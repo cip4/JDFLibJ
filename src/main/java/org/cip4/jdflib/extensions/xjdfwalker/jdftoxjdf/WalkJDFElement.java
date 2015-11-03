@@ -78,18 +78,22 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
 public class WalkJDFElement extends WalkElement
 {
+	final String m_spawnInfo = "SpawnInfo";
+
 	/**
 	 * 
 	 */
@@ -249,7 +253,7 @@ public class WalkJDFElement extends WalkElement
 	 */
 	protected boolean mustInline(final String refLocalName)
 	{
-		return jdfToXJDF.inlineSet.contains(refLocalName);
+		return JDFToXJDFDataCache.getInlineSet().contains(refLocalName);
 	}
 
 	/**
@@ -360,14 +364,11 @@ public class WalkJDFElement extends WalkElement
 	protected void setLeafAttributes(final JDFResource leaf, final JDFElement rl, final KElement newLeaf)
 	{
 		final JDFAttributeMap partMap = leaf.getPartMap();
-		// JDFAttributeMap attMap=leaf.getAttributeMap();
-		// attMap.remove("ID");
 		setAmountPool(rl, newLeaf, partMap);
-
 		// retain spawn information
-		if (jdfToXJDF.bRetainSpawnInfo && leaf.hasAttribute(AttributeName.SPAWNIDS))
+		if (jdfToXJDF.isRetainSpawnInfo() && leaf.hasAttribute(AttributeName.SPAWNIDS))
 		{
-			final KElement spawnInfo = newLeaf.getDocRoot().getCreateElement(jdfToXJDF.m_spawnInfo, null, 0);
+			final KElement spawnInfo = newLeaf.getDocRoot().getCreateElement(m_spawnInfo, null, 0);
 			final KElement spawnID = spawnInfo.appendElement("SpawnID");
 			spawnID.moveAttribute(AttributeName.SPAWNIDS, newLeaf, null, null, null);
 			spawnID.moveAttribute(AttributeName.SPAWNSTATUS, newLeaf, null, null, null);
@@ -384,36 +385,70 @@ public class WalkJDFElement extends WalkElement
 	 */
 	protected void setAmountPool(final JDFElement rl, final KElement newLeaf, final JDFAttributeMap partMap)
 	{
-		if (rl == null)
+		if (rl != null)
 		{
-			return;
-		}
-		JDFAmountPool ap = (JDFAmountPool) rl.getElement(ElementName.AMOUNTPOOL);
-		if (ap == null)
-		{
-			JDFAttributeMap amounts = rl.getAttributeMap().reduceMap(JDFToXJDF.amountAttribs);
-			if (amounts.size() > 0)
+			JDFAmountPool ap = (JDFAmountPool) rl.getElement(ElementName.AMOUNTPOOL);
+			if (ap == null)
 			{
-				ap = (JDFAmountPool) newLeaf.getCreateElement(ElementName.AMOUNTPOOL);
-				for (String key : amounts.keySet())
+				JDFAttributeMap amounts = rl.getAttributeMap().reduceMap(JDFToXJDFDataCache.getAmountAttribs());
+				if (amounts.size() > 0)
 				{
-					ap.setPartAttribute(key, amounts.get(key), null, partMap);
-					rl.removeAttribute(key);
+					ap = (JDFAmountPool) newLeaf.getCreateElement(ElementName.AMOUNTPOOL);
+					for (String key : amounts.keySet())
+					{
+						ap.setPartAttribute(key, amounts.get(key), null, partMap);
+						rl.removeAttribute(key);
+					}
+				}
+			}
+			else
+			{
+				final VElement vPartAmounts = ap.getMatchingPartAmountVector(partMap);
+				if (vPartAmounts != null && vPartAmounts.size() > 0)
+				{
+					ap = (JDFAmountPool) newLeaf.getCreateElement(ElementName.AMOUNTPOOL);
+					for (KElement e : vPartAmounts)
+					{
+						JDFPartAmount pa = (JDFPartAmount) e;
+						moveToAmountPool(ap, pa);
+					}
 				}
 			}
 		}
-		else
+	}
+
+	/**
+	 * 
+	 * @param newAP
+	 * @param pa
+	 */
+	protected void moveToAmountPool(JDFAmountPool newAP, JDFPartAmount pa)
+	{
+		JDFAttributeMap partMap = pa.getPartMap();
+		VJDFAttributeMap partMapVector = pa.getPartMapVector();
+		if (partMapVector != null)
 		{
-			final VElement vPartAmounts = ap.getMatchingPartAmountVector(partMap);
-			if (vPartAmounts != null && vPartAmounts.size() > 0)
+			partMapVector.removeKey(AttributeName.CONDITION);
+		}
+		JDFPartAmount paNew = newAP.getCreatePartAmount(partMapVector);
+		if (partMap != null && jdfToXJDF.isExplicitWaste())
+		{
+			String condition = partMap.get(AttributeName.CONDITION);
+			boolean bWaste = StringUtil.getNonEmpty(condition) != null && !"Good".equals(condition);
+			JDFAttributeMap map = pa.getAttributeMap();
+			if (bWaste)
 			{
-				ap = (JDFAmountPool) newLeaf.getCreateElement(ElementName.AMOUNTPOOL);
-				for (KElement e : vPartAmounts)
-				{
-					JDFPartAmount pa = (JDFPartAmount) e;
-					JDFPartAmount paNew = ap.getCreatePartAmount(pa.getPartMapVector());
-					paNew.setAttributes(pa);
-				}
+				map.remove(AttributeName.AMOUNT);
+				map.remove(AttributeName.ACTUALAMOUNT);
+				paNew.setAttributes(map);
+				String wasteName = "Waste".equals(condition) ? null : condition;
+				paNew.copyAttribute("ActualWaste", pa, AttributeName.ACTUALAMOUNT, null, null);
+				paNew.copyAttribute("Waste", pa, AttributeName.AMOUNT, null, null);
+				paNew.setAttribute("WasteDetails", wasteName);
+			}
+			else
+			{
+				paNew.setAttributes(map);
 			}
 		}
 	}
@@ -434,14 +469,25 @@ public class WalkJDFElement extends WalkElement
 		resourceSet.removeAttribute(AttributeName.RSUBREF);
 		resourceSet.removeAttribute(AttributeName.AMOUNT);
 		resourceSet.removeAttribute(AttributeName.AMOUNTPRODUCED);
+		resourceSet.removeAttribute(AttributeName.MINAMOUNT);
 		resourceSet.removeAttribute(AttributeName.MAXAMOUNT);
 		resourceSet.removeAttribute(AttributeName.ACTUALAMOUNT);
 
 		if (rl instanceof JDFResourceLink)
 		{
 			final JDFResourceLink resLink = (JDFResourceLink) rl;
-			final JDFNode rootIn = resLink.getJDFRoot();
-
+			final JDFNode rootIn = resLink.getParentJDF();
+			if (rootIn != null)
+			{
+				if (rootIn.isProduct())
+				{
+					//ToDo					resourceSet.setAttribute("ProductPart", rootIn.getID());
+				}
+				else
+				{
+					//ToDo					resourceSet.setAttribute("ProcessType", rootIn.getTypesString());
+				}
+			}
 			final JDFResource resInRoot = rootIn == null ? linkRoot : (JDFResource) rootIn.getChildWithAttribute(null, AttributeName.ID, null, resLink.getrRef(), 0, false);
 			if (resInRoot != null)
 			{
@@ -461,5 +507,4 @@ public class WalkJDFElement extends WalkElement
 			}
 		}
 	}
-
 }

@@ -449,6 +449,24 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
+	 * remove the key specified and then erase any duplicates and emptys
+	 * 
+	 * @param key
+	 */
+	public void removeKey(final String key)
+	{
+		for (int i = size() - 1; i >= 0; i--)
+		{
+			elementAt(i).remove(key);
+			if (elementAt(i).isEmpty())
+			{
+				removeElementAt(i);
+			}
+		}
+		unify();
+	}
+
+	/**
 	 * Tests whether this has a entry with the same key and value entries not more nor less keys
 	 * 
 	 * @param attmap the given JDFAttributeMap element

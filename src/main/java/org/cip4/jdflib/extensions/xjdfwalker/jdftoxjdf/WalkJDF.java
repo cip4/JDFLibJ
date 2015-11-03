@@ -149,7 +149,7 @@ public class WalkJDF extends WalkJDFElement
 			// me be sub product
 			return;
 		}
-		newRootP.appendXMLComment("Very preliminary experimental prototype trial version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
+		newRootP.setXMLComment("Preliminary prototype version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion());
 		newRootP.setAttribute(AttributeName.JOBID, node.getJobID(true));
 
 		final JDFNodeInfo ni = node.getCreateNodeInfo();
@@ -199,17 +199,17 @@ public class WalkJDF extends WalkJDFElement
 	}
 
 	/**
-	 * @param newRootP
+	 * @param xjdfElement
 	 */
 	@Override
-	protected void removeUnused(final KElement newRootP)
+	protected void removeUnused(final KElement xjdfElement)
 	{
 		// status is set only in the NodeInfo
-		newRootP.removeAttribute(AttributeName.STATUS);
-		newRootP.removeAttribute(AttributeName.STATUSDETAILS);
-		newRootP.removeAttribute(AttributeName.ACTIVATION);
-		newRootP.removeAttribute(AttributeName.TEMPLATE);
-		super.removeUnused(newRootP);
+		xjdfElement.removeAttribute(AttributeName.STATUS);
+		xjdfElement.removeAttribute(AttributeName.STATUSDETAILS);
+		xjdfElement.removeAttribute(AttributeName.ACTIVATION);
+		xjdfElement.removeAttribute(AttributeName.TEMPLATE);
+		super.removeUnused(xjdfElement);
 	}
 
 	/**
@@ -241,9 +241,9 @@ public class WalkJDF extends WalkJDFElement
 	 */
 	private void updateSpawnInfo(final JDFNode node, final KElement newRootP)
 	{
-		if (jdfToXJDF.m_spawnInfo != null && newRootP.hasAttribute(AttributeName.SPAWNID))
+		if (m_spawnInfo != null && newRootP.hasAttribute(AttributeName.SPAWNID))
 		{
-			final KElement spawnInfo = newRootP.appendElement(jdfToXJDF.m_spawnInfo, "www.cip4.org/SpawnInfo");
+			final KElement spawnInfo = newRootP.appendElement(m_spawnInfo, "www.cip4.org/SpawnInfo");
 			spawnInfo.moveAttribute(AttributeName.SPAWNID, newRootP, null, null, null);
 			final JDFAncestorPool ancestorPool = node.getAncestorPool();
 			if (ancestorPool != null)

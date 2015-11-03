@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -74,10 +74,10 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -85,18 +85,19 @@ import org.junit.Test;
  * 
  * This implements the first fixture with unit tests for class JDFAudit.
  */
-public class JDFPartAmountTest extends JDFTestCaseBase {
+public class JDFPartAmountTest extends JDFTestCaseBase
+{
 
 	private JDFResourceLink rl;
 	private JDFPartAmount pa;
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * 	@Override
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
-	public void setUp() throws Exception {
-		// TODO Auto-generated method stub
+	public void setUp() throws Exception
+	{
 		super.setUp();
 		KElement.setLongID(false);
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
@@ -107,27 +108,51 @@ public class JDFPartAmountTest extends JDFTestCaseBase {
 		pa = rl.getAmountPool().getPartAmount(s1Map);
 	}
 
+	/**
+	 * 
+	 */
 	@Test
-	public void testGetInvalidAttributes() {
-		Assert.assertEquals(pa.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 0).size(), 0);
+	public void testGetInvalidAttributes()
+	{
+		assertEquals(pa.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 0).size(), 0);
 		rl.setAttribute("Amount", 20, null);
-		Assert.assertTrue(pa.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 0).contains("Amount"));
+		assertTrue(pa.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 0).contains("Amount"));
 
 	}
 
+	/**
+	 * 
+	 */
 	@Test
-	public void testLot() {
+	public void testLot()
+	{
 		pa.appendLot();
-		Assert.assertTrue(pa.isValid(EnumValidationLevel.Incomplete));
-		Assert.assertFalse(pa.getUnknownElements(false, 999).contains(ElementName.LOT));
+		assertTrue(pa.isValid(EnumValidationLevel.Incomplete));
+		assertFalse(pa.getUnknownElements(false, 999).contains(ElementName.LOT));
 	}
 
-	// ///////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	@Test
-	public void testPartAmount() {
+	public void testPartAmount()
+	{
 		pa.appendElement("AmountPool");
-		Assert.assertTrue(pa.getUnknownElements(false, 999).contains(ElementName.AMOUNTPOOL));
+		assertTrue(pa.getUnknownElements(false, 999).contains(ElementName.AMOUNTPOOL));
 	}
-	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
+	@Test
+	public void testSetPartMapVector()
+	{
+		JDFAttributeMap map = new JDFAttributeMap("SheetName", "S1");
+		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		vMap.add(map.clone());
+		map.put("SheetName", "S2");
+		vMap.add(map);
+		pa.setPartMapVector(vMap);
+		assertEquals(pa.numChildElements(ElementName.PART, null), 2);
+	}
 }

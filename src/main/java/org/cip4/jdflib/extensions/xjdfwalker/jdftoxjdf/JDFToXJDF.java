@@ -87,7 +87,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseWalker;
@@ -100,10 +99,8 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
-import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -126,9 +123,7 @@ public class JDFToXJDF extends PackageElementWalker
 		wantProduct = true;
 		rootID = null;
 		KElement.uniqueID(-1000); // don't start at zero to avoid collisions in short ID scenarios
-		trackAudits = true;
-		removeSignatureName = true;
-		init();
+		componentProductMap = new JDFAttributeMap();
 	}
 
 	/**
@@ -198,20 +193,17 @@ public class JDFToXJDF extends PackageElementWalker
 		return JDFElement.getSchemaURL(2, 0);
 	}
 
-	final String m_spawnInfo = "SpawnInfo";
 	/**
 	 * 
 	 */
-	final public static VString amountAttribs = new VString("Amount,ActualAmount,MinAmount,MaxAmount", ",");
-	private boolean trackAudits;
-	protected VString resAttribs;
+	private boolean trackAudits = true;
 	protected KElement newRoot = null;
 	protected JDFNode oldRoot = null;
 	protected Set<String> first = new HashSet<String>();
 	/**
-	 * if true merge stripping and layout
+	 * if true merge explicitly call out waste
 	 */
-	private boolean bExplicitWaste = false;
+	private boolean bExplicitWaste = true;
 
 	/**
 	 * Getter for bExplicitWaste attribute.
@@ -245,17 +237,17 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	private boolean bMergeLayoutPrep = true;
 	/**
-	 * if true clean up runlist/LayoutElement
+	 * if true merge runlist and LayoutElement
 	 */
 	private boolean bMergeRunList = true;
 	/**
 	 * set to retain spawn information
 	 */
-	boolean bRetainSpawnInfo = false;
+	private boolean bRetainSpawnInfo = false;
 	/**
 	 * set to update single node update
 	 */
-	private boolean bSingleNode = true;
+	private boolean bSingleNode = false;
 	/**
 	 * set to update version stamps
 	 */
@@ -278,7 +270,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	private boolean bIntentPartition = false;
 	/**
-	 * 
+	 * if true, parameters and resources are generated; else everything is a resource
 	 */
 	private boolean bParameterSet = false;
 
@@ -301,9 +293,9 @@ public class JDFToXJDF extends PackageElementWalker
 	/**
 	 *  if true, we want a productList from the kids
 	 */
-	boolean wantProduct;
+	private boolean wantProduct;
 
-	private JDFAttributeMap componentProductMap;
+	final private JDFAttributeMap componentProductMap;
 
 	/**
 	 * 
@@ -332,9 +324,8 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	private boolean bConvertTilde = true;
 	String rootID;
-	protected VString elemAttribs;
-	protected HashSet<String> inlineSet;
-	private boolean removeSignatureName;
+
+	private boolean removeSignatureName = true;
 
 	/**
 	 * 
@@ -486,66 +477,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * initialize statics
-	 */
-	private void init()
-	{
-		componentProductMap = new JDFAttributeMap();
-		resAttribs = generateResourceAttributes();
-		elemAttribs = generateElementAttributes();
-		inlineSet = generateInlineSet();
-	}
-
-	private HashSet<String> generateInlineSet()
-	{
-		HashSet<String> set = new HashSet<String>();
-		set.add(ElementName.OBJECTRESOLUTION);
-		set.add(ElementName.BARCODECOMPPARAMS);
-		set.add(ElementName.BARCODEREPROPARAMS);
-		set.add(ElementName.COMCHANNEL);
-		set.add(ElementName.INTERPRETEDPDLDATA);
-		set.add(ElementName.BYTEMAP);
-		set.add(ElementName.ADDRESS);
-		set.add(ElementName.COSTCENTER);
-		set.add(ElementName.COMPANY);
-		set.add(ElementName.PERSON);
-		set.add(ElementName.DEVICE);
-		set.add(ElementName.DEVICENSPACE);
-		set.add(ElementName.COLORANTALIAS);
-		set.add(ElementName.GLUELINE);
-		set.add(ElementName.GLUEAPPLICATION);
-		set.add(ElementName.CIELABMEASURINGFIELD);
-		set.add(ElementName.REGISTERMARK);
-		set.add(ElementName.FITPOLICY);
-		set.add(ElementName.CUTBLOCK);
-		set.add(ElementName.EMPLOYEE);
-		set.add(ElementName.ELEMENTCOLORPARAMS);
-		set.add(ElementName.CUT);
-		set.add(ElementName.PDLRESOURCEALIAS);
-		set.add(ElementName.HOLELIST);
-		set.add(ElementName.HOLE);
-		set.add(ElementName.MISDETAILS);
-		set.add(ElementName.HOLELINE);
-		set.add(ElementName.JOBFIELD);
-		set.add(ElementName.AUTOMATEDOVERPRINTPARAMS);
-		set.add(ElementName.EXTERNALIMPOSITIONTEMPLATE);
-		set.add(ElementName.PRODUCTIONPATH);
-		set.add(ElementName.SHAPE);
-		set.add(ElementName.SCAVENGERAREA);
-		set.add(ElementName.TRAPREGION);
-		set.add(ElementName.TRANSFERCURVE);
-		set.add(ElementName.COLORCONTROLSTRIP);
-		set.add(ElementName.LAYERLIST);
-		set.add(ElementName.PAGECONDITION);
-		set.add(ElementName.CONTENTOBJECT);
-		set.add(ElementName.MARKOBJECT);
-		set.add(ElementName.LAYERDETAILS);
-		set.add(ElementName.FILESPEC);
-		set.add(ElementName.IDENTIFICATIONFIELD);
-		return set;
-	}
-
-	/**
 	 * 
 	 * @param compID
 	 * @param productID
@@ -563,37 +494,6 @@ public class JDFToXJDF extends PackageElementWalker
 	protected String getProduct(String compID)
 	{
 		return componentProductMap.get(compID);
-	}
-
-	/**
-	 * 
-	 *  
-	 * @return
-	 */
-	protected VString generateResourceAttributes()
-	{
-		VString resAttribs = new VString();
-		final JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc("ResourcePool").getRoot();
-		final JDFResource intRes = dummyResPool.appendResource("intent", EnumResourceClass.Intent, null);
-		final JDFResource physRes = dummyResPool.appendResource("physical", EnumResourceClass.Consumable, null);
-		final JDFResource paramRes = dummyResPool.appendResource("param", EnumResourceClass.Parameter, null);
-		final JDFPart part = (JDFPart) dummyResPool.appendElement(ElementName.PART);
-		resAttribs = paramRes.knownAttributes();
-		resAttribs.appendUnique(physRes.knownAttributes());
-		resAttribs.appendUnique(intRes.knownAttributes());
-		resAttribs.appendUnique(part.knownAttributes());
-		return resAttribs;
-	}
-
-	/**
-	 * 
-	 *  
-	 * @return
-	 */
-	protected VString generateElementAttributes()
-	{
-		final JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc("ResourcePool").getRoot();
-		return dummyResPool.knownAttributes();
 	}
 
 	/**
@@ -640,6 +540,7 @@ public class JDFToXJDF extends PackageElementWalker
 		 */
 		void saveZip(final String fileName, final JDFNode rootNode, final boolean replace)
 		{
+			setSingleNode(true);
 			final File file = new File(fileName);
 			if (file.canRead())
 			{
@@ -703,6 +604,7 @@ public class JDFToXJDF extends PackageElementWalker
 		{
 			if (root == null)
 				return null;
+			setSingleNode(true);
 			Vector<XJDFHelper> vRet = new Vector<XJDFHelper>();
 			VElement v = getProcessNodes(root);
 			boolean keepProduct = wantProduct;

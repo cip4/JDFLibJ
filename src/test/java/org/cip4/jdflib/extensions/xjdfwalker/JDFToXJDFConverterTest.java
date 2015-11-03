@@ -82,9 +82,11 @@ import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.PartitionHelper;
@@ -560,6 +562,28 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFDoc d = invert.convert(xjdf);
 		JDFNode n2 = d.getJDFRoot();
 		assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.PhaseTime, null, null).getEmployee(0).getDescriptiveName(), "me");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testAmountPoolWaste()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFResource media = n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		JDFResourceLink rl = n.getLink(media, null);
+
+		JDFAttributeMap mPart = new JDFAttributeMap(AttributeName.CONDITION, "Good");
+		mPart.put("SheetName", "S1");
+		rl.setActualAmount(10, mPart);
+		mPart.put(AttributeName.CONDITION, "FooWaste");
+		rl.setActualAmount(15, mPart);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/@ActualWaste", null), "15");
 	}
 
 	/**

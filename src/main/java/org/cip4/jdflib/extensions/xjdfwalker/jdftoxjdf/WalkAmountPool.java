@@ -110,12 +110,13 @@ public class WalkAmountPool extends WalkJDFElement
 		JDFAmountPool newAP = (JDFAmountPool) super.walk(jdf, xjdf);
 		if (jdfToXJDF.isExplicitWaste())
 		{
-			Collection<JDFPartAmount> v = newAP.getAllPartAmount();
+			Collection<JDFPartAmount> v = ((JDFAmountPool) jdf).getAllPartAmount();
 			for (JDFPartAmount pa : v)
 			{
-				// TODO copy stuff 
+				moveToAmountPool(newAP, pa);
 			}
 		}
 		return newAP;
 	}
+
 }

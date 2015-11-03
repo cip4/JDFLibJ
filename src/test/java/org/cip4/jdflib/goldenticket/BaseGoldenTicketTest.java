@@ -168,6 +168,8 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 		assertTrue(gtType + templateName + ".jdf", goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
 
 		XJDF20 xjdfConv = new XJDF20();
+		//		xjdfConv.setSingleNode(false);
+
 		KElement xjdfRoot = xjdfConv.convert(goldenTicket.getExpandedNode());
 		xjdfRoot.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + gtType + templateName + ".xjdf", 2, false);
 		//TODO add xjdf schem validation here

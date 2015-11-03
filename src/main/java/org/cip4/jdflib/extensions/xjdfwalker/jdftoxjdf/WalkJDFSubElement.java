@@ -113,7 +113,7 @@ public class WalkJDFSubElement extends WalkJDFElement
 	@Override
 	protected void removeUnused(KElement newRootP)
 	{
-		newRootP.removeAttributes(jdfToXJDF.elemAttribs);
+		newRootP.removeAttributes(JDFToXJDFDataCache.getElemAttribs());
 		super.removeUnused(newRootP);
 	}
 

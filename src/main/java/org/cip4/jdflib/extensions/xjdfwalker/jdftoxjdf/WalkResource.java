@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
@@ -118,7 +119,8 @@ public class WalkResource extends WalkJDFElement
 	{
 		final String localName = xjdf.getLocalName();
 		final boolean bRoot = "Intent".equals(localName) || "Parameter".equals(localName) || "Resource".equals(localName);
-		for (String attrib : jdfToXJDF.resAttribs)
+		VString resAttribs = JDFToXJDFDataCache.getResAttribs();
+		for (String attrib : resAttribs)
 		{
 			if (newResLeaf.hasAttribute(attrib))
 			{

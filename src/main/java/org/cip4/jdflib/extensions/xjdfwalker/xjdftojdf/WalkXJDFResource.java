@@ -68,9 +68,12 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -129,40 +132,76 @@ public class WalkXJDFResource extends WalkXElement
 			return null;
 		}
 
-		final JDFAttributeMap map = xjdfRes.getAttributeMap();
-		map.remove(AttributeName.ID);
-		map.remove(AttributeName.PARTIDKEYS);
+		final JDFAttributeMap map = getResMap(xjdfRes);
 
 		if (newPartitionElement instanceof JDFResource)
 		{
 			JDFResource newPartition = (JDFResource) newPartitionElement;
 			JDFResourceLink rl = theNode.getLink(newPartition, null);
-			JDFResourceLink rlpart = null;
-			if (partialProductNode != null)
-			{
-				rlpart = partialProductNode.getLink(newPartition, null);
-				EnumUsage newUsage = rl == null ? null : rl.getUsage();
-				if (rlpart == null && newUsage != null)
-				{
-					rlpart = partialProductNode.ensureLink(newPartition, newUsage, null);
-				}
-				if (rlpart != null)
-				{
-					rl = rlpart;
-				}
-
-			}
-			KElement ap = xjdfRes.getElement(ElementName.AMOUNTPOOL);
-			if (ap != null)
-			{
-				xjdfToJDFImpl.walkTree(ap, rl);
-				ap.deleteNode();
-			}
-			xjdfToJDFImpl.moveAmountsToLink(partmap, map, rl);
+			rl = ensureLink(partialProductNode, newPartition, rl);
+			handleAmountPool(xjdfRes, partmap, map, rl);
 		}
 		newPartitionElement.setAttributes(map);
 
 		return newPartitionElement;
+	}
+
+	private JDFAttributeMap getResMap(final KElement xjdfRes)
+	{
+		final JDFAttributeMap map = xjdfRes.getAttributeMap();
+		map.remove(AttributeName.ID);
+		map.remove(AttributeName.PARTIDKEYS);
+		return map;
+	}
+
+	/**
+	 * 
+	 * @param xjdfRes
+	 * @param partmap
+	 * @param map
+	 * @param rl
+	 */
+	private void handleAmountPool(final KElement xjdfRes, JDFAttributeMap partmap, final JDFAttributeMap map, JDFResourceLink rl)
+	{
+		KElement ap = xjdfRes.getElement(ElementName.AMOUNTPOOL);
+		if (ap != null)
+		{
+			KElement newAmountPool = rl.getCreateAmountPool();
+			Vector<JDFPartAmount> vpa = ap.getChildrenByClass(JDFPartAmount.class, false, 0);
+			for (JDFPartAmount pa : vpa)
+			{
+				xjdfToJDFImpl.walkTree(pa, newAmountPool);
+			}
+			ap.deleteNode();
+		}
+		xjdfToJDFImpl.moveAmountsToLink(partmap, map, rl);
+	}
+
+	/**
+	 * 
+	 * @param partialProductNode
+	 * @param newPartition
+	 * @param rl
+	 * @return
+	 */
+	private JDFResourceLink ensureLink(JDFNode partialProductNode, JDFResource newPartition, JDFResourceLink rl)
+	{
+		JDFResourceLink rlpart;
+		if (partialProductNode != null)
+		{
+			rlpart = partialProductNode.getLink(newPartition, null);
+			EnumUsage newUsage = rl == null ? null : rl.getUsage();
+			if (rlpart == null && newUsage != null)
+			{
+				rlpart = partialProductNode.ensureLink(newPartition, newUsage, null);
+			}
+			if (rlpart != null)
+			{
+				rl = rlpart;
+			}
+
+		}
+		return rl;
 	}
 
 	/**

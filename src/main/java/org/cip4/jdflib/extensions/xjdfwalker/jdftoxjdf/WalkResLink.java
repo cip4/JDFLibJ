@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -114,7 +115,7 @@ public class WalkResLink extends WalkJDFElement
 		// we do not explicitly call out components for products
 		if (EnumType.Product.equals(n.getEnumType()))
 		{
-			if ((linkTarget instanceof JDFComponent) || (!jdfToXJDF.wantProduct && !matchesRootID(n)))
+			if ((linkTarget instanceof JDFComponent) || (!jdfToXJDF.isWantProduct() && !matchesRootID(n)))
 			{
 				return null;
 			}
@@ -182,6 +183,10 @@ public class WalkResLink extends WalkJDFElement
 			// products are handled by productList
 			return null;
 		}
+		if (parent.getElement(ElementName.JDF) != null)
+		{
+			return null;
+		}
 		String jobPartID = getJobPartID(parent);
 		if (jobPartID == null)
 			return null;
@@ -192,15 +197,22 @@ public class WalkResLink extends WalkJDFElement
 		{
 			process = processList.appendElement("Process");
 			process.setAttribute(AttributeName.JOBPARTID, jobPartID);
-			JDFNode grandparent = parent.getParentJDF();
 
 			if (parent.hasAttribute(AttributeName.TYPES))
 			{
-				process.copyAttribute("Types", parent);
+				process.copyAttribute(AttributeName.TYPES, parent);
 			}
 			else
 			{
-				process.copyAttribute("Types", parent, "Type", null, null);
+				process.copyAttribute(AttributeName.TYPES, parent, AttributeName.TYPE, null, null);
+			}
+			process.copyAttribute(AttributeName.CATEGORY, parent);
+			process.copyAttribute(AttributeName.DESCRIPTIVENAME, parent);
+
+			JDFNode grandparent = parent.getParentJDF();
+			while (grandparent != null && !grandparent.isProduct())
+			{
+				grandparent = grandparent.getParentJDF();
 			}
 
 			if (grandparent != null)

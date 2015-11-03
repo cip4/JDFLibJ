@@ -74,9 +74,11 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
@@ -255,6 +257,72 @@ public class PostXJDFWalker extends BaseElementWalker
 		public boolean matches(KElement e)
 		{
 			return (e instanceof JDFPart);
+		}
+	}
+
+	/**
+	 * class that cleans up redundant partition keys
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkPartAmount extends WalkElement
+	{
+		/**
+		 * 
+		 */
+		public WalkPartAmount()
+		{
+			super();
+		}
+
+		/**
+		 * @param partAmount
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement pa, final KElement dummy)
+		{
+			JDFPartAmount partAmount = (JDFPartAmount) pa;
+			removeRedundantPartKeys(partAmount);
+			return super.walk(partAmount, dummy);
+		}
+
+		/**
+		 * 
+		 * @param partAmount
+		 */
+		private void removeRedundantPartKeys(JDFPartAmount partAmount)
+		{
+			VElement parentParts = getParentParts(partAmount);
+			if (parentParts != null)
+			{
+				VString keys = new VString();
+				for (KElement e : parentParts)
+				{
+					JDFPart p = (JDFPart) e;
+					JDFAttributeMap partMap = p.getPartMap();
+					VString nextKeys = partMap.getKeys();
+					keys.appendUnique(nextKeys);
+				}
+				VJDFAttributeMap vPA = partAmount.getPartMapVector();
+				if (keys != null && keys.size() > 0)
+				{
+					vPA.removeKeys(keys);
+				}
+				partAmount.setPartMapVector(vPA);
+			}
+		}
+
+		private VElement getParentParts(KElement part)
+		{
+			return part.getXPathElementVector("../../Part", 0);
+		}
+
+		@Override
+		public boolean matches(KElement e)
+		{
+			return (e instanceof JDFPartAmount);
 		}
 	}
 
@@ -1055,7 +1123,7 @@ public class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return toCheck.getLocalName().equals(XJDFHelper.XJDF);
+			return XJDFHelper.XJDF.equals(toCheck.getLocalName());
 		}
 
 		/**
@@ -1130,6 +1198,53 @@ public class PostXJDFWalker extends BaseElementWalker
 				j++;
 			}
 			//TODO treat outputs backwards...
+			combineSameSets(xjdf);
+		}
+
+		/**
+		 * 
+		 * @param v
+		 */
+		private void combineSameSets(JDFElement xjdf)
+		{
+			Vector<SetHelper> v = new XJDFHelper(xjdf).getSets();
+
+			for (int i = 0; i < v.size(); i++)
+			{
+				Vector<SetHelper> sameSets = new Vector<SetHelper>();
+				SetHelper firstSet = v.remove(0);
+				sameSets.add(firstSet);
+				for (int j = 0; j < v.size(); j++)
+				{
+					SetHelper next = v.get(j);
+					if (sameSetType(firstSet, next))
+					{
+						sameSets.add(next);
+						v.remove(j);
+						j--;
+					}
+				}
+
+				for (int j = 1; j < sameSets.size(); j++)
+				{
+
+				}
+			}
+
+		}
+
+		/**
+		 * 
+		 * @param firstSet
+		 * @param next
+		 * @return
+		 */
+		private boolean sameSetType(SetHelper firstSet, SetHelper next)
+		{
+			boolean same = firstSet.getName().equals(next.getName());
+			if (same)
+				same = StringUtil.equals(firstSet.getProcessUsage(), next.getProcessUsage());
+			return same;
 		}
 	}
 
@@ -1180,4 +1295,53 @@ public class PostXJDFWalker extends BaseElementWalker
 			}
 		}
 	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	public class WalkProcessList extends WalkElement
+	{
+		/**
+		 * 
+		 */
+		public WalkProcessList()
+		{
+			super();
+		}
+
+		/**
+		 * 
+		 * @see org.cip4.jdflib.extensions.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return "ProcessList".equals(toCheck.getLocalName());
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param xjdf
+		 * @param dummy
+		 * @return
+		*/
+		@Override
+		public KElement walk(KElement xjdf, KElement dummy)
+		{
+
+			if (xjdf.numChildElements("Process", null) < 2)
+			{
+				xjdf.deleteNode();
+				return null;
+			}
+			else
+			{
+				return super.walk(xjdf, dummy);
+			}
+		}
+	}
+
 }

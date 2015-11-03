@@ -135,7 +135,7 @@ public class WalkPhaseTimeAudit extends WalkAudit
 	 * @param xjdf
 	 * @return true if must continue
 	 */
-	public KElement oldwalk(final KElement jdf, final KElement xjdf)
+	private KElement oldwalk(final KElement jdf, final KElement xjdf)
 	{
 		final JDFPhaseTime pt = (JDFPhaseTime) jdf;
 		final VElement vL = pt.getLinkVector();

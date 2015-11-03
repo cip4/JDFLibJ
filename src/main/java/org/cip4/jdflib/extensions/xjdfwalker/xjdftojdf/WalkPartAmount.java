@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -73,11 +73,15 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkPartAmount extends WalkResource
+public class WalkPartAmount extends WalkXElement
 {
 	/**
 	 * 
@@ -99,25 +103,91 @@ public class WalkPartAmount extends WalkResource
 	}
 
 	/**
-	 * @param e
+	 * @param map 
+	 * @param xjdfPartAmount
+	 * @return the created resource
+	 */
+	private void walkSingle(JDFAttributeMap map, final KElement xjdfPartAmount, KElement jdfAmountPool)
+	{
+		if (xjdfPartAmount != null && map != null)
+		{
+			xjdfPartAmount.removeAttributes(null);
+			String condition = map.remove("Condition");
+			xjdfPartAmount.setAttributes(map);
+			JDFPartAmount pa = (JDFPartAmount) xjdfPartAmount;
+			JDFPartAmount newPA = (JDFPartAmount) super.walk(xjdfPartAmount, jdfAmountPool);
+			VJDFAttributeMap vPartMap = pa.getPartMapVector();
+			if (condition != null)
+			{
+				vPartMap.put(AttributeName.CONDITION, condition);
+			}
+			newPA.setPartMapVector(vPartMap);
+		}
+	}
+
+	/**
+	 * @param xjdfPartAmount
 	 * @return the created resource
 	 */
 	@Override
-	public KElement walk(final KElement e, KElement trackElem)
+	public KElement walk(final KElement xjdfPartAmount, KElement jdfAmountPool)
 	{
-		if (e.getElement(ElementName.PART) == null)
+		JDFPart part = (JDFPart) xjdfPartAmount.getElement(ElementName.PART);
+		JDFAttributeMap partMap = part == null ? null : part.getPartMap();
+		if (partMap == null || partMap.isEmpty())
 		{
-			KElement parent = trackElem.getParentNode_KElement();
+			KElement parent = jdfAmountPool.getParentNode_KElement();
 			if (parent instanceof JDFResourceLink)
 			{
 				JDFResourceLink rl = (JDFResourceLink) parent;
-				rl.copyAttribute(AttributeName.AMOUNT, e);
-				rl.copyAttribute(AttributeName.ACTUALAMOUNT, e);
-				rl.copyAttribute(AttributeName.MAXAMOUNT, e);
-				trackElem.deleteNode();
+				rl.copyAttribute(AttributeName.AMOUNT, xjdfPartAmount);
+				rl.copyAttribute(AttributeName.ACTUALAMOUNT, xjdfPartAmount);
+				rl.copyAttribute(AttributeName.MAXAMOUNT, xjdfPartAmount);
+				jdfAmountPool.deleteNode();
 				return null;
 			}
 		}
-		return super.walk(e, trackElem);
+
+		VJDFAttributeMap split = splitWaste(xjdfPartAmount, true);
+		for (JDFAttributeMap map : split)
+		{
+			walkSingle(map, xjdfPartAmount, jdfAmountPool);
+		}
+
+		return null;
+	}
+
+	private VJDFAttributeMap splitWaste(KElement xjdfPartAmount, boolean bGood)
+	{
+		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		JDFAttributeMap map = xjdfPartAmount.getAttributeMap();
+		boolean bAmount = map.containsKey(AttributeName.ACTUALAMOUNT) || map.containsKey(AttributeName.AMOUNT);
+		boolean bWaste = map.containsKey("Waste") || map.containsKey("ActualWaste");
+		String wasteKey = map.remove("WasteDetails");
+		if (StringUtil.getNonEmpty(wasteKey) == null)
+		{
+			wasteKey = "Waste";
+		}
+		if (bAmount && bWaste)
+		{
+			map.put(AttributeName.CONDITION, "Good");
+		}
+		if (bWaste)
+		{
+			JDFAttributeMap mapWaste = map.clone();
+			mapWaste.put(AttributeName.CONDITION, wasteKey);
+			mapWaste.put(AttributeName.AMOUNT, mapWaste.remove("Waste"));
+			mapWaste.put(AttributeName.ACTUALAMOUNT, mapWaste.remove("ActualWaste"));
+			mapWaste.remove(AttributeName.MINAMOUNT);
+			mapWaste.remove(AttributeName.MAXAMOUNT);
+			vMap.add(mapWaste);
+		}
+		if (bAmount)
+		{
+			map.remove("Waste");
+			map.remove("ActualWaste");
+			vMap.add(map);
+		}
+		return vMap;
 	}
 }

@@ -97,14 +97,24 @@ public class WalkNotificationAudit extends WalkAudit
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		KElement notificationAudit = xjdf.appendElement("AuditNotification");
-		JDFNotification not = (JDFNotification) jdf;
-		notificationAudit.moveAttribute(AttributeName.AGENTNAME, not);
-		notificationAudit.moveAttribute(AttributeName.AGENTVERSION, not);
-		notificationAudit.moveAttribute(AttributeName.AUTHOR, not);
-		notificationAudit.moveAttribute(AttributeName.PERSONALID, not);
-		notificationAudit.moveAttribute(AttributeName.ID, not);
-		notificationAudit.moveAttribute(AttributeName.TIMESTAMP, not);
+		moveToParentAudit(jdf, notificationAudit);
 		return super.walk(jdf, notificationAudit);
+	}
+
+	/**
+	 * 
+	 * @param jdf
+	 * @param auditNotification
+	 */
+	private void moveToParentAudit(final KElement jdf, KElement auditNotification)
+	{
+		JDFNotification not = (JDFNotification) jdf;
+		auditNotification.moveAttribute(AttributeName.AGENTNAME, not);
+		auditNotification.moveAttribute(AttributeName.AGENTVERSION, not);
+		auditNotification.moveAttribute(AttributeName.AUTHOR, not);
+		auditNotification.moveAttribute(AttributeName.PERSONALID, not);
+		auditNotification.moveAttribute(AttributeName.ID, not);
+		auditNotification.moveAttribute(AttributeName.TIMESTAMP, not);
 	}
 
 	/**

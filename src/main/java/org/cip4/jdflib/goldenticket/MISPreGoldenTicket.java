@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -661,8 +661,9 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 
 				for (int j = 0; j < ncols; j++)
 				{
-					pvp.getCreatePartition(EnumPartIDKey.Separation, cols.get(j), partIDKeys);
-					pvp.setResStatus(EnumResStatus.Incomplete, false);
+					JDFPreview pvsep = (JDFPreview) pvp.getCreatePartition(EnumPartIDKey.Separation, cols.get(j), partIDKeys);
+					pvsep.setURL("http://foo.preview." + i + "." + cols.get(j) + ".pdf");
+					pvsep.setResStatus(EnumResStatus.Incomplete, false);
 				}
 			}
 		}

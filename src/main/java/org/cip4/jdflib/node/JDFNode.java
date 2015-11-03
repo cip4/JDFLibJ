@@ -4770,21 +4770,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * isCombined - is this a Combined resource type ?
 	 * 
 	 * @return boolean - true if it is, otherwise false
-	 * @deprecated use JDFConstants.COMBINED.equals(getType());
 	 */
-	@Deprecated
 	public boolean isCombined()
 	{
 		return JDFConstants.COMBINED.equals(getType());
 	}
 
 	/**
-	 * Is this a Combined node type ?
+	 * Is this a product node type ?
 	 * 
 	 * @return boolean - true if this is a product node
-	 * @deprecated use JDFConstants.PRODUCT.equals(getType());
 	 */
-	@Deprecated
 	public boolean isProduct()
 	{
 		return JDFConstants.PRODUCT.equals(getType());
@@ -4794,9 +4790,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * Is this a Combined node type ?
 	 * 
 	 * @return boolean - true if this is a combined node
-	 * @deprecated use JDFConstants.PROCESSGROUP.equals(getType());
 	 */
-	@Deprecated
 	public boolean isProcessGroup()
 	{
 		return JDFConstants.PROCESSGROUP.equals(getType());
