@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -337,6 +337,26 @@ public class VStringTest extends TestCase
 	 */
 	@Test
 	public void testConstructEmpty()
+	{
+		VString v = new VString("", ",");
+		assertEquals(v.size(), 0);
+		v = new VString((String) null, null);
+		assertEquals(v.size(), 0);
+		v = new VString((String[]) null);
+		assertEquals(v.size(), 0);
+		v = new VString((new String[] {}));
+		assertEquals(v.size(), 0);
+		v = new VString((VString) null);
+		assertEquals(v.size(), 0);
+		v = new VString(new VString());
+		assertEquals(v.size(), 0);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testConstructDouble()
 	{
 		VString v = new VString("a,b,c, ,", ",");
 		assertEquals(v.get(-1), " ");

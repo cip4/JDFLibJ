@@ -101,7 +101,7 @@ public class WalkRefElement extends WalkJDFElement
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final JDFRefElement refElem = (JDFRefElement) jdf;
-		if (mustInline(refElem))
+		if (mustInline(refElem.getRefLocalName()))
 		{
 			try
 			{
@@ -110,7 +110,7 @@ public class WalkRefElement extends WalkJDFElement
 			}
 			catch (JDFException x)
 			{
-				//nop
+				log.error("Problems converting refElement: " + refElem.getNodeName(), x);
 			}
 		}
 		else if (isProduct(refElem))
@@ -124,6 +124,11 @@ public class WalkRefElement extends WalkJDFElement
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param refElem
+	 * @param xjdf
+	 */
 	private void refProduct(JDFRefElement refElem, KElement xjdf)
 	{
 		final String attName = ProductHelper.PRODUCT + "Ref";
@@ -131,6 +136,11 @@ public class WalkRefElement extends WalkJDFElement
 		xjdf.appendAttribute(attName, id, null, " ", true);
 	}
 
+	/**
+	 * 
+	 * @param refElem
+	 * @return
+	 */
 	private boolean isProduct(JDFRefElement refElem)
 	{
 		return jdfToXJDF.getProduct(refElem.getrRef()) != null;

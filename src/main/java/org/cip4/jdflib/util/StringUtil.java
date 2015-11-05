@@ -595,7 +595,7 @@ public class StringUtil
 	{
 		delim = delim == null ? JDFConstants.BLANK : delim;
 		final VString v = new VString();
-		if (strWork != null)
+		if (StringUtil.getNonEmpty(strWork) != null)
 		{
 			if (delim.length() == 1 && strWork.indexOf(delim) < 0)
 			{

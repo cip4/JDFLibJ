@@ -165,22 +165,20 @@ public class WalkJDFElement extends WalkElement
 		if (parentJDF != null)
 		{
 			r = r.makeRootResource(null, parentJDF, false);
-			r.setResStatus(EnumResStatus.Available, true);
 			final JDFResourcePool prevPool = parentJDF.getResourcePool();
 			if (prevPool != null)
 			{
 				r = removeDuplicateRefs(r, prevPool);
 			}
-			je.refElement(r);
 		}
 		else if (je.getJMFRoot() != null)
 		{
 			final JDFResource resourceRoot = r.getResourceRoot();
 			final JDFElement parent = (JDFElement) (resourceRoot == null ? null : resourceRoot.getParentNode_KElement());
 			r = r.makeRootResource(null, parent, false);
-			r.setResStatus(EnumResStatus.Available, true);
-			je.refElement(r);
 		}
+		r.setResStatus(EnumResStatus.Available, true);
+		je.refElement(r);
 	}
 
 	/**
@@ -236,15 +234,6 @@ public class WalkJDFElement extends WalkElement
 			name = "RunListRef";
 		}
 		return name;
-	}
-
-	/**
-	 * @param re
-	 * @return true if must inline re
-	 */
-	protected boolean mustInline(final JDFRefElement re)
-	{
-		return mustInline(re.getRefLocalName());
 	}
 
 	/**

@@ -158,13 +158,21 @@ public class VString extends Vector<String>
 	public VString(final String strIn, String strSep)
 	{
 		super();
-		if (strIn != null)
+		if (StringUtil.getNonEmpty(strIn) != null)
 		{
 			if (strSep == null)
 			{
 				strSep = JDFCoreConstants.BLANK;
 			}
-
+			if (strSep.length() == 1)
+			{
+				// performance boost...
+				if (strIn.indexOf(strSep) < 0)
+				{
+					addElement(strIn);
+					return;
+				}
+			}
 			final StringTokenizer sToken = new StringTokenizer(strIn, strSep);
 			while (sToken.hasMoreTokens())
 			{
@@ -179,8 +187,9 @@ public class VString extends Vector<String>
 	 */
 	public VString(final String[] a)
 	{
-		super(a.length);
-		for (int i = 0; i < a.length; i++)
+		super(a == null ? 0 : a.length);
+		int l = a == null ? 0 : a.length;
+		for (int i = 0; i < l; i++)
 		{
 			add(a[i]);
 		}

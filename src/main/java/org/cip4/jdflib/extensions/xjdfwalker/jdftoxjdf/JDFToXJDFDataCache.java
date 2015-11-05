@@ -78,6 +78,12 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 
+/**
+ * class to maintain data from typesafe library
+ * 
+ * @author rainer prosi
+ *
+ */
 class JDFToXJDFDataCache
 {
 	private static JDFToXJDFDataCache theCache;
@@ -90,7 +96,7 @@ class JDFToXJDFDataCache
 	}
 
 	/**
-	 * initialize statics
+	 *  
 	 */
 	private JDFToXJDFDataCache()
 	{
@@ -110,12 +116,16 @@ class JDFToXJDFDataCache
 	 *  
 	 * @return
 	 */
-	protected VString generateElementAttributes()
+	private VString generateElementAttributes()
 	{
 		final JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc("ResourcePool").getRoot();
 		return dummyResPool.knownAttributes();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	private HashSet<String> generateInlineSet()
 	{
 		HashSet<String> set = new HashSet<String>();
@@ -170,7 +180,7 @@ class JDFToXJDFDataCache
 	 *  
 	 * @return
 	 */
-	protected VString generateResourceAttributes()
+	private VString generateResourceAttributes()
 	{
 		VString resAttribs = new VString();
 		final JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc("ResourcePool").getRoot();
@@ -188,7 +198,7 @@ class JDFToXJDFDataCache
 	/**
 	 * @return the elemAttribs
 	 */
-	protected static VString getElemAttribs()
+	static VString getElemAttribs()
 	{
 		return getCache().elemAttribs;
 	}
@@ -196,7 +206,7 @@ class JDFToXJDFDataCache
 	/**
 	 * @return the inlineSet
 	 */
-	protected static HashSet<String> getInlineSet()
+	static HashSet<String> getInlineSet()
 	{
 		return getCache().inlineSet;
 	}
@@ -204,7 +214,7 @@ class JDFToXJDFDataCache
 	/**
 	 * @return the resAttribs
 	 */
-	protected static VString getResAttribs()
+	static VString getResAttribs()
 	{
 		return getCache().resAttribs;
 	}
@@ -213,7 +223,7 @@ class JDFToXJDFDataCache
 	 * 
 	 * @return
 	 */
-	public static VString getAmountAttribs()
+	static VString getAmountAttribs()
 	{
 		return getCache().amountAttribs;
 	}

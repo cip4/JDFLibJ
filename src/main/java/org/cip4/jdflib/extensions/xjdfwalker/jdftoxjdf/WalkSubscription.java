@@ -103,12 +103,12 @@ public class WalkSubscription extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#removeUnused(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void removeUnused(KElement newRootP)
+	protected void removeUnused(KElement xjdfElem)
 	{
-		newRootP.removeAttribute(AttributeName.FORMAT);
-		newRootP.removeAttribute(AttributeName.MINDELAYTIME);
-		newRootP.removeAttribute(AttributeName.REPEATSTEP);
-		newRootP.removeAttribute(AttributeName.TEMPLATE);
-		super.removeUnused(newRootP);
+		xjdfElem.removeAttribute(AttributeName.FORMAT);
+		xjdfElem.removeAttribute(AttributeName.MINDELAYTIME);
+		xjdfElem.removeAttribute(AttributeName.REPEATSTEP);
+		xjdfElem.removeAttribute(AttributeName.TEMPLATE);
+		super.removeUnused(xjdfElem);
 	}
 }
