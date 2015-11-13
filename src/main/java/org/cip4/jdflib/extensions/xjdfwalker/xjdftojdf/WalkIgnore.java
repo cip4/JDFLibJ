@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFPart;
 
 /**
@@ -106,9 +107,9 @@ public class WalkIgnore extends WalkXElement
 	{
 		boolean matches = super.matches(toCheck);
 		matches = matches && (toCheck instanceof JDFPart) && PartitionHelper.isAsset(toCheck.getParentNode_KElement());
-		matches = matches || "ChildProduct".equals(toCheck.getLocalName());
-		matches = matches || "ProcessList".equals(toCheck.getLocalName());
-		matches = matches || "Dependent".equals(toCheck.getLocalName());
+		matches = matches || XJDFConstants.ChildProduct.equals(toCheck.getLocalName());
+		matches = matches || XJDFConstants.ProcessList.equals(toCheck.getLocalName());
+		matches = matches || XJDFConstants.Dependent.equals(toCheck.getLocalName());
 		return matches;
 	}
 

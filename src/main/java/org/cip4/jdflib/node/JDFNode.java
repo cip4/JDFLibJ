@@ -4989,6 +4989,23 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
+	 * get the Parent JDFNode with Type=Product, null if the parent element is the document or an envelope xml or no product exists
+	 * 
+	 * @return JDFNode: the parent JDF, null if this is the root JDF
+	 */
+	public JDFNode getParentProduct()
+	{
+		JDFNode parent = this;
+		while (parent != null)
+		{
+			if (parent.isProduct())
+				break;
+			parent = parent.getParentJDF();
+		}
+		return parent;
+	}
+
+	/**
 	 * Check existence of attribute Type
 	 * 
 	 * @return boolean - true if attribute Type exists
@@ -8225,14 +8242,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 * Checks if this node is a simple process (including Combined) leaf node.
+	 * Checks if this node is a simple process (including Combined and grey box ProcessGroup) leaf node.
 	 * 
 	 * @return boolean - <code>true</code> if this is a process node.
 	 */
 	public boolean isProcessNode()
 	{
-		final EnumType type2 = getEnumType();
-		return getElement(ElementName.JDF) == null && !EnumType.Product.equals(type2);
+		final EnumType typ = getEnumType();
+		return !hasChildElement(ElementName.JDF, null) && !EnumType.Product.equals(typ);
 
 	}
 

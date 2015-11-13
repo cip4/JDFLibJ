@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,20 +75,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi finds all ids
  */
 public class IDFinder extends BaseElementWalker
 {
-	protected final Map<String, IDPart> theMap;
+	final Map<String, IDPart> theMap;
+	final Map<String, String> indexMap;
 
 	/**
 	 * 
@@ -104,16 +109,36 @@ public class IDFinder extends BaseElementWalker
 		 */
 		public IDPart(String idParent, VElement parts)
 		{
-			id = idParent;
 			vMap = null;
 			if (parts != null && parts.size() > 0)
 			{
-				vMap = new VJDFAttributeMap();
-				for (int i = 0; i < parts.size(); i++)
+				KElement part = parts.get(0);
+				if (part != null)
 				{
-					vMap.add(parts.get(i).getAttributeMap());
+					String productID = StringUtil.getNonEmpty(part.getAttribute(AttributeName.PRODUCTPART));
+					if (productID != null)
+					{
+						idParent += "." + productID;
+					}
+					String procs = StringUtil.getNonEmpty(part.getAttribute(XJDFConstants.ProcessTypes));
+					if (procs != null)
+					{
+						idParent += "." + getIndex(procs);
+					}
 				}
+
+				vMap = new VJDFAttributeMap();
+
+				for (KElement p : parts)
+				{
+					JDFAttributeMap partMap = p.getAttributeMap();
+					partMap.remove(AttributeName.PRODUCTPART);
+					partMap.remove(XJDFConstants.ProcessTypes);
+					vMap.add(partMap);
+				}
+				vMap.unify();
 			}
+			id = idParent;
 		}
 
 		/**
@@ -159,6 +184,7 @@ public class IDFinder extends BaseElementWalker
 	{
 		super(new BaseWalkerFactory());
 		theMap = new HashMap<String, IDPart>();
+		indexMap = new HashMap<String, String>();
 		new BaseWalker(getFactory()); // need a default walker
 	}
 
@@ -173,6 +199,23 @@ public class IDFinder extends BaseElementWalker
 		theMap.clear();
 		walkTree(n, null);
 		return theMap;
+	}
+
+	/**
+	 * otherwise our ids get too long...
+	 * 
+	 * @param procs
+	 * @return
+	 */
+	private String getIndex(String procs)
+	{
+		String index = indexMap.get(procs);
+		if (index == null)
+		{
+			index = StringUtil.rightStr("00" + indexMap.size(), 3);
+			indexMap.put(procs, index);
+		}
+		return index;
 	}
 
 	/**
@@ -200,16 +243,23 @@ public class IDFinder extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			final String idParent = e.getParentNode_KElement().getAttribute(AttributeName.ID, null, null);
 			String id = e.getAttribute(AttributeName.ID, null, null);
 			if (id == null)
 			{
-				id = e.generateDotID("ID", null);
+				id = e.generateDotID(AttributeName.ID, null);
 				e.setID(id);
 			}
-			VElement vPart = e.getChildElementVector("Part", null, null, true, 0, false);
+			VElement vPart = e.getChildElementVector(ElementName.PART, null, null, true, 0, false);
+
+			final String idParent = getParentID(e);
 			theMap.put(id, new IDPart(idParent, vPart));
 			return e;
+		}
+
+		private String getParentID(final KElement e)
+		{
+			String idParent = e.getParentNode_KElement().getAttribute(AttributeName.ID, null, null);
+			return idParent;
 		}
 
 		/**

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -306,7 +306,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		}
 		long dif = getCurrentMem() - mem;
 		dif = Math.max(dif, 0);
-		assertEquals(dif, 0, 500000);
+		assertEquals(dif, 0, 1500000);
 	}
 
 	/**

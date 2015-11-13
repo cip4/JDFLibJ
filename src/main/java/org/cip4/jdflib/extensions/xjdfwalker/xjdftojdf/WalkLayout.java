@@ -126,6 +126,8 @@ public class WalkLayout extends WalkStrippingParams
 	private boolean moveToStripping(final KElement e, final JDFStrippingParams stripParams)
 	{
 		final VString vAtt = stripParams.knownAttributes();
+		vAtt.add("MediaRef");
+		vAtt.add("DeviceRef");
 		final JDFAttributeMap map = e.getAttributeMap();
 		final Iterator<String> it = map.getKeyIterator();
 		boolean foundSome = false;
@@ -161,6 +163,7 @@ public class WalkLayout extends WalkStrippingParams
 	private void createStrippingPartition(JDFStrippingParams stripParams, JDFLayout trackLayout)
 	{
 		JDFNode node = xjdfToJDFImpl.currentJDFNode;
+		node = getNode(stripParams.getParentNode_KElement().getParentNode_KElement(), node);
 		if (node == null)
 		{
 			log.error("whazzup - not in xjdf root???");

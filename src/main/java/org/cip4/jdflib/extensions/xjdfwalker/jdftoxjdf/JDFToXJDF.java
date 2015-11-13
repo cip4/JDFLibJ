@@ -94,7 +94,6 @@ import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.elementwalker.IWalker;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
-import org.cip4.jdflib.extensions.PostXJDFWalker;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
@@ -326,6 +325,15 @@ public class JDFToXJDF extends PackageElementWalker
 	String rootID;
 
 	private boolean removeSignatureName = true;
+	private boolean wantProcessList = false;
+
+	/**
+	 * @param bProcessList the ProcessList to set
+	 */
+	public void setWantProcessList(boolean bProcessList)
+	{
+		this.wantProcessList = bProcessList;
+	}
 
 	/**
 	 * 
@@ -374,10 +382,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 		walkTree(root, newRoot);
 		newRoot.eraseEmptyNodes(true);
-		boolean tmpTrack = trackAudits;
-		trackAudits = false;
-		postWalk();
-		trackAudits = tmpTrack;
+		postWalk(true);
 		return newRoot;
 	}
 
@@ -399,17 +404,19 @@ public class JDFToXJDF extends PackageElementWalker
 			oldRoot = root;
 		}
 		prepareNewDoc(false);
-
 		loopNodes(root);
-
 		prepareRoot(root);
 
-		postWalk();
+		postWalk(false);
 		newRoot.getOwnerDocument_KElement().copyMeta(node.getOwnerDocument_KElement());
 
 		return newRoot;
 	}
 
+	/**
+	 * 
+	 * @param root
+	 */
 	private void preFixVersion(final JDFElement root)
 	{
 		FixVersion vers = new FixVersion(EnumVersion.Version_1_5);
@@ -421,9 +428,9 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * 
-	 *  
+	 * @param bJMF
 	 */
-	private void postWalk()
+	private void postWalk(boolean bJMF)
 	{
 		PostXJDFWalker pw = new PostXJDFWalker((JDFElement) newRoot);
 		pw.setMergeLayout(bMergeLayout);
@@ -431,13 +438,14 @@ public class JDFToXJDF extends PackageElementWalker
 		pw.setRemoveSignatureName(removeSignatureName);
 
 		pw.walkTreeKidsFirst(newRoot);
-
-		if (trackAudits)
+		if (!bJMF)
 		{
-			JDFAuditPool auditPool = (JDFAuditPool) newRoot.getCreateElement("AuditPool");
-			auditPool.addCreated("XJDF Converter", null);
+			if (trackAudits)
+			{
+				JDFAuditPool auditPool = (JDFAuditPool) newRoot.getCreateElement("AuditPool");
+				auditPool.addCreated("XJDF Converter", null);
+			}
 		}
-
 		newRoot.eraseEmptyNodes(true);
 	}
 
@@ -526,7 +534,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 * class that generates a set of multiple JDF elements from the leaf nodes of a JDF
 	 * @author rainer prosi
 	 *
 	 */
@@ -654,15 +662,25 @@ public class JDFToXJDF extends PackageElementWalker
 				}
 				else
 				{
-					String nam = n.getJobPartID(false);
-					if (StringUtil.getNonEmpty(nam) == null)
-					{
-						nam = "Part_" + i;
-					}
-
+					ensureJobPartID(i, n);
 				}
 			}
 			return v;
+		}
+
+		/**
+		 * 
+		 * @param i
+		 * @param n
+		 */
+		private void ensureJobPartID(int i, final JDFNode n)
+		{
+			String nam = n.getJobPartID(false);
+			if (StringUtil.getNonEmpty(nam) == null)
+			{
+				nam = "Part_" + i;
+				n.setJobPartID(nam);
+			}
 		}
 	}
 
@@ -959,5 +977,14 @@ public class JDFToXJDF extends PackageElementWalker
 			setTypeSafeMessage(false);
 			setUpdateVersion(false);
 		}
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isWantProcessList()
+	{
+		return wantProcessList;
 	}
 }

@@ -79,7 +79,10 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -147,7 +150,7 @@ public class WalkXElement extends BaseWalker
 		xjdfToJDFImpl.convertTilde(trackElem);
 		if (trackElem instanceof JDFElement)
 		{
-			// we want to retain al existing attributes
+			// we want to retain all existing attributes
 			JDFAttributeMap map = trackElem.getAttributeMap_KElement();
 			((JDFElement) trackElem).init();
 			trackElem.setAttributes(map);
@@ -180,6 +183,42 @@ public class WalkXElement extends BaseWalker
 	{
 		final String refName = val.endsWith("Refs") ? StringUtil.leftStr(val, -1) : val;
 		return refName;
+	}
+
+	/**
+	 * 
+	 * @param xjdfRes
+	 * @param jdfNode
+	 * @return
+	 */
+	protected JDFNode getNode(KElement xjdfRes, KElement jdfNode)
+	{
+		JDFNode theNode = (JDFNode) jdfNode;
+		final JDFPart part = (JDFPart) xjdfRes.getElement(ElementName.PART);
+		JDFAttributeMap partMap = part == null ? null : part.getAttributeMap();
+		if (partMap != null)
+		{
+			String productID = StringUtil.getNonEmpty(partMap.get(AttributeName.PRODUCTID));
+			if (productID != null)
+			{
+				JDFNode newNode = (JDFNode) theNode.getChildWithAttribute(ElementName.JDF, AttributeName.ID, null, productID, 0, false);
+				if (newNode != null)
+				{
+					theNode = newNode;
+				}
+			}
+			String types = StringUtil.getNonEmpty(partMap.get(XJDFConstants.ProcessTypes));
+			if (types != null && theNode.isProduct())
+			{
+				JDFNode newNode = (JDFNode) theNode.getChildWithAttribute(ElementName.JDF, AttributeName.TYPES, null, types, 0, false);
+				if (newNode == null)
+				{
+					newNode = theNode.addProcessGroup(new VString(types, null));
+				}
+				theNode = newNode;
+			}
+		}
+		return theNode;
 	}
 
 	/**

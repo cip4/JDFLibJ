@@ -77,6 +77,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.ProductHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -107,7 +108,7 @@ public class WalkProduct extends WalkJDF
 		boolean matchesID = matchesRootID(node);
 		if (matchesID)
 		{
-			setRootAttributes(node, xjdf);
+			prepareRoot(node, xjdf);
 			jdfToXJDF.first.add(jdf.getID());
 		}
 		walkProduct(jdf, xjdf);
@@ -161,7 +162,7 @@ public class WalkProduct extends WalkJDF
 
 		for (String kid : kids)
 		{
-			final KElement sub = prod.appendElement("ChildProduct");
+			final KElement sub = prod.appendElement(XJDFConstants.ChildProduct);
 			sub.setAttribute("ChildRef", kid, null);
 			// TODO add processusage from input / output resources
 		}

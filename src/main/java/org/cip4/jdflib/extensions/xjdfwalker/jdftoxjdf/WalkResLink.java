@@ -71,13 +71,18 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
+import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.util.StringUtil;
@@ -113,7 +118,7 @@ public class WalkResLink extends WalkJDFElement
 		}
 
 		// we do not explicitly call out components for products
-		if (EnumType.Product.equals(n.getEnumType()))
+		if (n.isProduct())
 		{
 			if ((linkTarget instanceof JDFComponent) || (!jdfToXJDF.isWantProduct() && !matchesRootID(n)))
 			{
@@ -146,7 +151,7 @@ public class WalkResLink extends WalkJDFElement
 	 */
 	private void setProcess(JDFResourceLink rl)
 	{
-		if (rl == null)
+		if (!jdfToXJDF.isWantProcessList() || rl == null)
 			return;
 
 		KElement process = getProcess(rl);
@@ -162,12 +167,10 @@ public class WalkResLink extends WalkJDFElement
 		if (rl == null || process == null)
 			return;
 		EnumUsage usage = rl.getUsage();
-		if (usage == null)
-			return;
-		String attName = usage.getName();
-		if (attName != null)
+		String usageName = usage == null ? null : usage.getName();
+		if (usageName != null)
 		{
-			process.appendAttribute(attName, rl.getrRef(), null, " ", true);
+			process.appendAttribute(usageName, rl.getrRef(), null, JDFConstants.BLANK, true);
 		}
 	}
 
@@ -178,7 +181,7 @@ public class WalkResLink extends WalkJDFElement
 	private KElement getProcess(JDFResourceLink rl)
 	{
 		JDFNode parent = rl.getParentJDF();
-		if (parent == null || JDFConstants.PRODUCT.equals(parent.getType()))
+		if (parent == null || parent.isProduct())
 		{
 			// products are handled by productList
 			return null;
@@ -191,11 +194,11 @@ public class WalkResLink extends WalkJDFElement
 		if (jobPartID == null)
 			return null;
 
-		KElement processList = jdfToXJDF.newRoot.getCreateElement("ProcessList", null, 0);
-		KElement process = processList.getChildWithAttribute("Process", AttributeName.JOBPARTID, null, jobPartID, 0, true);
+		KElement processList = jdfToXJDF.newRoot.getCreateElement(XJDFConstants.ProcessList, null, 0);
+		KElement process = processList.getChildWithAttribute(XJDFConstants.Process, AttributeName.JOBPARTID, null, jobPartID, 0, true);
 		if (process == null)
 		{
-			process = processList.appendElement("Process");
+			process = processList.appendElement(XJDFConstants.Process);
 			process.setAttribute(AttributeName.JOBPARTID, jobPartID);
 
 			if (parent.hasAttribute(AttributeName.TYPES))
@@ -217,7 +220,7 @@ public class WalkResLink extends WalkJDFElement
 
 			if (grandparent != null)
 			{
-				process.setAttribute("Parent", getJobPartID(grandparent));
+				process.setAttribute(XJDFConstants.Parent, getJobPartID(grandparent));
 			}
 		}
 		return process;
@@ -244,5 +247,52 @@ public class WalkResLink extends WalkJDFElement
 	public boolean matches(final KElement toCheck)
 	{
 		return toCheck instanceof JDFResourceLink && !(toCheck instanceof JDFPartAmount);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#setResource(org.cip4.jdflib.core.JDFElement, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected VElement setResource(JDFElement rl, JDFResource linkTarget, KElement xRoot)
+	{
+		VElement newResources = super.setResource(rl, linkTarget, xRoot);
+		if (XJDF20.rootName.equals(xRoot.getLocalName()))
+		{
+			setNodePartitions(rl, newResources);
+		}
+		return newResources;
+	}
+
+	private void setNodePartitions(JDFElement rl, VElement newResources)
+	{
+		if (newResources != null && newResources.size() > 0 && !jdfToXJDF.isWantProcessList() && !jdfToXJDF.isSingleNode())
+		{
+			JDFNode parentNode = rl.getParentJDF();
+			JDFNode parentProduct = parentNode.getParentProduct();
+			for (KElement newResource : newResources)
+			{
+				PartitionHelper ph = new PartitionHelper(newResource);
+				VJDFAttributeMap partMaps = ph.getPartMapVector();
+				boolean bChange = false;
+				if (parentProduct != null)
+				{
+					partMaps.put(XJDFConstants.ProductPart, parentProduct.getID());
+					bChange = true;
+				}
+				if (parentNode != parentProduct)
+				{
+					String typesString = StringUtil.getNonEmpty(parentNode.getTypesString());
+					if (typesString != null)
+					{
+						partMaps.put(XJDFConstants.ProcessTypes, typesString);
+						bChange = true;
+					}
+				}
+				if (bChange)
+				{
+					ph.setPartMapVector(partMaps);
+				}
+			}
+		}
 	}
 }

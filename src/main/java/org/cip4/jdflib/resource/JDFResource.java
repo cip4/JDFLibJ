@@ -230,7 +230,7 @@ public class JDFResource extends JDFElement
 		atrInfoTable_UpdateID_Required[0] = new AtrInfoTable(AttributeName.UPDATEID, 0x44444221, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
-	private static AtrInfoTable[] atrInfoTable_PartIDKeys = new AtrInfoTable[55];
+	private static AtrInfoTable[] atrInfoTable_PartIDKeys = new AtrInfoTable[56];
 	static
 	{
 		atrInfoTable_PartIDKeys[0] = new AtrInfoTable(AttributeName.BINDERYSIGNATURENAME, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
@@ -288,6 +288,7 @@ public class JDFResource extends JDFElement
 		atrInfoTable_PartIDKeys[52] = new AtrInfoTable(AttributeName.SETTAGS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable_PartIDKeys[53] = new AtrInfoTable(AttributeName.SUBRUN, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable_PartIDKeys[54] = new AtrInfoTable(AttributeName.WEBPRODUCT, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable_PartIDKeys[55] = new AtrInfoTable(AttributeName.PRODUCTPART, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -2541,15 +2542,13 @@ public class JDFResource extends JDFElement
 		// if !bCreate the return value is the consumer ;-)
 		final VElement v = getLinksAndRefs(true, false);
 		final VElement vv = new VElement();
-		KElement kElem = null;
 		if (v == null)
 		{
 			return null;
 		}
 
-		for (int i = 0; i < v.size(); i++)
+		for (KElement kElem : v)
 		{
-			kElem = v.elementAt(i);
 			if (kElem instanceof JDFResourceLink)
 			{
 				final JDFResourceLink l = (JDFResourceLink) kElem;

@@ -169,16 +169,21 @@ public class JDFPart extends JDFAutoPart
 	public VString guessPartIDKeys()
 	{
 		final JDFAttributeMap map = getPartMap();
+		return guessPartIDKeys(map);
+	}
+
+	public static VString guessPartIDKeys(final JDFAttributeMap map)
+	{
 		if (map == null || map.size() == 0)
 		{
 			return null;
 		}
-		final VString v = new VString();
-		final VString keys = map.getKeys();
 		if (map.size() == 1)
 		{
 			return map.getKeys();
 		}
+		final VString v = new VString();
+		final VString keys = map.getKeys();
 		if (keys.contains(AttributeName.SIGNATURENAME))
 		{
 			v.add(AttributeName.SIGNATURENAME);

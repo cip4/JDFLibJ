@@ -70,14 +70,15 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFPageData;
 
 /**
@@ -96,20 +97,30 @@ public class WalkContentResource extends WalkXJDFResource
 	}
 
 	/**
+	 * 
 	 * @param e
-	 * @param trackElem
 	 * @return
 	 */
 	@Override
-	protected KElement createPartition(final KElement e, final KElement trackElem, final JDFPart part)
+	protected String getJDFResName(final SetHelper sh)
+	{
+		return ElementName.PAGELIST;
+	}
+
+	/**
+	 * @param e
+	 * @param jdfRes
+	 * @return
+	 */
+	@Override
+	protected KElement createPartition(final KElement e, final JDFResource jdfRes, final JDFPart part, JDFNode theNode)
 	{
 		JDFAttributeMap restMap = getPartMap(part);
 		if (restMap.size() > 0)
 		{
-			return super.createPartition(e, trackElem, part);
+			return super.createPartition(e, jdfRes, part, theNode);
 		}
-		JDFNode theNode = ((JDFElement) trackElem).getParentJDF();
-		final JDFPageList pageList = (JDFPageList) trackElem;
+		final JDFPageList pageList = (JDFPageList) jdfRes;
 		final String pages = part.getAttribute(AttributeName.PAGENUMBER);
 		final KElement pd = pageList.getChildWithAttribute(ElementName.PAGEDATA, AttributeName.PAGEINDEX, null, pages, 0, true);
 		if (pd != null)

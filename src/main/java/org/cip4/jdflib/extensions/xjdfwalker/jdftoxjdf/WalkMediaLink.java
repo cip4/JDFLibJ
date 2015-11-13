@@ -113,11 +113,25 @@ public class WalkMediaLink extends WalkResLink
 	{
 		JDFResourceLink rl = (JDFResourceLink) jdf;
 		final JDFResource r = rl.getLinkRoot();
-		if (r != null)
+		if (mustConvert(r))
 		{
 			rl = createComponent(xjdf, rl);
 		}
 		return super.walk(rl, xjdf);
+	}
+
+	/**
+	 * 
+	 * @param r
+	 * @return
+	 */
+	private boolean mustConvert(JDFResource r)
+	{
+		JDFMedia media = (JDFMedia) r;
+		if (media == null)
+			return false;
+		media = (JDFMedia) media.getLeaves(false).get(0);
+		return media.isComponentMedia();
 	}
 
 	/**

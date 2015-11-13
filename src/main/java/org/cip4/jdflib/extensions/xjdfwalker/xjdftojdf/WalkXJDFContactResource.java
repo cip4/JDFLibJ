@@ -66,164 +66,54 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- *  
- * @author rainer prosi
- * @date Feb 17, 2012
+ * @author Rainer Prosi, Heidelberger Druckmaschinen 
+ * 
+ * walker for the colorSet - this gets translated back to a colorpool
  */
-public abstract class BaseXJDFHelper
+public class WalkXJDFContactResource extends WalkXJDFResource
 {
-	private static Log log;
-
-	protected BaseXJDFHelper()
+	/**
+	 * 
+	 */
+	public WalkXJDFContactResource()
 	{
 		super();
-		if (log == null)
-		{
-			log = LogFactory.getLog(BaseXJDFHelper.class);
-		}
-	}
-
-	/**
-	 *  
-	 * @param xpath
-	 * @return
-	 */
-	public String getXPathValue(String xpath)
-	{
-		return theElement == null ? null : theElement.getXPathAttribute(xpath, null);
 	}
 
 	/**
 	 * 
-	 * @param xpath
-	 * @return
-	 */
-	public KElement getXPathElement(String xpath)
-	{
-		return theElement == null ? null : theElement.getXPathElement(xpath);
-	}
-
-	/**
-	 * reorder elements in their canonical order - usually nop
-	 */
-	public void reorder()
-	{
-		return;
-	}
-
-	/**
-	 * 
-	 *  
-	 * @param xpath
-	 * @param value
-	 */
-	public void setXPathValue(String xpath, String value)
-	{
-		if (theElement != null)
-		{
-			theElement.setXPathValue(xpath, value);
-		}
-	}
-
-	/**
-	 * 
-	 *generic cleanup routine
-	 */
-	public abstract void cleanUp();
-
-	protected KElement theElement;
-
-	/**
-	 * 
-	 * @return the xjdf root element
-	 */
-	public KElement getRoot()
-	{
-		return theElement;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public KElement deleteNode()
-	{
-		KElement ret = theElement;
-		if (theElement != null)
-		{
-			theElement.deleteNode();
-			theElement = null;
-		}
-		return ret;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public boolean isEqual(BaseXJDFHelper other)
-	{
-		if (theElement == null)
-			return other == null || other.theElement == null;
-		return theElement.isEqual(other.theElement);
-	}
-
-	/**
-	 * get the ID from the generic Parameter or Resource element
-	 * @return the ID , may be null in case this is connected to a null element
-	 */
-	public String getID()
-	{
-		return getXPathValue("@ID");
-	}
-
-	/**
-	 * 
-	 * @param newID
-	 */
-	public void setID(String newID)
-	{
-		setXPathValue("@ID", newID);
-	}
-
-	/**
-	 * equals and hash are based on the xml element that this helper represents
-	 * 
-	 * @see java.lang.Object#hashCode()
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#getJDFResName(org.cip4.jdflib.extensions.SetHelper)
 	 */
 	@Override
-	public int hashCode()
+	protected String getJDFResName(SetHelper sh)
 	{
-		final int prime = 31;
-		int result = 42;
-		result = prime * result + ((theElement == null) ? 0 : theElement.hashCode());
-		return result;
+		return ElementName.EMPLOYEE;
 	}
 
 	/**
-	 * equals and hash are based on the xml element that this helper represents
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
 	@Override
-	public boolean equals(Object obj)
+	public boolean matches(final KElement toCheck)
 	{
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BaseXJDFHelper other = (BaseXJDFHelper) obj;
-		return ContainerUtil.equals(theElement, other.theElement);
+		boolean isContact = PartitionHelper.isAsset(toCheck, ElementName.CONTACT);
+		if (isContact)
+		{
+			String types = toCheck.getXPathAttribute("Contact/@ContactTypes", null);
+			isContact = StringUtil.hasToken(types, ElementName.EMPLOYEE, null, 0);
+		}
+		return isContact;
 	}
 
 }

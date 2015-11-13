@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
@@ -104,30 +105,35 @@ public class WalkResourceAudit extends WalkAudit
 	{
 		xjdf.renameElement(ElementName.RESOURCEAUDIT, null);
 		JDFResourceInfo ri = (JDFResourceInfo) xjdf.getElement(ElementName.RESOURCEINFO);
+		boolean foundLink = false;
 		while (ri != null)
 		{
-			linkSet(ri);
+			KElement newLink = linkSet(ri);
+			foundLink = foundLink || newLink != null;
 			ri = (JDFResourceInfo) xjdf.getElement(ElementName.RESOURCEINFO);
 		}
-		KElement ret = super.walk(xjdf, jdf);
+
+		KElement ret = foundLink ? super.walk(xjdf, jdf) : null;
 		return ret;
 	}
 
-	private void linkSet(JDFResourceInfo ri)
+	private KElement linkSet(JDFResourceInfo ri)
 	{
-		String id = ri.getResourceID();
 		XJDFHelper h = new XJDFHelper(xjdfToJDFImpl.xjdf);
 
-		if (StringUtil.getNonEmpty(id) == null)
+		String name = StringUtil.getNonEmpty(ri.getResourceName());
+		SetHelper sh = h.getSet(name, ri.getUsage(), ri.getProcessUsage());
+		PartitionHelper ph = sh == null ? null : sh.getPartition(ri.getPartMapVector());
+		if (ph == null)
 		{
-			String name = StringUtil.getNonEmpty(ri.getResourceName());
-			SetHelper sh = h.getSet(name, ri.getUsage(), ri.getProcessUsage());
-			id = sh == null ? null : sh.getID();
+			ph = sh == null ? null : sh.getPartition(0);
 		}
-		SetHelper sh = h.getSetForPartition(id);
-		if (sh == null)
+		String id = ph == null ? null : xjdfToJDFImpl.idMap.get(ph.getID()).getID();
+
+		if (id == null)
 		{
 			ri.deleteNode();
+			ri = null;
 		}
 		else
 		{
@@ -135,13 +141,13 @@ public class WalkResourceAudit extends WalkAudit
 			ri.removeAttribute(AttributeName.LEVEL);
 			ri.removeAttribute(AttributeName.MODULEID);
 			ri.removeAttribute(AttributeName.PRODUCTID);
-			ri.renameAttribute(AttributeName.RESOURCEID, AttributeName.RREF, null, null);
+			ri.setAttribute(AttributeName.RREF, id);
 			ri.removeAttribute(AttributeName.RESOURCENAME);
 			ri.removeAttribute(AttributeName.STATUS);
 			ri.removeAttribute(AttributeName.UNIT);
 			ri.getParentNode_KElement().moveElements(ri.getChildElementVector(ElementName.PART, null), null);
 		}
-
+		return ri;
 	}
 
 	/**

@@ -77,9 +77,13 @@ import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
@@ -103,7 +107,99 @@ public class WalkXJDFResource extends WalkXElement
 	 * @return the created resource
 	 */
 	@Override
-	public KElement walk(final KElement xjdfRes, final KElement jdfResource)
+	public KElement walk(final KElement xjdfRes, final KElement jdfNode)
+	{
+		JDFNode theNode = getNode(xjdfRes, jdfNode);
+		JDFResource res = getResourceRoot(theNode, xjdfRes);
+		final JDFPart part = (JDFPart) xjdfRes.getElement(ElementName.PART);
+		KElement newPartitionElement = createPartition(xjdfRes, res, part, theNode);
+		if (newPartitionElement == null)
+		{
+			return null;
+		}
+		final JDFAttributeMap map = getResMap(xjdfRes);
+
+		if (newPartitionElement instanceof JDFResource)
+		{
+			JDFResource newPartition = (JDFResource) newPartitionElement;
+			JDFResourceLink rl = theNode.getLink(newPartition, null);
+			rl = ensureLink(theNode, newPartition, rl);
+			final JDFAttributeMap partMap = getPartMap(part);
+			handleAmountPool(xjdfRes, partMap, map, rl);
+		}
+		newPartitionElement.setAttributes(map);
+
+		return newPartitionElement;
+	}
+
+	/**
+	 * 
+	 * @param e
+	 * @return
+	 */
+	protected String getJDFResName(final SetHelper sh)
+	{
+		final String name = sh.getName();
+		return name;
+	}
+
+	/**
+	 * 
+	 * @param theNode
+	 * @param xjdfRes
+	 * @return
+	 */
+	private JDFResource getResourceRoot(JDFNode theNode, KElement xjdfRes)
+	{
+		JDFNode newRoot = theNode.getJDFRoot();
+		PartitionHelper ph = new PartitionHelper(xjdfRes);
+		SetHelper sh = ph.getSet();
+		final String name = getJDFResName(sh);
+		EnumUsage inOut = sh.getUsage();
+		String processUsage = sh.getProcessUsage();
+		if (inOut == null && xjdfToJDFImpl.isHeuristicLink())
+		{
+			if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name) && !ElementName.COMPONENT.equals(name)
+					&& !ElementName.COLORPOOL.equals(name) && !ElementName.MEDIA.equals(name) && !ElementName.EXPOSEDMEDIA.equals(name)
+					&& theNode.isValidLink(name, EnumUsage.Input, processUsage))
+			{
+				inOut = EnumUsage.Input;
+			}
+		}
+		String id = xjdfToJDFImpl.idMap.get(xjdfRes.getID()).getID();
+		JDFResource res = (JDFResource) newRoot.getCreateResourcePool().getChildWithAttribute(null, AttributeName.ID, null, id, 0, true);
+		if (res == null)
+		{
+			res = theNode.getCreateResource(name, inOut, processUsage);
+			if (theNode != newRoot)
+			{
+				newRoot.getCreateResourcePool().moveElement(res, null);
+			}
+			if (inOut != null)
+			{
+				final JDFResourceLink rl = theNode.getLink(res, inOut);
+				rl.setrRef(id);
+				res.removeAttribute(AttributeName.USAGE);
+				VString reslinks = XJDFToJDFConverter.getResLinkAttribs();
+				for (String key : reslinks)
+				{
+					if (res.hasAttribute(key))
+					{
+						rl.moveAttribute(key, res);
+					}
+				}
+			}
+			res.setID(id);
+		}
+
+		return res;
+	}
+
+	/**
+	 * @param xjdfRes
+	 * @return the created resource
+	 */
+	public KElement oldwalk(final KElement xjdfRes, final KElement jdfResource)
 	{
 		JDFNode theNode = xjdfToJDFImpl.currentJDFNode == null ? ((JDFElement) jdfResource).getParentJDF() : xjdfToJDFImpl.currentJDFNode;
 		final JDFPart part = (JDFPart) xjdfRes.getElement(ElementName.PART);
@@ -112,7 +208,7 @@ public class WalkXJDFResource extends WalkXElement
 		JDFNode partialProductNode = null;
 		if (part != null)
 		{
-			newPartitionElement = createPartition(xjdfRes, jdfResource, part);
+			newPartitionElement = createPartition(xjdfRes, (JDFResource) jdfResource, part, theNode);
 			partmap = part.getPartMap();
 
 			String productPart = partmap == null ? null : StringUtil.getNonEmpty(partmap.get(AttributeName.PRODUCTPART));
@@ -211,18 +307,20 @@ public class WalkXJDFResource extends WalkXElement
 	 * @param part
 	 * @return
 	 */
-	protected KElement createPartition(final KElement xjdfRes, final KElement jdfRes, final JDFPart part)
+	protected KElement createPartition(final KElement xjdfRes, final JDFResource jdfRes, final JDFPart part, JDFNode theNode)
 	{
-		JDFNode theNode = xjdfToJDFImpl.currentJDFNode == null ? ((JDFElement) jdfRes).getParentJDF() : xjdfToJDFImpl.currentJDFNode;
-		final JDFResource r = (JDFResource) jdfRes;
+		if (part == null)
+		{
+			return jdfRes;
+		}
 		final JDFAttributeMap partMap = getPartMap(part);
-		final JDFResource rPart = r.getCreatePartition(partMap, part.guessPartIDKeys());
-		final JDFResourceLink rll = theNode.getLink(r, null);
+		final JDFResource rPart = jdfRes.getCreatePartition(partMap, JDFPart.guessPartIDKeys(partMap));
+		final JDFResourceLink rll = theNode.getLink(jdfRes, null);
 		final VJDFAttributeMap partMapVector = rll != null ? rll.getPartMapVector() : null;
 		if (rll != null && (partMapVector == null || !partMapVector.contains(partMap)))
 		{
 			rll.appendPart().setPartMap(partMap);
-			part.deleteNode();
+			//			part.deleteNode();
 		}
 		return rPart;
 	}
@@ -236,7 +334,7 @@ public class WalkXJDFResource extends WalkXElement
 	 */
 	JDFAttributeMap getPartMap(final JDFPart part)
 	{
-		final JDFAttributeMap p = part.getPartMap();
+		final JDFAttributeMap p = part == null ? null : part.getPartMap();
 		if (p != null)
 		{
 			String sheetName = p.get(AttributeName.SHEETNAME);
@@ -247,6 +345,8 @@ public class WalkXJDFResource extends WalkXElement
 				p.put(AttributeName.SIGNATURENAME, signatureName);
 				part.setSignatureName(signatureName);
 			}
+			p.remove(AttributeName.PRODUCTPART);
+			p.remove(XJDFConstants.ProcessTypes);
 		}
 		return p;
 	}

@@ -360,7 +360,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	/**
 	 * find and optionally create the appropriate node
 	 * @param xjdf
-	 * @param create if true, creat the new node
+	 * @param create if true, create the new node
 	 * @return the node
 	 */
 	private JDFNode findNode(KElement xjdf, final boolean create)

@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
@@ -97,8 +98,27 @@ public class WalkResLinkPool extends WalkJDFSubElement
 	@Override
 	public KElement walk(final KElement resLinkPool, final KElement xjdf)
 	{
-		getLinksFromAncestorPool(resLinkPool);
-		return xjdf;
+		if (isIntermediateNode(resLinkPool))
+		{
+			// we ignore intermediate JDF Nodes
+			return null;
+		}
+		else
+		{
+			getLinksFromAncestorPool(resLinkPool);
+			return xjdf;
+		}
+	}
+
+	/**
+	 * 
+	 * @param resLinkPool
+	 * @return
+	 */
+	boolean isIntermediateNode(final KElement resLinkPool)
+	{
+		JDFNode parent = ((JDFElement) resLinkPool).getParentJDF();
+		return parent != null && parent.isProcessGroup() && parent.hasChildElement(ElementName.JDF, null);
 	}
 
 	/**

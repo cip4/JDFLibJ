@@ -174,8 +174,29 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	 */
 	public void setPartMap(JDFAttributeMap map)
 	{
+		if (getPartMapVector().size() > 0)
+		{
+			theElement.removeChildren(ElementName.PART, null, null);
+		}
 		JDFPart part = (JDFPart) theElement.getCreateElement(ElementName.PART);
 		part.setAttributes(map);
+	}
+
+	/**
+	 * 
+	 * @param vPart the vector of partmaps to set the part element
+	 */
+	public void setPartMapVector(VJDFAttributeMap vPart)
+	{
+		theElement.removeChildrenByClass(JDFPart.class);
+		if (vPart != null)
+		{
+			for (JDFAttributeMap part : vPart)
+			{
+				final KElement p = theElement.appendElement(ElementName.PART, null);
+				p.setAttributes(part);
+			}
+		}
 	}
 
 	/**

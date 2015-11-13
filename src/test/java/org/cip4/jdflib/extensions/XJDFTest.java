@@ -288,6 +288,7 @@ public class XJDFTest extends JDFTestCaseBase
 		n = JDFDoc.parseFile(sm_dirTestData + "job4.jdf").getJDFRoot();
 		XJDF20 xjdf20 = new XJDF20();
 		xjdf20.setSingleNode(false);
+		xjdf20.setWantProcessList(true);
 		xjdf = xjdf20.makeNewJDF(n, null);
 		KElement procList = xjdf.getXPathElement("ProcessList");
 		assertNotNull(procList);

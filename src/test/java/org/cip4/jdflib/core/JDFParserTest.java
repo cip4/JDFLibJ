@@ -175,8 +175,11 @@ public class JDFParserTest extends JDFTestCaseBase
 		{
 			new JDFParser().parseString(s);
 		}
-		log.info("mem new:   " + getCurrentMem() + " " + mem);
-		assertTrue(getCurrentMem() - mem < 2000000);
+		long currentMem = getCurrentMem();
+		log.info("mem new:   " + currentMem + " " + mem);
+		if (currentMem < mem)
+			currentMem = mem;
+		assertEquals("parese memory", currentMem, mem, 2000000);
 		log.info("new:   " + (System.nanoTime() - l1) / 1000000);
 	}
 

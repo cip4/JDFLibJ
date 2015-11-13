@@ -78,7 +78,9 @@ import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 
 // //////////////////////////////////////////////////////////////////////////////
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+ * @author Rainer Prosi, Heidelberger Druckmaschinen 
+ * 
+ * walker for the various resource sets
  */
 public class WalkResource extends WalkJDFElement
 {

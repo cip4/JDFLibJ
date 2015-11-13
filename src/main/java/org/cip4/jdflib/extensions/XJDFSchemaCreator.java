@@ -1232,7 +1232,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			complexType = setComplexType(out, setName);
 
 			setGeneric(complexType, true);
-			setXSElement(complexType, "ChildProduct");
+			setXSElement(complexType, XJDFConstants.ChildProduct);
 			setXSElement(complexType, "Intent");
 			setXSAttribute(complexType, "Amount", getTypeName(EnumAttributeType.integer), false, null);
 			setXSAttribute(complexType, "ProductID", getTypeName(EnumAttributeType.shortString), false, null);

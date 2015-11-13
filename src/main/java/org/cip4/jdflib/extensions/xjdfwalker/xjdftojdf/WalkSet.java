@@ -70,14 +70,11 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
-import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -100,31 +97,51 @@ public class WalkSet extends WalkXElement
 	}
 
 	/**
-	 * @param e
-	 * @return the created resource
+	 * @param xjdf
+	 * @param jdf
+	 * 
+	 * @return the current parent node
 	 */
 	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
+	public KElement walk(final KElement xjdf, final KElement jdf)
 	{
-		final JDFNode parentNode = (JDFNode) trackElem;
-		final JDFNode root = parentNode.getJDFRoot();
-		EnumUsage inOut = EnumUsage.getEnum(e.getAttribute(AttributeName.USAGE));
-		String procUsage = StringUtil.getNonEmpty(e.getAttribute(AttributeName.PROCESSUSAGE));
+		final JDFNode parentNode = (JDFNode) jdf;
+		String procUsage = StringUtil.getNonEmpty(xjdf.getAttribute(AttributeName.PROCESSUSAGE));
 		if (ProductHelper.PRODUCT.equals(procUsage))
 		{
-
 			if (!EnumType.Product.equals(parentNode.getEnumType()))
 			{
 				return null;
 			}
 		}
-		final String id = e.getAttribute(AttributeName.ID, null, null);
+		return jdf;
+	}
+
+	/**
+	 * @param xjdf
+	 * @param jdf
+	 * @return the created resource
+	 */
+	public KElement oldwalk(final KElement xjdf, final KElement jdf)
+	{
+		final JDFNode parentNode = (JDFNode) jdf;
+		final JDFNode root = parentNode.getJDFRoot();
+		EnumUsage inOut = EnumUsage.getEnum(xjdf.getAttribute(AttributeName.USAGE));
+		String procUsage = StringUtil.getNonEmpty(xjdf.getAttribute(AttributeName.PROCESSUSAGE));
+		if (ProductHelper.PRODUCT.equals(procUsage))
+		{
+			if (!EnumType.Product.equals(parentNode.getEnumType()))
+			{
+				return null;
+			}
+		}
+		final String id = xjdf.getAttribute(AttributeName.ID, null, null);
 		if (inOut == null && xjdfToJDFImpl.isHeuristicLink())
 		{
-			final String name = getJDFResName(e);
+			final String name = getJDFResName(xjdf);
 			if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name) && !ElementName.COMPONENT.equals(name)
 					&& !ElementName.COLORPOOL.equals(name) && !ElementName.MEDIA.equals(name) && !ElementName.EXPOSEDMEDIA.equals(name)
-					&& parentNode.isValidLink(name, EnumUsage.Input, StringUtil.getNonEmpty(e.getAttribute(AttributeName.PROCESSUSAGE, null, null))))
+					&& parentNode.isValidLink(name, EnumUsage.Input, StringUtil.getNonEmpty(xjdf.getAttribute(AttributeName.PROCESSUSAGE, null, null))))
 			{
 				inOut = EnumUsage.Input;
 			}
@@ -150,35 +167,21 @@ public class WalkSet extends WalkXElement
 		}
 		if (r == null)
 		{
-			final String name = getJDFResName(e);
+			final String name = getJDFResName(xjdf);
 			if (name != null)
 			{
-				String nsURI = StringUtil.getNonEmpty(e.getNamespaceURI());
+				String nsURI = StringUtil.getNonEmpty(xjdf.getNamespaceURI());
 				r = root.addResource(name, null, null, null, null, nsURI, null);
 				r.removeAttribute(AttributeName.STATUS); // don't want the default
 			}
 		}
 		if (r != null)
 		{
-			r.setAttributes(e);
+			r.setAttributes(xjdf);
 			if (r.getResourceClass() == null)
 			{
-				final String name = StringUtil.leftStr(e.getLocalName(), -3);
+				final String name = StringUtil.leftStr(xjdf.getLocalName(), -3);
 				r.setResourceClass("Parameter".equals(name) ? EnumResourceClass.Parameter : EnumResourceClass.Handling);
-			}
-			if (inOut != null)
-			{
-				final JDFResourceLink rl = parentNode.ensureLink(r, inOut, null);
-				if (rl != null)
-				{
-					rl.setrRef(id);
-					r.removeAttribute(AttributeName.USAGE);
-					VString reslinks = XJDFToJDFConverter.getResLinkAttribs();
-					for (String key : reslinks)
-					{
-						rl.moveAttribute(key, r);
-					}
-				}
 			}
 
 			// not linked are also available - they will typically be referenced resources

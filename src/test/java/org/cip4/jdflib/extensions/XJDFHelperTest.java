@@ -77,7 +77,6 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.extensions.SetHelper.EnumFamily;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.FileUtil;
 import org.junit.Test;
@@ -134,10 +133,10 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		SetHelper rlSet = theHelper.appendResourceSet("RunList", EnumUsage.Input);
 		SetHelper rlSet2 = theHelper.appendResourceSet("Media", EnumUsage.Output);
 
-		assertEquals(rlSet, theHelper.getSets(EnumFamily.Resource, null).get(0));
-		assertEquals(rlSet2, theHelper.getSets(EnumFamily.Resource, null).get(1));
-		assertEquals(rlSet, theHelper.getSets(EnumFamily.Resource, EnumUsage.Input).get(0));
-		assertEquals(rlSet2, theHelper.getSets(EnumFamily.Resource, EnumUsage.Output).get(0));
+		assertEquals(rlSet, theHelper.getSets(ElementName.RUNLIST, null).get(0));
+		assertEquals(rlSet2, theHelper.getSets(ElementName.MEDIA, null).get(0));
+		assertEquals(rlSet2, theHelper.getSets(ElementName.MEDIA, EnumUsage.Output).get(0));
+		assertEquals(rlSet, theHelper.getSets(ElementName.RUNLIST, EnumUsage.Input).get(0));
 		assertEquals(rlSet, theHelper.getSets(null, EnumUsage.Input).get(0));
 		assertEquals(1, theHelper.getSets(null, EnumUsage.Input).size());
 		assertEquals(rlSet2, theHelper.getSets(null, EnumUsage.Output).get(0));

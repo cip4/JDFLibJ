@@ -112,7 +112,7 @@ public class WalkJDF extends WalkJDFElement
 		boolean matchesID = matchesRootID(node);
 		if (matchesID)
 		{
-			setRootAttributes(node, xjdf);
+			prepareRoot(node, xjdf);
 			jdfToXJDF.first.add(jdf.getID());
 			return xjdf;
 		}
@@ -142,25 +142,33 @@ public class WalkJDF extends WalkJDFElement
 	 * @param node
 	 * @param newRootP
 	 */
-	void setRootAttributes(final JDFNode node, final KElement newRootP)
+	void prepareRoot(final JDFNode node, final KElement newRootP)
 	{
 		if (EnumType.Product.equals(node.getEnumType()) && node.getParentJDF() != null && !jdfToXJDF.first.isEmpty())
 		{
 			// me be sub product
 			return;
 		}
-		newRootP.setXMLComment("Preliminary prototype version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion());
-		newRootP.setAttribute(AttributeName.JOBID, node.getJobID(true));
 
 		final JDFNodeInfo ni = node.getCreateNodeInfo();
 		final VElement niLeaves = ni.getLeaves(false);
-		for (int i = 0; i < niLeaves.size(); i++)
+		for (KElement leaf : niLeaves)
 		{
-			final JDFNodeInfo niLeaf = (JDFNodeInfo) niLeaves.get(i);
+			final JDFNodeInfo niLeaf = (JDFNodeInfo) leaf;
 			final JDFAttributeMap map = niLeaf.getPartMap();
 			niLeaf.setNodeStatus(node.getPartStatus(map, 0));
 			niLeaf.setNodeStatusDetails(StringUtil.getNonEmpty(node.getPartStatusDetails(map)));
 		}
+		if (jdfToXJDF.rootID.equals(node.getID()))
+		{
+			setRootAttributes(node, newRootP);
+		}
+	}
+
+	private void setRootAttributes(final JDFNode node, final KElement newRootP)
+	{
+		newRootP.setXMLComment("Preliminary prototype version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion());
+		newRootP.setAttribute(AttributeName.JOBID, node.getJobID(true));
 		String types = newRootP.getAttribute(AttributeName.TYPES, null, null);
 		newRootP.setAttributes(node);
 

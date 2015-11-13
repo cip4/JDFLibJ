@@ -1535,7 +1535,7 @@ public class StringUtil
 	 * @param token the token to search for
 	 * @param delim the delimiter of the tokens
 	 * @return boolean -
-	 * @deprecated 060420 
+	 * @deprecated use the 4 parameter version 
 	 * 
 	 */
 	@Deprecated

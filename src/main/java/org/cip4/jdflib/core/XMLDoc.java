@@ -551,7 +551,7 @@ public class XMLDoc
 	 */
 	public void write2Stream(final OutputStream outStream, final int indent, final boolean bPreserveSpace) throws IOException
 	{
-		for (int i = 0; i < 3; i++)
+		for (int i = 1; true; i++)
 		{
 			try
 			{
@@ -583,15 +583,15 @@ public class XMLDoc
 				}
 				return; // all is well here
 			}
-			catch (final IOException x)
+			catch (final Exception x)
 			{
-				if (i >= 2)
+				if (i >= 5)
 				{
-					log.error("writing to Stream, bailing out", x);
-					throw x; // try three times, else ciao
+					log.error("writing to Stream, bailing out after " + i + " attempts", x);
+					throw x; // try n times, else ciao
 				}
-				ThreadUtil.sleep((1000 * (i + 1)));
-				log.warn("retry IO exception " + i + " for writing to stream; original XML file=" + getOriginalFileName(), x);
+				ThreadUtil.sleep((100 * i));
+				log.warn("retry exception #" + i + " for writing to stream; original XML file=" + getOriginalFileName(), x);
 			}
 		}
 	}

@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -280,6 +281,10 @@ public class WalkJDFElement extends WalkElement
 		{
 			return null;
 		}
+		if (isExchangeResource(linkTarget))
+		{
+			return null;
+		}
 		linkTarget.expand(false);
 
 		final String resID = linkTarget.getID();
@@ -314,6 +319,26 @@ public class WalkJDFElement extends WalkElement
 			}
 		}
 		return v;
+	}
+
+	/**
+	 * 
+	 * @param linkTarget
+	 * @return
+	 */
+	private boolean isExchangeResource(JDFResource linkTarget)
+	{
+		final JDFResource resInRoot = linkTarget == null ? null : linkTarget.getResourceRoot();
+		if (resInRoot != null)
+		{
+			final VElement vCreators = resInRoot.getCreator(true);
+			if (vCreators != null && vCreators.size() > 0)
+			{
+				final VElement vConsumers = resInRoot.getCreator(false);
+				return (vConsumers != null && vConsumers.size() > 0);
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -461,22 +486,24 @@ public class WalkJDFElement extends WalkElement
 		resourceSet.removeAttribute(AttributeName.MINAMOUNT);
 		resourceSet.removeAttribute(AttributeName.MAXAMOUNT);
 		resourceSet.removeAttribute(AttributeName.ACTUALAMOUNT);
+		if (jdfToXJDF.isSingleNode())
+		{
+			setDependent(resourceSet, rl, linkRoot);
+		}
+	}
 
+	/**
+	 * 
+	 * @param resourceSet
+	 * @param rl
+	 * @param linkRoot
+	 */
+	private void setDependent(final KElement resourceSet, final KElement rl, final JDFResource linkRoot)
+	{
 		if (rl instanceof JDFResourceLink)
 		{
 			final JDFResourceLink resLink = (JDFResourceLink) rl;
 			final JDFNode rootIn = resLink.getParentJDF();
-			if (rootIn != null)
-			{
-				if (rootIn.isProduct())
-				{
-					//ToDo					resourceSet.setAttribute("ProductPart", rootIn.getID());
-				}
-				else
-				{
-					//ToDo					resourceSet.setAttribute("ProcessType", rootIn.getTypesString());
-				}
-			}
 			final JDFResource resInRoot = rootIn == null ? linkRoot : (JDFResource) rootIn.getChildWithAttribute(null, AttributeName.ID, null, resLink.getrRef(), 0, false);
 			if (resInRoot != null)
 			{
@@ -487,7 +514,7 @@ public class WalkJDFElement extends WalkElement
 					for (int i = 0; i < size; i++)
 					{
 						final JDFNode depNode = (JDFNode) vCreators.elementAt(i);
-						final KElement dependent = resourceSet.appendElement("Dependent");
+						final KElement dependent = resourceSet.appendElement(XJDFConstants.Dependent);
 						dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
 						dependent.copyAttribute(AttributeName.JMFURL, depNode, null, null, null);
 						dependent.copyAttribute(AttributeName.JOBPARTID, depNode, null, null, null);

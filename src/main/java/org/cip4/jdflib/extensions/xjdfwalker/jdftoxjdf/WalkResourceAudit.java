@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
@@ -124,6 +125,7 @@ public class WalkResourceAudit extends WalkAudit
 			return;
 		JDFResourceInfo ri = (JDFResourceInfo) raNew.appendElement(ElementName.RESOURCEINFO);
 		ri.setLink(rl, false);
+		ri.removeAttribute(AttributeName.RESOURCEID);
 		rl.deleteNode(); // don't walk the links!
 	}
 

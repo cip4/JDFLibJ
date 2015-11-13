@@ -66,7 +66,7 @@
  * <http://www.cip4.org/>.
  *
  */
-package org.cip4.jdflib.extensions;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import java.util.Vector;
 import java.util.zip.DataFormatException;
@@ -86,6 +86,13 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
+import org.cip4.jdflib.extensions.IntentHelper;
+import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ProductHelper;
+import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
@@ -97,6 +104,7 @@ import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -105,7 +113,7 @@ import org.cip4.jdflib.util.StringUtil;
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class PostXJDFWalker extends BaseElementWalker
+class PostXJDFWalker extends BaseElementWalker
 {
 	/**
 	 * if true merge stripping and layout
@@ -125,7 +133,7 @@ public class PostXJDFWalker extends BaseElementWalker
 	 * 
 	 * @return
 	 */
-	public boolean isMergeLayout()
+	boolean isMergeLayout()
 	{
 		return mergeLayout;
 	}
@@ -134,7 +142,7 @@ public class PostXJDFWalker extends BaseElementWalker
 	 * 
 	 * @param mergeLayout
 	 */
-	public void setMergeLayout(boolean mergeLayout)
+	void setMergeLayout(boolean mergeLayout)
 	{
 		this.mergeLayout = mergeLayout;
 	}
@@ -143,7 +151,7 @@ public class PostXJDFWalker extends BaseElementWalker
 	 * 
 	 * @return
 	 */
-	public boolean isIntentPartition()
+	boolean isIntentPartition()
 	{
 		return bIntentPartition;
 	}
@@ -152,7 +160,7 @@ public class PostXJDFWalker extends BaseElementWalker
 	 * 
 	 * @param bIntentPartition
 	 */
-	public void setIntentPartition(boolean bIntentPartition)
+	void setIntentPartition(boolean bIntentPartition)
 	{
 		this.bIntentPartition = bIntentPartition;
 	}
@@ -161,7 +169,7 @@ public class PostXJDFWalker extends BaseElementWalker
 	 * 
 	 * @return
 	 */
-	public boolean isDeliveryIntent()
+	boolean isDeliveryIntent()
 	{
 		return bDeliveryIntent;
 	}
@@ -170,7 +178,7 @@ public class PostXJDFWalker extends BaseElementWalker
 	 * 
 	 * @param bDeliveryIntent
 	 */
-	public void setDeliveryIntent(boolean bDeliveryIntent)
+	void setDeliveryIntent(boolean bDeliveryIntent)
 	{
 		this.bDeliveryIntent = bDeliveryIntent;
 	}
@@ -181,7 +189,7 @@ public class PostXJDFWalker extends BaseElementWalker
 	 * 
 	 * @return
 	 */
-	public boolean isRemoveSignatureName()
+	boolean isRemoveSignatureName()
 	{
 		return removeSignatureName;
 	}
@@ -190,7 +198,7 @@ public class PostXJDFWalker extends BaseElementWalker
 	 * 
 	 * @param removeSignatureName
 	 */
-	public void setRemoveSignatureName(boolean removeSignatureName)
+	void setRemoveSignatureName(boolean removeSignatureName)
 	{
 		this.removeSignatureName = removeSignatureName;
 	}
@@ -306,7 +314,7 @@ public class PostXJDFWalker extends BaseElementWalker
 					keys.appendUnique(nextKeys);
 				}
 				VJDFAttributeMap vPA = partAmount.getPartMapVector();
-				if (keys != null && keys.size() > 0)
+				if (vPA != null && keys != null && keys.size() > 0)
 				{
 					vPA.removeKeys(keys);
 				}
@@ -354,7 +362,7 @@ public class PostXJDFWalker extends BaseElementWalker
 
 		/**
 		 * 
-		 * @see org.cip4.jdflib.extensions.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
 		public KElement walk(KElement stripCellParams, KElement dummy)
@@ -398,7 +406,7 @@ public class PostXJDFWalker extends BaseElementWalker
 
 		/**
 		 * 
-		 * @see org.cip4.jdflib.extensions.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
 		public KElement walk(KElement strippingParams, KElement dummy)
@@ -669,7 +677,7 @@ public class PostXJDFWalker extends BaseElementWalker
 
 		/**
 		 * 
-		 * @see org.cip4.jdflib.extensions.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
 		 * @param toCheck
 		 * @return
 		 */
@@ -717,7 +725,7 @@ public class PostXJDFWalker extends BaseElementWalker
 
 		/**
 		 * 
-		 * @see org.cip4.jdflib.extensions.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
 		 * @param toCheck
 		 * @return
 		 */
@@ -765,7 +773,7 @@ public class PostXJDFWalker extends BaseElementWalker
 
 		/**
 		 * 
-		 * @see org.cip4.jdflib.extensions.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
 		 * @param toCheck
 		 * @return
 		 */
@@ -1090,7 +1098,7 @@ public class PostXJDFWalker extends BaseElementWalker
 	 * @param newRoot 
 	 *  
 	 */
-	public PostXJDFWalker(JDFElement newRoot)
+	PostXJDFWalker(JDFElement newRoot)
 	{
 		super(new BaseWalkerFactory());
 		this.newRoot = newRoot;
@@ -1209,7 +1217,7 @@ public class PostXJDFWalker extends BaseElementWalker
 		{
 			Vector<SetHelper> v = new XJDFHelper(xjdf).getSets();
 
-			for (int i = 0; i < v.size(); i++)
+			while (v.size() > 0)
 			{
 				Vector<SetHelper> sameSets = new Vector<SetHelper>();
 				SetHelper firstSet = v.remove(0);
@@ -1225,9 +1233,15 @@ public class PostXJDFWalker extends BaseElementWalker
 					}
 				}
 
+				KElement root = firstSet.getRoot();
 				for (int j = 1; j < sameSets.size(); j++)
 				{
-
+					Vector<PartitionHelper> parts = sameSets.get(j).getPartitions();
+					for (PartitionHelper ph : parts)
+					{
+						root.copyElement(ph.getRoot(), null);
+					}
+					sameSets.get(j).getRoot().deleteNode();
 				}
 			}
 
@@ -1244,6 +1258,8 @@ public class PostXJDFWalker extends BaseElementWalker
 			boolean same = firstSet.getName().equals(next.getName());
 			if (same)
 				same = StringUtil.equals(firstSet.getProcessUsage(), next.getProcessUsage());
+			if (same)
+				same = ContainerUtil.equals(firstSet.getUsage(), next.getUsage());
 			return same;
 		}
 	}
@@ -1264,7 +1280,7 @@ public class PostXJDFWalker extends BaseElementWalker
 
 		/**
 		 * 
-		 * @see org.cip4.jdflib.extensions.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
 		 * @param toCheck
 		 * @return
 		 */
@@ -1312,14 +1328,14 @@ public class PostXJDFWalker extends BaseElementWalker
 
 		/**
 		 * 
-		 * @see org.cip4.jdflib.extensions.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
 		 * @param toCheck
 		 * @return
 		 */
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return "ProcessList".equals(toCheck.getLocalName());
+			return XJDFConstants.ProcessList.equals(toCheck.getLocalName());
 		}
 
 		/**

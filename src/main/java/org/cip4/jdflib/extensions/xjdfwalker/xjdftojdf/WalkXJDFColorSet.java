@@ -94,7 +94,7 @@ public class WalkXJDFColorSet extends WalkSet
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return super.matches(toCheck) && ElementName.COLOR.equals(toCheck.getAttribute(AttributeName.NAME));
+		return false && super.matches(toCheck) && ElementName.COLOR.equals(toCheck.getAttribute(AttributeName.NAME));
 	}
 
 	/**
@@ -111,12 +111,4 @@ public class WalkXJDFColorSet extends WalkSet
 		return k2;
 	}
 
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkSet#getJDFResName(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	protected String getJDFResName(KElement e)
-	{
-		return ElementName.COLORPOOL;
-	}
 }

@@ -85,7 +85,6 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.extensions.SetHelper.EnumFamily;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.util.ContainerUtil;
@@ -211,11 +210,11 @@ public class XJDFHelper extends BaseXJDFHelper
 
 	/**
 	 * 
-	 * @param family
+	 * @param setName
 	 * @param usage
 	 * @return the vector of parametersets and resourcesets
 	 */
-	public Vector<SetHelper> getSets(EnumFamily family, EnumUsage usage)
+	public Vector<SetHelper> getSets(String setName, EnumUsage usage)
 	{
 		Vector<SetHelper> v = new Vector<SetHelper>();
 		KElement e = theElement.getFirstChildElement();
@@ -224,7 +223,7 @@ public class XJDFHelper extends BaseXJDFHelper
 			if (SetHelper.isSet(e))
 			{
 				SetHelper set = new SetHelper(e);
-				if ((family == null || set.getFamily().equals(family)) && (usage == null || usage.equals(set.getUsage())))
+				if ((setName == null || setName.equals(set.getName())) && (usage == null || usage.equals(set.getUsage())))
 				{
 					v.add(set);
 				}
@@ -726,9 +725,12 @@ public class XJDFHelper extends BaseXJDFHelper
 	public void cleanUp()
 	{
 		Vector<SetHelper> v = getSets();
-		for (SetHelper sh : v)
+		if (v != null)
 		{
-			sh.cleanUp();
+			for (SetHelper sh : v)
+			{
+				sh.cleanUp();
+			}
 		}
 	}
 
