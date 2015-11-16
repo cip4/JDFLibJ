@@ -148,4 +148,14 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 		super.tearDown();
 	}
 
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		XJMFTypeMap.shutDown();
+	}
+
 }

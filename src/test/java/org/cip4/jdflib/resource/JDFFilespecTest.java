@@ -213,12 +213,12 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	@Test
 	public void testMoveToDirUserFileName()
 	{
-		JDFFileSpec fs = (JDFFileSpec) new JDFDoc(ElementName.FILESPEC).getRoot();
-		fs.setURL(sm_dirTestData + "url1.pdf");
-		fs.setUserFileName("newName1.pdf");
-		File copy = UrlUtil.moveToDir(fs, new File(sm_dirTestDataTemp), null, true);
+		JDFFileSpec fileSpec = (JDFFileSpec) new JDFDoc(ElementName.FILESPEC).getRoot();
+		fileSpec.setURL(sm_dirTestData + "url1.pdf");
+		fileSpec.setUserFileName("newName1.pdf");
+		File copy = UrlUtil.moveToDir(fileSpec, new File(sm_dirTestDataTemp).getAbsoluteFile(), null, true);
 		assertEquals(copy.getName(), "newName1.pdf");
-		assertEquals(UrlUtil.urlToFile(fs.getURL()), copy);
+		assertEquals(UrlUtil.urlToFile(fileSpec.getURL()), copy);
 	}
 
 	/**
