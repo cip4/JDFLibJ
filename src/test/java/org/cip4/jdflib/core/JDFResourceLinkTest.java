@@ -131,6 +131,24 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testGetLinkedResourceName()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		n.setType("ConventionalPrinting", true);
+		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
+		final JDFResourceLink rl = n.getLink(m, null);
+		assertEquals(rl.getLinkedResourceName(), ElementName.MEDIA);
+		rl.setrRef("ddd");
+		assertEquals(rl.getLinkedResourceName(), ElementName.MEDIA);
+		rl.renameElement("foo", null);
+		assertNull(rl.getLinkedResourceName());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testAmountCondition()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);

@@ -3100,28 +3100,33 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public void ensureValidRefsPosition(JDFResource r)
 	{
+		if (r == null)
+			return;
 		// move the resource to the closest common ancestor if it is not already an ancestor of this
 		VElement refs = r.getvHRefRes(true, true);
 		if (refs == null)
 			refs = new VElement();
 		refs.add(r);
-		for (int i = 0; i < refs.size(); i++)
+		for (KElement target : refs)
 		{
 			// move the resource to the closest common ancestor if it is not already an ancestor of this
-			JDFResource r2 = ((JDFResource) refs.get(i)).getResourceRoot();
-			ensureValidResPosition(r2);
+			JDFResource res = ((JDFResource) target).getResourceRoot();
+			ensureValidResPosition(res);
 		}
 	}
 
 	/**
-	 * @param r2
+	 * @param res
 	 */
-	public void ensureValidResPosition(JDFResource r2)
+	public void ensureValidResPosition(JDFResource res)
 	{
-		JDFNode parent = r2.getParentJDF();
+		if (res == null)
+			return;
+
+		JDFNode parent = res.getParentJDF();
 		while (parent != null && !parent.isAncestor(this))
 		{
-			parent = r2.getParentJDF();
+			parent = res.getParentJDF();
 			if (parent == null)
 			{
 				break;
@@ -3130,10 +3135,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			parent = parent.getParentJDF();
 			if (parent == null)
 			{
-				throw new JDFException("JDFResourceLink appendResource resource is not in the same document");
+				throw new JDFException("JDFResourceLink ensureValidResPosition resource is not in the same document");
 			}
 
-			r2 = (JDFResource) parent.getCreateResourcePool().moveElement(r2, null);
+			res = (JDFResource) parent.getCreateResourcePool().moveElement(res, null);
 		}
 	}
 

@@ -69,11 +69,7 @@
 package org.cip4.jdflib.util;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
 
@@ -212,13 +208,21 @@ public class URLReader
 	{
 		InputStream retStream = getNetInputStream();
 		if (retStream == null)
+		{
 			retStream = getBodyPartInputStream();
-		if (retStream == null)
-			retStream = getZipInputStream();
-		if (retStream == null)
-			retStream = getAbsoluteFileInputStream();
-		if (retStream == null)
-			retStream = getRelativeFileInputStream();
+			if (retStream == null)
+			{
+				retStream = getZipInputStream();
+				if (retStream == null)
+				{
+					retStream = getAbsoluteFileInputStream();
+					if (retStream == null)
+					{
+						retStream = getRelativeFileInputStream();
+					}
+				}
+			}
+		}
 		return retStream;
 	}
 
@@ -268,25 +272,12 @@ public class URLReader
 	 */
 	InputStream getNetInputStream()
 	{
-		InputStream retStream = null;
 		if (UrlUtil.isNet(urlString))
 		{
-			try
-			{
-				final URL url = new URL(urlString);
-				final URLConnection urlConnection = url.openConnection();
-				retStream = urlConnection.getInputStream();
-			}
-			catch (final MalformedURLException x)
-			{
-				//
-			}
-			catch (final IOException x)
-			{
-				//
-			}
+			UrlPart part = UrlUtil.writeToURL(urlString, null, UrlUtil.GET, null, null);
+			return part == null ? null : part.getResponseStream();
 		}
-		return retStream;
+		return null;
 	}
 
 	/**

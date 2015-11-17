@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -73,7 +73,6 @@ import java.io.File;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.zip.ZipReader;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -81,16 +80,18 @@ import org.junit.Test;
  * @author rainer prosi
  * @date Feb 1, 2012
  */
-public class URLReaderTest extends JDFTestCaseBase {
+public class URLReaderTest extends JDFTestCaseBase
+{
 	/**
 	 * 
 	 *  
 	 */
 	@Test
-	public void testGetUrlInputStreamLocal() {
+	public void testGetUrlInputStreamLocal()
+	{
 		URLReader reader = new URLReader("job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
-		Assert.assertNotNull(reader.getURLInputStream());
+		assertNotNull(reader.getURLInputStream());
 	}
 
 	/**
@@ -98,12 +99,13 @@ public class URLReaderTest extends JDFTestCaseBase {
 	 *  
 	 */
 	@Test
-	public void testGetXMLDocLocal() {
+	public void testGetXMLDocLocal()
+	{
 		URLReader reader = new URLReader("job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
 		XMLDoc xmlDoc = reader.getXMLDoc();
-		Assert.assertNotNull(xmlDoc);
-		Assert.assertEquals(StringUtil.token(xmlDoc.getOriginalFileName(), -1, File.separator), "job.jdf");
+		assertNotNull(xmlDoc);
+		assertEquals(StringUtil.token(xmlDoc.getOriginalFileName(), -1, File.separator), "job.jdf");
 	}
 
 	/**
@@ -111,17 +113,26 @@ public class URLReaderTest extends JDFTestCaseBase {
 	 *  
 	 */
 	@Test
-	public void testGetXMLDocZip() {
+	public void testGetXMLDocZip()
+	{
 		URLReader reader = new URLReader("schema/BarcodeDetails.jdf");
 		ZipReader zip = new ZipReader(sm_dirTestData + "schema.zip");
 		reader.setZipReader(zip);
 		XMLDoc xmlDoc = reader.getXMLDoc();
-		Assert.assertNotNull(xmlDoc);
-		Assert.assertEquals(StringUtil.token(xmlDoc.getOriginalFileName(), -1, "/"), "BarcodeDetails.jdf");
+		assertNotNull(xmlDoc);
+		assertEquals(StringUtil.token(xmlDoc.getOriginalFileName(), -1, "/"), "BarcodeDetails.jdf");
 	}
 
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetURLInputStreamRedirect()
+	{
+		if (!isTestNetwork())
+			return;
+		URLReader reader = new URLReader("http://google.ch");
+		assertNotNull(reader.getURLInputStream());
 	}
+
 }
