@@ -275,7 +275,7 @@ public class URLReader
 		if (UrlUtil.isNet(urlString))
 		{
 			UrlPart part = UrlUtil.writeToURL(urlString, null, UrlUtil.GET, null, null);
-			return part == null ? null : part.getResponseStream();
+			return part == null || part.getResponseCode() != 200 ? null : part.getResponseStream();
 		}
 		return null;
 	}

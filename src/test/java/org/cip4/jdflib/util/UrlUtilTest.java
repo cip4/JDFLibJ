@@ -735,6 +735,10 @@ public class UrlUtilTest extends JDFTestCaseBase
 			final File fi1 = new File("\\\\fooBar\\4€€.txt");
 			final File fi = UrlUtil.urlToFile("file://fooBar/4€%e2%82%ac.txt");
 			assertEquals("escape %20", fi.getCanonicalPath(), fi1.getCanonicalPath());
+			assertEquals(new File("C:\\Windows"), UrlUtil.urlToFile("file:/C:/Windows"));
+			assertEquals(new File("C:\\Windows"), UrlUtil.urlToFile("file:///C:/Windows"));
+			assertEquals(new File("C:\\Windows"), UrlUtil.urlToFile("file://localhost/C:/Windows"));
+			assertEquals(new File("C:\\Windows"), UrlUtil.urlToFile("file:/C%3A/Windows"));
 		}
 
 	}
@@ -934,7 +938,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 			{
 				break;
 			}
-			System.out.println("Waiting " + i);
+			log.info("Waiting " + i);
 		}
 		long l = f.lastModified();
 		final File f2 = UrlUtil.moveToDir(fs, newDir, null, false);

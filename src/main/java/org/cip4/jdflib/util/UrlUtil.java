@@ -734,11 +734,11 @@ public class UrlUtil
 	}
 
 	/**
-	 * Retrieve a file for a relative or absolute file url
-	 * 
+	* Retrieve a file for a relative or absolute file url
+	*
 	 * @param urlString the file url to retrieve a file for
-	 * @return the file located at url
-	 */
+	* @return the file located at url
+	*/
 	public static File urlToFile(String urlString)
 	{
 		if (urlString == null || isCID(urlString) || isNet(urlString))
@@ -761,25 +761,35 @@ public class UrlUtil
 		{
 			return f;
 		}
+
+		urlString = UrlUtil.unEscape(urlString);
+
 		if (FileUtil.isWindows()) // on windows
 		{
 			if (urlString.startsWith("///") && urlString.length() > 6 && urlString.charAt(4) == ':' && urlString.charAt(5) == '/')
 			{
 				urlString = urlString.charAt(3) + ":" + urlString.substring(5);
 			}
-			else if (urlString.startsWith("/") && urlString.length() > 3 && urlString.charAt(2) == '/' && urlString.charAt(1) != '/')
+			else if (urlString.startsWith("/") && urlString.length() > 3 && urlString.charAt(1) != '/')
 			{
-				urlString = urlString.charAt(1) + ":" + urlString.substring(2);
+				if (urlString.charAt(2) == '/')
+				{
+					urlString = urlString.charAt(1) + ":" + urlString.substring(2);
+				}
+				else if (urlString.charAt(2) == ':')
+				{
+					urlString = urlString.substring(1);
+				}
+			}
+			else if (urlString.startsWith("/") && urlString.length() > 3 && urlString.charAt(2) == ':' && urlString.charAt(1) != '/')
+			{
+				urlString = urlString.charAt(1) + urlString.substring(2);
 			}
 			else if (urlString.startsWith("///"))
 			{
 				urlString = urlString.substring(2);
 			}
 		}
-
-		//		urlString = new String(StringUtil.setUTF8String(urlString)); // ensure that any non-utf8 gets encoded to utf-8
-		urlString = UrlUtil.unEscape(urlString);
-		//urlString = StringUtil.getUTF8String(urlString.getBytes());
 
 		return new File(urlString);
 	}
