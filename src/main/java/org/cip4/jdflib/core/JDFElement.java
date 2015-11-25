@@ -5768,6 +5768,10 @@ public class JDFElement extends KElement
 	 */
 	public JDFGeneralID appendGeneralID(final String idUsage, final String idValue, EnumDataType namedfeature)
 	{
+		if (idValue == null)
+		{
+			return null;
+		}
 		final JDFGeneralID gid = appendGeneralID();
 		gid.setIDValue(idValue);
 		gid.setIDUsage(idUsage);
@@ -5808,6 +5812,11 @@ public class JDFElement extends KElement
 			}
 			gid.setIDValue(idValue);
 			gid.setIDUsage(idUsage);
+			if (idValue == null)
+			{
+				gid.deleteNode();
+				return null;
+			}
 		}
 		else
 		{

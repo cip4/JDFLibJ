@@ -87,11 +87,6 @@ import org.cip4.jdflib.core.VString;
 public class MyArgs
 {
 
-	// //////////////////////////////////////////////////////////////////////////
-	// ////
-	// Variables
-	// //////////////////////////////////////////////////////////////////////////
-	// ////
 	private VString m_onlyArgs;
 	private String m_switchParameterString;
 	private String m_argumentParameterString;
@@ -101,12 +96,6 @@ public class MyArgs
 	private VString m_argV;
 
 	// cmd-line has or has not args and not only options( starting with "-" )
-
-	// //////////////////////////////////////////////////////////////////////////
-	// ////
-	// Construction
-	// //////////////////////////////////////////////////////////////////////////
-	// ////
 
 	/**
 	 * @param argv 
@@ -131,6 +120,13 @@ public class MyArgs
 		initMyArgs(argv, switchParameterString, argumentParameterString, requiredParameterString);
 	}
 
+	/**
+	 * 
+	 * @param argv
+	 * @param strSwitchParameter
+	 * @param strArgumentParameter
+	 * @param strRequiredParameter
+	 */
 	private void initMyArgs(final String[] argv, final String strSwitchParameter, final String strArgumentParameter, final String strRequiredParameter)
 	{
 		String[] argvLocal = argv;
@@ -142,7 +138,7 @@ public class MyArgs
 
 		m_switchParameterString = strSwitchParameter;
 		m_argumentParameterString = strArgumentParameter;
-		m_requiredParameterString = strRequiredParameter;
+		m_requiredParameterString = strRequiredParameter == null ? "" : strRequiredParameter;
 
 		m_argV = new VString(argvLocal);
 		m_onlyArgs = new VString();
@@ -225,14 +221,24 @@ public class MyArgs
 		return s += "\n";
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// ////
-	// Methods
-	// //////////////////////////////////////////////////////////////////////////
-	// ///
+	/**
+	 * @param c
+	 * @return
+	 */
+	public String missingArgs()
+	{
+		String missing = "";
+		for (int i = 0; i < m_requiredParameterString.length(); i++)
+		{
+			if (!hasParameter(m_requiredParameterString.charAt(i)))
+			{
+				missing += m_requiredParameterString.charAt(i);
+			}
+		}
+		return StringUtil.getNonEmpty(missing);
 
-	// --------------------------------------------------------------------------
-	// ----
+	}
+
 	/**
 	 * @param c
 	 * @return

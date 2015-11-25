@@ -1934,8 +1934,8 @@ public class JDFResource extends JDFElement
 					}
 					else
 					{
-						throw new JDFException("GetCreatePartition: Resource ID=" + getID() + " attempting to fill non-matching partIDKeys: " + key + " valid keys: "
-								+ localPartMap);
+						throw new JDFException("GetCreatePartition: " + getNodeName() + " ID=" + getID() + " attempting to fill non-matching partIDKeys: " + key + " valid keys: "
+								+ localPartMap + "Current PartIDKeys: " + getPartIDKeys() + " complete map: " + partMap);
 					}
 				}
 				else
@@ -1970,36 +1970,25 @@ public class JDFResource extends JDFElement
 			{
 				partUsage = getPartUsage();
 			}
-			if (m.size() > partIDKeys.size() && EnumPartUsage.Explicit.equals(partUsage))
+			final int mapSize = m.size();
+			if (mapSize > partIDKeys.size() && EnumPartUsage.Explicit.equals(partUsage))
 			{
 				return null;
 			}
 
+			final int size = partIDKeys.size();
+			int nFirst = checkFast(m, mapSize, size);
+			if (nFirst < 0)
+				return null;
+
 			JDFResource ret = JDFResource.this;
 			final String nodeName = ret.getNodeName();
 
-			final int size = partIDKeys.size();
-			// internal consistency check - if the map can't fit don't even start searching 
-			int nFirst = 0;
-			for (int i = 0; i < size; i++)
+			int needed = (nFirst + mapSize < size) ? nFirst + mapSize : size;
+			for (int i = nFirst; i < needed; i++)
 			{
 				final String attName = partIDKeys.get(i);
 				final String attVal = m.get(attName);
-				if (attVal == null)
-				{
-					nFirst = i + 1;
-					if (i + m.size() >= size)
-						return null;
-				}
-			}
-
-			final String ns = ret.getNamespaceURI();
-			boolean bPrefix = KElement.xmlnsPrefix(nodeName) != null;
-			for (int i = nFirst; i < size; i++)
-			{
-				final String attName = partIDKeys.get(i);
-				final String attVal = m.get(attName);
-				//			ret = (JDFResource) ret.getChildWithAttribute(nodeName, attName, ns, attVal, 0, true);
 				KElement e = ret.getFirstChildElement();
 				ret = null;
 
@@ -2007,7 +1996,7 @@ public class JDFResource extends JDFElement
 				{
 					if (nodeName.equals(e.getNodeName()))
 					{
-						Attr attr = bPrefix ? e.getDOMAttr(attName, ns, false) : e.getAttributeNode(attName);
+						Attr attr = e.getAttributeNode(attName);
 						String partVal = attr == null ? null : attr.getValue();
 						if (attVal.equals(partVal))
 						{
@@ -2022,6 +2011,7 @@ public class JDFResource extends JDFElement
 					break;
 				}
 			}
+
 			if (followIdentical)
 			{
 				final JDFIdentical id = ret == null ? null : ret.getIdentical();
@@ -2031,6 +2021,47 @@ public class JDFResource extends JDFElement
 				}
 			}
 			return ret;
+		}
+
+		/**
+		 * internal consistency check - if the map can't fit don't even start searching 
+		 * 
+		 * @param m
+		 * @param mapSize
+		 * @param size
+		 * @return position of first match; -1 if we are incompatible
+		 */
+		private int checkFast(JDFAttributeMap m, final int mapSize, final int size)
+		{
+			int nFirst = 0;
+			int found = 0;
+			for (int i = 0; i < size; i++)
+			{
+				final String attName = partIDKeys.get(i);
+				final String attVal = m.get(attName);
+				if (attVal == null)
+				{
+					if (found > 0)
+					{
+						// we have a gap
+						return -1;
+					}
+					nFirst = i + 1;
+					if (i + mapSize >= size)
+					{
+						return -1;
+					}
+				}
+				else
+				{
+					found++;
+					if (found == mapSize)
+					{
+						break;
+					}
+				}
+			}
+			return nFirst;
 		}
 
 		/**

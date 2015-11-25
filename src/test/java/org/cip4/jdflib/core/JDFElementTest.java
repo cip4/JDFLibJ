@@ -169,9 +169,26 @@ public class JDFElementTest extends JDFTestCaseBase
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode r = d.getJDFRoot();
+		assertNull(r.appendGeneralID("null", null));
 		JDFGeneralID gi1 = r.setGeneralID("foo", "bar");
 		assertEquals(gi1.getNextSiblingElement(), r.getAuditPool());
 		JDFGeneralID gi2 = r.appendGeneralID("foo2", "bar2");
+		assertEquals(gi1.getNextSiblingElement(), gi2);
+		assertEquals(gi2.getNextSiblingElement(), r.getAuditPool());
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public void testSetGeneralID()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode r = d.getJDFRoot();
+		assertNull(r.setGeneralID("null", null));
+		JDFGeneralID gi1 = r.setGeneralID("foo", "bar");
+		assertEquals(gi1.getNextSiblingElement(), r.getAuditPool());
+		JDFGeneralID gi2 = r.setGeneralID("foo2", "bar2");
 		assertEquals(gi1.getNextSiblingElement(), gi2);
 		assertEquals(gi2.getNextSiblingElement(), r.getAuditPool());
 	}
