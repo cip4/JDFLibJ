@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,6 +72,7 @@ import java.util.Iterator;
 
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.StringUtil;
+import org.w3c.dom.Node;
 
 /**
  * 
@@ -137,10 +138,6 @@ class XPathHelper
 		 */
 		KElement getCreateXPathElement(final String path)
 		{
-			if (path == null || path.length() == 0)
-			{
-				return theElement;
-			}
 			KElement e = getXPathElement(path);
 			if (e != null)
 			{
@@ -403,34 +400,36 @@ class XPathHelper
 	 */
 	String buildLocalPath(final int methCountSiblings, final KElement parent)
 	{
-		String path = theElement.getNodeName();
+		StringBuffer buf = new StringBuffer(theElement.getNodeName());
 		if (methCountSiblings > 0)
 		{
 			if (methCountSiblings == 3 && theElement.hasAttribute_KElement(JDFCoreConstants.ID, null, false))
 			{
-				path += "[@ID=\"" + theElement.getAttribute(JDFCoreConstants.ID) + "\"]";
+				buf.append("[@ID=\"").append(theElement.getAttribute(JDFCoreConstants.ID)).append("\"]");
 			}
 			else
 			{
-				KElement e = (parent != null) ? parent.getElement_KElement(path, null, 0) : null;
+				String s = buf.toString();
+				Node e = (parent != null) ? parent.getElement_KElement(s, null, 0) : null;
 				int i = 1;
 				while (e != null)
 				{
 					if (e == theElement)
 					{
-						path += "[" + Integer.toString(i) + "]";
+						buf.append("[").append(i).append("]");
 						break;
 					}
 					do
 					{
-						e = e.getNextSiblingElement();
+						e = e.getNextSibling();
 					}
-					while (e != null && !e.fitsName_KElement(path, null));
+					while (e != null && !s.equals(e.getNodeName()));
 					i++;
 				}
 			}
 		}
-		return "/" + path;
+
+		return "/" + buf.toString();
 	}
 
 	/**
@@ -706,6 +705,10 @@ class XPathHelper
 	 */
 	KElement getXPathElement(final String path)
 	{
+		if (path == null || path.length() == 0 || ".".equals(path))
+		{
+			return theElement;
+		}
 		final VElement v = getXPathElementVectorInternal(path, 1, true);
 		if (v == null || v.size() < 1)
 		{

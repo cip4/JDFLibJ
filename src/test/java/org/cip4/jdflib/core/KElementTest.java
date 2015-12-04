@@ -1230,7 +1230,7 @@ public class KElementTest extends JDFTestCaseBase
 			assertNull(e3.getNamespaceURI());
 		}
 
-		System.out.println("mem new:   " + getCurrentMem() + " " + mem);
+		log.info("mem new:   " + getCurrentMem() + " " + mem);
 
 		long l = getCurrentMem() - mem;
 		assertTrue(l < 1500000);
