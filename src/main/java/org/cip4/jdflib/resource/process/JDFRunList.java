@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1292,7 +1292,8 @@ public class JDFRunList extends JDFAutoRunList
 	public VElement getPageLeaves()
 	{
 		final VElement v = getLeaves(false);
-		for (int i = 0; i < v.size(); i++)
+		int size = v.size();
+		for (int i = 0; i < size; i++)
 		{
 			JDFRunList rl = (JDFRunList) v.elementAt(i);
 			boolean bRep = false;
@@ -1366,7 +1367,7 @@ public class JDFRunList extends JDFAutoRunList
 	}
 
 	/**
-	 * 
+	 * calculates nPage from the leaves if possible - else does the standard stuff
 	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoRunList#getNPage()
 	 */
@@ -1407,7 +1408,7 @@ public class JDFRunList extends JDFAutoRunList
 			}
 		}
 
-		return n; // TODO what is the default
+		return n <= 0 ? super.getNPage() : n;
 	}
 
 	/**
@@ -1583,11 +1584,11 @@ public class JDFRunList extends JDFAutoRunList
 			siz = v.size();
 			for (int i = 0; i < siz; i++)
 			{
-				final JDFRunList rl = (JDFRunList) v.elementAt(i);
-				final int page = rl.getNPage();
+				final JDFRunList pageLeaf = (JDFRunList) v.elementAt(i);
+				final int page = pageLeaf.getNPage();
 				if (page > 0)
 				{
-					rl.setNPage(page);
+					pageLeaf.setNPage(page);
 				}
 			}
 		}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -98,14 +98,14 @@ import org.cip4.jdflib.resource.process.JDFRunList.JDFRunData;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.CPUTimer;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class JDFRunListTest extends JDFTestCaseBase {
+public class JDFRunListTest extends JDFTestCaseBase
+{
 
 	/**
 	 * 
@@ -120,49 +120,65 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public final void testUnPartitionNPage() {
+	public final void testUnPartitionNPage()
+	{
 		final JDFRunList rl1 = rl.addPDF("file:///file1.pdf", 0, 2);
 		final JDFRunList rl2 = rl.addPDF("file:///file1.pdf", 3, 5);
-		Assert.assertEquals(rl.getNPage(), 6);
+		assertEquals(rl.getNPage(), 6);
 		rl.removeAttribute(AttributeName.NPAGE);
-		Assert.assertEquals(rl.getNPage(), 6);
-		Assert.assertEquals(rl1.getNPage(), 3);
-		Assert.assertEquals(rl2.getNPage(), 3);
+		assertEquals(rl.getNPage(), 6);
+		assertEquals(rl1.getNPage(), 3);
+		assertEquals(rl2.getNPage(), 3);
 		rl.unpartition(true);
-		Assert.assertEquals(rl.getNPage(), 6);
+		assertEquals(rl.getNPage(), 6);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public final void testCollapseNPage() {
+	public final void testExpand()
+	{
+		JDFRunList rl1 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
+		rl.setNPage(4);
+		rl.expand(true);
+		assertEquals(rl1.getNPage(), 4);
+		assertEquals(rl.getNPage(), 4);
+
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public final void testCollapseNPage()
+	{
 		final JDFRunList rl1 = rl.addPDF("file:///file1.pdf", 0, 2);
 		final JDFRunList rl2 = rl.addPDF("file:///file2.pdf", 1, 3);
-		Assert.assertEquals(rl.getNPage(), 6);
+		assertEquals(rl.getNPage(), 6);
 		rl.removeAttribute(AttributeName.NPAGE);
-		Assert.assertEquals(rl.getNPage(), 6);
-		Assert.assertEquals(rl1.getNPage(), 3);
-		Assert.assertEquals(rl2.getNPage(), 3);
+		assertEquals(rl.getNPage(), 6);
+		assertEquals(rl1.getNPage(), 3);
+		assertEquals(rl2.getNPage(), 3);
 		rl.removeAttribute(AttributeName.NPAGE);
 		rl1.removeAttribute(AttributeName.NPAGE);
 		rl2.removeAttribute(AttributeName.NPAGE);
 
 		rl.collapse(false, true);
-		Assert.assertEquals(rl.getNPage(), 6);
-		Assert.assertEquals(rl1.getNPage(), 3);
-		Assert.assertEquals(rl2.getNPage(), 3);
+		assertEquals(rl.getNPage(), 6);
+		assertEquals(rl1.getNPage(), 3);
+		assertEquals(rl2.getNPage(), 3);
 		final JDFRunList rl3 = rl.addPDF("file:///file3.pdf", 1, 3);
-		Assert.assertEquals(rl.getNPage(), 9);
+		assertEquals(rl.getNPage(), 9);
 		rl.expand(false);
-		Assert.assertEquals(rl.getNPage(), 9);
-		Assert.assertEquals(rl1.getNPage(), 3);
-		Assert.assertEquals(rl2.getNPage(), 3);
+		assertEquals(rl.getNPage(), 9);
+		assertEquals(rl1.getNPage(), 3);
+		assertEquals(rl2.getNPage(), 3);
 		rl.collapse(false, true);
-		Assert.assertEquals(rl.getNPage(), 9);
-		Assert.assertEquals(rl1.getNPage(), 3);
-		Assert.assertEquals(rl2.getNPage(), 3);
-		Assert.assertEquals(rl3.getNPage(), 3);
+		assertEquals(rl.getNPage(), 9);
+		assertEquals(rl1.getNPage(), 3);
+		assertEquals(rl2.getNPage(), 3);
+		assertEquals(rl3.getNPage(), 3);
 	}
 
 	/**
@@ -170,38 +186,53 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public final void testCollapseNPageNoNPageLeaf() throws DataFormatException {
+	public final void testCollapseNPageNoNPageLeaf() throws DataFormatException
+	{
 		rl.setNPage(4);
 		JDFRunList rl1 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
 		rl1.setAttribute("Pages", "0 ~ 1");
 		JDFRunList rl2 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r2");
 		rl2.setAttribute("Pages", "2 ~ 3");
-		Assert.assertEquals(rl2.getNPage(), 2);
+		assertEquals(rl2.getNPage(), 2);
 		rl.collapse(false, true);
-		Assert.assertEquals(rl2.getNPage(), 2);
+		assertEquals(rl2.getNPage(), 2);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public final void testFixNPage() {
+	public final void testFixNPageOnly()
+	{
+		JDFRunList rl1 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
+		rl1.setNPage(4);
+		rl.fixNPage();
+		assertEquals(rl1.getNPage(), 4);
+		assertEquals(rl.getNPage(), 4);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public final void testFixNPage()
+	{
 		JDFRunList rlSh1 = (JDFRunList) rl.addPartition(EnumPartIDKey.SheetName, "S1");
 		JDFRunList rlSet = (JDFRunList) rlSh1.addPartition(EnumPartIDKey.PageTags, "P1");
 		final JDFRunList rl1 = rlSet.addPDF("file:///file1.pdf", 0, 2);
 		final JDFRunList rl2 = rlSet.addPDF("file:///file2.pdf", 1, 3);
 		rl1.setLogicalPage(0);
 		rl2.setLogicalPage(3);
-		Assert.assertEquals(rlSet.getNPage(), 6);
-		Assert.assertEquals(rl.getNPage(), 6);
+		assertEquals(rlSet.getNPage(), 6);
+		assertEquals(rl.getNPage(), 6);
 		JDFRunList rlSh2 = (JDFRunList) rl.addPartition(EnumPartIDKey.SheetName, "S2");
 		JDFRunList rlSet2 = (JDFRunList) rlSh2.addPartition(EnumPartIDKey.PageTags, "P2");
 		final JDFRunList rl21 = rlSet2.addPDF("file:///file3.pdf", 0, 2);
 		final JDFRunList rl22 = rlSet2.addPDF("file:///file4.pdf", 1, 3);
 		rl21.setLogicalPage(4);
 		rl22.setLogicalPage(7);
-		Assert.assertEquals(rlSet2.getNPage(), 6);
-		Assert.assertEquals(rl.getNPage(), 12);
+		assertEquals(rlSet2.getNPage(), 6);
+		assertEquals(rl.getNPage(), 12);
 		rl.removeAttribute(AttributeName.NPAGE);
 		rl1.removeAttribute(AttributeName.NPAGE);
 		rlSh1.removeAttribute(AttributeName.NPAGE);
@@ -215,13 +246,13 @@ public class JDFRunListTest extends JDFTestCaseBase {
 		rl22.removeAttribute(AttributeName.NPAGE);
 		rlSet2.removeAttribute(AttributeName.NPAGE);
 		rl.fixNPage();
-		Assert.assertEquals(rlSh1.getNPage(), 6);
-		Assert.assertEquals(rlSh2.getNPage(), 6);
-		Assert.assertEquals(rlSet.getNPage(), 6);
-		Assert.assertEquals(rlSet2.getNPage(), 6);
-		Assert.assertEquals(rl.getNPage(), 12);
-		Assert.assertEquals(rl1.getNPage(), 3);
-		Assert.assertEquals(rl2.getNPage(), 3);
+		assertEquals(rlSh1.getNPage(), 6);
+		assertEquals(rlSh2.getNPage(), 6);
+		assertEquals(rlSet.getNPage(), 6);
+		assertEquals(rlSet2.getNPage(), 6);
+		assertEquals(rl.getNPage(), 12);
+		assertEquals(rl1.getNPage(), 3);
+		assertEquals(rl2.getNPage(), 3);
 
 	}
 
@@ -229,24 +260,27 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public final void testAddRun() {
+	public final void testAddRun()
+	{
 		final JDFRunList rl2 = rl.addRun("f1.pdf", 0, -1);
-		Assert.assertFalse(rl2.hasAttribute_KElement(AttributeName.NPAGE, null, false));
-		Assert.assertFalse(rl.hasAttribute_KElement(AttributeName.NPAGE, null, false));
+		assertFalse(rl2.hasAttribute_KElement(AttributeName.NPAGE, null, false));
+		assertFalse(rl.hasAttribute_KElement(AttributeName.NPAGE, null, false));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public final void testAddRunPerformance() {
+	public final void testAddRunPerformance()
+	{
 		final CPUTimer ct = new CPUTimer(false);
 
-		for (int i = 1; i < 1000; i++) {
+		for (int i = 1; i < 1000; i++)
+		{
 			ct.start();
 			final JDFRunList rl2 = rl.addRun("f1.pdf", 0, 3);
-			Assert.assertTrue(rl2.hasAttribute_KElement(AttributeName.NPAGE, null, false));
-			Assert.assertEquals(rl.getNPage(), 4 * i);
+			assertTrue(rl2.hasAttribute_KElement(AttributeName.NPAGE, null, false));
+			assertEquals(rl.getNPage(), 4 * i);
 			if (i % 50 == 0)
 				System.out.println(i + " " + ct.toString());
 		}
@@ -256,10 +290,11 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public final void testGetFileURL() {
+	public final void testGetFileURL()
+	{
 		rl.setFileURL("./foo/bar.pdf");
 		rl.setDirectory("File://c/fnarf");
-		Assert.assertEquals(rl.getFileURL(), "File://c/fnarf/foo/bar.pdf");
+		assertEquals(rl.getFileURL(), "File://c/fnarf/foo/bar.pdf");
 	}
 
 	/**
@@ -267,57 +302,61 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public final void testSetPages() throws DataFormatException {
+	public final void testSetPages() throws DataFormatException
+	{
 		final JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList(new JDFIntegerRange(0, -1, 8));
 		rl.setPages(integerRangeList);
-		Assert.assertEquals(rl.getPages(), integerRangeList);
-		Assert.assertEquals(rl.getNPage(), 8);
+		assertEquals(rl.getPages(), integerRangeList);
+		assertEquals(rl.getNPage(), 8);
 		JDFRunList rl1 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
 		rl1.setPages(new JDFIntegerRangeList("4~-1"));
-		Assert.assertEquals(rl1.getNPage(), 4);
+		assertEquals(rl1.getNPage(), 4);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public final void testGetMimeType() {
+	public final void testGetMimeType()
+	{
 		final JDFResourcePool resPool = root.getCreateResourcePool();
 		final KElement kElem = resPool.appendResource(ElementName.RUNLIST, null, null);
-		Assert.assertTrue(kElem instanceof JDFRunList);
+		assertTrue(kElem instanceof JDFRunList);
 		final JDFRunList ruli = (JDFRunList) kElem;
-		Assert.assertNull(ruli.getFileMimeType());
+		assertNull(ruli.getFileMimeType());
 		kElem.setXPathAttribute("LayoutElement/FileSpec/@MimeType", "application/pdf");
-		Assert.assertEquals(ruli.getFileMimeType(), "application/pdf");
+		assertEquals(ruli.getFileMimeType(), "application/pdf");
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public final void testGetTruePage() {
+	public final void testGetTruePage()
+	{
 		final JDFResourcePool resPool = root.getCreateResourcePool();
 		final JDFRunList ruli = (JDFRunList) resPool.appendResource(ElementName.RUNLIST, null, null);
-		Assert.assertEquals(ruli.getTruePage(), ruli);
+		assertEquals(ruli.getTruePage(), ruli);
 		final JDFRunList ruli2 = ruli.addSepRun(new VString("c.pdf m.pdf y.pdf k.pdf", " "), new VString("Cyan Magenta Yellow Black", " "), 0, 4, true);
-		Assert.assertEquals(ruli.getTruePage(), ruli);
-		Assert.assertEquals(ruli2.getTruePage(), ruli2);
+		assertEquals(ruli.getTruePage(), ruli);
+		assertEquals(ruli2.getTruePage(), ruli2);
 		final JDFRunList ruli2c = (JDFRunList) ruli2.getElement_KElement(ElementName.RUNLIST, null, 0);
-		Assert.assertEquals(ruli2.getTruePage(), ruli2);
-		Assert.assertEquals(ruli2c.getTruePage(), ruli2);
+		assertEquals(ruli2.getTruePage(), ruli2);
+		assertEquals(ruli2c.getTruePage(), ruli2);
 	}
 
 	/**
 	 * @throws Exception
 	 */
 	@Test
-	public final void testGetPages() throws Exception {
+	public final void testGetPages() throws Exception
+	{
 		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
 		rlp.setPages(new JDFIntegerRangeList("0 ~ -1"));
 		rlp.setNPage(7);
 		final JDFIntegerRangeList pages = rlp.getPages();
-		Assert.assertEquals(pages.getDef(), 7);
-		Assert.assertEquals(pages.getElementCount(), 7);
+		assertEquals(pages.getDef(), 7);
+		assertEquals(pages.getElementCount(), 7);
 	}
 
 	/**
@@ -325,18 +364,19 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public final void testGetNPage() throws Exception {
+	public final void testGetNPage() throws Exception
+	{
 		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
 		rlp.setPages(new JDFIntegerRangeList("1 3 5 7"));
-		Assert.assertEquals(rlp.getNPage(), 4);
+		assertEquals(rlp.getNPage(), 4);
 		rlp.setNPage(3);
-		Assert.assertEquals(rlp.getNPage(), 3);
+		assertEquals(rlp.getNPage(), 3);
 		final JDFRunList rlp2 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r2");
 		rlp2.setPages(new JDFIntegerRangeList("0 2 4 6"));
-		Assert.assertEquals(rlp2.getNPage(), 4);
+		assertEquals(rlp2.getNPage(), 4);
 		rlp2.setNPage(3);
-		Assert.assertEquals(rlp2.getNPage(), 3);
-		Assert.assertEquals(rl.getNPage(), 6);
+		assertEquals(rlp2.getNPage(), 3);
+		assertEquals(rl.getNPage(), 6);
 	}
 
 	/**
@@ -344,17 +384,18 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public final void testGetIndexPartition() throws Exception {
+	public final void testGetIndexPartition() throws Exception
+	{
 		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
 		rlp.setPages(new JDFIntegerRangeList("1 3 5 7"));
-		Assert.assertEquals(rl.getIndexPartition(0), rlp);
-		Assert.assertEquals(rl.getIndexPartition(3), rlp);
+		assertEquals(rl.getIndexPartition(0), rlp);
+		assertEquals(rl.getIndexPartition(3), rlp);
 		rlp.setNPage(3);
 		final JDFRunList rlp2 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r2");
 		rlp2.setPages(new JDFIntegerRangeList("0 2 4 6"));
-		Assert.assertEquals(rl.getIndexPartition(3), rlp2);
-		Assert.assertEquals(rl.getIndexPartition(6), rlp2);
-		Assert.assertNull(rl.getIndexPartition(7));
+		assertEquals(rl.getIndexPartition(3), rlp2);
+		assertEquals(rl.getIndexPartition(6), rlp2);
+		assertNull(rl.getIndexPartition(7));
 	}
 
 	/**
@@ -362,13 +403,14 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public final void testGetPageListIndex() throws Exception {
+	public final void testGetPageListIndex() throws Exception
+	{
 		JDFIntegerRangeList pageListIndex = rl.getPageListIndex();
-		Assert.assertNotNull(pageListIndex);
-		Assert.assertEquals(pageListIndex.getElementCount(), 0);
+		assertNotNull(pageListIndex);
+		assertEquals(pageListIndex.getElementCount(), 0);
 		rl.setPageListIndex(new JDFIntegerRangeList("0 ~11"));
 		pageListIndex = rl.getPageListIndex();
-		Assert.assertEquals(pageListIndex.getElementCount(), 12);
+		assertEquals(pageListIndex.getElementCount(), 12);
 	}
 
 	/**
@@ -376,14 +418,15 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public final void testGetPageListIndexPartition() throws Exception {
+	public final void testGetPageListIndexPartition() throws Exception
+	{
 		JDFIntegerRangeList pageListIndex = rl.getPageListIndex();
-		Assert.assertNotNull(pageListIndex);
-		Assert.assertEquals(pageListIndex.getElementCount(), 0);
+		assertNotNull(pageListIndex);
+		assertEquals(pageListIndex.getElementCount(), 0);
 		rl.setPageListIndex(new JDFIntegerRangeList("0 ~11"));
 		JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "test");
 		pageListIndex = rlp.getPageListIndex();
-		Assert.assertEquals(pageListIndex.getElementCount(), 12);
+		assertEquals(pageListIndex.getElementCount(), 12);
 	}
 
 	/**
@@ -391,14 +434,15 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public final void testGetPageListIndexNegative() throws Exception {
+	public final void testGetPageListIndexNegative() throws Exception
+	{
 		JDFPageList pl = (JDFPageList) root.addResource(ElementName.PAGELIST, EnumUsage.Input);
 		pl.appendPageData().setPageIndex(new JDFIntegerRangeList("0 ~11"));
 		rl.refPageList(pl);
 		rl.setPageListIndex(new JDFIntegerRangeList("0 ~ -1"));
 		JDFIntegerRangeList pageListIndex = rl.getPageListIndex();
-		Assert.assertNotNull(pageListIndex);
-		Assert.assertEquals(pageListIndex.getElementCount(), 12);
+		assertNotNull(pageListIndex);
+		assertEquals(pageListIndex.getElementCount(), 12);
 	}
 
 	/**
@@ -406,15 +450,16 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public final void testGetPageListIndexNegativePartition() throws Exception {
+	public final void testGetPageListIndexNegativePartition() throws Exception
+	{
 		JDFPageList pl = (JDFPageList) root.addResource(ElementName.PAGELIST, EnumUsage.Input);
 		pl.appendPageData().setPageIndex(new JDFIntegerRangeList("0 ~11"));
 		rl.refPageList(pl);
 		rl.setPageListIndex(new JDFIntegerRangeList("0 ~ -1"));
 		JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "test");
 		JDFIntegerRangeList pageListIndex = rlp.getPageListIndex();
-		Assert.assertNotNull(pageListIndex);
-		Assert.assertEquals(pageListIndex.getElementCount(), 12);
+		assertNotNull(pageListIndex);
+		assertEquals(pageListIndex.getElementCount(), 12);
 	}
 
 	/**
@@ -422,54 +467,56 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public final void testGetPageInFile() throws Exception {
+	public final void testGetPageInFile() throws Exception
+	{
 		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
 		rlp.setPages(new JDFIntegerRangeList("1 3 5 7"));
-		Assert.assertEquals(rlp.getPageInFile(0), 1);
-		Assert.assertEquals(rlp.getPageInFile(1), 3);
-		Assert.assertEquals(rlp.getPageInFile(3), 7);
+		assertEquals(rlp.getPageInFile(0), 1);
+		assertEquals(rlp.getPageInFile(1), 3);
+		assertEquals(rlp.getPageInFile(3), 7);
 		rlp.setNPage(3);
-		Assert.assertEquals(rlp.getPageInFile(3), -1);
+		assertEquals(rlp.getPageInFile(3), -1);
 		final JDFRunList rlp2 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r2");
 		rlp2.setPages(new JDFIntegerRangeList("0 2 4 6"));
-		Assert.assertEquals(rlp2.getPageInFile(0), -1);
-		Assert.assertEquals(rlp2.getPageInFile(3), 0);
-		Assert.assertEquals(rlp2.getPageInFile(5), 4);
-		Assert.assertEquals(rlp2.getPageInFile(6), 6);
+		assertEquals(rlp2.getPageInFile(0), -1);
+		assertEquals(rlp2.getPageInFile(3), 0);
+		assertEquals(rlp2.getPageInFile(5), 4);
+		assertEquals(rlp2.getPageInFile(6), 6);
 		rlp2.setNPage(3);
-		Assert.assertEquals(rlp2.getPageInFile(6), -1);
+		assertEquals(rlp2.getPageInFile(6), -1);
 		rlp2.setNPage(4);
-		Assert.assertEquals(rlp2.getPageInFile(6), 6);
+		assertEquals(rlp2.getPageInFile(6), 6);
 	}
 
 	/**
 	 * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
 	 */
 	@Test
-	public final void testGetPageLeaves() {
+	public final void testGetPageLeaves()
+	{
 		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
 		final JDFRunList rlp2 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r2");
 		VElement v = rl.getPageLeaves();
-		Assert.assertTrue(v.contains(rlp));
-		Assert.assertTrue(v.contains(rlp2));
-		Assert.assertEquals(v.size(), 2);
+		assertTrue(v.contains(rlp));
+		assertTrue(v.contains(rlp2));
+		assertEquals(v.size(), 2);
 		final JDFRunList rlp21 = (JDFRunList) rlp2.addPartition(EnumPartIDKey.RunSet, "s1");
 		final JDFRunList rlp22 = (JDFRunList) rlp2.addPartition(EnumPartIDKey.RunSet, "s2");
 		v = rl.getPageLeaves();
-		Assert.assertTrue(v.contains(rlp));
-		Assert.assertFalse(v.contains(rlp2));
-		Assert.assertTrue(v.contains(rlp21));
-		Assert.assertTrue(v.contains(rlp22));
-		Assert.assertEquals(v.size(), 3);
+		assertTrue(v.contains(rlp));
+		assertFalse(v.contains(rlp2));
+		assertTrue(v.contains(rlp21));
+		assertTrue(v.contains(rlp22));
+		assertEquals(v.size(), 3);
 		rlp21.setIsPage(false);
 		rlp22.setIsPage(false);
 		v = rl.getPageLeaves();
-		Assert.assertTrue(v.contains(rlp));
-		Assert.assertTrue(v.contains(rlp2));
-		Assert.assertEquals(v.size(), 2);
+		assertTrue(v.contains(rlp));
+		assertTrue(v.contains(rlp2));
+		assertEquals(v.size(), 2);
 		v = rlp2.getPageLeaves();
-		Assert.assertTrue(v.contains(rlp2));
-		Assert.assertEquals(v.size(), 1);
+		assertTrue(v.contains(rlp2));
+		assertEquals(v.size(), 1);
 
 	}
 
@@ -478,30 +525,31 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public final void testGetIndex() throws Exception {
+	public final void testGetIndex() throws Exception
+	{
 		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
 		rlp.setPages(new JDFIntegerRangeList("1 3 5 7"));
-		Assert.assertEquals("first partition starts at 0", rlp.getFirstIndex(), 0);
-		Assert.assertEquals(rlp.getLastIndex(), 3);
+		assertEquals("first partition starts at 0", rlp.getFirstIndex(), 0);
+		assertEquals(rlp.getLastIndex(), 3);
 		rlp.setNPage(3);
-		Assert.assertEquals(rlp.getFirstIndex(), 0);
-		Assert.assertEquals(rlp.getLastIndex(), 2);
+		assertEquals(rlp.getFirstIndex(), 0);
+		assertEquals(rlp.getLastIndex(), 2);
 		final JDFRunList rlp2 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r2");
 		rlp2.setPages(new JDFIntegerRangeList("0 2 4 6"));
-		Assert.assertEquals(rlp2.getFirstIndex(), 3);
-		Assert.assertEquals(rlp2.getLastIndex(), 6);
+		assertEquals(rlp2.getFirstIndex(), 3);
+		assertEquals(rlp2.getLastIndex(), 6);
 		rlp2.setNPage(2);
-		Assert.assertEquals(rlp2.getFirstIndex(), 3);
-		Assert.assertEquals(rlp2.getLastIndex(), 4);
+		assertEquals(rlp2.getFirstIndex(), 3);
+		assertEquals(rlp2.getLastIndex(), 4);
 		final JDFRunList rlp3 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r3");
 		rlp2.setLogicalPage(11);
 		rlp3.setPages(new JDFIntegerRangeList("0 2 4 6"));
-		Assert.assertEquals(rlp3.getFirstIndex(), 13);
-		Assert.assertEquals(rlp3.getLastIndex(), 16);
+		assertEquals(rlp3.getFirstIndex(), 13);
+		assertEquals(rlp3.getLastIndex(), 16);
 		rlp3.setNPage(2);
 		rlp3.setLogicalPage(22);
-		Assert.assertEquals(rlp3.getFirstIndex(), 22);
-		Assert.assertEquals(rlp3.getLastIndex(), 23);
+		assertEquals(rlp3.getFirstIndex(), 22);
+		assertEquals(rlp3.getLastIndex(), 23);
 	}
 
 	/**
@@ -509,7 +557,8 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public final void testPageIterator() throws Exception {
+	public final void testPageIterator() throws Exception
+	{
 		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
 		rlp.setPages(new JDFIntegerRangeList("1 3 5 7"));
 		rlp.setNPage(3);
@@ -517,13 +566,14 @@ public class JDFRunListTest extends JDFTestCaseBase {
 		rlp2.setPages(new JDFIntegerRangeList("0 2 4 6"));
 		final Iterator<JDFRunData> it = rl.getPageIterator();
 		int n = 0;
-		while (it.hasNext()) {
+		while (it.hasNext())
+		{
 			final JDFRunData ri = it.next();
-			Assert.assertEquals(n, ri.runIndex);
-			Assert.assertEquals(n < 3 ? rlp : rlp2, ri.runList);
+			assertEquals(n, ri.runIndex);
+			assertEquals(n < 3 ? rlp : rlp2, ri.runList);
 			n++;
 		}
-		Assert.assertEquals(n, 7);
+		assertEquals(n, 7);
 	}
 
 	/**
@@ -532,9 +582,11 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public final void testPageIteratorSpeed() throws Exception {
+	public final void testPageIteratorSpeed() throws Exception
+	{
 		final int nMax = 3000;
-		for (int i = 0; i < nMax; i++) {
+		for (int i = 0; i < nMax; i++)
+		{
 			final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r" + i);
 			rlp.setPages(new JDFIntegerRangeList("1 3 5 7"));
 			rlp.setFileURL("File://Test" + i + ".pdf");
@@ -542,20 +594,22 @@ public class JDFRunListTest extends JDFTestCaseBase {
 		final Iterator<JDFRunData> it = rl.getPageIterator();
 		int n = 0;
 
-		while (it.hasNext()) {
+		while (it.hasNext())
+		{
 			final JDFRunData ri = it.next();
-			Assert.assertEquals(n, ri.runIndex);
-			Assert.assertEquals(((ri.getPageInFile() - 1) / 2) % 4, n % 4);
+			assertEquals(n, ri.runIndex);
+			assertEquals(((ri.getPageInFile() - 1) / 2) % 4, n % 4);
 			n++;
 		}
-		Assert.assertEquals(n, 4 * nMax);
+		assertEquals(n, 4 * nMax);
 	}
 
 	/**
 	 * experimental mapping of tags to partition keys
 	 */
 	@Test
-	public void testTagMapTiff() {
+	public void testTagMapTiff()
+	{
 		final KElement tagMap = rl.appendElement(METADATA_MAP);
 		tagMap.setAttribute("BoundaryKey", "EndOfDocument");
 		final KElement tagSet = tagMap.appendElement(EXPR);
@@ -582,14 +636,15 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	// p.setSchemaLocation(JDFConstants.JDFNAMESPACE, sm_dirTestSchema + "JDF.xsd");
 	// JDFDoc dNew = p.parseString(s);
 	// XMLDoc dVal = dNew.getValidationResult();
-	// Assert.assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
+	// assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
 	// }
 
 	/**
 	 * experimental mapping of tags to partition keys
 	 */
 	@Test
-	public void testObjectTagsMetadata() {
+	public void testObjectTagsMetadata()
+	{
 		final KElement tagMap = rl.appendElement(METADATA_MAP);
 		tagMap.setXMLComment("This tagmap specifies The path for the NMTOKEN \"ObjectTag\"");
 		tagMap.setAttribute("Name", "ObjectTags");
@@ -599,7 +654,8 @@ public class JDFRunListTest extends JDFTestCaseBase {
 		tagMap.setAttribute(AttributeName.VALUETEMPLATE, "AnyName1");
 		tagMap.addNameSpace("TIFFXMP", "http://ns.adobe.com/tiff/1.0");
 		final String[] ss = new String[] { "Acme", "Bcme", "Ccme" };
-		for (int i = 0; i < ss.length; i++) {
+		for (int i = 0; i < ss.length; i++)
+		{
 			final String s = ss[i];
 			final KElement tagSet = tagMap.appendElement(EXPR);
 			tagSet.setAttribute("Name", "AnyName1");
@@ -624,7 +680,8 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public void testTagMap() throws Exception {
+	public void testTagMap() throws Exception
+	{
 
 		final JDFLayout lo = (JDFLayout) root.addResource(ElementName.LAYOUT, null, EnumUsage.Input, null, null, null, null);
 		final JDFMedia med = (JDFMedia) root.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
@@ -704,14 +761,16 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testSeparatedTiff() {
+	public void testSeparatedTiff()
+	{
 		final VString v1 = new VString("Cyan Magenta Yello Black", " ");
 		final VString v2 = new VString();
-		for (int i = 0; i < v1.size(); i++) {
+		for (int i = 0; i < v1.size(); i++)
+		{
 			v2.add("File://device/dir/" + v1.get(i) + ".tif");
 		}
 		final JDFRunList rl2 = rl.addSepRun(v2, v1, 0, 0, false);
-		Assert.assertTrue(rl2.isValid(EnumValidationLevel.Complete));
+		assertTrue(rl2.isValid(EnumValidationLevel.Complete));
 	}
 
 	/**
@@ -720,7 +779,8 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
-	public void setUp() throws Exception {
+	public void setUp() throws Exception
+	{
 		KElement.setLongID(false);
 		super.setUp();
 		doc = new JDFDoc("JDF");

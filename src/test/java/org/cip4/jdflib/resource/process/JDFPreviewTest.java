@@ -72,6 +72,7 @@
 package org.cip4.jdflib.resource.process;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoPreview.EnumPreviewUsage;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
@@ -79,8 +80,8 @@ import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -98,11 +99,25 @@ public class JDFPreviewTest extends JDFTestCaseBase
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setVersion(EnumVersion.Version_1_4);
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
-		Assert.assertTrue(m.isValid(EnumValidationLevel.Incomplete));
+		assertTrue(m.isValid(EnumValidationLevel.Incomplete));
 		final JDFPreview pv = m.appendPreview();
-		Assert.assertTrue(n.isValid(EnumValidationLevel.Incomplete));
+		assertTrue(n.isValid(EnumValidationLevel.Incomplete));
 		pv.makeRootResource(null, null, true);
-		Assert.assertTrue(n.isValid(EnumValidationLevel.Incomplete));
+		assertTrue(n.isValid(EnumValidationLevel.Incomplete));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public final void testWriteDefault()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setVersion(EnumVersion.Version_1_4);
+		JDFPreview pv = n.appendPreview();
+		pv.setPreviewUsage(EnumPreviewUsage.Separation);
+		String s = n.getOwnerDocument_JDFElement().write2String(2);
+		assertTrue(s.indexOf(EnumPreviewUsage.Separation.getName()) > 0);
 	}
 
 	/**
