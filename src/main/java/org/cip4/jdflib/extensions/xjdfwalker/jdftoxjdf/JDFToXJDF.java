@@ -325,14 +325,15 @@ public class JDFToXJDF extends PackageElementWalker
 	String rootID;
 
 	private boolean removeSignatureName = true;
-	private boolean wantProcessList = false;
+
+	private EnumProcessPartition processPartition = EnumProcessPartition.processTypes;
 
 	/**
 	 * @param bProcessList the ProcessList to set
 	 */
-	public void setWantProcessList(boolean bProcessList)
+	public void setProcessPart(EnumProcessPartition process)
 	{
-		this.wantProcessList = bProcessList;
+		this.processPartition = process;
 	}
 
 	/**
@@ -984,12 +985,26 @@ public class JDFToXJDF extends PackageElementWalker
 		}
 	}
 
+	public enum EnumProcessPartition
+	{
+		processList, processTypes, jobPartID
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public EnumProcessPartition getProcessPart()
+	{
+		return processPartition;
+	}
+
 	/**
 	 * 
 	 * @return
 	 */
 	public boolean isWantProcessList()
 	{
-		return wantProcessList;
+		return EnumProcessPartition.processList.equals(processPartition);
 	}
 }

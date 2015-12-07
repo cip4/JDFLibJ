@@ -93,6 +93,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.elementwalker.EnsureNSUri;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
+import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF.EnumProcessPartition;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -288,7 +289,7 @@ public class XJDFTest extends JDFTestCaseBase
 		n = JDFDoc.parseFile(sm_dirTestData + "job4.jdf").getJDFRoot();
 		XJDF20 xjdf20 = new XJDF20();
 		xjdf20.setSingleNode(false);
-		xjdf20.setWantProcessList(true);
+		xjdf20.setProcessPart(EnumProcessPartition.processList);
 		xjdf = xjdf20.makeNewJDF(n, null);
 		KElement procList = xjdf.getXPathElement("ProcessList");
 		assertNotNull(procList);

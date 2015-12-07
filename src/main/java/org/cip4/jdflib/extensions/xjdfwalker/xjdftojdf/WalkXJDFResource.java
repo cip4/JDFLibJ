@@ -212,7 +212,15 @@ public class WalkXJDFResource extends WalkXElement
 			partmap = part.getPartMap();
 
 			String productPart = partmap == null ? null : StringUtil.getNonEmpty(partmap.get(AttributeName.PRODUCTPART));
-			partialProductNode = productPart == null ? null : theNode.getChildJDFNode(productPart, false);
+			if (productPart != null)
+			{
+				partialProductNode = productPart == null ? null : theNode.getChildJDFNode(productPart, false);
+				//ToDo fix when we have exact mapping definitions
+				if (partialProductNode == null)
+				{
+					partialProductNode = theNode.getJobPart(productPart, null);
+				}
+			}
 		}
 		else if (xjdfRes.getPreviousSiblingElement(xjdfRes.getNodeName(), null) != null)
 		{

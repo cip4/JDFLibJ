@@ -82,6 +82,7 @@ import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF.EnumProcessPartition;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFComponent;
@@ -274,18 +275,39 @@ public class WalkResLink extends WalkJDFElement
 				PartitionHelper ph = new PartitionHelper(newResource);
 				VJDFAttributeMap partMaps = ph.getPartMapVector();
 				boolean bChange = false;
-				if (parentProduct != null)
+				if (EnumProcessPartition.processTypes.equals(jdfToXJDF.getProcessPart()))
 				{
-					partMaps.put(XJDFConstants.ProductPart, parentProduct.getID());
-					bChange = true;
-				}
-				if (parentNode != parentProduct)
-				{
-					String typesString = StringUtil.getNonEmpty(parentNode.getTypesString());
-					if (typesString != null)
+					if (parentProduct != null)
 					{
-						partMaps.put(XJDFConstants.ProcessTypes, typesString);
+						partMaps.put(XJDFConstants.ProductPart, parentProduct.getID());
 						bChange = true;
+					}
+					if (parentNode != parentProduct)
+					{
+						String typesString = StringUtil.getNonEmpty(parentNode.getTypesString());
+						if (typesString != null)
+						{
+							partMaps.put(XJDFConstants.ProcessTypes, typesString);
+							bChange = true;
+						}
+					}
+				}
+				else if (EnumProcessPartition.jobPartID.equals(jdfToXJDF.getProcessPart()))
+				{
+					if (parentProduct != null)
+					{
+						// TODO change to externalID or productID
+						partMaps.put(XJDFConstants.ProductPart, parentProduct.getID());
+						bChange = true;
+					}
+					if (parentNode != parentProduct)
+					{
+						String jobPartID = StringUtil.getNonEmpty(parentNode.getJobPartID(false));
+						if (jobPartID != null)
+						{
+							partMaps.put(XJDFConstants.ProductPart, jobPartID);
+							bChange = true;
+						}
 					}
 				}
 				if (bChange)
