@@ -81,6 +81,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -242,6 +244,58 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		assertTrue(cc.getSeparations().contains("Snarf Blue"));
 		cc.setProcessColorModel("DeviceN");
 		assertTrue(cc.getSeparations().contains("Snarf Blue"));
+	}
+
+	/**
+	 *  
+	 */
+	@Test
+	public final void testGetProcessSeparations()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode root = doc.getJDFRoot();
+		final JDFResourcePool resPool = root.getCreateResourcePool();
+		final KElement kElem = resPool.appendResource(ElementName.COLORANTCONTROL, null, null);
+		assertTrue(kElem instanceof JDFColorantControl);
+		final JDFColorantControl cc = ((JDFColorantControl) kElem);
+		cc.setProcessColorModel("DeviceCMYK");
+		assertEquals(cc.getSeparations(), cc.getProcessSeparations());
+	}
+
+	/**
+	 *  
+	 */
+	@Test
+	public final void testRemoveProcessSeparations()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode root = doc.getJDFRoot();
+		final JDFResourcePool resPool = root.getCreateResourcePool();
+		final KElement kElem = resPool.appendResource(ElementName.COLORANTCONTROL, null, null);
+		assertTrue(kElem instanceof JDFColorantControl);
+		final JDFColorantControl cc = ((JDFColorantControl) kElem);
+		cc.setProcessColorModel("DeviceCMYK");
+		cc.appendColorantParams().setSeparations(cc.getSeparations());
+		assertEquals(cc.getSeparations(), cc.getProcessSeparations());
+		cc.removeProcessColors();
+		assertEquals(cc.getSeparations(), cc.getProcessSeparations());
+		assertNull(cc.getColorantParams());
+	}
+
+	/**
+	 * tests the separationlist class
+	 * 
+	 */
+	@Test
+	public final void testImplicitPartitions()
+	{
+		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
+		final JDFResource res = root.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		assertTrue(res instanceof JDFColorantControl);
+		JDFResourceLink rl = root.getLink(res, null);
+		rl.appendPart().setSeparation("Blue");
+		rl.appendPart().setSeparation("Green");
+		assertNotNull(rl.getTarget());
 	}
 
 	/**

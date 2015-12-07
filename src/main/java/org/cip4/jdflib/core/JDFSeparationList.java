@@ -143,7 +143,7 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	/**
 	 * Get a list of all separation names in the SeparationSpec elements
 	 * 
-	 * @return the vector of separation names
+	 * @return the vector of separation names - empty VString if no separations are present
 	 */
 	public VString getSeparations()
 	{

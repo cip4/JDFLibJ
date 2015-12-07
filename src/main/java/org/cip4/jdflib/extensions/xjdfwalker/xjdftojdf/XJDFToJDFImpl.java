@@ -86,7 +86,6 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -394,25 +393,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 			n = root.addProcessGroup(new VString(xjdf.getAttribute(AttributeName.TYPES), null));
 		}
 		return n;
-	}
-
-	/**
-	 * make a separationlist from an attribute
-	 * @param rPart
-	 * @param elem the separation list attribute / element
-	 * @return 
-	 */
-	protected JDFSeparationList createSeparationList(final KElement rPart, final String elem)
-	{
-		final String c = rPart.getAttribute(elem, null, null);
-		JDFSeparationList sepList = null;
-		if (c != null)
-		{
-			sepList = (JDFSeparationList) rPart.getCreateElement(elem);
-			sepList.setSeparations(new VString(c, null));
-			rPart.removeAttribute(elem);
-		}
-		return sepList;
 	}
 
 	/**

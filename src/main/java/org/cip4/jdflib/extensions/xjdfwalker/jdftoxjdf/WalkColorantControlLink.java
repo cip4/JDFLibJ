@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,54 +68,28 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.resource.process.JDFColorantControl;
 
 /**
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkSeparationList extends WalkJDFSubElement
+public class WalkColorantControlLink extends WalkResLink
 {
 	/**
 	 * 
 	 */
-	public WalkSeparationList()
+	public WalkColorantControlLink()
 	{
 		super();
-	}
-
-	/**
-	 * replace separationspec elements with their respective values
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		// we zapped DEVICECOLORANTORDER
-		if (ElementName.DEVICECOLORANTORDER.equals(jdf.getLocalName()))
-		{
-			return null;
-		}
-
-		final JDFSeparationList je = (JDFSeparationList) jdf;
-		final String name = jdf.getLocalName();
-		final VString cols = je.getSeparations();
-		if (cols != null)
-		{
-			for (int i = 0; i < cols.size(); i++)
-			{
-				String col = cols.get(i);
-				cols.set(i, StringUtil.replaceChar(col, ' ', "_", 0));
-			}
-		}
-		xjdf.setAttribute(name, cols, null);
-		return null; // done
 	}
 
 	/**
@@ -126,6 +100,55 @@ public class WalkSeparationList extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFSeparationList;
+		return toCheck instanceof JDFResourceLink && "ColorantControlLink".equals(toCheck.getLocalName());
+	}
+
+	/**
+	 * @param jdf
+	 * @param xjdf
+	 * @return true if must continue
+	 */
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		final JDFResourceLink rl = (JDFResourceLink) jdf;
+		processSeparations(rl);
+		return super.walk(jdf, xjdf);
+	}
+
+	/**
+	 * 
+	 * @param rl
+	 */
+	private void processSeparations(final JDFResourceLink rl)
+	{
+		VJDFAttributeMap vParts = rl.getPartMapVector();
+		if (vParts != null && vParts.containsKey(AttributeName.SEPARATION))
+		{
+			VJDFAttributeMap vMap2 = vParts.clone();
+			vMap2.removeKey(AttributeName.SEPARATION);
+			rl.setPartMapVector(vMap2);
+			if (vMap2.isEmpty())
+			{
+				vMap2.add(new JDFAttributeMap());
+			}
+
+			JDFColorantControl ccRoot = (JDFColorantControl) rl.getLinkRoot();
+			for (JDFAttributeMap map2 : vMap2)
+			{
+				JDFColorantControl cc = (JDFColorantControl) ccRoot.getPartition(map2, null);
+				if (cc != null)
+				{
+					VJDFAttributeMap matching = vParts.getOverlapMaps(map2).clone();
+					JDFSeparationList colorantOrder = cc.getCreateColorantOrder();
+					VString previous = colorantOrder.getSeparations();
+					VString sepsFromLink = matching.getPartValues(AttributeName.SEPARATION, true);
+					if (!sepsFromLink.isEmpty())
+					{
+						colorantOrder.setSeparations(previous.getOverlapping(sepsFromLink));
+					}
+				}
+			}
+		}
 	}
 }

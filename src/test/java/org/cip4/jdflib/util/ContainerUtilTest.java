@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -101,8 +101,8 @@ public class ContainerUtilTest extends JDFTestCaseBase
 			this.i = pi;
 		}
 
-		/*
-		 * (non-Javadoc)
+		/**
+		 *  
 		 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 		 */
 		@Override
@@ -111,8 +111,20 @@ public class ContainerUtilTest extends JDFTestCaseBase
 			return ((SimpleMatch) subset).i == i;
 		}
 
-		/*
-		 * (non-Javadoc)
+		/**
+		 * @see java.lang.Object#hashCode()
+		 */
+		@Override
+		public int hashCode()
+		{
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + i;
+			return result;
+		}
+
+		/**
+		 * 
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
 		@Override
@@ -295,6 +307,20 @@ public class ContainerUtilTest extends JDFTestCaseBase
 			assertTrue(inv.get("a" + i).contains("b" + i));
 			assertTrue(inv.get("a" + i).contains("" + i));
 		}
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetNonEmpty()
+	{
+		final Vector<String> v = new Vector<String>();
+		assertNull(ContainerUtil.getNonEmpty(v));
+		assertNull(ContainerUtil.getNonEmpty(null));
+
+		v.add("a");
+		assertEquals(v, ContainerUtil.getNonEmpty(v));
 	}
 
 	/**

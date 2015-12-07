@@ -1361,6 +1361,30 @@ public class JDFResource extends JDFElement
 		 */
 		public VElement getPartitionVector(VJDFAttributeMap vm, EnumPartUsage partUsage)
 		{
+			if (getImplicitPartitions() != null)
+			{
+				VJDFAttributeMap vmNew = new VJDFAttributeMap();
+				for (JDFAttributeMap map : vm)
+				{
+					JDFAttributeMap removeImplicitPartions = removeImplicitPartions(map.clone());
+					if (!removeImplicitPartions.isEmpty())
+					{
+						vmNew.appendUnique(removeImplicitPartions);
+					}
+				}
+				vm = vmNew;
+			}
+			if (ContainerUtil.getNonEmpty(vm) == null)
+			{
+				VElement v = new VElement();
+				v.add(JDFResource.this);
+				return v;
+			}
+			else if (vm.size() == 1)
+			{
+				return getPartitionVector(vm.get(0), partUsage);
+			}
+
 			if (partUsage == null)
 			{
 				partUsage = getPartUsage();
@@ -1637,9 +1661,9 @@ public class JDFResource extends JDFElement
 				return m;
 			}
 			m = new JDFAttributeMap(m);
-			for (int i = 0; i < v.size(); i++)
+			for (EnumPartIDKey e : v)
 			{
-				m.remove((v.elementAt(i)).getName());
+				m.remove(e.getName());
 			}
 			return m;
 		}

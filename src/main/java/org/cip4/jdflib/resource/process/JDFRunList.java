@@ -1106,11 +1106,15 @@ public class JDFRunList extends JDFAutoRunList
 	 * @return vector of EnumPartIDKey
 	 */
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.resource.JDFResource#getImplicitPartitions()
+	 */
 	@Override
 	public Vector<EnumPartIDKey> getImplicitPartitions()
 	{
 		Vector<EnumPartIDKey> v = super.getImplicitPartitions();
-		if ("Dynamic".equals(getAttribute("Automation")))
+		if ("Dynamic".equals(getAttribute(AttributeName.AUTOMATION)))
 			return v;
 
 		if (v == null)

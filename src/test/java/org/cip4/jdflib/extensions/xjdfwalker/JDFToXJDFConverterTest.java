@@ -109,6 +109,7 @@ import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
+import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFEmployee;
@@ -118,6 +119,7 @@ import org.cip4.jdflib.resource.process.JDFPageData;
 import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
+import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
 
 /**
@@ -336,6 +338,33 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		n.setStatus(EnumNodeStatus.Cleanup);
 		KElement xjdf = conv.convert(n);
 		assertEquals(xjdf.getXPathAttribute("ProductList/Product/@ProductID", null), "prodID");
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testColorantControl()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.ImageSetting);
+		JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		cc.getCreateColorantOrder().setSeparations(new VString("Cyan Magenta Yellow Black", null));
+		cc.getCreateDeviceColorantOrder().setSeparations(new VString("Magenta Cyan Yellow Black", null));
+		cc.setProcessColorModel("DeviceCMYK");
+
+		JDFResourceLink ccl = n.getLink(cc, null);
+		ccl.appendPart().setSeparation("Cyan");
+		ccl.appendPart().setSeparation("Black");
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+
+		JDFColorantControl ccNew = (JDFColorantControl) new XJDFHelper(xjdf).getPartition(ElementName.COLORANTCONTROL, 0, 0).getResource();
+		assertEquals(ccNew.getAttribute(ElementName.COLORANTPARAMS), "Cyan Magenta Yellow Black");
+		assertEquals(ccNew.getAttribute(ElementName.COLORANTORDER), "Cyan Black");
+		assertNull(StringUtil.getNonEmpty(ccNew.getAttribute(ElementName.DEVICECOLORANTORDER)));
 	}
 
 	/**
@@ -602,6 +631,33 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.convert(n);
 		assertTrue(xjdf.getXPathAttribute("ResourceSet/Resource/Component/@MediaRef", null).startsWith(med.getID()));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testPartAmountPartitions()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		JDFMedia med = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		JDFMedia m1 = (JDFMedia) med.addPartition(EnumPartIDKey.Location, "loc1");
+		m1.setMediaType(EnumMediaType.Paper);
+		m1.setWeight(42);
+		JDFResourceLink ml = n.getLink(med, null);
+		JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.Location.getName(), "loc1");
+		ml.setPartMap(map);
+
+		map.put(EnumPartIDKey.Separation, "Cyan");
+		map.put(EnumPartIDKey.Condition, "Good");
+		ml.setAmount(42, map);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+		assertNotNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/Part/@Location", null));
+		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/Part/@Location", null));
+		assertNotNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/Part/@Separation", null));
 	}
 
 	/**

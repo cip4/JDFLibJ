@@ -86,12 +86,14 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
+import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
@@ -125,6 +127,30 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		JDFNode root = d.getJDFRoot();
 		JDFContact contact = (JDFContact) root.getResource("Contact", EnumUsage.Input, 0);
 		assertEquals(contact.getCompany().getProductID(), "company_id");
+	}
+
+	/**
+	 *  
+	 *  
+	 */
+	@Test
+	public void testColorantControl()
+	{
+		XJDFHelper h = new XJDFHelper("j", "p", null);
+		h.setTypes(EnumType.ImageSetting.getName());
+		JDFColorantControl cc = (JDFColorantControl) h.getCreateResourceSet(ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true).getResource();
+		cc.setAttribute(ElementName.COLORANTPARAMS, "Cyan Magenta Yellow Black");
+		cc.setAttribute(ElementName.COLORANTORDER, "Cyan Black");
+		cc.setProcessColorModel("DeviceCMYK");
+
+		XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		JDFDoc docjdf = conv.convert(h);
+		JDFNode n = docjdf.getJDFRoot();
+
+		JDFColorantControl ccNew = (JDFColorantControl) n.getResource(ElementName.COLORANTCONTROL, EnumUsage.Input, null, 0);
+		assertNull(ccNew.getColorantParams());
+		assertEquals(ccNew.getColorantOrder().getSeparations(), new VString("Cyan Black", null));
+		assertNull(ccNew.getDeviceColorantOrder());
 	}
 
 	/**

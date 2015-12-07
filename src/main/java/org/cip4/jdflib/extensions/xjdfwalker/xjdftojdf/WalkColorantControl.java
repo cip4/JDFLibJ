@@ -102,11 +102,11 @@ public class WalkColorantControl extends WalkResource
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		//TODO add processcolormodel removal
 		final KElement rPart = super.walk(e, trackElem);
-		xjdfToJDFImpl.createSeparationList(rPart, ElementName.COLORANTPARAMS);
-		xjdfToJDFImpl.createSeparationList(rPart, ElementName.COLORANTORDER);
-		xjdfToJDFImpl.createSeparationList(rPart, ElementName.DEVICECOLORANTORDER);
+		createSeparationList(rPart, ElementName.COLORANTPARAMS);
+		createSeparationList(rPart, ElementName.COLORANTORDER);
+		createSeparationList(rPart, ElementName.DEVICECOLORANTORDER);
+		((JDFColorantControl) rPart).removeProcessColors();
 		return rPart;
 	}
 }

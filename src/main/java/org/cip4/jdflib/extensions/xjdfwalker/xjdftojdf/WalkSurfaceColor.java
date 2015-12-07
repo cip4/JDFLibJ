@@ -120,7 +120,7 @@ public class WalkSurfaceColor extends WalkXElement
 				ci.copyAttribute(key, surfaceColor);
 				if (ElementName.COLORSUSED.equals(key))
 				{
-					xjdfToJDFImpl.createSeparationList(ci, key);
+					createSeparationList(ci, key);
 				}
 				else if (spans.contains(key))
 				{

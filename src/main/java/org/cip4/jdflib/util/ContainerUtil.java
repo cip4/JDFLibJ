@@ -126,6 +126,18 @@ public class ContainerUtil
 	}
 
 	/**
+	 * return null if c==null or c.isEmpty=true
+	 * used to zapp empty collections
+	 * 
+	 * @param c the Collection to test
+	 * @return the converted Collecion
+	 */
+	public static Collection<?> getNonEmpty(final Collection<?> c)
+	{
+		return c == null || c.isEmpty() ? null : c;
+	}
+
+	/**
 	 * create a HashSet from a List (Vector...)
 	 * @param <a> the data type of the sets
 	 * @param list the list

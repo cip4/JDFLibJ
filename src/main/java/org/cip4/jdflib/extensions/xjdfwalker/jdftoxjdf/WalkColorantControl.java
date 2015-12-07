@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,54 +68,45 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.resource.process.JDFColorantControl;
+import org.cip4.jdflib.util.ContainerUtil;
 
 /**
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkSeparationList extends WalkJDFSubElement
+public class WalkColorantControl extends WalkInlineAllRes
 {
 	/**
 	 * 
 	 */
-	public WalkSeparationList()
+	public WalkColorantControl()
 	{
 		super();
 	}
 
 	/**
-	 * replace separationspec elements with their respective values
+	 * ensure that implied separations are correctly returned
+	 * 
 	 * @param xjdf
 	 * @return true if must continue
 	 */
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		// we zapped DEVICECOLORANTORDER
-		if (ElementName.DEVICECOLORANTORDER.equals(jdf.getLocalName()))
+		JDFColorantControl cc = (JDFColorantControl) jdf;
+		VString seps = cc.getSeparations();
+		if (ContainerUtil.getNonEmpty(seps) != null)
 		{
-			return null;
+			JDFSeparationList ccp = cc.getCreateColorantParams();
+			seps.appendUnique(ccp.getSeparations());
+			ccp.setSeparations(seps);
 		}
-
-		final JDFSeparationList je = (JDFSeparationList) jdf;
-		final String name = jdf.getLocalName();
-		final VString cols = je.getSeparations();
-		if (cols != null)
-		{
-			for (int i = 0; i < cols.size(); i++)
-			{
-				String col = cols.get(i);
-				cols.set(i, StringUtil.replaceChar(col, ' ', "_", 0));
-			}
-		}
-		xjdf.setAttribute(name, cols, null);
-		return null; // done
+		return super.walk(jdf, xjdf);
 	}
 
 	/**
@@ -126,6 +117,6 @@ public class WalkSeparationList extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFSeparationList;
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFColorantControl);
 	}
 }

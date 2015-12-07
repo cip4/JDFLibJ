@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -183,6 +184,25 @@ public class WalkXElement extends BaseWalker
 	{
 		final String refName = val.endsWith("Refs") ? StringUtil.leftStr(val, -1) : val;
 		return refName;
+	}
+
+	/**
+	 * make a separationlist from an attribute
+	 * @param rPart
+	 * @param elem the separation list attribute / element
+	 * @return 
+	 */
+	protected JDFSeparationList createSeparationList(final KElement rPart, final String elem)
+	{
+		final String c = rPart.getAttribute(elem, null, null);
+		JDFSeparationList sepList = null;
+		if (c != null)
+		{
+			sepList = (JDFSeparationList) rPart.getCreateElement(elem);
+			sepList.setSeparations(new VString(c, null));
+			rPart.removeAttribute(elem);
+		}
+		return sepList;
 	}
 
 	/**

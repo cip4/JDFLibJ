@@ -403,6 +403,11 @@ public class JDFToXJDF extends PackageElementWalker
 		{
 			oldRoot = root;
 		}
+		// we are a simple - not spawned jdf 
+		if (oldRoot == root && root.getElement(ElementName.JDF) == null && root.getAncestorPool() == null)
+		{
+			setSingleNode(true);
+		}
 		prepareNewDoc(false);
 		loopNodes(root);
 		prepareRoot(root);

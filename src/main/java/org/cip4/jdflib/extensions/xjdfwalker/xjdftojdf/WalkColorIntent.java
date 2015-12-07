@@ -209,16 +209,18 @@ public class WalkColorIntent extends WalkIntentResource
 	 */
 	private void evaluateColorsUsed(final KElement e)
 	{
-		JDFSeparationList sl = xjdfToJDFImpl.createSeparationList(e, "ColorsUsed");
+		JDFSeparationList sl = createSeparationList(e, "ColorsUsed");
 		if (e.hasAttribute("ColorsUsedBack"))
 		{
 			if (sl != null)
 				sl = (JDFSeparationList) sl.deleteNode();
 			e.renameAttribute("ColorsUsedBack", "ColorsUsed", null, null);
-			JDFSeparationList slBack = xjdfToJDFImpl.createSeparationList(e, "ColorsUsed");
+			JDFSeparationList slBack = createSeparationList(e, "ColorsUsed");
 			slBack.renameElement("ColorsUsedBack", null);
 			if (sl != null)
+			{
 				e.moveElement(sl, slBack);
+			}
 		}
 	}
 

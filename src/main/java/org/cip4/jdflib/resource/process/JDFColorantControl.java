@@ -227,6 +227,26 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	 */
 	public VString getSeparations()
 	{
+		VString vName = getProcessSeparations();
+
+		final JDFSeparationList colpar = getColorantParams();
+		if (colpar != null)
+		{
+			vName.addAll(colpar.getSeparations());
+		}
+		vName.unify();
+		return vName;
+	}
+
+	/**
+	 * get the list of separations that the value of ProcessColorModel implies 
+	 * adds the separations that are implied by ProcessColorModel
+	 * ignores colorantorder and devicecolorantorder
+	 * 
+	 * @return VString the complete list of process and spot colors
+	 */
+	public VString getProcessSeparations()
+	{
 		VString vName = new VString();
 		final String model = getProcessColorModel();
 		if ("DeviceCMY".equals(model))
@@ -256,15 +276,11 @@ public class JDFColorantControl extends JDFAutoColorantControl
 		{
 			JDFDeviceNSpace deviceNSpace = getDeviceNSpace(0);
 			if (deviceNSpace != null)
+			{
 				vName = deviceNSpace.getSeparations();
+			}
 		}
 
-		final JDFSeparationList colpar = getColorantParams();
-		if (colpar != null)
-		{
-			vName.addAll(colpar.getSeparations());
-		}
-		vName.unify();
 		return vName;
 	}
 
@@ -276,5 +292,31 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	{
 		final JDFColorPool cp = getColorPool();
 		return cp == null ? super.getCreateColorPool() : cp;
+	}
+
+	/**
+	 * 
+	 * remove implied process colorors from the params list
+	 */
+	public void removeProcessColors()
+	{
+		VString processSeps = getProcessSeparations();
+		if (!processSeps.isEmpty())
+		{
+			JDFSeparationList params = getColorantParams();
+			if (params != null)
+			{
+				VString oldList = params.getSeparations();
+				oldList.removeAll(processSeps);
+				if (oldList.isEmpty())
+				{
+					params.deleteNode();
+				}
+				else
+				{
+					params.setSeparations(oldList);
+				}
+			}
+		}
 	}
 }

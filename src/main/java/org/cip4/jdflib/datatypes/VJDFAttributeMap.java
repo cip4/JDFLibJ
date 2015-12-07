@@ -372,7 +372,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * Return the maximum size size of a JDFAttributeMap in this
+	 * Return the minimum size size of a JDFAttributeMap in this
 	 * 
 	 * @return int - the size
 	 */
@@ -556,7 +556,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * reduce each JDFAttributeMap in <code>this</code> by keySet
+	 * reduce each JDFAttributeMap in <code>this</code> by keySet (only entries in keyset are retained)
 	 * 
 	 * @param keySet
 	 */
