@@ -1260,6 +1260,9 @@ class PostXJDFWalker extends BaseElementWalker
 				same = StringUtil.equals(firstSet.getProcessUsage(), next.getProcessUsage());
 			if (same)
 				same = ContainerUtil.equals(firstSet.getUsage(), next.getUsage());
+			if (same)
+				same = ContainerUtil.equals(firstSet.getXPathValue("@JobPartID"), next.getXPathValue("@JobPartID"));
+
 			return same;
 		}
 	}

@@ -261,6 +261,7 @@ public class WalkResLink extends WalkJDFElement
 		{
 			setNodePartitions(rl, newResources);
 		}
+
 		return newResources;
 	}
 
@@ -308,6 +309,21 @@ public class WalkResLink extends WalkJDFElement
 							partMaps.put(XJDFConstants.ProductPart, jobPartID);
 							bChange = true;
 						}
+					}
+				}
+				else if (EnumProcessPartition.processUsageJobPartID.equals(jdfToXJDF.getProcessPart()))
+				{
+					if (parentProduct != null)
+					{
+						// TODO change to externalID or productID
+						partMaps.put(XJDFConstants.ProductPart, parentProduct.getID());
+						bChange = true;
+					}
+					if (parentNode != parentProduct)
+					{
+						KElement set = newResource.getParentNode_KElement();
+						String jobPartID = StringUtil.getNonEmpty(parentNode.getJobPartID(false));
+						set.setAttribute(AttributeName.JOBPARTID, jobPartID);
 					}
 				}
 				if (bChange)

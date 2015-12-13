@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -236,7 +236,6 @@ public class JDFJMF extends JDFAutoJMF
 	 * 
 	 * Appendix D (JDF 1.3) - Supported Error Codes in JMF and Notification elements Jun 7, 2009
 	 */
-	@SuppressWarnings("unchecked")
 	public static class EnumJMFReturnCode extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -1001,7 +1000,7 @@ public class JDFJMF extends JDFAutoJMF
 	public JDFJMF createResponse()
 	{
 		final VElement v = getMessageVector(null, null);
-		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		final JDFJMF jmf = new JDFDoc(ElementName.JMF).getJMFRoot();
 		for (int i = 0; i < v.size(); i++)
 		{
 			final JDFMessage m = (JDFMessage) v.elementAt(i);

@@ -987,7 +987,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	public enum EnumProcessPartition
 	{
-		processList, processTypes, jobPartID
+		processList, processTypes, jobPartID, processUsageJobPartID
 	}
 
 	/**
