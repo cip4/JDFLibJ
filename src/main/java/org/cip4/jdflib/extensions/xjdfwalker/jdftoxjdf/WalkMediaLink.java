@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
@@ -101,7 +102,7 @@ public class WalkMediaLink extends WalkResLink
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFResourceLink && "MediaLink".equals(toCheck.getLocalName());
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFResourceLink && "MediaLink".equals(toCheck.getLocalName());
 	}
 
 	/**
@@ -162,6 +163,8 @@ public class WalkMediaLink extends WalkResLink
 			}
 			rlComp.setPartMapVector(rl.getPartMapVector());
 			rlComp.moveElement(rl.getAmountPool(), null);
+			rl.removeAttribute(AttributeName.RREF);
+			rlComp.setAttributes(rl);
 			rl.deleteNode();
 			return rlComp;
 

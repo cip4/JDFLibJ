@@ -104,6 +104,6 @@ public class WalkRunList extends WalkInlineAllRes
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return (toCheck instanceof JDFRunList);
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFRunList);
 	}
 }

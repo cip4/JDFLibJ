@@ -637,6 +637,38 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testMediaComponentAmount()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		JDFMedia med = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		JDFMedia m1 = (JDFMedia) med.addPartition(EnumPartIDKey.Location, "loc1");
+		m1.setMediaType(EnumMediaType.Paper);
+		m1.setWeight(42);
+		JDFResourceLink mediaLink = n.ensureLink(med, EnumUsage.Input, null);
+		JDFAttributeMap amountMap = new JDFAttributeMap();
+		amountMap.put(AttributeName.CONDITION, "Good");
+		amountMap.put(AttributeName.LOCATION, "loc1");
+		mediaLink.setAmount(1234, amountMap);
+		amountMap.put(AttributeName.CONDITION, "Waste");
+		mediaLink.setAmount(123, amountMap);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/@Amount", null), "1234");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/@Waste", null), "123");
+
+		mediaLink.removeChild(ElementName.AMOUNTPOOL, null, 0);
+		mediaLink.setAmount(5678, (JDFAttributeMap) null);
+		conv = new JDFToXJDF();
+		xjdf = conv.convert(n);
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/@Amount", null), "5678");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testPartAmountPartitions()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
