@@ -1100,7 +1100,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	public void testIsInvalid()
 	{
 		final File testData = new File(sm_dirTestData + "BadSampleFiles");
-		assertTrue("testData dir", testData.isDirectory());
+		assertTrue("testData dir " + testData, testData.isDirectory());
 		final File[] fList = FileUtil.listFilesWithExtension(testData, ".jdf");
 		final JDFParser p = new JDFParser();
 		final JDFParser p2 = new JDFParser();

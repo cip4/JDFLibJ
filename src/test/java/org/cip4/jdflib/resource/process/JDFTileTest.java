@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -76,7 +76,6 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFParser;
@@ -179,8 +178,7 @@ public class JDFTileTest extends JDFTestCaseBase
 			assertNotNull(partTile);
 		}
 		String string = root.getOwnerDocument_JDFElement().write2String(2);
-		JDFParser jdfParser = new JDFParser();
-		jdfParser.setSchemaLocation(JDFElement.getSchemaURL(), sm_dirTestSchema + "JDF.xsd");
+		JDFParser jdfParser = getSchemaParser();
 		JDFDoc d = jdfParser.parseString(string);
 		assertEquals(d.getValidationResult().getRoot().getAttribute("ValidationResult"), "Valid");
 	}

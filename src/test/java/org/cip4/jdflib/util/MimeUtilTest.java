@@ -745,7 +745,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	@Test
 	public void testPerformanceGet() throws Exception
 	{
-
+		testWritePerformance();
 		final long write = System.currentTimeMillis();
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "performance.mjm");
 		final long getMP = System.currentTimeMillis();
