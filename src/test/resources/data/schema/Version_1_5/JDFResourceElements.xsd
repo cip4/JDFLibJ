@@ -37,135 +37,6 @@
 	<xs:import namespace="http://www.CIP4.org/JDFSchema_1_5_Types" schemaLocation="JDFTypes.xsd"/>
 	<xs:include schemaLocation="JDFCore.xsd"/>
 
-	<xs:attributeGroup name="AddressAttribs_c">
-		<xs:attribute name="City" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="Country" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="CountryCode" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="PostBox" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="PostalCode" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="Region" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="Street" type="jdftyp:string" use="optional"/>
-	</xs:attributeGroup>
-	<xs:attributeGroup name="AddressAttribs_r">
-		<xs:attributeGroup ref="jdf:AddressAttribs_c"/>
-	</xs:attributeGroup>
-	<xs:complexType name="Address_re" mixed="false">
-		<xs:annotation>
-			<xs:appinfo>
-				<Constraint Path="ExtendedAddress" minOccurs="0" maxOccurs="1"/>
-			</xs:appinfo>
-		</xs:annotation>
-		<xs:complexContent mixed="false">
-			<xs:extension base="jdf:ResourceElement">
-				<xs:sequence minOccurs="0" maxOccurs="unbounded">
-					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
-					<xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
-					<xs:element name="ExtendedAddress" type="jdf:telem" minOccurs="0"/>
-				</xs:sequence>
-				<xs:attributeGroup ref="jdf:AddressAttribs_r"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:attributeGroup name="AutomatedOverPrintParamsAttribs_c">
-		<xs:attribute name="LineArtBlackLevel" type="jdftyp:double" use="optional"/>
-		<xs:attribute name="TextSizeThreshold" type="jdftyp:Integer" use="optional"/>
-	</xs:attributeGroup>
-	<xs:attributeGroup name="AutomatedOverPrintParamsAttribs_r">
-		<xs:attributeGroup ref="jdf:AutomatedOverPrintParamsAttribs_c"/>
-		<xs:attribute name="KnockOutCMYKWhite" type="jdftyp:boolean" default="false"/>
-		<xs:attribute name="OverPrintBlackText" type="jdftyp:boolean" default="false"/>
-		<xs:attribute name="OverPrintBlackLineArt" type="jdftyp:boolean" default="false"/>
-		<xs:attribute name="TextBlackLevel" type="jdftyp:double" default="1"/>
-	</xs:attributeGroup>
-	<xs:complexType name="AutomatedOverPrintParams_re" mixed="false">
-		<xs:complexContent mixed="false">
-			<xs:extension base="jdf:ResourceElement">
-				<xs:sequence minOccurs="0" maxOccurs="unbounded">
-					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
-					<xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
-				</xs:sequence>
-				<xs:attributeGroup ref="jdf:AutomatedOverPrintParamsAttribs_r"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:attributeGroup name="BarcodeCompParamsAttribs_c">
-		<xs:attribute name="CompensationValue" type="jdftyp:double" use="optional"/>
-	</xs:attributeGroup>
-	<xs:attributeGroup name="BarcodeCompParamsAttribs_r">
-		<xs:attributeGroup ref="jdf:BarcodeCompParamsAttribs_c"/>
-		<xs:attribute name="CompensationProcess" type="jdftyp:eCompensationProcess_" use="required"/>
-	</xs:attributeGroup>
-	<xs:complexType name="BarcodeCompParams_re" mixed="false">
-		<xs:complexContent mixed="false">
-			<xs:extension base="jdf:ResourceElement">
-				<xs:sequence minOccurs="0" maxOccurs="unbounded">
-					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
-					<xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
-				</xs:sequence>
-				<xs:attributeGroup ref="jdf:BarcodeCompParamsAttribs_r"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:attributeGroup name="BarcodeReproParamsAttribs_c">
-		<xs:attribute name="BearerBars" type="jdftyp:eBearerBars_" use="optional"/>
-		<xs:attribute name="Height" type="jdftyp:double" use="optional"/>
-		<xs:attribute name="Magnification" type="jdftyp:double" use="optional"/>
-		<xs:attribute name="Masking" type="jdftyp:eMasking_" use="optional"/>
-		<xs:attribute name="ModuleHeight" type="jdftyp:double" use="optional"/>
-		<xs:attribute name="ModuleWidth" type="jdftyp:double" use="optional"/>
-		<xs:attribute name="Ratio" type="jdftyp:double" use="optional"/>
-	</xs:attributeGroup>
-	<xs:attributeGroup name="BarcodeReproParamsAttribs_r">
-		<xs:attributeGroup ref="jdf:BarcodeReproParamsAttribs_c"/>
-	</xs:attributeGroup>
-	<xs:complexType name="BarcodeReproParams_re" mixed="false">
-		<xs:complexContent mixed="false">
-			<xs:extension base="jdf:ResourceElement">
-				<xs:sequence minOccurs="0" maxOccurs="unbounded">
-					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
-					<xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
-					<xs:element name="BarcodeCompParams" type="jdf:BarcodeCompParams_re" minOccurs="0"/>
-<!-- 					<xs:element ref="jdf:BarcodeCompParamsRef" minOccurs="0"/> -->
-				</xs:sequence>
-				<xs:attributeGroup ref="jdf:BarcodeReproParamsAttribs_r"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:attributeGroup name="CIELABMeasuringFieldAttribs_c">
-		<xs:attribute name="DensityStandard" type="jdftyp:eDensityStandard_" use="optional"/>
-		<xs:attribute name="Diameter" type="jdftyp:double" use="optional"/>
-		<xs:attribute name="Light" type="jdftyp:NMTOKEN" use="optional"/>
-		<xs:attribute name="Observer" type="jdftyp:Integer" use="optional"/>
-		<xs:attribute name="Percentages" type="jdftyp:DoubleList" use="optional"/>
-		<xs:attribute name="ScreenRuling" type="jdftyp:DoubleList" use="optional"/>
-		<xs:attribute name="ScreenShape" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="Setup" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="Tolerance" type="jdftyp:double" use="optional"/>
-	</xs:attributeGroup>
-	<xs:attributeGroup name="CIELABMeasuringFieldAttribs_r">
-		<xs:attributeGroup ref="jdf:CIELABMeasuringFieldAttribs_c"/>
-		<xs:attribute name="Center" type="jdftyp:XYPair" use="required"/>
-		<xs:attribute name="CIELab" type="jdftyp:LabColor" use="required"/>
-	</xs:attributeGroup>
-	<xs:complexType name="CIELABMeasuringField_re" mixed="false">
-		<xs:complexContent mixed="false">
-			<xs:extension base="jdf:ResourceElement">
-				<xs:sequence minOccurs="0" maxOccurs="unbounded">
-					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
-					<xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
-					<xs:element name="ColorMeasurementConditions" type="jdf:ColorMeasurementConditions_re"
-						minOccurs="0"/>
-					<xs:element ref="jdf:ColorMeasurementConditionsRef" minOccurs="0"/>
-				</xs:sequence>
-				<xs:attributeGroup ref="jdf:CIELABMeasuringFieldAttribs_r"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
 	<xs:attributeGroup name="ColorSpaceConversionOpAttribs_c">
 		<xs:attribute name="IgnoreEmbeddedICC" type="jdftyp:boolean" use="optional"/>
 		<xs:attribute name="ObjectTags" type="jdftyp:NMTOKENS" use="optional"/>
@@ -214,27 +85,6 @@
 					<xs:element name="SeparationSpec" type="jdf:SeparationSpec_re" minOccurs="0"/>
 				</xs:sequence>
 				<xs:attributeGroup ref="jdf:ColorSpaceConversionOpAttribs_r"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:attributeGroup name="ComChannelAttribs_c">
-		<xs:attribute name="ChannelTypeDetails" type="jdftyp:NMTOKEN" use="optional"/>
-		<xs:attribute name="ChannelUsage" type="jdftyp:NMTOKENS" use="optional"/>
-	</xs:attributeGroup>
-	<xs:attributeGroup name="ComChannelAttribs_r">
-		<xs:attributeGroup ref="jdf:ComChannelAttribs_c"/>
-		<xs:attribute name="ChannelType" type="jdftyp:eChannelType_" use="required"/>
-		<xs:attribute name="Locator" type="jdftyp:string" use="required"/>
-	</xs:attributeGroup>
-	<xs:complexType name="ComChannel_re" mixed="false">
-		<xs:complexContent mixed="false">
-			<xs:extension base="jdf:ResourceElement">
-				<xs:sequence minOccurs="0" maxOccurs="unbounded">
-					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
-					<xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
-				</xs:sequence>
-				<xs:attributeGroup ref="jdf:ComChannelAttribs_r"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -371,52 +221,6 @@
 		</xs:complexContent>
 	</xs:complexType>
 
-	<xs:attributeGroup name="DeviceMarkAttribs_c">
-		<xs:attribute name="Anchor" type="jdftyp:eAnchor_" use="optional"/>
-		<xs:attribute name="Font" type="jdftyp:NMTOKEN" use="optional"/>
-		<xs:attribute name="FontSize" type="jdftyp:double" use="optional"/>
-		<xs:attribute name="HorizontalFitPolicy" type="jdftyp:eHorizontalFitPolicy_" use="optional"/>
-		<xs:attribute name="MarkJustification" type="jdftyp:eMarkJustification_" use="optional"/>
-		<xs:attribute name="MarkOffset" type="jdftyp:XYPair" use="optional"/>
-		<xs:attribute name="MarkOrientation" type="jdftyp:eMarkOrientation_" use="optional"/>
-		<xs:attribute name="MarkPosition" type="jdftyp:eMarkPosition_" use="optional"/>
-		<xs:attribute name="VerticalFitPolicy" type="jdftyp:eVerticalFitPolicy_" use="optional"/>
-	</xs:attributeGroup>
-	<xs:attributeGroup name="DeviceMarkAttribs_r">
-		<xs:attributeGroup ref="jdf:DeviceMarkAttribs_c"/>
-	</xs:attributeGroup>
-	<xs:complexType name="DeviceMark_re" mixed="false">
-		<xs:complexContent mixed="false">
-			<xs:extension base="jdf:ResourceElement">
-				<xs:sequence minOccurs="0" maxOccurs="unbounded">
-					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
-					<xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
-				</xs:sequence>
-				<xs:attributeGroup ref="jdf:DeviceMarkAttribs_r"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:attributeGroup name="DeviceNSpaceAttribs_c">
-		<xs:attribute name="Name" type="jdftyp:string" use="optional"/>
-	</xs:attributeGroup>
-	<xs:attributeGroup name="DeviceNSpaceAttribs_r">
-		<xs:attributeGroup ref="jdf:DeviceNSpaceAttribs_c"/>
-		<xs:attribute name="N" type="jdftyp:Integer" use="required"/>
-	</xs:attributeGroup>
-	<xs:complexType name="DeviceNSpace_re" mixed="false">
-		<xs:complexContent mixed="false">
-			<xs:extension base="jdf:ResourceElement">
-				<xs:sequence minOccurs="0" maxOccurs="unbounded">
-					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
-					<xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
-					<xs:element name="SeparationSpec" type="jdf:SeparationSpec_re" minOccurs="0"/>
-				</xs:sequence>
-				<xs:attributeGroup ref="jdf:DeviceNSpaceAttribs_r"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
 	<xs:attributeGroup name="DisjointingAttribs_c">
 		<xs:attribute name="Number" type="jdftyp:Integer" use="optional"/>
 		<xs:attribute name="Offset" type="jdftyp:XYPair" use="optional"/>
@@ -480,103 +284,26 @@
 		</xs:complexContent>
 	</xs:complexType>
 
-	<xs:attributeGroup name="FitPolicyAttribs_c">
-		<xs:attribute name="ClipOffset" type="jdftyp:XYPair" use="optional"/>
-		<xs:attribute name="MinGutter" type="jdftyp:XYPair" use="optional"/>
-		<xs:attribute name="RotatePolicy" type="jdftyp:eFitPolicyRotatePolicy_" use="optional"/>
-		<xs:attribute name="SizePolicy" type="jdftyp:eFitPolicySizePolicy_" use="optional"/>
+	<xs:attributeGroup name="MarkColorAttribs_c">
 	</xs:attributeGroup>
-	<xs:attributeGroup name="FitPolicyAttribs_r">
-		<xs:attributeGroup ref="jdf:FitPolicyAttribs_c"/>
-		<xs:attribute name="GutterPolicy" type="jdftyp:eFitPolicyGutterPolicy_" default="Fixed"/>
+	<xs:attributeGroup name="MarkColorAttribs_r">
+		<xs:attributeGroup ref="jdf:MarkColorAttribs_c"/>
+		<xs:attribute name="Name" type="jdftyp:string" use="required"/>
+		<xs:attribute name="Tint" type="jdftyp:double" use="required"/>
 	</xs:attributeGroup>
-	<xs:complexType name="FitPolicy_re" mixed="false">
+	<xs:complexType name="MarkColor_re" mixed="false">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.5"/>
+			</xs:appinfo>
+		</xs:annotation>
 		<xs:complexContent mixed="false">
 			<xs:extension base="jdf:ResourceElement">
 				<xs:sequence minOccurs="0" maxOccurs="unbounded">
 					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
 					<xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
 				</xs:sequence>
-				<xs:attributeGroup ref="jdf:FitPolicyAttribs_r"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:attributeGroup name="FoldAttribs_c">
-		<xs:attribute name="Travel" type="jdftyp:double" use="optional"/>
-		<xs:attribute name="RelativeTravel" use="optional">
-			<xs:simpleType>
-				<xs:restriction base="jdftyp:double">
-					<xs:minInclusive value="0"/>
-					<xs:maxInclusive value="1"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-	</xs:attributeGroup>
-	<xs:attributeGroup name="FoldAttribs_r">
-		<xs:attributeGroup ref="jdf:FoldAttribs_c"/>
-		<xs:attribute name="From" type="jdftyp:eFrom_" use="required"/>
-		<xs:attribute name="To" type="jdftyp:eTo_" use="required"/>
-	</xs:attributeGroup>
-	<xs:complexType name="Fold_re" mixed="false">
-		<xs:complexContent mixed="false">
-			<xs:extension base="jdf:ResourceElement">
-				<xs:sequence minOccurs="0" maxOccurs="unbounded">
-					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
-					<xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
-				</xs:sequence>
-				<xs:attributeGroup ref="jdf:FoldAttribs_r"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:attributeGroup name="GlueLineAttribs_c">
-		<xs:attribute name="GlueBrand" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="GlueLineWidth" type="jdftyp:double" use="optional"/>
-		<xs:attribute name="GluingPattern" type="jdftyp:XYPair" use="optional"/>
-		<xs:attribute name="GlueType" type="jdftyp:eGlueType_" use="optional"/>
-		<xs:attribute name="MeltingTemperature" type="jdftyp:Integer" use="optional"/>
-		<xs:attribute name="RelativeStartPosition" type="jdftyp:XYPair" use="optional"/>
-		<xs:attribute name="RelativeWorkingPath" type="jdftyp:XYPair" use="optional"/>
-		<xs:attribute name="StartPosition" type="jdftyp:XYPair" use="optional"/>
-		<xs:attribute name="WorkingPath" type="jdftyp:XYPair" use="optional"/>
-	</xs:attributeGroup>
-	<xs:attributeGroup name="GlueLineAttribs_r">
-		<xs:attributeGroup ref="jdf:GlueLineAttribs_c"/>
-		<xs:attribute name="AreaGlue" type="jdftyp:boolean" default="false"/>
-	</xs:attributeGroup>
-	<xs:complexType name="GlueLine_re" mixed="false">
-		<xs:complexContent mixed="false">
-			<xs:extension base="jdf:ResourceElement">
-				<xs:sequence minOccurs="0" maxOccurs="unbounded">
-					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
-					<xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
-				</xs:sequence>
-				<xs:attributeGroup ref="jdf:GlueLineAttribs_r"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:attributeGroup name="JobFieldAttribs_c">
-		<xs:attribute name="JobFormat" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="JobTemplate" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="OperatorText" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="UserText" type="jdftyp:string" use="optional"/>
-	</xs:attributeGroup>
-	<xs:attributeGroup name="JobFieldAttribs_r">
-		<xs:attributeGroup ref="jdf:JobFieldAttribs_c"/>
-		<xs:attribute name="ShowList" type="jdftyp:NMTOKENS" use="optional"/>
-	</xs:attributeGroup>
-	<xs:complexType name="JobField_re" mixed="false">
-		<xs:complexContent mixed="false">
-			<xs:extension base="jdf:ResourceElement">
-				<xs:sequence minOccurs="0" maxOccurs="unbounded">
-					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
-					<xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
-					<xs:element name="DeviceMark" type="jdf:DeviceMark_re" minOccurs="0"/>
-<!-- 					<xs:element ref="jdf:DeviceMarkRef" minOccurs="0"/> -->
-				</xs:sequence>
-				<xs:attributeGroup ref="jdf:JobFieldAttribs_r"/>
+				<xs:attributeGroup ref="jdf:MarkColorAttribs_r"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -677,27 +404,6 @@
 		</xs:complexContent>
 	</xs:complexType>
 
-	<xs:attributeGroup name="ObjectResolutionAttribs_c">
-		<xs:attribute name="AntiAliasing" type="jdftyp:NMTOKEN" use="optional"/>
-		<xs:attribute name="ObjectTags" type="jdftyp:NMTOKENS" use="optional"/>
-	</xs:attributeGroup>
-	<xs:attributeGroup name="ObjectResolutionAttribs_r">
-		<xs:attributeGroup ref="jdf:ObjectResolutionAttribs_c"/>
-		<xs:attribute name="Resolution" type="jdftyp:XYPair" use="required"/>
-		<xs:attribute name="SourceObjects" type="jdftyp:eSourceObjects_" default="All"/>
-	</xs:attributeGroup>
-	<xs:complexType name="ObjectResolution_re" mixed="false">
-		<xs:complexContent mixed="false">
-			<xs:extension base="jdf:ResourceElement">
-				<xs:sequence minOccurs="0" maxOccurs="unbounded">
-					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
-					<xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
-				</xs:sequence>
-				<xs:attributeGroup ref="jdf:ObjectResolutionAttribs_r"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
 	<xs:attributeGroup name="PerforateAttribs_c">
 		<xs:attribute name="Depth" type="jdftyp:double" use="optional"/>
 		<xs:attribute name="RelativeStartPosition" type="jdftyp:XYPair" use="optional"/>
@@ -725,42 +431,6 @@
 					<xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
 				</xs:sequence>
 				<xs:attributeGroup ref="jdf:PerforateAttribs_r"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:attributeGroup name="PersonAttribs_c">
-		<xs:attribute name="AdditionalNames" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="FamilyName" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="FirstName" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="JobTitle" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="Languages" type="jdftyp:languages" use="optional"/>
-		<xs:attribute name="NamePrefix" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="NameSuffix" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="PhoneticFirstName" type="jdftyp:string" use="optional"/>
-		<xs:attribute name="PhoneticLastName" type="jdftyp:string" use="optional"/>
-	</xs:attributeGroup>
-	<xs:attributeGroup name="PersonAttribs_r">
-		<xs:attributeGroup ref="jdf:PersonAttribs_c"/>
-	</xs:attributeGroup>
-	<xs:complexType name="Person_re" mixed="false">
-		<xs:annotation>
-			<xs:appinfo>
-				<Version Path="@PhoneticFirstName" First="1.5"/>
-				<Version Path="@PhoneticLastName" First="1.5"/>
-			</xs:appinfo>
-		</xs:annotation>
-		<xs:complexContent mixed="false">
-			<xs:extension base="jdf:ResourceElement">
-				<xs:sequence minOccurs="0" maxOccurs="unbounded">
-					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
-					<xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
-					<xs:element name="Address" type="jdf:Address_re" minOccurs="0"/>
-<!-- 					<xs:element ref="jdf:AddressRef" minOccurs="0"/> -->
-					<xs:element name="ComChannel" type="jdf:ComChannel_re" minOccurs="0"/>
-<!-- 					<xs:element ref="jdf:ComChannelRef" minOccurs="0"/> -->
-				</xs:sequence>
-				<xs:attributeGroup ref="jdf:PersonAttribs_r"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
