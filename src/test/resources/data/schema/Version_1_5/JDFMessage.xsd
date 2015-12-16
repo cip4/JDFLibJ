@@ -63,7 +63,6 @@
 <xs:schema xmlns:jdftyp="http://www.CIP4.org/JDFSchema_1_5_Types" xmlns:jdf="http://www.CIP4.org/JDFSchema_1_1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.CIP4.org/JDFSchema_1_1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="V1.5-001">
 	<xs:import namespace="http://www.CIP4.org/JDFSchema_1_5_Types" schemaLocation="JDFTypes.xsd"/>
 	<xs:include schemaLocation="JDFCore.xsd"/>
-	<!--	This is the schema representation of 5.5.1 pure events  -->
 	<xs:complexType name="SignalNotification" mixed="false">
 		<xs:annotation>
 			<xs:appinfo>
@@ -1718,6 +1717,7 @@
 				<Version Path="@ModuleIndex" First="1.3"/>
 				<Version Path="@Orientation" First="1.5"/>
 				<Version Path="@ProductID" First="1.2"/>
+				<Version Path="@Scope" First="1.5"/>
 				<Version Path="@Status" First="1.2"/>
 				<Version Path="@Usage" First="1.3"/>
 				<Version Path="AmountPool" First="1.3"/>
@@ -1804,6 +1804,7 @@
 				<xs:attribute name="ProductID" type="jdftyp:shortString" use="optional"/>
 				<xs:attribute name="ResourceID" type="jdftyp:NMTOKEN" use="optional"/>
 				<xs:attribute name="ResourceName" type="jdftyp:NMTOKEN" use="optional"/>
+				<xs:attribute name="Scope" type="jdftyp:eValueUsage_" use="optional"/>
 				<xs:attribute name="Status" type="jdftyp:eResourceStatus_" use="optional"/>
 				<xs:attribute name="Unit" type="jdftyp:string" use="optional"/>
 				<xs:attribute name="Usage" type="jdftyp:eUsage_" use="optional"/>
@@ -2010,35 +2011,7 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-<!-- should be removed! -->
-<!--
-	<xs:complexType name="SignalShutDown" mixed="false">
-		<xs:annotation>
-			<xs:appinfo>
-				<Version Path="." First="1.2"/>
-				<Constraint Path="ShutDownCmdParams" minOccurs="1" maxOccurs="1"/>
-				<Constraint Path="QueueFilter" minOccurs="1" maxOccurs="1"/>
-				<Constraint Path="DeviceInfo" minOccurs="1" maxOccurs="1"/>
-				<Constraint Path="Queue" minOccurs="1" maxOccurs="1"/>
-				<Constraint Path="Notification" minOccurs="0" maxOccurs="1"/>
-				<Constraint Path="Trigger" minOccurs="0" maxOccurs="1"/>
-			</xs:appinfo>
-		</xs:annotation>
-		<xs:complexContent mixed="false">
-			<xs:extension base="jdf:JMFAbstractSignal_">
-				<xs:sequence minOccurs="0" maxOccurs="unbounded">
-					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
-					<xs:element ref="jdf:ShutDownCmdParams" minOccurs="0"/>
-					<xs:element ref="jdf:QueueFilter" minOccurs="0"/>
-					<xs:element ref="jdf:DeviceInfo" minOccurs="0"/>
-					<xs:element ref="jdf:Queue" minOccurs="0"/>
-					<xs:element name="Notification" type="jdf:NotificationAudit" minOccurs="0"/>
-					<xs:element name="Trigger" type="jdf:TriggerElement_m" minOccurs="0"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
--->
+
 	<xs:element name="ShutDownCmdParams" type="jdf:ShutDownCmdParams_m" substitutionGroup="jdf:CommandTypeObj">
 		<xs:annotation>
 			<xs:appinfo>
@@ -3612,6 +3585,7 @@
 			<xs:appinfo>
 				<Version Path="@refID" First="1.2"/>
 				<Version Path="@ReturnJMF" First="1.2"/>
+				<Version Path="@WatchURL" Last="1.4"/>
 				<Version Path="Disposition" First="1.2"/>
 				<Constraint Path="Disposition" minOccurs="0" maxOccurs="1"/>
 			</xs:appinfo>
@@ -3668,6 +3642,7 @@
 				<Version Path="@refID" First="1.2"/>
 				<Version Path="@ReturnJMF" First="1.2"/>
 				<Version Path="@ReturnURL" First="1.2"/>
+				<Version Path="@WatchURL" Last="1.4"/>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexContent mixed="false">
@@ -4353,6 +4328,7 @@
 					<xs:element name="Device" type="jdf:Device_re" minOccurs="0"/>
 					<xs:element name="Part" type="jdf:Part" minOccurs="0"/>
 				</xs:sequence>
+				<xs:attribute name="Activation" type="jdftyp:eActivation_" use="optional"/>
 				<xs:attribute name="GangNames" type="jdftyp:NMTOKENS" use="optional"/>
 				<xs:attribute name="JobID" type="jdftyp:string" use="optional"/>
 				<xs:attribute name="JobPartID" type="jdftyp:string" use="optional"/>
@@ -4363,7 +4339,6 @@
 				<xs:attribute name="QueueEntryDetails" type="jdftyp:eQueueEntryDetails_" default="Brief"/>
 				<xs:attribute name="StatusList" type="jdftyp:eQueueEntryStatusList_" use="optional"/>
 				<xs:attribute name="UpdateGranularity" type="jdftyp:eUpdateGranularity_" use="optional"/>
-				<xs:attribute name="Activation" type="jdftyp:eActivation_" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

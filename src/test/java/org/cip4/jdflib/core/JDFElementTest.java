@@ -1094,58 +1094,6 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 */
-	@Test
-	public void testIsInvalid()
-	{
-		final File testData = new File(sm_dirTestData + "BadSampleFiles");
-		assertTrue("testData dir " + testData, testData.isDirectory());
-		final File[] fList = FileUtil.listFilesWithExtension(testData, ".jdf");
-		final JDFParser p = new JDFParser();
-		final JDFParser p2 = new JDFParser();
-		p2.m_SchemaLocation = sm_dirTestSchema + "JDF.xsd";
-		if (fList != null)
-		{
-			for (int i = 0; i < fList.length; i++)
-			{
-				final File file = fList[i];
-				// skip directories in CVS environments
-				if (file.isDirectory())
-				{
-					continue;
-				}
-
-				// skip schema files
-				if (file.getPath().endsWith(".xsd"))
-				{
-					continue;
-				}
-
-				System.out.println("Parsing: " + file.getPath());
-				JDFDoc jdfDoc = p.parseFile(file.getPath());
-				assertNotNull("parse not ok:  " + file.getPath(), jdfDoc);
-				JDFElement e = null;
-				if (jdfDoc != null)
-				{
-					e = (JDFElement) jdfDoc.getRoot();
-					assertFalse("valid doc: " + file.getPath(), e.isValid(EnumValidationLevel.RecursiveComplete));
-				}
-
-				// now with schema validation
-				jdfDoc = p2.parseFile(file.getPath());
-				assertTrue("schema parse ok", jdfDoc != null);
-				// TODO fix handling of prerelease default attributes
-				if (jdfDoc != null)
-				{
-					e = (JDFElement) jdfDoc.getRoot();
-					assertFalse("valid doc: " + file.getPath(), e.isValid(EnumValidationLevel.RecursiveComplete));
-				}
-			}
-		}
-	}
-
-	/**
 	 * @throws CloneNotSupportedException 
 	 * 
 	 */

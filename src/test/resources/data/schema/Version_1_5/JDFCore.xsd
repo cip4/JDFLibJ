@@ -221,7 +221,6 @@
 		<xs:attribute name="Author" type="jdftyp:string" use="optional"/>
 		<xs:attribute name="CatalogID" type="jdftyp:shortString" use="optional"/>
 		<xs:attribute name="CatalogDetails" type="jdftyp:string" use="optional"/>
-		<!-- added for backward compatibility 060601 -->
 		<xs:attribute name="Status" type="jdftyp:eResourceStatus_" use="optional"/>
 	</xs:attributeGroup>
 	<xs:attributeGroup name="AuditAttribs">
@@ -348,7 +347,6 @@
 		<xs:sequence>
 			<xs:element ref="jdf:Comment" minOccurs="0"/>
 			<xs:element ref="jdf:GeneralID" minOccurs="0"/>
-			<!--  was  jdf:Preview_r but this caused "Class" to be inserted in partitions...-->
 			<xs:element name="Preview" type="jdf:Preview_re" minOccurs="0"/>
 			<xs:element name="PreviewRef" type="jdf:ResourceRef" minOccurs="0"/>
 			<xs:any namespace="##other" processContents="lax" minOccurs="0"/>
@@ -1425,12 +1423,6 @@
 				<xs:attribute name="Time" type="jdftyp:dateTime" use="optional"/>
 				<xs:attribute name="Type" type="jdftyp:NMTOKEN" use="required"/>
 				<xs:attribute name="Version" type="jdftyp:JDFJMFVersion"/>
-				<!--
-				<xs:sequence minOccurs="0" maxOccurs="unbounded">
-					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
-					<xs:element ref="jdf:Employee" minOccurs="0"/> 
-				</xs:sequence>
-				-->
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -1875,7 +1867,7 @@
 				<xs:sequence minOccurs="0" maxOccurs="unbounded">
 					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
 					<xs:element name="ComChannel" type="jdf:ComChannel_re" minOccurs="0"/>
-					<!--  No ref for ComChannel <xs:element ref="jdf:ComChannelRef" minOccurs="0"/> -->
+					<xs:element ref="jdf:ComChannelRef" minOccurs="0"/>
 				</xs:sequence>
 				<xs:attribute name="Language" type="jdftyp:language" use="optional"/>
 				<xs:attribute name="MessageEvents" type="jdftyp:NMTOKENS" use="required"/>
@@ -2064,7 +2056,6 @@
 				<Version Path="@RelatedJobID" First="1.2"/>
 				<Version Path="@RelatedJobPartID" First="1.2"/>
 				<Version Path="@SettingsPolicy" First="1.1"/>
-				<!--SettingsPolicy was first declared here, until promoted for all elems-->
 				<Version Path="@SpawnID" First="1.1"/>
 				<Version Path="@StatusDetails" First="1.2"/>
 				<Version Path="@Template" First="1.1"/>
@@ -2126,7 +2117,6 @@
 				<Version Path="@RelatedJobID" First="1.2"/>
 				<Version Path="@RelatedJobPartID" First="1.2"/>
 				<Version Path="@SettingsPolicy" First="1.1"/>
-				<!--SettinhsPolicy was first declared here, until promoted for all elems-->
 				<Version Path="@SpawnID" First="1.1"/>
 				<Version Path="@StatusDetails" First="1.2"/>
 				<Version Path="@Template" First="1.1"/>

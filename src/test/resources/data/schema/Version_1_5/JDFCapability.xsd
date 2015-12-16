@@ -861,7 +861,6 @@
 		<xs:annotation>
 			<xs:appinfo>
 				<Version Path="." First="1.3"/>
-				<!-- Should all constraints be added? OLA -->
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexContent>

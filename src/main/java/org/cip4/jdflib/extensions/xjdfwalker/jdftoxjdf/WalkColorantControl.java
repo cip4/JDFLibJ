@@ -99,7 +99,7 @@ public class WalkColorantControl extends WalkInlineAllRes
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		JDFColorantControl cc = (JDFColorantControl) jdf;
-		VString seps = cc.getSeparations();
+		VString seps = cc.getProcessSeparations();
 		if (ContainerUtil.getNonEmpty(seps) != null)
 		{
 			JDFSeparationList ccp = cc.getCreateColorantParams();
