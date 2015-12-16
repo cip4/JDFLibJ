@@ -128,6 +128,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 * if false, all deliveryintents and artdeliveryintents are converted to the respective process resources
 	 */
 	private boolean bDeliveryIntent;
+	private boolean retainAll;
 
 	/**
 	 * 
@@ -292,7 +293,10 @@ class PostXJDFWalker extends BaseElementWalker
 		public KElement walk(final KElement pa, final KElement dummy)
 		{
 			JDFPartAmount partAmount = (JDFPartAmount) pa;
-			removeRedundantPartKeys(partAmount);
+			if (!retainAll)
+			{
+				removeRedundantPartKeys(partAmount);
+			}
 			return super.walk(partAmount, dummy);
 		}
 
@@ -634,7 +638,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return toCheck.getLocalName().equals(SetHelper.RESOURCE_SET) && ElementName.STRIPPINGPARAMS.equals(toCheck.getAttribute(AttributeName.NAME));
+			return !retainAll && toCheck.getLocalName().equals(SetHelper.RESOURCE_SET) && ElementName.STRIPPINGPARAMS.equals(toCheck.getAttribute(AttributeName.NAME));
 		}
 
 		/**
@@ -652,7 +656,9 @@ class PostXJDFWalker extends BaseElementWalker
 				return null;
 			}
 			else
+			{
 				return super.walk(xjdf, dummy);
+			}
 		}
 		/**
 		 * 
@@ -684,7 +690,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return super.matches(toCheck) && ElementName.ARTDELIVERYINTENT.equals(toCheck.getAttribute("Name"));
+			return !retainAll && super.matches(toCheck) && ElementName.ARTDELIVERYINTENT.equals(toCheck.getAttribute("Name"));
 		}
 
 		/**
@@ -780,7 +786,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return toCheck instanceof JDFDeliveryParams;
+			return !retainAll && toCheck instanceof JDFDeliveryParams;
 		}
 
 		/**
@@ -856,7 +862,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return toCheck.getLocalName().equals("IntentSet");
+			return !retainAll && toCheck.getLocalName().equals("IntentSet");
 		}
 
 		/**
@@ -1106,6 +1112,29 @@ class PostXJDFWalker extends BaseElementWalker
 		bIntentPartition = false;
 		mergeLayout = true;
 		removeSignatureName = true;
+		retainAll = false;
+	}
+
+	/**
+	 * @return the retainAll
+	 */
+	protected boolean isRetainAll()
+	{
+		return retainAll;
+	}
+
+	/**
+	 * @param retainAll the retainAll to set
+	 */
+	protected void setRetainAll(boolean retainAll)
+	{
+		this.retainAll = retainAll;
+		if (retainAll)
+		{
+			removeSignatureName = !retainAll;
+			mergeLayout = !retainAll;
+			bDeliveryIntent = retainAll;
+		}
 	}
 
 	/**

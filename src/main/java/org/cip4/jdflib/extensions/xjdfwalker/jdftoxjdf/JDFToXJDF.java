@@ -442,6 +442,7 @@ public class JDFToXJDF extends PackageElementWalker
 		pw.setMergeLayout(bMergeLayout);
 		pw.setIntentPartition(bIntentPartition);
 		pw.setRemoveSignatureName(removeSignatureName);
+		pw.setRetainAll(bRetainAll);
 
 		pw.walkTreeKidsFirst(newRoot);
 		if (!bJMF)

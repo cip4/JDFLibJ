@@ -281,7 +281,7 @@ public class WalkJDFElement extends WalkElement
 		{
 			return null;
 		}
-		if (isExchangeResource(linkTarget))
+		if (!jdfToXJDF.isSingleNode() && isExchangeResource(linkTarget))
 		{
 			return null;
 		}

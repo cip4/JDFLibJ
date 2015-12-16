@@ -184,7 +184,7 @@ public class WalkColorIntentResLink extends WalkResLink
 	@Override
 	public boolean matches(KElement toCheck)
 	{
-		return super.matches(toCheck) && "ColorIntentLink".equals(toCheck.getLocalName());
+		return !jdfToXJDF.isRetainAll() && super.matches(toCheck) && "ColorIntentLink".equals(toCheck.getLocalName());
 	}
 
 }

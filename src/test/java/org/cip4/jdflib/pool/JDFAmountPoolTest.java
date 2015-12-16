@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -279,7 +279,23 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 		ap = (JDFAmountPool) new JDFDoc(ElementName.AMOUNTPOOL).getRoot();
 	}
 
-	// /////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetPartVectorNull()
+	{
+		JDFAmountPool ap = (JDFAmountPool) new JDFDoc(ElementName.AMOUNTPOOL).getRoot();
+		JDFPartAmount pa = ap.appendPartAmount();
+		pa.setAmount(42);
+		assertEquals(pa, ap.getPartAmount(new VJDFAttributeMap()));
+		assertEquals(pa, ap.getPartAmount((VJDFAttributeMap) null));
+
+		pa.setPart("Location", "l1");
+		assertNull(ap.getPartAmount(new VJDFAttributeMap()));
+		assertNull(ap.getPartAmount((VJDFAttributeMap) null));
+	}
+
 	/**
 	 * Method testGetMatchingPartAmountVector.
 	 * 

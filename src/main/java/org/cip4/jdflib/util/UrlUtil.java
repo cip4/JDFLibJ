@@ -770,6 +770,10 @@ public class UrlUtil
 			{
 				urlString = urlString.charAt(3) + ":" + urlString.substring(5);
 			}
+			else if (urlString.toLowerCase().startsWith("//localhost/") && urlString.length() > 15 && urlString.charAt(13) == ':' && urlString.charAt(14) == '/')
+			{
+				urlString = urlString.charAt(12) + ":" + urlString.substring(14);
+			}
 			else if (urlString.startsWith("/") && urlString.length() > 3 && urlString.charAt(1) != '/')
 			{
 				if (urlString.charAt(2) == '/')

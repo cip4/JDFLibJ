@@ -772,8 +772,13 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	public JDFPartAmount getPartAmount(VJDFAttributeMap vPart)
 	{
 		if (vPart != null && vPart.size() == 1 && vPart.get(0).isEmpty())
+		{
 			vPart = null;
-
+		}
+		else if (vPart != null && vPart.isEmpty())
+		{
+			vPart = null;
+		}
 		final Vector<JDFPartAmount> vPartAmount = getChildrenByClass(JDFPartAmount.class, true, 0);
 		for (JDFPartAmount partAmount : vPartAmount)
 		{
