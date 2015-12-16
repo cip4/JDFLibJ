@@ -101,7 +101,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 		{
 			Math.sin(i);
 		}
-		assertTrue(t.getTotalCPUTime() > 0);
+		assertTrue(" t=" + t.getTotalCPUTime(), t.getTotalCPUTime() > 0);
 	}
 
 	/**

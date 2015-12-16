@@ -347,7 +347,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	@Test
 	public void testColorantControl()
 	{
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ImageSetting);
 		JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
 		cc.getCreateColorantOrder().setSeparations(new VString("Cyan Magenta Yellow Black", null));
@@ -359,6 +359,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		ccl.appendPart().setSeparation("Black");
 
 		JDFToXJDF conv = new JDFToXJDF();
+		conv.setRetainAll(false);
+
 		KElement xjdf = conv.convert(n);
 
 		JDFColorantControl ccNew = (JDFColorantControl) new XJDFHelper(xjdf).getPartition(ElementName.COLORANTCONTROL, 0, 0).getResource();

@@ -125,26 +125,26 @@ public class WalkColorantControlLink extends WalkResLink
 		VJDFAttributeMap vParts = rl.getPartMapVector();
 		if (vParts != null && vParts.containsKey(AttributeName.SEPARATION))
 		{
-			VJDFAttributeMap vMap2 = vParts.clone();
-			vMap2.removeKey(AttributeName.SEPARATION);
-			rl.setPartMapVector(vMap2);
-			if (vMap2.isEmpty())
+			VJDFAttributeMap vMapPartClone = vParts.clone();
+			vMapPartClone.removeKey(AttributeName.SEPARATION);
+			rl.setPartMapVector(vMapPartClone);
+			if (vMapPartClone.isEmpty())
 			{
-				vMap2.add(new JDFAttributeMap());
+				vMapPartClone.add(new JDFAttributeMap());
 			}
 
 			JDFColorantControl ccRoot = (JDFColorantControl) rl.getLinkRoot();
-			for (JDFAttributeMap map2 : vMap2)
+			for (JDFAttributeMap map2 : vMapPartClone)
 			{
 				JDFColorantControl cc = (JDFColorantControl) ccRoot.getPartition(map2, null);
 				if (cc != null)
 				{
 					VJDFAttributeMap matching = vParts.getOverlapMaps(map2).clone();
-					JDFSeparationList colorantOrder = cc.getCreateColorantOrder();
-					VString previous = colorantOrder.getSeparations();
 					VString sepsFromLink = matching.getPartValues(AttributeName.SEPARATION, true);
 					if (!sepsFromLink.isEmpty())
 					{
+						JDFSeparationList colorantOrder = cc.getCreateColorantOrder();
+						VString previous = colorantOrder.getSeparations();
 						colorantOrder.setSeparations(previous.getOverlapping(sepsFromLink));
 					}
 				}
