@@ -97,9 +97,13 @@ public class CPUTimerTest extends JDFTestCaseBase
 	public void testCPUTime()
 	{
 		t.start();
-		for (int i = 0; i < 20000000; i++)
+		for (int i = 0; i < 100000000; i++)
 		{
 			Math.sin(i);
+			if (i % 100000 == 0 && t.getTotalCPUTime() > 0)
+			{
+				break;
+			}
 		}
 		assertTrue(" t=" + t.getTotalCPUTime(), t.getTotalCPUTime() > 0);
 	}
@@ -114,6 +118,8 @@ public class CPUTimerTest extends JDFTestCaseBase
 		for (int i = 0; i < 100000; i++)
 		{
 			t.toXML();
+			if (i > 3 && (t.getTotalCPUTime() > 0))
+				break;
 		}
 		t.stop();
 		assertTrue(t.getTotalCPUTime() > 0);
@@ -140,7 +146,8 @@ public class CPUTimerTest extends JDFTestCaseBase
 	@Test
 	public void testStartStop()
 	{
-		for (int i = 0; i < 1000; i++)
+		int i = 0;
+		for (i = 1; i < 1000; i++)
 		{
 			t.start();
 			for (int ii = 0; ii < 100000; ii++)
@@ -148,10 +155,12 @@ public class CPUTimerTest extends JDFTestCaseBase
 				Math.sin(ii);
 			}
 			t.stop();
+			if (i > 2 && t.getTotalCPUTime() > 0)
+				break;
 		}
 		assertTrue(t.getTotalCPUTime() > 0);
-		assertEquals(t.getTotalCPUTime() / 1000, t.getAverageCPUTime());
-		assertEquals(t.getTotalRealTime() / 1000, t.getAverageRealTime());
+		assertEquals(t.getTotalCPUTime() / i, t.getAverageCPUTime());
+		assertEquals(t.getTotalRealTime() / i, t.getAverageRealTime());
 	}
 
 	/**
@@ -187,10 +196,11 @@ public class CPUTimerTest extends JDFTestCaseBase
 	{
 		long l = 0;
 		long lCPU = 0;
-		for (int ii = 0; ii < 5; ii++)
+		int ii;
+		for (ii = 1; ii < 142; ii++)
 		{
 			CPUTimer t1 = new CPUTimer(true);
-			for (int i = 0; i < 3000; i++)
+			for (int i = 0; i < 1000; i++)
 			{
 				t.toXML();
 			}
@@ -198,10 +208,11 @@ public class CPUTimerTest extends JDFTestCaseBase
 			l += t1.getTotalRealTime();
 			lCPU += t1.getTotalCPUTime();
 			t1.stop();
-
+			if (ii > 2 && (t.getTotalCPUTime() > 0))
+				break;
 		}
 		assertTrue(t.getTotalCPUTime() > 0);
-		assertEquals(t.getNumStarts(), 5);
+		assertEquals(t.getNumStarts(), ii);
 		assertEquals(t.getTotalCPUTime(), lCPU, lCPU / 100);
 		assertEquals(t.getTotalRealTime(), l, l / 100);
 
@@ -219,13 +230,19 @@ public class CPUTimerTest extends JDFTestCaseBase
 		assertEquals(t.getTotalRealTime(), t.getAverageRealTime());
 
 		t.start();
-		for (int ii = 0; ii < 20000000; ii++)
+		int i = 0;
+		for (i = 0; i < 1000; i++)
 		{
-			Math.sin(ii);
+			for (int ii = 0; ii < 100000; ii++)
+			{
+				Math.sin(ii);
+			}
+			if (i > 2 && t.getTotalCPUTime() > 0)
+				break;
 		}
 		assertTrue(t.getTotalCPUTime() > 0);
-		assertEquals(t.getTotalCPUTime(), t.getAverageCPUTime(), t.getAverageCPUTime() / 100);
-		assertEquals(t.getTotalRealTime(), t.getAverageRealTime(), t.getAverageRealTime() / 100);
+		assertEquals(t.getTotalCPUTime(), t.getAverageCPUTime(), t.getAverageCPUTime() / i);
+		assertEquals(t.getTotalRealTime(), t.getAverageRealTime(), t.getAverageRealTime() / i);
 	}
 
 	/**
