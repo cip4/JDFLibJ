@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -578,17 +578,4 @@ public class JDFDocTest extends JDFTestCaseBase
 		final String s = inMessageDoc.write2String(0);
 		assertNotNull(s);
 	}
-
-	/**
-	 * @throws IOException  
-	 */
-	@Test
-	public void testWriteToURLExample() throws IOException
-	{
-		final JDFDoc d = new JDFDoc("JDF");
-		final String url = UrlUtil.normalize("https://toolbox.cip4.org/jdf/Schema/JDF.xsd");
-		JDFDoc resp = d.write2URL(url);
-		assertNotNull(resp);
-	}
-
 }

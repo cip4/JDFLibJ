@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -627,15 +627,15 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		theQueue.setAutomated(true);
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
 		CPUTimer ct = new CPUTimer(false);
-		for (int i = 0; i < 20000; i++)
+		for (int i = 0; i < 10000; i++)
 		{
-			final JDFQueue qLast = i < 19000 ? null : (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
+			final JDFQueue qLast = i < 9000 ? null : (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
 			final JDFQueueEntry qe = theQueue.appendQueueEntry();
 			qe.setPriority((i * 317) % 99);
 			qe.setQueueEntryID("q" + i);
-			if (i == 19000)
+			if (i == 9000)
 				log.info("startup");
-			if (i > 19000)
+			if (i > 9000)
 			{
 				ct.start();
 				JDFQueue qCopy = filter.copy(theQueue, qLast, null);

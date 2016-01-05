@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -74,8 +74,8 @@ import java.util.Vector;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * 
  * @author rainer prosi
@@ -103,12 +103,12 @@ public class FileJanitorTest extends JDFTestCaseBase
 		FileJanitor fileJanitor = new FileJanitor(f, 2);
 		fileJanitor.setLogSingle(true);
 		Vector<File> cleanupList = fileJanitor.cleanup();
-		Assert.assertEquals(cleanupList.size(), 1);
+		assertEquals(cleanupList.size(), 1);
 		ThreadUtil.sleep(2000);
 		fileJanitor = new FileJanitor(f, 1);
 		fileJanitor.setLogSingle(true);
 		cleanupList = fileJanitor.cleanup();
-		Assert.assertEquals(cleanupList.size(), 3);
+		assertEquals(cleanupList.size(), 3);
 	}
 
 	/**
@@ -132,11 +132,11 @@ public class FileJanitorTest extends JDFTestCaseBase
 		fileJanitor.setLogSingle(true);
 		fileJanitor.setDeleteEmptyDir(true);
 		Vector<File> cleanupList = fileJanitor.cleanup();
-		Assert.assertEquals(cleanupList.size(), 2);
+		assertEquals(cleanupList.size(), 2);
 		ThreadUtil.sleep(2000);
 		fileJanitor = new FileJanitor(f, 1);
 		fileJanitor.setLogSingle(true);
 		cleanupList = fileJanitor.cleanup();
-		Assert.assertEquals(cleanupList.size(), 2);
+		assertEquals(cleanupList.size(), 2);
 	}
 }
