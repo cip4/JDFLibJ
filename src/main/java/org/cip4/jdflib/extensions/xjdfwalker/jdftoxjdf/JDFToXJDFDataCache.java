@@ -193,6 +193,8 @@ class JDFToXJDFDataCache
 		resAttribs.appendUnique(physRes.knownAttributes());
 		resAttribs.appendUnique(intRes.knownAttributes());
 		resAttribs.appendUnique(part.knownAttributes());
+
+		resAttribs.appendUnique("ExternalID");
 		return resAttribs;
 	}
 
