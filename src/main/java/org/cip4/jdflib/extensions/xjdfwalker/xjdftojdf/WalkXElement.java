@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -154,19 +154,16 @@ public class WalkXElement extends BaseWalker
 		{
 			// we want to retain all existing attributes
 			JDFAttributeMap map = trackElem.getAttributeMap_KElement();
-			if (map != null)
-			{
-				updateAttributes(map);
-			}
 			((JDFElement) trackElem).init();
 			trackElem.setAttributes(map);
 		}
+		updateAttributes(trackElem);
 		return trackElem;
 	}
 
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(KElement elem)
 	{
-		map.renameKey("ExternalID", AttributeName.PRODUCTID);
+		elem.renameAttribute("ExternalID", AttributeName.PRODUCTID, null, null);
 	}
 
 	/**
