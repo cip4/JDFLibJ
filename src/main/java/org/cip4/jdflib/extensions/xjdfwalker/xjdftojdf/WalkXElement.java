@@ -149,14 +149,24 @@ public class WalkXElement extends BaseWalker
 		}
 		xjdfToJDFImpl.convertUnits(trackElem);
 		xjdfToJDFImpl.convertTilde(trackElem);
+
 		if (trackElem instanceof JDFElement)
 		{
 			// we want to retain all existing attributes
 			JDFAttributeMap map = trackElem.getAttributeMap_KElement();
+			if (map != null)
+			{
+				updateAttributes(map);
+			}
 			((JDFElement) trackElem).init();
 			trackElem.setAttributes(map);
 		}
 		return trackElem;
+	}
+
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		map.renameKey("ExternalID", AttributeName.PRODUCTID);
 	}
 
 	/**
@@ -259,8 +269,8 @@ public class WalkXElement extends BaseWalker
 			{
 				if ((key.endsWith("Ref") || key.endsWith("Refs")) && !key.equals("rRef"))
 				{
-					final String values = map.get(key);
-					cleanRef(e, trackElem, key, values);
+					final String value = map.get(key);
+					cleanRef(e, trackElem, key, value);
 				}
 			}
 		}

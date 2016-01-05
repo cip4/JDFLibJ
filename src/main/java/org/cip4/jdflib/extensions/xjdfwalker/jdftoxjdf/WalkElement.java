@@ -187,7 +187,23 @@ public class WalkElement extends BaseWalker
 				}
 			}
 		}
+
+		if (!jdfToXJDF.isRetainAll() && map != null)
+		{
+			updateAttributes(map);
+		}
+
 		eNew.setAttributes(map);
+	}
+
+	/**
+	 * 
+	 * @param map
+	 */
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+
+		map.renameKey(AttributeName.PRODUCTID, "ExternalID");
 	}
 
 	/**

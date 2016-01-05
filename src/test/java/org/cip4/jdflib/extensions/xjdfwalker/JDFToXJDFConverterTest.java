@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -737,9 +738,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		product.setType(EnumType.Product);
 		JDFLayoutIntent loi = (JDFLayoutIntent) product.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
 		loi.setSides(EnumSides.OneSided);
-		JDFNode plateset = product.addCombined(new VString("Impositioning Interpreting Rendering ImageSetting", " "));
+		JDFNode plateset = product.addCombined(new VString("Imposition Interpreting Rendering ImageSetting", " "));
 		JDFInterpretingParams ip = (JDFInterpretingParams) plateset.addResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input);
-		ip.setPolarity(EnumPolarity.Negative);
+		ip.setPrintQuality(org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPrintQuality.Normal);
 		JDFRunList ruli = (JDFRunList) plateset.addResource(ElementName.RUNLIST, EnumUsage.Input);
 		ruli.setFileURL("file:///foo.pdf");
 		plateset.addResource(ElementName.MEDIA, EnumUsage.Input);
@@ -748,10 +749,12 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFNode cp = product.addCombined(new VString("InkZoneCalculation ConventionalPrinting", " "));
 		cp.ensureLink(xm, EnumUsage.Input, null);
 		cp.addResource(ElementName.MEDIA, EnumUsage.Input);
+		product.write2File(sm_dirTestDataTemp + "3files.jdf");
 
 		JDFToXJDF conv = new JDFToXJDF();
 		conv.setWantProduct(true);
 		conv.saveZip(sm_dirTestDataTemp + "3files.xjdf.zip", product, true);
+		assertTrue(product.isValid(EnumValidationLevel.Incomplete));
 	}
 
 	/**

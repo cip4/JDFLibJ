@@ -127,7 +127,7 @@ public class XJDFZipReader implements IStreamWriter
 	/**
 	 * 
 	 */
-	public void convert()
+	public JDFDoc convert()
 	{
 		if (theReader != null)
 		{
@@ -146,5 +146,6 @@ public class XJDFZipReader implements IStreamWriter
 				}
 			}
 		}
+		return newDoc;
 	}
 }

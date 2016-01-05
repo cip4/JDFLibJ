@@ -101,6 +101,7 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.NumberFormatter;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -575,11 +576,12 @@ public class JDFToXJDF extends PackageElementWalker
 
 				final OutputStream fos = FileUtil.getBufferedOutputStream(new File(fileName));
 				final ZipOutputStream zos = new ZipOutputStream(fos);
+				int nZip = 0;
 				for (XJDFHelper h : v)
 				{
 					try
 					{
-						String nam = h.getJobPartID() + "." + XJDFHelper.XJDF;
+						String nam = new NumberFormatter().formatInt(nZip++, 2) + "_" + h.getJobPartID() + "." + XJDFHelper.XJDF;
 						final ZipEntry ze = new ZipEntry(nam);
 						zos.putNextEntry(ze);
 						h.writeToStream(zos);
@@ -988,7 +990,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	public enum EnumProcessPartition
 	{
-		processList, processTypes, jobPartID, processUsageJobPartID
+		zip, processList, processTypes, jobPartID, processUsageJobPartID
 	}
 
 	/**

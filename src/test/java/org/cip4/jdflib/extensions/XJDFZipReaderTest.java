@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,7 +71,10 @@ package org.cip4.jdflib.extensions;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.extensions.xjdfwalker.JDFToXJDFConverterTest;
+import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.FileUtil;
 import org.junit.Test;
 
@@ -87,6 +90,19 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 		new JDFToXJDFConverterTest().testMultiNode1();
 		XJDFZipReader zr = new XJDFZipReader(new File(sm_dirTestDataTemp + "3files.xjdf.zip"));
 		FileUtil.writeFile(zr, new File(sm_dirTestDataTemp + "3files.jdf"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testConvert()
+	{
+		new JDFToXJDFConverterTest().testMultiNode1();
+		XJDFZipReader zr = new XJDFZipReader(new File(sm_dirTestDataTemp + "3files.xjdf.zip"));
+		JDFNode jdfRoot = zr.convert().getJDFRoot();
+		assertTrue(jdfRoot.isValid(EnumValidationLevel.Incomplete));
+		assertEquals(jdfRoot.numChildElements(ElementName.JDF, null), 2);
 	}
 
 }
