@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -2491,8 +2491,14 @@ public class JDFResource extends JDFElement
 			final EnumVersion v = getVersion(true);
 			if (v == null || v.getValue() >= EnumVersion.Version_1_2.getValue() && autoAgent)
 			{
-				setAgentName(JDFAudit.getStaticAgentName());
-				setAgentVersion(JDFAudit.getStaticAgentVersion());
+				if (!hasAttribute(AttributeName.AGENTNAME))
+				{
+					setAgentName(JDFAudit.getStaticAgentName());
+				}
+				if (!hasAttribute(AttributeName.AGENTVERSION))
+				{
+					setAgentVersion(JDFAudit.getStaticAgentVersion());
+				}
 			}
 		}
 		return true;
