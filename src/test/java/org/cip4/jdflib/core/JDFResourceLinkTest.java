@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1169,6 +1169,22 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	{
 		assertEquals(EnumUsage.Output, EnumUsage.Output.invert().invert());
 		assertEquals(EnumUsage.Input, EnumUsage.Output.invert());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testIsResourceLink()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		assertFalse(JDFResourceLink.isResourceLink(n));
+		JDFResource r = n.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
+		JDFResourceLink rl = n.getLink(r, null);
+		assertFalse(JDFResourceLink.isResourceLink(r));
+		assertTrue(JDFResourceLink.isResourceLink(rl));
+		JDFPartAmount pa = rl.appendAmountPool().appendPartAmount();
+		assertFalse(JDFResourceLink.isResourceLink(pa));
 	}
 
 	/**

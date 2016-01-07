@@ -125,6 +125,15 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
+	 * check whether e is a "real" resourceLink and NOT a partamount
+	 * @param e
+	 */
+	public static boolean isResourceLink(KElement e)
+	{
+		return (e instanceof JDFResourceLink) && !(e instanceof JDFPartAmount);
+	}
+
+	/**
 	 * 
 	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.JDFElement.EnumValidationLevel, boolean, int)
 	 */
