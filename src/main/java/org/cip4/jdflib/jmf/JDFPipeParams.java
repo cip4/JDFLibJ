@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -182,10 +182,9 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	{
 		final VElement v = getChildElementVector(null, null, null, true, 0, false);
 
-		for (int i = 0; i < v.size(); i++)
+		for (final KElement e : v)
 		{
-			final KElement e = v.item(i);
-			if (e instanceof JDFResourceLink)
+			if (JDFResourceLink.isResourceLink(e))
 			{
 				return (JDFResourceLink) e;
 			}
@@ -319,7 +318,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 		}
 
 		final KElement e = appendElement(linkNameLocal, null);
-		if (e instanceof JDFResourceLink)
+		if (JDFResourceLink.isResourceLink(e))
 		{
 			rl = (JDFResourceLink) e;
 			rl.setUsage(bInput ? EnumUsage.Input : EnumUsage.Output);
