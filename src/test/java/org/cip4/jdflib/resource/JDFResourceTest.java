@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -316,13 +316,19 @@ public class JDFResourceTest extends JDFTestCaseBase
 			final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
 			assertTrue(xm.hasAttribute(AttributeName.AGENTNAME) == bb);
 			assertTrue(xm.hasAttribute(AttributeName.AGENTVERSION) == bb);
-			JDFAudit.setStaticAgentName("foo");
-			xm.init();
-			if (bb)
-			{
-				assertEquals(xm.getAgentName(), "foo");
-			}
 		}
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testInitAgentName()
+	{
+		JDFAudit.setStaticAgentName("foo");
+		JDFResource.setAutoAgent(true);
+		JDFResource r = new JDFDoc(ElementName.JDF).getJDFRoot().addResource(ElementName.COMPONENT, null);
+		assertEquals(r.getAgentName(), "foo");
 	}
 
 	/**
@@ -1786,11 +1792,6 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
-	// /////////////////////////////////////////////////////////////////////////
-	// ///
-
 	/**
 	 * 
 	 */
@@ -1801,7 +1802,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 		n.setType(EnumType.Product);
 		final long t0 = System.currentTimeMillis();
 		final VElement vM = new VElement();
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 500; i++)
 		{
 			final JDFNode n2 = n.addJDFNode(EnumType.ImageSetting);
 			final JDFNode n3 = n.addJDFNode(EnumType.ConventionalPrinting);
@@ -1814,33 +1815,35 @@ public class JDFResourceTest extends JDFTestCaseBase
 			vM.add(m);
 		}
 		final long t1 = System.currentTimeMillis();
-		System.out.println(t1 - t0);
-		// final JDFMedia mNew = (JDFMedia) n.addResource("Media", null);
-		// final JDFExposedMedia xmNew = (JDFExposedMedia) n.addResource("ExposedMedia", null);
-		for (int i = 0; i < 1000; i++)
+		log.info("time: " + (t1 - t0));
+		final JDFMedia mNew = (JDFMedia) n.addResource("Media", null);
+		final JDFExposedMedia xmNew = (JDFExposedMedia) n.addResource("ExposedMedia", null);
+		assertNotNull(xmNew);
+		for (int i = 0; i < 500; i++)
 		{
-			// final JDFMedia p = (JDFMedia) mNew.addPartition(EnumPartIDKey.SheetName, "S" + i);
+			final JDFMedia p = (JDFMedia) mNew.addPartition(EnumPartIDKey.SheetName, "S" + i);
+			assertNotNull(p);
 			final JDFMedia m2 = (JDFMedia) vM.get(i);
 			final VElement vRef = m2.getLinksAndRefs(true, true);
 			assertEquals("A link and a ref", vRef.size(), 2);
 
 		}
 		final long t2 = System.currentTimeMillis();
-		System.out.println(t2 - t1);
+		log.info("time: " + (t2 - t1));
 
 		final LinkRefFinder lrf = new LinkRefFinder(true, true);
 		final VectorMap<String, KElement> vm = lrf.getMap(n);
 		final long t3 = System.currentTimeMillis();
-		System.out.println(t3 - t2);
-		for (int i = 0; i < 1000; i++)
+		log.info("time: " + (t3 - t2));
+		for (int i = 0; i < 500; i++)
 		{
-			// final JDFMedia p = (JDFMedia) mNew.addPartition(EnumPartIDKey.SheetName, "S" + i);
 			final JDFMedia m2 = (JDFMedia) vM.get(i);
 			final VElement vRef = new VElement(vm.get(m2.getID()));
 			assertNotNull(vRef);
 			assertEquals("A link and a ref", vRef.size(), 2);
-
 		}
+		final long t4 = System.currentTimeMillis();
+		log.info("time: " + (t4 - t3));
 	}
 
 	/**
