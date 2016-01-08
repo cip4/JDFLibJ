@@ -73,6 +73,7 @@ import java.util.HashSet;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
@@ -194,7 +195,7 @@ class JDFToXJDFDataCache
 		resAttribs.appendUnique(intRes.knownAttributes());
 		resAttribs.appendUnique(part.knownAttributes());
 
-		resAttribs.appendUnique("ExternalID");
+		resAttribs.appendUnique(XJDFConstants.ExternalID);
 		return resAttribs;
 	}
 

@@ -163,7 +163,7 @@ public class WalkXElement extends BaseWalker
 
 	protected void updateAttributes(KElement elem)
 	{
-		elem.renameAttribute("ExternalID", AttributeName.PRODUCTID, null, null);
+		elem.renameAttribute(XJDFConstants.ExternalID, AttributeName.PRODUCTID, null, null);
 	}
 
 	/**
