@@ -95,6 +95,7 @@ import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
@@ -281,7 +282,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	{
 		xjdf = _xjdf.cloneNewDoc();
 		String docType = xjdf.getLocalName();
-		boolean isJMF = ElementName.JMF.equals(docType) || XJDFHelper.XJMF.equals(docType);
+		boolean isJMF = ElementName.JMF.equals(docType) || XJDFConstants.XJMF.equals(docType);
 		if (jdfDoc == null)
 		{
 			String strDocType = isJMF ? ElementName.JMF : ElementName.JDF;
@@ -353,7 +354,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 */
 	public boolean canConvert(final KElement xjdf)
 	{
-		return xjdf == null ? false : XJDFHelper.XJDF.equals(xjdf.getLocalName());
+		return xjdf == null ? false : XJDFConstants.XJDF.equals(xjdf.getLocalName());
 	}
 
 	/**

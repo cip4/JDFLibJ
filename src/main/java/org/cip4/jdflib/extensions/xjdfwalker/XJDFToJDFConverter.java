@@ -77,6 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.XJDFToJDFImpl;
 import org.cip4.jdflib.ifaces.IXJDFSplit;
@@ -162,7 +163,7 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 	 */
 	protected boolean needSplit(KElement xjdf)
 	{
-		return splitter != null && xjdf != null && XJDFHelper.XJDF.equals(xjdf.getLocalName());
+		return splitter != null && xjdf != null && XJDFConstants.XJDF.equals(xjdf.getLocalName());
 	}
 
 	/**

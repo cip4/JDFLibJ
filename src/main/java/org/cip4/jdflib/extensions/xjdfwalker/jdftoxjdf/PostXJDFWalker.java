@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -705,7 +705,7 @@ class PostXJDFWalker extends BaseElementWalker
 			KElement intent = super.walk(xjdf, dummy);
 			if (intent != null)
 			{
-				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDFHelper.XJDF, 0));
+				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDFConstants.XJDF, 0));
 				SetHelper artDelResHelper = h.getCreateResourceSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
 				PartitionHelper ph = artDelResHelper.appendPartition(null, true);
 				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
@@ -753,7 +753,7 @@ class PostXJDFWalker extends BaseElementWalker
 			KElement intent = super.walk(xjdf, dummy);
 			if (intent != null)
 			{
-				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDFHelper.XJDF, 0));
+				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDFConstants.XJDF, 0));
 				SetHelper delResHelper = h.getCreateResourceSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
 				PartitionHelper ph = delResHelper.appendPartition(null, true);
 				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
@@ -1160,7 +1160,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return XJDFHelper.XJDF.equals(toCheck.getLocalName());
+			return XJDFConstants.XJDF.equals(toCheck.getLocalName());
 		}
 
 		/**

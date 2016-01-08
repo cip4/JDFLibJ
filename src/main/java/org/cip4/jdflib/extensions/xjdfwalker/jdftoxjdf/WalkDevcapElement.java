@@ -73,7 +73,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
@@ -201,7 +201,7 @@ public class WalkDevcapElement extends WalkJDFElement
 		else
 		{
 			if ("JDF".equals(vs.get(0)))
-				vs.set(0, XJDFHelper.XJDF);
+				vs.set(0, XJDFConstants.XJDF);
 			if (vs.size() > 1 && ElementName.RESOURCEPOOL.equals(vs.get(1)))
 			{
 				String className = null;
@@ -228,7 +228,7 @@ public class WalkDevcapElement extends WalkJDFElement
 				}
 			}
 			s = StringUtil.setvString(vs, "/", "/", null);
-			if (!s.startsWith("/" + XJDFHelper.XJDF))
+			if (!s.startsWith("/" + XJDFConstants.XJDF))
 				s = "/" + s;
 		}
 		return s;

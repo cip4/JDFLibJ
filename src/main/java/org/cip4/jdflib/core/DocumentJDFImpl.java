@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -86,7 +86,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import org.apache.xerces.dom.ParentNode;
-import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
@@ -1080,8 +1080,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			return new KElement(this, namespaceURI, qualifiedName, localPart);
 		}
 
-		bInJDFJMF = bInJDFJMF || jdfNSURI.equals(namespaceURI) || xjdfNSURI.equals(namespaceURI) || ElementName.JDF.equals(localPart) || XJDFHelper.XJDF.equals(localPart)
-				|| XJDFHelper.XJMF.equals(localPart) || ElementName.JMF.equals(localPart);
+		bInJDFJMF = bInJDFJMF || jdfNSURI.equals(namespaceURI) || xjdfNSURI.equals(namespaceURI) || ElementName.JDF.equals(localPart) || XJDFConstants.XJDF.equals(localPart)
+				|| XJDFConstants.XJMF.equals(localPart) || ElementName.JMF.equals(localPart);
 
 		DocumentData theData = data;
 		synchronized (theData.sm_hashCtorElementNS)

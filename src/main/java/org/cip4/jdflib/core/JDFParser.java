@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.apache.xerces.xni.NamespaceContext;
 import org.apache.xerces.xni.QName;
 import org.apache.xerces.xni.XMLLocator;
 import org.apache.xerces.xni.XNIException;
-import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.StringUtil;
@@ -334,7 +334,7 @@ public class JDFParser extends XMLParser
 	@Override
 	protected void setDocumentProperties(final KElement root, final DocumentXMLImpl memberDocument, final String namespaceURI)
 	{
-		boolean isXJDF = XJDFHelper.XJDF.equals(root.getLocalName()) || JDFElement.getSchemaURL(2, 0).equals(root.getNamespaceURI());
+		boolean isXJDF = XJDFConstants.XJDF.equals(root.getLocalName()) || JDFElement.getSchemaURL(2, 0).equals(root.getNamespaceURI());
 		boolean bJDFRoot = (root instanceof JDFNode) || (root instanceof JDFJMF);
 		if (bJDFRoot && !JDFConstants.JDFNAMESPACE.equals(namespaceURI) && !isXJDF)
 		{

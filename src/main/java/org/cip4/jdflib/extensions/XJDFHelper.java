@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -100,18 +100,19 @@ public class XJDFHelper extends BaseXJDFHelper
 	/**
 	 * 
 	 */
-	public static final String RESOURCE = "Resource";
+	public static final String RESOURCE = XJDFConstants.Resource;
 	/**
 	 * 
 	 */
-	public static final String XJDF = "XJDF";
+	public static final String XJDF = XJDFConstants.XJDF;
 	/**
 	 * 
 	 */
-	public static final String XJMF = "XJMF";
+	public static final String XJMF = XJDFConstants.XJMF;
 	/**
-	 * 
+	 * @deprecated
 	 */
+	@Deprecated
 	public static final String PARAMETER = "Parameter";
 
 	/**
@@ -125,7 +126,7 @@ public class XJDFHelper extends BaseXJDFHelper
 		if (doc == null)
 			return null;
 		KElement root = doc.getRoot();
-		return root.getLocalName().equals(XJDFHelper.XJDF) ? new XJDFHelper(root) : null;
+		return root.getLocalName().equals(XJDFConstants.XJDF) ? new XJDFHelper(root) : null;
 	}
 
 	/**
@@ -138,8 +139,8 @@ public class XJDFHelper extends BaseXJDFHelper
 	{
 		if (root == null)
 			return null;
-		if (!root.getLocalName().equals(XJDFHelper.XJDF))
-			root = root.getDeepParent(XJDFHelper.XJDF, 0);
+		if (!root.getLocalName().equals(XJDFConstants.XJDF))
+			root = root.getDeepParent(XJDFConstants.XJDF, 0);
 		return (root != null) ? new XJDFHelper(root) : null;
 	}
 
@@ -193,7 +194,7 @@ public class XJDFHelper extends BaseXJDFHelper
 	 */
 	private void newXJDF()
 	{
-		JDFDoc doc = new JDFDoc(XJDFHelper.XJDF, EnumVersion.Version_2_0);
+		JDFDoc doc = new JDFDoc(XJDFConstants.XJDF, EnumVersion.Version_2_0);
 		doc.setInitOnCreate(false);
 		theElement = doc.getRoot();
 		JDFAuditPool ap = (JDFAuditPool) theElement.getCreateElement(ElementName.AUDITPOOL);
@@ -615,7 +616,7 @@ public class XJDFHelper extends BaseXJDFHelper
 	 */
 	public SetHelper appendResourceSet(String name, EnumUsage usage)
 	{
-		return appendSet(RESOURCE, name, usage);
+		return appendSet(XJDFConstants.Resource, name, usage);
 	}
 
 	/**

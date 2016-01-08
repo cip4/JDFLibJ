@@ -282,7 +282,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testFactory()
 	{
-		XMLDoc d = new XMLDoc(XJDFHelper.XJDF, null);
+		XMLDoc d = new XMLDoc(XJDFConstants.XJDF, null);
 		assertNotNull(XJDFHelper.getHelper(d));
 		d = new XMLDoc("abc", null);
 		assertNull(XJDFHelper.getHelper(d));
@@ -295,7 +295,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testFactoryElem()
 	{
-		XMLDoc d = new XMLDoc(XJDFHelper.XJDF, null);
+		XMLDoc d = new XMLDoc(XJDFConstants.XJDF, null);
 		assertNotNull(XJDFHelper.getHelper(d.getRoot()));
 		d = new XMLDoc("abc", null);
 		assertNull(XJDFHelper.getHelper(d.getRoot()));

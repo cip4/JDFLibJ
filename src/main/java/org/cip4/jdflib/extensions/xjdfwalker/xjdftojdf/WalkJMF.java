@@ -71,7 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFJMF;
 
 /**
@@ -116,7 +116,7 @@ public class WalkJMF extends WalkXElement
 	public boolean matches(final KElement toCheck)
 	{
 		String localName = toCheck.getLocalName();
-		return super.matches(toCheck) && (ElementName.JMF.equals(localName) || XJDFHelper.XJMF.equals(localName));
+		return super.matches(toCheck) && (ElementName.JMF.equals(localName) || XJDFConstants.XJMF.equals(localName));
 	}
 
 }

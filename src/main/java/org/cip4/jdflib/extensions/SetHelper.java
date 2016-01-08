@@ -90,6 +90,11 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public static final String SET = "Set";
 
+	/**
+	 * 
+	 * @author rainerprosi
+	 *
+	 */
 	public enum EnumFamily
 	{
 		Parameter, Resource
@@ -103,7 +108,7 @@ public class SetHelper extends BaseXJDFHelper
 	/**
 	 * 
 	 */
-	public static final String RESOURCE_SET = EnumFamily.Resource.name() + "Set";
+	public static final String RESOURCE_SET = XJDFConstants.ResourceSet;
 
 	/**
 	 * @param set the set to help on

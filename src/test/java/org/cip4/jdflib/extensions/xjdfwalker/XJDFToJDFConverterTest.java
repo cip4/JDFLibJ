@@ -83,6 +83,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
@@ -121,7 +122,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		KElement c = e.appendElement(SetHelper.RESOURCE_SET);
 		c.setAttribute("Name", "Contact");
 		c.setAttribute("Usage", "Input");
-		c.appendElement(XJDFHelper.RESOURCE).appendElement(ElementName.CONTACT).appendElement(ElementName.COMPANY).setAttribute("CompanyID", "company_id");
+		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.CONTACT).appendElement(ElementName.COMPANY).setAttribute("CompanyID", "company_id");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		JDFNode root = d.getJDFRoot();
@@ -204,7 +205,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		KElement c = e.appendElement(SetHelper.RESOURCE_SET);
 		c.setAttribute("Name", "Layout");
 		c.setAttribute("Usage", "Input");
-		c.appendElement(XJDFHelper.RESOURCE).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL", "file://foo.xml");
+		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL", "file://foo.xml");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		JDFNode root = d.getJDFRoot();
@@ -405,7 +406,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	@Test
 	public void testXJMFKnownMessages()
 	{
-		KElement root = new JDFDoc(XJDFHelper.XJMF).getRoot();
+		KElement root = new JDFDoc(XJDFConstants.XJMF).getRoot();
 		root.appendElement("QueryKnownMessages");
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final JDFDoc d = xCon.convert(root);

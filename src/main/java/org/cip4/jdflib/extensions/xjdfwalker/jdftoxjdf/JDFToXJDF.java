@@ -94,6 +94,7 @@ import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.elementwalker.IWalker;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
@@ -176,7 +177,7 @@ public class JDFToXJDF extends PackageElementWalker
 	/**
 	 * the root node name if NOT typesafe
 	 */
-	public final static String rootName = XJDFHelper.XJDF;
+	public final static String rootName = XJDFConstants.XJDF;
 	/**
 	 * the root JMF name
 	 */
@@ -485,7 +486,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	private void prepareNewDoc(boolean bJMF)
 	{
-		final JDFDoc newDoc = new JDFDoc(bJMF ? (bTypeSafeMessage ? XJDFHelper.XJMF : rootJMF) : XJDFHelper.XJDF, EnumVersion.Version_2_0);
+		final JDFDoc newDoc = new JDFDoc(bJMF ? (bTypeSafeMessage ? XJDFConstants.XJMF : rootJMF) : XJDFConstants.XJDF, EnumVersion.Version_2_0);
 		newDoc.setInitOnCreate(false);
 		newRoot = newDoc.getRoot();
 		newRoot.setNamespaceURI(getSchemaURL());
@@ -518,7 +519,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	public static String getExtension()
 	{
-		return XJDFHelper.XJDF.toLowerCase();
+		return XJDFConstants.XJDF.toLowerCase();
 	}
 
 	/**
@@ -581,7 +582,7 @@ public class JDFToXJDF extends PackageElementWalker
 				{
 					try
 					{
-						String nam = new NumberFormatter().formatInt(nZip++, 2) + "_" + h.getJobPartID() + "." + XJDFHelper.XJDF;
+						String nam = new NumberFormatter().formatInt(nZip++, 2) + "_" + h.getJobPartID() + "." + XJDFConstants.XJDF;
 						final ZipEntry ze = new ZipEntry(nam);
 						zos.putNextEntry(ze);
 						h.writeToStream(zos);

@@ -74,7 +74,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -217,7 +217,7 @@ public class WalkSet extends WalkXElement
 	public boolean matches(final KElement toCheck)
 	{
 		final KElement parent = toCheck.getParentNode_KElement();
-		final boolean bL1 = parent != null && (parent.getLocalName().equals(XJDFHelper.XJDF) || parent.getLocalName().equals("Product"));
+		final boolean bL1 = parent != null && (parent.getLocalName().equals(XJDFConstants.XJDF) || parent.getLocalName().equals("Product"));
 		final String localName = toCheck.getLocalName();
 		return bL1 && super.matches(toCheck) && localName.endsWith("Set")
 				&& (toCheck.hasAttribute(AttributeName.NAME) || toCheck.getElement(StringUtil.leftStr(localName, -3)) != null);

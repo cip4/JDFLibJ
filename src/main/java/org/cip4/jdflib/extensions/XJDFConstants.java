@@ -82,6 +82,12 @@ public class XJDFConstants
 	public static final String ProcessTypes = "ProcessType"; // TODO discuss "s"
 	public static final String ProductPart = "ProductPart";
 
+	public static final String Resource = "Resource";
+	public static final String ResourceSet = "ResourceSet";
+
+	public static final String XJDF = "XJDF";
+	public static final String XJMF = "XJMF";
+
 	/**
 	 * hidden constructor
 	 */

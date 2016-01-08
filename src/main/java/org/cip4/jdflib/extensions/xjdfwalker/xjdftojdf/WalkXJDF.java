@@ -72,7 +72,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.StringUtil;
@@ -160,6 +160,6 @@ public class WalkXJDF extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return super.matches(toCheck) && XJDFHelper.XJDF.equals(toCheck.getLocalName());
+		return super.matches(toCheck) && XJDFConstants.XJDF.equals(toCheck.getLocalName());
 	}
 }

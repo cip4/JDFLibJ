@@ -72,6 +72,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
@@ -177,7 +178,7 @@ public class WalkResource extends WalkJDFElement
 				resourceClass = ((JDFResource) r2).getResourceClass();
 			}
 		}
-		String className = jdfToXJDF.isParameterSet() ? XJDFHelper.PARAMETER : XJDFHelper.RESOURCE;
+		String className = jdfToXJDF.isParameterSet() ? XJDFHelper.PARAMETER : XJDFConstants.Resource;
 		if (resourceClass == null)
 		{
 			return className;
@@ -192,7 +193,7 @@ public class WalkResource extends WalkJDFElement
 		}
 		else if (!EnumResourceClass.Parameter.equals(resourceClass))
 		{
-			return XJDFHelper.RESOURCE;
+			return XJDFConstants.Resource;
 		}
 		return className;
 	}
