@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -84,6 +84,7 @@ import org.cip4.jdflib.resource.process.JDFConvertingConfig;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.junit.Test;
+
 /**
  * 
  * @author rainerprosi
@@ -169,6 +170,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 		JDFLayout lo = (JDFLayout) layout.getCreatePartition(partMap, true).getResource();
 		JDFBinderySignature bs = (JDFBinderySignature) lo.appendElement(ElementName.BINDERYSIGNATURE);
 		JDFPosition p = JDFPosition.createPosition(bs, i, j, 2, 2);
+		assertNotNull(p);
 	}
 
 	/**
@@ -214,17 +216,17 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 
 	private void prepareLayout()
 	{
-		layout = xjdfHelper.getCreateParameterSet(ElementName.LAYOUT, EnumUsage.Output);
+		layout = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Output);
 		layout.getCreatePartition(0, true);
 	}
 
 	private void prepareSheetOptimizing()
 	{
-		SetHelper hsSheetOptim = xjdfHelper.getCreateParameterSet("SheetOptimizingParams", EnumUsage.Input);
+		SetHelper hsSheetOptim = xjdfHelper.getCreateResourceSet("SheetOptimizingParams", EnumUsage.Input);
 		PartitionHelper hpSheetOptim = hsSheetOptim.getCreatePartition(0, true);
 		sheetOptimizingParams = hpSheetOptim.getCreateResource();
 
-		SetHelper hsCC = xjdfHelper.getCreateParameterSet(ElementName.CONVERTINGCONFIG, EnumUsage.Input);
+		SetHelper hsCC = xjdfHelper.getCreateResourceSet(ElementName.CONVERTINGCONFIG, EnumUsage.Input);
 		PartitionHelper hpCC = hsCC.getCreatePartition(0, true);
 		convertingConfig = (JDFConvertingConfig) hpCC.getCreateResource();
 		convertingConfig.setSheetHeight(700 * 72 / 2.54, 700 * 72 / 2.54);

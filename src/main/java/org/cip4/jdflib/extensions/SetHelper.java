@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -206,6 +206,8 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * creates 1 partition for each entry in the map
+	 * 
 	 * @param vmap
 	 * @param addRes 
 	 * @return 
@@ -409,9 +411,47 @@ public class SetHelper extends BaseXJDFHelper
 		for (PartitionHelper ph : v)
 		{
 			if (ph.matches(vmap))
+			{
 				return ph;
+			}
 		}
 		return null;
+	}
+
+	/**
+	 * @param vmap
+	 * @return
+	 */
+	public Vector<PartitionHelper> getPartitions(VJDFAttributeMap vmap)
+	{
+		Vector<PartitionHelper> v = getPartitions();
+		Vector<PartitionHelper> vRet = new Vector<PartitionHelper>();
+		for (PartitionHelper ph : v)
+		{
+			if (ph.matches(vmap))
+			{
+				vRet.add(ph);
+			}
+		}
+		return vRet;
+	}
+
+	/**
+	 * @param map
+	 * @return
+	 */
+	public Vector<PartitionHelper> getPartitions(JDFAttributeMap map)
+	{
+		Vector<PartitionHelper> v = getPartitions();
+		Vector<PartitionHelper> vRet = new Vector<PartitionHelper>();
+		for (PartitionHelper ph : v)
+		{
+			if (ph.matches(map))
+			{
+				vRet.add(ph);
+			}
+		}
+		return vRet;
 	}
 
 	/**

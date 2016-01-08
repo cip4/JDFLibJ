@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,6 +72,8 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.junit.Test;
 
 /**
@@ -121,6 +123,48 @@ public class SetHelperTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testGetPartitionMap()
+	{
+		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		assertEquals(sh.getName(), "Media");
+		PartitionHelper ph1 = sh.getPartition(new JDFAttributeMap("SheetName", "S1"));
+		PartitionHelper ph2 = sh.getCreatePartition(new JDFAttributeMap("SheetName", "S1"), true);
+		assertNotSame(ph2, ph1);
+		PartitionHelper ph3 = sh.getPartition(new JDFAttributeMap("SheetName", "S1"));
+		assertNotNull(ph3);
+		assertEquals(ph2, ph3);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetPartitionsMap()
+	{
+		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		assertEquals(sh.getName(), "Media");
+		sh.getCreatePartition(new JDFAttributeMap("SheetName", "S1"), true);
+		sh.getCreatePartition(new JDFAttributeMap("SheetName", "S2"), true);
+		assertEquals(sh.getPartitions(new JDFAttributeMap("SheetName", "S2")).size(), 2);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetPartitionsVMap()
+	{
+		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		assertEquals(sh.getName(), "Media");
+		sh.getCreatePartition(new JDFAttributeMap("SheetName", "S1"), true);
+		sh.getCreatePartition(new JDFAttributeMap("SheetName", "S2"), true);
+		assertEquals(sh.getPartitions(new VJDFAttributeMap(new JDFAttributeMap("SheetName", "S2"))).size(), 2);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testGetPartitionByID()
 	{
 		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
@@ -136,7 +180,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetCreatePartition()
 	{
-		SetHelper sh = new XJDFHelper(root).getCreateParameterSet("FoldingParams", EnumUsage.Input);
+		SetHelper sh = new XJDFHelper(root).getCreateResourceSet("FoldingParams", EnumUsage.Input);
 		assertEquals(sh.getName(), "FoldingParams");
 		assertNotNull(sh.getCreatePartition(0, false));
 		assertNotNull(sh.getPartition(-1));
