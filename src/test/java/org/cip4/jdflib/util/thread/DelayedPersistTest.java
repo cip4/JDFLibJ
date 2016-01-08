@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -130,6 +130,18 @@ public class DelayedPersistTest extends JDFTestCaseBase
 		DelayedPersist.getDelayedPersist().queue(new TestRunPersist(), 1555);
 		ThreadUtil.sleep(2000);
 		assertTrue(file.exists());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testNullPersist()
+	{
+		DelayedPersist.getDelayedPersist().queueRunnable((Runnable) null, 555);
+		ThreadUtil.sleep(2000);
+		DelayedPersist.getDelayedPersist().queue((TestRunPersist) null, 555);
+		ThreadUtil.sleep(2000);
 	}
 
 	/**

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -217,7 +217,7 @@ public class DelayedPersist extends Thread
 	 */
 	public void queueRunnable(Runnable r, long deltaTime)
 	{
-		queue(new RunnablePersist(r), deltaTime);
+		queue(r == null ? null : new RunnablePersist(r), deltaTime);
 	}
 
 	/**
@@ -227,6 +227,12 @@ public class DelayedPersist extends Thread
 	 */
 	public void queue(IPersistable persistable, long deltaTime)
 	{
+		if (persistable == null)
+		{
+			log.warn("Cannot queue null IPersistable");
+			return;
+		}
+
 		synchronized (persistQueue)
 		{
 			MyLong l = persistQueue.get(persistable);
