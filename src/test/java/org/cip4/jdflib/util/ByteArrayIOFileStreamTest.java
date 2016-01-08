@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,8 +93,6 @@ import org.junit.Test;
  */
 public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 {
-
-	// /////////////////////////////////////////////////////////////////////////
 	/**
 	 * 
 	 */
@@ -194,6 +192,8 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	{
 		File f = new File(sm_dirTestDataTemp + "bios.fil");
 		f.delete();
+		ThreadUtil.sleep(123);
+		assertFalse(f.exists());
 		ByteArrayIOStream ios = new ByteArrayIOFileStream(f, 200, true);
 		InputStream is = ios.getInputStream();
 		assertEquals(is.available(), 0);
@@ -236,7 +236,8 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	public void testInReadMulti() throws Exception
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOFileStream(2222);
-		for (int i = 0; i < 50000; i++)
+		int len = 10000;
+		for (int i = 0; i < len; i++)
 		{
 			ios.write(i);
 		}
@@ -251,7 +252,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 			assertEquals(jj, i);
 			n++;
 		}
-		assertEquals(n, 50000);
+		assertEquals(n, len);
 		ios.close();
 	}
 
@@ -262,7 +263,8 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	public void testInReadMulti2() throws Exception
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOFileStream(2222);
-		for (int i = 0; i < 50000; i++)
+		int len = 10000;
+		for (int i = 0; i < len; i++)
 		{
 			ios.write(i);
 		}
@@ -277,7 +279,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 			assertEquals(jj, i);
 			n++;
 		}
-		assertEquals(n, 50000);
+		assertEquals(n, len);
 		ios.close();
 	}
 
@@ -288,7 +290,8 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	public void testGetBufferedInputStream() throws Exception
 	{
 		final ByteArrayIOStream ios = new ByteArrayIOFileStream(444);
-		for (int i = 0; i < 50000; i++)
+		int len = 10000;
+		for (int i = 0; i < len; i++)
 		{
 			ios.write(i);
 		}
@@ -303,7 +306,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 			assertEquals(jj, i);
 			n++;
 		}
-		assertEquals(n, 50000);
+		assertEquals(n, len);
 		ios.close();
 	}
 
