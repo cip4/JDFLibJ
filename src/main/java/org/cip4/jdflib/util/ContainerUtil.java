@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -226,11 +226,12 @@ public class ContainerUtil
 
 	/**
 	 * return a matching element from a collection of IMatches
+	 * 
 	 * @param <a> the data type
 	 * @param c the collection to search
 	 * @param obj the search key for matches
 	 * @param iSkip which one to grab, may be negative in which case we count -1=last, -2=second last...
-	 * @return the matching <a>
+	 * @return the matching {@link IMatches}
 	 */
 	public static <a> IMatches getMatch(final Collection<? extends IMatches> c, final a obj, int iSkip)
 	{
@@ -269,6 +270,50 @@ public class ContainerUtil
 
 	/**
 	 * return a matching element from a collection of IMatches
+	 * 
+	 * @param <a> the data type
+	 * @param match the matcher
+	 * @param c the {@link Collection}
+	 * @param iSkip which one to grab, may be negative in which case we count -1=last, -2=second last...
+	 * @return the matching <a>
+	 */
+	public static <a> a getMatch(IMatches match, final Collection<a> c, int iSkip)
+	{
+		if (c == null)
+		{
+			return null;
+		}
+
+		if (iSkip < 0)
+		{
+			final Vector<a> v = getMatches(match, c);
+			if (v == null)
+			{
+				return null;
+			}
+
+			iSkip = v.size() + iSkip;
+			if (iSkip < 0)
+			{
+				return null;
+			}
+
+			return v.get(iSkip);
+		}
+
+		for (a b : c)
+		{
+			if (match.matches(b) && iSkip-- <= 0)
+			{
+				return b;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * return a matching element from a collection of IMatches
 	 * @param <a> the data type
 	 * @param c the collection to search
 	 * @param obj the search key for matches
@@ -286,6 +331,31 @@ public class ContainerUtil
 			if (m.matches(obj))
 			{
 				v.add(m);
+			}
+		}
+		return v.size() == 0 ? null : v;
+	}
+
+	/**
+	 * return a matching element from a collection 
+	 * 
+	 * @param <a> the data type
+	 * @param c the collection to search
+	 * @param obj the matches
+	 * @return Vector of matching a
+	 */
+	public static <a> Vector<a> getMatches(IMatches m, final Collection<a> c)
+	{
+		if (c == null)
+		{
+			return null;
+		}
+		final Vector<a> v = new Vector<a>();
+		for (a b : c)
+		{
+			if (m.matches(b))
+			{
+				v.add(b);
 			}
 		}
 		return v.size() == 0 ? null : v;

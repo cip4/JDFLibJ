@@ -5557,7 +5557,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		final EnumVersion eVer = getVersion(true);
 
 		// if version>=1.0 or no direct element is there try the resource
-		if (eVer != null && eVer.getValue() >= EnumVersion.Version_1_3.getValue() || (nici == null))
+		if (eVer == null || eVer.getValue() >= EnumVersion.Version_1_3.getValue() || (nici == null))
 		{
 			final JDFResourceLinkPool rlp = getResourceLinkPool();
 			if (rlp != null)
@@ -5630,9 +5630,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		return null;
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// ///////
-
 	/**
 	 * gets the existing NodeInfo or creates a new one if none exists this method will check if a NodeInfo exists,
 	 * 
@@ -5656,9 +5653,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		if (nici == null)
 		{
 			final EnumVersion eVer = getVersion(true);
-			if (eVer != null && eVer.getValue() >= EnumVersion.Version_1_3.getValue())
+			if (eVer == null || eVer.getValue() >= EnumVersion.Version_1_3.getValue())
 			{
-				nici = addResource(s, null, EnumUsage.Input, null, this, null, null);
+				nici = addResource(s, EnumUsage.Input);
 			}
 			else
 			{

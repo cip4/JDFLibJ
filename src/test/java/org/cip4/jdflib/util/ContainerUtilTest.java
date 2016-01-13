@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -108,6 +108,8 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		@Override
 		public boolean matches(final Object subset)
 		{
+			if (subset instanceof Integer)
+				return ((Integer) subset).intValue() == i;
 			return ((SimpleMatch) subset).i == i;
 		}
 
@@ -218,6 +220,22 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		final SimpleMatch simpleMatch1 = new SimpleMatch(1);
 		assertEquals(ContainerUtil.getMatches(v, simpleMatch1).size(), 5);
 		assertEquals(ContainerUtil.getMatch(v, simpleMatch1, 0), simpleMatch1);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetMatchInverted()
+	{
+		final Vector<Integer> v = new Vector<Integer>();
+		for (int i = 0; i < 10; i++)
+		{
+			v.add(Integer.valueOf(i % 2));
+		}
+		final SimpleMatch simpleMatch1 = new SimpleMatch(1);
+		assertEquals(ContainerUtil.getMatches(simpleMatch1, v).size(), 5);
+		assertEquals(ContainerUtil.getMatch(simpleMatch1, v, 0), Integer.valueOf(1));
 	}
 
 	/**

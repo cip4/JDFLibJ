@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,6 +78,7 @@ package org.cip4.jdflib.resource;
 import java.util.Iterator;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VString;
@@ -120,7 +121,6 @@ public class JDFPartTest extends JDFTestCaseBase
 		part = (JDFPart) doc.getRoot();
 	}
 
-	// //////////////////////////////////////////////////////////////
 	/**
 	 * 
 	 */
@@ -134,6 +134,17 @@ public class JDFPartTest extends JDFTestCaseBase
 			final String name = (it.next()).getName();
 			assertTrue("name missing in Part: " + name, knownAtts.contains(name));
 		}
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testEnumSide()
+	{
+		assertEquals(EnumSide.Front, EnumSide.getEnum("Front"));
+		assertEquals(EnumSide.Back, EnumSide.getEnum("Back"));
+		assertNull(EnumSide.getEnum("foo"));
 	}
 
 	/**
