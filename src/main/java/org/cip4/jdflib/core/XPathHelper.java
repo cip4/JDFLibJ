@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -1011,6 +1011,15 @@ class XPathHelper
 				return new XPathHelper(r).getXPathElementVectorInternal(nextPath, maxSize, true);
 			}
 			throw new IllegalArgumentException("Invalid root node name: " + path);
+		}
+
+		/**
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString()
+		{
+			return "ElementVectorGetter " + XPathHelper.this.toString();
 		}
 	}
 

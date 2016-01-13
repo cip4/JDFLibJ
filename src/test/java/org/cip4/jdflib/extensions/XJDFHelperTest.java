@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,6 +77,8 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.FileUtil;
 import org.junit.Test;
@@ -170,6 +172,25 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		assertEquals(theHelper.getSet(ElementName.NODEINFO, "b"), setb);
 		assertNull(theHelper.getSet(ElementName.NODEINFO, "c"));
 		assertNull(theHelper.getSet(ElementName.NODEINFO, null));
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	@Test
+	public void testGetPartMapVector()
+	{
+		SetHelper sh = theHelper.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+		VJDFAttributeMap v = new VJDFAttributeMap();
+		JDFAttributeMap map1 = new JDFAttributeMap("SheetName", "S1");
+		v.add(map1);
+		sh.getCreatePartition(map1, true);
+		JDFAttributeMap map2 = new JDFAttributeMap("SheetName", "S2");
+		v.add(map2);
+		sh.getCreatePartition(map2, true);
+		VJDFAttributeMap vp = theHelper.getPartMapVector();
+		assertEquals(vp, v);
 	}
 
 	/**

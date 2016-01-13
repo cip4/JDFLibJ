@@ -440,15 +440,15 @@ public class WalkJDFElement extends WalkElement
 	{
 		JDFAttributeMap partMap = pa.getPartMap();
 		VJDFAttributeMap partMapVector = pa.getPartMapVector();
-		if (partMapVector != null)
-		{
-			partMapVector.removeKey(AttributeName.CONDITION);
-		}
-		JDFPartAmount paNew = newAP.getCreatePartAmount(partMapVector);
 		if (partMap != null && jdfToXJDF.isExplicitWaste())
 		{
 			String condition = partMap.get(AttributeName.CONDITION);
 			boolean bWaste = StringUtil.getNonEmpty(condition) != null && !"Good".equals(condition);
+			if (partMapVector != null)
+			{
+				partMapVector.removeKey(AttributeName.CONDITION);
+			}
+			JDFPartAmount paNew = newAP.getCreatePartAmount(partMapVector);
 			JDFAttributeMap map = pa.getAttributeMap();
 			if (bWaste)
 			{
@@ -464,6 +464,11 @@ public class WalkJDFElement extends WalkElement
 			{
 				paNew.setAttributes(map);
 			}
+		}
+		else
+		{
+			JDFPartAmount paNew = newAP.getCreatePartAmount(partMapVector);
+			paNew.setAttributes(pa);
 		}
 	}
 

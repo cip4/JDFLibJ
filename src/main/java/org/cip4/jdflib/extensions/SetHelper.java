@@ -568,4 +568,20 @@ public class SetHelper extends BaseXJDFHelper
 			}
 		}
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public VJDFAttributeMap getPartMapVector()
+	{
+		Vector<PartitionHelper> vph = getPartitions();
+		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		for (PartitionHelper ph : vph)
+		{
+			vMap.addAll(ph.getPartMapVector());
+		}
+		vMap.unify();
+		return vMap;
+	}
 }

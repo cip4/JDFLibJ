@@ -706,6 +706,25 @@ public class XJDFHelper extends BaseXJDFHelper
 
 	/**
 	 * 
+	 * @return the category
+	 */
+	public String getCategory()
+	{
+		return getXPathValue("@Category");
+	}
+
+	/**
+	 * 
+	 * @return the category
+	 */
+	public VJDFAttributeMap getPartMapVector()
+	{
+		SetHelper sh = getSet(ElementName.NODEINFO, EnumUsage.Input, null);
+		return sh == null ? null : sh.getPartMapVector();
+	}
+
+	/**
+	 * 
 	 * @return the implied JDF/@Type - if only one type in @Types, then we use said @Types, else ProcessGroup
 	 */
 	public EnumType getType()

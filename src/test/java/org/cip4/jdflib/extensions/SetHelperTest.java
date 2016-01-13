@@ -152,6 +152,26 @@ public class SetHelperTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testGetPartMapVector()
+	{
+		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		assertEquals(sh.getName(), "Media");
+		VJDFAttributeMap v = new VJDFAttributeMap();
+		JDFAttributeMap map1 = new JDFAttributeMap("SheetName", "S1");
+		v.add(map1);
+		sh.getCreatePartition(map1, true);
+		JDFAttributeMap map2 = new JDFAttributeMap("SheetName", "S2");
+		v.add(map2);
+		v.add(new JDFAttributeMap());
+		sh.getCreatePartition(map2, true);
+		VJDFAttributeMap vp = sh.getPartMapVector();
+		assertEquals(vp, v);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testGetPartitionsVMap()
 	{
 		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
