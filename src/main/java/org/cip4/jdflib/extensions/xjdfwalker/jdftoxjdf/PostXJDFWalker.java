@@ -1172,8 +1172,11 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public KElement walk(KElement xjdf, KElement dummy)
 		{
-			reorderSets((JDFElement) xjdf);
-			reorderProductList(xjdf);
+			if (!retainAll)
+			{
+				reorderSets((JDFElement) xjdf);
+				reorderProductList(xjdf);
+			}
 			super.walk(xjdf, dummy);
 			return xjdf;
 		}

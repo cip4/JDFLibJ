@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -307,6 +307,8 @@ public class JDFDurationTest extends TestCase
 		assertEquals(JDFDuration.createDuration("25h").getDuration(), 60 * 60 * 25);
 		assertEquals(JDFDuration.createDuration("p25h").getDuration(), 60 * 60 * 25);
 		assertEquals(JDFDuration.createDuration("pt25h").getDuration(), 60 * 60 * 25);
+		assertEquals(JDFDuration.createDuration("pt30m").getDuration(), 30 * 60);
+		assertEquals(JDFDuration.createDuration("pt3h").getDuration(), 3 * 60 * 60);
 		assertEquals(JDFDuration.createDuration("240h").getDuration(), 60 * 60 * 240);
 		assertNull(JDFDuration.createDuration("foo"));
 	}
