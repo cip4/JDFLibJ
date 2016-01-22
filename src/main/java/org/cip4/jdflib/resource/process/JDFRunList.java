@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -94,6 +94,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFPageList;
@@ -1691,7 +1692,11 @@ public class JDFRunList extends JDFAutoRunList
 	@Override
 	public JDFIntegerRangeList getPages()
 	{
-		final JDFIntegerRangeList irl = super.getPages();
+		JDFIntegerRangeList irl = super.getPages();
+		if (irl == null)
+		{
+			irl = new JDFIntegerRangeList(new JDFIntegerRange(0, -1));
+		}
 		final int nPage = super.getNPage();
 		if (nPage > 0)
 		{

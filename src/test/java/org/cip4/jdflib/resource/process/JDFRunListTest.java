@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -353,6 +353,19 @@ public class JDFRunListTest extends JDFTestCaseBase
 	{
 		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
 		rlp.setPages(new JDFIntegerRangeList("0 ~ -1"));
+		rlp.setNPage(7);
+		final JDFIntegerRangeList pages = rlp.getPages();
+		assertEquals(pages.getDef(), 7);
+		assertEquals(pages.getElementCount(), 7);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public final void testGetPagesNull() throws Exception
+	{
+		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
 		rlp.setNPage(7);
 		final JDFIntegerRangeList pages = rlp.getPages();
 		assertEquals(pages.getDef(), 7);
