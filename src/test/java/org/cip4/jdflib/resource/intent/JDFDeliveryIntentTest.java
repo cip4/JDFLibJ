@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
@@ -118,6 +119,46 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testGetDropItemForComponentPart()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
+		JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		JDFComponent c1 = (JDFComponent) c.addPartition(EnumPartIDKey.SheetName, "S1");
+		JDFComponent c2 = (JDFComponent) c.addPartition(EnumPartIDKey.SheetName, "S2");
+		JDFDropIntent drop = di.appendDropIntent();
+		assertNull(drop.getDropItemWithComponent(c1));
+		JDFDropItemIntent dropItemIntent = drop.appendDropItemIntent();
+		dropItemIntent.refComponent(c1);
+		assertEquals(dropItemIntent, drop.getDropItemWithComponent(c1));
+		assertNull(drop.getDropItemWithComponent(c2));
+		assertNull(drop.getDropItemWithComponent(c));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetDropDropItemForComponentPart()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
+		JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		JDFComponent c1 = (JDFComponent) c.addPartition(EnumPartIDKey.SheetName, "S1");
+		JDFComponent c2 = (JDFComponent) c.addPartition(EnumPartIDKey.SheetName, "S2");
+		JDFDropIntent drop = di.appendDropIntent();
+		assertNull(di.getDropItemWithComponent(c1));
+		JDFDropItemIntent dropItemIntent = drop.appendDropItemIntent();
+		dropItemIntent.refComponent(c1);
+		assertEquals(dropItemIntent, di.getDropItemWithComponent(c1));
+		assertNull(di.getDropItemWithComponent(c2));
+		assertNull(di.getDropItemWithComponent(c));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testGetCreateDropItemForComponent()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -127,6 +168,27 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 		assertNull(drop.getDropItemWithComponent(c));
 		JDFDropItemIntent dropItemIntent = drop.getCreateDropItemWithComponent(c);
 		assertEquals(dropItemIntent, drop.getDropItemWithComponent(c));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetCreateDropItemForComponentPart()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
+		JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		JDFComponent c1 = (JDFComponent) c.addPartition(EnumPartIDKey.SheetName, "S1");
+		JDFComponent c2 = (JDFComponent) c.addPartition(EnumPartIDKey.SheetName, "S2");
+		JDFDropIntent drop = di.appendDropIntent();
+		assertNull(drop.getDropItemWithComponent(c1));
+		JDFDropItemIntent dropItemIntent = drop.getCreateDropItemWithComponent(c1);
+		assertEquals(dropItemIntent, drop.getDropItemWithComponent(c1));
+		assertNull(drop.getDropItemWithComponent(c));
+		assertNull(drop.getDropItemWithComponent(c2));
+		dropItemIntent = drop.getCreateDropItemWithComponent(c2);
+		assertEquals(dropItemIntent, drop.getDropItemWithComponent(c2));
 	}
 
 	/**

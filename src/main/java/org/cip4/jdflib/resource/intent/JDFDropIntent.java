@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDropIntent;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFDrop;
@@ -93,6 +94,7 @@ import org.cip4.jdflib.span.JDFNameSpan;
 import org.cip4.jdflib.span.JDFSpanSurplusHandling;
 import org.cip4.jdflib.span.JDFSpanTransfer;
 import org.cip4.jdflib.span.JDFStringSpan;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
@@ -291,7 +293,8 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	}
 
 	/**
-	 * get the dropItemIntent for a given component
+	 * get the dropItemIntent for a given component 
+	 * also checks partition
 	 * @param c
 	 * @return
 	 */
@@ -299,12 +302,15 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	{
 		Vector<JDFDropItemIntent> v = getChildrenByClass(JDFDropItemIntent.class, false, 0);
 		if (v == null || c == null || StringUtil.getNonEmpty(c.getID()) == null)
+		{
 			return null;
+		}
 		String cID = c.getID();
+		JDFAttributeMap partMap = c.getPartMap();
 		for (JDFDropItemIntent dii : v)
 		{
 			JDFComponent cdii = dii.getComponent();
-			if (cdii != null && cID.equals(cdii.getID()))
+			if (cdii != null && cID.equals(cdii.getID()) && ContainerUtil.equals(partMap, cdii.getPartMap()))
 			{
 				return dii;
 			}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,10 +79,12 @@
 
 package org.cip4.jdflib.resource.intent;
 
+import java.util.Collection;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDeliveryIntent;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDrop;
 import org.w3c.dom.DOMException;
@@ -162,6 +164,29 @@ public class JDFDeliveryIntent extends JDFAutoDeliveryIntent
 		}
 
 		return done;
+	}
+
+	/**
+	 * get the dropItemIntent for a given component 
+	 * also checks partition
+	 * @param c
+	 * @return
+	 */
+	public JDFDropItemIntent getDropItemWithComponent(JDFComponent c)
+	{
+		Collection<JDFDropIntent> dis = getAllDropIntent();
+		if (dis != null)
+		{
+			for (JDFDropIntent di : dis)
+			{
+				JDFDropItemIntent dii = di.getDropItemWithComponent(c);
+				if (dii != null)
+				{
+					return dii;
+				}
+			}
+		}
+		return null;
 	}
 
 }
