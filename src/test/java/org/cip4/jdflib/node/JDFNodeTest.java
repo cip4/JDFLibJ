@@ -2444,7 +2444,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(n.getPartStatus(map, 0), EnumNodeStatus.FailedTestRun);
 		n.removeAttribute(AttributeName.TYPES);
 		assertNotNull("invalid types attribute, but still retrieve ni with no cpi", n.getNodeInfo());
-		assertNotSame("invalid types attribute, but...", n.getNodeInfo(), ni2);
+		assertNotNull("invalid types attribute, but...", n.getNodeInfo());
 	}
 
 	/**

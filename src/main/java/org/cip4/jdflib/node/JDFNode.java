@@ -5572,7 +5572,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 					{
 						final JDFResourceLink rl = (JDFResourceLink) v.elementAt(i);
 						final JDFIntegerList combinedProcessIndex = rl.getCombinedProcessIndex();
-						if (combinedProcessIndex == null || (types != null && combinedProcessIndex.size() == types.size()))
+						if (combinedProcessIndex == null || types == null || (types != null && combinedProcessIndex.size() == types.size()))
 						{
 							// in case of multiple parts - grab root - else potential performance hit
 							nici = rl.getPart(1) == null ? rl.getTarget() : rl.getLinkRoot();

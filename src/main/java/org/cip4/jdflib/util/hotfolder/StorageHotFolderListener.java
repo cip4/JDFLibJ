@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -195,6 +195,7 @@ class StorageHotFolderListener implements HotFolderListener
 				}
 				else
 				{
+					log.info("Copied good file: " + storedFile.getName() + " to " + okStorage);
 					copied.setLastModified(System.currentTimeMillis());
 				}
 				cleanup(bOK);
@@ -220,6 +221,7 @@ class StorageHotFolderListener implements HotFolderListener
 				}
 				else
 				{
+					log.warn("Copied error file: " + storedFile.getName() + " to " + errorStorage);
 					copied.setLastModified(System.currentTimeMillis());
 				}
 

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -104,7 +104,7 @@ public class HotFolder implements Runnable
 	/**
 	 * the default time time in milliseconds to wait for stabilization
 	 */
-	public static int defaultStabilizeTime = 2222; // time between reads in milliseconds -
+	private static int defaultStabilizeTime = 2222; // time between reads in milliseconds -
 	/**
 	 * the time in milliseconds to wait for stabilization
 	 */
@@ -306,9 +306,12 @@ public class HotFolder implements Runnable
 					}
 					Vector<File> vf = ContainerUtil.toVector(files);
 					for (int i = vf.size() - 1; i >= 0; i--)
+					{
 						if (vf.get(i) == null)
+						{
 							vf.remove(i);
-
+						}
+					}
 					files = vf.toArray(new File[0]);
 					files = new FileSorter(files).sortLastModified(false);
 
