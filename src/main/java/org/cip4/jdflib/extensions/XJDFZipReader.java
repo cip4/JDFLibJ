@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.zip.ZipReader;
 
 /**
@@ -89,6 +90,8 @@ import org.cip4.jdflib.util.zip.ZipReader;
  */
 public class XJDFZipReader implements IStreamWriter
 {
+	private String path;
+
 	/**
 	 * 
 	 */
@@ -98,6 +101,15 @@ public class XJDFZipReader implements IStreamWriter
 		theReader = ZipReader.getZipReader(inStream);
 		theReader.setCaseSensitive(false);
 		newDoc = null;
+		path = null;
+	}
+
+	/**
+	 * @param path the path to set
+	 */
+	public void setPath(String path)
+	{
+		this.path = UrlUtil.cleanDots(path);
 	}
 
 	/**
@@ -118,10 +130,13 @@ public class XJDFZipReader implements IStreamWriter
 	public void writeStream(OutputStream os) throws IOException
 	{
 		if (newDoc == null)
+		{
 			convert();
+		}
 		if (newDoc != null)
+		{
 			newDoc.write2Stream(os, 2, false);
-
+		}
 	}
 
 	/**
@@ -132,9 +147,10 @@ public class XJDFZipReader implements IStreamWriter
 		if (theReader != null)
 		{
 			XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+			String pathExpression = UrlUtil.getURLWithDirectory(path, "*.xjdf");
 			for (int i = 0; true; i++)
 			{
-				ZipEntry ze = theReader.getMatchingEntry("*.xjdf", i);
+				ZipEntry ze = theReader.getMatchingEntry(pathExpression, i);
 				if (ze == null)
 				{
 					break;
@@ -147,5 +163,14 @@ public class XJDFZipReader implements IStreamWriter
 			}
 		}
 		return newDoc;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "XJDFZipReader [path=" + path + ", newDoc=" + newDoc + "]";
 	}
 }

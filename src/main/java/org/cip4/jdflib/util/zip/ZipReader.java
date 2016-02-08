@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -462,7 +462,7 @@ public class ZipReader
 	/**
 	 * get an entry by name - note that we need to buffer the entire file for this random access method
 	 * 
-	 * @param expr the regexp to match - simplified regexp is accepted
+	 * @param expr the regexp of the path (including directories) to match - simplified regexp is accepted
 	 * @param iSkip how many to skip - default= 0
 	 * @return
 	 */
