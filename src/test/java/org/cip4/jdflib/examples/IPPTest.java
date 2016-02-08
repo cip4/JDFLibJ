@@ -207,9 +207,9 @@ public class IPPTest extends JDFTestCaseBase
 		mBody.setDescriptiveName("Body Paper");
 
 		digiParams.setSides(EnumSides.TwoSided);
-		JDFDigitalPrintingParams dpCover = (JDFDigitalPrintingParams) med.addPartition(EnumPartIDKey.RunIndex, coverIndex);
+		JDFDigitalPrintingParams dpCover = (JDFDigitalPrintingParams) digiParams.addPartition(EnumPartIDKey.RunIndex, coverIndex);
 		dpCover.refMedia(mCover);
-		JDFDigitalPrintingParams dpBody = (JDFDigitalPrintingParams) med.addPartition(EnumPartIDKey.RunIndex, bodyIndex);
+		JDFDigitalPrintingParams dpBody = (JDFDigitalPrintingParams) digiParams.addPartition(EnumPartIDKey.RunIndex, bodyIndex);
 		dpBody.refMedia(mBody);
 
 		ruli.addPDF("file://host/dir/name.pdf", 0, -1);
