@@ -86,6 +86,7 @@ import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Test;
 import org.w3c.dom.Attr;
@@ -109,21 +110,7 @@ public class XMLDocTest extends JDFTestCaseBase
 
 		protected void waitComplete()
 		{
-			if (mutex == null)
-			{
-				return;
-			}
-			synchronized (mutex)
-			{
-				try
-				{
-					mutex.wait();
-				}
-				catch (final InterruptedException x)
-				{
-					// nop
-				}
-			}
+			ThreadUtil.wait(mutex, 0);
 		}
 
 		protected abstract void runMyThread();
@@ -139,9 +126,9 @@ public class XMLDocTest extends JDFTestCaseBase
 			try
 			{
 				mutex = new Object();
-				System.out.println("Starting " + iLoop);
+				log.info("Starting " + iLoop);
 				runMyThread();
-				System.out.println("Completing " + iLoop);
+				log.info("Completing " + iLoop);
 			}
 			catch (final Exception e)
 			{

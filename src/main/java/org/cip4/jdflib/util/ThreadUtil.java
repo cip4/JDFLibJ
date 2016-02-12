@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -154,6 +154,7 @@ public class ThreadUtil
 		/**
 		 * @see java.lang.Runnable#run()
 		 */
+		@Override
 		public final void run()
 		{
 			theObject = handle();
@@ -185,7 +186,9 @@ public class ThreadUtil
 	public static boolean sleep(final int millis)
 	{
 		if (millis <= 0)
+		{
 			return true;
+		}
 		try
 		{
 			Thread.sleep(millis);
@@ -206,13 +209,19 @@ public class ThreadUtil
 	public static boolean join(final Thread thread, int millis)
 	{
 		if (thread == null)
+		{
 			return true;
+		}
 		try
 		{
 			if (millis <= 0)
+			{
 				thread.join();
+			}
 			else
+			{
 				thread.join(millis);
+			}
 			return true;
 		}
 		catch (final InterruptedException x)
@@ -230,13 +239,13 @@ public class ThreadUtil
 	 */
 	public static boolean wait(final Object mutex, int millis)
 	{
-		if (mutex == null)
-		{
-			return false;
-		}
 		if (millis < 0)
 		{
 			millis = 0;
+		}
+		if (mutex == null)
+		{
+			return false;
 		}
 		try
 		{
