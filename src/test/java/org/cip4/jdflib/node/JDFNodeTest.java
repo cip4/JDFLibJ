@@ -1183,31 +1183,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 			//
 		}
 		assertTrue(cat);
-		cat = false;
-		try
-		{
-			nodeVer3.appendNodeInfo();
-		}
-		catch (final JDFException e)
-		{
-			// nodeinfo has a cardinality of 1 in V1.1
-			// if we try to append another NodeInfo
-			cat = true;
-		}
-		assertTrue(cat);
-		cat = false;
-		try
-		{
-			nodeVer3.appendNodeInfo();
-		}
-		catch (final JDFException e)
-		{
-			// nodeinfo has a cardinality of 1 in V1.1
-			// if we try to append another NodeInfo
-			cat = true;
-		}
 
-		assertTrue(cat);
 		assertNotNull(nodeVer1.getNodeInfo());
 		assertNotNull(nodeVer3.getNodeInfo());
 
@@ -1662,15 +1638,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode node = doc.getJDFRoot();
 		final JDFNodeInfo n = node.appendNodeInfo();
-		try
-		{
-			node.appendNodeInfo();
-			fail("one ni is enough");
-		}
-		catch (final JDFException ex)
-		{
-			// nop
-		}
+
 		node.setType("ProcessGroup", true);
 		final JDFNode node2 = node.addProcessGroup(null);
 		final JDFNode node3 = node2.addJDFNode(JDFNode.EnumType.CaseMaking);
@@ -1717,16 +1685,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode node = doc.getJDFRoot();
 		final JDFNodeInfo n = node.appendNodeInfo();
-		try
-		{
-			node.appendNodeInfo();
-			fail("one ni is enough");
-		}
-		catch (final JDFException ex)
-		{
-			// nop
-		}
-		// System.out.println(n.version());
+
 		assertTrue("nodeinfo is resource", n.getResourceClass() == EnumResourceClass.Parameter);
 		doc.write2File(sm_dirTestDataTemp + "createNodeInfoTest.xml", 0, true);
 		final JDFCustomerInfo myCustInfo = node.getCreateCustomerInfo();
@@ -2435,7 +2394,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFAttributeMap map = new JDFAttributeMap("SheetName", "S1");
 		n.setPartStatus(map, EnumNodeStatus.FailedTestRun, null);
 		assertNotNull(n.getNodeInfo());
-		assertNotSame(ni2, n.getNodeInfo());
+		assertEquals(ni2, n.getNodeInfo());
 		assertEquals(ni2, n.getNodeInfo(1));
 		assertEquals(ni2, n.getNodeInfo(2));
 		assertNull(n.getNodeInfo(0));
@@ -2463,7 +2422,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFNodeInfo ni2 = n.appendNodeInfo();
 		final JDFResourceLink rl2 = n.getLink(ni2, null);
 		rl2.setCombinedProcessIndex(new JDFIntegerList("1"));
-		assertNull(n.getNodeInfo());
+		assertNotNull(n.getNodeInfo());
 		assertEquals(ni2, n.getNodeInfo(1));
 		assertEquals(ni1, n.getNodeInfo(0));
 		assertNull(n.getNodeInfo(3));

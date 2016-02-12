@@ -5514,11 +5514,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public JDFCustomerInfo appendCustomerInfo()
 	{
-		if (getCustomerInfo() != null)
-		{
-			throw new JDFException("JDFNode.appendCustomerInfo: CustomerInfo already exists");
-		}
-		return getCreateCustomerInfo();
+		return (JDFCustomerInfo) appendNiCi(ElementName.CUSTOMERINFO);
 	}
 
 	/**
@@ -5559,27 +5555,39 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		// if version>=1.0 or no direct element is there try the resource
 		if (eVer == null || eVer.getValue() >= EnumVersion.Version_1_3.getValue() || (nici == null))
 		{
-			final JDFResourceLinkPool rlp = getResourceLinkPool();
-			if (rlp != null)
+			VElement v = getResourceLinks(elementName, new JDFAttributeMap(AttributeName.USAGE, "Input"), null);
+			JDFResourceLink retLink = null;
+			if (v == null || v.isEmpty())
 			{
-				final VElement v = rlp.getPoolChildren(elementName + "Link", new JDFAttributeMap(AttributeName.USAGE, "Input"), null);
-				if (v != null)
-				{
-					final int siz = v.size();
-					final VString types = getTypes();
+				retLink = null;
+			}
+			else if (v.size() == 1)
+			{
+				retLink = (JDFResourceLink) v.get(0);
+			}
+			else
+			{
+				final VString types = getTypes();
 
-					for (int i = 0; i < siz; i++)
+				for (KElement e : v)
+				{
+					final JDFResourceLink rl = (JDFResourceLink) e;
+					final JDFIntegerList combinedProcessIndex = rl.getCombinedProcessIndex();
+					if (combinedProcessIndex == null || types == null || (types != null && combinedProcessIndex.size() == types.size()))
 					{
-						final JDFResourceLink rl = (JDFResourceLink) v.elementAt(i);
-						final JDFIntegerList combinedProcessIndex = rl.getCombinedProcessIndex();
-						if (combinedProcessIndex == null || types == null || (types != null && combinedProcessIndex.size() == types.size()))
-						{
-							// in case of multiple parts - grab root - else potential performance hit
-							nici = rl.getPart(1) == null ? rl.getTarget() : rl.getLinkRoot();
-							break;
-						}
+						retLink = rl;
+						break;
 					}
 				}
+				if (retLink == null)
+				{
+					retLink = (JDFResourceLink) v.get(0);
+				}
+			}
+			// in case of multiple parts - grab root - else potential performance hit
+			if (retLink != null)
+			{
+				nici = retLink.getPart(1) == null ? retLink.getTarget() : retLink.getLinkRoot();
 			}
 		}
 
@@ -5652,15 +5660,26 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		KElement nici = getNiCi(s, false, null);
 		if (nici == null)
 		{
-			final EnumVersion eVer = getVersion(true);
-			if (eVer == null || eVer.getValue() >= EnumVersion.Version_1_3.getValue())
-			{
-				nici = addResource(s, EnumUsage.Input);
-			}
-			else
-			{
-				nici = appendElement(s);
-			}
+			nici = appendNiCi(s);
+		}
+		return nici;
+	}
+
+	private KElement appendNiCi(final String s)
+	{
+		KElement nici;
+		final EnumVersion eVer = getVersion(true);
+		if (eVer == null || eVer.getValue() >= EnumVersion.Version_1_3.getValue())
+		{
+			nici = addResource(s, EnumUsage.Input);
+		}
+		else if (getNiCi(s, false, null) == null)
+		{
+			nici = appendElement(s);
+		}
+		else
+		{
+			throw new JDFException(s + " already exists");
 		}
 		return nici;
 	}
@@ -5672,11 +5691,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public JDFNodeInfo appendNodeInfo()
 	{
-		if (getNodeInfo() != null)
-		{
-			throw new JDFException("JDFNodeInfo.appendNodeInfo: NodeInfo already exists");
-		}
-		return getCreateNodeInfo();
+		return (JDFNodeInfo) appendNiCi(ElementName.NODEINFO);
 	}
 
 	/**
