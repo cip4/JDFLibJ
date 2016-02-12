@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,6 +72,7 @@ import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -163,7 +164,7 @@ public class WalkProduct extends WalkJDF
 		for (String kid : kids)
 		{
 			final KElement sub = prod.appendElement(XJDFConstants.ChildProduct);
-			sub.setAttribute("ChildRef", "ID_Product_" + kid, null);
+			sub.setAttribute("ChildRef", "IDP_" + kid, null);
 			// TODO add processusage from input / output resources
 		}
 	}
@@ -174,7 +175,7 @@ public class WalkProduct extends WalkJDF
 	 */
 	private boolean readComponent(final JDFNode node, final KElement prod)
 	{
-		final JDFResourceLink cOutLink = node.getLink(0, ElementName.COMPONENT, new JDFAttributeMap("Usage", "Output"), null);
+		final JDFResourceLink cOutLink = node.getLink(0, ElementName.COMPONENT, new JDFAttributeMap(AttributeName.USAGE, EnumUsage.Output), null);
 		if (cOutLink == null)
 			return false;
 		int amount = (int) cOutLink.getAmountPoolSumDouble(AttributeName.AMOUNT, null);
@@ -196,7 +197,7 @@ public class WalkProduct extends WalkJDF
 			{
 				new ProductHelper(prod).setRoot();
 			}
-			jdfToXJDF.putComponentProduct(component.getID(), node.getID());
+			jdfToXJDF.putComponentProduct(component.getID(), prod.getID());
 		}
 		return true;
 	}

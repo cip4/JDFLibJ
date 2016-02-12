@@ -267,8 +267,8 @@ public class WalkJDFElement extends WalkElement
 	KElement getProductForElement(final KElement xjdf, final JDFElement rl)
 	{
 		JDFNode rlParent = (rl instanceof JDFNode) ? (JDFNode) rl : rl.getParentJDF();
-		String parentID = rlParent.getJobPartID(false);
-		parentID = "ID_Product_" + parentID;
+		String parentID = rlParent.getID();
+		parentID = "IDP_" + parentID;
 		KElement product = new XJDFHelper(xjdf).getCreateProduct(parentID).getProduct();
 		return product;
 	}
