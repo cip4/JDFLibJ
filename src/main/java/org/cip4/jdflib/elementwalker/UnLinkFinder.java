@@ -76,6 +76,7 @@ import java.util.HashSet;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
@@ -101,8 +102,18 @@ public class UnLinkFinder extends BaseElementWalker
 	public UnLinkFinder()
 	{
 		super(new BaseWalkerFactory());
-		linkData = this.new LinkData();
+		linkData = new LinkData();
 		new BaseWalker(getFactory()); // need a default walker
+	}
+
+	boolean ignoreForeign;
+
+	/**
+	 * @param ignoreForeign the ignoreForeign to set
+	 */
+	public void setIgnoreForeign(boolean ignoreForeign)
+	{
+		this.ignoreForeign = ignoreForeign;
 	}
 
 	/**
@@ -294,11 +305,8 @@ public class UnLinkFinder extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
+			if (ignoreForeign && !JDFElement.isInJDFNameSpaceStatic(toCheck))
 				return false;
-			}
 			return (toCheck instanceof JDFResource) && (toCheck.getParentNode() instanceof JDFResourcePool);
 		}
 	}
@@ -356,11 +364,9 @@ public class UnLinkFinder extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
+			if (ignoreForeign && !JDFElement.isInJDFNameSpaceStatic(toCheck))
 				return false;
-			}
+
 			return JDFResourceLink.isResourceLink(toCheck) || (toCheck instanceof JDFRefElement);
 		}
 

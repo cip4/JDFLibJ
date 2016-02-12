@@ -78,10 +78,10 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
@@ -163,7 +163,7 @@ public class WalkProduct extends WalkJDF
 		for (String kid : kids)
 		{
 			final KElement sub = prod.appendElement(XJDFConstants.ChildProduct);
-			sub.setAttribute("ChildRef", kid, null);
+			sub.setAttribute("ChildRef", "ID_Product_" + kid, null);
 			// TODO add processusage from input / output resources
 		}
 	}
@@ -210,29 +210,31 @@ public class WalkProduct extends WalkJDF
 	{
 		final JDFNode node = (JDFNode) jdf;
 
-		ProductHelper prodHelper = new XJDFHelper(xjdf).appendProduct();
-		final KElement prod = prodHelper.getProduct();
+		final KElement prod = getProductForElement(xjdf, node);
 		if (node.isJDFRoot())
 		{
-			prodHelper.setRoot();
+			new ProductHelper(prod).setRoot();
 		}
 
 		if (readComponent(node, prod))
 		{
-			prod.setAttributes(jdf);
-			prod.removeAttribute(AttributeName.TYPE);
-			prod.removeAttribute(AttributeName.ACTIVATION);
-			prod.removeAttribute(AttributeName.VERSION);
-			prod.removeAttribute(AttributeName.MAXVERSION);
-			prod.removeAttribute(AttributeName.ICSVERSIONS);
-			prod.removeAttribute(AttributeName.STATUS);
-			prod.removeAttribute(AttributeName.STATUSDETAILS);
-			prod.removeAttribute(AttributeName.XMLNS);
-			prod.removeAttribute(AttributeName.XSITYPE);
-			prod.removeAttribute(AttributeName.JOBID);
-			if (!prod.hasAttribute(AttributeName.JOBPARTID))
-				prod.renameAttribute(AttributeName.JOBPARTID, AttributeName.PRODUCTID, null, null);
-			prod.removeAttribute("xmlns:xsi");
+			JDFAttributeMap map = jdf.getAttributeMap();
+			map.remove(AttributeName.ID);
+			map.remove(AttributeName.TYPE);
+			map.remove(AttributeName.ACTIVATION);
+			map.remove(AttributeName.VERSION);
+			map.remove(AttributeName.MAXVERSION);
+			map.remove(AttributeName.ICSVERSIONS);
+			map.remove(AttributeName.STATUS);
+			map.remove(AttributeName.STATUSDETAILS);
+			map.remove(AttributeName.XMLNS);
+			map.remove(AttributeName.XSITYPE);
+			map.remove(AttributeName.JOBID);
+			if (StringUtil.getNonEmpty(prod.getAttribute(AttributeName.PRODUCTID)) == null)
+				map.renameKey(AttributeName.JOBPARTID, AttributeName.PRODUCTID);
+			map.remove("xmlns:xsi");
+			map.remove(AttributeName.JOBPARTID);
+			prod.setAttributes(map);
 
 			calcChildren(node, prod);
 			return prod;

@@ -78,7 +78,6 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.PartitionHelper;
-import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF.EnumProcessPartition;
@@ -126,7 +125,7 @@ public class WalkResLink extends WalkJDFElement
 			}
 			if (jdfToXJDF.isProductResource(linkTarget))
 			{
-				KElement product = xjdf.getCreateElement(ProductHelper.PRODUCTLIST).getCreateElement(ProductHelper.PRODUCT, null, -1);
+				KElement product = getProductForElement(xjdf, rl);
 				setResource(rl, linkTarget, product);
 			}
 			else

@@ -81,6 +81,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -255,6 +256,21 @@ public class WalkJDFElement extends WalkElement
 	public boolean matches(final KElement toCheck)
 	{
 		return toCheck instanceof JDFElement;
+	}
+
+	/**
+	 * 
+	 * @param xjdf
+	 * @param rl
+	 * @return
+	 */
+	KElement getProductForElement(final KElement xjdf, final JDFElement rl)
+	{
+		JDFNode rlParent = (rl instanceof JDFNode) ? (JDFNode) rl : rl.getParentJDF();
+		String parentID = rlParent.getJobPartID(false);
+		parentID = "ID_Product_" + parentID;
+		KElement product = new XJDFHelper(xjdf).getCreateProduct(parentID).getProduct();
+		return product;
 	}
 
 	/**

@@ -317,6 +317,34 @@ public class XJDFHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public ProductHelper getProduct(String id)
+	{
+		KElement productList = theElement == null ? null : theElement.getElement(ProductHelper.PRODUCTLIST);
+		KElement productElement = productList == null ? null : productList.getChildWithAttribute(ProductHelper.PRODUCT, AttributeName.ID, null, id, 0, true);
+		return productElement == null ? null : new ProductHelper(productElement);
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public ProductHelper getCreateProduct(String id)
+	{
+		ProductHelper ph = getProduct(id);
+		if (ph == null)
+		{
+			ph = appendProduct();
+			ph.setID(id);
+		}
+		return ph;
+	}
+
+	/**
 	 * get the Root product by index
 	 * - note that this need not be the index in the product list but rather depends on the index of the ID in ProductList/@RootProducts
 	 * 
@@ -395,9 +423,7 @@ public class XJDFHelper extends BaseXJDFHelper
 	 */
 	public Vector<ProductHelper> getProductHelpers()
 	{
-		if (theElement == null)
-			return null;
-		KElement productList = theElement.getElement(ProductHelper.PRODUCTLIST);
+		KElement productList = theElement == null ? null : theElement.getElement(ProductHelper.PRODUCTLIST);
 		VElement products = productList == null ? null : productList.getChildElementVector(ProductHelper.PRODUCT, null);
 		if (products == null || products.size() == 0)
 			return null;
