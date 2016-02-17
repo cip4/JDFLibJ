@@ -1098,8 +1098,6 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 
 				if (path != null)
 					constructi = theData.sm_hashCtorElementNS.get(path);
-				if (localPart.equals("ReportList") && path.equals(CORE_KELEMENT))
-					System.out.println(path + " " + qualifiedName);
 			}
 			if (constructi == null)// AS 17.09.02
 			{

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -253,7 +253,7 @@ public class WalkColorIntent extends WalkIntentResource
 			{
 				trackElem.setAttribute(AttributeName.NUMCOLORS, front, null);
 			}
-			else
+			else if (trackElem instanceof JDFColorIntent)
 			{
 				JDFColorIntent ci = (JDFColorIntent) trackElem;
 				if (front > 0)
