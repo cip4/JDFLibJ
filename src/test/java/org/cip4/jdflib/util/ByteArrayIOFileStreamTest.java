@@ -192,7 +192,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	{
 		File f = new File(sm_dirTestDataTemp + "bios.fil");
 		f.delete();
-		ThreadUtil.sleep(123);
+		ThreadUtil.sleep(323);
 		assertFalse(f.exists());
 		ByteArrayIOStream ios = new ByteArrayIOFileStream(f, 200, true);
 		InputStream is = ios.getInputStream();
