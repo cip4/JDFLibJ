@@ -202,6 +202,11 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	public XJDFToJDFImpl(final JDFDoc template)
 	{
 		super(new BaseWalkerFactory());
+		reset(template);
+	}
+
+	public void reset(final JDFDoc template)
+	{
 		firstConvert = firstproductInList = createProduct = true;
 		currentJDFNode = null;
 		foundProductList = false;

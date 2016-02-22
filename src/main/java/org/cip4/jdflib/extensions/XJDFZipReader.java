@@ -255,6 +255,7 @@ public class XJDFZipReader implements IStreamWriter
 	{
 		if (converter == null)
 			converter = new XJDFToJDFConverter(null);
+		converter.reset(null);
 		return converter;
 	}
 
