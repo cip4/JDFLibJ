@@ -101,6 +101,7 @@ import org.apache.xml.serialize.XMLSerializer;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.Attr;
@@ -5659,7 +5660,9 @@ public class KElement extends ElementNSImpl implements Element
 	public boolean write2File(File file)
 	{
 		OutputStream stream = FileUtil.getBufferedOutputStream(file);
-		return write2Stream(stream);
+		boolean written = write2Stream(stream);
+		StreamUtil.close(stream);
+		return written;
 	}
 
 	/**

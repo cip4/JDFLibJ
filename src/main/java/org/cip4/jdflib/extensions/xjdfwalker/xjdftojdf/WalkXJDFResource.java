@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -85,6 +85,7 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.StringUtil;
@@ -155,8 +156,8 @@ public class WalkXJDFResource extends WalkXElement
 		PartitionHelper ph = new PartitionHelper(xjdfRes);
 		SetHelper sh = ph.getSet();
 		final String name = getJDFResName(sh);
-		EnumUsage inOut = sh.getUsage();
 		String processUsage = sh.getProcessUsage();
+		EnumUsage inOut = sh.getUsage();
 		if (inOut == null && xjdfToJDFImpl.isHeuristicLink())
 		{
 			if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name) && !ElementName.COMPONENT.equals(name)
@@ -175,9 +176,14 @@ public class WalkXJDFResource extends WalkXElement
 			{
 				newRoot.getCreateResourcePool().moveElement(res, null);
 			}
-			if (inOut != null)
+			res.setID(id);
+		}
+		if (inOut != null)
+		{
+			JDFResourceLink rl = theNode.getLink(res, inOut);
+			if (rl == null)
 			{
-				final JDFResourceLink rl = theNode.getLink(res, inOut);
+				rl = theNode.ensureLink(res, inOut, EnumProcessUsage.getEnum(processUsage));
 				rl.setrRef(id);
 				res.removeAttribute(AttributeName.USAGE);
 				VString reslinks = XJDFToJDFConverter.getResLinkAttribs();
@@ -189,9 +195,7 @@ public class WalkXJDFResource extends WalkXElement
 					}
 				}
 			}
-			res.setID(id);
 		}
-
 		return res;
 	}
 
