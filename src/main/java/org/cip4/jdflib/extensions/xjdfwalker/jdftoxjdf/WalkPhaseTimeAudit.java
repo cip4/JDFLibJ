@@ -77,7 +77,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.PartitionHelper;
-import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 
@@ -108,7 +108,7 @@ public class WalkPhaseTimeAudit extends WalkAudit
 		final JDFPhaseTime pt = (JDFPhaseTime) jdf;
 		JDFJMF jmf = pt.toSignalJMF();
 		jmf.appendAnchor(null);
-		KElement xjmf = new JDFDoc(XJDF20.rootJMF).getRoot();
+		KElement xjmf = new JDFDoc(XJDFConstants.XJMF).getRoot();
 		jdfToXJDF.walkTree(jmf, xjmf);
 		KElement signalxjmf = xjmf.getFirstChildElement();
 		signalxjmf.removeChild(ElementName.STATUSQUPARAMS, null, 0);

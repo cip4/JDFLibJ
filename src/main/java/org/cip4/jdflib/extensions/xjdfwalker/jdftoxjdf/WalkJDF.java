@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -167,10 +167,10 @@ public class WalkJDF extends WalkJDFElement
 
 	private void setRootAttributes(final JDFNode node, final KElement newRootP)
 	{
-		newRootP.setXMLComment("Preliminary prototype version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion());
+		newRootP.setXMLComment("JDFToXJDF version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion());
 		newRootP.setAttribute(AttributeName.JOBID, node.getJobID(true));
 		String types = newRootP.getAttribute(AttributeName.TYPES, null, null);
-		newRootP.setAttributes(node);
+		setAttributes(node, newRootP);
 
 		removeUnused(newRootP);
 
@@ -183,6 +183,11 @@ public class WalkJDF extends WalkJDFElement
 		updateTypes(newRootP, types);
 		namedFeaturesToGeneralID(node, newRootP);
 		updateSpawnInfo(node, newRootP);
+		JDFNode parentProduct = node.getParentProduct();
+		if (parentProduct != null && parentProduct != node && parentProduct != node.getJDFRoot())
+		{
+			newRootP.setAttribute("ParentID", parentProduct.getID());
+		}
 	}
 
 	/**
@@ -249,7 +254,7 @@ public class WalkJDF extends WalkJDFElement
 	 */
 	private void updateSpawnInfo(final JDFNode node, final KElement newRootP)
 	{
-		if (m_spawnInfo != null && newRootP.hasAttribute(AttributeName.SPAWNID))
+		if (jdfToXJDF.isRetainSpawnInfo() && newRootP.hasAttribute(AttributeName.SPAWNID))
 		{
 			final KElement spawnInfo = newRootP.appendElement(m_spawnInfo, "www.cip4.org/SpawnInfo");
 			spawnInfo.moveAttribute(AttributeName.SPAWNID, newRootP, null, null, null);

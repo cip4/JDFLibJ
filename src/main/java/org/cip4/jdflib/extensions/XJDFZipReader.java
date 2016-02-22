@@ -97,14 +97,23 @@ import org.cip4.jdflib.util.zip.ZipReader;
 public class XJDFZipReader implements IStreamWriter
 {
 	private String path;
+	private XJDFToJDFConverter converter;
 
 	/**
 	 * 
 	 */
 	public XJDFZipReader(InputStream inStream)
 	{
+		this(ZipReader.getZipReader(inStream));
+	}
+
+	/**
+	 * 
+	 */
+	public XJDFZipReader(ZipReader zipReader)
+	{
 		super();
-		theReader = ZipReader.getZipReader(inStream);
+		theReader = zipReader;
 		if (theReader != null)
 		{
 			theReader.setCaseSensitive(false);
@@ -112,6 +121,7 @@ public class XJDFZipReader implements IStreamWriter
 		newDoc = null;
 		newJMF = null;
 		path = null;
+		converter = null;
 	}
 
 	/**
@@ -162,12 +172,11 @@ public class XJDFZipReader implements IStreamWriter
 	/**
 	 * 
 	 */
-	void convertXJDF()
+	public void convertXJDF()
 	{
 		newDoc = null;
 		if (theReader != null)
 		{
-			XJDFToJDFConverter c = new XJDFToJDFConverter(null);
 			String pathExpression = UrlUtil.getURLWithDirectory(path, "*.xjdf");
 			for (int i = 0; true; i++)
 			{
@@ -179,7 +188,7 @@ public class XJDFZipReader implements IStreamWriter
 				XMLDoc xdoc = theReader.getXMLDoc();
 				if (xdoc != null)
 				{
-					newDoc = c.convert(xdoc.getRoot());
+					newDoc = getConverter().convert(xdoc.getRoot());
 				}
 			}
 		}
@@ -193,7 +202,7 @@ public class XJDFZipReader implements IStreamWriter
 		newJMF = null;
 		if (theReader != null)
 		{
-			XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+			XJDFToJDFConverter c = getConverter();
 			ZipEntry ze = theReader.getMatchingEntry("*.xjmf", 0);
 			XMLDoc xdoc = ze == null ? null : theReader.getXMLDoc();
 			if (xdoc != null)
@@ -240,5 +249,25 @@ public class XJDFZipReader implements IStreamWriter
 	public JDFJMF getJMFRoot()
 	{
 		return newJMF == null ? null : newJMF.getJMFRoot();
+	}
+
+	public XJDFToJDFConverter getConverter()
+	{
+		if (converter == null)
+			converter = new XJDFToJDFConverter(null);
+		return converter;
+	}
+
+	public void setConverter(XJDFToJDFConverter converter)
+	{
+		this.converter = converter;
+	}
+
+	/**
+	 * @param newJMF the newJMF to set
+	 */
+	protected void setNewJMF(JDFDoc newJMF)
+	{
+		this.newJMF = newJMF;
 	}
 }

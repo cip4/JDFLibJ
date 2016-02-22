@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -98,14 +98,36 @@ public class WalkXJDF extends WalkXElement
 	@Override
 	public KElement walk(final KElement xjdf, final KElement jdf)
 	{
-		xjdfToJDFImpl.currentJDFNode = (JDFNode) jdf;
-		xjdfToJDFImpl.currentJDFNode.setAttributes(xjdf);
-		xjdfToJDFImpl.currentJDFNode.setVersion(xjdfToJDFImpl.getVersion());
-		xjdfToJDFImpl.currentJDFNode.setMaxVersion(EnumVersion.Version_2_0);
-		xjdfToJDFImpl.currentJDFNode.setStatus(EnumNodeStatus.Part);
+		JDFNode jdfNode = getParentProduct(xjdf, jdf);
+		jdfNode.setAttributes(xjdf);
+		jdfNode.setVersion(xjdfToJDFImpl.getVersion());
+		jdfNode.setMaxVersion(EnumVersion.Version_2_0);
+		jdfNode.setStatus(EnumNodeStatus.Part);
+		xjdfToJDFImpl.currentJDFNode = jdfNode;
 		updateJobID();
 		setType();
-		return xjdfToJDFImpl.currentJDFNode;
+		updateAttributes(jdfNode);
+		return jdfNode;
+	}
+
+	/**
+	 * @param jdf
+	 * @param jdf2 
+	 * @return
+	 */
+	private JDFNode getParentProduct(final KElement xjdf, KElement jdf)
+	{
+		JDFNode jdfNode = (JDFNode) jdf;
+		String parentID = xjdf.getNonEmpty("ParentID");
+		if (parentID != null)
+		{
+			JDFNode childProduct = jdfNode.getChildJDFNode(parentID, false);
+			if (childProduct != null)
+			{
+				jdfNode = childProduct;
+			}
+		}
+		return jdfNode;
 	}
 
 	/**
@@ -161,5 +183,15 @@ public class WalkXJDF extends WalkXElement
 	public boolean matches(final KElement toCheck)
 	{
 		return super.matches(toCheck) && XJDFConstants.XJDF.equals(toCheck.getLocalName());
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void updateAttributes(KElement elem)
+	{
+		elem.removeAttribute("ParentID");
+		super.updateAttributes(elem);
 	}
 }
