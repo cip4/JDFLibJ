@@ -162,9 +162,11 @@ public class StringUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetDefaultNull()
 	{
+		assertNull(StringUtil.getDefaultNull(null, null));
 		assertNull(StringUtil.getDefaultNull("", ""));
 		assertNull(StringUtil.getDefaultNull(null, ""));
 		assertEquals("a", StringUtil.getDefaultNull("a", ""));
+		assertEquals("a", StringUtil.getDefaultNull("a", null));
 	}
 
 	/**

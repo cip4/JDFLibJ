@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -2171,6 +2171,32 @@ public class KElementTest extends JDFTestCaseBase
 		assertNull("", child.getDOMAttr("at", null, false));
 		assertNull("", child.getDOMAttr("at_notther", null, true));
 		assertNotNull("", child.getDOMAttr("at", null, true));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetAttribute()
+	{
+		final XMLDoc xd = new XMLDoc("a", null);
+		final KElement root = xd.getRoot();
+		root.setAttribute("at", "b");
+		assertEquals("b", root.getAttribute("at"));
+		assertEquals("", root.getAttribute("at2"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetNonEmpty()
+	{
+		final XMLDoc xd = new XMLDoc("a", null);
+		final KElement root = xd.getRoot();
+		root.setAttribute("at", "b");
+		assertEquals("b", root.getNonEmpty("at"));
+		assertNull(root.getNonEmpty("at2"));
 	}
 
 	/**

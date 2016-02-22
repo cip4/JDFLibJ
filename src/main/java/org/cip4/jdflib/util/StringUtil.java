@@ -1132,7 +1132,7 @@ public class StringUtil
 	 */
 	public static String getDefaultNull(final String s, final String def)
 	{
-		return s == null || def.equals(s) ? null : s;
+		return s == null || s.equals(def) ? null : s;
 	}
 
 	/**

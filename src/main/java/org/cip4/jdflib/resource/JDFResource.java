@@ -5088,11 +5088,12 @@ public class JDFResource extends JDFElement
 	public String updateAttributeFromLeaves(final String attName, final String nsURI, final boolean bDirect)
 	{
 		final VElement v = getLeaves(false);
-		if (v == null || v.size() == 0 || (v.size() == 1 && this == v.get(0)))
+		int size = v == null ? 0 : v.size();
+		if (size == 0 || (size == 1 && this == v.get(0)))
 		{
 			if (!hasAttribute_KElement(attName, nsURI, false))
 			{
-				final String val = getAttribute(attName, nsURI, null);
+				final String val = StringUtil.getNonEmpty(getAttribute(attName, nsURI, null));
 				setAttribute(attName, val, nsURI);
 				return val;
 			}
@@ -5100,13 +5101,13 @@ public class JDFResource extends JDFElement
 		}
 		if (!bDirect)
 		{
-			for (int i = 0; i < v.size(); i++)
+			for (KElement e : v)
 			{
-				((JDFResource) v.get(i)).updateAttributeFromLeaves(attName, nsURI, bDirect);
+				((JDFResource) e).updateAttributeFromLeaves(attName, nsURI, bDirect);
 			}
 		}
 		String val = v.get(0).getAttribute(attName, nsURI, null);
-		for (int i = 1; i < v.size() && val != null; i++)
+		for (int i = 1; i < size && val != null; i++)
 		{
 			final String vali = v.get(i).getAttribute(attName, nsURI, null);
 			if (!val.equals(vali))

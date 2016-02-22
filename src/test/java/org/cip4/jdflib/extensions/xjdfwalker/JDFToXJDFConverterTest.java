@@ -110,6 +110,7 @@ import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
+import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFComponent;
@@ -154,9 +155,13 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		_testDeliveryIntent();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public KElement _testDeliveryIntent()
 	{
-		final JDFNode nP = new JDFDoc("JDF").getJDFRoot();
+		final JDFNode nP = new JDFDoc(ElementName.JDF).getJDFRoot();
 		nP.setType(EnumType.Product);
 		nP.setDescriptiveName("desc");
 		JDFDeliveryIntent di = (JDFDeliveryIntent) nP.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
@@ -176,6 +181,29 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/DeliveryParams/DropItem/@Amount", null), "42");
 		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[2]/DeliveryParams/DropItem/@Amount", null), "63");
 		return xjdf;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@Test
+	public void testSpanIntent()
+	{
+		final JDFNode nP = new JDFDoc(ElementName.JDF).getJDFRoot();
+		nP.setType(EnumType.Product);
+		nP.setDescriptiveName("desc");
+		JDFMediaIntent mi = (JDFMediaIntent) nP.addResource(ElementName.MEDIAINTENT, EnumUsage.Input);
+		mi.appendBrightness().setPreferred(42);
+
+		XJDF20 xjdf20 = new XJDF20();
+		xjdf20.setSingleNode(true);
+		xjdf20.setSpanAsAttribute(true);
+		KElement xjdf = xjdf20.makeNewJDF(nP, null);
+		xjdf.write2File(sm_dirTestDataTemp + "bind.xjdf");
+		assertNotNull(xjdf);
+		assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/MediaIntent/@Brightness", null), "42");
+		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/MediaIntent/Brightness"));
 	}
 
 	/**
@@ -671,6 +699,30 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.convert(n);
 		assertTrue(xjdf.getXPathAttribute("ResourceSet/Resource/Component/@MediaRef", null).startsWith(med.getID()));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testPlatePaperMedia()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		JDFMedia med = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		JDFMedia m1 = (JDFMedia) med.addPartition(EnumPartIDKey.Location, "loc1");
+		m1.setMediaType(EnumMediaType.Paper);
+		m1.setWeight(42);
+
+		JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
+		JDFExposedMedia xms = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.SheetName, "s1");
+		JDFMedia medPlate = (JDFMedia) n.addResource(ElementName.MEDIA, null);
+		medPlate.setMediaType(EnumMediaType.Plate);
+		xms.refMedia(medPlate);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+		assertEquals(new XJDFHelper(xjdf).getSets(ElementName.MEDIA, null).size(), 2);
 	}
 
 	/**

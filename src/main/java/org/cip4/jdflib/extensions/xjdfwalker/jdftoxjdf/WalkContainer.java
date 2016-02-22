@@ -78,7 +78,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkContainer extends WalkJDFElement
+public class WalkContainer extends WalkJDFSubElement
 {
 	/**
 	 * 

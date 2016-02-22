@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -77,7 +77,7 @@ import org.cip4.jdflib.span.JDFSpanBase;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkSpan extends WalkJDFElement
+public class WalkSpan extends WalkJDFSubElement
 {
 	/**
 	 * 
@@ -100,13 +100,17 @@ public class WalkSpan extends WalkJDFElement
 		final KElement ret;
 		final JDFSpanBase span = (JDFSpanBase) jdf;
 
-		if (this.jdfToXJDF.isSpanAsAttribute())
+		if (jdfToXJDF.isSpanAsAttribute())
 		{
 			ret = spanToAttribute(span, xjdf);
 		}
-		else
+		else if (!jdfToXJDF.isRetainAll())
 		{
 			ret = invertSpan(span, xjdf);
+		}
+		else
+		{
+			ret = super.walk(jdf, xjdf);
 		}
 		return ret;
 	}
@@ -121,7 +125,9 @@ public class WalkSpan extends WalkJDFElement
 		String name = span.getLocalName();
 		String val = span.guessActual();
 		if (val != null)
+		{
 			xjdf.setAttribute(name, val);
+		}
 		return null;
 	}
 

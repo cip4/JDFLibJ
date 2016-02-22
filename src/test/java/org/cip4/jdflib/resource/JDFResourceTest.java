@@ -896,9 +896,12 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFResource r22 = r2.addPartition(EnumPartIDKey.CellIndex, "C2");
 		r11.setAttribute("a", "a1");
 		r21.setAttribute("a", "a1");
+		r22.setAttribute("a", "a2");
+		assertNull(r.updateAttributeFromLeaves("a", null, false));
 		r22.setAttribute("a", "a1");
 		r.updateAttributeFromLeaves("a", null, false);
 		assertEquals(r.getAttribute("a"), "a1");
+
 	}
 
 	/**

@@ -119,7 +119,7 @@ class JDFToXJDFDataCache
 	 */
 	private VString generateElementAttributes()
 	{
-		final JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc("ResourcePool").getRoot();
+		final JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc(ElementName.RESOURCEPOOL).getRoot();
 		return dummyResPool.knownAttributes();
 	}
 

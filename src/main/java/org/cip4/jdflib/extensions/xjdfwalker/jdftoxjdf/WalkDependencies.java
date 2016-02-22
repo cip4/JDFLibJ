@@ -74,7 +74,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFDependencies;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 
-public class WalkDependencies extends WalkJDFElement
+public class WalkDependencies extends WalkJDFSubElement
 {
 	/**
 	 * 

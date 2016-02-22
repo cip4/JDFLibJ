@@ -1011,4 +1011,13 @@ public class JDFToXJDF extends PackageElementWalker
 	{
 		return EnumProcessPartition.processList.equals(processPartition);
 	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.ElementWalker#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return getClass().getSimpleName() + " new: " + newRoot;
+	}
 }

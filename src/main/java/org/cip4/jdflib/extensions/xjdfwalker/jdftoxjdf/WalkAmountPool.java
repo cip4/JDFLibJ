@@ -79,7 +79,7 @@ import org.cip4.jdflib.pool.JDFAmountPool;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkAmountPool extends WalkJDFElement
+public class WalkAmountPool extends WalkJDFSubElement
 {
 	/**
 	 * 

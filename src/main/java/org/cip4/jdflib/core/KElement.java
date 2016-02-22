@@ -285,6 +285,19 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * similar to getAttribute but returns null for all empty strings
+	 * 
+	 * Gets an attribute value out of an element
+	 * @param strLocalName the name of the attribute you want to have
+	 * @return String the value of the Attribute or emptystring
+	 */
+	public String getNonEmpty(final String strLocalName)
+	{
+		String val = getAttribute(strLocalName, null, null);
+		return val == JDFCoreConstants.EMPTYSTRING ? null : val;
+	}
+
+	/**
 	 * getAttribute with no pardon for namespaces or anything
 	 * 
 	 * @param qualifiedName the name of the attribute you want to have
@@ -4231,7 +4244,8 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String getXPathAttribute(final String path, final String def)
 	{
-		return new XPathHelper(this).getXPathAttribute(path, def);
+		XPathHelper xPathHelper = new XPathHelper(this);
+		return xPathHelper.getXPathAttribute(path, def);
 	}
 
 	/**
@@ -4262,7 +4276,8 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public JDFAttributeMap getXPathAttributeMap(String path)
 	{
-		return new XPathHelper(this).getXPathAttributeMap(path, false);
+		XPathHelper xPathHelper = new XPathHelper(this);
+		return xPathHelper.getXPathAttributeMap(path, false);
 	}
 
 	/**
@@ -4277,7 +4292,8 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public JDFAttributeMap getXPathValueMap()
 	{
-		return new XPathHelper(this).getXPathAttributeMap(null, true);
+		XPathHelper xPathHelper = new XPathHelper(this);
+		return xPathHelper.getXPathAttributeMap(null, true);
 	}
 
 	/**
@@ -4290,7 +4306,8 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public KElement getXPathElement(final String path)
 	{
-		return new XPathHelper(this).getXPathElement(path);
+		XPathHelper xPathHelper = new XPathHelper(this);
+		return xPathHelper.getXPathElement(path);
 	}
 
 	/**
