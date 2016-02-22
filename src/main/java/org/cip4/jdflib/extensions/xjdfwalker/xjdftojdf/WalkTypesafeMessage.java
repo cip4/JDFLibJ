@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -123,6 +123,17 @@ public class WalkTypesafeMessage extends WalkXElement
 	{
 		String type = StringUtil.rightStr(messageName, -family.length());
 		return type;
+	}
+
+	/**
+	 * 
+	 * @param elem
+	 */
+	@Override
+	protected void updateAttributes(KElement elem)
+	{
+		super.updateAttributes(elem);
+		elem.renameAttribute(AttributeName.DEVICEID, AttributeName.SENDERID, null, null);
 	}
 
 	/**

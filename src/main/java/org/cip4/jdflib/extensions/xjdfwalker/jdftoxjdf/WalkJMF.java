@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,8 +68,10 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
 
 /**
@@ -121,7 +123,7 @@ public class WalkJMF extends WalkJDFElement
 	 */
 	private void setRootAttributes(final JDFJMF jmf, final KElement newRootP)
 	{
-		newRootP.appendXMLComment("Very preliminary experimental prototype trial version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
+		newRootP.appendXMLComment("XJDF converter version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
 		newRootP.setAttributes(jmf);
 		if (this.jdfToXJDF.isUpdateVersion())
 		{
@@ -129,5 +131,15 @@ public class WalkJMF extends WalkJDFElement
 			newRootP.setAttribute("MaxVersion", "2.0");
 		}
 		removeUnused(newRootP);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		super.updateAttributes(map);
+		map.renameKey(AttributeName.SENDERID, AttributeName.DEVICEID);
 	}
 }

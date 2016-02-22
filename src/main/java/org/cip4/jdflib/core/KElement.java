@@ -5641,7 +5641,6 @@ public class KElement extends ElementNSImpl implements Element
 		try
 		{
 			stream.write(toXML().getBytes(StringUtil.UTF8));
-			stream.close();
 			return true;
 		}
 		catch (IOException e)

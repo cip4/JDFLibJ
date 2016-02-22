@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
+import java.io.File;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -98,6 +99,7 @@ import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -121,6 +123,7 @@ import org.cip4.jdflib.resource.process.JDFPageData;
 import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
 
@@ -196,7 +199,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFMediaIntent mi = (JDFMediaIntent) nP.addResource(ElementName.MEDIAINTENT, EnumUsage.Input);
 		mi.appendBrightness().setPreferred(42);
 
-		XJDF20 xjdf20 = new XJDF20();
+		JDFToXJDF xjdf20 = new JDFToXJDF();
 		xjdf20.setSingleNode(true);
 		xjdf20.setSpanAsAttribute(true);
 		KElement xjdf = xjdf20.makeNewJDF(nP, null);
@@ -843,6 +846,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 		conv.setWantProduct(true);
 		conv.saveZip(sm_dirTestDataTemp + "3files.xjdf.zip", product, true);
+
+		JDFJMF jmf = new JMFBuilder().buildSubmitQueueEntry("http://foo.bar", "xjdfs");
+		conv.writeStream(FileUtil.getBufferedOutputStream(new File(sm_dirTestDataTemp + "3files.xjmf.zip")), product, jmf);
 		assertTrue(product.isValid(EnumValidationLevel.Incomplete));
 	}
 

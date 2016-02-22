@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -112,6 +112,26 @@ public class JMFBuilderTest extends JDFTestCaseBase
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "milestone");
 	}
 
+	/**
+	 * 
+	 * test milestone
+	 */
+	@Test
+	public void testBuildSubmitQueueEntry()
+	{
+		JDFJMF jmf = b.buildSubmitQueueEntry("retURL", "xxx");
+		JDFQueueSubmissionParams queueSubmissionParams = jmf.getCommand(0).getQueueSubmissionParams(0);
+		assertEquals(queueSubmissionParams.getURL(), "xxx");
+		assertEquals(queueSubmissionParams.getReturnJMF(), "retURL");
+		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "submitQueueEntry");
+	}
+
+	/**
+	 * 
+	 * @param jmf
+	 * @param level
+	 * @param dir
+	 */
 	private void roundTrip(JDFJMF jmf, EnumValidationLevel level, String dir)
 	{
 		assertTrue(jmf.isValid(level));

@@ -75,10 +75,16 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.ifaces.IStreamWriter;
+import org.cip4.jdflib.ifaces.IURLSetter;
+import org.cip4.jdflib.jmf.JDFCommand;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.zip.ZipReader;
@@ -99,8 +105,12 @@ public class XJDFZipReader implements IStreamWriter
 	{
 		super();
 		theReader = ZipReader.getZipReader(inStream);
-		theReader.setCaseSensitive(false);
+		if (theReader != null)
+		{
+			theReader.setCaseSensitive(false);
+		}
 		newDoc = null;
+		newJMF = null;
 		path = null;
 	}
 
@@ -121,7 +131,8 @@ public class XJDFZipReader implements IStreamWriter
 	}
 
 	final ZipReader theReader;
-	JDFDoc newDoc;
+	private JDFDoc newDoc;
+	private JDFDoc newJMF;
 
 	/**
 	 * 
@@ -142,8 +153,18 @@ public class XJDFZipReader implements IStreamWriter
 	/**
 	 * 
 	 */
-	public JDFDoc convert()
+	public void convert()
 	{
+		convertXJMF();
+		convertXJDF();
+	}
+
+	/**
+	 * 
+	 */
+	void convertXJDF()
+	{
+		newDoc = null;
 		if (theReader != null)
 		{
 			XJDFToJDFConverter c = new XJDFToJDFConverter(null);
@@ -162,7 +183,36 @@ public class XJDFZipReader implements IStreamWriter
 				}
 			}
 		}
-		return newDoc;
+	}
+
+	/**
+	 * 
+	 */
+	void convertXJMF()
+	{
+		newJMF = null;
+		if (theReader != null)
+		{
+			XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+			ZipEntry ze = theReader.getMatchingEntry("*.xjmf", 0);
+			XMLDoc xdoc = ze == null ? null : theReader.getXMLDoc();
+			if (xdoc != null)
+			{
+				newJMF = c.convert(xdoc.getRoot());
+				JDFJMF jmf = newJMF == null ? null : newJMF.getJMFRoot();
+				JDFCommand command = jmf == null ? null : jmf.getCommand(0);
+				if (command != null)
+				{
+					VString validParams = new VString(new String[] { ElementName.QUEUESUBMISSIONPARAMS, ElementName.RESUBMISSIONPARAMS, ElementName.RETURNQUEUEENTRYPARAMS });
+					IURLSetter params = (IURLSetter) command.getChildFromList(validParams, 0, null, true);
+					String url = params.getURL();
+					if (UrlUtil.isRelativeURL(url))
+					{
+						setPath(url);
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -172,5 +222,23 @@ public class XJDFZipReader implements IStreamWriter
 	public String toString()
 	{
 		return "XJDFZipReader [path=" + path + ", newDoc=" + newDoc + "]";
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public JDFNode getJDFRoot()
+	{
+		return newDoc == null ? null : newDoc.getJDFRoot();
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public JDFJMF getJMFRoot()
+	{
+		return newJMF == null ? null : newJMF.getJMFRoot();
 	}
 }

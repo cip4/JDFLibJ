@@ -407,11 +407,15 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	public void testXJMFKnownMessages()
 	{
 		KElement root = new JDFDoc(XJDFConstants.XJMF).getRoot();
-		root.appendElement("QueryKnownMessages");
+		root.setAttribute(AttributeName.DEVICEID, "devID");
+		KElement q = root.appendElement("QueryKnownMessages");
+		q.setAttribute(AttributeName.DEVICEID, "devID2");
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final JDFDoc d = xCon.convert(root);
 		JDFJMF jmfRoot = d.getJMFRoot();
 		assertNotNull(jmfRoot);
+		assertEquals(jmfRoot.getSenderID(), "devID");
+		assertEquals(jmfRoot.getQuery(0).getSenderID(), "devID2");
 		assertTrue(jmfRoot.isValid(EnumValidationLevel.Complete));
 	}
 

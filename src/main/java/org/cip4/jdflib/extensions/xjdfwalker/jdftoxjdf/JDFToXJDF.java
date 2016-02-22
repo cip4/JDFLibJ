@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipException;
 import java.util.zip.ZipOutputStream;
 
 import org.cip4.jdflib.core.ElementName;
@@ -103,7 +102,9 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.NumberFormatter;
+import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG <br/>
@@ -379,13 +380,20 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	public KElement makeNewJMF(final JDFJMF jmf)
 	{
-		final JDFJMF root = (JDFJMF) jmf.cloneNewDoc();
 		prepareNewDoc(true);
-		preFixVersion(root);
+		if (jmf != null)
+		{
+			final JDFJMF root = (JDFJMF) jmf.cloneNewDoc();
+			preFixVersion(root);
 
-		walkTree(root, newRoot);
-		newRoot.eraseEmptyNodes(true);
-		postWalk(true);
+			walkTree(root, newRoot);
+			newRoot.eraseEmptyNodes(true);
+			postWalk(true);
+		}
+		else
+		{
+			newRoot = null;
+		}
 		return newRoot;
 	}
 
@@ -396,28 +404,34 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	public KElement makeNewJDF(final JDFNode node, final VJDFAttributeMap vMap)
 	{
-		final JDFNode root = (JDFNode) node.getJDFRoot().cloneNewDoc();
-		rootID = node.getID();
-		preFixVersion(root);
-
-		String id = StringUtil.getNonEmpty(node.getID());
-		oldRoot = id == null ? root : (JDFNode) root.getChildWithAttribute(null, "ID", null, id, 0, false);
-		if (oldRoot == null)
-		{
-			oldRoot = root;
-		}
-		// we are a simple - not spawned jdf 
-		if (oldRoot == root && root.getElement(ElementName.JDF) == null && root.getAncestorPool() == null)
-		{
-			setSingleNode(true);
-		}
 		prepareNewDoc(false);
-		loopNodes(root);
-		prepareRoot(root);
+		if (node != null)
+		{
+			final JDFNode root = (JDFNode) node.getJDFRoot().cloneNewDoc();
+			rootID = node.getID();
+			preFixVersion(root);
 
-		postWalk(false);
-		newRoot.getOwnerDocument_KElement().copyMeta(node.getOwnerDocument_KElement());
+			String id = StringUtil.getNonEmpty(node.getID());
+			oldRoot = id == null ? root : (JDFNode) root.getChildWithAttribute(null, "ID", null, id, 0, false);
+			if (oldRoot == null)
+			{
+				oldRoot = root;
+			}
+			// we are a simple - not spawned jdf 
+			if (oldRoot == root && root.getElement(ElementName.JDF) == null && root.getAncestorPool() == null)
+			{
+				setSingleNode(true);
+			}
+			loopNodes(root);
+			prepareRoot(root);
 
+			postWalk(false);
+			newRoot.getOwnerDocument_KElement().copyMeta(node.getOwnerDocument_KElement());
+		}
+		else
+		{
+			newRoot = null;
+		}
 		return newRoot;
 	}
 
@@ -534,6 +548,17 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * 
+	 * @param os the output stream
+	 * @param rootNode the root jdf to save
+	 * @param jmf the submission or return  jmf
+	 */
+	public void writeStream(final OutputStream os, final JDFNode rootNode, final JDFJMF jmf)
+	{
+		new MultiJDFToXJDF().writeStream(os, rootNode, jmf);
+	}
+
+	/**
+	 * 
 	 * @param root
 	 * @return
 	 */
@@ -557,7 +582,6 @@ public class JDFToXJDF extends PackageElementWalker
 		 */
 		void saveZip(final String fileName, final JDFNode rootNode, final boolean replace)
 		{
-			setSingleNode(true);
 			final File file = new File(fileName);
 			if (file.canRead())
 			{
@@ -571,28 +595,49 @@ public class JDFToXJDF extends PackageElementWalker
 				}
 			}
 
+			final OutputStream fos = FileUtil.getBufferedOutputStream(new File(fileName));
+			writeZipStream(rootNode, fos, null, null);
+			StreamUtil.close(fos);
+		}
+
+		/**
+		 * 
+		 * @param os
+		 * @param rootNode
+		 * @param xjmf
+		 */
+		void writeStream(final OutputStream os, final JDFNode rootNode, final JDFJMF jmf)
+		{
+			KElement xjmf = makeNewJMF(jmf);
+			writeZipStream(rootNode, os, "xjdfs", xjmf);
+		}
+
+		/**
+		 * @param rootNode
+		 * @param fos
+		 */
+		private void writeZipStream(final JDFNode rootNode, final OutputStream fos, String dirName, KElement xjmf)
+		{
+			setSingleNode(true);
 			try
 			{
-				final Vector<XJDFHelper> v = getXJDFs(rootNode);
+				final Vector<XJDFHelper> vXJDFs = getXJDFs(rootNode);
 
-				final OutputStream fos = FileUtil.getBufferedOutputStream(new File(fileName));
 				final ZipOutputStream zos = new ZipOutputStream(fos);
+				writeXJMF(xjmf, zos);
 				int nZip = 0;
-				for (XJDFHelper h : v)
+				for (XJDFHelper h : vXJDFs)
 				{
 					try
 					{
 						String nam = new NumberFormatter().formatInt(nZip++, 2) + "_" + h.getJobPartID() + "." + XJDFConstants.XJDF;
+						nam = UrlUtil.getURLWithDirectory(dirName, nam);
 						final ZipEntry ze = new ZipEntry(nam);
 						zos.putNextEntry(ze);
 						h.writeToStream(zos);
 						zos.closeEntry();
 					}
-					catch (final ZipException x)
-					{
-						log.error("oops: ", x);
-					}
-					catch (final IOException x)
+					catch (final Exception x)
 					{
 						log.error("oops: ", x);
 					}
@@ -602,6 +647,29 @@ public class JDFToXJDF extends PackageElementWalker
 			catch (final IOException x)
 			{
 				log.error("oops: ", x);
+			}
+		}
+
+		/**
+		 * @param xjmf
+		 * @param zos
+		 * @throws IOException
+		 */
+		private void writeXJMF(KElement xjmf, final ZipOutputStream zos) throws IOException
+		{
+			if (xjmf != null)
+			{
+				try
+				{
+					final ZipEntry ze = new ZipEntry("root.xjmf");
+					zos.putNextEntry(ze);
+					xjmf.write2Stream(zos);
+					zos.closeEntry();
+				}
+				catch (final Exception x)
+				{
+					log.error("oops: ", x);
+				}
 			}
 		}
 
@@ -1010,14 +1078,5 @@ public class JDFToXJDF extends PackageElementWalker
 	public boolean isWantProcessList()
 	{
 		return EnumProcessPartition.processList.equals(processPartition);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.ElementWalker#toString()
-	 */
-	@Override
-	public String toString()
-	{
-		return getClass().getSimpleName() + " new: " + newRoot;
 	}
 }

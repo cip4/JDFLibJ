@@ -2001,7 +2001,7 @@ public class UrlUtil
 	 */
 	public static boolean isRelativeURL(String url)
 	{
-		if (url == null)
+		if (StringUtil.getNonEmpty(url) == null)
 			return false;
 		return url.indexOf(":/") < 0 && url.indexOf(":\\") < 0 && !url.startsWith("/") && !url.startsWith("\\") && !isCID(url);
 	}
