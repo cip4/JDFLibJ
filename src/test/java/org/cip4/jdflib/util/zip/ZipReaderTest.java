@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -576,6 +576,40 @@ public class ZipReaderTest extends JDFTestCaseBase
 		assertNotNull(r.getMatchingEntry("content/???.Pdf", 0));
 		assertNotNull(r.getMatchingEntry("content/%20.Pdf", 0));
 		r.close();
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testGetMatchingEntries()
+	{
+		ZipReader r = new ZipReader(sm_dirTestData + "testZip.zip");
+		Vector<ZipEntry> v = r.getMatchingEntries("*", true);
+		r.buffer();
+		assertEquals(v.size(), r.getEntries().size());
+		for (int i = 0; i < v.size() - 1; i++)
+		{
+			assertTrue(v.get(i).getName().compareTo(v.get(i + 1).getName()) < 0);
+		}
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testSetEntry()
+	{
+		ZipReader r = new ZipReader(sm_dirTestData + "testZip.zip");
+		Vector<ZipEntry> v = r.getEntries();
+		for (ZipEntry ze : v)
+		{
+			assertTrue(r.setEntry(ze));
+		}
+		assertFalse(r.setEntry(null));
+		assertFalse(r.setEntry(new ZipEntry("blub")));
 	}
 
 	/**

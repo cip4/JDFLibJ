@@ -73,6 +73,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Vector;
 import java.util.zip.ZipEntry;
 
 import org.cip4.jdflib.core.ElementName;
@@ -179,13 +180,10 @@ public class XJDFZipReader implements IStreamWriter
 		{
 			String pathExpression = UrlUtil.getURLWithDirectory(path, "*.xjdf");
 			XJDFToJDFConverter localConverter = getConverter();
-			for (int i = 0; true; i++)
+			Vector<ZipEntry> vze = theReader.getMatchingEntries(pathExpression, true);
+			for (ZipEntry ze : vze)
 			{
-				ZipEntry ze = theReader.getMatchingEntry(pathExpression, i);
-				if (ze == null)
-				{
-					break;
-				}
+				theReader.setEntry(ze);
 				XMLDoc xdoc = theReader.getXMLDoc();
 				if (xdoc != null)
 				{

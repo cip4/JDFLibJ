@@ -74,6 +74,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -86,6 +88,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.ByteArrayIOFileStream;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.SkipInputStream;
 import org.cip4.jdflib.util.StringUtil;
@@ -462,6 +465,32 @@ public class ZipReader
 	/**
 	 * get an entry by name - note that we need to buffer the entire file for this random access method
 	 * 
+	 * @param zeSet the zip entry to set
+	 * @return
+	 */
+	public boolean setEntry(ZipEntry zeSet)
+	{
+		buffer();
+		if (zeSet == null)
+		{
+			log.error("cannot set null entry");
+			return false;
+		}
+		ZipEntry ze = getNextEntry();
+
+		String setName = zeSet.getName();
+		while (ze != null)
+		{
+			if (setName.equals(ze.getName()))
+				return true;
+			ze = getNextEntry();
+		}
+		return false;
+	}
+
+	/**
+	 * get an entry by name - note that we need to buffer the entire file for this random access method
+	 * 
 	 * @param expr the regexp of the path (including directories) to match - simplified regexp is accepted
 	 * @param iSkip how many to skip - default= 0
 	 * @return
@@ -481,6 +510,48 @@ public class ZipReader
 			ze = getNextMatchingEntry(expr);
 		}
 		return null;
+	}
+
+	/**
+	 * get entries by name - note that we need to buffer the entire file for this random access method
+	 * 
+	 * @param expr the regexp of the path (including directories) to match - simplified regexp is accepted
+	 *  
+	 * @return
+	 */
+	public Vector<ZipEntry> getMatchingEntries(String expr, boolean sortName)
+	{
+		buffer();
+		Vector<ZipEntry> vRet = new Vector<ZipEntry>();
+		ZipEntry ze = getNextMatchingEntry(expr);
+
+		while (ze != null)
+		{
+			vRet.add(ze);
+			ze = getNextMatchingEntry(expr);
+		}
+		if (sortName)
+		{
+			Collections.sort(vRet, new NameComparator());
+		}
+		return vRet;
+	}
+
+	private class NameComparator implements Comparator<ZipEntry>
+	{
+
+		/**
+		 * 
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
+		@Override
+		public int compare(ZipEntry o1, ZipEntry o2)
+		{
+			String s1 = getEntryName(o1);
+			String s2 = getEntryName(o2);
+			return ContainerUtil.compare(s1, s2);
+		}
+
 	}
 
 	/**
