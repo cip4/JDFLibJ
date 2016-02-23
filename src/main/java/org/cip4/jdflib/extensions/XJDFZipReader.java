@@ -178,6 +178,7 @@ public class XJDFZipReader implements IStreamWriter
 		if (theReader != null)
 		{
 			String pathExpression = UrlUtil.getURLWithDirectory(path, "*.xjdf");
+			XJDFToJDFConverter localConverter = getConverter();
 			for (int i = 0; true; i++)
 			{
 				ZipEntry ze = theReader.getMatchingEntry(pathExpression, i);
@@ -188,7 +189,7 @@ public class XJDFZipReader implements IStreamWriter
 				XMLDoc xdoc = theReader.getXMLDoc();
 				if (xdoc != null)
 				{
-					newDoc = getConverter().convert(xdoc.getRoot());
+					newDoc = localConverter.convert(xdoc.getRoot());
 				}
 			}
 		}
