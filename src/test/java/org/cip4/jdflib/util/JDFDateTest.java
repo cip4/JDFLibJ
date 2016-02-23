@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -346,12 +346,12 @@ public class JDFDateTest extends JDFTestCaseBase
 	{
 		long l = System.currentTimeMillis();
 		JDFDate date = new JDFDate("" + l);
-		assertEquals(date.getTimeInMillis(), l, 1000);
-		date = new JDFDate("" + (l / 1000));
 		assertEquals(date.getTimeInMillis(), l, 2000);
+		date = new JDFDate("" + (l / 1000));
+		assertEquals(date.getTimeInMillis(), l, 4000);
 		date = new JDFDate("" + ((l / 1000) - 365 * 24 * 3600 * 5));
 		date.addOffset(0, 0, 0, 365 * 5);
-		assertEquals(date.getTimeInMillis(), l, 2000);
+		assertEquals(date.getTimeInMillis(), l, 6000);
 	}
 
 	/**
