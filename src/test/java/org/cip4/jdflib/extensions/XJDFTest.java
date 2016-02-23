@@ -107,6 +107,7 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
@@ -1285,8 +1286,8 @@ public class XJDFTest extends JDFTestCaseBase
 		assertNotNull(d);
 		JDFNode root = d.getJDFRoot();
 		JDFColorIntent ci = (JDFColorIntent) root.getResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
-		JDFColorIntent cif = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Front"), null);
-		JDFColorIntent cib = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Back"), null);
+		JDFColorIntent cif = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Front"), EnumPartUsage.Explicit);
+		JDFColorIntent cib = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Back"), EnumPartUsage.Explicit);
 		assertNull(cif);
 		assertNull(cib);
 		assertNull(ci.getElement("ColorsUsedBack"));
@@ -1308,7 +1309,7 @@ public class XJDFTest extends JDFTestCaseBase
 		JDFNode root = d.getJDFRoot();
 		JDFColorIntent ci = (JDFColorIntent) root.getResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
 		JDFColorIntent cif = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Front"), null);
-		JDFColorIntent cib = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Back"), null);
+		JDFColorIntent cib = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Back"), EnumPartUsage.Explicit);
 		assertNull(ci.getColorsUsed());
 		assertNull(cib);
 		assertEquals(cif.getNumColors(), 4);

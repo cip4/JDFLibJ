@@ -158,7 +158,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	@Test
 	public void testConstructFile() throws IOException
 	{
-		final File f = new File(sm_dirTestDataTemp + "bios.fil");
+		final File f = new File(sm_dirTestDataTemp + "bios2.fil");
 		f.delete();
 		f.createNewFile();
 		final FileOutputStream fos = new FileOutputStream(f);
@@ -190,9 +190,9 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	@Test
 	public void testConstructBadFile() throws IOException
 	{
-		File f = new File(sm_dirTestDataTemp + "bios.fil");
+		File f = new File(sm_dirTestDataTemp + "bios1.fil");
 		f.delete();
-		ThreadUtil.sleep(323);
+		ThreadUtil.sleep(123);
 		assertFalse(f.exists());
 		ByteArrayIOStream ios = new ByteArrayIOFileStream(f, 200, true);
 		InputStream is = ios.getInputStream();

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -73,6 +73,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.IntentHelper;
+import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
@@ -178,7 +179,7 @@ public class WalkIntent extends WalkXElement
 	public boolean matches(final KElement toCheck)
 	{
 		final KElement parent = toCheck.getParentNode_KElement();
-		final boolean bL1 = parent != null && parent.getLocalName().equals("Product");
-		return bL1 && super.matches(toCheck) && toCheck.getLocalName().equals("Intent");
+		final boolean bL1 = parent != null && parent.getLocalName().equals(ProductHelper.PRODUCT);
+		return bL1 && super.matches(toCheck) && toCheck.getLocalName().equals(IntentHelper.INTENT);
 	}
 }
