@@ -225,7 +225,7 @@ public class WalkXElement extends BaseWalker
 		JDFAttributeMap partMap = part == null ? null : part.getAttributeMap();
 		if (partMap != null)
 		{
-			String productID = StringUtil.getNonEmpty(partMap.get(AttributeName.PRODUCTID));
+			String productID = StringUtil.getNonEmpty(partMap.get(AttributeName.PRODUCTPART));
 			if (productID != null)
 			{
 				JDFNode newNode = (JDFNode) theNode.getChildWithAttribute(ElementName.JDF, AttributeName.ID, null, productID, 0, false);

@@ -2203,6 +2203,45 @@ public class KElementTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testGetNonEmpty_KElement()
+	{
+		final XMLDoc xd = new XMLDoc("a", null);
+		final KElement root = xd.getRoot();
+		root.setAttribute("at", "b");
+		assertEquals("b", root.getNonEmpty_KElement("at"));
+		assertNull(root.getNonEmpty_KElement("at2"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testHasNonEmpty()
+	{
+		final XMLDoc xd = new XMLDoc("a", null);
+		final KElement root = xd.getRoot();
+		root.setAttribute("at", "b");
+		assertTrue(root.hasNonEmpty("at"));
+		assertFalse(root.hasNonEmpty("at2"));
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public void testHasNonEmpty_KElement()
+	{
+		final XMLDoc xd = new XMLDoc("a", null);
+		final KElement root = xd.getRoot();
+		root.setAttribute("at", "b");
+		assertTrue(root.hasNonEmpty_KElement("at"));
+		assertFalse(root.hasNonEmpty_KElement("at2"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testRemoveXPathAttribute()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);

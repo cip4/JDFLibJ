@@ -1298,6 +1298,30 @@ public class XJDFTest extends JDFTestCaseBase
 	 *  
 	 */
 	@Test
+	public void testFromXJDFColorIntentExplicitUsed()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		xjdf = new XMLDoc("XJDF", null).getRoot();
+		xjdf.setAttribute("Types", "Product");
+		xjdf.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@ColorsUsed", "Black Spot1");
+		xjdf.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@ColorsUsedBack", "Black");
+		final JDFDoc d = xCon.convert(xjdf);
+		assertNotNull(d);
+		JDFNode root = d.getJDFRoot();
+		JDFColorIntent ci = (JDFColorIntent) root.getResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
+		JDFColorIntent cif = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Front"), EnumPartUsage.Explicit);
+		JDFColorIntent cib = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Back"), EnumPartUsage.Explicit);
+		assertNotNull(cif);
+		assertNotNull(cib);
+		assertNull(cib.getElement("ColorsUsedBack"));
+		assertEquals(cif.getColorsUsed().getSeparations().size(), 2);
+		assertEquals(cib.getColorsUsed().getSeparations().size(), 1);
+	}
+
+	/**
+	 *  
+	 */
+	@Test
 	public void testFromXJDFColorIntentFront()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);

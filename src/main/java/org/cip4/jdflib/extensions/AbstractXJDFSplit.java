@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -133,10 +133,12 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 		if (set != null && types != null)
 		{
 			String processUsage = set.getProcessUsage();
-			VString allUsages = StringUtil.tokenize(processUsage, null, false);
-			if (allUsages != null && allUsages.size() > 0)
+			if (processUsage != null)
 			{
-				if (!allUsages.containsAny(types))
+				if ("EndCustomer".equals(processUsage))
+					processUsage = "Product";
+
+				if (!types.contains(processUsage))
 				{
 					set.deleteNode();
 				}

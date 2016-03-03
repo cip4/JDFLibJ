@@ -295,7 +295,46 @@ public class KElement extends ElementNSImpl implements Element
 	public String getNonEmpty(final String strLocalName)
 	{
 		String val = getAttribute(strLocalName, null, null);
-		return val == JDFCoreConstants.EMPTYSTRING ? null : val;
+		return val == null || JDFConstants.EMPTYSTRING.equals(val) ? null : val;
+	}
+
+	/**
+	 * similar to getAttribute but returns null for all empty strings
+	 * 
+	 * Gets an attribute value out of an element
+	 * @param strLocalName the name of the attribute you want to have
+	 * @return String the value of the Attribute or emptystring
+	 */
+	public String getNonEmpty_KElement(final String strLocalName)
+	{
+		String val = getAttribute_KElement(strLocalName, null, null);
+		return val == null || JDFConstants.EMPTYSTRING.equals(val) ? null : val;
+	}
+
+	/**
+	 * similar to hasAttribute but returns false for all empty strings
+	 * 
+	 * Gets an attribute value out of an element
+	 * @param strLocalName the name of the attribute you want to have
+	 * @return String the value of the Attribute or emptystring
+	 */
+	public boolean hasNonEmpty(final String strLocalName)
+	{
+		String val = getNonEmpty(strLocalName);
+		return val != null;
+	}
+
+	/**
+	 * similar to hasAttribute but returns false for all empty strings
+	 * 
+	 * Gets an attribute value out of an element
+	 * @param strLocalName the name of the attribute you want to have
+	 * @return String the value of the Attribute or emptystring
+	 */
+	public boolean hasNonEmpty_KElement(final String strLocalName)
+	{
+		String val = getNonEmpty_KElement(strLocalName);
+		return val != null;
 	}
 
 	/**

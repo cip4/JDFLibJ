@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,6 +70,8 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -77,6 +79,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
+import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.Test;
 
@@ -150,6 +153,32 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 
 		JDFDoc d = c.convert(h.getRoot());
 		d.write2File(sm_dirTestDataTemp + "splitxjdfNull.jdf", 2, false);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testSplitEndCustomer()
+	{
+		XJDFHelper h = new XJDFHelper("j1", "root", null);
+		h.appendProduct();
+		h.setTypes("Product ConventionalPrinting");
+		SetHelper s = h.appendResourceSet(ElementName.CUSTOMERINFO, EnumUsage.Input);
+		s.setProcessUsage("EndCustomer");
+		s.getCreatePartition(0, true).getResource().setAttribute(AttributeName.CUSTOMERID, "c1");
+		SetHelper s2 = h.appendResourceSet(ElementName.CUSTOMERINFO, EnumUsage.Input);
+		s2.getCreatePartition(0, true).getResource().setAttribute(AttributeName.CUSTOMERID, "c2");
+		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+		c.setSplitter(splitter);
+
+		JDFDoc d = c.convert(h);
+		JDFNode n = d.getJDFRoot();
+
+		assertNotNull(n.getCustomerInfo());
+		assertNotNull(n.getResource(ElementName.CUSTOMERINFO, EnumUsage.Input, "EndCustomer", null, 0));
+		d.write2File(sm_dirTestDataTemp + "ci2.jdf", 2, false);
 	}
 
 	/**

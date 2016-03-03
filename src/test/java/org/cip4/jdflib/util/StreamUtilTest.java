@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,7 +68,9 @@
  */
 package org.cip4.jdflib.util;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.VString;
@@ -95,4 +97,27 @@ public class StreamUtilTest extends JDFTestCaseBase
 		assertEquals(3, vs.size());
 		bos.close();
 	}
+
+	/**
+	 * 
+	 *  
+	 * @throws IOException
+	 */
+	@Test
+	public void testReset() throws IOException
+	{
+		InputStream s = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
+		s.mark(42);
+		byte[] b = new byte[4];
+		s.read(b);
+		assertEquals(new String(b), "%PDF");
+		StreamUtil.reset(s);
+		s.read(b);
+		assertEquals(new String(b), "%PDF");
+		StreamUtil.reset(null);
+		s.read(b);
+		assertNotSame(new String(b), "%PDF");
+
+	}
+
 }

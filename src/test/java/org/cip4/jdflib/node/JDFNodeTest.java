@@ -725,6 +725,17 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testEnumType()
+	{
+		assertNull(EnumType.getEnum(-1));
+		assertNull(EnumType.getEnum("FOO"));
+		assertEquals(EnumType.ConventionalPrinting, EnumType.getEnum(JDFConstants.TYPE_CONVENTIONALPRINTING));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testContainsType()
 	{
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
@@ -736,7 +747,6 @@ public class JDFNodeTest extends JDFTestCaseBase
 		n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.AssetListCreation);
 		assertTrue(n.containsType(EnumType.AssetListCreation.getName()));
-
 	}
 
 	/**

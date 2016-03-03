@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -114,31 +114,6 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 			boolean b = ThreadUtil.sleep(t);
 			log.info(b + " waited: " + i);
 		}
-	}
-
-	/**
-	 * 
-	 *  
-	 */
-	@Test
-	public void testMulti()
-	{
-		OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi1", 3);
-		assertEquals(0, q.getAvQueue());
-		assertEquals(0, q.getAvRun());
-		for (int i = 0; i < 10; i++)
-			q.queue(new WaitRunner(i, 100));
-		assertEquals(q.getAvQueue(), 0);
-		ThreadUtil.sleep(10);
-		assertEquals(q.size(), 7);
-		ThreadUtil.sleep(1111);
-		assertTrue(q.getAvQueue() > 0);
-		assertTrue(q.getAvRun() > 0);
-		assertEquals(q.size(), 0);
-		assertTrue(q.queue(new WaitRunner(4)));
-		ThreadUtil.sleep(222);
-		assertEquals(q.size(), 0);
-		assertTrue(q.getAvQueue() > 0);
 	}
 
 	/**

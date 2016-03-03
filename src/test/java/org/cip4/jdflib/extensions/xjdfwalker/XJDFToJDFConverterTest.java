@@ -443,6 +443,30 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*  
 	*/
 	@Test
+	public void testNiciProduct()
+	{
+		XJDFHelper h = new XJDFHelper("j", "root", null);
+		ProductHelper p1 = h.appendProduct();
+		p1.setRoot();
+		p1.setID("ID1");
+		ProductHelper p2 = h.appendProduct();
+		p2.setRoot();
+		p2.setID("ID2");
+		SetHelper sh = h.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+		sh.setProcessUsage("Product");
+		sh.appendPartition(new JDFAttributeMap(AttributeName.PRODUCTPART, "ID1"), true).getResource().setAttribute(AttributeName.JOBPRIORITY, "42");
+		sh.appendPartition(new JDFAttributeMap(AttributeName.PRODUCTPART, "ID2"), true).getResource().setAttribute(AttributeName.JOBPRIORITY, "24");
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		JDFDoc d = xCon.convert(h);
+		JDFNode jobPart1 = d.getJDFRoot().getJobPart("root.1", null);
+		assertEquals(jobPart1.getNodeInfo().getJobPriority(), 42);
+	}
+
+	/**
+	*  
+	*  
+	*/
+	@Test
 	public void testMultiBackwardProduct()
 	{
 		XJDFHelper h = new XJDFHelper("j", "root", null);

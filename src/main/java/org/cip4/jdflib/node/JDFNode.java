@@ -1999,6 +1999,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		/** * */
 		public static final EnumProcessUsage Case = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_CASE);
 		/** * */
+		public static final EnumProcessUsage EndCustomer = new EnumProcessUsage("EndCustomer");
+		/** * */
 		public static final EnumProcessUsage FrontEndSheet = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_FRONTENDSHEET);
 		/** * */
 		public static final EnumProcessUsage BackEndSheet = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_BACKENDSHEET);
@@ -3048,6 +3050,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
+	 * 
+	 * @param jdfResource
+	 * @param usage
+	 * @param processUsage
+	 * @return
+	 */
+	public JDFResourceLink ensureLink(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage)
+	{
+		String puName = processUsage == null ? null : processUsage.getName();
+		return ensureLinkPU(jdfResource, usage, puName);
+	}
+
+	/**
 	 * ensureLink: if it does not yet exist, create a resourceLink in the resourceLinkPool that refers to the resource jdfResource also sets the appropriate
 	 * combined process index
 	 * 
@@ -3060,7 +3075,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * 
 	 * @default ensureLink(r, usage, null)
 	 */
-	public JDFResourceLink ensureLink(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage)
+	public JDFResourceLink ensureLinkPU(final JDFResource jdfResource, final EnumUsage usage, final String processUsage)
 	{
 		if (jdfResource == null)
 		{
@@ -3088,8 +3103,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 					rl.setProcessUsage(processUsage);
 				}
 			}
-			if (rl == null)
-				rl = linkResource(jdfResource, usage, processUsage);
+			if (rl == null && usage != null)
+			{
+				rl = linkResource(jdfResource, usage, null);
+				rl.setProcessUsage(processUsage);
+			}
 		}
 		return rl;
 	}

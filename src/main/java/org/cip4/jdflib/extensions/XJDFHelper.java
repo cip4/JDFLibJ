@@ -530,7 +530,7 @@ public class XJDFHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * @param family - always RESOURCE
+	 * @param family - always RESOURCE better use appendResourceSet
 	 * @param name 
 	 * @param usage 
 	 * @return a new set element

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -66,96 +66,81 @@
  *  
  * 
  */
-package org.cip4.jdflib.elementwalker.fixversion;
+package org.cip4.jdflib.util.thread;
 
-import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.util.ThreadUtil;
+import org.junit.Test;
 
-/**
- * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * June 7, 2009
- */
-public class WalkJDF extends WalkElement
+public class MultiTaskQueueTest extends JDFTestCaseBase
 {
+	class WaitRunner implements Runnable
+	{
+		/**
+		 * 
+		 * @param i
+		 */
+		WaitRunner(int i)
+		{
+			super();
+			this.i = i;
+			t = 100;
+		}
+
+		WaitRunner(int i, int t)
+		{
+			super();
+			this.i = i;
+			this.t = t;
+		}
+
+		private final int i;
+		private final int t;
+
+		/**
+		 * @see java.lang.Runnable#run()
+		 */
+		@Override
+		public void run()
+		{
+			log.info("queued: " + i);
+			boolean b = ThreadUtil.sleep(t);
+			log.info(b + " waited: " + i);
+		}
+	}
+
 	/**
 	 * 
 	 */
-	public WalkJDF()
+	@Test
+	public void testSize()
 	{
-		super();
+		MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multi1", 3);
+		assertEquals(0, q.size());
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if matches
+	 * 
+	 *  
 	 */
-	@Override
-	public boolean matches(final KElement toCheck)
+	@Test
+	public void testMulti()
 	{
-		return (toCheck instanceof JDFNode);
+		OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi1", 3);
+		assertEquals(0, q.getAvQueue());
+		assertEquals(0, q.getAvRun());
+		for (int i = 0; i < 10; i++)
+			q.queue(new WaitRunner(i, 100));
+		assertEquals(q.getAvQueue(), 0);
+		ThreadUtil.sleep(10);
+		assertEquals(q.size(), 7);
+		ThreadUtil.sleep(1111);
+		assertTrue(q.getAvQueue() > 0);
+		assertTrue(q.getAvRun() > 0);
+		assertEquals(q.size(), 0);
+		assertTrue(q.queue(new WaitRunner(4)));
+		ThreadUtil.sleep(222);
+		assertEquals(q.size(), 0);
+		assertTrue(q.getAvQueue() > 0);
 	}
-
-	/**
-	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
-	 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
-	 * high versions but potentially fail when attempting to move from higher to lower versions
-	 */
-	@Override
-	public KElement walk(final KElement e1, final KElement trackElem)
-	{
-		final JDFNode n = (JDFNode) e1;
-		if (fixVersion.version != null)
-		{
-			n.setVersion(fixVersion.version);
-			n.setMaxVersion(fixVersion.version);
-			n.fixNiCi(fixVersion.version);
-			fixNamedFeatures(n, trackElem);
-		}
-
-		if (!n.hasAttribute(AttributeName.JOBPARTID))
-		{
-			n.setJobPartID(n.generateDotID(AttributeName.JOBPARTID, null));
-		}
-
-		if (n.isJDFRoot() && !n.hasAncestorAttribute(AttributeName.JOBID, null))
-		{
-			n.setJobID(n.generateDotID(AttributeName.JOBID, null));
-		}
-		final EnumType enumType = n.getEnumType();
-		if (enumType != null)
-		{
-			n.setType(enumType); // fixes xsi:type stuff
-		}
-		return super.walk(e1, trackElem);
-	}
-
-	/**
-	 * move namedfeatures to generalID
-	 * @param trackElem 
-	 * @param n 
-	 */
-	private void fixNamedFeatures(JDFNode n, KElement trackElem)
-	{
-		if (EnumUtil.aLessThanB(EnumVersion.Version_1_4, fixVersion.version))
-		{
-			VString v = n.getNamedFeatures();
-			final int size = v == null ? 0 : v.size();
-			for (int i = 0; i < size / 2; i++)
-			{
-				String key = v.get(i * 2);
-				String val = v.get(i * 2 + 1);
-				n.appendGeneralID(key, val).setDataType(EnumDataType.NamedFeature);
-			}
-			n.removeAttribute(AttributeName.NAMEDFEATURES);
-		}
-	}
-
 }

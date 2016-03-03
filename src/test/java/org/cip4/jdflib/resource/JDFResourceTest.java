@@ -218,6 +218,78 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	@Test
+	public void testGetNonEmpty()
+	{
+		final JDFDoc xd = new JDFDoc(ElementName.JDF, null);
+		final JDFNode root = xd.getJDFRoot();
+		JDFResource r = root.addResource(ElementName.CUTTINGPARAMS, EnumUsage.Input);
+		JDFResource leaf = r.addPartition(EnumPartIDKey.DeliveryUnit1, "B1");
+		r.setDescriptiveName("d1");
+		assertEquals("d1", r.getNonEmpty(AttributeName.DESCRIPTIVENAME));
+		assertEquals("d1", leaf.getNonEmpty(AttributeName.DESCRIPTIVENAME));
+		assertNull(root.getNonEmpty(AttributeName.ABSOLUTEBOX));
+		assertNull(leaf.getNonEmpty(AttributeName.ABSOLUTEBOX));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetNonEmpty_KElement()
+	{
+		final JDFDoc xd = new JDFDoc(ElementName.JDF, null);
+		final JDFNode root = xd.getJDFRoot();
+		JDFResource r = root.addResource(ElementName.CUTTINGPARAMS, EnumUsage.Input);
+		JDFResource leaf = r.addPartition(EnumPartIDKey.DeliveryUnit1, "B1");
+		leaf.setAmount(42);
+		r.setDescriptiveName("d1");
+		assertEquals("d1", r.getNonEmpty_KElement(AttributeName.DESCRIPTIVENAME));
+		assertEquals("42", leaf.getNonEmpty_KElement(AttributeName.AMOUNT));
+		assertNull(leaf.getNonEmpty_KElement(AttributeName.DESCRIPTIVENAME));
+		assertNull(root.getNonEmpty_KElement(AttributeName.ABSOLUTEBOX));
+		assertNull(leaf.getNonEmpty_KElement(AttributeName.ABSOLUTEBOX));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testHasNonEmpty()
+	{
+		final JDFDoc xd = new JDFDoc(ElementName.JDF, null);
+		final JDFNode root = xd.getJDFRoot();
+		JDFResource r = root.addResource(ElementName.CUTTINGPARAMS, EnumUsage.Input);
+		JDFResource leaf = r.addPartition(EnumPartIDKey.DeliveryUnit1, "B1");
+		r.setDescriptiveName("d1");
+		assertTrue(r.hasNonEmpty(AttributeName.DESCRIPTIVENAME));
+		assertTrue(leaf.hasNonEmpty(AttributeName.DESCRIPTIVENAME));
+		assertFalse(root.hasNonEmpty(AttributeName.ABSOLUTEBOX));
+		assertFalse(leaf.hasNonEmpty(AttributeName.ABSOLUTEBOX));
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public void testHasNonEmpty_KElement()
+	{
+		final JDFDoc xd = new JDFDoc(ElementName.JDF, null);
+		final JDFNode root = xd.getJDFRoot();
+		JDFResource r = root.addResource(ElementName.CUTTINGPARAMS, EnumUsage.Input);
+		JDFResource leaf = r.addPartition(EnumPartIDKey.DeliveryUnit1, "B1");
+		leaf.setAmount(42);
+		r.setDescriptiveName("d1");
+		assertTrue(r.hasNonEmpty_KElement(AttributeName.DESCRIPTIVENAME));
+		assertTrue(leaf.hasNonEmpty_KElement(AttributeName.AMOUNT));
+		assertFalse(leaf.hasNonEmpty_KElement(AttributeName.DESCRIPTIVENAME));
+		assertFalse(root.hasNonEmpty_KElement(AttributeName.ABSOLUTEBOX));
+		assertFalse(leaf.hasNonEmpty_KElement(AttributeName.ABSOLUTEBOX));
+	}
+
+	/**
 	 * test the the generalized partition matching
 	 */
 	@Test

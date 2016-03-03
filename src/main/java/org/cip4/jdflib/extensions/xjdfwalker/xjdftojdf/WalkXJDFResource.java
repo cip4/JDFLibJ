@@ -85,7 +85,6 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.StringUtil;
@@ -171,19 +170,23 @@ public class WalkXJDFResource extends WalkXElement
 		JDFResource res = (JDFResource) newRoot.getCreateResourcePool().getChildWithAttribute(null, AttributeName.ID, null, id, 0, true);
 		if (res == null)
 		{
-			res = theNode.getCreateResource(name, inOut, processUsage);
+			res = theNode.getResource(name, inOut, processUsage, null, 0);
+			if (res == null)
+			{
+				res = theNode.addResource(name, null);
+				res.setID(id);
+			}
 			if (theNode != newRoot)
 			{
 				newRoot.getCreateResourcePool().moveElement(res, null);
 			}
-			res.setID(id);
 		}
 		if (inOut != null)
 		{
 			JDFResourceLink rl = theNode.getLink(res, inOut);
 			if (rl == null)
 			{
-				rl = theNode.ensureLink(res, inOut, EnumProcessUsage.getEnum(processUsage));
+				rl = theNode.ensureLinkPU(res, inOut, processUsage);
 				rl.setrRef(id);
 				res.removeAttribute(AttributeName.USAGE);
 				VString reslinks = XJDFToJDFConverter.getResLinkAttribs();
