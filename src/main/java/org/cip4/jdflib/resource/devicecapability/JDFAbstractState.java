@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -355,6 +355,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getNamePathVector()
 	 * @return
 	*/
+	@Override
 	public final VString getNamePathVector()
 	{
 		return getNamePathVector(true);
@@ -425,6 +426,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * 
 	 * @param value the value to set the attribute to
 	 */
+	@Override
 	public void setAvailability(final EnumAvailability value)
 	{
 		setAttribute(AttributeName.AVAILABILITY, value.getName(), null);
@@ -435,6 +437,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * 
 	 * @return EnumAvailability: the enumeration value of the attribute
 	 */
+	@Override
 	public EnumAvailability getAvailability()
 	{
 		EnumAvailability avail = EnumAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, null));
@@ -921,7 +924,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 			}
 			else if (this instanceof JDFMatrixState)
 			{
-				def = JDFMatrix.unitMatrix.toString();
+				def = JDFMatrix.getUnitMatrix().toString();
 			}
 			else if (this instanceof JDFShapeState)
 			{
@@ -1200,6 +1203,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getModulePool()
 	 * @return
 	*/
+	@Override
 	public JDFModulePool getModulePool()
 	{
 		return (JDFModulePool) getParentPool(ElementName.MODULEPOOL);
@@ -1209,6 +1213,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getCreateModulePool()
 	 * @return
 	*/
+	@Override
 	public JDFModulePool getCreateModulePool()
 	{
 		return (JDFModulePool) getCreateParentPool(ElementName.MODULEPOOL);
@@ -1261,6 +1266,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * 
 	 * @return VString the value of the attribute
 	 */
+	@Override
 	public VString getModuleRefs()
 	{
 		return StringUtil.tokenize(getAttribute(AttributeName.MODULEREFS, null, null), " ", false);
@@ -1271,6 +1277,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * @param id
 	 * @return
 	*/
+	@Override
 	public JDFModuleCap appendModuleRef(final String id)
 	{
 		return JDFModulePool.appendModuleRef(this, id);
@@ -1302,6 +1309,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 * @return
 	*/
+	@Override
 	public abstract EnumTerm getEvaluationType();
 
 }

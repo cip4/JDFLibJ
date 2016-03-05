@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,25 +79,41 @@
 package org.cip4.jdflib.datatypes;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class JDFMatrixTest extends JDFTestCaseBase {
+public class JDFMatrixTest extends JDFTestCaseBase
+{
 	/**
 	 * 
 	 */
 	@Test
-	public void testCreate() {
+	public void testCreate()
+	{
 		JDFMatrix m = new JDFMatrix(90, 20, 20);
 		JDFMatrix m2 = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
 		m2.shift(20, 20);
-		Assert.assertEquals(m, m2);
+		assertEquals(m, m2);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testCreateFromRect()
+	{
+		JDFRectangle r = new JDFRectangle(0, 10, 30, 40);
+		JDFMatrix m = new JDFMatrix(r);
+		JDFMatrix m2 = JDFMatrix.getUnitMatrix();
+		m2.shift(0, 10);
+		assertEquals(m, m2);
 	}
 
 	/**
@@ -105,14 +121,15 @@ public class JDFMatrixTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public void testSetString() throws Exception {
-		JDFDoc d = new JDFDoc("JDF");
+	public void testSetString() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
 
 		JDFMatrix m = new JDFMatrix("1 0 0 1 0 0");
-		Assert.assertEquals(m, JDFMatrix.unitMatrix);
+		assertEquals(m, JDFMatrix.getUnitMatrix());
 		n.setAttribute("foo", m, null);
-		Assert.assertEquals(n.getAttribute("foo"), m.toString());
+		assertEquals(n.getAttribute("foo"), m.toString());
 	}
 
 	// ////////////////////////////////////////////////////////////
@@ -120,101 +137,146 @@ public class JDFMatrixTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testOrientation() {
+	public void testOrientation()
+	{
 
 		JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
-		Assert.assertEquals(m, JDFMatrix.unitMatrix);
+		assertEquals(m, JDFMatrix.getUnitMatrix());
 	}
 
-	// ////////////////////////////////////////////////////////////
 	/**
 	 * 
 	 */
 	@Test
-	public void testRotate() {
-
+	public void testRotate()
+	{
 		JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
-		Assert.assertEquals(m, JDFMatrix.unitMatrix);
+		assertEquals(m, JDFMatrix.getUnitMatrix());
 		m.rotate(180);
-		Assert.assertEquals(m, new JDFMatrix(EnumOrientation.Rotate180, 0, 0));
+		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate180, 0, 0));
 		m.rotate(90);
-		Assert.assertEquals(m, new JDFMatrix(EnumOrientation.Rotate270, 0, 0));
+		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate270, 0, 0));
 
 		m.rotate(180);
-		Assert.assertEquals(m, new JDFMatrix(EnumOrientation.Rotate90, 0, 0));
+		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate90, 0, 0));
 		m = new JDFMatrix(EnumOrientation.Flip0, 0, 0);
 		m.rotate(180);
-		Assert.assertEquals(m, new JDFMatrix(EnumOrientation.Flip180, 0, 0));
+		assertEquals(m, new JDFMatrix(EnumOrientation.Flip180, 0, 0));
 		m.rotate(90);
-		Assert.assertEquals(m, new JDFMatrix(EnumOrientation.Flip270, 0, 0));
+		assertEquals(m, new JDFMatrix(EnumOrientation.Flip270, 0, 0));
 	}
 
-	// ////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	@Test
+	public void testMultiRotate()
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			JDFMatrix m = JDFMatrix.getUnitMatrix();
+			m.shift(i * 10, i * 20);
+			JDFMatrix m2 = new JDFMatrix(m);
+			for (int ii = 0; ii < 18; ii++)
+			{
+				m2.rotate(20);
+			}
+			assertEquals(m, m2);
+		}
+	}
+
 	/**
 	 * @throws Exception
 	 * 
 	 */
 	@Test
-	public void testShift() throws Exception {
+	public void testShift() throws Exception
+	{
 
 		JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
-		Assert.assertEquals(m, JDFMatrix.unitMatrix);
+		assertEquals(m, JDFMatrix.getUnitMatrix());
 		m.shift(10, 11);
-		Assert.assertEquals(m, new JDFMatrix("1 0 0 1 10 11"));
+		assertEquals(m, new JDFMatrix("1 0 0 1 10 11"));
 		m.shift(10, 11);
-		Assert.assertEquals("2nd shift adds up", m, new JDFMatrix("1 0 0 1 20 22"));
+		assertEquals("2nd shift adds up", m, new JDFMatrix("1 0 0 1 20 22"));
 	}
 
-	// ////////////////////////////////////////////////////////////
 	/**
 	 * @throws Exception
 	 * 
 	 */
 	@Test
-	public void testShiftXY() throws Exception {
+	public void testShiftXY() throws Exception
+	{
 
 		JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
 		m.shift(new JDFXYPair(20, 25));
-		Assert.assertEquals(m, new JDFMatrix("0 1 -1 0 20 25"));
+		assertEquals(m, new JDFMatrix("0 1 -1 0 20 25"));
+		m.shift(new JDFXYPair(20, 25));
+		assertEquals(m, new JDFMatrix("0 1 -1 0 40 50"));
 	}
 
-	// ////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception
+	 * 
+	 */
+	@Test
+	public void testSetShiftXY() throws Exception
+	{
+
+		JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
+		m.setShift(new JDFXYPair(20, 25));
+		assertEquals(m, new JDFMatrix("0 1 -1 0 20 25"));
+	}
+
+	/**
+	 * @throws Exception
+	 * 
+	 */
+	@Test
+	public void testGetShiftXY() throws Exception
+	{
+
+		JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
+		assertEquals(m.getShift(), new JDFXYPair());
+		m.setShift(new JDFXYPair(20, 25));
+		assertEquals(m.getShift(), new JDFXYPair(20, 25));
+	}
+
 	/**
 	 * 
 	 */
 	@Test
-	public void testConcat() {
+	public void testConcat()
+	{
 
 		JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
 		JDFMatrix m2 = new JDFMatrix(EnumOrientation.Rotate270, 0, 0);
 		m.concat(m2);
-		Assert.assertEquals(m, JDFMatrix.unitMatrix);
+		assertEquals(m, JDFMatrix.getUnitMatrix());
 
 		m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
 		m.concat(m);
-		Assert.assertEquals(m, new JDFMatrix(EnumOrientation.Rotate180, 0, 0));
+		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate180, 0, 0));
 
 		m = new JDFMatrix(EnumOrientation.Flip180, 0, 0);
 		m.concat(m);
-		Assert.assertEquals(m, new JDFMatrix(EnumOrientation.Rotate0, 0, 0));
+		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate0, 0, 0));
 
 	}
 
-	// ////////////////////////////////////////////////////////////
 	/**
 	 * @throws Exception
 	 * 
 	 */
 	@Test
-	public void testClone() throws Exception {
-		JDFMatrix m = (JDFMatrix) JDFMatrix.unitMatrix.clone();
+	public void testClone() throws Exception
+	{
+		JDFMatrix m = JDFMatrix.getUnitMatrix();
 		m.rotate(180);
-		Assert.assertNotSame(JDFMatrix.unitMatrix, m);
-		Assert.assertEquals(new JDFMatrix("1 0 0 1 0 0"), JDFMatrix.unitMatrix);
-		Assert.assertEquals(new JDFMatrix(EnumOrientation.Rotate180, 0, 0), m);
+		assertNotSame(JDFMatrix.getUnitMatrix(), m);
+		assertEquals(new JDFMatrix("1 0 0 1 0 0"), JDFMatrix.getUnitMatrix());
+		assertEquals(new JDFMatrix(EnumOrientation.Rotate180, 0, 0), m);
 	}
-
-	// ////////////////////////////////////////////////////////////
 
 }

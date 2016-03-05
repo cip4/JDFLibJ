@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -99,9 +99,20 @@ import org.cip4.jdflib.util.HashUtil;
  */
 public class JDFMatrix extends JDFNumList
 {
-	// **************************************** Constructors
-	// ****************************************
-	public final static JDFMatrix unitMatrix = new JDFMatrix(1, 0, 0, 1, 0, 0);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final static JDFMatrix unitMatrix = new JDFMatrix(1, 0, 0, 1, 0, 0);
+
+	/**
+	 * 
+	 * @return a copy of the unit matrix
+	 */
+	public static JDFMatrix getUnitMatrix()
+	{
+		return new JDFMatrix(unitMatrix);
+	}
 
 	/**
 	 * constructs a matrix with all values set to 0.0 Double
@@ -254,16 +265,32 @@ public class JDFMatrix extends JDFNumList
 	}
 
 	/**
-	 * constructs a rectangle with all values set via a JDFNumberList
+	 * copy constructor
 	 * 
-	 * @param nl the given number list
+	 * @param matrix the given number list
 	 * 
 	 * 
 	 */
-	public JDFMatrix(final JDFMatrix nl)
+	public JDFMatrix(final JDFMatrix matrix)
 	{
 		super();
-		addAll(nl);
+		addAll(matrix);
+	}
+
+	/**
+	 * constructs a rectangle with all values set via a JDFNumberList
+	 * 
+	 * @param rect the given number list
+	 * 
+	 * 
+	 */
+	public JDFMatrix(final JDFRectangle rect)
+	{
+		this(unitMatrix);
+		if (rect != null)
+		{
+			shift(rect.getLlx(), rect.getLly());
+		}
 	}
 
 	/**
@@ -400,6 +427,15 @@ public class JDFMatrix extends JDFNumList
 	public double getTx()
 	{
 		return doubleAt(4);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public JDFXYPair getShift()
+	{
+		return new JDFXYPair(getTx(), getTy());
 	}
 
 	/**
@@ -545,5 +581,16 @@ public class JDFMatrix extends JDFNumList
 			return;
 		}
 		shift(point.getX(), point.getY());
+	}
+
+	/**
+	 * shift this matrix by an xypair
+	 * 
+	 * @param point the point to shift by
+	 */
+	public void setShift(final JDFXYPair point)
+	{
+		setTx(point == null ? 0 : point.getX());
+		setTy(point == null ? 0 : point.getY());
 	}
 }

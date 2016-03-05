@@ -66,76 +66,67 @@
  *  
  * 
  */
-package org.cip4.jdflib.resource.devicecapability;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import java.util.Iterator;
-import java.util.Vector;
-
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement.EnumOrientation;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFMatrix;
-import org.junit.Test;
+import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.process.JDFCutBlock;
 
 /**
- * TODO Please insert comment!
- * @author rainer prosi
- * @date Dec 10, 2010
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class JDFMatrixEvaluationTest extends JDFTestCaseBase
+public class WalkCutBlock extends WalkXElement
 {
-	private JDFMatrixEvaluation m;
-
 	/**
 	 * 
 	 */
-	@Test
-	public void testGetTransforms()
+	public WalkCutBlock()
 	{
-		Vector<EnumOrientation> v = new Vector<EnumOrientation>();
-		v.add(EnumOrientation.Rotate90);
-		m.setTransforms(v);
-		assertEquals(v, m.getTransforms());
-		m.setAttribute(AttributeName.TRANSFORMS, "bad");
-		assertNull("bad att", m.getTransforms());
+		super();
 	}
 
 	/**
-	 * 
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
-	@Test
-	public void testFitsTransforms()
-	{
-		Vector<EnumOrientation> v = new Vector<EnumOrientation>();
-		v.add(EnumOrientation.Rotate90);
-		m.setTransforms(v);
-		JDFMatrix mat = JDFMatrix.getUnitMatrix();
-		assertFalse(m.fitsTransforms(mat));
-		mat.rotate(90);
-		assertTrue(m.fitsTransforms(mat));
-		Iterator<EnumOrientation> it = EnumOrientation.iterator();
-		while (it.hasNext())
-		{
-			EnumOrientation next = it.next();
-			v.set(0, next);
-			m.setTransforms(v);
-			for (int x = -100; x < 200; x += 100)
-			{
-				for (int y = -100; y < 200; y += 100)
-				{
-					assertTrue(m.fitsTransforms(new JDFMatrix(next, x, y)));
-				}
-			}
-		}
-	}
-
 	@Override
-	public void setUp() throws Exception
+	public boolean matches(final KElement toCheck)
 	{
-		super.setUp();
-		m = (JDFMatrixEvaluation) new JDFDoc(ElementName.MATRIXEVALUATION).getRoot();
+		return toCheck instanceof JDFCutBlock;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public KElement walk(KElement e, KElement trackElem)
+	{
+		String box = e.getNonEmpty(AttributeName.BOX);
+		JDFRectangle r = JDFRectangle.createRectangle(box);
+		if (r != null)
+		{
+			copyToTrf((JDFCutBlock) e, r);
+		}
+		return super.walk(e, trackElem);
+	}
+
+	/**
+	 * 
+	 * @param cutBlock
+	 * @param r
+	 */
+	private void copyToTrf(JDFCutBlock cutBlock, JDFRectangle r)
+	{
+		JDFMatrix blockTrf = JDFMatrix.getUnitMatrix();
+		blockTrf.shift(r.getLL());
+		cutBlock.setBlockTrf(blockTrf);
+		JDFXYPair size = r.getSize();
+		cutBlock.setBlockSize(size);
+		cutBlock.removeAttribute(AttributeName.BOX);
 	}
 
 }

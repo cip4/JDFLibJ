@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -315,14 +315,14 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 		final JDFContentObject co0 = su.appendContentObject();
 		co0.setOrd(0);
-		JDFMatrix m1 = (JDFMatrix) JDFMatrix.unitMatrix.clone();
+		JDFMatrix m1 = JDFMatrix.getUnitMatrix();
 		m1.shift(25, 25);
-		co0.setCTM(JDFMatrix.unitMatrix);
+		co0.setCTM(JDFMatrix.getUnitMatrix());
 		co0.setTrimSize(new JDFXYPair(200, 300));
 		final String[] id = new String[2];
 		id[0] = co0.appendAnchor(null);
 		final JDFContentObject co1 = su.appendContentObject();
-		m1 = (JDFMatrix) JDFMatrix.unitMatrix.clone();
+		m1 = JDFMatrix.getUnitMatrix();
 		m1.shift(275, 25);
 		co1.setCTM(m1);
 		co1.setTrimSize(200, 300);

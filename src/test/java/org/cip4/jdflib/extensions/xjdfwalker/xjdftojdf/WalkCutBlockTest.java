@@ -66,76 +66,41 @@
  *  
  * 
  */
-package org.cip4.jdflib.resource.devicecapability;
-
-import java.util.Iterator;
-import java.util.Vector;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.datatypes.JDFMatrix;
-import org.junit.Test;
+import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.process.JDFCutBlock;
 
 /**
- * TODO Please insert comment!
+ * 
  * @author rainer prosi
- * @date Dec 10, 2010
+ *
  */
-public class JDFMatrixEvaluationTest extends JDFTestCaseBase
+public class WalkCutBlockTest extends JDFTestCaseBase
 {
-	private JDFMatrixEvaluation m;
-
 	/**
 	 * 
 	 */
-	@Test
-	public void testGetTransforms()
+	public void testWalk()
 	{
-		Vector<EnumOrientation> v = new Vector<EnumOrientation>();
-		v.add(EnumOrientation.Rotate90);
-		m.setTransforms(v);
-		assertEquals(v, m.getTransforms());
-		m.setAttribute(AttributeName.TRANSFORMS, "bad");
-		assertNull("bad att", m.getTransforms());
+		JDFCutBlock cb = (JDFCutBlock) new JDFDoc(ElementName.CUTBLOCK).getRoot();
+		JDFRectangle box = new JDFRectangle(10, 20, 210, 420);
+		cb.setAttribute(AttributeName.BOX, box, null);
+		WalkCutBlock walkCutBlock = new WalkCutBlock();
+		walkCutBlock.setParent(new XJDFToJDFImpl(null));
+		walkCutBlock.walk(cb, new JDFDoc(ElementName.RESOURCEPOOL).getRoot());
+		assertNull(cb.getNonEmpty(AttributeName.BOX));
+		JDFMatrix m = JDFMatrix.getUnitMatrix();
+		m.shift(box.getLL());
+		JDFXYPair size = box.getSize();
+		assertEquals(cb.getBlockTrf(), m);
+		assertEquals(cb.getBlockSize(), size);
+		assertNull(cb.getNonEmpty(AttributeName.BOX));
 	}
-
-	/**
-	 * 
-	 */
-	@Test
-	public void testFitsTransforms()
-	{
-		Vector<EnumOrientation> v = new Vector<EnumOrientation>();
-		v.add(EnumOrientation.Rotate90);
-		m.setTransforms(v);
-		JDFMatrix mat = JDFMatrix.getUnitMatrix();
-		assertFalse(m.fitsTransforms(mat));
-		mat.rotate(90);
-		assertTrue(m.fitsTransforms(mat));
-		Iterator<EnumOrientation> it = EnumOrientation.iterator();
-		while (it.hasNext())
-		{
-			EnumOrientation next = it.next();
-			v.set(0, next);
-			m.setTransforms(v);
-			for (int x = -100; x < 200; x += 100)
-			{
-				for (int y = -100; y < 200; y += 100)
-				{
-					assertTrue(m.fitsTransforms(new JDFMatrix(next, x, y)));
-				}
-			}
-		}
-	}
-
-	@Override
-	public void setUp() throws Exception
-	{
-		super.setUp();
-		m = (JDFMatrixEvaluation) new JDFDoc(ElementName.MATRIXEVALUATION).getRoot();
-	}
-
 }

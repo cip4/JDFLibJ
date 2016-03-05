@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -197,8 +197,6 @@ public class JDFRectangle extends JDFNumList
 		setUry(ury);
 	}
 
-	// **************************************** Methods
-	// *********************************************
 	/**
 	 * isValid - true if the size of the vector is 4 and all instances are Double types
 	 * 
@@ -378,6 +376,34 @@ public class JDFRectangle extends JDFNumList
 	}
 
 	/**
+	 * shifts this by the amount specified
+	 * 
+	 * @param tx shift in x direction
+	 * @param ty shift in y direction
+	 */
+	public void shift(final double tx, final double ty)
+	{
+		setLlx(getLlx() + tx);
+		setLly(getLly() + ty);
+		setUrx(getUrx() + tx);
+		setUry(getUry() + ty);
+	}
+
+	/**
+	 * shifts this by the amount specified
+	 * 
+	 * @param shift in x and y direction
+	 */
+	public void shift(final JDFXYPair shift)
+	{
+		if (shift == null)
+		{
+			return;
+		}
+		shift(shift.getX(), shift.getY());
+	}
+
+	/**
 	 * isGreaterOrEqual - equality operator >=
 	 * 
 	 * @param r the JDFRectangle object to compare to
@@ -408,5 +434,32 @@ public class JDFRectangle extends JDFNumList
 	public boolean isLessOrEqual(final JDFRectangle r)
 	{
 		return (getLlx() >= r.getLlx()) && (getLly() >= r.getLly()) && (getUrx() <= r.getUrx()) && (getUry() <= r.getUry());
+	}
+
+	/**
+	 * 
+	 * @return the lower left pout
+	 */
+	public JDFXYPair getLL()
+	{
+		return new JDFXYPair(getLlx(), getLly());
+	}
+
+	/**
+	* 
+	* @return the upper right point
+	*/
+	public JDFXYPair getUR()
+	{
+		return new JDFXYPair(getUrx(), getUry());
+	}
+
+	/**
+	* 
+	* @return the width and height
+	*/
+	public JDFXYPair getSize()
+	{
+		return new JDFXYPair(getWidth(), getHeight());
 	}
 }

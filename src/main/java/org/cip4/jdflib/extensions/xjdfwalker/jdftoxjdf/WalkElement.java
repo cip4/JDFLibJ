@@ -204,6 +204,7 @@ public class WalkElement extends BaseWalker
 	protected void updateAttributes(JDFAttributeMap map)
 	{
 		map.renameKey(AttributeName.PRODUCTID, XJDFConstants.ExternalID);
+		map.renameKey(AttributeName.ASSEMBLYIDS, XJDFConstants.BinderySignatureIDs);
 	}
 
 	/**

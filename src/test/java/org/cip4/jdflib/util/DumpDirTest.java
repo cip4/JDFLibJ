@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -109,7 +109,7 @@ public class DumpDirTest extends JDFTestCaseBase
 		}
 		long mem2 = rt.totalMemory() - rt.freeMemory();
 		if (mem2 > mem)
-			assertEquals(mem2, mem, 1000000);
+			assertEquals(mem2, mem, 2000000);
 	}
 
 	/**

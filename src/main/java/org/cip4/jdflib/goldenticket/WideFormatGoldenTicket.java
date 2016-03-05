@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -215,7 +215,7 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 	private JDFTile initTile()
 	{
 		JDFTile tile = (JDFTile) theNode.getCreateResource(ElementName.TILE, EnumUsage.Input, 0);
-		tile.setCTM(JDFMatrix.unitMatrix);
+		tile.setCTM(JDFMatrix.getUnitMatrix());
 		tile.setClipBox(new JDFRectangle(0, 0, 444, 666));
 		return tile;
 	}

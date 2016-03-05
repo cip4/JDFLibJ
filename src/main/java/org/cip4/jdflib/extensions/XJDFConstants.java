@@ -68,8 +68,11 @@
  */
 package org.cip4.jdflib.extensions;
 
-public class XJDFConstants
+public abstract class XJDFConstants
 {
+	public static final String BinderySignatureID = "BinderySignatureID";
+	public static final String BinderySignatureIDs = "BinderySignatureIDs";
+
 	public static final String ChildProduct = "ChildProduct";
 
 	public static final String Dependent = "Dependent";
@@ -87,11 +90,4 @@ public class XJDFConstants
 
 	public static final String XJDF = "XJDF";
 	public static final String XJMF = "XJMF";
-
-	/**
-	 * hidden constructor
-	 */
-	private XJDFConstants()
-	{
-	}
 }

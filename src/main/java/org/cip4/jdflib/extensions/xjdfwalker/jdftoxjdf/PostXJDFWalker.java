@@ -513,7 +513,7 @@ class PostXJDFWalker extends BaseElementWalker
 		{
 			if (strippingParams == null || bs == null)
 				return;
-			bs.moveAttribute(AttributeName.ASSEMBLYID, bs, AttributeName.ASSEMBLYIDS, null, null);
+			bs.moveAttribute(XJDFConstants.BinderySignatureID, bs, AttributeName.ASSEMBLYIDS, null, null);
 			bs.moveAttribute(AttributeName.JOBID, bs);
 			bs.moveAttribute(AttributeName.INNERMOSTSHINGLING, bs);
 			bs.moveAttribute(AttributeName.OUTERMOSTSHINGLING, bs);

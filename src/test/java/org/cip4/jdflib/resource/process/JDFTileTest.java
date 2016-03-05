@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -145,18 +145,18 @@ public class JDFTileTest extends JDFTestCaseBase
 		root.setType(EnumType.Tiling);
 		JDFTile tile = (JDFTile) root.appendMatchingResource(ElementName.TILE, EnumUsage.Input);
 		tile.appendMedia();
-		tile.appendMarkObject().setCTM(JDFMatrix.unitMatrix);
+		tile.appendMarkObject().setCTM(JDFMatrix.getUnitMatrix());
 		tile.setClipBox(new JDFRectangle(11, 1, 1, 1));
-		tile.setCTM(JDFMatrix.unitMatrix);
+		tile.setCTM(JDFMatrix.getUnitMatrix());
 		tile.setTrimBox(new JDFRectangle(11, 1, 1, 1));
 		for (int i = 0; i < 16; i++)
 		{
 			JDFTile partTile = (JDFTile) tile.addPartition(EnumPartIDKey.TileID, new JDFXYPair(i % 4, i / 4).getString(0));
 			assertNotNull(partTile);
-			partTile.appendMarkObject().setCTM(JDFMatrix.unitMatrix);
+			partTile.appendMarkObject().setCTM(JDFMatrix.getUnitMatrix());
 			partTile.appendMedia();
 			partTile.setClipBox(new JDFRectangle(11, 1, 1, 1));
-			partTile.setCTM(JDFMatrix.unitMatrix);
+			partTile.setCTM(JDFMatrix.getUnitMatrix());
 			partTile.setTrimBox(new JDFRectangle(11, 1, 1, 1));
 		}
 		checkSchema(root, EnumValidationLevel.Incomplete);
