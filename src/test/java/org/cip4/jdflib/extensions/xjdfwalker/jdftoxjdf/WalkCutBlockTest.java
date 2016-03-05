@@ -74,6 +74,7 @@ import static org.junit.Assert.assertNull;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
@@ -97,6 +98,29 @@ public class WalkCutBlockTest
 		JDFRectangle box = JDFRectangle.createRectangle(cb.getNonEmpty(AttributeName.BOX));
 		assertEquals(box.getSize(), size);
 		assertEquals(box.getLL(), new JDFXYPair());
+		assertNull(cb.getBlockTrf());
+		assertNull(cb.getBlockSize());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testWalkTRF()
+	{
+		JDFCutBlock cb = (JDFCutBlock) new JDFDoc(ElementName.CUTBLOCK).getRoot();
+		JDFXYPair size = new JDFXYPair(10, 20);
+		cb.setBlockSize(size);
+		JDFMatrix m = JDFMatrix.getUnitMatrix();
+		JDFXYPair shift = new JDFXYPair(400, 600);
+		m.shift(shift);
+		cb.setBlockTrf(m);
+		WalkCutBlock walkCutBlock = new WalkCutBlock();
+		walkCutBlock.setParent(new JDFToXJDF());
+		walkCutBlock.walk(cb, new JDFDoc(ElementName.RESOURCEPOOL).getRoot());
+		JDFRectangle box = JDFRectangle.createRectangle(cb.getNonEmpty(AttributeName.BOX));
+		assertEquals(box.getSize(), size);
+		assertEquals(box.getLL(), shift);
 		assertNull(cb.getBlockTrf());
 		assertNull(cb.getBlockSize());
 	}
