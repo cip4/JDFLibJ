@@ -439,6 +439,26 @@ public class JDFMatrix extends JDFNumList
 	}
 
 	/**
+	 * 
+	 * @return 
+	 */
+	public double getAngle()
+	{
+		double det = getAffineTransform().getDeterminant();
+		if (det < 0.00001)
+		{
+			return 0;
+		}
+		double a = getA() / det;
+		double b = getB() / det;
+		double angleb = Math.asin(b) * 180 / Math.PI;
+		double angleA = Math.acos(a) * 180 / Math.PI;
+		if (angleb < 0)
+			angleA += 180;
+		return angleA;
+	}
+
+	/**
 	 * setTx - sets the tx coordinate
 	 * 
 	 * @param p_tx the tx coordinate

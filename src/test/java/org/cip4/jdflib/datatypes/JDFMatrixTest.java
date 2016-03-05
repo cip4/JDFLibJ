@@ -154,8 +154,10 @@ public class JDFMatrixTest extends JDFTestCaseBase
 		assertEquals(m, JDFMatrix.getUnitMatrix());
 		m.rotate(180);
 		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate180, 0, 0));
+		assertEquals(m.getAngle(), 180.0);
 		m.rotate(90);
 		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate270, 0, 0));
+		assertEquals(m.getAngle(), 270.0);
 
 		m.rotate(180);
 		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate90, 0, 0));
@@ -164,6 +166,12 @@ public class JDFMatrixTest extends JDFTestCaseBase
 		assertEquals(m, new JDFMatrix(EnumOrientation.Flip180, 0, 0));
 		m.rotate(90);
 		assertEquals(m, new JDFMatrix(EnumOrientation.Flip270, 0, 0));
+		for (int i = 0; i < 1800; i += 45)
+		{
+			JDFMatrix m2 = JDFMatrix.getUnitMatrix();
+			m2.rotate(0.1 * i);
+			assertEquals(m2.getAngle(), 0.1 * i, 0.000001);
+		}
 	}
 
 	/**
