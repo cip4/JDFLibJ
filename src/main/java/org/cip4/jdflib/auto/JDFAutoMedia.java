@@ -1914,6 +1914,27 @@ public abstract class JDFAutoMedia extends JDFResource
 	}
 
 	/* ---------------------------------------------------------------------
+	Methods for Attribute OuterCoreDiameter
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute OuterCoreDiameter
+	  * @param value the value to set the attribute to
+	  */
+	public void setInnerCoreDiameter(double value)
+	{
+		setAttribute(AttributeName.INNERCOREDIAMETER, value, null);
+	}
+
+	/**
+	  * (17) get double attribute OuterCoreDiameter
+	  * @return double the value of the attribute
+	  */
+	public double getInnerCoreDiameter()
+	{
+		return getRealAttribute(AttributeName.INNERCOREDIAMETER, null, 0.0);
+	}
+
+	/* ---------------------------------------------------------------------
 	Methods for Attribute OutsideGain
 	--------------------------------------------------------------------- */
 	/**

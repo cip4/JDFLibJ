@@ -959,7 +959,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return "Resource".equals(toCheck.getLocalName()) || "Parameter".equals(toCheck.getLocalName());
+			return XJDFHelper.RESOURCE.equals(toCheck.getLocalName()) || "Parameter".equals(toCheck.getLocalName());
 		}
 
 		/**
