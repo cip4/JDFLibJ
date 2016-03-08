@@ -140,6 +140,12 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.cip4.lib.xjdf</groupId>
+			<artifactId>xJdfLib</artifactId>
+			<version>0.6-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<profiles>
 		<profile>
