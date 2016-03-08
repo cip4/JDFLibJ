@@ -74,6 +74,7 @@ import java.util.Vector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
@@ -151,7 +152,7 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 	{
 		final String stringURL = UrlUtil.fileToUrl(hotFile, false);
 
-		final JDFDoc jmfDoc = new JDFDoc("JMF");
+		final JDFDoc jmfDoc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmfRoot = jmfDoc.getJMFRoot();
 		JDFCommand queueCommand = getQueueCommand(iMessage);
 		if (queueCommand == null)

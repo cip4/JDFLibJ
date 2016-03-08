@@ -250,6 +250,10 @@ public class XJDFZipReader implements IStreamWriter
 		return newJMF == null ? null : newJMF.getJMFRoot();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public XJDFToJDFConverter getConverter()
 	{
 		if (converter == null)
@@ -258,6 +262,10 @@ public class XJDFZipReader implements IStreamWriter
 		return converter;
 	}
 
+	/**
+	 * 
+	 * @param converter
+	 */
 	public void setConverter(XJDFToJDFConverter converter)
 	{
 		this.converter = converter;
