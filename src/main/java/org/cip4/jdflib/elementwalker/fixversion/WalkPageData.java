@@ -68,8 +68,11 @@
  */
 package org.cip4.jdflib.elementwalker.fixversion;
 
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFPageData;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -109,4 +112,14 @@ public class WalkPageData extends WalkElement
 		this.fixVersion.updateAssemblyIDS(e);
 		return super.walk(e1, trackElem);
 	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return StringUtil.tokenize(ElementName.PAGEDATA, null, false);
+	}
+
 }

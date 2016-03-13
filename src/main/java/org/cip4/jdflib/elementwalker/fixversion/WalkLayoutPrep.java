@@ -68,13 +68,16 @@
  */
 package org.cip4.jdflib.elementwalker.fixversion;
 
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.elementwalker.StrippingConverter;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFLayoutPreparationParams;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -150,4 +153,14 @@ public class WalkLayoutPrep extends WalkResource
 		}
 		return super.walk(e1, trackElem);
 	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return StringUtil.tokenize(ElementName.LAYOUTPREPARATIONPARAMS, null, false);
+	}
+
 }
