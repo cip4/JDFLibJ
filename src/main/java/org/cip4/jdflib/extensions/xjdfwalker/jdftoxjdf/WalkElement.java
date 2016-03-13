@@ -125,7 +125,9 @@ public class WalkElement extends BaseWalker
 	{
 		String nsURI = jdf.getNamespaceURI();
 		if (JDFConstants.JDFNAMESPACE.equals(nsURI))
+		{
 			nsURI = XJDF20.getSchemaURL();
+		}
 		String nodeName = getXJDFName(jdf);
 		final KElement eNew = bMerge ? xjdf : xjdf.appendElement(nodeName, nsURI);
 
@@ -147,7 +149,7 @@ public class WalkElement extends BaseWalker
 				eNew.insertBefore(comment, before);
 			}
 		}
-		removeUnused(eNew);
+		removeUnusedElements(jdf);
 		return eNew;
 	}
 
@@ -203,8 +205,12 @@ public class WalkElement extends BaseWalker
 	 */
 	protected void updateAttributes(JDFAttributeMap map)
 	{
-		map.renameKey(AttributeName.PRODUCTID, XJDFConstants.ExternalID);
-		map.renameKey(AttributeName.ASSEMBLYIDS, XJDFConstants.BinderySignatureIDs);
+		if (!jdfToXJDF.isRetainAll())
+		{
+			map.renameKey(AttributeName.PRODUCTID, XJDFConstants.ExternalID);
+			map.renameKey(AttributeName.ASSEMBLYIDS, XJDFConstants.BinderySignatureIDs);
+			map.remove(AttributeName.XSITYPE);
+		}
 	}
 
 	/**
@@ -231,10 +237,10 @@ public class WalkElement extends BaseWalker
 							JDFNameRange r = (JDFNameRange) rl.at(i);
 							if (i > 0)
 							{
-								buf.append(" ");
+								buf.append(JDFConstants.BLANK);
 							}
 							buf.append(r.getLeft());
-							buf.append(" ");
+							buf.append(JDFConstants.BLANK);
 							buf.append(r.getRight());
 						}
 						map.put(key, buf.toString());
@@ -246,12 +252,12 @@ public class WalkElement extends BaseWalker
 	}
 
 	/**
-	 * zapp unused attributes
-	 * @param newRootP
+	 * zapp unused elements
+	 * @param jdf
 	 */
-	protected void removeUnused(final KElement newRootP)
+	protected void removeUnusedElements(final KElement jdf)
 	{
-		newRootP.removeAttribute(AttributeName.XSITYPE);
+		//nop
 	}
 
 	/**

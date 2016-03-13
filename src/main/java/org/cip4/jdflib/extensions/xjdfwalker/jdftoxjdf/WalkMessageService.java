@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -69,53 +69,27 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
-import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFMessageService;
+import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
 
 /**
- *  
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
  */
-public class WalkDevCap extends WalkDevcapElement
+public class WalkMessageService extends WalkJDFSubElement
 {
 	/**
 	 * 
 	 */
-	public WalkDevCap()
+	public WalkMessageService()
 	{
 		super();
-	}
-
-	/**
-	 * @param e
-	 * @return the created resource
-	 */
-	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
-	{
-		JDFDevCap dc = (JDFDevCap) e;
-		String name = dc.getName();
-		VString v = getXPathVector(dc, name);
-		for (String path : v)
-		{
-			name = StringUtil.token(path, -1, "/");
-			KElement eState = trackElem.getChildWithAttribute("ElementState", "XPath", null, name, 0, true);
-			if (eState == null)
-			{
-				eState = trackElem.appendElement("ElementState");
-
-				eState.setAttribute("XPathRoot", getXPathRoot(path, null));
-				eState.setAttribute("XPath", name);
-				eState.setAttributes(e);
-				eState.removeAttribute(AttributeName.DEVCAPREF);
-				eState.removeAttribute(AttributeName.NAME);
-				eState.removeAttribute(AttributeName.DEVCAPREFS);
-			}
-
-		}
-		return trackElem;
 	}
 
 	/**
@@ -126,7 +100,51 @@ public class WalkDevCap extends WalkDevcapElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFDevCap;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFMessageService;
 	}
 
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return new VString(ElementName.MESSAGESERVICE, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		map.remove(AttributeName.ACKNOWLEDGE);
+		map.remove(AttributeName.COMMAND);
+		map.remove(AttributeName.SIGNAL);
+		map.remove(AttributeName.QUERY);
+		map.remove(AttributeName.REGISTRATION);
+		map.remove(AttributeName.GENERICATTRIBUTES);
+		map.remove(AttributeName.PERSISTENT);
+		super.updateAttributes(map);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void removeUnusedElements(KElement jdf)
+	{
+		VElement v = jdf.getChildElementVector(null, null);
+		if (v != null)
+		{
+			for (KElement e : v)
+			{
+				if (e instanceof JDFAbstractState)
+				{
+					e.deleteNode();
+				}
+			}
+		}
+		super.removeUnusedElements(jdf);
+	}
 }

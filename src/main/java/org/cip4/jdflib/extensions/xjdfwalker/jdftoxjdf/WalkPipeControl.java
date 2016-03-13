@@ -92,13 +92,14 @@ public class WalkPipeControl extends WalkMessage
 
 	/**
 	 * 
+	 * @return 
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkMessage#makeTypesafe(org.cip4.jdflib.jmf.JDFMessage)
 	 */
 	@Override
-	void makeTypesafe(JDFMessage m)
+	JDFMessage makeTypesafe(JDFMessage m)
 	{
 		String originalType = super.getMessageType(m);
-		super.makeTypesafe(m);
+		m = super.makeTypesafe(m);
 		if (m instanceof JDFCommand)
 		{
 			KElement pipeParams = m.getCreateElement(ElementName.PIPEPARAMS, null, 0);
@@ -106,6 +107,7 @@ public class WalkPipeControl extends WalkMessage
 			String id = m.getID();
 			XJMFTypeMap.getMap().put(id, originalType);
 		}
+		return m;
 	}
 
 	/**

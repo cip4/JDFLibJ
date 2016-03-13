@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,9 +72,12 @@
 package org.cip4.jdflib.elementwalker;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 
 /**
  * simple implementation of the IWalkerFactory
@@ -85,8 +88,17 @@ import org.cip4.jdflib.core.KElement;
 public class BaseWalkerFactory implements IWalkerFactory
 {
 
-	protected int maxDepth = 0;
-	protected Vector<BaseWalker> vBaseWalker = new Vector<BaseWalker>();
+	public BaseWalkerFactory()
+	{
+		super();
+		maxDepth = 0;
+		vBaseWalker = new Vector<BaseWalker>();
+		nameMap = new HashMap<String, BaseWalker>();
+	}
+
+	protected int maxDepth;
+	protected final Vector<BaseWalker> vBaseWalker;
+	private final Map<String, BaseWalker> nameMap;
 
 	/**
 	 * 
@@ -96,6 +108,16 @@ public class BaseWalkerFactory implements IWalkerFactory
 	@Override
 	public IWalker getWalker(final KElement toCheck)
 	{
+		if (toCheck != null)
+		{
+			String name = toCheck.getLocalName();
+			BaseWalker walkerByName = nameMap.get(name);
+			// sometimes we have additional restrictions that make a named walker a mismatch
+			if (walkerByName != null && walkerByName.matches(toCheck))
+			{
+				return walkerByName;
+			}
+		}
 		for (BaseWalker w : vBaseWalker)
 		{
 			if (w.matches(toCheck))
@@ -116,8 +138,19 @@ public class BaseWalkerFactory implements IWalkerFactory
 	{
 		final int d = w.getDepth();
 		maxDepth = d > maxDepth ? d : maxDepth;
-		vBaseWalker.add(w);
-		Collections.sort(vBaseWalker);
+		VString elementNames = w.getElementNames();
+		if (elementNames != null)
+		{
+			for (String name : elementNames)
+			{
+				nameMap.put(name, w);
+			}
+		}
+		else
+		{
+			vBaseWalker.add(w);
+			Collections.sort(vBaseWalker);
+		}
 	}
 
 	/**
@@ -126,7 +159,7 @@ public class BaseWalkerFactory implements IWalkerFactory
 	@Override
 	public String toString()
 	{
-		return "BasewalkerFactory " + maxDepth + "\n walkers: " + vBaseWalker;
+		return "BasewalkerFactory " + maxDepth + " name walkers " + nameMap.keySet() + " walkers: " + vBaseWalker;
 	}
 
 	/**

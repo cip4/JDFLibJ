@@ -73,49 +73,100 @@ package org.cip4.jdflib.elementwalker;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
-import org.junit.Assert;
+import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
+
 /**
  * @author prosirai
  * 
  */
-public class BaseWalkerTest extends JDFTestCaseBase {
+public class BaseWalkerTest extends JDFTestCaseBase
+{
 
-	// //////////////////////////////////////////////////////////////////////
+	static class TestWalker extends BaseWalker
+	{
+		private String name;
 
-	static class TestWalker extends BaseWalker {
 		/**
 		 * @param factory this call adds the testwalker to the factory
 		 */
-		public TestWalker(BaseWalkerFactory factory) {
+		public TestWalker(BaseWalkerFactory factory)
+		{
 			super(factory);
+			this.name = null;
+		}
+
+		void setNames(String name)
+		{
+			this.name = name;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			VString strings = StringUtil.tokenize(name, null, false);
+			return strings == null || strings.size() == 0 ? null : strings;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public boolean matches(KElement e)
+		{
+			return name == null || StringUtil.equals(e.getLocalName(), name);
 		}
 
 	}
 
-	// //////////////////////////////////////////////////////////////////////
-
+	/**
+	 * 
+	 */
 	@Test
-	public void testDepth() {
+	public void testDepth()
+	{
 		BaseWalkerFactory bf = new BaseWalkerFactory();
 		BaseWalker b = new TestWalker(bf);
-		Assert.assertEquals(b.getDepth(), 1);
+		assertEquals(b.getDepth(), 1);
 	}
 
-	// //////////////////////////////////////////////////////////////////////
-
+	/**
+	 * 
+	 */
 	@Test
-	public void testDepthWalk() {
+	public void testDepthWalk()
+	{
 		BaseWalkerFactory bf = new BaseWalkerFactory();
 		new TestWalker(bf);
 		XMLDoc d = new XMLDoc("a", null);
 		ElementWalker ew = new ElementWalker(bf);
 		KElement root = d.getRoot();
-		Assert.assertEquals(ew.walkTree(root, null), 1);
+		assertEquals(ew.walkTree(root, null), 1);
 		for (int i = 1; i <= 10; i++)
 			root.getCreateXPathElement("b/c/d[" + i + "]");
-		Assert.assertEquals("a,b,c+10*d=13", ew.walkTree(root, null), 13);
+		assertEquals("a,b,c+10*d=13", ew.walkTree(root, null), 13);
+	}
 
+	/**
+	 * test to check that the speed up map works
+	 */
+	@Test
+	public void testElementName()
+	{
+		BaseWalkerFactory bf = new BaseWalkerFactory();
+		TestWalker tw = new TestWalker(bf);
+		KElement a = new XMLDoc("a", null).getRoot();
+		assertEquals(bf.getWalker(a), tw);
+		tw.setNames("b");
+		bf.addWalker(tw);
+		assertNull(bf.getWalker(a));
+		tw.setNames("a");
+		bf.addWalker(tw);
+		assertEquals(bf.getWalker(a), tw);
 	}
 }

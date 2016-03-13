@@ -72,6 +72,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.resource.process.JDFContact;
@@ -155,5 +156,14 @@ public class WalkEmployee extends WalkResource
 		contact.renameAttribute(AttributeName.PERSONALID, AttributeName.PRODUCTID, null, null);
 		contact.renameAttribute(AttributeName.ROLES, AttributeName.CONTACTTYPEDETAILS, null, null);
 		return contact;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return new VString(ElementName.EMPLOYEE, null);
 	}
 }

@@ -68,24 +68,22 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFMatrix;
-import org.cip4.jdflib.datatypes.JDFRectangle;
-import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.resource.process.JDFCutBlock;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFDeviceFilter;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkCutBlock extends WalkJDFSubElement
+public class WalkDeviceFilter extends WalkJDFSubElement
 {
 	/**
 	 * 
 	 */
-	public WalkCutBlock()
+	public WalkDeviceFilter()
 	{
 		super();
 	}
@@ -98,48 +96,45 @@ public class WalkCutBlock extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFCutBlock);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public KElement walk(KElement e, KElement trackElem)
-	{
-		JDFCutBlock cutBlock = (JDFCutBlock) e;
-		copyToBox(cutBlock);
-		return super.walk(e, trackElem);
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFDeviceFilter);
 	}
 
 	/**
 	 * 
-	 * @param cutBlock
+	 * @param map
 	 */
-	private void copyToBox(JDFCutBlock cutBlock)
+	private void fixDeviceDetails(JDFAttributeMap map)
 	{
-		JDFXYPair size = cutBlock.getBlockSize();
-		if (size != null)
+		EnumDeviceDetails det = EnumDeviceDetails.getEnum(map.get(AttributeName.DEVICEDETAILS));
+		if (EnumDeviceDetails.NamedFeature.equals(det))
 		{
-			JDFMatrix blockTrf = cutBlock.getBlockTrf();
-			JDFRectangle box = new JDFRectangle(0, 0, size.getX(), size.getY());
-			if (blockTrf != null)
-			{
-				JDFXYPair shift = blockTrf.getShift();
-				box.shift(shift);
-			}
-			cutBlock.setAttribute(AttributeName.BOX, box, null);
+			map.put(AttributeName.DEVICEDETAILS, EnumDeviceDetails.Details.getName());
 		}
-		cutBlock.removeAttribute(AttributeName.BLOCKSIZE);
-		cutBlock.removeAttribute(AttributeName.BLOCKTRF);
+		else if (EnumDeviceDetails.Capability.equals(det))
+		{
+			map.put(AttributeName.DEVICEDETAILS, EnumDeviceDetails.Full.getName());
+		}
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	public VString getElementNames()
+	protected void updateAttributes(JDFAttributeMap map)
 	{
-		return new VString(ElementName.CUTBLOCK, null);
+		fixDeviceDetails(map);
+		map.remove(AttributeName.LOCALIZATION);
+		super.updateAttributes(map);
 	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void removeUnusedElements(KElement newRootP)
+	{
+		super.removeUnusedElements(newRootP);
+		newRootP.removeChildren(ElementName.DEVICE, null, null);
+	}
+
 }

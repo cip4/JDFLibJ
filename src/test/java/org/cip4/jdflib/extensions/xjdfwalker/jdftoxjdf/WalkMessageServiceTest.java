@@ -68,176 +68,38 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.ifaces.ICapabilityElement;
-import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
-import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
-import org.cip4.jdflib.resource.devicecapability.JDFEvaluation;
-import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFMessageService;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
+import org.junit.Test;
 
 /**
  * 
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ * @author rainer prosi
+ *
  */
-public class WalkDevcapElement extends WalkJDFSubElement
+public class WalkMessageServiceTest extends JDFTestCaseBase
 {
-
 	/**
 	 * 
 	 */
-	public WalkDevcapElement()
+	@Test
+	public void testDevCaps()
 	{
-		super();
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
+		JDFMessageService ms = jmf.getResponse(0).appendMessageService();
+		ms.appendActionPool();
+		ms.appendDevCapPool();
+		ms.appendDevCaps();
+		KElement e = new JDFToXJDF().convert(jmf);
+		JDFMessageService msNew = (JDFMessageService) e.getElement("ResponseKnownMessages").getElement(ElementName.MESSAGESERVICE);
+		assertNull(msNew.getActionPool());
+		assertNull(msNew.getDevCapPool());
+		assertNull(msNew.getDevCaps(0));
 	}
 
-	/**
-	 * @param e
-	 * @return the created resource
-	 */
-	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
-	{
-		return trackElem;
-	}
-
-	/**
-	 * 
-	 * @param path
-	 * @param old
-	 * @return
-	 */
-	protected String getXPathRoot(String path, String old)
-	{
-		if (path == null || "/".equals(path) || "".equals(path))
-			return path;
-		String rootPath = StringUtil.replaceToken(path, -1, "/", null);
-		return rootPath;
-	}
-
-	/**
-	 * 
-	 * 
-	 * @param dc
-	 * @param name
-	 * @return
-	 */
-	protected VString getXPathVector(JDFElement dc, String name)
-	{
-		VString v = null;
-		if (dc instanceof JDFDevCap)
-			v = ((JDFDevCap) dc).getNamePathVector();
-		else if (dc instanceof JDFAbstractState)
-			v = ((JDFAbstractState) dc).getNamePathVector();
-		else if (dc instanceof JDFEvaluation)
-		{
-			ICapabilityElement refTarget = ((JDFEvaluation) dc).getRefTarget();
-			if (refTarget != null)
-				v = refTarget.getNamePathVector();
-			else
-				v = null;
-		}
-
-		if (v != null && v.size() > 0)
-		{
-			VString v2 = new VString();
-			for (String s : v)
-			{
-				s = modifyXPath(s);
-				v2.add(s);
-			}
-			v = v2;
-			v.unify();
-		}
-		return v;
-	}
-
-	/**
-	 * 
-	 * 
-	 * @param name
-	 * @return
-	 */
-	protected String getClassName(final String name)
-	{
-		if (name == null)
-			return null;
-		KElement e = new JDFDoc(name).getRoot();
-
-		String className = (e instanceof JDFResource) ? jdfToXJDF.getClassName((JDFResource) e) : null;
-		return className;
-	}
-
-	/**
-	 * 
-	 * @param s
-	 * @return
-	 */
-	public String modifyXPath(String s)
-	{
-		VString vs = StringUtil.tokenize(s, "/", false);
-		//					while (vs.size() > 0 && vs.elementAt(-1).equals(name))
-		//						vs.remove(vs.size() - 1);
-		for (int i = vs.size() - 2; i >= 0; i--)
-		{
-			if (vs.elementAt(i).equals(vs.elementAt(i + 1)))
-				vs.remove(i + 1);
-		}
-		// remove parents of JMF, if any
-		int posJMF = vs.indexOf("JMF");
-		while (posJMF-- > 0)
-			vs.remove(0);
-
-		if (vs.size() == 0)
-		{
-			s = "/";
-		}
-		else
-		{
-			if ("JDF".equals(vs.get(0)))
-				vs.set(0, XJDFConstants.XJDF);
-			if (vs.size() > 1 && ElementName.RESOURCEPOOL.equals(vs.get(1)))
-			{
-				String className = null;
-				if (vs.size() == 3)
-				{
-					String name = vs.get(2);
-					className = getClassName(name);
-					if (className != null)
-					{
-						if ("Intent".equals(className))
-						{
-							vs.set(1, "ProductList/Product");
-						}
-						else
-						{
-							vs.set(1, className + "Set/" + className);
-						}
-					}
-				}
-				if (className == null)
-				{
-					vs.remove(1);
-					vs.remove(0);
-				}
-			}
-			s = StringUtil.setvString(vs, "/", "/", null);
-			if (!s.startsWith("/" + XJDFConstants.XJDF))
-				s = "/" + s;
-		}
-		return s;
-	}
-
-	@Override
-	public boolean matches(KElement e)
-	{
-		// we are abstract...
-		return false;
-	}
 }

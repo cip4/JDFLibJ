@@ -68,78 +68,68 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFMatrix;
-import org.cip4.jdflib.datatypes.JDFRectangle;
-import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.resource.process.JDFCutBlock;
+import org.cip4.jdflib.jmf.JDFDeviceFilter;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
+import org.junit.Test;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+ * @author rainer prosi
+ *
  */
-public class WalkCutBlock extends WalkJDFSubElement
+public class WalkDeviceFilterTest extends JDFTestCaseBase
 {
 	/**
 	 * 
 	 */
-	public WalkCutBlock()
+	@Test
+	public void testDeviceDetails()
 	{
-		super();
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFCutBlock);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public KElement walk(KElement e, KElement trackElem)
-	{
-		JDFCutBlock cutBlock = (JDFCutBlock) e;
-		copyToBox(cutBlock);
-		return super.walk(e, trackElem);
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildKnownDevicesQuery(null);
+		JDFDeviceFilter f = jmf.getQuery(0).getDeviceFilter(0);
+		f.setDeviceDetails(EnumDeviceDetails.NamedFeature);
+		KElement e = new JDFToXJDF().convert(jmf);
+		JDFDeviceFilter fConverted = (JDFDeviceFilter) e.getElement("QueryKnownDevices").getElement(ElementName.DEVICEFILTER);
+		assertEquals(fConverted.getDeviceDetails(), EnumDeviceDetails.Details);
+		f.setDeviceDetails(EnumDeviceDetails.Capability);
+		e = new JDFToXJDF().convert(jmf);
+		fConverted = (JDFDeviceFilter) e.getElement("QueryKnownDevices").getElement(ElementName.DEVICEFILTER);
+		assertEquals(fConverted.getDeviceDetails(), EnumDeviceDetails.Full);
 	}
 
 	/**
 	 * 
-	 * @param cutBlock
 	 */
-	private void copyToBox(JDFCutBlock cutBlock)
+	@Test
+	public void testLocalization()
 	{
-		JDFXYPair size = cutBlock.getBlockSize();
-		if (size != null)
-		{
-			JDFMatrix blockTrf = cutBlock.getBlockTrf();
-			JDFRectangle box = new JDFRectangle(0, 0, size.getX(), size.getY());
-			if (blockTrf != null)
-			{
-				JDFXYPair shift = blockTrf.getShift();
-				box.shift(shift);
-			}
-			cutBlock.setAttribute(AttributeName.BOX, box, null);
-		}
-		cutBlock.removeAttribute(AttributeName.BLOCKSIZE);
-		cutBlock.removeAttribute(AttributeName.BLOCKTRF);
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildKnownDevicesQuery(null);
+		KElement e = new JDFToXJDF().convert(jmf);
+		assertNotNull("no exception", e);
+		JDFDeviceFilter f = jmf.getQuery(0).getDeviceFilter(0);
+		f.setLocalization("DE");
+		e = new JDFToXJDF().convert(jmf);
+		JDFDeviceFilter fConverted = (JDFDeviceFilter) e.getElement("QueryKnownDevices").getElement(ElementName.DEVICEFILTER);
+		assertEquals("", fConverted.getLocalization());
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 * 
 	 */
-	@Override
-	public VString getElementNames()
+	@Test
+	public void testDevice()
 	{
-		return new VString(ElementName.CUTBLOCK, null);
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildKnownDevicesQuery(null);
+		JDFDeviceFilter f = jmf.getQuery(0).getDeviceFilter(0);
+		f.appendDevice().setDeviceID("ID1");
+		KElement e = new JDFToXJDF().convert(jmf);
+		JDFDeviceFilter fConverted = (JDFDeviceFilter) e.getElement("QueryKnownDevices").getElement(ElementName.DEVICEFILTER);
+		assertNull("", fConverted.getDevice(0));
 	}
+
 }

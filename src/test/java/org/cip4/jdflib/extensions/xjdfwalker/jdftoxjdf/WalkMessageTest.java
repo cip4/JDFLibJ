@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,48 +68,46 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFResourceCmdParams;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
+import org.junit.Test;
 
 /**
- * simply stop walking on these
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+ * 
+ * @author rainer prosi
+ *
  */
-public class WalkDeviceCap extends WalkElement
+public class WalkMessageTest extends JDFTestCaseBase
 {
 	/**
 	 * 
 	 */
-	public WalkDeviceCap()
+	@Test
+	public void testRegistration()
 	{
-		super();
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Registration, "Resource");
+		JDFResourceCmdParams rcp = jmf.getRegistration(0).appendResourceCmdParams();
+		rcp.setResourceName("Plate");
+		KElement e = new JDFToXJDF().convert(jmf);
+		assertNull(e);
 	}
 
 	/**
-	 * @param e
-	 * @return the created resource
+	 * 
 	 */
-	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
+	@Test
+	public void testAcknowledge()
 	{
-
-		KElement e2 = super.walk(e, trackElem);
-		e2.removeAttribute(AttributeName.COMBINEDMETHOD);
-		e2.removeAttribute(AttributeName.GENERICATTRIBUTES);
-		return e2;
-
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return toCheck instanceof JDFDeviceCap;
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Acknowledge, "Resource");
+		JDFResourceInfo ri = jmf.getAcknowledge(0).appendResourceInfo();
+		ri.setResourceName("Plate");
+		KElement e = new JDFToXJDF().convert(jmf);
+		assertNull(e);
 	}
 
 }

@@ -205,10 +205,10 @@ public class WalkPhaseTimeAudit extends WalkAudit
 
 	/**
 	 * remove all stuff that is now in the JobPhases
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#removeUnused(org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void removeUnused(KElement newRootP)
+	protected void removeUnusedElements(KElement newRootP)
 	{
 		newRootP.removeAttribute(AttributeName.STATUS);
 		newRootP.removeAttribute(AttributeName.STATUSDETAILS);
@@ -216,6 +216,6 @@ public class WalkPhaseTimeAudit extends WalkAudit
 		newRootP.removeAttribute(AttributeName.START);
 		newRootP.removeAttribute(AttributeName.END);
 		newRootP.removeAttribute(AttributeName.QUEUEENTRYID);
-		super.removeUnused(newRootP);
+		super.removeUnusedElements(newRootP);
 	}
 }

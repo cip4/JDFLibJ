@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -94,15 +94,16 @@ public class WalkModifyQueueEntry extends WalkMessage
 
 	/**
 	 * 
+	 * @return 
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkMessage#makeTypesafe(org.cip4.jdflib.jmf.JDFMessage)
 	 */
 	@Override
-	void makeTypesafe(JDFMessage m)
+	JDFMessage makeTypesafe(JDFMessage m)
 	{
 		String originalType = super.getMessageType(m);
 		JDFQueueEntryDef queueEntryDef = m.getQueueEntryDef(0);
 		String qeid = queueEntryDef == null ? null : queueEntryDef.getQueueEntryID();
-		super.makeTypesafe(m);
+		m = super.makeTypesafe(m);
 		if ((m instanceof JDFQuery) || (m instanceof JDFCommand))
 		{
 			String id = m.getID();
@@ -112,6 +113,7 @@ public class WalkModifyQueueEntry extends WalkMessage
 			modifyParams.setXPathAttribute("QueueFilter/@QueueEntryIDs", qeid);
 			m.removeChild(ElementName.QUEUEENTRYDEF, null, 0);
 		}
+		return m;
 	}
 
 	/**

@@ -70,8 +70,10 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import java.util.Collection;
 
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.pool.JDFAmountPool;
 
 /**
@@ -117,6 +119,15 @@ public class WalkAmountPool extends WalkJDFSubElement
 			}
 		}
 		return newAP;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return new VString(ElementName.AMOUNTPOOL, null);
 	}
 
 }

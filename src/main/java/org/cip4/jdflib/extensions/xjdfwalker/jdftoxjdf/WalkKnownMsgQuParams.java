@@ -72,20 +72,18 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFMatrix;
-import org.cip4.jdflib.datatypes.JDFRectangle;
-import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.resource.process.JDFCutBlock;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFKnownMsgQuParams;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkCutBlock extends WalkJDFSubElement
+public class WalkKnownMsgQuParams extends WalkJDFSubElement
 {
 	/**
 	 * 
 	 */
-	public WalkCutBlock()
+	public WalkKnownMsgQuParams()
 	{
 		super();
 	}
@@ -98,40 +96,21 @@ public class WalkCutBlock extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFCutBlock);
+		return toCheck instanceof JDFKnownMsgQuParams;
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	public KElement walk(KElement e, KElement trackElem)
+	protected void updateAttributes(JDFAttributeMap map)
 	{
-		JDFCutBlock cutBlock = (JDFCutBlock) e;
-		copyToBox(cutBlock);
-		return super.walk(e, trackElem);
-	}
-
-	/**
-	 * 
-	 * @param cutBlock
-	 */
-	private void copyToBox(JDFCutBlock cutBlock)
-	{
-		JDFXYPair size = cutBlock.getBlockSize();
-		if (size != null)
-		{
-			JDFMatrix blockTrf = cutBlock.getBlockTrf();
-			JDFRectangle box = new JDFRectangle(0, 0, size.getX(), size.getY());
-			if (blockTrf != null)
-			{
-				JDFXYPair shift = blockTrf.getShift();
-				box.shift(shift);
-			}
-			cutBlock.setAttribute(AttributeName.BOX, box, null);
-		}
-		cutBlock.removeAttribute(AttributeName.BLOCKSIZE);
-		cutBlock.removeAttribute(AttributeName.BLOCKTRF);
+		map.remove(AttributeName.LISTCOMMANDS);
+		map.remove(AttributeName.LISTQUERIES);
+		map.remove(AttributeName.LISTREGISTRATIONS);
+		map.remove(AttributeName.LISTSIGNALS);
+		map.remove(AttributeName.PERSISTENT);
+		super.updateAttributes(map);
 	}
 
 	/**
@@ -140,6 +119,7 @@ public class WalkCutBlock extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.CUTBLOCK, null);
+		return new VString(ElementName.KNOWNMSGQUPARAMS, null);
 	}
+
 }

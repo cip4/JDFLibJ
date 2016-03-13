@@ -164,15 +164,23 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 	 */
 	protected static void writeRoundTrip(final BaseGoldenTicket goldenTicket, String gtType, final String templateName)
 	{
+
 		goldenTicket.write2File(sm_dirTestDataTemp + gtType + templateName + ".jdf", 2);
 		assertTrue(gtType + templateName + ".jdf", goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
 
 		XJDF20 xjdfConv = new XJDF20();
-		//		xjdfConv.setSingleNode(false);
 
 		KElement xjdfRoot = xjdfConv.convert(goldenTicket.getExpandedNode());
-		xjdfRoot.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + gtType + templateName + ".xjdf", 2, false);
-		//TODO add xjdf schem validation here
+		String tmpXJDF = sm_dirTestDataTemp + gtType + templateName + ".xjdf";
+		xjdfRoot.getOwnerDocument_KElement().write2File(tmpXJDF, 2, false);
+
+		/*
+		JDFParser p = new JDFParser();
+		p.setSchemaLocation(XJDF20.getSchemaURL(), sm_dirTestSchema + "../xjdf.xsd");
+		JDFDoc docXJDF = p.parseFile(tmpXJDF);
+		XMLDoc dVal = docXJDF.getValidationResult();
+		assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
+		*/
 
 		XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		JDFDoc converted = jdfConverter.convert(xjdfRoot);

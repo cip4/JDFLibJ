@@ -69,7 +69,9 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 
 /**
@@ -125,5 +127,14 @@ public class WalkHoleMakingParams extends WalkInlineAllRes
 	public boolean matches(final KElement toCheck)
 	{
 		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFHoleMakingParams);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return new VString(ElementName.HOLEMAKINGPARAMS, null);
 	}
 }

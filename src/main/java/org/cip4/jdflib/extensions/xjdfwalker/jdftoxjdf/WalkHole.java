@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,7 +68,10 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.process.postpress.JDFHole;
 
 /**
@@ -93,7 +96,7 @@ public class WalkHole extends WalkInlineAllRes
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		jdf.renameElement("HolePattern", null);
+		jdf.renameElement(XJDFConstants.HolePattern, null);
 		return super.walk(jdf, xjdf);
 	}
 
@@ -106,5 +109,14 @@ public class WalkHole extends WalkInlineAllRes
 	public boolean matches(final KElement toCheck)
 	{
 		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFHole);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return new VString(ElementName.HOLE, null);
 	}
 }

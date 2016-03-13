@@ -74,10 +74,13 @@ public abstract class XJDFConstants
 	public static final String BinderySignatureIDs = "BinderySignatureIDs";
 
 	public static final String ChildProduct = "ChildProduct";
+	public static final String CompanyID = "CompanyID";
 
 	public static final String Dependent = "Dependent";
 
 	public static final String ExternalID = "ExternalID";
+
+	public static final String HolePattern = "HolePattern";
 
 	public static final String Parent = "Parent";
 	public static final String Process = "Process";
@@ -87,6 +90,8 @@ public abstract class XJDFConstants
 
 	public static final String Resource = "Resource";
 	public static final String ResourceSet = "ResourceSet";
+
+	public static final String SurfaceColor = "SurfaceColor";
 
 	public static final String XJDF = "XJDF";
 	public static final String XJMF = "XJMF";

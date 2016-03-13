@@ -461,7 +461,15 @@ public class JDFToXJDF extends PackageElementWalker
 		pw.setRetainAll(bRetainAll);
 
 		pw.walkTreeKidsFirst(newRoot);
-		if (!bJMF)
+		if (bJMF)
+		{
+			if (newRoot.numChildElements(null, null) == 0)
+			{
+				log.info("erased empty jmf");
+				newRoot = null;
+			}
+		}
+		else
 		{
 			if (trackAudits)
 			{
@@ -469,7 +477,10 @@ public class JDFToXJDF extends PackageElementWalker
 				auditPool.addCreated("XJDF Converter", null);
 			}
 		}
-		newRoot.eraseEmptyNodes(true);
+		if (newRoot != null)
+		{
+			newRoot.eraseEmptyNodes(true);
+		}
 	}
 
 	/**

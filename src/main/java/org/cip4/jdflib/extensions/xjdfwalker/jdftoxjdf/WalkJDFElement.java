@@ -274,14 +274,17 @@ public class WalkJDFElement extends WalkElement
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.XJDF20.WalkElement#removeUnused(org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.XJDF20.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
 	 * @param newRootP
 	*/
 	@Override
-	protected void removeUnused(KElement newRootP)
+	protected void updateAttributes(JDFAttributeMap map)
 	{
-		newRootP.removeAttribute(AttributeName.SPAWNID);
-		super.removeUnused(newRootP);
+		if (!jdfToXJDF.isRetainAll())
+		{
+			map.remove(AttributeName.SPAWNID);
+			super.updateAttributes(map);
+		}
 	}
 
 	/**

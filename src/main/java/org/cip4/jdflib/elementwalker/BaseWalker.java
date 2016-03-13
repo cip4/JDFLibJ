@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,7 @@ package org.cip4.jdflib.elementwalker;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -170,6 +171,15 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	public int getDepth()
 	{
 		return depth;
+	}
+
+	/**
+	 * retur the list of elements that will always be procesed by this walker
+	 * @return
+	 */
+	public VString getElementNames()
+	{
+		return null;
 	}
 
 	/**

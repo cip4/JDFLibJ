@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -335,9 +335,15 @@ public abstract class JDFTestCaseBase extends TestCase
 
 		XJDF20 xjdfConv = new XJDF20();
 		KElement xjdfRoot = xjdfConv.convert(root);
-		xjdfRoot.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + fileBase + ".xjdf", 2, false);
-		//TODO add xjdf schem validation here
-
+		String tmpXJDF = sm_dirTestDataTemp + fileBase + ".xjdf";
+		xjdfRoot.getOwnerDocument_KElement().write2File(tmpXJDF, 2, false);
+		/*
+		JDFParser p = new JDFParser();
+		p.setSchemaLocation(XJDF20.getSchemaURL(), sm_dirTestSchema + "xjdf.xsd");
+		JDFDoc docXJDF = p.parseFile(tmpXJDF);
+		XMLDoc dVal = docXJDF.getValidationResult();
+		assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
+		*/
 		XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		JDFDoc converted = jdfConverter.convert(xjdfRoot);
 		converted.write2File(sm_dirTestDataTemp + fileBase + ".xjdf.jdf", 2, false);

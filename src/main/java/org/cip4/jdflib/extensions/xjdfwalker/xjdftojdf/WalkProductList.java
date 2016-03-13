@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -138,4 +139,14 @@ public class WalkProductList extends WalkXElement
 	{
 		return super.matches(toCheck) && ProductHelper.PRODUCTLIST.equals(toCheck.getLocalName());
 	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return new VString(ProductHelper.PRODUCTLIST, null);
+	}
+
 }

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.util.ContainerUtil;
@@ -139,6 +140,15 @@ public class WalkSurfaceColor extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return super.matches(toCheck) && ("SurfaceColor".equals(toCheck.getLocalName()));
+		return super.matches(toCheck) && (XJDFConstants.SurfaceColor.equals(toCheck.getLocalName()));
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return new VString(XJDFConstants.SurfaceColor, null);
 	}
 }

@@ -73,6 +73,7 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
@@ -99,7 +100,7 @@ public class WalkJMF extends WalkJDFElement
 		{
 			return null;
 		}
-		this.jdfToXJDF.first.add(jdf.getID());
+		jdfToXJDF.first.add(jdf.getID());
 		final JDFJMF jmf = (JDFJMF) jdf;
 		setRootAttributes(jmf, xjdf);
 
@@ -119,18 +120,31 @@ public class WalkJMF extends WalkJDFElement
 
 	/**
 	 * @param jmf
-	 * @param newRootP
+	 * @param xjmfRoot
 	 */
-	private void setRootAttributes(final JDFJMF jmf, final KElement newRootP)
+	private void setRootAttributes(final JDFJMF jmf, final KElement xjmfRoot)
 	{
-		newRootP.appendXMLComment("XJDF converter version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
-		newRootP.setAttributes(jmf);
-		if (this.jdfToXJDF.isUpdateVersion())
+		xjmfRoot.appendXMLComment("XJDF converter version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
+
+		xjmfRoot.setAttributes(jmf);
+		if (!jdfToXJDF.isRetainAll())
 		{
-			newRootP.setAttribute("Version", "2.0");
-			newRootP.setAttribute("MaxVersion", "2.0");
+			// need to do this at the beginning because we will rename SenderID to DeviceID
+			xjmfRoot.removeAttribute(AttributeName.DEVICEID);
+			JDFEmployee employee = jmf.getEmployee(0);
+			if (employee != null)
+			{
+				xjmfRoot.setAttribute(AttributeName.AUTHOR, employee.getDescriptiveName());
+				xjmfRoot.copyAttribute(AttributeName.PERSONALID, employee);
+				employee.deleteNode();
+			}
+			if (this.jdfToXJDF.isUpdateVersion())
+			{
+				xjmfRoot.setAttribute("Version", "2.0");
+				xjmfRoot.setAttribute("MaxVersion", "2.0");
+			}
+			removeUnusedElements(xjmfRoot);
 		}
-		removeUnused(newRootP);
 	}
 
 	/**

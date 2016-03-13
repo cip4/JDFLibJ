@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFHoleLine;
 import org.cip4.jdflib.resource.process.postpress.JDFHole;
 
@@ -113,5 +114,14 @@ public class WalkHoleLine extends WalkHole
 	public boolean matches(final KElement toCheck)
 	{
 		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFHoleLine);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return new VString(ElementName.HOLELINE, null);
 	}
 }

@@ -73,6 +73,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.node.JDFNode;
@@ -107,14 +108,13 @@ public class WalkJDFSubElement extends WalkJDFElement
 	}
 
 	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#removeUnused(org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void removeUnused(KElement newRootP)
+	protected void updateAttributes(JDFAttributeMap map)
 	{
-		newRootP.removeAttributes(JDFToXJDFDataCache.getElemAttribs());
-		super.removeUnused(newRootP);
+		map.removeKeys(JDFToXJDFDataCache.getElemAttribs());
+		super.updateAttributes(map);
 	}
 
 }

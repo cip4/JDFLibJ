@@ -69,7 +69,10 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFSubscription;
 
 /**
@@ -99,16 +102,24 @@ public class WalkSubscription extends WalkJDFSubElement
 	}
 
 	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#removeUnused(org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
 	 */
 	@Override
-	protected void removeUnused(KElement xjdfElem)
+	public VString getElementNames()
 	{
-		xjdfElem.removeAttribute(AttributeName.FORMAT);
-		xjdfElem.removeAttribute(AttributeName.MINDELAYTIME);
-		xjdfElem.removeAttribute(AttributeName.REPEATSTEP);
-		xjdfElem.removeAttribute(AttributeName.TEMPLATE);
-		super.removeUnused(xjdfElem);
+		return new VString(ElementName.SUBSCRIPTION, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		map.remove(AttributeName.FORMAT);
+		map.remove(AttributeName.MINDELAYTIME);
+		map.remove(AttributeName.REPEATSTEP);
+		map.remove(AttributeName.TEMPLATE);
+		super.updateAttributes(map);
 	}
 }

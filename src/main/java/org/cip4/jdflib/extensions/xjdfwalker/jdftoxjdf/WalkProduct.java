@@ -131,14 +131,14 @@ public class WalkProduct extends WalkJDF
 	 * @param newRootP
 	 */
 	@Override
-	protected void removeUnused(final KElement newRootP)
+	protected void removeUnusedElements(final KElement newRootP)
 	{
 		// status is set only in the NodeInfo
 		newRootP.removeAttribute(AttributeName.STATUS);
 		newRootP.removeAttribute(AttributeName.STATUSDETAILS);
 		newRootP.removeAttribute(AttributeName.ACTIVATION);
 		newRootP.removeAttribute(AttributeName.TEMPLATE);
-		super.removeUnused(newRootP);
+		super.removeUnusedElements(newRootP);
 	}
 
 	/**

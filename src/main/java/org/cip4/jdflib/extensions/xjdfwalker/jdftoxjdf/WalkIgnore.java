@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,13 +68,9 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.node.JDFSpawned;
-import org.cip4.jdflib.pool.JDFAncestorPool;
-import org.cip4.jdflib.pool.JDFResourcePool;
-import org.cip4.jdflib.resource.JDFMerged;
-import org.cip4.jdflib.resource.JDFObservationTarget;
-import org.cip4.jdflib.resource.process.JDFBusinessInfo;
+import org.cip4.jdflib.core.VString;
 
 /**
  * any matching class will be removed with extreme prejudice...
@@ -90,6 +86,7 @@ public class WalkIgnore extends WalkJDFElement
 	public WalkIgnore()
 	{
 		super();
+		depth += 42; // bump us up front so that we always get checked first
 	}
 
 	/**
@@ -103,14 +100,28 @@ public class WalkIgnore extends WalkJDFElement
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
 	 */
 	@Override
-	public boolean matches(final KElement toCheck)
+	public VString getElementNames()
 	{
-		return toCheck instanceof JDFAncestorPool || toCheck instanceof JDFResourcePool || toCheck instanceof JDFSpawned || toCheck instanceof JDFMerged
-				|| toCheck instanceof JDFObservationTarget || toCheck instanceof JDFBusinessInfo;
+		VString v = new VString();
+		v.add(ElementName.ANCESTORPOOL);
+		v.add(ElementName.SPAWNED);
+		v.add(ElementName.RESOURCEPOOL);
+		v.add(ElementName.MERGED);
+		v.add(ElementName.OBSERVATIONTARGET);
+		v.add(ElementName.TRIGGER);
+		v.add(ElementName.BUSINESSINFO);
+		v.add(ElementName.REGISTRATION);
+		v.add(ElementName.ACKNOWLEDGE);
+		v.add(ElementName.ANCESTORPOOL);
+		v.add(ElementName.DEVCAPS);
+		v.add(ElementName.DEVCAPPOOL);
+		v.add(ElementName.TESTPOOL);
+		v.add(ElementName.ACTIONPOOL);
+		v.add(ElementName.MODULEPOOL);
+		return v;
 	}
+
 }

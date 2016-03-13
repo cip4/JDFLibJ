@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,7 +68,12 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.process.JDFCompany;
 
 /**
@@ -96,13 +101,21 @@ public class WalkCompany extends WalkResource
 	}
 
 	/**
-	 * @param e
-	 * @return the created resource
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
 	 */
 	@Override
-	public KElement walk(final KElement e, KElement trackElem)
+	public VString getElementNames()
 	{
-		e.renameAttribute("ProductID", "CompanyID", null, null);
-		return super.walk(e, trackElem);
+		return new VString(ElementName.COMPANY, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		map.renameKey(AttributeName.PRODUCTID, XJDFConstants.CompanyID);
+		super.updateAttributes(map);
 	}
 }

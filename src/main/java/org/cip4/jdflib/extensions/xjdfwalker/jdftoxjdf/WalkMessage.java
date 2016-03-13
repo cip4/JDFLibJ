@@ -98,7 +98,12 @@ public class WalkMessage extends WalkJDFElement
 		JDFMessage m = (JDFMessage) jdf;
 		if (jdfToXJDF.isTypeSafeMessage())
 		{
-			makeTypesafe(m);
+			JDFMessage m2 = makeTypesafe(m);
+			if (m2 == null)
+			{
+				log.info("Removing message family " + m.getFamily());
+				return null;
+			}
 		}
 		return super.walk(jdf, xjdf);
 	}
@@ -110,25 +115,38 @@ public class WalkMessage extends WalkJDFElement
 	protected void updateAttributes(JDFAttributeMap map)
 	{
 		super.updateAttributes(map);
-		map.renameKey(AttributeName.SENDERID, AttributeName.DEVICEID);
+		if (jdfToXJDF.isTypeSafeMessage())
+		{
+			map.renameKey(AttributeName.SENDERID, AttributeName.DEVICEID);
+			map.remove(AttributeName.TYPE);
+			map.remove(AttributeName.ACKNOWLEDGED);
+			map.remove(AttributeName.ACKNOWLEDGETYPE);
+			map.remove(AttributeName.ACKNOWLEDGEURL);
+			map.remove(AttributeName.FORMAT);
+			map.remove(AttributeName.LASTREPEAT);
+			map.remove(AttributeName.TEMPLATE);
+		}
+
 	}
 
 	/**
 	 * 
 	 * @param m
 	 */
-	void makeTypesafe(JDFMessage m)
+	JDFMessage makeTypesafe(JDFMessage m)
 	{
 		EnumFamily family = getNewFamily(m);
 		if (family == null)
 		{
 			log.error("cannot convert message with null family");
+			return null;
 		}
 		else
 		{
 			String type = getMessageType(m);
 			m.renameElement(getFamilyName(family) + type, null);
 		}
+		return m;
 	}
 
 	/**
@@ -169,20 +187,6 @@ public class WalkMessage extends WalkJDFElement
 				family = EnumFamily.Response;
 		}
 		return family;
-	}
-
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#removeUnused(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	protected void removeUnused(final KElement newRootP)
-	{
-		super.removeUnused(newRootP);
-		if (jdfToXJDF.isTypeSafeMessage())
-		{
-			newRootP.removeAttribute(AttributeName.TYPE);
-		}
 	}
 
 	/**

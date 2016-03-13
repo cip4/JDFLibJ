@@ -172,7 +172,7 @@ public class WalkJDF extends WalkJDFElement
 		String types = newRootP.getAttribute(AttributeName.TYPES, null, null);
 		setAttributes(node, newRootP);
 
-		removeUnused(newRootP);
+		removeUnusedElements(newRootP);
 
 		if (jdfToXJDF.isUpdateVersion())
 		{
@@ -215,14 +215,14 @@ public class WalkJDF extends WalkJDFElement
 	 * @param xjdfElement
 	 */
 	@Override
-	protected void removeUnused(final KElement xjdfElement)
+	protected void removeUnusedElements(final KElement xjdfElement)
 	{
 		// status is set only in the NodeInfo
 		xjdfElement.removeAttribute(AttributeName.STATUS);
 		xjdfElement.removeAttribute(AttributeName.STATUSDETAILS);
 		xjdfElement.removeAttribute(AttributeName.ACTIVATION);
 		xjdfElement.removeAttribute(AttributeName.TEMPLATE);
-		super.removeUnused(xjdfElement);
+		super.removeUnusedElements(xjdfElement);
 	}
 
 	/**
@@ -231,13 +231,13 @@ public class WalkJDF extends WalkJDFElement
 	 */
 	private void updateTypes(final KElement newRootP, String types)
 	{
-		if (!newRootP.hasAttribute(AttributeName.TYPES))
+		if (newRootP.hasAttribute(AttributeName.TYPES))
 		{
-			newRootP.renameAttribute("Type", "Types", null, null);
+			newRootP.removeAttribute(AttributeName.TYPE);
 		}
 		else
 		{
-			newRootP.removeAttribute("Type");
+			newRootP.renameAttribute(AttributeName.TYPE, AttributeName.TYPES, null, null);
 		}
 		VString t1 = StringUtil.tokenize(types, null, false);
 		VString t2 = StringUtil.tokenize(newRootP.getAttribute(AttributeName.TYPES), null, false);
@@ -267,10 +267,12 @@ public class WalkJDF extends WalkJDFElement
 					final int size = vParts.size();
 					for (int i = 0; i < size; i++)
 					{
-						spawnInfo.appendElement(ElementName.PART).setAttributes(vParts.elementAt(i));
+						KElement part = spawnInfo.appendElement(ElementName.PART);
+						part.setAttributes(vParts.elementAt(i));
 					}
 				}
 			}
 		}
 	}
+
 }
