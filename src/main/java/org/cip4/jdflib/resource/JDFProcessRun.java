@@ -287,7 +287,8 @@ public class JDFProcessRun extends JDFAutoProcessRun
 		final JDFDate start = pt.getStart();
 		if (start != null)
 		{
-			if (start.isEarlier(getStart()))
+			JDFDate start2 = getStart();
+			if (start2 == null || start.isEarlier(start2))
 			{
 				setStart(start);
 			}
@@ -400,6 +401,3 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	}
 
 }
-
-// class JDFProcessRun
-// ==========================================================================
