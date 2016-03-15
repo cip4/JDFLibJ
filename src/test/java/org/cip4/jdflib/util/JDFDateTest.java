@@ -136,11 +136,11 @@ public class JDFDateTest extends JDFTestCaseBase
 		JDFDate d = new JDFDate();
 		assertTrue(d.getFormattedDateTime(JDFDate.DATETIMEISO_00).contains(":00:00"));
 		JDFDate d1 = new JDFDate(d.getFormattedDateTime(JDFDate.DATETIMEISO_0));
-		assertFalse(d.before(d1));
+		assertFalse(d.isEarlier(d1));
 		JDFDate d2 = new JDFDate(d.getFormattedDateTime(JDFDate.DATETIMEISO_00));
-		assertFalse(d1.before(d2));
+		assertFalse(d1.isEarlier(d2));
 		JDFDate d3 = new JDFDate(d.getFormattedDateTime(JDFDate.DATETIMEISO_000));
-		assertFalse(d2.before(d3));
+		assertFalse(d2.isEarlier(d3));
 	}
 
 	/**
@@ -504,13 +504,25 @@ public class JDFDateTest extends JDFTestCaseBase
 	{
 		final JDFDate date1 = new JDFDate();
 		final JDFDate date2 = new JDFDate();
-		assertFalse(date1.before(date2));
 		assertFalse(date1.before(date2.getTimeInMillis()));
-		assertFalse(date2.before(date1));
 		assertFalse(date2.before(date1.getTimeInMillis()));
 		date1.addOffset(22, 22, 22, 22);
-		assertTrue(date2.before(date1));
 		assertTrue(date2.before(date1.getTimeInMillis()));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testIsEarlier()
+	{
+		final JDFDate date1 = new JDFDate();
+		final JDFDate date2 = new JDFDate();
+		assertFalse(date1.isEarlier(date2));
+		assertFalse(date2.isEarlier(date1));
+		assertFalse(date2.isEarlier(null));
+		date1.addOffset(22, 22, 22, 22);
+		assertTrue(date2.isEarlier(date1));
 	}
 
 	/**
@@ -521,13 +533,25 @@ public class JDFDateTest extends JDFTestCaseBase
 	{
 		final JDFDate date1 = new JDFDate();
 		final JDFDate date2 = new JDFDate(date1);
-		assertFalse(date1.after(date2));
 		assertFalse(date1.after(date2.getTimeInMillis()));
-		assertFalse(date2.after(date1));
 		assertFalse(date2.after(date1.getTimeInMillis()));
 		date1.addOffset(22, 22, 22, 22);
-		assertTrue(date1.after(date2));
 		assertTrue(date1.after(date2.getTimeInMillis()));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testIsLater()
+	{
+		final JDFDate date1 = new JDFDate();
+		final JDFDate date2 = new JDFDate(date1);
+		assertFalse(date1.isLater(date2));
+		assertFalse(date2.isLater(date1));
+		assertTrue(date2.isLater(null));
+		date1.addOffset(22, 22, 22, 22);
+		assertTrue(date1.isLater(date2));
 	}
 
 	/**
@@ -718,7 +742,7 @@ public class JDFDateTest extends JDFTestCaseBase
 			d = new JDFDate(d.getDateTimeISO());
 			if (i > 0)
 			{
-				assertTrue(d.after(v[i - 1]));
+				assertTrue(d.isLater(v[i - 1]));
 			}
 		}
 	}

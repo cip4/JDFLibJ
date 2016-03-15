@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -271,7 +271,7 @@ public class CapabilitiesCreator extends BaseElementWalker
 				{
 					String minDate = dtv.getAttribute("MinValue");
 					min = JDFDate.createDate(minDate);
-					min = date.before(min) ? date : min;
+					min = date.isEarlier(min) ? date : min;
 				}
 				dtv.setAttribute("MinValue", min.getDateTimeISO());
 
@@ -280,7 +280,7 @@ public class CapabilitiesCreator extends BaseElementWalker
 				{
 					String maxDate = dtv.getAttribute("MaxValue");
 					max = JDFDate.createDate(maxDate);
-					max = date.after(min) ? date : max;
+					max = date.isLater(min) ? date : max;
 				}
 				dtv.setAttribute("MaxValue", max.getDateTimeISO());
 			}

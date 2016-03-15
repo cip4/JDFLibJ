@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -346,10 +346,9 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	@Test
 	public void testCreateSubmitProcessRun()
 	{
-
 		JDFProcessRun pr = myAuditPool.createSubmitProcessRun(null);
 		assertNotNull(pr.getSubmissionTime());
-		assertFalse("has submissiontime before now", new JDFDate().before(pr.getSubmissionTime()));
+		assertFalse("has submissiontime before now", new JDFDate().isEarlier(pr.getSubmissionTime()));
 		assertTrue(pr.getAttribute(AttributeName.QUEUEENTRYID).startsWith("qe"));
 
 		final JDFDoc d = new JDFDoc(ElementName.QUEUEENTRY);

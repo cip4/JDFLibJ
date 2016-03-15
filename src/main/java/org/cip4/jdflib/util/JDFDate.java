@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -817,7 +817,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public boolean isLater(final JDFDate x)
 	{
-		return lTimeInMillis > x.getTimeInMillis();
+		long timeInMillis = x == null ? 0 : x.getTimeInMillis();
+		return lTimeInMillis > timeInMillis;
 	}
 
 	/**
@@ -828,7 +829,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public boolean isEarlier(final JDFDate x)
 	{
-		return lTimeInMillis < x.getTimeInMillis();
+		long timeInMillis = x == null ? 0 : x.getTimeInMillis();
+		return lTimeInMillis < timeInMillis;
 	}
 
 	/**
@@ -883,18 +885,16 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * true, if this is before other, also true if other==null
+	 * true, if this is before other
 	 * 
-	 * @param other JDFDate to compare
+	 * @param other the time in milliseconds since 1970 (e.g. from System.currentTimeMillis())
 	 * @return true if this is before other
+	 * @deprecated use isEarlier
 	 */
+	@Deprecated
 	public boolean before(final JDFDate other)
 	{
-		if (other == null)
-		{
-			return true;
-		}
-		return lTimeInMillis < other.lTimeInMillis;
+		return isEarlier(other);
 	}
 
 	/**
@@ -913,14 +913,12 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * 
 	 * @param other
 	 * @return true if this date is after other
+	 * @deprecated use isLater
 	 */
+	@Deprecated
 	public boolean after(final JDFDate other)
 	{
-		if (other == null)
-		{
-			return true;
-		}
-		return lTimeInMillis > other.lTimeInMillis;
+		return isLater(other);
 	}
 
 	/**

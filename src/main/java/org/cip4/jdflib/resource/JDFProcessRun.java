@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -287,7 +287,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 		final JDFDate start = pt.getStart();
 		if (start != null)
 		{
-			if (start.before(getStart()))
+			if (start.isEarlier(getStart()))
 			{
 				setStart(start);
 			}
@@ -296,7 +296,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 		final JDFDate end = pt.getEnd();
 		if (end != null)
 		{
-			if (end.after(getEnd()))
+			if (end.isLater(getEnd()))
 			{
 				setEnd(end);
 			}
