@@ -213,7 +213,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	@Test
 	public void testInterruptCurrent()
 	{
-		OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test3");
+		OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test333");
 		assertTrue(q.queue(new WaitRunner(1, 10000)));
 		assertTrue(q.queue(new WaitRunner(2, 10000)));
 		ThreadUtil.sleep(200);

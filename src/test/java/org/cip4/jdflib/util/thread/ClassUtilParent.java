@@ -69,78 +69,23 @@
 package org.cip4.jdflib.util.thread;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Test;
 
-public class MultiTaskQueueTest extends JDFTestCaseBase
+/**
+ * 
+ * @author rainer prosi
+ * @date Mar 15, 2013
+ */
+public class ClassUtilParent extends JDFTestCaseBase
 {
-	class WaitRunner implements Runnable
-	{
-		/**
-		 * 
-		 * @param i
-		 */
-		WaitRunner(int i)
-		{
-			super();
-			this.i = i;
-			t = 100;
-		}
-
-		WaitRunner(int i, int t)
-		{
-			super();
-			this.i = i;
-			this.t = t;
-		}
-
-		private final int i;
-		private final int t;
-
-		/**
-		 * @see java.lang.Runnable#run()
-		 */
-		@Override
-		public void run()
-		{
-			log.info("queued: " + i);
-			boolean b = ThreadUtil.sleep(t);
-			log.info(b + " waited: " + i);
-		}
-	}
-
-	/**
-	 * 
-	 */
-	@Test
-	public void testSize()
-	{
-		MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multi0", 3);
-		assertEquals(0, q.size());
-	}
-
 	/**
 	 * 
 	 *  
+	 * @author rainer  prosi
+	 * @date Mar 15, 2013
 	 */
-	@Test
-	public void testMulti()
+	protected class OtherInnerClass
 	{
-		OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi1", 3);
-		assertEquals(0, q.getAvQueue());
-		assertEquals(0, q.getAvRun());
-		for (int i = 0; i < 10; i++)
-			q.queue(new WaitRunner(i, 100));
-		assertEquals(q.getAvQueue(), 0);
-		ThreadUtil.sleep(10);
-		assertEquals(q.size(), 7);
-		ThreadUtil.sleep(1111);
-		assertTrue(q.getAvQueue() > 0);
-		assertTrue(q.getAvRun() > 0);
-		assertEquals(q.size(), 0);
-		assertTrue(q.queue(new WaitRunner(4)));
-		ThreadUtil.sleep(222);
-		assertEquals(q.size(), 0);
-		assertTrue(q.getAvQueue() > 0);
+
 	}
+
 }

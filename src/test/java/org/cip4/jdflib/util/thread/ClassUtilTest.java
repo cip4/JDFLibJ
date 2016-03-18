@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -77,7 +77,7 @@ import org.junit.Test;
  * @author rainer prosi
  * @date Mar 15, 2013
  */
-public class ClassUtilTest extends OrderedTaskQueueTest
+public class ClassUtilTest extends ClassUtilParent
 {
 	/**
 	 * 
@@ -98,7 +98,7 @@ public class ClassUtilTest extends OrderedTaskQueueTest
 	{
 		Vector<Class<?>> v = ClassUtil.getDeclaredClasses(getClass());
 		assertTrue(v.contains(InnerClass.class));
-		assertTrue(v.contains(WaitRunner.class));
+		assertTrue(v.contains(OtherInnerClass.class));
 	}
 
 }
