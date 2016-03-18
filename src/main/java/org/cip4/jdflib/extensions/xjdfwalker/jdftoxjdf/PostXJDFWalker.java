@@ -1347,6 +1347,87 @@ class PostXJDFWalker extends BaseElementWalker
 				return super.walk(xjdf, dummy);
 			}
 		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ProductHelper.PRODUCTLIST, null);
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	public class WalkProduct extends WalkElement
+	{
+		/**
+		 * 
+		 */
+		public WalkProduct()
+		{
+			super();
+		}
+
+		/**
+		 * 
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return ProductHelper.PRODUCT.equals(toCheck.getLocalName());
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param xjdf
+		 * @param dummy
+		 * @return
+		*/
+		@Override
+		public KElement walk(KElement xjdf, KElement dummy)
+		{
+			fixChildRefs(xjdf);
+			return super.walk(xjdf, dummy);
+		}
+
+		/**
+		 * 
+		 * @param xjdf
+		 */
+		private void fixChildRefs(KElement xjdf)
+		{
+			IntentHelper bind = new ProductHelper(xjdf).getIntent(ElementName.BINDINGINTENT);
+			if (bind != null)
+			{
+				bind.getCreateResource().moveAttribute(XJDFConstants.ChildRefs, bind.getRoot());
+			}
+			else
+			{
+				//TODO fix to subelements
+				IntentHelper insert = new ProductHelper(xjdf).getIntent(ElementName.INSERTINGINTENT);
+				if (insert != null)
+				{
+					insert.getCreateResource().moveAttribute(XJDFConstants.ChildRefs, insert.getRoot());
+				}
+			}
+
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ProductHelper.PRODUCT, null);
+		}
 	}
 
 	/**

@@ -3995,11 +3995,18 @@ public class KElement extends ElementNSImpl implements Element
 		}
 	}
 
-	// ************************** end of methods needed in JDFAncestorPool
-	// ******
-	// //////////////////////////////////////////////////////////////////////////
-	// ************************** start of methods needed in JDFResource
-	// ********
+	/**
+	 * Rename an attribute in this namespace<br/>
+	 * if oldName does not exist, newName is NOT modified
+	 * <p>
+	 * default: renameAttribute(oldName, newName, null, null)
+	 * @param oldName attribute name to move from
+	 * @param newName attribute name to move to
+		 */
+	public void renameAttribute(final String oldName, final String newName)
+	{
+		renameAttribute(oldName, newName, null, null);
+	}
 
 	/**
 	 * Get a vector of all value of the attribute attName in the children of this node
@@ -5713,5 +5720,17 @@ public class KElement extends ElementNSImpl implements Element
 	public boolean write2File(String filename)
 	{
 		return write2File(UrlUtil.urlToFile(filename));
+	}
+
+	/**
+	 * convenience setter
+	 * 
+	 * same as setAttribute but never sets ""
+	 * @param key
+	 * @param val
+	 */
+	public void setNonEmpty(String key, String val)
+	{
+		setAttribute(key, StringUtil.getNonEmpty(val));
 	}
 }

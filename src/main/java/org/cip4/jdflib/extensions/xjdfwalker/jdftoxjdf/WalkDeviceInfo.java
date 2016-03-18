@@ -68,35 +68,68 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- * any matching class will be removed with extreme prejudice...
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkIgnore extends WalkJDFElement
+public class WalkDeviceInfo extends WalkJDFSubElement
 {
-
 	/**
 	 * 
 	 */
-	public WalkIgnore()
+	public WalkDeviceInfo()
 	{
 		super();
-		depth += 42; // bump us up front so that we always get checked first
 	}
 
 	/**
-	 * @param xjdf
-	 * @return true if must continue
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
 	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	public boolean matches(final KElement toCheck)
 	{
-		return null;
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFDeviceInfo);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		updateDeviceStatus(map);
+		super.updateAttributes(map);
+	}
+
+	/**
+	 * 
+	 * @param map
+	 */
+	private void updateDeviceStatus(JDFAttributeMap map)
+	{
+		map.renameKey(AttributeName.DEVICESTATUS, AttributeName.STATUS);
+		String val = map.get(AttributeName.STATUS);
+		if (StringUtil.getNonEmpty(val) != null)
+		{
+			if ("Unknown".equals(val) || "Down".equals(val))
+			{
+				val = "Offline";
+			}
+			else if ("Setup".equals(val) || "Running".equals(val) || "Cleanup".equals(val))
+			{
+				val = "Production";
+			}
+			map.put(AttributeName.STATUS, val);
+		}
 	}
 
 	/**
@@ -105,25 +138,7 @@ public class WalkIgnore extends WalkJDFElement
 	@Override
 	public VString getElementNames()
 	{
-		VString v = new VString();
-		v.add(ElementName.ACKNOWLEDGE);
-		v.add(ElementName.ACTIONPOOL);
-		v.add(ElementName.ADHESIVEBINDING);
-		v.add(ElementName.ANCESTORPOOL);
-		v.add(ElementName.BINDLIST);
-		v.add(ElementName.BOOKCASE);
-		v.add(ElementName.BUSINESSINFO);
-		v.add(ElementName.DEVCAPPOOL);
-		v.add(ElementName.DEVCAPS);
-		v.add(ElementName.MERGED);
-		v.add(ElementName.MODULEPOOL);
-		v.add(ElementName.OBSERVATIONTARGET);
-		v.add(ElementName.REGISTRATION);
-		v.add(ElementName.RESOURCEPOOL);
-		v.add(ElementName.SPAWNED);
-		v.add(ElementName.TESTPOOL);
-		v.add(ElementName.TRIGGER);
-		return v;
+		return new VString(ElementName.DEVICEINFO, null);
 	}
 
 }

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -126,7 +126,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 		JDFDoc d = new JDFParser().parseFile(sm_dirTestData + "bigWhite.jdf");
 		JDFAttributeMap map = d.getRoot().getXPathValueMap();
 
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 1; i++)
 		{
 			ct.start();
 			JDFDoc dNew = new JDFDoc("JDF");
@@ -145,7 +145,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 		CPUTimer ct = new CPUTimer(false);
 		JDFDoc d = StatusCounterTest.getJMF();
 
-		for (int i = 0; i < 30000; i++)
+		for (int i = 0; i < 10000; i++)
 		{
 			ct.start();
 			JDFAttributeMap map = d.getRoot().getXPathValueMap();

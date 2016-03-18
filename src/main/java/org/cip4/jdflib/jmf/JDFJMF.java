@@ -855,11 +855,9 @@ public class JDFJMF extends JDFAutoJMF
 	 */
 	public VElement getMessageVector(final JDFMessage.EnumFamily family, final JDFMessage.EnumType typ)
 	{
-		VElement vM;
 		final String sFamily = (family != null) ? family.getName() : null;
-
 		final JDFAttributeMap typMap = typ == null ? null : new JDFAttributeMap(AttributeName.TYPE, typ.getName());
-		vM = getChildrenByTagName(sFamily, null, typMap, true, true, 0);
+		VElement vM = getChildrenByTagName(sFamily, null, typMap, true, true, 0);
 
 		if (family == null) // only needed if call was generic
 		{

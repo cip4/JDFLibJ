@@ -593,22 +593,21 @@ public class StringUtil
 	 */
 	public static VString tokenize(final String strWork, String delim, final boolean delim2token)
 	{
-		delim = delim == null ? JDFConstants.BLANK : delim;
-		final VString v = new VString();
-		if (StringUtil.getNonEmpty(strWork) != null)
+		if (delim2token)
 		{
-			if (delim.length() == 1 && strWork.indexOf(delim) < 0)
-			{
-				v.add(strWork);
-				return v;
-			}
+			delim = delim == null ? JDFConstants.BLANK : delim;
+			final VString v = new VString();
 			final StringTokenizer st = new StringTokenizer(strWork, delim, delim2token);
 			while (st.hasMoreTokens())
 			{
 				v.add(st.nextToken());
 			}
+			return v;
 		}
-		return v;
+		else
+		{
+			return new VString(strWork, delim);
+		}
 	}
 
 	/**

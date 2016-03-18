@@ -73,7 +73,9 @@ public abstract class XJDFConstants
 	public static final String BinderySignatureID = "BinderySignatureID";
 	public static final String BinderySignatureIDs = "BinderySignatureIDs";
 
+	public static final String ChannelCover = "ChannelCover";
 	public static final String ChildProduct = "ChildProduct";
+	public static final String ChildRefs = "ChildRefs";
 	public static final String CompanyID = "CompanyID";
 
 	public static final String Dependent = "Dependent";
@@ -82,10 +84,16 @@ public abstract class XJDFConstants
 
 	public static final String HolePattern = "HolePattern";
 
+	public static final String IsRoot = "IsRoot";
+
+	public static final String LooseBinding = "LooseBinding";
+
 	public static final String Parent = "Parent";
 	public static final String Process = "Process";
 	public static final String ProcessList = "ProcessList";
 	public static final String ProcessTypes = "ProcessType"; // TODO discuss "s"
+	public static final String Product = "Product";
+	public static final String ProductList = "ProductList";
 	public static final String ProductPart = "ProductPart";
 
 	public static final String Resource = "Resource";

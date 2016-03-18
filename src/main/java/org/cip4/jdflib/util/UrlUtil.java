@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -341,6 +341,14 @@ public class UrlUtil
 	 * 
 	 */
 	public static final String VND_JMF = JDFCoreConstants.MIME_JMF;
+	/**
+	 * 
+	 */
+	public static final String VND_XJDF = JDFCoreConstants.MIME_XJDF;
+	/**
+	 * 
+	 */
+	public static final String VND_XJMF = JDFCoreConstants.MIME_XJMF;
 	/**
 	 * 
 	 */

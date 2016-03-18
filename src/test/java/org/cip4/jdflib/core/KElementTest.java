@@ -290,6 +290,19 @@ public class KElementTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testRenameAttribute()
+	{
+		final XMLDoc d = new XMLDoc("root", null);
+		final KElement root = d.getRoot();
+		root.setAttribute("a", "aa");
+		root.renameAttribute("a", "b");
+		assertEquals("aa", root.getAttribute("b"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testRemoveChildren()
 	{
 		final XMLDoc d = new XMLDoc("root", null);
@@ -2630,6 +2643,20 @@ public class KElementTest extends JDFTestCaseBase
 		String s = jdfDoc2.write2String(2);
 		assertNull("incorrectly serialized namespace", new JDFParser().parseString(s));
 		assertFalse("no magic name space...", s.indexOf("xmlns:b") > 0);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testSetNonEmpty()
+	{
+		final XMLDoc jdfDoc = new XMLDoc("Foo", null);
+		final KElement root = jdfDoc.getRoot();
+		root.setNonEmpty("b", "c");
+		assertEquals(root.getAttribute("b"), "c");
+		root.setNonEmpty("b", "");
+		assertNull(root.getAttribute("b", null, null));
 	}
 
 	/**

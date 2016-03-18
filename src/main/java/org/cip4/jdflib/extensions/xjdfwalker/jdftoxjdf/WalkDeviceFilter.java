@@ -72,6 +72,7 @@ import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFDeviceFilter;
 
@@ -135,6 +136,15 @@ public class WalkDeviceFilter extends WalkJDFSubElement
 	{
 		super.removeUnusedElements(newRootP);
 		newRootP.removeChildren(ElementName.DEVICE, null, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return new VString(ElementName.DEVICEFILTER, null);
 	}
 
 }

@@ -66,64 +66,37 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
 
 /**
- * any matching class will be removed with extreme prejudice...
- * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
+ * @author rainer prosi
+ *
  */
-public class WalkIgnore extends WalkJDFElement
+public class WalkDeviceInfoTest extends JDFTestCaseBase
 {
-
 	/**
 	 * 
 	 */
-	public WalkIgnore()
+	public void testDeviceStatus()
 	{
-		super();
-		depth += 42; // bump us up front so that we always get checked first
+		JDFDeviceInfo di = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
+		di.setAttribute(AttributeName.STATUS, "Production");
+		WalkDeviceInfo wdi = new WalkDeviceInfo();
+		wdi.setParent(new XJDFToJDFImpl(null));
+		KElement rp = new JDFDoc(ElementName.RESOURCEPOOL).getRoot();
+		wdi.walk(di, rp);
+		JDFDeviceInfo di2 = (JDFDeviceInfo) rp.getElement(ElementName.DEVICEINFO);
+		String status = di2.getNonEmpty(AttributeName.DEVICESTATUS);
+		assertNull(di2.getNonEmpty(AttributeName.STATUS));
+		assertEquals(status, EnumDeviceStatus.Running.getName());
 	}
-
-	/**
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		return null;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		VString v = new VString();
-		v.add(ElementName.ACKNOWLEDGE);
-		v.add(ElementName.ACTIONPOOL);
-		v.add(ElementName.ADHESIVEBINDING);
-		v.add(ElementName.ANCESTORPOOL);
-		v.add(ElementName.BINDLIST);
-		v.add(ElementName.BOOKCASE);
-		v.add(ElementName.BUSINESSINFO);
-		v.add(ElementName.DEVCAPPOOL);
-		v.add(ElementName.DEVCAPS);
-		v.add(ElementName.MERGED);
-		v.add(ElementName.MODULEPOOL);
-		v.add(ElementName.OBSERVATIONTARGET);
-		v.add(ElementName.REGISTRATION);
-		v.add(ElementName.RESOURCEPOOL);
-		v.add(ElementName.SPAWNED);
-		v.add(ElementName.TESTPOOL);
-		v.add(ElementName.TRIGGER);
-		return v;
-	}
-
 }

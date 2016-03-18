@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,11 +84,11 @@ public class ProductHelper extends BaseXJDFHelper
 	/**
 	 * 
 	 */
-	public static final String PRODUCT = "Product";
+	public static final String PRODUCT = XJDFConstants.Product;
 	/**
 	 * 
 	 */
-	public static final String PRODUCTLIST = PRODUCT + "List";
+	public static final String PRODUCTLIST = XJDFConstants.ProductList;
 	/**
 	 * 
 	 */
@@ -96,7 +96,7 @@ public class ProductHelper extends BaseXJDFHelper
 	/**
 	 * root products attribute name
 	 */
-	public final static String rootProduct = "IsRoot";
+	public final static String rootProduct = XJDFConstants.IsRoot;
 
 	/**
 	 * @param product

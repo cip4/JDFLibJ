@@ -71,10 +71,9 @@
 package org.cip4.jdflib.util;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -231,7 +230,7 @@ public class DumpDir
 		final File dump = newFile(null, ext);
 		is = ByteArrayIOStream.getBufferedInputStream(is);
 
-		final FileOutputStream fs = newHeader(header, dump, false);
+		final OutputStream fs = newHeader(header, dump, false);
 		if (fs != null)
 		{
 			try
@@ -262,12 +261,12 @@ public class DumpDir
 	 * @param bClose 
 	 * @return 
 	 */
-	private FileOutputStream newHeader(final String header, final File f, final boolean bClose)
+	private OutputStream newHeader(final String header, final File f, final boolean bClose)
 	{
-		try
+		final OutputStream fs = FileUtil.getBufferedOutputStream(f);
+		if (header != null && fs != null)
 		{
-			final FileOutputStream fs = new FileOutputStream(f);
-			if (header != null)
+			try
 			{
 				fs.write(header.getBytes());
 				fs.write("\n------ end of header ----!\n".getBytes());
@@ -277,18 +276,12 @@ public class DumpDir
 					fs.close();
 				}
 			}
-			return fs;
+			catch (IOException e)
+			{
+				// nop
+			}
 		}
-		catch (final FileNotFoundException x)
-		{
-			// nop
-		}
-		catch (final IOException x)
-		{
-			// nop
-		}
-
-		return null;
+		return fs;
 	}
 
 	/**

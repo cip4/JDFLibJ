@@ -161,10 +161,27 @@ public class WalkXElement extends BaseWalker
 		return trackElem;
 	}
 
+	/**
+	 * 
+	 * @param elem
+	 */
 	protected void updateAttributes(KElement elem)
 	{
-		elem.renameAttribute(XJDFConstants.ExternalID, AttributeName.PRODUCTID, null, null);
-		elem.renameAttribute(XJDFConstants.BinderySignatureIDs, AttributeName.ASSEMBLYIDS, null, null);
+		elem.renameAttribute(XJDFConstants.ExternalID, AttributeName.PRODUCTID);
+		elem.renameAttribute(XJDFConstants.BinderySignatureIDs, AttributeName.ASSEMBLYIDS);
+		moveCostCenterID(elem);
+	}
+
+	/**
+	 * 
+	 * @param elem
+	 */
+	private void moveCostCenterID(KElement elem)
+	{
+		if (elem.getNonEmpty(AttributeName.COSTCENTERID) != null)
+		{
+			elem.appendElement(ElementName.COSTCENTER).moveAttribute(AttributeName.COSTCENTERID, elem);
+		}
 	}
 
 	/**

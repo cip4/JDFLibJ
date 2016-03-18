@@ -68,62 +68,37 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
+import org.junit.Test;
 
-/**
- * any matching class will be removed with extreme prejudice...
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
- */
-public class WalkIgnore extends WalkJDFElement
+public class WalkDeviceInfoTest extends JDFTestCaseBase
 {
 
 	/**
 	 * 
 	 */
-	public WalkIgnore()
+	@Test
+	public void testStatus()
 	{
-		super();
-		depth += 42; // bump us up front so that we always get checked first
-	}
-
-	/**
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		return null;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		VString v = new VString();
-		v.add(ElementName.ACKNOWLEDGE);
-		v.add(ElementName.ACTIONPOOL);
-		v.add(ElementName.ADHESIVEBINDING);
-		v.add(ElementName.ANCESTORPOOL);
-		v.add(ElementName.BINDLIST);
-		v.add(ElementName.BOOKCASE);
-		v.add(ElementName.BUSINESSINFO);
-		v.add(ElementName.DEVCAPPOOL);
-		v.add(ElementName.DEVCAPS);
-		v.add(ElementName.MERGED);
-		v.add(ElementName.MODULEPOOL);
-		v.add(ElementName.OBSERVATIONTARGET);
-		v.add(ElementName.REGISTRATION);
-		v.add(ElementName.RESOURCEPOOL);
-		v.add(ElementName.SPAWNED);
-		v.add(ElementName.TESTPOOL);
-		v.add(ElementName.TRIGGER);
-		return v;
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
+		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Running);
+		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Setup);
+		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Cleanup);
+		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Down);
+		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Idle);
+		KElement xjmf = new JDFToXJDF().convert(jmf);
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@Status", null), "Offline");
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[2]/@Status", null), "Production");
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[3]/@Status", null), "Production");
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[4]/@Status", null), "Production");
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[5]/@Status", null), "Offline");
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[6]/@Status", null), "Idle");
 	}
 
 }

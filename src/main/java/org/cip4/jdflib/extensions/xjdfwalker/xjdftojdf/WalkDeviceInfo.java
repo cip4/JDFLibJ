@@ -66,37 +66,37 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- * any matching class will be removed with extreme prejudice...
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkIgnore extends WalkJDFElement
+public class WalkDeviceInfo extends WalkXElement
 {
-
 	/**
 	 * 
 	 */
-	public WalkIgnore()
+	public WalkDeviceInfo()
 	{
 		super();
-		depth += 42; // bump us up front so that we always get checked first
 	}
 
 	/**
-	 * @param xjdf
-	 * @return true if must continue
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
 	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	public boolean matches(final KElement toCheck)
 	{
-		return null;
+		return toCheck instanceof JDFDeviceInfo;
 	}
 
 	/**
@@ -105,25 +105,39 @@ public class WalkIgnore extends WalkJDFElement
 	@Override
 	public VString getElementNames()
 	{
-		VString v = new VString();
-		v.add(ElementName.ACKNOWLEDGE);
-		v.add(ElementName.ACTIONPOOL);
-		v.add(ElementName.ADHESIVEBINDING);
-		v.add(ElementName.ANCESTORPOOL);
-		v.add(ElementName.BINDLIST);
-		v.add(ElementName.BOOKCASE);
-		v.add(ElementName.BUSINESSINFO);
-		v.add(ElementName.DEVCAPPOOL);
-		v.add(ElementName.DEVCAPS);
-		v.add(ElementName.MERGED);
-		v.add(ElementName.MODULEPOOL);
-		v.add(ElementName.OBSERVATIONTARGET);
-		v.add(ElementName.REGISTRATION);
-		v.add(ElementName.RESOURCEPOOL);
-		v.add(ElementName.SPAWNED);
-		v.add(ElementName.TESTPOOL);
-		v.add(ElementName.TRIGGER);
-		return v;
+		return new VString(ElementName.DEVICEINFO, null);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void updateAttributes(KElement elem)
+	{
+		elem.renameAttribute(AttributeName.STATUS, AttributeName.DEVICESTATUS);
+		String newStatus = updateDeviceStatus(elem.getNonEmpty(AttributeName.DEVICESTATUS));
+		elem.setAttribute(AttributeName.DEVICESTATUS, newStatus);
+		super.updateAttributes(elem);
+	}
+
+	/**
+	 * 
+	 * @param val
+	 * @return
+	 */
+	private String updateDeviceStatus(String val)
+	{
+		if (StringUtil.getNonEmpty(val) != null)
+		{
+			if ("Offline".equals(val))
+			{
+				val = "Unknown";
+			}
+			else if ("Production".equals(val))
+			{
+				val = "Running";
+			}
+		}
+		return val;
+	}
 }
