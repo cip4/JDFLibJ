@@ -68,7 +68,10 @@
  */
 package org.cip4.jdflib.util.thread;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.junit.Test;
 
 /**
  * 
@@ -86,6 +89,17 @@ public class ClassUtilParent extends JDFTestCaseBase
 	protected class OtherInnerClass
 	{
 
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetDeclaredClasses()
+	{
+		Vector<Class<?>> v = ClassUtil.getDeclaredClasses(getClass());
+
+		assertTrue(v.contains(OtherInnerClass.class));
 	}
 
 }
