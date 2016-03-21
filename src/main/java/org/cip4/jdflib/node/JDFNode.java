@@ -118,6 +118,8 @@
  */
 package org.cip4.jdflib.node;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -8803,4 +8805,42 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			setMaxVersion(enumVer);
 		}
 	}
+
+	/**
+	 * parse a JDF file
+	 * 
+	 * @param file
+	 * @return the parsed JDFNode
+	 */
+	public static JDFNode parseFile(final File file)
+	{
+		JDFDoc doc = JDFDoc.parseFile(file);
+		return doc == null ? null : doc.getJDFRoot();
+	}
+
+	/**
+	 * parse a JDF file
+	 * 
+	 * @param fileName
+	 * @return the parsed JDFNode
+	 */
+	public static JDFNode parseFile(final String fileName)
+	{
+		JDFDoc doc = JDFDoc.parseFile(fileName);
+		return doc == null ? null : doc.getJDFRoot();
+	}
+
+	/**
+	 * parse a JDF input stream
+	 * 
+	 * @param is
+	 * @return the parsed JDFNode
+	 */
+	public static JDFNode parseStream(InputStream is)
+	{
+		JDFDoc doc = JDFDoc.parseStream(is);
+		return doc == null ? null : doc.getJDFRoot();
+
+	}
+
 }

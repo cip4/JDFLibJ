@@ -128,6 +128,7 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.CPUTimer;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
@@ -482,6 +483,54 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFResource foPa = n.addResource(ElementName.FOLDINGPARAMS, null, EnumUsage.Input, null, null, null, null);
 		final JDFResourceLink rlfoPa = n.getLink(foPa, null);
 		assertFalse(rlfoPa.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
+	}
+
+	/**
+	 *  
+	 * 
+	 */
+	@Test
+	public void testParseFile()
+	{
+		JDFNode n = JDFNode.parseFile(new File(sm_dirTestData + "Job.jdf"));
+		assertNotNull(n);
+		n = JDFNode.parseFile(sm_dirTestData + "Job.jdf");
+		assertNotNull(n);
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	@Test
+	public void testParseFileNull()
+	{
+		JDFNode n = JDFNode.parseFile((File) null);
+		assertNull(n);
+		n = JDFNode.parseFile((String) null);
+		assertNull(n);
+	}
+
+	/**
+	 *  
+	 * 
+	 */
+	@Test
+	public void testParseStreamNull()
+	{
+		JDFNode n = JDFNode.parseStream(null);
+		assertNull(n);
+	}
+
+	/**
+	 *  
+	 * 
+	 */
+	@Test
+	public void testParseStream()
+	{
+		JDFNode n = JDFNode.parseStream(FileUtil.getBufferedInputStream(new File(sm_dirTestData + "Job.jdf")));
+		assertNotNull(n);
 	}
 
 	/**
