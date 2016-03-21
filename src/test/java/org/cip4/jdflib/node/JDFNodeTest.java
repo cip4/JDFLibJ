@@ -492,7 +492,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	@Test
 	public void testParseFile()
 	{
-		JDFNode n = JDFNode.parseFile(new File(sm_dirTestData + "Job.jdf"));
+		JDFNode n = JDFNode.parseFile(new File(sm_dirTestData + "job.jdf"));
 		assertNotNull(n);
 		n = JDFNode.parseFile(sm_dirTestData + "Job.jdf");
 		assertNotNull(n);
@@ -529,7 +529,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	@Test
 	public void testParseStream()
 	{
-		JDFNode n = JDFNode.parseStream(FileUtil.getBufferedInputStream(new File(sm_dirTestData + "Job.jdf")));
+		JDFNode n = JDFNode.parseStream(FileUtil.getBufferedInputStream(new File(sm_dirTestData + "job.jdf")));
 		assertNotNull(n);
 	}
 
