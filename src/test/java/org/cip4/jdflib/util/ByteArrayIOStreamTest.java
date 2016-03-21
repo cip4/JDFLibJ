@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -155,7 +155,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	public void testConstructFile() throws IOException
 	{
 		final File f = new File(sm_dirTestDataTemp + "bios.fil");
-		f.delete();
+		FileUtil.forceDelete(f);
 		f.createNewFile();
 		final FileOutputStream fos = new FileOutputStream(f);
 		for (int i = 0; i < 20000; i++)
@@ -180,7 +180,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	public void testConstructBadFile() throws IOException
 	{
 		File f = new File(sm_dirTestDataTemp + "bios.fil");
-		f.delete();
+		FileUtil.forceDelete(f);
 		ByteArrayIOStream ios = new ByteArrayIOStream(f);
 		InputStream is = ios.getInputStream();
 		assertEquals(is.available(), 0);

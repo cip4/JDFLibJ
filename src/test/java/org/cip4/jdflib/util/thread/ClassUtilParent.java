@@ -95,7 +95,7 @@ public class ClassUtilParent extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetDeclaredClasses()
+	public void testGetDeclaredClasses1()
 	{
 		Vector<Class<?>> v = ClassUtil.getDeclaredClasses(getClass());
 
