@@ -169,6 +169,20 @@ public class JDFRectangle extends JDFNumList
 	}
 
 	/**
+	 * constructs a rectangle with all values set via a JDFRectangle
+	 * 
+	 * @param rec the given rectangle
+	 */
+	public JDFRectangle(final JDFXYPair size)
+	{
+		super(MAX_RECTANGLE_DIMENSION);
+		setLlx(0);
+		setLly(0);
+		setUrx(size.getX());
+		setUry(size.getY());
+	}
+
+	/**
 	 * constructs a rectangle with all values set via a JDFNumberList
 	 * 
 	 * @param nl the given number list

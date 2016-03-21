@@ -494,7 +494,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	{
 		JDFNode n = JDFNode.parseFile(new File(sm_dirTestData + "job.jdf"));
 		assertNotNull(n);
-		n = JDFNode.parseFile(sm_dirTestData + "Job.jdf");
+		n = JDFNode.parseFile(sm_dirTestData + "job.jdf");
 		assertNotNull(n);
 	}
 

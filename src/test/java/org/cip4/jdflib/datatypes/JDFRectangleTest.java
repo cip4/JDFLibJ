@@ -202,7 +202,20 @@ public class JDFRectangleTest extends TestCase
 	 * 
 	 */
 	@Test
-	public void testGetSizr()
+	public void testFromXYPair()
+	{
+		JDFXYPair size = new JDFXYPair(2, 3);
+		JDFRectangle r = new JDFRectangle(size);
+		assertEquals(size, r.getSize());
+		assertEquals(size, r.getUR());
+		assertEquals(new JDFXYPair(), r.getLL());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetSize()
 	{
 		JDFRectangle r = JDFRectangle.createRectangle("5 10 6 12");
 		assertEquals(new JDFXYPair(1, 2), r.getSize());

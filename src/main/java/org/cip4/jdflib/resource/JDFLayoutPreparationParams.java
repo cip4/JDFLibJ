@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,8 +68,12 @@
  */
 package org.cip4.jdflib.resource;
 
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams;
+import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.elementwalker.StrippingConverter;
 import org.cip4.jdflib.node.JDFNode;
 import org.w3c.dom.DOMException;
@@ -143,5 +147,26 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 		final StrippingConverter c = new StrippingConverter(this, n);
 		c.convert();
 		return c;
+	}
+
+	/**
+	 * 
+	 * @return the clipbox from the pagecells - if all are equal or null - else null
+	 */
+	public JDFRectangle getClipBox()
+	{
+		JDFPageCell pc = getPageCell();
+		return pc == null ? null : pc.getClipBox();
+	}
+
+	/**
+	 * 
+	 * @return the trimsize from the pagecells - if all are equal or null - else null
+	 */
+
+	public JDFXYPair getTrimSize()
+	{
+		JDFPageCell pc = getPageCell();
+		return pc == null ? null : pc.getTrimSize();
 	}
 }

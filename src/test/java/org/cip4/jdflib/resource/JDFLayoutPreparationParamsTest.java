@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts also some tests for automated layout
  * 
@@ -202,6 +203,40 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	public String toString()
 	{
 		return n.toString();
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetClipBox()
+	{
+		assertNull(lpp.getClipBox());
+		JDFPageCell pc = lpp.appendPageCell();
+		assertNull(lpp.getClipBox());
+		JDFXYPair size = new JDFXYPair(10, 20);
+		pc.setTrimSize(size);
+		assertEquals(lpp.getClipBox().getSize(), size);
+		JDFRectangle rect = new JDFRectangle(1, 2, 33, 44);
+		pc.setClipBox(rect);
+		assertEquals(lpp.getClipBox(), rect);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testTrimSize()
+	{
+		assertNull(lpp.getTrimSize());
+		JDFPageCell pc = lpp.appendPageCell();
+		assertNull(lpp.getTrimSize());
+		JDFRectangle rect = new JDFRectangle(1, 2, 33, 44);
+		pc.setClipBox(rect);
+		assertEquals(lpp.getTrimSize(), rect.getSize());
+		JDFXYPair size = new JDFXYPair(10, 20);
+		pc.setTrimSize(size);
+		assertEquals(lpp.getTrimSize(), size);
 	}
 
 }
