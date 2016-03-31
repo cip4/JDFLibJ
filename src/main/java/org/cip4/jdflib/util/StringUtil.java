@@ -2840,7 +2840,7 @@ public class StringUtil
 	 * 
 	 * @param work
 	 * @param trimChars if null - use standard whitespace
-	 * @return
+	 * @return null if no chars left
 	 */
 	public static String trim(final String work, final String trimChars)
 	{

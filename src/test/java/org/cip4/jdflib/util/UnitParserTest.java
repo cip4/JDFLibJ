@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -136,6 +136,18 @@ public class UnitParserTest extends JDFTestCaseBase
 		assertEquals(unitParser.extractUnits("0.1CM"), "2.8346");
 		assertEquals(unitParser.extractUnits("10Cm 10  mm"), "283.4646 28.3465");
 		assertEquals(unitParser.extractUnits("10 In 10 MM"), "720 28.3465");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetFactor()
+	{
+		assertEquals(unitParser.getFactor("cm"), 72. / 2.54);
+		assertEquals(unitParser.getFactor("MM"), 72. / 25.4);
+		assertEquals(unitParser.getFactor("in "), 72.);
+		assertEquals(unitParser.getFactor("a"), 1.);
 	}
 
 	/**

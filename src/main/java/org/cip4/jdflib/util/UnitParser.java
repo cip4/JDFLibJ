@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -78,6 +78,11 @@ import org.cip4.jdflib.core.VString;
  */
 public class UnitParser
 {
+	public static final String UNIT_IN = "in";
+	public static final String UNIT_CM = "cm";
+	public static final String UNIT_MM = "mm";
+	public static final String UNIT_PT = "pt";
+
 	private int precision;
 
 	/**
@@ -87,6 +92,35 @@ public class UnitParser
 	{
 		super();
 		setPrecision(4);
+	}
+
+	/**
+	 * get the factor for one of the units to points
+	 * 
+	 * @param unit
+	 * @return
+	 */
+	public double getFactor(String unit)
+	{
+		final double factor;
+		unit = StringUtil.normalize(unit, true);
+		if (UNIT_MM.equals(unit))
+		{
+			factor = 72. / 25.4;
+		}
+		else if (UNIT_CM.equals(unit))
+		{
+			factor = 72. / 2.54;
+		}
+		else if (UNIT_IN.equals(unit))
+		{
+			factor = 72.;
+		}
+		else
+		{
+			factor = 1.0;
+		}
+		return factor;
 	}
 
 	/**
@@ -110,17 +144,17 @@ public class UnitParser
 		{
 			String tmp = v.get(i).toLowerCase();
 			double factor = 1.0;
-			if (tmp.endsWith("mm"))
+			if (tmp.endsWith(UNIT_MM))
 			{
 				factor = 72. / 25.4;
 				tmp = StringUtil.leftStr(tmp, -2);
 			}
-			else if (tmp.endsWith("cm"))
+			else if (tmp.endsWith(UNIT_CM))
 			{
 				factor = 72. / 2.54;
 				tmp = StringUtil.leftStr(tmp, -2);
 			}
-			else if (tmp.endsWith("in"))
+			else if (tmp.endsWith(UNIT_IN))
 			{
 				factor = 72.;
 				tmp = StringUtil.leftStr(tmp, -2);
