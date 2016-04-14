@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -587,5 +587,32 @@ public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
 	public EnumQueueEntryStatus getQueueEntryStatus()
 	{
 		return EnumNodeStatus.getQueueEntryStatus(getStatus());
+	}
+
+	/**
+	 * also checks parent deviceinfo if empty
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoJobPhase#getSpeed()
+	 */
+	@Override
+	public double getSpeed()
+	{
+		String speed = getNonEmpty(AttributeName.SPEED);
+		if (speed == null)
+		{
+			KElement parent = getParentNode_KElement();
+			if (parent instanceof JDFDeviceInfo)
+			{
+				return ((JDFDeviceInfo) parent).getSpeed();
+			}
+			else
+			{
+				return 0.0;
+			}
+		}
+		else
+		{
+			return super.getSpeed();
+		}
 	}
 }

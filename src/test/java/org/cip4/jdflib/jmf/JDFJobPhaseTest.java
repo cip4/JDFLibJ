@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,8 +85,8 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Rainer Prosi
  * 
@@ -121,13 +121,13 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 		final JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
 		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
 		JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
-		Assert.assertFalse(pt.hasChildElement(ElementName.MISDETAILS, null));
+		assertFalse(pt.hasChildElement(ElementName.MISDETAILS, null));
 		final JDFMISDetails misDetails = pt.appendMISDetails();
 		misDetails.setWorkTypeDetails("FooBar");
 		misDetails.setWorkType(EnumWorkType.Alteration);
 		jp = di.createJobPhaseFromPhaseTime(pt);
-		Assert.assertEquals(pt.getMISDetails().getWorkType(), jp.getMISDetails().getWorkType());
-		Assert.assertTrue(jp.hasAttribute(AttributeName.PHASESTARTTIME));
+		assertEquals(pt.getMISDetails().getWorkType(), jp.getMISDetails().getWorkType());
+		assertTrue(jp.hasAttribute(AttributeName.PHASESTARTTIME));
 	}
 
 	/**
@@ -141,10 +141,10 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 		n.setJobPartID("p2");
 		final JDFJobPhase jp = di.appendJobPhase();
 		jp.applyNode(null);
-		Assert.assertNull(jp.getJobID());
+		assertNull(jp.getJobID());
 		jp.applyNode(n);
-		Assert.assertEquals(jp.getJobID(), "j1");
-		Assert.assertEquals(jp.getActivation().getName(), n.getActivation(true).getName());
+		assertEquals(jp.getJobID(), "j1");
+		assertEquals(jp.getActivation().getName(), n.getActivation(true).getName());
 
 	}
 
@@ -160,7 +160,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
 		final JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
 		jp.setAmount(42);
-		Assert.assertEquals(jp.getPhaseAmount(), 42.0, 0.0);
+		assertEquals(jp.getPhaseAmount(), 42.0, 0.0);
 
 	}
 
@@ -175,7 +175,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
 		final JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
 		jp.setWaste(42);
-		Assert.assertEquals(jp.getPhaseWaste(), 42.0, 0.0);
+		assertEquals(jp.getPhaseWaste(), 42.0, 0.0);
 	}
 
 	/**
@@ -186,19 +186,19 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	{
 		JDFStatusQuParams sqp = jmf.getSignal(0).appendStatusQuParams();
 		JDFJobPhase jp = di.appendJobPhase();
-		Assert.assertEquals(sqp, jp.getStatusQuParams());
+		assertEquals(sqp, jp.getStatusQuParams());
 
 		jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.PipePush);
 		jp = jmf.getResponse(0).appendJobPhase();
-		Assert.assertNull(jp.getStatusQuParams());
+		assertNull(jp.getStatusQuParams());
 
 		jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.ShutDown);
 		jp = jmf.getResponse(0).appendDeviceInfo().appendJobPhase();
-		Assert.assertNull(jp.getStatusQuParams());
+		assertNull(jp.getStatusQuParams());
 
 		jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.Status);
 		jp = jmf.getResponse(0).appendDeviceInfo().appendJobPhase();
-		Assert.assertNull(jp.getStatusQuParams());
+		assertNull(jp.getStatusQuParams());
 
 	}
 
@@ -211,12 +211,25 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 		JDFStatusQuParams sqp = jmf.getSignal(0).appendStatusQuParams();
 		sqp.setQueueEntryID("qeID1");
 		JDFJobPhase jp = di.appendJobPhase();
-		Assert.assertEquals("qeID1", jp.getQueueEntryID());
+		assertEquals("qeID1", jp.getQueueEntryID());
 
 		jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.Status);
 		jp = jmf.getResponse(0).appendDeviceInfo().appendJobPhase();
-		Assert.assertNull(jp.getStatusQuParams());
+		assertNull(jp.getStatusQuParams());
+	}
 
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetSpeed()
+	{
+
+		di.setSpeed(3);
+		JDFJobPhase jp = di.appendJobPhase();
+		assertEquals(jp.getSpeed(), 3.0, 0.001);
+		jp.setSpeed(42);
+		assertEquals(jp.getSpeed(), 42.0, 0.001);
 	}
 
 	/**
@@ -230,10 +243,10 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
 		final JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
 		jp.setAmount(42);
-		Assert.assertEquals(jp.getAmountDifference(null), 42.0, 0.0);
+		assertEquals(jp.getAmountDifference(null), 42.0, 0.0);
 		final JDFJobPhase jp2 = (JDFJobPhase) di.copyElement(jp, null);
 		jp2.setAmount(62);
-		Assert.assertEquals(jp2.getAmountDifference(jp), 20.0, 0.0);
+		assertEquals(jp2.getAmountDifference(jp), 20.0, 0.0);
 
 	}
 
@@ -248,10 +261,10 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
 		final JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
 		jp.setPhaseWaste(42);
-		Assert.assertEquals(jp.getWasteDifference(null), 42.0, 0.0);
+		assertEquals(jp.getWasteDifference(null), 42.0, 0.0);
 		final JDFJobPhase jp2 = (JDFJobPhase) di.copyElement(jp, null);
 		jp2.setPhaseWaste(62);
-		Assert.assertEquals(jp2.getWasteDifference(jp), 20.0, 0.0);
+		assertEquals(jp2.getWasteDifference(jp), 20.0, 0.0);
 
 	}
 
@@ -275,10 +288,10 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 		jp2.setPhaseAmount(300);
 		jp2.setPhaseWaste(30);
 		jp2.setAmount(500);
-		Assert.assertTrue(jp2.mergeLastPhase(jp));
-		Assert.assertEquals(jp2.getPhaseStartTime(), d1);
-		Assert.assertEquals(jp2.getPhaseWaste(), 130., 0.);
-		Assert.assertEquals(jp2.getPhaseAmount(), 500., 0.);
-		Assert.assertEquals(jp2.getAmount(), 500., 0.);
+		assertTrue(jp2.mergeLastPhase(jp));
+		assertEquals(jp2.getPhaseStartTime(), d1);
+		assertEquals(jp2.getPhaseWaste(), 130., 0.);
+		assertEquals(jp2.getPhaseAmount(), 500., 0.);
+		assertEquals(jp2.getAmount(), 500., 0.);
 	}
 }
