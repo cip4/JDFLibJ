@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -109,8 +109,6 @@ public class StringUtil
 	 */
 	public static final String UTF8 = "UTF-8";
 
-	// **************************************** Constants
-	// *******************************************
 	private static final String m_sep = JDFConstants.BLANK;
 
 	/**
@@ -124,18 +122,16 @@ public class StringUtil
 		// hide constructor to avoid accidental instantiation
 	}
 
-	// **************************************** Methods
-	// ******************************************
-
 	/**
 	 * returns a random string <br/>
 	 * really important routine - written on a friday afternoon ;-) <br/>
 	 * please add more at your leisure.... <br/>
-	 * parts (c) Monty Python, Star Trek, Douglas Adams, Black Adder, Goethe
+	 * parts (c) Monty Python, Star Trek, Douglas Adams, Black Adder, Goethe, Firefly, Capt. Jack Sparrow
 	 * 
 	 */
 	private static String[] strings = {
 			"Randomly inserted error",
+			"Me. I'm dishonest! And a dishonest man you can always trust to be dishonest... honestly!",
 			"fooBar",
 			"Snafu",
 			"Soon TM is a registered trademark of CIP4 and does not imply, either implicitly or explicitly, any action will take place in any given time, if ever.",
