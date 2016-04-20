@@ -79,6 +79,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.core.DocumentJDFImpl;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
@@ -189,8 +190,8 @@ public abstract class JDFTestCaseBase extends TestCase
 		n.appendElement("NS:Foobar", "www.foobar.com");
 
 		n.appendMatchingResource("Layout", JDFNode.EnumProcessUsage.AnyInput, null);
-		final JDFComponent comp = (JDFComponent) n.appendMatchingResource("Component", JDFNode.EnumProcessUsage.AnyOutput, null);
-		final JDFExposedMedia xm = (JDFExposedMedia) n.appendMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.Plate, null);
+		final JDFComponent comp = (JDFComponent) n.appendMatchingResource(ElementName.COMPONENT, JDFNode.EnumProcessUsage.AnyOutput, null);
+		final JDFExposedMedia xm = (JDFExposedMedia) n.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.Plate, null);
 		final JDFNodeInfo ni = n.appendNodeInfo();
 		final JDFMedia m = xm.appendMedia();
 		m.appendElement("NS:FoobarMedia", "www.foobar.com");
