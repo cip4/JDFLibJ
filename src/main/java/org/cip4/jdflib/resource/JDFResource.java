@@ -4103,6 +4103,14 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
+	 * expand a leaf to contain the data of all intermediate leaves
+	 */
+	public void expandLeaf()
+	{
+		getResourceRoot().new Collapser().expandLeaf(this, null);
+	}
+
+	/**
 	 * get the list of attributes that are administrative only
 	 * 
 	 * @return the VString that lists all adminstrative and partition keys
@@ -4152,7 +4160,7 @@ public class JDFResource extends JDFElement
 	 * @param bForce if true force collapse by removing non-identical elements
 	 * 
 	 * @return true if successfully unpartitioned
-	 * @default Collapse(false)
+	 * @default unpartition(false)
 	 */
 	public boolean unpartition(boolean bForce)
 	{
@@ -4174,7 +4182,7 @@ public class JDFResource extends JDFElement
 		 * @return true if successfully unpartitioned
 		 * @throws JDFException if not root
 		 */
-		protected boolean unpartition(boolean force)
+		boolean unpartition(boolean force)
 		{
 			if (!isResourceRoot())
 				throw new JDFException("Unpartition currently only implemented for root nodes");
@@ -4249,7 +4257,7 @@ public class JDFResource extends JDFElement
 		 * 
 		 * @default expand(false)
 		 */
-		protected void expand(final boolean bDeleteFromNode)
+		void expand(final boolean bDeleteFromNode)
 		{
 			final VElement leaves = getLeaves(false);
 			if (leaves.size() == 1 && leaves.elementAt(0) == JDFResource.this && isResourceRoot())
@@ -4259,82 +4267,88 @@ public class JDFResource extends JDFElement
 
 			final VString parts = getRootPartAtts();
 
-			final int leafSize = leaves.size();
-
-			for (int i = 0; i < leafSize; i++)
+			for (KElement e : leaves)
 			{
-				final JDFResource leaf = (JDFResource) leaves.elementAt(i);
-				final VString atts = new VString(leaf.getAttributeVector_JDFResource());
-				int j = 0;
-
-				final int attSize = atts.size();
-				for (j = 0; j < attSize; j++)
-				{
-					final String aj = atts.get(j);
-					if (!parts.contains(aj))
-					{
-						leaf.setAttribute(aj, leaf.getAttribute(aj, null, null), null);
-					}
-				}
-
-				// expand sub-elements - since 190602
-				final VElement vElm = leaf.getChildElementVector(null, null, null, true, 0, false);
-				for (j = 0; j < vElm.size(); j++)
-				{
-					final String nodeName = (vElm.elementAt(j)).getNodeName();
-					// copy non existing element to leaf
-					if (leaf.getElement_JDFElement(nodeName, null, 0) == null)
-					{
-						final VElement vCopy = leaf.getChildElementVector(nodeName, null, null, true, 0, false);
-
-						final int copySize = vCopy.size();
-						for (int k = 0; k < copySize; k++)
-						{
-							leaf.copyElement(vCopy.elementAt(k), null);
-						}
-					}
-				}
+				final JDFResource leaf = (JDFResource) e;
+				expandLeaf(leaf, parts);
 			}
 
 			if (bDeleteFromNode)
 			{
-				final String nodeName = getNodeName();
+				deleteFromNode(leaves, parts);
+			}
+		}
 
-				for (int i = 0; i < leafSize; i++)
+		void expandLeaf(final JDFResource leaf, VString parts)
+		{
+			if (parts == null)
+			{
+				parts = getRootPartAtts();
+
+			}
+			final VString atts = new VString(leaf.getAttributeVector_JDFResource());
+
+			for (String aj : atts)
+			{
+				if (!parts.contains(aj))
 				{
-					final JDFResource res = (JDFResource) leaves.elementAt(i);
-					JDFElement r = (JDFElement) res.getParentNode_KElement();
+					leaf.setAttribute(aj, leaf.getAttribute(aj, null, null), null);
+				}
+			}
 
-					while (r != null && r.getNodeName().equals(nodeName))
+			// expand sub-elements - since 190602
+			final VElement vElm = leaf.getChildElementVector(null, null, null, true, 0, false);
+			for (KElement elm : vElm)
+			{
+				final String nodeName = elm.getNodeName();
+				// copy non existing element to leaf
+				if (leaf.getElement_JDFElement(nodeName, null, 0) == null)
+				{
+					final VElement vCopy = leaf.getChildElementVector(nodeName, null, null, true, 0, false);
+					for (KElement copy : vCopy)
 					{
-						final VString atts = new VString(r.getAttributeVector());
-						int j;
-						for (j = 0; j < atts.size(); j++)
-						{
-							final String aj = atts.get(j);
-							if (!parts.contains(aj))
-							{
-								r.removeAttribute(aj, null);
-							}
-						}
-
-						// delete all intermediate elements
-						final VElement vElm = r.getChildElementVector_JDFElement(null, null, null, true, 0, false);
-						for (j = 0; j < vElm.size(); j++)
-						{
-							if (!vElm.elementAt(j).getNodeName().equals(nodeName))
-							{
-								vElm.elementAt(j).deleteNode();
-							}
-						}
-
-						if (r == JDFResource.this)
-						{
-							break;
-						}
-
-						r = (JDFElement) r.getParentNode_KElement();
+						leaf.copyElement(copy, null);
 					}
+				}
+			}
+		}
+
+		private void deleteFromNode(final VElement leaves, final VString parts)
+		{
+			final String nodeName = getNodeName();
+
+			for (KElement e : leaves)
+			{
+				final JDFResource res = (JDFResource) e;
+				JDFElement r = (JDFElement) res.getParentNode_KElement();
+
+				while (r != null && r.getNodeName().equals(nodeName))
+				{
+					final VString atts = new VString(r.getAttributeVector());
+					for (String aj : atts)
+					{
+						if (!parts.contains(aj))
+						{
+							r.removeAttribute(aj, null);
+						}
+					}
+
+					// delete all intermediate elements
+					final VElement vElm = r.getChildElementVector_JDFElement(null, null, null, true, 0, false);
+					for (KElement elm : vElm)
+					{
+						if (!elm.getNodeName().equals(nodeName))
+						{
+							elm.deleteNode();
+						}
+					}
+
+					if (r == JDFResource.this)
+					{
+						break;
+					}
+
+					r = (JDFElement) r.getParentNode_KElement();
 				}
 			}
 		}
@@ -4347,7 +4361,7 @@ public class JDFResource extends JDFElement
 		 * 
 		 * @default Collapse(false)
 		 */
-		protected void collapse(final boolean bCollapseToNode, final boolean bCollapseElements)
+		void collapse(final boolean bCollapseToNode, final boolean bCollapseElements)
 		{
 			final VElement leaves = getLeaves(false);
 			if (leaves.size() == 1 && leaves.elementAt(0) == JDFResource.this)

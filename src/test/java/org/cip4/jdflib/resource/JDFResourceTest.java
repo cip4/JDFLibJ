@@ -2576,7 +2576,6 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertTrue(xm.isValid(EnumValidationLevel.Complete));
 	}
 
-	// //////////////////////////////////////////////////////////////////
 	/**
 	 * test expand and collapse methods
 	 */
@@ -2659,7 +2658,31 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	}
 
-	// ////////////////////////////////////////////////////////////////
+	/**
+	 * test expand and collapse methods
+	 */
+	@Test
+	public void testExpandLeaf()
+	{
+		final JDFDoc doc = creatXMDoc();
+		final JDFNode n = doc.getJDFRoot();
+		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		xm.setBrand("rootBrand");
+		xm.setGeneralID("testID", "rootValue");
+
+		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		mPart.put("SheetName", "S1");
+		mPart.put("Side", "Front");
+		final JDFExposedMedia xmPart = (JDFExposedMedia) xm.getPartition(mPart, null);
+
+		assertNotSame(xmPart.getBrand(), xmPart.getAttribute_KElement(AttributeName.BRAND));
+		assertNull(xmPart.getElement_KElement(ElementName.GENERALID, null, 0));
+		xmPart.expandLeaf();
+
+		assertEquals(xmPart.getBrand(), xmPart.getAttribute_KElement(AttributeName.BRAND));
+		assertNotNull(xmPart.getElement_KElement(ElementName.GENERALID, null, 0));
+
+	}
 
 	/**
 	 * 
