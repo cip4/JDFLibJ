@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1733,7 +1733,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	@Test
 	public void testSpawnPartRefElem()
 	{
-		JDFNode nn = new JDFDoc("JDF").getJDFRoot();
+		JDFNode nn = new JDFDoc(ElementName.JDF).getJDFRoot();
 		nn.setType("Product", false);
 		JDFNode n = nn.addJDFNode(EnumType.ImageSetting);
 		n.setType(EnumType.ImageSetting);
@@ -1745,6 +1745,36 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		n.linkResource(m, EnumUsage.Input, null);
 		JDFMedia m1 = (JDFMedia) m.addPartition(EnumPartIDKey.SheetName, "s1");
 		JDFMedia m2 = (JDFMedia) m.addPartition(EnumPartIDKey.SheetName, "s2");
+
+		JDFSpawn s = new JDFSpawn(n);
+		s.vRWResources_in = new VString("Media", null);
+		s.vSpawnParts = new VJDFAttributeMap();
+		JDFAttributeMap e = new JDFAttributeMap(EnumPartIDKey.SheetName, "s1");
+		s.vSpawnParts.add(e);
+		JDFNode n2 = s.spawn();
+		assertNull(n2.getXPathAttribute("ResourcePool/Media/@SpawnIDs", null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testSpawnPartRefElemPart()
+	{
+		JDFNode nn = new JDFDoc(ElementName.JDF).getJDFRoot();
+		nn.setType("Product", false);
+		JDFNode n = nn.addJDFNode(EnumType.ImageSetting);
+		n.setType(EnumType.ImageSetting);
+		JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
+		nn.linkResource(xm, EnumUsage.Input, null);
+		JDFExposedMedia xm1 = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.SheetName, "s1");
+		JDFExposedMedia xm2 = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.SheetName, "s2");
+		JDFMedia m = (JDFMedia) xm.appendMedia().makeRootResource(null, nn, false);
+		n.linkResource(m, EnumUsage.Input, null);
+		JDFMedia m1 = (JDFMedia) m.addPartition(EnumPartIDKey.SheetName, "s1");
+		xm1.refMedia(m1);
+		JDFMedia m2 = (JDFMedia) m.addPartition(EnumPartIDKey.SheetName, "s2");
+		xm2.refMedia(m2);
 
 		JDFSpawn s = new JDFSpawn(n);
 		s.vRWResources_in = new VString("Media", null);
@@ -3532,11 +3562,31 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testMismatchPartitioned()
+	{
+		JDFNode n0 = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n0.setType(EnumType.Product);
+		JDFNode n = n0.addJDFNode(EnumType.Rendering);
+		JDFResource cc = n.addResource(ElementName.COLORANTCONTROL, null, EnumUsage.Input, null, n0, null, null);
+		cc.addPartition(EnumPartIDKey.RunIndex, "1");
+		cc.setPartUsage(EnumPartUsage.Implicit);
+		JDFSpawn sp = new JDFSpawn(n);
+		VJDFAttributeMap _vSpawnParts = new VJDFAttributeMap(new JDFAttributeMap("Run", "r1"));
+		JDFNode spawned = sp.spawn(null, null, null, _vSpawnParts, true, true, true, true);
+		JDFResource ccSpawned = spawned.getResource(ElementName.COLORANTCONTROL, EnumUsage.Input, 0);
+		JDFResource ccSpPart = ccSpawned.getPartition(new JDFAttributeMap(EnumPartIDKey.RunIndex, "1"), EnumPartUsage.Explicit);
+		assertNotNull(ccSpPart);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testPartitionedSpawnNI()
 	{
 		for (int i = 0; i < 2; i++)
 		{
-			final JDFDoc d = new JDFDoc("JDF");
+			final JDFDoc d = new JDFDoc(ElementName.JDF);
 			final JDFNode nRoot = d.getJDFRoot();
 			nRoot.setType(EnumType.ProcessGroup);
 			final JDFNode n2 = nRoot.addJDFNode(EnumType.Buffer);
