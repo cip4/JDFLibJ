@@ -71,12 +71,12 @@ package org.cip4.jdflib.extensions.examples;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.resource.devicecapability.JDFStringState;
-import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
-import org.cip4.jdflib.resource.devicecapability.JDFTest;
-import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
-import org.cip4.jdflib.resource.devicecapability.JDFand;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.junit.Test;
 
 /**
@@ -84,24 +84,34 @@ import org.junit.Test;
  * @author rainer prosi
  *
  */
-public class XJDFDevCapTest extends JDFTestCaseBase
+public class XJDFRunListTest extends JDFTestCaseBase
 {
 	/**
 	 * 
 	 */
 	@Test
-	public void testTestPool1()
+	public void testFilterRunIndex()
 	{
-		JDFTestPool pool = (JDFTestPool) new JDFDoc("TestPool").getRoot();
-		JDFTest t = pool.appendTest();
-		t.setDescriptiveName("Transparencies cannot print duplex");
-		JDFand a = (JDFand) t.appendTerm(EnumTerm.and);
-		JDFStringState ss1 = (JDFStringState) a.appendElement(ElementName.STRINGSTATE);
-		ss1.setAttribute(AttributeName.XPATH, "/XJDF/ResourceSet/Resource/Media/@MediaType");
-		ss1.setAllowedRegExp("(Transparency)");
-		JDFStringState ss2 = (JDFStringState) a.appendElement(ElementName.STRINGSTATE);
-		ss2.setAttribute(AttributeName.XPATH, "/XJDF/ParameterSet/Parameter/DigitalPrintingParams/@Sides");
-		ss2.setAllowedRegExp("(TwoSided)");
-		pool.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "duplex.xjdf", 2, false);
+		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, "Impo", null);
+		SetHelper shRL = xjdfHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Input);
+		JDFRunList rl1 = (JDFRunList) shRL.appendPartition(new JDFAttributeMap(AttributeName.RUN, "r1"), true).getResource();
+		rl1.setNPage(2);
+		JDFRunList rl2 = (JDFRunList) shRL.appendPartition(new JDFAttributeMap(AttributeName.RUN, "r2"), true).getResource();
+		rl2.setNPage(8);
+
+		SetHelper shNI = xjdfHelper.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+		shNI.removePartitions();
+		shNI.appendPartition(new JDFAttributeMap(AttributeName.RUNINDEX, "0 3"), true);
+		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/testFilterRunIndex.xjdf");
+	}
+
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		KElement.setLongID(false);
 	}
 }
