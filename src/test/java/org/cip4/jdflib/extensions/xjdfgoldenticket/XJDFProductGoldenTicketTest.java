@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -69,7 +69,15 @@
 package org.cip4.jdflib.extensions.xjdfgoldenticket;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.IntentHelper;
+import org.cip4.jdflib.extensions.ProductHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFHelper;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  *  
@@ -80,21 +88,123 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 {
 
 	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * 
+	 *  
 	 */
-	@Override
-	protected void setUp() throws Exception
+	@Test
+	public void testSimple()
 	{
-		super.setUp();
+		XJDFBaseGoldenTicket bt = new XJDFBaseGoldenTicket(1, EnumVersion.Version_2_0);
+		bt.getXJDFHelper().writeToFile(sm_dirTestDataTemp + "xjdf/GTSimple.xjdf");
 	}
 
 	/**
 	 * 
 	 *  
 	 */
-	public void testSimple()
+	@Test
+	public void testBrochureSimple()
 	{
-		XJDFBaseGoldenTicket bt = new XJDFBaseGoldenTicket(1, EnumVersion.Version_2_0);
-		bt.getXJDFHelper().writeToFile(sm_dirTestDataTemp + "xjdfGT.xjdf");
+		XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
+		XJDFHelper xjdfHelper = bt.getXJDFHelper();
+		ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
+		ph.setAmount(10);
+		ProductHelper phc = xjdfHelper.getCreateProduct("IDCover");
+		phc.setProductType("Brochure");
+		phc.setAmount(1);
+		ProductHelper phb = xjdfHelper.getCreateProduct("IDBody");
+		phb.setAmount(1);
+		IntentHelper ih = ph.getCreateIntent(ElementName.BINDINGINTENT);
+		ih.getCreateResource().setAttribute(ElementName.BINDINGTYPE, "SaddleStitch");
+		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDCover", null, null, false);
+		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBody", null, null, false);
+		xjdfHelper.writeToFile(sm_dirTestDataTemp + "xjdf/GTBrochure.xjdf");
 	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testNotebook()
+	{
+		XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
+		XJDFHelper xjdfHelper = bt.getXJDFHelper();
+		ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
+		ph.setAmount(10);
+		ph.setProductType("Notebook");
+		ProductHelper phc = xjdfHelper.getCreateProduct("IDCover");
+		phc.setAmount(1);
+		phc.setProductType("FrontCover");
+		ProductHelper phb = xjdfHelper.getCreateProduct("IDBody");
+		phb.setAmount(50);
+		phb.setProductType("BookBlock");
+		ProductHelper phcb = xjdfHelper.getCreateProduct("IDBack");
+		phcb.setProductType("BackCover");
+		phcb.setAmount(1);
+		IntentHelper ih = ph.getCreateIntent(ElementName.BINDINGINTENT);
+		ih.getCreateResource().setAttribute(ElementName.BINDINGTYPE, "EdgeGluing");
+		ih.getCreateResource().setAttribute(ElementName.BINDINGSIDE, "Top");
+		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDCover", null, null, false);
+		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBody", null, null, false);
+		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBack", null, null, false);
+		xjdfHelper.writeToFile(sm_dirTestDataTemp + "xjdf/GTNotebook.xjdf");
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testMultiVariable()
+	{
+		XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
+		XJDFHelper xjdfHelper = bt.getXJDFHelper();
+		ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
+		ph.setAmount(10000);
+		IntentHelper ih = ph.getCreateIntent("VariableIntent");
+		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBrochure", null, null, false);
+		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBook", null, null, false);
+		ProductHelper phh = xjdfHelper.getCreateProduct("IDBook");
+		phh.setAmount(1000);
+		phh.setProductType("Book");
+
+		ProductHelper phhc = xjdfHelper.getCreateProduct("IDBookCover");
+		phhc.setProductType("Cover");
+		phhc.setAmount(1);
+
+		ProductHelper phb = xjdfHelper.getCreateProduct("IDBody");
+		phb.setAmount(1);
+
+		IntentHelper ihb = phh.getCreateIntent(ElementName.BINDINGINTENT);
+		ihb.getCreateResource().setAttribute(ElementName.BINDINGTYPE, "HardCover");
+		ihb.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBookCover", null, null, false);
+		ihb.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBody", null, null, false);
+
+		ProductHelper phs = xjdfHelper.getCreateProduct("IDBrochure");
+		phs.setAmount(9000);
+
+		ProductHelper phsc = xjdfHelper.getCreateProduct("IDBrochureCover");
+		phsc.setProductType("Cover");
+		phsc.setAmount(1);
+
+		IntentHelper ihs = phs.getCreateIntent(ElementName.BINDINGINTENT);
+		ihs.getCreateResource().setAttribute(ElementName.BINDINGTYPE, "SaddleStitch");
+		ihs.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBrochureCover", null, null, false);
+		ihs.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBody", null, null, false);
+
+		xjdfHelper.writeToFile(sm_dirTestDataTemp + "xjdf/GTVariable1.xjdf");
+	}
+
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	@Before
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		KElement.setLongID(false);
+	}
+
 }

@@ -74,7 +74,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -112,7 +111,16 @@ public class ProductHelper extends BaseXJDFHelper
 	 */
 	public void setRoot()
 	{
-		theElement.setAttribute(rootProduct, true, null);
+		setRoot(true);
+	}
+
+	/**
+	 * 
+	 * @param isRoot
+	 */
+	public void setRoot(boolean isRoot)
+	{
+		theElement.setAttribute(rootProduct, isRoot, null);
 	}
 
 	/**
@@ -124,10 +132,10 @@ public class ProductHelper extends BaseXJDFHelper
 		IntentHelper ih = getIntent(name);
 		if (ih == null)
 		{
-			KElement intent = theElement.appendElement("Intent");
+			KElement intent = theElement.appendElement(XJDFConstants.INTENT);
 			ih = new IntentHelper(intent);
 			intent.appendElement(name);
-			intent.setAttribute("Name", name);
+			intent.setAttribute(AttributeName.NAME, name);
 		}
 		return ih;
 	}
@@ -138,7 +146,7 @@ public class ProductHelper extends BaseXJDFHelper
 	 */
 	public IntentHelper getIntent(String name)
 	{
-		KElement intent = theElement.getChildWithAttribute("Intent", "Name", null, name, 0, true);
+		KElement intent = theElement.getChildWithAttribute(XJDFConstants.INTENT, AttributeName.NAME, null, name, 0, true);
 		return intent == null ? null : new IntentHelper(intent);
 	}
 
@@ -182,7 +190,24 @@ public class ProductHelper extends BaseXJDFHelper
 	 */
 	public String getProductID()
 	{
-		return StringUtil.getNonEmpty(theElement.getAttribute(AttributeName.PRODUCTID, null, null));
+		return theElement.getNonEmpty(AttributeName.PRODUCTID);
+	}
+
+	/**
+	 * @return the productID of the product
+	 */
+	public String getProductType()
+	{
+		return theElement.getNonEmpty(AttributeName.PRODUCTTYPE);
+	}
+
+	/**
+	 * 
+	 * @param productType
+	 */
+	public void setProductType(String productType)
+	{
+		theElement.setNonEmpty(AttributeName.PRODUCTTYPE, productType);
 	}
 
 	/**
@@ -223,7 +248,9 @@ public class ProductHelper extends BaseXJDFHelper
 	/**
 	 * @param phCover
 	 * @param amount 
+	 * @deprecated
 	 */
+	@Deprecated
 	public void setChild(ProductHelper phCover, int amount)
 	{
 		KElement e = theElement.getChildWithAttribute("ChildProduct", "Childref", null, phCover.theElement.getID(), 0, true);
@@ -243,7 +270,9 @@ public class ProductHelper extends BaseXJDFHelper
 	 * get the nth child of this
 	 * @param nChild the index of the child
 	 * @return 
+	 * @deprecated
 	 */
+	@Deprecated
 	public ProductHelper getChild(int nChild)
 	{
 		KElement e = theElement.getElement("ChildProduct", null, nChild);
@@ -266,7 +295,9 @@ public class ProductHelper extends BaseXJDFHelper
 	 * @param productType the productType attribute
 	 * @param n the index of the child
 	 * @return 
+	 * @deprecated
 	 */
+	@Deprecated
 	public ProductHelper getChild(String productType, int n)
 	{
 		Vector<ProductHelper> v = getChildren();
@@ -289,7 +320,9 @@ public class ProductHelper extends BaseXJDFHelper
 	 * get the vector of children of this
 	 * 
 	 * @return 
+	 * @deprecated
 	 */
+	@Deprecated
 	public Vector<ProductHelper> getChildren()
 	{
 		VElement v = theElement.getChildElementVector("ChildProduct", null);
@@ -323,15 +356,15 @@ public class ProductHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * @return
+	 * @return the explicit value or the heuristic value if not set
 	 */
 	public boolean isRootProduct()
 	{
 		boolean b = theElement.getBoolAttribute(rootProduct, null, false);
-		if (!b)
+		if (!b && theElement.getBoolAttribute(rootProduct, null, true))
 		{
 			KElement list = theElement.getParentNode_KElement();
-			b = (list != null && list.getElement("Product", null, 0) == theElement && list.getChildWithAttribute("Product", rootProduct, null, "true", 0, true) == null);
+			b = (list != null && list.getElement(XJDFConstants.Product, null, 0) == theElement && list.getChildWithAttribute(XJDFConstants.Product, rootProduct, null, "true", 0, true) == null);
 		}
 		return b;
 	}
@@ -347,13 +380,13 @@ public class ProductHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * 
 	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#cleanUp()
 	 */
 	@Override
 	public void cleanUp()
 	{
-		// TODO Auto-generated method stub
-
+		// nop
 	}
 
 }

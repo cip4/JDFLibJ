@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions.xjdfgoldenticket;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.junit.Test;
 
 /**
  *  
@@ -92,9 +93,10 @@ public class XJDFBaseGoldenTicketTest extends JDFTestCaseBase
 	 * 
 	 *  
 	 */
+	@Test
 	public void testSimple()
 	{
 		XJDFBaseGoldenTicket bt = new XJDFBaseGoldenTicket(1, EnumVersion.Version_2_0);
-		bt.getXJDFHelper().writeToFile(sm_dirTestDataTemp + "xjdfBaseGT.xjdf");
+		bt.getXJDFHelper().writeToFile(sm_dirTestDataTemp + "xjdf/BaseGT.xjdf");
 	}
 }

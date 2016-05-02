@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -116,6 +116,49 @@ public class ProductHelperTest extends JDFTestCaseBase
 		ProductHelper ph = new ProductHelper(product);
 		ph.setRoot();
 		assertEquals("true", product.getAttribute("IsRoot", null, null));
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public void testAppendProduct()
+	{
+		XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		ProductHelper ph = theHelper.appendProduct();
+		assertTrue(ph.isRootProduct());
+		ProductHelper ph2 = theHelper.appendProduct();
+		assertFalse(ph2.isRootProduct());
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public void testGetCreateRootProduct()
+	{
+		XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		ProductHelper ph = theHelper.getCreateRootProduct(0);
+		assertTrue(ph.isRootProduct());
+		ProductHelper ph2 = theHelper.getCreateRootProduct(1);
+		assertTrue(ph2.isRootProduct());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testSetRootFalse()
+	{
+		XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		KElement root = theHelper.getRoot();
+		KElement productList = root.appendElement("ProductList");
+		KElement product = productList.appendElement("Product");
+		ProductHelper ph = new ProductHelper(product);
+		ph.setRoot(true);
+		assertTrue(ph.isRootProduct());
+		ph.setRoot(false);
+		assertFalse(ph.isRootProduct());
 	}
 
 	/**

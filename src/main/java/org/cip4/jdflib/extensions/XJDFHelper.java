@@ -620,7 +620,9 @@ public class XJDFHelper extends BaseXJDFHelper
 	{
 		KElement product = theElement.getCreateElement(ProductHelper.PRODUCTLIST).appendElement(ProductHelper.PRODUCT);
 		reorder();
-		return new ProductHelper(product);
+		ProductHelper productHelper = new ProductHelper(product);
+		productHelper.setRoot(productHelper.isRootProduct());
+		return productHelper;
 	}
 
 	/**

@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFComment;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
@@ -86,7 +87,7 @@ public class IntentHelper extends BaseXJDFHelper
 	 */
 	public static boolean bSpanAsAttribute = true;
 
-	public static final String INTENT = "Intent";
+	public static final String INTENT = XJDFConstants.INTENT;
 
 	/**
 	 * @param intent
@@ -137,7 +138,7 @@ public class IntentHelper extends BaseXJDFHelper
 	 */
 	public KElement getResource()
 	{
-		String name = theElement.getAttribute("Name", null, null);
+		String name = theElement.getAttribute(AttributeName.NAME, null, null);
 		if (name != null)
 		{
 			return theElement.getElement(name);
@@ -162,7 +163,7 @@ public class IntentHelper extends BaseXJDFHelper
 	 */
 	public KElement getCreateResource()
 	{
-		String name = theElement.getAttribute("Name", null, null);
+		String name = theElement.getAttribute(AttributeName.NAME, null, null);
 		if (name != null)
 		{
 			return theElement.getCreateElement(name);
@@ -187,7 +188,7 @@ public class IntentHelper extends BaseXJDFHelper
 	 */
 	public String getName()
 	{
-		String name = theElement.getAttribute("Name", null, null);
+		String name = theElement.getAttribute(AttributeName.NAME, null, null);
 		if (name == null)
 		{
 			KElement r = getResource();
@@ -231,7 +232,7 @@ public class IntentHelper extends BaseXJDFHelper
 		KElement resource = getResource();
 		if (resource == null)
 			return null;
-		String elem = StringUtil.removeToken(spanPath, -1, "/");
+		String elem = StringUtil.removeToken(spanPath, -1, JDFConstants.SLASH);
 		if (elem != null)
 		{
 			resource = resource.getXPathElement(elem);
@@ -240,7 +241,7 @@ public class IntentHelper extends BaseXJDFHelper
 		{
 			return null;
 		}
-		String spanName = StringUtil.token(spanPath, -1, "/");
+		String spanName = StringUtil.token(spanPath, -1, JDFConstants.SLASH);
 		String s = resource.getAttribute(spanName, null, null);
 		if (s == null)
 		{
@@ -258,7 +259,7 @@ public class IntentHelper extends BaseXJDFHelper
 	 */
 	public void setSpan(KElement resource, final String spanPath, final String val, String dataType)
 	{
-		String elem = StringUtil.removeToken(spanPath, -1, "/");
+		String elem = StringUtil.removeToken(spanPath, -1, JDFConstants.SLASH);
 		if (elem != null)
 		{
 			resource = resource.getCreateXPathElement(elem);
@@ -267,7 +268,7 @@ public class IntentHelper extends BaseXJDFHelper
 		{
 			return;
 		}
-		String spanName = StringUtil.token(spanPath, -1, "/");
+		String spanName = StringUtil.token(spanPath, -1, JDFConstants.SLASH);
 		if (bSpanAsAttribute || dataType == null)
 		{
 			resource.setAttribute(spanName, val);
@@ -279,8 +280,8 @@ public class IntentHelper extends BaseXJDFHelper
 				dataType += "Span";
 			}
 			final KElement span = resource.getCreateElement(dataType);
-			span.setAttribute("Name", spanName);
-			span.setAttribute("Actual", val);
+			span.setAttribute(AttributeName.NAME, spanName);
+			span.setAttribute(AttributeName.ACTUAL, val);
 		}
 	}
 

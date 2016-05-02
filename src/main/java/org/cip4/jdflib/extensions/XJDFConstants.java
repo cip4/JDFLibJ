@@ -84,6 +84,7 @@ public abstract class XJDFConstants
 
 	public static final String HolePattern = "HolePattern";
 
+	public static final String INTENT = "Intent";
 	public static final String IsRoot = "IsRoot";
 
 	public static final String LooseBinding = "LooseBinding";
