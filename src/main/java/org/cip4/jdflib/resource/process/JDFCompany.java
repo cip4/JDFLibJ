@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoCompany;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
@@ -163,5 +164,16 @@ public class JDFCompany extends JDFAutoCompany implements IMatches
 			matches = matches(other.getOrganizationName());
 		}
 		return matches;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#getDescriptiveName()
+	 * defaults to OrganizationName if not specified
+	 */
+	@Override
+	public String getDescriptiveName()
+	{
+		String descName = getNonEmpty(AttributeName.DESCRIPTIVENAME);
+		return descName != null ? descName : getOrganizationName();
 	}
 }

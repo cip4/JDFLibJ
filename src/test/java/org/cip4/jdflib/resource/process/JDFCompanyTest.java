@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,7 @@
 package org.cip4.jdflib.resource.process;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.junit.Test;
 
@@ -82,9 +83,9 @@ public class JDFCompanyTest extends JDFTestCaseBase
 	@Test
 	public final void testMatches()
 	{
-		JDFDoc doc = new JDFDoc("Company");
+		JDFDoc doc = new JDFDoc(ElementName.COMPANY);
 		JDFCompany c = (JDFCompany) doc.getRoot();
-		JDFCompany c2 = (JDFCompany) new JDFDoc("Company").getRoot();
+		JDFCompany c2 = (JDFCompany) new JDFDoc(ElementName.COMPANY).getRoot();
 		assertTrue(c.matches(c2));
 		c.setOrganizationName("org1");
 		assertTrue(c.matches(c2));
@@ -92,5 +93,21 @@ public class JDFCompanyTest extends JDFTestCaseBase
 		assertTrue(c.matches(c));
 		c2.setOrganizationName("Organ2");
 		assertFalse(c.matches(c2));
+	}
+
+	/**
+	 *  
+	 * 
+	 */
+	@Test
+	public final void testDescriptiveName()
+	{
+		JDFDoc doc = new JDFDoc(ElementName.COMPANY);
+		JDFCompany c = (JDFCompany) doc.getRoot();
+		assertEquals("", c.getDescriptiveName());
+		c.setOrganizationName("o");
+		assertEquals("o", c.getDescriptiveName());
+		c.setDescriptiveName("d");
+		assertEquals("d", c.getDescriptiveName());
 	}
 }
