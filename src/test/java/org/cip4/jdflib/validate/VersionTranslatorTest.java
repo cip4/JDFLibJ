@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,17 +68,20 @@
  */
 package org.cip4.jdflib.validate;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
- * TODO Please insert comment!
+
  * @author rainer prosi
  * @date Nov 16, 2010
  */
@@ -94,8 +97,23 @@ public class VersionTranslatorTest extends JDFTestCaseBase
 		String s = "<JDF Type=\"Product\"/>";
 		ByteArrayIOStream bis = new ByteArrayIOStream(s.getBytes());
 		Vector<InputStream> is2 = vt.convertStream(bis.getInputStream());
-		Assert.assertTrue(StringUtil.createString(is2.get(0)).indexOf("<XJDF") >= 0);
+		assertTrue(StringUtil.createString(is2.get(0)).indexOf("<XJDF") >= 0);
+		bis.close();
+	}
 
+	/**
+	 *  
+	 */
+	@Test
+	public void testFileToXJDF()
+	{
+		VersionTranslator vt = new VersionTranslator(EnumVersion.Version_2_0);
+		File input = new File(sm_dirTestData + "ApprovalSubJDF.jdf");
+		File outDir = new File(sm_dirTestDataTemp);
+		File newFile = new File(sm_dirTestDataTemp + "ApprovalSubJDF.xjdf");
+		newFile.delete();
+		vt.convertFile(input, outDir);
+		assertTrue(XMLDoc.parseFile(newFile).getRoot().getLocalName().equals(XJDF20.rootName));
 	}
 
 	/**
@@ -108,6 +126,7 @@ public class VersionTranslatorTest extends JDFTestCaseBase
 		String s = "<XJDF Types=\"Product\"/>";
 		ByteArrayIOStream bis = new ByteArrayIOStream(s.getBytes());
 		Vector<InputStream> is2 = vt.convertStream(bis.getInputStream());
-		Assert.assertTrue(StringUtil.createString(is2.get(0)).indexOf("<JDF") >= 0);
+		assertTrue(StringUtil.createString(is2.get(0)).indexOf("<JDF") >= 0);
+		bis.close();
 	}
 }

@@ -70,6 +70,7 @@ package org.cip4.jdflib.elementwalker.fixversion;
 
 import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -101,6 +102,15 @@ public class WalkJDF extends WalkElement
 	public boolean matches(final KElement toCheck)
 	{
 		return (toCheck instanceof JDFNode);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return VString.getVString(ElementName.JDF, null);
 	}
 
 	/**
