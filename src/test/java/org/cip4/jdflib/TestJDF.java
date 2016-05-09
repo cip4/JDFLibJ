@@ -205,7 +205,7 @@ public class TestJDF extends JDFTestCaseBase
 	 * 
 	 * @throws Throwable
 	 */
-	public void testSpawnf() throws Throwable
+	public void _testSpawnf() throws Throwable
 	{
 		JDFDoc jdfDoc = JDFDoc.parseFile("/data/JDF/FrankB.jdf");
 
@@ -238,7 +238,7 @@ public class TestJDF extends JDFTestCaseBase
 	 * 
 	 * @throws Throwable
 	 */
-	public void testSpawn() throws Throwable
+	public void _testSpawn() throws Throwable
 	{
 		if (true)
 			return;
