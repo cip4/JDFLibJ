@@ -73,7 +73,10 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFJobPhase;
+import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 
 /**
@@ -115,7 +118,16 @@ public class WalkPhaseTimeAudit extends WalkAudit
 			e.setAttributes(xjdf);
 			xjdf = e;
 		}
-		((JDFPhaseTime) xjdf).setPhase(jmf.getSignal(0).getDeviceInfo(0).getJobPhase(0));
+		JDFSignal signal = jmf.getSignal(0);
+		if (signal != null)
+		{
+			JDFDeviceInfo deviceInfo = signal.getDeviceInfo(0);
+			if (deviceInfo != null)
+			{
+				JDFJobPhase jobPhase = deviceInfo.getJobPhase(0);
+				((JDFPhaseTime) xjdf).setPhase(jobPhase);
+			}
+		}
 		return super.walk(xjdf, jdf);
 	}
 

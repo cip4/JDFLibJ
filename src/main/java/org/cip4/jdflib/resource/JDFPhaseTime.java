@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -445,16 +445,19 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 	 */
 	public void setPhase(JDFJobPhase phase)
 	{
-		JDFJMF jmf = (JDFJMF) phase.getDeepParent(ElementName.JMF, 0);
-		JDFDeviceInfo devInfo = (JDFDeviceInfo) phase.getParentNode_KElement();
-		setStatusDetails(phase.getStatusDetails());
-		setStatus(phase.getStatus());
-		setPartMapVector(phase.getPartMapVector());
-		copyElements(devInfo.getChildElementVector(ElementName.EMPLOYEE, null), null);
-		copyElements(phase.getChildElementVector(ElementName.ACTIVITY, null), null);
-		copyElement(phase.getMISDetails(), null);
-		setEnd(jmf.getTimeStamp());
-		setStart(phase.getPhaseStartTime());
+		if (phase != null)
+		{
+			JDFJMF jmf = (JDFJMF) phase.getDeepParent(ElementName.JMF, 0);
+			JDFDeviceInfo devInfo = (JDFDeviceInfo) phase.getParentNode_KElement();
+			setStatusDetails(phase.getStatusDetails());
+			setStatus(phase.getStatus());
+			setPartMapVector(phase.getPartMapVector());
+			copyElements(devInfo.getChildElementVector(ElementName.EMPLOYEE, null), null);
+			copyElements(phase.getChildElementVector(ElementName.ACTIVITY, null), null);
+			copyElement(phase.getMISDetails(), null);
+			setEnd(jmf.getTimeStamp());
+			setStart(phase.getPhaseStartTime());
+		}
 	}
 
 }
