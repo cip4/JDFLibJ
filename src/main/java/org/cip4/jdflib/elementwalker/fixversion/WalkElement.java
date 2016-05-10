@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -155,40 +155,41 @@ public class WalkElement extends BaseWalker
 	 */
 	private void walkSingleAttribute(final JDFElement el, final AttributeInfo ai, final String key, final String value)
 	{
-		if (fixVersion.bZappDeprecated && fixVersion.version.isGreater(ai.getLastVersion(key)))
+		if (fixVersion.bZappDeprecated)
+		{
+			String prefix = KElement.xmlnsPrefix(key);
+			String uri = prefix == null ? null : el.getNamespaceURIFromPrefix(prefix);
+			if (uri != null && JDFElement.isInJDFNameSpaceStatic(uri) && fixVersion.version.isGreater(ai.getLastVersion(key)))
+			{
+				el.removeAttribute_KElement(key, null);
+				return;
+			}
+		}
+
+		final EnumAttributeType attType = ai.getAttributeType(key);
+		if (EnumAttributeType.isRange(attType))
+		{
+			fixRange(el, key, value);
+		}
+		else if (EnumAttributeType.duration.equals(attType))
+		{
+			fixDuration(el, key, value);
+		}
+		else if (EnumAttributeType.dateTime.equals(attType))
+		{
+			fixDateTime(el, key, value);
+		}
+		if (fixVersion.bFixIDs && value.length() > 0 && StringUtils.isNumeric(value.substring(0, 1)))
+		{
+			fixIDs(el, ai, key, value);
+		}
+		if (AttributeName.ICSVERSIONS.equals(key))
+		{
+			fixICSVersions(el, value);
+		}
+		if (fixVersion.bZappInvalid && !AttributeInfo.validStringForType(value, attType, null))
 		{
 			el.removeAttribute_KElement(key, null);
-		}
-		else
-		{
-			final EnumAttributeType attType = ai.getAttributeType(key);
-			if (EnumAttributeType.isRange(attType))
-			{
-				fixRange(el, key, value);
-			}
-			else if (EnumAttributeType.duration.equals(attType))
-			{
-				fixDuration(el, key, value);
-			}
-			else if (EnumAttributeType.dateTime.equals(attType))
-			{
-				fixDateTime(el, key, value);
-			}
-			if (this.fixVersion.bFixIDs && value.length() > 0 && StringUtils.isNumeric(value.substring(0, 1)))
-			{
-				fixIDs(el, ai, key, value);
-			}
-			if (AttributeName.ICSVERSIONS.equals(key))
-			{
-				fixICSVesions(el, value);
-			}
-			if (fixVersion.bZappInvalid && attType != null)
-			{
-				if (!AttributeInfo.validStringForType(value, attType, null))
-				{
-					el.removeAttribute_KElement(key, null);
-				}
-			}
 		}
 	}
 
@@ -196,7 +197,7 @@ public class WalkElement extends BaseWalker
 	 * @param el
 	 * @param value
 	 */
-	private void fixICSVesions(final JDFElement el, final String value)
+	private void fixICSVersions(final JDFElement el, final String value)
 	{
 		if (!this.fixVersion.fixICSVersions)
 		{

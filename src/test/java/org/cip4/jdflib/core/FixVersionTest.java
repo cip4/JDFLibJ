@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -216,6 +216,32 @@ public class FixVersionTest extends JDFTestCaseBase
 		n.fixVersion(EnumVersion.Version_1_3);
 		ns2 = n.getResourcePool().getElement("foo:myresource");
 		assertEquals(ns2.getNamespaceURI(), "http://www.foo.com/schema");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testNamespaceRetain()
+	{
+		n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.addNameSpace("foo", "http://www.foo.com/schema");
+		n.fixVersion(EnumVersion.Version_1_3);
+		assertEquals(n.getAttribute("xmlns:foo"), "http://www.foo.com/schema");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testNamespaceRetainZappDeprecated()
+	{
+		n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.addNameSpace("foo", "http://www.foo.com/schema");
+		FixVersion fv = new FixVersion(EnumVersion.Version_1_5);
+		fv.setZappDeprecated(true);
+		fv.convert(n);
+		assertEquals(n.getAttribute("xmlns:foo"), "http://www.foo.com/schema");
 	}
 
 	/**
