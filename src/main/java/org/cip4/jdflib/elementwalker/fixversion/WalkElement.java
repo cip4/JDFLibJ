@@ -159,7 +159,7 @@ public class WalkElement extends BaseWalker
 		{
 			String prefix = KElement.xmlnsPrefix(key);
 			String uri = prefix == null ? null : el.getNamespaceURIFromPrefix(prefix);
-			if (uri != null && JDFElement.isInJDFNameSpaceStatic(uri) && fixVersion.version.isGreater(ai.getLastVersion(key)))
+			if ((uri == null || JDFElement.isInJDFNameSpaceStatic(uri)) && fixVersion.version.isGreater(ai.getLastVersion(key)))
 			{
 				el.removeAttribute_KElement(key, null);
 				return;
