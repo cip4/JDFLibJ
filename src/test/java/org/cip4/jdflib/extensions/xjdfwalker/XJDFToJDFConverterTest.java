@@ -404,6 +404,38 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *  
 	 */
 	@Test
+	public void testMissingSetID()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		XJDFHelper h = new XJDFHelper("j1", "root", null);
+		KElement e = h.getRoot();
+		e.setXPathAttribute("ResourceSet[@Name=\"CustomerInfo\"]/Resource/CustomerInfo/@CustomerID", "cid");
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d.getJDFRoot().getCustomerInfo());
+		assertEquals("cid", d.getJDFRoot().getCustomerInfo().getCustomerID());
+	}
+
+	/**
+	 *  
+	 *  
+	 */
+	@Test
+	public void testMultiSet()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		XJDFHelper h = new XJDFHelper("j1", "root", null);
+		KElement e = h.getRoot();
+		h.appendResourceSet(ElementName.DIELAYOUT, EnumUsage.Input).appendPartition(null, true).setAmount(5, null, true);
+		h.appendResourceSet(ElementName.DIELAYOUT, EnumUsage.Input).appendPartition(null, true).setAmount(6, null, true);
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d.getJDFRoot().getResource(ElementName.DIELAYOUT, null, 1));
+	}
+
+	/**
+	 *  
+	 *  
+	 */
+	@Test
 	public void testXJMFKnownMessages()
 	{
 		KElement root = new JDFDoc(XJDFConstants.XJMF).getRoot();

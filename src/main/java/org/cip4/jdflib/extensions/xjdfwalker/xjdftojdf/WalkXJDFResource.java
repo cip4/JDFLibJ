@@ -170,7 +170,8 @@ public class WalkXJDFResource extends WalkXElement
 		JDFResource res = (JDFResource) newRoot.getCreateResourcePool().getChildWithAttribute(null, AttributeName.ID, null, id, 0, true);
 		if (res == null)
 		{
-			res = theNode.getResource(name, inOut, processUsage, null, 0);
+			boolean combine = !StringUtil.equals(id, sh.getID());
+			res = combine ? theNode.getResource(name, inOut, processUsage, null, 0) : null;
 			if (res == null)
 			{
 				res = theNode.addResource(name, null);
