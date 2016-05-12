@@ -71,9 +71,6 @@
 
 package org.cip4.jdflib;
 
-import java.io.File;
-
-import org.apache.commons.io.FilenameUtils;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
@@ -94,21 +91,6 @@ import org.junit.Test;
  */
 public class TestJDF extends JDFTestCaseBase
 {
-	private static final String SEPARATOR = File.separator;
-
-	static protected final String sm_dirTestData = getTestDataDir();
-	static protected final String sm_dirTestSchema = sm_dirTestData + "schema" + SEPARATOR + "Version_1_3" + SEPARATOR;
-	static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + SEPARATOR;
-
-	private static String getTestDataDir()
-	{
-
-		String path = JDFTestCaseBase.class.getResource("/data").getPath();
-		path = FilenameUtils.normalize(path) + File.separator;
-
-		return path;
-
-	}
 
 	/**
 	 * 
