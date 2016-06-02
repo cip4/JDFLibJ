@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -145,6 +145,7 @@ public class JDFGeneralID extends JDFAutoGeneralID implements IMatches
 	 * @param subset
 	 * @return true if it matches
 	*/
+	@Override
 	public boolean matches(Object subset)
 	{
 		if (subset == null)
