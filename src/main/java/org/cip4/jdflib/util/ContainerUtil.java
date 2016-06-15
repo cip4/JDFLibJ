@@ -623,4 +623,34 @@ public class ContainerUtil
 		}
 		return c;
 	}
+
+	/**
+	 * unify a collection while retaining the initial order (if the input collection is ordered)
+	 * @param <a> the data type of the collection
+	 * @param c the collection to unify
+	 * @return the unified collection - always the input collection
+	 */
+	public static <a extends IMatches> Collection<a> unifyMatches(final Collection<a> c)
+	{
+		if (c == null || c.size() < 2)
+		{
+			return c;
+		}
+		final LinkedHashSet<a> lhsIn = new LinkedHashSet<a>(c.size());
+
+		for (final a el : c)
+		{
+			if (getMatch(lhsIn, el, 0) == null)
+			{
+				lhsIn.add(el);
+			}
+		}
+
+		if (lhsIn.size() < c.size())
+		{
+			c.clear();
+			c.addAll(lhsIn);
+		}
+		return c;
+	}
 }

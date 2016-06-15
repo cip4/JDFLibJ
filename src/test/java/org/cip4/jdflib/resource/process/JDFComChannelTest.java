@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,7 @@ package org.cip4.jdflib.resource.process;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.junit.Test;
 
@@ -134,6 +135,46 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testMatchesString()
+	{
+		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
+		assertTrue(cc.stringMatch("tel:+49 431 123456"));
+		assertTrue(cc.stringMatch("+49431123456"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testMatchesComChannel()
+	{
+		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
+		JDFComChannel ccNew = (JDFComChannel) cc.cloneNewDoc();
+		assertTrue(ccNew.matchesComChannel(cc));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testMatches()
+	{
+		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
+		JDFComChannel ccNew = (JDFComChannel) cc.cloneNewDoc();
+		assertTrue(ccNew.matches(cc));
+		cc.setPhoneNumber("+49 431 123456");
+		assertTrue(ccNew.matches(cc));
+		cc.setPhoneNumber("+49 431 1234567");
+		assertFalse(ccNew.matches(cc));
+		cc.setPhoneNumber("+49 431 123456");
+		cc.setChannelType(EnumChannelType.Mobile);
+		assertFalse(ccNew.matches(cc));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testSetPhoneNumberShort()
 	{
 		cc.setChannelType(EnumChannelType.Phone);
@@ -160,9 +201,8 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	@Override
 	public void setUp() throws Exception
 	{
-		// TODO Auto-generated method stub
 		super.setUp();
-		JDFDoc d = new JDFDoc("ComChannel");
+		JDFDoc d = new JDFDoc(ElementName.COMCHANNEL);
 		cc = (JDFComChannel) d.getRoot();
 	}
 }

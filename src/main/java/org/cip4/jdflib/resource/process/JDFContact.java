@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -81,6 +81,7 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -91,6 +92,7 @@ import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoContact;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.util.ContainerUtil;
@@ -310,8 +312,9 @@ public class JDFContact extends JDFAutoContact implements IMatches
 	public void addContactTypes(EnumContactType typ)
 	{
 		if (typ != null)
-			appendAttribute(AttributeName.CONTACTTYPES, typ.getName(), null, " ", true);
-
+		{
+			appendAttribute(AttributeName.CONTACTTYPES, typ.getName(), null, JDFConstants.BLANK, true);
+		}
 	}
 
 	/**
@@ -342,6 +345,63 @@ public class JDFContact extends JDFAutoContact implements IMatches
 			p.setFamilyName(familyName);
 		}
 		return p;
+	}
+
+	/**
+	 * merge two contacts while avoiding duplicates
+	 * @param other
+	 */
+	public void merge(JDFContact other)
+	{
+		if (other == null || equals(other))
+			return;
+
+		if (getPerson() == null)
+		{
+			copyElement(other.getPerson(), null);
+		}
+		if (getAddress() == null)
+		{
+			copyElement(other.getAddress(), null);
+		}
+		if (getCompany() == null)
+		{
+			copyElement(other.getCompany(), null);
+		}
+		mergeComChannels(other);
+		mergeContactTypes(other);
+
+	}
+
+	private void mergeComChannels(JDFContact other)
+	{
+		Collection<JDFComChannel> cs = getAllComChannel();
+		Collection<JDFComChannel> cso = other.getAllComChannel();
+		if (cso != null)
+		{
+			for (JDFComChannel occ : cso)
+			{
+				if (ContainerUtil.getMatch(cs, occ, 0) == null)
+				{
+					copyElement(occ, null);
+					cs.add(occ);
+				}
+			}
+		}
+	}
+
+	private void mergeContactTypes(JDFContact other)
+	{
+		VString contactTypes = getContactTypes();
+		int s0 = contactTypes.size();
+		Collection<String> vs = ContainerUtil.addAll(contactTypes, other.getContactTypes());
+		ContainerUtil.unify(vs);
+		if (vs != null && vs.size() > s0)
+		{
+			VString nct = new VString();
+			nct.addAll(vs);
+			setContactTypes(nct);
+		}
 	}
 
 	/**

@@ -194,6 +194,25 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testUnifyMatches()
+	{
+		JDFCostCenter cs = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
+		cs.setCostCenterID("CS");
+		JDFCostCenter cs2 = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
+		cs2.setCostCenterID("CS2");
+		JDFCostCenter cs3 = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
+		cs2.setCostCenterID("CS");
+		Vector<JDFCostCenter> vcs = new Vector<JDFCostCenter>();
+		vcs.add(cs);
+		vcs.add(cs2);
+		vcs.add(cs3);
+		assertEquals(ContainerUtil.unifyMatches(vcs).size(), 2);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testAddAll()
 	{
 		final VString v1 = new VString("a b c", null);

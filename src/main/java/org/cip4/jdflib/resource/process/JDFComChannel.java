@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -87,6 +87,8 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoComChannel;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.ifaces.IMatches;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -94,8 +96,9 @@ import org.cip4.jdflib.util.StringUtil;
  * 
  * 13.02.2009
  */
-public class JDFComChannel extends JDFAutoComChannel
+public class JDFComChannel extends JDFAutoComChannel implements IMatches
 {
+	private static final String PHONE_CHARS = "+0123456789";
 	private static final long serialVersionUID = 1L;
 	/**
 	 * 
@@ -306,7 +309,7 @@ public class JDFComChannel extends JDFAutoComChannel
 		locator = StringUtil.stripPrefix(locator, TEL, true);
 		if (stripNonNumerical)
 		{
-			locator = StringUtil.stripNot(locator, "+0123456789");
+			locator = StringUtil.stripNot(locator, PHONE_CHARS);
 		}
 		return locator;
 	}
@@ -334,7 +337,8 @@ public class JDFComChannel extends JDFAutoComChannel
 	 * 
 	 * @param phone the phone number string
 	 * @param replaceForBlank the replacement char for non-leading blanks , typically "." or null are a good idea
-	 * @param channelType the channelType - must be either Fax or Phone
+	 * @param channelType the channelType - must be either Fax, Phone or Mobile
+	 * 
 	 * @throws IllegalArgumentException if phone is not a valid phone number
 	 * 
 	 */
@@ -388,4 +392,52 @@ public class JDFComChannel extends JDFAutoComChannel
 		return channelType;
 	}
 
+	@Override
+	public boolean matches(Object subset)
+	{
+		if (subset instanceof String)
+		{
+			return stringMatch((String) subset);
+		}
+		else if (subset instanceof JDFComChannel)
+		{
+			return matchesComChannel((JDFComChannel) subset);
+		}
+		return false;
+	}
+
+	/**
+	 * 
+	 * @param other
+	 * @return
+	 */
+	boolean matchesComChannel(JDFComChannel other)
+	{
+		if (!ContainerUtil.equals(getChannelType(), other.getChannelType()))
+			return false;
+		if (!ContainerUtil.equals(getChannelTypeDetails(), other.getChannelTypeDetails()))
+			return false;
+		if (!ContainerUtil.equals(getChannelUsage(), other.getChannelUsage()))
+			return false;
+		return matches(other.getLocator());
+	}
+
+	/**
+	 * 
+	 * @param s
+	 * @return
+	 */
+	boolean stringMatch(String s)
+	{
+		boolean b = StringUtil.equals(StringUtil.normalize(s, true, null), StringUtil.normalize(getLocator(), true, null));
+		if (!b)
+		{
+			EnumChannelType channelType = getChannelType();
+			if (EnumChannelType.Fax.equals(channelType) || EnumChannelType.Phone.equals(channelType) || EnumChannelType.Mobile.equals(channelType))
+			{
+				b = StringUtil.equals(StringUtil.stripNot(s, PHONE_CHARS), StringUtil.stripNot(getLocator(), PHONE_CHARS));
+			}
+		}
+		return b;
+	}
 }

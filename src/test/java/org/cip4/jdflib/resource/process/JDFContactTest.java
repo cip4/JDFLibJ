@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,6 +72,7 @@
 package org.cip4.jdflib.resource.process;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -169,9 +170,9 @@ public class JDFContactTest extends JDFTestCaseBase
 	@Test
 	public final void testMatches()
 	{
-		JDFDoc doc = new JDFDoc("Contact");
+		JDFDoc doc = new JDFDoc(ElementName.CONTACT);
 		JDFContact c = (JDFContact) doc.getRoot();
-		JDFContact c2 = (JDFContact) new JDFDoc("Contact").getRoot();
+		JDFContact c2 = (JDFContact) new JDFDoc(ElementName.CONTACT).getRoot();
 		assertFalse(c.matches(c2));
 		JDFPerson p = c.appendPerson();
 		JDFPerson p2 = c2.appendPerson();
@@ -186,5 +187,29 @@ public class JDFContactTest extends JDFTestCaseBase
 
 		c.setUserID("foo");
 		assertTrue(c.matches("foo"));
+	}
+
+	/**
+	 *  
+	 * 
+	 */
+	@Test
+	public final void testMerge()
+	{
+		JDFDoc doc = new JDFDoc(ElementName.CONTACT);
+		JDFContact c = (JDFContact) doc.getRoot();
+		c.addContactTypes(EnumContactType.Accounting);
+		JDFContact c2 = (JDFContact) new JDFDoc(ElementName.CONTACT).getRoot();
+		c2.addContactTypes(EnumContactType.Accounting);
+		c2.addContactTypes(EnumContactType.Billing);
+		JDFPerson p = c2.appendPerson();
+
+		c.appendComChannel(EnumChannelType.Email).setEMailLocator("a@b.com");
+		c2.appendComChannel(EnumChannelType.Email).setEMailLocator("a@b.com");
+		c2.appendComChannel(EnumChannelType.Phone).setPhoneNumber("+12345");
+		c.merge(c2);
+		assertEquals(c.getComChannel(1).getPhoneNumber(false), "+12345");
+		assertTrue(c.getPerson().matches(p));
+		assertEquals(2, c.getContactTypes().size());
 	}
 }
