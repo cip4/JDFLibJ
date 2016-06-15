@@ -85,6 +85,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -376,6 +377,10 @@ public class JDFContact extends JDFAutoContact implements IMatches
 	private void mergeComChannels(JDFContact other)
 	{
 		Collection<JDFComChannel> cs = getAllComChannel();
+		if (cs == null)
+		{
+			cs = new Vector<JDFComChannel>();
+		}
 		Collection<JDFComChannel> cso = other.getAllComChannel();
 		if (cso != null)
 		{

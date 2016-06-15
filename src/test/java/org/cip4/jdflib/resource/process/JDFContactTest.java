@@ -212,4 +212,27 @@ public class JDFContactTest extends JDFTestCaseBase
 		assertTrue(c.getPerson().matches(p));
 		assertEquals(2, c.getContactTypes().size());
 	}
+
+	/**
+	 *  
+	 * 
+	 */
+	@Test
+	public final void testMergeNoComChannel()
+	{
+		JDFDoc doc = new JDFDoc(ElementName.CONTACT);
+		JDFContact c = (JDFContact) doc.getRoot();
+		c.addContactTypes(EnumContactType.Accounting);
+		JDFContact c2 = (JDFContact) new JDFDoc(ElementName.CONTACT).getRoot();
+		c2.addContactTypes(EnumContactType.Accounting);
+		c2.addContactTypes(EnumContactType.Billing);
+		JDFPerson p = c2.appendPerson();
+
+		c2.appendComChannel(EnumChannelType.Email).setEMailLocator("a@b.com");
+		c2.appendComChannel(EnumChannelType.Phone).setPhoneNumber("+12345");
+		c.merge(c2);
+		assertEquals(c.getComChannel(1).getPhoneNumber(false), "+12345");
+		assertTrue(c.getPerson().matches(p));
+		assertEquals(2, c.getContactTypes().size());
+	}
 }
