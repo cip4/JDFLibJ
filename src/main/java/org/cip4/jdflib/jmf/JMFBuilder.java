@@ -98,7 +98,7 @@ import org.cip4.jdflib.util.StringUtil;
  * 
  * June 20, 2009 split off from JMFFactory
  */
-public class JMFBuilder
+public class JMFBuilder implements Cloneable
 {
 	private String acknowledgeURL;
 	private String senderID;

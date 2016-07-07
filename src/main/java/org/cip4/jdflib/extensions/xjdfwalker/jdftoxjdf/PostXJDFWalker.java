@@ -905,7 +905,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return !retainAll && toCheck.getLocalName().equals("IntentSet");
+			return "IntentSet".equals(toCheck.getLocalName());
 		}
 
 		/**
@@ -917,7 +917,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public KElement walk(KElement xjdf, KElement dummy)
 		{
-			KElement intent = xjdf.getElement("Intent");
+			KElement intent = xjdf.getElement(XJDFConstants.INTENT);
 			if (!bIntentPartition && intent != null)
 			{
 				intent.copyAttribute(AttributeName.NAME, xjdf);

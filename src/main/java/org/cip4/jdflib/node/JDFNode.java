@@ -6703,7 +6703,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 						continue;
 					}
 
-					int iS = Integer.valueOf(strID).intValue();
+					int iS = StringUtil.parseInt(strID, 0);
 					if (iS > 1000000) // not in the simple ordering
 					{
 						iS = iS % 1000000;
@@ -6758,7 +6758,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			{
 				continue;
 			}
-			iMax = (Integer.valueOf(s).intValue() > iMax) ? new Integer(s).intValue() : iMax;
+			int parseInt = StringUtil.parseInt(s, 0);
+			iMax = (parseInt > iMax) ? parseInt : iMax;
 		}
 		return iMax;
 	}

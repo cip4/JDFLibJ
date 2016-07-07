@@ -5499,7 +5499,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return
 	*/
 	@Override
-	public KElement clone() //throws CloneNotSupportedException
+	public KElement clone()
 	{
 		KElement e = createChildFromName(getNodeName(), getNamespaceURI());
 		e.copyInto(this, false);

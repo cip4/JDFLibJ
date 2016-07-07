@@ -117,7 +117,7 @@ public class AttributeInfo
 	/**
 	 * 
 	 */
-	public static HashMap<String, AttributeInfo> fixedMap = new HashMap<String, AttributeInfo>();
+	public static final HashMap<String, AttributeInfo> fixedMap = new HashMap<String, AttributeInfo>();
 
 	HashMap<String, AtrInfo> attribInfoTable = new HashMap<String, AtrInfo>();
 	private EnumVersion version = null;

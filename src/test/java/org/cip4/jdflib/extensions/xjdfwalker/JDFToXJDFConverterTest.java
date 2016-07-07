@@ -627,6 +627,23 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testProductRetainAll()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Product);
+		n.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		conv.setRetainAll(true);
+		KElement xjdf = conv.makeNewJDF(n, null);
+		assertNull(xjdf.getXPathAttribute("ProductList/Product/IntentSet", null));
+		assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/@Name", null), ElementName.LAYOUTINTENT);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testNotificationAudit()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();

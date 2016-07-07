@@ -132,7 +132,7 @@ import org.w3c.dom.traversal.TreeWalker;
  * < July 15, 2009
  */
 @SuppressWarnings("deprecation")
-public class XMLDoc
+public class XMLDoc implements Cloneable
 {
 
 	protected DocumentXMLImpl m_doc;

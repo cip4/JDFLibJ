@@ -95,7 +95,7 @@ import org.cip4.jdflib.util.UrlUtil;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class XJDFHelper extends BaseXJDFHelper
+public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 {
 	/**
 	 * 
