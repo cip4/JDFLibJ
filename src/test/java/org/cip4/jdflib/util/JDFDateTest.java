@@ -517,7 +517,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	public void testIsEarlier()
 	{
 		final JDFDate date1 = new JDFDate();
-		final JDFDate date2 = new JDFDate();
+		final JDFDate date2 = new JDFDate(date1);
 		assertFalse(date1.isEarlier(date2));
 		assertFalse(date2.isEarlier(date1));
 		assertFalse(date2.isEarlier(null));
