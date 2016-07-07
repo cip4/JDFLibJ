@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -102,6 +102,29 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	{
 		theHelper.setTypes("Product");
 		assertEquals("Product", theHelper.getTypes().get(0));
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testGetAttribute()
+	{
+		assertNull(theHelper.getAttribute("foo"));
+		theHelper.setAttribute("foo", "bar");
+		assertEquals("bar", theHelper.getAttribute("foo"));
+	}
+
+	/**
+	* 
+	*  
+	*/
+	@Test
+	public void testSetAttribute()
+	{
+		theHelper.setAttribute("foo", "bar");
+		assertEquals("bar", theHelper.getAttribute("foo"));
 	}
 
 	/**

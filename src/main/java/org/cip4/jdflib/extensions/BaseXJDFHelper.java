@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -80,15 +80,12 @@ import org.cip4.jdflib.util.ContainerUtil;
  */
 public abstract class BaseXJDFHelper
 {
-	private static Log log;
+	protected final Log log;
 
 	protected BaseXJDFHelper()
 	{
 		super();
-		if (log == null)
-		{
-			log = LogFactory.getLog(BaseXJDFHelper.class);
-		}
+		log = LogFactory.getLog(BaseXJDFHelper.class);
 	}
 
 	/**
@@ -109,6 +106,30 @@ public abstract class BaseXJDFHelper
 	public KElement getXPathElement(String xpath)
 	{
 		return theElement == null ? null : theElement.getXPathElement(xpath);
+	}
+
+	/**
+	 * 
+	 * @param attName
+	 * @return
+	 */
+	public String getAttribute(String attName)
+	{
+		return theElement == null ? null : theElement.getNonEmpty(attName);
+	}
+
+	/**
+	 * 
+	 * @param attName
+	 * @param value
+	 * @return
+	 */
+	public void setAttribute(String attName, String value)
+	{
+		if (theElement != null)
+		{
+			theElement.setAttribute(attName, value);
+		}
 	}
 
 	/**

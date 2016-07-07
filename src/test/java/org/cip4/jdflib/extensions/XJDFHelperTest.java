@@ -97,8 +97,24 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetSet()
 	{
-		KElement rlSet = theHelper.appendResourceSet("RunList", null).getSet();
-		assertEquals(rlSet, theHelper.getSet("RunList", 0).getSet());
+		KElement rlSet = theHelper.appendResourceSet(ElementName.RUNLIST, null).getSet();
+		assertEquals(rlSet, theHelper.getSet(ElementName.RUNLIST, 0).getSet());
+	}
+
+	/**
+	* 
+	* 
+	*/
+	@Test
+	public void testGetCreateResourceSet()
+	{
+		assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input, null));
+		SetHelper sh1 = theHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Input);
+		assertNotNull(sh1);
+		SetHelper sh2 = theHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Output);
+		assertNotNull(sh2);
+		assertNotSame(sh1, sh2);
+
 	}
 
 	/**
@@ -191,6 +207,28 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		sh.getCreatePartition(map2, true);
 		VJDFAttributeMap vp = theHelper.getPartMapVector();
 		assertEquals(vp, v);
+	}
+
+	/**
+	* 
+	* 
+	*/
+	@Test
+	public void testGetDependentPartIDKeys()
+	{
+		SetHelper sh = theHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Input);
+		assertNull(theHelper.getDependentJobParts(null));
+		assertNull(theHelper.getDependentJobParts(EnumUsage.Output));
+		sh.setXPathValue("Dependent[1]/@JobPartID", "p1");
+		assertEquals(theHelper.getDependentJobParts(EnumUsage.Input).get(0), "p1");
+		assertEquals(theHelper.getDependentJobParts(null).get(0), "p1");
+		assertNull(theHelper.getDependentJobParts(EnumUsage.Output));
+		sh.setXPathValue("Dependent[3]/@JobPartID", "p2");
+		assertEquals(theHelper.getDependentJobParts(EnumUsage.Input).get(1), "p2");
+		SetHelper sh2 = theHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Output);
+		assertNull(theHelper.getDependentJobParts(EnumUsage.Output));
+		sh2.setXPathValue("Dependent[1]/@JobPartID", "o1");
+		assertEquals(theHelper.getDependentJobParts(EnumUsage.Output).get(0), "o1");
 	}
 
 	/**

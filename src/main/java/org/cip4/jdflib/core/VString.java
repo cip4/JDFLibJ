@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -341,18 +341,13 @@ public class VString extends Vector<String>
 	/**
 	 * AppendUnique - append a string but ignore multiple entries
 	 * 
-	 * @param v the string to append, if null nothing is added
+	 * @param string the string to append, if null nothing is added
 	 */
-	public void appendUnique(final String v)
+	public void appendUnique(final String string)
 	{
-		if (v == null)
+		if (string != null && !contains(string))
 		{
-			return;
-		}
-
-		if (!contains(v))
-		{
-			addElement(v);
+			addElement(string);
 		}
 	}
 
@@ -363,26 +358,26 @@ public class VString extends Vector<String>
 	 */
 	public void appendUnique(final VString v)
 	{
-		if (v == null || v.size() == 0)
+		if (v != null && v.size() > 0)
 		{
-			return;
-		}
-		final int size = v.size();
-		if (size == 1) // speedup for single append
-		{
-			final String theOther = v.elementAt(0);
-			if (!this.contains(theOther))
+			final int size = v.size();
+			if (size == 1) // speedup for single append
 			{
-				add(theOther);
+				final String theOther = v.elementAt(0);
+				if (!contains(theOther))
+				{
+					add(theOther);
+				}
 			}
-			return;
+			else
+			{
+				for (int i = 0; i < size; i++)
+				{
+					add(v.elementAt(i));
+				}
+				unify();
+			}
 		}
-		for (int i = 0; i < size; i++)
-		{
-			add(v.elementAt(i));
-		}
-
-		unify();
 	}
 
 	/**

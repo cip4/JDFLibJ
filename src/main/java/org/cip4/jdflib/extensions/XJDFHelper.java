@@ -318,6 +318,26 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 
 	/**
 	 * 
+	 * @param usage if Input, get predecessors,  if Output get followers, if null get any
+	 *  
+	 * @return the list of dependents, null if none were found
+	 */
+	public VString getDependentJobParts(EnumUsage usage)
+	{
+		Vector<SetHelper> vsh = getSets(null, usage);
+		VString ret = new VString();
+		if (vsh != null)
+		{
+			for (SetHelper sh : vsh)
+			{
+				ret.appendUnique(sh.getDependentJobParts());
+			}
+		}
+		return ret.isEmpty() ? null : ret;
+	}
+
+	/**
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -518,9 +538,8 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		String usageString = usage == null ? null : usage.getName();
 		while (e != null)
 		{
-			if (SetHelper.isSet(e) && (name == null || name.equals(e.getAttribute("Name", null, null)))
-					&& StringUtil.equals(usageString, e.getAttribute(AttributeName.USAGE, null, null))
-					&& StringUtil.equals(processUsage, e.getAttribute(AttributeName.PROCESSUSAGE, null, null)))
+			if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))) && StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE))
+					&& StringUtil.equals(processUsage, e.getNonEmpty(AttributeName.PROCESSUSAGE)))
 			{
 				return new SetHelper(e);
 			}
@@ -556,7 +575,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public SetHelper getCreateSet(String family, String name, EnumUsage usage)
 	{
-		SetHelper newSet = getSet(name, 0);
+		SetHelper newSet = getSet(name, usage, null);
 		if (newSet == null)
 		{
 			newSet = appendSet(family, name, usage);

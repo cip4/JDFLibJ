@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFPart;
@@ -583,5 +584,24 @@ public class SetHelper extends BaseXJDFHelper
 		}
 		vMap.unify();
 		return vMap;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public VString getDependentJobParts()
+	{
+		VElement deps = theElement.getChildElementVector(XJDFConstants.Dependent, null);
+		VString ret = new VString();
+		if (deps != null)
+		{
+			for (KElement dep : deps)
+			{
+				String jpID = dep.getNonEmpty(AttributeName.JOBPARTID);
+				ret.appendUnique(jpID);
+			}
+		}
+		return ret.isEmpty() ? null : ret;
 	}
 }

@@ -123,6 +123,21 @@ public class SetHelperTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testGetDependentJobPart()
+	{
+		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		assertNull(sh.getDependentJobParts());
+		sh.setXPathValue("Dependent[1]/@JobPartID", "p1");
+		assertEquals(sh.getDependentJobParts().get(0), "p1");
+		sh.setXPathValue("Dependent[3]/@JobPartID", "p2");
+		assertEquals(sh.getDependentJobParts().get(1), "p2");
+		assertEquals(sh.getDependentJobParts().size(), 2);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testGetPartitionMap()
 	{
 		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
