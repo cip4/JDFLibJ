@@ -192,7 +192,7 @@ public class XJDFHelper extends BaseXJDFHelper
 	/**
 	 * 
 	 */
-	private void newXJDF()
+	void newXJDF()
 	{
 		JDFDoc doc = new JDFDoc(XJDFConstants.XJDF, EnumVersion.Version_2_0);
 		doc.setInitOnCreate(false);

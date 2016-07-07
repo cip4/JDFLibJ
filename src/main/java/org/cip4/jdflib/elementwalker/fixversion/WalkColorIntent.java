@@ -131,7 +131,7 @@ public class WalkColorIntent extends WalkResource
 	private void processNumColors(final KElement e1)
 	{
 		JDFColorIntent ci = (JDFColorIntent) e1;
-		if (fixVersion.lessThanVersion(EnumVersion.Version_1_5))
+		if (fixVersion.lessThanVersion(EnumVersion.Version_1_5) || fixVersion.isXJDF())
 		{
 			removeNumColors(ci);
 		}

@@ -267,4 +267,13 @@ public class FixVersionImpl extends PackageElementWalker
 			constructWalker.setParent(this);
 		return constructWalker;
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isXJDF()
+	{
+		return version != null && version.isXJDF();
+	}
 }

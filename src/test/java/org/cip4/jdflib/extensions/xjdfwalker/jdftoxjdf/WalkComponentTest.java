@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,108 +68,34 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
+import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFRefElement;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.PartitionHelper;
-import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.resource.process.JDFComponent;
+import org.junit.Test;
 
-/**
- * 
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
- */
-public class WalkColorPoolRef extends WalkRefElement
+public class WalkComponentTest
 {
+
 	/**
 	 * 
 	 */
-	public WalkColorPoolRef()
+	@Test
+	public void testComponentType()
 	{
-		super();
+		JDFComponent cb = (JDFComponent) new JDFDoc(ElementName.COMPONENT).getRoot();
+		cb.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Web);
+		WalkComponent walkComponent = new WalkComponent();
+		walkComponent.updateComponentType(cb);
+		assertEquals("Web", cb.getAttribute(AttributeName.COMPONENTTYPE));
+
+		cb.setComponentType(EnumComponentType.PartialProduct, null);
+		walkComponent.updateComponentType(cb);
+		assertNull(cb.getAttribute(AttributeName.COMPONENTTYPE, null, null));
 	}
 
-	/**
-	 * @param re
-	 */
-	@Override
-	protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
-	{
-		makeSetRefAttribute(re, xjdf);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return toCheck instanceof JDFRefElement && "ColorPoolRef".equals(toCheck.getLocalName());
-	}
-
-	/**
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		final JDFRefElement refElem = (JDFRefElement) jdf;
-		final JDFResource colorPool = refElem.getTargetRoot();
-		if (colorPool != null)
-		{
-			final VElement v = colorPool.getChildElementVector(ElementName.COLOR, null);
-			for (KElement e : v)
-			{
-				e.renameAttribute("Name", "Separation", null, null);
-			}
-			KElement newColorRes = safeRename(colorPool, ElementName.COLOR, true);
-			newColorRes.setAttribute(AttributeName.PARTIDKEYS, "Separation");
-		}
-		refElem.renameElement("ColorRef", null);
-		KElement ret = super.walk(jdf, xjdf);
-		if (!jdfToXJDF.isRetainAll())
-		{
-			xjdf.removeAttribute("ColorRef");
-		}
-
-		return ret;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return VString.getVString("ColorPoolRef", null);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#setResource(org.cip4.jdflib.core.JDFElement, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	protected VElement setResource(JDFElement rl, JDFResource linkTarget, KElement xRoot)
-	{
-		VElement vRes = super.setResource(rl, linkTarget, xRoot);
-		if (!jdfToXJDF.isRetainAll() && vRes != null && vRes.size() > 0)
-		{
-			KElement res = vRes.get(0);
-			PartitionHelper ph = new PartitionHelper(res);
-			SetHelper sh = ph.getSet();
-			if (sh != null && sh.getUsage() == null)
-			{
-				sh.setUsage(EnumUsage.Input);
-			}
-		}
-		return vRes;
-	}
 }

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,38 +70,25 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFRefElement;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.PartitionHelper;
-import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFPreview;
 
 /**
  * 
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen at this point only a dummy since we have a specific WalkResourceAudit child
  */
-public class WalkColorPoolRef extends WalkRefElement
+public class WalkPreview extends WalkResource
 {
+
 	/**
 	 * 
 	 */
-	public WalkColorPoolRef()
+	public WalkPreview()
 	{
 		super();
-	}
-
-	/**
-	 * @param re
-	 */
-	@Override
-	protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
-	{
-		makeSetRefAttribute(re, xjdf);
 	}
 
 	/**
@@ -112,36 +99,28 @@ public class WalkColorPoolRef extends WalkRefElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFRefElement && "ColorPoolRef".equals(toCheck.getLocalName());
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFPreview;
 	}
 
 	/**
-	 * @param xjdf
-	 * @return true if must continue
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	public KElement walk(KElement jdf, KElement xjdf)
 	{
-		final JDFRefElement refElem = (JDFRefElement) jdf;
-		final JDFResource colorPool = refElem.getTargetRoot();
-		if (colorPool != null)
-		{
-			final VElement v = colorPool.getChildElementVector(ElementName.COLOR, null);
-			for (KElement e : v)
-			{
-				e.renameAttribute("Name", "Separation", null, null);
-			}
-			KElement newColorRes = safeRename(colorPool, ElementName.COLOR, true);
-			newColorRes.setAttribute(AttributeName.PARTIDKEYS, "Separation");
-		}
-		refElem.renameElement("ColorRef", null);
-		KElement ret = super.walk(jdf, xjdf);
-		if (!jdfToXJDF.isRetainAll())
-		{
-			xjdf.removeAttribute("ColorRef");
-		}
+		moveToFileSpec(jdf);
+		return super.walk(jdf, xjdf);
+	}
 
-		return ret;
+	/**
+	 * 
+	 * @param jdf
+	 */
+	void moveToFileSpec(KElement jdf)
+	{
+		JDFFileSpec fs = (JDFFileSpec) jdf.appendElement(ElementName.FILESPEC);
+		fs.moveAttribute(AttributeName.URL, jdf);
 	}
 
 	/**
@@ -150,26 +129,17 @@ public class WalkColorPoolRef extends WalkRefElement
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString("ColorPoolRef", null);
+		return new VString(ElementName.PREVIEW, null);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#setResource(org.cip4.jdflib.core.JDFElement, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected VElement setResource(JDFElement rl, JDFResource linkTarget, KElement xRoot)
+	protected void updateAttributes(JDFAttributeMap map)
 	{
-		VElement vRes = super.setResource(rl, linkTarget, xRoot);
-		if (!jdfToXJDF.isRetainAll() && vRes != null && vRes.size() > 0)
-		{
-			KElement res = vRes.get(0);
-			PartitionHelper ph = new PartitionHelper(res);
-			SetHelper sh = ph.getSet();
-			if (sh != null && sh.getUsage() == null)
-			{
-				sh.setUsage(EnumUsage.Input);
-			}
-		}
-		return vRes;
+		map.remove(AttributeName.DIRECTORY);
+		map.remove(AttributeName.MIMETYPEDETAILS);
+		super.updateAttributes(map);
 	}
 }

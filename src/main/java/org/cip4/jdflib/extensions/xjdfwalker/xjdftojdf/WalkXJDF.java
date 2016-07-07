@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
@@ -118,10 +119,11 @@ public class WalkXJDF extends WalkXElement
 	private JDFNode getParentProduct(final KElement xjdf, KElement jdf)
 	{
 		JDFNode jdfNode = (JDFNode) jdf;
-		String parentID = xjdf.getNonEmpty("ParentID");
+		String parentID = xjdf.getNonEmpty(XJDFConstants.ParentID);
 		if (parentID != null)
 		{
-			JDFNode childProduct = jdfNode.getChildJDFNode(parentID, false);
+			JDFNode childProduct = (JDFNode) jdfNode.getChildWithAttribute(ElementName.JDF, AttributeName.JOBPARTID, null, parentID, 0, false);
+
 			if (childProduct != null)
 			{
 				jdfNode = childProduct;
@@ -191,7 +193,7 @@ public class WalkXJDF extends WalkXElement
 	@Override
 	protected void updateAttributes(KElement elem)
 	{
-		elem.removeAttribute("ParentID");
+		elem.removeAttribute(XJDFConstants.ParentID);
 		super.updateAttributes(elem);
 	}
 }

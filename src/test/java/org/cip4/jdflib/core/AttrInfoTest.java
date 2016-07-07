@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,6 +76,7 @@ import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * 
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -95,7 +96,7 @@ public class AttrInfoTest extends TestCase
 
 		ai = new AtrInfo(0x33333222, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		Assert.assertEquals("", ai.getFirstVersion(), EnumVersion.Version_1_0);
-		Assert.assertEquals("", ai.getLastVersion(), EnumVersion.Version_1_7);
+		Assert.assertEquals("", ai.getLastVersion(), EnumVersion.Version_2_0);
 	}
 
 	// ////////////////////////////////////////////////////////////

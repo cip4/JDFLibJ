@@ -90,6 +90,7 @@ import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.extensions.XJDF20;
@@ -120,6 +121,27 @@ import org.junit.Before;
  */
 public abstract class JDFTestCaseBase extends TestCase
 {
+
+	/**
+	 * 
+	 * @return
+	 */
+	public static String getXJDFSchema()
+	{
+		return StringUtil.replaceToken(sm_dirTestSchema, -1, File.separator, "Version_2_0") + "xjdf.xsd";
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	protected static JDFParser getXJDFSchemaParser()
+	{
+		JDFParser parser = new JDFParser();
+		parser.setSchemaLocation(JDFElement.getSchemaURL(2, 0), getXJDFSchema());
+		return parser;
+	}
+
 	/**
 	 * 
 	 */
@@ -338,13 +360,12 @@ public abstract class JDFTestCaseBase extends TestCase
 		KElement xjdfRoot = xjdfConv.convert(root);
 		String tmpXJDF = sm_dirTestDataTemp + fileBase + ".xjdf";
 		xjdfRoot.getOwnerDocument_KElement().write2File(tmpXJDF, 2, false);
-		/*
-		JDFParser p = new JDFParser();
-		p.setSchemaLocation(XJDF20.getSchemaURL(), sm_dirTestSchema + "xjdf.xsd");
+
+		JDFParser p = getXJDFSchemaParser();
 		JDFDoc docXJDF = p.parseFile(tmpXJDF);
 		XMLDoc dVal = docXJDF.getValidationResult();
 		assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
-		*/
+
 		XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		JDFDoc converted = jdfConverter.convert(xjdfRoot);
 		converted.write2File(sm_dirTestDataTemp + fileBase + ".xjdf.jdf", 2, false);

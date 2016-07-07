@@ -328,6 +328,21 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
+	public void testPreview()
+	{
+		KElement xjdf = new JDFToXJDFConverterTest()._testPreview();
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		JDFDoc d = xCon.convert(xjdf);
+		JDFNode root = d.getJDFRoot();
+		d.write2File(sm_dirTestDataTemp + "Preview.xjdf.jdf", 2, false);
+		assertTrue(root.isValid(EnumValidationLevel.Incomplete));
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@Test
 	public void testPageListEmpty()
 	{
 		KElement xjdf = new JDFToXJDFConverterTest()._testPageListEmpty();

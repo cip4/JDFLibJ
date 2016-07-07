@@ -364,7 +364,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	{
 		final File foo = new File(sm_dirTestSchema).getParentFile();
 		assertTrue("please mount the svn schema parallel to jdflibJ", foo.isDirectory());
-		final File[] dirs = FileUtil.listFilesWithExpression(foo, "*Version_*");
+		final File[] dirs = FileUtil.listFilesWithExpression(foo, "*Version_1*");
 		assertTrue(dirs.length > 0);
 		int nCheck = 0;
 		for (int i = 0; i < dirs.length; i++)

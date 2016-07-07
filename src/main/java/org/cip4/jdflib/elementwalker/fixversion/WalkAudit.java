@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -112,11 +112,11 @@ public class WalkAudit extends WalkElement
 	public KElement walk(final KElement e1, final KElement trackElem)
 	{
 		final JDFAudit audit = (JDFAudit) e1;
-		if (this.fixVersion.version != null)
+		if (fixVersion.version != null)
 		{
 			fixID(audit);
 			final String author = audit.getAuthor();
-			if (this.fixVersion.lessThanVersion(EnumVersion.Version_1_2))
+			if (fixVersion.lessThanVersion(EnumVersion.Version_1_2))
 			{
 				mergeAuthor(audit, author);
 			}
@@ -124,7 +124,10 @@ public class WalkAudit extends WalkElement
 			{
 				splitAuthor(audit, author);
 			}
-			authorToEmployee(audit);
+			if (fixVersion.lessThanVersion(EnumVersion.Version_2_0))
+			{
+				authorToEmployee(audit);
+			}
 		}
 		return super.walk(e1, trackElem);
 	}

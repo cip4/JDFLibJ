@@ -129,6 +129,23 @@ class PostXJDFWalker extends BaseElementWalker
 	 */
 	private boolean bDeliveryIntent;
 	private boolean retainAll;
+	private boolean reorderElements;
+
+	/**
+	 * @return the reorderElements
+	 */
+	protected boolean isReorderElements()
+	{
+		return reorderElements;
+	}
+
+	/**
+	 * @param reorderElements the reorderElements to set
+	 */
+	protected void setReorderElements(boolean reorderElements)
+	{
+		this.reorderElements = reorderElements;
+	}
 
 	/**
 	 * 
@@ -224,11 +241,25 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
+			updateNamespaces(xjdf);
+			if (isReorderElements())
+			{
+				reorderElements(xjdf);
+			}
+			return xjdf;
+		}
+
+		void updateNamespaces(final KElement xjdf)
+		{
 			if (xjdf.hasAttribute(AttributeName.XMLNS))
 				xjdf.removeAttribute(AttributeName.XMLNS);
 			if (xjdf.getNamespaceURI().equals(JDFElement.getSchemaURL()))
 				xjdf.setNamespaceURI(XJDF20.getSchemaURL());
-			return xjdf;
+		}
+
+		protected void reorderElements(KElement xjdf)
+		{
+			xjdf.sortChildren(new KElement.SimpleElementNameComparator());
 		}
 	}
 
@@ -318,11 +349,23 @@ class PostXJDFWalker extends BaseElementWalker
 					keys.appendUnique(nextKeys);
 				}
 				VJDFAttributeMap vPA = partAmount.getPartMapVector();
+				if (vPA == null)
+					vPA = new VJDFAttributeMap();
 				if (vPA != null && keys != null && keys.size() > 0)
 				{
 					vPA.removeKeys(keys);
 				}
+				if (vPA.isEmpty())
+					vPA.add(new JDFAttributeMap());
+
 				partAmount.setPartMapVector(vPA);
+				// the parts are new and need to be moved into the correct namespace
+				VElement v = partAmount.getParts();
+				for (KElement e : v)
+				{
+					updateNamespaces(e);
+				}
+
 			}
 		}
 
@@ -810,14 +853,14 @@ class PostXJDFWalker extends BaseElementWalker
 					PartitionHelper ph = new PartitionHelper(param);
 					SetHelper sh = new SetHelper(set);
 					JDFAttributeMap partMap = ph.getPartMap();
-					partMap.put(ElementName.DROP, "DROP_0");
+					partMap.put(XJDFConstants.DROP_ID, "DROP_0");
 					ph.setPartMap(partMap);
 
 					delParams.removeChildren(ElementName.DROP, null, null);
 					for (int j = 0; j < size; j++)
 					{
 						int i = (j + 1) % size;
-						partMap.put(ElementName.DROP, "DROP_" + i);
+						partMap.put(XJDFConstants.DROP_ID, "DROP_" + i);
 						KElement newDrop;
 						PartitionHelper newParam;
 						if (i != 0)
@@ -877,8 +920,7 @@ class PostXJDFWalker extends BaseElementWalker
 			KElement intent = xjdf.getElement("Intent");
 			if (!bIntentPartition && intent != null)
 			{
-				intent.copyAttribute("ID", xjdf);
-				intent.copyAttribute("Name", xjdf);
+				intent.copyAttribute(AttributeName.NAME, xjdf);
 				xjdf.getParentNode_KElement().moveElement(intent, xjdf);
 				xjdf.deleteNode();
 			}
@@ -998,6 +1040,16 @@ class PostXJDFWalker extends BaseElementWalker
 			}
 			return ret;
 		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#reorderElements(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		protected void reorderElements(KElement xjdf)
+		{
+			super.reorderElements(xjdf);
+			new PartitionHelper(xjdf).cleanUp();
+		}
 	}
 
 	/**
@@ -1056,6 +1108,15 @@ class PostXJDFWalker extends BaseElementWalker
 			}
 			return ret;
 		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#reorderElements(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		protected void reorderElements(KElement xjdf)
+		{
+			// nop
+		}
 	}
 
 	/**
@@ -1095,6 +1156,7 @@ class PostXJDFWalker extends BaseElementWalker
 		{
 			xjdf.removeAttribute(AttributeName.STATUS);
 			xjdf.removeAttribute(AttributeName.STATUSDETAILS);
+			xjdf.removeAttribute(AttributeName.ID);
 			KElement ret = super.walk(xjdf, dummy);
 			return ret;
 		}
@@ -1113,6 +1175,7 @@ class PostXJDFWalker extends BaseElementWalker
 		mergeLayout = true;
 		removeSignatureName = true;
 		retainAll = false;
+		reorderElements = true;
 	}
 
 	/**
@@ -1134,6 +1197,7 @@ class PostXJDFWalker extends BaseElementWalker
 			removeSignatureName = !retainAll;
 			mergeLayout = !retainAll;
 			bDeliveryIntent = retainAll;
+			reorderElements = false;
 		}
 	}
 
@@ -1356,6 +1420,15 @@ class PostXJDFWalker extends BaseElementWalker
 		{
 			return new VString(ProductHelper.PRODUCTLIST, null);
 		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#reorderElements(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		protected void reorderElements(KElement xjdf)
+		{
+			//nop
+		}
 	}
 
 	/**
@@ -1403,18 +1476,19 @@ class PostXJDFWalker extends BaseElementWalker
 		 */
 		private void fixChildRefs(KElement xjdf)
 		{
-			IntentHelper bind = new ProductHelper(xjdf).getIntent(ElementName.BINDINGINTENT);
+			ProductHelper ph = new ProductHelper(xjdf);
+			IntentHelper bind = ph.getIntent(ElementName.BINDINGINTENT);
 			if (bind != null)
 			{
-				bind.getCreateResource().moveAttribute(XJDFConstants.ChildRefs, bind.getRoot());
+				bind.getCreateResource().moveAttribute(XJDFConstants.ChildRefs, ph.getRoot());
 			}
 			else
 			{
 				//TODO fix to subelements
-				IntentHelper insert = new ProductHelper(xjdf).getIntent(ElementName.INSERTINGINTENT);
+				IntentHelper insert = ph.getIntent(ElementName.INSERTINGINTENT);
 				if (insert != null)
 				{
-					insert.getCreateResource().moveAttribute(XJDFConstants.ChildRefs, insert.getRoot());
+					insert.getCreateResource().moveAttribute(XJDFConstants.ChildRefs, ph.getRoot());
 				}
 			}
 

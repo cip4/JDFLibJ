@@ -205,7 +205,7 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 					pgt.addKid(goldenTicket4);
 				}
 
-				BaseGoldenTicketTest.write9GTFiles(pgt, "MISPre_ComplexPlate" + (i >= 2 ? "Making" : "Setting") + (goldenTicket2.bStripping ? "Strip" : "")
+				BaseGoldenTicketTest.write3GTFiles(pgt, "MISPre_ComplexPlate" + (i >= 2 ? "Making" : "Setting") + (goldenTicket2.bStripping ? "Strip" : "")
 						+ (bExpand ? "Expand" : ""));
 			}
 		}

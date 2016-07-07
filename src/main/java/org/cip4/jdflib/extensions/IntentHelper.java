@@ -96,7 +96,6 @@ public class IntentHelper extends BaseXJDFHelper
 	{
 		super();
 		theElement = intent;
-		theElement.appendAnchor(null);
 	}
 
 	/**

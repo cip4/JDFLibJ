@@ -78,6 +78,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
@@ -98,9 +99,11 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.NumberFormatter;
 import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.StringUtil;
@@ -329,7 +332,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	private boolean removeSignatureName = true;
 
-	private EnumProcessPartition processPartition = EnumProcessPartition.processTypes;
+	private EnumProcessPartition processPartition = EnumProcessPartition.jobPartID;
 
 	/**
 	 * @param bProcessList the ProcessList to set
@@ -441,7 +444,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	private void preFixVersion(final JDFElement root)
 	{
-		FixVersion vers = new FixVersion(EnumVersion.Version_1_5);
+		FixVersion vers = new FixVersion(EnumVersion.Version_2_0);
 		vers.setLayoutPrepToStripping(bMergeLayoutPrep);
 		vers.setZappDeprecated(true);
 
@@ -473,8 +476,11 @@ public class JDFToXJDF extends PackageElementWalker
 		{
 			if (trackAudits)
 			{
-				JDFAuditPool auditPool = (JDFAuditPool) newRoot.getCreateElement("AuditPool");
-				auditPool.addCreated("XJDF Converter", null);
+				JDFAuditPool auditPool = (JDFAuditPool) newRoot.getCreateElement(ElementName.AUDITPOOL);
+				JDFCreated c = auditPool.addCreated(null, null);
+				c.setAgentName("JDF To XJDF Converter");
+				c.setAgentVersion(JDFAudit.getStaticAgentVersion());
+				c.setTimeStamp(new JDFDate());
 			}
 		}
 		if (newRoot != null)

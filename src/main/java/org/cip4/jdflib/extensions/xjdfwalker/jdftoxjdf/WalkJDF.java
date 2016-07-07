@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAncestorPool;
@@ -176,8 +177,7 @@ public class WalkJDF extends WalkJDFElement
 
 		if (jdfToXJDF.isUpdateVersion())
 		{
-			newRootP.setAttribute("Version", "2.0");
-			newRootP.setAttribute("MaxVersion", "2.0");
+			newRootP.setAttribute(AttributeName.VERSION, "2.0");
 			newRootP.setID(null);
 		}
 		updateTypes(newRootP, types);
@@ -186,7 +186,7 @@ public class WalkJDF extends WalkJDFElement
 		JDFNode parentProduct = node.getParentProduct();
 		if (parentProduct != null && parentProduct != node && parentProduct != node.getJDFRoot())
 		{
-			newRootP.setAttribute("ParentID", parentProduct.getID());
+			newRootP.setAttribute(XJDFConstants.ParentID, parentProduct.getJobPartID(false));
 		}
 	}
 
@@ -273,6 +273,17 @@ public class WalkJDF extends WalkJDFElement
 				}
 			}
 		}
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		map.remove(AttributeName.MAXVERSION);
+		map.remove(AttributeName.STATUS);
+		super.updateAttributes(map);
 	}
 
 }

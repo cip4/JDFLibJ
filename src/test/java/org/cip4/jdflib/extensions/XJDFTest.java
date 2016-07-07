@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,7 +68,6 @@
  */
 package org.cip4.jdflib.extensions;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -508,18 +507,6 @@ public class XJDFTest extends JDFTestCaseBase
 		else
 			assertEquals(xjdf.getXPathAttribute("CommandModifyQueueEntry/ModifyQueueEntryParams/@Operation", null), "Hold");
 
-	}
-
-	/**
-	 * 	@deprecated
-	 */
-	@Deprecated
-	public void xjdfSchemaTest()
-	{
-		final XJDFSchemaWalker sw = new XJDFSchemaWalker();
-		final File in = new File(sm_dirTestSchema + "JDFResource.xsd");
-		final File out = new File(sm_dirTestDataTemp + "schema/xjdf/JDFResource.xsd");
-		sw.newFile(in, out);
 	}
 
 	/**

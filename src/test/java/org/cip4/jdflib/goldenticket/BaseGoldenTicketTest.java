@@ -74,7 +74,9 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 
@@ -174,13 +176,10 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 		String tmpXJDF = sm_dirTestDataTemp + gtType + templateName + ".xjdf";
 		xjdfRoot.getOwnerDocument_KElement().write2File(tmpXJDF, 2, false);
 
-		/*
-		JDFParser p = new JDFParser();
-		p.setSchemaLocation(XJDF20.getSchemaURL(), sm_dirTestSchema + "../xjdf.xsd");
+		JDFParser p = getXJDFSchemaParser();
 		JDFDoc docXJDF = p.parseFile(tmpXJDF);
 		XMLDoc dVal = docXJDF.getValidationResult();
-		assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
-		*/
+		//		assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
 
 		XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		JDFDoc converted = jdfConverter.convert(xjdfRoot);

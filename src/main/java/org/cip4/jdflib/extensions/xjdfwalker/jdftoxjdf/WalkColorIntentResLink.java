@@ -114,22 +114,35 @@ public class WalkColorIntentResLink extends WalkResLink
 				thecolorIntent = colorIntent;
 
 			EnumSide side = part == null ? null : part.getSide();
-			String surface = side == null ? "Both" : side.getName();
+			VString surfaces = new VString();
+			if (side == null)
+			{
+				surfaces.add("Front");
+				surfaces.add("Back");
+
+			}
+			else
+			{
+				surfaces.add(side.getName());
+			}
 			if (thecolorIntent != null)
 			{
-				KElement surfaceColor = thecolorIntent.getCreateChildWithAttribute("SurfaceColor", "Surface", null, surface, 0);
-				fixNumColors(surfaceColor, colorIntent);
-				if (part != null)
+				for (String surface : surfaces)
 				{
-					part.deleteNode();
-				}
-				for (String att : frontBack)
-				{
-					String attVal = colorIntent.getAttribute(att, null, null);
-					if (attVal != null)
+					KElement surfaceColor = thecolorIntent.getCreateChildWithAttribute("SurfaceColor", "Surface", null, surface, 0);
+					fixNumColors(surfaceColor, colorIntent);
+					if (part != null)
 					{
-						surfaceColor.setAttribute(att, attVal);
-						thecolorIntent.removeAttribute(att);
+						part.deleteNode();
+					}
+					for (String att : frontBack)
+					{
+						String attVal = colorIntent.getAttribute(att, null, null);
+						if (attVal != null)
+						{
+							surfaceColor.setAttribute(att, attVal);
+							thecolorIntent.removeAttribute(att);
+						}
 					}
 				}
 			}

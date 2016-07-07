@@ -163,9 +163,7 @@ public class WalkProduct extends WalkJDF
 
 		for (String kid : kids)
 		{
-			final KElement sub = prod.appendElement(XJDFConstants.ChildProduct);
-			sub.setAttribute("ChildRef", "IDP_" + kid, null);
-			// TODO add processusage from input / output resources
+			prod.appendAttribute(XJDFConstants.ChildRefs, "IDP_" + kid, null, null, false);
 		}
 	}
 
@@ -232,9 +230,10 @@ public class WalkProduct extends WalkJDF
 			map.remove(AttributeName.XSITYPE);
 			map.remove(AttributeName.JOBID);
 			if (StringUtil.getNonEmpty(prod.getAttribute(AttributeName.PRODUCTID)) == null)
-				map.renameKey(AttributeName.JOBPARTID, AttributeName.PRODUCTID);
+				map.renameKey(AttributeName.JOBPARTID, XJDFConstants.ExternalID);
 			map.remove("xmlns:xsi");
 			map.remove(AttributeName.JOBPARTID);
+			updateAttributes(map);
 			prod.setAttributes(map);
 
 			calcChildren(node, prod);

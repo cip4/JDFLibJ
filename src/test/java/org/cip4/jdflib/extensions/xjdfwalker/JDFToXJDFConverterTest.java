@@ -121,6 +121,7 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPageData;
 import org.cip4.jdflib.resource.process.JDFPerson;
+import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.cip4.jdflib.util.FileUtil;
@@ -588,6 +589,38 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/@ExternalID", null), "P1");
 		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/Address/@Street", null), "Sesame");
 		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/ComChannel/@Locator", null), "tel:123");
+	}
+
+	/**
+	 * 
+	 */
+	public KElement _testPreview()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFPreview pv = (JDFPreview) n.addResource(ElementName.PREVIEW, EnumUsage.Input);
+		pv.setURL("previewURL");
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.makeNewJDF(n, null);
+		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Preview\"]/Resource/Preview/@URL", null));
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Preview\"]/Resource/Preview/FileSpec/@URL", null), "previewURL");
+		return xjdf;
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testPreview()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFPreview pv = (JDFPreview) n.addResource(ElementName.PREVIEW, EnumUsage.Input);
+		pv.setURL("previewURL");
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.makeNewJDF(n, null);
+		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Preview\"]/Resource/Preview/@URL", null));
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Preview\"]/Resource/Preview/FileSpec/@URL", null), "previewURL");
 	}
 
 	/**

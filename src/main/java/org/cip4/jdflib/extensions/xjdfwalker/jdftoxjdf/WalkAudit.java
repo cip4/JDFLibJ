@@ -68,12 +68,10 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.JDFCreated;
-import org.cip4.jdflib.resource.JDFModified;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 
 /**
  * 
@@ -108,16 +106,20 @@ public class WalkAudit extends WalkJDFSubElement
 	@Override
 	public KElement walk(KElement jdf, KElement xjdf)
 	{
-		if ((jdf instanceof JDFCreated) || (jdf instanceof JDFModified))
-			return null;
-
+		JDFAudit a = (JDFAudit) jdf;
+		employeeToAuthor(a);
 		KElement e = super.walk(jdf, xjdf);
-		if (!jdfToXJDF.isSingleNode() && e != null)
+		return e;
+	}
+
+	private void employeeToAuthor(JDFAudit a)
+	{
+		JDFEmployee emp = a.getEmployee(0);
+		if (emp != null)
 		{
-			JDFNode n = ((JDFAudit) jdf).getParentJDF();
-			e.copyAttribute(AttributeName.JOBPARTID, n);
+			a.setAuthor(emp.getDescriptiveName());
+			a.removeChildren(ElementName.EMPLOYEE, null, null);
 		}
 
-		return e;
 	}
 }

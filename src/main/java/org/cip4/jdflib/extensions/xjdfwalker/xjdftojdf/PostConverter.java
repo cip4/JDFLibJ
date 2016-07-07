@@ -288,7 +288,24 @@ class PostConverter
 				{
 					cleanPageList(resRoot);
 				}
+				cleanClass(resRoot, false);
 			}
+		}
+
+		private void cleanClass(KElement elem, boolean cleanMe)
+		{
+			if (cleanMe)
+			{
+				elem.removeAttribute_KElement(AttributeName.CLASS, null);
+			}
+
+			KElement e2 = elem.getFirstChildElement();
+			while (e2 != null)
+			{
+				cleanClass(e2, true);
+				e2 = e2.getNextSiblingElement();
+			}
+
 		}
 
 		private void cleanPageList(final JDFResource r)

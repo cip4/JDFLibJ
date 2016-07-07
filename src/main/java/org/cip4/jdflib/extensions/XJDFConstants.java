@@ -79,6 +79,7 @@ public abstract class XJDFConstants
 	public static final String CompanyID = "CompanyID";
 
 	public static final String Dependent = "Dependent";
+	public static final String DROP_ID = "DropID";
 
 	public static final String ExternalID = "ExternalID";
 
@@ -90,6 +91,7 @@ public abstract class XJDFConstants
 	public static final String LooseBinding = "LooseBinding";
 
 	public static final String Parent = "Parent";
+	public static final String ParentID = "ParentID";
 	public static final String Process = "Process";
 	public static final String ProcessList = "ProcessList";
 	public static final String ProcessTypes = "ProcessType"; // TODO discuss "s"

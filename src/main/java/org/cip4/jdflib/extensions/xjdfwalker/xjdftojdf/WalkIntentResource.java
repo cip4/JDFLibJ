@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.IntentHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
  * 
@@ -96,6 +97,16 @@ public class WalkIntentResource extends WalkResource
 	{
 		xjdfToJDFImpl.attributesToSpan(e);
 		return super.walk(e, trackElem);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void updateAttributes(KElement elem)
+	{
+		elem.removeAttribute(XJDFConstants.ChildRefs);
+		super.updateAttributes(elem);
 	}
 
 	/**

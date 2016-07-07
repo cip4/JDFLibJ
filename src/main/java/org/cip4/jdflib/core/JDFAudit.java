@@ -523,7 +523,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 			}
 		}
 
-		if (auditVersion == null || auditVersion.getValue() >= EnumVersion.Version_1_3.getValue())
+		if ((auditVersion == null || auditVersion.getValue() >= EnumVersion.Version_1_3.getValue()) && !isXJDF())
 		{
 			appendAnchor(null);
 		}

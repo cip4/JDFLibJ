@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -147,9 +147,9 @@ public class FileUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetBufferedOutputStream() throws IOException
 	{
-		File file = new File(sm_dirTestDataTemp+"bufOut.txt");
+		File file = new File(sm_dirTestDataTemp + "bufOut.txt");
 		file.delete();
-		OutputStream os=FileUtil.getBufferedOutputStream(file);
+		OutputStream os = FileUtil.getBufferedOutputStream(file);
 		os.write("abc".getBytes());
 		os.close();
 		assertTrue(file.exists());
@@ -466,6 +466,10 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertFalse(f2.exists());
 		assertTrue(f3.length() > 50000);
 
+		assertFalse(FileUtil.moveFile(null, f2));
+		assertFalse(FileUtil.moveFile(f2, null));
+		assertFalse(FileUtil.moveFile(null, null));
+
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -569,6 +573,10 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertEquals(nf.getName(), f.getName());
 		assertFalse(f.exists());
 		assertTrue(nf.exists());
+
+		assertNull(FileUtil.moveFileToDir(null, fd));
+		assertNull(FileUtil.moveFileToDir(fd, null));
+		assertNull(FileUtil.moveFileToDir(null, null));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

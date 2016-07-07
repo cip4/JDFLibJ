@@ -421,6 +421,10 @@ public class AtrInfo
 			masked = masked >> (4 * i);
 			if (masked == 2 || masked == 3)
 			{
+				// dirty hack to allow FixVersion with 2.0, if all bits, we also assume jdf 2.0 (xjdf)
+				if (i == 7)
+					i += 3;
+
 				return EnumVersion.getEnum(i + 1);
 			}
 		}

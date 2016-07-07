@@ -3746,6 +3746,30 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	* sorts according to the lexical string representation of the xml objects
+	* @author prosirai
+	*/
+	public static class SimpleElementNameComparator implements Comparator<KElement>
+	{
+
+		/**
+		 * 
+		 * @param o1
+		 * @param o2
+		 * @return
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
+		@Override
+		public int compare(final KElement o1, final KElement o2)
+		{
+			String nodeName = o1.getNodeName();
+			String nodeName2 = o2.getNodeName();
+			return nodeName.compareTo(nodeName2);
+
+		}
+	}
+
+	/**
 	 * sorts according to the value of one attribute<br/>
 	 * if the attribute is numeric, compare numerically, else lexical comparison is done
 	 * @author prosirai
@@ -4673,7 +4697,10 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public void moveAttribute(final String attrib, final KElement src)
 	{
-		moveAttribute(attrib, src, null, null, null);
+		if (src != null)
+		{
+			moveAttribute(attrib, src, null, null, null);
+		}
 	}
 
 	/**

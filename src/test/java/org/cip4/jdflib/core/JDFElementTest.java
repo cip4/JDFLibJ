@@ -92,6 +92,7 @@ import org.cip4.jdflib.core.JDFElement.EnumXYRelation;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNumberList;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFAcknowledge;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -842,6 +843,35 @@ public class JDFElementTest extends JDFTestCaseBase
 		m_jdfElement.appendComment();
 		m_kElement = m_jdfElement.getChildByTagName("Comment", "", 0, null, false, true);
 		assertTrue("Bug: This is no comment!", m_kElement instanceof JDFComment);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testIsInJDFNamespaceStatic()
+	{
+		_setUp();
+		assertTrue(JDFElement.isInJDFNameSpaceStatic(JDFElement.getSchemaURL(1, 1)));
+		assertTrue(JDFElement.isInJDFNameSpaceStatic(m_jdfElement));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testIsInXJDFNamespaceStatic()
+	{
+		assertTrue(JDFElement.isInXJDFNameSpaceStatic(JDFElement.getSchemaURL(2, 0)));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testXJDF()
+	{
+		assertTrue(((JDFElement) new XJDFHelper("a", null, null).getRoot()).isXJDF());
 	}
 
 	/**

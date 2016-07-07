@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFPartAmount;
@@ -318,10 +319,12 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	@Override
 	public void cleanUp()
 	{
-		if (!theElement.hasAttribute("ID"))
+		if (!theElement.hasAttribute(AttributeName.ID))
 		{
-			theElement.setID(theElement.generateDotID("ID", null));
+			theElement.setID(theElement.generateDotID(AttributeName.ID, null));
 		}
+		theElement.sortChildren();
+		theElement.moveElement(getResource(), null);
 	}
 
 	/**

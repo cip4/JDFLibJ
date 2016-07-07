@@ -174,6 +174,8 @@ public class WalkProduct extends WalkXElement
 	{
 		VString ignore = new VString("IsRoot", null);
 		theNode.setAttributes(e, ignore);
+		updateAttributes(theNode);
+
 	}
 
 	/**

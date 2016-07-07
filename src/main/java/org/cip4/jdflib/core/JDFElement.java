@@ -2813,6 +2813,15 @@ public class JDFElement extends KElement
 		return this instanceof JDFNode;
 	}
 
+	/** 
+	 * are we an XJDF or child of XJDF/XJMF
+	 * @return
+	 */
+	public boolean isXJDF()
+	{
+		return isInXJDFNameSpaceStatic(getNamespaceURI());
+	}
+
 	/**
 	 * Method IsInJDFNameSpace.
 	 * 
@@ -2874,6 +2883,17 @@ public class JDFElement extends KElement
 	{
 		return ns == null || ns.equals(JDFConstants.EMPTYSTRING) || (ns.compareToIgnoreCase("http://www.CIP4.org/JDFSchema_1_1") == 0)
 				|| (ns.compareToIgnoreCase("http://www.CIP4.org/JDFSchema_1") == 0);
+	}
+
+	/**
+	 * checks whether kElem is in the JDF namespace
+	 * 
+	 * @param ns the KElement to check
+	 * @return boolean - true, if kElem is in the JDF namespace
+	 */
+	public static boolean isInXJDFNameSpaceStatic(final String ns)
+	{
+		return ns != null && (ns.startsWith("http://www.CIP4.org/JDFSchema_2"));
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -93,6 +93,7 @@ public class LinkValidatorMap
 	private final HashMap<String, LinkInfoMap> m_LinkInfoMap = new HashMap<String, LinkInfoMap>();
 
 	private final String[] m_GenericLinkInfo = { JDFConstants.INPUT_ZEROTOINFINITY,// APPROVALSUCCESS
+			JDFConstants.INPUT_ZEROTOONE, // COLORPOOL
 			JDFConstants.INPUT_ZEROTOONE, // CUSTOMERINFO
 			JDFConstants.INPUT_ZEROTOINFINITY, // DEVICE
 			JDFConstants.INPUT_ZEROTOINFINITY, // EMPLOYEE
@@ -104,8 +105,8 @@ public class LinkValidatorMap
 			JDFConstants.INPUT_ZEROTOINFINITY // USAGECOUNTER
 	};
 
-	private final String[] m_GenericLinkNames = { ElementName.APPROVALSUCCESS, ElementName.CUSTOMERINFO, ElementName.DEVICE, ElementName.EMPLOYEE, ElementName.MISCCONSUMABLE,
-			ElementName.NODEINFO, ElementName.PREFLIGHTREPORT, ElementName.PREVIEW, ElementName.TOOL, ElementName.USAGECOUNTER };
+	private final String[] m_GenericLinkNames = { ElementName.APPROVALSUCCESS, ElementName.COLORPOOL, ElementName.CUSTOMERINFO, ElementName.DEVICE, ElementName.EMPLOYEE,
+			ElementName.MISCCONSUMABLE, ElementName.NODEINFO, ElementName.PREFLIGHTREPORT, ElementName.PREVIEW, ElementName.TOOL, ElementName.USAGECOUNTER };
 
 	private HashSet<String> nameSet = null;
 

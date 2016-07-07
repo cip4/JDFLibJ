@@ -235,6 +235,10 @@ public class WalkJDFElement extends WalkElement
 		{
 			name = "RunListRef";
 		}
+		if ("ContactRef".equals(name))
+		{
+			name += 's';
+		}
 		return name;
 	}
 
@@ -283,6 +287,10 @@ public class WalkJDFElement extends WalkElement
 		if (!jdfToXJDF.isRetainAll())
 		{
 			map.remove(AttributeName.SPAWNID);
+			map.remove(AttributeName.SETTINGSPOLICY);
+			map.remove(AttributeName.MUSTHONOREXCEPTIONS);
+			map.remove(AttributeName.BESTEFFORTEXCEPTIONS);
+			map.remove(AttributeName.OPERATORINTERVENTIONEXCEPTIONS);
 			super.updateAttributes(map);
 		}
 	}

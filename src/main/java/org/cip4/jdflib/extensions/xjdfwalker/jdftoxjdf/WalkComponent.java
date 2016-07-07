@@ -99,15 +99,24 @@ public class WalkComponent extends WalkResource
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final JDFComponent k = (JDFComponent) super.walk(jdf, xjdf);
-		String comptype = k.getAttribute(AttributeName.COMPONENTTYPE);
-		comptype = StringUtil.replaceString(comptype, "FinalProduct", null);
-		comptype = StringUtil.replaceString(comptype, "PartialProduct", null);
-		k.setAttribute(AttributeName.COMPONENTTYPE, StringUtil.getNonEmpty(comptype));
+		updateComponentType(k);
 
 		String prodType = k.getAttribute(AttributeName.PRODUCTTYPE);
 		if ("Unknown".equals(prodType))
 			k.removeAttribute(AttributeName.PRODUCTTYPE);
 		return k;
+	}
+
+	/**
+	 * 
+	 * @param k
+	 */
+	void updateComponentType(final JDFComponent k)
+	{
+		String comptype = k.getAttribute(AttributeName.COMPONENTTYPE);
+		comptype = StringUtil.replaceString(comptype, "FinalProduct", null);
+		comptype = StringUtil.replaceString(comptype, "PartialProduct", null);
+		k.setAttribute(AttributeName.COMPONENTTYPE, StringUtil.trim(comptype, null));
 	}
 
 	/**
