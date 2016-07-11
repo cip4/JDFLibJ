@@ -106,4 +106,14 @@ public class WalkJobPhase extends WalkXElement
 		return new VString(ElementName.JOBPHASE, null);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void updateAttributes(KElement elem)
+	{
+		moveCostCenterID(elem);
+		super.updateAttributes(elem);
+	}
+
 }

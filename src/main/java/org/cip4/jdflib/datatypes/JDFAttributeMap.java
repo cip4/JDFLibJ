@@ -581,7 +581,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 * rename a key to the new value. newKey is only replaced if oldkey exists
+	 * rename a key to the new value. newKey is only replaced if oldkey exists and is non empty
 	 * 
 	 * @param oldKey
 	 * @param newKey
@@ -591,7 +591,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	{
 		String val = remove(oldKey);
 		String ret = null;
-		if (val != null)
+		if (StringUtil.getNonEmpty(val) != null)
 		{
 			ret = put(newKey, val);
 		}

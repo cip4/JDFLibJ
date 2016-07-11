@@ -68,10 +68,13 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJobPhase;
+import org.cip4.jdflib.resource.process.JDFCostCenter;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
@@ -104,6 +107,50 @@ public class WalkJobPhase extends WalkJDFSubElement
 	public VString getElementNames()
 	{
 		return new VString(ElementName.JOBPHASE, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		map.remove(AttributeName.ACTIVATION);
+		map.remove(AttributeName.URL);
+		renamePhaseAttributes(map);
+		super.updateAttributes(map);
+	}
+
+	private void renamePhaseAttributes(JDFAttributeMap map)
+	{
+		map.renameKey(AttributeName.PHASESTARTTIME, AttributeName.STARTTIME);
+		map.renameKey(AttributeName.PHASEAMOUNT, AttributeName.AMOUNT);
+		map.renameKey(AttributeName.PHASEWASTE, AttributeName.WASTE);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public KElement walk(KElement jdf, KElement xjdf)
+	{
+		jdf.removeChild(ElementName.JDF, null, 0);
+		moveCostCenter(jdf);
+		return super.walk(jdf, xjdf);
+	}
+
+	/**
+	 * 
+	 * @param jdf
+	 */
+	void moveCostCenter(KElement jdf)
+	{
+		JDFCostCenter c = ((JDFJobPhase) jdf).getCostCenter();
+		if (c != null)
+		{
+			jdf.moveAttribute(AttributeName.COSTCENTERID, c);
+			c.deleteNode();
+		}
 	}
 
 }

@@ -169,14 +169,13 @@ public class WalkXElement extends BaseWalker
 	{
 		elem.renameAttribute(XJDFConstants.ExternalID, AttributeName.PRODUCTID);
 		elem.renameAttribute(XJDFConstants.BinderySignatureIDs, AttributeName.ASSEMBLYIDS);
-		moveCostCenterID(elem);
 	}
 
 	/**
 	 * 
 	 * @param elem
 	 */
-	private void moveCostCenterID(KElement elem)
+	void moveCostCenterID(KElement elem)
 	{
 		if (elem.getNonEmpty(AttributeName.COSTCENTERID) != null)
 		{

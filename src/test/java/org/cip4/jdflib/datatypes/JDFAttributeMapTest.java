@@ -418,6 +418,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
+		m1.put("b", "");
 		assertEquals(m1.renameKey("a1", "a3"), null);
 		assertEquals(m1.get("a3"), "v1");
 		assertEquals(m1.renameKey("a4", "a5"), null);
@@ -427,6 +428,9 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		assertEquals(m1.renameKey("a3", "a2"), "v2");
 		assertEquals(m1.get("a2"), "v1");
 		assertEquals(m1.get("a3"), null);
+		assertNull(m1.renameKey("b", "c"));
+		assertNull(m1.get("b"));
+		assertNull(m1.get("c"));
 	}
 
 }
