@@ -170,6 +170,10 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	{
 		VJDFAttributeMap vPartMap = ri.getPartMapVector();
 		String resName = ri.getXPathAttribute("ResourceSet/@Name", null);
+		if (resName == null)
+		{
+			resName = ri.getResourceName();
+		}
 		KElement set = ri.getChildWithAttribute(XJDFConstants.ResourceSet, AttributeName.NAME, null, resName, 0, true);
 		if (set == null)
 		{
