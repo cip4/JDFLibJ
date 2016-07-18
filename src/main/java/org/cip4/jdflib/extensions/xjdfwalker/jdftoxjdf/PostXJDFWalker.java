@@ -86,6 +86,8 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
+import org.cip4.jdflib.extensions.AuditPoolHelper;
+import org.cip4.jdflib.extensions.AuditResourceHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
@@ -93,6 +95,7 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
@@ -272,6 +275,15 @@ class PostXJDFWalker extends BaseElementWalker
 	protected class WalkPart extends WalkElement
 	{
 		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString(ElementName.PART, null);
+		}
+
+		/**
 		 * 
 		 */
 		public WalkPart()
@@ -356,7 +368,7 @@ class PostXJDFWalker extends BaseElementWalker
 					vPA.removeKeys(keys);
 				}
 				if (vPA.isEmpty())
-					vPA.add(new JDFAttributeMap());
+					vPA = null;
 
 				partAmount.setPartMapVector(vPA);
 				// the parts are new and need to be moved into the correct namespace
@@ -365,19 +377,119 @@ class PostXJDFWalker extends BaseElementWalker
 				{
 					updateNamespaces(e);
 				}
-
 			}
 		}
 
+		/**
+		 * 
+		 * @param part
+		 * @return
+		 */
 		private VElement getParentParts(KElement part)
 		{
 			return part.getXPathElementVector("../../Part", 0);
 		}
 
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString(ElementName.PARTAMOUNT, null);
+		}
+
+		/**
+		 * 
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 */
 		@Override
 		public boolean matches(KElement e)
 		{
 			return (e instanceof JDFPartAmount);
+		}
+	}
+
+	/**
+	 * class that cleans up redundant partition keys
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkAmountPool extends WalkElement
+	{
+		/**
+		 * 
+		 */
+		public WalkAmountPool()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString(ElementName.AMOUNTPOOL, null);
+		}
+
+		/**
+		 * @param ap
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement ap, final KElement dummy)
+		{
+			JDFAmountPool pool = (JDFAmountPool) ap;
+			if (!retainAll)
+			{
+				moveActualToAudit(pool);
+			}
+			return super.walk(pool, dummy);
+		}
+
+		/**
+		 * 
+		 * @param partAmount
+		 */
+		void moveActualToAudit(JDFAmountPool partAmount)
+		{
+			if (partAmount.getDeepParent(ElementName.AUDITPOOL, 0) == null)
+			{
+				AuditPoolHelper ah = new AuditPoolHelper(newRoot.getCreateElement(ElementName.AUDITPOOL));
+				KElement resource = partAmount.getDeepParent(XJDFConstants.Resource, 0);
+				PartitionHelper ph = resource == null ? null : new PartitionHelper(resource);
+				SetHelper sh = ph == null ? null : ph.getSet();
+				if (sh != null)
+				{
+					AuditResourceHelper arh = ah.getCreateAuditResourceHelper(sh);
+					SetHelper shNew = arh.getSet();
+					PartitionHelper phNew = shNew.getCreateVPartition(sh.getPartMapVector(), false);
+					KElement newAmountPool = phNew.getRoot().copyElement(partAmount, null);
+					VElement vpa = newAmountPool.getChildElementVector(ElementName.PARTAMOUNT, null);
+					for (KElement pa : vpa)
+					{
+						pa.removeAttribute(AttributeName.AMOUNT);
+						pa.renameAttribute(AttributeName.ACTUALAMOUNT, AttributeName.AMOUNT);
+						pa.removeAttribute(AttributeName.WASTE);
+						pa.renameAttribute("ActualWaste", AttributeName.WASTE);
+					}
+					walkTree(newAmountPool, null);
+				}
+			}
+
+		}
+
+		/**
+		 * 
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public boolean matches(KElement e)
+		{
+			return (e instanceof JDFAmountPool) && e.getDeepParent(ElementName.AUDITPOOL, 0) == null;
 		}
 	}
 

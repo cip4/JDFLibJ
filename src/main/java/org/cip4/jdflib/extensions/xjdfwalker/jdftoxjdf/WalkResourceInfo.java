@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,8 +68,17 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.Vector;
+
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.resource.JDFResource;
 
@@ -95,8 +104,8 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	public KElement walk(final KElement resInfo, final KElement xjdf)
 	{
 		final JDFResourceInfo ri = (JDFResourceInfo) resInfo;
-		final KElement eNew = xjdf.copyElement(resInfo, null);
-		eNew.removeChildren(null, null, null);
+		final KElement eNew = super.walk(ri, xjdf);
+
 		final VElement vr = ri.getChildElementVector(null, null);
 		int nRes = 0;
 		for (KElement e : vr)
@@ -116,8 +125,32 @@ public class WalkResourceInfo extends WalkJDFSubElement
 				nRes++;
 			}
 		}
-
+		moveToResourceSet((JDFResourceInfo) eNew);
 		return eNew;
+	}
+
+	/**
+	 * 
+	 * @param ri
+	 * @param eNew
+	 */
+	private void moveToResourceSet(JDFResourceInfo ri)
+	{
+		VJDFAttributeMap vPartMap = ri.getPartMapVector();
+		String resName = ri.getResourceName();
+		KElement set = ri.getChildWithAttribute(XJDFConstants.ResourceSet, AttributeName.NAME, m_spawnInfo, resName, 0, true);
+		if (set == null)
+		{
+			set = ri.appendElement(XJDFConstants.ResourceSet);
+			set.setAttribute(AttributeName.NAME, resName);
+		}
+		SetHelper sh = new SetHelper(set);
+		Vector<PartitionHelper> newParts = sh.getCreatePartitions(vPartMap, false);
+		for (PartitionHelper ph : newParts)
+		{
+			//TODO use correct amounts
+			ph.setAmount(ri.getActualAmount(), null, true);
+		}
 	}
 
 	/**
@@ -129,5 +162,25 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	public boolean matches(final KElement toCheck)
 	{
 		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFResourceInfo;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		map.remove(AttributeName.DEVICEID);
+		map.remove(AttributeName.LEVEL);
+		super.updateAttributes(map);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#makeRefElements(org.cip4.jdflib.core.JDFElement)
+	 */
+	@Override
+	void makeRefElements(JDFElement je)
+	{
+		// nop
 	}
 }

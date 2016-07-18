@@ -245,6 +245,10 @@ public class WalkJDF extends WalkJDFElement
 		t1.appendUnique(t2);
 		t1.removeStrings("ProcessGroup", 0);
 		t1.removeStrings("Combined", 0);
+		if (t1.isEmpty())
+		{
+			t1.add("Product");
+		}
 		newRootP.setAttribute(AttributeName.TYPES, t1, null);
 	}
 

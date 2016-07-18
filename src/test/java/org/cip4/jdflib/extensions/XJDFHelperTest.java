@@ -102,6 +102,17 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 * 
+	 */
+	@Test
+	public void testAppendSet()
+	{
+		KElement rlSet = theHelper.appendSet(null, ElementName.RUNLIST, null).getSet();
+		assertEquals(rlSet.getLocalName(), XJDFConstants.ResourceSet);
+	}
+
+	/**
 	* 
 	* 
 	*/

@@ -94,12 +94,12 @@ import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.elementwalker.IWalker;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
+import org.cip4.jdflib.elementwalker.RemoveEmpty;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
-import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.FileUtil;
@@ -390,7 +390,7 @@ public class JDFToXJDF extends PackageElementWalker
 			preFixVersion(root);
 
 			walkTree(root, newRoot);
-			newRoot.eraseEmptyNodes(true);
+			new RemoveEmpty().removEmptyElement(newRoot);
 			postWalk(true);
 		}
 		else
@@ -477,16 +477,14 @@ public class JDFToXJDF extends PackageElementWalker
 			if (trackAudits)
 			{
 				JDFAuditPool auditPool = (JDFAuditPool) newRoot.getCreateElement(ElementName.AUDITPOOL);
-				JDFCreated c = auditPool.addCreated(null, null);
+				boolean hasCreated = auditPool.hasChildElement(ElementName.CREATED, null);
+				JDFAudit c = hasCreated ? auditPool.addModified(null, null) : auditPool.addCreated(null, null);
 				c.setAgentName("JDF To XJDF Converter");
 				c.setAgentVersion(JDFAudit.getStaticAgentVersion());
 				c.setTimeStamp(new JDFDate());
 			}
 		}
-		if (newRoot != null)
-		{
-			newRoot.eraseEmptyNodes(true);
-		}
+		new RemoveEmpty().removEmptyElement(newRoot);
 	}
 
 	/**

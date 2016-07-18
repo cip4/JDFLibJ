@@ -126,11 +126,9 @@ public class WalkJMF extends WalkJDFElement
 	{
 		xjmfRoot.appendXMLComment("XJDF converter version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
 
-		xjmfRoot.setAttributes(jmf);
+		setAttributes(jmf, xjmfRoot);
 		if (!jdfToXJDF.isRetainAll())
 		{
-			// need to do this at the beginning because we will rename SenderID to DeviceID
-			xjmfRoot.removeAttribute(AttributeName.DEVICEID);
 			JDFEmployee employee = jmf.getEmployee(0);
 			if (employee != null)
 			{

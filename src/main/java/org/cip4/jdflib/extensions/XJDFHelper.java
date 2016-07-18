@@ -530,7 +530,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param name 
 	 * @param processUsage
 	 *  
-	 * @return the SetHelper for the vector of parametersets and resourcesets
+	 * @return the SetHelper for the vector of resourcesets
 	 */
 	public SetHelper getSet(String name, EnumUsage usage, String processUsage)
 	{
@@ -556,6 +556,8 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public SetHelper appendSet(String family, String name, EnumUsage usage)
 	{
+		if (family == null)
+			family = XJDFConstants.Resource;
 		KElement newSet = theElement.appendElement(family + "Set");
 		newSet.setAttribute("Name", name);
 		if (name == null)
@@ -591,7 +593,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public SetHelper getCreateResourceSet(String name, EnumUsage usage)
 	{
-		return getCreateSet("Resource", name, usage);
+		return getCreateSet(XJDFConstants.Resource, name, usage);
 	}
 
 	/**

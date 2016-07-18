@@ -195,6 +195,29 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * @param map
+	 * @param addRes 
+	 * @return 
+	 */
+	public PartitionHelper getCreateVPartition(VJDFAttributeMap vmap, boolean addRes)
+	{
+		JDFAttributeMap map = vmap != null && !vmap.isEmpty() ? vmap.get(0) : null;
+		PartitionHelper e = getPartition(map);
+		if (e == null)
+		{
+			e = appendPartition(map, addRes);
+		}
+		else if (!e.containsMap(map))
+		{
+			e = insertPartitionBefore(e, map, addRes);
+		}
+		e.setPartMapVector(vmap);
+		if (addRes)
+			e.getCreateResource();
+		return e;
+	}
+
+	/**
 	 * @param e
 	 * @param map
 	 * @param addRes
@@ -603,5 +626,14 @@ public class SetHelper extends BaseXJDFHelper
 			}
 		}
 		return ret.isEmpty() ? null : ret;
+	}
+
+	/**
+	 * 
+	 * @param name
+	 */
+	public void setName(String name)
+	{
+		setAttribute(AttributeName.NAME, name);
 	}
 }

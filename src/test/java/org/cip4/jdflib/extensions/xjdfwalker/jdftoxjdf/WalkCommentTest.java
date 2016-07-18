@@ -70,38 +70,39 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFComment;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.jmf.JDFMessage;
-import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.cip4.jdflib.jmf.JDFMessageService;
-import org.cip4.jdflib.jmf.JMFBuilderFactory;
+import org.cip4.jdflib.node.JDFNode;
 import org.junit.Test;
 
-/**
- * 
- * @author rainer prosi
- *
- */
-public class WalkMessageServiceTest extends JDFTestCaseBase
+public class WalkCommentTest extends JDFTestCaseBase
 {
+
 	/**
 	 * 
 	 */
 	@Test
-	public void testDevCaps()
+	public void testID()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
-		JDFMessageService ms = jmf.getResponse(0).appendMessageService();
-		ms.setType(EnumType.AbortQueueEntry);
-		ms.appendActionPool();
-		ms.appendDevCapPool();
-		ms.appendDevCaps();
-		KElement e = new JDFToXJDF().convert(jmf);
-		JDFMessageService msNew = (JDFMessageService) e.getElement("ResponseKnownMessages").getElement(ElementName.MESSAGESERVICE);
-		assertNull(msNew.getActionPool());
-		assertNull(msNew.getDevCapPool());
-		assertNull(msNew.getDevCaps(0));
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFComment c = n.appendComment();
+		c.setID("i1");
+		KElement xjdf = new JDFToXJDF().convert(n);
+		assertNull(xjdf.getXPathAttribute("Comment/@ID", null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testText()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFComment c = n.appendComment();
+		c.setText("abc");
+		KElement xjdf = new JDFToXJDF().convert(n);
+		assertEquals(xjdf.getXPathAttribute("Comment", null), "abc");
 	}
 
 }

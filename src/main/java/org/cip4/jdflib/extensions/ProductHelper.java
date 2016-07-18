@@ -151,16 +151,6 @@ public class ProductHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * @see java.lang.Object#toString()
-	 * @return
-	*/
-	@Override
-	public String toString()
-	{
-		return "ProductHelper: " + theElement;
-	}
-
-	/**
 	 * @return amount the amount to get
 	 */
 	public int getAmount()

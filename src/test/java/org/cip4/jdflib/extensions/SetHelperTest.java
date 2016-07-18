@@ -123,6 +123,18 @@ public class SetHelperTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testSetName()
+	{
+		KElement set = KElement.createRoot(XJDFConstants.ResourceSet, null);
+		SetHelper sh = new SetHelper(set);
+		sh.setName("foo");
+		assertEquals("foo", sh.getName());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testGetDependentJobPart()
 	{
 		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));

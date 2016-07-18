@@ -69,39 +69,50 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.cip4.jdflib.jmf.JDFMessageService;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
+import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.junit.Test;
 
-/**
- * 
- * @author rainer prosi
- *
- */
-public class WalkMessageServiceTest extends JDFTestCaseBase
+public class WalkSignalResourceTest extends JDFTestCaseBase
 {
+
 	/**
 	 * 
 	 */
 	@Test
-	public void testDevCaps()
+	public void testRQP()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
-		JDFMessageService ms = jmf.getResponse(0).appendMessageService();
-		ms.setType(EnumType.AbortQueueEntry);
-		ms.appendActionPool();
-		ms.appendDevCapPool();
-		ms.appendDevCaps();
-		KElement e = new JDFToXJDF().convert(jmf);
-		JDFMessageService msNew = (JDFMessageService) e.getElement("ResponseKnownMessages").getElement(ElementName.MESSAGESERVICE);
-		assertNull(msNew.getActionPool());
-		assertNull(msNew.getDevCapPool());
-		assertNull(msNew.getDevCaps(0));
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
+		JDFSignal sig = jmf.getSignal(0);
+		sig.appendResourceQuParams().setJobID("j1");
+		JDFResourceInfo ri = sig.appendResourceInfo();
+
+		new WalkSignalResource().moveFromQuParams(sig);
+		assertNull(sig.getResourceQuParams());
+		assertEquals("j1", ri.getAttribute(AttributeName.JOBID));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testConvert()
+	{
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
+		JDFSignal sig = jmf.getSignal(0);
+		sig.appendResourceQuParams().setJobID("j1");
+		sig.appendResourceInfo();
+
+		KElement xjmf = new JDFToXJDF().convert(jmf);
+
+		assertNull(xjmf.getXPathElement("SignalResource/ResourceQuParams"));
+		assertEquals("j1", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@JobID", null));
 	}
 
 }

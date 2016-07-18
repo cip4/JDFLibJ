@@ -121,7 +121,7 @@ public class WalkJDFElement extends WalkElement
 	 * make all inline resources to refelements
 	 * @param je
 	 */
-	private void makeRefElements(final JDFElement je)
+	void makeRefElements(final JDFElement je)
 	{
 		final VElement v = je.getChildElementVector_KElement(null, null, null, true, 0);
 		for (KElement e : v)
@@ -482,6 +482,7 @@ public class WalkJDFElement extends WalkElement
 				map.remove(AttributeName.AMOUNT);
 				map.remove(AttributeName.ACTUALAMOUNT);
 				paNew.setAttributes(map);
+				// Note that actualamount and actualwaste will be copied in a post processing step by @see PostXJDFWalker
 				String wasteName = "Waste".equals(condition) ? null : condition;
 				paNew.copyAttribute("ActualWaste", pa, AttributeName.ACTUALAMOUNT, null, null);
 				paNew.copyAttribute("Waste", pa, AttributeName.AMOUNT, null, null);

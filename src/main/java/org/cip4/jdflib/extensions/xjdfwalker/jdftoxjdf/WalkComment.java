@@ -68,40 +68,54 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.jmf.JDFMessage;
-import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.cip4.jdflib.jmf.JDFMessageService;
-import org.cip4.jdflib.jmf.JMFBuilderFactory;
-import org.junit.Test;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
 /**
- * 
- * @author rainer prosi
- *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkMessageServiceTest extends JDFTestCaseBase
+public class WalkComment extends WalkJDFElement
 {
 	/**
 	 * 
 	 */
-	@Test
-	public void testDevCaps()
+	public WalkComment()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
-		JDFMessageService ms = jmf.getResponse(0).appendMessageService();
-		ms.setType(EnumType.AbortQueueEntry);
-		ms.appendActionPool();
-		ms.appendDevCapPool();
-		ms.appendDevCaps();
-		KElement e = new JDFToXJDF().convert(jmf);
-		JDFMessageService msNew = (JDFMessageService) e.getElement("ResponseKnownMessages").getElement(ElementName.MESSAGESERVICE);
-		assertNull(msNew.getActionPool());
-		assertNull(msNew.getDevCapPool());
-		assertNull(msNew.getDevCaps(0));
+		super();
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
+	 */
+	@Override
+	public boolean matches(final KElement toCheck)
+	{
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFComment);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return new VString(ElementName.COMMENT, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		super.updateAttributes(map);
+		map.remove(AttributeName.ID);
 	}
 
 }

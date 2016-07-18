@@ -82,10 +82,22 @@ public abstract class BaseXJDFHelper
 {
 	protected final Log log;
 
+	/**
+	 * 
+	 */
 	protected BaseXJDFHelper()
+	{
+		this(null);
+	}
+
+	/**
+	 * 
+	 */
+	protected BaseXJDFHelper(KElement theElement)
 	{
 		super();
 		log = LogFactory.getLog(BaseXJDFHelper.class);
+		this.theElement = theElement;
 	}
 
 	/**
@@ -245,6 +257,16 @@ public abstract class BaseXJDFHelper
 			return false;
 		BaseXJDFHelper other = (BaseXJDFHelper) obj;
 		return ContainerUtil.equals(theElement, other.theElement);
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 * @return
+	*/
+	@Override
+	public String toString()
+	{
+		return getClass().getSimpleName() + ": " + theElement;
 	}
 
 }

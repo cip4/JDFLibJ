@@ -793,7 +793,9 @@ public class XJDFTest extends JDFTestCaseBase
 		n.getResource("ExposedMedia", null, 0).refElement(m);
 		final JDFCustomerInfo ci = n.getCustomerInfo();
 		// final JDFResource r =
-		ci.appendCompany().makeRootResource(null, null, true);
+		JDFCompany company = ci.appendCompany();
+		company.setOrganizationName("Acme");
+		company.makeRootResource(null, null, true);
 
 		xjdf = new XJDF20().makeNewJDF(n, null);
 		assertNotNull(xjdf.getXPathElement("ResourceSet[@Name=\"Media\"]"));

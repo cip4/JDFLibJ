@@ -68,40 +68,74 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.jmf.JDFMessage;
-import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.cip4.jdflib.jmf.JDFMessageService;
-import org.cip4.jdflib.jmf.JMFBuilderFactory;
-import org.junit.Test;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
+import org.cip4.jdflib.jmf.JDFResourceQuParams;
+import org.cip4.jdflib.jmf.JDFSignal;
 
 /**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
  * 
- * @author rainer prosi
- *
  */
-public class WalkMessageServiceTest extends JDFTestCaseBase
+public class WalkSignalResource extends WalkSignal
 {
 	/**
 	 * 
 	 */
-	@Test
-	public void testDevCaps()
+	public WalkSignalResource()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
-		JDFMessageService ms = jmf.getResponse(0).appendMessageService();
-		ms.setType(EnumType.AbortQueueEntry);
-		ms.appendActionPool();
-		ms.appendDevCapPool();
-		ms.appendDevCaps();
-		KElement e = new JDFToXJDF().convert(jmf);
-		JDFMessageService msNew = (JDFMessageService) e.getElement("ResponseKnownMessages").getElement(ElementName.MESSAGESERVICE);
-		assertNull(msNew.getActionPool());
-		assertNull(msNew.getDevCapPool());
-		assertNull(msNew.getDevCaps(0));
+		super();
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.XJDF20.WalkMessage#matches(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public boolean matches(KElement toCheck)
+	{
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFSignal) && ElementName.RESOURCE.equals(((JDFSignal) toCheck).getType());
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkMessage#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public KElement walk(KElement jdf, KElement xjdf)
+	{
+		moveFromQuParams(jdf);
+		return super.walk(jdf, xjdf);
+	}
+
+	/**
+	 * 
+	 * @param jdf
+	 */
+	void moveFromQuParams(KElement jdf)
+	{
+		JDFResourceQuParams rqp = ((JDFSignal) jdf).getCreateResourceQuParams(0);
+		VElement vRI = jdf.getChildElementVector(ElementName.RESOURCEINFO, null);
+		if (vRI != null)
+		{
+			String[] moveAtts = new String[] { AttributeName.JOBID, AttributeName.JOBPARTID, AttributeName.QUEUEENTRYID };
+			for (KElement e : vRI)
+			{
+				JDFResourceInfo ri = (JDFResourceInfo) e;
+				for (String att : moveAtts)
+				{
+					if (!ri.hasAttribute(att))
+					{
+						ri.moveAttribute(att, rqp);
+					}
+				}
+			}
+		}
+		if (rqp != null)
+		{
+			rqp.deleteNode();
+		}
 	}
 
 }

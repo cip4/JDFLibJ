@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -75,6 +75,9 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFContact;
@@ -120,12 +123,24 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 */
 	public void testRemoveComment()
 	{
-		JDFDoc d = new JDFDoc("JDF");
+		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
 		n.appendComment();
 		RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
 		assertFalse(n.toXML().contains(ElementName.COMMENT));
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testRemoveJMF()
+	{
+		JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
+		RemoveEmpty emp = new RemoveEmpty();
+		emp.removEmptyElement(jmf);
+		assertNotNull(jmf.getResponse(0));
 	}
 
 	/**

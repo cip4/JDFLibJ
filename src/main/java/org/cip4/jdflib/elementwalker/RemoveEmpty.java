@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,6 +72,7 @@
 package org.cip4.jdflib.elementwalker;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
@@ -431,6 +432,38 @@ public class RemoveEmpty extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return toCheck instanceof JDFComChannel;
+		}
+	}
+
+	/**
+	* zapp me
+	* 
+	* @author prosirai
+	* 
+	*/
+	public class WalkMessage extends WalkElement
+	{
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			String localName = toCheck.getLocalName();
+			return localName.startsWith(ElementName.RESPONSE) || localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.COMMAND);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(KElement e1, KElement trackElem)
+		{
+			//always keep all
+			return e1;
 		}
 	}
 

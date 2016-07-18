@@ -68,40 +68,30 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.jmf.JDFMessage;
-import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.cip4.jdflib.jmf.JDFMessageService;
-import org.cip4.jdflib.jmf.JMFBuilderFactory;
-import org.junit.Test;
+import org.cip4.jdflib.jmf.JDFSignal;
 
 /**
- * 
- * @author rainer prosi
- *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
+ * walker for JMF mesaages
  */
-public class WalkMessageServiceTest extends JDFTestCaseBase
+public class WalkSignal extends WalkMessage
 {
 	/**
 	 * 
 	 */
-	@Test
-	public void testDevCaps()
+	public WalkSignal()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
-		JDFMessageService ms = jmf.getResponse(0).appendMessageService();
-		ms.setType(EnumType.AbortQueueEntry);
-		ms.appendActionPool();
-		ms.appendDevCapPool();
-		ms.appendDevCaps();
-		KElement e = new JDFToXJDF().convert(jmf);
-		JDFMessageService msNew = (JDFMessageService) e.getElement("ResponseKnownMessages").getElement(ElementName.MESSAGESERVICE);
-		assertNull(msNew.getActionPool());
-		assertNull(msNew.getDevCapPool());
-		assertNull(msNew.getDevCaps(0));
+		super();
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.XJDF20.WalkMessage#matches(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public boolean matches(KElement toCheck)
+	{
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFSignal);
 	}
 
 }
