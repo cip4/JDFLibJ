@@ -764,11 +764,15 @@ public class MimeUtilTest extends JDFTestCaseBase
 	@Test
 	public void testURLPerformance()
 	{
-		// testWritePerformance();
 		try
 		{
 			final long write = System.currentTimeMillis();
-			final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "performance.mjm");
+			String mjm = sm_dirTestDataTemp + File.separator + "performance.mjm";
+			if (!new File(mjm).exists())
+			{
+				testWritePerformance();
+			}
+			final Multipart mp = MimeUtil.getMultiPart(mjm);
 			final long getMP = System.currentTimeMillis();
 			System.out.println("get multipart time: " + (getMP - write));
 			final BodyPart bp = MimeUtil.getPartByCID(mp, "bigger.pdf");
