@@ -71,60 +71,24 @@ package org.cip4.jdflib.extensions;
 import junit.framework.TestCase;
 
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.junit.Test;
 
 /**
  * 
  * @author rainer prosi
  *
  */
-public class IntentHelperTest extends TestCase
+public class AuditHelperTest extends TestCase
 {
-	/**
-	 * 
-	 */
-	@Test
-	public void testGetSpan()
-	{
-		KElement intent = new JDFDoc("Intent").getRoot();
-		intent.appendElement("Comment");
-		intent.appendElement("foo");
-		IntentHelper intentHelper = new IntentHelper(intent);
-		intentHelper.setSpan("a", "42", "IntegerSpan");
-		intentHelper.setSpan("b/a", "43", "IntegerSpan");
-		assertEquals(intentHelper.getSpan("a"), "42");
-		assertEquals(intentHelper.getSpan("b/a"), "43");
-	}
 
 	/**
 	 * 
 	 */
-	@Test
-	public void testSetSpan()
+	public void testCleanup()
 	{
-		KElement intent = new JDFDoc("Intent").getRoot();
-		intent.appendElement("foo");
-		IntentHelper intentHelper = new IntentHelper(intent);
-		intentHelper.setSpan("a", "42");
-		intentHelper.setSpan("b/a", "43");
-		assertEquals(intentHelper.getSpan("a"), "42");
-		assertEquals(intentHelper.getSpan("b/a"), "43");
-	}
-
-	/**
-	 * 
-	 */
-	@Test
-	public void testIsIntent()
-	{
-		KElement intent = new JDFDoc(XJDFConstants.INTENT).getRoot();
-		intent.setAttribute("Name", "foo");
-		KElement foo = intent.appendElement("foo");
-		KElement c = intent.appendElement(ElementName.COMMENT);
-		assertTrue(IntentHelper.isIntentResource(foo));
-		assertFalse(IntentHelper.isIntentResource(intent));
-		assertFalse(IntentHelper.isIntentResource(c));
+		KElement audit = KElement.createRoot(ElementName.CREATED, null);
+		AuditHelper ah = new AuditHelper(audit);
+		ah.cleanUp();
+		assertNotNull(ah);
 	}
 }

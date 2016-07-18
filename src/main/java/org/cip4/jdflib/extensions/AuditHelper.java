@@ -84,14 +84,11 @@ public class AuditHelper extends BaseXJDFHelper
 		theElement = audit;
 	}
 
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#cleanUp()
-	 */
 	@Override
 	public void cleanUp()
 	{
-		// nop
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -793,6 +793,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	@Override
 	public void cleanUp()
 	{
+		super.cleanUp();
 		Vector<SetHelper> v = getSets();
 		if (v != null)
 		{
@@ -800,6 +801,11 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 			{
 				sh.cleanUp();
 			}
+		}
+		KElement auditPool = theElement.getElement(ElementName.AUDITPOOL);
+		if (auditPool != null)
+		{
+			new AuditPoolHelper(auditPool).cleanUp();
 		}
 	}
 

@@ -260,6 +260,10 @@ class PostXJDFWalker extends BaseElementWalker
 				xjdf.setNamespaceURI(XJDF20.getSchemaURL());
 		}
 
+		/**
+		 * 
+		 * @param xjdf
+		 */
 		protected void reorderElements(KElement xjdf)
 		{
 			xjdf.sortChildren(new KElement.SimpleElementNameComparator());

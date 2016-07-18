@@ -358,13 +358,9 @@ public class SetHelper extends BaseXJDFHelper
 	@Override
 	public void cleanUp()
 	{
-		if (!theElement.hasAttribute("Name"))
+		if (!theElement.hasAttribute(AttributeName.NAME))
 		{
-			theElement.setAttribute("Name", getName());
-		}
-		if (!theElement.hasAttribute("ID"))
-		{
-			theElement.appendAnchor(null);
+			theElement.setAttribute(AttributeName.NAME, getName());
 		}
 		Vector<PartitionHelper> kids = getPartitions();
 		if (kids != null)
@@ -382,7 +378,7 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public String getName()
 	{
-		String name = theElement.getAttribute("Name", null, null);
+		String name = theElement.getAttribute(AttributeName.NAME, null, null);
 		if (name == null)
 		{
 			Vector<PartitionHelper> v = getPartitions();
@@ -392,7 +388,7 @@ public class SetHelper extends BaseXJDFHelper
 				if (res != null)
 				{
 					name = res.getNodeName();
-					theElement.setAttribute("Name", name);
+					theElement.setAttribute(AttributeName.NAME, name);
 					return name;
 				}
 			}

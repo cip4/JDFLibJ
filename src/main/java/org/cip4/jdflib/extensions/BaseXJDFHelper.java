@@ -170,7 +170,10 @@ public abstract class BaseXJDFHelper
 	 * 
 	 *generic cleanup routine
 	 */
-	public abstract void cleanUp();
+	public void cleanUp()
+	{
+		theElement.sortChildren(new KElement.SimpleElementNameComparator());
+	}
 
 	protected KElement theElement;
 

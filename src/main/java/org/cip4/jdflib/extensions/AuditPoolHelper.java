@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.extensions;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -85,16 +87,6 @@ public class AuditPoolHelper extends BaseXJDFHelper
 	public AuditPoolHelper(KElement audit)
 	{
 		theElement = audit;
-	}
-
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#cleanUp()
-	 */
-	@Override
-	public void cleanUp()
-	{
-		// nop
 	}
 
 	/**
@@ -148,6 +140,48 @@ public class AuditPoolHelper extends BaseXJDFHelper
 			shNew.setProcessUsage(sh.getProcessUsage());
 		}
 		return ah;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#cleanUp()
+	 */
+	@Override
+	public void cleanUp()
+	{
+		Vector<AuditHelper> vA = getAuditHelepers();
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Vector<AuditHelper> getAuditHelepers()
+	{
+		Vector<AuditHelper> vA = new Vector<AuditHelper>();
+		VElement v = theElement.getChildElementVector(null, null);
+		for (KElement e : v)
+		{
+			vA.add(getAuditHelper(e));
+		}
+		return vA;
+	}
+
+	/**
+	 * 
+	 * @param e
+	 * @return
+	 */
+	public AuditHelper getAuditHelper(KElement e)
+	{
+		if (e == null)
+			return null;
+		String name = e.getLocalName();
+		if (XJDFConstants.AuditResource.equals(name))
+			return new AuditResourceHelper(e);
+		else if (XJDFConstants.AuditStatus.equals(name))
+			return new AuditHelper(e);
+		else
+			return new AuditHelper(e);
 	}
 
 }

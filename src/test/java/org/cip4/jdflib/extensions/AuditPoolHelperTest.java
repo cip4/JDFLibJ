@@ -71,60 +71,27 @@ package org.cip4.jdflib.extensions;
 import junit.framework.TestCase;
 
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.junit.Test;
 
 /**
  * 
  * @author rainer prosi
  *
  */
-public class IntentHelperTest extends TestCase
+public class AuditPoolHelperTest extends TestCase
 {
-	/**
-	 * 
-	 */
-	@Test
-	public void testGetSpan()
-	{
-		KElement intent = new JDFDoc("Intent").getRoot();
-		intent.appendElement("Comment");
-		intent.appendElement("foo");
-		IntentHelper intentHelper = new IntentHelper(intent);
-		intentHelper.setSpan("a", "42", "IntegerSpan");
-		intentHelper.setSpan("b/a", "43", "IntegerSpan");
-		assertEquals(intentHelper.getSpan("a"), "42");
-		assertEquals(intentHelper.getSpan("b/a"), "43");
-	}
 
 	/**
 	 * 
 	 */
-	@Test
-	public void testSetSpan()
+	public void testCleanup()
 	{
-		KElement intent = new JDFDoc("Intent").getRoot();
-		intent.appendElement("foo");
-		IntentHelper intentHelper = new IntentHelper(intent);
-		intentHelper.setSpan("a", "42");
-		intentHelper.setSpan("b/a", "43");
-		assertEquals(intentHelper.getSpan("a"), "42");
-		assertEquals(intentHelper.getSpan("b/a"), "43");
-	}
+		KElement auditPool = KElement.createRoot(ElementName.AUDIT, null);
+		KElement created = auditPool.appendElement(ElementName.CREATED);
+		KElement ar = auditPool.appendElement("AuditResource");
+		AuditPoolHelper ah = new AuditPoolHelper(auditPool);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testIsIntent()
-	{
-		KElement intent = new JDFDoc(XJDFConstants.INTENT).getRoot();
-		intent.setAttribute("Name", "foo");
-		KElement foo = intent.appendElement("foo");
-		KElement c = intent.appendElement(ElementName.COMMENT);
-		assertTrue(IntentHelper.isIntentResource(foo));
-		assertFalse(IntentHelper.isIntentResource(intent));
-		assertFalse(IntentHelper.isIntentResource(c));
+		ah.cleanUp();
+		assertEquals(created.getNextSiblingElement(), ar);
 	}
 }
