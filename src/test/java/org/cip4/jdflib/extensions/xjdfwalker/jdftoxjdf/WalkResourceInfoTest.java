@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -98,4 +99,57 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 		assertEquals("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
 	}
 
+	/**
+	 * 
+	 */
+	@Test
+	public void testAuditPool()
+	{
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
+		JDFSignal sig = jmf.getSignal(0);
+		sig.appendResourceQuParams().setJobID("j1");
+		JDFResourceInfo ri = sig.appendResourceInfo();
+		ri.setResourceName(ElementName.MEDIA);
+		ri.setActualAmount(42);
+
+		KElement xjmf = new JDFToXJDF().convert(jmf);
+
+		assertEquals(-1, xjmf.toXML().indexOf(ElementName.AUDITPOOL));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testNameOnly()
+	{
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
+		JDFSignal sig = jmf.getSignal(0);
+		sig.appendResourceQuParams().setJobID("j1");
+		JDFResourceInfo ri = sig.appendResourceInfo();
+		ri.setResourceName(ElementName.MEDIA);
+		ri.setActualAmount(42);
+
+		KElement xjmf = new JDFToXJDF().convert(jmf);
+
+		assertEquals("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet[@Name=\"Media\"]/Resource/AmountPool/PartAmount/@Amount", null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testNoResourceName()
+	{
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
+		JDFSignal sig = jmf.getSignal(0);
+		sig.appendResourceQuParams().setJobID("j1");
+		JDFResourceInfo ri = sig.appendResourceInfo();
+		ri.setResourceName(ElementName.MEDIA);
+		ri.setActualAmount(42);
+
+		KElement xjmf = new JDFToXJDF().convert(jmf);
+
+		assertNull("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@ResourceName", null));
+	}
 }

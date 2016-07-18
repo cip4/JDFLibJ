@@ -70,13 +70,18 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
+import org.cip4.jdflib.jmf.JDFResourceQuParams;
 import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
+import org.cip4.jdflib.resource.process.JDFExposedMedia;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.Test;
 
 public class WalkSignalResourceTest extends JDFTestCaseBase
@@ -96,6 +101,52 @@ public class WalkSignalResourceTest extends JDFTestCaseBase
 		new WalkSignalResource().moveFromQuParams(sig);
 		assertNull(sig.getResourceQuParams());
 		assertEquals("j1", ri.getAttribute(AttributeName.JOBID));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testJobID()
+	{
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
+		JDFSignal sig = jmf.getSignal(0);
+		JDFResourceQuParams rqp = sig.appendResourceQuParams();
+		rqp.setJobID("j1");
+		rqp.setJobPartID("p1");
+		sig.appendResourceInfo();
+
+		KElement xjmf = new JDFToXJDF().convert(jmf);
+
+		assertNull(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/@JobID", null));
+		assertNull(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/@JobPartID", null));
+		assertEquals("j1", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@JobID", null));
+		assertEquals("p1", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@JobPartID", null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testExposedMedia()
+	{
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
+
+		JDFSignal sig = jmf.getSignal(0);
+		sig.appendResourceQuParams().setJobID("j1");
+
+		JDFResourceInfo ri = sig.appendResourceInfo();
+		JDFExposedMedia xm = (JDFExposedMedia) ri.appendResource(ElementName.EXPOSEDMEDIA);
+		xm.setProductID("pid");
+		JDFMedia media = xm.appendMedia();
+		media.setBrand("plate");
+
+		JDFToXJDF jdfToXJDF = new JDFToXJDF();
+		KElement xjmf = jdfToXJDF.convert(jmf);
+
+		KElement sr = xjmf.getElement("SignalResource");
+		assertEquals(sr.numChildElements(ElementName.RESOURCEINFO, null), 2);
+		assertEquals(sr.getChildrenByTagName(XJDFConstants.ResourceSet, null, null, false, true, 0).size(), 2);
 	}
 
 	/**

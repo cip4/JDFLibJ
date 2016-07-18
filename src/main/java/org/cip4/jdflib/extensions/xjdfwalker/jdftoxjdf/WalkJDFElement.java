@@ -82,6 +82,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -509,7 +510,7 @@ public class WalkJDFElement extends WalkElement
 	 */
 	protected void setSetAttributes(final KElement resourceSet, final KElement rl, final JDFResource linkRoot)
 	{
-		resourceSet.setAttribute("Name", jdfToXJDF.getSetName(linkRoot));
+		resourceSet.setAttribute(AttributeName.NAME, jdfToXJDF.getSetName(linkRoot));
 		resourceSet.setAttributes(rl);
 		//TODO orientation + coordinate system stuff
 		resourceSet.removeAttribute(AttributeName.RREF);
@@ -519,6 +520,11 @@ public class WalkJDFElement extends WalkElement
 		resourceSet.removeAttribute(AttributeName.MINAMOUNT);
 		resourceSet.removeAttribute(AttributeName.MAXAMOUNT);
 		resourceSet.removeAttribute(AttributeName.ACTUALAMOUNT);
+		if (rl instanceof JDFResourceInfo)
+		{
+			resourceSet.removeAttribute(AttributeName.JOBID);
+			resourceSet.removeAttribute(AttributeName.JOBPARTID);
+		}
 		if (jdfToXJDF.isSingleNode())
 		{
 			setDependent(resourceSet, rl, linkRoot);

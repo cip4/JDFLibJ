@@ -493,7 +493,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(KElement e)
 		{
-			return (e instanceof JDFAmountPool) && e.getDeepParent(ElementName.AUDITPOOL, 0) == null;
+			return (e instanceof JDFAmountPool) && e.getDeepParent(ElementName.AUDITPOOL, 0) == null && e.getDeepParent(XJDFConstants.XJMF, 0) == null;
 		}
 	}
 

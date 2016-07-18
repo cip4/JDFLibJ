@@ -126,7 +126,39 @@ public class WalkResourceInfo extends WalkJDFSubElement
 			}
 		}
 		moveToResourceSet((JDFResourceInfo) eNew);
+		updateInfos((JDFResourceInfo) eNew);
 		return eNew;
+	}
+
+	void updateInfos(JDFResourceInfo eNew)
+	{
+		VElement v = eNew.getChildElementVector(XJDFConstants.ResourceSet, null);
+		int size = v.size();
+		if (size > 1)
+		{
+			KElement parent = eNew.getParentNode_KElement();
+			if (parent != null)
+			{
+				int n = 0;
+				VElement vRI = new VElement();
+				vRI.add(eNew);
+				for (int i = 1; i < size; i++)
+				{
+					vRI.add(parent.copyElement(eNew, null));
+				}
+				for (KElement ri : vRI)
+				{
+					for (int ii = size - 1; ii >= 0; ii--)
+					{
+						if (ii != n)
+						{
+							ri.removeChild(XJDFConstants.ResourceSet, null, ii);
+						}
+					}
+					n++;
+				}
+			}
+		}
 	}
 
 	/**
@@ -137,13 +169,17 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	private void moveToResourceSet(JDFResourceInfo ri)
 	{
 		VJDFAttributeMap vPartMap = ri.getPartMapVector();
-		String resName = ri.getResourceName();
-		KElement set = ri.getChildWithAttribute(XJDFConstants.ResourceSet, AttributeName.NAME, m_spawnInfo, resName, 0, true);
+		String resName = ri.getXPathAttribute("ResourceSet/@Name", null);
+		KElement set = ri.getChildWithAttribute(XJDFConstants.ResourceSet, AttributeName.NAME, null, resName, 0, true);
 		if (set == null)
 		{
 			set = ri.appendElement(XJDFConstants.ResourceSet);
 			set.setAttribute(AttributeName.NAME, resName);
 		}
+
+		set.moveAttribute(AttributeName.PROCESSUSAGE, ri);
+		set.moveAttribute(AttributeName.ORIENTATION, ri);
+
 		SetHelper sh = new SetHelper(set);
 		Vector<PartitionHelper> newParts = sh.getCreatePartitions(vPartMap, false);
 		for (PartitionHelper ph : newParts)
@@ -151,6 +187,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 			//TODO use correct amounts
 			ph.setAmount(ri.getActualAmount(), null, true);
 		}
+		ri.removeAttribute(AttributeName.RESOURCENAME);
 	}
 
 	/**
@@ -170,6 +207,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	@Override
 	protected void updateAttributes(JDFAttributeMap map)
 	{
+		map.remove(AttributeName.LOTCONTROLLED);
 		map.remove(AttributeName.DEVICEID);
 		map.remove(AttributeName.LEVEL);
 		super.updateAttributes(map);
