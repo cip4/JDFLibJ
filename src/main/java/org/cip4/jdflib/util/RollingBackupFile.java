@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -181,10 +181,10 @@ public class RollingBackupFile extends File
 		HashMap<Integer, File> map = getNameMap();
 		for (int i = nBackup; i > 0; i--)
 		{
-			File newFile = map.get(new Integer(i - 1));
+			File newFile = map.get(Integer.valueOf(i - 1));
 			if (newFile != null)
 			{
-				File oldFile = map.get(new Integer(i));
+				File oldFile = map.get(Integer.valueOf(i));
 				if (oldFile != null && oldFile.exists())
 				{
 					oldFile.delete();

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,7 +74,6 @@ package org.cip4.jdflib.util;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -82,7 +81,8 @@ import org.junit.Test;
  * 
  * 08.12.2008
  */
-public class RollingBackupTest extends JDFTestCaseBase {
+public class RollingBackupTest extends JDFTestCaseBase
+{
 	private File dir;
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -90,34 +90,38 @@ public class RollingBackupTest extends JDFTestCaseBase {
 	 * @throws Exception x
 	 */
 	@Test
-	public void testConstruct() throws Exception {
+	public void testConstruct() throws Exception
+	{
 		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
 		final RollingBackupFile rbf = new RollingBackupFile(backRoot, 4);
-		Assert.assertTrue(rbf.createNewFile());
+		assertTrue(rbf.createNewFile());
 
 		final File rbf2 = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
-		Assert.assertTrue(rbf2.exists());
+		assertTrue(rbf2.exists());
 	}
 
 	/**
 	 * @throws Exception x
 	 */
 	@Test
-	public void testGetNewFile() throws Exception {
+	public void testGetNewFile() throws Exception
+	{
 		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
 		final RollingBackupFile rbf = new RollingBackupFile(backRoot, 4);
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++)
+		{
 			rbf.getNewFile();
-			Assert.assertTrue(rbf.createNewFile());
-			Assert.assertEquals(dir.listFiles().length, Math.min(i + 1, 5));
+			assertTrue(rbf.createNewFile());
+			assertEquals(dir.listFiles().length, Math.min(i + 1, 5));
 		}
 		final File backRoot2 = FileUtil.getFileInDirectory(dir, new File("Roll2.xml"));
 		final RollingBackupFile rbf2 = new RollingBackupFile(backRoot2.getPath(), 4);
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++)
+		{
 			rbf2.getNewFile();
-			Assert.assertTrue(rbf2.createNewFile());
-			Assert.assertEquals(dir.listFiles().length, Math.min(5 + i + 1, 5 + 5));
+			assertTrue(rbf2.createNewFile());
+			assertEquals(dir.listFiles().length, Math.min(5 + i + 1, 5 + 5));
 		}
 	}
 
@@ -125,14 +129,16 @@ public class RollingBackupTest extends JDFTestCaseBase {
 	 * @throws Exception x
 	 */
 	@Test
-	public void testGetNewFileWithExtension() throws Exception {
+	public void testGetNewFileWithExtension() throws Exception
+	{
 		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
 		final RollingBackupFile rbf = new RollingBackupFile(backRoot, 4);
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++)
+		{
 			File ff = rbf.getNewFile("txt" + (i % 3));
-			Assert.assertTrue(ff.createNewFile());
-			Assert.assertEquals(dir.listFiles().length, Math.min(i + 1, 5));
+			assertTrue(ff.createNewFile());
+			assertEquals(dir.listFiles().length, Math.min(i + 1, 5));
 		}
 	}
 
@@ -140,10 +146,12 @@ public class RollingBackupTest extends JDFTestCaseBase {
 	 * @throws Exception x
 	 */
 	@Test
-	public void testGetNewFileWithDotExtension() throws Exception {
+	public void testGetNewFileWithDotExtension() throws Exception
+	{
 		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
 		final RollingBackupFile rbf = new RollingBackupFile(backRoot, 42);
-		for (int i = 0; i < 30; i++) {
+		for (int i = 0; i < 30; i++)
+		{
 			File ff = rbf.getNewFile();
 			ff.createNewFile();
 			File ff1 = rbf.getNewFile(".foo.txt");
@@ -157,22 +165,26 @@ public class RollingBackupTest extends JDFTestCaseBase {
 	 * @throws Exception x
 	 */
 	@Test
-	public void testGetOldFile() throws Exception {
+	public void testGetOldFile() throws Exception
+	{
 		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
 		final RollingBackupFile rbf = new RollingBackupFile(backRoot, 4);
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++)
+		{
 			rbf.getNewFile();
-			Assert.assertTrue(rbf.createNewFile());
-			Assert.assertEquals(dir.listFiles().length, Math.min(i + 1, 5));
+			assertTrue(rbf.createNewFile());
+			assertEquals(dir.listFiles().length, Math.min(i + 1, 5));
 		}
-		Assert.assertEquals(rbf.getOldFile(0), rbf);
-		for (int i = 1; i < 4; i++) {
-			Assert.assertNotNull(rbf.getOldFile(i));
-			Assert.assertNotSame(rbf.getOldFile(i), rbf);
+		assertEquals(rbf.getOldFile(0), rbf);
+		for (int i = 1; i < 4; i++)
+		{
+			assertNotNull(rbf.getOldFile(i));
+			assertNotSame(rbf.getOldFile(i), rbf);
 		}
-		for (int i = 5; i < 14; i++) {
-			Assert.assertNull(rbf.getOldFile(i));
+		for (int i = 5; i < 14; i++)
+		{
+			assertNull(rbf.getOldFile(i));
 		}
 	}
 
@@ -180,17 +192,19 @@ public class RollingBackupTest extends JDFTestCaseBase {
 	 * @throws Exception x
 	 */
 	@Test
-	public void testClearAll() throws Exception {
+	public void testClearAll() throws Exception
+	{
 		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
 		final RollingBackupFile rbf = new RollingBackupFile(backRoot, 4);
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++)
+		{
 			rbf.getNewFile();
-			Assert.assertTrue(rbf.createNewFile());
-			Assert.assertEquals("File " + i, dir.listFiles().length, Math.min(i + 1, 5));
+			assertTrue(rbf.createNewFile());
+			assertEquals("File " + i, dir.listFiles().length, Math.min(i + 1, 5));
 		}
 		rbf.clearAll();
-		Assert.assertEquals(dir.listFiles().length, 0);
+		assertEquals(dir.listFiles().length, 0);
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -199,7 +213,8 @@ public class RollingBackupTest extends JDFTestCaseBase {
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
-	public void setUp() throws Exception {
+	public void setUp() throws Exception
+	{
 		super.setUp();
 		dir = FileUtil.getFileInDirectory(new File(sm_dirTestDataTemp), new File("Rolling"));
 		FileUtil.deleteAll(dir);
