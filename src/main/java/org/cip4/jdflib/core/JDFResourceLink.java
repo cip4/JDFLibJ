@@ -1113,9 +1113,9 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		for (int i = 0; i < vmParts.size(); i++)
 		{
 			final VElement vr = resRoot.getPartitionVector(vmParts.elementAt(i), partUsage);
-			for (int j = 0; j < vr.size(); j++)
+			for (KElement e : vr)
 			{
-				final JDFResource targ = (JDFResource) vr.get(j);
+				final JDFResource targ = (JDFResource) e;
 				final VElement leaves = targ.getLeaves(false);
 				for (int k = 0; k < leaves.size(); k++)
 				{
@@ -1124,11 +1124,11 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 					{
 						leaf = (JDFResource) leaf.getParentNode();
 					}
-					v.appendUnique(leaf);
+					v.add(leaf);
 				}
 			}
 		}
-
+		v.unify();
 		return v.isEmpty() ? null : v;
 	}
 

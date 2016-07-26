@@ -80,7 +80,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.Charset;
 
 import javax.mail.BodyPart;
 import javax.mail.Multipart;
@@ -206,6 +205,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("foo%20bar", UrlUtil.escape("foo bar", true));
 		assertEquals("%e2%82%ac", UrlUtil.escape("€", true));
 		assertEquals("€", UrlUtil.escape("€", false));
+		assertEquals("%23", UrlUtil.escape("#", false));
 		assertEquals(UrlUtil.escape("世界中のあらゆる情", false), "世界中のあらゆる情");
 	}
 
@@ -661,19 +661,18 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 		assertEquals("file://a/b/c.txt", UrlUtil.uncToUrl("\\\\a\\b\\c.txt", true));
 		String unc = "\\\\a\\b\\c ä.txt";
-		assertEquals("file://a/b/c%20%c3%a4.txt", UrlUtil.uncToUrl(unc, true));
+		String url = UrlUtil.uncToUrl(unc, true);
+		assertEquals("file://a/b/c%20%c3%a4.txt", url);
 		String unc2 = unc;
-		System.out.println("ENCODING: " + System.getProperty("file.encoding"));
-		System.out.println("ENCODING: " + Charset.defaultCharset());
 
 		for (int i = 0; i < 10; i++)
 		{
-			System.out.println(unc);
-			System.out.println("-----------");
-			unc = UrlUtil.urlToUNC(UrlUtil.uncToUrl(unc, true));
-
+			url = UrlUtil.uncToUrl(unc, true);
+			unc = UrlUtil.urlToUNC(url);
 		}
 		assertEquals(unc, unc2);
+
+		assertEquals("file://a/a%23", UrlUtil.uncToUrl("\\\\a\\a#", false));
 	}
 
 	/**
@@ -685,6 +684,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("a%5cb", UrlUtil.urlToUNC("file:a%5cb"));
 		assertEquals("a%25", UrlUtil.urlToUNC("file:a%2525"));
 		assertEquals("a b", UrlUtil.urlToUNC("file:a%20b"));
+		assertEquals("a b#", UrlUtil.urlToUNC("file:a%20b%23"));
 		assertEquals("a%2fb\\d", UrlUtil.urlToUNC("file:a%2fb/d"));
 		assertEquals("\\\\host\\dir\\file", UrlUtil.urlToUNC("\\\\host\\dir\\file"));
 		assertEquals("\\\\host\\dir\\file", UrlUtil.urlToUNC("//host/dir/file"));
@@ -997,6 +997,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.unEscape("aaa%"), "aaa%");
 		assertEquals(UrlUtil.unEscape("%2"), "%2");
 		assertEquals(UrlUtil.unEscape("%20"), " ");
+		assertEquals(UrlUtil.unEscape("%23"), "#");
 		assertEquals(UrlUtil.unEscape("世界中のあらゆる情"), "世界中のあらゆる情");
 	}
 

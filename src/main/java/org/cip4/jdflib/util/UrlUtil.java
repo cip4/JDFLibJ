@@ -408,7 +408,7 @@ public class UrlUtil
 		relPath = StringUtil.replaceChar(relPath, '\\', "/", 0);
 		final byte[] utf8 = StringUtil.getUTF8Bytes(relPath);
 		relPath = new String(utf8);
-		relPath = StringUtil.escape(relPath, m_URIEscape, "%", 16, 2, 0x21, bEscape128 ? 128 : -1);
+		relPath = UrlUtil.escape(relPath, bEscape128);
 		return relPath;
 	}
 

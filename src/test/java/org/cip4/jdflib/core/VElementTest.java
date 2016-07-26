@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -103,6 +103,19 @@ public class VElementTest extends JDFTestCaseBase
 		assertEquals(v.size(), 2);
 		v.addAll(v);
 		assertEquals(v.size(), 4);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testAppendUnique()
+	{
+		final KElement e = KElement.createRoot("doc", null);
+		final VElement v = new VElement();
+		for (int i = 0; i < 4; i++)
+			v.appendUnique(e.appendElement("a"));
+		assertEquals(" identical but different elements are appended!", v.size(), 4);
 
 	}
 

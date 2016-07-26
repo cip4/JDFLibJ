@@ -237,11 +237,7 @@ public class VElement extends Vector<KElement>
 	 */
 	public void appendUnique(final KElement elem)
 	{
-		if (elem == null)
-		{
-			return;
-		}
-		if (!(index(elem) >= 0))
+		if (elem != null && !contains(elem))
 		{
 			addElement(elem);
 		}

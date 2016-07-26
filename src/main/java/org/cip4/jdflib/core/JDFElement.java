@@ -4841,10 +4841,10 @@ public class JDFElement extends KElement
 			final KElement kEl = getTarget(sRefs.elementAt(i), AttributeName.ID);
 			if (kEl instanceof JDFResource)
 			{
-				v.appendUnique(kEl);
+				v.add(kEl);
 			}
 		}
-
+		v.unify();
 		return v;
 	}
 

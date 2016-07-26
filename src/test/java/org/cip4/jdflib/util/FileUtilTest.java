@@ -431,7 +431,56 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertTrue(FileUtil.forceDelete(f));
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testMoveFileNull() throws Exception
+	{
+		final byte[] b = new byte[5555];
+		for (int i = 0; i < 5555; i++)
+		{
+			b[i] = (byte) (i % 256);
+		}
+		final ByteArrayInputStream is = new ByteArrayInputStream(b);
+		is.close();
+		final File f = new File(sm_dirTestDataTemp + "streamMove.dat");
+		if (f.exists())
+		{
+			f.delete();
+		}
+		FileUtil.streamToFile(is, f.getPath());
+
+		assertFalse(FileUtil.moveFile(null, f));
+		assertFalse(FileUtil.moveFile(f, null));
+		assertFalse(FileUtil.moveFile(null, null));
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testMoveFileEquals() throws Exception
+	{
+		final byte[] b = new byte[5555];
+		for (int i = 0; i < 5555; i++)
+		{
+			b[i] = (byte) (i % 256);
+		}
+		final ByteArrayInputStream is = new ByteArrayInputStream(b);
+		is.close();
+		final File f = new File(sm_dirTestDataTemp + "streamMove.dat");
+		if (f.exists())
+		{
+			f.delete();
+		}
+		FileUtil.streamToFile(is, f.getPath());
+		final File f2 = new File(sm_dirTestDataTemp + "streamMove.dat");
+
+		assertTrue(FileUtil.moveFile(f2, f));
+		assertTrue(FileUtil.moveFile(new File("file://a"), new File("file://a")));
+	}
+
 	/**
 	 * @throws Exception
 	 */
@@ -465,14 +514,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertTrue(FileUtil.moveFile(f2, f3));
 		assertFalse(f2.exists());
 		assertTrue(f3.length() > 50000);
-
-		assertFalse(FileUtil.moveFile(null, f2));
-		assertFalse(FileUtil.moveFile(f2, null));
-		assertFalse(FileUtil.moveFile(null, null));
-
 	}
-
-	// /////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * @throws Exception
