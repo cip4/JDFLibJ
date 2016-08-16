@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -168,6 +168,23 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 
 	/**
 	 * 
+	 * check problems with special characters
+	 * @throws IOException
+	 */
+	@Test
+	public void testNonAscii() throws IOException
+	{
+		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		final File file = new File(theHFDir + File.separator + "42 äöü €.txt");
+		file.createNewFile();
+		assertTrue(file.exists());
+		ThreadUtil.sleep(2000);
+		assertFalse(file.exists());
+		assertEquals(tmpHFDir.listFiles().length, 0, 0);
+	}
+
+	/**
+	 * 
 	 * simple creation
 	 * @throws IOException
 	 */
@@ -229,5 +246,34 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		assertEquals(ok.listFiles().length, 42, 13);
 		assertEquals(tmpHFDir.listFiles().length, 0, 0);
 		assertEquals(error.listFiles().length, 42, 13);
+	}
+
+	/**
+	 * 
+	 * ok or error folder testing
+	 * @throws Exception
+	 */
+	@Test
+	public void testOKErrorNonAscii() throws Exception
+	{
+		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		File error = new File("error");
+		hf.setErrorStorage(error);
+		File ok = new File("ok");
+		hf.setOKStorage(ok);
+		hf.setMaxStore(42);
+		ThreadUtil.sleep(1000);
+		for (int i = 0; i < 4; i++)
+		{
+
+			final File file = new File(theHFDir + File.separator + "f ä ö ü €" + i + ".txt");
+			file.createNewFile();
+		}
+		ok = FileUtil.getFileInDirectory(theHFDir, ok);
+		error = FileUtil.getFileInDirectory(theHFDir, error);
+		ThreadUtil.sleep(2000);
+		assertEquals(ok.listFiles().length, 2, 1);
+		assertEquals(tmpHFDir.listFiles().length, 0, 1);
+		assertEquals(error.listFiles().length, 2, 1);
 	}
 }

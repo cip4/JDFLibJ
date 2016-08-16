@@ -131,6 +131,26 @@ public class ZipReaderTest extends JDFTestCaseBase
 	}
 
 	/**
+	* 
+	*  
+	*/
+	@Test
+	public void testNonAscii()
+	{
+		File zipFile = new File(sm_dirTestDataTemp + "äöü.zip");
+		FileUtil.copyFile(new File(sm_dirTestData + "schema.zip"), zipFile);
+		ZipReader r = new ZipReader(zipFile);
+		ZipEntry e = r.getEntry("schema/Conditions.jdf");
+		assertNotNull(r.getInputStream());
+		e = r.getEntry("schema/BarcodeDetails.jdf");
+		assertNotNull(r.getInputStream());
+		e = r.getEntry("schema/Conditions.jdf");
+		assertNotNull(r.getInputStream());
+		assertNotNull(e);
+		r.close();
+	}
+
+	/**
 	 * 
 	 *  
 	 */
@@ -519,7 +539,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 			Vector<ZipEntry> vze = zr.getEntries();
 			for (ZipEntry ze : vze)
 			{
-				log.info(ze.getName());
+				log.info("Class name: " + ze.getName());
 			}
 		}
 	}
