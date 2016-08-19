@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of Processes in
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress (CIP4). All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -1596,13 +1596,13 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 			final VElement vResLeaves = r.getLeaves(false);
 			final HashSet<JDFPartAmount> hsDone = new HashSet<JDFPartAmount>();
-			for (int i = 0; i < vResLeaves.size(); i++)
+			for (KElement leaf : vResLeaves)
 			{
-				final JDFResource resLeaf = (JDFResource) vResLeaves.get(i);
+				final JDFResource resLeaf = (JDFResource) leaf;
 				final JDFAttributeMap m = resLeaf.getPartMap();
 				if (m == null || m.overlapMap(mPart))
 				{
-					final JDFAttributeMap m2 = m == null ? mPart : m.getOrMap(mPart);
+					final JDFAttributeMap m2 = (m == null) ? mPart : m.getOrMap(mPart);
 
 					final JDFPartAmount pa = amountPool.getPartAmount(mPart);
 					// don't count ParAmount elements with multiple parts more than once
@@ -1611,7 +1611,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 						double delta = AmountPoolHelper.getAmountPoolMinDouble(this, attName, m2);
 						if (m2.get(AttributeName.CONDITION) == null)
 						{
-							JDFAttributeMap m2Good = m2 == null ? new JDFAttributeMap() : m2.clone();
+							JDFAttributeMap m2Good = m2.clone();
 							m2Good.put(AttributeName.CONDITION, "Good");
 							double deltaGood = AmountPoolHelper.getAmountPoolMinDouble(this, attName, m2Good);
 							delta = Math.max(delta, deltaGood);

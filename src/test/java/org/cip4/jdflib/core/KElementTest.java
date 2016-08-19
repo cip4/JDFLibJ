@@ -1183,6 +1183,21 @@ public class KElementTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testMoveAttributeNS()
+	{
+		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
+		final KElement root = doc.getRoot();
+		final KElement a = root.appendElement("a");
+		a.setAttribute("foo:a1", "aa", "foo.ns");
+		a.moveAttribute("bar:a1", a, "foo:a1", "bar.ns", "foo.ns");
+		assertNull(a.getAttribute("foo:a1", "foo.ns", null));
+		assertEquals(a.getAttribute("a1", "bar.ns", null), "aa");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testMoveAttribute()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");

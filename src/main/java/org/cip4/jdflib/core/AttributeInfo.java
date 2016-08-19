@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -568,23 +568,24 @@ public class AttributeInfo
 		{
 			if (setRange == null)
 			{
-				setRange = new HashSet<EnumAttributeType>();
-				setRange.add(EnumAttributeType.DateTimeRange);
-				setRange.add(EnumAttributeType.DateTimeRangeList);
-				setRange.add(EnumAttributeType.DurationRange);
-				setRange.add(EnumAttributeType.DurationRangeList);
-				setRange.add(EnumAttributeType.IntegerRange);
-				setRange.add(EnumAttributeType.IntegerRangeList);
-				setRange.add(EnumAttributeType.NameRange);
-				setRange.add(EnumAttributeType.NameRangeList);
-				setRange.add(EnumAttributeType.NumberRange);
-				setRange.add(EnumAttributeType.NumberRangeList);
-				setRange.add(EnumAttributeType.RectangleRange);
-				setRange.add(EnumAttributeType.RectangleRangeList);
-				setRange.add(EnumAttributeType.ShapeRange);
-				setRange.add(EnumAttributeType.ShapeRangeList);
-				setRange.add(EnumAttributeType.XYPairRange);
-				setRange.add(EnumAttributeType.XYPairRangeList);
+				HashSet<EnumAttributeType> setRangeLocal = new HashSet<EnumAttributeType>();
+				setRangeLocal.add(EnumAttributeType.DateTimeRange);
+				setRangeLocal.add(EnumAttributeType.DateTimeRangeList);
+				setRangeLocal.add(EnumAttributeType.DurationRange);
+				setRangeLocal.add(EnumAttributeType.DurationRangeList);
+				setRangeLocal.add(EnumAttributeType.IntegerRange);
+				setRangeLocal.add(EnumAttributeType.IntegerRangeList);
+				setRangeLocal.add(EnumAttributeType.NameRange);
+				setRangeLocal.add(EnumAttributeType.NameRangeList);
+				setRangeLocal.add(EnumAttributeType.NumberRange);
+				setRangeLocal.add(EnumAttributeType.NumberRangeList);
+				setRangeLocal.add(EnumAttributeType.RectangleRange);
+				setRangeLocal.add(EnumAttributeType.RectangleRangeList);
+				setRangeLocal.add(EnumAttributeType.ShapeRange);
+				setRangeLocal.add(EnumAttributeType.ShapeRangeList);
+				setRangeLocal.add(EnumAttributeType.XYPairRange);
+				setRangeLocal.add(EnumAttributeType.XYPairRangeList);
+				setRange = setRangeLocal;
 			}
 
 			return test == null ? false : setRange.contains(test);

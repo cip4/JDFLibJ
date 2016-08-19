@@ -4655,7 +4655,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param attrib where to move the attribute
 	 * @param src element to move from
 	 * @param srcAttrib the attribute to move. If empty string, the string attrib is used as source and target
-	 * @param nameSpaceURI the namespaceURI to search in
+	 * @param nameSpaceURI the namespaceURI to set
 	 * @param srcNameSpaceURI
 	 */
 	public void moveAttribute(final String attrib, KElement src, final String srcAttrib, String nameSpaceURI, final String srcNameSpaceURI)
@@ -4686,7 +4686,7 @@ public class KElement extends ElementNSImpl implements Element
 			src.removeAttribute(strSrcAttrib, strNameSpace);
 		}
 
-		setAttribute(attrib, attribute);
+		setAttribute(attrib, attribute, nameSpaceURI);
 	}
 
 	/**

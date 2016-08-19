@@ -3560,11 +3560,11 @@ public class JDFElement extends KElement
 	{
 		if (hasAttribute(AttributeName.ID))
 		{
-			return this.getAttribute(AttributeName.ID, null, null);
+			return getAttribute(AttributeName.ID, null, null);
 		}
 		else if ((strName == null) || strName.equals(JDFConstants.EMPTYSTRING))
 		{
-			String local = "";
+			String local = JDFConstants.EMPTYSTRING;
 			final JDFNode n = getJDFRoot();
 			if (n != null)
 			{
@@ -3575,14 +3575,14 @@ public class JDFElement extends KElement
 					local = "." + StringUtil.rightStr(local, 6) + ".";
 				}
 			}
-			final JDFJMF m = getJMFRoot();
-			if (m != null)
+			final JDFJMF jmf = getJMFRoot();
+			if (jmf != null)
 			{
-				local = m.getSenderID();
-				if (!isWildCard(local))
+				local = jmf.getSenderID();
+				if (StringUtil.getNonEmpty(local) != null)
 				{
 					local = StringUtil.replaceCharSet(local, " \t\n\f", null, 0);
-					local = "." + Math.abs(local.hashCode()) + ".";
+					local = "." + (local.hashCode() & 0xffff) % 10000 + ".";
 				}
 			}
 
@@ -6400,65 +6400,71 @@ public class JDFElement extends KElement
 	 */
 	static public String getValueForNewAttribute(final KElement ke, final String attName)
 	{
-
-		if (!(ke instanceof JDFElement))
+		if (StringUtil.getNonEmpty(attName) == null)
+		{
+			return null;
+		}
+		else if (!(ke instanceof JDFElement))
+		{
 			return "New Value";
+		}
+
 		JDFElement e = (JDFElement) ke;
 		// return the default if it exists
-		final JDFAttributeMap map = (e == null) ? null : e.getDefaultAttributeMap();
+		final JDFAttributeMap map = e.getDefaultAttributeMap();
 		if (map != null && map.containsKey(attName))
 		{
 			return map.get(attName);
 		}
 
-		if (attName.equals("ID"))
+		if (AttributeName.ID.equals(attName))
 		{
 			return "ID" + KElement.uniqueID(0);
 		}
 
-		if (attName.equals("JobID"))
+		if (AttributeName.JOBID.equals(attName))
 		{
 			return "J" + KElement.uniqueID(0);
 		}
 
-		if (attName.equals("JobPartID") && (e instanceof JDFElement))
+		if (AttributeName.JOBPARTID.equals(attName))
 		{
 			return e.generateDotID("JobPartID", null);
 		}
 
-		if (attName.equals("Status") && (e instanceof JDFNode))
+		if (AttributeName.STATUS.equals(attName) && (e instanceof JDFNode))
 		{
 			return "Waiting";
 		}
 
-		if (attName.equals("Status") && (e instanceof JDFResource))
+		if (AttributeName.STATUS.equals(attName) && (e instanceof JDFResource))
 		{
 			return "Unavailable";
 		}
 
-		if (attName.equals("Type") && (e instanceof JDFNode))
+		if (AttributeName.TYPE.equals(attName) && (e instanceof JDFNode))
 		{
 			return "Product";
 		}
 
-		if (attName.equals("Type") && (e instanceof JDFMessage))
+		if (AttributeName.TYPE.equals(attName) && (e instanceof JDFMessage))
 		{
 			return "Status";
 		}
 
-		if (attName.equals("TimeStamp"))
+		if (AttributeName.TIMESTAMP.equals(attName))
 		{
 			return new JDFDate().getDateTimeISO();
 		}
 
-		if (attName.equals("ComponentType"))
+		if (AttributeName.COMPONENTTYPE.equals(attName))
 		{
 			return "PartialProduct";
 		}
 
-		if (attName.equals("PreviewType"))
+		if (AttributeName.PREVIEWTYPE.equals(attName))
 		{
-			return "Separation";
+			return AttributeName.SEPARATION;
 		}
 
 		if (e != null)

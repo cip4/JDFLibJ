@@ -744,8 +744,9 @@ public class JDFElementTest extends JDFTestCaseBase
 	@Test
 	public void testGetValueForNewAttribute()
 	{
-		JDFElement e = new JDFDoc("JMF").getJMFRoot();
+		JDFElement e = new JDFDoc(ElementName.JMF).getJMFRoot();
 		assertTrue(JDFElement.getValueForNewAttribute(e, "ID").startsWith("I"));
+		assertNull(JDFElement.getValueForNewAttribute(e, null));
 	}
 
 	/**
@@ -1281,15 +1282,13 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
-
 	/**
 	 * 
 	 */
 	@Test
 	public void testAppendAnchor()
 	{
-		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFElement e = doc.getJDFRoot();
 		final HashSet<String> m = new HashSet<String>();
 		final KElement e2 = e.appendElement("e2");
@@ -1307,7 +1306,21 @@ public class JDFElementTest extends JDFTestCaseBase
 		}
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
+	/**
+	* 
+	*/
+	@Test
+	public void testAppendAnchorJMF()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF e = doc.getJMFRoot();
+		e.setSenderID("Sender");
+		final KElement e2 = e.appendElement("e2");
+		final JDFElement appendElement = (JDFElement) e2.appendElement("FooBar");
+		final String s = appendElement.appendAnchor(null);
+		assertEquals(s, appendElement.getID());
+		assertTrue(StringUtil.matchesSimple(s, "*.????.*"));
+	}
 
 	/**
 	 * 
