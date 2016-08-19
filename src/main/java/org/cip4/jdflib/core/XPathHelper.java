@@ -616,7 +616,8 @@ class XPathHelper
 	void removeXPathElement(final String path)
 	{
 		final int pos = path.lastIndexOf(JDFCoreConstants.AET);
-		if (pos == -1)
+		final int pos2 = path.lastIndexOf(']');
+		if (pos == -1 || pos < pos2)
 		{
 			final KElement kEle = getXPathElement(path);
 			if (kEle != null)

@@ -193,6 +193,21 @@ public class XPathHelperTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testRemoveXPathElem()
+	{
+		XMLDoc d = new XMLDoc("x", null);
+		KElement root = d.getRoot();
+		KElement y = root.appendElement("y");
+		y.setAttribute("a", "b");
+		assertEquals(y, root.getXPathElement("y[@a=\"b\"]"));
+		root.removeXPathElement("y[@a=\"b\"]");
+		assertNull(root.getXPathElement("y[@a=\"b\"]"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testSetXPathValuesNSElem()
 	{
 		XMLDoc d = new XMLDoc("x", null);
