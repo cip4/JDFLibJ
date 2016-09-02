@@ -536,7 +536,13 @@ public class FileUtil
 			{
 				bufferedInputStream.read(b);
 				md5.update(b);
-				bufferedInputStream.skip(f.length() - 2l * maxSize);
+				long toSkip = f.length() - 2l * maxSize;
+				long skipped = 42;
+				while (toSkip > 0 && skipped != 0)
+				{
+					skipped = bufferedInputStream.skip(toSkip);
+					toSkip -= skipped;
+				}
 				bufferedInputStream.read(b);
 				md5.update(b);
 				bufferedInputStream.close();
