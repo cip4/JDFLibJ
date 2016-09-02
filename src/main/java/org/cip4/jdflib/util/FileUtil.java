@@ -508,15 +508,15 @@ public class FileUtil
 	/**
 	 * get an md5 from a file that reads at most 2*maxSize bytes of which maxSize are from the front and maxSize are from the back
 	 * @param f
-	 * @param maxSize
+	 * @param maxSize if<=0 always use entir length
 	 * @return
 	 */
 	public static byte[] getFastMD5(File f, int maxSize)
 	{
 		BufferedInputStream bufferedInputStream = getBufferedInputStream(f);
-		if (bufferedInputStream == null || !f.canRead() || maxSize < 1)
+		if (bufferedInputStream == null || !f.canRead())
 			return null;
-		if (f.length() <= maxSize * 2)
+		if (maxSize <= 0 || f.length() <= maxSize * 2)
 		{
 			return StreamUtil.getMD5(bufferedInputStream);
 		}
