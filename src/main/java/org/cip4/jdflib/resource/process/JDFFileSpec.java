@@ -254,4 +254,20 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 		return getLongAttribute(AttributeName.FILESIZE, null, -1);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoFileSpec#setCheckSum(java.lang.String)
+	 */
+	public void setCheckSum(byte[] value)
+	{
+		super.setCheckSum(StringUtil.setHexBinaryBytes(value, -1));
+	}
+
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoFileSpec#setCheckSum(java.lang.String)
+	 */
+	public byte[] getCheckSumBytes()
+	{
+		return StringUtil.getHexBinaryBytes(getCheckSum().getBytes());
+	}
+
 }

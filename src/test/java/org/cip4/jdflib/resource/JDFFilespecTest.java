@@ -142,6 +142,22 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	}
 
 	/**
+	* 
+	*/
+	@Test
+	public void testSetCheckSum()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode n = doc.getJDFRoot();
+		final JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, null, EnumUsage.Input, null, null, null, null);
+		byte[] b = new byte[] { 0, (byte) 255, (byte) 0x99, 64 };
+		fs.setCheckSum(b);
+		assertEquals(fs.getCheckSum(), "00FF9940");
+		assertEquals(new String(fs.getCheckSumBytes()), new String(b));
+
+	}
+
+	/**
 	 * @throws Exception x
 	 */
 	@Test
