@@ -81,12 +81,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.LogFactory;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.ifaces.IStreamWriter;
 
@@ -499,6 +503,79 @@ public class FileUtil
 			return null;
 		}
 		return fil;
+	}
+
+	/**
+	 * get an md5 from a file that reads at most 2*maxSize bytes of which maxSize are from the front and maxSize are from the back
+	 * @param f
+	 * @param maxSize
+	 * @return
+	 */
+	public static byte[] getFastMD5(File f, int maxSize)
+	{
+		BufferedInputStream bufferedInputStream = getBufferedInputStream(f);
+		if (bufferedInputStream == null || !f.canRead() || maxSize < 1)
+			return null;
+		if (f.length() <= maxSize * 2)
+		{
+			return StreamUtil.getMD5(bufferedInputStream);
+		}
+		byte[] b = new byte[maxSize];
+		MessageDigest md5;
+		try
+		{
+			md5 = MessageDigest.getInstance(JDFConstants.MD5);
+		}
+		catch (NoSuchAlgorithmException e)
+		{
+			md5 = null;
+		}
+		try
+		{
+			synchronized (md5)
+			{
+				bufferedInputStream.read(b);
+				md5.update(b);
+				bufferedInputStream.skip(f.length() - 2l * maxSize);
+				bufferedInputStream.read(b);
+				md5.update(b);
+				bufferedInputStream.close();
+				return md5.digest();
+			}
+		}
+		catch (IOException e)
+		{
+			return null;
+		}
+	}
+
+	/**
+	 * same as streanToFile but also calculates the md5 hash of the stream
+	 * 
+	 * @param fis the InputStream to read - if null nothing happens
+	 * @param fil the file to stream to
+	 * @return the file created by the stream, null if snafu
+	 */
+	public static MyPair<File, byte[]> streamToMD5File(final InputStream fis, final File fil)
+	{
+		if (fis == null)
+			return null;
+
+		MessageDigest md5;
+		try
+		{
+			md5 = MessageDigest.getInstance(JDFConstants.MD5);
+		}
+		catch (NoSuchAlgorithmException e)
+		{
+			md5 = null;
+		}
+		synchronized (md5)
+		{
+			DigestInputStream dis = new DigestInputStream(fis, md5);
+			File fRet = streamToFile(dis, fil);
+			return fRet == null ? null : new MyPair<File, byte[]>(fRet, md5.digest());
+		}
 	}
 
 	/**

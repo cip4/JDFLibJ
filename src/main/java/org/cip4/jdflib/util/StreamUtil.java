@@ -80,7 +80,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 
@@ -153,6 +156,46 @@ public class StreamUtil
 			final String s = bytes == null ? null : new String(bytes, 0, bytes.length);
 			return StringUtil.tokenize(s, "\n\r", false);
 		}
+	}
+
+	/**
+	 * calculate the md5 hash
+	 * @param is
+	 * @return
+	 */
+	public static byte[] getMD5(InputStream is)
+	{
+		if (is == null)
+			return null;
+		MessageDigest md5;
+		try
+		{
+			md5 = MessageDigest.getInstance(JDFConstants.MD5);
+		}
+		catch (NoSuchAlgorithmException e)
+		{
+			md5 = null;
+		}
+		synchronized (md5)
+		{
+			byte[] b = new byte[100000];
+			int n;
+			try
+			{
+				n = is.read(b);
+				while (n > 0)
+				{
+					md5.update(b, 0, n);
+					n = is.read(b);
+				}
+				return md5.digest();
+			}
+			catch (IOException e)
+			{
+				return null;
+			}
+		}
+
 	}
 
 	/**

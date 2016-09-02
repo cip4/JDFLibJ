@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -341,6 +341,8 @@ public abstract class JDFConstants extends JDFCoreConstants
 	public static final String JREF = "jRef";
 	/** * */
 	public static final String MACHINE = "Machine";
+	/** * */
+	public static final String MD5 = "MD5";
 	/** * */
 	public static final String MERGEID = "MergeID";
 	/** * */

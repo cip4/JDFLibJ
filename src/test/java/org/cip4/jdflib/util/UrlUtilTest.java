@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -531,6 +531,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 			assertEquals(UrlUtil.stringToURL("File:/c:/blöd €.pdf"), new URL(UrlUtil.fileToUrl(new File("c:/blöd €.pdf"), true)));
 			assertEquals(UrlUtil.stringToURL("c:\\xyz\\").getPath(), new URL("File:/c:/xyz").getPath());
 			assertEquals(UrlUtil.stringToURL("File:/c:/xyz/").getPath(), new URL("File:/c:/xyz").getPath());
+			assertEquals(UrlUtil.stringToURL("File:\\\\host\\dir\\dir2\\file.pdf").getPath(), new URL("File://host/dir/dir2/file.pdf").getPath());
+			assertEquals(UrlUtil.stringToURL("File:\\\\host\\dir\\dir2/dir3/file.pdf").getPath(), new URL("File://host/dir/dir2/dir3/file.pdf").getPath());
 			assertEquals(UrlUtil.stringToURL("c:\\xyz").getPath(), new URL("File:/c:/xyz").getPath());
 
 			assertEquals(UrlUtil.stringToURL("file://foo/ .txt"), new URL("file://foo/%20.txt"));
@@ -673,6 +675,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(unc, unc2);
 
 		assertEquals("file://a/a%23", UrlUtil.uncToUrl("\\\\a\\a#", false));
+		assertEquals("file://a/b/c.d", UrlUtil.uncToUrl("\\\\a/b/c.d", false));
 	}
 
 	/**

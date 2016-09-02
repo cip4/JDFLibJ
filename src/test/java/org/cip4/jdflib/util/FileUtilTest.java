@@ -94,7 +94,6 @@ import org.junit.Test;
 public class FileUtilTest extends JDFTestCaseBase
 {
 
-	// /////////////////////////////////////////////////////////////////////////
 	/**
 	 * 
 	 */
@@ -208,6 +207,22 @@ public class FileUtilTest extends JDFTestCaseBase
 		{
 			assertEquals(b[i % 66666], b3[i]);
 		}
+	}
+
+	/**
+	 * @throws Exception x
+	 */
+	@Test
+	public void testgetFastMD5() throws Exception
+	{
+		byte[] b1 = FileUtil.getFastMD5(new File(sm_dirTestData + "dir1.zip"), 1000000);
+		byte[] b2 = FileUtil.getFastMD5(new File(sm_dirTestData + "dir1.zip"), 1000000);
+		for (int i = 0; i < b1.length; i++)
+		{
+			assertEquals(b1[i], b2[i]);
+		}
+		byte[] b3 = FileUtil.getFastMD5(new File(sm_dirTestData + "FixVersion.jdf"), 1000000);
+		assertNotNull(b3);
 	}
 
 	/**
@@ -355,7 +370,6 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertEquals(listFilesWithExpression.length, 1);
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
 	/**
 	 * @throws Exception
 	 */
@@ -621,7 +635,6 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertNull(FileUtil.moveFileToDir(null, null));
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
 	/**
 	 * @throws Exception
 	 */
@@ -671,7 +684,39 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertNull("null safe", FileUtil.streamToFile(null, sm_dirTestDataTemp + "stream2.dat"));
 	}
 
-	// ////////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testStreamToMD5File() throws Exception
+	{
+		final byte[] b = new byte[55555];
+		for (int i = 0; i < 55555; i++)
+		{
+			b[i] = (byte) (i % 256);
+		}
+		final ByteArrayIOStream is = new ByteArrayIOStream(b);
+		is.close();
+		final File f = new File(sm_dirTestDataTemp + "stream.dat");
+		if (f.exists())
+		{
+			f.delete();
+		}
+
+		MyPair<File, byte[]> pair = FileUtil.streamToMD5File(is.getInputStream(), f);
+		assertTrue(f.exists());
+		assertEquals(f, pair.a);
+		assertEquals(f.length(), 55555, 2000);
+		assertNotNull(pair.b);
+
+		f.delete();
+		MyPair<File, byte[]> pair2 = FileUtil.streamToMD5File(is.getInputStream(), f);
+		assertTrue(f.exists());
+		assertEquals(f, pair2.a);
+		assertEquals(f.length(), 55555, 2000);
+		assertEquals(pair.a, pair2.a);
+	}
+
 	/**
 	 * 
 	 */

@@ -117,7 +117,24 @@ public class StreamUtilTest extends JDFTestCaseBase
 		StreamUtil.reset(null);
 		s.read(b);
 		assertNotSame(new String(b), "%PDF");
-
 	}
 
+	/**
+	 * 
+	 *  
+	 * @throws IOException
+	 */
+	@Test
+	public void testGetMD5() throws IOException
+	{
+		InputStream s = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
+		byte[] md5 = StreamUtil.getMD5(s);
+		assertNotNull(md5);
+		s.close();
+		InputStream s2 = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
+		byte[] md52 = StreamUtil.getMD5(s2);
+		for (int i = 0; i < md5.length; i++)
+			assertEquals(md5[i], md52[i]);
+		s2.close();
+	}
 }

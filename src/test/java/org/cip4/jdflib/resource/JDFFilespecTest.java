@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -113,10 +113,10 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	@Test
 	public void testSetAbsoluteURL()
 	{
-		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
-		final JDFFileSpec fs = (JDFFileSpec) n.addResource("FileSpec", null, EnumUsage.Input, null, null, null, null);
-		final JDFFileSpec fs2 = (JDFFileSpec) n.addResource("FileSpec", null, EnumUsage.Input, null, null, null, null);
+		final JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, null, EnumUsage.Input, null, null, null, null);
+		final JDFFileSpec fs2 = (JDFFileSpec) n.addResource(ElementName.FILESPEC, null, EnumUsage.Input, null, null, null, null);
 		if (FileUtil.isWindows())
 		{
 			fs.setAbsoluteFileURL(new File("C:\\ist blöd\\fnord is €"), false);
@@ -125,6 +125,20 @@ public class JDFFilespecTest extends JDFTestCaseBase
 			assertEquals(fs2.getURL(), "file:///C:/ist%20bl%c3%b6d/fnord%20is%20%e2%82%ac");
 
 		}
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public void testSetFileSize()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode n = doc.getJDFRoot();
+		final JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, null, EnumUsage.Input, null, null, null, null);
+		assertEquals(-1l, fs.getFileSizeLong());
+		fs.setFileSize(42);
+		assertEquals(42l, fs.getFileSizeLong());
 	}
 
 	/**
@@ -158,7 +172,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	@Test
 	public void testLocalGetURLStream() throws Exception
 	{
-		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFRunList rli = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
 		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "localjdf.jdf", 2, false);
 		rli = rli.addRun("dummy.txt", 0, -1);
