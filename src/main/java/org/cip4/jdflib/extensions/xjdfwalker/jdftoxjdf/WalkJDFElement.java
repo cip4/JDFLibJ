@@ -542,21 +542,22 @@ public class WalkJDFElement extends WalkElement
 		if (JDFResourceLink.isResourceLink(rl))
 		{
 			final JDFResourceLink resLink = (JDFResourceLink) rl;
-			final JDFNode rootIn = resLink.getParentJDF();
-			final JDFResource resInRoot = rootIn == null ? linkRoot : (JDFResource) rootIn.getChildWithAttribute(null, AttributeName.ID, null, resLink.getrRef(), 0, false);
+			final JDFResource resInRoot = resLink.getTarget();
 			if (resInRoot != null)
 			{
 				final VElement vCreators = resInRoot.getCreator(EnumUsage.Input.equals(resLink.getUsage()));
 				if (vCreators != null)
 				{
-					final int size = vCreators.size();
-					for (int i = 0; i < size; i++)
+					for (KElement creator : vCreators)
 					{
-						final JDFNode depNode = (JDFNode) vCreators.elementAt(i);
-						final KElement dependent = resourceSet.appendElement(XJDFConstants.Dependent);
-						dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
-						dependent.copyAttribute(AttributeName.JMFURL, depNode, null, null, null);
-						dependent.copyAttribute(AttributeName.JOBPARTID, depNode, null, null, null);
+						final JDFNode depNode = (JDFNode) creator;
+						if (!depNode.isGroupNode())
+						{
+							final KElement dependent = resourceSet.appendElement(XJDFConstants.Dependent);
+							dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
+							dependent.copyAttribute(AttributeName.JMFURL, depNode, null, null, null);
+							dependent.copyAttribute(AttributeName.JOBPARTID, depNode, null, null, null);
+						}
 					}
 				}
 			}

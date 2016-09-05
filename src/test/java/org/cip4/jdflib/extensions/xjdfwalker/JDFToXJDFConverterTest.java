@@ -142,12 +142,12 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	public void testRefMediaFromInline()
 	{
 		JDFToXJDF conv = new JDFToXJDF();
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ImageSetting);
 		JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
 		xm.appendMedia().setMediaSetCount(42);
 		KElement xjdf = conv.convert(n);
-		assertNotNull(new XJDFHelper(xjdf).getSet("Media", 0));
+		assertNotNull(new XJDFHelper(xjdf).getSet(ElementName.MEDIA, 0));
 	}
 
 	/**
@@ -157,6 +157,42 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	public void testDeliveryIntent()
 	{
 		_testDeliveryIntent();
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testDependent()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setJobPartID("p");
+		n.setType(EnumType.ProcessGroup);
+		JDFNode nc1 = n.addJDFNode(EnumType.ConventionalPrinting);
+		JDFNode nf1 = n.addJDFNode(EnumType.Folding);
+		JDFNode nc2 = n.addJDFNode(EnumType.ConventionalPrinting);
+		JDFNode nf2 = n.addJDFNode(EnumType.Folding);
+		JDFResource r = n.addResource(ElementName.COMPONENT, null);
+		JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		r1.setDescriptiveName("d1");
+		JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		r2.setDescriptiveName("d2");
+		nc1.linkResource(r1, EnumUsage.Output, null);
+		nf1.linkResource(r1, EnumUsage.Input, null);
+		nc2.linkResource(r2, EnumUsage.Output, null);
+		nf2.linkResource(r2, EnumUsage.Input, null);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		conv.setSingleNode(true);
+		KElement xjdff1 = conv.convert(nf1);
+		KElement xjdff2 = conv.convert(nf2);
+		KElement xjdfc1 = conv.convert(nc1);
+		KElement xjdfc2 = conv.convert(nc2);
+
+		assertEquals(xjdff1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.1");
+		assertEquals(xjdfc1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.2");
+		assertEquals(xjdff2.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.3");
+		assertEquals(xjdfc2.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.4");
 	}
 
 	/**

@@ -168,6 +168,33 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testGetCreatorPartition()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ProcessGroup);
+		JDFNode nc1 = n.addJDFNode(EnumType.ConventionalPrinting);
+		JDFNode nf1 = n.addJDFNode(EnumType.Folding);
+		JDFNode nc2 = n.addJDFNode(EnumType.ConventionalPrinting);
+		JDFNode nf2 = n.addJDFNode(EnumType.Folding);
+		JDFResource r = n.addResource(ElementName.COMPONENT, null);
+		JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		nc1.linkResource(r1, EnumUsage.Output, null);
+		nf1.linkResource(r1, EnumUsage.Input, null);
+		nc2.linkResource(r2, EnumUsage.Output, null);
+		nf2.linkResource(r2, EnumUsage.Input, null);
+		assertEquals(r1.getCreator(true).size(), 1);
+		assertEquals(r1.getCreator(true).get(0), nc1);
+		assertEquals(r2.getCreator(true).size(), 1);
+		assertEquals(r2.getCreator(true).get(0), nc2);
+		assertEquals(r1.getCreator(false).get(0), nf1);
+		assertEquals(r2.getCreator(false).get(0), nf2);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testUnPartition()
 	{
 		final JDFDoc doc = creatXMDoc();

@@ -213,6 +213,33 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testGetPredecessorsPartition()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ProcessGroup);
+		JDFNode nc1 = n.addJDFNode(EnumType.ConventionalPrinting);
+		JDFNode nf1 = n.addJDFNode(EnumType.Folding);
+		JDFNode nc2 = n.addJDFNode(EnumType.ConventionalPrinting);
+		JDFNode nf2 = n.addJDFNode(EnumType.Folding);
+		JDFResource r = n.addResource(ElementName.COMPONENT, null);
+		JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		nc1.linkResource(r1, EnumUsage.Output, null);
+		nf1.linkResource(r1, EnumUsage.Input, null);
+		nc2.linkResource(r2, EnumUsage.Output, null);
+		nf2.linkResource(r2, EnumUsage.Input, null);
+		assertEquals(nf1.getPredecessors(true, true).size(), 1);
+		assertEquals(nf1.getPredecessors(true, true).get(0), nc1);
+		assertEquals(nf2.getPredecessors(true, true).size(), 1);
+		assertEquals(nf2.getPredecessors(true, true).get(0), nc2);
+		assertEquals(nc1.getPredecessors(false, true).get(0), nf1);
+		assertEquals(nc2.getPredecessors(false, true).get(0), nf2);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testGetRefPartition()
 	{
 		final JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData + "GetReferencedPartition.jdf");
