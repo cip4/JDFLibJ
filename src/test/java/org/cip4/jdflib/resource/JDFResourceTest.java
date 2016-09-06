@@ -1536,6 +1536,25 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	@Test
+	public void testGetPartitionSelf()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFResource media = n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
+
+		final JDFMedia mp1 = (JDFMedia) media.addPartition(EnumPartIDKey.SignatureName, "sig1");
+		JDFMedia m2 = (JDFMedia) mp1.addPartition(EnumPartIDKey.SheetName, "sh1");
+
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put(EnumPartIDKey.SignatureName, "sig1");
+		map.put(EnumPartIDKey.SheetName, "sh1");
+		assertEquals(m2, m2.getPartition(map, null));
+		assertEquals(m2, mp1.getPartition(map, null));
+	}
+
+	/**
 	 * test whether getpartition works for when inconsistently called
 	 */
 	@Test
@@ -2979,7 +2998,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
-		final JDFResource media = n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
+		final JDFResource media = n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
 
 		final JDFMedia mp1 = (JDFMedia) media.addPartition(EnumPartIDKey.SignatureName, "sig1");
 		mp1.addPartition(EnumPartIDKey.SheetName, "sh1");
@@ -2998,8 +3017,26 @@ public class JDFResourceTest extends JDFTestCaseBase
 		}
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetCreatePartitionSelf()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFResource media = n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
+
+		final JDFMedia mp1 = (JDFMedia) media.addPartition(EnumPartIDKey.SignatureName, "sig1");
+		JDFMedia m2 = (JDFMedia) mp1.addPartition(EnumPartIDKey.SheetName, "sh1");
+
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put(EnumPartIDKey.SignatureName, "sig1");
+		map.put(EnumPartIDKey.SheetName, "sh1");
+		assertEquals(m2, m2.getCreatePartition(map, new VString("SignatureName SheetName", null)));
+		assertEquals(m2, m2.getCreatePartition(map, null));
+		assertEquals(m2, mp1.getCreatePartition(map, new VString("SignatureName SheetName", null)));
+		assertEquals(m2, mp1.getCreatePartition(map, null));
+	}
 
 	/**
 	 * 
