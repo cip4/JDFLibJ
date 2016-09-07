@@ -495,7 +495,7 @@ public class KElementTest extends JDFTestCaseBase
 		}
 		System.gc();
 		final long l2 = d.getDocMemoryUsed();
-		assertEquals("memory nice and low", l2, l, 100000);
+		assertEquals("memory nice and low", l2, l, 400000);
 	}
 
 	/**
