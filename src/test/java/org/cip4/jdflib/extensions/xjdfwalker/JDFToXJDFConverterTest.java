@@ -73,6 +73,7 @@ import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPolarity;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
@@ -96,6 +97,7 @@ import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -505,6 +507,21 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFJMF jmfResp = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.PipeClose);
 		xjmf = conv.makeNewJMF(jmfResp);
 		assertEquals(xjmf.getElement(null).getLocalName(), "ResponsePipeControl");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testDeviceInfoStatus()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
+		JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
+		di.appendDevice().setDeviceID("id");
+		di.setDeviceStatus(EnumDeviceStatus.Running);
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@Status", null), "Production");
 	}
 
 	/**

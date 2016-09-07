@@ -109,7 +109,11 @@ public class WalkResource extends WalkJDFElement
 			newResLeaf.removeAttribute(AttributeName.ID);
 			moveAttribsToBase(xjdf, newResLeaf);
 			removeDeprecatedResourceAttribs(r, newResLeaf);
-			removeDeprecatedResourceAttribs(r, xjdf);
+			final boolean bRoot = isRootXJDFResource(xjdf);
+			if (bRoot)
+			{
+				removeDeprecatedResourceAttribs(r, xjdf);
+			}
 		}
 		return newResLeaf;
 	}
@@ -120,8 +124,7 @@ public class WalkResource extends WalkJDFElement
 	 */
 	protected void moveAttribsToBase(final KElement xjdf, final KElement newResLeaf)
 	{
-		final String localName = xjdf.getLocalName();
-		final boolean bRoot = "Intent".equals(localName) || "Parameter".equals(localName) || "Resource".equals(localName);
+		final boolean bRoot = isRootXJDFResource(xjdf);
 		VString resAttribs = JDFToXJDFDataCache.getResAttribs();
 		for (String attrib : resAttribs)
 		{
@@ -137,6 +140,18 @@ public class WalkResource extends WalkJDFElement
 				}
 			}
 		}
+	}
+
+	/**
+	 * 
+	 * @param xjdf
+	 * @return
+	 */
+	private boolean isRootXJDFResource(final KElement xjdf)
+	{
+		final String localName = xjdf == null ? null : xjdf.getLocalName();
+		final boolean bRoot = XJDFConstants.INTENT.equals(localName) || "Parameter".equals(localName) || XJDFConstants.Resource.equals(localName);
+		return bRoot;
 	}
 
 	/**
