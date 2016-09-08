@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,8 @@
  */
 package org.cip4.jdflib.elementwalker;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.ifaces.IElementConverter;
 import org.cip4.jdflib.ifaces.IURLSetter;
@@ -115,6 +117,8 @@ public class URLMapper extends BaseElementWalker implements IElementConverter
 
 	private final String baseIn;
 	private final String baseOut;
+	private boolean wantLog;
+	final Log log;
 
 	/**
 	 * @param baseIn the input (to be modified) base url
@@ -126,6 +130,24 @@ public class URLMapper extends BaseElementWalker implements IElementConverter
 		super(new BaseWalkerFactory());
 		this.baseIn = baseIn;
 		this.baseOut = baseOut;
+		wantLog = false;
+		log = LogFactory.getLog(getClass());
+	}
+
+	/**
+	 * @return the wantLog
+	 */
+	protected boolean isWantLog()
+	{
+		return wantLog;
+	}
+
+	/**
+	 * @param wantLog the wantLog to set
+	 */
+	protected void setWantLog(boolean wantLog)
+	{
+		this.wantLog = wantLog;
 	}
 
 	/**
@@ -156,12 +178,20 @@ public class URLMapper extends BaseElementWalker implements IElementConverter
 		{
 			IURLSetter u = (IURLSetter) e;
 			String url = StringUtil.getNonEmpty(u.getURL());
-			if (url == null)
-				return e;
-			String relativeURL = UrlUtil.getLocalURL(baseIn, url);
-			if (relativeURL != null)
-				u.setURL(UrlUtil.getURLWithDirectory(baseOut, relativeURL));
-			return e; //  continue
+			if (url != null)
+			{
+				String relativeURL = UrlUtil.getLocalURL(baseIn, url);
+				if (relativeURL != null)
+				{
+					String newUrl = UrlUtil.getURLWithDirectory(baseOut, relativeURL);
+					u.setURL(newUrl);
+					if (wantLog)
+					{
+						log.info("renaming url from: " + url + " to " + newUrl);
+					}
+				}
+			}
+			return e;
 		}
 
 		/**

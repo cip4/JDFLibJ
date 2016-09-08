@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of Processes in
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress (CIP4). All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -219,35 +219,24 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 */
 	public void extendMap(final String strKey, final VString vsValues)
 	{
-		if (vsValues == null)
+		if (vsValues == null || vsValues.isEmpty())
 		{
 			return;
 		}
 
-		final int vsValueSize = vsValues.size();
-		if (vsValueSize == 0)
-		{
-			return;
-		}
+		final VJDFAttributeMap vec = new VJDFAttributeMap();
 
-		final Vector<JDFAttributeMap> vec = new Vector<JDFAttributeMap>();
-
-		final int size = size();
-		for (int i = 0; i < size; i++)
+		for (JDFAttributeMap map : this)
 		{
-			final JDFAttributeMap map = elementAt(i);
-			for (int v = 0; v < vsValueSize; v++)
+			for (String val : vsValues)
 			{
 				final JDFAttributeMap mapNew = new JDFAttributeMap(map);
-				mapNew.put(strKey, vsValues.get(v));
+				mapNew.put(strKey, val);
 				vec.add(mapNew);
 			}
 		}
 
-		if (!vec.isEmpty())
-		{
-			setVector(vec);
-		}
+		setVector(vec);
 	}
 
 	/**

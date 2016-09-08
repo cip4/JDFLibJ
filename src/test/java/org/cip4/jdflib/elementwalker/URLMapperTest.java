@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -74,28 +74,44 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
- * TODO Please insert comment!
- * @author rainerprosi
+ *  
+ * @author rainer prosi
  * @date Apr 21, 2011
  */
 public class URLMapperTest extends JDFTestCaseBase
 {
 	/**
 	 * 
-	 * TODO Please insert comment!
+	 *  
 	 */
 	@Test
 	public void testMapToUrl()
 	{
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, EnumUsage.Input);
 		fs.setURL("file://foo/bar/a.b");
 		URLMapper m = new URLMapper("File://foo", "http://www.foo.com");
 		m.convert(n);
-		Assert.assertEquals(fs.getURL(), "http://www.foo.com/bar/a.b");
+		assertEquals(fs.getURL(), "http://www.foo.com/bar/a.b");
+	}
 
+	/**
+	* 
+	*  
+	*/
+	@Test
+	public void testWantLog()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, EnumUsage.Input);
+		fs.setURL("file://foo/bar/a.b");
+		URLMapper m = new URLMapper("File://foo", "http://www.foo.com");
+		m.setWantLog(true);
+		m.convert(n);
+		assertTrue(m.isWantLog());
+		assertEquals(fs.getURL(), "http://www.foo.com/bar/a.b");
 	}
 }

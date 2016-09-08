@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -444,6 +444,20 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		assertEquals("mixed ordering", v, v2);
 		v2.add(m1);
 		assertFalse("mixed ordering -other cardinality ", v.equals(v2));
+	}
+
+	/**
+	 *  
+	 */
+	@Test
+	public void testExtendMap()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		v.add(m1);
+		v.extendMap("b", new VString("b1 b2 b3", null));
+
+		assertEquals(3, v.size());
 	}
 
 	/**
