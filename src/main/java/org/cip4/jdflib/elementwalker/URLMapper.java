@@ -137,7 +137,7 @@ public class URLMapper extends BaseElementWalker implements IElementConverter
 	/**
 	 * @return the wantLog
 	 */
-	protected boolean isWantLog()
+	public boolean isWantLog()
 	{
 		return wantLog;
 	}
@@ -145,7 +145,7 @@ public class URLMapper extends BaseElementWalker implements IElementConverter
 	/**
 	 * @param wantLog the wantLog to set
 	 */
-	protected void setWantLog(boolean wantLog)
+	public void setWantLog(boolean wantLog)
 	{
 		this.wantLog = wantLog;
 	}
