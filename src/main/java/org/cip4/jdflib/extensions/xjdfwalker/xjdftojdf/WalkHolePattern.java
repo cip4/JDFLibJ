@@ -110,16 +110,11 @@ public class WalkHolePattern extends WalkXElement
 
 		if (bHoleLine)
 		{
-			e.renameElement(ElementName.HOLELINE, null);
 			JDFHole hole = (JDFHole) e.appendElement(ElementName.HOLE);
 			JDFAttributeMap map = e.getAttributeMap();
 			map.remove(AttributeName.PITCH);
 			hole.setAttributes(map);
 			e.removeAttributes(map.getKeys());
-		}
-		else
-		{
-			e.renameElement(ElementName.HOLE, null);
 		}
 		return super.walk(e, trackElem);
 	}
@@ -131,6 +126,17 @@ public class WalkHolePattern extends WalkXElement
 	public VString getElementNames()
 	{
 		return new VString(XJDFConstants.HolePattern, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getJDFName(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	String getJDFName(KElement e)
+	{
+		boolean bHoleLine = e.hasAttribute(AttributeName.PITCH);
+		return bHoleLine ? ElementName.HOLELINE : ElementName.HOLE;
+
 	}
 
 }

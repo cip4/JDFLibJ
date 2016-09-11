@@ -74,12 +74,14 @@ import java.util.Vector;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoInsertingParams.EnumMethod;
 import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPolarity;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
@@ -91,6 +93,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
@@ -106,13 +109,16 @@ import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFHoleLine;
+import org.cip4.jdflib.resource.JDFInsert;
 import org.cip4.jdflib.resource.JDFInterpretingParams;
+import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
+import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
@@ -600,7 +606,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	@Test
 	public void testRefSelf()
 	{
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFResource r1 = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
 
 		r1.refElement(r1);
@@ -612,6 +618,60 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		conv.setRetainAll(true);
 		xjdf = conv.makeNewJDF(n, null);
 		assertNotNull(xjdf);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testResLocked()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFResource r1 = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
+		r1.setDescriptiveName("c1");
+
+		r1.setLocked(true);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.makeNewJDF(n, null);
+		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/@Locked", null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testResUnit()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFResource r1 = n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		r1.setDescriptiveName("c1");
+		r1.setUnit("parsec");
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.makeNewJDF(n, null);
+		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@Unit", null));
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/@Unit", null), "parsec");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testSourceRes()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFResource m1 = n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		m1.setDescriptiveName("mmm");
+		JDFResource r1 = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
+		r1.setDescriptiveName("c1");
+		r1.appendSourceResource().refElement(m1);
+
+		r1.setLocked(true);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.makeNewJDF(n, null);
+		assertTrue(xjdf.toXML().indexOf(ElementName.SOURCERESOURCE) < 0);
 	}
 
 	/**
@@ -704,12 +764,35 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.makeNewJDF(n, null);
-		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditNotification/Notification/@Author", null), "me");
+		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditNotification/Notification/Comment", null), "foo");
 
 		XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
 		JDFDoc d = invert.convert(xjdf);
 		JDFNode n2 = d.getJDFRoot();
-		assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.Notification, null, null).getEmployee(0).getDescriptiveName(), "me");
+		JDFAudit audit = n2.getAuditPool().getAudit(0, EnumAuditType.Notification, null, null);
+		assertEquals(audit.getEmployee(0).getDescriptiveName(), "me");
+		assertEquals(audit.getComment(0).getText(), "foo");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testNotificationEvent()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.getCreateAuditPool().addNotification(EnumClass.Error, "me", null).appendEvent().setEventID("IDfoo");
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.makeNewJDF(n, null);
+		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditNotification/Notification/Event/@EventID", null), "IDfoo");
+
+		XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
+		JDFDoc d = invert.convert(xjdf);
+		JDFNode n2 = d.getJDFRoot();
+		JDFNotification audit = (JDFNotification) n2.getAuditPool().getAudit(0, EnumAuditType.Notification, null, null);
+		assertEquals(audit.getEmployee(0).getDescriptiveName(), "me");
+		assertEquals(audit.getEvent().getEventID(), "IDfoo");
 	}
 
 	/**
@@ -734,6 +817,45 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testAuditCreated()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditCreated/@AgentName", null), "CIP4 JDF Writer Java");
+
+		XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
+		JDFDoc d = invert.convert(xjdf);
+		JDFNode n2 = d.getJDFRoot();
+		assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.Created, null, null).getAgentName(), "CIP4 JDF Writer Java");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testAuditProcessRun()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		VJDFAttributeMap maps = new VJDFAttributeMap();
+		maps.add(new JDFAttributeMap("SheetName", "s1"));
+		maps.add(new JDFAttributeMap("SheetName", "s2"));
+		n.getCreateAuditPool().addProcessRun(EnumNodeStatus.Completed, "me", maps);
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditProcessRun/ProcessRun/Part[1]/@SheetName", null), "s1");
+		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditProcessRun/ProcessRun/Part[2]/@SheetName", null), "s2");
+
+		XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
+		JDFDoc d = invert.convert(xjdf);
+		JDFNode n2 = d.getJDFRoot();
+		assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.ProcessRun, null, null).getPartMapVector().size(), 2);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testAmountPoolWaste()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -750,6 +872,21 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		KElement xjdf = conv.convert(n);
 
 		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/@ActualWaste", null), "15");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testAncestorPool()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.appendAncestorPool().appendAncestor().setJobPartID("j2");
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+
+		assertNull(xjdf.getElement(ElementName.ANCESTORPOOL));
 	}
 
 	/**
@@ -805,6 +942,23 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.convert(n);
 		assertTrue(xjdf.getXPathAttribute("ResourceSet/Resource/Component/@MediaRef", null).startsWith(med.getID()));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testLocation()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Input);
+		c.setDescriptiveName("c1");
+		c.appendLocationElement().setLocID("L1");
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Part/@Location", null), "L1");
 	}
 
 	/**
@@ -971,6 +1125,23 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		KElement holepattern = ph.getResource().getElement("HolePattern");
 		assertNotNull(holepattern);
 		assertEquals(holepattern.getAttribute(AttributeName.CENTER), "3 4");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testInsertingIntent()
+	{
+		JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setType(EnumType.Product);
+		JDFInsertingIntent insi = (JDFInsertingIntent) node.addResource(ElementName.INSERTINGINTENT, EnumUsage.Input);
+		JDFInsert ins = insi.appendInsertList().appendInsert();
+		ins.appendMethod().setActual(EnumMethod.BindIn);
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(node);
+
+		assertNotNull(xjdf.getXPathElement("ProductList/Product/Intent[@Name=\"AssemblingIntent\"]/AssemblingIntent/BindIn"));
 	}
 
 	/**

@@ -71,11 +71,11 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
-import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -103,7 +103,6 @@ public class WalkResourceAudit extends WalkAudit
 	@Override
 	public KElement walk(KElement xjdf, final KElement jdf)
 	{
-		xjdf.renameElement(ElementName.RESOURCEAUDIT, null);
 		JDFResourceInfo ri = (JDFResourceInfo) xjdf.getElement(ElementName.RESOURCEINFO);
 		boolean foundLink = false;
 		while (ri != null)
@@ -158,7 +157,25 @@ public class WalkResourceAudit extends WalkAudit
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFPhaseTime || "AuditResource".equals(toCheck.getLocalName());
+		return "AuditResource".equals(toCheck.getLocalName());
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getJDFName(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	String getJDFName(KElement e)
+	{
+		return ElementName.RESOURCEAUDIT;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return VString.getVString("AuditResource", null);
 	}
 
 }

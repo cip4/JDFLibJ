@@ -68,9 +68,10 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.devicecapability.JDFDevCapPool;
-import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.JDFInsertList;
 
 /**
 * any matching class will be ignored and all children will be moved into the respective parent element
@@ -107,6 +108,15 @@ public class WalkSkip extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFDevCapPool || toCheck instanceof JDFDevCaps;
+		return toCheck instanceof JDFInsertList;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return VString.getVString(ElementName.INSERTLIST, null);
 	}
 }

@@ -70,9 +70,15 @@ package org.cip4.jdflib.extensions;
 
 public abstract class XJDFConstants
 {
+	public static final String AssemblingIntent = "AssemblingIntent";
+
+	public static final String AuditCreated = "AuditCreated";
+	public static final String AuditNotification = "AuditNotification";
+	public static final String AuditProcessRun = "AuditProcessRun";
 	public static final String AuditResource = "AuditResource";
 	public static final String AuditStatus = "AuditStatus";
 
+	public static final String BindIn = "BindIn";
 	public static final String BinderySignatureID = "BinderySignatureID";
 	public static final String BinderySignatureIDs = "BinderySignatureIDs";
 
@@ -109,4 +115,5 @@ public abstract class XJDFConstants
 
 	public static final String XJDF = "XJDF";
 	public static final String XJMF = "XJMF";
+
 }

@@ -130,4 +130,13 @@ public class WalkCreatedAudit extends WalkAudit
 		return new VString(ElementName.CREATED, null);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected String getXJDFName(KElement jdf)
+	{
+		return "AuditCreated";
+	}
+
 }

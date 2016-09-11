@@ -280,4 +280,13 @@ public class WalkColorIntent extends WalkIntentResource
 	{
 		return super.matches(toCheck) && (toCheck instanceof JDFColorIntent);
 	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return VString.getVString(ElementName.COLORINTENT, null);
+	}
 }

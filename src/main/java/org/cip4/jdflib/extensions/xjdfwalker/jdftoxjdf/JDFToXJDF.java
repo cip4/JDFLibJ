@@ -77,6 +77,7 @@ import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
@@ -477,11 +478,14 @@ public class JDFToXJDF extends PackageElementWalker
 			if (trackAudits)
 			{
 				JDFAuditPool auditPool = (JDFAuditPool) newRoot.getCreateElement(ElementName.AUDITPOOL);
-				boolean hasCreated = auditPool.hasChildElement(ElementName.CREATED, null);
-				JDFAudit c = hasCreated ? auditPool.addModified(null, null) : auditPool.addCreated(null, null);
-				c.setAgentName("JDF To XJDF Converter");
-				c.setAgentVersion(JDFAudit.getStaticAgentVersion());
-				c.setTimeStamp(new JDFDate());
+				boolean hasCreated = auditPool.hasChildElement(ElementName.CREATED, null) || auditPool.hasChildElement("AuditCreated", null);
+				if (!hasCreated)
+				{
+					KElement c = auditPool.appendElement("AuditCreated");
+					c.setAttribute(AttributeName.AGENTNAME, "JDF To XJDF Converter");
+					c.setAttribute(AttributeName.AGENTVERSION, JDFAudit.getStaticAgentVersion());
+					c.setAttribute(AttributeName.TIMESTAMP, new JDFDate().getDateTimeISO());
+				}
 			}
 		}
 		new RemoveEmpty().removEmptyElement(newRoot);

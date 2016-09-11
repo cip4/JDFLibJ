@@ -1125,7 +1125,7 @@ public class XJDFTest extends JDFTestCaseBase
 	public void testFromXJDFProductComment()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
-		xjdf = new XMLDoc("XJDF", null).getRoot();
+		xjdf = new XMLDoc(XJDFConstants.XJDF, null).getRoot();
 		xjdf.getCreateXPathElement("ProductList/Product/Comment").setText("bar");
 		final JDFDoc d = xCon.convert(xjdf);
 		assertNotNull(d);

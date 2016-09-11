@@ -212,20 +212,6 @@ public class WalkJDF extends WalkJDFElement
 	}
 
 	/**
-	 * @param xjdfElement
-	 */
-	@Override
-	protected void removeUnusedElements(final KElement xjdfElement)
-	{
-		// status is set only in the NodeInfo
-		xjdfElement.removeAttribute(AttributeName.STATUS);
-		xjdfElement.removeAttribute(AttributeName.STATUSDETAILS);
-		xjdfElement.removeAttribute(AttributeName.ACTIVATION);
-		xjdfElement.removeAttribute(AttributeName.TEMPLATE);
-		super.removeUnusedElements(xjdfElement);
-	}
-
-	/**
 	 * @param newRootP
 	 * @param types 
 	 */
@@ -285,8 +271,14 @@ public class WalkJDF extends WalkJDFElement
 	@Override
 	protected void updateAttributes(JDFAttributeMap map)
 	{
+		map.remove(AttributeName.ACTIVATION);
 		map.remove(AttributeName.MAXVERSION);
 		map.remove(AttributeName.STATUS);
+		map.remove(AttributeName.STATUSDETAILS);
+		map.remove(AttributeName.TEMPLATE);
+		map.remove(AttributeName.TEMPLATEID);
+		map.remove(AttributeName.TEMPLATEVERSION);
+		map.remove(AttributeName.VERSION);
 		super.updateAttributes(map);
 	}
 

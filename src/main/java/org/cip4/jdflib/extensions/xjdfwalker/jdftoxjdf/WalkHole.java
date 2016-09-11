@@ -90,17 +90,6 @@ public class WalkHole extends WalkInlineAllRes
 	}
 
 	/**
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		jdf.renameElement(XJDFConstants.HolePattern, null);
-		return super.walk(jdf, xjdf);
-	}
-
-	/**
 	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
 	 * @param toCheck
 	 * @return true if it matches
@@ -118,5 +107,14 @@ public class WalkHole extends WalkInlineAllRes
 	public VString getElementNames()
 	{
 		return new VString(ElementName.HOLE, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected String getXJDFName(KElement jdf)
+	{
+		return XJDFConstants.HolePattern;
 	}
 }

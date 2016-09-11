@@ -68,8 +68,10 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -94,7 +96,9 @@ public class WalkComment extends WalkXElement
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
 		//		fixAuthor(e);
-		return super.walk(e, trackElem);
+		KElement newJDF = super.walk(e, trackElem);
+		newJDF.setText(e.getText());
+		return newJDF;
 	}
 
 	/**
@@ -106,5 +110,16 @@ public class WalkComment extends WalkXElement
 	public boolean matches(final KElement toCheck)
 	{
 		return toCheck instanceof JDFComment;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void updateAttributes(KElement elem)
+	{
+		elem.renameAttribute(AttributeName.TYPE, AttributeName.NAME);
+		elem.renameAttribute(XJDFConstants.ExternalID, AttributeName.ID);
+		super.updateAttributes(elem);
 	}
 }

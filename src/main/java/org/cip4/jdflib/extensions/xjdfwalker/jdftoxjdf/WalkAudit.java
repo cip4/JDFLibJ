@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.KElement;
@@ -120,6 +121,21 @@ public class WalkAudit extends WalkJDFSubElement
 			a.setAuthor(emp.getDescriptiveName());
 			a.removeChildren(ElementName.EMPLOYEE, null, null);
 		}
-
 	}
+
+	/**
+	 * 
+	 * @param jdf
+	 * @param auditParent
+	 */
+	void moveToParentAudit(final KElement jdf, KElement auditParent)
+	{
+		auditParent.moveAttribute(AttributeName.AGENTNAME, jdf);
+		auditParent.moveAttribute(AttributeName.AGENTVERSION, jdf);
+		auditParent.moveAttribute(AttributeName.AUTHOR, jdf);
+		auditParent.moveAttribute(AttributeName.PERSONALID, jdf);
+		auditParent.moveAttribute(AttributeName.ID, jdf);
+		auditParent.moveAttribute(AttributeName.TIMESTAMP, jdf);
+	}
+
 }

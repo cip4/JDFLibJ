@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -88,10 +89,12 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFInsert;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
+import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
@@ -383,9 +386,9 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		XJDFHelper xjdf = new XJDFHelper("j1", null, null);
-		SetHelper sh = xjdf.getCreateResourceSet("Media", EnumUsage.Input);
-		PartitionHelper ph = sh.getCreatePartition(new JDFAttributeMap("SheetName", "S1"), true);
-		ph.setAmount(33, new JDFAttributeMap("SheetName", "S1"), true);
+		SetHelper sh = xjdf.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
+		PartitionHelper ph = sh.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+		ph.setAmount(33, new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
 		KElement e = xjdf.getRoot();
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
@@ -395,6 +398,28 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		JDFResourceLink rl = root.getLink(m, null);
 		assertNotNull(rl.getAmountPool());
 		assertNull(m.getElement("AmountPool"));
+	}
+
+	/**
+	*  
+	*  
+	*/
+	@Test
+	public void testAssemblingIntentBindIn()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		XJDFHelper xjdf = new XJDFHelper("j1", null, null);
+		ProductHelper ph = xjdf.appendProduct();
+		IntentHelper h = ph.appendIntent(XJDFConstants.AssemblingIntent);
+		h.getCreateResource().appendElement(XJDFConstants.BindIn);
+		JDFDoc jdf = xCon.convert(xjdf);
+		JDFNode root = jdf.getJDFRoot();
+		JDFInsertingIntent insertingIntent = (JDFInsertingIntent) root.getResource(ElementName.INSERTINGINTENT, EnumUsage.Input, 0);
+		assertNotNull(insertingIntent);
+		assertNotNull(insertingIntent.getInsertList());
+		JDFInsert insert = insertingIntent.getInsertList().getInsert(0);
+		assertNotNull(insert);
+		assertEquals(JDFIntentResource.guessActual(insert, "Method"), "BindIn");
 	}
 
 	/**

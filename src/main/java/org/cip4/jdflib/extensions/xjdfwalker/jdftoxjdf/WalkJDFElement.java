@@ -291,6 +291,7 @@ public class WalkJDFElement extends WalkElement
 			map.remove(AttributeName.SETTINGSPOLICY);
 			map.remove(AttributeName.MUSTHONOREXCEPTIONS);
 			map.remove(AttributeName.BESTEFFORTEXCEPTIONS);
+			map.remove(AttributeName.MAXVERSION);
 			map.remove(AttributeName.OPERATORINTERVENTIONEXCEPTIONS);
 			super.updateAttributes(map);
 		}
@@ -512,6 +513,9 @@ public class WalkJDFElement extends WalkElement
 	{
 		resourceSet.setAttribute(AttributeName.NAME, jdfToXJDF.getSetName(linkRoot));
 		resourceSet.setAttributes(rl);
+		if (linkRoot.hasAttribute(AttributeName.UNIT))
+			resourceSet.moveAttribute(AttributeName.UNIT, linkRoot);
+
 		//TODO orientation + coordinate system stuff
 		resourceSet.removeAttribute(AttributeName.RREF);
 		resourceSet.removeAttribute(AttributeName.RSUBREF);
@@ -555,8 +559,14 @@ public class WalkJDFElement extends WalkElement
 						{
 							final KElement dependent = resourceSet.appendElement(XJDFConstants.Dependent);
 							dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
-							dependent.copyAttribute(AttributeName.JMFURL, depNode, null, null, null);
-							dependent.copyAttribute(AttributeName.JOBPARTID, depNode, null, null, null);
+							dependent.copyAttribute(AttributeName.JMFURL, depNode);
+							dependent.copyAttribute(AttributeName.JOBPARTID, depNode);
+							dependent.setNonEmpty(AttributeName.PIPEPROTOCOL, resLink.getPipeProtocol());
+							dependent.copyAttribute(AttributeName.PIPEPAUSE, resLink);
+							dependent.copyAttribute(AttributeName.PIPERESUME, resLink);
+							dependent.setNonEmpty(AttributeName.PIPEPROTOCOL, resLink.getPipeProtocol());
+							dependent.setNonEmpty(AttributeName.PIPEID, linkRoot.getPipeID());
+							dependent.copyAttribute(AttributeName.PIPEPARTIDKEYS, resLink);
 						}
 					}
 				}

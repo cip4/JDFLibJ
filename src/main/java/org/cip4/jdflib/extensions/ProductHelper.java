@@ -132,12 +132,23 @@ public class ProductHelper extends BaseXJDFHelper
 		IntentHelper ih = getIntent(name);
 		if (ih == null)
 		{
-			KElement intent = theElement.appendElement(XJDFConstants.INTENT);
-			ih = new IntentHelper(intent);
-			intent.appendElement(name);
-			intent.setAttribute(AttributeName.NAME, name);
+			ih = appendIntent(name);
 		}
 		return ih;
+	}
+
+	/**
+	 * 
+	 * @param name
+	 * @param ih
+	 * @return
+	 */
+	public IntentHelper appendIntent(String name)
+	{
+		KElement intent = theElement.appendElement(XJDFConstants.INTENT);
+		intent.appendElement(name);
+		intent.setAttribute(AttributeName.NAME, name);
+		return new IntentHelper(intent);
 	}
 
 	/**

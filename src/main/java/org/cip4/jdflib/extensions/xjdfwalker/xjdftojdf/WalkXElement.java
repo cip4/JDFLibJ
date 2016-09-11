@@ -140,11 +140,10 @@ public class WalkXElement extends BaseWalker
 		}
 		else
 		{
-			final KElement e2 = trackElem.copyElement(e, null);
-			xjdfToJDFImpl.convertUnits(e2);
-			xjdfToJDFImpl.convertTilde(e2);
+			String nodeName = getJDFName(e);
+			final KElement e2 = trackElem.appendElement(nodeName);
+			e2.setAttributes(e);
 			fixNamespace(e2);
-			e2.removeChildren(null, null, null); // will be copied later
 			trackElem = e2;
 		}
 		xjdfToJDFImpl.convertUnits(trackElem);
@@ -159,6 +158,16 @@ public class WalkXElement extends BaseWalker
 		}
 		updateAttributes(trackElem);
 		return trackElem;
+	}
+
+	/**
+	 * 
+	 * @param e
+	 * @return
+	 */
+	String getJDFName(KElement e)
+	{
+		return e.getLocalName();
 	}
 
 	/**

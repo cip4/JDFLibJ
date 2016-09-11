@@ -69,11 +69,13 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
@@ -135,7 +137,11 @@ public class WalkIntent extends WalkXElement
 		if (r == null)
 		{
 			final IntentHelper h = new IntentHelper(e);
-			final String name = h.getName();
+			String name = h.getName();
+			if (XJDFConstants.AssemblingIntent.equals(name))
+			{
+				name = ElementName.INSERTINGINTENT;
+			}
 			if (name != null)
 			{
 				r = parent.addResource(name, null);

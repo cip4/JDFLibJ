@@ -113,6 +113,8 @@ public class WalkIgnore extends WalkJDFElement
 		v.add(ElementName.BINDLIST);
 		v.add(ElementName.BOOKCASE);
 		v.add(ElementName.BUSINESSINFO);
+		v.add(ElementName.COLORMEASUREMENTCONDITIONS);
+		v.add(ElementName.COLORSPACESUBSTITUTE);
 		v.add(ElementName.DELETED);
 		v.add(ElementName.DEVCAPPOOL);
 		v.add(ElementName.DEVCAPS);
@@ -120,8 +122,10 @@ public class WalkIgnore extends WalkJDFElement
 		v.add(ElementName.MODIFIED);
 		v.add(ElementName.MODULEPOOL);
 		v.add(ElementName.OBSERVATIONTARGET);
+		v.add(ElementName.PAGEASSIGNEDLIST);
 		v.add(ElementName.REGISTRATION);
 		v.add(ElementName.RESOURCEPOOL);
+		v.add(ElementName.SOURCERESOURCE);
 		v.add(ElementName.SPAWNED);
 		v.add(ElementName.TESTPOOL);
 		v.add(ElementName.TRIGGER);

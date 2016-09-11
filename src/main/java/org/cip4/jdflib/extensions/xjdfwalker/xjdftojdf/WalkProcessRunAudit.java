@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,23 +68,39 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
- */
-public class WalkLooseBinding extends WalkXElement
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
+  */
+public class WalkProcessRunAudit extends WalkAudit
 {
 	/**
 	 * 
 	 */
-	public WalkLooseBinding()
+	public WalkProcessRunAudit()
 	{
 		super();
+	}
+
+	/**
+	 * @param xjdf
+	 * @return true if must continue
+	 */
+	@Override
+	public KElement walk(KElement xjdf, final KElement jdf)
+	{
+		KElement not = xjdf.getElement(ElementName.PROCESSRUN);
+		if (not == null)
+			return null;
+		not.setAttributes(xjdf);
+		// we explicitly do not call super.walk, so that the original AuditNotification is ignored
+		return jdf;
 	}
 
 	/**
@@ -95,37 +111,7 @@ public class WalkLooseBinding extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return XJDFConstants.LooseBinding.equals(toCheck.getLocalName());
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public KElement walk(KElement e, KElement trackElem)
-	{
-		String name = getJDFName(trackElem);
-		if (name != null)
-		{
-			return super.walk(e, trackElem);
-		}
-		else
-		{
-			log.warn("No BindType specified for loosebinding - deleting");
-			return null;
-		}
-	}
-
-	/**
-	 * get the name of the explicit loosebinding element
-	 * 
-	 * @param e
-	 * @return
-	 */
-	@Override
-	String getJDFName(KElement e)
-	{
-		return e.getNonEmpty(ElementName.BINDINGTYPE);
+		return XJDFConstants.AuditProcessRun.equals(toCheck.getLocalName());
 	}
 
 	/**
@@ -134,20 +120,7 @@ public class WalkLooseBinding extends WalkXElement
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(XJDFConstants.LooseBinding, null);
+		return VString.getVString(XJDFConstants.AuditProcessRun, null);
 	}
 
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	protected void updateAttributes(KElement elem)
-	{
-		String updatedName = elem.getLocalName();
-		if (ElementName.CHANNELBINDING.equals(updatedName))
-		{
-			elem.renameAttribute(AttributeName.BRAND, ElementName.CHANNELBRAND);
-		}
-		super.updateAttributes(elem);
-	}
 }

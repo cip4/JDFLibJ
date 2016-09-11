@@ -82,6 +82,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	@Deprecated
 	public void testGetChild()
 	{
 		XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
@@ -129,6 +130,19 @@ public class ProductHelperTest extends JDFTestCaseBase
 		assertTrue(ph.isRootProduct());
 		ProductHelper ph2 = theHelper.appendProduct();
 		assertFalse(ph2.isRootProduct());
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public void testAppendIntent()
+	{
+		XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		ProductHelper ph = theHelper.appendProduct();
+		assertNull(ph.getIntent(XJDFConstants.AssemblingIntent));
+		ph.appendIntent(XJDFConstants.AssemblingIntent);
+		assertNotNull(ph.getIntent(XJDFConstants.AssemblingIntent));
 	}
 
 	/**

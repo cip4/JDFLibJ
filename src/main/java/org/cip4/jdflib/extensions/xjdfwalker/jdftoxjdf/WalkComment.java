@@ -74,6 +74,7 @@ import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
@@ -115,7 +116,11 @@ public class WalkComment extends WalkJDFElement
 	protected void updateAttributes(JDFAttributeMap map)
 	{
 		super.updateAttributes(map);
-		map.remove(AttributeName.ID);
+		map.renameKey(AttributeName.ID, XJDFConstants.ExternalID);
+		map.renameKey(AttributeName.NAME, AttributeName.TYPE);
+		map.remove(AttributeName.ATTRIBUTE);
+		map.remove(AttributeName.BOX);
+		map.remove(AttributeName.PATH);
 	}
 
 }

@@ -70,6 +70,8 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
  * 
@@ -109,7 +111,16 @@ public class WalkNotificationAudit extends WalkAudit
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return "AuditNotification".equals(toCheck.getLocalName());
+		return XJDFConstants.AuditNotification.equals(toCheck.getLocalName());
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return VString.getVString(XJDFConstants.AuditNotification, null);
 	}
 
 }

@@ -68,8 +68,8 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFNotification;
 
@@ -96,25 +96,9 @@ public class WalkNotificationAudit extends WalkAudit
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		KElement notificationAudit = xjdf.appendElement("AuditNotification");
+		KElement notificationAudit = xjdf.appendElement(XJDFConstants.AuditNotification);
 		moveToParentAudit(jdf, notificationAudit);
 		return super.walk(jdf, notificationAudit);
-	}
-
-	/**
-	 * 
-	 * @param jdf
-	 * @param auditNotification
-	 */
-	private void moveToParentAudit(final KElement jdf, KElement auditNotification)
-	{
-		JDFNotification not = (JDFNotification) jdf;
-		auditNotification.moveAttribute(AttributeName.AGENTNAME, not);
-		auditNotification.moveAttribute(AttributeName.AGENTVERSION, not);
-		auditNotification.moveAttribute(AttributeName.AUTHOR, not);
-		auditNotification.moveAttribute(AttributeName.PERSONALID, not);
-		auditNotification.moveAttribute(AttributeName.ID, not);
-		auditNotification.moveAttribute(AttributeName.TIMESTAMP, not);
 	}
 
 	/**
