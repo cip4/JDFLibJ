@@ -99,8 +99,8 @@ public class WalkJDFTest extends JDFTestCaseBase
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		KElement xjdf = new JDFToXJDF().convert(n);
-		assertNotNull(xjdf.getXPathElement("AuditPool/Created[1]"));
-		assertNull(xjdf.getXPathElement("AuditPool/Created[2]"));
+		assertNotNull(xjdf.getXPathElement("AuditPool/AuditCreated[1]"));
+		assertNull(xjdf.getXPathElement("AuditPool/AuditCreated[2]"));
 	}
 
 }
