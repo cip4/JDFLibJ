@@ -855,7 +855,7 @@ public class XJDFTest extends JDFTestCaseBase
 		css.appendSeparationSpec().setName("Spot1");
 		css.appendPDLResourceAlias();
 		xjdf = new XJDF20().makeNewJDF(n, null);
-		assertEquals("Spot1", xjdf.getXPathAttribute("ResourceSet[@Name=\"ColorantControl\"]/Resource/ColorantControl/ColorSpaceSubstitute/@SeparationSpec", null));
+		assertNull(xjdf.getXPathElement("ResourceSet[@Name=\"ColorantControl\"]/Resource/ColorantControl/ColorSpaceSubstitute"));
 	}
 
 	/**

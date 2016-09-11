@@ -822,12 +822,13 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.convert(n);
-		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditCreated/@AgentName", null), "CIP4 JDF Writer Java");
+		String agent = xjdf.getXPathAttribute("AuditPool/AuditCreated/@AgentName", null);
+		assertTrue(agent.length() > 4);
 
 		XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
 		JDFDoc d = invert.convert(xjdf);
 		JDFNode n2 = d.getJDFRoot();
-		assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.Created, null, null).getAgentName(), "CIP4 JDF Writer Java");
+		assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.Created, null, null).getAgentName(), agent);
 	}
 
 	/**
