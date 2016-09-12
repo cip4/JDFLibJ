@@ -73,6 +73,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.util.JDFDate;
 
@@ -136,7 +137,7 @@ public class WalkCreatedAudit extends WalkAudit
 	@Override
 	protected String getXJDFName(KElement jdf)
 	{
-		return "AuditCreated";
+		return XJDFConstants.AuditCreated;
 	}
 
 }

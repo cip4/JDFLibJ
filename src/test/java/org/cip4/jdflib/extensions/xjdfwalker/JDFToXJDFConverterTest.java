@@ -819,11 +819,12 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	@Test
 	public void testAuditCreated()
 	{
+		JDFAudit.setStaticAgentName("CIP4 Test Agent");
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.convert(n);
 		String agent = xjdf.getXPathAttribute("AuditPool/AuditCreated/@AgentName", null);
-		assertTrue(agent.length() > 4);
+		assertEquals("CIP4 Test Agent", agent);
 
 		XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
 		JDFDoc d = invert.convert(xjdf);
