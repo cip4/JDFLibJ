@@ -311,8 +311,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNull(dp);
 		JDFDeliveryIntent di = (JDFDeliveryIntent) d.getJDFRoot().getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
 		assertNotNull(di);
-		assertEquals("Drop_0", di.getDropIntent(0).getDropID());
-		assertEquals("Drop_1", di.getDropIntent(1).getDropID());
+		assertEquals("DROP_0", di.getDropIntent(0).getDropID());
+		assertEquals("DROP_1", di.getDropIntent(1).getDropID());
 	}
 
 	/**

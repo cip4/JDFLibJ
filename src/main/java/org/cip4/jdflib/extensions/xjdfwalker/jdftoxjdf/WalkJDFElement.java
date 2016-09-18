@@ -89,6 +89,7 @@ import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -244,17 +245,21 @@ public class WalkJDFElement extends WalkElement
 		}
 		if ("MediaRef".equals(re.getLocalName()))
 		{
-			JDFMedia m = (JDFMedia) re.getTarget();
-			if (m != null)
+			KElement parent = re.getParentNode_KElement();
+			if (parent instanceof JDFLayout)
 			{
-				EnumMediaType t = m.getMediaType();
-				if (EnumMediaType.Paper.equals(t))
+				JDFMedia m = (JDFMedia) re.getTarget();
+				if (m != null)
 				{
-					return "PaperRef";
-				}
-				if (EnumMediaType.Plate.equals(t))
-				{
-					return "PlateRef";
+					EnumMediaType t = m.getMediaType();
+					if (EnumMediaType.Paper.equals(t))
+					{
+						return "PaperRef";
+					}
+					if (EnumMediaType.Plate.equals(t))
+					{
+						return "PlateRef";
+					}
 				}
 			}
 		}

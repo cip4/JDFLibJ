@@ -352,6 +352,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 		JDFIntentResource.copyProcessToActual(this, drop, null, AttributeName.METHOD);
 		JDFIntentResource.copyProcessToActual(this, drop, null, AttributeName.EARLIEST);
 		JDFIntentResource.copyProcessToActual(this, drop, null, AttributeName.REQUIRED);
+		copyAttribute(AttributeName.DROPID, drop);
 		//TODO more
 	}
 
