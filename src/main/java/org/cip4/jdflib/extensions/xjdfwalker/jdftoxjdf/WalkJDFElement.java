@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
@@ -88,6 +89,7 @@ import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -239,6 +241,22 @@ public class WalkJDFElement extends WalkElement
 		if ("ContactRef".equals(name))
 		{
 			name += 's';
+		}
+		if ("MediaRef".equals(re.getLocalName()))
+		{
+			JDFMedia m = (JDFMedia) re.getTarget();
+			if (m != null)
+			{
+				EnumMediaType t = m.getMediaType();
+				if (EnumMediaType.Paper.equals(t))
+				{
+					return "PaperRef";
+				}
+				if (EnumMediaType.Plate.equals(t))
+				{
+					return "PlateRef";
+				}
+			}
 		}
 		return name;
 	}

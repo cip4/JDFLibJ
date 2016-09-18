@@ -96,11 +96,13 @@ import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.pool.JDFAmountPool;
+import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
+import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDrop;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -494,6 +496,72 @@ class PostXJDFWalker extends BaseElementWalker
 		public boolean matches(KElement e)
 		{
 			return (e instanceof JDFAmountPool) && e.getDeepParent(ElementName.AUDITPOOL, 0) == null && e.getDeepParent(XJDFConstants.XJMF, 0) == null;
+		}
+	}
+
+	/**
+	 * 
+	 * @author rainerprosi
+	 *
+	 */
+	public class WalkPlacedObject extends WalkElement
+	{
+		/**
+		 * 
+		 */
+		public WalkPlacedObject()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return (toCheck instanceof JDFContentObject) || (toCheck instanceof JDFMarkObject);
+		}
+
+		/**
+		 * 
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkRefElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			copyToPlaceObject(xjdf);
+			return super.walk(xjdf, dummy);
+		}
+
+		/**
+		 * we do everything on the jdf side so that all other tests are done by the call to super
+		 * @param xjdf
+		 *  
+		 * @return
+		 */
+		private KElement copyToPlaceObject(KElement xjdf)
+		{
+			KElement po = xjdf.getParentNode_KElement().insertBefore(XJDFConstants.PlacedObject, xjdf, null);
+			VString poAttribs = JDFToXJDFDataCache.getPlacedObjectAttribs();
+			for (String att : poAttribs)
+			{
+				po.moveAttribute(att, xjdf);
+			}
+			po.setAttribute(AttributeName.TYPE, xjdf.getLocalName());
+			po.moveElement(xjdf, null);
+			return po;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(new String[] { ElementName.CONTENTOBJECT, ElementName.MARKOBJECT });
 		}
 	}
 

@@ -75,9 +75,11 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.pool.JDFResourcePool;
+import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.process.JDFContentObject;
 
 /**
  * class to maintain data from typesafe library
@@ -89,7 +91,11 @@ class JDFToXJDFDataCache
 {
 	private static JDFToXJDFDataCache theCache;
 
-	private static JDFToXJDFDataCache getCache()
+	/**
+	 * 
+	 * @return
+	 */
+	static JDFToXJDFDataCache getCache()
 	{
 		if (theCache == null)
 			theCache = new JDFToXJDFDataCache();
@@ -104,12 +110,27 @@ class JDFToXJDFDataCache
 		resAttribs = generateResourceAttributes();
 		elemAttribs = generateElementAttributes();
 		inlineSet = generateInlineSet();
+		placedObjectAttribs = generatePlacedObjectAttributes();
 		amountAttribs = new VString("Amount,ActualAmount,MinAmount,MaxAmount", ",");
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	private VString generatePlacedObjectAttributes()
+	{
+		final JDFContentObject co = (JDFContentObject) new JDFDoc(ElementName.CONTENTOBJECT).getRoot();
+		final JDFMarkObject mo = (JDFMarkObject) new JDFDoc(ElementName.MARKOBJECT).getRoot();
+		VString vco = co.knownAttributes();
+		VString vmo = mo.knownAttributes();
+		return vmo.getOverlapping(vco);
 	}
 
 	private final VString elemAttribs;
 	private final HashSet<String> inlineSet;
 	private final VString resAttribs;
+	private final VString placedObjectAttribs;
 	final private VString amountAttribs;
 
 	/**
@@ -221,6 +242,14 @@ class JDFToXJDFDataCache
 	static VString getResAttribs()
 	{
 		return getCache().resAttribs;
+	}
+
+	/**
+	 * @return the placedObjectAttribs
+	 */
+	static VString getPlacedObjectAttribs()
+	{
+		return getCache().placedObjectAttribs;
 	}
 
 	/**

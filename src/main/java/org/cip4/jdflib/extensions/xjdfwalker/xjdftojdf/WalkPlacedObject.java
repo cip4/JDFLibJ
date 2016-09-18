@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -66,44 +66,50 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.resource.JDFHoleLine;
-import org.cip4.jdflib.resource.process.postpress.JDFHole;
+import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
- * note: by inheriting from Hole we rename to HolePattern
+ * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
- */
-public class WalkHoleLine extends WalkHole
+  */
+public class WalkPlacedObject extends WalkAudit
 {
 	/**
 	 * 
 	 */
-	public WalkHoleLine()
+	public WalkPlacedObject()
 	{
 		super();
 	}
 
 	/**
-	 * 
 	 * @param xjdf
 	 * @return true if must continue
 	 */
 	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	public KElement walk(KElement xjdf, final KElement jdf)
 	{
-		JDFHole hole = (JDFHole) jdf.getElement(ElementName.HOLE);
-		if (hole != null)
-		{
-			jdf.setAttributes(hole);
-			hole.deleteNode();
-		}
-		return super.walk(jdf, xjdf);
+		String typ = xjdf.getNonEmpty(AttributeName.TYPE);
+		KElement obj = null;
+		if (typ != null)
+			obj = xjdf.getCreateElement(typ);
+		if (obj == null)
+			obj = xjdf.getElement(ElementName.CONTENTOBJECT);
+		if (obj == null)
+			obj = xjdf.getElement(ElementName.MARKOBJECT);
+		if (obj == null)
+			return null;
+		obj.setAttributes(xjdf);
+		obj.removeAttribute(AttributeName.TYPE);
+		// we explicitly do not call super.walk, so that the original AuditNotification is ignored
+		return jdf;
 	}
 
 	/**
@@ -114,7 +120,7 @@ public class WalkHoleLine extends WalkHole
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFHoleLine);
+		return XJDFConstants.PlacedObject.equals(toCheck.getLocalName());
 	}
 
 	/**
@@ -123,6 +129,7 @@ public class WalkHoleLine extends WalkHole
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.HOLELINE, null);
+		return VString.getVString(XJDFConstants.PlacedObject, null);
 	}
+
 }

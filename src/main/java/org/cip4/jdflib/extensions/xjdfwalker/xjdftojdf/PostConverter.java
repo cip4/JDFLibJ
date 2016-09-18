@@ -84,6 +84,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.EnsureNSUri;
 import org.cip4.jdflib.elementwalker.RemoveEmpty;
 import org.cip4.jdflib.elementwalker.UnLinkFinder;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
@@ -130,7 +131,7 @@ class PostConverter
 	{
 		JDFNode root = theNode.getJDFRoot();
 		String type = StringUtil.getNonEmpty(root.getType());
-		if (type == null || "Product".equals(type))
+		if (type == null || XJDFConstants.Product.equals(type))
 		{
 			xjdfToJDFImpl.mergeProductLinks(theNode, root);
 		}
@@ -209,7 +210,7 @@ class PostConverter
 	{
 		JDFDeliveryParams dp = (JDFDeliveryParams) theNode.getResource(ElementName.DELIVERYPARAMS, EnumUsage.Input, 0);
 		VString allTypes = theNode.getAllTypes();
-		if (dp != null && allTypes.contains("Product"))
+		if (dp != null && allTypes.contains(XJDFConstants.Product))
 		{
 			boolean keepDI = theNode.getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0) != null;
 			JDFDeliveryIntent di = (JDFDeliveryIntent) theNode.getCreateResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);

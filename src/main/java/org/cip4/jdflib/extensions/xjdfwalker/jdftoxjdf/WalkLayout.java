@@ -78,7 +78,7 @@ import org.cip4.jdflib.resource.process.JDFLayout;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkLayout extends WalkMediaRefByType
+public class WalkLayout extends WalkResource
 {
 	/**
 	 * 

@@ -91,6 +91,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFInsert;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
@@ -100,6 +101,7 @@ import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
+import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
@@ -293,6 +295,45 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		JDFDeliveryIntent di = (JDFDeliveryIntent) d.getJDFRoot().getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
 		assertNotNull(di);
 		assertNotNull("The ProductRef was not translated", di.getDropIntent(1).getDropItemIntent(0).getComponent());
+	}
+
+	/**
+	*  
+	*  
+	*/
+	@Test
+	public void testDropID()
+	{
+		KElement xjdf = new JDFToXJDFConverterTest()._testDeliveryIntent();
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		JDFDoc d = xCon.convert(xjdf);
+		JDFDeliveryParams dp = (JDFDeliveryParams) d.getJDFRoot().getResource(ElementName.DELIVERYPARAMS, EnumUsage.Input, 0);
+		assertNull(dp);
+		JDFDeliveryIntent di = (JDFDeliveryIntent) d.getJDFRoot().getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
+		assertNotNull(di);
+		assertEquals("Drop_0", di.getDropIntent(0).getDropID());
+		assertEquals("Drop_1", di.getDropIntent(1).getDropID());
+	}
+
+	/**
+	*  
+	*  
+	*/
+	@Test
+	public void testPlacedObject()
+	{
+		KElement xjdf = new XJDFHelper("j1", "p1", null).getRoot();
+		xjdf.setXPathAttribute("ResourceSet[@Name=\"Layout\"]/Resource/Part/@SheetName", "s1");
+		xjdf.setXPathAttribute("ResourceSet[@Name=\"Layout\"]/Resource/Layout/PlacedObject/@Ord", "1");
+		xjdf.setXPathAttribute("ResourceSet[@Name=\"Layout\"]/@Usage", "Input");
+		xjdf.setXPathAttribute("ResourceSet[@Name=\"Layout\"]/Resource/Layout/PlacedObject/@Type", "ContentObject");
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		JDFDoc d = xCon.convert(xjdf);
+		JDFLayout partition = (JDFLayout) d.getJDFRoot().getResource(ElementName.LAYOUT, EnumUsage.Input, 0).getPartition(new JDFAttributeMap(EnumPartIDKey.SheetName, "s1"), null);
+		JDFContentObject contentObject = partition.getContentObject(0);
+		assertEquals(contentObject.getOrd(), 1);
+		assertNull(contentObject.getNonEmpty(AttributeName.TYPE));
 	}
 
 	/**

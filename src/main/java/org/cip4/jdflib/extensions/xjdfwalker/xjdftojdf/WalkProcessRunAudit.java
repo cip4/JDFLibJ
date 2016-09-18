@@ -95,10 +95,10 @@ public class WalkProcessRunAudit extends WalkAudit
 	@Override
 	public KElement walk(KElement xjdf, final KElement jdf)
 	{
-		KElement not = xjdf.getElement(ElementName.PROCESSRUN);
-		if (not == null)
+		KElement procRun = xjdf.getElement(ElementName.PROCESSRUN);
+		if (procRun == null)
 			return null;
-		not.setAttributes(xjdf);
+		procRun.setAttributes(xjdf);
 		// we explicitly do not call super.walk, so that the original AuditNotification is ignored
 		return jdf;
 	}

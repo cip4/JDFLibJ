@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -125,6 +125,12 @@ public class WalkDeliveryParams extends WalkResource
 				xjdfDeliveryParams.removeAttribute(s);
 				foundSome = true;
 			}
+		}
+		String dropID = xjdfDeliveryParams.getXPathAttribute("../Part/@DropID", null);
+		if (StringUtil.getNonEmpty(dropID) != null)
+		{
+			foundSome = true;
+			drop.setDropID(dropID);
 		}
 		final VString dropKnown = drop.knownElements();
 		final VElement vMyElm = xjdfDeliveryParams.getChildElementVector_KElement(null, null, null, true, 0);

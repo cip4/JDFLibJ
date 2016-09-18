@@ -111,6 +111,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFHoleLine;
 import org.cip4.jdflib.resource.JDFInsert;
 import org.cip4.jdflib.resource.JDFInterpretingParams;
+import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
@@ -124,8 +125,10 @@ import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
+import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPageData;
 import org.cip4.jdflib.resource.process.JDFPerson;
@@ -961,6 +964,66 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.convert(n);
 		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Part/@Location", null), "L1");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testLayoutMark()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Imposition);
+		JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Input);
+		JDFLayout sheet = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s1");
+		JDFMarkObject markObject = sheet.appendMarkObject();
+		markObject.setOrd(0);
+		markObject.appendCIELABMeasuringField().setCenter(new JDFXYPair(2, 2));
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/@Ord", null), "0");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/@Type", null), "MarkObject");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/MarkObject/CIELABMeasuringField/@Center", null), "2 2");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testLayoutMedia()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Imposition);
+		JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Input);
+		JDFLayout sheet = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s1");
+		sheet.appendMedia().setMediaType(EnumMediaType.Plate);
+		sheet.appendMedia().setMediaType(EnumMediaType.Paper);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+		assertNotNull(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/@PaperRef", null));
+		assertNotNull(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/@PlateRef", null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testLayoutContent()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Imposition);
+		JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Input);
+		JDFLayout sheet = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s1");
+		JDFContentObject markObject = sheet.appendContentObject();
+		markObject.setOrd(0);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/@Ord", null), "0");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/@Type", null), "ContentObject");
+		assertNull(xjdf.getXPathElement("ResourceSet/Resource/Layout/PlacedObject/ContentObject"));
 	}
 
 	/**

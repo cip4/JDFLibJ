@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,48 +68,35 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFInterpretingParams;
-import org.cip4.jdflib.resource.JDFStrippingParams;
-import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.VString;
+import org.junit.Test;
 
-/**
- * 
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
- */
-public class WalkMediaRefByType extends WalkResource
+public class JDFToXJDFDataCacheTest extends JDFTestCaseBase
 {
 
 	/**
 	 * 
 	 */
-	public WalkMediaRefByType()
+	@Test
+	public void testGetResAttribs()
 	{
-		super();
+		VString resAtts = JDFToXJDFDataCache.getResAttribs();
+		assertNotNull(resAtts);
+		assertTrue(resAtts.contains(AttributeName.AMOUNT));
 	}
 
 	/**
 	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	@Test
+	public void testGetPOAttribs()
 	{
-		// TODO mediaref -> plateref etc.
-		return super.walk(jdf, xjdf);
+		VString resAtts = JDFToXJDFDataCache.getPlacedObjectAttribs();
+		assertNotNull(resAtts);
+		assertTrue(resAtts.contains(AttributeName.ORD));
+		assertTrue(resAtts.contains(AttributeName.ANCHOR));
 	}
 
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return (toCheck instanceof JDFInterpretingParams) || (toCheck instanceof JDFLayout) || (toCheck instanceof JDFStrippingParams); // TODO|| (toCheck
-		// instanceof
-		// JDFRasterReadingParams);
-	}
 }

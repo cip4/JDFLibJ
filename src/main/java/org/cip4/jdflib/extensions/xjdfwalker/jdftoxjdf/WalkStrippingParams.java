@@ -78,7 +78,7 @@ import org.cip4.jdflib.resource.JDFStrippingParams;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkStrippingParams extends WalkMediaRefByType
+public class WalkStrippingParams extends WalkResource
 {
 	/**
 	 * 
