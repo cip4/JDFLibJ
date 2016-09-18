@@ -162,7 +162,7 @@ public class JDFElement extends KElement
 
 	private static final long serialVersionUID = 1L;
 	private static final Log jLog = LogFactory.getLog(JDFElement.class);
-	private static EnumVersion defaultVersion = EnumVersion.Version_1_4;
+	private static EnumVersion defaultVersion = EnumVersion.Version_1_5;
 
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
