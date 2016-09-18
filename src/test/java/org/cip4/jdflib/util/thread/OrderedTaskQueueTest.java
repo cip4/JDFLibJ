@@ -203,6 +203,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test2");
 		assertTrue(q.queue(new WaitRunner(1)));
 		q.shutDown();
+		ThreadUtil.sleep(1);
 		assertFalse(q.queue(new WaitRunner(2)));
 	}
 
@@ -240,6 +241,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test4");
 		assertTrue(q.queue(new WaitRunner(1)));
 		OrderedTaskQueue.shutDownAll();
+		ThreadUtil.sleep(1);
 		assertFalse(q.queue(new WaitRunner(2)));
 	}
 
