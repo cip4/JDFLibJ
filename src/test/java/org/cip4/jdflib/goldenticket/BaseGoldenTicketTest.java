@@ -179,7 +179,7 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 		JDFParser p = getXJDFSchemaParser();
 		JDFDoc docXJDF = p.parseFile(tmpXJDF);
 		XMLDoc dVal = docXJDF.getValidationResult();
-		//		assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
+		//TODO		assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
 
 		XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		JDFDoc converted = jdfConverter.convert(xjdfRoot);

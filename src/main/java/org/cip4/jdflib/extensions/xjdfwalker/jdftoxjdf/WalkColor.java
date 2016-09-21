@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -101,7 +102,7 @@ public class WalkColor extends WalkResource
 		{
 			k.setAttribute("HTMLColor", ((JDFColor) jdf).getHTMLColor());
 		}
-		k.setActualColorName(jdf.getAttribute("Separation", null, null));
+		k.setActualColorName(jdf.getAttribute(AttributeName.SEPARATION, null, null));
 		return k;
 	}
 
@@ -113,7 +114,7 @@ public class WalkColor extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFColor;
+		return toCheck instanceof JDFColor;
 	}
 
 	/**

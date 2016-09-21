@@ -122,6 +122,8 @@ import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
+import org.cip4.jdflib.resource.process.JDFColor;
+import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFComponent;
@@ -447,6 +449,27 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(ccNew.getAttribute(ElementName.COLORANTPARAMS), "Cyan Magenta Yellow Black");
 		assertEquals(ccNew.getAttribute(ElementName.COLORANTORDER), "Cyan Black");
 		assertNull(StringUtil.getNonEmpty(ccNew.getAttribute(ElementName.DEVICECOLORANTORDER)));
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testColorPool()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ImageSetting);
+		JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, EnumUsage.Input);
+		cp.appendColorWithName("c1", null);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+
+		PartitionHelper partition = new XJDFHelper(xjdf).getPartition(ElementName.COLOR, 0, 0);
+		JDFColor cNew = (JDFColor) partition.getResource();
+		assertEquals(cNew.getAttribute(AttributeName.ACTUALCOLORNAME), "c1");
+		assertEquals(partition.getPartMap().get(AttributeName.SEPARATION), "c1");
 	}
 
 	/**
