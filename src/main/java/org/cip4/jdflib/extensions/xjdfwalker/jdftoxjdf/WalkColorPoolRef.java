@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,8 +68,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -126,13 +124,7 @@ public class WalkColorPoolRef extends WalkRefElement
 		final JDFResource colorPool = refElem.getTargetRoot();
 		if (colorPool != null)
 		{
-			final VElement v = colorPool.getChildElementVector(ElementName.COLOR, null);
-			for (KElement e : v)
-			{
-				e.renameAttribute("Name", "Separation", null, null);
-			}
-			KElement newColorRes = safeRename(colorPool, ElementName.COLOR, true);
-			newColorRes.setAttribute(AttributeName.PARTIDKEYS, "Separation");
+			updateColorPoolColors(colorPool);
 		}
 		refElem.renameElement("ColorRef", null);
 		KElement ret = super.walk(jdf, xjdf);

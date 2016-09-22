@@ -477,6 +477,55 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *  
 	 */
 	@Test
+	public void testColorPoolSpace()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ImageSetting);
+		JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, EnumUsage.Input);
+		cp.appendColorWithName("sep 1", null);
+		cp.appendColorWithName("sep 2", null);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+
+		for (int i = 0; i < 2; i++)
+		{
+			PartitionHelper partition = new XJDFHelper(xjdf).getPartition(ElementName.COLOR, 0, i);
+			JDFColor cNew = (JDFColor) partition.getResource();
+			assertEquals(cNew.getAttribute(AttributeName.ACTUALCOLORNAME), "sep " + (i + 1));
+			assertEquals(partition.getPartMap().get(AttributeName.SEPARATION), "sep_" + (i + 1));
+		}
+	}
+
+	/**
+	* 
+	*  
+	*/
+	@Test
+	public void testColorantControlSpace()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ImageSetting);
+		JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, EnumUsage.Input);
+		cp.appendColorWithName("sep 1", null);
+		cp.appendColorWithName("sep 2", null);
+
+		JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		cc.appendColorantParams().setSeparations(new VString("sep 1,sep 2", ","));
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+
+		PartitionHelper partition = new XJDFHelper(xjdf).getPartition(ElementName.COLORANTCONTROL, 0, 0);
+		JDFColorantControl cNew = (JDFColorantControl) partition.getResource();
+		assertEquals(cNew.getAttribute(ElementName.COLORANTPARAMS), "sep_1 sep_2");
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
 	public void testColorIntent()
 	{
 		JDFToXJDF conv = new JDFToXJDF();

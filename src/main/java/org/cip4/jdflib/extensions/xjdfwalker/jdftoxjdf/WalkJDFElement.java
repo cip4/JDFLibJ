@@ -321,6 +321,27 @@ public class WalkJDFElement extends WalkElement
 	}
 
 	/**
+	 * 
+	 * @param r
+	 */
+	void updateColorPoolColors(final JDFResource r)
+	{
+		final VElement v = r.getChildElementVector(ElementName.COLOR, null);
+		for (KElement e : v)
+		{
+			if (!e.hasAttribute(AttributeName.ACTUALCOLORNAME))
+			{
+				e.copyAttribute(AttributeName.ACTUALCOLORNAME, e, AttributeName.NAME, null, null);
+			}
+			String sep = StringUtil.replaceChar(e.getAttribute(AttributeName.NAME), ' ', "_", 0);
+			e.setAttribute(AttributeName.SEPARATION, sep);
+			e.removeAttribute(AttributeName.NAME);
+		}
+		KElement cNew = safeRename(r, ElementName.COLOR, true);
+		cNew.setAttribute(AttributeName.PARTIDKEYS, AttributeName.SEPARATION);
+	}
+
+	/**
 	 * @param rl the refelement or reslink
 	 * @param linkTarget
 	 * @param xRoot
