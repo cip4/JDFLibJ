@@ -636,20 +636,29 @@ public class ContainerUtil
 		{
 			return c;
 		}
-		final LinkedHashSet<a> lhsIn = new LinkedHashSet<a>(c.size());
+		final Vector<a> vect = new Vector<a>(c.size());
 
 		for (final a el : c)
 		{
-			if (getMatch(lhsIn, el, 0) == null)
+			Vector<IMatches> mm = getMatches(vect, el);
+			if (mm == null)
 			{
-				lhsIn.add(el);
+				vect.add(el);
 			}
 		}
-
-		if (lhsIn.size() < c.size())
+		if (vect.size() < c.size())
 		{
+			Vector<a> v2 = new Vector<a>();
+			for (int i = vect.size() - 1; i >= 0; i--)
+			{
+				Vector<IMatches> mm = getMatches(v2, vect.get(i));
+				if (mm == null)
+				{
+					v2.add(vect.get(i));
+				}
+			}
 			c.clear();
-			c.addAll(lhsIn);
+			c.addAll(v2);
 		}
 		return c;
 	}

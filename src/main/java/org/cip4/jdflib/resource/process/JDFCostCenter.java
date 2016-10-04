@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -130,13 +130,11 @@ public class JDFCostCenter extends JDFAutoCostCenter implements IMatches
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	// **************************************** Methods
-	// *********************************************
 	/**
-	 * toString
-	 * 
-	 * @return String
-	 */
+	* toString
+	* 
+	* @return String
+	*/
 	@Override
 	public String toString()
 	{
@@ -151,6 +149,7 @@ public class JDFCostCenter extends JDFAutoCostCenter implements IMatches
 	 * 
 	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 	 */
+	@Override
 	public boolean matches(final Object subset)
 	{
 		if (subset == null)

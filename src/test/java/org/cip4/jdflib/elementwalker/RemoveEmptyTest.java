@@ -79,6 +79,7 @@ import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFContact;
 
@@ -129,6 +130,22 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 		RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
 		assertFalse(n.toXML().contains(ElementName.COMMENT));
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testRemovePosition()
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode n = d.getJDFRoot();
+		JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
+		sp.appendPosition();
+		RemoveEmpty emp = new RemoveEmpty();
+		emp.removEmpty(n);
+		JDFStrippingParams sp2 = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+		assertNotNull(sp2.getPosition(0));
 	}
 
 	/**

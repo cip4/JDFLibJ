@@ -86,6 +86,7 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
+import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -105,7 +106,7 @@ public class RemoveEmpty extends BaseElementWalker
 	{
 		super(new BaseWalkerFactory());
 		zappElements = true;
-		part = (JDFPart) new JDFDoc("Part").getRoot();
+		part = (JDFPart) new JDFDoc(ElementName.PART).getRoot();
 		part.appendElement("foo");
 		new BaseWalker(getFactory()); // need a default walker
 	}
@@ -117,9 +118,10 @@ public class RemoveEmpty extends BaseElementWalker
 	 */
 	public void removEmpty(JDFNode n)
 	{
-		new UnLinkFinder().eraseUnlinked(n);
+		UnLinkFinder unLinkFinder = new UnLinkFinder();
+		unLinkFinder.eraseUnlinked(n);
 		removEmptyElement(n);
-		new UnLinkFinder().eraseUnlinked(n);
+		unLinkFinder.eraseUnlinked(n);
 	}
 
 	/**
@@ -172,7 +174,7 @@ public class RemoveEmpty extends BaseElementWalker
 		public KElement walk(final KElement e1, final KElement trackElem)
 		{
 			boolean hasGood = walkAttributes(e1);
-			if (zappElements && e1.numChildElements_KElement(null, null) == 0 && e1.getText() == null && !hasGood)
+			if (zappElements && !hasGood && e1.getFirstChildElement() == null && e1.getText() == null)
 			{
 				e1.deleteNode();
 				return null;
@@ -274,6 +276,16 @@ public class RemoveEmpty extends BaseElementWalker
 		{
 			return toCheck instanceof JDFGeneralID;
 		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString(ElementName.GENERALID, null);
+		}
+
 	}
 
 	/**
@@ -314,6 +326,56 @@ public class RemoveEmpty extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return toCheck instanceof JDFComment;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString(ElementName.COMMENT, null);
+		}
+	}
+
+	/**
+	* never zapp me
+	* 
+	* 
+	* 
+	*/
+	public class WalkIgnore extends WalkElement
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param e - the element to track
+		 * @param trackElem - always null
+		 * @return the element to continue walking
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			return e;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFPosition;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString(ElementName.POSITION, null);
 		}
 	}
 
@@ -432,6 +494,15 @@ public class RemoveEmpty extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return toCheck instanceof JDFComChannel;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString(ElementName.COMCHANNEL, null);
 		}
 	}
 

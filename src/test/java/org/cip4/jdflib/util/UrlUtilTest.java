@@ -689,6 +689,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("a b", UrlUtil.urlToUNC("file:a%20b"));
 		assertEquals("a b#", UrlUtil.urlToUNC("file:a%20b%23"));
 		assertEquals("a%2fb\\d", UrlUtil.urlToUNC("file:a%2fb/d"));
+		assertNull(UrlUtil.urlToUNC(""));
 		assertEquals("\\\\host\\dir\\file", UrlUtil.urlToUNC("\\\\host\\dir\\file"));
 		assertEquals("\\\\host\\dir\\file", UrlUtil.urlToUNC("//host/dir/file"));
 		assertEquals("\\\\host\\dir\\file", UrlUtil.urlToUNC("file://host/dir/file"));

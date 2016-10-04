@@ -137,6 +137,38 @@ public class ContainerUtilTest extends JDFTestCaseBase
 
 	}
 
+	private class FilterMatch implements IMatches
+	{
+		/**
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString()
+		{
+			return "FilterMatch [s=" + s + "]";
+		}
+
+		private final String s;
+
+		public FilterMatch(final String pi)
+		{
+			super();
+			this.s = pi;
+		}
+
+		/**
+		 *  
+		 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
+		 */
+		@Override
+		public boolean matches(final Object subset)
+		{
+			FilterMatch f = (FilterMatch) subset;
+			return f.s.startsWith(s);
+		}
+
+	}
+
 	/**
 	 * 
 	 */
@@ -207,6 +239,29 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		vcs.add(cs2);
 		vcs.add(cs3);
 		assertEquals(ContainerUtil.unifyMatches(vcs).size(), 2);
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public void testUnifyFilterMatches()
+	{
+		FilterMatch ma = new FilterMatch("a");
+		FilterMatch mb = new FilterMatch("b");
+		Vector<FilterMatch> vcs = new Vector<FilterMatch>();
+		vcs.add(mb);
+		for (int i = 0; i < 20; i++)
+		{
+			vcs.add(new FilterMatch("a" + i));
+		}
+		vcs.add(ma);
+		for (int i = 0; i < 20; i++)
+		{
+			vcs.add(new FilterMatch("b" + i));
+		}
+		ContainerUtil.unifyMatches(vcs);
+		assertEquals(2, vcs.size());
 	}
 
 	/**
