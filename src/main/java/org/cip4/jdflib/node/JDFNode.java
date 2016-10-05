@@ -8844,4 +8844,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public static JDFNode createRoot()
+	{
+		return new JDFDoc(ElementName.JDF).getJDFRoot();
+	}
+
 }

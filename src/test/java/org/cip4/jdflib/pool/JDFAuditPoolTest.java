@@ -93,6 +93,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFMerged;
+import org.cip4.jdflib.resource.JDFModified;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFProcessRun;
@@ -160,6 +161,19 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 		final JDFCreated kResourceAudit = (JDFCreated) myAuditPool.getChildWithAttribute(null, "XPath", null, strResourceID, 0, true);
 
 		assertNotNull("Error: Audit not found ", kResourceAudit);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testAddModified()
+	{
+		JDFAudit.setStaticAuthor("foo");
+		JDFNode node = JDFNode.createRoot();
+		JDFModified mod = node.getCreateAuditPool().addModified("me", null);
+		assertEquals(1, mod.numChildElements(ElementName.EMPLOYEE, null));
+		JDFAudit.setStaticAuthor(null);
 	}
 
 	/**

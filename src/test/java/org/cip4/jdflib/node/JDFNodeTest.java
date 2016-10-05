@@ -1760,7 +1760,14 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	}
 
-	// ////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	@Test
+	public void testCreateNode()
+	{
+		assertEquals(JDFNode.class, JDFNode.createRoot().getClass());
+	}
 
 	/**
 	 * 
