@@ -113,12 +113,17 @@ public class WalkCreatedAudit extends WalkAudit
 	protected void updateAttributes(JDFAttributeMap map)
 	{
 		map.remove(AttributeName.AUTHOR);
+		String a1 = map.get(AttributeName.AGENTNAME);
+		String a2 = map.get(AttributeName.AGENTVERSION);
 
 		if (map.get(AttributeName.TIME) == null)
 		{
 			map.put(AttributeName.TIME, new JDFDate().getDateTimeISO());
 		}
+
 		super.updateAttributes(map);
+		map.put(AttributeName.AGENTNAME, a1);
+		map.put(AttributeName.AGENTVERSION, a2);
 	}
 
 	/**

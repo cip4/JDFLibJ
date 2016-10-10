@@ -1229,7 +1229,7 @@ class PostXJDFWalker extends BaseElementWalker
 		private void moveToSet(KElement xjdf)
 		{
 			KElement set = xjdf.getParentNode_KElement();
-			if (set != null)
+			if (set != null && xjdf.hasNonEmpty(AttributeName.UNIT))
 			{
 				set.moveAttribute(AttributeName.UNIT, xjdf);
 			}
