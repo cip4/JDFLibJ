@@ -183,6 +183,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 
 		set.moveAttribute(AttributeName.PROCESSUSAGE, ri);
 		set.moveAttribute(AttributeName.ORIENTATION, ri);
+		set.moveAttribute(AttributeName.USAGE, ri);
 
 		SetHelper sh = new SetHelper(set);
 		Vector<PartitionHelper> newParts = sh.getCreatePartitions(vPartMap, false);

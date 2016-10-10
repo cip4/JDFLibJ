@@ -103,6 +103,7 @@ public class UnLinkFinder extends BaseElementWalker
 	{
 		super(new BaseWalkerFactory());
 		linkData = new LinkData();
+		ignoreForeign = true;
 		new BaseWalker(getFactory()); // need a default walker
 	}
 

@@ -108,6 +108,17 @@ public class WalkAudit extends WalkXElement
 		KElement e = super.walk(xjdf, jdf);
 		fixAuthor(e);
 		e.removeAttribute(AttributeName.JOBPARTID);
+		e.appendAnchor(null);
 		return e;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void updateAttributes(KElement elem)
+	{
+		elem.renameAttribute(AttributeName.TIME, AttributeName.TIMESTAMP);
+		super.updateAttributes(elem);
 	}
 }

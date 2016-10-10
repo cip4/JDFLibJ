@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -115,7 +115,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	@Test
 	public void testIsAsset()
 	{
-		JDFDoc d = new JDFDoc("XJDF");
+		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		KElement root = d.getRoot();
 
 		KElement set = root.getCreateXPathElement("ResourceSet");
@@ -134,7 +134,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	@Test
 	public void testIsAssetTwo()
 	{
-		JDFDoc d = new JDFDoc("XJDF");
+		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		KElement root = d.getRoot();
 
 		KElement set = root.getCreateXPathElement("ResourceSet");
@@ -155,7 +155,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	@Test
 	public void testisResourceElement()
 	{
-		JDFDoc d = new JDFDoc("XJDF");
+		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		KElement root = d.getRoot();
 
 		KElement set = root.getCreateXPathElement("ResourceSet");
@@ -174,7 +174,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	@Test
 	public void testCleanup()
 	{
-		JDFDoc d = new JDFDoc("XJDF");
+		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		KElement root = d.getRoot();
 
 		root.getCreateXPathElement("ResourceSet/Resource/Part");
@@ -191,7 +191,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	@Test
 	public void testSetPartMap()
 	{
-		JDFDoc d = new JDFDoc("XJDF");
+		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		KElement root = d.getRoot();
 		root.getCreateXPathElement("ResourceSet/Resource/Media");
 		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
@@ -199,4 +199,24 @@ public class PartitionHelperTest extends JDFTestCaseBase
 		ph.setPartMap(map);
 		assertEquals(ph.getPartMap(), map);
 	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testEnsureParts()
+	{
+		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
+		KElement root = d.getRoot();
+		root.getCreateXPathElement("ResourceSet/Resource/Media");
+		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
+		JDFAttributeMap map = new JDFAttributeMap("SheetName", "S1");
+		ph.ensurePart("SheetName", "S1");
+		assertEquals(ph.getPartMap(), map);
+		ph.ensurePart("Side", "Front");
+		map.put("Side", "Front");
+
+		assertEquals(ph.getPartMap(), map);
+	}
+
 }

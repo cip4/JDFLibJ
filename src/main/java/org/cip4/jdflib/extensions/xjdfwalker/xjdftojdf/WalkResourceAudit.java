@@ -74,6 +74,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.util.StringUtil;
@@ -175,7 +176,7 @@ public class WalkResourceAudit extends WalkAudit
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString("AuditResource", null);
+		return VString.getVString(XJDFConstants.AuditResource, null);
 	}
 
 }

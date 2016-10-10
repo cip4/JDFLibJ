@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,6 +72,9 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 
@@ -111,8 +114,16 @@ public class WalkResourceAudit extends WalkAudit
 			ra.setPartMapVector(null);
 		}
 		copyLinkValues(raNew, newLink);
-		raNew.renameElement("AuditResource", null);
 		return raNew;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected String getXJDFName(KElement jdf)
+	{
+		return XJDFConstants.AuditResource;
 	}
 
 	/**
@@ -138,5 +149,26 @@ public class WalkResourceAudit extends WalkAudit
 	public boolean matches(final KElement toCheck)
 	{
 		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFResourceAudit);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return VString.getVString(ElementName.RESOURCEAUDIT, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkAudit#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		map.remove(AttributeName.REASON);
+		map.remove(AttributeName.CONTENTSMODIFIED);
+		map.remove(AttributeName.NODESTATUS);
+		super.updateAttributes(map);
 	}
 }

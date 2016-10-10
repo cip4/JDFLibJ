@@ -138,7 +138,7 @@ public class VString extends Vector<String>
 	}
 
 	/**
-	 * simple static factory
+	 * simple static factory - null if strIn is null or empty
 	 * 
 	 * @param strIn
 	 * @param strSep

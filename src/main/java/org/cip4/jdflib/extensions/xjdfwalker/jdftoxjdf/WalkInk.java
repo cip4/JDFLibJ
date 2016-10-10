@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -66,24 +66,29 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.resource.process.prepress.JDFInk;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
-  */
-public class WalkCreatedAudit extends WalkAudit
+ */
+public class WalkInk extends WalkInlineAllRes
 {
 	/**
 	 * 
 	 */
-	public WalkCreatedAudit()
+	public WalkInk()
 	{
 		super();
 	}
@@ -96,16 +101,7 @@ public class WalkCreatedAudit extends WalkAudit
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return "AuditCreated".equals(toCheck.getLocalName());
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getJDFName(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	String getJDFName(KElement e)
-	{
-		return ElementName.CREATED;
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFInk);
 	}
 
 	/**
@@ -114,17 +110,29 @@ public class WalkCreatedAudit extends WalkAudit
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString("AuditCreated", null);
+		return new VString(ElementName.INK, null);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(KElement elem)
+	protected void updateAttributes(JDFAttributeMap map)
 	{
-		elem.renameAttribute(AttributeName.TIME, AttributeName.TIMESTAMP);
-		super.updateAttributes(elem);
+		VString specialInks = VString.getVString(map.remove(AttributeName.SPECIALINK), null);
+		if (specialInks == null)
+		{
+			map.renameKey(AttributeName.FAMILY, XJDFConstants.InkType);
+		}
+		else
+		{
+			String family = map.remove(AttributeName.FAMILY);
+			if (StringUtil.getNonEmpty(family) != null)
+			{
+				specialInks.appendUnique(family);
+				map.put(XJDFConstants.InkType, StringUtil.setvString(specialInks, JDFConstants.BLANK, null, null));
+			}
+		}
+		super.updateAttributes(map);
 	}
-
 }

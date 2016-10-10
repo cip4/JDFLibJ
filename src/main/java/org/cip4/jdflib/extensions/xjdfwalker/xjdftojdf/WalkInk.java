@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,18 +72,20 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.resource.process.prepress.JDFInk;
 
 /**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen 
  * 
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
-  */
-public class WalkCreatedAudit extends WalkAudit
+ *  
+ */
+public class WalkInk extends WalkResource
 {
 	/**
 	 * 
 	 */
-	public WalkCreatedAudit()
+	public WalkInk()
 	{
 		super();
 	}
@@ -96,16 +98,7 @@ public class WalkCreatedAudit extends WalkAudit
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return "AuditCreated".equals(toCheck.getLocalName());
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getJDFName(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	String getJDFName(KElement e)
-	{
-		return ElementName.CREATED;
+		return toCheck instanceof JDFInk;
 	}
 
 	/**
@@ -114,7 +107,7 @@ public class WalkCreatedAudit extends WalkAudit
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString("AuditCreated", null);
+		return VString.getVString(ElementName.INK, null);
 	}
 
 	/**
@@ -123,7 +116,18 @@ public class WalkCreatedAudit extends WalkAudit
 	@Override
 	protected void updateAttributes(KElement elem)
 	{
-		elem.renameAttribute(AttributeName.TIME, AttributeName.TIMESTAMP);
+		VString inkType = VString.getVString(elem.getNonEmpty(XJDFConstants.InkType), null);
+		if (inkType != null)
+		{
+			if (inkType.size() == 1)
+			{
+				elem.renameAttribute(XJDFConstants.InkType, AttributeName.FAMILY);
+			}
+			else
+			{
+				elem.renameAttribute(XJDFConstants.InkType, AttributeName.SPECIALINK);
+			}
+		}
 		super.updateAttributes(elem);
 	}
 

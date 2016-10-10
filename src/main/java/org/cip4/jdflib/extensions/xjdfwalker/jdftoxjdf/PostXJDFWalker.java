@@ -482,7 +482,7 @@ class PostXJDFWalker extends BaseElementWalker
 						pa.removeAttribute(AttributeName.WASTE);
 						pa.renameAttribute("ActualWaste", AttributeName.WASTE);
 					}
-					walkTree(newAmountPool, null);
+					walkTree(shNew.getRoot(), null);
 				}
 			}
 
@@ -1197,6 +1197,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public KElement walk(KElement xjdf, KElement dummy)
 		{
+			moveToSet(xjdf);
 			KElement ret = super.walk(xjdf, dummy);
 			xjdf.eraseEmptyNodes(true);
 			KElement set = xjdf.getParentNode_KElement();
@@ -1223,6 +1224,16 @@ class PostXJDFWalker extends BaseElementWalker
 				return null;
 			}
 			return ret;
+		}
+
+		private void moveToSet(KElement xjdf)
+		{
+			KElement set = xjdf.getParentNode_KElement();
+			if (set != null)
+			{
+				set.moveAttribute(AttributeName.UNIT, xjdf);
+			}
+
 		}
 
 		/**
@@ -1338,6 +1349,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public KElement walk(KElement xjdf, KElement dummy)
 		{
+			xjdf.removeAttribute(AttributeName.DESCRIPTIVENAME);
 			xjdf.removeAttribute(AttributeName.STATUS);
 			xjdf.removeAttribute(AttributeName.STATUSDETAILS);
 			xjdf.removeAttribute(AttributeName.ID);

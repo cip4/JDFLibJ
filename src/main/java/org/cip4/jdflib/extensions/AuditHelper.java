@@ -87,8 +87,7 @@ public class AuditHelper extends BaseXJDFHelper
 	@Override
 	public void cleanUp()
 	{
-		// TODO Auto-generated method stub
-
+		theElement.appendAnchor(null);
 	}
 
 }

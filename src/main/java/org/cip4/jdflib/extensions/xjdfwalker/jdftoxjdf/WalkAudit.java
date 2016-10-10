@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,6 +72,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 
 /**
@@ -109,6 +110,7 @@ public class WalkAudit extends WalkJDFSubElement
 	{
 		JDFAudit a = (JDFAudit) jdf;
 		employeeToAuthor(a);
+		a.appendAnchor(null);
 		KElement e = super.walk(jdf, xjdf);
 		return e;
 	}
@@ -130,12 +132,25 @@ public class WalkAudit extends WalkJDFSubElement
 	 */
 	void moveToParentAudit(final KElement jdf, KElement auditParent)
 	{
-		auditParent.moveAttribute(AttributeName.AGENTNAME, jdf);
+		jdf.removeAttribute(AttributeName.AGENTNAME);
+		jdf.removeAttribute(AttributeName.AGENTVERSION);
 		auditParent.moveAttribute(AttributeName.AGENTVERSION, jdf);
 		auditParent.moveAttribute(AttributeName.AUTHOR, jdf);
 		auditParent.moveAttribute(AttributeName.PERSONALID, jdf);
 		auditParent.moveAttribute(AttributeName.ID, jdf);
 		auditParent.moveAttribute(AttributeName.TIMESTAMP, jdf);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		map.remove(AttributeName.AGENTNAME);
+		map.remove(AttributeName.AGENTVERSION);
+		map.renameKey(AttributeName.TIMESTAMP, AttributeName.TIME);
+		super.updateAttributes(map);
 	}
 
 }

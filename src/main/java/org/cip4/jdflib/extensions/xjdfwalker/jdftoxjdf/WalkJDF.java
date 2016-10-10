@@ -177,7 +177,6 @@ public class WalkJDF extends WalkJDFElement
 
 		if (jdfToXJDF.isUpdateVersion())
 		{
-			newRootP.setAttribute(AttributeName.VERSION, "2.0");
 			newRootP.setID(null);
 		}
 		updateTypes(newRootP, types);
@@ -271,7 +270,7 @@ public class WalkJDF extends WalkJDFElement
 	@Override
 	protected void updateAttributes(JDFAttributeMap map)
 	{
-		map.remove(AttributeName.ACTIVATION);
+		map.remove(AttributeName.AGENTVERSION);
 		map.remove(AttributeName.MAXVERSION);
 		map.remove(AttributeName.STATUS);
 		map.remove(AttributeName.STATUSDETAILS);

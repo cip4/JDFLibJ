@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -66,24 +66,26 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
 
 /**
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
-  */
-public class WalkCreatedAudit extends WalkAudit
+ */
+public class WalkConventionalPrintingParams extends WalkInlineAllRes
 {
 	/**
 	 * 
 	 */
-	public WalkCreatedAudit()
+	public WalkConventionalPrintingParams()
 	{
 		super();
 	}
@@ -96,16 +98,7 @@ public class WalkCreatedAudit extends WalkAudit
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return "AuditCreated".equals(toCheck.getLocalName());
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getJDFName(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	String getJDFName(KElement e)
-	{
-		return ElementName.CREATED;
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFConventionalPrintingParams);
 	}
 
 	/**
@@ -114,17 +107,21 @@ public class WalkCreatedAudit extends WalkAudit
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString("AuditCreated", null);
+		return new VString(ElementName.CONVENTIONALPRINTINGPARAMS, null);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(KElement elem)
+	protected void updateAttributes(JDFAttributeMap map)
 	{
-		elem.renameAttribute(AttributeName.TIME, AttributeName.TIMESTAMP);
-		super.updateAttributes(elem);
+		map.remove(AttributeName.PRINTINGTYPE);
+		map.remove(AttributeName.MEDIALOCATION);
+		map.remove(AttributeName.NONPRINTABLEMARGINBOTTOM);
+		map.remove(AttributeName.NONPRINTABLEMARGINLEFT);
+		map.remove(AttributeName.NONPRINTABLEMARGINRIGHT);
+		map.remove(AttributeName.NONPRINTABLEMARGINTOP);
+		super.updateAttributes(map);
 	}
-
 }

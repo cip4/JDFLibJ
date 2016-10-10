@@ -139,6 +139,7 @@ public class AuditPoolHelper extends BaseXJDFHelper
 			shNew.setUsage(sh.getUsage());
 			shNew.setProcessUsage(sh.getProcessUsage());
 		}
+		ah.cleanUp();
 		return ah;
 	}
 

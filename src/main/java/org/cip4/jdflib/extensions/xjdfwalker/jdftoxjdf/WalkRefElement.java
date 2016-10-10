@@ -76,7 +76,6 @@ import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.resource.JDFResource;
 
@@ -132,7 +131,7 @@ public class WalkRefElement extends WalkJDFElement
 	 */
 	private void refProduct(JDFRefElement refElem, KElement xjdf)
 	{
-		final String attName = ProductHelper.PRODUCT + "Ref";
+		final String attName = "ItemRef";
 		final String id = jdfToXJDF.getProduct(refElem.getrRef());
 		xjdf.appendAttribute(attName, id, null, " ", true);
 	}
