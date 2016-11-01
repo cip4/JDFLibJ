@@ -1111,19 +1111,18 @@ public class UrlUtil
 	 * @param url the url to test
 	 * @return
 	 */
-	public static boolean isCID(final String url)
+	public static boolean isCID(String url)
 	{
-		String urlLocal = url;
 
-		if (urlLocal == null)
+		if (url == null)
 		{
 			return false;
 		}
-		if (urlLocal.startsWith("<"))
+		if (url.startsWith("<"))
 		{
-			urlLocal = urlLocal.substring(1);
+			url = url.substring(1);
 		}
-		final String lowerURL = urlLocal.toLowerCase();
+		final String lowerURL = url.toLowerCase();
 		return lowerURL.startsWith("cid:");
 	}
 
@@ -1256,14 +1255,22 @@ public class UrlUtil
 	public static String normalize(String urlString)
 	{
 		if (UrlUtil.isUNC(urlString))
+		{
 			return uncToUrl(urlString, false);
+		}
 		else if (UrlUtil.isFile(urlString))
+		{
 			urlString = "file:" + urlString.substring(5);
+		}
+		else if (UrlUtil.isCID(urlString))
+		{
+			urlString = StringUtil.replaceCharSet(urlString, "<>", null, 0);
+			urlString = "cid:" + urlString.substring(4);
+		}
 		else if (!UrlUtil.isRelativeURL(urlString))
 		{
 			final URL url = stringToURL(urlString);
-			if (url != null)
-				return urlToString(url);
+			urlString = urlToString(url);
 		}
 		urlString = UrlUtil.unEscape(urlString);
 		urlString = UrlUtil.escape(urlString, false);

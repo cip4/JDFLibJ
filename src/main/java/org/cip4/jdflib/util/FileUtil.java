@@ -528,7 +528,7 @@ public class FileUtil
 		}
 		catch (NoSuchAlgorithmException e)
 		{
-			md5 = null;
+			return null;
 		}
 		try
 		{
@@ -574,7 +574,7 @@ public class FileUtil
 		}
 		catch (NoSuchAlgorithmException e)
 		{
-			md5 = null;
+			return null;
 		}
 		synchronized (md5)
 		{

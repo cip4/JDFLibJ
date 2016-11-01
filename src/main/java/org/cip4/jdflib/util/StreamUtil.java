@@ -174,7 +174,7 @@ public class StreamUtil
 		}
 		catch (NoSuchAlgorithmException e)
 		{
-			md5 = null;
+			return null;
 		}
 		synchronized (md5)
 		{
