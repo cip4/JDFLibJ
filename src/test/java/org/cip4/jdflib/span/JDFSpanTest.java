@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -80,8 +80,10 @@ package org.cip4.jdflib.span;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.resource.intent.JDFBindingIntent;
+import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.span.JDFSpanBindingType.EnumSpanBindingType;
 import org.junit.Test;
 
@@ -99,10 +101,21 @@ public class JDFSpanTest extends JDFTestCaseBase
 	@Test
 	public void testBindTypeNone()
 	{
-		JDFDoc doc = new JDFDoc("BindingIntent");
+		JDFDoc doc = new JDFDoc(ElementName.BINDINGINTENT);
 		JDFBindingIntent e = (JDFBindingIntent) doc.getRoot();
 		JDFSpanBindingType bindingType = e.appendBindingType();
 		bindingType.setActual(EnumSpanBindingType.None);
 		assertEquals(bindingType.getActual(), EnumSpanBindingType.None);
 	}
+
+	@Test
+	public void testTimeNull()
+	{
+		JDFDoc doc = new JDFDoc(ElementName.DELIVERYINTENT);
+		JDFDeliveryIntent e = (JDFDeliveryIntent) doc.getRoot();
+		JDFTimeSpan ts = e.appendRequired();
+		ts.setPreferred(null);
+		assertNull(ts.getPreferred());
+	}
+
 }

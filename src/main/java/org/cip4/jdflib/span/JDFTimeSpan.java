@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -143,8 +143,6 @@ public class JDFTimeSpan extends JDFSpanBase
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	// **************************************** Methods
-	// *********************************************
 	/**
 	 * toString
 	 * 
@@ -163,7 +161,7 @@ public class JDFTimeSpan extends JDFSpanBase
 	 */
 	public void setActual(JDFDate value)
 	{
-		setAttribute(AttributeName.ACTUAL, value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.ACTUAL, value == null ? null : value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -181,7 +179,7 @@ public class JDFTimeSpan extends JDFSpanBase
 	 */
 	public void setPreferred(JDFDate value)
 	{
-		setAttribute(AttributeName.PREFERRED, value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.PREFERRED, value == null ? null : value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -199,7 +197,7 @@ public class JDFTimeSpan extends JDFSpanBase
 	 */
 	public void setRange(JDFDateTimeRange value)
 	{
-		setAttribute(AttributeName.RANGE, value.toString());
+		setAttribute(AttributeName.RANGE, value == null ? null : value.toString());
 	}
 
 	/**

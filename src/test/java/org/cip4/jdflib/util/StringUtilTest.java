@@ -1042,6 +1042,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.token(s, 0, "?/"), "a");
 		assertEquals(StringUtil.token(s, 1, "?/"), "b");
 		assertEquals(StringUtil.token(s, 2, "?/"), "c");
+		assertNull(StringUtil.token("", 0, null));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

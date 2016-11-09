@@ -828,7 +828,7 @@ public class StringUtil
 	 */
 	public static String token(final String strWork, int index, String delim)
 	{
-		if (strWork == null)
+		if (getNonEmpty(strWork) == null)
 		{
 			return null; // null bleibt null
 		}

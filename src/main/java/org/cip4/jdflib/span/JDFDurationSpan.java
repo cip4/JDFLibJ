@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -156,7 +156,7 @@ public class JDFDurationSpan extends JDFSpanBase
 
 	public void setActual(JDFDuration value)
 	{
-		setAttribute(AttributeName.ACTUAL, value.getDurationISO(), JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.ACTUAL, value == null ? null : value.getDurationISO(), JDFConstants.EMPTYSTRING);
 	}
 
 	public JDFDuration getActual()
@@ -173,7 +173,7 @@ public class JDFDurationSpan extends JDFSpanBase
 
 	public void setPreferred(JDFDuration value)
 	{
-		setAttribute(AttributeName.PREFERRED, value.getDurationISO(), JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.PREFERRED, value == null ? null : value.getDurationISO(), JDFConstants.EMPTYSTRING);
 	}
 
 	public JDFDuration getPreferred()
@@ -190,7 +190,7 @@ public class JDFDurationSpan extends JDFSpanBase
 
 	public void setRange(JDFDurationRange value)
 	{
-		setAttribute(AttributeName.RANGE, value.toString());
+		setAttribute(AttributeName.RANGE, value == null ? null : value.toString());
 	}
 
 	public JDFDurationRange getRange()
@@ -207,7 +207,7 @@ public class JDFDurationSpan extends JDFSpanBase
 
 	public void setOfferRange(JDFDurationRange value)
 	{
-		setAttribute(AttributeName.OFFERRANGE, value.toString());
+		setAttribute(AttributeName.OFFERRANGE, value == null ? null : value.toString());
 	}
 
 	public JDFDurationRange getOfferRange()
