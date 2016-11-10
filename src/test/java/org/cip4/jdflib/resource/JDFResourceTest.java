@@ -2143,7 +2143,6 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertEquals("size false", vL.size(), 15);
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
 	/**
 	* 
 	*/
@@ -2152,7 +2151,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
-		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.AnyInput, null, 0);
 
 		xm.setResStatus(EnumResStatus.Incomplete, true);
 		assertEquals(xm.getStatusFromLeaves(false), EnumResStatus.Incomplete);
@@ -2175,7 +2174,6 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	}
 
-	// //////////////////////////////////////////////////////
 	/**
 	 * @return the doc
 	 * 

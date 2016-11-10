@@ -609,6 +609,24 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testDeviceInfoEmployees()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
+		JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
+		di.appendDevice().setDeviceID("id");
+		di.setDeviceStatus(EnumDeviceStatus.Running);
+		di.appendEmployee().setPersonalID("e1");
+		di.appendEmployee().setPersonalID("e2");
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/Activity/@PersonalID", null), "e1");
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/Activity[2]@PersonalID", null), "e2");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testJMFEmployee()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.PipeClose);

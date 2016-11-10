@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,6 +84,8 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
@@ -120,6 +122,18 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
+
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+	}
+
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
 	}
 
 	private static final long serialVersionUID = 1L;

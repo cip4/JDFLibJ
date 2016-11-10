@@ -73,8 +73,10 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.node.JDFActivity;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.StringUtil;
@@ -124,9 +126,9 @@ public class WalkEmployee extends WalkResource
 	public KElement walk(KElement jdf, KElement xjdf)
 	{
 		KElement parent = jdf.getParentNode_KElement();
+		JDFEmployee emp = (JDFEmployee) jdf;
 		if ((parent instanceof JDFAudit) || (parent instanceof JDFMessage))
 		{
-			JDFEmployee emp = (JDFEmployee) jdf;
 			String personalID = StringUtil.getNonEmpty(emp.getPersonalID());
 			xjdf.setAttribute(AttributeName.PERSONALID, personalID);
 			String author = StringUtil.getNonEmpty(emp.getDescriptiveName());
@@ -135,6 +137,12 @@ public class WalkEmployee extends WalkResource
 		}
 		else if (parent instanceof JDFJMF)
 		{
+			return null;
+		}
+		else if (parent instanceof JDFDeviceInfo)
+		{
+			JDFActivity a = ((JDFDeviceInfo) xjdf).appendActivity();
+			a.setPersonalID(emp.getPersonalID());
 			return null;
 		}
 		else

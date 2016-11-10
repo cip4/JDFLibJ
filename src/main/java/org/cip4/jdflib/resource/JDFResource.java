@@ -7831,10 +7831,9 @@ public class JDFResource extends JDFElement
 		final VElement v = getLeaves(bAll);
 		if (v != null)
 		{
-			final int siz = v.size();
-			for (int i = 0; i < siz; i++)
+			for (KElement e : v)
 			{
-				final JDFResource r = (JDFResource) v.elementAt(i);
+				final JDFResource r = (JDFResource) e;
 				if (minStatus == null)
 				{
 					minStatus = r.getResStatus(false);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,6 +73,8 @@ package org.cip4.jdflib.jmf;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
@@ -239,6 +241,19 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 		assertFalse(di1.isSamePhase(di2, false));
 		di2.appendEmployee().setPersonalID("p3");
 		assertFalse(di1.isSamePhase(di2, false));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testEmployeeDeprecated15()
+	{
+		JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Brief);
+		JDFDeviceInfo di2 = jmf.getSignal(0).getCreateDeviceInfo(0);
+		di2.appendEmployee().setPersonalID("p");
+		assertTrue(di2.getDeprecatedElements(0).isEmpty());
+
 	}
 
 	/**
