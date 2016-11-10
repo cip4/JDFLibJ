@@ -92,6 +92,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.IntentHelper;
@@ -621,6 +622,23 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		KElement xjmf = conv.makeNewJMF(jmf);
 		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/Activity/@PersonalID", null), "e1");
 		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/Activity[2]@PersonalID", null), "e2");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testDeviceInfoModuleStatus()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
+		JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
+		di.appendDevice().setDeviceID("id");
+		di.setDeviceStatus(EnumDeviceStatus.Running);
+		di.appendModuleStatus().setModuleIndex(new JDFIntegerRangeList(new int[] { 0 }));
+		di.appendModuleStatus().setModuleIndex(new JDFIntegerRangeList(new int[] { 1 }));
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@ModuleIDs", null), "0 1");
 	}
 
 	/**
