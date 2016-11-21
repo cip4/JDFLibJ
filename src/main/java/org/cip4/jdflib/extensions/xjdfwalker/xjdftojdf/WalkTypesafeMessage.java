@@ -72,6 +72,7 @@ import java.util.List;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -97,6 +98,7 @@ public class WalkTypesafeMessage extends WalkXElement
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
+		moveFromSender(e, e.getElement(XJDFConstants.SENDER));
 		String messageName = e.getLocalName();
 		List<String> families = EnumFamily.getFamilies();
 		for (String family : families)

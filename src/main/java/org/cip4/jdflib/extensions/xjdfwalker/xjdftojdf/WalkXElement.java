@@ -180,6 +180,16 @@ public class WalkXElement extends BaseWalker
 		elem.renameAttribute(XJDFConstants.BinderySignatureIDs, AttributeName.ASSEMBLYIDS);
 	}
 
+	void moveFromSender(KElement parent, KElement sender)
+	{
+		if (sender != null)
+		{
+			parent.setAttributes(sender);
+			sender.deleteNode();
+		}
+
+	}
+
 	/**
 	 * 
 	 * @param elem

@@ -72,6 +72,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFJMF;
 
@@ -99,6 +100,7 @@ public class WalkJMF extends WalkXElement
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
 		xjdfToJDFImpl.currentJDFNode = null;
+		moveFromSender(e, e.getElement(XJDFConstants.SENDER));
 		KElement dummy = super.walk(e, trackElem);
 		trackElem.setAttributes(dummy);
 		((JDFJMF) trackElem).setVersion(xjdfToJDFImpl.getVersion());
@@ -117,6 +119,7 @@ public class WalkJMF extends WalkXElement
 	{
 		super.updateAttributes(elem);
 		elem.renameAttribute(AttributeName.DEVICEID, AttributeName.SENDERID, null, null);
+		elem.renameAttribute(AttributeName.TIME, AttributeName.TIMESTAMP, null, null);
 	}
 
 	/**
@@ -129,6 +132,15 @@ public class WalkJMF extends WalkXElement
 	{
 		String localName = toCheck.getLocalName();
 		return super.matches(toCheck) && (ElementName.JMF.equals(localName) || XJDFConstants.XJMF.equals(localName));
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return VString.getVString(XJDFConstants.XJMF, null);
 	}
 
 }
