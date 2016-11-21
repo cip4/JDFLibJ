@@ -580,21 +580,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testPipeJMF()
-	{
-		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.PipeClose);
-		JDFToXJDF conv = new JDFToXJDF();
-		KElement xjmf = conv.makeNewJMF(jmf);
-		assertEquals(xjmf.getXPathAttribute("CommandPipeControl/PipeParams/@Operation", null), "PipeClose");
-		final JDFJMF jmfResp = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.PipeClose);
-		xjmf = conv.makeNewJMF(jmfResp);
-		assertEquals(xjmf.getElement(null).getLocalName(), "ResponsePipeControl");
-	}
-
-	/**
-	 * 
-	 */
-	@Test
 	public void testDeviceInfoStatus()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
@@ -1215,38 +1200,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/Part/@Location", null));
 		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/Part/@Location", null));
 		assertNotNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/Part/@Separation", null));
-	}
-
-	/**
-	 * 
-	 */
-	@Test
-	public void testSubscriptionJMF()
-	{
-		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSubscription("url", 42, 21, "qe33");
-		jmf.getQuery(0).getSubscription().appendObservationTarget().setAttributes(new VString("a", null));
-		jmf.getQuery(0).getStatusQuParams().setQueueInfo(true);
-		JDFToXJDF conv = new JDFToXJDF();
-		KElement xjmf = conv.makeNewJMF(jmf);
-		assertNull(xjmf.getChildByTagName(ElementName.OBSERVATIONTARGET, null, 0, null, false, false));
-		KElement subscription = xjmf.getChildByTagName(ElementName.SUBSCRIPTION, null, 0, null, false, false);
-		assertNotNull(subscription);
-		assertFalse(subscription.hasAttribute(AttributeName.REPEATSTEP));
-	}
-
-	/**
-	 * 
-	 */
-	@Test
-	public void testStatusJMF()
-	{
-		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSubscription("url", 42, 21, "qe33");
-		jmf.getQuery(0).getSubscription().appendObservationTarget().setAttributes(new VString("a", null));
-		jmf.getQuery(0).getStatusQuParams().setQueueInfo(true);
-		JDFToXJDF conv = new JDFToXJDF();
-		KElement xjmf = conv.makeNewJMF(jmf);
-		KElement statusquparams = xjmf.getChildByTagName(ElementName.STATUSQUPARAMS, null, 0, null, false, false);
-		assertFalse(statusquparams.hasAttribute(AttributeName.QUEUEINFO));
 	}
 
 	/**

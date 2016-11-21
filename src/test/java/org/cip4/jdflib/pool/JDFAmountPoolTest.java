@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -421,5 +421,24 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 		assertNull(ap.getPartAmount(map));
 		assertNull(ap.getPartAmount(2));
 		assertEquals(pa, ap.getPartAmount(0));
+	}
+
+	/**
+	 * make sure no npe in empty amountpools
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testGetPartAmountEmpty() throws Exception
+	{
+
+		final JDFResourceLink rl = (JDFResourceLink) new JDFDoc("MediaLink").getRoot();
+		ap = rl.appendAmountPool();
+		JDFPartAmount pa = ap.appendPartAmount();
+		assertEquals(pa, ap.getPartAmount(new JDFAttributeMap()));
+		assertEquals(pa, ap.getPartAmount((JDFAttributeMap) null));
+		pa.appendPart();
+		assertEquals(pa, ap.getPartAmount(new JDFAttributeMap()));
+		assertEquals(pa, ap.getPartAmount((JDFAttributeMap) null));
 	}
 }

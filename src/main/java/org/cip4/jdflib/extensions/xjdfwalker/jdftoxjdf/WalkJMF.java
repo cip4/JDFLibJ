@@ -103,7 +103,6 @@ public class WalkJMF extends WalkJDFElement
 		jdfToXJDF.first.add(jdf.getID());
 		final JDFJMF jmf = (JDFJMF) jdf;
 		setRootAttributes(jmf, xjdf);
-
 		return xjdf;
 	}
 
@@ -153,5 +152,6 @@ public class WalkJMF extends WalkJDFElement
 	{
 		super.updateAttributes(map);
 		map.renameKey(AttributeName.SENDERID, AttributeName.DEVICEID);
+		map.renameKey(AttributeName.TIMESTAMP, AttributeName.TIME);
 	}
 }

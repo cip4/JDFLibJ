@@ -1839,7 +1839,28 @@ public class JDFResourceTest extends JDFTestCaseBase
 			final JDFExposedMedia xmp = (JDFExposedMedia) v.elementAt(i);
 			assertTrue("overlap of maps", m.overlapMap(xmp.getPartMap()));
 		}
+	}
 
+	/**
+	 * check that the vector gets missing levels of prtition correctly
+	 */
+	@Test
+	public void testGetPartionVectorExplicitSkip()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		JDFResource xm = n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
+		JDFResource xm2 = xm.addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "s1").addPartition(EnumPartIDKey.Side, "Front");
+		VElement vSeps = xm2.addPartitions(EnumPartIDKey.Separation, new VString("C M Y K", null));
+		for (KElement sep : vSeps)
+		{
+			((JDFResource) sep).addPartitions(EnumPartIDKey.PartVersion, new VString("DE EN FR ES", null));
+		}
+		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		mPart.put("SheetName", "s1");
+		mPart.put("Side", "Front");
+		mPart.put("PartVersion", "DE");
+		VElement partitionVector = xm.getPartitionVector(mPart, EnumPartUsage.Explicit);
+		assertEquals(4, partitionVector.size());
 	}
 
 	/**

@@ -96,12 +96,12 @@ public class WalkMessage extends WalkJDFElement
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		JDFMessage m = (JDFMessage) jdf;
+
 		if (jdfToXJDF.isTypeSafeMessage())
 		{
 			JDFMessage m2 = makeTypesafe(m);
 			if (m2 == null)
 			{
-				log.info("Removing message family " + m.getFamily());
 				return null;
 			}
 		}

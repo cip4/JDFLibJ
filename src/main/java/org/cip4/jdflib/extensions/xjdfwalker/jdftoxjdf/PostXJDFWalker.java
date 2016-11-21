@@ -1748,4 +1748,100 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 	}
 
+	/**
+	 * class that ensures that we do not have signaturename partitions 
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkXJMF extends WalkElement
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString(XJDFConstants.XJMF, null);
+		}
+
+		/**
+		 * 
+		 */
+		public WalkXJMF()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(KElement xjdf, KElement dummy)
+		{
+			moveToSender(xjdf);
+			return super.walk(xjdf, dummy);
+		}
+
+	}
+
+	/**
+	 * class that ensures that we do not have signaturename partitions 
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkMessage extends WalkElement
+	{
+
+		/**
+		 * 
+		 */
+		public WalkMessage()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(KElement xjdf, KElement dummy)
+		{
+			moveToSender(xjdf);
+			return super.walk(xjdf, dummy);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public boolean matches(KElement e)
+		{
+			String localName = e.getLocalName();
+			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE)
+					|| localName.startsWith(ElementName.COMMAND);
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param xjdf
+	 */
+	void moveToSender(KElement xjdf)
+	{
+		if (xjdf != null)
+		{
+			JDFElement sender = (JDFElement) xjdf.getCreateElement(XJDFConstants.SENDER);
+			sender.moveAttribute(AttributeName.AGENTNAME, xjdf);
+			sender.moveAttribute(AttributeName.AGENTVERSION, xjdf);
+			sender.moveAttribute(AttributeName.AUTHOR, xjdf);
+			sender.moveAttribute(AttributeName.DEVICEID, xjdf);
+			sender.moveAttribute(AttributeName.TIME, xjdf);
+			sender.moveAttribute(AttributeName.ICSVERSIONS, xjdf);
+			sender.moveAttribute(AttributeName.PERSONALID, xjdf);
+			sender.moveAttribute(AttributeName.REFID, xjdf);
+		}
+	}
 }
