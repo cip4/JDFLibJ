@@ -106,7 +106,6 @@ import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JMFBuilder;
-import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFHoleLine;
@@ -636,7 +635,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		jmf.getCommand(0).appendEmployee().setPersonalID("P1");
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjmf = conv.makeNewJMF(jmf);
-		assertEquals(xjmf.getXPathAttribute("CommandPipeControl/@PersonalID", null), "P1");
+		assertEquals(xjmf.getXPathAttribute("CommandPipeControl/Sender/@PersonalID", null), "P1");
 
 		XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
 		JDFDoc d = invert.convert(xjmf);

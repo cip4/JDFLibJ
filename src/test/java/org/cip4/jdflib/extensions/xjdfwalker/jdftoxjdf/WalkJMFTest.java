@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -95,8 +96,9 @@ public class WalkJMFTest extends JDFTestCaseBase
 
 		KElement xjmf = new JDFToXJDF().convert(jmf);
 
-		assertNull(xjmf.getNonEmpty(AttributeName.SENDERID));
-		assertEquals(xjmf.getNonEmpty(AttributeName.DEVICEID), "s1");
+		KElement sender = xjmf.getElement(XJDFConstants.SENDER);
+		assertNull(sender.getNonEmpty(AttributeName.SENDERID));
+		assertEquals(sender.getNonEmpty(AttributeName.DEVICEID), "s1");
 	}
 
 	/**

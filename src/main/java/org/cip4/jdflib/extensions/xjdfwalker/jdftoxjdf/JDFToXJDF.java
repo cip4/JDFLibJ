@@ -467,7 +467,7 @@ public class JDFToXJDF extends PackageElementWalker
 		pw.walkTreeKidsFirst(newRoot);
 		if (bJMF)
 		{
-			if (newRoot.numChildElements(null, null) == 0)
+			if (newRoot.numChildElements(null, null) == newRoot.numChildElements(XJDFConstants.SENDER, null))
 			{
 				log.info("erased empty jmf");
 				newRoot = null;
