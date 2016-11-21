@@ -73,6 +73,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.util.ByteArrayIOStream;
+import org.cip4.jdflib.util.zip.ZipReader;
 import org.junit.Test;
 
 /**
@@ -95,6 +96,25 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 		KElement a = new XMLDoc("a", null).getRoot();
 		KElement t = new XSLTransformHelper(a, xsl).getTransformElement().getRoot();
 		assertNotNull(t);
+	}
+
+	/**
+	* make sure we also get all valid deep elements
+	*/
+	@Test
+	public void testGetTransformMetadata()
+	{
+		XMLDoc xsl = new XMLDoc("xsl:stylesheet", "http://www.w3.org/1999/XSL/Transform");
+		KElement style = xsl.getRoot();
+		KElement template = style.appendElement("xsl:template");
+		template.setAttribute("match", "*");
+		template.appendElement("html", "http://www.w3.org/1999/xhtml");
+		XMLDoc xmlDoc = new XMLDoc("a", null);
+		ZipReader zip = new ZipReader("abc");
+		xmlDoc.setZipReader(zip);
+		KElement a = xmlDoc.getRoot();
+		XMLDoc t = new XSLTransformHelper(a, xsl).getTransformElement();
+		assertEquals(zip, t.getZipReader());
 	}
 
 	/**
