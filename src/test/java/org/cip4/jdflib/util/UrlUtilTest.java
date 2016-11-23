@@ -978,6 +978,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.normalize("HTTP://a//a.b"), "http://a/a.b");
 		assertEquals(UrlUtil.normalize("cid:a.b"), "cid:a.b");
 		assertEquals(UrlUtil.normalize("<cid:a.b>"), "cid:a.b");
+		assertEquals(UrlUtil.normalize("http://a/a.b?f=g"), "http://a/a.b?f=g");
 	}
 
 	/**

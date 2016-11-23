@@ -1261,6 +1261,8 @@ public class UrlUtil
 		else if (UrlUtil.isFile(urlString))
 		{
 			urlString = "file:" + urlString.substring(5);
+			urlString = UrlUtil.unEscape(urlString);
+			urlString = UrlUtil.escape(urlString, false);
 		}
 		else if (UrlUtil.isCID(urlString))
 		{
@@ -1272,8 +1274,6 @@ public class UrlUtil
 			final URL url = stringToURL(urlString);
 			urlString = urlToString(url);
 		}
-		urlString = UrlUtil.unEscape(urlString);
-		urlString = UrlUtil.escape(urlString, false);
 		urlString = UrlUtil.cleanDots(urlString);
 
 		return urlString;
