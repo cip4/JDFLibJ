@@ -79,6 +79,7 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import java.util.Arrays;
 import java.util.StringTokenizer;
 import java.util.zip.DataFormatException;
 
@@ -376,6 +377,19 @@ public class JDFIntegerList extends JDFNumList
 		else
 		{
 			set(pos, Integer.valueOf(val));
+		}
+
+	}
+
+	@Override
+	public void sort()
+	{
+		int[] a = getIntArray();
+		Arrays.sort(a);
+		int pos = 0;
+		for (int d : a)
+		{
+			setInt(pos++, d);
 		}
 
 	}

@@ -149,7 +149,7 @@ public class WalkInsert extends WalkJDFSubElement
 			JDFIntegerList il = irl.getIntegerList();
 			if (il != null)
 			{
-				il.sort(null);
+				il.sort(il);
 				int i0 = il.getInt(0);
 				int i1 = il.getInt(-1);
 				if (XJDFConstants.BlowIn.equals(eNew.getLocalName()))

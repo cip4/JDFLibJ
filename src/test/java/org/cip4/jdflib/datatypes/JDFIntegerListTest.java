@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,8 +79,8 @@
 package org.cip4.jdflib.datatypes;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -89,9 +89,6 @@ import org.junit.Test;
 public class JDFIntegerListTest extends JDFTestCaseBase
 {
 
-	// /////////////////////////////////////////////////////////////////
-	// /////////////////////////////////////////////////////////////////
-
 	/**
 	 * 
 	 */
@@ -99,8 +96,8 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 	public void testConstruct()
 	{
 		final JDFIntegerList l = new JDFIntegerList(3);
-		Assert.assertEquals(l.size(), 1);
-		Assert.assertEquals(l.getInt(0), 3);
+		assertEquals(l.size(), 1);
+		assertEquals(l.getInt(0), 3);
 	}
 
 	/**
@@ -110,14 +107,30 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 	public void testSetInt()
 	{
 		final JDFIntegerList l = new JDFIntegerList(3);
-		Assert.assertEquals(l.size(), 1);
-		Assert.assertEquals(l.getInt(0), 3);
+		assertEquals(l.size(), 1);
+		assertEquals(l.getInt(0), 3);
 		l.setInt(0, 2);
-		Assert.assertEquals(l.getInt(0), 2);
-		Assert.assertEquals(l.size(), 1);
+		assertEquals(l.getInt(0), 2);
+		assertEquals(l.size(), 1);
 		l.setInt(1, 4);
-		Assert.assertEquals(l.getInt(1), 4);
+		assertEquals(l.getInt(1), 4);
 		l.setInt(-1, 3);
-		Assert.assertEquals(l.getInt(1), 3);
+		assertEquals(l.getInt(1), 3);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testSort()
+	{
+		final JDFIntegerList l = new JDFIntegerList(3);
+		l.setInt(0, 2);
+		l.setInt(1, 4);
+		l.setInt(2, 3);
+		l.sort();
+		assertEquals(l.get(0), 2);
+		assertEquals(l.get(1), 3);
+		assertEquals(l.get(2), 4);
 	}
 }

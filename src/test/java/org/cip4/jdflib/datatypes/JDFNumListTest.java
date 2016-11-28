@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -397,7 +397,22 @@ public class JDFNumListTest extends JDFTestCaseBase
 		assertEquals(v.get(0), nl);
 		Collections.sort(v, new JDFNumList.VolumeComparator());
 		assertEquals(v.get(0), nl);
+	}
 
+	/**
+	 * 
+	 */
+	@Test
+	public void testSort()
+	{
+		final JDFNumberList l = new JDFNumberList();
+		l.add(2);
+		l.add(4);
+		l.add(3);
+		l.sort();
+		assertEquals(l.get(0), 2.0);
+		assertEquals(l.get(1), 3.0);
+		assertEquals(l.get(2), 4.0);
 	}
 
 	/**

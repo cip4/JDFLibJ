@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,6 +77,7 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
@@ -698,6 +699,18 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 		}
 
 		return intArray;
+	}
+
+	public void sort()
+	{
+		double[] a = getDoubleList();
+		Arrays.sort(a);
+		int pos = 0;
+		for (double d : a)
+		{
+			set(pos++, d);
+		}
+
 	}
 
 	/**

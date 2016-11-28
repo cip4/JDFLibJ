@@ -90,13 +90,16 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFNumberList extends JDFNumList
 {
+	public JDFNumberList()
+	{
+		super();
+	}
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	// **************************************** Constructors
-	// ****************************************
 	/**
 	 * constructs a number list with the given string
 	 * 
