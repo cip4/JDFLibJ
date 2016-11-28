@@ -129,6 +129,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 		}
 		moveToResourceSet((JDFResourceInfo) eNew, ri.getAmountPool());
 		updateInfos((JDFResourceInfo) eNew);
+		eNew.removeAttribute(AttributeName.RESOURCENAME);
 		return eNew;
 	}
 
