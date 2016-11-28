@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -80,6 +81,7 @@ import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
+import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
@@ -125,7 +127,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 				nRes++;
 			}
 		}
-		moveToResourceSet((JDFResourceInfo) eNew);
+		moveToResourceSet((JDFResourceInfo) eNew, ri.getAmountPool());
 		updateInfos((JDFResourceInfo) eNew);
 		return eNew;
 	}
@@ -164,9 +166,9 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	/**
 	 * 
 	 * @param ri
-	 * @param eNew
+	 * @param ap
 	 */
-	private void moveToResourceSet(JDFResourceInfo ri)
+	private void moveToResourceSet(JDFResourceInfo ri, JDFAmountPool ap)
 	{
 		VJDFAttributeMap vPartMap = ri.getPartMapVector();
 		String resName = ri.getXPathAttribute("ResourceSet/@Name", null);
@@ -189,10 +191,24 @@ public class WalkResourceInfo extends WalkJDFSubElement
 		Vector<PartitionHelper> newParts = sh.getCreatePartitions(vPartMap, false);
 		for (PartitionHelper ph : newParts)
 		{
-			//TODO use correct amounts
-			ph.setAmount(ri.getActualAmount(), null, true);
+			if (ap == null)
+			{
+				//TODO use correct amounts
+				ph.setAmount(ri.getActualAmount(), null, true);
+			}
+			else
+			{
+				JDFAmountPool ap2 = (JDFAmountPool) ap.getParentNode_KElement().copyElement(ap, null);
+				ap2.reducePartAmounts(ph.getPartMapVector());
+				jdfToXJDF.walkTree(ap2, ph.getRoot());
+				ap2.deleteNode();
+			}
 		}
-		ri.removeAttribute(AttributeName.RESOURCENAME);
+		ri.removeChild(ElementName.AMOUNTPOOL, null, 0);
+		if (ap != null)
+		{
+			ap.deleteNode();
+		}
 	}
 
 	/**

@@ -66,36 +66,28 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.PartitionHelper;
-import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.process.JDFApprovalParams;
 
 /**
- * simply stop walking on these
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
  */
-public class WalkIgnore extends WalkXElement
+public class WalkApprovalParams extends WalkInlineAllRes
 {
 	/**
 	 * 
 	 */
-	public WalkIgnore()
+	public WalkApprovalParams()
 	{
 		super();
-	}
-
-	/**
-	 * @param e
-	 * @return the created resource
-	 */
-	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
-	{
-		return null;
 	}
 
 	/**
@@ -106,13 +98,7 @@ public class WalkIgnore extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		boolean matches = super.matches(toCheck);
-		matches = matches && (toCheck instanceof JDFPart) && PartitionHelper.isAsset(toCheck.getParentNode_KElement());
-		matches = matches || XJDFConstants.ChildProduct.equals(toCheck.getLocalName());
-		matches = matches || XJDFConstants.ProcessList.equals(toCheck.getLocalName());
-		matches = matches || XJDFConstants.Dependent.equals(toCheck.getLocalName());
-		matches = matches || XJDFConstants.PreflightItem.equals(toCheck.getLocalName());
-		return matches;
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFApprovalParams);
 	}
 
 	/**
@@ -121,7 +107,20 @@ public class WalkIgnore extends WalkXElement
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(new String[] { XJDFConstants.ChildProduct, XJDFConstants.ProcessList, XJDFConstants.Dependent, XJDFConstants.PreflightItem });
+		return new VString(ElementName.APPROVALPARAMS, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		if (!jdfToXJDF.isRetainAll())
+		{
+			map.remove(AttributeName.MINAPPROVALS);
+		}
+		super.updateAttributes(map);
 	}
 
 }

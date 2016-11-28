@@ -72,12 +72,17 @@ package org.cip4.jdflib.jmf;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
+import org.cip4.jdflib.pool.JDFAmountPool;
 import org.junit.Test;
 
 /**
@@ -158,6 +163,40 @@ public class JMFBuilderTest extends JDFTestCaseBase
 		JDFJMF jmf = b.buildResourceSignal(true, null);
 		assertEquals(jmf.getSignal(0).getType(), "Resource");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "resourceSignal");
+	}
+
+	/**
+	 * 
+	 * test ink resource signal
+	 */
+	@Test
+	public void testBuildResourceSignalInkLot()
+	{
+		JDFJMF jmf = b.buildResourceSignal(false, null);
+
+		JDFSignal signal = jmf.getSignal(0);
+		JDFResourceQuParams rqp = signal.getCreateResourceQuParams(0);
+		rqp.setJobID("job1");
+		rqp.setJobPartID("ConvPrint.1");
+		JDFResourceInfo ri = signal.getCreateResourceInfo(0);
+		ri.setResourceName(ElementName.INK);
+		ri.setUnit("g");
+		JDFAmountPool ap = ri.getCreateAmountPool();
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put(AttributeName.SIGNATURENAME, "sig1");
+		map.put(AttributeName.SHEETNAME, "s1");
+		map.put(AttributeName.SIDE, "Front");
+		for (int i = 1; i < 3; i++)
+		{
+			for (String sep : new VString("Cyan Magenta Yellow Black Grün", null))
+			{
+				map.put(AttributeName.SEPARATION, sep);
+				map.put(AttributeName.LOTID, "Los_" + i + "_" + sep);
+				ap.appendPartAmount(map).setActualAmount(125 + (i * 42 * sep.hashCode()) % 123);
+			}
+		}
+		assertEquals(signal.getType(), "Resource");
+		jmf.write2File(sm_dirTestDataTemp + "resourceInk.jmf");
 	}
 
 	/**

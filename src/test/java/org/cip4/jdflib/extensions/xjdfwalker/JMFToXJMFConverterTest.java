@@ -73,13 +73,18 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFQuery;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
+import org.cip4.jdflib.jmf.JDFResourceQuParams;
+import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
+import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.process.JDFPerson;
 import org.junit.Test;
 
@@ -208,6 +213,43 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	{
 		XJMFTypeMap.shutDown();
 		super.tearDown();
+	}
+
+	/**
+	 * 
+	 * test ink resource signal
+	 */
+	@Test
+	public void testBuildResourceSignalInkLot()
+	{
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
+
+		JDFSignal signal = jmf.getSignal(0);
+		JDFResourceQuParams rqp = signal.getCreateResourceQuParams(0);
+		rqp.setJobID("job1");
+		rqp.setJobPartID("ConvPrint.1");
+		JDFResourceInfo ri = signal.getCreateResourceInfo(0);
+		ri.setResourceName(ElementName.INK);
+		ri.setUnit("g");
+		JDFAmountPool ap = ri.getCreateAmountPool();
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put(AttributeName.SIGNATURENAME, "sig1");
+		map.put(AttributeName.SHEETNAME, "s1");
+		map.put(AttributeName.SIDE, "Front");
+		for (int i = 1; i < 3; i++)
+		{
+			for (String sep : new VString("Cyan Magenta Yellow Black Grün", null))
+			{
+				map.put(AttributeName.SEPARATION, sep);
+				map.put(AttributeName.LOTID, "Los_" + i + "_" + sep);
+				ap.appendPartAmount(map).setActualAmount(125 + (i * 42 * sep.hashCode()) % 123);
+			}
+		}
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+		assertNotNull(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/Part/@LotID", null));
+		assertEquals(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/Part/@LotID", null), jmf.getXPathAttribute("Signal/ResourceInfo/AmountPool/PartAmount/Part/@LotID", null));
+		xjmf.write2File(sm_dirTestDataTemp + "resourceInk.xjmf");
 	}
 
 }

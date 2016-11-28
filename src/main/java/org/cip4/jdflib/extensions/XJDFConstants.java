@@ -109,6 +109,7 @@ public abstract class XJDFConstants
 	public static final String Parent = "Parent";
 	public static final String ParentID = "ParentID";
 	public static final String PlacedObject = "PlacedObject";
+	public static final String PreflightItem = "PreflightItem";
 	public static final String Process = "Process";
 	public static final String ProcessList = "ProcessList";
 	public static final String ProcessTypes = "ProcessType"; // TODO discuss "s"
@@ -122,6 +123,8 @@ public abstract class XJDFConstants
 	public static final String SENDER = "Sender";
 	public static final String StickOn = "StickOn";
 	public static final String SurfaceColor = "SurfaceColor";
+
+	public static final String TransferCurveName = "TransferCurveName";
 
 	public static final String XJDF = "XJDF";
 	public static final String XJMF = "XJMF";

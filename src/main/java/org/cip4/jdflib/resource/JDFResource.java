@@ -105,6 +105,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.LinkRefFinder;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
@@ -989,6 +990,10 @@ public class JDFResource extends JDFElement
 		/**
 		 * 
 		 */
+		public static final EnumPartIDKey LotID = new EnumPartIDKey(AttributeName.LOTID);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Option = new EnumPartIDKey(JDFConstants.PARTIDKEY_OPTION);
 		/**
 		 * 
@@ -1009,7 +1014,15 @@ public class JDFResource extends JDFElement
 		/**
 		 * 
 		 */
+		public static final EnumPartIDKey PrintCondition = new EnumPartIDKey(ElementName.PRINTCONDITION);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey ProductPart = new EnumPartIDKey(AttributeName.PRODUCTPART);
+		/**
+		 * 
+		 */
+		public static final EnumPartIDKey QualityMeasurement = new EnumPartIDKey(ElementName.QUALITYMEASUREMENT);
 		/**
 		 * 
 		 */
@@ -1082,6 +1095,10 @@ public class JDFResource extends JDFElement
 		 * 
 		 */
 		public static final EnumPartIDKey TileID = new EnumPartIDKey(JDFConstants.PARTIDKEY_TILEID);
+		/**
+		 * 
+		 */
+		public static final EnumPartIDKey TransferCurveName = new EnumPartIDKey(XJDFConstants.TransferCurveName);
 		/**
 		 * 
 		 */

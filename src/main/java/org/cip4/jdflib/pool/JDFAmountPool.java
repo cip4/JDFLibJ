@@ -701,11 +701,13 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	 */
 	public void removePartAmount(final JDFAttributeMap mPart)
 	{
-		getPartAmount(mPart).deleteNode();
+		JDFPartAmount partAmount = getPartAmount(mPart);
+		if (partAmount != null)
+		{
+			partAmount.deleteNode();
+		}
 	}
 
-	// **************************************** Methods
-	// *********************************************
 	/**
 	 * toString
 	 * 
