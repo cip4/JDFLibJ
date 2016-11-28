@@ -110,6 +110,7 @@ public class WalkIgnore extends WalkJDFElement
 		v.add(ElementName.ACTIONPOOL);
 		v.add(ElementName.ADHESIVEBINDING);
 		v.add(ElementName.ANCESTORPOOL);
+		v.add(ElementName.ASSETLISTCREATIONPARAMS);
 		v.add(ElementName.BINDLIST);
 		v.add(ElementName.BOOKCASE);
 		v.add(ElementName.BUSINESSINFO);

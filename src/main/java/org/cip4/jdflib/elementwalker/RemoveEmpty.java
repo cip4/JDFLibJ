@@ -86,7 +86,6 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
-import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -98,6 +97,7 @@ public class RemoveEmpty extends BaseElementWalker
 {
 	boolean zappElements;
 	final JDFPart part;
+	final VString ignoreElements;
 
 	/**
 	 * 
@@ -105,10 +105,17 @@ public class RemoveEmpty extends BaseElementWalker
 	public RemoveEmpty()
 	{
 		super(new BaseWalkerFactory());
+		ignoreElements = new VString();
+		addIgnoreElement(ElementName.POSITION);
 		zappElements = true;
 		part = (JDFPart) new JDFDoc(ElementName.PART).getRoot();
 		part.appendElement("foo");
 		new BaseWalker(getFactory()); // need a default walker
+	}
+
+	public void addIgnoreElement(String name)
+	{
+		ignoreElements.add(name);
 	}
 
 	/**
@@ -366,17 +373,9 @@ public class RemoveEmpty extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return toCheck instanceof JDFPosition;
+			return ignoreElements.contains(toCheck.getLocalName());
 		}
 
-		/**
-		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-		 */
-		@Override
-		public VString getElementNames()
-		{
-			return VString.getVString(ElementName.POSITION, null);
-		}
 	}
 
 	/**

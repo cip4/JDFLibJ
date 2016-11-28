@@ -73,6 +73,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
@@ -104,6 +105,7 @@ public class WalkPhaseTimeAudit extends WalkAudit
 	@Override
 	public KElement walk(KElement xjdf, final KElement jdf)
 	{
+		moveFromSender(xjdf, xjdf.getElement(XJDFConstants.SENDER));
 		VElement v = xjdf.getChildElementVector(null, null);
 		KElement signalStatus = xjdf.appendElement("SignalStatus");
 		signalStatus.moveElements(v, null);

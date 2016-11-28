@@ -391,7 +391,6 @@ public class JDFToXJDF extends PackageElementWalker
 			preFixVersion(root);
 
 			walkTree(root, newRoot);
-			new RemoveEmpty().removEmptyElement(newRoot);
 			postWalk(true);
 		}
 		else
@@ -488,7 +487,9 @@ public class JDFToXJDF extends PackageElementWalker
 				}
 			}
 		}
-		new RemoveEmpty().removEmptyElement(newRoot);
+		RemoveEmpty removeEmpty = new RemoveEmpty();
+		removeEmpty.addIgnoreElement(XJDFConstants.SENDER);
+		removeEmpty.removEmptyElement(newRoot);
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -102,7 +102,7 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 		KElement xjmfResp = new XMLDoc(XJDFConstants.XJMF, null).getRoot();
 		KElement response = xjmfResp.appendElement("ResponseModifyQueueEntry");
 		response.appendAnchor(null);
-		response.copyAttribute(AttributeName.REFID, command, AttributeName.ID, null, null);
+		response.getCreateElement(XJDFConstants.SENDER).copyAttribute(AttributeName.REFID, command.getElement(XJDFConstants.SENDER), AttributeName.ID, null, null);
 		assertEquals(1, XJMFTypeMap.getMap().size());
 		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		JDFDoc newDoc = xc.convert(xjmfResp);
@@ -128,7 +128,7 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 		KElement xjmfResp = new XMLDoc(XJDFConstants.XJMF, null).getRoot();
 		KElement response = xjmfResp.appendElement("ResponsePipeControl");
 		response.appendAnchor(null);
-		response.copyAttribute(AttributeName.REFID, command, AttributeName.ID, null, null);
+		response.getCreateElement(XJDFConstants.SENDER).copyAttribute(AttributeName.REFID, command.getElement(XJDFConstants.SENDER), AttributeName.ID, null, null);
 		assertEquals(1, XJMFTypeMap.getMap().size());
 		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		JDFDoc newDoc = xc.convert(xjmfResp);

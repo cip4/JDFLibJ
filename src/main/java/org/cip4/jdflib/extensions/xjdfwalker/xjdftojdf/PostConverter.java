@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import java.util.Collection;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -87,13 +88,18 @@ import org.cip4.jdflib.elementwalker.UnLinkFinder;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
+import org.cip4.jdflib.resource.JDFPageList;
+import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
+import org.cip4.jdflib.resource.process.JDFColor;
+import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDependencies;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
+import org.cip4.jdflib.resource.process.JDFPageData;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
@@ -289,11 +295,16 @@ class PostConverter
 				{
 					cleanPageList(resRoot);
 				}
-				cleanClass(resRoot, false);
+				cleanLeaf(resRoot, false);
+				VElement leaves = resRoot.getLeaves(true);
+				for (KElement leaf : leaves)
+				{
+					leaf.removeChildrenByClass(JDFPart.class);
+				}
 			}
 		}
 
-		private void cleanClass(KElement elem, boolean cleanMe)
+		private void cleanLeaf(KElement elem, boolean cleanMe)
 		{
 			if (cleanMe)
 			{
@@ -303,15 +314,24 @@ class PostConverter
 			KElement e2 = elem.getFirstChildElement();
 			while (e2 != null)
 			{
-				cleanClass(e2, true);
+				cleanLeaf(e2, true);
 				e2 = e2.getNextSiblingElement();
 			}
-
 		}
 
 		private void cleanPageList(final JDFResource r)
 		{
 			String id = r.getID();
+			JDFPageList pl = (JDFPageList) r;
+			Collection<JDFPageData> vpd = pl.getAllPageData();
+			if (vpd != null)
+			{
+				for (JDFPageData pd : vpd)
+				{
+					pd.removeChildrenByClass(JDFPart.class);
+				}
+			}
+
 			if (StringUtil.getNonEmpty(id) != null)
 			{
 				VElement v = theNode.getRoot().getChildrenByTagName_KElement(null, null, new JDFAttributeMap("rRef", id), false, false, 0);
@@ -342,6 +362,15 @@ class PostConverter
 		private void cleanColorPool(final JDFResource r)
 		{
 			String id = r.getID();
+			JDFColorPool cp = (JDFColorPool) r;
+			Collection<JDFColor> vc = cp.getAllColor();
+			if (vc != null)
+			{
+				for (JDFColor c : vc)
+				{
+					c.removeChildrenByClass(JDFPart.class);
+				}
+			}
 			if (StringUtil.getNonEmpty(id) != null)
 			{
 				VElement v = theNode.getRoot().getChildrenByTagName_KElement(null, null, new JDFAttributeMap("rRef", id), false, false, 0);

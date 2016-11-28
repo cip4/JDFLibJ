@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -388,16 +389,17 @@ public class JDFPart extends JDFAutoPart
 		if (ai != null)
 			return ai;
 		ai = super.getTheAttributeInfo();
-		ai.updateAdd(atrInfoTable);
+		ai.updateReplace(atrInfoTable);
 		AttributeInfo.fixedMap.put("JDFPart", ai);
 		return ai;
 	}
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.LOTID, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.PRODUCTPART, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(ElementName.PRINTCONDITION, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	/**

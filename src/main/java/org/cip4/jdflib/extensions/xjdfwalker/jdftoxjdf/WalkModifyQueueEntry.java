@@ -112,6 +112,7 @@ public class WalkModifyQueueEntry extends WalkMessage
 			modifyParams.setAttribute(AttributeName.OPERATION, StringUtil.leftStr(originalType, -10)); //-10 = queueentry.size()
 			modifyParams.setXPathAttribute("QueueFilter/@QueueEntryIDs", qeid);
 			m.removeChild(ElementName.QUEUEENTRYDEF, null, 0);
+			m.removeChild(originalType + "Params", null, 0);
 		}
 		return m;
 	}

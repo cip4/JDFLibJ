@@ -70,9 +70,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.resource.JDFPart;
 
 /**
  * simply stop walking on these
@@ -107,7 +105,6 @@ public class WalkIgnore extends WalkXElement
 	public boolean matches(final KElement toCheck)
 	{
 		boolean matches = super.matches(toCheck);
-		matches = matches && (toCheck instanceof JDFPart) && PartitionHelper.isAsset(toCheck.getParentNode_KElement());
 		matches = matches || XJDFConstants.ChildProduct.equals(toCheck.getLocalName());
 		matches = matches || XJDFConstants.ProcessList.equals(toCheck.getLocalName());
 		matches = matches || XJDFConstants.Dependent.equals(toCheck.getLocalName());

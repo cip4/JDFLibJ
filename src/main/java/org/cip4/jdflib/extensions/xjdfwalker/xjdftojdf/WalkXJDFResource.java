@@ -128,7 +128,6 @@ public class WalkXJDFResource extends WalkXElement
 			handleAmountPool(xjdfRes, partMap, map, rl);
 		}
 		newPartitionElement.setAttributes(map);
-
 		return newPartitionElement;
 	}
 
