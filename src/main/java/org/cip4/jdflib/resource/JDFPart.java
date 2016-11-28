@@ -89,6 +89,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 /**
@@ -394,12 +395,14 @@ public class JDFPart extends JDFAutoPart
 		return ai;
 	}
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.LOTID, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.PRODUCTPART, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[2] = new AtrInfoTable(ElementName.PRINTCONDITION, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(ElementName.QUALITYMEASUREMENT, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(XJDFConstants.TransferCurveName, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	/**
