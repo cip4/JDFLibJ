@@ -66,69 +66,27 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
+import org.cip4.jdflib.node.JDFNode;
+import org.junit.Test;
 
-/**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
- */
-public class WalkInsert extends WalkXElement
+public class WalkAuditTest extends JDFTestCaseBase
 {
+
 	/**
 	 * 
 	 */
-	public WalkInsert()
+	@Test
+	public void testCreatedTime()
 	{
-		super();
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		String localName = toCheck.getLocalName();
-		return XJDFConstants.BindIn.equals(localName) || XJDFConstants.BlowIn.equals(localName) || XJDFConstants.StickOn.equals(localName);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return VString.getVString("BindIn StickOn", null);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getJDFName(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	String getJDFName(KElement e)
-	{
-		return ElementName.INSERT;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public KElement walk(KElement e, KElement trackElem)
-	{
-		e.setAttribute(AttributeName.METHOD, e.getLocalName());
-		trackElem = ((JDFInsertingIntent) trackElem).getCreateInsertList();
-		KElement ret = super.walk(e, trackElem);
-		xjdfToJDFImpl.attributesToSpan(ret);
-		return ret;
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		KElement xjdf = new JDFToXJDF().convert(n);
+		assertNotNull(xjdf.getXPathAttribute("AuditPool/AuditCreated/Sender/@Time", null));
 	}
 
 }

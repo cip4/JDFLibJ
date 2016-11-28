@@ -92,9 +92,6 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 	String agentName;
 	VJDFAttributeMap vMap;
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
-
 	/**
 	 * 
 	 */
@@ -113,7 +110,7 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 		final JDFNode nodePre = node.addJDFNode(EnumType.ProcessGroup);
 
 		goldenTicket.assign(nodePre);
-		BaseGoldenTicketTest.write9GTFiles(goldenTicket, "MISPre_ContentCreation");
+		BaseGoldenTicketTest.write9GTFiles(goldenTicket, "MISPre_ContentCreation", null);
 	}
 
 	/**
@@ -147,7 +144,7 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 			}
 
 			goldenTicket.assign(nodePre);
-			BaseGoldenTicketTest.write9GTFiles(goldenTicket, "MISPre_" + (i < 2 ? "GB_" : "") + "ImpositionPreparation" + (goldenTicket.bStripping ? "Strip" : ""));
+			BaseGoldenTicketTest.write9GTFiles(goldenTicket, "MISPre_" + (i < 2 ? "GB_" : "") + "ImpositionPreparation" + (goldenTicket.bStripping ? "Strip" : ""), null);
 		}
 	}
 

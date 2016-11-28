@@ -69,21 +69,20 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkInsert extends WalkXElement
+public class WalkBlowIn extends WalkInsert
 {
 	/**
 	 * 
 	 */
-	public WalkInsert()
+	public WalkBlowIn()
 	{
 		super();
 	}
@@ -97,7 +96,7 @@ public class WalkInsert extends WalkXElement
 	public boolean matches(final KElement toCheck)
 	{
 		String localName = toCheck.getLocalName();
-		return XJDFConstants.BindIn.equals(localName) || XJDFConstants.BlowIn.equals(localName) || XJDFConstants.StickOn.equals(localName);
+		return XJDFConstants.BlowIn.equals(localName);
 	}
 
 	/**
@@ -106,29 +105,24 @@ public class WalkInsert extends WalkXElement
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString("BindIn StickOn", null);
+		return VString.getVString(XJDFConstants.BlowIn, null);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getJDFName(org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	String getJDFName(KElement e)
+	protected void updateAttributes(KElement elem)
 	{
-		return ElementName.INSERT;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public KElement walk(KElement e, KElement trackElem)
-	{
-		e.setAttribute(AttributeName.METHOD, e.getLocalName());
-		trackElem = ((JDFInsertingIntent) trackElem).getCreateInsertList();
-		KElement ret = super.walk(e, trackElem);
-		xjdfToJDFImpl.attributesToSpan(ret);
-		return ret;
+		super.updateAttributes(elem);
+		int i = elem.getIntAttribute(XJDFConstants.FolioFrom, null, -1);
+		int j = elem.getIntAttribute(XJDFConstants.FolioTo, null, i);
+		if (j >= 0 && i >= 0)
+		{
+			elem.setAttribute(AttributeName.FOLIO, new JDFIntegerRange(i, j).toString());
+		}
+		elem.removeAttribute(XJDFConstants.FolioFrom);
+		elem.removeAttribute(XJDFConstants.FolioTo);
 	}
 
 }

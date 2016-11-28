@@ -152,7 +152,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 		final JDFNode node = pgt.getNode();
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "postcard.jdf", 2, false);
 		node.setJobID("6913");
-		write9GTFiles(pgt, "postcards");
+		write9GTFiles(pgt, "postcards", null);
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 		final JDFNode node = pgt.getNode();
 		node.setJobID("6914");
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "adressBook.jdf", 2, false);
-		write9GTFiles(pgt, "adressBook");
+		write9GTFiles(pgt, "adressBook", null);
 	}
 
 	/**
@@ -185,7 +185,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 		pgt.createWatches();
 		final JDFNode node = pgt.getNode();
 		node.setJobID("6915");
-		write9GTFiles(pgt, "watches");
+		write9GTFiles(pgt, "watches", null);
 	}
 
 	/**
@@ -217,7 +217,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 		pgt.createHarley();
 		final JDFNode node = pgt.getNode();
 		node.setJobID("6916");
-		write9GTFiles(pgt, "harley");
+		write9GTFiles(pgt, "harley", null);
 	}
 
 	/**
@@ -234,7 +234,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 		final JDFNode node = pgt.getNode();
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "HDCity.jdf", 2, false);
 		node.setJobID("6917");
-		write9GTFiles(pgt, "hdcity");
+		write9GTFiles(pgt, "hdcity", null);
 	}
 
 	/**

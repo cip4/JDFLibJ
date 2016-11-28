@@ -112,7 +112,7 @@ public class WideFormatGoldenTicketTest extends BaseGoldenTicketTest
 	@Test
 	public void testSimple()
 	{
-		write9GTFiles(theTicket, "DPW_Simple");
+		write9GTFiles(theTicket, "DPW_Simple", null);
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class WideFormatGoldenTicketTest extends BaseGoldenTicketTest
 	{
 		theTicket = new WideFormatGoldenTicket(3);
 		theTicket.assign(null);
-		write9GTFiles(theTicket, "DPW_L3");
+		write9GTFiles(theTicket, "DPW_L3", null);
 	}
 
 }

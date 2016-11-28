@@ -69,10 +69,15 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.auto.JDFAutoInsertingParams.EnumMethod;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFInsert;
+import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 
 /**
@@ -120,6 +125,45 @@ public class WalkInsert extends WalkJDFSubElement
 	{
 		JDFInsert insert = (JDFInsert) jdf;
 		String method = JDFIntentResource.guessActual(insert, ElementName.METHOD);
+		if (method == null)
+		{
+			KElement parent = jdf.getDeepParent(ElementName.INSERTINGINTENT, 0);
+			if (parent instanceof JDFInsertingIntent)
+			{
+				method = JDFIntentResource.guessActual((JDFInsertingIntent) parent, ElementName.METHOD);
+			}
+		}
 		return method == null ? EnumMethod.BindIn.getName() : method;
 	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#setAttributes(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void setAttributes(KElement jdf, KElement eNew)
+	{
+		super.setAttributes(jdf, eNew);
+		JDFIntegerRangeList irl = JDFIntegerRangeList.createIntegerRangeList(eNew.getNonEmpty(AttributeName.FOLIO));
+		if (irl != null)
+		{
+			JDFIntegerList il = irl.getIntegerList();
+			if (il != null)
+			{
+				il.sort(null);
+				int i0 = il.getInt(0);
+				int i1 = il.getInt(-1);
+				if (XJDFConstants.BlowIn.equals(eNew.getLocalName()))
+				{
+					eNew.setAttribute(XJDFConstants.FolioFrom, i0, null);
+					eNew.setAttribute(XJDFConstants.FolioTo, i1, null);
+					eNew.removeAttribute(AttributeName.FOLIO);
+				}
+				else
+				{
+					eNew.setAttribute(AttributeName.FOLIO, i0, null);
+				}
+			}
+		}
+	}
+
 }

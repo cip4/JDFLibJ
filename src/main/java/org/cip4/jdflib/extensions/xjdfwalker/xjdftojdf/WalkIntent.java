@@ -117,14 +117,14 @@ public class WalkIntent extends WalkXElement
 			e.setAttribute(AttributeName.ID, id);
 		}
 		JDFResource r = null;
-		final KElement idElem = parent.getCreateResourcePool().getChildWithAttribute(null, "ID", null, id, 0, true);
+		final KElement idElem = parent.getCreateResourcePool().getChildWithAttribute(null, AttributeName.ID, null, id, 0, true);
 		if (idElem instanceof JDFResource)
 		{
 			r = (JDFResource) idElem;
 		}
 		else
 		{
-			r = (JDFResource) root.getChildWithAttribute(null, "ID", null, id, 0, false);
+			r = (JDFResource) root.getChildWithAttribute(null, AttributeName.ID, null, id, 0, false);
 			if (r != null)
 			{
 				final JDFResourcePool rp = root.getCreateResourcePool();
@@ -141,6 +141,10 @@ public class WalkIntent extends WalkXElement
 			if (XJDFConstants.AssemblingIntent.equals(name))
 			{
 				name = ElementName.INSERTINGINTENT;
+			}
+			else if (XJDFConstants.ContentCheckIntent.equals(name))
+			{
+				name = ElementName.PROOFINGINTENT;
 			}
 			if (name != null)
 			{

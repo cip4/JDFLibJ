@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
  * 
@@ -105,6 +106,7 @@ public class WalkAudit extends WalkXElement
 	@Override
 	public KElement walk(KElement xjdf, KElement jdf)
 	{
+		moveFromSender(xjdf, xjdf.getElement(XJDFConstants.SENDER));
 		KElement e = super.walk(xjdf, jdf);
 		fixAuthor(e);
 		e.removeAttribute(AttributeName.JOBPARTID);

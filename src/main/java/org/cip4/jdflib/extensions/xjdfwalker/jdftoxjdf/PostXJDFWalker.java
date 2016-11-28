@@ -501,7 +501,6 @@ class PostXJDFWalker extends BaseElementWalker
 
 	/**
 	 * 
-	 * @author rainerprosi
 	 *
 	 */
 	public class WalkPlacedObject extends WalkElement
@@ -1826,6 +1825,45 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
+	 * class that ensures that we do not have signaturename partitions 
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkAudit extends WalkElement
+	{
+
+		/**
+		 * 
+		 */
+		public WalkAudit()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(KElement xjdf, KElement dummy)
+		{
+			moveToSender(xjdf);
+			return super.walk(xjdf, dummy);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public boolean matches(KElement e)
+		{
+			String localName = e.getLocalName();
+			return localName.startsWith(ElementName.AUDIT);
+		}
+
+	}
+
+	/**
 	 * 
 	 * @param xjdf
 	 */
@@ -1841,6 +1879,7 @@ class PostXJDFWalker extends BaseElementWalker
 			sender.moveAttribute(AttributeName.TIME, xjdf);
 			sender.moveAttribute(AttributeName.ICSVERSIONS, xjdf);
 			sender.moveAttribute(AttributeName.PERSONALID, xjdf);
+			sender.moveAttribute(AttributeName.ID, xjdf);
 			sender.moveAttribute(AttributeName.REFID, xjdf);
 		}
 	}

@@ -87,6 +87,8 @@ import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 {
 
+	private static boolean defaultCheckSchema = false;
+
 	/**
 	 * 
 	 */
@@ -145,17 +147,18 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 	 * 
 	 * @param goldenTicket the ticket to write
 	 * @param templateName the file name root of the 3 files
+	 * @param checkSchema TODO
 	 */
-	public static void write9GTFiles(final BaseGoldenTicket goldenTicket, final String templateName)
+	public static void write9GTFiles(final BaseGoldenTicket goldenTicket, final String templateName, Boolean checkSchema)
 	{
-		writeRoundTrip(goldenTicket, "GoldenTicket_Manager_", templateName);
+		writeRoundTrip(goldenTicket, "GoldenTicket_Manager_", templateName, null);
 
 		goldenTicket.bExpandGrayBox = false;
 		goldenTicket.makeReadyAll();
-		writeRoundTrip(goldenTicket, "GoldenTicket_MakeReady_", templateName);
+		writeRoundTrip(goldenTicket, "GoldenTicket_MakeReady_", templateName, null);
 
 		goldenTicket.executeAll(null);
-		writeRoundTrip(goldenTicket, "GoldenTicket_Worker_", templateName);
+		writeRoundTrip(goldenTicket, "GoldenTicket_Worker_", templateName, null);
 	}
 
 	/**
@@ -163,8 +166,9 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 	 * @param goldenTicket
 	 * @param gtType
 	 * @param templateName
+	 * @param checkSchema TODO
 	 */
-	protected static void writeRoundTrip(final BaseGoldenTicket goldenTicket, String gtType, final String templateName)
+	protected static void writeRoundTrip(final BaseGoldenTicket goldenTicket, String gtType, final String templateName, Boolean checkSchema)
 	{
 
 		goldenTicket.write2File(sm_dirTestDataTemp + gtType + templateName + ".jdf", 2);
@@ -181,8 +185,11 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 		XMLDoc dVal = docXJDF.getValidationResult();
 		String schemapath = sm_dirTestDataTemp + gtType + templateName + ".schema.xml";
 		dVal.write2File(schemapath, 2, false);
-		//		assertEquals(schemapath, dVal.getRoot().getAttribute("ValidationResult"), "Valid");
-
+		boolean localCheckSchema = checkSchema == null ? defaultCheckSchema : checkSchema.booleanValue();
+		if (localCheckSchema)
+		{
+			assertEquals(schemapath, dVal.getRoot().getAttribute("ValidationResult"), "Valid");
+		}
 		XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		JDFDoc converted = jdfConverter.convert(xjdfRoot);
 		converted.write2File(sm_dirTestDataTemp + gtType + templateName + ".xjdf.jdf", 2, false);

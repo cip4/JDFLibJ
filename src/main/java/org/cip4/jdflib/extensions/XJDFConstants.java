@@ -81,17 +81,22 @@ public abstract class XJDFConstants
 	public static final String BindIn = "BindIn";
 	public static final String BinderySignatureID = "BinderySignatureID";
 	public static final String BinderySignatureIDs = "BinderySignatureIDs";
+	public static final String BlowIn = "BlowIn";
 
 	public static final String ChannelCover = "ChannelCover";
 	public static final String ChildProduct = "ChildProduct";
 	public static final String ChildRefs = "ChildRefs";
 	public static final String CompanyID = "CompanyID";
 	public static final String Content = "Content";
+	public static final String ContentCheckIntent = "ContentCheckIntent";
 
 	public static final String Dependent = "Dependent";
 	public static final String DROP_ID = "DropID";
 
 	public static final String ExternalID = "ExternalID";
+
+	public static final String FolioFrom = "FolioFrom";
+	public static final String FolioTo = "FolioTo";
 
 	public static final String HolePattern = "HolePattern";
 
@@ -115,6 +120,7 @@ public abstract class XJDFConstants
 	public static final String ResourceSet = "ResourceSet";
 
 	public static final String SENDER = "Sender";
+	public static final String StickOn = "StickOn";
 	public static final String SurfaceColor = "SurfaceColor";
 
 	public static final String XJDF = "XJDF";

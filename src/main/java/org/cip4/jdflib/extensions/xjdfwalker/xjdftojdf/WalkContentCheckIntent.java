@@ -68,22 +68,23 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class WalkInsert extends WalkXElement
+public class WalkContentCheckIntent extends WalkIntentResource
 {
+
 	/**
 	 * 
+	 * 
 	 */
-	public WalkInsert()
+	public WalkContentCheckIntent()
 	{
 		super();
 	}
@@ -96,17 +97,7 @@ public class WalkInsert extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		String localName = toCheck.getLocalName();
-		return XJDFConstants.BindIn.equals(localName) || XJDFConstants.BlowIn.equals(localName) || XJDFConstants.StickOn.equals(localName);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return VString.getVString("BindIn StickOn", null);
+		return super.matches(toCheck) && (XJDFConstants.ContentCheckIntent.equals(toCheck.getLocalName()));
 	}
 
 	/**
@@ -115,20 +106,15 @@ public class WalkInsert extends WalkXElement
 	@Override
 	String getJDFName(KElement e)
 	{
-		return ElementName.INSERT;
+		return ElementName.PROOFINGINTENT;
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
 	 */
 	@Override
-	public KElement walk(KElement e, KElement trackElem)
+	public VString getElementNames()
 	{
-		e.setAttribute(AttributeName.METHOD, e.getLocalName());
-		trackElem = ((JDFInsertingIntent) trackElem).getCreateInsertList();
-		KElement ret = super.walk(e, trackElem);
-		xjdfToJDFImpl.attributesToSpan(ret);
-		return ret;
+		return VString.getVString(XJDFConstants.ContentCheckIntent, null);
 	}
-
 }

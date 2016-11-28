@@ -98,7 +98,7 @@ public class ODPGoldenTicketTest extends BaseGoldenTicketTest
 	@Test
 	public void testODPSimple()
 	{
-		write9GTFiles(odpGoldenTicket, "ODP_Simple");
+		write9GTFiles(odpGoldenTicket, "ODP_Simple", null);
 	}
 
 	/**

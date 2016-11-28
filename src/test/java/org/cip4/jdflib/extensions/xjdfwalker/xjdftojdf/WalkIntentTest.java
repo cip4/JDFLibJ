@@ -68,67 +68,55 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
+import java.util.zip.DataFormatException;
 
-/**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
- */
-public class WalkInsert extends WalkXElement
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
+import org.cip4.jdflib.resource.intent.JDFProofingIntent;
+import org.cip4.jdflib.span.JDFSpanProofType.EnumSpanProofType;
+import org.junit.Test;
+
+public class WalkIntentTest extends JDFTestCaseBase
 {
 	/**
 	 * 
 	 */
-	public WalkInsert()
+	@Test
+	public void testProofingIntent()
 	{
-		super();
+		XJDFHelper h = new XJDFHelper("j1", "p1", null);
+		h.setXPathValue("ProductList/Product/Intent[@Name=\"ContentCheckIntent\"]/ContentCheckIntent/ProofItem/@ProofType", EnumSpanProofType.Page.getName());
+		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		JDFDoc dJDF = c.convert(h);
+		JDFNode jdfRoot = dJDF.getJDFRoot();
+		JDFProofingIntent pi = (JDFProofingIntent) jdfRoot.getResource(ElementName.PROOFINGINTENT, EnumUsage.Input, 0);
+		assertEquals(pi.getProofItem(0).getProofType().guessActual(), "Page");
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * @throws DataFormatException 
+	 * @throws JDFException 
+	 * 
 	 */
-	@Override
-	public boolean matches(final KElement toCheck)
+	@Test
+	public void testInsertingIntent() throws JDFException, DataFormatException
 	{
-		String localName = toCheck.getLocalName();
-		return XJDFConstants.BindIn.equals(localName) || XJDFConstants.BlowIn.equals(localName) || XJDFConstants.StickOn.equals(localName);
-	}
+		XJDFHelper h = new XJDFHelper("j1", "p1", null);
+		h.setXPathValue("ProductList/Product/Intent[@Name=\"AssemblingIntent\"]/AssemblingIntent/BlowIn/@FolioFrom", "1");
+		h.setXPathValue("ProductList/Product/Intent[@Name=\"AssemblingIntent\"]/AssemblingIntent/BlowIn/@FolioTo", "4");
 
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return VString.getVString("BindIn StickOn", null);
+		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		JDFDoc dJDF = c.convert(h);
+		JDFNode jdfRoot = dJDF.getJDFRoot();
+		JDFInsertingIntent ii = (JDFInsertingIntent) jdfRoot.getResource(ElementName.INSERTINGINTENT, EnumUsage.Input, 0);
+		assertEquals(ii.getInsertList().getInsert(0).getFolio(), new JDFIntegerRangeList("1 ~ 4"));
 	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getJDFName(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	String getJDFName(KElement e)
-	{
-		return ElementName.INSERT;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public KElement walk(KElement e, KElement trackElem)
-	{
-		e.setAttribute(AttributeName.METHOD, e.getLocalName());
-		trackElem = ((JDFInsertingIntent) trackElem).getCreateInsertList();
-		KElement ret = super.walk(e, trackElem);
-		xjdfToJDFImpl.attributesToSpan(ret);
-		return ret;
-	}
-
 }

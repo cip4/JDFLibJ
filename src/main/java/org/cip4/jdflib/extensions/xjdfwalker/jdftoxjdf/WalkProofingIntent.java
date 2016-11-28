@@ -66,24 +66,23 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
+import org.cip4.jdflib.resource.intent.JDFProofingIntent;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkInsert extends WalkXElement
+public class WalkProofingIntent extends WalkIntentResource
 {
 	/**
 	 * 
 	 */
-	public WalkInsert()
+	public WalkProofingIntent()
 	{
 		super();
 	}
@@ -96,8 +95,16 @@ public class WalkInsert extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		String localName = toCheck.getLocalName();
-		return XJDFConstants.BindIn.equals(localName) || XJDFConstants.BlowIn.equals(localName) || XJDFConstants.StickOn.equals(localName);
+		return toCheck instanceof JDFProofingIntent;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected String getXJDFName(KElement jdf)
+	{
+		return XJDFConstants.ContentCheckIntent;
 	}
 
 	/**
@@ -106,29 +113,6 @@ public class WalkInsert extends WalkXElement
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString("BindIn StickOn", null);
+		return VString.getVString(ElementName.PROOFINGINTENT, null);
 	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getJDFName(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	String getJDFName(KElement e)
-	{
-		return ElementName.INSERT;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public KElement walk(KElement e, KElement trackElem)
-	{
-		e.setAttribute(AttributeName.METHOD, e.getLocalName());
-		trackElem = ((JDFInsertingIntent) trackElem).getCreateInsertList();
-		KElement ret = super.walk(e, trackElem);
-		xjdfToJDFImpl.attributesToSpan(ret);
-		return ret;
-	}
-
 }

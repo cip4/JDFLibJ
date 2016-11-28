@@ -215,7 +215,7 @@ public class MISFinTest extends BaseGoldenTicketTest
 		fgt.setCategory(MISFinGoldenTicket.MISFIN_STITCHFIN);
 		fgt.assign(null);
 		fgt.bExpandGrayBox = false;
-		write9GTFiles(fgt, "GBStitching");
+		write9GTFiles(fgt, "GBStitching", null);
 	}
 
 	/**

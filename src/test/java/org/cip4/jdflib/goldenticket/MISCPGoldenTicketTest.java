@@ -114,7 +114,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 
 		cpGoldenTicket.assign(null);
 		JDFNode node = cpGoldenTicket.getNode();
-		writeRoundTrip(cpGoldenTicket, "GoldenTicket_Manager", "_MISCPS_1_GB");
+		writeRoundTrip(cpGoldenTicket, "GoldenTicket_Manager", "_MISCPS_1_GB", null);
 		assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
 		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
 		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.5"));
@@ -126,7 +126,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.makeReadyAll();
 		cpGoldenTicket.execute(null, true, true);
 		node = cpGoldenTicket.getNode();
-		writeRoundTrip(cpGoldenTicket, "GoldenTicket_Worker", "_MISCPS_1_GB");
+		writeRoundTrip(cpGoldenTicket, "GoldenTicket_Worker", "_MISCPS_1_GB", null);
 		assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
 		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
 		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.5"));
@@ -141,7 +141,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		map.put(EnumPartIDKey.Side, "Back");
 		cpGoldenTicket.schedule(mapSingle, 8, 2);
 
-		writeRoundTrip(cpGoldenTicket, "GoldenTicket_Manager", "MISCPS_1_GB_FrontBack");
+		writeRoundTrip(cpGoldenTicket, "GoldenTicket_Manager", "MISCPS_1_GB_FrontBack", null);
 		map.put(EnumPartIDKey.Side, "Front");
 		cpGoldenTicket.execute(mapSingle, false, true);
 		cpGoldenTicket.write2File(sm_dirTestDataTemp + "GoldenTicket_Worker_MISCPS_1_GB_FrontBack_xB.jdf", 2);
@@ -176,7 +176,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.waste = 90;
 		cpGoldenTicket.bExpandGrayBox = bExpandGB;
 
-		BaseGoldenTicketTest.write9GTFiles(cpGoldenTicket, "MISCPS_SimplexPoster");
+		BaseGoldenTicketTest.write9GTFiles(cpGoldenTicket, "MISCPS_SimplexPoster", null);
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -214,7 +214,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		map.put(EnumPartIDKey.Side, "Front");
 		dev.getCreatePartition(map, null).setAttribute("DeviceID", "FrontSidePress");
 
-		write9GTFiles(cpGoldenTicket, "MISCPS_4_1Poster");
+		write9GTFiles(cpGoldenTicket, "MISCPS_4_1Poster", null);
 	}
 
 	/**
@@ -251,7 +251,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.waste = 90;
 
 		cpGoldenTicket.partsAtOnce = 2;
-		BaseGoldenTicketTest.write9GTFiles(cpGoldenTicket, "MISCPS_ProductGrayBox");
+		BaseGoldenTicketTest.write9GTFiles(cpGoldenTicket, "MISCPS_ProductGrayBox", null);
 	}
 
 	/**
@@ -287,7 +287,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.waste = 90;
 
 		cpGoldenTicket.partsAtOnce = 2;
-		BaseGoldenTicketTest.write9GTFiles(cpGoldenTicket, "MISCPS_ProductFlyer");
+		BaseGoldenTicketTest.write9GTFiles(cpGoldenTicket, "MISCPS_ProductFlyer", null);
 	}
 
 	/**
@@ -331,7 +331,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.assign(n);
 		cpGoldenTicket.good = 3000;
 		cpGoldenTicket.waste = 200;
-		write9GTFiles(cpGoldenTicket, "sameInk");
+		write9GTFiles(cpGoldenTicket, "sameInk", null);
 	}
 
 	/**
