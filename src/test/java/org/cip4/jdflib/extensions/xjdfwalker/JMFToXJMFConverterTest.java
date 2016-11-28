@@ -249,6 +249,8 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		KElement xjmf = conv.makeNewJMF(jmf);
 		assertNotNull(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/Part/@LotID", null));
 		assertEquals(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/Part/@LotID", null), jmf.getXPathAttribute("Signal/ResourceInfo/AmountPool/PartAmount/Part/@LotID", null));
+		assertEquals(10, xjmf.getXPathElementVector("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount", 0).size());
+
 		xjmf.write2File(sm_dirTestDataTemp + "resourceInk.xjmf");
 	}
 

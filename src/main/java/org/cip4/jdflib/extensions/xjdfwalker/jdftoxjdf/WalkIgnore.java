@@ -124,6 +124,7 @@ public class WalkIgnore extends WalkJDFElement
 		v.add(ElementName.MODULEPOOL);
 		v.add(ElementName.OBSERVATIONTARGET);
 		v.add(ElementName.PAGEASSIGNEDLIST);
+		v.add(ElementName.PARTAMOUNT);
 		v.add(ElementName.REGISTRATION);
 		v.add(ElementName.RESOURCEPOOL);
 		v.add(ElementName.SOURCERESOURCE);
