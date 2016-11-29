@@ -1858,7 +1858,7 @@ class PostXJDFWalker extends BaseElementWalker
 		public boolean matches(KElement e)
 		{
 			String localName = e.getLocalName();
-			return localName.startsWith(ElementName.AUDIT);
+			return localName.startsWith(ElementName.AUDIT) && !ElementName.AUDITPOOL.equals(localName);
 		}
 
 	}
@@ -1882,5 +1882,15 @@ class PostXJDFWalker extends BaseElementWalker
 			sender.moveAttribute(AttributeName.ID, xjdf);
 			sender.moveAttribute(AttributeName.REFID, xjdf);
 		}
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll
+				+ ", reorderElements=" + reorderElements + ", removeSignatureName=" + removeSignatureName + ", newRoot=" + newRoot + "]";
 	}
 }

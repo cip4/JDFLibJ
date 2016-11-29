@@ -99,4 +99,20 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		w.walkTree(h.getRoot(), null);
 		assertEquals(h.getRoot().getXPathAttribute("AuditPool/AuditResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null), "66");
 	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testAuditPool()
+	{
+		XJDFHelper h = new XJDFHelper("a", "p", null);
+		h.setXPathValue("AuditPool/AuditCreated/@ID", "42");
+		PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.walkTree(h.getRoot(), null);
+		assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated"));
+		assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated/Sender"));
+		assertNull(h.getRoot().getXPathElement("AuditPool/Sender"));
+
+	}
 }
