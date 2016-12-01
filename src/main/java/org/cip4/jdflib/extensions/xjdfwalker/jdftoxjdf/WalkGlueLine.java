@@ -78,7 +78,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkGlueLine extends WalkInlineAllRes
+public class WalkGlueLine extends WalkResource
 {
 	/**
 	 * 

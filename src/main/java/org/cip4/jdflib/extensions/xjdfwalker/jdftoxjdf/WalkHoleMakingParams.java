@@ -79,7 +79,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkHoleMakingParams extends WalkInlineAllRes
+public class WalkHoleMakingParams extends WalkResource
 {
 	/**
 	 * 

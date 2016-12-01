@@ -56,10 +56,14 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.junit.Test;
 
@@ -111,8 +115,56 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
 		assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated"));
-		assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated/Sender"));
-		assertNull(h.getRoot().getXPathElement("AuditPool/Sender"));
-
+		assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated/Header"));
+		assertNull(h.getRoot().getXPathElement("AuditPool/Header"));
 	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testAuditOrder()
+	{
+		XJDFHelper h = new XJDFHelper("a", "p", null);
+		h.setXPathValue("AuditPool/AuditCreated/@ID", "42");
+		h.setXPathValue("AuditPool/AuditCreated/Foo/@Bar", "foo");
+		PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.walkTree(h.getRoot(), null);
+		assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated"));
+		KElement head = h.getRoot().getXPathElement("AuditPool/AuditCreated/Header");
+		KElement foo = h.getRoot().getXPathElement("AuditPool/AuditCreated/Foo");
+		assertEquals(head.getNextSibling(), foo);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testHeaderXJMFOrder()
+	{
+		KElement x = new JDFDoc(XJDFConstants.XJMF, EnumVersion.Version_2_0).getRoot();
+		KElement c = x.appendElement("CommandSubmitQueueEntry");
+		KElement h = x.appendElement(XJDFConstants.HEADER);
+		PostXJDFWalker w = new PostXJDFWalker((JDFElement) x);
+		w.walkTree(x, null);
+		assertEquals(x.getElement(null), h);
+		assertEquals(h.getNextSibling(), c);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testHeaderMessageOrder()
+	{
+		KElement x = new JDFDoc(XJDFConstants.XJMF, EnumVersion.Version_2_0).getRoot();
+		KElement c = x.appendElement("CommandSubmitQueueEntry");
+		KElement h = c.appendElement(XJDFConstants.HEADER);
+		KElement h2 = c.appendElement(XJDFConstants.AssemblingIntent);
+		PostXJDFWalker w = new PostXJDFWalker((JDFElement) x);
+		w.walkTree(x, null);
+		assertEquals(c.getElement(null), h);
+		assertEquals(h.getNextSibling(), h2);
+	}
+
 }

@@ -106,7 +106,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		assertEquals(xjmf.getXPathAttribute("CommandPipeControl/PipeParams/@Operation", null), "PipeClose");
 		final JDFJMF jmfResp = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.PipeClose);
 		xjmf = conv.makeNewJMF(jmfResp);
-		assertEquals(xjmf.getElement(null).getLocalName(), "ResponsePipeControl");
+		assertEquals(xjmf.getElement("ResponsePipeControl").getLocalName(), "ResponsePipeControl");
 	}
 
 	/**
@@ -150,7 +150,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceQuery(true);
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjmf = conv.makeNewJMF(jmf);
-		KElement sender = xjmf.getElement(XJDFConstants.SENDER);
+		KElement sender = xjmf.getElement(XJDFConstants.HEADER);
 		assertNotNull(sender);
 		assertEquals(jmf.getID(), sender.getID());
 	}
@@ -169,7 +169,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		person.setFamilyName("meier");
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjmf = conv.makeNewJMF(jmf);
-		KElement sender = xjmf.getXPathElement("QueryResource/Sender");
+		KElement sender = xjmf.getXPathElement("QueryResource/Header");
 		assertNotNull(sender);
 		assertEquals(q.getEmployee(0).getPersonalID(), sender.getAttribute(AttributeName.PERSONALID));
 		assertEquals(q.getEmployee(0).getDescriptiveName(), sender.getAttribute(AttributeName.AUTHOR));
@@ -184,7 +184,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceQuery(true);
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjmf = conv.makeNewJMF(jmf);
-		KElement sender = xjmf.getElement(XJDFConstants.SENDER);
+		KElement sender = xjmf.getElement(XJDFConstants.HEADER);
 		assertNotNull(sender);
 		assertEquals(jmf.getTimeStamp().getDateTimeISO(), sender.getAttribute(AttributeName.TIME));
 	}
@@ -199,7 +199,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		jmf.setSenderID("s1");
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjmf = conv.makeNewJMF(jmf);
-		KElement sender = xjmf.getElement(XJDFConstants.SENDER);
+		KElement sender = xjmf.getElement(XJDFConstants.HEADER);
 		assertNotNull(sender);
 		assertEquals(jmf.getSenderID(), sender.getAttribute(AttributeName.DEVICEID));
 	}

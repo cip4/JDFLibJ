@@ -635,7 +635,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		jmf.getCommand(0).appendEmployee().setPersonalID("P1");
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjmf = conv.makeNewJMF(jmf);
-		assertEquals(xjmf.getXPathAttribute("CommandPipeControl/Sender/@PersonalID", null), "P1");
+		assertEquals(xjmf.getXPathAttribute("CommandPipeControl/Header/@PersonalID", null), "P1");
 
 		XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
 		JDFDoc d = invert.convert(xjmf);
@@ -900,7 +900,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		n.getCreateAuditPool().addAudit(EnumAuditType.PhaseTime, "me");
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.convert(n);
-		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditStatus/Sender/@Author", null), "me");
+		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditStatus/Header/@Author", null), "me");
 
 		XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
 		JDFDoc d = invert.convert(xjdf);
@@ -918,7 +918,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.convert(n);
-		String agent = xjdf.getXPathAttribute("AuditPool/AuditCreated/Sender/@AgentName", null);
+		String agent = xjdf.getXPathAttribute("AuditPool/AuditCreated/Header/@AgentName", null);
 		assertEquals("CIP4 Test Agent", agent);
 
 		XJDFToJDFConverter invert = new XJDFToJDFConverter(null);

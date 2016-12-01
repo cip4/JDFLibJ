@@ -78,7 +78,7 @@ import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkApprovalSuccess extends WalkInlineAllRes
+public class WalkApprovalSuccess extends WalkResource
 {
 	/**
 	 * 

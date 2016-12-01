@@ -466,7 +466,7 @@ public class JDFToXJDF extends PackageElementWalker
 		pw.walkTreeKidsFirst(newRoot);
 		if (bJMF)
 		{
-			if (newRoot.numChildElements(null, null) == newRoot.numChildElements(XJDFConstants.SENDER, null))
+			if (newRoot.numChildElements(null, null) == newRoot.numChildElements(XJDFConstants.HEADER, null))
 			{
 				log.info("erased empty jmf");
 				newRoot = null;
@@ -488,7 +488,7 @@ public class JDFToXJDF extends PackageElementWalker
 			}
 		}
 		RemoveEmpty removeEmpty = new RemoveEmpty();
-		removeEmpty.addIgnoreElement(XJDFConstants.SENDER);
+		removeEmpty.addIgnoreElement(XJDFConstants.HEADER);
 		removeEmpty.removEmptyElement(newRoot);
 	}
 

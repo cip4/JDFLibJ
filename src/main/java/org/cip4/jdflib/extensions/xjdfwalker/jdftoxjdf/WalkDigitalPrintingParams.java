@@ -80,7 +80,7 @@ import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkDigitalPrintingParams extends WalkInlineAllRes
+public class WalkDigitalPrintingParams extends WalkResource
 {
 	/**
 	 * 

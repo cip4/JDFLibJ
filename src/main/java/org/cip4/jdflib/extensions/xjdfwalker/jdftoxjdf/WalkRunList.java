@@ -76,7 +76,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkRunList extends WalkInlineAllRes
+public class WalkRunList extends WalkResource
 {
 	/**
 	 * 
@@ -84,16 +84,6 @@ public class WalkRunList extends WalkInlineAllRes
 	public WalkRunList()
 	{
 		super();
-	}
-
-	/**
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		return super.walk(jdf, xjdf);
 	}
 
 	/**

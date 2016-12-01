@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,49 +68,76 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.process.JDFEmployee;
+import org.cip4.jdflib.resource.process.JDFAssemblySection;
+import org.junit.Test;
 
-/**
- * 
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
- */
-public class WalkInlineResource extends WalkResource
+public class WalkAssemblySectionTest extends JDFTestCaseBase
 {
+
 	/**
 	 * 
 	 */
-	public WalkInlineResource()
+	@Test
+	public void testWalkElements()
 	{
-		super();
+		JDFAssemblySection as = (JDFAssemblySection) new JDFDoc(ElementName.ASSEMBLYSECTION).getRoot();
+		JDFAssemblySection ass = as.appendAssemblySection();
+		as.appendPageAssignedList();
+		WalkAssemblySection wa = new WalkAssemblySection();
+		wa.setParent(new JDFToXJDF());
+		KElement root = new JDFDoc(ElementName.ASSEMBLY).getRoot();
+		wa.walk(as, root);
+		JDFAssemblySection as2 = (JDFAssemblySection) root.getElement(ElementName.ASSEMBLYSECTION);
+		assertNotNull(as2);
+		JDFAssemblySection ass2 = as.getAssemblySection(0);
+		assertNotNull(ass2);
+		assertNull(as2.getPageAssignedList(0));
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * 
 	 */
-	@Override
-	public boolean matches(final KElement toCheck)
+	@Test
+	public void testWalkAttributes()
 	{
-		return toCheck instanceof JDFEmployee;
+		JDFAssemblySection as = (JDFAssemblySection) new JDFDoc(ElementName.ASSEMBLYSECTION).getRoot();
+		as.setJobID("j");
+		WalkAssemblySection wa = new WalkAssemblySection();
+		wa.setParent(new JDFToXJDF());
+		KElement root = new JDFDoc(ElementName.ASSEMBLYSECTION).getRoot();
+		wa.walk(as, root);
+		JDFAssemblySection as2 = (JDFAssemblySection) root.getElement(ElementName.ASSEMBLYSECTION);
+		assertNull(as2.getNonEmpty(AttributeName.JOBID));
 	}
 
 	/**
-	 * @param xjdf
-	 * @return true if must continue
+	 * 
 	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	@Test
+	public void testMatches()
 	{
-		String descName = jdf.getAttribute(AttributeName.DESCRIPTIVENAME, null, null);
-		KElement e = super.walk(jdf, xjdf);
-		if (e != null)
-		{
-			e.setAttribute(AttributeName.DESCRIPTIVENAME, descName);
-		}
-		return e;
+		JDFAssemblySection as = (JDFAssemblySection) new JDFDoc(ElementName.ASSEMBLYSECTION).getRoot();
+		WalkAssemblySection wa = new WalkAssemblySection();
+		wa.setParent(new JDFToXJDF());
+		assertTrue(wa.matches(as));
 	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetElementNames()
+	{
+		JDFAssemblySection as = (JDFAssemblySection) new JDFDoc(ElementName.ASSEMBLYSECTION).getRoot();
+		WalkAssemblySection wa = new WalkAssemblySection();
+		wa.setParent(new JDFToXJDF());
+		assertTrue(wa.matches(as));
+		assertTrue(wa.getElementNames().contains(as.getLocalName()));
+	}
+
 }

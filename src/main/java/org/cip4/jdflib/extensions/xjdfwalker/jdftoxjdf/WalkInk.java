@@ -83,7 +83,7 @@ import org.cip4.jdflib.util.StringUtil;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkInk extends WalkInlineAllRes
+public class WalkInk extends WalkResource
 {
 	/**
 	 * 

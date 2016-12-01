@@ -98,7 +98,7 @@ public class WalkTypesafeMessage extends WalkXElement
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		moveFromSender(e, e.getElement(XJDFConstants.SENDER));
+		moveFromSender(e, e.getElement(XJDFConstants.HEADER));
 		String messageName = e.getLocalName();
 		List<String> families = EnumFamily.getFamilies();
 		for (String family : families)

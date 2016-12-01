@@ -105,7 +105,7 @@ public class WalkPhaseTimeAudit extends WalkAudit
 	@Override
 	public KElement walk(KElement xjdf, final KElement jdf)
 	{
-		moveFromSender(xjdf, xjdf.getElement(XJDFConstants.SENDER));
+		moveFromSender(xjdf, xjdf.getElement(XJDFConstants.HEADER));
 		VElement v = xjdf.getChildElementVector(null, null);
 		KElement signalStatus = xjdf.appendElement("SignalStatus");
 		signalStatus.moveElements(v, null);

@@ -68,89 +68,56 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.datatypes.JDFMatrix;
-import org.cip4.jdflib.datatypes.JDFRectangle;
-import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.resource.process.JDFCutBlock;
-import org.junit.Test;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.process.JDFAssemblySection;
 
-public class WalkCutBlockTest
+/**
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
+ */
+public class WalkAssemblySection extends WalkJDFElement
 {
-
 	/**
 	 * 
 	 */
-	@Test
-	public void testWalk()
+	public WalkAssemblySection()
 	{
-		JDFCutBlock cbo = (JDFCutBlock) new JDFDoc(ElementName.CUTBLOCK).getRoot();
-		JDFXYPair size = new JDFXYPair(10, 20);
-		cbo.setBlockSize(size);
-		WalkCutBlock walkCutBlock = new WalkCutBlock();
-		walkCutBlock.setParent(new JDFToXJDF());
-		KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
-		walkCutBlock.walk(cbo, root);
-		JDFCutBlock cb = (JDFCutBlock) root.getElement(ElementName.CUTBLOCK);
-		JDFRectangle box = JDFRectangle.createRectangle(cb.getNonEmpty(AttributeName.BOX));
-		assertEquals(box.getSize(), size);
-		assertEquals(box.getLL(), new JDFXYPair());
-		assertNull(cb.getBlockTrf());
-		assertNull(cb.getBlockSize());
+		super();
 	}
 
 	/**
-	 * 
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
-	@Test
-	public void testWalkTRF()
+	@Override
+	public boolean matches(final KElement toCheck)
 	{
-		JDFCutBlock cbo = (JDFCutBlock) new JDFDoc(ElementName.CUTBLOCK).getRoot();
-		JDFXYPair size = new JDFXYPair(10, 20);
-		cbo.setBlockSize(size);
-		JDFMatrix m = JDFMatrix.getUnitMatrix();
-		JDFXYPair shift = new JDFXYPair(400, 600);
-		m.shift(shift);
-		cbo.setBlockTrf(m);
-		WalkCutBlock walkCutBlock = new WalkCutBlock();
-		walkCutBlock.setParent(new JDFToXJDF());
-		KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
-		walkCutBlock.walk(cbo, root);
-		JDFCutBlock cb = (JDFCutBlock) root.getElement(ElementName.CUTBLOCK);
-		JDFRectangle box = JDFRectangle.createRectangle(cb.getNonEmpty(AttributeName.BOX));
-		assertEquals(box.getSize(), size);
-		assertEquals(box.getLL(), shift);
-		assertNull(cb.getBlockTrf());
-		assertNull(cb.getBlockSize());
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFAssemblySection);
 	}
 
 	/**
-	 * 
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
 	 */
-	@Test
-	public void testMatches()
+	@Override
+	public VString getElementNames()
 	{
-		JDFCutBlock cbo = (JDFCutBlock) new JDFDoc(ElementName.CUTBLOCK).getRoot();
-		WalkCutBlock wa = new WalkCutBlock();
-		wa.setParent(new JDFToXJDF());
-		assertTrue(wa.matches(cbo));
+		return new VString(ElementName.ASSEMBLYSECTION, null);
 	}
 
 	/**
-	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
-	@Test
-	public void testGetElementNames()
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
 	{
-		JDFCutBlock cbo = (JDFCutBlock) new JDFDoc(ElementName.CUTBLOCK).getRoot();
-		WalkCutBlock wa = new WalkCutBlock();
-		assertTrue(wa.getElementNames().contains(cbo.getLocalName()));
+		map.remove(AttributeName.JOBID);
+		super.updateAttributes(map);
 	}
+
 }

@@ -81,7 +81,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkLayoutElement extends WalkInlineAllRes
+public class WalkLayoutElement extends WalkResource
 {
 	/**
 	 * 

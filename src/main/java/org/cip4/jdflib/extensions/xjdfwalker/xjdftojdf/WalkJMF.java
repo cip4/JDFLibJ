@@ -100,7 +100,7 @@ public class WalkJMF extends WalkXElement
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
 		xjdfToJDFImpl.currentJDFNode = null;
-		moveFromSender(e, e.getElement(XJDFConstants.SENDER));
+		moveFromSender(e, e.getElement(XJDFConstants.HEADER));
 		KElement dummy = super.walk(e, trackElem);
 		trackElem.setAttributes(dummy);
 		((JDFJMF) trackElem).setVersion(xjdfToJDFImpl.getVersion());

@@ -98,6 +98,7 @@ public abstract class XJDFConstants
 	public static final String FolioFrom = "FolioFrom";
 	public static final String FolioTo = "FolioTo";
 
+	public static final String HEADER = "Header";
 	public static final String HolePattern = "HolePattern";
 
 	public static final String InkType = "InkType";
@@ -120,7 +121,6 @@ public abstract class XJDFConstants
 	public static final String Resource = "Resource";
 	public static final String ResourceSet = "ResourceSet";
 
-	public static final String SENDER = "Sender";
 	public static final String StickOn = "StickOn";
 	public static final String SurfaceColor = "SurfaceColor";
 

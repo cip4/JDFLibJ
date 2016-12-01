@@ -104,7 +104,7 @@ public class WalkResourceAudit extends WalkAudit
 	@Override
 	public KElement walk(KElement xjdf, final KElement jdf)
 	{
-		moveFromSender(xjdf, xjdf.getElement(XJDFConstants.SENDER));
+		moveFromSender(xjdf, xjdf.getElement(XJDFConstants.HEADER));
 		JDFResourceInfo ri = (JDFResourceInfo) xjdf.getElement(ElementName.RESOURCEINFO);
 		boolean foundLink = false;
 		while (ri != null)

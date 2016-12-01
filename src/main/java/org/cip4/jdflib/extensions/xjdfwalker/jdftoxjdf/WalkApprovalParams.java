@@ -80,7 +80,7 @@ import org.cip4.jdflib.resource.process.JDFApprovalParams;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkApprovalParams extends WalkInlineAllRes
+public class WalkApprovalParams extends WalkResource
 {
 	/**
 	 * 
@@ -116,10 +116,7 @@ public class WalkApprovalParams extends WalkInlineAllRes
 	@Override
 	protected void updateAttributes(JDFAttributeMap map)
 	{
-		if (!jdfToXJDF.isRetainAll())
-		{
-			map.remove(AttributeName.MINAPPROVALS);
-		}
+		map.remove(AttributeName.MINAPPROVALS);
 		super.updateAttributes(map);
 	}
 

@@ -1782,6 +1782,20 @@ class PostXJDFWalker extends BaseElementWalker
 			return super.walk(xjdf, dummy);
 		}
 
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#reorderElements(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		protected void reorderElements(KElement xjdf)
+		{
+			super.reorderElements(xjdf);
+			KElement header = xjdf.removeChild(XJDFConstants.HEADER, null, 0);
+			if (header != null)
+			{
+				xjdf.insertBefore(header, xjdf.getFirstChild());
+			}
+		}
+
 	}
 
 	/**
@@ -1820,6 +1834,20 @@ class PostXJDFWalker extends BaseElementWalker
 			String localName = e.getLocalName();
 			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE)
 					|| localName.startsWith(ElementName.COMMAND);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#reorderElements(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		protected void reorderElements(KElement xjdf)
+		{
+			super.reorderElements(xjdf);
+			KElement header = xjdf.removeChild(XJDFConstants.HEADER, null, 0);
+			if (header != null)
+			{
+				xjdf.insertBefore(header, xjdf.getFirstChild());
+			}
 		}
 
 	}
@@ -1861,6 +1889,20 @@ class PostXJDFWalker extends BaseElementWalker
 			return localName.startsWith(ElementName.AUDIT) && !ElementName.AUDITPOOL.equals(localName);
 		}
 
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#reorderElements(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		protected void reorderElements(KElement xjdf)
+		{
+			super.reorderElements(xjdf);
+			KElement header = xjdf.removeChild(XJDFConstants.HEADER, null, 0);
+			if (header != null)
+			{
+				xjdf.insertBefore(header, xjdf.getFirstChild());
+			}
+		}
+
 	}
 
 	/**
@@ -1871,7 +1913,7 @@ class PostXJDFWalker extends BaseElementWalker
 	{
 		if (xjdf != null)
 		{
-			JDFElement sender = (JDFElement) xjdf.getCreateElement(XJDFConstants.SENDER);
+			JDFElement sender = (JDFElement) xjdf.getCreateElement(XJDFConstants.HEADER);
 			sender.moveAttribute(AttributeName.AGENTNAME, xjdf);
 			sender.moveAttribute(AttributeName.AGENTVERSION, xjdf);
 			sender.moveAttribute(AttributeName.AUTHOR, xjdf);

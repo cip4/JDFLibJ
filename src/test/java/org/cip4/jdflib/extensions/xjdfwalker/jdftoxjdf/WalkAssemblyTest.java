@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,48 +68,82 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFBlockPreparationParams;
-import org.cip4.jdflib.resource.JDFCreasingParams;
-import org.cip4.jdflib.resource.JDFCuttingParams;
-import org.cip4.jdflib.resource.process.JDFColorControlStrip;
-import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.resource.process.JDFAssembly;
+import org.junit.Test;
 
-/**
- * 
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
- */
-public class WalkInlineAllRes extends WalkResource
+public class WalkAssemblyTest
 {
-	/**
-	 * class that inlines all refelements for classes that are derived from resources
-	 * see {@link WalkInlineAllElement} for similar functionality for elements
-	 */
-	public WalkInlineAllRes()
-	{
-		super();
-	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * 
 	 */
-	@Override
-	public boolean matches(final KElement toCheck)
+	@Test
+	public void testWalkElements()
 	{
-		return (toCheck instanceof JDFBlockPreparationParams) || (toCheck instanceof JDFColorControlStrip) || (toCheck instanceof JDFCuttingParams)
-				|| (toCheck instanceof JDFCreasingParams) || (toCheck instanceof JDFFoldingParams);
+		JDFAssembly as = (JDFAssembly) new JDFDoc(ElementName.ASSEMBLY).getRoot();
+		as.appendPageAssignedList();
+		as.appendPageAssignedList();
+		as.appendPageList();
+		as.appendAssemblySection();
+		WalkAssembly wa = new WalkAssembly();
+		wa.setParent(new JDFToXJDF());
+		KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
+		wa.walk(as, root);
+		JDFAssembly as2 = (JDFAssembly) root.getElement(ElementName.ASSEMBLY);
+		assertNotNull(as2);
+		assertNull(as2.getPageAssignedList(0));
+		assertNull(as.getPageList());
+		assertNotNull(as.getAssemblySection(0));
 	}
 
 	/**
 	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#mustInline(java.lang.String)
 	 */
-	@Override
-	protected boolean mustInline(final String refLocalName)
+	@Test
+	public void testWalkAttributes()
 	{
-		return true;
+		JDFAssembly as = (JDFAssembly) new JDFDoc(ElementName.ASSEMBLY).getRoot();
+		as.setPhysicalSection(JDFIntegerList.createIntegerList(" 1 3 5"));
+		as.appendPageAssignedList();
+		as.appendPageList();
+		WalkAssembly wa = new WalkAssembly();
+		wa.setParent(new JDFToXJDF());
+		KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
+		wa.walk(as, root);
+		JDFAssembly as2 = (JDFAssembly) root.getElement(ElementName.ASSEMBLY);
+		assertNull(as2.getNonEmpty(AttributeName.PHYSICALSECTION));
 	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testMatches()
+	{
+		JDFAssembly as = (JDFAssembly) new JDFDoc(ElementName.ASSEMBLY).getRoot();
+		WalkAssembly wa = new WalkAssembly();
+		wa.setParent(new JDFToXJDF());
+		assertTrue(wa.matches(as));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetElementNames()
+	{
+		JDFAssembly as = (JDFAssembly) new JDFDoc(ElementName.ASSEMBLY).getRoot();
+		WalkAssembly wa = new WalkAssembly();
+		assertTrue(wa.getElementNames().contains(as.getLocalName()));
+	}
+
 }

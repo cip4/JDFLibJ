@@ -177,6 +177,7 @@ public class WalkResource extends WalkJDFElement
 	 * @param r
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	protected String getClassName(final JDFResource r)
 	{
 		if (r == null)

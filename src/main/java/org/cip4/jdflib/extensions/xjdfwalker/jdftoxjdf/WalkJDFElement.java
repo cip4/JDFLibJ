@@ -127,6 +127,7 @@ public class WalkJDFElement extends WalkElement
 	 */
 	void makeRefElements(final JDFElement je)
 	{
+		removeUnusedElements(je);
 		final VElement v = je.getChildElementVector_KElement(null, null, null, true, 0);
 		for (KElement e : v)
 		{
