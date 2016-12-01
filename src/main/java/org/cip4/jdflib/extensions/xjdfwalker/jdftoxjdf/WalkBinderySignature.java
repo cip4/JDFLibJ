@@ -74,6 +74,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
+import org.cip4.jdflib.resource.process.postpress.JDFFold;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
@@ -115,7 +116,21 @@ public class WalkBinderySignature extends WalkResource
 	protected void updateAttributes(JDFAttributeMap map)
 	{
 		map.remove(AttributeName.ALIGNMENTREFERENCEWEB);
+		map.remove(AttributeName.BINDINGEDGE);
+		map.remove(AttributeName.FOLDLAY);
+		map.remove(AttributeName.JOGEDGE);
+		map.remove(AttributeName.ALIGNMENTREFERENCEWEB);
 		map.remove(AttributeName.WEBCELLALIGNMENT);
 		super.updateAttributes(map);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void removeUnusedElements(KElement jdf)
+	{
+		jdf.removeChildrenByClass(JDFFold.class);
+		super.removeUnusedElements(jdf);
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,45 +68,75 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBindingEdge;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFMarkObject;
-import org.cip4.jdflib.resource.process.JDFContentObject;
-import org.cip4.jdflib.resource.process.JDFMediaLayers;
+import org.cip4.jdflib.resource.process.JDFBinderySignature;
+import org.junit.Test;
 
-/**
- * class that inlines all refelements for classes that are derived from element
- * see {@link WalkInlineAllRes} for similar functionality for resources
- * 
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
- */
-public class WalkInlineAllElement extends WalkJDFSubElement
+public class WalkBinderySignatureTest extends JDFTestCaseBase
 {
+
 	/**
 	 * 
 	 */
-	public WalkInlineAllElement()
+	@Test
+	public void testWalkElements()
 	{
-		super();
+		JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
+		bs.appendFold();
+		WalkBinderySignature wa = new WalkBinderySignature();
+		wa.setParent(new JDFToXJDF());
+		KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
+		wa.walk(bs, root);
+		JDFBinderySignature bs2 = (JDFBinderySignature) root.getElement(ElementName.BINDERYSIGNATURE);
+		assertNotNull(bs2);
+		assertNull(bs.getFold(0));
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * 
 	 */
-	@Override
-	public boolean matches(final KElement toCheck)
+	@Test
+	public void testWalkAttributes()
 	{
-		return (toCheck instanceof JDFContentObject) || (toCheck instanceof JDFMarkObject) || (toCheck instanceof JDFMediaLayers);
+		JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
+		bs.setBindingEdge(EnumBindingEdge.Bottom);
+		WalkBinderySignature wa = new WalkBinderySignature();
+		wa.setParent(new JDFToXJDF());
+		KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
+		wa.walk(bs, root);
+		JDFBinderySignature bs2 = (JDFBinderySignature) root.getElement(ElementName.BINDERYSIGNATURE);
+		assertNotNull(bs2);
+		assertNull(bs2.getNonEmpty(AttributeName.BINDINGEDGE));
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#mustInline(java.lang.String)
+	 * 
 	 */
-	@Override
-	protected boolean mustInline(final String refLocalName)
+	@Test
+	public void testMatches()
 	{
-		return true;
+		JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
+		bs.setBindingEdge(EnumBindingEdge.Bottom);
+		WalkBinderySignature wa = new WalkBinderySignature();
+		wa.setParent(new JDFToXJDF());
+		assertTrue(wa.matches(bs));
 	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetElementNames()
+	{
+		JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
+		bs.setBindingEdge(EnumBindingEdge.Bottom);
+		WalkBinderySignature wa = new WalkBinderySignature();
+		assertTrue(wa.getElementNames().contains(bs.getLocalName()));
+	}
+
 }
