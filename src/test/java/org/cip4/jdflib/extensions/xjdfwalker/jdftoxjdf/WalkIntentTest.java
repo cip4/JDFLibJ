@@ -71,16 +71,23 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoHole.EnumShape;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFHoleLine;
+import org.cip4.jdflib.resource.intent.JDFFoldingIntent;
+import org.cip4.jdflib.resource.intent.JDFHoleMakingIntent;
 import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 import org.cip4.jdflib.resource.intent.JDFProofingIntent;
+import org.cip4.jdflib.resource.process.postpress.JDFHole;
+import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
 import org.cip4.jdflib.span.JDFSpanMethod.EnumSpanMethod;
 import org.cip4.jdflib.span.JDFSpanProofType.EnumSpanProofType;
 import org.junit.Test;
@@ -100,8 +107,90 @@ public class WalkIntentTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 
 		KElement xjdf = conv.makeNewJDF(n, null);
-		assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/ProofingIntent", null));
+		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/ProofingIntent"));
 		assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/ContentCheckIntent/ProofItem/@ProofType", null), EnumSpanProofType.Page.getName());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testFoldingIntent()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Product);
+		JDFFoldingIntent fi = (JDFFoldingIntent) n.addResource(ElementName.FOLDINGINTENT, EnumUsage.Input);
+		fi.appendFoldingCatalog().setActual("F4-1");
+		JDFToXJDF conv = new JDFToXJDF();
+
+		KElement xjdf = conv.makeNewJDF(n, null);
+		assertNull("F4-1", xjdf.getXPathAttribute("ProductList/Product/Intent/FoldingIntent/@FoldingCatalog", null));
+		assertEquals("F4-1", xjdf.getXPathAttribute("ProductList/Product/Intent/FoldingIntent/@FoldCatalog", null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testHoleMakingIntent()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Product);
+		JDFHoleMakingIntent hi = (JDFHoleMakingIntent) n.addResource(ElementName.HOLEMAKINGINTENT, EnumUsage.Input);
+		hi.setExtent(new JDFXYPair(21, 44));
+		hi.appendHoleType().setActual("R2i-US-b");
+		JDFToXJDF conv = new JDFToXJDF();
+
+		KElement xjdf = conv.makeNewJDF(n, null);
+		assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/@Extent", null));
+		assertEquals("21 44", xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Extent", null));
+		assertEquals("R2i-US-b", xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Pattern", null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testHoleMakingIntentLine()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Product);
+		JDFHoleMakingIntent hi = (JDFHoleMakingIntent) n.addResource(ElementName.HOLEMAKINGINTENT, EnumUsage.Input);
+		JDFHoleLine hl = hi.appendHoleList().appendHoleLine();
+		hl.setPitch(3);
+		JDFHole h = hl.appendHole();
+		h.setExtent(new JDFXYPair(3, 5));
+		h.setShape(EnumShape.Round);
+		hi.appendHoleType().setActual("explicit");
+		JDFToXJDF conv = new JDFToXJDF();
+
+		KElement xjdf = conv.makeNewJDF(n, null);
+		assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/@Extent", null));
+		assertEquals("3 5", xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Extent", null));
+		assertEquals("3", xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Pitch", null));
+		assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Pattern", null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testHoleMakingIntentList()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Product);
+		JDFHoleMakingIntent hi = (JDFHoleMakingIntent) n.addResource(ElementName.HOLEMAKINGINTENT, EnumUsage.Input);
+		JDFHoleList hl = hi.appendHoleList();
+		JDFHole h = hl.appendHole();
+		h.setExtent(new JDFXYPair(3, 5));
+		h.setShape(EnumShape.Round);
+		hi.appendHoleType().setActual("explicit");
+		JDFToXJDF conv = new JDFToXJDF();
+
+		KElement xjdf = conv.makeNewJDF(n, null);
+		assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/@Extent", null));
+		assertEquals("3 5", xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Extent", null));
+		assertNull(xjdf.getXPathAttribute("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Pattern", null));
 	}
 
 	/**

@@ -129,4 +129,5 @@ public class WalkColorantControl extends WalkResource
 	{
 		return new VString(ElementName.COLORANTCONTROL, null);
 	}
+
 }

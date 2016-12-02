@@ -138,7 +138,6 @@ import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.cip4.jdflib.util.FileUtil;
-import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
 
 /**
@@ -248,6 +247,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		nP.setDescriptiveName("desc");
 		JDFMediaIntent mi = (JDFMediaIntent) nP.addResource(ElementName.MEDIAINTENT, EnumUsage.Input);
 		mi.appendBrightness().setPreferred(42);
+		mi.appendMediaQuality().setPreferred("foo");
 
 		JDFToXJDF xjdf20 = new JDFToXJDF();
 		xjdf20.setSingleNode(true);
@@ -255,8 +255,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		KElement xjdf = xjdf20.makeNewJDF(nP, null);
 		xjdf.write2File(sm_dirTestDataTemp + "bind.xjdf");
 		assertNotNull(xjdf);
-		assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/MediaIntent/@Brightness", null), "42");
+		assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/MediaIntent/@MediaQuality", null), "foo");
 		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/MediaIntent/Brightness"));
+		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/MediaIntent/@Brightness"));
 	}
 
 	/**
@@ -448,7 +449,33 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFColorantControl ccNew = (JDFColorantControl) new XJDFHelper(xjdf).getPartition(ElementName.COLORANTCONTROL, 0, 0).getResource();
 		assertEquals(ccNew.getAttribute(ElementName.COLORANTPARAMS), "Cyan Magenta Yellow Black");
 		assertEquals(ccNew.getAttribute(ElementName.COLORANTORDER), "Cyan Black");
-		assertNull(StringUtil.getNonEmpty(ccNew.getAttribute(ElementName.DEVICECOLORANTORDER)));
+		assertNull(ccNew.getNonEmpty(ElementName.DEVICECOLORANTORDER));
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testColorantControlRefPool()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ImageSetting);
+		JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		cc.getCreateColorantOrder().setSeparations(new VString("Cyan Magenta Yellow Black", null));
+		cc.getCreateDeviceColorantOrder().setSeparations(new VString("Magenta Cyan Yellow Black", null));
+		cc.setProcessColorModel("DeviceCMYK");
+		JDFColorPool cp = (JDFColorPool) cc.appendColorPool().makeRootResource(null, null, true);
+		JDFColor color = cp.appendColor();
+		color.setSeparation("spot");
+		color.setGray(44);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+
+		JDFColorantControl ccNew = (JDFColorantControl) new XJDFHelper(xjdf).getPartition(ElementName.COLORANTCONTROL, 0, 0).getResource();
+		assertNull(ccNew.getNonEmpty("ColorRef"));
+
 	}
 
 	/**

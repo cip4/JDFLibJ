@@ -80,7 +80,7 @@ import org.cip4.jdflib.resource.process.JDFAssemblySection;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkAssemblySection extends WalkJDFElement
+public class WalkAssemblySection extends WalkJDFSubElement
 {
 	/**
 	 * 

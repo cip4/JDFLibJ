@@ -77,7 +77,7 @@ import org.cip4.jdflib.core.VString;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkIgnore extends WalkJDFElement
+public class WalkIgnore extends WalkElement
 {
 
 	/**
@@ -116,19 +116,26 @@ public class WalkIgnore extends WalkJDFElement
 		v.add(ElementName.BUSINESSINFO);
 		v.add(ElementName.COLORMEASUREMENTCONDITIONS);
 		v.add(ElementName.COLORSPACESUBSTITUTE);
+		v.add(ElementName.CONTACTCOPYPARAMS);
 		v.add(ElementName.DELETED);
+		v.add(ElementName.CYLINDERLAYOUT);
+		v.add(ElementName.CYLINDERLAYOUTPREPARATIONPARAMS);
 		v.add(ElementName.DEVCAPPOOL);
 		v.add(ElementName.DEVCAPS);
 		v.add(ElementName.DEVCAP);
 		v.add(ElementName.DEVICECAP);
+		v.add(ElementName.DIGITALDELIVERYPARAMS);
 		v.add(ElementName.MERGED);
 		v.add(ElementName.MODIFIED);
 		v.add(ElementName.MODULEPOOL);
 		v.add(ElementName.OBSERVATIONTARGET);
+		v.add(ElementName.PACKINGINTENT);
 		v.add(ElementName.PAGEASSIGNEDLIST);
 		v.add(ElementName.PARTAMOUNT);
+		v.add(ElementName.PDLRESOURCEALIAS);
 		v.add(ElementName.REGISTRATION);
 		v.add(ElementName.RESOURCEPOOL);
+		v.add(ElementName.SCREENINGINTENT);
 		v.add(ElementName.SOURCERESOURCE);
 		v.add(ElementName.SPAWNED);
 		v.add(ElementName.TESTPOOL);

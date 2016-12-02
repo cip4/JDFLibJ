@@ -149,7 +149,10 @@ public class WalkElement extends BaseWalker
 				eNew.insertBefore(comment, before);
 			}
 		}
-		removeUnusedElements(jdf);
+		if (!jdfToXJDF.isRetainAll())
+		{
+			removeUnusedElements(jdf);
+		}
 		return eNew;
 	}
 

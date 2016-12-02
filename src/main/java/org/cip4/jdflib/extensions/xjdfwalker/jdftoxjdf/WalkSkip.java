@@ -71,7 +71,6 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.resource.JDFInsertList;
 
 /**
 * any matching class will be ignored and all children will be moved into the respective parent element
@@ -108,7 +107,7 @@ public class WalkSkip extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFInsertList;
+		return true;
 	}
 
 	/**
@@ -117,6 +116,6 @@ public class WalkSkip extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString(ElementName.INSERTLIST, null);
+		return new VString(new String[] { ElementName.INSERTLIST, ElementName.HOLELIST });
 	}
 }

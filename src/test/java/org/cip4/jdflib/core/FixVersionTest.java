@@ -351,6 +351,20 @@ public class FixVersionTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testCustomerMessage()
+	{
+		final JDFCustomerInfo ci = (JDFCustomerInfo) n.addResource(ElementName.CUSTOMERINFO, null, EnumUsage.Input, null, null, null, null);
+		ci.appendCustomerMessage().setText("foo");
+		FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
+		fixVersion.setZappDeprecated(true);
+		fixVersion.convert(ci);
+		assertNull(ci.getCustomerMessage(0));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testChannelType()
 	{
 		final JDFComChannel c = (JDFComChannel) new JDFDoc("ComChannel").getRoot();

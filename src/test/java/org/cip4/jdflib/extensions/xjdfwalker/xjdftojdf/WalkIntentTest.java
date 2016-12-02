@@ -79,6 +79,8 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.intent.JDFFoldingIntent;
+import org.cip4.jdflib.resource.intent.JDFHoleMakingIntent;
 import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 import org.cip4.jdflib.resource.intent.JDFProofingIntent;
 import org.cip4.jdflib.span.JDFSpanProofType.EnumSpanProofType;
@@ -119,4 +121,41 @@ public class WalkIntentTest extends JDFTestCaseBase
 		JDFInsertingIntent ii = (JDFInsertingIntent) jdfRoot.getResource(ElementName.INSERTINGINTENT, EnumUsage.Input, 0);
 		assertEquals(ii.getInsertList().getInsert(0).getFolio(), new JDFIntegerRangeList("1 ~ 4"));
 	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testHoleMakingIntent()
+	{
+		XJDFHelper h = new XJDFHelper("j1", "p1", null);
+
+		h.setXPathValue("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Extent", "44 55");
+		h.setXPathValue("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Pattern", "R2i-US-b");
+
+		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		JDFDoc dJDF = c.convert(h);
+		JDFNode jdfRoot = dJDF.getJDFRoot();
+		JDFHoleMakingIntent hi = (JDFHoleMakingIntent) jdfRoot.getResource(ElementName.HOLEMAKINGINTENT, EnumUsage.Input, 0);
+		assertEquals("R2i-US-b", hi.getHoleType().getActual());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testFoldingIntent()
+	{
+		XJDFHelper h = new XJDFHelper("j1", "p1", null);
+
+		h.setXPathValue("ProductList/Product/Intent/FoldingIntent/@FoldCatalog", "F4-1");
+
+		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		JDFDoc dJDF = c.convert(h);
+		JDFNode jdfRoot = dJDF.getJDFRoot();
+		JDFFoldingIntent fi = (JDFFoldingIntent) jdfRoot.getResource(ElementName.FOLDINGINTENT, EnumUsage.Input, 0);
+		assertEquals("F4-1", fi.getFoldingCatalog().getActual());
+
+	}
+
 }

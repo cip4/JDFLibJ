@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -114,9 +114,6 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo implements IMatches
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.RREFS, 0x44444433, AttributeInfo.EnumAttributeType.IDREFS, null, null);
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
-
 	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
@@ -142,7 +139,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo implements IMatches
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPANY, 0x44444446);
 		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.CUSTOMERMESSAGE, 0x33333311);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.CUSTOMERMESSAGE, 0x44433311);
 	}
 
 	// //////////////////////////////////////////////////////////////////////////

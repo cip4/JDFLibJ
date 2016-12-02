@@ -122,6 +122,9 @@ public class WalkConventionalPrintingParams extends WalkResource
 		map.remove(AttributeName.NONPRINTABLEMARGINLEFT);
 		map.remove(AttributeName.NONPRINTABLEMARGINRIGHT);
 		map.remove(AttributeName.NONPRINTABLEMARGINTOP);
+		map.remove(AttributeName.MODULEINDEX);
+		map.remove(AttributeName.PERFECTINGMODULE);
 		super.updateAttributes(map);
 	}
+
 }

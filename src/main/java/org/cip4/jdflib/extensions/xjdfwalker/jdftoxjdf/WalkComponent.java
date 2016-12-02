@@ -139,4 +139,14 @@ public class WalkComponent extends WalkResource
 		return new VString(ElementName.COMPONENT, null);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void removeUnusedElements(KElement jdf)
+	{
+		jdf.removeChild(ElementName.LAYOUT, null, 0);
+		super.removeUnusedElements(jdf);
+	}
+
 }

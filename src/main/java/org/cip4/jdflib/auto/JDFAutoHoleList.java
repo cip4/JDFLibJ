@@ -81,7 +81,6 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFHoleLine;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHole;
-import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
 
 /**
 *****************************************************************************
@@ -240,9 +239,9 @@ public abstract class JDFAutoHoleList extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFHoleList the element
 	 */
-	public JDFHoleList getCreateHoleLine(int iSkip)
+	public JDFHoleLine getCreateHoleLine(int iSkip)
 	{
-		return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELINE, null, iSkip);
+		return (JDFHoleLine) getCreateElement_KElement(ElementName.HOLELINE, null, iSkip);
 	}
 
 	/**
@@ -250,9 +249,9 @@ public abstract class JDFAutoHoleList extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFHoleList the element
 	 * default is getHoleLine(0)     */
-	public JDFHoleList getHoleLine(int iSkip)
+	public JDFHoleLine getHoleLine(int iSkip)
 	{
-		return (JDFHoleList) getElement(ElementName.HOLELINE, null, iSkip);
+		return (JDFHoleLine) getElement(ElementName.HOLELINE, null, iSkip);
 	}
 
 	/**
@@ -260,7 +259,7 @@ public abstract class JDFAutoHoleList extends JDFResource
 	 * 
 	 * @return Collection<JDFHoleList>, null if none are available
 	 */
-	public Collection<JDFHoleList> getAllHoleLine()
+	public Collection<JDFHoleLine> getAllHoleLine()
 	{
 		final VElement vc = getChildElementVector(ElementName.HOLELINE, null);
 		if (vc == null || vc.size() == 0)
@@ -268,10 +267,10 @@ public abstract class JDFAutoHoleList extends JDFResource
 			return null;
 		}
 
-		final Vector<JDFHoleList> v = new Vector<JDFHoleList>();
+		final Vector<JDFHoleLine> v = new Vector<JDFHoleLine>();
 		for (int i = 0; i < vc.size(); i++)
 		{
-			v.add((JDFHoleList) vc.get(i));
+			v.add((JDFHoleLine) vc.get(i));
 		}
 
 		return v;
@@ -281,9 +280,9 @@ public abstract class JDFAutoHoleList extends JDFResource
 	 * (30) append element HoleLine
 	 * @return JDFHoleList the element
 	 */
-	public JDFHoleList appendHoleLine()
+	public JDFHoleLine appendHoleLine()
 	{
-		return (JDFHoleList) appendElement(ElementName.HOLELINE, null);
+		return (JDFHoleLine) appendElement(ElementName.HOLELINE, null);
 	}
 
 	/**

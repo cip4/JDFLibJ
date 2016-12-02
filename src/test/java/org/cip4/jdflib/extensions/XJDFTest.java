@@ -448,13 +448,15 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Query, JDFMessage.EnumType.Status);
 		XJDF20 xjdf20 = new XJDF20();
 		xjdf = xjdf20.makeNewJMF(jmf);
+		KElement firstChildElement = xjdf.getFirstChildElement();
 		if (xjdf20.isTypeSafeMessage())
 		{
-			assertEquals(xjdf.getFirstChildElement().getLocalName(), "QueryStatus");
+			assertEquals(firstChildElement.getLocalName(), XJDFConstants.HEADER);
+			assertEquals(firstChildElement.getNextSiblingElement().getLocalName(), "QueryStatus");
 		}
 		else
 		{
-			assertEquals(xjdf.getFirstChildElement().getFirstChildElement().getLocalName(), "StatusQuery");
+			assertEquals(firstChildElement.getFirstChildElement().getLocalName(), "StatusQuery");
 		}
 	}
 

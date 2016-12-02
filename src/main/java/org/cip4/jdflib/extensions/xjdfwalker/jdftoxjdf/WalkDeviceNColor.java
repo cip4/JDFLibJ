@@ -78,7 +78,7 @@ import org.cip4.jdflib.resource.process.JDFDeviceNColor;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkDeviceNColor extends WalkJDFElement
+public class WalkDeviceNColor extends WalkJDFSubElement
 {
 	/**
 	 * 
