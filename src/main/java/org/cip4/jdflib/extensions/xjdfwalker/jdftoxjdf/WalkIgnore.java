@@ -68,6 +68,9 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -79,6 +82,7 @@ import org.cip4.jdflib.core.VString;
  */
 public class WalkIgnore extends WalkElement
 {
+	private static Set<String> allwaysIgnore = null;
 
 	/**
 	 * 
@@ -141,6 +145,48 @@ public class WalkIgnore extends WalkElement
 		v.add(ElementName.TESTPOOL);
 		v.add(ElementName.TRIGGER);
 		return v;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+
+	Set<String> getAlwaysIgnore()
+	{
+		if (allwaysIgnore == null)
+		{
+			HashSet<String> v = new HashSet<String>();
+			v.add(ElementName.ACTIONPOOL);
+			v.add(ElementName.DELETED);
+			v.add(ElementName.DEVCAPPOOL);
+			v.add(ElementName.DEVCAPS);
+			v.add(ElementName.DEVCAP);
+			v.add(ElementName.DEVICECAP);
+			v.add(ElementName.MERGED);
+			v.add(ElementName.MODIFIED);
+			v.add(ElementName.MODULEPOOL);
+			v.add(ElementName.PARTAMOUNT);
+			v.add(ElementName.SPAWNED);
+			v.add(ElementName.TESTPOOL);
+			allwaysIgnore = v;
+		}
+		return allwaysIgnore;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public boolean matches(KElement e)
+	{
+		if (jdfToXJDF.isRetainAll())
+		{
+			return getAlwaysIgnore().contains(e.getLocalName());
+		}
+		else
+		{
+			return true;
+		}
 	}
 
 }

@@ -283,6 +283,11 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf.write2File(sm_dirTestDataTemp + "pack.xjdf");
 		assertNotNull(xjdf);
 		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/PackingIntent"));
+		xjdf20.setRetainAll(true);
+		xjdf = xjdf20.makeNewJDF(nP, null);
+		xjdf.write2File(sm_dirTestDataTemp + "packretain.xjdf");
+		assertNotNull(xjdf);
+		assertNotNull(xjdf.getXPathElement("ProductList/Product/Intent/PackingIntent"));
 	}
 
 	/**
@@ -305,6 +310,11 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf.write2File(sm_dirTestDataTemp + "screen.xjdf");
 		assertNotNull(xjdf);
 		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/ScreeningIntent"));
+		xjdf20.setRetainAll(true);
+		xjdf = xjdf20.makeNewJDF(nP, null);
+		xjdf.write2File(sm_dirTestDataTemp + "screenretain.xjdf");
+		assertNotNull(xjdf);
+		assertNotNull(xjdf.getXPathElement("ProductList/Product/Intent/ScreeningIntent"));
 	}
 
 	/**
