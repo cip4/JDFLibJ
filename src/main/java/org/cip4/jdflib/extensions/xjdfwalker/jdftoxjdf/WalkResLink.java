@@ -111,7 +111,7 @@ public class WalkResLink extends WalkJDFElement
 		final JDFResourceLink rl = (JDFResourceLink) jdf;
 		final JDFResource linkTarget = rl.getLinkRoot();
 		JDFNode n = rl.getParentJDF();
-		if (linkTarget == null)
+		if (jdfToXJDF.getClassName(linkTarget) == null)
 		{
 			return null;
 		}

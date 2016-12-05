@@ -122,6 +122,8 @@ import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
+import org.cip4.jdflib.resource.intent.JDFPackingIntent;
+import org.cip4.jdflib.resource.intent.JDFScreeningIntent;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
@@ -137,6 +139,7 @@ import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
+import org.cip4.jdflib.span.JDFSpanScreeningType.EnumSpanScreeningType;
 import org.cip4.jdflib.util.FileUtil;
 import org.junit.Test;
 
@@ -258,6 +261,50 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/MediaIntent/@MediaQuality", null), "foo");
 		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/MediaIntent/Brightness"));
 		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/MediaIntent/@Brightness"));
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@Test
+	public void testPackingIntent()
+	{
+		final JDFNode nP = new JDFDoc(ElementName.JDF).getJDFRoot();
+		nP.setType(EnumType.Product);
+		nP.setDescriptiveName("desc");
+		JDFPackingIntent pi = (JDFPackingIntent) nP.addResource(ElementName.PACKINGINTENT, EnumUsage.Input);
+		pi.appendBoxedQuantity().setActual(43);
+
+		JDFToXJDF xjdf20 = new JDFToXJDF();
+		xjdf20.setSingleNode(true);
+		xjdf20.setSpanAsAttribute(true);
+		KElement xjdf = xjdf20.makeNewJDF(nP, null);
+		xjdf.write2File(sm_dirTestDataTemp + "pack.xjdf");
+		assertNotNull(xjdf);
+		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/PackingIntent"));
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@Test
+	public void testScreeningIntent()
+	{
+		final JDFNode nP = new JDFDoc(ElementName.JDF).getJDFRoot();
+		nP.setType(EnumType.Product);
+		nP.setDescriptiveName("desc");
+		JDFScreeningIntent pi = (JDFScreeningIntent) nP.addResource(ElementName.SCREENINGINTENT, EnumUsage.Input);
+		pi.appendScreeningType().setActual(EnumSpanScreeningType.AM);
+
+		JDFToXJDF xjdf20 = new JDFToXJDF();
+		xjdf20.setSingleNode(true);
+		xjdf20.setSpanAsAttribute(true);
+		KElement xjdf = xjdf20.makeNewJDF(nP, null);
+		xjdf.write2File(sm_dirTestDataTemp + "screen.xjdf");
+		assertNotNull(xjdf);
+		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/ScreeningIntent"));
 	}
 
 	/**
