@@ -166,6 +166,7 @@ public class WalkIgnore extends WalkElement
 			v.add(ElementName.MODIFIED);
 			v.add(ElementName.MODULEPOOL);
 			v.add(ElementName.PARTAMOUNT);
+			v.add(ElementName.RESOURCEPOOL);
 			v.add(ElementName.SPAWNED);
 			v.add(ElementName.TESTPOOL);
 			allwaysIgnore = v;

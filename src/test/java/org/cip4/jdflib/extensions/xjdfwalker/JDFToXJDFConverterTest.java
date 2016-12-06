@@ -322,6 +322,29 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
+	public void testRetainResPool()
+	{
+		final JDFNode nP = new JDFDoc(ElementName.JDF).getJDFRoot();
+		nP.setType(EnumType.Product);
+		nP.setDescriptiveName("desc");
+		JDFScreeningIntent pi = (JDFScreeningIntent) nP.addResource(ElementName.SCREENINGINTENT, EnumUsage.Input);
+		pi.appendScreeningType().setActual(EnumSpanScreeningType.AM);
+
+		JDFToXJDF xjdf20 = new JDFToXJDF();
+		xjdf20.setSingleNode(true);
+		xjdf20.setSpanAsAttribute(true);
+		xjdf20.setRetainAll(true);
+		KElement xjdf = xjdf20.makeNewJDF(nP, null);
+		xjdf.write2File(sm_dirTestDataTemp + "retain.xjdf");
+		assertNotNull(xjdf);
+		assertNull(xjdf.getChildByTagName(ElementName.RESOURCEPOOL, null, 0, null, false, false));
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@Test
 	public void testPageList()
 	{
 		_testPageList(false);
