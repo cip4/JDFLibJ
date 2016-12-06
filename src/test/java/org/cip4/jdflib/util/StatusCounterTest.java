@@ -306,7 +306,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		}
 		long dif = getCurrentMem() - mem;
 		dif = Math.max(dif, 0);
-		assertEquals(dif, 0, 1500000);
+		assertEquals(dif, 0, 2500000);
 	}
 
 	/**
@@ -317,7 +317,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	{
 		sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		VElement v = new VElement();
-		for (int i = 0; i < 3333; i++)
+		for (int i = 0; i < 2222; i++)
 		{
 			if (i % 1000 == 0)
 				log.info(i + " " + getCurrentMem() + " " + (getCurrentMem() / (i + 1)));
@@ -333,10 +333,10 @@ public class StatusCounterTest extends JDFTestCaseBase
 	{
 		sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		VJDFAttributeMap v = new VJDFAttributeMap();
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 2222; i++)
 		{
 			if (i % 1000 == 0)
-				System.out.println(i + " " + getCurrentMem() + " " + (getCurrentMem() / (i + 1)));
+				log.info(i + " " + getCurrentMem() + " " + (getCurrentMem() / (i + 1)));
 			v.add(sc.getDocJMFPhaseTime().getRoot().getXPathValueMap());
 		}
 	}
