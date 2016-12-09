@@ -72,9 +72,11 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
 
 /**
@@ -141,5 +143,15 @@ public class WalkCutBlock extends WalkJDFSubElement
 	public VString getElementNames()
 	{
 		return new VString(ElementName.CUTBLOCK, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		super.updateAttributes(map);
+		map.renameKey(AttributeName.ASSEMBLYIDS, XJDFConstants.BinderySignatureIDs);
 	}
 }

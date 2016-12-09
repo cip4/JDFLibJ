@@ -116,12 +116,27 @@ public class WalkDigitalPrintingParams extends WalkResource
 	@Override
 	protected void updateAttributes(JDFAttributeMap map)
 	{
+		map.remove(AttributeName.DIRECTPROOFAMOUNT);
 		map.remove(AttributeName.PRINTINGTYPE);
+		map.remove(AttributeName.PRINTPASS);
 		map.remove(AttributeName.MEDIALOCATION);
 		map.remove(AttributeName.NONPRINTABLEMARGINBOTTOM);
 		map.remove(AttributeName.NONPRINTABLEMARGINLEFT);
 		map.remove(AttributeName.NONPRINTABLEMARGINRIGHT);
 		map.remove(AttributeName.NONPRINTABLEMARGINTOP);
 		super.updateAttributes(map);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void removeUnusedElements(KElement jdf)
+	{
+		jdf.removeChild(ElementName.APPROVALPARAMS, null, 0);
+		jdf.removeChild(ElementName.COMPONENT, null, 0);
+		jdf.removeChild(ElementName.DISJOINTING, null, 0);
+		jdf.removeChild(ElementName.MEDIA, null, 0);
+		super.removeUnusedElements(jdf);
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -73,19 +73,19 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
+import org.cip4.jdflib.resource.devicecapability.JDFModule;
 
 /**
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkConventionalPrintingParams extends WalkResource
+public class WalkModule extends WalkJDFElement
 {
 	/**
 	 * 
 	 */
-	public WalkConventionalPrintingParams()
+	public WalkModule()
 	{
 		super();
 	}
@@ -98,7 +98,7 @@ public class WalkConventionalPrintingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFConventionalPrintingParams);
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFModule);
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class WalkConventionalPrintingParams extends WalkResource
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.CONVENTIONALPRINTINGPARAMS, null);
+		return new VString(ElementName.MODULE, null);
 	}
 
 	/**
@@ -116,16 +116,25 @@ public class WalkConventionalPrintingParams extends WalkResource
 	@Override
 	protected void updateAttributes(JDFAttributeMap map)
 	{
-		map.remove(AttributeName.PRINTINGTYPE);
-		map.remove(AttributeName.DIRECTPROOF);
-		map.remove(AttributeName.MEDIALOCATION);
-		map.remove(AttributeName.NONPRINTABLEMARGINBOTTOM);
-		map.remove(AttributeName.NONPRINTABLEMARGINLEFT);
-		map.remove(AttributeName.NONPRINTABLEMARGINRIGHT);
-		map.remove(AttributeName.NONPRINTABLEMARGINTOP);
+		map.remove(AttributeName.DEVICETYPE);
+		map.remove(AttributeName.MANUFACTURERURL);
+		map.remove(AttributeName.MODELDESCRIPTION);
+		map.remove(AttributeName.MODELNAME);
+		map.remove(AttributeName.MODELNUMBER);
+		map.remove(AttributeName.MODELURL);
 		map.remove(AttributeName.MODULEINDEX);
-		map.remove(AttributeName.PERFECTINGMODULE);
+		map.remove(AttributeName.SERIALNUMBER);
+		map.remove(AttributeName.SUBMODULEINDEX);
 		super.updateAttributes(map);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void removeUnusedElements(KElement jdf)
+	{
+		jdf.removeChildren(ElementName.MODULE, null, null);
+		super.removeUnusedElements(jdf);
+	}
 }

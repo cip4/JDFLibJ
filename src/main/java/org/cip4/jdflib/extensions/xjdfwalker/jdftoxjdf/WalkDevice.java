@@ -121,6 +121,7 @@ public class WalkDevice extends WalkResource
 		map.remove(AttributeName.JDFINPUTURL);
 		map.remove(AttributeName.JDFOUTPUTURL);
 		map.remove(AttributeName.JMFSENDERID);
+		map.remove(AttributeName.JMFURL);
 		super.updateAttributes(map);
 	}
 }

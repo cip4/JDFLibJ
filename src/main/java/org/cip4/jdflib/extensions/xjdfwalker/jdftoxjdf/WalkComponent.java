@@ -72,6 +72,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -91,32 +93,16 @@ public class WalkComponent extends WalkResource
 	}
 
 	/**
-	 *
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		final JDFComponent k = (JDFComponent) super.walk(jdf, xjdf);
-		updateComponentType(k);
-
-		String prodType = k.getAttribute(AttributeName.PRODUCTTYPE);
-		if ("Unknown".equals(prodType))
-			k.removeAttribute(AttributeName.PRODUCTTYPE);
-		return k;
-	}
-
-	/**
 	 * 
 	 * @param k
 	 */
-	void updateComponentType(final JDFComponent k)
+	void updateComponentType(final JDFAttributeMap k)
 	{
-		String comptype = k.getAttribute(AttributeName.COMPONENTTYPE);
+		String comptype = k.remove(AttributeName.COMPONENTTYPE);
 		comptype = StringUtil.replaceString(comptype, "FinalProduct", null);
 		comptype = StringUtil.replaceString(comptype, "PartialProduct", null);
-		k.setAttribute(AttributeName.COMPONENTTYPE, StringUtil.trim(comptype, null));
+		if (comptype != null)
+			k.put(AttributeName.COMPONENTTYPE, StringUtil.trim(comptype, null));
 	}
 
 	/**
@@ -146,7 +132,24 @@ public class WalkComponent extends WalkResource
 	protected void removeUnusedElements(KElement jdf)
 	{
 		jdf.removeChild(ElementName.LAYOUT, null, 0);
+		jdf.removeChild(ElementName.ASSEMBLY, null, 0);
+		jdf.removeChild(ElementName.DISJOINTING, null, 0);
 		super.removeUnusedElements(jdf);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		String prodType = map.get(AttributeName.PRODUCTTYPE);
+		if ("Unknown".equals(prodType))
+			map.remove(AttributeName.PRODUCTTYPE);
+		updateComponentType(map);
+		map.remove(AttributeName.PAGELISTINDEX);
+		map.renameKey(AttributeName.ASSEMBLYIDS, XJDFConstants.BinderySignatureIDs);
+		super.updateAttributes(map);
 	}
 
 }

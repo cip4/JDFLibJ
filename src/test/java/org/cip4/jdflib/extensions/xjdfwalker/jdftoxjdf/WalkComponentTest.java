@@ -75,6 +75,7 @@ import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.junit.Test;
 
@@ -90,12 +91,14 @@ public class WalkComponentTest
 		JDFComponent cb = (JDFComponent) new JDFDoc(ElementName.COMPONENT).getRoot();
 		cb.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Web);
 		WalkComponent walkComponent = new WalkComponent();
-		walkComponent.updateComponentType(cb);
-		assertEquals("Web", cb.getAttribute(AttributeName.COMPONENTTYPE));
+		JDFAttributeMap map = cb.getAttributeMap();
+		walkComponent.updateComponentType(map);
+		assertEquals("Web", map.get(AttributeName.COMPONENTTYPE));
 
 		cb.setComponentType(EnumComponentType.PartialProduct, null);
-		walkComponent.updateComponentType(cb);
-		assertNull(cb.getAttribute(AttributeName.COMPONENTTYPE, null, null));
+		map = cb.getAttributeMap();
+		walkComponent.updateComponentType(map);
+		assertNull(map.get(AttributeName.COMPONENTTYPE));
 	}
 
 }

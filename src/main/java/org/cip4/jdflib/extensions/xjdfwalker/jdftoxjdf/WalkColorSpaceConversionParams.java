@@ -73,19 +73,19 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
+import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 
 /**
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkConventionalPrintingParams extends WalkResource
+public class WalkColorSpaceConversionParams extends WalkResource
 {
 	/**
 	 * 
 	 */
-	public WalkConventionalPrintingParams()
+	public WalkColorSpaceConversionParams()
 	{
 		super();
 	}
@@ -98,7 +98,7 @@ public class WalkConventionalPrintingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFConventionalPrintingParams);
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFColorSpaceConversionParams);
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class WalkConventionalPrintingParams extends WalkResource
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.CONVENTIONALPRINTINGPARAMS, null);
+		return new VString(ElementName.COLORSPACECONVERSIONPARAMS, null);
 	}
 
 	/**
@@ -116,16 +116,8 @@ public class WalkConventionalPrintingParams extends WalkResource
 	@Override
 	protected void updateAttributes(JDFAttributeMap map)
 	{
-		map.remove(AttributeName.PRINTINGTYPE);
-		map.remove(AttributeName.DIRECTPROOF);
-		map.remove(AttributeName.MEDIALOCATION);
-		map.remove(AttributeName.NONPRINTABLEMARGINBOTTOM);
-		map.remove(AttributeName.NONPRINTABLEMARGINLEFT);
-		map.remove(AttributeName.NONPRINTABLEMARGINRIGHT);
-		map.remove(AttributeName.NONPRINTABLEMARGINTOP);
-		map.remove(AttributeName.MODULEINDEX);
-		map.remove(AttributeName.PERFECTINGMODULE);
 		super.updateAttributes(map);
+		map.remove(AttributeName.COLORMANAGEMENTSYSTEM);
 	}
 
 }

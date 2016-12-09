@@ -121,9 +121,11 @@ public class WalkIgnore extends WalkElement
 		v.add(ElementName.COLORMEASUREMENTCONDITIONS);
 		v.add(ElementName.COLORSPACESUBSTITUTE);
 		v.add(ElementName.CONTACTCOPYPARAMS);
-		v.add(ElementName.DELETED);
+		v.add(ElementName.CUSTOMERMESSAGE);
 		v.add(ElementName.CYLINDERLAYOUT);
 		v.add(ElementName.CYLINDERLAYOUTPREPARATIONPARAMS);
+		v.add(ElementName.CYLINDERPOSITION);
+		v.add(ElementName.DELETED);
 		v.add(ElementName.DEVCAPPOOL);
 		v.add(ElementName.DEVCAPS);
 		v.add(ElementName.DEVCAP);
