@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -241,6 +241,24 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	public void testSchemafolder()
 	{
 		File[] jdfs = FileUtil.listFilesWithExtension(new File(sm_dirTestData + "schema"), "jdf");
+
+		for (File jdf : jdfs)
+		{
+			final JDFDoc d = p.parseFile(jdf);
+			assertNotNull(d);
+			log.info("Parsing: " + jdf.getName());
+			assertNull("schema error in: " + jdf.getName(), p.m_lastExcept);
+		}
+	}
+
+	/**
+	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
+	 * 
+	 */
+	@Test
+	public void testSchemafolderJMF()
+	{
+		File[] jdfs = FileUtil.listFilesWithExtension(new File(sm_dirTestData + "schema"), "jmf");
 
 		for (File jdf : jdfs)
 		{

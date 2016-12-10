@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JMF xmlns="http://www.CIP4.org/JDFSchema_1_1" AgentName="ApogeeX" AgentVersion="10.69.1.69.74" DeviceID="KMBT001315" ICSVersions="Base_L1-1.4 Base_L2-1.4 JMF_L1-1.4 MIS_L1-1.4 MIS_L2-1.4 MISPRE_L1-1.4 MISPRE_L2-1.4" MaxVersion="1.4" SenderID="VMPREPRESS10S22" TimeStamp="2016-11-20T20:43:57+01:00" Version="1.4" xmlns:agfa="http://www.agfa.com/w3c/gs/jdf/agfaextensions.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Query ID="m_VMPREPRESS10S22_KMBT001315_Resource_Media" Type="Resource" xsi:type="QueryResource">
+		<ResourceQuParams Exact="true" ResourceName="Media" Scope="Allowed"/>
+		<Subscription URL="http://10.232.51.125:80/AXJMF/"/>
+	</Query>
+</JMF>

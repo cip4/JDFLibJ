@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
   <!--
     The CIP4 Software License, Version 1.0 
-    Copyright (c) 2001-2015 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). 
+    Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). 
     All rights reserved. Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
     following conditions are met: 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following
     disclaimer. 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
@@ -3637,7 +3637,7 @@
 			<Version Path="ContactRef" First="1.1"/>
 			<Version Path="Company" Last="1.0"/>
 			<Version Path="CompanyRef" Last="1.0"/>
-			<Version Path="CustomerMessge" First="1.2" Last="1.4"/>
+			<Version Path="CustomerMessage" First="1.2" Last="1.4"/>
 			<Constraint Path="Contact" minOccurs="0" maxOccurs="unbounded"/>
 			<Constraint Path="ContactRef" minOccurs="0" maxOccurs="unbounded"/>
 			<Constraint Path="Company" minOccurs="0" maxOccurs="1"/>
@@ -7373,7 +7373,7 @@
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
           <xs:element name="Hole" type="jdf:Hole_re" minOccurs="0"/>
           <xs:element ref="jdf:HoleRef" minOccurs="0"/>
-          <xs:element name="HoleLine" type="jdf:HoleList_re" minOccurs="0"/>
+          <xs:element name="HoleLine" type="jdf:HoleLine_re" minOccurs="0"/>
           <xs:element ref="jdf:HoleLineRef" minOccurs="0"/>
           <xs:element name="HoleListUpdate" type="jdf:HoleList_re" minOccurs="0"/>
           <xs:element name="HoleList" type="jdf:HoleList_rp" minOccurs="0"/>
@@ -10485,6 +10485,7 @@
         <Version Path="@HoleCount" Last="1.0"/>
         <Version Path="@HoleType" First="1.1"/>
         <Version Path="@InsideLoss" First="1.3"/>
+        <Version Path="@InnerCoreDiameter" First="1.4"/>
         <Version Path="@ISOPaperSubstrate" First="1.5"/>
         <Version Path="@LabColorValue" First="1.2"/>
         <Version Path="@MediaColorNameDetails" First="1.2"/>
@@ -10544,6 +10545,7 @@
     <xs:attribute name="GrainDirection" type="jdftyp:eDirection_" use="optional"/>
     <xs:attribute name="HoleCount" type="jdftyp:Integer" use="optional"/>
     <xs:attribute name="ImagableSide" type="jdftyp:eImagableSide_" use="optional"/>
+    <xs:attribute name="InnerCoreDiameter" type="jdftyp:double" use="optional"/>
     <xs:attribute name="InsideLoss" type="jdftyp:double" use="optional"/>
     <xs:attribute name="ISOPaperSubstrate" type="jdftyp:eMediaSubstrateType_" use="optional"/>
     <xs:attribute name="LabColorValue" type="jdftyp:LabColor" use="optional"/>

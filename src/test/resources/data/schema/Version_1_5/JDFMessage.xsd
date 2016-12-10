@@ -2,7 +2,7 @@
 <!--	The CIP4 Software License, Version 1.0
 	
 	
-	Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+	Copyright (c) 2001-2016 The International Cooperation for the Integration of 
 	Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without modification, 
@@ -1753,6 +1753,20 @@
 		</xs:annotation>
 	</xs:element>
 	<xs:complexType name="ResourceQuParams_m" mixed="false">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="@Context" First="1.5"/>
+				<Version Path="@LotDetails" First="1.4"/>
+				<Version Path="@LotID" First="1.4"/>
+				<Version Path="@ProductID" First="1.2"/>
+				<Version Path="@QueueEntryID" First="1.2"/>
+				<Version Path="@ResourceDetails" First="1.4"/>
+				<Version Path="@ResourceID" First="1.3" Last="1.5"/>
+				<Version Path="@Scope" First="1.4"/>
+				<Version Path="Part" First="1.2"/>
+				<Constraint Path="Part" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:appinfo>
+		</xs:annotation>
 		<xs:complexContent mixed="false">
 			<xs:extension base="jdf:QueryTypeObj_">
 				<xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -1773,6 +1787,7 @@
 				<xs:attribute name="ResourceDetails" type="jdftyp:eResourceDetails_" default="Full"/>
 				<xs:attribute name="ResourceID" type="jdftyp:NMTOKEN" use="optional"/>
 				<xs:attribute name="ResourceName" type="jdftyp:NMTOKENS" use="optional"/>
+				<xs:attribute name="Scope" type="jdftyp:eValueUsage_" use="optional"/>
 				<xs:attribute name="Usage" type="jdftyp:eUsage_" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
