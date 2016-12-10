@@ -911,7 +911,8 @@ public class XJDFTest extends JDFTestCaseBase
 		// final JDFFileSpec fsc =
 		fs1.appendContainer().appendFileSpec();
 		xjdf = new XJDF20().makeNewJDF(n, null);
-		assertNotNull(xjdf.getXPathAttribute("ResourceSet[@Usage=\"Input\"]/Resource/FileSpec/@ContainerRef", null));
+		assertNull(xjdf.getXPathAttribute("ResourceSet[@Usage=\"Input\"]/Resource/FileSpec/@ContainerRef", null));
+		assertNull(xjdf.getXPathAttribute("ResourceSet[@Usage=\"Input\"]/Resource/FileSpec/Container", null));
 
 	}
 

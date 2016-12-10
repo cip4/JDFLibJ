@@ -121,6 +121,7 @@ public class WalkIgnore extends WalkElement
 		v.add(ElementName.COLORMEASUREMENTCONDITIONS);
 		v.add(ElementName.COLORSPACESUBSTITUTE);
 		v.add(ElementName.CONTACTCOPYPARAMS);
+		v.add(ElementName.CONTAINER);
 		v.add(ElementName.CUSTOMERMESSAGE);
 		v.add(ElementName.CYLINDERLAYOUT);
 		v.add(ElementName.CYLINDERLAYOUTPREPARATIONPARAMS);
@@ -131,6 +132,9 @@ public class WalkIgnore extends WalkElement
 		v.add(ElementName.DEVCAP);
 		v.add(ElementName.DEVICECAP);
 		v.add(ElementName.DIGITALDELIVERYPARAMS);
+		v.add(ElementName.ELEMENTCOLORPARAMS);
+		v.add(ElementName.FILEALIAS);
+		v.add(ElementName.FORMATCONVERSIONPARAMS);
 		v.add(ElementName.MERGED);
 		v.add(ElementName.MODIFIED);
 		v.add(ElementName.MODULEPOOL);
