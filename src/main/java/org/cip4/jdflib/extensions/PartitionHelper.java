@@ -216,6 +216,28 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	}
 
 	/**
+	 * 
+	 * @param vPart the vector of partmaps to set the part element
+	 */
+	public void appendPartMapVector(VJDFAttributeMap vPart)
+	{
+		VJDFAttributeMap vexisting = getPartMapVector();
+		if (vexisting != null)
+		{
+			vPart = vPart.clone();
+			vPart.removeAll(vexisting);
+		}
+		if (vPart != null && vPart.size() > 0)
+		{
+			for (JDFAttributeMap part : vPart)
+			{
+				final KElement p = theElement.appendElement(ElementName.PART, null);
+				p.setAttributes(part);
+			}
+		}
+	}
+
+	/**
 	 * @param map
 	 * @return
 	 */
@@ -266,6 +288,15 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 		if (parent != null && parent.getNodeName().equals(theElement.getNodeName() + "Set"))
 			return new SetHelper(parent);
 		return null;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public XJDFHelper getXJDF()
+	{
+		return XJDFHelper.getHelper(theElement);
 	}
 
 	/**
@@ -412,6 +443,24 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	public JDFAmountPool getCreateAmountPool()
 	{
 		return (JDFAmountPool) getRoot().getCreateElement(ElementName.AMOUNTPOOL);
+	}
+
+	/**
+	 * 
+	 * @param brand
+	 */
+	public void setBrand(String brand)
+	{
+		setAttribute(AttributeName.BRAND, brand);
+	}
+
+	/**
+	 * 
+	 * @return the brand
+	 */
+	public String getBrand()
+	{
+		return getAttribute(AttributeName.BRAND);
 	}
 
 }

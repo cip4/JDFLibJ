@@ -69,9 +69,11 @@
 package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.junit.Test;
 
 /**
@@ -153,6 +155,21 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testGetXJDF()
+	{
+		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
+		KElement root = d.getRoot();
+
+		KElement set = root.getCreateXPathElement("ResourceSet");
+		set.getCreateXPathElement("Resource/Part");
+		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
+		assertEquals(ph.getXJDF(), new XJDFHelper(root));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testisResourceElement()
 	{
 		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
@@ -182,7 +199,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
 		assertNull(m.getParentNode_KElement().getAttribute("ID", null, null));
 		ph.cleanUp();
-		assertEquals(ph.getPartition().getID(), m.getParentNode_KElement().getAttribute("ID", null, null));
+		assertEquals(ph.getPartition().getID(), m.getParentNode_KElement().getAttribute(AttributeName.ID, null, null));
 	}
 
 	/**
@@ -198,6 +215,25 @@ public class PartitionHelperTest extends JDFTestCaseBase
 		JDFAttributeMap map = new JDFAttributeMap("Drop", "D1");
 		ph.setPartMap(map);
 		assertEquals(ph.getPartMap(), map);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testAppendPartMap()
+	{
+		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
+		KElement root = d.getRoot();
+		root.getCreateXPathElement("ResourceSet/Resource/Media");
+		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
+		JDFAttributeMap map = new JDFAttributeMap("Drop", "D1");
+		VJDFAttributeMap vMap = new VJDFAttributeMap(map);
+		ph.appendPartMapVector(vMap);
+		assertEquals(ph.getPartMapVector(), vMap);
+		vMap.add(new JDFAttributeMap("Drop", "D2"));
+		ph.appendPartMapVector(vMap);
+		assertEquals(ph.getPartMapVector(), vMap);
 	}
 
 	/**

@@ -1053,11 +1053,19 @@ public class JDFToXJDF extends PackageElementWalker
 		return w == null ? null : w.isProductResource(linkTarget);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isRetainAll()
 	{
 		return bRetainAll;
 	}
 
+	/**
+	 * 
+	 * @param bRetainAll
+	 */
 	public void setRetainAll(boolean bRetainAll)
 	{
 		this.bRetainAll = bRetainAll;

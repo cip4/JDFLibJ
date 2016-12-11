@@ -195,6 +195,7 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * get an existing partition with at least a matching partmap 
 	 * @param map
 	 * @param addRes 
 	 * @return 
@@ -321,6 +322,15 @@ public class SetHelper extends BaseXJDFHelper
 			newRes.removeAttribute(AttributeName.CLASS);
 		}
 		return partitionHelper;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public XJDFHelper getXJDF()
+	{
+		return XJDFHelper.getHelper(theElement);
 	}
 
 	/**

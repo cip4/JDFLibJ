@@ -600,6 +600,24 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 *  
 	 * @param name 
 	 * @param usage 
+	 * @param processUsage
+	 * @return a new set element
+	 */
+	public SetHelper getCreateSet(String name, EnumUsage usage, String processUsage)
+	{
+		SetHelper set = getSet(name, usage, processUsage);
+		if (set == null)
+		{
+			set = appendSet(RESOURCE, name, usage);
+			set.setProcessUsage(processUsage);
+		}
+		return set;
+	}
+
+	/**
+	 *  
+	 * @param name 
+	 * @param usage 
 	 * @return a new set element
 	 * @deprecated
 	 */
