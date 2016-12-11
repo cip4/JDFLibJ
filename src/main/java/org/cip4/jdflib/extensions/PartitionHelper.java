@@ -142,6 +142,21 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	}
 
 	/**
+	 * factory to create a helper from an element
+	 *  
+	 * @param res the element to parseeither a "Resource" or a resource element
+	 * @return the helper
+	 */
+	public static PartitionHelper getHelper(KElement res)
+	{
+		if (isAsset(res))
+			return new PartitionHelper(res);
+		if (isResourceElement(res))
+			return new PartitionHelper(res.getParentNode_KElement());
+		return null;
+	}
+
+	/**
 	 * @return
 	 */
 	@Override

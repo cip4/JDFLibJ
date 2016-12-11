@@ -73,7 +73,9 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * 
@@ -132,7 +134,31 @@ public class MiscConsumableMaker
 	{
 		if (miscPart != null)
 		{
-			miscPart.getCreateResource().setAttribute(AttributeName.COLOR, color);
+			miscPart.getCreateResource().setAttribute(AttributeName.COLOR, StringUtil.getNonEmpty(color));
+		}
+	}
+
+	/**
+	 * 
+	 * @param color
+	 */
+	public void setColorDetails(String color)
+	{
+		if (miscPart != null)
+		{
+			miscPart.getCreateResource().setAttribute(AttributeName.COLORDETAILS, StringUtil.getNonEmpty(color));
+		}
+	}
+
+	/**
+	 * 
+	 * @param details
+	 */
+	public void setTypeDetails(String details)
+	{
+		if (miscPart != null)
+		{
+			miscPart.getCreateResource().setAttribute(XJDFConstants.TYPEDETAILS, StringUtil.getNonEmpty(details));
 		}
 	}
 
@@ -144,7 +170,7 @@ public class MiscConsumableMaker
 	{
 		if (miscPart != null)
 		{
-			miscPart.setBrand(brand);
+			miscPart.setBrand(StringUtil.getNonEmpty(brand));
 		}
 	}
 }

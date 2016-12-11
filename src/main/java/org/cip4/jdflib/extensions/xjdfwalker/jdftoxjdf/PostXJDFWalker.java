@@ -96,6 +96,7 @@ import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.pool.JDFAmountPool;
+import org.cip4.jdflib.resource.JDFHeadBandApplicationParams;
 import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFStrippingParams;
@@ -1697,6 +1698,79 @@ class PostXJDFWalker extends BaseElementWalker
 		{
 			return new VString(ProductHelper.PRODUCT, null);
 		}
+	}
+
+	/**
+	 * 
+	 * @author rainer prosi
+	 *
+	 */
+	public class WalkHeadBandApplicationParams extends WalkResourceElement
+	{
+		/**
+		 * 
+		 */
+		public WalkHeadBandApplicationParams()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return !isRetainAll() && (toCheck instanceof JDFHeadBandApplicationParams);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ElementName.HEADBANDAPPLICATIONPARAMS, null);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(KElement xjdf, KElement dummy)
+		{
+			JDFHeadBandApplicationParams hap = (JDFHeadBandApplicationParams) xjdf;
+			String mat = hap.getNonEmpty(AttributeName.STRIPMATERIAL);
+			if (mat != null)
+			{
+				MiscConsumableMaker mm = new MiscConsumableMaker(PartitionHelper.getHelper(xjdf));
+				mm.create("BackStrip");
+				mm.setTypeDetails(mat);
+				hap.removeAttribute(AttributeName.STRIPMATERIAL);
+			}
+			String col = hap.getNonEmpty(AttributeName.TOPCOLOR);
+			String brand = hap.getNonEmpty(AttributeName.TOPBRAND);
+			if (col != null || brand != null)
+			{
+				//TODO worry about top and bottom
+				MiscConsumableMaker mm = new MiscConsumableMaker(PartitionHelper.getHelper(xjdf));
+				mm.create("HeadBand");
+				mm.setColor(col);
+				mm.setColorDetails(hap.getNonEmpty(AttributeName.TOPCOLORDETAILS));
+				mm.setBrand(brand);
+				hap.removeAttribute(AttributeName.TOPCOLOR);
+				hap.removeAttribute(AttributeName.TOPCOLORDETAILS);
+				hap.removeAttribute(AttributeName.TOPBRAND);
+				hap.removeAttribute(AttributeName.BOTTOMCOLOR);
+				hap.removeAttribute(AttributeName.BOTTOMCOLORDETAILS);
+				hap.removeAttribute(AttributeName.BOTTOMBRAND);
+
+			}
+			return super.walk(xjdf, dummy);
+		}
+
 	}
 
 	/**

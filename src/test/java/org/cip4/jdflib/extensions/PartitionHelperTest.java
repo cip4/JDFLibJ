@@ -100,6 +100,23 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testGetHelper()
+	{
+		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
+		KElement root = d.getRoot();
+
+		root.getCreateXPathElement("ResourceSet[@Name=\"Media\"]/Resource/Part");
+		KElement m = root.getCreateXPathElement("ResourceSet/Resource/Media");
+		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
+		assertEquals(ph.getResource(), m);
+		assertEquals(PartitionHelper.getHelper(m), ph);
+		assertEquals(PartitionHelper.getHelper(m.getParentNode_KElement()), ph);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testGetSet()
 	{
 		JDFDoc d = new JDFDoc("XJDF");

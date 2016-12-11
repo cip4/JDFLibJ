@@ -55,6 +55,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
@@ -102,6 +103,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
 		assertEquals(h.getRoot().getXPathAttribute("AuditPool/AuditResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null), "66");
+
 	}
 
 	/**
@@ -117,6 +119,35 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated"));
 		assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated/Header"));
 		assertNull(h.getRoot().getXPathElement("AuditPool/Header"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testHeadbandStrip()
+	{
+		XJDFHelper h = new XJDFHelper("a", "p", null);
+		h.appendResourceSet(ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input).appendPartition(null, true).getResource().setAttribute(AttributeName.STRIPMATERIAL, "b1");
+		PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.walkTree(h.getRoot(), null);
+		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "BackStrip").getPartition(0).getResource().getAttribute(XJDFConstants.TYPEDETAILS), "b1");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testHeadbandColor()
+	{
+		XJDFHelper h = new XJDFHelper("a", "p", null);
+		KElement band = h.appendResourceSet(ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input).appendPartition(null, true).getResource();
+		band.setAttribute(AttributeName.TOPCOLOR, "Black");
+		band.setAttribute(AttributeName.TOPBRAND, "b1");
+		PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.walkTree(h.getRoot(), null);
+		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getResource().getAttribute(AttributeName.COLOR), "Black");
+		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getBrand(), "b1");
 	}
 
 	/**
