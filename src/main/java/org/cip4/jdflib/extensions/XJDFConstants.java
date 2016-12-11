@@ -95,6 +95,7 @@ public abstract class XJDFConstants
 
 	public static final String ExternalID = "ExternalID";
 
+	public static final String Face = "Face";
 	public static final String FolioFrom = "FolioFrom";
 	public static final String FolioTo = "FolioTo";
 
@@ -125,9 +126,8 @@ public abstract class XJDFConstants
 	public static final String SurfaceColor = "SurfaceColor";
 
 	public static final String TransferCurveName = "TransferCurveName";
-	public static final String TYPEDETAILS = "TypeDetails";
+	public static final String TypeDetails = "TypeDetails";
 
 	public static final String XJDF = "XJDF";
 	public static final String XJMF = "XJMF";
-
 }

@@ -158,7 +158,7 @@ public class MiscConsumableMaker
 	{
 		if (miscPart != null)
 		{
-			miscPart.getCreateResource().setAttribute(XJDFConstants.TYPEDETAILS, StringUtil.getNonEmpty(details));
+			miscPart.getCreateResource().setAttribute(XJDFConstants.TypeDetails, StringUtil.getNonEmpty(details));
 		}
 	}
 
