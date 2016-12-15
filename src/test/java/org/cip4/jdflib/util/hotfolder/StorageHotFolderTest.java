@@ -72,6 +72,11 @@ import java.io.File;
 import java.io.IOException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.elementwalker.URLExtractor;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.After;
@@ -89,7 +94,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	/**
 	 * 
 	 * 
-	 * @author rainerprosi
+	 * @author rainer prosi
 	 * @date Mar 11, 2013
 	 */
 	public class CountListener implements HotFolderListener
@@ -115,6 +120,39 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			return iCount++ % 2 == 0;
 		}
 
+	}
+
+	/**
+	 * 
+	 * 
+	 * @author rainer prosi
+	 * @date Mar 11, 2013
+	 */
+	public class ExtractListener implements HotFolderListener
+	{
+		/**
+		 * 
+		 */
+		public ExtractListener()
+		{
+			super();
+		}
+
+		/**
+		 * dummy that alternates ok and false
+		 * @see org.cip4.jdflib.util.hotfolder.HotFolderListener#hotFile(java.io.File)
+		 */
+		@Override
+		public boolean hotFile(File hotFile)
+		{
+			File dumpDir = new File(sm_dirTestDataTemp + "URLOut");
+			dumpDir.delete();
+			URLExtractor ex = new URLExtractor(dumpDir, theHFDir.getAbsolutePath(), null);
+			ex.setWantLog(true);
+			JDFDoc d = JDFDoc.parseFile(hotFile);
+			ex.walkTree(d.getJDFRoot(), null);
+			return true;
+		}
 	}
 
 	File theHFDir;
@@ -163,6 +201,30 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		assertTrue(file.exists());
 		ThreadUtil.sleep(2000);
 		assertFalse(file.exists());
+		assertEquals(tmpHFDir.listFiles().length, 0, 0);
+	}
+
+	/**
+	 * 
+	 * simple creation
+	 * @throws IOException
+	 */
+	@Test
+	public void testSubdir() throws IOException
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
+		rl.addPDF("./content/boo.pdf", 0, -1);
+		String hfPath = theHFDir.getAbsolutePath();
+		File content = new File(hfPath + "/content/boo.pdf");
+		FileUtil.createNewFile(content);
+		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new ExtractListener());
+		d.write2File(hfPath + "/dummy.jdf", 2, false);
+		File file = new File(hfPath + "/dummy.jdf");
+		assertTrue(file.exists());
+		ThreadUtil.sleep(2000);
+		assertFalse(file.exists());
+		assertFalse(content.exists());
 		assertEquals(tmpHFDir.listFiles().length, 0, 0);
 	}
 

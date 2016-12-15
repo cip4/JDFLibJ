@@ -123,6 +123,23 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	protected Set<URLProtocol> protocols;
 	protected final String currentURL;
 	protected final Set<String> saved;
+	protected boolean deleteFile;
+
+	/**
+	 * @return the deleteFile
+	 */
+	protected boolean isDeleteFile()
+	{
+		return deleteFile;
+	}
+
+	/**
+	 * @param deleteFile the deleteFile to set
+	 */
+	protected void setDeleteFile(boolean deleteFile)
+	{
+		this.deleteFile = deleteFile;
+	}
 
 	/**
 	 * Getter for list of saved files
@@ -218,7 +235,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 				}
 			}
 			boolean bOverwrite = !saved.contains(url);
-			final File newFile = UrlUtil.moveToDir(urlSetter, dir, currentURL, bOverwrite);
+			final File newFile = UrlUtil.moveToDir(urlSetter, dir, currentURL, bOverwrite, deleteFile);
 			if (newFile != null)
 			{
 				if (baseURL != null)

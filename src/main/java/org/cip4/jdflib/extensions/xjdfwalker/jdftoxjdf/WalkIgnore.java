@@ -145,6 +145,10 @@ public class WalkIgnore extends WalkElement
 		v.add(ElementName.PAGEASSIGNEDLIST);
 		v.add(ElementName.PARTAMOUNT);
 		v.add(ElementName.PDLRESOURCEALIAS);
+		v.add(ElementName.PREFLIGHTREPORTRULEPOOL);
+		v.add(ElementName.PRGROUP);
+		v.add(ElementName.PRGROUPOCCURRENCE);
+		v.add(ElementName.PRITEM);
 		v.add(ElementName.REGISTRATION);
 		v.add(ElementName.RESOURCEPOOL);
 		v.add(ElementName.SCREENINGINTENT);

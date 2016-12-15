@@ -1935,6 +1935,21 @@ public class UrlUtil
 	 */
 	public static File moveToDir(IURLSetter urlSetter, final File dir, final String cwd, final boolean overWrite)
 	{
+		return moveToDir(urlSetter, dir, cwd, overWrite, false);
+	}
+
+	/**
+	 * physically store the file at the location specified in dir and also modify parent to reflect the new location
+	 * 
+	 * @param urlSetter the parent element, typically a filespec or preview
+	 * @param dir the directory to move to. dir is created if it does not exist. 
+	 * If dir exists and dir is not a directory, the call fails and null is returned
+	 * @param cwd the current working dir for local urls
+	 * @param overWrite if true, zapp any old files with the same name
+	 * @return the file that corresponds to the moved url reference, null if an error occurred
+	 */
+	public static File moveToDir(IURLSetter urlSetter, final File dir, final String cwd, final boolean overWrite, boolean deleteFile)
+	{
 		if (urlSetter == null || dir == null || dir.exists() && !dir.isDirectory())
 		{
 			return null;
@@ -1993,18 +2008,28 @@ public class UrlUtil
 				return out;
 			}
 		}
-		InputStream inputStream = new URLReader(url, d).getURLInputStream();
-		if (inputStream != null)
+
+		URLReader urlReader = new URLReader(url, d);
+		File oldFile = deleteFile ? urlReader.getFile() : null;
+		if (oldFile != null)
 		{
-			out = FileUtil.streamToFile(inputStream, out);
-			if (out != null)
-			{
-				urlSetter.setURL(UrlUtil.fileToUrl(out, false));
-			}
+			FileUtil.moveFile(oldFile, out);
 		}
 		else
 		{
-			out = null;
+			InputStream inputStream = urlReader.getURLInputStream();
+			if (inputStream != null)
+			{
+				out = FileUtil.streamToFile(inputStream, out);
+			}
+			else
+			{
+				out = null;
+			}
+		}
+		if (out != null)
+		{
+			urlSetter.setURL(UrlUtil.fileToUrl(out, false));
 		}
 		return out;
 	}

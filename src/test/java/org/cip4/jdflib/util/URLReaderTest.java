@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -92,6 +92,31 @@ public class URLReaderTest extends JDFTestCaseBase
 		URLReader reader = new URLReader("job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
 		assertNotNull(reader.getURLInputStream());
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testGetFileLocal()
+	{
+		URLReader reader = new URLReader("job.jdf");
+		reader.addLocalRoot(new File(sm_dirTestData));
+		assertEquals(UrlUtil.urlToFile(sm_dirTestData + "job.jdf"), reader.getFile());
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testGetFileFile()
+	{
+		String filePath = sm_dirTestData + "job.jdf";
+		File file = new File(filePath);
+		URLReader reader = new URLReader(UrlUtil.fileToUrl(file, false));
+		assertEquals(file, reader.getFile());
 	}
 
 	/**

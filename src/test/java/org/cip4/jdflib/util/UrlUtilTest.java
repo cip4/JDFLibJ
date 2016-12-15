@@ -88,10 +88,12 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
@@ -923,7 +925,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testMoveToDir() throws Exception
+	public void testMoveToDirMime() throws Exception
 	{
 		new MimeUtilTest().testBuildMimePackageDoc();
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + "testMimePackageDoc.mjm");
@@ -961,6 +963,55 @@ public class UrlUtilTest extends JDFTestCaseBase
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "dummy/deep/blub.pdf"));
 		assertTrue("relative:", UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true).exists());
 
+	}
+
+	/**
+	 * @throws Exception
+	 * 
+	 */
+	@Test
+	public void testMoveToDir() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
+		JDFFileSpec fs = rl.addPDF("./content/boo.pdf", 0, -1).getLayoutElement().getFileSpec();
+
+		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "URLIn/content/boo.pdf"));
+
+		final File newDir = new File(sm_dirTestDataTemp + "newDir");
+		fs.setURL("bad:/blöd");
+		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir, null, true));
+		fs.setURL("http://really_really_not_there.com/isnt/there?aaa");
+		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir, null, true));
+		fs.setURL("./blub.pdf");
+		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "dummy/blub.pdf"));
+		assertTrue("relative:", UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true).exists());
+		fs.setURL("deep/blub.pdf");
+		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "dummy/deep/blub.pdf"));
+		assertTrue("relative:", UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true).exists());
+	}
+
+	/**
+	 * @throws Exception
+	 * 
+	 */
+	@Test
+	public void testMoveToDirDelete() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
+		JDFFileSpec fs = rl.addPDF("./content/boo.pdf", 0, -1).getLayoutElement().getFileSpec();
+
+		final File newDir = new File(sm_dirTestDataTemp + "newDir");
+		fs.setURL("./blub.pdf");
+		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "dummy/blub.pdf"));
+		assertTrue("relative:", UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true, true).exists());
+		assertFalse("relative:", new File(sm_dirTestDataTemp + "dummy/blub.pdf").exists());
+
+		fs.setURL("deep/blub.pdf");
+		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "dummy/deep/blub.pdf"));
+		assertTrue("relative:", UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true, true).exists());
+		assertFalse("relative:", new File(sm_dirTestDataTemp + "dummy/deep/blub.pdf").exists());
 	}
 
 	/**

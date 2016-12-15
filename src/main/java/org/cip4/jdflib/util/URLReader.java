@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -215,15 +215,25 @@ public class URLReader
 				retStream = getZipInputStream();
 				if (retStream == null)
 				{
-					retStream = getAbsoluteFileInputStream();
-					if (retStream == null)
+					File file = getFile();
+					if (file != null)
 					{
-						retStream = getRelativeFileInputStream();
+						retStream = FileUtil.getBufferedInputStream(file);
 					}
 				}
 			}
 		}
 		return retStream;
+	}
+
+	public File getFile()
+	{
+		File file = getAbsoluteFile();
+		if (file == null)
+		{
+			file = getRelativeFile();
+		}
+		return file;
 	}
 
 	/**
@@ -284,25 +294,22 @@ public class URLReader
 	 * 
 	 * @return
 	 */
-	InputStream getAbsoluteFileInputStream()
+	File getAbsoluteFile()
 	{
-		InputStream retStream = null;
-
-		final File f = UrlUtil.urlToFile(urlString);
+		final File f = !UrlUtil.isNet(urlString) && !UrlUtil.isCID(urlString) ? UrlUtil.urlToFile(urlString) : null;
 		if ((f != null) && f.canRead())
 		{
-			retStream = FileUtil.getBufferedInputStream(f);
+			return f;
 		}
-		return retStream;
+		return null;
 	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	InputStream getRelativeFileInputStream()
+	File getRelativeFile()
 	{
-		InputStream retStream = null;
 		if (UrlUtil.isRelativeURL(urlString))
 		{
 			final File fLocal = UrlUtil.urlToFile(urlString);
@@ -311,13 +318,12 @@ public class URLReader
 				File f = FileUtil.getFileInDirectory(root, fLocal);
 				if ((f != null) && f.canRead())
 				{
-					retStream = FileUtil.getBufferedInputStream(f);
 					notRelative = f;
-					break;
+					return notRelative;
 				}
 			}
 		}
-		return retStream;
+		return null;
 	}
 
 	/**
