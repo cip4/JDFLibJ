@@ -128,15 +128,16 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	/**
 	 * @return the deleteFile
 	 */
-	protected boolean isDeleteFile()
+	public boolean isDeleteFile()
 	{
 		return deleteFile;
 	}
 
 	/**
-	 * @param deleteFile the deleteFile to set
+	 * @param deleteFile the deleteFile to set; if true files are move rather than copied
+	 * note that files are NOT removed from zip or mime packages
 	 */
-	protected void setDeleteFile(boolean deleteFile)
+	public void setDeleteFile(boolean deleteFile)
 	{
 		this.deleteFile = deleteFile;
 	}
@@ -286,6 +287,6 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	@Override
 	public String toString()
 	{
-		return super.toString() + "\n " + protocols + " baseURL: " + baseURL + " currentURL: " + currentURL + " dir: " + dir;
+		return super.toString() + "\n " + protocols + " baseURL: " + baseURL + " currentURL: " + currentURL + " dir: " + dir + " delete: " + deleteFile;
 	}
 }

@@ -149,6 +149,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			dumpDir.delete();
 			URLExtractor ex = new URLExtractor(dumpDir, theHFDir.getAbsolutePath(), null);
 			ex.setWantLog(true);
+			ex.setDeleteFile(true);
 			JDFDoc d = JDFDoc.parseFile(hotFile);
 			ex.walkTree(d.getJDFRoot(), null);
 			return true;
