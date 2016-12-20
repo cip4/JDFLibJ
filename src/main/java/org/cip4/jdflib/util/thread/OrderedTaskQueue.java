@@ -247,6 +247,8 @@ public class OrderedTaskQueue extends Thread
 		log.info("shutting down ordered queue");
 		idle = -1;
 		theMap.remove(getName());
+		ThreadUtil.notify(mutex);
+		ThreadUtil.join(this, 10);
 	}
 
 	/**

@@ -147,7 +147,9 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	public void setMaxParallel(int maxParallel)
 	{
 		if (maxParallel > 0)
+		{
 			this.maxParallel = maxParallel;
+		}
 	}
 
 	/**
@@ -278,6 +280,14 @@ public class MultiTaskQueue extends OrderedTaskQueue
 		NextRunner nextRunner = new NextRunner(r);
 		current.add(nextRunner);
 		nextRunner.start();
+	}
+
+	/**
+	 * @return the maxParallel
+	 */
+	public int getMaxParallel()
+	{
+		return maxParallel;
 	}
 
 }

@@ -121,6 +121,16 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 
 	/**
 	 * 
+	 */
+	@Test
+	public void testMaxParrallel()
+	{
+		MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multi0", 3);
+		assertEquals(3, q.getMaxParallel());
+	}
+
+	/**
+	 * 
 	 *  
 	 */
 	@Test

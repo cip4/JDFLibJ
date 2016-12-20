@@ -138,7 +138,7 @@ public class StorageHotFolder
 	}
 
 	/**
-	 * TODO Please insert comment!
+	 *  
 	 * @param _hotFolderDir
 	 */
 	private void moveFromTemp(File _hotFolderDir)

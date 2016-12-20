@@ -92,6 +92,7 @@ import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.file.FileSorter;
+import org.cip4.jdflib.util.thread.MultiTaskQueue;
 
 /**
  * a very simple hotfolder watcher subdirectories are ignored
@@ -111,6 +112,48 @@ public class HotFolder implements Runnable
 	public int stabilizeTime = defaultStabilizeTime; // time between reads in milliseconds - also minimum length of non-modification
 	private boolean interrupt = false; // if set to true, the watcher interupted and the thread ends
 	private static int nThread = 0;
+
+	/**
+	 * @param maxConcurrent the maxConcurrent to set
+	 */
+	public void setMaxConcurrent(int maxConcurrent)
+	{
+		if (maxConcurrent > 10)
+		{
+			maxConcurrent = 10;
+		}
+		if (maxConcurrent != getMaxConcurrent())
+		{
+			if (maxConcurrent == 0)
+			{
+				if (taskQueue != null)
+				{
+					taskQueue.shutDown();
+					taskQueue = null;
+				}
+			}
+			else
+			{
+				if (taskQueue != null)
+				{
+					taskQueue.setMaxParallel(maxConcurrent);
+				}
+				else
+				{
+					taskQueue = MultiTaskQueue.getCreateQueue(getThreadName(false), maxConcurrent);
+				}
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public int getMaxConcurrent()
+	{
+		return taskQueue == null ? 0 : taskQueue.getMaxParallel();
+	}
 
 	private final File dir;
 	private String allExtensions;
@@ -159,6 +202,7 @@ public class HotFolder implements Runnable
 	private final Vector<FileTime> lastFileTime;
 	protected final Vector<ExtensionListener> hfl;
 	private Thread runThread;
+	MultiTaskQueue taskQueue;
 	private final Log log;
 
 	/**
@@ -197,6 +241,7 @@ public class HotFolder implements Runnable
 	public HotFolder(final File _dir, final String ext, final HotFolderListener _hfl)
 	{
 		log = LogFactory.getLog(getClass());
+		taskQueue = null;
 		dir = _dir;
 		dir.mkdirs();
 		dir.setWritable(true);
@@ -206,7 +251,9 @@ public class HotFolder implements Runnable
 		runThread = null;
 		allExtensions = null;
 		if (_hfl != null)
+		{
 			addListener(_hfl, ext);
+		}
 		restart();
 	}
 
@@ -223,14 +270,32 @@ public class HotFolder implements Runnable
 		{
 			log.error("Cannot use read only hot folder at");
 		}
-
-		String threadName = "HotFolder_" + nThread++ + "_" + dir.getAbsolutePath();
+		String threadName = getThreadName(true);
 		runThread = new Thread(this, threadName);
 		runThread.setDaemon(true);
 		interrupt = false;
 		log.info("Starting hotfolder: " + threadName);
 		lastModified = -1;
+		if (taskQueue != null)
+		{
+			taskQueue = MultiTaskQueue.getCreateQueue(threadName, taskQueue.getMaxParallel());
+		}
 		runThread.start();
+	}
+
+	/**
+	 * 
+	 * @param increment
+	 * @return
+	 */
+	String getThreadName(boolean increment)
+	{
+		String threadName = "HotFolder_" + nThread + "_" + dir.getAbsolutePath();
+		if (increment)
+		{
+			nThread++;
+		}
+		return threadName;
 	}
 
 	/**
@@ -240,6 +305,10 @@ public class HotFolder implements Runnable
 	public void stop()
 	{
 		interrupt = true;
+		if (taskQueue != null)
+		{
+			taskQueue.shutDown();
+		}
 		if (runThread != null)
 		{
 			synchronized (runThread)
@@ -355,7 +424,15 @@ public class HotFolder implements Runnable
 		{
 			if (fileJ.exists())
 			{
-				hotFiles(fileJ);
+				HotFileRunner runner = new HotFileRunner(fileJ);
+				if (taskQueue == null)
+				{
+					runner.run();
+				}
+				else
+				{
+					taskQueue.queue(runner);
+				}
 			}
 			else
 			{
@@ -367,23 +444,47 @@ public class HotFolder implements Runnable
 			lftAt.modified = files[j].lastModified();
 		}
 
-		files[j] = null; // this file has been processed,
-		// remove from list for performance
+		files[j] = null; // this file has been processed, remove from list for performance
 		return found;
 	}
 
-	private void hotFiles(final File fileJ)
+	class HotFileRunner implements Runnable
 	{
-		for (ExtensionListener xl : hfl)
+		File fileJ;
+
+		public HotFileRunner(File fileJ)
 		{
-			try
+			super();
+			this.fileJ = fileJ;
+		}
+
+		/**
+		 * 
+		 * @see java.lang.Runnable#run()
+		 */
+		@Override
+		public void run()
+		{
+			for (ExtensionListener xl : hfl)
 			{
-				xl.hotFile(fileJ); // exists and stabilized - call callbacks
+				try
+				{
+					xl.hotFile(fileJ); // exists and stabilized - call callbacks
+				}
+				catch (final Throwable x)
+				{
+					log.error("exception processing hot files", x);
+				}
 			}
-			catch (final Throwable x)
-			{
-				log.error("exception processing hot files", x);
-			}
+		}
+
+		/**
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString()
+		{
+			return "HotFileRunner [fileJ=" + fileJ + "]";
 		}
 	}
 
@@ -478,7 +579,7 @@ public class HotFolder implements Runnable
 	@Override
 	public String toString()
 	{
-		return "HotFolder: " + dir + " " + lastModified;
+		return getClass().getSimpleName() + " " + dir + " " + lastModified + " maxConcurrent=" + getMaxConcurrent();
 	}
 
 	/**
