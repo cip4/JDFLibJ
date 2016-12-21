@@ -266,19 +266,19 @@ public class URLExtractorTest extends JDFTestCaseBase
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
-		rl.addPDF("./content/boo.pdf", 0, -1);
+		rl.addPDF("./content/boooo.pdf", 0, -1);
 		d.write2File(sm_dirTestDataTemp + "URLIn/dummy.jdf", 2, false);
 
-		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "URLIn/content/boo.pdf"));
+		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "URLIn/content/boooo.pdf"));
 
 		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut");
 		dumpDir.delete();
 		URLExtractor ex = new URLExtractor(dumpDir, null, null);
 		ex.walkTree(d.getJDFRoot(), null);
 		String write2String = d.write2String(2);
-		assertTrue(new File(sm_dirTestDataTemp + "URLOut/content/boo.pdf").exists());
-		assertTrue(new File(sm_dirTestDataTemp + "URLIn/content/boo.pdf").exists());
-		assertTrue(write2String.indexOf("file:" + sm_dirTestDataTemp + "URLOut/content/boo.pdf") > 0);
+		assertTrue(new File(sm_dirTestDataTemp + "URLOut/content/boooo.pdf").exists());
+		assertTrue(new File(sm_dirTestDataTemp + "URLIn/content/boooo.pdf").exists());
+		assertTrue(write2String.indexOf("file:" + sm_dirTestDataTemp + "URLOut/content/boooo.pdf") > 0);
 	}
 
 	/**
@@ -289,10 +289,10 @@ public class URLExtractorTest extends JDFTestCaseBase
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
-		rl.addPDF("./content/boo.pdf", 0, -1);
+		rl.addPDF("./content/booo.pdf", 0, -1);
 		d.write2File(sm_dirTestDataTemp + "URLIn/dummy.jdf", 2, false);
 
-		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "URLIn/content/boo.pdf"));
+		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "URLIn/content/booo.pdf"));
 
 		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut");
 		dumpDir.delete();
@@ -300,9 +300,9 @@ public class URLExtractorTest extends JDFTestCaseBase
 		ex.setDeleteFile(true);
 		ex.walkTree(d.getJDFRoot(), null);
 		String write2String = d.write2String(2);
-		assertTrue(new File(sm_dirTestDataTemp + "URLOut/content/boo.pdf").exists());
-		assertFalse(new File(sm_dirTestDataTemp + "URLIn/content/boo.pdf").exists());
-		assertTrue(write2String.indexOf("file:" + sm_dirTestDataTemp + "URLOut/content/boo.pdf") > 0);
+		assertTrue(new File(sm_dirTestDataTemp + "URLOut/content/booo.pdf").exists());
+		assertFalse(new File(sm_dirTestDataTemp + "URLIn/content/booo.pdf").exists());
+		assertTrue(write2String.indexOf("file:" + sm_dirTestDataTemp + "URLOut/content/booo.pdf") > 0);
 	}
 
 	/**
