@@ -221,6 +221,8 @@ class StorageHotFolderListener implements HotFolderListener
 				{
 					log.warn("failed to delete temporary file " + storedFile.getAbsolutePath());
 				}
+				FileUtil.deleteAll(auxFile);
+
 			}
 		}
 		else
@@ -257,6 +259,8 @@ class StorageHotFolderListener implements HotFolderListener
 				boolean ok = FileUtil.forceDelete(storedFile);
 				if (!ok)
 					log.warn("failed to delete temporary file " + storedFile.getAbsolutePath());
+				FileUtil.deleteAll(auxFile);
+
 			}
 		}
 	}

@@ -411,6 +411,10 @@ public class HotFolder implements Runnable
 					log.warn("ignoring read only file in hot folder: " + files[i]);
 					files[i] = null;
 				}
+				else if (files[i].isDirectory())
+				{
+					files[i] = null;
+				}
 			}
 		}
 		return files;

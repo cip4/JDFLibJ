@@ -147,11 +147,14 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		{
 			File dumpDir = new File(sm_dirTestDataTemp + "URLOut");
 			dumpDir.delete();
-			URLExtractor ex = new URLExtractor(dumpDir, theHFDir.getAbsolutePath(), null);
+			URLExtractor ex = new URLExtractor(dumpDir, tmpHFDir.getAbsolutePath(), null);
 			ex.setWantLog(true);
 			ex.setDeleteFile(true);
 			JDFDoc d = JDFDoc.parseFile(hotFile);
-			ex.walkTree(d.getJDFRoot(), null);
+			if (d != null)
+			{
+				ex.walkTree(d.getJDFRoot(), null);
+			}
 			return true;
 		}
 	}
@@ -219,17 +222,17 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
-		rl.addPDF("./content/boo.pdf", 0, -1);
+		rl.addPDF("./dummy/boo.pdf", 0, -1);
 		String hfPath = theHFDir.getAbsolutePath();
-		File content = new File(hfPath + "/content/boo.pdf");
+		File content = new File(hfPath + "/dummy/boo.pdf");
 		FileUtil.createNewFile(content);
 		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new ExtractListener());
 		d.write2File(hfPath + "/dummy.jdf", 2, false);
 		File file = new File(hfPath + "/dummy.jdf");
 		assertTrue(file.exists());
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 10; i++)
 		{
-			ThreadUtil.sleep(200);
+			ThreadUtil.sleep(1000);
 			if (!file.exists() && !content.exists())
 				break;
 		}
