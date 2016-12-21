@@ -137,7 +137,7 @@ public class RollingBackupTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 		{
 			File ff = rbf.getNewFile("txt" + (i % 3));
-			assertTrue(ff.createNewFile());
+			assertTrue("" + i, ff.createNewFile());
 			assertEquals(dir.listFiles().length, Math.min(i + 1, 5));
 		}
 	}

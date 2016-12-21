@@ -279,6 +279,7 @@ public class HotFolder implements Runnable
 		if (taskQueue != null)
 		{
 			taskQueue = MultiTaskQueue.getCreateQueue(threadName, taskQueue.getMaxParallel());
+
 		}
 		runThread.start();
 	}
@@ -347,7 +348,7 @@ public class HotFolder implements Runnable
 					{
 						boolean found = false;
 						final FileTime lftAt = lastFileTime.elementAt(i);
-						for (int j = 0; j < fileListLength; j++)
+						for (int j = 0; !interrupt && j < fileListLength; j++)
 						// loop over all matching files in the directory
 						{
 							final File fileJ = files[j];
@@ -391,8 +392,15 @@ public class HotFolder implements Runnable
 		log.info("completed hot folder at: " + dir.getAbsolutePath());
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	private File[] getHotFiles()
 	{
+		if (interrupt)
+			return null;
+
 		File[] files = FileUtil.listFilesWithExtension(dir, getAllExtensions());
 		if (files != null)
 		{
@@ -423,7 +431,12 @@ public class HotFolder implements Runnable
 				}
 				else
 				{
-					taskQueue.queue(runner);
+					boolean queued = taskQueue.queue(runner);
+					if (!queued)
+					{
+						taskQueue = MultiTaskQueue.getCreateQueue(getThreadName(false), taskQueue.getMaxParallel());
+						taskQueue.queue(runner);
+					}
 				}
 			}
 			else

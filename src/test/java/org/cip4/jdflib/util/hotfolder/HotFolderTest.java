@@ -104,8 +104,8 @@ public class HotFolderTest extends JDFTestCaseBase
 			bZapp = _bZapp;
 		}
 
-		/*
-		 * (non-Javadoc)
+		/**
+		 *  
 		 * 
 		 * @see org.cip4.jdflib.util.HotFolderListener#hotFile(java.io.File)
 		 */

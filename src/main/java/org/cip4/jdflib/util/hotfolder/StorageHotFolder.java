@@ -97,7 +97,6 @@ public class StorageHotFolder
 	protected final HotFolder hf; // the active hot folder
 	private final File storageDir;
 	protected final Log log;
-	boolean moveDirs;
 
 	/**
 	 * @return the hotfolder directory
@@ -123,7 +122,6 @@ public class StorageHotFolder
 		super();
 		log = LogFactory.getLog(getClass());
 		this.storageDir = storageDir;
-		moveDirs = false;
 		storageDir.mkdirs(); // just in case
 		storageDir.setWritable(true);
 		if (!storageDir.isDirectory())
@@ -195,6 +193,16 @@ public class StorageHotFolder
 		hf.addListener(storageListener, ext);
 		listenerImpl.add(storageListener);
 		return storageListener;
+	}
+
+	/**
+	 * 
+	 * @param i
+	 * @return
+	 */
+	StorageHotFolderListener getListener(int i)
+	{
+		return listenerImpl.get(i);
 	}
 
 	/**

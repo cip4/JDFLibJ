@@ -87,6 +87,15 @@ import org.cip4.jdflib.core.VString;
 public class RollingBackupFile extends File
 {
 	private final int nBackup;
+	boolean wantExtension;
+
+	/**
+	 * @param wantExtension the wantExtension to set
+	 */
+	public void setWantExtension(boolean wantExtension)
+	{
+		this.wantExtension = wantExtension;
+	}
 
 	/**
 	 * @param pathname the base filename
@@ -96,6 +105,7 @@ public class RollingBackupFile extends File
 	{
 		super(pathname);
 		this.nBackup = nBackupp;
+		wantExtension = false;
 	}
 
 	/**
@@ -104,8 +114,7 @@ public class RollingBackupFile extends File
 	 */
 	public RollingBackupFile(final File file, final int nBackupp)
 	{
-		super(file.getPath());
-		this.nBackup = nBackupp;
+		this(file.getPath(), nBackupp);
 	}
 
 	/**
@@ -179,18 +188,21 @@ public class RollingBackupFile extends File
 		String pathname = getPath();
 		pathname = UrlUtil.newExtension(pathname, extension);
 		HashMap<Integer, File> map = getNameMap();
-		for (int i = nBackup; i > 0; i--)
+		if (!map.isEmpty())
 		{
-			File newFile = map.get(Integer.valueOf(i - 1));
-			if (newFile != null)
+			for (int i = nBackup; i > 0; i--)
 			{
-				File oldFile = map.get(Integer.valueOf(i));
-				if (oldFile != null && oldFile.exists())
+				File newFile = map.get(Integer.valueOf(i - 1));
+				if (newFile != null)
 				{
-					oldFile.delete();
+					File oldFile = map.get(Integer.valueOf(i));
+					if (oldFile != null && oldFile.exists())
+					{
+						oldFile.delete();
+					}
+					File newFileRenamed = new File(getPathFor(newFile.getAbsolutePath(), i));
+					newFile.renameTo(newFileRenamed);
 				}
-				File newFileRenamed = new File(getPathFor(newFile.getAbsolutePath(), i));
-				newFile.renameTo(newFileRenamed);
 			}
 		}
 		return new File(pathname);
@@ -202,7 +214,13 @@ public class RollingBackupFile extends File
 	 */
 	private HashMap<Integer, File> getNameMap()
 	{
-		File[] oldFiles = FileUtil.listFilesWithExpression(getParentFile(), UrlUtil.newExtension(getName(), null) + "*");
+		String myExt = FileUtil.getExtension(this);
+		String expression = UrlUtil.newExtension(getName(), null) + "*";
+		if (wantExtension && StringUtil.getNonEmpty(myExt) != null)
+		{
+			expression += "." + myExt;
+		}
+		File[] oldFiles = FileUtil.listFilesWithExpression(getParentFile(), expression);
 		HashMap<Integer, File> map = new HashMap<Integer, File>();
 		if (oldFiles != null)
 		{
