@@ -172,7 +172,7 @@ public class StorageHotFolder
 	}
 
 	/**
-	 * restart this hot folder, create s a new listner thread and stops the old one
+	 * restart this hot folder, creates a new listener thread and stops the old one
 	 * 
 	 */
 	public void restart()

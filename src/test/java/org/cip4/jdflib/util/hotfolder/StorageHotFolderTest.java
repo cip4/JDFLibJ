@@ -168,6 +168,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Before
 	public void setUp() throws Exception
 	{
+		super.setUp();
 		theHFDir = new File(sm_dirTestDataTemp + File.separator + "HFTest");
 		FileUtil.deleteAll(theHFDir);
 		theHFDir.mkdirs();
@@ -367,13 +368,15 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
 			file.createNewFile();
 		}
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 1000; i++)
 		{
 			ThreadUtil.sleep(200);
-			if (theHFDir.listFiles().length == 0)
+			if (theHFDir.listFiles().length <= 2)
 			{
+				log.info("stop " + i);
 				break;
 			}
+			log.warn("run over " + theHFDir.listFiles().length);
 		}
 		assertEquals(ok.listFiles().length, 42, 13);
 		assertEquals(tmpHFDir.listFiles().length, 0, 0);

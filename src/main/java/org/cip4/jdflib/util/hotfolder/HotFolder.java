@@ -302,7 +302,7 @@ public class HotFolder implements Runnable
 	 * stop this thread;
 	 * 
 	 */
-	public void stop()
+	public synchronized void stop()
 	{
 		interrupt = true;
 		if (taskQueue != null)
@@ -311,27 +311,16 @@ public class HotFolder implements Runnable
 		}
 		if (runThread != null)
 		{
-			synchronized (runThread)
-			{
-				runThread.notifyAll();
-				String name = runThread.getName();
-				log.info("Stopping hot folder: " + name);
-				try
-				{
-					// kill the old thread with extreme prejudice -otherwise we may have multiple concurring hf watcher threads
-					runThread.join();
-				}
-				catch (final InterruptedException x)
-				{
-					log.info("interupted while dying... ", x);
-				}
-				log.info("Finished stopping hot folder: " + name);
-			}
+			String name = runThread.getName();
+			log.info("Stopping hot folder: " + name);
+			ThreadUtil.notifyAll(runThread);
+			log.info("Finished stopping hot folder: " + name);
+			ThreadUtil.join(runThread, 10);
 			runThread = null;
 		}
 		else
 		{
-			log.warn("Stopping stopped hot folder: ");
+			log.info("Stopping stopped hot folder: ");
 		}
 	}
 
@@ -395,7 +384,10 @@ public class HotFolder implements Runnable
 				break;
 		}
 
-		runThread.interrupt();
+		if (runThread != null)
+		{
+			runThread.interrupt();
+		}
 		log.info("completed hot folder at: " + dir.getAbsolutePath());
 	}
 
