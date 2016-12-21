@@ -534,6 +534,42 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	public void testMoveDir() throws Exception
+	{
+		final byte[] b = new byte[55555];
+		for (int i = 0; i < 55555; i++)
+		{
+			b[i] = (byte) (i % 256);
+		}
+		final ByteArrayInputStream is = new ByteArrayInputStream(b);
+		is.close();
+		final File dir = new File(sm_dirTestDataTemp + "testDir");
+		final File dirdir = FileUtil.getFileInDirectory(dir, new File("subdir"));
+		final File dir2 = new File(sm_dirTestDataTemp + "testDir2");
+		FileUtil.deleteAll(dir);
+		FileUtil.deleteAll(dir2);
+		dir.mkdirs();
+		File sm = new File("streamMove.dat");
+		final File f = FileUtil.getFileInDirectory(dir, sm);
+		FileUtil.streamToFile(is, f.getPath());
+		final File f2 = FileUtil.getFileInDirectory(dir, new File("streamMove2.dat"));
+		FileUtil.streamToFile(is, f2.getPath());
+
+		assertTrue(FileUtil.moveFile(dir, dir2));
+		assertFalse(FileUtil.moveFile(dir, dir2));
+		assertFalse(dir.exists());
+		assertTrue(dir2.exists());
+		assertTrue(FileUtil.moveFile(dir2, dirdir));
+		assertFalse(dir2.exists());
+		assertTrue(dirdir.exists());
+		assertTrue(FileUtil.listFilesInTree(dir, "*.dat").toString().indexOf(sm.getName()) > 42);
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	public void testCopyFileToDir() throws Exception
 	{
 		final byte[] b = new byte[55555];

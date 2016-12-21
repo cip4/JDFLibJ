@@ -666,6 +666,13 @@ public class FileUtil
 		{
 			return true;
 		}
+		if (fromFile.isDirectory())
+		{
+			File parent = toFile.getParentFile();
+			String parentPath = parent == null ? null : parent.getAbsolutePath();
+
+			getCreateDirectory(parentPath);
+		}
 		if (fromFile.renameTo(toFile))
 		{
 			return true;
