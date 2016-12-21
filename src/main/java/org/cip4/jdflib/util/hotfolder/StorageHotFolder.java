@@ -238,4 +238,22 @@ public class StorageHotFolder
 			shfl.setMaxStore(maxStore);
 	}
 
+	/**
+	 * @param maxConcurrent
+	 * @see org.cip4.jdflib.util.hotfolder.HotFolder#setMaxConcurrent(int)
+	 */
+	public void setMaxConcurrent(int maxConcurrent)
+	{
+		hf.setMaxConcurrent(maxConcurrent);
+	}
+
+	/**
+	 * @param stabilizeTime
+	 * @see org.cip4.jdflib.util.hotfolder.HotFolder#setStabilizeTime(int)
+	 */
+	public void setStabilizeTime(int stabilizeTime)
+	{
+		hf.setStabilizeTime(stabilizeTime);
+	}
+
 }

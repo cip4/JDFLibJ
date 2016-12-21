@@ -127,7 +127,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		super.setUp();
 		theHF = new File(sm_dirTestDataTemp + File.separator + "HFTest");
 		theHF.mkdirs();
-		HotFolder.setDefaultStabilizeTime(500);
+		HotFolder.setDefaultStabilizeTime(200);
 	}
 
 	/**
