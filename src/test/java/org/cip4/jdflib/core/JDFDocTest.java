@@ -322,7 +322,21 @@ public class JDFDocTest extends JDFTestCaseBase
 		new JDFDoc(new XMLDoc());
 	}
 
-	// ///////////////////////////////////////////////////
+	/**
+	 * 
+	 * test graceful null handling
+	 */
+	@Test
+	public void testReparse()
+	{
+		XMLDoc d = new XMLDoc(ElementName.JDF, null);
+		d.getRoot().appendElement(ElementName.AUDITPOOL);
+		JDFDoc d2 = new JDFDoc(d);
+		KElement root2 = d2.getRoot();
+		assertEquals(1, root2.numChildElements(ElementName.AUDITPOOL, null));
+		assertTrue(d2.getFirstChild() instanceof JDFNode);
+	}
+
 	/**
 	 * 
 	 */

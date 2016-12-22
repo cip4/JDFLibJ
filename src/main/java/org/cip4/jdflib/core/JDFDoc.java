@@ -98,6 +98,7 @@ import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  *
@@ -161,6 +162,11 @@ public class JDFDoc extends XMLDoc
 			root.removeAttributes(null);
 			root.removeXMLComment(0);
 			root.copyInto((KElement) document.getDocumentElement(), false);
+			Node nC = doc.getFirstChild();
+			if (!(nC instanceof Element))
+			{
+				doc.removeChild(nC);
+			}
 		}
 		m_doc = doc.m_doc;
 	}
