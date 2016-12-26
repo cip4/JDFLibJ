@@ -96,7 +96,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.IntentHelper;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFHelper;
@@ -573,7 +573,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.convert(n);
 
-		PartitionHelper partition = new XJDFHelper(xjdf).getPartition(ElementName.COLOR, 0, 0);
+		ResourceHelper partition = new XJDFHelper(xjdf).getPartition(ElementName.COLOR, 0, 0);
 		JDFColor cNew = (JDFColor) partition.getResource();
 		assertEquals(cNew.getAttribute(AttributeName.ACTUALCOLORNAME), "c1");
 		assertEquals(partition.getPartMap().get(AttributeName.SEPARATION), "c1");
@@ -597,7 +597,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		for (int i = 0; i < 2; i++)
 		{
-			PartitionHelper partition = new XJDFHelper(xjdf).getPartition(ElementName.COLOR, 0, i);
+			ResourceHelper partition = new XJDFHelper(xjdf).getPartition(ElementName.COLOR, 0, i);
 			JDFColor cNew = (JDFColor) partition.getResource();
 			assertEquals(cNew.getAttribute(AttributeName.ACTUALCOLORNAME), "sep " + (i + 1));
 			assertEquals(partition.getPartMap().get(AttributeName.SEPARATION), "sep_" + (i + 1));
@@ -623,7 +623,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.convert(n);
 
-		PartitionHelper partition = new XJDFHelper(xjdf).getPartition(ElementName.COLORANTCONTROL, 0, 0);
+		ResourceHelper partition = new XJDFHelper(xjdf).getPartition(ElementName.COLORANTCONTROL, 0, 0);
 		JDFColorantControl cNew = (JDFColorantControl) partition.getResource();
 		assertEquals(cNew.getAttribute(ElementName.COLORANTPARAMS), "sep_1 sep_2");
 	}
@@ -1353,7 +1353,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		hp.setCenter(new JDFXYPair(3, 4));
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.convert(node);
-		PartitionHelper ph = new XJDFHelper(xjdf).getPartition(ElementName.HOLEMAKINGPARAMS, 0, 0);
+		ResourceHelper ph = new XJDFHelper(xjdf).getPartition(ElementName.HOLEMAKINGPARAMS, 0, 0);
 		KElement holepattern = ph.getResource().getElement("HolePattern");
 		assertNotNull(holepattern);
 		assertEquals(holepattern.getAttribute(AttributeName.CENTER), "3 4");
@@ -1396,7 +1396,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		holeline.appendHole().setCenter(new JDFXYPair(5, 6));
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.convert(node);
-		PartitionHelper ph = new XJDFHelper(xjdf).getPartition(ElementName.HOLEMAKINGPARAMS, 0, 0);
+		ResourceHelper ph = new XJDFHelper(xjdf).getPartition(ElementName.HOLEMAKINGPARAMS, 0, 0);
 		KElement holepattern = ph.getResource().getElement("HolePattern");
 		assertNotNull(holepattern);
 		assertEquals(holepattern.getAttribute(AttributeName.CENTER), "5 6");

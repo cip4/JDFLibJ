@@ -129,37 +129,22 @@ public class StringUtil
 	 * parts (c) Monty Python, Star Trek, Douglas Adams, Black Adder, Goethe, Firefly, Capt. Jack Sparrow
 	 * 
 	 */
-	private static String[] strings = {
-			"Randomly inserted error",
-			"Me. I'm dishonest! And a dishonest man you can always trust to be dishonest... honestly!",
-			"fooBar",
-			"Snafu",
+	private static String[] strings = { "Randomly inserted error", "Me. I'm dishonest! And a dishonest man you can always trust to be dishonest... honestly!", "fooBar", "Snafu",
 			"Soon TM is a registered trademark of CIP4 and does not imply, either implicitly or explicitly, any action will take place in any given time, if ever.",
 			"Programming today is a race between software engineers striving to build bigger and better programs, and the Universe trying to produce bigger and better idiots. So far, the Universe is winning.",
-			"Nichtsnutz geht über Eigennutz!",
-			"Dumb people are always blissfully unaware of how dumb they really are…",
+			"Nichtsnutz geht über Eigennutz!", "Dumb people are always blissfully unaware of how dumb they really are…",
 			"Well, it’s no secret that the best thing about a secret is secretly telling someone your secret, thereby adding another secret to their secret collection of secrets, secretly.",
 			"Bad Karma",
 			"Ihr Instrumente freilich spottet mein, Mit Rad und Kämmen, Walz und Bügel: Ich stand am Tor, ihr solltet Schlüssel sein; Zwar euer Bart ist kraus, doch hebt ihr nicht die Riegel.",
-			"What do you expect from a simulator",
-			"Paper Jam",
-			"Strawberry jam",
-			"Elderberry jam",
-			"Your mother was a hamster and your father smelt of elderberries!",
-			"I'm French! Why do think I have this outrageous accent, you silly king-a?!",
-			"It's just a flesh wound.",
-			"All right, we'll call it a draw.",
+			"What do you expect from a simulator", "Paper Jam", "Strawberry jam", "Elderberry jam", "Your mother was a hamster and your father smelt of elderberries!",
+			"I'm French! Why do think I have this outrageous accent, you silly king-a?!", "It's just a flesh wound.", "All right, we'll call it a draw.",
 			"Oh, oh, I see! Running away, eh? You yellow bastards! Come back here and take what's coming to you! I'll bite your legs off!",
-			"You don't frighten us, English pig-dogs!",
-			"Go and boil your bottom, sons of a silly person.",
+			"You don't frighten us, English pig-dogs!", "Go and boil your bottom, sons of a silly person.",
 			"I blow my nose at you, so-called Arthur King, you and all your silly English k-nnnnniggets. Thpppppt! Thppt! Thppt!",
-			"I don't wanna talk to you no more, you empty headed animal food trough wiper!",
-			"I fart in your general direction!",
+			"I don't wanna talk to you no more, you empty headed animal food trough wiper!", "I fart in your general direction!",
 			"Listen, strange women lyin' in ponds distributin' swords is no basis for a system of government. Supreme executive power derives from a mandate from the masses, not from some farcical aquatic ceremony",
-			"C'est un lapin, lapin de bois.",
-			"Quoi? Un cadeau. What? A present. Oh, un cadeau. Oui, oui. Hurry. What? Let's go. Oh. On y va. Bon magne. Over here...",
-			"Oh. Oh, I see. Running away, eh? You yellow bastards! Come back here and take what's coming to you. I'll bite your legs off!",
-			"You're using coconuts!",
+			"C'est un lapin, lapin de bois.", "Quoi? Un cadeau. What? A present. Oh, un cadeau. Oui, oui. Hurry. What? Let's go. Oh. On y va. Bon magne. Over here...",
+			"Oh. Oh, I see. Running away, eh? You yellow bastards! Come back here and take what's coming to you. I'll bite your legs off!", "You're using coconuts!",
 			"The swallow may fly south with the sun or the house martin or the plover may seek warmer climes in winter, yet these are not strangers to our land?",
 			"Are you suggesting coconuts migrate?",
 			"It's not a question of where he grips it! It's a simple question of weight ratios! A five ounce bird could not carry a one pound coconut.",
@@ -167,8 +152,7 @@ public class StringUtil
 			"Oh, King, eh, very nice. And how d'you get that, eh? By exploiting the workers! By 'anging on to outdated imperialist dogma which perpetuates the economic and social differences in our society. If there's ever going to be any progress with the--",
 			"Oh! Come and see the violence inherent in the system! Help! Help! I'm being repressed!",
 			"Here I am, brain the size of a planet, and they ask me to take you to the bridge. Call that job satisfaction, 'cause I don't.",
-			"Ghastly, isn't it? All the doors on this spaceship have been programmed to have a cheery and sunny disposition.",
-			"whazzap?",
+			"Ghastly, isn't it? All the doors on this spaceship have been programmed to have a cheery and sunny disposition.", "whazzap?",
 			"Explain again how sheep's bladders may be employed to prevent earthquakes.",
 			"Pardon me for breathing, which I never do anyway so I don't know why I even bothered to say it. Oh god, I'm so depressed.",
 			"I've got this pain in all the diodes down my left side",
@@ -185,8 +169,7 @@ public class StringUtil
 			"Under the terms of the Roman occupancy, we're entitled to be crucified in a purely Jewish area.",
 			"Amongst our weaponry are such diverse elements as: fear, surprise, ruthless efficiency, an almost fanatical devotion to the Pope, and nice red uniforms - Oh damn!",
 			"*Nobody* expects the Spanish Inquisition! Our chief weapon is surprise, surprise and fear, fear and surprise. Our *two* weapons are fear and surprise, and ruthless efficiency. Our *three* weapons are fear and surprise and ruthless efficiency and an almost fanatical dedication to the pope. Our *four*... No... Amongst our weapons... Amongst our weaponry are such elements as fear, sur- I'll come in again. ",
-			"NOBODY expects the Spanish Inquisition!",
-			"Hm! She is made of harder stuff! Cardinal Fang! Fetch...THE COMFY CHAIR!",
+			"NOBODY expects the Spanish Inquisition!", "Hm! She is made of harder stuff! Cardinal Fang! Fetch...THE COMFY CHAIR!",
 			"So you think you are strong because you can survive the soft cushions. Well, we shall see. Biggles! Put her in the Comfy Chair!",
 			"Tungsten carbide drills? What the bloody hell's tungsten carbide drills? - It's something they use in coal mining, father.' Your bloody fancy talk since you left London.",
 			"I'll tell you what's wrong with it, my lad. It's dead, that's what's wrong with it!",
@@ -201,14 +184,10 @@ public class StringUtil
 			"To you it's a potato, to me it's a potato. But to Sir Walter Bloody Raleigh it's country estates, fine carriages, and as many girls as his tongue can cope with. He's making a fortune out of the things; people are smoking them, building houses out of them... They'll be eating them next.",
 			"E: Look, there's no need to panic. Someone in the crew will know how to steer this thing.\nR: The crew, milord?\nE: Yes, the crew.\nR: What crew?\nE: I was under the impression that it was common maritime practice for a ship to have a crew.\nR: Opinion is divided on the subject.\n",
 			"If we do happen to step on a mine, Sir, what do we do ?\nNormal procedure, Lieutenant, is to jump 200 feet in the air and scatter oneself over a wide area.",
-			"Gentlemen, you can't fight in here, this is the War Room!",
-			"I love it when a plan comes together",
-			"Das also war des Pudels Kern!",
+			"Gentlemen, you can't fight in here, this is the War Room!", "I love it when a plan comes together", "Das also war des Pudels Kern!",
 			"I feel that if a person can't communicate the very least he can do is to shut up",
-			"Always carry a flagon of whiskey in case of snakebite and furthermore always carry a small snake.",
-			"Anyone who hates children and animals can't be all bad.",
-			"Ein Teil von jener Kraft, Die stets das Böse will und stets das Gute schafft.",
-			"Von allen Geistern, die verneinen, ist mir der Schalk am wenigsten zur Last.",
+			"Always carry a flagon of whiskey in case of snakebite and furthermore always carry a small snake.", "Anyone who hates children and animals can't be all bad.",
+			"Ein Teil von jener Kraft, Die stets das Böse will und stets das Gute schafft.", "Von allen Geistern, die verneinen, ist mir der Schalk am wenigsten zur Last.",
 			"And the Lord spake, saying, 'First shalt thou take out the Holy Pin. Then, shalt thou count to three, no more, no less. Three shalt be the number thou shalt count, and the number of the counting shall be three. Four shalt thou not count, nor either count thou two, excepting that thou then proceed to three. Five is right out. Once the number three, being the third number, be reached, then lobbest thou thy Holy Hand Grenade of Antioch towards thy foe, who, being naughty in my sight, shall snuff it.",
 			"The slightest thought hadn't even begun to speculate about the merest possibility of crossing my mind.",
 			"Right, Baldrick, let's try again, shall we? This is called adding. If I have two beans, and then I add two more beans, what do I have?\nSome beans.\nYes...and no. Let's try again, shall we? I have two beans, then I add two more beans. What does that make?\nA very small casserole.\nBaldrick, the ape creatures of the Indus have mastered this. Now try again. One, two, three, four. So how many are there?\nThree\nWhat?\nAnd that one.\nThree and that one. So if I add that one to the three what will I have?\nOh! Some beans.\nYes. To you Baldrick, the Renaissance was just something that happened to other people wasn't it?",
@@ -469,7 +448,8 @@ public class StringUtil
 			buf.append(back);
 		}
 
-		return buf.toString();
+		String ret = buf.toString();
+		return getNonEmpty(ret);
 	}
 
 	/**
@@ -2085,7 +2065,7 @@ public class StringUtil
 
 					if (iEscapeLen > 0)
 					{ // check if the length of the buffer is smaler then the
-						// ordered escape length. If this is the case
+							// ordered escape length. If this is the case
 						// insert some 0 in front of. for Example buf = 12345
 						// iEscapeLen is 7. The result String is 0012345
 						final int lenBuf = buf.length();
@@ -2114,7 +2094,7 @@ public class StringUtil
 				}
 				else
 				{ // radix = 0; just insert the escape character in front of the
-					// actual char
+						// actual char
 					escaped[posE] = a_toEscape[i];
 					posE++;
 				}

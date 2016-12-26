@@ -73,7 +73,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFPosition;
@@ -150,7 +150,7 @@ public class WalkPosition extends WalkXElement
 			XJDFHelper xh = XJDFHelper.getHelper(e);
 			if (xh != null)
 			{
-				PartitionHelper bsh = xh.getPartition(id);
+				ResourceHelper bsh = xh.getPartition(id);
 				VElement vSigCell = bsh == null ? null : bsh.getResource().getChildElementVector(ElementName.SIGNATURECELL, null);
 				if (vSigCell != null)
 				{

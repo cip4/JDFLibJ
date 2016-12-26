@@ -73,7 +73,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFPreview;
 
@@ -113,7 +113,7 @@ public class WalkPreview extends WalkResource
 		moveToFileSpec(jdf);
 		String typ = jdf.getAttribute(AttributeName.PREVIEWUSAGE);
 		KElement xjdfPreview = super.walk(jdf, xjdf);
-		PartitionHelper ph = new PartitionHelper(xjdfPreview.getParentNode_KElement());
+		ResourceHelper ph = new ResourceHelper(xjdfPreview.getParentNode_KElement());
 		ph.ensurePart(AttributeName.PREVIEWTYPE, typ);
 		return xjdfPreview;
 	}

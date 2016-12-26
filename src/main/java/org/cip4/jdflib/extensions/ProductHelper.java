@@ -374,7 +374,7 @@ public class ProductHelper extends BaseXJDFHelper
 	 * reference the customerinfo specified by ph
 	 * @param cuph
 	 */
-	public void setCustomerInfo(PartitionHelper cuph)
+	public void setCustomerInfo(ResourceHelper cuph)
 	{
 		if (cuph != null)
 			getRoot().setAttribute(ElementName.CUSTOMERINFO + "Ref", cuph.getID());

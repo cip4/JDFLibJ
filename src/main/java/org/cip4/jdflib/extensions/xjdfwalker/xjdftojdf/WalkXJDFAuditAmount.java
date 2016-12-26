@@ -73,7 +73,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.util.StringUtil;
@@ -121,7 +121,7 @@ public class WalkXJDFAuditAmount extends WalkXElement
 			{
 				XJDFHelper h = XJDFHelper.getHelper(e);
 				SetHelper sh = h.getSetForPartition(id);
-				PartitionHelper ph = h.getPartition(id);
+				ResourceHelper ph = h.getPartition(id);
 				if (sh != null)
 				{
 					KElement amountParent = amountCopy.getParentNode_KElement();

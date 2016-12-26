@@ -87,9 +87,9 @@ import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.extensions.AuditPoolHelper;
-import org.cip4.jdflib.extensions.AuditResourceHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.MessageResourceHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDF20;
@@ -467,13 +467,13 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				AuditPoolHelper ah = new AuditPoolHelper(newRoot.getCreateElement(ElementName.AUDITPOOL));
 				KElement resource = partAmount.getDeepParent(XJDFConstants.Resource, 0);
-				PartitionHelper ph = resource == null ? null : new PartitionHelper(resource);
+				ResourceHelper ph = resource == null ? null : new ResourceHelper(resource);
 				SetHelper sh = ph == null ? null : ph.getSet();
 				if (sh != null)
 				{
-					AuditResourceHelper arh = ah.getCreateAuditResourceHelper(sh);
+					MessageResourceHelper arh = ah.getCreateMessageResourceHelper(sh);
 					SetHelper shNew = arh.getSet();
-					PartitionHelper phNew = shNew.getCreateVPartition(sh.getPartMapVector(), false);
+					ResourceHelper phNew = shNew.getCreateVPartition(sh.getPartMapVector(), false);
 					KElement newAmountPool = phNew.getRoot().copyElement(partAmount, null);
 					VElement vpa = newAmountPool.getChildElementVector(ElementName.PARTAMOUNT, null);
 					for (KElement pa : vpa)
@@ -651,7 +651,7 @@ class PostXJDFWalker extends BaseElementWalker
 			XJDFHelper h = new XJDFHelper(newRoot);
 			SetHelper layoutseth = h.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
 
-			VJDFAttributeMap vmap = new PartitionHelper(strippingParams.getParentNode_KElement()).getPartMapVector();
+			VJDFAttributeMap vmap = new ResourceHelper(strippingParams.getParentNode_KElement()).getPartMapVector();
 			JDFAttributeMap map = vmap.size() == 0 ? null : vmap.get(0);
 			map = mergeStrippingParamsLayout((JDFStrippingParams) strippingParams, layoutseth, map);
 
@@ -671,7 +671,7 @@ class PostXJDFWalker extends BaseElementWalker
 		{
 			String bsName = map.remove(AttributeName.BINDERYSIGNATURENAME);
 			String cellIndex = map.remove(AttributeName.CELLINDEX);
-			PartitionHelper layoutPartitionH = layoutseth.getCreatePartition(map, true);
+			ResourceHelper layoutPartitionH = layoutseth.getCreatePartition(map, true);
 			JDFLayout layoutPartition = (JDFLayout) layoutPartitionH.getResource();
 			ensureLayoutPositions(strippingParams, layoutPartition);
 
@@ -692,7 +692,7 @@ class PostXJDFWalker extends BaseElementWalker
 			else
 			{
 				String bsID = strippingParams.getAttribute(ElementName.BINDERYSIGNATURE + "Ref", null, null);
-				PartitionHelper bsHelper = XJDFHelper.getHelper(layoutPartition).getPartition(bsID);
+				ResourceHelper bsHelper = XJDFHelper.getHelper(layoutPartition).getPartition(bsID);
 				JDFBinderySignature bs = (bsHelper == null) ? null : (JDFBinderySignature) bsHelper.getResource();
 				if (bs != null)
 				{
@@ -934,7 +934,7 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDFConstants.XJDF, 0));
 				SetHelper artDelResHelper = h.getCreateResourceSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
-				PartitionHelper ph = artDelResHelper.appendPartition(null, true);
+				ResourceHelper ph = artDelResHelper.appendPartition(null, true);
 				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
 				dp.setFromArtDelivery((JDFArtDeliveryIntent) intent.getElement(ElementName.ARTDELIVERYINTENT));
 			}
@@ -982,7 +982,7 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDFConstants.XJDF, 0));
 				SetHelper delResHelper = h.getCreateResourceSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
-				PartitionHelper ph = delResHelper.appendPartition(null, true);
+				ResourceHelper ph = delResHelper.appendPartition(null, true);
 				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
 				dp.setFromDeliveryIntent((JDFDeliveryIntent) intent.getElement(ElementName.DELIVERYINTENT));
 			}
@@ -1034,7 +1034,7 @@ class PostXJDFWalker extends BaseElementWalker
 				KElement set = param == null ? null : param.getParentNode_KElement();
 				if (set != null)
 				{
-					PartitionHelper ph = new PartitionHelper(param);
+					ResourceHelper ph = new ResourceHelper(param);
 					SetHelper sh = new SetHelper(set);
 					JDFAttributeMap partMap = ph.getPartMap();
 					partMap.put(XJDFConstants.DROP_ID, "DROP_0");
@@ -1046,7 +1046,7 @@ class PostXJDFWalker extends BaseElementWalker
 						int i = (j + 1) % size;
 						partMap.put(XJDFConstants.DROP_ID, "DROP_" + i);
 						KElement newDrop;
-						PartitionHelper newParam;
+						ResourceHelper newParam;
 						if (i != 0)
 						{
 							newParam = sh.getCreatePartition(partMap, true);
@@ -1139,7 +1139,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return PartitionHelper.isResourceElement(toCheck);
+			return ResourceHelper.isResourceElement(toCheck);
 		}
 
 		/**
@@ -1243,7 +1243,7 @@ class PostXJDFWalker extends BaseElementWalker
 		protected void reorderElements(KElement xjdf)
 		{
 			super.reorderElements(xjdf);
-			new PartitionHelper(xjdf).cleanUp();
+			new ResourceHelper(xjdf).cleanUp();
 		}
 	}
 
@@ -1528,8 +1528,8 @@ class PostXJDFWalker extends BaseElementWalker
 				KElement root = firstSet.getRoot();
 				for (int j = 1; j < sameSets.size(); j++)
 				{
-					Vector<PartitionHelper> parts = sameSets.get(j).getPartitions();
-					for (PartitionHelper ph : parts)
+					Vector<ResourceHelper> parts = sameSets.get(j).getPartitions();
+					for (ResourceHelper ph : parts)
 					{
 						root.copyElement(ph.getRoot(), null);
 					}
@@ -1745,7 +1745,7 @@ class PostXJDFWalker extends BaseElementWalker
 			String mat = hap.getNonEmpty(AttributeName.STRIPMATERIAL);
 			if (mat != null)
 			{
-				MiscConsumableMaker mm = new MiscConsumableMaker(PartitionHelper.getHelper(xjdf));
+				MiscConsumableMaker mm = new MiscConsumableMaker(ResourceHelper.getHelper(xjdf));
 				mm.create("BackStrip");
 				mm.setTypeDetails(mat);
 				hap.removeAttribute(AttributeName.STRIPMATERIAL);
@@ -1755,7 +1755,7 @@ class PostXJDFWalker extends BaseElementWalker
 			if (col != null || brand != null)
 			{
 				//TODO worry about top and bottom
-				MiscConsumableMaker mm = new MiscConsumableMaker(PartitionHelper.getHelper(xjdf));
+				MiscConsumableMaker mm = new MiscConsumableMaker(ResourceHelper.getHelper(xjdf));
 				mm.create("HeadBand");
 				mm.setColor(col);
 				mm.setColorDetails(hap.getNonEmpty(AttributeName.TOPCOLORDETAILS));

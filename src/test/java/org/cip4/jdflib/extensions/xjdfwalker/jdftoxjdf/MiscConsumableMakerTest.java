@@ -6,7 +6,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNamedColor;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.JDFHeadBandApplicationParams;
@@ -22,10 +22,10 @@ public class MiscConsumableMakerTest
 	{
 		XJDFHelper root = new XJDFHelper("j1", "p1", null);
 		SetHelper sh = root.getCreateResourceSet(ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input);
-		PartitionHelper ph = sh.getCreatePartition(null, true);
+		ResourceHelper ph = sh.getCreatePartition(null, true);
 		JDFHeadBandApplicationParams hp = (JDFHeadBandApplicationParams) ph.getResource();
 		MiscConsumableMaker m = new MiscConsumableMaker(ph);
-		PartitionHelper misc = m.create("Headband");
+		ResourceHelper misc = m.create("Headband");
 		assertEquals(misc.getResource().getAttribute(AttributeName.TYPE), "Headband");
 		assertEquals(misc.getSet().getProcessUsage(), "Headband");
 	}
@@ -38,11 +38,11 @@ public class MiscConsumableMakerTest
 	{
 		XJDFHelper root = new XJDFHelper("j1", "p1", null);
 		SetHelper sh = root.getCreateResourceSet(ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input);
-		PartitionHelper ph = sh.getCreatePartition(null, true);
+		ResourceHelper ph = sh.getCreatePartition(null, true);
 		JDFHeadBandApplicationParams hp = (JDFHeadBandApplicationParams) ph.getResource();
 		hp.setTopBrand("b1");
 		MiscConsumableMaker m = new MiscConsumableMaker(ph);
-		PartitionHelper misc = m.create("Headband");
+		ResourceHelper misc = m.create("Headband");
 		m.setBrand("b1");
 		assertEquals(misc.getBrand(), "b1");
 	}
@@ -55,12 +55,12 @@ public class MiscConsumableMakerTest
 	{
 		XJDFHelper root = new XJDFHelper("j1", "p1", null);
 		SetHelper sh = root.getCreateResourceSet(ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input);
-		PartitionHelper ph = sh.getCreatePartition(null, true);
+		ResourceHelper ph = sh.getCreatePartition(null, true);
 		JDFHeadBandApplicationParams hp = (JDFHeadBandApplicationParams) ph.getResource();
 		hp.setTopBrand("b1");
 		hp.setTopColor(EnumNamedColor.Black);
 		MiscConsumableMaker m = new MiscConsumableMaker(ph);
-		PartitionHelper misc = m.create("Headband");
+		ResourceHelper misc = m.create("Headband");
 		m.setColor("Black");
 		assertEquals(misc.getResource().getAttribute(AttributeName.COLOR), "Black");
 	}

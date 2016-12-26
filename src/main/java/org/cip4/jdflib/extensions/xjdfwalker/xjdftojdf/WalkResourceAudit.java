@@ -72,7 +72,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
@@ -124,7 +124,7 @@ public class WalkResourceAudit extends WalkAudit
 
 		String name = StringUtil.getNonEmpty(ri.getResourceName());
 		SetHelper sh = h.getSet(name, ri.getUsage(), ri.getProcessUsage());
-		PartitionHelper ph = sh == null ? null : sh.getPartition(ri.getPartMapVector());
+		ResourceHelper ph = sh == null ? null : sh.getPartition(ri.getPartMapVector());
 		if (ph == null)
 		{
 			ph = sh == null ? null : sh.getPartition(0);

@@ -68,17 +68,12 @@
  */
 package org.cip4.jdflib.extensions;
 
-import java.util.Vector;
-
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.util.ContainerUtil;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class AuditPoolHelper extends BaseXJDFHelper
+public class AuditPoolHelper extends MessagePoolHelper
 {
 
 	/**
@@ -86,103 +81,19 @@ public class AuditPoolHelper extends BaseXJDFHelper
 	 */
 	public AuditPoolHelper(KElement audit)
 	{
-		theElement = audit;
+		super(audit);
 	}
 
 	/**
+	 * factory method
 	 * 
-	 * @param sh
+	 * @param message
 	 * @return
-	 */
-	public AuditResourceHelper getAuditResourceHelper(SetHelper sh)
-	{
-		String name = sh == null ? null : sh.getName();
-		if (name == null)
-		{
-			return null;
-		}
-		VElement v = theElement.getXPathElementVector("AuditResource/ResourceInfo/@ResourceSet[@Name=\"" + name + "\"]", 0);
-		if (v != null)
-		{
-			for (KElement e : v)
-			{
-				SetHelper thisHelper = new SetHelper(e);
-				if (!ContainerUtil.equals(sh.getUsage(), thisHelper.getUsage()))
-					continue;
-				if (!ContainerUtil.equals(sh.getProcessUsage(), thisHelper.getProcessUsage()))
-					continue;
-				return new AuditResourceHelper(e.getParentNode_KElement().getParentNode_KElement());
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * 
-	 * @param sh
-	 * @return
-	 */
-	public AuditResourceHelper getCreateAuditResourceHelper(SetHelper sh)
-	{
-		String name = sh == null ? null : sh.getName();
-		if (name == null)
-		{
-			return null;
-		}
-		AuditResourceHelper ah = getAuditResourceHelper(sh);
-		if (ah == null)
-		{
-			ah = new AuditResourceHelper(theElement.appendElement(XJDFConstants.AuditResource));
-			KElement set = ah.getRoot().appendElement(ElementName.RESOURCEINFO).appendElement(XJDFConstants.ResourceSet);
-			SetHelper shNew = new SetHelper(set);
-			shNew.setName(name);
-			shNew.setUsage(sh.getUsage());
-			shNew.setProcessUsage(sh.getProcessUsage());
-		}
-		ah.cleanUp();
-		return ah;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#cleanUp()
 	 */
 	@Override
-	public void cleanUp()
+	MessageResourceHelper newMessageResourceHelper(KElement message)
 	{
-		Vector<AuditHelper> vA = getAuditHelepers();
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public Vector<AuditHelper> getAuditHelepers()
-	{
-		Vector<AuditHelper> vA = new Vector<AuditHelper>();
-		VElement v = theElement.getChildElementVector(null, null);
-		for (KElement e : v)
-		{
-			vA.add(getAuditHelper(e));
-		}
-		return vA;
-	}
-
-	/**
-	 * 
-	 * @param e
-	 * @return
-	 */
-	public AuditHelper getAuditHelper(KElement e)
-	{
-		if (e == null)
-			return null;
-		String name = e.getLocalName();
-		if (XJDFConstants.AuditResource.equals(name))
-			return new AuditResourceHelper(e);
-		else if (XJDFConstants.AuditStatus.equals(name))
-			return new AuditHelper(e);
-		else
-			return new AuditHelper(e);
+		return new AuditResourceHelper(message);
 	}
 
 }

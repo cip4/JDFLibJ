@@ -75,7 +75,6 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -86,7 +85,6 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
@@ -178,6 +176,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		theElement.setAttribute(AttributeName.JOBID, jobID);
 		theElement.setAttribute(AttributeName.JOBPARTID, jobPartID);
 		setParts(parts);
+		cleanUp();
 	}
 
 	/**
@@ -197,8 +196,8 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		JDFDoc doc = new JDFDoc(XJDFConstants.XJDF, EnumVersion.Version_2_0);
 		doc.setInitOnCreate(false);
 		theElement = doc.getRoot();
-		JDFAuditPool ap = (JDFAuditPool) theElement.getCreateElement(ElementName.AUDITPOOL);
-		ap.addAudit(EnumAuditType.Created, null).init();
+		AuditPoolHelper aph = getCreateAuditPool();
+		aph.appendMessage(XJDFConstants.AuditCreated);
 	}
 
 	/**
@@ -235,6 +234,26 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
+	 * 
+	 * @return
+	 */
+	public AuditPoolHelper getAuditPool()
+	{
+		KElement auditPool = theElement.getElement(ElementName.AUDITPOOL);
+		return auditPool == null ? null : new AuditPoolHelper(auditPool);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public AuditPoolHelper getCreateAuditPool()
+	{
+		KElement auditPool = theElement.getCreateElement(ElementName.AUDITPOOL);
+		return new AuditPoolHelper(auditPool);
+	}
+
+	/**
 	 * @param id 
 	 * @return the  parameterset and resourceset with ID=iD
 	 */
@@ -259,7 +278,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public SetHelper getSetForPartition(String id)
 	{
-		PartitionHelper ph = getPartition(id);
+		ResourceHelper ph = getPartition(id);
 		if (ph != null)
 		{
 			return ph.getSet();
@@ -274,7 +293,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param id 
 	 * @return the  parameterset and resourceset with ID=iD
 	 */
-	public PartitionHelper getPartition(String id)
+	public ResourceHelper getPartition(String id)
 	{
 		if (id == null)
 			return null;
@@ -283,7 +302,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		{
 			if (SetHelper.isSet(e))
 			{
-				PartitionHelper ph = new SetHelper(e).getPartition(id);
+				ResourceHelper ph = new SetHelper(e).getPartition(id);
 				if (ph != null)
 				{
 					return ph;
@@ -462,7 +481,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param iPart 
 	 * @return PartitionHelper for the requested partition, null if it ain't there
 	 */
-	public PartitionHelper getPartition(String name, int iSet, int iPart)
+	public ResourceHelper getPartition(String name, int iSet, int iPart)
 	{
 		SetHelper sh = getSet(name, iSet);
 		return sh == null ? null : sh.getPartition(iPart);
@@ -476,7 +495,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public KElement getResource(String name, int iSet, int iPart)
 	{
-		PartitionHelper ph = getPartition(name, iSet, iPart);
+		ResourceHelper ph = getPartition(name, iSet, iPart);
 		return ph == null ? null : ph.getResource();
 	}
 
@@ -702,6 +721,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public boolean writeToFile(String file)
 	{
+		cleanUp();
 		boolean b = getRoot().getOwnerDocument_KElement().write2File(file, 2, false);
 		return b;
 	}
@@ -740,6 +760,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public void writeToStream(OutputStream os) throws IOException
 	{
+		cleanUp();
 		getRoot().getOwnerDocument_KElement().write2Stream(os, 2, false);
 	}
 
@@ -820,10 +841,10 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 				sh.cleanUp();
 			}
 		}
-		KElement auditPool = theElement.getElement(ElementName.AUDITPOOL);
+		AuditPoolHelper auditPool = getAuditPool();
 		if (auditPool != null)
 		{
-			new AuditPoolHelper(auditPool).cleanUp();
+			auditPool.cleanUp();
 		}
 	}
 

@@ -68,10 +68,10 @@
  */
 package org.cip4.jdflib.extensions;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+
+import junit.framework.TestCase;
 
 /**
  * 
@@ -88,7 +88,7 @@ public class AuditPoolHelperTest extends TestCase
 	{
 		KElement auditPool = KElement.createRoot(ElementName.AUDIT, null);
 		KElement created = auditPool.appendElement(ElementName.CREATED);
-		KElement ar = auditPool.appendElement("AuditResource");
+		KElement ar = auditPool.appendElement(XJDFConstants.AuditResource);
 		AuditPoolHelper ah = new AuditPoolHelper(auditPool);
 
 		ah.cleanUp();

@@ -77,7 +77,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF.EnumProcessPartition;
@@ -271,7 +271,7 @@ public class WalkResLink extends WalkJDFElement
 			JDFNode parentProduct = parentNode.getParentProduct();
 			for (KElement newResource : newResources)
 			{
-				PartitionHelper ph = new PartitionHelper(newResource);
+				ResourceHelper ph = new ResourceHelper(newResource);
 				VJDFAttributeMap partMaps = ph.getPartMapVector();
 				boolean bChange = false;
 				if (EnumProcessPartition.processTypes.equals(jdfToXJDF.getProcessPart()))

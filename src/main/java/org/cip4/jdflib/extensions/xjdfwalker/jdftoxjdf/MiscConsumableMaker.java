@@ -71,7 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
@@ -84,15 +84,15 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class MiscConsumableMaker
 {
-	private final PartitionHelper ph;
+	private final ResourceHelper ph;
 
-	private PartitionHelper miscPart;
+	private ResourceHelper miscPart;
 
 	/**
 	 * 
 	 * @param ph the source partition
 	 */
-	MiscConsumableMaker(PartitionHelper ph)
+	MiscConsumableMaker(ResourceHelper ph)
 	{
 		super();
 		this.ph = ph;
@@ -104,7 +104,7 @@ public class MiscConsumableMaker
 	 * @param consumableType
 	 * @return
 	 */
-	public PartitionHelper create(String consumableType)
+	public ResourceHelper create(String consumableType)
 	{
 		XJDFHelper helper = ph.getXJDF();
 		if (helper == null)

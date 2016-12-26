@@ -81,7 +81,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.IntentHelper;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -227,7 +227,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	{
 		XJDFHelper h = new XJDFHelper("j1", null, null);
 		SetHelper lh = h.appendResourceSet(ElementName.LAYOUT, EnumUsage.Input);
-		PartitionHelper ph = lh.appendPartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+		ResourceHelper ph = lh.appendPartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
 		ph.setAttribute(AttributeName.DESCRIPTIVENAME, "d1", null);
 		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
 		JDFDoc docJDF = c.convert(h);
@@ -247,7 +247,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		XJDFHelper xjdf = new XJDFHelper("j1", null, null);
 		SetHelper sh = xjdf.getCreateResourceSet("Media", EnumUsage.Input);
-		PartitionHelper ph = sh.getCreatePartition(null, true);
+		ResourceHelper ph = sh.getCreatePartition(null, true);
 		ph.setAmount(33, null, true);
 		KElement e = xjdf.getRoot();
 		final JDFDoc d = xCon.convert(e);
@@ -408,7 +408,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		SetHelper rls = h.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input);
 		for (int i = 0; i < 3; i++)
 		{
-			PartitionHelper ph = rls.appendPartition(new JDFAttributeMap("Run", "R" + i), true);
+			ResourceHelper ph = rls.appendPartition(new JDFAttributeMap("Run", "R" + i), true);
 			JDFRunList rl = (JDFRunList) ph.getCreateResource();
 			rl.setFileURL("url");
 		}
@@ -428,7 +428,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		XJDFHelper xjdf = new XJDFHelper("j1", null, null);
 		SetHelper sh = xjdf.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
-		PartitionHelper ph = sh.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+		ResourceHelper ph = sh.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
 		ph.setAmount(33, new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
 		KElement e = xjdf.getRoot();
 		final JDFDoc d = xCon.convert(e);
@@ -474,7 +474,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		XJDFHelper h = new XJDFHelper("j1", "root", null);
 		KElement e = h.getRoot();
 		SetHelper sh = h.getCreateResourceSet("Contact", null);
-		PartitionHelper ph = sh.getCreatePartition(0, true);
+		ResourceHelper ph = sh.getCreatePartition(0, true);
 		ph.getResource().setAttribute(AttributeName.CONTACTTYPES, EnumContactType.Customer.getName());
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);

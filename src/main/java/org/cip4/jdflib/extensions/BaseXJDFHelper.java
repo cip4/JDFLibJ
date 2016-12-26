@@ -132,6 +132,19 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 * 
+	 * @param attrib
+	 * @param nameSpaceURI
+	 */
+	public void removeAttribute(String attrib, String nameSpaceURI)
+	{
+		if (theElement != null)
+		{
+			theElement.removeAttribute(attrib, nameSpaceURI);
+		}
+	}
+
+	/**
+	 * 
 	 * @param attName
 	 * @param value
 	 * @return

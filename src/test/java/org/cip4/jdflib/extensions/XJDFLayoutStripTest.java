@@ -96,7 +96,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	public void testStripLayout_BSSep()
 	{
 		bssh = theHelper.getCreateResourceSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
-		PartitionHelper bsh = bssh.appendPartition(new JDFAttributeMap(), true);
+		ResourceHelper bsh = bssh.appendPartition(new JDFAttributeMap(), true);
 		JDFBinderySignature bs = (JDFBinderySignature) bsh.getCreateResource();
 		initBS(bs, 0);
 
@@ -104,7 +104,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		{
 			JDFAttributeMap sheetMap = getSheetMap(1);
 			sheetMap.put("Side", k == 0 ? "Front" : "Back");
-			PartitionHelper loh = losh.appendPartition(sheetMap, true);
+			ResourceHelper loh = losh.appendPartition(sheetMap, true);
 			JDFLayout lo = (JDFLayout) loh.getResource();
 
 			for (int i = 0; i < 8; i++)
@@ -112,7 +112,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 				initContentObject(lo, k * 8 + i);
 			}
 		}
-		PartitionHelper loh = losh.appendPartition(getSheetMap(1), true);
+		ResourceHelper loh = losh.appendPartition(getSheetMap(1), true);
 		JDFLayout lo = (JDFLayout) loh.getResource();
 		for (int i = 0; i < 2; i++)
 		{
@@ -164,7 +164,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		{
 			JDFAttributeMap sheetMap = getSheetMap(1);
 			sheetMap.put("Side", k == 0 ? "Front" : "Back");
-			PartitionHelper loh = losh.appendPartition(sheetMap, true);
+			ResourceHelper loh = losh.appendPartition(sheetMap, true);
 			JDFLayout lo = (JDFLayout) loh.getResource();
 
 			for (int i = 0; i < 8; i++)
@@ -172,7 +172,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 				initContentObject(lo, k * 8 + i);
 			}
 		}
-		PartitionHelper loh = losh.appendPartition(getSheetMap(1), true);
+		ResourceHelper loh = losh.appendPartition(getSheetMap(1), true);
 		JDFLayout lo = (JDFLayout) loh.getResource();
 		JDFBinderySignature bs = (JDFBinderySignature) lo.appendElement(ElementName.BINDERYSIGNATURE);
 		initBS(bs, 0);
@@ -201,10 +201,10 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		for (int k = 0; k < 2; k++)
 		{
 			JDFAttributeMap sheetMap = getSheetMap(k);
-			PartitionHelper loh = losh.appendPartition(sheetMap, true);
+			ResourceHelper loh = losh.appendPartition(sheetMap, true);
 			JDFLayout lo = (JDFLayout) loh.getResource();
 			SetHelper nish = theHelper.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
-			PartitionHelper niph = nish.appendPartition(sheetMap, true);
+			ResourceHelper niph = nish.appendPartition(sheetMap, true);
 			niph.getRoot().setAttribute("AmountGood", 1234, null);
 			SetHelper cush = theHelper.getCreateResourceSet(ElementName.CUSTOMERINFO, EnumUsage.Input);
 			SetHelper cosh = theHelper.getCreateResourceSet(ElementName.CONTACT, EnumUsage.Input);
@@ -227,8 +227,8 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 
 				if (ii < 6)
 				{
-					PartitionHelper cuph = cush.appendPartition(new JDFAttributeMap("Product", "P" + ii), true);
-					PartitionHelper coph = cosh.appendPartition(new JDFAttributeMap("Product", "P" + ii), true);
+					ResourceHelper cuph = cush.appendPartition(new JDFAttributeMap("Product", "P" + ii), true);
+					ResourceHelper coph = cosh.appendPartition(new JDFAttributeMap("Product", "P" + ii), true);
 					coph.getResource().setXMLComment("Contact, Address etc go here");
 					coph.getResource().setAttribute("ContactTypes", "Customer");
 					JDFCustomerInfo ci = (JDFCustomerInfo) cuph.getResource();
@@ -252,7 +252,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		{
 			JDFAttributeMap sheetMap = getSheetMap(1);
 			sheetMap.put("Side", k == 0 ? "Front" : "Back");
-			PartitionHelper loh = losh.appendPartition(sheetMap, true);
+			ResourceHelper loh = losh.appendPartition(sheetMap, true);
 			JDFLayout lo = (JDFLayout) loh.getResource();
 
 			for (int i = 0; i < 8; i++)
@@ -264,7 +264,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 
 			}
 		}
-		PartitionHelper loh = losh.appendPartition(getSheetMap(1), true);
+		ResourceHelper loh = losh.appendPartition(getSheetMap(1), true);
 		JDFLayout lo = (JDFLayout) loh.getResource();
 		JDFBinderySignature bs = (JDFBinderySignature) lo.appendElement(ElementName.BINDERYSIGNATURE);
 		initBS(bs, 0);

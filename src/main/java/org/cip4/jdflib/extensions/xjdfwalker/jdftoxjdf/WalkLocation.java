@@ -73,7 +73,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.resource.JDFLocation;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -114,7 +114,7 @@ public class WalkLocation extends WalkJDFSubElement
 		String locID = loc.getLocID();
 		if (StringUtil.getNonEmpty(locID) != null)
 		{
-			new PartitionHelper(res).setPartMap(new JDFAttributeMap(AttributeName.LOCATION, locID));
+			new ResourceHelper(res).setPartMap(new JDFAttributeMap(AttributeName.LOCATION, locID));
 		}
 		return null;
 	}

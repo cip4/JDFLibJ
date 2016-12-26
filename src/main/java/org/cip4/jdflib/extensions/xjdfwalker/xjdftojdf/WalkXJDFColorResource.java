@@ -72,7 +72,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFPart;
@@ -138,7 +138,7 @@ public class WalkXJDFColorResource extends WalkXJDFResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return PartitionHelper.isAsset(toCheck, ElementName.COLOR);
+		return ResourceHelper.isAsset(toCheck, ElementName.COLOR);
 	}
 
 	/**

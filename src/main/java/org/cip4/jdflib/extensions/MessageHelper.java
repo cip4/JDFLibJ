@@ -73,15 +73,25 @@ import org.cip4.jdflib.core.KElement;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class AuditHelper extends MessageHelper
+public class MessageHelper extends BaseXJDFHelper
 {
 
 	/**
 	 * @param audit
 	 */
-	public AuditHelper(KElement audit)
+	public MessageHelper(KElement audit)
 	{
-		super(audit);
+		theElement = audit;
+	}
+
+	/**
+	 * 
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#cleanUp()
+	 */
+	@Override
+	public void cleanUp()
+	{
+		theElement.getCreateElement(XJDFConstants.HEADER).appendAnchor(null);
 	}
 
 }

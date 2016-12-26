@@ -1931,6 +1931,8 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(2, root.getXPathElementVector("//d", 0).size());
 		assertEquals(2, root.getXPathElementVector("/a/c/d", 0).size());
 		assertEquals("d", root.getXPathElementVector("/a/c/d", 0).elementAt(0).getNodeName());
+		assertEquals(2, root.getXPathElementVector("/*/c/d", 0).size());
+		assertEquals("d", root.getXPathElementVector("/*/c/d", 0).elementAt(0).getNodeName());
 	}
 
 	/**
@@ -3088,7 +3090,7 @@ public class KElementTest extends JDFTestCaseBase
 	public void testPushUp()
 	{
 		{// defines a logical test block
-			// pushup from 4 to 1
+				// pushup from 4 to 1
 			final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 			final JDFNode root = (JDFNode) jdfDoc.getRoot();
 			KElement e = root;
@@ -3103,7 +3105,7 @@ public class KElementTest extends JDFTestCaseBase
 		}
 
 		{// defines a logical test block
-			// pushup with emptystring
+				// pushup with emptystring
 			final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 			final JDFNode root = (JDFNode) jdfDoc.getRoot();
 			KElement e = root;
@@ -3118,7 +3120,7 @@ public class KElementTest extends JDFTestCaseBase
 		}
 
 		{// defines a logical test block
-			// pushup and force parentNode == null
+				// pushup and force parentNode == null
 			final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 			final JDFNode root = (JDFNode) jdfDoc.getRoot();
 			KElement e = root;

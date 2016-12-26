@@ -68,20 +68,151 @@
  */
 package org.cip4.jdflib.extensions;
 
+import java.util.Vector;
+
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.util.ContainerUtil;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class AuditHelper extends MessageHelper
+public class MessagePoolHelper extends BaseXJDFHelper
 {
 
 	/**
-	 * @param audit
+	 * @param pool
 	 */
-	public AuditHelper(KElement audit)
+	public MessagePoolHelper(KElement pool)
 	{
-		super(audit);
+		super(pool);
 	}
 
+	/**
+	 * 
+	 * @param sh
+	 * @return
+	 */
+	public MessageResourceHelper getMessageResourceHelper(SetHelper sh)
+	{
+		String name = sh == null ? null : sh.getName();
+		if (name == null)
+		{
+			return null;
+		}
+		VElement v = theElement.getXPathElementVector("*/ResourceInfo/@ResourceSet[@Name=\"" + name + "\"]", 0);
+		if (v != null)
+		{
+			for (KElement e : v)
+			{
+				SetHelper thisHelper = new SetHelper(e);
+				if (!ContainerUtil.equals(sh.getUsage(), thisHelper.getUsage()))
+					continue;
+				if (!ContainerUtil.equals(sh.getProcessUsage(), thisHelper.getProcessUsage()))
+					continue;
+				KElement message = e.getParentNode_KElement().getParentNode_KElement();
+				return newMessageResourceHelper(message);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 * @param message
+	 * @return
+	 */
+	MessageResourceHelper newMessageResourceHelper(KElement message)
+	{
+		return new MessageResourceHelper(message);
+	}
+
+	/**
+	 * 
+	 * @param sh
+	 * @return
+	 */
+	public MessageResourceHelper getCreateMessageResourceHelper(SetHelper sh)
+	{
+		String name = sh == null ? null : sh.getName();
+		if (name == null)
+		{
+			return null;
+		}
+		MessageResourceHelper ah = getMessageResourceHelper(sh);
+		if (ah == null)
+		{
+			ah = new MessageResourceHelper(theElement.appendElement(XJDFConstants.AuditResource));
+			KElement set = ah.getRoot().appendElement(ElementName.RESOURCEINFO).appendElement(XJDFConstants.ResourceSet);
+			SetHelper shNew = new SetHelper(set);
+			shNew.setName(name);
+			shNew.setUsage(sh.getUsage());
+			shNew.setProcessUsage(sh.getProcessUsage());
+		}
+		ah.cleanUp();
+		return ah;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#cleanUp()
+	 */
+	@Override
+	public void cleanUp()
+	{
+		Vector<MessageHelper> vA = getAuditHelpers();
+		if (vA != null)
+		{
+			for (MessageHelper ah : vA)
+			{
+				ah.cleanUp();
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Vector<MessageHelper> getAuditHelpers()
+	{
+		Vector<MessageHelper> vA = new Vector<MessageHelper>();
+		VElement v = theElement.getChildElementVector(null, null);
+		for (KElement e : v)
+		{
+			vA.add(getMessageHelper(e));
+		}
+		return vA;
+	}
+
+	/**
+	 * 
+	 * @param e
+	 * @return
+	 */
+	public MessageHelper getMessageHelper(KElement e)
+	{
+		if (e == null)
+			return null;
+		String name = e.getLocalName();
+		if (XJDFConstants.AuditResource.equals(name))
+			return newMessageResourceHelper(e);
+		else if (XJDFConstants.AuditStatus.equals(name))
+			return new MessageHelper(e);
+		else
+			return new MessageHelper(e);
+	}
+
+	/**
+	 * 
+	 * @param elementName
+	 * @return
+	 */
+	public MessageHelper appendMessage(String elementName)
+	{
+		KElement e = theElement.appendElement(elementName);
+		MessageHelper messageHelper = getMessageHelper(e);
+		messageHelper.cleanUp();
+		return messageHelper;
+	}
 }

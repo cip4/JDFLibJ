@@ -72,7 +72,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.resource.process.JDFContact;
 
 /**
@@ -112,7 +112,7 @@ public class WalkContact extends WalkResource
 		{
 			c.removeAttribute(AttributeName.CONTACTTYPES);
 			c.renameAttribute(AttributeName.CONTACTTYPEDETAILS, AttributeName.ROLES, null, null);
-			if (!PartitionHelper.isResourceElement(c))
+			if (!ResourceHelper.isResourceElement(c))
 			{
 				c.renameElement(ElementName.EMPLOYEE, null);
 			}

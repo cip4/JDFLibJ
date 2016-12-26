@@ -313,7 +313,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetPartitionByID()
 	{
-		PartitionHelper rlSet = theHelper.getCreateResourceSet("RunList", null).getCreatePartition(0, true);
+		ResourceHelper rlSet = theHelper.getCreateResourceSet("RunList", null).getCreatePartition(0, true);
 		assertEquals(rlSet, theHelper.getPartition("RunList", 0, 0));
 		theHelper.cleanUp();
 		assertEquals(theHelper.getPartition(rlSet.getID()), rlSet);

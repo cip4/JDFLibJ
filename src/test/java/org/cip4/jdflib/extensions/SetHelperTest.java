@@ -164,10 +164,10 @@ public class SetHelperTest extends JDFTestCaseBase
 	{
 		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
-		PartitionHelper ph1 = sh.getPartition(new JDFAttributeMap("SheetName", "S1"));
-		PartitionHelper ph2 = sh.getCreatePartition(new JDFAttributeMap("SheetName", "S1"), true);
+		ResourceHelper ph1 = sh.getPartition(new JDFAttributeMap("SheetName", "S1"));
+		ResourceHelper ph2 = sh.getCreatePartition(new JDFAttributeMap("SheetName", "S1"), true);
 		assertNotSame(ph2, ph1);
-		PartitionHelper ph3 = sh.getPartition(new JDFAttributeMap("SheetName", "S1"));
+		ResourceHelper ph3 = sh.getPartition(new JDFAttributeMap("SheetName", "S1"));
 		assertNotNull(ph3);
 		assertEquals(ph2, ph3);
 	}

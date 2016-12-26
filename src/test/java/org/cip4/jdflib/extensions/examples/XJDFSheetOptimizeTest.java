@@ -75,7 +75,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -117,7 +117,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 			JDFAttributeMap partMap = new JDFAttributeMap("BinderySignatureName", "BS" + i);
 			String sn = "S" + (i / 3);
 			partMap.put("SheetName", sn);
-			PartitionHelper phLO = layout.appendPartition(partMap, true);
+			ResourceHelper phLO = layout.appendPartition(partMap, true);
 			phLO.setAmount(1000, partMap, true);
 			JDFLayout lo = (JDFLayout) phLO.getCreateResource();
 			JDFBinderySignature bs = (JDFBinderySignature) lo.appendElement(ElementName.BINDERYSIGNATURE);
@@ -223,11 +223,11 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 	private void prepareSheetOptimizing()
 	{
 		SetHelper hsSheetOptim = xjdfHelper.getCreateResourceSet("SheetOptimizingParams", EnumUsage.Input);
-		PartitionHelper hpSheetOptim = hsSheetOptim.getCreatePartition(0, true);
+		ResourceHelper hpSheetOptim = hsSheetOptim.getCreatePartition(0, true);
 		sheetOptimizingParams = hpSheetOptim.getCreateResource();
 
 		SetHelper hsCC = xjdfHelper.getCreateResourceSet(ElementName.CONVERTINGCONFIG, EnumUsage.Input);
-		PartitionHelper hpCC = hsCC.getCreatePartition(0, true);
+		ResourceHelper hpCC = hsCC.getCreatePartition(0, true);
 		convertingConfig = (JDFConvertingConfig) hpCC.getCreateResource();
 		convertingConfig.setSheetHeight(700 * 72 / 2.54, 700 * 72 / 2.54);
 		convertingConfig.setSheetWidth(1000 * 72 / 2.54, 1000 * 72 / 2.54);

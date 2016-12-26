@@ -87,7 +87,7 @@ public class AuditHelperTest extends TestCase
 	public void testCleanup()
 	{
 		KElement audit = KElement.createRoot(ElementName.CREATED, null);
-		AuditHelper ah = new AuditHelper(audit);
+		MessageHelper ah = new MessageHelper(audit);
 		ah.cleanUp();
 		assertNotNull(ah);
 	}

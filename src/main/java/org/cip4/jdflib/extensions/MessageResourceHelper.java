@@ -68,20 +68,68 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class AuditHelper extends MessageHelper
+public class MessageResourceHelper extends MessageHelper
 {
 
 	/**
 	 * @param audit
 	 */
-	public AuditHelper(KElement audit)
+	public MessageResourceHelper(KElement audit)
 	{
 		super(audit);
+	}
+
+	/**
+	 * 
+	 * @return the ResourceSet if it exists
+	 */
+	public SetHelper getSet()
+	{
+		KElement resInfo = theElement.getElement(ElementName.RESOURCEINFO);
+		KElement set = resInfo == null ? null : resInfo.getElement(XJDFConstants.ResourceSet);
+		return set == null ? null : new SetHelper(set);
+	}
+
+	/**
+	 * 
+	 * @return 
+	 */
+	public SetHelper getCreateSet()
+	{
+		KElement set = theElement.getCreateElement(ElementName.RESOURCEINFO).getCreateElement(XJDFConstants.ResourceSet);
+		return new SetHelper(set);
+	}
+
+	/**
+	 * 
+	 * @param amount
+	 * @param partMap
+	 * @param bGood
+	 */
+	public void setAmount(double amount, JDFAttributeMap partMap, boolean bGood)
+	{
+		getCreateSet().getCreatePartition(partMap, false).setAmount(amount, null, bGood);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.MessageHelper#cleanUp()
+	 */
+	@Override
+	public void cleanUp()
+	{
+		super.cleanUp();
+		SetHelper sh = getSet();
+		if (sh != null)
+		{
+			sh.removeIDs();
+		}
 	}
 
 }

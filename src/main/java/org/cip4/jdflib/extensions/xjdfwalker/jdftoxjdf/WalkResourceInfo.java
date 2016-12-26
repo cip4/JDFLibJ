@@ -77,7 +77,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
@@ -189,8 +189,8 @@ public class WalkResourceInfo extends WalkJDFSubElement
 		set.moveAttribute(AttributeName.USAGE, ri);
 
 		SetHelper sh = new SetHelper(set);
-		Vector<PartitionHelper> newParts = sh.getCreatePartitions(vPartMap, false);
-		for (PartitionHelper ph : newParts)
+		Vector<ResourceHelper> newParts = sh.getCreatePartitions(vPartMap, false);
+		for (ResourceHelper ph : newParts)
 		{
 			if (ap == null)
 			{

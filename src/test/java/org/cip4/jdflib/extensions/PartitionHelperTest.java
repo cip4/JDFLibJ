@@ -92,7 +92,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 
 		root.getCreateXPathElement("ResourceSet/Resource/Part");
 		KElement m = root.getCreateXPathElement("ResourceSet/Resource/Media");
-		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
+		ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
 		assertEquals(ph.getResource(), m);
 	}
 
@@ -107,10 +107,10 @@ public class PartitionHelperTest extends JDFTestCaseBase
 
 		root.getCreateXPathElement("ResourceSet[@Name=\"Media\"]/Resource/Part");
 		KElement m = root.getCreateXPathElement("ResourceSet/Resource/Media");
-		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
+		ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
 		assertEquals(ph.getResource(), m);
-		assertEquals(PartitionHelper.getHelper(m), ph);
-		assertEquals(PartitionHelper.getHelper(m.getParentNode_KElement()), ph);
+		assertEquals(ResourceHelper.getHelper(m), ph);
+		assertEquals(ResourceHelper.getHelper(m.getParentNode_KElement()), ph);
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 
 		KElement set = root.getCreateXPathElement("ResourceSet");
 		set.getCreateXPathElement("Resource/Part");
-		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
+		ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
 		assertEquals(ph.getSet(), new SetHelper(set));
 	}
 
@@ -142,9 +142,9 @@ public class PartitionHelperTest extends JDFTestCaseBase
 		KElement p = set.getCreateXPathElement("Resource/Part");
 		KElement m = set.getCreateXPathElement("Resource/Media");
 		KElement res = root.getXPathElement("ResourceSet/Resource");
-		assertTrue(PartitionHelper.isAsset(res));
-		assertFalse(PartitionHelper.isAsset(m));
-		assertFalse(PartitionHelper.isAsset(p));
+		assertTrue(ResourceHelper.isAsset(res));
+		assertFalse(ResourceHelper.isAsset(m));
+		assertFalse(ResourceHelper.isAsset(p));
 	}
 
 	/**
@@ -161,11 +161,11 @@ public class PartitionHelperTest extends JDFTestCaseBase
 		KElement p = set.getCreateXPathElement("Resource/Part");
 		KElement m = set.getCreateXPathElement("Resource/Media");
 		KElement res = root.getXPathElement("ResourceSet/Resource");
-		assertTrue(PartitionHelper.isAsset(res, null));
-		assertTrue(PartitionHelper.isAsset(res, "Media"));
-		assertFalse(PartitionHelper.isAsset(res, "ExposedMedia"));
-		assertFalse(PartitionHelper.isAsset(m, "Media"));
-		assertFalse(PartitionHelper.isAsset(p, null));
+		assertTrue(ResourceHelper.isAsset(res, null));
+		assertTrue(ResourceHelper.isAsset(res, "Media"));
+		assertFalse(ResourceHelper.isAsset(res, "ExposedMedia"));
+		assertFalse(ResourceHelper.isAsset(m, "Media"));
+		assertFalse(ResourceHelper.isAsset(p, null));
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 
 		KElement set = root.getCreateXPathElement("ResourceSet");
 		set.getCreateXPathElement("Resource/Part");
-		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
+		ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
 		assertEquals(ph.getXJDF(), new XJDFHelper(root));
 	}
 
@@ -197,9 +197,9 @@ public class PartitionHelperTest extends JDFTestCaseBase
 		KElement p = set.getCreateXPathElement("Resource/Part");
 		KElement m = set.getCreateXPathElement("Resource/Media");
 		KElement res = root.getXPathElement("ResourceSet/Resource");
-		assertFalse(PartitionHelper.isResourceElement(res));
-		assertTrue(PartitionHelper.isResourceElement(m));
-		assertFalse(PartitionHelper.isResourceElement(p));
+		assertFalse(ResourceHelper.isResourceElement(res));
+		assertTrue(ResourceHelper.isResourceElement(m));
+		assertFalse(ResourceHelper.isResourceElement(p));
 	}
 
 	/**
@@ -213,7 +213,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 
 		root.getCreateXPathElement("ResourceSet/Resource/Part");
 		KElement m = root.getCreateXPathElement("ResourceSet/Resource/Media");
-		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
+		ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
 		assertNull(m.getParentNode_KElement().getAttribute("ID", null, null));
 		ph.cleanUp();
 		assertEquals(ph.getPartition().getID(), m.getParentNode_KElement().getAttribute(AttributeName.ID, null, null));
@@ -228,7 +228,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		KElement root = d.getRoot();
 		root.getCreateXPathElement("ResourceSet/Resource/Media");
-		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
+		ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
 		JDFAttributeMap map = new JDFAttributeMap("Drop", "D1");
 		ph.setPartMap(map);
 		assertEquals(ph.getPartMap(), map);
@@ -243,7 +243,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		KElement root = d.getRoot();
 		root.getCreateXPathElement("ResourceSet/Resource/Media");
-		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
+		ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
 		JDFAttributeMap map = new JDFAttributeMap("Drop", "D1");
 		VJDFAttributeMap vMap = new VJDFAttributeMap(map);
 		ph.appendPartMapVector(vMap);
@@ -262,7 +262,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		KElement root = d.getRoot();
 		root.getCreateXPathElement("ResourceSet/Resource/Media");
-		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
+		ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
 		JDFAttributeMap map = new JDFAttributeMap("SheetName", "S1");
 		ph.ensurePart("SheetName", "S1");
 		assertEquals(ph.getPartMap(), map);

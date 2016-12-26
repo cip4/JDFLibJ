@@ -80,7 +80,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
@@ -151,7 +151,7 @@ public class WalkXJDFResource extends WalkXElement
 	private JDFResource getResourceRoot(JDFNode theNode, KElement xjdfRes)
 	{
 		JDFNode newRoot = theNode.getJDFRoot();
-		PartitionHelper ph = new PartitionHelper(xjdfRes);
+		ResourceHelper ph = new ResourceHelper(xjdfRes);
 		SetHelper sh = ph.getSet();
 		final String name = getJDFResName(sh);
 		String processUsage = sh.getProcessUsage();
@@ -374,6 +374,6 @@ public class WalkXJDFResource extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return super.matches(toCheck) && PartitionHelper.isAsset(toCheck);
+		return super.matches(toCheck) && ResourceHelper.isAsset(toCheck);
 	}
 }

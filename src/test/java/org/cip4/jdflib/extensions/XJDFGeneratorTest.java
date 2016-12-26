@@ -106,7 +106,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 		theHelper.getRoot().setXMLComment("Assume incremental adding of an additional 3rd plate");
 		theHelper.getRoot().setAttribute("Types", "PlateMaking");
 		SetHelper rlh = theHelper.getCreateResourceSet("RunList", EnumUsage.Input);
-		PartitionHelper p = rlh.getCreatePartition(null, true);
+		ResourceHelper p = rlh.getCreatePartition(null, true);
 		JDFRunList rl = (JDFRunList) p.getCreateResource();
 		rl.setNPage(48);
 		rlh.getSet().setXMLComment("set the updated total number of pages");
@@ -140,7 +140,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 		theHelper.getRoot().setXMLComment("Added Varnishing - how do we differentiate varnishing only from add varnishing\n");
 		theHelper.getRoot().setAttribute("Types", "Varnishing");
 		SetHelper rlh = theHelper.getCreateResourceSet(ElementName.VARNISHINGPARAMS, EnumUsage.Input);
-		PartitionHelper p = rlh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
+		ResourceHelper p = rlh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		//		JDFVarnishingParams vp = (JDFRunList) p.getCreateResource();
 		//		rl.setNPage(48);
 	}
@@ -187,7 +187,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 		theHelper.getRoot().setXMLComment("Assume incremental removal of an existing 3rd plate");
 		theHelper.getRoot().setAttribute("Types", "PlateMaking");
 		SetHelper rlh = theHelper.getCreateResourceSet("RunList", EnumUsage.Input);
-		PartitionHelper p = rlh.getCreatePartition(null, true);
+		ResourceHelper p = rlh.getCreatePartition(null, true);
 		JDFRunList rl = (JDFRunList) p.getCreateResource();
 		rl.setNPage(32);
 		rlh.getSet().setXMLComment("set the updated reduced total number of pages");
@@ -213,7 +213,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 
 		theHelper.removeSet(ElementName.NODEINFO);
 		SetHelper nih = theHelper.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
-		PartitionHelper p = nih.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
+		ResourceHelper p = nih.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		JDFNodeInfo ni = (JDFNodeInfo) p.getCreateResource();
 		ni.setAttribute("AmountGood", 10000, null);
 
@@ -233,7 +233,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 		SetHelper nih = theHelper.appendResourceSet("NodeInfo", null);
 		nih.setUsage(EnumUsage.Input);
 		JDFAttributeMap sheetMap = new JDFAttributeMap("SheetName", "S1");
-		PartitionHelper niS1 = nih.getCreatePartition(sheetMap, true);
+		ResourceHelper niS1 = nih.getCreatePartition(sheetMap, true);
 		KElement ni = niS1.getResource();
 		ni.setAttribute("Amount", "5000");
 
@@ -243,7 +243,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 
 		SetHelper mediaSetHelper = theHelper.appendResourceSet(ElementName.MEDIA, null);
 		mediaSetHelper.setUsage(EnumUsage.Input);
-		PartitionHelper mediaHelper = mediaSetHelper.getCreatePartition(sheetMap, true);
+		ResourceHelper mediaHelper = mediaSetHelper.getCreatePartition(sheetMap, true);
 		KElement mediaPart = mediaHelper.getPartition();
 		mediaPart.setAttribute("Brand", "TestBrand");
 		mediaPart.setAttribute("ProductID", "ID");
@@ -253,7 +253,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 
 		SetHelper compSetHelper = theHelper.appendResourceSet(ElementName.COMPONENT, null);
 		compSetHelper.setUsage(EnumUsage.Output);
-		PartitionHelper compHelper = compSetHelper.getCreatePartition(sheetMap, true);
+		ResourceHelper compHelper = compSetHelper.getCreatePartition(sheetMap, true);
 		KElement compPart = compHelper.getPartition();
 		compPart.setAttribute("ProductID", "ComponentID");
 		compHelper.getResource().setAttribute("MediaRef", mediaPart.getAttribute("ID"));

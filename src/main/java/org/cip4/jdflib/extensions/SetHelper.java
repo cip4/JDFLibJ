@@ -146,10 +146,10 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param map
 	 * @return 
 	 */
-	public PartitionHelper getPartition(JDFAttributeMap map)
+	public ResourceHelper getPartition(JDFAttributeMap map)
 	{
-		Vector<PartitionHelper> v = getPartitions();
-		for (PartitionHelper ph : v)
+		Vector<ResourceHelper> v = getPartitions();
+		for (ResourceHelper ph : v)
 		{
 			if (ph.matches(map))
 			{
@@ -163,9 +163,9 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param index
 	 * @return 
 	 */
-	public PartitionHelper getPartition(int index)
+	public ResourceHelper getPartition(int index)
 	{
-		Vector<PartitionHelper> v = getPartitions();
+		Vector<ResourceHelper> v = getPartitions();
 		if (index < 0)
 			index += v.size();
 		if (index >= v.size())
@@ -178,9 +178,9 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param addRes 
 	 * @return 
 	 */
-	public PartitionHelper getCreatePartition(JDFAttributeMap map, boolean addRes)
+	public ResourceHelper getCreatePartition(JDFAttributeMap map, boolean addRes)
 	{
-		PartitionHelper e = getPartition(map);
+		ResourceHelper e = getPartition(map);
 		if (e == null)
 		{
 			e = appendPartition(map, addRes);
@@ -200,10 +200,10 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param addRes 
 	 * @return 
 	 */
-	public PartitionHelper getCreateVPartition(VJDFAttributeMap vmap, boolean addRes)
+	public ResourceHelper getCreateVPartition(VJDFAttributeMap vmap, boolean addRes)
 	{
 		JDFAttributeMap map = vmap != null && !vmap.isEmpty() ? vmap.get(0) : null;
-		PartitionHelper e = getPartition(map);
+		ResourceHelper e = getPartition(map);
 		if (e == null)
 		{
 			e = appendPartition(map, addRes);
@@ -224,9 +224,9 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param addRes
 	 * @return
 	 */
-	public PartitionHelper insertPartitionBefore(PartitionHelper e, JDFAttributeMap map, boolean addRes)
+	public ResourceHelper insertPartitionBefore(ResourceHelper e, JDFAttributeMap map, boolean addRes)
 	{
-		PartitionHelper e2 = appendPartition(map, addRes);
+		ResourceHelper e2 = appendPartition(map, addRes);
 		if (e != null)
 		{
 			KElement e3 = e.getPartition();
@@ -242,14 +242,14 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param addRes 
 	 * @return 
 	 */
-	public Vector<PartitionHelper> getCreatePartitions(VJDFAttributeMap vmap, boolean addRes)
+	public Vector<ResourceHelper> getCreatePartitions(VJDFAttributeMap vmap, boolean addRes)
 	{
 		if (vmap == null)
 		{
 			vmap = new VJDFAttributeMap();
 			vmap.add(null);
 		}
-		Vector<PartitionHelper> vp = new Vector<PartitionHelper>();
+		Vector<ResourceHelper> vp = new Vector<ResourceHelper>();
 		for (JDFAttributeMap m : vmap)
 		{
 			vp.add(getCreatePartition(m, addRes));
@@ -262,9 +262,9 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param addRes 
 	 * @return 
 	 */
-	public PartitionHelper getCreatePartition(int index, boolean addRes)
+	public ResourceHelper getCreatePartition(int index, boolean addRes)
 	{
-		Vector<PartitionHelper> v = getPartitions();
+		Vector<ResourceHelper> v = getPartitions();
 		int size = v.size();
 		if (index < 0)
 			index += size;
@@ -280,7 +280,7 @@ public class SetHelper extends BaseXJDFHelper
 		}
 		if (size != v.size())
 			v = getPartitions();
-		PartitionHelper ph = v.get(index);
+		ResourceHelper ph = v.get(index);
 		if (addRes)
 			ph.getCreateResource();
 		return ph;
@@ -291,11 +291,37 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public void removePartitions()
 	{
-		Vector<PartitionHelper> v = getPartitions();
-		for (PartitionHelper ph : v)
+		Vector<ResourceHelper> v = getPartitions();
+		for (ResourceHelper ph : v)
 		{
 			ph.getPartition().deleteNode();
 		}
+	}
+
+	/**
+	 * convenience ... @see {@link SetHelper#appendPartition(JDFAttributeMap, boolean)}
+	 * 
+	 * @param partKey
+	 * @param partValue
+	 * @param addRes
+	 * @return
+	 */
+	public ResourceHelper appendPartition(String partKey, String partValue, boolean addRes)
+	{
+		return appendPartition(new JDFAttributeMap(partKey, partValue), addRes);
+	}
+
+	/**
+	 * convenience ... @see {@link SetHelper#getCreatePartition(JDFAttributeMap, boolean)}
+	 * 
+	 * @param partKey
+	 * @param partValue
+	 * @param addRes
+	 * @return
+	 */
+	public ResourceHelper getCreatePartition(String partKey, String partValue, boolean addRes)
+	{
+		return getCreatePartition(new JDFAttributeMap(partKey, partValue), addRes);
 	}
 
 	/**
@@ -303,10 +329,10 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param addRes if true, also add the detailed resource element, e.g. Layout
 	 * @return
 	 */
-	public PartitionHelper appendPartition(JDFAttributeMap partMap, boolean addRes)
+	public ResourceHelper appendPartition(JDFAttributeMap partMap, boolean addRes)
 	{
 		KElement newPart = theElement.appendElement(getPartitionName());
-		PartitionHelper partitionHelper = new PartitionHelper(newPart);
+		ResourceHelper partitionHelper = new ResourceHelper(newPart);
 		partitionHelper.cleanUp();
 		if (partMap != null && partMap.size() > 0)
 		{
@@ -347,16 +373,16 @@ public class SetHelper extends BaseXJDFHelper
 	/**
 	 * @return the vector of partition helpers 
 	 */
-	public Vector<PartitionHelper> getPartitions()
+	public Vector<ResourceHelper> getPartitions()
 	{
 		VElement v = theElement.getChildElementVector(getPartitionName(), null);
 
-		Vector<PartitionHelper> v2 = new Vector<PartitionHelper>();
+		Vector<ResourceHelper> v2 = new Vector<ResourceHelper>();
 		if (v != null)
 		{
 			for (KElement e : v)
 			{
-				v2.add(new PartitionHelper(e));
+				v2.add(new ResourceHelper(e));
 			}
 		}
 		return v2;
@@ -372,10 +398,10 @@ public class SetHelper extends BaseXJDFHelper
 		{
 			theElement.setAttribute(AttributeName.NAME, getName());
 		}
-		Vector<PartitionHelper> kids = getPartitions();
+		Vector<ResourceHelper> kids = getPartitions();
 		if (kids != null)
 		{
-			for (PartitionHelper kid : kids)
+			for (ResourceHelper kid : kids)
 			{
 				kid.cleanUp();
 			}
@@ -391,8 +417,8 @@ public class SetHelper extends BaseXJDFHelper
 		String name = theElement.getAttribute(AttributeName.NAME, null, null);
 		if (name == null)
 		{
-			Vector<PartitionHelper> v = getPartitions();
-			for (PartitionHelper ph : v)
+			Vector<ResourceHelper> v = getPartitions();
+			for (ResourceHelper ph : v)
 			{
 				KElement res = ph.getResource();
 				if (res != null)
@@ -440,10 +466,10 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param vmap
 	 * @return
 	 */
-	public PartitionHelper getPartition(VJDFAttributeMap vmap)
+	public ResourceHelper getPartition(VJDFAttributeMap vmap)
 	{
-		Vector<PartitionHelper> v = getPartitions();
-		for (PartitionHelper ph : v)
+		Vector<ResourceHelper> v = getPartitions();
+		for (ResourceHelper ph : v)
 		{
 			if (ph.matches(vmap))
 			{
@@ -457,11 +483,11 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param vmap
 	 * @return
 	 */
-	public Vector<PartitionHelper> getPartitions(VJDFAttributeMap vmap)
+	public Vector<ResourceHelper> getPartitions(VJDFAttributeMap vmap)
 	{
-		Vector<PartitionHelper> v = getPartitions();
-		Vector<PartitionHelper> vRet = new Vector<PartitionHelper>();
-		for (PartitionHelper ph : v)
+		Vector<ResourceHelper> v = getPartitions();
+		Vector<ResourceHelper> vRet = new Vector<ResourceHelper>();
+		for (ResourceHelper ph : v)
 		{
 			if (ph.matches(vmap))
 			{
@@ -475,11 +501,11 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param map
 	 * @return
 	 */
-	public Vector<PartitionHelper> getPartitions(JDFAttributeMap map)
+	public Vector<ResourceHelper> getPartitions(JDFAttributeMap map)
 	{
-		Vector<PartitionHelper> v = getPartitions();
-		Vector<PartitionHelper> vRet = new Vector<PartitionHelper>();
-		for (PartitionHelper ph : v)
+		Vector<ResourceHelper> v = getPartitions();
+		Vector<ResourceHelper> vRet = new Vector<ResourceHelper>();
+		for (ResourceHelper ph : v)
 		{
 			if (ph.matches(map))
 			{
@@ -550,7 +576,7 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param id
 	 * @return
 	 */
-	public PartitionHelper getPartition(String id)
+	public ResourceHelper getPartition(String id)
 	{
 		if (id == null)
 			return null;
@@ -559,7 +585,7 @@ public class SetHelper extends BaseXJDFHelper
 		while (e != null)
 		{
 			if (id.equals(e.getID()))
-				return new PartitionHelper(e);
+				return new ResourceHelper(e);
 			e = e.getNextSiblingElement(partitionName, null);
 		}
 		return null;
@@ -587,10 +613,10 @@ public class SetHelper extends BaseXJDFHelper
 	{
 		String oldID = getID();
 		super.setID(newID);
-		Vector<PartitionHelper> parts = getPartitions();
+		Vector<ResourceHelper> parts = getPartitions();
 		if (parts != null)
 		{
-			for (PartitionHelper part : parts)
+			for (ResourceHelper part : parts)
 			{
 				String partID = part.getID();
 				partID = StringUtil.replaceString(partID, oldID, newID);
@@ -605,9 +631,9 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public VJDFAttributeMap getPartMapVector()
 	{
-		Vector<PartitionHelper> vph = getPartitions();
+		Vector<ResourceHelper> vph = getPartitions();
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
-		for (PartitionHelper ph : vph)
+		for (ResourceHelper ph : vph)
 		{
 			vMap.addAll(ph.getPartMapVector());
 		}
@@ -641,5 +667,19 @@ public class SetHelper extends BaseXJDFHelper
 	public void setName(String name)
 	{
 		setAttribute(AttributeName.NAME, name);
+	}
+
+	public void removeIDs()
+	{
+		removeAttribute(AttributeName.ID, null);
+		Vector<ResourceHelper> v = getPartitions();
+		if (v != null)
+		{
+			for (ResourceHelper ph : v)
+			{
+				ph.removeAttribute(AttributeName.ID, null);
+			}
+		}
+
 	}
 }

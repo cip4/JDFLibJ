@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -66,54 +66,59 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.examples;
 
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.AuditPoolHelper;
+import org.cip4.jdflib.extensions.MessageResourceHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.resource.process.JDFMedia;
+import org.junit.Test;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen 
  * 
- * walker for the colorSet - this gets translated back to a colorpool
+ * @author rainer prosi
+ *
  */
-public class WalkXJDFContactResource extends WalkXJDFResource
+public class XJDFAuditTest extends JDFTestCaseBase
 {
 	/**
 	 * 
 	 */
-	public WalkXJDFContactResource()
+	@Test
+	public void testResourceAudit()
 	{
-		super();
+		XJDFHelper xjdfHelper = new XJDFHelper("PaperAudit", null, null);
+		SetHelper shMedia = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
+		ResourceHelper rh = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
+		rh.setAmount(400, null, true);
+		JDFMedia m = (JDFMedia) rh.getResource();
+		m.setWeight(80);
+		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/PaperAudit.xjdf");
+		AuditPoolHelper ah = xjdfHelper.getCreateAuditPool();
+		MessageResourceHelper mrh = ah.getCreateMessageResourceHelper(shMedia);
+		SetHelper aSet = mrh.getSet();
+		rh = aSet.getCreatePartition(AttributeName.SHEETNAME, "S1", true);
+		rh.setAmount(400, null, true);
+		rh.setAmount(21, null, false);
+		m = (JDFMedia) rh.getResource();
+		m.setWeight(90);
+		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/PaperAuditActual.xjdf");
 	}
 
 	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#getJDFResName(org.cip4.jdflib.extensions.SetHelper)
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
-	protected String getJDFResName(SetHelper sh)
+	protected void setUp() throws Exception
 	{
-		return ElementName.EMPLOYEE;
+		super.setUp();
+		KElement.setLongID(false);
 	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		boolean isContact = ResourceHelper.isAsset(toCheck, ElementName.CONTACT);
-		if (isContact)
-		{
-			String types = toCheck.getXPathAttribute("Contact/@ContactTypes", null);
-			isContact = StringUtil.hasToken(types, ElementName.EMPLOYEE, null, 0);
-		}
-		return isContact;
-	}
-
 }

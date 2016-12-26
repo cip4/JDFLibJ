@@ -97,6 +97,6 @@ public class XJDFBaseGoldenTicketTest extends JDFTestCaseBase
 	public void testSimple()
 	{
 		XJDFBaseGoldenTicket bt = new XJDFBaseGoldenTicket(1, EnumVersion.Version_2_0);
-		bt.getXJDFHelper().writeToFile(sm_dirTestDataTemp + "xjdf/BaseGT.xjdf");
+		bt.writeToFile(sm_dirTestDataTemp + "xjdf/BaseGT.xjdf");
 	}
 }

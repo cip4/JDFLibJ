@@ -100,7 +100,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		XJDFHelper h = new XJDFHelper("j1", "root", null);
 		h.setTypes("ImageSetting PreviewGeneration ConventionalPrinting Cutting Folding");
 		SetHelper s = h.appendResourceSet("Media", EnumUsage.Input);
-		PartitionHelper p = s.appendPartition(null, true);
+		ResourceHelper p = s.appendPartition(null, true);
 		((JDFMedia) p.getResource()).setMediaType(EnumMediaType.Plate);
 
 		s = h.appendResourceSet("ExposedMedia", null);
@@ -143,7 +143,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		XJDFHelper h = new XJDFHelper("j1", "root", null);
 		h.setTypes((String) null);
 		SetHelper s = h.appendResourceSet("Media", EnumUsage.Input);
-		PartitionHelper p = s.appendPartition(null, true);
+		ResourceHelper p = s.appendPartition(null, true);
 		((JDFMedia) p.getResource()).setMediaType(EnumMediaType.Plate);
 
 		XJDFToJDFConverter c = new XJDFToJDFConverter(null);

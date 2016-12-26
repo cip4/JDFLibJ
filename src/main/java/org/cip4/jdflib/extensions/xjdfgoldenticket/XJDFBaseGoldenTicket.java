@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,7 +77,6 @@ import org.cip4.jdflib.extensions.XJDFHelper;
  */
 public class XJDFBaseGoldenTicket
 {
-	protected int baseICSLevel;
 	protected EnumVersion theVersion;
 
 	/**
@@ -87,7 +86,6 @@ public class XJDFBaseGoldenTicket
 	public XJDFBaseGoldenTicket(XJDFBaseGoldenTicket parent)
 	{
 		helper = new XJDFHelper(null, null, null);
-		this.baseICSLevel = parent.baseICSLevel;
 		this.theVersion = parent.theVersion;
 	}
 
@@ -96,8 +94,7 @@ public class XJDFBaseGoldenTicket
 	 */
 	public VString getICSVersions()
 	{
-		final String icsTag = "Base_L" + baseICSLevel + "-" + theVersion.getName();
-		return new VString(icsTag, null);
+		return new VString();
 	}
 
 	/**
@@ -107,7 +104,6 @@ public class XJDFBaseGoldenTicket
 	 */
 	public XJDFBaseGoldenTicket(int baseICSLevel, EnumVersion jdfVersion)
 	{
-		this.baseICSLevel = baseICSLevel;
 		this.theVersion = jdfVersion;
 		helper = new XJDFHelper(null, null, null);
 		helper.getRoot().setAttribute(AttributeName.ICSVERSIONS, getICSVersions(), null);
@@ -121,5 +117,15 @@ public class XJDFBaseGoldenTicket
 	public XJDFHelper getXJDFHelper()
 	{
 		return helper;
+	}
+
+	/**
+	 * @param file
+	 * @return
+	 * @see org.cip4.jdflib.extensions.XJDFHelper#writeToFile(java.lang.String)
+	 */
+	public boolean writeToFile(String file)
+	{
+		return helper.writeToFile(file);
 	}
 }

@@ -74,7 +74,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.resource.JDFResource;
 
@@ -155,7 +155,7 @@ public class WalkColorPoolRef extends WalkRefElement
 		if (!jdfToXJDF.isRetainAll() && vRes != null && vRes.size() > 0)
 		{
 			KElement res = vRes.get(0);
-			PartitionHelper ph = new PartitionHelper(res);
+			ResourceHelper ph = new ResourceHelper(res);
 			SetHelper sh = ph.getSet();
 			if (sh != null && sh.getUsage() == null)
 			{

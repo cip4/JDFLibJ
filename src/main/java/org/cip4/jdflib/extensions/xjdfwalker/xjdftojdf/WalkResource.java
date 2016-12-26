@@ -69,7 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
@@ -93,7 +93,7 @@ public class WalkResource extends WalkXElement
 	public boolean matches(final KElement toCheck)
 	{
 		// test on grandparent
-		return super.matches(toCheck) && PartitionHelper.isResourceElement(toCheck);
+		return super.matches(toCheck) && ResourceHelper.isResourceElement(toCheck);
 	}
 
 }

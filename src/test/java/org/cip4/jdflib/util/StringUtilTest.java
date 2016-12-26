@@ -1087,7 +1087,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.replaceToken(s2, 2, "/", null), "//a/b");
 		final String s3 = "a";
 		assertEquals(StringUtil.replaceToken(s3, 0, "/", "A"), "A");
-		assertEquals(StringUtil.replaceToken(s3, 0, "/", null), "");
+		assertNull(StringUtil.replaceToken(s3, 0, "/", null));
 		final String s4 = "a_b";
 		assertEquals(StringUtil.replaceToken(s4, 0, "_", "c"), "c_b");
 		assertEquals(StringUtil.replaceToken(s4, 0, "_", null), "b");

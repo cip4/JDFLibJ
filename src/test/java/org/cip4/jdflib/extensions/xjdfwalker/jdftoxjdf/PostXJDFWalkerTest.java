@@ -62,7 +62,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
@@ -79,7 +79,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	{
 		XJDFHelper h = new XJDFHelper("a", "p", null);
 		SetHelper sni = h.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
-		PartitionHelper pi = sni.getCreatePartition(null, true);
+		ResourceHelper pi = sni.getCreatePartition(null, true);
 		pi.setAmount(42, null, true);
 		pi.setAmount(2, null, false);
 
@@ -96,7 +96,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	{
 		XJDFHelper h = new XJDFHelper("a", "p", null);
 		SetHelper sni = h.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
-		PartitionHelper pi = sni.getCreatePartition(null, true);
+		ResourceHelper pi = sni.getCreatePartition(null, true);
 		pi.setAmount(42, null, true);
 		pi.getAmountPool().getPartAmount(0).setActualAmount(66);
 
