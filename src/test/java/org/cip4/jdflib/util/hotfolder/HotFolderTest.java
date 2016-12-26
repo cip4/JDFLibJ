@@ -467,7 +467,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		fos.close();
 		fos2.close();
 
-		for (int i = 0; i < 60 && file.exists(); i++)
+		for (int i = 1; i < 160 && file.exists(); i++)
 		{
 			ThreadUtil.sleep(100);
 		}
