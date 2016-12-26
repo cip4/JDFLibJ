@@ -545,7 +545,7 @@ public class KElement extends ElementNSImpl implements Element
 
 					if (!key.equals(nodeName))
 					{ // overwrite default namespace with qualified
-						// namespace or vice versa
+							// namespace or vice versa
 						super.setAttributeNS(nameSpaceURI, key, value);
 					}
 					else
@@ -664,13 +664,13 @@ public class KElement extends ElementNSImpl implements Element
 							// already there
 							if (key.equals(nodeName))
 							{ // overwrite default namespace with qualified
-								// namespace or vice versa
+									// namespace or vice versa
 								removeAttribute(nodeName);
 								super.setAttribute(key, value);
 							}
 							else
 							{ // same qualified name, simply overwrite the
-								// value
+									// value
 								a.setNodeValue(value);
 							}
 						}
@@ -2749,7 +2749,7 @@ public class KElement extends ElementNSImpl implements Element
 		// we had a change - update
 		if (n > 0)
 		{
-			strAttrValue = strAttrValue.trim();
+			strAttrValue = strAttrValue == null ? null : strAttrValue.trim();
 			setAttribute(key, StringUtil.getNonEmpty(strAttrValue), nameSpaceURI);
 		}
 

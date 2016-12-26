@@ -71,7 +71,9 @@ package org.cip4.jdflib.extensions;
 import org.cip4.jdflib.core.KElement;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * superclass for audits and messages
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class MessageHelper extends BaseXJDFHelper
 {
