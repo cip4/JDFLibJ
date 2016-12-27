@@ -237,7 +237,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		file.createNewFile();
 		assertTrue(file.exists());
 
-		for (int i = 0; i < 45 && file.exists(); i++)
+		for (int i = 0; i < 145 && file.exists(); i++)
 		{
 			ThreadUtil.sleep(1000);
 		}

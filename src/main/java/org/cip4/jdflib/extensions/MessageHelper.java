@@ -68,7 +68,9 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.util.JDFDate;
 
 /**
  * superclass for audits and messages
@@ -93,7 +95,28 @@ public class MessageHelper extends BaseXJDFHelper
 	@Override
 	public void cleanUp()
 	{
-		theElement.getCreateElement(XJDFConstants.HEADER).appendAnchor(null);
+		ensureHeader(theElement);
+	}
+
+	/**
+	 * 
+	 * @param message
+	 * @return
+	 */
+	static KElement ensureHeader(KElement message)
+	{
+		KElement header = message.getCreateElement(XJDFConstants.HEADER);
+		header.appendAnchor(null);
+		if (!header.hasAttribute(AttributeName.TIME))
+		{
+			header.setAttribute(AttributeName.TIME, new JDFDate().getDateTimeISO());
+		}
+		KElement next = message.getFirstChildElement();
+		if (next != header)
+		{
+			message.insertBefore(header, next);
+		}
+		return header;
 	}
 
 }

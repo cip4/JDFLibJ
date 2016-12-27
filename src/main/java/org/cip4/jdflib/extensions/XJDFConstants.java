@@ -108,6 +108,9 @@ public abstract class XJDFConstants
 
 	public static final String LooseBinding = "LooseBinding";
 
+	public static final String ModifyQueueEntry = "ModifyQueueEntry";
+	public static final String ModifyQueueEntryParams = "ModifyQueueEntryParams";
+
 	public static final String Parent = "Parent";
 	public static final String ParentID = "ParentID";
 	public static final String PlacedObject = "PlacedObject";
@@ -130,4 +133,5 @@ public abstract class XJDFConstants
 
 	public static final String XJDF = "XJDF";
 	public static final String XJMF = "XJMF";
+
 }

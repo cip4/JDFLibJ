@@ -66,162 +66,95 @@
  * <http://www.cip4.org/>.
  *
  */
+
 package org.cip4.jdflib.extensions;
 
-import java.util.Vector;
+import java.io.File;
 
-import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.util.JDFDate;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class MessagePoolHelper extends BaseXJDFHelper
+public class XJMFHelperTest extends JDFTestCaseBase
 {
+	XJMFHelper theHelper = null;
 
 	/**
-	 * @param pool
-	 */
-	public MessagePoolHelper(KElement pool)
+	 * @see junit.framework.TestCase#setUp()
+	 * @throws Exception if snafu
+	*/
+	@Before
+	@Override
+	public void setUp() throws Exception
 	{
-		super(pool);
+		super.setUp();
+		KElement.setLongID(false);
+		theHelper = new XJMFHelper();
 	}
 
 	/**
 	 * 
-	 * @param sh
-	 * @return
 	 */
-	public MessageResourceHelper getMessageResourceHelper(SetHelper sh)
+	@Test
+	public void testAddMessage()
 	{
-		String name = sh == null ? null : sh.getName();
-		if (name == null)
-		{
-			return null;
-		}
-		VElement v = theElement.getXPathElementVector("*/ResourceInfo/@ResourceSet[@Name=\"" + name + "\"]", 0);
-		if (v != null)
-		{
-			for (KElement e : v)
-			{
-				SetHelper thisHelper = new SetHelper(e);
-				if (!ContainerUtil.equals(sh.getUsage(), thisHelper.getUsage()))
-					continue;
-				if (!ContainerUtil.equals(sh.getProcessUsage(), thisHelper.getProcessUsage()))
-					continue;
-				KElement message = e.getParentNode_KElement().getParentNode_KElement();
-				return newMessageResourceHelper(message);
-			}
-		}
-		return null;
+		MessageHelper mh = theHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry);
+		assertEquals("CommandSubmitQueueEntry", mh.getRoot().getLocalName());
 	}
 
 	/**
 	 * 
-	 * @param message
-	 * @return
 	 */
-	MessageResourceHelper newMessageResourceHelper(KElement message)
+	@Test
+	public void testHeaderID()
 	{
-		return new MessageResourceHelper(message);
+		assertNotNull(theHelper.getXPathValue("Header/@ID"));
 	}
 
 	/**
 	 * 
-	 * @param sh
-	 * @return
 	 */
-	public MessageResourceHelper getCreateMessageResourceHelper(SetHelper sh)
+	@Test
+	public void testHeaderID2()
 	{
-		String name = sh == null ? null : sh.getName();
-		if (name == null)
-		{
-			return null;
-		}
-		MessageResourceHelper ah = getMessageResourceHelper(sh);
-		if (ah == null)
-		{
-			ah = new MessageResourceHelper(theElement.appendElement(XJDFConstants.AuditResource));
-			KElement set = ah.getRoot().appendElement(ElementName.RESOURCEINFO).appendElement(XJDFConstants.ResourceSet);
-			SetHelper shNew = new SetHelper(set);
-			shNew.setName(name);
-			shNew.setUsage(sh.getUsage());
-			shNew.setProcessUsage(sh.getProcessUsage());
-		}
-		ah.cleanUp();
-		return ah;
+		assertNull(theHelper.getXPathElement("Header/Header"));
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#cleanUp()
+	 * 
+	 */
+	@Test
+	public void testHeaderDate()
+	{
+		assertNotNull(JDFDate.createDate(theHelper.getXPathValue("Header/@Time")));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testWriteToFile()
+	{
+		theHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry);
+		File file = new File(sm_dirTestDataTemp + "xjmf.xjmf");
+		file.delete();
+		theHelper.writeToFile(sm_dirTestDataTemp + "xjmf.xjmf");
+		assertTrue(file.exists());
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public void cleanUp()
+	public String toString()
 	{
-		Vector<MessageHelper> vA = getAuditHelpers();
-		if (vA != null)
-		{
-			for (MessageHelper ah : vA)
-			{
-				ah.cleanUp();
-			}
-		}
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public Vector<MessageHelper> getAuditHelpers()
-	{
-		Vector<MessageHelper> vA = new Vector<MessageHelper>();
-		VElement v = theElement.getChildElementVector(null, null);
-		for (KElement e : v)
-		{
-			if (!XJDFConstants.HEADER.equals(e.getLocalName()))
-			{
-				vA.add(getMessageHelper(e));
-			}
-		}
-		return vA;
-	}
-
-	/**
-	 * 
-	 * @param e
-	 * @return
-	 */
-	public MessageHelper getMessageHelper(KElement e)
-	{
-		if (e == null)
-			return null;
-		String name = e.getLocalName();
-		if (XJDFConstants.AuditResource.equals(name))
-			return newMessageResourceHelper(e);
-		else if (XJDFConstants.AuditStatus.equals(name))
-			return new MessageHelper(e);
-		else
-			return new MessageHelper(e);
-	}
-
-	/**
-	 * 
-	 * @param elementName
-	 * @return
-	 */
-	public MessageHelper appendMessage(String elementName)
-	{
-		if (StringUtil.getNonEmpty(elementName) == null)
-		{
-			log.error("Cannot append null element");
-			return null;
-		}
-		KElement e = theElement.appendElement(elementName);
-		MessageHelper messageHelper = getMessageHelper(e);
-		messageHelper.cleanUp();
-		return messageHelper;
+		return "XJMFHelperTest [theHelper=" + theHelper + "]";
 	}
 }

@@ -68,8 +68,13 @@
  */
 package org.cip4.jdflib.extensions;
 
+import java.io.IOException;
+import java.io.OutputStream;
+
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 
 public class XJMFHelper extends MessagePoolHelper
 {
@@ -91,6 +96,77 @@ public class XJMFHelper extends MessagePoolHelper
 	{
 		super(new JDFDoc(XJDFConstants.XJMF).getRoot());
 		cleanUp();
+	}
+
+	/**
+	 * 
+	 * @param family
+	 * @param typ
+	 * @return
+	 */
+	public MessageHelper appendMessage(EnumFamily family, EnumType typ)
+	{
+		if (family == null || typ == null)
+			return null;
+
+		return appendMessage(getMessageName(family, typ.getName()));
+	}
+
+	/**
+	 * 
+	 * @param family
+	 * @param typ
+	 * @return
+	 */
+	public MessageHelper appendMessage(EnumFamily family, String typ)
+	{
+		if (family == null || typ == null)
+			return null;
+
+		return appendMessage(getMessageName(family, typ));
+	}
+
+	/**
+	 * 
+	 * @param family
+	 * @param typ
+	 * @return
+	 */
+	private String getMessageName(EnumFamily family, String typ)
+	{
+		return family.getName() + typ;
+	}
+
+	/**
+	 * @param file
+	 * @return 
+	 */
+	public boolean writeToFile(String file)
+	{
+		cleanUp();
+		boolean b = getRoot().getOwnerDocument_KElement().write2File(file, 2, false);
+		return b;
+	}
+
+	/**
+	 * 
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#cleanUp()
+	 */
+	@Override
+	public void cleanUp()
+	{
+		super.cleanUp();
+		MessageHelper.ensureHeader(theElement);
+	}
+
+	/**
+	 * @param os
+	 * @throws IOException 
+	 */
+	public void writeToStream(OutputStream os) throws IOException
+	{
+		cleanUp();
+		getRoot().getOwnerDocument_KElement().write2Stream(os, 2, false);
 	}
 
 }

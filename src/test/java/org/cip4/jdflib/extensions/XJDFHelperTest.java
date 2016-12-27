@@ -81,6 +81,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.FileUtil;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -453,6 +454,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 * @see junit.framework.TestCase#setUp()
 	 * @throws Exception if snafu
 	*/
+	@Before
 	@Override
 	public void setUp() throws Exception
 	{
