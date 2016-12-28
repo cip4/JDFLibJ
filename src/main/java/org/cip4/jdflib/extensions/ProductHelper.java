@@ -145,7 +145,7 @@ public class ProductHelper extends BaseXJDFHelper
 	 */
 	public IntentHelper appendIntent(String name)
 	{
-		KElement intent = theElement.appendElement(XJDFConstants.INTENT);
+		KElement intent = theElement.appendElement(XJDFConstants.Intent);
 		intent.appendElement(name);
 		intent.setAttribute(AttributeName.NAME, name);
 		return new IntentHelper(intent);
@@ -157,7 +157,7 @@ public class ProductHelper extends BaseXJDFHelper
 	 */
 	public IntentHelper getIntent(String name)
 	{
-		KElement intent = theElement.getChildWithAttribute(XJDFConstants.INTENT, AttributeName.NAME, null, name, 0, true);
+		KElement intent = theElement.getChildWithAttribute(XJDFConstants.Intent, AttributeName.NAME, null, name, 0, true);
 		return intent == null ? null : new IntentHelper(intent);
 	}
 

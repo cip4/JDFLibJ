@@ -285,4 +285,24 @@ public abstract class BaseXJDFHelper
 		return getClass().getSimpleName() + ": " + theElement;
 	}
 
+	/**
+	 * @param elementName
+	 * @return
+	 * @see org.cip4.jdflib.core.KElement#appendElement(java.lang.String)
+	 */
+	public KElement appendElement(String elementName)
+	{
+		return theElement == null ? null : theElement.appendElement(elementName);
+	}
+
+	/**
+	 * @param nodeName
+	 * @return
+	 * @see org.cip4.jdflib.core.KElement#getCreateElement(java.lang.String)
+	 */
+	public KElement getCreateElement(String nodeName)
+	{
+		return theElement == null ? null : theElement.getCreateElement(nodeName);
+	}
+
 }

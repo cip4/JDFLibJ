@@ -451,7 +451,7 @@ public class XJDFTest extends JDFTestCaseBase
 		KElement firstChildElement = xjdf.getFirstChildElement();
 		if (xjdf20.isTypeSafeMessage())
 		{
-			assertEquals(firstChildElement.getLocalName(), XJDFConstants.HEADER);
+			assertEquals(firstChildElement.getLocalName(), XJDFConstants.Header);
 			assertEquals(firstChildElement.getNextSiblingElement().getLocalName(), "QueryStatus");
 		}
 		else

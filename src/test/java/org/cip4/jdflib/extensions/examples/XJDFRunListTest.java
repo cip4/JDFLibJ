@@ -74,9 +74,14 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.resource.process.JDFExpr;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFMetadataMap;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Test;
 
 /**
@@ -102,7 +107,56 @@ public class XJDFRunListTest extends JDFTestCaseBase
 		SetHelper shNI = xjdfHelper.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
 		shNI.removePartitions();
 		shNI.appendPartition(new JDFAttributeMap(AttributeName.RUNINDEX, "0 3"), true);
-		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/testFilterRunIndex.xjdf");
+		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/FilterRunIndex.xjdf");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testFileTemplate()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, "Format", null);
+		SetHelper shRL = xjdfHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Input);
+		JDFFileSpec fs = (JDFFileSpec) shRL.appendPartition(null, true).getResource().appendElement(ElementName.FILESPEC);
+		fs.setFileFormat("file://myserver/next/%s/m%4.i.pdf");
+		fs.setFileTemplate("JobID,i");
+		fs.setMimeType(UrlUtil.APPLICATION_PDF);
+		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/FileFormat.xjdf");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testMetaDataMap()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, "Metadata", null);
+		SetHelper shRL = xjdfHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Input);
+		JDFRunList runList = (JDFRunList) shRL.appendPartition(null, true).getResource();
+		JDFFileSpec fs = (JDFFileSpec) runList.appendElement(ElementName.FILESPEC);
+		fs.setURL("file://host/file/data.pdf");
+		JDFMetadataMap md = (JDFMetadataMap) runList.appendElement(ElementName.METADATAMAP);
+		md.setName("MetaData");
+		md.setValueFormat("%s_%s");
+		md.setValueTemplate("gender,status");
+		JDFExpr x = md.appendExpr();
+		x.setName("gender");
+		x.setPath("/doc/record/Geschlecht");
+		x = md.appendExpr();
+		x.setName("status");
+		x.setPath("/doc/record/Status");
+
+		SetHelper shComp = xjdfHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Input);
+		ResourceHelper rh = shComp.appendPartition("MetaData", "Mann_Platin", true);
+		rh.setExternalID("BlueGoodPaper");
+		rh = shComp.appendPartition("MetaData", "Mann(.)*", true);
+		rh.setExternalID("BlueCheapPaper");
+		rh = shComp.appendPartition("MetaData", "Frau_Platin", true);
+		rh.setExternalID("PinkGoodPaper");
+		rh = shComp.appendPartition("MetaData", "Frau_(.)*", true);
+		rh.setExternalID("PinkCheapPaper");
+		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/MetaData.xjdf");
 	}
 
 	/**

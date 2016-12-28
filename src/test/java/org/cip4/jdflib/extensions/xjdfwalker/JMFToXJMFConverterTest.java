@@ -150,7 +150,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceQuery(true);
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjmf = conv.makeNewJMF(jmf);
-		KElement sender = xjmf.getElement(XJDFConstants.HEADER);
+		KElement sender = xjmf.getElement(XJDFConstants.Header);
 		assertNotNull(sender);
 		assertEquals(jmf.getID(), sender.getID());
 	}
@@ -184,7 +184,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceQuery(true);
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjmf = conv.makeNewJMF(jmf);
-		KElement sender = xjmf.getElement(XJDFConstants.HEADER);
+		KElement sender = xjmf.getElement(XJDFConstants.Header);
 		assertNotNull(sender);
 		assertEquals(jmf.getTimeStamp().getDateTimeISO(), sender.getAttribute(AttributeName.TIME));
 	}
@@ -199,7 +199,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		jmf.setSenderID("s1");
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjmf = conv.makeNewJMF(jmf);
-		KElement sender = xjmf.getElement(XJDFConstants.HEADER);
+		KElement sender = xjmf.getElement(XJDFConstants.Header);
 		assertNotNull(sender);
 		assertEquals(jmf.getSenderID(), sender.getAttribute(AttributeName.DEVICEID));
 	}

@@ -119,7 +119,7 @@ public class IntentHelperTest extends TestCase
 	@Test
 	public void testIsIntent()
 	{
-		KElement intent = new JDFDoc(XJDFConstants.INTENT).getRoot();
+		KElement intent = new JDFDoc(XJDFConstants.Intent).getRoot();
 		intent.setAttribute("Name", "foo");
 		KElement foo = intent.appendElement("foo");
 		KElement c = intent.appendElement(ElementName.COMMENT);

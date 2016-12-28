@@ -87,7 +87,7 @@ public class IntentHelper extends BaseXJDFHelper
 	 */
 	public static boolean bSpanAsAttribute = true;
 
-	public static final String INTENT = XJDFConstants.INTENT;
+	public static final String INTENT = XJDFConstants.Intent;
 
 	/**
 	 * @param intent

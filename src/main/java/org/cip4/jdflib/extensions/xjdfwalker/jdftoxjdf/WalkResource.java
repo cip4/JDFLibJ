@@ -150,7 +150,7 @@ public class WalkResource extends WalkJDFElement
 	private boolean isRootXJDFResource(final KElement xjdf)
 	{
 		final String localName = xjdf == null ? null : xjdf.getLocalName();
-		final boolean bRoot = XJDFConstants.INTENT.equals(localName) || "Parameter".equals(localName) || XJDFConstants.Resource.equals(localName);
+		final boolean bRoot = XJDFConstants.Intent.equals(localName) || "Parameter".equals(localName) || XJDFConstants.Resource.equals(localName);
 		return bRoot;
 	}
 

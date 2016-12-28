@@ -1101,7 +1101,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public KElement walk(KElement xjdf, KElement dummy)
 		{
-			KElement intent = xjdf.getElement(XJDFConstants.INTENT);
+			KElement intent = xjdf.getElement(XJDFConstants.Intent);
 			if (!bIntentPartition && intent != null)
 			{
 				intent.copyAttribute(AttributeName.NAME, xjdf);
@@ -1863,7 +1863,7 @@ class PostXJDFWalker extends BaseElementWalker
 		protected void reorderElements(KElement xjdf)
 		{
 			super.reorderElements(xjdf);
-			KElement header = xjdf.removeChild(XJDFConstants.HEADER, null, 0);
+			KElement header = xjdf.removeChild(XJDFConstants.Header, null, 0);
 			if (header != null)
 			{
 				xjdf.insertBefore(header, xjdf.getFirstChild());
@@ -1917,7 +1917,7 @@ class PostXJDFWalker extends BaseElementWalker
 		protected void reorderElements(KElement xjdf)
 		{
 			super.reorderElements(xjdf);
-			KElement header = xjdf.removeChild(XJDFConstants.HEADER, null, 0);
+			KElement header = xjdf.removeChild(XJDFConstants.Header, null, 0);
 			if (header != null)
 			{
 				xjdf.insertBefore(header, xjdf.getFirstChild());
@@ -1970,7 +1970,7 @@ class PostXJDFWalker extends BaseElementWalker
 		protected void reorderElements(KElement xjdf)
 		{
 			super.reorderElements(xjdf);
-			KElement header = xjdf.removeChild(XJDFConstants.HEADER, null, 0);
+			KElement header = xjdf.removeChild(XJDFConstants.Header, null, 0);
 			if (header != null)
 			{
 				xjdf.insertBefore(header, xjdf.getFirstChild());
@@ -1987,7 +1987,7 @@ class PostXJDFWalker extends BaseElementWalker
 	{
 		if (xjdf != null)
 		{
-			JDFElement sender = (JDFElement) xjdf.getCreateElement(XJDFConstants.HEADER);
+			JDFElement sender = (JDFElement) xjdf.getCreateElement(XJDFConstants.Header);
 			sender.moveAttribute(AttributeName.AGENTNAME, xjdf);
 			sender.moveAttribute(AttributeName.AGENTVERSION, xjdf);
 			sender.moveAttribute(AttributeName.AUTHOR, xjdf);

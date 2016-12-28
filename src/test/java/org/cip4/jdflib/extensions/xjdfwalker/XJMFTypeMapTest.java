@@ -102,7 +102,7 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 		KElement xjmfResp = new XMLDoc(XJDFConstants.XJMF, null).getRoot();
 		KElement response = xjmfResp.appendElement("ResponseModifyQueueEntry");
 		response.appendAnchor(null);
-		response.getCreateElement(XJDFConstants.HEADER).copyAttribute(AttributeName.REFID, command.getElement(XJDFConstants.HEADER), AttributeName.ID, null, null);
+		response.getCreateElement(XJDFConstants.Header).copyAttribute(AttributeName.REFID, command.getElement(XJDFConstants.Header), AttributeName.ID, null, null);
 		assertEquals(1, XJMFTypeMap.getMap().size());
 		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		JDFDoc newDoc = xc.convert(xjmfResp);
@@ -128,7 +128,7 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 		KElement xjmfResp = new XMLDoc(XJDFConstants.XJMF, null).getRoot();
 		KElement response = xjmfResp.appendElement("ResponsePipeControl");
 		response.appendAnchor(null);
-		response.getCreateElement(XJDFConstants.HEADER).copyAttribute(AttributeName.REFID, command.getElement(XJDFConstants.HEADER), AttributeName.ID, null, null);
+		response.getCreateElement(XJDFConstants.Header).copyAttribute(AttributeName.REFID, command.getElement(XJDFConstants.Header), AttributeName.ID, null, null);
 		assertEquals(1, XJMFTypeMap.getMap().size());
 		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		JDFDoc newDoc = xc.convert(xjmfResp);

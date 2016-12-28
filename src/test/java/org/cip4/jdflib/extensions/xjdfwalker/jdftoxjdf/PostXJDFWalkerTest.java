@@ -175,7 +175,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	{
 		KElement x = new JDFDoc(XJDFConstants.XJMF, EnumVersion.Version_2_0).getRoot();
 		KElement c = x.appendElement("CommandSubmitQueueEntry");
-		KElement h = x.appendElement(XJDFConstants.HEADER);
+		KElement h = x.appendElement(XJDFConstants.Header);
 		PostXJDFWalker w = new PostXJDFWalker((JDFElement) x);
 		w.walkTree(x, null);
 		assertEquals(x.getElement(null), h);
@@ -190,7 +190,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	{
 		KElement x = new JDFDoc(XJDFConstants.XJMF, EnumVersion.Version_2_0).getRoot();
 		KElement c = x.appendElement("CommandSubmitQueueEntry");
-		KElement h = c.appendElement(XJDFConstants.HEADER);
+		KElement h = c.appendElement(XJDFConstants.Header);
 		KElement h2 = c.appendElement(XJDFConstants.AssemblingIntent);
 		PostXJDFWalker w = new PostXJDFWalker((JDFElement) x);
 		w.walkTree(x, null);

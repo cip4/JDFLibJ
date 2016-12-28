@@ -468,4 +468,22 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 		return getAttribute(AttributeName.BRAND);
 	}
 
+	/**
+	 * 
+	 * @param externalID
+	 */
+	public void setExternalID(String externalID)
+	{
+		setAttribute(XJDFConstants.ExternalID, externalID);
+	}
+
+	/**
+	 * 
+	 * @return the externalID
+	 */
+	public String getExternalID()
+	{
+		return getAttribute(XJDFConstants.ExternalID);
+	}
+
 }

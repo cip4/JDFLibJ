@@ -96,7 +96,7 @@ public class WalkJMFTest extends JDFTestCaseBase
 
 		KElement xjmf = new JDFToXJDF().convert(jmf);
 
-		KElement sender = xjmf.getElement(XJDFConstants.HEADER);
+		KElement sender = xjmf.getElement(XJDFConstants.Header);
 		assertNull(sender.getNonEmpty(AttributeName.SENDERID));
 		assertEquals(sender.getNonEmpty(AttributeName.DEVICEID), "s1");
 	}

@@ -181,7 +181,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 		VElement v = theElement.getChildElementVector(null, null);
 		for (KElement e : v)
 		{
-			if (!XJDFConstants.HEADER.equals(e.getLocalName()))
+			if (!XJDFConstants.Header.equals(e.getLocalName()))
 			{
 				vA.add(getMessageHelper(e));
 			}

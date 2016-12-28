@@ -70,6 +70,8 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.jmf.JMFBuilder;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
@@ -95,6 +97,7 @@ public class MessageHelper extends BaseXJDFHelper
 	@Override
 	public void cleanUp()
 	{
+		super.cleanUp();
 		ensureHeader(theElement);
 	}
 
@@ -105,11 +108,24 @@ public class MessageHelper extends BaseXJDFHelper
 	 */
 	static KElement ensureHeader(KElement message)
 	{
-		KElement header = message.getCreateElement(XJDFConstants.HEADER);
+		KElement header = message.getCreateElement(XJDFConstants.Header);
 		header.appendAnchor(null);
 		if (!header.hasAttribute(AttributeName.TIME))
 		{
 			header.setAttribute(AttributeName.TIME, new JDFDate().getDateTimeISO());
+		}
+		JMFBuilder jmfBuilder = JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF);
+		if (!header.hasAttribute(AttributeName.DEVICEID))
+		{
+			header.setAttribute(AttributeName.DEVICEID, jmfBuilder.getSenderID());
+		}
+		if (!header.hasAttribute(AttributeName.AGENTNAME))
+		{
+			header.setAttribute(AttributeName.AGENTNAME, jmfBuilder.getAgentName());
+		}
+		if (!header.hasAttribute(AttributeName.AGENTVERSION))
+		{
+			header.setAttribute(AttributeName.AGENTVERSION, jmfBuilder.getAgentVersion());
 		}
 		KElement next = message.getFirstChildElement();
 		if (next != header)

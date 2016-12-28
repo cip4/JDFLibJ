@@ -85,7 +85,7 @@ public class MessagePoolHelperTest extends JDFTestCaseBase
 		KElement auditPool = KElement.createRoot(ElementName.AUDIT, null);
 		AuditPoolHelper ah = new AuditPoolHelper(auditPool);
 		MessageHelper created = ah.appendMessage(XJDFConstants.AuditCreated);
-		assertNotNull(created.getXPathElement(XJDFConstants.HEADER));
+		assertNotNull(created.getXPathElement(XJDFConstants.Header));
 		assertNotNull(created);
 	}
 

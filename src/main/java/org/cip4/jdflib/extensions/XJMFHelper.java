@@ -72,6 +72,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -94,7 +95,18 @@ public class XJMFHelper extends MessagePoolHelper
 	 */
 	public XJMFHelper()
 	{
-		super(new JDFDoc(XJDFConstants.XJMF).getRoot());
+		super(null);
+		newXJMF();
+	}
+
+	/**
+	 * 
+	 */
+	void newXJMF()
+	{
+		JDFDoc doc = new JDFDoc(XJDFConstants.XJMF, EnumVersion.Version_2_0);
+		doc.setInitOnCreate(false);
+		theElement = doc.getRoot();
 		cleanUp();
 	}
 

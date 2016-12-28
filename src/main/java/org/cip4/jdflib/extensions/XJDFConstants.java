@@ -99,11 +99,11 @@ public abstract class XJDFConstants
 	public static final String FolioFrom = "FolioFrom";
 	public static final String FolioTo = "FolioTo";
 
-	public static final String HEADER = "Header";
+	public static final String Header = "Header";
 	public static final String HolePattern = "HolePattern";
 
 	public static final String InkType = "InkType";
-	public static final String INTENT = "Intent";
+	public static final String Intent = "Intent";
 	public static final String IsRoot = "IsRoot";
 
 	public static final String LooseBinding = "LooseBinding";
@@ -133,5 +133,6 @@ public abstract class XJDFConstants
 
 	public static final String XJDF = "XJDF";
 	public static final String XJMF = "XJMF";
+	public static final String XJMFURL = "XJMFURL";
 
 }
