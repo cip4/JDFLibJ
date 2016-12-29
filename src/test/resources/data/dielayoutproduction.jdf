@@ -1,0 +1,34 @@
+<!-- DieLayoutProduction Sample
+Date:Sept 2007 Version: 1.00
+Single Shape is repeated on a range of alternative sheet sizes.
+-->
+<JDF xmlns="http://www.CIP4.org/JDFSchema_1_1" ID="n001"
+Type="DieLayoutProduction" Status="Waiting" JobPartID="ID234"
+DescriptiveName="Single shape versus a set of sheet sizes"
+Version="1.4">
+<ResourcePool>
+<ShapeDef Class="Parameter" ID="Shape1Up" Status="Available">
+<FileSpec URL="file://myserver/myshare/olive.dd3"/>
+</ShapeDef>
+<!-- Layout can chose from 2 stock sheet sizes. Nesting with 2nd row
+rotated and secondary gutters. Rotate against grain/flute
+is not allowed.
+-->
+<DieLayoutProductionParams Class="Parameter" ID="LayParam"
+Status="Available">
+<ConvertingConfig SheetWidth="2834.64 ~ 2834.64"
+SheetHeight="2267.72 ~ 2267.72"/>
+<ConvertingConfig SheetWidth="3401.57 ~ 3401.57"
+SheetHeight="2834.64 ~ 2834.64"/>
+<RepeatDesc GutterY="0.0" GutterY2="14.17" AllowedRotate="None"
+LayoutStyle="Reverse2ndRow"/>
+</DieLayoutProductionParams>
+<!-- The layout with minimum waste will be returned as the final result. -->
+<DieLayout Class="Parameter" ID="DieLay" Status="Unavailable"/>
+</ResourcePool>
+<ResourceLinkPool>
+<ShapeDefLink rRef="Shape1Up" Usage="Input"/>
+<DieLayoutProductionParamsLink rRef="LayParam" Usage="Input"/>
+<DieLayoutLink rRef="DieLay" Usage="Output"/>
+</ResourceLinkPool>
+</JDF>
