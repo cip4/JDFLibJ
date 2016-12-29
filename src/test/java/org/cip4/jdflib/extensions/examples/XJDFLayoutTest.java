@@ -66,78 +66,73 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.examples;
 
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
+import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFMatrix;
-import org.cip4.jdflib.datatypes.JDFRectangle;
-import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.resource.process.JDFCutBlock;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.ResourceHelper;
+import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.resource.process.JDFBinderySignature;
+import org.cip4.jdflib.resource.process.JDFLayout;
+import org.junit.Test;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+ * @author rainer prosi
+ *
  */
-public class WalkCutBlock extends WalkXElement
+public class XJDFLayoutTest extends JDFTestCaseBase
 {
 	/**
 	 * 
 	 */
-	public WalkCutBlock()
+	@Test
+	public void testIDPSimplex()
 	{
-		super();
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return new VString(ElementName.CUTBLOCK, null);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return toCheck instanceof JDFCutBlock;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public KElement walk(KElement e, KElement trackElem)
-	{
-		String box = e.getNonEmpty(AttributeName.BOX);
-		JDFRectangle r = JDFRectangle.createRectangle(box);
-		if (r != null)
-		{
-			copyToTrf((JDFCutBlock) e, r);
-		}
-		return super.walk(e, trackElem);
+		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Simplex", null);
+		xjdfHelper.setTypes("Stripping");
+		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		ResourceHelper rh = shLO.appendPartition(null, true);
+		JDFLayout lo = (JDFLayout) rh.getResource();
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.getName());
+		lo.setAutomated(true);
+		lo.appendElement(ElementName.POSITION);
+		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/LayoutSimplex.xjdf");
 	}
 
 	/**
 	 * 
-	 * @param cutBlock
-	 * @param r
 	 */
-	private void copyToTrf(JDFCutBlock cutBlock, JDFRectangle r)
+	@Test
+	public void testStrippingF16()
 	{
-		JDFMatrix blockTrf = JDFMatrix.getUnitMatrix();
-		blockTrf.shift(r.getLL());
-		cutBlock.setBlockTrf(blockTrf);
-		JDFXYPair size = r.getSize();
-		cutBlock.setBlockSize(size);
-		cutBlock.removeAttribute(AttributeName.BOX);
+		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
+		xjdfHelper.setTypes("Stripping");
+		SetHelper shBS = xjdfHelper.getCreateResourceSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		ResourceHelper rhBS = shBS.appendPartition(null, true);
+		JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
+		bs.setFoldCatalog("F16-6");
+		bs.setBinderySignatureType(EnumBinderySignatureType.Fold);
+
+		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		for (int i = 1; i <= 3; i++)
+		{
+			rhBS.appendPartMap(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "bs" + i));
+			ResourceHelper rh = shLO.appendPartition(AttributeName.SHEETNAME, "sheet" + i, true);
+			JDFLayout lo = (JDFLayout) rh.getResource();
+			lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndBack.getName());
+			KElement pos = lo.appendElement(ElementName.POSITION);
+			pos.setAttribute(XJDFConstants.BinderySignatureID, "bs" + i);
+		}
+		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/LayoutF166.xjdf");
 	}
 
 }

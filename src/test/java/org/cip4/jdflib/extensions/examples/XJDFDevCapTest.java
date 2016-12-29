@@ -87,8 +87,9 @@ import org.junit.Test;
 public class XJDFDevCapTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 * @deprecated we now use schema
 	 */
+	@Deprecated
 	@Test
 	public void testTestPool1()
 	{

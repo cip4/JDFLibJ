@@ -80,12 +80,14 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFNumberRange;
 import org.cip4.jdflib.extensions.IntentHelper;
-import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -103,6 +105,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
+import org.cip4.jdflib.resource.process.JDFDieLayoutProductionParams;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
@@ -157,6 +160,25 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNull(ccNew.getColorantParams());
 		assertEquals(ccNew.getColorantOrder().getSeparations(), new VString("Cyan Black", null));
 		assertNull(ccNew.getDeviceColorantOrder());
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@Test
+	public void testConvertingConfig()
+	{
+		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "dielayoutproduction.jdf");
+
+		JDFToXJDF xjdf20 = new JDFToXJDF();
+		xjdf20.setSingleNode(true);
+		KElement xjdf = xjdf20.makeNewJDF(n, null);
+		XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		JDFDoc docjdf = conv.convert(xjdf);
+		assertNotNull(xjdf);
+		JDFDieLayoutProductionParams dlp = (JDFDieLayoutProductionParams) docjdf.getJDFRoot().getResource(ElementName.DIELAYOUTPRODUCTIONPARAMS, null, 0);
+		assertEquals(JDFNumberRange.createNumberRange("2267.72 ~ 2267.72"), dlp.getConvertingConfig(0).getSheetHeight());
 	}
 
 	/**

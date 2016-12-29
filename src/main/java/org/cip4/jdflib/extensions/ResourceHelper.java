@@ -224,8 +224,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 		{
 			for (JDFAttributeMap part : vPart)
 			{
-				final KElement p = theElement.appendElement(ElementName.PART, null);
-				p.setAttributes(part);
+				appendPartMap(part);
 			}
 		}
 	}
@@ -246,10 +245,19 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 		{
 			for (JDFAttributeMap part : vPart)
 			{
-				final KElement p = theElement.appendElement(ElementName.PART, null);
-				p.setAttributes(part);
+				appendPartMap(part);
 			}
 		}
+	}
+
+	/**
+	 * 
+	 * @param part
+	 */
+	public void appendPartMap(JDFAttributeMap part)
+	{
+		final KElement p = theElement.appendElement(ElementName.PART, null);
+		p.setAttributes(part);
 	}
 
 	/**

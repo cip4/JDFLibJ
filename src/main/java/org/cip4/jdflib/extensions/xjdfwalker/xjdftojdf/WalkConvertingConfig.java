@@ -72,31 +72,19 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFMatrix;
-import org.cip4.jdflib.datatypes.JDFRectangle;
-import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.resource.process.JDFCutBlock;
+import org.cip4.jdflib.resource.process.JDFConvertingConfig;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkCutBlock extends WalkXElement
+public class WalkConvertingConfig extends WalkXElement
 {
 	/**
 	 * 
 	 */
-	public WalkCutBlock()
+	public WalkConvertingConfig()
 	{
 		super();
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return new VString(ElementName.CUTBLOCK, null);
 	}
 
 	/**
@@ -107,37 +95,44 @@ public class WalkCutBlock extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFCutBlock;
+		return toCheck instanceof JDFConvertingConfig;
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
 	 */
 	@Override
-	public KElement walk(KElement e, KElement trackElem)
+	public VString getElementNames()
 	{
-		String box = e.getNonEmpty(AttributeName.BOX);
-		JDFRectangle r = JDFRectangle.createRectangle(box);
-		if (r != null)
-		{
-			copyToTrf((JDFCutBlock) e, r);
-		}
-		return super.walk(e, trackElem);
+		return new VString(ElementName.CONVERTINGCONFIG, null);
 	}
 
 	/**
-	 * 
-	 * @param cutBlock
-	 * @param r
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
 	 */
-	private void copyToTrf(JDFCutBlock cutBlock, JDFRectangle r)
+	@Override
+	protected void updateAttributes(KElement elem)
 	{
-		JDFMatrix blockTrf = JDFMatrix.getUnitMatrix();
-		blockTrf.shift(r.getLL());
-		cutBlock.setBlockTrf(blockTrf);
-		JDFXYPair size = r.getSize();
-		cutBlock.setBlockSize(size);
-		cutBlock.removeAttribute(AttributeName.BOX);
+		super.updateAttributes(elem);
+		for (String key : new String[] { AttributeName.SHEETHEIGHT, AttributeName.SHEETWIDTH })
+		{
+			String s = elem.getNonEmpty(key + "Min");
+			String s2 = elem.getNonEmpty(key + "Max");
+			if (s == null)
+			{
+				s = s2;
+			}
+			if (s2 == null)
+			{
+				s2 = s;
+			}
+			if (s != null)
+			{
+				elem.removeAttribute(key + "Min");
+				elem.removeAttribute(key + "Max");
+				elem.setAttribute(key, s + " ~ " + s2);
+			}
+		}
 	}
 
 }

@@ -96,8 +96,8 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.IntentHelper;
-import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
@@ -261,6 +261,23 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/MediaIntent/@MediaQuality", null), "foo");
 		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/MediaIntent/Brightness"));
 		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/MediaIntent/@Brightness"));
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@Test
+	public void testConvertingConfig()
+	{
+		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "dielayoutproduction.jdf");
+
+		JDFToXJDF xjdf20 = new JDFToXJDF();
+		xjdf20.setSingleNode(true);
+		KElement xjdf = xjdf20.makeNewJDF(n, null);
+		xjdf.write2File(sm_dirTestDataTemp + "dielayoutproduction.xjdf");
+		assertNotNull(xjdf);
+		assertEquals("2267.72", xjdf.getXPathAttribute("ResourceSet/Resource/DieLayoutProductionParams/ConvertingConfig/@SheetHeightMax", null));
 	}
 
 	/**
