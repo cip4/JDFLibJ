@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -203,7 +203,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 	{
 		for (int strm = 0; strm < 3; strm++)
 		{
-			doc = new JDFDoc("JDF");
+			doc = new JDFDoc(ElementName.JDF);
 			n = doc.getJDFRoot();
 			n.setType(EnumType.Combined);
 			n.setTypes(new VString("Interpreting Reendering DigitalPrinting", null));
@@ -247,7 +247,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 					fs.appendContainer().refElement(fsContainer);
 				}
 			}
-			doc.write2File(sm_dirTestDataTemp + "PDFVTStream.jdf" + strm + ".jdf", 2, false);
+			writeTest(doc, "PDFVTStream.jdf" + strm + ".jdf");
 		}
 	}
 
@@ -273,10 +273,10 @@ public class DigiPrintTest extends JDFTestCaseBase
 		JDFResourceLink rll2 = n.ensureLink(ruLi, EnumUsage.Input, null);
 		rll2.setCombinedProcessIndex(pos + 1);
 		rll2.setMinStatus(EnumResStatus.Available);
-		jdfDoc.write2File(sm_dirTestDataTemp + "HoldRIP.jdf", 2, false);
+		writeTest(jdfDoc, "HoldRIP.jdf");
 		rll2.setMinStatus(EnumResStatus.Unavailable);
 		rll2.setPipeResume(5);
-		jdfDoc.write2File(sm_dirTestDataTemp + "PipeRIP.jdf", 2, false);
+		writeTest(jdfDoc, "PipeRIP.jdf");
 	}
 
 	/**
@@ -301,7 +301,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 		JDFResourceLink rll2 = n.ensureLink(apSuc, EnumUsage.Input, null);
 		rll2.setCombinedProcessIndex(pos);
 		rll2.setMinStatus(EnumResStatus.Available);
-		jdfDoc.write2File(sm_dirTestDataTemp + "HoldQRIP.jdf", 2, false);
+		writeTest(jdfDoc, "HoldQRIP.jdf");
 	}
 
 	/**
@@ -344,7 +344,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 				}
 			}
 		}
-		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "RIPPipePushSheetMeta.jmf", 2, false);
+		writeTest(jmf, "RIPPipePushSheetMeta.jmf");
 	}
 
 	/**
@@ -389,7 +389,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 		pt3.copyElement(mpJob, null);
 		pt3.copyElement(mpPrint, null);
 
-		doc.write2File(sm_dirTestDataTemp + "DigiPrintModuleUpdate.jdf", 2, false);
+		writeTest(doc, "DigiPrintModuleUpdate.jdf");
 	}
 
 	/**
@@ -530,7 +530,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 			}
 			jmf.setDescriptiveName("Phase when the Printer and Finisher have completed");
 			jmfDoc.write2File(sm_dirTestDataTemp + "moduleStatus" + testType + "3.jmf", 2, false);
-			doc.write2File(sm_dirTestDataTemp + "DigiPrintModule.1.4" + testType + ".jdf", 2, false);
+			writeTest(doc, "DigiPrintModule.1.4" + testType + ".jdf");
 		}
 	}
 
@@ -775,7 +775,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 		JDFRunList body = (JDFRunList) rl.addPartition(EnumPartIDKey.DocTags, "Body");
 		JDFNode print = n.addCombined(new VString("DigitalPrinting", null));
 		print.ensureLink(rl, EnumUsage.Input, null);
-		jdfDoc.write2File(sm_dirTestDataTemp + "BookletPipeRunList.jdf", 2, false);
+		writeTest(jdfDoc, "BookletPipeRunList.jdf");
 	}
 
 	/**
@@ -879,7 +879,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 				}
 			}
 		}
-		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "RIPPipePushRunListSet.jmf", 2, false);
+		writeTest(jmf, "RIPPipePushRunListSet.jmf");
 	}
 
 	JDFAttributeMap createRunListPartition(int set, String cb, int sheet, String fb, String sep, JDFPipeParams pp)

@@ -240,7 +240,8 @@ public class ContentCreationTest extends PreflightTest
 		textSrc.setText("Laurum Ipsum Blah blah blah!\n btw. this is unformatted plain text and nothing else!");
 
 		//TODO fix back conversion		writeRoundTrip(n, "LayoutPositionObj");
-		d.write2File(sm_dirTestDataTemp + File.separator + "LayoutPositionObj.jdf", 2, false);
+		//		d.write2File(sm_dirTestDataTemp + File.separator + "LayoutPositionObj.jdf", 2, false);
+		writeTest(n, "LayoutPositionObj.jdf");
 	}
 
 	/**

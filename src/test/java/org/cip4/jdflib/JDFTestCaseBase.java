@@ -72,8 +72,6 @@ package org.cip4.jdflib;
 import java.io.File;
 import java.net.URL;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -95,6 +93,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
+import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
@@ -105,6 +104,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.logging.LogConfigurator;
 import org.cip4.jdflib.util.net.ProxyUtil;
 import org.cip4.jdflib.util.net.UrlCheck;
@@ -112,6 +112,8 @@ import org.cip4.jdflib.util.thread.RegularJanitor;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+
+import junit.framework.TestCase;
 
 /**
  * base class for JDFLib test case classes
@@ -336,13 +338,31 @@ public abstract class JDFTestCaseBase extends TestCase
 
 	/**
 	 * 
+	 * @param d
+	 * @param filename
+	 */
+	protected void writeTest(JDFDoc d, String filename)
+	{
+		writeTest(d.getRoot(), filename);
+	}
+
+	/**
+	 * 
 	 * write an element to the standard test directory sm_dirTestDataTemp
 	 * @param e
 	 * @param filename
 	 */
 	protected void writeTest(KElement e, String filename)
 	{
-		e.write2File(sm_dirTestDataTemp + filename);
+		e.write2File(sm_dirTestDataTemp + "jdfexamples/" + filename);
+		String ext = UrlUtil.extension(filename);
+		if (!ext.startsWith("x"))
+		{
+			ext = "x" + ext;
+			JDFToXJDF conv = new JDFToXJDF();
+			KElement x = conv.convert(e);
+			x.write2File(sm_dirTestDataTemp + "xjdfexamples/" + UrlUtil.newExtension(filename, ext));
+		}
 	}
 
 	/**

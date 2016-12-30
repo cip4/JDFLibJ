@@ -1,4 +1,73 @@
 /*
+ * The CIP4 Software License, Version 1.0
+ *
+ *
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
+ *
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
+ *
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *
+ *
+ */
+/*
  * JDFExampleDocTest.java
  * 
  * @author muchadie
@@ -31,6 +100,7 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Test;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * tests for CAD production 
@@ -58,23 +128,23 @@ public class CADTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testStatusJMF()
+	public void testCompletedJMF()
 	{
 		createShapeDefProduction();
 		StatusCounter sc = new StatusCounter(null, null, null);
 		sc.setDeviceID("EngView");
 		JDFDoc dJMF = sc.getDocJMFPhaseTime();
-		dJMF.write2File(sm_dirTestDataTemp + File.separator + "Idle.jmf", 2, false);
+		writeTest(dJMF, "Idle.jmf");
 		sc.setActiveNode(n, null, null);
 		sc.setPhase(EnumNodeStatus.InProgress, "Processing", EnumDeviceStatus.Running, "inUse");
 		dJMF = sc.getDocJMFPhaseTime();
-		dJMF.write2File(sm_dirTestDataTemp + File.separator + "Running.jmf", 2, false);
+		writeTest(dJMF, "Running.jmf");
 		sc.setPhase(EnumNodeStatus.Completed, null, EnumDeviceStatus.Idle, null);
 		dJMF = sc.getDocJMFPhaseTime();
-		dJMF.write2File(sm_dirTestDataTemp + File.separator + "Completed.jmf", 2, false);
+		writeTest(dJMF, "Completed.jmf");
 		sc.setActiveNode(null, null, null);
 
-		d.write2File(sm_dirTestDataTemp + File.separator + "CompletedShapeDef.jdf", 2, false);
+		writeTest(dJMF, "CompletedShapeDef.jdf");
 
 	}
 
@@ -88,7 +158,7 @@ public class CADTest extends JDFTestCaseBase
 	{
 		createShapeDefProduction();
 
-		d.write2File(sm_dirTestDataTemp + File.separator + "CAD_ShapeDefProduction.jdf", 2, false);
+		writeTest(n, "CAD_ShapeDefProduction.jdf");
 	}
 
 	/**
@@ -114,7 +184,7 @@ public class CADTest extends JDFTestCaseBase
 			genID.setDescriptiveName("Name and Value of a parameter");
 		}
 		JDFFileSpec filespec = (JDFFileSpec) shapeTemplate.appendElement(ElementName.FILESPEC);
-		filespec.setURL(UrlUtil.fileToUrl(new File("\\\\host\\share\\dir1\\dir2\\File with �.cff2"), false));
+		filespec.setURL(UrlUtil.fileToUrl(new File("//host/share/dir1/dir2/File with �.cff2"), false));
 		filespec.setDescriptiveName("This is the optional location of the input cff2 (or evd), Note the escaping of Blanks. - chars > 127 may but need not be encoded as utf-8");
 
 		for (int i = 0; i < nOptions; i++)
@@ -153,10 +223,10 @@ public class CADTest extends JDFTestCaseBase
 		repeatDesc.setAttribute("AllowedRotate", "None");
 		repeatDesc.setAttribute("LayoutStyle", "StraightNest");
 
-		JDFDieLayout dl = createDieLayout(EnumUsage.Output, "\\\\host\\share\\dir1\\dir2\\dieLayout.cff2");
+		JDFDieLayout dl = createDieLayout(EnumUsage.Output, "//host/share/dir1/dir2/dieLayout.cff2");
 		dl.setDescriptiveName("the abstract die layout ");
 
-		d.write2File(sm_dirTestDataTemp + File.separator + "CAD_DieLayoutProduction.jdf", 2, false);
+		writeTest(n, "CAD_DieLayoutProduction.jdf");
 	}
 
 	/**
@@ -167,7 +237,7 @@ public class CADTest extends JDFTestCaseBase
 	public void testDieDesign()
 	{
 		createDieDesign();
-		d.write2File(sm_dirTestDataTemp + File.separator + "CAD_DieDesign_out.jdf", 2, false);
+		writeTest(n, "CAD_DieDesign_out.jdf");
 	}
 
 	/**
@@ -181,14 +251,14 @@ public class CADTest extends JDFTestCaseBase
 		comment.setName("Description");
 		comment.setText("Multi line descriptions of the overall process are placed here\nLine feeds must be preserved for display");
 
-		JDFDieLayout dl = createDieLayout(EnumUsage.Input, "\\\\host\\share\\dir1\\dir2\\dieLayout.cff2");
+		JDFDieLayout dl = createDieLayout(EnumUsage.Input, "//host/share/dir1/dir2/dieLayout.cff2");
 		dl.setDescriptiveName("the abstract die layout ");
-		dl = createDieLayout(EnumUsage.Input, "\\\\host\\share\\dir1\\dir2\\dieLayoutUpper.cff2");
+		dl = createDieLayout(EnumUsage.Input, "//host/share/dir1/dir2/dieLayoutUpper.cff2");
 		dl.setDescriptiveName("the upper die layout ");
-		dl = createDieLayout(EnumUsage.Input, "\\\\host\\share\\dir1\\dir2\\dieLayoutLower.cff2");
+		dl = createDieLayout(EnumUsage.Input, "//host/share/dir1/dir2/dieLayoutLower.cff2");
 		dl.setDescriptiveName("the lower die layout ");
 
-		d.write2File(sm_dirTestDataTemp + File.separator + "CAD_DieDesign.jdf", 2, false);
+		writeTest(n, "CAD_DieDesign.jdf");
 		setAudits();
 	}
 
@@ -233,7 +303,7 @@ public class CADTest extends JDFTestCaseBase
 			shapeDef = shapeDefRoot.addPartition(EnumPartIDKey.Option, "Option" + option);
 		}
 		JDFFileSpec filespecOut = (JDFFileSpec) shapeDef.appendElement(ElementName.FILESPEC);
-		filespecOut.setURL(UrlUtil.fileToUrl(new File("\\\\host\\share\\dir1\\dir2\\OutFile with �.cff2"), false));
+		filespecOut.setURL(UrlUtil.fileToUrl(new File("//host/share/dir1/dir2/OutFile with ü.cff2"), false));
 		filespecOut.setDescriptiveName("This is the requested location of the output cff2 (or evd)");
 		shapeDef.setDescriptiveName("Additional parameters may be filled by CAD - note also that this shapeDef will be the input of the DieLayoutProduction process");
 		shapeDef.setAttribute("Area", "0.3");
