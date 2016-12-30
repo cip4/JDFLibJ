@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -131,7 +131,7 @@ public class JMFExampleTest extends JDFTestCaseBase
 			activity.setXMLComment("The following 2nd activity is job related (direct child of jobphase) \ndo we need both cost center and MISDetails here?");
 		}
 
-		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "Activity.jmf", 2, false);
+		writeTest(jmf, "Activity.jmf");
 	}
 
 	@Override

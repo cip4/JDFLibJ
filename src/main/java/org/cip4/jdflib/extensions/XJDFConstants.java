@@ -105,6 +105,7 @@ public abstract class XJDFConstants
 	public static final String InkType = "InkType";
 	public static final String Intent = "Intent";
 	public static final String IsRoot = "IsRoot";
+	public static final String ItemRef = "ItemRef";
 
 	public static final String LooseBinding = "LooseBinding";
 
