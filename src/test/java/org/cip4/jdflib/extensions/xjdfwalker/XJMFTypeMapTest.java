@@ -124,7 +124,7 @@ public class XJMFTypeMapTest extends JDFTestCaseBase
 		assertEquals(xjmf.getLocalName(), XJDFConstants.XJMF);
 		KElement command = xjmf.getElement("CommandPipeControl");
 		assertNotNull(command);
-		assertEquals(command.getElement("PipeParams").getAttribute(AttributeName.OPERATION), "PipePush");
+		assertEquals(command.getElement("PipeParams").getAttribute(AttributeName.OPERATION), "Push");
 		KElement xjmfResp = new XMLDoc(XJDFConstants.XJMF, null).getRoot();
 		KElement response = xjmfResp.appendElement("ResponsePipeControl");
 		response.appendAnchor(null);

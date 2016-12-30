@@ -103,7 +103,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.PipeClose);
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjmf = conv.makeNewJMF(jmf);
-		assertEquals(xjmf.getXPathAttribute("CommandPipeControl/PipeParams/@Operation", null), "PipeClose");
+		assertEquals(xjmf.getXPathAttribute("CommandPipeControl/PipeParams/@Operation", null), "Close");
 		final JDFJMF jmfResp = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.PipeClose);
 		xjmf = conv.makeNewJMF(jmfResp);
 		assertEquals(xjmf.getElement("ResponsePipeControl").getLocalName(), "ResponsePipeControl");

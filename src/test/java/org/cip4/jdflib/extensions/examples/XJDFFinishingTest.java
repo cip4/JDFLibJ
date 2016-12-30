@@ -104,6 +104,7 @@ public class XJDFFinishingTest extends JDFTestCaseBase
 		ResourceHelper bookHelper = shBook.getCreatePartition(XJDFConstants.ProductPart, "BookProductID", true);
 		bookHelper.setID("BookComponentID");
 		bookHelper.setAttribute(AttributeName.WEIGHT, "" + 650);
+		bookHelper.setAmount(4200, null, true);
 
 		SetHelper shPallet = xjdfHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Output);
 		ResourceHelper palletHelper = shPallet.getCreatePartition(null, true);
