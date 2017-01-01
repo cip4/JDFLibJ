@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -151,14 +151,14 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 	 */
 	public static void write9GTFiles(final BaseGoldenTicket goldenTicket, final String templateName, Boolean checkSchema)
 	{
-		writeRoundTrip(goldenTicket, "GoldenTicket_Manager_", templateName, null);
+		writeRoundTrip(goldenTicket, "GoldenTicket_Manager_", templateName, checkSchema);
 
 		goldenTicket.bExpandGrayBox = false;
 		goldenTicket.makeReadyAll();
-		writeRoundTrip(goldenTicket, "GoldenTicket_MakeReady_", templateName, null);
+		writeRoundTrip(goldenTicket, "GoldenTicket_MakeReady_", templateName, checkSchema);
 
 		goldenTicket.executeAll(null);
-		writeRoundTrip(goldenTicket, "GoldenTicket_Worker_", templateName, null);
+		writeRoundTrip(goldenTicket, "GoldenTicket_Worker_", templateName, checkSchema);
 	}
 
 	/**
