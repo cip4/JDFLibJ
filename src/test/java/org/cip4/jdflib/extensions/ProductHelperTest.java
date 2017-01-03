@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.junit.Test;
 
@@ -79,7 +80,7 @@ import org.junit.Test;
 public class ProductHelperTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	@Deprecated
@@ -105,7 +106,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetRoot()
@@ -120,7 +121,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testAppendProduct()
@@ -133,7 +134,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testAppendIntent()
@@ -146,7 +147,22 @@ public class ProductHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
+	*/
+	@Test
+	public void testGetIntentAtt()
+	{
+		XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		ProductHelper ph = theHelper.appendProduct();
+		IntentHelper intent = ph.getIntent(ElementName.LAYOUTINTENT);
+		assertNull(intent);
+		intent = ph.appendIntent(ElementName.LAYOUTINTENT);
+		intent.setAttribute(AttributeName.PAGES, "4");
+		assertEquals("4", ph.getIntentAttribute(ElementName.LAYOUTINTENT, AttributeName.PAGES));
+	}
+
+	/**
+	*
 	*/
 	@Test
 	public void testGetCreateRootProduct()
@@ -159,7 +175,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetRootFalse()
@@ -176,7 +192,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testisRootProduct()
@@ -196,7 +212,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAmount()
@@ -221,7 +237,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testOverProduction()
