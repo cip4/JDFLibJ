@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  *
@@ -120,7 +120,7 @@ public class JDFDoc extends XMLDoc
 	/**
 	 * constructor from a document
 	 * note that the constructor will create a copy of the document in case it is not a typesafe DocumentJDFImpl
-	 * 
+	 *
 	 * @param document
 	 */
 	public JDFDoc(final Document document)
@@ -136,7 +136,7 @@ public class JDFDoc extends XMLDoc
 	/**
 	 * constructor
 	 * note that the constructor will create a copy of the document in case it is not a typesafe DocumentJDFImpl
-	 * 
+	 *
 	 * @param document
 	 */
 	public JDFDoc(final XMLDoc document)
@@ -180,7 +180,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * constructor
-	 * 
+	 *
 	 * @param document
 	 */
 	public JDFDoc(final DocumentJDFImpl document)
@@ -190,7 +190,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * constructor - create the kind of JDF you need
-	 * 
+	 *
 	 * @param strDocType - ElementName.JDF, ElementName.JMF, "Config" ...
 	 */
 	public JDFDoc(final String strDocType)
@@ -202,9 +202,9 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * constructor - create the kind of JDF you need
-	 * 
+	 *
 	 * @param strDocType - ElementName.JDF, ElementName.JMF, "Config" ...
-	 * @param version 
+	 * @param version
 	 */
 	public JDFDoc(final String strDocType, EnumVersion version)
 	{
@@ -223,7 +223,7 @@ public class JDFDoc extends XMLDoc
 	// *********************************************
 	/**
 	 * GetJDFRoot - get the jdf root
-	 * 
+	 *
 	 * @return JDFNode - the root of the JDF file
 	 */
 	public JDFNode getJDFRoot()
@@ -243,7 +243,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * GetJMFRoot - get the jmf root
-	 * 
+	 *
 	 * @return JDFJMF - the root of the JMF file
 	 */
 	public JDFJMF getJMFRoot()
@@ -271,7 +271,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * clone
-	 * 
+	 *
 	 * @return JDFDoc the cloned JDFDoc
 	 */
 	@Override
@@ -282,7 +282,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -293,7 +293,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * CreateJDF
-	 * 
+	 *
 	 * @param jdfPath
 	 * @deprecated simply use constructor
 	 * @return JDFDoc
@@ -314,11 +314,11 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * returns a JDFNode by its id attribute
-	 * 
+	 *
 	 * @param id the ID parameter of the JDF node
 	 * @return JDFNode - the corresponding JDF Node, null if no such node exists
 	 * @deprecated use getRoot().getTarget(id, AttributeName.ID) and cast.
-	 * 
+	 *
 	 */
 	@Deprecated
 	public JDFNode getJDFNodeByID(final String id)
@@ -329,10 +329,10 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * removes all dangling resources and cleans up the rrefs attributes
-	 * 
+	 *
 	 * @param nodeNames the list of nodenames to remove, remove all if nodenames is empty
 	 * @return the number of collected resources
-	 * 
+	 *
 	 * @default CollectGarbageResources(new vString())
 	 * @deprecated use JDFNode.eraseUnlinkedResources
 	 */
@@ -392,16 +392,13 @@ public class JDFDoc extends XMLDoc
 				}
 			}
 		}
-		// run gc a few times to really clean up
-		Runtime.getRuntime().gc();
-		Runtime.getRuntime().gc();
 
 		return nDeleted;
 	}
 
 	/**
 	 * gets the content type
-	 * 
+	 *
 	 * @return the content type, Text/XML if neither jdf nor jmf
 	 */
 	public String getContentType()
@@ -426,7 +423,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * parse a JDF input stream
-	 * 
+	 *
 	 * @param is
 	 * @return the parsed JDFDoc
 	 */
@@ -442,7 +439,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * parse a JDF file
-	 * 
+	 *
 	 * @param file
 	 * @return the parsed JDFDoc
 	 */
@@ -459,7 +456,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * parse a JDF file
-	 * 
+	 *
 	 * @param fileName
 	 * @return the parsed JDFDoc
 	 */
@@ -473,7 +470,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * parse a given url
-	 * 
+	 *
 	 * @param url the url to search
 	 * @param bp the bodypart that the CID url is located in
 	 * @return the parsed JDFDoc
@@ -500,11 +497,11 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * initialize a new root of strDocType in the document called by constructor XMLDoc(String strDocType)
-	 * 
+	 *
 	 * @param strDocType qualified tag name of the doc root to create if still empty
 	 * @param namespaceURI namespace URI of the doc root
 	 * @return KElement - the root element
-	 * 
+	 *
 	 * @default setRoot(ElementName.JDF, null)
 	 */
 	@Override
@@ -530,7 +527,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * register new custom class in the factory
-	 * 
+	 *
 	 * @param strElement fully qualified name
 	 * @param packagepath package path
 	 */
@@ -542,9 +539,9 @@ public class JDFDoc extends XMLDoc
 	/**
 	 * This method sends the contents of this JDFDoc to the URL <code>strURL</code> and receives the response in the returned JDFDoc. the content type is
 	 * automagically set to either text/xml for undefined xml or to application/vnd.cip4-jdf+xml or application/vnd.cip4-jmf+xml
-	 * 
+	 *
 	 * @param strURL the URL to write to
-	 * 
+	 *
 	 * @return docResponse the response received from URL. A Null document if no response was received, or an exception occurred
 	 */
 	public JDFDoc write2URL(final String strURL)
@@ -561,7 +558,7 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**get the correct parser for this type of document
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
@@ -571,7 +568,7 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**
-	 * 
+	 *
 	 * @param xmlParser
 	 */
 	@Override
@@ -616,7 +613,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * gets the contentType for a given root element
-	 * 
+	 *
 	 * @param e
 	 * @return
 	 */
@@ -650,7 +647,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * Method getXMLDocUserData - get the associated XMLDocUserData
-	 * 
+	 *
 	 * @return XMLDocUserData of this object
 	 */
 	protected XMLDocUserData getXMLDocUserData()
@@ -660,7 +657,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * does the owner document of this have an associated XMLDocUserData
-	 * 
+	 *
 	 * @return true if XMLDocUserData of this exists
 	 */
 	protected boolean hasXMLDocUserData()
@@ -670,7 +667,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * get/create the associated XMLDocUserData - it is always there!
-	 * 
+	 *
 	 * @return the XMLDocUserData of this
 	 */
 	public XMLDocUserData getCreateXMLDocUserData()
@@ -680,7 +677,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * get a vector of all IDs of elements that are dirty
-	 * 
+	 *
 	 * @return VString - the vector of element IDs
 	 */
 	public VString getDirtyIDs()
@@ -703,7 +700,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * is the node with ID dirty?
-	 * 
+	 *
 	 * @param strID id the id to be checked
 	 * @return boolean - true if the node with ID=id is dirty
 	 */
@@ -722,9 +719,9 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**
-	 * if true (the default) initialize element when they are created, 
+	 * if true (the default) initialize element when they are created,
 	 * else don't call init() when an element is initially created
-	 * 
+	 *
 	 * @param bInitOnCreate
 	 */
 	public void setInitOnCreate(boolean bInitOnCreate)
@@ -733,9 +730,9 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**
-	 * if true (the default) initialize element when they are created, 
+	 * if true (the default) initialize element when they are created,
 	 * else don't call init() when an element is initially created
-	 * 
+	 *
 	 * @return bInitOnCreate
 	 */
 	public boolean getInitOnCreate()
@@ -745,7 +742,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * getMemberDocument
-	 * 
+	 *
 	 * @return the MemberDocument
 	 */
 	@Override
