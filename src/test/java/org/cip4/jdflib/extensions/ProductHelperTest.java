@@ -157,7 +157,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 		IntentHelper intent = ph.getIntent(ElementName.LAYOUTINTENT);
 		assertNull(intent);
 		intent = ph.appendIntent(ElementName.LAYOUTINTENT);
-		intent.setAttribute(AttributeName.PAGES, "4");
+		intent.getResource().setAttribute(AttributeName.PAGES, "4");
 		assertEquals("4", ph.getIntentAttribute(ElementName.LAYOUTINTENT, AttributeName.PAGES));
 	}
 

@@ -162,6 +162,7 @@ public class ProductHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 *get an attribute from an explicit intent resource
 	 *
 	 * @param intentName
 	 * @param attName
@@ -170,6 +171,7 @@ public class ProductHelper extends BaseXJDFHelper
 	public String getIntentAttribute(String intentName, String attName)
 	{
 		KElement intent = theElement.getChildWithAttribute(XJDFConstants.Intent, AttributeName.NAME, null, intentName, 0, true);
+		intent = intent == null ? null : intent.getElement(intentName);
 		return intent == null ? null : intent.getNonEmpty(attName);
 	}
 
