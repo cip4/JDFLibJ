@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,8 +83,8 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.zip.ZipReader;
 
 /**
- * 
- *  
+ *
+ *
  * @author rainerprosi
  * @date Feb 1, 2012
  */
@@ -98,8 +98,8 @@ public class URLReader
 	private File notRelative;
 
 	/**
-	 * @param urlString 
-	 * 
+	 * @param urlString
+	 *
 	 */
 	public URLReader(final String urlString)
 	{
@@ -110,9 +110,9 @@ public class URLReader
 	}
 
 	/**
-	 * @param urlString 
-	 * @param doc 
-	 * 
+	 * @param urlString
+	 * @param doc
+	 *
 	 */
 	public URLReader(final String urlString, XMLDoc doc)
 	{
@@ -132,7 +132,7 @@ public class URLReader
 	}
 
 	/**
-	 *  
+	 *
 	 * @param bodyPart
 	 */
 	public void setBodyPart(BodyPart bodyPart)
@@ -141,7 +141,7 @@ public class URLReader
 	}
 
 	/**
-	 * add a root for local files 
+	 * add a root for local files
 	 * @param root
 	 */
 	public void addLocalRoot(File root)
@@ -158,7 +158,7 @@ public class URLReader
 	}
 
 	/**
-	 *  
+	 *
 	 * @param zip
 	 */
 	public void setZipReader(ZipReader zip)
@@ -168,8 +168,8 @@ public class URLReader
 
 	/**
 	 * get the opened input stream for a given url string
-	 * 
-	 *  
+	 *
+	 *
 	 * @return
 	 */
 	InputStream getBodyPartInputStream()
@@ -185,8 +185,8 @@ public class URLReader
 
 	/**
 	 * get the opened input stream for a given url string
-	 * 
-	 *  
+	 *
+	 *
 	 * @return
 	 */
 	InputStream getZipInputStream()
@@ -201,7 +201,7 @@ public class URLReader
 	}
 
 	/**
-	 *  
+	 *
 	 * @return
 	 */
 	public InputStream getURLInputStream()
@@ -237,7 +237,7 @@ public class URLReader
 	}
 
 	/**
-	 *  
+	 *
 	 * @return
 	 */
 	public XMLDoc getXMLDoc()
@@ -249,7 +249,7 @@ public class URLReader
 	}
 
 	/**
-	 *  
+	 *
 	 * @return
 	 */
 	public JDFDoc getJDFDoc()
@@ -261,8 +261,8 @@ public class URLReader
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @param doc
 	 */
 	private void applyDoc(XMLDoc doc)
@@ -271,13 +271,15 @@ public class URLReader
 		{
 			doc.setBodyPart(bodypart);
 			doc.setZipReader(zip);
-			String filename = notRelative == null ? urlString : notRelative.getAbsolutePath();
+			String url = notRelative == null ? urlString : notRelative.getAbsolutePath();
+			File f = UrlUtil.urlToFile(url);
+			String filename = f == null ? null : f.getAbsolutePath();
 			doc.setOriginalFileName(filename);
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	InputStream getNetInputStream()
@@ -291,7 +293,7 @@ public class URLReader
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	File getAbsoluteFile()
@@ -305,7 +307,7 @@ public class URLReader
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	File getRelativeFile()
@@ -327,7 +329,7 @@ public class URLReader
 	}
 
 	/**
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
