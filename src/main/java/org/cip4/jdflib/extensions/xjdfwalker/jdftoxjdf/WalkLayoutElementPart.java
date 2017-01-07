@@ -68,28 +68,25 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import java.util.Vector;
-
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.extensions.ResourceHelper;
+import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFHelper;
 
 /**
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class WalkFileSpec extends WalkResource
+public class WalkLayoutElementPart extends WalkJDFSubElement
 {
-	private static VString nastyRes = null;
-
 	/**
 	 *
 	 */
-	public WalkFileSpec()
+	public WalkLayoutElementPart()
 	{
 		super();
 	}
@@ -102,7 +99,23 @@ public class WalkFileSpec extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFFileSpec);
+		return !jdfToXJDF.isRetainAll() && ElementName.LAYOUTELEMENTPART.equals(toCheck.getLocalName());
+	}
+
+	/**
+	 *
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkRefElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		XJDFHelper h = XJDFHelper.getHelper(jdfToXJDF.newRoot);
+		SetHelper sh = h.getCreateResourceSet(XJDFConstants.Content, null);
+		ResourceHelper contentHelper = sh.appendPartition(null, false);
+		KElement contentBase = contentHelper.getRoot();
+		jdf.renameElement(XJDFConstants.Content, null);
+		xjdf.appendAttribute("ContentRefs", contentBase.getID(), null, null, true);
+		return super.walk(jdf, contentBase);
 	}
 
 	/**
@@ -111,57 +124,6 @@ public class WalkFileSpec extends WalkResource
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.FILESPEC, null);
+		return new VString(ElementName.LAYOUTELEMENTPART, null);
 	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
-	 */
-	@Override
-	protected void updateAttributes(JDFAttributeMap map)
-	{
-		super.updateAttributes(map);
-		map.remove(AttributeName.APPLICATION);
-		map.remove(AttributeName.APPOS);
-		map.remove(AttributeName.APPVERSION);
-		map.remove(AttributeName.COMPRESSION);
-		map.remove(AttributeName.DISPOSITION);
-		map.remove(AttributeName.DOCUMENTNATURALLANG);
-		map.remove(AttributeName.FILETARGETDEVICEMODEL);
-		map.remove(AttributeName.FILEVERSION);
-		map.remove(AttributeName.MIMETYPEVERSION);
-		map.remove(AttributeName.OSVERSION);
-		map.remove(AttributeName.PAGEORDER);
-		map.remove(AttributeName.REQUESTQUALITY);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public KElement walk(KElement jdf, KElement xjdf)
-	{
-		if (isDeprecatedResUsage((JDFFileSpec) jdf))
-		{
-			return null;
-		}
-		return super.walk(jdf, xjdf);
-	}
-
-	private boolean isDeprecatedResUsage(JDFFileSpec fs)
-	{
-		if (jdfToXJDF.isRetainAll())
-			return false;
-		return getNastyResUsages().contains(fs.getResourceUsage());
-	}
-
-	private Vector<String> getNastyResUsages()
-	{
-		if (nastyRes == null)
-		{
-			nastyRes = new VString();
-		}
-		return nastyRes;
-	}
-
 }

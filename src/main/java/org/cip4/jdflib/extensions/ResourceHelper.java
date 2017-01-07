@@ -143,7 +143,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 
 	/**
 	 * factory to create a helper from an element
-	 *  
+	 *
 	 * @param res the element to parseeither a "Resource" or a resource element
 	 * @return the helper
 	 */
@@ -185,7 +185,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 * 
+	 *
 	 * @param map the partmap to set the part element
 	 */
 	public void setPartMap(JDFAttributeMap map)
@@ -199,7 +199,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 * 
+	 *
 	 * @param key
 	 * @param value
 	 */
@@ -214,7 +214,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 * 
+	 *
 	 * @param vPart the vector of partmaps to set the part element
 	 */
 	public void setPartMapVector(VJDFAttributeMap vPart)
@@ -230,7 +230,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 * 
+	 *
 	 * @param vPart the vector of partmaps to set the part element
 	 */
 	public void appendPartMapVector(VJDFAttributeMap vPart)
@@ -251,7 +251,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 * 
+	 *
 	 * @param part
 	 */
 	public void appendPartMap(JDFAttributeMap part)
@@ -314,7 +314,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public XJDFHelper getXJDF()
@@ -323,7 +323,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 * 
+	 *
 	 * @param amount
 	 * @param moreMap
 	 * @param bGood
@@ -391,7 +391,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 		{
 			theElement.setID(theElement.generateDotID(AttributeName.ID, null));
 		}
-		theElement.sortChildren();
+		super.cleanUp();
 		theElement.moveElement(getResource(), null);
 	}
 
@@ -459,7 +459,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 * 
+	 *
 	 * @param brand
 	 */
 	public void setBrand(String brand)
@@ -468,7 +468,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 * 
+	 *
 	 * @return the brand
 	 */
 	public String getBrand()
@@ -477,7 +477,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 * 
+	 *
 	 * @param externalID
 	 */
 	public void setExternalID(String externalID)
@@ -486,7 +486,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 * 
+	 *
 	 * @return the externalID
 	 */
 	public String getExternalID()

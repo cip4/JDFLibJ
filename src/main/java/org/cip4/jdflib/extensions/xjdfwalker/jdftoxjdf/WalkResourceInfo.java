@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
@@ -91,7 +91,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 {
 
 	/**
-	 * 
+	 *
 	 */
 	public WalkResourceInfo()
 	{
@@ -127,10 +127,10 @@ public class WalkResourceInfo extends WalkJDFSubElement
 				nRes++;
 			}
 		}
-		moveToResourceSet((JDFResourceInfo) eNew, ri.getAmountPool());
+		moveToResourceSet((JDFResourceInfo) eNew, ri);
 		updateInfos((JDFResourceInfo) eNew);
 		eNew.removeAttribute(AttributeName.RESOURCENAME);
-		return eNew;
+		return null; // we are done with all relevant kids from JDF
 	}
 
 	void updateInfos(JDFResourceInfo eNew)
@@ -165,13 +165,15 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	}
 
 	/**
-	 * 
+	 *
 	 * @param ri
 	 * @param ap
 	 */
-	private void moveToResourceSet(JDFResourceInfo ri, JDFAmountPool ap)
+	private void moveToResourceSet(JDFResourceInfo ri, JDFResourceInfo jdfRI)
 	{
-		VJDFAttributeMap vPartMap = ri.getPartMapVector();
+		JDFAmountPool ap = jdfRI.getAmountPool();
+		VJDFAttributeMap vPartMap = jdfRI.getPartMapVector();
+		setAmountPool(jdfRI, jdfRI, null);
 		String resName = ri.getXPathAttribute("ResourceSet/@Name", null);
 		if (resName == null)
 		{
@@ -196,6 +198,11 @@ public class WalkResourceInfo extends WalkJDFSubElement
 			{
 				//TODO use correct amounts
 				ph.setAmount(ri.getActualAmount(), null, true);
+				if (newParts.size() == 1)
+				{
+					ph.getRoot().moveAttribute(XJDFConstants.ExternalID, ri);
+				}
+
 			}
 			else
 			{
@@ -205,11 +212,15 @@ public class WalkResourceInfo extends WalkJDFSubElement
 				ap2.deleteNode();
 			}
 		}
-		ri.removeChild(ElementName.AMOUNTPOOL, null, 0);
-		if (ap != null)
+		if (newParts.size() > 1)
 		{
-			ap.deleteNode();
+			set.moveAttribute(XJDFConstants.ExternalID, ri);
 		}
+		else
+		{
+			ri.removeAttribute(XJDFConstants.ExternalID);
+		}
+		ri.removeChild(ElementName.AMOUNTPOOL, null, 0);
 	}
 
 	/**
@@ -229,9 +240,13 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	@Override
 	protected void updateAttributes(JDFAttributeMap map)
 	{
-		map.remove(AttributeName.LOTCONTROLLED);
+		map.remove(AttributeName.ACTUALAMOUNT);
+		map.remove(AttributeName.AMOUNT);
 		map.remove(AttributeName.DEVICEID);
 		map.remove(AttributeName.LEVEL);
+		map.remove(AttributeName.LOTCONTROLLED);
+		map.remove(AttributeName.RESOURCEID);
+		map.remove(AttributeName.STATUS);
 		super.updateAttributes(map);
 	}
 

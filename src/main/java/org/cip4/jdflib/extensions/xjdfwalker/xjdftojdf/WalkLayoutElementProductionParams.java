@@ -66,30 +66,22 @@
  *
  *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import java.util.Vector;
-
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
 
 /**
- *
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkFileSpec extends WalkResource
+public class WalkLayoutElementProductionParams extends WalkResource
 {
-	private static VString nastyRes = null;
-
 	/**
 	 *
 	 */
-	public WalkFileSpec()
+	public WalkLayoutElementProductionParams()
 	{
 		super();
 	}
@@ -102,7 +94,7 @@ public class WalkFileSpec extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFFileSpec);
+		return toCheck instanceof JDFLayoutElementProductionParams;
 	}
 
 	/**
@@ -111,57 +103,18 @@ public class WalkFileSpec extends WalkResource
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.FILESPEC, null);
+		return new VString(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, null);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	public KElement walk(KElement e, KElement trackElem)
 	{
-		super.updateAttributes(map);
-		map.remove(AttributeName.APPLICATION);
-		map.remove(AttributeName.APPOS);
-		map.remove(AttributeName.APPVERSION);
-		map.remove(AttributeName.COMPRESSION);
-		map.remove(AttributeName.DISPOSITION);
-		map.remove(AttributeName.DOCUMENTNATURALLANG);
-		map.remove(AttributeName.FILETARGETDEVICEMODEL);
-		map.remove(AttributeName.FILEVERSION);
-		map.remove(AttributeName.MIMETYPEVERSION);
-		map.remove(AttributeName.OSVERSION);
-		map.remove(AttributeName.PAGEORDER);
-		map.remove(AttributeName.REQUESTQUALITY);
-	}
+		KElement walk = super.walk(e, trackElem);
 
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public KElement walk(KElement jdf, KElement xjdf)
-	{
-		if (isDeprecatedResUsage((JDFFileSpec) jdf))
-		{
-			return null;
-		}
-		return super.walk(jdf, xjdf);
-	}
-
-	private boolean isDeprecatedResUsage(JDFFileSpec fs)
-	{
-		if (jdfToXJDF.isRetainAll())
-			return false;
-		return getNastyResUsages().contains(fs.getResourceUsage());
-	}
-
-	private Vector<String> getNastyResUsages()
-	{
-		if (nastyRes == null)
-		{
-			nastyRes = new VString();
-		}
-		return nastyRes;
+		return walk;
 	}
 
 }

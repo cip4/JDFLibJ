@@ -117,15 +117,15 @@ import junit.framework.TestCase;
 
 /**
  * base class for JDFLib test case classes
- * 
+ *
  * @author prosirai
- * 
+ *
  */
 public abstract class JDFTestCaseBase extends TestCase
 {
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public static String getXJDFSchema()
@@ -134,7 +134,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	protected static JDFParser getXJDFSchemaParser()
@@ -145,7 +145,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public JDFTestCaseBase()
 	{
@@ -185,10 +185,10 @@ public abstract class JDFTestCaseBase extends TestCase
 	}
 
 	/**
-	 * 
+	 *
 	 * check a node against the schema
 	 * @param root
-	 * @param level 
+	 * @param level
 	 */
 	protected void checkSchema(JDFElement root, EnumValidationLevel level)
 	{
@@ -200,7 +200,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	}
 
 	/**
-	 * 
+	 *
 	 * create a doc with exposedmedia for tests
 	 * @return
 	 */
@@ -287,7 +287,7 @@ public abstract class JDFTestCaseBase extends TestCase
 
 	// //////////////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
@@ -319,7 +319,7 @@ public abstract class JDFTestCaseBase extends TestCase
 
 	/**
 	 *  general cleanup after each test
-	 *  
+	 *
 	 * @see junit.framework.TestCase#tearDown()
 	 */
 	@Override
@@ -337,7 +337,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	}
 
 	/**
-	 * 
+	 *
 	 * @param d
 	 * @param filename
 	 */
@@ -347,7 +347,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	}
 
 	/**
-	 * 
+	 *
 	 * write an element to the standard test directory sm_dirTestDataTemp
 	 * @param e
 	 * @param filename
@@ -361,13 +361,19 @@ public abstract class JDFTestCaseBase extends TestCase
 			ext = "x" + ext;
 			JDFToXJDF conv = new JDFToXJDF();
 			KElement x = conv.convert(e);
-			x.write2File(sm_dirTestDataTemp + "xjdfexamples/" + UrlUtil.newExtension(filename, ext));
+			String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + UrlUtil.newExtension(filename, ext);
+			x.write2File(xjdfFile);
+			JDFParser p = getXJDFSchemaParser();
+			JDFDoc xParsed = p.parseFile(xjdfFile);
+			XMLDoc dVal = xParsed.getValidationResult();
+			dVal.write2File(UrlUtil.newExtension(xjdfFile, "val.xml"), 2, false);
+			assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
 		}
 	}
 
 	/**
 	 * write convert and unconvert
-	 * 
+	 *
 	 * @param root the jdf node or jmf root
 	 * @param fileBase the filename without extension
 	 */
@@ -417,7 +423,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	}
 
 	/**
-	 * 
+	 *
 	 * @param doc
 	 * @return
 	 */
@@ -463,7 +469,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	protected JDFParser getSchemaParser()

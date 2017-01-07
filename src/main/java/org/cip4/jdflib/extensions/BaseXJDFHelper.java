@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions;
 
@@ -74,7 +74,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.util.ContainerUtil;
 
 /**
- *  
+ *
  * @author rainer prosi
  * @date Feb 17, 2012
  */
@@ -83,7 +83,7 @@ public abstract class BaseXJDFHelper
 	protected final Log log;
 
 	/**
-	 * 
+	 *
 	 */
 	protected BaseXJDFHelper()
 	{
@@ -91,7 +91,7 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	protected BaseXJDFHelper(KElement theElement)
 	{
@@ -101,7 +101,7 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *  
+	 *
 	 * @param xpath
 	 * @return
 	 */
@@ -111,7 +111,7 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @param xpath
 	 * @return
 	 */
@@ -121,7 +121,7 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @param attName
 	 * @return
 	 */
@@ -131,7 +131,7 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @param attrib
 	 * @param nameSpaceURI
 	 */
@@ -144,7 +144,7 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @param attName
 	 * @param value
 	 * @return
@@ -166,8 +166,8 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @param xpath
 	 * @param value
 	 */
@@ -180,18 +180,18 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 *generic cleanup routine
 	 */
 	public void cleanUp()
 	{
-		theElement.sortChildren(new KElement.SimpleElementNameComparator());
+		theElement.sortChildren(new KElement.SimpleElementNameComparator(), true);
 	}
 
 	protected KElement theElement;
 
 	/**
-	 * 
+	 *
 	 * @return the xjdf root element
 	 */
 	public KElement getRoot()
@@ -200,7 +200,7 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public KElement deleteNode()
@@ -215,7 +215,7 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isEqual(BaseXJDFHelper other)
@@ -235,7 +235,7 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @param newID
 	 */
 	public void setID(String newID)
@@ -245,7 +245,7 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 * equals and hash are based on the xml element that this helper represents
-	 * 
+	 *
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -259,7 +259,7 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 * equals and hash are based on the xml element that this helper represents
-	 * 
+	 *
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

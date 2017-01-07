@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -98,6 +98,7 @@ import org.cip4.jdflib.elementwalker.PackageElementWalker;
 import org.cip4.jdflib.elementwalker.RemoveEmpty;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.XJMFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
@@ -114,14 +115,14 @@ import org.cip4.jdflib.util.UrlUtil;
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG <br/>
  * conversion class to convert JDF 1.x to the experimental JDF 2.0<br/>
  * very experimental and subject to change without notice
- * 
+ *
  * 15.01.2009
  */
 public class JDFToXJDF extends PackageElementWalker
 {
 
 	/**
-	 * 
+	 *
 	 */
 	public JDFToXJDF()
 	{
@@ -145,8 +146,8 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @param r
 	 * @return
 	 */
@@ -157,7 +158,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param r
 	 * @return
 	 */
@@ -170,7 +171,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * if true, add a modified audit
 	 * @param trackAudits
 	 */
@@ -190,8 +191,8 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * returns the official JDF schema URI for  2.0
-	 * 
-	 * 
+	 *
+	 *
 	 * @return the URL that fits to majorVersion and minorVersion - null if not supported
 	 */
 	public static String getSchemaURL()
@@ -200,7 +201,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private boolean trackAudits = true;
 	protected KElement newRoot = null;
@@ -304,7 +305,7 @@ public class JDFToXJDF extends PackageElementWalker
 	final private JDFAttributeMap componentProductMap;
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isWantProduct()
@@ -313,7 +314,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param wantProduct
 	 */
 	public void setWantProduct(boolean wantProduct)
@@ -344,7 +345,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isRemoveSignatureName()
@@ -353,7 +354,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param removeSignatureName
 	 */
 	public void setRemoveSignatureName(boolean removeSignatureName)
@@ -420,13 +421,14 @@ public class JDFToXJDF extends PackageElementWalker
 			{
 				oldRoot = root;
 			}
-			// we are a simple - not spawned jdf 
+			// we are a simple - not spawned jdf
 			if (oldRoot == root && root.getElement(ElementName.JDF) == null && root.getAncestorPool() == null)
 			{
 				setSingleNode(true);
 			}
-			loopNodes(root);
+
 			prepareRoot(root);
+			loopNodes(root);
 
 			postWalk(false);
 			newRoot.getOwnerDocument_KElement().copyMeta(node.getOwnerDocument_KElement());
@@ -439,7 +441,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param root
 	 */
 	private void preFixVersion(final JDFElement root)
@@ -452,7 +454,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param bJMF
 	 */
 	private void postWalk(boolean bJMF)
@@ -471,6 +473,11 @@ public class JDFToXJDF extends PackageElementWalker
 				log.info("erased empty jmf");
 				newRoot = null;
 			}
+			if (!isRetainAll())
+			{
+				new XJMFHelper(newRoot).cleanUp();
+			}
+
 		}
 		else
 		{
@@ -486,9 +493,15 @@ public class JDFToXJDF extends PackageElementWalker
 					c.setAttribute(AttributeName.TIMESTAMP, new JDFDate().getDateTimeISO());
 				}
 			}
+			if (!isRetainAll())
+			{
+				new XJDFHelper(newRoot).cleanUp();
+			}
 		}
 		RemoveEmpty removeEmpty = new RemoveEmpty();
 		removeEmpty.addIgnoreElement(XJDFConstants.Header);
+		removeEmpty.addIgnoreElement(ElementName.MARKOBJECT);
+		removeEmpty.addIgnoreElement(ElementName.CONTENTOBJECT);
 		removeEmpty.removEmptyElement(newRoot);
 	}
 
@@ -516,7 +529,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * @param bJMF if true, create a jmf
-	 * 
+	 *
 	 */
 	private void prepareNewDoc(boolean bJMF)
 	{
@@ -528,7 +541,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param compID
 	 * @param productID
 	 */
@@ -538,7 +551,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param compID
 	 * @return
 	 */
@@ -567,7 +580,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param os the output stream
 	 * @param rootNode the root jdf to save
 	 * @param jmf the submission or return  jmf
@@ -578,7 +591,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param root
 	 * @return
 	 */
@@ -621,7 +634,7 @@ public class JDFToXJDF extends PackageElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @param os
 		 * @param rootNode
 		 * @param xjmf
@@ -694,7 +707,7 @@ public class JDFToXJDF extends PackageElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 */
 		MultiJDFToXJDF()
 		{
@@ -702,7 +715,7 @@ public class JDFToXJDF extends PackageElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @param root
 		 * @return
 		 */
@@ -731,7 +744,7 @@ public class JDFToXJDF extends PackageElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @param n
 		 * @return
 		 */
@@ -744,7 +757,7 @@ public class JDFToXJDF extends PackageElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @param rootNode
 		 * @return
 		 */
@@ -767,7 +780,7 @@ public class JDFToXJDF extends PackageElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @param i
 		 * @param n
 		 */
@@ -933,7 +946,7 @@ public class JDFToXJDF extends PackageElementWalker
 	/**
 	 * Setter for bTypeSafeMessage attribute.
 	 * also switches the JMF Root element name to XJMF
-	 * 
+	 *
 	 * @param bTypeSafeMessage the bTypeSafeMessage to set
 	 */
 	public void setTypeSafeMessage(boolean bTypeSafeMessage)
@@ -1032,7 +1045,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param r
 	 * @return
 	 */
@@ -1043,7 +1056,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param linkTarget
 	 * @return
 	 */
@@ -1054,7 +1067,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isRetainAll()
@@ -1063,7 +1076,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param bRetainAll
 	 */
 	public void setRetainAll(boolean bRetainAll)
@@ -1091,7 +1104,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public EnumProcessPartition getProcessPart()
@@ -1100,7 +1113,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isWantProcessList()

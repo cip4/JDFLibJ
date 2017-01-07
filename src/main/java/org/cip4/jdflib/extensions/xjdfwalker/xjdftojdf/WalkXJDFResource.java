@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
@@ -72,7 +72,6 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -95,7 +94,7 @@ import org.cip4.jdflib.util.StringUtil;
 public class WalkXJDFResource extends WalkXElement
 {
 	/**
-	 * 
+	 *
 	 */
 	public WalkXJDFResource()
 	{
@@ -132,7 +131,7 @@ public class WalkXJDFResource extends WalkXElement
 	}
 
 	/**
-	 * 
+	 *
 	 * @param e
 	 * @return
 	 */
@@ -143,7 +142,7 @@ public class WalkXJDFResource extends WalkXElement
 	}
 
 	/**
-	 * 
+	 *
 	 * @param theNode
 	 * @param xjdfRes
 	 * @return
@@ -202,61 +201,6 @@ public class WalkXJDFResource extends WalkXElement
 		return res;
 	}
 
-	/**
-	 * @param xjdfRes
-	 * @return the created resource
-	 */
-	public KElement oldwalk(final KElement xjdfRes, final KElement jdfResource)
-	{
-		JDFNode theNode = xjdfToJDFImpl.currentJDFNode == null ? ((JDFElement) jdfResource).getParentJDF() : xjdfToJDFImpl.currentJDFNode;
-		final JDFPart part = (JDFPart) xjdfRes.getElement(ElementName.PART);
-		JDFAttributeMap partmap = null;
-		final KElement newPartitionElement;
-		JDFNode partialProductNode = null;
-		if (part != null)
-		{
-			newPartitionElement = createPartition(xjdfRes, (JDFResource) jdfResource, part, theNode);
-			partmap = part.getPartMap();
-
-			String productPart = partmap == null ? null : StringUtil.getNonEmpty(partmap.get(AttributeName.PRODUCTPART));
-			if (productPart != null)
-			{
-				partialProductNode = productPart == null ? null : theNode.getChildJDFNode(productPart, false);
-				//ToDo fix when we have exact mapping definitions
-				if (partialProductNode == null)
-				{
-					partialProductNode = theNode.getJobPart(productPart, null);
-				}
-			}
-		}
-		else if (xjdfRes.getPreviousSiblingElement(xjdfRes.getNodeName(), null) != null)
-		{
-			newPartitionElement = theNode.getJDFRoot().addResource(jdfResource.getLocalName(), null);
-			newPartitionElement.copyAttribute(AttributeName.ID, xjdfRes);
-		}
-		else
-		{
-			newPartitionElement = jdfResource;
-		}
-		if (newPartitionElement == null)
-		{
-			return null;
-		}
-
-		final JDFAttributeMap map = getResMap(xjdfRes);
-
-		if (newPartitionElement instanceof JDFResource)
-		{
-			JDFResource newPartition = (JDFResource) newPartitionElement;
-			JDFResourceLink rl = theNode.getLink(newPartition, null);
-			rl = ensureLink(partialProductNode, newPartition, rl);
-			handleAmountPool(xjdfRes, partmap, map, rl);
-		}
-		newPartitionElement.setAttributes(map);
-
-		return newPartitionElement;
-	}
-
 	private JDFAttributeMap getResMap(final KElement xjdfRes)
 	{
 		final JDFAttributeMap map = xjdfRes.getAttributeMap();
@@ -266,7 +210,7 @@ public class WalkXJDFResource extends WalkXElement
 	}
 
 	/**
-	 * 
+	 *
 	 * @param xjdfRes
 	 * @param partmap
 	 * @param map
@@ -289,7 +233,7 @@ public class WalkXJDFResource extends WalkXElement
 	}
 
 	/**
-	 * 
+	 *
 	 * @param partialProductNode
 	 * @param newPartition
 	 * @param rl
@@ -342,27 +286,31 @@ public class WalkXJDFResource extends WalkXElement
 
 	/**
 	 * ensure that we always have a SIGNATURENAME partition in case we have a SHEETNAME
-	 * 
+	 *
 	 * @param part the partmap
-	 * 
+	 *
 	 * @return
 	 */
 	JDFAttributeMap getPartMap(final JDFPart part)
 	{
-		final JDFAttributeMap p = part == null ? null : part.getPartMap();
-		if (p != null)
+		final JDFAttributeMap p = part == null ? new JDFAttributeMap() : part.getPartMap();
+
+		String bsID = part == null ? null : part.getNonEmpty(XJDFConstants.BinderySignatureID);
+		if (bsID != null)
 		{
-			String sheetName = p.get(AttributeName.SHEETNAME);
-			String signatureName = p.get(AttributeName.SIGNATURENAME);
-			if (StringUtil.getNonEmpty(sheetName) != null && StringUtil.getNonEmpty(signatureName) == null)
-			{
-				signatureName = "Sig_" + sheetName;
-				p.put(AttributeName.SIGNATURENAME, signatureName);
-				part.setSignatureName(signatureName);
-			}
-			p.remove(AttributeName.PRODUCTPART);
-			p.remove(XJDFConstants.ProcessTypes);
+			p.put(AttributeName.BINDERYSIGNATURENAME, bsID);
 		}
+		String sheetName = p.get(AttributeName.SHEETNAME);
+		String signatureName = p.get(AttributeName.SIGNATURENAME);
+		if (StringUtil.getNonEmpty(sheetName) != null && StringUtil.getNonEmpty(signatureName) == null)
+		{
+			signatureName = "Sig_" + sheetName;
+			p.put(AttributeName.SIGNATURENAME, signatureName);
+			part.setSignatureName(signatureName);
+		}
+		p.remove(AttributeName.PRODUCTPART);
+		p.remove(XJDFConstants.ProcessTypes);
+
 		return p;
 	}
 

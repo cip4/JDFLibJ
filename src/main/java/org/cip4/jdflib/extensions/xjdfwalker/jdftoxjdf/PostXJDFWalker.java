@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,8 +89,8 @@ import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.extensions.AuditPoolHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.MessageResourceHelper;
-import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -114,9 +114,9 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * some generic postprocessing that is better done on the XJDF after JDF to XJDF Conversion 
+ * some generic postprocessing that is better done on the XJDF after JDF to XJDF Conversion
  * such as merging stripping and Layout
- * 
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 class PostXJDFWalker extends BaseElementWalker
@@ -135,26 +135,9 @@ class PostXJDFWalker extends BaseElementWalker
 	 */
 	private boolean bDeliveryIntent;
 	private boolean retainAll;
-	private boolean reorderElements;
 
 	/**
-	 * @return the reorderElements
-	 */
-	protected boolean isReorderElements()
-	{
-		return reorderElements;
-	}
-
-	/**
-	 * @param reorderElements the reorderElements to set
-	 */
-	protected void setReorderElements(boolean reorderElements)
-	{
-		this.reorderElements = reorderElements;
-	}
-
-	/**
-	 * 
+	 *
 	 * @return
 	 */
 	boolean isMergeLayout()
@@ -163,7 +146,7 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param mergeLayout
 	 */
 	void setMergeLayout(boolean mergeLayout)
@@ -172,7 +155,7 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	boolean isIntentPartition()
@@ -181,7 +164,7 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param bIntentPartition
 	 */
 	void setIntentPartition(boolean bIntentPartition)
@@ -190,7 +173,7 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	boolean isDeliveryIntent()
@@ -199,7 +182,7 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param bDeliveryIntent
 	 */
 	void setDeliveryIntent(boolean bDeliveryIntent)
@@ -210,7 +193,7 @@ class PostXJDFWalker extends BaseElementWalker
 	private boolean removeSignatureName;
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	boolean isRemoveSignatureName()
@@ -219,7 +202,7 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param removeSignatureName
 	 */
 	void setRemoveSignatureName(boolean removeSignatureName)
@@ -228,9 +211,9 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class WalkElement extends BaseWalker
 	{
@@ -248,10 +231,6 @@ class PostXJDFWalker extends BaseElementWalker
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			updateNamespaces(xjdf);
-			if (isReorderElements())
-			{
-				reorderElements(xjdf);
-			}
 			return xjdf;
 		}
 
@@ -263,21 +242,13 @@ class PostXJDFWalker extends BaseElementWalker
 				xjdf.setNamespaceURI(XJDF20.getSchemaURL());
 		}
 
-		/**
-		 * 
-		 * @param xjdf
-		 */
-		protected void reorderElements(KElement xjdf)
-		{
-			xjdf.sortChildren(new KElement.SimpleElementNameComparator());
-		}
 	}
 
 	/**
-	 * class that ensures that we do not have signaturename partitions 
-	 * 
+	 * class that ensures that we do not have signaturename partitions
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class WalkPart extends WalkElement
 	{
@@ -291,7 +262,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 */
 		public WalkPart()
 		{
@@ -321,14 +292,14 @@ class PostXJDFWalker extends BaseElementWalker
 
 	/**
 	 * class that cleans up redundant partition keys
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class WalkPartAmount extends WalkElement
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkPartAmount()
 		{
@@ -346,12 +317,21 @@ class PostXJDFWalker extends BaseElementWalker
 			if (!retainAll)
 			{
 				removeRedundantPartKeys(partAmount);
+				fixPartAmount(partAmount);
 			}
 			return super.walk(partAmount, dummy);
 		}
 
+		void fixPartAmount(KElement pa)
+		{
+			pa.removeAttribute(AttributeName.AMOUNT);
+			pa.renameAttribute(AttributeName.ACTUALAMOUNT, AttributeName.AMOUNT);
+			pa.removeAttribute(AttributeName.WASTE);
+			pa.renameAttribute("ActualWaste", AttributeName.WASTE);
+		}
+
 		/**
-		 * 
+		 *
 		 * @param partAmount
 		 */
 		private void removeRedundantPartKeys(JDFPartAmount partAmount)
@@ -388,7 +368,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @param part
 		 * @return
 		 */
@@ -407,7 +387,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
@@ -419,14 +399,14 @@ class PostXJDFWalker extends BaseElementWalker
 
 	/**
 	 * class that cleans up redundant partition keys
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class WalkAmountPool extends WalkElement
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkAmountPool()
 		{
@@ -458,7 +438,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @param partAmount
 		 */
 		void moveActualToAudit(JDFAmountPool partAmount)
@@ -478,19 +458,23 @@ class PostXJDFWalker extends BaseElementWalker
 					VElement vpa = newAmountPool.getChildElementVector(ElementName.PARTAMOUNT, null);
 					for (KElement pa : vpa)
 					{
-						pa.removeAttribute(AttributeName.AMOUNT);
-						pa.renameAttribute(AttributeName.ACTUALAMOUNT, AttributeName.AMOUNT);
-						pa.removeAttribute(AttributeName.WASTE);
-						pa.renameAttribute("ActualWaste", AttributeName.WASTE);
+						fixPartAmount(pa);
 					}
 					walkTree(shNew.getRoot(), null);
 				}
 			}
+		}
 
+		public void fixPartAmount(KElement pa)
+		{
+			pa.removeAttribute(AttributeName.AMOUNT);
+			pa.renameAttribute(AttributeName.ACTUALAMOUNT, AttributeName.AMOUNT);
+			pa.removeAttribute(AttributeName.WASTE);
+			pa.renameAttribute("ActualWaste", AttributeName.WASTE);
 		}
 
 		/**
-		 * 
+		 *
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
@@ -501,13 +485,13 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 */
 	public class WalkPlacedObject extends WalkElement
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkPlacedObject()
 		{
@@ -526,7 +510,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkRefElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
@@ -539,7 +523,7 @@ class PostXJDFWalker extends BaseElementWalker
 		/**
 		 * we do everything on the jdf side so that all other tests are done by the call to super
 		 * @param xjdf
-		 *  
+		 *
 		 * @return
 		 */
 		private KElement copyToPlaceObject(KElement xjdf)
@@ -550,7 +534,6 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				po.moveAttribute(att, xjdf);
 			}
-			po.setAttribute(AttributeName.TYPE, xjdf.getLocalName());
 			po.moveElement(xjdf, null);
 			return po;
 		}
@@ -566,14 +549,14 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class WalkStripCellParams extends WalkElement
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkStripCellParams()
 		{
@@ -592,7 +575,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
@@ -610,14 +593,14 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class WalkStrippingParams extends WalkResourceElement
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkStrippingParams()
 		{
@@ -636,7 +619,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
@@ -663,12 +646,14 @@ class PostXJDFWalker extends BaseElementWalker
 
 		/**
 		 * @param strippingParams
-		 * @param layoutseth 
-		 * @param map 
-		 * @return 
+		 * @param layoutseth
+		 * @param map
+		 * @return
 		 */
 		private JDFAttributeMap mergeStrippingParamsLayout(JDFStrippingParams strippingParams, SetHelper layoutseth, JDFAttributeMap map)
 		{
+			if (isRemoveSignatureName())
+				map.remove(AttributeName.SIGNATURENAME);
 			String bsName = map.remove(AttributeName.BINDERYSIGNATURENAME);
 			String cellIndex = map.remove(AttributeName.CELLINDEX);
 			ResourceHelper layoutPartitionH = layoutseth.getCreatePartition(map, true);
@@ -691,20 +676,36 @@ class PostXJDFWalker extends BaseElementWalker
 			}
 			else
 			{
-				String bsID = strippingParams.getAttribute(ElementName.BINDERYSIGNATURE + "Ref", null, null);
-				ResourceHelper bsHelper = XJDFHelper.getHelper(layoutPartition).getPartition(bsID);
-				JDFBinderySignature bs = (bsHelper == null) ? null : (JDFBinderySignature) bsHelper.getResource();
-				if (bs != null)
+				String bsRef = strippingParams.getNonEmpty(ElementName.BINDERYSIGNATURE + "Ref");
+				ResourceHelper bsHelper = XJDFHelper.getHelper(layoutPartition).getPartition(bsRef);
+				if (bsHelper != null)
 				{
-					bs.setBinderySignatureName(bsName);
-					moveStripCells(bs, childElementVector);
-					moveBSFromStripping(bs, strippingParams);
-					VElement positions = layoutPartition.getChildElementVector(ElementName.POSITION, null);
-					for (KElement position : positions)
+					JDFAttributeMap partMap = bsHelper.getPartMap();
+					String bsID = partMap == null ? null : partMap.get(XJDFConstants.BinderySignatureID);
+					if (bsID == null)
 					{
-						position.setAttribute(ElementName.BINDERYSIGNATURE + "Ref", bsID);
+						if (partMap == null)
+						{
+							partMap = new JDFAttributeMap();
+						}
+						SetHelper sh = bsHelper.getSet();
+						int i = sh.indexOf(bsHelper);
+						partMap.put(XJDFConstants.BinderySignatureID, "BS_" + i);
+						bsHelper.setPartMap(partMap);
 					}
-					strippingParams.removeAttribute(ElementName.BINDERYSIGNATURE + "Ref");
+					JDFBinderySignature bs = (JDFBinderySignature) bsHelper.getResource();
+					if (bs != null)
+					{
+						bs.setBinderySignatureName(bsName);
+						moveStripCells(bs, childElementVector);
+						moveBSFromStripping(bs, strippingParams);
+						VElement positions = layoutPartition.getChildElementVector(ElementName.POSITION, null);
+						for (KElement position : positions)
+						{
+							position.setAttribute(XJDFConstants.BinderySignatureID, bsID);
+						}
+						strippingParams.removeAttribute(ElementName.BINDERYSIGNATURE + "Ref");
+					}
 				}
 				layoutPartition.copyInto(strippingParams, false);
 			}
@@ -712,8 +713,8 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
-		 *  
+		 *
+		 *
 		 * @param strippingParams
 		 * @param layoutPartition
 		 */
@@ -748,7 +749,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * move and merge stripcellparams and signaturecells
 		 * @param bindSig
 		 * @param childElementVector
@@ -775,7 +776,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @param bindSig
 		 * @param il
 		 * @return
@@ -804,7 +805,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @param sc
 		 * @param il
 		 * @return
@@ -835,7 +836,7 @@ class PostXJDFWalker extends BaseElementWalker
 		private void mergeSurfaces(JDFAttributeMap map)
 		{
 			// TODO merge surfaces that match map
-			// 2 options 
+			// 2 options
 			//- either add @Side to the respective content / mark objects + dynamic marks
 			// add Surface elements
 		}
@@ -843,14 +844,14 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class WalkStrippingSet extends WalkResourceSet
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkStrippingSet()
 		{
@@ -888,20 +889,20 @@ class PostXJDFWalker extends BaseElementWalker
 			}
 		}
 		/**
-		 * 
+		 *
 		 * @author Rainer Prosi, Heidelberger Druckmaschinen
-		 * 
+		 *
 		 */
 	}
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	public class WalkArtDeliveryIntentSet extends WalkIntentSet
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkArtDeliveryIntentSet()
 		{
@@ -909,7 +910,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
 		 * @param toCheck
 		 * @return
@@ -943,13 +944,13 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	public class WalkDeliveryIntentSet extends WalkIntentSet
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkDeliveryIntentSet()
 		{
@@ -957,7 +958,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
 		 * @param toCheck
 		 * @return
@@ -991,13 +992,13 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	public class WalkDeliveryParams extends WalkResourceElement
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkDeliveryParams()
 		{
@@ -1005,7 +1006,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
 		 * @param toCheck
 		 * @return
@@ -1067,14 +1068,14 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class WalkIntentSet extends WalkElement
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkIntentSet()
 		{
@@ -1117,14 +1118,14 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class WalkResourceElement extends WalkElement
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkResourceElement()
 		{
@@ -1163,14 +1164,14 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class WalkResource extends WalkElement
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkResource()
 		{
@@ -1236,26 +1237,17 @@ class PostXJDFWalker extends BaseElementWalker
 
 		}
 
-		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#reorderElements(org.cip4.jdflib.core.KElement)
-		 */
-		@Override
-		protected void reorderElements(KElement xjdf)
-		{
-			super.reorderElements(xjdf);
-			new ResourceHelper(xjdf).cleanUp();
-		}
 	}
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class WalkResourceSet extends WalkElement
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkResourceSet()
 		{
@@ -1304,25 +1296,17 @@ class PostXJDFWalker extends BaseElementWalker
 			return ret;
 		}
 
-		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#reorderElements(org.cip4.jdflib.core.KElement)
-		 */
-		@Override
-		protected void reorderElements(KElement xjdf)
-		{
-			// nop
-		}
 	}
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class WalkIntent extends WalkElement
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkIntent()
 		{
@@ -1359,8 +1343,8 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * @param newRoot 
-	 *  
+	 * @param newRoot
+	 *
 	 */
 	PostXJDFWalker(JDFElement newRoot)
 	{
@@ -1371,7 +1355,6 @@ class PostXJDFWalker extends BaseElementWalker
 		mergeLayout = true;
 		removeSignatureName = true;
 		retainAll = false;
-		reorderElements = true;
 	}
 
 	/**
@@ -1393,19 +1376,18 @@ class PostXJDFWalker extends BaseElementWalker
 			removeSignatureName = !retainAll;
 			mergeLayout = !retainAll;
 			bDeliveryIntent = retainAll;
-			reorderElements = false;
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class WalkXJDF extends WalkElement
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkXJDF()
 		{
@@ -1452,8 +1434,8 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @param xjdf 
-		 * 
+		 * @param xjdf
+		 *
 		 */
 		private void reorderSets(JDFElement xjdf)
 		{
@@ -1502,7 +1484,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @param v
 		 */
 		private void combineSameSets(JDFElement xjdf)
@@ -1540,7 +1522,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @param firstSet
 		 * @param next
 		 * @return
@@ -1562,13 +1544,13 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	public class WalkProductList extends WalkElement
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkProductList()
 		{
@@ -1576,7 +1558,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
 		 * @param toCheck
 		 * @return
@@ -1617,24 +1599,16 @@ class PostXJDFWalker extends BaseElementWalker
 			return new VString(ProductHelper.PRODUCTLIST, null);
 		}
 
-		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#reorderElements(org.cip4.jdflib.core.KElement)
-		 */
-		@Override
-		protected void reorderElements(KElement xjdf)
-		{
-			//nop
-		}
 	}
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	public class WalkProduct extends WalkElement
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkProduct()
 		{
@@ -1642,7 +1616,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
 		 * @param toCheck
 		 * @return
@@ -1667,7 +1641,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @param xjdf
 		 */
 		private void fixChildRefs(KElement xjdf)
@@ -1701,14 +1675,14 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @author rainer prosi
 	 *
 	 */
 	public class WalkHeadBandApplicationParams extends WalkResourceElement
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkHeadBandApplicationParams()
 		{
@@ -1774,13 +1748,13 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	public class WalkProcessList extends WalkElement
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkProcessList()
 		{
@@ -1788,7 +1762,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
 		 * @param toCheck
 		 * @return
@@ -1822,10 +1796,10 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * class that ensures that we do not have signaturename partitions 
-	 * 
+	 * class that ensures that we do not have signaturename partitions
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class WalkXJMF extends WalkElement
 	{
@@ -1839,7 +1813,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 */
 		public WalkXJMF()
 		{
@@ -1856,33 +1830,19 @@ class PostXJDFWalker extends BaseElementWalker
 			return super.walk(xjdf, dummy);
 		}
 
-		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#reorderElements(org.cip4.jdflib.core.KElement)
-		 */
-		@Override
-		protected void reorderElements(KElement xjdf)
-		{
-			super.reorderElements(xjdf);
-			KElement header = xjdf.removeChild(XJDFConstants.Header, null, 0);
-			if (header != null)
-			{
-				xjdf.insertBefore(header, xjdf.getFirstChild());
-			}
-		}
-
 	}
 
 	/**
-	 * class that ensures that we do not have signaturename partitions 
-	 * 
+	 * class that ensures that we do not have signaturename partitions
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class WalkMessage extends WalkElement
 	{
 
 		/**
-		 * 
+		 *
 		 */
 		public WalkMessage()
 		{
@@ -1910,33 +1870,19 @@ class PostXJDFWalker extends BaseElementWalker
 					|| localName.startsWith(ElementName.COMMAND);
 		}
 
-		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#reorderElements(org.cip4.jdflib.core.KElement)
-		 */
-		@Override
-		protected void reorderElements(KElement xjdf)
-		{
-			super.reorderElements(xjdf);
-			KElement header = xjdf.removeChild(XJDFConstants.Header, null, 0);
-			if (header != null)
-			{
-				xjdf.insertBefore(header, xjdf.getFirstChild());
-			}
-		}
-
 	}
 
 	/**
-	 * class that ensures that we do not have signaturename partitions 
-	 * 
+	 * class that ensures that we do not have signaturename partitions
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class WalkAudit extends WalkElement
 	{
 
 		/**
-		 * 
+		 *
 		 */
 		public WalkAudit()
 		{
@@ -1963,24 +1909,10 @@ class PostXJDFWalker extends BaseElementWalker
 			return localName.startsWith(ElementName.AUDIT) && !ElementName.AUDITPOOL.equals(localName);
 		}
 
-		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#reorderElements(org.cip4.jdflib.core.KElement)
-		 */
-		@Override
-		protected void reorderElements(KElement xjdf)
-		{
-			super.reorderElements(xjdf);
-			KElement header = xjdf.removeChild(XJDFConstants.Header, null, 0);
-			if (header != null)
-			{
-				xjdf.insertBefore(header, xjdf.getFirstChild());
-			}
-		}
-
 	}
 
 	/**
-	 * 
+	 *
 	 * @param xjdf
 	 */
 	void moveToSender(KElement xjdf)
@@ -2007,6 +1939,6 @@ class PostXJDFWalker extends BaseElementWalker
 	public String toString()
 	{
 		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll
-				+ ", reorderElements=" + reorderElements + ", removeSignatureName=" + removeSignatureName + ", newRoot=" + newRoot + "]";
+				+ ", removeSignatureName=" + removeSignatureName + ", newRoot=" + newRoot + "]";
 	}
 }

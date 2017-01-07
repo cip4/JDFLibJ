@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,20 +54,21 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
@@ -82,7 +83,7 @@ import org.cip4.jdflib.util.StringUtil;
 public class WalkDeviceInfo extends WalkJDFSubElement
 {
 	/**
-	 * 
+	 *
 	 */
 	public WalkDeviceInfo()
 	{
@@ -111,25 +112,32 @@ public class WalkDeviceInfo extends WalkJDFSubElement
 	}
 
 	/**
-	 * 
+	 *
 	 * @param map
 	 */
 	private void updateDeviceStatus(JDFAttributeMap map)
 	{
 		map.renameKey(AttributeName.DEVICESTATUS, AttributeName.STATUS);
-		String val = map.get(AttributeName.STATUS);
-		if (StringUtil.getNonEmpty(val) != null)
+		String status = map.get(AttributeName.STATUS);
+		String opMode = map.remove(AttributeName.DEVICEOPERATIONMODE);
+
+		EnumDeviceOperationMode eOpMode = EnumDeviceOperationMode.getEnum(opMode);
+		if (EnumDeviceOperationMode.NonProductive.equals(eOpMode) || EnumDeviceOperationMode.Maintenance.equals(eOpMode))
 		{
-			if ("Unknown".equals(val) || "Down".equals(val))
-			{
-				val = "Offline";
-			}
-			else if ("Setup".equals(val) || "Running".equals(val) || "Cleanup".equals(val))
-			{
-				val = "Production";
-			}
-			map.put(AttributeName.STATUS, val);
+			status = "NonProductive";
 		}
+		else if (StringUtil.getNonEmpty(status) != null)
+		{
+			if ("Unknown".equals(status) || "Down".equals(status))
+			{
+				status = "Offline";
+			}
+			else if ("Setup".equals(status) || "Running".equals(status) || "Cleanup".equals(status))
+			{
+				status = "Production";
+			}
+		}
+		map.put(AttributeName.STATUS, status);
 	}
 
 	/**
@@ -139,6 +147,20 @@ public class WalkDeviceInfo extends WalkJDFSubElement
 	public VString getElementNames()
 	{
 		return new VString(ElementName.DEVICEINFO, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#setAttributes(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void setAttributes(KElement jdf, KElement eNew)
+	{
+		super.setAttributes(jdf, eNew);
+		KElement parent = eNew.getParentNode_KElement();
+		if (parent != null)
+		{
+			parent.moveAttribute(AttributeName.DEVICEID, eNew);
+		}
 	}
 
 }

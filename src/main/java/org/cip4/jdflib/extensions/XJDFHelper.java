@@ -96,15 +96,15 @@ import org.cip4.jdflib.util.UrlUtil;
 public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 {
 	/**
-	 * 
+	 *
 	 */
 	public static final String RESOURCE = XJDFConstants.Resource;
 	/**
-	 * 
+	 *
 	 */
 	public static final String XJDF = XJDFConstants.XJDF;
 	/**
-	 * 
+	 *
 	 */
 	public static final String XJMF = XJDFConstants.XJMF;
 	/**
@@ -115,7 +115,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 
 	/**
 	 * factory to create a helper from a doc
-	 *  
+	 *
 	 * @param doc the xmldoc to parse
 	 * @return the helper
 	 */
@@ -129,7 +129,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 
 	/**
 	 * factory to create a helper from an element
-	 *  
+	 *
 	 * @param root the element to parse if not an XJDF - search in ancestors of element
 	 * @return the helper
 	 */
@@ -164,8 +164,8 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 
 	/**
 	 * @param jobID , if null a new jobid is generated
-	 * @param jobPartID 
-	 * @param parts 
+	 * @param jobPartID
+	 * @param parts
 	 */
 	public XJDFHelper(String jobID, String jobPartID, VJDFAttributeMap parts)
 	{
@@ -189,7 +189,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	void newXJDF()
 	{
@@ -209,7 +209,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @param setName
 	 * @param usage
 	 * @return the vector of parametersets and resourcesets
@@ -234,7 +234,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public AuditPoolHelper getAuditPool()
@@ -244,7 +244,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public AuditPoolHelper getCreateAuditPool()
@@ -254,7 +254,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * @param id 
+	 * @param id
 	 * @return the  parameterset and resourceset with ID=iD
 	 */
 	public SetHelper getSet(String id)
@@ -273,7 +273,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * @param id 
+	 * @param id
 	 * @return the  parameterset and resourceset with a child partiton with ID=iD
 	 */
 	public SetHelper getSetForPartition(String id)
@@ -290,7 +290,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * @param id 
+	 * @param id
 	 * @return the  parameterset and resourceset with ID=iD
 	 */
 	public ResourceHelper getPartition(String id)
@@ -314,7 +314,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * is the element a set?
 	 * @param e
 	 * @return
@@ -327,8 +327,8 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
-	 * @return the 
+	 *
+	 * @return the
 	 */
 	public String getJobID()
 	{
@@ -336,9 +336,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @param usage if Input, get predecessors,  if Output get followers, if null get any
-	 *  
+	 *
 	 * @return the list of dependents, null if none were found
 	 */
 	public VString getDependentJobParts(EnumUsage usage)
@@ -356,7 +356,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -368,7 +368,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -386,8 +386,8 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	/**
 	 * get the Root product by index
 	 * - note that this need not be the index in the product list but rather depends on the index of the ID in ProductList/@RootProducts
-	 * 
-	 * @param iProduct the index of root products 
+	 *
+	 * @param iProduct the index of root products
 	 * @return the product, null if no matching product exists
 	 */
 	public ProductHelper getRootProduct(int iProduct)
@@ -408,8 +408,8 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	/**
 	* get the Root product by index
 	* - note that this need not be the index in the product list but rather depends on the index of the ID in ProductList/@RootProducts
-	* 
-	* @param iProduct the index of root products 
+	*
+	* @param iProduct the index of root products
 	* @return the product, null if no matching product exists
 	*/
 	public ProductHelper getCreateRootProduct(int iProduct)
@@ -424,7 +424,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @param rootOnly
 	 * @return
 	 */
@@ -435,7 +435,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @return the xjdf root element
 	 */
 	public Vector<ProductHelper> getRootProductHelpers()
@@ -457,7 +457,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 
 	/**
 	 * the vector of product helpers; null if no ProductList or no ProductList/Product
-	 * 
+	 *
 	 * @return the vector of product helpers
 	 */
 	public Vector<ProductHelper> getProductHelpers()
@@ -476,9 +476,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * @param name 
-	 * @param iSet 
-	 * @param iPart 
+	 * @param name
+	 * @param iSet
+	 * @param iPart
 	 * @return PartitionHelper for the requested partition, null if it ain't there
 	 */
 	public ResourceHelper getPartition(String name, int iSet, int iPart)
@@ -488,9 +488,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * @param name 
-	 * @param iSet 
-	 * @param iPart 
+	 * @param name
+	 * @param iSet
+	 * @param iPart
 	 * @return resource for the requested partition, null if it ain't there
 	 */
 	public KElement getResource(String name, int iSet, int iPart)
@@ -500,8 +500,8 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * @param name 
-	 * @param iSkip 
+	 * @param name
+	 * @param iSkip
 	 * @return the SetHelper for the vector of parametersets and resourcesets
 	 */
 	public SetHelper getSet(String name, int iSkip)
@@ -525,9 +525,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * @param name 
+	 * @param name
 	 * @param processUsage
-	 *  
+	 *
 	 * @return the SetHelper for the vector of parametersets and resourcesets
 	 */
 	public SetHelper getSet(String name, String processUsage)
@@ -546,9 +546,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * @param name 
+	 * @param name
 	 * @param processUsage
-	 *  
+	 *
 	 * @return the SetHelper for the vector of resourcesets
 	 */
 	public SetHelper getSet(String name, EnumUsage usage, String processUsage)
@@ -569,8 +569,8 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 
 	/**
 	 * @param family - always RESOURCE better use appendResourceSet
-	 * @param name 
-	 * @param usage 
+	 * @param name
+	 * @param usage
 	 * @return a new set element
 	 */
 	public SetHelper appendSet(String family, String name, EnumUsage usage)
@@ -589,9 +589,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * @param family 
-	 * @param name 
-	 * @param usage 
+	 * @param family
+	 * @param name
+	 * @param usage
 	 * @return a new set element
 	 */
 	public SetHelper getCreateSet(String family, String name, EnumUsage usage)
@@ -605,9 +605,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 *  
-	 * @param name 
-	 * @param usage 
+	 *
+	 * @param name
+	 * @param usage
 	 * @return a new set element
 	 */
 	public SetHelper getCreateResourceSet(String name, EnumUsage usage)
@@ -616,9 +616,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 *  
-	 * @param name 
-	 * @param usage 
+	 *
+	 * @param name
+	 * @param usage
 	 * @param processUsage
 	 * @return a new set element
 	 */
@@ -634,9 +634,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 *  
-	 * @param name 
-	 * @param usage 
+	 *
+	 * @param name
+	 * @param usage
 	 * @return a new set element
 	 * @deprecated
 	 */
@@ -647,7 +647,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * @param name 
+	 * @param name
 	 */
 	public void removeSet(String name)
 	{
@@ -659,8 +659,8 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * @param name 
-	 * @param usage 
+	 * @param name
+	 * @param usage
 	 * @return a new set element
 	 * @deprecated
 	 *
@@ -672,7 +672,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * @return a new producthelper 
+	 * @return a new producthelper
 	 */
 	public ProductHelper appendProduct()
 	{
@@ -684,8 +684,8 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * @param name 
-	 * @param usage 
+	 * @param name
+	 * @param usage
 	 * @return a new set element
 	 * @deprecated
 	 */
@@ -696,8 +696,8 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * @param name 
-	 * @param usage 
+	 * @param name
+	 * @param usage
 	 * @return a new set element
 	 */
 	public SetHelper appendResourceSet(String name, EnumUsage usage)
@@ -717,7 +717,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 
 	/**
 	 * @param file
-	 * @return 
+	 * @return
 	 */
 	public boolean writeToFile(String file)
 	{
@@ -729,7 +729,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	/**
 	 * write to a directory - potentially generating a jobPartID
 	 * @param dir
-	 * @return 
+	 * @return
 	 */
 	public File writeToDir(String dir)
 	{
@@ -756,7 +756,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 
 	/**
 	 * @param os
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public void writeToStream(OutputStream os) throws IOException
 	{
@@ -765,7 +765,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @param types
 	 */
 	public void setTypes(String types)
@@ -775,7 +775,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @param vtypes
 	 */
 	public void setTypes(VString vtypes)
@@ -784,7 +784,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @return types the vector of types
 	 */
 	public VString getTypes()
@@ -793,7 +793,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @return the category
 	 */
 	public String getCategory()
@@ -802,7 +802,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @return the category
 	 */
 	public VJDFAttributeMap getPartMapVector()
@@ -812,7 +812,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @return the implied JDF/@Type - if only one type in @Types, then we use said @Types, else ProcessGroup
 	 */
 	public EnumType getType()
@@ -832,13 +832,14 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	@Override
 	public void cleanUp()
 	{
-		super.cleanUp();
+		theElement.sortChildren(new KElement.SimpleElementNameComparator(), false);
 		Vector<SetHelper> v = getSets();
 		if (v != null)
 		{
 			for (SetHelper sh : v)
 			{
 				sh.cleanUp();
+				theElement.moveElement(sh.getSet(), null);
 			}
 		}
 		AuditPoolHelper auditPool = getAuditPool();
@@ -849,7 +850,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @return a clone of this; any underlying documents or elements are also cloned
 	 */
 	@Override
@@ -860,7 +861,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public String getJobPartID()
@@ -869,7 +870,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @param jobPartID
 	 */
 	public void setJobPartID(String jobPartID)
@@ -878,7 +879,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @param jobID
 	 */
 	public void setJobID(String jobID)
@@ -888,7 +889,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 
 	/**
 	 * ensure we always have auditpool and productlist first
-	 * 
+	 *
 	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#reorder()
 	 */
 	@Override

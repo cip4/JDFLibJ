@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,12 +87,12 @@ import org.cip4.jdflib.util.StringUtil;
 public class SetHelper extends BaseXJDFHelper
 {
 	/**
-	 * 
+	 *
 	 */
 	public static final String SET = "Set";
 
 	/**
-	 * 
+	 *
 	 * @author rainerprosi
 	 *
 	 */
@@ -102,12 +102,12 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public static final String PARAMETER_SET = EnumFamily.Parameter.name() + "Set";
 	/**
-	 * 
+	 *
 	 */
 	public static final String RESOURCE_SET = XJDFConstants.ResourceSet;
 
@@ -121,7 +121,7 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * is the element a set?
 	 * @param e
 	 * @return
@@ -144,7 +144,7 @@ public class SetHelper extends BaseXJDFHelper
 
 	/**
 	 * @param map
-	 * @return 
+	 * @return
 	 */
 	public ResourceHelper getPartition(JDFAttributeMap map)
 	{
@@ -161,7 +161,7 @@ public class SetHelper extends BaseXJDFHelper
 
 	/**
 	 * @param index
-	 * @return 
+	 * @return
 	 */
 	public ResourceHelper getPartition(int index)
 	{
@@ -175,8 +175,8 @@ public class SetHelper extends BaseXJDFHelper
 
 	/**
 	 * @param map
-	 * @param addRes 
-	 * @return 
+	 * @param addRes
+	 * @return
 	 */
 	public ResourceHelper getCreatePartition(JDFAttributeMap map, boolean addRes)
 	{
@@ -195,10 +195,10 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * get an existing partition with at least a matching partmap 
+	 * get an existing partition with at least a matching partmap
 	 * @param map
-	 * @param addRes 
-	 * @return 
+	 * @param addRes
+	 * @return
 	 */
 	public ResourceHelper getCreateVPartition(VJDFAttributeMap vmap, boolean addRes)
 	{
@@ -237,10 +237,10 @@ public class SetHelper extends BaseXJDFHelper
 
 	/**
 	 * creates 1 partition for each entry in the map
-	 * 
+	 *
 	 * @param vmap
-	 * @param addRes 
-	 * @return 
+	 * @param addRes
+	 * @return
 	 */
 	public Vector<ResourceHelper> getCreatePartitions(VJDFAttributeMap vmap, boolean addRes)
 	{
@@ -259,8 +259,8 @@ public class SetHelper extends BaseXJDFHelper
 
 	/**
 	 * @param index
-	 * @param addRes 
-	 * @return 
+	 * @param addRes
+	 * @return
 	 */
 	public ResourceHelper getCreatePartition(int index, boolean addRes)
 	{
@@ -300,7 +300,7 @@ public class SetHelper extends BaseXJDFHelper
 
 	/**
 	 * convenience ... @see {@link SetHelper#appendPartition(JDFAttributeMap, boolean)}
-	 * 
+	 *
 	 * @param partKey
 	 * @param partValue
 	 * @param addRes
@@ -313,7 +313,7 @@ public class SetHelper extends BaseXJDFHelper
 
 	/**
 	 * convenience ... @see {@link SetHelper#getCreatePartition(JDFAttributeMap, boolean)}
-	 * 
+	 *
 	 * @param partKey
 	 * @param partValue
 	 * @param addRes
@@ -351,7 +351,7 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public XJDFHelper getXJDF()
@@ -371,7 +371,7 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * @return the vector of partition helpers 
+	 * @return the vector of partition helpers
 	 */
 	public Vector<ResourceHelper> getPartitions()
 	{
@@ -389,7 +389,7 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void cleanUp()
@@ -409,7 +409,7 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * @return the name of the resource set 
+	 * @return the name of the resource set
 	 * also fixes it in case it needs to be calculated from kids
 	 */
 	public String getName()
@@ -433,8 +433,8 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * @return 
-	 * 
+	 * @return
+	 *
 	 */
 	public String getPartitionName()
 	{
@@ -443,8 +443,8 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
-	 * @param e the element to test 
+	 *
+	 * @param e the element to test
 	 * @return  then asset type name (Parameter, Resource etc)
 	 */
 	public static String getSetName(KElement e)
@@ -453,8 +453,8 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
-	 * @param setName the name of the set element 
+	 *
+	 * @param setName the name of the set element
 	 * @return then asset type name (Parameter, Resource etc)
 	 */
 	public static String getSetName(String setName)
@@ -532,8 +532,8 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @return
 	 */
 	public EnumUsage getUsage()
@@ -542,8 +542,8 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @return
 	 */
 	public String getProcessUsage()
@@ -552,8 +552,8 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @return
 	 */
 	public void setProcessUsage(String processUsage)
@@ -592,7 +592,7 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public EnumFamily getFamily()
@@ -605,7 +605,7 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setID(java.lang.String)
 	 */
 	@Override
@@ -626,7 +626,7 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public VJDFAttributeMap getPartMapVector()
@@ -642,7 +642,7 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public VString getDependentJobParts()
@@ -661,7 +661,7 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @param name
 	 */
 	public void setName(String name)
@@ -680,6 +680,22 @@ public class SetHelper extends BaseXJDFHelper
 				ph.removeAttribute(AttributeName.ID, null);
 			}
 		}
+
+	}
+
+	/**
+	 *
+	 * @param bsHelper
+	 * @return
+	 */
+	public int indexOf(ResourceHelper bsHelper)
+	{
+		if (bsHelper == null)
+			return -1;
+		VElement v = theElement.getChildElementVector(getPartitionName(), null);
+		if (v == null)
+			return -1;
+		return v.indexOf(bsHelper.getRoot());
 
 	}
 }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	KElement root = null;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetName()
@@ -94,7 +94,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsSet()
@@ -106,7 +106,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartition()
@@ -120,7 +120,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetXJDF()
@@ -130,7 +130,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetName()
@@ -142,7 +142,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetDependentJobPart()
@@ -157,7 +157,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartitionMap()
@@ -173,7 +173,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartitionsMap()
@@ -186,7 +186,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartMapVector()
@@ -206,7 +206,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartitionsVMap()
@@ -219,7 +219,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartitionByID()
@@ -232,7 +232,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetCreatePartition()
@@ -246,7 +246,19 @@ public class SetHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
+	 */
+	@Test
+	public void testIndexOf()
+	{
+		SetHelper sh = new XJDFHelper(root).getCreateResourceSet("FoldingParams", EnumUsage.Input);
+		assertEquals(sh.indexOf(null), -1);
+		ResourceHelper rh = sh.getCreatePartition(0, false);
+		assertEquals(sh.indexOf(rh), 0);
+	}
+
+	/**
+	 *
 	 */
 	@Test
 	public void testCleanup()
@@ -258,7 +270,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void setUp()

@@ -258,6 +258,21 @@ public class TestJDF extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 * @throws Throwable
+	 */
+	@Test
+	public void testMerge() throws Throwable
+	{
+		JDFNode main = JDFNode.parseFile("/data/JDF/bug/lucas/main.jdf");
+		JDFNode sub = JDFNode.parseFile("/data/JDF/bug/lucas/sub.jdf");
+
+		JDFMerge m = new JDFMerge(main);
+		m.mergeJDF(sub);
+		main.write2File("/data/JDF/bug/lucas/merged.jdf");
+	}
+
+	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
