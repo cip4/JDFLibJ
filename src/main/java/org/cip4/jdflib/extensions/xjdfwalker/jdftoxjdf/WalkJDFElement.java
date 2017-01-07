@@ -594,6 +594,7 @@ public class WalkJDFElement extends WalkElement
 		{
 			final JDFResourceLink resLink = (JDFResourceLink) rl;
 			final JDFResource resInRoot = resLink.getTarget();
+			JDFNode rlParent = (JDFNode) rl.getDeepParent(ElementName.JDF, 0);
 			if (resInRoot != null)
 			{
 				final VElement vCreators = resInRoot.getCreator(EnumUsage.Input.equals(resLink.getUsage()));
@@ -602,16 +603,17 @@ public class WalkJDFElement extends WalkElement
 					for (KElement creator : vCreators)
 					{
 						final JDFNode depNode = (JDFNode) creator;
+						if (depNode.equals(rlParent))
+							continue;
 						if (!depNode.isGroupNode())
 						{
 							final KElement dependent = resourceSet.appendElement(XJDFConstants.Dependent);
 							dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
 							dependent.copyAttribute(AttributeName.JMFURL, depNode);
 							dependent.copyAttribute(AttributeName.JOBPARTID, depNode);
-							dependent.setNonEmpty(AttributeName.PIPEPROTOCOL, resLink.getPipeProtocol());
-							dependent.copyAttribute(AttributeName.PIPEPAUSE, resLink);
-							dependent.copyAttribute(AttributeName.PIPERESUME, resLink);
-							dependent.setNonEmpty(AttributeName.PIPEPROTOCOL, resLink.getPipeProtocol());
+							dependent.moveAttribute(AttributeName.PIPEPAUSE, resLink);
+							dependent.moveAttribute(AttributeName.PIPERESUME, resLink);
+							dependent.moveAttribute(AttributeName.PIPEPROTOCOL, resLink);
 							dependent.setNonEmpty(AttributeName.PIPEID, linkRoot.getPipeID());
 							dependent.copyAttribute(AttributeName.PIPEPARTIDKEYS, resLink);
 						}

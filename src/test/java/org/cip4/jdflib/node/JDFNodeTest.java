@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -137,13 +137,13 @@ import org.junit.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class JDFNodeTest extends JDFTestCaseBase
 {
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	public void testgetLinkedResourceVector()
 	{
@@ -183,7 +183,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPredecessors()
@@ -210,7 +210,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPredecessorsPartition()
@@ -237,7 +237,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetRefPartition()
@@ -266,7 +266,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSortChildren()
@@ -303,7 +303,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetType()
@@ -332,7 +332,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetEnum()
@@ -356,7 +356,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testLinkResourceNS()
@@ -371,7 +371,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEnsureLink()
@@ -390,7 +390,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEnsureLinkProcessUsage()
@@ -406,7 +406,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEnsureLinkRecursive()
@@ -445,7 +445,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * test whether combinedprocessIndex is automagically and correctly assigned
-	 * 
+	 *
 	 */
 	@Test
 	public void testInsertTypeInTypes()
@@ -468,7 +468,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * test whether combinedprocessIndex is automagically and correctly assigned
-	 * 
+	 *
 	 */
 	@Test
 	public void testLinkNamesCombined()
@@ -483,7 +483,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * test whether combinedprocessIndex is automagically and correctly assigned
-	 * 
+	 *
 	 */
 	@Test
 	public void testLinkNamesProduct()
@@ -499,7 +499,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * test whether combinedprocessIndex is automagically and correctly assigned
-	 * 
+	 *
 	 */
 	@Test
 	public void testLinkResourceSimple()
@@ -513,8 +513,8 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testParseFile()
@@ -526,8 +526,8 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testParseFileNull()
@@ -539,8 +539,8 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testParseStreamNull()
@@ -550,8 +550,8 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testParseStream()
@@ -562,7 +562,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * test whether combinedprocessIndex is automagically and correctly assigned
-	 * 
+	 *
 	 */
 	@Test
 	public void testLinkOutput()
@@ -584,7 +584,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	/**
 	 * test whether combinedprocessIndex is automagically and correctly assigned
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public void testLinkResourceCombined() throws Exception
@@ -649,7 +649,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddTypes()
@@ -669,7 +669,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddProduct()
@@ -682,7 +682,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddProcessGroup()
@@ -699,7 +699,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddResource()
@@ -721,7 +721,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testActivation()
@@ -732,7 +732,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddInternalPipe()
@@ -752,7 +752,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCombinedProcessIndex()
@@ -767,7 +767,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCombinedProcessIndexStar()
@@ -784,7 +784,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testCombinedProcessIndexGeneric()
@@ -798,7 +798,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEnumType()
@@ -809,7 +809,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testContainsType()
@@ -826,7 +826,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCloneResourceToModify()
@@ -846,7 +846,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEraseEmptyAttributes()
@@ -860,7 +860,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEraseEmptyNodes()
@@ -877,7 +877,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFixVersion()
@@ -895,7 +895,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// /////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEraseUnlinkedResources()
@@ -942,7 +942,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveResource()
@@ -960,7 +960,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveLink()
@@ -981,8 +981,8 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws DataFormatException 
-	 * 
+	 * @throws DataFormatException
+	 *
 	 */
 	@Test
 	public void testRemoveFromTypes() throws DataFormatException
@@ -1011,7 +1011,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// //////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testResourceAudit()
@@ -1050,7 +1050,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * test setPartStatus with null maps
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetPartStatusNull()
@@ -1127,8 +1127,8 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testSetPhase() throws Exception
@@ -1290,7 +1290,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetExecutablePartitionsPreflightImport
-	 * 
+	 *
 	 */
 
 	@Test
@@ -1327,7 +1327,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetExecutablePartitionsNormalizer
-	 * 
+	 *
 	 */
 
 	@Test
@@ -1352,7 +1352,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * Method testIsExecutableZones
-	 * 
+	 *
 	 */
 
 	@Test
@@ -1401,7 +1401,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@SuppressWarnings("unchecked")
 	@Test
@@ -1445,7 +1445,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNodeIdentifier()
@@ -1468,7 +1468,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNodeIdentifierParts()
@@ -1495,7 +1495,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNodeIdentifierMatches()
@@ -1526,7 +1526,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testInit()
@@ -1543,7 +1543,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testInitDefaultVersion()
@@ -1565,7 +1565,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsValid()
@@ -1581,7 +1581,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsValidCombined()
@@ -1593,7 +1593,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsGroupNode()
@@ -1613,7 +1613,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsTypesNode()
@@ -1636,7 +1636,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsExecutable()
@@ -1716,7 +1716,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetInheritedNodeInfo()
@@ -1761,7 +1761,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCreateNode()
@@ -1770,7 +1770,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCreateNodeInfo()
@@ -1782,8 +1782,8 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertTrue("nodeinfo is resource", n.getResourceClass() == EnumResourceClass.Parameter);
 		doc.write2File(sm_dirTestDataTemp + "createNodeInfoTest.xml", 0, true);
 		final JDFCustomerInfo myCustInfo = node.getCreateCustomerInfo();
-		final JDFContact myContact = myCustInfo.appendContact();
-		assertTrue("contact is res", myContact.getResourceClass() == EnumResourceClass.Parameter);
+		myCustInfo.appendContact();
+		//assertTrue("contact is res", myContact.getResourceClass() == EnumResourceClass.Parameter);
 		assertNotNull(node.getNodeInfo());
 		node.removeNodeInfo();
 		assertNull(node.getNodeInfo());
@@ -1793,7 +1793,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetvJDFNode()
@@ -1819,7 +1819,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartStatusNull()
@@ -1840,7 +1840,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartStatusSingleLeaf()
@@ -1871,7 +1871,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartStatusIdentical()
@@ -1899,7 +1899,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartStatusImplicit()
@@ -1921,7 +1921,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartStatusPerformance()
@@ -1947,7 +1947,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetVectorPartStatus()
@@ -1968,7 +1968,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetVectorPartStatusDetails()
@@ -1988,7 +1988,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartStatusGlobal()
@@ -2010,7 +2010,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartStatus()
@@ -2050,7 +2050,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartStatusMinMax()
@@ -2096,7 +2096,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGenericResources()
@@ -2122,7 +2122,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testProductValidation()
@@ -2143,7 +2143,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGrayBox()
@@ -2160,7 +2160,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendMatchingResourceProduct()
@@ -2185,7 +2185,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendMatchingResourcePrivate()
@@ -2206,7 +2206,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendMatchingResourceDefinition()
@@ -2220,7 +2220,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetResource()
@@ -2255,7 +2255,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLink2()
@@ -2272,7 +2272,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetResourceNS()
@@ -2286,7 +2286,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetResourceRoot()
@@ -2307,7 +2307,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetResourceEmptyRLP()
@@ -2325,7 +2325,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetResourceProcessUsage()
@@ -2347,7 +2347,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetCreateResource()
@@ -2369,7 +2369,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetCreateResourceProcUsage()
@@ -2385,7 +2385,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendMatchingResource()
@@ -2435,7 +2435,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCheckSpawnedResources()
@@ -2524,7 +2524,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetParentJDF()
@@ -2541,7 +2541,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetEnumTypes()
@@ -2564,7 +2564,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetAncestorElementRef()
@@ -2577,7 +2577,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetAncestorElement()
@@ -2589,7 +2589,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetAncestorElementAttribute()
@@ -2606,7 +2606,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetActivation()
@@ -2646,7 +2646,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetAllTypes()
@@ -2694,7 +2694,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetMatchingNodes()
@@ -2716,7 +2716,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetMatchingResource()
@@ -2748,7 +2748,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetJobPart()
@@ -2773,7 +2773,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetJobPartIdentifier()
@@ -2792,7 +2792,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetChildJDFNode()
@@ -2817,7 +2817,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetCombinedProcessIndex()
@@ -2834,7 +2834,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLink()
@@ -2856,7 +2856,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetResourceLinks()
@@ -2875,7 +2875,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testUpdatePartStatus()
@@ -2930,7 +2930,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testToGrayBox()
@@ -2979,7 +2979,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testStatusPartMapVector()
@@ -3009,7 +3009,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetGreateLinksForType()
@@ -3041,7 +3041,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLinksForType()
@@ -3143,7 +3143,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetMatchingResourceStar()
@@ -3195,7 +3195,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetMissingLinks()
@@ -3220,7 +3220,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetMissingLinksProduct()
@@ -3240,7 +3240,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetWorkStepID()
@@ -3271,7 +3271,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetUnknownLinks()

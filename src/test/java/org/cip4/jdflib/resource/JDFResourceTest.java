@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -143,7 +143,7 @@ import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * 20.01.2009
  */
 public class JDFResourceTest extends JDFTestCaseBase
@@ -153,7 +153,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	private boolean bSubElem;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetCreator()
@@ -165,7 +165,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetCreatorPartition()
@@ -192,7 +192,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testUnPartition()
@@ -205,7 +205,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testUnPartitionNot()
@@ -221,7 +221,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetAttributeVector()
@@ -245,7 +245,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetNonEmpty()
@@ -262,7 +262,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetNonEmpty_KElement()
@@ -281,7 +281,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHasNonEmpty()
@@ -298,7 +298,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testHasNonEmpty_KElement()
@@ -419,7 +419,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testInitAgentName()
@@ -431,7 +431,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 */
 	@Test
@@ -463,7 +463,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetResourceRootNI13()
@@ -565,7 +565,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsPhysical()
@@ -585,7 +585,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testIsParameter()
@@ -600,7 +600,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testInvalidAttributes()
@@ -614,7 +614,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsResourceElement()
@@ -637,7 +637,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testgetPartMap()
@@ -696,7 +696,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testgetPartValues()
@@ -724,7 +724,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testgetPartMapVector()
@@ -749,7 +749,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testgetPartMapVectorSequence()
@@ -772,7 +772,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetChildrenByTagName()
@@ -803,7 +803,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetChildElement()
@@ -827,7 +827,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetChildElementVector()
@@ -880,7 +880,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// /////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetColorPool()
@@ -982,7 +982,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testUpdateValuesFromLeaves()
@@ -1087,7 +1087,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testContainsData()
@@ -1104,7 +1104,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCreatePartitions()
@@ -1152,7 +1152,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	// ///////////////////////////////////////////////////////////
 	@Test
@@ -1320,7 +1320,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHasAttribute()
@@ -1338,7 +1338,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIdenticalStatus()
@@ -1367,7 +1367,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIdentical()
@@ -1461,7 +1461,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIdenticalValid()
@@ -1497,7 +1497,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testGetParentPartition()
@@ -1536,7 +1536,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartitionSelf()
@@ -1700,7 +1700,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartitionVectorIdentical()
@@ -1732,7 +1732,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartitionVectorIdenticalNoFollowIdentical()
@@ -1774,7 +1774,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartitionVector()
@@ -1864,7 +1864,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartitionVectorSkip()
@@ -1889,7 +1889,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testDeleteUnlinked()
@@ -1915,7 +1915,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// /
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLinks()
@@ -1935,7 +1935,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLinksAndRefsPerformance()
@@ -1989,7 +1989,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLinksAndRefs()
@@ -2034,7 +2034,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLocalPartitionKey()
@@ -2054,7 +2054,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testBuildXPath()
@@ -2069,7 +2069,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testBinderySignatureName()
@@ -2084,7 +2084,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testInvalidPartIDKeysLeaves()
@@ -2099,7 +2099,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testExplicitPartUsage()
@@ -2124,7 +2124,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testInvalidPartUsage()
@@ -2143,7 +2143,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////////
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testGetLeaves()
@@ -2165,7 +2165,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testGetMinStatusFromLeaves()
@@ -2197,7 +2197,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	/**
 	 * @return the doc
-	 * 
+	 *
 	 */
 	public static JDFDoc creatRLDoc()
 	{
@@ -2223,7 +2223,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testSubElement()
@@ -2232,7 +2232,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFNode n = doc.getJDFRoot();
 		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
 		JDFMedia m = xm.getMedia();
-		assertEquals("Media in XM class", m.getResourceClass(), EnumResourceClass.Consumable);
+		//		assertEquals("Media in XM class", m.getResourceClass(), EnumResourceClass.Consumable);
 		m.setBrand("fooBrand");
 		assertTrue("xm valid", xm.isValid(EnumValidationLevel.Complete));
 		assertTrue("m valid", m.isValid(EnumValidationLevel.Complete));
@@ -2245,7 +2245,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testSetAttributes()
@@ -2266,7 +2266,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testRunPage()
@@ -2281,7 +2281,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testSetLocked()
@@ -2324,7 +2324,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////////////////
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testImplicitPartitions()
@@ -2393,7 +2393,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveImplicitPartions()
@@ -2409,7 +2409,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveInheritedAttributes()
@@ -2500,7 +2500,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void testSubelementClass()
 	{
@@ -2750,7 +2750,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGeneralID()
@@ -2788,7 +2788,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// /
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGeneralIDEmptyNamespace()
@@ -2806,7 +2806,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// /
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testInstantiations()
@@ -2829,7 +2829,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// /
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetElement()
@@ -2906,7 +2906,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// /
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetResStatus()
@@ -2964,7 +2964,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// /
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetCreatePartition2()
@@ -2990,7 +2990,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// /
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetCreatePartitionCreate()
@@ -3010,7 +3010,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetCreatePartition3()
@@ -3037,7 +3037,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetCreatePartitionSelf()
@@ -3058,7 +3058,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddpartitionEnum()
@@ -3074,7 +3074,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// /
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddpartition()
@@ -3151,7 +3151,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// /
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMultiplePartIDKeys()
@@ -3175,7 +3175,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// /
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testConsistentPartIDKeys()
@@ -3236,8 +3236,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 * 
+	 *
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
@@ -3250,8 +3250,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override

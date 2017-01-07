@@ -362,8 +362,12 @@ public abstract class JDFTestCaseBase extends TestCase
 			JDFParser p = getXJDFSchemaParser();
 			JDFDoc xParsed = p.parseFile(xjdfFile);
 			XMLDoc dVal = xParsed.getValidationResult();
-			dVal.write2File(UrlUtil.newExtension(xjdfFile, "val.xml"), 2, false);
-			assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
+			String valResult = dVal.getRoot().getAttribute("ValidationResult");
+			if (!"Valid".equals(valResult))
+			{
+				dVal.write2File(UrlUtil.newExtension(xjdfFile, "val.xml"), 2, false);
+			}
+			assertEquals(valResult, "Valid");
 		}
 	}
 
