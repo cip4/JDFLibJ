@@ -317,17 +317,8 @@ class PostXJDFWalker extends BaseElementWalker
 			if (!retainAll)
 			{
 				removeRedundantPartKeys(partAmount);
-				fixPartAmount(partAmount);
 			}
 			return super.walk(partAmount, dummy);
-		}
-
-		void fixPartAmount(KElement pa)
-		{
-			pa.removeAttribute(AttributeName.AMOUNT);
-			pa.renameAttribute(AttributeName.ACTUALAMOUNT, AttributeName.AMOUNT);
-			pa.removeAttribute(AttributeName.WASTE);
-			pa.renameAttribute("ActualWaste", AttributeName.WASTE);
 		}
 
 		/**
@@ -443,7 +434,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 */
 		void moveActualToAudit(JDFAmountPool partAmount)
 		{
-			if (partAmount.getDeepParent(ElementName.AUDITPOOL, 0) == null)
+			if (partAmount.getDeepParent(ElementName.AUDITPOOL, 0) == null && partAmount.getDeepParent(XJDFConstants.XJMF, 0) == null)
 			{
 				AuditPoolHelper ah = new AuditPoolHelper(newRoot.getCreateElement(ElementName.AUDITPOOL));
 				KElement resource = partAmount.getDeepParent(XJDFConstants.Resource, 0);
@@ -454,13 +445,23 @@ class PostXJDFWalker extends BaseElementWalker
 					MessageResourceHelper arh = ah.getCreateMessageResourceHelper(sh);
 					SetHelper shNew = arh.getSet();
 					ResourceHelper phNew = shNew.getCreateVPartition(sh.getPartMapVector(), false);
-					KElement newAmountPool = phNew.getRoot().copyElement(partAmount, null);
-					VElement vpa = newAmountPool.getChildElementVector(ElementName.PARTAMOUNT, null);
-					for (KElement pa : vpa)
-					{
-						fixPartAmount(pa);
-					}
+					phNew.getRoot().copyElement(partAmount, null);
 					walkTree(shNew.getRoot(), null);
+				}
+				VElement vpa = partAmount.getChildElementVector(ElementName.PARTAMOUNT, null);
+				for (KElement pa : vpa)
+				{
+					pa.removeAttribute(AttributeName.ACTUALAMOUNT);
+					pa.removeAttribute("ActualWaste");
+				}
+
+			}
+			else
+			{
+				VElement vpa = partAmount.getChildElementVector(ElementName.PARTAMOUNT, null);
+				for (KElement pa : vpa)
+				{
+					fixPartAmount(pa);
 				}
 			}
 		}
@@ -480,7 +481,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(KElement e)
 		{
-			return (e instanceof JDFAmountPool) && e.getDeepParent(ElementName.AUDITPOOL, 0) == null && e.getDeepParent(XJDFConstants.XJMF, 0) == null;
+			return (e instanceof JDFAmountPool);
 		}
 	}
 

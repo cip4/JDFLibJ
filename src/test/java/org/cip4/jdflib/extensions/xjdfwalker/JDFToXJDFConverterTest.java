@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
@@ -145,13 +145,13 @@ import org.junit.Test;
 
 /**
  * @author rainer prosi
- *  
+ *
  */
 public class JDFToXJDFConverterTest extends JDFTestCaseBase
 {
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testRefMediaFromInline()
@@ -175,7 +175,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testDependent()
@@ -211,7 +211,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public KElement _testDeliveryIntent()
@@ -239,7 +239,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -264,7 +264,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -281,7 +281,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -308,7 +308,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -335,7 +335,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -358,7 +358,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -368,7 +368,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -378,7 +378,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public KElement _testPageList(boolean retainAll)
@@ -421,7 +421,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -432,7 +432,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public KElement _testPageListEmpty()
@@ -463,8 +463,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testSignatureName()
@@ -483,8 +483,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testKeepParameter()
@@ -502,8 +502,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testComponentProductID()
@@ -521,8 +521,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testColorantControl()
@@ -550,8 +550,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testColorantControlRefPool()
@@ -576,8 +576,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testColorPool()
@@ -597,8 +597,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testColorPoolSpace()
@@ -622,8 +622,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
-	*  
+	*
+	*
 	*/
 	@Test
 	public void testColorantControlSpace()
@@ -646,8 +646,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testColorIntent()
@@ -672,8 +672,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	*  
-	*  
+	*
+	*
 	*/
 	@Test
 	public void testMultiBackwardProduct()
@@ -700,7 +700,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testDeviceInfoStatus()
@@ -715,7 +715,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testDeviceInfoEmployees()
@@ -733,7 +733,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testDeviceInfoModuleStatus()
@@ -750,7 +750,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testJMFEmployee()
@@ -768,7 +768,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNodeEmployee()
@@ -793,7 +793,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRef()
@@ -820,7 +820,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRefSelf()
@@ -840,7 +840,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testResLocked()
@@ -857,7 +857,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testResUnit()
@@ -874,7 +874,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSourceRes()
@@ -894,7 +894,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPerson()
@@ -924,7 +924,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public KElement _testPreview()
 	{
@@ -940,7 +940,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPreview()
@@ -956,7 +956,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testProductRetainAll()
@@ -973,7 +973,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNotificationAudit()
@@ -994,7 +994,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNotificationEvent()
@@ -1015,7 +1015,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAuditEmployee()
@@ -1033,7 +1033,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAuditCreated()
@@ -1052,7 +1052,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAuditProcessRun()
@@ -1074,7 +1074,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAmountPoolWaste()
@@ -1092,11 +1092,11 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.convert(n);
 
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/@ActualWaste", null), "15");
+		assertEquals(xjdf.getXPathAttribute("//ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Waste", null), "15");
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAncestorPool()
@@ -1111,7 +1111,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAmountPoolNoExplicitWaste()
@@ -1148,7 +1148,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMediaComponentIn()
@@ -1166,7 +1166,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testLocation()
@@ -1183,7 +1183,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testLayoutMark()
@@ -1199,12 +1199,11 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.convert(n);
 		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/@Ord", null), "0");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/@Type", null), "MarkObject");
 		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/MarkObject/CIELABMeasuringField/@Center", null), "2 2");
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testLayoutMedia()
@@ -1223,7 +1222,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testLayoutContent()
@@ -1238,12 +1237,11 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.convert(n);
 		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/@Ord", null), "0");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/@Type", null), "ContentObject");
-		assertNull(xjdf.getXPathElement("ResourceSet/Resource/Layout/PlacedObject/ContentObject"));
+		assertNotNull(xjdf.getXPathElement("ResourceSet/Resource/Layout/PlacedObject/ContentObject"));
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPlatePaperMedia()
@@ -1267,7 +1265,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMediaComponentAmount()
@@ -1299,7 +1297,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPartAmountPartitions()
@@ -1326,7 +1324,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMultiNode1()
@@ -1359,7 +1357,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHoleMaking()
@@ -1377,7 +1375,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testInsertingIntent()
@@ -1394,8 +1392,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @return 
-	 * 
+	 * @return
+	 *
 	 */
 	@Test
 	public void testHoleLine()
@@ -1422,7 +1420,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testgetXJDFs1()
@@ -1463,7 +1461,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
