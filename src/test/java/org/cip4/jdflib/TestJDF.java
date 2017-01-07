@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 package org.cip4.jdflib;
@@ -82,19 +82,20 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * < July 9, 2009
  */
 public class TestJDF extends JDFTestCaseBase
 {
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @throws FileNotFoundException
 	 */
 	// @Test
@@ -106,7 +107,7 @@ public class TestJDF extends JDFTestCaseBase
 	//	}
 
 	/**
-	 * 
+	 *
 	 */
 	// @Test
 	//	public void testWriteJMF()
@@ -120,7 +121,7 @@ public class TestJDF extends JDFTestCaseBase
 	//	}
 
 	/**
-	 * 
+	 *
 	 * TODO Please insert comment!
 	 * @throws Throwable
 	 */
@@ -140,7 +141,7 @@ public class TestJDF extends JDFTestCaseBase
 			spawn.bSpawnIdentical = true;
 			spawn.bSpawnRWPartsMultiple = true;
 			JDFMerge m = new JDFMerge(jdfRoot);
-
+	
 			Vector<JDFNode> vSpawned = new Vector<JDFNode>();
 			for (int ii = 1; ii < 21; ii++)
 			{
@@ -159,7 +160,7 @@ public class TestJDF extends JDFTestCaseBase
 					vamParts.add(amParts0);
 				}
 				final VString vsRWResourceIDs = new VString("Output", null);
-
+	
 				ct.start();
 				JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
 				vSpawned.add(nodeSubJDF);
@@ -180,11 +181,11 @@ public class TestJDF extends JDFTestCaseBase
 			}
 			strOutJDFPath = "/share/data/fehler/PD-68493/giant_merged.jdf";
 			jdfDoc.write2File(strOutJDFPath, 2, false);
-
+	
 		}*/
 
 	/**
-	 * 
+	 *
 	 * @throws Throwable
 	 */
 	public void _testSpawnf() throws Throwable
@@ -217,7 +218,7 @@ public class TestJDF extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @throws Throwable
 	 */
 	public void _testSpawn() throws Throwable
@@ -258,9 +259,10 @@ public class TestJDF extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @throws Throwable
 	 */
+	@Ignore
 	@Test
 	public void testMerge() throws Throwable
 	{
@@ -284,8 +286,8 @@ public class TestJDF extends JDFTestCaseBase
 	}
 
 	/*	*//**
-			* 
-			*  
+			*
+			*
 			* @throws Throwable
 			*/
 	/*
@@ -298,27 +300,27 @@ public class TestJDF extends JDFTestCaseBase
 	final JDFNodeInfo nodeInfo = nodeProc.getNodeInfo();
 	final VJDFAttributeMap vamDeepest = new VJDFAttributeMap();
 	JDFAttributeMap amPart0 = new JDFAttributeMap();
-
+	
 	amPart0.put("PartVersion", "chn");
 	amPart0.put("SheetName", "IN_FB 001");
 	amPart0.put("Side", "Back");
 	amPart0.put("SignatureName", "Sig001");
-
+	
 	vamDeepest.add(amPart0);
-
+	
 	final VElement veParts = nodeInfo.getPartitionVector(vamDeepest, null);
-
+	
 	assertEquals("Number of spawnInfos", 1, veParts.size());
-
+	
 	final JDFNodeInfo niFound = (JDFNodeInfo) veParts.get(0);
-
+	
 	JDFAttributeMap amFound = niFound.getPartMap();
-
+	
 	assertEquals("Found partmap must equal input partmap", amPart0, amFound);
 	}*/
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testDumy()

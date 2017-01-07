@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,7 +96,6 @@ import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
@@ -110,7 +109,6 @@ import org.cip4.jdflib.util.net.ProxyUtil;
 import org.cip4.jdflib.util.net.UrlCheck;
 import org.cip4.jdflib.util.thread.RegularJanitor;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 
 import junit.framework.TestCase;
@@ -219,8 +217,6 @@ public abstract class JDFTestCaseBase extends TestCase
 		final JDFNodeInfo ni = n.appendNodeInfo();
 		final JDFMedia m = xm.appendMedia();
 		m.appendElement("NS:FoobarMedia", "www.foobar.com");
-
-		Assert.assertEquals("m Class", m.getResourceClass(), EnumResourceClass.Consumable);
 
 		final VString vs = new VString();
 		vs.add("SignatureName");
