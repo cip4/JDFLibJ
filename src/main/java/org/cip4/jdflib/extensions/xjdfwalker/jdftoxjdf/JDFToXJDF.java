@@ -473,7 +473,7 @@ public class JDFToXJDF extends PackageElementWalker
 				log.info("erased empty jmf");
 				newRoot = null;
 			}
-			if (!isRetainAll())
+			else if (!isRetainAll())
 			{
 				new XJMFHelper(newRoot).cleanUp();
 			}

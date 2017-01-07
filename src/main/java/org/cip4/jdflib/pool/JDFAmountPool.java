@@ -96,7 +96,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 {
 	/**
 	 * map of an amountpool that allows quick access to multiple amounts Class AmountMap
-	 * 
+	 *
 	 */
 	public class AmountMap extends VectorMap<JDFAttributeMap, JDFPartAmount>
 	{
@@ -104,13 +104,13 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		private final VString m_vsUsedPartIDKeys = new VString();
 
 		/**
-		 * 
+		 *
 		 */
 		private static final long serialVersionUID = 6548151023982113766L;
 
 		/**
 		 * Constructor AmountMap
-		 * 
+		 *
 		 * @param vsPartIDKeys
 		 */
 		AmountMap(final VString vsPartIDKeys)
@@ -139,10 +139,10 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 		/**
 		 * Method getAmountDouble
-		 * 
+		 *
 		 * @param amParts
 		 * @param strAttributeName
-		 * 
+		 *
 		 * @return the sum of all matching amounts
 		 */
 		public double getAmountDouble(final JDFAttributeMap amParts, final String strAttributeName)
@@ -189,7 +189,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		/**
 		 * returns the attribute occurrence in PartAmount, or the default in the ResourceLink
 		 * @param poolParent the pool parent
-		 * 
+		 *
 		 * @param attrib the attribute name
 		 * @param nameSpaceURI the XML-namespace
 		 * @param mPart defines which part of this ResourceLink the Amount belongs to. If empty get the ResourceLink root attribute.
@@ -231,7 +231,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 		/**
 		 * returns the attribute occurrence in PartAmount, or the default in the ResourceLink
-		 * 
+		 *
 		 * @param poolParent the parent pool to work on
 		 * @param attrib the attribute name
 		 * @param nameSpaceURI the XML-namespace
@@ -359,7 +359,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 		/**
 		 * get the exactly matching AmountPool/PartAmount/@AttName as a double
-		 * 
+		 *
 		 * @param poolParent the parent pool to work on
 		 * @param attName
 		 * @param vPart
@@ -386,12 +386,12 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 		/**
 		 * gets the sum of all matching tags, with the assumption that no condition defaults to good
-		 * 
+		 *
 		 * @param poolParent
 		 * @param attName
 		 * @param vPart
 		 * @return the sum
-		 * 
+		 *
 		 */
 		public static double getAmountPoolSumDouble(final IAmountPoolContainer poolParent, final String attName, VJDFAttributeMap vPart)
 		{
@@ -481,11 +481,11 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 		/**
 		 * get double attribute Amount, defaults to the value of Amount for the linked partition
-		 * 
+		 *
 		 * @param poolParent the parent pool to work on
 		 * @param mPart partition map to retrieve Amount for
 		 * @return the amount, -1 if none is specified
-		 * 
+		 *
 		 * @default getAmount(null)
 		 */
 		public static double getAmount(final IAmountPoolContainer poolParent, final JDFAttributeMap mPart)
@@ -513,7 +513,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 		/**
 		 * get double attribute MinAmount, defaults to getAmount if MinAmount is not set
-		 * 
+		 *
 		 * @param poolParent the parent pool to work on
 		 * @param mPart partition map to retrieve MinAmount for
 		 * @return the MinAmount value
@@ -531,7 +531,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 		/**
 		 * get double attribute MaxAmount, defaults to getAmount if MinAmount is not set
-		 * 
+		 *
 		 * @param poolParent the parent pool to work on
 		 * @param mPart partition map to retrieve MinAmount for
 		 * @return the MinAmount value
@@ -550,7 +550,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		/**
 		 * sets the attribute occurence in the appropriate PartAmount when called for a resourceLink and creates the AmountPool and/or PartAmount(s) if they are
 		 * not yet there
-		 * 
+		 *
 		 * @param poolParent the parent pool to work on
 		 * @param attrib the attribute name
 		 * @param value value to set in string form.
@@ -575,7 +575,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		/**
 		 * sets the attribute occurence in the appropriate PartAmount when called for a resourceLink and creates the AmountPool and/or PartAmount if it is not
 		 * yet there
-		 * 
+		 *
 		 * @param poolParent the parent pool to work on
 		 * @param attrib the attribute name
 		 * @param value value to set in string form.
@@ -606,7 +606,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * set an attribute in the appropriate PartAmount
-	 *  
+	 *
 	 * @param attrib
 	 * @param value
 	 * @param nameSpaceURI
@@ -619,8 +619,8 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @param attrib
 	 * @param nameSpaceURI
 	 * @param part
@@ -633,8 +633,8 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @param attrib
 	 * @param nameSpaceURI
 	 * @param vPart
@@ -647,8 +647,8 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @param attrib
 	 * @param value
 	 * @param nameSpaceURI
@@ -662,7 +662,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * Constructor for JDFAmountPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -673,7 +673,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * Constructor for JDFAmountPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -685,7 +685,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * Constructor for JDFAmountPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -710,7 +710,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -721,7 +721,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * Get a PartAmount that fits to the filter defined by mPart
-	 * 
+	 *
 	 * @param mPart filter for the part to set the status
 	 * @return the PartAmount that fits
 	 */
@@ -744,7 +744,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * Get a PartAmount that exactly equals the filter defined by mPart
-	 * 
+	 *
 	 * @param mPart filter for the part to set the status
 	 * @return the PartAmount that fits
 	 */
@@ -780,7 +780,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * Get a PartAmount that fits to the filter defined by vPart
-	 * 
+	 *
 	 * @param vPart filter for the part to set the status
 	 * @return the PartAmount that fits
 	 */
@@ -809,7 +809,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * Get a PartAmount that fits to the filter defined by mPart
-	 * 
+	 *
 	 * @param mPart filter for the part to set the status
 	 * @param iSkip the iSkip'th element to get
 	 * @return the PartAmount that fits
@@ -833,7 +833,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * Get a PartAmount that fits to the filter defined by mPart
-	 * 
+	 *
 	 * @param mPart filter for the part to set the status
 	 * @param bCreate
 	 * @return the PartAmount that fits
@@ -853,7 +853,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * Get a vector of PartAmount that fits to the filter defined by mPart
-	 * 
+	 *
 	 * @param vmPart filter vector for the part to set the status
 	 * @param bCreate
 	 * @return the PartAmount that fits
@@ -876,7 +876,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * remove all partAmounts that are not specified in keepList
-	 * 
+	 *
 	 * @param keepList partAmounts to keep
 	 */
 	public void reducePartAmounts(final VJDFAttributeMap keepList)
@@ -890,7 +890,9 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		for (int i = 0; i < v.size(); i++)
 		{
 			final JDFPartAmount pa = (JDFPartAmount) v.elementAt(i);
-			final JDFAttributeMap map = pa.getPartMap();
+			JDFAttributeMap map = pa.getPartMap();
+			if (map == null)
+				map = new JDFAttributeMap();
 			boolean ciao = true;
 			for (int j = 0; j < keepList.size(); j++)
 			{
@@ -919,7 +921,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * Append JDFPartAmount element
-	 * 
+	 *
 	 * @param mPart JDFAttributeMap to append
 	 * @return
 	 */
@@ -932,7 +934,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * Append JDFPartAmount elements
-	 * 
+	 *
 	 * @param vPart vector of partAmounts to append
 	 * @return
 	 */
@@ -945,7 +947,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * get JDFPartAmount specified by mPart, create a new one if it doesn't exist
-	 * 
+	 *
 	 * @param mPart JDFPartAmount to get/create
 	 * @return
 	 */
@@ -962,7 +964,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * get JDFPartAmount specified by mPart, create a new one if it doesn't exist
-	 * 
+	 *
 	 * @param vPart JDFPartAmount to get/create
 	 * @return
 	 */
@@ -980,9 +982,9 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	/**
 	 * Get a vector of PartAmounts which are supersets of the filter defined by mPart<br>
 	 * i.e. mPart is a submap of all returned elements
-	 * 
+	 *
 	 * @param mPart filter vector for the part to set the status
-	 * 
+	 *
 	 * @return VElement - the vector of PartAmount elements that fit, null if nothing matches
 	 */
 	public VElement getMatchingPartAmountVector(final JDFAttributeMap mPart)

@@ -171,9 +171,9 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	 */
 	private void moveToResourceSet(JDFResourceInfo ri, JDFResourceInfo jdfRI)
 	{
-		JDFAmountPool ap = jdfRI.getAmountPool();
 		VJDFAttributeMap vPartMap = jdfRI.getPartMapVector();
 		setAmountPool(jdfRI, jdfRI, null);
+		JDFAmountPool ap = jdfRI.getAmountPool();
 		String resName = ri.getXPathAttribute("ResourceSet/@Name", null);
 		if (resName == null)
 		{

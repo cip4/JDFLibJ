@@ -4,33 +4,33 @@
  *
  * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress (CIP4). All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification, are permitted
  * provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this list of conditions
  * and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice, this list of
  * conditions and the following disclaimer in the documentation and/or other materials provided with
  * the distribution.
- * 
+ *
  * 3. The end-user documentation included with the redistribution, if any, must include the
  * following acknowledgment: "This product includes software developed by the The International
  * Cooperation for the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)"
  * Alternately, this acknowledgment may appear in the software itself, if and wherever such
  * third-party acknowledgments normally appear.
- * 
+ *
  * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress" must not be used to endorse or promote products derived from this
  * software without prior written permission. For written permission, please contact info@cip4.org.
- * 
+ *
  * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their
  * name, without prior written permission of the CIP4 organization
- * 
+ *
  * Usage of this software in commercial products is subject to restrictions. For details please
  * consult info@cip4.org.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
  * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN
@@ -72,7 +72,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 {
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAmountsNull()
@@ -89,7 +89,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAmounts()
@@ -107,7 +107,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAuditPool()
@@ -122,7 +122,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHeadbandStrip()
@@ -135,7 +135,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHeadbandColor()
@@ -151,7 +151,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAuditOrder()
@@ -168,22 +168,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 */
-	@Test
-	public void testHeaderXJMFOrder()
-	{
-		KElement x = new JDFDoc(XJDFConstants.XJMF, EnumVersion.Version_2_0).getRoot();
-		KElement c = x.appendElement("CommandSubmitQueueEntry");
-		KElement h = x.appendElement(XJDFConstants.Header);
-		PostXJDFWalker w = new PostXJDFWalker((JDFElement) x);
-		w.walkTree(x, null);
-		assertEquals(x.getElement(null), h);
-		assertEquals(h.getNextSibling(), c);
-	}
-
-	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHeaderMessageOrder()
