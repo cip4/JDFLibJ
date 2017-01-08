@@ -1859,21 +1859,7 @@ class PostXJDFWalker extends BaseElementWalker
 		public KElement walk(KElement xjdf, KElement dummy)
 		{
 			moveToSender(xjdf);
-			removeIDs(xjdf);
 			return super.walk(xjdf, dummy);
-		}
-
-		private void removeIDs(KElement xjdf)
-		{
-			VElement v = xjdf.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.ID, JDFConstants.STAR), false, true, 0);
-			if (v != null)
-			{
-				for (KElement e : v)
-				{
-					e.removeAttribute(AttributeName.ID);
-				}
-			}
-
 		}
 
 		/**
@@ -1946,6 +1932,18 @@ class PostXJDFWalker extends BaseElementWalker
 			sender.moveAttribute(AttributeName.PERSONALID, xjdf);
 			sender.moveAttribute(AttributeName.ID, xjdf);
 			sender.moveAttribute(AttributeName.REFID, xjdf);
+			VElement v = xjdf.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.ID, JDFConstants.STAR), false, true, 0);
+			if (v != null)
+			{
+				for (KElement e : v)
+				{
+					if (!XJDFConstants.Header.equals(e.getLocalName()))
+					{
+						e.removeAttribute(AttributeName.ID);
+					}
+				}
+			}
+
 		}
 	}
 
