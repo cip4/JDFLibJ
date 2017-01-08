@@ -1223,9 +1223,6 @@
     <xs:complexType name="Command">
         <xs:complexContent>
             <xs:extension base="Message">
-                <xs:attribute name="ID" type="ID" use="required"/>
-                <xs:attribute name="RelatedCommands" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="TransactionID" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1264,9 +1261,7 @@
         <xs:complexContent>
             <xs:extension base="Message">
                 <xs:attribute name="ChannelMode" type="EnumChannelMode" use="optional"/>
-                <xs:attribute name="ID" type="ID" use="required"/>
-                <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
-            </xs:extension>
+             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 

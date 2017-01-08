@@ -68,42 +68,55 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.jmf.JDFSignal;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFStatusQuParams;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
- * walker for JMF mesaages
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkSignal extends WalkMessage
+public class WalkStatusQuParams extends WalkJDFSubElement
 {
 	/**
 	 *
 	 */
-	public WalkSignal()
+	public WalkStatusQuParams()
 	{
 		super();
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.XJDF20.WalkMessage#matches(org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
 	@Override
-	public boolean matches(KElement toCheck)
+	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFSignal);
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFStatusQuParams;
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void removeUnusedElements(KElement jdf)
+	protected void updateAttributes(JDFAttributeMap map)
 	{
-		super.removeUnusedElements(jdf);
-		jdf.removeChild(ElementName.STATUSQUPARAMS, null, 0);
-		jdf.removeChild(ElementName.RESOURCEQUPARAMS, null, 0);
+		map.remove(AttributeName.DEVICEDETAILS);
+		map.remove(AttributeName.JOBDETAILS);
+		super.updateAttributes(map);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return new VString(ElementName.KNOWNMSGQUPARAMS, null);
 	}
 
 }
