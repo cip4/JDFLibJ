@@ -92,6 +92,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -110,6 +111,8 @@ import org.cip4.jdflib.util.net.UrlCheck;
 import org.cip4.jdflib.util.thread.RegularJanitor;
 import org.junit.After;
 import org.junit.Before;
+import org.w3c.dom.Comment;
+import org.w3c.dom.Node;
 
 import junit.framework.TestCase;
 
@@ -334,10 +337,33 @@ public abstract class JDFTestCaseBase extends TestCase
 
 	/**
 	 *
+	 * @param e
+	 */
+	protected void setSnippet(KElement e)
+	{
+		Node parent = e.getParentNode();
+		Comment newChild = e.getOwnerDocument().createComment(" START SNIPPET ");
+		parent.insertBefore(newChild, e);
+		newChild = e.getOwnerDocument().createComment(" END SNIPPET ");
+		parent.insertBefore(newChild, e.getNextSibling());
+	}
+
+	/**
+	 *
 	 * @param d
 	 * @param filename
 	 */
 	protected void writeTest(JDFDoc d, String filename)
+	{
+		writeTest(d.getRoot(), filename, true);
+	}
+
+	/**
+	 *
+	 * @param d
+	 * @param filename
+	 */
+	protected void writeTest(XJDFHelper d, String filename)
 	{
 		writeTest(d.getRoot(), filename, true);
 	}
@@ -351,15 +377,32 @@ public abstract class JDFTestCaseBase extends TestCase
 	 */
 	protected void writeTest(KElement e, String filename, boolean convertX)
 	{
-		e.write2File(sm_dirTestDataTemp + "jdfexamples/" + filename);
 		String ext = UrlUtil.extension(filename);
-		if (convertX && !ext.startsWith("x"))
+		if (ext.startsWith("x"))
 		{
-			ext = "x" + ext;
-			JDFToXJDF conv = new JDFToXJDF();
-			KElement x = conv.convert(e);
-			String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + UrlUtil.newExtension(filename, ext);
-			x.write2File(xjdfFile);
+			if (e.getParentNode_KElement() == null)
+				e.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "xjdfexamples/" + filename, 2, false);
+			else
+				e.write2File(sm_dirTestDataTemp + "xjdfexamples/" + filename);
+		}
+		else
+		{
+			if (e.getParentNode_KElement() == null)
+				e.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "jdfexamples/" + filename, 2, false);
+			else
+				e.write2File(sm_dirTestDataTemp + "jdfexamples/" + filename);
+			if (convertX)
+			{
+				ext = "x" + ext;
+				JDFToXJDF conv = new JDFToXJDF();
+				KElement x = conv.convert(e);
+				String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + UrlUtil.newExtension(filename, ext);
+				x.write2File(xjdfFile);
+			}
+		}
+		if (convertX)
+		{
+			String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + filename;
 			JDFParser p = getXJDFSchemaParser();
 			JDFDoc xParsed = p.parseFile(xjdfFile);
 			XMLDoc dVal = xParsed.getValidationResult();

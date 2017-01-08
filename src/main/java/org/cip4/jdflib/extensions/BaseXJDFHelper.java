@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.util.ContainerUtil;
 
@@ -240,7 +241,7 @@ public abstract class BaseXJDFHelper
 	 */
 	public void setID(String newID)
 	{
-		setXPathValue("@ID", newID);
+		setAttribute(AttributeName.ID, KElement.xmlnsLocalName(newID));
 	}
 
 	/**

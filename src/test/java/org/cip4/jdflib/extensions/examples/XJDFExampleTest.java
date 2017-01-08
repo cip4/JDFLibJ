@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.examples;
 
@@ -82,14 +82,14 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @author rainer prosi
  *
  */
 public class XJDFExampleTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNamespace()
@@ -99,48 +99,82 @@ public class XJDFExampleTest extends JDFTestCaseBase
 		ResourceHelper rh = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
 		JDFMedia m = (JDFMedia) rh.getResource();
 		m.setAttribute("foo:FooAtt", "FooVal", "http://www.foo.org");
-		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/ExtendAtt.xjdf");
+		setSnippet(rh.getRoot());
+		writeTest(xjdfHelper, "ExtendAtt.xjdf");
 	}
 
 	/**
-	 * 
+	 *
+	 */
+	@Test
+	public void testSnippet()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
+		SetHelper shMedia = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
+		ResourceHelper rh = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
+		setSnippet(rh.getRoot());
+		assertTrue(xjdfHelper.toString().indexOf("<!-- START SNIPPET -->") > 0);
+		assertTrue(xjdfHelper.toString().indexOf("<!-- END SNIPPET -->") > 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSnippetRoot()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
+		SetHelper shMedia = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
+		shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
+		KElement root = xjdfHelper.getRoot();
+		setSnippet(root);
+		assertTrue(root.getOwnerDocument_KElement().write2String(2).indexOf("<!-- START SNIPPET -->") > 0);
+		assertTrue(root.getOwnerDocument_KElement().write2String(2).indexOf("<!-- END SNIPPET -->") > 0);
+	}
+
+	/**
+	 *
 	 */
 	@Test
 	public void testIntentNamespace()
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("IntentExtension", null, null);
 		ProductHelper product = xjdfHelper.getCreateRootProduct(0);
+		setSnippet(product.getRoot());
 		xjdfHelper.getRoot().addNameSpace("foo", "http://www.foo.org");
 		IntentHelper ih = product.appendIntent("foo:FooIntent");
 		ih.getResource().setAttribute("FooAtt", "FooVal");
 		xjdfHelper.getRoot().removeAttribute("xmlns:foo");
-		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/ExtendIntent.xjdf");
+		writeTest(xjdfHelper, "ExtendIntent.xjdf");
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testResourceNamespace()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper("IntentExtension", null, null);
+		XJDFHelper xjdfHelper = new XJDFHelper("ResourceExtension", null, null);
 		SetHelper sh = xjdfHelper.appendResourceSet("foo:FooParams", EnumUsage.Input);
 		sh.getSet().addNameSpace("foo", "http://www.foo.org");
+		setSnippet(sh.getRoot());
 		ResourceHelper res = sh.getCreatePartition("Run", "R1", true);
 		res.getResource().setAttribute("FooAtt", "FooVal");
-		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/ExtendSet.xjdf");
+		writeTest(xjdfHelper, "ExtendSet.xjdf");
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testProcessNamespace()
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("IntentExtension", null, null);
-		xjdfHelper.getRoot().addNameSpace("foo", "http://www.foo.org");
+		KElement root = xjdfHelper.getRoot();
+		setSnippet(root);
+		root.addNameSpace("foo", "http://www.foo.org");
 		xjdfHelper.setTypes("foo:FooMaking");
-		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/ExtendProcess.xjdf");
+		writeTest(xjdfHelper, "ExtendProcess.xjdf");
 	}
 
 	/**

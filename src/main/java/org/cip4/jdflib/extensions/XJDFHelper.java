@@ -581,8 +581,8 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		newSet.setAttribute("Name", name);
 		if (name == null)
 			name = "Set";
-		newSet.setAttribute(AttributeName.ID, name + KElement.uniqueID(0));
 		SetHelper h = new SetHelper(newSet);
+		h.setID(name + KElement.uniqueID(0));
 		if (usage != null)
 			h.setUsage(usage);
 		return h;
