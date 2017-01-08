@@ -68,11 +68,9 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFRunList;
@@ -110,6 +108,9 @@ public class WalkLayoutElement extends WalkResource
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
+		if (!jdfToXJDF.isMergeRunList())
+			return super.walk(jdf, xjdf);
+
 		KElement root = jdf.getDeepParentChild(ElementName.RESOURCEPOOL);
 		if (root == null)
 			root = JDFResource.getResourceRoot(jdf);
@@ -121,13 +122,6 @@ public class WalkLayoutElement extends WalkResource
 		else
 		{
 			KElement ret = super.walk(jdf, xjdf);
-			if (root instanceof JDFLayoutElement)
-			{
-				KElement retPar = ret.getDeepParent(SetHelper.RESOURCE_SET, 0);
-				retPar.setAttribute(AttributeName.NAME, ElementName.RUNLIST);
-				ret.renameElement(ElementName.RUNLIST, null);
-			}
-
 			return ret;
 		}
 	}
@@ -147,6 +141,14 @@ public class WalkLayoutElement extends WalkResource
 	@Override
 	protected String getXJDFName(KElement jdf)
 	{
-		return jdfToXJDF.isMergeRunList() ? null : super.getXJDFName(jdf);
+		if (jdfToXJDF.isMergeRunList())
+		{
+			KElement parent = jdf.getParentNode_KElement();
+			return (parent instanceof JDFRunList) ? null : ElementName.RUNLIST;
+		}
+		else
+		{
+			return super.getXJDFName(jdf);
+		}
 	}
 }
