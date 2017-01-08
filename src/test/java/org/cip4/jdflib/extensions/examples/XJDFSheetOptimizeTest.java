@@ -111,7 +111,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 			e.setAttribute("PageDimension", "333 222");
 		}
 		xjdfHelper.getRoot().setXMLComment("most trivial list of single page documents - e.g. business cards");
-		writeTest(xjdfHelper.getRoot(), "SimpleGangIn.xjdf");
+		writeTest(xjdfHelper.getRoot(), "SimpleGangIn.xjdf", true);
 		for (int i = 0; i < 6; i++)
 		{
 			JDFAttributeMap partMap = new JDFAttributeMap("BinderySignatureName", "BS" + i);
@@ -123,7 +123,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 			JDFBinderySignature bs = (JDFBinderySignature) lo.appendElement(ElementName.BINDERYSIGNATURE);
 			bs.appendElement(ElementName.POSITION);
 		}
-		writeTest(xjdfHelper.getRoot(), "SimpleGangOut.xjdf");
+		writeTest(xjdfHelper.getRoot(), "SimpleGangOut.xjdf", true);
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 			addGang();
 			addGangLayout();
 		}
-		writeTest(xjdfHelper.getRoot(), "SimpleGang.xjdf");
+		writeTest(xjdfHelper.getRoot(), "SimpleGang.xjdf", true);
 	}
 
 	/**
@@ -155,7 +155,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 				addOutLayout(i, j);
 			}
 		}
-		writeTest(xjdfHelper.getRoot(), "GangLayout.xjdf");
+		writeTest(xjdfHelper.getRoot(), "GangLayout.xjdf", true);
 	}
 
 	/**

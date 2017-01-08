@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.examples;
 
@@ -115,7 +115,7 @@ import org.junit.Test;
 public class DigitalFinishingTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 */
 	public DigitalFinishingTest()
 	{
@@ -123,7 +123,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -135,8 +135,8 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testNearLineSimpleBarcode()
@@ -162,16 +162,16 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 
 		idp = new JDFSpawn(idp).spawn();
 		new JDFSpawn(idp).unSpawnChild(idp);
-		writeTest(idp, "SimpleBarcodeIDP.jdf");
+		writeTest(idp, "SimpleBarcodeIDP.jdf", true);
 
 		booklet = new JDFSpawn(booklet).spawn();
 		new JDFSpawn(booklet).unSpawnChild(booklet);
-		writeTest(booklet, "SimpleBarcodeFinishing.jdf");
+		writeTest(booklet, "SimpleBarcodeFinishing.jdf", true);
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testNearLineJDFBookletBarcode()
@@ -217,21 +217,21 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 
 		idp = new JDFSpawn(idp).spawn();
 		new JDFSpawn(idp).unSpawnChild(idp);
-		writeTest(idp, "BookletBarcodeIDP.jdf");
+		writeTest(idp, "BookletBarcodeIDP.jdf", false);
 
 		booklet = new JDFSpawn(booklet).spawn();
 		new JDFSpawn(booklet).unSpawnChild(booklet);
-		writeTest(booklet, "BookletBarcodeFinishing.jdf");
+		writeTest(booklet, "BookletBarcodeFinishing.jdf", false);
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testNearLineJDFBookletPipe()
 	{
-		JDFDoc jdfDoc = new JDFDoc("JDF");
+		JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		JDFNode n = jdfDoc.getJDFRoot();
 		n.setVersion(EnumVersion.Version_1_5);
 		n.setJobID("J1");
@@ -248,6 +248,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		c.setAttribute("Automation", "Dynamic");
 		c.setPipeID("PipeSheet");
 		c.setPipeProtocol("JMFPush");
+		c.setPipeURL("http:foo.com");
 		c.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 
 		c = (JDFComponent) c.addPartition(EnumPartIDKey.SetIndex, "0~-1");
@@ -270,16 +271,16 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		jdfDoc.write2File(sm_dirTestDataTemp + "BookletPipe.jdf", 2, false);
 		idp = new JDFSpawn(idp).spawn();
 		new JDFSpawn(idp).unSpawnChild(idp);
-		writeTest(idp, "BookletPipeIDP.jdf");
+		writeTest(idp, "BookletPipeIDP.jdf", false);
 
 		booklet = new JDFSpawn(booklet).spawn();
 		new JDFSpawn(booklet).unSpawnChild(booklet);
-		writeTest(booklet, "BookletPipeFinishing.jdf");
+		writeTest(booklet, "BookletPipeFinishing.jdf", false);
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public void testNearLineJDFBookletPipeMetaData()
 	{
@@ -319,8 +320,8 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testPipePushSet()
@@ -354,7 +355,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		pp = createPipeParams(command);
 		JDFAmountPool ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
 		JDFAttributeMap m = new JDFAttributeMap("SetIndex", "1~-1");
-		JDFPartAmount pa = ap.getCreatePartAmount(m);
+		ap.getCreatePartAmount(m);
 
 		command = jmf.appendCommand();
 		command.setXMLComment("resend the 2nd push: cover + 5 body sheets");
@@ -392,12 +393,12 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		command.setSenderID("Printer");
 		pp = createPipeParams(command);
 
-		writeTest(jmf, "PipePushSet.jmf");
+		writeTest(jmf, "PipePushSet.jmf", true);
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testPipePushSheet()
@@ -422,12 +423,12 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 				createPartAmount(pp, j, i, 3 + j, false);
 			}
 		}
-		writeTest(jmf, "PipePushSheet.jmf");
+		writeTest(jmf, "PipePushSheet.jmf", true);
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	void createPipePushSheetExample(int set, int sheet, int sheets, boolean bCover)
 	{
@@ -438,12 +439,12 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		command.setType(EnumType.PipePush);
 		JDFPipeParams pp = createPipeParams(command);
 		createPartAmount(pp, set, sheet, sheets, bCover);
-		writeTest(jmf, "PipePushSheetExample" + set + "." + sheet + (bCover ? "c" : "b") + ".jmf");
+		writeTest(jmf, "PipePushSheetExample" + set + "." + sheet + (bCover ? "c" : "b") + ".jmf", true);
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testPipePushSheetExample()
@@ -465,8 +466,8 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		JDFAmountPool ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
 		JDFAttributeMap m = new JDFAttributeMap("SetIndex", "34 35");
 		m.put("Condition", "Waste");
-		JDFPartAmount pa = ap.getCreatePartAmount(m);
-		writeTest(jmf, "PipePauseFinisherExample.jmf");
+		ap.getCreatePartAmount(m);
+		writeTest(jmf, "PipePauseFinisherExample.jmf", true);
 
 		jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setVersion(EnumVersion.Version_1_5);
@@ -476,8 +477,8 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		pp = createPipeParams(command);
 		ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
 		m = new JDFAttributeMap("SetIndex", "34~-1");
-		pa = ap.getCreatePartAmount(m);
-		writeTest(jmf, "PipePullFinisherExample.jmf");
+		ap.getCreatePartAmount(m);
+		writeTest(jmf, "PipePullFinisherExample.jmf", true);
 
 		createPipePushSheetExample(34, 0, 1, true);
 		createPipePushSheetExample(34, 0, 5, false);
@@ -493,8 +494,8 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
 		m = new JDFAttributeMap("SetIndex", "122");
 		m.put("Condition", "Waste");
-		pa = ap.getCreatePartAmount(m);
-		writeTest(jmf, "PipePausePrinterExample.jmf");
+		ap.getCreatePartAmount(m);
+		writeTest(jmf, "PipePausePrinterExample.jmf", true);
 
 		jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setVersion(EnumVersion.Version_1_5);
@@ -505,8 +506,8 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
 		m = new JDFAttributeMap("SetIndex", "122");
 		m.put("Condition", "Waste");
-		pa = ap.getCreatePartAmount(m);
-		writeTest(jmf, "PipePauseFinisher2Example.jmf");
+		ap.getCreatePartAmount(m);
+		writeTest(jmf, "PipePauseFinisher2Example.jmf", true);
 
 		jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setVersion(EnumVersion.Version_1_5);
@@ -516,8 +517,8 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		pp = createPipeParams(command);
 		ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
 		m = new JDFAttributeMap("SetIndex", "122~-1");
-		pa = ap.getCreatePartAmount(m);
-		writeTest(jmf, "PipePullFinisher2Example.jmf");
+		ap.getCreatePartAmount(m);
+		writeTest(jmf, "PipePullFinisher2Example.jmf", true);
 
 		createPipePushSheetExample(122, 0, 1, true);
 
@@ -531,14 +532,14 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		pp = createPipeParams(command);
 		ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
 		m = new JDFAttributeMap("SetIndex", "0~221");
-		pa = ap.getCreatePartAmount(m);
-		writeTest(jmf, "PipeCloseExample.jmf");
+		ap.getCreatePartAmount(m);
+		writeTest(jmf, "PipeCloseExample.jmf", true);
 	}
 
 	/**
-	 * @throws DataFormatException 
-	 * 
-	 * 
+	 * @throws DataFormatException
+	 *
+	 *
 	 */
 	@Test
 	public void testPipePushSheetMeta() throws DataFormatException
@@ -572,8 +573,8 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @param command
 	 * @return
 	 */
@@ -586,7 +587,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @param pp
 	 * @param set
 	 * @param sheets
@@ -612,7 +613,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @param pp
 	 * @param set
 	 * @param sheets

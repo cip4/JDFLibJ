@@ -602,7 +602,7 @@ public class WalkJDFElement extends WalkElement
 			if (resInRoot != null)
 			{
 				final VElement vCreators = resInRoot.getCreator(EnumUsage.Input.equals(resLink.getUsage()));
-				if (vCreators != null)
+				if (vCreators != null && !vCreators.isEmpty())
 				{
 					for (KElement creator : vCreators)
 					{
@@ -619,10 +619,22 @@ public class WalkJDFElement extends WalkElement
 							dependent.moveAttribute(AttributeName.PIPERESUME, resLink);
 							dependent.moveAttribute(AttributeName.PIPEPROTOCOL, linkRoot);
 							dependent.moveAttribute(AttributeName.PIPEPROTOCOL, resLink);
-							dependent.setNonEmpty(AttributeName.PIPEID, linkRoot.getPipeID());
+							dependent.moveAttribute(AttributeName.PIPEID, linkRoot);
 							dependent.copyAttribute(AttributeName.PIPEPARTIDKEYS, resLink);
 						}
 					}
+				}
+				else
+				{
+					final KElement dependent = resourceSet.appendElement(XJDFConstants.Dependent);
+					dependent.moveAttribute(AttributeName.PIPEPAUSE, linkRoot);
+					dependent.moveAttribute(AttributeName.PIPEPAUSE, resLink);
+					dependent.moveAttribute(AttributeName.PIPERESUME, linkRoot);
+					dependent.moveAttribute(AttributeName.PIPERESUME, resLink);
+					dependent.moveAttribute(AttributeName.PIPEPROTOCOL, linkRoot);
+					dependent.moveAttribute(AttributeName.PIPEPROTOCOL, resLink);
+					dependent.moveAttribute(AttributeName.PIPEID, linkRoot);
+					dependent.copyAttribute(AttributeName.PIPEPARTIDKEYS, resLink);
 				}
 			}
 		}

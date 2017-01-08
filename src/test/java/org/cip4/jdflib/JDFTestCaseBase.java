@@ -339,7 +339,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	 */
 	protected void writeTest(JDFDoc d, String filename)
 	{
-		writeTest(d.getRoot(), filename);
+		writeTest(d.getRoot(), filename, true);
 	}
 
 	/**
@@ -347,12 +347,13 @@ public abstract class JDFTestCaseBase extends TestCase
 	 * write an element to the standard test directory sm_dirTestDataTemp
 	 * @param e
 	 * @param filename
+	 * @param convertX TODO
 	 */
-	protected void writeTest(KElement e, String filename)
+	protected void writeTest(KElement e, String filename, boolean convertX)
 	{
 		e.write2File(sm_dirTestDataTemp + "jdfexamples/" + filename);
 		String ext = UrlUtil.extension(filename);
-		if (!ext.startsWith("x"))
+		if (convertX && !ext.startsWith("x"))
 		{
 			ext = "x" + ext;
 			JDFToXJDF conv = new JDFToXJDF();

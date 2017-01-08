@@ -131,7 +131,7 @@ public class JMFExampleTest extends JDFTestCaseBase
 			activity.setXMLComment("The following 2nd activity is job related (direct child of jobphase) \ndo we need both cost center and MISDetails here?");
 		}
 
-		writeTest(jmf, "Activity.jmf");
+		writeTest(jmf, "Activity.jmf", true);
 	}
 
 	@Override

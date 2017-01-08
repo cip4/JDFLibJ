@@ -344,7 +344,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 				}
 			}
 		}
-		writeTest(jmf, "RIPPipePushSheetMeta.jmf");
+		writeTest(jmf, "RIPPipePushSheetMeta.jmf", true);
 	}
 
 	/**
@@ -879,7 +879,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 				}
 			}
 		}
-		writeTest(jmf, "RIPPipePushRunListSet.jmf");
+		writeTest(jmf, "RIPPipePushRunListSet.jmf", true);
 	}
 
 	JDFAttributeMap createRunListPartition(int set, String cb, int sheet, String fb, String sep, JDFPipeParams pp)
