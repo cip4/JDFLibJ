@@ -365,6 +365,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	 */
 	protected void writeTest(XJDFHelper d, String filename)
 	{
+		d.cleanUp();
 		writeTest(d.getRoot(), filename, true);
 	}
 
@@ -396,7 +397,8 @@ public abstract class JDFTestCaseBase extends TestCase
 				ext = "x" + ext;
 				JDFToXJDF conv = new JDFToXJDF();
 				KElement x = conv.convert(e);
-				String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + UrlUtil.newExtension(filename, ext);
+				filename = UrlUtil.newExtension(filename, ext);
+				String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + filename;
 				x.write2File(xjdfFile);
 			}
 		}

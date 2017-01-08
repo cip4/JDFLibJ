@@ -70,13 +70,14 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
  * superclass for audits and messages
- * 
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class MessageHelper extends BaseXJDFHelper
@@ -91,7 +92,7 @@ public class MessageHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#cleanUp()
 	 */
 	@Override
@@ -99,10 +100,18 @@ public class MessageHelper extends BaseXJDFHelper
 	{
 		super.cleanUp();
 		ensureHeader(theElement);
+		VElement v = theElement.getChildrenByTagName(XJDFConstants.ResourceSet, null, null, false, true, 0);
+		if (v != null)
+		{
+			for (KElement e : v)
+			{
+				new SetHelper(e).cleanUp();
+			}
+		}
 	}
 
 	/**
-	 * 
+	 *
 	 * @param message
 	 * @return
 	 */
