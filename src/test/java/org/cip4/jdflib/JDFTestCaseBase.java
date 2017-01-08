@@ -91,8 +91,8 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
+import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.XJDF20;
-import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -350,6 +350,15 @@ public abstract class JDFTestCaseBase extends TestCase
 
 	/**
 	 *
+	 * @param h
+	 */
+	protected void setSnippet(BaseXJDFHelper h)
+	{
+		setSnippet(h.getRoot());
+	}
+
+	/**
+	 *
 	 * @param d
 	 * @param filename
 	 */
@@ -363,7 +372,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	 * @param d
 	 * @param filename
 	 */
-	protected void writeTest(XJDFHelper d, String filename)
+	protected void writeTest(BaseXJDFHelper d, String filename)
 	{
 		d.cleanUp();
 		writeTest(d.getRoot(), filename, true);

@@ -1374,7 +1374,7 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="QueueEntryIDs" type="NMTOKENS" use="required"/>
+            <xs:attribute name="QueueEntryIDs" type="NMTOKENS" use="optional"/>
             <xs:attribute name="StatusList" use="optional">
                 <xs:simpleType>
                     <xs:list>
