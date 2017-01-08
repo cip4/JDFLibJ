@@ -125,4 +125,22 @@ public class WalkComment extends WalkJDFElement
 		map.remove(AttributeName.PATH);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public KElement walk(KElement jdf, KElement xjdf)
+	{
+		VString valid = new VString(new String[] { XJDFConstants.XJDF, XJDFConstants.ResourceSet, ElementName.RESOURCE, XJDFConstants.Product, ElementName.NOTIFICATION });
+		while (xjdf != null)
+		{
+			if (valid.contains(xjdf.getLocalName()))
+				break;
+			xjdf = xjdf.getParentNode_KElement();
+		}
+		if (xjdf == null)
+			return null;
+		return super.walk(jdf, xjdf);
+	}
+
 }

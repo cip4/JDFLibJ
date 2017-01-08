@@ -95,7 +95,6 @@ public class WalkElement extends BaseWalker
 	 *
 	 */
 	protected JDFToXJDF jdfToXJDF;
-	boolean bMerge;
 
 	/**
 	 *
@@ -103,7 +102,6 @@ public class WalkElement extends BaseWalker
 	public WalkElement()
 	{
 		super();
-		bMerge = false;
 	}
 
 	/**
@@ -129,7 +127,7 @@ public class WalkElement extends BaseWalker
 			nsURI = XJDF20.getSchemaURL();
 		}
 		String nodeName = getXJDFName(jdf);
-		final KElement eNew = bMerge ? xjdf : xjdf.appendElement(nodeName, nsURI);
+		final KElement eNew = nodeName == null ? xjdf : xjdf.appendElement(nodeName, nsURI);
 
 		setAttributes(jdf, eNew);
 		eNew.setText(jdf.getText());

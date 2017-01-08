@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -114,6 +115,7 @@ public class WalkLayoutElementPart extends WalkJDFSubElement
 		ResourceHelper contentHelper = sh.appendPartition(null, false);
 		KElement contentBase = contentHelper.getRoot();
 		jdf.renameElement(XJDFConstants.Content, null);
+		contentBase.moveAttribute(AttributeName.ID, jdf);
 		xjdf.appendAttribute("ContentRefs", contentBase.getID(), null, null, true);
 		return super.walk(jdf, contentBase);
 	}

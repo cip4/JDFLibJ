@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
@@ -73,18 +73,19 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFRunList;
 
 /**
- * 
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class WalkLayoutElement extends WalkResource
 {
 	/**
-	 * 
+	 *
 	 */
 	public WalkLayoutElement()
 	{
@@ -109,21 +110,26 @@ public class WalkLayoutElement extends WalkResource
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		KElement parent = jdf.getParentNode_KElement();
-		boolean bInRunList = parent instanceof JDFRunList;
-		if (bInRunList)
-			bMerge = jdfToXJDF.isMergeRunList();
-		else
-			bMerge = false;
-		KElement ret = super.walk(jdf, xjdf);
-		if (!bInRunList && jdfToXJDF.isMergeRunList())
+		KElement root = jdf.getDeepParentChild(ElementName.RESOURCEPOOL);
+		if (root == null)
+			root = JDFResource.getResourceRoot(jdf);
+		jdf.getParentNode_KElement();
+		if (!(root instanceof JDFRunList) && !(root instanceof JDFLayoutElement))
 		{
-			KElement retPar = ret.getDeepParent(SetHelper.RESOURCE_SET, 0);
-			if (retPar != null)
-				retPar.setAttribute(AttributeName.NAME, ElementName.RUNLIST);
-			ret.renameElement(ElementName.RUNLIST, null);
+			return xjdf;
 		}
-		return ret;
+		else
+		{
+			KElement ret = super.walk(jdf, xjdf);
+			if (root instanceof JDFLayoutElement)
+			{
+				KElement retPar = ret.getDeepParent(SetHelper.RESOURCE_SET, 0);
+				retPar.setAttribute(AttributeName.NAME, ElementName.RUNLIST);
+				ret.renameElement(ElementName.RUNLIST, null);
+			}
+
+			return ret;
+		}
 	}
 
 	/**
@@ -133,5 +139,14 @@ public class WalkLayoutElement extends WalkResource
 	public VString getElementNames()
 	{
 		return new VString(ElementName.LAYOUTELEMENT, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected String getXJDFName(KElement jdf)
+	{
+		return jdfToXJDF.isMergeRunList() ? null : super.getXJDFName(jdf);
 	}
 }
