@@ -219,9 +219,14 @@ public class WalkElement extends BaseWalker
 	 * @param jdf
 	 * @return
 	 */
-	private JDFAttributeMap convertRanges(JDFElement jdf)
+	JDFAttributeMap convertRanges(JDFElement jdf)
 	{
 		JDFAttributeMap map = jdf.getAttributeMap_KElement();
+		return convertRanges(map, jdf);
+	}
+
+	JDFAttributeMap convertRanges(JDFAttributeMap map, JDFElement jdf)
+	{
 		if (jdfToXJDF.isConvertTilde())
 		{
 			VString keys = map.getKeys();

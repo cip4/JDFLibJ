@@ -438,7 +438,8 @@ public class WalkJDFElement extends WalkElement
 	 */
 	protected KElement setBaseResource(final JDFElement rl, final JDFResource r, final KElement xjdfSet)
 	{
-		final JDFAttributeMap map = r.getPartMap();
+		JDFAttributeMap map = r.getPartMap();
+		map = convertRanges(map, r);
 		SetHelper sh = new SetHelper(xjdfSet);
 		KElement newLeaf = sh.getCreatePartition(map, false).getPartition();
 		setLeafAttributes(r, rl, newLeaf);
@@ -571,6 +572,9 @@ public class WalkJDFElement extends WalkElement
 		resourceSet.removeAttribute(AttributeName.MINAMOUNT);
 		resourceSet.removeAttribute(AttributeName.MAXAMOUNT);
 		resourceSet.removeAttribute(AttributeName.ACTUALAMOUNT);
+		resourceSet.removeAttribute(AttributeName.PIPEPROTOCOL);
+		resourceSet.removeAttribute(AttributeName.PIPEPAUSE);
+		resourceSet.removeAttribute(AttributeName.PIPERESUME);
 		if (rl instanceof JDFResourceInfo)
 		{
 			resourceSet.removeAttribute(AttributeName.JOBID);
@@ -594,7 +598,7 @@ public class WalkJDFElement extends WalkElement
 		{
 			final JDFResourceLink resLink = (JDFResourceLink) rl;
 			final JDFResource resInRoot = resLink.getTarget();
-			JDFNode rlParent = (JDFNode) rl.getDeepParent(ElementName.JDF, 0);
+			rl.getDeepParent(ElementName.JDF, 0);
 			if (resInRoot != null)
 			{
 				final VElement vCreators = resInRoot.getCreator(EnumUsage.Input.equals(resLink.getUsage()));
@@ -603,16 +607,17 @@ public class WalkJDFElement extends WalkElement
 					for (KElement creator : vCreators)
 					{
 						final JDFNode depNode = (JDFNode) creator;
-						if (depNode.equals(rlParent))
-							continue;
 						if (!depNode.isGroupNode())
 						{
 							final KElement dependent = resourceSet.appendElement(XJDFConstants.Dependent);
 							dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
 							dependent.copyAttribute(AttributeName.JMFURL, depNode);
 							dependent.copyAttribute(AttributeName.JOBPARTID, depNode);
+							dependent.moveAttribute(AttributeName.PIPEPAUSE, linkRoot);
 							dependent.moveAttribute(AttributeName.PIPEPAUSE, resLink);
+							dependent.moveAttribute(AttributeName.PIPERESUME, linkRoot);
 							dependent.moveAttribute(AttributeName.PIPERESUME, resLink);
+							dependent.moveAttribute(AttributeName.PIPEPROTOCOL, linkRoot);
 							dependent.moveAttribute(AttributeName.PIPEPROTOCOL, resLink);
 							dependent.setNonEmpty(AttributeName.PIPEID, linkRoot.getPipeID());
 							dependent.copyAttribute(AttributeName.PIPEPARTIDKEYS, resLink);

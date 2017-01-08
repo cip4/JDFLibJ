@@ -404,6 +404,7 @@ public class SetHelper extends BaseXJDFHelper
 			for (ResourceHelper kid : kids)
 			{
 				kid.cleanUp();
+				theElement.moveElement(kid.getRoot(), null);
 			}
 		}
 	}

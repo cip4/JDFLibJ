@@ -73,6 +73,7 @@ import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -280,6 +281,7 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				part.removeAttribute(AttributeName.SIGNATURENAME);
 			}
+			part.removeAttribute(AttributeName.DOCTAGS);
 			return super.walk(part, dummy);
 		}
 
@@ -1857,7 +1859,21 @@ class PostXJDFWalker extends BaseElementWalker
 		public KElement walk(KElement xjdf, KElement dummy)
 		{
 			moveToSender(xjdf);
+			removeIDs(xjdf);
 			return super.walk(xjdf, dummy);
+		}
+
+		private void removeIDs(KElement xjdf)
+		{
+			VElement v = xjdf.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.ID, JDFConstants.STAR), false, true, 0);
+			if (v != null)
+			{
+				for (KElement e : v)
+				{
+					e.removeAttribute(AttributeName.ID);
+				}
+			}
+
 		}
 
 		/**

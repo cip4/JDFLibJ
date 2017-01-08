@@ -68,8 +68,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import java.util.Vector;
-
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
@@ -77,151 +75,45 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.extensions.ResourceHelper;
-import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.jmf.JDFResourceInfo;
-import org.cip4.jdflib.pool.JDFAmountPool;
+import org.cip4.jdflib.jmf.JDFPipeParams;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
-public class WalkResourceInfo extends WalkJDFSubElement
+public class WalkPipeParams extends WalkJDFSubElement
 {
 
 	/**
 	 *
 	 */
-	public WalkResourceInfo()
+	public WalkPipeParams()
 	{
 		super();
 	}
 
 	/**
-	 * @param resInfo
+	 * @param pipeParams
 	 * @return the created resource
 	 */
 	@Override
-	public KElement walk(final KElement resInfo, final KElement xjdf)
+	public KElement walk(final KElement pipeParams, final KElement xjdf)
 	{
-		final JDFResourceInfo ri = (JDFResourceInfo) resInfo;
-		final KElement eNew = super.walk(ri, xjdf);
+		final JDFPipeParams pp = (JDFPipeParams) pipeParams;
+		final KElement eNew = super.walk(pp, xjdf);
 
-		final VElement vr = ri.getChildElementVector(null, null);
-		int nRes = 0;
+		final VElement vr = pp.getChildElementVector(null, null);
 		for (KElement e : vr)
 		{
 			if (e instanceof JDFResource)
 			{
 				final JDFResource r = (JDFResource) e;
-				if (nRes == 0)
-				{
-					setResource(ri, r, eNew);
-				}
-				else
-				{
-					setResource(null, r, eNew);
-				}
+				setResource(null, r, eNew);
 				r.deleteNode();
-				nRes++;
 			}
 		}
-		moveToResourceSet((JDFResourceInfo) eNew, ri);
-		updateInfos((JDFResourceInfo) eNew);
 		eNew.removeAttribute(AttributeName.RESOURCENAME);
 		return null; // we are done with all relevant kids from JDF
-	}
-
-	void updateInfos(JDFResourceInfo eNew)
-	{
-		VElement v = eNew.getChildElementVector(XJDFConstants.ResourceSet, null);
-		int size = v.size();
-		if (size > 1)
-		{
-			KElement parent = eNew.getParentNode_KElement();
-			if (parent != null)
-			{
-				int n = 0;
-				VElement vRI = new VElement();
-				vRI.add(eNew);
-				for (int i = 1; i < size; i++)
-				{
-					vRI.add(parent.copyElement(eNew, null));
-				}
-				for (KElement ri : vRI)
-				{
-					for (int ii = size - 1; ii >= 0; ii--)
-					{
-						if (ii != n)
-						{
-							ri.removeChild(XJDFConstants.ResourceSet, null, ii);
-						}
-					}
-					n++;
-				}
-			}
-		}
-	}
-
-	/**
-	 *
-	 * @param ri
-	 * @param ap
-	 */
-	private void moveToResourceSet(JDFResourceInfo ri, JDFResourceInfo jdfRI)
-	{
-		VJDFAttributeMap vPartMap = jdfRI.getPartMapVector();
-		setAmountPool(jdfRI, jdfRI, null);
-		JDFAmountPool ap = jdfRI.getAmountPool();
-		String resName = ri.getXPathAttribute("ResourceSet/@Name", null);
-		if (resName == null)
-		{
-			resName = ri.getResourceName();
-		}
-		KElement set = ri.getChildWithAttribute(XJDFConstants.ResourceSet, AttributeName.NAME, null, resName, 0, true);
-		if (set == null)
-		{
-			set = ri.appendElement(XJDFConstants.ResourceSet);
-			set.setAttribute(AttributeName.NAME, resName);
-		}
-
-		set.moveAttribute(AttributeName.PROCESSUSAGE, ri);
-		set.moveAttribute(AttributeName.ORIENTATION, ri);
-		set.moveAttribute(AttributeName.USAGE, ri);
-
-		SetHelper sh = new SetHelper(set);
-		Vector<ResourceHelper> newParts = sh.getCreatePartitions(vPartMap, false);
-		for (ResourceHelper ph : newParts)
-		{
-			if (ap == null)
-			{
-				//TODO use correct amounts
-				ph.setAmount(ri.getActualAmount(), null, true);
-				if (newParts.size() == 1)
-				{
-					ph.getRoot().moveAttribute(XJDFConstants.ExternalID, ri);
-				}
-
-			}
-			else
-			{
-				JDFAmountPool ap2 = (JDFAmountPool) ap.getParentNode_KElement().copyElement(ap, null);
-				ap2.reducePartAmounts(ph.getPartMapVector());
-				jdfToXJDF.walkTree(ap2, ph.getRoot());
-				ap2.deleteNode();
-			}
-		}
-		if (newParts.size() > 1)
-		{
-			set.moveAttribute(XJDFConstants.ExternalID, ri);
-		}
-		else
-		{
-			ri.removeAttribute(XJDFConstants.ExternalID);
-		}
-		ri.removeChild(ElementName.AMOUNTPOOL, null, 0);
 	}
 
 	/**
@@ -232,7 +124,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFResourceInfo;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFPipeParams;
 	}
 
 	/**
@@ -241,13 +133,6 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	@Override
 	protected void updateAttributes(JDFAttributeMap map)
 	{
-		map.remove(AttributeName.ACTUALAMOUNT);
-		map.remove(AttributeName.AMOUNT);
-		map.remove(AttributeName.DEVICEID);
-		map.remove(AttributeName.LEVEL);
-		map.remove(AttributeName.LOTCONTROLLED);
-		map.remove(AttributeName.RESOURCEID);
-		map.remove(AttributeName.STATUS);
 		super.updateAttributes(map);
 	}
 
@@ -266,6 +151,6 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString(ElementName.RESOURCEINFO, null);
+		return VString.getVString(ElementName.PIPEPARAMS, null);
 	}
 }
