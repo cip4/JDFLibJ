@@ -160,7 +160,7 @@ public class URLReaderTest extends JDFTestCaseBase
 		reader.setZipReader(zip);
 		XMLDoc xmlDoc = reader.getXMLDoc();
 		assertNotNull(xmlDoc);
-		assertEquals(StringUtil.token(xmlDoc.getOriginalFileName(), -1, "/"), "BarcodeDetails.jdf");
+		assertEquals(StringUtil.token(xmlDoc.getOriginalFileName(), -1, "/\\"), "BarcodeDetails.jdf");
 	}
 
 	/**
