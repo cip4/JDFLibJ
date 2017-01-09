@@ -116,7 +116,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	@Test
 	public void testSize()
 	{
-		MultiTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multi0", 3);
+		MultiTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij0", 3);
 		assertEquals(0, q.size());
 	}
 
@@ -126,7 +126,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	@Test
 	public void testMaxParrallel()
 	{
-		MultiTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multi0", 3);
+		MultiTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij0", 3);
 		assertEquals(3, q.getMaxParallel());
 	}
 
@@ -137,7 +137,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	@Test
 	public void testMulti()
 	{
-		MultiJobTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multi1", 7);
+		MultiJobTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij1", 7);
 		assertEquals(0, q.getAvQueue());
 		assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 10; i++)
@@ -170,7 +170,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 	public void testManyMulti()
 	{
 		nRun = 0;
-		MultiJobTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multi2", 7);
+		MultiJobTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij2", 7);
 		assertEquals(0, q.getAvQueue());
 		assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 1000; i++)
