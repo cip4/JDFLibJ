@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.util.hotfolder;
 
@@ -76,9 +76,9 @@ import org.cip4.jdflib.jmf.JDFJMF;
 
 /**
  * a hotfolder that emulates JMF queue functionality by applying a specific queue submission or queue return message to any file that is dropped into it
- * 
+ *
  * @author Rainer Prosi
- * 
+ *
  */
 public class QueueHotFolder extends StorageHotFolder
 {
@@ -86,9 +86,9 @@ public class QueueHotFolder extends StorageHotFolder
 	private final QueueHotFolderListener theQueueListener;
 
 	/**
-	 * 
+	 *
 	 * constructor for a simple queue based hotfolder watcher that is automagically started in its own thread
-	 * 
+	 *
 	 * @param _hotFolderDir the hot folder directory to watch
 	 * @param _storageDir the storage directory where hot files are moved to
 	 * @param ext the file extensions that are moved - if null no filtering
@@ -97,8 +97,21 @@ public class QueueHotFolder extends StorageHotFolder
 	 */
 	public QueueHotFolder(final File _hotFolderDir, final File _storageDir, final String ext, final QueueHotFolderListener hfListener, JDFJMF _queueCommand)
 	{
-		super(_hotFolderDir, _storageDir, ext, new QueueHotFolderListenerImpl(hfListener, _queueCommand));
-		theQueueListener = hfListener;
+		this(_hotFolderDir, _storageDir, ext, new QueueHotFolderListenerImpl(hfListener, _queueCommand));
+	}
+
+	/**
+	 * new constructo that allows you to override QueueHotFolderListenerImpl
+	 *
+	 * @param _hotFolderDir the hot folder directory to watch
+	 * @param _storageDir the storage directory where hot files are moved to
+	 * @param ext the file extensions that are moved - if null no filtering
+	 * @param hfListenerImpl
+	 */
+	public QueueHotFolder(final File _hotFolderDir, final File _storageDir, final String ext, final QueueHotFolderListenerImpl hfListenerImpl)
+	{
+		super(_hotFolderDir, _storageDir, ext, hfListenerImpl);
+		theQueueListener = hfListenerImpl.qhfl;
 	}
 
 	/**
