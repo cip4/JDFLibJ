@@ -242,7 +242,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	 * @param name
 	 *
 	 */
-	private MultiTaskQueue(String name)
+	MultiTaskQueue(String name)
 	{
 		super(name);
 		current = new Vector<NextRunner>();
@@ -257,7 +257,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	@Override
 	public String toString()
 	{
-		return "MultiTaskQueue " + getName() + " " + idle + " queue: " + queue;
+		return getClass().getSimpleName() + " " + getName() + " " + idle + " queue: " + queue;
 	}
 
 	/**
