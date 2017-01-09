@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,13 +89,13 @@ import org.junit.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class FileUtilTest extends JDFTestCaseBase
 {
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testisAbsoluteFile()
@@ -114,7 +114,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testisDirectory()
@@ -130,7 +130,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetExtension()
@@ -140,8 +140,31 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws IOException 
-	 * 
+	 *
+	 */
+	@Test
+	public void testGetAuxDir()
+	{
+		File theHFDir = new File(sm_dirTestDataTemp + File.separator + "Foo");
+		FileUtil.deleteAll(theHFDir);
+		theHFDir.mkdirs();
+		File aaa = FileUtil.getFileInDirectory(theHFDir, new File("aaa.txt"));
+		FileUtil.createNewFile(aaa);
+
+		assertNull(FileUtil.getAuxDir(aaa));
+		File aaaDir = FileUtil.newExtension(aaa, null);
+		aaaDir.mkdirs();
+		assertEquals(aaaDir, FileUtil.getAuxDir(aaa));
+		File aaaDir2 = FileUtil.newExtension(aaaDir, "dir");
+		aaaDir.renameTo(aaaDir2);
+		assertEquals(aaaDir2, FileUtil.getAuxDir(aaa));
+		assertNull(FileUtil.getAuxDir(new File(".xyz")));
+
+	}
+
+	/**
+	 * @throws IOException
+	 *
 	 */
 	@Test
 	public void testGetBufferedOutputStream() throws IOException
@@ -155,7 +178,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCleanDots()
@@ -168,7 +191,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNewExtension()
@@ -180,7 +203,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCopyBytes()
@@ -260,7 +283,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testisCleanURLFile()
@@ -275,7 +298,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testListTree()
@@ -292,7 +315,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testListTreeFilter()
@@ -393,7 +416,7 @@ public class FileUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCreateFile()
@@ -406,7 +429,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEquals()
@@ -426,8 +449,8 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception 
-	 * 
+	 * @throws Exception
+	 *
 	 */
 	@Test
 	public void testForceDelete() throws Exception
@@ -754,7 +777,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetFileInDirectory()

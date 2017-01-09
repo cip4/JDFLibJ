@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 package org.cip4.jdflib.util;
@@ -100,6 +100,42 @@ import org.cip4.jdflib.ifaces.IStreamWriter;
  */
 public class FileUtil
 {
+
+	/**
+	 * get any auxiliary directory with the same name as a file
+	 * @param hotFile
+	 * @return
+	 */
+	public static File getAuxDir(File hotFile)
+	{
+		if (hotFile == null)
+		{
+			return null;
+		}
+		String name = hotFile.getName();
+		String base = UrlUtil.newExtension(name, null);
+		if (StringUtil.getNonEmpty(base) == null)
+			return null;
+		File parentDir = hotFile.getParentFile();
+		File auxFile = getFileInDirectory(parentDir, new File(base));
+		if (!auxFile.isDirectory())
+		{
+			auxFile = null;
+			File[] v = listFilesWithExpression(parentDir, base + ".*");
+			if (v != null)
+			{
+				for (File f : v)
+				{
+					if (!f.getName().equals(name) && f.isDirectory())
+					{
+						auxFile = f;
+						break;
+					}
+				}
+			}
+		}
+		return auxFile;
+	}
 
 	/**
 	 * list all files with a given extension (directories are skipped
@@ -136,7 +172,7 @@ public class FileUtil
 	/**
 	 * list all files matching given regexp
 	 * @param dir the directory to search
-	 * @param filter the filter to apply to files 
+	 * @param filter the filter to apply to files
 	 * @return Vector<File>  the matching files, null if none are found
 	 */
 	public static Vector<File> listFilesInTree(final File dir, final FileFilter filter)
@@ -338,8 +374,8 @@ public class FileUtil
 	protected static class DirectoryFileFilter implements FileFilter
 	{
 		/**
-		 *  
-		 * 
+		 *
+		 *
 		 * @see java.io.FileFilter#accept(java.io.File)
 		 */
 		@Override
@@ -429,10 +465,10 @@ public class FileUtil
 
 	/**
 	 * write to a file
-	 * 
+	 *
 	 * @param file the file to write
 	 * @param w the writer to write to
-	 * 
+	 *
 	 * @return the file that was created, null if snafu
 	 */
 	public static File writeFile(IStreamWriter w, File file)
@@ -462,7 +498,7 @@ public class FileUtil
 		return file;
 	}
 
-	/** 
+	/**
 	 * create a File object with a new extension
 	 * @see UrlUtil#newExtension(String, String) for details of handling null etc.
 	 * @param f the file, if null always returns null
@@ -557,7 +593,7 @@ public class FileUtil
 
 	/**
 	 * same as streanToFile but also calculates the md5 hash of the stream
-	 * 
+	 *
 	 * @param fis the InputStream to read - if null nothing happens
 	 * @param fil the file to stream to
 	 * @return the file created by the stream, null if snafu
@@ -687,7 +723,7 @@ public class FileUtil
 
 	/**
 	 * copy a buffer to the end of a file, creating it if necessary
-	 * 
+	 *
 	 * @param buf the source buffer
 	 * @param toFile the destination File
 	 * @return true if success
@@ -748,7 +784,7 @@ public class FileUtil
 	 *
 	 * @param fromFile the File to move
 	 * @param toDir the Directory to move to
-	 * @return File the destination File if success, 
+	 * @return File the destination File if success,
 	 */
 	public static File ensureFileInDir(final File fromFile, final File toDir)
 	{
@@ -769,7 +805,7 @@ public class FileUtil
 
 	/**
 	 * remove any internal "../" "./" and "//" from a url
-	 * 
+	 *
 	 * @param file the file to clean
 	 * @return File - the clean file
 	 */
@@ -867,7 +903,7 @@ public class FileUtil
 
 	/**
 	 * create a new directory and return null if the directory could not be created
-	 * 
+	 *
 	 * @param newDir the path or URL of the new directory
 	 * @return
 	 */
@@ -963,9 +999,9 @@ public class FileUtil
 		if (roots != null)
 		{
 			f = f.toLowerCase();
-			for (int i = 0; i < roots.length; i++)
+			for (File root : roots)
 			{
-				if (f.startsWith(roots[i].getPath().toLowerCase()))
+				if (f.startsWith(root.getPath().toLowerCase()))
 				{
 					return true;
 				}
@@ -1064,7 +1100,7 @@ public class FileUtil
 	/**
 	 * create a buffered output stream for a file
 	 * @param file
-	 * @param append 
+	 * @param append
 	 * @return the buffered output stream, null if snafu
 	 */
 	public static BufferedOutputStream getBufferedOutputStream(File file, boolean append)
@@ -1089,7 +1125,7 @@ public class FileUtil
 	}
 
 	/**
-	 * 
+	 *
 	 * @return true if we are on a windows file system
 	 */
 	public static boolean isWindows()
