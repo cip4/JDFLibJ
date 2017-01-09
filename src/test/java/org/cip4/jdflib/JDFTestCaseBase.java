@@ -131,7 +131,8 @@ public abstract class JDFTestCaseBase extends TestCase
 	 */
 	public static String getXJDFSchema()
 	{
-		return StringUtil.replaceToken(sm_dirTestSchema, -1, File.separator, "Version_2_0") + "JDF20.xsd";
+		final String file = StringUtil.replaceToken(sm_dirTestSchema, -1, File.separator, "Version_2_0") + "JDF20.xsd";
+		return UrlUtil.normalize(file);
 	}
 
 	/**
