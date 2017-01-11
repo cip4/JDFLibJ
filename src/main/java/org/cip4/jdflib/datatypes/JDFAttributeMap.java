@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  *
@@ -99,7 +99,7 @@ import org.cip4.jdflib.util.StringUtil;
 public class JDFAttributeMap extends HashMap<String, String>
 {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -115,7 +115,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * utility constructor to construct a single value map
-	 * 
+	 *
 	 * @param key the key of the single value map
 	 * @param value the value of the single value map
 	 */
@@ -127,7 +127,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * utility constructor to construct a single value map
-	 * 
+	 *
 	 * @param key the key of the single value map
 	 * @param value the value of the single value map
 	 */
@@ -139,7 +139,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * Method JDFAttributeMap clone the content of the input map
-	 * 
+	 *
 	 * @param inputMap map to clone
 	 */
 	public JDFAttributeMap(final Map<String, String> inputMap)
@@ -153,7 +153,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * constructor: create a new map with one entry that is defined by partIDKey, value
-	 * 
+	 *
 	 * @param partIDKey the enumerated partIDKey
 	 * @param value the partition key value
 	 */
@@ -167,7 +167,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	/**
 	 * showKeys - similar to toString but without class identifier
 	 * @param sep the separator key between key-entry pairs
-	 * 
+	 *
 	 * @return String
 	 */
 	public String showKeys(String sep)
@@ -191,7 +191,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * keys - returns an enumeration of all keys in this {@link JDFAttributeMap}
-	 * 
+	 *
 	 * @return Enumeration - the enumeration of all keys
 	 * @deprecated use keyset().iterator()
 	 */
@@ -205,7 +205,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -216,12 +216,12 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * put - maps the specified key to the specified value in this hashtable. the key MUST NOT be ""
-	 * 
+	 *
 	 * Note: This method is the equivalent to AddPair in C++
-	 * 
+	 *
 	 * @param key unique key of the pair to add. Must not be "" or null.
 	 * @param value value of the pair to add. MAY be "" or null.
-	 * 
+	 *
 	 * @return the previous value of oldkey, if any
 	 * <p>
 	 * NOTE: It is NOT possible to enter to identical keys. If you enter a key to a Attribute Map which already exists, the value will be replaced.
@@ -240,12 +240,12 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * put - maps the specified key to the specified value in this hashtable. Neither the key nor the value can be ""
-	 * 
+	 *
 	 * Note: This method is the equivalent to AddPair in C++
-	 * 
+	 *
 	 * @param key unique key of the pair to add. Must not be "" or null.
 	 * @param value value of the pair to add. Must not be "" or null.
-	 * 
+	 *
 	 * @return boolean - false if one Inputparamter is invalid (empty String and null are not alowed)<br>
 	 * true if the new Key was inserted
 	 * <p>
@@ -277,11 +277,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * subMap - returns true if map contains subMap, all keys of submap must be in this hashtable and they must have the same value<br>
-	 * 
+	 *
 	 * if subMap is null, the function returns true if subMap contains any wildcards, then the existance of the key in this defines a match
-	 * 
+	 *
 	 * @param subMap the map to compare
-	 * 
+	 *
 	 * @return boolean - true if this map contains subMap
 	 */
 	public boolean subMap(final JDFAttributeMap subMap)
@@ -311,7 +311,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 			if (!KElement.isWildCard(subVal))
 			{
 				final String val = this.get(key);
-				if (!val.equals(subVal))
+				if (!KElement.isWildCard(val) && !val.equals(subVal))
 				{
 					return false;
 				}
@@ -322,7 +322,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * Method subMap check if any of the maps in vMap are a subMap oft this (see subMap for details) if vMap is null, the function returns true
-	 * 
+	 *
 	 * @param vMap the vector submaps to check against
 	 * @return true if this has at least one entry that vMap contains at least a submap of
 	 */
@@ -332,9 +332,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 		{
 			return true;
 		}
-		for (int i = 0; i < vMap.size(); i++)
+		for (JDFAttributeMap map : vMap)
 		{
-			if (subMap(vMap.elementAt(i)))
+			if (subMap(map))
 			{
 				return true;
 			}
@@ -344,7 +344,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * Method overlapMap.
-	 * 
+	 *
 	 * @param vMap the vector submaps to check against
 	 * @return true if this has at least one entry that vMap contains at least a submap or supermap of
 	 */
@@ -367,7 +367,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * checks whether this attributemap matches a regexp
-	 * 
+	 *
 	 * @param key the key to match
 	 * @param regExp the simplified regexp
 	 * @param ignoreCase duh...
@@ -381,9 +381,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * overlapMap - identical keys must have the same values in both maps i.e submap is either a superset or a subset of this
-	 * 
+	 *
 	 * @param subMap the map to compare with <code>this</this>
-	 * 
+	 *
 	 * @return boolean - true if identical keys have the same values in both maps
 	 */
 	public boolean overlapMap(final JDFAttributeMap subMap)
@@ -414,9 +414,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * orMap - put all key/value pairs which are not in this map to this map. Clear this, if both maps have the same keys with different values.
-	 * 
+	 *
 	 * @param subMap the map to compare with <code>this</this>
-	 * @return 
+	 * @return
 	 */
 	public JDFAttributeMap orMap(final JDFAttributeMap subMap)
 	{
@@ -449,7 +449,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * andMap - builds a new map with identical pairs of both maps
-	 * 
+	 *
 	 * @param subMap the given map
 	 */
 	public void andMap(final JDFAttributeMap subMap)
@@ -474,7 +474,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * andMap - builds a new map with identical pairs of both maps does not modify this
-	 * 
+	 *
 	 * @param subMap the given map
 	 * @return the ored map, null if mismatches occurred
 	 */
@@ -507,7 +507,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * andMap - builds a new map with identical pairs of both maps does not modify this
-	 * 
+	 *
 	 * @param subMap the given map
 	 * @return the anded map, null if mismatches occurred
 	 */
@@ -538,8 +538,8 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * reduceKey - reduces the map, only valid map entries with the given key vector will be copied to the new hashtable; if null, clear this map
-	 * 
-	 * 
+	 *
+	 *
 	 * @param keySet the collection of given keys
 	 * @return this after removal
 	 */
@@ -565,7 +565,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	/**
 	 * remove - removes the key (and its corresponding value) from this hashtable.<br>
 	 * This method does nothing if the key is not in the hashtable
-	 * 
+	 *
 	 * @return Object - the value to which the key had been mapped in this hashtable, or null if the key did not have a mapping
 	 */
 	@Override
@@ -582,7 +582,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * rename a key to the new value. newKey is only replaced if oldkey exists and is non empty
-	 * 
+	 *
 	 * @param oldKey
 	 * @param newKey
 	 * @return the previous value of oldkey
@@ -599,8 +599,8 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *  
-	 * 
+	 *
+	 *
 	 * @see java.util.Map#get(java.lang.Object)
 	 */
 	@Override
@@ -615,12 +615,12 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *  
+	 *
 	 * convenience int getter
-	 * @param key 
-	 * @param def 
-	 * @return 
-	 * 
+	 * @param key
+	 * @param def
+	 * @return
+	 *
 	 */
 	public int getInt(Object key, int def)
 	{
@@ -628,12 +628,12 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *  
+	 *
 	 * convenience boolean getter
-	 * @param key 
-	 * @param def 
-	 * @return 
-	 * 
+	 * @param key
+	 * @param def
+	 * @return
+	 *
 	 */
 	public boolean getBool(Object key, boolean def)
 	{
@@ -641,12 +641,12 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *  
+	 *
 	 * convenience double getter
-	 * @param key 
-	 * @param def 
-	 * @return 
-	 * 
+	 * @param key
+	 * @param def
+	 * @return
+	 *
 	 */
 	public double getDouble(Object key, double def)
 	{
@@ -654,11 +654,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 * 
+	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 * 
+	 *
 	 */
 	public String put(ValuedEnum key, String value)
 	{
@@ -666,11 +666,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 * 
+	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 * 
+	 *
 	 */
 	public String put(String key, int value)
 	{
@@ -678,11 +678,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 * 
+	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 * 
+	 *
 	 */
 	public String put(ValuedEnum key, int value)
 	{
@@ -690,11 +690,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 * 
+	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 * 
+	 *
 	 */
 	public String put(String key, double value)
 	{
@@ -702,11 +702,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 * 
+	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 * 
+	 *
 	 */
 	public String put(ValuedEnum key, double value)
 	{
@@ -714,11 +714,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 * 
+	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 * 
+	 *
 	 */
 	public String put(String key, boolean value)
 	{
@@ -726,11 +726,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 * 
+	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 * 
+	 *
 	 */
 	public String put(ValuedEnum key, boolean value)
 	{
@@ -738,11 +738,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 * 
+	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 * 
+	 *
 	 */
 	public String put(String key, ValuedEnum value)
 	{
@@ -750,11 +750,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 * 
+	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 * 
+	 *
 	 */
 	public String put(ValuedEnum key, ValuedEnum value)
 	{
@@ -764,7 +764,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	/**
 	 * getKeyIterator - returns an iterator over the elements in this set. The elements are returned in no particular order (unless this set is an instance of
 	 * some class that provides a guarantee).
-	 * 
+	 *
 	 * @return Iterator - an iterator over the elements in this set
 	 */
 	public Iterator<String> getKeyIterator()
@@ -774,7 +774,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * get the keys as a Vector,
-	 * 
+	 *
 	 * @return
 	 */
 	public VString getKeys()
@@ -788,9 +788,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * remove all keys defined by set from this
-	 * 
+	 *
 	 * @param toRemove the set of keys to remove
-	 * @return this map 
+	 * @return this map
 	 */
 	public JDFAttributeMap removeKeys(final Collection<String> toRemove)
 	{

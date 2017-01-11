@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,8 +71,8 @@
  * JDFXYPairRangeListTest.java
  *
  * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.datatypes;
@@ -89,12 +89,12 @@ import org.junit.Test;
 /**
  * test of JDFAttributemap
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class JDFAttributeMapTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testShowKeys()
@@ -108,7 +108,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testClone()
@@ -126,7 +126,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCloneNull()
@@ -142,7 +142,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEquals()
@@ -163,7 +163,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPut()
@@ -181,7 +181,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPutInt()
@@ -192,7 +192,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPutDouble()
@@ -203,7 +203,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPutBool()
@@ -214,7 +214,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPutNotNull()
@@ -228,7 +228,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGet()
@@ -239,10 +239,8 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		assertEquals(m1.get(EnumPartIDKey.SignatureName), "v1");
 	}
 
-	// ////////////////////////////////////////////////////////////////////
-
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSubMap()
@@ -251,13 +249,16 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		m1.put("a2", "v2");
 		assertTrue(m1.subMap((JDFAttributeMap) null));
 		final JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMap m3 = new JDFAttributeMap("a1", "v3");
 		JDFAttributeMap mStar = new JDFAttributeMap("a1", (String) null);
 		assertTrue(m1.subMap(m2));
 		assertTrue(m1.subMap(mStar));
+		assertTrue(mStar.subMap(m3));
 		m2.put("a2", "v2");
 		mStar = new JDFAttributeMap("a1", "*");
 		assertTrue(m1.subMap(m2));
 		assertTrue(m1.subMap(mStar));
+		assertTrue(mStar.subMap(m3));
 		m2.put("a2", "v3");
 		assertFalse(m1.subMap(m2));
 		m2.put("a2", "v2");
@@ -268,7 +269,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetAndMap()
@@ -289,7 +290,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetOrMap()
@@ -314,7 +315,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testOverlapMap()
@@ -344,7 +345,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMatches()
@@ -375,7 +376,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testReduceMapSet()
@@ -392,7 +393,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveKeys()
@@ -411,7 +412,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRenameKey()
