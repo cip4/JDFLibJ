@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -102,7 +102,7 @@ import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * 12.01.2009
  */
 public class UrlUtilTest extends JDFTestCaseBase
@@ -118,7 +118,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLocalURL()
@@ -135,7 +135,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetExtensionTypeFromMimeType()
@@ -153,7 +153,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetMimeTypeFromExt()
@@ -171,7 +171,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetURLProtocol()
@@ -183,7 +183,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testExtension()
@@ -223,6 +223,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("a?b=c&bb=cc", UrlUtil.addParameter("a?b=c", "bb", "cc"));
 		assertEquals("a?b=c%20d", UrlUtil.addParameter("a", "b", "c d"));
 		assertEquals("a?b=http%3a%2f%2fwww.example.com", UrlUtil.addParameter("a", "b", "http://www.example.com"));
+		assertEquals("ô", UrlUtil.escape("ô", false));
 	}
 
 	/**
@@ -237,7 +238,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToURL()
@@ -248,8 +249,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws IOException 
-	 * 
+	 * @throws IOException
+	 *
 	 */
 	@Test
 	public void testStreamWriter() throws IOException
@@ -264,7 +265,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToURLPost()
@@ -275,7 +276,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToFTP()
@@ -286,7 +287,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToURLClose()
@@ -299,7 +300,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToURLRedirect()
@@ -310,7 +311,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsRedirect()
@@ -321,7 +322,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetDetails()
@@ -335,7 +336,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToURLNull()
@@ -346,7 +347,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveProtocol()
@@ -361,7 +362,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsCid()
@@ -374,7 +375,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsNotCid()
@@ -387,7 +388,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsHTTP()
@@ -399,7 +400,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsHTTPS()
@@ -411,7 +412,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsNet()
@@ -424,7 +425,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsIRL()
@@ -442,7 +443,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsURL()
@@ -461,7 +462,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testIsURLPerformance()
@@ -487,7 +488,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsXMLType()
@@ -502,7 +503,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsZIPType()
@@ -556,7 +557,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsEscaped()
@@ -569,8 +570,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 *  
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testGetBytesFromIP()
@@ -582,8 +583,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testGetIPFromBytes()
@@ -597,7 +598,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFileToURL()
@@ -647,7 +648,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testURLToFileName()
@@ -657,7 +658,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testUNCToUrl()
@@ -750,7 +751,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testisRelativeURL()
@@ -766,7 +767,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testisUNC()
@@ -777,7 +778,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetRelativeURI()
@@ -790,7 +791,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetParentDirectory()
@@ -804,7 +805,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetRelativeURL()
@@ -821,7 +822,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetURLWithDirectory()
@@ -865,7 +866,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveExtension()
@@ -880,7 +881,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCleanDots()
@@ -897,7 +898,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCleanHttpUrl()
@@ -909,8 +910,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testCreateHttpUrl()
@@ -922,7 +923,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public void testMoveToDirMime() throws Exception
@@ -967,7 +968,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public void testMoveToDir() throws Exception
@@ -993,7 +994,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public void testMoveToDirDelete() throws Exception
@@ -1015,7 +1016,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNormalize()
@@ -1033,8 +1034,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testNormalizeFile()
@@ -1045,7 +1046,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testUnEscape()
@@ -1060,7 +1061,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNewExtension()

@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  *
@@ -113,9 +113,9 @@ import sun.net.www.protocol.ftp.FtpURLConnection;
 
 /**
  * collection of helper routines to convert urls
- * 
+ *
  * @author prosirai
- * 
+ *
  */
 public class UrlUtil
 {
@@ -133,7 +133,7 @@ public class UrlUtil
 	public static final String HEAD = "HEAD";
 
 	/**
-	 * 
+	 *
 	 */
 	public static final String KEEPALIVE = "keep-alive";
 
@@ -141,7 +141,7 @@ public class UrlUtil
 
 	/**
 	 * Returns connection timeout in milliseconds as integer.
-	 * 
+	 *
 	 * @return connectionTimeout in milliseconds
 	 */
 	public static void setConnectionTimeout(int timeout)
@@ -151,7 +151,7 @@ public class UrlUtil
 
 	/**
 	 * Returns connection timeout in milliseconds as integer.
-	 * 
+	 *
 	 * @return connectionTimeout in milliseconds
 	 */
 	public static int getConnectionTimeout()
@@ -160,20 +160,20 @@ public class UrlUtil
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public static final String CLOSE = "close";
 
 	/**
-	 * 
+	 *
 	 */
 	public static final String CONTENT_TRANSFER_ENCODING = "Content-Transfer-Encoding";
 
 	/**
 	 * helper class to set mime details
-	 * 
+	 *
 	 * @author prosirai
-	 * 
+	 *
 	 */
 	public static class HTTPDetails
 	{
@@ -187,7 +187,7 @@ public class UrlUtil
 
 		/**
 		 * size of http chunks to be written, if <=0 no chunks
-		 *  
+		 *
 		 */
 		private int chunkSize;
 		private boolean bKeepAlive;
@@ -247,7 +247,7 @@ public class UrlUtil
 
 		/**
 		 * apply these details to the connection specified
-		 * 
+		 *
 		 * @param urlCon
 		 */
 		public void applyTo(final HttpURLConnection urlCon)
@@ -288,21 +288,21 @@ public class UrlUtil
 	/**
 	 * strings that must be escaped in urls
 	 */
-	public static final String m_URIEscape = "|#%?@&=+$,;[]\\\"\'<>^`´{}~";
+	public static final String m_URIEscape = "|#%?@&=+$,;[]\\\"\'<>^{}~";
 	/**
 	 * strings that must be escaped in uncs
 	 */
 	public static final String m_UNCEscape = "/\\*?<>|";
 	/**
-	 * 
+	 *
 	 */
 	public static final String TEXT_HTML = "text/html";
 	/**
-	 * 
+	 *
 	 */
 	public static final String TEXT_PLAIN = "text/plain";
 	/**
-	 * 
+	 *
 	 */
 	public static final String TEXT_UNKNOWN = JDFCoreConstants.MIME_TEXTUNKNOWN;
 	/**
@@ -326,31 +326,31 @@ public class UrlUtil
 	 */
 	public static final String APPLICATION_PS = JDFCoreConstants.MIME_PS;
 	/**
-	 * 
+	 *
 	 */
 	public static final String TEXT_XML = JDFCoreConstants.MIME_TEXTXML;
 	/**
-	 * 
+	 *
 	 */
 	public static final String TEXT_CSV = "text/csv";
 	/**
-	 * 
+	 *
 	 */
 	public static final String VND_JDF = JDFCoreConstants.MIME_JDF;
 	/**
-	 * 
+	 *
 	 */
 	public static final String VND_JMF = JDFCoreConstants.MIME_JMF;
 	/**
-	 * 
+	 *
 	 */
 	public static final String VND_XJDF = JDFCoreConstants.MIME_XJDF;
 	/**
-	 * 
+	 *
 	 */
 	public static final String VND_XJMF = JDFCoreConstants.MIME_XJMF;
 	/**
-	 * 
+	 *
 	 */
 	public static final String CONTENT_ID = "Content-ID";
 	/**
@@ -362,11 +362,11 @@ public class UrlUtil
 	 */
 	public static final String CONTENT_LENGTH = "Content-Length";
 	/**
-	 * 
+	 *
 	 */
 	public static final String BASE64 = "base64";
 	/**
-	 * 
+	 *
 	 */
 	public static final String BINARY = "binary";
 
@@ -374,7 +374,7 @@ public class UrlUtil
 
 	/**
 	 * rough classification of protocol type
-	 * 
+	 *
 	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	public static enum URLProtocol
@@ -391,7 +391,7 @@ public class UrlUtil
 
 	/**
 	 * returns the relative URL of a file relative to the current working directory
-	 * 
+	 *
 	 * @param f the file to get the relative url for
 	 * @param baseDir the file that describes cwd, if <code>null</code> cwd is calculated
 	 * @param bEscape128 if true, escape > 128 (URL), else retain (IRL)
@@ -446,7 +446,7 @@ public class UrlUtil
 	/**
 	 * returns the relative URL of a file relative to the current working directory<br>
 	 * this includes escaping of %20 etc.
-	 * 
+	 *
 	 * @param f the file to get the relative path for
 	 * @param fCWD the file that describes cwd, if <code>null</code> cwd is calculated from user.dir
 	 * @return
@@ -532,12 +532,12 @@ public class UrlUtil
 
 	/**
 	 * get a readable inputstream from the CID url
-	 * 
+	 *
 	 * @param url the url to get a stream for
 	 * @param multipart the multipart mime to which the cid refers
-	 * 
+	 *
 	 * @return InputStream - the readable input stream that this filespec refers to, <code>null</code> if broken or non-existent
-	 * 
+	 *
 	 */
 	public static InputStream getCidURLStream(final String url, final Multipart multipart)
 	{
@@ -555,7 +555,7 @@ public class UrlUtil
 	 * get the filename extension of pathName excluding the '.'
 	 * if no '.' is found, returns null
 	 * if trailing . is found, returns ""
-	 * 
+	 *
 	 * @param pathName the pathName to get the extension for
 	 * @return String - the filename extension
 	 */
@@ -572,7 +572,7 @@ public class UrlUtil
 
 	/**
 	 * get the path name without extension of pathName
-	 * 
+	 *
 	 * @param pathName the pathName to get the extension for
 	 * @return String - the filename without extension
 	 * @deprecated use prefix(pathName)
@@ -586,7 +586,7 @@ public class UrlUtil
 	/**
 	 * get an array of urlparts, regardless of whether this was mime or not if the stream is mime/multipart get also extract that
 	 * @param connection
-	 * 
+	 *
 	 * @return the array of body parts input stream
 	 */
 	public static org.cip4.jdflib.util.UrlPart[] getURLParts(final HttpURLConnection connection)
@@ -647,7 +647,7 @@ public class UrlUtil
 
 	/**
 	 * get the opened input stream for a given url string
-	 * 
+	 *
 	 * @param urlString
 	 * @param bodyPart
 	 * @return
@@ -670,7 +670,7 @@ public class UrlUtil
 
 	/**
 	 * create a new directory and return null if the directory could not be created
-	 * 
+	 *
 	 * @param newDir the path or URL of the new directory
 	 * @return
 	 * @deprecated use FileUtil.getCreateDirectory(newDir);
@@ -684,7 +684,7 @@ public class UrlUtil
 	/**
 	 * Convert a File to a valid file URL or IRL<br>
 	 * note that some internal functions use network protocol and therefor performance may be non-optimal
-	 * 
+	 *
 	 * @param f the File to parse,
 	 * @param bEscape128 if true, escape non -ascii chars (URI), if false, don't (IRI)
 	 * @return the URL string
@@ -808,7 +808,7 @@ public class UrlUtil
 
 	/**
 	 * Retrieve a UNC path for a relative or absolute file url, any of '/'or "\\" is assumed a path separator
-	 * 
+	 *
 	 * @param urlString the file url to retrieve a UNC path  for
 	 * @return the UNC
 	 */
@@ -835,7 +835,7 @@ public class UrlUtil
 		return urlString;
 	}
 
-	/** 
+	/**
 	 * @param unc
 	 * @param escape128 if true escape chars>128
 	 * @return
@@ -910,7 +910,7 @@ public class UrlUtil
 	/**
 	 * standard url escaping
 	 * @param toEscape the string to escape
-	 * @param bEscape128 if true, also escape >128, else leave non-ascii7 as is 
+	 * @param bEscape128 if true, also escape >128, else leave non-ascii7 as is
 	 * @return the escaped string
 	 */
 	public static String escape(String toEscape, boolean bEscape128)
@@ -919,7 +919,8 @@ public class UrlUtil
 			return null;
 		if (bEscape128)
 		{
-			toEscape = new String(StringUtil.getUTF8Bytes(toEscape));
+			byte[] utf8Bytes = StringUtil.getUTF8Bytes(toEscape);
+			toEscape = new String(utf8Bytes);
 			toEscape = StringUtil.escape(toEscape, m_URIEscape, "%", 16, 2, 0x21, 127);
 		}
 		else
@@ -941,7 +942,7 @@ public class UrlUtil
 
 	/**
 	 * Create a URL for any url string using heuristics and escaping
-	 * 
+	 *
 	 * @param urlString the file url to retrieve a file for
 	 * @return
 	 */
@@ -992,7 +993,7 @@ public class UrlUtil
 
 	/**
 	 * checks whether there is a remote chance that the file is useful for reading
-	 * 
+	 *
 	 * @param f - File to check
 	 * @return true if the file is ok
 	 */
@@ -1003,7 +1004,7 @@ public class UrlUtil
 
 	/**
 	 * test whether a given url is escaped as utf-8
-	 * 
+	 *
 	 * @param url the url to test
 	 * @return
 	 */
@@ -1032,8 +1033,8 @@ public class UrlUtil
 	}
 
 	/**
-	 * generates the correct extension for a given mime content type 
-	 * 
+	 * generates the correct extension for a given mime content type
+	 *
 	 * @param contentType
 	 * @return
 	 */
@@ -1061,7 +1062,7 @@ public class UrlUtil
 
 	/**
 	 * generates the correct MIMEType for a given URL and sets it
-	 * 
+	 *
 	 * @param url
 	 * @return
 	 */
@@ -1107,7 +1108,7 @@ public class UrlUtil
 
 	/**
 	 * test whether a given url is a cid (cid:)
-	 * 
+	 *
 	 * @param url the url to test
 	 * @return
 	 */
@@ -1128,7 +1129,7 @@ public class UrlUtil
 
 	/**
 	 * test whether a given url is NOT a cid this may be a local identifier
-	 * 
+	 *
 	 * @param url the url to test
 	 * @return true if we are either a cid or a local url
 	 */
@@ -1184,7 +1185,7 @@ public class UrlUtil
 
 	/**
 	 * test whether a given url is an http url (excluding https - @see isHttps)
-	 * 
+	 *
 	 * @param url the url to test
 	 * @return
 	 */
@@ -1200,7 +1201,7 @@ public class UrlUtil
 
 	/**
 	* test whether a given url is an http url (excluding https - @see isHttps)
-	* 
+	*
 	* @param url the url to test
 	* @return
 	*/
@@ -1216,7 +1217,7 @@ public class UrlUtil
 
 	/**
 	 * test whether a given url is an https url
-	 * 
+	 *
 	 * @param url the url to test
 	 * @return
 	 */
@@ -1232,7 +1233,7 @@ public class UrlUtil
 
 	/**
 	 * test whether a given url is any network style url, currently either http, https or ftp
-	 * 
+	 *
 	 * @param url the url to test
 	 * @return
 	 */
@@ -1248,7 +1249,7 @@ public class UrlUtil
 
 	/**
 	 * normalize a url string by grinding it through url
-	 * 
+	 *
 	 * @param urlString
 	 * @return the normalized string, null if not a valid url
 	 */
@@ -1295,7 +1296,7 @@ public class UrlUtil
 
 	/**
 	 * check whether a file is a mime file only check extensions TODO sniff file rather than check extensions
-	 * 
+	 *
 	 * @param file the FILE to check
 	 * @return true if the file is a MIME file
 	 */
@@ -1378,7 +1379,7 @@ public class UrlUtil
 
 	/**
 	 * check whether a file is a mime file
-	 * 
+	 *
 	 * @param lower
 	 * @return
 	 */
@@ -1462,7 +1463,7 @@ public class UrlUtil
 	/**
 	 * get the local url without directory
 	 * schemes in the base url are case insensitive, all others are case sensitive
-	 * 
+	 *
 	 * @param directory the url of the directory
 	 * @param url the absolute url
 	 * @return String - the local URL of url after removing directory
@@ -1508,7 +1509,7 @@ public class UrlUtil
 	/**
 	 * concatenate directory and url to a single path IF and only IF url is a relative url<br>
 	 * relative urls MUST NOT have a scheme (e.g. file:)
-	 * 
+	 *
 	 * @param directory the url of the directory
 	 * @param url the relative url of the file
 	 * @return String - the concatenated URL of the directory + file
@@ -1563,8 +1564,8 @@ public class UrlUtil
 
 	/**
 	 * get the parent directory of a file or url
-	 * @param url 
-	 * @return 
+	 * @param url
+	 * @return
 	 */
 	public static String getParentDirectory(String url)
 	{
@@ -1583,7 +1584,7 @@ public class UrlUtil
 
 	/**
 	 * remove any internal "../" "./" and "//" from a url
-	 * 
+	 *
 	 * @param url the url to clean
 	 * @return String - the clean path
 	 */
@@ -1633,7 +1634,7 @@ public class UrlUtil
 	/**
 	 * create a "real" url from a user input url
 	 * add http://
-	 * 
+	 *
 	 * @param url the input url
 	 * @return the - hopefully - usable url
 	 */
@@ -1662,14 +1663,14 @@ public class UrlUtil
 
 	/**
 	 * write a Stream to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
-	 * 
+	 *
 	 * @param strUrl the URL to write to
 	 * @param stream the input stream to read from
 	 * @param method HEAD, GET or POST
 	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
 	 * @param details
 	 * @return {@link UrlPart} the opened http connection, null in case of error
-	 * 
+	 *
 	 */
 	public static UrlPart writeToURL(final String strUrl, final InputStream stream, final String method, String contentType, final HTTPDetails details)
 	{
@@ -1680,7 +1681,7 @@ public class UrlUtil
 	static class StreamReader implements IStreamWriter
 	{
 		/**
-		 * 
+		 *
 		 * @param input
 		 */
 		StreamReader(InputStream input)
@@ -1701,14 +1702,14 @@ public class UrlUtil
 
 	/**
 	 * write the contents of an IStreamWriter to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
-	 * 
+	 *
 	 * @param strUrl the URL to write to
 	 * @param streamWriter the IStreamWriter to read from
 	 * @param method HEAD, GET or POST
 	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
 	 * @param details
 	 * @return {@link UrlPart} the opened http connection, null in case of error
-	 * 
+	 *
 	 */
 	public static UrlPart writerToURL(final String strUrl, final IStreamWriter streamWriter, final String method, String contentType, final HTTPDetails details)
 	{
@@ -1756,9 +1757,9 @@ public class UrlUtil
 
 		/**
 		 * write a Stream to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
-		 * 
+		 *
 		 * @return {@link UrlPart} the opened http connection, null in case of error
-		 * 
+		 *
 		 */
 		protected UrlPart writeToURL()
 		{
@@ -1851,7 +1852,7 @@ public class UrlUtil
 
 		/**
 		 * @param proxy
-		 * @param bWantLog 
+		 * @param bWantLog
 		 * @return
 		 */
 		private UrlPart callProxy(Proxy proxy, boolean bWantLog)
@@ -1911,7 +1912,7 @@ public class UrlUtil
 	/**
 	 * physically store the file at the location specified in dir and also modify this to reflect the new location
 	 * @param parent the parent element, trypically a filespec or preview
-	 * @param dir the directory to move to. dir is created if it does not exist. 
+	 * @param dir the directory to move to. dir is created if it does not exist.
 	 * If dir exists and dir is not a directory, the call fails and null is returned
 	 * @param overWrite if true, zapp any old files with the same name
 	 * @return the file that corresponds to the moved url reference, null if an error occurred
@@ -1925,9 +1926,9 @@ public class UrlUtil
 
 	/**
 	 * physically store the file at the location specified in dir and also modify parent to reflect the new location
-	 * 
+	 *
 	 * @param urlSetter the parent element, typically a filespec or preview
-	 * @param dir the directory to move to. dir is created if it does not exist. 
+	 * @param dir the directory to move to. dir is created if it does not exist.
 	 * If dir exists and dir is not a directory, the call fails and null is returned
 	 * @param cwd the current working dir for local urls
 	 * @param overWrite if true, zapp any old files with the same name
@@ -1940,9 +1941,9 @@ public class UrlUtil
 
 	/**
 	 * physically store the file at the location specified in dir and also modify parent to reflect the new location
-	 * 
+	 *
 	 * @param urlSetter the parent element, typically a filespec or preview
-	 * @param dir the directory to move to. dir is created if it does not exist. 
+	 * @param dir the directory to move to. dir is created if it does not exist.
 	 * If dir exists and dir is not a directory, the call fails and null is returned
 	 * @param cwd the current working dir for local urls
 	 * @param overWrite if true, zapp any old files with the same name
@@ -2082,7 +2083,7 @@ public class UrlUtil
 
 	/**
 	 * replace the .extension of a file name
-	 * 
+	 *
 	 * @param strWork the file path
 	 * @param newExt the new extension (works with or without the initial "."
 	 * @return the strWork with a replaced extension
@@ -2120,7 +2121,7 @@ public class UrlUtil
 
 	/**
 	 * return true if the response code should redirect
-	 * 
+	 *
 	 * @param responseCode
 	 * @return
 	 */
