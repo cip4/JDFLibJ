@@ -209,6 +209,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("€", UrlUtil.escape("€", false));
 		assertEquals("%23", UrlUtil.escape("#", false));
 		assertEquals(UrlUtil.escape("世界中のあらゆる情", false), "世界中のあらゆる情");
+		assertEquals("ô", UrlUtil.escape("ô", false));
+
 	}
 
 	/**
