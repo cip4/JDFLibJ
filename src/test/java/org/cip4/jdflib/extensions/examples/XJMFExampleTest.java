@@ -152,6 +152,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		rqp.setAttribute(AttributeName.SCOPE, "Allowed");
 		rqp.setResourceDetails(EnumResourceDetails.Full);
 		xjmfHelper.cleanUp();
+		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
 		writeTest(xjmfHelper, "jmf/paperResourceQuery.xjmf");
 	}
@@ -179,9 +180,10 @@ public class XJMFExampleTest extends JDFTestCaseBase
 			((JDFMedia) rh.getResource()).setWeight(60 + 20 * i);
 
 		}
+		xjmfHelper.cleanUp();
 		sh.getRoot().appendXMLComment(" One Resource element for each paper follows here ", null);
 		setSnippet(xjmfHelper, true);
-		writeTest(xjmfHelper, "jmf/paperResponsePaper.xjmf");
+		writeTest(xjmfHelper, "jmf/paperResourceResponse.xjmf");
 	}
 
 	/**
@@ -192,7 +194,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	{
 		XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper response = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.KnownDevices);
-		response.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.REFID, "C1");
+		response.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.REFID, "Q1");
 		response.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.ID, "R1");
 		response.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.DEVICEID, "VeggieController");
 		response.setAttribute(AttributeName.RETURNCODE, "0");
@@ -205,8 +207,11 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		dev.setDeviceID("dev2");
 		dev.setDeviceType("ACME Baldrick turnip press V42-66");
 		dev.setAttribute(XJDFConstants.XJMFURL, "http://acmeturnip1:1234/xjmfurl");
+		xjmfHelper.cleanUp();
+		response.getRoot().appendXMLComment(" One Device element for each known device follows here ", null);
 
-		xjmfHelper.writeToFile(sm_dirTestDataTemp + "xjdf/ResponseKnownDevices.xjmf");
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "jmf/responseKnowDevices.xjmf");
 	}
 
 	/**

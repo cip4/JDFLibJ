@@ -1904,16 +1904,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for DeviceList ** -->
-    <xs:element name="DeviceList">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="Device"/>
-            </xs:sequence>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for DeviceMark ** -->
     <xs:element name="DeviceMark">
         <xs:complexType>
@@ -7183,7 +7173,7 @@
         <xs:complexContent>
             <xs:extension base="Response">
                 <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="DeviceList"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="Device"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -7194,7 +7184,7 @@
         <xs:complexContent>
             <xs:extension base="Signal">
                 <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="DeviceList"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="Device"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
