@@ -247,6 +247,14 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumResponseModes">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="FireAndForget"/>
+            <xs:enumeration value="Reliable"/>
+            <xs:enumeration value="Response"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="Scope">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Allowed"/>
@@ -1269,9 +1277,9 @@
             <xs:sequence>
                 <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
             </xs:sequence>
-            <xs:attribute name="ChannelMode" use="optional">
+            <xs:attribute name="ResponseModes" use="optional">
                 <xs:simpleType>
-                    <xs:list itemType="EnumChannelMode"/>
+                    <xs:list itemType="EnumResponseModes"/>
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="JMFRole" use="optional">

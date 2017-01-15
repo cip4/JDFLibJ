@@ -70,28 +70,35 @@ package org.cip4.jdflib.extensions.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
+import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
+import org.cip4.jdflib.auto.JDFAutoResourceInfo.EnumScope;
 import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumResourceDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJMFHelper;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.jmf.JDFQueueEntry;
+import org.cip4.jdflib.jmf.JDFResourceCmdParams;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFResourceQuParams;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.JDFDevice;
-import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.util.JDFDate;
 import org.junit.Test;
 
 /**
@@ -109,13 +116,14 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	public void testCommandResumeQE()
 	{
 		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper signal = xjmfHelper.appendMessage(EnumFamily.Command, XJDFConstants.ModifyQueueEntry);
-		signal.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/@" + AttributeName.OPERATION, "Resume");
-		signal.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/" + ElementName.QUEUEFILTER + "/@" + AttributeName.JOBID, "j1");
-		signal.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.ID, "C1");
+		MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, XJDFConstants.ModifyQueueEntry);
+		command.getHeader().setAttribute(AttributeName.REFID, "C1");
+		command.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/@" + AttributeName.OPERATION, "Resume");
+		command.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/" + ElementName.QUEUEFILTER + "/@" + AttributeName.JOBID, "j1");
+		command.getHeader().setAttribute(AttributeName.ID, "R1");
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
-		writeTest(xjmfHelper, "CommandModifyQE.xjmf");
+		writeTest(xjmfHelper, "jmf/CommandModifyQE.xjmf");
 	}
 
 	/**
@@ -124,18 +132,20 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testResponseResumeQE()
 	{
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper response = xjmfHelper.appendMessage(EnumFamily.Response, XJDFConstants.ModifyQueueEntry);
-		response.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.REFID, "C1");
-		response.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.ID, "R1");
+		response.getHeader().setAttribute(AttributeName.REFID, "C1");
+		response.getHeader().setAttribute(AttributeName.ID, "R1");
 		response.setAttribute(AttributeName.RETURNCODE, "0");
 		JDFQueueEntry qe = (JDFQueueEntry) response.getRoot().appendElement(ElementName.QUEUEENTRY);
 		qe.setJobID("j1");
 		qe.setQueueEntryID("QE1");
 		qe.setStatus(EnumNodeStatus.Waiting);
 		qe.setActivation(EnumActivation.Active);
-
-		xjmfHelper.writeToFile(sm_dirTestDataTemp + "xjdf/ResponseModifyQE.xjmf");
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "jmf/ResponseModifyQE.xjmf");
 	}
 
 	/**
@@ -152,9 +162,98 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		rqp.setAttribute(AttributeName.SCOPE, "Allowed");
 		rqp.setResourceDetails(EnumResourceDetails.Full);
 		xjmfHelper.cleanUp();
-		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
 		writeTest(xjmfHelper, "jmf/paperResourceQuery.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCommandPaper()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Resource);
+		q.getHeader().setID("C1");
+		JDFResourceCmdParams rcp = (JDFResourceCmdParams) q.appendElement(ElementName.RESOURCECMDPARAMS);
+		rcp.setUpdateMethod(EnumUpdateMethod.Incremental);
+		SetHelper sh = new SetHelper(rcp.appendElement(XJDFConstants.ResourceSet));
+		sh.setName(ElementName.MEDIA);
+		for (int i = 1; i < 3; i++)
+		{
+			ResourceHelper rh = sh.appendPartition(null, true);
+			rh.setExternalID("ID_" + i);
+			rh.setAttribute(AttributeName.DESCRIPTIVENAME, "Paper # " + i);
+			((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
+			((JDFMedia) rh.getResource()).setWeight(60 + 20 * i);
+
+		}
+
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		sh.getRoot().appendXMLComment(" One Resource element for each paper to upload follows here ", null);
+		writeTest(xjmfHelper, "jmf/paperResourceCommand.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSignalPaper()
+	{
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Resource);
+		q.getHeader().setID("S1");
+		q.getHeader().setAttribute(AttributeName.REFID, "Sub1");
+		JDFResourceInfo ri = (JDFResourceInfo) q.appendElement(ElementName.RESOURCEINFO);
+		ri.setAttribute(AttributeName.SCOPE, "Job");
+		ri.setAttribute(AttributeName.JOBID, "Job1");
+		ri.setAttribute(AttributeName.JOBPARTID, "Printing");
+		SetHelper sh = new SetHelper(ri.appendElement(XJDFConstants.ResourceSet));
+		sh.setUsage(EnumUsage.Input);
+		sh.setName(ElementName.MEDIA);
+		ResourceHelper rh = sh.appendPartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), false);
+		rh.setExternalID("MIS-ID");
+		rh.setAmount(4500, new JDFAttributeMap(AttributeName.LOTID, "Lot1"), true);
+		rh.setAmount(66, new JDFAttributeMap(AttributeName.LOTID, "Lot1"), false);
+		rh.setAmount(2200, new JDFAttributeMap(AttributeName.LOTID, "Lot2"), true);
+		rh.setAmount(22, new JDFAttributeMap(AttributeName.LOTID, "Lot2"), false);
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "jmf/paperResourceSignal.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSignalStatus()
+	{
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
+		s.getHeader().setID("S1");
+		s.getHeader().setAttribute(AttributeName.REFID, "Sub1");
+		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
+		JDFDeviceInfo di = (JDFDeviceInfo) s.getRoot().appendElement(ElementName.DEVICEINFO);
+		di.setAttribute(AttributeName.STATUS, "Production");
+		JDFJobPhase p = di.appendJobPhase();
+		p.setJobID("j1");
+		p.setJobPartID("p1");
+		p.setStatus(EnumNodeStatus.Setup);
+		p.setStartTime(new JDFDate().setTime(16, 0, 0));
+		s = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
+		di = (JDFDeviceInfo) s.getRoot().appendElement(ElementName.DEVICEINFO);
+		di.setAttribute(AttributeName.STATUS, "Production");
+		p = di.appendJobPhase();
+		p.setJobID("j1");
+		p.setJobPartID("p1");
+		p.setStatus(EnumNodeStatus.InProgress);
+		p.setStartTime(new JDFDate().setTime(17, 0, 0));
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "jmf/paperResourceSignal.xjmf");
 	}
 
 	/**
@@ -169,6 +268,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		q.getHeader().setAttribute(AttributeName.REFID, "Q1");
 		q.getHeader().setID("R1");
 		JDFResourceInfo ri = (JDFResourceInfo) q.appendElement(ElementName.RESOURCEINFO);
+		ri.setScope(EnumScope.Allowed);
 		SetHelper sh = new SetHelper(ri.appendElement(XJDFConstants.ResourceSet));
 		sh.setName(ElementName.MEDIA);
 		for (int i = 1; i < 3; i++)
@@ -192,11 +292,11 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testResponseKnownDevices()
 	{
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("VeggieController");
 		XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper response = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.KnownDevices);
-		response.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.REFID, "Q1");
-		response.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.ID, "R1");
-		response.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.DEVICEID, "VeggieController");
+		response.getHeader().setAttribute(AttributeName.REFID, "Q1");
+		response.getHeader().setAttribute(AttributeName.ID, "R1");
 		response.setAttribute(AttributeName.RETURNCODE, "0");
 		JDFDevice dev = (JDFDevice) response.getRoot().appendElement(ElementName.DEVICE);
 		dev.setDeviceID("dev1");
@@ -220,28 +320,27 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testResponseKnownMessages()
 	{
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper response = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.KnownMessages);
-		JDFFileSpec fs = (JDFFileSpec) response.appendElement(ElementName.FILESPEC);
-		fs.setResourceUsage("Schema");
-		fs.setURL("http://acmeturnip1:1234/xsdurl");
-		response.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.REFID, "C1");
-		response.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.ID, "R1");
-		response.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.DEVICEID, "Controller");
+		response.getHeader().setAttribute(AttributeName.REFID, "Q1");
+		response.getHeader().setAttribute(AttributeName.ID, "R1");
 		response.setAttribute(AttributeName.RETURNCODE, "0");
 		JDFMessageService ms = (JDFMessageService) response.appendElement(ElementName.MESSAGESERVICE);
 		ms.setType("QueryKnownMessages");
-		ms.setAttribute(AttributeName.CHANNELMODE, ElementName.RESPONSE);
+		ms.setAttribute(XJDFConstants.ResponseModes, ElementName.RESPONSE);
 		ms = (JDFMessageService) response.appendElement(ElementName.MESSAGESERVICE);
 		ms.setType("QueryStatus");
-		ms.setAttribute(AttributeName.CHANNELMODE, EnumChannelMode.FireAndForget.getName());
+		ms.setAttribute(XJDFConstants.ResponseModes, EnumChannelMode.FireAndForget.getName());
+		ms.appendAttribute(XJDFConstants.ResponseModes, EnumChannelMode.Reliable.getName(), null, null, false);
 		ms = (JDFMessageService) response.appendElement(ElementName.MESSAGESERVICE);
 		ms.setType("CommandSubmitQueueEntry");
-		ms.setAttribute(AttributeName.CHANNELMODE, ElementName.RESPONSE);
 		ms = (JDFMessageService) response.appendElement(ElementName.MESSAGESERVICE);
 		ms.setType("ResponseReturnQueueEntry");
 
-		xjmfHelper.writeToFile(sm_dirTestDataTemp + "xjdf/ResponseKnownMessages.xjmf");
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "jmf/ResponseKnownMessages.xjmf");
 	}
 
 	/**

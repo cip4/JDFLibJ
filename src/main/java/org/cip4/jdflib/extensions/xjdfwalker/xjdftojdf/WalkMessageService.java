@@ -66,24 +66,20 @@
  *
  *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFMessageService;
-import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkMessageService extends WalkJDFSubElement
+public class WalkMessageService extends WalkXElement
 {
 	/**
 	 *
@@ -101,7 +97,7 @@ public class WalkMessageService extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFMessageService;
+		return toCheck instanceof JDFMessageService;
 	}
 
 	/**
@@ -110,43 +106,26 @@ public class WalkMessageService extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.MESSAGESERVICE, null);
+		return VString.getVString(ElementName.MESSAGESERVICE, null);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(KElement elem)
 	{
-		map.remove(AttributeName.ACKNOWLEDGE);
-		map.remove(AttributeName.COMMAND);
-		map.remove(AttributeName.SIGNAL);
-		map.remove(AttributeName.QUERY);
-		map.remove(AttributeName.REGISTRATION);
-		map.remove(AttributeName.GENERICATTRIBUTES);
-		map.remove(AttributeName.PERSISTENT);
-		map.renameKey(AttributeName.CHANNELMODE, XJDFConstants.ResponseModes);
-		super.updateAttributes(map);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	protected void removeUnusedElements(KElement jdf)
-	{
-		VElement v = jdf.getChildElementVector(null, null);
-		if (v != null)
+		elem.renameAttribute(XJDFConstants.ResponseModes, AttributeName.CHANNELMODE);
+		VString mode = StringUtil.tokenize(elem.getNonEmpty(AttributeName.CHANNELMODE), null, false);
+		if (mode != null)
 		{
-			for (KElement e : v)
+			mode.remove(ElementName.RESPONSE);
+			if (mode.isEmpty())
 			{
-				if (e instanceof JDFAbstractState)
-				{
-					e.deleteNode();
-				}
+				elem.removeAttribute(AttributeName.CHANNELMODE);
 			}
 		}
-		super.removeUnusedElements(jdf);
+		super.updateAttributes(elem);
 	}
+
 }

@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JMFBuilder;
@@ -106,6 +107,15 @@ public class MessageHelper extends BaseXJDFHelper
 			for (KElement e : v)
 			{
 				new SetHelper(e).cleanUp();
+				e.removeAttribute(AttributeName.ID);
+				VElement vRes = e.getChildElementVector(ElementName.RESOURCE, null);
+				if (vRes != null)
+				{
+					for (KElement res : vRes)
+					{
+						res.removeAttribute(AttributeName.ID);
+					}
+				}
 			}
 		}
 	}

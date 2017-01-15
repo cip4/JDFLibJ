@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
@@ -107,6 +108,19 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final JDFJMF jmfResp = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.PipeClose);
 		xjmf = conv.makeNewJMF(jmfResp);
 		assertEquals(xjmf.getElement("ResponsePipeControl").getLocalName(), "ResponsePipeControl");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMessageServiceMode()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.KnownMessages);
+		jmf.getResponse(0).appendMessageService().setChannelMode(EnumChannelMode.FireAndForget);
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals(xjmf.getXPathAttribute("ResponseKnownMessages/MessageService/@ResponseModes", null), "FireAndForget");
 	}
 
 	/**
