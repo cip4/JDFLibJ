@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -136,12 +136,25 @@ public class MessageHelper extends BaseXJDFHelper
 		{
 			header.setAttribute(AttributeName.AGENTVERSION, jmfBuilder.getAgentVersion());
 		}
+		if (!header.hasAttribute(AttributeName.DEVICEID))
+		{
+			header.setAttribute(AttributeName.DEVICEID, jmfBuilder.getSenderID());
+		}
 		KElement next = message.getFirstChildElement();
 		if (next != header)
 		{
 			message.insertBefore(header, next);
 		}
 		return header;
+	}
+
+	/**
+	 * get the header of this - create if not there yet
+	 * @return
+	 */
+	public KElement getHeader()
+	{
+		return ensureHeader(theElement);
 	}
 
 }

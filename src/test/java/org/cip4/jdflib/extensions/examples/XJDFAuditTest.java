@@ -109,7 +109,9 @@ public class XJDFAuditTest extends JDFTestCaseBase
 		rh.setAmount(21, null, false);
 		m = (JDFMedia) rh.getResource();
 		m.setWeight(90);
-		setSnippet(xjdfHelper.getRoot());
+		xjdfHelper.cleanUp();
+		setSnippet(xjdfHelper, true);
+		setSnippet(xjdfHelper.getSet(ElementName.NODEINFO, 0), false);
 		writeTest(xjdfHelper, "PaperAuditActual.xjdf");
 	}
 

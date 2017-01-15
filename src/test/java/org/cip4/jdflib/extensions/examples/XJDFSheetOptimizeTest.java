@@ -122,6 +122,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 			sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS" + i), true).getResource();
 			lo.appendElement(ElementName.POSITION).setAttribute(XJDFConstants.BinderySignatureID, "BS" + i);
 		}
+		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "SimpleGangOut.xjdf");
 	}
 
@@ -136,6 +137,8 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 		{
 			addGang();
 		}
+		xjdfHelper.cleanUp();
+		setSnippet(xjdfHelper, true);
 		writeTest(xjdfHelper, "SimpleGang.xjdf");
 	}
 
@@ -154,6 +157,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 				addOutLayout(i, j);
 			}
 		}
+		xjdfHelper.cleanUp();
 		writeTest(xjdfHelper, "GangLayout.xjdf");
 	}
 

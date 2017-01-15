@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,29 +56,29 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * ==========================================================================
- * class JDFDate 
- * 
- * JDFDate additionally stores the timezone offset of the original date, 
+ * class JDFDate
+ *
+ * JDFDate additionally stores the timezone offset of the original date,
  * so that after mDate = new JDFDate("1999-09-26T11:43:10+03:00") the following
  * equation holds: mDate.dateTimeISO() == "1999-09-26T11:43:10+03:00"
  * independent of the default timezone
  * ==========================================================================
- * COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2003. ALL RIGHTS RESERVED 
+ * COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2003. ALL RIGHTS RESERVED
  **/
 
 package org.cip4.jdflib.util;
@@ -99,7 +99,7 @@ import org.cip4.jdflib.core.VString;
  * class to manipulate date and time according to ISO 8601<br/>
  * the date and time are in local time with the respective time zone specified
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDate>
 {
@@ -120,15 +120,15 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	private static FastCalendar fastCalendar = new FastCalendar();
 	/**
-	 * 
+	 *
 	 */
 	public static final String DATEISO = "yyyy'-'MM'-'dd'";
 	/**
-	 * 
+	 *
 	 */
 	final static String TIMEISO = "HH:mm:ss";
 	/**
-	 * 
+	 *
 	 */
 	public static final String DATETIMEISO = "yyyy'-'MM'-'dd'T'HH:mm:ssZZ";
 	/**
@@ -144,23 +144,23 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public static final String DATETIMEISO_000 = "yyyy'-'MM'-'dd'T00':'00':'00'ZZ";
 	/**
-	 * 
+	 *
 	 */
 	public static final String DATETIMEREADABLE = "dd MMM yyyy HH:mm";
 	/**
-	 * 
+	 *
 	 */
 	public static final String DATENUMERIC_DDMM = "dd/MM/yyyy";
 	/**
-	 * 
+	 *
 	 */
 	public static final String DATENUMERIC_MMDD = "MM/dd/yyyy";
 	/**
-	 * 
+	 *
 	 */
 	public static final String DATETIMENUMERIC_DDMM = "dd/MM/yyyy HH:mm";
 	/**
-	 * 
+	 *
 	 */
 	public static final String DATETIMENUMERIC_MMDD = "MM/dd/yyyy HH:mm";
 
@@ -179,8 +179,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 		/**
 		 * @param b
-		 * @param decimalLength 
-		 * @param tzInMillis 
+		 * @param decimalLength
+		 * @param tzInMillis
 		 * @return
 		 */
 		synchronized long getTimeInMillis(final byte[] b, int decimalLength, int tzInMillis)
@@ -247,7 +247,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 * Allocates a <code>JDFDate</code> object and initializes it so that it represents the time point, expressed in milliseconds after January 1, 1970, 0:00:00
 	 * GMT. Also sets the current time zone to the system default time zone
-	 * 
+	 *
 	 * @param iTime current time in milliseconds after January 1, 1970, 0:00:00 GMT. Use JDFDuration instead. This class will be modified to handle only JDFDate
 	 * objects
 	 */
@@ -290,10 +290,10 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * Attention!<br>
 	 * you can enter milliseconds, but <code>getDateTimeISO()</code> still returns the time rounded to full seconds. Only <code>long getTimeInMillis()</code>
 	 * returns the exact time
-	 * 
+	 *
 	 * @param strDateTime formatted date and time
 	 * @throws DataFormatException if strDateTime is not a valid DateTime
-	 * 
+	 *
 	 * Attention! you can enter milliseconds, but getDateTimeISO() still returns the time rounded to full seconds only long getTimeInMillis() returns the exact
 	 * time
 	 */
@@ -328,7 +328,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * for debug purpose
-	 * 
+	 *
 	 * @return Object informations
 	 * @Override
 	 */
@@ -350,7 +350,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * <li>"P1Y2M3DT10H30M"</li>
 	 * <li>"PM8T12M"</li>
 	 * <li>"PT30M"</li>
-	 * 
+	 *
 	 * @param strDateTime formatted date and time
 	 * @throws DataFormatException thrown if the string is not a reasonable iso date or date time
 	 */
@@ -385,7 +385,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		private long l;
 
 		/**
-		 * 
+		 *
 		 * @param strDateTime
 		 */
 		StringHandler(String strDateTime)
@@ -396,7 +396,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		}
 
 		/**
-		 * 
+		 *
 		 * @param millis
 		 */
 		StringHandler(long millis)
@@ -502,7 +502,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 		/**
 		 * TODO Please insert comment!
-		 * @throws DataFormatException 
+		 * @throws DataFormatException
 		 */
 		private void cleanDate() throws DataFormatException
 		{
@@ -531,8 +531,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		}
 
 		/**
-		 *  
-		 * @throws DataFormatException 
+		 *
+		 * @throws DataFormatException
 		 */
 		private void cleanTime() throws DataFormatException
 		{
@@ -673,7 +673,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * returns the date and time of this in nonean arbitrary pattern
-	 * 
+	 *
 	 * @param format the format string using {@link FastDateFormat} formatting
 	 * @return String - the date as specified by the pattern
 	 * @throws IllegalArgumentException
@@ -685,7 +685,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * returns the date and time of this in none ISO pattern 'yyyyMMddHHmmss'
-	 * 
+	 *
 	 * @return String - the date in pattern yyyyMMddHHmmss
 	 */
 	public String getDateTime()
@@ -696,7 +696,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 * setOffset: set the offset to this time. Note: The time stored in this is not resetted if you want an offset based on current time use 'public MyDate(int
 	 * iOffset)'
-	 * 
+	 *
 	 * @param iOffset offset time in seconds
 	 * @deprecated use addOffset
 	 */
@@ -709,19 +709,20 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 * add a given offset to this <br/>
 	 * note: multiple calls stack
-	 * 
+	 *
 	 * @param seconds seconds to add to this
 	 * @param minutes minutes to add to this
 	 * @param hours hours to add to this
 	 * @param days days to add to this
 	 */
-	public void addOffset(final int seconds, final int minutes, final int hours, final int days)
+	public JDFDate addOffset(final int seconds, final int minutes, final int hours, final int days)
 	{
 		lTimeInMillis += 1000l * (seconds + 60l * minutes + 3600l * hours + 3600l * 24l * days);
+		return this;
 	}
 
 	/**
-	 * 
+	 *
 	 * create a date with a relative offset defined in duration
 	 * @param duration
 	 * @param hour the fixed hour, if -1 don't set
@@ -745,7 +746,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 * format the date and time as an ISO 8601 conform String<br/>
 	 * the date and time are in local time with the respective time zone specified
-	 * 
+	 *
 	 * @return date and time as String of form yyyy-mm-ddThh:mm:ss+zz:00
 	 */
 	public String getDateTimeISO()
@@ -787,7 +788,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 * format the time into a ISO conform String<br/>
 	 * the time is in local time
-	 * 
+	 *
 	 * @return String: the time of this ISO 8601 in format hh:mm:ss
 	 */
 	public String getTimeISO()
@@ -797,7 +798,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * the TimeZone as spezified in ISO 8601 +/-10:00 for example
-	 * 
+	 *
 	 * @return String: the timezone
 	 */
 	public String getTimeZoneISO()
@@ -811,7 +812,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * Tests if this date is after the specified date.
-	 * 
+	 *
 	 * @param x the date you wish to know if it is later than this
 	 * @return true if and only if the instant represented by this Date object is strictly later than the instant represented by x; false otherwise.
 	 */
@@ -823,7 +824,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * Tests if this date is before the specified date.
-	 * 
+	 *
 	 * @param x the date you wish to know if it is eariler than this
 	 * @return true if and only if the instant of time represented by this Date object is strictly earlier than the instant represented by x; false otherwise.
 	 */
@@ -835,7 +836,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * get the time in milliseconds
-	 * 
+	 *
 	 * @return long - the time in milliseconds
 	 */
 	public long getTimeInMillis()
@@ -845,12 +846,13 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * set this time milliseconds
-	 * 
+	 *
 	 * @param l time in milliseconds
 	 */
-	public void setTimeInMillis(final long l)
+	public JDFDate setTimeInMillis(final long l)
 	{
 		lTimeInMillis = l;
+		return this;
 	}
 
 	/**
@@ -864,13 +866,13 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * 
+	 *
 	 *set the time without modifying the date
 	 * @param h
 	 * @param m
 	 * @param s
 	 */
-	public void setTime(int h, int m, int s)
+	public JDFDate setTime(int h, int m, int s)
 	{
 		String st = getFormattedDateTime(DATETIMEISO_000);
 		try
@@ -882,11 +884,12 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			// NOP
 		}
 		addOffset(s, m, h, 0);
+		return this;
 	}
 
 	/**
 	 * true, if this is before other
-	 * 
+	 *
 	 * @param other the time in milliseconds since 1970 (e.g. from System.currentTimeMillis())
 	 * @return true if this is before other
 	 * @deprecated use isEarlier
@@ -899,7 +902,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * true, if this is before other
-	 * 
+	 *
 	 * @param other the time in milliseconds since 1970 (e.g. from System.currentTimeMillis())
 	 * @return true if this is before other
 	 */
@@ -910,7 +913,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * true, if this is after other, also true if other==null
-	 * 
+	 *
 	 * @param other
 	 * @return true if this date is after other
 	 * @deprecated use isLater
@@ -923,7 +926,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * true, if this is after other
-	 * 
+	 *
 	 * @param other the time in milliseconds since 1970 (e.g. from System.currentTimeMillis())
 	 * @return true if this date is after other
 	 */
@@ -944,7 +947,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * 
+	 *
 	 *get the month as an integer
 	 * @return (1-12)
 	 */
@@ -954,7 +957,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * 
+	 *
 	 *get the year as an integer
 	 * @return the year
 	 */
@@ -964,7 +967,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * 
+	 *
 	 *get the day of month as an integer
 	 * @return the year
 	 */
@@ -1021,7 +1024,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * 
+	 *
 	 * @see java.lang.Comparable#compareTo(java.lang.Object) the value 0 if the argument is a Date equal to this Date; a value less than 0 if the argument is a
 	 * Date after this Date; and a value greater than 0 if the argument is a Date before this Date.
 	 */
@@ -1051,9 +1054,10 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 * @param timeZoneOffsetInMillis The timeZoneOffsetInMillis to set.
 	 */
-	public void setTimeZoneOffsetInMillis(final int timeZoneOffsetInMillis)
+	public JDFDate setTimeZoneOffsetInMillis(final int timeZoneOffsetInMillis)
 	{
 		m_TimeZoneOffsetInMillis = timeZoneOffsetInMillis;
+		return this;
 	}
 
 	/**
@@ -1065,7 +1069,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * 
+	 *
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
@@ -1075,7 +1079,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * 
+	 *
 	 * @param d0
 	 * @param d1
 	 * @return

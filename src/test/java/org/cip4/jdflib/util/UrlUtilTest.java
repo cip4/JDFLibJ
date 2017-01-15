@@ -79,6 +79,7 @@ package org.cip4.jdflib.util;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
 import javax.mail.BodyPart;
@@ -193,6 +194,17 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("foo", UrlUtil.extension(".foo"));
 		assertEquals("foo", UrlUtil.extension("a.b.foo"));
 		assertEquals("foo", UrlUtil.extension("a.b..foo"));
+	}
+
+	/**
+	 * ensure we don't accidentally introduce artifacts if we add characters for escaping
+	 * @throws UnsupportedEncodingException
+	 */
+	@Test
+	public void testEscapeUTF8() throws UnsupportedEncodingException
+	{
+		assertEquals(UrlUtil.m_URIEscape.length(), UrlUtil.m_URIEscape.getBytes(StringUtil.UTF8).length);
+		assertEquals(UrlUtil.m_UNCEscape.length(), UrlUtil.m_UNCEscape.getBytes(StringUtil.UTF8).length);
 	}
 
 	/**

@@ -1236,7 +1236,6 @@
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="Subscription"/>
                 </xs:sequence>
-                <xs:attribute name="ID" type="NMTOKEN" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1249,8 +1248,6 @@
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="Notification"/>
                 </xs:sequence>
-                <xs:attribute name="ID" type="ID" use="optional"/>
-                <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ReturnCode" type="integer" use="optional"/>
             </xs:extension>
         </xs:complexContent>

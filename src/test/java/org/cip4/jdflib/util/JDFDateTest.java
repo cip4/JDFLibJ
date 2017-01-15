@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,7 +68,7 @@
  */
 /**
  * JDFDateTest.java
- * 
+ *
  * @author Dietrich Mucha
  *
  * Copyright (C) 2002 Heidelberger Druckmaschinen AG. All Rights Reserved.
@@ -85,7 +85,7 @@ import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * before June 10, 2009
  */
 public class JDFDateTest extends JDFTestCaseBase
@@ -94,7 +94,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 * 
+	 *
 	 */
 	@Test
 	public void testCreateDate() throws DataFormatException
@@ -107,7 +107,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	* @throws DataFormatException
-	* 
+	*
 	*/
 	@Test
 	public void testCreateDateNormalize() throws DataFormatException
@@ -118,7 +118,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	* @throws DataFormatException
-	* 
+	*
 	*/
 	@Test
 	public void testCreateDateBlank() throws DataFormatException
@@ -128,7 +128,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 * 
+	 *
 	 */
 	@Test
 	public void testRoundDate() throws DataFormatException
@@ -144,11 +144,11 @@ public class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws DataFormatException
-	 * 
+	 *
+	 *
 	 */
 	@Test
-	public void testSetTime() throws DataFormatException
+	public void testSetTime()
 	{
 		JDFDate d = new JDFDate();
 		JDFDate d1 = new JDFDate();
@@ -158,9 +158,23 @@ public class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testDateChain()
+	{
+		JDFDate d = new JDFDate();
+		JDFDate d1 = new JDFDate();
+		d1.setTime(0, 0, 0).addOffset(0, 0, 22, 3);
+		assertTrue(d1.getFormattedDateTime(JDFDate.DATETIMEISO).contains("T22:00:00"));
+		assertEquals(d.getDay() + 3, d1.getDay());
+	}
+
+	/**
 	 * @throws DataFormatException
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testCreateDateFromDuration() throws DataFormatException
@@ -175,7 +189,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 * 
+	 *
 	 */
 	@Test
 	public void testBadDate() throws DataFormatException
@@ -436,7 +450,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEquals()
@@ -448,7 +462,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * test the c++ regexp for date time
 	 */
 	@Test
@@ -459,7 +473,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSort()
@@ -482,7 +496,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCompareTo()
@@ -497,7 +511,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testBefore()
@@ -511,7 +525,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsEarlier()
@@ -526,7 +540,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAfter()
@@ -540,7 +554,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsLater()
@@ -555,7 +569,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCompareString()
@@ -749,7 +763,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 * 
+	 *
 	 */
 	@Test
 	public void testNoTimeZone() throws DataFormatException
@@ -766,7 +780,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 * 
+	 *
 	 */
 	@Test
 	public void testToString() throws DataFormatException
@@ -777,7 +791,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 * 
+	 *
 	 */
 	@Test
 	public void testTimeZone() throws DataFormatException
@@ -811,7 +825,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	* @throws DataFormatException
-	* 
+	*
 	*/
 	@Test
 	public void testTimeZoneSwitch() throws DataFormatException

@@ -341,7 +341,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public KElement getResource()
 	{
 		KElement set = theElement.getParentNode_KElement();
-		String name = set != null ? set.getAttribute("Name", null, null) : null;
+		String name = set != null ? set.getAttribute(AttributeName.NAME, null, null) : null;
 		if (name != null)
 		{
 			return theElement.getElement(name);

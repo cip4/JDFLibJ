@@ -87,6 +87,7 @@ import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.jmf.JDFQueueEntry;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFResourceQuParams;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
@@ -112,7 +113,8 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		signal.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/@" + AttributeName.OPERATION, "Resume");
 		signal.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/" + ElementName.QUEUEFILTER + "/@" + AttributeName.JOBID, "j1");
 		signal.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.ID, "C1");
-		setSnippet(xjmfHelper);
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
 		writeTest(xjmfHelper, "CommandModifyQE.xjmf");
 	}
 
@@ -144,12 +146,14 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	{
 		XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Resource);
-		q.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.ID, "Q1");
+		q.getHeader().setID("Q1");
 		JDFResourceQuParams rqp = (JDFResourceQuParams) q.appendElement(ElementName.RESOURCEQUPARAMS);
 		rqp.setResourceName(ElementName.MEDIA);
 		rqp.setAttribute(AttributeName.SCOPE, "Allowed");
 		rqp.setResourceDetails(EnumResourceDetails.Full);
-		xjmfHelper.writeToFile(sm_dirTestDataTemp + "xjdf/QueryPaper.xjmf");
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "jmf/paperResourceQuery.xjmf");
 	}
 
 	/**
@@ -158,12 +162,12 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testResponsePaper()
 	{
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Resource);
-		q.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.REFID, "Q1");
-		q.setXPathValue(XJDFConstants.Header + "/@" + AttributeName.ID, "R1");
+		q.getHeader().setAttribute(AttributeName.REFID, "Q1");
+		q.getHeader().setID("R1");
 		JDFResourceInfo ri = (JDFResourceInfo) q.appendElement(ElementName.RESOURCEINFO);
-		ri.setResourceName(ElementName.MEDIA);
 		SetHelper sh = new SetHelper(ri.appendElement(XJDFConstants.ResourceSet));
 		sh.setName(ElementName.MEDIA);
 		for (int i = 1; i < 3; i++)
@@ -175,7 +179,9 @@ public class XJMFExampleTest extends JDFTestCaseBase
 			((JDFMedia) rh.getResource()).setWeight(60 + 20 * i);
 
 		}
-		xjmfHelper.writeToFile(sm_dirTestDataTemp + "xjdf/ResponsePaper.xjmf");
+		sh.getRoot().appendXMLComment(" One Resource element for each paper follows here ", null);
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "jmf/paperResponsePaper.xjmf");
 	}
 
 	/**
@@ -240,6 +246,9 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	protected void setUp() throws Exception
 	{
 		super.setUp();
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentName(null);
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentVersion(null);
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID(null);
 		KElement.setLongID(false);
 	}
 }

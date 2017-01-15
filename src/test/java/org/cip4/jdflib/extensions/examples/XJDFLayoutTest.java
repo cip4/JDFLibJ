@@ -102,7 +102,8 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
 		ResourceHelper rh = shLO.appendPartition(null, true);
 		JDFLayout lo = (JDFLayout) rh.getResource();
-		setSnippet(lo);
+		xjdfHelper.cleanUp();
+		setSnippet(lo, true);
 		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.getName());
 		lo.setAutomated(true);
 		lo.appendElement(ElementName.POSITION);
@@ -133,7 +134,8 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 			KElement pos = lo.appendElement(ElementName.POSITION);
 			pos.setAttribute(XJDFConstants.BinderySignatureID, "bs" + i);
 		}
-		setSnippet(xjdfHelper.getRoot());
+		setSnippet(xjdfHelper, true);
+		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "LayoutF166.xjdf");
 	}
 

@@ -73,13 +73,16 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.util.JDFDate;
 import org.junit.Test;
+import org.w3c.dom.Comment;
 
 /**
  *
@@ -99,7 +102,8 @@ public class XJDFExampleTest extends JDFTestCaseBase
 		ResourceHelper rh = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
 		JDFMedia m = (JDFMedia) rh.getResource();
 		m.setAttribute("foo:FooAtt", "FooVal", "http://www.foo.org");
-		setSnippet(rh.getRoot());
+		xjdfHelper.cleanUp();
+		setSnippet(rh, true);
 		writeTest(xjdfHelper, "ExtendAtt.xjdf");
 	}
 
@@ -112,9 +116,41 @@ public class XJDFExampleTest extends JDFTestCaseBase
 		XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
 		SetHelper shMedia = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
 		ResourceHelper rh = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
-		setSnippet(rh.getRoot());
+		setSnippet(rh.getRoot(), true);
 		assertTrue(xjdfHelper.toString().indexOf("<!-- START SNIPPET -->") > 0);
 		assertTrue(xjdfHelper.toString().indexOf("<!-- END SNIPPET -->") > 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSnippetAuditPool()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
+		setSnippet(xjdfHelper, true);
+		setSnippet(xjdfHelper.getAuditPool(), false);
+		KElement ap = xjdfHelper.getAuditPool().getRoot();
+		assertTrue(ap.getPreviousSibling() instanceof Comment);
+		assertEquals(ap.getPreviousSibling().getNodeValue(), " END SNIPPET ");
+		assertTrue(ap.getNextSibling() instanceof Comment);
+		assertEquals(ap.getNextSibling().getNodeValue(), " START SNIPPET ");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSnippetAuditPoolFirst()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
+		setSnippet(xjdfHelper.getAuditPool(), false);
+		setSnippet(xjdfHelper, true);
+		KElement ap = xjdfHelper.getAuditPool().getRoot();
+		assertTrue(ap.getPreviousSibling() instanceof Comment);
+		assertEquals(ap.getPreviousSibling().getNodeValue(), " END SNIPPET ");
+		assertTrue(ap.getNextSibling() instanceof Comment);
+		assertEquals(ap.getNextSibling().getNodeValue(), " START SNIPPET ");
 	}
 
 	/**
@@ -127,7 +163,7 @@ public class XJDFExampleTest extends JDFTestCaseBase
 		SetHelper shMedia = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
 		shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
 		KElement root = xjdfHelper.getRoot();
-		setSnippet(root);
+		setSnippet(root, true);
 		assertTrue(root.getOwnerDocument_KElement().write2String(2).indexOf("<!-- START SNIPPET -->") > 0);
 		assertTrue(root.getOwnerDocument_KElement().write2String(2).indexOf("<!-- END SNIPPET -->") > 0);
 	}
@@ -140,11 +176,12 @@ public class XJDFExampleTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("IntentExtension", null, null);
 		ProductHelper product = xjdfHelper.getCreateRootProduct(0);
-		setSnippet(product.getRoot());
 		xjdfHelper.getRoot().addNameSpace("foo", "http://www.foo.org");
 		IntentHelper ih = product.appendIntent("foo:FooIntent");
 		ih.getResource().setAttribute("FooAtt", "FooVal");
 		xjdfHelper.getRoot().removeAttribute("xmlns:foo");
+		xjdfHelper.cleanUp();
+		setSnippet(product.getRoot(), true);
 		writeTest(xjdfHelper, "ExtendIntent.xjdf");
 	}
 
@@ -157,10 +194,35 @@ public class XJDFExampleTest extends JDFTestCaseBase
 		XJDFHelper xjdfHelper = new XJDFHelper("ResourceExtension", null, null);
 		SetHelper sh = xjdfHelper.appendResourceSet("foo:FooParams", EnumUsage.Input);
 		sh.getSet().addNameSpace("foo", "http://www.foo.org");
-		setSnippet(sh.getRoot());
+		xjdfHelper.cleanUp();
+		setSnippet(sh, true);
 		ResourceHelper res = sh.getCreatePartition("Run", "R1", true);
 		res.getResource().setAttribute("FooAtt", "FooVal");
 		writeTest(xjdfHelper, "ExtendSet.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCPI()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper(AttributeName.COMBINEDPROCESSINDEX, null, null);
+		xjdfHelper.setTypes("Cutting Folding");
+		SetHelper sh1 = xjdfHelper.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+		JDFDate jdfDate = new JDFDate().setTime(13, 0, 0);
+		sh1.getPartition((JDFAttributeMap) null).getResource().setAttribute(AttributeName.START, jdfDate.getDateTimeISO());
+		sh1.setAttribute(AttributeName.COMBINEDPROCESSINDEX, "0");
+		SetHelper sh2 = xjdfHelper.appendResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+		jdfDate.addOffset(0, 0, 4, 0);
+		sh2.appendPartition(null, true).getResource().setAttribute(AttributeName.START, jdfDate.getDateTimeISO());
+		sh2.setAttribute(AttributeName.COMBINEDPROCESSINDEX, "1");
+		xjdfHelper.appendResourceSet(ElementName.CUTTINGPARAMS, EnumUsage.Input).appendPartition(null, false);
+		xjdfHelper.appendResourceSet(ElementName.FOLDINGPARAMS, EnumUsage.Input).appendPartition(null, false);
+		xjdfHelper.cleanUp();
+		setSnippet(xjdfHelper, true);
+		setSnippet(xjdfHelper.getAuditPool(), false);
+		writeTest(xjdfHelper, "CPI.xjdf");
 	}
 
 	/**
@@ -171,9 +233,9 @@ public class XJDFExampleTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("IntentExtension", null, null);
 		KElement root = xjdfHelper.getRoot();
-		setSnippet(root);
 		root.addNameSpace("foo", "http://www.foo.org");
 		xjdfHelper.setTypes("foo:FooMaking");
+		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "ExtendProcess.xjdf");
 	}
 

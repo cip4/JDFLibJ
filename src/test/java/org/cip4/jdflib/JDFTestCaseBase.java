@@ -93,6 +93,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -338,24 +339,44 @@ public abstract class JDFTestCaseBase extends TestCase
 
 	/**
 	 *
-	 * @param e
+	 * @param h
+	 * @param startFirst
 	 */
-	protected void setSnippet(KElement e)
+	protected void setSnippet(BaseXJDFHelper h, boolean startFirst)
 	{
-		Node parent = e.getParentNode();
-		Comment newChild = e.getOwnerDocument().createComment(" START SNIPPET ");
-		parent.insertBefore(newChild, e);
-		newChild = e.getOwnerDocument().createComment(" END SNIPPET ");
-		parent.insertBefore(newChild, e.getNextSibling());
+		if (h != null)
+		{
+			setSnippet(h.getRoot(), startFirst);
+		}
 	}
 
 	/**
 	 *
-	 * @param h
+	 * @param e
+	 * @param startFirst if true include the enclosing element, if false exclude it
 	 */
-	protected void setSnippet(BaseXJDFHelper h)
+	protected void setSnippet(KElement e, boolean startFirst)
 	{
-		setSnippet(h.getRoot());
+		if (e != null)
+		{
+			Node parent = e.getParentNode();
+			String start = " START SNIPPET ";
+			String end = " END SNIPPET ";
+			Comment newChild = e.getOwnerDocument().createComment(startFirst ? start : end);
+			parent.insertBefore(newChild, e);
+			newChild = e.getOwnerDocument().createComment(startFirst ? end : start);
+			parent.insertBefore(newChild, e.getNextSibling());
+		}
+	}
+
+	protected void cleanSnippets(XJDFHelper h)
+	{
+		if (h == null || h.getRoot() == null)
+			return;
+		h.cleanUp();
+		setSnippet(h, true);
+		setSnippet(h.getAuditPool(), false);
+		setSnippet(h.getSet(ElementName.NODEINFO, 0), false);
 	}
 
 	/**
@@ -375,7 +396,6 @@ public abstract class JDFTestCaseBase extends TestCase
 	 */
 	protected void writeTest(BaseXJDFHelper d, String filename)
 	{
-		d.cleanUp();
 		writeTest(d.getRoot(), filename, true);
 	}
 
