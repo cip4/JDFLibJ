@@ -130,6 +130,21 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testCommandSubmitQE()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry.getName());
+		command.setXPathValue(ElementName.QUEUESUBMISSIONPARAMS + "/@" + AttributeName.URL, "http://jobserver.xjdf.org?job1");
+		command.getHeader().setAttribute(AttributeName.ID, "C1");
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "jmf/commandSubmitQE.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testResponseResumeQE()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
@@ -253,7 +268,34 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		p.setStartTime(new JDFDate().setTime(17, 0, 0));
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
-		writeTest(xjmfHelper, "jmf/paperResourceSignal.xjmf");
+		writeTest(xjmfHelper, "jmf/statusSignal.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testResponseStatus()
+	{
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
+		s.getHeader().setID("S1");
+		s.getHeader().setAttribute(AttributeName.REFID, "Q1");
+		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
+		JDFDeviceInfo di = (JDFDeviceInfo) s.getRoot().appendElement(ElementName.DEVICEINFO);
+		di.setAttribute(AttributeName.STATUS, "Production");
+		JDFJobPhase p = di.appendJobPhase();
+		p.setJobID("j1");
+		p.setJobPartID("p1");
+		p.setQueueEntryID("Q1");
+		;
+		p.setStartTime(new JDFDate().setTime(16, 0, 0));
+		p.setStatus(EnumNodeStatus.InProgress);
+		p.setAttribute(AttributeName.MODULEID + "S", "P0 P1 P2 P3 P5 P6 P7 Perf");
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "jmf/statusSignal.xjmf");
 	}
 
 	/**

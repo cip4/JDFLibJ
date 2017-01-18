@@ -488,9 +488,10 @@ public class JDFToXJDF extends PackageElementWalker
 				if (!hasCreated)
 				{
 					KElement c = auditPool.appendElement("AuditCreated");
-					c.setAttribute(AttributeName.AGENTNAME, "JDF To XJDF Converter");
-					c.setAttribute(AttributeName.AGENTVERSION, JDFAudit.getStaticAgentVersion());
-					c.setAttribute(AttributeName.TIMESTAMP, new JDFDate().getDateTimeISO());
+					KElement header = c.appendElement(XJDFConstants.Header);
+					header.setAttribute(AttributeName.AGENTNAME, "JDF To XJDF Converter");
+					header.setAttribute(AttributeName.AGENTVERSION, JDFAudit.getStaticAgentVersion());
+					header.setAttribute(AttributeName.TIME, new JDFDate().getDateTimeISO());
 				}
 			}
 			if (!isRetainAll())

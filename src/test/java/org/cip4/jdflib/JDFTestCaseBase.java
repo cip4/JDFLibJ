@@ -426,6 +426,7 @@ public abstract class JDFTestCaseBase extends TestCase
 			{
 				ext = "x" + ext;
 				JDFToXJDF conv = new JDFToXJDF();
+				conv.setTrackAudits(false);
 				KElement x = conv.convert(e);
 				filename = UrlUtil.newExtension(filename, ext);
 				String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + filename;
