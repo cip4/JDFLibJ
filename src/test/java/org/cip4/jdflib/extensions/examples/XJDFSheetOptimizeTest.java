@@ -85,7 +85,7 @@ import org.junit.Test;
 
 /**
  *
- * @author rainerprosi
+ * @author rainer prosi
  * @date Dec 23, 2012
  */
 public class XJDFSheetOptimizeTest extends JDFTestCaseBase
@@ -123,7 +123,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 			lo.appendElement(ElementName.POSITION).setAttribute(XJDFConstants.BinderySignatureID, "BS" + i);
 		}
 		cleanSnippets(xjdfHelper);
-		writeTest(xjdfHelper, "SimpleGangOut.xjdf");
+		writeTest(xjdfHelper, "processes/SimpleGangOut.xjdf");
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 		}
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
-		writeTest(xjdfHelper, "SimpleGang.xjdf");
+		writeTest(xjdfHelper, "processes/SimpleGang.xjdf");
 	}
 
 	/**
@@ -158,7 +158,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 			}
 		}
 		xjdfHelper.cleanUp();
-		writeTest(xjdfHelper, "GangLayout.xjdf");
+		writeTest(xjdfHelper, "processes/GangLayout.xjdf");
 	}
 
 	/**

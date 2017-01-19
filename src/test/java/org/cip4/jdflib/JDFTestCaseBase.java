@@ -425,9 +425,7 @@ public abstract class JDFTestCaseBase extends TestCase
 			if (convertX)
 			{
 				ext = "x" + ext;
-				JDFToXJDF conv = new JDFToXJDF();
-				conv.setTrackAudits(false);
-				KElement x = conv.convert(e);
+				KElement x = convertToXJDF(e);
 				filename = UrlUtil.newExtension(filename, ext);
 				String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + filename;
 				x.write2File(xjdfFile);
@@ -446,6 +444,14 @@ public abstract class JDFTestCaseBase extends TestCase
 			}
 			assertEquals(valResult, "Valid");
 		}
+	}
+
+	protected KElement convertToXJDF(KElement e)
+	{
+		JDFToXJDF conv = new JDFToXJDF();
+		conv.setTrackAudits(false);
+		KElement x = conv.convert(e);
+		return x;
 	}
 
 	/**

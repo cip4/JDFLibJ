@@ -72,7 +72,6 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.XJDFHelper;
-import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.node.JDFNode;
 import org.junit.Test;
 
@@ -90,9 +89,7 @@ public class XJDFExampleConvertTest extends JDFTestCaseBase
 	public void testLayoutElementProduction()
 	{
 		JDFNode n = JDFNode.parseFile(sm_dirTestData + "dielayoutproduction.jdf");
-		JDFToXJDF conv = new JDFToXJDF();
-		conv.setTrackAudits(false);
-		KElement x = conv.convert(n);
+		KElement x = convertToXJDF(n);
 		XJDFHelper h = XJDFHelper.getHelper(x);
 		h.getSet(ElementName.NODEINFO, 0);
 		h.cleanUp();

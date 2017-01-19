@@ -82,6 +82,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.resource.process.JDFPosition;
 import org.junit.Test;
 
 /**
@@ -114,12 +115,44 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testCutStack()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "CutStack", null);
+		xjdfHelper.setTypes("Stripping");
+		/**
+		SetHelper shBS = xjdfHelper.getCreateResourceSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		ResourceHelper rhBS = shBS.appendPartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS1"), true);
+		JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
+		bs.setFoldCatalog("F2-1");
+		bs.setBinderySignatureType(EnumBinderySignatureType.Fold);
+		*/
+		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		ResourceHelper rh = shLO.appendPartition(null, true);
+		JDFLayout lo = (JDFLayout) rh.getResource();
+		xjdfHelper.cleanUp();
+		setSnippet(lo, true);
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndTurn.getName());
+		lo.setAutomated(true);
+		JDFPosition pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
+		pos.setAttribute("StackDepth", "10");
+		pos.setAttribute("StackOrd", "0");
+
+		pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
+		pos.setAttribute("StackDepth", "10");
+		pos.setAttribute("StackOrd", "1");
+		writeTest(xjdfHelper, "processes/LayoutCutStack.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testStrippingF16()
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
 		xjdfHelper.setTypes("Stripping");
 		SetHelper shBS = xjdfHelper.getCreateResourceSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
-		ResourceHelper rhBS = shBS.appendPartition(null, true);
+		ResourceHelper rhBS = shBS.appendPartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS1"), true);
 		JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
 		bs.setFoldCatalog("F16-6");
 		bs.setBinderySignatureType(EnumBinderySignatureType.Fold);

@@ -661,7 +661,7 @@ class PostXJDFWalker extends BaseElementWalker
 			String cellIndex = map.remove(AttributeName.CELLINDEX);
 			ResourceHelper layoutPartitionH = layoutseth.getCreatePartition(map, true);
 			JDFLayout layoutPartition = (JDFLayout) layoutPartitionH.getResource();
-			ensureLayoutPositions(strippingParams, layoutPartition);
+			ensureLayoutPositions(strippingParams, layoutPartition, bsName);
 
 			JDFBinderySignature bsOld = (JDFBinderySignature) layoutPartition.getChildWithAttribute(ElementName.BINDERYSIGNATURE, AttributeName.BINDERYSIGNATURENAME, null, bsName, 0, true);
 			VElement childElementVector = strippingParams.getChildElementVector(ElementName.SIGNATURECELL, null);
@@ -692,20 +692,33 @@ class PostXJDFWalker extends BaseElementWalker
 							partMap = new JDFAttributeMap();
 						}
 						SetHelper sh = bsHelper.getSet();
-						int i = sh.indexOf(bsHelper);
-						partMap.put(XJDFConstants.BinderySignatureID, "BS_" + i);
+						if (bsName == null)
+						{
+							bsName = "BS_" + sh.indexOf(bsHelper);
+						}
+						partMap.put(XJDFConstants.BinderySignatureID, bsName);
 						bsHelper.setPartMap(partMap);
+					}
+					else if (!bsID.equals(bsName) && bsName != null)
+					{
+						VJDFAttributeMap partMaps = bsHelper.getPartMapVector();
+						JDFAttributeMap map2 = partMap.clone();
+						map2.put(XJDFConstants.BinderySignatureID, bsName);
+						partMaps.appendUnique(map2);
+						bsHelper.setPartMapVector(partMaps);
 					}
 					JDFBinderySignature bs = (JDFBinderySignature) bsHelper.getResource();
 					if (bs != null)
 					{
-						bs.setBinderySignatureName(bsName);
 						moveStripCells(bs, childElementVector);
 						moveBSFromStripping(bs, strippingParams);
 						VElement positions = layoutPartition.getChildElementVector(ElementName.POSITION, null);
 						for (KElement position : positions)
 						{
-							position.setAttribute(XJDFConstants.BinderySignatureID, bsID);
+							if (!position.hasAttribute(XJDFConstants.BinderySignatureID))
+							{
+								position.setAttribute(XJDFConstants.BinderySignatureID, bsID);
+							}
 						}
 						strippingParams.removeAttribute(ElementName.BINDERYSIGNATURE + "Ref");
 					}
@@ -720,8 +733,9 @@ class PostXJDFWalker extends BaseElementWalker
 		 *
 		 * @param strippingParams
 		 * @param layoutPartition
+		 * @param bsName
 		 */
-		private void ensureLayoutPositions(JDFStrippingParams strippingParams, JDFLayout layoutPartition)
+		private void ensureLayoutPositions(JDFStrippingParams strippingParams, JDFLayout layoutPartition, String bsName)
 		{
 			VElement positions = strippingParams.getChildElementVector(ElementName.POSITION, null);
 			if (positions != null && positions.size() > 0)
@@ -732,7 +746,16 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				JDFPosition newPos = (JDFPosition) layoutPartition.appendElement(ElementName.POSITION);
 				newPos.setRelativeBox(new JDFRectangle(0, 0, 1, 1));
+				positions = new VElement();
+				positions.add(newPos);
 			}
+			String attribute = AttributeName.STACKDEPTH;
+			for (KElement position : positions)
+			{
+				position.setAttribute(XJDFConstants.BinderySignatureID, bsName);
+				position.copyAttribute(attribute, strippingParams);
+			}
+			strippingParams.removeAttribute(attribute);
 		}
 
 		/**

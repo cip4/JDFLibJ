@@ -88,6 +88,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -105,6 +106,7 @@ import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Assert;
 import org.junit.Test;
+
 public class AutomatedLayoutTest extends JDFTestCaseBase
 {
 	private JDFDoc doc;
@@ -115,7 +117,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 
 	/**
 	 * test automated stripping
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -134,7 +136,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void setUp()
@@ -330,8 +332,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		lo.appendXMLComment("Layout for 2 Cover pages and varying numbers of 2 up two sided body pages\n" + "The number of pages per instance document varies\n"
 				+ "MaxDocOrd is set to 1. This is redundant since 1 is the default.\n" + "A value of 1 explicitly resets all counters at a Document break.", null);
 		JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Cover");
-		cover.appendXMLComment("In this example, the cover is assumed to be the first two pages of each runlist\n"
-				+ "\n!!! We unfortunately have an issue here:\n"
+		cover.appendXMLComment("In this example, the cover is assumed to be the first two pages of each runlist\n" + "\n!!! We unfortunately have an issue here:\n"
 				+ "we cannot differentiate whether the cover should be repeated of not, i.e. whether the cover is executed once (the correct choice) or repeated between each body sheet.\n"
 				+ "Note that no MaxOrd is not set, as it varies between documents", null);
 		cover.setDescriptiveName("one sided cover - the inner = back side is empty");
@@ -511,11 +512,19 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		stripStack1.refElement(binderySignature);
 		stripStack1.appendPosition().setRelativeBox(new JDFRectangle(0.5, 0, 1, 1));
 		doc.write2File(sm_dirTestDataTemp + "AutomatedStrippingCutStack.jdf", 2, false);
+
+		KElement x = convertToXJDF(n);
+		XJDFHelper h = XJDFHelper.getHelper(x);
+		h.getSet(ElementName.NODEINFO, 0);
+		h.cleanUp();
+		setSnippet(h, true);
+		setSnippet(h.getSet(ElementName.NODEINFO, 0), false);
+		//	writeTest(x, "processes/AutomatedStrippingCutStack.xjdf", true);
 	}
 
 	/**
 	 * tests jdf 1.4 negative ords
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -562,7 +571,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 
 	/**
 	 * tests jdf 1.4 negative ords
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -676,7 +685,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 
 	/**
 	 * tests jdf 1.4 negative ords
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -817,7 +826,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 
 	/**
 	 * tests jdf 1.4 c&s layout
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test

@@ -1172,6 +1172,7 @@
             </xs:attribute>
             <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ModuleIDs" type="NMTOKENS" use="optional"/>
             <xs:attribute name="PercentCompleted" type="double" use="optional"/>
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RestTime" type="duration" use="optional"/>
