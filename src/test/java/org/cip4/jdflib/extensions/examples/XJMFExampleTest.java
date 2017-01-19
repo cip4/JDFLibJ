@@ -289,10 +289,9 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		p.setJobID("j1");
 		p.setJobPartID("p1");
 		p.setQueueEntryID("Q1");
-		;
 		p.setStartTime(new JDFDate().setTime(16, 0, 0));
 		p.setStatus(EnumNodeStatus.InProgress);
-		p.setAttribute(AttributeName.MODULEID + "S", "P0 P1 P2 P3 P5 P6 P7 Perf");
+		p.setAttribute(AttributeName.MODULEID + "s", "P0 P1 P2 P3 P5 P6 P7 Perf");
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
 		writeTest(xjmfHelper, "jmf/statusSignal.xjmf");
