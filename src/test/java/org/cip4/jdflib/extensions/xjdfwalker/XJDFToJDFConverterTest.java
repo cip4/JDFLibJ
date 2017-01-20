@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
@@ -72,8 +72,10 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -81,7 +83,9 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
+import org.cip4.jdflib.extensions.AuditPoolHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
+import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -91,9 +95,12 @@ import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.pool.JDFAmountPool;
+import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFInsert;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
@@ -119,8 +126,8 @@ import org.junit.Test;
 public class XJDFToJDFConverterTest extends JDFTestCaseBase
 {
 	/**
-	 *  
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testCompany()
@@ -139,8 +146,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testColorantControl()
@@ -163,7 +170,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -182,8 +189,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testParameterSet()
@@ -202,8 +209,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testPrintedPages()
@@ -221,8 +228,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testExternalImpositionTemplate()
@@ -260,8 +267,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	*  
-	*  
+	*
+	*
 	*/
 	@Test
 	public void testAmountPool()
@@ -283,8 +290,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	*  
-	*  
+	*
+	*
 	*/
 	@Test
 	public void testOverage()
@@ -303,8 +310,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	*  
-	*  
+	*
+	*
 	*/
 	@Test
 	public void testDeliveryIntent()
@@ -320,8 +327,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	*  
-	*  
+	*
+	*
 	*/
 	@Test
 	public void testDropID()
@@ -338,8 +345,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	*  
-	*  
+	*
+	*
 	*/
 	@Test
 	public void testPlacedObject()
@@ -359,8 +366,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	*  
-	*  
+	*
+	*
 	*/
 	@Test
 	public void testHolePattern()
@@ -375,7 +382,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -390,7 +397,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -405,7 +412,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -420,8 +427,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	*  
-	*  
+	*
+	*
 	*/
 	@Test
 	public void testPartIDKeys()
@@ -441,8 +448,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	*  
-	*  
+	*
+	*
 	*/
 	@Test
 	public void testAmountPoolPart()
@@ -456,16 +463,48 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		JDFNode root = d.getJDFRoot();
-		JDFMedia m = (JDFMedia) root.getResource("Media", EnumUsage.Input, 0);
+		JDFMedia m = (JDFMedia) root.getResource(ElementName.MEDIA, EnumUsage.Input, 0);
 		assertNotNull(m);
 		JDFResourceLink rl = root.getLink(m, null);
 		assertNotNull(rl.getAmountPool());
-		assertNull(m.getElement("AmountPool"));
+		assertNull(m.getElement(ElementName.AMOUNTPOOL));
 	}
 
 	/**
-	*  
-	*  
+	*
+	*
+	*/
+	@Test
+	public void testAmountPoolAudit()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		XJDFHelper xjdf = new XJDFHelper("j1", null, null);
+		SetHelper sh = xjdf.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
+		ResourceHelper ph = sh.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+		ph.setAmount(33, new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+
+		AuditPoolHelper ah = xjdf.getCreateAuditPool();
+		MessageHelper ra = ah.appendMessage(XJDFConstants.AuditResource);
+		ra.getRoot().appendElement(ElementName.RESOURCEINFO).copyElement(sh.getRoot(), null);
+		xjdf.cleanUp();
+		KElement e = xjdf.getRoot();
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		JDFNode root = d.getJDFRoot();
+		JDFAuditPool ap = root.getAuditPool();
+		JDFResourceAudit ra2 = (JDFResourceAudit) ap.getAudit(0, EnumAuditType.ResourceAudit, null, null);
+		assertNotNull(ra2);
+		JDFResourceLink rl = ra2.getNewLink();
+		assertNotNull(rl);
+		JDFAmountPool amountPool = rl.getAmountPool();
+		assertNotNull(amountPool);
+		JDFPartAmount partAmount = amountPool.getPartAmount(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"));
+		assertEquals(33, partAmount.getAmount(), 0.3);
+	}
+
+	/**
+	*
+	*
 	*/
 	@Test
 	public void testAssemblingIntentBindIn()
@@ -486,8 +525,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testCustomerInfoContacts()
@@ -503,8 +542,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testMissingSetID()
@@ -519,8 +558,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testMultiSet()
@@ -535,8 +574,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testXJMFKnownMessages()
@@ -555,8 +594,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	*  
-	*  
+	*
+	*
 	*/
 	@Test
 	public void testBackwardProduct()
@@ -574,8 +613,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	*  
-	*  
+	*
+	*
 	*/
 	@Test
 	public void testNiciProduct()
@@ -598,8 +637,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	*  
-	*  
+	*
+	*
 	*/
 	@Test
 	public void testMultiBackwardProduct()
@@ -621,7 +660,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFColorIntentSurfaceColor()

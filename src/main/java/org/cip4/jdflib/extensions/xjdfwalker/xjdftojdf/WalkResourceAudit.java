@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,43 +54,47 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
-import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.pool.JDFAmountPool;
 
 /**
- * 
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  * at this point only a dummy since we have a specific WalkResourceAudit child
- * 
+ *
  * TODO how should resource consumption be tracked?
  */
 public class WalkResourceAudit extends WalkAudit
 {
 	/**
-	 * 
+	 *
 	 */
 	public WalkResourceAudit()
 	{
@@ -106,24 +110,20 @@ public class WalkResourceAudit extends WalkAudit
 	{
 		moveFromSender(xjdf, xjdf.getElement(XJDFConstants.Header));
 		JDFResourceInfo ri = (JDFResourceInfo) xjdf.getElement(ElementName.RESOURCEINFO);
-		boolean foundLink = false;
-		while (ri != null)
-		{
-			KElement newLink = linkSet(ri);
-			foundLink = foundLink || newLink != null;
-			ri = (JDFResourceInfo) xjdf.getElement(ElementName.RESOURCEINFO);
-		}
-
-		KElement ret = foundLink ? super.walk(xjdf, jdf) : null;
-		return ret;
+		KElement ret = super.walk(xjdf, jdf);
+		linkSet(ri, ret);
+		return null;
 	}
 
-	private KElement linkSet(JDFResourceInfo ri)
+	private void linkSet(JDFResourceInfo ri, KElement resAudit)
 	{
-		XJDFHelper h = new XJDFHelper(xjdfToJDFImpl.xjdf);
+		if (ri == null)
+			return;
 
-		String name = StringUtil.getNonEmpty(ri.getResourceName());
-		SetHelper sh = h.getSet(name, ri.getUsage(), ri.getProcessUsage());
+		XJDFHelper h = new XJDFHelper(xjdfToJDFImpl.xjdf);
+		KElement resSet = ri.getElement(XJDFConstants.ResourceSet);
+		SetHelper sha = resSet == null ? null : new SetHelper(resSet);
+		SetHelper sh = sha == null ? null : h.getSet(sha.getName(), sha.getUsage(), sha.getProcessUsage());
 		ResourceHelper ph = sh == null ? null : sh.getPartition(ri.getPartMapVector());
 		if (ph == null)
 		{
@@ -131,24 +131,23 @@ public class WalkResourceAudit extends WalkAudit
 		}
 		String id = ph == null ? null : xjdfToJDFImpl.idMap.get(ph.getID()).getID();
 
-		if (id == null)
+		if (id != null)
 		{
-			ri.deleteNode();
-			ri = null;
+			JDFResourceLink link = (JDFResourceLink) resAudit.appendElement(sh.getName() + "Link", null);
+			link.setAttribute(AttributeName.RREF, id);
+			link.setUsage(sha.getUsage());
+			link.setPartMapVector(sha.getPartMapVector());
+			JDFAmountPool ap = link.appendAmountPool();
+			Vector<JDFAmountPool> aps = sha.getRoot().getChildrenByClass(JDFAmountPool.class, true, 0);
+			for (JDFAmountPool ap1 : aps)
+			{
+				VElement partAmounts = ap1.getChildElementVector(ElementName.PARTAMOUNT, null);
+				for (KElement pa : partAmounts)
+				{
+					xjdfToJDFImpl.walkTree(pa, ap);
+				}
+			}
 		}
-		else
-		{
-			ri.renameElement(sh.getName() + "Link", null);
-			ri.removeAttribute(AttributeName.LEVEL);
-			ri.removeAttribute(AttributeName.MODULEID);
-			ri.removeAttribute(AttributeName.PRODUCTID);
-			ri.setAttribute(AttributeName.RREF, id);
-			ri.removeAttribute(AttributeName.RESOURCENAME);
-			ri.removeAttribute(AttributeName.STATUS);
-			ri.removeAttribute(AttributeName.UNIT);
-			ri.getParentNode_KElement().moveElements(ri.getChildElementVector(ElementName.PART, null), null);
-		}
-		return ri;
 	}
 
 	/**
