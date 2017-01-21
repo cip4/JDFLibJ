@@ -92,8 +92,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	XJDFHelper theHelper = null;
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testGetSet()
@@ -103,8 +103,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testAppendSet()
@@ -114,8 +114,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
-	* 
+	*
+	*
 	*/
 	@Test
 	public void testGetCreateResourceSet()
@@ -130,8 +130,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	*  
-	*  
+	*
+	*
 	*/
 	@Test
 	public void testNumProduct()
@@ -154,8 +154,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testGetSets()
@@ -173,8 +173,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testGetTyp()
@@ -186,8 +186,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testGetSetProcessUsage()
@@ -203,8 +203,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testGetPartMapVector()
@@ -222,8 +222,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
-	* 
+	*
+	*
 	*/
 	@Test
 	public void testGetDependentPartIDKeys()
@@ -244,19 +244,20 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testGetSetByID()
 	{
 		SetHelper rlSet = theHelper.appendResourceSet("RunList", null);
 		theHelper.cleanUp();
+		rlSet.setID("id");
 		assertEquals(rlSet, theHelper.getSet(rlSet.getID()));
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetXJDF()
@@ -270,7 +271,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testJobPartID()
@@ -282,7 +283,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testJobID()
@@ -294,8 +295,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testGetPartition()
@@ -308,8 +309,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testGetPartitionByID()
@@ -317,12 +318,13 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		ResourceHelper rlSet = theHelper.getCreateResourceSet("RunList", null).getCreatePartition(0, true);
 		assertEquals(rlSet, theHelper.getPartition("RunList", 0, 0));
 		theHelper.cleanUp();
+		rlSet.setID("id");
 		assertEquals(theHelper.getPartition(rlSet.getID()), rlSet);
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testCreate()
@@ -334,8 +336,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testClone()
@@ -347,8 +349,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testFactory()
@@ -360,8 +362,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testFactoryElem()
@@ -373,8 +375,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testRootProducts()
@@ -399,8 +401,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testRootProduct()
@@ -417,8 +419,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testWriteToDir()
@@ -432,8 +434,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testGetCreateRootProduct()

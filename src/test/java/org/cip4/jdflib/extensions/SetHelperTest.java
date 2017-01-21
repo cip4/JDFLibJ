@@ -227,6 +227,7 @@ public class SetHelperTest extends JDFTestCaseBase
 		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertNull(sh.getPartition("fooo"));
 		assertNotNull(sh.getCreatePartition(1, true));
+		sh.setID("id");
 		String id = sh.getPartition(0).getID();
 		assertEquals(sh.getPartition(0), sh.getPartition(id));
 	}
