@@ -295,7 +295,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 			return false;
 		}
 
-		final Set<String> mapSet = this.keySet();
+		final Set<String> mapSet = keySet();
 		final Set<String> subMapSet = subMap.keySet();
 
 		if (!mapSet.containsAll(subMapSet))
@@ -303,14 +303,12 @@ public class JDFAttributeMap extends HashMap<String, String>
 			return false;
 		}
 
-		final Iterator<String> it = subMapSet.iterator();
-		while (it.hasNext())
+		for (String key : subMapSet)
 		{
-			final String key = it.next();
 			final String subVal = subMap.get(key);
 			if (!KElement.isWildCard(subVal))
 			{
-				final String val = this.get(key);
+				final String val = get(key);
 				if (!KElement.isWildCard(val) && !val.equals(subVal))
 				{
 					return false;

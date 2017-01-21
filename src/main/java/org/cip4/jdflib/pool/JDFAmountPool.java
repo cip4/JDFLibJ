@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFPartAmount;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -119,10 +120,9 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 			if (vPartAmount != null)
 			{
-				final int size = vPartAmount.size();
-				for (int i = 0; i < size; i++)
+				for (KElement e : vPartAmount)
 				{
-					final JDFPartAmount pa = (JDFPartAmount) vPartAmount.elementAt(i);
+					final JDFPartAmount pa = (JDFPartAmount) e;
 					final VJDFAttributeMap vamParts = pa.getPartMapVector();
 
 					final int size2 = vamParts == null ? 1 : vamParts.size();
@@ -1019,4 +1019,26 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		return vPA.size() == 0 ? null : vPA;
 	}
 	// /////////////////////////////////////////////////////////////////////
+
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#getPartMapVector()
+	 */
+	@Override
+	public VJDFAttributeMap getPartMapVector()
+	{
+		final VElement vPartAmount = getChildElementVector(ElementName.PARTAMOUNT, null, null, true, 0, false);
+		VJDFAttributeMap ret = new VJDFAttributeMap();
+		if (vPartAmount != null)
+		{
+			for (KElement e : vPartAmount)
+			{
+				final JDFPartAmount pa = (JDFPartAmount) e;
+				final VJDFAttributeMap vamParts = pa.getPartMapVector();
+				if (vamParts != null && !vamParts.isEmpty())
+					ret.addAll(vamParts);
+			}
+		}
+		ret.unify();
+		return ret;
+	}
 }

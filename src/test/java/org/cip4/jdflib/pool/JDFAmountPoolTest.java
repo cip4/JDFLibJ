@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,7 @@
 package org.cip4.jdflib.pool;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFPartAmount;
@@ -88,7 +89,7 @@ import org.junit.Test;
 
 /**
  * @author RP
- * 
+ *
  * This implements the first fixture with unit tests for class JDFAmountPool.
  */
 public class JDFAmountPoolTest extends JDFTestCaseBase
@@ -110,8 +111,8 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////
 	/**
 	 * Method testReducePartAmounts.
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testReducePartAmounts()
@@ -147,7 +148,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testVirtualAmounts.
-	 * 
+	 *
 	 */
 	@Test
 	public void testVirtualAmounts()
@@ -178,7 +179,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method .
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetPartAmount()
@@ -202,7 +203,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testVirtualAmounts.
-	 * 
+	 *
 	 */
 	@Test
 	public void testVirtualAmountsSplit()
@@ -240,7 +241,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetMatchingPartAmountVector.
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetMatchingPartAmountVector()
@@ -269,7 +270,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -280,7 +281,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartVectorNull()
@@ -298,7 +299,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetMatchingPartAmountVector.
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPartAmountMulti()
@@ -332,7 +333,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetMatchingPartAmountVector.
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetCreatePartAmount()
@@ -355,7 +356,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetMatchingPartAmountVector.
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetAmountMap()
@@ -376,18 +377,44 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 		}
 		AmountMap am = ap.getAmountMap(new VString("Separation", null));
 		assertEquals(am.size(), 2);
-		assertEquals(am.getAmountDouble(map, "Amount"), 50 * 99 * 10., 0.);
+		assertEquals(am.getAmountDouble(map, AttributeName.AMOUNT), 50 * 99 * 10., 0.);
 
 		am = ap.getAmountMap(new VString("SheetName Separation", null));
 		assertEquals(am.size(), 200);
-		assertEquals(am.getAmountDouble(map, "Amount"), -1.0, 0.);
+		assertEquals(am.getAmountDouble(map, AttributeName.AMOUNT), -1.0, 0.);
 		map.put("SheetName", "Sheet12");
-		assertEquals("10 signatures * 12", am.getAmountDouble(map, "Amount"), 10 * 12.0, 0.);
+		assertEquals("10 signatures * 12", am.getAmountDouble(map, AttributeName.AMOUNT), 10 * 12.0, 0.);
 	}
 
 	/**
 	 * Method testGetMatchingPartAmountVector.
-	 * 
+	 *
+	 */
+	@Test
+	public void testGetPartMapVector()
+	{
+		final JDFAttributeMap map = new JDFAttributeMap("Separation", "Black");
+		final JDFAttributeMap map2 = new JDFAttributeMap("Separation", "Cyan");
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		vMap.add(new JDFAttributeMap(map));
+		vMap.add(new JDFAttributeMap(map2));
+		for (int i = 0; i < 10; i++)
+		{
+			vMap.put("SignatureName", "Sig" + i);
+			for (int j = 0; j < 100; j++)
+			{
+				vMap.put("SheetName", "Sheet" + j);
+				ap.appendPartAmount(vMap).setAmount(j, null);
+			}
+		}
+		VJDFAttributeMap am = ap.getPartMapVector();
+		assertEquals(am.size(), 2000);
+		assertEquals(3, am.getKeys().size());
+	}
+
+	/**
+	 * Method testGetMatchingPartAmountVector.
+	 *
 	 */
 	@Test
 	public void testGetCorruptAmountMap()
@@ -399,7 +426,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * make sure no npe in empty amountpools
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -425,7 +452,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * make sure no npe in empty amountpools
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test

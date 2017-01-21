@@ -1216,8 +1216,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		final VElement vRes = getTargetVector(0);
 		if ((vRes == null || vRes.isEmpty()) && ((levelLocal == EnumValidationLevel.Complete) || (levelLocal == EnumValidationLevel.RecursiveComplete)))
 		{
-			// if any partition points to nirvana and we are validating
-			// complete, the entire resource is invalid
+			// if any partition points to nirvana and we are validating complete, the entire resource is invalid
 			return false;
 		}
 
@@ -1228,13 +1227,10 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 		if (vRes != null)
 		{
-			for (int iRes = 0; iRes < vRes.size(); iRes++)
+			for (KElement e : vRes)
 			{
-				final JDFResource r = (JDFResource) vRes.elementAt(iRes);
-				// reslinks that point to nothing may be valid
-
-				// but they certainly aren't valid if they point to the wrong
-				// resource
+				final JDFResource r = (JDFResource) e;
+				// reslinks that point to nothing may be valid but they certainly aren't valid if they point to the wrong resource
 				if (!getNodeName().equals(r.getLinkString()))
 				{
 					return false;
@@ -1243,7 +1239,6 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 				if (levelLocal.getValue() >= EnumValidationLevel.RecursiveIncomplete.getValue())
 				{
 					final EnumValidationLevel valDown = (levelLocal == EnumValidationLevel.RecursiveIncomplete) ? EnumValidationLevel.Incomplete : EnumValidationLevel.Complete;
-
 					if (!r.isValid(valDown))
 					{
 						return false;

@@ -76,12 +76,15 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.pool.JDFAmountPool;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  *
@@ -117,6 +120,7 @@ public class WalkResourceAudit extends WalkAudit
 
 	private void linkSet(JDFResourceInfo ri, KElement resAudit)
 	{
+
 		if (ri == null)
 			return;
 
@@ -136,7 +140,23 @@ public class WalkResourceAudit extends WalkAudit
 			JDFResourceLink link = (JDFResourceLink) resAudit.appendElement(sh.getName() + "Link", null);
 			link.setAttribute(AttributeName.RREF, id);
 			link.setUsage(sha.getUsage());
-			link.setPartMapVector(sha.getPartMapVector());
+			VJDFAttributeMap partMapVector = sha.getPartMapVector();
+			partMapVector.removeKey(XJDFConstants.ProductPart);
+			if (partMapVector != null)
+			{
+				for (JDFAttributeMap partMap : partMapVector)
+				{
+					String sheetName = partMap.get(AttributeName.SHEETNAME);
+					String signatureName = partMap.get(AttributeName.SIGNATURENAME);
+					if (StringUtil.getNonEmpty(sheetName) != null && StringUtil.getNonEmpty(signatureName) == null)
+					{
+						signatureName = "Sig_" + sheetName;
+						partMap.put(AttributeName.SIGNATURENAME, signatureName);
+					}
+				}
+			}
+			partMapVector.unify();
+			link.setPartMapVector(partMapVector);
 			JDFAmountPool ap = link.appendAmountPool();
 			Vector<JDFAmountPool> aps = sha.getRoot().getChildrenByClass(JDFAmountPool.class, true, 0);
 			for (JDFAmountPool ap1 : aps)

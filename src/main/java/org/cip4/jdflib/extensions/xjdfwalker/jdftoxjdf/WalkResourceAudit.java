@@ -74,8 +74,10 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
+import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 
 /**
@@ -105,16 +107,28 @@ public class WalkResourceAudit extends WalkAudit
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final KElement raNew = super.walk(jdf, xjdf);
-		final JDFResourceAudit ra = (JDFResourceAudit) jdf;
+		JDFResourceLink newLink = updateLink((JDFResourceAudit) jdf);
+		copyLinkValues(raNew, newLink);
+		return raNew;
+	}
 
+	private JDFResourceLink updateLink(final JDFResourceAudit ra)
+	{
 		JDFResourceLink newLink = ra.getNewLink();
 		if (newLink != null && newLink.getPart(0) == null)
 		{
-			newLink.setPartMapVector(ra.getPartMapVector());
+			VJDFAttributeMap partMapVector = ra.getPartMapVector();
+			if (partMapVector != null)
+			{
+				JDFAmountPool amountPool = newLink.getAmountPool();
+				VJDFAttributeMap apMaps = amountPool == null ? null : amountPool.getPartMapVector();
+				VString keys = apMaps == null ? null : apMaps.getKeys();
+				partMapVector.removeKeys(keys);
+				newLink.setPartMapVector(partMapVector);
+			}
 			ra.setPartMapVector(null);
 		}
-		copyLinkValues(raNew, newLink);
-		return raNew;
+		return newLink;
 	}
 
 	/**
