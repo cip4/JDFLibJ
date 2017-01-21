@@ -247,14 +247,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumResponseModes">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="FireAndForget"/>
-            <xs:enumeration value="Reliable"/>
-            <xs:enumeration value="Response"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="Scope">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Allowed"/>
@@ -888,16 +880,7 @@
                                 <xs:enumeration value="DropID"/>
                                 <xs:enumeration value="Location"/>
                                 <xs:enumeration value="LotID"/>
-                                <xs:enumeration value="Metadata0"/>
-                                <xs:enumeration value="Metadata1"/>
-                                <xs:enumeration value="Metadata2"/>
-                                <xs:enumeration value="Metadata3"/>
-                                <xs:enumeration value="Metadata4"/>
-                                <xs:enumeration value="Metadata5"/>
-                                <xs:enumeration value="Metadata6"/>
-                                <xs:enumeration value="Metadata7"/>
-                                <xs:enumeration value="Metadata8"/>
-                                <xs:enumeration value="Metadata9"/>
+                                <xs:enumeration value="Metadata"/>
                                 <xs:enumeration value="Option"/>
                                 <xs:enumeration value="PageNumber"/>
                                 <xs:enumeration value="PartVersion"/>
@@ -1280,7 +1263,16 @@
             </xs:sequence>
             <xs:attribute name="ResponseModes" use="optional">
                 <xs:simpleType>
-                    <xs:list itemType="EnumResponseModes"/>
+                    <xs:list>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:NMTOKEN">
+                                <xs:enumeration value="FireAndForget"/>
+                                <xs:enumeration value="Reliable"/>
+                                <xs:enumeration value="Response"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+
+                    </xs:list>
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="JMFRole" use="optional">
@@ -2542,16 +2534,7 @@
             <xs:attribute name="DropID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Location" type="NMTOKEN" use="optional"/>
             <xs:attribute name="LotID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Metadata0" type="RegExp" use="optional"/>
-            <xs:attribute name="Metadata1" type="RegExp" use="optional"/>
-            <xs:attribute name="Metadata2" type="RegExp" use="optional"/>
-            <xs:attribute name="Metadata3" type="RegExp" use="optional"/>
-            <xs:attribute name="Metadata4" type="RegExp" use="optional"/>
-            <xs:attribute name="Metadata5" type="RegExp" use="optional"/>
-            <xs:attribute name="Metadata6" type="RegExp" use="optional"/>
-            <xs:attribute name="Metadata7" type="RegExp" use="optional"/>
-            <xs:attribute name="Metadata8" type="RegExp" use="optional"/>
-            <xs:attribute name="Metadata9" type="RegExp" use="optional"/>
+            <xs:attribute name="Metadata" type="RegExp" use="optional"/>
             <xs:attribute name="Option" type="NMTOKEN" use="optional"/>
             <xs:attribute name="PageNumber" type="IntegerRange" use="optional"/>
             <xs:attribute name="PartVersion" type="NMTOKEN" use="optional"/>

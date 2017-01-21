@@ -282,6 +282,7 @@ class PostXJDFWalker extends BaseElementWalker
 				part.removeAttribute(AttributeName.SIGNATURENAME);
 			}
 			part.removeAttribute(AttributeName.DOCTAGS);
+			part.renameAttribute(AttributeName.METADATA0, AttributeName.METADATA);
 			return super.walk(part, dummy);
 		}
 

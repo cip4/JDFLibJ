@@ -310,6 +310,7 @@ public class WalkXJDFResource extends WalkXElement
 		}
 		p.remove(AttributeName.PRODUCTPART);
 		p.remove(XJDFConstants.ProcessTypes);
+		p.renameKey(AttributeName.METADATA, AttributeName.METADATA0);
 
 		return p;
 	}
