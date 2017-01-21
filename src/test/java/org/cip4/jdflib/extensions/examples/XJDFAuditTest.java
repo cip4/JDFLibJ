@@ -78,6 +78,8 @@ import org.cip4.jdflib.extensions.MessageResourceHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.Test;
 
@@ -95,24 +97,35 @@ public class XJDFAuditTest extends JDFTestCaseBase
 	public void testResourceAudit()
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("PaperAudit", null, null);
-		SetHelper shMedia = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
-		ResourceHelper rh = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
-		rh.setAmount(400, null, true);
-		JDFMedia m = (JDFMedia) rh.getResource();
+		xjdfHelper.setTypes(EnumType.ConventionalPrinting.getName());
+		SetHelper shMedia = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, null);
+		SetHelper shComp = xjdfHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Input);
+
+		ResourceHelper rhM = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
+		ResourceHelper rhC = shComp.appendPartition(AttributeName.SHEETNAME, "S1", true);
+		rhC.setAmount(400, null, true);
+		JDFMedia m = (JDFMedia) rhM.getResource();
 		m.setWeight(80);
+		JDFComponent comp = (JDFComponent) rhC.getResource();
+		comp.setAttribute("MediaRef", rhM.ensureID());
+
 		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/PaperAudit.xjdf");
+
 		AuditPoolHelper ah = xjdfHelper.getCreateAuditPool();
+		MessageResourceHelper crh = ah.getCreateMessageResourceHelper(shComp);
+		SetHelper aSet = crh.getSet();
+		rhC = aSet.getCreatePartition(AttributeName.SHEETNAME, "S1", true);
+		rhC.setAmount(400, null, true);
+		rhC.setAmount(21, null, false);
+
 		MessageResourceHelper mrh = ah.getCreateMessageResourceHelper(shMedia);
-		SetHelper aSet = mrh.getSet();
-		rh = aSet.getCreatePartition(AttributeName.SHEETNAME, "S1", true);
-		rh.setAmount(400, null, true);
-		rh.setAmount(21, null, false);
-		m = (JDFMedia) rh.getResource();
+		m = (JDFMedia) mrh.getSet().getCreatePartition(null, true).getResource();
 		m.setWeight(90);
 		xjdfHelper.cleanUp();
+
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getSet(ElementName.NODEINFO, 0), false);
-		writeTest(xjdfHelper, "PaperAuditActual.xjdf");
+		writeTest(xjdfHelper, "structure/PaperAuditActual.xjdf");
 	}
 
 	/**

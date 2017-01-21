@@ -77,6 +77,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFExpr;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFMetadataMap;
@@ -98,6 +99,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 	public void testFilterRunIndex()
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, "Impo", null);
+		xjdfHelper.setTypes(EnumType.Product.getName());
 		SetHelper shRL = xjdfHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Input);
 		JDFRunList rl1 = (JDFRunList) shRL.appendPartition(new JDFAttributeMap(AttributeName.RUN, "r1"), true).getResource();
 		rl1.setNPage(2);
@@ -120,6 +122,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 	public void testFileTemplate()
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, "Format", null);
+		xjdfHelper.setTypes(EnumType.Product.getName());
 		SetHelper shRL = xjdfHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Input);
 		KElement ruli = shRL.appendPartition(null, true).getResource();
 		JDFFileSpec fs = (JDFFileSpec) ruli.appendElement(ElementName.FILESPEC);
@@ -138,6 +141,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 	public void testMetaDataMap()
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, "Metadata", null);
+		xjdfHelper.setTypes(EnumType.DigitalPrinting.getName());
 		SetHelper shRL = xjdfHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Input);
 		JDFRunList runList = (JDFRunList) shRL.appendPartition(null, true).getResource();
 		JDFFileSpec fs = (JDFFileSpec) runList.appendElement(ElementName.FILESPEC);

@@ -925,12 +925,12 @@
             <xs:attribute name="CommentURL" type="URL" use="optional"/>
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
             <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="JobID" type="NMTOKEN" use="required"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ProjectID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RelatedJobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RelatedJobPartID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Types" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="Types" type="NMTOKENS" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>

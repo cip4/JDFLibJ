@@ -79,6 +79,7 @@ import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.Test;
@@ -98,6 +99,7 @@ public class XJDFExampleTest extends JDFTestCaseBase
 	public void testNamespace()
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
+		xjdfHelper.setTypes(EnumType.Product.getName());
 		SetHelper shMedia = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
 		ResourceHelper rh = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
 		JDFMedia m = (JDFMedia) rh.getResource();
@@ -175,6 +177,7 @@ public class XJDFExampleTest extends JDFTestCaseBase
 	public void testIntentNamespace()
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("IntentExtension", null, null);
+		xjdfHelper.setTypes(EnumType.Product.getName());
 		ProductHelper product = xjdfHelper.getCreateRootProduct(0);
 		xjdfHelper.getRoot().addNameSpace("foo", "http://www.foo.org");
 		IntentHelper ih = product.appendIntent("foo:FooIntent");
@@ -192,6 +195,7 @@ public class XJDFExampleTest extends JDFTestCaseBase
 	public void testResourceNamespace()
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("ResourceExtension", null, null);
+		xjdfHelper.setTypes("foo:Fooing");
 		SetHelper sh = xjdfHelper.appendResourceSet("foo:FooParams", EnumUsage.Input);
 		sh.getSet().addNameSpace("foo", "http://www.foo.org");
 		xjdfHelper.cleanUp();

@@ -5551,7 +5551,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String appendAnchor(String newID)
 	{
-		String id = StringUtil.getNonEmpty(getAttribute(JDFCoreConstants.ID, null, null));
+		String id = getNonEmpty(JDFCoreConstants.ID);
 		if (id != null)
 		{
 			return id;

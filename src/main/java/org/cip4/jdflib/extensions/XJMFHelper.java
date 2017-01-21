@@ -74,6 +74,7 @@ import java.io.OutputStream;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.xjdfwalker.IDRemover;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 
@@ -81,7 +82,7 @@ public class XJMFHelper extends MessagePoolHelper
 {
 
 	/**
-	 * 
+	 *
 	 * @param pool
 	 */
 	public XJMFHelper(KElement pool)
@@ -90,7 +91,7 @@ public class XJMFHelper extends MessagePoolHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @param pool
 	 */
 	public XJMFHelper()
@@ -100,7 +101,7 @@ public class XJMFHelper extends MessagePoolHelper
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	void newXJMF()
 	{
@@ -111,7 +112,7 @@ public class XJMFHelper extends MessagePoolHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @param family
 	 * @param typ
 	 * @return
@@ -125,7 +126,7 @@ public class XJMFHelper extends MessagePoolHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @param family
 	 * @param typ
 	 * @return
@@ -139,7 +140,7 @@ public class XJMFHelper extends MessagePoolHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @param family
 	 * @param typ
 	 * @return
@@ -151,7 +152,7 @@ public class XJMFHelper extends MessagePoolHelper
 
 	/**
 	 * @param file
-	 * @return 
+	 * @return
 	 */
 	public boolean writeToFile(String file)
 	{
@@ -161,7 +162,7 @@ public class XJMFHelper extends MessagePoolHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#cleanUp()
 	 */
 	@Override
@@ -169,11 +170,12 @@ public class XJMFHelper extends MessagePoolHelper
 	{
 		super.cleanUp();
 		MessageHelper.ensureHeader(theElement);
+		new IDRemover().removeIDs(theElement);
 	}
 
 	/**
 	 * @param os
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public void writeToStream(OutputStream os) throws IOException
 	{

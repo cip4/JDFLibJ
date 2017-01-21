@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.util.ContainerUtil;
 
@@ -228,11 +229,20 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 * get the ID from the generic Parameter or Resource element
-	 * @return the ID , may be null in case this is connected to a null element
+	 * @return the ID , may be null
 	 */
 	public String getID()
 	{
-		return getXPathValue("@ID");
+		return getAttribute(JDFConstants.ID);
+	}
+
+	/**
+	 * get the ID from the generic Parameter or Resource element
+	 * @return the ID , may never be null
+	 */
+	public String ensureID()
+	{
+		return theElement.appendAnchor(null);
 	}
 
 	/**

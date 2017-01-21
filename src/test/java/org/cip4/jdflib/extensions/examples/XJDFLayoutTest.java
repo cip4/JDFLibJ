@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.AttributeName;
@@ -82,6 +83,7 @@ import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
@@ -182,7 +184,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
 		xjdfHelper.setTypes("Stripping");
 		SetHelper shBS = xjdfHelper.getCreateResourceSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
-		ResourceHelper rhBS = shBS.appendPartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS1"), true);
+		ResourceHelper rhBS = shBS.appendPartition(null, true);
 		JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
 		bs.setFoldCatalog("F16-6");
 		bs.setBinderySignatureType(EnumBinderySignatureType.Fold);
@@ -197,9 +199,12 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 			KElement pos = lo.appendElement(ElementName.POSITION);
 			pos.setAttribute(XJDFConstants.BinderySignatureID, "bs" + i);
 		}
-		setSnippet(xjdfHelper, true);
+		SetHelper shAss = xjdfHelper.getCreateResourceSet(ElementName.ASSEMBLY, EnumUsage.Input);
+		ResourceHelper rhAss = shAss.appendPartition(null, true);
+		rhAss.getResource().setAttribute(XJDFConstants.BinderySignatureIDs, "bs1 bs2 bs3");
+		((JDFAssembly) rhAss.getResource()).setOrder(EnumOrder.Collecting);
 		cleanSnippets(xjdfHelper);
-		writeTest(xjdfHelper, "LayoutF166.xjdf");
+		writeTest(xjdfHelper, "processes/StrippingF16-6.xjdf");
 	}
 
 }
