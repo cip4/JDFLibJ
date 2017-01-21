@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.examples;
 
@@ -85,14 +85,14 @@ import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @author rainer prosi
  *
  */
 public class XJDFRunListTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFilterRunIndex()
@@ -104,29 +104,35 @@ public class XJDFRunListTest extends JDFTestCaseBase
 		JDFRunList rl2 = (JDFRunList) shRL.appendPartition(new JDFAttributeMap(AttributeName.RUN, "r2"), true).getResource();
 		rl2.setNPage(8);
 
-		SetHelper shNI = xjdfHelper.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+		SetHelper shNI = xjdfHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Output);
 		shNI.removePartitions();
 		shNI.appendPartition(new JDFAttributeMap(AttributeName.RUNINDEX, "0 3"), true);
-		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/FilterRunIndex.xjdf");
+		xjdfHelper.cleanUp();
+		setSnippet(shNI, true);
+		setSnippet(shRL, true);
+		writeTest(xjdfHelper, "resources/filteringPartsofaRunList.xjdf");
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFileTemplate()
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, "Format", null);
 		SetHelper shRL = xjdfHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Input);
-		JDFFileSpec fs = (JDFFileSpec) shRL.appendPartition(null, true).getResource().appendElement(ElementName.FILESPEC);
+		KElement ruli = shRL.appendPartition(null, true).getResource();
+		JDFFileSpec fs = (JDFFileSpec) ruli.appendElement(ElementName.FILESPEC);
 		fs.setFileFormat("file://myserver/next/%s/m%4.i.pdf");
 		fs.setFileTemplate("JobID,i");
 		fs.setMimeType(UrlUtil.APPLICATION_PDF);
-		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/FileFormat.xjdf");
+		xjdfHelper.cleanUp();
+		setSnippet(ruli, true);
+		writeTest(xjdfHelper, "appendix/FileFormat.xjdf");
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMetaDataMap()
@@ -148,15 +154,18 @@ public class XJDFRunListTest extends JDFTestCaseBase
 		x.setPath("/doc/record/Status");
 
 		SetHelper shComp = xjdfHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Input);
-		ResourceHelper rh = shComp.appendPartition("MetaData", "Mann_Platin", true);
+		ResourceHelper rh = shComp.appendPartition(AttributeName.METADATA, "Mann_Platin", true);
 		rh.setExternalID("BlueGoodPaper");
-		rh = shComp.appendPartition("MetaData", "Mann(.)*", true);
+		rh = shComp.appendPartition(AttributeName.METADATA, "Mann(.)*", true);
 		rh.setExternalID("BlueCheapPaper");
-		rh = shComp.appendPartition("MetaData", "Frau_Platin", true);
+		rh = shComp.appendPartition(AttributeName.METADATA, "Frau_Platin", true);
 		rh.setExternalID("PinkGoodPaper");
-		rh = shComp.appendPartition("MetaData", "Frau_(.)*", true);
+		rh = shComp.appendPartition(AttributeName.METADATA, "Frau_(.)*", true);
 		rh.setExternalID("PinkCheapPaper");
-		xjdfHelper.writeToFile(sm_dirTestDataTemp + "/xjdf/MetaData.xjdf");
+		xjdfHelper.cleanUp();
+		setSnippet(shRL, true);
+		setSnippet(shComp, true);
+		writeTest(xjdfHelper, "subelements/runListMetaDataMap.xjdf");
 	}
 
 	/**
