@@ -112,7 +112,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.getName());
 		lo.setAutomated(true);
 		lo.appendElement(ElementName.POSITION);
-		writeTest(xjdfHelper, "LayoutSimplex.xjdf");
+		writeTest(xjdfHelper, "processes/LayoutSimplex.xjdf");
 	}
 
 	/**
@@ -130,13 +130,15 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		lo.setSurfaceContentsBox(new JDFRectangle(0, 0, 600, 420));
 		KElement po = lo.appendElement(XJDFConstants.PlacedObject);
 		po.setAttribute("Ord", "0");
+		po.setAttribute(AttributeName.CLIPBOX, new JDFRectangle(0, 0, 600, 420).toString());
 		po.setAttribute("CTM", JDFMatrix.getUnitMatrix().toString());
 		po.appendElement(ElementName.CONTENTOBJECT);
 		ResourceHelper rh2 = shLO.appendPartition(AttributeName.TILEID, "1 1", true);
 		rh2.ensurePart(AttributeName.SIDE, "Front");
 		JDFLayout lo2 = (JDFLayout) rh2.getResource();
-		lo.setSurfaceContentsBox(new JDFRectangle(600, 420, 1200, 840));
-		lo2.copyElement(po, null);
+		lo2.setSurfaceContentsBox(new JDFRectangle(0, 0, 600, 420));
+		po = lo2.copyElement(po, null);
+		po.setAttribute("CTM", JDFMatrix.getUnitMatrix().shift(-600, -420).toString());
 		xjdfHelper.cleanUp();
 		shLO.getRoot().appendXMLComment("More tiles here", rh2.getRoot());
 		setSnippet(shLO, true);
@@ -151,27 +153,24 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "CutStack", null);
 		xjdfHelper.setTypes("Stripping");
-		/**
-		SetHelper shBS = xjdfHelper.getCreateResourceSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
-		ResourceHelper rhBS = shBS.appendPartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS1"), true);
-		JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
-		bs.setFoldCatalog("F2-1");
-		bs.setBinderySignatureType(EnumBinderySignatureType.Fold);
-		*/
 		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
 		ResourceHelper rh = shLO.appendPartition(null, true);
 		JDFLayout lo = (JDFLayout) rh.getResource();
+
 		xjdfHelper.cleanUp();
 		setSnippet(lo, true);
+
 		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndTurn.getName());
 		lo.setAutomated(true);
 		JDFPosition pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
 		pos.setAttribute("StackDepth", "10");
 		pos.setAttribute("StackOrd", "0");
+		pos.setRelativeBox(new JDFRectangle(0, 0, 50, 100));
 
 		pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
 		pos.setAttribute("StackDepth", "10");
 		pos.setAttribute("StackOrd", "1");
+		pos.setRelativeBox(new JDFRectangle(50, 0, 100, 100));
 		writeTest(xjdfHelper, "processes/LayoutCutStack.xjdf");
 	}
 

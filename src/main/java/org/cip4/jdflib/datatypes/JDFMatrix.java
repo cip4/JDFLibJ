@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,24 +89,24 @@ import org.cip4.jdflib.util.HashUtil;
 
 /**
  * This class represents a transformation matrix consisting of 6 transformation values a, b, c, d, tx, ty all values are double values. The matrix looks like:
- * 
+ *
  * <pre>
  *  [ x']   [  a  b  tx  ] [ x ]   [ m00x + m01y + m02 ]
  *  [ y'] = [  c  d  ty  ] [ y ] = [ m10x + m11y + m12 ]
  *  [ 1 ]   [  0  0  1   ] [ 1 ]   [         1         ]
  * </pre>
- * 
+ *
  */
 public class JDFMatrix extends JDFNumList
 {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private final static JDFMatrix unitMatrix = new JDFMatrix(1, 0, 0, 1, 0, 0);
 
 	/**
-	 * 
+	 *
 	 * @return a copy of the unit matrix
 	 */
 	public static JDFMatrix getUnitMatrix()
@@ -124,9 +124,9 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * constructs a matrix with all values set via a Vector of Double objects
-	 * 
+	 *
 	 * @param Vector v - the given Vector
-	 * 
+	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 * @deprecated use typesafe constructors
 	 */
@@ -138,11 +138,11 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * constructs a matrix with all values set via arotation and a shift
-	 * 
+	 *
 	 * @param degrees - the rotation in degrees
 	 * @param x the X shift
 	 * @param y the Y shift
-	 * 
+	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
 	public JDFMatrix(final double degrees, final double x, final double y)
@@ -156,11 +156,11 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * constructs a matrix with all values set via an enumerated orientation
-	 * 
+	 *
 	 * @param orientation - the named orientation
 	 * @param w the width of the unrotated object to transform
 	 * @param h the height of the unrotated object to transform
-	 * 
+	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
 	public JDFMatrix(final EnumOrientation orientation, final double w, final double h)
@@ -218,9 +218,9 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * constructs a matrix with all values set via a String
-	 * 
+	 *
 	 * @param s the given String
-	 * 
+	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFMatrix(final String s) throws DataFormatException
@@ -254,9 +254,9 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * constructs a rectangle with all values set via a JDFNumberList
-	 * 
+	 *
 	 * @param nl the given number list
-	 * 
+	 *
 	 * @throws DataFormatException - if the JDFNumberList has not a valid format
 	 */
 	public JDFMatrix(final JDFNumList nl) throws DataFormatException
@@ -266,10 +266,10 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * copy constructor
-	 * 
+	 *
 	 * @param matrix the given number list
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public JDFMatrix(final JDFMatrix matrix)
 	{
@@ -279,10 +279,10 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * constructs a rectangle with all values set via a JDFNumberList
-	 * 
+	 *
 	 * @param rect the given number list
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public JDFMatrix(final JDFRectangle rect)
 	{
@@ -295,7 +295,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * constructs a new JDFMatrix with the given double values
-	 * 
+	 *
 	 * @param a position 01 of the transformation matrix
 	 * @param b position 02 of the transformation matrix
 	 * @param c position 10 of the transformation matrix
@@ -318,7 +318,7 @@ public class JDFMatrix extends JDFNumList
 	// *********************************************
 	/**
 	 * isValid - true if the size of the vector is 6 and all instances are Double types
-	 * 
+	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
 	@Override
@@ -341,7 +341,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * getA - returns the first coordinate
-	 * 
+	 *
 	 * @return the first coordinate
 	 */
 	public double getA()
@@ -351,7 +351,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * setA - sets the first coordinate
-	 * 
+	 *
 	 * @param p_a the first coordinate
 	 */
 	public void setA(final double p_a)
@@ -361,7 +361,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * getB - returns the second coordinate
-	 * 
+	 *
 	 * @return double - the second coordinate
 	 */
 	public double getB()
@@ -371,7 +371,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * setB - sets the second coordinate
-	 * 
+	 *
 	 * @param p_b the first coordinate
 	 */
 	public void setB(final double p_b)
@@ -381,7 +381,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * getC - returns the third coordinate
-	 * 
+	 *
 	 * @return double - the third coordinate
 	 */
 	public double getC()
@@ -391,7 +391,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * setC - sets the third coordinate
-	 * 
+	 *
 	 * @param p_c the third coordinate
 	 */
 	public void setC(final double p_c)
@@ -401,7 +401,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * getD - returns the fourth coordinate
-	 * 
+	 *
 	 * @return double - the fourth coordinate
 	 */
 	public double getD()
@@ -411,7 +411,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * setD - sets the fourth coordinate
-	 * 
+	 *
 	 * @param p_d the fourth coordinate
 	 */
 	public void setD(final double p_d)
@@ -421,7 +421,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * getTx - returns the tx coordinate
-	 * 
+	 *
 	 * @return double - the tx coordinate
 	 */
 	public double getTx()
@@ -430,7 +430,7 @@ public class JDFMatrix extends JDFNumList
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFXYPair getShift()
@@ -439,8 +439,8 @@ public class JDFMatrix extends JDFNumList
 	}
 
 	/**
-	 * 
-	 * @return 
+	 *
+	 * @return
 	 */
 	public double getAngle()
 	{
@@ -460,7 +460,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * setTx - sets the tx coordinate
-	 * 
+	 *
 	 * @param p_tx the tx coordinate
 	 */
 	public void setTx(final double p_tx)
@@ -470,7 +470,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * getTy - returns the ty coordinate
-	 * 
+	 *
 	 * @return double - the ty coordinate
 	 */
 	public double getTy()
@@ -480,7 +480,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * setTy - sets the ty coordinate
-	 * 
+	 *
 	 * @param p_ty the ty coordinate
 	 */
 	public void setTy(final double p_ty)
@@ -490,7 +490,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * equals - returns true if both JDFMatrices are equal, otherwise false
-	 * 
+	 *
 	 * @return boolean - true if equal otherwise false
 	 */
 	@Override
@@ -526,7 +526,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * getAffineTransform -
-	 * 
+	 *
 	 * @return AffineTransform
 	 */
 	public AffineTransform getAffineTransform()
@@ -536,7 +536,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * setAffineTransform -
-	 * 
+	 *
 	 * @param affineTrans matrix to be stored
 	 */
 	public void setAffineTransform(final AffineTransform affineTrans)
@@ -553,33 +553,36 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * shifts Tx and Ty by the amount specified
-	 * 
+	 *
 	 * @param tx shift in x direction
 	 * @param ty shift in y direction
+	 * @return
 	 */
-	public void shift(final double tx, final double ty)
+	public JDFMatrix shift(final double tx, final double ty)
 	{
 		setTx(getTx() + tx);
 		setTy(getTy() + ty);
+		return this;
 	}
 
 	/**
 	 * rotate this by degrees degrees CouterClockwise
-	 * 
+	 *
 	 * @param degrees the degrees to rotate by in counterclockwise direction
 	 */
-	public void rotate(final double degrees)
+	public JDFMatrix rotate(final double degrees)
 	{
 		final AffineTransform at = getAffineTransform();
 		at.rotate(degrees * Math.PI / 180.0);
 		setAffineTransform(at);
+		return this;
 	}
 
 	/**
 	 * concatinates this with m
-	 * 
+	 *
 	 * @param m the matrix to concatinate
-	 * 
+	 *
 	 */
 	public void concat(final JDFMatrix m)
 	{
@@ -591,26 +594,27 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * shift this matrix by an xypair
-	 * 
+	 *
 	 * @param point the point to shift by
 	 */
-	public void shift(final JDFXYPair point)
+	public JDFMatrix shift(final JDFXYPair point)
 	{
-		if (point == null)
+		if (point != null)
 		{
-			return;
+			shift(point.getX(), point.getY());
 		}
-		shift(point.getX(), point.getY());
+		return this;
 	}
 
 	/**
 	 * shift this matrix by an xypair
-	 * 
+	 *
 	 * @param point the point to shift by
 	 */
-	public void setShift(final JDFXYPair point)
+	public JDFMatrix setShift(final JDFXYPair point)
 	{
 		setTx(point == null ? 0 : point.getX());
 		setTy(point == null ? 0 : point.getY());
+		return this;
 	}
 }
