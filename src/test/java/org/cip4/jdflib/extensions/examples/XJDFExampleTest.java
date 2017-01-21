@@ -104,7 +104,7 @@ public class XJDFExampleTest extends JDFTestCaseBase
 		m.setAttribute("foo:FooAtt", "FooVal", "http://www.foo.org");
 		xjdfHelper.cleanUp();
 		setSnippet(rh, true);
-		writeTest(xjdfHelper, "ExtendAtt.xjdf");
+		writeTest(xjdfHelper, "structure/namespacesExtendAttribute.xjdf");
 	}
 
 	/**
@@ -182,7 +182,7 @@ public class XJDFExampleTest extends JDFTestCaseBase
 		xjdfHelper.getRoot().removeAttribute("xmlns:foo");
 		xjdfHelper.cleanUp();
 		setSnippet(product.getRoot(), true);
-		writeTest(xjdfHelper, "ExtendIntent.xjdf");
+		writeTest(xjdfHelper, "structure/namespacesExtendIntent.xjdf");
 	}
 
 	/**
@@ -198,7 +198,7 @@ public class XJDFExampleTest extends JDFTestCaseBase
 		setSnippet(sh, true);
 		ResourceHelper res = sh.getCreatePartition("Run", "R1", true);
 		res.getResource().setAttribute("FooAtt", "FooVal");
-		writeTest(xjdfHelper, "ExtendSet.xjdf");
+		writeTest(xjdfHelper, "structure/namespacesExtendSet.xjdf");
 	}
 
 	/**
@@ -236,7 +236,7 @@ public class XJDFExampleTest extends JDFTestCaseBase
 		root.addNameSpace("foo", "http://www.foo.org");
 		xjdfHelper.setTypes("foo:FooMaking");
 		cleanSnippets(xjdfHelper);
-		writeTest(xjdfHelper, "ExtendProcess.xjdf");
+		writeTest(xjdfHelper, "structure/namespacesExtendProcess.xjdf");
 	}
 
 	/**

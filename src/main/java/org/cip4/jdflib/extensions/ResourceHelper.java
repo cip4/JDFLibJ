@@ -202,8 +202,9 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 *
 	 * @param key
 	 * @param value
+	 * @return this - useful for lazy chaining
 	 */
-	public void ensurePart(String key, String value)
+	public ResourceHelper ensurePart(String key, String value)
 	{
 		if (StringUtil.getNonEmpty(value) != null)
 		{
@@ -211,6 +212,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 			partMapVector.put(key, value);
 			setPartMapVector(partMapVector);
 		}
+		return this;
 	}
 
 	/**

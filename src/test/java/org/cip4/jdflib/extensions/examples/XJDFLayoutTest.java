@@ -76,6 +76,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -109,6 +111,34 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		lo.setAutomated(true);
 		lo.appendElement(ElementName.POSITION);
 		writeTest(xjdfHelper, "LayoutSimplex.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testTiling()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Tiling", null);
+		xjdfHelper.setTypes("Imposition");
+		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		ResourceHelper rh = shLO.appendPartition(AttributeName.TILEID, "0 0", true);
+		rh.ensurePart(AttributeName.SIDE, "Front");
+		JDFLayout lo = (JDFLayout) rh.getResource();
+		lo.setSurfaceContentsBox(new JDFRectangle(0, 0, 600, 420));
+		KElement po = lo.appendElement(XJDFConstants.PlacedObject);
+		po.setAttribute("Ord", "0");
+		po.setAttribute("CTM", JDFMatrix.getUnitMatrix().toString());
+		po.appendElement(ElementName.CONTENTOBJECT);
+		ResourceHelper rh2 = shLO.appendPartition(AttributeName.TILEID, "1 1", true);
+		rh2.ensurePart(AttributeName.SIDE, "Front");
+		JDFLayout lo2 = (JDFLayout) rh2.getResource();
+		lo.setSurfaceContentsBox(new JDFRectangle(600, 420, 1200, 840));
+		lo2.copyElement(po, null);
+		xjdfHelper.cleanUp();
+		shLO.getRoot().appendXMLComment("More tiles here", rh2.getRoot());
+		setSnippet(shLO, true);
+		writeTest(xjdfHelper, "processes/impositionForTiling.xjdf");
 	}
 
 	/**

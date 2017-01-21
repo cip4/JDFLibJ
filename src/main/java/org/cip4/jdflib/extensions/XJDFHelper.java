@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.xjdfwalker.IDRemover;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
@@ -847,6 +848,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		{
 			auditPool.cleanUp();
 		}
+		new IDRemover().removeIDs(theElement);
 	}
 
 	/**
