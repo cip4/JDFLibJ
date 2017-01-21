@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,6 +68,7 @@
  */package org.cip4.jdflib.extensions.xjdfgoldenticket;
 
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -75,7 +76,7 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 public class XJDFProductGoldenTicket extends XJDFBaseGoldenTicket
 {
 	/**
-	 * 
+	 *
 	 * @param parent
 	 */
 	public XJDFProductGoldenTicket(XJDFProductGoldenTicket parent)
@@ -84,13 +85,14 @@ public class XJDFProductGoldenTicket extends XJDFBaseGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 * @param pIcsLevel
 	 * @param jdfVersion
 	 */
 	public XJDFProductGoldenTicket(int pIcsLevel, EnumVersion jdfVersion)
 	{
 		super(pIcsLevel, jdfVersion);
+		helper.setTypes(XJDFConstants.Product);
 	}
 
 }

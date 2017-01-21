@@ -196,8 +196,10 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 		ihs.getCreateResource().setAttribute(ElementName.BINDINGTYPE, "SaddleStitch");
 		ihs.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBrochureCover", null, null, false);
 		ihs.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBody", null, null, false);
+		xjdfHelper.cleanUp();
+		setSnippet(xjdfHelper.getRoot().getElement(XJDFConstants.ProductList), true);
 
-		xjdfHelper.writeToFile(sm_dirTestDataTemp + "xjdf/GTVariable1.xjdf");
+		writeTest(xjdfHelper, "intents/VariableAmounts.xjdf");
 	}
 
 	/**
