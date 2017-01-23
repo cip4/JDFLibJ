@@ -79,12 +79,15 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.resource.JDFPageCondition;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
+import org.cip4.jdflib.resource.process.JDFDynamicField;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.junit.Test;
@@ -143,6 +146,65 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		shLO.getRoot().appendXMLComment("More tiles here", rh2.getRoot());
 		setSnippet(shLO, true);
 		writeTest(xjdfHelper, "processes/impositionForTiling.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testPageCondition()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "PageCondition", null);
+		xjdfHelper.setTypes("Imposition");
+		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		ResourceHelper rh = shLO.appendPartition(AttributeName.SIDE, "Front", true);
+
+		JDFLayout lo = (JDFLayout) rh.getResource();
+		lo.setAutomated(true);
+		KElement po = lo.appendElement(XJDFConstants.PlacedObject);
+		po.setAttribute("Ord", "0");
+		KElement co1 = po.appendElement(ElementName.CONTENTOBJECT);
+		po = lo.appendElement(XJDFConstants.PlacedObject);
+		po.setAttribute("Ord", "1");
+		co1 = po.appendElement(ElementName.CONTENTOBJECT);
+		JDFPageCondition pc = (JDFPageCondition) co1.appendElement(ElementName.PAGECONDITION);
+		JDFAttributeMap mPart = new JDFAttributeMap(AttributeName.RUNINDEX, "0 0");
+		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		for (int i = 0; i < 4; i++)
+		{
+			mPart.put(AttributeName.DOCINDEX, "" + i + " " + i);
+			vMap.add(mPart.clone());
+		}
+		pc.setPartMapVector(vMap);
+
+		xjdfHelper.cleanUp();
+		setSnippet(shLO, true);
+		writeTest(xjdfHelper, "resources/pageCondition.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testDynamicField()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "DynamicField", null);
+		xjdfHelper.setTypes("Imposition");
+		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		ResourceHelper rh = shLO.appendPartition(AttributeName.SIDE, "Front", true);
+
+		JDFLayout lo = (JDFLayout) rh.getResource();
+		lo.setAutomated(true);
+		KElement po = lo.appendElement(XJDFConstants.PlacedObject);
+		po.setAttribute(AttributeName.CLIPBOX, "4 4 50 20");
+		po.setAttribute("Ord", "0");
+		KElement mo1 = po.appendElement(ElementName.MARKOBJECT);
+		JDFDynamicField df = (JDFDynamicField) mo1.appendElement(ElementName.DYNAMICFIELD);
+		df.setFormat("Moon phase while imaging: %s sheet # %i");
+		df.setTemplate("MoonPhase SheetIndex");
+		xjdfHelper.cleanUp();
+		setSnippet(shLO, true);
+		writeTest(xjdfHelper, "resources/dynamicField.xjdf");
 	}
 
 	/**

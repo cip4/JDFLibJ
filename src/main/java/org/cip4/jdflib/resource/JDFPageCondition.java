@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,10 +79,12 @@ package org.cip4.jdflib.resource;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPageCondition;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 
 /**
- * 
- *  
+ *
+ *
  * @author rainer prosi
  * @date May 9, 2014
  */
@@ -92,7 +94,7 @@ public class JDFPageCondition extends JDFAutoPageCondition
 
 	/**
 	 * Constructor for JDFPageCondition
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -103,7 +105,7 @@ public class JDFPageCondition extends JDFAutoPageCondition
 
 	/**
 	 * Constructor for JDFPageCondition
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -115,7 +117,7 @@ public class JDFPageCondition extends JDFAutoPageCondition
 
 	/**
 	 * Constructor for JDFPageCondition
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -128,13 +130,31 @@ public class JDFPageCondition extends JDFAutoPageCondition
 
 	/**
 	 * toString()
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
 	public String toString()
 	{
 		return "JDFPageCondition[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#setPartMapVector(org.cip4.jdflib.datatypes.VJDFAttributeMap)
+	 */
+	@Override
+	public void setPartMapVector(VJDFAttributeMap vPart)
+	{
+		super.setPartMapVector(vPart);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#setPartMap(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	public void setPartMap(JDFAttributeMap mPart)
+	{
+		super.setPartMap(mPart);
 	}
 
 }

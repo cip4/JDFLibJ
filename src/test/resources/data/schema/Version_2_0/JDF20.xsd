@@ -4578,13 +4578,9 @@
     <!-- ** Complex type definition for DynamicField ** -->
     <xs:element name="DynamicField">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="DeviceMark"/>
-            </xs:sequence>
-            <xs:attribute name="OrdExpression" type="string" use="optional"/>
+            <xs:attribute name="Format" type="string" use="required"/>
             <xs:attribute name="ReplaceField" type="string" use="optional"/>
-            <xs:attribute name="Ord" type="integer" use="optional"/>
-            <xs:attribute name="Format" type="string" use="optional"/>
+            <xs:attribute name="Template" type="NMTOKENS" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
