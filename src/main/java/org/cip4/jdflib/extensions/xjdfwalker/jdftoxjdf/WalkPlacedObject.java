@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
 /**
@@ -76,6 +77,16 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
  */
 public class WalkPlacedObject extends WalkJDFSubElement
 {
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#matches(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public boolean matches(KElement toCheck)
+	{
+		// we are abstract
+		return false;
+	}
+
 	/**
 	 *
 	 */
