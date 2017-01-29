@@ -80,6 +80,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorantAlias;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
 
@@ -121,6 +122,31 @@ public class XJDFResourceExampleTest extends JDFTestCaseBase
 
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "resources/ColorantAlias.xjdf");
+	}
+
+	/**
+	* tests the separationlist class
+	*
+	*/
+	@Test
+	public final void testMultiRunList()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper("RunList", null, null);
+		xjdfHelper.setTypes(EnumType.Imposition.getName());
+		SetHelper rlh = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, null);
+		ResourceHelper runh = rlh.appendPartition(AttributeName.RUN, "R1", true);
+		JDFRunList rl = (JDFRunList) runh.getResource();
+		rl.setNPage(6);
+		rl.setAttribute(AttributeName.PAGES, "0 5");
+		rl.appendElement(ElementName.FILESPEC).setAttribute(AttributeName.URL, "File:///File1.pdf");
+		runh = rlh.appendPartition(AttributeName.RUN, "R2", true);
+		rl = (JDFRunList) runh.getResource();
+		rl.setAttribute(AttributeName.PAGES, "0 -1");
+		rl.appendElement(ElementName.FILESPEC).setAttribute(AttributeName.URL, "File:///File2.pdf");
+
+		cleanSnippets(xjdfHelper);
+		writeTest(xjdfHelper, "resources/RunList2.xjdf");
 
 	}
+
 }

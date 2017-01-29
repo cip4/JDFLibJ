@@ -127,6 +127,7 @@ public abstract class XJDFConstants
 	public static final String ResourceSet = "ResourceSet";
 	public static final String ResponseModes = "ResponseModes";
 
+	public static final String ShapeDefRef = "ShapeDefRef";
 	public static final String ShapeDimension = "ShapeDimension";
 	public static final String StickOn = "StickOn";
 	public static final String SurfaceColor = "SurfaceColor";

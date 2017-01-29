@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -105,7 +105,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	JDFNode n;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testContentData()
@@ -142,8 +142,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 		}
 		pl.setXMLComment("Note that multiple page elements may but need not be specified\nit is also possible to reference only on pageEleemnt that spans the entire book");
 
-		d.write2File(sm_dirTestDataTemp + "ContentMetaData.jdf", 2, false);
-
+		writeTest(d.getRoot(), "resources/ContentMetaData.jdf", false);
 	}
 
 	/**
@@ -165,7 +164,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -184,7 +183,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -205,7 +204,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -226,7 +225,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	* @throws Exception
 	*/
 	@Test
@@ -246,7 +245,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	* @throws Exception
 	*/
 	@Test
@@ -267,7 +266,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	* @throws Exception
 	*/
 	@Test
@@ -291,7 +290,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test

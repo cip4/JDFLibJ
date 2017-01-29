@@ -233,7 +233,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		pos.setAttribute("StackDepth", "10");
 		pos.setAttribute("StackOrd", "1");
 		pos.setRelativeBox(new JDFRectangle(50, 0, 100, 100));
-		writeTest(xjdfHelper, "processes/LayoutCutStack.xjdf");
+		writeTest(xjdfHelper, "processes/layoutCutStack.xjdf");
 	}
 
 	/**
