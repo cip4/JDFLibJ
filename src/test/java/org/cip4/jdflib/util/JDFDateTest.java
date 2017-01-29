@@ -165,7 +165,9 @@ public class JDFDateTest extends JDFTestCaseBase
 	public void testDateChain()
 	{
 		JDFDate d = new JDFDate();
-		JDFDate d1 = new JDFDate();
+		if (d.getDay() > 20)
+			d.addOffset(0, 0, 0, -5);
+		JDFDate d1 = new JDFDate(d);
 		d1.setTime(0, 0, 0).addOffset(0, 0, 22, 3);
 		assertTrue(d1.getFormattedDateTime(JDFDate.DATETIMEISO).contains("T22:00:00"));
 		assertEquals(d.getDay() + 3, d1.getDay());
