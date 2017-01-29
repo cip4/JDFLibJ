@@ -406,7 +406,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	 * @param filename
 	 * @param convertX TODO
 	 */
-	protected void writeTest(KElement e, String filename, boolean convertX)
+	protected XMLDoc writeTest(KElement e, String filename, boolean convertX)
 	{
 		String ext = UrlUtil.extension(filename);
 		if (ext.startsWith("x"))
@@ -443,7 +443,10 @@ public abstract class JDFTestCaseBase extends TestCase
 				dVal.write2File(UrlUtil.newExtension(xjdfFile, "val.xml"), 2, false);
 			}
 			assertEquals(valResult, "Valid");
+			return xParsed;
+
 		}
+		return null;
 	}
 
 	protected KElement convertToXJDF(KElement e)
