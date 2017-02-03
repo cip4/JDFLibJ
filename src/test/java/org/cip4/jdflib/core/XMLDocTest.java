@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -116,8 +116,8 @@ public class XMLDocTest extends JDFTestCaseBase
 		protected abstract void runMyThread();
 
 		/**
-		 *  
-		 * 
+		 *
+		 *
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
@@ -146,8 +146,8 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @author rainer prosi
 	 * @date Jun 20, 2012
 	 */
@@ -156,7 +156,7 @@ public class XMLDocTest extends JDFTestCaseBase
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
@@ -173,15 +173,15 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @author rainer prosi
 	 * @date Jun 20, 2012
 	 */
 	protected class MyParseThread extends MyThread
 	{
 		/**
-		 * 
+		 *
 		 * @see org.cip4.jdflib.core.XMLDocTest.MyThread#runMyThread()
 		 */
 		@Override
@@ -194,7 +194,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @author rainer prosi
 	 * @date Jun 20, 2012
 	 */
@@ -202,7 +202,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	{
 		/**
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
@@ -225,7 +225,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	/**
 	 * thread class that writes a lot of documents
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
+	 *
 	 */
 	protected class MyManyWriteThread extends MyThread
 	{
@@ -233,7 +233,7 @@ public class XMLDocTest extends JDFTestCaseBase
 
 		/**
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.lang.Runnable#run()
 		 */
 		@SuppressWarnings("synthetic-access")
@@ -286,7 +286,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testSetValues()
@@ -301,7 +301,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testDirtyIDs()
@@ -391,7 +391,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCreateElementNoNS()
@@ -402,7 +402,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNewDocNS()
@@ -415,7 +415,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCreateElementNS()
@@ -467,7 +467,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	/**
 	 * @throws IOException bang
 	 * @throws SAXException bang
-	 * 
+	 *
 	 */
 	@Test
 	public void testParseDOM() throws SAXException, IOException
@@ -483,7 +483,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testParseNoNS()
@@ -506,7 +506,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCreateAttribute()
@@ -538,7 +538,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRegisterClass()
@@ -575,7 +575,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNSRoot()
@@ -650,7 +650,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * test graceful null handling
 	 */
 	@Test
@@ -661,7 +661,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCopyXMLDoc()
@@ -675,7 +675,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToFile()
@@ -700,7 +700,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToStringIndent()
@@ -715,7 +715,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToStringEscape()
@@ -730,7 +730,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToStringHash13()
@@ -770,7 +770,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToFileThreadRead()
@@ -810,7 +810,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * see if we can concurrently parse files (locking/threading) 
+	 * see if we can concurrently parse files (locking/threading)
 	 */
 	@Test
 	public void testParseFileThreadRead()
@@ -827,10 +827,11 @@ public class XMLDocTest extends JDFTestCaseBase
 		{
 			threads[i].waitComplete();
 		}
+		log.info("all done");
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToFileThreadWrite()
@@ -899,7 +900,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToFileFile()
@@ -925,7 +926,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToFileBadFile()
@@ -942,7 +943,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToFileYen()
@@ -956,7 +957,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToFileEscape()
@@ -1028,7 +1029,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToFileNull()
@@ -1043,7 +1044,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToFileURL()
@@ -1072,7 +1073,7 @@ public class XMLDocTest extends JDFTestCaseBase
 
 	/**
 	 * tests all kinds of special characters in file names - including %, ï¿½ and umlauts
-	 * 
+	 *
 	 */
 	@Test
 	public void testUmlaut()
@@ -1103,7 +1104,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSize()
@@ -1139,7 +1140,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCreateBig()
@@ -1194,7 +1195,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetElementsByTagName()
