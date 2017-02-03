@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -82,7 +83,7 @@ import org.junit.Test;
 public class PartitionHelperTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetResource()
@@ -97,7 +98,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetHelper()
@@ -114,7 +115,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetSet()
@@ -129,7 +130,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsAsset()
@@ -148,7 +149,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsAssetTwo()
@@ -169,7 +170,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetXJDF()
@@ -184,7 +185,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testisResourceElement()
@@ -203,7 +204,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCleanup()
@@ -220,7 +221,28 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
+	 */
+	@Test
+	public void testIgnoreOrder()
+	{
+		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
+		KElement root = d.getRoot();
+
+		KElement r1 = root.getCreateXPathElement("ResourceSet/Resource/Part");
+		KElement m = root.getCreateXPathElement("ResourceSet/Resource/Media");
+		KElement ml = m.appendElement(ElementName.MEDIALAYERS);
+		KElement m1 = ml.appendElement(ElementName.MEDIA);
+		KElement m2 = ml.appendElement(ElementName.GLUE);
+		KElement m3 = ml.appendElement(ElementName.MEDIA);
+		ResourceHelper ph = new ResourceHelper(r1);
+		ph.cleanUp();
+		assertEquals(m1.getNextSiblingElement(), m2);
+		assertEquals(m2.getNextSiblingElement(), m3);
+	}
+
+	/**
+	 *
 	 */
 	@Test
 	public void testSetPartMap()
@@ -235,7 +257,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendPartMap()
@@ -254,7 +276,7 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEnsureParts()

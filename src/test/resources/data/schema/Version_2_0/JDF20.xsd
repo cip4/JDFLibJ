@@ -5233,10 +5233,10 @@
     <!-- ** Complex type definition for MediaLayers ** -->
     <xs:element name="MediaLayers">
         <xs:complexType>
-            <xs:sequence>
+            <xs:choice maxOccurs="unbounded">
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Glue"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Media"/>
-            </xs:sequence>
+            </xs:choice>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>

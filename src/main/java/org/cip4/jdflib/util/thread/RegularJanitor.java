@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.util.thread;
 
@@ -86,12 +86,43 @@ public final class RegularJanitor
 	private int nThread;
 	private static RegularJanitor theJanitor = null;
 	private final Vector<Sweeper> vSweepers;
-	private final Vector<Sweeper> tmpSweepers;
-	private final Vector<Sweeper> zappSweepers;
 	private int interval;
 
 	/**
-	 * 
+	 *
+	 * simple runnable maker
+	 *
+	 */
+	class SweepRunner implements Runnable
+	{
+		private final Sweeper sweeper;
+
+		SweepRunner(Sweeper sweeper)
+		{
+			this.sweeper = sweeper;
+		}
+
+		@Override
+		public void run()
+		{
+			if (sweeper != null)
+			{
+				sweeper.sweep();
+			}
+		}
+
+		/**
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString()
+		{
+			return "SweepRunner [sweeper=" + sweeper + "]";
+		}
+	}
+
+	/**
+	 *
 	 * set the interval between sweeps in seconds
 	 * @param interval
 	 */
@@ -106,7 +137,7 @@ public final class RegularJanitor
 	}
 
 	/**
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -116,18 +147,18 @@ public final class RegularJanitor
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @return
 	 */
 	int numSweepers()
 	{
-		return vSweepers.size() + tmpSweepers.size() - zappSweepers.size();
+		return vSweepers.size();
 	}
 
 	/**
 	 * add a new sweeper
-	 *  
+	 *
 	 * @param sweeper
 	 * @param singleClass if true, make sure we only have one of sweeper of this type running at any given time
 	 */
@@ -139,19 +170,19 @@ public final class RegularJanitor
 			return;
 		}
 		// must use tnp to avoid race conditions while sweeping
-		synchronized (tmpSweepers)
+		synchronized (vSweepers)
 		{
 			if (singleClass)
 			{
 				checkDuplicates(sweeper);
 			}
-			tmpSweepers.add(sweeper);
+			vSweepers.add(sweeper);
 			log.info("adding sweeper " + sweeper);
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 * @param sweeper
 	 * @return
 	 */
@@ -164,8 +195,10 @@ public final class RegularJanitor
 	{
 
 		Vector<Sweeper> v = new Vector<Sweeper>();
-		v.addAll(tmpSweepers);
-		v.addAll(vSweepers);
+		synchronized (vSweepers)
+		{
+			v.addAll(vSweepers);
+		}
 		Class<?> newClass = getRunnerClass(sweeper);
 		if (newClass == null)
 			return null;
@@ -182,7 +215,7 @@ public final class RegularJanitor
 	}
 
 	/**
-	 * 
+	 *
 	 * @param sweeper
 	 */
 	private void checkDuplicates(Sweeper sweeper)
@@ -191,13 +224,13 @@ public final class RegularJanitor
 		if (oldSweeper != null)
 		{
 			log.info("removing duplicate tmp sweeper");
-			zappSweepers.add(oldSweeper);
+			vSweepers.remove(oldSweeper);
 		}
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @param oldSweeper
 	 * @return
 	 */
@@ -219,8 +252,8 @@ public final class RegularJanitor
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @author rainer prosi
 	 * @date Dec 9, 2011
 	 */
@@ -229,7 +262,7 @@ public final class RegularJanitor
 		private int firstInterval;
 
 		/**
-		 * 
+		 *
 		 */
 		JanitorThread()
 		{
@@ -254,8 +287,12 @@ public final class RegularJanitor
 			}
 			while (theMutex != null)
 			{
-				moveModifications();
-				for (Sweeper sweeper : vSweepers)
+				Vector<Sweeper> v = new Vector<>();
+				synchronized (vSweepers)
+				{
+					v.addAll(vSweepers);
+				}
+				for (Sweeper sweeper : v)
 				{
 					sweep(sweeper);
 					if (theMutex == null)
@@ -269,24 +306,9 @@ public final class RegularJanitor
 			log.info("Janitor over and out");
 		}
 
-		protected void moveModifications()
-		{
-			synchronized (tmpSweepers)
-			{
-				for (Sweeper oldSweeper : zappSweepers)
-				{
-					tmpSweepers.remove(oldSweeper);
-					vSweepers.remove(oldSweeper);
-				}
-				vSweepers.addAll(tmpSweepers);
-				tmpSweepers.clear();
-				zappSweepers.clear();
-			}
-		}
-
 		/**
 		 * protected sweeper
-		 * 
+		 *
 		 * @param sweeper the sweeper to execute
 		 */
 		private void sweep(Sweeper sweeper)
@@ -295,7 +317,8 @@ public final class RegularJanitor
 			{
 				if (sweeper.needSweep())
 				{
-					sweeper.sweep();
+					OrderedTaskQueue tq = OrderedTaskQueue.getCreateQueue(getRunnerClass(sweeper).getSimpleName());
+					tq.queue(new SweepRunner(sweeper));
 				}
 			}
 			catch (Throwable x)
@@ -305,7 +328,7 @@ public final class RegularJanitor
 		}
 
 		/**
-		 *  
+		 *
 		 * @param firstInterval the first interval prior to commencing in seconds
 		 */
 		void setFirstInterval(int firstInterval)
@@ -318,7 +341,7 @@ public final class RegularJanitor
 
 	/**
 	 * @param firstInterval the time in seconds to wait prior to the first sweep, if 0 then don't wait if<0 then use interval
-	 * 
+	 *
 	 */
 	public synchronized void startSweep(int firstInterval)
 	{
@@ -338,7 +361,7 @@ public final class RegularJanitor
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public static void feierabend()
 	{
@@ -351,7 +374,7 @@ public final class RegularJanitor
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void shutdown()
 	{
@@ -387,8 +410,6 @@ public final class RegularJanitor
 		nThread = 0;
 		log = LogFactory.getLog(getClass());
 		vSweepers = new Vector<Sweeper>();
-		tmpSweepers = new Vector<Sweeper>();
-		zappSweepers = new Vector<Sweeper>();
 		log.info("creating new janitor");
 	}
 }
