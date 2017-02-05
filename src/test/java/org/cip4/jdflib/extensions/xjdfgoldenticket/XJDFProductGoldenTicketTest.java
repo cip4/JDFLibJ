@@ -169,6 +169,7 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 		IntentHelper ih = ph.getCreateIntent("VariableIntent");
 		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBrochure", null, null, false);
 		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBook", null, null, false);
+		ih.getResource().setAttribute(XJDFConstants.VariableType, "Area");
 		ProductHelper phh = xjdfHelper.getCreateProduct("IDBook");
 		phh.setAmount(1000);
 		phh.setProductType("Book");

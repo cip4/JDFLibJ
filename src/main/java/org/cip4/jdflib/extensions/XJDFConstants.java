@@ -135,6 +135,8 @@ public abstract class XJDFConstants
 	public static final String TransferCurveName = "TransferCurveName";
 	public static final String TypeDetails = "TypeDetails";
 
+	public static final String VariableType = "VariableType";
+
 	public static final String XJDF = "XJDF";
 	public static final String XJMF = "XJMF";
 	public static final String XJMFURL = "XJMFURL";
