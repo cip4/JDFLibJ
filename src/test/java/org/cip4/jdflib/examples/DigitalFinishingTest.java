@@ -155,7 +155,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		barcode.setBoundingBox(new JDFRectangle(6, 6, 66, 66));
 		barcode.setPosition(EnumPosition.Front);
 		barcode.setValueFormat("%6s/Set%i/%i_Page%i/%i");
-		barcode.setValueTemplate("jobID,SetIndex,TotalSets,PoolSheetIndex,TotalSheetsInPool");
+		barcode.setValueTemplate("jobID SetIndex TotalSets PoolSheetIndex TotalSheetsInPool");
 
 		JDFNode booklet = n.addCombined(new VString("Collecting Stitching", null));
 		booklet.ensureLink(c, EnumUsage.Input, EnumProcessUsage.Cover);
@@ -583,6 +583,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		JDFPipeParams pp = command.appendPipeParams();
 		pp.setPipeID("PipeSheet");
 		pp.setJobID("J1");
+		pp.setJobPartID("Part");
 		return pp;
 	}
 
