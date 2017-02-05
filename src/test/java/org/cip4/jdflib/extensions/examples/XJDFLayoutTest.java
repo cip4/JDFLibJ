@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -163,9 +164,11 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		lo.setAutomated(true);
 		KElement po = lo.appendElement(XJDFConstants.PlacedObject);
 		po.setAttribute("Ord", "0");
+		po.setAttribute(AttributeName.CTM, JDFMatrix.getUnitMatrix().toString());
 		KElement co1 = po.appendElement(ElementName.CONTENTOBJECT);
 		po = lo.appendElement(XJDFConstants.PlacedObject);
 		po.setAttribute("Ord", "1");
+		po.setAttribute(AttributeName.CTM, JDFMatrix.getUnitMatrix().shift(new JDFXYPair(500, 0)).toString());
 		co1 = po.appendElement(ElementName.CONTENTOBJECT);
 		JDFPageCondition pc = (JDFPageCondition) co1.appendElement(ElementName.PAGECONDITION);
 		JDFAttributeMap mPart = new JDFAttributeMap(AttributeName.RUNINDEX, "0 0");
@@ -197,6 +200,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		lo.setAutomated(true);
 		KElement po = lo.appendElement(XJDFConstants.PlacedObject);
 		po.setAttribute(AttributeName.CLIPBOX, "4 4 50 20");
+		po.setAttribute(AttributeName.CTM, JDFMatrix.getUnitMatrix().toString());
 		po.setAttribute("Ord", "0");
 		KElement mo1 = po.appendElement(ElementName.MARKOBJECT);
 		JDFDynamicField df = (JDFDynamicField) mo1.appendElement(ElementName.DYNAMICFIELD);

@@ -111,6 +111,11 @@ public class WalkXJDFResource extends WalkXElement
 		JDFNode theNode = getNode(xjdfRes, jdfNode);
 		JDFResource res = getResourceRoot(theNode, xjdfRes);
 		final JDFPart part = (JDFPart) xjdfRes.getElement(ElementName.PART);
+		ResourceHelper rh = ResourceHelper.getHelper(xjdfRes);
+		if (rh != null)
+		{
+			rh.getCreateResource();
+		}
 		KElement newPartitionElement = createPartition(xjdfRes, res, part, theNode);
 		if (newPartitionElement == null)
 		{

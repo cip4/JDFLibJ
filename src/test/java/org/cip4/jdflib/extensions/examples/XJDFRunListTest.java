@@ -127,7 +127,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 		KElement ruli = shRL.appendPartition(null, true).getResource();
 		JDFFileSpec fs = (JDFFileSpec) ruli.appendElement(ElementName.FILESPEC);
 		fs.setFileFormat("file://myserver/next/%s/m%4.i.pdf");
-		fs.setFileTemplate("JobID,i");
+		fs.setFileTemplate("JobID i");
 		fs.setMimeType(UrlUtil.APPLICATION_PDF);
 		xjdfHelper.cleanUp();
 		setSnippet(ruli, true);
@@ -149,7 +149,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 		JDFMetadataMap md = (JDFMetadataMap) runList.appendElement(ElementName.METADATAMAP);
 		md.setName("MetaData");
 		md.setValueFormat("%s_%s");
-		md.setValueTemplate("gender,status");
+		md.setValueTemplate("gender status");
 		JDFExpr x = md.appendExpr();
 		x.setName("gender");
 		x.setPath("/doc/record/Geschlecht");
