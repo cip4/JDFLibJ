@@ -143,4 +143,16 @@ public class WalkNodeInfo extends WalkResource
 		return walk;
 	}
 
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#mustInline(java.lang.String)
+	 */
+	@Override
+	protected boolean mustInline(String refLocalName)
+	{
+		if (ElementName.EMPLOYEE.equals(refLocalName))
+			return false;
+
+		return super.mustInline(refLocalName);
+	}
+
 }

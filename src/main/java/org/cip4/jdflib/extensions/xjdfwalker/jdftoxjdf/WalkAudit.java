@@ -131,13 +131,21 @@ public class WalkAudit extends WalkJDFSubElement
 	 */
 	void moveToParentAudit(final KElement jdf, KElement auditParent)
 	{
-		jdf.removeAttribute(AttributeName.AGENTNAME);
-		jdf.removeAttribute(AttributeName.AGENTVERSION);
+		auditParent.moveAttribute(AttributeName.AGENTNAME, jdf);
 		auditParent.moveAttribute(AttributeName.AGENTVERSION, jdf);
-		auditParent.moveAttribute(AttributeName.AUTHOR, jdf);
-		auditParent.moveAttribute(AttributeName.PERSONALID, jdf);
 		auditParent.moveAttribute(AttributeName.ID, jdf);
 		auditParent.moveAttribute(AttributeName.TIME, jdf, AttributeName.TIMESTAMP, null, null);
+		JDFEmployee emp = (JDFEmployee) jdf.getElement(ElementName.EMPLOYEE);
+		if (emp != null)
+		{
+			auditParent.setAttribute(AttributeName.AUTHOR, emp.getDescriptiveName());
+			auditParent.setAttribute(AttributeName.PERSONALID, emp.getPersonalID());
+		}
+		else
+		{
+			auditParent.moveAttribute(AttributeName.AUTHOR, jdf);
+			auditParent.moveAttribute(AttributeName.PERSONALID, jdf);
+		}
 	}
 
 	/**

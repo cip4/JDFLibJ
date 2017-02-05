@@ -159,11 +159,12 @@ class JDFToXJDFDataCache
 		set.add(ElementName.BYTEMAP);
 		set.add(ElementName.ADDRESS);
 		set.add(ElementName.COSTCENTER);
+		set.add(ElementName.COLORANTALIAS);
 		set.add(ElementName.COMPANY);
 		set.add(ElementName.PERSON);
 		set.add(ElementName.DEVICE);
 		set.add(ElementName.DEVICENSPACE);
-		set.add(ElementName.COLORANTALIAS);
+		set.add(ElementName.EMPLOYEE);
 		set.add(ElementName.GLUELINE);
 		set.add(ElementName.GLUEAPPLICATION);
 		set.add(ElementName.CIELABMEASURINGFIELD);

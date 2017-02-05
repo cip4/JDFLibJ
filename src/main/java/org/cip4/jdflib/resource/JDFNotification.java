@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -67,17 +67,17 @@
  *
  *
  *//**
-* ========================================================================== 
-* class JDFNotification extends JDFAutoNotification
-* created 2001-09-06T10:02:57GMT+02:00 
-* ==========================================================================
-* ==========================================================================
-* @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
-* @Author : sabjon@topmail.de   using a code generator 
-* Warning! very preliminary test version. 
-* Interface subject to change without prior notice! 
-* Revision history:   ...
-*/
+	* ==========================================================================
+	* class JDFNotification extends JDFAutoNotification
+	* created 2001-09-06T10:02:57GMT+02:00
+	* ==========================================================================
+	* ==========================================================================
+	* @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
+	* @Author : sabjon@topmail.de   using a code generator
+	* Warning! very preliminary test version.
+	* Interface subject to change without prior notice!
+	* Revision history:   ...
+	*/
 
 package org.cip4.jdflib.resource;
 
@@ -441,7 +441,11 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	 */
 	public JDFError getError()
 	{
-		return (JDFError) getNotificationDetails();
+		JDFError notificationDetails = (JDFError) getNotificationDetails();
+		if (notificationDetails == null)
+			return (JDFError) getElement(ElementName.ERROR);
+
+		return notificationDetails;
 	}
 
 	/**
@@ -575,7 +579,10 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	 */
 	public JDFEvent getEvent()
 	{
-		return (JDFEvent) getNotificationDetails();
+		JDFEvent notificationDetails = (JDFEvent) getNotificationDetails();
+		if (notificationDetails == null)
+			return (JDFEvent) getElement(ElementName.EVENT);
+		return notificationDetails;
 	}
 
 	/**
@@ -694,4 +701,4 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	}
 
 } // class JDFNotification
-// ==========================================================================
+	// ==========================================================================
