@@ -139,7 +139,7 @@ import org.junit.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class DigiPrintTest extends JDFTestCaseBase
 {
@@ -155,7 +155,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 	/**
 	 * test amount handling
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public void testModules() throws Exception
@@ -196,7 +196,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 	/**
 	 * test amount handling
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public void testPDFVTStream() throws Exception
@@ -252,7 +252,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHoldPipeRIP()
@@ -280,7 +280,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testHoldQueueRIP()
@@ -305,8 +305,8 @@ public class DigiPrintTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public void testPipePushSheet()
 	{
@@ -395,7 +395,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 	/**
 	 * test amount handling
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public void testModules14() throws Exception
@@ -537,7 +537,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 	/**
 	 * test devcaps for usagecounters
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public void testUsageCounterDevCaps() throws Exception
@@ -557,7 +557,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 
 	/**
 	 * test amount handling
-	 * 
+	 *
 	 */
 	@Test
 	public void testDirectProof()
@@ -613,7 +613,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 	/**
 	 * test amount handling
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@SuppressWarnings("deprecation")
 	@Test
@@ -753,8 +753,8 @@ public class DigiPrintTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public void testVariableRipBookletPipe()
 	{
@@ -772,15 +772,15 @@ public class DigiPrintTest extends JDFTestCaseBase
 		idp.ensureLink(rl, EnumUsage.Output, null);
 		JDFRunList cover = (JDFRunList) rl.addPartition(EnumPartIDKey.DocTags, "Cover");
 		cover.setNPage(2);
-		JDFRunList body = (JDFRunList) rl.addPartition(EnumPartIDKey.DocTags, "Body");
+		rl.addPartition(EnumPartIDKey.DocTags, "Body");
 		JDFNode print = n.addCombined(new VString("DigitalPrinting", null));
 		print.ensureLink(rl, EnumUsage.Input, null);
 		writeTest(jdfDoc, "BookletPipeRunList.jdf");
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @param command
 	 * @return
 	 */
@@ -789,12 +789,13 @@ public class DigiPrintTest extends JDFTestCaseBase
 		JDFPipeParams pp = command.appendPipeParams();
 		pp.setPipeID("PipeByteMap");
 		pp.setJobID("J1");
+		pp.setJobPartID("Part");
 		return pp;
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public void testPipePushSheetMeta()
 	{
@@ -837,8 +838,8 @@ public class DigiPrintTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public void testPipePushSetMeta()
 	{
@@ -1005,7 +1006,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void setUp()
