@@ -78,6 +78,8 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.Test;
 
@@ -123,7 +125,7 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 	@Test
 	public void testSchedule()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "Amount", new VJDFAttributeMap(new JDFAttributeMap("SheetName", "Sheet1")));
+		XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "Reschedule", new VJDFAttributeMap(new JDFAttributeMap("SheetName", "Sheet1")));
 		xjdfHelper.setTypes("Folding");
 		JDFDate jdfDate = new JDFDate().setTime(13, 0, 0);
 		SetHelper sh2 = xjdfHelper.getSet(ElementName.NODEINFO, EnumUsage.Input, null);
@@ -133,6 +135,51 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
 		writeTest(xjdfHelper, "structure/schedule.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testDevice()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "Device", new VJDFAttributeMap(new JDFAttributeMap("SheetName", "Sheet1")));
+		xjdfHelper.setTypes("Folding");
+		JDFDate jdfDate = new JDFDate().setTime(13, 0, 0);
+		SetHelper sh1 = xjdfHelper.getCreateSet(ElementName.DEVICE, EnumUsage.Input, null);
+		sh1.getCreatePartition("SheetName", "Sheet1", true).getResource().setAttribute(AttributeName.DEVICEID, "Folder2");
+		SetHelper sh2 = xjdfHelper.getSet(ElementName.NODEINFO, EnumUsage.Input, null);
+		jdfDate.addOffset(0, 0, 4, 0);
+		sh2.getCreatePartition("SheetName", "Sheet1", true).getResource().setAttribute(AttributeName.START, jdfDate.getDateTimeISO());
+		xjdfHelper.cleanUp();
+		setSnippet(xjdfHelper, true);
+		setSnippet(xjdfHelper.getAuditPool(), false);
+		writeTest(xjdfHelper, "structure/device.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testPaper()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "Paper", new VJDFAttributeMap(new JDFAttributeMap("SheetName", "Sheet1")));
+		xjdfHelper.setTypes("ConventionalPrinting");
+		SetHelper sh1 = xjdfHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Input);
+		ResourceHelper rh1 = sh1.appendPartition("SheetName", "Sheet1", true);
+		SetHelper sh2 = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
+		ResourceHelper rh2 = sh2.appendPartition("SheetName", "Sheet1", true);
+		JDFMedia m = (JDFMedia) rh2.getResource();
+		m.setWeight(120);
+		JDFComponent c = (JDFComponent) rh1.getResource();
+		c.setAttribute("MediaRef", rh2.getRoot().appendAnchor(null));
+		rh1.setAmount(4000, null, true);
+		xjdfHelper.getSet(ElementName.NODEINFO, EnumUsage.Input, null).deleteNode();
+
+		xjdfHelper.cleanUp();
+		setSnippet(xjdfHelper, true);
+		setSnippet(xjdfHelper.getAuditPool(), false);
+		writeTest(xjdfHelper, "structure/paper.xjdf");
 	}
 
 }
