@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
+import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
 import org.cip4.jdflib.auto.JDFAutoResourceInfo.EnumScope;
 import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumResourceDetails;
@@ -97,6 +98,7 @@ import org.cip4.jdflib.jmf.JDFResourceQuParams;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.Test;
@@ -161,6 +163,26 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
 		writeTest(xjmfHelper, "jmf/ResponseModifyQE.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testResponseNotification()
+	{
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper response = xjmfHelper.appendMessage(EnumFamily.Response, XJDFConstants.ModifyQueueEntry);
+		response.getHeader().setAttribute(AttributeName.REFID, "C1");
+		response.getHeader().setAttribute(AttributeName.ID, "R1");
+		response.setAttribute(AttributeName.RETURNCODE, "5");
+		JDFNotification n = (JDFNotification) response.appendElement(ElementName.NOTIFICATION);
+		n.setClass(EnumClass.Error);
+		n.appendComment().setText("StartJob unsuccessful - Device does not handle resume");
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "jmf/ResponseNotification.xjmf");
 	}
 
 	/**
