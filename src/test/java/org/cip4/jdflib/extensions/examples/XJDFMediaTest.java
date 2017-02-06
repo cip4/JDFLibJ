@@ -72,15 +72,18 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumFluteDirection;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaUnit;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumPlateTechnology;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMediaLayers;
 import org.cip4.jdflib.resource.process.postpress.JDFGlue;
@@ -124,6 +127,7 @@ public class XJDFMediaTest extends JDFTestCaseBase
 		m2 = ml.appendMedia();
 		m2.setMediaType(EnumMediaType.Paper);
 		m2.setWeight(180);
+		cleanSnippets(xjdfHelper);
 
 		writeTest(xjdfHelper, "resources/MediaCorrugated.xjdf");
 	}
@@ -134,32 +138,70 @@ public class XJDFMediaTest extends JDFTestCaseBase
 	@Test
 	public void testFlexoPlate()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper("Converting", "Corrugated", null);
+		XJDFHelper xjdfHelper = new XJDFHelper("Flexo", "Plate", null);
 		xjdfHelper.setTypes(JDFConstants.CONVENTIONALPRINTING);
-		SetHelper shMedia = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
-		ResourceHelper rh = shMedia.appendPartition(null, true);
+		SetHelper shMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, EnumUsage.Input, "Plate");
+		ResourceHelper rh = shMedia.appendPartition(AttributeName.SEPARATION, "Black", true);
+		rh.setBrand("FlexoBrand");
 		JDFMedia m = (JDFMedia) rh.getResource();
-		m.setMediaType(EnumMediaType.CorrugatedBoard);
-		m.setDimensionCM(new JDFXYPair(100, 70));
-		m.setThickness(2382);
-		m.setInsideLoss(1000);
-		m.setOutsideGain(1380);
-		m.setMediaTypeDetails("SingleWall");
+		m.setMediaType(EnumMediaType.Plate);
+		m.setDimensionCM(new JDFXYPair(90, 120));
+		m.setThickness(1143);
+		m.setPlateTechnology(EnumPlateTechnology.FlexoDigitalThermal);
+		m.setReliefThickness(500);
+
 		JDFMediaLayers ml = m.appendMediaLayers();
 		JDFMedia m2 = ml.appendMedia();
-		m2.setMediaType(EnumMediaType.Paper);
-		m2.setWeight(190);
-		m2 = ml.appendMedia();
-		m2.setMediaType(EnumMediaType.Paper);
-		m2.setWeight(180);
-		m2.setFlute("B");
-		m2.setFluteDirection(EnumFluteDirection.XDirection);
-		m2.setMediaTypeDetails("Flute");
-		m2 = ml.appendMedia();
-		m2.setMediaType(EnumMediaType.Paper);
-		m2.setWeight(180);
+		m2.setMediaType(EnumMediaType.Plate);
+		m2.setThickness(966);
+		m2.setMediaTypeDetails("FlexoPhotoPolymer");
 
-		writeTest(xjdfHelper, "resources/MediaCorrugated.xjdf");
+		m2 = ml.appendMedia();
+		m2.setMediaType(EnumMediaType.Plate);
+		m2.setThickness(177);
+		m2.setMediaTypeDetails("FlexoBase");
+		cleanSnippets(xjdfHelper);
+
+		writeTest(xjdfHelper, "resources/FlexoPlate.xjdf");
+		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		JDFDoc d = xc.convert(xjdfHelper);
+		writeTest(d.getRoot(), "resources/FlexoPlate.jdf", false);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testFlexoSleeve()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper("Flexo", "Sleeve", null);
+		xjdfHelper.setTypes(JDFConstants.CONVENTIONALPRINTING);
+		SetHelper shMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, EnumUsage.Input, "Plate");
+		ResourceHelper rh = shMedia.appendPartition(AttributeName.SEPARATION, "Black", true);
+		rh.setBrand("FlexoBrand");
+		JDFMedia m = (JDFMedia) rh.getResource();
+		m.setMediaType(EnumMediaType.Sleeve);
+		m.setDimensionCM(new JDFXYPair(50, 25));
+		m.setThickness(2810);
+		m.setPlateTechnology(EnumPlateTechnology.FlexoDigitalSolvent);
+		m.setReliefThickness(500);
+
+		JDFMediaLayers ml = m.appendMediaLayers();
+		JDFMedia m2 = ml.appendMedia();
+		m2.setMediaType(EnumMediaType.Sleeve);
+		m2.setThickness(1570);
+		m2.setMediaTypeDetails("FlexoPhotoPolymer");
+
+		m2 = ml.appendMedia();
+		m2.setMediaType(EnumMediaType.Sleeve);
+		m2.setThickness(1249);
+		m2.setMediaTypeDetails("FlexoBase");
+		cleanSnippets(xjdfHelper);
+
+		writeTest(xjdfHelper, "resources/FlexoSleeve.xjdf");
+		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		JDFDoc d = xc.convert(xjdfHelper);
+		writeTest(d.getRoot(), "resources/FlexoSleeve.jdf", false);
 	}
 
 	/**
@@ -187,7 +229,7 @@ public class XJDFMediaTest extends JDFTestCaseBase
 		m2 = ml.appendMedia();
 		m2.setMediaType(EnumMediaType.Paper);
 		m2.setWeight(60);
-
+		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "resources/MediaSelfAdhesive.xjdf");
 	}
 

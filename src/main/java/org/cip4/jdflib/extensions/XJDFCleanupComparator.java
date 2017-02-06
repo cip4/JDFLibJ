@@ -1,5 +1,8 @@
 package org.cip4.jdflib.extensions;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 
@@ -73,6 +76,7 @@ import org.cip4.jdflib.core.KElement;
  */
 class XJDFCleanupComparator extends KElement.SimpleElementNameComparator
 {
+	private static Set<String> retain = null;
 
 	/**
 	 * @see org.cip4.jdflib.core.KElement.SimpleElementNameComparator#compare(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
@@ -83,19 +87,28 @@ class XJDFCleanupComparator extends KElement.SimpleElementNameComparator
 		if (o1 != null)
 		{
 			KElement parent = o1.getParentNode_KElement();
-			if (parent != null)
+			if (mustRetain(parent))
 			{
-				String parentName = parent.getLocalName();
-				if (ElementName.AUDITPOOL.equals(parentName) || ElementName.MEDIALAYERS.equals(parentName) || XJDFConstants.XJMF.equals(parentName))
-				{
-					return 0;
-				}
-
+				return 0;
 			}
+
 			//TODO foreign namespaces last
 			//TODO resouces last, after parts
 		}
 		return super.compare(o1, o2);
+	}
+
+	private boolean mustRetain(KElement parent)
+	{
+		if (retain == null)
+		{
+			retain = new HashSet<>();
+			retain.add(ElementName.AUDITPOOL);
+			retain.add(ElementName.MEDIALAYERS);
+			retain.add(XJDFConstants.XJMF);
+		}
+
+		return parent == null ? false : retain.contains(parent.getLocalName());
 	}
 
 }

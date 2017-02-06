@@ -404,7 +404,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	 * write an element to the standard test directory sm_dirTestDataTemp
 	 * @param e
 	 * @param filename
-	 * @param convertX TODO
+	 * @param convertX
 	 */
 	protected XMLDoc writeTest(KElement e, String filename, boolean convertX)
 	{
@@ -426,9 +426,10 @@ public abstract class JDFTestCaseBase extends TestCase
 			{
 				ext = "x" + ext;
 				KElement x = convertToXJDF(e);
+				cleanSnippets(XJDFHelper.getHelper(x));
 				filename = UrlUtil.newExtension(filename, ext);
 				String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + filename;
-				x.write2File(xjdfFile);
+				x.getOwnerDocument_KElement().write2File(xjdfFile, 2, false);
 			}
 		}
 		if (convertX)
@@ -476,7 +477,12 @@ public abstract class JDFTestCaseBase extends TestCase
 		JDFParser p = getXJDFSchemaParser();
 		JDFDoc docXJDF = p.parseFile(tmpXJDF);
 		XMLDoc dVal = docXJDF.getValidationResult();
-		assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
+		String valResult = dVal.getRoot().getAttribute("ValidationResult");
+		if (!"Valid".equals(valResult))
+		{
+			dVal.write2File(sm_dirTestDataTemp + fileBase + ".val.xml", 2, false);
+		}
+		assertEquals(valResult, "Valid");
 
 		XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		JDFDoc converted = jdfConverter.convert(xjdfRoot);

@@ -617,6 +617,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
+	 * get or create a ResourceSet with a name, usage and processUsage
 	 *
 	 * @param name
 	 * @param usage

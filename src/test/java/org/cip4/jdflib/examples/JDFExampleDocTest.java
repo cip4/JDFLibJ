@@ -4,33 +4,33 @@
  *
  * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress (CIP4). All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification, are permitted
  * provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this list of conditions
  * and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice, this list of
  * conditions and the following disclaimer in the documentation and/or other materials provided with
  * the distribution.
- * 
+ *
  * 3. The end-user documentation included with the redistribution, if any, must include the
  * following acknowledgment: "This product includes software developed by the The International
  * Cooperation for the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)"
  * Alternately, this acknowledgment may appear in the software itself, if and wherever such
  * third-party acknowledgments normally appear.
- * 
+ *
  * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress" must not be used to endorse or promote products derived from this
  * software without prior written permission. For written permission, please contact info@cip4.org.
- * 
+ *
  * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their
  * name, without prior written permission of the CIP4 organization
- * 
+ *
  * Usage of this software in commercial products is subject to restrictions. For details please
  * consult info@cip4.org.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
  * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN
@@ -54,7 +54,7 @@
  */
 /*
  * JDFExampleDocTest.java
- * 
+ *
  * @author muchadie
  */
 package org.cip4.jdflib.examples;
@@ -152,10 +152,10 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 
 	/**
 	 * a simple generic main routine for a dumb console app
-	 * 
+	 *
 	 * switches: -a: actions to perform - DoAll calls all test programs -i input
 	 * JDF file -o output JDF File
-	 * 
+	 *
 	 */
 	@Test
 	public void testAll()
@@ -185,7 +185,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		}
 
 		String strDocType = action.endsWith("Message") ? ElementName.JMF // 1 = JMF document root
-		: ElementName.JDF; // 0 = JDF document root
+				: ElementName.JDF; // 0 = JDF document root
 
 		// use JDFExampleDoc as a container that holds the various example routines
 		doExample(strDocType, action, args.parameter('i'), args.parameter('o'));
@@ -193,7 +193,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 
 	/**
 	 * dispatcher to the individual example tasks
-	 * 
+	 *
 	 * @param String
 	 *            action the routine to call
 	 * @param String
@@ -293,7 +293,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		{
 			// remove whitespace only nodes before writing
 			root.eraseEmptyNodes(true);
-			//			writeRoundTrip((JDFElement) m_doc.getRoot(), UrlUtil.newExtension(outFile, null));
+			//		writeRoundTrip((JDFElement) m_doc.getRoot(), UrlUtil.newExtension(outFile, null));
 			m_doc.write2File(sm_dirTestDataTemp + outFile, 0, true);
 		}
 		else
@@ -467,7 +467,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 	// /
 	/**
 	 * Example 3: parse a JDF or PrintTalk and print the node type + ID
-	 * 
+	 *
 	 */
 
 	private int parseNodes()
@@ -558,7 +558,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 	/**
 	 * Example 5: parse a JDF and simulate processing it also add some audit
 	 * elements
-	 * 
+	 *
 	 */
 
 	private int doAudit()
@@ -604,7 +604,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 	// /
 	/**
 	 * Example 6: parse a JDF and validate the runlist
-	 * 
+	 *
 	 */
 
 	private int doValid()
@@ -779,12 +779,13 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		// set up the media
 		JDFMedia media = (JDFMedia) ripNode.appendMatchingResource(ElementName.MEDIA, JDFNode.EnumProcessUsage.AnyInput, null);
 		media.setResStatus(JDFMedia.EnumResStatus.Available, false);
+		media.setMediaType(EnumMediaType.Plate);
 		JDFResourceLink mediaLink = ripNode.getLink(media, null);
 		mediaLink.setAmount(4 * 4, new JDFAttributeMap()); // 4 seps * 8 pages
 
 		// set up the expose output media
 		JDFExposedMedia exposedMedia = (JDFExposedMedia) ripNode.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.AnyOutput, null);
-		exposedMedia.appendMedia();
+		exposedMedia.refMedia(media);
 
 		// set up one partition / page
 		VElement vExposedMediaPages = exposedMedia.addPartitions(JDFResource.EnumPartIDKey.RunIndex, new VString("0 1 2 3", null));
@@ -1090,7 +1091,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 
 	/**
 	 * create a simple stripping node for 2 user jobs in a gang job
-	 * 
+	 *
 	 */
 	@Test
 	public void testDigitalDelivery()
@@ -1112,7 +1113,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 
 	/**
 	 * create a simple stripping node for 2 user jobs in a gang job
-	 * 
+	 *
 	 */
 	@Test
 	public void testGangDigitalDelivery()
@@ -1232,7 +1233,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 
 	/**
 	 * create a simple stripping node for 2 user jobs in a gang job
-	 * 
+	 *
 	 * @return
 	 */
 	public int testMISGang() throws Exception

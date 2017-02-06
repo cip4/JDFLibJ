@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,24 +56,24 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  * JDFXYPairRangeListTest.java
  *
  * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.datatypes;
@@ -89,13 +89,13 @@ import org.cip4.jdflib.util.CPUTimer;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFNumListTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -119,7 +119,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public final void testGetIntArray() throws Exception
@@ -132,7 +132,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testSetIntArray()
@@ -149,9 +149,8 @@ public class JDFNumListTest extends JDFTestCaseBase
 		assertEquals(iArray[2], ar[2]);
 	}
 
-	// ////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testScale()
@@ -169,9 +168,8 @@ public class JDFNumListTest extends JDFTestCaseBase
 		assertEquals(2 * iArray[2], ar[2]);
 	}
 
-	// ////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testAbs()
@@ -190,7 +188,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testScaleFromCM()
@@ -203,7 +201,28 @@ public class JDFNumListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
+	 */
+	@Test
+	public final void testScalePrecision()
+	{
+		JDFShape s = new JDFShape(10, 20, 5);
+		s.scaleFromCM();
+		s.scale(1, 0);
+		assertEquals((int) s.getX(), (int) (10. * 72. / 2.54 + 0.5));
+		assertEquals((int) s.getY(), (int) (20. * 72. / 2.54 + 0.5));
+		assertEquals((int) s.getZ(), (int) (5. * 72. / 2.54 + 0.5));
+		for (int i = 0; i < 5; i++)
+		{
+			s = new JDFShape(10, 20, 5);
+			s.scaleFromCM();
+			s.scale(1, i);
+			assertTrue(s.toString().length() <= 3 * (i + 4) + 2);
+		}
+	}
+
+	/**
+	 *
 	 */
 	@Test
 	public final void testScaleFromMM()
@@ -217,7 +236,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws CloneNotSupportedException
-	 * 
+	 *
 	 */
 	@Test
 	public final void testClone() throws CloneNotSupportedException
@@ -232,7 +251,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	/**
 	 * @throws CloneNotSupportedException
 	 * @throws DataFormatException
-	 * 
+	 *
 	 */
 	@Test
 	public final void testMatches() throws CloneNotSupportedException, DataFormatException
@@ -266,7 +285,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -281,7 +300,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public final void testContainsInt() throws Exception
@@ -295,7 +314,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public final void testContainsAll() throws Exception
@@ -309,7 +328,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 	/**
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public final void testContainsList() throws Exception
@@ -323,7 +342,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testRemoveElementAt()
@@ -342,7 +361,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetDouble() throws Exception
@@ -357,7 +376,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public void testNorm() throws Exception
@@ -370,7 +389,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public void testVolume() throws Exception
@@ -383,7 +402,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public void testCompare() throws Exception
@@ -400,7 +419,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSort()
@@ -417,7 +436,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetString() throws Exception
@@ -431,7 +450,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetDoubleList() throws Exception
@@ -444,7 +463,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public void testPerformance() throws Exception
@@ -460,7 +479,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 	/**
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public void testShape() throws Exception
@@ -481,7 +500,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testShape2()

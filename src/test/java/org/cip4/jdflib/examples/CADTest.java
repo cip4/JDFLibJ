@@ -69,7 +69,7 @@
  */
 /*
  * JDFExampleDocTest.java
- * 
+ *
  * @author muchadie
  */
 package org.cip4.jdflib.examples;
@@ -103,7 +103,7 @@ import org.junit.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * tests for CAD production 
+ * tests for CAD production
  */
 public class CADTest extends JDFTestCaseBase
 {
@@ -148,7 +148,6 @@ public class CADTest extends JDFTestCaseBase
 
 	}
 
-	// /////////////////////////////////////////////////////////////////
 	/**
 	 * tests the creation of the initial shapedefproduction (one up) process
 	 * @throws Exception
@@ -162,14 +161,40 @@ public class CADTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 * tests the creation of the initial shapedefproduction (one up) process
+	 * @throws Exception
+	 */
+	@Test
+	public void testShapeDefLWD()
+	{
+		d = new JDFDoc(ElementName.JDF);
+		n = d.getJDFRoot();
+		n.setType("ShapeDefProduction", false);
+		JDFResource sdpp = n.addResource("ShapeDefProductionParams", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
+		sdpp.setDescriptiveName("Box123");
+		setSnippet(sdpp, true);
+		JDFShape shape = new JDFShape(10 * 72 / 2.54, 20 * 72 / 2.54, 30 * 72 / 2.54);
+		JDFElement shapeTemplate = (JDFElement) sdpp.appendElement("ShapeTemplate");
+		shapeTemplate.setAttribute("InnerDimensions", shape.toString());
+		shapeTemplate.setDescriptiveName("10 * 20 * 30 cm shape");
+		shapeTemplate.setAttribute("Standard", "ECMA");
+
+		shapeTemplate.appendGeneralID("L", "1440");
+		shapeTemplate.appendGeneralID("W", "720");
+		shapeTemplate.appendGeneralID("D", "1440");
+
+		writeTest(n, "resources/LWD_ShapeDefProduction.jdf", true);
+	}
+
+	/**
+	 *
 	 */
 	private void createShapeDefProduction()
 	{
 		n.setType("ShapeDefProduction", false);
 		n.setDescriptiveName("This process describes one up cad production");
 		JDFResource sdpp = n.addResource("ShapeDefProductionParams", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
-
+		setSnippet(sdpp, true);
 		int nOptions = 3;
 		JDFShape shape = new JDFShape(10 * 72 / 2.54, 20 * 72 / 2.54, 30 * 72 / 2.54);
 		JDFElement shapeTemplate = (JDFElement) sdpp.appendElement("ShapeTemplate");
@@ -241,7 +266,7 @@ public class CADTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void createDieDesign()
 	{
@@ -263,9 +288,9 @@ public class CADTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @param inOut 
+	 * @param inOut
 	 * @return the dielayout
-	 * 
+	 *
 	 */
 	private JDFDieLayout createDieLayout(EnumUsage inOut, String fileName)
 	{
@@ -280,9 +305,9 @@ public class CADTest extends JDFTestCaseBase
 	/**
 	 * note that this may be calle multiple times to describe multiple one-ups per sheet
 	 * @param inOut input or output
-	 * @param option 
-	 * @param nOptions 
-	 * @return 
+	 * @param option
+	 * @param nOptions
+	 * @return
 	 */
 	private JDFResource createShapeDef(EnumUsage inOut, int option, int nOptions)
 	{
@@ -325,14 +350,14 @@ public class CADTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);
-		d = new JDFDoc("JDF");
+		d = new JDFDoc(ElementName.JDF);
 		prepareCustomerInfo(d);
 		prepareNodeInfo(d);
 		n = d.getJDFRoot();

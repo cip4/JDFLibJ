@@ -101,6 +101,7 @@ import org.cip4.jdflib.resource.JDFHeadBandApplicationParams;
 import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.intent.JDFArtDelivery;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
@@ -960,13 +961,31 @@ class PostXJDFWalker extends BaseElementWalker
 			KElement intent = super.walk(xjdf, dummy);
 			if (intent != null)
 			{
-				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDFConstants.XJDF, 0));
+				XJDFHelper h = new XJDFHelper(intent.getDeepParent(XJDFConstants.XJDF, 0));
 				SetHelper artDelResHelper = h.getCreateResourceSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
 				ResourceHelper ph = artDelResHelper.appendPartition(null, true);
 				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
-				dp.setFromArtDelivery((JDFArtDeliveryIntent) intent.getElement(ElementName.ARTDELIVERYINTENT));
+				setFromArtDelivery(dp, (JDFArtDeliveryIntent) intent.getElement(ElementName.ARTDELIVERYINTENT));
+				intent.deleteNode();
+				return null;
 			}
 			return intent;
+		}
+
+		private void setFromArtDelivery(JDFDeliveryParams dp, JDFArtDeliveryIntent adi)
+		{
+			Vector<JDFArtDelivery> vAD = adi == null ? null : adi.getChildrenByClass(JDFArtDelivery.class, false, 0);
+			if (vAD != null)
+			{
+				for (JDFArtDelivery ad : vAD)
+				{
+					dp.setMethod(StringUtil.getNonEmpty(ad.getArtDeliveryType()));
+					KElement dropItem = dp.appendElement(ElementName.DROPITEM);
+					dropItem.copyAttribute(XJDFConstants.ItemRef, ad, "RunListRef", null, null);
+					dropItem.setAttribute(AttributeName.AMOUNT, 1, null);
+				}
+			}
+
 		}
 	}
 
@@ -1234,6 +1253,7 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				return null;
 			}
+			/*
 			KElement realRes = xjdf.getElement(name);
 			if (realRes != null)
 				return ret;
@@ -1251,6 +1271,7 @@ class PostXJDFWalker extends BaseElementWalker
 				xjdf.deleteNode();
 				return null;
 			}
+			*/
 			return ret;
 		}
 

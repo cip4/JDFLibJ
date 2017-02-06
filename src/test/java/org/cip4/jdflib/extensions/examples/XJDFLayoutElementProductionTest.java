@@ -69,6 +69,9 @@
 package org.cip4.jdflib.extensions.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoBarcodeCompParams.EnumCompensationProcess;
+import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumEncoding;
+import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumPurpose;
 import org.cip4.jdflib.auto.JDFAutoShapeElement.EnumShapeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -81,6 +84,10 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.JDFShapeElement;
+import org.cip4.jdflib.resource.process.JDFBarcodeCompParams;
+import org.cip4.jdflib.resource.process.JDFBarcodeProductionParams;
+import org.cip4.jdflib.resource.process.JDFBarcodeReproParams;
+import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFShapeDef;
@@ -110,8 +117,8 @@ public class XJDFLayoutElementProductionTest extends JDFTestCaseBase
 		ResourceHelper rhc = shC.appendPartition(null, true);
 		ResourceHelper rhrl = shRL.appendPartition(null, true);
 		KElement content = rhc.getResource();
-		content.setAttribute(AttributeName.SOURCECLIPBOX, new JDFRectangle(0, 0, 23, 31).scaleFromCM().toString());
-		content.setAttribute(AttributeName.SOURCETRIMBOX, new JDFRectangle(0, 0, 21, 29.7).scaleFromCM().toString());
+		content.setAttribute(AttributeName.SOURCECLIPBOX, new JDFRectangle(0, 0, 23, 31).scaleFromCM().getString(2));
+		content.setAttribute(AttributeName.SOURCETRIMBOX, new JDFRectangle(0.5, 0.5, 21, 30.0).scaleFromCM().getString(2));
 		content.setAttribute(AttributeName.CONTENTTYPE, "Page");
 
 		JDFRunList rl = (JDFRunList) rhrl.getResource();
@@ -120,6 +127,44 @@ public class XJDFLayoutElementProductionTest extends JDFTestCaseBase
 		xjdfHelper.cleanUp();
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "resources/LayoutElementPage.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testLoPBarcode()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "Barcode", null);
+		xjdfHelper.setTypes(JDFConstants.LAYOUTELEMENTPRODUCTION);
+		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
+		SetHelper shC = xjdfHelper.getCreateResourceSet(XJDFConstants.Content, null);
+		ResourceHelper rh = shLO.appendPartition(null, true);
+		JDFLayoutElementProductionParams lop = (JDFLayoutElementProductionParams) rh.getResource();
+		ResourceHelper rhc = shC.appendPartition(null, true);
+		KElement content = rhc.getResource();
+
+		content.setAttribute(AttributeName.CONTENTTYPE, "Page");
+		JDFBarcodeProductionParams bcp = (JDFBarcodeProductionParams) content.appendElement(ElementName.BARCODEPRODUCTIONPARAMS);
+		JDFIdentificationField idf = bcp.appendIdentificationField();
+		idf.setEncoding(EnumEncoding.Barcode);
+		idf.setEncodingDetails("EAN_13");
+		idf.setPurpose(EnumPurpose.Label);
+		idf.setPurposeDetails("ProductIdentification");
+		idf.setValue("0123456789128");
+
+		JDFBarcodeReproParams brp = bcp.appendBarcodeReproParams();
+		brp.setHeight(73.5);
+		brp.setMagnification(1);
+
+		JDFBarcodeCompParams bccp = brp.appendBarcodeCompParams();
+		bccp.setCompensationValue(10);
+		bccp.setCompensationProcess(EnumCompensationProcess.Printing);
+
+		lop.setAttribute(AttributeName.CONTENTREFS, rhc.getID());
+		xjdfHelper.cleanUp();
+		cleanSnippets(xjdfHelper);
+		writeTest(xjdfHelper, "subelements/LayoutElementBarcode.xjdf");
 	}
 
 	/**

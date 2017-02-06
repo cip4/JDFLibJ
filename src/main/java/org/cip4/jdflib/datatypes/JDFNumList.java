@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,8 +95,8 @@ import org.cip4.jdflib.util.StringUtil;
 public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTypes, Cloneable
 {
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @author rainer prosi
 	 * @date Feb 19, 2014
 	 */
@@ -115,8 +115,8 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @author rainer prosi
 	 * @date Feb 19, 2014
 	 */
@@ -135,7 +135,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -151,7 +151,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * constructor - constructs a number list with the given size and sets all values set to 0.0 Double
-	 * 
+	 *
 	 * @param size the given size
 	 */
 	public JDFNumList(final int size)
@@ -165,9 +165,9 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * constructor - constructs a number list with the given vector
-	 * 
+	 *
 	 * @param v a vector with number list objects
-	 * 
+	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 * @deprecated use typesafe constructors
 	 */
@@ -183,9 +183,9 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	/**
 	 * constructor - constructs a number list with the given String; if the sub class is of type JDFIntegerList all object will be Integer in all other cases
 	 * the object will be a Double
-	 * 
+	 *
 	 * @param sl the given String
-	 * 
+	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFNumList(final String sl) throws DataFormatException
@@ -195,8 +195,8 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @param pos
 	 * @param d
 	 */
@@ -206,7 +206,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	}
 
 	/**
-	 * 
+	 *
 	 * sets this to the value specified in string
 	 * @param string
 	 * @throws DataFormatException
@@ -251,9 +251,9 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * constructor - constructs a number list with a given JDFNumList
-	 * 
+	 *
 	 * @param nl the given number list
-	 * 
+	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFNumList(final JDFNumList nl) throws DataFormatException
@@ -267,7 +267,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	// *********************************************
 	/**
 	 * getString - returns all values whitespace separated in a String
-	 * 
+	 *
 	 * @return String
 	 * @deprecated 060418 - use toString
 	 */
@@ -278,7 +278,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	}
 
 	/**
-	 * 
+	 *
 	 * get the list of values as doubles
 	 * @return
 	 */
@@ -292,7 +292,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * toString - returns the JDFNumList as a String
-	 * 
+	 *
 	 * @return String - the JDFNumList as a String
 	 */
 	@Override
@@ -300,7 +300,8 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	{
 		final StringBuffer sb = new StringBuffer();
 
-		for (int i = 0; i < size(); i++)
+		int size = size();
+		for (int i = 0; i < size; i++)
 		{
 			if (i > 0)
 			{
@@ -360,7 +361,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * equals - compares two JDFNumList elements
-	 * 
+	 *
 	 * @return boolean - true if equal otherwise false
 	 */
 	@Override
@@ -408,7 +409,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * getElementAt - returns the element at the ith position
-	 * 
+	 *
 	 * @param i the index
 	 * @return Object - the range object at the given position, null if i is out of range
 	 */
@@ -429,7 +430,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * getElementAt - returns the element at the ith position
-	 * 
+	 *
 	 * @param i the index
 	 * @return double - the double value given position, 0.0 if out of range
 	 */
@@ -449,7 +450,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * copyNumList - returns a clone of the numList vector
-	 * 
+	 *
 	 * @return Vector - the clone of the numList vector
 	 * @deprecated use clone()
 	 */
@@ -461,9 +462,9 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * removeElementAt - removes the element at the given position
-	 * 
+	 *
 	 * @param i the position from where to remove the element
-	 * 
+	 *
 	 */
 	@Override
 	public void removeElementAt(int i)
@@ -480,7 +481,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * replaceElementAt - replaces the element at the given position with the given object
-	 * 
+	 *
 	 * @param obj the object
 	 * @param i the given position
 	 * @return boolean - true if successful otherwise false
@@ -502,7 +503,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * isValid - true if all instances are Double or Integer types
-	 * 
+	 *
 	 * @return boolean - true if all instances are Double or Integer types
 	 * @throws DataFormatException
 	 */
@@ -511,7 +512,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	/**
 	 * isValidString - true if all instances are Double or Integer types
 	 * @param st the string to check
-	 * 
+	 *
 	 * @return boolean - true if all instances are Double or Integer types
 	 */
 	public boolean isValidString(final String st)
@@ -535,8 +536,8 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * scale all values of this to points from millimeters
-	 * @return 
-	 * 
+	 * @return
+	 *
 	 */
 	public JDFNumList scaleFromMM()
 	{
@@ -545,8 +546,8 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * scale all values of this to points from centimeters
-	 * @return 
-	 * 
+	 * @return
+	 *
 	 */
 	public JDFNumList scaleFromCM()
 	{
@@ -555,8 +556,8 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * scale all values of this to points from millimeters
-	 * @return 
-	 * 
+	 * @return
+	 *
 	 */
 	public JDFNumList scaleToMM()
 	{
@@ -565,8 +566,8 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * scale all values of this to points from centimeters
-	 * @return 
-	 * 
+	 * @return
+	 *
 	 */
 	public JDFNumList scaleToCM()
 	{
@@ -575,9 +576,9 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * scale all values of this by factor
-	 * 
+	 *
 	 * @param factor
-	 * @return 
+	 * @return
 	 */
 	public JDFNumList scale(final double factor)
 	{
@@ -591,9 +592,27 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	}
 
 	/**
+	 * scale all values of this by factor
+	 *
+	 * @param factor
+	 * @return
+	 */
+	public JDFNumList scale(final double factor, int precision)
+	{
+		scale(factor);
+		for (int i = 0; i < size(); i++)
+		{
+			double scale = Math.pow(10, precision);
+			int num = (int) (0.5 + (doubleAt(i) * scale));
+			setElementAt((num) / scale, i);
+		}
+		return this;
+	}
+
+	/**
 	 * modify numlist to absolute values
 	 * @see Math#abs
-	 * @return 
+	 * @return
 	 */
 	public JDFNumList abs()
 	{
@@ -607,7 +626,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	}
 
 	/**
-	 * 
+	 *
 	 * @see java.util.Vector#clone()
 	 */
 	@Override
@@ -618,10 +637,10 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * are all values within +/- delta?
-	 * @param other 
-	 * @param delta 
+	 * @param other
+	 * @param delta
 	 * @see Math#abs
-	 * @return 
+	 * @return
 	 */
 	public boolean matches(JDFNumList other, double delta)
 	{
@@ -642,7 +661,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	}
 
 	/**
-	 * subtract l from this, 
+	 * subtract l from this,
 	 * @param l the list to subtract from this
 	 * @throws IllegalArgumentException if sizes don't match
 	 */
@@ -662,8 +681,8 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * ensure that each instance exists only once
-	 *  
-	 *  
+	 *
+	 *
 	 */
 	public void unify()
 	{
@@ -685,7 +704,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * getIntArray - returns this integer list as an int array
-	 * 
+	 *
 	 * @return int[] - the int array
 	 */
 	public int[] getIntArray()
@@ -715,8 +734,8 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * return true if this contains at least one element from l
-	 * 
-	 * @param l the list to check for 
+	 *
+	 * @param l the list to check for
 	 * @return
 	 */
 	public boolean contains(final JDFNumList l)
@@ -737,7 +756,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * return the absolute norm (sqrt of sum of values)
-	 *  
+	 *
 	 * @return
 	 */
 	public double norm()
@@ -754,7 +773,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * return the n dimensional volume (product of all values)
-	 *  
+	 *
 	 * @return
 	 */
 	public double volume()
@@ -773,9 +792,9 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * return true if this contains all elements from l
-	 * 
-	 * @param l the list to check for 
-	 * @return 
+	 *
+	 * @param l the list to check for
+	 * @return
 	 */
 	public boolean containsAll(final JDFNumList l)
 	{
