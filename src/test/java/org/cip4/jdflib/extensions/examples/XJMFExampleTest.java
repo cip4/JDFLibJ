@@ -147,6 +147,23 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testCommandResubmitQE()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ResubmitQueueEntry.getName());
+		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.URL, "http://jobserver.xjdf.org?job1");
+		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.QUEUEENTRYID, "qe1");
+		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.UPDATEMETHOD, EnumUpdateMethod.Incremental.getName());
+		command.getHeader().setAttribute(AttributeName.ID, "C1");
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "structure/commandResubmitQE.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testResponseResumeQE()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");

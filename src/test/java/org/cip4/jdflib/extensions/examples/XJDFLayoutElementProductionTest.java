@@ -226,6 +226,7 @@ public class XJDFLayoutElementProductionTest extends JDFTestCaseBase
 	@Override
 	protected void setUp() throws Exception
 	{
+		super.setUp();
 		KElement.setLongID(false);
 	}
 }

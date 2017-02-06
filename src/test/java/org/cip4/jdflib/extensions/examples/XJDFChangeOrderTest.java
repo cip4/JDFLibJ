@@ -72,15 +72,13 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.datatypes.JDFRGBColor;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
-import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.resource.process.JDFColor;
-import org.cip4.jdflib.resource.process.JDFColorantAlias;
-import org.cip4.jdflib.resource.process.JDFColorantControl;
-import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.JDFDate;
 import org.junit.Test;
 
 /**
@@ -88,39 +86,53 @@ import org.junit.Test;
  * @author rainer prosi
  *
  */
-public class XJDFResourceExampleTest extends JDFTestCaseBase
+public class XJDFChangeOrderTest extends JDFTestCaseBase
 {
 	/**
-	* tests the separationlist class
-	*
-	*/
-	@Test
-	public final void testColorantAlias()
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	protected void setUp() throws Exception
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper("RawName", null, null);
-		xjdfHelper.setTypes(EnumType.ColorSpaceConversion.getName());
-		SetHelper cch = xjdfHelper.getCreateSet(ElementName.COLORANTCONTROL, EnumUsage.Input, null);
-		ResourceHelper ccrh = cch.appendPartition(null, true);
-		JDFColorantControl colControl = (JDFColorantControl) ccrh.getResource();
+		super.setUp();
+		KElement.setLongID(false);
+	}
 
-		JDFColorantAlias ca = colControl.appendColorantAlias();
-		ca.setReplacementColorantName("Spot1");
-		ca.setAttribute("ColorantName", "Grün");
-		ca.setAttribute(AttributeName.RAWNAME, "4772FC6E");
+	/**
+	 *
+	 */
+	@Test
+	public void testAmount()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "Amount", null);
+		xjdfHelper.setTypes("Folding");
+		SetHelper sh1 = xjdfHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Output);
+		ResourceHelper rh1 = sh1.appendPartition("SheetName", "Sheet1", false);
+		rh1.setAmount(4000, null, true);
+		SetHelper sh2 = xjdfHelper.getSet(ElementName.NODEINFO, EnumUsage.Input, null);
+		sh2.deleteNode();
+		xjdfHelper.cleanUp();
+		setSnippet(xjdfHelper, true);
+		setSnippet(xjdfHelper.getAuditPool(), false);
+		writeTest(xjdfHelper, "structure/amount.xjdf");
+	}
 
-		ca = (JDFColorantAlias) colControl.copyElement(ca, null);
-		ca.setAttribute("ColorantName", "grün");
-		ca.setAttribute(AttributeName.RAWNAME, "6772FC6E");
-
-		SetHelper colh = xjdfHelper.getCreateSet(ElementName.COLOR, EnumUsage.Input, null);
-		ResourceHelper colrh = colh.appendPartition(AttributeName.SEPARATION, "Spot1", true);
-		JDFColor color = (JDFColor) colrh.getResource();
-		color.setsRGB(new JDFRGBColor(0, 1, 0));
-		color.setActualColorName("Green");
-		color.setRawName(StringUtil.setHexBinaryBytes("Green".getBytes(), -1));
-
-		cleanSnippets(xjdfHelper);
-		writeTest(xjdfHelper, "resources/ColorantAlias.xjdf");
+	/**
+	 *
+	 */
+	@Test
+	public void testSchedule()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "Amount", new VJDFAttributeMap(new JDFAttributeMap("SheetName", "Sheet1")));
+		xjdfHelper.setTypes("Folding");
+		JDFDate jdfDate = new JDFDate().setTime(13, 0, 0);
+		SetHelper sh2 = xjdfHelper.getSet(ElementName.NODEINFO, EnumUsage.Input, null);
+		jdfDate.addOffset(0, 0, 4, 0);
+		sh2.getCreatePartition("SheetName", "Sheet1", true).getResource().setAttribute(AttributeName.START, jdfDate.getDateTimeISO());
+		xjdfHelper.cleanUp();
+		setSnippet(xjdfHelper, true);
+		setSnippet(xjdfHelper.getAuditPool(), false);
+		writeTest(xjdfHelper, "structure/schedule.xjdf");
 	}
 
 }
