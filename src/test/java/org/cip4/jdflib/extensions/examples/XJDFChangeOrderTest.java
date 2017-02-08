@@ -69,17 +69,29 @@
 package org.cip4.jdflib.extensions.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoVarnishingParams.EnumVarnishMethod;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFVarnishingParams;
+import org.cip4.jdflib.resource.process.JDFColor;
+import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.prepress.JDFInk;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.Test;
 
@@ -116,7 +128,7 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
-		writeTest(xjdfHelper, "structure/amount.xjdf");
+		writeTest(xjdfHelper, "structure/co_amount.xjdf");
 	}
 
 	/**
@@ -134,7 +146,154 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
-		writeTest(xjdfHelper, "structure/schedule.xjdf");
+		writeTest(xjdfHelper, "structure/co_schedule.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAddColor()
+	{
+		JDFAttributeMap map = new JDFAttributeMap("SheetName", "Sheet1");
+		XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "AddColor", new VJDFAttributeMap(map));
+		map.put("Side", "Front");
+		map.put("Separation", "Spot1");
+
+		xjdfHelper.setTypes(EnumType.ConventionalPrinting.getName());
+
+		SetHelper sh2 = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, null);
+		ResourceHelper rh2 = sh2.appendPartition(null, true);
+		JDFMedia m = (JDFMedia) rh2.getResource();
+		m.setMediaType(EnumMediaType.Plate);
+
+		SetHelper sh1 = xjdfHelper.getCreateSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input, null);
+		ResourceHelper rh1 = sh1.appendPartition(map, true);
+		JDFExposedMedia xm = (JDFExposedMedia) rh1.getResource();
+		xm.setAttribute("MediaRef", rh2.getRoot().appendAnchor(null));
+
+		SetHelper sh3 = xjdfHelper.getCreateSet(ElementName.COLOR, EnumUsage.Input, null);
+		ResourceHelper rh3 = sh3.appendPartition("Separation", "Spot1", true);
+		JDFColor c = (JDFColor) rh3.getResource();
+		c.setActualColorName("Acme ColorBook 42");
+		c.setCMYK(new JDFCMYKColor(0.2, 0.3, 0.4, 0.1));
+
+		SetHelper sh4 = xjdfHelper.getCreateSet(ElementName.INK, EnumUsage.Input, null);
+		ResourceHelper rh4 = sh4.appendPartition("Separation", "Spot1", true);
+		JDFInk ink = (JDFInk) rh4.getResource();
+		rh4.setBrand("Acme Ink 42");
+		ink.setAttribute(XJDFConstants.InkType, "Ink");
+
+		SetHelper sh5 = xjdfHelper.getCreateSet(ElementName.COLORANTCONTROL, EnumUsage.Input, null);
+		JDFAttributeMap map2 = map.clone();
+		map2.remove(AttributeName.SEPARATION);
+		ResourceHelper rh5 = sh5.appendPartition(map2, true);
+		JDFColorantControl cc = (JDFColorantControl) rh5.getResource();
+		VString seps = new VString(JDFSeparationList.SEPARATIONS_CMYK);
+		seps.add("Spot1");
+		cc.setAttribute(ElementName.COLORANTPARAMS, seps, null);
+		cc.setAttribute(ElementName.COLORANTORDER, seps, null);
+
+		xjdfHelper.cleanUp();
+		setSnippet(xjdfHelper, true);
+		setSnippet(xjdfHelper.getAuditPool(), false);
+		writeTest(xjdfHelper, "structure/co_color.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testInlineVarnish()
+	{
+		JDFAttributeMap map = new JDFAttributeMap("SheetName", "Sheet1");
+		XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "InlineVarnish", new VJDFAttributeMap(map));
+		map.put("Side", "Front");
+		map.put("Separation", "Varnish");
+
+		xjdfHelper.setTypes("ConventionalPrinting Varnishing");
+
+		SetHelper sh2 = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, null);
+		ResourceHelper rh2 = sh2.appendPartition(null, true);
+		JDFMedia m = (JDFMedia) rh2.getResource();
+		m.setMediaType(EnumMediaType.Plate);
+
+		SetHelper sh1 = xjdfHelper.getCreateSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input, null);
+		ResourceHelper rh1 = sh1.appendPartition(map, true);
+		JDFExposedMedia xm = (JDFExposedMedia) rh1.getResource();
+		xm.setAttribute("MediaRef", rh2.getRoot().appendAnchor(null));
+
+		SetHelper sh5 = xjdfHelper.getCreateSet(ElementName.VARNISHINGPARAMS, EnumUsage.Input, null);
+		JDFAttributeMap map2 = map.clone();
+		map2.remove(AttributeName.SEPARATION);
+
+		ResourceHelper rh5 = sh5.appendPartition(map2, true);
+		JDFVarnishingParams vp = (JDFVarnishingParams) rh5.getResource();
+		vp.setVarnishMethod(EnumVarnishMethod.Plate);
+
+		SetHelper sh4 = xjdfHelper.getCreateSet(ElementName.INK, EnumUsage.Input, null);
+		ResourceHelper rh4 = sh4.appendPartition("Separation", "Varnish", true);
+		JDFInk ink = (JDFInk) rh4.getResource();
+		rh4.setBrand("Acme Varnish");
+		ink.setAttribute(XJDFConstants.InkType, "Varnish");
+
+		xjdfHelper.cleanUp();
+		setSnippet(xjdfHelper, true);
+		setSnippet(xjdfHelper.getAuditPool(), false);
+		writeTest(xjdfHelper, "structure/co_plateVarnish.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAddVarnish()
+	{
+		JDFAttributeMap map = new JDFAttributeMap("SheetName", "Sheet1");
+		XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "AddVarnish", new VJDFAttributeMap(map));
+		map.put("Side", "Front");
+		map.put("Separation", "Var");
+
+		xjdfHelper.setTypes(EnumType.Varnishing.getName());
+
+		SetHelper sh2 = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, null);
+		ResourceHelper rh2 = sh2.appendPartition(null, true);
+		JDFMedia m = (JDFMedia) rh2.getResource();
+		m.setMediaType(EnumMediaType.Blanket);
+
+		SetHelper sh1 = xjdfHelper.getCreateSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input, null);
+		ResourceHelper rh1 = sh1.appendPartition(map, true);
+		JDFExposedMedia xm = (JDFExposedMedia) rh1.getResource();
+		xm.setAttribute("MediaRef", rh2.getRoot().appendAnchor(null));
+
+		SetHelper sh3 = xjdfHelper.getCreateSet(ElementName.COLOR, EnumUsage.Input, null);
+		ResourceHelper rh3 = sh3.appendPartition("Separation", "Varnish", true);
+		JDFColor c = (JDFColor) rh3.getResource();
+		c.setActualColorName("Acme Gloss Varnish");
+
+		SetHelper sh4 = xjdfHelper.getCreateSet(ElementName.INK, EnumUsage.Input, null);
+		ResourceHelper rh4 = sh4.appendPartition("Separation", "Varnish", true);
+		JDFInk ink = (JDFInk) rh4.getResource();
+		rh4.setBrand("Acme Gloss Varnish");
+		ink.setAttribute(XJDFConstants.InkType, "Gloss Varnish");
+
+		SetHelper sh5 = xjdfHelper.getCreateSet(ElementName.VARNISHINGPARAMS, EnumUsage.Input, null);
+		JDFAttributeMap map2 = map.clone();
+		map2.remove(AttributeName.SEPARATION);
+
+		ResourceHelper rh5 = sh5.appendPartition(map2, true);
+		JDFVarnishingParams vp = (JDFVarnishingParams) rh5.getResource();
+		vp.setVarnishMethod(EnumVarnishMethod.Blanket);
+
+		SetHelper sh6 = xjdfHelper.getCreateSet(ElementName.DEVICE, EnumUsage.Input, null);
+		ResourceHelper rh6 = sh6.getCreatePartition(map2, true);
+		rh6.setAttribute(AttributeName.DESCRIPTIVENAME, "Offline Acme varnishiner");
+		rh6.getResource().setAttribute(AttributeName.DEVICEID, "Var_1");
+
+		xjdfHelper.cleanUp();
+		setSnippet(xjdfHelper, true);
+		setSnippet(xjdfHelper.getAuditPool(), false);
+		writeTest(xjdfHelper, "structure/co_varnish.xjdf");
 	}
 
 	/**
@@ -154,7 +313,7 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
-		writeTest(xjdfHelper, "structure/device.xjdf");
+		writeTest(xjdfHelper, "structure/co_device.xjdf");
 	}
 
 	/**
@@ -167,10 +326,11 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 		xjdfHelper.setTypes("ConventionalPrinting");
 		SetHelper sh1 = xjdfHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Input);
 		ResourceHelper rh1 = sh1.appendPartition("SheetName", "Sheet1", true);
-		SetHelper sh2 = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
-		ResourceHelper rh2 = sh2.appendPartition("SheetName", "Sheet1", true);
+		SetHelper sh2 = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, null);
+		ResourceHelper rh2 = sh2.appendPartition(null, true);
 		JDFMedia m = (JDFMedia) rh2.getResource();
 		m.setWeight(120);
+		m.setMediaType(EnumMediaType.Paper);
 		JDFComponent c = (JDFComponent) rh1.getResource();
 		c.setAttribute("MediaRef", rh2.getRoot().appendAnchor(null));
 		rh1.setAmount(4000, null, true);
@@ -179,7 +339,7 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
-		writeTest(xjdfHelper, "structure/paper.xjdf");
+		writeTest(xjdfHelper, "structure/co_paper.xjdf");
 	}
 
 }

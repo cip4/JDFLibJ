@@ -937,6 +937,7 @@ public abstract class JDFAutoMedia extends JDFResource
 
 		/**  */
 		public static final EnumMediaType CorrugatedBoard = new EnumMediaType("CorrugatedBoard");
+		public static final EnumMediaType Blanket = new EnumMediaType("Blanket");
 		/**  */
 		public static final EnumMediaType Disc = new EnumMediaType("Disc");
 		/**  */
@@ -2288,7 +2289,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	}
 
 	/** (25) getCreateColor
-	 * 
+	 *
 	 * @return JDFColor the element
 	 */
 	public JDFColor getCreateColor()
@@ -2325,7 +2326,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	}
 
 	/** (25) getCreateColorMeasurementConditions
-	 * 
+	 *
 	 * @return JDFColorMeasurementConditions the element
 	 */
 	public JDFColorMeasurementConditions getCreateColorMeasurementConditions()
@@ -2362,7 +2363,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	}
 
 	/** (25) getCreateMediaLayers
-	 * 
+	 *
 	 * @return JDFMediaLayers the element
 	 */
 	public JDFMediaLayers getCreateMediaLayers()
@@ -2390,7 +2391,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	}
 
 	/** (25) getCreateHoleList
-	 * 
+	 *
 	 * @return JDFHoleList the element
 	 */
 	public JDFHoleList getCreateHoleList()
@@ -2409,7 +2410,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	}
 
 	/** (26) getCreateTabDimensions
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFTabDimensions the element
 	 */
@@ -2430,7 +2431,7 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	/**
 	 * Get all TabDimensions from the current element
-	 * 
+	 *
 	 * @return Collection<JDFTabDimensions>, null if none are available
 	 */
 	public Collection<JDFTabDimensions> getAllTabDimensions()
@@ -2448,7 +2449,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	}
 
 	/** (26) getCreateContact
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
@@ -2469,7 +2470,7 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	/**
 	 * Get all Contact from the current element
-	 * 
+	 *
 	 * @return Collection<JDFContact>, null if none are available
 	 */
 	public Collection<JDFContact> getAllContact()
@@ -2497,7 +2498,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	}
 
 	/** (26) getCreateIdentificationField
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element
 	 */
@@ -2520,7 +2521,7 @@ public abstract class JDFAutoMedia extends JDFResource
 
 	/**
 	 * Get all IdentificationField from the current element
-	 * 
+	 *
 	 * @return Collection<JDFIdentificationField>, null if none are available
 	 */
 	public Collection<JDFIdentificationField> getAllIdentificationField()
