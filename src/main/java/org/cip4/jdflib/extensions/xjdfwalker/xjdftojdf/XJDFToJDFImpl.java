@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -67,7 +67,7 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
@@ -103,13 +103,12 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFComponent;
-import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UnitParser;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class XJDFToJDFImpl extends PackageElementWalker
 {
@@ -184,11 +183,11 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	boolean convertUnits;
 	/**
-	 * 
+	 *
 	 */
 	private EnumVersion version;
 	private boolean bConvertTilde;
@@ -197,7 +196,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 
 	/**
 	 * @param template the jdfdoc to fill this into
-	 * 
+	 *
 	 */
 	public XJDFToJDFImpl(final JDFDoc template)
 	{
@@ -270,7 +269,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void convertXJMF()
 	{
@@ -279,7 +278,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param _xjdf
 	 * @return
 	 */
@@ -302,7 +301,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param xjdf
 	 * @return
 	 */
@@ -403,7 +402,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 
 	/**
 	 * make sure we have a product in case we have multiple nodes
-	 *  
+	 *
 	 * @return
 	 */
 	protected JDFNode createProductRoot()
@@ -437,28 +436,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	{
 		if (convertUnits)
 		{
-			final JDFAttributeMap map = element.getAttributeMap();
-			final Iterator<String> keyIt = map.getKeyIterator();
-			final UnitParser up = new UnitParser();
-			while (keyIt.hasNext())
-			{
-				final String key = keyIt.next();
-				final String val = map.get(key);
-				final String newVal = up.extractUnits(val);
-				if (!val.equals(newVal))
-				{
-					element.setAttribute(key, newVal);
-				}
-				//update dates in case they were specified in milliseconds
-				if ((element instanceof JDFElement) && EnumAttributeType.dateTime.equals(((JDFElement) element).getAttributeInfo().getAttributeType(key)))
-				{
-					JDFDate d = JDFDate.createDate(val);
-					if (d != null && !val.equals(d.getDateTimeISO()))
-					{
-						element.setAttribute(key, d.getDateTimeISO());
-					}
-				}
-			}
+			new UnitParser().convertUnits(element);
 		}
 	}
 
@@ -557,9 +535,9 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @param e
-	 * 
+	 *
 	 */
 	protected void attributesToSpan(final KElement e)
 	{
@@ -577,8 +555,8 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @param e
 	 * @param name
 	 * @return the new span element
@@ -587,7 +565,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	{
 		final KElement subElem = e.appendElement(name);
 		subElem.init();
-		subElem.setAttribute("Actual", e.getAttribute(name));
+		subElem.setAttribute(AttributeName.ACTUAL, e.getAttribute(name));
 		convertUnits(subElem);
 		convertTilde(subElem);
 		e.removeAttribute(name);
@@ -670,7 +648,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isHeuristicLink()
