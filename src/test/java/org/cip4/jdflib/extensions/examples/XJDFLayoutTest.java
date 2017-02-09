@@ -123,6 +123,56 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testIDPBooklet()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Simplex", null);
+		xjdfHelper.setTypes("Stripping");
+		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		ResourceHelper rh = shLO.appendPartition(null, true);
+		JDFLayout lo = (JDFLayout) rh.getResource();
+
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndTurn.getName());
+		lo.setAutomated(true);
+		lo.appendElement(ElementName.POSITION);
+
+		SetHelper shBS = xjdfHelper.getCreateResourceSet(ElementName.BINDERYSIGNATURE, null);
+		ResourceHelper rhBS = shBS.appendPartition(null, true);
+		JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
+		bs.setFoldCatalog("F4-1");
+
+		SetHelper shAss = xjdfHelper.getCreateResourceSet(ElementName.ASSEMBLY, null);
+		ResourceHelper rhAss = shAss.appendPartition(null, true);
+		JDFAssembly ass = (JDFAssembly) rhAss.getResource();
+		ass.setOrder(EnumOrder.Collecting);
+		xjdfHelper.cleanUp();
+
+		cleanSnippets(xjdfHelper);
+		writeTest(xjdfHelper, "processes/IDPBooklet.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testIDPCalendar()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Simplex", null);
+		xjdfHelper.setTypes("Stripping");
+		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		ResourceHelper rh = shLO.appendPartition(null, true);
+		JDFLayout lo = (JDFLayout) rh.getResource();
+		xjdfHelper.cleanUp();
+		setSnippet(lo, true);
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndTumble.getName());
+		lo.setAutomated(true);
+		lo.appendElement(ElementName.POSITION);
+		writeTest(xjdfHelper, "processes/LayoutDuplexTopBind.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testTiling()
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Tiling", null);
