@@ -87,7 +87,7 @@ import org.junit.Test;
 
 /**
  * @author Rainer
- * 
+ *
  *         To change the template for this generated type comment go to Window - Preferences - Java - Code Generation - Code and Comments
  */
 public class HotFolderTest extends JDFTestCaseBase
@@ -105,8 +105,8 @@ public class HotFolderTest extends JDFTestCaseBase
 		}
 
 		/**
-		 *  
-		 * 
+		 *
+		 *
 		 * @see org.cip4.jdflib.util.HotFolderListener#hotFile(java.io.File)
 		 */
 		@Override
@@ -115,8 +115,7 @@ public class HotFolderTest extends JDFTestCaseBase
 			boolean zapp = false;
 			if (bZapp)
 				zapp = hotFile.delete();
-			int currentRunning = hf.taskQueue == null ? 0 : hf.taskQueue.getCurrentRunning();
-			log.info(hotFile.getPath() + "," + bZapp + "," + zapp + " " + hf.getMaxConcurrent() + " " + currentRunning);
+			log.info(hotFile.getPath() + "," + bZapp + "," + zapp + " " + hf.getMaxConcurrent());
 			return zapp;
 		}
 
@@ -173,20 +172,24 @@ public class HotFolderTest extends JDFTestCaseBase
 	@Test
 	public void testRestartManyConcurrent() throws Exception
 	{
-		hf = new HotFolder(theHF, null, new MyListener(true));
-		hf.setMaxConcurrent(3);
-		hf.restart();
-		int n0 = Thread.activeCount();
-		for (int i = 0; i < 10; i++)
+		for (int j = 0; j < 10; j++)
 		{
-			assertEquals("Loop " + i, Thread.activeCount(), n0);
+			Thread.sleep(10);
+			hf = new HotFolder(theHF, null, new MyListener(true));
+			hf.setMaxConcurrent(3);
 			hf.restart();
-		}
-		for (int i = 0; i < 3; i++)
-		{
-			Thread.sleep(1);
-			hf.stop();
-			assertEquals("Loop " + i, Thread.activeCount(), n0 - 2);
+			int n0 = Thread.activeCount();
+			for (int i = 0; i < 10; i++)
+			{
+				assertEquals("Loop " + i, Thread.activeCount(), n0);
+				hf.restart();
+			}
+			for (int i = 0; i < 3; i++)
+			{
+				Thread.sleep(10);
+				hf.stop();
+				assertEquals("Loop " + i, n0 - 1, Thread.activeCount());
+			}
 		}
 	}
 
@@ -480,8 +483,8 @@ public class HotFolderTest extends JDFTestCaseBase
 	}
 
 	/***
-	 *  
-	 * 
+	 *
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override

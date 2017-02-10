@@ -1904,7 +1904,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	@Test
 	public void testGetPartStatusImplicit()
 	{
-		final JDFNode createJDF = new JDFDoc("JDF").getJDFRoot();
+		final JDFNode createJDF = new JDFDoc(ElementName.JDF).getJDFRoot();
 		createJDF.getCreateResourcePool();
 		final JDFNodeInfo createNodeInfo = createJDF.getCreateNodeInfo();
 		createNodeInfo.setNodeStatus(EnumNodeStatus.Waiting);
@@ -2053,6 +2053,24 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetPartStatusPartVersion()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFNodeInfo ni = n.getCreateNodeInfo();
+		ni.setStatus(EnumNodeStatus.Waiting);
+		ni.setPartUsage(EnumPartUsage.Implicit);
+		n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "p1"), EnumNodeStatus.Completed, null);
+		n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "p2"), EnumNodeStatus.Completed, null);
+		assertEquals(EnumNodeStatus.Completed, n.getPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "p1 p2"), -1));
+		assertEquals(EnumNodeStatus.Completed, n.getPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "p1 p2"), 0));
+		assertEquals(EnumNodeStatus.Completed, n.getPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "p1 p2"), 1));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetPartStatusMinMax()
 	{
 		for (int i = -1; i < 2; i += 2)
@@ -2092,8 +2110,6 @@ public class JDFNodeTest extends JDFTestCaseBase
 			assertEquals("ni side back  mixed", minmax, node.getPartStatus(m5, i));
 		}
 	}
-
-	// ////////////////////////////////////////////////////////
 
 	/**
 	 *

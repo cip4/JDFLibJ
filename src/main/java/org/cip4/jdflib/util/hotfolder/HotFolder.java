@@ -112,6 +112,7 @@ public class HotFolder implements Runnable
 	public int stabilizeTime = defaultStabilizeTime; // time between reads in milliseconds - also minimum length of non-modification
 	private boolean interrupt = false; // if set to true, the watcher interupted and the thread ends
 	private static int nThread = 0;
+	private int maxConcurrent;
 
 	/**
 	 * @param maxConcurrent the maxConcurrent to set
@@ -122,28 +123,11 @@ public class HotFolder implements Runnable
 		{
 			maxConcurrent = 42;
 		}
-		if (maxConcurrent != getMaxConcurrent())
+		else if (maxConcurrent < 1)
 		{
-			if (maxConcurrent == 0)
-			{
-				if (taskQueue != null)
-				{
-					taskQueue.shutDown();
-					taskQueue = null;
-				}
-			}
-			else
-			{
-				if (taskQueue != null)
-				{
-					taskQueue.setMaxParallel(maxConcurrent);
-				}
-				else
-				{
-					taskQueue = MultiTaskQueue.getCreateQueue(getThreadName(false), maxConcurrent);
-				}
-			}
+			maxConcurrent = 1;
 		}
+		this.maxConcurrent = maxConcurrent;
 	}
 
 	/**
@@ -152,7 +136,7 @@ public class HotFolder implements Runnable
 	 */
 	public int getMaxConcurrent()
 	{
-		return taskQueue == null ? 0 : taskQueue.getMaxParallel();
+		return maxConcurrent;
 	}
 
 	private final File dir;
@@ -202,7 +186,6 @@ public class HotFolder implements Runnable
 	private final Vector<FileTime> lastFileTime;
 	protected final Vector<ExtensionListener> hfl;
 	private Thread runThread;
-	MultiTaskQueue taskQueue;
 	final Set<File> hfRunning;
 	private final Log log;
 
@@ -242,7 +225,7 @@ public class HotFolder implements Runnable
 	public HotFolder(final File _dir, final String ext, final HotFolderListener _hfl)
 	{
 		log = LogFactory.getLog(getClass());
-		taskQueue = null;
+		maxConcurrent = 1;
 		dir = _dir;
 		dir.mkdirs();
 		dir.setWritable(true);
@@ -278,11 +261,6 @@ public class HotFolder implements Runnable
 		interrupt = false;
 		log.info("Starting hotfolder: " + threadName);
 		lastModified = -1;
-		if (taskQueue != null)
-		{
-			taskQueue = MultiTaskQueue.getCreateQueue(threadName, taskQueue.getMaxParallel());
-
-		}
 		runThread.start();
 		hfRunning.clear();
 	}
@@ -309,13 +287,13 @@ public class HotFolder implements Runnable
 	public synchronized void stop()
 	{
 		interrupt = true;
-		if (taskQueue != null)
-		{
-			taskQueue.shutDown();
-		}
 		if (runThread != null)
 		{
 			String name = runThread.getName();
+			if (maxConcurrent > 1)
+			{
+				MultiTaskQueue.shutDown(name);
+			}
 			log.info("Stopping hot folder: " + name);
 			ThreadUtil.notifyAll(runThread);
 			log.info("Finished stopping hot folder: " + name);
@@ -435,18 +413,14 @@ public class HotFolder implements Runnable
 			if (fileJ.exists())
 			{
 				HotFileRunner runner = new HotFileRunner(fileJ);
-				if (taskQueue == null)
+				if (maxConcurrent == 1)
 				{
 					runner.run();
 				}
 				else
 				{
-					boolean queued = taskQueue.queue(runner);
-					if (!queued)
-					{
-						taskQueue = MultiTaskQueue.getCreateQueue(getThreadName(false), taskQueue.getMaxParallel());
-						taskQueue.queue(runner);
-					}
+					MultiTaskQueue taskQueue = MultiTaskQueue.getCreateQueue(getThreadName(false), maxConcurrent);
+					found = taskQueue.queue(runner);
 				}
 			}
 			else
