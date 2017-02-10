@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.span.JDFSpanBase;
 
 /**
  * class to parse units from strings
@@ -112,12 +113,12 @@ public class UnitParser
 	{
 		final JDFAttributeMap map = element.getAttributeMap();
 		final Iterator<String> keyIt = map.getKeyIterator();
-
+		boolean elemSpan = (element instanceof JDFSpanBase) && isUnit(element.getLocalName());
 		while (keyIt.hasNext())
 		{
 			final String key = keyIt.next();
 
-			if (!isUnit(key))
+			if (!elemSpan && !isUnit(key))
 			{
 				continue;
 			}

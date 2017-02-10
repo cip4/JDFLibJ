@@ -71,8 +71,10 @@
 package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
@@ -169,6 +171,28 @@ public class UnitParserTest extends JDFTestCaseBase
 		unitParser.convertUnits(li);
 		assertEquals(li.getAttribute("Dimensions"), "283 142");
 		assertEquals(li.getAttribute("FinishedDimensions"), "283 142 0");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSpanDataType()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+
+		KElement li = n.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
+		KElement d = li.appendElement("Dimensions");
+		d.setAttribute(AttributeName.ACTUAL, "10cm 5cm");
+		KElement fd = li.appendElement("FinishedDimensions");
+		fd.setAttribute(AttributeName.ACTUAL, "10cm 5cm 0cm");
+		fd.setAttribute(AttributeName.FACECELLS, "10cm 5cm 0cm");
+		unitParser.setPrecision(0);
+		unitParser.convertUnits(d);
+		unitParser.convertUnits(fd);
+		assertEquals(li.getXPathAttribute("Dimensions/@Actual", null), "283 142");
+		assertEquals(li.getXPathAttribute("FinishedDimensions/@Actual", null), "283 142 0");
+		assertEquals(li.getXPathAttribute("FinishedDimensions/@FaceCells", null), "283 142 0");
 	}
 
 	/**
