@@ -165,7 +165,7 @@ public class WebTest extends JDFTestCaseBase
 		XMLDoc xjdfDoc = writeTest(doc.getRoot(), "resources/WebgrowthPartition.jdf", true);
 		XJDFHelper h = XJDFHelper.getHelper(xjdfDoc);
 		SetHelper sh = h.getSet(ElementName.LAYOUTSHIFT, 0);
-		setSnippet(sh, true);
+		//		setSnippet(sh, true);
 		setSnippet(sh.getPartition(1), false);
 		setSnippet(sh.getPartition(2), false);
 		writeTest(h, "resources/WebgrowthPartition.xjdf");
