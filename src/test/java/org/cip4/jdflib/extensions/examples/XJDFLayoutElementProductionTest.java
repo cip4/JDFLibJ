@@ -191,7 +191,7 @@ public class XJDFLayoutElementProductionTest extends JDFTestCaseBase
 		lop.setAttribute(XJDFConstants.ShapeDefRef, rhc.getID());
 		xjdfHelper.cleanUp();
 		cleanSnippets(xjdfHelper);
-		writeTest(xjdfHelper, "resources/LayoutElementShape.xjdf");
+		writeTest(xjdfHelper, "resources/LayoutElementLabel.xjdf");
 	}
 
 	/**
