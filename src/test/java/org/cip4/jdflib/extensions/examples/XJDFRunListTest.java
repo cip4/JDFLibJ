@@ -131,7 +131,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 		fs.setMimeType(UrlUtil.APPLICATION_PDF);
 		xjdfHelper.cleanUp();
 		setSnippet(ruli, true);
-		writeTest(xjdfHelper, "appendix/FileFormat.xjdf");
+		writeTest(xjdfHelper, "ap_generatingstrings/FileFormat.xjdf");
 	}
 
 	/**
