@@ -79,7 +79,6 @@ import org.cip4.jdflib.elementwalker.URLExtractor;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -162,7 +161,6 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 
 	File theHFDir;
 	File tmpHFDir;
-	StorageHotFolder hf;
 
 	static int n = 0;
 
@@ -183,17 +181,8 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		tmpHFDir = new File(sm_dirTestDataTemp + File.separator + "StHFTemp" + n);
 		FileUtil.deleteAll(tmpHFDir);
 
+		log.info("Setting up: " + theHFDir);
 		HotFolder.setDefaultStabilizeTime(100);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
-	 */
-	@Override
-	@After
-	public synchronized void tearDown() throws Exception
-	{
-		hf.stop();
 	}
 
 	/**
@@ -204,13 +193,14 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testSimple() throws IOException
 	{
-		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		final File file = new File(theHFDir + File.separator + "f1.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
 		ThreadUtil.sleep(2000);
 		assertFalse(file.exists());
 		assertEquals(tmpHFDir.listFiles().length, 0, 0);
+		hf.stop();
 	}
 
 	/**
@@ -227,7 +217,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		String hfPath = theHFDir.getAbsolutePath();
 		File content = new File(hfPath + "/dummy/boo.pdf");
 		FileUtil.createNewFile(content);
-		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new ExtractListener());
+		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new ExtractListener());
 		d.write2File(hfPath + "/dummy.jdf", 2, false);
 		File file = new File(hfPath + "/dummy.jdf");
 		assertTrue(file.exists());
@@ -240,6 +230,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		assertFalse(file.exists());
 		assertFalse(content.exists());
 		assertEquals(tmpHFDir.listFiles().length, 0, 0);
+		hf.stop();
 	}
 
 	/**
@@ -256,7 +247,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		String hfPath = theHFDir.getAbsolutePath();
 		File content = new File(hfPath + "/dummy space/boo.pdf");
 		FileUtil.createNewFile(content);
-		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new ExtractListener());
+		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new ExtractListener());
 		hf.setOKStorage(new File("OK"));
 		d.write2File(hfPath + "/dummy space.jdf", 2, false);
 		File file = new File(hfPath + "/dummy space.jdf");
@@ -272,6 +263,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		File file2 = new File(hfPath + "/OK/dummy space");
 		assertTrue(file2.isDirectory());
 		assertEquals(tmpHFDir.listFiles().length, 0, 0);
+		hf.stop();
 	}
 
 	/**
@@ -282,13 +274,14 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testNonAscii() throws IOException
 	{
-		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		final File file = new File(theHFDir + File.separator + "42 äöü €.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
 		ThreadUtil.sleep(2000);
 		assertFalse(file.exists());
 		assertEquals(tmpHFDir.listFiles().length, 0, 0);
+		hf.stop();
 	}
 
 	/**
@@ -299,7 +292,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testAddListener() throws IOException
 	{
-		hf = new StorageHotFolder(theHFDir, tmpHFDir, ".xml", new CountListener());
+		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, ".xml", new CountListener());
 		final File file = new File(theHFDir + File.separator + "f1.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
@@ -308,6 +301,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		hf.addListener(new CountListener(), ".txt");
 		ThreadUtil.sleep(2000);
 		assertFalse(file.exists());
+		hf.stop();
 	}
 
 	/**
@@ -318,7 +312,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testOKError() throws Exception
 	{
-		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.setStabilizeTime(100);
 		File error = new File("error");
 		hf.setErrorStorage(error);
@@ -377,7 +371,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testOKErrorMulti() throws Exception
 	{
-		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.setMaxConcurrent(5);
 		hf.setStabilizeTime(100);
 		File error = new File("error");
@@ -437,7 +431,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testOKErrorMultiAux() throws Exception
 	{
-		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.setMaxConcurrent(5);
 		hf.setStabilizeTime(100);
 		File error = new File("error");
@@ -503,7 +497,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testOKErrorNonAscii() throws Exception
 	{
-		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		File error = new File("error");
 		hf.setErrorStorage(error);
 		File ok = new File("ok");
@@ -522,5 +516,6 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		assertEquals(ok.listFiles().length, 2, 1);
 		assertEquals(tmpHFDir.listFiles().length, 0, 1);
 		assertEquals(error.listFiles().length, 2, 1);
+		hf.stop();
 	}
 }
