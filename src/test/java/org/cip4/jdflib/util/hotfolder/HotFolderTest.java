@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -121,12 +121,15 @@ public class HotFolderTest extends JDFTestCaseBase
 
 	}
 
+	static int n = 1000;
+
 	@Before
 	@Override
-	public void setUp() throws Exception
+	public synchronized void setUp() throws Exception
 	{
+		n++;
 		super.setUp();
-		theHF = new File(sm_dirTestDataTemp + File.separator + "HFTest");
+		theHF = new File(sm_dirTestDataTemp + File.separator + "HFTest" + n);
 		theHF.mkdirs();
 		HotFolder.setDefaultStabilizeTime(200);
 	}
@@ -135,7 +138,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testStartNull() throws Exception
+	public synchronized void testStartNull() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(false));
 		final File file = new File(theHF + File.separator + "f1.txt");
@@ -149,12 +152,13 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testRestartMany() throws Exception
+	public synchronized void testRestartMany() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
 		int n0 = Thread.activeCount();
 		for (int i = 0; i < 10; i++)
 		{
+			Thread.sleep(1);
 			assertEquals("Loop " + i, Thread.activeCount(), n0);
 			hf.restart();
 		}
@@ -170,7 +174,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testRestartManyConcurrent() throws Exception
+	public synchronized void testRestartManyConcurrent() throws Exception
 	{
 		for (int j = 0; j < 10; j++)
 		{
@@ -181,6 +185,7 @@ public class HotFolderTest extends JDFTestCaseBase
 			int n0 = Thread.activeCount();
 			for (int i = 0; i < 10; i++)
 			{
+				Thread.sleep(10);
 				assertEquals("Loop " + i, Thread.activeCount(), n0);
 				hf.restart();
 			}
@@ -197,7 +202,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testStopStart() throws Exception
+	public synchronized void testStopStart() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
 		final File file = new File(theHF + File.separator + "f1.txt");
@@ -232,7 +237,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testStopStartMulti() throws Exception
+	public synchronized void testStopStartMulti() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
 		hf.setMaxConcurrent(5);
@@ -268,7 +273,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testExtension() throws Exception
+	public synchronized void testExtension() throws Exception
 	{
 		for (int conc = 0; conc < 5; conc += 4)
 		{
@@ -316,7 +321,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testDir() throws Exception
+	public synchronized void testDir() throws Exception
 	{
 		hf = new HotFolder(theHF, ".txt", new MyListener(true));
 		hf.addListener(new MyListener(true), "xml");
@@ -342,7 +347,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testLog() throws Exception
+	public synchronized void testLog() throws Exception
 	{
 		hf = new HotFolder(theHF, ".txt", new MyListener(true));
 		File backup = new File(sm_dirTestDataTemp + "backup/hfbackup.keep");
@@ -368,7 +373,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testLogMulti() throws Exception
+	public synchronized void testLogMulti() throws Exception
 	{
 		hf = new HotFolder(theHF, ".txt", new MyListener(true));
 		hf.setMaxConcurrent(5);
@@ -395,7 +400,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testStartNullDelete() throws Exception
+	public synchronized void testStartNullDelete() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
 		final File file = new File(theHF + File.separator + "f1.txt");
@@ -414,7 +419,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testBig() throws Exception
+	public synchronized void testBig() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
 		final File file = new File(theHF + File.separator + "f1Big.txt");
@@ -444,7 +449,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testBigConcurrent() throws Exception
+	public synchronized void testBigConcurrent() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
 		hf.setMaxConcurrent(3);
@@ -488,12 +493,9 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	public void tearDown() throws Exception
+	public synchronized void tearDown() throws Exception
 	{
 		hf.stop();
 		super.tearDown();
 	}
-
-	// /////////////////////////////////////////////////////////////////////////
-
 }
