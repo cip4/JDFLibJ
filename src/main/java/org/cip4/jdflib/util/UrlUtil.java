@@ -1971,7 +1971,7 @@ public class UrlUtil
 		{
 			if (UrlUtil.isRelativeURL(url))
 			{
-				fileName = cleanDots(url);
+				fileName = cleanDots(UrlUtil.unEscape(url));
 				if (cwd != null)
 				{
 					url = UrlUtil.getURLWithDirectory(cwd, url);

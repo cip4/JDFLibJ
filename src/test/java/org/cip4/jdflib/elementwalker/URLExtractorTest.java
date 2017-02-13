@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 {
 	/**
 	 * @return the created doc
-	 * 
+	 *
 	 */
 	@Test
 	public JDFDoc testWalk()
@@ -119,7 +119,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 
 	/**
 	 * @return the created doc
-	 * 
+	 *
 	 */
 	@Test
 	public void testWalkNoURL()
@@ -147,8 +147,8 @@ public class URLExtractorTest extends JDFTestCaseBase
 	}
 
 	/**
-	*  
-	* 
+	*
+	*
 	*/
 	@Test
 	public void testWantLog()
@@ -176,8 +176,8 @@ public class URLExtractorTest extends JDFTestCaseBase
 	}
 
 	/**
-	*  
-	* 
+	*
+	*
 	*/
 	@Test
 	public void testGetSave()
@@ -221,7 +221,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIgnoreSelf()
@@ -237,7 +237,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRelativePath()
@@ -259,7 +259,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRelativePathFromJDF()
@@ -282,7 +282,30 @@ public class URLExtractorTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
+	 */
+	@Test
+	public void testRelativePathFromJDFSpace()
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
+		rl.addPDF("./content/boo%20oo.pdf", 0, -1);
+		d.write2File(sm_dirTestDataTemp + "URLIn/dummy.jdf", 2, false);
+
+		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "URLIn/content/boo oo.pdf"));
+
+		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut");
+		dumpDir.delete();
+		URLExtractor ex = new URLExtractor(dumpDir, null, null);
+		ex.walkTree(d.getJDFRoot(), null);
+		String write2String = rl.toDisplayXML(2);
+		assertTrue(new File(sm_dirTestDataTemp + "URLOut/content/boo oo.pdf").exists());
+		assertTrue(new File(sm_dirTestDataTemp + "URLIn/content/boo oo.pdf").exists());
+		assertTrue(write2String.indexOf("URLOut/content/boo%20oo.pdf") > 0);
+	}
+
+	/**
+	 *
 	 */
 	@Test
 	public void testRelativePathDelete()
@@ -306,7 +329,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddProtocol()
