@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.util.net;
 
@@ -76,66 +76,66 @@ import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Test;
 
 /**
- *  
+ *
  * @author rainer prosi
  * @date Nov 16, 2012
  */
 public class UrlCheckTest extends JDFTestCaseBase
 {
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testPing()
 	{
 		if (!isTestNetwork())
 			return;
-		assertNotNull(new UrlCheck("http://www.google.com").ping(5555));
+		assertNotNull(new UrlCheck("https://www.google.com").ping(5555));
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testBuffer()
 	{
 		if (!isTestNetwork())
 			return;
-		UrlCheck urlCheck = new UrlCheck("http://www.google.com");
+		UrlCheck urlCheck = new UrlCheck("https://www.google.com");
 		urlCheck.setBuffer(true);
 		UrlPart ping = urlCheck.ping(5555);
 		assertNotNull(ping.getResponseStream());
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testPingRC()
 	{
 		if (!isTestNetwork())
 			return;
-		assertEquals(200, new UrlCheck("http://www.google.com").pingRC(5555));
+		assertEquals(200, new UrlCheck("https://www.google.com").pingRC(5555));
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testPingRCGet()
 	{
 		if (!isTestNetwork())
 			return;
-		assertEquals(200, new UrlCheck("http://www.google.com", UrlUtil.GET).pingRC(5555));
+		assertEquals(200, new UrlCheck("https://www.google.com", UrlUtil.GET).pingRC(5555));
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@SuppressWarnings("resource")
 	@Test
@@ -143,23 +143,23 @@ public class UrlCheckTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		UrlCheck urlCheck = new UrlCheck("http://www.google.com", UrlUtil.POST);
+		UrlCheck urlCheck = new UrlCheck("https://www.google.com", UrlUtil.POST);
 		urlCheck.setStream(new ByteArrayIOStream("test".getBytes()).getInputStream());
 		assertTrue("Google does not accept post... ", urlCheck.pingRC(5555) > 200);
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testGetPingRC()
 	{
 		if (!isTestNetwork())
 			return;
-		UrlCheck urlCheck = new UrlCheck("http://www.google.com");
+		UrlCheck urlCheck = new UrlCheck("https://www.google.com");
 		urlCheck.startPing(5555);
-		ThreadUtil.sleep(1000);
+		ThreadUtil.sleep(111);
 		assertEquals(200, urlCheck.getPingRC());
 	}
 }
