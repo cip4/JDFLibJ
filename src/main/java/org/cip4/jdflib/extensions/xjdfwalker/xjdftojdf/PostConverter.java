@@ -374,7 +374,6 @@ class PostConverter
 		/**
 		 *
 		 *
-		 * @param theNode
 		 * @param r
 		 */
 		private void cleanColorPool(final JDFResource r)
@@ -386,7 +385,7 @@ class PostConverter
 			{
 				for (JDFColor c : vc)
 				{
-					c.removeChildrenByClass(JDFPart.class);
+					fixColor(c);
 				}
 			}
 			if (StringUtil.getNonEmpty(id) != null)
@@ -414,6 +413,27 @@ class PostConverter
 							e.renameElement("PageListLink", null);
 						}
 					}
+				}
+			}
+		}
+
+		private void fixColor(JDFColor c)
+		{
+			c.removeChildrenByClass(JDFPart.class);
+			String actual = c.getActualColorName();
+			String name = c.getName();
+			if (!name.equals(actual))
+			{
+				c.setName(actual);
+				VElement v = theNode.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.SEPARATION, name), false, true, 0);
+				for (KElement e : v)
+				{
+					e.setAttribute(AttributeName.SEPARATION, actual);
+				}
+				VElement w = theNode.getChildrenByTagName(ElementName.SEPARATIONSPEC, null, new JDFAttributeMap(AttributeName.NAME, name), false, true, 0);
+				for (KElement e : w)
+				{
+					e.setAttribute(AttributeName.NAME, actual);
 				}
 			}
 		}

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.HashSet;
+
 import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -90,12 +92,36 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class WalkJDF extends WalkJDFElement
 {
+	private final HashSet<String> deprecatedTypes;
+
 	/**
 	 *
 	 */
 	public WalkJDF()
 	{
 		super();
+		deprecatedTypes = new HashSet<>();
+		deprecatedTypes.add(EnumType.Combine.getName());
+		deprecatedTypes.add(EnumType.Ordering.getName());
+		deprecatedTypes.add(EnumType.Packing.getName());
+		deprecatedTypes.add(EnumType.ResourceDefinition.getName());
+		deprecatedTypes.add(EnumType.Split.getName());
+
+		deprecatedTypes.add(EnumType.AssetListCreation.getName());
+		deprecatedTypes.add(EnumType.ContactCopying.getName());
+		deprecatedTypes.add(EnumType.ContoneCalibration.getName());
+		deprecatedTypes.add(EnumType.CylinderLayoutPreparation.getName());
+		deprecatedTypes.add(EnumType.DBDocTemplateLayout.getName());
+		deprecatedTypes.add(EnumType.DBTemplateMerging.getName());
+		deprecatedTypes.add(EnumType.ImageReplacement.getName());
+		deprecatedTypes.add(EnumType.PageAssigning.getName());
+		deprecatedTypes.add(EnumType.PDFToPSConversion.getName());
+		deprecatedTypes.add(EnumType.Proofing.getName());
+		deprecatedTypes.add(EnumType.PSToPDFConversion.getName());
+		deprecatedTypes.add(EnumType.Scanning.getName());
+		deprecatedTypes.add(EnumType.Tiling.getName());
+
+		deprecatedTypes.add(EnumType.Dividing.getName());
 	}
 
 	/**
@@ -230,11 +256,34 @@ public class WalkJDF extends WalkJDFElement
 		t1.appendUnique(t2);
 		t1.removeStrings("ProcessGroup", 0);
 		t1.removeStrings("Combined", 0);
+		removeDeprecatedTypes(t1);
 		if (t1.isEmpty())
 		{
 			t1.add("Product");
 		}
 		newRootP.setAttribute(AttributeName.TYPES, t1, null);
+	}
+
+	/**
+	 * replace deprecated types with manualLabor
+	 * @param t1
+	 */
+	void removeDeprecatedTypes(VString t1)
+	{
+
+		for (int i = t1.size() - 1; i >= 0; i--)
+		{
+			if (isDeprecatedType(t1.get(i)))
+			{
+				t1.setElementAt(EnumType.ManualLabor.getName(), i);
+			}
+		}
+
+	}
+
+	private boolean isDeprecatedType(String typ)
+	{
+		return deprecatedTypes.contains(typ);
 	}
 
 	/**

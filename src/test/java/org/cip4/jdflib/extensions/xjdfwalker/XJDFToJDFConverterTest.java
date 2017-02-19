@@ -107,6 +107,7 @@ import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
+import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
@@ -167,6 +168,32 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNull(ccNew.getColorantParams());
 		assertEquals(ccNew.getColorantOrder().getSeparations(), new VString("Cyan Black", null));
 		assertNull(ccNew.getDeviceColorantOrder());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testActualColorName()
+	{
+		XJDFHelper h = new XJDFHelper("j", "p", null);
+		h.setTypes(EnumType.ImageSetting.getName());
+		JDFColorantControl cc = (JDFColorantControl) h.getCreateResourceSet(ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true).getResource();
+		cc.setAttribute(ElementName.COLORANTPARAMS, "Sep_1");
+		cc.setAttribute(ElementName.COLORANTORDER, "Sep_1");
+		h.getCreateResourceSet(ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME, "Sep 1");
+
+		XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		JDFDoc docjdf = conv.convert(h);
+		JDFNode n = docjdf.getJDFRoot();
+
+		JDFColorantControl ccNew = (JDFColorantControl) n.getResource(ElementName.COLORANTCONTROL, EnumUsage.Input, null, 0);
+		assertEquals(ccNew.getColorantOrder().getSeparations().get(0), "Sep 1");
+		assertEquals(ccNew.getColorantParams().getSeparations().get(0), "Sep 1");
+
+		JDFColorPool cpNew = (JDFColorPool) n.getResource(ElementName.COLORPOOL, EnumUsage.Input, null, 0);
+		assertNotNull(cpNew.getColorWithName("Sep 1"));
 	}
 
 	/**

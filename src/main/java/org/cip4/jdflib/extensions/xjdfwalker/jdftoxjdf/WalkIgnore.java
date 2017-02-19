@@ -143,14 +143,20 @@ public class WalkIgnore extends WalkElement
 		v.add(ElementName.OBSERVATIONTARGET);
 		v.add(ElementName.PACKINGINTENT);
 		v.add(ElementName.PAGEASSIGNEDLIST);
+		v.add(ElementName.PAGEASSIGNPARAMS);
 		v.add(ElementName.PARTAMOUNT);
+		v.add(ElementName.PDFTOPSCONVERSIONPARAMS);
 		v.add(ElementName.PDLRESOURCEALIAS);
 		v.add(ElementName.PREFLIGHTREPORTRULEPOOL);
 		v.add(ElementName.PRGROUP);
 		v.add(ElementName.PRGROUPOCCURRENCE);
 		v.add(ElementName.PRITEM);
+		v.add(ElementName.PSTOPDFCONVERSIONPARAMS);
+
 		v.add(ElementName.REGISTRATION);
+		v.add(ElementName.RESOURCEDEFINITIONPARAMS);
 		v.add(ElementName.RESOURCEPOOL);
+		v.add(ElementName.SCANPARAMS);
 		v.add(ElementName.SCREENINGINTENT);
 		v.add(ElementName.SOURCERESOURCE);
 		v.add(ElementName.SPAWNED);

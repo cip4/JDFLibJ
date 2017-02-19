@@ -160,6 +160,15 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * @param map
+	 * @return
+	 */
+	public ResourceHelper getPartition(String key, String value)
+	{
+		return getPartition(new JDFAttributeMap(key, value));
+	}
+
+	/**
 	 * @param index
 	 * @return
 	 */

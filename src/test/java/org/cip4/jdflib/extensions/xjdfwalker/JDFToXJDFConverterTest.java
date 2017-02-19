@@ -511,7 +511,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	{
 		JDFToXJDF conv = new JDFToXJDF();
 		conv.setWantProduct(true);
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Product);
 		JDFResource c = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		c.setDescriptiveName("desc");
