@@ -235,7 +235,7 @@ class PostConverter
 		}
 	}
 
-	private class ResourceCleaner
+	class ResourceCleaner
 	{
 		/**
 		 * @param theNode
