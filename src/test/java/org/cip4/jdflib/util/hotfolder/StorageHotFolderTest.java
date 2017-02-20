@@ -227,8 +227,8 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			if (!file.exists() && !content.exists())
 				break;
 		}
-		assertFalse(file.exists());
-		assertFalse(content.exists());
+		assertFalse(file.getAbsolutePath(), file.exists());
+		assertFalse(content.getAbsolutePath(), content.exists());
 		assertEquals(tmpHFDir.listFiles().length, 0, 0);
 		hf.stop();
 	}
@@ -258,8 +258,8 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			if (!file.exists() && !content.exists())
 				break;
 		}
-		assertFalse(file.exists());
-		assertFalse(content.exists());
+		assertFalse(file.getAbsolutePath(), file.exists());
+		assertFalse(content.getAbsolutePath(), content.exists());
 		File file2 = new File(hfPath + "/OK/dummy space");
 		assertTrue(file2.isDirectory());
 		assertEquals(tmpHFDir.listFiles().length, 0, 0);
