@@ -100,7 +100,7 @@ import org.cip4.jdflib.util.thread.MultiTaskQueue;
  * @author rainer prosi
  *
  */
-public class HotFolder implements Runnable
+public class HotFolder
 {
 	/**
 	 * the default time time in milliseconds to wait for stabilization
@@ -110,7 +110,6 @@ public class HotFolder implements Runnable
 	 * the time in milliseconds to wait for stabilization
 	 */
 	public int stabilizeTime = defaultStabilizeTime; // time between reads in milliseconds - also minimum length of non-modification
-	private boolean interrupt = false; // if set to true, the watcher interupted and the thread ends
 	private static int nThread = 0;
 	private int maxConcurrent;
 
@@ -185,7 +184,7 @@ public class HotFolder implements Runnable
 	private long lastModified = -1;
 	private final Vector<FileTime> lastFileTime;
 	protected final Vector<ExtensionListener> hfl;
-	private Thread runThread;
+	private HotFolderRunner runThread;
 	final Set<File> hfRunning;
 	private final Log log;
 
@@ -238,8 +237,8 @@ public class HotFolder implements Runnable
 		if (_hfl != null)
 		{
 			addListener(_hfl, ext);
+			restart();
 		}
-		restart();
 	}
 
 	/**
@@ -255,13 +254,8 @@ public class HotFolder implements Runnable
 		{
 			log.error("Cannot use read only hot folder at");
 		}
-		String threadName = getThreadName(true);
-		runThread = new Thread(this, threadName);
-		runThread.setDaemon(true);
-		interrupt = false;
-		log.info("Starting hotfolder: " + threadName);
+		runThread = new HotFolderRunner();
 		lastModified = -1;
-		runThread.start();
 		hfRunning.clear();
 	}
 
@@ -286,19 +280,12 @@ public class HotFolder implements Runnable
 	 */
 	public synchronized void stop()
 	{
-		interrupt = true;
 		if (runThread != null)
 		{
-			String name = runThread.getName();
-			if (maxConcurrent > 1)
-			{
-				MultiTaskQueue.shutDown(name);
-			}
-			log.info("Stopping hot folder: " + name);
-			ThreadUtil.notifyAll(runThread);
-			log.info("Finished stopping hot folder: " + name);
+			runThread.quit();
 			ThreadUtil.join(runThread, 10);
 			runThread = null;
+			log.info("stopped hot folder at: " + dir.getAbsolutePath());
 		}
 		else
 		{
@@ -306,103 +293,133 @@ public class HotFolder implements Runnable
 		}
 	}
 
-	/**
-	 * run the listener thread...
-	 * @see java.lang.Runnable#run()
-	 */
-	@Override
-	public void run()
+	class HotFolderRunner extends Thread
 	{
-		log.info("starting hot folder at: " + dir.getAbsolutePath());
-		while (!interrupt)
+		/**
+		 * stop this thread;
+		 *
+		 */
+		void quit()
 		{
-			final long lastMod = dir.lastModified();
-			if (lastMod > lastModified || lastFileTime.size() > 0)
-			// has the directory been touched?
+			String name = getName();
+			log.info("Stopping hot folder: " + name);
+			interrupt = true;
+			if (maxConcurrent > 1)
 			{
-				lastModified = lastMod;
-				File[] files = getHotFiles();
-				if (files != null)
+				MultiTaskQueue.shutDown(name);
+			}
+			ThreadUtil.notifyAll(this);
+			log.info("Finished stopping hot folder: " + name);
+		}
+
+		public HotFolderRunner()
+		{
+			super(getThreadName(true));
+			setDaemon(true);
+			log.info("Starting hotfolder: " + getThreadName(false));
+			interrupt = false;
+			start();
+		}
+
+		boolean interrupt;
+
+		/**
+		 * run the listener thread...
+		 * @see java.lang.Runnable#run()
+		 */
+		@Override
+		public void run()
+		{
+			log.info("starting hot folder at: " + dir.getAbsolutePath());
+			while (!interrupt)
+			{
+				long t0 = System.currentTimeMillis();
+				final long lastMod = dir.lastModified();
+				if (lastMod > lastModified || lastFileTime.size() > 0 || (t0 - lastModified) < 42000)
+				// has the directory been touched?
 				{
-					final int fileListLength = files.length;
-					for (int i = 0; i < lastFileTime.size(); i++)
+					lastModified = lastMod;
+					File[] files = getHotFiles();
+					if (lastFileTime.size() > 0)
 					{
-						boolean found = false;
-						final FileTime lftAt = lastFileTime.elementAt(i);
-						for (int j = 0; !interrupt && j < fileListLength; j++)
-						// loop over all matching files in the directory
+						final int fileListLength = files == null ? 0 : files.length;
+						for (int i = 0; i < lastFileTime.size(); i++)
 						{
-							final File fileJ = files[j];
-							if (fileJ != null && fileJ.equals(lftAt.f))
+							boolean found = false;
+							final FileTime lftAt = lastFileTime.elementAt(i);
+							for (int j = 0; !interrupt && j < fileListLength; j++)
+							// loop over all matching files in the directory
 							{
-								found = found || processSingleFile(files, lftAt, j, fileJ);
+								final File fileJ = files[j];
+								if (fileJ != null && fileJ.equals(lftAt.f))
+								{
+									found = found || processSingleFile(files, lftAt, j, fileJ);
+								}
+							}
+
+							if (!found)
+							{
+								lastFileTime.remove(i--); // not there anymore - note the -- for undo remove
 							}
 						}
-
-						if (!found)
-						{
-							lastFileTime.remove(i--); // not there anymore - note the -- for und remove
-						}
 					}
-					Vector<File> vf = ContainerUtil.toVector(files);
-					for (int i = vf.size() - 1; i >= 0; i--)
+					if (files != null)
 					{
-						if (vf.get(i) == null)
+						Vector<File> vf = ContainerUtil.toVector(files);
+						for (int i = vf.size() - 1; i >= 0; i--)
 						{
-							vf.remove(i);
+							if (vf.get(i) == null)
+							{
+								vf.remove(i);
+							}
 						}
-					}
-					files = vf.toArray(new File[0]);
-					files = new FileSorter(files).sortLastModified(false);
+						files = vf.toArray(new File[0]);
+						files = new FileSorter(files).sortLastModified(false);
 
-					for (File f : files) // the file is new - add to list for next check
-					{
-						lastFileTime.add(new FileTime(f));
+						for (File f : files) // the file is new - add to list for next check
+						{
+							lastFileTime.add(new FileTime(f));
+						}
 					}
 				}
+
+				if (!ThreadUtil.wait(this, stabilizeTime))
+					break;
 			}
-
-			if (!ThreadUtil.wait(runThread, stabilizeTime))
-				break;
+			log.info("completed hot folder at: " + dir.getAbsolutePath());
 		}
 
-		if (runThread != null)
+		/**
+		 *
+		 * @return
+		 */
+		private File[] getHotFiles()
 		{
-			runThread.interrupt();
-		}
-		log.info("completed hot folder at: " + dir.getAbsolutePath());
-	}
+			if (interrupt)
+				return null;
 
-	/**
-	 *
-	 * @return
-	 */
-	private File[] getHotFiles()
-	{
-		if (interrupt)
-			return null;
-
-		File[] files = FileUtil.listFilesWithExtension(dir, getAllExtensions());
-		if (files != null)
-		{
-			for (int i = 0; i < files.length; i++)
+			File[] files = FileUtil.listFilesWithExtension(dir, getAllExtensions());
+			if (files != null)
 			{
-				if (!files[i].canWrite())
+				for (int i = 0; i < files.length; i++)
 				{
-					log.warn("ignoring read only file in hot folder: " + files[i]);
-					files[i] = null;
-				}
-				else if (files[i].isDirectory())
-				{
-					files[i] = null;
-				}
-				else if (hfRunning.contains(files[i]))
-				{
-					files[i] = null;
+					if (!files[i].canWrite())
+					{
+						log.warn("ignoring read only file in hot folder: " + files[i]);
+						files[i] = null;
+					}
+					else if (files[i].isDirectory())
+					{
+						files[i] = null;
+					}
+					else if (hfRunning.contains(files[i]))
+					{
+						files[i] = null;
+					}
 				}
 			}
+			return files;
 		}
-		return files;
 	}
 
 	private boolean processSingleFile(final File[] files, final FileTime lftAt, int j, final File fileJ)
