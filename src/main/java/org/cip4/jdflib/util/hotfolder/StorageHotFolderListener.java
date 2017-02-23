@@ -87,8 +87,8 @@ class StorageHotFolderListener implements HotFolderListener
 	private final File storage;
 	private File errorStorage;
 	private File okStorage;
-	private final StorageHotFolder parent;
-	private final Log log;
+	final StorageHotFolder parent;
+	protected final Log log;
 	private int nHotOK;
 	private int nHotError;
 	private int maxStore;
@@ -324,7 +324,7 @@ class StorageHotFolderListener implements HotFolderListener
 		}
 	}
 
-	private File getStoredFile(File hotFile)
+	File getStoredFile(File hotFile)
 	{
 		String hotFileName = hotFile.getName();
 		File newAbsoluteFile = FileUtil.getFileInDirectory(storage, new File(hotFileName));

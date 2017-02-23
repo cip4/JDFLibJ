@@ -89,14 +89,14 @@ import org.cip4.jdflib.util.FileUtil;
 /**
  * a hotfolder that handles storage of "hotfolded" data
  *
- * @author prosirai
+ * @author rainer prosi
  *
  */
 public class StorageHotFolder
 {
-	protected final HotFolder hf; // the active hot folder
-	private final File storageDir;
-	protected final Log log;
+	final HotFolder hf; // the active hot folder
+	final File storageDir;
+	final Log log;
 
 	/**
 	 * @return the hotfolder directory
@@ -106,7 +106,7 @@ public class StorageHotFolder
 		return hf.getDir();
 	}
 
-	private final Vector<StorageHotFolderListener> listenerImpl;
+	final Vector<StorageHotFolderListener> listenerImpl;
 
 	/**
 	 *
@@ -133,8 +133,12 @@ public class StorageHotFolder
 			moveFromTemp(_hotFolderDir);
 		}
 		listenerImpl = new Vector<StorageHotFolderListener>();
-		listenerImpl.add(new StorageHotFolderListener(storageDir, hfListener, this));
-		hf = new HotFolder(_hotFolderDir, ext, listenerImpl.get(0));
+		hf = new HotFolder(_hotFolderDir, null, null);
+		if (hfListener != null)
+		{
+			addListener(hfListener, ext);
+			restart();
+		}
 	}
 
 	/**
@@ -272,7 +276,7 @@ public class StorageHotFolder
 	@Override
 	public String toString()
 	{
-		return "StorageHotFolder [hf=" + hf + ", storageDir=" + storageDir + "]";
+		return getClass().getSimpleName() + "[hf=" + hf + ", storageDir=" + storageDir + "]";
 	}
 
 }

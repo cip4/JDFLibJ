@@ -79,6 +79,8 @@ import org.cip4.jdflib.elementwalker.URLExtractor;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
+import org.cip4.jdflib.util.thread.OrderedTaskQueue;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -172,6 +174,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Before
 	public synchronized void setUp() throws Exception
 	{
+		OrderedTaskQueue.shutDownAll();
 		super.setUp();
 		n++;
 		theHFDir = new File(sm_dirTestDataTemp + File.separator + "StHFTest" + n);
@@ -218,6 +221,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		File content = new File(hfPath + "/dummy/boo.pdf");
 		FileUtil.createNewFile(content);
 		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new ExtractListener());
+		ThreadUtil.sleep(333);
 		d.write2File(hfPath + "/dummy.jdf", 2, false);
 		File file = new File(hfPath + "/dummy.jdf");
 		assertTrue(file.exists());
@@ -249,6 +253,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		FileUtil.createNewFile(content);
 		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new ExtractListener());
 		hf.setOKStorage(new File("OK"));
+		ThreadUtil.sleep(333);
 		d.write2File(hfPath + "/dummy space.jdf", 2, false);
 		File file = new File(hfPath + "/dummy space.jdf");
 		assertTrue(file.exists());
@@ -371,6 +376,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testOKErrorMulti() throws Exception
 	{
+
 		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.setMaxConcurrent(5);
 		hf.setStabilizeTime(100);
@@ -517,5 +523,16 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		assertEquals(tmpHFDir.listFiles().length, 0, 1);
 		assertEquals(error.listFiles().length, 2, 1);
 		hf.stop();
+	}
+
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 */
+	@Override
+	@After
+	protected void tearDown() throws Exception
+	{
+		OrderedTaskQueue.shutDownAll();
+		super.tearDown();
 	}
 }
