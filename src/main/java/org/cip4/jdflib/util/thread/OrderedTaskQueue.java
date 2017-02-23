@@ -247,7 +247,7 @@ public class OrderedTaskQueue extends Thread
 	 */
 	public static void shutDownAll()
 	{
-		LogFactory.getLog(OrderedTaskQueue.class).info("shutting down all ordered queues");
+		LogFactory.getLog(OrderedTaskQueue.class).info("shutting down " + theMap.size() + " ordered queues");
 		Vector<String> v = ContainerUtil.getKeyVector(theMap);
 		if (v != null)
 		{
