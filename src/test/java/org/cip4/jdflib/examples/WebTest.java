@@ -134,19 +134,22 @@ public class WebTest extends JDFTestCaseBase
 		los = los.addPartition(EnumPartIDKey.Side, "Front");
 		final VString vSep = new VString("Cyan Magenta Yellow Black", " ");
 
-		for (int i = 0; i < 16; i++)
+		for (int i = 0; i < 4; i++)
 		{
-			final int x = 720 * (i % 4);
-			final int y = 1000 * (i / 4);
+			final int x = 720 * (i % 2);
+			final int y = 1000 * (i / 2);
 			final int ord = i % 8;
 			final JDFContentObject co = lofr.appendContentObject();
 			co.setOrd(ord);
 			co.setOrdID(i);
 			co.setCTM(new JDFMatrix(1, 0, 0, 1, x, y));
-			final JDFMarkObject mo = lofr.appendMarkObject();
-			mo.setOrd(ord);
-			mo.setOrdID(i + 100);
-			mo.setCTM(new JDFMatrix(1, 0, 0, 1, x + 700, y + 900));
+			if ((i % 4) == 0)
+			{
+				final JDFMarkObject mo = lofr.appendMarkObject();
+				mo.setOrd(ord);
+				mo.setOrdID(i + 100);
+				mo.setCTM(new JDFMatrix(1, 0, 0, 1, x + 700, y + 900));
+			}
 		}
 		for (int j = 0; j < vSep.size(); j++)
 		{
@@ -156,7 +159,7 @@ public class WebTest extends JDFTestCaseBase
 
 				final int x = 720 * (i % 4);
 				final int y = 1000 * (i / 4);
-				final KElement shiftObject = sepShift.appendElement("ShiftPoint");
+				final KElement shiftObject = sepShift.appendElement(ElementName.SHIFTPOINT);
 
 				shiftObject.setAttribute("Position", new JDFXYPair(x + 360, y + 500).toString());
 				shiftObject.setAttribute("CTM", new JDFMatrix(1, 0, 0, 1, j + i / 4, j + i % 4).toString());
@@ -166,6 +169,7 @@ public class WebTest extends JDFTestCaseBase
 		XJDFHelper h = XJDFHelper.getHelper(xjdfDoc);
 		SetHelper sh = h.getSet(ElementName.LAYOUTSHIFT, 0);
 		//		setSnippet(sh, true);
+		setSnippet(sh.getPartition(0), false);
 		setSnippet(sh.getPartition(1), false);
 		setSnippet(sh.getPartition(2), false);
 		writeTest(h, "resources/WebgrowthPartition.xjdf");
