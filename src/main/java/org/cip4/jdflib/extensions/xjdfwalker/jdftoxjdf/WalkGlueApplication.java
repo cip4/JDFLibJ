@@ -78,25 +78,15 @@ import org.cip4.jdflib.core.VString;
 * @author Rainer Prosi, Heidelberger Druckmaschinen
 *
 */
-public class WalkSkip extends WalkJDFSubElement
+public class WalkGlueApplication extends WalkJDFSubElement
 {
 
 	/**
 	 *
 	 */
-	public WalkSkip()
+	public WalkGlueApplication()
 	{
 		super();
-	}
-
-	/**
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		return xjdf;
 	}
 
 	/**
@@ -107,7 +97,7 @@ public class WalkSkip extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return true;
+		return !jdfToXJDF.isRetainAll();
 	}
 
 	/**
@@ -116,6 +106,15 @@ public class WalkSkip extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(new String[] { ElementName.HOLELIST, ElementName.INSERTLIST });
+		return new VString(new String[] { ElementName.GLUEAPPLICATION });
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected String getXJDFName(KElement jdf)
+	{
+		return null;
 	}
 }

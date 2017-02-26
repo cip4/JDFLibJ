@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.Set;
+
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -174,7 +176,8 @@ public class WalkElement extends BaseWalker
 		JDFAttributeMap map = (jdf instanceof JDFElement) ? convertRanges((JDFElement) jdf) : jdf.getAttributeMap_KElement();
 		if (map != null)
 		{
-			for (String key : map.keySet())
+			Set<String> keySet = map.keySet();
+			for (String key : keySet)
 			{
 				String prefix = KElement.xmlnsPrefix(key);
 				if (prefix != null)

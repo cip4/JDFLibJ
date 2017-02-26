@@ -68,35 +68,26 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.process.postpress.JDFCut;
 
 /**
-* any matching class will be ignored and all children will be moved into the respective parent element
-*
-* @author Rainer Prosi, Heidelberger Druckmaschinen
-*
-*/
-public class WalkSkip extends WalkJDFSubElement
+ *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
+public class WalkCut extends WalkResource
 {
-
 	/**
 	 *
 	 */
-	public WalkSkip()
+	public WalkCut()
 	{
 		super();
-	}
-
-	/**
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		return xjdf;
 	}
 
 	/**
@@ -107,7 +98,7 @@ public class WalkSkip extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return true;
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFCut);
 	}
 
 	/**
@@ -116,6 +107,19 @@ public class WalkSkip extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(new String[] { ElementName.HOLELIST, ElementName.INSERTLIST });
+		return new VString(ElementName.CUT, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		map.remove(AttributeName.LOWERRIBBONNAME);
+		map.remove(AttributeName.RELATIVESTARTPOSITION);
+		map.remove(AttributeName.RELATIVEWORKINGPATH);
+		map.remove(AttributeName.UPPERRIBBONNAME);
+		super.updateAttributes(map);
 	}
 }

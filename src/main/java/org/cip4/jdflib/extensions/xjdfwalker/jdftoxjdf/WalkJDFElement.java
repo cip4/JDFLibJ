@@ -316,6 +316,7 @@ public class WalkJDFElement extends WalkElement
 			map.remove(AttributeName.SETTINGSPOLICY);
 			map.remove(AttributeName.MUSTHONOREXCEPTIONS);
 			map.remove(AttributeName.BESTEFFORTEXCEPTIONS);
+			map.remove(AttributeName.LOCKED);
 			map.remove(AttributeName.MAXVERSION);
 			map.remove(AttributeName.OPERATORINTERVENTIONEXCEPTIONS);
 			super.updateAttributes(map);

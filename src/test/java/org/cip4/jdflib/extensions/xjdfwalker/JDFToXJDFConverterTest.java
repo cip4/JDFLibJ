@@ -73,8 +73,11 @@ import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
+import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoExposedMedia.EnumPlateType;
+import org.cip4.jdflib.auto.JDFAutoGlue.EnumWorkingDirection;
+import org.cip4.jdflib.auto.JDFAutoGlueApplication.EnumGluingTechnique;
 import org.cip4.jdflib.auto.JDFAutoInsertingParams.EnumMethod;
 import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPolarity;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
@@ -139,6 +142,9 @@ import org.cip4.jdflib.resource.process.JDFPageData;
 import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.resource.process.postpress.JDFGlue;
+import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
+import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.cip4.jdflib.span.JDFSpanScreeningType.EnumSpanScreeningType;
 import org.cip4.jdflib.util.FileUtil;
@@ -1407,6 +1413,36 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		KElement xjdf = conv.convert(node);
 
 		assertNotNull(xjdf.getXPathElement("ProductList/Product/Intent[@Name=\"AssemblingIntent\"]/AssemblingIntent/BindIn"));
+	}
+
+	/**
+	 * @return
+	 *
+	 */
+	@Test
+	public void testGlueLine()
+	{
+		JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setJobID("glue");
+		node.setType(EnumType.Gluing);
+		JDFComponent c1 = (JDFComponent) node.addResource(ElementName.COMPONENT, EnumUsage.Input);
+		JDFComponent c2 = (JDFComponent) node.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		c1.setComponentType(EnumComponentType.PartialProduct, null);
+		c1.setDimensions(new JDFXYPair(3, 5));
+		c2.setComponentType(EnumComponentType.PartialProduct, null);
+		c2.setDimensions(new JDFXYPair(3, 5));
+		JDFGlue glue = (JDFGlue) node.addResource(ElementName.GLUINGPARAMS, EnumUsage.Input).appendElement(ElementName.GLUE);
+		glue.setWorkingDirection(EnumWorkingDirection.Bottom);
+		JDFGlueLine gl = (JDFGlueLine) glue.appendElement(ElementName.GLUELINE);
+		gl.setGlueBrand("gb1");
+		gl.setAreaGlue(true);
+		JDFGlue glue2 = (JDFGlue) node.getResource(ElementName.GLUINGPARAMS, EnumUsage.Input, 0).appendElement(ElementName.GLUE);
+		JDFGlueApplication ga = glue2.appendGlueApplication();
+		ga.setGluingTechnique(EnumGluingTechnique.SpineGluing);
+		ga.copyElement(gl, null);
+
+		writeRoundTrip(node, "glue");
+
 	}
 
 	/**
