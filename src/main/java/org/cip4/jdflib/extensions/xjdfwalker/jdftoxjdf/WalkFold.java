@@ -80,7 +80,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFFold;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class WalkFold extends WalkResource
+public class WalkFold extends WalkJDFElement
 {
 	/**
 	 *

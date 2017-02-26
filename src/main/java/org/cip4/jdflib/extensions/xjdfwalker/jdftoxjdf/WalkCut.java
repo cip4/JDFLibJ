@@ -80,7 +80,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFCut;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class WalkCut extends WalkResource
+public class WalkCut extends WalkJDFElement
 {
 	/**
 	 *

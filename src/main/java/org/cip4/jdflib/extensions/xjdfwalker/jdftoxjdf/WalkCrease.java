@@ -80,7 +80,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFCrease;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class WalkCrease extends WalkResource
+public class WalkCrease extends WalkJDFElement
 {
 	/**
 	 *
