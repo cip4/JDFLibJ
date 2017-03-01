@@ -124,7 +124,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertFalse(StringUtil.matches("abcd", StringUtil.simpleRegExptoRegExp("ab(.)")));
 		assertFalse(StringUtil.matches("abc", StringUtil.simpleRegExptoRegExp("*b??")));
 		assertFalse(StringUtil.matches("abcd", StringUtil.simpleRegExptoRegExp("*b?")));
-		assertTrue(StringUtil.matches("a+bc", StringUtil.simpleRegExptoRegExp("a+b?")));
+		assertTrue(StringUtil.matches("a+bc", StringUtil.simpleRegExptoRegExp("a+?b?")));
 	}
 
 	/**
