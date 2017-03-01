@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,13 +92,13 @@ import org.junit.Test;
 
 /**
  * @author MatternK
- * 
+ *
  * To change the template for this generated type comment go to Window - Preferences - Java - Code Generation - Code and Comments
  */
 public class StringUtilTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSimpleRegexp()
@@ -124,10 +124,11 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertFalse(StringUtil.matches("abcd", StringUtil.simpleRegExptoRegExp("ab(.)")));
 		assertFalse(StringUtil.matches("abc", StringUtil.simpleRegExptoRegExp("*b??")));
 		assertFalse(StringUtil.matches("abcd", StringUtil.simpleRegExptoRegExp("*b?")));
+		assertTrue(StringUtil.matches("a+bc", StringUtil.simpleRegExptoRegExp("a+b?")));
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWipeInvalidXML10Chars()
@@ -139,7 +140,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetRelativePath()
@@ -220,7 +221,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSprintfString()
@@ -239,7 +240,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSprintf()
@@ -277,7 +278,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetHexBinaryBytes()
@@ -291,7 +292,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetUTF8Bytes()
@@ -310,7 +311,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetUTF8Bytes()
@@ -327,7 +328,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetVStringEnum()
@@ -339,7 +340,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetVString()
@@ -364,7 +365,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEscape()
@@ -383,7 +384,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testExtension()
@@ -395,7 +396,7 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	/**
 	 * test regexp matching utility
-	 * 
+	 *
 	 */
 	@Test
 	public void testMatchesIgnoreCase()
@@ -409,7 +410,7 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	/**
 	 * test prefix stripper
-	 * 
+	 *
 	 */
 	@Test
 	public void testStripPrefix()
@@ -424,7 +425,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testStripNot()
@@ -435,7 +436,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testStripQuote()
@@ -448,7 +449,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testTrim()
@@ -465,7 +466,7 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	/**
 	 * test regexp matching utility
-	 * 
+	 *
 	 */
 	@Test
 	public void testMatchesSimple()
@@ -540,7 +541,7 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	/**
 	 * test regexp matching utility
-	 * 
+	 *
 	 */
 	@Test
 	public void testMatchesRegExp()
@@ -616,7 +617,7 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	/**
 	 * test normalize utility
-	 * 
+	 *
 	 */
 	@Test
 	public void testNormalize()
@@ -630,7 +631,7 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	/**
 	 * test normalize utility
-	 * 
+	 *
 	 */
 	@Test
 	public void testNormalize3()
@@ -643,7 +644,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNumOccurrences()
@@ -660,7 +661,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRegExpPerformance()
@@ -679,7 +680,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testReplaceString()
@@ -696,7 +697,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testStringReplacer()
@@ -709,7 +710,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testReplaceChar()
@@ -725,7 +726,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testReplaceCharSet()
@@ -736,7 +737,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRightString()
@@ -749,7 +750,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testLeftString()
@@ -762,7 +763,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSubstring()
@@ -779,7 +780,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testParseLong()
@@ -796,7 +797,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testParseInt()
@@ -814,7 +815,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testParseBoolean()
@@ -828,7 +829,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testParseDouble()
@@ -871,7 +872,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFind_last_not_of()
@@ -884,7 +885,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFormatLong()
@@ -898,7 +899,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testFormatDouble()
@@ -931,7 +932,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testuncToUrl()
@@ -950,7 +951,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testZappTokenWS()
@@ -964,7 +965,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHasToken()
@@ -997,7 +998,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHasTokenPerformance()
@@ -1025,7 +1026,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testToken()
@@ -1048,7 +1049,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testTokenize()
@@ -1068,7 +1069,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testReplaceToken()
@@ -1094,7 +1095,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveToken()
@@ -1109,7 +1110,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddToken()
@@ -1124,7 +1125,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testTokenizeDelim()
@@ -1143,7 +1144,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testTokenizeBrackets()
@@ -1165,7 +1166,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testConcatStrings()
@@ -1178,7 +1179,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCreateString()
@@ -1191,7 +1192,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEndsWithIgnoreCase()
@@ -1204,7 +1205,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEquals()
@@ -1217,7 +1218,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testisInteger()
@@ -1231,7 +1232,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testisEqual()
@@ -1256,7 +1257,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCompareTo()
@@ -1271,7 +1272,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsNMTOKEN()
@@ -1290,7 +1291,7 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsID()
@@ -1302,7 +1303,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testisWindowsLocalPath()
@@ -1318,7 +1319,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPathToName()
@@ -1332,7 +1333,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetNamesVector()
@@ -1346,7 +1347,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetEnumsVector()

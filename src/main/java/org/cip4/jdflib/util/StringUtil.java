@@ -2518,8 +2518,8 @@ public class StringUtil
 			return simpleRegExp;
 
 		// attention note sequence, otherwise we get unwanted side effects
-		final String[] in = new String[] { ".", "*", "?" };
-		final String[] out = new String[] { "\\.", "(.*)", "(.)" };
+		final String[] in = new String[] { ".", "*", "+", "?" };
+		final String[] out = new String[] { "\\.", "(.*)", "\\+", "(.)" };
 		for (int i = 0; i < in.length; i++)
 		{
 			final StringBuffer b = new StringBuffer(simpleRegExp.length() * 2);

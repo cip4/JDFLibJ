@@ -489,10 +489,10 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	void createPair(int i) throws IOException
 	{
 		String fileName = "f" + i + ".txt";
+		final File dir = new File(theHFDir + File.separator + fileName + ".dir");
+		dir.mkdir();
 		final File file = new File(theHFDir + File.separator + fileName);
 		file.createNewFile();
-		final File dir = new File(theHFDir + File.separator + "f" + i + ".dir");
-		dir.mkdir();
 	}
 
 	/**
@@ -522,6 +522,36 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		assertEquals(ok.listFiles().length, 2, 1);
 		assertEquals(tmpHFDir.listFiles().length, 0, 1);
 		assertEquals(error.listFiles().length, 2, 1);
+		hf.stop();
+	}
+
+	/**
+	 *
+	 * ok or error folder testing
+	 * @throws Exception
+	 */
+	@Test
+	public synchronized void testOKErrorNonAsciiAux() throws Exception
+	{
+		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		File error = new File("error");
+		hf.setErrorStorage(error);
+		File ok = new File("ok");
+		hf.setOKStorage(ok);
+		hf.setMaxStore(42);
+		ThreadUtil.sleep(1000);
+		for (int i = 0; i < 4; i++)
+		{
+			final File file = new File(theHFDir + File.separator + "()&¢$[]f ä ö ü +&:€" + i + ".txt");
+			FileUtil.newExtension(file, "content").mkdirs();
+			file.createNewFile();
+		}
+		ok = FileUtil.getFileInDirectory(theHFDir, ok);
+		error = FileUtil.getFileInDirectory(theHFDir, error);
+		ThreadUtil.sleep(2000);
+		assertEquals(ok.listFiles().length, 4, 1);
+		assertEquals(tmpHFDir.listFiles().length, 0, 1);
+		assertEquals(error.listFiles().length, 4, 1);
 		hf.stop();
 	}
 

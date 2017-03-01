@@ -207,7 +207,15 @@ class StorageHotFolderListener implements HotFolderListener
 						RollingBackupFile rollingBackupFile = new RollingBackupFile(auxbackup, 10);
 						rollingBackupFile.setWantExtension(true);
 						rollingBackupFile.getNewFile();
-						FileUtil.moveFileToDir(auxFile, okStorage);
+						File movedAux = FileUtil.moveFileToDir(auxFile, okStorage);
+						if (movedAux != null)
+						{
+							log.info("Copied good aux dir: " + auxFile.getName() + " to " + movedAux);
+						}
+						else
+						{
+							log.warn("Could not copy good aux dir: " + auxFile.getName() + " to " + okStorage);
+						}
 					}
 				}
 				cleanup(bOK);
@@ -220,7 +228,6 @@ class StorageHotFolderListener implements HotFolderListener
 					log.warn("failed to delete temporary file " + storedFile.getAbsolutePath());
 				}
 				FileUtil.deleteAll(auxFile);
-
 			}
 		}
 		else
@@ -246,7 +253,15 @@ class StorageHotFolderListener implements HotFolderListener
 						RollingBackupFile rollingBackupFile = new RollingBackupFile(auxbackup, 10);
 						rollingBackupFile.setWantExtension(true);
 						rollingBackupFile.getNewFile();
-						FileUtil.moveFileToDir(auxFile, errorStorage);
+						File movedAux = FileUtil.moveFileToDir(auxFile, errorStorage);
+						if (movedAux != null)
+						{
+							log.info("Copied error aux dir: " + auxFile.getName() + " to " + movedAux);
+						}
+						else
+						{
+							log.warn("Could not copy error aux dir: " + auxFile.getName() + " to " + okStorage);
+						}
 					}
 				}
 
