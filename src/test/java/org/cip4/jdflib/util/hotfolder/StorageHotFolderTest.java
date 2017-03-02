@@ -542,7 +542,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		ThreadUtil.sleep(1000);
 		for (int i = 0; i < 4; i++)
 		{
-			final File file = new File(theHFDir + File.separator + "()&¢$[]f ä ö ü +&:€" + i + ".txt");
+			final File file = new File(theHFDir + File.separator + "()&¢$[]f ä ö ü +&€" + i + ".txt");
 			FileUtil.newExtension(file, "content").mkdirs();
 			file.createNewFile();
 		}
