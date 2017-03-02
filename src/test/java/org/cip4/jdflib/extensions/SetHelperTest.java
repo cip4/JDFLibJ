@@ -69,10 +69,12 @@
 package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.junit.Test;
 
@@ -112,11 +114,23 @@ public class SetHelperTest extends JDFTestCaseBase
 	public void testGetPartition()
 	{
 		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
-		assertEquals(sh.getName(), "Media");
+		assertEquals(sh.getName(), ElementName.MEDIA);
 		assertNull(sh.getPartition(1));
 		assertNotNull(sh.getCreatePartition(1, true));
 		assertNotNull(sh.getPartition(-1));
 		assertNull(sh.getPartition(-3));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetCPI()
+	{
+		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		sh.setCombinedProcessIndex(new JDFIntegerList(3));
+		assertEquals(3, sh.getCombinedProcessIndex().getInt(0));
+
 	}
 
 	/**
@@ -276,7 +290,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Override
 	public void setUp()
 	{
-		JDFDoc d = new JDFDoc("XJDF");
+		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		root = d.getRoot();
 		root.getCreateXPathElement("ResourceSet/Resource/Part");
 		root.getCreateXPathElement("ResourceSet/Resource/Media");

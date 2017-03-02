@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,9 +76,9 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * 
+ *
  * XJDF splitter that splits based on the types list
- * 
+ *
  * @author rainer prosi
  *
  */
@@ -87,7 +87,7 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	final Vector<VString> groups;
 
 	/**
-	 * 
+	 *
 	 */
 	public ProcessXJDFSplit()
 	{
@@ -96,7 +96,7 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.extensions.AbstractXJDFSplit#splitXJDF(org.cip4.jdflib.extensions.XJDFHelper)
 	 */
 	@Override
@@ -106,6 +106,7 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 		Vector<XJDFHelper> ret = new Vector<XJDFHelper>();
 		if (newTypes != null && newTypes.size() > 0)
 		{
+			VString allTypes = root.getTypes();
 			for (VString types : newTypes)
 			{
 				XJDFHelper h = root.clone();
@@ -115,7 +116,7 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 					jobPartID = "Part_";
 				h.setJobPartID(jobPartID + StringUtil.setvString(types));
 				h.setID(null);
-				fixInOutLinks(h);
+				fixInOutLinks(h, allTypes);
 				ret.add(h);
 			}
 			consolidateExchangeResources(ret);
@@ -128,9 +129,9 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	}
 
 	/**
-	 * 
+	 *
 	 * @param root
-	 * 
+	 *
 	 * @return the list of types to split into, null is a flag for no split
 	 */
 	protected Vector<VString> splitTypes(XJDFHelper root)
@@ -201,7 +202,7 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	}
 
 	/**
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

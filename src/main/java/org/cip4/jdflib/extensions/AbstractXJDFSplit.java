@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,6 +74,7 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.ifaces.IXJDFSplit;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.node.LinkInfo;
@@ -101,10 +102,10 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 
 	/**
 	 * update the Usage of resource links according to the value of types
-	 * 
+	 *
 	 * @param xjdf
 	 */
-	public void fixInOutLinks(XJDFHelper xjdf)
+	protected void fixInOutLinks(XJDFHelper xjdf, VString allTypes)
 	{
 		LinkInfoMap map = getLinkInfoMap(xjdf);
 		if (map != null)
@@ -115,7 +116,7 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 				VString types = xjdf.getTypes();
 				for (SetHelper set : sets)
 				{
-					SetHelper set2 = matchesType(set, types);
+					SetHelper set2 = matchesType(set, types, allTypes);
 					fixInOutLink(set2, map);
 				}
 			}
@@ -123,34 +124,72 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	}
 
 	/**
-	 * 
+	 *
 	 * @param set the set to keep or zapp
 	 * @param types from the xjdf root
+	 * @param allTypes
 	 * @return null if deleted or no further processing is required
 	 */
-	protected SetHelper matchesType(SetHelper set, VString types)
+	protected SetHelper matchesType(SetHelper set, VString types, VString allTypes)
 	{
 		if (set != null && types != null)
 		{
-			String processUsage = set.getProcessUsage();
-			if (processUsage != null)
-			{
-				if ("EndCustomer".equals(processUsage))
-					processUsage = "Product";
+			set = checkProcessUsage(set, types);
+			set = checkCPI(set, types, allTypes);
+		}
+		return set;
 
-				if (!types.contains(processUsage))
+	}
+
+	protected SetHelper checkProcessUsage(SetHelper set, VString types)
+	{
+		String processUsage = set.getProcessUsage();
+		if (processUsage != null)
+		{
+			if ("EndCustomer".equals(processUsage))
+				processUsage = "Product";
+
+			if (!types.contains(processUsage))
+			{
+				set.deleteNode();
+			}
+
+			// we still flag null but do not delete to avoid further processing in case we found an explicit match
+			set = null;
+		}
+		return set;
+	}
+
+	protected SetHelper checkCPI(SetHelper set, VString types, VString allTypes)
+	{
+		if (set != null && allTypes != null)
+		{
+			JDFIntegerList cpi = set.getCombinedProcessIndex();
+			if (cpi != null)
+			{
+				boolean ok = false;
+				for (int i = 0; i < cpi.size(); i++)
+				{
+					int pos = cpi.getInt(i);
+					String proc = allTypes.get(pos);
+					if (proc != null && types.contains(proc))
+					{
+						ok = true;
+						break;
+					}
+				}
+				if (!ok)
 				{
 					set.deleteNode();
+					set = null;
 				}
-				// we still flag null but do not delete to avoid further processing in case we found an explicit match
-				set = null;
 			}
 		}
 		return set;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param xjdf
 	 * @return
 	 */
@@ -163,7 +202,7 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	}
 
 	/**
-	 * 
+	 *
 	 * @param set
 	 * @param map
 	 */
@@ -186,7 +225,7 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	}
 
 	/**
-	 * 
+	 *
 	 * @param set
 	 * @param li
 	 */
@@ -226,7 +265,7 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	}
 
 	/**
-	 * 
+	 *
 	 * @param v
 	 */
 	protected void consolidateExchangeResources(Vector<XJDFHelper> v)
@@ -256,10 +295,10 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	}
 
 	/**
-	 * 
-	 * @param h0 
+	 *
+	 * @param h0
 	 * @param set0
-	 * @param h1 
+	 * @param h1
 	 * @param set1
 	 */
 	protected void consolidateExchangeResource(XJDFHelper h0, SetHelper set0, XJDFHelper h1, SetHelper set1)

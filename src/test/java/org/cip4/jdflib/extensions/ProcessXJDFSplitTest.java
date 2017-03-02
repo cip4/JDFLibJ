@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions;
 
@@ -78,13 +78,14 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @author rainer prosi
  *
  */
@@ -92,7 +93,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 {
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSplit()
@@ -135,7 +136,45 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
+	 */
+	@Test
+	public void testSplitDevice()
+	{
+		XJDFHelper h = new XJDFHelper("j1", "root", null);
+		h.setTypes("ImageSetting ConventionalPrinting");
+
+		SetHelper s = h.appendResourceSet("Device", EnumUsage.Input);
+		s.setCombinedProcessIndex(new JDFIntegerList(0));
+		s.setDescriptiveName("Dev PlateSetter");
+		KElement dev = s.appendPartition(null, true).getResource();
+		dev.setAttribute(AttributeName.DEVICEID, "PS1");
+
+		s = h.appendResourceSet("Device", EnumUsage.Input);
+		s.setCombinedProcessIndex(new JDFIntegerList(1));
+		dev = s.appendPartition(null, true).getResource();
+		dev.setAttribute(AttributeName.DEVICEID, "P1");
+		s.setDescriptiveName("Dev Print");
+		s.appendPartition(null, true);
+
+		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+		splitter.addGroup(new VString("ImageSetting PreviewGeneration", null));
+		c.setSplitter(splitter);
+
+		JDFDoc d = c.convert(h.getRoot());
+		JDFNode root = d.getJDFRoot();
+		JDFNode imSet = (JDFNode) root.getvJDFNode("ImageSetting", null, true).get(0);
+		assertEquals("PS1", imSet.getResource(ElementName.DEVICE, null, 0).getAttribute(AttributeName.DEVICEID));
+		JDFNode cp = (JDFNode) root.getvJDFNode("ConventionalPrinting", null, true).get(0);
+		assertEquals("P1", cp.getResource(ElementName.DEVICE, null, 0).getAttribute(AttributeName.DEVICEID));
+
+		d.write2File(sm_dirTestDataTemp + "splitDevxjdf.jdf", 2, false);
+		assertTrue(d.getJDFRoot().isValid(EnumValidationLevel.Incomplete));
+	}
+
+	/**
+	 *
 	 */
 	@Test
 	public void testSplitNullTypes()
@@ -156,7 +195,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSplitEndCustomer()
@@ -182,7 +221,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSplitFromFile()

@@ -77,6 +77,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.util.StringUtil;
@@ -558,7 +559,27 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public String getProcessUsage()
 	{
-		return theElement.getAttribute(AttributeName.PROCESSUSAGE, null, null);
+		return getAttribute(AttributeName.PROCESSUSAGE);
+	}
+
+	/**
+	 *
+	 *
+	 * @return
+	 */
+	public JDFIntegerList getCombinedProcessIndex()
+	{
+		return JDFIntegerList.createIntegerList(getAttribute(AttributeName.COMBINEDPROCESSINDEX));
+	}
+
+	/**
+	 *
+	 *
+	 * @return
+	 */
+	public void setCombinedProcessIndex(JDFIntegerList cpi)
+	{
+		setAttribute(AttributeName.COMBINEDPROCESSINDEX, cpi == null ? null : cpi.toString());
 	}
 
 	/**
@@ -569,6 +590,24 @@ public class SetHelper extends BaseXJDFHelper
 	public void setProcessUsage(String processUsage)
 	{
 		theElement.setAttribute(AttributeName.PROCESSUSAGE, processUsage, null);
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public String getDescriptiveName()
+	{
+		return getAttribute(AttributeName.DESCRIPTIVENAME);
+	}
+
+	/**
+	 *
+	 * @param descriptiveName
+	 */
+	public void setDescriptiveName(String descriptiveName)
+	{
+		setAttribute(AttributeName.DESCRIPTIVENAME, descriptiveName);
 	}
 
 	/**

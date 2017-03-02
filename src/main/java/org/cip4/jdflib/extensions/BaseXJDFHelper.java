@@ -155,7 +155,7 @@ public abstract class BaseXJDFHelper
 	{
 		if (theElement != null)
 		{
-			theElement.setAttribute(attName, value);
+			theElement.setNonEmpty(attName, value);
 		}
 	}
 
