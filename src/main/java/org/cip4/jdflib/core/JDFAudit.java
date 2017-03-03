@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -102,7 +102,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	private static final long serialVersionUID = 1L;
 	final private static String m_libAgentName = "CIP4 JDF Writer Java";
-	final private static String m_libAgentVersion = "1.5 BLD 92";
+	final private static String m_libAgentVersion = "1.5 BLD 93";
 
 	// use reasonable defaults
 	private static String m_strAgentName = m_libAgentName;
@@ -158,7 +158,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 * 
+	 *
 	 * before June 3, 2009
 	 */
 	@SuppressWarnings("rawtypes")
@@ -215,46 +215,46 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 		}
 
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumAuditType Created = new EnumAuditType("Created");
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumAuditType Modified = new EnumAuditType("Modified");
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumAuditType Deleted = new EnumAuditType("Deleted");
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumAuditType Spawned = new EnumAuditType("Spawned");
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumAuditType Merged = new EnumAuditType("Merged");
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumAuditType Notification = new EnumAuditType("Notification");
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumAuditType PhaseTime = new EnumAuditType("PhaseTime");
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumAuditType ResourceAudit = new EnumAuditType("ResourceAudit");
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumAuditType ProcessRun = new EnumAuditType("ProcessRun");
 	}
 
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 * 
+	 *
 	 * July 20, 2009
 	 */
 	@SuppressWarnings("rawtypes")
@@ -311,23 +311,23 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 		}
 
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumSeverity Event = new EnumSeverity("Event");
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumSeverity Information = new EnumSeverity("Information");
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumSeverity Warning = new EnumSeverity("Warning");
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumSeverity Error = new EnumSeverity("Error");
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumSeverity Fatal = new EnumSeverity("Fatal");
 	}
@@ -663,7 +663,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * (26) getCreateEmployee
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
@@ -684,7 +684,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * Get all Employee from the current element
-	 * 
+	 *
 	 * @return Collection<JDFEmployee>
 	 */
 	public Collection<JDFEmployee> getAllEmployee()

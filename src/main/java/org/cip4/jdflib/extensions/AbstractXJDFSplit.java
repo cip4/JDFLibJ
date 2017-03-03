@@ -105,6 +105,17 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	 *
 	 * @param xjdf
 	 */
+	@Deprecated
+	protected void fixInOutLinks(XJDFHelper xjdf)
+	{
+		fixInOutLinks(xjdf, xjdf.getTypes());
+	}
+
+	/**
+	 * update the Usage of resource links according to the value of types
+	 *
+	 * @param xjdf
+	 */
 	protected void fixInOutLinks(XJDFHelper xjdf, VString allTypes)
 	{
 		LinkInfoMap map = getLinkInfoMap(xjdf);
@@ -121,6 +132,19 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 				}
 			}
 		}
+	}
+
+	/**
+	 *
+	 * @param set the set to keep or zapp
+	 * @param types from the xjdf root
+	 * @param allTypes
+	 * @return null if deleted or no further processing is required
+	 */
+	@Deprecated
+	protected SetHelper matchesType(SetHelper set, VString types)
+	{
+		return matchesType(set, types, types);
 	}
 
 	/**
