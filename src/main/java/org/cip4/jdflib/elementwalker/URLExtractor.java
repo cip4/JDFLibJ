@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -67,7 +67,7 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.elementwalker;
 
@@ -83,8 +83,8 @@ import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.UrlUtil.URLProtocol;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen 
- * walker that extracts all URLs and dumps them to a directory 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * walker that extracts all URLs and dumps them to a directory
  * URLS are modified to reflect the new location
  */
 public class URLExtractor extends BaseElementWalker implements IElementConverter
@@ -92,13 +92,13 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 
 	/**
 	 * the URL walker
-	 * 
-	 * @author Rainer Prosi, Heidelberger Druckmaschinen 
+	 *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
 	public class WalkElement extends BaseWalker
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkElement()
 		{
@@ -170,10 +170,10 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @param bWant if true, we will log each move
-	 *  
+	 *
 	 */
 	public void setWantLog(boolean bWant)
 	{
@@ -193,9 +193,9 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 
 	/**
 	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
-	 * 
+	 *
 	 * @author prosirai
-	 * 
+	 *
 	 */
 	public class WalkURL extends WalkElement
 	{
@@ -242,7 +242,6 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 				if (baseURL != null)
 				{
 					String s = UrlUtil.isRelativeURL(url) ? url : newFile.getName();
-					s = UrlUtil.escape(s, false);
 					String urlWithDirectory = UrlUtil.getURLWithDirectory(baseURL, s);
 					urlSetter.setURL(urlWithDirectory);
 				}
