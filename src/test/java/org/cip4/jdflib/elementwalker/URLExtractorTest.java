@@ -290,9 +290,11 @@ public class URLExtractorTest extends JDFTestCaseBase
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
 		rl.addPDF("./content/boo%20oo.pdf", 0, -1);
+		rl.addPDF("content/aaa%20oo.pdf", 0, -1);
 		d.write2File(sm_dirTestDataTemp + "URLIn/dummy.jdf", 2, false);
 
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "URLIn/content/boo oo.pdf"));
+		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "URLIn/content/aaa oo.pdf"));
 
 		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut");
 		dumpDir.delete();
@@ -302,6 +304,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 		assertTrue(new File(sm_dirTestDataTemp + "URLOut/content/boo oo.pdf").exists());
 		assertTrue(new File(sm_dirTestDataTemp + "URLIn/content/boo oo.pdf").exists());
 		assertTrue(write2String.indexOf("URLOut/content/boo%20oo.pdf") > 0);
+		assertTrue(write2String.indexOf("URLOut/content/aaa%20oo.pdf") > 0);
 	}
 
 	/**
