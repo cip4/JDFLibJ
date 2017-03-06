@@ -125,6 +125,13 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		theHelper.addType("Cutting", 0);
 		assertEquals(theHelper.getTypes().get(1), "Folding");
 		assertEquals(theHelper.getTypes().get(0), "Cutting");
+		theHelper.addType("Stitching", -1);
+		assertEquals(theHelper.getTypes().get(1), "Folding");
+		assertEquals(theHelper.getTypes().get(0), "Cutting");
+		assertEquals(theHelper.getTypes().get(2), "Stitching");
+		theHelper.addType("Imposition", 0);
+		assertEquals(theHelper.getTypes().get(0), "Imposition");
+		assertEquals(theHelper.getTypes().get(3), "Stitching");
 	}
 
 	/**

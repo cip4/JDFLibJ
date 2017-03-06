@@ -176,15 +176,15 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	 */
 	protected VString calcTypes(XJDFHelper root)
 	{
-		VString types = root.getTypes();
-		if (types == null)
-			types = new VString();
 		root.removeType(XJDFConstants.Product, 0);
 		Vector<ProductHelper> productHelpers = root.getProductHelpers();
 		if (productHelpers != null)
 		{
 			root.addType(XJDFConstants.Product, 0);
 		}
+		VString types = root.getTypes();
+		if (types == null)
+			types = new VString();
 		return types;
 	}
 

@@ -953,6 +953,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 			types = new VString();
 		}
 		int lastPos = types.size();
+		if (iSkip < 0)
+			iSkip = lastPos;
+
 		if (iSkip <= lastPos)
 		{
 			types.insertElementAt(typ, iSkip);
