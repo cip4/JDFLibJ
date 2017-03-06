@@ -598,11 +598,19 @@ public class WalkJDFElement extends WalkElement
 		if (JDFResourceLink.isResourceLink(rl))
 		{
 			final JDFResourceLink resLink = (JDFResourceLink) rl;
-			final JDFResource resInRoot = resLink.getTarget();
-			rl.getDeepParent(ElementName.JDF, 0);
-			if (resInRoot != null)
+			final VElement vResInRoot = resLink.getTargetVector(0);
+			if (vResInRoot != null)
 			{
-				final VElement vCreators = resInRoot.getCreator(EnumUsage.Input.equals(resLink.getUsage()));
+				final VElement vCreators = new VElement();
+				for (KElement r : vResInRoot)
+				{
+					final VElement vTmp = ((JDFResource) r).getCreator(EnumUsage.Input.equals(resLink.getUsage()));
+					if (vTmp != null)
+					{
+						vCreators.addAll(vTmp);
+					}
+				}
+				vCreators.unify();
 				if (vCreators != null && !vCreators.isEmpty())
 				{
 					for (KElement creator : vCreators)

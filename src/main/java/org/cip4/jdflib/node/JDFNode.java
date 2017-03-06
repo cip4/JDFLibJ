@@ -3334,18 +3334,32 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 				if (vNode != null)
 				{
-					for (KElement nodeElem : vNode)
+					JDFResourceLink rl = getLink(r, bPre ? EnumUsage.Input : EnumUsage.Output);
+					if (rl != null)
 					{
-						final JDFNode p = (JDFNode) nodeElem;
-						if (h.contains(p) || p == this)
+						VJDFAttributeMap vMaps = rl.getPartMapVector();
+						for (KElement nodeElem : vNode)
 						{
-							continue; // snafu
-						}
-						h.add(p);
+							final JDFNode p = (JDFNode) nodeElem;
+							if (h.contains(p) || p == this)
+							{
+								continue; // snafu
+							}
+							JDFResourceLink rl2 = p.getLink(r, bPre ? EnumUsage.Output : EnumUsage.Input);
+							if (rl2 == null)
+							{
+								continue;
+							}
+							if (vMaps != null && !vMaps.overlapsMap(rl2.getPartMapVector()))
+							{
+								continue;
+							}
+							h.add(p);
 
-						if (!bDirect)
-						{
-							p.getPredecessorImpl(bPre, bDirect, h);
+							if (!bDirect)
+							{
+								p.getPredecessorImpl(bPre, bDirect, h);
+							}
 						}
 					}
 				}
@@ -3431,7 +3445,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 *
-
+	
 	 *
 	 */
 
