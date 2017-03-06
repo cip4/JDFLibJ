@@ -241,7 +241,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 			{
 				if (baseURL != null)
 				{
-					String s = UrlUtil.isRelativeURL(url) ? url : newFile.getName();
+					String s = UrlUtil.isRelativeURL(url) ? url : UrlUtil.escape(newFile.getName(), false);
 					String urlWithDirectory = UrlUtil.getURLWithDirectory(baseURL, s);
 					urlSetter.setURL(urlWithDirectory);
 				}
