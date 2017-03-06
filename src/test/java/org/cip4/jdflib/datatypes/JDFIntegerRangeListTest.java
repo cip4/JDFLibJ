@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,24 +56,24 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  * JDFIntegerRangeListTest.java
  *
  * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.datatypes;
@@ -84,8 +84,8 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.Test;
 
 /**
- * 
- *  
+ *
+ *
  * @author rainer prosi
  * @date way before Jan 11, 2012
  */
@@ -94,7 +94,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	private int defaultDef;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCreateIntegerRangeList()
@@ -108,8 +108,8 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -127,8 +127,8 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -150,8 +150,8 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testConstruct()
@@ -171,8 +171,8 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testConstructArray()
@@ -185,9 +185,9 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////////
 
 	/**
-	 * @throws Exception 
-	 * 
-	 *  
+	 * @throws Exception
+	 *
+	 *
 	 */
 	@Test
 	public final void testNormalize() throws Exception
@@ -203,8 +203,8 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testDef()
@@ -242,8 +242,8 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testGetIntegerListReverse() throws Exception
@@ -254,8 +254,8 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testGetIntegerList() throws Exception
@@ -287,11 +287,30 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 		assertEquals(n, m);
 	}
 
+	/**
+	 *
+	 */
+	@Test
+	public void testGetIntegerListLong()
+	{
+		JDFIntegerRange range = new JDFIntegerRange(0, -1, 0);
+		JDFIntegerRangeList rangeList = new JDFIntegerRangeList(range);
+		JDFIntegerList il = rangeList.getIntegerList();
+		assertEquals(il.size(), 0);
+
+		il = rangeList.getIntegerList();
+		rangeList.setDef(2000);
+		il = rangeList.getIntegerList();
+		assertEquals(il.size(), 2000);
+		rangeList.setDef(20000);
+		il = rangeList.getIntegerList();
+		assertEquals(il.size(), 20000);
+	}
 	// /////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testJDFIntegerRangeList_CopyConstructor()
@@ -315,8 +334,8 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////////
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testAppend()
@@ -343,8 +362,8 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testIsList()
@@ -374,9 +393,9 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////
 
 	/**
-	 * @throws Exception 
-	 * 
-	 *  
+	 * @throws Exception
+	 *
+	 *
 	 */
 	@Test
 	public final void testIsOverlapping() throws Exception
@@ -389,9 +408,9 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception 
-	 * 
-	 *  
+	 * @throws Exception
+	 *
+	 *
 	 */
 	@Test
 	public final void testIsUnique() throws Exception
@@ -421,9 +440,9 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * @throws Exception 
-	 * 
-	 *  
+	 * @throws Exception
+	 *
+	 *
 	 */
 	@Test
 	public final void testIsOrdered_Reverse_True() throws Exception
@@ -436,9 +455,9 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception 
-	 * 
-	 *  
+	 * @throws Exception
+	 *
+	 *
 	 */
 	@Test
 	public final void testIsUniqueOrdered_Reverse_False() throws Exception
@@ -451,9 +470,9 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception 
-	 * 
-	 *  
+	 * @throws Exception
+	 *
+	 *
 	 */
 	@Test
 	public final void testIsUniqueOrdered_False() throws Exception
@@ -467,9 +486,9 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception 
-	 * 
-	 *  
+	 * @throws Exception
+	 *
+	 *
 	 */
 	@Test
 	public final void testIsUniqueOrdered_True() throws Exception
@@ -482,8 +501,8 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testJDFIntegerRangeList1()
@@ -498,8 +517,8 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testJDFIntegerRangeList2()
@@ -519,9 +538,9 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * @throws Exception 
-	 * 
-	 *  
+	 * @throws Exception
+	 *
+	 *
 	 */
 	@Test
 	public final void testDefaultDef() throws Exception
@@ -541,9 +560,9 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception 
-	 * 
-	 *  
+	 * @throws Exception
+	 *
+	 *
 	 */
 	@Test
 	public void testInRange() throws Exception
@@ -556,9 +575,9 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception 
-	 * 
-	 *  
+	 * @throws Exception
+	 *
+	 *
 	 */
 	@Test
 	public void testInfiniteList() throws Exception
@@ -573,9 +592,9 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * @throws Exception 
-	 * 
-	 *  
+	 * @throws Exception
+	 *
+	 *
 	 */
 	@Test
 	public void testgetElementCount() throws Exception
@@ -601,9 +620,9 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * @throws Exception 
-	 * 
-	 *  
+	 * @throws Exception
+	 *
+	 *
 	 */
 	@Test
 	public void testgetElement() throws Exception
@@ -613,8 +632,8 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -626,8 +645,8 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 * 
+	 *
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
