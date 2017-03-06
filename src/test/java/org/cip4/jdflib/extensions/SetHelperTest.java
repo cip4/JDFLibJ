@@ -276,6 +276,38 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testAddTypeToCPI()
+	{
+		SetHelper sh = new XJDFHelper(root).getCreateResourceSet("FoldingParams", EnumUsage.Input);
+		sh.addTypeToCPI(0);
+		assertNull(sh.getCombinedProcessIndex());
+		sh.setCombinedProcessIndex(JDFIntegerList.createIntegerList("1 3"));
+		sh.addTypeToCPI(2);
+		assertEquals(1, sh.getCombinedProcessIndex().getInt(0));
+		assertEquals(4, sh.getCombinedProcessIndex().getInt(1));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testRemoveTypeFromCPI()
+	{
+		SetHelper sh = new XJDFHelper(root).getCreateResourceSet("FoldingParams", EnumUsage.Input);
+		sh.addTypeToCPI(0);
+		assertNull(sh.getCombinedProcessIndex());
+		sh.setCombinedProcessIndex(JDFIntegerList.createIntegerList("1 4"));
+		sh.removeTypeFromCPI(2);
+		assertEquals(1, sh.getCombinedProcessIndex().getInt(0));
+		assertEquals(3, sh.getCombinedProcessIndex().getInt(1));
+		sh.removeTypeFromCPI(1);
+		assertEquals(2, sh.getCombinedProcessIndex().getInt(0));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testCleanup()
 	{
 		KElement element = root.getElement("ResourceSet");

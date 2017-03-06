@@ -573,13 +573,73 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * remove a CPI process
+	 * @param typ
+	 * @param pos
+	 */
+	public void removeTypeFromCPI(int pos)
+	{
+		JDFIntegerList il = getCombinedProcessIndex();
+		if (il != null)
+		{
+			boolean mod = false;
+			for (int i = 0; i < il.size(); i++)
+			{
+				int iPos = il.getInt(i);
+				if (iPos == pos)
+				{
+					il.remove(i);
+					i--;
+					mod = true;
+				}
+				else if (iPos > pos)
+				{
+					il.setInt(i, iPos - 1);
+					mod = true;
+				}
+			}
+			if (mod)
+			{
+				setCombinedProcessIndex(il);
+			}
+		}
+	}
+
+	/**
+	 * remove a CPI process
+	 * @param typ
+	 * @param pos
+	 */
+	public void addTypeToCPI(int pos)
+	{
+		JDFIntegerList il = getCombinedProcessIndex();
+		if (il != null)
+		{
+			boolean mod = false;
+			for (int i = 0; i < il.size(); i++)
+			{
+				int iPos = il.getInt(i);
+				if (iPos >= pos)
+				{
+					il.setInt(i, iPos + 1);
+					mod = true;
+				}
+			}
+			if (mod)
+			{
+				setCombinedProcessIndex(il);
+			}
+		}
+	}
+
+	/**
 	 *
 	 *
 	 * @return
 	 */
 	public void setCombinedProcessIndex(JDFIntegerList cpi)
 	{
-		setAttribute(AttributeName.COMBINEDPROCESSINDEX, cpi == null ? null : cpi.toString());
+		setAttribute(AttributeName.COMBINEDPROCESSINDEX, cpi == null || cpi.isEmpty() ? null : cpi.toString());
 	}
 
 	/**
@@ -589,7 +649,7 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public void setProcessUsage(String processUsage)
 	{
-		theElement.setAttribute(AttributeName.PROCESSUSAGE, processUsage, null);
+		setAttribute(AttributeName.PROCESSUSAGE, processUsage);
 	}
 
 	/**

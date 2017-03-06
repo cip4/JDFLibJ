@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.FileUtil;
@@ -111,6 +112,65 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	{
 		KElement rlSet = theHelper.appendSet(null, ElementName.RUNLIST, null).getSet();
 		assertEquals(rlSet.getLocalName(), XJDFConstants.ResourceSet);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testAddType()
+	{
+		theHelper.setTypes("Folding");
+		theHelper.addType("Cutting", 0);
+		assertEquals(theHelper.getTypes().get(1), "Folding");
+		assertEquals(theHelper.getTypes().get(0), "Cutting");
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testRemoveType()
+	{
+		theHelper.setTypes("Folding");
+		theHelper.addType("Cutting", 0);
+		theHelper.removeType("Foo", 0);
+		assertEquals(theHelper.getTypes().get(1), "Folding");
+		assertEquals(theHelper.getTypes().get(0), "Cutting");
+		theHelper.removeType("Cutting", 0);
+		assertEquals(theHelper.getTypes().get(0), "Folding");
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testAddTypeCPI()
+	{
+		theHelper.setTypes("Folding");
+		SetHelper rlSet = theHelper.appendSet(null, ElementName.FOLDINGPARAMS, null);
+		rlSet.setCombinedProcessIndex(JDFIntegerList.createIntegerList("0"));
+		theHelper.addType("Cutting", 0);
+		assertEquals(1, rlSet.getCombinedProcessIndex().getInt(0));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testRemoveTypeCPI()
+	{
+		theHelper.setTypes("Folding");
+		SetHelper rlSet = theHelper.appendSet(null, ElementName.FOLDINGPARAMS, null);
+		rlSet.setCombinedProcessIndex(JDFIntegerList.createIntegerList("0"));
+		theHelper.addType("Cutting", 0);
+		assertEquals(1, rlSet.getCombinedProcessIndex().getInt(0));
+		theHelper.removeType("Cutting", 0);
+		assertEquals(0, rlSet.getCombinedProcessIndex().getInt(0));
 	}
 
 	/**

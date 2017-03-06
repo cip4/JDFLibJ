@@ -179,11 +179,11 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 		VString types = root.getTypes();
 		if (types == null)
 			types = new VString();
-		types.remove("Product");
+		root.removeType(XJDFConstants.Product, 0);
 		Vector<ProductHelper> productHelpers = root.getProductHelpers();
 		if (productHelpers != null)
 		{
-			types.insertElementAt("Product", 0);
+			root.addType(XJDFConstants.Product, 0);
 		}
 		return types;
 	}

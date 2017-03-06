@@ -791,7 +791,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public VString getTypes()
 	{
-		return VString.getVString(getXPathValue("@Types"), null);
+		return VString.getVString(getAttribute(AttributeName.TYPES), null);
 	}
 
 	/**
@@ -800,7 +800,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public String getCategory()
 	{
-		return getXPathValue("@Category");
+		return getAttribute(AttributeName.CATEGORY);
 	}
 
 	/**
@@ -916,4 +916,55 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		}
 	}
 
+	/**
+	 * remove a types token
+	 * @param typ
+	 * @param iSkip
+	 */
+	public void removeType(String typ, int iSkip)
+	{
+		VString types = getTypes();
+		if (types != null && types.indexOf(typ, iSkip) >= 0)
+		{
+			int pos = types.indexOf(typ, iSkip);
+			types.remove(pos);
+			setTypes(types);
+			Vector<SetHelper> sets = getSets();
+			if (sets != null)
+			{
+				for (SetHelper set : sets)
+				{
+					set.removeTypeFromCPI(pos);
+				}
+			}
+		}
+	}
+
+	/**
+	 * remove a types token
+	 * @param typ
+	 * @param iSkip
+	 */
+	public void addType(String typ, int iSkip)
+	{
+		VString types = getTypes();
+		if (types == null)
+		{
+			types = new VString();
+		}
+		int lastPos = types.size();
+		if (iSkip <= lastPos)
+		{
+			types.insertElementAt(typ, iSkip);
+			setTypes(types);
+			Vector<SetHelper> sets = getSets();
+			if (sets != null)
+			{
+				for (SetHelper set : sets)
+				{
+					set.addTypeToCPI(iSkip);
+				}
+			}
+		}
+	}
 }
