@@ -219,6 +219,67 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 	/**
 	 *
+	 */
+	@Test
+	public void testDependentMulti()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setJobPartID("p");
+		n.setType(EnumType.ProcessGroup);
+		JDFNode nc = n.addJDFNode(EnumType.ConventionalPrinting);
+		JDFNode nf1 = n.addJDFNode(EnumType.Folding);
+		JDFNode nf2 = n.addJDFNode(EnumType.Folding);
+		JDFResource r = n.addResource(ElementName.COMPONENT, null);
+		JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		r1.setDescriptiveName("d1");
+		JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		r2.setDescriptiveName("d2");
+		nc.linkResource(r, EnumUsage.Output, null);
+		nf1.linkResource(r1, EnumUsage.Input, null);
+		nf2.linkResource(r2, EnumUsage.Input, null);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		conv.setSingleNode(true);
+		KElement xjdff1 = conv.convert(nf1);
+		KElement xjdff2 = conv.convert(nf2);
+		KElement xjdfc1 = conv.convert(nc);
+
+		assertEquals(xjdfc1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.2");
+
+		assertEquals(xjdff1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.1");
+		assertEquals(xjdff2.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.1");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testDependentMultiPart()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setJobPartID("p");
+		n.setType(EnumType.ProcessGroup);
+		JDFNode nc = n.addJDFNode(EnumType.ConventionalPrinting);
+		JDFNode nf = n.addJDFNode(EnumType.Folding);
+		JDFResource r = n.addResource(ElementName.COMPONENT, null);
+		JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		r1.setDescriptiveName("d1");
+		JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		r2.setDescriptiveName("d2");
+		nc.linkResource(r1, EnumUsage.Output, null).getPartMapVector().add(new JDFAttributeMap(EnumPartIDKey.SheetName, "s2"));
+		nf.linkResource(r1, EnumUsage.Input, null).getPartMapVector().add(new JDFAttributeMap(EnumPartIDKey.SheetName, "s2"));
+
+		JDFToXJDF conv = new JDFToXJDF();
+		conv.setSingleNode(true);
+		KElement xjdff1 = conv.convert(nf);
+		KElement xjdfc1 = conv.convert(nc);
+
+		assertEquals(xjdfc1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.2");
+		assertEquals(xjdff1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.1");
+	}
+
+	/**
+	 *
 	 * @return
 	 */
 	public KElement _testDeliveryIntent()

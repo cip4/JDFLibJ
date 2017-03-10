@@ -630,6 +630,7 @@ public class WalkJDFElement extends WalkElement
 							dependent.moveAttribute(AttributeName.PIPEPROTOCOL, resLink);
 							dependent.moveAttribute(AttributeName.PIPEID, linkRoot);
 							dependent.copyAttribute(AttributeName.PIPEPARTIDKEYS, resLink);
+							removeDuplicateDependents(resourceSet);
 						}
 					}
 				}
@@ -644,8 +645,29 @@ public class WalkJDFElement extends WalkElement
 					dependent.moveAttribute(AttributeName.PIPEPROTOCOL, resLink);
 					dependent.moveAttribute(AttributeName.PIPEID, linkRoot);
 					dependent.copyAttribute(AttributeName.PIPEPARTIDKEYS, resLink);
+					removeDuplicateDependents(resourceSet);
+				}
+
+			}
+		}
+	}
+
+	void removeDuplicateDependents(KElement resourceSet)
+	{
+		VElement exist = resourceSet.getChildElementVector(XJDFConstants.Dependent, null);
+		if (exist.size() > 1)
+		{
+			KElement newDep = exist.get(-1);
+			for (int i = exist.size() - 2; i >= 0; i--)
+			{
+				KElement old = exist.get(i);
+				if (old.isEqual(newDep))
+				{
+					newDep.deleteNode();
+					break;
 				}
 			}
 		}
+
 	}
 }
