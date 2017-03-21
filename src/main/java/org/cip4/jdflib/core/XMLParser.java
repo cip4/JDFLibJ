@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /*
  * Created on July 3, 2003
@@ -105,9 +105,9 @@ public class XMLParser extends DOMParser
 {
 	/**
 	 * simple search stream that will find a valid xml wherever it starts
-	 * 
+	 *
 	 * @author prosirai
-	 * 
+	 *
 	 */
 	private class XMLReaderStream extends SkipInputStream
 	{
@@ -122,18 +122,18 @@ public class XMLParser extends DOMParser
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public XMLErrorHandler m_ErrorHandler = null;
 	/**
-	 * 
+	 *
 	 */
 	protected String m_SchemaLocation = null;
 	String inputID;
 
 	/**
 	 * @return the class name
-	 * 
+	 *
 	 */
 	public String getDocumentClass()
 	{
@@ -141,11 +141,11 @@ public class XMLParser extends DOMParser
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public Exception m_lastExcept = null;
 	/**
-	 * 
+	 *
 	 */
 	public static boolean m_searchStream = false;
 
@@ -193,7 +193,7 @@ public class XMLParser extends DOMParser
 
 	/**
 	 * parseFile - parse a file specified by strFile
-	 * 
+	 *
 	 * @param strFile link to the document to parse, may be either a file path or a url
 	 * @return JDFDoc or null if File not found
 	 */
@@ -230,7 +230,10 @@ public class XMLParser extends DOMParser
 			}
 			catch (final FileNotFoundException e)
 			{
-				log.error("cannot find file to parse:", e);
+				if (XMLErrorHandler.isWantLog())
+				{
+					log.error("cannot find file to parse:", e);
+				}
 				return null;
 			}
 		}
@@ -239,7 +242,7 @@ public class XMLParser extends DOMParser
 
 	/**
 	 * parseString - parse a string specified by stringInput
-	 * 
+	 *
 	 * @param stringInput string to parse
 	 * @return JDFDoc or null if parse failed default: parseString(stringInput)
 	 */
@@ -268,7 +271,7 @@ public class XMLParser extends DOMParser
 
 	/**
 	 * parseStream - parse a stream specified by inStream
-	 * 
+	 *
 	 * @param inStream stream to parse
 	 * @return JDFDoc or null if parse failed default: parseStream(inStream)
 	 */
@@ -316,7 +319,7 @@ public class XMLParser extends DOMParser
 
 	/**
 	 * parse an input source
-	 * 
+	 *
 	 * @param inSource the InputSource to parse
 	 */
 	@Override
@@ -327,7 +330,7 @@ public class XMLParser extends DOMParser
 
 	/**
 	 * parse an input source
-	 * 
+	 *
 	 * @param inSource the InputSource to parse
 	 * @return JDFDoc the newly parsed doc
 	 */
@@ -419,7 +422,10 @@ public class XMLParser extends DOMParser
 		catch (final Exception e)
 		{
 			m_lastExcept = e;
-			log.error("error parsing " + e.getMessage());
+			if (XMLErrorHandler.isWantLog())
+			{
+				log.error("error parsing " + e.getMessage());
+			}
 			doc = null;
 		}
 		catch (final StackOverflowError e)
@@ -460,7 +466,7 @@ public class XMLParser extends DOMParser
 
 	/**
 	 * set the physical schema location
-	 * 
+	 *
 	 * @param nsURI the schema namespace uri
 	 * @param locationURL the schema location url
 	 */
@@ -483,7 +489,7 @@ public class XMLParser extends DOMParser
 
 	/**
 	 * (non-Javadoc) reset all internal variables to a reasonable default
-	 * 
+	 *
 	 * @see org.apache.xerces.parsers.AbstractDOMParser#reset()
 	 */
 	public void cleanup()

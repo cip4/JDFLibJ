@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
@@ -94,9 +94,26 @@ public class XMLErrorHandler implements ErrorHandler
 	XMLParser parser;
 	InputSource src;
 	private final Log log;
+	private static boolean wantLog = true;
 
 	/**
-	 * 
+	 * @return the wantLog
+	 */
+	protected static boolean isWantLog()
+	{
+		return wantLog;
+	}
+
+	/**
+	 * @param wantLog the wantLog to set
+	 */
+	protected static void setWantLog(boolean wantLog)
+	{
+		XMLErrorHandler.wantLog = wantLog;
+	}
+
+	/**
+	 *
 	 */
 	public XMLErrorHandler()
 	{
@@ -116,7 +133,10 @@ public class XMLErrorHandler implements ErrorHandler
 		KElement kEl = root.appendElement("Warning");
 		kEl.setAttribute("Message", warn);
 		parser.m_lastExcept = exception;
-		log.warn(warn);
+		if (wantLog)
+		{
+			log.warn(warn);
+		}
 	}
 
 	/**
@@ -132,7 +152,10 @@ public class XMLErrorHandler implements ErrorHandler
 		{
 			KElement kEl = root.appendElement("Error");
 			kEl.setAttribute("Message", er);
-			log.error("Parser error: " + er);
+			if (wantLog)
+			{
+				log.error("Parser error: " + er);
+			}
 		}
 	}
 
@@ -147,12 +170,15 @@ public class XMLErrorHandler implements ErrorHandler
 		KElement kEl = root.appendElement("FatalError");
 		kEl.setAttribute("Message", er);
 		parser.m_lastExcept = exception;
-		log.fatal(er);
+		if (wantLog)
+		{
+			log.fatal(er);
+		}
 		throw new JDFException("Fatal error in the Parser: " + er);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param exception
 	 * @return
 	 */
@@ -177,7 +203,7 @@ public class XMLErrorHandler implements ErrorHandler
 
 	/**
 	 * remove duplicate warnings from the list and set schemaloction
-	 * 
+	 *
 	 * @param schemaLocation
 	 */
 	public void cleanXML(String schemaLocation)
@@ -234,7 +260,7 @@ public class XMLErrorHandler implements ErrorHandler
 	}
 
 	/**
-	 * 
+	 *
 	 * @param inSource
 	 */
 	public void setInputSource(InputSource inSource)
