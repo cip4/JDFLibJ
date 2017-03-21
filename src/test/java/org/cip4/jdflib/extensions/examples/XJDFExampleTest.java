@@ -241,7 +241,7 @@ public class XJDFExampleTest extends JDFTestCaseBase
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
-		writeTest(xjdfHelper, "CPI.xjdf");
+		writeTest(xjdfHelper, "structure/CPI.xjdf");
 	}
 
 	/**
