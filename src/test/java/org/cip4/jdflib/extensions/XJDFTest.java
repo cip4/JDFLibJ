@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -103,7 +104,6 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.node.NodeIdentifier;
-import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -136,7 +136,7 @@ import org.xml.sax.SAXException;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class XJDFTest extends JDFTestCaseBase
 {
@@ -145,7 +145,7 @@ public class XJDFTest extends JDFTestCaseBase
 	private JDFAttributeMap sheetMap = null;
 
 	/**
-	* 
+	*
 	*/
 	@Override
 	public void setUp() throws Exception
@@ -184,7 +184,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testToXJDF()
@@ -211,7 +211,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testToXJDFTypes()
@@ -222,7 +222,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFromXJDFTypes()
@@ -237,7 +237,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFromXJDFTypesNS()
@@ -255,7 +255,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testToXJDFMulti()
@@ -284,7 +284,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testToXJDFProcessList()
@@ -368,10 +368,11 @@ public class XJDFTest extends JDFTestCaseBase
 	public void testXJDFNiCi()
 	{
 		XJDF20 xjdf20 = new XJDF20();
-		n = new JDFDoc("JDF").getJDFRoot();
+		n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		for (int i = 1; i < 4; i++)
 		{
 			JDFNodeInfo ni = (JDFNodeInfo) n.addResource("NodeInfo", null);
+			ni.setNodeStatus(EnumNodeStatus.Cleanup);
 			n.setXPathAttribute("AncestorPool/Ancestor[" + i + "]/NodeInforRef/@rRef", ni.getID());
 			xjdf = xjdf20.makeNewJDF(n, null);
 		}
@@ -379,7 +380,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeStripping()
@@ -405,7 +406,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeStrippingPartition()
@@ -440,7 +441,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testJMFMessageRoot()
@@ -461,7 +462,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	XJDF20 getJMFConverter()
@@ -472,7 +473,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testJMFToXJDF()
@@ -497,7 +498,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testJMFHoldQEToXJDF()
@@ -574,7 +575,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFWithProduct()
@@ -590,7 +591,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFWithSubProductProduct()
@@ -609,7 +610,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFMedia()
@@ -627,7 +628,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFCC()
@@ -644,7 +645,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testResetProduct()
@@ -667,7 +668,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFWithProductMulti()
@@ -685,7 +686,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFWithProductMultiProduct()
@@ -711,7 +712,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testNamedFeatures()
@@ -776,7 +777,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testColorPoolRef()
@@ -845,7 +846,7 @@ public class XJDFTest extends JDFTestCaseBase
 		rl.setActualAmount(300., map);
 		ra.setPartMap(sheetMap);
 		xjdf = new XJDF20().makeNewJDF(n, null);
-		JDFAuditPool ap = (JDFAuditPool) xjdf.getElement(ElementName.AUDITPOOL);
+		xjdf.getElement(ElementName.AUDITPOOL);
 	}
 
 	/**
@@ -939,7 +940,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testToXJDFCustomerInfo()
@@ -950,7 +951,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testToXJDFMedia()
@@ -960,8 +961,8 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception 
-	 *  
+	 * @throws Exception
+	 *
 	 */
 	@Test
 	public void testToXJDFLayout() throws Exception
@@ -1000,7 +1001,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDF()
@@ -1011,7 +1012,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFRunList()
@@ -1036,7 +1037,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFNoNamespace()
@@ -1052,9 +1053,9 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws IOException 
-	 * @throws SAXException 
-	 *  
+	 * @throws IOException
+	 * @throws SAXException
+	 *
 	 */
 	@Test
 	public void testFromXJDFIntentNoNames() throws SAXException, IOException
@@ -1071,7 +1072,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFNiCiLink()
@@ -1093,7 +1094,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFComment()
@@ -1109,7 +1110,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFProductComponentTransfer()
@@ -1127,7 +1128,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFProductComment()
@@ -1142,8 +1143,8 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @return 
-	 *  
+	 * @return
+	 *
 	 */
 	public JDFNode testFromXJDFCompany()
 	{
@@ -1162,8 +1163,8 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testToXJDFCompany()
@@ -1178,8 +1179,8 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testToXJDFPartition()
@@ -1195,8 +1196,8 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testToXJDFSubPartition()
@@ -1217,8 +1218,8 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testFromXJDFPartition()
@@ -1230,7 +1231,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFColorIntentLegacy()
@@ -1270,7 +1271,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFColorIntent44()
@@ -1292,7 +1293,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFColorIntentExplicitUsed()
@@ -1316,7 +1317,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFColorIntentFront()
@@ -1337,7 +1338,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDFResourceID()
@@ -1354,7 +1355,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testFromXJDF2Sheets()
@@ -1379,7 +1380,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testRefFirst()

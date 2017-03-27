@@ -565,7 +565,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		n.setStatus(EnumNodeStatus.Cleanup);
 		conv.setParameterSet(true);
 		KElement xjdf = conv.convert(n);
-		assertEquals(xjdf.getXPathAttribute("ParameterSet/Parameter/NodeInfo/@NodeStatus", null), "Cleanup");
+		assertEquals(xjdf.getXPathAttribute("ParameterSet/Parameter/NodeInfo/@Status", null), "Cleanup");
 		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/@DescriptiveName", null), "desc");
 	}
 

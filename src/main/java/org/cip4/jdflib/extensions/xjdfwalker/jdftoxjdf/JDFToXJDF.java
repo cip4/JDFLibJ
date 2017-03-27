@@ -503,6 +503,7 @@ public class JDFToXJDF extends PackageElementWalker
 		removeEmpty.addIgnoreElement(XJDFConstants.Header);
 		removeEmpty.addIgnoreElement(ElementName.MARKOBJECT);
 		removeEmpty.addIgnoreElement(ElementName.CONTENTOBJECT);
+		removeEmpty.addIgnoreElement(ElementName.NODEINFO);
 		removeEmpty.removEmptyElement(newRoot);
 	}
 

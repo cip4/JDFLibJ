@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
@@ -127,7 +128,13 @@ public class WalkNodeInfo extends WalkResource
 	@Override
 	protected void updateAttributes(KElement elem)
 	{
-		elem.renameAttribute(AttributeName.STATUS, AttributeName.NODESTATUS);
+		// came in via init
+		if (!EnumResStatus.Unavailable.getName().equals(elem.getAttribute(AttributeName.STATUS)))
+		{
+			elem.renameAttribute(AttributeName.STATUS, AttributeName.NODESTATUS);
+		}
+		elem.renameAttribute(AttributeName.STATUSDETAILS, AttributeName.NODESTATUSDETAILS);
+		elem.setAttribute(AttributeName.STATUS, EnumResStatus.Available.getName());
 		super.updateAttributes(elem);
 	}
 }

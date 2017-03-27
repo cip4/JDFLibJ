@@ -113,6 +113,8 @@ public class WalkResource extends WalkJDFElement
 			if (bRoot)
 			{
 				removeDeprecatedResourceAttribs(r, xjdf);
+				xjdf.removeAttribute(AttributeName.STATUS);
+				xjdf.removeAttribute(AttributeName.STATUSDETAILS);
 			}
 		}
 		return newResLeaf;
@@ -132,7 +134,7 @@ public class WalkResource extends WalkJDFElement
 			{
 				if (bRoot)
 				{
-					xjdf.moveAttribute(attrib, newResLeaf, null, null, null);
+					xjdf.moveAttribute(attrib, newResLeaf);
 				}
 				else
 				{
@@ -168,7 +170,6 @@ public class WalkResource extends WalkJDFElement
 		newResLeaf.removeAttribute(AttributeName.NOOP);
 		newResLeaf.removeAttribute(AttributeName.SPAWNSTATUS);
 		newResLeaf.removeAttribute(AttributeName.SPAWNIDS);
-		newResLeaf.removeAttribute(AttributeName.STATUS);
 		newResLeaf.removeAttribute(AttributeName.PARTIDKEYS);
 	}
 

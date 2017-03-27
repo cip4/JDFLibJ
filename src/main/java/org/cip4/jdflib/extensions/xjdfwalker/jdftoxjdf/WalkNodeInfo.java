@@ -119,8 +119,6 @@ public class WalkNodeInfo extends WalkResource
 		map.remove(AttributeName.IPPVERSION);
 		map.remove(AttributeName.ROUTE);
 		map.remove(AttributeName.TARGETROUTE);
-		map.remove(AttributeName.STATUS);
-		map.put(AttributeName.STATUS, map.remove(AttributeName.NODESTATUS));
 		super.updateAttributes(map);
 	}
 
@@ -155,6 +153,17 @@ public class WalkNodeInfo extends WalkResource
 			return false;
 
 		return super.mustInline(refLocalName);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResource#moveAttribsToBase(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void moveAttribsToBase(KElement xjdf, KElement newResLeaf)
+	{
+		super.moveAttribsToBase(xjdf, newResLeaf);
+		newResLeaf.renameAttribute(AttributeName.NODESTATUS, AttributeName.STATUS);
+		newResLeaf.renameAttribute(AttributeName.NODESTATUSDETAILS, AttributeName.STATUSDETAILS);
 	}
 
 }
