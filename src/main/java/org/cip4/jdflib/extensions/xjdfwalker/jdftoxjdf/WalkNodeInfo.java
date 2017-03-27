@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -119,6 +119,8 @@ public class WalkNodeInfo extends WalkResource
 		map.remove(AttributeName.IPPVERSION);
 		map.remove(AttributeName.ROUTE);
 		map.remove(AttributeName.TARGETROUTE);
+		map.remove(AttributeName.STATUS);
+		map.put(AttributeName.STATUS, map.remove(AttributeName.NODESTATUS));
 		super.updateAttributes(map);
 	}
 
