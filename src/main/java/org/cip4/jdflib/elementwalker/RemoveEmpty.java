@@ -393,6 +393,12 @@ public class RemoveEmpty extends BaseElementWalker
 	*/
 	public class WalkIgnore extends WalkElement
 	{
+		public WalkIgnore()
+		{
+			super();
+			depth += 3;
+		}
+
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 * @param e - the element to track
