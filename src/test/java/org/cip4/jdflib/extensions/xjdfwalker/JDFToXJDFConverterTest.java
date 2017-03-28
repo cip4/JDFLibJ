@@ -544,10 +544,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		c.setDescriptiveName("desc");
 		c.addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "s1");
 		KElement x = conv.convert(n);
-		assertEquals(x.toXML().indexOf("SignatureName"), -1);
+		assertEquals(x.toXML().indexOf(AttributeName.SIGNATURENAME), -1);
 		conv.setRemoveSignatureName(false);
 		KElement x2 = conv.convert(n);
-		assertTrue(x2.toXML().indexOf("SignatureName") > 0);
+		assertTrue(x2.toXML().indexOf(AttributeName.SIGNATURENAME) > 0);
 	}
 
 	/**
@@ -558,7 +558,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	public void testKeepParameter()
 	{
 		JDFToXJDF conv = new JDFToXJDF();
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
 		JDFResource c = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		c.setDescriptiveName("desc");
