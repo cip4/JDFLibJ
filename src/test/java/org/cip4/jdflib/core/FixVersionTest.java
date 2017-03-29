@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -98,6 +98,7 @@ import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFComChannel;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.StringUtil;
@@ -105,7 +106,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class FixVersionTest extends JDFTestCaseBase
@@ -114,7 +115,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	private JDFNode n;
 
 	/**
-	 * 
+	 *
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
@@ -130,7 +131,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testApprovalSuccess()
@@ -158,7 +159,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRRefs()
@@ -170,7 +171,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNamespace()
@@ -187,7 +188,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNamespaceRes()
@@ -204,7 +205,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNamespaceParse()
@@ -219,7 +220,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNamespaceRetain()
@@ -231,7 +232,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNamespaceRetainZappDeprecated()
@@ -245,7 +246,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testICSVersions()
@@ -266,7 +267,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAudit()
@@ -303,7 +304,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testResourceStatus()
@@ -318,7 +319,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMultiConstruct()
@@ -335,7 +336,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testConvert()
@@ -348,7 +349,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCustomerMessage()
@@ -362,7 +363,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testChannelType()
@@ -377,7 +378,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNamedFeature()
@@ -392,7 +393,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNumColors()
@@ -410,7 +411,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNodeInfo()
@@ -426,7 +427,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNumColorsDouble()
@@ -445,7 +446,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testTool()
@@ -462,7 +463,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testLayoutPrep()
@@ -480,7 +481,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testJMF()
@@ -497,7 +498,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testJMFQueueFilter()
@@ -514,7 +515,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testJMFQueueAbortQueueEntry()
@@ -533,7 +534,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testJMFQueueHoldQueueEntry()
@@ -552,7 +553,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testJMFQueueRemoveQueueEntry()
@@ -571,7 +572,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testJMFQueueSuspendQueueEntry()
@@ -590,7 +591,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testJMFQueueSusbmitQueueEntry()
@@ -607,7 +608,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testJMFQueueResumeQueueEntry()
@@ -631,7 +632,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testJMFQueue()
@@ -650,7 +651,7 @@ public class FixVersionTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAssembly()
@@ -701,7 +702,21 @@ public class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 * tests updating multiple versions at once
+	 */
+	@Test
+	public void testAmount()
+	{
+		n.setVersion(EnumVersion.Version_1_4);
+		final JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Input);
+		JDFResourceLink rl = n.getLink(c, null);
+		rl.setAttribute(AttributeName.AMOUNT, "333.0");
+		n.fixVersion(null);
+		assertEquals(rl.getAttribute(AttributeName.AMOUNT), "333");
+	}
+
+	/**
+	 *
 	 * @see junit.framework.TestCase#toString()
 	 */
 	@Override

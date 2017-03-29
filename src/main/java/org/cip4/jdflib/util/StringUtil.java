@@ -1935,7 +1935,7 @@ public class StringUtil
 
 		try
 		{
-			new Integer(intStr);
+			Integer.parseInt(intStr);
 			return true;
 		}
 		catch (final NumberFormatException e)
