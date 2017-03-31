@@ -173,7 +173,24 @@ public class XJDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
-	* tests the separationlist class
+	*
+	*/
+	@Test
+	public final void testSingleRunList()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper("RunList", null, null);
+		xjdfHelper.setTypes(EnumType.Imposition.getName());
+		SetHelper rlh = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, null);
+		ResourceHelper runh = rlh.appendPartition(null, null, true);
+		JDFRunList rl = (JDFRunList) runh.getResource();
+		rl.setAttribute(AttributeName.PAGES, "0 -1");
+		rl.appendElement(ElementName.FILESPEC).setAttribute(AttributeName.URL, "File:///in/colortest.pdf");
+		cleanSnippets(xjdfHelper);
+		writeTest(xjdfHelper, "resources/RunListSimple.xjdf");
+
+	}
+
+	/**
 	*
 	*/
 	@Test
