@@ -848,7 +848,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		emp.setPersonalID("P1");
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.makeNewJDF(n, null);
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/@ContactTypes", null), "Employee");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Part/@ContactType", null), ElementName.EMPLOYEE);
 		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/@ContactTypeDetails", null), "ShiftLeader TelephoneSanitizer");
 		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/@ExternalID", null), "P1");
 
@@ -984,7 +984,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.makeNewJDF(n, null);
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/@ContactTypes", null), "Employee");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Part/@ContactType", null), "Employee");
 		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/@ContactTypeDetails", null), "ShiftLeader TelephoneSanitizer");
 		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/@ExternalID", null), "P1");
 		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/Address/@Street", null), "Sesame");

@@ -104,6 +104,7 @@ import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFArtDelivery;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
+import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
@@ -225,6 +226,15 @@ class PostXJDFWalker extends BaseElementWalker
 			super(getFactory());
 		}
 
+		public String getCoating(String coating)
+		{
+			if (coating == null)
+				return null;
+			if ("glossy".equalsIgnoreCase(coating))
+				return "Gloss";
+			return coating;
+		}
+
 		/**
 		 * @param xjdf
 		 * @return true if must continue
@@ -233,7 +243,17 @@ class PostXJDFWalker extends BaseElementWalker
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			updateNamespaces(xjdf);
+			updateAttributes(xjdf);
 			return xjdf;
+		}
+
+		/**
+		 * rename hook
+		 * @param xjdf
+		 */
+		void updateAttributes(KElement xjdf)
+		{
+			// nop
 		}
 
 		void updateNamespaces(final KElement xjdf)
@@ -551,6 +571,58 @@ class PostXJDFWalker extends BaseElementWalker
 		{
 			return new VString(new String[] { ElementName.CONTENTOBJECT, ElementName.MARKOBJECT });
 		}
+	}
+
+	/**
+	 *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 *
+	 */
+	protected class WalkMediaIntent extends WalkIntent
+	{
+		/**
+		 *
+		 */
+		public WalkMediaIntent()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return !retainAll && (toCheck instanceof JDFMediaIntent);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString(ElementName.MEDIAINTENT, null);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkIntent#updateAttributes(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		void updateAttributes(KElement xjdf)
+		{
+			String coating = xjdf.getNonEmpty("FrontCoatings");
+			if (xjdf != null)
+			{
+				xjdf.removeAttribute("FrontCoatings");
+				xjdf.setAttribute("FrontCoating", getCoating(coating));
+			}
+			super.updateAttributes(xjdf);
+		}
+
 	}
 
 	/**
@@ -1373,20 +1445,16 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param xjdf
-		 * @param dummy
-		 * @return
-		*/
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#updateAttributes(org.cip4.jdflib.core.KElement)
+		 */
 		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
+		void updateAttributes(KElement xjdf)
 		{
 			xjdf.removeAttribute(AttributeName.DESCRIPTIVENAME);
 			xjdf.removeAttribute(AttributeName.STATUS);
 			xjdf.removeAttribute(AttributeName.STATUSDETAILS);
 			xjdf.removeAttribute(AttributeName.ID);
-			KElement ret = super.walk(xjdf, dummy);
-			return ret;
+			super.updateAttributes(xjdf);
 		}
 	}
 

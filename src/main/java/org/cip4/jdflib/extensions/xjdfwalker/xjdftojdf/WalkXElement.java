@@ -368,4 +368,13 @@ public class WalkXElement extends BaseWalker
 			emp.setPersonalID(pID);
 		}
 	}
+
+	public String getCoating(String coating)
+	{
+		if (coating == null)
+			return null;
+		if ("gloss".equalsIgnoreCase(coating))
+			return "Glossy";
+		return coating;
+	}
 }

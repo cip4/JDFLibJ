@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -66,13 +66,13 @@
  *
  *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.process.JDFContact;
@@ -98,36 +98,35 @@ public class WalkContact extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFContact;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFContact;
 	}
 
 	/**
-	 * @param e
-	 * @return the created resource
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
 	 */
 	@Override
-	public KElement walk(KElement e, KElement trackElem)
+	public VString getElementNames()
 	{
-		JDFContact c = (JDFContact) e;
-		ResourceHelper h = ResourceHelper.getHelper(c);
-		VJDFAttributeMap vMap = h == null ? null : h.getPartMapVector();
-		if (vMap != null)
-		{
-			VString cTypes = vMap.getPartValues(XJDFConstants.ContactType, true);
-			c.setContactTypes(cTypes);
-		}
-		VString roles = c.getContactTypes();
-		if (roles != null && roles.contains(ElementName.EMPLOYEE))
-		{
-			c.removeAttribute(AttributeName.CONTACTTYPES);
-			c.renameAttribute(AttributeName.CONTACTTYPEDETAILS, AttributeName.ROLES, null, null);
-			if (!ResourceHelper.isResourceElement(c))
-			{
-				c.renameElement(ElementName.EMPLOYEE, null);
-			}
-		}
-		KElement ret = super.walk(e, trackElem);
-		return ret;
+		return new VString(ElementName.CONTACT, null);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResource#moveAttribsToBase(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void moveAttribsToBase(KElement xjdf, KElement newResLeaf)
+	{
+		super.moveAttribsToBase(xjdf, newResLeaf);
+		String ct = newResLeaf.getNonEmpty(AttributeName.CONTACTTYPES);
+		if (ct != null)
+		{
+			ResourceHelper helper = ResourceHelper.getHelper(xjdf);
+			VString vCts = VString.getVString(ct, null);
+			for (String c : vCts)
+			{
+				helper.appendPartMap(new JDFAttributeMap(XJDFConstants.ContactType, c));
+			}
+		}
+		newResLeaf.removeAttribute(AttributeName.CONTACTTYPES);
+	}
 }

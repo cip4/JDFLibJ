@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,24 +68,23 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.extensions.ResourceHelper;
-import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * TODO discuss and implement varying numcolors for front and back, e.g. 4/1
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class WalkContact extends WalkResource
+public class WalkMediaIntent extends WalkIntentResource
 {
+
 	/**
 	 *
+	 *
 	 */
-	public WalkContact()
+	public WalkMediaIntent()
 	{
 		super();
 	}
@@ -98,36 +97,31 @@ public class WalkContact extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFContact;
+		return toCheck instanceof JDFMediaIntent;
 	}
 
 	/**
-	 * @param e
-	 * @return the created resource
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
 	 */
 	@Override
-	public KElement walk(KElement e, KElement trackElem)
+	public VString getElementNames()
 	{
-		JDFContact c = (JDFContact) e;
-		ResourceHelper h = ResourceHelper.getHelper(c);
-		VJDFAttributeMap vMap = h == null ? null : h.getPartMapVector();
-		if (vMap != null)
+		return VString.getVString(ElementName.MEDIAINTENT, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkIntentResource#updateAttributes(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void updateAttributes(KElement elem)
+	{
+		String nonEmpty = elem.getNonEmpty("FrontCoating");
+		if (nonEmpty != null)
 		{
-			VString cTypes = vMap.getPartValues(XJDFConstants.ContactType, true);
-			c.setContactTypes(cTypes);
+			elem.removeAttribute("FrontCoating");
+			elem.setAttribute("FrontCoatings", getCoating(nonEmpty));
 		}
-		VString roles = c.getContactTypes();
-		if (roles != null && roles.contains(ElementName.EMPLOYEE))
-		{
-			c.removeAttribute(AttributeName.CONTACTTYPES);
-			c.renameAttribute(AttributeName.CONTACTTYPEDETAILS, AttributeName.ROLES, null, null);
-			if (!ResourceHelper.isResourceElement(c))
-			{
-				c.renameElement(ElementName.EMPLOYEE, null);
-			}
-		}
-		KElement ret = super.walk(e, trackElem);
-		return ret;
+		super.updateAttributes(elem);
 	}
 
 }
