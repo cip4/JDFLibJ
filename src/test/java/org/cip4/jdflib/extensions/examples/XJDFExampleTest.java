@@ -211,10 +211,11 @@ public class XJDFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testComment()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper("Comment", null, null);
+		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.COMMENT, null, null);
 		xjdfHelper.setTypes(ElementName.MANUALLABOR);
 		KElement comment = xjdfHelper.appendElement(ElementName.COMMENT);
 		comment.setText("Multiline text\n\twith white space\n\n\nand empty lines\n\n");
+		comment.setAttribute(AttributeName.TYPE, "Instruction");
 		xjdfHelper.cleanUp();
 		setSnippet(comment, true);
 		writeTest(xjdfHelper, "subelements/comment.xjdf");

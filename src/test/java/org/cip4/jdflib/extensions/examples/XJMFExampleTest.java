@@ -186,6 +186,26 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testResponseResumeQEBad()
+	{
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper response = xjmfHelper.appendMessage(EnumFamily.Response, XJDFConstants.ModifyQueueEntry);
+		response.getHeader().setAttribute(AttributeName.REFID, "C1");
+		response.getHeader().setAttribute(AttributeName.ID, "R1");
+		response.setAttribute(AttributeName.RETURNCODE, "105");
+		JDFNotification not = (JDFNotification) response.appendElement(ElementName.NOTIFICATION);
+		not.setAttribute(AttributeName.CLASS, "Error");
+		not.appendComment().setText("Not resuming unknown QueueEntry: YourQueueEntryID");
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "system/ResponseError.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testResponseNotification()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
