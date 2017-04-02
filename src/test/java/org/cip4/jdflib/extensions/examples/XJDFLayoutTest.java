@@ -223,15 +223,12 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		JDFPageCondition pc = (JDFPageCondition) po.appendElement(ElementName.PAGECONDITION);
 		JDFAttributeMap mPart = new JDFAttributeMap(AttributeName.RUNINDEX, "0 0");
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
-		for (int i = 0; i < 4; i++)
-		{
-			mPart.put(AttributeName.DOCINDEX, "" + i + " " + i);
-			vMap.add(mPart.clone());
-		}
+		vMap.add(mPart);
 
 		pc.setPartMapVector(vMap);
 		KElement cond = pc.appendElement(AttributeName.CONDITION);
 		cond.moveElements(pc.getChildElementVector(ElementName.PART, null), null);
+		cond.setAttribute(XJDFConstants.PartContext, AttributeName.DOCINDEX);
 		xjdfHelper.cleanUp();
 		setSnippet(shLO, true);
 		writeTest(xjdfHelper, "resources/pageCondition.xjdf");

@@ -385,13 +385,13 @@ public class XJDFTest extends JDFTestCaseBase
 	@Test
 	public void testMergeStripping()
 	{
-		n = new JDFDoc("JDF").getJDFRoot();
+		n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Stripping);
 		JDFRunList rl = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
 		assertNotNull(rl);
 		JDFStrippingParams sp = (JDFStrippingParams) n.appendMatchingResource(ElementName.STRIPPINGPARAMS, EnumProcessUsage.AnyInput, null);
 		JDFBinderySignature bs = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, null, null, null, null, null, null);
-		JDFLayout lo = (JDFLayout) n.addResource("Layout", EnumUsage.Output);
+		JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Output);
 		assertNotNull(lo);
 		sp.refBinderySignature(bs);
 		sp.appendPosition();

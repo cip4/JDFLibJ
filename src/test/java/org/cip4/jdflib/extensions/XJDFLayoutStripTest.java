@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,13 +71,23 @@ package org.cip4.jdflib.extensions;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCustomerInfo;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
+import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
+import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -90,7 +100,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	private SetHelper bssh;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testStripLayout_BSSep()
@@ -133,7 +143,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	/**
 	 * @param lo
 	 * @param i
-	 * @return 
+	 * @return
 	 */
 	private JDFContentObject initContentObject(JDFLayout lo, int i)
 	{
@@ -154,7 +164,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testStripLayout_AllinOne()
@@ -193,7 +203,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testDescribeFinishedGang()
@@ -243,7 +253,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testStripLayout_verbose()
@@ -311,4 +321,34 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		bssh = null;
 	}
 
+	/**
+	 *
+	 */
+	@Ignore
+	@Test
+	public void testStripCell()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Stripping);
+		JDFStrippingParams sp = (JDFStrippingParams) n.appendMatchingResource(ElementName.STRIPPINGPARAMS, EnumProcessUsage.AnyInput, null);
+		sp = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.BinderySignatureName, "BS1");
+		JDFBinderySignature bs = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, null);
+		sp.refBinderySignature(bs);
+		sp.appendPosition();
+		sp.appendStripCellParams().setSpine(42);
+
+		JDFToXJDF xjdf20 = new JDFToXJDF();
+
+		KElement xjdf = xjdf20.makeNewJDF(n, null);
+		JDFBinderySignature bsNew = (JDFBinderySignature) xjdf.getChildByTagName(ElementName.BINDERYSIGNATURE, null, 0, null, false, true);
+		assertEquals(42, bsNew.getSignatureCell(0).getIntAttribute(XJDFConstants.TrimSpine, null, 0));
+
+		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		JDFDoc dJDF = xc.convert(xjdf);
+		JDFNode n2 = dJDF.getJDFRoot();
+		JDFStrippingParams sp2 = (JDFStrippingParams) n2.getResource(ElementName.STRIPPINGPARAMS, null, 0);
+		//TODO
+		assertNotNull(sp2.getStripCellParams());
+		assertEquals(42, sp2.getStripCellParams().getSpine(), 0.1);
+	}
 }

@@ -667,6 +667,16 @@ class PostXJDFWalker extends BaseElementWalker
 			super.walk(stripCellParams, dummy);
 			return stripCellParams; // stop after merging
 		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#updateAttributes(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		void updateAttributes(KElement xjdf)
+		{
+			xjdf.renameAttribute(AttributeName.SPINE, XJDFConstants.TrimSpine);
+			super.updateAttributes(xjdf);
+		}
 	}
 
 	/**
