@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -69,6 +69,7 @@ import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaUnit;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
@@ -1109,6 +1110,23 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 
 		d.write2File(sm_dirTestDataTemp + File.separator + "DigitalDelivery.jdf", 2, false);
 
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testComment()
+	{
+		KElement.setLongID(false);
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode pgNode = d.getJDFRoot();
+		pgNode.setType(EnumType.ManualLabor);
+		JDFComment comment = pgNode.appendComment();
+		comment.setText("Multiline text\n\twith white space\n\n\nand empty lines\n");
+		comment.setName("Instruction");
+		setSnippet(comment, true);
+		writeTest(pgNode, "subelements/comment.jdf", true);
 	}
 
 	/**
