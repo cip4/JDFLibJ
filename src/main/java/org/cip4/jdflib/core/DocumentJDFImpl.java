@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,23 +56,23 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  * DocumentJDFImpl.java - JDFElement Factory
  *
  * @author Dietrich Mucha
- * 
+ *
  * This method creates at least a KElement !!! (was JDFElement until 11.2005)
  *
  * Copyright (C) 2003 Heidelberger Druckmaschinen AG. All Rights Reserved.
@@ -99,13 +99,13 @@ import org.w3c.dom.Node;
 /**
  * implementation of the JDFLib class factory
  * @author prosirai
- * 
+ *
  */
 public class DocumentJDFImpl extends DocumentXMLImpl
 {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final String CORE_KELEMENT = "org.cip4.jdflib.core.KElement";
 	private static final String CORE_JDFELEMENT = "org.cip4.jdflib.core.JDFElement";
@@ -113,14 +113,14 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 
 	/**
 	 * this is a singlton data container for the parser
-	 * 
+	 *
 	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	private static class DocumentData
 	{
 		/**
 		 * register new custom class in the factory
-		 * 
+		 *
 		 * @param strElement local name
 		 * @param packagepath package path
 		 */
@@ -936,7 +936,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		}
 
 		/**
-		 * 
+		 *
 		 */
 		public DocumentData()
 		{
@@ -1005,7 +1005,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	public DocumentJDFImpl clone()
 	{
 		DocumentJDFImpl clon = (DocumentJDFImpl) super.clone();
-		clon.myXMLUserDat = new XMLDocUserData(this);
+		clon.myXMLUserDat = new XMLDocUserData(clon);
 		clon.bInitOnCreate = bInitOnCreate;
 		clon.bKElementOnly = bKElementOnly;
 		clon.m_Bodypart = m_Bodypart;
@@ -1016,7 +1016,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 
 	/**
 	 * register new custom class in the factory
-	 * 
+	 *
 	 * @param strElement local name
 	 * @param packagepath package path
 	 */
@@ -1174,7 +1174,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 
 	/**
 	 * Method createKElement
-	 * 
+	 *
 	 * @param constructi
 	 * @param constructorArguments
 	 * @return KElement (always != <code>null</code>)
@@ -1222,7 +1222,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	/**
 	 * Searches for the matching factory class in sm_PackageNames If a match could not be found then JDFResource.class is returned if the element is in a
 	 * resource pool else if the element is in the default name space JDFElement.class is returned else KElement.class is returned
-	 * 
+	 *
 	 * will return JDFElement.class or JDFResource.class only.
 	 * @param qualifiedName the qualified name of the class
 	 * @return
@@ -1303,7 +1303,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		String strClassPath = null;
 
 		if (qualifiedName.endsWith(JDFConstants.LINK)
-		// CreateLink and RemoveLink are messages, no links
+				// CreateLink and RemoveLink are messages, no links
 				&& !ElementName.CREATELINK.equals(qualifiedName) && !ElementName.REMOVELINK.equals(qualifiedName))
 		{
 			strClassPath = data.sm_PackageNames.get(ElementName.RESOURCELINK);
@@ -1394,7 +1394,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			else
 			{
 				// should never get her - needed for compiler happiness
-				strClassPath = (nameSpaceURI == null && bInJDFJMF || (nameSpaceURI != null && nameSpaceURI.startsWith(jdfNSURIPrefix))) ? data.sm_PackageNames.get("EleDefault") : data.sm_PackageNames.get("OtherNSDefault");
+				strClassPath = (nameSpaceURI == null && bInJDFJMF
+						|| (nameSpaceURI != null && nameSpaceURI.startsWith(jdfNSURIPrefix))) ? data.sm_PackageNames.get("EleDefault") : data.sm_PackageNames.get("OtherNSDefault");
 			}
 		}
 		else
@@ -1405,7 +1406,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			}
 			else
 			{
-				strClassPath = (nameSpaceURI == null && bInJDFJMF || (nameSpaceURI != null && nameSpaceURI.startsWith(jdfNSURIPrefix))) ? data.sm_PackageNames.get("EleDefault") : data.sm_PackageNames.get("OtherNSDefault");
+				strClassPath = (nameSpaceURI == null && bInJDFJMF
+						|| (nameSpaceURI != null && nameSpaceURI.startsWith(jdfNSURIPrefix))) ? data.sm_PackageNames.get("EleDefault") : data.sm_PackageNames.get("OtherNSDefault");
 			}
 		}
 
@@ -1427,8 +1429,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @param node
 	 */
 	public void setParentNode(final Node node)
@@ -1460,7 +1462,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 
 	/**
 	 * get/create the associated XMLDocUserData
-	 * 
+	 *
 	 * @return the XMLDocUserData of this
 	 */
 	protected XMLDocUserData getXMLDocUserData()
