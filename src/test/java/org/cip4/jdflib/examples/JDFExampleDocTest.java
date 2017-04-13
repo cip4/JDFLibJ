@@ -1123,7 +1123,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		JDFNode pgNode = d.getJDFRoot();
 		pgNode.setType(EnumType.ManualLabor);
 		JDFComment comment = pgNode.appendComment();
-		comment.setText("Multiline text\n\twith white space\n\n\nand empty lines\n");
+		comment.setText("Multiline text\n\twith white space\n\n\nand empty lines");
 		comment.setName("Instruction");
 		setSnippet(comment, true);
 		writeTest(pgNode, "subelements/comment.jdf", true);

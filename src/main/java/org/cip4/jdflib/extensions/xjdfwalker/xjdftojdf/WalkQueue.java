@@ -66,57 +66,61 @@
  *
  *
  */
-package org.cip4.jdflib.jmf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFQueue;
 
 /**
- *
- * @author rainer prosi
- * @date Apr 4, 2014
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class JDFQueueTest extends JDFTestCaseBase
+public class WalkQueue extends WalkXElement
 {
 	/**
 	 *
-	 *
 	 */
-	public void testgetEntryCount()
+	public WalkQueue()
 	{
-		JDFQueue q = (JDFQueue) new JDFDoc(ElementName.QUEUE).getRoot();
-		for (int i = 0; i < 42; i++)
-		{
-			assertEquals(q.numEntries(null), i);
-			assertEquals(q.getEntryCount(), i);
-			q.appendQueueEntry();
-		}
+		super();
 	}
 
 	/**
-	 *
-	 *
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
-	public void testXJMFQueue()
+	@Override
+	public boolean matches(final KElement toCheck)
 	{
-		JDFDoc jdfDoc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = jdfDoc.getJMFRoot();
-		JDFQueue q = jmf.appendResponse(EnumType.QueueStatus).appendQueue();
-		q.setDeviceID("d1");
-		for (int i = 0; i < 42; i++)
+		return toCheck instanceof JDFQueue;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return new VString(ElementName.QUEUE, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void updateAttributes(KElement elem)
+	{
+		JDFQueue q = (JDFQueue) elem;
+		KElement p = elem.getParentNode_KElement();
+		if (p instanceof JDFMessage)
 		{
-			JDFQueueEntry qe = q.appendQueueEntry();
-			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 8));
-			qe.setQueueEntryID("q" + i);
+			q.setDeviceID(((JDFMessage) p).getSenderID());
 		}
 		q.setStatusFromEntries();
-		KElement xjmf = convertToXJDF(jmf);
-		assertEquals(42, xjmf.getChildrenByClass(JDFQueueEntry.class, true, 0).size());
-		writeRoundTrip(jmf, "QueueStatus.jmf");
+		super.updateAttributes(elem);
 	}
 
 }

@@ -66,57 +66,77 @@
  *
  *
  */
-package org.cip4.jdflib.jmf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFQueueEntry;
 
 /**
  *
- * @author rainer prosi
- * @date Apr 4, 2014
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
  */
-public class JDFQueueTest extends JDFTestCaseBase
+public class WalkQueueEntry extends WalkJDFElement
 {
 	/**
 	 *
-	 *
 	 */
-	public void testgetEntryCount()
+	public WalkQueueEntry()
 	{
-		JDFQueue q = (JDFQueue) new JDFDoc(ElementName.QUEUE).getRoot();
-		for (int i = 0; i < 42; i++)
-		{
-			assertEquals(q.numEntries(null), i);
-			assertEquals(q.getEntryCount(), i);
-			q.appendQueueEntry();
-		}
+		super();
 	}
 
 	/**
-	 *
-	 *
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
-	public void testXJMFQueue()
+	@Override
+	public boolean matches(final KElement toCheck)
 	{
-		JDFDoc jdfDoc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = jdfDoc.getJMFRoot();
-		JDFQueue q = jmf.appendResponse(EnumType.QueueStatus).appendQueue();
-		q.setDeviceID("d1");
-		for (int i = 0; i < 42; i++)
-		{
-			JDFQueueEntry qe = q.appendQueueEntry();
-			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 8));
-			qe.setQueueEntryID("q" + i);
-		}
-		q.setStatusFromEntries();
-		KElement xjmf = convertToXJDF(jmf);
-		assertEquals(42, xjmf.getChildrenByClass(JDFQueueEntry.class, true, 0).size());
-		writeRoundTrip(jmf, "QueueStatus.jmf");
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFQueueEntry);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return new VString(ElementName.QUEUEENTRY, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
+	{
+		String status = map.get(AttributeName.STATUS);
+		if (EnumQueueEntryStatus.Running.getName().equals(status))
+		{
+			map.put(AttributeName.STATUS, "InProgress");
+		}
+		else if (EnumQueueEntryStatus.Held.getName().equals(status))
+		{
+			map.put(AttributeName.STATUS, "Waiting");
+			map.put(AttributeName.ACTIVATION, "Held");
+		}
+		else if (EnumQueueEntryStatus.Removed.getName().equals(status))
+		{
+			map.put(AttributeName.STATUS, "Completed");
+			map.put(AttributeName.STATUSDETAILS, "Removed");
+		}
+		else if (EnumQueueEntryStatus.PendingReturn.getName().equals(status))
+		{
+			map.put(AttributeName.STATUS, "Completed");
+			map.put(AttributeName.STATUSDETAILS, "PendingReturn");
+		}
+		super.updateAttributes(map);
+	}
 }

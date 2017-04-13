@@ -74,6 +74,7 @@ import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.jmf.JDFDeviceFilter;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
@@ -136,6 +137,18 @@ public class JMFExampleTest extends JDFTestCaseBase
 		}
 
 		writeTest(jmf, "Activity.jmf", true);
+	}
+
+	/**
+	 *
+	 *  new activity element in JobPhase
+	 */
+	@Test
+	public void testKnownDevices()
+	{
+		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		JDFJMF jmf = b.buildKnownDevicesQuery(JDFDeviceFilter.EnumDeviceDetails.Brief);
+		writeTest(jmf, "overview/knowndevices.jmf", true);
 	}
 
 	@Override

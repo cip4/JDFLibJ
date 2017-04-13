@@ -487,7 +487,10 @@ public abstract class JDFTestCaseBase extends TestCase
 		XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		JDFDoc converted = jdfConverter.convert(xjdfRoot);
 		converted.write2File(sm_dirTestDataTemp + fileBase + ".xjdf.jdf", 2, false);
-		assertTrue(fileBase + ".xjdf.jdf", converted.getJDFRoot().isValid(EnumValidationLevel.Complete));
+		JDFElement jxRoot = converted.getJDFRoot();
+		if (jxRoot == null)
+			jxRoot = converted.getJMFRoot();
+		assertTrue(fileBase + ".xjdf.jdf", jxRoot.isValid(EnumValidationLevel.Complete));
 	}
 
 	/**
