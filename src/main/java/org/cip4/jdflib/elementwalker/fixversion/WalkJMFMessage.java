@@ -129,6 +129,8 @@ public class WalkJMFMessage extends WalkElement
 		b = b || JDFMessage.EnumType.AbortQueueEntry.equals(type);
 		b = b || JDFMessage.EnumType.RemoveQueueEntry.equals(type);
 		b = b || JDFMessage.EnumType.HoldQueueEntry.equals(type);
+		b = b || JDFMessage.EnumType.SuspendQueueEntry.equals(type);
+		b = b || JDFMessage.EnumType.ResumeQueueEntry.equals(type);
 		b = b || JDFMessage.EnumType.RemoveQueueEntry.equals(type);
 		b = b || JDFMessage.EnumType.ResubmitQueueEntry.equals(type);
 		b = b || JDFMessage.EnumType.SetQueueEntryPosition.equals(type);
