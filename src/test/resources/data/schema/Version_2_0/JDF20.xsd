@@ -1470,12 +1470,12 @@
     <!-- ** Complex type definition for AuditPool ** -->
     <xs:element name="AuditPool">
         <xs:complexType>
-            <xs:choice maxOccurs="unbounded">
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="AuditCreated"/>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="AuditNotification"/>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="AuditProcessRun"/>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="AuditResource"/>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="AuditStatus"/>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="AuditCreated"/>
+                <xs:element ref="AuditNotification"/>
+                <xs:element ref="AuditProcessRun"/>
+                <xs:element ref="AuditResource"/>
+                <xs:element ref="AuditStatus"/>
             </xs:choice>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -1703,9 +1703,11 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="Cut"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="CutBlock"/>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
+                	<xs:choice>
+                    	<xs:element maxOccurs="unbounded" minOccurs="0" ref="Cut"/>
+                    	<xs:element maxOccurs="unbounded" minOccurs="0" ref="CutBlock"/>
+ 		                <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
+                    </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="SheetLay" type="SheetLay" use="optional"/>
             </xs:extension>
@@ -3688,8 +3690,10 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="BoxFoldAction"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="Glue"/>
+                	<xs:choice maxOccurs="unbounded" minOccurs="0">  
+                    	<xs:element ref="BoxFoldAction"/>
+                    	<xs:element ref="Glue"/>
+                    </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="BlankDimensionsX" type="DoubleList" use="optional"/>
                 <xs:attribute name="BlankDimensionsY" type="DoubleList" use="optional"/>
@@ -4967,9 +4971,9 @@
     <!-- ** Complex type definition for MediaLayers ** -->
     <xs:element name="MediaLayers">
         <xs:complexType>
-            <xs:choice maxOccurs="unbounded">
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="Glue"/>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="Media"/>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="Glue"/>
+                <xs:element ref="Media"/>
             </xs:choice>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>

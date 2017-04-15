@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
@@ -81,7 +82,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 {
 
 	/**
-	 * 
+	 *
 	 */
 	public void testGetXJDFSchema()
 	{
@@ -89,7 +90,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testBaseValidate()
@@ -100,7 +101,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSimpleValidate()
@@ -109,8 +110,21 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/Resource/ConventionalPrintingParams/@WorkStyle", "WorkAndTurn");
 		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/@Usage", "Input");
 		root.setAttribute("Types", "ConventionalPrinting");
-		JDFDoc doc = getXJDFSchemaParser().parseString(root.toXML());
-		assertNotNull(doc.getValidationResult());
+		writeTest(root, "../SimpleCP.xjdf", false);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testEmptyAuditPool()
+	{
+		KElement root = new XJDFHelper("j1", "p", null).getRoot();
+		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/Resource/ConventionalPrintingParams/@WorkStyle", "WorkAndTurn");
+		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/@Usage", "Input");
+		root.setAttribute("Types", "ConventionalPrinting");
+		root.getElement(ElementName.AUDITPOOL).removeChildren(null, null, null);
+		writeTest(root, "../NoAudit.xjdf", false);
 	}
 
 }

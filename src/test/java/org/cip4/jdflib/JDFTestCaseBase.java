@@ -495,7 +495,7 @@ public abstract class JDFTestCaseBase extends TestCase
 
 	/**
 	 * create a standard customerInfo
-	 * @param doc the doc to preparein
+	 * @param doc the doc to prepare
 	 * @return the new customerInfo
 	 */
 	protected JDFCustomerInfo prepareCustomerInfo(final JDFDoc doc)
