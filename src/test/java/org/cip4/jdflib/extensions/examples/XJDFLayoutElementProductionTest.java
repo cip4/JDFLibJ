@@ -185,7 +185,7 @@ public class XJDFLayoutElementProductionTest extends JDFTestCaseBase
 		JDFShapeElement s = ((JDFShapeDef) rhc.getResource()).appendShape();
 		s.setDDESCutType(101);
 		s.setShapeType(EnumShapeType.Path);
-		s.setCutPath("10 0 l");
+		s.setCutPath("10 0 l 0 10 l -10 -10 l");
 		JDFRunList rl = (JDFRunList) rhrl.getResource();
 		rl.setNPage(1);
 		lop.setAttribute(XJDFConstants.ShapeDefRef, rhc.getID());

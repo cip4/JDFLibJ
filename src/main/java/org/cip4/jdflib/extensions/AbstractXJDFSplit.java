@@ -72,6 +72,7 @@ package org.cip4.jdflib.extensions;
 import java.util.Collection;
 import java.util.Vector;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
@@ -184,6 +185,13 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 		return set;
 	}
 
+	/**
+	 *
+	 * @param set
+	 * @param types
+	 * @param allTypes
+	 * @return
+	 */
 	protected SetHelper checkCPI(SetHelper set, VString types, VString allTypes)
 	{
 		if (set != null && allTypes != null)
@@ -245,7 +253,18 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 		else
 		{
 			fixUsage(set, li);
+			fixCPI(set, li);
 		}
+	}
+
+	/**
+	 * fix the combinedprocessindex - initial implementation is delete only
+	 * @param set
+	 * @param li
+	 */
+	protected void fixCPI(SetHelper set, LinkInfo li)
+	{
+		set.removeAttribute(AttributeName.COMBINEDPROCESSINDEX, null);
 	}
 
 	/**

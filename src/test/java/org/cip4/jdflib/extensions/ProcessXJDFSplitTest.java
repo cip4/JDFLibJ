@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.Test;
 
@@ -165,9 +166,13 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		JDFDoc d = c.convert(h.getRoot());
 		JDFNode root = d.getJDFRoot();
 		JDFNode imSet = (JDFNode) root.getvJDFNode("ImageSetting", null, true).get(0);
-		assertEquals("PS1", imSet.getResource(ElementName.DEVICE, null, 0).getAttribute(AttributeName.DEVICEID));
+		JDFResource jdfDev = imSet.getResource(ElementName.DEVICE, null, 0);
+		assertEquals("PS1", jdfDev.getAttribute(AttributeName.DEVICEID));
+		assertNull(imSet.getLink(jdfDev, null).getNonEmpty(AttributeName.COMBINEDPROCESSINDEX));
 		JDFNode cp = (JDFNode) root.getvJDFNode("ConventionalPrinting", null, true).get(0);
-		assertEquals("P1", cp.getResource(ElementName.DEVICE, null, 0).getAttribute(AttributeName.DEVICEID));
+		JDFResource cpDev = cp.getResource(ElementName.DEVICE, null, 0);
+		assertEquals("P1", cpDev.getAttribute(AttributeName.DEVICEID));
+		assertNull(cp.getLink(cpDev, null).getNonEmpty(AttributeName.COMBINEDPROCESSINDEX));
 
 		d.write2File(sm_dirTestDataTemp + "splitDevxjdf.jdf", 2, false);
 		assertTrue(d.getJDFRoot().isValid(EnumValidationLevel.Incomplete));
