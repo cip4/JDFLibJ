@@ -76,6 +76,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
@@ -197,6 +198,32 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 
 		JDFDoc d = c.convert(h.getRoot());
 		d.write2File(sm_dirTestDataTemp + "splitxjdfNull.jdf", 2, false);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSplitJPIDTypes()
+	{
+		XJDFHelper h = new XJDFHelper("j1", "root", null);
+		h.setTypes("Screening ImageSetting ConventionalPrinting");
+		SetHelper s = h.appendResourceSet("Media", EnumUsage.Input);
+		ResourceHelper p = s.appendPartition(null, true);
+		((JDFMedia) p.getResource()).setMediaType(EnumMediaType.Plate);
+
+		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+		splitter.addGroup(new VString("Screening ImageSetting PreviewGeneration", null));
+		c.setSplitter(splitter);
+
+		JDFDoc d = c.convert(h.getRoot());
+		VElement v = d.getJDFRoot().getvJDFNode(null, null, false);
+		for (KElement e : v)
+		{
+			assertEquals(-1, e.getNonEmpty(AttributeName.JOBPARTID).indexOf(" "));
+		}
+		d.write2File(sm_dirTestDataTemp + "splitxjdfTypes.jdf", 2, false);
 	}
 
 	/**

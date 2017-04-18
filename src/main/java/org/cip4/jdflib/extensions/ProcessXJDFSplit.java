@@ -114,7 +114,7 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 				String jobPartID = root.getJobPartID();
 				if (jobPartID == null)
 					jobPartID = "Part_";
-				h.setJobPartID(jobPartID + StringUtil.setvString(types));
+				h.setJobPartID(jobPartID + StringUtil.setvString(types, "_", null, null));
 				h.setID(null);
 				fixInOutLinks(h, allTypes);
 				ret.add(h);
