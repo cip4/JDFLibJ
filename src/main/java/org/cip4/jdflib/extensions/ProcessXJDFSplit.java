@@ -154,7 +154,14 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 					overlap = types.getOverlapping(group);
 					if (overlap != null)
 					{
-						break;
+						if (overlap.size() > 1)
+						{
+							break;
+						}
+						else
+						{
+							overlap = null;
+						}
 					}
 				}
 			}
