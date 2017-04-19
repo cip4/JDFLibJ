@@ -75,6 +75,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.RollingBackupFile;
+import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.file.FileSorter;
 
 /**
@@ -355,7 +356,25 @@ class StorageHotFolderListener implements HotFolderListener
 		if (ok)
 		{
 			File aux = FileUtil.getAuxDir(hotFile);
-			FileUtil.moveFileToDir(aux, storage);
+			if (aux != null)
+			{
+				log.info("moving aux file " + aux + " to " + storage);
+				for (int i = 1; true; i++)
+				{
+					File moved = FileUtil.moveFileToDir(aux, storage);
+					if (moved != null)
+					{
+						log.info("moved aux dir " + aux + " to " + moved);
+						break;
+					}
+					else
+					{
+						log.warn("could not move aux dir " + aux + " to " + storage + " #" + i);
+						if (i == 3 || !ThreadUtil.sleep(4242 * i))
+							break;
+					}
+				}
+			}
 		}
 		return ok ? newAbsoluteFile : null;
 	}
