@@ -116,7 +116,7 @@ public class WalkStatusQuParams extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.KNOWNMSGQUPARAMS, null);
+		return new VString(ElementName.STATUSQUPARAMS, null);
 	}
 
 }

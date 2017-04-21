@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,7 +76,7 @@ public class WalkPipeControl extends WalkTypesafeMessage
 {
 
 	/**
-	 * 
+	 *
 	 */
 	public WalkPipeControl()
 	{
@@ -84,7 +84,7 @@ public class WalkPipeControl extends WalkTypesafeMessage
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkTypesafeMessage#matches(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
@@ -95,7 +95,7 @@ public class WalkPipeControl extends WalkTypesafeMessage
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkTypesafeMessage#getMessageType(org.cip4.jdflib.core.KElement, java.lang.String, java.lang.String)
 	 */
 	@Override
@@ -114,6 +114,6 @@ public class WalkPipeControl extends WalkTypesafeMessage
 				}
 			}
 		}
-		return operation;
+		return "Pipe" + operation;
 	}
 }

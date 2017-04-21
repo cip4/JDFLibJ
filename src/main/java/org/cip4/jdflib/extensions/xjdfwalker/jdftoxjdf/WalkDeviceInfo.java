@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -161,6 +162,25 @@ public class WalkDeviceInfo extends WalkJDFSubElement
 		{
 			parent.moveAttribute(AttributeName.DEVICEID, eNew);
 		}
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public KElement walk(KElement jdf, KElement xjdf)
+	{
+		KElement e = jdf.getParentNode_KElement();
+		if (e instanceof JDFDeviceList)
+		{
+			String devID = jdf.getNonEmpty(AttributeName.DEVICEID);
+			if (devID != null)
+			{
+				jdf.getCreateElement(ElementName.DEVICE).setAttribute(AttributeName.DEVICEID, devID);
+			}
+			return xjdf;
+		}
+		return super.walk(jdf, xjdf);
 	}
 
 }

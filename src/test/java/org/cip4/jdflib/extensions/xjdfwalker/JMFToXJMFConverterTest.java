@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -77,9 +78,12 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.jmf.JDFPipeParams;
 import org.cip4.jdflib.jmf.JDFQuery;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFResourceQuParams;
@@ -102,12 +106,17 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	public void testPipeJMF()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.PipeClose);
+		JDFPipeParams pp = jmf.getCommand(0).getCreatePipeParams(0);
+		pp.setJobID("j1");
+		pp.setJobPartID("p2");
+		pp.setPipeID("pid");
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjmf = conv.makeNewJMF(jmf);
 		assertEquals(xjmf.getXPathAttribute("CommandPipeControl/PipeParams/@Operation", null), "Close");
 		final JDFJMF jmfResp = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.PipeClose);
 		xjmf = conv.makeNewJMF(jmfResp);
 		assertEquals(xjmf.getElement("ResponsePipeControl").getLocalName(), "ResponsePipeControl");
+		writeRoundTrip(jmf, "pipecontrol.jmf");
 	}
 
 	/**
@@ -144,6 +153,21 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testKnownDevicesResponse()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Response, EnumType.KnownDevices);
+		JDFDeviceInfo deviceInfo = jmf.getResponse(0).appendDeviceList().appendDeviceInfo();
+		deviceInfo.setDeviceID("d1");
+		deviceInfo.setDeviceStatus(EnumDeviceStatus.Idle);
+		KElement x = convertToXJDF(jmf);
+		assertEquals("d1", x.getXPathAttribute("ResponseKnownDevices/Device/@DeviceID", null));
+		writeRoundTrip(jmf, "KnownDevResp.jmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testStatusJMF()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSubscription("url", 42, 21, "qe33");
@@ -153,6 +177,7 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		KElement xjmf = conv.makeNewJMF(jmf);
 		KElement statusquparams = xjmf.getChildByTagName(ElementName.STATUSQUPARAMS, null, 0, null, false, false);
 		assertFalse(statusquparams.hasAttribute(AttributeName.QUEUEINFO));
+		//	writeTest(jmf, "../StatusJMF.jmf", true);
 	}
 
 	/**

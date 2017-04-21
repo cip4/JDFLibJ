@@ -1,5 +1,6 @@
-/**
+/*
  * The CIP4 Software License, Version 1.0
+ *
  *
  * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
@@ -22,7 +23,7 @@
  *       "This product includes software developed by the
  *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
+ *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
  * 4. The names "CIP4" and "The International Cooperation for the Integration of
@@ -32,7 +33,7 @@
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
+ *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
  *    permission of the CIP4 organization
  *
  * Usage of this software in commercial products is subject to restrictions. For
@@ -44,7 +45,7 @@
  * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
  * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
  * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
  * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
@@ -56,7 +57,7 @@
  * This software consists of voluntary contributions made by many
  * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software
+ * originally based on software restartProcesses()
  * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
  * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
@@ -64,50 +65,48 @@
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
  *
- *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import java.util.Vector;
+
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.JDFDeviceList;
 
-/**
-* any matching class will be ignored and all children will be moved into the respective parent element
-*
-* @author Rainer Prosi, Heidelberger Druckmaschinen
-*
-*/
-public class WalkSkip extends WalkJDFSubElement
+public class WalkKnownDevicesResponse extends WalkTypesafeMessage
 {
 
 	/**
 	 *
 	 */
-	public WalkSkip()
+	public WalkKnownDevicesResponse()
 	{
 		super();
 	}
 
 	/**
-	 * @param xjdf
-	 * @return true if must continue
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkTypesafeMessage#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	public KElement walk(KElement e, KElement trackElem)
 	{
-		return xjdf;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return true;
+		Vector<JDFDevice> v = e.getChildrenByClass(JDFDevice.class, false, 0);
+		if (v != null)
+		{
+			JDFDeviceList dl = (JDFDeviceList) e.getCreateElement(ElementName.DEVICELIST);
+			for (JDFDevice d : v)
+			{
+				JDFDeviceInfo deviceInfo = dl.appendDeviceInfo();
+				deviceInfo.setDeviceStatus(EnumDeviceStatus.Unknown);
+				deviceInfo.moveElement(d, null);
+			}
+		}
+		return super.walk(e, trackElem);
 	}
 
 	/**
@@ -116,6 +115,7 @@ public class WalkSkip extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(new String[] { ElementName.DEVICELIST, ElementName.HOLELIST, ElementName.INSERTLIST });
+		return VString.getVString("ResponseKnownDevices SignalKnownDevices", null);
 	}
+
 }
