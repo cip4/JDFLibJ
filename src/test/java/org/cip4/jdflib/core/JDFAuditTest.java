@@ -119,8 +119,6 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	}
 
-	// ///////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -158,8 +156,6 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	}
 
-	// ///////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -177,11 +173,9 @@ public class JDFAuditTest extends JDFTestCaseBase
 		assertEquals(pt.getID(), pt2.getrefID());
 	}
 
-	// ///////////////////////////////////////////////////////////////////
-
 	/**
 	 *
-	 * TODO Please insert comment!
+	 *
 	 */
 	@Test
 	public void testGetTimeStamp()
@@ -190,7 +184,7 @@ public class JDFAuditTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		final JDFAuditPool ap = n.getAuditPool();
 		JDFAudit audit = ap.getAudit(0, EnumAuditType.Created, null, null);
-		assertEquals(audit.getTimeStamp().getTimeInMillis(), System.currentTimeMillis(), 2000);
+		assertEquals(audit.getTimeStamp().getTimeInMillis(), System.currentTimeMillis(), 4242);
 		audit.setAttribute(AttributeName.TIMESTAMP, "crap");
 		assertNull(audit.getTimeStamp());
 	}
@@ -216,8 +210,6 @@ public class JDFAuditTest extends JDFTestCaseBase
 		assertNotSame(pt2.getID(), pt.getID());
 	}
 
-	// ///////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -236,8 +228,6 @@ public class JDFAuditTest extends JDFTestCaseBase
 		assertEquals(pt2.getUpdatedPreviousAudit(), pt);
 		assertNull(pt.getUpdatedPreviousAudit());
 	}
-
-	// ///////////////////////////////////////////////////////////////////
 
 	/**
 	 *
@@ -261,8 +251,6 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	}
 
-	// ///////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -276,8 +264,6 @@ public class JDFAuditTest extends JDFTestCaseBase
 		final JDFProcessRun p1 = ap.addProcessRun(EnumNodeStatus.Completed, null, null);
 		assertEquals(p1.getTimeStamp(), new JDFDate());
 	}
-
-	// ///////////////////////////////////////////////////////////////////
 
 	/**
 	 *
@@ -298,8 +284,6 @@ public class JDFAuditTest extends JDFTestCaseBase
 		assertEquals(p2.getSpawnID(), n2.getSpawnID(true));
 		assertEquals(p2.getSpawnID(), n.getSpawnID(false));
 	}
-
-	// ///////////////////////////////////////////////////////////////////
 
 	/**
 	 *
@@ -337,21 +321,16 @@ public class JDFAuditTest extends JDFTestCaseBase
 		assertFalse(r.hasAttribute(AttributeName.AGENTVERSION));
 	}
 
-	// ///////////////////////////////////////////////////////////////////
-
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
 	public void tearDown() throws Exception
 	{
-		// TODO Auto-generated method stub
 		super.tearDown();
 		JDFResource.setAutoAgent(bAutoAgent);
 
 	}
-
-	// ///////////////////////////////////////////////////////////////////
 
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
@@ -359,13 +338,10 @@ public class JDFAuditTest extends JDFTestCaseBase
 	@Override
 	public void setUp() throws Exception
 	{
-		// TODO Auto-generated method stub
 		super.setUp();
 		bAutoAgent = JDFResource.getAutoAgent();
 		KElement.setLongID(false);
 
 	}
-
-	// ///////////////////////////////////////////////////////////////////
 
 }

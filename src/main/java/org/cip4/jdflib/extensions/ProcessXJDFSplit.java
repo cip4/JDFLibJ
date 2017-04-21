@@ -84,7 +84,15 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class ProcessXJDFSplit extends AbstractXJDFSplit
 {
-	final Vector<VString> groups;
+	private final Vector<VString> groups;
+
+	/**
+	 * @return the groups
+	 */
+	protected Vector<VString> getGroups()
+	{
+		return groups;
+	}
 
 	/**
 	 *
@@ -145,29 +153,40 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 		}
 		while (types.size() > 0)
 		{
-			String first = types.get(0);
-			VString overlap = null;
-			for (VString group : groups)
-			{
-				if (group.contains(first))
-				{
-					VString newOverlap = types.getOverlapping(group);
-					if ((newOverlap != null) && ((overlap == null) || (overlap.size() < newOverlap.size())))
-					{
-						overlap = newOverlap;
-					}
-				}
-			}
-
-			if (overlap == null)
-			{
-				overlap = new VString();
-				overlap.add(first);
-			}
+			VString overlap = extractTypes(types);
 			ret.add(overlap);
-			types.removeAll(overlap);
 		}
 		return ret.size() == 0 ? null : ret;
+	}
+
+	/**
+	 *
+	 * @param types
+	 * @return
+	 */
+	protected VString extractTypes(VString types)
+	{
+		String first = types.get(0);
+		VString overlap = null;
+		for (VString group : groups)
+		{
+			if (group.contains(first))
+			{
+				VString newOverlap = types.getOverlapping(group);
+				if ((newOverlap != null) && ((overlap == null) || (overlap.size() < newOverlap.size())))
+				{
+					overlap = newOverlap;
+				}
+			}
+		}
+
+		if (overlap == null)
+		{
+			overlap = new VString();
+			overlap.add(first);
+		}
+		types.removeAll(overlap);
+		return overlap;
 	}
 
 	/**
@@ -209,6 +228,6 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	@Override
 	public String toString()
 	{
-		return "ProcessXJDFSplit [groups=" + groups + "]";
+		return getClass().getSimpleName() + " [groups=" + groups + "]";
 	}
 }
