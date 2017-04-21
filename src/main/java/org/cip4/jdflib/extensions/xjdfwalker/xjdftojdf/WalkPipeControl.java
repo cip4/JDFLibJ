@@ -114,6 +114,10 @@ public class WalkPipeControl extends WalkTypesafeMessage
 				}
 			}
 		}
-		return "Pipe" + operation;
+		else
+		{
+			operation = "Pipe" + operation;
+		}
+		return operation;
 	}
 }
