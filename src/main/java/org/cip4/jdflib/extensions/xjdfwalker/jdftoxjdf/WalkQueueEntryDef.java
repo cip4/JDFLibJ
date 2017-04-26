@@ -1,8 +1,7 @@
-/*
+/**
  * The CIP4 Software License, Version 1.0
  *
- *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -23,7 +22,7 @@
  *       "This product includes software developed by the
  *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
+ *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
  * 4. The names "CIP4" and "The International Cooperation for the Integration of
@@ -33,7 +32,7 @@
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
+ *    nor may "CIP4" appear in their name, without prior written
  *    permission of the CIP4 organization
  *
  * Usage of this software in commercial products is subject to restrictions. For
@@ -45,7 +44,7 @@
  * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
  * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
  * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
  * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
@@ -57,7 +56,7 @@
  * This software consists of voluntary contributions made by many
  * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software restartProcesses()
+ * originally based on software
  * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
  * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
@@ -65,64 +64,57 @@
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
  *
+ *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.xjdfwalker.XJMFTypeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.util.StringUtil;
 
-public class WalkModifyQueueEntry extends WalkTypesafeMessage
+/**
+ *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
+public class WalkQueueEntryDef extends WalkJDFSubElement
 {
-
 	/**
 	 *
 	 */
-	public WalkModifyQueueEntry()
+	public WalkQueueEntryDef()
 	{
 		super();
 	}
 
 	/**
-	 *
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkTypesafeMessage#matches(org.cip4.jdflib.core.KElement)
+	 * replace separationspec elements with their respective values
+	 * @param xjdf
+	 * @return true if must continue
 	 */
 	@Override
-	public boolean matches(KElement toCheck)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		return true;
+		String qeid = jdf.getNonEmpty(AttributeName.QUEUEENTRYID);
+		qeid = StringUtil.replaceChar(qeid, ' ', "_", 0);
+
+		xjdf.appendAttribute(XJDFConstants.QueueEntryIDs, qeid, null, JDFConstants.BLANK, true);
+		return null;
 	}
 
 	/**
-	 *
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkTypesafeMessage#getMessageType(org.cip4.jdflib.core.KElement, java.lang.String, java.lang.String)
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
 	@Override
-	String getMessageType(KElement e, String messageName, String family)
+	public boolean matches(final KElement toCheck)
 	{
-		String operation = e.getXPathAttribute("ModifyQueueEntryParams/@Operation", null);
-		if (operation == null)
-		{
-			String refID = e.getAttribute(AttributeName.REFID, null, null);
-			if (refID != null)
-			{
-				operation = XJMFTypeMap.getMap().remove(refID);
-				if (operation == null)
-				{
-					operation = super.getMessageType(e, messageName, family);
-				}
-			}
-		}
-		else
-		{
-			if ("Complete".equals(operation))
-			{
-				operation = "Abort";
-			}
-			operation += "QueueEntry";
-		}
-		return operation;
+		return !jdfToXJDF.isRetainAll();
 	}
 
 	/**
@@ -131,6 +123,6 @@ public class WalkModifyQueueEntry extends WalkTypesafeMessage
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString("CommandModifyQueueEntry ResponseModifyQueueEntry", null);
+		return VString.getVString(ElementName.QUEUEENTRYDEF, null);
 	}
 }

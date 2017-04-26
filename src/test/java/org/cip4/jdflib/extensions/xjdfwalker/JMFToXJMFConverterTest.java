@@ -73,20 +73,25 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
+import org.cip4.jdflib.jmf.JDFAbortQueueEntryParams;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.jmf.JDFHoldQueueEntryParams;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFPipeParams;
 import org.cip4.jdflib.jmf.JDFQuery;
+import org.cip4.jdflib.jmf.JDFRemoveQueueEntryParams;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFResourceQuParams;
+import org.cip4.jdflib.jmf.JDFResumeQueueEntryParams;
 import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.pool.JDFAmountPool;
@@ -117,6 +122,93 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		xjmf = conv.makeNewJMF(jmfResp);
 		assertEquals(xjmf.getElement("ResponsePipeControl").getLocalName(), "ResponsePipeControl");
 		writeRoundTrip(jmf, "pipecontrol.jmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAbortQE()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.AbortQueueEntry);
+		JDFAbortQueueEntryParams pp = (JDFAbortQueueEntryParams) jmf.getCommand(0).appendElement(ElementName.ABORTQUEUEENTRYPARAMS);
+		pp.appendQueueFilter().appendQueueEntryDef("q1e");
+		pp.setEndStatus(EnumNodeStatus.Aborted);
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+		KElement mqp = xjmf.getElement("CommandModifyQueueEntry").getElement(XJDFConstants.ModifyQueueEntryParams);
+		assertEquals(mqp.getAttribute(AttributeName.OPERATION), "Abort");
+
+		writeRoundTrip(jmf, "abortqe.jmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCompleteQE()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.AbortQueueEntry);
+		JDFAbortQueueEntryParams pp = (JDFAbortQueueEntryParams) jmf.getCommand(0).appendElement(ElementName.ABORTQUEUEENTRYPARAMS);
+		pp.appendQueueFilter().appendQueueEntryDef("q1e");
+		pp.setEndStatus(EnumNodeStatus.Completed);
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+		KElement mqp = xjmf.getElement("CommandModifyQueueEntry").getElement(XJDFConstants.ModifyQueueEntryParams);
+		assertEquals(mqp.getAttribute(AttributeName.OPERATION), "Complete");
+
+		writeRoundTrip(jmf, "completeqe.jmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testHoldQE()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.HoldQueueEntry);
+		JDFHoldQueueEntryParams pp = (JDFHoldQueueEntryParams) jmf.getCommand(0).appendElement(ElementName.HOLDQUEUEENTRYPARAMS);
+		pp.appendQueueFilter().appendQueueEntryDef("q1e");
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+		KElement mqp = xjmf.getElement("CommandModifyQueueEntry").getElement(XJDFConstants.ModifyQueueEntryParams);
+		assertEquals(mqp.getAttribute(AttributeName.OPERATION), "Hold");
+
+		writeRoundTrip(jmf, "holdqe.jmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testResumeQE()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.ResumeQueueEntry);
+		JDFResumeQueueEntryParams pp = (JDFResumeQueueEntryParams) jmf.getCommand(0).appendElement(ElementName.RESUMEQUEUEENTRYPARAMS);
+		pp.appendQueueFilter().appendQueueEntryDef("q1e");
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+		KElement mqp = xjmf.getElement("CommandModifyQueueEntry").getElement(XJDFConstants.ModifyQueueEntryParams);
+		assertEquals(mqp.getAttribute(AttributeName.OPERATION), "Resume");
+
+		writeRoundTrip(jmf, "resumeqe.jmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testRemovedQE()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.RemoveQueueEntry);
+		JDFRemoveQueueEntryParams pp = (JDFRemoveQueueEntryParams) jmf.getCommand(0).appendElement(ElementName.REMOVEQUEUEENTRYPARAMS);
+		pp.appendQueueFilter().appendQueueEntryDef("q1e");
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+		KElement mqp = xjmf.getElement("CommandModifyQueueEntry").getElement(XJDFConstants.ModifyQueueEntryParams);
+		assertEquals(mqp.getAttribute(AttributeName.OPERATION), "Remove");
+
+		writeRoundTrip(jmf, "removeqe.jmf");
 	}
 
 	/**

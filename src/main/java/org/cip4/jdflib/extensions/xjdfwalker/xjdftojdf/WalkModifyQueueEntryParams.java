@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,60 +69,39 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.xjdfwalker.XJMFTypeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 
-public class WalkModifyQueueEntry extends WalkTypesafeMessage
+public class WalkModifyQueueEntryParams extends WalkXElement
 {
 
 	/**
 	 *
 	 */
-	public WalkModifyQueueEntry()
+	public WalkModifyQueueEntryParams()
 	{
 		super();
 	}
 
 	/**
-	 *
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkTypesafeMessage#matches(org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public boolean matches(KElement toCheck)
+	protected void updateAttributes(KElement elem)
 	{
-		return true;
-	}
-
-	/**
-	 *
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkTypesafeMessage#getMessageType(org.cip4.jdflib.core.KElement, java.lang.String, java.lang.String)
-	 */
-	@Override
-	String getMessageType(KElement e, String messageName, String family)
-	{
-		String operation = e.getXPathAttribute("ModifyQueueEntryParams/@Operation", null);
-		if (operation == null)
+		String operation = elem.getNonEmpty(AttributeName.OPERATION);
+		elem.removeAttribute(AttributeName.OPERATION);
+		if ("Abort".equals(operation))
 		{
-			String refID = e.getAttribute(AttributeName.REFID, null, null);
-			if (refID != null)
-			{
-				operation = XJMFTypeMap.getMap().remove(refID);
-				if (operation == null)
-				{
-					operation = super.getMessageType(e, messageName, family);
-				}
-			}
+			elem.setAttribute(AttributeName.ENDSTATUS, EnumNodeStatus.Aborted.getName());
 		}
-		else
+		else if ("Complete".equals(operation))
 		{
-			if ("Complete".equals(operation))
-			{
-				operation = "Abort";
-			}
-			operation += "QueueEntry";
+			elem.setAttribute(AttributeName.ENDSTATUS, EnumNodeStatus.Completed.getName());
 		}
-		return operation;
+		super.updateAttributes(elem);
 	}
 
 	/**
@@ -131,6 +110,28 @@ public class WalkModifyQueueEntry extends WalkTypesafeMessage
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString("CommandModifyQueueEntry ResponseModifyQueueEntry", null);
+		return VString.getVString(XJDFConstants.ModifyQueueEntryParams, null);
 	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getJDFName(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	String getJDFName(KElement e)
+	{
+		String operation = e.getNonEmpty(AttributeName.OPERATION);
+		if (operation != null)
+		{
+			if ("Complete".equals(operation))
+			{
+				operation = "Abort";
+			}
+			return operation + "QueueEntryParams";
+		}
+		else
+		{
+			return super.getJDFName(e);
+		}
+	}
+
 }

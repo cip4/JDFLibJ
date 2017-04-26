@@ -464,7 +464,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	 * @param root the jdf node or jmf root
 	 * @param fileBase the filename without extension
 	 */
-	protected static void writeRoundTrip(final JDFElement root, String fileBase)
+	protected void writeRoundTrip(final JDFElement root, String fileBase)
 	{
 		root.write2File(sm_dirTestDataTemp + fileBase + ".jdf");
 		assertTrue(fileBase + ".jdf", root.isValid(EnumValidationLevel.Complete));

@@ -177,7 +177,7 @@ public class XJDFMediaTest extends JDFTestCaseBase
 		XJDFHelper xjdfHelper = new XJDFHelper("Flexo", "Sleeve", null);
 		xjdfHelper.setTypes(JDFConstants.CONVENTIONALPRINTING);
 		SetHelper shMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, EnumUsage.Input, "Plate");
-		ResourceHelper rh = shMedia.appendPartition(AttributeName.SEPARATION, "Black", true);
+		ResourceHelper rh = shMedia.appendPartition(null, true);
 		rh.setBrand("FlexoBrand");
 		JDFMedia m = (JDFMedia) rh.getResource();
 		m.setMediaType(EnumMediaType.Sleeve);

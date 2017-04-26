@@ -66,42 +66,26 @@
  *
  *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.resource.process.JDFSeparationSpec;
+import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.jmf.JDFQueueFilter;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkSeparationSpec extends WalkJDFSubElement
+public class WalkQueueFilter extends WalkXElement
 {
 	/**
 	 *
 	 */
-	public WalkSeparationSpec()
+	public WalkQueueFilter()
 	{
 		super();
-	}
-
-	/**
-	 * replace separationspec elements with their respective values
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		final JDFSeparationSpec ss = (JDFSeparationSpec) jdf;
-		String name = ss.getName();
-		name = StringUtil.replaceChar(name, ' ', "_", 0);
-		xjdf.appendAttribute("SeparationSpec", name, null, " ", false);
-		return null;
 	}
 
 	/**
@@ -112,7 +96,7 @@ public class WalkSeparationSpec extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFSeparationSpec;
+		return true;
 	}
 
 	/**
@@ -121,6 +105,27 @@ public class WalkSeparationSpec extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString(ElementName.SEPARATIONSPEC, null);
+		return new VString(ElementName.QUEUEFILTER, null);
 	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void updateAttributes(KElement elem)
+	{
+		String qeids = elem.getNonEmpty(XJDFConstants.QueueEntryIDs);
+		if (qeids != null)
+		{
+			elem.removeAttribute(XJDFConstants.QueueEntryIDs);
+			JDFQueueFilter qf = (JDFQueueFilter) elem;
+			VString vs = StringUtil.tokenize(qeids, null, false);
+			for (String s : vs)
+			{
+				qf.appendQueueEntryDef(s);
+			}
+		}
+		super.updateAttributes(elem);
+	}
+
 }
