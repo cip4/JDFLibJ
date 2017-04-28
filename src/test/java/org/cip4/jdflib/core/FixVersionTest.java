@@ -537,6 +537,24 @@ public class FixVersionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testJMFQueueAbortQueueEntryNull()
+	{
+		JDFJMF jmf = new JMFBuilder().buildAbortQueueEntry("42");
+		JDFCommand command = jmf.getCommand(0);
+		assertNotNull(command.getQueueEntryDef(0));
+		FixVersion fix = new FixVersion(EnumVersion.Version_1_5);
+		fix.walkTree(jmf, null);
+		assertNull(command.getQueueEntryDef(0));
+		assertEquals("42", jmf.getXPathAttribute("Command/AbortQueueEntryParams/QueueFilter/QueueEntryDef/@QueueEntryID", null));
+		fix = new FixVersion(EnumVersion.Version_1_4);
+		fix.walkTree(jmf, null);
+		assertNotNull(command.getQueueEntryDef(0));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testJMFQueueHoldQueueEntry()
 	{
 		JDFJMF jmf = new JMFBuilder().buildHoldQueueEntry("42");
