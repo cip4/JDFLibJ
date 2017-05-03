@@ -235,6 +235,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * this setting is useful e.g. for jdf xml display
 	 */
 	private boolean bRetainAll = false;
+	private boolean bCleanup = true;
 	/**
 	 * if true merge stripping and layout
 	 */
@@ -494,7 +495,7 @@ public class JDFToXJDF extends PackageElementWalker
 					header.setAttribute(AttributeName.TIME, new JDFDate().getDateTimeISO());
 				}
 			}
-			if (!isRetainAll())
+			if (isCleanup())
 			{
 				new XJDFHelper(newRoot).cleanUp();
 			}
@@ -1097,6 +1098,7 @@ public class JDFToXJDF extends PackageElementWalker
 			setRetainSpawnInfo(true);
 			setTypeSafeMessage(false);
 			setUpdateVersion(false);
+			setCleanup(false);
 		}
 	}
 
@@ -1121,5 +1123,21 @@ public class JDFToXJDF extends PackageElementWalker
 	public boolean isWantProcessList()
 	{
 		return EnumProcessPartition.processList.equals(processPartition);
+	}
+
+	/**
+	 * @return the bCleanup
+	 */
+	public boolean isCleanup()
+	{
+		return bCleanup;
+	}
+
+	/**
+	 * @param bCleanup the bCleanup to set
+	 */
+	public void setCleanup(boolean bCleanup)
+	{
+		this.bCleanup = bCleanup;
 	}
 }

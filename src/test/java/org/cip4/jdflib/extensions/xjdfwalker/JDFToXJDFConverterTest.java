@@ -574,6 +574,37 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testCleanupFalse()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		JDFToXJDF conv = new JDFToXJDF();
+		conv.setCleanup(false);
+		KElement xjdf = conv.convert(n);
+		assertNotNull(xjdf.getXPathAttribute("ResourceSet/@ID", null));
+		assertNotNull(xjdf.getXPathAttribute("ResourceSet/Resource/@ID", null));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testCleanupTrue()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+		assertNull(xjdf.getXPathAttribute("ResourceSet/@ID", null));
+		assertNull(xjdf.getXPathAttribute("ResourceSet/Resource/@ID", null));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testComponentProductID()
 	{
 		JDFToXJDF conv = new JDFToXJDF();
