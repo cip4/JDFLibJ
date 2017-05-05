@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,11 +85,12 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * Jul 9, 2009
  */
 public class JDFIdentical extends JDFAutoIdentical
@@ -98,7 +99,7 @@ public class JDFIdentical extends JDFAutoIdentical
 
 	/**
 	 * Constructor for JDFIdentical
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -126,7 +127,7 @@ public class JDFIdentical extends JDFAutoIdentical
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 * 
+	 *
 	 * @throws DOMException
 	 */
 	public JDFIdentical(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
@@ -138,7 +139,7 @@ public class JDFIdentical extends JDFAutoIdentical
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -149,7 +150,7 @@ public class JDFIdentical extends JDFAutoIdentical
 
 	/**
 	 * set all parts to those define in vParts
-	 * 
+	 *
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
@@ -160,7 +161,7 @@ public class JDFIdentical extends JDFAutoIdentical
 
 	/**
 	 * get part map
-	 * 
+	 *
 	 * @return JDFAttributeMap: the map of parts
 	 */
 	@Override
@@ -175,16 +176,22 @@ public class JDFIdentical extends JDFAutoIdentical
 	 * @see org.cip4.jdflib.core.JDFElement#getTarget()
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	public JDFResource getTarget()
 	{
 		final JDFAttributeMap identityMap = getPartMap();
-		return getParentResource().getResourceRoot().getPartition(identityMap, null);
+		JDFResource parentResource = getParentResource();
+		if (parentResource == null)
+			return null;
+		JDFAttributeMap myMap = parentResource.getPartMap();
+		if (ContainerUtil.equals(identityMap, myMap))
+			return parentResource;
+		else
+			return parentResource.getResourceRoot().getPartition(identityMap, null);
 	}
 
 	/**
 	 * return the parent resource, null if parent is not a resource
-	 * 
+	 *
 	 * @return the parent resource
 	 */
 	public JDFResource getParentResource()
