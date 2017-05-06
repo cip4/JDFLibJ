@@ -211,7 +211,7 @@ public class XJDFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testCPI()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper(AttributeName.COMBINEDPROCESSINDEX, null, null);
+		XJDFHelper xjdfHelper = new XJDFHelper("CPI_Example", null, null);
 		xjdfHelper.setTypes("Cutting Folding");
 		SetHelper sh1 = xjdfHelper.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
 		JDFDate jdfDate = new JDFDate().setTime(13, 0, 0);
