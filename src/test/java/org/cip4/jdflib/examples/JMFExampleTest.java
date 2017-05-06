@@ -148,7 +148,7 @@ public class JMFExampleTest extends JDFTestCaseBase
 	{
 		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		JDFJMF jmf = b.buildKnownDevicesQuery(JDFDeviceFilter.EnumDeviceDetails.Brief);
-		writeTest(jmf, "overview/knowndevices.jmf", true);
+		writeTest(jmf, "introduction/knowndevices.jmf", true);
 	}
 
 	@Override
