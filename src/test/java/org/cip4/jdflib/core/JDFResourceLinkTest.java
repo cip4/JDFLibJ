@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,13 +96,13 @@ import org.junit.Test;
 
 /**
  * @author MuchaD
- * 
+ *
  * This implements the first fixture with unit tests for class JDFElement.
  */
 public class JDFResourceLinkTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAmount()
@@ -128,7 +128,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAmountPart()
@@ -146,7 +146,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLinkedResourceName()
@@ -164,7 +164,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAmountCondition()
@@ -213,7 +213,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendAmountPool()
@@ -279,7 +279,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetMinAmountPoolAttribute()
@@ -299,7 +299,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testExpandAmountPool()
@@ -321,6 +321,22 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		assertNotNull(rl.getAmountPool());
 		assertEquals(rl.getPipeProtocol(), "JDF");
 
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testGenerateCPINull() throws Exception
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setVersion(JDFElement.EnumVersion.Version_1_3);
+		JDFResource r = n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
+		JDFResourceLink rl = n.getLink(r, null);
+		rl.setrRef("dummy");
+		n.setCombined(new VString("ImageSetting ConventionalPrinting", null));
+		rl.generateCombinedProcessIndex();
+		assertNull(" No CPI for unlinked resLink", rl.getCombinedProcessIndex());
 	}
 
 	/**
@@ -401,7 +417,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetAmountPoolDouble()
@@ -419,7 +435,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetAmountPoolSumDouble()
@@ -452,7 +468,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetAmountPoolVector()
@@ -472,7 +488,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * tests whether the convoluted inheritence of partAmount and ResourceLink function correctly
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -517,7 +533,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * tests whether the convoluted inheritence of partAmount and ResourceLink function correctly
-	 * 
+	 *
 	 */
 	@Test
 	public void testPartAmountVirtual()
@@ -553,7 +569,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetAmountPoolAttribute()
@@ -576,7 +592,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetLinkRoot.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -598,7 +614,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetTarget
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLeafVector()
@@ -746,7 +762,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetTargetVectorIdentical()
@@ -787,7 +803,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetTarget
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetTargetVectorSparse()
@@ -824,7 +840,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetTarget
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetTargetVectorNullPart()
@@ -861,7 +877,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetTarget
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -963,7 +979,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetLinkRootJMF
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLinkRoot()
@@ -1006,7 +1022,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testLinkRootDeadLoop()
@@ -1020,7 +1036,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMatchesString()
@@ -1044,7 +1060,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * Method testIncludesMatchingAttribute.
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetPartMap()
@@ -1101,7 +1117,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 	/**
 	 * Method testIncludesMatchingAttribute.
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetUsage()
@@ -1115,7 +1131,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * Method testHasResourcePartMap.
-	 * 
+	 *
 	 */
 	@Test
 	public void testHasResourcePartMap()
@@ -1180,7 +1196,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testInvertUsage()
@@ -1190,7 +1206,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsResourceLink()
@@ -1207,7 +1223,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * Method testIsExecutable().
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsExecutable()
@@ -1285,7 +1301,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 	/**
 	 * test that the position checking algorithm works
-	 * 
+	 *
 	 */
 	@Test
 	public void testValidPosition()
@@ -1306,7 +1322,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 	/**
 	 * test that the position checking algorithm works
-	 * 
+	 *
 	 */
 	@Test
 	public void testUnPartition()
@@ -1328,7 +1344,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * test that the position checking algorithm works
-	 * 
+	 *
 	 */
 	@Test
 	public void testValidAttributesAmountPool()
@@ -1348,7 +1364,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 	/**
 	 * test that the position checking algorithm works
-	 * 
+	 *
 	 */
 	@Test
 	public void testValidCombinedProcessIndex()
@@ -1386,7 +1402,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * test that the position checking algorithm works
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetCombinedProcessIndex()

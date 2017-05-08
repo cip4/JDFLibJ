@@ -258,7 +258,11 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 			final VString types = n.getTypes();
 			if (types != null)
 			{
-				CombinedProcessIndexHelper.generateCombinedProcessIndex(getLinkRoot(), getUsage(), getEnumProcessUsage(), this, types);
+				JDFResource linkRoot = getLinkRoot();
+				if (linkRoot != null)
+				{
+					CombinedProcessIndexHelper.generateCombinedProcessIndex(linkRoot, getUsage(), getEnumProcessUsage(), this, types);
+				}
 			}
 		}
 	}
