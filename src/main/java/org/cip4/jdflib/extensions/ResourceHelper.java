@@ -80,6 +80,7 @@ import org.cip4.jdflib.ifaces.IAmountPoolContainer;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -494,6 +495,27 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public String getExternalID()
 	{
 		return getAttribute(XJDFConstants.ExternalID);
+	}
+
+	/**
+	 *
+	 * @param available
+	 */
+	public void setStatus(EnumResStatus status)
+	{
+		if (EnumResStatus.Available.equals(status) || EnumResStatus.Unavailable.equals(status))
+			setAttribute(AttributeName.STATUS, status.getName());
+		else
+			setAttribute(AttributeName.STATUS, null);
+	}
+
+	/**
+	 *
+	 * @return the res status enum
+	 */
+	public EnumResStatus getStatus()
+	{
+		return EnumResStatus.getEnum(getAttribute(AttributeName.STATUS));
 	}
 
 }

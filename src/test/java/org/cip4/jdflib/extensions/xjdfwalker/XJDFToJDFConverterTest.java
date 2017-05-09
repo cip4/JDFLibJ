@@ -100,6 +100,7 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFInsert;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
@@ -168,6 +169,37 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNull(ccNew.getColorantParams());
 		assertEquals(ccNew.getColorantOrder().getSeparations(), new VString("Cyan Black", null));
 		assertNull(ccNew.getDeviceColorantOrder());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testInputStatus()
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			XJDFHelper h = new XJDFHelper("j", "p", null);
+			h.setTypes(EnumType.ImageSetting.getName());
+			ResourceHelper partition = h.getCreateResourceSet(ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true);
+			if (i == 1)
+				partition.setStatus(EnumResStatus.Available);
+			else if (i == 2)
+				partition.setStatus(EnumResStatus.Unavailable);
+			JDFColorantControl cc = (JDFColorantControl) partition.getResource();
+			cc.setProcessColorModel("DeviceCMYK");
+
+			XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+			JDFDoc docjdf = conv.convert(h);
+			JDFNode n = docjdf.getJDFRoot();
+
+			JDFColorantControl ccNew = (JDFColorantControl) n.getResource(ElementName.COLORANTCONTROL, EnumUsage.Input, null, 0);
+			if (i < 2)
+				assertEquals(EnumResStatus.Available, ccNew.getResStatus(false));
+			else
+				assertEquals(EnumResStatus.Unavailable, ccNew.getResStatus(false));
+		}
 	}
 
 	/**

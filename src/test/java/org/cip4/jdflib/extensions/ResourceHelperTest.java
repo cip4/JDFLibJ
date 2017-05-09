@@ -75,12 +75,13 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.junit.Test;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class PartitionHelperTest extends JDFTestCaseBase
+public class ResourceHelperTest extends JDFTestCaseBase
 {
 	/**
 	 *
@@ -88,13 +89,46 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetResource()
 	{
-		JDFDoc d = new JDFDoc("XJDF");
+		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		KElement root = d.getRoot();
 
 		root.getCreateXPathElement("ResourceSet/Resource/Part");
 		KElement m = root.getCreateXPathElement("ResourceSet/Resource/Media");
 		ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
 		assertEquals(ph.getResource(), m);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetStatus()
+	{
+		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
+		KElement root = d.getRoot();
+
+		root.getCreateXPathElement("ResourceSet/Resource/Part");
+		ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
+		assertNull(ph.getStatus());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSetStatus()
+	{
+		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
+		KElement root = d.getRoot();
+
+		root.getCreateXPathElement("ResourceSet/Resource/Part");
+		ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
+		ph.setStatus(EnumResStatus.Available);
+		assertEquals(EnumResStatus.Available, ph.getStatus());
+		ph.setStatus(EnumResStatus.Unavailable);
+		assertEquals(EnumResStatus.Unavailable, ph.getStatus());
+		ph.setStatus(EnumResStatus.Draft);
+		assertNull(ph.getStatus());
 	}
 
 	/**

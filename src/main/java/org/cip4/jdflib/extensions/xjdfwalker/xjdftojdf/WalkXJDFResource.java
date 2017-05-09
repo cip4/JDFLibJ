@@ -86,6 +86,8 @@ import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -171,12 +173,14 @@ public class WalkXJDFResource extends WalkXElement
 		}
 		String id = xjdfToJDFImpl.idMap.get(xjdfRes.getID()).getID();
 		JDFResource res = (JDFResource) newRoot.getCreateResourcePool().getChildWithAttribute(null, AttributeName.ID, null, id, 0, true);
+		boolean isNew = false;
 		if (res == null)
 		{
 			boolean combine = !StringUtil.equals(id, sh.getID());
 			res = combine ? theNode.getResource(name, inOut, processUsage, null, 0) : null;
 			if (res == null)
 			{
+				isNew = true;
 				res = theNode.addResource(name, null);
 				res.setID(id);
 			}
@@ -202,6 +206,14 @@ public class WalkXJDFResource extends WalkXElement
 					}
 				}
 			}
+			// parameters and consumables are assumed to be available by default
+			EnumResourceClass resClass = res.getResourceClass();
+			if (isNew && EnumUsage.Input.equals(inOut)
+					&& (EnumResourceClass.Parameter.equals(resClass) || EnumResourceClass.Consumable.equals(resClass) || EnumResourceClass.Intent.equals(resClass)))
+			{
+				res.setResStatus(EnumResStatus.Available, false);
+			}
+
 		}
 		return res;
 	}
