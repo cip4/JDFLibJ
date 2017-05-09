@@ -74,7 +74,9 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -200,6 +202,49 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 			else
 				assertEquals(EnumResStatus.Unavailable, ccNew.getResStatus(false));
 		}
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testNodeInfoStatus()
+	{
+		XJDFHelper h = new XJDFHelper("j", "p", null);
+		h.setTypes(EnumType.ImageSetting.getName());
+		ResourceHelper partition = h.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input).getCreatePartition(0, true);
+		partition.setStatus(EnumResStatus.Available);
+		JDFNodeInfo ni = (JDFNodeInfo) partition.getResource();
+		ni.setAttribute(AttributeName.STATUS, "InProgress");
+
+		XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		JDFDoc docjdf = conv.convert(h);
+		JDFNodeInfo nij = docjdf.getJDFRoot().getNodeInfo();
+		assertEquals(EnumResStatus.Available, nij.getResStatus(false));
+		assertEquals(EnumNodeStatus.InProgress, nij.getNodeStatus());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testNodeInfoStatusEmpty()
+	{
+		XJDFHelper h = new XJDFHelper("j", "p", null);
+		h.setTypes(EnumType.ImageSetting.getName());
+		ResourceHelper partition = h.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input).getCreatePartition(0, true);
+		partition.setStatus(EnumResStatus.Available);
+		JDFNodeInfo ni = (JDFNodeInfo) partition.getResource();
+		ni.setAttribute(AttributeName.STATUS, "InProgress");
+
+		XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		JDFDoc docjdf = conv.convert(h);
+		JDFNodeInfo nij = docjdf.getJDFRoot().getNodeInfo();
+		assertEquals(EnumResStatus.Available, nij.getResStatus(false));
+		assertEquals(EnumNodeStatus.InProgress, nij.getNodeStatus());
+
 	}
 
 	/**

@@ -129,7 +129,8 @@ public class WalkNodeInfo extends WalkResource
 	protected void updateAttributes(KElement elem)
 	{
 		// came in via init
-		if (!EnumResStatus.Unavailable.getName().equals(elem.getAttribute(AttributeName.STATUS)))
+		String status = elem.getAttribute(AttributeName.STATUS);
+		if (!EnumResStatus.Unavailable.getName().equals(status) && !EnumResStatus.Available.getName().equals(status))
 		{
 			elem.renameAttribute(AttributeName.STATUS, AttributeName.NODESTATUS);
 		}
