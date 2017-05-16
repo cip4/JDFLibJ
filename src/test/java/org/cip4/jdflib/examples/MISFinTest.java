@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,27 +56,28 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /*
  * JDFExampleDocTest.java
- * 
+ *
  * @author muchadie
  */
 package org.cip4.jdflib.examples;
 
 import java.io.File;
 
+import org.cip4.jdflib.auto.JDFAutoBoxFoldAction.EnumAction;
 import org.cip4.jdflib.auto.JDFAutoBundle.EnumBundleType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -85,6 +86,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.goldenticket.BaseGoldenTicketTest;
 import org.cip4.jdflib.goldenticket.MISFinGoldenTicket;
 import org.cip4.jdflib.node.JDFNode;
@@ -93,20 +95,22 @@ import org.cip4.jdflib.resource.JDFBundle;
 import org.cip4.jdflib.resource.JDFBundleItem;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.process.JDFBoxFoldAction;
+import org.cip4.jdflib.resource.process.JDFBoxFoldingParams;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * Apr 1, 2009
  */
 public class MISFinTest extends BaseGoldenTicketTest
 {
 	/**
 	 * test MIS to Finishing ICS
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testAmount()
@@ -151,7 +155,7 @@ public class MISFinTest extends BaseGoldenTicketTest
 	// ///////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAmountPalletteManifest()
@@ -206,7 +210,7 @@ public class MISFinTest extends BaseGoldenTicketTest
 	// ///////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testStitchGB()
@@ -219,7 +223,37 @@ public class MISFinTest extends BaseGoldenTicketTest
 	}
 
 	/**
-	 * 
+	 * tests the creation of the initial shapedefproduction (one up) process
+	 * @throws Exception
+	 */
+	@Test
+	public void testBoxfold()
+	{
+		JDFNode n = JDFNode.createRoot();
+		n.setType("BoxFolding", false);
+		JDFBoxFoldingParams bfp = (JDFBoxFoldingParams) n.addResource(ElementName.BOXFOLDINGPARAMS, EnumUsage.Input);
+		setSnippet(bfp, true);
+		JDFBoxFoldAction bfa = bfp.appendBoxFoldAction();
+		bfa.setFoldIndex(new JDFXYPair(0, -1));
+		bfa.setAction(EnumAction.LongPreFoldLeftToRight);
+
+		bfa = bfp.appendBoxFoldAction();
+		bfa.setFoldIndex(new JDFXYPair(2, -1));
+		bfa.setAction(EnumAction.LongPreFoldRightToLeft);
+
+		bfa = bfp.appendBoxFoldAction();
+		bfa.setFoldIndex(new JDFXYPair(1, -1));
+		bfa.setAction(EnumAction.LongFoldLeftToRight);
+
+		bfa = bfp.appendBoxFoldAction();
+		bfa.setFoldIndex(new JDFXYPair(3, -1));
+		bfa.setAction(EnumAction.LongFoldRightToLeft);
+
+		writeTest(n, "resources/boxFoldingParams_boxFoldAction.jdf", true);
+	}
+
+	/**
+	 *
 	 */
 	@Test
 	public void testAmountPalletteCompleteManifest()

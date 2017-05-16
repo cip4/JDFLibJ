@@ -219,7 +219,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		n.appendComment().setText("StartJob unsuccessful - Device does not handle resume");
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
-		writeTest(xjmfHelper, "jmf/ResponseNotification.xjmf");
+		writeTest(xjmfHelper, "building/ResponseNotification.xjmf");
 	}
 
 	/**

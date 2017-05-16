@@ -361,7 +361,15 @@ public class WalkJDFElement extends WalkElement
 		{
 			return null;
 		}
-		linkTarget.expand(false);
+		final boolean expandLink = rl instanceof JDFResourceLink;
+		if (expandLink)
+		{
+			linkTarget.getResourceRoot().expand(false);
+		}
+		else
+		{
+			linkTarget.expand(false);
+		}
 
 		final String resID = linkTarget.getID();
 		KElement resourceSet = getSet(resID, xRoot, className);
@@ -374,7 +382,7 @@ public class WalkJDFElement extends WalkElement
 		// TODO what if we have resources used as in and out in the same node?
 		setSetAttributes(resourceSet, rl, linkTarget);
 		int nLeaves = resourceSet.numChildElements(className, null);
-		final VElement vRes = (rl instanceof JDFResourceLink) ? ((JDFResourceLink) rl).getTargetVector(0) : linkTarget.getLeaves(false);
+		final VElement vRes = expandLink ? ((JDFResourceLink) rl).getTargetVector(0) : linkTarget.getLeaves(false);
 
 		final VElement v = new VElement();
 		for (KElement e : vRes)
