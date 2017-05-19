@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -99,6 +99,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.INodeIdentifiable;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.resource.JDFDevice;
@@ -149,11 +150,11 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 		/**
 		 * modifies queue to match this filter by removing all non-matching entries
-		 * 
+		 *
 		 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
-		 * @return 
+		 * @return
 		 * @deprecated use copyTo
-		 *  
+		 *
 		 */
 		@Deprecated
 		protected JDFQueue apply()
@@ -198,7 +199,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		}
 
 		/**
-		 * 
+		 *
 		 */
 		private void addRemoved(JDFQueue copyQueue)
 		{
@@ -223,9 +224,9 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 		/**
 		 * modifies queueEntry to match this filter by removing all non-matching attributes and elements
-		 * 
+		 *
 		 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
-		 * 
+		 *
 		 * @param qe
 		 * @deprecated use copyTo
 		 */
@@ -251,7 +252,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		/**
 		 * copies queueEntry if it matches this filter and removes all non-matching attributes and elements
 		 * @param newQueue the new parent queue
-		 * 
+		 *
 		 * @param qe the queue entry to copy
 		 * @return the copied element, null if this was not copied
 		 */
@@ -275,7 +276,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 				}
 			}
 			else
-			// we don't match the filter, still we ain't removed - thanks Yu Chen 
+			// we don't match the filter, still we ain't removed - thanks Yu Chen
 			{
 				if (lastMap != null)
 					lastMap.remove(qe.getQueueEntryID());
@@ -314,7 +315,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 		/**
 		 * @param qe the queue entry to apply the change only filter to
-		 * 
+		 *
 		 * @return true if this element has been removed because it is identical to a previous element (no change)
 		 */
 		private boolean noDifference(final JDFQueueEntry qe, boolean clean)
@@ -343,7 +344,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 		/**
 		 * copy a queue to a parent element while applying the filter
-		 * 
+		 *
 		 * @param parent the parent element to create the queue in; may be null
 		 * @return
 		 */
@@ -375,7 +376,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		}
 
 		/**
-		 * 
+		 *
 		 * @param newQueue
 		 * @param s
 		 */
@@ -395,7 +396,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		}
 
 		/**
-		 * 
+		 *
 		 * @param newQueue
 		 */
 		private void copyAll(JDFQueue newQueue)
@@ -417,7 +418,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	Set<String> queueEntrieDefs;
 
 	/**
-	 * 
+	 *
 	 * @param queueEntrieDefs
 	 */
 	public void setQueueEntrieDefs(Set<String> queueEntrieDefs)
@@ -427,7 +428,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * Constructor for JDFQueueFilter
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -439,7 +440,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * Constructor for JDFQueueFilter
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -452,7 +453,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * Constructor for JDFQueueFilter
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -466,7 +467,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -477,7 +478,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * GetPartMapVector returns a vector of partmaps, null if no parts are present
-	 * 
+	 *
 	 * @return VJDFAttributeMap
 	 */
 	@Override
@@ -488,7 +489,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * SetPartMapVector
-	 * 
+	 *
 	 * @param vPart
 	 */
 	@Override
@@ -499,9 +500,9 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * modifies queue to match this filter by removing all non-matching entries
-	 * 
+	 *
 	 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
-	 * 
+	 *
 	 * @param theQueue the queue to modify
 	 * @return
 	 * @deprecated use the 2 parameter version
@@ -513,11 +514,11 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	}
 
 	/**
-	 * @deprecated - use copyTo 
+	 * @deprecated - use copyTo
 	 * modifies queue to match this filter by removing all non-matching entries
-	 * 
+	 *
 	 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
-	 * 
+	 *
 	 * @param theQueue the queue to modify
 	 * @param lastQueue the last queue to diff against, note that this must be the complete queue prior to the last call of match
 	 * @return
@@ -686,7 +687,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		{
 			VectorMap<String, JDFGeneralID> qeGeneralIDS = qe.getGeneralIDVectorMap();
 
-			// assume all entries in filter must exist 
+			// assume all entries in filter must exist
 			if (qeGeneralIDS.size() < generalIDS.size())
 			{
 				return false;
@@ -758,7 +759,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * (9.2) get StatusList attribute StatusList
-	 * 
+	 *
 	 * @return Vector of the enumerations this version uses queueEntryStatus rather than an own enumeration
 	 */
 	@SuppressWarnings("unchecked")
@@ -770,7 +771,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * get the list of QueueEntryDef/@QueueEntryIDs strings as a set
-	 * 
+	 *
 	 * @return the set of QueueEntryIDs, null if no QueueEntryDef is specified
 	 */
 	public Set<String> getQueueEntryDefSet()
@@ -799,7 +800,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * get the list of Device/@DeviceIDs strings as a set
-	 * 
+	 *
 	 * @return the set of DeviceIDs, null if no Device is specified
 	 */
 	public Set<String> getDeviceIDSet()
@@ -827,10 +828,10 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * append a Device element with @DeviceID
-	 * 
+	 *
 	 * @param deviceID the deviceID to set
-	 * @return 
-	 * @throws JDFException 
+	 * @return
+	 * @throws JDFException
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueFilter#appendDevice()
 	 */
 	public JDFDevice appendDevice(final String deviceID) throws JDFException
@@ -842,8 +843,8 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * @param queueEntryID the queueEntryID to set
-	 * @return 
-	 * @throws JDFException 
+	 * @return
+	 * @throws JDFException
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueFilter#appendQueueEntryDef()
 	 */
 	public JDFQueueEntryDef appendQueueEntryDef(final String queueEntryID) throws JDFException
@@ -858,7 +859,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	 * @param theQueue the queue to copy
 	 * @param lastQueue the previously created queue
 	 * @param resp the JDF response message, may be null
-	 * @return 
+	 * @return
 	 */
 	public JDFQueue copy(JDFQueue theQueue, JDFQueue lastQueue, KElement resp)
 	{
@@ -900,6 +901,14 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	@Override
 	public int getMaxEntries()
 	{
-		return getIntAttribute(AttributeName.MAXENTRIES, null, Integer.MAX_VALUE);
+		KElement parent = getParentNode_KElement();
+		int def = 0;
+		if (parent instanceof JDFMessage)
+		{
+			EnumType t = ((JDFMessage) parent).getEnumType();
+			if (EnumType.QueueStatus.equals(t))
+				def = Integer.MAX_VALUE;
+		}
+		return getIntAttribute(AttributeName.MAXENTRIES, null, def);
 	}
 }

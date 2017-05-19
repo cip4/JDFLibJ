@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.jmf;
 
@@ -89,8 +89,8 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
@@ -102,59 +102,44 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	JDFQueueSubmissionParams qsp;
 
 	/**
+	 * @throws Exception
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
-	public void setUp()
+	public void setUp() throws Exception
 	{
 		JDFDoc d = new JDFDoc(ElementName.QUEUE);
 		theQueue = (JDFQueue) d.getRoot();
 		d = new JDFDoc(ElementName.JMF);
 		theJMF = d.getJMFRoot();
 		qsp = theJMF.appendCommand(EnumType.SubmitQueueEntry).appendQueueSubmissionParams();
+		super.setUp();
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// /////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddNull()
 	{
 		JDFResponse resp = qsp.addEntry(null, null, null);
-		Assert.assertEquals(2, resp.getReturnCode());
+		assertEquals(2, resp.getReturnCode());
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// /////////////////
-
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddEntry()
 	{
 		JDFResponse resp = qsp.addEntry(theQueue, null, null);
-		Assert.assertEquals(0, resp.getReturnCode());
+		assertEquals(0, resp.getReturnCode());
 		theQueue = resp.getQueue(0);
-		Assert.assertEquals(theQueue.getQueueEntry(0).getQueueEntryStatus(), resp.getQueueEntry(0).getQueueEntryStatus());
-		Assert.assertEquals(theQueue.getQueueEntry(0).getQueueEntryID(), resp.getQueueEntry(0).getQueueEntryID());
-		Assert.assertNotSame(theQueue.getQueueEntry(0).getQueueEntryID(), "");
-		Assert.assertEquals(theQueue.numEntries(null), 1);
-		Assert.assertEquals(theQueue.numEntries(EnumQueueEntryStatus.Waiting), 1);
-		qsp.setHold(true);
-		JDFJMF jmfNew = new JDFDoc("JMF").getJMFRoot();
-		resp = qsp.addEntry(theQueue, jmfNew, null);
-		Assert.assertEquals(resp, jmfNew.getResponse(0));
-		Assert.assertEquals(theQueue.numEntries(null), 2);
-		Assert.assertEquals(theQueue.numEntries(EnumQueueEntryStatus.Waiting), 1);
-		Assert.assertEquals(theQueue.numEntries(EnumQueueEntryStatus.Held), 1);
-		Assert.assertNotSame(theQueue.getQueueEntry(0).getQueueEntryID(), theQueue.getQueueEntry(1).getQueueEntryID());
+		assertEquals(theQueue.numEntries(null), 0);
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddEntryMany()
@@ -173,22 +158,20 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 			{
 				t.start();
 				JDFResponse resp = qsp.addEntry(theQueue, null, f);
-				Assert.assertEquals(0, resp.getReturnCode());
+				assertEquals(0, resp.getReturnCode());
 				JDFQueueEntry queueResp = resp.getQueueEntry(0);
-				Assert.assertNotNull(queueResp);
+				assertNotNull(queueResp);
 				t.stop();
 				if (i % 100 == 0)
 				{
-					System.out.println(b + " " + i + " " + t.getTotalRealTime() + " " + t.getAverageRealTime() + " " + t.getTotalCPUTime() + " " + t.getAverageCPUTime());
+					log.info(b + " " + i + " " + t.getTotalRealTime() + " " + t.getAverageRealTime() + " " + t.getTotalCPUTime() + " " + t.getAverageCPUTime());
 				}
 			}
 		}
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// /////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetMimeURL()
@@ -212,13 +195,13 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 		Multipart m = MimeUtil.buildMimePackage(d1, doc, true);
 
 		JDFDoc[] d2 = MimeUtil.getJMFSubmission(m);
-		Assert.assertNotNull(d2);
+		assertNotNull(d2);
 		final JDFQueueSubmissionParams queueSubmissionParams = d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0);
-		Assert.assertEquals(queueSubmissionParams.getURL(), "cid:JDF.jdf");
-		Assert.assertEquals(d2[1].getJDFRoot().getEnumType(), JDFNode.EnumType.ColorSpaceConversion);
+		assertEquals(queueSubmissionParams.getURL(), "cid:JDF.jdf");
+		assertEquals(d2[1].getJDFRoot().getEnumType(), JDFNode.EnumType.ColorSpaceConversion);
 		JDFDoc d3 = queueSubmissionParams.getURLDoc();
-		Assert.assertNotNull(d3);
-		Assert.assertEquals(d3.getJDFRoot().getEnumType(), JDFNode.EnumType.ColorSpaceConversion);
+		assertNotNull(d3);
+		assertEquals(d3.getJDFRoot().getEnumType(), JDFNode.EnumType.ColorSpaceConversion);
 	}
 
 	/**
@@ -228,9 +211,9 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	public void testSetReturnURL() throws Exception
 	{
 		qsp.setReturnURL((URL) null);
-		Assert.assertFalse(qsp.hasAttribute(AttributeName.RETURNURL));
+		assertFalse(qsp.hasAttribute(AttributeName.RETURNURL));
 		qsp.setReturnURL(new URL("http://localhost"));
-		Assert.assertEquals(qsp.getReturnURL(), "http://localhost");
+		assertEquals(qsp.getReturnURL(), "http://localhost");
 	}
 
 	/**
@@ -240,8 +223,8 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	public void testSetReturnJMFL() throws Exception
 	{
 		qsp.setReturnJMF((URL) null);
-		Assert.assertFalse(qsp.hasAttribute(AttributeName.RETURNJMF));
+		assertFalse(qsp.hasAttribute(AttributeName.RETURNJMF));
 		qsp.setReturnJMF(new URL("http://localhost"));
-		Assert.assertEquals(qsp.getReturnJMF(), "http://localhost");
+		assertEquals(qsp.getReturnJMF(), "http://localhost");
 	}
 }
