@@ -404,7 +404,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
 			file.createNewFile();
 		}
-		ThreadUtil.sleep(1000);
+		ThreadUtil.sleep(2345);
 		assertEquals(ok.listFiles().length, 4, 1);
 		assertEquals(tmpHFDir.listFiles().length, 0, 1);
 		for (int i = 0; i < 100; i++)
@@ -462,7 +462,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		{
 			createPair(i);
 		}
-		ThreadUtil.sleep(1000);
+		ThreadUtil.sleep(2345);
 		assertEquals(ok.listFiles().length, 8, 1);
 		assertEquals(tmpHFDir.listFiles().length, 0, 1);
 		for (int i = 0; i < 100; i++)
