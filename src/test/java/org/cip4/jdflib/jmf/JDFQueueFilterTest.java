@@ -459,6 +459,27 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws Exception
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Test
+	public void testQueueSize() throws Exception
+	{
+		filter = theJMF.appendCommand(EnumType.SubmitQueueEntry).appendQueueFilter();
+		theQueue.setAutomated(false);
+		for (int i = 0; i < 120; i++)
+		{
+			final JDFQueueEntry qe = theQueue.appendQueueEntry();
+			qe.setPriority((i * 317) % 99);
+			qe.setQueueEntryID("q" + i);
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+		}
+		JDFQueue qCopy = filter.copy(theQueue, null, null);
+		assertNull(qCopy.getQueueEntry(0));
+		assertEquals(120, qCopy.getQueueSize());
+	}
+
+	/**
 	 *
 	 */
 	@Test

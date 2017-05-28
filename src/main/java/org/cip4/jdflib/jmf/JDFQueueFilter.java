@@ -352,6 +352,10 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		{
 			JDFQueue newQueue = (JDFQueue) (parent == null ? new JDFDoc(ElementName.QUEUE).getRoot() : parent.appendElement(ElementName.QUEUE));
 			newQueue.setAttributes(theQueue);
+			if (!newQueue.hasAttribute(AttributeName.QUEUESIZE) && theQueue != null)
+			{
+				newQueue.setAttribute(AttributeName.QUEUESIZE, theQueue.getQueueSize(), null);
+			}
 			Set<String> s = getQueueEntryDefSet();
 			if (s == null)
 			{
