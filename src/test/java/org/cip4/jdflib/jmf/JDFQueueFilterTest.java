@@ -226,7 +226,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
 
 		JDFQueue matchedQueue = filter.copy(theQueue, copy, null);
-		assertNull("identical queue should cancel", matchedQueue.getQueueEntry(0));
+		assertNull("identical queue should cancel", matchedQueue);
 		JDFQueueEntry qe = copy.appendQueueEntry();
 		qe.setQueueEntryID("q11");
 		matchedQueue = filter.copy(theQueue, copy, null);
@@ -584,7 +584,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.Brief);
 		qCopy = filter.copy(theQueue, qLast, null);
-		assertEquals("we modified statusdetails, but are ignoring job phase", qCopy.numEntries(null), 0);
+		assertNull("we modified statusdetails, but are ignoring job phase", qCopy);
 
 		queueEntryLast.setPriority(100);
 		qCopy = filter.copy(theQueue, qLast, null);
@@ -627,7 +627,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		assertTrue(ms.equals(set));
 		filter.setQueueEntrieDefs(new HashSet<String>());
 		qCopy = filter.copy(theQueue, qLast, null);
-		assertEquals(qCopy.getQueueEntryVector().size(), 0);
+		assertNull(qCopy);
 	}
 
 	/**
