@@ -83,7 +83,6 @@
 
 package org.cip4.jdflib.util;
 
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
@@ -281,16 +280,16 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 * @param other the date to clone
 	 */
-	public JDFDate(final LocalDateTime dateTime)
-	{
-		this();
-		if (dateTime != null)
-		{
-			JDFDate date = createDate(dateTime.toString());
-			lTimeInMillis = date.getTimeInMillis();
-			m_TimeZoneOffsetInMillis = date.getTimeZoneOffsetInMillis();
-		}
-	}
+	//	public JDFDate(final LocalDateTime dateTime)
+	//	{
+	//		this();
+	//		if (dateTime != null)
+	//		{
+	//			JDFDate date = createDate(dateTime.toString());
+	//			lTimeInMillis = date.getTimeInMillis();
+	//			m_TimeZoneOffsetInMillis = date.getTimeZoneOffsetInMillis();
+	//		}
+	//	}
 
 	/**
 	 * Allocates a <code>JDFDate</code> object and initializes it so that the JDFDate represents a date set by <code>strDateTime</code> Format of

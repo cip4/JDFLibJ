@@ -75,7 +75,6 @@
  */
 package org.cip4.jdflib.util;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -346,15 +345,15 @@ public class JDFDateTest extends JDFTestCaseBase
 	 * Method testdateTimeZone.
 	 * @throws Exception
 	 */
-	@Test
-	public void testConstructLocalDate() throws Exception
-	{
-		LocalDateTime now = LocalDateTime.now();
-		JDFDate date = new JDFDate(now);
-		JDFDate date2 = new JDFDate(System.currentTimeMillis());
-		assertEquals(date.getTimeZoneOffsetInMillis(), date2.getTimeZoneOffsetInMillis());
-		assertEquals(date.getTimeInMillis(), date2.getTimeInMillis(), 1000);
-	}
+	//@Test
+	//	public void testConstructLocalDate() throws Exception
+	//	{
+	//		LocalDateTime now = LocalDateTime.now();
+	//		JDFDate date = new JDFDate(now);
+	//		JDFDate date2 = new JDFDate(System.currentTimeMillis());
+	//		assertEquals(date.getTimeZoneOffsetInMillis(), date2.getTimeZoneOffsetInMillis());
+	//		assertEquals(date.getTimeInMillis(), date2.getTimeInMillis(), 1000);
+	//	}
 
 	/**
 	 * Method testdateMillis.
