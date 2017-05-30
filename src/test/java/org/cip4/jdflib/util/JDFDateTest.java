@@ -75,6 +75,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -339,6 +340,20 @@ public class JDFDateTest extends JDFTestCaseBase
 		date = new JDFDate("1999-06-26T11:43:10-05:00");
 		assertEquals("-05:00", date.getTimeZoneISO());
 		assertEquals(1000 * 60 * 60 * -5, date.getTimeZoneOffsetInMillis());
+	}
+
+	/**
+	 * Method testdateTimeZone.
+	 * @throws Exception
+	 */
+	@Test
+	public void testConstructLocalDate() throws Exception
+	{
+		LocalDateTime now = LocalDateTime.now();
+		JDFDate date = new JDFDate(now);
+		JDFDate date2 = new JDFDate(System.currentTimeMillis());
+		assertEquals(date.getTimeZoneOffsetInMillis(), date2.getTimeZoneOffsetInMillis());
+		assertEquals(date.getTimeInMillis(), date2.getTimeInMillis(), 1000);
 	}
 
 	/**
@@ -772,12 +787,16 @@ public class JDFDateTest extends JDFTestCaseBase
 	{
 		JDFDate date = new JDFDate("1999-09-26T11:43:10+03:00");
 		assertNotNull(date);
-		date = new JDFDate("1999-09-26");
+		assertEquals(3600000l * 3, date.getTimeZoneOffsetInMillis());
+		date = new JDFDate("1999-07-26");
 		assertNotNull(date);
+		assertEquals(TimeZone.getDefault().getOffset(date.getTimeInMillis()), date.getTimeZoneOffsetInMillis());
 		date = new JDFDate("1999-09-26T11:43:10");
 		assertNotNull(date);
-		date = new JDFDate("1999-09-26T11:43:10.04");
+		assertEquals(TimeZone.getDefault().getOffset(date.getTimeInMillis()), date.getTimeZoneOffsetInMillis());
+		date = new JDFDate("1999-11-26T11:43:10.04");
 		assertNotNull(date);
+		assertEquals(TimeZone.getDefault().getOffset(date.getTimeInMillis()), date.getTimeZoneOffsetInMillis());
 	}
 
 	/**

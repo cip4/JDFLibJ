@@ -83,6 +83,7 @@
 
 package org.cip4.jdflib.util;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
@@ -278,6 +279,20 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
+	 * @param other the date to clone
+	 */
+	public JDFDate(final LocalDateTime dateTime)
+	{
+		this();
+		if (dateTime != null)
+		{
+			JDFDate date = createDate(dateTime.toString());
+			lTimeInMillis = date.getTimeInMillis();
+			m_TimeZoneOffsetInMillis = date.getTimeZoneOffsetInMillis();
+		}
+	}
+
+	/**
 	 * Allocates a <code>JDFDate</code> object and initializes it so that the JDFDate represents a date set by <code>strDateTime</code> Format of
 	 * <code>strDateTime</code>
 	 * <p>
@@ -383,6 +398,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	{
 		private String strDateTime;
 		private long l;
+		private boolean timezoneSet;
 
 		/**
 		 *
@@ -392,6 +408,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		{
 			super();
 			this.strDateTime = strDateTime;
+			timezoneSet = true;
 			l = StringUtil.parseLong(strDateTime, -1);
 		}
 
@@ -490,8 +507,12 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 				cleanDateTime();
 				b = strDateTime.getBytes();
 			}
-
 			lTimeInMillis = fastCalendar.getTimeInMillis(b, decimalLength, getTimeZoneOffsetInMillis());
+			if (!timezoneSet)
+			{
+				m_TimeZoneOffsetInMillis = TimeZone.getDefault().getOffset(lTimeInMillis);
+				lTimeInMillis = fastCalendar.getTimeInMillis(b, decimalLength, getTimeZoneOffsetInMillis());
+			}
 		}
 
 		private void cleanDateTime() throws DataFormatException
@@ -585,6 +606,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			{
 				setTimeZoneOffsetInMillis(TimeZone.getDefault().getOffset(lTimeInMillis));
 				strDateTime += getTimeZoneISO();
+				timezoneSet = false;
 			}
 			else if (posPlus >= 0 && posMinus >= 0)
 			{
@@ -634,7 +656,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		{
 			if (strDateTime.indexOf("T") == -1)
 			{
-				setTimeZoneOffsetInMillis(TimeZone.getDefault().getOffset(lTimeInMillis));
+				timezoneSet = false;
 				if (l > 1000 && l < 5000)
 					strDateTime += "-01-01";
 				if (strDateTime.length() == 7)
@@ -644,6 +666,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			}
 			else if (strDateTime.length() < 16)
 			{
+				timezoneSet = false;
 				String buffer = getDefaultTime() + getTimeZoneISO();
 				buffer = buffer.substring(16 - strDateTime.length());
 				strDateTime += buffer;
