@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,7 +73,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -123,14 +122,6 @@ public class WalkXElement extends BaseWalker
 	@Override
 	public KElement walk(final KElement e, KElement trackElem)
 	{
-		final VElement v = trackElem.getChildElementVector(null, null);
-		for (KElement kk : v)
-		{
-			if (e.isEqual(kk))
-			{
-				return null;
-			}
-		}
 		cleanRefs(e, trackElem);
 
 		// dirty, dirty but needed in case of inherited inline resources

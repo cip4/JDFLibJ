@@ -541,15 +541,18 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 */
 	protected void attributesToSpan(final KElement e)
 	{
-		final JDFAttributeMap map = e.getAttributeMap();
-		final JDFElement ir = (JDFElement) e;
-		final VString keys = map.getKeys();
-		final VString knownElements = ir.knownElements();
-		for (final String name : keys)
+		if (e != null)
 		{
-			if (knownElements.contains(name))
+			final JDFAttributeMap map = e.getAttributeMap();
+			final JDFElement ir = (JDFElement) e;
+			final VString keys = map.getKeys();
+			final VString knownElements = ir.knownElements();
+			for (final String name : keys)
 			{
-				attributeToSpan(e, name);
+				if (knownElements.contains(name))
+				{
+					attributeToSpan(e, name);
+				}
 			}
 		}
 	}

@@ -110,6 +110,7 @@ import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
+import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFContact;
@@ -411,6 +412,24 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(di);
 		assertEquals(JDFIntentResource.guessActual(di, "Overage"), "50");
 		assertEquals(JDFIntentResource.guessActual(di, "Underage"), "25");
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testIntentExternalID()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		XJDFHelper xjdf = new XJDFHelper("j1", null, null);
+		ProductHelper ph = xjdf.appendProduct();
+		IntentHelper ih = ph.appendIntent(ElementName.MEDIAINTENT);
+		ih.setAttribute(XJDFConstants.ExternalID, "id");
+		JDFDoc d = xCon.convert(xjdf.getRoot());
+		JDFMediaIntent mi = (JDFMediaIntent) d.getJDFRoot().getResource(ElementName.MEDIAINTENT, EnumUsage.Input, 0);
+
+		assertEquals("id", mi.getProductID());
 	}
 
 	/**
