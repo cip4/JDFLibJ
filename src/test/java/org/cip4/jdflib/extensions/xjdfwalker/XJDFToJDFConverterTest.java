@@ -73,6 +73,7 @@ import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
+import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -657,11 +658,16 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		XJDFHelper h = new XJDFHelper("j1", "root", null);
 		KElement e = h.getRoot();
-		SetHelper sh = h.getCreateResourceSet("Contact", null);
+		h.getCreateResourceSet(ElementName.CUSTOMERINFO, EnumUsage.Input).getCreatePartition(0, true).getResource().setAttribute(AttributeName.CUSTOMERORDERID, "cc");
+		SetHelper sh = h.getCreateResourceSet(ElementName.CONTACT, EnumUsage.Input);
 		ResourceHelper ph = sh.getCreatePartition(0, true);
-		ph.getResource().setAttribute(AttributeName.CONTACTTYPES, EnumContactType.Customer.getName());
+		ph.setPartMap(new JDFAttributeMap(XJDFConstants.ContactType, EnumContactType.Customer.getName()));
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
+		JDFCustomerInfo ci = d.getJDFRoot().getCustomerInfo();
+		assertNotNull(ci);
+		JDFContact contact = (JDFContact) d.getJDFRoot().getResource(ElementName.CONTACT, null, 0);
+		assertEquals(EnumContactType.Customer.getName(), contact.getContactTypes().get(0));
 	}
 
 	/**
