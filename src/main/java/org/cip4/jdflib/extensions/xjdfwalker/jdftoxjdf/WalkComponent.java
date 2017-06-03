@@ -147,9 +147,10 @@ public class WalkComponent extends WalkResource
 		if ("Unknown".equals(prodType))
 			map.remove(AttributeName.PRODUCTTYPE);
 		updateComponentType(map);
-		map.remove(AttributeName.PAGELISTINDEX);
 		map.renameKey(AttributeName.ASSEMBLYIDS, XJDFConstants.BinderySignatureIDs);
 		map.remove(AttributeName.COMPONENTTYPE);
+		map.remove(AttributeName.PAGELISTINDEX);
+		map.remove(AttributeName.SPINETHICKNESS);
 		super.updateAttributes(map);
 	}
 
