@@ -181,6 +181,10 @@ public class IDRemover extends BaseElementWalker
 							}
 						}
 					}
+					else if (XJDFConstants.Container.endsWith(key))
+					{
+						refSet.add(map.get(key));
+					}
 				}
 			}
 			return e;

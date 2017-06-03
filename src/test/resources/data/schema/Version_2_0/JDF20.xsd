@@ -716,6 +716,8 @@
                 <xs:element maxOccurs="1" minOccurs="0" ref="ProductIntent"/>
                 <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
             </xs:sequence>
+            <xs:attribute name="DescriptiveName" type="string" use="optional"/>
+            <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Name" type="NMTOKEN" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -1553,16 +1555,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for BufferParams ** -->
-    <xs:element name="BufferParams" substitutionGroup="SpecificResource" type="BufferParams"/>
-    <xs:complexType name="BufferParams">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource">
-                <xs:attribute name="MinimumWait" type="duration" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for Bundle ** -->
     <xs:element name="Bundle" substitutionGroup="SpecificResource" type="Bundle"/>
     <xs:complexType name="Bundle">
@@ -2252,18 +2244,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for NumberingParams ** -->
-    <xs:element name="NumberingParams" substitutionGroup="SpecificResource" type="NumberingParams"/>
-    <xs:complexType name="NumberingParams">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="NumberingParam"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for PageCondition ** -->
     <xs:element name="PageCondition">
         <xs:complexType>
@@ -2429,23 +2409,7 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for PlaceHolderResource ** -->
-    <xs:element name="PlaceHolderResource" substitutionGroup="SpecificResource" type="PlaceHolderResource"/>
-    <xs:complexType name="PlaceHolderResource">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource"/>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for PreflightAnalysis ** -->
-    <xs:element name="PreflightAnalysis" substitutionGroup="SpecificResource" type="PreflightAnalysis"/>
-    <xs:complexType name="PreflightAnalysis">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource"/>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <xs:element name="AuditProcessRun">
+     <xs:element name="AuditProcessRun">
         <xs:complexType>
             <xs:complexContent>
                 <xs:extension base="Audit">
@@ -3498,18 +3462,15 @@
     </xs:element>
 
     <!-- ** Complex type definition for AutomatedOverPrintParams ** -->
-    <xs:element name="AutomatedOverPrintParams" substitutionGroup="SpecificResource" type="AutomatedOverPrintParams"/>
-    <xs:complexType name="AutomatedOverPrintParams">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource">
-                <xs:attribute name="KnockOutCMYKWhite" type="boolean" use="optional"/>
-                <xs:attribute name="OverPrintBlackLineArt" type="boolean" use="optional"/>
-                <xs:attribute name="LineArtBlackLevel" type="double" use="optional"/>
-                <xs:attribute name="OverPrintBlackText" type="boolean" use="optional"/>
-                <xs:attribute name="TextBlackLevel" type="double" use="optional"/>
-                <xs:attribute name="TextSizeThreshold" type="integer" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
+    <xs:element name="AutomatedOverPrintParams"/>
+    <xs:complexType>
+		<xs:attribute name="KnockOutCMYKWhite" type="boolean" use="optional"/>
+		<xs:attribute name="OverPrintBlackLineArt" type="boolean" use="optional"/>
+		<xs:attribute name="LineArtBlackLevel" type="double" use="optional"/>
+		<xs:attribute name="OverPrintBlackText" type="boolean" use="optional"/>
+		<xs:attribute name="TextBlackLevel" type="double" use="optional"/>
+		<xs:attribute name="TextSizeThreshold" type="integer" use="optional"/>
+        <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
 
     <!-- ** Complex type definition for BarcodeCompParams ** -->
@@ -4497,14 +4458,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for FoldOperation ** -->
-    <xs:element name="FoldOperation" substitutionGroup="SpecificResource" type="FoldOperation"/>
-    <xs:complexType name="FoldOperation">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource"/>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for FontPolicy ** -->
     <xs:element name="FontPolicy" substitutionGroup="SpecificResource" type="FontPolicy"/>
     <xs:complexType name="FontPolicy">
@@ -4669,14 +4622,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for InterpretedPDLData ** -->
-    <xs:element name="InterpretedPDLData" substitutionGroup="SpecificResource" type="InterpretedPDLData"/>
-    <xs:complexType name="InterpretedPDLData">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource"/>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for JBIG2Params ** -->
     <xs:element name="JBIG2Params">
         <xs:complexType>
@@ -4801,15 +4746,6 @@
                     <xs:element maxOccurs="unbounded" minOccurs="1" ref="ShiftPoint"/>
                 </xs:sequence>
             </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for LongitudinalRibbonOperationParams ** -->
-    <xs:element name="LongitudinalRibbonOperationParams" substitutionGroup="SpecificResource"
-                type="LongitudinalRibbonOperationParams"/>
-    <xs:complexType name="LongitudinalRibbonOperationParams">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource"/>
         </xs:complexContent>
     </xs:complexType>
 
@@ -5068,18 +5004,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for NumberingParam ** -->
-    <xs:element name="NumberingParam">
-        <xs:complexType>
-            <xs:attribute name="XPosition" type="double" use="optional"/>
-            <xs:attribute name="Orientation" type="double" use="optional"/>
-            <xs:attribute name="YPosition" type="string" use="optional"/>
-            <xs:attribute name="Step" type="integer" use="optional"/>
-            <xs:attribute name="StartValue" type="string" use="optional"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for ObjectModel ** -->
     <xs:element name="ObjectModel">
         <xs:complexType>
@@ -5111,18 +5035,6 @@
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
-
-    <!-- ** Complex type definition for OrderingParams ** -->
-    <xs:element name="OrderingParams" substitutionGroup="SpecificResource" type="OrderingParams"/>
-    <xs:complexType name="OrderingParams">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="Contact"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
 
     <!-- ** Complex type definition for PackingParams ** -->
     <xs:element name="PackingParams" substitutionGroup="SpecificResource" type="PackingParams"/>
@@ -5209,14 +5121,6 @@
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
-
-    <!-- ** Complex type definition for PlateCopyParams ** -->
-    <xs:element name="PlateCopyParams" substitutionGroup="SpecificResource" type="PlateCopyParams"/>
-    <xs:complexType name="PlateCopyParams">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource"/>
-        </xs:complexContent>
-    </xs:complexType>
 
     <!-- ** Complex type definition for Position ** -->
     <xs:element name="Position">
@@ -6097,14 +6001,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for SaddleStitchingParams ** -->
-    <xs:element name="SaddleStitchingParams" substitutionGroup="SpecificResource" type="SaddleStitchingParams"/>
-    <xs:complexType name="SaddleStitchingParams">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource"/>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for Score ** -->
     <xs:element name="Score">
         <xs:complexType>
@@ -6120,14 +6016,6 @@
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
-
-    <!-- ** Complex type definition for SideSewingParams ** -->
-    <xs:element name="SideSewingParams" substitutionGroup="SpecificResource" type="SideSewingParams"/>
-    <xs:complexType name="SideSewingParams">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource"/>
-        </xs:complexContent>
-    </xs:complexType>
 
     <!-- ** Complex type definition for SideStitching ** -->
     <xs:element name="SideStitching">

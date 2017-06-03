@@ -88,6 +88,7 @@ public abstract class XJDFConstants
 	public static final String ChildRefs = "ChildRefs";
 	public static final String CompanyID = "CompanyID";
 	public static final String ContactType = "ContactType";
+	public static final String Container = "Container";
 	public static final String Content = "Content";
 	public static final String ContentCheckIntent = "ContentCheckIntent";
 

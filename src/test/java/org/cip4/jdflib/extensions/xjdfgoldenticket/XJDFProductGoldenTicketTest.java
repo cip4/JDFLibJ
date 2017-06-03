@@ -160,6 +160,35 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testAssembleEnvelope()
+	{
+		XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
+		XJDFHelper xjdfHelper = bt.getXJDFHelper();
+		xjdfHelper.setTypes(EnumType.Product.getName());
+		ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
+		ph.setAmount(10);
+		ph.setProductType("FilledEnvelope");
+		ProductHelper phe = xjdfHelper.getCreateProduct("ID_Envelope");
+		phe.setAmount(1);
+		phe.setProductType("Envelope");
+		phe.setAttribute(XJDFConstants.ExternalID, "MISID_Envelope");
+		ProductHelper phl = xjdfHelper.getCreateProduct("ID_Letter");
+		phl.setAmount(1);
+		phl.setProductType("Letter");
+		IntentHelper ih = ph.getCreateIntent(XJDFConstants.AssemblingIntent);
+		ih.getCreateResource().setAttribute(XJDFConstants.Container, "ID_Envelope");
+		ih.getCreateResource().setXPathAttribute("BlowIn/@ChildRef", "ID_Letter");
+
+		xjdfHelper.cleanUp();
+		setSnippet(xjdfHelper.getRoot().getElement(XJDFConstants.ProductList), true);
+		writeTest(xjdfHelper, "intents/AssembleEnvelope.xjdf");
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testMultiVariable()
 	{
 		XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);

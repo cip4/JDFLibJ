@@ -68,39 +68,37 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFQueueFilter;
 
 /**
- * any matching class will be removed with extreme prejudice...
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class WalkIgnore extends WalkElement
+public class WalkQueueFilter extends WalkJDFElement
 {
-	private static Set<String> allwaysIgnore = null;
-
 	/**
 	 *
 	 */
-	public WalkIgnore()
+	public WalkQueueFilter()
 	{
 		super();
-		depth += 42; // bump us up front so that we always get checked first
 	}
 
 	/**
-	 * @param xjdf
-	 * @return true if must continue
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
 	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	public boolean matches(final KElement toCheck)
 	{
-		return null;
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFQueueFilter);
 	}
 
 	/**
@@ -109,105 +107,16 @@ public class WalkIgnore extends WalkElement
 	@Override
 	public VString getElementNames()
 	{
-		VString v = new VString();
-		v.add(ElementName.ACKNOWLEDGE);
-		v.add(ElementName.ACTIONPOOL);
-		v.add(ElementName.ADHESIVEBINDING);
-		v.add(ElementName.ANCESTORPOOL);
-		v.add(ElementName.ASSETLISTCREATIONPARAMS);
-		v.add(ElementName.BINDLIST);
-		v.add(ElementName.BOOKCASE);
-		v.add(ElementName.BUFFERPARAMS);
-		v.add(ElementName.BUSINESSINFO);
-		v.add(ElementName.COLORMEASUREMENTCONDITIONS);
-		v.add(ElementName.COLORSPACESUBSTITUTE);
-		v.add(ElementName.CONTACTCOPYPARAMS);
-		v.add(ElementName.CONTAINER);
-		v.add(ElementName.CUSTOMERMESSAGE);
-		v.add(ElementName.CYLINDERLAYOUT);
-		v.add(ElementName.CYLINDERLAYOUTPREPARATIONPARAMS);
-		v.add(ElementName.CYLINDERPOSITION);
-		v.add(ElementName.DELETED);
-		v.add(ElementName.DEVCAPPOOL);
-		v.add(ElementName.DEVCAPS);
-		v.add(ElementName.DEVCAP);
-		v.add(ElementName.DEVICECAP);
-		v.add(ElementName.DIGITALDELIVERYPARAMS);
-		v.add(ElementName.ELEMENTCOLORPARAMS);
-		v.add(ElementName.FILEALIAS);
-		v.add(ElementName.FORMATCONVERSIONPARAMS);
-		v.add(ElementName.IMAGEREPLACEMENTPARAMS);
-		v.add(ElementName.INTERPRETEDPDLDATA);
-		v.add(ElementName.MERGED);
-		v.add(ElementName.MODIFIED);
-		v.add(ElementName.MODULEPOOL);
-		v.add(ElementName.OBSERVATIONTARGET);
-		v.add(ElementName.PACKINGINTENT);
-		v.add(ElementName.PAGEASSIGNEDLIST);
-		v.add(ElementName.PAGEASSIGNPARAMS);
-		v.add(ElementName.PARTAMOUNT);
-		v.add(ElementName.PDFTOPSCONVERSIONPARAMS);
-		v.add(ElementName.PDLRESOURCEALIAS);
-		v.add(ElementName.PREFLIGHTREPORTRULEPOOL);
-		v.add(ElementName.PRGROUP);
-		v.add(ElementName.PRGROUPOCCURRENCE);
-		v.add(ElementName.PRITEM);
-		v.add(ElementName.PSTOPDFCONVERSIONPARAMS);
-
-		v.add(ElementName.REGISTRATION);
-		v.add(ElementName.RESOURCEDEFINITIONPARAMS);
-		v.add(ElementName.RESOURCEPOOL);
-		v.add(ElementName.SCANPARAMS);
-		v.add(ElementName.SCREENINGINTENT);
-		v.add(ElementName.SOURCERESOURCE);
-		v.add(ElementName.SPAWNED);
-		v.add(ElementName.TILE);
-		v.add(ElementName.TESTPOOL);
-		v.add(ElementName.TRIGGER);
-		return v;
+		return new VString(ElementName.QUEUEFILTER, null);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-
-	Set<String> getAlwaysIgnore()
-	{
-		if (allwaysIgnore == null)
-		{
-			HashSet<String> v = new HashSet<String>();
-			v.add(ElementName.ACTIONPOOL);
-			v.add(ElementName.DELETED);
-			v.add(ElementName.DEVCAPPOOL);
-			v.add(ElementName.DEVCAPS);
-			v.add(ElementName.DEVCAP);
-			v.add(ElementName.DEVICECAP);
-			v.add(ElementName.MERGED);
-			v.add(ElementName.MODIFIED);
-			v.add(ElementName.MODULEPOOL);
-			v.add(ElementName.PARTAMOUNT);
-			v.add(ElementName.RESOURCEPOOL);
-			v.add(ElementName.SPAWNED);
-			v.add(ElementName.TESTPOOL);
-			allwaysIgnore = v;
-		}
-		return allwaysIgnore;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	public boolean matches(KElement e)
+	protected void updateAttributes(JDFAttributeMap map)
 	{
-		if (jdfToXJDF.isRetainAll())
-		{
-			return getAlwaysIgnore().contains(e.getLocalName());
-		}
-		else
-		{
-			return true;
-		}
+		map.remove(AttributeName.QUEUEENTRYDETAILS);
+		super.updateAttributes(map);
 	}
-
 }
