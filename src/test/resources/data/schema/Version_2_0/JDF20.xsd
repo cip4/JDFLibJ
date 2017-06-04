@@ -6910,7 +6910,7 @@
         <xs:complexContent>
             <xs:extension base="Query">
                 <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="1" ref="StatusQuParams"/>
+                    <xs:element maxOccurs="1" minOccurs="0" ref="StatusQuParams"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -6921,7 +6921,7 @@
         <xs:complexContent>
             <xs:extension base="Response">
                 <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="1" ref="DeviceInfo"/>
+                    <xs:element maxOccurs="1" minOccurs="0" ref="DeviceInfo"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

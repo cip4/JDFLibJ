@@ -95,6 +95,7 @@ import org.cip4.jdflib.jmf.JDFQueueEntry;
 import org.cip4.jdflib.jmf.JDFResourceCmdParams;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFResourceQuParams;
+import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.JDFDevice;
@@ -354,6 +355,63 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
 		writeTest(xjmfHelper, "jmf/statusSignal.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSubscribeStatus()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
+		s.getHeader().setID("Status1");
+		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
+		s.appendElement(ElementName.STATUSQUPARAMS);
+		JDFSubscription sub = s.subscribe("http://MIS:1234/subscibeurl");
+		sub.setRepeatTime(30);
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "building/subscribeStatus.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testRespondSubscribeStatus()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
+		s.getHeader().setAttribute(AttributeName.REFID, "Status1");
+		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "building/subscribeStatusResponse.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSignalStatusBuilding()
+	{
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
+		s.getHeader().setID("S1");
+		s.getHeader().setAttribute(AttributeName.REFID, "Status1");
+		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
+		JDFDeviceInfo di = (JDFDeviceInfo) s.getRoot().appendElement(ElementName.DEVICEINFO);
+		di.setAttribute(AttributeName.STATUS, "Production");
+		JDFJobPhase p = di.appendJobPhase();
+		p.setJobID("j1");
+		p.setJobPartID("p1");
+		p.setStatus(EnumNodeStatus.InProgress);
+		p.setStartTime(new JDFDate().setTime(17, 0, 0));
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "building/subscribeStatusSignal.xjmf");
 	}
 
 	/**
