@@ -77,6 +77,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  *
@@ -126,6 +127,11 @@ public class WalkMessageService extends WalkJDFSubElement
 		map.remove(AttributeName.REGISTRATION);
 		map.remove(AttributeName.GENERICATTRIBUTES);
 		map.remove(AttributeName.PERSISTENT);
+		String urlschemes = map.get(AttributeName.URLSCHEMES);
+		if (urlschemes != null)
+		{
+			map.put(AttributeName.URLSCHEMES, StringUtil.removeToken(urlschemes, "file", null));
+		}
 		map.renameKey(AttributeName.CHANNELMODE, XJDFConstants.ResponseModes);
 		super.updateAttributes(map);
 	}

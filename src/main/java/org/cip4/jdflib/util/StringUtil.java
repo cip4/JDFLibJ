@@ -750,6 +750,33 @@ public class StringUtil
 	}
 
 	/**
+	 *
+	 * @param strWork
+	 * @param oldToken
+	 * @param delim
+	 * @param newToken
+	 * @return
+	 */
+	public static String replaceToken(final String strWork, String oldToken, String delim, String newToken)
+	{
+		int pos = posOfToken(strWork, oldToken, delim, 0);
+		return (pos >= 0) ? replaceToken(strWork, pos, delim, newToken) : strWork;
+	}
+
+	/**
+	 *
+	 * @param strWork
+	 * @param oldToken
+	 * @param delim
+	 * @param newToken
+	 * @return
+	 */
+	public static String removeToken(final String strWork, String oldToken, String delim)
+	{
+		return replaceToken(strWork, oldToken, delim, null);
+	}
+
+	/**
 	 * replace a token in a string
 	 * @param strWork the String to work on
 	 * @param index index of the token to replace
@@ -761,7 +788,7 @@ public class StringUtil
 	public static String replaceToken(final String strWork, int index, String delim, String newToken)
 	{
 		if (delim == null)
-			delim = " ";
+			delim = JDFConstants.BLANK;
 		VString v = tokenize(strWork, delim, false);
 		if (v == null)
 			return null;
@@ -1531,7 +1558,7 @@ public class StringUtil
 	public static int indexOfToken(final String strWork, final String token, String delim, int start)
 	{
 		if (delim == null)
-			delim = " ";
+			delim = JDFConstants.BLANK;
 		if (strWork != null)
 		{
 			int tl = token.length();
