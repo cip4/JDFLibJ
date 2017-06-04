@@ -77,12 +77,12 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkDeviceNColor extends WalkJDFSubElement
+public class WalkDeviceNSpace extends WalkJDFSubElement
 {
 	/**
 	 *
 	 */
-	public WalkDeviceNColor()
+	public WalkDeviceNSpace()
 	{
 		super();
 	}
@@ -104,7 +104,7 @@ public class WalkDeviceNColor extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.DEVICENCOLOR, null);
+		return new VString(ElementName.DEVICENSPACE, null);
 	}
 
 	/**

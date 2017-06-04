@@ -354,7 +354,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 			KElement e = theElement.getFirstChildElement();
 			while (e != null)
 			{
-				if (!(e instanceof JDFPart) && !(e instanceof JDFGeneralID) && !(e instanceof JDFComment))
+				if (!(e instanceof JDFPart) && !(e instanceof JDFGeneralID) && !(e instanceof JDFAmountPool) && !(e instanceof JDFComment))
 					return e;
 				e = e.getNextSiblingElement();
 			}
