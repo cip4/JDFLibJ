@@ -4249,7 +4249,6 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Offset" type="XYPair" use="optional"/>
-            <xs:attribute name="Units" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
