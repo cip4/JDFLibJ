@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.util.JDFDate;
@@ -169,6 +170,20 @@ public class MessageHelper extends BaseXJDFHelper
 	public KElement getHeader()
 	{
 		return ensureHeader(theElement);
+	}
+
+	/**
+	 *
+	 * @param url
+	 * @return null if we ain't no query
+	 */
+	public JDFSubscription subscribe(String url)
+	{
+		if (!theElement.getLocalName().startsWith("Query"))
+			return null;
+		JDFSubscription sub = (JDFSubscription) appendElement(ElementName.SUBSCRIPTION);
+		sub.setURL(url);
+		return sub;
 	}
 
 }
