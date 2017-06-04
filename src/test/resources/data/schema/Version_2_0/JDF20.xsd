@@ -2697,11 +2697,11 @@
             <xs:attribute name="TabCount" type="integer" use="optional"/>
             <xs:attribute name="TabsPerBank" type="integer" use="optional"/>
             <xs:attribute name="TabExtensionDistance" type="double" use="optional"/>
-            <xs:attribute name="TabExtensionMylar" type="boolean" use="optional"/>
-            <xs:attribute name="TabBindMylar" type="boolean" use="optional"/>
+            <xs:attribute name="ReinforceTabs" type="boolean" use="optional"/>
+            <xs:attribute name="ReinforceBind" type="boolean" use="optional"/>
             <xs:attribute name="TabBodyCopy" type="boolean" use="optional"/>
-            <xs:attribute name="TabMylarColor" type="NamedColor" use="optional"/>
-            <xs:attribute name="TabMylarColorDetails" type="string" use="optional"/>
+            <xs:attribute name="ReinforceColor" type="NamedColor" use="optional"/>
+            <xs:attribute name="ReinforceColorDetails" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5558,8 +5558,8 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element maxOccurs="1" minOccurs="0" ref="BarcodeReproParams"/>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="FillMark"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
                 <xs:element maxOccurs="1" minOccurs="0" ref="JobField"/>
                 <xs:element maxOccurs="1" minOccurs="1" ref="RefAnchor"/>
             </xs:sequence>

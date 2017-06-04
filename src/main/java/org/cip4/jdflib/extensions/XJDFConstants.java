@@ -128,6 +128,10 @@ public abstract class XJDFConstants
 
 	public static final String QueueEntryIDs = "QueueEntryIDs";
 
+	public static final String ReinforceBind = "ReinforceBind";
+	public static final String ReinforceColor = "ReinforceColor";
+	public static final String ReinforceColorDetails = "ReinforceColorDetails";
+	public static final String ReinforceTabs = "ReinforceTabs";
 	public static final String Resource = "Resource";
 	public static final String ResourceSet = "ResourceSet";
 	public static final String ResponseModes = "ResponseModes";

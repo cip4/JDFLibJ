@@ -74,6 +74,7 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.util.JDFDate;
@@ -140,6 +141,10 @@ public class MessageHelper extends BaseXJDFHelper
 		if (!header.hasAttribute(AttributeName.DEVICEID))
 		{
 			String senderID = jmfBuilder.getSenderID();
+			if (StringUtil.getNonEmpty(senderID) == null)
+			{
+				senderID = JDFJMF.getTheSenderID();
+			}
 			if (StringUtil.getNonEmpty(senderID) == null)
 			{
 				senderID = StringUtil.replaceString(JDFAudit.getStaticAgentName(), JDFConstants.BLANK, JDFConstants.UNDERSCORE);
