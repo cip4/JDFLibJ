@@ -385,4 +385,19 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		xjmf.write2File(sm_dirTestDataTemp + "resourceInk.xjmf");
 	}
 
+	/**
+	 *
+	 */
+	@Test
+	public void testSubmitQueueEntryHold()
+	{
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildSubmitQueueEntry(null);
+		jmf.getCommand(0).getQueueSubmissionParams(0).setHold(true);
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+
+		assertEquals("Held", xjmf.getXPathAttribute("CommandSubmitQueueEntry/QueueSubmissionParams/@Activation", null));
+		assertNull(xjmf.getXPathAttribute("CommandSubmitQueueEntry/QueueSubmissionParams/@Hold", null));
+	}
+
 }
