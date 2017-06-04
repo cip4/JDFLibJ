@@ -70,11 +70,14 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * superclass for audits and messages
@@ -136,7 +139,12 @@ public class MessageHelper extends BaseXJDFHelper
 		JMFBuilder jmfBuilder = JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF);
 		if (!header.hasAttribute(AttributeName.DEVICEID))
 		{
-			header.setAttribute(AttributeName.DEVICEID, jmfBuilder.getSenderID());
+			String senderID = jmfBuilder.getSenderID();
+			if (StringUtil.getNonEmpty(senderID) == null)
+			{
+				senderID = StringUtil.replaceString(JDFAudit.getStaticAgentName(), JDFConstants.BLANK, JDFConstants.UNDERSCORE);
+			}
+			header.setAttribute(AttributeName.DEVICEID, senderID);
 		}
 		if (!header.hasAttribute(AttributeName.AGENTNAME))
 		{
@@ -145,15 +153,6 @@ public class MessageHelper extends BaseXJDFHelper
 		if (!header.hasAttribute(AttributeName.AGENTVERSION))
 		{
 			header.setAttribute(AttributeName.AGENTVERSION, jmfBuilder.getAgentVersion());
-		}
-		if (!header.hasAttribute(AttributeName.DEVICEID))
-		{
-			header.setAttribute(AttributeName.DEVICEID, jmfBuilder.getSenderID());
-		}
-		KElement next = message.getFirstChildElement();
-		if (next != header)
-		{
-			message.insertBefore(header, next);
 		}
 		return header;
 	}

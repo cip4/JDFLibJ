@@ -1,11 +1,3 @@
-package org.cip4.jdflib.extensions;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.KElement;
-
 /**
  * The CIP4 Software License, Version 1.0
  *
@@ -74,8 +66,26 @@ import org.cip4.jdflib.core.KElement;
  *
  *
  */
+
+package org.cip4.jdflib.extensions;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.KElement;
+
 class XJDFCleanupComparator extends KElement.SimpleElementNameComparator
 {
+
+	/**
+	 *
+	 */
+	public XJDFCleanupComparator()
+	{
+		super();
+	}
+
 	private static Set<String> retain = null;
 
 	/**
@@ -84,14 +94,32 @@ class XJDFCleanupComparator extends KElement.SimpleElementNameComparator
 	@Override
 	public int compare(KElement o1, KElement o2)
 	{
-		if (o1 != null)
+		if (o1 != null && o2 != null)
 		{
+			String name1 = o1.getLocalName();
+			String name2 = o2.getLocalName();
+			if (XJDFConstants.Header.equals(name1))
+			{
+				return XJDFConstants.Header.equals(name2) ? 0 : -1;
+			}
+			if (XJDFConstants.Header.equals(name2))
+			{
+				return 1;
+			}
+
 			KElement parent = o1.getParentNode_KElement();
 			if (mustRetain(parent))
 			{
 				return 0;
 			}
-
+			if (ElementName.SUBSCRIPTION.equals(name1))
+			{
+				return ElementName.SUBSCRIPTION.equals(name2) ? 0 : -1;
+			}
+			if (ElementName.SUBSCRIPTION.equals(name2))
+			{
+				return 1;
+			}
 			//TODO foreign namespaces last
 			//TODO resouces last, after parts
 		}

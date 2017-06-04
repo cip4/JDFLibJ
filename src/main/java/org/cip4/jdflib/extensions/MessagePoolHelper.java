@@ -91,7 +91,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @param sh
 	 * @return
 	 */
@@ -120,7 +120,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @param message
 	 * @return
 	 */
@@ -130,7 +130,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @param sh
 	 * @return
 	 */
@@ -169,10 +169,11 @@ public class MessagePoolHelper extends BaseXJDFHelper
 				ah.cleanUp();
 			}
 		}
+		super.cleanUp();
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public Vector<MessageHelper> getAuditHelpers()
@@ -190,7 +191,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @param e
 	 * @return
 	 */
@@ -208,7 +209,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @param elementName
 	 * @return
 	 */

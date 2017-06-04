@@ -187,7 +187,8 @@ public abstract class BaseXJDFHelper
 	 */
 	public void cleanUp()
 	{
-		theElement.sortChildren(new XJDFCleanupComparator(), true);
+		XJDFCleanupComparator comparator = new XJDFCleanupComparator();
+		theElement.sortChildren(comparator, true);
 	}
 
 	protected KElement theElement;
