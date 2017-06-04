@@ -2022,18 +2022,13 @@
             <xs:attribute name="ImageFilter" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ImageResolution" type="double" use="optional"/>
             <xs:attribute name="ImageType" use="required">
-                <xs:simpleType>
-                    <xs:list>
                         <xs:simpleType>
                             <xs:restriction base="xs:NMTOKEN">
-                                <xs:enumeration value="All"/>
                                 <xs:enumeration value="Color"/>
                                 <xs:enumeration value="Grayscale"/>
                                 <xs:enumeration value="Monochrome"/>
                             </xs:restriction>
                         </xs:simpleType>
-                    </xs:list>
-                </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="JPXQuality" type="integer" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
