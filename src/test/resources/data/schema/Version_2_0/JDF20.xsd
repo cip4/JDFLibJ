@@ -1384,7 +1384,9 @@
     <!-- ** Complex type definition for ResourceQuParams ** -->
     <xs:element name="ResourceQuParams">
         <xs:complexType>
+           <xs:sequence>
         	<xs:element maxOccurs="unbounded" minOccurs="0" ref="Part"/>
+        	</xs:sequence>
             <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
@@ -3465,7 +3467,7 @@
     </xs:element>
 
     <!-- ** Complex type definition for AutomatedOverPrintParams ** -->
-    <xs:element name="AutomatedOverPrintParams"/>
+    <xs:element name="AutomatedOverPrintParams">
     <xs:complexType>
 		<xs:attribute name="KnockOutCMYKWhite" type="boolean" use="optional"/>
 		<xs:attribute name="OverPrintBlackLineArt" type="boolean" use="optional"/>
@@ -3475,6 +3477,7 @@
 		<xs:attribute name="TextSizeThreshold" type="integer" use="optional"/>
         <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for BarcodeCompParams ** -->
     <xs:element name="BarcodeCompParams" substitutionGroup="SpecificResource" type="BarcodeCompParams"/>
@@ -5172,7 +5175,9 @@
     <xs:complexType name="Preview">
         <xs:complexContent>
             <xs:extension base="SpecificResource">
+            <xs:sequence>            
             <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
+            </xs:sequence>
                 <xs:attribute name="Compensation" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
@@ -5869,7 +5874,7 @@
             </xs:attribute>
             <xs:attribute name="Extent" type="XYPair" use="required"/>
             <xs:attribute name="HoleCount" type="IntegerList" use="optional"/>
-            <xs:attribute name="Pattern" type="NMTOKEN" use="optional">
+            <xs:attribute name="Pattern" use="optional">
                             <xs:simpleType>
                                 <xs:restriction base="xs:string">
                                     <xs:enumeration value="None"/>
@@ -6579,7 +6584,7 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:element name="QueryGangStatus" substitutionGroup="Command" type="QueryGangStatus"/>
+    <xs:element name="QueryGangStatus" substitutionGroup="Query" type="QueryGangStatus"/>
     <xs:complexType name="QueryGangStatus">
         <xs:complexContent>
             <xs:extension base="Query">
