@@ -120,8 +120,15 @@ class XJDFCleanupComparator extends KElement.SimpleElementNameComparator
 			{
 				return 1;
 			}
+			if (ResourceHelper.isResourceElement(o1))
+			{
+				return 1;
+			}
+			if (ResourceHelper.isResourceElement(o2))
+			{
+				return -1;
+			}
 			//TODO foreign namespaces last
-			//TODO resouces last, after parts
 		}
 		return super.compare(o1, o2);
 	}

@@ -395,7 +395,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 			theElement.setID(theElement.generateDotID(AttributeName.ID, null));
 		}
 		super.cleanUp();
-		theElement.moveElement(getResource(), null);
 	}
 
 	/**
