@@ -1774,6 +1774,7 @@
                     </xs:simpleType>
                 </xs:attribute>
                 <xs:attribute name="PresentationURL" type="URL" use="optional"/>
+                <xs:attribute name="Revision" type="string" use="optional"/>
                 <xs:attribute name="SerialNumber" type="string" use="optional"/>
                 <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="XJMFURL" type="URL" use="optional"/>
@@ -1940,14 +1941,8 @@
             </xs:attribute>
             <xs:attribute name="JacketFoldingWidth" type="double" use="optional"/>
             <xs:attribute name="JapanBind" type="boolean" use="optional"/>
-            <xs:attribute name="SpineBrushing" type="boolean" use="optional"/>
-            <xs:attribute name="SpineFiberRoughing" type="boolean" use="optional"/>
             <xs:attribute name="SpineGlue" type="EnumGlue" use="optional"/>
-            <xs:attribute name="SpineLevelling" type="boolean" use="optional"/>
-            <xs:attribute name="SpineMilling" type="boolean" use="optional"/>
-            <xs:attribute name="SpineNotching" type="boolean" use="optional"/>
-            <xs:attribute name="SpineSanding" type="boolean" use="optional"/>
-            <xs:attribute name="SpineShredding" type="boolean" use="optional"/>
+            <xs:attribute name="SpineOperations" type="NMTOKENS" use="optional"/>
             <xs:attribute name="Thickness" type="double" use="optional"/>
             <xs:attribute name="TightBacking" type="TightBacking" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -2807,6 +2802,7 @@
             <xs:attribute name="ManufacturerURL" type="URL" use="optional"/>
             <xs:attribute name="ModuleID" type="NMTOKEN" use="required"/>
             <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Revision" type="string" use="optional"/>
             <xs:attribute name="SerialNumber" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -3598,6 +3594,17 @@
                 <xs:attribute name="DieLayoutRef" type="IDREF" use="optional"/>
                 <xs:attribute name="FoldCatalog" type="FoldCatalog" use="optional"/>
                 <xs:attribute name="NumberUp" type="XYPair" use="optional"/>
+                <xs:attribute name="Overfold" type="double" use="optional"/>
+                <xs:attribute name="OverfoldSide" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="Back"/>
+                            <xs:enumeration value="BackHalf"/>
+                            <xs:enumeration value="Front"/>
+                            <xs:enumeration value="FrontHalf"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
                 <xs:attribute name="StaggerColumns" type="DoubleList" use="optional"/>
                 <xs:attribute name="StaggerContinuous" type="boolean" use="optional"/>
                 <xs:attribute name="StaggerRows" type="DoubleList" use="optional"/>
