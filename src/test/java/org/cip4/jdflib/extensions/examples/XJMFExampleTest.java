@@ -368,7 +368,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		s.getHeader().setID("Status1");
 		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
 		s.appendElement(ElementName.STATUSQUPARAMS);
-		JDFSubscription sub = s.subscribe("http://MIS:1234/subscibeurl");
+		JDFSubscription sub = s.subscribe("http://MIS:1234/xjmfurl");
 		sub.setRepeatTime(30);
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
@@ -385,6 +385,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
 		s.getHeader().setAttribute(AttributeName.REFID, "Status1");
 		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
+		s.setAttribute(AttributeName.RETURNCODE, "0");
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
 		writeTest(xjmfHelper, "building/subscribeStatusResponse.xjmf");
