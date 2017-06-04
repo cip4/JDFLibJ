@@ -2182,7 +2182,6 @@
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="CIELABMeasuringField"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="ColorControlStrip"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="CutMark"/>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="DynamicField"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="RegisterMark"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="ScavengerArea"/>
             </xs:sequence>
@@ -2194,7 +2193,7 @@
     <xs:element name="FillMark">
         <xs:complexType>
             <xs:sequence>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="MarkColor"/>
+                <xs:element maxOccurs="unbounded" minOccurs="1" ref="MarkColor"/>
             </xs:sequence>
             <xs:attribute name="KnockoutBleed" type="double" use="optional"/>
             <xs:attribute name="KnockoutRefs" type="IDREFS" use="optional"/>
@@ -2203,7 +2202,6 @@
                     <xs:restriction base="xs:NMTOKEN">
                         <xs:enumeration value="ClipPath"/>
                         <xs:enumeration value="SourceClipPath"/>
-                        <xs:enumeration value="TrimClipPath"/>
                         <xs:enumeration value="TrimBox"/>
                     </xs:restriction>
                 </xs:simpleType>
@@ -4117,7 +4115,6 @@
     <!-- ** Complex type definition for DeviceNSpace ** -->
     <xs:element name="DeviceNSpace">
         <xs:complexType>
-            <xs:attribute name="N" type="integer" use="required"/>
             <xs:attribute name="Name" type="NMTOKEN" use="required"/>
             <xs:attribute name="Separations" type="NMTOKENS" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -4678,7 +4675,7 @@
     <xs:element name="PlacedObject">
         <xs:complexType>
             <xs:sequence>
-                <xs:choice>
+                <xs:choice maxOccurs="1" minOccurs="1">
                     <xs:element ref="ContentObject"/>
                     <xs:element ref="MarkObject"/>
                 </xs:choice>
@@ -4686,20 +4683,14 @@
                 <xs:element maxOccurs="1" minOccurs="0" ref="PageCondition"/>
             </xs:sequence>
             <xs:attribute name="Anchor" type="Anchor" use="optional"/>
-            <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
             <xs:attribute name="ClipBox" type="rectangle" use="optional"/>
-            <xs:attribute name="ClipBoxFormat" type="string" use="optional"/>
-            <xs:attribute name="ClipBoxTemplate" type="NMTOKENS" use="optional"/>
             <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
-            <xs:attribute name="CompensationCTMFormat" type="string" use="optional"/>
-            <xs:attribute name="CompensationCTMTemplate" type="NMTOKENS" use="optional"/>
             <xs:attribute name="CTM" type="matrix" use="required"/>
             <xs:attribute name="HalfTonePhaseOrigin" type="XYPair" use="optional"/>
             <xs:attribute name="ID" type="ID" use="optional"/>
             <xs:attribute name="Ord" type="integer" use="optional"/>
             <xs:attribute name="PositionRef" type="IDREF" use="optional"/>
             <xs:attribute name="SourceClipPath" type="PDFPath" use="optional"/>
-            <xs:attribute name="TrimClipPath" type="PDFPath" use="optional"/>
             <xs:attribute name="TrimCTM" type="matrix" use="optional"/>
             <xs:attribute name="TrimSize" type="XYPair" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
