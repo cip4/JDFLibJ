@@ -1384,7 +1384,7 @@
     <!-- ** Complex type definition for ResourceQuParams ** -->
     <xs:element name="ResourceQuParams">
         <xs:complexType>
-           <xs:sequence>
+            <xs:sequence>
         	<xs:element maxOccurs="unbounded" minOccurs="0" ref="Part"/>
         	</xs:sequence>
             <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
@@ -1826,9 +1826,8 @@
             <xs:attribute name="Height" type="double" use="optional"/>
             <xs:attribute name="ImageSize" type="XYPair" use="optional"/>
             <xs:attribute name="Position" type="XYPair" use="optional"/>
-            <xs:attribute name="ShapeName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Separation" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ToolName" type="string" use="optional"/>
+            <xs:attribute name="ToolName" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5874,7 +5873,7 @@
             </xs:attribute>
             <xs:attribute name="Extent" type="XYPair" use="required"/>
             <xs:attribute name="HoleCount" type="IntegerList" use="optional"/>
-            <xs:attribute name="Pattern" use="optional">
+            <xs:attribute name="Pattern"  use="optional">
                             <xs:simpleType>
                                 <xs:restriction base="xs:string">
                                     <xs:enumeration value="None"/>
