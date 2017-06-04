@@ -188,7 +188,7 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 		boolean localCheckSchema = checkSchema == null ? defaultCheckSchema : checkSchema.booleanValue();
 		if (localCheckSchema)
 		{
-			assertEquals(schemapath, dVal.getRoot().getAttribute("ValidationResult"), "Valid");
+			assertEquals(schemapath, "Valid", dVal.getRoot().getAttribute("ValidationResult"));
 		}
 		XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		JDFDoc converted = jdfConverter.convert(xjdfRoot);

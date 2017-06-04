@@ -443,7 +443,7 @@ public abstract class JDFTestCaseBase extends TestCase
 			{
 				dVal.write2File(UrlUtil.newExtension(xjdfFile, "val.xml"), 2, false);
 			}
-			assertEquals(valResult, "Valid");
+			assertEquals("Valid", valResult);
 			return xParsed;
 
 		}
