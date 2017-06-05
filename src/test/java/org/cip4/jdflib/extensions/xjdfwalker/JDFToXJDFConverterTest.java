@@ -288,7 +288,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		nP.setType(EnumType.Product);
 		nP.setDescriptiveName("desc");
 		JDFDeliveryIntent di = (JDFDeliveryIntent) nP.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
-		final JDFComponent c = (JDFComponent) nP.addResource("Component", EnumUsage.Output);
+		final JDFComponent c = (JDFComponent) nP.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		nP.getLink(c, null).setAmount(66);
 		JDFDropItemIntent dropItemIntent = di.appendDropIntent().appendDropItemIntent();
 		dropItemIntent.refComponent(c);

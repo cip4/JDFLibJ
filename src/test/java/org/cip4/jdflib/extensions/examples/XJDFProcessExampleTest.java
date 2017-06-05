@@ -69,8 +69,20 @@
 package org.cip4.jdflib.extensions.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.ProductHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
+import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.junit.Test;
 
 /**
@@ -96,4 +108,45 @@ public class XJDFProcessExampleTest extends JDFTestCaseBase
 		writeTest(xjdfHelper, "processes/CombinedExample.xjdf");
 	}
 
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testDrops()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper("splitDelivery", null, null);
+		xjdfHelper.setTypes(JDFConstants.PRODUCT);
+		ProductHelper product = xjdfHelper.getCreateRootProduct(0);
+		product.setAmount(30);
+		product.setProductType("Book");
+		product.setID("IDBook");
+		SetHelper shc = xjdfHelper.getCreateResourceSet(ElementName.CONTACT, EnumUsage.Input);
+		SetHelper shdp = xjdfHelper.getCreateResourceSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
+		for (int i = 1; i < 3; i++)
+		{
+			JDFAttributeMap map = new JDFAttributeMap("DropID", "Drop" + i);
+			ResourceHelper rhdp = shdp.getCreatePartition(map, true);
+			KElement dropItem = rhdp.getResource().appendElement(ElementName.DROPITEM);
+			dropItem.setAttribute(AttributeName.AMOUNT, "" + (i * 10));
+			dropItem.setAttribute(XJDFConstants.ItemRef, product.getID());
+			map.put(XJDFConstants.ContactType, EnumContactType.Delivery.getName());
+			ResourceHelper rhc = shc.getCreatePartition(map, true);
+			rhc.getResource().appendElement(ElementName.ADDRESS).setAttribute(AttributeName.CITY, "city" + i);
+			rhc.getResource().appendElement(ElementName.PERSON).setAttribute(AttributeName.FIRSTNAME, "Name" + i);
+		}
+
+		cleanSnippets(xjdfHelper);
+		writeTest(xjdfHelper, "processes/deliverydrops.xjdf");
+	}
+
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	protected void setUp() throws Exception
+	{
+		JDFElement.setLongID(false);
+		super.setUp();
+	}
 }
