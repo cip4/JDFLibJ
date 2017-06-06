@@ -6598,6 +6598,17 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:element name="SignalGangStatus" substitutionGroup="Signal" type="SignalGangStatus"/>
+    <xs:complexType name="SignalGangStatus">
+        <xs:complexContent>
+            <xs:extension base="Signal">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="GangInfo"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
     <xs:element name="QueryKnownDevices" substitutionGroup="Query" type="QueryKnownDevices"/>
     <xs:complexType name="QueryKnownDevices">
         <xs:complexContent>
