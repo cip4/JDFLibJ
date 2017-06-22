@@ -89,6 +89,8 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.JDFTool;
@@ -100,6 +102,7 @@ import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Before;
@@ -123,7 +126,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		mDoc = new JDFDoc("JDF");
+		mDoc = new JDFDoc(ElementName.JDF);
 		n = mDoc.getJDFRoot();
 
 	}
@@ -424,6 +427,23 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertTrue(converted);
 		assertNotNull(n.getResource(ElementName.NODEINFO, EnumUsage.Input, 0));
 		assertNull(n.getResource(ElementName.NODEINFO, EnumUsage.Input, 0).getElement(ElementName.JMF));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testInheritedAttributes()
+	{
+		JDFRunList ru = (JDFRunList) n.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 0);
+		JDFResource rup = ru.addPartition(EnumPartIDKey.Run, "r");
+		ru.setNPage(7);
+		FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
+		fixVersion.setZappDeprecated(true);
+		boolean converted = fixVersion.convert(n);
+		assertTrue(converted);
+		assertEquals(7, ru.getNPage());
+		assertFalse(rup.hasAttribute_KElement(AttributeName.NPAGE, null, false));
 	}
 
 	/**
