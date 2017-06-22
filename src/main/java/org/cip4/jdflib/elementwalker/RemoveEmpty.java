@@ -200,7 +200,7 @@ public class RemoveEmpty extends BaseElementWalker
 		 */
 		protected boolean walkAttributes(final KElement e1)
 		{
-			JDFAttributeMap map = e1.getAttributeMap();
+			JDFAttributeMap map = e1.getAttributeMap_KElement();
 			VString allKeys = map.getKeys();
 			boolean hasGood = false;
 			VString dummy = zappElements ? getDummyAttributes() : null;

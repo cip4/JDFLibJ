@@ -137,7 +137,7 @@ public class WalkElement extends BaseWalker
 		}
 
 		// replace all "~" with " ~ "
-		final JDFAttributeMap m = el.getAttributeMap();
+		final JDFAttributeMap m = el.getAttributeMap_KElement();
 		final Iterator<String> it = m.getKeyIterator();
 		final AttributeInfo ai = el.getAttributeInfo();
 		while (it.hasNext())

@@ -3739,8 +3739,8 @@ public class KElement extends ElementNSImpl implements Element
 			{
 				return i;
 			}
-			nodeName += o1.getAttributeMap();
-			nodeName2 += o2.getAttributeMap();
+			nodeName += o1.getAttributeMap_KElement();
+			nodeName2 += o2.getAttributeMap_KElement();
 			return nodeName.compareTo(nodeName2);
 		}
 	}

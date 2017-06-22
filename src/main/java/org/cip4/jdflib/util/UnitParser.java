@@ -111,7 +111,7 @@ public class UnitParser
 	 */
 	public void convertUnits(final KElement element)
 	{
-		final JDFAttributeMap map = element.getAttributeMap();
+		final JDFAttributeMap map = element.getAttributeMap_KElement();
 		final Iterator<String> keyIt = map.getKeyIterator();
 		boolean elemSpan = (element instanceof JDFSpanBase) && isUnit(element.getLocalName());
 		while (keyIt.hasNext())
