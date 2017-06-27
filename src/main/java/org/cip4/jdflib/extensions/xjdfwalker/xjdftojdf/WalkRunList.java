@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
@@ -84,7 +84,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 public class WalkRunList extends WalkResource
 {
 	/**
-	 * 
+	 *
 	 */
 	public WalkRunList()
 	{
@@ -103,28 +103,32 @@ public class WalkRunList extends WalkResource
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		splitLayoutElem(e);
+		splitLayoutElem(e, trackElem);
 		return super.walk(e, trackElem);
 	}
 
 	/**
 	 * split a RunList into a RunList and a RunList/LayoutElement
-	 * @param e
+	 * @param xjdf
 	 */
-	private void splitLayoutElem(final KElement e)
+	private void splitLayoutElem(final KElement xjdf, KElement trackJDF)
 	{
-		if (!e.hasChildElement(ElementName.LAYOUTELEMENT, null))
+		if (trackJDF != null && trackJDF.hasChildElement(ElementName.LAYOUTELEMENT, null))
 		{
-			final JDFElement loe = (JDFElement) e.appendElement(ElementName.LAYOUTELEMENT);
+			xjdf.removeChildren(ElementName.FILESPEC, null, null);
+		}
+		else if (!xjdf.hasChildElement(ElementName.LAYOUTELEMENT, null))
+		{
+			final JDFElement loe = (JDFElement) xjdf.appendElement(ElementName.LAYOUTELEMENT);
 			final VString vAtt = loe.knownAttributes();
 			vAtt.appendUnique(ElementName.DEPENDENCIES);
-			final JDFAttributeMap map = e.getAttributeMap();
+			final JDFAttributeMap map = xjdf.getAttributeMap();
 			final Iterator<String> it = map.getKeyIterator();
 			while (it.hasNext())
 			{
@@ -132,11 +136,11 @@ public class WalkRunList extends WalkResource
 				if (vAtt.contains(s))
 				{
 					loe.setAttribute(s, map.get(s));
-					e.removeAttribute(s);
+					xjdf.removeAttribute(s);
 				}
 			}
 			final VString knownLayouteElems = loe.knownElements();
-			final VElement vMyElm = e.getChildElementVector(null, null);
+			final VElement vMyElm = xjdf.getChildElementVector(null, null);
 			for (KElement myElm : vMyElm)
 			{
 				if (knownLayouteElems.contains(myElm.getLocalName()))
