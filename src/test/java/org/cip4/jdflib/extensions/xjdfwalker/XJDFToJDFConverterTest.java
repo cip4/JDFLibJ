@@ -438,6 +438,25 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	public void testResourceExternalID()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		XJDFHelper xjdf = new XJDFHelper("j1", null, null);
+		SetHelper sh = xjdf.appendResourceSet(ElementName.MEDIA, EnumUsage.Input);
+		ResourceHelper part = sh.appendPartition(null, true);
+		part.getResource().setAttribute(AttributeName.DIMENSION, "10 10");
+		part.setExternalID("id");
+		JDFDoc d = xCon.convert(xjdf.getRoot());
+		JDFMedia m = (JDFMedia) d.getJDFRoot().getResource(ElementName.MEDIA, EnumUsage.Input, 0);
+
+		assertEquals("id", m.getProductID());
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
 	public void testDeliveryIntent()
 	{
 		KElement xjdf = new JDFToXJDFConverterTest()._testDeliveryIntent();
