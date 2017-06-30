@@ -117,6 +117,7 @@ public abstract class XJDFConstants
 	public static final String Parent = "Parent";
 	public static final String ParentID = "ParentID";
 	public static final String PartContext = "PartContext";
+	public static final String PartWaste = "PartWaste";
 	public static final String PlacedObject = "PlacedObject";
 	public static final String PreflightItem = "PreflightItem";
 	public static final String Process = "Process";
@@ -146,6 +147,9 @@ public abstract class XJDFConstants
 	public static final String TypeDetails = "TypeDetails";
 
 	public static final String VariableType = "VariableType";
+
+	public static final String Waste = "Waste";
+	public static final String WasteDetails = "WasteDetails";
 
 	public static final String XJDF = "XJDF";
 	public static final String XJMF = "XJMF";

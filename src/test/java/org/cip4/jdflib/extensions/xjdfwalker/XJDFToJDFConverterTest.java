@@ -400,6 +400,31 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	public void testAmountWaste()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		XJDFHelper xjdf = new XJDFHelper("j1", null, null);
+		SetHelper sh = xjdf.getCreateResourceSet("Media", EnumUsage.Input);
+		ResourceHelper ph = sh.getCreatePartition(null, true);
+		ph.setAmount(333, null, true);
+		ph.setAmount(33, null, false);
+		KElement e = xjdf.getRoot();
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		JDFNode root = d.getJDFRoot();
+		JDFMedia m = (JDFMedia) root.getResource("Media", EnumUsage.Input, 0);
+		assertNotNull(m);
+		JDFResourceLink rl = root.getLink(m, null);
+		assertEquals(333, (int) rl.getAmount(new JDFAttributeMap(AttributeName.CONDITION, "Good")));
+		assertEquals(33, (int) rl.getAmount(new JDFAttributeMap(AttributeName.CONDITION, "Waste")));
+		assertNull(m.getElement("AmountPool"));
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
 	public void testOverage()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);

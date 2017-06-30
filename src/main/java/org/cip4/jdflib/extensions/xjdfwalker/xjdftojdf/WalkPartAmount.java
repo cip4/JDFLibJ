@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
@@ -73,8 +73,10 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -84,7 +86,7 @@ import org.cip4.jdflib.util.StringUtil;
 public class WalkPartAmount extends WalkXElement
 {
 	/**
-	 * 
+	 *
 	 */
 	public WalkPartAmount()
 	{
@@ -103,7 +105,7 @@ public class WalkPartAmount extends WalkXElement
 	}
 
 	/**
-	 * @param map 
+	 * @param map
 	 * @param xjdfPartAmount
 	 * @return the created resource
 	 */
@@ -112,13 +114,17 @@ public class WalkPartAmount extends WalkXElement
 		if (xjdfPartAmount != null && map != null)
 		{
 			xjdfPartAmount.removeAttributes(null);
-			String condition = map.remove("Condition");
+			String condition = map.remove(AttributeName.CONDITION);
 			xjdfPartAmount.setAttributes(map);
 			JDFPartAmount pa = (JDFPartAmount) xjdfPartAmount;
 			JDFPartAmount newPA = (JDFPartAmount) super.walk(xjdfPartAmount, jdfAmountPool);
 			VJDFAttributeMap vPartMap = pa.getPartMapVector();
 			if (condition != null)
 			{
+				if (vPartMap == null)
+				{
+					vPartMap = new VJDFAttributeMap();
+				}
 				vPartMap.put(AttributeName.CONDITION, condition);
 			}
 			newPA.setPartMapVector(vPartMap);
@@ -132,23 +138,26 @@ public class WalkPartAmount extends WalkXElement
 	@Override
 	public KElement walk(final KElement xjdfPartAmount, KElement jdfAmountPool)
 	{
-		JDFPart part = (JDFPart) xjdfPartAmount.getElement(ElementName.PART);
-		JDFAttributeMap partMap = part == null ? null : part.getPartMap();
-		if (partMap == null || partMap.isEmpty())
+		VJDFAttributeMap split = splitWaste(xjdfPartAmount, true);
+
+		if (split.size() <= 1)
 		{
-			KElement parent = jdfAmountPool.getParentNode_KElement();
-			if (parent instanceof JDFResourceLink)
+			JDFPart part = (JDFPart) xjdfPartAmount.getElement(ElementName.PART);
+			JDFAttributeMap partMap = part == null ? null : part.getPartMap();
+			if (partMap == null || partMap.isEmpty())
 			{
-				JDFResourceLink rl = (JDFResourceLink) parent;
-				rl.copyAttribute(AttributeName.AMOUNT, xjdfPartAmount);
-				rl.copyAttribute(AttributeName.ACTUALAMOUNT, xjdfPartAmount);
-				rl.copyAttribute(AttributeName.MAXAMOUNT, xjdfPartAmount);
-				jdfAmountPool.deleteNode();
-				return null;
+				KElement parent = jdfAmountPool.getParentNode_KElement();
+				if (parent instanceof JDFResourceLink)
+				{
+					JDFResourceLink rl = (JDFResourceLink) parent;
+					rl.copyAttribute(AttributeName.AMOUNT, xjdfPartAmount);
+					rl.copyAttribute(AttributeName.ACTUALAMOUNT, xjdfPartAmount);
+					rl.copyAttribute(AttributeName.MAXAMOUNT, xjdfPartAmount);
+					jdfAmountPool.deleteNode();
+					return null;
+				}
 			}
 		}
-
-		VJDFAttributeMap split = splitWaste(xjdfPartAmount, true);
 		for (JDFAttributeMap map : split)
 		{
 			walkSingle(map, xjdfPartAmount, jdfAmountPool);
@@ -157,16 +166,22 @@ public class WalkPartAmount extends WalkXElement
 		return null;
 	}
 
+	/**
+	 *
+	 * @param xjdfPartAmount
+	 * @param bGood
+	 * @return
+	 */
 	private VJDFAttributeMap splitWaste(KElement xjdfPartAmount, boolean bGood)
 	{
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
 		JDFAttributeMap map = xjdfPartAmount.getAttributeMap();
 		boolean bAmount = map.containsKey(AttributeName.ACTUALAMOUNT) || map.containsKey(AttributeName.AMOUNT);
-		boolean bWaste = map.containsKey("Waste") || map.containsKey("ActualWaste");
-		String wasteKey = map.remove("WasteDetails");
+		boolean bWaste = map.containsKey(XJDFConstants.Waste);
+		String wasteKey = map.remove(XJDFConstants.WasteDetails);
 		if (StringUtil.getNonEmpty(wasteKey) == null)
 		{
-			wasteKey = "Waste";
+			wasteKey = XJDFConstants.Waste;
 		}
 		if (bAmount && bWaste)
 		{
@@ -176,18 +191,25 @@ public class WalkPartAmount extends WalkXElement
 		{
 			JDFAttributeMap mapWaste = map.clone();
 			mapWaste.put(AttributeName.CONDITION, wasteKey);
-			mapWaste.put(AttributeName.AMOUNT, mapWaste.remove("Waste"));
-			mapWaste.put(AttributeName.ACTUALAMOUNT, mapWaste.remove("ActualWaste"));
+			mapWaste.put(AttributeName.AMOUNT, mapWaste.remove(XJDFConstants.Waste));
 			mapWaste.remove(AttributeName.MINAMOUNT);
 			mapWaste.remove(AttributeName.MAXAMOUNT);
 			vMap.add(mapWaste);
 		}
 		if (bAmount)
 		{
-			map.remove("Waste");
-			map.remove("ActualWaste");
+			map.remove(XJDFConstants.Waste);
 			vMap.add(map);
 		}
 		return vMap;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return VString.getVString(ElementName.PARTAMOUNT, null);
 	}
 }
