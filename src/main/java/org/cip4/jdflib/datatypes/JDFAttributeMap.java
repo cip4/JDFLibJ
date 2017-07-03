@@ -235,7 +235,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 			return null;
 		}
 		// put key value to hashmap. The map returns null if the key was new or an object (the old value) if the value was replaced
-		return super.put(key, value);
+		return super.put(StringSet.getString(key), value);
 	}
 
 	/**
@@ -660,7 +660,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public String put(ValuedEnum key, String value)
 	{
-		return super.put(key.getName(), value);
+		return put(key == null ? null : key.getName(), value);
 	}
 
 	/**
@@ -684,7 +684,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public String put(ValuedEnum key, int value)
 	{
-		return put(key.getName(), StringUtil.formatInteger(value));
+		return put(key == null ? null : key.getName(), StringUtil.formatInteger(value));
 	}
 
 	/**
@@ -708,7 +708,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public String put(ValuedEnum key, double value)
 	{
-		return super.put(key.getName(), StringUtil.formatDouble(value));
+		return put(key == null ? null : key.getName(), StringUtil.formatDouble(value));
 	}
 
 	/**
@@ -732,7 +732,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public String put(ValuedEnum key, boolean value)
 	{
-		return super.put(key.getName(), value ? "true" : "false");
+		return put(key == null ? null : key.getName(), value ? "true" : "false");
 	}
 
 	/**
@@ -744,7 +744,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public String put(String key, ValuedEnum value)
 	{
-		return super.put(key, value.getName());
+		return put(key, value == null ? null : value.getName());
 	}
 
 	/**
@@ -756,7 +756,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public String put(ValuedEnum key, ValuedEnum value)
 	{
-		return super.put(key.getName(), value.getName());
+		return put(key == null ? null : key.getName(), value.getName());
 	}
 
 	/**
