@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -101,8 +101,6 @@ public class WalkModifyQueueEntry extends WalkMessage
 	@Override
 	JDFMessage makeTypesafe(JDFMessage m)
 	{
-		JDFQueueEntryDef queueEntryDef = m.getQueueEntryDef(0);
-		String qeid = queueEntryDef == null ? null : queueEntryDef.getQueueEntryID();
 		m = super.makeTypesafe(m);
 		if ((m instanceof JDFQuery) || (m instanceof JDFCommand))
 		{
@@ -113,6 +111,8 @@ public class WalkModifyQueueEntry extends WalkMessage
 			KElement modifyParams = m.getCreateElement("ModifyQueueEntryParams", null, 0);
 			modifyParams.setAttribute(AttributeName.OPERATION, operation);
 			String oldParams = originalType + "Params";
+			JDFQueueEntryDef queueEntryDef = (JDFQueueEntryDef) m.getElement(ElementName.QUEUEENTRYDEF, null, 0);
+			String qeid = queueEntryDef == null ? null : queueEntryDef.getQueueEntryID();
 			if (qeid != null)
 			{
 				modifyParams.setXPathAttribute("QueueFilter/@QueueEntryIDs", qeid);

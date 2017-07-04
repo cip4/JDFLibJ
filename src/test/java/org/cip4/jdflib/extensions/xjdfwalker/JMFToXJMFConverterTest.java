@@ -260,6 +260,21 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testAbortQEResponse()
+	{
+		final JDFJMF jmf0 = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Command, EnumType.AbortQueueEntry);
+		convertToXJDF(jmf0);
+
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
+		jmf.getResponse(0).setrefID(jmf0.getCommand(0).getID());
+		//		assertEquals("q1", x.getXPathAttribute("ResponseModifyQueueEntry/QueueEntry/@QueueEntryID", null));
+		writeRoundTrip(jmf, "AbortResp.jmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testStatusJMF()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSubscription("url", 42, 21, "qe33");
