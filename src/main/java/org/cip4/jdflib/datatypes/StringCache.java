@@ -81,10 +81,14 @@ package org.cip4.jdflib.datatypes;
 
 import java.util.HashMap;
 
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.extensions.XJDFConstants;
+
 /**
- * This is the Java class to the mAttribute class on the C++ side.
+ *
  */
-public class StringSet
+public class StringCache
 {
 	static private HashMap<String, String> theSet = null;
 
@@ -97,6 +101,12 @@ public class StringSet
 		if (enable && theSet == null)
 		{
 			theSet = new HashMap<>();
+			getCreateString(JDFConstants.TRUE);
+			getCreateString(JDFConstants.FALSE);
+			getCreateString(ElementName.JDF);
+			getCreateString(ElementName.JMF);
+			getCreateString(XJDFConstants.XJDF);
+			getCreateString(XJDFConstants.XJMF);
 		}
 		else if (!enable)
 		{
@@ -104,7 +114,12 @@ public class StringSet
 		}
 	}
 
-	public static String getString(String s)
+	/**
+	 *
+	 * @param s
+	 * @return
+	 */
+	public static String getCreateString(String s)
 	{
 		if (theSet == null)
 			return s;
@@ -118,6 +133,27 @@ public class StringSet
 			theSet.put(s, s);
 			return s;
 		}
+	}
+
+	/**
+	 * gets strings if they are there, eles only fills short strings up to length 2
+	 * @param s
+	 * @return
+	 */
+	public static String getString(String s)
+	{
+		if (theSet == null)
+			return s;
+		String s2 = theSet.get(s);
+		if (s2 != null)
+		{
+			return s2;
+		}
+		else if (s != null && s.length() < 3)
+		{
+			theSet.put(s, s);
+		}
+		return s;
 	}
 
 	public static int size()

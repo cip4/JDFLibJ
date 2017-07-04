@@ -88,6 +88,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -235,7 +236,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 			return null;
 		}
 		// put key value to hashmap. The map returns null if the key was new or an object (the old value) if the value was replaced
-		return super.put(StringSet.getString(key), value);
+		return super.put(StringCache.getCreateString(key), StringCache.getString(value));
 	}
 
 	/**
@@ -720,7 +721,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public String put(String key, boolean value)
 	{
-		return put(key, value ? "true" : "false");
+		return put(key, value ? JDFConstants.TRUE : JDFConstants.FALSE);
 	}
 
 	/**
@@ -732,7 +733,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public String put(ValuedEnum key, boolean value)
 	{
-		return put(key == null ? null : key.getName(), value ? "true" : "false");
+		return put(key == null ? null : key.getName(), value);
 	}
 
 	/**
@@ -756,7 +757,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public String put(ValuedEnum key, ValuedEnum value)
 	{
-		return put(key == null ? null : key.getName(), value.getName());
+		return put(key == null ? null : key.getName(), value);
 	}
 
 	/**
@@ -782,8 +783,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 		return thisKeys;
 	}
 
-	// /////////////////////////////////////////////////////////////////////
-
 	/**
 	 * remove all keys defined by set from this
 	 *
@@ -794,10 +793,8 @@ public class JDFAttributeMap extends HashMap<String, String>
 	{
 		if (toRemove != null)
 		{
-			final Iterator<String> it = toRemove.iterator();
-			while (it.hasNext())
+			for (String key : toRemove)
 			{
-				final String key = it.next();
 				remove(key);
 			}
 		}
@@ -813,6 +810,4 @@ public class JDFAttributeMap extends HashMap<String, String>
 	{
 		return new JDFAttributeMap(this);
 	}
-
-	// //////////////////////////////////////////////////////////////////////////
 }
