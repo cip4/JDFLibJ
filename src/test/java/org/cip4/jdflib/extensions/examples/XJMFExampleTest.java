@@ -514,4 +514,35 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID(null);
 		KElement.setLongID(false);
 	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testExtendQuery()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		KElement e = xjmfHelper.getRoot().appendElement("foo:QueryBar", "www.foo.org");
+		e.appendElement("foo:BarParams").setAttribute("BarDetails", "value");
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "xjmf/extendQuery.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testExtendQueryMixed()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.KnownDevices);
+		q.getHeader().setID("Q1");
+		KElement e = xjmfHelper.getRoot().appendElement("foo:QueryBar", "www.foo.org");
+		e.copyElement(q.getHeader(), null).setID("F1");
+		e.appendElement("foo:BarParams").setAttribute("BarDetails", "value");
+		MessageHelper q2 = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.KnownMessages);
+		q2.getHeader().setID("Q2");
+		writeTest(xjmfHelper, "xjmf/extendQueryMixed.xjmf");
+	}
+
 }

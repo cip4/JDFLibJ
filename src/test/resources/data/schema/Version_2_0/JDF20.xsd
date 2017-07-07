@@ -1063,7 +1063,10 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element maxOccurs="1" minOccurs="1" ref="Header"/>
-                <xs:element maxOccurs="unbounded" minOccurs="1" ref="Message"/>
+                 <xs:choice minOccurs="1" maxOccurs="unbounded">
+                    <xs:element ref="Message"/>
+             	    <xs:any namespace="##other" processContents="lax"/>
+                 </xs:choice>
             </xs:sequence>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
