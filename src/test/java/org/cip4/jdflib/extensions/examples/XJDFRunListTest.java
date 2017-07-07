@@ -127,7 +127,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 		KElement ruli = shRL.appendPartition(null, true).getResource();
 		JDFFileSpec fs = (JDFFileSpec) ruli.appendElement(ElementName.FILESPEC);
 		fs.setFileFormat("file://myserver/next/%s/m%4.i.pdf");
-		fs.setFileTemplate("JobID i");
+		fs.setFileTemplate("JobID DocIndex");
 		fs.setMimeType(UrlUtil.APPLICATION_PDF);
 		xjdfHelper.cleanUp();
 		setSnippet(ruli, true);
