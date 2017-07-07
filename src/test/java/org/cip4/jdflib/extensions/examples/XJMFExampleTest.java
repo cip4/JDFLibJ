@@ -525,7 +525,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		KElement e = xjmfHelper.getRoot().appendElement("foo:QueryBar", "www.foo.org");
 		e.appendElement("foo:BarParams").setAttribute("BarDetails", "value");
 		setSnippet(xjmfHelper, true);
-		writeTest(xjmfHelper, "xjmf/extendQuery.xjmf");
+		writeTest(xjmfHelper, "jmf/extendQuery.xjmf");
 	}
 
 	/**
@@ -542,7 +542,8 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		e.appendElement("foo:BarParams").setAttribute("BarDetails", "value");
 		MessageHelper q2 = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.KnownMessages);
 		q2.getHeader().setID("Q2");
-		writeTest(xjmfHelper, "xjmf/extendQueryMixed.xjmf");
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "jmf/extendQueryMixed.xjmf");
 	}
 
 }
