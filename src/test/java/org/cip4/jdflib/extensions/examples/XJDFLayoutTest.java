@@ -112,7 +112,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Simplex", null);
 		xjdfHelper.setTypes("Stripping");
-		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
 		ResourceHelper rh = shLO.appendPartition(null, true);
 		JDFLayout lo = (JDFLayout) rh.getResource();
 		xjdfHelper.cleanUp();
@@ -131,7 +131,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Simplex", null);
 		xjdfHelper.setTypes("Stripping");
-		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
 		ResourceHelper rh = shLO.appendPartition(null, true);
 		JDFLayout lo = (JDFLayout) rh.getResource();
 
@@ -139,12 +139,12 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		lo.setAutomated(true);
 		lo.appendElement(ElementName.POSITION);
 
-		SetHelper shBS = xjdfHelper.getCreateResourceSet(ElementName.BINDERYSIGNATURE, null);
+		SetHelper shBS = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, null);
 		ResourceHelper rhBS = shBS.appendPartition(null, true);
 		JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
 		bs.setFoldCatalog("F4-1");
 
-		SetHelper shAss = xjdfHelper.getCreateResourceSet(ElementName.ASSEMBLY, null);
+		SetHelper shAss = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.ASSEMBLY, null);
 		ResourceHelper rhAss = shAss.appendPartition(null, true);
 		JDFAssembly ass = (JDFAssembly) rhAss.getResource();
 		ass.setOrder(EnumOrder.Collecting);
@@ -162,7 +162,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Simplex", null);
 		xjdfHelper.setTypes("Stripping");
-		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
 		ResourceHelper rh = shLO.appendPartition(null, true);
 		JDFLayout lo = (JDFLayout) rh.getResource();
 		xjdfHelper.cleanUp();
@@ -181,7 +181,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Tiling", null);
 		xjdfHelper.setTypes("Imposition");
-		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
 		ResourceHelper rh = shLO.appendPartition(AttributeName.TILEID, "0 0", true);
 		rh.ensurePart(AttributeName.SIDE, "Front");
 		JDFLayout lo = (JDFLayout) rh.getResource();
@@ -211,7 +211,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "PageCondition", null);
 		xjdfHelper.setTypes("Imposition");
-		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
 		ResourceHelper rh = shLO.appendPartition(AttributeName.SIDE, "Front", true);
 
 		JDFLayout lo = (JDFLayout) rh.getResource();
@@ -246,7 +246,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "DynamicField", null);
 		xjdfHelper.setTypes("Imposition");
-		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
 		ResourceHelper rh = shLO.appendPartition(AttributeName.SIDE, "Front", true);
 		rh.setID("ID_Lo");
 		JDFLayout lo = (JDFLayout) rh.getResource();
@@ -275,7 +275,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "CutStack", null);
 		xjdfHelper.setTypes("Stripping");
-		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
 		ResourceHelper rh = shLO.appendPartition(null, true);
 		JDFLayout lo = (JDFLayout) rh.getResource();
 
@@ -304,13 +304,13 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
 		xjdfHelper.setTypes("Stripping");
-		SetHelper shBS = xjdfHelper.getCreateResourceSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		SetHelper shBS = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 		ResourceHelper rhBS = shBS.appendPartition(null, true);
 		JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
 		bs.setFoldCatalog("F16-6");
 		bs.setBinderySignatureType(EnumBinderySignatureType.Fold);
 
-		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
 		for (int i = 1; i <= 3; i++)
 		{
 			rhBS.appendPartMap(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "bs" + i));
@@ -320,7 +320,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 			KElement pos = lo.appendElement(ElementName.POSITION);
 			pos.setAttribute(XJDFConstants.BinderySignatureID, "bs" + i);
 		}
-		SetHelper shAss = xjdfHelper.getCreateResourceSet(ElementName.ASSEMBLY, EnumUsage.Input);
+		SetHelper shAss = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.ASSEMBLY, EnumUsage.Input);
 		ResourceHelper rhAss = shAss.appendPartition(null, true);
 		rhAss.getResource().setAttribute(XJDFConstants.BinderySignatureIDs, "bs1 bs2 bs3");
 		((JDFAssembly) rhAss.getResource()).setOrder(EnumOrder.Collecting);

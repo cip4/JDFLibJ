@@ -78,7 +78,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	public void testAmountsNull()
 	{
 		XJDFHelper h = new XJDFHelper("a", "p", null);
-		SetHelper sni = h.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+		SetHelper sni = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
 		ResourceHelper pi = sni.getCreatePartition(null, true);
 		pi.setAmount(42, null, true);
 		pi.setAmount(2, null, false);
@@ -95,7 +95,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	public void testAmounts()
 	{
 		XJDFHelper h = new XJDFHelper("a", "p", null);
-		SetHelper sni = h.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+		SetHelper sni = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
 		ResourceHelper pi = sni.getCreatePartition(null, true);
 		pi.setAmount(42, null, true);
 		pi.getAmountPool().getPartAmount(0).setActualAmount(66);

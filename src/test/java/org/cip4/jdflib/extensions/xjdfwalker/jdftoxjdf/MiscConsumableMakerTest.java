@@ -8,6 +8,7 @@ import org.cip4.jdflib.core.JDFElement.EnumNamedColor;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.JDFHeadBandApplicationParams;
 import org.junit.Test;
@@ -21,7 +22,7 @@ public class MiscConsumableMakerTest
 	public void testCreate()
 	{
 		XJDFHelper root = new XJDFHelper("j1", "p1", null);
-		SetHelper sh = root.getCreateResourceSet(ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input);
+		SetHelper sh = root.getCreateSet(XJDFConstants.Resource, ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input);
 		ResourceHelper ph = sh.getCreatePartition(null, true);
 		JDFHeadBandApplicationParams hp = (JDFHeadBandApplicationParams) ph.getResource();
 		MiscConsumableMaker m = new MiscConsumableMaker(ph);
@@ -37,7 +38,7 @@ public class MiscConsumableMakerTest
 	public void testBrand()
 	{
 		XJDFHelper root = new XJDFHelper("j1", "p1", null);
-		SetHelper sh = root.getCreateResourceSet(ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input);
+		SetHelper sh = root.getCreateSet(XJDFConstants.Resource, ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input);
 		ResourceHelper ph = sh.getCreatePartition(null, true);
 		JDFHeadBandApplicationParams hp = (JDFHeadBandApplicationParams) ph.getResource();
 		hp.setTopBrand("b1");
@@ -54,7 +55,7 @@ public class MiscConsumableMakerTest
 	public void testColor()
 	{
 		XJDFHelper root = new XJDFHelper("j1", "p1", null);
-		SetHelper sh = root.getCreateResourceSet(ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input);
+		SetHelper sh = root.getCreateSet(XJDFConstants.Resource, ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input);
 		ResourceHelper ph = sh.getCreatePartition(null, true);
 		JDFHeadBandApplicationParams hp = (JDFHeadBandApplicationParams) ph.getResource();
 		hp.setTopBrand("b1");

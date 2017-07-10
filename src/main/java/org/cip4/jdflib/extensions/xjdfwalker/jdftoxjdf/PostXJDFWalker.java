@@ -719,7 +719,7 @@ class PostXJDFWalker extends BaseElementWalker
 			}
 			//TODO multiple lower level stripparams partitions
 			XJDFHelper h = new XJDFHelper(newRoot);
-			SetHelper layoutseth = h.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+			SetHelper layoutseth = h.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
 
 			VJDFAttributeMap vmap = new ResourceHelper(strippingParams.getParentNode_KElement()).getPartMapVector();
 			JDFAttributeMap map = vmap.size() == 0 ? null : vmap.get(0);
@@ -1044,7 +1044,7 @@ class PostXJDFWalker extends BaseElementWalker
 			if (intent != null)
 			{
 				XJDFHelper h = new XJDFHelper(intent.getDeepParent(XJDFConstants.XJDF, 0));
-				SetHelper artDelResHelper = h.getCreateResourceSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
+				SetHelper artDelResHelper = h.getCreateSet(XJDFConstants.Resource, ElementName.DELIVERYPARAMS, EnumUsage.Input);
 				ResourceHelper ph = artDelResHelper.appendPartition(null, true);
 				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
 				setFromArtDelivery(dp, (JDFArtDeliveryIntent) intent.getElement(ElementName.ARTDELIVERYINTENT));
@@ -1110,7 +1110,7 @@ class PostXJDFWalker extends BaseElementWalker
 			if (intent != null)
 			{
 				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDFConstants.XJDF, 0));
-				SetHelper delResHelper = h.getCreateResourceSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
+				SetHelper delResHelper = h.getCreateSet(XJDFConstants.Resource, ElementName.DELIVERYPARAMS, EnumUsage.Input);
 				ResourceHelper ph = delResHelper.appendPartition(null, true);
 				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
 				dp.setFromDeliveryIntent((JDFDeliveryIntent) intent.getElement(ElementName.DELIVERYINTENT));

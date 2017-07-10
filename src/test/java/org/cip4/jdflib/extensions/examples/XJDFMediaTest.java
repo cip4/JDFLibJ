@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.resource.process.JDFMedia;
@@ -105,7 +106,7 @@ public class XJDFMediaTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("Converting", "Corrugated", null);
 		xjdfHelper.setTypes(JDFConstants.CONVENTIONALPRINTING);
-		SetHelper shMedia = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
+		SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
 		ResourceHelper rh = shMedia.appendPartition(null, true);
 		JDFMedia m = (JDFMedia) rh.getResource();
 		m.setMediaType(EnumMediaType.CorrugatedBoard);
@@ -212,7 +213,7 @@ public class XJDFMediaTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("Converting", "Corrugated", null);
 		xjdfHelper.setTypes(JDFConstants.CONVENTIONALPRINTING);
-		SetHelper shMedia = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
+		SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
 		ResourceHelper rh = shMedia.appendPartition(null, true);
 		JDFMedia m = (JDFMedia) rh.getResource();
 		m.setMediaType(EnumMediaType.SelfAdhesive);

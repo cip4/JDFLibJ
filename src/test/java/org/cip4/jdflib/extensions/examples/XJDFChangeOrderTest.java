@@ -120,7 +120,7 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "Amount", null);
 		xjdfHelper.setTypes("Folding");
-		SetHelper sh1 = xjdfHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Output);
+		SetHelper sh1 = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Output);
 		ResourceHelper rh1 = sh1.appendPartition("SheetName", "Sheet1", false);
 		rh1.setAmount(4000, null, true);
 		SetHelper sh2 = xjdfHelper.getSet(ElementName.NODEINFO, EnumUsage.Input, null);
@@ -162,7 +162,7 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 
 		xjdfHelper.setTypes(EnumType.ConventionalPrinting.getName());
 
-		SetHelper sh2 = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, null);
+		SetHelper sh2 = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, null);
 		ResourceHelper rh2 = sh2.appendPartition(null, true);
 		JDFMedia m = (JDFMedia) rh2.getResource();
 		m.setMediaType(EnumMediaType.Plate);
@@ -213,7 +213,7 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 
 		xjdfHelper.setTypes("ConventionalPrinting Varnishing");
 
-		SetHelper sh2 = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, null);
+		SetHelper sh2 = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, null);
 		ResourceHelper rh2 = sh2.appendPartition(null, true);
 		JDFMedia m = (JDFMedia) rh2.getResource();
 		m.setMediaType(EnumMediaType.Plate);
@@ -256,7 +256,7 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 
 		xjdfHelper.setTypes(EnumType.Varnishing.getName());
 
-		SetHelper sh2 = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, null);
+		SetHelper sh2 = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, null);
 		ResourceHelper rh2 = sh2.appendPartition(null, true);
 		JDFMedia m = (JDFMedia) rh2.getResource();
 		m.setMediaType(EnumMediaType.Blanket);
@@ -324,9 +324,9 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "Paper", new VJDFAttributeMap(new JDFAttributeMap("SheetName", "Sheet1")));
 		xjdfHelper.setTypes("ConventionalPrinting");
-		SetHelper sh1 = xjdfHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Input);
+		SetHelper sh1 = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Input);
 		ResourceHelper rh1 = sh1.appendPartition("SheetName", "Sheet1", true);
-		SetHelper sh2 = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, null);
+		SetHelper sh2 = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, null);
 		ResourceHelper rh2 = sh2.appendPartition(null, true);
 		JDFMedia m = (JDFMedia) rh2.getResource();
 		m.setWeight(120);

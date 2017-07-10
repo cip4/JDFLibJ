@@ -111,7 +111,7 @@ public class WalkLayoutElementPart extends WalkJDFSubElement
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		XJDFHelper h = XJDFHelper.getHelper(jdfToXJDF.newRoot);
-		SetHelper sh = h.getCreateResourceSet(XJDFConstants.Content, null);
+		SetHelper sh = h.getCreateSet(XJDFConstants.Resource, XJDFConstants.Content, null);
 		ResourceHelper contentHelper = sh.appendPartition(null, false);
 		KElement contentBase = contentHelper.getRoot();
 		jdf.renameElement(XJDFConstants.Content, null);

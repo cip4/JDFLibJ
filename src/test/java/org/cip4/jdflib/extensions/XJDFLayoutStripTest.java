@@ -104,7 +104,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	@Test
 	public void testStripLayout_BSSep()
 	{
-		bssh = theHelper.getCreateResourceSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		bssh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 		ResourceHelper bsh = bssh.appendPartition(new JDFAttributeMap(), true);
 		JDFBinderySignature bs = (JDFBinderySignature) bsh.getCreateResource();
 		initBS(bs, 0);
@@ -212,11 +212,11 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 			JDFAttributeMap sheetMap = getSheetMap(k);
 			ResourceHelper loh = losh.appendPartition(sheetMap, true);
 			JDFLayout lo = (JDFLayout) loh.getResource();
-			SetHelper nish = theHelper.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+			SetHelper nish = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
 			ResourceHelper niph = nish.appendPartition(sheetMap, true);
 			niph.getRoot().setAttribute("AmountGood", 1234, null);
-			SetHelper cush = theHelper.getCreateResourceSet(ElementName.CUSTOMERINFO, EnumUsage.Input);
-			SetHelper cosh = theHelper.getCreateResourceSet(ElementName.CONTACT, EnumUsage.Input);
+			SetHelper cush = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.CUSTOMERINFO, EnumUsage.Input);
+			SetHelper cosh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.CONTACT, EnumUsage.Input);
 			for (int i = 0; i < 4; i++)
 			{
 				int ii = k * 4 + i;
@@ -316,7 +316,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		theHelper.getRoot().setXMLComment("create a stripping in a layout\n Stripping now consumes a layout");
 		theHelper.getRoot().setAttribute("Types", "Imposition");
 
-		losh = theHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		losh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
 		bssh = null;
 	}
 

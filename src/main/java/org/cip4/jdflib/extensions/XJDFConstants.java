@@ -120,9 +120,11 @@ public abstract class XJDFConstants
 	public static final String PartWaste = "PartWaste";
 	public static final String PlacedObject = "PlacedObject";
 	public static final String PreflightItem = "PreflightItem";
+	public static final String PrintStandard = "PrintStandard";
 	public static final String Process = "Process";
 	public static final String ProcessList = "ProcessList";
-	public static final String ProcessTypes = "ProcessType"; // TODO discuss "s"
+	@Deprecated
+	public static final String ProcessTypes = "ProcessType"; // TODO remove
 	public static final String Product = "Product";
 	public static final String ProductList = "ProductList";
 	public static final String ProductPart = "ProductPart";

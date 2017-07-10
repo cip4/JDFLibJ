@@ -1020,7 +1020,7 @@ public class XJDFTest extends JDFTestCaseBase
 		XJDFHelper h = new XJDFHelper(null);
 		xjdf = h.getRoot();
 		xjdf.setAttribute("JobPartID", "Root");
-		SetHelper sh = h.getCreateResourceSet("RunList", EnumUsage.Input);
+		SetHelper sh = h.getCreateSet(XJDFConstants.Resource, "RunList", EnumUsage.Input);
 		sh.getSet().setID("R");
 		sh.getCreatePartition(new JDFAttributeMap("Run", "r1"), true).getResource().appendElement("FileSpec");
 		XJDFToJDFConverter conv = new XJDFToJDFConverter(null);

@@ -160,7 +160,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	{
 		XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.setTypes(EnumType.ImageSetting.getName());
-		JDFColorantControl cc = (JDFColorantControl) h.getCreateResourceSet(ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true).getResource();
+		JDFColorantControl cc = (JDFColorantControl) h.getCreateSet(XJDFConstants.Resource, ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true).getResource();
 		cc.setAttribute(ElementName.COLORANTPARAMS, "Cyan Magenta Yellow Black");
 		cc.setAttribute(ElementName.COLORANTORDER, "Cyan Black");
 		cc.setProcessColorModel("DeviceCMYK");
@@ -186,7 +186,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		{
 			XJDFHelper h = new XJDFHelper("j", "p", null);
 			h.setTypes(EnumType.ImageSetting.getName());
-			ResourceHelper partition = h.getCreateResourceSet(ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true);
+			ResourceHelper partition = h.getCreateSet(XJDFConstants.Resource, ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true);
 			if (i == 1)
 				partition.setStatus(EnumResStatus.Available);
 			else if (i == 2)
@@ -215,7 +215,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	{
 		XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.setTypes(EnumType.ImageSetting.getName());
-		ResourceHelper partition = h.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input).getCreatePartition(0, true);
+		ResourceHelper partition = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input).getCreatePartition(0, true);
 		partition.setStatus(EnumResStatus.Available);
 		JDFNodeInfo ni = (JDFNodeInfo) partition.getResource();
 		ni.setAttribute(AttributeName.STATUS, "InProgress");
@@ -236,7 +236,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	{
 		XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.setTypes(EnumType.ImageSetting.getName());
-		ResourceHelper partition = h.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input).getCreatePartition(0, true);
+		ResourceHelper partition = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input).getCreatePartition(0, true);
 		partition.setStatus(EnumResStatus.Available);
 		JDFNodeInfo ni = (JDFNodeInfo) partition.getResource();
 		ni.setAttribute(AttributeName.STATUS, "InProgress");
@@ -258,10 +258,10 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	{
 		XJDFHelper h = new XJDFHelper("j", "p", null);
 		h.setTypes(EnumType.ImageSetting.getName());
-		JDFColorantControl cc = (JDFColorantControl) h.getCreateResourceSet(ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true).getResource();
+		JDFColorantControl cc = (JDFColorantControl) h.getCreateSet(XJDFConstants.Resource, ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true).getResource();
 		cc.setAttribute(ElementName.COLORANTPARAMS, "Sep_1");
 		cc.setAttribute(ElementName.COLORANTORDER, "Sep_1");
-		h.getCreateResourceSet(ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME, "Sep 1");
+		h.getCreateSet(XJDFConstants.Resource, ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME, "Sep 1");
 
 		XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
 		JDFDoc docjdf = conv.convert(h);
@@ -381,7 +381,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		XJDFHelper xjdf = new XJDFHelper("j1", null, null);
-		SetHelper sh = xjdf.getCreateResourceSet("Media", EnumUsage.Input);
+		SetHelper sh = xjdf.getCreateSet(XJDFConstants.Resource, "Media", EnumUsage.Input);
 		ResourceHelper ph = sh.getCreatePartition(null, true);
 		ph.setAmount(33, null, true);
 		KElement e = xjdf.getRoot();
@@ -404,7 +404,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		XJDFHelper xjdf = new XJDFHelper("j1", null, null);
-		SetHelper sh = xjdf.getCreateResourceSet("Media", EnumUsage.Input);
+		SetHelper sh = xjdf.getCreateSet(XJDFConstants.Resource, "Media", EnumUsage.Input);
 		ResourceHelper ph = sh.getCreatePartition(null, true);
 		ph.setAmount(333, null, true);
 		ph.setAmount(33, null, false);
@@ -624,7 +624,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		XJDFHelper xjdf = new XJDFHelper("j1", null, null);
-		SetHelper sh = xjdf.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
+		SetHelper sh = xjdf.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
 		ResourceHelper ph = sh.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
 		ph.setAmount(33, new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
 		KElement e = xjdf.getRoot();
@@ -647,7 +647,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		XJDFHelper xjdf = new XJDFHelper("j1", null, null);
-		SetHelper sh = xjdf.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
+		SetHelper sh = xjdf.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
 		ResourceHelper ph = sh.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
 		ph.setAmount(33, new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
 
@@ -702,8 +702,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		XJDFHelper h = new XJDFHelper("j1", "root", null);
 		KElement e = h.getRoot();
-		h.getCreateResourceSet(ElementName.CUSTOMERINFO, EnumUsage.Input).getCreatePartition(0, true).getResource().setAttribute(AttributeName.CUSTOMERORDERID, "cc");
-		SetHelper sh = h.getCreateResourceSet(ElementName.CONTACT, EnumUsage.Input);
+		h.getCreateSet(XJDFConstants.Resource, ElementName.CUSTOMERINFO, EnumUsage.Input).getCreatePartition(0, true).getResource().setAttribute(AttributeName.CUSTOMERORDERID, "cc");
+		SetHelper sh = h.getCreateSet(XJDFConstants.Resource, ElementName.CONTACT, EnumUsage.Input);
 		ResourceHelper ph = sh.getCreatePartition(0, true);
 		ph.setPartMap(new JDFAttributeMap(XJDFConstants.ContactType, EnumContactType.Customer.getName()));
 		final JDFDoc d = xCon.convert(e);
@@ -799,7 +799,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		ProductHelper p2 = h.appendProduct();
 		p2.setRoot();
 		p2.setID("ID2");
-		SetHelper sh = h.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+		SetHelper sh = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
 		sh.setProcessUsage("Product");
 		sh.appendPartition(new JDFAttributeMap(AttributeName.PRODUCTPART, "ID1"), true).getResource().setAttribute(AttributeName.JOBPRIORITY, "42");
 		sh.appendPartition(new JDFAttributeMap(AttributeName.PRODUCTPART, "ID2"), true).getResource().setAttribute(AttributeName.JOBPRIORITY, "24");

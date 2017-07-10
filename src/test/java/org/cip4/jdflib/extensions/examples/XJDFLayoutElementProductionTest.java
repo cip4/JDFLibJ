@@ -109,9 +109,9 @@ public class XJDFLayoutElementProductionTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "PageSize", null);
 		xjdfHelper.setTypes(JDFConstants.LAYOUTELEMENTPRODUCTION);
-		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
-		SetHelper shC = xjdfHelper.getCreateResourceSet(XJDFConstants.Content, null);
-		SetHelper shRL = xjdfHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Output);
+		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
+		SetHelper shC = xjdfHelper.getCreateSet(XJDFConstants.Resource, XJDFConstants.Content, null);
+		SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
 		ResourceHelper rh = shLO.appendPartition(null, true);
 		JDFLayoutElementProductionParams lop = (JDFLayoutElementProductionParams) rh.getResource();
 		ResourceHelper rhc = shC.appendPartition(null, true);
@@ -137,8 +137,8 @@ public class XJDFLayoutElementProductionTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "Barcode", null);
 		xjdfHelper.setTypes(JDFConstants.LAYOUTELEMENTPRODUCTION);
-		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
-		SetHelper shC = xjdfHelper.getCreateResourceSet(XJDFConstants.Content, null);
+		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
+		SetHelper shC = xjdfHelper.getCreateSet(XJDFConstants.Resource, XJDFConstants.Content, null);
 		ResourceHelper rh = shLO.appendPartition(null, true);
 		JDFLayoutElementProductionParams lop = (JDFLayoutElementProductionParams) rh.getResource();
 		ResourceHelper rhc = shC.appendPartition(null, true);
@@ -175,9 +175,9 @@ public class XJDFLayoutElementProductionTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "ShapeDef", null);
 		xjdfHelper.setTypes(JDFConstants.LAYOUTELEMENTPRODUCTION);
-		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
-		SetHelper shC = xjdfHelper.getCreateResourceSet(ElementName.SHAPEDEF, null);
-		SetHelper shRL = xjdfHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Output);
+		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
+		SetHelper shC = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.SHAPEDEF, null);
+		SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
 		ResourceHelper rh = shLO.appendPartition(null, true);
 		JDFLayoutElementProductionParams lop = (JDFLayoutElementProductionParams) rh.getResource();
 		ResourceHelper rhc = shC.appendPartition(null, true);
@@ -202,9 +202,9 @@ public class XJDFLayoutElementProductionTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "ShapeDef", null);
 		xjdfHelper.setTypes(JDFConstants.LAYOUTELEMENTPRODUCTION);
-		SetHelper shLO = xjdfHelper.getCreateResourceSet(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
-		SetHelper shC = xjdfHelper.getCreateResourceSet(ElementName.SHAPEDEF, null);
-		SetHelper shRL = xjdfHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Output);
+		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
+		SetHelper shC = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.SHAPEDEF, null);
+		SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
 		ResourceHelper rh = shLO.appendPartition(null, true);
 		JDFLayoutElementProductionParams lop = (JDFLayoutElementProductionParams) rh.getResource();
 		ResourceHelper rhc = shC.appendPartition(null, true);

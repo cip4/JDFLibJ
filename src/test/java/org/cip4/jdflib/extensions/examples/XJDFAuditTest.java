@@ -77,6 +77,7 @@ import org.cip4.jdflib.extensions.AuditPoolHelper;
 import org.cip4.jdflib.extensions.MessageResourceHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFComponent;
@@ -98,8 +99,8 @@ public class XJDFAuditTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("PaperAudit", null, null);
 		xjdfHelper.setTypes(EnumType.ConventionalPrinting.getName());
-		SetHelper shMedia = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, null);
-		SetHelper shComp = xjdfHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Input);
+		SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, null);
+		SetHelper shComp = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Input);
 
 		ResourceHelper rhM = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
 		ResourceHelper rhC = shComp.appendPartition(AttributeName.SHEETNAME, "S1", true);

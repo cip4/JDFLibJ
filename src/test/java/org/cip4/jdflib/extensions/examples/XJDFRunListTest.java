@@ -76,6 +76,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFExpr;
@@ -100,13 +101,13 @@ public class XJDFRunListTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, "Impo", null);
 		xjdfHelper.setTypes(EnumType.Product.getName());
-		SetHelper shRL = xjdfHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Input);
+		SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Input);
 		JDFRunList rl1 = (JDFRunList) shRL.appendPartition(new JDFAttributeMap(AttributeName.RUN, "r1"), true).getResource();
 		rl1.setNPage(2);
 		JDFRunList rl2 = (JDFRunList) shRL.appendPartition(new JDFAttributeMap(AttributeName.RUN, "r2"), true).getResource();
 		rl2.setNPage(8);
 
-		SetHelper shNI = xjdfHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Output);
+		SetHelper shNI = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
 		shNI.removePartitions();
 		shNI.appendPartition(new JDFAttributeMap(AttributeName.RUNINDEX, "0 3"), true);
 		xjdfHelper.cleanUp();
@@ -123,7 +124,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, "Format", null);
 		xjdfHelper.setTypes(EnumType.Product.getName());
-		SetHelper shRL = xjdfHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Input);
+		SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Input);
 		KElement ruli = shRL.appendPartition(null, true).getResource();
 		JDFFileSpec fs = (JDFFileSpec) ruli.appendElement(ElementName.FILESPEC);
 		fs.setFileFormat("file://myserver/next/%s/m%4.i.pdf");
@@ -142,7 +143,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, "Metadata", null);
 		xjdfHelper.setTypes(EnumType.DigitalPrinting.getName());
-		SetHelper shRL = xjdfHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Input);
+		SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Input);
 		JDFRunList runList = (JDFRunList) shRL.appendPartition(null, true).getResource();
 		JDFFileSpec fs = (JDFFileSpec) runList.appendElement(ElementName.FILESPEC);
 		fs.setURL("file://host/file/data.pdf");
@@ -157,7 +158,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 		x.setName("status");
 		x.setPath("/doc/record/Status");
 
-		SetHelper shComp = xjdfHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Input);
+		SetHelper shComp = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Input);
 		ResourceHelper rh = shComp.appendPartition(AttributeName.METADATA, "Mann_Platin", true);
 		rh.setExternalID("BlueGoodPaper");
 		rh = shComp.appendPartition(AttributeName.METADATA, "Mann(.)*", true);

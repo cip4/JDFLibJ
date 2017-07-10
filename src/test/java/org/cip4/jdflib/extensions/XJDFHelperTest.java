@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -139,6 +139,18 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testAddTypeChain()
+	{
+		theHelper.addType("Cutting").addType("Folding");
+		assertEquals(theHelper.getTypes().get(1), "Folding");
+		assertEquals(theHelper.getTypes().get(0), "Cutting");
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testRemoveType()
 	{
 		theHelper.setTypes("Folding");
@@ -188,9 +200,9 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testGetCreateResourceSet()
 	{
 		assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input, null));
-		SetHelper sh1 = theHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Input);
+		SetHelper sh1 = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Input);
 		assertNotNull(sh1);
-		SetHelper sh2 = theHelper.getCreateResourceSet(ElementName.RUNLIST, EnumUsage.Output);
+		SetHelper sh2 = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
 		assertNotNull(sh2);
 		assertNotSame(sh1, sh2);
 
@@ -259,7 +271,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetSetProcessUsage()
 	{
-		SetHelper seta = theHelper.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+		SetHelper seta = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
 		seta.setProcessUsage("a");
 		SetHelper setb = theHelper.appendResourceSet(ElementName.NODEINFO, EnumUsage.Input);
 		setb.setProcessUsage("b");
@@ -276,7 +288,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetPartMapVector()
 	{
-		SetHelper sh = theHelper.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+		SetHelper sh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
 		VJDFAttributeMap v = new VJDFAttributeMap();
 		JDFAttributeMap map1 = new JDFAttributeMap("SheetName", "S1");
 		v.add(map1);
@@ -295,7 +307,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetDependentPartIDKeys()
 	{
-		SetHelper sh = theHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Input);
+		SetHelper sh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Input);
 		assertNull(theHelper.getDependentJobParts(null));
 		assertNull(theHelper.getDependentJobParts(EnumUsage.Output));
 		sh.setXPathValue("Dependent[1]/@JobPartID", "p1");
@@ -304,7 +316,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		assertNull(theHelper.getDependentJobParts(EnumUsage.Output));
 		sh.setXPathValue("Dependent[3]/@JobPartID", "p2");
 		assertEquals(theHelper.getDependentJobParts(EnumUsage.Input).get(1), "p2");
-		SetHelper sh2 = theHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Output);
+		SetHelper sh2 = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Output);
 		assertNull(theHelper.getDependentJobParts(EnumUsage.Output));
 		sh2.setXPathValue("Dependent[1]/@JobPartID", "o1");
 		assertEquals(theHelper.getDependentJobParts(EnumUsage.Output).get(0), "o1");
@@ -368,7 +380,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetPartition()
 	{
-		KElement rlSet = theHelper.getCreateResourceSet("RunList", null).getCreatePartition(0, true).getResource();
+		KElement rlSet = theHelper.getCreateSet(XJDFConstants.Resource, "RunList", null).getCreatePartition(0, true).getResource();
 		assertEquals(rlSet, theHelper.getResource("RunList", 0, 0));
 		assertNull(theHelper.getResource("RunList", 0, 1));
 		assertNull(theHelper.getResource("RunList", 1, 1));
@@ -382,7 +394,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetPartitionByID()
 	{
-		ResourceHelper rlSet = theHelper.getCreateResourceSet("RunList", null).getCreatePartition(0, true);
+		ResourceHelper rlSet = theHelper.getCreateSet(XJDFConstants.Resource, "RunList", null).getCreatePartition(0, true);
 		assertEquals(rlSet, theHelper.getPartition("RunList", 0, 0));
 		theHelper.cleanUp();
 		rlSet.setID("id");
@@ -460,7 +472,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	{
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		theHelper.reorder();
-		theHelper.getCreateResourceSet("foo", null);
+		theHelper.getCreateSet(XJDFConstants.Resource, "foo", null);
 		theHelper.appendProduct().setRoot();
 		KElement ap = theHelper.getRoot().getElement(ElementName.AUDITPOOL);
 		assertEquals(theHelper.getRoot().getFirstChildElement(), ap);

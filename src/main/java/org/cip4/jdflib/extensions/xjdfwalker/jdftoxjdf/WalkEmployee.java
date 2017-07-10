@@ -168,7 +168,7 @@ public class WalkEmployee extends WalkResource
 	{
 		JDFContact contact = (JDFContact) safeRename(jdfEmployee, ElementName.CONTACT, true);
 
-		contact.renameAttribute(AttributeName.PERSONALID, AttributeName.PRODUCTID, null, null);
+		contact.renameAttribute(AttributeName.PERSONALID, XJDFConstants.ExternalID, null, null);
 		contact.renameAttribute(AttributeName.ROLES, AttributeName.CONTACTTYPEDETAILS, null, null);
 		return contact;
 	}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.auto.JDFAutoRegisterMark.EnumMarkUsage;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -90,6 +91,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -109,7 +111,7 @@ import org.junit.Test;
 
 /**
  * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts also some tests for automated layout
- * 
+ *
  */
 public class JDFLayoutTest extends JDFTestCaseBase
 {
@@ -131,7 +133,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void reset()
 	{
@@ -144,7 +146,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsNewLayout()
@@ -162,7 +164,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAutoRegister()
@@ -195,7 +197,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetAllOrds()
@@ -208,7 +210,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCalcMaxOrd()
@@ -220,7 +222,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCalcNumSame()
@@ -256,7 +258,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMedia()
@@ -270,7 +272,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSheetCondition()
@@ -284,19 +286,19 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
-	// TODO @Stefan @Test
-	// public void testLogicalStackSchema() {
-	// final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
-	// lo.appendLogicalStackParams().appendStack().setLogicalStackOrd(1);
-	// String s = lo.getOwnerDocument_JDFElement().write2String(2);
-	// JDFParser p = new JDFParser();
-	// p.setSchemaLocation(JDFConstants.JDFNAMESPACE, sm_dirTestSchema + "JDF.xsd");
-	// JDFDoc dNew = p.parseString(s);
-	// XMLDoc dVal = dNew.getValidationResult();
-	// assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
-	// }
+	public void testLogicalStackSchema()
+	{
+		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
+		lo.appendLogicalStackParams().appendStack().setLogicalStackOrd(1);
+		String s = lo.getOwnerDocument_JDFElement().write2String(2);
+		JDFParser p = new JDFParser();
+		p.setSchemaLocation(JDFConstants.JDFNAMESPACE, sm_dirTestSchema + "JDF.xsd");
+		JDFDoc dNew = p.parseString(s);
+		XMLDoc dVal = dNew.getValidationResult();
+		assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
+	}
 
 	// ////////////////////////////////////////////////////////////////////////
 
@@ -401,7 +403,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	/**
 	 * build a 1.2 layout using appendsignature etc
-	 * 
+	 *
 	 */
 	@Test
 	public void testBuildOldLayout()
@@ -478,7 +480,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	/**
 	 * build a 1.3 layout using appendsignature etc
-	 * 
+	 *
 	 */
 	@Test
 	public void testBuildNewLayout()
@@ -537,7 +539,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFixToNewLayout()
@@ -552,7 +554,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFixToNewLayoutWithPartIDKeys()
@@ -572,7 +574,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFixFromNewLayout()
@@ -587,7 +589,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFixFromFlatNewLayout()
@@ -608,7 +610,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFixFromSheetNewLayout()
@@ -630,7 +632,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFixFromSurfaceNewLayout()
@@ -701,7 +703,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	// ///////////////////////////////////////////////////
 	@Test
@@ -723,7 +725,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLayoutLeavesNew()
@@ -744,7 +746,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetSignatureVector_Old()
@@ -773,7 +775,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetSignatureName_Old()
@@ -804,7 +806,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetSignatureByName()
@@ -836,7 +838,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetSignatureName_New()
@@ -858,7 +860,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetSignatureVector_New()
@@ -885,7 +887,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFixVersionProblem()
@@ -903,9 +905,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	/**
 	 * GeneratedObject
-	 * 
+	 *
 	 * CTM or Position Position: See ImageShift PositionX and PositionY, Shift (Margins) � See ShiftFront RelativeShift?
-	 * 
+	 *
 	 * Anchor Point (same as position ll, ul, cc, spine�) (if CTM is given) Orientation (rotation, matrix or ll, ul, �) Contents Format/Template JobField
 	 * (Replace, DynamicField?) SeparationList Mark References (FoldMark, CIE, �)
 	 * @throws Exception

@@ -78,6 +78,7 @@ import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFMedia;
@@ -100,7 +101,7 @@ public class XJDFExampleTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
 		xjdfHelper.setTypes(EnumType.Product.getName());
-		SetHelper shMedia = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
+		SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
 		ResourceHelper rh = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
 		JDFMedia m = (JDFMedia) rh.getResource();
 		m.setAttribute("foo:FooAtt", "FooVal", "http://www.foo.org");
@@ -116,7 +117,7 @@ public class XJDFExampleTest extends JDFTestCaseBase
 	public void testSnippet()
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
-		SetHelper shMedia = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
+		SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
 		ResourceHelper rh = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
 		setSnippet(rh.getRoot(), true);
 		assertTrue(xjdfHelper.toString().indexOf("<!-- START SNIPPET -->") > 0);
@@ -162,7 +163,7 @@ public class XJDFExampleTest extends JDFTestCaseBase
 	public void testSnippetRoot()
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
-		SetHelper shMedia = xjdfHelper.getCreateResourceSet(ElementName.MEDIA, EnumUsage.Input);
+		SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
 		shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
 		KElement root = xjdfHelper.getRoot();
 		setSnippet(root, true);
@@ -213,7 +214,7 @@ public class XJDFExampleTest extends JDFTestCaseBase
 	{
 		XJDFHelper xjdfHelper = new XJDFHelper("CPI_Example", null, null);
 		xjdfHelper.setTypes("Cutting Folding");
-		SetHelper sh1 = xjdfHelper.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+		SetHelper sh1 = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
 		JDFDate jdfDate = new JDFDate().setTime(13, 0, 0);
 		sh1.getPartition((JDFAttributeMap) null).getResource().setAttribute(AttributeName.START, jdfDate.getDateTimeISO());
 		sh1.setAttribute(AttributeName.COMBINEDPROCESSINDEX, "0");

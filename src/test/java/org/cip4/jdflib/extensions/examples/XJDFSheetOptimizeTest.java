@@ -118,7 +118,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 			ResourceHelper phLO = layout.appendPartition(partMap, true);
 			phLO.setAmount(1000, partMap, true);
 			JDFLayout lo = (JDFLayout) phLO.getCreateResource();
-			SetHelper sh = xjdfHelper.getCreateResourceSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+			SetHelper sh = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 			sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS" + i), true).getResource();
 			lo.appendElement(ElementName.POSITION).setAttribute(XJDFConstants.BinderySignatureID, "BS" + i);
 		}
@@ -172,7 +172,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 		String bsIJ = "BS_" + i + "_" + j;
 		partMap.put(XJDFConstants.BinderySignatureID, bsIJ);
 		JDFLayout lo = (JDFLayout) layout.getCreatePartition(partMap, true).getResource();
-		SetHelper sh = xjdfHelper.getCreateResourceSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		SetHelper sh = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 		sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsIJ), true).getResource();
 		JDFPosition p = JDFPosition.createPosition(lo, i, j, 2, 2);
 		p.setAttribute(XJDFConstants.BinderySignatureID, bsIJ);
@@ -207,13 +207,13 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 
 	private void prepareLayout()
 	{
-		layout = xjdfHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Output);
+		layout = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Output);
 		layout.getCreatePartition(0, true);
 	}
 
 	private void prepareSheetOptimizing()
 	{
-		SetHelper hsSheetOptim = xjdfHelper.getCreateResourceSet("SheetOptimizingParams", EnumUsage.Input);
+		SetHelper hsSheetOptim = xjdfHelper.getCreateSet(XJDFConstants.Resource, "SheetOptimizingParams", EnumUsage.Input);
 		ResourceHelper hpSheetOptim = hsSheetOptim.getCreatePartition(0, true);
 		sheetOptimizingParams = hpSheetOptim.getCreateResource();
 

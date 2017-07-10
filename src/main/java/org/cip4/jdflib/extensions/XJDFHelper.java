@@ -185,7 +185,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	private void setParts(VJDFAttributeMap parts)
 	{
-		SetHelper niHelper = getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+		SetHelper niHelper = getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
 		niHelper.getCreatePartitions(parts, true);
 	}
 
@@ -610,8 +610,21 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param name
 	 * @param usage
 	 * @return a new set element
+	 * @deprecated use getCreateSet
 	 */
+	@Deprecated
 	public SetHelper getCreateResourceSet(String name, EnumUsage usage)
+	{
+		return getCreateSet(XJDFConstants.Resource, name, usage);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param usage
+	 * @return a new set element
+	 */
+	public SetHelper getCreateSet(String name, EnumUsage usage)
 	{
 		return getCreateSet(XJDFConstants.Resource, name, usage);
 	}
@@ -645,7 +658,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	@Deprecated
 	public SetHelper getCreateParameterSet(String name, EnumUsage usage)
 	{
-		return getCreateResourceSet(name, usage);
+		return getCreateSet(XJDFConstants.Resource, name, usage);
 	}
 
 	/**
@@ -941,11 +954,31 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * remove a types token
+	 * append a types token
 	 * @param typ
-	 * @param iSkip
+	 *
 	 */
-	public void addType(String typ, int iSkip)
+	public XJDFHelper addType(String typ)
+	{
+		return addType(typ, -1);
+	}
+
+	/**
+	 * append a enumerated types token
+	 * @param typ
+	 *
+	 */
+	public XJDFHelper addType(EnumType typ)
+	{
+		return addType(typ.getName(), -1);
+	}
+
+	/**
+	 * add a types token
+	 * @param typ
+	 * @param iSkip <0 for append
+	 */
+	public XJDFHelper addType(String typ, int iSkip)
 	{
 		VString types = getTypes();
 		if (types == null)
@@ -969,5 +1002,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 				}
 			}
 		}
+		return this;
 	}
 }

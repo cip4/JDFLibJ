@@ -69,17 +69,28 @@
 package org.cip4.jdflib.extensions.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp.EnumOperation;
+import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPrintQuality;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.datatypes.JDFRGBColor;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFInterpretingParams;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorantAlias;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
+import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
 
@@ -91,7 +102,7 @@ import org.junit.Test;
 public class XJDFResourceExampleTest extends JDFTestCaseBase
 {
 	/**
-	* tests the separationlist class
+	*
 	*
 	*/
 	@Test
@@ -121,6 +132,47 @@ public class XJDFResourceExampleTest extends JDFTestCaseBase
 
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "resources/ColorantAlias.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public final void testPrintConditions()
+	{
+		XJDFHelper h = new XJDFHelper("PrintCondition", null, null);
+		h.addType(EnumType.ColorSpaceConversion).addType(EnumType.Interpreting).addType(EnumType.Rendering).addType(EnumType.DigitalPrinting);
+
+		SetHelper sint = h.getCreateSet(ElementName.INTERPRETINGPARAMS, EnumUsage.Input);
+		ResourceHelper rint = sint.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
+		JDFInterpretingParams intp = (JDFInterpretingParams) rint.getResource();
+		intp.setPrintQuality(EnumPrintQuality.High);
+
+		SetHelper smed = h.getCreateSet(ElementName.MEDIA, EnumUsage.Input);
+		ResourceHelper rmed = smed.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
+		JDFMedia med = (JDFMedia) rmed.getResource();
+		med.setMediaType(EnumMediaType.Paper);
+
+		SetHelper scol = h.getCreateSet(ElementName.COLOR, EnumUsage.Input);
+		for (String sep : JDFSeparationList.SEPARATIONS_CMYK)
+		{
+			ResourceHelper rcol = scol.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
+			rcol.ensurePart(AttributeName.SEPARATION, sep);
+			JDFColor col = (JDFColor) rcol.getResource();
+			col.setAttribute(XJDFConstants.PrintStandard, "7-Color");
+		}
+
+		SetHelper scsp = h.getCreateSet(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input);
+		ResourceHelper rcsp = scsp.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
+		JDFColorSpaceConversionParams csp = (JDFColorSpaceConversionParams) rcsp.getResource();
+		JDFColorSpaceConversionOp op = csp.appendColorSpaceConversionOp();
+		op.setOperation(EnumOperation.Convert);
+		JDFFileSpec filespec = csp.appendFileSpec();
+		filespec.setURL("file://7-color-gloss.icc");
+
+		cleanSnippets(h);
+		writeTest(h, "resources/PrintCondition.xjdf");
+
 	}
 
 }

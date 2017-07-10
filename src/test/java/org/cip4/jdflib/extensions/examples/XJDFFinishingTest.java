@@ -102,18 +102,18 @@ public class XJDFFinishingTest extends JDFTestCaseBase
 		book.setID("BookProductID");
 		book.setAmount(4200);
 
-		SetHelper shBook = xjdfHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Input);
+		SetHelper shBook = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Input);
 		ResourceHelper bookHelper = shBook.getCreatePartition(XJDFConstants.ProductPart, "BookProductID", true);
 		bookHelper.setID("BookComponentID");
 		bookHelper.setAttribute(AttributeName.GROSSWEIGHT, "" + 650);
 		bookHelper.setAmount(4200, null, true);
 
-		SetHelper shPallet = xjdfHelper.getCreateResourceSet(ElementName.COMPONENT, EnumUsage.Output);
+		SetHelper shPallet = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Output);
 		ResourceHelper palletHelper = shPallet.getCreatePartition(null, true);
 		palletHelper.setAmount(10, null, true);
 		palletHelper.setAttribute(AttributeName.GROSSWEIGHT, "" + (20 * 1000 + 10 * 300 + 42 * 650));
 
-		SetHelper shBundle = xjdfHelper.getCreateResourceSet(ElementName.BUNDLE, EnumUsage.Input);
+		SetHelper shBundle = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BUNDLE, EnumUsage.Input);
 		ResourceHelper rh = shBundle.appendPartition(null, true);
 		JDFBundle b = (JDFBundle) rh.getResource();
 		JDFBundleItem pallet = b.appendBundleItem();

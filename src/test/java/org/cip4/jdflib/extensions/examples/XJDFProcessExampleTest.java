@@ -121,8 +121,8 @@ public class XJDFProcessExampleTest extends JDFTestCaseBase
 		product.setAmount(30);
 		product.setProductType("Book");
 		product.setID("IDBook");
-		SetHelper shc = xjdfHelper.getCreateResourceSet(ElementName.CONTACT, EnumUsage.Input);
-		SetHelper shdp = xjdfHelper.getCreateResourceSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
+		SetHelper shc = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.CONTACT, EnumUsage.Input);
+		SetHelper shdp = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.DELIVERYPARAMS, EnumUsage.Input);
 		for (int i = 1; i < 3; i++)
 		{
 			JDFAttributeMap map = new JDFAttributeMap("DropID", "Drop" + i);

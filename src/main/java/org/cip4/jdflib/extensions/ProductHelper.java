@@ -192,7 +192,7 @@ public class ProductHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * @return amount the amount to get
+	 * @return amount the max amount to get, defaults to the value of amount
 	 */
 	public int getMaxAmount()
 	{
@@ -202,10 +202,21 @@ public class ProductHelper extends BaseXJDFHelper
 
 	/**
 	 * @return the productID of the product
+	 * @deprecated use getExternalID
 	 */
+	@Deprecated
 	public String getProductID()
 	{
 		return theElement.getNonEmpty(AttributeName.PRODUCTID);
+	}
+
+	/**
+	 * @return the productID of the product
+	 *
+	 */
+	public String getExternalID()
+	{
+		return theElement.getNonEmpty(XJDFConstants.ExternalID);
 	}
 
 	/**

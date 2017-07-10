@@ -105,25 +105,25 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	{
 		theHelper.getRoot().setXMLComment("Assume incremental adding of an additional 3rd plate");
 		theHelper.getRoot().setAttribute("Types", "PlateMaking");
-		SetHelper rlh = theHelper.getCreateResourceSet("RunList", EnumUsage.Input);
+		SetHelper rlh = theHelper.getCreateSet(XJDFConstants.Resource, "RunList", EnumUsage.Input);
 		ResourceHelper p = rlh.getCreatePartition(null, true);
 		JDFRunList rl = (JDFRunList) p.getCreateResource();
 		rl.setNPage(48);
 		rlh.getSet().setXMLComment("set the updated total number of pages");
 
-		SetHelper loh = theHelper.getCreateResourceSet("Layout", EnumUsage.Input);
+		SetHelper loh = theHelper.getCreateSet(XJDFConstants.Resource, "Layout", EnumUsage.Input);
 		p = loh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		JDFLayout lo = (JDFLayout) p.getCreateResource();
 		JDFBinderySignature bs = (JDFBinderySignature) lo.appendElement(ElementName.BINDERYSIGNATURE);
 		bs.setNumberUp(new JDFXYPair(4, 4));
 		loh.getSet().setXMLComment("only specify the 3rd sheet");
 
-		SetHelper mh = theHelper.getCreateResourceSet("Media", EnumUsage.Input);
+		SetHelper mh = theHelper.getCreateSet(XJDFConstants.Resource, "Media", EnumUsage.Input);
 		p = mh.getCreatePartition(null, true);
 		KElement mPart = p.getPartition();
 		mPart.setAttribute("ProductID", "PlateID");
 
-		SetHelper xmh = theHelper.getCreateResourceSet("ExposedMedia", EnumUsage.Output);
+		SetHelper xmh = theHelper.getCreateSet(XJDFConstants.Resource, "ExposedMedia", EnumUsage.Output);
 		p = xmh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		JDFExposedMedia xm = (JDFExposedMedia) p.getCreateResource();
 		xm.setAttribute("MediaRef", mPart.getAttribute("ID"));
@@ -139,7 +139,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	{
 		theHelper.getRoot().setXMLComment("Added Varnishing - how do we differentiate varnishing only from add varnishing\n");
 		theHelper.getRoot().setAttribute("Types", "Varnishing");
-		SetHelper rlh = theHelper.getCreateResourceSet(ElementName.VARNISHINGPARAMS, EnumUsage.Input);
+		SetHelper rlh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.VARNISHINGPARAMS, EnumUsage.Input);
 		ResourceHelper p = rlh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		//		JDFVarnishingParams vp = (JDFRunList) p.getCreateResource();
 		//		rl.setNPage(48);
@@ -186,13 +186,13 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	{
 		theHelper.getRoot().setXMLComment("Assume incremental removal of an existing 3rd plate");
 		theHelper.getRoot().setAttribute("Types", "PlateMaking");
-		SetHelper rlh = theHelper.getCreateResourceSet("RunList", EnumUsage.Input);
+		SetHelper rlh = theHelper.getCreateSet(XJDFConstants.Resource, "RunList", EnumUsage.Input);
 		ResourceHelper p = rlh.getCreatePartition(null, true);
 		JDFRunList rl = (JDFRunList) p.getCreateResource();
 		rl.setNPage(32);
 		rlh.getSet().setXMLComment("set the updated reduced total number of pages");
 
-		SetHelper nih = theHelper.getCreateResourceSet("NodeInfo", EnumUsage.Input);
+		SetHelper nih = theHelper.getCreateSet(XJDFConstants.Resource, "NodeInfo", EnumUsage.Input);
 		p = nih.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		JDFNodeInfo ni = (JDFNodeInfo) p.getCreateResource();
 		ni.setNodeStatus(EnumNodeStatus.Aborted);
@@ -212,7 +212,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 		theHelper.getRoot().setAttribute("Types", "ConventionalPrinting");
 
 		theHelper.removeSet(ElementName.NODEINFO);
-		SetHelper nih = theHelper.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+		SetHelper nih = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
 		ResourceHelper p = nih.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		JDFNodeInfo ni = (JDFNodeInfo) p.getCreateResource();
 		ni.setAttribute("AmountGood", 10000, null);
