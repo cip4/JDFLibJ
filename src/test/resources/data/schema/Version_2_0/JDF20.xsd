@@ -3164,7 +3164,7 @@
                 <xs:attribute name="BuyerSupplied" type="boolean" use="optional"/>
                 <xs:attribute name="Flute" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="FluteDirection" type="MediaDirection" use="optional"/>
-                <xs:attribute name="FrontCoating" type="Coating" use="optional"/>
+                <xs:attribute name="Coating" type="Coating" use="optional"/>
                 <xs:attribute name="GrainDirection" type="MediaDirection" use="optional"/>
                 <xs:attribute name="ISOPaperSubstrate" type="ISOPaperSubstrate" use="optional"/>
                 <xs:attribute name="MediaColor" type="NamedColor" use="optional"/>
@@ -4774,9 +4774,9 @@
                 <xs:attribute name="Dimension" type="XYPair" use="optional"/>
                 <xs:attribute name="Flute" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="FluteDirection" type="MediaDirection" use="optional"/>
-                <xs:attribute name="FrontCoatingDetail" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="FrontCoating" type="Coating" use="optional"/>
-                <xs:attribute name="FrontGlossValue" type="float" use="optional"/>
+                <xs:attribute name="CoatingDetail" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="Coating" type="Coating" use="optional"/>
+                <xs:attribute name="GlossValue" type="float" use="optional"/>
                 <xs:attribute name="GrainDirection" type="MediaDirection" use="optional"/>
                 <xs:attribute name="ImagableSide" use="optional">
                     <xs:simpleType>
@@ -5501,7 +5501,6 @@
             <xs:attribute name="BleedHead" type="float" use="optional"/>
             <xs:attribute name="BleedSpine" type="float" use="optional"/>
             <xs:attribute name="FaceCells" type="IntegerList" use="optional"/>
-            <xs:attribute name="FrontOverfold" type="float" use="optional"/>
             <xs:attribute name="FrontPages" type="IntegerList" use="optional"/>
             <xs:attribute name="FrontSpread" type="IntegerList" use="optional"/>
             <xs:attribute name="Mask" use="optional">

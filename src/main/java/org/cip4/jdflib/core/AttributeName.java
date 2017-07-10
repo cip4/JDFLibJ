@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1813,7 +1813,7 @@ public final class AttributeName
 	/** */
 	public static final String LOGICALSTACKORD = "LogicalStackOrd";
 	/**
-	 * 
+	 *
 	 */
 	public static final String LOGICALSTACKSEQUENCE = "LogicalStackSequence";
 	/** */
@@ -2621,6 +2621,8 @@ public final class AttributeName
 	/** */
 	public static final String PRINTABLEAREA = "PrintableArea";
 	/** */
+	public static final String PRINTCONDITION = "PrintCondition";
+	/** */
 	public static final String PRINTCONDITIONNAME = "PrintConditionName";
 	/** */
 	public static final String PRINTERFONTSSUBFOLDER = "PrinterFontsSubFolder";
@@ -3046,7 +3048,8 @@ public final class AttributeName
 	 * @deprecated
 	 */
 	@Deprecated
-	/** */public static final String SHEETOCCURENCE = "SheetOccurrence";
+	/** */
+	public static final String SHEETOCCURENCE = "SheetOccurrence";
 	/** */
 	public static final String SHEETOCCURRENCE = "SheetOccurrence";
 	/** */

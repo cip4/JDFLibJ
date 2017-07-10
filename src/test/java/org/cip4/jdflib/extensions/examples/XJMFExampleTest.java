@@ -449,6 +449,58 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testResponsePaperPrintCondition()
+	{
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Resource);
+		q.getHeader().setAttribute(AttributeName.REFID, "Q1");
+		q.getHeader().setID("R1");
+		JDFResourceInfo ri = (JDFResourceInfo) q.appendElement(ElementName.RESOURCEINFO);
+		ri.setScope(EnumScope.Allowed);
+		SetHelper sh = new SetHelper(ri.appendElement(XJDFConstants.ResourceSet));
+		sh.setName(ElementName.MEDIA);
+
+		ResourceHelper rh = sh.appendPartition(new JDFAttributeMap(AttributeName.PRINTCONDITION, "7-color-gloss"), true);
+		rh.appendPartMap(new JDFAttributeMap(AttributeName.PRINTCONDITION, "4-color-gloss"));
+		rh.setExternalID("ID1");
+		rh.setAttribute(AttributeName.DESCRIPTIVENAME, "Good Gloss Paper");
+		((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
+		((JDFMedia) rh.getResource()).setWeight(100);
+		((JDFMedia) rh.getResource()).setAttribute(XJDFConstants.Coating, "Gloss");
+
+		rh = sh.appendPartition(new JDFAttributeMap(ElementName.PRINTCONDITION, "4-color-gloss"), true);
+		rh.setExternalID("ID2");
+		rh.setAttribute(AttributeName.DESCRIPTIVENAME, "Cheap Gloss Paper not for 7 color");
+		((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
+		((JDFMedia) rh.getResource()).setWeight(100);
+		((JDFMedia) rh.getResource()).setAttribute(XJDFConstants.Coating, "Gloss");
+
+		rh = sh.appendPartition(new JDFAttributeMap(AttributeName.PRINTCONDITION, "7-color-matte"), true);
+		rh.appendPartMap(new JDFAttributeMap(ElementName.PRINTCONDITION, "4-color-matte"));
+		rh.setExternalID("ID3");
+		rh.setAttribute(AttributeName.DESCRIPTIVENAME, "Good Matte Paper");
+		((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
+		((JDFMedia) rh.getResource()).setWeight(100);
+		((JDFMedia) rh.getResource()).setAttribute(XJDFConstants.Coating, "Matte");
+
+		rh = sh.appendPartition(new JDFAttributeMap(ElementName.PRINTCONDITION, "4-color-matte"), true);
+		rh.setExternalID("ID2");
+		rh.setAttribute(AttributeName.DESCRIPTIVENAME, "Cheap Matte Paper not for 7 color");
+		((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
+		((JDFMedia) rh.getResource()).setWeight(100);
+		((JDFMedia) rh.getResource()).setAttribute(XJDFConstants.Coating, "Matte");
+
+		xjmfHelper.cleanUp();
+		sh.getRoot().appendXMLComment(" One Resource element for each paper follows here ", null);
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "jmf/paperResourceResponse_PC.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testResponseKnownDevices()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("VeggieController");
