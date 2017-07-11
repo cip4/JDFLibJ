@@ -107,6 +107,7 @@ import org.cip4.jdflib.resource.process.JDFRegisterMark;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFSurface;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -125,6 +126,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Override
+	@Before
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -161,8 +163,6 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		assertFalse("l no layout", JDFLayout.isNewLayout(rl));
 	}
 
-	// ////////////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -193,8 +193,6 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		fms.appendElement("SeparationSpec").setAttribute("Name", "Spot2");
 		doc.write2File(sm_dirTestDataTemp + "autoregister.jdf", 2, false);
 	}
-
-	// ////////////////////////////////////////////////////////////////////////
 
 	/**
 	 *
@@ -288,6 +286,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	/**
 	 *
 	 */
+	@Test
 	public void testLogicalStackSchema()
 	{
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
@@ -299,8 +298,6 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		XMLDoc dVal = dNew.getValidationResult();
 		assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
 	}
-
-	// ////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * @throws Exception

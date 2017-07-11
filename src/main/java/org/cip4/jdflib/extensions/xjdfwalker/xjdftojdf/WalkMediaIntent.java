@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 
 /**
@@ -115,10 +116,10 @@ public class WalkMediaIntent extends WalkIntentResource
 	@Override
 	protected void updateAttributes(KElement elem)
 	{
-		String nonEmpty = elem.getNonEmpty("FrontCoating");
+		String nonEmpty = elem.getNonEmpty(XJDFConstants.Coating);
 		if (nonEmpty != null)
 		{
-			elem.removeAttribute("FrontCoating");
+			elem.removeAttribute(XJDFConstants.Coating);
 			elem.setAttribute("FrontCoatings", getCoating(nonEmpty));
 		}
 		super.updateAttributes(elem);

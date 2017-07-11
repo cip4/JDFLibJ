@@ -618,7 +618,7 @@ class PostXJDFWalker extends BaseElementWalker
 			if (xjdf != null)
 			{
 				xjdf.removeAttribute("FrontCoatings");
-				xjdf.setAttribute("FrontCoating", getCoating(coating));
+				xjdf.setAttribute(XJDFConstants.Coating, getCoating(coating));
 			}
 			super.updateAttributes(xjdf);
 		}
