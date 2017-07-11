@@ -80,7 +80,6 @@ import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.auto.JDFAutoRegisterMark.EnumMarkUsage;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -292,8 +291,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		lo.appendLogicalStackParams().appendStack().setLogicalStackOrd(1);
 		String s = lo.getOwnerDocument_JDFElement().write2String(2);
-		JDFParser p = new JDFParser();
-		p.setSchemaLocation(JDFConstants.JDFNAMESPACE, sm_dirTestSchema + "JDF.xsd");
+		JDFParser p = getSchemaParser();
 		JDFDoc dNew = p.parseString(s);
 		XMLDoc dVal = dNew.getValidationResult();
 		assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
