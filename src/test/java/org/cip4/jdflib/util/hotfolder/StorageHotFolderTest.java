@@ -423,7 +423,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			log.warn("run over " + theHFDir.listFiles().length);
 		}
 		assertEquals(ok.listFiles().length, 42, 13);
-		assertEquals(tmpHFDir.listFiles().length, 0, 0);
+		assertEquals(tmpHFDir.listFiles().length, 0, 3);
 		assertEquals(error.listFiles().length, 42, 13);
 
 		hf.stop();
