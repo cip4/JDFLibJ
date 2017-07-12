@@ -185,6 +185,6 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 			}
 		}
 		ThreadUtil.sleep(40);
-		assertEquals(nRun, 1000);
+		assertEquals(nRun, 1000, 2);
 	}
 }
