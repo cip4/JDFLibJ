@@ -213,6 +213,22 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	public void testGetCreateResourceSet2()
+	{
+		assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input));
+		SetHelper sh1 = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Input);
+		assertNotNull(sh1);
+		SetHelper sh2 = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
+		assertNotNull(sh2);
+		assertNotSame(sh1, sh2);
+
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
 	public void testNumProduct()
 	{
 		XJDFHelper h = new XJDFHelper("j", "root", null);
@@ -269,16 +285,13 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetSetProcessUsage()
+	public void testGetSetUsage()
 	{
 		SetHelper seta = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
-		seta.setProcessUsage("a");
-		SetHelper setb = theHelper.appendResourceSet(ElementName.NODEINFO, EnumUsage.Input);
-		setb.setProcessUsage("b");
-		assertEquals(theHelper.getSet(ElementName.NODEINFO, "a"), seta);
-		assertEquals(theHelper.getSet(ElementName.NODEINFO, "b"), setb);
-		assertNull(theHelper.getSet(ElementName.NODEINFO, "c"));
-		assertNull(theHelper.getSet(ElementName.NODEINFO, null));
+		SetHelper setb = theHelper.appendResourceSet(ElementName.NODEINFO, EnumUsage.Output);
+		assertEquals(theHelper.getSet(ElementName.NODEINFO, EnumUsage.Input), seta);
+		assertEquals(theHelper.getSet(ElementName.NODEINFO, EnumUsage.Output), setb);
+		assertEquals(theHelper.getSet(ElementName.NODEINFO, null), seta);
 	}
 
 	/**
