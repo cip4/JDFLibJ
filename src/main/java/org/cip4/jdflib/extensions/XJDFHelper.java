@@ -565,15 +565,17 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 			}
 			e = e.getNextSiblingElement();
 		}
-
-		e = theElement.getFirstChildElement();
-		while (e != null)
+		if (usage == null)
 		{
-			if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))))
+			e = theElement.getFirstChildElement();
+			while (e != null)
 			{
-				return new SetHelper(e);
+				if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))))
+				{
+					return new SetHelper(e);
+				}
+				e = e.getNextSiblingElement();
 			}
-			e = e.getNextSiblingElement();
 		}
 		return null;
 	}

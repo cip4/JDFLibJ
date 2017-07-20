@@ -288,6 +288,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testGetSetUsage()
 	{
 		SetHelper seta = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
+		assertNull(theHelper.getSet(ElementName.NODEINFO, EnumUsage.Output));
 		SetHelper setb = theHelper.appendResourceSet(ElementName.NODEINFO, EnumUsage.Output);
 		assertEquals(theHelper.getSet(ElementName.NODEINFO, EnumUsage.Input), seta);
 		assertEquals(theHelper.getSet(ElementName.NODEINFO, EnumUsage.Output), setb);
