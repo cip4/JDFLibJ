@@ -179,11 +179,60 @@ public class MessageHelper extends BaseXJDFHelper
 	 */
 	public JDFSubscription subscribe(String url)
 	{
-		if (!theElement.getLocalName().startsWith("Query"))
+		if (!isQuery())
 			return null;
-		JDFSubscription sub = (JDFSubscription) appendElement(ElementName.SUBSCRIPTION);
+		JDFSubscription sub = (JDFSubscription) getCreateElement(ElementName.SUBSCRIPTION);
 		sub.setURL(url);
 		return sub;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public boolean isQuery()
+	{
+		return theElement != null && theElement.getLocalName().startsWith(ElementName.QUERY);
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public boolean isCommand()
+	{
+		return theElement != null && theElement.getLocalName().startsWith(ElementName.COMMAND);
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public boolean isResponse()
+	{
+		return theElement != null && theElement.getLocalName().startsWith(ElementName.RESPONSE);
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public boolean isSignal()
+	{
+		return theElement != null && theElement.getLocalName().startsWith(ElementName.SIGNAL);
+	}
+
+	/**
+	 *
+	 * @param url
+	 * @return null if we ain't no query
+	 */
+	public void setQuery(MessageHelper hQuery)
+	{
+		if (!isResponse() && !isSignal() || hQuery == null || (hQuery.isResponse() || hQuery.isSignal()))
+			return;
+		String id = ensureHeader(hQuery.theElement).appendAnchor(null);
+		ensureHeader(theElement).setAttribute(AttributeName.REFID, id);
 	}
 
 }

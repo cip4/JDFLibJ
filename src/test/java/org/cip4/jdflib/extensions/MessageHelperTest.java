@@ -69,6 +69,8 @@
 package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -100,7 +102,89 @@ public class MessageHelperTest extends JDFTestCaseBase
 		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
 		JDFSubscription sub = mh.subscribe("http://foo");
 		assertNotNull(sub);
-		writeTest(xjmfHelper.getRoot(), sm_dirTestDataTemp + "subscribe.xjmf", false);
+		writeRoundTripX(xjmfHelper.theElement, "subscribe.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testIsQuery()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
+		assertTrue(mh.isQuery());
+		mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
+		assertFalse(mh.isQuery());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testIsCommand()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
+		assertTrue(mh.isCommand());
+		mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
+		assertFalse(mh.isCommand());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testIsSignal()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
+		assertTrue(mh.isSignal());
+		mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
+		assertFalse(mh.isSignal());
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testIsResponse()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
+		assertTrue(mh.isResponse());
+		mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
+		assertFalse(mh.isResponse());
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testSetQuery()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
+		MessageHelper mhc = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
+		mh.setQuery(mhc);
+		assertEquals(mhc.getHeader().getID(), mh.getHeader().getAttribute(AttributeName.REFID));
+		writeRoundTripX(xjmfHelper.theElement, "setQuery.xjmf");
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testSetQuerySignal()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
+		mh.appendElement(ElementName.DEVICEINFO).setAttribute(AttributeName.STATUS, "Idle");
+
+		MessageHelper mhc = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
+		mh.setQuery(mhc);
+		assertEquals(mhc.getHeader().getID(), mh.getHeader().getAttribute(AttributeName.REFID));
+		writeRoundTripX(xjmfHelper.theElement, "setQuerySignal.xjmf");
 	}
 
 }

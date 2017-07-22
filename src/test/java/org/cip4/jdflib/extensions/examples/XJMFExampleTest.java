@@ -577,7 +577,22 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		KElement e = xjmfHelper.getRoot().appendElement("foo:QueryBar", "www.foo.org");
 		e.appendElement("foo:BarParams").setAttribute("BarDetails", "value");
 		setSnippet(xjmfHelper, true);
+		new MessageHelper(e).getHeader().setID("queryID");
 		writeTest(xjmfHelper, "jmf/extendQuery.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testExtendResponse()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		KElement e = xjmfHelper.getRoot().appendElement("foo:ResponseBar", "www.foo.org");
+		e.appendElement("foo:BarResonseParams").setAttribute("BarDetails", "value");
+		new MessageHelper(e).getHeader().setAttribute(AttributeName.REFID, "queryID");
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "jmf/extendResponse.xjmf");
 	}
 
 	/**

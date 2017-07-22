@@ -494,6 +494,44 @@ public abstract class JDFTestCaseBase extends TestCase
 	}
 
 	/**
+	 * write convert and unconvert
+	 *
+	 * @param xjdfRoot the xjdf node or xjmf root
+	 * @param fileBase the filename without extension
+	 */
+	protected void writeRoundTripX(final KElement xjdfRoot, String fileBase)
+	{
+
+		String tmpXJDF = sm_dirTestDataTemp + fileBase + ".xjdf";
+		xjdfRoot.getOwnerDocument_KElement().write2File(tmpXJDF, 2, false);
+
+		JDFParser p = getXJDFSchemaParser();
+		JDFDoc docXJDF = p.parseFile(tmpXJDF);
+		XMLDoc dVal = docXJDF.getValidationResult();
+		String valResult = dVal.getRoot().getAttribute("ValidationResult");
+		if (!"Valid".equals(valResult))
+		{
+			dVal.write2File(sm_dirTestDataTemp + fileBase + ".val.xml", 2, false);
+		}
+		assertEquals(valResult, "Valid");
+
+		XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
+		JDFDoc converted = jdfConverter.convert(xjdfRoot);
+		converted.write2File(sm_dirTestDataTemp + fileBase + ".xjdf.jdf", 2, false);
+		JDFElement jxRoot = converted.getJDFRoot();
+		if (jxRoot == null)
+			jxRoot = converted.getJMFRoot();
+		assertTrue(fileBase + ".xjdf.jdf", jxRoot.isValid(EnumValidationLevel.Complete));
+
+		XJDF20 xjdfConv = new XJDF20();
+		KElement root = xjdfConv.convert(jxRoot);
+
+		root.write2File(sm_dirTestDataTemp + fileBase + ".jdf.xjdf");
+		assertTrue(fileBase + ".jdf", ((JDFElement) root).isValid(EnumValidationLevel.Complete));
+
+	}
+
+	/**
 	 * create a standard customerInfo
 	 * @param doc the doc to prepare
 	 * @return the new customerInfo
