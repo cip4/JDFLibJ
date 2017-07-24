@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ public class MessageResourceHelper extends MessageHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @return the ResourceSet if it exists
 	 */
 	public SetHelper getSet()
@@ -98,8 +98,8 @@ public class MessageResourceHelper extends MessageHelper
 	}
 
 	/**
-	 * 
-	 * @return 
+	 *
+	 * @return
 	 */
 	public SetHelper getCreateSet()
 	{
@@ -108,7 +108,30 @@ public class MessageResourceHelper extends MessageHelper
 	}
 
 	/**
-	 * 
+	 *
+	 * @return
+	 */
+	public SetHelper copySet(SetHelper sh)
+	{
+		KElement oldSet = sh == null ? null : sh.getRoot();
+		if (oldSet != null)
+		{
+			KElement ri = theElement.getCreateElement(ElementName.RESOURCEINFO);
+			if (getSet() != null)
+			{
+				getSet().deleteNode();
+			}
+			KElement set = ri.copyElement(oldSet, null);
+			return new SetHelper(set);
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
+	 *
 	 * @param amount
 	 * @param partMap
 	 * @param bGood

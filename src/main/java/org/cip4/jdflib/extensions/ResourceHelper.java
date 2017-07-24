@@ -210,7 +210,15 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 		if (StringUtil.getNonEmpty(value) != null)
 		{
 			VJDFAttributeMap partMapVector = getPartMapVector();
-			partMapVector.put(key, value);
+			JDFAttributeMap newMap = new JDFAttributeMap(key, value);
+			if (partMapVector.overlapsMap(newMap))
+			{
+				partMapVector.put(key, value);
+			}
+			else
+			{
+				partMapVector.add(newMap);
+			}
 			setPartMapVector(partMapVector);
 		}
 		return this;
