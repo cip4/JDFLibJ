@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,21 +56,21 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  * KElementTest.java
- * 
+ *
  * @author Dietrich Mucha
  *
  * Copyright (C) 2002 Heidelberger Druckmaschinen AG. All Rights Reserved.
@@ -104,14 +104,14 @@ import org.w3c.dom.Element;
 
 /**
  * test class for KElement
- * 
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class KElementTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsEqual()
@@ -129,7 +129,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEquals()
@@ -147,7 +147,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsEqualBig()
@@ -176,7 +176,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAncestorDistance()
@@ -230,7 +230,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEnumValid()
@@ -268,7 +268,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRenameElement()
@@ -287,7 +287,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRenameAttribute()
@@ -300,7 +300,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveChildren()
@@ -319,7 +319,7 @@ public class KElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetElementsWithMultipleID()
@@ -343,7 +343,7 @@ public class KElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetFirstChildElement()
@@ -361,7 +361,7 @@ public class KElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetNextSibling()
@@ -380,7 +380,7 @@ public class KElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNumChildrenByClass()
@@ -395,7 +395,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetElementByClass()
@@ -413,7 +413,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetElementById()
@@ -463,7 +463,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testReplaceElementRoot()
@@ -499,7 +499,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testReplaceElement()
@@ -544,7 +544,7 @@ public class KElementTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSortChildren()
@@ -573,7 +573,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSortChild()
@@ -610,7 +610,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSortChildrenAttribute()
@@ -637,7 +637,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSortChildrenXPath()
@@ -666,7 +666,7 @@ public class KElementTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSortChildrenCompPerformance()
@@ -709,7 +709,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSortChildrenComp()
@@ -742,7 +742,7 @@ public class KElementTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveFromAttribute()
@@ -779,7 +779,7 @@ public class KElementTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveExtensions()
@@ -800,7 +800,7 @@ public class KElementTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveEmptyAttributes()
@@ -832,7 +832,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveAttribute()
@@ -875,7 +875,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMatchesPath()
@@ -906,7 +906,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeElement()
@@ -930,7 +930,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCopyInto()
@@ -963,7 +963,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeElementElements()
@@ -991,7 +991,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMoveMe()
@@ -1013,7 +1013,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNumChildElements()
@@ -1030,7 +1030,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNumSiblingElements()
@@ -1049,7 +1049,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMoveElement()
@@ -1068,7 +1068,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCopyElementMem()
@@ -1093,7 +1093,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCloneElementMem()
@@ -1116,7 +1116,7 @@ public class KElementTest extends JDFTestCaseBase
 
 	/**
 	 * @throws CloneNotSupportedException
-	 * 
+	 *
 	 */
 	@Test
 	public void testClone() throws CloneNotSupportedException
@@ -1141,7 +1141,7 @@ public class KElementTest extends JDFTestCaseBase
 
 	/**
 	 * @throws CloneNotSupportedException
-	 * 
+	 *
 	 */
 	@Test
 	public void testCloneNewDoc() throws CloneNotSupportedException
@@ -1165,7 +1165,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCloneRoot()
@@ -1180,7 +1180,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMoveAttributeNS()
@@ -1195,7 +1195,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMoveAttribute()
@@ -1326,7 +1326,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCopyAttribute()
@@ -1372,7 +1372,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCopyAttributeNS()
@@ -1388,7 +1388,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNameSpace()
@@ -1456,7 +1456,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNameSpaceInElements()
@@ -1537,7 +1537,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNameSpace1()
@@ -1568,7 +1568,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNameSpaceInAttributes()
@@ -1604,7 +1604,7 @@ public class KElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPrefix()
@@ -1623,8 +1623,8 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	public void testGetLength()
 	{
@@ -1634,7 +1634,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLocalName()
@@ -1694,7 +1694,7 @@ public class KElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetMatchesPath()
@@ -1710,7 +1710,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetDefaultAttributeMap()
@@ -1725,7 +1725,7 @@ public class KElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEraseDefaultAttributeMap()
@@ -1743,7 +1743,7 @@ public class KElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetAttributeMap()
@@ -1756,7 +1756,7 @@ public class KElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEraseEmptyNodes()
@@ -1774,7 +1774,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveXPathElement()
@@ -1789,7 +1789,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveXPathValue()
@@ -1804,7 +1804,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveXPathAttribute2()
@@ -1830,7 +1830,7 @@ public class KElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetXPathAttributeMap()
@@ -1848,7 +1848,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetXPathAttributeMapNull()
@@ -1866,7 +1866,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetXPathValueMapText()
@@ -1879,7 +1879,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetXPathValueMapPerformance()
@@ -1899,7 +1899,7 @@ public class KElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetXPathElementVector()
@@ -1936,7 +1936,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetXPathElementNS()
@@ -1951,7 +1951,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetXPathElement()
@@ -2000,7 +2000,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetCreateXPathElement()
@@ -2040,7 +2040,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testBuildXPath()
@@ -2066,7 +2066,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testBuildRelativeXPath()
@@ -2090,7 +2090,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetReal()
@@ -2119,7 +2119,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetXPathAttribute()
@@ -2156,7 +2156,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetXPathAttributeText()
@@ -2171,7 +2171,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetXPathAttributeWithPath()
@@ -2188,7 +2188,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetDOMAttr()
@@ -2204,7 +2204,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetAttribute()
@@ -2217,7 +2217,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetNonEmpty()
@@ -2230,7 +2230,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetNonEmpty_KElement()
@@ -2243,7 +2243,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHasNonEmpty()
@@ -2256,7 +2256,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testHasNonEmpty_KElement()
@@ -2269,7 +2269,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveXPathAttribute()
@@ -2290,7 +2290,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetXPathAttributeReplace()
@@ -2307,7 +2307,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetXPathAttribute()
@@ -2353,7 +2353,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetXPathValue()
@@ -2367,7 +2367,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetXPathValueText()
@@ -2387,7 +2387,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetXPathValues()
@@ -2408,7 +2408,7 @@ public class KElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetDeepParentChild.
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetDeepParent()
@@ -2430,7 +2430,7 @@ public class KElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetDeepParentChild.
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetDeepParentChild()
@@ -2451,7 +2451,7 @@ public class KElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetDeepParentNotName.
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetDeepParentNotName()
@@ -2470,7 +2470,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testInsertBefore()
@@ -2488,7 +2488,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIncludesAttributes()
@@ -2509,7 +2509,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHasAttributeNS()
@@ -2525,7 +2525,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testInfinity()
@@ -2548,7 +2548,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetAttribute_LongAttValue()
@@ -2571,7 +2571,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetAttribute_SpecialChar()
@@ -2592,7 +2592,7 @@ public class KElementTest extends JDFTestCaseBase
 	// //
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetAttributes()
@@ -2612,7 +2612,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetAttributesRaw()
@@ -2634,7 +2634,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetAttributeRaw()
@@ -2663,7 +2663,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetNonEmpty()
@@ -2677,7 +2677,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetAttributeIterator()
@@ -2706,7 +2706,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetAttributesMap()
@@ -2732,7 +2732,7 @@ public class KElementTest extends JDFTestCaseBase
 	// /////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetAttributesResource()
@@ -2750,7 +2750,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetAttribute()
@@ -2777,7 +2777,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetAttributeNS()
@@ -2826,7 +2826,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 */
 	@Test
@@ -2848,7 +2848,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 */
 	@Test
@@ -2882,7 +2882,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetElementsByTagName_KElement()
@@ -2898,7 +2898,7 @@ public class KElementTest extends JDFTestCaseBase
 	// ///
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetChildrenByTagNameWildCard()
@@ -2920,7 +2920,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetChildrenByTagName()
@@ -2941,7 +2941,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetChildrenFromList()
@@ -2958,7 +2958,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetChildrenIgnoreList()
@@ -2976,7 +2976,29 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
+	 */
+	@Test
+	public void testGetChildByTagName()
+	{
+		final XMLDoc doc = new XMLDoc("Foo", null);
+		final KElement root = doc.getRoot();
+		assertEquals(root.getChildElementArray().length, 0);
+		root.appendElement("bar:bar", "www.bar.com");
+		final KElement bar2 = root.appendElement("bar2");
+		bar2.setAttribute("foo", "1");
+		bar2.setAttribute("ID", "id2");
+		final KElement bar3 = bar2.appendElement("bar3");
+		bar3.setAttribute("foo", "1");
+		bar3.setAttribute("foo2", "2");
+		bar3.setAttribute("ID", "id3");
+		assertEquals(root.getChildByTagName("bar3", null, 0, null, false, true), bar3);
+		assertEquals(root.getChildByTagName("bar3", null, -1, null, false, true), bar3);
+
+	}
+
+	/**
+	 *
 	 */
 	@Test
 	public void testGetChildWithAttribute()
@@ -2995,6 +3017,7 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(root.getChildWithAttribute(null, "foo2", null, null, 0, false), bar3);
 		assertEquals(root.getChildWithAttribute(null, "foo", null, null, 0, false), bar2);
 		assertEquals(root.getChildWithAttribute(null, "foo", null, null, 1, false), bar3);
+		assertEquals(root.getChildWithAttribute(null, "foo", null, null, -1, false), bar3);
 		assertEquals(root.getChildWithAttribute(null, "foo", null, null, 0, true), bar2);
 		assertEquals(root.getChildWithAttribute(null, "foo", null, "1", 0, true), bar2);
 		assertEquals(root.getChildWithAttribute(null, "ID", null, "id2", 0, true), bar2);
@@ -3011,7 +3034,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetCreateChildWithAttribute()
@@ -3029,7 +3052,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetChildElementVector_KElement()
@@ -3053,7 +3076,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetChildElementArray()
@@ -3072,7 +3095,7 @@ public class KElementTest extends JDFTestCaseBase
 	// ///
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAttributeInfo()
@@ -3084,7 +3107,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPushUp()
@@ -3177,7 +3200,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetAttribute_NullCreate()
@@ -3200,7 +3223,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetAttribute_NameSpaceHandling()
@@ -3258,8 +3281,8 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testRemoveNS1()
@@ -3274,7 +3297,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 */
 	@Test
@@ -3296,7 +3319,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testXMLNameSpace()
@@ -3310,7 +3333,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendChild()
@@ -3329,7 +3352,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendCData()
@@ -3348,7 +3371,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testParseAppendChild()
@@ -3372,7 +3395,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetXMLComment()
@@ -3394,7 +3417,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendElementRaw()
@@ -3452,7 +3475,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendElement()
@@ -3480,7 +3503,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendElement_NSAtt()
@@ -3498,7 +3521,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendElement_NSAttJDFDoc()
@@ -3539,7 +3562,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendElement_AttRaw()
@@ -3579,7 +3602,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendElement_SingleNS()
@@ -3601,7 +3624,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCreateElement_NoNS()
@@ -3626,7 +3649,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testParse_SingleNS()
@@ -3648,7 +3671,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendXMLComment()
@@ -3670,8 +3693,8 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testUniqueID()
@@ -3685,7 +3708,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendAttribute()
@@ -3721,7 +3744,7 @@ public class KElementTest extends JDFTestCaseBase
 	// /
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testToString()
@@ -3732,7 +3755,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testToXML()
@@ -3746,7 +3769,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testToXMLParse()
@@ -3759,7 +3782,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testToXMLParseNS()
@@ -3778,7 +3801,7 @@ public class KElementTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetComment()
@@ -3789,7 +3812,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testTextMethods()
@@ -3844,7 +3867,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFillHashSet()
@@ -3876,7 +3899,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * test the flush method also for xml comments, cdata and similar crap
 	 */
 	@Test
@@ -3896,8 +3919,8 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testWrite2File()
@@ -3913,8 +3936,8 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testWrite2Stream()

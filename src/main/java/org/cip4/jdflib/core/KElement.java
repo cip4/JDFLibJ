@@ -2678,9 +2678,11 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param bAnd if true, a child is only returned if it has all attributes specified in mAttrib
 	 * @return KElement the found child (element or node), null if index < 0 or index < number of matching children
 	 */
-	public KElement getChildByTagName(final String s, final String nameSpaceURI, final int index, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd)
+	public KElement getChildByTagName(final String s, final String nameSpaceURI, int index, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd)
 	{
 		final VElement v = getChildrenByTagName(s, nameSpaceURI, mAttrib, bDirect, bAnd, index + 1);
+		if (index < 0)
+			index += v.size();
 		if ((index >= 0) && (v.size() > index))
 		{
 			return v.item(index);
