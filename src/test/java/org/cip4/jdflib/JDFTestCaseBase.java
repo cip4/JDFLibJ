@@ -526,9 +526,16 @@ public abstract class JDFTestCaseBase extends TestCase
 		XJDF20 xjdfConv = new XJDF20();
 		KElement root = xjdfConv.convert(jxRoot);
 
-		root.write2File(sm_dirTestDataTemp + fileBase + ".jdf.xjdf");
-		assertTrue(fileBase + ".jdf", ((JDFElement) root).isValid(EnumValidationLevel.Complete));
-
+		String roundXjdf = sm_dirTestDataTemp + fileBase + ".jdf.xjdf";
+		root.write2File(roundXjdf);
+		docXJDF = p.parseFile(roundXjdf);
+		dVal = docXJDF.getValidationResult();
+		valResult = dVal.getRoot().getAttribute("ValidationResult");
+		if (!"Valid".equals(valResult))
+		{
+			dVal.write2File(sm_dirTestDataTemp + fileBase + ".val.jdf.xml", 2, false);
+		}
+		assertEquals(valResult, "Valid");
 	}
 
 	/**

@@ -2912,6 +2912,23 @@ public class JDFElement extends KElement
 	}
 
 	/**
+	* checks whether kElem is in the JDF namespace
+	*
+	* @param kElem the KElement to check
+	* @return boolean - true, if kElem is in the JDF namespace
+	*/
+	public static boolean isInXJDFNameSpaceStatic(final KElement kElem)
+	{
+		if (kElem == null)
+		{
+			return false; // null ain't no jdf
+		}
+
+		final String ns = kElem.getNamespaceURI();
+		return isInXJDFNameSpaceStatic(ns);
+	}
+
+	/**
 	 * gets an inter resource link to a target resource. if target is a partition, the refElement MUST point exactly to that partition
 	 *
 	 * @param target - Target resource to link to

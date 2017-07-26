@@ -376,12 +376,12 @@ public class JDFDateTest extends JDFTestCaseBase
 	{
 		long l = System.currentTimeMillis();
 		JDFDate date = new JDFDate("" + l);
-		assertEquals(date.getTimeInMillis(), l, 2000);
+		assertEquals(date.getTimeInMillis(), l, 3000);
 		date = new JDFDate("" + (l / 1000));
-		assertEquals(date.getTimeInMillis(), l, 4000);
+		assertEquals(date.getTimeInMillis(), l, 5000);
 		date = new JDFDate("" + ((l / 1000) - 365 * 24 * 3600 * 5));
 		date.addOffset(0, 0, 0, 365 * 5);
-		assertEquals(date.getTimeInMillis(), l, 6000);
+		assertEquals(date.getTimeInMillis(), l, 7000);
 	}
 
 	/**

@@ -93,7 +93,7 @@ import org.junit.Test;
 public class XJDFProcessExampleTest extends JDFTestCaseBase
 {
 	/**
-	* tests the separationlist class
+	*
 	*
 	*/
 	@Test
@@ -138,6 +138,27 @@ public class XJDFProcessExampleTest extends JDFTestCaseBase
 
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "processes/deliverydrops.xjdf");
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public final void testQualityControl()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper("QualityControlExample", null, null);
+		xjdfHelper.addType(EnumType.ConventionalPrinting.getName(), 0);
+		xjdfHelper.addType(EnumType.QualityControl.getName(), -1);
+
+		xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
+		SetHelper qqp = xjdfHelper.getCreateSet(ElementName.QUALITYCONTROLPARAMS, EnumUsage.Input);
+		ResourceHelper qpr = qqp.appendPartition(null, true);
+		qpr.getRoot().appendElement("cc:CxF", "http://colorexchangeformat.com/CxF3-core");
+		qpr.getResource().setAttribute(AttributeName.SAMPLEINTERVAL, "42");
+		cleanSnippets(xjdfHelper);
+		writeRoundTripX(xjdfHelper.getRoot(), "QualityControlCxF");
+
 	}
 
 	/**

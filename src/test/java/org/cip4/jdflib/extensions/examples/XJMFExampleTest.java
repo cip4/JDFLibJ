@@ -613,4 +613,48 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		writeTest(xjmfHelper, "jmf/extendQueryMixed.xjmf");
 	}
 
+	/**
+	*
+	*
+	*/
+	@Test
+	public final void testQualityControlSubscription()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Resource);
+		s.getHeader().setID("QC1");
+		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
+		JDFResourceQuParams rqp = (JDFResourceQuParams) s.appendElement(ElementName.RESOURCEQUPARAMS);
+		rqp.setResourceName(ElementName.QUALITYCONTROLPARAMS);
+		rqp.setAttribute(AttributeName.SCOPE, "Job");
+		JDFSubscription sub = s.subscribe("http://MIS:1234/xjmfurl");
+		sub.setRepeatTime(120);
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeRoundTripX(xjmfHelper.getRoot(), "QualityControlSubscription");
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public final void testQualityControlSignal()
+	{
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
+		s.getHeader().setID("S1");
+		s.getHeader().setAttribute(AttributeName.REFID, "QC1");
+		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
+
+		SetHelper qqp = xjdfHelper.getCreateSet(ElementName.QUALITYCONTROLPARAMS, EnumUsage.Input);
+		ResourceHelper qpr = qqp.appendPartition(null, true);
+		qpr.getRoot().appendElement("cc:CxF", "http://colorexchangeformat.com/CxF3-core");
+		qpr.getResource().setAttribute(AttributeName.SAMPLEINTERVAL, "42");
+		cleanSnippets(xjdfHelper);
+		writeRoundTripX(xjdfHelper.getRoot(), "QualityControlCxF");
+
+	}
+
 }

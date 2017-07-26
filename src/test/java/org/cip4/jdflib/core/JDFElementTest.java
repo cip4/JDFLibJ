@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.core;
 
@@ -131,7 +131,7 @@ import org.junit.Test;
 
 /**
  * @author MuchaD
- * 
+ *
  * This implements the first fixture with unit tests for class JDFElement.
  */
 public class JDFElementTest extends JDFTestCaseBase
@@ -145,7 +145,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	private JDFElement m_jdfElement;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendElement()
@@ -163,7 +163,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendGeneralID()
@@ -179,7 +179,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testSetGeneralID()
@@ -195,7 +195,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCopyElement()
@@ -216,7 +216,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 */
 	@Test
@@ -232,7 +232,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 */
 	@Test
@@ -250,7 +250,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 */
 	@Test
@@ -284,7 +284,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNameSpaceElement()
@@ -305,7 +305,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveExtensions()
@@ -321,7 +321,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveChild()
@@ -351,7 +351,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetInvalidAttributes()
@@ -364,7 +364,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetGeneralID()
@@ -381,7 +381,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testGetHRefs()
@@ -408,7 +408,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFixVersion()
@@ -429,7 +429,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testDefaultVersion()
@@ -457,7 +457,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void testEnumSeparation()
 	{
@@ -466,7 +466,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void testEnumVersion()
 	{
@@ -476,7 +476,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEvaluateXY()
@@ -511,7 +511,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////
 	/**
 	 * Method testGenerateDotID.
-	 * 
+	 *
 	 */
 	@Test
 	public void testGenerateDotID()
@@ -552,7 +552,7 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testIncludesMatchingAttribute.
-	 * 
+	 *
 	 */
 	@Test
 	public void testIncludesMatchingAttribute()
@@ -580,7 +580,7 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testChildElementVector.
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetRefElement()
@@ -602,7 +602,7 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testChildElementVector.
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetCreateElement()
@@ -616,7 +616,7 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testChildElementVector.
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetCreateRefElement()
@@ -651,7 +651,7 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testChildElementVector.
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetChildElementVector()
@@ -667,7 +667,7 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testChildElementVector.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -693,7 +693,7 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testChildElementVector.
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetParentJDFStatic()
@@ -711,7 +711,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetSettingsPolicy()
@@ -726,7 +726,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetSchemaVersion()
@@ -739,7 +739,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetValueForNewAttribute()
@@ -750,7 +750,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetVersion()
@@ -761,7 +761,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testOrientationMap()
@@ -771,7 +771,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetParentJDFNode()
@@ -792,7 +792,7 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetElementByID.
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetElementByID()
@@ -834,7 +834,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsCommentStatic()
@@ -847,7 +847,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsInJDFNamespaceStatic()
@@ -858,7 +858,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsInXJDFNamespaceStatic()
@@ -867,7 +867,16 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
+	 */
+	@Test
+	public void testIsInXJDFNamespaceStaticElem()
+	{
+		assertTrue(JDFElement.isInXJDFNameSpaceStatic(new XJDFHelper("j1", null, null).getRoot()));
+	}
+
+	/**
+	 *
 	 */
 	@Test
 	public void testXJDF()
@@ -876,7 +885,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsDeprecated()
@@ -890,7 +899,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsResourceStatic()
@@ -905,7 +914,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsResourceLinkStatic()
@@ -918,7 +927,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testInheritedVersionInfo()
@@ -934,7 +943,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMatchesPathKElement()
@@ -957,7 +966,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMatchesPath()
@@ -995,7 +1004,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRefElement()
@@ -1059,7 +1068,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsValid()
@@ -1109,7 +1118,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToDirJMF()
@@ -1125,8 +1134,8 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws CloneNotSupportedException 
-	 * 
+	 * @throws CloneNotSupportedException
+	 *
 	 */
 	@Test
 	public void testCloneNewDoc() throws CloneNotSupportedException
@@ -1150,7 +1159,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCache()
@@ -1198,7 +1207,7 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetElementByID.
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetDeepElementByID()
@@ -1230,7 +1239,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIncrementUniqueID()
@@ -1245,7 +1254,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testUniqueID()
@@ -1266,7 +1275,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testInvalidNameSpace()
@@ -1283,7 +1292,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendAnchor()
@@ -1307,7 +1316,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testAppendAnchorJMF()
@@ -1323,7 +1332,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testVersions()
@@ -1333,7 +1342,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMinorVersions()
@@ -1344,7 +1353,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMajorVersions()
@@ -1357,7 +1366,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetEnumerationsAttribute()
@@ -1374,8 +1383,8 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws DataFormatException 
-	 * 
+	 * @throws DataFormatException
+	 *
 	 */
 	@Test
 	public void testSetAttributeNumList() throws DataFormatException
@@ -1388,7 +1397,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetXSIType()
@@ -1402,7 +1411,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testStatusEquals()

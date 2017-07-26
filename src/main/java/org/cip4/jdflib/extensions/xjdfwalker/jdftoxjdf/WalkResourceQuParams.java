@@ -66,88 +66,58 @@
  *
  *
  */
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-package org.cip4.jdflib.extensions;
-
-import java.util.HashSet;
-import java.util.Set;
-
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFResourceQuParams;
 
-class XJDFCleanupComparator extends KElement.SimpleElementNameComparator
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ */
+public class WalkResourceQuParams extends WalkJDFSubElement
 {
-
 	/**
 	 *
 	 */
-	public XJDFCleanupComparator()
+	public WalkResourceQuParams()
 	{
 		super();
 	}
 
-	private static Set<String> retain = null;
-
 	/**
-	 * @see org.cip4.jdflib.core.KElement.SimpleElementNameComparator#compare(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
 	@Override
-	public int compare(KElement o1, KElement o2)
+	public boolean matches(final KElement toCheck)
 	{
-		if (o1 != null && o2 != null)
-		{
-			String name1 = o1.getLocalName();
-			String name2 = o2.getLocalName();
-			if (XJDFConstants.Header.equals(name1))
-			{
-				return XJDFConstants.Header.equals(name2) ? 0 : -1;
-			}
-			if (XJDFConstants.Header.equals(name2))
-			{
-				return 1;
-			}
-
-			KElement parent = o1.getParentNode_KElement();
-			if (mustRetain(parent))
-			{
-				return 0;
-			}
-			if (ElementName.SUBSCRIPTION.equals(name1))
-			{
-				return ElementName.SUBSCRIPTION.equals(name2) ? 0 : -1;
-			}
-			if (ElementName.SUBSCRIPTION.equals(name2))
-			{
-				return 1;
-			}
-			if (JDFElement.isInXJDFNameSpaceStatic(o2.getNamespaceURI()) && !JDFElement.isInXJDFNameSpaceStatic(o1.getNamespaceURI()))
-			{
-				return JDFElement.isInXJDFNameSpaceStatic(o2.getNamespaceURI()) ? 1 : -1;
-			}
-			if (ResourceHelper.isResourceElement(o1))
-			{
-				return 1;
-			}
-			if (ResourceHelper.isResourceElement(o2))
-			{
-				return -1;
-			}
-		}
-		return super.compare(o1, o2);
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFResourceQuParams;
 	}
 
-	private boolean mustRetain(KElement parent)
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(JDFAttributeMap map)
 	{
-		if (retain == null)
-		{
-			retain = new HashSet<>();
-			retain.add(ElementName.AUDITPOOL);
-			retain.add(ElementName.MEDIALAYERS);
-			retain.add(XJDFConstants.XJMF);
-		}
+		String val = map.renameKey(AttributeName.CONTEXT, AttributeName.SCOPE);
+		if (!"Job".equals(val))
+			map.put(AttributeName.SCOPE, "Present");
+		super.updateAttributes(map);
+	}
 
-		return parent == null ? false : retain.contains(parent.getLocalName());
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return new VString(ElementName.RESOURCEQUPARAMS, null);
 	}
 
 }
