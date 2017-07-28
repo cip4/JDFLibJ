@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 
 /**
@@ -75,6 +76,20 @@ import org.cip4.jdflib.core.KElement;
  */
 public class AuditHelper extends MessageHelper
 {
+
+	/**
+	 *
+	 * @return
+	 */
+	public static boolean isAudit(KElement element)
+	{
+		String localName = element == null ? null : element.getLocalName();
+		if (localName == null)
+		{
+			return false;
+		}
+		return localName.startsWith(ElementName.AUDIT);
+	}
 
 	/**
 	 * @param audit

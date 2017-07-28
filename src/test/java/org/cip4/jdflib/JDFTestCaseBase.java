@@ -369,6 +369,10 @@ public abstract class JDFTestCaseBase extends TestCase
 		}
 	}
 
+	/**
+	 *
+	 * @param h
+	 */
 	protected void cleanSnippets(XJDFHelper h)
 	{
 		if (h == null || h.getRoot() == null)

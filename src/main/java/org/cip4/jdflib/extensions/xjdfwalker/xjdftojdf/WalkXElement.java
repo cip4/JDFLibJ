@@ -132,8 +132,9 @@ public class WalkXElement extends BaseWalker
 		else
 		{
 			String nodeName = getJDFName(e);
-			final KElement e2 = trackElem.appendElement(nodeName);
+			final KElement e2 = trackElem.appendElement(nodeName, e.getNamespaceURI());
 			e2.setAttributes(e);
+			e2.setText(e.getText());
 			fixNamespace(e2);
 			trackElem = e2;
 		}
@@ -146,6 +147,7 @@ public class WalkXElement extends BaseWalker
 			JDFAttributeMap map = trackElem.getAttributeMap_KElement();
 			((JDFElement) trackElem).init();
 			trackElem.setAttributes(map);
+			trackElem.getText();
 		}
 		updateAttributes(trackElem);
 		return trackElem;
@@ -158,7 +160,10 @@ public class WalkXElement extends BaseWalker
 	 */
 	String getJDFName(KElement e)
 	{
-		return e.getLocalName();
+		if (JDFElement.isInXJDFNameSpaceStatic(e))
+			return e.getLocalName();
+		else
+			return e.getNodeName();
 	}
 
 	/**
@@ -203,8 +208,7 @@ public class WalkXElement extends BaseWalker
 	 */
 	private void fixNamespace(KElement e2)
 	{
-		String namespace = e2.getNamespaceURI();
-		if (JDFElement.getSchemaURL(2, 0).equals(StringUtil.leftStr(namespace, -1) + 0))
+		if (JDFElement.isInXJDFNameSpaceStatic(e2))
 		{
 			e2.setNamespaceURI(JDFElement.getSchemaURL(1, 1));
 			if (StringUtil.getNonEmpty(e2.getPrefix()) != null)
@@ -251,32 +255,39 @@ public class WalkXElement extends BaseWalker
 	 */
 	protected JDFNode getNode(KElement xjdfRes, KElement jdfNode)
 	{
-		JDFNode theNode = (JDFNode) jdfNode;
-		final JDFPart part = (JDFPart) xjdfRes.getElement(ElementName.PART);
-		JDFAttributeMap partMap = part == null ? null : part.getAttributeMap();
-		if (partMap != null)
+		if (jdfNode instanceof JDFNode)
 		{
-			String productID = StringUtil.getNonEmpty(partMap.get(AttributeName.PRODUCTPART));
-			if (productID != null)
+			JDFNode theNode = (JDFNode) jdfNode;
+			final JDFPart part = (JDFPart) xjdfRes.getElement(ElementName.PART);
+			JDFAttributeMap partMap = part == null ? null : part.getAttributeMap();
+			if (partMap != null)
 			{
-				JDFNode newNode = (JDFNode) theNode.getChildWithAttribute(ElementName.JDF, AttributeName.ID, null, productID, 0, false);
-				if (newNode != null)
+				String productID = StringUtil.getNonEmpty(partMap.get(AttributeName.PRODUCTPART));
+				if (productID != null)
 				{
+					JDFNode newNode = (JDFNode) theNode.getChildWithAttribute(ElementName.JDF, AttributeName.ID, null, productID, 0, false);
+					if (newNode != null)
+					{
+						theNode = newNode;
+					}
+				}
+				String types = StringUtil.getNonEmpty(partMap.get(XJDFConstants.ProcessTypes));
+				if (types != null && theNode.isProduct())
+				{
+					JDFNode newNode = (JDFNode) theNode.getChildWithAttribute(ElementName.JDF, AttributeName.TYPES, null, types, 0, false);
+					if (newNode == null)
+					{
+						newNode = theNode.addProcessGroup(new VString(types, null));
+					}
 					theNode = newNode;
 				}
 			}
-			String types = StringUtil.getNonEmpty(partMap.get(XJDFConstants.ProcessTypes));
-			if (types != null && theNode.isProduct())
-			{
-				JDFNode newNode = (JDFNode) theNode.getChildWithAttribute(ElementName.JDF, AttributeName.TYPES, null, types, 0, false);
-				if (newNode == null)
-				{
-					newNode = theNode.addProcessGroup(new VString(types, null));
-				}
-				theNode = newNode;
-			}
+			return theNode;
 		}
-		return theNode;
+		else
+		{
+			return null;
+		}
 	}
 
 	/**

@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,33 +54,26 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.pool.JDFResourcePool;
-import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
-import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -89,7 +82,7 @@ import org.cip4.jdflib.util.StringUtil;
 public class WalkSet extends WalkXElement
 {
 	/**
-	 * 
+	 *
 	 */
 	public WalkSet()
 	{
@@ -99,26 +92,29 @@ public class WalkSet extends WalkXElement
 	/**
 	 * @param xjdf
 	 * @param jdf
-	 * 
+	 *
 	 * @return the current parent node
 	 */
 	@Override
 	public KElement walk(final KElement xjdf, final KElement jdf)
 	{
-		final JDFNode parentNode = (JDFNode) jdf;
-		String procUsage = StringUtil.getNonEmpty(xjdf.getAttribute(AttributeName.PROCESSUSAGE));
-		if (ProductHelper.PRODUCT.equals(procUsage))
+		if (jdf instanceof JDFNode)
 		{
-			if (!EnumType.Product.equals(parentNode.getEnumType()))
+			final JDFNode parentNode = (JDFNode) jdf;
+			String procUsage = StringUtil.getNonEmpty(xjdf.getAttribute(AttributeName.PROCESSUSAGE));
+			if (ProductHelper.PRODUCT.equals(procUsage))
 			{
-				return null;
+				if (!EnumType.Product.equals(parentNode.getEnumType()))
+				{
+					return null;
+				}
 			}
 		}
 		return jdf;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param e
 	 * @return
 	 */
@@ -137,11 +133,7 @@ public class WalkSet extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		final KElement parent = toCheck.getParentNode_KElement();
-		final boolean bL1 = parent != null && (parent.getLocalName().equals(XJDFConstants.XJDF) || parent.getLocalName().equals("Product"));
-		final String localName = toCheck.getLocalName();
-		return bL1 && super.matches(toCheck) && localName.endsWith("Set")
-				&& (toCheck.hasAttribute(AttributeName.NAME) || toCheck.getElement(StringUtil.leftStr(localName, -3)) != null);
+		return SetHelper.isSet(toCheck);
 	}
 
 }

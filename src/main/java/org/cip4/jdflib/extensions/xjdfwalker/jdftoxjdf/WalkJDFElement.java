@@ -568,7 +568,8 @@ public class WalkJDFElement extends WalkElement
 	protected void setSetAttributes(final KElement resourceSet, final KElement rl, final JDFResource linkRoot)
 	{
 		resourceSet.setAttribute(AttributeName.NAME, jdfToXJDF.getSetName(linkRoot));
-		resourceSet.setAttributes(rl);
+		if (rl instanceof JDFResourceLink)
+			resourceSet.setAttributes(rl);
 		if (linkRoot.hasAttribute(AttributeName.UNIT))
 			resourceSet.moveAttribute(AttributeName.UNIT, linkRoot);
 
@@ -586,8 +587,8 @@ public class WalkJDFElement extends WalkElement
 		resourceSet.removeAttribute(AttributeName.PIPERESUME);
 		if (rl instanceof JDFResourceInfo)
 		{
-			resourceSet.removeAttribute(AttributeName.JOBID);
-			resourceSet.removeAttribute(AttributeName.JOBPARTID);
+			resourceSet.copyAttribute(AttributeName.USAGE, rl);
+			resourceSet.copyAttribute(AttributeName.PROCESSUSAGE, rl);
 		}
 		if (jdfToXJDF.isSingleNode())
 		{

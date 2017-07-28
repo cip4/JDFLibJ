@@ -140,7 +140,7 @@ class PostConverter
 		String type = StringUtil.getNonEmpty(root.getType());
 		if (type == null || XJDFConstants.Product.equals(type))
 		{
-			xjdfToJDFImpl.mergeProductLinks(theNode, root);
+			mergeProductLinks(theNode, root);
 		}
 		fixDelivery();
 		new GangCleaner().cleanGangLinks();
@@ -512,5 +512,60 @@ class PostConverter
 	public String toString()
 	{
 		return "PostConverter [theNode=" + theNode + "]";
+	}
+
+	/**
+	 * @param childNode
+	 * @param parentProduct
+	 * @param resName
+	 * @param enumUsage
+	 */
+	private JDFResource mergeProductLink(final JDFNode childNode, final JDFNode parentProduct, final String resName, final EnumUsage enumUsage)
+	{
+		JDFResource r = parentProduct.getResource(resName, enumUsage, 0);
+		int n = 0;
+		while (r == null)
+		{
+			final JDFResourceLink link = childNode.getLink(n, resName, new JDFAttributeMap(AttributeName.USAGE, enumUsage), null);
+			if (link == null)
+			{
+				break;
+			}
+			else if (link.getCombinedProcessIndex() == null)
+			{
+				r = link.getLinkRoot();
+				parentProduct.ensureLink(r, enumUsage, null);
+			}
+			n++;
+		}
+		return r;
+	}
+
+	/**
+	 * @param childNode
+	 * @param parentProduct
+	 */
+	void mergeProductLinks(final JDFNode childNode, final JDFNode parentProduct)
+	{
+		if (childNode == parentProduct)
+			return;
+
+		mergeProductLink(childNode, parentProduct, ElementName.CUSTOMERINFO, EnumUsage.Input);
+		JDFResource ni = mergeProductLink(childNode, parentProduct, ElementName.NODEINFO, EnumUsage.Input);
+		if (ni == null)
+		{
+			parentProduct.appendNodeInfo().setDescriptiveName("Generated root NodeInfo");
+		}
+		final JDFResource r = parentProduct.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+		if (r != null && "dummy outout".equals(r.getDescriptiveName()))
+		{
+			final JDFResource rNode = childNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+			if (rNode != null)
+			{
+				parentProduct.getLink(r, EnumUsage.Output).deleteNode();
+				r.deleteNode();
+			}
+		}
+		mergeProductLink(childNode, parentProduct, ElementName.COMPONENT, EnumUsage.Output);
 	}
 }

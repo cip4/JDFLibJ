@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.MessageHelper;
+import org.cip4.jdflib.extensions.MessageResourceHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -101,6 +102,7 @@ import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFQualityControlResult;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.Test;
 
@@ -643,17 +645,19 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
+		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Resource);
 		s.getHeader().setID("S1");
 		s.getHeader().setAttribute(AttributeName.REFID, "QC1");
 		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
-
-		SetHelper qqp = xjdfHelper.getCreateSet(ElementName.QUALITYCONTROLPARAMS, EnumUsage.Input);
+		MessageResourceHelper mr = new MessageResourceHelper(s.getRoot());
+		SetHelper qqp = mr.appendSet(ElementName.QUALITYCONTROLRESULT);
 		ResourceHelper qpr = qqp.appendPartition(null, true);
-		qpr.getRoot().appendElement("cc:CxF", "http://colorexchangeformat.com/CxF3-core");
-		qpr.getResource().setAttribute(AttributeName.SAMPLEINTERVAL, "42");
-		cleanSnippets(xjdfHelper);
-		writeRoundTripX(xjdfHelper.getRoot(), "QualityControlCxF");
+		qpr.getRoot().appendElement("cc:CxF", "http://colorexchangeformat.com/CxF3-core").setText("CxF Measurement datas in here");
+		JDFQualityControlResult qcr = (JDFQualityControlResult) qpr.getResource();
+		qcr.setPassed(42);
+		qcr.setFailed(3);
+		setSnippet(xjmfHelper, true);
+		writeRoundTripX(xjmfHelper.getRoot(), "QualityControlSignalCxF");
 
 	}
 

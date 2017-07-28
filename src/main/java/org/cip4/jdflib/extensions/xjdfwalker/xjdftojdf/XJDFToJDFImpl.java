@@ -407,7 +407,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 */
 	protected JDFNode createProductRoot()
 	{
-		final JDFNode parent = (JDFNode) jdfDoc.createElement("JDF");
+		final JDFNode parent = (JDFNode) jdfDoc.createElement(ElementName.JDF);
 		parent.setType(EnumType.Product);
 		JDFNode oldParent = jdfDoc.getJDFRoot();
 		oldParent = (JDFNode) parent.moveElement(oldParent, null);
@@ -424,7 +424,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		c.setDescriptiveName("dummy output");
 		c.setComponentType(EnumComponentType.FinalProduct, null);
 
-		mergeProductLinks(oldParent, parent);
 		firstConvert = true;
 		return parent;
 	}
@@ -470,50 +469,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 						}
 					}
 				}
-			}
-		}
-	}
-
-	/**
-	 * @param theNode
-	 * @param parent
-	 */
-	void mergeProductLinks(final JDFNode theNode, final JDFNode parent)
-	{
-		if (theNode == parent)
-			return;
-
-		mergeProductLink(theNode, parent, ElementName.CUSTOMERINFO, EnumUsage.Input);
-		mergeProductLink(theNode, parent, ElementName.NODEINFO, EnumUsage.Input);
-		final JDFResource r = parent.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
-		if (r != null && "dummy outout".equals(r.getDescriptiveName()))
-		{
-			final JDFResource rNode = theNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
-			if (rNode != null)
-			{
-				parent.getLink(r, EnumUsage.Output).deleteNode();
-				r.deleteNode();
-			}
-		}
-		mergeProductLink(theNode, parent, ElementName.COMPONENT, EnumUsage.Output);
-	}
-
-	/**
-	 * @param theNode
-	 * @param parent
-	 * @param resName
-	 * @param enumUsage
-	 */
-	private void mergeProductLink(final JDFNode theNode, final JDFNode parent, final String resName, final EnumUsage enumUsage)
-	{
-		final JDFResource r = parent.getResource(resName, enumUsage, 0);
-
-		if (r == null)
-		{
-			final JDFResourceLink link = theNode.getLink(0, resName, new JDFAttributeMap("Usage", enumUsage), null);
-			if (link != null)
-			{
-				parent.ensureLink(link.getLinkRoot(), enumUsage, null);
 			}
 		}
 	}
@@ -591,7 +546,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		for (final String gw : vGW)
 		{
 			final JDFAttributeMap pm = new JDFAttributeMap(partmap);
-			pm.put("Condition", gw);
+			pm.put(AttributeName.CONDITION, gw);
 			if (map.get(a + gw) != null)
 			{
 				rl.setAmountPoolAttribute(a, map.get(a + gw), null, pm);

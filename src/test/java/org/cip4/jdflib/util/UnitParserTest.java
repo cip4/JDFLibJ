@@ -149,6 +149,27 @@ public class UnitParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testAdd()
+	{
+		assertEquals(unitParser.extractUnits("0.1CM"), "2.8346");
+		assertEquals(unitParser.extractUnits("10Cm 10  mm"), "283.4646 28.3465");
+		assertEquals(unitParser.extractUnits("10 In 10 MM"), "720 28.3465");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testKey()
+	{
+		assertEquals(unitParser.extractUnits(AttributeName.LENGTH, "0.1CM"), "2.8346");
+		assertEquals(unitParser.extractUnits(AttributeName.JOBID, "0.1CM"), "0.1CM");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testDataType()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();

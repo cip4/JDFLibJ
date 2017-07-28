@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
 import org.cip4.jdflib.extensions.AuditPoolHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
@@ -225,6 +226,63 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		JDFNodeInfo nij = docjdf.getJDFRoot().getNodeInfo();
 		assertEquals(EnumResStatus.Available, nij.getResStatus(false));
 		assertEquals(EnumNodeStatus.InProgress, nij.getNodeStatus());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testNodeInfoMulti()
+	{
+		XJDFHelper h = new XJDFHelper("j", "p", null);
+		h.getCreateRootProduct(0);
+		h.setTypes(EnumType.ImageSetting.getName());
+		h.addType(EnumType.ConventionalPrinting);
+		SetHelper set = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
+		ResourceHelper partition = set.getCreatePartition(0, true);
+		set.setCombinedProcessIndex(new JDFIntegerList(0));
+		partition.setStatus(EnumResStatus.Available);
+		JDFNodeInfo ni = (JDFNodeInfo) partition.getResource();
+		ni.setAttribute(AttributeName.STATUS, "InProgress");
+
+		XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		conv.setCreateProduct(true);
+		JDFDoc docjdf = conv.convert(h);
+		JDFNodeInfo nij1 = docjdf.getJDFRoot().getJDF(0).getNodeInfo();
+		assertEquals(EnumResStatus.Available, nij1.getResStatus(false));
+		assertEquals(EnumNodeStatus.InProgress, nij1.getNodeStatus());
+		JDFNodeInfo nij = docjdf.getJDFRoot().getNodeInfo();
+		assertNotNull(nij);
+		assertNotSame(nij1, nij);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testNodeInfoMultiNoCPI()
+	{
+		XJDFHelper h = new XJDFHelper("j", "p", null);
+		h.getCreateRootProduct(0);
+		h.setTypes(EnumType.ImageSetting.getName());
+		h.addType(EnumType.ConventionalPrinting);
+		SetHelper set = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
+		ResourceHelper partition = set.getCreatePartition(0, true);
+		partition.setStatus(EnumResStatus.Available);
+		JDFNodeInfo ni = (JDFNodeInfo) partition.getResource();
+		ni.setAttribute(AttributeName.STATUS, "InProgress");
+
+		XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		conv.setCreateProduct(true);
+		JDFDoc docjdf = conv.convert(h);
+		JDFNodeInfo nij1 = docjdf.getJDFRoot().getJDF(0).getNodeInfo();
+		assertEquals(EnumResStatus.Available, nij1.getResStatus(false));
+		assertEquals(EnumNodeStatus.InProgress, nij1.getNodeStatus());
+		JDFNodeInfo nij = docjdf.getJDFRoot().getNodeInfo();
+		assertNotNull(nij);
+		assertEquals(nij1, nij);
 	}
 
 	/**

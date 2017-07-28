@@ -3445,7 +3445,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 *
-	
+
 	 *
 	 */
 
@@ -4147,6 +4147,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			return this;
 		}
 		return getJobPart(nodeID.getJobPartID(), nodeID.getJobID());
+	}
+
+	/**
+	 * getJobPart - get a child node with a given jobpartid
+	 *
+	 * @param nodeID the NodeIdentifier of the job part
+	 *
+	 * @return JDFNode
+	 *
+	 */
+	public JDFNode getJDF(int iSkip)
+	{
+		return (JDFNode) getElement(ElementName.JDF, null, iSkip);
 	}
 
 	/**

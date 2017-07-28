@@ -111,6 +111,18 @@ public class MessageResourceHelper extends MessageHelper
 	 *
 	 * @return
 	 */
+	public SetHelper appendSet(String setName)
+	{
+		KElement set = theElement.getCreateElement(ElementName.RESOURCEINFO).getCreateElement(XJDFConstants.ResourceSet);
+		SetHelper setHelper = new SetHelper(set);
+		setHelper.setName(setName);
+		return setHelper;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
 	public SetHelper copySet(SetHelper sh)
 	{
 		KElement oldSet = sh == null ? null : sh.getRoot();
@@ -122,7 +134,9 @@ public class MessageResourceHelper extends MessageHelper
 				getSet().deleteNode();
 			}
 			KElement set = ri.copyElement(oldSet, null);
-			return new SetHelper(set);
+			SetHelper setHelper = new SetHelper(set);
+			setHelper.removeIDs();
+			return setHelper;
 		}
 		else
 		{

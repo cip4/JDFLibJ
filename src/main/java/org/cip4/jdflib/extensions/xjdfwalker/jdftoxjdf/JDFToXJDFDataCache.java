@@ -206,7 +206,7 @@ class JDFToXJDFDataCache
 	private VString generateResourceAttributes()
 	{
 		VString resAttribs = new VString();
-		final JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc("ResourcePool").getRoot();
+		final JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc(ElementName.RESOURCEPOOL).getRoot();
 		final JDFResource intRes = dummyResPool.appendResource("intent", EnumResourceClass.Intent, null);
 		final JDFResource physRes = dummyResPool.appendResource("physical", EnumResourceClass.Consumable, null);
 		final JDFResource paramRes = dummyResPool.appendResource("param", EnumResourceClass.Parameter, null);

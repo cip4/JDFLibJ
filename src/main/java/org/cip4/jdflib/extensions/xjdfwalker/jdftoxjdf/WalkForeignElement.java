@@ -66,108 +66,57 @@
  *
  *
  */
-package org.cip4.jdflib.extensions.examples;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.extensions.ProductHelper;
+import org.cip4.jdflib.extensions.AuditHelper;
+import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.extensions.XJDFHelper;
-import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
-import org.junit.Test;
 
 /**
- *
- * @author rainer prosi
- *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
-public class XJDFProcessExampleTest extends JDFTestCaseBase
+public class WalkForeignElement extends WalkElement
 {
-	/**
-	*
-	*
-	*/
-	@Test
-	public final void testCombined()
-	{
-		XJDFHelper xjdfHelper = new XJDFHelper("CombinedExample", null, null);
-		xjdfHelper.addType(EnumType.Interpreting.getName(), 0);
-		xjdfHelper.addType(EnumType.Rendering.getName(), -1);
-		xjdfHelper.addType(EnumType.DigitalPrinting.getName(), -1);
 
-		cleanSnippets(xjdfHelper);
-		writeTest(xjdfHelper, "processes/CombinedExample.xjdf");
+	/**
+	 *
+	 */
+	public WalkForeignElement()
+	{
+		super();
 	}
 
 	/**
-	*
-	*
-	*/
-	@Test
-	public void testDrops()
-	{
-		XJDFHelper xjdfHelper = new XJDFHelper("splitDelivery", null, null);
-		xjdfHelper.setTypes(JDFConstants.PRODUCT);
-		ProductHelper product = xjdfHelper.getCreateRootProduct(0);
-		product.setAmount(30);
-		product.setProductType("Book");
-		product.setID("IDBook");
-		SetHelper shc = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.CONTACT, EnumUsage.Input);
-		SetHelper shdp = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.DELIVERYPARAMS, EnumUsage.Input);
-		for (int i = 1; i < 3; i++)
-		{
-			JDFAttributeMap map = new JDFAttributeMap("DropID", "Drop" + i);
-			ResourceHelper rhdp = shdp.getCreatePartition(map, true);
-			KElement dropItem = rhdp.getResource().appendElement(ElementName.DROPITEM);
-			dropItem.setAttribute(AttributeName.AMOUNT, "" + (i * 10));
-			dropItem.setAttribute(XJDFConstants.ItemRef, product.getID());
-			map.put(XJDFConstants.ContactType, EnumContactType.Delivery.getName());
-			ResourceHelper rhc = shc.getCreatePartition(map, true);
-			rhc.getResource().appendElement(ElementName.ADDRESS).setAttribute(AttributeName.CITY, "city" + i);
-			rhc.getResource().appendElement(ElementName.PERSON).setAttribute(AttributeName.FIRSTNAME, "Name" + i);
-		}
-
-		cleanSnippets(xjdfHelper);
-		writeTest(xjdfHelper, "processes/deliverydrops.xjdf");
-	}
-
-	/**
-	*
-	*
-	*/
-	@Test
-	public final void testQualityControl()
-	{
-		XJDFHelper xjdfHelper = new XJDFHelper("QualityControlExample", null, null);
-		xjdfHelper.addType(EnumType.ConventionalPrinting.getName(), 0);
-		xjdfHelper.addType(EnumType.QualityControl.getName(), -1);
-
-		xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
-		SetHelper qqp = xjdfHelper.getCreateSet(ElementName.QUALITYCONTROLPARAMS, EnumUsage.Input);
-		ResourceHelper qpr = qqp.appendPartition(null, true);
-		qpr.getRoot().appendElement("cc:CxF", "http://colorexchangeformat.com/CxF3-core").setText("CxF data is in here");
-		qpr.getResource().setAttribute(AttributeName.SAMPLEINTERVAL, "42");
-		cleanSnippets(xjdfHelper);
-		writeRoundTripX(xjdfHelper.getRoot(), "QualityControlCxF");
-
-	}
-
-	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @param jdf
+	 * @param xjdf
+	 * @return the created resource
 	 */
 	@Override
-	protected void setUp() throws Exception
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		JDFElement.setLongID(false);
-		super.setUp();
+		KElement foreignParent = getForeignAllowed(xjdf);
+
+		return foreignParent == null ? null : super.walk(jdf, foreignParent);
+	}
+
+	KElement getForeignAllowed(KElement xjdf)
+	{
+		if (xjdf == null)
+			return null;
+		if (SetHelper.isSet(xjdf) || ResourceHelper.isAsset(xjdf) || MessageHelper.isMessage(xjdf) || AuditHelper.isAudit(xjdf))
+			return xjdf;
+		return getForeignAllowed(xjdf.getParentNode_KElement());
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public boolean matches(KElement e)
+	{
+		return !JDFElement.isInXJDFNameSpaceStatic(e);
 	}
 }

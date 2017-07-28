@@ -83,6 +83,7 @@ import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
@@ -108,10 +109,23 @@ public class WalkXJDFResource extends WalkXElement
 	 * @return the created resource
 	 */
 	@Override
-	public KElement walk(final KElement xjdfRes, final KElement jdfNode)
+	public KElement walk(final KElement xjdfRes, final KElement parent)
 	{
-		JDFNode theNode = getNode(xjdfRes, jdfNode);
-		JDFResource res = getResourceRoot(theNode, xjdfRes);
+		JDFNode theNode = getNode(xjdfRes, parent);
+		final JDFResource res;
+		if (theNode != null)
+		{
+			res = getResourceRoot(theNode, xjdfRes);
+		}
+		else if (parent instanceof JDFResourceInfo)
+		{
+			res = getResInfoRoot((JDFResourceInfo) parent, xjdfRes);
+		}
+		else
+		{
+			return null;
+		}
+
 		final JDFPart part = (JDFPart) xjdfRes.getElement(ElementName.PART);
 		ResourceHelper rh = ResourceHelper.getHelper(xjdfRes);
 		if (rh != null)
@@ -128,8 +142,12 @@ public class WalkXJDFResource extends WalkXElement
 		if (newPartitionElement instanceof JDFResource)
 		{
 			JDFResource newPartition = (JDFResource) newPartitionElement;
-			JDFResourceLink rl = theNode.getLink(newPartition, null);
-			rl = ensureLink(theNode, newPartition, rl);
+			JDFResourceLink rl = null;
+			if (theNode != null)
+			{
+				theNode.getLink(newPartition, null);
+				rl = ensureLink(theNode, newPartition, rl);
+			}
 			final JDFAttributeMap partMap = getPartMap(part);
 			handleAmountPool(xjdfRes, partMap, map, rl);
 		}
@@ -195,6 +213,7 @@ public class WalkXJDFResource extends WalkXElement
 			if (rl == null)
 			{
 				rl = theNode.ensureLinkPU(res, inOut, processUsage);
+				rl.copyAttribute(AttributeName.COMBINEDPROCESSINDEX, sh.getRoot());
 				rl.setrRef(id);
 				res.removeAttribute(AttributeName.USAGE);
 				VString reslinks = XJDFToJDFConverter.getResLinkAttribs();
@@ -216,6 +235,36 @@ public class WalkXJDFResource extends WalkXElement
 
 		}
 		return res;
+	}
+
+	/**
+	 *
+	 * @param theNode
+	 * @param xjdfRes
+	 * @return
+	 */
+	private JDFResource getResInfoRoot(JDFResourceInfo parent, KElement xjdfRes)
+	{
+		ResourceHelper ph = new ResourceHelper(xjdfRes);
+		SetHelper sh = ph.getSet();
+		final String name = getJDFResName(sh);
+		String processUsage = sh.getProcessUsage();
+		parent.setProcessUsage(processUsage);
+		EnumUsage inOut = sh.getUsage();
+		parent.setUsage(inOut);
+		parent.setResourceName(name);
+		JDFResource res = parent.getCreateResource(name);
+
+		VString reslinks = XJDFToJDFConverter.getResLinkAttribs();
+		for (String key : reslinks)
+		{
+			if (res.hasAttribute(key))
+			{
+				parent.moveAttribute(key, res);
+			}
+		}
+		return res;
+
 	}
 
 	private JDFAttributeMap getResMap(final KElement xjdfRes)

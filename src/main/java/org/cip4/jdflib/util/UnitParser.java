@@ -77,6 +77,7 @@ import java.util.Set;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -141,9 +142,24 @@ public class UnitParser
 		}
 	}
 
-	private boolean isUnit(String key)
+	/**
+	 *
+	 * @param key
+	 * @return
+	 */
+	public boolean isUnit(String key)
 	{
 		return unitKeys.contains(key);
+	}
+
+	/**
+	 *
+	 * @param key
+	 * @return
+	 */
+	public void addUnitKey(String key)
+	{
+		unitKeys.add(key);
 	}
 
 	private void getUnitKeys()
@@ -169,6 +185,7 @@ public class UnitParser
 			unitKeys.add(AttributeName.FOLDINGWIDTH + "Back");
 			unitKeys.add(AttributeName.FRONTOVERFOLD);
 			unitKeys.add(AttributeName.HEIGHT);
+			unitKeys.add(AttributeName.LENGTH);
 			unitKeys.add(AttributeName.MILLINGDEPTH);
 			unitKeys.add(AttributeName.PITCH);
 			unitKeys.add(ElementName.POSITION);
@@ -219,6 +236,24 @@ public class UnitParser
 	}
 
 	/**
+	 *
+	 * @param key the attribute name to check
+	 * @param val
+	 * @return
+	 */
+	public String extractUnits(String key, String val)
+	{
+		if (key != null && unitKeys.contains(key))
+		{
+			return extractUnits(val);
+		}
+		else
+		{
+			return val;
+		}
+	}
+
+	/**
 	 * extract units if and only if the string has a pattern of "<##>mm" or "<##>cm"or "<##>in" whitespace characters may be placed between the numbers and the units
 	 * the unit case is ignored
 	 * @param val the string to convert
@@ -231,7 +266,7 @@ public class UnitParser
 			return val;
 		}
 
-		final VString v = StringUtil.tokenize(val, " ", false);
+		final VString v = StringUtil.tokenize(val, JDFConstants.BLANK, false);
 		final VString keep = new VString(v);
 		boolean oneGood = false;
 		int size = v.size();
@@ -257,10 +292,10 @@ public class UnitParser
 
 			if (factor > 0 && i > 0 && tmp == null && StringUtil.isNumber(keep.get(i - 1)))
 			{
-				if (i < 2 || !"\"".equals(v.get(i - 2)))
+				if (i < 2 || !JDFConstants.QUOTE.equals(v.get(i - 2)))
 				{
 					tmp = v.get(i - 1);
-					v.setElementAt("\"", i - 1);
+					v.setElementAt(JDFConstants.QUOTE, i - 1);
 				}
 				else
 				{
@@ -295,7 +330,7 @@ public class UnitParser
 		}
 		if (oneGood)
 		{
-			val = StringUtil.setvString(v, " ", null, null);
+			val = StringUtil.setvString(v, JDFConstants.BLANK, null, null);
 			val = StringUtil.replaceString(val, "\" ", "");
 		}
 		return val;

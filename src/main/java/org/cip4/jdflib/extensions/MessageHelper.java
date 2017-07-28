@@ -92,9 +92,9 @@ public class MessageHelper extends BaseXJDFHelper
 	/**
 	 * @param audit
 	 */
-	public MessageHelper(KElement audit)
+	public MessageHelper(KElement mes)
 	{
-		theElement = audit;
+		theElement = mes;
 	}
 
 	/**
@@ -193,6 +193,21 @@ public class MessageHelper extends BaseXJDFHelper
 	public boolean isQuery()
 	{
 		return theElement != null && theElement.getLocalName().startsWith(ElementName.QUERY);
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public static boolean isMessage(KElement element)
+	{
+		String localName = element == null ? null : element.getLocalName();
+		if (localName == null)
+		{
+			return false;
+		}
+		return localName.startsWith(ElementName.COMMAND) || localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL)
+				|| localName.startsWith(ElementName.RESPONSE);
 	}
 
 	/**
