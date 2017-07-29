@@ -224,10 +224,10 @@ public class UnitParserTest extends JDFTestCaseBase
 	@Test
 	public void testGetFactor()
 	{
-		assertEquals(unitParser.getFactor("cm"), 72. / 2.54);
-		assertEquals(unitParser.getFactor("MM"), 72. / 25.4);
-		assertEquals(unitParser.getFactor("in "), 72.);
-		assertEquals(unitParser.getFactor("a"), 1.);
+		assertEquals(unitParser.getFactor("cm"), 72. / 2.54, 0.0001);
+		assertEquals(unitParser.getFactor("MM"), 72. / 25.4, 0.0001);
+		assertEquals(unitParser.getFactor("in "), 72., 0.0001);
+		assertEquals(unitParser.getFactor("a"), 1., 0.0001);
 	}
 
 	/**

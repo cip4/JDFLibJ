@@ -975,7 +975,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(l, f2.lastModified(), 0);
 		fs.setURL("bad:/blöd");
 		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir, null, true));
-		fs.setURL("http://really_really_not_there.com/isnt/there?aaa");
+		fs.setURL("http:localhost:2");
 		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir, null, true));
 		fs.setURL("./blub.pdf");
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "dummy/blub.pdf"));
@@ -1002,7 +1002,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 		final File newDir = new File(sm_dirTestDataTemp + "newDir");
 		fs.setURL("bad:/blöd");
 		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir, null, true));
-		fs.setURL("http://really_really_not_there.com/isnt/there?aaa");
+		//		fs.setURL("http://really_really_not_there.com/isnt/there?aaa");
+		fs.setURL("http://localhost:2");
 		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir, null, true));
 		fs.setURL("./blub.pdf");
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "dummy/blub.pdf"));

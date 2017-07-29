@@ -1298,7 +1298,8 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		{
 			fail("rectangle");
 		}
-		writeRoundTrip(misNode, "StrippingGang");
+		misNode.addResource(ElementName.LAYOUT, EnumUsage.Output);
+		//TODO		writeRoundTrip(misNode, "StrippingGang");
 	}
 
 }
