@@ -250,7 +250,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 	 */
 	@Override
 	@Before
-	protected void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		dir = new File("./src/main/java/org/cip4/jdflib/auto");

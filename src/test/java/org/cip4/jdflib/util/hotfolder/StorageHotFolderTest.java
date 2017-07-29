@@ -564,7 +564,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	 */
 	@Override
 	@After
-	protected void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		OrderedTaskQueue.shutDownAll();
 		super.tearDown();

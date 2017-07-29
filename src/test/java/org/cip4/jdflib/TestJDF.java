@@ -143,7 +143,7 @@ public class TestJDF extends JDFTestCaseBase
 			spawn.bSpawnIdentical = true;
 			spawn.bSpawnRWPartsMultiple = true;
 			JDFMerge m = new JDFMerge(jdfRoot);
-
+	
 			Vector<JDFNode> vSpawned = new Vector<JDFNode>();
 			for (int ii = 1; ii < 21; ii++)
 			{
@@ -162,7 +162,7 @@ public class TestJDF extends JDFTestCaseBase
 					vamParts.add(amParts0);
 				}
 				final VString vsRWResourceIDs = new VString("Output", null);
-
+	
 				ct.start();
 				JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
 				vSpawned.add(nodeSubJDF);
@@ -183,7 +183,7 @@ public class TestJDF extends JDFTestCaseBase
 			}
 			strOutJDFPath = "/share/data/fehler/PD-68493/giant_merged.jdf";
 			jdfDoc.write2File(strOutJDFPath, 2, false);
-
+	
 		}*/
 
 	/**
@@ -271,7 +271,7 @@ public class TestJDF extends JDFTestCaseBase
 	 */
 	@Override
 	@After
-	protected void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		JDFResource.setUnpartitiondImplicit(false);
 		super.tearDown();

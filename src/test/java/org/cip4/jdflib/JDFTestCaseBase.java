@@ -293,7 +293,7 @@ public abstract class JDFTestCaseBase
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Before
-	protected void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		JDFElement.setDefaultJDFVersion(defaultVersion);
 		senderID = "TestSender";
@@ -324,7 +324,7 @@ public abstract class JDFTestCaseBase
 	 * @see junit.framework.TestCase#tearDown()
 	 */
 	@After
-	protected void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		KElement.setLongID(true);
 		JDFElement.setDefaultJDFVersion(defaultVersion);

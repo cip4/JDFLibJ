@@ -218,7 +218,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 
 	@Override
 	@Before
-	protected void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		defaultSel = ProxySelector.getDefault();
 		super.setUp();
@@ -226,7 +226,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 
 	@Override
 	@After
-	protected void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		super.tearDown();
 		ProxySelector.setDefault(defaultSel);

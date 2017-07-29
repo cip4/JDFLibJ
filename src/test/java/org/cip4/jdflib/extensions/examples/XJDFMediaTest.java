@@ -239,7 +239,7 @@ public class XJDFMediaTest extends JDFTestCaseBase
 	 */
 	@Before
 	@Override
-	protected void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		KElement.setLongID(false);
 	}

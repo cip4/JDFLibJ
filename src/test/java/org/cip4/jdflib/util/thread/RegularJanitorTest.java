@@ -225,7 +225,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 	 */
 	@Override
 	@After
-	protected void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		super.tearDown();
 		RegularJanitor.feierabend();

@@ -316,7 +316,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 	}
 
 	@Override
-	protected void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		currentDate = new JDFDate("2015-09-26T11:43:10+03:00");

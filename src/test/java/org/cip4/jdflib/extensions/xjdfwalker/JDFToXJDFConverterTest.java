@@ -1616,7 +1616,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	protected void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		XJMFTypeMap.shutDown();
 		super.tearDown();

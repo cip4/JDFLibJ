@@ -237,7 +237,7 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	 */
 	@Override
 	@Before
-	protected void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		super.setUp();
 		KElement.setLongID(false);

@@ -71,7 +71,7 @@ public class StringCacheTest extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
-	protected void setUp() throws Exception
+	public void setUp() throws Exception
 	{
 		StringCache.enable(false);
 		StringCache.enable(true);
@@ -82,7 +82,7 @@ public class StringCacheTest extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	protected void tearDown() throws Exception
+	public void tearDown() throws Exception
 	{
 		StringCache.enable(false);
 		super.tearDown();
