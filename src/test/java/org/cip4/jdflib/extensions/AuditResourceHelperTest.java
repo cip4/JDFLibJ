@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.Assert.assertEquals;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -80,7 +82,7 @@ public class AuditResourceHelperTest extends JDFTestCaseBase
 {
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCleanup()

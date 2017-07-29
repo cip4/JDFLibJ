@@ -69,8 +69,6 @@
  */
 package org.cip4.jdflib.pool;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
@@ -79,6 +77,8 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 
 /**
  * @author MuchaD

@@ -68,6 +68,9 @@
  */
 package org.cip4.jdflib.core;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.After;
 import org.junit.Test;

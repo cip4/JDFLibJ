@@ -4,7 +4,7 @@
  *
  *
  * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,26 +56,32 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  * JDFDocTest.java
- * 
+ *
  * @author Kai Mattern
  *
  * Copyright (C) 2002 Heidelberger Druckmaschinen AG. All Rights Reserved.
  */
 package org.cip4.jdflib.core;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -93,7 +99,7 @@ import org.junit.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class JDFParserTest extends JDFTestCaseBase
 {
@@ -107,12 +113,12 @@ public class JDFParserTest extends JDFTestCaseBase
 	{
 
 		/**
-		 * 
+		 *
 		 */
 		private static final long serialVersionUID = 1819514227719688245L;
 
 		/**
-		 * 
+		 *
 		 */
 		public MyDocImpl()
 		{
@@ -128,7 +134,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	{
 
 		/**
-		 * 
+		 *
 		 */
 		public MyParser()
 		{
@@ -136,7 +142,7 @@ public class JDFParserTest extends JDFTestCaseBase
 		}
 
 		/**
-		 * 
+		 *
 		 */
 
 		@Override
@@ -150,7 +156,7 @@ public class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check speed of the parser
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpeed()
@@ -165,7 +171,7 @@ public class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check speed of the parser
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpeed1()
@@ -185,7 +191,7 @@ public class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check speed of the parser
-	 * 
+	 *
 	 */
 	@Test
 	public void testParseSpeed()
@@ -200,7 +206,7 @@ public class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check simple parsestring
-	 * 
+	 *
 	 */
 	@Test
 	public void testParseString()
@@ -211,7 +217,7 @@ public class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check simple parsestring
-	 * 
+	 *
 	 */
 	@Test
 	public void testParseStringJDF()
@@ -228,7 +234,7 @@ public class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check simple parsestring for invalid xml
-	 * 
+	 *
 	 */
 	@Test
 	public void testParseStringJDFBad()
@@ -243,7 +249,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testParseStringJDFWrongNS()
@@ -261,7 +267,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	/**
 	 * check simple parseStream
 	 * @throws IOException
-	 * 
+	 *
 	 */
 	@Test
 	public void testParseFileStream() throws IOException
@@ -285,7 +291,7 @@ public class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check speed of the parser
-	 * 
+	 *
 	 */
 	@Test
 	public void testMyDocClass()
@@ -298,7 +304,7 @@ public class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check speed of the parser
-	 * 
+	 *
 	 */
 	@Test
 	public void testBadNS()
@@ -309,7 +315,7 @@ public class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check speed of the parser
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpeed2()
@@ -327,7 +333,7 @@ public class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * parse a string with guck up front
-	 * 
+	 *
 	 */
 	@Test
 	public void testSkipParse()
@@ -346,7 +352,7 @@ public class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * parse a string with guck up front
-	 * 
+	 *
 	 */
 	@Test
 	public void testInit()
@@ -367,9 +373,9 @@ public class JDFParserTest extends JDFTestCaseBase
 		final File[] dirs = FileUtil.listFilesWithExpression(foo, "*Version_1*");
 		assertTrue(dirs.length > 0);
 		int nCheck = 0;
-		for (int i = 0; i < dirs.length; i++)
+		for (File dir2 : dirs)
 		{
-			final File dir = dirs[i];
+			final File dir = dir2;
 			if (!dir.isDirectory())
 			{
 				continue;
@@ -385,7 +391,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override

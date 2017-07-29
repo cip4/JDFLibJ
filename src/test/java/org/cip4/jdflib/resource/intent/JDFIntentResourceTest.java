@@ -69,6 +69,9 @@
  */
 package org.cip4.jdflib.resource.intent;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeliveryParams.EnumTransfer;
 import org.cip4.jdflib.core.AttributeName;
@@ -85,7 +88,7 @@ import org.junit.Test;
 public class JDFIntentResourceTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGuessActualStatic()
@@ -101,7 +104,7 @@ public class JDFIntentResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCopyActualStatic()
@@ -120,7 +123,7 @@ public class JDFIntentResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPreferredToActual()
@@ -134,7 +137,7 @@ public class JDFIntentResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCopyProcessStatic()

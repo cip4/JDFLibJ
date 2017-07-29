@@ -68,11 +68,11 @@
  */
 package org.cip4.jdflib.node;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 
 public class LinkInfoTest extends TestCase
 {

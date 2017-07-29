@@ -77,9 +77,9 @@
  */
 package org.cip4.jdflib.core;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.util.ThreadUtil;
+
+import junit.framework.TestCase;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG

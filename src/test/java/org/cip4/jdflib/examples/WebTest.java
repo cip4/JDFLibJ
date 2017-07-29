@@ -75,6 +75,9 @@
  */
 package org.cip4.jdflib.examples;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;

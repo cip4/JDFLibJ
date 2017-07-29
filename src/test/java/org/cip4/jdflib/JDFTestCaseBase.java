@@ -69,6 +69,9 @@
  */
 package org.cip4.jdflib;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.net.URL;
 
@@ -115,15 +118,13 @@ import org.junit.Before;
 import org.w3c.dom.Comment;
 import org.w3c.dom.Node;
 
-import junit.framework.TestCase;
-
 /**
  * base class for JDFLib test case classes
  *
  * @author prosirai
  *
  */
-public abstract class JDFTestCaseBase extends TestCase
+public abstract class JDFTestCaseBase
 {
 
 	/**
@@ -291,7 +292,6 @@ public abstract class JDFTestCaseBase extends TestCase
 	 *
 	 * @see junit.framework.TestCase#setUp()
 	 */
-	@Override
 	@Before
 	protected void setUp() throws Exception
 	{
@@ -323,7 +323,6 @@ public abstract class JDFTestCaseBase extends TestCase
 	 *
 	 * @see junit.framework.TestCase#tearDown()
 	 */
-	@Override
 	@After
 	protected void tearDown() throws Exception
 	{

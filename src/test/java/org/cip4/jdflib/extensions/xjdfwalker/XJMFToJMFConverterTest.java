@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
+import static org.junit.Assert.assertNotNull;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
 import org.cip4.jdflib.core.AttributeName;

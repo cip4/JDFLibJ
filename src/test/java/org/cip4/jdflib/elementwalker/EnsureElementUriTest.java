@@ -68,9 +68,9 @@
  */
 package org.cip4.jdflib.elementwalker;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.KElement;
+
+import junit.framework.TestCase;
 
 /**
  *  

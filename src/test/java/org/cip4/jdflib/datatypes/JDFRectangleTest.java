@@ -77,9 +77,9 @@
  */
 package org.cip4.jdflib.datatypes;
 
-import junit.framework.TestCase;
-
 import org.junit.Test;
+
+import junit.framework.TestCase;
 
 public class JDFRectangleTest extends TestCase
 {

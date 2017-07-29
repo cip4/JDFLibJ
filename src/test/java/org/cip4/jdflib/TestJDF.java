@@ -71,6 +71,9 @@
 
 package org.cip4.jdflib;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
@@ -140,7 +143,7 @@ public class TestJDF extends JDFTestCaseBase
 			spawn.bSpawnIdentical = true;
 			spawn.bSpawnRWPartsMultiple = true;
 			JDFMerge m = new JDFMerge(jdfRoot);
-	
+
 			Vector<JDFNode> vSpawned = new Vector<JDFNode>();
 			for (int ii = 1; ii < 21; ii++)
 			{
@@ -159,7 +162,7 @@ public class TestJDF extends JDFTestCaseBase
 					vamParts.add(amParts0);
 				}
 				final VString vsRWResourceIDs = new VString("Output", null);
-	
+
 				ct.start();
 				JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
 				vSpawned.add(nodeSubJDF);
@@ -180,7 +183,7 @@ public class TestJDF extends JDFTestCaseBase
 			}
 			strOutJDFPath = "/share/data/fehler/PD-68493/giant_merged.jdf";
 			jdfDoc.write2File(strOutJDFPath, 2, false);
-	
+
 		}*/
 
 	/**
@@ -254,6 +257,12 @@ public class TestJDF extends JDFTestCaseBase
 		m.mergeJDF(nodeSubJDF);
 		JDFNode nodeProcMerged = jdfDoc.getJDFRoot().getJobPart("1001", JDFConstants.EMPTYSTRING);
 		assertEquals(nodeProcMerged.getPartStatus(amParts0, 0), EnumNodeStatus.Completed);
+
+	}
+
+	private void assertEquals(EnumNodeStatus partStatus, EnumNodeStatus completed)
+	{
+		// TODO Auto-generated method stub
 
 	}
 

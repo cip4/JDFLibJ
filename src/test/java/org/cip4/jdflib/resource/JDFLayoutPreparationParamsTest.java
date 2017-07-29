@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.resource;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -89,7 +92,7 @@ import org.junit.Test;
 
 /**
  * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts also some tests for automated layout
- * 
+ *
  */
 public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 {
@@ -98,7 +101,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	JDFLayoutPreparationParams lpp = null;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testConvertStripMarks()
@@ -113,7 +116,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testConvertStripSimple()
@@ -125,8 +128,8 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws DataFormatException 
-	 * 
+	 * @throws DataFormatException
+	 *
 	 */
 	@Test
 	public void testConvertStripStepRepeat() throws DataFormatException
@@ -139,7 +142,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testConvertStripDeep()
@@ -158,7 +161,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testConvertStripSimpleCombined()
@@ -172,7 +175,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testBorderless()
@@ -206,7 +209,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetClipBox()
@@ -223,7 +226,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testTrimSize()

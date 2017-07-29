@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,6 +68,11 @@
  */
 package org.cip4.jdflib.jmf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.util.Vector;
 
@@ -107,7 +112,7 @@ import org.junit.Test;
 
 /**
  * @author Rainer Prosi
- * 
+ *
  * Test of the Resource JMF
  */
 public class JMFResourceTest extends JDFTestCaseBase
@@ -124,7 +129,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testResourceQuParams()
@@ -166,7 +171,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testUsageCounter()
@@ -198,7 +203,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMedia()
@@ -221,7 +226,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMediaCatalog()
@@ -262,7 +267,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMediaCatalogSignal()
@@ -303,7 +308,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEcmaList()
@@ -346,7 +351,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMediaRef()
@@ -491,7 +496,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		mPartRQP.setAttribute(AttributeName.DIMENSION, "");
 		mediaRQP.removeAttribute(AttributeName.DIMENSION);
 		rqp.applyResourceCommand(jdf);
-		//		final JDFMedia m2Sheet4 = (JDFMedia) 
+		//		final JDFMedia m2Sheet4 = (JDFMedia)
 		m2.getPartition(sheetMap, null);
 		assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
 		// assertFalse("removed leaf dimension", m2Sheet4.hasAttribute_KElement(AttributeName.DIMENSION, null, false));
@@ -499,7 +504,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 
 	/**
 	 * Method testResourceCommand
-	 * 
+	 *
 	 */
 	@Test
 	public void testResourceCommand()
@@ -548,7 +553,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 
 	/**
 	 * Method testResourceCommandPartIDKeys
-	 * 
+	 *
 	 */
 	@Test
 	public void testResourceCommandPartIDKeys()
@@ -570,7 +575,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 
 	/**
 	 * Method testResourceCommandPartIDKeys
-	 * 
+	 *
 	 */
 	@Test
 	public void testResourceCommandIdentical()

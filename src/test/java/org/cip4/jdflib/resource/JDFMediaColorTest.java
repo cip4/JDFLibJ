@@ -6,14 +6,14 @@
  */
 package org.cip4.jdflib.resource;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 public class JDFMediaColorTest extends TestCase
 {
 	@Test

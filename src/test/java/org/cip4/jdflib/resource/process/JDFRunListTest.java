@@ -70,6 +70,12 @@
 
 package org.cip4.jdflib.resource.process;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Iterator;
 import java.util.zip.DataFormatException;
 
@@ -102,13 +108,13 @@ import org.junit.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class JDFRunListTest extends JDFTestCaseBase
 {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final String EXPR = "Expr";
 	private static final String METADATA_MAP = "MetadataMap";
@@ -117,7 +123,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	private JDFRunList rl;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testUnPartitionNPage()
@@ -134,7 +140,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testExpand()
@@ -148,7 +154,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testCollapseNPage()
@@ -183,7 +189,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 * 
+	 *
 	 */
 	@Test
 	public final void testCollapseNPageNoNPageLeaf() throws DataFormatException
@@ -199,7 +205,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testFixNPageOnly()
@@ -212,7 +218,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testFixNPage()
@@ -257,7 +263,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testAddRun()
@@ -268,7 +274,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testAddRunPerformance()
@@ -287,7 +293,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testGetFileURL()
@@ -299,7 +305,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 * 
+	 *
 	 */
 	@Test
 	public final void testSetPages() throws DataFormatException
@@ -314,7 +320,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testGetMimeType()
@@ -329,7 +335,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testGetTruePage()
@@ -591,7 +597,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 
 	/**
 	 * performance check for the runlist iterator
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -635,7 +641,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	// TODO @Stefan @Test
 	// public void testMetadataMapSchema() {
@@ -667,9 +673,8 @@ public class JDFRunListTest extends JDFTestCaseBase
 		tagMap.setAttribute(AttributeName.VALUETEMPLATE, "AnyName1");
 		tagMap.addNameSpace("TIFFXMP", "http://ns.adobe.com/tiff/1.0");
 		final String[] ss = new String[] { "Acme", "Bcme", "Ccme" };
-		for (int i = 0; i < ss.length; i++)
+		for (final String s : ss)
 		{
-			final String s = ss[i];
 			final KElement tagSet = tagMap.appendElement(EXPR);
 			tagSet.setAttribute("Name", "AnyName1");
 			tagSet.setAttribute("Value", s);
@@ -771,7 +776,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSeparatedTiff()
@@ -787,8 +792,8 @@ public class JDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override

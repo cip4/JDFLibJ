@@ -73,8 +73,6 @@ package org.cip4.jdflib.resource.process;
 
 import java.util.Vector;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumBackCoatings;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumHoleType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
@@ -89,6 +87,8 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 
 /**
  * 

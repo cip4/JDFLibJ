@@ -73,11 +73,11 @@ package org.cip4.jdflib.core;
 import java.util.HashSet;
 import java.util.Set;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen

@@ -5,13 +5,13 @@ package org.cip4.jdflib.extensions.xjdfwalker;
 
 import java.util.Map;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *

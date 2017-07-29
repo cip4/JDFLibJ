@@ -69,6 +69,10 @@
  */
 package org.cip4.jdflib.jmf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
@@ -86,7 +90,7 @@ import org.cip4.jdflib.pool.JDFAmountPool;
 import org.junit.Test;
 
 /**
- * 
+ *
  * lets generate some jmf messages
  * @author rainer prosi
  * @date Sept 7, 2010
@@ -96,7 +100,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	private JMFBuilder b;
 
 	/**
-	 * 
+	 *
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
@@ -107,7 +111,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * test milestone
 	 */
 	@Test
@@ -118,7 +122,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * test milestone
 	 */
 	@Test
@@ -132,7 +136,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @param jmf
 	 * @param level
 	 * @param dir
@@ -154,7 +158,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * test resource signal
 	 */
 	@Test
@@ -166,7 +170,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * test ink resource signal
 	 */
 	@Test
@@ -200,7 +204,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * test milestone
 	 */
 	@Test
@@ -212,7 +216,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * test milestone
 	 */
 	@Test
@@ -223,7 +227,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * test status subscription
 	 */
 	@Test
@@ -234,7 +238,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * test resource subscription
 	 */
 	@Test
@@ -245,7 +249,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * test notification subscription
 	 */
 	@Test
@@ -256,7 +260,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * test queue status subscription
 	 */
 	@Test
@@ -267,7 +271,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * test milestone
 	 */
 	@Test

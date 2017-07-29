@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,38 +56,43 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  * JDFCustomerInfoTest.java
- * 
+ *
  * @author Dietrich Mucha
  *
  * Copyright (C) 2004 Heidelberger Druckmaschinen AG. All Rights Reserved.
  */
 package org.cip4.jdflib.core;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFPerson;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * before July 7, 2009
  */
 public class JDFCustomerInfoTest extends JDFTestCaseBase
@@ -114,7 +119,7 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testgetContactVector()
@@ -127,7 +132,7 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		if (info != null)
 		{
 			v = info.getChildElementVector(ElementName.CONTACT, null, null, true, 0, false);
-			Assert.assertEquals("v does not contain 4 contact", v.size(), 4);
+			assertEquals("v does not contain 4 contact", v.size(), 4);
 		}
 
 		v = null;
@@ -135,12 +140,12 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		if (info != null)
 		{
 			v = info.getChildElementVector(ElementName.CONTACT, null, null, true, 0, false);
-			Assert.assertTrue("v does not contain 4 contacts", v.size() == 4);
+			assertTrue("v does not contain 4 contacts", v.size() == 4);
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetContactWithContactType()
@@ -149,22 +154,22 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		final JDFCustomerInfo info = prepareCustomerInfo(doc);
 
 		JDFContact cc = info.getContactWithContactType("Customer", 0);
-		Assert.assertNotNull("cc", cc);
+		assertNotNull("cc", cc);
 		cc = info.getContactWithContactType("Customer", 2);
-		Assert.assertNotNull("cc", cc);
+		assertNotNull("cc", cc);
 		cc = info.getContactWithContactType("Customer", 1);
-		Assert.assertNotNull("cc", cc);
+		assertNotNull("cc", cc);
 		final JDFContact cc2 = info.getContactWithContactType("Administrator", 0);
-		Assert.assertNotNull("cc2", cc2);
-		Assert.assertEquals("cc2", cc, cc2);
+		assertNotNull("cc2", cc2);
+		assertEquals("cc2", cc, cc2);
 		cc = info.getContactWithContactType("Delivery", 0);
-		Assert.assertNotNull("cc", cc);
+		assertNotNull("cc", cc);
 		cc = info.getContactWithContactType("fnarf", 0);
-		Assert.assertNull("cc", cc);
+		assertNull("cc", cc);
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testGetCreateContactWithContactType()
@@ -172,15 +177,15 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFCustomerInfo info = doc.getJDFRoot().getCreateCustomerInfo();
 		JDFContact cc = info.getContactWithContactType("Customer", 0);
-		Assert.assertNull("cc", cc);
+		assertNull("cc", cc);
 		cc = info.getCreateContactWithContactType("Customer", 0);
-		Assert.assertNotNull("cc", cc);
+		assertNotNull("cc", cc);
 		cc = info.getContactWithContactType("Customer", 0);
-		Assert.assertNotNull("cc", cc);
+		assertNotNull("cc", cc);
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetContactVectorWithContactType()
@@ -189,22 +194,22 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		final JDFCustomerInfo info = prepareCustomerInfo(doc);
 
 		VElement v = info.getContactVectorWithContactType("Customer");
-		Assert.assertNotNull(v);
-		Assert.assertEquals(v.size(), 3);
+		assertNotNull(v);
+		assertEquals(v.size(), 3);
 		v = info.getContactVectorWithContactType("Administrator");
-		Assert.assertNotNull(v);
-		Assert.assertEquals(v.size(), 1);
+		assertNotNull(v);
+		assertEquals(v.size(), 1);
 		v = info.getContactVectorWithContactType("beagle");
-		Assert.assertNull(v);
+		assertNull(v);
 		v = info.getContactVectorWithContactType(null);
-		Assert.assertEquals(v.size(), 4);
+		assertEquals(v.size(), 4);
 
 	}
 
 	// ///////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetContact()
@@ -213,12 +218,12 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		final JDFNode n = doc.getJDFRoot();
 		final JDFCustomerInfo info = n.appendCustomerInfo();
 		info.appendContact().setContactTypes(new VString("foo", null));
-		Assert.assertNotNull(info.getContact(0));
+		assertNotNull(info.getContact(0));
 	}
 
 	/**
-	 *  
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public final void testMatches()

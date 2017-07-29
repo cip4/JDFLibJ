@@ -71,6 +71,8 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -87,7 +89,7 @@ public class VectorMapTest extends JDFTestCaseBase
 	private VectorMap<String, String> m;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSize()
@@ -131,7 +133,7 @@ public class VectorMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFillInvertedMap()
@@ -169,7 +171,7 @@ public class VectorMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPutOne()
@@ -185,7 +187,7 @@ public class VectorMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendUniqueKey()
@@ -201,7 +203,7 @@ public class VectorMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendUnique()
@@ -217,7 +219,7 @@ public class VectorMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testremoveOne()
@@ -235,7 +237,7 @@ public class VectorMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetOne()
@@ -252,7 +254,7 @@ public class VectorMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetOneInt()
@@ -280,8 +282,8 @@ public class VectorMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override

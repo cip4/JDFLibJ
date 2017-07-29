@@ -80,13 +80,13 @@ package org.cip4.jdflib.datatypes;
 
 import java.util.zip.DataFormatException;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.CPUTimer;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 /**
  * 
  *  

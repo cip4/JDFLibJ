@@ -67,9 +67,13 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.elementwalker;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
@@ -84,7 +88,7 @@ import org.junit.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class UnlinkFinderTest extends JDFTestCaseBase
 {
@@ -97,7 +101,7 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	private JDFRefElement re;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetUlinkedRes()
@@ -109,7 +113,7 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetUlinkedAll()
@@ -123,7 +127,7 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetUlinkedRef()
@@ -136,7 +140,7 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEraseUlinkedRes()
@@ -153,7 +157,7 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEraseUlinkedRefs()
@@ -169,7 +173,7 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testIgnoreforeign()
@@ -189,7 +193,7 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEraseUlinked()

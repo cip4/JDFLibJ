@@ -70,6 +70,11 @@
 
 package org.cip4.jdflib.jmf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumWorkType;
 import org.cip4.jdflib.core.AttributeName;
@@ -89,7 +94,7 @@ import org.junit.Test;
 
 /**
  * @author Rainer Prosi
- * 
+ *
  * Test of the Status JMF
  */
 public class JDFJobPhaseTest extends JDFTestCaseBase
@@ -112,7 +117,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testJobPhaseFromPhaseTime()
@@ -131,7 +136,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testApplyNode()
@@ -150,7 +155,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPhaseAmount()
@@ -165,7 +170,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetPhaseWaste()
@@ -179,7 +184,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetStatusQuParams()
@@ -203,7 +208,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetQueueEntryID()
@@ -219,7 +224,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetSpeed()
@@ -233,7 +238,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetAmountDifference()
@@ -251,7 +256,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetWasteDifference()
@@ -269,7 +274,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeLastPhase()

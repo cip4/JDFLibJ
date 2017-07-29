@@ -71,6 +71,12 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -104,7 +110,7 @@ import org.junit.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class StatusCounterTest extends JDFTestCaseBase
 {
@@ -118,7 +124,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 
 	/**
 	 * @return the doc
-	 * 
+	 *
 	 *
 	 */
 	public static JDFDoc getJMF()
@@ -159,7 +165,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testDeviceID()
@@ -173,7 +179,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWasteAmount()
@@ -202,8 +208,8 @@ public class StatusCounterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @return 
-	 * 
+	 * @return
+	 *
 	 */
 	@Test
 	public JDFDoc testAddPhase()
@@ -259,7 +265,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEvent()
@@ -342,7 +348,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEmployee()
@@ -377,7 +383,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIdle()
@@ -442,7 +448,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	// }
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMultiModule()

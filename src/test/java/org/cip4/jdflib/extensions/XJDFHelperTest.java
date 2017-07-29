@@ -69,6 +69,11 @@
 
 package org.cip4.jdflib.extensions;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;

@@ -71,6 +71,10 @@
 
 package org.cip4.jdflib.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.ByteArrayInputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -78,7 +82,7 @@ import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * July 23, 2009
  */
 public class SkipInputStreamTest extends JDFTestCaseBase

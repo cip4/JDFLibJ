@@ -68,12 +68,15 @@
  */
 package org.cip4.jdflib.jmf;
 
+import static org.junit.Assert.assertEquals;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.junit.Test;
 
 /**
  *
@@ -86,6 +89,7 @@ public class JDFQueueTest extends JDFTestCaseBase
 	 *
 	 *
 	 */
+	@Test
 	public void testgetEntryCount()
 	{
 		JDFQueue q = (JDFQueue) new JDFDoc(ElementName.QUEUE).getRoot();
@@ -101,6 +105,7 @@ public class JDFQueueTest extends JDFTestCaseBase
 	 *
 	 *
 	 */
+	@Test
 	public void testXJMFQueue()
 	{
 		JDFDoc jdfDoc = new JDFDoc(ElementName.JMF);

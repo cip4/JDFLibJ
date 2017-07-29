@@ -70,6 +70,11 @@
 
 package org.cip4.jdflib.core;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 import java.util.Vector;
 
@@ -81,13 +86,13 @@ import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * 05.12.2008
  */
 public class VElementTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddAll()
@@ -106,7 +111,7 @@ public class VElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAppendUnique()
@@ -120,7 +125,7 @@ public class VElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddAllArray()
@@ -144,7 +149,7 @@ public class VElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@SuppressWarnings("unchecked")
 	@Test
@@ -160,7 +165,7 @@ public class VElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGet()
@@ -178,7 +183,7 @@ public class VElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testItem()
@@ -195,7 +200,7 @@ public class VElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testElementAt()
@@ -212,7 +217,7 @@ public class VElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testRemoveElements()
@@ -238,7 +243,7 @@ public class VElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testRemoveElement()
@@ -265,7 +270,7 @@ public class VElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testContainsElement()
@@ -294,7 +299,7 @@ public class VElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testgetNodeNames()
@@ -313,7 +318,7 @@ public class VElementTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testUnify()
@@ -336,7 +341,7 @@ public class VElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testUnifyElement()
@@ -363,7 +368,7 @@ public class VElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testUnifyElementPerformance()
@@ -392,7 +397,7 @@ public class VElementTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSort()
@@ -413,7 +418,7 @@ public class VElementTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsEqual()
@@ -440,7 +445,7 @@ public class VElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIndex()

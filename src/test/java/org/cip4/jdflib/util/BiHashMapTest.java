@@ -70,12 +70,15 @@
 
 package org.cip4.jdflib.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * 08.12.2008
  */
 public class BiHashMapTest extends JDFTestCaseBase
@@ -83,7 +86,7 @@ public class BiHashMapTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPut()
@@ -104,7 +107,7 @@ public class BiHashMapTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testClear()
@@ -119,7 +122,7 @@ public class BiHashMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveNull()
@@ -140,7 +143,7 @@ public class BiHashMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testRemove()
@@ -158,7 +161,7 @@ public class BiHashMapTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveVal()

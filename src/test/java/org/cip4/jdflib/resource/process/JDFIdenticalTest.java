@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import static org.junit.Assert.assertEquals;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;

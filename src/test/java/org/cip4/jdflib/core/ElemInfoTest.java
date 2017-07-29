@@ -69,11 +69,11 @@
  */
 package org.cip4.jdflib.core;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 public class ElemInfoTest extends TestCase
 {
 

@@ -70,6 +70,12 @@
 
 package org.cip4.jdflib.jmf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
@@ -89,7 +95,7 @@ import org.junit.Test;
 
 /**
  * @author Rainer Prosi
- * 
+ *
  * Test of the Status JMF
  */
 public class JDFDeviceInfoTest extends JDFTestCaseBase
@@ -111,7 +117,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetDeviceID()
@@ -127,7 +133,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetDescriptiveName()
@@ -144,7 +150,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNullDeviceStatus()
@@ -156,7 +162,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeLastPhase()
@@ -189,7 +195,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsSamePhaseIdle()
@@ -217,7 +223,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testIsSamePhase()
@@ -244,7 +250,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEmployeeDeprecated15()
@@ -257,7 +263,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetIdleStartTime()

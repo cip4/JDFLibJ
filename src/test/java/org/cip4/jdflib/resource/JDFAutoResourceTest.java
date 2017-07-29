@@ -76,8 +76,6 @@
  */
 package org.cip4.jdflib.resource;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.auto.JDFAutoInsertSheet.EnumSheetType;
 import org.cip4.jdflib.auto.JDFAutoInsertSheet.EnumSheetUsage;
 import org.cip4.jdflib.core.AttributeName;
@@ -105,6 +103,8 @@ import org.cip4.jdflib.resource.process.postpress.JDFScore.EnumScoreSide;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 public class JDFAutoResourceTest extends TestCase
 {
 	@Test

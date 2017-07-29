@@ -68,6 +68,10 @@
  */
 package org.cip4.jdflib.elementwalker;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -82,7 +86,7 @@ import org.junit.Test;
 public class EnsureNSUriTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEnsureNS()
@@ -102,7 +106,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEnsureNSKeepUnknown()
@@ -124,7 +128,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEnsureNSNull()
@@ -146,7 +150,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEnsureNSDefault()
@@ -164,7 +168,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEnsureNSMapToDefault()
@@ -183,7 +187,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEnsureNSAlias()
@@ -212,7 +216,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEnsureNSAliasBackwards()
@@ -238,7 +242,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testBigEnsureNS()

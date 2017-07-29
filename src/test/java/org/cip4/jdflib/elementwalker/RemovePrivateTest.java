@@ -68,13 +68,13 @@
  */
 package org.cip4.jdflib.elementwalker;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */

@@ -72,13 +72,13 @@ package org.cip4.jdflib.jmf;
 
 import java.util.Vector;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *

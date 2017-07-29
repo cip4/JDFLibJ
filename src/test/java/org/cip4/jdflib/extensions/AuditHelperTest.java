@@ -68,10 +68,10 @@
  */
 package org.cip4.jdflib.extensions;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+
+import junit.framework.TestCase;
 
 /**
  * 

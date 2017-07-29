@@ -70,8 +70,6 @@
  */
 package org.cip4.jdflib.jmf;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
@@ -89,6 +87,8 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 

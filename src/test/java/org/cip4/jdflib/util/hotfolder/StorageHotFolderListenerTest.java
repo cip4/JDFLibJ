@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.util.hotfolder;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;

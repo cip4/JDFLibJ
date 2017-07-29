@@ -67,9 +67,12 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.elementwalker;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
@@ -79,13 +82,13 @@ import org.junit.Test;
 
 /**
  * @author prosirai
- * 
+ *
  */
 public class AttributeReplacerTest extends JDFTestCaseBase
 {
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testReplace()
@@ -101,7 +104,7 @@ public class AttributeReplacerTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testReplaceNull()
@@ -117,7 +120,7 @@ public class AttributeReplacerTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRegeExp()
@@ -133,7 +136,7 @@ public class AttributeReplacerTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testReplaceMap()

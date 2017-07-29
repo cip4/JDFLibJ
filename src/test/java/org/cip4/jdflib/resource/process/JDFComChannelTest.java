@@ -69,6 +69,11 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.core.ElementName;
@@ -77,14 +82,14 @@ import org.junit.Test;
 
 /**
  * @author prosirai
- * 
+ *
  */
 public class JDFComChannelTest extends JDFTestCaseBase
 {
 	JDFComChannel cc;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetEMailLocator()
@@ -99,7 +104,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetPhoneNumber()
@@ -110,7 +115,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetPhoneNumberMobile()
@@ -121,7 +126,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetChannelType()
@@ -132,7 +137,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMatchesString()
@@ -143,7 +148,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMatchesComChannel()
@@ -154,7 +159,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMatches()
@@ -172,7 +177,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetPhoneNumberShort()
@@ -194,8 +199,8 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override

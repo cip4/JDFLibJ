@@ -69,6 +69,11 @@
 
 package org.cip4.jdflib.extensions;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -100,7 +105,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddMessage()
@@ -110,7 +115,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHeaderID()
@@ -119,7 +124,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHeaderID2()
@@ -128,7 +133,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHeaderDate()
@@ -137,7 +142,7 @@ public class XJMFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToFile()

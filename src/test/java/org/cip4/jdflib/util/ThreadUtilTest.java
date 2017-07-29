@@ -71,6 +71,11 @@
 
 package org.cip4.jdflib.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.thread.MyMutex;
 import org.cip4.jdflib.util.thread.WaitTimeout;
@@ -78,7 +83,7 @@ import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * 08.12.2008
  */
 public class ThreadUtilTest extends JDFTestCaseBase
@@ -90,7 +95,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 
 		/**
 		 * @param millis
-		 * @param sleep 
+		 * @param sleep
 		 */
 		public TestWait(final int millis, final int sleep)
 		{
@@ -113,7 +118,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testWaitTimeout()
@@ -123,7 +128,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testPeekWaitTimeout()
@@ -135,7 +140,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testWaitTimeoutDelay()
@@ -148,7 +153,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testWaitTimeoutFail()
@@ -157,7 +162,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testWaitTimeoutMany()
@@ -173,7 +178,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testMyMutex()

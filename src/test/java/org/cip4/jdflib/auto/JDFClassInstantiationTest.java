@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,12 +68,14 @@
  */
 /**
  * JDFClassInstantiationTest.java
- * 
+ *
  * @author Dietrich Mucha
- * 
+ *
  * Copyright (C) 2005-2006 Heidelberger Druckmaschinen AG. All Rights Reserved.
  */
 package org.cip4.jdflib.auto;
+
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -130,15 +132,15 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 			}
 		});
 
-		for (int i = 0; i < entries.length; ++i)
+		for (File entrie : entries)
 		{
-			if (entries[i].isDirectory())
+			if (entrie.isDirectory())
 			{
-				traverseNormalClassesAndInstantiate(entries[i], visitor);
+				traverseNormalClassesAndInstantiate(entrie, visitor);
 			}
 			else
 			{
-				visitor.visitFile(entries[i]);
+				visitor.visitFile(entrie);
 			}
 		}
 
@@ -148,12 +150,12 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 	/**
 	 * get the fileName for every class JDFxxx below "./src/org/cip4/jdflib" which is not in ignoreList and extract from it elementName (=xxx) With elementName
 	 * instantiate the corresponding class (using jdfRoot.appendElement(elementName) and factory DocumentJDFImpl.java)
-	 * 
+	 *
 	 * Then createdClass+".java" should be equal to fileName, i.e. the factory DocumentJDFImpl creates a class at the correct point in the hierarchy
-	 * 
+	 *
 	 * result = fileName.equals(createdClass + ".java") || (fileName.startsWith("JDFAuto") && createdClass.equals(JDFConstants.JDFELEMENT)) ||
 	 * fileName.equals(JDFConstants.JDFNODE) || !createdClass.equals(JDFConstants.JDFELEMENT);
-	 * 
+	 *
 	 */
 	@Test
 	public void testDirectoryInstantiateVisitor()
@@ -201,9 +203,9 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 		});
 
 		File entry;
-		for (int i = 0; i < entries.length; ++i)
+		for (File entrie : entries)
 		{
-			entry = entries[i];
+			entry = entrie;
 			if (entry.isDirectory())
 			{
 				traverseAutoClassesAndCheckForCorrespondingNormalClass(entry, visitor);
@@ -226,7 +228,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAutoClasses()

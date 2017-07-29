@@ -71,6 +71,11 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMarkObject.EnumAnchor;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
@@ -78,9 +83,9 @@ import org.junit.Test;
 
 /**
  * general utilities for containers and objects
- * 
+ *
  * @author prosirai
- * 
+ *
  */
 public class EnumUtilTest extends JDFTestCaseBase
 {
@@ -90,7 +95,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	};
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMin()
@@ -99,7 +104,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMax()
@@ -108,7 +113,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testLessEq()
@@ -119,7 +124,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testLess()
@@ -130,7 +135,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetEnumName()
@@ -139,7 +144,7 @@ public class EnumUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetEnumIgnorecase()

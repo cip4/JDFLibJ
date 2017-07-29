@@ -69,13 +69,13 @@
  */
 package org.cip4.jdflib.core;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 
 /**
  * 

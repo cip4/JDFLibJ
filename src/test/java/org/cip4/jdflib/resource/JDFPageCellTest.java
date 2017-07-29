@@ -69,6 +69,9 @@
  */
 package org.cip4.jdflib.resource;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -80,7 +83,7 @@ public class JDFPageCellTest extends JDFTestCaseBase
 {
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetClipBox()
@@ -96,7 +99,7 @@ public class JDFPageCellTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testTrimSize()

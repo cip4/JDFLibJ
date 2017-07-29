@@ -70,6 +70,14 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.util.Collection;
 import java.util.List;
@@ -140,7 +148,7 @@ import org.w3c.dom.Node;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class JDFSpawnTest extends JDFTestCaseBase
 {
@@ -207,7 +215,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCorruptPartitionedSpawn()
@@ -246,7 +254,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSubsetPartitionedSpawn()
@@ -310,7 +318,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnPartImplicit()
@@ -331,7 +339,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnPartImplicitColorant()
@@ -356,7 +364,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnPartAmountPool()
@@ -412,7 +420,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testSpawnPartAmountPoolPartition()
@@ -456,7 +464,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnMulti10()
@@ -484,7 +492,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnMulti10Part()
@@ -515,7 +523,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnPartMulti()
@@ -628,7 +636,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnRWGap()
@@ -675,7 +683,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnPartChain()
@@ -785,7 +793,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test wierd sequences of spawning and merging with the same res being spawned both rw and ro
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnPartMultiRORW()
@@ -884,7 +892,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCleanSpawnedResources()
@@ -992,7 +1000,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnMixPart()
@@ -1063,7 +1071,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnIntermediateMissing()
@@ -1110,7 +1118,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnPartMissing()
@@ -1163,7 +1171,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testSpawnSeparationMissing()
@@ -1213,7 +1221,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnPartPVVariation()
@@ -1276,7 +1284,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnPartParallel()
@@ -1327,7 +1335,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnPartNoSide()
@@ -1407,7 +1415,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnPart2Side()
@@ -1455,7 +1463,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnParallel()
@@ -1508,7 +1516,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnPartAmount()
@@ -1563,7 +1571,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnIdenticalDeep()
@@ -1613,7 +1621,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnIdentical()
@@ -1697,7 +1705,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnPartSubElemIdent()
@@ -1728,7 +1736,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnPartRefElem()
@@ -1739,12 +1747,12 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		n.setType(EnumType.ImageSetting);
 		JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
 		nn.linkResource(xm, EnumUsage.Input, null);
-		JDFExposedMedia xm1 = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.SheetName, "s1");
-		JDFExposedMedia xm2 = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.SheetName, "s2");
+		xm.addPartition(EnumPartIDKey.SheetName, "s1");
+		xm.addPartition(EnumPartIDKey.SheetName, "s2");
 		JDFMedia m = (JDFMedia) xm.appendMedia().makeRootResource(null, nn, true);
 		n.linkResource(m, EnumUsage.Input, null);
-		JDFMedia m1 = (JDFMedia) m.addPartition(EnumPartIDKey.SheetName, "s1");
-		JDFMedia m2 = (JDFMedia) m.addPartition(EnumPartIDKey.SheetName, "s2");
+		m.addPartition(EnumPartIDKey.SheetName, "s1");
+		m.addPartition(EnumPartIDKey.SheetName, "s2");
 
 		JDFSpawn s = new JDFSpawn(n);
 		s.vRWResources_in = new VString("Media", null);
@@ -1756,7 +1764,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnPartRefElemPart()
@@ -1786,7 +1794,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnPart()
@@ -1958,7 +1966,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnMergeSimple()
@@ -2034,7 +2042,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnAddPartRoot()
@@ -2094,7 +2102,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnAddPart()
@@ -2205,7 +2213,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawn2()
@@ -2251,7 +2259,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawn3()
@@ -2300,7 +2308,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnNI13()
@@ -2345,7 +2353,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 * 
+	 *
 	 */
 	@Test
 	public void testUnSpawnChild()
@@ -2371,7 +2379,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 * 
+	 *
 	 */
 	@Test
 	public void testUnSpawn()
@@ -2403,7 +2411,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 * 
+	 *
 	 */
 	@Test
 	public void testUnSpawnNull()
@@ -2441,7 +2449,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test auditpool spawn merge stuff to information in the AncestorPool
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnAuditPool()
@@ -2495,7 +2503,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnNI()
@@ -2544,7 +2552,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnNIStatus()
@@ -2577,7 +2585,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnNILocalPartStatus()
@@ -2618,7 +2626,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnCINI()
@@ -2711,7 +2719,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnLayout()
@@ -2753,7 +2761,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testBigSpawn()
@@ -2801,7 +2809,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	// /
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testManySpawn()
@@ -2867,7 +2875,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testManySpawnInformative()
@@ -2920,7 +2928,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testManySpawnPartInformative()
@@ -2976,7 +2984,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeVersion()
@@ -3015,7 +3023,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeUpdateNI()
@@ -3078,7 +3086,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	//		{
 	//			File f = new File(sm_dirTestDataTemp + "bigSub" + i + ".jdf");
 	//			assertTrue(String.format("File %s does not exist.", f.getAbsolutePath()), f.exists());
-	//			
+	//
 	//			final JDFParser parser2 = new JDFParser();
 	//			final JDFDoc jdfDocSub = parser2.parseFile(sm_dirTestDataTemp + "bigSub" + i + ".jdf");
 	//			final JDFNode nodeMain = jdfDoc.getJDFRoot();
@@ -3096,7 +3104,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCheckSpawnedResourcesRWImplicit()
@@ -3124,7 +3132,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCheckSpawnedResources()
@@ -3176,7 +3184,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testBookintent()
@@ -3195,7 +3203,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @param strXMLFile
 	 * @param strSpawnedFile
 	 * @param strElementID
@@ -3269,7 +3277,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testNestedSpawn()
@@ -3305,7 +3313,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnRootNestedPerformance()
@@ -3339,7 +3347,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnRootListPerformance()
@@ -3380,7 +3388,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeRootList()
@@ -3404,7 +3412,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnSheetMix()
@@ -3468,7 +3476,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnSheetNeedsSide()
@@ -3495,7 +3503,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnNameSpace()
@@ -3536,7 +3544,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPartitionedSpawn()
@@ -3559,7 +3567,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMismatchPartitioned()
@@ -3579,7 +3587,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPartitionedSpawnNI()
@@ -3613,7 +3621,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRef()
@@ -3634,7 +3642,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeExpandedPartition()
@@ -3664,7 +3672,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeNewNamespace()
@@ -3696,7 +3704,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeNewResource()
@@ -3728,7 +3736,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeNewPart()
@@ -3761,7 +3769,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeResourceOrder()
@@ -3797,7 +3805,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testRemerge()
@@ -3842,7 +3850,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeRemovedResource()
@@ -3899,7 +3907,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSpawnMultiDepthRWResource()
@@ -3954,7 +3962,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * test merging amounts - also over multiple nodes
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeAmount()
@@ -3996,7 +4004,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeJDF()
@@ -4043,7 +4051,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCleanupMerge()
@@ -4092,7 +4100,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	// project folder must look to test.jdf
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeJDF2()
@@ -4125,7 +4133,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergeJDF3()
@@ -4161,7 +4169,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override

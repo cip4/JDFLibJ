@@ -68,10 +68,10 @@
  */
 package org.cip4.jdflib.util;
 
-import junit.framework.TestCase;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 /**
  * JUnit test case for scale unit helper class.
  * @author Stefan Meißner, CIP4

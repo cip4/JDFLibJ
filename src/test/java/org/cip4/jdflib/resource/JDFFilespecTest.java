@@ -70,10 +70,14 @@
 /*
  * MediaColorTest.java
  * @author Dietrich Mucha
- * 
+ *
  * Copyright (C) 2004 Heidelberger Druckmaschinen AG. All Rights Reserved.
  */
 package org.cip4.jdflib.resource;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -102,13 +106,13 @@ import org.junit.Test;
 ////////////////////////////////////////////////////////////////
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * 26.11.2008
  */
 public class JDFFilespecTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetAbsoluteURL()
@@ -128,7 +132,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testSetFileSize()
@@ -142,7 +146,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testSetCheckSum()
@@ -206,7 +210,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	/**
 	 * @throws IOException
 	 * @throws MessagingException
-	 * 
+	 *
 	 */
 	@Test
 	public void testMoveToDir() throws MessagingException, IOException
@@ -238,7 +242,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	/**
 	 * @throws IOException
 	 * @throws MessagingException
-	 * 
+	 *
 	 */
 	@Test
 	public void testMoveToDirUserFileName()
@@ -252,7 +256,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetMimeTypeFromURL()
@@ -266,7 +270,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetMimeURL()

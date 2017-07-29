@@ -77,8 +77,6 @@ package org.cip4.jdflib.devicecapability;
 
 import java.util.Vector;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumBoolean;
@@ -109,6 +107,8 @@ import org.cip4.jdflib.resource.devicecapability.JDFXYPairState;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 /**
  * 
  *  

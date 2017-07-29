@@ -70,10 +70,15 @@
 /*
  * MediaColorTest.java
  * @author Dietrich Mucha
- * 
+ *
  * Copyright (C) 2004 Heidelberger Druckmaschinen AG. All Rights Reserved.
  */
 package org.cip4.jdflib.resource;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
 
@@ -95,7 +100,7 @@ public class JDFPartTest extends JDFTestCaseBase
 	JDFPart part = null;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetPartMap()
@@ -112,7 +117,7 @@ public class JDFPartTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Override
 	public void setUp()
@@ -122,7 +127,7 @@ public class JDFPartTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testPartIDConsistency()
@@ -137,7 +142,7 @@ public class JDFPartTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEnumSide()
@@ -148,7 +153,7 @@ public class JDFPartTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMatchesPartPartVersion()
@@ -171,7 +176,7 @@ public class JDFPartTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMatchesPart()
@@ -197,7 +202,7 @@ public class JDFPartTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMatchesPartTags()

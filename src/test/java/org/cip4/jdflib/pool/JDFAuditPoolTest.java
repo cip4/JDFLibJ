@@ -69,6 +69,13 @@
  */
 package org.cip4.jdflib.pool;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AttributeName;
@@ -106,7 +113,7 @@ import org.junit.Test;
 
 /**
  * @author MuchaD
- * 
+ *
  * This implements the first fixture with unit tests for class JDFElement.
  */
 public class JDFAuditPoolTest extends JDFTestCaseBase
@@ -135,7 +142,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddCreated()
@@ -164,7 +171,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddModified()
@@ -177,7 +184,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -195,7 +202,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddMerged()
@@ -215,7 +222,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddSpawned()
@@ -235,7 +242,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddNotification()
@@ -250,7 +257,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMergePools()
@@ -273,7 +280,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetPhaseNull()
@@ -285,7 +292,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSetPhase()
@@ -327,7 +334,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLastPhase()
@@ -355,7 +362,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCreateSubmitProcessRun()
@@ -415,7 +422,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetAudit()
@@ -433,7 +440,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetAuditPartitioned()

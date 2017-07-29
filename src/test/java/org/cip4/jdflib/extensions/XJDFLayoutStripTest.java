@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.Assert.assertEquals;
+
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCustomerInfo;

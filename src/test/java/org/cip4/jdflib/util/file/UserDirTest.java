@@ -66,25 +66,29 @@
  * <http://www.cip4.org/>.
  *
  *
- * 
+ *
  */
 package org.cip4.jdflib.util.file;
+
+import static org.junit.Assert.assertNotSame;
 
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.junit.Test;
 
 /**
- * 
+ *
  * @author rainer prosi
  *
  */
 public class UserDirTest extends JDFTestCaseBase
 {
 	/**
-	 * @throws Exception 
-	 * 
+	 * @throws Exception
+	 *
 	 */
+	@Test
 	public void testNotDot() throws Exception
 	{
 		UserDir d = new UserDir("myTool");

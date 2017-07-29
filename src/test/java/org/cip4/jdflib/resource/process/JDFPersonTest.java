@@ -69,6 +69,10 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -76,14 +80,14 @@ import org.junit.Test;
 
 /**
  * @author prosirai
- * 
+ *
  */
 public class JDFPersonTest extends JDFTestCaseBase
 {
 	private JDFPerson person;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFamilyName()
@@ -100,7 +104,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFirstName()
@@ -117,7 +121,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFirstLastName()
@@ -144,7 +148,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testLastFirstName()
@@ -156,7 +160,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testPhoneticFirstName()
@@ -167,7 +171,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testPhoneticLastName()
@@ -178,7 +182,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testKeepDescName()
@@ -190,7 +194,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetDescName()
@@ -209,7 +213,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -220,8 +224,8 @@ public class JDFPersonTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public final void testMatches()

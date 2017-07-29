@@ -2,8 +2,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Vector;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
@@ -14,6 +12,8 @@ import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 public class AutoTest extends TestCase {
 	// Beware!
 	// These tests are for checking versioning and JDFValidator internal details

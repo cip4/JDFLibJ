@@ -59,6 +59,9 @@
  */
 package org.cip4.jdflib.examples;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
@@ -139,7 +142,6 @@ import org.cip4.jdflib.span.JDFIntegerSpan;
 import org.cip4.jdflib.span.JDFXYPairSpan;
 import org.cip4.jdflib.util.MyArgs;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -575,7 +577,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		auditPool.setPhase(JDFElement.EnumNodeStatus.InProgress, null, null, null);
 		auditPool.setPhase(JDFElement.EnumNodeStatus.InProgress, null, null, null);
 		auditPool.setPhase(JDFElement.EnumNodeStatus.Cleanup, null, null, null);
-		Assert.assertEquals(auditPool.getPoolChildren("PhaseTime", null).size(), 3);
+		assertEquals(auditPool.getPoolChildren("PhaseTime", null).size(), 3);
 
 		// get the input runlist
 		final VElement inOutLinks = root.getResourceLinkPool().getInOutLinks(EnumUsage.Input, false, "RunList", null);
@@ -597,12 +599,6 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		return 0;
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// /
-	////////////////////////////////////////////////////////////////////////////
-	// /
-	////////////////////////////////////////////////////////////////////////////
-	// /
 	/**
 	 * Example 6: parse a JDF and validate the runlist
 	 *
@@ -1254,6 +1250,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 	 *
 	 * @return
 	 */
+	@Test
 	public int testMISGang() throws Exception
 	{
 		KElement.setLongID(false);
@@ -1284,7 +1281,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		}
 		catch (DataFormatException e)
 		{
-			Assert.fail("rectangle");
+			fail("rectangle");
 		}
 
 		JDFStrippingParams sp2 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.BinderySignatureName, "BS2");
@@ -1299,9 +1296,9 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		}
 		catch (DataFormatException e)
 		{
-			Assert.fail("rectangle");
+			fail("rectangle");
 		}
-		d.write2File(sm_dirTestDataTemp + File.separator + "StrippingGang.jdf", 2, false);
+		writeRoundTrip(misNode, "StrippingGang");
 		return 0;
 	}
 

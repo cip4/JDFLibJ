@@ -70,9 +70,9 @@ package org.cip4.jdflib.util;
 
 import java.io.File;
 
-import junit.framework.TestCase;
-
 import org.junit.Test;
+
+import junit.framework.TestCase;
 
 /**
  * JUnit test case for PlatformUtil class.

@@ -1,5 +1,8 @@
 package org.cip4.jdflib.datatypes;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.Test;
 

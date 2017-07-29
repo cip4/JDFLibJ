@@ -76,12 +76,12 @@
  */
 package org.cip4.jdflib.datatypes;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 
 /**
  * 

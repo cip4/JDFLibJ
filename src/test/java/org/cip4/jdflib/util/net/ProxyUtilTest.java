@@ -66,7 +66,7 @@
  * <http://www.cip4.org/>.
  *
  *
- *  
+ *
  */
 /*
  * Created on Aug 26, 2004
@@ -75,6 +75,10 @@
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
 package org.cip4.jdflib.util.net;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -91,7 +95,7 @@ import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * 12.01.2009
  */
 public class ProxyUtilTest extends JDFTestCaseBase
@@ -147,7 +151,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -187,7 +191,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToURL()
@@ -199,7 +203,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testWriteToURLSecure()

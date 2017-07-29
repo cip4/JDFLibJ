@@ -71,11 +71,17 @@
  * JDFXYPairRangeListTest.java
  *
  * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.datatypes;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
@@ -85,7 +91,7 @@ import org.junit.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class VJDFAttributeMapTest extends JDFTestCaseBase
 {
@@ -225,7 +231,7 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testgetMatchingMaps()
@@ -250,8 +256,8 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testHash()
@@ -339,7 +345,7 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testShowKeys()
@@ -447,7 +453,7 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
 	public void testExtendMap()
@@ -511,7 +517,7 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMinSize()

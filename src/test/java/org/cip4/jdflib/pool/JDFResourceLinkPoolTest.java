@@ -69,6 +69,12 @@
  */
 package org.cip4.jdflib.pool;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
@@ -87,7 +93,7 @@ import org.junit.Test;
 
 /**
  * @author MuchaD
- * 
+ *
  *         This implements the first fixture with unit tests for class
  *         JDFElement.
  */
@@ -95,7 +101,7 @@ public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 {
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLink()
@@ -118,7 +124,7 @@ public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetInOutLink()
@@ -147,8 +153,8 @@ public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testLinkResource.
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testLinkResource()
@@ -186,8 +192,8 @@ public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testLinkResource.
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testLinkResourcePartition()
@@ -214,7 +220,7 @@ public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLinkedResources()

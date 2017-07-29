@@ -10,8 +10,6 @@ package org.cip4.jdflib.datatypes;
 
 import java.util.zip.DataFormatException;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -20,6 +18,8 @@ import org.cip4.jdflib.resource.devicecapability.JDFTest;
 import org.cip4.jdflib.resource.devicecapability.JDFXYPairEvaluation;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 public class JDFXYPairRangeListTest extends TestCase
 {
 	@Test

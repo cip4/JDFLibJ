@@ -69,6 +69,9 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -77,13 +80,13 @@ import org.junit.Test;
 
 /**
  * @author rainer prosi
- * 
+ *
  */
 public class JDFShapeTemplateTest extends JDFTestCaseBase
 {
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testSetStandard()
@@ -94,8 +97,8 @@ public class JDFShapeTemplateTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testGetEnumStandard()
@@ -106,8 +109,8 @@ public class JDFShapeTemplateTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testSetNonStandard()

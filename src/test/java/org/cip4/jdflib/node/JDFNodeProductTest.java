@@ -75,8 +75,6 @@
  */
 package org.cip4.jdflib.node;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -84,6 +82,8 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *

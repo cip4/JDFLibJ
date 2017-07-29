@@ -68,8 +68,6 @@
  */
 package org.cip4.jdflib.elementwalker;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -81,6 +79,8 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.VectorMap;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 

@@ -71,6 +71,8 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -78,9 +80,9 @@ import org.junit.Test;
 
 /**
  * general utilities for containers and objects
- * 
+ *
  * @author Rainer Prosi
- * 
+ *
  */
 public class DumpDirTest extends JDFTestCaseBase
 {

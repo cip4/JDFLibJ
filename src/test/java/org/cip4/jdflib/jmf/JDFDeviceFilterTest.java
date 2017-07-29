@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.jmf;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
@@ -83,7 +86,7 @@ import org.junit.Test;
 
 /**
  * @author Rainer Prosi
- * 
+ *
  * Test of the Status JMF
  */
 public class JDFDeviceFilterTest extends JDFTestCaseBase
@@ -114,7 +117,7 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testApplyToNone()
@@ -133,7 +136,7 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testApplyToBrief()
@@ -152,7 +155,7 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testApplyToClass()
@@ -161,7 +164,7 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testApplyToDetails()
@@ -181,7 +184,7 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testApplyToCaps()

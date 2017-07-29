@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,20 +56,24 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 package org.cip4.jdflib.devicecapability;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Vector;
 
@@ -106,12 +110,11 @@ import org.cip4.jdflib.resource.devicecapability.JDFXYPairEvaluation;
 import org.cip4.jdflib.resource.devicecapability.JDFnot;
 import org.cip4.jdflib.resource.devicecapability.JDFor;
 import org.cip4.jdflib.resource.process.JDFComponent;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * 
- *  
+ *
+ *
  * @author rainer prosi
  * @date Mar 17, 2013
  */
@@ -125,7 +128,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 	private JDFEnumerationState compState;
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -155,8 +158,8 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -165,21 +168,21 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		JDFDoc d = new JDFDoc(ElementName.INTEGEREVALUATION);
 		JDFIntegerEvaluation ie = (JDFIntegerEvaluation) d.getRoot();
 		ie.appendValueList(1);
-		Assert.assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1");
+		assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1");
 		ie.appendValueList(3);
-		Assert.assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1 3");
+		assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1 3");
 		ie.appendValueList(4);
-		Assert.assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1 3 ~ 4");
+		assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1 3 ~ 4");
 		ie.appendValueList(5);
-		Assert.assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1 3 ~ 5");
+		assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1 3 ~ 5");
 		ie.appendValueList(Integer.MAX_VALUE);
-		Assert.assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1 3 ~ 5 INF");
-		Assert.assertEquals(ie.getValueList(), new JDFIntegerRangeList("1 3 ~ 5 INF"));
+		assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1 3 ~ 5 INF");
+		assertEquals(ie.getValueList(), new JDFIntegerRangeList("1 3 ~ 5 INF"));
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testEnumerationEvaluation()
@@ -187,15 +190,15 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		JDFDoc d = new JDFDoc(ElementName.ENUMERATIONEVALUATION);
 		JDFEnumerationEvaluation ee = (JDFEnumerationEvaluation) d.getRoot();
 		ee.setRegExp("a( b)?");
-		Assert.assertTrue(ee.fitsValue("a"));
-		Assert.assertTrue(ee.fitsValue("a b"));
-		Assert.assertFalse(ee.fitsValue("a b c"));
-		Assert.assertFalse(ee.fitsValue("c"));
+		assertTrue(ee.fitsValue("a"));
+		assertTrue(ee.fitsValue("a b"));
+		assertFalse(ee.fitsValue("a b c"));
+		assertFalse(ee.fitsValue("c"));
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testSetTolerance()
@@ -203,15 +206,15 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		JDFDoc d = new JDFDoc(ElementName.XYPAIREVALUATION);
 		JDFXYPairEvaluation ie = (JDFXYPairEvaluation) d.getRoot();
 		ie.setTolerance(new JDFXYPair(1, 1));
-		Assert.assertEquals(ie.getTolerance().toString(), "1 1");
+		assertEquals(ie.getTolerance().toString(), "1 1");
 		ie.setValueList(new JDFXYPair(1.5, 1.5));
 		ie.appendBasicPreflightTest("foo");
-		Assert.assertTrue(ie.fitsMap(new JDFAttributeMap("foo", "1.2 1.6")));
+		assertTrue(ie.fitsMap(new JDFAttributeMap("foo", "1.2 1.6")));
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testSetPath()
@@ -223,8 +226,8 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testIsPresentPartition()
@@ -234,7 +237,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		tst.setContext("//Component");
 		JDFIsPresentEvaluation ipe = (JDFIsPresentEvaluation) tst.getTerm();
 		ipe.setRefTarget(ptState);
-		Assert.assertEquals(ipe.getrRef(), ptState.getID());
+		assertEquals(ipe.getrRef(), ptState.getID());
 
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode node = doc.getJDFRoot();
@@ -245,16 +248,16 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		XMLDoc rep = new XMLDoc("root", null);
 		KElement eRep = rep.getRoot();
 		boolean fitsJDF = tst.fitsJDF(comp, eRep);
-		Assert.assertTrue(fitsJDF);
+		assertTrue(fitsJDF);
 		comp = (JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "s1");
 		fitsJDF = tst.fitsJDF(comp, eRep);
-		Assert.assertTrue("also partition leaves ", fitsJDF);
+		assertTrue("also partition leaves ", fitsJDF);
 
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testAction()
@@ -265,7 +268,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		JDFor or = (JDFor) ((JDFnot) tst.getTerm()).getTerm(EnumTerm.or, 0);
 		JDFIsPresentEvaluation ipe = (JDFIsPresentEvaluation) or.appendTerm(EnumTerm.IsPresentEvaluation);
 		ipe.setRefTarget(ptState);
-		Assert.assertEquals(ipe.getrRef(), ptState.getID());
+		assertEquals(ipe.getrRef(), ptState.getID());
 
 		JDFEnumerationEvaluation enev = (JDFEnumerationEvaluation) or.appendTerm(EnumTerm.EnumerationEvaluation);
 		enev.setRefTarget(compState);
@@ -279,31 +282,31 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		XMLDoc rep = new XMLDoc("root", null);
 		KElement eRep = rep.getRoot();
 		boolean fitsJDF = tst.fitsJDF(comp, eRep);
-		Assert.assertTrue(fitsJDF);
+		assertTrue(fitsJDF);
 
 		comp.setProductType("foobar");
 		fitsJDF = tst.fitsJDF(comp, eRep);
-		Assert.assertFalse("have pt", fitsJDF);
+		assertFalse("have pt", fitsJDF);
 
 		Vector<EnumComponentType> v = new Vector<EnumComponentType>();
 		v.add(EnumComponentType.FinalProduct);
 		comp.setComponentType(v);
 		fitsJDF = tst.fitsJDF(comp, eRep);
-		Assert.assertFalse("have both", fitsJDF);
+		assertFalse("have both", fitsJDF);
 
 		comp.removeAttribute("ProductType");
 		fitsJDF = tst.fitsJDF(comp, eRep);
-		Assert.assertFalse("have final", fitsJDF);
+		assertFalse("have final", fitsJDF);
 
 		v = new Vector<EnumComponentType>();
 		v.add(EnumComponentType.PartialProduct);
 		comp.setComponentType(v);
 		fitsJDF = tst.fitsJDF(comp, eRep);
-		Assert.assertTrue("have no final", fitsJDF);
+		assertTrue("have no final", fitsJDF);
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#toString()
 	 */
 	@Override

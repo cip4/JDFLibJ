@@ -71,6 +71,11 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.HashMap;
 import java.util.Set;
 import java.util.Vector;
@@ -85,9 +90,9 @@ import org.junit.Test;
 
 /**
  * general utilities for containers and objects
- * 
+ *
  * @author Rainer Prosi
- * 
+ *
  */
 public class ContainerUtilTest extends JDFTestCaseBase
 {
@@ -102,7 +107,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		}
 
 		/**
-		 *  
+		 *
 		 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 		 */
 		@Override
@@ -126,7 +131,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		}
 
 		/**
-		 * 
+		 *
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
 		@Override
@@ -157,7 +162,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		}
 
 		/**
-		 *  
+		 *
 		 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 		 */
 		@Override
@@ -170,7 +175,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEquals()
@@ -183,7 +188,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMatches()
@@ -203,7 +208,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testMatchesExisting()
@@ -223,7 +228,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testUnifyMatches()
@@ -242,7 +247,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public void testUnifyFilterMatches()
@@ -265,7 +270,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddAll()
@@ -281,7 +286,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetMatch()
@@ -297,7 +302,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetMatchInverted()
@@ -313,7 +318,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testToHashSetArray()
@@ -327,7 +332,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testToValueVector()
@@ -349,7 +354,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetKeyVector()
@@ -371,7 +376,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetInvertedVector()
@@ -402,7 +407,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetNonEmpty()
@@ -416,7 +421,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testUnify()
@@ -440,7 +445,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testEnsureSize()
@@ -454,7 +459,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testCompare()

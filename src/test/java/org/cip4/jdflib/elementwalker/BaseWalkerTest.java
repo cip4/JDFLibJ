@@ -67,9 +67,12 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.elementwalker;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
@@ -80,7 +83,7 @@ import org.junit.Test;
 
 /**
  * @author prosirai
- * 
+ *
  */
 public class BaseWalkerTest extends JDFTestCaseBase
 {
@@ -125,7 +128,7 @@ public class BaseWalkerTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testDepth()
@@ -136,7 +139,7 @@ public class BaseWalkerTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testDepthWalk()

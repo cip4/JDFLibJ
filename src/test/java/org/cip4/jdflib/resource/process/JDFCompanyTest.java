@@ -69,6 +69,10 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -77,8 +81,8 @@ import org.junit.Test;
 public class JDFCompanyTest extends JDFTestCaseBase
 {
 	/**
-	 *  
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public final void testMatches()
@@ -96,8 +100,8 @@ public class JDFCompanyTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *  
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public final void testDescriptiveName()

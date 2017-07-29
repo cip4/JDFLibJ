@@ -1,7 +1,5 @@
 package org.cip4.jdflib.resource.process;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.auto.JDFAutoCutBlock.EnumBlockType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -12,6 +10,8 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 public class JDFCutBlockTest extends TestCase
 {
 	/**

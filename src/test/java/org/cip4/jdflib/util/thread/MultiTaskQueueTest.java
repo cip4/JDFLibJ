@@ -68,6 +68,9 @@
  */
 package org.cip4.jdflib.util.thread;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.Test;

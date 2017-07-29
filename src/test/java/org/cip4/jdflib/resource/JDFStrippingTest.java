@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.resource;
 
+import static org.junit.Assert.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -91,7 +93,7 @@ import org.junit.Test;
 
 /**
  * all kinds of fun tests around Stripping also some tests for automated layout
- * 
+ *
  */
 public class JDFStrippingTest extends JDFTestCaseBase
 {
@@ -122,8 +124,8 @@ public class JDFStrippingTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testPositionValid()
@@ -137,7 +139,7 @@ public class JDFStrippingTest extends JDFTestCaseBase
 
 	/**
 	 * test how foldouts are generated
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test

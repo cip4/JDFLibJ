@@ -71,11 +71,11 @@
  */
 package org.cip4.jdflib.util;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 /**
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen

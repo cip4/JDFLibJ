@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.validate;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -85,7 +88,7 @@ import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * Jul 16, 2010
  */
 public class JDFValidatorTest extends JDFTestCaseBase
@@ -94,7 +97,7 @@ public class JDFValidatorTest extends JDFTestCaseBase
 	private JDFValidator validator;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testResourceAuditLinks()
@@ -129,7 +132,7 @@ public class JDFValidatorTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testResourceInfo()

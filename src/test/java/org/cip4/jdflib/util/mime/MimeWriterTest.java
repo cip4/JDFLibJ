@@ -5,12 +5,12 @@ package org.cip4.jdflib.util.mime;
 
 import java.io.ByteArrayInputStream;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.mime.MimeWriter.FixSemiColonStream;
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */

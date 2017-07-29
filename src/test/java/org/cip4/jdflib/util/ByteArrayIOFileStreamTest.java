@@ -76,6 +76,10 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -88,13 +92,13 @@ import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * Jul 16, 2009
  */
 public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSize()
@@ -109,7 +113,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testTell()
@@ -130,7 +134,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testConstructStream()
@@ -153,7 +157,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 * 
+	 *
 	 */
 	@Test
 	public void testConstructFile() throws IOException
@@ -185,7 +189,7 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 * 
+	 *
 	 */
 	@Test
 	public void testConstructBadFile() throws IOException

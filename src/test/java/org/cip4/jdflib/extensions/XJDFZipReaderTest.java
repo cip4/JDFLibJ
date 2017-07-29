@@ -68,6 +68,9 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -83,7 +86,7 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 {
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testSimpleZip()
@@ -94,7 +97,7 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testConvert()
@@ -108,7 +111,7 @@ public class XJDFZipReaderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testExtractJMF()
