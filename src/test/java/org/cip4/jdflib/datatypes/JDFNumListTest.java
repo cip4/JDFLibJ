@@ -387,7 +387,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	{
 		final JDFNumberList nl = new JDFNumberList("4 3");
 		final JDFNumberList nl2 = new JDFNumberList("-3 4");
-		assertEquals(nl.norm(), nl2.norm());
+		assertEquals(nl.norm(), nl2.norm(), 0.0001);
 		assertEquals(nl.norm(), 5, 0.0);
 	}
 
@@ -400,7 +400,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	{
 		final JDFNumberList nl = new JDFNumberList("4 3");
 		final JDFNumberList nl2 = new JDFNumberList("-3 4");
-		assertEquals(nl.volume(), -nl2.volume());
+		assertEquals(nl.volume(), -nl2.volume(), 0.0001);
 		assertEquals(nl.volume(), 12, 0.0);
 	}
 

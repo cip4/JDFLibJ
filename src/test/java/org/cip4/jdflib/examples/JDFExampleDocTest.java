@@ -1251,7 +1251,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
-	public int testMISGang() throws Exception
+	public void testMISGang() throws Exception
 	{
 		KElement.setLongID(false);
 		// set up the root process node, which is an imposition node
@@ -1299,7 +1299,6 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 			fail("rectangle");
 		}
 		writeRoundTrip(misNode, "StrippingGang");
-		return 0;
 	}
 
 }

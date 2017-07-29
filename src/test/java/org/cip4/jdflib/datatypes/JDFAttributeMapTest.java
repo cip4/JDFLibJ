@@ -205,7 +205,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	{
 		JDFAttributeMap map = new JDFAttributeMap();
 		map.put("a", 2.1);
-		assertEquals(map.getDouble("a", 4), 2.1);
+		assertEquals(map.getDouble("a", 4), 2.1, 0.001);
 	}
 
 	/**

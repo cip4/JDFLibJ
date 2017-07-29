@@ -98,7 +98,6 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 * @return the created doc
 	 *
 	 */
-	@Test
 	public JDFDoc testWalk()
 	{
 		try

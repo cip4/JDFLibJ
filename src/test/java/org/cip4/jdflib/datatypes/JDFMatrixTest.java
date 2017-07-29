@@ -157,10 +157,10 @@ public class JDFMatrixTest extends JDFTestCaseBase
 		assertEquals(m, JDFMatrix.getUnitMatrix());
 		m.rotate(180);
 		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate180, 0, 0));
-		assertEquals(m.getAngle(), 180.0);
+		assertEquals(m.getAngle(), 180.0, 0.00001);
 		m.rotate(90);
 		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate270, 0, 0));
-		assertEquals(m.getAngle(), 270.0);
+		assertEquals(m.getAngle(), 270.0, 0.00001);
 
 		m.rotate(180);
 		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate90, 0, 0));

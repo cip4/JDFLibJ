@@ -211,7 +211,6 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 * @return
 	 *
 	 */
-	@Test
 	public JDFDoc testAddPhase()
 	{
 		boolean bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");

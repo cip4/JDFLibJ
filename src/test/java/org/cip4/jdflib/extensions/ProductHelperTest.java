@@ -253,11 +253,11 @@ public class ProductHelperTest extends JDFTestCaseBase
 		KElement productList = root.appendElement("ProductList");
 		KElement product = productList.appendElement("Product");
 		ProductHelper ph = new ProductHelper(product);
-		assertEquals(ph.getOverproduction(), 0.0);
+		assertEquals(ph.getOverproduction(), 0.0, 0.0001);
 		ph.setAmount(42);
-		assertEquals(ph.getOverproduction(), 0.0);
+		assertEquals(ph.getOverproduction(), 0.0, 0.0001);
 		ph.setMaxAmount(84);
-		assertEquals(ph.getOverproduction(), 100.0);
+		assertEquals(ph.getOverproduction(), 100.0, 0.0001);
 	}
 
 }
