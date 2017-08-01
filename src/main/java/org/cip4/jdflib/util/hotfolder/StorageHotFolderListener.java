@@ -92,6 +92,7 @@ class StorageHotFolderListener implements HotFolderListener
 	protected final Log log;
 	private int nHotOK;
 	private int nHotError;
+	private int nQueued;
 	private int maxStore;
 
 	/**
@@ -102,7 +103,7 @@ class StorageHotFolderListener implements HotFolderListener
 	StorageHotFolderListener(File storageDir, HotFolderListener hfListener, StorageHotFolder parent)
 	{
 		super();
-		nHotOK = nHotError = 0;
+		nHotOK = nHotError = nQueued = 0;
 		setMaxStore(42);
 		errorStorage = null;
 		okStorage = null;
@@ -343,7 +344,8 @@ class StorageHotFolderListener implements HotFolderListener
 	File getStoredFile(File hotFile)
 	{
 		String hotFileName = hotFile.getName();
-		File newAbsoluteFile = FileUtil.getFileInDirectory(storage, new File(hotFileName));
+		int nTmp = nQueued++;
+		File newAbsoluteFile = getTmpFile(hotFileName, nTmp);
 		boolean ok = FileUtil.moveFile(hotFile, newAbsoluteFile);
 		if (ok)
 		{
@@ -358,10 +360,12 @@ class StorageHotFolderListener implements HotFolderListener
 			File aux = FileUtil.getAuxDir(hotFile);
 			if (aux != null)
 			{
+				File newaux = getTmpAux(nTmp, aux);
+				FileUtil.moveFile(aux, newaux);
 				log.info("moving aux file " + aux + " to " + storage);
 				for (int i = 1; true; i++)
 				{
-					File moved = FileUtil.moveFileToDir(aux, storage);
+					File moved = FileUtil.moveFileToDir(newaux, storage);
 					if (moved != null)
 					{
 						log.info("moved aux dir " + aux + " to " + moved);
@@ -377,6 +381,38 @@ class StorageHotFolderListener implements HotFolderListener
 			}
 		}
 		return ok ? newAbsoluteFile : null;
+	}
+
+	private File getTmpAux(int nTmp, File aux)
+	{
+		String ext;
+		ext = FileUtil.getExtension(aux);
+		if (ext == null)
+		{
+			ext = "" + nTmp;
+		}
+		else
+		{
+			ext = nTmp + "." + ext;
+		}
+		File newaux = FileUtil.newExtension(aux, ext);
+		return newaux;
+	}
+
+	private File getTmpFile(String hotFileName, int nTmp)
+	{
+		File newAbsoluteFile = FileUtil.getFileInDirectory(storage, new File(hotFileName));
+		String ext = FileUtil.getExtension(newAbsoluteFile);
+		if (ext == null)
+		{
+			ext = "" + nTmp;
+		}
+		else
+		{
+			ext = nTmp + "." + ext;
+		}
+		newAbsoluteFile = FileUtil.newExtension(newAbsoluteFile, ext);
+		return newAbsoluteFile;
 	}
 
 	/**
