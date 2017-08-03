@@ -152,7 +152,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		{
 			File dumpDir = new File(sm_dirTestDataTemp + "URLOut" + n);
 			dumpDir.delete();
-			URLExtractor ex = new URLExtractor(dumpDir, tmpHFDir.getAbsolutePath(), null);
+			URLExtractor ex = new URLExtractor(dumpDir, hotFile.getParent(), null);
 			ex.setWantLog(true);
 			ex.setDeleteFile(true);
 			JDFDoc d = JDFDoc.parseFile(hotFile);
@@ -269,7 +269,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		}
 		assertFalse(file.getAbsolutePath(), file.exists());
 		assertFalse(content.getAbsolutePath(), content.exists());
-		File file2 = new File(hfPath + "/OK/dummy space.0");
+		File file2 = new File(hfPath + "/OK/dummy space");
 		assertTrue(file2.isDirectory());
 		assertEquals(tmpHFDir.listFiles().length, 0, 0);
 		hf.stop();

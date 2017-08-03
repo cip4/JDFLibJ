@@ -275,9 +275,10 @@ class StorageHotFolderListener implements HotFolderListener
 				if (!ok)
 					log.warn("failed to delete temporary file " + storedFile.getAbsolutePath());
 				FileUtil.deleteAll(auxFile);
-
 			}
 		}
+		File tmp = storedFile.getParentFile();
+		FileUtil.deleteAll(tmp);
 	}
 
 	protected void handleBad(final File storedFile, boolean bOK)
@@ -343,9 +344,9 @@ class StorageHotFolderListener implements HotFolderListener
 
 	File getStoredFile(File hotFile)
 	{
-		String hotFileName = hotFile.getName();
-		int nTmp = nQueued++;
-		File newAbsoluteFile = getTmpFile(hotFileName, nTmp);
+		String name = hotFile.getName();
+		File tmpDir = getTmpDir();
+		File newAbsoluteFile = FileUtil.getFileInDirectory(tmpDir, new File(name));
 		boolean ok = FileUtil.moveFile(hotFile, newAbsoluteFile);
 		if (ok)
 		{
@@ -360,12 +361,12 @@ class StorageHotFolderListener implements HotFolderListener
 			File aux = FileUtil.getAuxDir(hotFile);
 			if (aux != null)
 			{
-				File newaux = getTmpAux(nTmp, aux);
+				File newaux = FileUtil.getFileInDirectory(tmpDir, new File(aux.getName()));
 				FileUtil.moveFile(aux, newaux);
-				log.info("moving aux file " + aux + " to " + storage);
+				log.info("moving aux file " + aux + " to " + tmpDir);
 				for (int i = 1; true; i++)
 				{
-					File moved = FileUtil.moveFileToDir(newaux, storage);
+					File moved = FileUtil.moveFileToDir(newaux, tmpDir);
 					if (moved != null)
 					{
 						log.info("moved aux dir " + aux + " to " + moved);
@@ -373,7 +374,7 @@ class StorageHotFolderListener implements HotFolderListener
 					}
 					else
 					{
-						log.warn("could not move aux dir " + aux + " to " + storage + " #" + i);
+						log.warn("could not move aux dir " + aux + " to " + tmpDir + " #" + i);
 						if (i == 3 || !ThreadUtil.sleep(4242 * i))
 							break;
 					}
@@ -383,36 +384,9 @@ class StorageHotFolderListener implements HotFolderListener
 		return ok ? newAbsoluteFile : null;
 	}
 
-	private File getTmpAux(int nTmp, File aux)
+	private synchronized File getTmpDir()
 	{
-		String ext;
-		ext = FileUtil.getExtension(aux);
-		if (ext == null)
-		{
-			ext = "" + nTmp;
-		}
-		else
-		{
-			ext = nTmp + "." + ext;
-		}
-		File newaux = FileUtil.newExtension(aux, ext);
-		return newaux;
-	}
-
-	private File getTmpFile(String hotFileName, int nTmp)
-	{
-		File newAbsoluteFile = FileUtil.getFileInDirectory(storage, new File(hotFileName));
-		String ext = FileUtil.getExtension(newAbsoluteFile);
-		if (ext == null)
-		{
-			ext = "" + nTmp;
-		}
-		else
-		{
-			ext = nTmp + "." + ext;
-		}
-		newAbsoluteFile = FileUtil.newExtension(newAbsoluteFile, ext);
-		return newAbsoluteFile;
+		return FileUtil.newExtension(storage, "" + nQueued++);
 	}
 
 	/**
