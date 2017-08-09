@@ -136,14 +136,14 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 
 		assertEquals(q.size(), 7, 1);
 		q.interruptCurrent(1);
-		ThreadUtil.sleep(10);
-		assertEquals(q.size(), 4, 1);
+		ThreadUtil.sleep(20);
+		assertEquals(q.size(), 4, 3);
 		q.interruptCurrent(100);
 		ThreadUtil.sleep(10);
-		assertEquals(q.size(), 4, 1);
+		assertEquals(q.size(), 4, 3);
 		q.interruptCurrent(1);
 		ThreadUtil.sleep(10);
-		assertEquals(q.size(), 1, 1);
+		assertEquals(q.size(), 1, 3);
 		q.interruptCurrent(1);
 		ThreadUtil.sleep(10);
 		assertEquals(q.size(), 0, 1);
