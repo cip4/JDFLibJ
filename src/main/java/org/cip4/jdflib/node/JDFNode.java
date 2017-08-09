@@ -3379,6 +3379,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * default: isExecutable(null, true)
 	 */
 
+	/**
+	 *
+	 * @param partMap
+	 * @param bCheckChildren
+	 * @return
+	 */
 	public boolean isExecutable(final JDFAttributeMap partMap, final boolean bCheckChildren)
 	{
 		final JDFResourceLinkPool resourceLinkPool = getResourceLinkPool();
@@ -3386,7 +3392,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			return false;
 		}
-		final VElement v = resourceLinkPool.getPoolChildren(null, null, null);
 		final EnumNodeStatus status = getPartStatus(partMap, 0);
 		if ((status != EnumNodeStatus.Waiting) && (status != EnumNodeStatus.Ready))
 		{
@@ -3397,11 +3402,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			return false;
 		}
 
+		final VElement v = resourceLinkPool.getPoolChildren(null, null, null);
 		if (v != null)
 		{
-			for (int i = 0; i < v.size(); i++)
+			for (KElement e : v)
 			{
-				final JDFResourceLink rl = (JDFResourceLink) v.elementAt(i);
+				final JDFResourceLink rl = (JDFResourceLink) e;
 
 				if (rl != null && !rl.isExecutable(partMap, bCheckChildren))
 				{
@@ -3445,7 +3451,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 *
-
+	
 	 *
 	 */
 

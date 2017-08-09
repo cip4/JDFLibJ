@@ -1233,6 +1233,22 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testIsExecutableNull()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		final JDFResource r = n.addResource(ElementName.SCREENINGINTENT, null, EnumUsage.Input, null, null, null, null);
+		final JDFResourceLink rl = n.getLink(r, null);
+		r.setResStatus(null, true);
+
+		assertFalse(rl.isExecutable(null, true));
+	}
+
+	/**
+	 * Method testIsExecutable().
+	 *
+	 */
+	@Test
 	public void testIsExecutable()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);

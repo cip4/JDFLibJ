@@ -671,25 +671,22 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		if (bCheckChildren)
 		{
 			final VElement leaves2 = getTargetVector(-1);
-			for (int i = 0; i < leaves2.size(); i++)
+			for (KElement e : leaves2)
 			{
-				final JDFResource p = (JDFResource) leaves2.elementAt(i);
-				if (p == null)
+				if (e != null)
 				{
-					continue;
+					final JDFResource p = (JDFResource) e;
+					final VElement targetVector = p.getLeaves(false);
+					leaves.addAll(targetVector);
 				}
-				final VElement targetVector = p.getLeaves(false);
-				leaves.addAll(targetVector);
 			}
 		}
-
 		else
-		{ // calculate availability directly, but only for the subelements as
-				// specified by partMap
+		{ // calculate availability directly, but only for the subelements as specified by partMap
 			final VElement leaves2 = getTargetVector(-1);
-			for (int i = 0; i < leaves2.size(); i++)
+			for (KElement e : leaves2)
 			{
-				JDFResource leaf = (JDFResource) leaves2.elementAt(i);
+				JDFResource leaf = (JDFResource) e;
 				leaf = leaf.getPartition(partMap, null);
 				if (leaf != null)
 				{
@@ -708,12 +705,12 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 			}
 
 			final JDFResource.EnumResStatus status = leaf.getResStatus(true);
-			if (status.equals(JDFResource.EnumResStatus.InUse))
+			if (EnumResStatus.InUse.equals(status))
 			{
 				return false;
 			}
 
-			bExec = getMinStatus().getValue() <= status.getValue();
+			bExec = status != null && getMinStatus().getValue() <= status.getValue();
 			// any leaf not executable --> the whole thing is not executable
 			if (!bExec)
 			{
