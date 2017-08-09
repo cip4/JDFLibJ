@@ -469,6 +469,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		FileOutputStream fos2 = new FileOutputStream(file2);
 		for (int i = 0; i < 20; i++) // incrementally fill file
 		{
+			ThreadUtil.sleep(2);
 			for (int j = 0; j < 200; j++)
 			{
 				// incrementally fill file
@@ -477,8 +478,6 @@ public class HotFolderTest extends JDFTestCaseBase
 			}
 			fos.flush();
 			fos2.flush();
-
-			ThreadUtil.sleep(5);
 
 		}
 		assertTrue(file.exists());

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -124,7 +124,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	public void testWaitTimeout()
 	{
 		assertEquals(new TestWait(1400, 1000).getWaitedObject().intValue(), 42);
-		assertNull(new TestWait(20, 1000).getWaitedObject());
+		assertNull(new TestWait(2, 5000).getWaitedObject());
 	}
 
 	/**
