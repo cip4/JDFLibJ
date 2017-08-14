@@ -316,6 +316,32 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testRelativePathFromJDFUmlaut()
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
+		rl.addPDF("./content/boo%C3%BCoo.pdf", 0, -1);
+		rl.addPDF("content/aaa%C3%BCoo.pdf", 0, -1);
+		d.write2File(sm_dirTestDataTemp + "URLIn/dummy.jdf", 2, false);
+
+		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "URLIn/content/booüoo.pdf"));
+		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "URLIn/content/aaaüoo.pdf"));
+
+		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut");
+		dumpDir.delete();
+		URLExtractor ex = new URLExtractor(dumpDir, null, null);
+		ex.walkTree(d.getJDFRoot(), null);
+		String write2String = rl.toDisplayXML(2);
+		assertTrue(new File(sm_dirTestDataTemp + "URLOut/content/booüoo.pdf").exists());
+		assertTrue(new File(sm_dirTestDataTemp + "URLIn/content/booüoo.pdf").exists());
+		assertTrue(write2String.indexOf("URLOut/content/booüoo.pdf") > 0);
+		assertTrue(write2String.indexOf("URLOut/content/aaaüoo.pdf") > 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testRelativePathDelete()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
