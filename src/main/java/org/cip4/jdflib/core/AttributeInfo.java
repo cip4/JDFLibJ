@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -115,7 +115,7 @@ public class AttributeInfo
 {
 
 	/**
-	 * 
+	 *
 	 */
 	public static final HashMap<String, AttributeInfo> fixedMap = new HashMap<String, AttributeInfo>();
 
@@ -124,7 +124,7 @@ public class AttributeInfo
 
 	/**
 	 * Constructor
-	 * 
+	 *
 		 * @param attrInfo_own : table with element-specific attribute info
 	 */
 	protected AttributeInfo(AtrInfoTable[] attrInfo_own)
@@ -136,7 +136,7 @@ public class AttributeInfo
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param attrInfo_super corresponding attrib info of super; if null: start from scratch, otherwise
 	 *            initialize from other AttributeInfo
 	 * @param attrInfo_own table with element-specific attribute info
@@ -160,9 +160,9 @@ public class AttributeInfo
 
 	/**
 	 * Updater
-	 * 
+	 *
 	 * @param attrInfo_update table with element-specific attribute info
-	 * @return 
+	 * @return
 	 */
 	public AttributeInfo updateAdd(AtrInfoTable attrInfo_update)
 	{
@@ -175,17 +175,17 @@ public class AttributeInfo
 
 	/**
 	 * Updater
-	 * 
+	 *
 	 * @param attrInfo_update table with element-specific attribute info
-	 * @return 
+	 * @return
 	 */
 	public AttributeInfo updateAdd(AtrInfoTable[] attrInfo_update)
 	{
 		if (attrInfo_update != null)
 		{
-			for (int i = 0; i < attrInfo_update.length; i++)
+			for (AtrInfoTable element : attrInfo_update)
 			{
-				attribInfoTable.put(attrInfo_update[i].getAttributeName(), attrInfo_update[i].getAtrInfo());
+				attribInfoTable.put(element.getAttributeName(), element.getAtrInfo());
 			}
 		}
 		return this;
@@ -193,9 +193,9 @@ public class AttributeInfo
 
 	/**
 	 * Updater
-	 * 
+	 *
 	 * @param attrInfo_update table with element-specific attribute info
-	 * @return 
+	 * @return
 	 */
 	public AttributeInfo updateRemove(AtrInfoTable attrInfo_update)
 	{
@@ -211,19 +211,19 @@ public class AttributeInfo
 
 	/**
 	 * Updater
-	 * 
+	 *
 	 * @param attrInfo_update table with element-specific attribute info to remove from attribInfoTable
-	 * @return 
+	 * @return
 	 */
 	public AttributeInfo updateRemove(AtrInfoTable[] attrInfo_update)
 	{
 		if (attrInfo_update != null)
 		{
-			for (int i = 0; i < attrInfo_update.length; i++)
+			for (AtrInfoTable element : attrInfo_update)
 			{
-				if (attribInfoTable.containsKey(attrInfo_update[i].getAttributeName()))
+				if (attribInfoTable.containsKey(element.getAttributeName()))
 				{
-					attribInfoTable.remove(attrInfo_update[i].getAttributeName());
+					attribInfoTable.remove(element.getAttributeName());
 				}
 			}
 		}
@@ -251,9 +251,8 @@ public class AttributeInfo
 	{
 		if (attrInfo_update != null)
 		{
-			for (int i = 0; i < attrInfo_update.length; i++)
+			for (final AtrInfoTable atrInfoTable : attrInfo_update)
 			{
-				final AtrInfoTable atrInfoTable = attrInfo_update[i];
 				attribInfoTable.put(atrInfoTable.getAttributeName(), atrInfoTable.getAtrInfo());
 			}
 		}
@@ -262,7 +261,7 @@ public class AttributeInfo
 
 	/**
 	 * Returns a list of attributes matching the requested validity for the specified JDF version.
-	 * 
+	 *
 	 * @param attrValidity requested validity
 	 * @return VString: list of strings containing the names of the matching attributes
 	 */
@@ -308,7 +307,7 @@ public class AttributeInfo
 
 	/**
 	 * Returns a map of attributes with defaults for the specified JDF version.
-	 * 
+	 *
 	 * @return JDFAttributeMap: map of strings containing the names and defaults of the matching attributes, null if no
 	 *         defaults exist
 	 */
@@ -338,19 +337,19 @@ public class AttributeInfo
 
 	/**
 	 * Returns true if there is at least one attribute matching the requested validity for the specified JDF version.
-	 * 
+	 *
 	 * @param  attrValidity requested validity
 	 * @return boolean: true if at least one attribute matches the requested validity
 	 */
 	public boolean hasConformingAttrib(EnumAttributeValidity attrValidity)
 	{
-		Iterator<AtrInfo> iter = attribInfoTable.values().iterator();
+		Set<String> set = attribInfoTable.keySet();
 
 		long l2 = JDFVersions.getTheMask(version);
 		long v2 = JDFVersions.getTheOffset(version);
-		while (iter.hasNext())
+		for (String s : set)
 		{
-			AtrInfo ai = attribInfoTable.get(iter.next());
+			AtrInfo ai = attribInfoTable.get(s);
 			if ((ai.getAtrValidityStatus() & l2) == ((long) attrValidity.getValue() << v2))
 			{
 				return true;
@@ -362,7 +361,7 @@ public class AttributeInfo
 
 	/**
 	 * Returns the list of required attributes for the specified JDF version.
-	 * 
+	 *
 	 * @return VString: list of strings containing the names of the required attributes
 	 */
 	public VString requiredAttribs()
@@ -373,7 +372,7 @@ public class AttributeInfo
 	/**
 	 * Returns the list of optional attributes for the specified JDF version. Note: This includes attributes marked as
 	 * optional as well as attributes marked as deprecated (since, for backward compatibility, these are also optional).
-	 * 
+	 *
 	 * @return VString: list of strings containing the names of the optional attributes
 	 */
 	public VString optionalAttribs()
@@ -395,7 +394,7 @@ public class AttributeInfo
 
 	/**
 	 * Returns the list of all attributes for the specified JDF version.
-	 * 
+	 *
 	 * @return VString: list of strings containing the names of the deprecated attributes
 	 */
 	public VString knownAttribs()
@@ -405,7 +404,7 @@ public class AttributeInfo
 
 	/**
 	 * Returns the list of deprecated attributes for the specified JDF version.
-	 * 
+	 *
 	 * @return VString: list of strings containing the names of the deprecated attributes
 	 */
 	public VString deprecatedAttribs()
@@ -416,7 +415,7 @@ public class AttributeInfo
 	/**
 	 * Returns the list of prerelease attributes (those that are only valid in a later version) for the specified JDF
 	 * version.
-	 * 
+	 *
 	 * @return VString: list of strings containing the names of the prerelease attributes
 	 */
 	public VString prereleaseAttribs()
@@ -427,7 +426,7 @@ public class AttributeInfo
 	/**
 	 * Returns the type of the given attribute for the latest JDF version. Attribute types of previous versions have to
 	 * be provided by attribute-specific functions (if necessary).
-	 * 
+	 *
 	 * @param attributeName name of the attribute
 	 * @return EnumAttributeType: the attribute's type
 	 */
@@ -444,7 +443,7 @@ public class AttributeInfo
 	/**
 	 * Returns the validity of the given attribute for the latest JDF version. Attribute types of previous versions have
 	 * to be provided by attribute-specific functions (if necessary).
-	 * 
+	 *
 	 * @param  attributeName name of the attribute
 	 * @return EnumAttributeType: the attribute's type
 	 */
@@ -465,7 +464,7 @@ public class AttributeInfo
 
 	/**
 	 * Returns the ValuedEnum that goes with attributeName
-	 * 
+	 *
 	 * @param attributeName : name of the attribute
 	 * @return EnumAttributeType: the attribute's type
 	 */
@@ -481,7 +480,7 @@ public class AttributeInfo
 
 	/**
 	 * Returns the Default that goes with attributeName
-	 * 
+	 *
 	 * @param attributeName : name of the attribute
 	 * @return EnumAttributeType: the attribute's type
 	 */
@@ -561,7 +560,7 @@ public class AttributeInfo
 		}
 
 		/**
-		 * @param test 
+		 * @param test
 		 * @return true if test is a range data type
 		 */
 		public static boolean isRange(EnumAttributeType test)
@@ -784,7 +783,7 @@ public class AttributeInfo
 
 	/**
 	 * returns the data type of a given attribute
-	 * 
+	 *
 	 * @param attributeName the localname of the attribute to check
 	 * @return the data type of attributeName
 	 * @deprecated 2005-08-26
@@ -854,11 +853,11 @@ public class AttributeInfo
 	// /////////////
 
 	/**
-	 * @param val 
-	 * @param iType 
-	 * @param enu 
-	 * @return 
-	 * 
+	 * @param val
+	 * @param iType
+	 * @param enu
+	 * @return
+	 *
 	 */
 	public static boolean validStringForType(String val, EnumAttributeType iType, ValuedEnum enu)
 	{
@@ -1129,7 +1128,7 @@ public class AttributeInfo
 
 	/**
 	 * get the first jdf version where an attrinute of this type is valid
-	 * 
+	 *
 	 * @param attributeName the name of the queried attribute
 	 * @return
 	 */
@@ -1144,7 +1143,7 @@ public class AttributeInfo
 
 	/**
 	 * get the last jdf version where an attrinute of this type is valid
-	 * 
+	 *
 	 * @param attributeName the name of the queried attribute
 	 * @return
 	 */

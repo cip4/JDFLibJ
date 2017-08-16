@@ -961,10 +961,12 @@ public class JDFElement extends KElement
 		return null;
 	}
 
-	private static final DocumentJDFImpl m_dummyDocumentJDFImpl = new DocumentJDFImpl();
+	private static DocumentJDFImpl m_dummyDocumentJDFImpl = null;
 
 	private boolean checkInstance(final VString vElements, final String requiredKey)
 	{
+		if (m_dummyDocumentJDFImpl == null)
+			m_dummyDocumentJDFImpl = new DocumentJDFImpl();
 		final Class<?> requiredClass = m_dummyDocumentJDFImpl.getFactoryClass(requiredKey);
 		Class<?> elementClass = null;
 		final Iterator<String> elemIter = vElements.iterator();
