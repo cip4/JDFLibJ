@@ -215,7 +215,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	 */
 	public MessageHelper appendMessage(String elementName)
 	{
-		if (StringUtil.getNonEmpty(elementName) == null)
+		if (StringUtil.isEmpty(elementName))
 		{
 			log.error("Cannot append null element");
 			return null;

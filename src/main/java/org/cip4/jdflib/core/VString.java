@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  *
@@ -114,7 +114,7 @@ public class VString extends Vector<String>
 
 	/**
 	 * constructor
-	 * 
+	 *
 	 * @param m
 	 */
 	public VString(final Vector<String> m)
@@ -139,7 +139,7 @@ public class VString extends Vector<String>
 
 	/**
 	 * simple static factory - null if strIn is null or empty
-	 * 
+	 *
 	 * @param strIn
 	 * @param strSep
 	 * @return
@@ -150,7 +150,7 @@ public class VString extends Vector<String>
 	}
 
 	/**
-	 * 
+	 *
 	 * constructs a VString by tokenizing a string
 	 * @param strIn the string to tokenize
 	 * @param strSep the separator character
@@ -158,7 +158,7 @@ public class VString extends Vector<String>
 	public VString(final String strIn, String strSep)
 	{
 		super();
-		if (StringUtil.getNonEmpty(strIn) != null)
+		if (!StringUtil.isEmpty(strIn))
 		{
 			if (strSep == null)
 			{
@@ -249,7 +249,7 @@ public class VString extends Vector<String>
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -302,9 +302,9 @@ public class VString extends Vector<String>
 
 	/**
 	 * index - get the index of s in the vector
-	 * 
+	 *
 	 * @param s
-	 * 
+	 *
 	 * @return int the index of a string
 	 */
 	public int index(final String s)
@@ -326,9 +326,9 @@ public class VString extends Vector<String>
 
 	/**
 	 * hasString - is 's' a member of <code>this</code>?
-	 * 
+	 *
 	 * @param s string to find
-	 * 
+	 *
 	 * @return boolean - true, if 's' is included in <code>this</code>
 	 * @deprecated 2005-02-14 use contains ...
 	 */
@@ -340,7 +340,7 @@ public class VString extends Vector<String>
 
 	/**
 	 * AppendUnique - append a string but ignore multiple entries
-	 * 
+	 *
 	 * @param string the string to append, if null nothing is added
 	 */
 	public void appendUnique(final String string)
@@ -353,7 +353,7 @@ public class VString extends Vector<String>
 
 	/**
 	 * AppendUnique - append a vector but ignore multiple entries
-	 * 
+	 *
 	 * @param v the vector to append, if null nothing is added
 	 */
 	public void appendUnique(final VString v)
@@ -382,7 +382,7 @@ public class VString extends Vector<String>
 
 	/**
 	 * removeStrings - remove all occurrences of a string
-	 * 
+	 *
 	 * @param v
 	 * @deprecated use removeStrings(v, Integer.MAX_VALUE);
 	 */
@@ -394,7 +394,7 @@ public class VString extends Vector<String>
 
 	/**
 	 * removeStrings - remove all occurrences of a string
-	 * 
+	 *
 	 * @param v the vector of strings to remove from <code>this</code>
 	 * @param nMax the max number of strings to remove
 	 */
@@ -419,7 +419,7 @@ public class VString extends Vector<String>
 
 	/**
 	 * removeStrings - remove all occurrences of a string
-	 * 
+	 *
 	 * @param s
 	 * @deprecated use removeStrings(s, Integer.MAX_VALUE);
 	 */
@@ -431,7 +431,7 @@ public class VString extends Vector<String>
 
 	/**
 	 * removeStrings - remove nMax occurrences of a string
-	 * 
+	 *
 	 * @param s the string to remove
 	 * @param nMax remove s max. nMax times , 0 or negative = infinite
 	 */
@@ -456,7 +456,7 @@ public class VString extends Vector<String>
 	 * @param sep separator between strings
 	 * @param front string before the first entry
 	 * @param back string after the last entry
-	 * 
+	 *
 	 * @return a tokenized string
 	 * @deprecated use StringUtil setVString default: getString(sep, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING)
 	 */
@@ -552,15 +552,15 @@ public class VString extends Vector<String>
 	public void addAll(final String[] strings)
 	{
 		ensureCapacity(size() + strings.length);
-		for (int i = 0; i < strings.length; i++)
+		for (String string : strings)
 		{
-			add(strings[i]);
+			add(string);
 		}
 	}
 
 	/**
 	 * checks whether at least one of a given vector of strings is contained in <code>this</code>
-	 * 
+	 *
 	 * @param others the VSTring of values to test
 	 * @return true if at least one String in other is in <code>this</code>
 	 */
@@ -582,7 +582,7 @@ public class VString extends Vector<String>
 
 	/**
 	 * vector  of strings that is contained in <code>this</code>
-	 * 
+	 *
 	 * @param others the VString of values to test
 	 * @return true if at least one String in other is in <code>this</code>
 	 */
@@ -606,7 +606,7 @@ public class VString extends Vector<String>
 	/**
 	 * appends enumType to <code>this</code><br>
 	 * if enumType is a ValuedEnum, the name is appended
-	 * 
+	 *
 	 * @param enumType the object to append
 	 * @return true if successfully added
 	 */
@@ -616,7 +616,7 @@ public class VString extends Vector<String>
 	}
 
 	/**
-	 * remove but also implementing the usual neg number syntax 
+	 * remove but also implementing the usual neg number syntax
 	 * @param index if 0, or positive count from front, else if negative from back
 	 * @see java.util.Vector#remove(int)
 	 */

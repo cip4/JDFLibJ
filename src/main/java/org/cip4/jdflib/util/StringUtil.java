@@ -1185,7 +1185,17 @@ public class StringUtil
 	 */
 	public static String getNonEmpty(final String s)
 	{
-		return s == null || JDFConstants.EMPTYSTRING.equals(s) ? null : s;
+		return isEmpty(s) ? null : s;
+	}
+
+	/**
+	 * return true if s==null or s=="", else s<br/>
+	 * @param s
+	 * @return
+	 */
+	public static boolean isEmpty(String s)
+	{
+		return s == null || JDFConstants.EMPTYSTRING.equals(s);
 	}
 
 	/**
@@ -2895,4 +2905,5 @@ public class StringUtil
 	{
 		return new NumberFormatter().formatDouble(value, precision);
 	}
+
 }

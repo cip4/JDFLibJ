@@ -875,7 +875,7 @@ public class UrlUtil
 	 */
 	public static String addParameter(String baseUrl, String key, String val)
 	{
-		if (StringUtil.getNonEmpty(baseUrl) == null || StringUtil.getNonEmpty(key) == null || StringUtil.getNonEmpty(val) == null)
+		if (StringUtil.isEmpty(baseUrl) || StringUtil.isEmpty(key) || StringUtil.isEmpty(val))
 			return baseUrl;
 		int posQMark = baseUrl.indexOf("?");
 		String flag = posQMark >= 0 ? "&" : "?";

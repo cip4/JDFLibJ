@@ -207,6 +207,17 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test for getNonEmpty
+	 */
+	@Test
+	public void testIsNonEmpty()
+	{
+		assertTrue(StringUtil.isEmpty(""));
+		assertTrue(StringUtil.isEmpty(null));
+		assertFalse(StringUtil.isEmpty("a"));
+	}
+
+	/**
 	 * test for gerRandomString
 	 */
 	@Test

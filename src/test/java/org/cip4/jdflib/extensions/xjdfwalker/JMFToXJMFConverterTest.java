@@ -371,6 +371,27 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
+	public void testBuildResourceQueryPaperLot()
+	{
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceQuery(true);
+
+		JDFQuery q = jmf.getQuery(0);
+		JDFResourceQuParams rqp = q.getCreateResourceQuParams(0);
+		rqp.setJobID("job1");
+		rqp.setJobPartID("ConvPrint.1");
+		rqp.setLotID("L1");
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals("L1", xjmf.getXPathAttribute("QueryResource/ResourceQuParams/Part/@LotID", null));
+		assertNull(xjmf.getXPathAttribute("QueryResource/ResourceQuParams/@LotID", null));
+		xjmf.write2File(sm_dirTestDataTemp + "resourceQPaper.xjmf");
+	}
+
+	/**
+	 *
+	 * test ink resource signal
+	 */
+	@Test
 	public void testBuildResourceSignalInkLot()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);

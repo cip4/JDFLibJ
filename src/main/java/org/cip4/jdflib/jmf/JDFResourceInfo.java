@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  ==========================================================================
@@ -115,7 +115,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * Constructor for JDFResourceInfo
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -126,7 +126,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * Constructor for JDFResourceInfo
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -138,7 +138,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * Constructor for JDFResourceInfo
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -150,9 +150,9 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	}
 
 	/**
-	 * 
+	 *
 	 * create a resourceInfo in parent based on resourceLink
-	 * 
+	 *
 	 * @param parent
 	 * @param resourceLink
 	 * @param copyResource if true, also copy the referenced resource
@@ -185,7 +185,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * toString()
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -196,7 +196,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * get the resource defined by <code>resName</code> if null get the resource specified in @ResourceName
-	 * 
+	 *
 	 * @param resName name of the resource to get/create
 	 * @return JDFCostCenter The element
 	 */
@@ -210,7 +210,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * get resource defined by <code>resName</code>
-	 * 
+	 *
 	 * @param resName name of the resource to get
 	 * @return JDFResource: the element
 	 */
@@ -232,7 +232,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * get all resources
-	 * 
+	 *
 	 * @return VElement: the vector of resources
 	 */
 	public VElement getResourceVector()
@@ -255,15 +255,15 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * append resource
-	 * 
+	 *
 	 * @param resName name of the resource to append, if null get the resource specified in @ResourceName
-	 * @return 
+	 * @return
 	 */
 	public JDFResource appendResource(String resName)
 	{
-		if (StringUtil.getNonEmpty(resName) == null)
+		if (StringUtil.isEmpty(resName))
 			resName = getResourceName();
-		if (StringUtil.getNonEmpty(resName) != null)
+		if (!StringUtil.isEmpty(resName))
 		{
 			final KElement e = appendElement(resName, null);
 			if (e instanceof JDFResource)
@@ -278,10 +278,10 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	 * return a vector of unknown element nodenames
 	 * <p>
 	 * default: getUnknownElements(true, 999999)
-	 * 
+	 *
 	 * @param bIgnorePrivate used by JDFElement during the validation
 	 * @param nMax maximum number of elements to get
-	 * 
+	 *
 	 * @return Vector - vector of unknown element nodenames
 	 */
 	@Override
@@ -294,11 +294,11 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	 * Method getInvalidElements
 	 * <p>
 	 * default: GetInvalidElements(level, true, 999999)
-	 * 
+	 *
 	 * @param level validation level
 	 * @param bIgnorePrivate
 	 * @param nMax maximum number of elements to get
-	 * 
+	 *
 	 * @return VString - vector of names of invalid elements
 	 */
 	@Override
@@ -342,7 +342,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * get part map vector
-	 * 
+	 *
 	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
 	 */
 	@Override
@@ -353,7 +353,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * set all parts to those defined by vParts
-	 * 
+	 *
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
@@ -364,7 +364,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * set all parts to those defined by mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
@@ -375,7 +375,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * remove the part defined in mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
@@ -386,7 +386,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * check whether the part defined in mPart is included
-	 * 
+	 *
 	 * @param mPart attribute map to look for
 	 * @return boolean - returns true if the part exists
 	 */
@@ -448,7 +448,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * sets all relevant parameters of this to the values specified in resourceLink or its linked resource or JDF node
-	 * 
+	 *
 	 * @param resourceLink the resourceLink to extract the information from
 	 * @param rqp parameters
 	 */
@@ -470,7 +470,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * set ProcessUsage to the enum processusage
-	 * 
+	 *
 	 * @param processUsage
 	 */
 	public void setProcessUsage(final EnumProcessUsage processUsage)
@@ -481,7 +481,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	/**
 	 * if a Resource is available, return it's ProductID<br/>
 	 * if no productID is available, return null
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoResourceInfo#getProductID()
 	 */
 	@Override
@@ -502,7 +502,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * if a Resource is available, return it's ID
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoResourceInfo#getResourceID()
 	 */
 	@Override
@@ -523,7 +523,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * if a Resource is available, return it's name, null if none is available
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoResourceInfo#getResourceName()
 	 */
 	@Override
@@ -544,9 +544,9 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	}
 
 	/**
-	 * 
+	 *
 	 * if a Resource is available, return it's status
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoResourceInfo#getResStatus()
 	 */
 	@Override
@@ -567,7 +567,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * getLinkRoot - gets the root resource of the target based on ResourceName, if available
-	 * 
+	 *
 	 * @return JDFResource
 	 */
 	@Override
@@ -578,7 +578,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * Set attribute ActualAmount in the AmountPool or in the link, depending on the value of mPart
-	 * 
+	 *
 	 * @param value the value to set ActualAmount to
 	 * @param mPart the part map of AmountPool/PartAmount
 	 */
@@ -589,10 +589,10 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * setAmount in PartAmount or in this if partAmount=null
-	 * 
+	 *
 	 * @param value amount to set
 	 * @param mPart partition map to set amount for
-	 * 
+	 *
 	 * @default setAmount(double value, null)
 	 */
 	public void setAmount(final double value, final JDFAttributeMap mPart)
@@ -603,7 +603,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	/**
 	 * sets the attribute occurence in the appropriate PartAmount when called for a resourceLink and creates the AmountPool and/or PartAmount if it is not yet
 	 * there
-	 * 
+	 *
 	 * @param attrib the attribute name
 	 * @param value value to set in string form.
 	 * @param nameSpaceURI the XML-namespace
@@ -619,7 +619,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	/**
 	 * sets the attribute occurence in the appropriate PartAmount when called for a resourceLink and creates the AmountPool and/or PartAmount(s) if they are not
 	 * yet there
-	 * 
+	 *
 	 * @param attrib the attribute name
 	 * @param value value to set in string form.
 	 * @param nameSpaceURI the XML-namespace
@@ -634,7 +634,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * returns the attribute occurence in PartAmount, or the default in the ResourceLink
-	 * 
+	 *
 	 * @param attrib the attribute name
 	 * @param nameSpaceURI the XML-namespace
 	 * @param mPart defines which part of this ResourceLink the Amount belongs to. If empty get the ResourceLink root attribute.
@@ -649,7 +649,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * returns the attribute occurence in PartAmount, or the default in the ResourceLink
-	 * 
+	 *
 	 * @param attrib the attribute name
 	 * @param nameSpaceURI the XML-namespace
 	 * @param vPart defines which part of this ResourceLink the Amount belongs to. If null get the ResourceLink root attribute.
@@ -664,8 +664,8 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	/**
 	 * get the sum of all matching AmountPool/PartAmount/@attName as a double PartAmounts match if all attributes match those in PartAmount, i.e. mPart is a
 	 * submap of the searche PartAmount elements
-	 * 
-	 * 
+	 *
+	 *
 	 * @param attName the Attribute name , e.g Amount, ActualAmount
 	 * @param mPart
 	 * @return double - the element
@@ -678,7 +678,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * get the exactly matching AmountPool/PartAmount/@AttName as a double
-	 * 
+	 *
 	 * @param attName
 	 * @param vPart
 	 * @return double -
@@ -704,7 +704,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 
 	/**
 	 * do i match a resource name, type or resourcequparams? if object==null; return true
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 	 */
 	@Override
@@ -735,7 +735,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	}
 
 	/**
-	 * 
+	 *
 	 * the matching against rqp is not completely implemented
 	 * @param resourceName
 	 * @param rqp

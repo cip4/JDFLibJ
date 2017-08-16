@@ -3594,7 +3594,7 @@ public class JDFElement extends KElement
 			if (jmf != null)
 			{
 				local = jmf.getSenderID();
-				if (StringUtil.getNonEmpty(local) != null)
+				if (!StringUtil.isEmpty(local))
 				{
 					local = StringUtil.replaceCharSet(local, " \t\n\f", null, 0);
 					local = "." + (local.hashCode() & 0xffff) % 10000 + ".";

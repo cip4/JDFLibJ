@@ -73,7 +73,9 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFResourceQuParams;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
@@ -108,6 +110,8 @@ public class WalkResourceQuParams extends WalkJDFSubElement
 		String val = map.renameKey(AttributeName.CONTEXT, AttributeName.SCOPE);
 		if (!"Job".equals(val))
 			map.put(AttributeName.SCOPE, "Present");
+		map.remove(AttributeName.LOTDETAILS);
+		map.remove(AttributeName.LOTID);
 		super.updateAttributes(map);
 	}
 
@@ -118,6 +122,27 @@ public class WalkResourceQuParams extends WalkJDFSubElement
 	public VString getElementNames()
 	{
 		return new VString(ElementName.RESOURCEQUPARAMS, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#setAttributes(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void setAttributes(KElement jdf, KElement eNew)
+	{
+		JDFResourceQuParams jdfResourceQuParams = (JDFResourceQuParams) jdf;
+		String lotID = jdfResourceQuParams.getLotID();
+		if (!StringUtil.isEmpty(lotID))
+		{
+			VJDFAttributeMap map = jdfResourceQuParams.getPartMapVector();
+			if (map == null)
+			{
+				map = new VJDFAttributeMap();
+			}
+			map.put(AttributeName.LOTID, lotID);
+			jdfResourceQuParams.setPartMapVector(map);
+		}
+		super.setAttributes(jdf, eNew);
 	}
 
 }

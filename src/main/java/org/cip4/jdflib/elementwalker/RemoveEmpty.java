@@ -206,7 +206,7 @@ public class RemoveEmpty extends BaseElementWalker
 			VString dummy = zappElements ? getDummyAttributes() : null;
 			for (String key : allKeys)
 			{
-				if (StringUtil.getNonEmpty(map.get(key)) == null)
+				if (StringUtil.isEmpty(map.get(key)))
 				{
 					e1.removeAttribute(key);
 				}

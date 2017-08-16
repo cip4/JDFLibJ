@@ -179,7 +179,7 @@ public class WalkPartAmount extends WalkXElement
 		boolean bAmount = map.containsKey(AttributeName.ACTUALAMOUNT) || map.containsKey(AttributeName.AMOUNT);
 		boolean bWaste = map.containsKey(XJDFConstants.Waste);
 		String wasteKey = map.remove(XJDFConstants.WasteDetails);
-		if (StringUtil.getNonEmpty(wasteKey) == null)
+		if (StringUtil.isEmpty(wasteKey))
 		{
 			wasteKey = XJDFConstants.Waste;
 		}

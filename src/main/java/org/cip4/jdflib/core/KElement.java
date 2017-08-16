@@ -956,7 +956,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String appendAttribute(final String key, final String value, final String nameSpaceURI, String sep, final boolean bUnique)
 	{
-		if (StringUtil.getNonEmpty(value) == null)
+		if (StringUtil.isEmpty(value))
 		{
 			return getAttribute(key, nameSpaceURI, null);
 		}
@@ -3517,7 +3517,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public void appendText(final String textName)
 	{
-		if (StringUtil.getNonEmpty(textName) == null)
+		if (StringUtil.isEmpty(textName))
 			return;
 		final Text newChild = getOwnerDocument().createTextNode(textName);
 		appendChild(newChild);
