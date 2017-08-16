@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 package org.cip4.jdflib.util;
@@ -77,7 +77,7 @@ import org.cip4.jdflib.core.JDFConstants;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * Aug 10, 2009
  */
 public class JDFDuration implements Comparable<JDFDuration>
@@ -96,7 +96,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	// year (0?[0-9]|[1-9][0-9]) -- 0(00) - 99 are valid years
 	// month (0?[0-9]|1[01]) -- 0(00) - 11 are valid months
 	// day (0?[0-9]|[12][0-9]|3[0]) -- 0(00) - 30 are valid days
-	// 
+	//
 	// time Part "hHmMsS"
 	// hour (0?[0-9]|1[0-9]|2[0123]|) -- 0(00) - 23 are valid hours
 	// min (0?[0-9]|[1-5][0-9]) -- 0(00) - 59 are valid seconds
@@ -120,8 +120,8 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * does some heuristics to create a duration if duration is purely numeric, we guess days
-	 * @param duration 
-	 * @return 
+	 * @param duration
+	 * @return
 	 */
 	public static JDFDuration createDuration(String duration)
 	{
@@ -189,10 +189,10 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * creates a duration from two dates; may be negative if start later end
-	 * 
+	 *
 	 * @param start the starting point
 	 * @param end the end point
-	 * 
+	 *
 	 */
 	public JDFDuration(final JDFDate start, final JDFDate end)
 	{
@@ -206,7 +206,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * Allocates a <code>JDFDuration</code> object and initializes it with 's'
-	 * 
+	 *
 	 * @param s duration in seconds s may be fractional
 	 */
 	public JDFDuration(final double s)
@@ -216,8 +216,8 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * Allocates a <code>JDFDuration</code> object and initializes it with 's'
-	 * 
-	 * @param s duration in seconds s 
+	 *
+	 * @param s duration in seconds s
 	 */
 	public JDFDuration(final long s)
 	{
@@ -228,7 +228,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 * Allocates a <code>JDFDuration</code> object and initializes it with a value of <code>strDuration</code>, represented as a formatted duration string. <br>
 	 * Duration examples: <li>"P1Y2M3DT10H30M"</li> <li>"P8MT12M"</li> Durations with overflows, e.g. P13M (13 Months) are also handled and correctly output, in
 	 * this case P1Y1M
-	 * 
+	 *
 	 * @param strDuration - formatted duration
 	 * @throws DataFormatException if strDuration is not a valid string representation of JDFDuration
 	 */
@@ -240,10 +240,10 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * add seconds to a duration
-	 * 
+	 *
 	 * @param seconds number of seconds to add
 	 * @return the new duration in seconds
-	 * 
+	 *
 	 */
 	public double addSeconds(final double seconds)
 	{
@@ -253,7 +253,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * for debug purposes
-	 * 
+	 *
 	 * @return Object informations
 	 */
 	@Override
@@ -266,7 +266,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 * Method init handles Strings of type: <br>
 	 * <li>"P1Y2M3DT10H30M"</li> <li>"PM8T12M"</li> <li>"PT30M"</li> <li>
 	 * "PT30M40S"</li> <li>"PT30M40.3333S"</li>
-	 * 
+	 *
 	 * @param strDuration
 	 * @throws DataFormatException
 	 */
@@ -292,7 +292,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	/**
 	 * Format and return the duration set by 'setDuration(int i)' or 'setDurationString(String a_aDuration)' as an ISO conforming String.<br>
 	 * For example: 'P1Y2M3DT10H30M'
-	 * 
+	 *
 	 * @return String - the duration formatted as an ISO 8601 conforming String if duration is '0' return value is 'PT00M'
 	 */
 	public String getDurationISO()
@@ -383,10 +383,10 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * Set a duration. Durations are not bound to time or date and can be set independently
-	 * 
+	 *
 	 * @return true - the duration was set<br>
 	 * false - the duration was not set, because a NumberFormatException was thrown (-> parseInt())
-	 * 
+	 *
 	 * @param a_aDuration formatted duration string 'P1Y2M3DT10H30M'
 	 */
 	public boolean setDurationISO(final String a_aDuration)
@@ -517,7 +517,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * setDuration: sets a duration for <code>this</code> in seconds. This duration is used in multiple classes of the JDF (e.g. Heating time).
-	 * 
+	 *
 	 * @param seconds the duration in seconds.
 	 */
 	public void setDuration(final long seconds)
@@ -528,7 +528,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	/**
 	 * setDuration: sets a duration for <code>this</code> in seconds, including fractions. This duration is used in multiple classes of the JDF (e.g. Heating
 	 * time).
-	 * 
+	 *
 	 * @param seconds the duration in seconds.
 	 */
 	public void setDuration(final double seconds)
@@ -538,7 +538,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * the duration in seconds
-	 * 
+	 *
 	 * @return duration in seconds; '0' default
 	 *
 	 */
@@ -549,7 +549,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * the duration in milliseconds
-	 * 
+	 *
 	 * @return duration in seconds; '0' default
 	 *
 	 */
@@ -561,7 +561,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	/**
 	 * isLess - tests if the duration of this JDFDuration is longer than the duration of the specified JDFDuration. Compares the integer durations, thus -PT15S
 	 * is shorter than -PT5S
-	 * 
+	 *
 	 * @param x the JDFDuration object to compare to <code>this</code>
 	 * @return boolean - true if the duration of this JDFDuration is longer than the duration of the JDFDuration 'x'.
 	 */
@@ -573,7 +573,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	/**
 	 * isShorter - tests if the duration of this JDFDuration is less than the duration of the specified JDFDuration. Compares the integer durations, thus -PT15S
 	 * is shorter than -PT5S
-	 * 
+	 *
 	 * @param x the JDFDuration object to compare to <code>this</code>
 	 * @return boolean - true if the duration of this JDFDuration is shorter than the duration of the JDFDuration 'x'.
 	 */
@@ -604,7 +604,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 			return false;
 		}
 
-		return (this.m_lDuration == ((JDFDuration) other).m_lDuration);
+		return Math.abs(m_lDuration - ((JDFDuration) other).m_lDuration) <= 0.001;
 	}
 
 	/**
@@ -617,7 +617,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	}
 
 	/**
-	 * 
+	 *
 	 * @param arg0
 	 * @return
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)

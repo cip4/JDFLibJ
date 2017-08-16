@@ -739,10 +739,12 @@ class PostXJDFWalker extends BaseElementWalker
 		 */
 		private JDFAttributeMap mergeStrippingParamsLayout(JDFStrippingParams strippingParams, SetHelper layoutseth, JDFAttributeMap map)
 		{
-			if (isRemoveSignatureName())
+			if (isRemoveSignatureName() && map != null)
+			{
 				map.remove(AttributeName.SIGNATURENAME);
-			String bsName = map.remove(AttributeName.BINDERYSIGNATURENAME);
-			String cellIndex = map.remove(AttributeName.CELLINDEX);
+			}
+			String bsName = map == null ? null : map.remove(AttributeName.BINDERYSIGNATURENAME);
+			String cellIndex = map == null ? null : map.remove(AttributeName.CELLINDEX);
 			ResourceHelper layoutPartitionH = layoutseth.getCreatePartition(map, true);
 			JDFLayout layoutPartition = (JDFLayout) layoutPartitionH.getResource();
 			ensureLayoutPositions(strippingParams, layoutPartition, bsName);
@@ -768,13 +770,13 @@ class PostXJDFWalker extends BaseElementWalker
 				if (bsHelper != null)
 				{
 					JDFAttributeMap partMap = bsHelper.getPartMap();
-					String bsID = partMap == null ? null : partMap.get(XJDFConstants.BinderySignatureID);
+					if (partMap == null)
+					{
+						partMap = new JDFAttributeMap();
+					}
+					String bsID = partMap.get(XJDFConstants.BinderySignatureID);
 					if (bsID == null)
 					{
-						if (partMap == null)
-						{
-							partMap = new JDFAttributeMap();
-						}
 						SetHelper sh = bsHelper.getSet();
 						if (bsName == null)
 						{
@@ -797,11 +799,14 @@ class PostXJDFWalker extends BaseElementWalker
 						moveStripCells(bs, childElementVector);
 						moveBSFromStripping(bs, strippingParams);
 						VElement positions = layoutPartition.getChildElementVector(ElementName.POSITION, null);
-						for (KElement position : positions)
+						if (positions != null)
 						{
-							if (!position.hasAttribute(XJDFConstants.BinderySignatureID))
+							for (KElement position : positions)
 							{
-								position.setAttribute(XJDFConstants.BinderySignatureID, bsID);
+								if (!position.hasAttribute(XJDFConstants.BinderySignatureID))
+								{
+									position.setAttribute(XJDFConstants.BinderySignatureID, bsID);
+								}
 							}
 						}
 						strippingParams.removeAttribute(ElementName.BINDERYSIGNATURE + "Ref");

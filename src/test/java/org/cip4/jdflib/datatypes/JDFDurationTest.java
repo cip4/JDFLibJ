@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,8 +70,8 @@
  * JDFDurationRangeTest.java
  *
  * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.datatypes;
@@ -84,14 +84,14 @@ import org.junit.Test;
 import junit.framework.TestCase;
 
 /**
- * 
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFDurationTest extends TestCase
 {
 
 	/**
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -129,7 +129,7 @@ public class JDFDurationTest extends TestCase
 	}
 
 	/**
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -176,7 +176,7 @@ public class JDFDurationTest extends TestCase
 
 	/**
 	 * @throws Exception
-	 * 
+	 *
 	 */
 	@Test
 	public final void testFractions() throws Exception
@@ -188,10 +188,40 @@ public class JDFDurationTest extends TestCase
 		assertEquals(new JDFDuration("PT5M90.95S").getDurationISO(), "PT6M30.95S");
 	}
 
+	/**
+	* @throws Exception
+	*
+	*/
+	@Test
+	public final void testEqualsFractions() throws Exception
+	{
+		assertEquals(new JDFDuration(90.5), new JDFDuration("PT1M30.5S"));
+		assertEquals(new JDFDuration(-90.5), new JDFDuration("-PT1M30.5S"));
+		assertEquals(new JDFDuration(0.95), new JDFDuration("PT0.95S"));
+		assertEquals(new JDFDuration(99.00001), new JDFDuration(99));
+		assertFalse(new JDFDuration(99.001).equals(new JDFDuration(99)));
+		assertEquals(new JDFDuration(-99.00001), new JDFDuration(-99));
+	}
+
+	/**
+	* @throws Exception
+	*
+	*/
+	@Test
+	public final void testEqualsFractionsHash() throws Exception
+	{
+		assertEquals(new JDFDuration(90.5).hashCode(), new JDFDuration("PT1M30.5S").hashCode());
+		assertEquals(new JDFDuration(-90.5).hashCode(), new JDFDuration("-PT1M30.5S").hashCode());
+		assertEquals(new JDFDuration(0.95).hashCode(), new JDFDuration("PT0.95S").hashCode());
+		assertEquals(new JDFDuration(99.00001).hashCode(), new JDFDuration(99).hashCode());
+		assertFalse(new JDFDuration(99.001).hashCode() == new JDFDuration(99).hashCode());
+		assertEquals(new JDFDuration(-99.00001).hashCode(), new JDFDuration(-99).hashCode());
+	}
+
 	// //////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testCompareTo()
@@ -206,7 +236,7 @@ public class JDFDurationTest extends TestCase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testConstructFromDate()
@@ -221,7 +251,7 @@ public class JDFDurationTest extends TestCase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testAddSeconds()
@@ -232,7 +262,7 @@ public class JDFDurationTest extends TestCase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testSetDuration()
@@ -251,7 +281,7 @@ public class JDFDurationTest extends TestCase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public final void testGetDurationMillis()
@@ -260,7 +290,7 @@ public class JDFDurationTest extends TestCase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public final void testGetDuration()
@@ -269,7 +299,7 @@ public class JDFDurationTest extends TestCase
 	}
 
 	/**
-	* 
+	*
 	*/
 	@Test
 	public final void testGetDurationINF()
@@ -278,7 +308,7 @@ public class JDFDurationTest extends TestCase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testSetDurationInf()
@@ -293,7 +323,7 @@ public class JDFDurationTest extends TestCase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testCreateDuration()

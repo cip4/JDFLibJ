@@ -68,7 +68,7 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.util;
 
@@ -145,7 +145,7 @@ public class JDFMerge
 	private VJDFAttributeMap parts;
 
 	/**
-	 * 
+	 *
 	 * @param parentNode the parent node to merge into. MAY be the actual node to be replace or any Parent thereof
 	 */
 	public JDFMerge(final JDFNode parentNode)
@@ -164,18 +164,18 @@ public class JDFMerge
 	 * merge a previously spawned JDF into a node that is a child of, or this root
 	 * <p>
 	 * default: mergeJDF(subJDFNode, null, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None)
-	 * 
+	 *
 	 * @param _toMerge the previously spawned jdf node
 	 * @param urlMerge the url of the ???
 	 * @param cleanPolicy policy how to clean up the spawn and merge audits after merging
 	 * @param amountPolicy policy how to clean up the Resource amounts after merging
 	 * @return JDFNode - the merged node in the new document<br>
 	 * note that the return value used to be boolean. The boolean value is now replaced by exceptions. This corresponds to <code>true</code> always.
-	 * 
+	 *
 	 * @throws JDFException if subJDFNode has already been merged
 	 * @throws JDFException if subJDFNode was not spawned from this
 	 * @throws JDFException if subJDFNode has no AncestorPool
-	 * 
+	 *
 	 * default: mergeJDF(subJDFNode, null, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None)
 	 */
 	public JDFNode mergeJDF(final JDFNode _toMerge, final String urlMerge, final EnumCleanUpMerge cleanPolicy, final JDFResource.EnumAmountMerge amountPolicy)
@@ -188,11 +188,11 @@ public class JDFMerge
 
 	/**
 	 * merge a previously spawned JDF into a node that is a child of, or this root
-	 * 
-	 * @param _toMerge the previously spawned jdf node		
+	 *
+	 * @param _toMerge the previously spawned jdf node
 		 * @return JDFNode - the merged node in the new document<br>
 		 * note that the return value used to be boolean. The boolean value is now replaced by exceptions. This corresponds to <code>true</code> always.
-		 * 
+		 *
 		 * @throws JDFException if subJDFNode has already been merged
 		 * @throws JDFException if subJDFNode was not spawned from this
 		 * @throws JDFException if subJDFNode has no AncestorPool
@@ -243,11 +243,11 @@ public class JDFMerge
 
 	/**
 	 * merge a previously spawned and previously merged JDF into a node that is a child of, or this root
-	 * 
-	 * @param _toMerge the previously spawned jdf node		
+	 *
+	 * @param _toMerge the previously spawned jdf node
 		 * @return JDFNode - the merged node in the new document<br>
 		 * note that the return value used to be boolean. The boolean value is now replaced by exceptions. This corresponds to <code>true</code> always.
-		 * 
+		 *
 		 * @throws JDFException if subJDFNode has no AncestorPool
 		 */
 	public synchronized JDFNode remergeJDF(final JDFNode _toMerge)
@@ -316,9 +316,9 @@ public class JDFMerge
 	}
 
 	/**
-	 * 
-	 * find matching audits	 
-	 * 
+	 *
+	 * find matching audits
+	 *
 	 */
 	private void analyzeAncestorPool(boolean bFindSpawnAudit)
 	{
@@ -413,7 +413,7 @@ public class JDFMerge
 
 	/**
 	 * merge the audit pools
-	 * 
+	 *
 	 * @param _overWriteNode
 	 * @param toMerge the source node of the audit pool to merge into this
 	 */
@@ -484,7 +484,7 @@ public class JDFMerge
 	}
 
 	/**
-	 * 
+	 *
 	 * merge the local resource links - mainly amounts
 	 */
 	private void mergeLocalLinks()
@@ -628,16 +628,16 @@ public class JDFMerge
 	/**
 	 * Merges partitioned resources into this resource uses PartIDKey to identify the correct resources
 	 * @param targetRes
-	 * 
+	 *
 	 * @param resToMerge the resource leaf to merge into this
 	 * @param spawnID the spawnID of the spawning that will now be merged
 	 * @param amountPolicy how to clean up the Resource amounts after merging
 	 * @param bLocalResource must be true for the local resources in a spawned node and its subnodes, which default to RW
 	 * @return
-	 * 
+	 *
 	 * @throws JDFException if here is an attempt to merge incompatible resources
 	 * @throws JDFException if here is an attempt to merge incompatible partitions
-	 * 
+	 *
 	 * @default mergePartition (resToMerge, spawnID, EnumAmountMerge.None, false);
 	 */
 	/*
@@ -868,7 +868,7 @@ public class JDFMerge
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void prepareNewSpawnMap()
 	{
@@ -1017,7 +1017,7 @@ public class JDFMerge
 
 	/**
 	 * merge the resource link pools
-	 * @param mainNode 
+	 * @param mainNode
 	 * @param toMerge the source node of the status pool to merge into this
 	 */
 	private void mergeResourceLinkPool(final JDFNode mainNode, final JDFNode toMerge)
@@ -1194,11 +1194,11 @@ public class JDFMerge
 	 * Merges the spawnIDs of the various partitions <br>
 	 * also updates SpawnStatus, if necessary <br>
 	 * this routine is needed to correctly handle nested spawning and merging
-	 * 
+	 *
 	 * @param mainRes the resource in the main jdf to merge to
 	 * @param resToMerge the resource with potentially new spawnIDs
 	 * @param bReadOnly if true, don't add anything since it was RO
-	 * 
+	 *
 	 */
 	private void mergeSpawnIDs(final JDFResource mainRes, final JDFResource resToMerge, final boolean bReadOnly)
 	{
@@ -1270,7 +1270,7 @@ public class JDFMerge
 
 	/**
 	 * merge the RW resources of the main JDF
-	 * 
+	 *
 	 * @param amountPolicy policy how to clean up the Resource amounts after merging
 	 */
 	private void mergeRWResources()
@@ -1318,8 +1318,7 @@ public class JDFMerge
 					}
 					catch (final Exception e)
 					{
-						throw new JDFException("JDFNode:mergeJDF, error in mergePartition: ID=" + (oldRes == null ? ">>> oldRes is null !!! <<<" : oldRes.getID()) + " SpawnID="
-								+ spawnID);
+						throw new JDFException("JDFNode:mergeJDF, error in mergePartition: ID=" + newRes.getID() + " SpawnID=" + spawnID);
 					}
 				}
 
@@ -1337,9 +1336,9 @@ public class JDFMerge
 
 	/**
 	 * merge the status pools
-	 * 
+	 *
 	 * @param poverWriteNode the source node of the status pool to merge into this
-	 * @param toMerge 
+	 * @param toMerge
 	 * @param parts the partitions to merge
 	 */
 	private void mergeStatusPool(final JDFNode poverWriteNode, final JDFNode toMerge, final VJDFAttributeMap parts)
@@ -1415,7 +1414,7 @@ public class JDFMerge
 
 	/**
 	 * merge the RO resources of the main JDF
-	 * 
+	 *
 	 */
 	private void cleanROResources()
 	{
@@ -1484,8 +1483,8 @@ public class JDFMerge
 	 * clean up the spawn and merge audits in this Node
 	 * <p>
 	 * default: CleanUpMerge(EnumCleanUpMerge cleanPolicy, JDFConstants.EMPTYSTRING, false)
-	 * @param overWriteTmpNode 
-	 * 
+	 * @param overWriteTmpNode
+	 *
 	 * @param cleanPolicy policy how to clean up the spawn and merge audits after merging
 	 * If not specified all spawns will be cleaned up.
 	 * @param bRecurse if true also recurse into all child JDF nodes; default=false
@@ -1529,7 +1528,7 @@ public class JDFMerge
 	}
 
 	/**
-	 * @param pool 
+	 * @param pool
 	 * @param cleanPolicy
 	 */
 	private void cleanUpMergeAudits(final JDFAuditPool pool)
@@ -1601,7 +1600,7 @@ public class JDFMerge
 	}
 
 	/**
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -1611,7 +1610,7 @@ public class JDFMerge
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public EnumCleanUpMerge getCleanPolicy()
@@ -1620,8 +1619,8 @@ public class JDFMerge
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @param cleanPolicy
 	 */
 	public void setCleanPolicy(EnumCleanUpMerge cleanPolicy)
@@ -1630,8 +1629,8 @@ public class JDFMerge
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @return
 	 */
 	public EnumAmountMerge getAmountPolicy()
@@ -1640,8 +1639,8 @@ public class JDFMerge
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @param amountPolicy
 	 */
 	public void setAmountPolicy(EnumAmountMerge amountPolicy)

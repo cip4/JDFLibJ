@@ -1377,7 +1377,7 @@ public class JDFResource extends JDFElement
 		 */
 		public VElement getPartitionVector(VJDFAttributeMap vm, EnumPartUsage partUsage)
 		{
-			if (getImplicitPartitions() != null)
+			if (vm != null && getImplicitPartitions() != null)
 			{
 				VJDFAttributeMap vmNew = new VJDFAttributeMap();
 				for (JDFAttributeMap map : vm)
@@ -1390,6 +1390,7 @@ public class JDFResource extends JDFElement
 				}
 				vm = vmNew;
 			}
+
 			if (ContainerUtil.getNonEmpty(vm) == null)
 			{
 				VElement v = new VElement();
@@ -1408,7 +1409,7 @@ public class JDFResource extends JDFElement
 			int partSize = partIDKeys == null ? 0 : partIDKeys.size();
 			if (EnumPartUsage.Explicit.equals(partUsage))
 			{
-				int partMapSize = vm == null ? 0 : vm.minSize();
+				int partMapSize = vm.minSize();
 				if (partSize < partMapSize)
 				{
 					VElement v = new VElement();
@@ -1426,11 +1427,6 @@ public class JDFResource extends JDFElement
 				return v;
 			}
 
-			if (vm == null)
-			{
-				vm = new VJDFAttributeMap();
-				vm.add(getPartMap());
-			}
 			final VElement v = detailedSearch(vm, partUsage);
 			v.unify();
 			return v;
@@ -3964,7 +3960,7 @@ public class JDFResource extends JDFElement
 						boolean bBreakWhile = false;
 						JDFResource parentNode = (JDFResource) parent;
 
-						while (nodeName.equals(parentNode.getNodeName()) && !bBreakWhile)
+						while (!bBreakWhile && nodeName.equals(parentNode.getNodeName()))
 						{
 							// still in the resource
 							if (parentNode.numChildElements(nodeName, null) == 1)

@@ -3451,7 +3451,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 *
-	
+
 	 *
 	 */
 
@@ -8607,22 +8607,24 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			return v;
 		}
 
-		int siz = 0;
 		if (v != null)
 		{
-			siz = v.size();
+			int siz = v.size();
 			for (int i = siz - 1; i >= 0; i--)
 			{
 				final JDFNode n = (JDFNode) v.get(i);
 				if (!n.getIdentifier().matches(ni))
 				{
 					v.remove(i);
+					siz--;
 				}
 			}
+			return siz == 0 ? null : v;
 		}
-
-		siz = v == null ? 0 : v.size();
-		return siz == 0 ? null : v;
+		else
+		{
+			return null;
+		}
 	}
 
 	/**

@@ -191,8 +191,8 @@ public class WalkElement extends BaseWalker
 		}
 		else if (EnumAttributeType.double_.equals(attType))
 		{
-			double d = StringUtil.parseDouble(value, Double.NaN);
-			if (d == Double.NaN)
+			double d = StringUtil.parseDouble(value, Double.POSITIVE_INFINITY);
+			if (d == Double.POSITIVE_INFINITY)
 			{
 				el.removeAttribute(key);
 			}

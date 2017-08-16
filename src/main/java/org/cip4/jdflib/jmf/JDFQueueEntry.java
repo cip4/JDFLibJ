@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  ==========================================================================
@@ -104,13 +104,13 @@ import org.cip4.jdflib.util.StringUtil;
 //----------------------------------
 /**
  * @author prosirai
- * 
+ *
  */
 public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElement>, INodeIdentifiable
 {
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 * 
+	 *
 	 * Apr 29, 2009
 	 */
 	public static class QueueEntryComparator implements Comparator<KElement>
@@ -123,14 +123,16 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 			super();
 			if (fastStat == null)
 			{
-				fastStat = new HashMap<String, MyInteger>();
+				HashMap<String, MyInteger> fastStat2 = new HashMap<String, MyInteger>();
 				final Iterator<EnumQueueEntryStatus> it = EnumQueueEntryStatus.iterator();
 				while (it.hasNext())
 				{
 					final EnumQueueEntryStatus eqs = it.next();
-					fastStat.put(eqs.getName(), new MyInteger(eqs.getValue()));
+					fastStat2.put(eqs.getName(), new MyInteger(eqs.getValue()));
 				}
+				fastStat = fastStat2;
 			}
+
 		}
 
 		private static HashMap<String, MyInteger> fastStat = null;
@@ -223,7 +225,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * Constructor for JDFQueueEntry
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -234,7 +236,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * Constructor for JDFQueueEntry
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -246,7 +248,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * Constructor for JDFQueueEntry
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -259,7 +261,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * toString()
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -270,7 +272,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * get part map vector
-	 * 
+	 *
 	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
 	 */
 	@Override
@@ -281,7 +283,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * set all parts to those define in vParts
-	 * 
+	 *
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
@@ -292,7 +294,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * set all parts to those defined by mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
@@ -303,7 +305,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * remove the part defined in mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
@@ -314,7 +316,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * return true if this qe matches the input node identifier
-	 * 
+	 *
 	 * @param ni
 	 * @return
 	 */
@@ -330,7 +332,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * return true if this qe matches the input QueueFilter
-	 * 
+	 *
 	 * @param filter
 	 * @return
 	 * @deprecated use QueueFilter.matches
@@ -347,7 +349,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * check whether the part defined by mPart is included
-	 * 
+	 *
 	 * @param mPart attribute map to look for
 	 * @return boolean - returns true if the part exists
 	 */
@@ -382,7 +384,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * sort this into the queue based on current values assumes presorted queue
-	 * 
+	 *
 	 * @param oldVal - the previous sort value, use -1 to sort from back
 	 * @deprecated call JDFQueue.sortChildren()
 	 */
@@ -409,9 +411,9 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	/**
 	 * sets the QueueEntry/@Status if the queue is automated, also resorts the queue to reflect the new Status and sets the Queue/@Status based on the maximum
 	 * number of concurrently running jobs also sets StartTime and EndTime appropriately if the queue is automated
-	 * 
+	 *
 	 * @param value the queuentry status to set
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setQueueEntryStatus(org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus)
 	 */
 	@Override
@@ -463,7 +465,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * gets the NodeIdetifier that matches this
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
@@ -476,9 +478,9 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * gets the NodeIdentifier that matches this
-	 * @param ni 
-	 * 
-	 *  
+	 * @param ni
+	 *
+	 *
 	 */
 	@Override
 	public void setIdentifier(final NodeIdentifier ni)
@@ -494,7 +496,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * get the next sibling queueentry
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFQueueEntry getNextQueueEntry()
@@ -504,7 +506,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * get the previous sibling queueentry
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFQueueEntry getPreviousQueueEntry()
@@ -514,7 +516,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * get the vector of valid next @Status values for this queue entry based on the current status based on the table of valid queue entry transitions
-	 * 
+	 *
 	 * @return Vector<EnumQueueEntryStatus> the vector of valid new stati
 	 */
 	public Vector<EnumQueueEntryStatus> getNextStatusVector()
@@ -604,7 +606,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * return a value based on QueueEntryStatus and Priority to sort the queue
-	 * 
+	 *
 	 * @return int a priority for sorting - low = back
 	 */
 	@Deprecated
@@ -616,7 +618,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	/**
 	* (24) const get element JobPhase
 	* @return JDFJobPhase the element
-	* @deprecated use getJobPhase(n) this is a legacy version 
+	* @deprecated use getJobPhase(n) this is a legacy version
 	*/
 	@Deprecated
 	public JDFJobPhase getJobPhase()
@@ -627,7 +629,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	/**
 	* (24) const get element JobPhase
 	* @return JDFJobPhase the element
-	* @deprecated use getCreateJobPhase(n) this is a legacy version 
+	* @deprecated use getCreateJobPhase(n) this is a legacy version
 	*/
 	@Deprecated
 	public JDFJobPhase getCreateJobPhase()
@@ -638,9 +640,9 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	/**
 	 * return a value based on QueueEntryStatus and Priority to sort the queue the status is the major order whereas the priority is used to order within
 	 * regions of identical status
-	 * @param status 
-	 * @param priority 
-	 * 
+	 * @param status
+	 * @param priority
+	 *
 	 * @return int a priority for sorting - low value = back of queue, high value = front of queue
 	 */
 	@Deprecated
@@ -653,7 +655,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * populates this queuentry with the relevant parameters extracted from a JDF jobid, partmap, jobpartid etc.
-	 * 
+	 *
 	 * @param jdf
 	 */
 	public void setFromJDF(final JDFNode jdf)
@@ -681,8 +683,8 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	}
 
 	/**
-	 * @param arg0 
-	 * @return 
+	 * @param arg0
+	 * @return
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	@Override

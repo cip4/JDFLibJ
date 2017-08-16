@@ -205,19 +205,19 @@ class JDFToXJDFDataCache
 	 */
 	private VString generateResourceAttributes()
 	{
-		VString resAttribs = new VString();
+		VString ra = new VString();
 		final JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc(ElementName.RESOURCEPOOL).getRoot();
 		final JDFResource intRes = dummyResPool.appendResource("intent", EnumResourceClass.Intent, null);
 		final JDFResource physRes = dummyResPool.appendResource("physical", EnumResourceClass.Consumable, null);
 		final JDFResource paramRes = dummyResPool.appendResource("param", EnumResourceClass.Parameter, null);
 		final JDFPart part = (JDFPart) dummyResPool.appendElement(ElementName.PART);
-		resAttribs = paramRes.knownAttributes();
-		resAttribs.appendUnique(physRes.knownAttributes());
-		resAttribs.appendUnique(intRes.knownAttributes());
-		resAttribs.appendUnique(part.knownAttributes());
+		ra = paramRes.knownAttributes();
+		ra.appendUnique(physRes.knownAttributes());
+		ra.appendUnique(intRes.knownAttributes());
+		ra.appendUnique(part.knownAttributes());
 
-		resAttribs.appendUnique(XJDFConstants.ExternalID);
-		return resAttribs;
+		ra.appendUnique(XJDFConstants.ExternalID);
+		return ra;
 	}
 
 	/**

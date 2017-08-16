@@ -1066,7 +1066,7 @@ public class JDFToXJDF extends PackageElementWalker
 	protected boolean isProductResource(final JDFResource linkTarget)
 	{
 		WalkResource w = getWalker(linkTarget);
-		return w == null ? null : w.isProductResource(linkTarget);
+		return w == null ? false : w.isProductResource(linkTarget);
 	}
 
 	/**

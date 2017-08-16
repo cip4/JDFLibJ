@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,6 +75,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -126,9 +127,9 @@ import org.cip4.jdflib.resource.process.JDFUsageCounter;
 
 /**
  * Utility class for status JDF and JMF
- * 
+ *
  * @author prosirai
- * 
+ *
  */
 public class StatusCounter
 {
@@ -260,11 +261,11 @@ public class StatusCounter
 	@Override
 	public String toString()
 	{
-		return "[StatusCounter - counter: " + m_deviceID + "Start date: " + startDate + " " + vLinkAmount + "]";
+		return "[StatusCounter - counter: " + m_deviceID + "Start date: " + startDate + " " + Arrays.toString(vLinkAmount) + "]";
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void writeAll()
 	{
@@ -276,7 +277,7 @@ public class StatusCounter
 
 	/**
 	 * construct a StatusUtil for a node n
-	 * 
+	 *
 	 * @param node the JDFNode that is being processed
 	 * @param vPartMap the map of Parts that is being processed excluding the waste partition
 	 * @param vResLinks the reslinks that are tracked for amount handling
@@ -297,7 +298,7 @@ public class StatusCounter
 
 	/**
 	 * set the currently active node
-	 * 
+	 *
 	 * @param node the JDFNode that is being processed
 	 * @param vPartMap the map of Parts that is being processed excluding the waste partition
 	 * @param vResLinks the reslinks that are tracked for amount handling
@@ -360,7 +361,7 @@ public class StatusCounter
 
 	/**
 	 * get the matching LinkAmount out of this
-	 * 
+	 *
 	 * @param refID the refID, name or usage of the resource of the bag - this MUST match the refID of a ResourceLink
 	 * @return the LinkAmount with matching refID, null if none found or bags is null
 	 */
@@ -378,11 +379,11 @@ public class StatusCounter
 			refIDLocal = getFirstRefID();
 		}
 
-		for (int i = 0; i < vLinkAmount.length; i++)
+		for (LinkAmount element : vLinkAmount)
 		{
-			if (vLinkAmount[i].linkFitsKey(refIDLocal))
+			if (element.linkFitsKey(refIDLocal))
 			{
-				return vLinkAmount[i];
+				return element;
 			}
 		}
 
@@ -391,7 +392,7 @@ public class StatusCounter
 
 	/**
 	 * get the matching LinkAmount out of this
-	 * 
+	 *
 	 * @param refID the refID, name or usage of the resource of the bag - this MUST match the refID of a ResourceLink
 	 * @return the actual refID of the matching resLink, null if none found or bags is null
 	 */
@@ -409,11 +410,11 @@ public class StatusCounter
 			refIDLocal = getFirstRefID();
 		}
 
-		for (int i = 0; i < vLinkAmount.length; i++)
+		for (LinkAmount element : vLinkAmount)
 		{
-			if (vLinkAmount[i].linkFitsKey(refIDLocal))
+			if (element.linkFitsKey(refIDLocal))
 			{
-				return vLinkAmount[i].rl.getrRef();
+				return element.rl.getrRef();
 			}
 		}
 
@@ -422,7 +423,7 @@ public class StatusCounter
 
 	/**
 	 * get the matching LinkAmount out of this
-	 * 
+	 *
 	 * @param n the index of the resource of the bag - this MUST match the refID of a ResourceLink
 	 * @return the LinkAmount with matching n, null if none found or bags is null
 	 */
@@ -437,7 +438,7 @@ public class StatusCounter
 
 	/**
 	 * get the refID of the first resource, i.e. the Resource that is being tracked in status messages
-	 * 
+	 *
 	 * @return the rRef of the prime resource link
 	 */
 	public String getFirstRefID()
@@ -455,7 +456,7 @@ public class StatusCounter
 
 	/**
 	 * set the id of the resource to be tracked in phasetimes, i.e. THE resource that is counted
-	 * 
+	 *
 	 * @param resID
 	 */
 	public void setFirstRefID(final String resID)
@@ -465,7 +466,7 @@ public class StatusCounter
 
 	/**
 	 * set the partIDKeys to be ignored
-	 * 
+	 *
 	 * @param key
 	 */
 	public void addIgnorePart(final EnumPartIDKey key)
@@ -502,7 +503,7 @@ public class StatusCounter
 
 	/**
 	 * clear all the amounts in the resource with id refID
-	 * 
+	 *
 	 * @param refID id of the resource
 	 */
 	public void clearAmounts(final String refID)
@@ -517,7 +518,7 @@ public class StatusCounter
 
 	/**
 	 * set the phase the amount specified by amount and waste to the resource with id refID
-	 * 
+	 *
 	 * @param refID , type or usage of the resource, if null all are updated
 	 * @param amount the amount for this phase
 	 * @param waste the waste for this phase
@@ -538,7 +539,7 @@ public class StatusCounter
 
 	/**
 	 * add the amount specified by amount and waste to the resource with id refID
-	 * 
+	 *
 	 * @param refID , type or usage of the resource, if null all are updated
 	 * @param amount
 	 * @param waste
@@ -577,7 +578,7 @@ public class StatusCounter
 
 	/**
 	 * set the total amount specified by amount and waste to the resource with id refID usually called when reading resource audits or resource signals
-	 * 
+	 *
 	 * @param refID , type or usage of the resource, if null all are updated
 	 * @param amount the amount to set
 	 * @param bWaste if true, set total waste, else set total good
@@ -603,7 +604,7 @@ public class StatusCounter
 
 	/**
 	 * get the total the amount of the resource with id refID
-	 * 
+	 *
 	 * @param refID , type or usage of the resource,
 	 * @return
 	 */
@@ -616,7 +617,7 @@ public class StatusCounter
 	/**
 	 * get all total amounts of all tracked resources
 	 * @return
-	 * 
+	 *
 	 */
 	public double[] getTotalAmounts()
 	{
@@ -635,7 +636,7 @@ public class StatusCounter
 	/**
 	 * get all total amounts of all tracked resources
 	 * @return
-	 * 
+	 *
 	 */
 	public JDFResourceLink[] getAmountLinks()
 	{
@@ -653,7 +654,7 @@ public class StatusCounter
 
 	/**
 	 * get all phaseamounts of all tracked resources
-	 * 
+	 *
 	 * @return
 	 */
 	public double[] getPhaseAmounts()
@@ -680,9 +681,9 @@ public class StatusCounter
 
 	/**
 	 * get the total the amount of the resource with id refID
-	 * 
+	 *
 	 * @param refID , type or usage of the resource,
-	 * @return 
+	 * @return
 	 */
 	public double getPhaseAmount(final String refID)
 	{
@@ -692,7 +693,7 @@ public class StatusCounter
 
 	/**
 	 * get the total the amount of the resource with id refID
-	 * 
+	 *
 	 * @param refID , type or usage of the resource,
 	 * @return
 	 */
@@ -704,7 +705,7 @@ public class StatusCounter
 
 	/**
 	 * get all total amounts of all tracked resources
-	 * 
+	 *
 	 * @return
 	 */
 	public double[] getTotalWastes()
@@ -723,8 +724,8 @@ public class StatusCounter
 
 	/**
 	 * get all phase waste amounts of all tracked resources
-	 * 
-	 * @return 
+	 *
+	 * @return
 	 */
 	public double[] getPhaseWastes()
 	{
@@ -742,9 +743,9 @@ public class StatusCounter
 
 	/**
 	 * get the total the amount of the resource with id refID
-	 * 
+	 *
 	 * @param refID , type or usage of the resource,
-	 * @return 
+	 * @return
 	 */
 	public double getPhaseWaste(final String refID)
 	{
@@ -769,11 +770,11 @@ public class StatusCounter
 	/**
 	 * set event, append the Event element and optionally the comment<br/>
 	 * overwrites existing values
-	 * 
+	 *
 	 * @param eventID Event/@EventID to set
 	 * @param eventValue Event/@EventValue to set
 	 * @param comment the comment text, if null no comment is set
-	 * @return 
+	 * @return
 	 */
 	public synchronized JDFNotification setEvent(final String eventID, final String eventValue, final String comment)
 	{
@@ -822,7 +823,7 @@ public class StatusCounter
 
 	/**
 	 * Set the Status and StatusDetails of this node update the PhaseTime audit or append a new phasetime as appropriate also prepare a status JMF
-	 * 
+	 *
 	 * @param nodeStatus the new status of the node
 	 * @param nodeStatusDetails the new statusDetails of the node
 	 * @param deviceStatus the new status of the device
@@ -905,10 +906,10 @@ public class StatusCounter
 	{
 		if (vLinkAmount != null)
 		{
-			for (int i = 0; i < vLinkAmount.length; i++)
+			for (LinkAmount element : vLinkAmount)
 			{
-				setResourceAudit(vLinkAmount[i].refID, EnumReason.ProcessResult);
-				vLinkAmount[i].updateNodeResource();
+				setResourceAudit(element.refID, EnumReason.ProcessResult);
+				element.updateNodeResource();
 			}
 		}
 	}
@@ -971,7 +972,7 @@ public class StatusCounter
 	 * @param deviceStatus
 	 * @param deviceStatusDetails
 	 * @param newDevInfo
-	 * @param la 
+	 * @param la
 	 */
 	private void fillDeviceInfo(final EnumDeviceStatus deviceStatus, final String deviceStatusDetails, final JDFDeviceInfo newDevInfo, final LinkAmount la)
 	{
@@ -1049,9 +1050,9 @@ public class StatusCounter
 		// cleanup!
 		if (vLinkAmount != null)
 		{
-			for (int i = 0; i < vLinkAmount.length; i++)
+			for (LinkAmount element : vLinkAmount)
 			{
-				vLinkAmount[i].addPhase(0, 0, true, true);
+				element.addPhase(0, 0, true, true);
 			}
 		}
 		return respStatus;
@@ -1107,7 +1108,7 @@ public class StatusCounter
 
 	/**
 	 * update all status relevant data in jobphase also update percentComplete if we don't have amounts
-	 * 
+	 *
 	 * @param la
 	 * @param jp
 	 */
@@ -1166,9 +1167,8 @@ public class StatusCounter
 			return null;
 		}
 		final VElement vRet = new VElement();
-		for (int i = 0; i < vLinkAmount.length; i++)
+		for (final LinkAmount la : vLinkAmount)
 		{
-			final LinkAmount la = vLinkAmount[i];
 			if (n == 1)
 			{
 				final JDFResourceLink phaseTimeLink = la.getPhaseTimeLink();
@@ -1218,7 +1218,7 @@ public class StatusCounter
 	}
 
 	/**
-	 * @param bClean 
+	 * @param bClean
 	 * @return the docJMFNotification
 	 */
 	public synchronized JDFDoc getDocJMFNotification(final boolean bClean)
@@ -1268,7 +1268,7 @@ public class StatusCounter
 			}
 
 			/**
-			 * 
+			 *
 			 */
 			protected AmountBag()
 			{
@@ -1284,19 +1284,6 @@ public class StatusCounter
 				phaseAmount = 0;
 				totalWaste = 0;
 				phaseWaste = 0;
-			}
-
-			/**
-			 * copy ctor
-			 * 
-			 * @param bag
-			 */
-			protected AmountBag(final AmountBag bag)
-			{
-				totalAmount = bag.totalAmount;
-				phaseAmount = bag.phaseAmount;
-				totalWaste = bag.totalWaste;
-				phaseWaste = bag.phaseWaste;
 			}
 
 			/**
@@ -1359,11 +1346,6 @@ public class StatusCounter
 		protected final AmountBag lastBag;
 		protected VJDFAttributeMap vResPartMap;
 		private boolean bInteger = false;
-
-		protected LinkAmount()
-		{
-			lastBag = new AmountBag();
-		}
 
 		protected LinkAmount(final JDFResourceLink _rl)
 		{
@@ -1677,7 +1659,7 @@ public class StatusCounter
 
 		/**
 		 * change the value to integer, if required
-		 * @param amount 
+		 * @param amount
 		 * @return the formatted amount, either as integer or double
 		 */
 		protected double getAmount(final double amount)
@@ -1686,7 +1668,7 @@ public class StatusCounter
 		}
 
 		/**
-		 * @param amount 
+		 * @param amount
 		 * @return the formatted amount, either as integer or double
 		 */
 		protected String formatAmount(final double amount)
@@ -1695,7 +1677,7 @@ public class StatusCounter
 		}
 
 		/**
-		 * 
+		 *
 		 */
 		private void cleanAmounts()
 		{
@@ -1718,7 +1700,7 @@ public class StatusCounter
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.lang.Object#toString()
 		 */
 		@Override
@@ -1802,9 +1784,9 @@ public class StatusCounter
 		m_deviceID = deviceid;
 	}
 
-	/**	 
-	 * @param moduleID 
-	 * @param moduleType 
+	/**
+	 * @param moduleID
+	 * @param moduleType
 	 */
 	public void addModule(final String moduleID, final String moduleType)
 	{
@@ -1822,7 +1804,7 @@ public class StatusCounter
 
 	/**
 	 * set waste tracking on or off for the resourcelink rl
-	 * 
+	 *
 	 * @param resID the resource id to the resource to track
 	 * @param b tracking on or off
 	 */
@@ -1840,7 +1822,7 @@ public class StatusCounter
 
 	/**
 	 * set copying the resource into resourceInfo on or off for the resourcelink rl
-	 * 
+	 *
 	 * @param _refID the refid of the resourcelink to the resource to copy
 	 * @param b tracking on or off
 	 */
@@ -1858,9 +1840,9 @@ public class StatusCounter
 	}
 
 	/**
-	 * 
+	 *
 	 * @param resID the resource ID to set/track reason for the audit
-	 * @param reason 
+	 * @param reason
 	 * @return JDFResourceAudit the generated audit
 	 */
 	public synchronized JDFResourceAudit setResourceAudit(final String resID, final EnumReason reason)
@@ -1885,7 +1867,7 @@ public class StatusCounter
 	/**
 	 * @param endStatus
 	 * @return
-	 * 
+	 *
 	 */
 	public JDFProcessRun setProcessResult(final EnumNodeStatus endStatus)
 	{
@@ -1913,7 +1895,7 @@ public class StatusCounter
 
 	/**
 	 * sets the MISDetails/@WorkType for default audis, resource audits and phaseTime elements
-	 * 
+	 *
 	 * @param _workType the worktype to set, if null no MISDetails and no Worktype are added. closes all ongoing phases and starts a new phase
 	 */
 	public void setWorkType(final EnumWorkType _workType)
@@ -1935,7 +1917,7 @@ public class StatusCounter
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public String getStatusDetails()
@@ -1944,7 +1926,7 @@ public class StatusCounter
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFDate getStartDate()
@@ -1953,7 +1935,7 @@ public class StatusCounter
 	}
 
 	/**
-	 * 
+	 *
 	 * @param _operationMode
 	 */
 	public void setOperationMode(final EnumDeviceOperationMode _operationMode)
