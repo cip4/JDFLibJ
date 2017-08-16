@@ -279,7 +279,7 @@ public class StringUtil
 			final String s = vTemplate.get(i);
 			if (isInteger(s))
 			{
-				vObj[i] = new Integer(parseInt(s, 0));
+				vObj[i] = Integer.valueOf(parseInt(s, 0));
 			}
 			else if (isNumber(s))
 			{

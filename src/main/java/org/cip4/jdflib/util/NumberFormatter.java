@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,7 @@ import org.cip4.jdflib.core.JDFConstants;
 
 /**
  * class to format integers, longs, doubles etc.
- * 
+ *
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class NumberFormatter
@@ -90,7 +90,7 @@ public class NumberFormatter
 
 	/**
 	 * if set, remove trailing 0
-	 *  
+	 *
 	 * @param zapp0
 	 */
 	public void setZapp0(boolean zapp0)
@@ -103,14 +103,14 @@ public class NumberFormatter
 	/**
 	 * returns a formatted double. Truncates to exactly precision digits after the "." <br>
 	 * If precision=0, the . is stripped
-	 * 
+	 *
 	 * @param i the integer to format
 	 * @param length maximum precision, depending on value of zapp0, leading 0s are discarded or kept
 	 * @return the formatted string that represents the integer
 	 */
 	public String formatInt(final int i, int length)
 	{
-		final Integer[] ad = { new Integer(i) };
+		final Integer[] ad = { Integer.valueOf(i) };
 		String s;
 		if (length > 0)
 		{
@@ -126,7 +126,7 @@ public class NumberFormatter
 	/**
 	 * returns a formatted double. Truncates to at most precision digits after the "." <br>
 	 * If precision=0, the . is stripped
-	 * 
+	 *
 	 * @param d the double to format
 	 * @param precision maximum precision, depending on value of zapp0, trailing 0s are discarded or kept
 	 * @return the formatted string that represents d TBD handle exp format, null if NaN
@@ -199,7 +199,7 @@ public class NumberFormatter
 	/**
 	 * returns a formatted double. Truncates to 8 digits after the "." <br>
 	 * If the double is representable as an integer, any ".0" is stripped.
-	 * 
+	 *
 	 * @param d the double to format
 	 * @return the formatted string that represents d TBD handle exp format
 	 */

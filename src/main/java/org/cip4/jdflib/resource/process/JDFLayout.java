@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,14 +68,14 @@
  *
  */
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFLayout extends JDFAutoLayout
- * created 2001-09-05T08:21:57GMT+02:00 
+ * created 2001-09-05T08:21:57GMT+02:00
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author sabjon@topmail.de    using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author sabjon@topmail.de    using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 
 package org.cip4.jdflib.resource.process;
@@ -99,7 +99,7 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class JDFLayout extends JDFSurface
 {
@@ -107,7 +107,7 @@ public class JDFLayout extends JDFSurface
 
 	/**
 	 * Constructor for JDFLayout
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -118,7 +118,7 @@ public class JDFLayout extends JDFSurface
 
 	/**
 	 * Constructor for JDFLayout
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -130,7 +130,7 @@ public class JDFLayout extends JDFSurface
 
 	/**
 	 * Constructor for JDFLayout
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -170,7 +170,7 @@ public class JDFLayout extends JDFSurface
 				String s = co.getAttribute(AttributeName.ORD, null, null);
 				int i = StringUtil.parseInt(s, -123456);
 				if (i != 123456)
-					vi.add(new Integer(i));
+					vi.add(Integer.valueOf(i));
 			}
 		}
 
@@ -243,7 +243,7 @@ public class JDFLayout extends JDFSurface
 
 	/**
 	 * generate a JDF 1.3 compatible Layout from this (1.2)
-	 * 
+	 *
 	 * @return true if successful
 	 */
 	public boolean toNewLayout()
@@ -305,9 +305,9 @@ public class JDFLayout extends JDFSurface
 	// /////////////////////////////////////////////////////////////////
 	/**
 	 * generate a JDF 1.2 compatible Layout from this (1.3)
-	 * 
+	 *
 	 * @return bool true if successful
-	 * 
+	 *
 	 */
 	public boolean fromNewLayout()
 	{
@@ -450,12 +450,12 @@ public class JDFLayout extends JDFSurface
 
 	/**
 	 * heuristics to check which version an element of a Layout is in: 1.3 or 1.2
-	 * 
+	 *
 	 * Note that this routine is static since it must be used on all sheets, surfaces etc.
-	 * 
+	 *
 	 * @param sheet the Sheet, Surface, Signature or Layout to check
 	 * @return true if this is a new, i.e. partitioned Layout
-	 * 
+	 *
 	 */
 	public static boolean isNewLayout(final JDFResource sheet)
 	{
@@ -506,6 +506,7 @@ public class JDFLayout extends JDFSurface
 	/**
 	 * appends a signature in both old and new Layouts if old: a <Signature> element if new: a SignatureName partition leaf
 	 */
+	@Override
 	public JDFSignature appendSignature() throws JDFException
 	{
 		return appendLayoutElement(this, ElementName.SIGNATURE, AttributeName.SIGNATURENAME);
@@ -514,7 +515,7 @@ public class JDFLayout extends JDFSurface
 	/**
 	 * counts the number of signatures in both old and new Layouts if old: the number of <Signature> elements if new: the number of SignatureName partition
 	 * leaves
-	 * 
+	 *
 	 * @return the number of signatures
 	 */
 	public int numSignatures()
@@ -524,9 +525,10 @@ public class JDFLayout extends JDFSurface
 
 	/**
 	 * gets or appends a signature in both old and new Layouts if old: a <Signature> element if new: a SignatureName partition leaf
-	 * 
+	 *
 	 * @param iSkip the number of signatures to skip
 	 */
+	@Override
 	public JDFSignature getCreateSignature(final int iSkip)
 	{
 		JDFSignature s = getSignature(iSkip);
@@ -539,9 +541,10 @@ public class JDFLayout extends JDFSurface
 
 	/**
 	 * gets a signature in both old and new Layouts if old: a <Signature> element if new: a SignatureName partition leaf
-	 * 
+	 *
 	 * @param iSkip the number of signatures to skip
 	 */
+	@Override
 	public JDFSignature getSignature(final int iSkip)
 	{
 		return getLayoutElement(this, ElementName.SIGNATURE, AttributeName.SIGNATURENAME, iSkip);
@@ -550,7 +553,7 @@ public class JDFLayout extends JDFSurface
 	/**
 	 * gets a signature in both old and new Layouts if old: a <Signature> element if new: a SignatureName partition leaf
 	 * @param signatureName the SignatureName partition key value(new) or Signature/@Name(old)
-	 * 
+	 *
 	 * @return the signature
 	 */
 	public JDFSignature getSignature(final String signatureName)
@@ -561,7 +564,7 @@ public class JDFLayout extends JDFSurface
 	/**
 	 * gets a signature in both old and new Layouts if old: a <Signature>creates it if it does not exist element if new: a SignatureName partition leaf
 	 * @param signatureName the SignatureName partition key value(new) or Signature/@Name(old)
-	 * 
+	 *
 	 * @return the signature
 	 * @throws JDFException
 	 */
@@ -572,7 +575,7 @@ public class JDFLayout extends JDFSurface
 
 	/**
 	 * get the vector of sheets in this signature
-	 * 
+	 *
 	 * @return {@link VElement} the vector of signatures in this
 	 */
 	public VElement getSignatureVector()
@@ -581,4 +584,4 @@ public class JDFLayout extends JDFSurface
 	}
 
 } // class JDFLayout
-// ==========================================================================
+	// ==========================================================================

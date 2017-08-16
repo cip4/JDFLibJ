@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-20175 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,13 +68,13 @@
  *
  */
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFDropItemIntent extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de   using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author: sabjon@topmail.de   using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  * Revision history:   ...
  */
 
@@ -84,7 +84,6 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDropItemIntent;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFDropItem;
@@ -96,7 +95,7 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 
 	/**
 	 * Constructor for JDFDropItemIntent
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -108,7 +107,7 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 
 	/**
 	 * Constructor for JDFDropItemIntent
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
@@ -121,7 +120,7 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 
 	/**
 	 * Constructor for JDFDropItemIntent
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
@@ -141,7 +140,7 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 
 	/**
 	 * return a vector of unknown element nodenames
-	 * 
+	 *
 	 * @default getUnknownElements(bIgnorePrivate, 99999999)
 	 */
 	@Override
@@ -152,7 +151,7 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 
 	/**
 	 * Get parent node of 'this' - node DeliveryIntent
-	 * 
+	 *
 	 * @return JDFDeliveryIntent: DeliveryIntent node
 	 */
 	public JDFDeliveryIntent getParentDeliveryIntent()
@@ -163,29 +162,32 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 	/**
 	 * Get of 'this' the value of attribute AdditionalAmount. If not specified, get the default value of attribute AdditionalAmount, that is specified in it's
 	 * parent element (node DeliveryIntent)
-	 * 
+	 *
 	 * @return WString: attribute value
+	 * @deprecated
 	 */
-	// TODO AdditionalAmount in super hat anderen return type! deshalt _Integer
+	@Deprecated
 	public int getAdditionalAmount_Integer()
+	{
+		return getAdditionalAmount();
+	}
+
+	/**
+	 *
+	 * @see org.cip4.jdflib.auto.JDFAutoDropItemIntent#getAdditionalAmount()
+	 */
+	@Override
+	public int getAdditionalAmount()
 	{
 		if (hasAttribute(AttributeName.ADDITIONALAMOUNT))
 		{
-			try
-			{
-				final Integer i = new Integer(super.getAdditionalAmount());
-				return i.intValue();
-			}
-			catch (final NumberFormatException nfe)
-			{
-				throw new JDFException("DropItemIntent.getAdditionalAmount: Ammount is nit a int value");
-			}
+			return getAdditionalAmount();
 		}
 		return getParentDeliveryIntent().getAdditionalAmount();
 	}
 
 	/**
-	 * 
+	 *
 	 * @param dropItem
 	 */
 	public void setFromDropItem(JDFDropItem dropItem)

@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
@@ -116,7 +116,7 @@ import org.cip4.jdflib.util.VectorMap;
 
 //----------------------------------
 /**
- * 
+ *
  */
 public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 {
@@ -125,7 +125,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * Constructor for JDFDevCaps
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -136,7 +136,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * Constructor for JDFDevCaps
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -148,7 +148,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * Constructor for JDFDevCaps
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -167,7 +167,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * set attribute <code>DevCapRef</code>
-	 * 
+	 *
 	 * @param value
 	 *            the value to set the attribute to
 	 */
@@ -178,7 +178,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * set rRef to the value of devCap/@ID
-	 * 
+	 *
 	 * @param dc
 	 *            the DevCap to set
 	 */
@@ -191,7 +191,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * set rRef to the value of devCap/@ID
-	 * 
+	 *
 	 * @param deviceCap
 	 *            the DevCap to set
 	 */
@@ -206,7 +206,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * set rRef to the value of devCap/@ID
-	 * 
+	 *
 	 * @param deviceCap
 	 *            the DevCap to set
 	 */
@@ -223,7 +223,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * get the DevCapPool that contains devcap elements referenced by this
-	 * 
+	 *
 	 * @return JDFDevCapPool the pool
 	 */
 	public JDFDevCapPool getDevCapPool()
@@ -233,7 +233,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * get the DEvCapPool that contains devcap elements referenced by this
-	 * 
+	 *
 	 * @return JDFDevCapPool the pool
 	 */
 	private KElement getParentPool(String poolName)
@@ -246,7 +246,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * get the DEvCapPool that contains devcap elements referenced by this
-	 * 
+	 *
 	 * @return JDFDevCapPool the pool
 	 */
 	private KElement getCreateParentPool(String poolName)
@@ -259,9 +259,10 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * get the DEvCapPool that contains devcap elements referenced by this
-	 * 
+	 *
 	 * @return JDFDevCapPool the pool
 	 */
+	@Override
 	public JDFModulePool getModulePool()
 	{
 		return (JDFModulePool) getParentPool(ElementName.MODULEPOOL);
@@ -269,9 +270,10 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * get the DEvCapPool that contains devcap elements referenced by this
-	 * 
+	 *
 	 * @return JDFDevCapPool the pool
 	 */
+	@Override
 	public JDFModulePool getCreateModulePool()
 	{
 		return (JDFModulePool) getCreateParentPool(ElementName.MODULEPOOL);
@@ -280,7 +282,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	/**
 	 * get the DevCapPool that contains devcap elements referenced by this
 	 * create one if it does not exist
-	 * 
+	 *
 	 * @return JDFDevCapPool the pool
 	 */
 	public JDFDevCapPool getCreateDevCapPool()
@@ -295,7 +297,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * get the one and only devCap - note that the spec allows <code>*</code>,
 	 * but recommends only one <code>+</code> additional actions.<br>
 	 * Also search devCapPool for a matching element to DevCapRef.
-	 * 
+	 *
 	 * @return the DevCap
 	 */
 	public JDFDevCap getDevCap()
@@ -320,11 +322,11 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * "DevCapsName[Context=bbb, LinkUsage=ccc]/"
 	 * <p>
 	 * default: getNamePath(false)
-	 * 
+	 *
 	 * @param onlyNames
 	 *            if true, returns only DevCapsName. Default=false
 	 * @return String - NamePath of this DevCaps
-	 * 
+	 *
 	 * @deprecated use getNamePathVector
 	 */
 	@Deprecated
@@ -347,12 +349,13 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * <code>DevCaps/@Context</code> or <code>DevCaps/@LinkUsage</code>.
 	 * <p>
 	 * default: getNamePath(false)
-	 * 
+	 *
 	 * @param bRecurse
 	 *            if true, returns "
 	 *            <code>DevCapsName/SubelemName1/SubelemName2/...</code>"
 	 * @return String - NamePath of this DevCap
 	 */
+	@Override
 	public final VString getNamePathVector()
 	{
 		String result = getDevCapsName();
@@ -418,7 +421,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * getDevCapVector()
-	 * 
+	 *
 	 * @return VElement
 	 */
 	public final VElement getDevCapVector()
@@ -446,10 +449,10 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * devCapReport - tests if the elements in vElem fit any (logical OR) DevCap
 	 * element that DevCaps consists of. Composes a detailed report in XML form
 	 * of the errors found. If XMLDoc is null there are no errors.<br>
-	 * 
+	 *
 	 * DevCaps will be checked if they are direct children of <code>this</code>
 	 * and referenced in DevCapPool.
-	 * 
+	 *
 	 * @param vElem
 	 *            vector of the elements to test
 	 * @param testlists
@@ -500,7 +503,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	/**
 	 * same as getName, except that "Link" is appended in case of
 	 * @Context="Link"
-	 * 
+	 *
 	 * @return the element name mangled by context
 	 */
 	public String getContextName()
@@ -523,7 +526,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * JDF 1.3, DevCap can be located in DevCapPool and can be called from any
 	 * DevCaps. So the CapXPaths in XMLDoc doc are being fixed by setting the
 	 * right source of calling.
-	 * 
+	 *
 	 * @param root
 	 *            root of the XMLDoc document where the CapXPaths must be
 	 *            corrected
@@ -575,7 +578,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	 * Checks CapXPath's for every InvalidResource element of the given XMLDoc
 	 * and all children (of arbitrary depth). Appends right ancestors if
 	 * CapXPath is not complete.<br>
-	 * 
+	 *
 	 * @param elem
 	 *            "pool" element like "InvalidElements" or "InvalidAttributes".<br>
 	 *            From this element we have access to its parent and children
@@ -617,7 +620,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * Moves the ChildElementVector of the second element into the first
-	 * 
+	 *
 	 * @param moveToElement
 	 *            the first element - new parent for the children of the second
 	 *            element
@@ -639,7 +642,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * gets the matching elements in node that match this devcap
-	 * 
+	 *
 	 * @param node
 	 *            the node to search in
 	 * @return VElement - the element vector of matching elements,
@@ -713,7 +716,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * gets the matching elements in node that match this devcaps
-	 * 
+	 *
 	 * @param node
 	 *            the node to search in
 	 * @return VElement - the element vector of matching elements,
@@ -752,13 +755,13 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	/**
 	 * append elements to the node that match this DevCap, if they do not exist
 	 * yet
-	 * 
+	 *
 	 * @param node
 	 *            the node to append the elements to
 	 * @param bAll
 	 *            if false, only add if minOccurs>=1 and required=true or a
 	 *            default exists
-	 * 
+	 *
 	 * @return KElement - the last element that was appended
 	 */
 	public KElement appendMatchingElementsToNode(JDFNode node, boolean bAll, VectorMap indexResMap, boolean bLink)
@@ -837,7 +840,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 						int kk = (tocNum2 == null || tocNum2.size() == 0) ? -1 : tocNum2.getInt(0);
 						if (EnumUsage.Input.equals(linkUsage))
 							kk--;
-						Vector<JDFResource> v = (Vector) indexResMap.get(new Integer(kk));
+						Vector<JDFResource> v = (Vector) indexResMap.get(Integer.valueOf(kk));
 						if (v != null)
 						{
 							int sv = v.size();
@@ -870,10 +873,10 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 						}
 
 						if (tocNum2 == null || tocNum2.size() == 0)
-							indexResMap.putOne(new Integer(-1), r);
+							indexResMap.putOne(Integer.valueOf(-1), r);
 						else
 							indexResMap.putOne(tocNum2.elementAt(0), r); // only
-																			// support
+																		// support
 																			// 1
 																			// now
 					}
@@ -923,13 +926,13 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * sets default elements and adds them, if there are less than minOccurs
-	 * 
+	 *
 	 * @param node
 	 *            the node to set
 	 * @param bAll
 	 *            if false, only add if minOccurs>=1 and required=true or a
 	 *            default exists, if true, always create one
-	 * 
+	 *
 	 * @return boolean true if a default element was created, else false
 	 */
 	public boolean setDefaultsFromCaps(JDFNode node, boolean bAll)
@@ -955,7 +958,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * return the highest maxOccurs of all devCap elements
-	 * 
+	 *
 	 * @return int - the highest maxOccurs of all devCap elements
 	 */
 	public int getMaxOccurs()
@@ -980,7 +983,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/**
 	 * return the lowest minOccurs of all devCap elements
-	 * 
+	 *
 	 * @return int - the lowest minOccurs of all devCap elements
 	 */
 	public int getMinOccurs()
@@ -1126,7 +1129,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	/**
 	 * get the availability of this devcaps based on the list of installed
 	 * modules in ModuleRefs and ModulePool
-	 * 
+	 *
 	 * @return
 	 */
 	public EnumAvailability getModuleAvailability()
@@ -1136,7 +1139,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.
 	 * core.KElement.EnumValidationLevel, boolean, int)
@@ -1176,11 +1179,12 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.cip4.jdflib.ifaces.IModuleCapability#appendModuleRef(java.lang.String
 	 * )
 	 */
+	@Override
 	public JDFModuleCap appendModuleRef(String id)
 	{
 		return JDFModulePool.appendModuleRef(this, id);
@@ -1188,9 +1192,10 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 */
+	@Override
 	public EnumTerm getEvaluationType()
 	{
 		return EnumTerm.IsPresentEvaluation;

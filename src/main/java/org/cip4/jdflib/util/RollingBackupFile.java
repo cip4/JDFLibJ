@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -66,7 +66,7 @@
  * <http://www.cip4.org/>.
  *
  *
- * 
+ *
  */
 package org.cip4.jdflib.util;
 
@@ -77,11 +77,11 @@ import org.cip4.jdflib.core.VString;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * class to generate rolling backup files using a simple <FileName>.n naming algorithm.
- * 
+ *
  * The oldest file dies when the maximum number is reached
- * 
+ *
  * 08.12.2008
  */
 public class RollingBackupFile extends File
@@ -127,7 +127,7 @@ public class RollingBackupFile extends File
 	}
 
 	/**
-	 * 
+	 *
 	 * get a new file for a given extension
 	 * @param extension
 	 * @return
@@ -209,7 +209,7 @@ public class RollingBackupFile extends File
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	private HashMap<Integer, File> getNameMap()
@@ -235,11 +235,11 @@ public class RollingBackupFile extends File
 					int i = StringUtil.parseInt(delta, -1);
 					if (i >= 0)
 					{
-						map.put(new Integer(i), file);
+						map.put(Integer.valueOf(i), file);
 					}
 					else if (delta != null && delta.equals(UrlUtil.prefix(getName())))
 					{
-						map.put(new Integer(0), file);
+						map.put(Integer.valueOf(0), file);
 					}
 				}
 			}
@@ -264,7 +264,7 @@ public class RollingBackupFile extends File
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1521423479897L;
 

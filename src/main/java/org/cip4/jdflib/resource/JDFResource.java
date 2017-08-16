@@ -4895,12 +4895,11 @@ public class JDFResource extends JDFElement
 						final int index = vTest.indexOf(kidMap);
 						if (index >= 0)
 						{
-							vTmp.add(new Integer(index));
+							vTmp.add(Integer.valueOf(index));
 						}
 						else
 						{
-							// we found a child in the resource that is not in
-							// vTest, --> we cannot consolidate
+							// we found a child in the resource that is not in vTest, --> we cannot consolidate
 							vTmp.clear();
 							break;
 						}
@@ -5021,7 +5020,7 @@ public class JDFResource extends JDFElement
 	private String makeID(final String s, final int numberOfDigits, final int value)
 	{
 		String result = s;
-		final Integer myValue = new Integer(value);
+		final Integer myValue = Integer.valueOf(value);
 
 		final int numberOfValueDigits = myValue.toString().length();
 
@@ -6456,7 +6455,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setFountainNumber(final int value)
 	{
-		final Integer i = new Integer(value);
+		final Integer i = Integer.valueOf(value);
 		setAttribute(AttributeName.FOUNTAINNUMBER, i.toString());
 	}
 
@@ -8351,7 +8350,7 @@ public class JDFResource extends JDFElement
 
 	/**
 	 * if true, subelements are initialized with a class attribute
-
+	
 	 * @param autoSubElementClass
 	 */
 	public static void setAutoSubElementClass(boolean autoSubElementClass)
