@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  *
@@ -78,7 +78,7 @@ package org.cip4.jdflib.core;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * before August 20, 2009
  */
 public abstract class JDFConstants extends JDFCoreConstants
@@ -101,47 +101,20 @@ public abstract class JDFConstants extends JDFCoreConstants
 	* @deprecated use null for no namespace check
 	*/
 	@Deprecated
-	/** * */public static final String NONAMESPACE = EMPTYSTRING;
+	/** * */
+	public static final String NONAMESPACE = EMPTYSTRING;
 	/** @deprecated use null */
 	@Deprecated
-	/** * */public static final String IMPROBABLE_STRING = "\"\'";
 	/** * */
-	public static final String COMMA = ",";
-	/** * */
-	public static final String BLANK = " ";
-	/** * */
-	public static final String COLON = ":";
-	/** * */
-	public static final String HYPHEN = "-";
-	/** * */
-	public static final char CHAR_COLON = ':';
-	/** * */
-	public static final String QUOTE = "\"";
-	/** * */
-	public static final String SLASH = "/";
-	/** * */
-	public static final String DOT = ".";
-	/** * */
-	public static final String DOTSLASH = "./";
-	/** * */
-	public static final String DOTDOTSLASH = "../";
-	/** * */
-	public static final String AET = "@";
-	/** * */
-	public static final String TILDE = "~";
-	/** * */
-	public static final String STAR = "*";
-	/** * */
-	public static final String UNDERSCORE = "_";
+	public static final String IMPROBABLE_STRING = "\"\'";
 
-	/** * */
-	public static final String XMLNS = "xmlns";
 	/** * */
 	public static final String XSI = "xsi";
 
 	/** @deprecated use null (not "null") */
 	@Deprecated
-	/** * */public static final String NULL = "null";
+	/** * */
+	public static final String NULL = "null";
 
 	/** * */
 	public static final String INTERNAL = "Internal";
@@ -149,11 +122,13 @@ public abstract class JDFConstants extends JDFCoreConstants
 	// the positive INF value 0x7FEDCBAA
 	/** @deprecated */
 	@Deprecated
-	/** * */public static final long POSINF_HEX = 0x7FEDCBAA;
+	/** * */
+	public static final long POSINF_HEX = 0x7FEDCBAA;
 	// the negative INF value 0x80123456
 	/** @deprecated */
 	@Deprecated
-	/** * */public static final long NEGINF_HEX = 0x80123456;
+	/** * */
+	public static final long NEGINF_HEX = 0x80123456;
 
 	/** * */
 	public static final String INPUT_ZEROTOINFINITY = "i*";
@@ -414,7 +389,8 @@ public abstract class JDFConstants extends JDFCoreConstants
 	 */
 	/** @deprecated */
 	@Deprecated
-	/** * */public static final String ACTIVATION_UNKNOWN = "Unknown";
+	/** * */
+	public static final String ACTIVATION_UNKNOWN = "Unknown";
 	/** * */
 	public static final String ACTIVATION_INACTIVE = "Inactive";
 	/** * */
@@ -433,7 +409,8 @@ public abstract class JDFConstants extends JDFCoreConstants
 	 */
 	/** @deprecated */
 	@Deprecated
-	/** * */public static final String PARTUSAGE_UNKNOWN = "Unknown";
+	/** * */
+	public static final String PARTUSAGE_UNKNOWN = "Unknown";
 	/** * */
 	public static final String PARTUSAGE_EXPLICIT = "Explicit";
 	/** * */
@@ -446,7 +423,8 @@ public abstract class JDFConstants extends JDFCoreConstants
 	 */
 	/** @deprecated */
 	@Deprecated
-	/** * */public static final String LOTCONTROL_UNKNOWN = "Unknown";
+	/** * */
+	public static final String LOTCONTROL_UNKNOWN = "Unknown";
 	/** * */
 	public static final String LOTCONTROL_CONTROLLED = "Controlled";
 	/** * */
@@ -457,7 +435,8 @@ public abstract class JDFConstants extends JDFCoreConstants
 	 */
 	/** @deprecated */
 	@Deprecated
-	/** * */public static final String PARTIDKEY_UNKNOWN = "Unknown";
+	/** * */
+	public static final String PARTIDKEY_UNKNOWN = "Unknown";
 	/** * */
 	public static final String PARTIDKEY_BINDERYSIGNATURENAME = "BinderySignatureName";
 	/** * */
@@ -535,7 +514,8 @@ public abstract class JDFConstants extends JDFCoreConstants
 
 	/** @deprecated */
 	@Deprecated
-	/** * */public static final String DATATYPE_UNKNOWN = "Unknown";
+	/** * */
+	public static final String DATATYPE_UNKNOWN = "Unknown";
 	/** * */
 	public static final String DATATYPE_DURATION = "DurationSpan";
 	/** * */
@@ -562,7 +542,8 @@ public abstract class JDFConstants extends JDFCoreConstants
 	 */
 	/** @deprecated */
 	@Deprecated
-	/** * */public static final String PRIORITY_UNKNOWN = "Unknown";
+	/** * */
+	public static final String PRIORITY_UNKNOWN = "Unknown";
 	/** * */
 	public static final String PRIORITY_NONE = "None";
 	/** * */
@@ -575,7 +556,8 @@ public abstract class JDFConstants extends JDFCoreConstants
 	 */
 	/** @deprecated */
 	@Deprecated
-	/** * */public static final String PROCESSUSAGE_UNKNOWN = "Unknown";
+	/** * */
+	public static final String PROCESSUSAGE_UNKNOWN = "Unknown";
 	/** * */
 	public static final String PROCESSUSAGE_ANYINPUT = "AnyInput";
 	/** * */
@@ -645,7 +627,8 @@ public abstract class JDFConstants extends JDFCoreConstants
 
 	/** @deprecated */
 	@Deprecated
-	/** * */public static final String TYPE_UNKNOWN = "Unknown";
+	/** * */
+	public static final String TYPE_UNKNOWN = "Unknown";
 	/** * */
 	public static final String TYPE_PRODUCT = "Product";
 	/** * */

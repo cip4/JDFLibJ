@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -87,11 +89,13 @@ import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
+import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFPageData;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -678,5 +682,33 @@ public class WalkJDFElement extends WalkElement
 			}
 		}
 
+	}
+
+	/**
+	 *
+	 * @param r
+	 */
+	void moveToContent(final JDFResource r)
+	{
+		if (r != null)
+		{
+			JDFPageList pl = (JDFPageList) r;
+			if (!pl.isIndexed())
+			{
+				pl.uniqueIndex();
+			}
+			KElement cNew = safeRename(r, XJDFConstants.Content, true);
+			cNew.appendAttribute(AttributeName.PARTIDKEYS, AttributeName.PAGENUMBER, null, null, true);
+			Vector<JDFPageData> vpd = cNew.getChildrenByClass(JDFPageData.class, true, 0);
+			if (vpd != null)
+			{
+				for (JDFPageData pd : vpd)
+				{
+					pd.renameAttribute(AttributeName.PAGEINDEX, AttributeName.PAGENUMBER, null, null);
+					pd.setAttribute(AttributeName.CONTENTTYPE, "Page");
+					safeRename(pd, XJDFConstants.Content, false);
+				}
+			}
+		}
 	}
 }

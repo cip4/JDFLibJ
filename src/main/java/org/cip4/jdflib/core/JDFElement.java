@@ -3662,38 +3662,7 @@ public class JDFElement extends KElement
 			}
 		}
 
-		int siz = 0;
-		final NamedNodeMap nm = kElem.getAttributes();
-		if (nm != null)
-		{
-			siz = nm.getLength();
-			boolean bCatch = false;
-			// this loop allows us to catch namespace exceptions, then set the namespace and subsequently reset the attributes
-			for (int j = 0; j < 2; j++)
-			{
-				for (int i = 0; i < siz; i++)
-				{
-					final Node a = nm.item(i);
-					if (ignoreList == null || !ignoreList.contains(a.getLocalName()))
-					{
-						try
-						{
-							setAttribute(a.getNodeName(), a.getNodeValue(), a.getNamespaceURI());
-						}
-						catch (JDFException x)
-						{
-							bCatch = true;
-							if (j == 1)
-								throw x;
-						}
-					}
-				}
-				if (!bCatch)
-					break; // one loop is enough in case all sets went through
-			}
-		}
-
-		return siz;
+		return super.setAttributes(kElem, ignoreList);
 	}
 
 	/**

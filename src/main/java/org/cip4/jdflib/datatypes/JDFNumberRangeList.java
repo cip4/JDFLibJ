@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,7 +70,7 @@
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFNumberRangeList.java
@@ -125,9 +125,9 @@ public class JDFNumberRangeList extends JDFRangeList
 
 	/**
 	 * constructs a JDFNumberRangeList from a given string
-	 * 
+	 *
 	 * @param s the given string
-	 * 
+	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFNumberRangeList(String s) throws DataFormatException
@@ -140,7 +140,7 @@ public class JDFNumberRangeList extends JDFRangeList
 
 	/**
 	 * constructs a JDFNumberRangeList from the given JDFNumberRangeList
-	 * 
+	 *
 	 * @param rl the given JDFNumberRangeList
 	 */
 	public JDFNumberRangeList(JDFNumberRangeList rl)
@@ -150,7 +150,7 @@ public class JDFNumberRangeList extends JDFRangeList
 
 	/**
 	 * constructs a JDFNumberRangeList from the given JDFNumberRange
-	 * 
+	 *
 	 * @param r the given JDFNumberRange
 	 */
 	public JDFNumberRangeList(JDFNumberRange r)
@@ -164,9 +164,9 @@ public class JDFNumberRangeList extends JDFRangeList
 
 	/**
 	 * inRange - returns true if the given double value is in one of the ranges of the range list
-	 * 
+	 *
 	 * @param x the given double value to compare
-	 * 
+	 *
 	 * @return boolean - true if in range otherwise false
 	 */
 	public boolean inRange(double x)
@@ -186,9 +186,9 @@ public class JDFNumberRangeList extends JDFRangeList
 
 	/**
 	 * setString - parse the given string and set the Number ranges
-	 * 
+	 *
 	 * @param s the given string
-	 * 
+	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public void setString(String s) throws DataFormatException
@@ -216,9 +216,9 @@ public class JDFNumberRangeList extends JDFRangeList
 
 	/**
 	 * isValid - validate the given String
-	 * 
+	 *
 	 * @param s the given string
-	 * 
+	 *
 	 * @return boolean - false if the String has not a valid format
 	 */
 	public boolean isValid(String s)
@@ -236,7 +236,7 @@ public class JDFNumberRangeList extends JDFRangeList
 
 	/**
 	 * append - appends a JDFNumberRange to this number range
-	 * 
+	 *
 	 * @param r the given number range
 	 */
 	public void append(JDFNumberRange r)
@@ -246,7 +246,7 @@ public class JDFNumberRangeList extends JDFRangeList
 
 	/**
 	 * append - appends a new range to the range list
-	 * 
+	 *
 	 * @param xMin the min value of the new range
 	 * @param xMax the max value of the new range
 	 */
@@ -257,7 +257,7 @@ public class JDFNumberRangeList extends JDFRangeList
 
 	/**
 	 * append - appends a new range to the range list
-	 * 
+	 *
 	 * @param x the min and the max value of the new range
 	 */
 	public void append(double x)
@@ -267,7 +267,7 @@ public class JDFNumberRangeList extends JDFRangeList
 
 	/**
 	 * isOrdered - tests if 'this' is OrderedRangeList
-	 * 
+	 *
 	 * @return boolean - true if 'this' is a OrdneredRangeList
 	 */
 	@Override
@@ -277,16 +277,7 @@ public class JDFNumberRangeList extends JDFRangeList
 		if (siz == 0)
 			return false; // attempt to operate on a null element
 
-		Vector<Double> v = new Vector<Double>(); // vector of ranges
-		for (int i = 0; i < siz; i++)
-		{
-			JDFNumberRange r = (JDFNumberRange) rangeList.elementAt(i);
-			v.addElement(Double.valueOf(r.getLeft()));
-			if (r.getLeft() != r.getRight())
-			{
-				v.addElement(Double.valueOf(r.getRight()));
-			}
-		}
+		Vector<Double> v = getRightVector(siz);
 
 		int n = v.size() - 1;
 		if (n == 0)
@@ -306,9 +297,24 @@ public class JDFNumberRangeList extends JDFRangeList
 		return true;
 	}
 
+	private Vector<Double> getRightVector(int siz)
+	{
+		Vector<Double> v = new Vector<Double>(); // vector of ranges
+		for (int i = 0; i < siz; i++)
+		{
+			JDFNumberRange r = (JDFNumberRange) rangeList.elementAt(i);
+			v.addElement(Double.valueOf(r.getLeft()));
+			if (r.getLeft() != r.getRight())
+			{
+				v.addElement(Double.valueOf(r.getRight()));
+			}
+		}
+		return v;
+	}
+
 	/**
 	 * isUniqueOrdered - tests if 'this' is UniqueOrdered RangeList
-	 * 
+	 *
 	 * @return boolean - true if 'this' is UniqueOrdered RangeList
 	 */
 	@Override
@@ -321,16 +327,7 @@ public class JDFNumberRangeList extends JDFRangeList
 			return false; // attempt to operate on a null element
 		}
 
-		Vector<Double> v = new Vector<Double>(); // vector of ranges
-		for (int i = 0; i < siz; i++)
-		{
-			JDFNumberRange r = (JDFNumberRange) rangeList.elementAt(i);
-			v.addElement(Double.valueOf(r.getLeft()));
-			if (r.getLeft() != r.getRight())
-			{
-				v.addElement(Double.valueOf(r.getRight()));
-			}
-		}
+		Vector<Double> v = getRightVector(siz);
 
 		int n = v.size() - 1;
 		if (n == 0)

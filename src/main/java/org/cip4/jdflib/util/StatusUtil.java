@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -106,7 +106,7 @@ import org.cip4.jdflib.resource.JDFResourceAudit;
 
 /**
  * Utility class for status JDF and JMF
- * 
+ *
  * @author prosirai
  * @deprecated - use StatusCounter
  */
@@ -123,7 +123,7 @@ public class StatusUtil
 
 	/**
 	 * construct a StatusUtil for a node n
-	 * 
+	 *
 	 * @param node the JDFNode that is being processed
 	 * @param vPartMap the map of Parts that is being processed excluding the waste partition
 	 * @param vResLinks the reslinks that are tracked for amount handling
@@ -141,7 +141,7 @@ public class StatusUtil
 
 	/**
 	 * get the matching AmountBag out of an array
-	 * 
+	 *
 	 * @param refID the refID of the bag - this MUST match the refID of a ResourceLink
 	 * @param bags the array of bags to search in
 	 * @return the AmountBag with matching refID, null if none found or bags is null
@@ -152,11 +152,11 @@ public class StatusUtil
 		{
 			return null;
 		}
-		for (int i = 0; i < bags.length; i++)
+		for (AmountBag bag : bags)
 		{
-			if (bags[i].refID.equals(refID))
+			if (bag.refID.equals(refID))
 			{
-				return bags[i];
+				return bag;
 			}
 		}
 		return null;
@@ -164,7 +164,7 @@ public class StatusUtil
 
 	/**
 	 * get the matching LinkAmount out of this
-	 * 
+	 *
 	 * @param refID the refID of the bag - this MUST match the refID of a ResourceLink
 	 * @return the LinkAmount with matching refID, null if none found or bags is null
 	 */
@@ -174,11 +174,11 @@ public class StatusUtil
 		{
 			return null;
 		}
-		for (int i = 0; i < vLinkAmount.length; i++)
+		for (LinkAmount element : vLinkAmount)
 		{
-			if (vLinkAmount[i].rl.getrRef().equals(refID))
+			if (element.rl.getrRef().equals(refID))
 			{
-				return vLinkAmount[i];
+				return element;
 			}
 		}
 		return null;
@@ -186,7 +186,7 @@ public class StatusUtil
 
 	/**
 	 * get the refID of the first resource, i.e. the Resource that is being tracked in status messages
-	 * 
+	 *
 	 * @return the rRef of the prime resource link
 	 */
 	public String getFirstRefID()
@@ -219,13 +219,13 @@ public class StatusUtil
 	/**
 	 * Set the Status and StatusDetails of this node update the PhaseTime audit or append a new phasetime as appropriate
 	 * also prepare a status JMF
-	 * 
+	 *
 	 * @param nodeStatus the new status of the node
 	 * @param nodeStatusDetails the new statusDetails of the node
 	 * @param deviceStatus the new status of the device
 	 * @param deviceStatusDetails the new statusDetails of the device
-	 * @param amounts 
-	 * 
+	 * @param amounts
+	 *
 	 */
 	public void setPhase(EnumNodeStatus nodeStatus, String nodeStatusDetails, EnumDeviceStatus deviceStatus, String deviceStatusDetails, AmountBag[] amounts)
 	{
@@ -407,8 +407,8 @@ public class StatusUtil
 	}
 
 	/**
-	 * @param amounts 
-	 * @param n 
+	 * @param amounts
+	 * @param n
 	 * @return
 	 */
 	private VElement getVResLink(AmountBag[] amounts, int n)
@@ -422,9 +422,8 @@ public class StatusUtil
 			throw new JDFException("incoherent resLink sizes");
 		}
 		VElement vRet = new VElement();
-		for (int i = 0; i < vLinkAmount.length; i++)
+		for (LinkAmount la : vLinkAmount)
 		{
-			LinkAmount la = vLinkAmount[i];
 			if (n == 1)
 			{
 				vRet.add(la.getPhaseTimeLink(getBag(la.rl.getrRef(), amounts)));
@@ -468,19 +467,19 @@ public class StatusUtil
 		 */
 		public String refID;
 		/**
-		 * 
+		 *
 		 */
 		public double totalAmount;
 		/**
-		 * 
+		 *
 		 */
 		public double phaseAmount;
 		/**
-		 * 
+		 *
 		 */
 		public double totalWaste;
 		/**
-		 * 
+		 *
 		 */
 		public double phaseWaste;
 
@@ -495,7 +494,7 @@ public class StatusUtil
 		}
 
 		/**
-		 * 
+		 *
 		 * @param rl resourceLink to the resource that is being counted
 		 */
 		public AmountBag(JDFResourceLink rl)
@@ -504,7 +503,7 @@ public class StatusUtil
 		}
 
 		/**
-		 * 
+		 *
 		 * @param _refID refID of the resource that is being counted
 		 */
 		public AmountBag(String _refID)
@@ -526,7 +525,7 @@ public class StatusUtil
 
 		/**
 		 * copy ctor
-		 * 
+		 *
 		 * @param bag
 		 */
 		public AmountBag(AmountBag bag)
@@ -539,9 +538,9 @@ public class StatusUtil
 		}
 
 		/**
-		 * @param amount 
-		 * @param waste 
-		 * @param bNewPhase 
+		 * @param amount
+		 * @param waste
+		 * @param bNewPhase
 		 */
 		public void addPhase(double amount, double waste, boolean bNewPhase)
 		{
@@ -630,7 +629,7 @@ public class StatusUtil
 		}
 
 		/**
-		 * @param bag 
+		 * @param bag
 		 * @return
 		 */
 		public JDFResourceLink getPhaseTimeLink(AmountBag bag)
@@ -680,57 +679,16 @@ public class StatusUtil
 		}
 
 		/**
-		 * @param bag 
+		 * @param bag
 		 * @return
 		 */
 		public JDFResourceLink getResourceAuditLink(AmountBag bag)
 		{
-			cleanAmounts();
-			if (bag != null)
-			{
-				VJDFAttributeMap vMap = new VJDFAttributeMap(m_vPartMap);
-				if (vMap.size() == 0)
-				{
-					vMap.add(new JDFAttributeMap());
-				}
-				if (bTrackWaste)
-				{
-					vMap.put(EnumPartIDKey.Condition, "Good");
-					if (bag.totalAmount != 0)
-					{
-						rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalAmount), null, vMap);
-					}
-					if (startAmount != 0)
-					{
-						rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount), null, vMap);
-					}
-					vMap.put(EnumPartIDKey.Condition, "Waste");
-					if (bag.totalWaste != 0)
-					{
-						rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalWaste), null, vMap);
-					}
-					if (startWaste != 0)
-					{
-						rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startWaste), null, vMap);
-					}
-				}
-				else
-				{
-					if (bag.totalAmount + bag.totalWaste != 0)
-					{
-						rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalAmount + bag.totalWaste), null, vMap);
-					}
-					if (startAmount + startWaste != 0)
-					{
-						rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount + startWaste), null, vMap);
-					}
-				}
-			}
-			return rl;
+			return getResourceInfoLink(bag);
 		}
 
 		/**
-		 * @param bag 
+		 * @param bag
 		 * @return
 		 */
 		public JDFResourceLink getResourceInfoLink(AmountBag bag)
@@ -780,7 +738,7 @@ public class StatusUtil
 		}
 
 		/**
-		 * 
+		 *
 		 */
 		private void cleanAmounts()
 		{
@@ -809,7 +767,7 @@ public class StatusUtil
 
 	/**
 	 * set waste tracking on or off for the resourcelink rl
-	 * 
+	 *
 	 * @param rl the resourcelink to the resource to track
 	 * @param b tracking on or off
 	 */
@@ -824,7 +782,7 @@ public class StatusUtil
 
 	/**
 	 * set copying the resource into resourceInfo on or off for the resourcelink rl
-	 * 
+	 *
 	 * @param rl the resourcelink to the resource to copy
 	 * @param b tracking on or off
 	 */
@@ -839,7 +797,7 @@ public class StatusUtil
 
 	/**
 	 * @param bag
-	 * @param reason 
+	 * @param reason
 	 * @return JDFResourceAudit the generated audit
 	 */
 	public JDFResourceAudit setResourceAudit(AmountBag bag, EnumReason reason)
@@ -858,8 +816,8 @@ public class StatusUtil
 	}
 
 	/**
-	 * @param endStatus 
-	 * @return 
+	 * @param endStatus
+	 * @return
 	 *
 	 */
 	public JDFProcessRun setProcessResult(EnumNodeStatus endStatus)
