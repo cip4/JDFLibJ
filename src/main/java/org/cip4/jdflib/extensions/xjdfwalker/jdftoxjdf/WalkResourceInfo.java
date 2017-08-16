@@ -205,7 +205,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 				}
 
 			}
-			else
+			else if (ph.getRoot().getElement(ElementName.AMOUNTPOOL) == null)
 			{
 				JDFAmountPool ap2 = (JDFAmountPool) ap.getParentNode_KElement().copyElement(ap, null);
 				ap2.reducePartAmounts(ph.getPartMapVector());

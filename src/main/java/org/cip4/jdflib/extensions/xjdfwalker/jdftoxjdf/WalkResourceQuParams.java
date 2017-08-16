@@ -112,6 +112,14 @@ public class WalkResourceQuParams extends WalkJDFSubElement
 			map.put(AttributeName.SCOPE, "Present");
 		map.remove(AttributeName.LOTDETAILS);
 		map.remove(AttributeName.LOTID);
+		map.remove(AttributeName.CLASSES);
+		String exact = map.remove(AttributeName.EXACT);
+		String det = map.get(AttributeName.RESOURCEDETAILS);
+		if (StringUtil.isEmpty(det))
+		{
+			det = StringUtil.parseBoolean(exact, false) ? "Full" : "Brief";
+			map.put(AttributeName.RESOURCEDETAILS, det);
+		}
 		super.updateAttributes(map);
 	}
 

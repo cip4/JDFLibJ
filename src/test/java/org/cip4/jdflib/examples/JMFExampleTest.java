@@ -68,19 +68,26 @@
  */
 package org.cip4.jdflib.examples;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFDeviceFilter;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
+import org.cip4.jdflib.pool.JDFAmountPool;
+import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.junit.Test;
 
 /**
@@ -149,6 +156,46 @@ public class JMFExampleTest extends JDFTestCaseBase
 		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		JDFJMF jmf = b.buildKnownDevicesQuery(JDFDeviceFilter.EnumDeviceDetails.Brief);
 		writeTest(jmf, "introduction/knowndevices.jmf", true);
+	}
+
+	/**
+	 *
+	 *  new activity element in JobPhase
+	 */
+	@Test
+	public void testLotQuery()
+	{
+		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		JDFJMF jmf = b.buildResourceQuery(true);
+		Vector<EnumResourceClass> v = new Vector<>();
+		v.add(EnumResourceClass.Consumable);
+		jmf.getQuery(0).getResourceQuParams().setClasses(v);
+		writeTest(jmf, "jmf/lotquery.jmf", true);
+	}
+
+	/**
+	 *
+	 *  new lot
+	 */
+	@Test
+	public void testLot()
+	{
+		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		JDFJMF jmf = b.buildResourceSignal(true, null);
+		JDFSignal signal = jmf.getSignal(0);
+		JDFResourceInfo ri = signal.getCreateResourceInfo(0);
+		ri.appendResource(ElementName.MEDIA).setDescriptiveName("more about the paper here");
+		JDFAmountPool ap = ri.appendAmountPool();
+		for (int i = 1; i < 3; i++)
+		{
+			JDFAttributeMap map = new JDFAttributeMap();
+			map.put(AttributeName.SIGNATURENAME, "Sig1");
+			map.put(AttributeName.SHEETNAME, "Sheet1");
+			map.put(AttributeName.LOTID, "Lot_" + i);
+			ap.appendPartAmount(map).setActualAmount(42 * i);
+		}
+
+		writeTest(jmf, "jmf/lotsignal.jmf", true);
 	}
 
 	@Override
