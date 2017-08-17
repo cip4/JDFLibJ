@@ -439,11 +439,10 @@ public class FileUtil
 			}
 		}
 
-		return dirToZapp.delete() && b;
+		return forceDelete(dirToZapp, 4) && b;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
-	// //////
 	/**
 	 * dump a stream to a newly created file
 	 * @param fis the inputstream to read
@@ -718,8 +717,7 @@ public class FileUtil
 		{
 			return false;
 		}
-		return fromFile.delete();
-
+		return forceDelete(fromFile);
 	}
 
 	/**
@@ -879,6 +877,17 @@ public class FileUtil
 	 */
 	public static boolean forceDelete(final File file)
 	{
+		return forceDelete(file, 42);
+	}
+
+	/**
+	 * forces deletion of a file
+	 * @param file the file to delete
+	 * @param # of 42 msec * loop  loops to wait
+	 * @return true if the file no longer exists
+	 */
+	public static boolean forceDelete(final File file, int loops)
+	{
 		if (file == null)
 		{
 			return true;
@@ -891,9 +900,9 @@ public class FileUtil
 		int i = 1;
 		while (!bOK)
 		{
-			boolean bInterupt = !ThreadUtil.sleep(i * i * 100);
+			boolean bInterupt = !ThreadUtil.sleep(i * 42);
 			bOK = file.delete();
-			if (bInterupt || i++ > 6)
+			if (bInterupt || i++ > loops)
 			{
 				LogFactory.getLog(FileUtil.class).warn("cannot force delete of file: " + file.getAbsolutePath());
 				break;

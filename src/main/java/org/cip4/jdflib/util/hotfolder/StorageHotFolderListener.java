@@ -73,6 +73,7 @@ import java.util.Vector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.RollingBackupFile;
 import org.cip4.jdflib.util.ThreadUtil;
@@ -190,8 +191,8 @@ class StorageHotFolderListener implements HotFolderListener
 		{
 			if (okStorage != null)
 			{
-				File backup = FileUtil.getFileInDirectory(okStorage, new File(storedFile.getName()));
-				RollingBackupFile roller = new RollingBackupFile(backup, 10);
+				File okFile = FileUtil.getFileInDirectory(okStorage, new File(storedFile.getName()));
+				RollingBackupFile roller = new RollingBackupFile(okFile, 10);
 				roller.setWantExtension(true);
 				roller.getNewFile();
 				File copied = FileUtil.moveFileToDir(storedFile, okStorage);
@@ -281,13 +282,16 @@ class StorageHotFolderListener implements HotFolderListener
 		FileUtil.deleteAll(tmp);
 	}
 
-	protected void handleBad(final File storedFile, boolean bOK)
+	protected boolean handleBad(final File storedFile, boolean bOK)
 	{
 		if (bOK)
+		{
 			log.warn("could not move ok " + storedFile + " to " + okStorage.getAbsolutePath());
+		}
 		else
+		{
 			log.warn("could not move error " + storedFile + " to " + errorStorage.getAbsolutePath());
-
+		}
 		File auxFile = FileUtil.getAuxDir(storedFile);
 		FileUtil.deleteAll(auxFile);
 
@@ -298,8 +302,9 @@ class StorageHotFolderListener implements HotFolderListener
 		}
 		else
 		{
-			log.error("cannot process hot file: " + storedFile);
+			log.error("cannot delete hot file: " + storedFile);
 		}
+		return bZapp;
 	}
 
 	/**
@@ -386,7 +391,7 @@ class StorageHotFolderListener implements HotFolderListener
 
 	private synchronized File getTmpDir()
 	{
-		return FileUtil.newExtension(storage, "" + nQueued++);
+		return FileUtil.newExtension(storage, JDFConstants.EMPTYSTRING + nQueued++);
 	}
 
 	/**
