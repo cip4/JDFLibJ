@@ -82,7 +82,11 @@ import org.cip4.jdflib.jmf.JDFDeviceFilter;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.jmf.JDFQuery;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
+import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
@@ -169,7 +173,9 @@ public class JMFExampleTest extends JDFTestCaseBase
 		JDFJMF jmf = b.buildResourceQuery(true);
 		Vector<EnumResourceClass> v = new Vector<>();
 		v.add(EnumResourceClass.Consumable);
-		jmf.getQuery(0).getResourceQuParams().setClasses(v);
+		JDFQuery query = jmf.getQuery(0);
+		query.setID("q1");
+		query.getResourceQuParams().setClasses(v);
 		writeTest(jmf, "jmf/lotquery.jmf", true);
 	}
 
@@ -181,9 +187,12 @@ public class JMFExampleTest extends JDFTestCaseBase
 	public void testLot()
 	{
 		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
-		JDFJMF jmf = b.buildResourceSignal(true, null);
-		JDFSignal signal = jmf.getSignal(0);
-		JDFResourceInfo ri = signal.getCreateResourceInfo(0);
+		JDFJMF jmf = b.createJMF(EnumFamily.Response, EnumType.Resource);
+
+		JDFResponse response = jmf.getResponse(0);
+		response.setID("r1");
+		response.setrefID("q1");
+		JDFResourceInfo ri = response.getCreateResourceInfo(0);
 		ri.appendResource(ElementName.MEDIA).setDescriptiveName("more about the paper here");
 		JDFAmountPool ap = ri.appendAmountPool();
 		for (int i = 1; i < 3; i++)
@@ -195,7 +204,7 @@ public class JMFExampleTest extends JDFTestCaseBase
 			ap.appendPartAmount(map).setActualAmount(42 * i);
 		}
 
-		writeTest(jmf, "jmf/lotsignal.jmf", true);
+		writeTest(jmf, "jmf/lotresponse.jmf", true);
 	}
 
 	@Override
