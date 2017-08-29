@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,6 +92,7 @@ import org.apache.xerces.parsers.DOMParser;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.XMLDocUserData.EnumDirtyPolicy;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.node.JDFNode;
@@ -342,6 +343,19 @@ public class JDFDocTest extends JDFTestCaseBase
 		KElement root2 = d2.getRoot();
 		assertEquals(1, root2.numChildElements(ElementName.AUDITPOOL, null));
 		assertTrue(d2.getFirstChild() instanceof JDFNode);
+	}
+
+	/**
+	 *
+	 * test graceful null handling
+	 */
+	@Test
+	public void testJDFElementXJDF()
+	{
+		XMLDoc d = new XMLDoc("PrintTalk", null);
+		d.getRoot().appendElement(XJDFConstants.XJDF);
+		JDFDoc d2 = new JDFDoc(d);
+		assertTrue(d2.getRoot().getElement(XJDFConstants.XJDF) instanceof JDFElement);
 	}
 
 	/**

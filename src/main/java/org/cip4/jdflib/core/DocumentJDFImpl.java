@@ -154,6 +154,9 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			// root elements
 			sm_PackageNames.put(ElementName.JDF, "org.cip4.jdflib.node.JDFNode");
 			sm_PackageNames.put(ElementName.JMF, "org.cip4.jdflib.jmf.JDFJMF");
+			sm_PackageNames.put(XJDFConstants.XJDF, CORE_JDFELEMENT);
+			sm_PackageNames.put(XJDFConstants.XJMF, CORE_JDFELEMENT);
+			sm_PackageNames.put("PrintTalk", CORE_JDFELEMENT);
 
 			sm_PackageNames.put(ElementName.ABORTQUEUEENTRYPARAMS, "org.cip4.jdflib.jmf.JDFAbortQueueEntryParams");
 			sm_PackageNames.put(ElementName.ACKNOWLEDGE, "org.cip4.jdflib.jmf.JDFAcknowledge");
