@@ -210,6 +210,23 @@ public class MessagePoolHelper extends BaseXJDFHelper
 
 	/**
 	 *
+	 * @param e
+	 * @return
+	 */
+	public MessageHelper getMessageHelper(int i)
+	{
+		Vector<MessageHelper> v = getAuditHelpers();
+		if (v == null)
+			return null;
+		if (i < 0)
+			i = i + v.size();
+		if (i < 0 || i >= v.size())
+			return null;
+		return v.get(i);
+	}
+
+	/**
+	 *
 	 * @param elementName
 	 * @return
 	 */

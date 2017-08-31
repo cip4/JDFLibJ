@@ -166,6 +166,19 @@ public class MessageHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	public void testGetReturnCode()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
+		assertEquals(0, mh.getReturnCode());
+		mh.setAttribute(AttributeName.RETURNCODE, "6");
+		assertEquals(6, mh.getReturnCode());
+	}
+
+	/**
+	*
+	*/
+	@Test
 	public void testSetQuery()
 	{
 		XJMFHelper xjmfHelper = new XJMFHelper();

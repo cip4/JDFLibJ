@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,7 +68,9 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
@@ -84,11 +86,26 @@ public class MessagePoolHelperTest extends JDFTestCaseBase
 	@Test
 	public void testAppendMessage()
 	{
-		KElement auditPool = KElement.createRoot(ElementName.AUDIT, null);
+		KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
 		AuditPoolHelper ah = new AuditPoolHelper(auditPool);
 		MessageHelper created = ah.appendMessage(XJDFConstants.AuditCreated);
 		assertNotNull(created.getXPathElement(XJDFConstants.Header));
 		assertNotNull(created);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetMessage()
+	{
+		KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
+		AuditPoolHelper ah = new AuditPoolHelper(auditPool);
+		MessageHelper created = ah.appendMessage(XJDFConstants.AuditCreated);
+		assertEquals(created, ah.getMessageHelper(0));
+		assertEquals(created, ah.getMessageHelper(-1));
+		assertNull(ah.getMessageHelper(1));
+		assertNull(ah.getMessageHelper(-42));
 	}
 
 }

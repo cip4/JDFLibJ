@@ -174,6 +174,18 @@ public class MessageHelper extends BaseXJDFHelper
 
 	/**
 	 *
+	 * @return
+	 */
+	public int getReturnCode()
+	{
+		if (!isResponse())
+			return -1;
+		String rc = getAttribute(AttributeName.RETURNCODE);
+		return StringUtil.parseInt(rc, 0);
+	}
+
+	/**
+	 *
 	 * @param url
 	 * @return null if we ain't no query
 	 */
