@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,6 +74,7 @@ import java.io.OutputStream;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.xjdfwalker.IDRemover;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -181,6 +182,35 @@ public class XJMFHelper extends MessagePoolHelper
 	{
 		cleanUp();
 		getRoot().getOwnerDocument_KElement().write2Stream(os, 2, false);
+	}
+
+	/**
+	 * factory to create a helper from an element
+	 *
+	 * @param root the element to parse if not an XJDF - search in ancestors of element
+	 * @return the helper
+	 */
+	public static XJMFHelper getHelper(KElement root)
+	{
+		if (root == null)
+			return null;
+		if (!root.getLocalName().equals(XJDFConstants.XJMF))
+			root = root.getDeepParent(XJDFConstants.XJMF, 0);
+		return (root != null) ? new XJMFHelper(root) : null;
+	}
+
+	/**
+	 * factory to create a helper from a doc
+	 *
+	 * @param doc the xmldoc to parse
+	 * @return the helper
+	 */
+	public static XJMFHelper getHelper(XMLDoc doc)
+	{
+		if (doc == null)
+			return null;
+		KElement root = doc.getRoot();
+		return getHelper(root);
 	}
 
 }
