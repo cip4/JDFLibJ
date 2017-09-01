@@ -425,7 +425,7 @@ public class HotFolder
 	private boolean processSingleFile(final File[] files, final FileTime lftAt, int j, final File fileJ)
 	{
 		boolean found = true;
-		if (fileJ.lastModified() == lftAt.modified)
+		if (fileJ.lastModified() == lftAt.modified && ((lftAt.modified + stabilizeTime) < System.currentTimeMillis()))
 		{
 			if (fileJ.exists())
 			{

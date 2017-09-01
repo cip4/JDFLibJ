@@ -135,7 +135,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		super.setUp();
 		theHF = new File(sm_dirTestDataTemp + File.separator + "HFTest" + n);
 		theHF.mkdirs();
-		HotFolder.setDefaultStabilizeTime(200);
+		HotFolder.setDefaultStabilizeTime(420);
 	}
 
 	/**
@@ -445,9 +445,9 @@ public class HotFolderTest extends JDFTestCaseBase
 		assertTrue(file.exists());
 		fos.close();
 
-		for (int i = 0; i < 60 && file.exists(); i++)
+		for (int i = 0; i < 600 && file.exists(); i++)
 		{
-			ThreadUtil.sleep(1000);
+			ThreadUtil.sleep(100);
 		}
 		assertFalse(file.exists());
 	}
@@ -478,7 +478,6 @@ public class HotFolderTest extends JDFTestCaseBase
 			}
 			fos.flush();
 			fos2.flush();
-
 		}
 		assertTrue(file.exists());
 		assertTrue(file2.exists());
