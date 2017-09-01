@@ -155,12 +155,27 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 			}
 		}
 		assertEquals(q.size(), 7);
-		ThreadUtil.sleep(1111);
+		for (int i = 0; i < 42; i++)
+		{
+			ThreadUtil.sleep(100);
+			if (q.size() == 0)
+			{
+				break;
+			}
+		}
+
 		assertTrue(q.getAvQueue() > 0);
 		assertTrue(q.getAvRun() > 0);
 		assertEquals(q.size(), 0);
 		assertTrue(q.queue(new WaitRunner(4)));
-		ThreadUtil.sleep(222);
+		for (int i = 0; i < 42; i++)
+		{
+			ThreadUtil.sleep(100);
+			if (q.size() == 0)
+			{
+				break;
+			}
+		}
 		assertEquals(q.size(), 0);
 		assertTrue(q.getAvQueue() > 0);
 	}
@@ -179,15 +194,15 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 		for (int i = 0; i < 1000; i++)
 			q.queue(new WaitRunner(i, 10));
 
-		for (int i = 0; i < 242; i++)
+		for (int i = 0; i < 442; i++)
 		{
-			ThreadUtil.sleep(40);
+			ThreadUtil.sleep(42);
 			if (q.size() == 0)
 			{
 				break;
 			}
 		}
-		ThreadUtil.sleep(40);
+		ThreadUtil.sleep(42);
 		assertEquals(nRun, 1000, 2);
 	}
 }
