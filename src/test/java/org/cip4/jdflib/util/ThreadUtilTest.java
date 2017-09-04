@@ -112,7 +112,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 		{
 			if (sleep > 0)
 				ThreadUtil.sleep(sleep);
-			return new Integer(42);
+			return Integer.valueOf(42);
 		}
 
 	}
@@ -158,7 +158,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	@Test
 	public void testWaitTimeoutFail()
 	{
-		assertNull(new TestWait(20, 14200).getWaitedObject());
+		assertNull(new TestWait(2, 14200).getWaitedObject());
 	}
 
 	/**
@@ -170,6 +170,12 @@ public class ThreadUtilTest extends JDFTestCaseBase
 		for (int i = 1; i < 666; i++)
 		{
 			TestWait testWait = new TestWait(142, 0);
+			for (int j = 0; j < 42; j++)
+			{
+				if (testWait.getWaitedObject() != null)
+					break;
+				ThreadUtil.sleep(j);
+			}
 			ThreadUtil.sleep(1);
 			Integer waitedObject = testWait.getWaitedObject();
 			assertNotNull("Waited Loop " + i, waitedObject);

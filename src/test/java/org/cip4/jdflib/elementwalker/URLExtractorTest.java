@@ -84,7 +84,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.MimeUtilTest;
-import org.cip4.jdflib.util.ThreadUtil;
+import org.cip4.jdflib.util.PlatformUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.UrlUtil.URLProtocol;
 import org.cip4.jdflib.util.mime.MimeReader;
@@ -320,6 +320,9 @@ public class URLExtractorTest extends JDFTestCaseBase
 	@Test
 	public void testFromJDFBad()
 	{
+		if (PlatformUtil.isWindows())
+			return;
+
 		File inDir = new File(sm_dirTestDataTemp + File.separator + "URLIn2");
 		FileUtil.deleteAll(inDir);
 		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut2");
@@ -349,6 +352,8 @@ public class URLExtractorTest extends JDFTestCaseBase
 	@Test
 	public void testFromJDFBadParent()
 	{
+		if (PlatformUtil.isWindows())
+			return;
 		File inDir = new File(sm_dirTestDataTemp + File.separator + "URLIn4");
 		FileUtil.deleteAll(inDir);
 		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut4");
@@ -386,20 +391,12 @@ public class URLExtractorTest extends JDFTestCaseBase
 		File file = new File(sm_dirTestDataTemp + "URLIn3/content/boooo.pdf");
 		file.delete();
 		File out = new File(sm_dirTestDataTemp + "URLOut3/boooo.pdf");
-		out.delete();
-		for (int i = 0; i < 42; i++)
-		{
-			ThreadUtil.sleep(10);
-			if (!out.exists())
-				break;
-		}
 
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
 		rl.addPDF(UrlUtil.fileToUrl(file, false), 0, -1);
 		d.write2File(sm_dirTestDataTemp + "URLIn3/dummy.jdf", 2, false);
 
-		dumpDir.delete();
 		URLExtractor ex = new URLExtractor(dumpDir, null, null);
 		ex.walkTree(d.getJDFRoot(), null);
 		String write2String = rl.toDisplayXML(2);
