@@ -309,9 +309,9 @@ public class URLExtractorTest extends JDFTestCaseBase
 		URLExtractor ex = new URLExtractor(dumpDir, null, null);
 		ex.walkTree(d.getJDFRoot(), null);
 		String write2String = rl.toDisplayXML(2);
+		assertTrue(write2String.indexOf("URLOut1/boooo.pdf") > 0);
 		assertTrue(new File(sm_dirTestDataTemp + "URLOut1/boooo.pdf").exists());
 		assertTrue(file.exists());
-		assertTrue(write2String.indexOf("URLOut1/boooo.pdf") > 0);
 	}
 
 	/**
@@ -338,9 +338,9 @@ public class URLExtractorTest extends JDFTestCaseBase
 		URLExtractor ex = new URLExtractor(dumpDir, null, null);
 		ex.walkTree(d.getJDFRoot(), null);
 		String write2String = rl.toDisplayXML(2);
+		assertTrue(write2String.indexOf("URLIn2/content/boooo.pdf") > 0);
 		assertFalse(out.exists());
 		assertTrue(file.exists());
-		assertTrue(write2String.indexOf("URLIn2/content/boooo.pdf") > 0);
 	}
 
 	/**
@@ -403,8 +403,8 @@ public class URLExtractorTest extends JDFTestCaseBase
 		URLExtractor ex = new URLExtractor(dumpDir, null, null);
 		ex.walkTree(d.getJDFRoot(), null);
 		String write2String = rl.toDisplayXML(2);
-		assertFalse(out.exists());
 		assertTrue(write2String.indexOf("URLIn3/content/boooo.pdf") > 0);
+		assertFalse(out.exists());
 	}
 
 	/**
