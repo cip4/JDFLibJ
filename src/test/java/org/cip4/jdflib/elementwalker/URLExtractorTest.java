@@ -294,6 +294,10 @@ public class URLExtractorTest extends JDFTestCaseBase
 	@Test
 	public void testFromJDF()
 	{
+		File inDir = new File(sm_dirTestDataTemp + File.separator + "URLIn1");
+		FileUtil.deleteAll(inDir);
+		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut1");
+		FileUtil.deleteAll(dumpDir);
 		File file = new File(sm_dirTestDataTemp + "URLIn1/content/boooo.pdf");
 		FileUtil.createNewFile(file);
 
@@ -302,8 +306,6 @@ public class URLExtractorTest extends JDFTestCaseBase
 		rl.addPDF(UrlUtil.fileToUrl(file, false), 0, -1);
 		d.write2File(sm_dirTestDataTemp + "URLIn1/dummy.jdf", 2, false);
 
-		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut1");
-		dumpDir.delete();
 		URLExtractor ex = new URLExtractor(dumpDir, null, null);
 		ex.walkTree(d.getJDFRoot(), null);
 		String write2String = rl.toDisplayXML(2);
@@ -318,25 +320,21 @@ public class URLExtractorTest extends JDFTestCaseBase
 	@Test
 	public void testFromJDFBad()
 	{
+		File inDir = new File(sm_dirTestDataTemp + File.separator + "URLIn2");
+		FileUtil.deleteAll(inDir);
+		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut2");
+		FileUtil.deleteAll(dumpDir);
+
 		File file = new File(sm_dirTestDataTemp + "URLIn2/content/boooo.pdf");
 		FileUtil.createNewFile(file);
 		file.setReadable(false);
 		File out = new File(sm_dirTestDataTemp + "URLOut2/boooo.pdf");
-		out.delete();
-		for (int i = 0; i < 42; i++)
-		{
-			ThreadUtil.sleep(10);
-			if (!out.exists())
-				break;
-		}
 
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
 		rl.addPDF(UrlUtil.fileToUrl(file, false), 0, -1);
 		d.write2File(sm_dirTestDataTemp + "URLIn2/dummy.jdf", 2, false);
 
-		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut2");
-		dumpDir.delete();
 		URLExtractor ex = new URLExtractor(dumpDir, null, null);
 		ex.walkTree(d.getJDFRoot(), null);
 		String write2String = rl.toDisplayXML(2);
@@ -351,31 +349,27 @@ public class URLExtractorTest extends JDFTestCaseBase
 	@Test
 	public void testFromJDFBadParent()
 	{
+		File inDir = new File(sm_dirTestDataTemp + File.separator + "URLIn4");
+		FileUtil.deleteAll(inDir);
+		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut4");
+		FileUtil.deleteAll(dumpDir);
+
 		File file = new File(sm_dirTestDataTemp + "URLIn4/content/boooo.pdf");
 		FileUtil.createNewFile(file);
 		file.getParentFile().setReadable(false);
 		file.getParentFile().setExecutable(false);
 		File out = new File(sm_dirTestDataTemp + "URLOut4/boooo.pdf");
-		out.delete();
-		for (int i = 0; i < 42; i++)
-		{
-			ThreadUtil.sleep(10);
-			if (!out.exists())
-				break;
-		}
 
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
 		rl.addPDF(UrlUtil.fileToUrl(file, false), 0, -1);
 		d.write2File(sm_dirTestDataTemp + "URLIn4/dummy.jdf", 2, false);
 
-		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut4");
-		dumpDir.delete();
 		URLExtractor ex = new URLExtractor(dumpDir, null, null);
 		ex.walkTree(d.getJDFRoot(), null);
 		String write2String = rl.toDisplayXML(2);
-		assertFalse(out.exists());
 		assertTrue(write2String.indexOf("URLIn4/content/boooo.pdf") > 0);
+		assertFalse(out.exists());
 		file.getParentFile().delete();
 	}
 
@@ -385,6 +379,10 @@ public class URLExtractorTest extends JDFTestCaseBase
 	@Test
 	public void testFromJDFBad2()
 	{
+		File inDir = new File(sm_dirTestDataTemp + File.separator + "URLIn3");
+		FileUtil.deleteAll(inDir);
+		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut3");
+		FileUtil.deleteAll(dumpDir);
 		File file = new File(sm_dirTestDataTemp + "URLIn3/content/boooo.pdf");
 		file.delete();
 		File out = new File(sm_dirTestDataTemp + "URLOut3/boooo.pdf");
@@ -401,7 +399,6 @@ public class URLExtractorTest extends JDFTestCaseBase
 		rl.addPDF(UrlUtil.fileToUrl(file, false), 0, -1);
 		d.write2File(sm_dirTestDataTemp + "URLIn3/dummy.jdf", 2, false);
 
-		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut3");
 		dumpDir.delete();
 		URLExtractor ex = new URLExtractor(dumpDir, null, null);
 		ex.walkTree(d.getJDFRoot(), null);

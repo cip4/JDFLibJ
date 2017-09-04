@@ -244,11 +244,12 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 				{
 					if (!f.exists())
 					{
-						if (f.getParentFile() != null && !f.getParentFile().exists())
+						File parentFile = f.getParentFile();
+						if (parentFile != null && !parentFile.exists())
 						{
 							log.error("No such parent directory: " + f.getParent());
 						}
-						else if (f.getParentFile() != null && !f.getParentFile().canRead())
+						else if (parentFile != null && !parentFile.canRead())
 						{
 							log.error("Cannot read parent directory: " + f.getParent());
 						}
