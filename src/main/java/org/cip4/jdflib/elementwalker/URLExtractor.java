@@ -273,7 +273,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 					return null;
 				}
 				newFile = UrlUtil.moveToDir(urlSetter, dir, currentURL, bOverwrite, deleteFile);
-				log.warn("attempting download # " + i + " of URL " + currentURL);
+				log.warn("attempting download # " + i + " of URL " + url);
 			}
 			if (newFile != null)
 			{
