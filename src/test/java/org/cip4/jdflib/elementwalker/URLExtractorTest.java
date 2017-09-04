@@ -323,7 +323,12 @@ public class URLExtractorTest extends JDFTestCaseBase
 		file.setReadable(false);
 		File out = new File(sm_dirTestDataTemp + "URLOut2/boooo.pdf");
 		out.delete();
-		ThreadUtil.sleep(10);
+		for (int i = 0; i < 42; i++)
+		{
+			ThreadUtil.sleep(10);
+			if (!out.exists())
+				break;
+		}
 
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -352,7 +357,12 @@ public class URLExtractorTest extends JDFTestCaseBase
 		file.getParentFile().setExecutable(false);
 		File out = new File(sm_dirTestDataTemp + "URLOut4/boooo.pdf");
 		out.delete();
-		ThreadUtil.sleep(10);
+		for (int i = 0; i < 42; i++)
+		{
+			ThreadUtil.sleep(10);
+			if (!out.exists())
+				break;
+		}
 
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
@@ -379,7 +389,12 @@ public class URLExtractorTest extends JDFTestCaseBase
 		file.delete();
 		File out = new File(sm_dirTestDataTemp + "URLOut3/boooo.pdf");
 		out.delete();
-		ThreadUtil.sleep(10);
+		for (int i = 0; i < 42; i++)
+		{
+			ThreadUtil.sleep(10);
+			if (!out.exists())
+				break;
+		}
 
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
