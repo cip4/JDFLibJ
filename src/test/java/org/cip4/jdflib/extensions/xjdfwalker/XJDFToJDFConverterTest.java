@@ -648,6 +648,41 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
+	public void testNPage()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper("j1", "p1", null);
+		KElement xjdf = xjdfHelper.getRoot();
+		xjdfHelper.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input);
+		xjdf.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/@NPage", "4");
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		JDFDoc d = xCon.convert(xjdf);
+		JDFNode root = d.getJDFRoot();
+		assertEquals(4, ((JDFRunList) root.getResource(ElementName.RUNLIST, EnumUsage.Input, 0)).getNPage());
+	}
+
+	/**
+	*
+	* @return
+	*/
+	@Test
+	public void testNPageFileSpec()
+	{
+		XJDFHelper xjdfHelper = new XJDFHelper("j1", "p1", null);
+		KElement xjdf = xjdfHelper.getRoot();
+		xjdfHelper.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input);
+		xjdf.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/@NPage", "4");
+		xjdf.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@URL", "file.pdf");
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		JDFDoc d = xCon.convert(xjdf);
+		JDFNode root = d.getJDFRoot();
+		assertEquals(4, ((JDFRunList) root.getResource(ElementName.RUNLIST, EnumUsage.Input, 0)).getNPage());
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@Test
 	public void testPageListEmpty()
 	{
 		KElement xjdf = new JDFToXJDFConverterTest()._testPageListEmpty();

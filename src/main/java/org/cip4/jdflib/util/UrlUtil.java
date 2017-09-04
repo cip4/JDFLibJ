@@ -2012,11 +2012,12 @@ public class UrlUtil
 
 		URLReader urlReader = new URLReader(url, d);
 		File oldFile = deleteFile ? urlReader.getFile() : null;
+		boolean needCopy = !deleteFile;
 		if (oldFile != null)
 		{
-			FileUtil.moveFile(oldFile, out);
+			needCopy = !FileUtil.moveFile(oldFile, out);
 		}
-		else
+		if (needCopy)
 		{
 			InputStream inputStream = urlReader.getURLInputStream();
 			if (inputStream != null)

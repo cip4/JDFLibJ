@@ -84,6 +84,8 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.MimeUtilTest;
+import org.cip4.jdflib.util.ThreadUtil;
+import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.UrlUtil.URLProtocol;
 import org.cip4.jdflib.util.mime.MimeReader;
 import org.cip4.jdflib.util.zip.ZipReader;
@@ -284,6 +286,113 @@ public class URLExtractorTest extends JDFTestCaseBase
 		assertTrue(new File(sm_dirTestDataTemp + "URLOut/content/boooo.pdf").exists());
 		assertTrue(new File(sm_dirTestDataTemp + "URLIn/content/boooo.pdf").exists());
 		assertTrue(write2String.indexOf("URLOut/content/boooo.pdf") > 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testFromJDF()
+	{
+		File file = new File(sm_dirTestDataTemp + "URLIn/content/boooo.pdf");
+		FileUtil.createNewFile(file);
+
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
+		rl.addPDF(UrlUtil.fileToUrl(file, false), 0, -1);
+		d.write2File(sm_dirTestDataTemp + "URLIn/dummy.jdf", 2, false);
+
+		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut");
+		dumpDir.delete();
+		URLExtractor ex = new URLExtractor(dumpDir, null, null);
+		ex.walkTree(d.getJDFRoot(), null);
+		String write2String = rl.toDisplayXML(2);
+		assertTrue(new File(sm_dirTestDataTemp + "URLOut/content/boooo.pdf").exists());
+		assertTrue(file.exists());
+		assertTrue(write2String.indexOf("URLOut/boooo.pdf") > 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testFromJDFBad()
+	{
+		File file = new File(sm_dirTestDataTemp + "URLIn/content/boooo.pdf");
+		FileUtil.createNewFile(file);
+		file.setReadable(false);
+		File out = new File(sm_dirTestDataTemp + "URLOut/boooo.pdf");
+		out.delete();
+		ThreadUtil.sleep(10);
+
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
+		rl.addPDF(UrlUtil.fileToUrl(file, false), 0, -1);
+		d.write2File(sm_dirTestDataTemp + "URLIn/dummy.jdf", 2, false);
+
+		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut");
+		dumpDir.delete();
+		URLExtractor ex = new URLExtractor(dumpDir, null, null);
+		ex.walkTree(d.getJDFRoot(), null);
+		String write2String = rl.toDisplayXML(2);
+		assertFalse(out.exists());
+		assertTrue(file.exists());
+		assertTrue(write2String.indexOf("URLIn/content/boooo.pdf") > 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testFromJDFBadParent()
+	{
+		File file = new File(sm_dirTestDataTemp + "URLIn/content/boooo.pdf");
+		FileUtil.createNewFile(file);
+		file.getParentFile().setReadable(false);
+		file.getParentFile().setExecutable(false);
+		File out = new File(sm_dirTestDataTemp + "URLOut/boooo.pdf");
+		out.delete();
+		ThreadUtil.sleep(10);
+
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
+		rl.addPDF(UrlUtil.fileToUrl(file, false), 0, -1);
+		d.write2File(sm_dirTestDataTemp + "URLIn/dummy.jdf", 2, false);
+
+		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut");
+		dumpDir.delete();
+		URLExtractor ex = new URLExtractor(dumpDir, null, null);
+		ex.walkTree(d.getJDFRoot(), null);
+		String write2String = rl.toDisplayXML(2);
+		assertFalse(out.exists());
+		assertTrue(write2String.indexOf("URLIn/content/boooo.pdf") > 0);
+		file.getParentFile().delete();
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testFromJDFBad2()
+	{
+		File file = new File(sm_dirTestDataTemp + "URLIn/content/boooo.pdf");
+		file.delete();
+		File out = new File(sm_dirTestDataTemp + "URLOut/boooo.pdf");
+		out.delete();
+		ThreadUtil.sleep(10);
+
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
+		rl.addPDF(UrlUtil.fileToUrl(file, false), 0, -1);
+		d.write2File(sm_dirTestDataTemp + "URLIn/dummy.jdf", 2, false);
+
+		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut");
+		dumpDir.delete();
+		URLExtractor ex = new URLExtractor(dumpDir, null, null);
+		ex.walkTree(d.getJDFRoot(), null);
+		String write2String = rl.toDisplayXML(2);
+		assertFalse(out.exists());
+		assertTrue(write2String.indexOf("URLIn/content/boooo.pdf") > 0);
 	}
 
 	/**

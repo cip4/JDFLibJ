@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.ifaces.IElementConverter;
 import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.UrlUtil.URLProtocol;
 
@@ -166,6 +167,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 		this.currentURL = currentURL;
 		saved = new HashSet<String>();
 		protocols = null;
+		setDeleteFile(false);
 		setWantLog(false);
 	}
 
@@ -235,8 +237,44 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 					return e;
 				}
 			}
+			if (UrlUtil.isFile(url))
+			{
+				File f = UrlUtil.urlToFile(url);
+				if (f != null)
+				{
+					if (!f.exists())
+					{
+						if (f.getParentFile() != null && !f.getParentFile().exists())
+						{
+							log.error("No such parent directory: " + f.getParent());
+						}
+						else if (f.getParentFile() != null && !f.getParentFile().canRead())
+						{
+							log.error("Cannot read parent directory: " + f.getParent());
+						}
+						log.error("No such file: " + f);
+						return null;
+					}
+					if (!f.canRead())
+					{
+						log.error("Cannot read file: " + f);
+						return null;
+					}
+				}
+			}
 			boolean bOverwrite = !saved.contains(url);
-			final File newFile = UrlUtil.moveToDir(urlSetter, dir, currentURL, bOverwrite, deleteFile);
+			File newFile = UrlUtil.moveToDir(urlSetter, dir, currentURL, bOverwrite, deleteFile);
+			for (int i = 2; i < 5; i++)
+			{
+				if (newFile != null)
+					break;
+				if (!ThreadUtil.sleep(4200))
+				{
+					return null;
+				}
+				newFile = UrlUtil.moveToDir(urlSetter, dir, currentURL, bOverwrite, deleteFile);
+				log.warn("attempting download # " + i + " of URL " + currentURL);
+			}
 			if (newFile != null)
 			{
 				if (baseURL != null)
@@ -247,12 +285,12 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 				}
 				if (wantLog && bOverwrite)
 				{
-					log.info("copied " + url + " to " + urlSetter.getURL());
+					log.info((deleteFile ? "moved" : "copied ") + url + " to " + urlSetter.getURL());
 				}
 			}
 			else if (wantLog)
 			{
-				log.warn("Could not copy " + url + " to " + dir);
+				log.warn((deleteFile ? "could not move " : "could not copy ") + url + " to " + dir);
 			}
 			saved.add(url);
 			return e; //  continue
@@ -268,6 +306,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 		{
 			return (toCheck instanceof IURLSetter);
 		}
+
 	}
 
 	/**
