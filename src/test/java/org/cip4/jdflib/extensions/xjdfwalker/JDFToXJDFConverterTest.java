@@ -108,6 +108,7 @@ import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
@@ -1568,6 +1569,20 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(holepattern.getAttribute(AttributeName.CENTER), "5 6");
 		assertEquals(holepattern.getAttribute(AttributeName.PITCH), "42");
 		return xjdf;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@Test
+	public void testCoilBindingTypes()
+	{
+		JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setType(EnumType.CoilBinding);
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(node);
+		assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
 	}
 
 	/**

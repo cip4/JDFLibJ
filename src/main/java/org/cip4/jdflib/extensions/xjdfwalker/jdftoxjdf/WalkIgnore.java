@@ -170,6 +170,7 @@ public class WalkIgnore extends WalkElement
 		v.add(ElementName.SIDESEWINGPARAMS);
 		v.add(ElementName.SOURCERESOURCE);
 		v.add(ElementName.SPAWNED);
+		v.add(ElementName.STATICBLOCKINGPARAMS);
 		v.add(ElementName.TILE);
 		v.add(ElementName.TESTPOOL);
 		v.add(ElementName.TRIGGER);

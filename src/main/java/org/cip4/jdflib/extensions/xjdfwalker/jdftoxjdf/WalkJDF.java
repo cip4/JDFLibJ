@@ -74,6 +74,7 @@ import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -93,6 +94,7 @@ import org.cip4.jdflib.util.StringUtil;
 public class WalkJDF extends WalkJDFElement
 {
 	private final HashSet<String> deprecatedTypes;
+	private final HashSet<String> looseBindingTypes;
 
 	/**
 	 *
@@ -102,6 +104,7 @@ public class WalkJDF extends WalkJDFElement
 		super();
 		deprecatedTypes = new HashSet<>();
 		deprecatedTypes.add(EnumType.Combine.getName());
+		deprecatedTypes.add(EnumType.Dividing.getName());
 		deprecatedTypes.add(EnumType.Ordering.getName());
 		deprecatedTypes.add(EnumType.Packing.getName());
 		deprecatedTypes.add(EnumType.ResourceDefinition.getName());
@@ -113,15 +116,25 @@ public class WalkJDF extends WalkJDFElement
 		deprecatedTypes.add(EnumType.CylinderLayoutPreparation.getName());
 		deprecatedTypes.add(EnumType.DBDocTemplateLayout.getName());
 		deprecatedTypes.add(EnumType.DBTemplateMerging.getName());
+		deprecatedTypes.add(EnumType.DigitalDelivery.getName());
 		deprecatedTypes.add(EnumType.ImageReplacement.getName());
 		deprecatedTypes.add(EnumType.PageAssigning.getName());
 		deprecatedTypes.add(EnumType.PDFToPSConversion.getName());
 		deprecatedTypes.add(EnumType.Proofing.getName());
 		deprecatedTypes.add(EnumType.PSToPDFConversion.getName());
+		deprecatedTypes.add(EnumType.ResourceDefinition.getName());
 		deprecatedTypes.add(EnumType.Scanning.getName());
+		deprecatedTypes.add(EnumType.StaticBlocking.getName());
 		deprecatedTypes.add(EnumType.Tiling.getName());
 
-		deprecatedTypes.add(EnumType.Dividing.getName());
+		looseBindingTypes = new HashSet<>();
+		looseBindingTypes.add(EnumType.ChannelBinding.getName());
+		looseBindingTypes.add(EnumType.CoilBinding.getName());
+		looseBindingTypes.add(EnumType.PlasticCombBinding.getName());
+		looseBindingTypes.add(EnumType.RingBinding.getName());
+		looseBindingTypes.add(EnumType.StripBinding.getName());
+		looseBindingTypes.add(EnumType.WireCombBinding.getName());
+
 	}
 
 	/**
@@ -256,10 +269,11 @@ public class WalkJDF extends WalkJDFElement
 		t1.appendUnique(t2);
 		t1.removeStrings("ProcessGroup", 0);
 		t1.removeStrings("Combined", 0);
+
 		removeDeprecatedTypes(t1);
 		if (t1.isEmpty())
 		{
-			t1.add("Product");
+			t1.add(JDFConstants.PRODUCT);
 		}
 		newRootP.setAttribute(AttributeName.TYPES, t1, null);
 	}
@@ -273,9 +287,14 @@ public class WalkJDF extends WalkJDFElement
 
 		for (int i = t1.size() - 1; i >= 0; i--)
 		{
-			if (isDeprecatedType(t1.get(i)))
+			String typ = t1.get(i);
+			if (isDeprecatedType(typ))
 			{
 				t1.setElementAt(EnumType.ManualLabor.getName(), i);
+			}
+			else if (looseBindingTypes.contains(typ))
+			{
+				t1.setElementAt(XJDFConstants.LooseBinding, i);
 			}
 		}
 

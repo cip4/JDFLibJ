@@ -111,6 +111,7 @@ public abstract class XJDFConstants
 	public static final String ItemRef = "ItemRef";
 
 	public static final String LooseBinding = "LooseBinding";
+	public static final String LooseBindingParams = "LooseBindingParams";
 
 	public static final String ModifyQueueEntry = "ModifyQueueEntry";
 	public static final String ModifyQueueEntryParams = "ModifyQueueEntryParams";
