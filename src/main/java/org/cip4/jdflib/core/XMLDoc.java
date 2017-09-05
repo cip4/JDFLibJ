@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  * XMLDoc.java
@@ -128,7 +128,7 @@ import org.w3c.dom.traversal.TreeWalker;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * < July 15, 2009
  */
 @SuppressWarnings("deprecation")
@@ -184,7 +184,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * constructor
-	 * 
+	 *
 	 * @param document
 	 */
 	public XMLDoc(final Document document)
@@ -219,7 +219,7 @@ public class XMLDoc implements Cloneable
 	}
 
 	/**
-	 * reparse a document that 
+	 * reparse a document that
 	 * @param document
 	 * @return
 	 */
@@ -258,7 +258,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * constructor
-	 * 
+	 *
 	 * @param document
 	 */
 	public XMLDoc(final DocumentXMLImpl document)
@@ -273,7 +273,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * constructor
-	 * 
+	 *
 	 * @param other
 	 */
 	public XMLDoc(final XMLDoc other)
@@ -284,7 +284,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * constructor
-	 * 
+	 *
 	 * @param strDocType ElementName.JDF, ElementName.JMF, "Config" ...
 	 * @deprecated use XMLDoc(String strDocType, String namespaceURI)
 	 */
@@ -296,7 +296,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * constructor
-	 * 
+	 *
 	 * @param strDocType ElementName.JDF, ElementName.JMF, "Config" ...
 	 * @param namespaceURI namespace to be used by the new XMLDoc
 	 */
@@ -316,11 +316,11 @@ public class XMLDoc implements Cloneable
 	// *********************************************
 	/**
 	 * initialize a new root of strDocType in the document called by constructor XMLDoc(String strDocType)
-	 * 
+	 *
 	 * @param strDocType qualified tag name of the doc root to create if still empty
 	 * @param namespaceURI namespace URI of the doc root
 	 * @return JDFElement - the root element
-	 * 
+	 *
 	 * @default setRoot(ElementName.JDF, null)
 	 */
 	public KElement setRoot(final String strDocType, final String namespaceURI)
@@ -338,7 +338,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * getMemberDocument
-	 * 
+	 *
 	 * @return the MemberDocument
 	 */
 	public DocumentXMLImpl getMemberDocument()
@@ -349,7 +349,7 @@ public class XMLDoc implements Cloneable
 	/**
 	 * Method Flush<br>
 	 * clean the m_doc and restart from scratch. The root element remains
-	 * 
+	 *
 	 * @return boolean - true if successful
 	 */
 	protected boolean flush()
@@ -359,9 +359,9 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get the root of the dom tree
-	 * 
+	 *
 	 * @return JDFElement
-	 * 
+	 *
 	 * default: getRoot()
 	 */
 	public KElement getRoot()
@@ -371,9 +371,9 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * write2String - write to a string;
-	 * 
+	 *
 	 * @param indent the indentation of the xml
-	 * 
+	 *
 	 * @return String - output
 	 */
 	public String write2String(final int indent)
@@ -411,10 +411,10 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * write2File - write to a file; Create if it doesn't exist always assume utf-8 encoding
-	 * 
+	 *
 	 * @param oFilePath
 	 * @param indent
-	 * 
+	 *
 	 * @return boolean
 	 * @deprecated 060419 use write2File(oFilePath, indent, true);
 	 * @default write2File(String oFilePath, 0)
@@ -427,13 +427,13 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * write2File - write to a file; Create if it doesn't exist always assume utf-8 encoding
-	 * 
+	 *
 	 * @param oFilePath where to write the file
 	 * @param indent indentation
 	 * @param bPreserveSpace if true, preserve whitespace
-	 * 
+	 *
 	 * @return boolean - true if successful
-	 * 
+	 *
 	 * @default write2File(String oFilePath, 0)
 	 */
 	public boolean write2File(String oFilePath, final int indent, final boolean bPreserveSpace)
@@ -454,13 +454,13 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * write2File - write to a file; Create if it doesn't exist
-	 * 
+	 *
 	 * @param file the file to write to
 	 * @param indent indentation
 	 * @param bPreserveSpace if true, preserve whitespace
-	 * 
+	 *
 	 * @return boolean - true if successful
-	 * 
+	 *
 	 * @default write2File(String oFilePath, 0)
 	 */
 	public boolean write2File(File file, final int indent, final boolean bPreserveSpace)
@@ -542,7 +542,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * write this to a stream
-	 * 
+	 *
 	 * @param outStream
 	 * @param indent
 	 * @param bPreserveSpace
@@ -649,7 +649,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * getDoctype
-	 * 
+	 *
 	 * @return DocumentType
 	 */
 	public DocumentType getDoctype()
@@ -659,7 +659,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * getImplementation
-	 * 
+	 *
 	 * @return DOMImplementation
 	 */
 	public DOMImplementation getImplementation()
@@ -669,7 +669,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * getDocumentElement
-	 * 
+	 *
 	 * @return Element
 	 */
 	public Element getDocumentElement()
@@ -681,9 +681,9 @@ public class XMLDoc implements Cloneable
 	 * createElement create a JDFElement that floats in nirvana. This must be appended to a node with appendChild (created in namespace JDFCoreConstants.NONAMESPACE
 	 * (DOM Level 2)).<br>
 	 * Another way would be to use KElement.appendElement(String elementName, String nameSpaceURI)
-	 * 
+	 *
 	 * @param elementName name of the element that is created
-	 * 
+	 *
 	 * @return Element - unconnected element that is created
 	 */
 	public Element createElement(final String elementName)
@@ -700,7 +700,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * createDocumentFragment
-	 * 
+	 *
 	 * @return DocumentFragment
 	 */
 	public DocumentFragment createDocumentFragment()
@@ -710,9 +710,9 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * createTextNode
-	 * 
+	 *
 	 * @param data
-	 * 
+	 *
 	 * @return Text
 	 */
 	public Text createTextNode(final String data)
@@ -722,9 +722,9 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * createComment
-	 * 
+	 *
 	 * @param data
-	 * 
+	 *
 	 * @return Comment
 	 */
 	public Comment createComment(final String data)
@@ -734,9 +734,9 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * create a CDATA section, which has this document as ownerDoc
-	 * 
+	 *
 	 * @param data content of the CDATA
-	 * 
+	 *
 	 * @return CDATASection
 	 */
 	public CDATASection createCDATASection(final String data)
@@ -746,7 +746,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * sets the processing instruction for an xslt stylesheet
-	 * 
+	 *
 	 * @param url the url of the xslt file
 	 */
 	public void setXSLTURL(final String url)
@@ -760,8 +760,31 @@ public class XMLDoc implements Cloneable
 	}
 
 	/**
+	 * gets the url for an xslt stylesheet
+	 *
+	 * e
+	 */
+	public String getXSLTURL()
+	{
+		ProcessingInstruction pi = getProcessingInstruction(0, "xml-stylesheet");
+		String val = pi == null ? null : pi.getNodeValue();
+		VString v = StringUtil.tokenize(val, null, false);
+		if (v != null)
+		{
+			for (String pair : v)
+			{
+				if ("href".equalsIgnoreCase(StringUtil.token(pair, 0, "=")))
+				{
+					return StringUtil.token(pair, -1, "\"'= ");
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * set the xpath values of thei to the values in the node
-	 * 
+	 *
 	 * @param valueMap the map of values, if this is still null, MUST be fully qualified
 	 */
 	public void setXPathValues(final JDFAttributeMap valueMap)
@@ -780,10 +803,10 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * creates a ProcessingInstruction having this Document as ownerDoc
-	 * 
+	 *
 	 * @param target the target "processor channel"
 	 * @param data parameter string to be passed to the target
-	 * 
+	 *
 	 * @return ProcessingInstruction
 	 */
 	public ProcessingInstruction createProcessingInstruction(final String target, final String data)
@@ -792,9 +815,45 @@ public class XMLDoc implements Cloneable
 	}
 
 	/**
+	 *
+	 * @param skip
+	 * @param name
+	 * @return
+	 */
+	public ProcessingInstruction getProcessingInstruction(int skip, String name)
+	{
+		return (ProcessingInstruction) getNode(Document.PROCESSING_INSTRUCTION_NODE, skip, name);
+	}
+
+	/**
+	 *
+	 * @param type the node type see {@link Document}
+	 * @param skip the number onodes to skip
+	 * @return
+	 */
+	public Node getNode(short type, int skip, String nodeName)
+	{
+		if (m_doc == null)
+			return null;
+		Node n = m_doc.getFirstChild();
+		while (n != null)
+		{
+			if (n.getNodeType() == type && (nodeName == null || nodeName.equals(n.getNodeName())))
+			{
+				if (skip-- <= 0)
+				{
+					return n;
+				}
+			}
+			n = n.getNextSibling();
+		}
+		return null;
+	}
+
+	/**
 	 * createAttribute in namespace JDFCoreConstants.NONAMESPACE (DOM Level 2)
-	 * 
-	 * @param name attribute name  
+	 *
+	 * @param name attribute name
 	 * @return Attr
 	 */
 	public Attr createAttribute(final String name)
@@ -829,9 +888,9 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * creates an EntityReference
-	 * 
+	 *
 	 * @param name name of the entity to refer to
-	 * 
+	 *
 	 * @return the newly created EntityReference
 	 */
 	public EntityReference createEntityReference(final String name)
@@ -841,9 +900,9 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * return a NodeList of all elements having the specified tagname
-	 * 
+	 *
 	 * @param tagname tag name of the elements to find (JDFCoreConstants.star for all elements)
-	 * 
+	 *
 	 * @return NodeList
 	 */
 	public NodeList getElementsByTagName(final String tagname)
@@ -853,10 +912,10 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * copy a node from another document in this document
-	 * 
+	 *
 	 * @param importedNode node to import
 	 * @param deep if true: recurse and import the subtree under the node as well
-	 * 
+	 *
 	 * @return Node
 	 */
 	public Node importNode(final Node importedNode, final boolean deep)
@@ -866,10 +925,10 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * create a Element that floats in nirvana, this must be appended to a node with appendChild
-	 * 
+	 *
 	 * @param namespaceURI the namespace uri of the created element
 	 * @param qualifiedName name of the element that is created
-	 * 
+	 *
 	 * @return Element - unconnected element that is created
 	 */
 	public Element createElementNS(final String namespaceURI, final String qualifiedName)
@@ -879,10 +938,10 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * create an attribute withe the given name in the given namespace
-	 * 
+	 *
 	 * @param namespaceURI namespace URI of the attribute
 	 * @param qualifiedName qualified name of the attribute
-	 * 
+	 *
 	 * @return Attr - the newly created attribute
 	 */
 	public Attr createAttributeNS(final String namespaceURI, final String qualifiedName)
@@ -892,10 +951,10 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get a NodeList of all elements with a given name and namespace URI
-	 * 
+	 *
 	 * @param namespaceURI the namespace URI to look for
 	 * @param myLocalName the element name to look for
-	 * 
+	 *
 	 * @return NodeList with all elements found
 	 */
 	public NodeList getElementsByTagNameNS(final String namespaceURI, final String myLocalName)
@@ -905,9 +964,9 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get element with ID = elementId similar to Docoment.getElementByID but works with non schema parsed documents
-	 * 
+	 *
 	 * @param elementId the element ID to look for
-	 * 
+	 *
 	 * @return the Element found
 	 */
 	public Element getElementById(final String elementId)
@@ -918,7 +977,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * gets the node name
-	 * 
+	 *
 	 * @return String
 	 */
 	public String getNodeName()
@@ -928,7 +987,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * gets the node value
-	 * 
+	 *
 	 * @return String
 	 */
 	public String getNodeValue()
@@ -938,7 +997,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * set the node value
-	 * 
+	 *
 	 * @param nodeValue value to set the node to
 	 */
 	public void setNodeValue(final String nodeValue)
@@ -951,7 +1010,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * set the namespace map from another document
-	 * 
+	 *
 	 * @param other value to set the node to
 	 */
 	public void setNSMap(final XMLDoc other)
@@ -964,7 +1023,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get node type
-	 * 
+	 *
 	 * @return a <i>short</i> representing the node type
 	 */
 	public short getNodeType()
@@ -974,7 +1033,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get the parent node of 'this' node
-	 * 
+	 *
 	 * @return the parent node
 	 */
 	public Node getParentNode()
@@ -984,7 +1043,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get the child nodes of this node
-	 * 
+	 *
 	 * @return a NodeList containing the child nodes
 	 */
 	public NodeList getChildNodes()
@@ -994,7 +1053,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get the first child node of 'this'
-	 * 
+	 *
 	 * @return the first child node
 	 */
 	public Node getFirstChild()
@@ -1004,7 +1063,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get the last child node of 'this'
-	 * 
+	 *
 	 * @return the last child node
 	 */
 	public Node getLastChild()
@@ -1014,7 +1073,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get the previous sibling of 'this'
-	 * 
+	 *
 	 * @return the previous sibling node
 	 */
 	public Node getPreviousSibling()
@@ -1024,7 +1083,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get the next sibling of 'this'
-	 * 
+	 *
 	 * @return the next sibling node
 	 */
 	public Node getNextSibling()
@@ -1034,7 +1093,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get the attributes associated with this node
-	 * 
+	 *
 	 * @return NamedNodeMap containing the attributes associated with this node
 	 */
 	public NamedNodeMap getAttributes()
@@ -1044,10 +1103,10 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * insert a new node before a given node
-	 * 
+	 *
 	 * @param newChild the new child node to insert
 	 * @param refChild the ref child node, the new node is inserted before it
-	 * 
+	 *
 	 * @return Node
 	 */
 	public Node insertBefore(final Node newChild, final Node refChild)
@@ -1057,10 +1116,10 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * replace a child node with a new one
-	 * 
+	 *
 	 * @param newChild the new child node to add
 	 * @param oldChild the old child node to be replaced
-	 * 
+	 *
 	 * @return Node
 	 */
 	public Node replaceChild(final Node newChild, final Node oldChild)
@@ -1070,9 +1129,9 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * remove a child from 'this'
-	 * 
+	 *
 	 * @param oldChild the child node to be removed
-	 * 
+	 *
 	 * @return oldChild, in its new state (removed)
 	 */
 	public Node removeChild(final Node oldChild)
@@ -1082,9 +1141,9 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * append a new child node to 'this'
-	 * 
+	 *
 	 * @param newChild new child node to add
-	 * 
+	 *
 	 * @return Node
 	 */
 	public Node appendChild(final Node newChild)
@@ -1094,7 +1153,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * test if 'this' has any children
-	 * 
+	 *
 	 * @return boolean - true, if 'this' has children
 	 */
 	public boolean hasChildNodes()
@@ -1104,9 +1163,9 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get a copy of 'this'
-	 * 
+	 *
 	 * @param deep true: copy children as well
-	 * 
+	 *
 	 * @return Node - a copy of 'this'
 	 */
 	public Node cloneNode(final boolean deep)
@@ -1127,10 +1186,10 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * test whether a specific DOMImplelementation feature is supported by 'this'
-	 * 
+	 *
 	 * @param feature package name of the feature to test
 	 * @param version version number of the package name to test
-	 * 
+	 *
 	 * @return boolean - true, if the feature is sopported
 	 * @see <a href="http://xerces.apache.org/xerces-j/apiDocs/org/apache/xerces/dom/NodeImpl.html#isSupported(java.lang.String,%20java.lang.String)"
 	 * <a>Xerxes-Documentation</a>
@@ -1142,7 +1201,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get the namespace prefix of 'this' node
-	 * 
+	 *
 	 * @return String - namespace prefix (null if unspecified)
 	 */
 	public String getPrefix()
@@ -1157,7 +1216,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * set the namespace prefix of 'this' node
-	 * 
+	 *
 	 * @param prefix namespace prefix
 	 */
 	public void setPrefix(final String prefix)
@@ -1170,7 +1229,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get the the local part of the qualified name of 'this'
-	 * 
+	 *
 	 * @return String - local name
 	 */
 	public String getLocalName()
@@ -1180,7 +1239,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * check whether the underlying document is null
-	 * 
+	 *
 	 * @return true if m_doc==null
 	 */
 	public boolean isNull()
@@ -1190,7 +1249,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * check if 'this' has attributes
-	 * 
+	 *
 	 * @return true, if 'this' has attributes
 	 */
 	public boolean hasAttributes()
@@ -1200,11 +1259,11 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * createDocumentType
-	 * 
+	 *
 	 * @param qualifiedName
 	 * @param publicID
 	 * @param systemID
-	 * 
+	 *
 	 * @return DocumentType
 	 */
 	public DocumentType createDocumentType(final String qualifiedName, final String publicID, final String systemID)
@@ -1214,7 +1273,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * sets whether the DOM implementation performs error checking upon operations
-	 * 
+	 *
 	 * @param check true - enable error checking
 	 */
 	public void setErrorChecking(final boolean check)
@@ -1227,7 +1286,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * does the DOM implementation perform error checking upon operations?
-	 * 
+	 *
 	 * @return true - error checking is enabled, otherwise false
 	 */
 	public boolean getErrorChecking()
@@ -1237,9 +1296,9 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * create an entity
-	 * 
+	 *
 	 * @param name name of the entity
-	 * 
+	 *
 	 * @return Entity - the newly created entity
 	 */
 	public Entity createEntity(final String name)
@@ -1249,9 +1308,9 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * creates a Notation having this Document as its OwnerDoc
-	 * 
+	 *
 	 * @param name name of the notation
-	 * 
+	 *
 	 * @return Notation - the newly created notation
 	 */
 	public Notation createNotation(final String name)
@@ -1261,9 +1320,9 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * creates an element definition. Element definitions hold default attribute values.
-	 * 
+	 *
 	 * @param name
-	 * 
+	 *
 	 * @return ElementDefinitionImpl
 	 */
 	public ElementDefinitionImpl createElementDefinition(final String name)
@@ -1273,7 +1332,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * Registers an identifier name with a specified element node
-	 * 
+	 *
 	 * @param idName
 	 * @param element
 	 */
@@ -1287,9 +1346,9 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * gets the element with the registered name = "idName"
-	 * 
+	 *
 	 * @param idName name of the element to get
-	 * 
+	 *
 	 * @return Element - the element with "idName"
 	 */
 	public Element getIdentifier(final String idName)
@@ -1299,7 +1358,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * remove element with identifier "idName"
-	 * 
+	 *
 	 * @param idName
 	 */
 	public void removeIdentifier(final String idName)
@@ -1312,7 +1371,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * gets the registered identifiers
-	 * 
+	 *
 	 * @return Enumeration of registered identifiers
 	 */
 	public Enumeration<?> getIdentifiers()
@@ -1322,11 +1381,11 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * create a node iterator
-	 * 
+	 *
 	 * @param root the root of the iterator
 	 * @param whatToShow the whatToShow mask
 	 * @param filter the node filter (null = no filter)
-	 * 
+	 *
 	 * @return the newly created NodeIterator
 	 */
 	public NodeIterator createNodeIterator(final Node root, final short whatToShow, final NodeFilter filter)
@@ -1336,12 +1395,12 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * createNodeIterator
-	 * 
+	 *
 	 * @param root the root of the iterator
 	 * @param whatToShow the whatToShow mask
 	 * @param filter the node filter (null = no filter)
 	 * @param entityReferenceExpansion true: expand the contents of EntityReference nodes
-	 * 
+	 *
 	 * @return the newly created NodeIterator
 	 */
 	public NodeIterator createNodeIterator(final Node root, final int whatToShow, final NodeFilter filter, final boolean entityReferenceExpansion)
@@ -1351,11 +1410,11 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * creates a TreeWalker
-	 * 
+	 *
 	 * @param root the root of the iterator
 	 * @param whatToShow the whatToShow mask
 	 * @param filter the node filter (null = no filter)
-	 * 
+	 *
 	 * @return the newly created TreeWalker
 	 */
 	public TreeWalker createTreeWalker(final Node root, final short whatToShow, final NodeFilter filter)
@@ -1365,12 +1424,12 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * creates a TreeWalker
-	 * 
+	 *
 	 * @param root the root of the iterator
 	 * @param whatToShow the whatToShow mask
 	 * @param filter the node filter (null = no filter)
 	 * @param entityReferenceExpansion true: expand the contents of EntityReference nodes
-	 * 
+	 *
 	 * @return the newly created TreeWalker
 	 */
 	public TreeWalker createTreeWalker(final Node root, final int whatToShow, final NodeFilter filter, final boolean entityReferenceExpansion)
@@ -1380,7 +1439,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * createRange
-	 * 
+	 *
 	 * @return Range
 	 */
 	public Range createRange()
@@ -1390,9 +1449,9 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * create an Event object
-	 * 
+	 *
 	 * @param type type of Event interface to be created
-	 * 
+	 *
 	 * @return the newly created Event
 	 */
 	public Event createEvent(final String type)
@@ -1402,7 +1461,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * clone the document, completely severing all connections to the original document
-	 * 
+	 *
 	 * @return Object
 	 */
 	@Override
@@ -1418,7 +1477,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -1429,7 +1488,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * toXML
-	 * 
+	 *
 	 * @return String
 	 */
 	public String toXML()
@@ -1444,12 +1503,12 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * This method sends the contents of this XMLDoc to the URL <code>strURL</code> and receives the response in the returned XMLDoc.
-	 * 
+	 *
 	 * @param strURL the URL to write to
 	 * @param strContentType the content type to write to
-	 * 
+	 *
 	 * @return docResponse the response received from URL. if url is a file, an empty doc is returned
-	 * 
+	 *
 	 * A Null document if no response was received, or an exception occurred
 	 */
 	public XMLDoc write2URL(final String strURL, final String strContentType)
@@ -1478,7 +1537,7 @@ public class XMLDoc implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @param xmlParser
 	 */
 	protected void pushParser(XMLParser xmlParser)
@@ -1489,8 +1548,8 @@ public class XMLDoc implements Cloneable
 	/**
 	 * gets the n'th child node of nodetype <code>nodeType</code> with n = iPos
 	 * @param nodeType the DOM node type to get <blockquote>
-	 * - copy from KElement - 
-	 * 
+	 * - copy from KElement -
+	 *
 	 * <ul>
 	 * <li>ELEMENT_NODE = 1
 	 * <li>ATTRIBUTE_NODE = 2
@@ -1533,7 +1592,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * gets of 'this' the text of the i-th child XMLComment. <code><!-- this is a XMLComment --></code> would return <code>this is a XMLComment</code>
-	 * 
+	 *
 	 * @return String text document XMLComment, null if i is higher then the number of child nodes
 	 */
 	public String getXMLComment()
@@ -1543,8 +1602,8 @@ public class XMLDoc implements Cloneable
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @return
 	 */
 	protected XMLParser getXMLParser()
@@ -1605,7 +1664,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * rough guestimate of the memory used by this if called after parsing
-	 * 
+	 *
 	 * @return the difference of memory used when calling compared to construction time
 	 */
 	public long getDocMemoryUsed()
@@ -1615,7 +1674,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get the Javax.Mail.BodyPart
-	 * 
+	 *
 	 * @return the BodyPart
 	 */
 	public BodyPart getBodyPart()
@@ -1625,7 +1684,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get the Javax.Mail.Multipart
-	 * 
+	 *
 	 * @return the Multipart
 	 */
 	public Multipart getMultiPart()
@@ -1640,7 +1699,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * set the Javax.Mail.BodyPart
-	 * 
+	 *
 	 * @param bodyPart the value to set
 	 */
 	public void setBodyPart(final BodyPart bodyPart)
@@ -1650,7 +1709,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * set the ZipReader
-	 * 
+	 *
 	 * @param zip the value to set
 	 */
 	public void setZipReader(final ZipReader zip)
@@ -1660,7 +1719,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * get the ZipReader
-	 * 
+	 *
 	 * @return zip the value to set
 	 */
 	public ZipReader getZipReader()
@@ -1737,7 +1796,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * set xs:schemalocation to
-	 * 
+	 *
 	 * @param nsURI
 	 * @param _schemaLocation
 	 */
@@ -1765,7 +1824,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * parse a JDF input stream
-	 * 
+	 *
 	 * @param is
 	 * @return the parsed JDFDoc
 	 */
@@ -1782,7 +1841,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * parse an XML file
-	 * 
+	 *
 	 * @param fileName
 	 * @return the parsed JDFDoc
 	 */
@@ -1797,7 +1856,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * parse an XML file
-	 * 
+	 *
 	 * @param string
 	 * @return the parsed JDFDoc
 	 */
@@ -1812,7 +1871,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * parse an XML file
-	 * 
+	 *
 	 * @param file
 	 * @return the parsed JDFDoc
 	 */
@@ -1827,7 +1886,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * parse a given url
-	 * 
+	 *
 	 * @param url the url to search
 	 * @param bp the bodypart that the CID url is located in
 	 * @return the parsed JDFDoc

@@ -98,6 +98,7 @@ import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Test;
 import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -291,6 +292,42 @@ public class XMLDocTest extends JDFTestCaseBase
 		doc.setSchemaLocation(nsURI, schema);
 		assertNotNull(doc.getSchemaLocation(nsURI));
 		assertEquals(doc.getSchemaLocationFile(nsURI).getCanonicalFile(), schema.getCanonicalFile());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetNode()
+	{
+		final XMLDoc doc = new XMLDoc("test", null);
+		KElement e = doc.getRoot();
+		assertEquals(e, doc.getNode(Document.ELEMENT_NODE, 0, null));
+		assertEquals(e, doc.getNode(Document.ELEMENT_NODE, 0, "test"));
+		assertNull(doc.getNode(Document.ELEMENT_NODE, 1, "test"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetNodeProc()
+	{
+		final XMLDoc doc = new XMLDoc("test", null);
+		doc.setXSLTURL("a.b");
+		assertTrue(doc.getNode(Document.PROCESSING_INSTRUCTION_NODE, 0, null).getNodeValue().indexOf("a.b") > 0);
+		assertEquals("xml-stylesheet", doc.getNode(Document.PROCESSING_INSTRUCTION_NODE, 0, "xml-stylesheet").getNodeName());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetXSLTURL()
+	{
+		final XMLDoc doc = new XMLDoc("test", null);
+		doc.setXSLTURL("a.b");
+		assertEquals("a.b", doc.getXSLTURL());
 	}
 
 	/**
