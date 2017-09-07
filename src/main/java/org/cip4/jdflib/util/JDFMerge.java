@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -200,9 +200,13 @@ public class JDFMerge
 	public synchronized JDFNode mergeJDF(final JDFNode _toMerge)
 	{
 		subJDFNode = _toMerge;
-		if (subJDFNode == null || !subJDFNode.hasParent(m_ParentNode))
+		if (subJDFNode == null)
 		{
-			throw new JDFException("JDFNode.MergeJDF no matching parent found");
+			throw new JDFException("JDFNode.MergeJDF subJDF is null");
+		}
+		if (!subJDFNode.hasParent(m_ParentNode))
+		{
+			throw new JDFException("JDFNode.MergeJDF no matching parent found: JobPartID=" + subJDFNode.getJobPartID(false) + " ID=" + subJDFNode.getID());
 		}
 		findOverwriteNode();
 
