@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,24 +71,22 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.resource.intent.JDFIntentResource;
-import org.cip4.jdflib.resource.intent.JDFMediaIntent;
+import org.cip4.jdflib.resource.process.JDFMedia;
 
 /**
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class WalkMediaIntent extends WalkIntentResource
+public class WalkMedia extends WalkIntentResource
 {
 	/**
 	 *
 	 */
-	public WalkMediaIntent()
+	public WalkMedia()
 	{
 		super();
 	}
@@ -101,7 +99,7 @@ public class WalkMediaIntent extends WalkIntentResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFMediaIntent);
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFMedia);
 	}
 
 	/**
@@ -110,7 +108,7 @@ public class WalkMediaIntent extends WalkIntentResource
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.MEDIAINTENT, null);
+		return new VString(ElementName.MEDIA, null);
 	}
 
 	/**
@@ -125,27 +123,6 @@ public class WalkMediaIntent extends WalkIntentResource
 			map.put(AttributeName.MEDIATYPE, EnumMediaType.Paper);
 		}
 		super.updateAttributes(map);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	protected void removeUnusedElements(KElement jdf)
-	{
-		jdf.removeChild(ElementName.BRIGHTNESS, null, 0);
-		jdf.removeChild(ElementName.MEDIALAYERS, null, 0);
-		super.removeUnusedElements(jdf);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#setAttributes(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	protected void setAttributes(KElement jdf, KElement eNew)
-	{
-		eNew.setNonEmpty(AttributeName.BRAND, JDFIntentResource.guessActual((JDFElement) jdf, ElementName.STOCKBRAND));
-		super.setAttributes(jdf, eNew);
 	}
 
 }

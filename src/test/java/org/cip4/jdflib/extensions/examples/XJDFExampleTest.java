@@ -72,6 +72,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -108,6 +109,7 @@ public class XJDFExampleTest extends JDFTestCaseBase
 		ResourceHelper rh = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
 		JDFMedia m = (JDFMedia) rh.getResource();
 		m.setAttribute("foo:FooAtt", "FooVal", "http://www.foo.org");
+		m.setMediaType(EnumMediaType.Paper);
 		xjdfHelper.cleanUp();
 		setSnippet(rh, true);
 		writeTest(xjdfHelper, "structure/namespacesExtendAttribute.xjdf");

@@ -905,7 +905,10 @@ public class KElement extends ElementNSImpl implements Element
 
 	/**
 	 * Checks if the actual element has a specific attribute<br>
-	 * this version checks within the resource and its partitioned parent xml elements
+	 * this version checks only the explicit element and NOT any inherited resource partiotions
+	 *
+	 * Attention! this behavior differs from that of @see getAttribute()
+	 *
 	 * @param attrib the name of the attribute to look for
 	 * @return boolean true, if the attribute is present
 	 */

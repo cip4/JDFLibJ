@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
@@ -263,6 +264,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 			rh.setAttribute(AttributeName.DESCRIPTIVENAME, "Paper # " + i);
 			((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
 			((JDFMedia) rh.getResource()).setWeight(60 + 20 * i);
+			((JDFMedia) rh.getResource()).setMediaType(EnumMediaType.Paper);
 
 		}
 
@@ -439,7 +441,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 			rh.setAttribute(AttributeName.DESCRIPTIVENAME, "Paper # " + i);
 			((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
 			((JDFMedia) rh.getResource()).setWeight(60 + 20 * i);
-
+			((JDFMedia) rh.getResource()).setMediaType(EnumMediaType.Paper);
 		}
 		xjmfHelper.cleanUp();
 		sh.getRoot().appendXMLComment(" One Resource element for each paper follows here ", null);
@@ -470,6 +472,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
 		((JDFMedia) rh.getResource()).setWeight(100);
 		((JDFMedia) rh.getResource()).setAttribute(XJDFConstants.Coating, "Gloss");
+		((JDFMedia) rh.getResource()).setMediaType(EnumMediaType.Paper);
 
 		rh = sh.appendPartition(new JDFAttributeMap(ElementName.PRINTCONDITION, "4-color-gloss"), true);
 		rh.setExternalID("ID2");
@@ -477,6 +480,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
 		((JDFMedia) rh.getResource()).setWeight(100);
 		((JDFMedia) rh.getResource()).setAttribute(XJDFConstants.Coating, "Gloss");
+		((JDFMedia) rh.getResource()).setMediaType(EnumMediaType.Paper);
 
 		rh = sh.appendPartition(new JDFAttributeMap(AttributeName.PRINTCONDITION, "7-color-matte"), true);
 		rh.appendPartMap(new JDFAttributeMap(ElementName.PRINTCONDITION, "4-color-matte"));
@@ -485,6 +489,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
 		((JDFMedia) rh.getResource()).setWeight(100);
 		((JDFMedia) rh.getResource()).setAttribute(XJDFConstants.Coating, "Matte");
+		((JDFMedia) rh.getResource()).setMediaType(EnumMediaType.Paper);
 
 		rh = sh.appendPartition(new JDFAttributeMap(ElementName.PRINTCONDITION, "4-color-matte"), true);
 		rh.setExternalID("ID2");
@@ -492,6 +497,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
 		((JDFMedia) rh.getResource()).setWeight(100);
 		((JDFMedia) rh.getResource()).setAttribute(XJDFConstants.Coating, "Matte");
+		((JDFMedia) rh.getResource()).setMediaType(EnumMediaType.Paper);
 
 		xjmfHelper.cleanUp();
 		sh.getRoot().appendXMLComment(" One Resource element for each paper follows here ", null);

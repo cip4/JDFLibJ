@@ -196,7 +196,30 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <!-- Enums -->
+    <xs:simpleType name="MediaType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Blanket"/>
+            <xs:enumeration value="CorrugatedBoard"/>
+            <xs:enumeration value="Disc"/>
+            <xs:enumeration value="EmbossingFoil"/>
+            <xs:enumeration value="Film"/>
+            <xs:enumeration value="Foil"/>
+            <xs:enumeration value="GravureCylinder"/>
+            <xs:enumeration value="ImagingCylinder"/>
+            <xs:enumeration value="LaminatingFoil"/>
+            <xs:enumeration value="Other"/>
+            <xs:enumeration value="Paper"/>
+            <xs:enumeration value="Plate"/>
+            <xs:enumeration value="Screen"/>
+            <xs:enumeration value="SelfAdhesive"/>
+            <xs:enumeration value="ShrinkFoil"/>
+            <xs:enumeration value="Sleeve"/>
+            <xs:enumeration value="Textile"/>
+            <xs:enumeration value="Transparency"/>
+            <xs:enumeration value="Vinyl"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="Activation">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Informative"/>
@@ -737,13 +760,11 @@
         </xs:complexType>
     </xs:element>
 
-    <!--** abstract type for substitution only ** -->
     <xs:element abstract="true" name="SpecificResource" type="SpecificResource"/>
     <xs:complexType abstract="true" name="SpecificResource">
         <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Intent ** -->
     <xs:element name="Intent">
         <xs:complexType>
             <xs:sequence>
@@ -757,7 +778,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!--** abstract type for substitution only ** -->
     <xs:element abstract="true" name="ProductIntent" type="ProductIntent"/>
     <xs:complexType abstract="true" name="ProductIntent">
         <xs:sequence>
@@ -766,7 +786,6 @@
         <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
 
-    <!-- ** Complex type definition for AmountPool ** -->
     <xs:element name="AmountPool">
         <xs:complexType>
             <xs:sequence>
@@ -776,7 +795,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for PartAmount ** -->
     <xs:element name="PartAmount">
         <xs:complexType>
             <xs:sequence>
@@ -800,7 +818,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Product ** -->
     <xs:element name="Product">
         <xs:complexType>
             <xs:sequence>
@@ -822,7 +839,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ProductList ** -->
     <xs:element name="ProductList">
         <xs:complexType>
             <xs:sequence>
@@ -832,7 +848,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Dependent ** -->
     <xs:element name="Dependent">
         <xs:complexType>
             <xs:attribute name="JobID" type="NMTOKEN" use="required"/>
@@ -844,7 +859,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ** -->
     <xs:element name="XJDF">
         <xs:complexType>
             <xs:sequence>
@@ -869,7 +883,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ResourceSet ** -->
     <xs:element name="ResourceSet">
         <xs:complexType>
             <xs:sequence>
@@ -897,7 +910,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Comment ** -->
     <xs:element name="Comment">
         <xs:complexType>
             <xs:simpleContent>
@@ -914,7 +926,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for CustomerInfo ** -->
     <xs:element name="CustomerInfo" substitutionGroup="SpecificResource" type="CustomerInfo"/>
     <xs:complexType name="CustomerInfo">
         <xs:complexContent>
@@ -927,7 +938,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for NodeInfo ** -->
     <xs:element name="NodeInfo" substitutionGroup="SpecificResource" type="NodeInfo"/>
     <xs:complexType name="NodeInfo">
         <xs:complexContent>
@@ -963,7 +973,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Shape ** -->
     <xs:element name="Shape" substitutionGroup="SpecificResource" type="Shape"/>
     <xs:complexType name="Shape">
         <xs:complexContent>
@@ -988,7 +997,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for DeviceFilter ** -->
     <xs:element name="DeviceFilter">
         <xs:complexType>
             <xs:attribute name="DeviceDetails" use="optional">
@@ -1004,7 +1012,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for DeviceInfo ** -->
     <xs:element name="DeviceInfo">
         <xs:complexType>
             <xs:sequence>
@@ -1026,7 +1033,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for GangCmdFilter ** -->
     <xs:element name="GangCmdFilter">
         <xs:complexType>
             <xs:attribute name="GangNames" type="NMTOKENS" use="optional"/>
@@ -1042,7 +1048,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for GangInfo ** -->
     <xs:element name="GangInfo">
         <xs:complexType>
             <xs:attribute name="Amount" type="float" use="optional"/>
@@ -1051,7 +1056,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for GangQuFilter ** -->
     <xs:element name="GangQuFilter">
         <xs:complexType>
             <xs:attribute name="GangNames" type="NMTOKENS" use="optional"/>
@@ -1072,7 +1076,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for JobPhase ** -->
     <xs:element name="JobPhase">
         <xs:complexType>
             <xs:sequence>
@@ -1116,7 +1119,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Message ** -->
     <xs:element abstract="true" name="Message" type="Message"/>
     <xs:complexType name="Message">
         <xs:sequence>
@@ -1140,7 +1142,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Command ** -->
     <xs:element abstract="true" name="Command" substitutionGroup="Message" type="Command"/>
     <xs:complexType name="Command">
         <xs:complexContent>
@@ -1149,7 +1150,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Query ** -->
     <xs:element abstract="true" name="Query" substitutionGroup="Message" type="Query"/>
     <xs:complexType name="Query">
         <xs:complexContent>
@@ -1161,7 +1161,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Response ** -->
     <xs:element abstract="true" name="Response" substitutionGroup="Message" type="Response"/>
     <xs:complexType name="Response">
         <xs:complexContent>
@@ -1174,7 +1173,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Signal ** -->
     <xs:element name="Signal" substitutionGroup="Message" type="Signal"/>
     <xs:complexType name="Signal">
         <xs:complexContent>
@@ -1184,7 +1182,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for MessageService ** -->
     <xs:element name="MessageService">
         <xs:complexType>
             <xs:attribute name="ResponseModes" use="optional">
@@ -1219,7 +1216,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for PipeParams ** -->
     <xs:element name="PipeParams">
         <xs:complexType>
             <xs:sequence>
@@ -1243,7 +1239,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Queue ** -->
     <xs:element name="Queue">
         <xs:complexType>
             <xs:sequence>
@@ -1256,7 +1251,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for QueueEntry ** -->
     <xs:element name="QueueEntry">
         <xs:complexType>
             <xs:sequence>
@@ -1306,7 +1300,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for QueueSubmissionParams ** -->
     <xs:element name="QueueSubmissionParams">
         <xs:complexType>
             <xs:attribute name="Activation" type="Activation" use="optional"/>
@@ -1321,7 +1314,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for RequestQueueEntryParams ** -->
     <xs:element name="RequestQueueEntryParams">
         <xs:complexType>
             <xs:sequence>
@@ -1335,7 +1327,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ResourceCmdParams ** -->
     <xs:element name="ResourceCmdParams">
         <xs:complexType>
             <xs:sequence>
@@ -1356,7 +1347,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ResourceInfo ** -->
     <xs:element name="ResourceInfo">
         <xs:complexType>
             <xs:sequence>
@@ -1393,7 +1383,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ResourceQuParams ** -->
     <xs:element name="ResourceQuParams">
         <xs:complexType>
             <xs:sequence>
@@ -1417,7 +1406,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ResubmissionParams ** -->
     <xs:element name="ResubmissionParams">
         <xs:complexType>
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="required"/>
@@ -1435,7 +1423,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ReturnQueueEntryParams ** -->
     <xs:element name="ReturnQueueEntryParams">
         <xs:complexType>
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="required"/>
@@ -1444,7 +1431,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ShutDownCmdParams ** -->
     <xs:element name="ShutDownCmdParams">
         <xs:complexType>
             <xs:attribute name="ShutDownType" use="optional">
@@ -1459,7 +1445,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for StatusQuParams ** -->
     <xs:element name="StatusQuParams">
         <xs:complexType>
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
@@ -1467,7 +1452,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for StopPersChParams ** -->
     <xs:element name="StopPersChParams">
         <xs:complexType>
             <xs:attribute name="ChannelID" type="NMTOKEN" use="optional"/>
@@ -1477,7 +1461,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Subscription ** -->
     <xs:element name="Subscription">
         <xs:complexType>
             <xs:attribute name="ChannelMode" use="optional">
@@ -1492,7 +1475,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for SubscriptionFilter ** -->
     <xs:element name="SubscriptionFilter">
         <xs:complexType>
             <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
@@ -1501,7 +1483,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for SubscriptionInfo ** -->
     <xs:element name="SubscriptionInfo">
         <xs:complexType>
             <xs:sequence>
@@ -1514,7 +1495,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for AuditPool ** -->
     <xs:element name="AuditPool">
         <xs:complexType>
             <xs:choice minOccurs="0" maxOccurs="unbounded">
@@ -1528,7 +1508,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!--** abstract type for substitution only ** -->
     <xs:complexType abstract="true" name="Audit">
         <xs:sequence>
             <xs:element maxOccurs="1" minOccurs="1" ref="Header"/>
@@ -1536,7 +1515,6 @@
         <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Band ** -->
     <xs:element name="Band">
         <xs:complexType>
             <xs:attribute name="Height" type="integer" use="optional"/>
@@ -1545,7 +1523,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for BlockPreparationParams ** -->
     <xs:element name="BlockPreparationParams" substitutionGroup="SpecificResource" type="BlockPreparationParams"/>
     <xs:complexType name="BlockPreparationParams">
         <xs:complexContent>
@@ -1560,7 +1537,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for BoxPackingParams ** -->
     <xs:element name="BoxPackingParams" substitutionGroup="SpecificResource" type="BoxPackingParams"/>
     <xs:complexType name="BoxPackingParams">
         <xs:complexContent>
@@ -1590,7 +1566,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Bundle ** -->
     <xs:element name="Bundle" substitutionGroup="SpecificResource" type="Bundle"/>
     <xs:complexType name="Bundle">
         <xs:complexContent>
@@ -1602,7 +1577,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for BundleItem ** -->
     <xs:element name="BundleItem">
         <xs:complexType>
             <xs:sequence>
@@ -1620,7 +1594,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for CaseMakingParams ** -->
     <xs:element name="CaseMakingParams" substitutionGroup="SpecificResource" type="CaseMakingParams"/>
     <xs:complexType name="CaseMakingParams">
         <xs:complexContent>
@@ -1640,7 +1613,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for CasingInParams ** -->
     <xs:element name="CasingInParams" substitutionGroup="SpecificResource" type="CasingInParams"/>
     <xs:complexType name="CasingInParams">
         <xs:complexContent>
@@ -1655,7 +1627,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for CoilBindingDetails ** -->
     <xs:element name="CoilBindingDetails">
         <xs:complexType>
             <xs:attribute name="CoilShape" type="NMTOKEN" use="optional"/>
@@ -1664,7 +1635,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for CoverApplicationParams ** -->
     <xs:element name="CoverApplicationParams" substitutionGroup="SpecificResource" type="CoverApplicationParams"/>
     <xs:complexType name="CoverApplicationParams">
         <xs:complexContent>
@@ -1677,7 +1647,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for CreasingParams ** -->
     <xs:element name="CreasingParams" substitutionGroup="SpecificResource" type="CreasingParams"/>
     <xs:complexType name="CreasingParams">
         <xs:complexContent>
@@ -1689,7 +1658,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for AuditCreated ** -->
     <xs:element name="AuditCreated">
         <xs:complexType>
             <xs:complexContent>
@@ -1699,7 +1667,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for CuttingParams ** -->
     <xs:element name="CuttingParams" substitutionGroup="SpecificResource" type="CuttingParams"/>
     <xs:complexType name="CuttingParams">
         <xs:complexContent>
@@ -1716,7 +1683,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for DevelopingParams ** -->
     <xs:element name="DevelopingParams" substitutionGroup="SpecificResource" type="DevelopingParams"/>
     <xs:complexType name="DevelopingParams">
         <xs:complexContent>
@@ -1730,7 +1696,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Device ** -->
     <xs:element name="Device" substitutionGroup="SpecificResource" type="Device"/>
     <xs:complexType name="Device">
         <xs:complexContent>
@@ -1787,7 +1752,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for EdgeGluing ** -->
     <xs:element name="EdgeGluing">
         <xs:complexType>
             <xs:attribute name="EdgeGlue" type="EnumGlue" use="optional"/>
@@ -1795,7 +1759,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Emboss ** -->
     <xs:element name="Emboss">
         <xs:complexType>
             <xs:sequence>
@@ -1821,7 +1784,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for EmbossingItem ** -->
     <xs:element name="EmbossingItem">
         <xs:complexType>
             <xs:attribute name="Direction" type="EnumEmbossDirection" use="optional"/>
@@ -1838,7 +1800,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for EmbossingParams ** -->
     <xs:element name="EmbossingParams" substitutionGroup="SpecificResource" type="EmbossingParams"/>
     <xs:complexType name="EmbossingParams">
         <xs:complexContent>
@@ -1851,7 +1812,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for EndSheetGluingParams ** -->
     <xs:element name="EndSheetGluingParams" substitutionGroup="SpecificResource" type="EndSheetGluingParams"/>
     <xs:complexType name="EndSheetGluingParams">
         <xs:complexContent>
@@ -1863,16 +1823,14 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Event ** -->
     <xs:element name="Event">
         <xs:complexType>
-            <xs:attribute name="EventID" type="string" use="required"/>
+            <xs:attribute name="EventID" type="NMTOKEN" use="required"/>
             <xs:attribute name="EventValue" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for FitPolicy ** -->
     <xs:element name="FitPolicy">
         <xs:complexType>
             <xs:attribute name="ClipOffset" type="XYPair" use="optional"/>
@@ -1910,7 +1868,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for GluingParams ** -->
     <xs:element name="GluingParams" substitutionGroup="SpecificResource" type="GluingParams"/>
     <xs:complexType name="GluingParams">
         <xs:complexContent>
@@ -1923,7 +1880,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for HardCoverBinding ** -->
     <xs:element name="HardCoverBinding">
         <xs:complexType>
             <xs:sequence>
@@ -1954,7 +1910,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for HeadBandApplicationParams ** -->
     <xs:element name="HeadBandApplicationParams" substitutionGroup="SpecificResource" type="HeadBandApplicationParams"/>
     <xs:complexType name="HeadBandApplicationParams">
         <xs:complexContent>
@@ -1968,7 +1923,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Icon ** -->
     <xs:element name="Icon">
         <xs:complexType>
             <xs:sequence>
@@ -1985,7 +1939,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for IconList ** -->
     <xs:element name="IconList">
         <xs:complexType>
             <xs:sequence>
@@ -1995,7 +1948,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ImageCompression ** -->
     <xs:element name="ImageCompression">
         <xs:complexType>
             <xs:sequence>
@@ -2040,7 +1992,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for InsertingParams ** -->
     <xs:element name="InsertingParams" substitutionGroup="SpecificResource" type="InsertingParams"/>
     <xs:complexType name="InsertingParams">
         <xs:complexContent>
@@ -2071,7 +2022,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for InterpretingParams ** -->
     <xs:element name="InterpretingParams" substitutionGroup="SpecificResource" type="InterpretingParams"/>
     <xs:complexType name="InterpretingParams">
         <xs:complexContent>
@@ -2104,7 +2054,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for InterpretingDetails ** -->
     <xs:element name="InterpretingDetails">
         <xs:complexType>
             <xs:attribute name="MinLineWidth" type="float" use="optional"/>
@@ -2112,7 +2061,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for JacketingParams ** -->
     <xs:element name="JacketingParams" substitutionGroup="SpecificResource" type="JacketingParams"/>
     <xs:complexType name="JacketingParams">
         <xs:complexContent>
@@ -2123,7 +2071,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for JobField ** -->
     <xs:element name="JobField">
         <xs:complexType>
             <xs:attribute name="JobFormat" type="string" use="optional"/>
@@ -2132,7 +2079,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for LabelingParams ** -->
     <xs:element name="LabelingParams" substitutionGroup="SpecificResource" type="LabelingParams"/>
     <xs:complexType name="LabelingParams">
         <xs:complexContent>
@@ -2147,7 +2093,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for LaminatingParams ** -->
     <xs:element name="LaminatingParams" substitutionGroup="SpecificResource" type="LaminatingParams"/>
     <xs:complexType name="LaminatingParams">
         <xs:complexContent>
@@ -2170,7 +2115,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for MarkObject ** -->
     <xs:element name="MarkObject">
         <xs:complexType>
             <xs:sequence>
@@ -2213,7 +2157,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Milestone ** -->
     <xs:element name="Milestone">
         <xs:complexType>
             <xs:attribute name="MilestoneType" type="NMTOKEN" use="required"/>
@@ -2222,7 +2165,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Notification ** -->
     <xs:element name="Notification">
         <xs:complexType>
             <xs:sequence>
@@ -2241,7 +2183,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for PageCondition ** -->
     <xs:element name="PageCondition">
         <xs:complexType>
             <xs:sequence>
@@ -2272,7 +2213,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Pallet ** -->
     <xs:element name="Pallet" substitutionGroup="SpecificResource" type="Pallet"/>
     <xs:complexType name="Pallet">
         <xs:complexContent>
@@ -2286,7 +2226,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for PalletizingParams ** -->
     <xs:element name="PalletizingParams" substitutionGroup="SpecificResource" type="PalletizingParams"/>
     <xs:complexType name="PalletizingParams">
         <xs:complexContent>
@@ -2301,7 +2240,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Part ** -->
     <xs:element name="Part">
         <xs:complexType>
             <xs:attribute name="BinderySignatureID" type="NMTOKEN" use="optional"/>
@@ -2357,7 +2295,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for PDFInterpretingParams ** -->
     <xs:element name="PDFInterpretingParams">
         <xs:complexType>
             <xs:sequence>
@@ -2380,7 +2317,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for PerforatingParams ** -->
     <xs:element name="PerforatingParams" substitutionGroup="SpecificResource" type="PerforatingParams"/>
     <xs:complexType name="PerforatingParams">
         <xs:complexContent>
@@ -2392,7 +2328,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for AuditStatus ** -->
     <xs:element name="AuditStatus">
         <xs:complexType>
             <xs:complexContent>
@@ -2441,7 +2376,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ProofItem ** -->
     <xs:element name="ProofItem" type="ProofItem"/>
     <xs:complexType name="ProofItem">
         <xs:attribute name="Amount" type="integer" use="optional"/>
@@ -2462,7 +2396,6 @@
         <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
 
-    <!-- ** Complex type definition for RefAnchor ** -->
     <xs:element name="RefAnchor">
         <xs:complexType>
             <xs:attribute name="Anchor" type="Anchor" use="required"/>
@@ -2479,7 +2412,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for RegisterRibbon ** -->
     <xs:element name="RegisterRibbon">
         <xs:complexType>
             <xs:attribute name="LengthOverall" type="float" use="optional"/>
@@ -2492,7 +2424,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ResourceAudit ** -->
     <xs:element name="AuditResource">
         <xs:complexType>
             <xs:complexContent>
@@ -2506,7 +2437,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ScavengerArea ** -->
     <xs:element name="ScavengerArea" substitutionGroup="SpecificResource" type="ScavengerArea"/>
     <xs:complexType name="ScavengerArea">
         <xs:complexContent>
@@ -2518,7 +2448,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ShapeCuttingParams ** -->
     <xs:element name="ShapeCuttingParams" substitutionGroup="SpecificResource" type="ShapeCuttingParams"/>
     <xs:complexType name="ShapeCuttingParams">
         <xs:complexContent>
@@ -2542,7 +2471,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ShrinkingParams ** -->
     <xs:element name="ShrinkingParams" substitutionGroup="SpecificResource" type="ShrinkingParams"/>
     <xs:complexType name="ShrinkingParams">
         <xs:complexContent>
@@ -2560,7 +2488,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for SoftCoverBinding ** -->
     <xs:element name="SoftCoverBinding">
         <xs:complexType>
             <xs:attribute name="BlockThreadSewing" type="boolean" use="optional"/>
@@ -2598,7 +2525,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for SpinePreparationParams ** -->
     <xs:element name="SpinePreparationParams" substitutionGroup="SpecificResource" type="SpinePreparationParams"/>
     <xs:complexType name="SpinePreparationParams">
         <xs:complexContent>
@@ -2613,7 +2539,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for SpineTapingParams ** -->
     <xs:element name="SpineTapingParams" substitutionGroup="SpecificResource" type="SpineTapingParams"/>
     <xs:complexType name="SpineTapingParams">
         <xs:complexContent>
@@ -2629,7 +2554,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for StackingParams ** -->
     <xs:element name="StackingParams" substitutionGroup="SpecificResource" type="StackingParams"/>
     <xs:complexType name="StackingParams">
         <xs:complexContent>
@@ -2665,7 +2589,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for StrappingParams ** -->
     <xs:element name="StrappingParams" substitutionGroup="SpecificResource" type="StrappingParams"/>
     <xs:complexType name="StrappingParams">
         <xs:complexContent>
@@ -2685,7 +2608,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Tabs ** -->
     <xs:element name="Tabs">
         <xs:complexType>
             <xs:attribute name="TabBrand" type="string" use="optional"/>
@@ -2701,7 +2623,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ThreadSealingParams ** -->
     <xs:element name="ThreadSealingParams" substitutionGroup="SpecificResource" type="ThreadSealingParams"/>
     <xs:complexType name="ThreadSealingParams">
         <xs:complexContent>
@@ -2715,7 +2636,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Tool ** -->
     <xs:element name="Tool" substitutionGroup="SpecificResource" type="Tool"/>
     <xs:complexType name="Tool">
         <xs:complexContent>
@@ -2728,7 +2648,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for VarnishingParams ** -->
     <xs:element name="VarnishingParams" substitutionGroup="SpecificResource" type="VarnishingParams"/>
     <xs:complexType name="VarnishingParams">
         <xs:complexContent>
@@ -2763,7 +2682,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for VerificationParams ** -->
     <xs:element name="VerificationParams" substitutionGroup="SpecificResource" type="VerificationParams"/>
     <xs:complexType name="VerificationParams">
         <xs:complexContent>
@@ -2773,7 +2691,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for WrappingParams ** -->
     <xs:element name="WrappingParams" substitutionGroup="SpecificResource" type="WrappingParams"/>
     <xs:complexType name="WrappingParams">
         <xs:complexContent>
@@ -2791,7 +2708,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Module ** -->
     <xs:element name="Module">
         <xs:complexType>
             <xs:sequence>
@@ -2808,7 +2724,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for BindingIntent ** -->
     <xs:element name="BindingIntent" substitutionGroup="ProductIntent" type="BindingIntent"/>
     <xs:complexType name="BindingIntent">
         <xs:complexContent>
@@ -2844,17 +2759,17 @@
                             <xs:enumeration value="AdhesiveNote"/>
                             <xs:enumeration value="ChannelBinding"/>
                             <xs:enumeration value="CoilBinding"/>
+                            <xs:enumeration value="CombBinding"/>
                             <xs:enumeration value="CornerStitch"/>
                             <xs:enumeration value="EdgeGluing"/>
                             <xs:enumeration value="HardCover"/>
                             <xs:enumeration value="LooseBinding"/>
                             <xs:enumeration value="None"/>
-                            <xs:enumeration value="PlasticComb"/>
-                            <xs:enumeration value="Ring"/>
+                            <xs:enumeration value="RingBinding"/>
                             <xs:enumeration value="SaddleStitch"/>
                             <xs:enumeration value="SideStitch"/>
                             <xs:enumeration value="SoftCover"/>
-                            <xs:enumeration value="StripBind"/>
+                            <xs:enumeration value="StripBinding"/>
                             <xs:enumeration value="Tape"/>
                             <xs:enumeration value="WireComb"/>
                         </xs:restriction>
@@ -2876,7 +2791,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type defintion for LooseBinding ** -->
     <xs:element name="LooseBinding">
         <xs:complexType>
             <xs:sequence>
@@ -2933,7 +2847,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for LooseBindingParams ** -->
     <xs:element name="LooseBindingParams" substitutionGroup="SpecificResource" type="LooseBindingParams"/>
     <xs:complexType name="LooseBindingParams">
         <xs:complexContent>
@@ -2962,7 +2875,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ColorIntent ** -->
     <xs:element name="ColorIntent" substitutionGroup="ProductIntent" type="ColorIntent"/>
     <xs:complexType name="ColorIntent">
         <xs:complexContent>
@@ -2974,7 +2886,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ProductionIntent ** -->
     <xs:element name="ProductionIntent" substitutionGroup="ProductIntent" type="ProductionIntent"/>
     <xs:complexType name="ProductionIntent">
         <xs:complexContent>
@@ -2994,7 +2905,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for EmbossingIntent ** -->
     <xs:element name="EmbossingIntent" substitutionGroup="ProductIntent" type="EmbossingIntent"/>
     <xs:complexType name="EmbossingIntent">
         <xs:complexContent>
@@ -3006,7 +2916,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for FoldingIntent ** -->
     <xs:element name="FoldingIntent" substitutionGroup="ProductIntent" type="FoldingIntent"/>
     <xs:complexType name="FoldingIntent">
         <xs:complexContent>
@@ -3023,7 +2932,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for HoleMakingIntent ** -->
     <xs:element name="HoleMakingIntent" substitutionGroup="ProductIntent" type="HoleMakingIntent"/>
     <xs:complexType name="HoleMakingIntent">
         <xs:complexContent>
@@ -3035,7 +2943,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for AssemblingIntent ** -->
     <xs:element name="AssemblingIntent" substitutionGroup="ProductIntent" type="AssemblingIntent"/>
     <xs:complexType name="AssemblingIntent">
         <xs:complexContent>
@@ -3095,7 +3002,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for IntentResource ** -->
     <xs:element name="IntentResource" substitutionGroup="ProductIntent" type="IntentResource"/>
     <xs:complexType name="IntentResource">
         <xs:complexContent>
@@ -3103,7 +3009,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for LaminatingIntent ** -->
     <xs:element name="LaminatingIntent" substitutionGroup="ProductIntent" type="LaminatingIntent"/>
     <xs:complexType name="LaminatingIntent">
         <xs:complexContent>
@@ -3123,7 +3028,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for LayoutIntent ** -->
     <xs:element name="LayoutIntent" substitutionGroup="ProductIntent" type="LayoutIntent"/>
     <xs:complexType name="LayoutIntent">
         <xs:complexContent>
@@ -3150,7 +3054,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for MediaIntent ** -->
     <xs:element name="MediaIntent" substitutionGroup="ProductIntent" type="MediaIntent"/>
     <xs:complexType name="MediaIntent">
         <xs:complexContent>
@@ -3170,7 +3073,7 @@
                 <xs:attribute name="MediaColor" type="NamedColor" use="optional"/>
                 <xs:attribute name="MediaColorDetails" type="string" use="optional"/>
                 <xs:attribute name="MediaQuality" type="string" use="optional"/>
-                <xs:attribute name="MediaType" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="MediaType" type="MediaType" use="required"/>
                 <xs:attribute name="MediaTypeDetails" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="NamedWeight" type="string" use="optional"/>
                 <xs:attribute name="Opacity" type="EnumOpacity" use="optional"/>
@@ -3192,7 +3095,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for VariableIntent ** -->
     <xs:element name="VariableIntent" substitutionGroup="ProductIntent" type="VariableIntent"/>
     <xs:complexType name="VariableIntent">
         <xs:complexContent>
@@ -3228,7 +3130,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ContentCheckIntent ** -->
     <xs:element name="ContentCheckIntent" substitutionGroup="ProductIntent" type="ContentCheckIntent"/>
     <xs:complexType name="ContentCheckIntent">
         <xs:complexContent>
@@ -3256,7 +3157,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ShapeCut ** -->
     <xs:element name="ShapeCut">
         <xs:complexType>
             <xs:attribute name="CutBox" type="rectangle" use="optional"/>
@@ -3294,7 +3194,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ShapeCuttingIntent ** -->
     <xs:element name="ShapeCuttingIntent" substitutionGroup="ProductIntent" type="ShapeCuttingIntent"/>
     <xs:complexType name="ShapeCuttingIntent">
         <xs:complexContent>
@@ -3306,7 +3205,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for SizeIntent ** -->
     <xs:element name="SizeIntent" substitutionGroup="ProductIntent" type="SizeIntent"/>
     <xs:complexType name="SizeIntent">
         <xs:complexContent>
@@ -3314,7 +3212,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Address ** -->
     <xs:element name="Address">
         <xs:complexType>
             <xs:sequence>
@@ -3332,7 +3229,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for AdvancedParams ** -->
     <xs:element name="AdvancedParams">
         <xs:complexType>
             <xs:attribute name="AllowPSXObjects" type="boolean" use="optional"/>
@@ -3371,7 +3267,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ApprovalDetails ** -->
     <xs:element name="ApprovalDetails" substitutionGroup="SpecificResource" type="ApprovalDetails"/>
     <xs:complexType name="ApprovalDetails">
         <xs:complexContent>
@@ -3395,7 +3290,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ApprovalParams ** -->
     <xs:element name="ApprovalParams" substitutionGroup="SpecificResource" type="ApprovalParams"/>
     <xs:complexType name="ApprovalParams">
         <xs:complexContent>
@@ -3407,7 +3301,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ApprovalPerson ** -->
     <xs:element name="ApprovalPerson">
         <xs:complexType>
             <xs:attribute name="ApprovalRole" use="optional">
@@ -3425,7 +3318,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Assembly ** -->
     <xs:element name="Assembly" substitutionGroup="SpecificResource" type="Assembly"/>
     <xs:complexType name="Assembly">
         <xs:complexContent>
@@ -3448,7 +3340,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for AssemblySection ** -->
     <xs:element name="AssemblySection">
         <xs:complexType>
             <xs:sequence>
@@ -3459,7 +3350,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for AutomatedOverPrintParams ** -->
     <xs:element name="AutomatedOverPrintParams">
         <xs:complexType>
             <xs:attribute name="KnockOutCMYKWhite" type="boolean" use="optional"/>
@@ -3472,7 +3362,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for BarcodeCompParams ** -->
     <xs:element name="BarcodeCompParams" substitutionGroup="SpecificResource" type="BarcodeCompParams"/>
     <xs:complexType name="BarcodeCompParams">
         <xs:complexContent>
@@ -3490,7 +3379,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for BarcodeDetails ** -->
     <xs:element name="BarcodeDetails">
         <xs:complexType>
             <xs:attribute name="BarcodeVersion" type="NMTOKEN" use="optional"/>
@@ -3501,7 +3389,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for BarcodeProductionParams ** -->
     <xs:element name="BarcodeProductionParams">
         <xs:complexType>
             <xs:sequence>
@@ -3512,7 +3399,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for BarcodeReproParams ** -->
     <xs:element name="BarcodeReproParams" substitutionGroup="SpecificResource" type="BarcodeReproParams"/>
     <xs:complexType name="BarcodeReproParams">
         <xs:complexContent>
@@ -3547,7 +3433,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for BendingParams ** -->
     <xs:element name="BendingParams" substitutionGroup="SpecificResource" type="BendingParams"/>
     <xs:complexType name="BendingParams">
         <xs:complexContent>
@@ -3559,7 +3444,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for BinderySignature ** -->
     <xs:element name="BinderySignature" substitutionGroup="SpecificResource" type="BinderySignature"/>
     <xs:complexType name="BinderySignature">
         <xs:complexContent>
@@ -3616,7 +3500,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for BindingQualityParams ** -->
     <xs:element name="BindingQualityParams">
         <xs:complexType>
             <xs:attribute name="FlexValue" type="float" use="optional"/>
@@ -3625,7 +3508,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for BoxFoldAction ** -->
     <xs:element name="BoxFoldAction">
         <xs:complexType>
             <xs:attribute name="FoldIndex" type="XYPair" use="required"/>
@@ -3654,7 +3536,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for BoxFoldingParams ** -->
     <xs:element name="BoxFoldingParams" substitutionGroup="SpecificResource" type="BoxFoldingParams"/>
     <xs:complexType name="BoxFoldingParams">
         <xs:complexContent>
@@ -3688,7 +3569,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ByteMap ** -->
     <xs:element name="ByteMap">
         <xs:complexType>
             <xs:sequence>
@@ -3714,7 +3594,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for CCITTFaxParams ** -->
     <xs:element name="CCITTFaxParams">
         <xs:complexType>
             <xs:attribute name="EncodedByteAlign" type="boolean" use="optional"/>
@@ -3726,7 +3605,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for CIELABMeasuringField ** -->
     <xs:element name="CIELABMeasuringField">
         <xs:complexType>
             <xs:attribute name="Center" type="XYPair" use="required"/>
@@ -3740,7 +3618,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for CollatingItem ** -->
     <xs:element name="CollatingItem">
         <xs:complexType>
             <xs:attribute name="Amount" type="integer" use="optional"/>
@@ -3761,7 +3638,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Color ** -->
     <xs:element name="Color" substitutionGroup="SpecificResource" type="Color"/>
     <xs:complexType name="Color">
         <xs:complexContent>
@@ -3800,7 +3676,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ColorantAlias ** -->
     <xs:element name="ColorantAlias">
         <xs:complexType>
             <xs:attribute name="ColorantName" type="string" use="required"/>
@@ -3810,7 +3685,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ColorantControl ** -->
     <xs:element name="ColorantControl" substitutionGroup="SpecificResource" type="ColorantControl"/>
     <xs:complexType name="ColorantControl">
         <xs:complexContent>
@@ -3847,7 +3721,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ColorControlStrip ** -->
     <xs:element name="ColorControlStrip">
         <xs:complexType>
             <xs:sequence>
@@ -3863,7 +3736,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ComChannel ** -->
     <xs:element name="ComChannel">
         <xs:complexType>
             <xs:attribute name="ChannelType" type="NMTOKEN" use="required"/>
@@ -3873,7 +3745,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Company ** -->
     <xs:element name="Company">
         <xs:complexType>
             <xs:sequence>
@@ -3885,7 +3756,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Component ** -->
     <xs:element name="Component" substitutionGroup="SpecificResource" type="Component"/>
     <xs:complexType name="Component">
         <xs:complexContent>
@@ -3911,7 +3781,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Contact ** -->
     <xs:element name="Contact" substitutionGroup="SpecificResource" type="Contact"/>
     <xs:complexType name="Contact">
         <xs:complexContent>
@@ -3929,7 +3798,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Content ** -->
     <xs:element name="Content" substitutionGroup="SpecificResource" type="Content"/>
     <xs:complexType name="Content">
         <xs:complexContent>
@@ -3958,7 +3826,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ContentMetaData ** -->
     <xs:element name="ContentMetadata">
         <xs:complexType>
             <xs:sequence>
@@ -3972,14 +3839,12 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ContentObject ** -->
     <xs:element name="ContentObject">
         <xs:complexType>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ConventionalPrintingParams ** -->
     <xs:element name="ConventionalPrintingParams" substitutionGroup="SpecificResource"
                 type="ConventionalPrintingParams"/>
     <xs:complexType name="ConventionalPrintingParams">
@@ -4004,7 +3869,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ConvertingConfig ** -->
     <xs:element name="ConvertingConfig">
         <xs:complexType>
             <xs:sequence>
@@ -4023,7 +3887,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for CutBlock ** -->
     <xs:element name="CutBlock">
         <xs:complexType>
             <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
@@ -4034,7 +3897,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for DCTParams ** -->
     <xs:element name="DCTParams">
         <xs:complexType>
             <xs:attribute name="ColorTransform" use="optional">
@@ -4055,7 +3917,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for DeliveryParams ** -->
     <xs:element name="DeliveryParams" substitutionGroup="SpecificResource" type="DeliveryParams"/>
     <xs:complexType name="DeliveryParams">
         <xs:complexContent>
@@ -4094,7 +3955,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for DensityMeasuringField ** -->
     <xs:element name="DensityMeasuringField">
         <xs:complexType>
             <xs:attribute name="Center" type="XYPair" use="required"/>
@@ -4111,7 +3971,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for DeviceNColor ** -->
     <xs:element name="DeviceNColor">
         <xs:complexType>
             <xs:attribute name="ColorList" type="DoubleList" use="required"/>
@@ -4120,7 +3979,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for DeviceNSpace ** -->
     <xs:element name="DeviceNSpace">
         <xs:complexType>
             <xs:attribute name="Name" type="NMTOKEN" use="required"/>
@@ -4129,7 +3987,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for DieLayout ** -->
     <xs:element name="DieLayout" substitutionGroup="SpecificResource" type="DieLayout"/>
     <xs:complexType name="DieLayout">
         <xs:complexContent>
@@ -4165,7 +4022,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for DieLayoutProductionParams ** -->
     <xs:element name="DieLayoutProductionParams" substitutionGroup="SpecificResource" type="DieLayoutProductionParams"/>
     <xs:complexType name="DieLayoutProductionParams">
         <xs:complexContent>
@@ -4180,24 +4036,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for DigitalMedia ** -->
-    <xs:element name="DigitalMedia" substitutionGroup="SpecificResource" type="DigitalMedia"/>
-    <xs:complexType name="DigitalMedia">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="FileSpec"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
-                </xs:sequence>
-                <xs:attribute name="Capacity" type="integer" use="optional"/>
-                <xs:attribute name="MediaLabel" type="string" use="optional"/>
-                <xs:attribute name="MediaType" type="NMTOKEN" use="required"/>
-                <xs:attribute name="MediaTypeDetails" type="string" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for DigitalPrintingParams ** -->
     <xs:element name="DigitalPrintingParams" substitutionGroup="SpecificResource" type="DigitalPrintingParams"/>
     <xs:complexType name="DigitalPrintingParams">
         <xs:complexContent>
@@ -4236,7 +4074,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Disjointing ** -->
     <xs:element name="Disjointing">
         <xs:complexType>
             <xs:sequence>
@@ -4258,7 +4095,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Disposition ** -->
     <xs:element name="Disposition">
         <xs:complexType>
             <xs:attribute name="DispositionAction" use="optional">
@@ -4277,7 +4113,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for DropItem ** -->
     <xs:element name="DropItem">
         <xs:complexType>
             <xs:attribute name="Amount" type="integer" use="required"/>
@@ -4290,7 +4125,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ExposedMedia ** -->
     <xs:element name="ExposedMedia" substitutionGroup="SpecificResource" type="ExposedMedia"/>
     <xs:complexType name="ExposedMedia">
         <xs:complexContent>
@@ -4314,7 +4148,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Expr ** -->
     <xs:element name="Expr">
         <xs:complexType>
             <xs:attribute name="Name" type="NMTOKEN" use="required"/>
@@ -4323,7 +4156,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ExtraValues ** -->
     <xs:element name="ExtraValues">
         <xs:complexType>
             <xs:attribute name="Usage" type="NMTOKEN" use="required"/>
@@ -4332,7 +4164,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Feeder ** -->
     <xs:element name="Feeder">
         <xs:complexType>
             <xs:sequence>
@@ -4367,7 +4198,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for FeederQualityParams ** -->
     <xs:element name="FeederQualityParams">
         <xs:complexType>
             <xs:attribute name="BadFeedQuality" type="EnumFeedQuality" use="optional"/>
@@ -4380,7 +4210,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for FeedingParams ** -->
     <xs:element name="FeedingParams" substitutionGroup="SpecificResource" type="FeedingParams"/>
     <xs:complexType name="FeedingParams">
         <xs:complexContent>
@@ -4393,7 +4222,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for FileSpec ** -->
     <xs:element name="FileSpec">
         <xs:complexType>
             <xs:sequence>
@@ -4427,7 +4255,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for FlateParams ** -->
     <xs:element name="FlateParams">
         <xs:complexType>
             <xs:attribute name="Predictor" type="integer" use="optional"/>
@@ -4435,7 +4262,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for FolderProduction ** -->
     <xs:element name="FolderProduction">
         <xs:complexType>
             <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
@@ -4451,7 +4277,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for FontPolicy ** -->
     <xs:element name="FontPolicy" substitutionGroup="SpecificResource" type="FontPolicy"/>
     <xs:complexType name="FontPolicy">
         <xs:complexContent>
@@ -4463,7 +4288,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for GeneralID ** -->
     <xs:element name="GeneralID">
         <xs:complexType>
             <xs:attribute name="DataType" use="optional">
@@ -4486,7 +4310,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for IdentificationField ** -->
     <xs:element name="IdentificationField">
         <xs:complexType>
             <xs:sequence>
@@ -4526,7 +4349,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ImageCompressionParams ** -->
     <xs:element name="ImageCompressionParams" substitutionGroup="SpecificResource" type="ImageCompressionParams"/>
     <xs:complexType name="ImageCompressionParams">
         <xs:complexContent>
@@ -4558,7 +4380,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ImageSetterParams ** -->
     <xs:element name="ImageSetterParams" substitutionGroup="SpecificResource" type="ImageSetterParams"/>
     <xs:complexType name="ImageSetterParams">
         <xs:complexContent>
@@ -4575,7 +4396,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for InsertSheet ** -->
     <xs:element name="InsertSheet">
         <xs:complexType>
             <xs:sequence>
@@ -4610,7 +4430,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for JBIG2Params ** -->
     <xs:element name="JBIG2Params">
         <xs:complexType>
             <xs:attribute name="JBIG2Lossless" type="boolean" use="optional"/>
@@ -4618,7 +4437,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for JPEG2000Params ** -->
     <xs:element name="JPEG2000Params">
         <xs:complexType>
             <xs:attribute name="CodeBlockSize" type="integer" use="optional"/>
@@ -4641,7 +4459,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Layout ** -->
     <xs:element name="Layout" substitutionGroup="SpecificResource" type="Layout"/>
     <xs:complexType name="Layout">
         <xs:complexContent>
@@ -4704,7 +4521,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for LayoutElementProductionParams ** -->
     <xs:element name="LayoutElementProductionParams" substitutionGroup="SpecificResource"
                 type="LayoutElementProductionParams"/>
     <xs:complexType name="LayoutElementProductionParams">
@@ -4719,7 +4535,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for LayoutShift ** -->
     <xs:element name="LayoutShift" substitutionGroup="SpecificResource" type="LayoutShift"/>
     <xs:complexType name="LayoutShift">
         <xs:complexContent>
@@ -4731,7 +4546,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for LZWParams ** -->
     <xs:element name="LZWParams">
         <xs:complexType>
             <xs:attribute name="EarlyChange" type="integer" use="optional"/>
@@ -4740,7 +4554,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ManualLaborParams ** -->
     <xs:element name="ManualLaborParams" substitutionGroup="SpecificResource" type="ManualLaborParams"/>
     <xs:complexType name="ManualLaborParams">
         <xs:complexContent>
@@ -4750,7 +4563,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Media ** -->
     <xs:element name="Media" substitutionGroup="SpecificResource" type="Media"/>
     <xs:complexType name="Media">
         <xs:complexContent>
@@ -4796,7 +4608,7 @@
                 <xs:attribute name="MediaColorNameDetails" type="string" use="optional"/>
                 <xs:attribute name="MediaQuality" type="string" use="optional"/>
                 <xs:attribute name="MediaSetCount" type="integer" use="optional"/>
-                <xs:attribute name="MediaType" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="MediaType" type="MediaType" use="required"/>
                 <xs:attribute name="MediaTypeDetails" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="MediaUnit" use="optional">
                     <xs:simpleType>
@@ -4841,7 +4653,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for MediaLayers ** -->
     <xs:element name="MediaLayers">
         <xs:complexType>
             <xs:choice minOccurs="0" maxOccurs="unbounded">
@@ -4852,7 +4663,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for MediaSource ** -->
     <xs:element name="MediaSource" substitutionGroup="SpecificResource" type="MediaSource"/>
     <xs:complexType name="MediaSource">
         <xs:complexContent>
@@ -4863,7 +4673,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for MetadataMap ** -->
     <xs:element name="MetadataMap">
         <xs:complexType>
             <xs:sequence>
@@ -4876,7 +4685,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for MiscConsumable ** -->
     <xs:element name="MiscConsumable" substitutionGroup="SpecificResource" type="MiscConsumable"/>
     <xs:complexType name="MiscConsumable">
         <xs:complexContent>
@@ -4892,7 +4700,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for MISDetails ** -->
     <xs:element name="MISDetails">
         <xs:complexType>
             <xs:attribute name="Complexity" type="float" use="optional"/>
@@ -4918,7 +4725,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for NotificationFilter ** -->
     <xs:element name="NotificationFilter">
         <xs:complexType>
             <xs:attribute name="Classes" use="optional">
@@ -4941,7 +4747,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ObjectModel ** -->
     <xs:element name="ObjectModel">
         <xs:complexType>
             <xs:sequence>
@@ -4952,7 +4757,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ObjectResolution ** -->
     <xs:element name="ObjectResolution">
         <xs:complexType>
             <xs:attribute name="AntiAliasing" type="NMTOKEN" use="optional"/>
@@ -4962,7 +4766,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for OCGControl ** -->
     <xs:element name="OCGControl">
         <xs:complexType>
             <xs:attribute name="IncludeOCG" type="boolean" use="required"/>
@@ -4973,7 +4776,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for PackingParams ** -->
     <xs:element name="PackingParams" substitutionGroup="SpecificResource" type="PackingParams"/>
     <xs:complexType name="PackingParams">
         <xs:complexContent>
@@ -4981,7 +4783,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for PDFXParams ** -->
     <xs:element name="PDFXParams">
         <xs:complexType>
             <xs:sequence>
@@ -5006,7 +4807,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for PDLCreationParams ** -->
     <xs:element name="PDLCreationParams" substitutionGroup="SpecificResource" type="PDLCreationParams"/>
     <xs:complexType name="PDLCreationParams">
         <xs:complexContent>
@@ -5031,7 +4831,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Perforate ** -->
     <xs:element name="Perforate">
         <xs:complexType>
             <xs:attribute name="Depth" type="float" use="optional"/>
@@ -5043,7 +4842,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Person ** -->
     <xs:element name="Person">
         <xs:complexType>
             <xs:attribute name="AdditionalNames" type="string" use="optional"/>
@@ -5059,7 +4857,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Position ** -->
     <xs:element name="Position">
         <xs:complexType>
             <xs:attribute name="AbsoluteBox" type="rectangle" use="optional"/>
@@ -5079,7 +4876,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for PositionObj ** -->
     <xs:element name="PositionObj">
         <xs:complexType>
             <xs:sequence>
@@ -5097,7 +4893,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for PreflightParams ** -->
     <xs:element name="PreflightParams" substitutionGroup="SpecificResource" type="PreflightParams"/>
     <xs:complexType name="PreflightParams">
         <xs:complexContent>
@@ -5110,7 +4905,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for PreflightReport ** -->
     <xs:element name="PreflightTest">
         <xs:complexType>
             <xs:sequence>
@@ -5125,7 +4919,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for PreflightReport ** -->
     <xs:element name="PreflightReport" substitutionGroup="SpecificResource" type="PreflightReport"/>
     <xs:complexType name="PreflightReport">
         <xs:complexContent>
@@ -5140,7 +4933,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for PreflightCheck ** -->
     <xs:element name="PreflightCheck">
         <xs:complexType>
             <xs:sequence>
@@ -5157,7 +4949,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Preview ** -->
     <xs:element name="Preview" substitutionGroup="SpecificResource" type="Preview"/>
     <xs:complexType name="Preview">
         <xs:complexContent>
@@ -5191,7 +4982,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for QualityControlParams ** -->
     <xs:element name="QualityControlParams" substitutionGroup="SpecificResource" type="QualityControlParams"/>
     <xs:complexType name="QualityControlParams">
         <xs:complexContent>
@@ -5206,7 +4996,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for QualityControlResult ** -->
     <xs:element name="QualityControlResult" substitutionGroup="SpecificResource" type="QualityControlResult"/>
     <xs:complexType name="QualityControlResult">
         <xs:complexContent>
@@ -5231,7 +5020,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ReferenceXObjParams ** -->
     <xs:element name="ReferenceXObjParams">
         <xs:complexType>
             <xs:sequence>
@@ -5242,7 +5030,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for RegisterMark ** -->
     <xs:element name="RegisterMark" substitutionGroup="SpecificResource" type="RegisterMark"/>
     <xs:complexType name="RegisterMark">
         <xs:complexContent>
@@ -5268,7 +5055,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for RepeatDesc ** -->
     <xs:element name="RepeatDesc">
         <xs:complexType>
             <xs:sequence>
@@ -5295,7 +5081,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for RuleLength ** -->
     <xs:element name="RuleLength">
         <xs:complexType>
             <xs:attribute name="DDESCutType" type="integer" use="required"/>
@@ -5304,7 +5089,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for RunList ** -->
     <xs:element name="RunList" substitutionGroup="SpecificResource" type="RunList"/>
     <xs:complexType name="RunList">
         <xs:complexContent>
@@ -5342,7 +5126,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ScreenSelector ** -->
     <xs:element name="ScreenSelector">
         <xs:complexType>
             <xs:attribute name="Angle" type="float" use="optional"/>
@@ -5370,7 +5153,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for SeparationControlParams ** -->
     <xs:element name="SeparationControlParams" substitutionGroup="SpecificResource" type="SeparationControlParams"/>
     <xs:complexType name="SeparationControlParams">
         <xs:complexContent>
@@ -5382,7 +5164,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ShapeDef ** -->
     <xs:element name="ShapeDef" substitutionGroup="SpecificResource" type="ShapeDef"/>
     <xs:complexType name="ShapeDef">
         <xs:complexContent>
@@ -5405,7 +5186,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ShapeDefProductionParams ** -->
     <xs:element name="ShapeDefProductionParams" substitutionGroup="SpecificResource" type="ShapeDefProductionParams"/>
     <xs:complexType name="ShapeDefProductionParams">
         <xs:complexContent>
@@ -5418,7 +5198,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ShapeTemplate ** -->
     <xs:element name="ShapeTemplate">
         <xs:complexType>
             <xs:sequence>
@@ -5481,7 +5260,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ShiftPoint ** -->
     <xs:element name="ShiftPoint">
         <xs:complexType>
             <xs:attribute name="CTM" type="matrix" use="required"/>
@@ -5490,7 +5268,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for SignatureCell ** -->
     <xs:element name="SignatureCell">
         <xs:complexType>
             <xs:attribute name="BackOverfold" type="float" use="optional"/>
@@ -5540,7 +5317,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Station ** -->
     <xs:element name="Station">
         <xs:complexType>
             <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
@@ -5550,7 +5326,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for StripMark ** -->
     <xs:element name="StripMark">
         <xs:complexType>
             <xs:sequence>
@@ -5578,20 +5353,25 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for TabDimensions ** -->
     <xs:element name="TabDimensions">
         <xs:complexType>
             <xs:attribute name="TabEdge" type="Edge" use="optional"/>
             <xs:attribute name="TabExtensionDistance" type="float" use="optional"/>
             <xs:attribute name="TabOffset" type="float" use="optional"/>
-            <xs:attribute name="TabSetCollationOrder" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="TabSetCollationOrder" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Forward"/>
+                        <xs:enumeration value="Reverse"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="TabsPerBank" type="integer" use="optional"/>
             <xs:attribute name="TabWidth" type="float" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ThinPDFParams ** -->
     <xs:element name="ThinPDFParams">
         <xs:complexType>
             <xs:attribute name="FilePerPage" type="boolean" use="optional"/>
@@ -5602,7 +5382,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for TIFFEmbeddedFile ** -->
     <xs:element name="TIFFEmbeddedFile">
         <xs:complexType>
             <xs:sequence>
@@ -5614,7 +5393,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for TIFFFormatParams ** -->
     <xs:element name="TIFFFormatParams">
         <xs:complexType>
             <xs:sequence>
@@ -5647,7 +5425,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for TIFFtag ** -->
     <xs:element name="TIFFtag">
         <xs:complexType>
             <xs:attribute name="BinaryValue" type="hexBinary" use="optional"/>
@@ -5660,7 +5437,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for TransferCurve ** -->
     <xs:element name="TransferCurve" substitutionGroup="SpecificResource" type="TransferCurve"/>
     <xs:complexType name="TransferCurve">
         <xs:complexContent>
@@ -5671,7 +5447,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for UsageCounter ** -->
     <xs:element name="UsageCounter" substitutionGroup="SpecificResource" type="UsageCounter"/>
     <xs:complexType name="UsageCounter">
         <xs:complexContent>
@@ -5690,7 +5465,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for BundlingParams ** -->
     <xs:element name="BundlingParams" substitutionGroup="SpecificResource" type="BundlingParams"/>
     <xs:complexType name="BundlingParams">
         <xs:complexContent>
@@ -5701,7 +5475,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ChannelBindingDetails ** -->
     <xs:element name="ChannelBindingDetails">
         <xs:complexType>
             <xs:attribute name="ClampD" type="float" use="optional"/>
@@ -5711,7 +5484,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Crease ** -->
     <xs:element name="Crease">
         <xs:complexType>
             <xs:attribute name="Depth" type="float" use="optional"/>
@@ -5722,7 +5494,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Cut ** -->
     <xs:element name="Cut">
         <xs:complexType>
             <xs:attribute name="CutWidth" type="float" use="optional"/>
@@ -5733,7 +5504,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for CutMark ** -->
     <xs:element name="CutMark">
         <xs:complexType>
             <xs:attribute name="MarkType" use="required">
@@ -5756,7 +5526,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ColorIntent ** -->
     <xs:element name="SurfaceColor" type="SurfaceColor"/>
     <xs:complexType name="SurfaceColor">
         <xs:attribute name="Coatings" type="NMTOKENS" use="optional"/>
@@ -5767,7 +5536,6 @@
         <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Fold ** -->
     <xs:element name="Fold">
         <xs:complexType>
             <xs:attribute name="From" use="required">
@@ -5791,7 +5559,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for FoldingParams ** -->
     <xs:element name="FoldingParams" substitutionGroup="SpecificResource" type="FoldingParams"/>
     <xs:complexType name="FoldingParams">
         <xs:complexContent>
@@ -5810,7 +5577,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for GlueLine ** -->
     <xs:element name="Glue">
         <xs:complexType>
             <xs:attribute name="AreaGlue" type="boolean" use="optional"/>
@@ -5845,7 +5611,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for HolePatter ** -->
     <xs:element name="HolePattern">
         <xs:complexType>
             <xs:attribute name="Center" type="XYPair" use="required"/>
@@ -5925,7 +5690,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for HoleMakingParams ** -->
     <xs:element name="HoleMakingParams" substitutionGroup="SpecificResource" type="HoleMakingParams"/>
     <xs:complexType name="HoleMakingParams">
         <xs:complexContent>
@@ -5937,7 +5701,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for CombBindingDetails ** -->
     <xs:element name="CombBindingDetails">
         <xs:complexType>
             <xs:attribute name="CombShape" type="NMTOKEN" use="optional"/>
@@ -5947,7 +5710,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for RingBindingDetails ** -->
     <xs:element name="RingBindingDetails">
         <xs:complexType>
             <xs:attribute name="Diameter" type="float" use="optional"/>
@@ -5967,7 +5729,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for SaddleStitching ** -->
     <xs:element name="SaddleStitching">
         <xs:complexType>
             <xs:attribute name="StitchNumber" type="integer" use="optional"/>
@@ -5975,7 +5736,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Score ** -->
     <xs:element name="Score">
         <xs:complexType>
             <xs:attribute name="Offset" type="float" use="required"/>
@@ -5991,7 +5751,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for SideStitching ** -->
     <xs:element name="SideStitching">
         <xs:complexType>
             <xs:attribute name="StitchNumber" type="integer" use="optional"/>
@@ -5999,7 +5758,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for StitchingParams ** -->
     <xs:element name="StitchingParams" substitutionGroup="SpecificResource" type="StitchingParams"/>
     <xs:complexType name="StitchingParams">
         <xs:complexContent>
@@ -6056,7 +5814,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ThreadSewing ** -->
     <xs:element name="ThreadSewing">
         <xs:complexType>
             <xs:attribute name="Sealing" type="boolean" use="optional"/>
@@ -6064,7 +5821,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ThreadSewingParams ** -->
     <xs:element name="ThreadSewingParams" substitutionGroup="SpecificResource" type="ThreadSewingParams"/>
     <xs:complexType name="ThreadSewingParams">
         <xs:complexContent>
@@ -6093,7 +5849,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for TrimmingParams ** -->
     <xs:element name="TrimmingParams" substitutionGroup="SpecificResource" type="TrimmingParams"/>
     <xs:complexType name="TrimmingParams">
         <xs:complexContent>
@@ -6115,7 +5870,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for WebInlineFinishingParams ** -->
     <xs:element name="WebInlineFinishingParams" substitutionGroup="SpecificResource" type="WebInlineFinishingParams"/>
     <xs:complexType name="WebInlineFinishingParams">
         <xs:complexContent>
@@ -6128,7 +5882,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ColorCorrectionOp ** -->
     <xs:element name="ColorCorrectionOp">
         <xs:complexType>
             <xs:attribute name="AdjustContrast" type="float" use="optional"/>
@@ -6144,7 +5897,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ColorCorrectionParams ** -->
     <xs:element name="ColorCorrectionParams" substitutionGroup="SpecificResource" type="ColorCorrectionParams"/>
     <xs:complexType name="ColorCorrectionParams">
         <xs:complexContent>
@@ -6157,7 +5909,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ColorSpaceConversionOp ** -->
     <xs:element name="ColorSpaceConversionOp">
         <xs:complexType>
             <xs:sequence>
@@ -6215,7 +5966,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ColorSpaceConversionParams ** -->
     <xs:element name="ColorSpaceConversionParams" substitutionGroup="SpecificResource"
                 type="ColorSpaceConversionParams"/>
     <xs:complexType name="ColorSpaceConversionParams">
@@ -6237,7 +5987,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Ink ** -->
     <xs:element name="Ink" substitutionGroup="SpecificResource" type="Ink"/>
     <xs:complexType name="Ink">
         <xs:complexContent>
@@ -6251,7 +6000,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for InkZoneCalculationParams ** -->
     <xs:element name="InkZoneCalculationParams" substitutionGroup="SpecificResource" type="InkZoneCalculationParams"/>
     <xs:complexType name="InkZoneCalculationParams">
         <xs:complexContent>
@@ -6268,7 +6016,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for InkZoneProfile ** -->
     <xs:element name="InkZoneProfile" substitutionGroup="SpecificResource" type="InkZoneProfile"/>
     <xs:complexType name="InkZoneProfile">
         <xs:complexContent>
@@ -6336,7 +6083,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for PreviewGenerationParams ** -->
     <xs:element name="PreviewGenerationParams" substitutionGroup="SpecificResource" type="PreviewGenerationParams"/>
     <xs:complexType name="PreviewGenerationParams">
         <xs:complexContent>
@@ -6392,12 +6138,11 @@
             <xs:attribute name="InitialResolution" type="XYPair" use="optional"/>
             <xs:attribute name="Optimize" type="boolean" use="optional"/>
             <xs:attribute name="OverPrintMode" type="integer" use="optional"/>
-            <xs:attribute name="PDFVersion" type="float" use="optional"/>
+            <xs:attribute name="PDFVersion" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for RenderingParams ** -->
     <xs:element name="RenderingParams" substitutionGroup="SpecificResource" type="RenderingParams"/>
     <xs:complexType name="RenderingParams">
         <xs:complexContent>
@@ -6424,7 +6169,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ScreeningParams ** -->
     <xs:element name="ScreeningParams" substitutionGroup="SpecificResource" type="ScreeningParams"/>
     <xs:complexType name="ScreeningParams">
         <xs:complexContent>
@@ -6437,7 +6181,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for TrappingParams ** -->
     <xs:element name="TrappingParams" substitutionGroup="SpecificResource" type="TrappingParams"/>
     <xs:complexType name="TrappingParams">
         <xs:complexContent>
@@ -6454,7 +6197,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for PrintCondition ** -->
     <xs:element name="PrintCondition" substitutionGroup="SpecificResource" type="PrintCondition"/>
     <xs:complexType name="PrintCondition">
         <xs:complexContent>

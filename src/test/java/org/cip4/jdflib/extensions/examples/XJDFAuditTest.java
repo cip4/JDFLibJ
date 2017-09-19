@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -107,6 +108,7 @@ public class XJDFAuditTest extends JDFTestCaseBase
 		rhC.setAmount(400, null, true);
 		JDFMedia m = (JDFMedia) rhM.getResource();
 		m.setWeight(80);
+		m.setMediaType(EnumMediaType.Paper);
 		JDFComponent comp = (JDFComponent) rhC.getResource();
 		comp.setAttribute("MediaRef", rhM.ensureID());
 
@@ -122,6 +124,7 @@ public class XJDFAuditTest extends JDFTestCaseBase
 		MessageResourceHelper mrh = ah.getCreateMessageResourceHelper(shMedia);
 		m = (JDFMedia) mrh.getSet().getCreatePartition(null, true).getResource();
 		m.setWeight(90);
+		m.setMediaType(EnumMediaType.Paper);
 		xjdfHelper.cleanUp();
 
 		setSnippet(xjdfHelper, true);
