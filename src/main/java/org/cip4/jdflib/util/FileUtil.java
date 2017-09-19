@@ -900,6 +900,10 @@ public class FileUtil
 		int i = 1;
 		while (!bOK)
 		{
+			file.setReadable(true);
+			file.setExecutable(true);
+			file.setWritable(true);
+
 			boolean bInterupt = !ThreadUtil.sleep(i * 42);
 			bOK = file.delete();
 			if (bInterupt || i++ > loops)

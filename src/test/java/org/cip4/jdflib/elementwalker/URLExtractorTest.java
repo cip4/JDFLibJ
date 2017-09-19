@@ -361,8 +361,9 @@ public class URLExtractorTest extends JDFTestCaseBase
 
 		File file = new File(sm_dirTestDataTemp + "URLIn4/content/boooo.pdf");
 		FileUtil.createNewFile(file);
-		file.getParentFile().setReadable(false);
-		file.getParentFile().setExecutable(false);
+		File parentFile = file.getParentFile();
+		parentFile.setReadable(false);
+		parentFile.setExecutable(false);
 		File out = new File(sm_dirTestDataTemp + "URLOut4/boooo.pdf");
 
 		JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -375,7 +376,9 @@ public class URLExtractorTest extends JDFTestCaseBase
 		String write2String = rl.toDisplayXML(2);
 		assertTrue(write2String.indexOf("URLIn4/content/boooo.pdf") > 0);
 		assertFalse(out.exists());
-		file.getParentFile().delete();
+		parentFile.setReadable(true);
+		parentFile.setExecutable(true);
+		assertTrue(FileUtil.deleteAll(parentFile));
 	}
 
 	/**
