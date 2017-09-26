@@ -1322,7 +1322,9 @@ public class JDFMerge
 					}
 					catch (final Exception e)
 					{
-						throw new JDFException("JDFNode:mergeJDF, error in mergePartition: ID=" + newRes.getID() + " SpawnID=" + spawnID);
+						JDFException jdfException = new JDFException("JDFNode:mergeJDF, error in mergePartition: ID=" + newRes.getID() + " SpawnID=" + spawnID);
+						jdfException.initCause(e);
+						throw jdfException;
 					}
 				}
 
