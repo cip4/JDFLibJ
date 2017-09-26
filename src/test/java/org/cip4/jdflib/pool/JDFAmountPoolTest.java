@@ -444,12 +444,14 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 		ap = rl.appendAmountPool();
 		assertNull(ap.getPartAmount(vMap));
 		assertNull(ap.getPartAmount(map));
+		assertNull(ap.getPartAmount(map, 0));
 		assertNull(ap.getPartAmount(2));
 		assertNull(ap.getPartAmount(0));
 
 		final JDFPartAmount pa = ap.appendPartAmount();
 		assertNull(ap.getPartAmount(vMap));
 		assertNull(ap.getPartAmount(map));
+		assertNull(ap.getPartAmount(map, 0));
 		assertNull(ap.getPartAmount(2));
 		assertEquals(pa, ap.getPartAmount(0));
 	}

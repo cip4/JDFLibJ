@@ -823,7 +823,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		for (JDFPartAmount partAmount : vPartAmount)
 		{
 			final VJDFAttributeMap vMapPart = partAmount.getPartMapVector();
-			if (vMapPart.subMap(mPart) && ++n > iSkip)
+			if (vMapPart != null && vMapPart.subMap(mPart) && ++n > iSkip)
 			{
 				return partAmount; // exact match
 			}
