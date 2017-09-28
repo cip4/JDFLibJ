@@ -830,7 +830,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		}
 
 		final MyReadThread[] mrs = new MyReadThread[100];
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 42; i++)
 		{
 			final MyReadThread mr = new MyReadThread();
 			mr.d = d;
@@ -839,13 +839,13 @@ public class XMLDocTest extends JDFTestCaseBase
 			new Thread(mr).start();
 
 		}
-		System.out.println("Writing start");
+		log.info("Writing start");
 		assertTrue(d.write2File(out, 2, true));
-		System.out.println("Writing done");
+		log.info("Writing done");
 
 		final File f = new File(out);
 		assertTrue(f.canRead());
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 42; i++)
 		{
 			if (mrs[i].hook != null)
 			{

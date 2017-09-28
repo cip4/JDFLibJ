@@ -176,12 +176,12 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 		MultiJobTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("multij2", 7);
 		assertEquals(0, q.getAvQueue());
 		assertEquals(0, q.getAvRun());
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 444; i++)
 		{
 			q.queue(new WaitRunner(i, 10), "" + ((int) (10.0 * Math.random())));
 		}
 
-		for (int i = 0; i < 242; i++)
+		for (int i = 0; i < 442; i++)
 		{
 			ThreadUtil.sleep(40);
 			if (q.size() == 0)
@@ -190,6 +190,6 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 			}
 		}
 		ThreadUtil.sleep(40);
-		assertEquals(nRun, 1000, 5);
+		assertEquals(nRun, 444, 5);
 	}
 }
