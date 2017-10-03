@@ -168,6 +168,23 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testCommandResubmitQERemove()
+	{
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ResubmitQueueEntry.getName());
+		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.URL, "http://jobserver.xjdf.org?job1");
+		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.QUEUEENTRYID, "qe1");
+		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.UPDATEMETHOD, EnumUpdateMethod.Remove.getName());
+		command.getHeader().setAttribute(AttributeName.ID, "C1");
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "building/commandResubmitQE.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testResponseResumeQE()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
@@ -203,7 +220,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		not.appendComment().setText("Not resuming unknown QueueEntry: YourQueueEntryID");
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
-		writeTest(xjmfHelper, "system/ResponseError.xjmf");
+		writeTest(xjmfHelper, "building/ResponseError.xjmf");
 	}
 
 	/**

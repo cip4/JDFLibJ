@@ -128,7 +128,7 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
-		writeTest(xjdfHelper, "structure/co_amount.xjdf");
+		writeTest(xjdfHelper, "building/co_amount.xjdf");
 	}
 
 	/**
@@ -146,7 +146,7 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
-		writeTest(xjdfHelper, "structure/co_schedule.xjdf");
+		writeTest(xjdfHelper, "building/co_schedule.xjdf");
 	}
 
 	/**
@@ -197,7 +197,7 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
-		writeTest(xjdfHelper, "structure/co_color.xjdf");
+		writeTest(xjdfHelper, "building/co_color.xjdf");
 	}
 
 	/**
@@ -240,7 +240,28 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
-		writeTest(xjdfHelper, "structure/co_plateVarnish.xjdf");
+		writeTest(xjdfHelper, "building/co_plateVarnish.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testRemoveVarnish()
+	{
+		JDFAttributeMap map = new JDFAttributeMap("SheetName", "Body");
+		XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "RemoveVarnish", new VJDFAttributeMap(map));
+
+		xjdfHelper.setTypes(EnumType.Varnishing.getName());
+
+		SetHelper sh2 = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.VARNISHINGPARAMS, null);
+		sh2.appendPartition(map, false);
+
+		xjdfHelper.cleanUp();
+		setSnippet(xjdfHelper, true);
+		setSnippet(xjdfHelper.getAuditPool(), false);
+		writeTest(xjdfHelper, "building/removeVarnish.xjdf");
+
 	}
 
 	/**
@@ -293,7 +314,7 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
-		writeTest(xjdfHelper, "structure/co_varnish.xjdf");
+		writeTest(xjdfHelper, "building/co_varnish.xjdf");
 	}
 
 	/**
@@ -313,7 +334,7 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
-		writeTest(xjdfHelper, "structure/co_device.xjdf");
+		writeTest(xjdfHelper, "building/co_device.xjdf");
 	}
 
 	/**
@@ -339,7 +360,7 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
-		writeTest(xjdfHelper, "structure/co_paper.xjdf");
+		writeTest(xjdfHelper, "building/co_paper.xjdf");
 	}
 
 }
