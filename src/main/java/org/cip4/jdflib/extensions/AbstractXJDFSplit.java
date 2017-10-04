@@ -73,6 +73,7 @@ import java.util.Collection;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
@@ -244,7 +245,7 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 		{
 			return;
 		}
-		String name = set.getName();
+		String name = getName(set);
 		LinkInfo li = map.getStar(name);
 		if (li == null)
 		{
@@ -255,6 +256,21 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 			fixUsage(set, li);
 			fixCPI(set, li);
 		}
+	}
+
+	/**
+	 * we need to map to jdf names in order to use linkmap
+	 * @param set
+	 * @return
+	 */
+	protected String getName(SetHelper set)
+	{
+		String name = set.getName();
+		if (ElementName.COLOR.equals(name))
+			name = ElementName.COLORPOOL;
+		else if (XJDFConstants.Content.equals(name))
+			name = ElementName.PAGELIST;
+		return name;
 	}
 
 	/**
@@ -347,7 +363,7 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	protected void consolidateExchangeResource(XJDFHelper h0, SetHelper set0, XJDFHelper h1, SetHelper set1)
 	{
 		String newID = "ID_Ex_" + StringUtil.setvString(h0.getTypes(), "_", null, null);
-		SetHelper set0Out = h0.appendSet(set0.getFamily().name(), set0.getName(), EnumUsage.Output);
+		SetHelper set0Out = h0.appendSet(set0.getFamily().name(), getName(set0), EnumUsage.Output);
 		set0Out.setID(newID);
 		set0.deleteNode();
 		SetHelper newSet = new SetHelper(h1.getRoot().copyElement(set0Out.getRoot(), null));

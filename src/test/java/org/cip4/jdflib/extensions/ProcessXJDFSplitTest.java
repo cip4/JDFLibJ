@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
@@ -255,6 +256,28 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		assertNotNull(n.getCustomerInfo());
 		assertNotNull(n.getResource(ElementName.CUSTOMERINFO, EnumUsage.Input, "EndCustomer", null, 0));
 		d.write2File(sm_dirTestDataTemp + "ci2.jdf", 2, false);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSplitColorPool()
+	{
+		XJDFHelper h = new XJDFHelper("j1", "root", null);
+		h.appendProduct();
+		h.setTypes("Product");
+		SetHelper s = h.appendResourceSet(ElementName.COLOR, EnumUsage.Input);
+		s.appendPartition(new JDFAttributeMap(AttributeName.SEPARATION, "Cyan"), true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME, "c1");
+		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+		c.setSplitter(splitter);
+
+		JDFDoc d = c.convert(h);
+		JDFNode n = d.getJDFRoot();
+
+		assertNotNull(n.getResource(ElementName.COLORPOOL, EnumUsage.Input, 0));
+		d.write2File(sm_dirTestDataTemp + "cp.jdf", 2, false);
 	}
 
 	/**
