@@ -73,7 +73,6 @@ import java.util.Vector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.RollingBackupFile;
 import org.cip4.jdflib.util.ThreadUtil;
@@ -391,7 +390,7 @@ class StorageHotFolderListener implements HotFolderListener
 
 	private synchronized File getTmpDir()
 	{
-		return FileUtil.newExtension(storage, JDFConstants.EMPTYSTRING + nQueued++);
+		return FileUtil.getFileInDirectory(storage, new File("tmp." + nQueued++));
 	}
 
 	/**
