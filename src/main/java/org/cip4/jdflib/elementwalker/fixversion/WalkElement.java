@@ -146,10 +146,13 @@ public class WalkElement extends BaseWalker
 		}
 		final Vector<String> keys = ContainerUtil.getKeyVector(m);
 		final AttributeInfo ai = el.getAttributeInfo();
-		for (final String key : keys)
+		if (keys != null)
 		{
-			final String value = m.get(key);
-			walkSingleAttribute(el, ai, key, value);
+			for (final String key : keys)
+			{
+				final String value = m.get(key);
+				walkSingleAttribute(el, ai, key, value);
+			}
 		}
 		return el;
 	}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,9 +72,9 @@
  * class JDFFileSpec
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * Author: sabjon@topmail.de    using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * Author: sabjon@topmail.de    using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 
 package org.cip4.jdflib.resource.process;
@@ -93,7 +93,7 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * July 24, 2009
  */
 public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
@@ -104,7 +104,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	 * Constructor for JDFFileSpec
 	 * @param myOwnerDocument
 	 * @param qualifiedName
-	 * 
+	 *
 	 * @throws DOMException
 	 */
 	public JDFFileSpec(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
@@ -118,7 +118,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
+	 *
 	 */
 	public JDFFileSpec(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
@@ -132,7 +132,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 * 
+	 *
 	 */
 	public JDFFileSpec(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
@@ -150,7 +150,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 
 	/**
 	 * sets the URL attribute to an absolute file IRL (internationalized)
-	 * 
+	 *
 	 * @param f the file to set the URL to
 	 * @param bEscape128 if true, escape chars>128 (URL) else don't escape (IRL)
 	 */
@@ -162,7 +162,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 
 	/**
 	 * sets the URL attribute to an absolute file IRL (internationalized)
-	 * 
+	 *
 	 * @param f the file to set the URL to
 	 * @param baseDir the File representing the relative location. if null use current working dir
 	 * @param bEscape128 if true, escape chars>128 (URL) else don't escape (IRL)
@@ -177,7 +177,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 
 	/**
 	 * get the input stream that reads from URL
-	 * 
+	 *
 	 * @return InputStream the input stream that the url points to, null if the url is inaccessible
 	 */
 	public InputStream getURLInputStream()
@@ -187,7 +187,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 
 	/**
 	 * sets URL and MimeType by matching the extensions
-	 * 
+	 *
 	 * @param url the url to set URL
 	 */
 	public void setMimeURL(final String url)
@@ -210,7 +210,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 
 	/**
 	 * returns the filename of the referenced object, even if it is a cid or http url
-	 * 
+	 *
 	 * @return the file name of the referenced object
 	 */
 	public String getFileName()
@@ -225,7 +225,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 
 	/**
 	 * generates the correct MIMEType for a given URL and sets it
-	 * 
+	 *
 	 * @param url
 	 * @return
 	 * @deprecated use @see UrlUtil.getMimeTypeFromURL(url)
@@ -237,16 +237,32 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	}
 
 	/**
+	 * create a container and prefill a filespec
+	 *
+	 * @param containerUrl
+	 * @param mimeType
+	 * @return the Container/FileSpec
+	 */
+	public JDFFileSpec setContainer(final String containerUrl, final String mimeType)
+	{
+		final JDFContainer c = getCreateContainer();
+		final JDFFileSpec fs = c.getCreateFileSpec();
+		fs.setURL(containerUrl);
+		fs.setMimeType(mimeType);
+		return fs;
+	}
+
+	/**
 	  * (36) set attribute FileSize
 	  * @param value the value to set the attribute to
 	  */
-	public void setFileSize(long value)
+	public void setFileSize(final long value)
 	{
 		setAttribute(AttributeName.FILESIZE, value, null);
 	}
 
 	/**
-	  * 
+	  *
 	  * @return the value of FileSize
 	  */
 	public long getFileSizeLong()
@@ -257,7 +273,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	/**
 	 * @see org.cip4.jdflib.auto.JDFAutoFileSpec#setCheckSum(java.lang.String)
 	 */
-	public void setCheckSum(byte[] value)
+	public void setCheckSum(final byte[] value)
 	{
 		super.setCheckSum(StringUtil.setHexBinaryBytes(value, -1));
 	}
