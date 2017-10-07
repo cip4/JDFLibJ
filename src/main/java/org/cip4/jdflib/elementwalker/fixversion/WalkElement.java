@@ -68,7 +68,7 @@
  */
 package org.cip4.jdflib.elementwalker.fixversion;
 
-import java.util.Iterator;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.StringUtils;
@@ -84,6 +84,7 @@ import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.elementwalker.BaseWalker;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
@@ -115,7 +116,7 @@ public class WalkElement extends BaseWalker
 	 * fills this into the factory
 	 * @param fixVersion
 	 */
-	public void setParent(FixVersionImpl fixVersion)
+	public void setParent(final FixVersionImpl fixVersion)
 	{
 		this.fixVersion = fixVersion;
 	}
@@ -138,15 +139,29 @@ public class WalkElement extends BaseWalker
 
 		// replace all "~" with " ~ "
 		final JDFAttributeMap m = el.getAttributeMap_KElement();
-		final Iterator<String> it = m.getKeyIterator();
-		final AttributeInfo ai = el.getAttributeInfo();
-		while (it.hasNext())
+		if (updateAttributes(m))
 		{
-			final String key = it.next();
+			el.removeAttributes(null);
+			el.setAttributes(m);
+		}
+		final Vector<String> keys = ContainerUtil.getKeyVector(m);
+		final AttributeInfo ai = el.getAttributeInfo();
+		for (final String key : keys)
+		{
 			final String value = m.get(key);
 			walkSingleAttribute(el, ai, key, value);
 		}
 		return el;
+	}
+
+	/**
+	 * hook to update the attributemap
+	 * @param m
+	 * @param el
+	 */
+	boolean updateAttributes(final JDFAttributeMap m)
+	{
+		return false;
 	}
 
 	/**
@@ -159,8 +174,8 @@ public class WalkElement extends BaseWalker
 	{
 		if (fixVersion.bZappDeprecated)
 		{
-			String prefix = KElement.xmlnsPrefix(key);
-			String uri = prefix == null ? null : el.getNamespaceURIFromPrefix(prefix);
+			final String prefix = KElement.xmlnsPrefix(key);
+			final String uri = prefix == null ? null : el.getNamespaceURIFromPrefix(prefix);
 			if ((uri == null || JDFElement.isInJDFNameSpaceStatic(uri)) && fixVersion.version.isGreater(ai.getLastVersion(key)))
 			{
 				el.removeAttribute_KElement(key, null);
@@ -179,7 +194,7 @@ public class WalkElement extends BaseWalker
 		}
 		else if (EnumAttributeType.integer.equals(attType))
 		{
-			int i = StringUtil.parseInt(value, Integer.MIN_VALUE + 42);
+			final int i = StringUtil.parseInt(value, Integer.MIN_VALUE + 42);
 			if (i == Integer.MIN_VALUE + 42)
 			{
 				el.removeAttribute(key);
@@ -191,7 +206,7 @@ public class WalkElement extends BaseWalker
 		}
 		else if (EnumAttributeType.double_.equals(attType))
 		{
-			double d = StringUtil.parseDouble(value, Double.POSITIVE_INFINITY);
+			final double d = StringUtil.parseDouble(value, Double.POSITIVE_INFINITY);
 			if (d == Double.POSITIVE_INFINITY)
 			{
 				el.removeAttribute(key);
@@ -207,12 +222,12 @@ public class WalkElement extends BaseWalker
 		}
 		else if (EnumAttributeType.XYPair.equals(attType))
 		{
-			JDFXYPair xyPair = JDFXYPair.createXYPair(value);
+			final JDFXYPair xyPair = JDFXYPair.createXYPair(value);
 			el.setAttribute(key, xyPair, null);
 		}
 		else if (EnumAttributeType.shape.equals(attType))
 		{
-			JDFShape shape = JDFShape.createShape(value);
+			final JDFShape shape = JDFShape.createShape(value);
 			el.setAttribute(key, shape, null);
 		}
 		if (fixVersion.bFixIDs && value.length() > 0 && StringUtils.isNumeric(value.substring(0, 1)))

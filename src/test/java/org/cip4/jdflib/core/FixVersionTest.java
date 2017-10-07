@@ -107,6 +107,7 @@ import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFContentMetaData;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.CPUTimer;
@@ -185,7 +186,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testNamespace()
 	{
-		KElement ns = n.appendElement("foo:abc", "www.foobar.com");
+		final KElement ns = n.appendElement("foo:abc", "www.foobar.com");
 		n.fixVersion(null);
 		KElement ns2 = n.getElement("foo:abc");
 		assertEquals(ns, ns2);
@@ -202,7 +203,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testNamespaceRes()
 	{
-		KElement ns = n.addResource("foo:abc", EnumResourceClass.Parameter, null, null, null, "www.foobar.com", null);
+		final KElement ns = n.addResource("foo:abc", EnumResourceClass.Parameter, null, null, null, "www.foobar.com", null);
 		n.fixVersion(null);
 		KElement ns2 = n.getResourcePool().getElement("foo:abc");
 		assertEquals(ns, ns2);
@@ -248,7 +249,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	{
 		n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.addNameSpace("foo", "http://www.foo.com/schema");
-		FixVersion fv = new FixVersion(EnumVersion.Version_1_5);
+		final FixVersion fv = new FixVersion(EnumVersion.Version_1_5);
 		fv.setZappDeprecated(true);
 		fv.convert(n);
 		assertEquals(n.getAttribute("xmlns:foo"), "http://www.foo.com/schema");
@@ -333,11 +334,11 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testMultiConstruct()
 	{
-		CPUTimer ct = new CPUTimer(false);
+		final CPUTimer ct = new CPUTimer(false);
 		for (int i = 0; i < 4; i++)
 		{
 			ct.start();
-			FixVersion v = new FixVersion(EnumVersion.Version_1_3);
+			final FixVersion v = new FixVersion(EnumVersion.Version_1_3);
 			assertNotNull(v);
 			log.info(ct.toXML());
 			ct.stop();
@@ -365,7 +366,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	{
 		final JDFCustomerInfo ci = (JDFCustomerInfo) n.addResource(ElementName.CUSTOMERINFO, null, EnumUsage.Input, null, null, null, null);
 		ci.appendCustomerMessage().setText("foo");
-		FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
+		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
 		fixVersion.setZappDeprecated(true);
 		fixVersion.convert(ci);
 		assertNull(ci.getCustomerMessage(0));
@@ -390,6 +391,21 @@ public class FixVersionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testContentData()
+	{
+		final JDFContentMetaData c = (JDFContentMetaData) new JDFDoc(ElementName.CONTENTMETADATA).getRoot();
+		c.setISBN13("12345");
+		assertTrue(new FixVersion(EnumVersion.Version_1_6).convert(c));
+		assertEquals(c.getAttribute(AttributeName.ISBN), "12345");
+		assertTrue(new FixVersion(EnumVersion.Version_1_1).convert(c));
+		assertEquals(c.getAttribute(AttributeName.ISBN10), "12345");
+		assertFalse(c.hasAttribute(AttributeName.ISBN));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testNamedFeature()
 	{
 		n.setNamedFeatures(new VString("a b", null));
@@ -407,7 +423,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testNumColors()
 	{
-		JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
+		final JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
 		ci.setNumColors(4);
 		boolean converted = new FixVersion(EnumVersion.Version_1_4).convert(ci);
 		assertTrue(converted);
@@ -425,9 +441,9 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testNumColorsK()
 	{
-		JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
+		final JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
 		ci.appendColorsUsed().setSeparations(new VString("K", null));
-		boolean converted = new FixVersion(EnumVersion.Version_1_4).convert(ci);
+		final boolean converted = new FixVersion(EnumVersion.Version_1_4).convert(ci);
 		assertTrue(converted);
 		assertNull(ci.getAttribute(AttributeName.NUMCOLORS, null, null));
 		assertEquals(ci.getColorsUsed().getSeparations().size(), 1);
@@ -442,9 +458,9 @@ public class FixVersionTest extends JDFTestCaseBase
 	{
 		n.setVersion(EnumVersion.Version_1_1);
 		n.appendNodeInfo().appendJMF();
-		FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
+		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
 		fixVersion.setZappDeprecated(true);
-		boolean converted = fixVersion.convert(n);
+		final boolean converted = fixVersion.convert(n);
 		assertTrue(converted);
 		assertNotNull(n.getResource(ElementName.NODEINFO, EnumUsage.Input, 0));
 		assertNull(n.getResource(ElementName.NODEINFO, EnumUsage.Input, 0).getElement(ElementName.JMF));
@@ -456,12 +472,12 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testInheritedAttributes()
 	{
-		JDFRunList ru = (JDFRunList) n.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 0);
-		JDFResource rup = ru.addPartition(EnumPartIDKey.Run, "r");
+		final JDFRunList ru = (JDFRunList) n.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 0);
+		final JDFResource rup = ru.addPartition(EnumPartIDKey.Run, "r");
 		ru.setNPage(7);
-		FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
+		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
 		fixVersion.setZappDeprecated(true);
-		boolean converted = fixVersion.convert(n);
+		final boolean converted = fixVersion.convert(n);
 		assertTrue(converted);
 		assertEquals(7, ru.getNPage());
 		assertFalse(rup.hasAttribute_KElement(AttributeName.NPAGE, null, false));
@@ -473,7 +489,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testNumColorsDouble()
 	{
-		JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
+		final JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
 		ci.setNumColors(4);
 		ci.getCreateColorsUsed().setCMYK();
 		boolean converted = new FixVersion(EnumVersion.Version_1_4).convert(ci);
@@ -509,12 +525,12 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testLayoutPrep()
 	{
-		IDPGoldenTicket idpGoldenTicket = new IDPGoldenTicket(1);
+		final IDPGoldenTicket idpGoldenTicket = new IDPGoldenTicket(1);
 
 		idpGoldenTicket.assign(null);
 		final JDFNode node = idpGoldenTicket.getNode();
 		assertTrue(node.isValid(EnumValidationLevel.Complete));
-		FixVersion fix = new FixVersion(EnumVersion.Version_1_5);
+		final FixVersion fix = new FixVersion(EnumVersion.Version_1_5);
 		fix.setLayoutPrepToStripping(true);
 		fix.walkTree(node, null);
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "FixLayoutPrep.jdf", 2, false);
@@ -527,14 +543,14 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testJMF()
 	{
-		JDFJMF jmf = new JMFBuilder().buildNewJDFCommand();
+		final JDFJMF jmf = new JMFBuilder().buildNewJDFCommand();
 		jmf.setAgentName("AName");
 		jmf.setAgentVersion("AVersion");
-		FixVersion fix = new FixVersion(EnumVersion.Version_1_3);
+		final FixVersion fix = new FixVersion(EnumVersion.Version_1_3);
 		fix.setBZappInvalid(true);
 		fix.walkTree(jmf, null);
 		assertNull(StringUtil.getNonEmpty(jmf.getAgentName()));
-		FixVersion fix2 = new FixVersion(EnumVersion.Version_1_4);
+		final FixVersion fix2 = new FixVersion(EnumVersion.Version_1_4);
 		fix2.walkTree(jmf, null);
 	}
 
@@ -544,8 +560,8 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testJMFQueueFilter()
 	{
-		JDFJMF jmf = new JMFBuilder().buildAbortQueueEntry("42");
-		JDFCommand command = jmf.getCommand(0);
+		final JDFJMF jmf = new JMFBuilder().buildAbortQueueEntry("42");
+		final JDFCommand command = jmf.getCommand(0);
 		command.appendQueueFilter();
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
@@ -561,8 +577,8 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testJMFQueueAbortQueueEntry()
 	{
-		JDFJMF jmf = new JMFBuilder().buildAbortQueueEntry("42");
-		JDFCommand command = jmf.getCommand(0);
+		final JDFJMF jmf = new JMFBuilder().buildAbortQueueEntry("42");
+		final JDFCommand command = jmf.getCommand(0);
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
 		assertNotNull(command.getQueueEntryDef(0));
@@ -580,8 +596,8 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testJMFQueueAbortQueueEntryNull()
 	{
-		JDFJMF jmf = new JMFBuilder().buildAbortQueueEntry("42");
-		JDFCommand command = jmf.getCommand(0);
+		final JDFJMF jmf = new JMFBuilder().buildAbortQueueEntry("42");
+		final JDFCommand command = jmf.getCommand(0);
 		assertNotNull(command.getQueueEntryDef(0));
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_5);
 		fix.walkTree(jmf, null);
@@ -598,8 +614,8 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testJMFQueueHoldQueueEntry()
 	{
-		JDFJMF jmf = new JMFBuilder().buildHoldQueueEntry("42");
-		JDFCommand command = jmf.getCommand(0);
+		final JDFJMF jmf = new JMFBuilder().buildHoldQueueEntry("42");
+		final JDFCommand command = jmf.getCommand(0);
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
 		assertNotNull(command.getQueueEntryDef(0));
@@ -617,8 +633,8 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testJMFQueueRemoveQueueEntry()
 	{
-		JDFJMF jmf = new JMFBuilder().buildRemoveQueueEntry("42");
-		JDFCommand command = jmf.getCommand(0);
+		final JDFJMF jmf = new JMFBuilder().buildRemoveQueueEntry("42");
+		final JDFCommand command = jmf.getCommand(0);
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
 		assertNotNull(command.getQueueEntryDef(0));
@@ -636,8 +652,8 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testJMFQueueSuspendQueueEntry()
 	{
-		JDFJMF jmf = new JMFBuilder().buildSuspendQueueEntry("42");
-		JDFCommand command = jmf.getCommand(0);
+		final JDFJMF jmf = new JMFBuilder().buildSuspendQueueEntry("42");
+		final JDFCommand command = jmf.getCommand(0);
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
 		assertNotNull(command.getQueueEntryDef(0));
@@ -655,8 +671,8 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testJMFQueueSusbmitQueueEntry()
 	{
-		JDFJMF jmf = new JMFBuilder().buildSubmitQueueEntry("http://www.example.com");
-		JDFCommand command = jmf.getCommand(0);
+		final JDFJMF jmf = new JMFBuilder().buildSubmitQueueEntry("http://www.example.com");
+		final JDFCommand command = jmf.getCommand(0);
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
 		fix = new FixVersion(EnumVersion.Version_1_5);
@@ -672,8 +688,8 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testJMFQueueResumeQueueEntry()
 	{
-		JDFJMF jmf = new JMFBuilder().buildResumeQueueEntry("42");
-		JDFCommand command = jmf.getCommand(0);
+		final JDFJMF jmf = new JMFBuilder().buildResumeQueueEntry("42");
+		final JDFCommand command = jmf.getCommand(0);
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
 		assertNotNull(command.getQueueEntryDef(0));
@@ -696,8 +712,8 @@ public class FixVersionTest extends JDFTestCaseBase
 	@Test
 	public void testJMFQueue()
 	{
-		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
-		JDFResponse r = jmf.appendResponse();
+		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		final JDFResponse r = jmf.appendResponse();
 		r.setType(EnumType.RemoveQueueEntry);
 		r.appendQueue();
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
@@ -717,10 +733,10 @@ public class FixVersionTest extends JDFTestCaseBase
 	{
 		final JDFAssembly a = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
 		a.setResStatus(EnumResStatus.Available, true);
-		VString ai = new VString("a1", null);
+		final VString ai = new VString("a1", null);
 		a.setAssemblyIDs(ai);
-		JDFAssemblySection as = a.appendAssemblySection();
-		VString asi = new VString("a1.1", null);
+		final JDFAssemblySection as = a.appendAssemblySection();
+		final VString asi = new VString("a1.1", null);
 		as.setAssemblyIDs(asi);
 		assertTrue(a.fixVersion(EnumVersion.Version_1_1));
 		assertEquals(a.getAssemblyID(), "a1");
@@ -743,10 +759,10 @@ public class FixVersionTest extends JDFTestCaseBase
 		n.setVersion(EnumVersion.Version_1_4);
 		final JDFAssembly a = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
 		a.setResStatus(EnumResStatus.Available, true);
-		VString ai = new VString("a1", null);
+		final VString ai = new VString("a1", null);
 		a.setAssemblyIDs(ai);
-		JDFAssemblySection as = a.appendAssemblySection();
-		VString asi = new VString("a1.1", null);
+		final JDFAssemblySection as = a.appendAssemblySection();
+		final VString asi = new VString("a1.1", null);
 		as.setAssemblyIDs(asi);
 		assertTrue(a.fixVersion(EnumVersion.Version_1_1));
 		assertEquals(a.getAssemblyID(), "a1");
@@ -768,7 +784,7 @@ public class FixVersionTest extends JDFTestCaseBase
 	{
 		n.setVersion(EnumVersion.Version_1_4);
 		final JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Input);
-		JDFResourceLink rl = n.getLink(c, null);
+		final JDFResourceLink rl = n.getLink(c, null);
 		rl.setAttribute(AttributeName.AMOUNT, "333.0");
 		n.fixVersion(null);
 		assertEquals(rl.getAttribute(AttributeName.AMOUNT), "333");

@@ -1616,6 +1616,8 @@ public final class AttributeName
 	/** */
 	public static final String ISBLANK = "IsBlank";
 	/** */
+	public static final String ISBN = "ISBN";
+	/** */
 	public static final String ISBN10 = "ISBN10";
 	/** */
 	public static final String ISBN13 = "ISBN13";

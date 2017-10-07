@@ -590,7 +590,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	{
 		String val = remove(oldKey);
 		String ret = null;
-		if (StringUtil.getNonEmpty(val) != null)
+		if (!StringUtil.isEmpty(val))
 		{
 			ret = put(newKey, val);
 		}
