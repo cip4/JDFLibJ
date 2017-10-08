@@ -131,7 +131,7 @@ public class CADTest extends JDFTestCaseBase
 	public void testCompletedJMF()
 	{
 		createShapeDefProduction();
-		StatusCounter sc = new StatusCounter(null, null, null);
+		final StatusCounter sc = new StatusCounter(null, null, null);
 		sc.setDeviceID("EngView");
 		JDFDoc dJMF = sc.getDocJMFPhaseTime();
 		writeTest(dJMF, "Idle.jmf");
@@ -144,7 +144,7 @@ public class CADTest extends JDFTestCaseBase
 		writeTest(dJMF, "Completed.jmf");
 		sc.setActiveNode(null, null, null);
 
-		writeTest(dJMF, "CompletedShapeDef.jdf");
+		writeTest(dJMF, "CompletedShapeDef.jmf");
 
 	}
 
@@ -170,11 +170,11 @@ public class CADTest extends JDFTestCaseBase
 		d = new JDFDoc(ElementName.JDF);
 		n = d.getJDFRoot();
 		n.setType("ShapeDefProduction", false);
-		JDFResource sdpp = n.addResource("ShapeDefProductionParams", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
+		final JDFResource sdpp = n.addResource("ShapeDefProductionParams", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
 		sdpp.setDescriptiveName("Box123");
 		setSnippet(sdpp, true);
-		JDFShape shape = new JDFShape(10 * 72 / 2.54, 20 * 72 / 2.54, 30 * 72 / 2.54);
-		JDFElement shapeTemplate = (JDFElement) sdpp.appendElement("ShapeTemplate");
+		final JDFShape shape = new JDFShape(10 * 72 / 2.54, 20 * 72 / 2.54, 30 * 72 / 2.54);
+		final JDFElement shapeTemplate = (JDFElement) sdpp.appendElement("ShapeTemplate");
 		shapeTemplate.setAttribute("InnerDimensions", shape.toString());
 		shapeTemplate.setDescriptiveName("10 * 20 * 30 cm shape");
 		shapeTemplate.setAttribute("Standard", "ECMA");
@@ -193,22 +193,22 @@ public class CADTest extends JDFTestCaseBase
 	{
 		n.setType("ShapeDefProduction", false);
 		n.setDescriptiveName("This process describes one up cad production");
-		JDFResource sdpp = n.addResource("ShapeDefProductionParams", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
+		final JDFResource sdpp = n.addResource("ShapeDefProductionParams", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
 		setSnippet(sdpp, true);
-		int nOptions = 3;
-		JDFShape shape = new JDFShape(10 * 72 / 2.54, 20 * 72 / 2.54, 30 * 72 / 2.54);
-		JDFElement shapeTemplate = (JDFElement) sdpp.appendElement("ShapeTemplate");
+		final int nOptions = 3;
+		final JDFShape shape = new JDFShape(10 * 72 / 2.54, 20 * 72 / 2.54, 30 * 72 / 2.54);
+		final JDFElement shapeTemplate = (JDFElement) sdpp.appendElement("ShapeTemplate");
 		shapeTemplate.setAttribute("InnerDimensions", shape.toString());
 		shapeTemplate.setDescriptiveName("10 * 20 * 30 cm shape");
 		shapeTemplate.setAttribute("Standard", "ECMA");
 		for (int i = 1; i < 4; i++)
 		{
-			JDFGeneralID genID = (JDFGeneralID) shapeTemplate.appendElement(ElementName.GENERALID);
+			final JDFGeneralID genID = (JDFGeneralID) shapeTemplate.appendElement(ElementName.GENERALID);
 			genID.setIDUsage("EcmaParameter" + i);
 			genID.setIDValue("123" + i);
 			genID.setDescriptiveName("Name and Value of a parameter");
 		}
-		JDFFileSpec filespec = (JDFFileSpec) shapeTemplate.appendElement(ElementName.FILESPEC);
+		final JDFFileSpec filespec = (JDFFileSpec) shapeTemplate.appendElement(ElementName.FILESPEC);
 		filespec.setURL(UrlUtil.fileToUrl(new File("//host/share/dir1/dir2/File with �.cff2"), false));
 		filespec.setDescriptiveName("This is the optional location of the input cff2 (or evd), Note the escaping of Blanks. - chars > 127 may but need not be encoded as utf-8");
 
@@ -228,13 +228,13 @@ public class CADTest extends JDFTestCaseBase
 
 		createShapeDef(EnumUsage.Input, 0, 1);
 
-		JDFResource dlpp = n.addResource("DieLayoutProductionParams", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
+		final JDFResource dlpp = n.addResource("DieLayoutProductionParams", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
 
 		dlpp.setAttribute("Esimate", true, null);
 		dlpp.setAttribute("Anchor", "Center");
 
-		JDFElement convertingConfig = (JDFElement) dlpp.appendElement("ConvertingConfig");
-		JDFNumberRange range = new JDFNumberRange();
+		final JDFElement convertingConfig = (JDFElement) dlpp.appendElement("ConvertingConfig");
+		final JDFNumberRange range = new JDFNumberRange();
 		range.setLeft(90 * 72 / 2.54);
 		range.setRight(110 * 72 / 2.54);
 		convertingConfig.setAttribute("SheetWidth", range, null);
@@ -243,12 +243,12 @@ public class CADTest extends JDFTestCaseBase
 		convertingConfig.setAttribute("SheetHeight", range, null);
 		convertingConfig.setDescriptiveName("range of height and width - may also add margins");
 
-		JDFElement repeatDesc = (JDFElement) dlpp.appendElement("RepeatDesc");
+		final JDFElement repeatDesc = (JDFElement) dlpp.appendElement("RepeatDesc");
 		repeatDesc.setDescriptiveName("details the step and repeat parameters");
 		repeatDesc.setAttribute("AllowedRotate", "None");
 		repeatDesc.setAttribute("LayoutStyle", "StraightNest");
 
-		JDFDieLayout dl = createDieLayout(EnumUsage.Output, "//host/share/dir1/dir2/dieLayout.cff2");
+		final JDFDieLayout dl = createDieLayout(EnumUsage.Output, "//host/share/dir1/dir2/dieLayout.cff2");
 		dl.setDescriptiveName("the abstract die layout ");
 
 		writeTest(n, "CAD_DieLayoutProduction.jdf", true);
@@ -272,7 +272,7 @@ public class CADTest extends JDFTestCaseBase
 	{
 		n.setType("DieDesign", false);
 		n.setDescriptiveName("This process describes detailing the various die cut toolsets from a general description");
-		JDFComment comment = n.appendComment();
+		final JDFComment comment = n.appendComment();
 		comment.setName("Description");
 		comment.setText("Multi line descriptions of the overall process are placed here\nLine feeds must be preserved for display");
 
@@ -292,11 +292,11 @@ public class CADTest extends JDFTestCaseBase
 	 * @return the dielayout
 	 *
 	 */
-	private JDFDieLayout createDieLayout(EnumUsage inOut, String fileName)
+	private JDFDieLayout createDieLayout(final EnumUsage inOut, final String fileName)
 	{
-		JDFDieLayout dieLayout = (JDFDieLayout) n.addResource("DieLayout", EnumResourceClass.Parameter, inOut, null, null, null, null);
+		final JDFDieLayout dieLayout = (JDFDieLayout) n.addResource("DieLayout", EnumResourceClass.Parameter, inOut, null, null, null, null);
 		dieLayout.setAttribute("Waste", "22");
-		JDFFileSpec fsDie = dieLayout.appendFileSpec();
+		final JDFFileSpec fsDie = dieLayout.appendFileSpec();
 		fsDie.makeRootResource(null, null, true);
 		fsDie.setURL(UrlUtil.fileToUrl(new File(fileName), false));
 		return dieLayout;
@@ -309,7 +309,7 @@ public class CADTest extends JDFTestCaseBase
 	 * @param nOptions
 	 * @return
 	 */
-	private JDFResource createShapeDef(EnumUsage inOut, int option, int nOptions)
+	private JDFResource createShapeDef(final EnumUsage inOut, final int option, final int nOptions)
 	{
 		// now the output
 		JDFResource shapeDefRoot;
@@ -327,7 +327,7 @@ public class CADTest extends JDFTestCaseBase
 		{
 			shapeDef = shapeDefRoot.addPartition(EnumPartIDKey.Option, "Option" + option);
 		}
-		JDFFileSpec filespecOut = (JDFFileSpec) shapeDef.appendElement(ElementName.FILESPEC);
+		final JDFFileSpec filespecOut = (JDFFileSpec) shapeDef.appendElement(ElementName.FILESPEC);
 		filespecOut.setURL(UrlUtil.fileToUrl(new File("//host/share/dir1/dir2/OutFile with ü.cff2"), false));
 		filespecOut.setDescriptiveName("This is the requested location of the output cff2 (or evd)");
 		shapeDef.setDescriptiveName("Additional parameters may be filled by CAD - note also that this shapeDef will be the input of the DieLayoutProduction process");
@@ -339,9 +339,9 @@ public class CADTest extends JDFTestCaseBase
 
 	private void setAudits()
 	{
-		JDFAuditPool ap = n.getAuditPool();
-		JDFPhaseTime pt = ap.addPhaseTime(EnumNodeStatus.InProgress, "Whoever", null);
-		JDFDate dat = new JDFDate();
+		final JDFAuditPool ap = n.getAuditPool();
+		final JDFPhaseTime pt = ap.addPhaseTime(EnumNodeStatus.InProgress, "Whoever", null);
+		final JDFDate dat = new JDFDate();
 		dat.addOffset(0, 0, 5, 0);
 		pt.setStart(dat);
 		dat.addOffset(0, 0, 3, 0);
