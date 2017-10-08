@@ -113,7 +113,7 @@ public class FilespecExampleTest extends JDFTestCaseBase
 	{
 		fs.setMimeType(MimeUtil.APPLICATION_PDF);
 		fs.setURL("file://host/share/dir/a.pdf");
-		writeTest(n, "AP_FileSpec/AP_FileSpec_1.jdf", false);
+		writeTest(n, "AP_FileSpec/AP_FileSpec_1.jdf", false, null);
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class FilespecExampleTest extends JDFTestCaseBase
 		fs.setURL("a.pdf");
 		fs.setContainer("file://host/share/dir/a.gz", MimeUtil.APPLICATION_ZIP);
 
-		writeTest(n, "AP_FileSpec/AP_FileSpec_2.jdf", false);
+		writeTest(n, "AP_FileSpec/AP_FileSpec_2.jdf", false, null);
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class FilespecExampleTest extends JDFTestCaseBase
 		fs.setMimeType(MimeUtil.APPLICATION_PDF);
 		fs.setURL("file://host/share/dir/a.pdf");
 		fs.setCompression("Base64");
-		writeTest(n, "AP_FileSpec/AP_FileSpec_3.jdf", false);
+		writeTest(n, "AP_FileSpec/AP_FileSpec_3.jdf", false, null);
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class FilespecExampleTest extends JDFTestCaseBase
 		final JDFFileSpec z1 = fs.setContainer("myNestedZip.zip", MimeUtil.APPLICATION_ZIP);
 		z1.setContainer("file://host/share/dir/c.zip", MimeUtil.APPLICATION_ZIP);
 
-		writeTest(n, "AP_FileSpec/AP_FileSpec_7.jdf", false);
+		writeTest(n, "AP_FileSpec/AP_FileSpec_7.jdf", false, null);
 	}
 
 	/**
@@ -174,7 +174,7 @@ public class FilespecExampleTest extends JDFTestCaseBase
 		fs2.setURL("b.pdf");
 		setSnippet(fs2, true);
 
-		writeTest(n, "AP_FileSpec/AP_FileSpec_9.jdf", false);
+		writeTest(n, "AP_FileSpec/AP_FileSpec_9.jdf", false, null);
 	}
 
 }

@@ -166,7 +166,7 @@ public class XJDFMediaTest extends JDFTestCaseBase
 		writeTest(xjdfHelper, "resources/FlexoPlate.xjdf");
 		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		JDFDoc d = xc.convert(xjdfHelper);
-		writeTest(d.getRoot(), "resources/FlexoPlate.jdf", false);
+		writeTest(d.getRoot(), "resources/FlexoPlate.jdf", false, null);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public class XJDFMediaTest extends JDFTestCaseBase
 		writeTest(xjdfHelper, "resources/FlexoSleeve.xjdf");
 		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		JDFDoc d = xc.convert(xjdfHelper);
-		writeTest(d.getRoot(), "resources/FlexoSleeve.jdf", false);
+		writeTest(d.getRoot(), "resources/FlexoSleeve.jdf", false, null);
 	}
 
 	/**

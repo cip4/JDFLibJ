@@ -95,7 +95,7 @@ public class XJDFExampleConvertTest extends JDFTestCaseBase
 		h.cleanUp();
 		setSnippet(h, true);
 		setSnippet(h.getSet(ElementName.NODEINFO, 0), false);
-		writeTest(x, "processes/dielayoutproduction.xjdf", true);
+		writeTest(x, "processes/dielayoutproduction.xjdf", true, null);
 	}
 
 	/**

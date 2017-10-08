@@ -249,7 +249,7 @@ public class MISFinTest extends BaseGoldenTicketTest
 		bfa.setFoldIndex(new JDFXYPair(3, -1));
 		bfa.setAction(EnumAction.LongFoldRightToLeft);
 
-		writeTest(n, "resources/boxFoldingParams_boxFoldAction.jdf", true);
+		writeTest(n, "resources/boxFoldingParams_boxFoldAction.jdf", true, null);
 	}
 
 	/**

@@ -168,7 +168,7 @@ public class WebTest extends JDFTestCaseBase
 				shiftObject.setAttribute("CTM", new JDFMatrix(1, 0, 0, 1, j + i / 4, j + i % 4).toString());
 			}
 		}
-		XMLDoc xjdfDoc = writeTest(doc.getRoot(), "resources/WebgrowthPartition.jdf", true);
+		XMLDoc xjdfDoc = writeTest(doc.getRoot(), "resources/WebgrowthPartition.jdf", true, null);
 		XJDFHelper h = XJDFHelper.getHelper(xjdfDoc);
 		SetHelper sh = h.getSet(ElementName.LAYOUTSHIFT, 0);
 		//		setSnippet(sh, true);

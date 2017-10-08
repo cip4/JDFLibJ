@@ -138,7 +138,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		assertTrue(ca.isValid(EnumValidationLevel.Complete));
 		ca.setAttribute("RawNames", rawNames);
 		elem.ensureLink(colControl, EnumUsage.Input, null);
-		writeTest(d.getRoot(), "resources/ColorantAlias.jdf", false);
+		writeTest(d.getRoot(), "resources/ColorantAlias.jdf", false, null);
 	}
 
 	/**

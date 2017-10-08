@@ -244,7 +244,7 @@ public class ContentCreationTest extends PreflightTest
 
 		//TODO fix back conversion		writeRoundTrip(n, "LayoutPositionObj");
 		//		d.write2File(sm_dirTestDataTemp + File.separator + "LayoutPositionObj.jdf", 2, false);
-		writeTest(n, "LayoutPositionObj.jdf", true);
+		writeTest(n, "LayoutPositionObj.jdf", true, null);
 	}
 
 	/**

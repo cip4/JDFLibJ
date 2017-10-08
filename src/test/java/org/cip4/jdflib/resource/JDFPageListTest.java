@@ -146,7 +146,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 		}
 		pl.setXMLComment("Note that multiple page elements may but need not be specified\nit is also possible to reference only on pageEleemnt that spans the entire book");
 
-		writeTest(d.getRoot(), "resources/ContentMetaData.jdf", false);
+		writeTest(d.getRoot(), "resources/ContentMetaData.jdf", false, null);
 	}
 
 	/**

@@ -143,7 +143,7 @@ public abstract class JDFTestCaseBase
 	 */
 	protected static JDFParser getXJDFSchemaParser()
 	{
-		JDFParser parser = new JDFParser();
+		final JDFParser parser = new JDFParser();
 		parser.setSchemaLocation(JDFElement.getSchemaURL(2, 0), getXJDFSchema());
 		return parser;
 	}
@@ -174,7 +174,7 @@ public abstract class JDFTestCaseBase
 	private static String getTestDataDir()
 	{
 		String path = null;
-		URL resource = JDFTestCaseBase.class.getResource("/data");
+		final URL resource = JDFTestCaseBase.class.getResource("/data");
 		if (resource != null)
 		{
 			path = resource.getPath();
@@ -194,11 +194,11 @@ public abstract class JDFTestCaseBase
 	 * @param root
 	 * @param level
 	 */
-	protected void checkSchema(JDFElement root, EnumValidationLevel level)
+	protected void checkSchema(final JDFElement root, final EnumValidationLevel level)
 	{
-		String string = root.getOwnerDocument_JDFElement().write2String(2);
-		JDFParser jdfParser = getSchemaParser();
-		JDFDoc doc = jdfParser.parseString(string);
+		final String string = root.getOwnerDocument_JDFElement().write2String(2);
+		final JDFParser jdfParser = getSchemaParser();
+		final JDFDoc doc = jdfParser.parseString(string);
 		assertEquals(doc.getValidationResult().getRoot().getAttribute("ValidationResult"), "Valid");
 		assertTrue(((JDFElement) doc.getRoot()).isValid(level));
 	}
@@ -341,7 +341,7 @@ public abstract class JDFTestCaseBase
 	 * @param h
 	 * @param startFirst
 	 */
-	protected void setSnippet(BaseXJDFHelper h, boolean startFirst)
+	protected void setSnippet(final BaseXJDFHelper h, final boolean startFirst)
 	{
 		if (h != null)
 		{
@@ -354,13 +354,13 @@ public abstract class JDFTestCaseBase
 	 * @param e
 	 * @param startFirst if true include the enclosing element, if false exclude it
 	 */
-	protected void setSnippet(KElement e, boolean startFirst)
+	protected void setSnippet(final KElement e, final boolean startFirst)
 	{
 		if (e != null)
 		{
-			Node parent = e.getParentNode();
-			String start = " START SNIPPET ";
-			String end = " END SNIPPET ";
+			final Node parent = e.getParentNode();
+			final String start = " START SNIPPET ";
+			final String end = " END SNIPPET ";
 			Comment newChild = e.getOwnerDocument().createComment(startFirst ? start : end);
 			parent.insertBefore(newChild, e);
 			newChild = e.getOwnerDocument().createComment(startFirst ? end : start);
@@ -372,7 +372,7 @@ public abstract class JDFTestCaseBase
 	 *
 	 * @param h
 	 */
-	protected void cleanSnippets(XJDFHelper h)
+	protected void cleanSnippets(final XJDFHelper h)
 	{
 		if (h == null || h.getRoot() == null)
 			return;
@@ -387,9 +387,9 @@ public abstract class JDFTestCaseBase
 	 * @param d
 	 * @param filename
 	 */
-	protected void writeTest(JDFDoc d, String filename)
+	protected void writeTest(final JDFDoc d, final String filename)
 	{
-		writeTest(d.getRoot(), filename, true);
+		writeTest(d.getRoot(), filename, true, null);
 	}
 
 	/**
@@ -397,9 +397,9 @@ public abstract class JDFTestCaseBase
 	 * @param d
 	 * @param filename
 	 */
-	protected void writeTest(BaseXJDFHelper d, String filename)
+	protected void writeTest(final BaseXJDFHelper d, final String filename)
 	{
-		writeTest(d.getRoot(), filename, true);
+		writeTest(d.getRoot(), filename, true, null);
 	}
 
 	/**
@@ -408,8 +408,9 @@ public abstract class JDFTestCaseBase
 	 * @param e
 	 * @param filename
 	 * @param convertX
+	 * @param snippetPath TODO
 	 */
-	protected XMLDoc writeTest(KElement e, String filename, boolean convertX)
+	protected XMLDoc writeTest(final KElement e, String filename, final boolean convertX, final String snippetPath)
 	{
 		String ext = UrlUtil.extension(filename);
 		if (ext.startsWith("x"))
@@ -422,26 +423,39 @@ public abstract class JDFTestCaseBase
 		else
 		{
 			if (e.getParentNode_KElement() == null)
+			{
 				e.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "jdfexamples/" + filename, 2, false);
+			}
 			else
+			{
 				e.write2File(sm_dirTestDataTemp + "jdfexamples/" + filename);
+			}
+
 			if (convertX)
 			{
 				ext = "x" + ext;
-				KElement x = convertToXJDF(e);
-				cleanSnippets(XJDFHelper.getHelper(x));
+				final KElement x = convertToXJDF(e);
+				if (snippetPath == null)
+				{
+					cleanSnippets(XJDFHelper.getHelper(x));
+				}
+				else
+				{
+					final KElement snippet = x.getXPathElement(snippetPath);
+					setSnippet(snippet, true);
+				}
 				filename = UrlUtil.newExtension(filename, ext);
-				String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + filename;
+				final String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + filename;
 				x.getOwnerDocument_KElement().write2File(xjdfFile, 2, false);
 			}
 		}
 		if (convertX)
 		{
-			String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + filename;
-			JDFParser p = getXJDFSchemaParser();
-			JDFDoc xParsed = p.parseFile(xjdfFile);
-			XMLDoc dVal = xParsed.getValidationResult();
-			String valResult = dVal.getRoot().getAttribute("ValidationResult");
+			final String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + filename;
+			final JDFParser p = getXJDFSchemaParser();
+			final JDFDoc xParsed = p.parseFile(xjdfFile);
+			final XMLDoc dVal = xParsed.getValidationResult();
+			final String valResult = dVal.getRoot().getAttribute("ValidationResult");
 			if (!"Valid".equals(valResult))
 			{
 				dVal.write2File(UrlUtil.newExtension(xjdfFile, "val.xml"), 2, false);
@@ -453,11 +467,11 @@ public abstract class JDFTestCaseBase
 		return null;
 	}
 
-	protected KElement convertToXJDF(KElement e)
+	protected KElement convertToXJDF(final KElement e)
 	{
-		JDFToXJDF conv = new JDFToXJDF();
+		final JDFToXJDF conv = new JDFToXJDF();
 		conv.setTrackAudits(false);
-		KElement x = conv.convert(e);
+		final KElement x = conv.convert(e);
 		return x;
 	}
 
@@ -467,28 +481,28 @@ public abstract class JDFTestCaseBase
 	 * @param root the jdf node or jmf root
 	 * @param fileBase the filename without extension
 	 */
-	protected void writeRoundTrip(final JDFElement root, String fileBase)
+	protected void writeRoundTrip(final JDFElement root, final String fileBase)
 	{
 		root.write2File(sm_dirTestDataTemp + fileBase + ".jdf");
 		assertTrue(fileBase + ".jdf", root.isValid(EnumValidationLevel.Complete));
 
-		XJDF20 xjdfConv = new XJDF20();
-		KElement xjdfRoot = xjdfConv.convert(root);
-		String tmpXJDF = sm_dirTestDataTemp + fileBase + ".xjdf";
+		final XJDF20 xjdfConv = new XJDF20();
+		final KElement xjdfRoot = xjdfConv.convert(root);
+		final String tmpXJDF = sm_dirTestDataTemp + fileBase + ".xjdf";
 		xjdfRoot.getOwnerDocument_KElement().write2File(tmpXJDF, 2, false);
 
-		JDFParser p = getXJDFSchemaParser();
-		JDFDoc docXJDF = p.parseFile(tmpXJDF);
-		XMLDoc dVal = docXJDF.getValidationResult();
-		String valResult = dVal.getRoot().getAttribute("ValidationResult");
+		final JDFParser p = getXJDFSchemaParser();
+		final JDFDoc docXJDF = p.parseFile(tmpXJDF);
+		final XMLDoc dVal = docXJDF.getValidationResult();
+		final String valResult = dVal.getRoot().getAttribute("ValidationResult");
 		if (!"Valid".equals(valResult))
 		{
 			dVal.write2File(sm_dirTestDataTemp + fileBase + ".val.xml", 2, false);
 		}
 		assertEquals(valResult, "Valid");
 
-		XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
-		JDFDoc converted = jdfConverter.convert(xjdfRoot);
+		final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
+		final JDFDoc converted = jdfConverter.convert(xjdfRoot);
 		converted.write2File(sm_dirTestDataTemp + fileBase + ".xjdf.jdf", 2, false);
 		JDFElement jxRoot = converted.getJDFRoot();
 		if (jxRoot == null)
@@ -502,13 +516,13 @@ public abstract class JDFTestCaseBase
 	 * @param xjdfRoot the xjdf node or xjmf root
 	 * @param fileBase the filename without extension
 	 */
-	protected void writeRoundTripX(final KElement xjdfRoot, String fileBase)
+	protected void writeRoundTripX(final KElement xjdfRoot, final String fileBase)
 	{
 
-		String tmpXJDF = sm_dirTestDataTemp + fileBase + ".xjdf";
+		final String tmpXJDF = sm_dirTestDataTemp + fileBase + ".xjdf";
 		xjdfRoot.getOwnerDocument_KElement().write2File(tmpXJDF, 2, false);
 
-		JDFParser p = getXJDFSchemaParser();
+		final JDFParser p = getXJDFSchemaParser();
 		JDFDoc docXJDF = p.parseFile(tmpXJDF);
 		XMLDoc dVal = docXJDF.getValidationResult();
 		String valResult = dVal.getRoot().getAttribute("ValidationResult");
@@ -518,18 +532,18 @@ public abstract class JDFTestCaseBase
 		}
 		assertEquals(valResult, "Valid");
 
-		XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
-		JDFDoc converted = jdfConverter.convert(xjdfRoot);
+		final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
+		final JDFDoc converted = jdfConverter.convert(xjdfRoot);
 		converted.write2File(sm_dirTestDataTemp + fileBase + ".xjdf.jdf", 2, false);
 		JDFElement jxRoot = converted.getJDFRoot();
 		if (jxRoot == null)
 			jxRoot = converted.getJMFRoot();
 		assertTrue(fileBase + ".xjdf.jdf", jxRoot.isValid(EnumValidationLevel.Complete));
 
-		XJDF20 xjdfConv = new XJDF20();
-		KElement root = xjdfConv.convert(jxRoot);
+		final XJDF20 xjdfConv = new XJDF20();
+		final KElement root = xjdfConv.convert(jxRoot);
 
-		String roundXjdf = sm_dirTestDataTemp + fileBase + ".jdf.xjdf";
+		final String roundXjdf = sm_dirTestDataTemp + fileBase + ".jdf.xjdf";
 		root.write2File(roundXjdf);
 		docXJDF = p.parseFile(roundXjdf);
 		dVal = docXJDF.getValidationResult();
@@ -596,7 +610,7 @@ public abstract class JDFTestCaseBase
 	 * Setter for bTestNetwork attribute.
 	 * @param bTestNetwork the bTestNetwork to set
 	 */
-	public void setTestNetwork(boolean bTestNetwork)
+	public void setTestNetwork(final boolean bTestNetwork)
 	{
 		JDFTestCaseBase.bTestNetwork = bTestNetwork;
 		netWorkChecked = true;
@@ -617,7 +631,7 @@ public abstract class JDFTestCaseBase
 	 */
 	protected JDFParser getSchemaParser()
 	{
-		JDFParser parser = new JDFParser();
+		final JDFParser parser = new JDFParser();
 		final File jdfxsd = new File(sm_dirTestSchema + File.separator + "JDF.xsd");
 		assertTrue(jdfxsd.canRead());
 		parser.setJDFSchemaLocation(jdfxsd);

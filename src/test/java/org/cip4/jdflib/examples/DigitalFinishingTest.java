@@ -162,11 +162,11 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 
 		idp = new JDFSpawn(idp).spawn();
 		new JDFSpawn(idp).unSpawnChild(idp);
-		writeTest(idp, "SimpleBarcodeIDP.jdf", true);
+		writeTest(idp, "SimpleBarcodeIDP.jdf", true, null);
 
 		booklet = new JDFSpawn(booklet).spawn();
 		new JDFSpawn(booklet).unSpawnChild(booklet);
-		writeTest(booklet, "SimpleBarcodeFinishing.jdf", true);
+		writeTest(booklet, "SimpleBarcodeFinishing.jdf", true, null);
 	}
 
 	/**
@@ -217,11 +217,11 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 
 		idp = new JDFSpawn(idp).spawn();
 		new JDFSpawn(idp).unSpawnChild(idp);
-		writeTest(idp, "BookletBarcodeIDP.jdf", false);
+		writeTest(idp, "BookletBarcodeIDP.jdf", false, null);
 
 		booklet = new JDFSpawn(booklet).spawn();
 		new JDFSpawn(booklet).unSpawnChild(booklet);
-		writeTest(booklet, "BookletBarcodeFinishing.jdf", false);
+		writeTest(booklet, "BookletBarcodeFinishing.jdf", false, null);
 	}
 
 	/**
@@ -271,11 +271,11 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		jdfDoc.write2File(sm_dirTestDataTemp + "BookletPipe.jdf", 2, false);
 		idp = new JDFSpawn(idp).spawn();
 		new JDFSpawn(idp).unSpawnChild(idp);
-		writeTest(idp, "BookletPipeIDP.jdf", false);
+		writeTest(idp, "BookletPipeIDP.jdf", false, null);
 
 		booklet = new JDFSpawn(booklet).spawn();
 		new JDFSpawn(booklet).unSpawnChild(booklet);
-		writeTest(booklet, "BookletPipeFinishing.jdf", false);
+		writeTest(booklet, "BookletPipeFinishing.jdf", false, null);
 	}
 
 	/**
@@ -393,7 +393,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		command.setSenderID("Printer");
 		pp = createPipeParams(command);
 
-		writeTest(jmf, "PipePushSet.jmf", true);
+		writeTest(jmf, "PipePushSet.jmf", true, null);
 	}
 
 	/**
@@ -423,7 +423,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 				createPartAmount(pp, j, i, 3 + j, false);
 			}
 		}
-		writeTest(jmf, "PipePushSheet.jmf", true);
+		writeTest(jmf, "PipePushSheet.jmf", true, null);
 	}
 
 	/**
@@ -439,7 +439,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		command.setType(EnumType.PipePush);
 		JDFPipeParams pp = createPipeParams(command);
 		createPartAmount(pp, set, sheet, sheets, bCover);
-		writeTest(jmf, "PipePushSheetExample" + set + "." + sheet + (bCover ? "c" : "b") + ".jmf", true);
+		writeTest(jmf, "PipePushSheetExample" + set + "." + sheet + (bCover ? "c" : "b") + ".jmf", true, null);
 	}
 
 	/**
@@ -467,7 +467,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		JDFAttributeMap m = new JDFAttributeMap("SetIndex", "34 35");
 		m.put("Condition", "Waste");
 		ap.getCreatePartAmount(m);
-		writeTest(jmf, "PipePauseFinisherExample.jmf", true);
+		writeTest(jmf, "PipePauseFinisherExample.jmf", true, null);
 
 		jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setVersion(EnumVersion.Version_1_5);
@@ -478,7 +478,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
 		m = new JDFAttributeMap("SetIndex", "34~-1");
 		ap.getCreatePartAmount(m);
-		writeTest(jmf, "PipePullFinisherExample.jmf", true);
+		writeTest(jmf, "PipePullFinisherExample.jmf", true, null);
 
 		createPipePushSheetExample(34, 0, 1, true);
 		createPipePushSheetExample(34, 0, 5, false);
@@ -495,7 +495,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		m = new JDFAttributeMap("SetIndex", "122");
 		m.put("Condition", "Waste");
 		ap.getCreatePartAmount(m);
-		writeTest(jmf, "PipePausePrinterExample.jmf", true);
+		writeTest(jmf, "PipePausePrinterExample.jmf", true, null);
 
 		jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setVersion(EnumVersion.Version_1_5);
@@ -507,7 +507,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		m = new JDFAttributeMap("SetIndex", "122");
 		m.put("Condition", "Waste");
 		ap.getCreatePartAmount(m);
-		writeTest(jmf, "PipePauseFinisher2Example.jmf", true);
+		writeTest(jmf, "PipePauseFinisher2Example.jmf", true, null);
 
 		jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setVersion(EnumVersion.Version_1_5);
@@ -518,7 +518,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
 		m = new JDFAttributeMap("SetIndex", "122~-1");
 		ap.getCreatePartAmount(m);
-		writeTest(jmf, "PipePullFinisher2Example.jmf", true);
+		writeTest(jmf, "PipePullFinisher2Example.jmf", true, null);
 
 		createPipePushSheetExample(122, 0, 1, true);
 
@@ -533,7 +533,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
 		m = new JDFAttributeMap("SetIndex", "0~221");
 		ap.getCreatePartAmount(m);
-		writeTest(jmf, "PipeCloseExample.jmf", true);
+		writeTest(jmf, "PipeCloseExample.jmf", true, null);
 	}
 
 	/**

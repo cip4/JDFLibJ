@@ -147,7 +147,7 @@ public class JMFExampleTest extends JDFTestCaseBase
 			activity.setXMLComment("The following 2nd activity is job related (direct child of jobphase) \ndo we need both cost center and MISDetails here?");
 		}
 
-		writeTest(jmf, "Activity.jmf", true);
+		writeTest(jmf, "Activity.jmf", true, null);
 	}
 
 	/**
@@ -159,7 +159,7 @@ public class JMFExampleTest extends JDFTestCaseBase
 	{
 		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		JDFJMF jmf = b.buildKnownDevicesQuery(JDFDeviceFilter.EnumDeviceDetails.Brief);
-		writeTest(jmf, "introduction/knowndevices.jmf", true);
+		writeTest(jmf, "introduction/knowndevices.jmf", true, null);
 	}
 
 	/**
@@ -176,7 +176,7 @@ public class JMFExampleTest extends JDFTestCaseBase
 		JDFQuery query = jmf.getQuery(0);
 		query.setID("q1");
 		query.getResourceQuParams().setClasses(v);
-		writeTest(jmf, "jmf/lotquery.jmf", true);
+		writeTest(jmf, "jmf/lotquery.jmf", true, null);
 	}
 
 	/**
@@ -204,7 +204,7 @@ public class JMFExampleTest extends JDFTestCaseBase
 			ap.appendPartAmount(map).setActualAmount(42 * i);
 		}
 
-		writeTest(jmf, "jmf/lotresponse.jmf", true);
+		writeTest(jmf, "jmf/lotresponse.jmf", true, null);
 	}
 
 	@Override

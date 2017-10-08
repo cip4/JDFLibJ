@@ -157,7 +157,7 @@ public class CADTest extends JDFTestCaseBase
 	{
 		createShapeDefProduction();
 
-		writeTest(n, "CAD_ShapeDefProduction.jdf", true);
+		writeTest(n, "CAD_ShapeDefProduction.jdf", true, null);
 	}
 
 	/**
@@ -183,7 +183,7 @@ public class CADTest extends JDFTestCaseBase
 		shapeTemplate.appendGeneralID("W", "720");
 		shapeTemplate.appendGeneralID("D", "1440");
 
-		writeTest(n, "resources/LWD_ShapeDefProduction.jdf", true);
+		writeTest(n, "resources/LWD_ShapeDefProduction.jdf", true, null);
 	}
 
 	/**
@@ -251,7 +251,7 @@ public class CADTest extends JDFTestCaseBase
 		final JDFDieLayout dl = createDieLayout(EnumUsage.Output, "//host/share/dir1/dir2/dieLayout.cff2");
 		dl.setDescriptiveName("the abstract die layout ");
 
-		writeTest(n, "CAD_DieLayoutProduction.jdf", true);
+		writeTest(n, "CAD_DieLayoutProduction.jdf", true, null);
 	}
 
 	/**
@@ -262,7 +262,7 @@ public class CADTest extends JDFTestCaseBase
 	public void testDieDesign()
 	{
 		createDieDesign();
-		writeTest(n, "CAD_DieDesign_out.jdf", true);
+		writeTest(n, "CAD_DieDesign_out.jdf", true, null);
 	}
 
 	/**
@@ -283,7 +283,7 @@ public class CADTest extends JDFTestCaseBase
 		dl = createDieLayout(EnumUsage.Input, "//host/share/dir1/dir2/dieLayoutLower.cff2");
 		dl.setDescriptiveName("the lower die layout ");
 
-		writeTest(n, "CAD_DieDesign.jdf", true);
+		writeTest(n, "CAD_DieDesign.jdf", true, null);
 		setAudits();
 	}
 

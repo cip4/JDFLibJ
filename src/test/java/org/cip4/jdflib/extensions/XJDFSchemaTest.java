@@ -113,7 +113,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/Resource/ConventionalPrintingParams/@WorkStyle", "WorkAndTurn");
 		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/@Usage", "Input");
 		root.setAttribute("Types", "ConventionalPrinting");
-		writeTest(root, "../SimpleCP.xjdf", false);
+		writeTest(root, "../SimpleCP.xjdf", false, null);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/@Usage", "Input");
 		root.setAttribute("Types", "ConventionalPrinting");
 		root.getElement(ElementName.AUDITPOOL).removeChildren(null, null, null);
-		writeTest(root, "../NoAudit.xjdf", false);
+		writeTest(root, "../NoAudit.xjdf", false, null);
 	}
 
 }
