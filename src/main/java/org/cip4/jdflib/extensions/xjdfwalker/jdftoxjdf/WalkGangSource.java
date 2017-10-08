@@ -80,7 +80,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class WalkGangSource extends WalkResource
+public class WalkGangSource extends WalkJDFElement
 {
 	/**
 	 *
@@ -114,7 +114,7 @@ public class WalkGangSource extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.renameKey(AttributeName.ASSEMBLYID, XJDFConstants.BinderySignatureID);
 		super.updateAttributes(map);
