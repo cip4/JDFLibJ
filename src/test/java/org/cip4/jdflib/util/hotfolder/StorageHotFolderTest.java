@@ -120,7 +120,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		 * @see org.cip4.jdflib.util.hotfolder.HotFolderListener#hotFile(java.io.File)
 		 */
 		@Override
-		public boolean hotFile(File hotFile)
+		public boolean hotFile(final File hotFile)
 		{
 			return iCount++ % 2 == 0;
 		}
@@ -148,14 +148,14 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		 * @see org.cip4.jdflib.util.hotfolder.HotFolderListener#hotFile(java.io.File)
 		 */
 		@Override
-		public boolean hotFile(File hotFile)
+		public boolean hotFile(final File hotFile)
 		{
-			File dumpDir = new File(sm_dirTestDataTemp + "URLOut" + n);
+			final File dumpDir = new File(sm_dirTestDataTemp + "URLOut" + n);
 			dumpDir.delete();
-			URLExtractor ex = new URLExtractor(dumpDir, hotFile.getParent(), null);
+			final URLExtractor ex = new URLExtractor(dumpDir, hotFile.getParent(), null);
 			ex.setWantLog(true);
 			ex.setDeleteFile(true);
-			JDFDoc d = JDFDoc.parseFile(hotFile);
+			final JDFDoc d = JDFDoc.parseFile(hotFile);
 			log.info("processing " + this);
 			if (d != null)
 			{
@@ -200,7 +200,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testSimple() throws IOException
 	{
-		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		final File file = new File(theHFDir + File.separator + "f1.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
@@ -218,16 +218,16 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testSubdir() throws IOException
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
 		rl.addPDF("./dummy/boo.pdf", 0, -1);
-		String hfPath = theHFDir.getAbsolutePath();
-		File content = new File(hfPath + "/dummy/boo.pdf");
+		final String hfPath = theHFDir.getAbsolutePath();
+		final File content = new File(hfPath + "/dummy/boo.pdf");
 		FileUtil.createNewFile(content);
-		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new ExtractListener());
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new ExtractListener());
 		ThreadUtil.sleep(333);
 		d.write2File(hfPath + "/dummy.jdf", 2, false);
-		File file = new File(hfPath + "/dummy.jdf");
+		final File file = new File(hfPath + "/dummy.jdf");
 		assertTrue(file.exists());
 		for (int i = 0; i < 10; i++)
 		{
@@ -249,17 +249,17 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testSubdirSpace() throws IOException
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
 		rl.addPDF("./dummy%20space/boo.pdf", 0, -1);
-		String hfPath = theHFDir.getAbsolutePath();
-		File content = new File(hfPath + "/dummy space/boo.pdf");
+		final String hfPath = theHFDir.getAbsolutePath();
+		final File content = new File(hfPath + "/dummy space/boo.pdf");
 		FileUtil.createNewFile(content);
-		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new ExtractListener());
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new ExtractListener());
 		hf.setOKStorage(new File("OK"));
 		ThreadUtil.sleep(333);
 		d.write2File(hfPath + "/dummy space.jdf", 2, false);
-		File file = new File(hfPath + "/dummy space.jdf");
+		final File file = new File(hfPath + "/dummy space.jdf");
 		assertTrue(file.exists());
 		for (int i = 0; i < 10; i++)
 		{
@@ -269,7 +269,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		}
 		assertFalse(file.getAbsolutePath(), file.exists());
 		assertFalse(content.getAbsolutePath(), content.exists());
-		File file2 = new File(hfPath + "/OK/dummy space");
+		final File file2 = new File(hfPath + "/OK/dummy space");
 		assertTrue(file2.isDirectory());
 		assertEquals(tmpHFDir.listFiles().length, 0, 0);
 		hf.stop();
@@ -283,7 +283,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testNonAscii() throws IOException
 	{
-		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		final File file = new File(theHFDir + File.separator + "42 äöü €.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
@@ -301,7 +301,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testAddListener() throws IOException
 	{
-		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, ".xml", new CountListener());
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, ".xml", new CountListener());
 		final File file = new File(theHFDir + File.separator + "f1.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
@@ -321,7 +321,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testOKError() throws Exception
 	{
-		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.setStabilizeTime(100);
 		File error = new File("error");
 		hf.setErrorStorage(error);
@@ -381,7 +381,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	public synchronized void testOKErrorMulti() throws Exception
 	{
 
-		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.setMaxConcurrent(5);
 		hf.setStabilizeTime(100);
 		File error = new File("error");
@@ -441,7 +441,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testOKErrorMultiAuxSame() throws Exception
 	{
-		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.setMaxConcurrent(5);
 		hf.setStabilizeTime(100);
 		File error = new File("error");
@@ -471,7 +471,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		error = FileUtil.getFileInDirectory(theHFDir, error);
 
 		assertEquals(ok.listFiles().length, 20, 4);
-		assertEquals(tmpHFDir.listFiles().length, 0, 2);
+		assertEquals(tmpHFDir.listFiles().length, 0, 4);
 		assertEquals(error.listFiles().length, 20, 4);
 
 		hf.stop();
@@ -485,7 +485,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testAux() throws Exception
 	{
-		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.setMaxConcurrent(5);
 		hf.setStabilizeTime(100);
 		File error = new File("error");
@@ -508,9 +508,9 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		hf.stop();
 	}
 
-	void createPair(int i) throws IOException
+	void createPair(final int i) throws IOException
 	{
-		String fileName = "f" + i;
+		final String fileName = "f" + i;
 		final File dir = new File(theHFDir + File.separator + fileName + ".dir");
 		while (dir.exists())
 		{
@@ -529,7 +529,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testOKErrorNonAscii() throws Exception
 	{
-		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		File error = new File("error");
 		hf.setErrorStorage(error);
 		File ok = new File("ok");
@@ -559,7 +559,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testOKErrorNonAsciiAux() throws Exception
 	{
-		StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		File error = new File("error");
 		hf.setErrorStorage(error);
 		File ok = new File("ok");
