@@ -111,7 +111,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * Setter for defaultHour attribute.
 	 * @param defaultHour the defaultHour to set
 	 */
-	public static void setDefaultHour(int defaultHour)
+	public static void setDefaultHour(final int defaultHour)
 	{
 		if (defaultHour >= 0 && defaultHour <= 23)
 			JDFDate.defaultHour = defaultHour;
@@ -183,7 +183,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		 * @param tzInMillis
 		 * @return
 		 */
-		synchronized long getTimeInMillis(final byte[] b, int decimalLength, int tzInMillis)
+		synchronized long getTimeInMillis(final byte[] b, final int decimalLength, final int tzInMillis)
 		{
 			final int iYear = getIntFromPos(b, 0, 4);
 			final int iMonth = getIntFromPos(b, 5, 7) - 1; // months are zero based in Java
@@ -257,7 +257,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		{
 			new StringHandler(iTime).handle();
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			lTimeInMillis = iTime;
 			m_TimeZoneOffsetInMillis = TimeZone.getDefault().getOffset(iTime);
@@ -315,7 +315,14 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	{
 		lTimeInMillis = 0;
 		m_TimeZoneOffsetInMillis = 0;
-		init(strDateTime);
+		init(strDateTime, -1, -1);
+	}
+
+	public JDFDate(final String strDateTime, final int defaultHour, final int defaultMinute) throws DataFormatException
+	{
+		lTimeInMillis = 0;
+		m_TimeZoneOffsetInMillis = 0;
+		init(strDateTime, defaultHour, defaultMinute);
 	}
 
 	/**
@@ -366,9 +373,11 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * <li>"PT30M"</li>
 	 *
 	 * @param strDateTime formatted date and time
+	 * @param h
+	 * @param m default offset minutes
 	 * @throws DataFormatException thrown if the string is not a reasonable iso date or date time
 	 */
-	private void init(String strDateTime) throws DataFormatException
+	private void init(final String strDateTime, final int h, final int m) throws DataFormatException
 	{
 		if (strDateTime == null || strDateTime.equals(JDFConstants.EMPTYSTRING))
 		{
@@ -379,7 +388,9 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 		try
 		{
-			new StringHandler(strDateTime).handle();
+			final StringHandler stringHandler = new StringHandler(strDateTime, h, m);
+
+			stringHandler.handle();
 		}
 		catch (final IndexOutOfBoundsException ie)
 		{
@@ -398,16 +409,22 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		private String strDateTime;
 		private long l;
 		private boolean timezoneSet;
+		private int defaultH;
+		private int defaultM;
 
 		/**
 		 *
 		 * @param strDateTime
+		 * @param m
+		 * @param h
 		 */
-		StringHandler(String strDateTime)
+		StringHandler(final String strDateTime, final int h, final int m)
 		{
 			super();
 			this.strDateTime = strDateTime;
 			timezoneSet = true;
+			this.defaultH = h >= 0 ? h : defaultHour;
+			this.defaultM = m >= 0 ? m : 0;
 			l = StringUtil.parseLong(strDateTime, -1);
 		}
 
@@ -415,7 +432,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		 *
 		 * @param millis
 		 */
-		StringHandler(long millis)
+		StringHandler(final long millis)
 		{
 			super();
 			this.strDateTime = "";
@@ -496,7 +513,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			// check for zulu style time zone
 			strDateTime = handleZulu(strDateTime);
 
-			int decimalLength = handleDecimal();
+			final int decimalLength = handleDecimal();
 			handleTimeZone(decimalLength);
 
 			// interpret the string - low level enhances performance quite a bit...
@@ -526,22 +543,22 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		 */
 		private void cleanDate() throws DataFormatException
 		{
-			String date = StringUtil.token(strDateTime, 0, "T");
-			VString dates = StringUtil.tokenize(date, "-", false);
+			final String date = StringUtil.token(strDateTime, 0, "T");
+			final VString dates = StringUtil.tokenize(date, "-", false);
 			if (dates != null && dates.size() >= 3)
 			{
-				int year = StringUtil.parseInt(dates.get(0), 0);
+				final int year = StringUtil.parseInt(dates.get(0), 0);
 				if (year <= 0 || year > 9999)
 					throw new DataFormatException("JDFDate.init: invalid date Year " + dates.get(0));
-				int month = StringUtil.parseInt(dates.get(1), 0);
+				final int month = StringUtil.parseInt(dates.get(1), 0);
 				if (month <= 0 || month > 12)
 					throw new DataFormatException("JDFDate.init: invalid date Month " + dates.get(1));
 
-				int day = StringUtil.parseInt(dates.get(2), 0);
+				final int day = StringUtil.parseInt(dates.get(2), 0);
 				if (day <= 0 || day > 31)
 					throw new DataFormatException("JDFDate.init: invalid date Day " + dates.get(2));
-				NumberFormatter nf = new NumberFormatter();
-				String newDate = nf.formatInt(year, 4) + "-" + nf.formatInt(month, 2) + "-" + nf.formatInt(day, 2);
+				final NumberFormatter nf = new NumberFormatter();
+				final String newDate = nf.formatInt(year, 4) + "-" + nf.formatInt(month, 2) + "-" + nf.formatInt(day, 2);
 				strDateTime = StringUtil.replaceToken(strDateTime, 0, "T", newDate);
 			}
 			else
@@ -557,9 +574,9 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		private void cleanTime() throws DataFormatException
 		{
 			String time = StringUtil.token(strDateTime, 1, "T");
-			String[] pms = new String[] { "+", "-" };
+			final String[] pms = new String[] { "+", "-" };
 			String timeZone = null;
-			for (String pm : pms)
+			for (final String pm : pms)
 			{
 				timeZone = StringUtil.token(time, 1, pm);
 				if (timeZone != null)
@@ -572,22 +589,22 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			if (timeZone == null)
 				throw new DataFormatException("bad time zone ");
 
-			VString times = StringUtil.tokenize(time, ":", false);
+			final VString times = StringUtil.tokenize(time, ":", false);
 			if (times != null && times.size() >= 3)
 			{
-				int hours = StringUtil.parseInt(times.get(0), -1);
+				final int hours = StringUtil.parseInt(times.get(0), -1);
 				if (hours < 0 || hours > 23)
 					throw new DataFormatException("JDFDate.init: invalid time hours " + times.get(0));
-				int minutes = StringUtil.parseInt(times.get(1), -1);
+				final int minutes = StringUtil.parseInt(times.get(1), -1);
 				if (minutes < 0 || minutes >= 60)
 					throw new DataFormatException("JDFDate.init: invalid time minutes " + times.get(1));
 
-				int seconds = StringUtil.parseInt(times.get(2), -1);
+				final int seconds = StringUtil.parseInt(times.get(2), -1);
 				if (seconds < 0 || seconds >= 60)
 					throw new DataFormatException("JDFDate.init: invalid time seconds " + times.get(2));
-				NumberFormatter nf = new NumberFormatter();
+				final NumberFormatter nf = new NumberFormatter();
 
-				String newTime = nf.formatInt(hours, 2) + ":" + nf.formatInt(minutes, 2) + ":" + nf.formatInt(seconds, 2) + timeZone;
+				final String newTime = nf.formatInt(hours, 2) + ":" + nf.formatInt(minutes, 2) + ":" + nf.formatInt(seconds, 2) + timeZone;
 				strDateTime = StringUtil.replaceToken(strDateTime, 1, "T", newTime);
 			}
 			else
@@ -596,11 +613,11 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			}
 		}
 
-		private void handleTimeZone(int decimalLength) throws DataFormatException
+		private void handleTimeZone(final int decimalLength) throws DataFormatException
 		{
 			// if the time looks like 2004-07-14T18:21:47 check if there is an +xx:00 or -xx:00 at the end specifying the time zone
 			int posPlus = strDateTime.indexOf('+', 15);
-			int posMinus = strDateTime.indexOf('-', 15);
+			final int posMinus = strDateTime.indexOf('-', 15);
 			if (posPlus == -1 && posMinus == -1)
 			{
 				setTimeZoneOffsetInMillis(TimeZone.getDefault().getOffset(lTimeInMillis));
@@ -616,12 +633,12 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 				if (posMinus > posPlus)
 					posPlus = posMinus;
 
-				String tzValue = strDateTime.substring(posPlus, posPlus + 3);
+				final String tzValue = strDateTime.substring(posPlus, posPlus + 3);
 				if (!StringUtil.isInteger(tzValue))
 				{
 					throw new DataFormatException("bad date time string: " + strDateTime);
 				}
-				int parseInt = StringUtil.parseInt(tzValue, 0);
+				final int parseInt = StringUtil.parseInt(tzValue, 0);
 				setTimeZoneOffsetInMillis(3600 * 1000 * parseInt);
 			}
 		}
@@ -674,12 +691,13 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 		private String getDefaultTime()
 		{
-			return "T" + new NumberFormatter().formatInt(defaultHour, 2) + ":00:00";
+			final NumberFormatter numberFormatter = new NumberFormatter();
+			return "T" + numberFormatter.formatInt(defaultH, 2) + ":" + numberFormatter.formatInt(defaultM, 2) + ":00";
 		}
 
 		private void handleLongValue()
 		{
-			long l0 = System.currentTimeMillis();
+			final long l0 = System.currentTimeMillis();
 			if (l0 / l >= 900) // this is roughly 10 years back
 				l *= 1000l; // assume seconds
 			lTimeInMillis = l;
@@ -751,9 +769,9 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * @param minute the fixed minute, if -1 don't set
 	 * @return
 	 */
-	public JDFDate createDateFromDuration(JDFDuration duration, int hour, int minute)
+	public JDFDate createDateFromDuration(final JDFDuration duration, final int hour, final int minute)
 	{
-		JDFDate d = new JDFDate(this);
+		final JDFDate d = new JDFDate(this);
 		if (duration != null)
 		{
 			d.setTimeInMillis(d.getTimeInMillis() + duration.getDurationMillis());
@@ -840,7 +858,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public boolean isLater(final JDFDate x)
 	{
-		long timeInMillis = x == null ? 0 : x.getTimeInMillis();
+		final long timeInMillis = x == null ? 0 : x.getTimeInMillis();
 		return lTimeInMillis > timeInMillis;
 	}
 
@@ -852,7 +870,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public boolean isEarlier(final JDFDate x)
 	{
-		long timeInMillis = x == null ? 0 : x.getTimeInMillis();
+		final long timeInMillis = x == null ? 0 : x.getTimeInMillis();
 		return lTimeInMillis < timeInMillis;
 	}
 
@@ -894,14 +912,14 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * @param m
 	 * @param s
 	 */
-	public JDFDate setTime(int h, int m, int s)
+	public JDFDate setTime(final int h, final int m, final int s)
 	{
-		String st = getFormattedDateTime(DATETIMEISO_000);
+		final String st = getFormattedDateTime(DATETIMEISO_000);
 		try
 		{
-			init(st);
+			init(st, -1, -1);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// NOP
 		}
