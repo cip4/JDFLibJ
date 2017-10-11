@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  * Created on Jul 5, 2006, 11:45:44 AM
@@ -118,11 +118,11 @@ public class MimeUtil extends UrlUtil
 		 */
 		public HTTPDetails httpDetails = new HTTPDetails();
 		/**
-		 * 
+		 *
 		 */
 		public String transferEncoding = defaultTransferEncoding;
 		/**
-		 * if true, the stream will be parsed for a semicolon after the mime multipart 
+		 * if true, the stream will be parsed for a semicolon after the mime multipart
 		 * and said semicolon will be replaced with a cr/lf
 		 */
 		public boolean modifyBoundarySemicolon = false;
@@ -150,7 +150,7 @@ public class MimeUtil extends UrlUtil
 
 		/**
 		 * * (non-Javadoc)
-		 * 
+		 *
 		 * @see javax.activation.DataSource#getContentType()
 		 */
 		@Override
@@ -198,7 +198,7 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * @param bp
 	 * @param cid
-	 * 
+	 *
 	 */
 	public static void setContentID(final BodyPart bp, final String cid)
 	{
@@ -394,7 +394,7 @@ public class MimeUtil extends UrlUtil
 	 * @param mimeType the mime type
 	 * @return true if matches
 	 */
-	public static boolean isMimeType(String toCheck, String mimeType)
+	public static boolean isMimeType(String toCheck, final String mimeType)
 	{
 		if (toCheck == null)
 		{
@@ -458,7 +458,7 @@ public class MimeUtil extends UrlUtil
 			urlString = urlString.substring(0, urlString.length() - 1);
 		}
 
-		return "cid:" + new File(urlString).getName(); // 
+		return "cid:" + new File(urlString).getName(); //
 	}
 
 	/**
@@ -525,7 +525,7 @@ public class MimeUtil extends UrlUtil
 	{
 		final MimeWriter mimeWriter = new MimeWriter(mp);
 		mimeWriter.setMIMEDetails(mimeDetails);
-		UrlPart part = mimeWriter.writeToURL(strUrl);
+		final UrlPart part = mimeWriter.writeToURL(strUrl);
 		return (part != null && (part.getConnection() instanceof HttpURLConnection)) ? (HttpURLConnection) part.getConnection() : null;
 	}
 
@@ -659,7 +659,7 @@ public class MimeUtil extends UrlUtil
 	}
 
 	/**
-	 * @param contentType 
+	 * @param contentType
 	 * @return
 	 */
 	public static boolean isMimeMultiPart(String contentType)
