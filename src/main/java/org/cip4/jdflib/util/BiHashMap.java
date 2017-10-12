@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 package org.cip4.jdflib.util;
@@ -78,12 +78,12 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Bidirectional HashMap utility class 
- * 
+ * Bidirectional HashMap utility class
+ *
  * @author Rainer Prosi
  * @param <a> any datatype for the key
  * @param <b> any datatype for the value
- * 
+ *
  */
 public class BiHashMap<a, b> implements Map<a, b>
 {
@@ -93,7 +93,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	private boolean unique;
 
 	/**
-	 * 
+	 *
 	 */
 	public BiHashMap()
 	{
@@ -133,7 +133,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	/**
 	 * remove key and its associated value
 	 * @param key the key
-	 * @return 
+	 * @return
 	 */
 	@Override
 	public b remove(final Object key)
@@ -155,7 +155,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	/**
 	 * remove value and its associated key
 	 * @param value the value
-	 * @return 
+	 * @return
 	 */
 	public a removeVal(final Object value)
 	{
@@ -180,7 +180,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * both key and value must be non-null
 	 * @param key the key
 	 * @param val the value
-	 * @return 
+	 * @return
 	 */
 	@Override
 	public b put(final a key, final b val)
@@ -219,7 +219,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 
 	/**
 	 * get a reference to the internal key map
-	 * 
+	 *
 	 * @return
 	 */
 	public Map<a, b> getKeyMap()
@@ -229,7 +229,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 
 	/**
 	 * get a reference to the internal value map
-	 * 
+	 *
 	 * @return
 	 */
 	public Map<b, a> getValMap()
@@ -255,7 +255,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @return
 	*/
 	@Override
-	public boolean containsKey(Object arg0)
+	public boolean containsKey(final Object arg0)
 	{
 		return mapKey.containsKey(arg0);
 	}
@@ -266,7 +266,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @return
 	*/
 	@Override
-	public boolean containsValue(Object arg0)
+	public boolean containsValue(final Object arg0)
 	{
 		return mapKey.containsValue(arg0);
 	}
@@ -287,7 +287,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @return
 	*/
 	@Override
-	public b get(Object arg0)
+	public b get(final Object arg0)
 	{
 		return mapKey.get(arg0);
 	}
@@ -317,14 +317,12 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @param arg0
 	*/
 	@Override
-	public void putAll(Map<? extends a, ? extends b> arg0)
+	public void putAll(final Map<? extends a, ? extends b> arg0)
 	{
 		if (arg0 == null)
 			return;
-		Iterator<? extends a> it = arg0.keySet().iterator();
-		while (it.hasNext())
+		for (final a key : arg0.keySet())
 		{
-			a key = it.next();
 			put(key, arg0.get(key));
 		}
 	}
@@ -353,7 +351,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * TODO Please insert comment!
 	 * @param b
 	 */
-	public void setUnique(boolean b)
+	public void setUnique(final boolean b)
 	{
 		unique = b;
 	}

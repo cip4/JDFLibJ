@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -67,7 +67,7 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.elementwalker.fixversion;
 
@@ -85,15 +85,18 @@ import org.cip4.jdflib.util.EnumUtil;
  * fixes versions within JDF 1.x June 7, 2009<br/>
  * uses heuristics to modify this element and its children to be compatible with a given version<br>
  * in general, it will be able to move from low to high versions, but potentially fail when attempting to move from higher to lower versions
- * 
+ *
  * This class is the result of refactoring the recursive fixVersion routines from the dom node tree into one class
- * 
+ *
  */
 public class FixVersionImpl extends PackageElementWalker
 {
 	protected boolean bFixIDs;
 	protected boolean bZappInvalid;
 	protected boolean bZappDeprecated;
+	// hours for missing times in dates
+	int firsthour;
+	int lasthour;
 
 	/**
 	 * @return the bZappDeprecated
@@ -106,7 +109,7 @@ public class FixVersionImpl extends PackageElementWalker
 	/**
 	 * @param bZappDeprecated the bZappDeprecated to set
 	 */
-	public void setZappDeprecated(boolean bZappDeprecated)
+	public void setZappDeprecated(final boolean bZappDeprecated)
 	{
 		this.bZappDeprecated = bZappDeprecated;
 	}
@@ -160,7 +163,7 @@ public class FixVersionImpl extends PackageElementWalker
 
 	/**
 	 * @param _version
-	 * 
+	 *
 	 */
 	public FixVersionImpl(final EnumVersion _version)
 	{
@@ -173,6 +176,8 @@ public class FixVersionImpl extends PackageElementWalker
 		bOK = true;
 		fixICSVersions = false;
 		bLayoutPrepToStripping = false;
+		firsthour = 6;
+		lasthour = 18;
 	}
 
 	/**
@@ -199,11 +204,11 @@ public class FixVersionImpl extends PackageElementWalker
 
 	/**
 	 * convert the element e to whichever version has been set up here
-	 * 
+	 *
 	 * @param e the element to convert - typically a JDF element
 	 * @return true if all went well
 	 */
-	public boolean convert(KElement e)
+	public boolean convert(final KElement e)
 	{
 		walkTree(e, null);
 		return isOK();
@@ -229,11 +234,11 @@ public class FixVersionImpl extends PackageElementWalker
 	}
 
 	/**
-	 * returns true if v is less than the target version 
-	 * @param v 
+	 * returns true if v is less than the target version
+	 * @param v
 	 * @return
 	 */
-	protected boolean lessThanVersion(EnumVersion v)
+	protected boolean lessThanVersion(final EnumVersion v)
 	{
 		return EnumUtil.aLessThanB(version, v);
 	}
@@ -251,7 +256,7 @@ public class FixVersionImpl extends PackageElementWalker
 	/**
 	 * @param zappInvalid the bZappInvalid to set
 	 */
-	public void setBZappInvalid(boolean zappInvalid)
+	public void setBZappInvalid(final boolean zappInvalid)
 	{
 		bZappInvalid = zappInvalid;
 	}
@@ -260,20 +265,36 @@ public class FixVersionImpl extends PackageElementWalker
 	 * @see org.cip4.jdflib.elementwalker.PackageElementWalker#constructWalker(java.lang.String)
 	 */
 	@Override
-	protected BaseWalker constructWalker(String name)
+	protected BaseWalker constructWalker(final String name)
 	{
-		WalkElement constructWalker = (WalkElement) super.constructWalker(name);
+		final WalkElement constructWalker = (WalkElement) super.constructWalker(name);
 		if (constructWalker != null)
 			constructWalker.setParent(this);
 		return constructWalker;
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isXJDF()
 	{
 		return version != null && version.isXJDF();
+	}
+
+	/**
+	 * @param firsthour the firsthour to set
+	 */
+	public void setFirsthour(final int firsthour)
+	{
+		this.firsthour = firsthour;
+	}
+
+	/**
+	 * @param lasthour the lasthour to set
+	 */
+	public void setLasthour(final int lasthour)
+	{
+		this.lasthour = lasthour;
 	}
 }

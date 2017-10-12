@@ -101,6 +101,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.JDFTool;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
+import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.process.JDFApprovalDetails;
 import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
 import org.cip4.jdflib.resource.process.JDFAssembly;
@@ -111,6 +112,7 @@ import org.cip4.jdflib.resource.process.JDFContentMetaData;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.CPUTimer;
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -464,6 +466,58 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertTrue(converted);
 		assertNotNull(n.getResource(ElementName.NODEINFO, EnumUsage.Input, 0));
 		assertNull(n.getResource(ElementName.NODEINFO, EnumUsage.Input, 0).getElement(ElementName.JMF));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testNodeInfoTime()
+	{
+		final JDFNodeInfo ni = n.appendNodeInfo();
+		ni.setAttribute(AttributeName.START, new JDFDate().getDateISO());
+		ni.setAttribute(AttributeName.LASTEND, new JDFDate().getDateISO());
+		final FixVersion fixVersion = new FixVersion((EnumVersion) null);
+		final boolean converted = fixVersion.convert(n);
+		assertTrue(converted);
+		assertTrue(ni.getAttribute(AttributeName.START).indexOf("T06:00") > 0);
+		assertTrue(ni.getAttribute(AttributeName.LASTEND).indexOf("T18:00") > 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testNodeInfoTimeSet()
+	{
+		final JDFNodeInfo ni = n.appendNodeInfo();
+		ni.setAttribute(AttributeName.START, new JDFDate().getDateISO());
+		ni.setAttribute(AttributeName.LASTEND, new JDFDate().getDateISO());
+		final FixVersion fixVersion = new FixVersion((EnumVersion) null);
+		fixVersion.setFirsthour(3);
+		fixVersion.setLasthour(22);
+		final boolean converted = fixVersion.convert(n);
+		assertTrue(converted);
+		assertTrue(ni.getAttribute(AttributeName.START).indexOf("T03:00") > 0);
+		assertTrue(ni.getAttribute(AttributeName.LASTEND).indexOf("T22:00") > 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testDeliveryIntentTimeSet()
+	{
+		final JDFDeliveryIntent ni = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
+		ni.appendEarliest().setAttribute(AttributeName.ACTUAL, new JDFDate().getDateISO());
+		ni.appendRequired().setAttribute(AttributeName.ACTUAL, new JDFDate().getDateISO());
+		final FixVersion fixVersion = new FixVersion((EnumVersion) null);
+		fixVersion.setFirsthour(3);
+		fixVersion.setLasthour(22);
+		final boolean converted = fixVersion.convert(n);
+		assertTrue(converted);
+		assertTrue(ni.getEarliest().getAttribute(AttributeName.ACTUAL).indexOf("T03:00") > 0);
+		assertTrue(ni.getRequired().getAttribute(AttributeName.ACTUAL).indexOf("T22:00") > 0);
 	}
 
 	/**

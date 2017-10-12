@@ -84,6 +84,7 @@ import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.elementwalker.BaseWalker;
+import org.cip4.jdflib.span.JDFTimeSpan;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
@@ -319,11 +320,24 @@ public class WalkElement extends BaseWalker
 	 * @param key
 	 * @param value
 	 */
-	private void fixDateTime(final JDFElement el, final String key, final String value)
+	void fixDateTime(final JDFElement el, final String key, final String value)
 	{
+		int hour = -1;
+		String check = key;
+		if (el instanceof JDFTimeSpan)
+		{
+			check = el.getLocalName();
+		}
+		if (check != null)
+		{
+			if (check.endsWith(AttributeName.END) || AttributeName.REQUIRED.equals(check))
+				hour = fixVersion.lasthour;
+			else if (check.endsWith(AttributeName.START) || AttributeName.EARLIEST.equals(check))
+				hour = fixVersion.firsthour;
+		}
 		try
 		{
-			el.setAttribute(key, new JDFDate(value).getDateTimeISO());
+			el.setAttribute(key, new JDFDate(value, hour, 0).getDateTimeISO());
 		}
 		catch (final DataFormatException ex)
 		{
