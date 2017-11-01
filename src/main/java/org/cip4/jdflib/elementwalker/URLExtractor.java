@@ -138,7 +138,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	 * @param deleteFile the deleteFile to set; if true files are move rather than copied
 	 * note that files are NOT removed from zip or mime packages
 	 */
-	public void setDeleteFile(boolean deleteFile)
+	public void setDeleteFile(final boolean deleteFile)
 	{
 		this.deleteFile = deleteFile;
 	}
@@ -177,7 +177,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	 * @param bWant if true, we will log each move
 	 *
 	 */
-	public void setWantLog(boolean bWant)
+	public void setWantLog(final boolean bWant)
 	{
 		wantLog = bWant;
 	}
@@ -186,7 +186,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	 * add a protocol to the list of protocols that are supported
 	 * @param protocol the protocol to add
 	 */
-	public void addProtocol(URLProtocol protocol)
+	public void addProtocol(final URLProtocol protocol)
 	{
 		if (protocols == null)
 			protocols = new HashSet<URLProtocol>();
@@ -219,8 +219,8 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			IURLSetter urlSetter = (IURLSetter) e;
-			String url = StringUtil.getNonEmpty(urlSetter.getURL());
+			final IURLSetter urlSetter = (IURLSetter) e;
+			final String url = StringUtil.getNonEmpty(urlSetter.getURL());
 			if (url == null)
 			{
 				return e;
@@ -231,7 +231,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 
 			if (protocols != null)
 			{
-				URLProtocol protocol = UrlUtil.getProtocol(url);
+				final URLProtocol protocol = UrlUtil.getProtocol(url);
 				if (!protocols.contains(protocol))
 				{
 					return e;
@@ -239,31 +239,31 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 			}
 			if (UrlUtil.isFile(url))
 			{
-				File f = UrlUtil.urlToFile(url);
+				final File f = UrlUtil.urlToFile(url);
 				if (f != null)
 				{
 					if (!f.exists())
 					{
-						File parentDir = f.getParentFile();
+						final File parentDir = f.getParentFile();
 						if (parentDir != null && !parentDir.exists())
 						{
-							log.error("No such parent directory: " + parentDir);
+							log.warn("No such parent directory: " + parentDir);
 						}
 						else if (parentDir != null && !parentDir.canRead())
 						{
-							log.error("Cannot read parent directory: " + parentDir);
+							log.warn("Cannot read parent directory: " + parentDir);
 						}
-						log.error("No such file: " + f);
+						log.warn("No such file: " + f);
 						return null;
 					}
 					if (!f.canRead())
 					{
-						log.error("Cannot read file: " + f);
+						log.warn("Cannot read file: " + f);
 						return null;
 					}
 				}
 			}
-			boolean bOverwrite = !saved.contains(url);
+			final boolean bOverwrite = !saved.contains(url);
 			File newFile = UrlUtil.moveToDir(urlSetter, dir, currentURL, bOverwrite, deleteFile);
 			for (int i = 2; i < 5; i++)
 			{
@@ -280,8 +280,8 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 			{
 				if (baseURL != null)
 				{
-					String s = UrlUtil.isRelativeURL(url) ? url : UrlUtil.escape(newFile.getName(), false);
-					String urlWithDirectory = UrlUtil.getURLWithDirectory(baseURL, s);
+					final String s = UrlUtil.isRelativeURL(url) ? url : UrlUtil.escape(newFile.getName(), false);
+					final String urlWithDirectory = UrlUtil.getURLWithDirectory(baseURL, s);
 					urlSetter.setURL(urlWithDirectory);
 				}
 				if (wantLog && bOverwrite)
@@ -314,7 +314,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	 * @see org.cip4.jdflib.ifaces.IElementConverter#convert(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement convert(KElement e)
+	public KElement convert(final KElement e)
 	{
 		walkTree(e, null);
 		return e;
