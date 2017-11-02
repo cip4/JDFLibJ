@@ -1349,7 +1349,7 @@ public class JDFResource extends JDFElement
 		 * Setter for followIdentical attribute.
 		 * @param followIdentical the followIdentical to set
 		 */
-		public void setFollowIdentical(boolean followIdentical)
+		public void setFollowIdentical(final boolean followIdentical)
 		{
 			this.followIdentical = followIdentical;
 		}
@@ -1379,10 +1379,10 @@ public class JDFResource extends JDFElement
 		{
 			if (vm != null && getImplicitPartitions() != null)
 			{
-				VJDFAttributeMap vmNew = new VJDFAttributeMap();
-				for (JDFAttributeMap map : vm)
+				final VJDFAttributeMap vmNew = new VJDFAttributeMap();
+				for (final JDFAttributeMap map : vm)
 				{
-					JDFAttributeMap removeImplicitPartions = removeImplicitPartions(map.clone());
+					final JDFAttributeMap removeImplicitPartions = removeImplicitPartions(map.clone());
 					if (!removeImplicitPartions.isEmpty())
 					{
 						vmNew.appendUnique(removeImplicitPartions);
@@ -1393,7 +1393,7 @@ public class JDFResource extends JDFElement
 
 			if (ContainerUtil.getNonEmpty(vm) == null)
 			{
-				VElement v = new VElement();
+				final VElement v = new VElement();
 				v.add(JDFResource.this);
 				return v;
 			}
@@ -1406,13 +1406,13 @@ public class JDFResource extends JDFElement
 			{
 				partUsage = getPartUsage();
 			}
-			int partSize = partIDKeys == null ? 0 : partIDKeys.size();
+			final int partSize = partIDKeys == null ? 0 : partIDKeys.size();
 			if (EnumPartUsage.Explicit.equals(partUsage))
 			{
-				int partMapSize = vm.minSize();
+				final int partMapSize = vm.minSize();
 				if (partSize < partMapSize)
 				{
-					VElement v = new VElement();
+					final VElement v = new VElement();
 					return v;
 				}
 			}
@@ -1422,7 +1422,7 @@ public class JDFResource extends JDFElement
 			}
 			if (partSize == 0)
 			{
-				VElement v = new VElement();
+				final VElement v = new VElement();
 				v.add(JDFResource.this);
 				return v;
 			}
@@ -1465,14 +1465,14 @@ public class JDFResource extends JDFElement
 		 * @param partSize
 		 * @return
 		 */
-		private VJDFAttributeMap updateVM(VJDFAttributeMap vm, int partSize)
+		private VJDFAttributeMap updateVM(VJDFAttributeMap vm, final int partSize)
 		{
-			int partMapSize = vm == null ? 0 : vm.maxSize();
+			final int partMapSize = vm == null ? 0 : vm.maxSize();
 			boolean checkKeys = partSize < partMapSize;
 			if (!checkKeys && partMapSize > 0 && vm != null && partIDKeys != null)
 			{
-				JDFAttributeMap map = vm.get(0);
-				Set<String> vm0Keys = map.keySet();
+				final JDFAttributeMap map = vm.get(0);
+				final Set<String> vm0Keys = map.keySet();
 				checkKeys = !partIDKeys.containsAll(vm0Keys);
 			}
 			if (vm != null && checkKeys)
@@ -1494,7 +1494,7 @@ public class JDFResource extends JDFElement
 			{
 				if (followIdentical)
 				{
-					JDFResource target = identical.getTarget();
+					final JDFResource target = identical.getTarget();
 					if (target != null)
 						v.add(target);
 				}
@@ -1512,12 +1512,12 @@ public class JDFResource extends JDFElement
 		 */
 		private VElement detailedSearch(final VJDFAttributeMap vm, EnumPartUsage partUsage)
 		{
-			VElement v = new VElement();
+			final VElement v = new VElement();
 
 			if (partUsage == null)
 				partUsage = getPartUsage();
-			JDFAttributeMap pm = getPartMap(partIDKeys);
-			int resPos = pm == null ? -1 : pm.size() - 1;
+			final JDFAttributeMap pm = getPartMap(partIDKeys);
+			final int resPos = pm == null ? -1 : pm.size() - 1;
 
 			for (JDFAttributeMap map : vm)
 			{
@@ -1554,9 +1554,9 @@ public class JDFResource extends JDFElement
 				partUsage = getPartUsage();
 			if (m != null)
 				m = removeImplicitPartions(m.clone());
-			VElement v = new VElement();
-			JDFAttributeMap pm = getPartMap(partIDKeys);
-			int resPos = pm == null ? -1 : pm.size() - 1;
+			final VElement v = new VElement();
+			final JDFAttributeMap pm = getPartMap(partIDKeys);
+			final int resPos = pm == null ? -1 : pm.size() - 1;
 			if (resPos >= 0)
 			{
 				if (!pm.overlapMap(m))
@@ -1576,10 +1576,10 @@ public class JDFResource extends JDFElement
 
 		// //////////////////////////////////////////////////////////////////////////
 
-		protected void getDeepPartVector(JDFResource r, final JDFAttributeMap m, EnumPartUsage partUsage, int resourceDepth, int mapDepth, VElement fillReturn)
+		protected void getDeepPartVector(final JDFResource r, final JDFAttributeMap m, final EnumPartUsage partUsage, final int resourceDepth, int mapDepth, final VElement fillReturn)
 		{
-			int mSize = m == null ? 0 : m.size();
-			int partSize = partIDKeys == null ? 0 : partIDKeys.size();
+			final int mSize = m == null ? 0 : m.size();
+			final int partSize = partIDKeys == null ? 0 : partIDKeys.size();
 			if (EnumPartUsage.Explicit.equals(partUsage) && mSize > partSize)
 			{
 				return;
@@ -1595,8 +1595,8 @@ public class JDFResource extends JDFElement
 			}
 			else
 			{
-				String key = resourceDepth < 0 ? null : partIDKeys.get(resourceDepth);
-				String value = key == null ? null : m.get(key);
+				final String key = resourceDepth < 0 ? null : partIDKeys.get(resourceDepth);
+				final String value = key == null ? null : m.get(key);
 				// this level is not in the map - accept all
 				if (value == null)
 				{
@@ -1604,7 +1604,7 @@ public class JDFResource extends JDFElement
 				}
 				else
 				{
-					String resPartitionValue = r.getAttribute_KElement(key, null, null);
+					final String resPartitionValue = r.getAttribute_KElement(key, null, null);
 					if (resPartitionValue != null && JDFPart.matchesPart(key, resPartitionValue, value, strictPartVersion))
 					{
 						mapDepth++;
@@ -1623,9 +1623,9 @@ public class JDFResource extends JDFElement
 			}
 		}
 
-		private void checkChildren(JDFResource r, final JDFAttributeMap m, EnumPartUsage partUsage, int resourceDepth, int mapDepth, VElement fillReturn)
+		private void checkChildren(JDFResource r, final JDFAttributeMap m, final EnumPartUsage partUsage, final int resourceDepth, final int mapDepth, final VElement fillReturn)
 		{
-			int preFill = fillReturn.size();
+			final int preFill = fillReturn.size();
 			VElement v = r.getChildElementVector_KElement(getNodeName(), null, null, true, 0);
 			if (v.size() == 0 && followIdentical && r.getIdentical() != null)
 			{
@@ -1635,7 +1635,7 @@ public class JDFResource extends JDFElement
 					v = r.getChildElementVector_KElement(getNodeName(), null, null, true, 0);
 				}
 			}
-			for (KElement e : v)
+			for (final KElement e : v)
 			{
 				getDeepPartVector((JDFResource) e, m, partUsage, resourceDepth + 1, mapDepth, fillReturn);
 			}
@@ -1652,9 +1652,9 @@ public class JDFResource extends JDFElement
 		 * @param resourceElement
 		 * @return
 		 */
-		private PartitionGetter newPartitionGetterForLeaf(JDFResource resourceElement)
+		private PartitionGetter newPartitionGetterForLeaf(final JDFResource resourceElement)
 		{
-			PartitionGetter pg = resourceElement.new PartitionGetter();
+			final PartitionGetter pg = resourceElement.new PartitionGetter();
 			pg.setStrictPartVersion(strictPartVersion);
 			pg.setFollowIdentical(followIdentical);
 			return pg;
@@ -1673,7 +1673,7 @@ public class JDFResource extends JDFElement
 				return m;
 			}
 			m = new JDFAttributeMap(m);
-			for (EnumPartIDKey e : v)
+			for (final EnumPartIDKey e : v)
 			{
 				m.remove(e.getName());
 			}
@@ -1716,7 +1716,7 @@ public class JDFResource extends JDFElement
 		 * @param partUsage lso accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is specified
 		 * @return the first found matching resource node or leaf
 		 */
-		protected JDFResource getDeepPart(JDFAttributeMap m, final EnumPartUsage partUsage)
+		protected JDFResource getDeepPart(final JDFAttributeMap m, final EnumPartUsage partUsage)
 		{
 			JDFResource retRes = null;
 			final VString partIDKeys = getPartIDKeys();
@@ -1897,7 +1897,7 @@ public class JDFResource extends JDFElement
 
 			// check whether we are already ok
 			int iMore = 0;
-			for (String key : localPartMap.keySet())
+			for (final String key : localPartMap.keySet())
 			{
 				if (!vPartIDKeys.contains(key))
 				{
@@ -1936,7 +1936,7 @@ public class JDFResource extends JDFElement
 			boolean creating = false;
 			JDFResource leaf = JDFResource.this;
 			// create all partitions
-			for (String key : vPartIDKeys)
+			for (final String key : vPartIDKeys)
 			{
 				final EnumPartIDKey enumKey = EnumPartIDKey.getEnum(key);
 				final String value = localPartMap.get(key);
@@ -2000,7 +2000,7 @@ public class JDFResource extends JDFElement
 		 * @param partUsage
 		 * @return
 		 */
-		private JDFResource getFastPartition(JDFAttributeMap m, JDFResource.EnumPartUsage partUsage)
+		private JDFResource getFastPartition(final JDFAttributeMap m, JDFResource.EnumPartUsage partUsage)
 		{
 			if (partUsage == null)
 			{
@@ -2013,14 +2013,14 @@ public class JDFResource extends JDFElement
 			}
 
 			final int size = partIDKeys.size();
-			int nFirst = checkFast(m, mapSize, size);
+			final int nFirst = checkFast(m, mapSize, size);
 			if (nFirst < 0)
 				return null;
 
 			JDFResource ret = JDFResource.this;
 			final String nodeName = ret.getNodeName();
 
-			int needed = (nFirst + mapSize < size) ? nFirst + mapSize : size;
+			final int needed = (nFirst + mapSize < size) ? nFirst + mapSize : size;
 			for (int i = nFirst; i < needed; i++)
 			{
 				final String attName = partIDKeys.get(i);
@@ -2032,8 +2032,8 @@ public class JDFResource extends JDFElement
 				{
 					if (nodeName.equals(e.getNodeName()))
 					{
-						Attr attr = e.getAttributeNode(attName);
-						String partVal = attr == null ? null : attr.getValue();
+						final Attr attr = e.getAttributeNode(attName);
+						final String partVal = attr == null ? null : attr.getValue();
 						if (attVal.equals(partVal))
 						{
 							ret = (JDFResource) e;
@@ -2067,7 +2067,7 @@ public class JDFResource extends JDFElement
 		 * @param size
 		 * @return position of first match; -1 if we are incompatible
 		 */
-		private int checkFast(JDFAttributeMap m, final int mapSize, final int size)
+		private int checkFast(final JDFAttributeMap m, final int mapSize, final int size)
 		{
 			int nFirst = 0;
 			int found = 0;
@@ -2181,7 +2181,7 @@ public class JDFResource extends JDFElement
 		 */
 		public VElement createPartitions(final VJDFAttributeMap vPartMap, final VString vPartIDKeys)
 		{
-			VElement vExist = new VElement();
+			final VElement vExist = new VElement();
 			final VString tmp = new VString();
 			for (int i = 0; i < vPartMap.size(); i++)
 			{
@@ -2189,7 +2189,7 @@ public class JDFResource extends JDFElement
 				final JDFResource res = getFastPartition(map, null);
 				if (res == null)
 				{
-					VElement v = getPartitionVector(map, null);
+					final VElement v = getPartitionVector(map, null);
 					if (v.isEmpty())
 					{
 						tmp.clear();
@@ -2266,7 +2266,7 @@ public class JDFResource extends JDFElement
 		 * if set to false (the default) partversions will match if tokens overlap
 		 * @param strictPartVersion
 		 */
-		public void setStrictPartVersion(boolean strictPartVersion)
+		public void setStrictPartVersion(final boolean strictPartVersion)
 		{
 			this.strictPartVersion = strictPartVersion;
 		}
@@ -2620,7 +2620,7 @@ public class JDFResource extends JDFElement
 			return null;
 		}
 
-		for (KElement kElem : v)
+		for (final KElement kElem : v)
 		{
 			if (kElem instanceof JDFResourceLink)
 			{
@@ -2752,7 +2752,7 @@ public class JDFResource extends JDFElement
 		 * @param bLink if true, include resource links
 		 * @param bRef if true include resource refs
 		 */
-		RefFinder(boolean bLink, boolean bRef)
+		RefFinder(final boolean bLink, final boolean bRef)
 		{
 			super();
 			this.bLink = bLink;
@@ -2851,12 +2851,12 @@ public class JDFResource extends JDFElement
 			{
 				final VElement vNodes = n.getvJDFNode(null, null, false);
 				vRet = new VElement();
-				for (KElement nE : vNodes)
+				for (final KElement nE : vNodes)
 				{
 					final VElement vTmp = ((JDFNode) nE).getResourceLinks(null);
 					if (vTmp != null)
 					{
-						for (KElement lE : vTmp)
+						for (final KElement lE : vTmp)
 						{
 							final JDFResourceLink link = (JDFResourceLink) lE;
 							if (resID.equals(link.getrRef()))
@@ -2904,7 +2904,7 @@ public class JDFResource extends JDFElement
 			validParentNodeNameSet = new HashSet<String>();
 			final String nodeNames[] = { "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams", // copy of validRootParentNodeNames
 					"DeviceInfo", "DropItemIntent", "DropItem", "ProductionIntent", "CustomerInfo", "NodeInfo", "Ancestor", "Occupation", ElementName.PHASETIME };
-			for (String nodeName2 : nodeNames)
+			for (final String nodeName2 : nodeNames)
 			{
 				validParentNodeNameSet.add(nodeName2);
 			}
@@ -2926,7 +2926,7 @@ public class JDFResource extends JDFElement
 			validRootParentNodeNameSet = new HashSet<String>();
 			final String[] nodeNames = { "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams" }; // must
 			// also copy to validParentNodeNames
-			for (String nodeName2 : nodeNames)
+			for (final String nodeName2 : nodeNames)
 			{
 				validRootParentNodeNameSet.add(nodeName2);
 			}
@@ -2986,7 +2986,7 @@ public class JDFResource extends JDFElement
 	 * @return JDFResource: the first matching resource leaf or node
 	 * @default getPartition(m, null)
 	 */
-	public JDFResource getPartition(JDFAttributeMap m, final JDFResource.EnumPartUsage partUsage)
+	public JDFResource getPartition(final JDFAttributeMap m, final JDFResource.EnumPartUsage partUsage)
 	{
 		return new PartitionGetter().getPartition(m, partUsage);
 	}
@@ -2996,11 +2996,11 @@ public class JDFResource extends JDFElement
 	 */
 	public HashMap<JDFAttributeMap, JDFResource> getPartitionMap()
 	{
-		VElement v = getLeaves(true);
-		HashMap<JDFAttributeMap, JDFResource> map = new HashMap<JDFAttributeMap, JDFResource>();
-		boolean bIdentical = getChildrenByClass(JDFIdentical.class, true, 1) != null;
+		final VElement v = getLeaves(true);
+		final HashMap<JDFAttributeMap, JDFResource> map = new HashMap<JDFAttributeMap, JDFResource>();
+		final boolean bIdentical = getChildrenByClass(JDFIdentical.class, true, 1) != null;
 		final VString partIDKeys = getPartIDKeys();
-		int size = v.size();
+		final int size = v.size();
 		for (int i = 0; i < size; i++)
 		{
 			JDFResource r = (JDFResource) v.get(i);
@@ -3235,7 +3235,7 @@ public class JDFResource extends JDFElement
 	public VElement getLeaves(final boolean bAll)
 	{
 		// want possibly intermediate nodes, check the kids
-		Vector<? extends KElement> vAllChildren = getDirectPartitionVector();
+		final Vector<? extends KElement> vAllChildren = getDirectPartitionVector();
 		final VElement vLeaves = new VElement();
 
 		if (vAllChildren == null || vAllChildren.isEmpty())
@@ -3268,7 +3268,7 @@ public class JDFResource extends JDFElement
 	 */
 	public Vector<? extends KElement> getDirectPartitionVector()
 	{
-		Class<? extends JDFResource> clazz = getClass();
+		final Class<? extends JDFResource> clazz = getClass();
 		if (clazz.equals(JDFResource.class))
 			return getChildElementVector_KElement(getNodeName(), null, null, true, 0);
 		else
@@ -3282,7 +3282,7 @@ public class JDFResource extends JDFElement
 	 */
 	public boolean isLeaf()
 	{
-		Class<? extends JDFResource> class1 = getClass();
+		final Class<? extends JDFResource> class1 = getClass();
 		if (class1.equals(JDFResource.class))
 			return getElement_KElement(getNodeName(), null, 0) == null;
 		else
@@ -3361,7 +3361,7 @@ public class JDFResource extends JDFElement
 	 * @see org.cip4.jdflib.core.KElement#getChildrenByClass(java.lang.Class, boolean, int)
 	 */
 	@Override
-	public <a extends KElement> Vector<a> getChildrenByClass(Class<a> clazz, boolean bRecurse, int nMax)
+	public <a extends KElement> Vector<a> getChildrenByClass(final Class<a> clazz, final boolean bRecurse, final int nMax)
 	{
 		Vector<a> v = super.getChildrenByClass(clazz, bRecurse, nMax);
 
@@ -3390,7 +3390,7 @@ public class JDFResource extends JDFElement
 		// follow partitioned inheritance
 		if (parent != null)
 		{
-			JDFAttributeMap map = parent.getAttributeMap();
+			final JDFAttributeMap map = parent.getAttributeMap();
 			map.putAll(super.getAttributeMap());
 			return map;
 		}
@@ -4174,7 +4174,7 @@ public class JDFResource extends JDFElement
 	 * @return true if successfully unpartitioned
 	 * @default unpartition(false)
 	 */
-	public boolean unpartition(boolean bForce)
+	public boolean unpartition(final boolean bForce)
 	{
 		return new Collapser().unpartition(bForce);
 	}
@@ -4194,22 +4194,22 @@ public class JDFResource extends JDFElement
 		 * @return true if successfully unpartitioned
 		 * @throws JDFException if not root
 		 */
-		boolean unpartition(boolean force)
+		boolean unpartition(final boolean force)
 		{
 			if (!isResourceRoot())
 				throw new JDFException("Unpartition currently only implemented for root nodes");
 
 			// this construct is required to pick up virtual overwrites - e.g. in RunList
 			JDFResource.this.collapse(false, true);
-			VElement v = getLeaves(true);
+			final VElement v = getLeaves(true);
 			v.remove(JDFResource.this);
 			boolean clean = true;
 			// if force we simply zapp what is not equal
 			if (!force)
 			{
-				for (KElement e : v)
+				for (final KElement e : v)
 				{
-					JDFResource r = (JDFResource) e;
+					final JDFResource r = (JDFResource) e;
 					if (containsData(r))
 					{
 						clean = false;
@@ -4219,7 +4219,7 @@ public class JDFResource extends JDFElement
 			}
 			if (clean)
 			{
-				for (KElement e : v)
+				for (final KElement e : v)
 				{
 					e.deleteNode();
 				}
@@ -4232,21 +4232,21 @@ public class JDFResource extends JDFElement
 		 * @param r
 		 * @return
 		 */
-		protected boolean containsData(JDFResource r)
+		protected boolean containsData(final JDFResource r)
 		{
-			VElement ve = r.getChildElementVector_KElement(null, null, null, true, 0);
-			String locName = r.getLocalName();
-			for (KElement e : ve)
+			final VElement ve = r.getChildElementVector_KElement(null, null, null, true, 0);
+			final String locName = r.getLocalName();
+			for (final KElement e : ve)
 			{
 				if (!locName.equals(e.getLocalName()))
 				{
 					return true; // gotcha
 				}
 			}
-			VString v = r.getAttributeVector_KElement();
+			final VString v = r.getAttributeVector_KElement();
 			if (v != null)// should actually always be the case...
 			{
-				VString ignoreAtts = r.getPartIDKeys();
+				final VString ignoreAtts = r.getPartIDKeys();
 				ignoreAtts.add(AttributeName.CLASS);
 				ignoreAtts.add(AttributeName.ID);
 				ignoreAtts.add(AttributeName.AGENTNAME);
@@ -4279,7 +4279,7 @@ public class JDFResource extends JDFElement
 
 			final VString parts = getRootPartAtts();
 
-			for (KElement e : leaves)
+			for (final KElement e : leaves)
 			{
 				final JDFResource leaf = (JDFResource) e;
 				expandLeaf(leaf, parts);
@@ -4300,7 +4300,7 @@ public class JDFResource extends JDFElement
 			}
 			final VString atts = new VString(leaf.getAttributeVector_JDFResource());
 
-			for (String aj : atts)
+			for (final String aj : atts)
 			{
 				if (!parts.contains(aj))
 				{
@@ -4310,14 +4310,14 @@ public class JDFResource extends JDFElement
 
 			// expand sub-elements - since 190602
 			final VElement vElm = leaf.getChildElementVector(null, null, null, true, 0, false);
-			for (KElement elm : vElm)
+			for (final KElement elm : vElm)
 			{
 				final String nodeName = elm.getNodeName();
 				// copy non existing element to leaf
 				if (leaf.getElement_JDFElement(nodeName, null, 0) == null)
 				{
 					final VElement vCopy = leaf.getChildElementVector(nodeName, null, null, true, 0, false);
-					for (KElement copy : vCopy)
+					for (final KElement copy : vCopy)
 					{
 						leaf.copyElement(copy, null);
 					}
@@ -4329,7 +4329,7 @@ public class JDFResource extends JDFElement
 		{
 			final String nodeName = getNodeName();
 
-			for (KElement e : leaves)
+			for (final KElement e : leaves)
 			{
 				final JDFResource res = (JDFResource) e;
 				JDFElement r = (JDFElement) res.getParentNode_KElement();
@@ -4337,7 +4337,7 @@ public class JDFResource extends JDFElement
 				while (r != null && r.getNodeName().equals(nodeName))
 				{
 					final VString atts = new VString(r.getAttributeVector());
-					for (String aj : atts)
+					for (final String aj : atts)
 					{
 						if (!parts.contains(aj))
 						{
@@ -4347,7 +4347,7 @@ public class JDFResource extends JDFElement
 
 					// delete all intermediate elements
 					final VElement vElm = r.getChildElementVector_JDFElement(null, null, null, true, 0, false);
-					for (KElement elm : vElm)
+					for (final KElement elm : vElm)
 					{
 						if (!elm.getNodeName().equals(nodeName))
 						{
@@ -4382,34 +4382,41 @@ public class JDFResource extends JDFElement
 			}
 
 			final VString parts = getRootPartAtts();
-			for (int i = 0; i < leaves.size(); i++)
+			final HashSet<KElement> done = new HashSet<>();
+			for (final KElement l : leaves)
 			{
-				JDFResource leaf = (JDFResource) leaves.elementAt(i);
+				JDFResource leaf = (JDFResource) l;
 				final VString atts = leaf.getAttributeVector_JDFResource();
 				atts.removeStrings(parts, Integer.MAX_VALUE);
 				JDFResource parent = (JDFResource) leaf.getParentNode_KElement();
 
 				while (true)
 				{
-					final VElement localLeaves = parent.getChildElementVector_JDFElement(getNodeName(), null, null, true, 0, false);
-					collapseAttributes(bCollapseToNode, leaf, atts, parent, localLeaves, true);
-					// since 190602 also collapse elements
-					if (bCollapseElements)
+					if (!done.contains(parent))
 					{
-						collapseElements(bCollapseToNode, leaf, parent, localLeaves);
+						done.add(parent);
+						final VElement localLeaves = parent.getChildElementVector_JDFElement(getNodeName(), null, null, true, 0, false);
+						collapseAttributes(bCollapseToNode, leaf, atts, parent, localLeaves, true);
+						// since 190602 also collapse elements
+						if (bCollapseElements)
+						{
+							collapseElements(bCollapseToNode, leaf, parent, localLeaves);
+						}
+						if (parent.isResourceRoot() || parent == JDFResource.this)
+						{
+							break;
+						}
+
+						leaf = parent;
+						parent = (JDFResource) parent.getParentNode_KElement();
 					}
-					if (parent.isResourceRoot() || parent == JDFResource.this)
+					else
 					{
 						break;
 					}
-
-					leaf = parent;
-					parent = (JDFResource) parent.getParentNode_KElement();
 				}
 			}
 		}
-
-		// //////////////////////////////////////////////////////////////////////////
 
 		private void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent, final VElement localLeaves, final boolean removeEqual)
 		{
@@ -4714,7 +4721,7 @@ public class JDFResource extends JDFElement
 	 *
 	 * @default getPartitionVector(m, null)
 	 */
-	public VElement getPartitionVector(final VJDFAttributeMap vm, EnumPartUsage partUsage)
+	public VElement getPartitionVector(final VJDFAttributeMap vm, final EnumPartUsage partUsage)
 	{
 		return new PartitionGetter().getPartitionVector(vm, partUsage);
 	}
@@ -4827,7 +4834,7 @@ public class JDFResource extends JDFElement
 	{
 		final VJDFAttributeMap vTest = new VJDFAttributeMap();
 		vTest.setVector(vParts);
-		VString partIDKeys = getPartIDKeys();
+		final VString partIDKeys = getPartIDKeys();
 		// reduce vParts internally
 		for (int i = 0; i < vTest.size(); i++)
 		{
@@ -5113,7 +5120,7 @@ public class JDFResource extends JDFElement
 	public String updateAttributeFromLeaves(final String attName, final String nsURI, final boolean bDirect)
 	{
 		final VElement v = getLeaves(false);
-		int size = v == null ? 0 : v.size();
+		final int size = v == null ? 0 : v.size();
 		if (size == 0 || (size == 1 && this == v.get(0)))
 		{
 			if (!hasAttribute_KElement(attName, nsURI, false))
@@ -5126,7 +5133,7 @@ public class JDFResource extends JDFElement
 		}
 		if (!bDirect)
 		{
-			for (KElement e : v)
+			for (final KElement e : v)
 			{
 				((JDFResource) e).updateAttributeFromLeaves(attName, nsURI, bDirect);
 			}
@@ -5157,7 +5164,7 @@ public class JDFResource extends JDFElement
 	 * @since 2011.1.15 note the change of interface. The prior usage of previousamount was inheritently flawed.
 	 * Update note: if you used a previousAmount!=0, you probably want to use keepPrevious=false whereas a 0 value retains the orignal value (leepPrevious=true)
 	 */
-	public void updateAmounts(boolean keepPrevious)
+	public void updateAmounts(final boolean keepPrevious)
 	{
 		double amount = keepPrevious ? StringUtil.parseDouble(getAttribute_KElement(AttributeName.AMOUNT), 0) : 0.0;
 		double amountProduced = keepPrevious ? StringUtil.parseDouble(getAttribute_KElement(AttributeName.AMOUNTPRODUCED), 0) : 0.0;
@@ -5185,7 +5192,7 @@ public class JDFResource extends JDFElement
 			for (int i = 0; i < linkSize; i++)
 			{
 				final JDFResourceLink rl = (JDFResourceLink) resLinks.elementAt(i);
-				KElement linkParent = rl.getParentNode_KElement();
+				final KElement linkParent = rl.getParentNode_KElement();
 				// we have a reource audit - must be ignored
 				if (!(linkParent instanceof JDFResourceLinkPool))
 					continue;
@@ -5194,7 +5201,7 @@ public class JDFResource extends JDFElement
 				if (n != null)
 				{
 					final JDFNode.EnumType typ = EnumType.getEnum(n.getType());
-					boolean bIsLeaf = !JDFNode.EnumType.ProcessGroup.equals(typ) && !JDFNode.EnumType.Product.equals(typ);
+					final boolean bIsLeaf = !JDFNode.EnumType.ProcessGroup.equals(typ) && !JDFNode.EnumType.Product.equals(typ);
 					if (bIsLeaf)
 					{
 						double rlActualAmount = 0;
@@ -5648,7 +5655,7 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFResource getIdenticalTarget()
 	{
-		JDFIdentical id = getIdentical();
+		final JDFIdentical id = getIdentical();
 		return id == null ? this : id.getTarget();
 	}
 
@@ -6683,7 +6690,7 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFResource getParentPartition()
 	{
-		KElement parent = getParentNode_KElement();
+		final KElement parent = getParentNode_KElement();
 		return getMyPartitionResource(parent);
 	}
 
@@ -6719,7 +6726,7 @@ public class JDFResource extends JDFElement
 	 *
 	 * @param bUnpartitiondImplicit the bUnpartitiondImplicit to set
 	 */
-	public static void setUnpartitiondImplicit(boolean bUnpartitiondImplicit)
+	public static void setUnpartitiondImplicit(final boolean bUnpartitiondImplicit)
 	{
 		JDFResource.bUnpartitiondImplicit = bUnpartitiondImplicit;
 	}
@@ -6734,7 +6741,7 @@ public class JDFResource extends JDFElement
 	 */
 	public EnumPartUsage getPartUsage()
 	{
-		String partUsage = getAttribute(AttributeName.PARTUSAGE, null, null);
+		final String partUsage = getAttribute(AttributeName.PARTUSAGE, null, null);
 		if (partUsage == null)
 		{
 			if (!bUnpartitiondImplicit || getResourceRoot().hasAttribute(AttributeName.PARTIDKEYS))
@@ -7842,7 +7849,7 @@ public class JDFResource extends JDFElement
 		final VElement v = getLeaves(bAll);
 		if (v != null)
 		{
-			for (KElement e : v)
+			for (final KElement e : v)
 			{
 				final JDFResource r = (JDFResource) e;
 				if (minStatus == null)
@@ -8154,7 +8161,7 @@ public class JDFResource extends JDFElement
 			}
 
 			final VElement v = getChildElementVector_KElement(getNodeName(), null, null, true, 0);
-			for (KElement e : v)
+			for (final KElement e : v)
 			{
 				if (!((JDFResource) e).isValid(level))
 				{
@@ -8350,10 +8357,10 @@ public class JDFResource extends JDFElement
 
 	/**
 	 * if true, subelements are initialized with a class attribute
-	
+
 	 * @param autoSubElementClass
 	 */
-	public static void setAutoSubElementClass(boolean autoSubElementClass)
+	public static void setAutoSubElementClass(final boolean autoSubElementClass)
 	{
 		JDFResource.autoSubElementClass = autoSubElementClass;
 	}
@@ -8363,7 +8370,7 @@ public class JDFResource extends JDFElement
 	 * @param e
 	 * @return
 	 */
-	private JDFResource getMyPartitionResource(Node e)
+	private JDFResource getMyPartitionResource(final Node e)
 	{
 		if (!(e instanceof JDFResource))
 			return null;
