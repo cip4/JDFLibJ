@@ -4382,7 +4382,6 @@ public class JDFResource extends JDFElement
 			}
 
 			final VString parts = getRootPartAtts();
-			final HashSet<KElement> done = new HashSet<>();
 			for (final KElement l : leaves)
 			{
 				JDFResource leaf = (JDFResource) l;
@@ -4392,28 +4391,20 @@ public class JDFResource extends JDFElement
 
 				while (true)
 				{
-					if (!done.contains(parent))
+					final VElement localLeaves = parent.getChildElementVector_JDFElement(getNodeName(), null, null, true, 0, false);
+					collapseAttributes(bCollapseToNode, leaf, atts, parent, localLeaves, true);
+					// since 190602 also collapse elements
+					if (bCollapseElements)
 					{
-						done.add(parent);
-						final VElement localLeaves = parent.getChildElementVector_JDFElement(getNodeName(), null, null, true, 0, false);
-						collapseAttributes(bCollapseToNode, leaf, atts, parent, localLeaves, true);
-						// since 190602 also collapse elements
-						if (bCollapseElements)
-						{
-							collapseElements(bCollapseToNode, leaf, parent, localLeaves);
-						}
-						if (parent.isResourceRoot() || parent == JDFResource.this)
-						{
-							break;
-						}
-
-						leaf = parent;
-						parent = (JDFResource) parent.getParentNode_KElement();
+						collapseElements(bCollapseToNode, leaf, parent, localLeaves);
 					}
-					else
+					if (parent.isResourceRoot() || parent == JDFResource.this)
 					{
 						break;
 					}
+
+					leaf = parent;
+					parent = (JDFResource) parent.getParentNode_KElement();
 				}
 			}
 		}
@@ -4425,10 +4416,10 @@ public class JDFResource extends JDFElement
 			{
 				final String att = atts.get(j);
 				// reduce lower stuff
-				if ((!bCollapseToNode) && (!parent.hasAttribute_KElement(att, null, false)))
+				if ((!bCollapseToNode) && (!parent.hasAttribute(att, null, false)))
 				{
 					final String attVal = leaf.getAttribute_KElement(att, null, JDFConstants.EMPTYSTRING);
-					if (!parent.getAttribute_KElement(att).equals(attVal))
+					if (!parent.getAttribute(att).equals(attVal))
 					{
 						// check all local children and grandchildren
 						boolean bAllSame = true;

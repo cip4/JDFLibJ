@@ -2595,10 +2595,32 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFResource b = sh.addPartition(EnumPartIDKey.Side, "Back");
 		f.setDescriptiveName("s");
 		b.setDescriptiveName("s");
+		sh.setDescriptiveName("s");
+		dpp.collapse(false, false);
+		assertEquals("s", dpp.getDescriptiveName());
+		assertFalse(f.hasAttribute_KElement(AttributeName.DESCRIPTIVENAME, null, false));
+		assertFalse(b.hasAttribute_KElement(AttributeName.DESCRIPTIVENAME, null, false));
+		assertFalse(sh.hasAttribute_KElement(AttributeName.DESCRIPTIVENAME, null, false));
+	}
+
+	/**
+	 * test expand and collapse methods
+	 */
+	@Test
+	public void testCollapseUniqueLeaves()
+	{
+		final JDFNode n = JDFNode.createRoot();
+
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
+		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
+		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
+		final JDFResource b = sh.addPartition(EnumPartIDKey.Side, "Back");
+		f.setDescriptiveName("s");
+		b.setDescriptiveName("s");
 		sh.setDescriptiveName("sh");
 		dpp.collapse(false, false);
 		assertEquals("sh", sh.getDescriptiveName());
-
 	}
 
 	/**
