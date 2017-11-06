@@ -94,6 +94,24 @@ public class FixVersionImpl extends PackageElementWalker
 	protected boolean bFixIDs;
 	protected boolean bZappInvalid;
 	protected boolean bZappDeprecated;
+	protected boolean bFixNewDuplicate;
+
+	/**
+	 * @return the bFixNewDuplicate
+	 */
+	public boolean isFixNewDuplicate()
+	{
+		return bFixNewDuplicate;
+	}
+
+	/**
+	 * @param bFixNewDuplicate the bFixNewDuplicate to set
+	 */
+	public void setFixNewDuplicate(final boolean bFixNewDuplicate)
+	{
+		this.bFixNewDuplicate = bFixNewDuplicate;
+	}
+
 	// hours for missing times in dates
 	int firsthour;
 	int lasthour;
@@ -176,6 +194,7 @@ public class FixVersionImpl extends PackageElementWalker
 		bOK = true;
 		fixICSVersions = false;
 		bLayoutPrepToStripping = false;
+		bFixNewDuplicate = true;
 		firsthour = 6;
 		lasthour = 18;
 	}
@@ -192,6 +211,7 @@ public class FixVersionImpl extends PackageElementWalker
 		bFixIDs = fixVersion.bFixIDs;
 		fixICSVersions = fixVersion.fixICSVersions;
 		bLayoutPrepToStripping = fixVersion.bLayoutPrepToStripping;
+		bFixNewDuplicate = fixVersion.bFixNewDuplicate;
 	}
 
 	/**

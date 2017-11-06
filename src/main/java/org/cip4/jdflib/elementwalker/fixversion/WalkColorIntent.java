@@ -130,12 +130,12 @@ public class WalkColorIntent extends WalkResource
 	 */
 	private void processNumColors(final KElement e1)
 	{
-		JDFColorIntent ci = (JDFColorIntent) e1;
+		final JDFColorIntent ci = (JDFColorIntent) e1;
 		if (fixVersion.lessThanVersion(EnumVersion.Version_1_5) || fixVersion.isXJDF())
 		{
 			removeNumColors(ci);
 		}
-		else
+		else if (fixVersion.isFixNewDuplicate())
 		{
 			extractNumColors(ci);
 		}
@@ -145,10 +145,10 @@ public class WalkColorIntent extends WalkResource
 	 *
 	 * @param ci
 	 */
-	private void extractNumColors(JDFColorIntent ci)
+	private void extractNumColors(final JDFColorIntent ci)
 	{
-		JDFSeparationList colorsUsed = ci.getColorsUsed();
-		VString colors = colorsUsed == null ? null : colorsUsed.getSeparations();
+		final JDFSeparationList colorsUsed = ci.getColorsUsed();
+		final VString colors = colorsUsed == null ? null : colorsUsed.getSeparations();
 		if (colors != null)
 		{
 			if (colors.containsAll(JDFSeparationList.SEPARATIONS_CMYK))
@@ -168,9 +168,9 @@ public class WalkColorIntent extends WalkResource
 	 *
 	 * @param ci
 	 */
-	private void removeNumColors(JDFColorIntent ci)
+	private void removeNumColors(final JDFColorIntent ci)
 	{
-		int nc = ci.getNumColorsRaw();
+		final int nc = ci.getNumColorsRaw();
 		if (nc == 1)
 		{
 			ci.getCreateColorsUsed().getCreateSeparation(JDFConstants.SEPARATION_BLACK);

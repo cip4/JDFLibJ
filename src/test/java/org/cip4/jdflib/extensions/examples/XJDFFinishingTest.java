@@ -73,6 +73,10 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -81,6 +85,9 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFBundle;
 import org.cip4.jdflib.resource.JDFBundleItem;
+import org.cip4.jdflib.resource.JDFCuttingParams;
+import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.junit.Test;
 
 /**
@@ -96,31 +103,31 @@ public class XJDFFinishingTest extends JDFTestCaseBase
 	@Test
 	public void testBundlePallet()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper("Bundle", null, null);
+		final XJDFHelper xjdfHelper = new XJDFHelper("Bundle", null, null);
 		xjdfHelper.setTypes(EnumType.Palletizing.getName());
-		ProductHelper book = xjdfHelper.getCreateRootProduct(0);
+		final ProductHelper book = xjdfHelper.getCreateRootProduct(0);
 		book.setID("BookProductID");
 		book.setAmount(4200);
 
-		SetHelper shBook = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Input);
-		ResourceHelper bookHelper = shBook.getCreatePartition(XJDFConstants.ProductPart, "BookProductID", true);
+		final SetHelper shBook = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Input);
+		final ResourceHelper bookHelper = shBook.getCreatePartition(XJDFConstants.ProductPart, "BookProductID", true);
 		bookHelper.setID("BookComponentID");
 		bookHelper.setAttribute(AttributeName.GROSSWEIGHT, "" + 650);
 		bookHelper.setAmount(4200, null, true);
 
-		SetHelper shPallet = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Output);
-		ResourceHelper palletHelper = shPallet.getCreatePartition(null, true);
+		final SetHelper shPallet = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Output);
+		final ResourceHelper palletHelper = shPallet.getCreatePartition(null, true);
 		palletHelper.setAmount(10, null, true);
 		palletHelper.setAttribute(AttributeName.GROSSWEIGHT, "" + (20 * 1000 + 10 * 300 + 42 * 650));
 
-		SetHelper shBundle = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BUNDLE, EnumUsage.Input);
-		ResourceHelper rh = shBundle.appendPartition(null, true);
-		JDFBundle b = (JDFBundle) rh.getResource();
-		JDFBundleItem pallet = b.appendBundleItem();
+		final SetHelper shBundle = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BUNDLE, EnumUsage.Input);
+		final ResourceHelper rh = shBundle.appendPartition(null, true);
+		final JDFBundle b = (JDFBundle) rh.getResource();
+		final JDFBundleItem pallet = b.appendBundleItem();
 		pallet.setAttribute(AttributeName.BUNDLETYPE, "Pallet");
 		pallet.setAmount(10);
 		pallet.setAttribute(AttributeName.TOTALAMOUNT, "4200");
-		JDFBundleItem box = (JDFBundleItem) pallet.appendElement(ElementName.BUNDLEITEM);
+		final JDFBundleItem box = (JDFBundleItem) pallet.appendElement(ElementName.BUNDLEITEM);
 		box.setAttribute(AttributeName.BUNDLETYPE, "Carton");
 		box.setAmount(10);
 		box.setAttribute(XJDFConstants.ItemRef, "BookProductID");
@@ -128,6 +135,76 @@ public class XJDFFinishingTest extends JDFTestCaseBase
 
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "resources/PalletBundle.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testNestedCutBlock()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper("Bundle", null, null);
+		xjdfHelper.addType(EnumType.Cutting);
+		xjdfHelper.addType(EnumType.Cutting);
+
+		final SetHelper shCut1 = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.CUTTINGPARAMS, EnumUsage.Input);
+		shCut1.setCombinedProcessIndex(new JDFIntegerList(0));
+		final ResourceHelper rhcut1 = shCut1.getCreatePartition(0, true);
+		final JDFCuttingParams cp1 = (JDFCuttingParams) rhcut1.getResource();
+		final JDFCutBlock cb1 = cp1.appendCutBlock();
+		cb1.setBlockName("b1");
+		cb1.setAttribute(AttributeName.BOX, new JDFRectangle(0, 0, 400, 600), null);
+		final JDFCutBlock cb2 = cp1.appendCutBlock();
+		cb2.setBlockName("b2");
+		cb2.setAttribute(AttributeName.BOX, new JDFRectangle(400, 0, 1200, 600), null);
+
+		final SetHelper shCut2 = xjdfHelper.appendSet(XJDFConstants.Resource, ElementName.CUTTINGPARAMS, EnumUsage.Input);
+		shCut2.setCombinedProcessIndex(new JDFIntegerList(1));
+
+		final ResourceHelper rhcut21 = shCut2.getCreatePartition(0, true);
+		rhcut21.setPartMap(new JDFAttributeMap(AttributeName.BLOCKNAME, "b1"));
+		final JDFCuttingParams cp21 = (JDFCuttingParams) rhcut21.getResource();
+		final JDFCutBlock cb211 = cp21.appendCutBlock();
+		cb211.setBlockName("b1.1");
+		cb211.setAttribute(AttributeName.BOX, new JDFRectangle(0, 0, 400, 300), null);
+		final JDFCutBlock cb212 = cp21.appendCutBlock();
+		cb212.setBlockName("b1.2");
+		cb212.setAttribute(AttributeName.BOX, new JDFRectangle(0, 300, 400, 600), null);
+
+		final ResourceHelper rhcut22 = shCut2.getCreatePartition(1, true);
+		rhcut22.setPartMap(new JDFAttributeMap(AttributeName.BLOCKNAME, "b2"));
+		final JDFCuttingParams cp22 = (JDFCuttingParams) rhcut22.getResource();
+		final JDFCutBlock cb221 = cp22.appendCutBlock();
+		cb221.setBlockName("b2.1");
+		cb221.setAttribute(AttributeName.BOX, new JDFRectangle(0, 0, 800, 300), null);
+		final JDFCutBlock cb222 = cp22.appendCutBlock();
+		cb222.setBlockName("b2.2");
+		cb222.setAttribute(AttributeName.BOX, new JDFRectangle(0, 300, 800, 600), null);
+
+		final SetHelper shCompIn = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Input);
+		final ResourceHelper rhcompIn = shCompIn.getCreatePartition(0, true);
+		JDFComponent c = (JDFComponent) rhcompIn.getCreateResource();
+		c.setDimensions(new JDFXYPair(1200, 600));
+
+		final SetHelper shCompOut = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Output);
+		ResourceHelper rhcompOut = shCompOut.getCreatePartition(new JDFAttributeMap(AttributeName.BLOCKNAME, "B1.1"), true);
+		c = (JDFComponent) rhcompOut.getCreateResource();
+		c.setDimensions(new JDFXYPair(400, 300));
+
+		rhcompOut = shCompOut.getCreatePartition(new JDFAttributeMap(AttributeName.BLOCKNAME, "B1.2"), true);
+		c = (JDFComponent) rhcompOut.getCreateResource();
+		c.setDimensions(new JDFXYPair(400, 300));
+
+		rhcompOut = shCompOut.getCreatePartition(new JDFAttributeMap(AttributeName.BLOCKNAME, "B2.1"), true);
+		c = (JDFComponent) rhcompOut.getCreateResource();
+		c.setDimensions(new JDFXYPair(800, 300));
+
+		rhcompOut = shCompOut.getCreatePartition(new JDFAttributeMap(AttributeName.BLOCKNAME, "B2.2"), true);
+		c = (JDFComponent) rhcompOut.getCreateResource();
+		c.setDimensions(new JDFXYPair(800, 300));
+
+		cleanSnippets(xjdfHelper);
+		writeTest(xjdfHelper, "resources/NestedCutBlock.xjdf");
 	}
 
 	/**
