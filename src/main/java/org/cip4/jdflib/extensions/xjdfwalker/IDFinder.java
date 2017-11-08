@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -67,7 +67,7 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
@@ -94,46 +94,31 @@ public class IDFinder extends BaseElementWalker
 {
 	final Map<String, IDPart> theMap;
 	final Map<String, String> indexMap;
+	boolean needSplitPart;
 
 	/**
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 *
 	 */
 	public class IDPart
 	{
 		/**
-		 * 
+		 *
 		 * @param idParent
 		 * @param parts
 		 */
-		public IDPart(String idParent, VElement parts)
+		public IDPart(final String idParent, final VElement parts)
 		{
 			vMap = null;
 			if (parts != null && parts.size() > 0)
 			{
-				KElement part = parts.get(0);
-				if (part != null)
-				{
-					String productID = StringUtil.getNonEmpty(part.getAttribute(AttributeName.PRODUCTPART));
-					if (productID != null)
-					{
-						idParent += "." + productID;
-					}
-					String procs = StringUtil.getNonEmpty(part.getAttribute(XJDFConstants.ProcessTypes));
-					if (procs != null)
-					{
-						idParent += "." + getIndex(procs);
-					}
-				}
-
 				vMap = new VJDFAttributeMap();
 
-				for (KElement p : parts)
+				for (final KElement p : parts)
 				{
-					JDFAttributeMap partMap = p.getAttributeMap();
+					final JDFAttributeMap partMap = p.getAttributeMap();
 					partMap.remove(AttributeName.PRODUCTPART);
-					partMap.remove(XJDFConstants.ProcessTypes);
 					vMap.add(partMap);
 				}
 				vMap.unify();
@@ -142,11 +127,11 @@ public class IDFinder extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 */
 		protected String id;
 		/**
-		 * 
+		 *
 		 */
 		protected VJDFAttributeMap vMap;
 
@@ -178,19 +163,20 @@ public class IDFinder extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public IDFinder()
 	{
 		super(new BaseWalkerFactory());
 		theMap = new HashMap<String, IDPart>();
 		indexMap = new HashMap<String, String>();
+		needSplitPart = false;
 		new BaseWalker(getFactory()); // need a default walker
 	}
 
 	/**
 	 * get a vector of all links and references of n and its children
-	 * 
+	 *
 	 * @param n the element to walk
 	 * @return the vector of unlinked resourcerefs and resourceLinks
 	 */
@@ -202,27 +188,10 @@ public class IDFinder extends BaseElementWalker
 	}
 
 	/**
-	 * otherwise our ids get too long...
-	 * 
-	 * @param procs
-	 * @return
-	 */
-	private String getIndex(String procs)
-	{
-		String index = indexMap.get(procs);
-		if (index == null)
-		{
-			index = StringUtil.rightStr("00" + indexMap.size(), 3);
-			indexMap.put(procs, index);
-		}
-		return index;
-	}
-
-	/**
 	 * the link and ref walker
-	 * 
+	 *
 	 * @author prosirai
-	 * 
+	 *
 	 */
 	public class WalkResource extends BaseWalker
 	{
@@ -249,16 +218,26 @@ public class IDFinder extends BaseElementWalker
 				id = e.generateDotID(AttributeName.ID, null);
 				e.setID(id);
 			}
-			VElement vPart = e.getChildElementVector(ElementName.PART, null, null, true, 0, false);
+			final VElement vPart = e.getChildElementVector(ElementName.PART, null, null, true, 0, false);
 
-			final String idParent = getParentID(e);
+			final String idParent = getParentID(e, vPart);
 			theMap.put(id, new IDPart(idParent, vPart));
 			return e;
 		}
 
-		private String getParentID(final KElement e)
+		private String getParentID(final KElement e, final VElement parts)
 		{
 			String idParent = e.getParentNode_KElement().getAttribute(AttributeName.ID, null, null);
+			final KElement part = parts == null ? null : parts.get(0);
+			if (part != null && needSplitPart)
+			{
+				final String productID = StringUtil.getNonEmpty(part.getAttribute(AttributeName.PRODUCTPART));
+				if (productID != null)
+				{
+					idParent += "." + productID;
+				}
+			}
+
 			return idParent;
 		}
 
@@ -275,17 +254,17 @@ public class IDFinder extends BaseElementWalker
 			{
 				return false;
 			}
-			String localName = toCheck.getLocalName();
-			return (localName.equals("Resource") || localName.equals("Parameter"));
+			final String localName = toCheck.getLocalName();
+			return (localName.equals(XJDFConstants.Resource) || localName.equals("Parameter"));
 		}
 
 	}
 
 	/**
 	 * the link and ref walker
-	 * 
+	 *
 	 * @author prosirai
-	 * 
+	 *
 	 */
 	public class WalkSet extends BaseWalker
 	{
@@ -312,6 +291,26 @@ public class IDFinder extends BaseElementWalker
 				id = "IDF" + KElement.uniqueID(0);
 				e.setID(id);
 			}
+			final int n = e.numChildElements(XJDFConstants.Resource, null);
+			if (n > 1)
+			{
+				final SetHelper sh = new SetHelper(e);
+				final VJDFAttributeMap parts = sh.getPartMapVector();
+				if (parts != null)
+				{
+					parts.removeKey(AttributeName.PRODUCTPART);
+					needSplitPart = parts.size() < n;
+				}
+				else
+				{
+					needSplitPart = true;
+				}
+			}
+			else
+			{
+				needSplitPart = false;
+			}
+
 			theMap.put(id, new IDPart(id, null));
 			return e;
 		}

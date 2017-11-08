@@ -179,16 +179,7 @@ public class WalkXJDFResource extends WalkXElement
 		SetHelper sh = ph.getSet();
 		final String name = getJDFResName(sh);
 		String processUsage = sh.getProcessUsage();
-		EnumUsage inOut = sh.getUsage();
-		if (inOut == null && xjdfToJDFImpl.isHeuristicLink())
-		{
-			if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name) && !ElementName.COMPONENT.equals(name)
-					&& !ElementName.COLORPOOL.equals(name) && !ElementName.MEDIA.equals(name) && !ElementName.EXPOSEDMEDIA.equals(name)
-					&& theNode.isValidLink(name, EnumUsage.Input, processUsage))
-			{
-				inOut = EnumUsage.Input;
-			}
-		}
+		EnumUsage inOut = getLinkUsage(theNode, sh, name, processUsage);
 		String id = xjdfToJDFImpl.idMap.get(xjdfRes.getID()).getID();
 		JDFResource res = (JDFResource) newRoot.getCreateResourcePool().getChildWithAttribute(null, AttributeName.ID, null, id, 0, true);
 		boolean isNew = false;
@@ -235,6 +226,21 @@ public class WalkXJDFResource extends WalkXElement
 
 		}
 		return res;
+	}
+
+	EnumUsage getLinkUsage(JDFNode theNode, SetHelper sh, final String name, String processUsage)
+	{
+		EnumUsage inOut = sh.getUsage();
+		if (inOut == null && xjdfToJDFImpl.isHeuristicLink())
+		{
+			if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name) && !ElementName.COMPONENT.equals(name)
+					&& !ElementName.COLORPOOL.equals(name) && !ElementName.MEDIA.equals(name) && !ElementName.EXPOSEDMEDIA.equals(name)
+					&& theNode.isValidLink(name, EnumUsage.Input, processUsage))
+			{
+				inOut = EnumUsage.Input;
+			}
+		}
+		return inOut;
 	}
 
 	/**
