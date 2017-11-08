@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
@@ -89,7 +89,7 @@ import org.cip4.jdflib.util.StringUtil;
 public class WalkLayout extends WalkStrippingParams
 {
 	/**
-	 * 
+	 *
 	 */
 	public WalkLayout()
 	{
@@ -110,12 +110,12 @@ public class WalkLayout extends WalkStrippingParams
 	/**
 	 * split a Layout into a Layout and a StrippingParams
 	 * @param e
-	 * @param trackElem 
+	 * @param trackElem
 	 */
-	private void splitLayout(final KElement e, KElement trackElem)
+	private void splitLayout(final KElement e, final KElement trackElem)
 	{
 		final JDFStrippingParams stripParams = (JDFStrippingParams) e.appendElement(ElementName.STRIPPINGPARAMS);
-		boolean foundSome = moveToStripping(e, stripParams);
+		final boolean foundSome = moveToStripping(e, stripParams);
 		if (foundSome)
 		{
 			createStrippingPartition(stripParams, (JDFLayout) trackElem);
@@ -143,12 +143,17 @@ public class WalkLayout extends WalkStrippingParams
 		}
 		final VString stripKnown = stripParams.knownElements();
 		final VElement vMyElm = e.getChildElementVector_KElement(null, null, null, true, 0);
-		for (KElement myElm : vMyElm)
+		for (final KElement myElm : vMyElm)
 		{
-			String localName = myElm.getLocalName();
+			final String localName = myElm.getLocalName();
 			if (stripKnown.contains(localName) || localName.endsWith("Ref") && stripKnown.contains(StringUtil.leftStr(localName, -3)))
 			{
 				stripParams.moveElement(myElm, null);
+				foundSome = true;
+			}
+			else if (ElementName.FILESPEC.equals(localName))
+			{
+				stripParams.getCreateExternalImpositionTemplate().moveElement(myElm, null);
 				foundSome = true;
 			}
 		}
@@ -156,11 +161,11 @@ public class WalkLayout extends WalkStrippingParams
 	}
 
 	/**
-	 *  
-	 * @param stripParams 
-	 * @param trackLayout 
+	 *
+	 * @param stripParams
+	 * @param trackLayout
 	 */
-	private void createStrippingPartition(JDFStrippingParams stripParams, JDFLayout trackLayout)
+	private void createStrippingPartition(final JDFStrippingParams stripParams, final JDFLayout trackLayout)
 	{
 		JDFNode node = xjdfToJDFImpl.currentJDFNode;
 		node = getNode(stripParams.getParentNode_KElement().getParentNode_KElement(), node);
@@ -170,12 +175,12 @@ public class WalkLayout extends WalkStrippingParams
 		}
 		else
 		{
-			JDFAttributeMap partMap = trackLayout.getPartMap();
-			JDFStrippingParams sp = (JDFStrippingParams) node.getCreateResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
-			JDFStrippingParams part = (JDFStrippingParams) sp.getCreatePartition(partMap, trackLayout.getPartIDKeys());
-			KElement foo = part.appendElement("foo");
+			final JDFAttributeMap partMap = trackLayout.getPartMap();
+			final JDFStrippingParams sp = (JDFStrippingParams) node.getCreateResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+			final JDFStrippingParams part = (JDFStrippingParams) sp.getCreatePartition(partMap, trackLayout.getPartIDKeys());
+			final KElement foo = part.appendElement("foo");
 			xjdfToJDFImpl.walkTree(stripParams, foo);
-			KElement tmpStripParams = foo.getElement(ElementName.STRIPPINGPARAMS);
+			final KElement tmpStripParams = foo.getElement(ElementName.STRIPPINGPARAMS);
 			tmpStripParams.removeAttribute(AttributeName.CLASS);
 			tmpStripParams.removeAttribute(AttributeName.ID);
 			part.copyInto(tmpStripParams, false);
@@ -188,15 +193,15 @@ public class WalkLayout extends WalkStrippingParams
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(KElement xjdfLayout, KElement jdfLayout)
+	public KElement walk(final KElement xjdfLayout, final KElement jdfLayout)
 	{
 		splitLayout(xjdfLayout, jdfLayout);
-		KElement walk = super.walk(xjdfLayout, jdfLayout);
+		final KElement walk = super.walk(xjdfLayout, jdfLayout);
 		return walk;
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
 	 */
 	@Override

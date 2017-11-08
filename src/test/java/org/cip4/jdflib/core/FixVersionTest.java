@@ -456,6 +456,27 @@ public class FixVersionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testNumColors15()
+	{
+		final JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
+		ci.appendColorsUsed().setSeparations(new VString("Black", null));
+		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
+		fixVersion.setFixNewDuplicate(false);
+		final boolean converted = fixVersion.convert(ci);
+		assertTrue(converted);
+		assertNull(ci.getNonEmpty(AttributeName.NUMCOLORS));
+		assertEquals(ci.getColorsUsed().getSeparations().size(), 1);
+		assertEquals("Black", ci.getColorsUsed().getSeparations().get(0));
+
+		fixVersion.setFixNewDuplicate(true);
+		fixVersion.convert(ci);
+		assertEquals("1", ci.getNonEmpty(AttributeName.NUMCOLORS));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testNodeInfo()
 	{
 		n.setVersion(EnumVersion.Version_1_1);
