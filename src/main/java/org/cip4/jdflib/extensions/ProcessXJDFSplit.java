@@ -71,6 +71,8 @@ package org.cip4.jdflib.extensions;
 import java.util.Collection;
 import java.util.Vector;
 
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
@@ -108,23 +110,17 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	 * @see org.cip4.jdflib.extensions.AbstractXJDFSplit#splitXJDF(org.cip4.jdflib.extensions.XJDFHelper)
 	 */
 	@Override
-	public Collection<XJDFHelper> splitXJDF(XJDFHelper root)
+	public Collection<XJDFHelper> splitXJDF(final XJDFHelper root)
 	{
-		Vector<VString> newTypes = splitTypes(root);
-		Vector<XJDFHelper> ret = new Vector<XJDFHelper>();
+		final Vector<VString> newTypes = splitTypes(root);
+		final Vector<XJDFHelper> ret = new Vector<XJDFHelper>();
 		if (newTypes != null && newTypes.size() > 0)
 		{
-			VString allTypes = root.getTypes();
-			for (VString types : newTypes)
+			final VString allTypes = root.getTypes();
+			for (final VString types : newTypes)
 			{
-				XJDFHelper h = root.clone();
-				h.setTypes(types);
-				String jobPartID = root.getJobPartID();
-				if (jobPartID == null)
-					jobPartID = "Part_";
-				h.setJobPartID(jobPartID + StringUtil.setvString(types, "_", ".", null));
-				h.setID(null);
-				fixInOutLinks(h, allTypes);
+				final XJDFHelper h = root.clone();
+				processSingle(h, types, allTypes);
 				ret.add(h);
 			}
 			consolidateExchangeResources(ret);
@@ -138,23 +134,67 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 
 	/**
 	 *
+	 * @param h
+	 * @param types
+	 * @param allTypes
+	 */
+	protected void processSingle(final XJDFHelper h, final VString types, final VString allTypes)
+	{
+		fixCategory(h, types, allTypes);
+		h.setJobPartID(getJobPartID(h, types));
+		h.setTypes(types);
+		h.setID(null);
+		fixInOutLinks(h, allTypes);
+	}
+
+	/**
+	 *
+	 * @param h
+	 * @param types
+	 * @param allTypes
+	 */
+	protected void fixCategory(final XJDFHelper h, final VString types, final VString allTypes)
+	{
+		if (!JDFConstants.PRODUCT.equals(types.get(0)) || ContainerUtil.equals(types, allTypes))
+		{
+			h.removeAttribute(AttributeName.CATEGORY, null);
+		}
+	}
+
+	protected String getJobPartID(final XJDFHelper xjdf, final VString types)
+	{
+		String jobPartID = xjdf.getJobPartID();
+		if (jobPartID == null)
+			jobPartID = "Part_";
+		return jobPartID + StringUtil.setvString(types, "_", ".", null);
+	}
+
+	/**
+	 *
 	 * @param root
 	 *
 	 * @return the list of types to split into, null is a flag for no split
 	 */
-	protected Vector<VString> splitTypes(XJDFHelper root)
+	protected Vector<VString> splitTypes(final XJDFHelper root)
 	{
-		Vector<VString> ret = new Vector<VString>();
-		VString types = calcTypes(root);
+		final Vector<VString> ret = new Vector<VString>();
+		final VString types = calcTypes(root);
 		if (types == null || types.size() <= 1)
 		{
 			// only one element - no need to split
 			return null;
 		}
+		boolean hasProduct = false;
 		while (types.size() > 0)
 		{
-			VString overlap = extractTypes(types);
+			final VString overlap = extractTypes(types);
+			if (overlap.contains(XJDFConstants.Product))
+				hasProduct = true;
 			ret.add(overlap);
+		}
+		if (!hasProduct && ret.size() > 1)
+		{
+			ret.insertElementAt(new VString(XJDFConstants.Product, null), 0);
 		}
 		return ret.size() == 0 ? null : ret;
 	}
@@ -164,15 +204,15 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	 * @param types
 	 * @return
 	 */
-	protected VString extractTypes(VString types)
+	protected VString extractTypes(final VString types)
 	{
-		String first = types.get(0);
+		final String first = types.get(0);
 		VString overlap = null;
-		for (VString group : groups)
+		for (final VString group : groups)
 		{
 			if (group.contains(first))
 			{
-				VString newOverlap = types.getOverlapping(group);
+				final VString newOverlap = types.getOverlapping(group);
 				if ((newOverlap != null) && ((overlap == null) || (overlap.size() < newOverlap.size())))
 				{
 					overlap = newOverlap;
@@ -194,17 +234,17 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	 * @param root
 	 * @return
 	 */
-	protected VString calcTypes(XJDFHelper root)
+	protected VString calcTypes(final XJDFHelper root)
 	{
 		root.removeType(XJDFConstants.Product, 0);
-		Vector<ProductHelper> productHelpers = root.getProductHelpers();
+		final Vector<ProductHelper> productHelpers = root.getProductHelpers();
 		if (productHelpers != null)
 		{
 			root.addType(XJDFConstants.Product, 0);
 		}
 		VString types = root.getTypes();
 		if (types == null)
-			types = new VString();
+			types = new VString(XJDFConstants.Product, null);
 		return types;
 	}
 
@@ -212,7 +252,7 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	 * add a group to split together
 	 * @param group
 	 */
-	public void addGroup(VString group)
+	public void addGroup(final VString group)
 	{
 		if (group != null && !group.isEmpty())
 		{
