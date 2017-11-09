@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
 import org.junit.Assert;
 import org.junit.Test;
 

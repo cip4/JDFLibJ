@@ -98,7 +98,7 @@ import org.cip4.jdflib.elementwalker.PackageElementWalker;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder;
-import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
+import org.cip4.jdflib.extensions.xjdfwalker.IDPart;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;

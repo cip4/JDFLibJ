@@ -80,7 +80,7 @@ import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
+import org.cip4.jdflib.extensions.xjdfwalker.IDPart;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;

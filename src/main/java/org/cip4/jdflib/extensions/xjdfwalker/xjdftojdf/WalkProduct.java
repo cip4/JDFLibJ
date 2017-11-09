@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,7 +78,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.extensions.xjdfwalker.IDFinder;
+import org.cip4.jdflib.extensions.xjdfwalker.IDPart;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
@@ -104,12 +104,12 @@ public class WalkProduct extends WalkXElement
 	 * @return the created resource
 	 */
 	@Override
-	public KElement walk(final KElement xjdfProduct, KElement trackElem)
+	public KElement walk(final KElement xjdfProduct, final KElement trackElem)
 	{
 		JDFNode theNode = (JDFNode) trackElem;
 		if (ProductHelper.PRODUCT.equals(theNode.getType()))
 		{
-			JDFNode tmp = theNode.getRoot().getChildJDFNode(xjdfProduct.getAttribute(AttributeName.ID), false);
+			final JDFNode tmp = theNode.getRoot().getChildJDFNode(xjdfProduct.getAttribute(AttributeName.ID), false);
 			if (tmp != null)
 			{
 				theNode = tmp;
@@ -129,7 +129,7 @@ public class WalkProduct extends WalkXElement
 		}
 		xjdfToJDFImpl.firstproductInList = false;
 		copyToNode(xjdfProduct, theNode);
-		JDFComponent c = fixComponent(theNode, xjdfProduct);
+		final JDFComponent c = fixComponent(theNode, xjdfProduct);
 
 		updateDeliveryIntent(xjdfProduct, theNode, c);
 		return theNode;
@@ -142,15 +142,15 @@ public class WalkProduct extends WalkXElement
 	 * @param theNode
 	 * @param c
 	 */
-	private void updateDeliveryIntent(final KElement xjdfProduct, JDFNode theNode, JDFComponent c)
+	private void updateDeliveryIntent(final KElement xjdfProduct, final JDFNode theNode, final JDFComponent c)
 	{
-		JDFResourceLink rlc = theNode.getLink(c, EnumUsage.Output);
-		double overage = rlc.getMaxAmount();
-		double underage = rlc.getMinAmount();
-		double amount = StringUtil.parseDouble(xjdfProduct.getAttribute(AttributeName.AMOUNT, null, null), -1000.);
+		final JDFResourceLink rlc = theNode.getLink(c, EnumUsage.Output);
+		final double overage = rlc.getMaxAmount();
+		final double underage = rlc.getMinAmount();
+		final double amount = StringUtil.parseDouble(xjdfProduct.getAttribute(AttributeName.AMOUNT, null, null), -1000.);
 		if (amount > 0 && (overage > 0 || underage > 0))
 		{
-			JDFDeliveryIntent di = (JDFDeliveryIntent) theNode.getCreateResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
+			final JDFDeliveryIntent di = (JDFDeliveryIntent) theNode.getCreateResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
 			if (overage > 0)
 			{
 				di.appendOverage().setActual(100.0 * (overage - amount) / amount);
@@ -171,9 +171,9 @@ public class WalkProduct extends WalkXElement
 	 * @param e
 	 * @param theNode
 	 */
-	private void copyToNode(final KElement e, JDFNode theNode)
+	private void copyToNode(final KElement e, final JDFNode theNode)
 	{
-		VString ignore = new VString(XJDFConstants.IsRoot, null);
+		final VString ignore = new VString(XJDFConstants.IsRoot, null);
 		theNode.setAttributes(e, ignore);
 		updateAttributes(theNode);
 
@@ -189,26 +189,26 @@ public class WalkProduct extends WalkXElement
 		if (c == null)
 		{
 			c = (JDFComponent) theNode.addResource(ElementName.COMPONENT, EnumUsage.Output);
-			xjdfToJDFImpl.idMap.put(c.getID(), new IDFinder().new IDPart(c.getID(), null));
-			boolean isRootProduct = new ProductHelper(xjdfProduct).isRootProduct();
+			xjdfToJDFImpl.idMap.put(c.getID(), new IDPart(c.getID(), null));
+			final boolean isRootProduct = new ProductHelper(xjdfProduct).isRootProduct();
 			final EnumComponentType partialFinal = isRootProduct ? EnumComponentType.FinalProduct : EnumComponentType.PartialProduct;
 			c.setComponentType(partialFinal, null);
 			if (!isRootProduct)
 			{
-				JDFNode parent = theNode.getParentJDF();
+				final JDFNode parent = theNode.getParentJDF();
 				if (parent != null && EnumType.Product.equals(parent.getEnumType()))
 				{
 					parent.ensureLink(c, EnumUsage.Input, null);
 				}
 			}
 		}
-		AttributeInfo info = c.getAttributeInfo();
-		VString cKnown = info.knownAttribs();
-		AttributeInfo infoNode = theNode.getAttributeInfo();
+		final AttributeInfo info = c.getAttributeInfo();
+		final VString cKnown = info.knownAttribs();
+		final AttributeInfo infoNode = theNode.getAttributeInfo();
 		cKnown.removeAll(infoNode.knownAttribs());
 		cKnown.remove(AttributeName.AMOUNT);
 		cKnown.remove(AttributeName.ACTUALAMOUNT);
-		for (String known : cKnown)
+		for (final String known : cKnown)
 		{
 			if (theNode.hasAttribute(known))
 			{

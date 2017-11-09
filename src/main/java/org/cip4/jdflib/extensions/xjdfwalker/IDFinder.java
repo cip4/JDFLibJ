@@ -78,7 +78,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
@@ -95,72 +94,6 @@ public class IDFinder extends BaseElementWalker
 	final Map<String, IDPart> theMap;
 	final Map<String, String> indexMap;
 	boolean needSplitPart;
-
-	/**
-	 *
-	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
-	 */
-	public class IDPart
-	{
-		/**
-		 *
-		 * @param idParent
-		 * @param parts
-		 */
-		public IDPart(final String idParent, final VElement parts)
-		{
-			vMap = null;
-			if (parts != null && parts.size() > 0)
-			{
-				vMap = new VJDFAttributeMap();
-
-				for (final KElement p : parts)
-				{
-					final JDFAttributeMap partMap = p.getAttributeMap();
-					partMap.remove(AttributeName.PRODUCTPART);
-					vMap.add(partMap);
-				}
-				vMap.unify();
-			}
-			id = idParent;
-		}
-
-		/**
-		 *
-		 */
-		protected String id;
-		/**
-		 *
-		 */
-		protected VJDFAttributeMap vMap;
-
-		/**
-		 * @see java.lang.Object#toString()
-		 * @return
-		 */
-		@Override
-		public String toString()
-		{
-			return "IDPart: ID=" + id + " Map= " + vMap;
-		}
-
-		/**
-		 * @return
-		 */
-		public String getID()
-		{
-			return id;
-		}
-
-		/**
-		 * @return
-		 */
-		public VJDFAttributeMap getPartMap()
-		{
-			return vMap;
-		}
-	}
 
 	/**
 	 *
@@ -296,15 +229,8 @@ public class IDFinder extends BaseElementWalker
 			{
 				final SetHelper sh = new SetHelper(e);
 				final VJDFAttributeMap parts = sh.getPartMapVector();
-				if (parts != null)
-				{
-					parts.removeKey(AttributeName.PRODUCTPART);
-					needSplitPart = parts.size() < n;
-				}
-				else
-				{
-					needSplitPart = true;
-				}
+				parts.removeKey(AttributeName.PRODUCTPART);
+				needSplitPart = parts.size() < n;
 			}
 			else
 			{
