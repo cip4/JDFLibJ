@@ -372,6 +372,76 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		hf.stop();
 	}
 
+	@Test
+	public synchronized void testSetRetry() throws Exception
+	{
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		hf.setRetry(-99);
+		assertEquals(1, hf.retry);
+		hf.setRetry(99);
+		assertEquals(99, hf.retry);
+	}
+
+	/**
+	 *
+	 * ok or error folder testing also check whether we run into a dead loop with retry>1
+	 * @throws Exception
+	 */
+	@Test
+	public synchronized void testOKErrorRetry() throws Exception
+	{
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		hf.setRetry(99);
+		hf.setStabilizeTime(100);
+		File error = new File("error");
+		hf.setErrorStorage(error);
+		File ok = new File("ok");
+		hf.setOKStorage(ok);
+		hf.setMaxStore(42);
+		hf.restart();
+		ThreadUtil.sleep(1000);
+
+		for (int i = 0; i < 4; i++)
+		{
+			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
+			file.createNewFile();
+		}
+		ok = FileUtil.getFileInDirectory(theHFDir, ok);
+		error = FileUtil.getFileInDirectory(theHFDir, error);
+		ThreadUtil.sleep(2000);
+		assertEquals(ok.listFiles().length, 2, 1);
+		assertEquals(tmpHFDir.listFiles().length, 0, 1);
+		assertEquals(error.listFiles().length, 2, 1);
+		for (int i = 0; i < 4; i++)
+		{
+			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
+			file.createNewFile();
+		}
+		ThreadUtil.sleep(1000);
+		assertEquals(ok.listFiles().length, 4, 1);
+		assertEquals(tmpHFDir.listFiles().length, 0, 1);
+		for (int i = 0; i < 100; i++)
+		{
+			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
+			file.createNewFile();
+		}
+		for (int i = 0; i < 1000; i++)
+		{
+			ThreadUtil.sleep(200);
+			if (theHFDir.listFiles().length <= 2)
+			{
+				log.info("stop " + i);
+				break;
+			}
+			log.warn("run over " + theHFDir.listFiles().length);
+		}
+		assertEquals(ok.listFiles().length, 42, 13);
+		assertEquals(tmpHFDir.listFiles().length, 0, 0);
+		assertEquals(error.listFiles().length, 42, 13);
+
+		hf.stop();
+	}
+
 	/**
 	 *
 	 * ok or error folder testing

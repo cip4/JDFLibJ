@@ -97,6 +97,7 @@ public class StorageHotFolder
 	final HotFolder hf; // the active hot folder
 	final File storageDir;
 	final Log log;
+	int retry;
 
 	/**
 	 * @return the hotfolder directory
@@ -120,6 +121,7 @@ public class StorageHotFolder
 	public StorageHotFolder(final File _hotFolderDir, final File storageDir, final String ext, final HotFolderListener hfListener)
 	{
 		super();
+		retry = 1;
 		log = LogFactory.getLog(getClass());
 		this.storageDir = storageDir;
 		storageDir.mkdirs(); // just in case
@@ -145,15 +147,15 @@ public class StorageHotFolder
 	 *
 	 * @param _hotFolderDir
 	 */
-	private void moveFromTemp(File _hotFolderDir)
+	private void moveFromTemp(final File _hotFolderDir)
 	{
-		File[] junk = storageDir.listFiles();
+		final File[] junk = storageDir.listFiles();
 		if (junk != null && junk.length > 0)
 		{
 			log.warn("moving " + junk.length + " legacy temp files from: " + storageDir.getPath());
-			for (File f : junk)
+			for (final File f : junk)
 			{
-				File fMoved = FileUtil.moveFileToDir(f, _hotFolderDir);
+				final File fMoved = FileUtil.moveFileToDir(f, _hotFolderDir);
 				if (fMoved == null)
 				{
 					log.warn("cannot move " + f.getName() + " from temp dir");
@@ -191,9 +193,9 @@ public class StorageHotFolder
 	 * @param ext
 	 * @return the newly added listener
 	 */
-	public StorageHotFolderListener addListener(HotFolderListener _hfl, String ext)
+	public StorageHotFolderListener addListener(final HotFolderListener _hfl, final String ext)
 	{
-		StorageHotFolderListener storageListener = new StorageHotFolderListener(storageDir, _hfl, this);
+		final StorageHotFolderListener storageListener = new StorageHotFolderListener(storageDir, _hfl, this);
 		hf.addListener(storageListener, ext);
 		listenerImpl.add(storageListener);
 		return storageListener;
@@ -204,7 +206,7 @@ public class StorageHotFolder
 	 * @param i
 	 * @return
 	 */
-	StorageHotFolderListener getListener(int i)
+	StorageHotFolderListener getListener(final int i)
 	{
 		return listenerImpl.get(i);
 	}
@@ -214,9 +216,9 @@ public class StorageHotFolder
 	 * set the directory for successful done
 	 * @param ok the local directory for ok files in the input hot folder
 	 */
-	public void setOKStorage(File ok)
+	public void setOKStorage(final File ok)
 	{
-		for (StorageHotFolderListener shfl : listenerImpl)
+		for (final StorageHotFolderListener shfl : listenerImpl)
 			shfl.setOKStorage(FileUtil.getFileInDirectory(getHfDirectory(), ok));
 	}
 
@@ -226,7 +228,7 @@ public class StorageHotFolder
 	 * @param storedFile
 	 * @param ok
 	 */
-	public void copyCompleted(final File storedFile, boolean ok)
+	public void copyCompleted(final File storedFile, final boolean ok)
 	{
 		listenerImpl.get(0).copyCompleted(storedFile, ok);
 	}
@@ -236,9 +238,9 @@ public class StorageHotFolder
 	 * set the directory for error done
 	 * @param error the local directory for error files in the input hot folder
 	 */
-	public void setErrorStorage(File error)
+	public void setErrorStorage(final File error)
 	{
-		for (StorageHotFolderListener shfl : listenerImpl)
+		for (final StorageHotFolderListener shfl : listenerImpl)
 			shfl.setErrorStorage(FileUtil.getFileInDirectory(getHfDirectory(), error));
 	}
 
@@ -246,9 +248,9 @@ public class StorageHotFolder
 	 * Setter for maxStore attribute.
 	 * @param maxStore the maxStore to set
 	 */
-	public void setMaxStore(int maxStore)
+	public void setMaxStore(final int maxStore)
 	{
-		for (StorageHotFolderListener shfl : listenerImpl)
+		for (final StorageHotFolderListener shfl : listenerImpl)
 			shfl.setMaxStore(maxStore);
 	}
 
@@ -256,7 +258,7 @@ public class StorageHotFolder
 	 * @param maxConcurrent
 	 * @see org.cip4.jdflib.util.hotfolder.HotFolder#setMaxConcurrent(int)
 	 */
-	public void setMaxConcurrent(int maxConcurrent)
+	public void setMaxConcurrent(final int maxConcurrent)
 	{
 		hf.setMaxConcurrent(maxConcurrent);
 	}
@@ -265,7 +267,7 @@ public class StorageHotFolder
 	 * @param stabilizeTime
 	 * @see org.cip4.jdflib.util.hotfolder.HotFolder#setStabilizeTime(int)
 	 */
-	public void setStabilizeTime(int stabilizeTime)
+	public void setStabilizeTime(final int stabilizeTime)
 	{
 		hf.setStabilizeTime(stabilizeTime);
 	}
@@ -276,7 +278,43 @@ public class StorageHotFolder
 	@Override
 	public String toString()
 	{
-		return getClass().getSimpleName() + "[hf=" + hf + ", storageDir=" + storageDir + "]";
+		return getClass().getSimpleName() + "[hf=" + hf + ", storageDir=" + storageDir + " retry=" + retry;
+	}
+
+	/**
+	 * @return the retry
+	 */
+	protected int getRetry()
+	{
+		return retry;
+	}
+
+	/**
+	 * @param retry the retry to set
+	 */
+	public void setRetry(int retry)
+	{
+		if (retry < 1)
+			retry = 1;
+		this.retry = retry;
+	}
+
+	/**
+	 * @return
+	 * @see org.cip4.jdflib.util.hotfolder.HotFolder#getMaxConcurrent()
+	 */
+	public int getMaxConcurrent()
+	{
+		return hf.getMaxConcurrent();
+	}
+
+	/**
+	 * @return
+	 * @see org.cip4.jdflib.util.hotfolder.HotFolder#getStabilizeTime()
+	 */
+	public int getStabilizeTime()
+	{
+		return hf.getStabilizeTime();
 	}
 
 }

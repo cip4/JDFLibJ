@@ -264,9 +264,9 @@ public class HotFolder
 	 * @param increment
 	 * @return
 	 */
-	String getThreadName(boolean increment)
+	String getThreadName(final boolean increment)
 	{
-		String threadName = "HotFolder_" + nThread + "_" + dir.getAbsolutePath();
+		final String threadName = "HotFolder_" + nThread + "_" + dir.getAbsolutePath();
 		if (increment)
 		{
 			nThread++;
@@ -301,7 +301,7 @@ public class HotFolder
 		 */
 		void quit()
 		{
-			String name = getName();
+			final String name = getName();
 			log.info("Stopping hot folder: " + name);
 			interrupt = true;
 			if (maxConcurrent > 1)
@@ -333,7 +333,7 @@ public class HotFolder
 			log.info("starting hot folder at: " + dir.getAbsolutePath());
 			while (!interrupt)
 			{
-				long t0 = System.currentTimeMillis();
+				final long t0 = System.currentTimeMillis();
 				final long lastMod = dir.lastModified();
 				if (lastMod > lastModified || lastFileTime.size() > 0 || (t0 - lastModified) < 42000)
 				// has the directory been touched?
@@ -365,7 +365,7 @@ public class HotFolder
 					}
 					if (files != null)
 					{
-						Vector<File> vf = ContainerUtil.toVector(files);
+						final Vector<File> vf = ContainerUtil.toVector(files);
 						for (int i = vf.size() - 1; i >= 0; i--)
 						{
 							if (vf.get(i) == null)
@@ -376,7 +376,7 @@ public class HotFolder
 						files = vf.toArray(new File[0]);
 						files = new FileSorter(files).sortLastModified(false);
 
-						for (File f : files) // the file is new - add to list for next check
+						for (final File f : files) // the file is new - add to list for next check
 						{
 							lastFileTime.add(new FileTime(f));
 						}
@@ -398,7 +398,7 @@ public class HotFolder
 			if (interrupt)
 				return null;
 
-			File[] files = FileUtil.listFilesWithExtension(dir, getAllExtensions());
+			final File[] files = FileUtil.listFilesWithExtension(dir, getAllExtensions());
 			if (files != null)
 			{
 				for (int i = 0; i < files.length; i++)
@@ -422,21 +422,21 @@ public class HotFolder
 		}
 	}
 
-	private boolean processSingleFile(final File[] files, final FileTime lftAt, int j, final File fileJ)
+	private boolean processSingleFile(final File[] files, final FileTime lftAt, final int j, final File fileJ)
 	{
 		boolean found = true;
 		if (fileJ.lastModified() == lftAt.modified && ((lftAt.modified + stabilizeTime) < System.currentTimeMillis()))
 		{
 			if (fileJ.exists())
 			{
-				HotFileRunner runner = new HotFileRunner(fileJ);
+				final HotFileRunner runner = new HotFileRunner(fileJ);
 				if (maxConcurrent == 1)
 				{
 					runner.run();
 				}
 				else
 				{
-					MultiTaskQueue taskQueue = MultiTaskQueue.getCreateQueue(getThreadName(false), maxConcurrent);
+					final MultiTaskQueue taskQueue = MultiTaskQueue.getCreateQueue(getThreadName(false), maxConcurrent);
 					found = taskQueue.queue(runner);
 				}
 			}
@@ -463,7 +463,7 @@ public class HotFolder
 	{
 		File fileJ;
 
-		HotFileRunner(File fileJ)
+		HotFileRunner(final File fileJ)
 		{
 			super();
 			if (hfRunning != null)
@@ -480,7 +480,7 @@ public class HotFolder
 		@Override
 		public void run()
 		{
-			for (ExtensionListener xl : hfl)
+			for (final ExtensionListener xl : hfl)
 			{
 				try
 				{
@@ -549,7 +549,7 @@ public class HotFolder
 			if (ext != null)
 			{
 				extension = new HashSet<String>();
-				VString vs = StringUtil.tokenize(ext, ",", false);
+				final VString vs = StringUtil.tokenize(ext, ",", false);
 				for (String s : vs)
 				{
 					if (s.startsWith("."))
@@ -612,9 +612,12 @@ public class HotFolder
 	/**
 	 * @param defaultStabilizeTime the defaultStabilizeTime to set
 	 */
-	public static void setDefaultStabilizeTime(int defaultStabilizeTime)
+	public static void setDefaultStabilizeTime(final int defaultStabilizeTime)
 	{
-		HotFolder.defaultStabilizeTime = defaultStabilizeTime;
+		if (defaultStabilizeTime > 0)
+		{
+			HotFolder.defaultStabilizeTime = defaultStabilizeTime;
+		}
 	}
 
 	/**
@@ -628,8 +631,11 @@ public class HotFolder
 	/**
 	 * @param stabilizeTime the stabilizeTime to set
 	 */
-	public void setStabilizeTime(int stabilizeTime)
+	public void setStabilizeTime(final int stabilizeTime)
 	{
-		this.stabilizeTime = stabilizeTime;
+		if (stabilizeTime > 0)
+		{
+			this.stabilizeTime = stabilizeTime;
+		}
 	}
 }
