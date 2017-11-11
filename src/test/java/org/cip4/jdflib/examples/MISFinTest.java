@@ -78,6 +78,7 @@ package org.cip4.jdflib.examples;
 import java.io.File;
 
 import org.cip4.jdflib.auto.JDFAutoBoxFoldAction.EnumAction;
+import org.cip4.jdflib.auto.JDFAutoBoxFoldingParams.EnumBoxFoldingType;
 import org.cip4.jdflib.auto.JDFAutoBundle.EnumBundleType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -229,9 +230,11 @@ public class MISFinTest extends BaseGoldenTicketTest
 	@Test
 	public void testBoxfold()
 	{
-		JDFNode n = JDFNode.createRoot();
+		final JDFNode n = JDFNode.createRoot();
 		n.setType("BoxFolding", false);
-		JDFBoxFoldingParams bfp = (JDFBoxFoldingParams) n.addResource(ElementName.BOXFOLDINGPARAMS, EnumUsage.Input);
+		final JDFBoxFoldingParams bfp = (JDFBoxFoldingParams) n.addResource(ElementName.BOXFOLDINGPARAMS, EnumUsage.Input);
+		bfp.setBoxFoldingType(EnumBoxFoldingType.Type01);
+
 		setSnippet(bfp, true);
 		JDFBoxFoldAction bfa = bfp.appendBoxFoldAction();
 		bfa.setFoldIndex(new JDFXYPair(0, -1));

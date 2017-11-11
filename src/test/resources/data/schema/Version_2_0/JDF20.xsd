@@ -278,6 +278,7 @@
     <xs:simpleType name="Scope">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Allowed"/>
+            <xs:enumeration value="Estimate"/>
             <xs:enumeration value="Job"/>
             <xs:enumeration value="Present"/>
         </xs:restriction>
@@ -667,11 +668,11 @@
 
     <xs:simpleType name="WorkStyle">
         <xs:restriction base="xs:string">
+            <xs:enumeration value="Perfecting"/>
             <xs:enumeration value="Simplex"/>
             <xs:enumeration value="WorkAndBack"/>
-            <xs:enumeration value="WorkAndTurn"/>
             <xs:enumeration value="WorkAndTumble"/>
-            <xs:enumeration value="WorkAndTwist"/>
+            <xs:enumeration value="WorkAndTurn"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -1370,6 +1371,8 @@
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
                         <xs:enumeration value="Empty"/>
+                        <xs:enumeration value="Full"/>
+                        <xs:enumeration value="High"/>
                         <xs:enumeration value="Low"/>
                         <xs:enumeration value="OK"/>
                     </xs:restriction>
@@ -2737,7 +2740,6 @@
                     <xs:element maxOccurs="1" minOccurs="0" ref="SideStitching"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="SoftCoverBinding"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="Tabs"/>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="ThreadSewing"/>
                 </xs:sequence>
                 <xs:attribute name="BackCoverColor" type="NamedColor" use="optional"/>
                 <xs:attribute name="BackCoverColorDetails" type="string" use="optional"/>
@@ -3013,7 +3015,11 @@
     <xs:complexType name="LaminatingIntent">
         <xs:complexContent>
             <xs:extension base="ProductIntent">
-                <xs:attribute name="Surface" type="Side" use="required"/>
+                <xs:attribute name="Surface" use="required">
+                    <xs:simpleType>
+                        <xs:list itemType="Side"/>
+                    </xs:simpleType>
+                </xs:attribute>
                 <xs:attribute name="Temperature" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
@@ -3043,8 +3049,6 @@
                 <xs:attribute name="SpreadType" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="NMTOKEN">
-                            <xs:enumeration value="Combine"/>
-                            <xs:enumeration value="FoldOut"/>
                             <xs:enumeration value="SinglePage"/>
                             <xs:enumeration value="Spread"/>
                         </xs:restriction>
@@ -4091,6 +4095,7 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Offset" type="XYPair" use="optional"/>
+            <xs:attribute name="Units" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -4967,7 +4972,15 @@
                     </xs:simpleType>
                 </xs:attribute>
                 <xs:attribute name="CTM" type="matrix" use="optional"/>
-                <xs:attribute name="PreviewFileType" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="PreviewFileType" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="PNG"/>
+                            <xs:enumeration value="CIP3Multiple"/>
+                            <xs:enumeration value="CIP3Single"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -5813,13 +5826,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <xs:element name="ThreadSewing">
-        <xs:complexType>
-            <xs:attribute name="Sealing" type="boolean" use="optional"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
 
     <xs:element name="ThreadSewingParams" substitutionGroup="SpecificResource" type="ThreadSewingParams"/>
     <xs:complexType name="ThreadSewingParams">
