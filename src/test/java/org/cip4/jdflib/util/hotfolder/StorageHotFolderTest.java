@@ -229,12 +229,13 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		d.write2File(hfPath + "/dummy.jdf", 2, false);
 		final File file = new File(hfPath + "/dummy.jdf");
 		assertTrue(file.exists());
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 400; i++)
 		{
-			ThreadUtil.sleep(1000);
+			ThreadUtil.sleep(100);
 			if (!file.exists() && !content.exists())
 				break;
 		}
+		ThreadUtil.sleep(420);
 		assertFalse(file.getAbsolutePath(), file.exists());
 		assertFalse(content.getAbsolutePath(), content.exists());
 		assertEquals(tmpHFDir.listFiles().length, 0, 0);
