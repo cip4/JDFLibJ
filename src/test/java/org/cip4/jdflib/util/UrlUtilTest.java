@@ -296,14 +296,18 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws IOException
 	 *
 	 */
 	@Test
-	public void testWriteToFTP()
+	public void testWriteToFTP() throws IOException
 	{
 		if (!isTestNetwork())
 			return;
-		assertNotNull(UrlUtil.writeToURL("ftp://ftp.mozilla.org/pub/mozilla.org", null, null, null, null));
+		final UrlPart part = UrlUtil.writeToURL("ftp://speedtest.tele2.net/", null, null, null, null);
+		assertEquals(part.getResponseCode(), 200);
+		part.buffer();
+		assertTrue(part.getResponseStream().available() > 100);
 	}
 
 	/**
