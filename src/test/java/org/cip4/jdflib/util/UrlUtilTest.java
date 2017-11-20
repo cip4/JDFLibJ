@@ -85,6 +85,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
@@ -311,6 +312,19 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	public void testGetFTPInputstream() throws IOException
+	{
+		if (!isTestNetwork())
+			return;
+		final InputStream is = UrlUtil.getURLInputStream("ftp://speedtest.tele2.net/");
+		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+	}
+
+	/**
 	 *
 	 */
 	@Test
@@ -359,6 +373,19 @@ public class UrlUtilTest extends JDFTestCaseBase
 		part.buffer();
 
 		assertTrue(part.getResponseStream().available() > 100);
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	public void testGetHTTPSInputstream() throws IOException
+	{
+		if (!isTestNetwork())
+			return;
+		final InputStream is = UrlUtil.getURLInputStream("https://google.ch");
+		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
 	}
 
 	/**
