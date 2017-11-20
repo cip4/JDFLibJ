@@ -109,8 +109,6 @@ import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeHelper;
 import org.cip4.jdflib.util.net.ProxyUtil;
 
-import sun.net.www.protocol.ftp.FtpURLConnection;
-
 /**
  * collection of helper routines to convert urls
  *
@@ -144,7 +142,7 @@ public class UrlUtil
 	 *
 	 * @return connectionTimeout in milliseconds
 	 */
-	public static void setConnectionTimeout(int timeout)
+	public static void setConnectionTimeout(final int timeout)
 	{
 		DEFAULT_CONNECTION_TIMEOUT = timeout;
 	}
@@ -197,7 +195,7 @@ public class UrlUtil
 			return redirect;
 		}
 
-		public void setRedirect(int redirect)
+		public void setRedirect(final int redirect)
 		{
 			this.redirect = redirect;
 		}
@@ -217,7 +215,7 @@ public class UrlUtil
 		 * Setter for chunkSize attribute.
 		 * @param chunkSize the chunkSize to set
 		 */
-		public void setChunkSize(int chunkSize)
+		public void setChunkSize(final int chunkSize)
 		{
 			this.chunkSize = chunkSize;
 		}
@@ -235,7 +233,7 @@ public class UrlUtil
 		 * Setter for bKeepAlive attribute.
 		 * @param bKeepAlive the bKeepAlive to set
 		 */
-		public void setbKeepAlive(boolean bKeepAlive)
+		public void setbKeepAlive(final boolean bKeepAlive)
 		{
 			this.bKeepAlive = bKeepAlive;
 		}
@@ -420,7 +418,7 @@ public class UrlUtil
 	 * @param path may be null
 	 * @return
 	 */
-	public static String createHttpUrl(boolean bSecure, String host, int port, String path)
+	public static String createHttpUrl(final boolean bSecure, final String host, final int port, String path)
 	{
 		if (path != null && !path.startsWith("/"))
 			path = "/" + path;
@@ -428,16 +426,16 @@ public class UrlUtil
 		{
 			if (port > 0)
 			{
-				URL url = new URL("http" + (bSecure ? "s" : ""), host, port, path);
+				final URL url = new URL("http" + (bSecure ? "s" : ""), host, port, path);
 				return url.toExternalForm();
 			}
 			else
 			{
-				URL url = new URL("http" + (bSecure ? "s" : ""), host, path);
+				final URL url = new URL("http" + (bSecure ? "s" : ""), host, path);
 				return url.toExternalForm();
 			}
 		}
-		catch (MalformedURLException x)
+		catch (final MalformedURLException x)
 		{
 			return null;
 		}
@@ -654,7 +652,7 @@ public class UrlUtil
 	 */
 	public static InputStream getURLInputStream(final String urlString, final BodyPart bodyPart)
 	{
-		URLReader reader = new URLReader(urlString);
+		final URLReader reader = new URLReader(urlString);
 		reader.setBodyPart(bodyPart);
 		return reader.getURLInputStream();
 	}
@@ -736,7 +734,7 @@ public class UrlUtil
 		}
 		if (urlString.length() == 0)
 			return null;
-		File urlToFile = urlToFile(urlString);
+		final File urlToFile = urlToFile(urlString);
 		return urlToFile == null ? null : urlToFile.getName();
 
 	}
@@ -840,11 +838,11 @@ public class UrlUtil
 	 * @param escape128 if true escape chars>128
 	 * @return
 	 */
-	public static String uncToUrl(String unc, boolean escape128)
+	public static String uncToUrl(final String unc, final boolean escape128)
 	{
 		if (!isUNC(unc))
 		{
-			URL url = stringToURL(unc);
+			final URL url = stringToURL(unc);
 			return url == null ? null : url.toExternalForm();
 		}
 		String url = StringUtil.replaceCharSet(unc, "\\", "/", 0);
@@ -873,13 +871,13 @@ public class UrlUtil
 	 * @param val the value to add - NOT escaped - if null nothing is set
 	 * @return the escaped new url
 	 */
-	public static String addParameter(String baseUrl, String key, String val)
+	public static String addParameter(final String baseUrl, String key, String val)
 	{
 		if (StringUtil.isEmpty(baseUrl) || StringUtil.isEmpty(key) || StringUtil.isEmpty(val))
 			return baseUrl;
-		int posQMark = baseUrl.indexOf("?");
-		String flag = posQMark >= 0 ? "&" : "?";
-		StringBuffer buf = new StringBuffer(baseUrl);
+		final int posQMark = baseUrl.indexOf("?");
+		final String flag = posQMark >= 0 ? "&" : "?";
+		final StringBuffer buf = new StringBuffer(baseUrl);
 		key = escape(key, true);
 		val = escape(val, true);
 		val = StringUtil.escape(val, ":/", "%", 16, 2, -1, -1);
@@ -893,7 +891,7 @@ public class UrlUtil
 	 * @param path the path to add
 	 * @return the escaped new url
 	 */
-	public static String addPath(String baseUrl, String path)
+	public static String addPath(final String baseUrl, final String path)
 	{
 		if (path == null)
 			return baseUrl;
@@ -901,7 +899,7 @@ public class UrlUtil
 			return path;
 		String request = StringUtil.token(baseUrl, 0, "?");
 		request = StringUtil.addToken(request, "/", path);
-		String params = StringUtil.token(baseUrl, 1, "?");
+		final String params = StringUtil.token(baseUrl, 1, "?");
 		if (params != null)
 			request += "?" + params;
 		return request;
@@ -913,13 +911,13 @@ public class UrlUtil
 	 * @param bEscape128 if true, also escape >128, else leave non-ascii7 as is
 	 * @return the escaped string
 	 */
-	public static String escape(String toEscape, boolean bEscape128)
+	public static String escape(String toEscape, final boolean bEscape128)
 	{
 		if (toEscape == null)
 			return null;
 		if (bEscape128)
 		{
-			byte[] utf8Bytes = StringUtil.getUTF8Bytes(toEscape);
+			final byte[] utf8Bytes = StringUtil.getUTF8Bytes(toEscape);
 			toEscape = new String(utf8Bytes);
 			toEscape = StringUtil.escape(toEscape, m_URIEscape, "%", 16, 2, 0x21, 127);
 		}
@@ -935,7 +933,7 @@ public class UrlUtil
 	 * @param toEscape the string to unescape
 	 * @return the escaped string
 	 */
-	public static String unEscape(String toEscape)
+	public static String unEscape(final String toEscape)
 	{
 		return StringUtil.unEscape(toEscape, "%", 16, 2);
 	}
@@ -961,7 +959,7 @@ public class UrlUtil
 			{
 				return new URL(uncToUrl(urlString, true));
 			}
-			catch (MalformedURLException e)
+			catch (final MalformedURLException e)
 			{
 				return null;
 			}
@@ -979,7 +977,7 @@ public class UrlUtil
 			}
 			else
 			{
-				String fileToUrl = fileToUrl(urlToFile(urlString), true);
+				final String fileToUrl = fileToUrl(urlToFile(urlString), true);
 				url = fileToUrl == null ? null : new URL(fileToUrl);
 			}
 		}
@@ -1102,7 +1100,7 @@ public class UrlUtil
 			mimeMap.put("zip", APPLICATION_ZIP);
 		}
 		final String extension = UrlUtil.extension(url);
-		String mimeType = extension == null ? null : mimeMap.get(extension.toLowerCase());
+		final String mimeType = extension == null ? null : mimeMap.get(extension.toLowerCase());
 		return mimeType == null ? JDFCoreConstants.MIME_TEXTUNKNOWN : mimeType;
 	}
 
@@ -1321,7 +1319,7 @@ public class UrlUtil
 	 * @param url
 	 * @return
 	 */
-	public static URLProtocol getProtocol(String url)
+	public static URLProtocol getProtocol(final String url)
 	{
 		if (isCID(url))
 			return URLProtocol.cid;
@@ -1339,13 +1337,13 @@ public class UrlUtil
 	 * @param ip
 	 * @return
 	 */
-	public static String getIPFromBytes(byte[] ip)
+	public static String getIPFromBytes(final byte[] ip)
 	{
 		if ((ip == null) || (ip.length != 4 && ip.length != 6))
 		{
 			return null;
 		}
-		StringBuffer b = new StringBuffer(32);
+		final StringBuffer b = new StringBuffer(32);
 		for (int i = 0; i < ip.length; i++)
 		{
 			b.append(ip[i]);
@@ -1360,16 +1358,16 @@ public class UrlUtil
 	 * @param ip
 	 * @return
 	 */
-	public static byte[] getBytesFromIP(String ip)
+	public static byte[] getBytesFromIP(final String ip)
 	{
-		VString v = StringUtil.tokenize(ip, ".", false);
+		final VString v = StringUtil.tokenize(ip, ".", false);
 		if (v == null || v.size() < 4)
 			return null;
-		byte[] b = new byte[v.size()];
+		final byte[] b = new byte[v.size()];
 		int n = 0;
-		for (String s : v)
+		for (final String s : v)
 		{
-			int i = StringUtil.parseInt(s, -1);
+			final int i = StringUtil.parseInt(s, -1);
 			if (i > 255 || i < 0)
 				return null;
 			b[n++] = (byte) i;
@@ -1423,7 +1421,7 @@ public class UrlUtil
 	{
 		if (url == null)
 			return null;
-		int pos = url.indexOf("://");
+		final int pos = url.indexOf("://");
 		if (pos > -1)
 			url = url.substring(pos + 3);
 		else if (isCID(url))
@@ -1483,8 +1481,8 @@ public class UrlUtil
 		{
 			return null;
 		}
-		VString vDirectory = StringUtil.tokenize(directory, "/", false);
-		VString vURL = StringUtil.tokenize(url, "/", false);
+		final VString vDirectory = StringUtil.tokenize(directory, "/", false);
+		final VString vURL = StringUtil.tokenize(url, "/", false);
 		if (vDirectory.size() >= vURL.size())
 			return null;
 		if (vDirectory.size() > 0 && vURL.size() > 0)
@@ -1494,9 +1492,9 @@ public class UrlUtil
 			if (vURL.get(0).endsWith(":"))
 				vURL.set(0, vURL.get(0).toLowerCase());
 		}
-		for (String dirChunk : vDirectory)
+		for (final String dirChunk : vDirectory)
 		{
-			String urlChunk = vURL.get(0);
+			final String urlChunk = vURL.get(0);
 			if (urlChunk.equals(dirChunk))
 				vURL.remove(0);
 			else
@@ -1538,7 +1536,7 @@ public class UrlUtil
 			try
 			{
 				final URI dirURI = new URI(directory);
-				String scheme = dirURI.getScheme();
+				final String scheme = dirURI.getScheme();
 				if (scheme != null)
 				{
 					directory = scheme + ":";
@@ -1567,7 +1565,7 @@ public class UrlUtil
 	 * @param url
 	 * @return
 	 */
-	public static String getParentDirectory(String url)
+	public static String getParentDirectory(final String url)
 	{
 
 		if (url == null)
@@ -1575,7 +1573,7 @@ public class UrlUtil
 			return null;
 		}
 		int pos = url.lastIndexOf('/');
-		int pos2 = url.lastIndexOf('\\');
+		final int pos2 = url.lastIndexOf('\\');
 		if (pos2 >= 0 && pos2 > pos)
 			pos = pos2;
 
@@ -1638,9 +1636,9 @@ public class UrlUtil
 	 * @param url the input url
 	 * @return the - hopefully - usable url
 	 */
-	public static String cleanHttpURL(String url)
+	public static String cleanHttpURL(final String url)
 	{
-		VString v = StringUtil.tokenize(url, "/", false);
+		final VString v = StringUtil.tokenize(url, "/", false);
 		if (v == null)
 			return null;
 		String protocol = v.get(0);
@@ -1672,9 +1670,9 @@ public class UrlUtil
 	 * @return {@link UrlPart} the opened http connection, null in case of error
 	 *
 	 */
-	public static UrlPart writeToURL(final String strUrl, final InputStream stream, final String method, String contentType, final HTTPDetails details)
+	public static UrlPart writeToURL(final String strUrl, final InputStream stream, final String method, final String contentType, final HTTPDetails details)
 	{
-		StreamReader streamReader = stream == null ? null : new StreamReader(stream);
+		final StreamReader streamReader = stream == null ? null : new StreamReader(stream);
 		return writerToURL(strUrl, streamReader, method, contentType, details);
 	}
 
@@ -1684,7 +1682,7 @@ public class UrlUtil
 		 *
 		 * @param input
 		 */
-		StreamReader(InputStream input)
+		StreamReader(final InputStream input)
 		{
 			super();
 			this.input = input;
@@ -1693,7 +1691,7 @@ public class UrlUtil
 		private final InputStream input;
 
 		@Override
-		public void writeStream(OutputStream os) throws IOException
+		public void writeStream(final OutputStream os) throws IOException
 		{
 			IOUtils.copy(input, os);
 		}
@@ -1711,9 +1709,9 @@ public class UrlUtil
 	 * @return {@link UrlPart} the opened http connection, null in case of error
 	 *
 	 */
-	public static UrlPart writerToURL(final String strUrl, final IStreamWriter streamWriter, final String method, String contentType, final HTTPDetails details)
+	public static UrlPart writerToURL(final String strUrl, final IStreamWriter streamWriter, final String method, final String contentType, final HTTPDetails details)
 	{
-		URLWriter urlWriter = new URLWriter(strUrl, streamWriter, method, contentType, details);
+		final URLWriter urlWriter = new URLWriter(strUrl, streamWriter, method, contentType, details);
 		return urlWriter.writeToURL();
 	}
 
@@ -1742,7 +1740,7 @@ public class UrlUtil
 		 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
 		 * @param details
 		 */
-		URLWriter(String strUrl, IStreamWriter streamWriter, final String method, String contentType, final HTTPDetails details)
+		URLWriter(final String strUrl, final IStreamWriter streamWriter, final String method, String contentType, final HTTPDetails details)
 		{
 			this.strUrl = strUrl;
 			this.streamWriter = streamWriter;
@@ -1772,12 +1770,12 @@ public class UrlUtil
 			}
 			else
 			{
-				URL url = UrlUtil.stringToURL(strUrl);
-				URI uri = ProxyUtil.getHostURI(url);
+				final URL url = UrlUtil.stringToURL(strUrl);
+				final URI uri = ProxyUtil.getHostURI(url);
 				if (uri == null) // redundant but makes compiler happy
 					return null;
 
-				List<Proxy> list = ProxyUtil.getProxiesWithLocal(uri);
+				final List<Proxy> list = ProxyUtil.getProxiesWithLocal(uri);
 
 				ByteArrayIOStream bufStream = streamWriter != null && list.size() > 1 ? new ByteArrayIOStream() : null;
 				if (bufStream != null)
@@ -1786,29 +1784,29 @@ public class UrlUtil
 					{
 						streamWriter.writeStream(bufStream);
 					}
-					catch (IOException e)
+					catch (final IOException e)
 					{
 						bufStream = null;
 					}
 				}
-				for (Proxy proxy : list)
+				for (final Proxy proxy : list)
 				{
 					if (bufStream != null)
 					{
 						streamWriter = new StreamReader(bufStream.getInputStream());
 					}
-					boolean bWantLog = list.size() == 1 || !proxy.equals(Proxy.NO_PROXY);
+					final boolean bWantLog = list.size() == 1 || !proxy.equals(Proxy.NO_PROXY);
 					urlPart = callProxy(proxy, bWantLog);
 					if (urlPart != null)
 					{
-						int responseCode = urlPart.getResponseCode();
+						final int responseCode = urlPart.getResponseCode();
 						if (responseCode == 200)
 						{
 							return urlPart;
 						}
 						else if (isRedirect(responseCode) && (details == null || details.getRedirect() < 42) && streamWriter == null)
 						{
-							String newLocation = urlPart.getConnection().getHeaderField("Location");
+							final String newLocation = urlPart.getConnection().getHeaderField("Location");
 							if (newLocation != null)
 							{
 								fallBack = urlPart;
@@ -1844,7 +1842,7 @@ public class UrlUtil
 			{
 				return new UrlPart(f);
 			}
-			catch (IOException x)
+			catch (final IOException x)
 			{
 				return null;
 			}
@@ -1855,9 +1853,9 @@ public class UrlUtil
 		 * @param bWantLog
 		 * @return
 		 */
-		private UrlPart callProxy(Proxy proxy, boolean bWantLog)
+		private UrlPart callProxy(final Proxy proxy, final boolean bWantLog)
 		{
-			URL url = UrlUtil.stringToURL(strUrl);
+			final URL url = UrlUtil.stringToURL(strUrl);
 
 			try
 			{
@@ -1867,7 +1865,7 @@ public class UrlUtil
 				urlConnection.setRequestProperty(CONTENT_TYPE, contentType);
 				if (urlConnection instanceof HttpURLConnection)
 				{
-					HttpURLConnection httpUrlConnection = (HttpURLConnection) urlConnection;
+					final HttpURLConnection httpUrlConnection = (HttpURLConnection) urlConnection;
 					httpUrlConnection.setRequestMethod(method);
 					if (details != null)
 					{
@@ -1876,9 +1874,9 @@ public class UrlUtil
 					output(httpUrlConnection);
 					return new UrlPart(httpUrlConnection);
 				}
-				else if (urlConnection instanceof FtpURLConnection)
+				else if (isFtp(strUrl))
 				{
-					return new UrlPart((FtpURLConnection) urlConnection);
+					return new UrlPart(urlConnection, false);
 				}
 			}
 			catch (final Throwable x)
@@ -1897,7 +1895,7 @@ public class UrlUtil
 		 */
 		private void output(final HttpURLConnection httpURLconnection) throws IOException
 		{
-			boolean doOutput = streamWriter != null;
+			final boolean doOutput = streamWriter != null;
 			httpURLconnection.setDoOutput(doOutput);
 			if (doOutput)
 			{
@@ -1919,7 +1917,7 @@ public class UrlUtil
 	 * @deprecated use moveToDir(parent, dir, null, overWrite);
 	 */
 	@Deprecated
-	public static File moveToDir(IURLSetter parent, final File dir, final boolean overWrite)
+	public static File moveToDir(final IURLSetter parent, final File dir, final boolean overWrite)
 	{
 		return moveToDir(parent, dir, null, overWrite);
 	}
@@ -1934,7 +1932,7 @@ public class UrlUtil
 	 * @param overWrite if true, zapp any old files with the same name
 	 * @return the file that corresponds to the moved url reference, null if an error occurred
 	 */
-	public static File moveToDir(IURLSetter urlSetter, final File dir, final String cwd, final boolean overWrite)
+	public static File moveToDir(final IURLSetter urlSetter, final File dir, final String cwd, final boolean overWrite)
 	{
 		return moveToDir(urlSetter, dir, cwd, overWrite, false);
 	}
@@ -1949,7 +1947,7 @@ public class UrlUtil
 	 * @param overWrite if true, zapp any old files with the same name
 	 * @return the file that corresponds to the moved url reference, null if an error occurred
 	 */
-	public static File moveToDir(IURLSetter urlSetter, final File dir, final String cwd, final boolean overWrite, boolean deleteFile)
+	public static File moveToDir(final IURLSetter urlSetter, final File dir, final String cwd, final boolean overWrite, final boolean deleteFile)
 	{
 		if (urlSetter == null || dir == null || dir.exists() && !dir.isDirectory())
 		{
@@ -1990,10 +1988,10 @@ public class UrlUtil
 			}
 		}
 
-		XMLDoc d = (urlSetter instanceof KElement) ? ((KElement) urlSetter).getOwnerDocument_KElement() : null;
+		final XMLDoc d = (urlSetter instanceof KElement) ? ((KElement) urlSetter).getOwnerDocument_KElement() : null;
 		if (fileName == null)
 		{
-			Multipart mp = d == null ? null : d.getMultiPart();
+			final Multipart mp = d == null ? null : d.getMultiPart();
 			fileName = getFileName(url, mp);
 		}
 		final File localFile = fileName == null ? null : new File(fileName);
@@ -2010,8 +2008,8 @@ public class UrlUtil
 			}
 		}
 
-		URLReader urlReader = new URLReader(url, d);
-		File oldFile = deleteFile ? urlReader.getFile() : null;
+		final URLReader urlReader = new URLReader(url, d);
+		final File oldFile = deleteFile ? urlReader.getFile() : null;
 		boolean needCopy = !deleteFile;
 		if (oldFile != null)
 		{
@@ -2019,7 +2017,7 @@ public class UrlUtil
 		}
 		if (needCopy)
 		{
-			InputStream inputStream = urlReader.getURLInputStream();
+			final InputStream inputStream = urlReader.getURLInputStream();
 			if (inputStream != null)
 			{
 				out = FileUtil.streamToFile(inputStream, out);
@@ -2041,7 +2039,7 @@ public class UrlUtil
 	 * @param url the url string to test
 	 * @return true if relative
 	 */
-	public static boolean isRelativeURL(String url)
+	public static boolean isRelativeURL(final String url)
 	{
 		if (StringUtil.getNonEmpty(url) == null)
 			return false;
@@ -2053,7 +2051,7 @@ public class UrlUtil
 	 * @param contentType
 	 * @return
 	 */
-	public static boolean isXMLType(String contentType)
+	public static boolean isXMLType(final String contentType)
 	{
 		if (contentType == null)
 			return false;
@@ -2072,7 +2070,7 @@ public class UrlUtil
 	 * @param contentType
 	 * @return
 	 */
-	public static boolean isZIPType(String contentType)
+	public static boolean isZIPType(final String contentType)
 	{
 		String lower = StringUtil.normalize(contentType, true);
 		if (contentType == null)
@@ -2126,7 +2124,7 @@ public class UrlUtil
 	 * @param responseCode
 	 * @return
 	 */
-	public static boolean isRedirect(int responseCode)
+	public static boolean isRedirect(final int responseCode)
 	{
 		return responseCode == 301 || responseCode == 302 || responseCode == 303 || responseCode == 307 || responseCode == 308;
 	}

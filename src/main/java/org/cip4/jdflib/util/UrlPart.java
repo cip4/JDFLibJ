@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.util;
 
@@ -84,18 +84,16 @@ import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.core.XMLParserFactory;
 import org.cip4.jdflib.util.net.IPollDetails;
 
-import sun.net.www.protocol.ftp.FtpURLConnection;
-
 /**
  * simple struct to contain the stream and type of a bodypart
- * 
+ *
  * @author prosirai
- * 
+ *
  */
 public class UrlPart implements IPollDetails
 {
 	/**
-	 * 
+	 *
 	 * @return the response code
 	 */
 	@Override
@@ -110,46 +108,49 @@ public class UrlPart implements IPollDetails
 	 */
 	public UrlPart(final HttpURLConnection connection) throws IOException
 	{
-		rc = connection.getResponseCode();
-		this.connection = connection;
-		contentType = connection.getContentType();
-		contentLength = connection.getContentLength();
-		url = UrlUtil.urlToString(connection.getURL());
-		try
-		{
-			inStream = connection.getInputStream();
-		}
-		catch (IOException x)
-		{
-			inStream = null;
-		}
-		if (inStream == null)
-			inStream = (connection).getErrorStream();
-		bufferStream = null;
+		this(connection, true);
 	}
 
 	/**
+	 *
 	 * @param connection
+	 * @param isHttp
 	 * @throws IOException
 	 */
-	public UrlPart(final FtpURLConnection connection) throws IOException
+	public UrlPart(final URLConnection connection, final boolean isHttp) throws IOException
 	{
 		this.connection = connection;
 		contentType = connection.getContentType();
 		contentLength = connection.getContentLength();
 		url = UrlUtil.urlToString(connection.getURL());
-		int rcTmp = 200;
-		try
+		if (isHttp)
 		{
-			inStream = connection.getInputStream();
+			try
+			{
+				inStream = connection.getInputStream();
+			}
+			catch (final IOException x)
+			{
+				inStream = null;
+			}
+			if (inStream == null)
+				inStream = ((HttpURLConnection) connection).getErrorStream();
+			rc = ((HttpURLConnection) connection).getResponseCode();
 		}
-		catch (IOException x)
+		else
 		{
-			inStream = null;
-			rcTmp = -1;
+			int rcTmp = 200;
+			try
+			{
+				inStream = connection.getInputStream();
+			}
+			catch (final IOException x)
+			{
+				inStream = null;
+				rcTmp = -1;
+			}
+			rc = rcTmp;
 		}
-		rc = rcTmp;
-
 		bufferStream = null;
 	}
 
@@ -170,7 +171,7 @@ public class UrlPart implements IPollDetails
 	}
 
 	/**
-	 * 
+	 *
 	 * @param f
 	 * @throws IOException
 	 */
@@ -219,7 +220,7 @@ public class UrlPart implements IPollDetails
 	/**
 	 * @param inStream the inStream to set
 	 */
-	public void setInStream(InputStream inStream)
+	public void setInStream(final InputStream inStream)
 	{
 		this.inStream = inStream;
 		bufferStream = null;
@@ -257,7 +258,7 @@ public class UrlPart implements IPollDetails
 
 	/**
 	 * buffer my input stream
-	 *   
+	 *
 	 */
 	public void buffer()
 	{
