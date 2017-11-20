@@ -70,8 +70,10 @@ package org.cip4.jdflib.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.InputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
@@ -93,9 +95,11 @@ public class URLReaderTest extends JDFTestCaseBase
 	@Test
 	public void testGetUrlInputStreamLocal()
 	{
-		URLReader reader = new URLReader("job.jdf");
+		final URLReader reader = new URLReader("job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
-		assertNotNull(reader.getURLInputStream());
+		final InputStream is = reader.getURLInputStream();
+		assertNotNull(is);
+		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
 	}
 
 	/**
@@ -105,7 +109,7 @@ public class URLReaderTest extends JDFTestCaseBase
 	@Test
 	public void testGetFileLocal()
 	{
-		URLReader reader = new URLReader("job.jdf");
+		final URLReader reader = new URLReader("job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
 		assertEquals(UrlUtil.urlToFile(sm_dirTestData + "job.jdf"), reader.getFile());
 	}
@@ -117,9 +121,9 @@ public class URLReaderTest extends JDFTestCaseBase
 	@Test
 	public void testGetFileFile()
 	{
-		String filePath = sm_dirTestData + "job.jdf";
-		File file = new File(filePath);
-		URLReader reader = new URLReader(UrlUtil.fileToUrl(file, false));
+		final String filePath = sm_dirTestData + "job.jdf";
+		final File file = new File(filePath);
+		final URLReader reader = new URLReader(UrlUtil.fileToUrl(file, false));
 		assertEquals(file, reader.getFile());
 	}
 
@@ -130,9 +134,9 @@ public class URLReaderTest extends JDFTestCaseBase
 	@Test
 	public void testGetXMLDocLocal()
 	{
-		URLReader reader = new URLReader("job.jdf");
+		final URLReader reader = new URLReader("job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
-		XMLDoc xmlDoc = reader.getXMLDoc();
+		final XMLDoc xmlDoc = reader.getXMLDoc();
 		assertNotNull(xmlDoc);
 		assertEquals(StringUtil.token(xmlDoc.getOriginalFileName(), -1, File.separator), "job.jdf");
 	}
@@ -144,9 +148,9 @@ public class URLReaderTest extends JDFTestCaseBase
 	@Test
 	public void testGetXMLDocLocalDoc()
 	{
-		JDFDoc d = JDFDoc.parseFile(sm_dirTestData + "job.jdf");
-		URLReader reader = new URLReader("job.jdf", d);
-		XMLDoc xmlDoc = reader.getXMLDoc();
+		final JDFDoc d = JDFDoc.parseFile(sm_dirTestData + "job.jdf");
+		final URLReader reader = new URLReader("job.jdf", d);
+		final XMLDoc xmlDoc = reader.getXMLDoc();
 		assertNotNull(xmlDoc);
 		assertEquals(StringUtil.token(xmlDoc.getOriginalFileName(), -1, File.separator), "job.jdf");
 	}
@@ -158,10 +162,10 @@ public class URLReaderTest extends JDFTestCaseBase
 	@Test
 	public void testGetXMLDocZip()
 	{
-		URLReader reader = new URLReader("schema/BarcodeDetails.jdf");
-		ZipReader zip = new ZipReader(sm_dirTestData + "schema.zip");
+		final URLReader reader = new URLReader("schema/BarcodeDetails.jdf");
+		final ZipReader zip = new ZipReader(sm_dirTestData + "schema.zip");
 		reader.setZipReader(zip);
-		XMLDoc xmlDoc = reader.getXMLDoc();
+		final XMLDoc xmlDoc = reader.getXMLDoc();
 		assertNotNull(xmlDoc);
 		assertEquals(StringUtil.token(xmlDoc.getOriginalFileName(), -1, "/\\"), "BarcodeDetails.jdf");
 	}
@@ -174,8 +178,38 @@ public class URLReaderTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		URLReader reader = new URLReader("http://google.ch");
-		assertNotNull(reader.getURLInputStream());
+		final URLReader reader = new URLReader("http://google.ch");
+		final InputStream is = reader.getURLInputStream();
+		assertNotNull(is);
+		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetURLInputStreamSecure()
+	{
+		if (!isTestNetwork())
+			return;
+		final URLReader reader = new URLReader("https://google.ch");
+		final InputStream is = reader.getURLInputStream();
+		assertNotNull(is);
+		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetURLInputStreamFTP()
+	{
+		if (!isTestNetwork())
+			return;
+		final URLReader reader = new URLReader("ftp://speedtest.tele2.net");
+		final InputStream is = reader.getURLInputStream();
+		assertNotNull(is);
+		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
 	}
 
 }
