@@ -277,8 +277,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		ByteArrayIOStream byteArrayIOStream = new ByteArrayIOStream("abc".getBytes());
-		ByteArrayIOInputStream inputStream = byteArrayIOStream.getInputStream();
+		final ByteArrayIOStream byteArrayIOStream = new ByteArrayIOStream("abc".getBytes());
+		final ByteArrayIOInputStream inputStream = byteArrayIOStream.getInputStream();
 		assertNotNull(UrlUtil.writerToURL("http://www.example.com", new UrlUtil.StreamReader(inputStream), UrlUtil.POST, UrlUtil.TEXT_PLAIN, null));
 		inputStream.close();
 		byteArrayIOStream.close();
@@ -314,7 +314,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		HTTPDetails det = new HTTPDetails();
+		final HTTPDetails det = new HTTPDetails();
 		det.setbKeepAlive(false);
 		assertNotNull(UrlUtil.writeToURL("http://google.com", new ByteArrayInputStream("foo".getBytes()), UrlUtil.POST, "foo/bar", det));
 	}
@@ -328,6 +328,33 @@ public class UrlUtilTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 		assertEquals(UrlUtil.writeToURL("http://google.ch", null, UrlUtil.GET, null, null).getResponseCode(), 200);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testWriteToURLSecure()
+	{
+		if (!isTestNetwork())
+			return;
+		assertEquals(UrlUtil.writeToURL("https://google.ch", null, UrlUtil.GET, null, null).getResponseCode(), 200);
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	public void testWriteToURLSecureStream() throws IOException
+	{
+		if (!isTestNetwork())
+			return;
+		final UrlPart part = UrlUtil.writeToURL("https://google.ch", null, UrlUtil.GET, null, null);
+		assertEquals(part.getResponseCode(), 200);
+		part.buffer();
+
+		assertTrue(part.getResponseStream().available() > 100);
 	}
 
 	/**
@@ -487,7 +514,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testIsURLPerformance()
 	{
-		CPUTimer ct = new CPUTimer(false);
+		final CPUTimer ct = new CPUTimer(false);
 		for (int i = 0; i < 1234; i++)
 		{
 			ct.start();
@@ -633,7 +660,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		}
 		else
 		{
-			String s = UrlUtil.fileToUrl(new File("/fooBar/4€.txt"), true);
+			final String s = UrlUtil.fileToUrl(new File("/fooBar/4€.txt"), true);
 			assertEquals(s, "file:/fooBar/4%e2%82%ac.txt");
 			assertEquals(UrlUtil.fileToUrl(new File("/a/4%.txt"), false), "file:/a/4%25.txt");
 		}
@@ -688,7 +715,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		String unc = "\\\\a\\b\\c ä.txt";
 		String url = UrlUtil.uncToUrl(unc, true);
 		assertEquals("file://a/b/c%20%c3%a4.txt", url);
-		String unc2 = unc;
+		final String unc2 = unc;
 
 		for (int i = 0; i < 10; i++)
 		{
@@ -968,7 +995,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 			}
 			log.info("Waiting " + i);
 		}
-		long l = f.lastModified();
+		final long l = f.lastModified();
 		final File f2 = UrlUtil.moveToDir(fs, newDir, null, false);
 		assertNotNull("error moving file to dir", f2);
 		ThreadUtil.sleep(1000);
@@ -993,9 +1020,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testMoveToDir() throws Exception
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
-		JDFFileSpec fs = rl.addPDF("./content/boo.pdf", 0, -1).getLayoutElement().getFileSpec();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
+		final JDFFileSpec fs = rl.addPDF("./content/boo.pdf", 0, -1).getLayoutElement().getFileSpec();
 
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "URLIn/content/boo.pdf"));
 
@@ -1020,9 +1047,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testMoveToDirDelete() throws Exception
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
-		JDFFileSpec fs = rl.addPDF("./content/boo.pdf", 0, -1).getLayoutElement().getFileSpec();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
+		final JDFFileSpec fs = rl.addPDF("./content/boo.pdf", 0, -1).getLayoutElement().getFileSpec();
 
 		final File newDir = new File(sm_dirTestDataTemp + "newDir");
 		fs.setURL("./blub.pdf");
