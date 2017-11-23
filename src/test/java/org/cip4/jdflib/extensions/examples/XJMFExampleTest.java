@@ -123,10 +123,9 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, XJDFConstants.ModifyQueueEntry);
-		command.getHeader().setAttribute(AttributeName.REFID, "C1");
+		command.getHeader().setAttribute(AttributeName.ID, "C1");
 		command.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/@" + AttributeName.OPERATION, "Resume");
 		command.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/" + ElementName.QUEUEFILTER + "/@" + AttributeName.JOBID, "j1");
-		command.getHeader().setAttribute(AttributeName.ID, "R1");
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
 		writeTest(xjmfHelper, "jmf/CommandModifyQE.xjmf");
