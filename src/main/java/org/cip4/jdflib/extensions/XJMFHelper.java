@@ -86,7 +86,7 @@ public class XJMFHelper extends MessagePoolHelper
 	 *
 	 * @param pool
 	 */
-	public XJMFHelper(KElement pool)
+	public XJMFHelper(final KElement pool)
 	{
 		super(pool);
 	}
@@ -106,7 +106,7 @@ public class XJMFHelper extends MessagePoolHelper
 	 */
 	void newXJMF()
 	{
-		JDFDoc doc = new JDFDoc(XJDFConstants.XJMF, EnumVersion.Version_2_0);
+		final JDFDoc doc = new JDFDoc(XJDFConstants.XJMF, EnumVersion.Version_2_0);
 		doc.setInitOnCreate(false);
 		theElement = doc.getRoot();
 		cleanUp();
@@ -118,7 +118,7 @@ public class XJMFHelper extends MessagePoolHelper
 	 * @param typ
 	 * @return
 	 */
-	public MessageHelper appendMessage(EnumFamily family, EnumType typ)
+	public MessageHelper appendMessage(final EnumFamily family, final EnumType typ)
 	{
 		if (family == null || typ == null)
 			return null;
@@ -132,7 +132,7 @@ public class XJMFHelper extends MessagePoolHelper
 	 * @param typ
 	 * @return
 	 */
-	public MessageHelper appendMessage(EnumFamily family, String typ)
+	public MessageHelper appendMessage(final EnumFamily family, final String typ)
 	{
 		if (family == null || typ == null)
 			return null;
@@ -146,7 +146,7 @@ public class XJMFHelper extends MessagePoolHelper
 	 * @param typ
 	 * @return
 	 */
-	private String getMessageName(EnumFamily family, String typ)
+	private String getMessageName(final EnumFamily family, final String typ)
 	{
 		return family.getName() + typ;
 	}
@@ -155,11 +155,20 @@ public class XJMFHelper extends MessagePoolHelper
 	 * @param file
 	 * @return
 	 */
-	public boolean writeToFile(String file)
+	public boolean writeToFile(final String file)
 	{
 		cleanUp();
-		boolean b = getRoot().getOwnerDocument_KElement().write2File(file, 2, false);
+		final boolean b = getRoot().getOwnerDocument_KElement().write2File(file, 2, false);
 		return b;
+	}
+
+	/**
+	 * get the header of this - create if not there yet
+	 * @return
+	 */
+	public KElement getHeader()
+	{
+		return MessageHelper.ensureHeader(theElement);
 	}
 
 	/**
@@ -178,7 +187,7 @@ public class XJMFHelper extends MessagePoolHelper
 	 * @param os
 	 * @throws IOException
 	 */
-	public void writeToStream(OutputStream os) throws IOException
+	public void writeToStream(final OutputStream os) throws IOException
 	{
 		cleanUp();
 		getRoot().getOwnerDocument_KElement().write2Stream(os, 2, false);
@@ -205,11 +214,11 @@ public class XJMFHelper extends MessagePoolHelper
 	 * @param doc the xmldoc to parse
 	 * @return the helper
 	 */
-	public static XJMFHelper getHelper(XMLDoc doc)
+	public static XJMFHelper getHelper(final XMLDoc doc)
 	{
 		if (doc == null)
 			return null;
-		KElement root = doc.getRoot();
+		final KElement root = doc.getRoot();
 		return getHelper(root);
 	}
 

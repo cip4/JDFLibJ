@@ -121,8 +121,8 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testCommandResumeQE()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, XJDFConstants.ModifyQueueEntry);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, XJDFConstants.ModifyQueueEntry);
 		command.getHeader().setAttribute(AttributeName.REFID, "C1");
 		command.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/@" + AttributeName.OPERATION, "Resume");
 		command.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/" + ElementName.QUEUEFILTER + "/@" + AttributeName.JOBID, "j1");
@@ -138,8 +138,8 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testCommandSubmitQE()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry.getName());
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry.getName());
 		command.setXPathValue(ElementName.QUEUESUBMISSIONPARAMS + "/@" + AttributeName.URL, "http://jobserver.xjdf.org?job1");
 		command.getHeader().setAttribute(AttributeName.ID, "C1");
 		xjmfHelper.cleanUp();
@@ -153,8 +153,8 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testCommandResubmitQE()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ResubmitQueueEntry.getName());
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ResubmitQueueEntry.getName());
 		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.URL, "http://jobserver.xjdf.org?job1");
 		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.QUEUEENTRYID, "qe1");
 		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.UPDATEMETHOD, EnumUpdateMethod.Incremental.getName());
@@ -170,8 +170,8 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testCommandResubmitQERemove()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ResubmitQueueEntry.getName());
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ResubmitQueueEntry.getName());
 		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.URL, "http://jobserver.xjdf.org?job1");
 		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.QUEUEENTRYID, "qe1");
 		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.UPDATEMETHOD, EnumUpdateMethod.Remove.getName());
@@ -188,12 +188,12 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	public void testResponseResumeQE()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper response = xjmfHelper.appendMessage(EnumFamily.Response, XJDFConstants.ModifyQueueEntry);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper response = xjmfHelper.appendMessage(EnumFamily.Response, XJDFConstants.ModifyQueueEntry);
 		response.getHeader().setAttribute(AttributeName.REFID, "C1");
 		response.getHeader().setAttribute(AttributeName.ID, "R1");
 		response.setAttribute(AttributeName.RETURNCODE, "0");
-		JDFQueueEntry qe = (JDFQueueEntry) response.getRoot().appendElement(ElementName.QUEUEENTRY);
+		final JDFQueueEntry qe = (JDFQueueEntry) response.getRoot().appendElement(ElementName.QUEUEENTRY);
 		qe.setJobID("j1");
 		qe.setQueueEntryID("QE1");
 		qe.setStatus(EnumNodeStatus.Waiting);
@@ -210,12 +210,12 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	public void testResponseResumeQEBad()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper response = xjmfHelper.appendMessage(EnumFamily.Response, XJDFConstants.ModifyQueueEntry);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper response = xjmfHelper.appendMessage(EnumFamily.Response, XJDFConstants.ModifyQueueEntry);
 		response.getHeader().setAttribute(AttributeName.REFID, "C1");
 		response.getHeader().setAttribute(AttributeName.ID, "R1");
 		response.setAttribute(AttributeName.RETURNCODE, "105");
-		JDFNotification not = (JDFNotification) response.appendElement(ElementName.NOTIFICATION);
+		final JDFNotification not = (JDFNotification) response.appendElement(ElementName.NOTIFICATION);
 		not.setAttribute(AttributeName.CLASS, "Error");
 		not.appendComment().setText("Not resuming unknown QueueEntry: YourQueueEntryID");
 		xjmfHelper.cleanUp();
@@ -230,12 +230,12 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	public void testResponseNotification()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper response = xjmfHelper.appendMessage(EnumFamily.Response, XJDFConstants.ModifyQueueEntry);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper response = xjmfHelper.appendMessage(EnumFamily.Response, XJDFConstants.ModifyQueueEntry);
 		response.getHeader().setAttribute(AttributeName.REFID, "C1");
 		response.getHeader().setAttribute(AttributeName.ID, "R1");
 		response.setAttribute(AttributeName.RETURNCODE, "5");
-		JDFNotification n = (JDFNotification) response.appendElement(ElementName.NOTIFICATION);
+		final JDFNotification n = (JDFNotification) response.appendElement(ElementName.NOTIFICATION);
 		n.setClass(EnumClass.Error);
 		n.appendComment().setText("StartJob unsuccessful - Device does not handle resume");
 		xjmfHelper.cleanUp();
@@ -249,10 +249,10 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testQueryPaper()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Resource);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Resource);
 		q.getHeader().setID("Q1");
-		JDFResourceQuParams rqp = (JDFResourceQuParams) q.appendElement(ElementName.RESOURCEQUPARAMS);
+		final JDFResourceQuParams rqp = (JDFResourceQuParams) q.appendElement(ElementName.RESOURCEQUPARAMS);
 		rqp.setResourceName(ElementName.MEDIA);
 		rqp.setAttribute(AttributeName.SCOPE, "Allowed");
 		rqp.setResourceDetails(EnumResourceDetails.Full);
@@ -267,16 +267,16 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testCommandPaper()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Resource);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Resource);
 		q.getHeader().setID("C1");
-		JDFResourceCmdParams rcp = (JDFResourceCmdParams) q.appendElement(ElementName.RESOURCECMDPARAMS);
+		final JDFResourceCmdParams rcp = (JDFResourceCmdParams) q.appendElement(ElementName.RESOURCECMDPARAMS);
 		rcp.setUpdateMethod(EnumUpdateMethod.Incremental);
-		SetHelper sh = new SetHelper(rcp.appendElement(XJDFConstants.ResourceSet));
+		final SetHelper sh = new SetHelper(rcp.appendElement(XJDFConstants.ResourceSet));
 		sh.setName(ElementName.MEDIA);
 		for (int i = 1; i < 3; i++)
 		{
-			ResourceHelper rh = sh.appendPartition(null, true);
+			final ResourceHelper rh = sh.appendPartition(null, true);
 			rh.setExternalID("ID_" + i);
 			rh.setAttribute(AttributeName.DESCRIPTIVENAME, "Paper # " + i);
 			((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
@@ -298,18 +298,18 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	public void testSignalPaper()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Resource);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Resource);
 		q.getHeader().setID("S1");
 		q.getHeader().setAttribute(AttributeName.REFID, "Sub1");
-		JDFResourceInfo ri = (JDFResourceInfo) q.appendElement(ElementName.RESOURCEINFO);
+		final JDFResourceInfo ri = (JDFResourceInfo) q.appendElement(ElementName.RESOURCEINFO);
 		ri.setAttribute(AttributeName.SCOPE, "Job");
 		ri.setAttribute(AttributeName.JOBID, "Job1");
 		ri.setAttribute(AttributeName.JOBPARTID, "Printing");
-		SetHelper sh = new SetHelper(ri.appendElement(XJDFConstants.ResourceSet));
+		final SetHelper sh = new SetHelper(ri.appendElement(XJDFConstants.ResourceSet));
 		sh.setUsage(EnumUsage.Input);
 		sh.setName(ElementName.MEDIA);
-		ResourceHelper rh = sh.appendPartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), false);
+		final ResourceHelper rh = sh.appendPartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), false);
 		rh.setExternalID("MIS-ID");
 		rh.setAmount(4500, new JDFAttributeMap(AttributeName.LOTID, "Lot1"), true);
 		rh.setAmount(66, new JDFAttributeMap(AttributeName.LOTID, "Lot1"), false);
@@ -327,7 +327,8 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	public void testSignalStatus()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
-		XJMFHelper xjmfHelper = new XJMFHelper();
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		xjmfHelper.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
 		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
 		s.getHeader().setID("S1");
 		s.getHeader().setAttribute(AttributeName.REFID, "Sub1");
@@ -340,6 +341,9 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		p.setStatus(EnumNodeStatus.Setup);
 		p.setStartTime(new JDFDate().setTime(16, 0, 0));
 		s = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
+		s.getHeader().setID("S2");
+		s.getHeader().setAttribute(AttributeName.REFID, "Sub1");
+		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
 		di = (JDFDeviceInfo) s.getRoot().appendElement(ElementName.DEVICEINFO);
 		di.setAttribute(AttributeName.STATUS, "Production");
 		p = di.appendJobPhase();
@@ -359,14 +363,14 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	public void testResponseStatus()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
 		s.getHeader().setID("S1");
 		s.getHeader().setAttribute(AttributeName.REFID, "Q1");
 		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
-		JDFDeviceInfo di = (JDFDeviceInfo) s.getRoot().appendElement(ElementName.DEVICEINFO);
+		final JDFDeviceInfo di = (JDFDeviceInfo) s.getRoot().appendElement(ElementName.DEVICEINFO);
 		di.setAttribute(AttributeName.STATUS, "Production");
-		JDFJobPhase p = di.appendJobPhase();
+		final JDFJobPhase p = di.appendJobPhase();
 		p.setJobID("j1");
 		p.setJobPartID("p1");
 		p.setQueueEntryID("Q1");
@@ -384,12 +388,12 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testSubscribeStatus()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
 		s.getHeader().setID("Status1");
 		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
 		s.appendElement(ElementName.STATUSQUPARAMS);
-		JDFSubscription sub = s.subscribe("http://MIS:1234/xjmfurl");
+		final JDFSubscription sub = s.subscribe("http://MIS:1234/xjmfurl");
 		sub.setRepeatTime(30);
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
@@ -402,8 +406,8 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testRespondSubscribeStatus()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
 		s.getHeader().setAttribute(AttributeName.REFID, "Status1");
 		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
 		s.setAttribute(AttributeName.RETURNCODE, "0");
@@ -419,14 +423,14 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	public void testSignalStatusBuilding()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
 		s.getHeader().setID("S1");
 		s.getHeader().setAttribute(AttributeName.REFID, "Status1");
 		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
-		JDFDeviceInfo di = (JDFDeviceInfo) s.getRoot().appendElement(ElementName.DEVICEINFO);
+		final JDFDeviceInfo di = (JDFDeviceInfo) s.getRoot().appendElement(ElementName.DEVICEINFO);
 		di.setAttribute(AttributeName.STATUS, "Production");
-		JDFJobPhase p = di.appendJobPhase();
+		final JDFJobPhase p = di.appendJobPhase();
 		p.setJobID("j1");
 		p.setJobPartID("p1");
 		p.setStatus(EnumNodeStatus.InProgress);
@@ -443,17 +447,17 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	public void testResponsePaper()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Resource);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Resource);
 		q.getHeader().setAttribute(AttributeName.REFID, "Q1");
 		q.getHeader().setID("R1");
-		JDFResourceInfo ri = (JDFResourceInfo) q.appendElement(ElementName.RESOURCEINFO);
+		final JDFResourceInfo ri = (JDFResourceInfo) q.appendElement(ElementName.RESOURCEINFO);
 		ri.setScope(EnumScope.Allowed);
-		SetHelper sh = new SetHelper(ri.appendElement(XJDFConstants.ResourceSet));
+		final SetHelper sh = new SetHelper(ri.appendElement(XJDFConstants.ResourceSet));
 		sh.setName(ElementName.MEDIA);
 		for (int i = 1; i < 3; i++)
 		{
-			ResourceHelper rh = sh.appendPartition(null, true);
+			final ResourceHelper rh = sh.appendPartition(null, true);
 			rh.setExternalID("ID_" + i);
 			rh.setAttribute(AttributeName.DESCRIPTIVENAME, "Paper # " + i);
 			((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
@@ -473,13 +477,13 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	public void testResponsePaperPrintCondition()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Resource);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Resource);
 		q.getHeader().setAttribute(AttributeName.REFID, "Q1");
 		q.getHeader().setID("R1");
-		JDFResourceInfo ri = (JDFResourceInfo) q.appendElement(ElementName.RESOURCEINFO);
+		final JDFResourceInfo ri = (JDFResourceInfo) q.appendElement(ElementName.RESOURCEINFO);
 		ri.setScope(EnumScope.Allowed);
-		SetHelper sh = new SetHelper(ri.appendElement(XJDFConstants.ResourceSet));
+		final SetHelper sh = new SetHelper(ri.appendElement(XJDFConstants.ResourceSet));
 		sh.setName(ElementName.MEDIA);
 
 		ResourceHelper rh = sh.appendPartition(new JDFAttributeMap(AttributeName.PRINTCONDITION, "7-color-gloss"), true);
@@ -529,8 +533,8 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	public void testResponseKnownDevices()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("VeggieController");
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper response = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.KnownDevices);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper response = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.KnownDevices);
 		response.getHeader().setAttribute(AttributeName.REFID, "Q1");
 		response.getHeader().setAttribute(AttributeName.ID, "R1");
 		response.setAttribute(AttributeName.RETURNCODE, "0");
@@ -557,8 +561,8 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	public void testResponseKnownMessages()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper response = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.KnownMessages);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper response = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.KnownMessages);
 		response.getHeader().setAttribute(AttributeName.REFID, "Q1");
 		response.getHeader().setAttribute(AttributeName.ID, "R1");
 		response.setAttribute(AttributeName.RETURNCODE, "0");
@@ -598,8 +602,8 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testExtendQuery()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		KElement e = xjmfHelper.getRoot().appendElement("foo:QueryBar", "www.foo.org");
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final KElement e = xjmfHelper.getRoot().appendElement("foo:QueryBar", "www.foo.org");
 		e.appendElement("foo:BarParams").setAttribute("BarDetails", "value");
 		setSnippet(xjmfHelper, true);
 		new MessageHelper(e).getHeader().setID("queryID");
@@ -612,8 +616,8 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testExtendResponse()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		KElement e = xjmfHelper.getRoot().appendElement("foo:ResponseBar", "www.foo.org");
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final KElement e = xjmfHelper.getRoot().appendElement("foo:ResponseBar", "www.foo.org");
 		e.appendElement("foo:BarResonseParams").setAttribute("BarDetails", "value");
 		new MessageHelper(e).getHeader().setAttribute(AttributeName.REFID, "queryID");
 		setSnippet(xjmfHelper, true);
@@ -626,13 +630,13 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testExtendQueryMixed()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.KnownDevices);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.KnownDevices);
 		q.getHeader().setID("Q1");
-		KElement e = xjmfHelper.getRoot().appendElement("foo:QueryBar", "www.foo.org");
+		final KElement e = xjmfHelper.getRoot().appendElement("foo:QueryBar", "www.foo.org");
 		e.copyElement(q.getHeader(), null).setID("F1");
 		e.appendElement("foo:BarParams").setAttribute("BarDetails", "value");
-		MessageHelper q2 = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.KnownMessages);
+		final MessageHelper q2 = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.KnownMessages);
 		q2.getHeader().setID("Q2");
 		setSnippet(xjmfHelper, true);
 		writeTest(xjmfHelper, "jmf/extendQueryMixed.xjmf");
@@ -645,14 +649,14 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	@Test
 	public final void testQualityControlSubscription()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Resource);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Resource);
 		s.getHeader().setID("QC1");
 		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
-		JDFResourceQuParams rqp = (JDFResourceQuParams) s.appendElement(ElementName.RESOURCEQUPARAMS);
+		final JDFResourceQuParams rqp = (JDFResourceQuParams) s.appendElement(ElementName.RESOURCEQUPARAMS);
 		rqp.setResourceName(ElementName.QUALITYCONTROLPARAMS);
 		rqp.setAttribute(AttributeName.SCOPE, "Job");
-		JDFSubscription sub = s.subscribe("http://MIS:1234/xjmfurl");
+		final JDFSubscription sub = s.subscribe("http://MIS:1234/xjmfurl");
 		sub.setRepeatTime(120);
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
@@ -667,16 +671,16 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	public final void testQualityControlSignal()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Resource);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Resource);
 		s.getHeader().setID("S1");
 		s.getHeader().setAttribute(AttributeName.REFID, "QC1");
 		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
-		MessageResourceHelper mr = new MessageResourceHelper(s.getRoot());
-		SetHelper qqp = mr.appendSet(ElementName.QUALITYCONTROLRESULT);
-		ResourceHelper qpr = qqp.appendPartition(null, true);
+		final MessageResourceHelper mr = new MessageResourceHelper(s.getRoot());
+		final SetHelper qqp = mr.appendSet(ElementName.QUALITYCONTROLRESULT);
+		final ResourceHelper qpr = qqp.appendPartition(null, true);
 		qpr.getRoot().appendElement("cc:CxF", "http://colorexchangeformat.com/CxF3-core").setText("CxF Measurement datas in here");
-		JDFQualityControlResult qcr = (JDFQualityControlResult) qpr.getResource();
+		final JDFQualityControlResult qcr = (JDFQualityControlResult) qpr.getResource();
 		qcr.setPassed(42);
 		qcr.setFailed(3);
 		setSnippet(xjmfHelper, true);
