@@ -264,16 +264,6 @@ public class FixVersionImpl extends PackageElementWalker
 	}
 
 	/**
-	 * @see java.lang.Object#toString()
-	 * @return
-	*/
-	@Override
-	public String toString()
-	{
-		return "[FixVersion : version=" + (version == null ? "null" : version.getName()) + " LO->Strip" + bLayoutPrepToStripping;
-	}
-
-	/**
 	 * @param zappInvalid the bZappInvalid to set
 	 */
 	public void setBZappInvalid(final boolean zappInvalid)
@@ -316,5 +306,16 @@ public class FixVersionImpl extends PackageElementWalker
 	public void setLasthour(final int lasthour)
 	{
 		this.lasthour = lasthour;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "FixVersion [bFixIDs=" + bFixIDs + ", bZappInvalid=" + bZappInvalid + ", bZappDeprecated=" + bZappDeprecated + ", bFixNewDuplicate=" + bFixNewDuplicate
+				+ ", firsthour=" + firsthour + ", lasthour=" + lasthour + ", " + (version != null ? "version=" + version + ", " : "") + "fixICSVersions=" + fixICSVersions
+				+ ", bLayoutPrepToStripping=" + bLayoutPrepToStripping + "]";
 	}
 }

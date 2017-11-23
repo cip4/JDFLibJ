@@ -393,6 +393,25 @@ public class FixVersionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testFriendlyName()
+	{
+		final JDFDevice d = (JDFDevice) new JDFDoc(ElementName.DEVICE).getRoot();
+		d.setFriendlyName("f1");
+		d.setDescriptiveName("d1");
+		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
+		assertTrue(fixVersion.convert(d));
+		assertEquals("f1", d.getFriendlyName());
+		assertEquals("d1", d.getDescriptiveName());
+		fixVersion.setZappDeprecated(true);
+		assertTrue(fixVersion.convert(d));
+		assertNull(d.getNonEmpty(AttributeName.FRIENDLYNAME));
+		assertEquals("d1", d.getDescriptiveName());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testContentData()
 	{
 		final JDFContentMetaData c = (JDFContentMetaData) new JDFDoc(ElementName.CONTENTMETADATA).getRoot();
