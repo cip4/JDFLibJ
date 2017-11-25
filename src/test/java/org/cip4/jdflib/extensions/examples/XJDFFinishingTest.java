@@ -152,33 +152,33 @@ public class XJDFFinishingTest extends JDFTestCaseBase
 		final ResourceHelper rhcut1 = shCut1.getCreatePartition(0, true);
 		final JDFCuttingParams cp1 = (JDFCuttingParams) rhcut1.getResource();
 		final JDFCutBlock cb1 = cp1.appendCutBlock();
-		cb1.setBlockName("b1");
+		cb1.setBlockName("B1");
 		cb1.setAttribute(AttributeName.BOX, new JDFRectangle(0, 0, 400, 600), null);
 		final JDFCutBlock cb2 = cp1.appendCutBlock();
-		cb2.setBlockName("b2");
+		cb2.setBlockName("B2");
 		cb2.setAttribute(AttributeName.BOX, new JDFRectangle(400, 0, 1200, 600), null);
 
 		final SetHelper shCut2 = xjdfHelper.appendSet(XJDFConstants.Resource, ElementName.CUTTINGPARAMS, EnumUsage.Input);
 		shCut2.setCombinedProcessIndex(new JDFIntegerList(1));
 
 		final ResourceHelper rhcut21 = shCut2.getCreatePartition(0, true);
-		rhcut21.setPartMap(new JDFAttributeMap(AttributeName.BLOCKNAME, "b1"));
+		rhcut21.setPartMap(new JDFAttributeMap(AttributeName.BLOCKNAME, "B1"));
 		final JDFCuttingParams cp21 = (JDFCuttingParams) rhcut21.getResource();
 		final JDFCutBlock cb211 = cp21.appendCutBlock();
-		cb211.setBlockName("b1.1");
+		cb211.setBlockName("B1.1");
 		cb211.setAttribute(AttributeName.BOX, new JDFRectangle(0, 0, 400, 300), null);
 		final JDFCutBlock cb212 = cp21.appendCutBlock();
-		cb212.setBlockName("b1.2");
+		cb212.setBlockName("B1.2");
 		cb212.setAttribute(AttributeName.BOX, new JDFRectangle(0, 300, 400, 600), null);
 
 		final ResourceHelper rhcut22 = shCut2.getCreatePartition(1, true);
-		rhcut22.setPartMap(new JDFAttributeMap(AttributeName.BLOCKNAME, "b2"));
+		rhcut22.setPartMap(new JDFAttributeMap(AttributeName.BLOCKNAME, "B2"));
 		final JDFCuttingParams cp22 = (JDFCuttingParams) rhcut22.getResource();
 		final JDFCutBlock cb221 = cp22.appendCutBlock();
-		cb221.setBlockName("b2.1");
+		cb221.setBlockName("B2.1");
 		cb221.setAttribute(AttributeName.BOX, new JDFRectangle(0, 0, 800, 300), null);
 		final JDFCutBlock cb222 = cp22.appendCutBlock();
-		cb222.setBlockName("b2.2");
+		cb222.setBlockName("B2.2");
 		cb222.setAttribute(AttributeName.BOX, new JDFRectangle(0, 300, 800, 600), null);
 
 		final SetHelper shCompIn = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Input);
