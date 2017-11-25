@@ -98,6 +98,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StatusCounter;
+import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Test;
 
@@ -173,15 +174,15 @@ public class CADTest extends JDFTestCaseBase
 		final JDFResource sdpp = n.addResource("ShapeDefProductionParams", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
 		sdpp.setDescriptiveName("Box123");
 		setSnippet(sdpp, true);
-		final JDFShape shape = new JDFShape(10 * 72 / 2.54, 20 * 72 / 2.54, 30 * 72 / 2.54);
+		final JDFShape shape = new JDFShape(20 * 72 / 2.54, 25 * 72 / 2.54, 10 * 72 / 2.54);
 		final JDFElement shapeTemplate = (JDFElement) sdpp.appendElement("ShapeTemplate");
 		shapeTemplate.setAttribute("InnerDimensions", shape.toString());
-		shapeTemplate.setDescriptiveName("10 * 20 * 30 cm shape");
+		shapeTemplate.setDescriptiveName("20 * 25 * 10 cm shape");
 		shapeTemplate.setAttribute("Standard", "ECMA");
 
-		shapeTemplate.appendGeneralID("L", "1440");
-		shapeTemplate.appendGeneralID("W", "720");
-		shapeTemplate.appendGeneralID("D", "1440");
+		shapeTemplate.appendGeneralID("L", StringUtil.formatDouble(shape.getX(), 2));
+		shapeTemplate.appendGeneralID("W", StringUtil.formatDouble(shape.getZ(), 2));
+		shapeTemplate.appendGeneralID("D", StringUtil.formatDouble(shape.getY(), 2));
 
 		writeTest(n, "resources/LWD_ShapeDefProduction.jdf", true, null);
 	}
