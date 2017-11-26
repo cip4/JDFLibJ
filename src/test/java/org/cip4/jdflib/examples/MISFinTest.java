@@ -76,6 +76,7 @@
 package org.cip4.jdflib.examples;
 
 import java.io.File;
+import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.auto.JDFAutoBoxFoldAction.EnumAction;
 import org.cip4.jdflib.auto.JDFAutoBoxFoldingParams.EnumBoxFoldingType;
@@ -87,6 +88,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.goldenticket.BaseGoldenTicketTest;
 import org.cip4.jdflib.goldenticket.MISFinGoldenTicket;
@@ -225,16 +227,18 @@ public class MISFinTest extends BaseGoldenTicketTest
 
 	/**
 	 * tests the creation of the initial shapedefproduction (one up) process
+	 * @throws DataFormatException
 	 * @throws Exception
 	 */
 	@Test
-	public void testBoxfold()
+	public void testBoxfold() throws DataFormatException
 	{
 		final JDFNode n = JDFNode.createRoot();
 		n.setType("BoxFolding", false);
 		final JDFBoxFoldingParams bfp = (JDFBoxFoldingParams) n.addResource(ElementName.BOXFOLDINGPARAMS, EnumUsage.Input);
 		bfp.setBoxFoldingType(EnumBoxFoldingType.Type01);
-
+		bfp.setBlankDimensionsX((JDFNumberList) new JDFNumberList("1 5 7 11 13").scaleFromCM());
+		bfp.setBlankDimensionsY((JDFNumberList) new JDFNumberList("2 3 5 15 17 18 20").scaleFromCM());
 		setSnippet(bfp, true);
 		JDFBoxFoldAction bfa = bfp.appendBoxFoldAction();
 		bfa.setFoldIndex(new JDFXYPair(0, -1));
