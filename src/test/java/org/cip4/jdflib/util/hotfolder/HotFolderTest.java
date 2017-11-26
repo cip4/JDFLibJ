@@ -103,7 +103,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	{
 		protected boolean bZapp;
 
-		protected MyListener(boolean _bZapp)
+		protected MyListener(final boolean _bZapp)
 		{
 			bZapp = _bZapp;
 		}
@@ -114,7 +114,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		 * @see org.cip4.jdflib.util.HotFolderListener#hotFile(java.io.File)
 		 */
 		@Override
-		public boolean hotFile(File hotFile)
+		public boolean hotFile(final File hotFile)
 		{
 			boolean zapp = false;
 			if (bZapp)
@@ -159,7 +159,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	public synchronized void testRestartMany() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
-		int n0 = Thread.activeCount();
+		final int n0 = Thread.activeCount();
 		for (int i = 0; i < 10; i++)
 		{
 			Thread.sleep(1);
@@ -193,6 +193,8 @@ public class HotFolderTest extends JDFTestCaseBase
 				assertEquals("Loop " + i, n0, Thread.activeCount(), 5);
 				hf.restart();
 			}
+			if (n0 < Thread.activeCount())
+				n0 = Thread.activeCount();
 			for (int i = 0; i < 3; i++)
 			{
 				Thread.sleep(10);
@@ -354,7 +356,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	public synchronized void testLog() throws Exception
 	{
 		hf = new HotFolder(theHF, ".txt", new MyListener(true));
-		File backup = new File(sm_dirTestDataTemp + "backup/hfbackup.keep");
+		final File backup = new File(sm_dirTestDataTemp + "backup/hfbackup.keep");
 		FileUtil.deleteAll(backup.getParentFile());
 
 		hf.restart();
@@ -381,7 +383,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	{
 		hf = new HotFolder(theHF, ".txt", new MyListener(true));
 		hf.setMaxConcurrent(5);
-		File backup = new File(sm_dirTestDataTemp + "backup/hfbackup.keep");
+		final File backup = new File(sm_dirTestDataTemp + "backup/hfbackup.keep");
 		FileUtil.deleteAll(backup.getParentFile());
 
 		hf.restart();
@@ -430,7 +432,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		file.createNewFile();
 		assertTrue(file.exists());
 
-		FileOutputStream fos = new FileOutputStream(file);
+		final FileOutputStream fos = new FileOutputStream(file);
 		for (int i = 0; i < 20; i++)
 		{
 			for (int j = 0; j < 200; j++)
@@ -465,8 +467,8 @@ public class HotFolderTest extends JDFTestCaseBase
 		file.createNewFile();
 		assertTrue(file.exists());
 
-		FileOutputStream fos = new FileOutputStream(file);
-		FileOutputStream fos2 = new FileOutputStream(file2);
+		final FileOutputStream fos = new FileOutputStream(file);
+		final FileOutputStream fos2 = new FileOutputStream(file2);
 		for (int i = 0; i < 20; i++) // incrementally fill file
 		{
 			ThreadUtil.sleep(2);
