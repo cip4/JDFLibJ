@@ -104,8 +104,10 @@ public class XJDFRunListTest extends JDFTestCaseBase
 		final SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Input);
 		final JDFRunList rl1 = (JDFRunList) shRL.appendPartition(new JDFAttributeMap(AttributeName.RUN, "r1"), true).getResource();
 		rl1.setNPage(2);
+		rl1.setXPathAttribute("FileSpec/@URL", "file1.pdf");
 		final JDFRunList rl2 = (JDFRunList) shRL.appendPartition(new JDFAttributeMap(AttributeName.RUN, "r2"), true).getResource();
 		rl2.setNPage(8);
+		rl2.setXPathAttribute("FileSpec/@URL", "file2.pdf");
 
 		final SetHelper shNI = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
 		shNI.removePartitions();
