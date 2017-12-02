@@ -1489,14 +1489,13 @@ public class JDFResource extends JDFElement
 		 */
 		private void addSingleResource(final VElement v, final JDFResource element)
 		{
-			final JDFIdentical identical = element.getIdentical();
+			final JDFIdentical identical = followIdentical ? element.getIdentical() : null;
 			if (identical != null)
 			{
-				if (followIdentical)
+				final JDFResource target = identical.getTarget();
+				if (target != null)
 				{
-					final JDFResource target = identical.getTarget();
-					if (target != null)
-						v.add(target);
+					v.add(target);
 				}
 			}
 			else
@@ -8348,7 +8347,7 @@ public class JDFResource extends JDFElement
 
 	/**
 	 * if true, subelements are initialized with a class attribute
-
+	
 	 * @param autoSubElementClass
 	 */
 	public static void setAutoSubElementClass(final boolean autoSubElementClass)

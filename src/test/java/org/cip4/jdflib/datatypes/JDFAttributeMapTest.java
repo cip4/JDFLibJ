@@ -192,7 +192,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	@Test
 	public void testPutInt()
 	{
-		JDFAttributeMap map = new JDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap();
 		map.put("a", 2);
 		assertEquals(map.getInt("a", 4), 2);
 	}
@@ -203,7 +203,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	@Test
 	public void testPutDouble()
 	{
-		JDFAttributeMap map = new JDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap();
 		map.put("a", 2.1);
 		assertEquals(map.getDouble("a", 4), 2.1, 0.001);
 	}
@@ -214,7 +214,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	@Test
 	public void testPutBool()
 	{
-		JDFAttributeMap map = new JDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap();
 		map.put("a", true);
 		assertEquals(map.getBool("a", false), true);
 	}
@@ -231,8 +231,6 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		assertEquals(m1.get("Side"), "Front");
 	}
 
-	// ////////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -243,6 +241,17 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		assertEquals(m1.get("SignatureName"), "v1");
 		m1.put(EnumPartIDKey.SheetName, "s1");
 		assertEquals(m1.get(EnumPartIDKey.SignatureName), "v1");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetNonEmpty()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SignatureName, "");
+		assertNull(m1.getNonEmpty("SignatureName"));
+		assertEquals(m1.get(EnumPartIDKey.SignatureName), "");
 	}
 
 	/**

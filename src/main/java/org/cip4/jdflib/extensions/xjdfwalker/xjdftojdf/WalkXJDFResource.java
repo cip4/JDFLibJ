@@ -111,7 +111,7 @@ public class WalkXJDFResource extends WalkXElement
 	@Override
 	public KElement walk(final KElement xjdfRes, final KElement parent)
 	{
-		JDFNode theNode = getNode(xjdfRes, parent);
+		final JDFNode theNode = getNode(xjdfRes, parent);
 		final JDFResource res;
 		if (theNode != null)
 		{
@@ -126,13 +126,15 @@ public class WalkXJDFResource extends WalkXElement
 			return null;
 		}
 
-		final JDFPart part = (JDFPart) xjdfRes.getElement(ElementName.PART);
-		ResourceHelper rh = ResourceHelper.getHelper(xjdfRes);
-		if (rh != null)
+		final ResourceHelper rh = ResourceHelper.getHelper(xjdfRes);
+		if (rh == null)
 		{
-			rh.getCreateResource();
+			return null;
 		}
-		KElement newPartitionElement = createPartition(xjdfRes, res, part, theNode);
+		rh.getCreateResource();
+		final VJDFAttributeMap vParts = getPartMaps(rh);
+
+		final KElement newPartitionElement = createPartition(res, vParts.get(0), theNode);
 		if (newPartitionElement == null)
 		{
 			return null;
@@ -141,18 +143,51 @@ public class WalkXJDFResource extends WalkXElement
 
 		if (newPartitionElement instanceof JDFResource)
 		{
-			JDFResource newPartition = (JDFResource) newPartitionElement;
+			final JDFResource newPartition = (JDFResource) newPartitionElement;
 			JDFResourceLink rl = null;
 			if (theNode != null)
 			{
 				theNode.getLink(newPartition, null);
 				rl = ensureLink(theNode, newPartition, rl);
 			}
-			final JDFAttributeMap partMap = getPartMap(part);
+			final JDFAttributeMap partMap = vParts.get(0);
+			handleIdentical(vParts, res, rl);
 			handleAmountPool(xjdfRes, partMap, map, rl);
 		}
 		newPartitionElement.setAttributes(map);
 		return newPartitionElement;
+	}
+
+	private void handleIdentical(final VJDFAttributeMap vParts, final JDFResource res, final JDFResourceLink rl)
+	{
+		if (vParts.size() > 1)
+		{
+			for (int i = 1; i < vParts.size(); i++)
+			{
+				final JDFResource r = createPartition(res, vParts.get(i), rl);
+				r.appendIdentical().setPartMap(vParts.get(0));
+			}
+		}
+
+	}
+
+	/**
+	 *
+	 * @param rh
+	 * @return
+	 */
+	VJDFAttributeMap getPartMaps(final ResourceHelper rh)
+	{
+		final Vector<JDFPart> parts = rh.getRoot().getChildrenByClass(JDFPart.class, false, 0);
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		for (final JDFPart part : parts)
+		{
+			final JDFAttributeMap partMap = getPartMap(part);
+			vMap.add(partMap);
+		}
+		if (vMap.isEmpty())
+			vMap.add(new JDFAttributeMap());
+		return vMap;
 	}
 
 	/**
@@ -172,20 +207,20 @@ public class WalkXJDFResource extends WalkXElement
 	 * @param xjdfRes
 	 * @return
 	 */
-	private JDFResource getResourceRoot(JDFNode theNode, KElement xjdfRes)
+	private JDFResource getResourceRoot(final JDFNode theNode, final KElement xjdfRes)
 	{
-		JDFNode newRoot = theNode.getJDFRoot();
-		ResourceHelper ph = new ResourceHelper(xjdfRes);
-		SetHelper sh = ph.getSet();
+		final JDFNode newRoot = theNode.getJDFRoot();
+		final ResourceHelper ph = new ResourceHelper(xjdfRes);
+		final SetHelper sh = ph.getSet();
 		final String name = getJDFResName(sh);
-		String processUsage = sh.getProcessUsage();
-		EnumUsage inOut = getLinkUsage(theNode, sh, name, processUsage);
-		String id = xjdfToJDFImpl.idMap.get(xjdfRes.getID()).getID();
+		final String processUsage = sh.getProcessUsage();
+		final EnumUsage inOut = getLinkUsage(theNode, sh, name, processUsage);
+		final String id = xjdfToJDFImpl.idMap.get(xjdfRes.getID()).getID();
 		JDFResource res = (JDFResource) newRoot.getCreateResourcePool().getChildWithAttribute(null, AttributeName.ID, null, id, 0, true);
 		boolean isNew = false;
 		if (res == null)
 		{
-			boolean combine = !StringUtil.equals(id, sh.getID());
+			final boolean combine = !StringUtil.equals(id, sh.getID());
 			res = combine ? theNode.getResource(name, inOut, processUsage, null, 0) : null;
 			if (res == null)
 			{
@@ -207,8 +242,8 @@ public class WalkXJDFResource extends WalkXElement
 				rl.copyAttribute(AttributeName.COMBINEDPROCESSINDEX, sh.getRoot());
 				rl.setrRef(id);
 				res.removeAttribute(AttributeName.USAGE);
-				VString reslinks = XJDFToJDFConverter.getResLinkAttribs();
-				for (String key : reslinks)
+				final VString reslinks = XJDFToJDFConverter.getResLinkAttribs();
+				for (final String key : reslinks)
 				{
 					if (res.hasAttribute(key))
 					{
@@ -217,7 +252,7 @@ public class WalkXJDFResource extends WalkXElement
 				}
 			}
 			// parameters and consumables are assumed to be available by default
-			EnumResourceClass resClass = res.getResourceClass();
+			final EnumResourceClass resClass = res.getResourceClass();
 			if (isNew && EnumUsage.Input.equals(inOut)
 					&& (EnumResourceClass.Parameter.equals(resClass) || EnumResourceClass.Consumable.equals(resClass) || EnumResourceClass.Intent.equals(resClass)))
 			{
@@ -228,7 +263,7 @@ public class WalkXJDFResource extends WalkXElement
 		return res;
 	}
 
-	EnumUsage getLinkUsage(JDFNode theNode, SetHelper sh, final String name, String processUsage)
+	EnumUsage getLinkUsage(final JDFNode theNode, final SetHelper sh, final String name, final String processUsage)
 	{
 		EnumUsage inOut = sh.getUsage();
 		if (inOut == null && xjdfToJDFImpl.isHeuristicLink())
@@ -249,20 +284,20 @@ public class WalkXJDFResource extends WalkXElement
 	 * @param xjdfRes
 	 * @return
 	 */
-	private JDFResource getResInfoRoot(JDFResourceInfo parent, KElement xjdfRes)
+	private JDFResource getResInfoRoot(final JDFResourceInfo parent, final KElement xjdfRes)
 	{
-		ResourceHelper ph = new ResourceHelper(xjdfRes);
-		SetHelper sh = ph.getSet();
+		final ResourceHelper ph = new ResourceHelper(xjdfRes);
+		final SetHelper sh = ph.getSet();
 		final String name = getJDFResName(sh);
-		String processUsage = sh.getProcessUsage();
+		final String processUsage = sh.getProcessUsage();
 		parent.setProcessUsage(processUsage);
-		EnumUsage inOut = sh.getUsage();
+		final EnumUsage inOut = sh.getUsage();
 		parent.setUsage(inOut);
 		parent.setResourceName(name);
-		JDFResource res = parent.getCreateResource(name);
+		final JDFResource res = parent.getCreateResource(name);
 
-		VString reslinks = XJDFToJDFConverter.getResLinkAttribs();
-		for (String key : reslinks)
+		final VString reslinks = XJDFToJDFConverter.getResLinkAttribs();
+		for (final String key : reslinks)
 		{
 			if (res.hasAttribute(key))
 			{
@@ -288,14 +323,14 @@ public class WalkXJDFResource extends WalkXElement
 	 * @param map
 	 * @param rl
 	 */
-	private void handleAmountPool(final KElement xjdfRes, JDFAttributeMap partmap, final JDFAttributeMap map, JDFResourceLink rl)
+	private void handleAmountPool(final KElement xjdfRes, final JDFAttributeMap partmap, final JDFAttributeMap map, final JDFResourceLink rl)
 	{
-		KElement ap = xjdfRes.getElement(ElementName.AMOUNTPOOL);
+		final KElement ap = xjdfRes.getElement(ElementName.AMOUNTPOOL);
 		if (ap != null)
 		{
-			KElement newAmountPool = rl.getCreateAmountPool();
-			Vector<JDFPartAmount> vpa = ap.getChildrenByClass(JDFPartAmount.class, false, 0);
-			for (JDFPartAmount pa : vpa)
+			final KElement newAmountPool = rl.getCreateAmountPool();
+			final Vector<JDFPartAmount> vpa = ap.getChildrenByClass(JDFPartAmount.class, false, 0);
+			for (final JDFPartAmount pa : vpa)
 			{
 				xjdfToJDFImpl.walkTree(pa, newAmountPool);
 			}
@@ -311,13 +346,12 @@ public class WalkXJDFResource extends WalkXElement
 	 * @param rl
 	 * @return
 	 */
-	private JDFResourceLink ensureLink(JDFNode partialProductNode, JDFResource newPartition, JDFResourceLink rl)
+	private JDFResourceLink ensureLink(final JDFNode partialProductNode, final JDFResource newPartition, JDFResourceLink rl)
 	{
-		JDFResourceLink rlpart;
 		if (partialProductNode != null)
 		{
-			rlpart = partialProductNode.getLink(newPartition, null);
-			EnumUsage newUsage = rl == null ? null : rl.getUsage();
+			JDFResourceLink rlpart = partialProductNode.getLink(newPartition, null);
+			final EnumUsage newUsage = rl == null ? null : rl.getUsage();
 			if (rlpart == null && newUsage != null)
 			{
 				rlpart = partialProductNode.ensureLink(newPartition, newUsage, null);
@@ -332,27 +366,30 @@ public class WalkXJDFResource extends WalkXElement
 	}
 
 	/**
-	 * @param theNode
-	 * @param xjdfRes
+	 *
 	 * @param jdfRes
-	 * @param part
+	 * @param partMap
+	 * @param theNode
 	 * @return
 	 */
-	protected KElement createPartition(final KElement xjdfRes, final JDFResource jdfRes, final JDFPart part, JDFNode theNode)
+	protected KElement createPartition(final JDFResource jdfRes, final JDFAttributeMap partMap, final JDFNode theNode)
 	{
-		if (part == null)
+		if (partMap == null || partMap.isEmpty())
 		{
 			return jdfRes;
 		}
-		final JDFAttributeMap partMap = getPartMap(part);
-		final JDFResource rPart = jdfRes.getCreatePartition(partMap, JDFPart.guessPartIDKeys(partMap));
 		final JDFResourceLink rll = theNode.getLink(jdfRes, null);
+		return createPartition(jdfRes, partMap, rll);
+	}
+
+	protected JDFResource createPartition(final JDFResource jdfRes, final JDFAttributeMap partMap, final JDFResourceLink rll)
+	{
 		final VJDFAttributeMap partMapVector = rll != null ? rll.getPartMapVector() : null;
 		if (rll != null && (partMapVector == null || !partMapVector.contains(partMap)))
 		{
 			rll.appendPart().setPartMap(partMap);
-			//			part.deleteNode();
 		}
+		final JDFResource rPart = jdfRes.getCreatePartition(partMap, JDFPart.guessPartIDKeys(partMap));
 		return rPart;
 	}
 
@@ -365,16 +402,12 @@ public class WalkXJDFResource extends WalkXElement
 	 */
 	JDFAttributeMap getPartMap(final JDFPart part)
 	{
-		final JDFAttributeMap p = part == null ? new JDFAttributeMap() : part.getPartMap();
+		final JDFAttributeMap p = part == null ? new JDFAttributeMap() : part.getAttributeMap();
 
-		String bsID = part == null ? null : part.getNonEmpty(XJDFConstants.BinderySignatureID);
-		if (bsID != null)
-		{
-			p.put(AttributeName.BINDERYSIGNATURENAME, bsID);
-		}
-		String sheetName = p.get(AttributeName.SHEETNAME);
-		String signatureName = p.get(AttributeName.SIGNATURENAME);
-		if (StringUtil.getNonEmpty(sheetName) != null && StringUtil.getNonEmpty(signatureName) == null)
+		p.renameKey(XJDFConstants.BinderySignatureID, AttributeName.BINDERYSIGNATURENAME);
+		final String sheetName = p.getNonEmpty(AttributeName.SHEETNAME);
+		String signatureName = p.getNonEmpty(AttributeName.SIGNATURENAME);
+		if (sheetName != null && signatureName == null)
 		{
 			signatureName = "Sig_" + sheetName;
 			p.put(AttributeName.SIGNATURENAME, signatureName);

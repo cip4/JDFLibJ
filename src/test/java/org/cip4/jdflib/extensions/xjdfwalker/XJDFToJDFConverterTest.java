@@ -111,6 +111,7 @@ import org.cip4.jdflib.resource.JDFInsert;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.JDFResource.PartitionGetter;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
@@ -124,8 +125,10 @@ import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFContentObject;
+import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDieLayoutProductionParams;
+import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
@@ -867,6 +870,32 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		h.appendResourceSet(ElementName.DIELAYOUT, EnumUsage.Input).appendPartition(null, true).setAmount(6, null, true);
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d.getJDFRoot().getResource(ElementName.DIELAYOUT, null, 1));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testMultiResourcePart()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		final KElement e = h.getRoot();
+		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
+
+		final ResourceHelper res = h.appendResourceSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input).appendPartition(map, true);
+		final JDFAttributeMap s2 = new JDFAttributeMap(AttributeName.SHEETNAME, "s2");
+		res.appendPartMap(s2);
+		final JDFDoc d = xCon.convert(e);
+		final JDFConventionalPrintingParams cp = (JDFConventionalPrintingParams) d.getJDFRoot().getResourceRoot(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input, 0);
+		assertEquals(2, cp.getLeaves(false).size());
+		final PartitionGetter pg = cp.new PartitionGetter();
+		pg.setFollowIdentical(false);
+		s2.put(AttributeName.SIGNATURENAME, "Sig_s2");
+		final JDFResource partition = pg.getPartition(s2, null);
+		final JDFIdentical id = partition.getIdentical();
+		assertTrue(id.getPartMap().overlapMap(map));
 	}
 
 	/**
