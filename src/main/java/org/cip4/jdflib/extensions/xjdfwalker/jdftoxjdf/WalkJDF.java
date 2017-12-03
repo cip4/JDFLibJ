@@ -103,6 +103,7 @@ public class WalkJDF extends WalkJDFElement
 	{
 		super();
 		deprecatedTypes = new HashSet<>();
+		deprecatedTypes.add(EnumType.Buffer.getName());
 		deprecatedTypes.add(EnumType.Combine.getName());
 		deprecatedTypes.add(EnumType.Dividing.getName());
 		deprecatedTypes.add(EnumType.Ordering.getName());
@@ -149,7 +150,7 @@ public class WalkJDF extends WalkJDFElement
 			return null;
 		}
 		final JDFNode node = (JDFNode) jdf;
-		boolean matchesID = matchesRootID(node);
+		final boolean matchesID = matchesRootID(node);
 		if (matchesID)
 		{
 			prepareRoot(node, xjdf);
@@ -158,7 +159,7 @@ public class WalkJDF extends WalkJDFElement
 		}
 		else
 		{
-			JDFNode nodeKid = node.getChildJDFNode(jdfToXJDF.rootID, false);
+			final JDFNode nodeKid = node.getChildJDFNode(jdfToXJDF.rootID, false);
 			if (nodeKid != null)
 			{
 				jdfToXJDF.walkTree(nodeKid, xjdf);
@@ -192,7 +193,7 @@ public class WalkJDF extends WalkJDFElement
 
 		final JDFNodeInfo ni = node.getCreateNodeInfo();
 		final VElement niLeaves = ni.getLeaves(false);
-		for (KElement leaf : niLeaves)
+		for (final KElement leaf : niLeaves)
 		{
 			final JDFNodeInfo niLeaf = (JDFNodeInfo) leaf;
 			final JDFAttributeMap map = niLeaf.getPartMap();
@@ -209,7 +210,7 @@ public class WalkJDF extends WalkJDFElement
 	{
 		newRootP.setXMLComment("JDFToXJDF version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion());
 		newRootP.setAttribute(AttributeName.JOBID, node.getJobID(true));
-		String types = newRootP.getAttribute(AttributeName.TYPES, null, null);
+		final String types = newRootP.getAttribute(AttributeName.TYPES, null, null);
 		setAttributes(node, newRootP);
 
 		removeUnusedElements(newRootP);
@@ -221,7 +222,7 @@ public class WalkJDF extends WalkJDFElement
 		updateTypes(newRootP, types);
 		namedFeaturesToGeneralID(node, newRootP);
 		updateSpawnInfo(node, newRootP);
-		JDFNode parentProduct = node.getParentProduct();
+		final JDFNode parentProduct = node.getParentProduct();
 		if (parentProduct != null && parentProduct != node && parentProduct != node.getJDFRoot())
 		{
 			newRootP.setAttribute(XJDFConstants.ParentID, parentProduct.getJobPartID(false));
@@ -253,7 +254,7 @@ public class WalkJDF extends WalkJDFElement
 	 * @param newRootP
 	 * @param types
 	 */
-	private void updateTypes(final KElement newRootP, String types)
+	private void updateTypes(final KElement newRootP, final String types)
 	{
 		if (newRootP.hasAttribute(AttributeName.TYPES))
 		{
@@ -263,8 +264,8 @@ public class WalkJDF extends WalkJDFElement
 		{
 			newRootP.renameAttribute(AttributeName.TYPE, AttributeName.TYPES, null, null);
 		}
-		VString t1 = StringUtil.tokenize(types, null, false);
-		VString t2 = StringUtil.tokenize(newRootP.getAttribute(AttributeName.TYPES), null, false);
+		final VString t1 = StringUtil.tokenize(types, null, false);
+		final VString t2 = StringUtil.tokenize(newRootP.getAttribute(AttributeName.TYPES), null, false);
 		t1.removeStrings("Product", 0);
 		t1.appendUnique(t2);
 		t1.removeStrings("ProcessGroup", 0);
@@ -282,12 +283,12 @@ public class WalkJDF extends WalkJDFElement
 	 * replace deprecated types with manualLabor
 	 * @param t1
 	 */
-	void removeDeprecatedTypes(VString t1)
+	void removeDeprecatedTypes(final VString t1)
 	{
 
 		for (int i = t1.size() - 1; i >= 0; i--)
 		{
-			String typ = t1.get(i);
+			final String typ = t1.get(i);
 			if (isDeprecatedType(typ))
 			{
 				t1.setElementAt(EnumType.ManualLabor.getName(), i);
@@ -300,7 +301,7 @@ public class WalkJDF extends WalkJDFElement
 
 	}
 
-	private boolean isDeprecatedType(String typ)
+	private boolean isDeprecatedType(final String typ)
 	{
 		return deprecatedTypes.contains(typ);
 	}
@@ -324,7 +325,7 @@ public class WalkJDF extends WalkJDFElement
 					final int size = vParts.size();
 					for (int i = 0; i < size; i++)
 					{
-						KElement part = spawnInfo.appendElement(ElementName.PART);
+						final KElement part = spawnInfo.appendElement(ElementName.PART);
 						part.setAttributes(vParts.elementAt(i));
 					}
 				}
@@ -336,7 +337,7 @@ public class WalkJDF extends WalkJDFElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.AGENTVERSION);
 		map.remove(AttributeName.MAXVERSION);

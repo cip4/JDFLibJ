@@ -109,6 +109,7 @@ import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDrop;
+import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
@@ -152,7 +153,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 *
 	 * @param mergeLayout
 	 */
-	void setMergeLayout(boolean mergeLayout)
+	void setMergeLayout(final boolean mergeLayout)
 	{
 		this.mergeLayout = mergeLayout;
 	}
@@ -170,7 +171,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 *
 	 * @param bIntentPartition
 	 */
-	void setIntentPartition(boolean bIntentPartition)
+	void setIntentPartition(final boolean bIntentPartition)
 	{
 		this.bIntentPartition = bIntentPartition;
 	}
@@ -188,7 +189,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 *
 	 * @param bDeliveryIntent
 	 */
-	void setDeliveryIntent(boolean bDeliveryIntent)
+	void setDeliveryIntent(final boolean bDeliveryIntent)
 	{
 		this.bDeliveryIntent = bDeliveryIntent;
 	}
@@ -208,7 +209,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 *
 	 * @param removeSignatureName
 	 */
-	void setRemoveSignatureName(boolean removeSignatureName)
+	void setRemoveSignatureName(final boolean removeSignatureName)
 	{
 		this.removeSignatureName = removeSignatureName;
 	}
@@ -226,7 +227,7 @@ class PostXJDFWalker extends BaseElementWalker
 			super(getFactory());
 		}
 
-		public String getCoating(String coating)
+		public String getCoating(final String coating)
 		{
 			if (coating == null)
 				return null;
@@ -251,7 +252,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * rename hook
 		 * @param xjdf
 		 */
-		void updateAttributes(KElement xjdf)
+		void updateAttributes(final KElement xjdf)
 		{
 			// nop
 		}
@@ -308,7 +309,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return (e instanceof JDFPart);
 		}
@@ -337,7 +338,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement pa, final KElement dummy)
 		{
-			JDFPartAmount partAmount = (JDFPartAmount) pa;
+			final JDFPartAmount partAmount = (JDFPartAmount) pa;
 			if (!retainAll)
 			{
 				removeRedundantPartKeys(partAmount);
@@ -349,17 +350,17 @@ class PostXJDFWalker extends BaseElementWalker
 		 *
 		 * @param partAmount
 		 */
-		private void removeRedundantPartKeys(JDFPartAmount partAmount)
+		private void removeRedundantPartKeys(final JDFPartAmount partAmount)
 		{
-			VElement parentParts = getParentParts(partAmount);
+			final VElement parentParts = getParentParts(partAmount);
 			if (parentParts != null)
 			{
-				VString keys = new VString();
-				for (KElement e : parentParts)
+				final VString keys = new VString();
+				for (final KElement e : parentParts)
 				{
-					JDFPart p = (JDFPart) e;
-					JDFAttributeMap partMap = p.getPartMap();
-					VString nextKeys = partMap.getKeys();
+					final JDFPart p = (JDFPart) e;
+					final JDFAttributeMap partMap = p.getPartMap();
+					final VString nextKeys = partMap.getKeys();
 					keys.appendUnique(nextKeys);
 				}
 				VJDFAttributeMap vPA = partAmount.getPartMapVector();
@@ -374,8 +375,8 @@ class PostXJDFWalker extends BaseElementWalker
 
 				partAmount.setPartMapVector(vPA);
 				// the parts are new and need to be moved into the correct namespace
-				VElement v = partAmount.getParts();
-				for (KElement e : v)
+				final VElement v = partAmount.getParts();
+				for (final KElement e : v)
 				{
 					updateNamespaces(e);
 				}
@@ -387,7 +388,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param part
 		 * @return
 		 */
-		private VElement getParentParts(KElement part)
+		private VElement getParentParts(final KElement part)
 		{
 			return part.getXPathElementVector("../../Part", 0);
 		}
@@ -406,7 +407,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return (e instanceof JDFPartAmount);
 		}
@@ -444,7 +445,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement ap, final KElement dummy)
 		{
-			JDFAmountPool pool = (JDFAmountPool) ap;
+			final JDFAmountPool pool = (JDFAmountPool) ap;
 			if (!retainAll)
 			{
 				moveActualToAudit(pool);
@@ -456,24 +457,24 @@ class PostXJDFWalker extends BaseElementWalker
 		 *
 		 * @param partAmount
 		 */
-		void moveActualToAudit(JDFAmountPool partAmount)
+		void moveActualToAudit(final JDFAmountPool partAmount)
 		{
 			if (partAmount.getDeepParent(ElementName.AUDITPOOL, 0) == null && partAmount.getDeepParent(XJDFConstants.XJMF, 0) == null)
 			{
-				AuditPoolHelper ah = new AuditPoolHelper(newRoot.getCreateElement(ElementName.AUDITPOOL));
-				KElement resource = partAmount.getDeepParent(XJDFConstants.Resource, 0);
-				ResourceHelper ph = resource == null ? null : new ResourceHelper(resource);
-				SetHelper sh = ph == null ? null : ph.getSet();
+				final AuditPoolHelper ah = new AuditPoolHelper(newRoot.getCreateElement(ElementName.AUDITPOOL));
+				final KElement resource = partAmount.getDeepParent(XJDFConstants.Resource, 0);
+				final ResourceHelper ph = resource == null ? null : new ResourceHelper(resource);
+				final SetHelper sh = ph == null ? null : ph.getSet();
 				if (sh != null)
 				{
-					MessageResourceHelper arh = ah.getCreateMessageResourceHelper(sh);
-					SetHelper shNew = arh.getSet();
-					ResourceHelper phNew = shNew.getCreateVPartition(sh.getPartMapVector(), false);
+					final MessageResourceHelper arh = ah.getCreateMessageResourceHelper(sh);
+					final SetHelper shNew = arh.getSet();
+					final ResourceHelper phNew = shNew.getCreateVPartition(sh.getPartMapVector(), false);
 					phNew.getRoot().copyElement(partAmount, null);
 					walkTree(shNew.getRoot(), null);
 				}
-				VElement vpa = partAmount.getChildElementVector(ElementName.PARTAMOUNT, null);
-				for (KElement pa : vpa)
+				final VElement vpa = partAmount.getChildElementVector(ElementName.PARTAMOUNT, null);
+				for (final KElement pa : vpa)
 				{
 					pa.removeAttribute(AttributeName.ACTUALAMOUNT);
 					pa.removeAttribute("ActualWaste");
@@ -482,15 +483,15 @@ class PostXJDFWalker extends BaseElementWalker
 			}
 			else
 			{
-				VElement vpa = partAmount.getChildElementVector(ElementName.PARTAMOUNT, null);
-				for (KElement pa : vpa)
+				final VElement vpa = partAmount.getChildElementVector(ElementName.PARTAMOUNT, null);
+				for (final KElement pa : vpa)
 				{
 					fixPartAmount(pa);
 				}
 			}
 		}
 
-		public void fixPartAmount(KElement pa)
+		public void fixPartAmount(final KElement pa)
 		{
 			pa.removeAttribute(AttributeName.AMOUNT);
 			pa.renameAttribute(AttributeName.ACTUALAMOUNT, AttributeName.AMOUNT);
@@ -503,7 +504,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return (e instanceof JDFAmountPool);
 		}
@@ -551,11 +552,11 @@ class PostXJDFWalker extends BaseElementWalker
 		 *
 		 * @return
 		 */
-		private KElement copyToPlaceObject(KElement xjdf)
+		private KElement copyToPlaceObject(final KElement xjdf)
 		{
-			KElement po = xjdf.getParentNode_KElement().insertBefore(XJDFConstants.PlacedObject, xjdf, null);
-			VString poAttribs = JDFToXJDFDataCache.getPlacedObjectAttribs();
-			for (String att : poAttribs)
+			final KElement po = xjdf.getParentNode_KElement().insertBefore(XJDFConstants.PlacedObject, xjdf, null);
+			final VString poAttribs = JDFToXJDFDataCache.getPlacedObjectAttribs();
+			for (final String att : poAttribs)
 			{
 				po.moveAttribute(att, xjdf);
 			}
@@ -612,9 +613,9 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkIntent#updateAttributes(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		void updateAttributes(KElement xjdf)
+		void updateAttributes(final KElement xjdf)
 		{
-			String coating = xjdf.getNonEmpty("FrontCoatings");
+			final String coating = xjdf.getNonEmpty("FrontCoatings");
 			if (xjdf != null)
 			{
 				xjdf.removeAttribute("FrontCoatings");
@@ -656,7 +657,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		public KElement walk(KElement stripCellParams, KElement dummy)
+		public KElement walk(final KElement stripCellParams, final KElement dummy)
 		{
 			if (!mergeLayout)
 			{
@@ -672,7 +673,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#updateAttributes(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		void updateAttributes(KElement xjdf)
+		void updateAttributes(final KElement xjdf)
 		{
 			xjdf.renameAttribute(AttributeName.SPINE, XJDFConstants.TrimSpine);
 			super.updateAttributes(xjdf);
@@ -710,7 +711,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		public KElement walk(KElement strippingParams, KElement dummy)
+		public KElement walk(final KElement strippingParams, final KElement dummy)
 		{
 			if (!mergeLayout)
 			{
@@ -718,10 +719,10 @@ class PostXJDFWalker extends BaseElementWalker
 				return strippingParams; // nuff done
 			}
 			//TODO multiple lower level stripparams partitions
-			XJDFHelper h = new XJDFHelper(newRoot);
-			SetHelper layoutseth = h.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+			final XJDFHelper h = new XJDFHelper(newRoot);
+			final SetHelper layoutseth = h.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
 
-			VJDFAttributeMap vmap = new ResourceHelper(strippingParams.getParentNode_KElement()).getPartMapVector();
+			final VJDFAttributeMap vmap = new ResourceHelper(strippingParams.getParentNode_KElement()).getPartMapVector();
 			JDFAttributeMap map = vmap.size() == 0 ? null : vmap.get(0);
 			map = mergeStrippingParamsLayout((JDFStrippingParams) strippingParams, layoutseth, map);
 
@@ -737,25 +738,25 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param map
 		 * @return
 		 */
-		private JDFAttributeMap mergeStrippingParamsLayout(JDFStrippingParams strippingParams, SetHelper layoutseth, JDFAttributeMap map)
+		private JDFAttributeMap mergeStrippingParamsLayout(final JDFStrippingParams strippingParams, final SetHelper layoutseth, final JDFAttributeMap map)
 		{
 			if (isRemoveSignatureName() && map != null)
 			{
 				map.remove(AttributeName.SIGNATURENAME);
 			}
 			String bsName = map == null ? null : map.remove(AttributeName.BINDERYSIGNATURENAME);
-			String cellIndex = map == null ? null : map.remove(AttributeName.CELLINDEX);
-			ResourceHelper layoutPartitionH = layoutseth.getCreatePartition(map, true);
-			JDFLayout layoutPartition = (JDFLayout) layoutPartitionH.getResource();
+			final String cellIndex = map == null ? null : map.remove(AttributeName.CELLINDEX);
+			final ResourceHelper layoutPartitionH = layoutseth.getCreatePartition(map, true);
+			final JDFLayout layoutPartition = (JDFLayout) layoutPartitionH.getResource();
 			ensureLayoutPositions(strippingParams, layoutPartition, bsName);
 
-			JDFBinderySignature bsOld = (JDFBinderySignature) layoutPartition.getChildWithAttribute(ElementName.BINDERYSIGNATURE, AttributeName.BINDERYSIGNATURENAME, null, bsName, 0, true);
-			VElement childElementVector = strippingParams.getChildElementVector(ElementName.SIGNATURECELL, null);
+			final JDFBinderySignature bsOld = (JDFBinderySignature) layoutPartition.getChildWithAttribute(ElementName.BINDERYSIGNATURE, AttributeName.BINDERYSIGNATURENAME, null, bsName, 0, true);
+			final VElement childElementVector = strippingParams.getChildElementVector(ElementName.SIGNATURECELL, null);
 			if (childElementVector != null)
 			{
-				for (KElement kid : childElementVector)
+				for (final KElement kid : childElementVector)
 				{
-					JDFStripCellParams scp = (JDFStripCellParams) kid;
+					final JDFStripCellParams scp = (JDFStripCellParams) kid;
 					scp.setAttribute(AttributeName.CELLINDEX, cellIndex);
 				}
 			}
@@ -765,8 +766,8 @@ class PostXJDFWalker extends BaseElementWalker
 			}
 			else
 			{
-				String bsRef = strippingParams.getNonEmpty(ElementName.BINDERYSIGNATURE + "Ref");
-				ResourceHelper bsHelper = XJDFHelper.getHelper(layoutPartition).getPartition(bsRef);
+				final String bsRef = strippingParams.getNonEmpty(ElementName.BINDERYSIGNATURE + "Ref");
+				final ResourceHelper bsHelper = XJDFHelper.getHelper(layoutPartition).getPartition(bsRef);
 				if (bsHelper != null)
 				{
 					JDFAttributeMap partMap = bsHelper.getPartMap();
@@ -774,10 +775,10 @@ class PostXJDFWalker extends BaseElementWalker
 					{
 						partMap = new JDFAttributeMap();
 					}
-					String bsID = partMap.get(XJDFConstants.BinderySignatureID);
+					final String bsID = partMap.get(XJDFConstants.BinderySignatureID);
 					if (bsID == null)
 					{
-						SetHelper sh = bsHelper.getSet();
+						final SetHelper sh = bsHelper.getSet();
 						if (bsName == null)
 						{
 							bsName = "BS_" + sh.indexOf(bsHelper);
@@ -787,21 +788,21 @@ class PostXJDFWalker extends BaseElementWalker
 					}
 					else if (!bsID.equals(bsName) && bsName != null)
 					{
-						VJDFAttributeMap partMaps = bsHelper.getPartMapVector();
-						JDFAttributeMap map2 = partMap.clone();
+						final VJDFAttributeMap partMaps = bsHelper.getPartMapVector();
+						final JDFAttributeMap map2 = partMap.clone();
 						map2.put(XJDFConstants.BinderySignatureID, bsName);
 						partMaps.appendUnique(map2);
 						bsHelper.setPartMapVector(partMaps);
 					}
-					JDFBinderySignature bs = (JDFBinderySignature) bsHelper.getResource();
+					final JDFBinderySignature bs = (JDFBinderySignature) bsHelper.getResource();
 					if (bs != null)
 					{
 						moveStripCells(bs, childElementVector);
 						moveBSFromStripping(bs, strippingParams);
-						VElement positions = layoutPartition.getChildElementVector(ElementName.POSITION, null);
+						final VElement positions = layoutPartition.getChildElementVector(ElementName.POSITION, null);
 						if (positions != null)
 						{
-							for (KElement position : positions)
+							for (final KElement position : positions)
 							{
 								if (!position.hasAttribute(XJDFConstants.BinderySignatureID))
 								{
@@ -824,7 +825,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param layoutPartition
 		 * @param bsName
 		 */
-		private void ensureLayoutPositions(JDFStrippingParams strippingParams, JDFLayout layoutPartition, String bsName)
+		private void ensureLayoutPositions(final JDFStrippingParams strippingParams, final JDFLayout layoutPartition, final String bsName)
 		{
 			VElement positions = strippingParams.getChildElementVector(ElementName.POSITION, null);
 			if (positions != null && positions.size() > 0)
@@ -833,13 +834,13 @@ class PostXJDFWalker extends BaseElementWalker
 			}
 			else
 			{
-				JDFPosition newPos = (JDFPosition) layoutPartition.appendElement(ElementName.POSITION);
+				final JDFPosition newPos = (JDFPosition) layoutPartition.appendElement(ElementName.POSITION);
 				newPos.setRelativeBox(new JDFRectangle(0, 0, 1, 1));
 				positions = new VElement();
 				positions.add(newPos);
 			}
-			String attribute = AttributeName.STACKDEPTH;
-			for (KElement position : positions)
+			final String attribute = AttributeName.STACKDEPTH;
+			for (final KElement position : positions)
 			{
 				position.setAttribute(XJDFConstants.BinderySignatureID, bsName);
 				position.copyAttribute(attribute, strippingParams);
@@ -852,7 +853,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param bs
 		 * @param strippingParams
 		 */
-		private void moveBSFromStripping(JDFBinderySignature bs, JDFStrippingParams strippingParams)
+		private void moveBSFromStripping(final JDFBinderySignature bs, final JDFStrippingParams strippingParams)
 		{
 			if (strippingParams == null || bs == null)
 				return;
@@ -869,19 +870,19 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param bindSig
 		 * @param childElementVector
 		 */
-		private void moveStripCells(JDFBinderySignature bindSig, VElement childElementVector)
+		private void moveStripCells(final JDFBinderySignature bindSig, final VElement childElementVector)
 		{
 			if (childElementVector == null)
 				return;
-			for (KElement sigCell : childElementVector)
+			for (final KElement sigCell : childElementVector)
 			{
-				String cellindex = sigCell.getAttribute(AttributeName.CELLINDEX, null, null);
-				JDFIntegerList il = JDFIntegerList.createIntegerList(cellindex);
-				Vector<JDFSignatureCell> vbsCell = getSigCellForIndex(bindSig, il);
+				final String cellindex = sigCell.getAttribute(AttributeName.CELLINDEX, null, null);
+				final JDFIntegerList il = JDFIntegerList.createIntegerList(cellindex);
+				final Vector<JDFSignatureCell> vbsCell = getSigCellForIndex(bindSig, il);
 				sigCell.removeAttribute(AttributeName.CELLINDEX);
 				if (vbsCell != null)
 				{
-					for (JDFSignatureCell bsCell : vbsCell)
+					for (final JDFSignatureCell bsCell : vbsCell)
 					{
 						bsCell.mergeElement(sigCell, false);
 					}
@@ -896,17 +897,17 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param il
 		 * @return
 		 */
-		private Vector<JDFSignatureCell> getSigCellForIndex(JDFBinderySignature bindSig, JDFIntegerList il)
+		private Vector<JDFSignatureCell> getSigCellForIndex(final JDFBinderySignature bindSig, final JDFIntegerList il)
 		{
-			Vector<JDFSignatureCell> v = bindSig.getChildrenByClass(JDFSignatureCell.class, true, 0);
-			Vector<JDFSignatureCell> vRet = new Vector<JDFSignatureCell>();
+			final Vector<JDFSignatureCell> v = bindSig.getChildrenByClass(JDFSignatureCell.class, true, 0);
+			final Vector<JDFSignatureCell> vRet = new Vector<JDFSignatureCell>();
 			if (v == null || v.size() == 0)
 			{
 				vRet.add(bindSig.appendSignatureCell());
 			}
 			else
 			{
-				for (JDFSignatureCell sc : v)
+				for (final JDFSignatureCell sc : v)
 				{
 					if (matchesIndex(sc, il))
 						vRet.add(sc);
@@ -925,7 +926,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param il
 		 * @return
 		 */
-		private boolean matchesIndex(JDFSignatureCell sc, JDFIntegerList il)
+		private boolean matchesIndex(final JDFSignatureCell sc, JDFIntegerList il)
 		{
 			if (il == null)
 				return true;
@@ -934,13 +935,13 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				il = new JDFIntegerList(il);
 			}
-			catch (DataFormatException e)
+			catch (final DataFormatException e)
 			{
 				return false;
 			}
 			//TODO simplex duplex evaluation
 			il.scale(2);
-			JDFIntegerList fp = sc.getFrontPages();
+			final JDFIntegerList fp = sc.getFrontPages();
 			// we assume that any match is valid for all
 			return il.contains(fp);
 		}
@@ -948,7 +949,7 @@ class PostXJDFWalker extends BaseElementWalker
 		/**
 		 * @param map
 		 */
-		private void mergeSurfaces(JDFAttributeMap map)
+		private void mergeSurfaces(final JDFAttributeMap map)
 		{
 			// TODO merge surfaces that match map
 			// 2 options
@@ -991,7 +992,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @return null or super depending on the value of mergelayout
 		*/
 		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
+		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			if (mergeLayout)
 			{
@@ -1043,15 +1044,15 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @return
 		*/
 		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
+		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
-			KElement intent = super.walk(xjdf, dummy);
+			final KElement intent = super.walk(xjdf, dummy);
 			if (intent != null)
 			{
-				XJDFHelper h = new XJDFHelper(intent.getDeepParent(XJDFConstants.XJDF, 0));
-				SetHelper artDelResHelper = h.getCreateSet(XJDFConstants.Resource, ElementName.DELIVERYPARAMS, EnumUsage.Input);
-				ResourceHelper ph = artDelResHelper.appendPartition(null, true);
-				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
+				final XJDFHelper h = new XJDFHelper(intent.getDeepParent(XJDFConstants.XJDF, 0));
+				final SetHelper artDelResHelper = h.getCreateSet(XJDFConstants.Resource, ElementName.DELIVERYPARAMS, EnumUsage.Input);
+				final ResourceHelper ph = artDelResHelper.appendPartition(null, true);
+				final JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
 				setFromArtDelivery(dp, (JDFArtDeliveryIntent) intent.getElement(ElementName.ARTDELIVERYINTENT));
 				intent.deleteNode();
 				return null;
@@ -1059,15 +1060,15 @@ class PostXJDFWalker extends BaseElementWalker
 			return intent;
 		}
 
-		private void setFromArtDelivery(JDFDeliveryParams dp, JDFArtDeliveryIntent adi)
+		private void setFromArtDelivery(final JDFDeliveryParams dp, final JDFArtDeliveryIntent adi)
 		{
-			Vector<JDFArtDelivery> vAD = adi == null ? null : adi.getChildrenByClass(JDFArtDelivery.class, false, 0);
+			final Vector<JDFArtDelivery> vAD = adi == null ? null : adi.getChildrenByClass(JDFArtDelivery.class, false, 0);
 			if (vAD != null)
 			{
-				for (JDFArtDelivery ad : vAD)
+				for (final JDFArtDelivery ad : vAD)
 				{
 					dp.setMethod(StringUtil.getNonEmpty(ad.getArtDeliveryType()));
-					KElement dropItem = dp.appendElement(ElementName.DROPITEM);
+					final KElement dropItem = dp.appendElement(ElementName.DROPITEM);
 					dropItem.copyAttribute(XJDFConstants.ItemRef, ad, "RunListRef", null, null);
 					dropItem.setAttribute(AttributeName.AMOUNT, 1, null);
 				}
@@ -1109,15 +1110,15 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @return
 		*/
 		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
+		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
-			KElement intent = super.walk(xjdf, dummy);
+			final KElement intent = super.walk(xjdf, dummy);
 			if (intent != null)
 			{
-				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDFConstants.XJDF, 0));
-				SetHelper delResHelper = h.getCreateSet(XJDFConstants.Resource, ElementName.DELIVERYPARAMS, EnumUsage.Input);
-				ResourceHelper ph = delResHelper.appendPartition(null, true);
-				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
+				final XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDFConstants.XJDF, 0));
+				final SetHelper delResHelper = h.getCreateSet(XJDFConstants.Resource, ElementName.DELIVERYPARAMS, EnumUsage.Input);
+				final ResourceHelper ph = delResHelper.appendPartition(null, true);
+				final JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
 				dp.setFromDeliveryIntent((JDFDeliveryIntent) intent.getElement(ElementName.DELIVERYINTENT));
 			}
 			return intent;
@@ -1157,27 +1158,27 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @return
 		*/
 		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
+		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
-			KElement delParams = super.walk(xjdf, dummy);
+			final KElement delParams = super.walk(xjdf, dummy);
 			if (delParams != null)
 			{
-				Vector<JDFDrop> vDrop = delParams.getChildrenByClass(JDFDrop.class, false, 0);
-				int size = vDrop == null ? 0 : vDrop.size();
-				KElement param = delParams.getParentNode_KElement();
-				KElement set = param == null ? null : param.getParentNode_KElement();
+				final Vector<JDFDrop> vDrop = delParams.getChildrenByClass(JDFDrop.class, false, 0);
+				final int size = vDrop == null ? 0 : vDrop.size();
+				final KElement param = delParams.getParentNode_KElement();
+				final KElement set = param == null ? null : param.getParentNode_KElement();
 				if (set != null)
 				{
-					ResourceHelper ph = new ResourceHelper(param);
-					SetHelper sh = new SetHelper(set);
-					JDFAttributeMap partMap = ph.getPartMap();
+					final ResourceHelper ph = new ResourceHelper(param);
+					final SetHelper sh = new SetHelper(set);
+					final JDFAttributeMap partMap = ph.getPartMap();
 					partMap.put(XJDFConstants.DROP_ID, "DROP_0");
 					ph.setPartMap(partMap);
 
 					delParams.removeChildren(ElementName.DROP, null, null);
 					for (int j = 0; j < size; j++)
 					{
-						int i = (j + 1) % size;
+						final int i = (j + 1) % size;
 						partMap.put(XJDFConstants.DROP_ID, "DROP_" + i);
 						KElement newDrop;
 						ResourceHelper newParam;
@@ -1233,9 +1234,9 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @return
 		*/
 		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
+		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
-			KElement intent = xjdf.getElement(XJDFConstants.Intent);
+			final KElement intent = xjdf.getElement(XJDFConstants.Intent);
 			if (!bIntentPartition && intent != null)
 			{
 				intent.copyAttribute(AttributeName.NAME, xjdf);
@@ -1283,9 +1284,9 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @return
 		*/
 		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
+		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
-			KElement ret = super.walk(xjdf, dummy);
+			final KElement ret = super.walk(xjdf, dummy);
 			xjdf.eraseEmptyNodes(true);
 			if (xjdf.getFirstChild() == null && xjdf.getAttributeMap().size() == 0)
 			{
@@ -1329,13 +1330,13 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @return
 		*/
 		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
+		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			moveToSet(xjdf);
-			KElement ret = super.walk(xjdf, dummy);
+			final KElement ret = super.walk(xjdf, dummy);
 			xjdf.eraseEmptyNodes(true);
-			KElement set = xjdf.getParentNode_KElement();
-			String name = set == null ? null : StringUtil.getNonEmpty(set.getAttribute(AttributeName.NAME));
+			final KElement set = xjdf.getParentNode_KElement();
+			final String name = set == null ? null : StringUtil.getNonEmpty(set.getAttribute(AttributeName.NAME));
 			if (name == null)
 			{
 				return null;
@@ -1362,9 +1363,9 @@ class PostXJDFWalker extends BaseElementWalker
 			return ret;
 		}
 
-		private void moveToSet(KElement xjdf)
+		private void moveToSet(final KElement xjdf)
 		{
-			KElement set = xjdf.getParentNode_KElement();
+			final KElement set = xjdf.getParentNode_KElement();
 			if (set != null && xjdf.hasNonEmpty(AttributeName.UNIT))
 			{
 				set.moveAttribute(AttributeName.UNIT, xjdf);
@@ -1407,17 +1408,17 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @return
 		*/
 		@Override
-		public KElement walk(KElement set, KElement dummy)
+		public KElement walk(final KElement set, final KElement dummy)
 		{
-			KElement ret = super.walk(set, dummy);
+			final KElement ret = super.walk(set, dummy);
 			set.eraseEmptyNodes(true);
-			KElement res = set.getElement(StringUtil.leftStr(set.getLocalName(), -3));
+			final KElement res = set.getElement(StringUtil.leftStr(set.getLocalName(), -3));
 			if (res != null)
 				return ret;
-			KElement comment = set.getElement(ElementName.COMMENT);
+			final KElement comment = set.getElement(ElementName.COMMENT);
 			if (comment != null)
 				return ret;
-			JDFAttributeMap map = set.getAttributeMap();
+			final JDFAttributeMap map = set.getAttributeMap();
 			map.remove(AttributeName.ID);
 			map.remove(AttributeName.NAME);
 			map.remove(AttributeName.PROCESSUSAGE);
@@ -1463,7 +1464,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#updateAttributes(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		void updateAttributes(KElement xjdf)
+		void updateAttributes(final KElement xjdf)
 		{
 			xjdf.removeAttribute(AttributeName.DESCRIPTIVENAME);
 			xjdf.removeAttribute(AttributeName.STATUS);
@@ -1477,7 +1478,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 * @param newRoot
 	 *
 	 */
-	PostXJDFWalker(JDFElement newRoot)
+	PostXJDFWalker(final JDFElement newRoot)
 	{
 		super(new BaseWalkerFactory());
 		this.newRoot = newRoot;
@@ -1499,7 +1500,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @param retainAll the retainAll to set
 	 */
-	protected void setRetainAll(boolean retainAll)
+	protected void setRetainAll(final boolean retainAll)
 	{
 		this.retainAll = retainAll;
 		if (retainAll)
@@ -1543,7 +1544,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @return
 		*/
 		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
+		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			if (!retainAll)
 			{
@@ -1554,10 +1555,10 @@ class PostXJDFWalker extends BaseElementWalker
 			return xjdf;
 		}
 
-		protected void reorderProductList(KElement xjdf)
+		protected void reorderProductList(final KElement xjdf)
 		{
-			KElement productList = xjdf.getElement(ProductHelper.PRODUCTLIST);
-			KElement auditPool = xjdf.getElement(ElementName.AUDITPOOL);
+			final KElement productList = xjdf.getElement(ProductHelper.PRODUCTLIST);
+			final KElement auditPool = xjdf.getElement(ElementName.AUDITPOOL);
 			if (productList != null && auditPool != null)
 			{
 				xjdf.moveElement(productList, auditPool);
@@ -1568,9 +1569,9 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param xjdf
 		 *
 		 */
-		private void reorderSets(JDFElement xjdf)
+		private void reorderSets(final JDFElement xjdf)
 		{
-			Vector<SetHelper> v = new XJDFHelper(xjdf).getSets();
+			final Vector<SetHelper> v = new XJDFHelper(xjdf).getSets();
 			if (v == null)
 				return; // nothing to do
 
@@ -1580,12 +1581,12 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				for (int i = 0; i < v.size(); i++)
 				{
-					SetHelper setHelper = v.get(i);
-					KElement e = setHelper == null ? null : setHelper.getSet();
+					final SetHelper setHelper = v.get(i);
+					final KElement e = setHelper == null ? null : setHelper.getSet();
 					if (e != null)
 					{
 						JDFIntegerList lcpi = null;
-						String cpi = e.getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
+						final String cpi = e.getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
 						try
 						{
 							lcpi = cpi == null ? null : new JDFIntegerList(cpi);
@@ -1618,18 +1619,18 @@ class PostXJDFWalker extends BaseElementWalker
 		 *
 		 * @param v
 		 */
-		private void combineSameSets(JDFElement xjdf)
+		private void combineSameSets(final JDFElement xjdf)
 		{
-			Vector<SetHelper> v = new XJDFHelper(xjdf).getSets();
+			final Vector<SetHelper> v = new XJDFHelper(xjdf).getSets();
 
 			while (v.size() > 0)
 			{
-				Vector<SetHelper> sameSets = new Vector<SetHelper>();
-				SetHelper firstSet = v.remove(0);
+				final Vector<SetHelper> sameSets = new Vector<SetHelper>();
+				final SetHelper firstSet = v.remove(0);
 				sameSets.add(firstSet);
 				for (int j = 0; j < v.size(); j++)
 				{
-					SetHelper next = v.get(j);
+					final SetHelper next = v.get(j);
 					if (sameSetType(firstSet, next))
 					{
 						sameSets.add(next);
@@ -1638,11 +1639,11 @@ class PostXJDFWalker extends BaseElementWalker
 					}
 				}
 
-				KElement root = firstSet.getRoot();
+				final KElement root = firstSet.getRoot();
 				for (int j = 1; j < sameSets.size(); j++)
 				{
-					Vector<ResourceHelper> parts = sameSets.get(j).getPartitions();
-					for (ResourceHelper ph : parts)
+					final Vector<ResourceHelper> parts = sameSets.get(j).getPartitions();
+					for (final ResourceHelper ph : parts)
 					{
 						root.copyElement(ph.getRoot(), null);
 					}
@@ -1658,7 +1659,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param next
 		 * @return
 		 */
-		private boolean sameSetType(SetHelper firstSet, SetHelper next)
+		private boolean sameSetType(final SetHelper firstSet, final SetHelper next)
 		{
 			boolean same = firstSet.getName().equals(next.getName());
 			if (same)
@@ -1707,9 +1708,9 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @return
 		*/
 		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
+		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
-			KElement firstProduct = xjdf.getElement(ProductHelper.PRODUCT);
+			final KElement firstProduct = xjdf.getElement(ProductHelper.PRODUCT);
 			if (firstProduct == null)
 			{
 				xjdf.deleteNode();
@@ -1765,7 +1766,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @return
 		*/
 		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
+		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			fixChildRefs(xjdf);
 			return super.walk(xjdf, dummy);
@@ -1775,10 +1776,10 @@ class PostXJDFWalker extends BaseElementWalker
 		 *
 		 * @param xjdf
 		 */
-		private void fixChildRefs(KElement xjdf)
+		private void fixChildRefs(final KElement xjdf)
 		{
-			ProductHelper ph = new ProductHelper(xjdf);
-			IntentHelper bind = ph.getIntent(ElementName.BINDINGINTENT);
+			final ProductHelper ph = new ProductHelper(xjdf);
+			final IntentHelper bind = ph.getIntent(ElementName.BINDINGINTENT);
 			if (bind != null)
 			{
 				bind.getCreateResource().moveAttribute(XJDFConstants.ChildRefs, ph.getRoot());
@@ -1786,7 +1787,7 @@ class PostXJDFWalker extends BaseElementWalker
 			else
 			{
 				//TODO fix to subelements
-				IntentHelper insert = ph.getIntent(ElementName.INSERTINGINTENT);
+				final IntentHelper insert = ph.getIntent(ElementName.INSERTINGINTENT);
 				if (insert != null)
 				{
 					insert.getCreateResource().moveAttribute(XJDFConstants.ChildRefs, ph.getRoot());
@@ -1802,6 +1803,56 @@ class PostXJDFWalker extends BaseElementWalker
 		public VString getElementNames()
 		{
 			return new VString(ProductHelper.PRODUCT, null);
+		}
+	}
+
+	/**
+	 *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	public class WalkIdentical extends WalkElement
+	{
+		/**
+		 *
+		 */
+		public WalkIdentical()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param xjdf
+		 * @param dummy
+		 * @return
+		*/
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			final JDFIdentical id = (JDFIdentical) xjdf;
+			final KElement xjdfRes = xjdf.getDeepParent(XJDFConstants.Resource, 0);
+			final KElement set = xjdfRes == null ? null : xjdfRes.getDeepParent(XJDFConstants.ResourceSet, 0);
+			if (set != null)
+			{
+				final JDFAttributeMap trgMap = id.getPartMap();
+				final SetHelper sh = new SetHelper(set);
+				final ResourceHelper trH = sh.getPartition(trgMap);
+				if (trH != null)
+				{
+					trH.appendPartMap(new ResourceHelper(xjdfRes).getPartMap());
+				}
+				xjdfRes.deleteNode();
+			}
+			return null;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ElementName.IDENTICAL, null);
 		}
 	}
 
@@ -1844,23 +1895,23 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
+		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
-			JDFHeadBandApplicationParams hap = (JDFHeadBandApplicationParams) xjdf;
-			String mat = hap.getNonEmpty(AttributeName.STRIPMATERIAL);
+			final JDFHeadBandApplicationParams hap = (JDFHeadBandApplicationParams) xjdf;
+			final String mat = hap.getNonEmpty(AttributeName.STRIPMATERIAL);
 			if (mat != null)
 			{
-				MiscConsumableMaker mm = new MiscConsumableMaker(ResourceHelper.getHelper(xjdf));
+				final MiscConsumableMaker mm = new MiscConsumableMaker(ResourceHelper.getHelper(xjdf));
 				mm.create("BackStrip");
 				mm.setTypeDetails(mat);
 				hap.removeAttribute(AttributeName.STRIPMATERIAL);
 			}
-			String col = hap.getNonEmpty(AttributeName.TOPCOLOR);
-			String brand = hap.getNonEmpty(AttributeName.TOPBRAND);
+			final String col = hap.getNonEmpty(AttributeName.TOPCOLOR);
+			final String brand = hap.getNonEmpty(AttributeName.TOPBRAND);
 			if (col != null || brand != null)
 			{
 				//TODO worry about top and bottom
-				MiscConsumableMaker mm = new MiscConsumableMaker(ResourceHelper.getHelper(xjdf));
+				final MiscConsumableMaker mm = new MiscConsumableMaker(ResourceHelper.getHelper(xjdf));
 				mm.create("HeadBand");
 				mm.setColor(col);
 				mm.setColorDetails(hap.getNonEmpty(AttributeName.TOPCOLORDETAILS));
@@ -1911,7 +1962,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @return
 		*/
 		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
+		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 
 			if (xjdf.numChildElements("Process", null) < 2)
@@ -1955,7 +2006,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
+		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			moveToSender(xjdf);
 			return super.walk(xjdf, dummy);
@@ -1984,7 +2035,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
+		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			moveToSender(xjdf);
 			return super.walk(xjdf, dummy);
@@ -1994,9 +2045,9 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
-			String localName = e.getLocalName();
+			final String localName = e.getLocalName();
 			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE)
 					|| localName.startsWith(ElementName.COMMAND);
 		}
@@ -2024,7 +2075,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
+		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			moveToSender(xjdf);
 			return super.walk(xjdf, dummy);
@@ -2034,9 +2085,9 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
-			String localName = e.getLocalName();
+			final String localName = e.getLocalName();
 			return localName.startsWith(ElementName.AUDIT) && !ElementName.AUDITPOOL.equals(localName);
 		}
 
@@ -2046,11 +2097,11 @@ class PostXJDFWalker extends BaseElementWalker
 	 *
 	 * @param xjdf
 	 */
-	void moveToSender(KElement xjdf)
+	void moveToSender(final KElement xjdf)
 	{
 		if (xjdf != null)
 		{
-			JDFElement sender = (JDFElement) xjdf.getCreateElement(XJDFConstants.Header);
+			final JDFElement sender = (JDFElement) xjdf.getCreateElement(XJDFConstants.Header);
 			sender.moveAttribute(AttributeName.AGENTNAME, xjdf);
 			sender.moveAttribute(AttributeName.AGENTVERSION, xjdf);
 			sender.moveAttribute(AttributeName.AUTHOR, xjdf);
@@ -2060,10 +2111,10 @@ class PostXJDFWalker extends BaseElementWalker
 			sender.moveAttribute(AttributeName.PERSONALID, xjdf);
 			sender.moveAttribute(AttributeName.ID, xjdf);
 			sender.moveAttribute(AttributeName.REFID, xjdf);
-			VElement v = xjdf.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.ID, JDFConstants.STAR), false, true, 0);
+			final VElement v = xjdf.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.ID, JDFConstants.STAR), false, true, 0);
 			if (v != null)
 			{
-				for (KElement e : v)
+				for (final KElement e : v)
 				{
 					if (!XJDFConstants.Header.equals(e.getLocalName()))
 					{

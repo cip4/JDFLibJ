@@ -199,7 +199,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	@Deprecated
 	public Enumeration<String> keys()
 	{
-		Hashtable<String, String> ht = new Hashtable<String, String>();
+		final Hashtable<String, String> ht = new Hashtable<String, String>();
 		ht.putAll(this);
 		return ht.keys();
 	}
@@ -304,7 +304,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 			return false;
 		}
 
-		for (String key : subMapSet)
+		for (final String key : subMapSet)
 		{
 			final String subVal = subMap.get(key);
 			if (!KElement.isWildCard(subVal))
@@ -331,7 +331,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 		{
 			return true;
 		}
-		for (JDFAttributeMap map : vMap)
+		for (final JDFAttributeMap map : vMap)
 		{
 			if (subMap(map))
 			{
@@ -372,9 +372,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @param ignoreCase duh...
 	 * @return true if the value matches the regexp
 	 */
-	public boolean matches(String key, String regExp, boolean ignoreCase)
+	public boolean matches(final String key, final String regExp, final boolean ignoreCase)
 	{
-		String myVal = get(key);
+		final String myVal = get(key);
 		return ignoreCase ? StringUtil.matchesIgnoreCase(myVal, regExp) : StringUtil.matchesSimple(myVal, regExp);
 	}
 
@@ -453,7 +453,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public void andMap(final JDFAttributeMap subMap)
 	{
-		Iterator<String> it = getKeys().iterator();
+		final Iterator<String> it = getKeys().iterator();
 
 		while (it.hasNext())
 		{
@@ -586,9 +586,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @param newKey
 	 * @return the previous value of oldkey
 	 */
-	public String renameKey(String oldKey, String newKey)
+	public String renameKey(final String oldKey, final String newKey)
 	{
-		String val = remove(oldKey);
+		final String val = remove(oldKey);
 		String ret = null;
 		if (!StringUtil.isEmpty(val))
 		{
@@ -615,13 +615,23 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 *
+	 *
+	 * get but  always return null instead of empty string
+	 */
+	public String getNonEmpty(final Object key)
+	{
+		return StringUtil.getNonEmpty(get(key));
+	}
+
+	/**
+	 *
 	 * convenience int getter
 	 * @param key
 	 * @param def
 	 * @return
 	 *
 	 */
-	public int getInt(Object key, int def)
+	public int getInt(final Object key, final int def)
 	{
 		return StringUtil.parseInt(get(key), def);
 	}
@@ -634,7 +644,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @return
 	 *
 	 */
-	public boolean getBool(Object key, boolean def)
+	public boolean getBool(final Object key, final boolean def)
 	{
 		return StringUtil.parseBoolean(get(key), def);
 	}
@@ -647,7 +657,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @return
 	 *
 	 */
-	public double getDouble(Object key, double def)
+	public double getDouble(final Object key, final double def)
 	{
 		return StringUtil.parseDouble(get(key), def);
 	}
@@ -659,7 +669,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @return
 	 *
 	 */
-	public String put(ValuedEnum key, String value)
+	public String put(final ValuedEnum key, final String value)
 	{
 		return put(key == null ? null : key.getName(), value);
 	}
@@ -671,7 +681,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @return
 	 *
 	 */
-	public String put(String key, int value)
+	public String put(final String key, final int value)
 	{
 		return put(key, StringUtil.formatInteger(value));
 	}
@@ -683,7 +693,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @return
 	 *
 	 */
-	public String put(ValuedEnum key, int value)
+	public String put(final ValuedEnum key, final int value)
 	{
 		return put(key == null ? null : key.getName(), StringUtil.formatInteger(value));
 	}
@@ -695,7 +705,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @return
 	 *
 	 */
-	public String put(String key, double value)
+	public String put(final String key, final double value)
 	{
 		return put(key, StringUtil.formatDouble(value));
 	}
@@ -707,7 +717,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @return
 	 *
 	 */
-	public String put(ValuedEnum key, double value)
+	public String put(final ValuedEnum key, final double value)
 	{
 		return put(key == null ? null : key.getName(), StringUtil.formatDouble(value));
 	}
@@ -719,7 +729,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @return
 	 *
 	 */
-	public String put(String key, boolean value)
+	public String put(final String key, final boolean value)
 	{
 		return put(key, value ? JDFConstants.TRUE : JDFConstants.FALSE);
 	}
@@ -731,7 +741,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @return
 	 *
 	 */
-	public String put(ValuedEnum key, boolean value)
+	public String put(final ValuedEnum key, final boolean value)
 	{
 		return put(key == null ? null : key.getName(), value);
 	}
@@ -743,7 +753,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @return
 	 *
 	 */
-	public String put(String key, ValuedEnum value)
+	public String put(final String key, final ValuedEnum value)
 	{
 		return put(key, value == null ? null : value.getName());
 	}
@@ -755,7 +765,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @return
 	 *
 	 */
-	public String put(ValuedEnum key, ValuedEnum value)
+	public String put(final ValuedEnum key, final ValuedEnum value)
 	{
 		return put(key == null ? null : key.getName(), value);
 	}
@@ -793,7 +803,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	{
 		if (toRemove != null)
 		{
-			for (String key : toRemove)
+			for (final String key : toRemove)
 			{
 				remove(key);
 			}

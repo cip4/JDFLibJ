@@ -115,12 +115,21 @@ public class WalkBinderySignature extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.ALIGNMENTREFERENCEWEB);
 		map.remove(AttributeName.BINDINGEDGE);
+		map.remove(AttributeName.BLEEDBOTTOM);
+		map.remove(AttributeName.BLEEDLEFT);
+		map.remove(AttributeName.BLEEDRIGHT);
+		map.remove(AttributeName.BLEEDTOP);
 		map.remove(AttributeName.FOLDLAY);
 		map.remove(AttributeName.JOGEDGE);
+		map.remove(AttributeName.OUTSIDEGUTTER);
+		map.remove(AttributeName.TRIMBOTTOM);
+		map.remove(AttributeName.TRIMLEFT);
+		map.remove(AttributeName.TRIMRIGHT);
+		map.remove(AttributeName.TRIMTOP);
 		map.remove(AttributeName.WEBCELLALIGNMENT);
 		super.updateAttributes(map);
 	}
@@ -129,7 +138,7 @@ public class WalkBinderySignature extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void removeUnusedElements(KElement jdf)
+	protected void removeUnusedElements(final KElement jdf)
 	{
 		jdf.removeChildrenByClass(JDFFold.class);
 		super.removeUnusedElements(jdf);
@@ -139,10 +148,10 @@ public class WalkBinderySignature extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResource#moveAttribsToBase(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void moveAttribsToBase(KElement xjdf, KElement newResLeaf)
+	protected void moveAttribsToBase(final KElement xjdf, final KElement newResLeaf)
 	{
 		super.moveAttribsToBase(xjdf, newResLeaf);
-		String bs = newResLeaf.getNonEmpty(XJDFConstants.BinderySignatureID);
+		final String bs = newResLeaf.getNonEmpty(XJDFConstants.BinderySignatureID);
 		if (bs != null)
 		{
 			ResourceHelper.getHelper(xjdf).appendPartMap(new JDFAttributeMap(XJDFConstants.BinderySignatureID, bs));

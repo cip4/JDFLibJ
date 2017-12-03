@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -109,20 +110,18 @@ public class WalkContentResource extends WalkXJDFResource
 	}
 
 	/**
-	 * @param e
-	 * @param jdfRes
-	 * @return
+	 *
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#createPartition(org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.datatypes.JDFAttributeMap, org.cip4.jdflib.node.JDFNode)
 	 */
 	@Override
-	protected KElement createPartition(final KElement e, final JDFResource jdfRes, final JDFPart part, JDFNode theNode)
+	protected KElement createPartition(final JDFResource jdfRes, final JDFAttributeMap partMap, final JDFNode theNode)
 	{
-		JDFAttributeMap restMap = getPartMap(part);
-		if (restMap != null && restMap.size() > 0)
+		if (partMap == null || partMap.size() > 0)
 		{
-			return super.createPartition(e, jdfRes, part, theNode);
+			return super.createPartition(jdfRes, partMap, theNode);
 		}
 		final JDFPageList pageList = (JDFPageList) jdfRes;
-		final String pages = part == null ? null : part.getAttribute(AttributeName.PAGENUMBER);
+		final String pages = partMap.getNonEmpty(AttributeName.PAGENUMBER);
 		final KElement pd = pages == null ? null : pageList.getChildWithAttribute(ElementName.PAGEDATA, AttributeName.PAGEINDEX, null, pages, 0, true);
 		if (pd != null)
 		{
@@ -130,13 +129,13 @@ public class WalkContentResource extends WalkXJDFResource
 		}
 
 		final JDFPageData rPageData = pageList.appendPageData();
-		rPageData.copyAttribute(AttributeName.PAGEINDEX, part, AttributeName.PAGENUMBER, null, null);
+		rPageData.setAttribute(AttributeName.PAGEINDEX, pages);
 		final JDFResourceLink rll = theNode.getLink(pageList, null);
 		if (rll != null)
 		{
 			rll.removeChildren(ElementName.PART, null, null);
 		}
-		pageList.removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.PAGENUMBER, null, " ", -1);
+		pageList.removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.PAGENUMBER, null, JDFConstants.BLANK, -1);
 		return rPageData;
 	}
 
@@ -171,9 +170,9 @@ public class WalkContentResource extends WalkXJDFResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#getPartMap(org.cip4.jdflib.resource.JDFPart)
 	 */
 	@Override
-	JDFAttributeMap getPartMap(JDFPart part)
+	JDFAttributeMap getPartMap(final JDFPart part)
 	{
-		JDFAttributeMap partMap = super.getPartMap(part);
+		final JDFAttributeMap partMap = super.getPartMap(part);
 		if (partMap != null)
 		{
 			partMap.remove(AttributeName.PAGENUMBER);

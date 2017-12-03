@@ -1648,8 +1648,6 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertTrue(partitionMap.containsValue(fp));
 	}
 
-	// ////////////////////////////////////////////////////////////
-
 	/**
 	 * test whether getpartition works for lists and ranges
 	 */
@@ -1664,8 +1662,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFMedia m = (JDFMedia) n.appendMatchingResource(ElementName.MEDIA, EnumProcessUsage.AnyInput, null);
 		final JDFMedia mp = (JDFMedia) m.addPartition(EnumPartIDKey.SheetIndex, "1 ~ 3");
 
-		// tests for partition list
-		// DE from DE FR
+		// tests for partition list DE from DE FR
 		assertEquals(xm.getPartition(new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(), "DE"), null), xmp);
 		assertNull(xm.getPartition(new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(), "GR"), null));
 
@@ -1772,7 +1769,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 		VElement v = pg.getPartitionVector((VJDFAttributeMap) null, null);
 		assertEquals("explicit identicals are not excluded", v.size(), 1);
 		v = pg.getPartitionVector(vm, null);
-		assertEquals(v.size(), 4);
+		assertEquals(8, v.size());
 		for (final JDFAttributeMap map : vm)
 		{
 			final JDFResource rr = pg.getPartition(map, null);

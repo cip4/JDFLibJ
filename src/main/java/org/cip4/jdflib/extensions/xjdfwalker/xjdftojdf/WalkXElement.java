@@ -110,7 +110,7 @@ public class WalkXElement extends BaseWalker
 	 * fills this into the factory
 	 * @param xjdftojdf
 	 */
-	public void setParent(XJDFToJDFImpl xjdftojdf)
+	public void setParent(final XJDFToJDFImpl xjdftojdf)
 	{
 		xjdfToJDFImpl = xjdftojdf;
 	}
@@ -131,7 +131,7 @@ public class WalkXElement extends BaseWalker
 		}
 		else
 		{
-			String nodeName = getJDFName(e);
+			final String nodeName = getJDFName(e);
 			final KElement e2 = trackElem.appendElement(nodeName, e.getNamespaceURI());
 			e2.setAttributes(e);
 			e2.setText(e.getText());
@@ -144,7 +144,7 @@ public class WalkXElement extends BaseWalker
 		if (trackElem instanceof JDFElement)
 		{
 			// we want to retain all existing attributes
-			JDFAttributeMap map = trackElem.getAttributeMap_KElement();
+			final JDFAttributeMap map = trackElem.getAttributeMap_KElement();
 			((JDFElement) trackElem).init();
 			trackElem.setAttributes(map);
 			trackElem.getText();
@@ -158,7 +158,7 @@ public class WalkXElement extends BaseWalker
 	 * @param e
 	 * @return
 	 */
-	String getJDFName(KElement e)
+	String getJDFName(final KElement e)
 	{
 		if (JDFElement.isInXJDFNameSpaceStatic(e))
 			return e.getLocalName();
@@ -170,7 +170,7 @@ public class WalkXElement extends BaseWalker
 	 *
 	 * @param elem
 	 */
-	protected void updateAttributes(KElement elem)
+	protected void updateAttributes(final KElement elem)
 	{
 		elem.renameAttribute(XJDFConstants.ExternalID, AttributeName.PRODUCTID);
 		elem.renameAttribute(XJDFConstants.BinderySignatureIDs, AttributeName.ASSEMBLYIDS);
@@ -181,7 +181,7 @@ public class WalkXElement extends BaseWalker
 	 * @param parent
 	 * @param sender
 	 */
-	void moveFromSender(KElement parent, KElement sender)
+	void moveFromSender(final KElement parent, final KElement sender)
 	{
 		if (sender != null)
 		{
@@ -194,9 +194,9 @@ public class WalkXElement extends BaseWalker
 	 *
 	 * @param elem
 	 */
-	void moveCostCenterID(KElement elem)
+	void moveCostCenterID(final KElement elem)
 	{
-		if (elem.getNonEmpty(AttributeName.COSTCENTERID) != null)
+		if (elem.hasNonEmpty(AttributeName.COSTCENTERID))
 		{
 			elem.appendElement(ElementName.COSTCENTER).moveAttribute(AttributeName.COSTCENTERID, elem);
 		}
@@ -206,7 +206,7 @@ public class WalkXElement extends BaseWalker
 	 * move namespace to 1.1 for all 2.x values
 	 * @param e2
 	 */
-	private void fixNamespace(KElement e2)
+	private void fixNamespace(final KElement e2)
 	{
 		if (JDFElement.isInXJDFNameSpaceStatic(e2))
 		{
@@ -253,25 +253,25 @@ public class WalkXElement extends BaseWalker
 	 * @param jdfNode
 	 * @return
 	 */
-	protected JDFNode getNode(KElement xjdfRes, KElement jdfNode)
+	protected JDFNode getNode(final KElement xjdfRes, final KElement jdfNode)
 	{
 		if (jdfNode instanceof JDFNode)
 		{
 			JDFNode theNode = (JDFNode) jdfNode;
 			final JDFPart part = (JDFPart) xjdfRes.getElement(ElementName.PART);
-			JDFAttributeMap partMap = part == null ? null : part.getAttributeMap();
+			final JDFAttributeMap partMap = part == null ? null : part.getAttributeMap();
 			if (partMap != null)
 			{
-				String productID = StringUtil.getNonEmpty(partMap.get(AttributeName.PRODUCTPART));
+				final String productID = StringUtil.getNonEmpty(partMap.get(AttributeName.PRODUCTPART));
 				if (productID != null)
 				{
-					JDFNode newNode = (JDFNode) theNode.getChildWithAttribute(ElementName.JDF, AttributeName.ID, null, productID, 0, false);
+					final JDFNode newNode = (JDFNode) theNode.getChildWithAttribute(ElementName.JDF, AttributeName.ID, null, productID, 0, false);
 					if (newNode != null)
 					{
 						theNode = newNode;
 					}
 				}
-				String types = StringUtil.getNonEmpty(partMap.get(XJDFConstants.ProcessTypes));
+				final String types = StringUtil.getNonEmpty(partMap.get(XJDFConstants.ProcessTypes));
 				if (types != null && theNode.isProduct())
 				{
 					JDFNode newNode = (JDFNode) theNode.getChildWithAttribute(ElementName.JDF, AttributeName.TYPES, null, types, 0, false);
@@ -304,7 +304,7 @@ public class WalkXElement extends BaseWalker
 		final VString keys = map.getKeys();
 		if (keys != null)
 		{
-			for (String key : keys)
+			for (final String key : keys)
 			{
 				if ((key.endsWith("Ref") || key.endsWith("Refs")) && !key.equals("rRef"))
 				{
@@ -353,25 +353,25 @@ public class WalkXElement extends BaseWalker
 	 *
 	 * @param e
 	 */
-	protected void fixAuthor(KElement e)
+	protected void fixAuthor(final KElement e)
 	{
-		String author = e.getAttribute(AttributeName.AUTHOR, null, null);
+		final String author = e.getAttribute(AttributeName.AUTHOR, null, null);
 		if (StringUtil.getNonEmpty(author) != null)
 		{
 			e.removeAttribute(AttributeName.AUTHOR);
-			JDFEmployee emp = (JDFEmployee) e.getCreateElement(ElementName.EMPLOYEE, null, 0);
+			final JDFEmployee emp = (JDFEmployee) e.getCreateElement(ElementName.EMPLOYEE, null, 0);
 			emp.setDescriptiveName(author);
 		}
-		String pID = e.getAttribute(AttributeName.PERSONALID, null, null);
+		final String pID = e.getAttribute(AttributeName.PERSONALID, null, null);
 		if (StringUtil.getNonEmpty(pID) != null)
 		{
 			e.removeAttribute(AttributeName.PERSONALID);
-			JDFEmployee emp = (JDFEmployee) e.getCreateElement(ElementName.EMPLOYEE, null, 0);
+			final JDFEmployee emp = (JDFEmployee) e.getCreateElement(ElementName.EMPLOYEE, null, 0);
 			emp.setPersonalID(pID);
 		}
 	}
 
-	public String getCoating(String coating)
+	public String getCoating(final String coating)
 	{
 		if (coating == null)
 			return null;

@@ -106,10 +106,10 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 		 */
 		@Override
-		public int compare(JDFNumList o1, JDFNumList o2)
+		public int compare(final JDFNumList o1, final JDFNumList o2)
 		{
-			double d1 = o1 == null ? Double.MIN_VALUE : o1.volume();
-			double d2 = o2 == null ? Double.MIN_VALUE : o2.volume();
+			final double d1 = o1 == null ? Double.MIN_VALUE : o1.volume();
+			final double d2 = o2 == null ? Double.MIN_VALUE : o2.volume();
 			return d1 < d2 ? -1 : d1 == d2 ? 0 : 1;
 		}
 	}
@@ -126,10 +126,10 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 		 */
 		@Override
-		public int compare(JDFNumList o1, JDFNumList o2)
+		public int compare(final JDFNumList o1, final JDFNumList o2)
 		{
-			double d1 = o1 == null ? -1 : o1.norm();
-			double d2 = o2 == null ? -1 : o2.norm();
+			final double d1 = o1 == null ? -1 : o1.norm();
+			final double d2 = o2 == null ? -1 : o2.norm();
 			return d1 < d2 ? -1 : d1 == d2 ? 0 : 1;
 		}
 	}
@@ -200,7 +200,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * @param pos
 	 * @param d
 	 */
-	public void set(int pos, double d)
+	public void set(final int pos, final double d)
 	{
 		super.set(pos, Double.valueOf(d));
 	}
@@ -220,21 +220,21 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 			if (v != null)
 			{
 				final int size = v.size();
-				boolean bInteger = this instanceof JDFIntegerList;
-				int minValue = Integer.MIN_VALUE + 42; // a bit off but rare...
+				final boolean bInteger = this instanceof JDFIntegerList;
+				final int minValue = Integer.MIN_VALUE + 42; // a bit off but rare...
 				for (int i = 0; i < size; i++)
 				{
 					final String s = v.get(i);
 					if (bInteger)
 					{
-						int theInt = StringUtil.parseInt(s, minValue);
+						final int theInt = StringUtil.parseInt(s, minValue);
 						if (theInt == minValue)
 							throw new DataFormatException("JDFNumList: bad numeric value: " + s);
 						addElement(Integer.valueOf(theInt));
 					}
 					else
 					{
-						double theDouble = StringUtil.parseDouble(s, Double.NaN);
+						final double theDouble = StringUtil.parseDouble(s, Double.NaN);
 						if (Double.isNaN(theDouble))
 							throw new DataFormatException("JDFNumList: bad numeric value: " + s);
 						addElement(Double.valueOf(theDouble));
@@ -284,7 +284,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 */
 	public double[] getDoubleList()
 	{
-		double[] list = new double[size()];
+		final double[] list = new double[size()];
 		for (int i = 0; i < size(); i++)
 			list[i] = doubleAt(i);
 		return list;
@@ -300,7 +300,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	{
 		final StringBuffer sb = new StringBuffer();
 
-		int size = size();
+		final int size = size();
 		for (int i = 0; i < size; i++)
 		{
 			if (i > 0)
@@ -331,7 +331,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * @param precision # of digits to print
 	 * @return String - the JDFNumList as a String
 	 */
-	public String getString(int precision)
+	public String getString(final int precision)
 	{
 		final StringBuffer sb = new StringBuffer();
 
@@ -545,6 +545,16 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	}
 
 	/**
+	 * scale all values of this to points from millimeters
+	 * @return
+	 *
+	 */
+	public JDFNumList scaleFromMM(final int precision)
+	{
+		return scale(72 / 25.4, precision);
+	}
+
+	/**
 	 * scale all values of this to points from centimeters
 	 * @return
 	 *
@@ -552,6 +562,16 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	public JDFNumList scaleFromCM()
 	{
 		return scale(72 / 2.54);
+	}
+
+	/**
+	 * scale all values of this to points from centimeters
+	 * @return
+	 *
+	 */
+	public JDFNumList scaleFromCM(final int precision)
+	{
+		return scale(72 / 2.54, precision);
 	}
 
 	/**
@@ -565,6 +585,16 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	}
 
 	/**
+	 * scale all values of this to points from millimeters
+	 * @return
+	 *
+	 */
+	public JDFNumList scaleToMM(final int precision)
+	{
+		return scale(25.4 / 72, precision);
+	}
+
+	/**
 	 * scale all values of this to points from centimeters
 	 * @return
 	 *
@@ -572,6 +602,16 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	public JDFNumList scaleToCM()
 	{
 		return scale(2.54 / 72);
+	}
+
+	/**
+	 * scale all values of this to points from centimeters
+	 * @return
+	 *
+	 */
+	public JDFNumList scaleToCM(final int precision)
+	{
+		return scale(2.54 / 72, precision);
 	}
 
 	/**
@@ -597,13 +637,13 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * @param factor
 	 * @return
 	 */
-	public JDFNumList scale(final double factor, int precision)
+	public JDFNumList scale(final double factor, final int precision)
 	{
 		scale(factor);
 		for (int i = 0; i < size(); i++)
 		{
-			double scale = Math.pow(10, precision);
-			int num = (int) (0.5 + (doubleAt(i) * scale));
+			final double scale = Math.pow(10, precision);
+			final int num = (int) (0.5 + (doubleAt(i) * scale));
 			setElementAt((num) / scale, i);
 		}
 		return this;
@@ -642,7 +682,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * @see Math#abs
 	 * @return
 	 */
-	public boolean matches(JDFNumList other, double delta)
+	public boolean matches(final JDFNumList other, final double delta)
 	{
 		if (other == null)
 			return false;
@@ -665,13 +705,13 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * @param l the list to subtract from this
 	 * @throws IllegalArgumentException if sizes don't match
 	 */
-	public void subtract(JDFNumList l)
+	public void subtract(final JDFNumList l)
 	{
 		if (l == null || size() != l.size())
 			return;
 
-		double[] me = getDoubleList();
-		double[] them = l.getDoubleList();
+		final double[] me = getDoubleList();
+		final double[] them = l.getDoubleList();
 		for (int i = 0; i < me.length; i++)
 		{
 			me[i] -= them[i];
@@ -686,7 +726,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 */
 	public void unify()
 	{
-		Set<Object> set = new HashSet<Object>();
+		final Set<Object> set = new HashSet<Object>();
 		int j = 0;
 		for (int i = 0; i < size(); i++)
 		{
@@ -722,10 +762,10 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	public void sort()
 	{
-		double[] a = getDoubleList();
+		final double[] a = getDoubleList();
 		Arrays.sort(a);
 		int pos = 0;
-		for (double d : a)
+		for (final double d : a)
 		{
 			set(pos++, d);
 		}
@@ -762,10 +802,10 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	public double norm()
 	{
 		double sum = 0;
-		int size = size();
+		final int size = size();
 		for (int i = 0; i < size; i++)
 		{
-			double di = doubleAt(i);
+			final double di = doubleAt(i);
 			sum += di * di;
 		}
 		return Math.sqrt(sum);
@@ -778,13 +818,13 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 */
 	public double volume()
 	{
-		int size = size();
+		final int size = size();
 		if (size == 0)
 			return 0;
 		double product = 1;
 		for (int i = 0; i < size; i++)
 		{
-			double di = doubleAt(i);
+			final double di = doubleAt(i);
 			product *= di;
 		}
 		return product;

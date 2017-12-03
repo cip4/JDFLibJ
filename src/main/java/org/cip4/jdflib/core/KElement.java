@@ -294,7 +294,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String getNonEmpty(final String strLocalName)
 	{
-		String val = getAttribute(strLocalName, null, null);
+		final String val = getAttribute(strLocalName, null, null);
 		return val == null || JDFConstants.EMPTYSTRING.equals(val) ? null : val;
 	}
 
@@ -307,7 +307,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String getNonEmpty_KElement(final String strLocalName)
 	{
-		String val = getAttribute_KElement(strLocalName, null, null);
+		final String val = getAttribute_KElement(strLocalName, null, null);
 		return val == null || JDFConstants.EMPTYSTRING.equals(val) ? null : val;
 	}
 
@@ -320,7 +320,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public boolean hasNonEmpty(final String strLocalName)
 	{
-		String val = getNonEmpty(strLocalName);
+		final String val = getNonEmpty(strLocalName);
 		return val != null;
 	}
 
@@ -333,7 +333,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public boolean hasNonEmpty_KElement(final String strLocalName)
 	{
-		String val = getNonEmpty_KElement(strLocalName);
+		final String val = getNonEmpty_KElement(strLocalName);
 		return val != null;
 	}
 
@@ -345,7 +345,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String getAttributeRaw(final String qualifiedName)
 	{
-		Attr a = getAttributeNode(qualifiedName);
+		final Attr a = getAttributeNode(qualifiedName);
 		return a == null ? null : a.getValue();
 	}
 
@@ -444,7 +444,7 @@ public class KElement extends ElementNSImpl implements Element
 		if ((a == null) && (nameSpaceURI != null))
 		{
 			// the xmlNSLocalName here is just in case - actually you shouldn't be calling both ns and prefix
-			String xmlnsLocalName = KElement.xmlnsLocalName(attrib);
+			final String xmlnsLocalName = KElement.xmlnsLocalName(attrib);
 			a = getAttributeNodeNS(nameSpaceURI, xmlnsLocalName);
 			if ((a == null) && nameSpaceURI.equals(getNamespaceURI()))
 			{
@@ -477,9 +477,9 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param nameSpaceURI the namespace the element is in
 	 * @throws JDFException if no settings of its attributes are possible
 	 */
-	public void setAttribute(final String key, final String value, String nameSpaceURI)
+	public void setAttribute(final String key, final String value, final String nameSpaceURI)
 	{
-		Document d = getOwnerDocument();
+		final Document d = getOwnerDocument();
 		if ((d instanceof DocumentXMLImpl) && !((DocumentXMLImpl) d).isStrictNSCheck())
 		{
 			super.setAttributeNS(nameSpaceURI, key, value);
@@ -562,7 +562,7 @@ public class KElement extends ElementNSImpl implements Element
 						namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), false);
 						if (!ContainerUtil.equals(namespaceURI2, nameSpaceURI))
 						{
-							String message = "KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
+							final String message = "KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
 									+ "; attempting to set URI: " + nameSpaceURI;
 							kLog.error(message);
 							throw new JDFException(message);
@@ -595,7 +595,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	private boolean setDomAttribute2FromDom1(final String key, final String value)
 	{
-		String nameSpaceURI = null;
+		final String nameSpaceURI = null;
 		boolean bDirty = false;
 		// must explicitly set xmlns as DOM level 2 because the xerces serializer checks for DOM level 2
 		// xmlns attributes and avoids duplicate serialization of the attribute and namespace nodes
@@ -623,11 +623,11 @@ public class KElement extends ElementNSImpl implements Element
 				{
 					super.setAttributeNS(JDFCoreConstants.XMLNSURI, key, value);
 				}
-				DocumentXMLImpl doc = (DocumentXMLImpl) getOwnerDocument();
+				final DocumentXMLImpl doc = (DocumentXMLImpl) getOwnerDocument();
 				doc.setNamespaceURIFromPrefix(myPrefix, value);
 			}
-			String prefixElem = getPrefix();
-			String prefixValue = StringUtil.token(key, 1, ":");
+			final String prefixElem = getPrefix();
+			final String prefixValue = StringUtil.token(key, 1, ":");
 			if (ContainerUtil.equals(prefixElem, prefixValue) && !value.equals(super.getNamespaceURI()))
 			{
 				setNamespaceURI(value);
@@ -727,7 +727,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param key name of the attribute to set
 	 * @param value value of the attribute
 	 */
-	public void setAttributeNSRaw(String ns, final String key, final String value)
+	public void setAttributeNSRaw(final String ns, final String key, final String value)
 	{
 		super.setAttributeNS(ns, key, value);
 	}
@@ -805,7 +805,7 @@ public class KElement extends ElementNSImpl implements Element
 	 *
 	 * @default setAttribute(key, value, null)
 	 */
-	public void setAttribute(final String key, final double value, final String nameSpaceURI, int precision)
+	public void setAttribute(final String key, final double value, final String nameSpaceURI, final int precision)
 	{
 		setAttribute(key, StringUtil.formatDouble(value, precision), nameSpaceURI);
 	}
@@ -981,7 +981,7 @@ public class KElement extends ElementNSImpl implements Element
 			if (!bUnique || !StringUtil.hasToken(oldVal, value, sep, 0))
 			// it  is either not unique/ or not there yet --> append
 			{
-				String newValue = oldVal + sep + value;
+				final String newValue = oldVal + sep + value;
 				setAttribute(key, newValue, nameSpaceURI);
 				return newValue;
 			}
@@ -1055,7 +1055,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param bcache
 	 * @return
 	 */
-	private String getNamespaceURIFromPrefix(final String prefix, boolean bcache)
+	private String getNamespaceURIFromPrefix(final String prefix, final boolean bcache)
 	{
 		String strNamespaceURI = null;
 		if (prefix == null || prefix.equals(JDFCoreConstants.EMPTYSTRING))
@@ -1087,7 +1087,7 @@ public class KElement extends ElementNSImpl implements Element
 			{
 				return JDFCoreConstants.XMLNSURI;
 			}
-			DocumentXMLImpl documentXMLImpl = (DocumentXMLImpl) getOwnerDocument();
+			final DocumentXMLImpl documentXMLImpl = (DocumentXMLImpl) getOwnerDocument();
 			if (bcache)
 			{
 				strNamespaceURI = documentXMLImpl.getNamespaceURIFromPrefix(prefix);
@@ -1149,7 +1149,7 @@ public class KElement extends ElementNSImpl implements Element
 		}
 
 		// we reached the document root and didn't find anything --> punt and return an empty string
-		DocumentXMLImpl documentXMLImpl = (DocumentXMLImpl) getOwnerDocument();
+		final DocumentXMLImpl documentXMLImpl = (DocumentXMLImpl) getOwnerDocument();
 		if (prefix == null)
 			documentXMLImpl.setNamespaceURIFromPrefix(JDFConstants.COLON, "");
 		return null;
@@ -1326,7 +1326,7 @@ public class KElement extends ElementNSImpl implements Element
 						{
 							setAttribute(a.getNodeName(), a.getNodeValue(), a.getNamespaceURI());
 						}
-						catch (JDFException x)
+						catch (final JDFException x)
 						{
 							bCatch = true;
 							if (j == 1)
@@ -1429,7 +1429,7 @@ public class KElement extends ElementNSImpl implements Element
 			{
 				final String xmlnsPrefix = xmlnsPrefix(elementName);
 
-				boolean ignoreNSDefault = ownerDoc.isIgnoreNSDefault();
+				final boolean ignoreNSDefault = ownerDoc.isIgnoreNSDefault();
 				String namespaceURI2 = ignoreNSDefault && xmlnsPrefix == null ? nameSpaceURI : getNamespaceURIFromPrefix(xmlnsPrefix);
 				namespaceURI2 = StringUtil.getNonEmpty(namespaceURI2);
 				if (xmlnsPrefix != null && namespaceURI2 == null)
@@ -1479,7 +1479,7 @@ public class KElement extends ElementNSImpl implements Element
 		{
 			return;
 		}
-		for (KElement e : v)
+		for (final KElement e : v)
 		{
 			copyElement(e, beforeChild);
 		}
@@ -1629,13 +1629,13 @@ public class KElement extends ElementNSImpl implements Element
 	 *
 	 * @param clazz the class of the children to zapp
 	 */
-	public void removeChildrenByClass(Class<? extends Node> clazz)
+	public void removeChildrenByClass(final Class<? extends Node> clazz)
 	{
 		Node n = getFirstChild();
-		Node parent = n == null ? null : n.getParentNode();
+		final Node parent = n == null ? null : n.getParentNode();
 		while (n != null)
 		{
-			Node nTmp = n.getNextSibling();
+			final Node nTmp = n.getNextSibling();
 			if (clazz.isInstance(n))
 			{
 				parent.removeChild(n);
@@ -1652,12 +1652,12 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param <a>
 	 * @param bRecurse if true recurse through all children, grandchildren etc.
 	 * @param nMax maximum number to search - if 0 or negative, search all
-	 * @return Vector<a> vector with all found elements
+	 * @return Vector<a> vector with all found elements, never null
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */
 	@SuppressWarnings("unchecked")
-	public <a extends KElement> Vector<a> getChildrenByClass(Class<a> clazz, boolean bRecurse, int nMax)
+	public <a extends KElement> Vector<a> getChildrenByClass(final Class<a> clazz, final boolean bRecurse, final int nMax)
 	{
 		final Vector<a> v = new Vector<a>();
 		Node n = getFirstChild();
@@ -1671,7 +1671,7 @@ public class KElement extends ElementNSImpl implements Element
 			}
 			if (bRecurse && (n instanceof KElement))
 			{
-				Vector<a> childrenByClass = ((KElement) n).getChildrenByClass(clazz, bRecurse, nMax);
+				final Vector<a> childrenByClass = ((KElement) n).getChildrenByClass(clazz, bRecurse, nMax);
 				if (childrenByClass != null)
 				{
 					v.addAll(childrenByClass);
@@ -1746,7 +1746,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return KElement the next sibling element of 'this', null if none is found
 	 */
 	@SuppressWarnings("unchecked")
-	public <a extends KElement> a getNextSiblingElement(Class<a> clazz)
+	public <a extends KElement> a getNextSiblingElement(final Class<a> clazz)
 	{
 		Node e = getNextSibling();
 		while (e != null)
@@ -1767,7 +1767,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return KElement the next sibling element of 'this', null if none is found
 	 */
 	@SuppressWarnings("unchecked")
-	public <a extends KElement> a getFirstChildElement(Class<a> clazz)
+	public <a extends KElement> a getFirstChildElement(final Class<a> clazz)
 	{
 		Node e = getFirstChild();
 		while (e != null)
@@ -2232,11 +2232,11 @@ public class KElement extends ElementNSImpl implements Element
 	 *
 	 */
 	@SuppressWarnings("unchecked")
-	public <a extends KElement> a getElementByClass(Class<a> clazz, int iSkip, boolean bRecurse)
+	public <a extends KElement> a getElementByClass(final Class<a> clazz, int iSkip, final boolean bRecurse)
 	{
 		if (iSkip < 0)
 		{
-			Vector<a> v = getChildrenByClass(clazz, bRecurse, 0);
+			final Vector<a> v = getChildrenByClass(clazz, bRecurse, 0);
 			if (v != null)
 			{
 				iSkip = v.size() + iSkip;
@@ -2256,7 +2256,7 @@ public class KElement extends ElementNSImpl implements Element
 			}
 			if (bRecurse)
 			{
-				a ret = n.getElementByClass(clazz, iSkip - i, bRecurse);
+				final a ret = n.getElementByClass(clazz, iSkip - i, bRecurse);
 				if (ret != null)
 					return ret;
 			}
@@ -2272,7 +2272,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return KElement the n'th ancestor node with name nodeName
 	 * @default getDeepParent(parentNode, 0)
 	 */
-	public KElement getDeepParent(final String parentNode, int depth)
+	public KElement getDeepParent(final String parentNode, final int depth)
 	{
 		final KElement parentElement = getParentNode_KElement();
 		if (!getLocalName().equals(parentNode) && !isWildCard(parentNode))
@@ -2403,7 +2403,7 @@ public class KElement extends ElementNSImpl implements Element
 		}
 		if (StringUtil.getNonEmpty(attrib) == null)
 			attrib = JDFCoreConstants.ID;
-		KElement docRoot = getDocRoot();
+		final KElement docRoot = getDocRoot();
 		if (docRoot.includesAttribute(attrib, id))
 			return docRoot;
 		return docRoot.getChildWithAttribute(null, attrib, null, id, 0, false);
@@ -2418,7 +2418,7 @@ public class KElement extends ElementNSImpl implements Element
 		final VElement vChildElem = getChildElementVector(null, null, null, true, 0, false);
 		final VString v = new VString();
 
-		for (KElement e : vChildElem)
+		for (final KElement e : vChildElem)
 		{
 			v.add(e.getNodeName());
 		}
@@ -2499,18 +2499,18 @@ public class KElement extends ElementNSImpl implements Element
 			return false;
 		}
 
-		NamedNodeMap atts = getAttributes();
-		NamedNodeMap katts = kElem.getAttributes();
-		int length = atts.getLength();
+		final NamedNodeMap atts = getAttributes();
+		final NamedNodeMap katts = kElem.getAttributes();
+		final int length = atts.getLength();
 		if (length != katts.getLength())
 		{
 			return false;
 		}
 		for (int i = 0; i < length; i++)
 		{
-			Node node = atts.item(i);
-			String key = node.getNodeName();
-			Node kNode = katts.getNamedItem(key);
+			final Node node = atts.item(i);
+			final String key = node.getNodeName();
+			final Node kNode = katts.getNamedItem(key);
 			if (kNode == null)
 				return false;
 			if (!key.equals(kNode.getNodeName()))
@@ -2604,7 +2604,7 @@ public class KElement extends ElementNSImpl implements Element
 	 *
 	 * @return int the number of matching child elements
 	 */
-	public int numChildrenByClass(Class<?> clazz, boolean bRecurse)
+	public int numChildrenByClass(final Class<?> clazz, final boolean bRecurse)
 	{
 		int i = 0;
 		Node n = getFirstChild();
@@ -2718,10 +2718,9 @@ public class KElement extends ElementNSImpl implements Element
 	public void removeChildren(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib)
 	{
 		final VElement v = getChildElementVector(nodeName, nameSpaceURI, mAttrib, true, 0, false);
-		final int size = v.size();
-		for (int i = 0; i < size; i++)
+		for (final KElement e : v)
 		{
-			removeChild(v.elementAt(i));
+			removeChild(e);
 		}
 	}
 
@@ -2736,7 +2735,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param nMax maximum number of value instances to remove (-1 = all)
 	 * @return int number of removed instances
 	 */
-	public int removeFromAttribute(final String key, final String token, final String nameSpaceURI, String sep, int nMax)
+	public int removeFromAttribute(final String key, final String token, final String nameSpaceURI, final String sep, final int nMax)
 	{
 		String strAttrValue = getAttribute_KElement(key, nameSpaceURI, null);
 		if (strAttrValue == null || token == null)
@@ -2770,7 +2769,7 @@ public class KElement extends ElementNSImpl implements Element
 		Node node = getFirstChild();
 		while (node != null)
 		{
-			Node next = node.getNextSibling();
+			final Node next = node.getNextSibling();
 			removeChild(node);
 			node = next;
 		}
@@ -2827,7 +2826,7 @@ public class KElement extends ElementNSImpl implements Element
 		}
 		else
 		{
-			for (String attrib : attribs)
+			for (final String attrib : attribs)
 			{
 				removeAttribute(attrib);
 			}
@@ -3099,7 +3098,7 @@ public class KElement extends ElementNSImpl implements Element
 		{
 			return;
 		}
-		for (KElement e : v)
+		for (final KElement e : v)
 		{
 			moveElement(e, beforeChild);
 		}
@@ -3182,7 +3181,7 @@ public class KElement extends ElementNSImpl implements Element
 	private Node copyNode(final Node src, final KElement beforeChild)
 	{
 		Node childNode = null;
-		Document od = getOwnerDocument();
+		final Document od = getOwnerDocument();
 		if (src.getOwnerDocument() == od)
 		{
 			childNode = src.cloneNode(true);
@@ -3209,7 +3208,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return this
 	 *
 	 */
-	public KElement copyInto(KElement src, boolean bRemove)
+	public KElement copyInto(final KElement src, final boolean bRemove)
 	{
 		if (src == null || src == this)
 			return this;
@@ -3222,7 +3221,7 @@ public class KElement extends ElementNSImpl implements Element
 		}
 		setAttributes(src);
 		setText(src.getText());
-		String srcNS = StringUtil.getNonEmpty(src.getNamespaceURI());
+		final String srcNS = StringUtil.getNonEmpty(src.getNamespaceURI());
 		if (srcNS != null)
 			setNamespaceURI(srcNS);
 		Node e = src.getFirstChild();
@@ -3614,7 +3613,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param bDirect if true, looks only in direct children, else search through all children, grandchildren etc.
 	 * @return KElement the element which matches the above conditions
 	 */
-	public KElement getChildWithAttribute(String nodeName, final String attName, String nameSpaceURI, String attVal, final int index, final boolean bDirect)
+	public KElement getChildWithAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index, final boolean bDirect)
 	{
 		return getChildByTagName(nodeName, nameSpaceURI, index, new JDFAttributeMap(attName, attVal), bDirect, true);
 	}
@@ -3630,7 +3629,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param index if more then one child meets the condition, you can specify the one to return via an index
 	 * @return KElement the element which matches the above conditions
 	 */
-	public KElement getCreateChildWithAttribute(String nodeName, final String attName, String nameSpaceURI, String attVal, final int index)
+	public KElement getCreateChildWithAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index)
 	{
 		KElement e = getChildWithAttribute(nodeName, attName, nameSpaceURI, attVal, index, true);
 		if (e == null)
@@ -3767,8 +3766,8 @@ public class KElement extends ElementNSImpl implements Element
 		@Override
 		public int compare(final KElement o1, final KElement o2)
 		{
-			String nodeName = o1.getNodeName();
-			String nodeName2 = o2.getNodeName();
+			final String nodeName = o1.getNodeName();
+			final String nodeName2 = o2.getNodeName();
 			return nodeName.compareTo(nodeName2);
 
 		}
@@ -3859,7 +3858,7 @@ public class KElement extends ElementNSImpl implements Element
 	/**
 	 * sorts all child elements by alphabet
 	 */
-	public void sortChildren(boolean bRecursive)
+	public void sortChildren(final boolean bRecursive)
 	{
 		sortChildren(new SimpleNodeComparator(), bRecursive);
 	}
@@ -3868,7 +3867,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * sorts/inserts e by alphabet
 	 * @param e
 	 */
-	public void sortChild(KElement e)
+	public void sortChild(final KElement e)
 	{
 		sortChild(e, new SimpleNodeComparator());
 	}
@@ -3886,11 +3885,11 @@ public class KElement extends ElementNSImpl implements Element
 	 * sorts all child elements by alphabet
 	 * @param comparator the comparator object to sort by
 	 */
-	public synchronized void sortChildren(final Comparator<KElement> comparator, boolean bRecursive)
+	public synchronized void sortChildren(final Comparator<KElement> comparator, final boolean bRecursive)
 	{
 		final VElement v = getChildElementVector_KElement(null, null, null, true, -1);
 		Collections.sort(v, comparator);
-		for (KElement e : v)
+		for (final KElement e : v)
 		{
 			if (bRecursive)
 			{
@@ -3906,17 +3905,17 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param e the existing element to sort
 	 * @param comparator the comparator object to sort by
 	 */
-	public synchronized void sortChild(KElement e, Comparator<KElement> comparator)
+	public synchronized void sortChild(final KElement e, final Comparator<KElement> comparator)
 	{
 		if (e == null)
 			return;
 		if (e.getParentNode_KElement() == this)
 		{
-			KElement prev = e.getPreviousSiblingElement();
+			final KElement prev = e.getPreviousSiblingElement();
 			boolean bSorted = prev == null || comparator.compare(prev, e) <= 0;
 			if (bSorted)
 			{
-				KElement next = e.getNextSiblingElement();
+				final KElement next = e.getNextSiblingElement();
 				bSorted = next == null || comparator.compare(next, e) >= 0;
 			}
 			if (!bSorted)
@@ -3934,10 +3933,10 @@ public class KElement extends ElementNSImpl implements Element
 			int lastPos = -1;
 			while (posBefore != posAfter)
 			{
-				int pos = (posBefore + posAfter) / 2;
+				final int pos = (posBefore + posAfter) / 2;
 
 				before = v.get(pos);
-				int d = comparator.compare(before, e);
+				final int d = comparator.compare(before, e);
 				if (d >= 0)
 				{
 					posBefore = (lastPos != pos) ? pos : pos - 1;
@@ -4299,7 +4298,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * sets all xpaths to the values provided in map
 	 * @param map map of XPath / values to set
 	 */
-	public void setXPathValues(JDFAttributeMap map)
+	public void setXPathValues(final JDFAttributeMap map)
 	{
 		new XPathHelper(this).setXPathValues(map);
 	}
@@ -4339,7 +4338,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String getXPathAttribute(final String path, final String def)
 	{
-		XPathHelper xPathHelper = new XPathHelper(this);
+		final XPathHelper xPathHelper = new XPathHelper(this);
 		return xPathHelper.getXPathAttribute(path, def);
 	}
 
@@ -4369,9 +4368,9 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
 	 */
-	public JDFAttributeMap getXPathAttributeMap(String path)
+	public JDFAttributeMap getXPathAttributeMap(final String path)
 	{
-		XPathHelper xPathHelper = new XPathHelper(this);
+		final XPathHelper xPathHelper = new XPathHelper(this);
 		return xPathHelper.getXPathAttributeMap(path, false);
 	}
 
@@ -4387,7 +4386,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public JDFAttributeMap getXPathValueMap()
 	{
-		XPathHelper xPathHelper = new XPathHelper(this);
+		final XPathHelper xPathHelper = new XPathHelper(this);
 		return xPathHelper.getXPathAttributeMap(null, true);
 	}
 
@@ -4401,7 +4400,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public KElement getXPathElement(final String path)
 	{
-		XPathHelper xPathHelper = new XPathHelper(this);
+		final XPathHelper xPathHelper = new XPathHelper(this);
 		return xPathHelper.getXPathElement(path);
 	}
 
@@ -4620,7 +4619,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param srcXPath the source xpath, if null same as dstXPath
 	 * @return the copied value; may be null if no value was found in srcXPath
 	 */
-	public String copyXPathValue(String dstXPath, KElement src, String srcXPath)
+	public String copyXPathValue(final String dstXPath, final KElement src, final String srcXPath)
 	{
 		return new XPathHelper(this).copyXPathValue(dstXPath, src, srcXPath);
 	}
@@ -4654,7 +4653,7 @@ public class KElement extends ElementNSImpl implements Element
 			}
 		}
 
-		String srcAtt = src == null ? null : src.getAttribute_KElement(strSrcAttrib, srcNameSpaceURI, null);
+		final String srcAtt = src == null ? null : src.getAttribute_KElement(strSrcAttrib, srcNameSpaceURI, null);
 		setAttribute(attrib, srcAtt, strNameSpace);
 		return srcAtt;
 	}
@@ -4746,7 +4745,7 @@ public class KElement extends ElementNSImpl implements Element
 		final StringBuffer strBuff = new StringBuffer(iBufferSize);
 
 		final NodeList nodeList = getChildNodes();
-		int length = nodeList.getLength();
+		final int length = nodeList.getLength();
 		for (int i = 0; i < length; i++)
 		{
 			final Node node = nodeList.item(i);
@@ -4854,7 +4853,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param bRecurse
 	 * @return number of child nodes with "nodeType"
 	 */
-	public int numChildNodes(final int nodeType, boolean bRecurse)
+	public int numChildNodes(final int nodeType, final boolean bRecurse)
 	{
 		int i = 0;
 		Node n = getFirstChild();
@@ -5480,7 +5479,7 @@ public class KElement extends ElementNSImpl implements Element
 	private void fillHashSet(final String attName, final String attNS, final HashSet<String> preFill, final boolean bFirst)
 	{
 		final Attr attr = attNS == null ? super.getAttributeNodeNS(attNS, attName) : super.getAttributeNode(attName);
-		String attVal = attr == null ? null : attr.getValue();
+		final String attVal = attr == null ? null : attr.getValue();
 		if (attVal != null)
 		{
 			if (preFill.contains(attVal))
@@ -5525,7 +5524,7 @@ public class KElement extends ElementNSImpl implements Element
 	@Override
 	public KElement clone()
 	{
-		KElement e = createChildFromName(getNodeName(), getNamespaceURI());
+		final KElement e = createChildFromName(getNodeName(), getNamespaceURI());
 		e.copyInto(this, false);
 		return e;
 
@@ -5539,9 +5538,9 @@ public class KElement extends ElementNSImpl implements Element
 	*/
 	public KElement cloneNewDoc() //throws CloneNotSupportedException
 	{
-		XMLDoc d = new XMLDoc(getNodeName(), getNamespaceURI());
+		final XMLDoc d = new XMLDoc(getNodeName(), getNamespaceURI());
 		d.copyMeta(getOwnerDocument_KElement());
-		KElement e = d.getRoot();
+		final KElement e = d.getRoot();
 		e.copyInto(this, false);
 		return e;
 	}
@@ -5556,7 +5555,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String appendAnchor(String newID)
 	{
-		String id = getNonEmpty(JDFCoreConstants.ID);
+		final String id = getNonEmpty(JDFCoreConstants.ID);
 		if (id != null)
 		{
 			return id;
@@ -5644,7 +5643,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param id
 	 *
 	 */
-	public void setID(String id)
+	public void setID(final String id)
 	{
 		setAttribute(JDFCoreConstants.ID, id, null);
 	}
@@ -5699,7 +5698,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param namespaceURI
 	 * @return
 	 */
-	public static KElement createRoot(String nodename, String namespaceURI)
+	public static KElement createRoot(final String nodename, final String namespaceURI)
 	{
 		return new XMLDoc(nodename, namespaceURI).getRoot();
 	}
@@ -5710,12 +5709,12 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param nameSpaceURI
 	 * @return
 	 */
-	public int numSiblingElements(String elementName, String nameSpaceURI)
+	public int numSiblingElements(final String elementName, final String nameSpaceURI)
 	{
-		KElement parent = getParentNode_KElement();
+		final KElement parent = getParentNode_KElement();
 		if (parent == null)
 			return 0;
-		VElement ve = parent.getChildElementVector(elementName, nameSpaceURI);
+		final VElement ve = parent.getChildElementVector(elementName, nameSpaceURI);
 		if (ve == null)
 			return 0;
 		int n = ve.size();
@@ -5730,7 +5729,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param stream
 	 * @return
 	 */
-	public boolean write2Stream(OutputStream stream)
+	public boolean write2Stream(final OutputStream stream)
 	{
 		if (stream == null)
 		{
@@ -5741,7 +5740,7 @@ public class KElement extends ElementNSImpl implements Element
 			stream.write(toXML().getBytes(StringUtil.UTF8));
 			return true;
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			kLog.error("cannot write " + getLocalName());
 			return false;
@@ -5754,10 +5753,10 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param file
 	 * @return
 	 */
-	public boolean write2File(File file)
+	public boolean write2File(final File file)
 	{
-		OutputStream stream = FileUtil.getBufferedOutputStream(file);
-		boolean written = write2Stream(stream);
+		final OutputStream stream = FileUtil.getBufferedOutputStream(file);
+		final boolean written = write2Stream(stream);
 		StreamUtil.close(stream);
 		return written;
 	}
@@ -5768,7 +5767,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param filename
 	 * @return
 	 */
-	public boolean write2File(String filename)
+	public boolean write2File(final String filename)
 	{
 		return write2File(UrlUtil.urlToFile(filename));
 	}
@@ -5780,7 +5779,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param key
 	 * @param val
 	 */
-	public void setNonEmpty(String key, String val)
+	public void setNonEmpty(final String key, final String val)
 	{
 		setAttribute(key, StringUtil.getNonEmpty(val));
 	}

@@ -208,6 +208,22 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public final void testScaleFromCMPrecision()
+	{
+		final JDFShape s = new JDFShape(10, 20, 5);
+		s.scaleFromCM(0);
+		assertEquals(s.getX(), 10. * 72. / 2.54, 0.5);
+		assertEquals(s.getY(), 20. * 72. / 2.54, 0.5);
+		assertEquals(s.getZ(), 5. * 72. / 2.54, 0.5);
+		assertEquals((int) s.getX(), (int) (10. * 72. / 2.54 + 0.5));
+		assertEquals((int) s.getY(), (int) (20. * 72. / 2.54 + 0.5));
+		assertEquals((int) s.getZ(), (int) (5. * 72. / 2.54 + 0.5));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public final void testScalePrecision()
 	{
 		JDFShape s = new JDFShape(10, 20, 5);
@@ -260,13 +276,13 @@ public class JDFNumListTest extends JDFTestCaseBase
 	@Test
 	public final void testMatches() throws CloneNotSupportedException, DataFormatException
 	{
-		JDFShape s = new JDFShape(100, 200, 50);
-		JDFShape s2 = new JDFShape(102, 198, 52);
+		final JDFShape s = new JDFShape(100, 200, 50);
+		final JDFShape s2 = new JDFShape(102, 198, 52);
 		assertTrue(s.matches(s2, 555));
 		assertTrue(s.matches(s2, 2));
 		assertFalse(s.matches(s2, 1));
-		JDFIntegerList il = new JDFIntegerList("100 200 300");
-		JDFIntegerList il2 = new JDFIntegerList("100 197 303");
+		final JDFIntegerList il = new JDFIntegerList("100 200 300");
+		final JDFIntegerList il2 = new JDFIntegerList("100 197 303");
 		assertTrue(il.matches(il2, 555));
 		assertTrue(il.matches(il2, 3));
 		assertFalse(il.matches(il2, 1));
@@ -413,7 +429,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	{
 		final JDFNumberList nl = new JDFNumberList("1 2");
 		final JDFNumberList nl2 = new JDFNumberList("3 4");
-		Vector<JDFNumberList> v = new Vector<JDFNumberList>();
+		final Vector<JDFNumberList> v = new Vector<JDFNumberList>();
 		v.add(nl2);
 		v.add(nl);
 		Collections.sort(v, new JDFNumList.NormComparator());
@@ -472,7 +488,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	@Test
 	public void testPerformance() throws Exception
 	{
-		CPUTimer ct = new CPUTimer(true);
+		final CPUTimer ct = new CPUTimer(true);
 		for (int i = 0; i < 100000; i++)
 		{
 			new JDFNumberList("1.104534098756 2.2098256107389 3.3098563 4.4234190123874 5.5555555 6.098634198634109875 7.129875 8.9123846");

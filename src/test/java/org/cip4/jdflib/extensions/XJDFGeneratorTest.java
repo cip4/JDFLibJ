@@ -91,110 +91,110 @@ import org.junit.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class XJDFGeneratorTest extends XJDFCreatorTest
 {
 	//TODO do we need an explicit incremental flag in the JDF proper and or sets
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddSheet1()
 	{
 		theHelper.getRoot().setXMLComment("Assume incremental adding of an additional 3rd plate");
 		theHelper.getRoot().setAttribute("Types", "PlateMaking");
-		SetHelper rlh = theHelper.getCreateSet(XJDFConstants.Resource, "RunList", EnumUsage.Input);
+		final SetHelper rlh = theHelper.getCreateSet(XJDFConstants.Resource, "RunList", EnumUsage.Input);
 		ResourceHelper p = rlh.getCreatePartition(null, true);
-		JDFRunList rl = (JDFRunList) p.getCreateResource();
+		final JDFRunList rl = (JDFRunList) p.getCreateResource();
 		rl.setNPage(48);
 		rlh.getSet().setXMLComment("set the updated total number of pages");
 
-		SetHelper loh = theHelper.getCreateSet(XJDFConstants.Resource, "Layout", EnumUsage.Input);
+		final SetHelper loh = theHelper.getCreateSet(XJDFConstants.Resource, "Layout", EnumUsage.Input);
 		p = loh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
-		JDFLayout lo = (JDFLayout) p.getCreateResource();
-		JDFBinderySignature bs = (JDFBinderySignature) lo.appendElement(ElementName.BINDERYSIGNATURE);
+		final JDFLayout lo = (JDFLayout) p.getCreateResource();
+		final JDFBinderySignature bs = (JDFBinderySignature) lo.appendElement(ElementName.BINDERYSIGNATURE);
 		bs.setNumberUp(new JDFXYPair(4, 4));
 		loh.getSet().setXMLComment("only specify the 3rd sheet");
 
-		SetHelper mh = theHelper.getCreateSet(XJDFConstants.Resource, "Media", EnumUsage.Input);
+		final SetHelper mh = theHelper.getCreateSet(XJDFConstants.Resource, "Media", EnumUsage.Input);
 		p = mh.getCreatePartition(null, true);
-		KElement mPart = p.getPartition();
+		final KElement mPart = p.getPartition();
 		mPart.setAttribute("ProductID", "PlateID");
 
-		SetHelper xmh = theHelper.getCreateSet(XJDFConstants.Resource, "ExposedMedia", EnumUsage.Output);
+		final SetHelper xmh = theHelper.getCreateSet(XJDFConstants.Resource, "ExposedMedia", EnumUsage.Output);
 		p = xmh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
-		JDFExposedMedia xm = (JDFExposedMedia) p.getCreateResource();
+		final JDFExposedMedia xm = (JDFExposedMedia) p.getCreateResource();
 		xm.setAttribute("MediaRef", mPart.getAttribute("ID"));
 
 		theHelper.getRoot().getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "changeSheet1.xjdf", 2, false);
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testAddProcess()
 	{
 		theHelper.getRoot().setXMLComment("Added Varnishing - how do we differentiate varnishing only from add varnishing\n");
 		theHelper.getRoot().setAttribute("Types", "Varnishing");
-		SetHelper rlh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.VARNISHINGPARAMS, EnumUsage.Input);
-		ResourceHelper p = rlh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
+		final SetHelper rlh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.VARNISHINGPARAMS, EnumUsage.Input);
+		final ResourceHelper p = rlh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		//		JDFVarnishingParams vp = (JDFRunList) p.getCreateResource();
 		//		rl.setNPage(48);
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testProductOnly()
 	{
 		theHelper.getRoot().setXMLComment("Product description only\n");
 		//h.getRoot().setAttribute("Types", "Varnishing");
-		ProductHelper ph = theHelper.appendProduct();
+		final ProductHelper ph = theHelper.appendProduct();
 		ph.setRoot();
 		ph.setAmount(4200);
 
-		ProductHelper phCover = theHelper.appendProduct();
+		final ProductHelper phCover = theHelper.appendProduct();
 		ph.setChild(phCover, 1);
 		phCover.getProduct().setAttribute("DescriptiveName", "Cover");
-		IntentHelper coverMedia = phCover.getCreateIntent("MediaIntent");
+		final IntentHelper coverMedia = phCover.getCreateIntent("MediaIntent");
 		coverMedia.setSpan("Weight", "150", "NumberSpan");
 
-		ProductHelper phBody = theHelper.appendProduct();
+		final ProductHelper phBody = theHelper.appendProduct();
 		ph.setChild(phBody, 1);
 		phBody.getProduct().setAttribute("DescriptiveName", "Body");
-		IntentHelper bodyMedia = phBody.getCreateIntent("MediaIntent");
+		final IntentHelper bodyMedia = phBody.getCreateIntent("MediaIntent");
 		bodyMedia.setSpan("Weight", "100", "NumberSpan");
 
-		IntentHelper binding = ph.getCreateIntent("BindingIntent");
+		final IntentHelper binding = ph.getCreateIntent("BindingIntent");
 		binding.setSpan("BindingType", EnumSpanBindingType.SaddleStitch.getName(), "EnumerationSpan");
 		binding.setSpan("CoverRef", phCover.getProduct().getID(), null);
-		IntentHelper layout = ph.getCreateIntent("LayoutIntent");
+		final IntentHelper layout = ph.getCreateIntent("LayoutIntent");
 		layout.setSpan("Dimensions", "700 1000", "XYPairSpan");
 
 		theHelper.writeToFile(sm_dirTestDataTemp + "product1.xjdf");
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testRemoveSheet()
 	{
 		theHelper.getRoot().setXMLComment("Assume incremental removal of an existing 3rd plate");
 		theHelper.getRoot().setAttribute("Types", "PlateMaking");
-		SetHelper rlh = theHelper.getCreateSet(XJDFConstants.Resource, "RunList", EnumUsage.Input);
+		final SetHelper rlh = theHelper.getCreateSet(XJDFConstants.Resource, "RunList", EnumUsage.Input);
 		ResourceHelper p = rlh.getCreatePartition(null, true);
-		JDFRunList rl = (JDFRunList) p.getCreateResource();
+		final JDFRunList rl = (JDFRunList) p.getCreateResource();
 		rl.setNPage(32);
 		rlh.getSet().setXMLComment("set the updated reduced total number of pages");
 
-		SetHelper nih = theHelper.getCreateSet(XJDFConstants.Resource, "NodeInfo", EnumUsage.Input);
+		final SetHelper nih = theHelper.getCreateSet(XJDFConstants.Resource, "NodeInfo", EnumUsage.Input);
 		p = nih.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
-		JDFNodeInfo ni = (JDFNodeInfo) p.getCreateResource();
+		final JDFNodeInfo ni = (JDFNodeInfo) p.getCreateResource();
 		ni.setNodeStatus(EnumNodeStatus.Aborted);
 		ni.setNodeStatusDetails("Removed");
 		nih.getSet().setXMLComment("All other dependent resources must be appropriately modified by the device");
@@ -203,7 +203,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testUpdateAmount()
@@ -212,17 +212,17 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 		theHelper.getRoot().setAttribute("Types", "ConventionalPrinting");
 
 		theHelper.removeSet(ElementName.NODEINFO);
-		SetHelper nih = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
-		ResourceHelper p = nih.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
-		JDFNodeInfo ni = (JDFNodeInfo) p.getCreateResource();
+		final SetHelper nih = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
+		final ResourceHelper p = nih.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
+		final JDFNodeInfo ni = (JDFNodeInfo) p.getCreateResource();
 		ni.setAttribute("AmountGood", 10000, null);
 
 		theHelper.getRoot().getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "updateAmount.xjdf", 2, false);
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testCPFromScratch()
@@ -230,31 +230,31 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 		theHelper = new XJDFHelper(null);
 		theXJDF = theHelper.getRoot();
 		theXJDF.setAttribute("Types", "InkZoneCalculation ConventionalPrinting");
-		SetHelper nih = theHelper.appendResourceSet("NodeInfo", null);
+		final SetHelper nih = theHelper.appendResourceSet("NodeInfo", null);
 		nih.setUsage(EnumUsage.Input);
-		JDFAttributeMap sheetMap = new JDFAttributeMap("SheetName", "S1");
-		ResourceHelper niS1 = nih.getCreatePartition(sheetMap, true);
-		KElement ni = niS1.getResource();
+		final JDFAttributeMap sheetMap = new JDFAttributeMap("SheetName", "S1");
+		final ResourceHelper niS1 = nih.getCreatePartition(sheetMap, true);
+		final KElement ni = niS1.getResource();
 		ni.setAttribute("Amount", "5000");
 
-		SetHelper cpSetHelper = theHelper.appendResourceSet(ElementName.CONVENTIONALPRINTINGPARAMS, null);
+		final SetHelper cpSetHelper = theHelper.appendResourceSet(ElementName.CONVENTIONALPRINTINGPARAMS, null);
 		cpSetHelper.setUsage(EnumUsage.Input);
 		cpSetHelper.getCreatePartition(sheetMap, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.getName());
 
-		SetHelper mediaSetHelper = theHelper.appendResourceSet(ElementName.MEDIA, null);
+		final SetHelper mediaSetHelper = theHelper.appendResourceSet(ElementName.MEDIA, null);
 		mediaSetHelper.setUsage(EnumUsage.Input);
-		ResourceHelper mediaHelper = mediaSetHelper.getCreatePartition(sheetMap, true);
-		KElement mediaPart = mediaHelper.getPartition();
+		final ResourceHelper mediaHelper = mediaSetHelper.getCreatePartition(sheetMap, true);
+		final KElement mediaPart = mediaHelper.getPartition();
 		mediaPart.setAttribute("Brand", "TestBrand");
 		mediaPart.setAttribute("ProductID", "ID");
-		KElement media = mediaHelper.getResource();
-		media.setAttribute("Dimension", new JDFXYPair(72, 49).scaleFromCM().toString(), null);
+		final KElement media = mediaHelper.getResource();
+		media.setAttribute("Dimension", new JDFXYPair(72, 49).scaleFromCM(1).toString(), null);
 		media.setAttribute(AttributeName.MEDIATYPE, EnumMediaType.Paper.getName());
 
-		SetHelper compSetHelper = theHelper.appendResourceSet(ElementName.COMPONENT, null);
+		final SetHelper compSetHelper = theHelper.appendResourceSet(ElementName.COMPONENT, null);
 		compSetHelper.setUsage(EnumUsage.Output);
-		ResourceHelper compHelper = compSetHelper.getCreatePartition(sheetMap, true);
-		KElement compPart = compHelper.getPartition();
+		final ResourceHelper compHelper = compSetHelper.getCreatePartition(sheetMap, true);
+		final KElement compPart = compHelper.getPartition();
 		compPart.setAttribute("ProductID", "ComponentID");
 		compHelper.getResource().setAttribute("MediaRef", mediaPart.getAttribute("ID"));
 
@@ -262,20 +262,20 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public void testFromCPGoldenTicket()
 	{
-		MISCPGoldenTicket gt = new MISCPGoldenTicket(2, EnumVersion.Version_1_4, 2, 2, true, null);
+		final MISCPGoldenTicket gt = new MISCPGoldenTicket(2, EnumVersion.Version_1_4, 2, 2, true, null);
 		gt.assign(null);
-		JDFNode n = gt.getNode();
+		final JDFNode n = gt.getNode();
 		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "cpGoldenTicket.jdf", 2, false);
-		XJDF20 jdfToXJD = new XJDF20();
+		final XJDF20 jdfToXJD = new XJDF20();
 		jdfToXJD.setMergeLayout(true);
-		KElement xjdf = jdfToXJD.makeNewJDF(n, null);
-		XMLDoc d = xjdf.getOwnerDocument_KElement();
+		final KElement xjdf = jdfToXJD.makeNewJDF(n, null);
+		final XMLDoc d = xjdf.getOwnerDocument_KElement();
 		d.write2File(sm_dirTestDataTemp + "cpGoldenTicket.xjdf", 2, false);
 	}
 }

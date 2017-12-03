@@ -107,21 +107,21 @@ public class XJDFLayoutElementProductionTest extends JDFTestCaseBase
 	@Test
 	public void testLoPPage()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "PageSize", null);
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "PageSize", null);
 		xjdfHelper.setTypes(JDFConstants.LAYOUTELEMENTPRODUCTION);
-		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
-		SetHelper shC = xjdfHelper.getCreateSet(XJDFConstants.Resource, XJDFConstants.Content, null);
-		SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
-		ResourceHelper rh = shLO.appendPartition(null, true);
-		JDFLayoutElementProductionParams lop = (JDFLayoutElementProductionParams) rh.getResource();
-		ResourceHelper rhc = shC.appendPartition(null, true);
-		ResourceHelper rhrl = shRL.appendPartition(null, true);
-		KElement content = rhc.getResource();
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
+		final SetHelper shC = xjdfHelper.getCreateSet(XJDFConstants.Resource, XJDFConstants.Content, null);
+		final SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
+		final ResourceHelper rh = shLO.appendPartition(null, true);
+		final JDFLayoutElementProductionParams lop = (JDFLayoutElementProductionParams) rh.getResource();
+		final ResourceHelper rhc = shC.appendPartition(null, true);
+		final ResourceHelper rhrl = shRL.appendPartition(null, true);
+		final KElement content = rhc.getResource();
 		content.setAttribute(AttributeName.SOURCECLIPBOX, new JDFRectangle(0, 0, 23, 31).scaleFromCM().getString(2));
 		content.setAttribute(AttributeName.SOURCETRIMBOX, new JDFRectangle(0.5, 0.5, 21, 30.0).scaleFromCM().getString(2));
 		content.setAttribute(AttributeName.CONTENTTYPE, "Page");
 
-		JDFRunList rl = (JDFRunList) rhrl.getResource();
+		final JDFRunList rl = (JDFRunList) rhrl.getResource();
 		rl.setNPage(4);
 		lop.setAttribute(AttributeName.CONTENTREFS, rhc.getID());
 		xjdfHelper.cleanUp();
@@ -135,29 +135,29 @@ public class XJDFLayoutElementProductionTest extends JDFTestCaseBase
 	@Test
 	public void testLoPBarcode()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "Barcode", null);
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "Barcode", null);
 		xjdfHelper.setTypes(JDFConstants.LAYOUTELEMENTPRODUCTION);
-		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
-		SetHelper shC = xjdfHelper.getCreateSet(XJDFConstants.Resource, XJDFConstants.Content, null);
-		ResourceHelper rh = shLO.appendPartition(null, true);
-		JDFLayoutElementProductionParams lop = (JDFLayoutElementProductionParams) rh.getResource();
-		ResourceHelper rhc = shC.appendPartition(null, true);
-		KElement content = rhc.getResource();
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
+		final SetHelper shC = xjdfHelper.getCreateSet(XJDFConstants.Resource, XJDFConstants.Content, null);
+		final ResourceHelper rh = shLO.appendPartition(null, true);
+		final JDFLayoutElementProductionParams lop = (JDFLayoutElementProductionParams) rh.getResource();
+		final ResourceHelper rhc = shC.appendPartition(null, true);
+		final KElement content = rhc.getResource();
 
 		content.setAttribute(AttributeName.CONTENTTYPE, "Page");
-		JDFBarcodeProductionParams bcp = (JDFBarcodeProductionParams) content.appendElement(ElementName.BARCODEPRODUCTIONPARAMS);
-		JDFIdentificationField idf = bcp.appendIdentificationField();
+		final JDFBarcodeProductionParams bcp = (JDFBarcodeProductionParams) content.appendElement(ElementName.BARCODEPRODUCTIONPARAMS);
+		final JDFIdentificationField idf = bcp.appendIdentificationField();
 		idf.setEncoding(EnumEncoding.Barcode);
 		idf.setEncodingDetails("EAN_13");
 		idf.setPurpose(EnumPurpose.Label);
 		idf.setPurposeDetails("ProductIdentification");
 		idf.setValue("0123456789128");
 
-		JDFBarcodeReproParams brp = bcp.appendBarcodeReproParams();
+		final JDFBarcodeReproParams brp = bcp.appendBarcodeReproParams();
 		brp.setHeight(73.5);
 		brp.setMagnification(1);
 
-		JDFBarcodeCompParams bccp = brp.appendBarcodeCompParams();
+		final JDFBarcodeCompParams bccp = brp.appendBarcodeCompParams();
 		bccp.setCompensationValue(10);
 		bccp.setCompensationProcess(EnumCompensationProcess.Printing);
 
@@ -173,20 +173,20 @@ public class XJDFLayoutElementProductionTest extends JDFTestCaseBase
 	@Test
 	public void testLoPShape()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "ShapeDef", null);
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "ShapeDef", null);
 		xjdfHelper.setTypes(JDFConstants.LAYOUTELEMENTPRODUCTION);
-		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
-		SetHelper shC = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.SHAPEDEF, null);
-		SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
-		ResourceHelper rh = shLO.appendPartition(null, true);
-		JDFLayoutElementProductionParams lop = (JDFLayoutElementProductionParams) rh.getResource();
-		ResourceHelper rhc = shC.appendPartition(null, true);
-		ResourceHelper rhrl = shRL.appendPartition(null, true);
-		JDFShapeElement s = ((JDFShapeDef) rhc.getResource()).appendShape();
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
+		final SetHelper shC = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.SHAPEDEF, null);
+		final SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
+		final ResourceHelper rh = shLO.appendPartition(null, true);
+		final JDFLayoutElementProductionParams lop = (JDFLayoutElementProductionParams) rh.getResource();
+		final ResourceHelper rhc = shC.appendPartition(null, true);
+		final ResourceHelper rhrl = shRL.appendPartition(null, true);
+		final JDFShapeElement s = ((JDFShapeDef) rhc.getResource()).appendShape();
 		s.setDDESCutType(101);
 		s.setShapeType(EnumShapeType.Path);
 		s.setCutPath("10 0 l 0 10 l -10 -10 l");
-		JDFRunList rl = (JDFRunList) rhrl.getResource();
+		final JDFRunList rl = (JDFRunList) rhrl.getResource();
 		rl.setNPage(1);
 		lop.setAttribute(XJDFConstants.ShapeDefRef, rhc.getID());
 		xjdfHelper.cleanUp();
@@ -200,18 +200,18 @@ public class XJDFLayoutElementProductionTest extends JDFTestCaseBase
 	@Test
 	public void testLoPBox()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "ShapeDef", null);
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUTELEMENTPRODUCTION, "ShapeDef", null);
 		xjdfHelper.setTypes(JDFConstants.LAYOUTELEMENTPRODUCTION);
-		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
-		SetHelper shC = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.SHAPEDEF, null);
-		SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
-		ResourceHelper rh = shLO.appendPartition(null, true);
-		JDFLayoutElementProductionParams lop = (JDFLayoutElementProductionParams) rh.getResource();
-		ResourceHelper rhc = shC.appendPartition(null, true);
-		ResourceHelper rhrl = shRL.appendPartition(null, true);
-		JDFShapeDef s = ((JDFShapeDef) rhc.getResource());
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input);
+		final SetHelper shC = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.SHAPEDEF, null);
+		final SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
+		final ResourceHelper rh = shLO.appendPartition(null, true);
+		final JDFLayoutElementProductionParams lop = (JDFLayoutElementProductionParams) rh.getResource();
+		final ResourceHelper rhc = shC.appendPartition(null, true);
+		final ResourceHelper rhrl = shRL.appendPartition(null, true);
+		final JDFShapeDef s = ((JDFShapeDef) rhc.getResource());
 		s.appendFileSpec().setURL("file://myserver/myshare/olive.dd3");
-		JDFRunList rl = (JDFRunList) rhrl.getResource();
+		final JDFRunList rl = (JDFRunList) rhrl.getResource();
 		rl.setNPage(1);
 		lop.setAttribute(XJDFConstants.ShapeDefRef, rhc.getID());
 		xjdfHelper.cleanUp();

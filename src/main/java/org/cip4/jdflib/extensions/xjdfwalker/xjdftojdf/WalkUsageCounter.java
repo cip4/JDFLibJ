@@ -66,28 +66,22 @@
  *
  *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.JDFMatrix;
-import org.cip4.jdflib.datatypes.JDFRectangle;
-import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.resource.process.JDFCutBlock;
+import org.cip4.jdflib.resource.process.JDFUsageCounter;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkCutBlock extends WalkJDFSubElement
+public class WalkUsageCounter extends WalkResource
 {
 	/**
 	 *
 	 */
-	public WalkCutBlock()
+	public WalkUsageCounter()
 	{
 		super();
 	}
@@ -100,59 +94,17 @@ public class WalkCutBlock extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFCutBlock);
+		return toCheck instanceof JDFUsageCounter;
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
+	protected void updateAttributes(final KElement elem)
 	{
-		final JDFCutBlock cutBlock = (JDFCutBlock) e;
-		copyToBox(cutBlock);
-		return super.walk(e, trackElem);
-	}
+		elem.renameAttribute(XJDFConstants.ExternalID, AttributeName.COUNTERID);
 
-	/**
-	 *
-	 * @param cutBlock
-	 */
-	private void copyToBox(final JDFCutBlock cutBlock)
-	{
-		final JDFXYPair size = cutBlock.getBlockSize();
-		if (size != null)
-		{
-			final JDFMatrix blockTrf = cutBlock.getBlockTrf();
-			final JDFRectangle box = new JDFRectangle(0, 0, size.getX(), size.getY());
-			if (blockTrf != null)
-			{
-				final JDFXYPair shift = blockTrf.getShift();
-				box.shift(shift);
-			}
-			cutBlock.setAttribute(AttributeName.BOX, box, null);
-		}
-		cutBlock.removeAttribute(AttributeName.BLOCKSIZE);
-		cutBlock.removeAttribute(AttributeName.BLOCKTRF);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return new VString(ElementName.CUTBLOCK, null);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
-	 */
-	@Override
-	protected void updateAttributes(final JDFAttributeMap map)
-	{
-		super.updateAttributes(map);
-		map.renameKey(AttributeName.ASSEMBLYIDS, XJDFConstants.BinderySignatureIDs);
-		map.remove(AttributeName.BLOCKELEMENTTYPE);
+		super.updateAttributes(elem);
 	}
 }

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -237,8 +237,8 @@ public class MISFinTest extends BaseGoldenTicketTest
 		n.setType("BoxFolding", false);
 		final JDFBoxFoldingParams bfp = (JDFBoxFoldingParams) n.addResource(ElementName.BOXFOLDINGPARAMS, EnumUsage.Input);
 		bfp.setBoxFoldingType(EnumBoxFoldingType.Type01);
-		bfp.setBlankDimensionsX((JDFNumberList) new JDFNumberList("1 5 7 11 13").scaleFromCM());
-		bfp.setBlankDimensionsY((JDFNumberList) new JDFNumberList("2 3 5 15 17 18 20").scaleFromCM());
+		bfp.setBlankDimensionsX((JDFNumberList) new JDFNumberList("1 5 7 11 13").scaleFromCM(0));
+		bfp.setBlankDimensionsY((JDFNumberList) new JDFNumberList("2 3 5 15 17 18 20").scaleFromCM(0));
 		setSnippet(bfp, true);
 		JDFBoxFoldAction bfa = bfp.appendBoxFoldAction();
 		bfa.setFoldIndex(new JDFXYPair(0, -1));
@@ -256,7 +256,7 @@ public class MISFinTest extends BaseGoldenTicketTest
 		bfa.setFoldIndex(new JDFXYPair(3, -1));
 		bfa.setAction(EnumAction.LongFoldRightToLeft);
 
-		writeTest(n, "resources/boxFoldingParams_boxFoldAction.jdf", true, null);
+		writeTest(n, "resources/boxFoldingParams_boxFoldAction.jdf", true, "ResourceSet[@Name=\"BoxFoldingParams\"]");
 	}
 
 	/**

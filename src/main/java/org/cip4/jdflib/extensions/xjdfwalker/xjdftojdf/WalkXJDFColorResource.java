@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
@@ -72,23 +72,23 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen 
- * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
  * walker for the colorSet - this gets translated back to a colorpool
  */
 public class WalkXJDFColorResource extends WalkXJDFResource
 {
 	/**
-	 * 
+	 *
 	 */
 	public WalkXJDFColorResource()
 	{
@@ -96,11 +96,11 @@ public class WalkXJDFColorResource extends WalkXJDFResource
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#getJDFResName(org.cip4.jdflib.extensions.SetHelper)
 	 */
 	@Override
-	protected String getJDFResName(SetHelper sh)
+	protected String getJDFResName(final SetHelper sh)
 	{
 		return ElementName.COLORPOOL;
 	}
@@ -111,10 +111,10 @@ public class WalkXJDFColorResource extends WalkXJDFResource
 	 * @return
 	 */
 	@Override
-	protected JDFResource createPartition(final KElement e, final JDFResource jdfRes, final JDFPart part, JDFNode theNode)
+	protected KElement createPartition(final JDFResource jdfRes, final JDFAttributeMap partmap, final JDFNode theNode)
 	{
 		final JDFColorPool colorPool = (JDFColorPool) jdfRes;
-		final String sep = part.getSeparation();
+		final String sep = partmap.getNonEmpty(AttributeName.SEPARATION);
 		final KElement col = colorPool.getChildWithAttribute(ElementName.COLOR, AttributeName.NAME, null, sep, 0, true);
 		if (col != null)
 		{
@@ -142,7 +142,7 @@ public class WalkXJDFColorResource extends WalkXJDFResource
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override

@@ -114,11 +114,13 @@ public class WalkNodeInfo extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.IPPVERSION);
 		map.remove(AttributeName.ROUTE);
 		map.remove(AttributeName.TARGETROUTE);
+		map.renameKey(AttributeName.WORKSTEPID, AttributeName.PRODUCTID);
+
 		super.updateAttributes(map);
 	}
 
@@ -126,9 +128,10 @@ public class WalkNodeInfo extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void removeUnusedElements(KElement jdf)
+	protected void removeUnusedElements(final KElement jdf)
 	{
 		jdf.removeChildren(ElementName.NOTIFICATIONFILTER, null, null);
+		jdf.removeChildren(ElementName.BUSINESSINFO, null, null);
 		super.removeUnusedElements(jdf);
 	}
 
@@ -136,9 +139,9 @@ public class WalkNodeInfo extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(KElement jdf, KElement xjdf)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		KElement walk = super.walk(jdf, xjdf);
+		final KElement walk = super.walk(jdf, xjdf);
 		jdf.removeChild(ElementName.EMPLOYEE, null, 0);
 		return walk;
 	}
@@ -147,7 +150,7 @@ public class WalkNodeInfo extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#mustInline(java.lang.String)
 	 */
 	@Override
-	protected boolean mustInline(String refLocalName)
+	protected boolean mustInline(final String refLocalName)
 	{
 		if (ElementName.EMPLOYEE.equals(refLocalName))
 			return false;
@@ -159,7 +162,7 @@ public class WalkNodeInfo extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResource#moveAttribsToBase(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void moveAttribsToBase(KElement xjdf, KElement newResLeaf)
+	protected void moveAttribsToBase(final KElement xjdf, final KElement newResLeaf)
 	{
 		super.moveAttribsToBase(xjdf, newResLeaf);
 		newResLeaf.renameAttribute(AttributeName.NODESTATUS, AttributeName.STATUS);

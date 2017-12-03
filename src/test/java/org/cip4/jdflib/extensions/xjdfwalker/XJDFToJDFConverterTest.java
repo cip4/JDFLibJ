@@ -132,6 +132,7 @@ import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.resource.process.JDFUsageCounter;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.junit.Test;
 
@@ -896,6 +897,36 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFResource partition = pg.getPartition(s2, null);
 		final JDFIdentical id = partition.getIdentical();
 		assertTrue(id.getPartMap().overlapMap(map));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testWorkstepID()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
+		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
+		sh.getCreatePartition(0, true).setExternalID("w1");
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(h);
+		assertEquals("w1", d.getJDFRoot().getNodeInfo().getWorkStepID());
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCounterID()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
+		final SetHelper sh = h.getCreateSet(ElementName.USAGECOUNTER, null);
+		sh.getCreatePartition(0, true).setExternalID("c1");
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(h);
+		assertEquals("c1", ((JDFUsageCounter) d.getJDFRoot().getResource(ElementName.USAGECOUNTER, EnumUsage.Input, 0)).getCounterID());
+
 	}
 
 	/**

@@ -109,7 +109,7 @@ public class WalkIgnore extends WalkElement
 	@Override
 	public VString getElementNames()
 	{
-		VString v = new VString();
+		final VString v = new VString();
 		v.add(ElementName.ACKNOWLEDGE);
 		v.add(ElementName.ACTIONPOOL);
 		v.add(ElementName.ADHESIVEBINDING);
@@ -185,7 +185,7 @@ public class WalkIgnore extends WalkElement
 	{
 		if (allwaysIgnore == null)
 		{
-			HashSet<String> v = new HashSet<String>();
+			final HashSet<String> v = new HashSet<String>();
 			v.add(ElementName.ACTIONPOOL);
 			v.add(ElementName.DELETED);
 			v.add(ElementName.DEVCAPPOOL);
@@ -208,7 +208,7 @@ public class WalkIgnore extends WalkElement
 	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public boolean matches(KElement e)
+	public boolean matches(final KElement e)
 	{
 		if (jdfToXJDF.isRetainAll())
 		{

@@ -74,6 +74,7 @@ import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 
@@ -126,16 +127,19 @@ public class WalkNodeInfo extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void updateAttributes(KElement elem)
+	protected void updateAttributes(final KElement elem)
 	{
 		// came in via init
-		String status = elem.getAttribute(AttributeName.STATUS);
+		final String status = elem.getAttribute(AttributeName.STATUS);
 		if (!EnumResStatus.Unavailable.getName().equals(status) && !EnumResStatus.Available.getName().equals(status))
 		{
 			elem.renameAttribute(AttributeName.STATUS, AttributeName.NODESTATUS);
 		}
 		elem.renameAttribute(AttributeName.STATUSDETAILS, AttributeName.NODESTATUSDETAILS);
 		elem.setAttribute(AttributeName.STATUS, EnumResStatus.Available.getName());
+
+		elem.renameAttribute(XJDFConstants.ExternalID, AttributeName.WORKSTEPID);
+
 		super.updateAttributes(elem);
 	}
 }
