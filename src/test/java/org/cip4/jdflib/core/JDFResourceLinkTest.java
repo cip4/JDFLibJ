@@ -800,15 +800,12 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 		VElement v = r.getPartitionVector((VJDFAttributeMap) null, null);
 		assertEquals("explicit identicals are excluded", v.size(), 1);
-		assertEquals("explicit identicals are excluded", v.size(), 1);
 		v = r.getPartitionVector(vm, null);
 		assertEquals(v.size(), 4);
 
 		rl.setPartMapVector(vm);
 		v = rl.getTargetVector(0);
 		assertEquals(v.size(), 4);
-		v = rl.getRawTargetVector(0);
-		assertEquals(v.size(), 8);
 	}
 
 	/**
