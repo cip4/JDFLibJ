@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
@@ -76,6 +78,7 @@ import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchorType;
 import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -89,7 +92,9 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.JDFJobField;
 import org.cip4.jdflib.resource.JDFPageCondition;
+import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFRefAnchor;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -110,11 +115,11 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	@Test
 	public void testIDPSimplex()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Simplex", null);
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Simplex", null);
 		xjdfHelper.setTypes("Stripping");
-		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
-		ResourceHelper rh = shLO.appendPartition(null, true);
-		JDFLayout lo = (JDFLayout) rh.getResource();
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper rh = shLO.appendPartition(null, true);
+		final JDFLayout lo = (JDFLayout) rh.getResource();
 		xjdfHelper.cleanUp();
 		setSnippet(lo, true);
 		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.getName());
@@ -129,24 +134,24 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	@Test
 	public void testIDPBooklet()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Simplex", null);
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Simplex", null);
 		xjdfHelper.setTypes("Stripping");
-		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
-		ResourceHelper rh = shLO.appendPartition(null, true);
-		JDFLayout lo = (JDFLayout) rh.getResource();
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper rh = shLO.appendPartition(null, true);
+		final JDFLayout lo = (JDFLayout) rh.getResource();
 
 		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndTurn.getName());
 		lo.setAutomated(true);
 		lo.appendElement(ElementName.POSITION);
 
-		SetHelper shBS = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, null);
-		ResourceHelper rhBS = shBS.appendPartition(null, true);
-		JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
+		final SetHelper shBS = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, null);
+		final ResourceHelper rhBS = shBS.appendPartition(null, true);
+		final JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
 		bs.setFoldCatalog("F4-1");
 
-		SetHelper shAss = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.ASSEMBLY, null);
-		ResourceHelper rhAss = shAss.appendPartition(null, true);
-		JDFAssembly ass = (JDFAssembly) rhAss.getResource();
+		final SetHelper shAss = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.ASSEMBLY, null);
+		final ResourceHelper rhAss = shAss.appendPartition(null, true);
+		final JDFAssembly ass = (JDFAssembly) rhAss.getResource();
 		ass.setOrder(EnumOrder.Collecting);
 		xjdfHelper.cleanUp();
 
@@ -158,13 +163,84 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testSheetActivation()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "SheetActivation", null);
+		xjdfHelper.setTypes("Stripping");
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper rh1 = shLO.appendPartition(new JDFAttributeMap(AttributeName.SHEETNAME, "FrontInsert"), true);
+		final ResourceHelper rh2 = shLO.appendPartition(new JDFAttributeMap(AttributeName.SHEETNAME, "Cover"), true);
+		final ResourceHelper rh3 = shLO.appendPartition(new JDFAttributeMap(AttributeName.SHEETNAME, "Body"), true);
+		final ResourceHelper rh4 = shLO.appendPartition(new JDFAttributeMap(AttributeName.SHEETNAME, "JobSheet"), true);
+		final ResourceHelper rh5 = shLO.appendPartition(new JDFAttributeMap(AttributeName.SHEETNAME, "SetSheet"), true);
+		final Vector<JDFLayout> vLO = new Vector<>();
+
+		final JDFLayout lo1 = (JDFLayout) rh1.getResource();
+		final KElement sc1 = lo1.appendElement("SheetActivation");
+		final JDFElement c1 = (JDFElement) sc1.appendElement(AttributeName.CONDITION);
+		final JDFPart p1 = (JDFPart) c1.appendElement(ElementName.PART);
+		p1.setPartMap(new JDFAttributeMap(EnumPartIDKey.RunIndex, "0 0"));
+		rh1.setAttribute(AttributeName.DESCRIPTIVENAME, "Start Job Sheet");
+		vLO.add(lo1);
+
+		final JDFLayout lo2 = (JDFLayout) rh2.getResource();
+		vLO.add(lo2);
+		final KElement po2 = lo2.appendElement(XJDFConstants.PlacedObject);
+		po2.appendElement(ElementName.CONTENTOBJECT);
+		po2.setAttribute(AttributeName.ORD, "0");
+		po2.setAttribute(AttributeName.CTM, "1 0 0 1 0 0");
+		final JDFPart p = (JDFPart) po2.getCreateXPathElement("PageActivation/Condition/Part");
+		p.setPartMap(new JDFAttributeMap("RunIndex", "0 0"));
+		p.getParentNode_KElement().setAttribute("PartContext", "DocIndex");
+		final JDFLayout lo3 = (JDFLayout) rh3.getResource();
+		vLO.add(lo3);
+		final KElement po3 = lo3.appendElement(XJDFConstants.PlacedObject);
+		po3.appendElement(ElementName.CONTENTOBJECT);
+		po3.setAttribute(AttributeName.ORD, "0");
+		po3.setAttribute(AttributeName.CTM, "1 0 0 1 0 0");
+		final JDFPart p3 = (JDFPart) po3.getCreateXPathElement("PageCondition/Condition/Part");
+		p3.setPartMap(new JDFAttributeMap("RunIndex", "0 0"));
+		p3.getParentNode_KElement().setAttribute("PartContext", "DocIndex");
+
+		final JDFLayout lo4 = (JDFLayout) rh4.getResource();
+		vLO.add(lo4);
+		final JDFPart p4 = (JDFPart) lo4.getCreateXPathElement("SheetActivation/Condition/Part");
+		final JDFAttributeMap mPart4 = new JDFAttributeMap("RunIndex", "-1 -1");
+		p4.setPartMap(mPart4);
+		p4.getParentNode_KElement().setAttribute("PartContext", "DocIndex");
+
+		final JDFLayout lo5 = (JDFLayout) rh5.getResource();
+		vLO.add(lo5);
+		final JDFPart p5 = (JDFPart) lo5.getCreateXPathElement("SheetActivation/Condition/Part");
+		final JDFAttributeMap mPart5 = new JDFAttributeMap("RunIndex", "-1 -1");
+		mPart5.put("DocIndex", "-1 -1");
+		p5.setPartMap(mPart5);
+
+		for (final JDFLayout lo : vLO)
+		{
+			lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndTurn.getName());
+			lo.setAutomated(true);
+			final ResourceHelper helper = ResourceHelper.getHelper(lo);
+			final JDFAttributeMap partMap = helper.getPartMap();
+			partMap.put(EnumPartIDKey.Side, "Front");
+			helper.setPartMap(partMap);
+		}
+
+		cleanSnippets(xjdfHelper);
+		writeTest(xjdfHelper, "../insertsheet.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testIDPCalendar()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Simplex", null);
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Simplex", null);
 		xjdfHelper.setTypes("Stripping");
-		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
-		ResourceHelper rh = shLO.appendPartition(null, true);
-		JDFLayout lo = (JDFLayout) rh.getResource();
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper rh = shLO.appendPartition(null, true);
+		final JDFLayout lo = (JDFLayout) rh.getResource();
 		xjdfHelper.cleanUp();
 		setSnippet(lo, true);
 		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndTumble.getName());
@@ -179,21 +255,21 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	@Test
 	public void testTiling()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Tiling", null);
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "Tiling", null);
 		xjdfHelper.setTypes("Imposition");
-		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
-		ResourceHelper rh = shLO.appendPartition(AttributeName.TILEID, "0 0", true);
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper rh = shLO.appendPartition(AttributeName.TILEID, "0 0", true);
 		rh.ensurePart(AttributeName.SIDE, "Front");
-		JDFLayout lo = (JDFLayout) rh.getResource();
+		final JDFLayout lo = (JDFLayout) rh.getResource();
 		lo.setSurfaceContentsBox(new JDFRectangle(0, 0, 600, 420));
 		KElement po = lo.appendElement(XJDFConstants.PlacedObject);
 		po.setAttribute("Ord", "0");
 		po.setAttribute(AttributeName.CLIPBOX, new JDFRectangle(0, 0, 600, 420).toString());
 		po.setAttribute("CTM", JDFMatrix.getUnitMatrix().toString());
 		po.appendElement(ElementName.CONTENTOBJECT);
-		ResourceHelper rh2 = shLO.appendPartition(AttributeName.TILEID, "1 1", true);
+		final ResourceHelper rh2 = shLO.appendPartition(AttributeName.TILEID, "1 1", true);
 		rh2.ensurePart(AttributeName.SIDE, "Front");
-		JDFLayout lo2 = (JDFLayout) rh2.getResource();
+		final JDFLayout lo2 = (JDFLayout) rh2.getResource();
 		lo2.setSurfaceContentsBox(new JDFRectangle(0, 0, 600, 420));
 		po = lo2.copyElement(po, null);
 		po.setAttribute("CTM", JDFMatrix.getUnitMatrix().shift(-600, -420).toString());
@@ -209,12 +285,12 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	@Test
 	public void testPageCondition()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "PageCondition", null);
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "PageCondition", null);
 		xjdfHelper.setTypes("Imposition");
-		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
-		ResourceHelper rh = shLO.appendPartition(AttributeName.SIDE, "Front", true);
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper rh = shLO.appendPartition(AttributeName.SIDE, "Front", true);
 
-		JDFLayout lo = (JDFLayout) rh.getResource();
+		final JDFLayout lo = (JDFLayout) rh.getResource();
 		lo.setAutomated(true);
 		KElement po = lo.appendElement(XJDFConstants.PlacedObject);
 		po.setAttribute("Ord", "0");
@@ -224,13 +300,13 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		po.setAttribute("Ord", "1");
 		po.setAttribute(AttributeName.CTM, JDFMatrix.getUnitMatrix().shift(new JDFXYPair(500, 0)).toString());
 		po.appendElement(ElementName.CONTENTOBJECT);
-		JDFPageCondition pc = (JDFPageCondition) po.appendElement(ElementName.PAGECONDITION);
-		JDFAttributeMap mPart = new JDFAttributeMap(AttributeName.RUNINDEX, "0 0");
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final JDFPageCondition pc = (JDFPageCondition) po.appendElement(ElementName.PAGECONDITION);
+		final JDFAttributeMap mPart = new JDFAttributeMap(AttributeName.RUNINDEX, "0 0");
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		vMap.add(mPart);
 
 		pc.setPartMapVector(vMap);
-		KElement cond = pc.appendElement(AttributeName.CONDITION);
+		final KElement cond = pc.appendElement(AttributeName.CONDITION);
 		cond.moveElements(pc.getChildElementVector(ElementName.PART, null), null);
 		cond.setAttribute(XJDFConstants.PartContext, AttributeName.DOCINDEX);
 		xjdfHelper.cleanUp();
@@ -244,21 +320,21 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	@Test
 	public void testDynamicField()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "DynamicField", null);
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "DynamicField", null);
 		xjdfHelper.setTypes("Imposition");
-		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
-		ResourceHelper rh = shLO.appendPartition(AttributeName.SIDE, "Front", true);
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper rh = shLO.appendPartition(AttributeName.SIDE, "Front", true);
 		rh.setID("ID_Lo");
-		JDFLayout lo = (JDFLayout) rh.getResource();
+		final JDFLayout lo = (JDFLayout) rh.getResource();
 		lo.setAutomated(true);
-		JDFStripMark sm = (JDFStripMark) lo.appendElement(ElementName.STRIPMARK);
+		final JDFStripMark sm = (JDFStripMark) lo.appendElement(ElementName.STRIPMARK);
 		sm.setAttribute(AttributeName.ABSOLUTEHEIGHT, "99");
 		sm.setAttribute(AttributeName.ABSOLUTEWIDTH, "999");
-		JDFRefAnchor ra = (JDFRefAnchor) sm.appendElement(ElementName.REFANCHOR);
+		final JDFRefAnchor ra = (JDFRefAnchor) sm.appendElement(ElementName.REFANCHOR);
 		ra.setrRef(rh.getID());
 		ra.setAnchorType(EnumAnchorType.Parent);
 		ra.setAnchor(EnumAnchor.TopLeft);
-		JDFJobField df = (JDFJobField) sm.appendElement(ElementName.JOBFIELD);
+		final JDFJobField df = (JDFJobField) sm.appendElement(ElementName.JOBFIELD);
 		sm.copyAttribute(AttributeName.ANCHOR, ra);
 		df.setJobFormat("Moon phase while imaging: %s sheet # %i");
 		df.setJobTemplate("MoonPhase SheetIndex");
@@ -273,11 +349,11 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	@Test
 	public void testCutStack()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "CutStack", null);
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "CutStack", null);
 		xjdfHelper.setTypes("Stripping");
-		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
-		ResourceHelper rh = shLO.appendPartition(null, true);
-		JDFLayout lo = (JDFLayout) rh.getResource();
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper rh = shLO.appendPartition(null, true);
+		final JDFLayout lo = (JDFLayout) rh.getResource();
 
 		xjdfHelper.cleanUp();
 		setSnippet(lo, true);
@@ -302,26 +378,26 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	@Test
 	public void testStrippingF16()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
 		xjdfHelper.setTypes("Stripping");
-		SetHelper shBS = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
-		ResourceHelper rhBS = shBS.appendPartition(null, true);
-		JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
+		final SetHelper shBS = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		final ResourceHelper rhBS = shBS.appendPartition(null, true);
+		final JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
 		bs.setFoldCatalog("F16-6");
 		bs.setBinderySignatureType(EnumBinderySignatureType.Fold);
 
-		SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
 		for (int i = 1; i <= 3; i++)
 		{
 			rhBS.appendPartMap(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "bs" + i));
-			ResourceHelper rh = shLO.appendPartition(AttributeName.SHEETNAME, "sheet" + i, true);
-			JDFLayout lo = (JDFLayout) rh.getResource();
+			final ResourceHelper rh = shLO.appendPartition(AttributeName.SHEETNAME, "sheet" + i, true);
+			final JDFLayout lo = (JDFLayout) rh.getResource();
 			lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndBack.getName());
-			KElement pos = lo.appendElement(ElementName.POSITION);
+			final KElement pos = lo.appendElement(ElementName.POSITION);
 			pos.setAttribute(XJDFConstants.BinderySignatureID, "bs" + i);
 		}
-		SetHelper shAss = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.ASSEMBLY, EnumUsage.Input);
-		ResourceHelper rhAss = shAss.appendPartition(null, true);
+		final SetHelper shAss = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.ASSEMBLY, EnumUsage.Input);
+		final ResourceHelper rhAss = shAss.appendPartition(null, true);
 		rhAss.getResource().setAttribute(XJDFConstants.BinderySignatureIDs, "bs1 bs2 bs3");
 		((JDFAssembly) rhAss.getResource()).setOrder(EnumOrder.Collecting);
 		cleanSnippets(xjdfHelper);

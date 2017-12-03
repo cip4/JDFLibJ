@@ -336,10 +336,10 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	@Test
 	public void testGenerateCPINull() throws Exception
 	{
-		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setVersion(JDFElement.EnumVersion.Version_1_3);
-		JDFResource r = n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
-		JDFResourceLink rl = n.getLink(r, null);
+		final JDFResource r = n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
+		final JDFResourceLink rl = n.getLink(r, null);
 		rl.setrRef("dummy");
 		n.setCombined(new VString("ImageSetting ConventionalPrinting", null));
 		rl.generateCombinedProcessIndex();
@@ -687,7 +687,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		mPart.put("Side", "Front");
 		mPart.put("PartVersion", "En Fr");
 		final JDFResourceLink rl = n.getMatchingLink("ExposedMedia", EnumProcessUsage.Plate, 0);
-		JDFResource r = rl.getTarget();
+		final JDFResource r = rl.getTarget();
 		rl.setPartMap(mPartLink);
 		r.getCreatePartition(mPart, null);
 		mPart.put("PartVersion", "En DK");
@@ -703,14 +703,14 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	public void testGetTargetPartVersion()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
-		JDFResource comp = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		final JDFResource comp = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
 		mPart.put("SheetName", "S1");
 		mPart.put("PartVersion", "En");
 		final JDFAttributeMap mPartLink = mPart.clone();
 		mPartLink.put("PartVersion", "En En");
-		JDFResourceLink rl = n.getLink(comp, null);
-		JDFResource leaf = comp.getCreatePartition(mPart, new VString("SignatureName SheetName PartVersion", null));
+		final JDFResourceLink rl = n.getLink(comp, null);
+		final JDFResource leaf = comp.getCreatePartition(mPart, new VString("SignatureName SheetName PartVersion", null));
 		rl.setPartMap(mPartLink);
 
 		assertEquals(rl.getTarget(), leaf);
@@ -726,14 +726,14 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	public void testGetTargetPartVersionMulti()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
-		JDFResource comp = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		final JDFResource comp = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
 		mPart.put("SheetName", "S1");
 		mPart.put("PartVersion", "En");
 		final JDFAttributeMap mPartLink = mPart.clone();
 		mPartLink.put("PartVersion", "En En");
-		JDFResourceLink rl = n.getLink(comp, null);
-		VJDFAttributeMap vLink = new VJDFAttributeMap();
+		final JDFResourceLink rl = n.getLink(comp, null);
+		final VJDFAttributeMap vLink = new VJDFAttributeMap();
 		vLink.add(mPartLink.clone());
 		comp.getCreatePartition(mPart, new VString("SignatureName SheetName PartVersion", null));
 		mPart.put("PartVersion", "Fr");
@@ -756,11 +756,11 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		final JDFAttributeMap mPartLink = new JDFAttributeMap("PartVersion", "v1");
 		final JDFAttributeMap mPartLink2 = new JDFAttributeMap("PartVersion", "v2");
-		JDFResource r = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
+		final JDFResource r = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
 		r.addPartition(EnumPartIDKey.PartVersion, "v1");
 		r.addPartition(EnumPartIDKey.PartVersion, "v2");
-		JDFResourceLink rl = n.getLink(r, null);
-		VJDFAttributeMap vm = new VJDFAttributeMap();
+		final JDFResourceLink rl = n.getLink(r, null);
+		final VJDFAttributeMap vm = new VJDFAttributeMap();
 		vm.add(mPartLink);
 		vm.add(mPartLink2);
 		rl.setPartMapVector(vm);
@@ -774,19 +774,19 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	@Test
 	public void testGetTargetVectorIdentical()
 	{
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
-		JDFResource r = n.addResource("ExposedMedia", EnumUsage.Input);
-		JDFResourceLink rl = n.getLink(r, EnumUsage.Input);
-		JDFResource s1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
-		JDFResource s2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
-		VString seps = new VString("CYAN MAGENTA YELLOW BLACK", null);
-		VJDFAttributeMap vm = new VJDFAttributeMap();
-		JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SheetName, "s1");
-		JDFAttributeMap m2 = new JDFAttributeMap(EnumPartIDKey.SheetName, "s2");
-		for (String sep : seps)
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFResource r = n.addResource("ExposedMedia", EnumUsage.Input);
+		final JDFResourceLink rl = n.getLink(r, EnumUsage.Input);
+		final JDFResource s1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource s2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		final VString seps = new VString("CYAN MAGENTA YELLOW BLACK", null);
+		final VJDFAttributeMap vm = new VJDFAttributeMap();
+		final JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SheetName, "s1");
+		final JDFAttributeMap m2 = new JDFAttributeMap(EnumPartIDKey.SheetName, "s2");
+		for (final String sep : seps)
 		{
-			JDFResource s11 = s1.addPartition(EnumPartIDKey.Separation, sep);
-			JDFResource s21 = s2.addPartition(EnumPartIDKey.Separation, sep);
+			final JDFResource s11 = s1.addPartition(EnumPartIDKey.Separation, sep);
+			final JDFResource s21 = s2.addPartition(EnumPartIDKey.Separation, sep);
 
 			JDFAttributeMap m = new JDFAttributeMap(m1);
 			m.put(EnumPartIDKey.Separation, sep);
@@ -800,12 +800,56 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 		VElement v = r.getPartitionVector((VJDFAttributeMap) null, null);
 		assertEquals("explicit identicals are excluded", v.size(), 1);
+		assertEquals("explicit identicals are excluded", v.size(), 1);
 		v = r.getPartitionVector(vm, null);
 		assertEquals(v.size(), 4);
 
 		rl.setPartMapVector(vm);
 		v = rl.getTargetVector(0);
 		assertEquals(v.size(), 4);
+		v = rl.getRawTargetVector(0);
+		assertEquals(v.size(), 8);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetRawTargetVectorIdentical()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFResource r = n.addResource("ExposedMedia", EnumUsage.Input);
+		final JDFResourceLink rl = n.getLink(r, EnumUsage.Input);
+		final JDFResource s1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource s2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		final VString seps = new VString("CYAN MAGENTA YELLOW BLACK", null);
+		final VJDFAttributeMap vm = new VJDFAttributeMap();
+		final JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SheetName, "s1");
+		final JDFAttributeMap m2 = new JDFAttributeMap(EnumPartIDKey.SheetName, "s2");
+		for (final String sep : seps)
+		{
+			final JDFResource s11 = s1.addPartition(EnumPartIDKey.Separation, sep);
+			final JDFResource s21 = s2.addPartition(EnumPartIDKey.Separation, sep);
+
+			JDFAttributeMap m = new JDFAttributeMap(m1);
+			m.put(EnumPartIDKey.Separation, sep);
+			vm.add(m);
+			m = new JDFAttributeMap(m2);
+			m.put(EnumPartIDKey.Separation, sep);
+			vm.add(m);
+			s21.setIdentical(s11);
+
+		}
+
+		VElement v = r.getPartitionVector((VJDFAttributeMap) null, null);
+		assertEquals("explicit identicals are excluded", v.size(), 1);
+		assertEquals("explicit identicals are excluded", v.size(), 1);
+		v = r.getPartitionVector(vm, null);
+		assertEquals(v.size(), 4);
+
+		rl.setPartMapVector(vm);
+		v = rl.getRawTargetVector(0);
+		assertEquals(v.size(), 8);
 	}
 
 	/**
@@ -1022,7 +1066,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFDoc d22 = new JDFDoc(ElementName.JDF);
 		final JDFNode n22 = d22.getJDFRoot();
 		final JDFResourceLinkPool rlp = n22.getCreateResourceLinkPool();
-		JDFResourceLink rl = rlp.linkResource(ni, true ? EnumUsage.Input : EnumUsage.Output, null);
+		final JDFResourceLink rl = rlp.linkResource(ni, true ? EnumUsage.Input : EnumUsage.Output, null);
 		assertNull(rl);
 		assertNull("NI not linked", rlp.getElement("NodeInfoLink"));
 
@@ -1218,13 +1262,13 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	@Test
 	public void testIsResourceLink()
 	{
-		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		assertFalse(JDFResourceLink.isResourceLink(n));
-		JDFResource r = n.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
-		JDFResourceLink rl = n.getLink(r, null);
+		final JDFResource r = n.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
+		final JDFResourceLink rl = n.getLink(r, null);
 		assertFalse(JDFResourceLink.isResourceLink(r));
 		assertTrue(JDFResourceLink.isResourceLink(rl));
-		JDFPartAmount pa = rl.appendAmountPool().appendPartAmount();
+		final JDFPartAmount pa = rl.appendAmountPool().appendPartAmount();
 		assertFalse(JDFResourceLink.isResourceLink(pa));
 	}
 
@@ -1355,7 +1399,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		n.setType(EnumType.Strapping);
 		final JDFResource rBar = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
 		final JDFResourceLink rl = n.getLink(rBar, null);
-		JDFAttributeMap partMap = new JDFAttributeMap("SheetName", "s1");
+		final JDFAttributeMap partMap = new JDFAttributeMap("SheetName", "s1");
 		rl.setActualAmount(42, partMap);
 		rl.setPartMap(partMap);
 		rl.unpartition(false, true);

@@ -341,8 +341,19 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 */
 	public void setAmount(final double amount, final JDFAttributeMap moreMap, final boolean bGood)
 	{
+		setVAmount(amount, new VJDFAttributeMap(moreMap), bGood);
+	}
+
+	/**
+	 *
+	 * @param amount
+	 * @param moreMap
+	 * @param bGood
+	 */
+	public void setVAmount(final double amount, final VJDFAttributeMap moreMaps, final boolean bGood)
+	{
 		final JDFAmountPool ap = getCreateAmountPool();
-		final JDFPartAmount pa0 = ap.getCreatePartAmount(new VJDFAttributeMap(moreMap));
+		final JDFPartAmount pa0 = ap.getCreatePartAmount(moreMaps);
 		pa0.setAttribute((bGood ? AttributeName.AMOUNT : AttributeName.WASTE), StringUtil.formatDouble(amount), null);
 	}
 

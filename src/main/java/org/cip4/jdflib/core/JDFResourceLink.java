@@ -102,6 +102,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.JDFResource.PartitionGetter;
 import org.cip4.jdflib.resource.process.JDFLot;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -128,7 +129,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	 * check whether e is a "real" resourceLink and NOT a partamount
 	 * @param e
 	 */
-	public static boolean isResourceLink(KElement e)
+	public static boolean isResourceLink(final KElement e)
 	{
 		return (e instanceof JDFResourceLink) && !(e instanceof JDFPartAmount);
 	}
@@ -157,7 +158,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		protected EnumUsage(String name)
+		protected EnumUsage(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -166,7 +167,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumUsage getEnum(String enumName)
+		public static EnumUsage getEnum(final String enumName)
 		{
 			return (EnumUsage) getEnum(EnumUsage.class, enumName);
 		}
@@ -175,7 +176,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumUsage getEnum(int enumValue)
+		public static EnumUsage getEnum(final int enumValue)
 		{
 			return (EnumUsage) getEnum(EnumUsage.class, enumValue);
 		}
@@ -232,7 +233,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	  * @param enumVar the enumVar to set the attribute to
 	  */
 	@Override
-	public void setUsage(EnumUsage enumVar)
+	public void setUsage(final EnumUsage enumVar)
 	{
 		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -258,7 +259,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 			final VString types = n.getTypes();
 			if (types != null)
 			{
-				JDFResource linkRoot = getLinkRoot();
+				final JDFResource linkRoot = getLinkRoot();
 				if (linkRoot != null)
 				{
 					CombinedProcessIndexHelper.generateCombinedProcessIndex(linkRoot, getUsage(), getEnumProcessUsage(), this, types);
@@ -359,14 +360,14 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	 * @param bRemovePartMapVector
 	 * @param bRemoveAmountPool if true, assume all amounts apply to the main resource and copy from the first partamount
 	 */
-	public void unpartition(boolean bRemovePartMapVector, boolean bRemoveAmountPool)
+	public void unpartition(final boolean bRemovePartMapVector, final boolean bRemoveAmountPool)
 	{
 		if (bRemovePartMapVector)
 			setPartMapVector(null);
-		JDFAmountPool ap = getAmountPool();
+		final JDFAmountPool ap = getAmountPool();
 		if (bRemoveAmountPool && ap != null)
 		{
-			JDFPartAmount pa = ap.getPartAmount(0);
+			final JDFPartAmount pa = ap.getPartAmount(0);
 			setAttributes(pa);
 			ap.deleteNode();
 		}
@@ -671,7 +672,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		if (bCheckChildren)
 		{
 			final VElement leaves2 = getTargetVector(-1);
-			for (KElement e : leaves2)
+			for (final KElement e : leaves2)
 			{
 				if (e != null)
 				{
@@ -684,7 +685,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		else
 		{ // calculate availability directly, but only for the subelements as specified by partMap
 			final VElement leaves2 = getTargetVector(-1);
-			for (KElement e : leaves2)
+			for (final KElement e : leaves2)
 			{
 				JDFResource leaf = (JDFResource) e;
 				leaf = leaf.getPartition(partMap, null);
@@ -776,7 +777,28 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		// split it into leaves
 		// 221003 changed GetResourcePartMapVector to GetPartMapVector
 		final VJDFAttributeMap vmParts = getPartMapVector();
-		return getMapTargetVector(vmParts, nMax);
+		return getMapTargetVector(vmParts, nMax, true);
+	}
+
+	/**
+	 * Method getTargetVector gets the resource nodes this resourcelink refers to including all leaves with identical elements.
+	 *  Skips links that do not exist or where the name mangling is illegal.<br>
+	 * Actual behavior varies according to the value of PartUsage of the referenced resource:<br>
+	 * if PartUsage="Explicit", all elements that are referenced in PartIDKeys and the ResourceLink must exist and fit<br>
+	 * if PartUsage="Implicit", the best fitting intermediate node of the partitioned resource is returned.<br>
+	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are assumed to be logical attributes (e.g. RunIndex of a RunList) and ignored
+	 * when searching the part.
+	 *
+	 * @param nMax maximum number of requested resources; -1= all
+	 *
+	 * @return VElement - the set of leaves that are referenced by this ResourceLink
+	 *
+	 * @default getTargetVector(-1)
+	 */
+	public VElement getRawTargetVector(final int nMax)
+	{
+		final VJDFAttributeMap vmParts = getPartMapVector();
+		return getMapTargetVector(vmParts, nMax, false);
 	}
 
 	/**
@@ -791,7 +813,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	 * @param nMax maximum number of requested resources; -1= all
 	 * @return VElement the set of leaves that are referenced by this ResourceLink
 	 */
-	private VElement getMapTargetVector(final VJDFAttributeMap vmParts, final int nMax)
+	private VElement getMapTargetVector(final VJDFAttributeMap vmParts, final int nMax, final boolean followIdentical)
 	{
 		VElement v = new VElement();
 		// get the resource root
@@ -819,7 +841,9 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 			return v;
 		}
 
-		v = resRoot.getPartitionVector(vmParts, partUsage);
+		final PartitionGetter partitionGetter = resRoot.new PartitionGetter();
+		partitionGetter.setFollowIdentical(followIdentical);
+		v = partitionGetter.getPartitionVector(vmParts, partUsage);
 		return v;
 	}
 
@@ -1114,7 +1138,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		for (int i = 0; i < vmParts.size(); i++)
 		{
 			final VElement vr = resRoot.getPartitionVector(vmParts.elementAt(i), partUsage);
-			for (KElement e : vr)
+			for (final KElement e : vr)
 			{
 				final JDFResource targ = (JDFResource) e;
 				final VElement leaves = targ.getLeaves(false);
@@ -1228,7 +1252,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 		if (vRes != null)
 		{
-			for (KElement e : vRes)
+			for (final KElement e : vRes)
 			{
 				final JDFResource r = (JDFResource) e;
 				// reslinks that point to nothing may be valid but they certainly aren't valid if they point to the wrong resource
@@ -1592,7 +1616,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 			final VElement vResLeaves = r.getLeaves(false);
 			final HashSet<JDFPartAmount> hsDone = new HashSet<JDFPartAmount>();
-			for (KElement leaf : vResLeaves)
+			for (final KElement leaf : vResLeaves)
 			{
 				final JDFResource resLeaf = (JDFResource) leaf;
 				final JDFAttributeMap m = resLeaf.getPartMap();
@@ -1607,9 +1631,9 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 						double delta = AmountPoolHelper.getAmountPoolMinDouble(this, attName, m2);
 						if (m2.get(AttributeName.CONDITION) == null)
 						{
-							JDFAttributeMap m2Good = m2.clone();
+							final JDFAttributeMap m2Good = m2.clone();
 							m2Good.put(AttributeName.CONDITION, "Good");
-							double deltaGood = AmountPoolHelper.getAmountPoolMinDouble(this, attName, m2Good);
+							final double deltaGood = AmountPoolHelper.getAmountPoolMinDouble(this, attName, m2Good);
 							delta = Math.max(delta, deltaGood);
 						}
 						if (delta > 0)

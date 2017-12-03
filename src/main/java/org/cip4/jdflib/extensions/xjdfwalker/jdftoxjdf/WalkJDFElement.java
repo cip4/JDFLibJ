@@ -134,7 +134,7 @@ public class WalkJDFElement extends WalkElement
 	{
 		removeUnusedElements(je);
 		final VElement v = je.getChildElementVector_KElement(null, null, null, true, 0);
-		for (KElement e : v)
+		for (final KElement e : v)
 		{
 			if (e instanceof JDFResource)
 			{
@@ -205,7 +205,7 @@ public class WalkJDFElement extends WalkElement
 		final VElement prevs = prevPool.getChildrenByTagName(jdfToXJDF.getSetName(r), null, m, true, true, 0);
 		if (prevs != null)
 		{
-			for (KElement e : prevs)
+			for (final KElement e : prevs)
 			{
 				final JDFResource prev = (JDFResource) e;
 				if (r == prev)
@@ -251,13 +251,13 @@ public class WalkJDFElement extends WalkElement
 		}
 		if ("MediaRef".equals(re.getLocalName()))
 		{
-			KElement parent = re.getParentNode_KElement();
+			final KElement parent = re.getParentNode_KElement();
 			if ((parent instanceof JDFLayout) || (parent instanceof JDFStrippingParams))
 			{
-				JDFMedia m = (JDFMedia) re.getTarget();
+				final JDFMedia m = (JDFMedia) re.getTarget();
 				if (m != null)
 				{
-					EnumMediaType t = m.getMediaType();
+					final EnumMediaType t = m.getMediaType();
 					if (EnumMediaType.Paper.equals(t))
 					{
 						return "PaperRef";
@@ -300,10 +300,10 @@ public class WalkJDFElement extends WalkElement
 	 */
 	KElement getProductForElement(final KElement xjdf, final JDFElement rl)
 	{
-		JDFNode rlParent = (rl instanceof JDFNode) ? (JDFNode) rl : rl.getParentJDF();
+		final JDFNode rlParent = (rl instanceof JDFNode) ? (JDFNode) rl : rl.getParentJDF();
 		String parentID = rlParent.getID();
 		parentID = "IDP_" + parentID;
-		KElement product = new XJDFHelper(xjdf).getCreateProduct(parentID).getProduct();
+		final KElement product = new XJDFHelper(xjdf).getCreateProduct(parentID).getProduct();
 		return product;
 	}
 
@@ -312,7 +312,7 @@ public class WalkJDFElement extends WalkElement
 	 * @param newRootP
 	*/
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		if (!jdfToXJDF.isRetainAll())
 		{
@@ -334,17 +334,17 @@ public class WalkJDFElement extends WalkElement
 	void updateColorPoolColors(final JDFResource r)
 	{
 		final VElement v = r.getChildElementVector(ElementName.COLOR, null);
-		for (KElement e : v)
+		for (final KElement e : v)
 		{
 			if (!e.hasAttribute(AttributeName.ACTUALCOLORNAME))
 			{
 				e.copyAttribute(AttributeName.ACTUALCOLORNAME, e, AttributeName.NAME, null, null);
 			}
-			String sep = StringUtil.replaceChar(e.getAttribute(AttributeName.NAME), ' ', "_", 0);
+			final String sep = StringUtil.replaceChar(e.getAttribute(AttributeName.NAME), ' ', "_", 0);
 			e.setAttribute(AttributeName.SEPARATION, sep);
 			e.removeAttribute(AttributeName.NAME);
 		}
-		KElement cNew = safeRename(r, ElementName.COLOR, true);
+		final KElement cNew = safeRename(r, ElementName.COLOR, true);
 		cNew.setAttribute(AttributeName.PARTIDKEYS, AttributeName.SEPARATION);
 	}
 
@@ -385,22 +385,21 @@ public class WalkJDFElement extends WalkElement
 
 		// TODO what if we have resources used as in and out in the same node?
 		setSetAttributes(resourceSet, rl, linkTarget);
-		int nLeaves = resourceSet.numChildElements(className, null);
-		final VElement vRes = expandLink ? ((JDFResourceLink) rl).getTargetVector(0) : linkTarget.getLeaves(false);
+		final int nLeaves = resourceSet.numChildElements(className, null);
+		final VElement vRes = expandLink ? ((JDFResourceLink) rl).getRawTargetVector(0) : linkTarget.getLeaves(false);
 
 		final VElement v = new VElement();
-		for (KElement e : vRes)
+		for (final KElement e : vRes)
 		{
 			final JDFResource r = (JDFResource) e;
 			final VElement vLeaves = r.getLeaves(false);
-			for (KElement eLeaf : vLeaves)
+			for (final KElement eLeaf : vLeaves)
 			{
 				final JDFResource leaf = (JDFResource) eLeaf;
 				final KElement newBaseRes = setBaseResource(rl, leaf, resourceSet);
 				final int nn = resourceSet.numChildElements(className, null);
 				if (nn > nLeaves)
 				{
-					nLeaves = nn;
 					jdfToXJDF.walkTree(leaf, newBaseRes);
 				}
 				v.add(newBaseRes);
@@ -414,7 +413,7 @@ public class WalkJDFElement extends WalkElement
 	 * @param linkTarget
 	 * @return
 	 */
-	private boolean isExchangeResource(JDFResource linkTarget)
+	private boolean isExchangeResource(final JDFResource linkTarget)
 	{
 		final JDFResource resInRoot = linkTarget == null ? null : linkTarget.getResourceRoot();
 		if (resInRoot != null)
@@ -436,9 +435,9 @@ public class WalkJDFElement extends WalkElement
 	 * @param className
 	 * @return
 	 */
-	protected KElement getSet(String resID, final KElement xRoot, String className)
+	protected KElement getSet(final String resID, final KElement xRoot, final String className)
 	{
-		KElement resourceSet = xRoot.getChildWithAttribute(className + SetHelper.SET, AttributeName.ID, null, resID, 0, true);
+		final KElement resourceSet = xRoot.getChildWithAttribute(className + SetHelper.SET, AttributeName.ID, null, resID, 0, true);
 		return resourceSet;
 	}
 
@@ -453,8 +452,8 @@ public class WalkJDFElement extends WalkElement
 	{
 		JDFAttributeMap map = r.getPartMap();
 		map = convertRanges(map, r);
-		SetHelper sh = new SetHelper(xjdfSet);
-		KElement newLeaf = sh.getCreatePartition(map, false).getPartition();
+		final SetHelper sh = new SetHelper(xjdfSet);
+		final KElement newLeaf = sh.getCreatePartition(map, false).getPartition();
 		setLeafAttributes(r, rl, newLeaf);
 		return newLeaf;
 	}
@@ -493,11 +492,11 @@ public class WalkJDFElement extends WalkElement
 			JDFAmountPool ap = (JDFAmountPool) rl.getElement(ElementName.AMOUNTPOOL);
 			if (ap == null)
 			{
-				JDFAttributeMap amounts = rl.getAttributeMap().reduceMap(JDFToXJDFDataCache.getAmountAttribs());
+				final JDFAttributeMap amounts = rl.getAttributeMap().reduceMap(JDFToXJDFDataCache.getAmountAttribs());
 				if (amounts.size() > 0)
 				{
 					ap = (JDFAmountPool) newLeaf.getCreateElement(ElementName.AMOUNTPOOL);
-					for (String key : amounts.keySet())
+					for (final String key : amounts.keySet())
 					{
 						ap.setPartAttribute(key, amounts.get(key), null, partMap);
 						rl.removeAttribute(key);
@@ -510,9 +509,9 @@ public class WalkJDFElement extends WalkElement
 				if (vPartAmounts != null && vPartAmounts.size() > 0)
 				{
 					ap = (JDFAmountPool) newLeaf.getCreateElement(ElementName.AMOUNTPOOL);
-					for (KElement e : vPartAmounts)
+					for (final KElement e : vPartAmounts)
 					{
-						JDFPartAmount pa = (JDFPartAmount) e;
+						final JDFPartAmount pa = (JDFPartAmount) e;
 						moveToAmountPool(ap, pa);
 					}
 				}
@@ -525,27 +524,27 @@ public class WalkJDFElement extends WalkElement
 	 * @param newAP
 	 * @param pa
 	 */
-	protected void moveToAmountPool(JDFAmountPool newAP, JDFPartAmount pa)
+	protected void moveToAmountPool(final JDFAmountPool newAP, final JDFPartAmount pa)
 	{
-		JDFAttributeMap partMap = pa.getPartMap();
-		VJDFAttributeMap partMapVector = pa.getPartMapVector();
+		final JDFAttributeMap partMap = pa.getPartMap();
+		final VJDFAttributeMap partMapVector = pa.getPartMapVector();
 		if (partMap != null && jdfToXJDF.isExplicitWaste())
 		{
-			String condition = partMap.get(AttributeName.CONDITION);
-			boolean bWaste = StringUtil.getNonEmpty(condition) != null && !"Good".equals(condition);
+			final String condition = partMap.get(AttributeName.CONDITION);
+			final boolean bWaste = StringUtil.getNonEmpty(condition) != null && !"Good".equals(condition);
 			if (partMapVector != null)
 			{
 				partMapVector.removeKey(AttributeName.CONDITION);
 			}
-			JDFPartAmount paNew = newAP.getCreatePartAmount(partMapVector);
-			JDFAttributeMap map = pa.getAttributeMap();
+			final JDFPartAmount paNew = newAP.getCreatePartAmount(partMapVector);
+			final JDFAttributeMap map = pa.getAttributeMap();
 			if (bWaste)
 			{
 				map.remove(AttributeName.AMOUNT);
 				map.remove(AttributeName.ACTUALAMOUNT);
 				paNew.setAttributes(map);
 				// Note that actualamount and actualwaste will be copied in a post processing step by @see PostXJDFWalker
-				String wasteName = "Waste".equals(condition) ? null : condition;
+				final String wasteName = "Waste".equals(condition) ? null : condition;
 				paNew.copyAttribute("ActualWaste", pa, AttributeName.ACTUALAMOUNT, null, null);
 				paNew.copyAttribute("Waste", pa, AttributeName.AMOUNT, null, null);
 				paNew.setAttribute("WasteDetails", wasteName);
@@ -557,7 +556,7 @@ public class WalkJDFElement extends WalkElement
 		}
 		else
 		{
-			JDFPartAmount paNew = newAP.getCreatePartAmount(partMapVector);
+			final JDFPartAmount paNew = newAP.getCreatePartAmount(partMapVector);
 			paNew.setAttributes(pa);
 		}
 	}
@@ -615,7 +614,7 @@ public class WalkJDFElement extends WalkElement
 			if (vResInRoot != null)
 			{
 				final VElement vCreators = new VElement();
-				for (KElement r : vResInRoot)
+				for (final KElement r : vResInRoot)
 				{
 					final VElement vTmp = ((JDFResource) r).getCreator(EnumUsage.Input.equals(resLink.getUsage()));
 					if (vTmp != null)
@@ -626,7 +625,7 @@ public class WalkJDFElement extends WalkElement
 				vCreators.unify();
 				if (vCreators != null && !vCreators.isEmpty())
 				{
-					for (KElement creator : vCreators)
+					for (final KElement creator : vCreators)
 					{
 						final JDFNode depNode = (JDFNode) creator;
 						if (!depNode.isGroupNode())
@@ -665,15 +664,15 @@ public class WalkJDFElement extends WalkElement
 		}
 	}
 
-	void removeDuplicateDependents(KElement resourceSet)
+	void removeDuplicateDependents(final KElement resourceSet)
 	{
-		VElement exist = resourceSet.getChildElementVector(XJDFConstants.Dependent, null);
+		final VElement exist = resourceSet.getChildElementVector(XJDFConstants.Dependent, null);
 		if (exist.size() > 1)
 		{
-			KElement newDep = exist.get(-1);
+			final KElement newDep = exist.get(-1);
 			for (int i = exist.size() - 2; i >= 0; i--)
 			{
-				KElement old = exist.get(i);
+				final KElement old = exist.get(i);
 				if (old.isEqual(newDep))
 				{
 					newDep.deleteNode();
@@ -692,17 +691,17 @@ public class WalkJDFElement extends WalkElement
 	{
 		if (r != null)
 		{
-			JDFPageList pl = (JDFPageList) r;
+			final JDFPageList pl = (JDFPageList) r;
 			if (!pl.isIndexed())
 			{
 				pl.uniqueIndex();
 			}
-			KElement cNew = safeRename(r, XJDFConstants.Content, true);
+			final KElement cNew = safeRename(r, XJDFConstants.Content, true);
 			cNew.appendAttribute(AttributeName.PARTIDKEYS, AttributeName.PAGENUMBER, null, null, true);
-			Vector<JDFPageData> vpd = cNew.getChildrenByClass(JDFPageData.class, true, 0);
+			final Vector<JDFPageData> vpd = cNew.getChildrenByClass(JDFPageData.class, true, 0);
 			if (vpd != null)
 			{
-				for (JDFPageData pd : vpd)
+				for (final JDFPageData pd : vpd)
 				{
 					pd.renameAttribute(AttributeName.PAGEINDEX, AttributeName.PAGENUMBER, null, null);
 					pd.setAttribute(AttributeName.CONTENTTYPE, "Page");
