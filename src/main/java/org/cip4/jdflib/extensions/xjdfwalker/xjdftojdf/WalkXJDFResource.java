@@ -87,6 +87,7 @@ import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.util.StringUtil;
@@ -413,10 +414,19 @@ public class WalkXJDFResource extends WalkXElement
 			p.put(AttributeName.SIGNATURENAME, signatureName);
 			part.setSignatureName(signatureName);
 		}
+		p.renameKey(AttributeName.METADATA, AttributeName.METADATA0);
+		final VString keys = p.getKeys();
+		for (final String key : keys)
+		{
+			if (EnumPartIDKey.getEnum(key) == null)
+			{
+				p.remove(key);
+			}
+		}
 		p.remove(AttributeName.PRODUCTPART);
 		p.remove(AttributeName.DROPID);
+		p.remove(XJDFConstants.ContactType);
 		p.remove(XJDFConstants.ProcessTypes);
-		p.renameKey(AttributeName.METADATA, AttributeName.METADATA0);
 
 		return p;
 	}

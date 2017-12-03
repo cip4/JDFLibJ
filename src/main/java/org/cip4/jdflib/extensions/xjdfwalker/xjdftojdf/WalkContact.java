@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -106,17 +106,17 @@ public class WalkContact extends WalkResource
 	 * @return the created resource
 	 */
 	@Override
-	public KElement walk(KElement e, KElement trackElem)
+	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		JDFContact c = (JDFContact) e;
-		ResourceHelper h = ResourceHelper.getHelper(c);
-		VJDFAttributeMap vMap = h == null ? null : h.getPartMapVector();
+		final JDFContact c = (JDFContact) e;
+		final ResourceHelper h = ResourceHelper.getHelper(c);
+		final VJDFAttributeMap vMap = h == null ? null : h.getPartMapVector();
 		if (vMap != null)
 		{
-			VString cTypes = vMap.getPartValues(XJDFConstants.ContactType, true);
+			final VString cTypes = vMap.getPartValues(XJDFConstants.ContactType, true);
 			c.setContactTypes(cTypes);
 		}
-		VString roles = c.getContactTypes();
+		final VString roles = c.getContactTypes();
 		if (roles != null && roles.contains(ElementName.EMPLOYEE))
 		{
 			c.removeAttribute(AttributeName.CONTACTTYPES);
@@ -126,8 +126,17 @@ public class WalkContact extends WalkResource
 				c.renameElement(ElementName.EMPLOYEE, null);
 			}
 		}
-		KElement ret = super.walk(e, trackElem);
+		final KElement ret = super.walk(e, trackElem);
 		return ret;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return VString.getVString(ElementName.CONTACT, null);
 	}
 
 }

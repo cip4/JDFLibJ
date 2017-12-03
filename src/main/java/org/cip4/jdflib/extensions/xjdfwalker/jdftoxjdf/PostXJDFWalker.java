@@ -680,6 +680,15 @@ class PostXJDFWalker extends BaseElementWalker
 			xjdf.renameAttribute(AttributeName.SPINE, XJDFConstants.TrimSpine);
 			super.updateAttributes(xjdf);
 		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ElementName.STRIPCELLPARAMS, null);
+		}
 	}
 
 	/**
@@ -706,6 +715,15 @@ class PostXJDFWalker extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return toCheck instanceof JDFStrippingParams;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ElementName.STRIPPINGPARAMS, null);
 		}
 
 		/**
@@ -1200,6 +1218,15 @@ class PostXJDFWalker extends BaseElementWalker
 			}
 			return delParams;
 		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString(ElementName.DELIVERYPARAMS, null);
+		}
 	}
 
 	/**
@@ -1540,14 +1567,12 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-		 * @param toCheck
-		 * @return true if it matches
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
 		 */
 		@Override
-		public boolean matches(final KElement toCheck)
+		public VString getElementNames()
 		{
-			return XJDFConstants.XJDF.equals(toCheck.getLocalName());
+			return new VString(XJDFConstants.XJDF, null);
 		}
 
 		/**
@@ -1849,10 +1874,10 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				final JDFAttributeMap trgMap = id.getPartMap();
 				final SetHelper sh = new SetHelper(set);
-				final ResourceHelper trH = sh.getPartition(trgMap);
-				if (trH != null)
+				final ResourceHelper targetHelper = sh.getPartition(trgMap);
+				if (targetHelper != null)
 				{
-					trH.appendPartMap(new ResourceHelper(xjdfRes).getPartMap());
+					targetHelper.appendPartMap(new ResourceHelper(xjdfRes).getPartMap());
 				}
 				xjdfRes.deleteNode();
 			}
