@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,28 +54,28 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.core;
 
-import java.util.Iterator;
+import java.util.Set;
 
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Node;
 
 /**
- * 
+ *
  * implementation class for all the KElement xpath stuff
  * @author rainer prosi
  * @date Dec 13, 2012
@@ -88,20 +88,20 @@ class XPathHelper
 	/**
 	 * @param kElement
 	 */
-	XPathHelper(KElement kElement)
+	XPathHelper(final KElement kElement)
 	{
 		theElement = kElement;
 	}
 
 	/**
 	 * copy attribute values or text from an xpath in src to this
-	 * 
+	 *
 	 * @param dstXPath the destination xpath in this element
 	 * @param src the source element, if null; use this
 	 * @param srcXPath the source xpath, if null same as dstXPath
 	 * @return the copied value; may be null if no value was found in srcXPath
 	 */
-	String copyXPathValue(String dstXPath, KElement src, String srcXPath)
+	String copyXPathValue(final String dstXPath, KElement src, String srcXPath)
 	{
 		if (src == null)
 		{
@@ -112,7 +112,7 @@ class XPathHelper
 			srcXPath = dstXPath;
 		}
 
-		String s = src.getXPathAttribute(srcXPath, null);
+		final String s = src.getXPathAttribute(srcXPath, null);
 		setXPathValue(dstXPath, s);
 		return s;
 	}
@@ -138,7 +138,7 @@ class XPathHelper
 		 */
 		KElement getCreateXPathElement(final String path)
 		{
-			KElement e = getXPathElement(path);
+			final KElement e = getXPathElement(path);
 			if (e != null)
 			{
 				return e;
@@ -167,7 +167,7 @@ class XPathHelper
 			if (endPos > 0)
 			{
 				String next = path.substring(0, endPos);
-				KElement e = getXPathElement(next);
+				final KElement e = getXPathElement(next);
 				if (e != null)
 				{
 					next = path.substring(endPos + 1);
@@ -214,7 +214,7 @@ class XPathHelper
 			fillMissing(iSkip, newPath, slash);
 			if (slash != -1)
 			{
-				KElement e = theElement.getCreateElement_KElement(newPath.substring(0, slash), null, iSkip);
+				final KElement e = theElement.getCreateElement_KElement(newPath.substring(0, slash), null, iSkip);
 				if (attName != null && !e.hasAttribute(attName))
 				{
 					e.setXPathAttribute(attName, attVal);
@@ -286,15 +286,15 @@ class XPathHelper
 		}
 
 		/**
-		 * 
-		 *  
+		 *
+		 *
 		 * @param iSkip
 		 * @param newPath
 		 * @param pos
 		 * @param attName
 		 * @return
 		 */
-		private int calcSkipFromAtt(int iSkip, String newPath, int pos, String attName)
+		private int calcSkipFromAtt(int iSkip, final String newPath, final int pos, final String attName)
 		{
 			final String kidName = pos >= 0 ? newPath.substring(0, pos) : newPath;
 			final VElement vNewChild = theElement.getChildElementVector(kidName, null);
@@ -315,17 +315,17 @@ class XPathHelper
 		}
 
 		/**
-		 * 
-		 *  
+		 *
+		 *
 		 * @param iSkip
 		 * @param newPath
 		 * @param pos
 		 */
-		private void fillMissing(int iSkip, String newPath, int pos)
+		private void fillMissing(final int iSkip, final String newPath, final int pos)
 		{
 			if (iSkip > 0)
 			{
-				String elem = pos < 0 ? newPath : newPath.substring(0, pos);
+				final String elem = pos < 0 ? newPath : newPath.substring(0, pos);
 				final int n = theElement.numChildElements_KElement(elem, null);
 				for (int i = n; i < iSkip; i++)
 				{
@@ -393,14 +393,14 @@ class XPathHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * @param methCountSiblings
 	 * @param parent
 	 * @return
 	 */
 	String buildLocalPath(final int methCountSiblings, final KElement parent)
 	{
-		StringBuffer buf = new StringBuffer(theElement.getNodeName());
+		final StringBuffer buf = new StringBuffer(theElement.getNodeName());
 		if (methCountSiblings > 0)
 		{
 			if (methCountSiblings == 3 && theElement.hasAttribute_KElement(JDFCoreConstants.ID, null, false))
@@ -409,7 +409,7 @@ class XPathHelper
 			}
 			else
 			{
-				String s = buf.toString();
+				final String s = buf.toString();
 				Node e = (parent != null) ? parent.getElement_KElement(s, null, 0) : null;
 				int i = 1;
 				while (e != null)
@@ -467,30 +467,27 @@ class XPathHelper
 	}
 
 	/**
-	 * 
+	 *
 	 * sets all xpaths to the values provided in map
 	 * @param map map of XPath / values to set
 	 */
-	void setXPathValues(JDFAttributeMap map)
+	void setXPathValues(final JDFAttributeMap map)
 	{
 		if (map == null)
 			return;
-		Iterator<String> it = map.getKeyIterator();
+		final Set<String> keys = map.keySet();
 
 		// we need this double loop to ensure that all namespaces are correctly set
-		while (it.hasNext())
+		for (final String xpath : keys)
 		{
-			String xpath = it.next();
 			if (xpath.indexOf(AttributeName.XMLNS) >= 0)
 			{
 				setXPathValue(xpath, map.get(xpath));
 			}
 		}
 
-		it = map.getKeyIterator();
-		while (it.hasNext())
+		for (final String xpath : keys)
 		{
-			String xpath = it.next();
 			if (xpath.indexOf(AttributeName.XMLNS) < 0)
 			{
 				setXPathValue(xpath, map.get(xpath));
@@ -580,7 +577,7 @@ class XPathHelper
 		}
 		else
 		{
-			String s = kEle.getText();
+			final String s = kEle.getText();
 			return s == null ? def : s;
 		}
 	}
@@ -605,7 +602,7 @@ class XPathHelper
 		}
 		final KElement kEle = getXPathElement(path.substring(0, pos));
 		return kEle == null ? def // xpath element does not exist
-		: kEle.getAttribute(path.substring(pos + 1), null, def);
+				: kEle.getAttribute(path.substring(pos + 1), null, def);
 	}
 
 	/**
@@ -632,43 +629,43 @@ class XPathHelper
 	}
 
 	/**
-	 * Gets a map of attribute values as defined by XPath 
+	 * Gets a map of attribute values as defined by XPath
 	 * namespace prefixes are resolved <br>
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code>
 	 * <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * if null, assume .//@*, i.e. all of this
 	 * @param bWantText if true, also add text
-	 * 
+	 *
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
 	 */
-	JDFAttributeMap getXPathAttributeMap(String path, boolean bWantText)
+	JDFAttributeMap getXPathAttributeMap(final String path, final boolean bWantText)
 	{
 		final int pos = path == null ? -1 : path.lastIndexOf(JDFCoreConstants.AET);
 		final String attName = path == null ? null : path.substring(pos + 1);
-		String subele = path == null ? ".//*" : path.substring(0, pos);
+		final String subele = path == null ? ".//*" : path.substring(0, pos);
 		final VElement vEle = theElement.getXPathElementVector(subele, 0);
 		if (vEle == null)
 		{
 			return null;
 		}
-		String base = path == null ? null : buildXPath((String) null, 1);
+		final String base = path == null ? null : buildXPath((String) null, 1);
 		final JDFAttributeMap map = new JDFAttributeMap();
-		for (KElement e : vEle)
+		for (final KElement e : vEle)
 		{
-			VString vKeys = e.getAttributeVector_KElement();
-			String baseXPath = new XPathHelper(e).buildXPath(base, 1);
-			String nodeName = e.getNodeName();
+			final VString vKeys = e.getAttributeVector_KElement();
+			final String baseXPath = new XPathHelper(e).buildXPath(base, 1);
+			final String nodeName = e.getNodeName();
 			String prefix = KElement.xmlnsPrefix(nodeName);
 			if (prefix != null)
 			{
-				String uri = e.getNamespaceURI();
+				final String uri = e.getNamespaceURI();
 				map.put("/" + StringUtil.token(baseXPath, 0, "/") + "/@xmlns:" + prefix, uri);
 			}
 			if (vKeys != null)
 			{
-				for (String key : vKeys)
+				for (final String key : vKeys)
 				{
 					if (StringUtil.matches(key, attName))
 					{
@@ -676,7 +673,7 @@ class XPathHelper
 						prefix = KElement.xmlnsPrefix(key);
 						if (prefix != null)
 						{
-							String uri = e.getNamespaceURIFromPrefix(prefix);
+							final String uri = e.getNamespaceURIFromPrefix(prefix);
 							map.put("/" + StringUtil.token(baseXPath, 0, "/") + "/@xmlns:" + prefix, uri);
 						}
 					}
@@ -749,12 +746,12 @@ class XPathHelper
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@,// are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code>
 	 * <code>parentElement/thisElement[2]</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
-	 * @param maxSize 
-	 * @param bLocal 
+	 * @param maxSize
+	 * @param bLocal
 	 * @return VElement the vector of matching elements
 	 * @throws IllegalArgumentException if path is not supported
 	 */
-	VElement getXPathElementVectorInternal(String path, final int maxSize, final boolean bLocal)
+	VElement getXPathElementVectorInternal(final String path, final int maxSize, final boolean bLocal)
 	{
 		return new ElementVectorGetter().getXPathElementVectorInternal(path, maxSize, bLocal);
 	}
@@ -766,12 +763,12 @@ class XPathHelper
 		 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@,// are supported
 		 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code>
 		 * <code>parentElement/thisElement[2]</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
-		 * @param maxSize 
-		 * @param bLocal 
+		 * @param maxSize
+		 * @param bLocal
 		 * @return VElement the vector of matching elements
 		 * @throws IllegalArgumentException if path is not supported
 		 */
-		VElement getXPathElementVectorInternal(String path, final int maxSize, final boolean bLocal)
+		VElement getXPathElementVectorInternal(final String path, final int maxSize, final boolean bLocal)
 		{
 			if (path == null)
 			{
@@ -797,7 +794,7 @@ class XPathHelper
 			int posBAt = posB0;
 			if (posB0 >= 0)
 			{
-				char next = path.charAt(posB0 + 1);
+				final char next = path.charAt(posB0 + 1);
 				if (next < '0' || next > '9')
 				{
 					posB0 = -1;
@@ -836,7 +833,7 @@ class XPathHelper
 
 				iSkip--;
 				bExplicitSkip = true;
-				String childName = path.substring(0, posB0);
+				final String childName = path.substring(0, posB0);
 				newPath = childName + path.substring(posB1 + 1);
 				pos = newPath.indexOf(JDFCoreConstants.SLASH);
 			}
@@ -851,7 +848,7 @@ class XPathHelper
 			if (pos != -1) // have another element
 			{
 				final String elmName = newPath.substring(0, pos);
-				VElement ve = getLocalElements(bLocal, newPath, map, elmName, iSkip);
+				final VElement ve = getLocalElements(bLocal, newPath, map, elmName, iSkip);
 				if (ve == null || ve.size() == 0)
 				{
 					return null;
@@ -862,7 +859,7 @@ class XPathHelper
 				for (int i = iFirst; i < iLast; i++) // loop in case multiple elements contain the same attribute
 				{
 					final KElement ee = ve.item(i);
-					VElement eRet = new XPathHelper(ee).getXPathElementVectorInternal(newPath.substring(pos + 1), maxSize, true);
+					final VElement eRet = new XPathHelper(ee).getXPathElementVectorInternal(newPath.substring(pos + 1), maxSize, true);
 					if (eRet != null)
 					{
 						vRet.addAll(eRet);
@@ -892,7 +889,7 @@ class XPathHelper
 			return vRet;
 		}
 
-		private VElement getLocalElements(final boolean bLocal, String newPath, JDFAttributeMap map, final String elmName, int iSkip)
+		private VElement getLocalElements(final boolean bLocal, final String newPath, final JDFAttributeMap map, final String elmName, final int iSkip)
 		{
 			VElement ve;
 			if (bLocal)
@@ -903,7 +900,7 @@ class XPathHelper
 				}
 				else
 				{
-					KElement e = theElement.getElement_KElement(elmName, null, iSkip);
+					final KElement e = theElement.getElement_KElement(elmName, null, iSkip);
 					if (e == null)
 					{
 						ve = null;
@@ -926,7 +923,7 @@ class XPathHelper
 			return ve;
 		}
 
-		private VElement doExplicitSkip(VElement vRet, int iSkip, String newPath)
+		private VElement doExplicitSkip(final VElement vRet, final int iSkip, final String newPath)
 		{
 			final KElement e = theElement.getElement_KElement(newPath, null, iSkip);
 			if (e == null)
@@ -938,7 +935,7 @@ class XPathHelper
 			return vRet;
 		}
 
-		private VElement evaluateDot(String path, final int maxSize, VElement vRet)
+		private VElement evaluateDot(final String path, final int maxSize, final VElement vRet)
 		{
 			if (path.startsWith(".//"))
 			{
@@ -995,7 +992,7 @@ class XPathHelper
 			return vRet;
 		}
 
-		private VElement evaluateSlash(String path, final int maxSize)
+		private VElement evaluateSlash(final String path, final int maxSize)
 		{
 			if (path.startsWith("//"))
 			{
@@ -1024,18 +1021,18 @@ class XPathHelper
 		}
 	}
 
-	VElement getPathVector(String newPath, JDFAttributeMap map, boolean create)
+	VElement getPathVector(final String newPath, final JDFAttributeMap map, final boolean create)
 	{
-		VElement v = theElement.getChildElementVector_KElement(newPath, null, null, true, 0);
+		final VElement v = theElement.getChildElementVector_KElement(newPath, null, null, true, 0);
 		VElement vRet = new VElement();
 		if (v != null && v.size() > 0)
 		{
 			if (map != null && map.size() > 0)
 			{
-				VString keys = map.getKeys();
-				for (String key : keys)
+				final VString keys = map.getKeys();
+				for (final String key : keys)
 				{
-					for (KElement e : v)
+					for (final KElement e : v)
 					{
 						if (e.getXPathAttribute(key, "").equals(map.get(key)))
 						{
@@ -1051,9 +1048,9 @@ class XPathHelper
 		}
 		else if (map != null && create)
 		{
-			VString keys = map.getKeys();
-			KElement e = theElement.appendElement(newPath);
-			for (String key : keys)
+			final VString keys = map.getKeys();
+			final KElement e = theElement.appendElement(newPath);
+			for (final String key : keys)
 			{
 				new XPathHelper(e).setXPathValue(key, map.get(key));
 			}

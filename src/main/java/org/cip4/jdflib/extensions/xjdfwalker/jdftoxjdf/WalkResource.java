@@ -127,8 +127,8 @@ public class WalkResource extends WalkJDFElement
 	protected void moveAttribsToBase(final KElement xjdf, final KElement newResLeaf)
 	{
 		final boolean bRoot = isRootXJDFResource(xjdf);
-		VString resAttribs = JDFToXJDFDataCache.getResAttribs();
-		for (String attrib : resAttribs)
+		final VString resAttribs = JDFToXJDFDataCache.getResAttribs();
+		for (final String attrib : resAttribs)
 		{
 			if (newResLeaf.hasAttribute(attrib))
 			{
@@ -154,6 +154,22 @@ public class WalkResource extends WalkJDFElement
 		final String localName = xjdf == null ? null : xjdf.getLocalName();
 		final boolean bRoot = XJDFConstants.Intent.equals(localName) || "Parameter".equals(localName) || XJDFConstants.Resource.equals(localName);
 		return bRoot;
+	}
+
+	/**
+	 *
+	 * @param eNew
+	 * @param details
+	 * @param key
+	 * @param oldKey
+	 */
+	protected void moveToDetails(final KElement eNew, final String details, final String key, final String oldKey)
+	{
+		final String val = eNew.getNonEmpty(key);
+		if (val != null)
+		{
+			eNew.getCreateElement(details).moveAttribute(key, eNew, oldKey, null, null);
+		}
 	}
 
 	/**
@@ -190,7 +206,7 @@ public class WalkResource extends WalkJDFElement
 		EnumResourceClass resourceClass = r.getResourceClass();
 		if (resourceClass == null)
 		{
-			KElement r2 = new JDFDoc(r.getLocalName()).getRoot();
+			final KElement r2 = new JDFDoc(r.getLocalName()).getRoot();
 			if (r2 instanceof JDFResource)
 			{
 				r2.init();

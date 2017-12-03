@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,125 +70,75 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement.EnumNamedColor;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.extensions.ResourceHelper;
-import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.extensions.XJDFHelper;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
  *
- * @author rainer prosi
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class MiscConsumableMaker
+public class WalkChannelBindingParams extends WalkResource
 {
-	private final ResourceHelper ph;
-
-	private ResourceHelper miscPart;
-
 	/**
 	 *
-	 * @param ph the source partition
 	 */
-	MiscConsumableMaker(final ResourceHelper ph)
+	public WalkChannelBindingParams()
 	{
 		super();
-		this.ph = ph;
-		miscPart = null;
 	}
 
 	/**
-	 *
-	 * @param consumableType
-	 * @param processUsage TODO
-	 * @return
-	 */
-	public ResourceHelper create(final String consumableType, String processUsage)
-	{
-		final XJDFHelper helper = ph.getXJDF();
-		if (helper == null)
-		{
-			return null;
-		}
-		if (processUsage == null)
-		{
-			processUsage = consumableType;
-		}
-		final SetHelper miscSet = helper.getCreateSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, processUsage);
-		miscPart = miscSet.getCreateVPartition(ph.getPartMapVector(), true);
-		miscPart.getResource().setAttribute(AttributeName.TYPE, consumableType);
-		return miscPart;
-	}
-
-	/**
-	 * @see java.lang.Object#toString()
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
 	@Override
-	public String toString()
+	public boolean matches(final KElement toCheck)
 	{
-		return "MiscConsumableMaker [misc=" + miscPart + "]";
+		return !jdfToXJDF.isRetainAll();
 	}
 
 	/**
-	 *
-	 * @param color
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
 	 */
-	public void setColor(final String color)
+	@Override
+	public VString getElementNames()
 	{
-		if (miscPart != null && !StringUtil.isEmpty(color))
-		{
-			miscPart.getCreateResource().setAttribute(AttributeName.COLOR, StringUtil.getNonEmpty(color));
-		}
+		return new VString(ElementName.CHANNELBINDINGPARAMS, null);
 	}
 
 	/**
-	 *
-	 * @param color
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
-	public void setColor(final EnumNamedColor color)
+	@Override
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
-		if (miscPart != null && color != null)
-		{
-			miscPart.getCreateResource().setAttribute(AttributeName.COLOR, color.getName());
-		}
+		map.put(ElementName.BINDINGTYPE, "ChannelBinding");
+		super.updateAttributes(map);
 	}
 
 	/**
-	 *
-	 * @param color
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
 	 */
-	public void setColorDetails(final String color)
+	@Override
+	protected String getXJDFName(final KElement jdf)
 	{
-		if (miscPart != null && !StringUtil.isEmpty(color))
-		{
-			miscPart.getCreateResource().setAttribute(AttributeName.COLORDETAILS, StringUtil.getNonEmpty(color));
-		}
+		return XJDFConstants.LooseBindingParams;
 	}
 
 	/**
-	 *
-	 * @param details
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#setAttributes(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
-	public void setTypeDetails(final String details)
+	@Override
+	protected void setAttributes(final KElement jdf, final KElement eNew)
 	{
-		if (miscPart != null && !StringUtil.isEmpty(details))
-		{
-			miscPart.getCreateResource().setAttribute(XJDFConstants.TypeDetails, StringUtil.getNonEmpty(details));
-		}
+		super.setAttributes(jdf, eNew);
+		moveToDetails(eNew, XJDFConstants.ChannelBindingDetails, AttributeName.CLAMPD, null);
+		moveToDetails(eNew, XJDFConstants.ChannelBindingDetails, AttributeName.CLAMPSIZE, null);
+		moveToDetails(eNew, XJDFConstants.ChannelBindingDetails, XJDFConstants.Cover, AttributeName.CLAMPSYSTEM);
 	}
 
-	/**
-	 *
-	 * @param brand
-	 */
-	public void setBrand(final String brand)
-	{
-		if (miscPart != null && !StringUtil.isEmpty(brand))
-		{
-			miscPart.setBrand(brand);
-		}
-	}
 }

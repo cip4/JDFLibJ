@@ -4688,8 +4688,8 @@ public class KElement extends ElementNSImpl implements Element
 			src = this;
 		}
 
-		final String strSrcAttrib = (srcAttrib == null) || srcAttrib.equals(JDFCoreConstants.EMPTYSTRING) ? attrib : srcAttrib;
-		final String strNameSpace = (srcNameSpaceURI == null) || srcNameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING) ? nameSpaceURI : srcNameSpaceURI;
+		final String strSrcAttrib = StringUtil.isEmpty(srcAttrib) ? attrib : srcAttrib;
+		final String strNameSpace = StringUtil.isEmpty(srcNameSpaceURI) ? nameSpaceURI : srcNameSpaceURI;
 		if (xmlnsPrefix(attrib) != null && nameSpaceURI == null)
 		{
 			final boolean b = src.hasAttribute(strSrcAttrib, strNameSpace, false);

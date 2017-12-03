@@ -83,15 +83,17 @@ public abstract class XJDFConstants
 	public static final String BinderySignatureIDs = "BinderySignatureIDs";
 	public static final String BlowIn = "BlowIn";
 
-	public static final String ChannelCover = "ChannelCover";
+	public static final String ChannelBindingDetails = "ChannelBindingDetails";
 	public static final String ChildProduct = "ChildProduct";
 	public static final String ChildRefs = "ChildRefs";
 	public static final String Coating = "Coating";
+	public static final String CoilBindingDetails = "CoilBindingDetails";
 	public static final String CompanyID = "CompanyID";
 	public static final String ContactType = "ContactType";
 	public static final String Container = "Container";
 	public static final String Content = "Content";
 	public static final String ContentCheckIntent = "ContentCheckIntent";
+	public static final String Cover = "Cover";
 
 	public static final String Dependent = "Dependent";
 	public static final String DROP_ID = "DropID";

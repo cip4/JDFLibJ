@@ -26,7 +26,7 @@ public class MiscConsumableMakerTest
 		ResourceHelper ph = sh.getCreatePartition(null, true);
 		JDFHeadBandApplicationParams hp = (JDFHeadBandApplicationParams) ph.getResource();
 		MiscConsumableMaker m = new MiscConsumableMaker(ph);
-		ResourceHelper misc = m.create("Headband");
+		ResourceHelper misc = m.create("Headband", null);
 		assertEquals(misc.getResource().getAttribute(AttributeName.TYPE), "Headband");
 		assertEquals(misc.getSet().getProcessUsage(), "Headband");
 	}
@@ -43,7 +43,7 @@ public class MiscConsumableMakerTest
 		JDFHeadBandApplicationParams hp = (JDFHeadBandApplicationParams) ph.getResource();
 		hp.setTopBrand("b1");
 		MiscConsumableMaker m = new MiscConsumableMaker(ph);
-		ResourceHelper misc = m.create("Headband");
+		ResourceHelper misc = m.create("Headband", null);
 		m.setBrand("b1");
 		assertEquals(misc.getBrand(), "b1");
 	}
@@ -61,7 +61,7 @@ public class MiscConsumableMakerTest
 		hp.setTopBrand("b1");
 		hp.setTopColor(EnumNamedColor.Black);
 		MiscConsumableMaker m = new MiscConsumableMaker(ph);
-		ResourceHelper misc = m.create("Headband");
+		ResourceHelper misc = m.create("Headband", null);
 		m.setColor("Black");
 		assertEquals(misc.getResource().getAttribute(AttributeName.COLOR), "Black");
 	}

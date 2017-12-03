@@ -81,13 +81,13 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	@Test
 	public void testAmountsNull()
 	{
-		XJDFHelper h = new XJDFHelper("a", "p", null);
-		SetHelper sni = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
-		ResourceHelper pi = sni.getCreatePartition(null, true);
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
+		final SetHelper sni = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
+		final ResourceHelper pi = sni.getCreatePartition(null, true);
 		pi.setAmount(42, null, true);
 		pi.setAmount(2, null, false);
 
-		PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
 		assertNull(h.getRoot().getXPathAttribute("AuditPool/AuditResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
 	}
@@ -98,13 +98,13 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	@Test
 	public void testAmounts()
 	{
-		XJDFHelper h = new XJDFHelper("a", "p", null);
-		SetHelper sni = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
-		ResourceHelper pi = sni.getCreatePartition(null, true);
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
+		final SetHelper sni = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
+		final ResourceHelper pi = sni.getCreatePartition(null, true);
 		pi.setAmount(42, null, true);
 		pi.getAmountPool().getPartAmount(0).setActualAmount(66);
 
-		PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
 		assertEquals(h.getRoot().getXPathAttribute("AuditPool/AuditResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null), "66");
 
@@ -116,9 +116,9 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	@Test
 	public void testAuditPool()
 	{
-		XJDFHelper h = new XJDFHelper("a", "p", null);
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		h.setXPathValue("AuditPool/AuditCreated/@ID", "42");
-		PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
 		assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated"));
 		assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated/Header"));
@@ -131,9 +131,9 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	@Test
 	public void testHeadbandStrip()
 	{
-		XJDFHelper h = new XJDFHelper("a", "p", null);
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		h.appendResourceSet(ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input).appendPartition(null, true).getResource().setAttribute(AttributeName.STRIPMATERIAL, "b1");
-		PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
 		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "BackStrip").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails), "b1");
 	}
@@ -144,11 +144,11 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	@Test
 	public void testHeadbandColor()
 	{
-		XJDFHelper h = new XJDFHelper("a", "p", null);
-		KElement band = h.appendResourceSet(ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input).appendPartition(null, true).getResource();
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
+		final KElement band = h.appendResourceSet(ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input).appendPartition(null, true).getResource();
 		band.setAttribute(AttributeName.TOPCOLOR, "Black");
 		band.setAttribute(AttributeName.TOPBRAND, "b1");
-		PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
 		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getResource().getAttribute(AttributeName.COLOR), "Black");
 		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getBrand(), "b1");
@@ -158,16 +158,30 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testThreadsewMaterial()
+	{
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
+		final KElement tsp = h.appendResourceSet(ElementName.THREADSEWINGPARAMS, EnumUsage.Input).appendPartition(null, true).getResource();
+		tsp.setAttribute(AttributeName.CASTINGMATERIAL, "cm");
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.walkTree(h.getRoot(), null);
+		assertEquals("cm", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Thread").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testAuditOrder()
 	{
-		XJDFHelper h = new XJDFHelper("a", "p", null);
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
 		h.setXPathValue("AuditPool/AuditCreated/@ID", "42");
 		h.setXPathValue("AuditPool/AuditCreated/Foo/@Bar", "foo");
-		PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
 		assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated"));
-		KElement head = h.getRoot().getXPathElement("AuditPool/AuditCreated/Header");
-		KElement foo = h.getRoot().getXPathElement("AuditPool/AuditCreated/Foo");
+		final KElement head = h.getRoot().getXPathElement("AuditPool/AuditCreated/Header");
+		final KElement foo = h.getRoot().getXPathElement("AuditPool/AuditCreated/Foo");
 		assertEquals(head.getNextSibling(), foo);
 	}
 
@@ -177,11 +191,11 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	@Test
 	public void testHeaderMessageOrder()
 	{
-		KElement x = new JDFDoc(XJDFConstants.XJMF, EnumVersion.Version_2_0).getRoot();
-		KElement c = x.appendElement("CommandSubmitQueueEntry");
-		KElement h = c.appendElement(XJDFConstants.Header);
-		KElement h2 = c.appendElement(XJDFConstants.AssemblingIntent);
-		PostXJDFWalker w = new PostXJDFWalker((JDFElement) x);
+		final KElement x = new JDFDoc(XJDFConstants.XJMF, EnumVersion.Version_2_0).getRoot();
+		final KElement c = x.appendElement("CommandSubmitQueueEntry");
+		final KElement h = c.appendElement(XJDFConstants.Header);
+		final KElement h2 = c.appendElement(XJDFConstants.AssemblingIntent);
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) x);
 		w.walkTree(x, null);
 		assertEquals(c.getElement(null), h);
 		assertEquals(h.getNextSibling(), h2);

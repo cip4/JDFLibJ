@@ -114,6 +114,7 @@ import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
+import org.cip4.jdflib.resource.process.postpress.JDFThreadSewingParams;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -129,7 +130,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 * if true merge stripping and layout
 	 */
 	private boolean mergeLayout;
-	protected JDFElement newRoot;
+	protected XJDFHelper newRootHelper;
 	/**
 	 * if false, intents are never partitioned
 	 */
@@ -461,7 +462,7 @@ class PostXJDFWalker extends BaseElementWalker
 		{
 			if (partAmount.getDeepParent(ElementName.AUDITPOOL, 0) == null && partAmount.getDeepParent(XJDFConstants.XJMF, 0) == null)
 			{
-				final AuditPoolHelper ah = new AuditPoolHelper(newRoot.getCreateElement(ElementName.AUDITPOOL));
+				final AuditPoolHelper ah = newRootHelper.getCreateAuditPool();
 				final KElement resource = partAmount.getDeepParent(XJDFConstants.Resource, 0);
 				final ResourceHelper ph = resource == null ? null : new ResourceHelper(resource);
 				final SetHelper sh = ph == null ? null : ph.getSet();
@@ -719,8 +720,7 @@ class PostXJDFWalker extends BaseElementWalker
 				return strippingParams; // nuff done
 			}
 			//TODO multiple lower level stripparams partitions
-			final XJDFHelper h = new XJDFHelper(newRoot);
-			final SetHelper layoutseth = h.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+			final SetHelper layoutseth = newRootHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
 
 			final VJDFAttributeMap vmap = new ResourceHelper(strippingParams.getParentNode_KElement()).getPartMapVector();
 			JDFAttributeMap map = vmap.size() == 0 ? null : vmap.get(0);
@@ -1287,6 +1287,7 @@ class PostXJDFWalker extends BaseElementWalker
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			final KElement ret = super.walk(xjdf, dummy);
+			moveToMisconsumable(xjdf);
 			xjdf.eraseEmptyNodes(true);
 			if (xjdf.getFirstChild() == null && xjdf.getAttributeMap().size() == 0)
 			{
@@ -1295,6 +1296,12 @@ class PostXJDFWalker extends BaseElementWalker
 			}
 			return ret;
 		}
+
+		void moveToMisconsumable(final KElement xjdf)
+		{
+			// nop hook
+		}
+
 	}
 
 	/**
@@ -1363,7 +1370,11 @@ class PostXJDFWalker extends BaseElementWalker
 			return ret;
 		}
 
-		private void moveToSet(final KElement xjdf)
+		/**
+		 *
+		 * @param xjdf
+		 */
+		void moveToSet(final KElement xjdf)
 		{
 			final KElement set = xjdf.getParentNode_KElement();
 			if (set != null && xjdf.hasNonEmpty(AttributeName.UNIT))
@@ -1472,6 +1483,7 @@ class PostXJDFWalker extends BaseElementWalker
 			xjdf.removeAttribute(AttributeName.ID);
 			super.updateAttributes(xjdf);
 		}
+
 	}
 
 	/**
@@ -1481,7 +1493,7 @@ class PostXJDFWalker extends BaseElementWalker
 	PostXJDFWalker(final JDFElement newRoot)
 	{
 		super(new BaseWalkerFactory());
-		this.newRoot = newRoot;
+		newRootHelper = new XJDFHelper(newRoot);
 		bDeliveryIntent = false;
 		bIntentPartition = false;
 		mergeLayout = true;
@@ -1892,27 +1904,25 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
 		 */
 		@Override
-		public KElement walk(final KElement xjdf, final KElement dummy)
+		void moveToMisconsumable(final KElement xjdf)
+		{
+			moveHeadBand(xjdf);
+			moveBackStrip(xjdf);
+		}
+
+		private void moveHeadBand(final KElement xjdf)
 		{
 			final JDFHeadBandApplicationParams hap = (JDFHeadBandApplicationParams) xjdf;
-			final String mat = hap.getNonEmpty(AttributeName.STRIPMATERIAL);
-			if (mat != null)
-			{
-				final MiscConsumableMaker mm = new MiscConsumableMaker(ResourceHelper.getHelper(xjdf));
-				mm.create("BackStrip");
-				mm.setTypeDetails(mat);
-				hap.removeAttribute(AttributeName.STRIPMATERIAL);
-			}
 			final String col = hap.getNonEmpty(AttributeName.TOPCOLOR);
 			final String brand = hap.getNonEmpty(AttributeName.TOPBRAND);
 			if (col != null || brand != null)
 			{
 				//TODO worry about top and bottom
 				final MiscConsumableMaker mm = new MiscConsumableMaker(ResourceHelper.getHelper(xjdf));
-				mm.create("HeadBand");
+				mm.create("HeadBand", null);
 				mm.setColor(col);
 				mm.setColorDetails(hap.getNonEmpty(AttributeName.TOPCOLORDETAILS));
 				mm.setBrand(brand);
@@ -1924,9 +1934,151 @@ class PostXJDFWalker extends BaseElementWalker
 				hap.removeAttribute(AttributeName.BOTTOMBRAND);
 
 			}
-			return super.walk(xjdf, dummy);
 		}
 
+		private void moveBackStrip(final KElement xjdf)
+		{
+			final JDFHeadBandApplicationParams hap = (JDFHeadBandApplicationParams) xjdf;
+			final String mat = hap.getNonEmpty(AttributeName.STRIPMATERIAL);
+			if (mat != null)
+			{
+				final MiscConsumableMaker mm = new MiscConsumableMaker(ResourceHelper.getHelper(xjdf));
+				mm.create("BackStrip", null);
+				mm.setTypeDetails(mat);
+				hap.removeAttribute(AttributeName.STRIPMATERIAL);
+			}
+		}
+
+	}
+
+	/**
+	 *
+	 * @author rainer prosi
+	 *
+	 */
+	public class WalkThreadSewingParams extends WalkResourceElement
+	{
+		/**
+		 *
+		 */
+		public WalkThreadSewingParams()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return !isRetainAll() && (toCheck instanceof JDFThreadSewingParams);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ElementName.THREADSEWINGPARAMS, null);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
+		 */
+		@Override
+		void moveToMisconsumable(final KElement xjdf)
+		{
+			final JDFThreadSewingParams tsp = (JDFThreadSewingParams) xjdf;
+			final String core = tsp.getNonEmpty(AttributeName.COREMATERIAL);
+			final String cast = core == null ? tsp.getNonEmpty(AttributeName.CASTINGMATERIAL) : core;
+			if (cast != null)
+			{
+				final MiscConsumableMaker mm = new MiscConsumableMaker(ResourceHelper.getHelper(xjdf));
+				mm.create("Thread", null);
+				mm.setTypeDetails(cast);
+				tsp.removeAttribute(AttributeName.COREMATERIAL);
+				tsp.removeAttribute(AttributeName.CASTINGMATERIAL);
+			}
+		}
+
+	}
+
+	public class WalkLooseBindindingParams extends WalkResourceElement
+	{
+
+		/**
+		 *
+		 */
+		public WalkLooseBindindingParams()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return !isRetainAll();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(XJDFConstants.LooseBindingParams, null);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
+		 */
+		@Override
+		void moveToMisconsumable(final KElement xjdf)
+		{
+			final MiscConsumableMaker mm = new MiscConsumableMaker(ResourceHelper.getHelper(xjdf));
+			final String typ = xjdf.getAttribute(ElementName.BINDINGTYPE);
+			if ("CoilBinding".equals(typ))
+			{
+				moveFromCoil(xjdf, mm);
+			}
+			else if ("ChannelBinding".equals(typ))
+			{
+				moveFromChannel(xjdf, mm);
+			}
+		}
+
+		private void moveFromCoil(final KElement xjdf, final MiscConsumableMaker mm)
+		{
+			mm.create("Coil", "Spine");
+			mm.setTypeDetails(xjdf.getNonEmpty(AttributeName.MATERIAL));
+			mm.setColor(xjdf.getNonEmpty(AttributeName.COLOR));
+			mm.setColorDetails(xjdf.getNonEmpty(AttributeName.COLORDETAILS));
+			mm.setBrand(xjdf.getNonEmpty(AttributeName.BRAND));
+			xjdf.removeAttribute(AttributeName.MATERIAL);
+			xjdf.removeAttribute(AttributeName.COLOR);
+			xjdf.removeAttribute(AttributeName.COLORDETAILS);
+			xjdf.removeAttribute(AttributeName.BRAND);
+		}
+
+		private void moveFromChannel(final KElement xjdf, final MiscConsumableMaker mm)
+		{
+			mm.create("ChannelBinder", "Spine");
+			mm.setColor(xjdf.getNonEmpty(AttributeName.CLAMPCOLOR));
+			mm.setColorDetails(xjdf.getNonEmpty(AttributeName.CLAMPCOLORDETAILS));
+			mm.setBrand(xjdf.getNonEmpty(AttributeName.BRAND));
+			xjdf.removeAttribute(AttributeName.CLAMPCOLOR);
+			xjdf.removeAttribute(AttributeName.CLAMPCOLORDETAILS);
+			xjdf.removeAttribute(AttributeName.BRAND);
+		}
 	}
 
 	/**
@@ -2133,6 +2285,6 @@ class PostXJDFWalker extends BaseElementWalker
 	public String toString()
 	{
 		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll
-				+ ", removeSignatureName=" + removeSignatureName + ", newRoot=" + newRoot + "]";
+				+ ", removeSignatureName=" + removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
 	}
 }

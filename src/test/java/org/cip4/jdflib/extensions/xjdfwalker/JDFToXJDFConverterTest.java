@@ -96,6 +96,7 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumNamedColor;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFNodeInfo;
@@ -110,6 +111,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
+import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
@@ -121,6 +123,7 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFCoilBindingParams;
 import org.cip4.jdflib.resource.JDFHoleLine;
 import org.cip4.jdflib.resource.JDFInsert;
 import org.cip4.jdflib.resource.JDFInterpretingParams;
@@ -154,6 +157,7 @@ import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
+import org.cip4.jdflib.resource.process.postpress.JDFChannelBindingParams;
 import org.cip4.jdflib.resource.process.postpress.JDFGlue;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
@@ -1658,6 +1662,85 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(node);
 		assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@Test
+	public void testCoilBindingParams()
+	{
+		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setType(EnumType.CoilBinding);
+		final JDFCoilBindingParams cbp = (JDFCoilBindingParams) node.getCreateResource(ElementName.COILBINDINGPARAMS, EnumUsage.Input, null);
+		cbp.setColor(EnumNamedColor.Red);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(node);
+		assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
+		assertNull(new XJDFHelper(xjdf).getSet(ElementName.COILBINDINGPARAMS, 0));
+		assertNotNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@Test
+	public void testCoilBindingMisc()
+	{
+		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setType(EnumType.CoilBinding);
+		final JDFCoilBindingParams cbp = (JDFCoilBindingParams) node.getCreateResource(ElementName.COILBINDINGPARAMS, EnumUsage.Input, null);
+		cbp.setColor(EnumNamedColor.Red);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(node);
+		assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
+		assertNull(new XJDFHelper(xjdf).getSet(ElementName.COILBINDINGPARAMS, 0));
+		assertNotNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
+		final SetHelper set = new XJDFHelper(xjdf).getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Spine");
+		assertNotNull(set);
+		assertEquals("Red", set.getPartition(0).getResource().getAttribute(AttributeName.COLOR));
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@Test
+	public void testChannellBindingMisc()
+	{
+		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setType(EnumType.ChannelBinding);
+		final JDFChannelBindingParams cbp = (JDFChannelBindingParams) node.getCreateResource(ElementName.CHANNELBINDINGPARAMS, EnumUsage.Input, null);
+		cbp.setClampColor(EnumNamedColor.Red);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(node);
+		assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
+		assertNull(new XJDFHelper(xjdf).getSet(ElementName.CHANNELBINDINGPARAMS, 0));
+		assertNotNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
+		final SetHelper set = new XJDFHelper(xjdf).getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Spine");
+		assertNotNull(set);
+		assertEquals("Red", set.getPartition(0).getResource().getAttribute(AttributeName.COLOR));
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@Test
+	public void testCoilBindingDetails()
+	{
+		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setType(EnumType.CoilBinding);
+		final JDFCoilBindingParams cbp = (JDFCoilBindingParams) node.getCreateResource(ElementName.COILBINDINGPARAMS, EnumUsage.Input, null);
+		cbp.setDiameter(42);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(node);
+		assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
+		assertNull(new XJDFHelper(xjdf).getSet(ElementName.COILBINDINGPARAMS, 0));
+		assertNotNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
+		assertEquals("42", new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0).getPartition(0).getXPathValue("LooseBindingParams/CoilBindingDetails/@Diameter"));
 	}
 
 	/**
