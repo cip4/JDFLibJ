@@ -114,6 +114,7 @@ import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
+import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
 import org.cip4.jdflib.resource.process.postpress.JDFThreadSewingParams;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
@@ -2002,6 +2003,63 @@ class PostXJDFWalker extends BaseElementWalker
 				mm.setTypeDetails(cast);
 				tsp.removeAttribute(AttributeName.COREMATERIAL);
 				tsp.removeAttribute(AttributeName.CASTINGMATERIAL);
+			}
+		}
+
+	}
+
+	/**
+	 *
+	 * @author rainer prosi
+	 *
+	 */
+	public class WalkStitchingParams extends WalkResourceElement
+	{
+		/**
+		 *
+		 */
+		public WalkStitchingParams()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return !isRetainAll();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ElementName.STITCHINGPARAMS, null);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
+		 */
+		@Override
+		void moveToMisconsumable(final KElement xjdf)
+		{
+			final JDFStitchingParams sp = (JDFStitchingParams) xjdf;
+			final String brand = sp.getNonEmpty(AttributeName.WIREBRAND);
+			if (brand != null)
+			{
+				final MiscConsumableMaker mm = new MiscConsumableMaker(ResourceHelper.getHelper(xjdf));
+				mm.create("Wire", null);
+				mm.setBrand(brand);
+				final String gauge = sp.getNonEmpty(AttributeName.WIREGAUGE);
+				mm.setTypeDetails(gauge);
+				sp.removeAttribute(AttributeName.WIREBRAND);
+				sp.removeAttribute(AttributeName.WIREGAUGE);
 			}
 		}
 

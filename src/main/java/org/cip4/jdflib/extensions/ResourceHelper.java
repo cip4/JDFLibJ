@@ -92,7 +92,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	/**
 	 * @param partition
 	 */
-	public ResourceHelper(KElement partition)
+	public ResourceHelper(final KElement partition)
 	{
 		super();
 		this.theElement = partition;
@@ -107,7 +107,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 		if (toCheck == null)
 			return false;
 		final KElement parent = toCheck.getParentNode_KElement();
-		String setName = SetHelper.getSetName(parent);
+		final String setName = SetHelper.getSetName(parent);
 		return toCheck.getLocalName().equals(setName);
 	}
 
@@ -115,7 +115,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 * @param toCheck
 	 * @return true if toCheck is an asset (Resource, Parameter...)
 	 */
-	public static boolean isAsset(final KElement toCheck, String resName)
+	public static boolean isAsset(final KElement toCheck, final String resName)
 	{
 		if (isAsset(toCheck))
 		{
@@ -124,7 +124,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 				return true;
 			}
 			final KElement parent = toCheck.getParentNode_KElement();
-			String name = parent.getAttribute("Name");
+			final String name = parent.getAttribute("Name");
 			return name.equals(resName);
 		}
 		return false;
@@ -148,7 +148,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 * @param res the element to parseeither a "Resource" or a resource element
 	 * @return the helper
 	 */
-	public static ResourceHelper getHelper(KElement res)
+	public static ResourceHelper getHelper(final KElement res)
 	{
 		if (isAsset(res))
 			return new ResourceHelper(res);
@@ -163,11 +163,11 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	@Override
 	public VJDFAttributeMap getPartMapVector()
 	{
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
-		VElement vParts = theElement.getChildElementVector(ElementName.PART, null);
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final VElement vParts = theElement.getChildElementVector(ElementName.PART, null);
 		if (vParts != null)
 		{
-			for (KElement e : vParts)
+			for (final KElement e : vParts)
 				vMap.add(e.getAttributeMap());
 			if (vParts.size() == 0)
 				vMap.add(new JDFAttributeMap());
@@ -181,7 +181,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 */
 	public JDFAttributeMap getPartMap()
 	{
-		JDFPart part = (JDFPart) theElement.getElement(ElementName.PART);
+		final JDFPart part = (JDFPart) theElement.getElement(ElementName.PART);
 		return part == null ? new JDFAttributeMap() : part.getAttributeMap();
 	}
 
@@ -189,13 +189,13 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 *
 	 * @param map the partmap to set the part element
 	 */
-	public void setPartMap(JDFAttributeMap map)
+	public void setPartMap(final JDFAttributeMap map)
 	{
 		if (getPartMapVector().size() > 0)
 		{
 			theElement.removeChildren(ElementName.PART, null, null);
 		}
-		JDFPart part = (JDFPart) theElement.getCreateElement(ElementName.PART);
+		final JDFPart part = (JDFPart) theElement.getCreateElement(ElementName.PART);
 		part.setAttributes(map);
 	}
 
@@ -205,12 +205,12 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 * @param value
 	 * @return this - useful for lazy chaining
 	 */
-	public ResourceHelper ensurePart(String key, String value)
+	public ResourceHelper ensurePart(final String key, final String value)
 	{
 		if (StringUtil.getNonEmpty(value) != null)
 		{
-			VJDFAttributeMap partMapVector = getPartMapVector();
-			JDFAttributeMap newMap = new JDFAttributeMap(key, value);
+			final VJDFAttributeMap partMapVector = getPartMapVector();
+			final JDFAttributeMap newMap = new JDFAttributeMap(key, value);
 			if (partMapVector.overlapsMap(newMap))
 			{
 				partMapVector.put(key, value);
@@ -228,12 +228,12 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 *
 	 * @param vPart the vector of partmaps to set the part element
 	 */
-	public void setPartMapVector(VJDFAttributeMap vPart)
+	public void setPartMapVector(final VJDFAttributeMap vPart)
 	{
 		theElement.removeChildrenByClass(JDFPart.class);
-		if (vPart != null)
+		if (vPart != null && vPart.maxSize() > 0)
 		{
-			for (JDFAttributeMap part : vPart)
+			for (final JDFAttributeMap part : vPart)
 			{
 				appendPartMap(part);
 			}
@@ -246,7 +246,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 */
 	public void appendPartMapVector(VJDFAttributeMap vPart)
 	{
-		VJDFAttributeMap vexisting = getPartMapVector();
+		final VJDFAttributeMap vexisting = getPartMapVector();
 		if (vexisting != null)
 		{
 			vPart = vPart.clone();
@@ -254,7 +254,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 		}
 		if (vPart != null && vPart.size() > 0)
 		{
-			for (JDFAttributeMap part : vPart)
+			for (final JDFAttributeMap part : vPart)
 			{
 				appendPartMap(part);
 			}
@@ -265,7 +265,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 *
 	 * @param part
 	 */
-	public void appendPartMap(JDFAttributeMap part)
+	public void appendPartMap(final JDFAttributeMap part)
 	{
 		final KElement p = theElement.appendElement(ElementName.PART, null);
 		p.setAttributes(part);
@@ -290,7 +290,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	{
 		if (map == null)
 			map = new JDFAttributeMap();
-		VJDFAttributeMap vm = getPartMapVector();
+		final VJDFAttributeMap vm = getPartMapVector();
 		return vm.contains(map);
 	}
 
@@ -318,7 +318,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 */
 	public SetHelper getSet()
 	{
-		KElement parent = theElement.getParentNode_KElement();
+		final KElement parent = theElement.getParentNode_KElement();
 		if (parent != null && parent.getNodeName().equals(theElement.getNodeName() + "Set"))
 			return new SetHelper(parent);
 		return null;
@@ -339,7 +339,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 * @param moreMap
 	 * @param bGood
 	 */
-	public void setAmount(double amount, JDFAttributeMap moreMap, boolean bGood)
+	public void setAmount(final double amount, final JDFAttributeMap moreMap, final boolean bGood)
 	{
 		final JDFAmountPool ap = getCreateAmountPool();
 		final JDFPartAmount pa0 = ap.getCreatePartAmount(new VJDFAttributeMap(moreMap));
@@ -351,8 +351,8 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 */
 	public KElement getResource()
 	{
-		KElement set = theElement.getParentNode_KElement();
-		String name = set != null ? set.getAttribute(AttributeName.NAME, null, null) : null;
+		final KElement set = theElement.getParentNode_KElement();
+		final String name = set != null ? set.getAttribute(AttributeName.NAME, null, null) : null;
 		if (name != null)
 		{
 			return theElement.getElement(name);
@@ -375,8 +375,8 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 */
 	public KElement getCreateResource()
 	{
-		KElement set = theElement.getParentNode_KElement();
-		String name = set != null ? set.getAttribute(AttributeName.NAME, null, null) : null;
+		final KElement set = theElement.getParentNode_KElement();
+		final String name = set != null ? set.getAttribute(AttributeName.NAME, null, null) : null;
 		if (name != null)
 			return theElement.getCreateElement(name);
 		return null;
@@ -418,7 +418,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getAttribute(java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public String getAttribute(String attrib, String nameSpaceURI, String def)
+	public String getAttribute(final String attrib, final String nameSpaceURI, final String def)
 	{
 		return getRoot().getAttribute(attrib, nameSpaceURI, def);
 	}
@@ -427,7 +427,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getRealAttribute(java.lang.String, java.lang.String, double)
 	 */
 	@Override
-	public double getRealAttribute(String attName, String namespace, double def)
+	public double getRealAttribute(final String attName, final String namespace, final double def)
 	{
 		return def;
 	}
@@ -436,7 +436,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#hasAttribute(java.lang.String)
 	 */
 	@Override
-	public boolean hasAttribute(String attName)
+	public boolean hasAttribute(final String attName)
 	{
 		return StringUtil.getNonEmpty(getAttribute(attName, null, null)) != null;
 	}
@@ -454,7 +454,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#setAttribute(java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void setAttribute(String attrib, String value, String nameSpaceURI)
+	public void setAttribute(final String attrib, final String value, final String nameSpaceURI)
 	{
 		getRoot().setAttribute(attrib, value, nameSpaceURI);
 	}
@@ -472,7 +472,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 *
 	 * @param brand
 	 */
-	public void setBrand(String brand)
+	public void setBrand(final String brand)
 	{
 		setAttribute(AttributeName.BRAND, brand);
 	}
@@ -490,7 +490,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 *
 	 * @param externalID
 	 */
-	public void setExternalID(String externalID)
+	public void setExternalID(final String externalID)
 	{
 		setAttribute(XJDFConstants.ExternalID, externalID);
 	}
@@ -508,7 +508,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 *
 	 * @param available
 	 */
-	public void setStatus(EnumResStatus status)
+	public void setStatus(final EnumResStatus status)
 	{
 		if (EnumResStatus.Available.equals(status) || EnumResStatus.Unavailable.equals(status))
 			setAttribute(AttributeName.STATUS, status.getName());

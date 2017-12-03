@@ -414,6 +414,7 @@ public class WalkXJDFResource extends WalkXElement
 			part.setSignatureName(signatureName);
 		}
 		p.remove(AttributeName.PRODUCTPART);
+		p.remove(AttributeName.DROPID);
 		p.remove(XJDFConstants.ProcessTypes);
 		p.renameKey(AttributeName.METADATA, AttributeName.METADATA0);
 

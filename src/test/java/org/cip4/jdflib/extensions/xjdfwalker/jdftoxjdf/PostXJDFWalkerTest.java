@@ -172,6 +172,21 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testStitchGauge()
+	{
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
+		final KElement tsp = h.appendResourceSet(ElementName.STITCHINGPARAMS, EnumUsage.Input).appendPartition(null, true).getResource();
+		tsp.setAttribute(AttributeName.WIREGAUGE, "42");
+		tsp.setAttribute(AttributeName.WIREBRAND, "wb");
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.walkTree(h.getRoot(), null);
+		assertEquals("42", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Wire").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testAuditOrder()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
