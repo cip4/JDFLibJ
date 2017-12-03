@@ -91,14 +91,14 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		 *
 		 * @param i
 		 */
-		WaitRunner(int i)
+		WaitRunner(final int i)
 		{
 			super();
 			this.i = i;
 			t = 100;
 		}
 
-		WaitRunner(int i, int t)
+		WaitRunner(final int i, final int t)
 		{
 			super();
 			this.i = i;
@@ -115,7 +115,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		public void run()
 		{
 			log.info("queued: " + i);
-			boolean b = ThreadUtil.sleep(t);
+			final boolean b = ThreadUtil.sleep(t);
 			log.info(b + " waited: " + i);
 		}
 	}
@@ -127,7 +127,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	@Test
 	public void testInterruptMulti()
 	{
-		OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi", 3);
+		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi", 3);
 		for (int i = 0; i < 10; i++)
 			q.queue(new WaitRunner(i, 1000));
 
@@ -159,7 +159,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	@Test
 	public void testInterruptTask()
 	{
-		MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multi2", 3);
+		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multi2", 3);
 		WaitRunner task = null;
 		for (int i = 0; i < 3; i++)
 		{
@@ -184,7 +184,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	@Test
 	public void test3Entry()
 	{
-		OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test");
+		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test");
 		assertEquals(q.getAvQueue(), 0);
 		assertTrue(q.queue(new WaitRunner(1)));
 		assertTrue(q.queue(new WaitRunner(2)));
@@ -204,7 +204,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	@Test
 	public void testStop()
 	{
-		OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test2");
+		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test2");
 		assertTrue(q.queue(new WaitRunner(1)));
 		q.shutDown();
 		ThreadUtil.sleep(1);
@@ -218,10 +218,10 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	@Test
 	public void testInterruptCurrent()
 	{
-		OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test333");
+		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test333");
 		assertTrue(q.queue(new WaitRunner(1, 10000)));
 		assertTrue(q.queue(new WaitRunner(2, 10000)));
-		ThreadUtil.sleep(200);
+		ThreadUtil.sleep(420);
 		log.info(q);
 		assertFalse(q.interruptCurrent(2000));
 		log.info(q);
@@ -242,7 +242,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	@Test
 	public void testStopOne()
 	{
-		OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test4");
+		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test4");
 		assertTrue(q.queue(new WaitRunner(1)));
 		OrderedTaskQueue.shutDown("test4");
 		ThreadUtil.sleep(1);
@@ -256,7 +256,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	@Test
 	public void testStopAll()
 	{
-		OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test4");
+		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test4");
 		assertTrue(q.queue(new WaitRunner(1)));
 		OrderedTaskQueue.shutDownAll();
 		ThreadUtil.sleep(1);
