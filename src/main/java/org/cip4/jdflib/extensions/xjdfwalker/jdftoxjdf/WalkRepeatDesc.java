@@ -78,7 +78,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class WalkRepeatDesc extends WalkJDFElement
+public class WalkRepeatDesc extends WalkJDFSubElement
 {
 	/**
 	 *
