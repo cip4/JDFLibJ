@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.node;
 
@@ -101,9 +101,9 @@ public class LinkValidator
 	private LinkInfoMap theMap;
 
 	/**
-	 * 
+	 *
 	 */
-	LinkValidator(JDFNode n)
+	LinkValidator(final JDFNode n)
 	{
 		this.node = n;
 		validatorMap = LinkValidatorMap.getLinkValidatorMap();
@@ -112,19 +112,19 @@ public class LinkValidator
 
 	/**
 	 * definition of resource link names in the JDF namespace
-	 * 
+	 *
 	 * @return String list of resource names that may be linked
 	 */
 	VString linkNames()
 	{
 		final EnumType typ = EnumType.getEnum(node.getType());
-		VString vTypes = node.getTypes();
+		final VString vTypes = node.getTypes();
 		return validatorMap.getLinkNames(typ, vTypes);
 	}
 
 	/**
 	 * definition of resource link usage, cardinality and ProcessUsage in the JDF namespace
-	 * 
+	 *
 	 * @return String list of resource information usages that may be linked
 	 */
 	LinkInfoMap getLinkInfoMap()
@@ -132,7 +132,7 @@ public class LinkValidator
 		if (theMap == null)
 		{
 			final EnumType typ = EnumType.getEnum(node.getType());
-			VString vTypes = node.getTypes();
+			final VString vTypes = node.getTypes();
 			theMap = validatorMap.getLinkInfoMap(typ, vTypes);
 		}
 		return theMap;
@@ -140,11 +140,11 @@ public class LinkValidator
 
 	/**
 	 * typesafe validator utility
-	 * 
+	 *
 	 * @param level validation level
 	 * @param nMax max. size of the returned vector
 	 * @return vector of invalid Link names
-	 * 
+	 *
 	 * @default getInvalidLinks (ValidationLevel_Complete, Integer.MAX_VALUE)
 	 */
 	VString getInvalidLinks(final EnumValidationLevel level, final int nMax)
@@ -155,7 +155,7 @@ public class LinkValidator
 		final VElement vLinks = linkPool == null ? null : linkPool.getPoolChildren(null, null, null);
 		if (vLinks != null)
 		{
-			for (KElement link : vLinks)
+			for (final KElement link : vLinks)
 			{
 				final JDFResourceLink rl = (JDFResourceLink) link;
 				if (!isValidLink(level, rl))
@@ -175,18 +175,18 @@ public class LinkValidator
 
 	/**
 	 * get a vector of Link names that may be inserted in this element if the links need a processusage, the format is LinkName:ProcessUsage
-	 * 
+	 *
 	 * @param nMax maximum size of the returned vector
 	 * @return vector of strings that contains insertable link names
 	 */
 	VString getInsertLinkVector(final int nMax)
 	{
-		LinkInfoMap map = getLinkInfoMap();
+		final LinkInfoMap map = getLinkInfoMap();
 		final VString vInsert = new VString();
-		Vector<String> resNames = ContainerUtil.getKeyVector(map);
-		for (String resName : resNames)
+		final Vector<String> resNames = ContainerUtil.getKeyVector(map);
+		for (final String resName : resNames)
 		{
-			LinkInfo li = map.get(resName);
+			final LinkInfo li = map.get(resName);
 
 			for (int j = 0; j < li.size(); j++)
 			{
@@ -217,22 +217,22 @@ public class LinkValidator
 
 	/**
 	 * definition of resource link usage, cardinality and ProcessUsage in the JDF namespace for one index
-	 * 
+	 *
 	 * @param namIndex index of the named list, if<0 tokenize all
 	 * @return list of resource process usages that may be linked
 	 */
-	VString vLinkInfo(String name)
+	VString vLinkInfo(final String name)
 	{
 		final LinkInfoMap linkInfoMap = getLinkInfoMap();
 		if (linkInfoMap == null)
 		{
 			return null;
 		}
-		Collection<LinkInfo> linkInfos = linkInfoMap.values();
-		VString v = new VString();
+		final Collection<LinkInfo> linkInfos = linkInfoMap.values();
+		final VString v = new VString();
 		if (name == null)
 		{
-			for (LinkInfo li : linkInfos)
+			for (final LinkInfo li : linkInfos)
 			{
 				v.add(li.getString());
 			}
@@ -251,14 +251,14 @@ public class LinkValidator
 
 	/**
 	 * isValidLink check whether an index is legal for this class
-	 * 
+	 *
 	 * @param level the checking level
 	 * @param rl the JDFResourceLink to check
 	 * @return true if valid
 	 */
 	boolean isValidLink(final EnumValidationLevel level, final JDFResourceLink rl)
 	{
-		EnumUsage usage = rl == null ? null : rl.getUsage();
+		final EnumUsage usage = rl == null ? null : rl.getUsage();
 		if (usage == null)
 		{
 			return false;
@@ -269,15 +269,15 @@ public class LinkValidator
 			return true;
 		}
 
-		String nam = rl.getLinkedResourceName();
-		String procU = StringUtil.getNonEmpty(rl.getProcessUsage());
+		final String nam = rl.getLinkedResourceName();
+		final String procU = StringUtil.getNonEmpty(rl.getProcessUsage());
 		return isValidLink(nam, usage, procU);
 	}
 
 	/**
 	 * get the links that match the typesafe resource name if the Resource type is not defined for the process represented by this node see chapter 6 JDFSpec,
 	 * then the links are ignored
-	 * 
+	 *
 	 * @param resName of the resource to remove
 	 * @param bLink if false, returns the linked resources, else if true, returns the ResourceLink elements
 	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
@@ -299,16 +299,16 @@ public class LinkValidator
 			return rlp.getInOutLinks(null, bLink, resName, null);
 		}
 
-		LinkInfo li = map.getStar(resName);
+		final LinkInfo li = map.getStar(resName);
 		if (li == null)
 			return null;
 
 		if (processUsage != null && processUsage.getValue() > EnumProcessUsage.AnyOutput.getValue())
 		{
-			boolean pu = li.hasProcessUsage(processUsage.getName());
+			final boolean pu = li.hasProcessUsage(processUsage.getName());
 			if (pu)
 			{
-				EnumUsage usage = li.getUsage(processUsage.getName());
+				final EnumUsage usage = li.getUsage(processUsage.getName());
 				vE = rlp.getInOutLinks(usage, bLink, resName, processUsage);
 			}
 		}
@@ -370,7 +370,7 @@ public class LinkValidator
 	/**
 	 * get a vector of Link names that are missing in this element<br>
 	 * if the links need a processusage, the format is LinkName:ProcessUsage
-	 * 
+	 *
 	 * @param nMax maximum size of the returned vector
 	 * @return VString vector of strings that contains missing Link names
 	 */
@@ -388,10 +388,10 @@ public class LinkValidator
 		}
 
 		final VString vMissing = new VString();
-		Vector<String> names = ContainerUtil.getKeyVector(liMap);
-		for (String nam : names)
+		final Vector<String> names = ContainerUtil.getKeyVector(liMap);
+		for (final String nam : names)
 		{
-			LinkInfo li = liMap.get(nam);
+			final LinkInfo li = liMap.get(nam);
 			if (li.isRequired(null))
 			{
 				for (int i = 0; i < li.size(); i++)
@@ -422,21 +422,21 @@ public class LinkValidator
 
 	/**
 	 * Append a resource that matches the typesafe link described by resource name
-	 * 
+	 *
 	 * @param resource the resource to link
 	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @param partMap the Attribute map of parts
 	 * @return the new link, null if failure
-	 * 
+	 *
 	 * @default linkMatchingResource(resource, processUsage, null)
 	 */
 	JDFResourceLink linkMatchingResource(final JDFResource resource, final EnumProcessUsage processUsage, final JDFAttributeMap partMap)
 	{
 		final String resName = resource.getLocalName();
-		EnumUsage usage = extractUsage(resName, processUsage);
+		final EnumUsage usage = extractUsage(resName, processUsage);
 		JDFResourceLink rl = node.getLink(resource, usage);
-		boolean exists = rl != null;
-		String sProcessUsage = extractProcessUsage(processUsage);
+		final boolean exists = rl != null;
+		final String sProcessUsage = extractProcessUsage(processUsage);
 		if (rl == null)
 		{
 			rl = node.ensureLink(resource, usage, null);
@@ -457,11 +457,11 @@ public class LinkValidator
 	}
 
 	/**
-	 * 
+	 *
 	 * @param processUsage
 	 * @return
 	 */
-	private String extractProcessUsage(EnumProcessUsage processUsage)
+	private String extractProcessUsage(final EnumProcessUsage processUsage)
 	{
 		if (processUsage == null)
 			return null;
@@ -471,12 +471,12 @@ public class LinkValidator
 	}
 
 	/**
-	 * 
+	 *
 	 * @param name
 	 * @param processUsage
 	 * @return
 	 */
-	private EnumUsage extractUsage(String name, EnumProcessUsage processUsage)
+	private EnumUsage extractUsage(final String name, final EnumProcessUsage processUsage)
 	{
 		if (EnumProcessUsage.AnyInput.equals(processUsage))
 			return EnumUsage.Input;
@@ -485,7 +485,7 @@ public class LinkValidator
 
 		for (int i = 0; i < 2; i++)
 		{
-			LinkInfo info = getLinkInfo(name, i == 1);
+			final LinkInfo info = getLinkInfo(name, i == 1);
 			if (info != null && info.size() > 0)
 			{
 				EnumUsage ret = null;
@@ -506,9 +506,9 @@ public class LinkValidator
 		return null;
 	}
 
-	private LinkInfo getLinkInfo(String name, boolean checkStar)
+	private LinkInfo getLinkInfo(final String name, final boolean checkStar)
 	{
-		LinkInfoMap map = getLinkInfoMap();
+		final LinkInfoMap map = getLinkInfoMap();
 		if (map == null)
 			return null;
 		return checkStar ? map.getStar(name) : map.get(name);
@@ -516,12 +516,12 @@ public class LinkValidator
 
 	/**
 	 * get the number of links that match the typesafe link resource name
-	 * 
+	 *
 	 * @param resName name of the resources to match
 	 * @param bLink if false: returns the linked resources, if true: returns the ResourceLink elements
 	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @return int - the number of resourcelink elements
-	 * 
+	 *
 	 * @default numMatchingLinks(resName, true, ProcessUsage_Any.getValue())
 	 */
 	int numMatchingLinks(final String resName, final boolean bLink, final EnumProcessUsage processUsage)
@@ -538,7 +538,7 @@ public class LinkValidator
 	/**
 	 * get the link that matches the typesafe resource name<br>
 	 * if the Resource type is not defined for the process represented by this node, the link is ignored (see JDF Spec Chapter 6)
-	 * 
+	 *
 	 * @param resName name of the resource to remove
 	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @param pos the position of the link (if multiple matching links exist)
@@ -553,13 +553,13 @@ public class LinkValidator
 	/**
 	 * Method AppendMatchingResource. Appends a resource and link it to this if it is listed in the list of valid nodes for for a JDF with the given type also
 	 * creates the matching resource link in this
-	 * 
+	 *
 	 * @param resName the name of the resource to add
 	 * @param processUsage the processUsage of the resourcelink of the resource to add: <li>null EnumProcessUsage.AnyOutput - for input but no processUsage</li>
 	 * <li>EnumProcessUsage.AnyOutput - for output but no processUsage</li>
-	 * 
+	 *
 	 * @param resourceRoot the root JDF node, that is the parent of the resourcepool where the resource should be added. If null, this node is assumed.
-	 * 
+	 *
 	 * @return JDFResource the newly created resource
 	 */
 	JDFResource appendMatchingResource(final String resName, final EnumProcessUsage processUsage, JDFNode resourceRoot)
@@ -567,21 +567,21 @@ public class LinkValidator
 		if (resourceRoot == null)
 			resourceRoot = node;
 		JDFResource r = resourceRoot.addResource(resName, null);
-		JDFResourceLink rl = linkMatchingResource(r, processUsage, null);
+		final JDFResourceLink rl = linkMatchingResource(r, processUsage, null);
 		if (rl == null)
 		{
-			EnumUsage usage = extractUsage(resName, processUsage);
+			final EnumUsage usage = extractUsage(resName, processUsage);
 			boolean mustZapp = usage != null;
 			if (!mustZapp)
 			{
-				LinkInfo li = getLinkInfo(resName, true);
+				final LinkInfo li = getLinkInfo(resName, true);
 				mustZapp = li == null || li.size() == 0;
 				if (!mustZapp)
 				{
-					int maxAllowed = li.maxAllowed(null);
+					final int maxAllowed = li.maxAllowed(null);
 					if (maxAllowed < Integer.MAX_VALUE)
 					{
-						VElement resourceLinks = node.getResourceLinks(resName, null, null);
+						final VElement resourceLinks = node.getResourceLinks(resName, null, null);
 						mustZapp = resourceLinks != null && resourceLinks.size() >= maxAllowed;
 					}
 				}
@@ -596,7 +596,7 @@ public class LinkValidator
 	}
 
 	/**
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -606,21 +606,21 @@ public class LinkValidator
 	}
 
 	/**
-	 * 
+	 *
 	 * @param resName
 	 * @param usage
 	 * @param processUsage
 	 * @return
 	 */
-	boolean isValidLink(String resName, EnumUsage usage, String processUsage)
+	boolean isValidLink(final String resName, final EnumUsage usage, final String processUsage)
 	{
-		LinkInfo li = getLinkInfo(resName, true);
+		final LinkInfo li = getLinkInfo(resName, true);
 		if (li == null)
 		{
 			return false;
 		}
-		JDFAttributeMap uMap = usage == null ? null : new JDFAttributeMap(AttributeName.USAGE, usage);
-		VElement vExist = node.getResourceLinks(resName, uMap, null);
+		final JDFAttributeMap uMap = usage == null ? null : new JDFAttributeMap(AttributeName.USAGE, usage);
+		final VElement vExist = node.getResourceLinks(resName, uMap, null);
 		return li.isValidLink(usage, processUsage, vExist == null ? 0 : vExist.size());
 	}
 }

@@ -5070,9 +5070,6 @@
 
     <xs:element name="RepeatDesc">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="1" minOccurs="0" ref="ShapeDef"/>
-            </xs:sequence>
             <xs:attribute name="AllowedRotate" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
@@ -5089,6 +5086,7 @@
             <xs:attribute name="GutterY2" type="float" use="optional"/>
             <xs:attribute name="LayoutStyle" type="NMTOKENS" use="optional"/>
             <xs:attribute name="OrderQuantity" type="integer" use="optional"/>
+            <xs:attribute name="ShapeDefRef" type="IDREF" use="required"/>
             <xs:attribute name="UseBleed" type="boolean" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>

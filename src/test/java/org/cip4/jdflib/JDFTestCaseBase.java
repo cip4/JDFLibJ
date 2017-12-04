@@ -113,6 +113,7 @@ import org.cip4.jdflib.util.logging.LogConfigurator;
 import org.cip4.jdflib.util.net.ProxyUtil;
 import org.cip4.jdflib.util.net.UrlCheck;
 import org.cip4.jdflib.util.thread.RegularJanitor;
+import org.cip4.jdflib.validate.JDFValidator;
 import org.junit.After;
 import org.junit.Before;
 import org.w3c.dom.Comment;
@@ -538,7 +539,12 @@ public abstract class JDFTestCaseBase
 		JDFElement jxRoot = converted.getJDFRoot();
 		if (jxRoot == null)
 			jxRoot = converted.getJMFRoot();
-		assertTrue(fileBase + ".xjdf.jdf", jxRoot.isValid(EnumValidationLevel.Complete));
+		final boolean valid = jxRoot.isValid(EnumValidationLevel.Complete);
+		if (!valid)
+		{
+			new JDFValidator().processSingleDocument(converted);
+		}
+		assertTrue(fileBase + ".xjdf.jdf", valid);
 
 		final XJDF20 xjdfConv = new XJDF20();
 		final KElement root = xjdfConv.convert(jxRoot);

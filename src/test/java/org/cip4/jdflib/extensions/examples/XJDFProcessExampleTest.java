@@ -68,22 +68,14 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
-import java.util.Vector;
-
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
-import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -91,8 +83,10 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
-import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.resource.process.JDFConvertingConfig;
+import org.cip4.jdflib.resource.process.JDFDieLayoutProductionParams;
+import org.cip4.jdflib.resource.process.JDFRepeatDesc;
+import org.cip4.jdflib.resource.process.JDFShapeDef;
 import org.junit.Test;
 
 /**
@@ -168,6 +162,42 @@ public class XJDFProcessExampleTest extends JDFTestCaseBase
 		qpr.getResource().setAttribute(AttributeName.SAMPLEINTERVAL, "42");
 		cleanSnippets(xjdfHelper);
 		writeRoundTripX(xjdfHelper.getRoot(), "QualityControlCxF");
+
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public final void testDieLayoutProd()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper("Die1", null, null);
+		xjdfHelper.addType(EnumType.DieLayoutProduction.getName(), 0);
+
+		final ResourceHelper sd0 = xjdfHelper.getCreateSet(ElementName.SHAPEDEF, null).getCreatePartition(0, true);
+		final JDFShapeDef sd = (JDFShapeDef) sd0.getResource();
+		sd.getCreateFileSpec().setURL("file://myserver/myshare/olive.dd3");
+		final SetHelper dlp = xjdfHelper.getCreateSet(ElementName.DIELAYOUTPRODUCTIONPARAMS, EnumUsage.Input);
+		final ResourceHelper dlpr = dlp.appendPartition(null, true);
+		final JDFDieLayoutProductionParams dlpp = (JDFDieLayoutProductionParams) dlpr.getResource();
+		JDFConvertingConfig cc = dlpp.appendConvertingConfig();
+		cc.setAttribute(XJDFConstants.SheetHeightMax, "2200");
+		cc.setAttribute(XJDFConstants.SheetHeightMin, "2200");
+		cc.setAttribute(XJDFConstants.SheetWidthMax, "2800");
+		cc.setAttribute(XJDFConstants.SheetWidthMin, "2800");
+		cc = dlpp.appendConvertingConfig();
+		cc.setAttribute(XJDFConstants.SheetHeightMax, "2500");
+		cc.setAttribute(XJDFConstants.SheetHeightMin, "2500");
+		cc.setAttribute(XJDFConstants.SheetWidthMax, "3400");
+		cc.setAttribute(XJDFConstants.SheetWidthMin, "3400");
+
+		final JDFRepeatDesc rd = dlpp.appendRepeatDesc();
+		rd.setAttribute("ShapeDefRef", sd0.ensureID());
+		rd.setLayoutStyle("StraightNest");
+		xjdfHelper.getCreateSet(ElementName.DIELAYOUT, EnumUsage.Output).getCreatePartition(0, true).setAttribute(AttributeName.DESCRIPTIVENAME, "The die layout");
+		cleanSnippets(xjdfHelper);
+		writeTest(xjdfHelper, "processes/dielayoutproduction.xjdf");
 
 	}
 

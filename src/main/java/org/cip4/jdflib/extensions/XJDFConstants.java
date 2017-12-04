@@ -145,6 +145,10 @@ public abstract class XJDFConstants
 
 	public static final String ShapeDefRef = "ShapeDefRef";
 	public static final String ShapeDimension = "ShapeDimension";
+	public static final String SheetHeightMax = "SheetHeightMax";
+	public static final String SheetHeightMin = "SheetHeightMin";
+	public static final String SheetWidthMax = "SheetWidthMax";
+	public static final String SheetWidthMin = "SheetWidthMin";
 	public static final String StickOn = "StickOn";
 	public static final String SurfaceColor = "SurfaceColor";
 

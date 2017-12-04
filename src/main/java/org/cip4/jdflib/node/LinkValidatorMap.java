@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.node;
 
@@ -92,7 +92,7 @@ public class LinkValidatorMap
 	 */
 	private final HashMap<String, LinkInfoMap> m_LinkInfoMap = new HashMap<String, LinkInfoMap>();
 
-	private final String[] m_GenericLinkInfo = { JDFConstants.INPUT_ZEROTOINFINITY,// APPROVALSUCCESS
+	private final String[] m_GenericLinkInfo = { JDFConstants.INPUT_ZEROTOINFINITY, // APPROVALSUCCESS
 			JDFConstants.INPUT_ZEROTOONE, // COLORPOOL
 			JDFConstants.INPUT_ZEROTOONE, // CUSTOMERINFO
 			JDFConstants.INPUT_ZEROTOINFINITY, // DEVICE
@@ -112,7 +112,7 @@ public class LinkValidatorMap
 
 	/**
 	 * get the singleton validator map
-	 *    
+	 *
 	 * @return
 	 */
 	public static LinkValidatorMap getLinkValidatorMap()
@@ -124,18 +124,18 @@ public class LinkValidatorMap
 
 	/**
 	 * add new entries to m_strGenericLinkNames and m_GenericLinkInfo
-	 * 
+	 *
 	 * @param key key for the new entry
 	 * @param nameAddon value of the new entry in m_strGenericLinkNames
 	 * @param linkAddon value of the new entry in m_GenericLinkInfo
 	 */
 	private void mapPut(final String key, final String nameAddon, final String linkAddon)
 	{
-		LinkInfoMap newMap = new LinkInfoMap();
-		int genericPos = 0;
-		for (String name : m_GenericLinkNames)
+		final LinkInfoMap newMap = new LinkInfoMap();
+		final int genericPos = 0;
+		for (final String name : m_GenericLinkNames)
 		{
-			LinkInfo li = new LinkInfo(m_GenericLinkInfo[genericPos]);
+			final LinkInfo li = new LinkInfo(m_GenericLinkInfo[genericPos]);
 			newMap.put(name, li);
 		}
 
@@ -144,9 +144,9 @@ public class LinkValidatorMap
 		if (vNames != null && vInfos != null && vNames.size() == vInfos.size())
 		{
 			int pos = 0;
-			for (String name : vNames)
+			for (final String name : vNames)
 			{
-				LinkInfo li = new LinkInfo(vInfos.get(pos));
+				final LinkInfo li = new LinkInfo(vInfos.get(pos));
 				newMap.put(name, li);
 				pos++;
 			}
@@ -156,7 +156,7 @@ public class LinkValidatorMap
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private LinkValidatorMap()
 	{
@@ -195,7 +195,7 @@ public class LinkValidatorMap
 		mapPut(EnumType.DBDocTemplateLayout.getName(), ",DBRules,DBSchema,LayoutElement", ",i_,i_,o* i*");
 		mapPut(EnumType.DBTemplateMerging.getName(), ",DBMergeParams,DBSelection,LayoutElement,RunList", ",i_,i_,i*,o_");
 		mapPut(EnumType.DieDesign.getName(), ",DieLayout", ",i_ o+");
-		mapPut(EnumType.DieLayoutProduction.getName(), ",DieLayout,DieLayoutProductionParams", ",i+ o+,i_");
+		mapPut(EnumType.DieLayoutProduction.getName(), ",ShapeDef,DieLayout,DieLayoutProductionParams", ",i+,o+,i_");
 		mapPut(EnumType.DigitalDelivery.getName(), ",DigitalDeliveryParams,RunList", ",i_,o+ i*");
 		mapPut(EnumType.FilmToPlateCopying.getName(), ",DevelopingParams,ExposedMedia,Media,PlateCopyParams", ",i?,o_ i_,i_,i_");
 		mapPut(EnumType.FormatConversion.getName(), ",FormatConversionParams,RunList", ",i_,o_ i_");
@@ -302,8 +302,8 @@ public class LinkValidatorMap
 	// ////////////////////////////////////////////////////////////////////
 	/**
 	 * definition of resource link names in the JDF namespace
-	 * @param typ 
-	 * 
+	 * @param typ
+	 *
 	 * @return String list of resource names that may be linked
 	 */
 	Vector<String> typeLinkNames(final EnumType typ)
@@ -312,7 +312,7 @@ public class LinkValidatorMap
 		{
 			return null;
 		}
-		LinkInfoMap map = m_LinkInfoMap.get(typ.getName());
+		final LinkInfoMap map = m_LinkInfoMap.get(typ.getName());
 		return ContainerUtil.getKeyVector(map);
 	}
 
@@ -332,12 +332,12 @@ public class LinkValidatorMap
 
 	/**
 	 * definition of resource link usage, cardinality and ProcessUsage in the JDF namespace for a given EnumType
-	 * 
+	 *
 	 * @param typeNum EnumType to get LinkInfo for
 	 * @param addStar if true, also get the generic map
 	 * @return String list of resource information usages that may be linked for this EnumType
 	 */
-	LinkInfoMap getTypeMap(final EnumType typeNum, boolean addStar)
+	LinkInfoMap getTypeMap(final EnumType typeNum, final boolean addStar)
 	{
 		LinkInfoMap info = typeNum == null ? null : m_LinkInfoMap.get(typeNum.getName());
 		if (info == null && addStar)
@@ -349,12 +349,12 @@ public class LinkValidatorMap
 	}
 
 	/**
-	 * 
+	 *
 	 * @param typ
 	 * @param vTypes
 	 * @return
 	 */
-	public LinkInfoMap getLinkInfoMap(final EnumType typ, VString vTypes)
+	public LinkInfoMap getLinkInfoMap(final EnumType typ, final VString vTypes)
 	{
 		if (typ == null)
 			return getTypeMap(EnumType.ProcessGroup, false);
@@ -367,7 +367,7 @@ public class LinkValidatorMap
 			}
 			final LinkInfoMap ret = new LinkInfoMap(m_LinkInfoMap.get("*"));
 
-			for (String s : vTypes)
+			for (final String s : vTypes)
 			{
 				EnumType t = EnumType.getEnum(s);
 				if (t == null)
@@ -384,14 +384,14 @@ public class LinkValidatorMap
 	}
 
 	/**
-	 * 
+	 *
 	 * @param typ
 	 * @param vTypes
 	 * @return
 	 */
-	public VString getLinkNames(final EnumType typ, VString vTypes)
+	public VString getLinkNames(final EnumType typ, final VString vTypes)
 	{
-		LinkInfoMap map = getLinkInfoMap(typ, vTypes);
+		final LinkInfoMap map = getLinkInfoMap(typ, vTypes);
 		return new VString(ContainerUtil.getKeyVector(map));
 	}
 

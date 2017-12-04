@@ -87,6 +87,7 @@ import org.cip4.jdflib.elementwalker.RemoveEmpty;
 import org.cip4.jdflib.elementwalker.UnLinkFinder;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFPart;
@@ -123,7 +124,7 @@ class PostConverter
 	 * @param xjdfToJDFImpl
 	 * @param theNode
 	 */
-	PostConverter(XJDFToJDFImpl xjdfToJDFImpl, JDFNode theNode)
+	PostConverter(final XJDFToJDFImpl xjdfToJDFImpl, final JDFNode theNode)
 	{
 		super();
 		this.xjdfToJDFImpl = xjdfToJDFImpl;
@@ -136,8 +137,8 @@ class PostConverter
 	 */
 	void postConvert()
 	{
-		JDFNode root = theNode.getJDFRoot();
-		String type = StringUtil.getNonEmpty(root.getType());
+		final JDFNode root = theNode.getJDFRoot();
+		final String type = StringUtil.getNonEmpty(root.getType());
 		if (type == null || XJDFConstants.Product.equals(type))
 		{
 			mergeProductLinks(theNode, root);
@@ -145,16 +146,17 @@ class PostConverter
 		fixDelivery();
 		new GangCleaner().cleanGangLinks();
 		new ResourceCleaner().cleanResources();
+		new ProcessCleaner().cleanProcesses();
 		new DependencyCleaner().fixDependencies(root);
 
 		new UnLinkFinder().eraseUnlinked(root);
 		xjdfToJDFImpl.firstConvert = false;
 
-		EnsureNSUri fixNS = new EnsureNSUri();
+		final EnsureNSUri fixNS = new EnsureNSUri();
 		fixNS.addNS(null, JDFElement.getSchemaURL());
 		fixNS.walk(root);
 
-		RemoveEmpty re = new RemoveEmpty();
+		final RemoveEmpty re = new RemoveEmpty();
 		re.removEmpty(root);
 	}
 
@@ -169,7 +171,7 @@ class PostConverter
 				links = (VElement) ContainerUtil.addAll(links, theNode.getResourceLinks(ElementName.CUSTOMERINFO, null, null));
 				if (links != null)
 				{
-					for (KElement e : links)
+					for (final KElement e : links)
 					{
 						cleanGangLink(e);
 					}
@@ -182,19 +184,19 @@ class PostConverter
 		 *
 		 * @param e
 		 */
-		private void cleanGangLink(KElement e)
+		private void cleanGangLink(final KElement e)
 		{
-			JDFResourceLink link = (JDFResourceLink) e;
-			VJDFAttributeMap linkMaps = link.getPartMapVector();
+			final JDFResourceLink link = (JDFResourceLink) e;
+			final VJDFAttributeMap linkMaps = link.getPartMapVector();
 			if (linkMaps != null)
 			{
 				linkMaps.reduceMap(new VString(AttributeName.PRODUCTPART, null));
 				if (!linkMaps.isEmpty())
 				{
 					boolean mustZapp = true;
-					for (JDFAttributeMap map : linkMaps)
+					for (final JDFAttributeMap map : linkMaps)
 					{
-						String val = map.get(AttributeName.PRODUCTPART);
+						final String val = map.get(AttributeName.PRODUCTPART);
 						if (theNode.getID().equals(val))
 						{
 							mustZapp = false;
@@ -215,18 +217,18 @@ class PostConverter
 	 */
 	private void fixDelivery()
 	{
-		JDFDeliveryParams dp = (JDFDeliveryParams) theNode.getResource(ElementName.DELIVERYPARAMS, EnumUsage.Input, 0);
-		VString allTypes = theNode.getAllTypes();
+		final JDFDeliveryParams dp = (JDFDeliveryParams) theNode.getResource(ElementName.DELIVERYPARAMS, EnumUsage.Input, 0);
+		final VString allTypes = theNode.getAllTypes();
 		if (dp != null && allTypes.contains(XJDFConstants.Product))
 		{
 			boolean keepDI = theNode.getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0) != null;
-			JDFDeliveryIntent di = (JDFDeliveryIntent) theNode.getCreateResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
+			final JDFDeliveryIntent di = (JDFDeliveryIntent) theNode.getCreateResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
 			keepDI = di.setFromDeliveryParams(dp) || keepDI;
 			if (!keepDI)
 				di.deleteNode();
 
 			boolean keepADI = theNode.getResource(ElementName.ARTDELIVERYINTENT, EnumUsage.Input, 0) != null;
-			JDFArtDeliveryIntent adi = (JDFArtDeliveryIntent) theNode.getCreateResource(ElementName.ARTDELIVERYINTENT, EnumUsage.Input, 0);
+			final JDFArtDeliveryIntent adi = (JDFArtDeliveryIntent) theNode.getCreateResource(ElementName.ARTDELIVERYINTENT, EnumUsage.Input, 0);
 			keepADI = adi.setFromDeliveryParams(dp) || keepADI;
 			if (!keepADI)
 				adi.deleteNode();
@@ -235,6 +237,76 @@ class PostConverter
 		}
 	}
 
+	class ProcessCleaner
+	{
+
+		/**
+		 * @param theNode
+		 */
+		void cleanProcesses()
+		{
+			final VString types = theNode.getAllTypes();
+			if (getFixType(types) != null)
+			{
+				cleanProcess(getFixType(types));
+			}
+		}
+
+		private void cleanProcess(final String fixType)
+		{
+			final String resName = getRes(fixType);
+			final EnumUsage usage = getUsage(fixType);
+			if (theNode.getLink(resName, usage, null) == null)
+			{
+				final VElement v = theNode.getChildrenByTagName(resName, null, null, false, true, 0);
+				if (v != null)
+				{
+					for (final KElement e : v)
+					{
+						final JDFResource r = (JDFResource) e;
+						if (r.isResourceRootRoot())
+						{
+							theNode.ensureLink(r, usage, null);
+						}
+					}
+				}
+			}
+
+		}
+
+		private String getRes(final String fixType)
+		{
+			if (EnumType.DieLayoutProduction.getName().equals(fixType))
+			{
+				return ElementName.SHAPEDEF;
+			}
+			return null;
+		}
+
+		private EnumUsage getUsage(final String fixType)
+		{
+			if (EnumType.DieLayoutProduction.getName().equals(fixType))
+			{
+				return EnumUsage.Input;
+			}
+			return null;
+		}
+
+		private String getFixType(final VString types)
+		{
+			if (types != null && types.contains(EnumType.DieLayoutProduction.getName()))
+			{
+				return EnumType.DieLayoutProduction.getName();
+			}
+			return null;
+		}
+	}
+
+	/**
+	 *
+	 * @author rainer prosi
+	 *
+	 */
 	class ResourceCleaner
 	{
 		/**
@@ -242,10 +314,10 @@ class PostConverter
 		 */
 		void cleanResources()
 		{
-			VElement vRes = collectResources();
+			final VElement vRes = collectResources();
 			if (vRes != null)
 			{
-				for (KElement rr : vRes)
+				for (final KElement rr : vRes)
 				{
 					cleanResource(rr);
 				}
@@ -261,10 +333,10 @@ class PostConverter
 		private VElement collectResources()
 		{
 			JDFNode n = theNode;
-			VElement vRes = new VElement();
+			final VElement vRes = new VElement();
 			while (n != null)
 			{
-				JDFResourcePool rp = n.getResourcePool();
+				final JDFResourcePool rp = n.getResourcePool();
 				final VElement v = rp == null ? null : rp.getPoolChildren(null, null, null);
 				vRes.addAll(v);
 				n = n.getParentJDF();
@@ -277,7 +349,7 @@ class PostConverter
 		 *
 		 * @param eRoot
 		 */
-		private void cleanResource(KElement eRoot)
+		private void cleanResource(final KElement eRoot)
 		{
 			final JDFResource resRoot = (JDFResource) eRoot;
 			if (resRoot != null)
@@ -287,7 +359,7 @@ class PostConverter
 				{
 					resRoot.setResStatus(s, false);
 				}
-				String localName = resRoot.getLocalName();
+				final String localName = resRoot.getLocalName();
 				if (ElementName.COLORPOOL.equals(localName))
 				{
 					cleanColorPool(resRoot);
@@ -297,15 +369,15 @@ class PostConverter
 					cleanPageList(resRoot);
 				}
 				cleanLeaf(resRoot, false);
-				VElement leaves = resRoot.getLeaves(true);
-				for (KElement leaf : leaves)
+				final VElement leaves = resRoot.getLeaves(true);
+				for (final KElement leaf : leaves)
 				{
 					leaf.removeChildrenByClass(JDFPart.class);
 				}
 			}
 		}
 
-		private void cleanLeaf(KElement elem, boolean cleanMe)
+		private void cleanLeaf(final KElement elem, final boolean cleanMe)
 		{
 			if (cleanMe)
 			{
@@ -322,12 +394,12 @@ class PostConverter
 
 		private void cleanPageList(final JDFResource r)
 		{
-			String id = r.getID();
-			JDFPageList pl = (JDFPageList) r;
-			Collection<JDFPageData> vpd = pl.getAllPageData();
+			final String id = r.getID();
+			final JDFPageList pl = (JDFPageList) r;
+			final Collection<JDFPageData> vpd = pl.getAllPageData();
 			if (vpd != null)
 			{
-				for (JDFPageData pd : vpd)
+				for (final JDFPageData pd : vpd)
 				{
 					pd.removeChildrenByClass(JDFPart.class);
 				}
@@ -335,12 +407,12 @@ class PostConverter
 
 			if (StringUtil.getNonEmpty(id) != null)
 			{
-				VElement v = theNode.getRoot().getChildrenByTagName_KElement(null, null, new JDFAttributeMap(AttributeName.RREF, id), false, false, 0);
+				final VElement v = theNode.getRoot().getChildrenByTagName_KElement(null, null, new JDFAttributeMap(AttributeName.RREF, id), false, false, 0);
 				if (v != null)
 				{
-					for (KElement e : v)
+					for (final KElement e : v)
 					{
-						String name = e.getLocalName();
+						final String name = e.getLocalName();
 						if ("ContentRef".equals(name))
 						{
 							e.renameElement("PageListRef", null);
@@ -358,13 +430,13 @@ class PostConverter
 			}
 		}
 
-		private void fixLayoutElementProductionParams(KElement lopp)
+		private void fixLayoutElementProductionParams(final KElement lopp)
 		{
-			JDFPageList pl = (JDFPageList) lopp.getElement(ElementName.PAGELIST);
-			Collection<JDFPageData> vpd = pl.getAllPageData();
-			for (JDFPageData pd : vpd)
+			final JDFPageList pl = (JDFPageList) lopp.getElement(ElementName.PAGELIST);
+			final Collection<JDFPageData> vpd = pl.getAllPageData();
+			for (final JDFPageData pd : vpd)
 			{
-				KElement ren = lopp.moveElement(pd, null).renameElement(ElementName.LAYOUTELEMENTPART, null);
+				final KElement ren = lopp.moveElement(pd, null).renameElement(ElementName.LAYOUTELEMENTPART, null);
 				lopp.copyElement(ren, ren);
 				ren.deleteNode();
 			}
@@ -378,24 +450,24 @@ class PostConverter
 		 */
 		private void cleanColorPool(final JDFResource r)
 		{
-			String id = r.getID();
-			JDFColorPool cp = (JDFColorPool) r;
-			Collection<JDFColor> vc = cp.getAllColor();
+			final String id = r.getID();
+			final JDFColorPool cp = (JDFColorPool) r;
+			final Collection<JDFColor> vc = cp.getAllColor();
 			if (vc != null)
 			{
-				for (JDFColor c : vc)
+				for (final JDFColor c : vc)
 				{
 					fixColor(c);
 				}
 			}
 			if (StringUtil.getNonEmpty(id) != null)
 			{
-				VElement v = theNode.getRoot().getChildrenByTagName_KElement(null, null, new JDFAttributeMap("rRef", id), false, false, 0);
+				final VElement v = theNode.getRoot().getChildrenByTagName_KElement(null, null, new JDFAttributeMap("rRef", id), false, false, 0);
 				if (v != null)
 				{
-					for (KElement e : v)
+					for (final KElement e : v)
 					{
-						String name = e.getLocalName();
+						final String name = e.getLocalName();
 						if ("ColorRef".equals(name))
 						{
 							e.renameElement("ColorPoolRef", null);
@@ -417,21 +489,21 @@ class PostConverter
 			}
 		}
 
-		private void fixColor(JDFColor c)
+		private void fixColor(final JDFColor c)
 		{
 			c.removeChildrenByClass(JDFPart.class);
-			String actual = c.getActualColorName();
-			String name = c.getName();
+			final String actual = c.getActualColorName();
+			final String name = c.getName();
 			if (!name.equals(actual))
 			{
 				c.setName(actual);
-				VElement v = theNode.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.SEPARATION, name), false, true, 0);
-				for (KElement e : v)
+				final VElement v = theNode.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.SEPARATION, name), false, true, 0);
+				for (final KElement e : v)
 				{
 					e.setAttribute(AttributeName.SEPARATION, actual);
 				}
-				VElement w = theNode.getChildrenByTagName(ElementName.SEPARATIONSPEC, null, new JDFAttributeMap(AttributeName.NAME, name), false, true, 0);
-				for (KElement e : w)
+				final VElement w = theNode.getChildrenByTagName(ElementName.SEPARATIONSPEC, null, new JDFAttributeMap(AttributeName.NAME, name), false, true, 0);
+				for (final KElement e : w)
 				{
 					e.setAttribute(AttributeName.NAME, actual);
 				}
@@ -445,12 +517,12 @@ class PostConverter
 		 *
 		 * @param root
 		 */
-		private void fixDependencies(JDFNode root)
+		private void fixDependencies(final JDFNode root)
 		{
-			Vector<JDFDependencies> vDep = root.getChildrenByClass(JDFDependencies.class, true, 0);
+			final Vector<JDFDependencies> vDep = root.getChildrenByClass(JDFDependencies.class, true, 0);
 			if (vDep == null)
 				return;
-			for (JDFDependencies dep : vDep)
+			for (final JDFDependencies dep : vDep)
 			{
 				fixOneDependencies(dep);
 			}
@@ -461,25 +533,25 @@ class PostConverter
 		 *
 		 * @param dep
 		 */
-		private void fixOneDependencies(JDFDependencies dep)
+		private void fixOneDependencies(final JDFDependencies dep)
 		{
 			if (dep == null)
 				return;
-			VElement v = dep.getChildElementVector_KElement("RunListRef", null, null, true, 0);
+			final VElement v = dep.getChildElementVector_KElement("RunListRef", null, null, true, 0);
 			if (v == null)
 				return;
-			for (KElement e : v)
+			for (final KElement e : v)
 			{
-				JDFRefElement rl = (JDFRefElement) e;
+				final JDFRefElement rl = (JDFRefElement) e;
 				rl.renameElement("LayoutElementRef", null);
-				JDFResource root = rl.getTargetRoot();
+				final JDFResource root = rl.getTargetRoot();
 				if (root != null)
 				{
-					VElement vR = root.getLeaves(true);
+					final VElement vR = root.getLeaves(true);
 					VElement v2 = root.getLinksAndRefs(true, false);
 					if (v2 != null)
 					{
-						for (KElement rl2 : v2)
+						for (final KElement rl2 : v2)
 						{
 							rl2.renameElement("LayoutElementLink", null);
 						}
@@ -487,14 +559,14 @@ class PostConverter
 					v2 = root.getLinksAndRefs(false, true);
 					if (v2 != null)
 					{
-						for (KElement rl2 : v2)
+						for (final KElement rl2 : v2)
 						{
 							rl2.renameElement("LayoutElementRef", null);
 						}
 					}
-					for (KElement r : vR)
+					for (final KElement r : vR)
 					{
-						JDFLayoutElement loe = (r instanceof JDFRunList) ? ((JDFRunList) r).getLayoutElement() : null;
+						final JDFLayoutElement loe = (r instanceof JDFRunList) ? ((JDFRunList) r).getLayoutElement() : null;
 						if (loe != null)
 						{
 							r.moveElements(loe.getChildElementVector_KElement(null, null, null, true, 0), null);
@@ -506,6 +578,7 @@ class PostConverter
 				}
 			}
 		}
+
 	}
 
 	@Override
@@ -551,7 +624,7 @@ class PostConverter
 			return;
 
 		mergeProductLink(childNode, parentProduct, ElementName.CUSTOMERINFO, EnumUsage.Input);
-		JDFResource ni = mergeProductLink(childNode, parentProduct, ElementName.NODEINFO, EnumUsage.Input);
+		final JDFResource ni = mergeProductLink(childNode, parentProduct, ElementName.NODEINFO, EnumUsage.Input);
 		if (ni == null)
 		{
 			parentProduct.appendNodeInfo().setDescriptiveName("Generated root NodeInfo");
