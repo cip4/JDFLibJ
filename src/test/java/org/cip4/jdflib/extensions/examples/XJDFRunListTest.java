@@ -104,17 +104,19 @@ public class XJDFRunListTest extends JDFTestCaseBase
 		final SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Input);
 		final JDFRunList rl1 = (JDFRunList) shRL.appendPartition(new JDFAttributeMap(AttributeName.RUN, "r1"), true).getResource();
 		rl1.setNPage(2);
-		rl1.setXPathAttribute("FileSpec/@URL", "file1.pdf");
+		rl1.setXPathAttribute("FileSpec/@URL", "file:///indir/file1.pdf");
 		final JDFRunList rl2 = (JDFRunList) shRL.appendPartition(new JDFAttributeMap(AttributeName.RUN, "r2"), true).getResource();
 		rl2.setNPage(8);
-		rl2.setXPathAttribute("FileSpec/@URL", "file2.pdf");
+		rl2.setXPathAttribute("FileSpec/@URL", "file:///indir/file2.pdf");
 
-		final SetHelper shNI = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
-		shNI.removePartitions();
-		final ResourceHelper rh = shNI.appendPartition(new JDFAttributeMap(AttributeName.RUNINDEX, "0 0"), true);
+		final SetHelper shOut = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Output);
+		shOut.removePartitions();
+		final ResourceHelper rh = shOut.appendPartition(new JDFAttributeMap(AttributeName.RUNINDEX, "0 0"), true);
 		rh.appendPartMap(new JDFAttributeMap(AttributeName.RUNINDEX, "3 6"));
+		final JDFRunList rlo = (JDFRunList) rh.getResource();
+		rl2.setXPathAttribute("FileSpec/@URL", "file:///outdir/output.pdf");
 		xjdfHelper.cleanUp();
-		setSnippet(shNI, true);
+		setSnippet(shOut, true);
 		setSnippet(shRL, true);
 		writeTest(xjdfHelper, "resources/filteringPartsofaRunList.xjdf");
 	}
