@@ -75,22 +75,18 @@ import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.Test;
@@ -100,74 +96,75 @@ import org.junit.Test;
  * @author rainer prosi
  *
  */
-public class XJDFProcessExampleTest extends JDFTestCaseBase
+public class XJDFAdditionalExampleTest extends JDFTestCaseBase
 {
 	/**
 	*
 	*
 	*/
 	@Test
-	public final void testCombined()
+	public final void testSeparationSplit()
 	{
-		final XJDFHelper xjdfHelper = new XJDFHelper("CombinedExample", null, null);
-		xjdfHelper.addType(EnumType.Interpreting.getName(), 0);
-		xjdfHelper.addType(EnumType.Rendering.getName(), -1);
-		xjdfHelper.addType(EnumType.DigitalPrinting.getName(), -1);
-
-		cleanSnippets(xjdfHelper);
-		writeTest(xjdfHelper, "processes/CombinedExample.xjdf");
-	}
-
-	/**
-	*
-	*
-	*/
-	@Test
-	public void testDrops()
-	{
-		final XJDFHelper xjdfHelper = new XJDFHelper("splitDelivery", null, null);
-		xjdfHelper.setTypes(JDFConstants.PRODUCT);
-		final ProductHelper product = xjdfHelper.getCreateRootProduct(0);
-		product.setAmount(30);
-		product.setProductType("Book");
-		product.setID("IDBook");
-		final SetHelper shc = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.CONTACT, EnumUsage.Input);
-		final SetHelper shdp = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.DELIVERYPARAMS, EnumUsage.Input);
-		for (int i = 1; i < 3; i++)
-		{
-			final JDFAttributeMap map = new JDFAttributeMap("DropID", "Drop" + i);
-			final ResourceHelper rhdp = shdp.getCreatePartition(map, true);
-			final KElement dropItem = rhdp.getResource().appendElement(ElementName.DROPITEM);
-			dropItem.setAttribute(AttributeName.AMOUNT, "" + (i * 10));
-			dropItem.setAttribute(XJDFConstants.ItemRef, product.getID());
-			map.put(XJDFConstants.ContactType, EnumContactType.Delivery.getName());
-			final ResourceHelper rhc = shc.getCreatePartition(map, true);
-			rhc.getResource().appendElement(ElementName.ADDRESS).setAttribute(AttributeName.CITY, "city" + i);
-			rhc.getResource().appendElement(ElementName.PERSON).setAttribute(AttributeName.FIRSTNAME, "Name" + i);
-		}
-
-		cleanSnippets(xjdfHelper);
-		writeTest(xjdfHelper, "processes/deliverydrops.xjdf");
-	}
-
-	/**
-	*
-	*
-	*/
-	@Test
-	public final void testQualityControl()
-	{
-		final XJDFHelper xjdfHelper = new XJDFHelper("QualityControlExample", null, null);
+		final XJDFHelper xjdfHelper = new XJDFHelper("SepSplit", null, null);
 		xjdfHelper.addType(EnumType.ConventionalPrinting.getName(), 0);
-		xjdfHelper.addType(EnumType.QualityControl.getName(), -1);
 
-		xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
-		final SetHelper qqp = xjdfHelper.getCreateSet(ElementName.QUALITYCONTROLPARAMS, EnumUsage.Input);
-		final ResourceHelper qpr = qqp.appendPartition(null, true);
-		qpr.getRoot().appendElement("cc:CxF", "http://colorexchangeformat.com/CxF3-core").setText("CxF data is in here");
-		qpr.getResource().setAttribute(AttributeName.SAMPLEINTERVAL, "42");
+		final SetHelper cp = xjdfHelper.getCreateSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
+		cp.getCreatePartition(null, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.getName());
+
+		final SetHelper pm = xjdfHelper.getCreateSet(ElementName.MEDIA, EnumUsage.Input);
+		final SetHelper dev = xjdfHelper.getCreateSet(ElementName.DEVICE, EnumUsage.Input);
+		final ResourceHelper mediaPart = pm.getCreatePartition(null, true);
+		final JDFMedia plateMedia = (JDFMedia) mediaPart.getResource();
+		plateMedia.setDimensionCM(new JDFXYPair(130, 80));
+		plateMedia.setMediaType(EnumMediaType.Plate);
+
+		final SetHelper compH = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
+		final ResourceHelper compR = compH.getCreatePartition(0, true);
+
+		final SetHelper xmH = xjdfHelper.getCreateSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
+		final SetHelper colorH = xjdfHelper.getCreateSet(ElementName.COLOR, EnumUsage.Input);
+
+		final SetHelper niH = xjdfHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
+
+		final JDFAttributeMap surfaceMap = new JDFAttributeMap(AttributeName.SHEETNAME, "S1");
+		surfaceMap.put(AttributeName.SIDE, "Back");
+		final VJDFAttributeMap back = new VJDFAttributeMap(surfaceMap);
+		back.extendMap(AttributeName.SEPARATION, new VString("sep1 sep2 sep3", null));
+
+		surfaceMap.put(AttributeName.SIDE, "Front");
+		final VJDFAttributeMap front1 = new VJDFAttributeMap(surfaceMap);
+		front1.extendMap(AttributeName.SEPARATION, new VString("sep1 sep2 sep3", null));
+		final VJDFAttributeMap front2 = new VJDFAttributeMap(surfaceMap);
+		front2.extendMap(AttributeName.SEPARATION, new VString("sep4 sep5 sep6", null));
+		final VJDFAttributeMap colors = new VJDFAttributeMap(surfaceMap);
+		colors.extendMap(AttributeName.SEPARATION, new VString("sep1 sep2 sep3 sep4 sep5 sep6", null));
+
+		colorH.getCreatePartitions(colors, true);
+		final Vector<VJDFAttributeMap> vvv = new Vector<>();
+		vvv.add(back);
+		vvv.add(front1);
+		vvv.add(front2);
+		int n = 0;
+		for (final VJDFAttributeMap vv : vvv)
+		{
+			n += 100;
+			final Vector<ResourceHelper> vxm = xmH.getCreatePartitions(vv, true);
+			for (final ResourceHelper xm : vxm)
+			{
+				xm.getResource().setAttribute("MediaRef", mediaPart.ensureID());
+			}
+			final ResourceHelper niRH = niH.getCreateVPartition(vv, true);
+			niRH.setAttribute(XJDFConstants.ExternalID, "S1_WS" + (n / 100));
+			((JDFNodeInfo) niRH.getResource()).setEnd(new JDFDate().addOffset(0, n, 0, 0));
+
+			final ResourceHelper devRH = dev.getCreateVPartition(vv, true);
+			devRH.getResource().setAttribute(AttributeName.DEVICEID, "XL" + n);
+
+			compR.setVAmount(4000 - n, vv, true);
+			compR.setVAmount(66 - n / 10, vv, false);
+		}
 		cleanSnippets(xjdfHelper);
-		writeRoundTripX(xjdfHelper.getRoot(), "QualityControlCxF");
+		writeRoundTripX(xjdfHelper.getRoot(), "SplitSep");
 
 	}
 
