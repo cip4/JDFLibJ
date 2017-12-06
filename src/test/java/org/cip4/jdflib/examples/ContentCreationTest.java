@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -113,18 +113,109 @@ public class ContentCreationTest extends PreflightTest
 	 * @throws Exception
 	 */
 	@Test
+	public void testLayoutElementPositioningExact() throws Exception
+	{
+		// TBD: Fuzzy, Sizes, literal text via comments
+		KElement.setLongID(false);
+		final JDFDoc d = new JDFDoc("JDF");
+		n = d.getJDFRoot();
+		n.setType(EnumType.LayoutElementProduction);
+
+		final JDFRunList outRun = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null);
+		outRun.setFileURL("output.pdf");
+
+		final JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null);
+		lep.appendXMLComment("This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed\nThe element to be placed is referenced by LayoutElement/FileSpec/URL", null);
+
+		final JDFContentList cl = null;
+		final JDFLayoutElementPart lePartPage = addLayoutElementPart(lep, cl);
+		lePartPage.setID("IDPage");
+		lePartPage.appendPositionObj().setSize(new JDFXYPair(21 * 44, 29 * 44));
+		final JDFLayoutElementPart lePart = addLayoutElementPart(lep, cl);
+		final JDFPositionObj positionObj = lePart.appendPositionObj();
+		positionObj.setPageRange(new JDFIntegerRangeList(new JDFIntegerRange(0)));
+		setNextAnchor(positionObj, "IDPage", "BottomLeft", "0 0", null, "Parent", 0);
+		positionObj.setAttribute("Anchor", "BottomLeft");
+		positionObj.setAttribute("PositionPolicy", "Exact");
+		final JDFLayoutElement bkg = (JDFLayoutElement) lePart.appendElement("LayoutElement");
+		bkg.setMimeURL("bkg.pdf");
+
+		//TODO fix back conversion		writeRoundTrip(n, "LayoutPositionObj");
+		//		d.write2File(sm_dirTestDataTemp + File.separator + "LayoutPositionObj.jdf", 2, false);
+		writeRoundTrip(n, "resources/layoutElementProductionParamsPositionObjExact");
+	}
+
+	/**
+	 * test iteration
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testLayoutElementPositioningFuzzy() throws Exception
+	{
+		// TBD: Fuzzy, Sizes, literal text via comments
+		KElement.setLongID(false);
+		final JDFDoc d = new JDFDoc("JDF");
+		n = d.getJDFRoot();
+		n.setType(EnumType.LayoutElementProduction);
+
+		final JDFRunList outRun = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null);
+		outRun.setFileURL("output.pdf");
+
+		final JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null);
+		final JDFContentList cl = null;
+		final JDFLayoutElementPart lePartPage = addLayoutElementPart(lep, cl);
+		lePartPage.setID("IDPage");
+		lePartPage.appendPositionObj().setSize(new JDFXYPair(21 * 44, 29 * 44));
+
+		lep.appendXMLComment("This is a \"roughly placed\" reservation in the middle of the page", null);
+		JDFLayoutElementPart lePart = addLayoutElementPart(lep, cl);
+		JDFPositionObj positionObj = lePart.appendPositionObj();
+		positionObj.setAttribute("PageRange", "0");
+		// TODO discuss individual positions
+		setNextAnchor(positionObj, "IDPage", "Center", null, null, "Parent", 0);
+		positionObj.setAttribute("Anchor", "Center");
+		positionObj.setAttribute("PositionPolicy", "Free");
+		final String id = lePart.appendAnchor(null);
+
+		JDFLayoutElement image = (JDFLayoutElement) lePart.appendElement("LayoutElement");
+		image.setElementType(EnumElementType.Image);
+		image.appendComment().setText("Please add an image of a palm tree on a beach here!");
+		lep.appendXMLComment("This is a \"roughly placed\" reservation 36 points below the previous image;\n NextPosition points from Anchor on this to NextAnchor on next,\n i.e. a positive vector specifies that next is shifted in the positive direction in the parent (in this case page) coordinate system", null);
+		lePart = addLayoutElementPart(lep, cl);
+		positionObj = lePart.appendPositionObj();
+		positionObj.setAttribute("PageRange", "0");
+		positionObj.setAttribute("Anchor", "TopCenter");
+		positionObj.setAttribute("PositionPolicy", "Free");
+		setNextAnchor(positionObj, id, "BottomCenter", "0 36", null, "Sibling", 0);
+
+		image = (JDFLayoutElement) lePart.appendElement("LayoutElement");
+		image.setElementType(EnumElementType.Image);
+		image.appendComment().setText("Please add an image of a beach ball below the palm tree!");
+
+		writeRoundTrip(n, "resources/layoutElementProductionParamsPositionObjFuzzy");
+		//		d.write2File(sm_dirTestDataTemp + File.separator + "LayoutPositionObj.jdf", 2, false);
+		writeTest(n, "resources/layoutElementProductionParamsPositionObj.jdf", true, null);
+	}
+
+	/**
+	 * test iteration
+	 *
+	 * @throws Exception
+	 */
+	@Test
 	public void testLayoutElementPositioning() throws Exception
 	{
 		// TBD: Fuzzy, Sizes, literal text via comments
 		KElement.setLongID(false);
-		JDFDoc d = new JDFDoc("JDF");
+		final JDFDoc d = new JDFDoc("JDF");
 		n = d.getJDFRoot();
 		n.setType(EnumType.LayoutElementProduction);
 
-		JDFRunList outRun = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null);
+		final JDFRunList outRun = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null);
 		outRun.setFileURL("output.pdf");
 
-		JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null);
+		final JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null);
 		lep.appendXMLComment("This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed\nThe element to be placed is referenced by LayoutElement/FileSpec/URL", null);
 
 		/*
@@ -132,8 +223,8 @@ public class ContentCreationTest extends PreflightTest
 		cl = (JDFContentList) cl.makeRootResource(null, null, true);
 		cl.setXMLComment("this is an optional metadatapool for the content");
 		*/
-		JDFContentList cl = null;
-		JDFLayoutElementPart lePartPage = addLayoutElementPart(lep, cl);
+		final JDFContentList cl = null;
+		final JDFLayoutElementPart lePartPage = addLayoutElementPart(lep, cl);
 		lePartPage.setID("IDPage");
 		lePartPage.appendPositionObj().setSize(new JDFXYPair(21 * 44, 29 * 44));
 		JDFLayoutElementPart lePart = addLayoutElementPart(lep, cl);
@@ -191,7 +282,7 @@ public class ContentCreationTest extends PreflightTest
 		lep.appendXMLComment("This is a \"roughly placed\"  container for marks\nThe anchor at top left is defined in the !Unrotated! orientation.\n It is placed at the left (=0.0) bottom(=0.0) position of the page.\nThe text flows bottom to top (=Rotate 90 = counterclockwise)\n do we need margins?", null);
 
 		lePart = addLayoutElementPart(lep, cl);
-		String idParent = lePart.appendAnchor(null);
+		final String idParent = lePart.appendAnchor(null);
 		positionObj = lePart.appendPositionObj();
 		positionObj.setAttribute("PageRange", "1");
 		positionObj.setAttribute("Anchor", "TopLeft");
@@ -238,23 +329,23 @@ public class ContentCreationTest extends PreflightTest
 		text = (JDFLayoutElement) lePart.appendElement("LayoutElement");
 		text.setElementType(EnumElementType.Text);
 
-		JDFComment textSrc = text.appendComment();
+		final JDFComment textSrc = text.appendComment();
 		textSrc.setName("TextInput");
 		textSrc.setText("Laurum Ipsum Blah blah blah!\n btw. this is unformatted plain text and nothing else!");
 
-		//TODO fix back conversion		writeRoundTrip(n, "LayoutPositionObj");
+		writeRoundTrip(n, "LayoutPositionObj");
 		//		d.write2File(sm_dirTestDataTemp + File.separator + "LayoutPositionObj.jdf", 2, false);
-		writeTest(n, "LayoutPositionObj.jdf", true, null);
+		//writeTest(n, "LayoutPositionObj.jdf", true, null);
 	}
 
 	/**
 	 *
 	 * @param lePart
 	 */
-	private void addBarcode(JDFLayoutElementPart lePart)
+	private void addBarcode(final JDFLayoutElementPart lePart)
 	{
-		JDFBarcodeProductionParams barcodeProductionParams = lePart.appendBarcodeProductionParams();
-		JDFIdentificationField identificationField = barcodeProductionParams.appendIdentificationField();
+		final JDFBarcodeProductionParams barcodeProductionParams = lePart.appendBarcodeProductionParams();
+		final JDFIdentificationField identificationField = barcodeProductionParams.appendIdentificationField();
 		identificationField.setEncoding(EnumEncoding.Barcode);
 		identificationField.setEncodingDetails("EAN");
 		barcodeProductionParams.setXMLComment("barcode details here");
@@ -266,9 +357,9 @@ public class ContentCreationTest extends PreflightTest
 	 * @param cl
 	 * @return
 	 */
-	private JDFLayoutElementPart addLayoutElementPart(JDFLayoutElementProductionParams lep, JDFContentList cl)
+	private JDFLayoutElementPart addLayoutElementPart(final JDFLayoutElementProductionParams lep, final JDFContentList cl)
 	{
-		JDFLayoutElementPart lePart = lep.appendLayoutElementPart();
+		final JDFLayoutElementPart lePart = lep.appendLayoutElementPart();
 		addMetaData(cl, lePart);
 		return lePart;
 	}
@@ -278,12 +369,12 @@ public class ContentCreationTest extends PreflightTest
 	 * @param lePart
 	 * @return
 	 */
-	private JDFContentData addMetaData(JDFContentList cl, JDFLayoutElementPart lePart)
+	private JDFContentData addMetaData(final JDFContentList cl, final JDFLayoutElementPart lePart)
 	{
 		if (cl == null)
 			return null;
 
-		JDFContentData cd = cl.appendContentData();
+		final JDFContentData cd = cl.appendContentData();
 		//		lePart.setAttribute("ContentDataIndex", cd.getIndex(), null);
 		return cd;
 	}
@@ -298,12 +389,12 @@ public class ContentCreationTest extends PreflightTest
 	 * @param rotation
 	 * @throws DataFormatException
 	 */
-	private static void setNextAnchor(KElement sm2_2, String idAnchor, String anchor, String absolutePosition, String xmlComment, String anchorType, double rotation) throws DataFormatException
+	private static void setNextAnchor(final KElement sm2_2, final String idAnchor, final String anchor, final String absolutePosition, final String xmlComment, final String anchorType, final double rotation) throws DataFormatException
 	{
-		KElement nextAnchor = sm2_2.appendElement(ElementName.REFANCHOR);
+		final KElement nextAnchor = sm2_2.appendElement(ElementName.REFANCHOR);
 		nextAnchor.setAttribute("Anchor", anchor);
-		JDFMatrix m = new JDFMatrix("1 0 0 1 0 0");
-		JDFXYPair xy = absolutePosition == null ? null : new JDFXYPair(absolutePosition);
+		final JDFMatrix m = new JDFMatrix("1 0 0 1 0 0");
+		final JDFXYPair xy = absolutePosition == null ? null : new JDFXYPair(absolutePosition);
 		m.shift(xy);
 		m.rotate(rotation);
 		if (xy != null || rotation != 0)
@@ -322,15 +413,15 @@ public class ContentCreationTest extends PreflightTest
 	public void testLayoutPreflight() throws Exception
 	{
 		KElement.setLongID(false);
-		JDFDoc d = new JDFDoc("JDF");
+		final JDFDoc d = new JDFDoc("JDF");
 		n = d.getJDFRoot();
 		n.setType(EnumType.LayoutElementProduction);
 
-		JDFRunList outRun = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null);
+		final JDFRunList outRun = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null);
 		outRun.setFileURL("output.pdf");
 
-		JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null);
-		JDFComment com = lep.appendComment();
+		final JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null);
+		final JDFComment com = lep.appendComment();
 		com.setName("Instruction");
 		com.setText("Add any human readable instructions here");
 
@@ -357,5 +448,15 @@ public class ContentCreationTest extends PreflightTest
 		su.getDocJMFPhaseTime();
 		d.write2File(sm_dirTestDataTemp + File.separator + "LayoutPreflight.jdf", 2, false);
 
+	}
+
+	/**
+	 * @see org.cip4.jdflib.examples.PreflightTest#setUp()
+	 */
+	@Override
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		KElement.setLongID(false);
 	}
 }

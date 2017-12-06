@@ -95,7 +95,7 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	@Test
 	public void testSimple()
 	{
-		XJDFBaseGoldenTicket bt = new XJDFBaseGoldenTicket(1, EnumVersion.Version_2_0);
+		final XJDFBaseGoldenTicket bt = new XJDFBaseGoldenTicket(1, EnumVersion.Version_2_0);
 		bt.getXJDFHelper().writeToFile(sm_dirTestDataTemp + "xjdf/GTSimple.xjdf");
 	}
 
@@ -106,16 +106,16 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	@Test
 	public void testBrochureSimple()
 	{
-		XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
-		XJDFHelper xjdfHelper = bt.getXJDFHelper();
-		ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
+		final XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
+		final XJDFHelper xjdfHelper = bt.getXJDFHelper();
+		final ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
 		ph.setAmount(10);
-		ProductHelper phc = xjdfHelper.getCreateProduct("IDCover");
+		final ProductHelper phc = xjdfHelper.getCreateProduct("IDCover");
 		phc.setProductType("Brochure");
 		phc.setAmount(1);
-		ProductHelper phb = xjdfHelper.getCreateProduct("IDBody");
+		final ProductHelper phb = xjdfHelper.getCreateProduct("IDBody");
 		phb.setAmount(1);
-		IntentHelper ih = ph.getCreateIntent(ElementName.BINDINGINTENT);
+		final IntentHelper ih = ph.getCreateIntent(ElementName.BINDINGINTENT);
 		ih.getCreateResource().setAttribute(ElementName.BINDINGTYPE, "SaddleStitch");
 		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDCover", null, null, false);
 		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBody", null, null, false);
@@ -129,27 +129,27 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	@Test
 	public void testNotebook()
 	{
-		XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
-		XJDFHelper xjdfHelper = bt.getXJDFHelper();
+		final XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
+		final XJDFHelper xjdfHelper = bt.getXJDFHelper();
 		xjdfHelper.setTypes(EnumType.Product.getName());
-		ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
+		final ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
 		ph.setAmount(10);
 		ph.setProductType("Notebook");
-		ProductHelper phc = xjdfHelper.getCreateProduct("IDCover");
+		final ProductHelper phc = xjdfHelper.getCreateProduct("ICover");
 		phc.setAmount(1);
 		phc.setProductType("FrontCover");
-		ProductHelper phb = xjdfHelper.getCreateProduct("IDBody");
+		final ProductHelper phb = xjdfHelper.getCreateProduct("IBody");
 		phb.setAmount(50);
 		phb.setProductType("BookBlock");
-		ProductHelper phcb = xjdfHelper.getCreateProduct("IDBack");
+		final ProductHelper phcb = xjdfHelper.getCreateProduct("IBack");
 		phcb.setProductType("BackCover");
 		phcb.setAmount(1);
-		IntentHelper ih = ph.getCreateIntent(ElementName.BINDINGINTENT);
+		final IntentHelper ih = ph.getCreateIntent(ElementName.BINDINGINTENT);
 		ih.getCreateResource().setAttribute(ElementName.BINDINGTYPE, "EdgeGluing");
 		ih.getCreateResource().setAttribute(ElementName.BINDINGSIDE, "Top");
-		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBack", null, null, false);
-		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBody", null, null, false);
-		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDCover", null, null, false);
+		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IBack", null, null, false);
+		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IBody", null, null, false);
+		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "ICover", null, null, false);
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper.getRoot().getElement(XJDFConstants.ProductList), true);
 		writeTest(xjdfHelper, "intents/Notebook.xjdf");
@@ -162,20 +162,20 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	@Test
 	public void testAssembleEnvelope()
 	{
-		XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
-		XJDFHelper xjdfHelper = bt.getXJDFHelper();
+		final XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
+		final XJDFHelper xjdfHelper = bt.getXJDFHelper();
 		xjdfHelper.setTypes(EnumType.Product.getName());
-		ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
+		final ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
 		ph.setAmount(10);
 		ph.setProductType("FilledEnvelope");
-		ProductHelper phe = xjdfHelper.getCreateProduct("ID_Envelope");
+		final ProductHelper phe = xjdfHelper.getCreateProduct("ID_Envelope");
 		phe.setAmount(1);
 		phe.setProductType("Envelope");
 		phe.setAttribute(XJDFConstants.ExternalID, "MISID_Envelope");
-		ProductHelper phl = xjdfHelper.getCreateProduct("ID_Letter");
+		final ProductHelper phl = xjdfHelper.getCreateProduct("ID_Letter");
 		phl.setAmount(1);
 		phl.setProductType("Letter");
-		IntentHelper ih = ph.getCreateIntent(XJDFConstants.AssemblingIntent);
+		final IntentHelper ih = ph.getCreateIntent(XJDFConstants.AssemblingIntent);
 		ih.getCreateResource().setAttribute(XJDFConstants.Container, "ID_Envelope");
 		ih.getCreateResource().setXPathAttribute("BlowIn/@ChildRef", "ID_Letter");
 
@@ -191,38 +191,38 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	@Test
 	public void testMultiVariable()
 	{
-		XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
-		XJDFHelper xjdfHelper = bt.getXJDFHelper();
-		ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
+		final XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
+		final XJDFHelper xjdfHelper = bt.getXJDFHelper();
+		final ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
 		ph.setAmount(10000);
-		IntentHelper ih = ph.getCreateIntent("VariableIntent");
+		final IntentHelper ih = ph.getCreateIntent("VariableIntent");
 		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBrochure", null, null, false);
 		ih.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBook", null, null, false);
 		ih.getResource().setAttribute(XJDFConstants.VariableType, "Area");
-		ProductHelper phh = xjdfHelper.getCreateProduct("IDBook");
+		final ProductHelper phh = xjdfHelper.getCreateProduct("IDBook");
 		phh.setAmount(1000);
 		phh.setProductType("Book");
 
-		ProductHelper phhc = xjdfHelper.getCreateProduct("IDBookCover");
+		final ProductHelper phhc = xjdfHelper.getCreateProduct("IDBookCover");
 		phhc.setProductType("Cover");
 		phhc.setAmount(1);
 
-		ProductHelper phb = xjdfHelper.getCreateProduct("IDBody");
+		final ProductHelper phb = xjdfHelper.getCreateProduct("IDBody");
 		phb.setAmount(1);
 
-		IntentHelper ihb = phh.getCreateIntent(ElementName.BINDINGINTENT);
+		final IntentHelper ihb = phh.getCreateIntent(ElementName.BINDINGINTENT);
 		ihb.getCreateResource().setAttribute(ElementName.BINDINGTYPE, "HardCover");
 		ihb.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBookCover", null, null, false);
 		ihb.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBody", null, null, false);
 
-		ProductHelper phs = xjdfHelper.getCreateProduct("IDBrochure");
+		final ProductHelper phs = xjdfHelper.getCreateProduct("IDBrochure");
 		phs.setAmount(9000);
 
-		ProductHelper phsc = xjdfHelper.getCreateProduct("IDBrochureCover");
+		final ProductHelper phsc = xjdfHelper.getCreateProduct("IDBrochureCover");
 		phsc.setProductType("Cover");
 		phsc.setAmount(1);
 
-		IntentHelper ihs = phs.getCreateIntent(ElementName.BINDINGINTENT);
+		final IntentHelper ihs = phs.getCreateIntent(ElementName.BINDINGINTENT);
 		ihs.getCreateResource().setAttribute(ElementName.BINDINGTYPE, "SaddleStitch");
 		ihs.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBrochureCover", null, null, false);
 		ihs.getResource().appendAttribute(XJDFConstants.ChildRefs, "IDBody", null, null, false);

@@ -434,11 +434,19 @@ class PostConverter
 		{
 			final JDFPageList pl = (JDFPageList) lopp.getElement(ElementName.PAGELIST);
 			final Collection<JDFPageData> vpd = pl.getAllPageData();
-			for (final JDFPageData pd : vpd)
+			if (vpd != null)
 			{
-				final KElement ren = lopp.moveElement(pd, null).renameElement(ElementName.LAYOUTELEMENTPART, null);
-				lopp.copyElement(ren, ren);
-				ren.deleteNode();
+				for (final JDFPageData pd : vpd)
+				{
+					final KElement ren = lopp.moveElement(pd, null).renameElement(ElementName.LAYOUTELEMENTPART, null);
+					final KElement el = lopp.copyElement(ren, ren);
+					final KElement fs = el.getElement(ElementName.FILESPEC);
+					if (fs != null)
+					{
+						el.appendElement(ElementName.LAYOUTELEMENT).moveElement(fs, null);
+					}
+					ren.deleteNode();
+				}
 			}
 			lopp.getElement("PageListRef").deleteNode();
 		}

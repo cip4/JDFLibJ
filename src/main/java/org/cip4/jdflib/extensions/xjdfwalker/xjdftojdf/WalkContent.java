@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -102,7 +103,7 @@ public class WalkContent extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void updateAttributes(KElement elem)
+	protected void updateAttributes(final KElement elem)
 	{
 		elem.renameAttribute(AttributeName.PAGENUMBER, AttributeName.PAGEINDEX, null, null);
 		elem.renameAttribute("ContentStatus", AttributeName.PAGESTATUS, null, null);
@@ -111,6 +112,20 @@ public class WalkContent extends WalkResource
 		elem.removeAttribute(AttributeName.STATUS);
 		elem.removeAttribute("ContentType"); // TODO Auto-generated method stub
 		super.updateAttributes(elem);
+	}
+
+	/**
+	 *
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public KElement walk(final KElement e, final KElement trackElem)
+	{
+		if (e.hasChildElement(ElementName.FILESPEC, null))
+		{
+
+		}
+		return super.walk(e, trackElem);
 	}
 
 	/**
