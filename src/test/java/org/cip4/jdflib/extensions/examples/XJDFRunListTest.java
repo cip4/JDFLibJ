@@ -153,7 +153,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 		final JDFFileSpec fs = (JDFFileSpec) runList.appendElement(ElementName.FILESPEC);
 		fs.setURL("file://host/file/data.pdf");
 		final JDFMetadataMap md = (JDFMetadataMap) runList.appendElement(ElementName.METADATAMAP);
-		md.setName("MetaData");
+		md.setName(AttributeName.METADATA);
 		md.setValueFormat("%s_%s");
 		md.setValueTemplate("gender status");
 		JDFExpr x = md.appendExpr();
