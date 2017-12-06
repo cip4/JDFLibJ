@@ -91,6 +91,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFDeviceFilter;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -100,6 +101,7 @@ import org.cip4.jdflib.jmf.JDFQuery;
 import org.cip4.jdflib.jmf.JDFRegistration;
 import org.cip4.jdflib.jmf.JDFResourceCmdParams;
 import org.cip4.jdflib.jmf.JDFResponse;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -152,6 +154,19 @@ import org.junit.Test;
 public class JDFExampleDocTest extends JDFTestCaseBase
 {
 	private JDFDoc m_doc = null;
+
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentName(null);
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentVersion(null);
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID(null);
+		KElement.setLongID(false);
+	}
 
 	/**
 	 * a simple generic main routine for a dumb console app

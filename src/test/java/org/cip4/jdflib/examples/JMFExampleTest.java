@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFDeviceFilter;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -116,12 +117,12 @@ public class JMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testActivity()
 	{
-		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
-		JDFJMF jmf = b.buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.MIS);
-		JDFSignal signal = jmf.getSignal(0);
-		JDFDeviceInfo di = signal.getDeviceInfo(0);
+		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		final JDFJMF jmf = b.buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.MIS);
+		final JDFSignal signal = jmf.getSignal(0);
+		final JDFDeviceInfo di = signal.getDeviceInfo(0);
 		{
-			KElement activity = di.appendElement("Activity");
+			final KElement activity = di.appendElement("Activity");
 			activity.setAttribute("PersonalID", "P1");
 			activity.setAttribute("ActivityName", "Polishing");
 			activity.setAttribute("ActivityID", "ID1234");
@@ -131,7 +132,7 @@ public class JMFExampleTest extends JDFTestCaseBase
 			di.appendElement(ElementName.EMPLOYEE).setAttribute("PersonalID", "P3");
 		}
 		{
-			JDFJobPhase jp = di.getJobPhase(0);
+			final JDFJobPhase jp = di.getJobPhase(0);
 			jp.setJobID("j1");
 			jp.setJobPartID("p1");
 			jp.setStatus(EnumNodeStatus.InProgress);
@@ -157,8 +158,8 @@ public class JMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testKnownDevices()
 	{
-		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
-		JDFJMF jmf = b.buildKnownDevicesQuery(JDFDeviceFilter.EnumDeviceDetails.Brief);
+		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		final JDFJMF jmf = b.buildKnownDevicesQuery(JDFDeviceFilter.EnumDeviceDetails.Brief);
 		writeTest(jmf, "introduction/knowndevices.jmf", true, null);
 	}
 
@@ -169,11 +170,11 @@ public class JMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testLotQuery()
 	{
-		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
-		JDFJMF jmf = b.buildResourceQuery(true);
-		Vector<EnumResourceClass> v = new Vector<>();
+		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		final JDFJMF jmf = b.buildResourceQuery(true);
+		final Vector<EnumResourceClass> v = new Vector<>();
 		v.add(EnumResourceClass.Consumable);
-		JDFQuery query = jmf.getQuery(0);
+		final JDFQuery query = jmf.getQuery(0);
 		query.setID("q1");
 		query.getResourceQuParams().setClasses(v);
 		writeTest(jmf, "jmf/lotquery.jmf", true, null);
@@ -186,18 +187,18 @@ public class JMFExampleTest extends JDFTestCaseBase
 	@Test
 	public void testLot()
 	{
-		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
-		JDFJMF jmf = b.createJMF(EnumFamily.Response, EnumType.Resource);
+		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		final JDFJMF jmf = b.createJMF(EnumFamily.Response, EnumType.Resource);
 
-		JDFResponse response = jmf.getResponse(0);
+		final JDFResponse response = jmf.getResponse(0);
 		response.setID("r1");
 		response.setrefID("q1");
-		JDFResourceInfo ri = response.getCreateResourceInfo(0);
+		final JDFResourceInfo ri = response.getCreateResourceInfo(0);
 		ri.appendResource(ElementName.MEDIA).setDescriptiveName("more about the paper here");
-		JDFAmountPool ap = ri.appendAmountPool();
+		final JDFAmountPool ap = ri.appendAmountPool();
 		for (int i = 1; i < 3; i++)
 		{
-			JDFAttributeMap map = new JDFAttributeMap();
+			final JDFAttributeMap map = new JDFAttributeMap();
 			map.put(AttributeName.SIGNATURENAME, "Sig1");
 			map.put(AttributeName.SHEETNAME, "Sheet1");
 			map.put(AttributeName.LOTID, "Lot_" + i);
@@ -211,6 +212,10 @@ public class JMFExampleTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		JMFBuilderFactory.setSenderID(null, "SenderID");
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentName(null);
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentVersion(null);
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID(null);
+		KElement.setLongID(false);
+
 	}
 }

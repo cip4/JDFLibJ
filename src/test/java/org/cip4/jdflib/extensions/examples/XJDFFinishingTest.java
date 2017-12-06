@@ -88,6 +88,8 @@ import org.cip4.jdflib.resource.JDFBundleItem;
 import org.cip4.jdflib.resource.JDFCuttingParams;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
+import org.cip4.jdflib.resource.process.JDFIdentificationField;
+import org.cip4.jdflib.resource.process.JDFMetadataMap;
 import org.junit.Test;
 
 /**
@@ -205,6 +207,36 @@ public class XJDFFinishingTest extends JDFTestCaseBase
 
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "resources/NestedCutBlock.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMetaDataMapBarcode()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper("Barcode", "Metadata", null);
+		xjdfHelper.setTypes(EnumType.Verification.getName());
+
+		final SetHelper shComp = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Input);
+		final ResourceHelper rh = shComp.getCreatePartition(0, true);
+		final JDFIdentificationField idf = (JDFIdentificationField) rh.getCreateResource().appendElement(ElementName.IDENTIFICATIONFIELD);
+		idf.setValueFormat("%6i%3i%2i");
+		idf.setValueTemplate("job doc sheet");
+		final JDFMetadataMap md0 = (JDFMetadataMap) idf.appendElement(ElementName.METADATAMAP);
+		md0.setName("JobID");
+		md0.setValueFormat("Job_%s");
+		md0.setValueTemplate("sheet");
+		final JDFMetadataMap md2 = (JDFMetadataMap) idf.appendElement(ElementName.METADATAMAP);
+		md2.setName("DocIndex");
+		md2.setValueFormat("%i %i");
+		md2.setValueTemplate("doc doc");
+		final JDFMetadataMap md1 = (JDFMetadataMap) idf.appendElement(ElementName.METADATAMAP);
+		md1.setName("RunIndex");
+		md1.setValueFormat("%i %i");
+		md1.setValueTemplate("sheet sheet");
+		cleanSnippets(xjdfHelper);
+		writeTest(xjdfHelper, "subelements/barcodeMetaDataMap.xjdf");
 	}
 
 	/**
