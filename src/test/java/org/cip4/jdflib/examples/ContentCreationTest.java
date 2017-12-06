@@ -71,17 +71,14 @@
 
 package org.cip4.jdflib.examples;
 
-import java.io.File;
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumEncoding;
 import org.cip4.jdflib.auto.JDFAutoLayoutElement.EnumElementType;
 import org.cip4.jdflib.auto.JDFAutoPositionObj.EnumAnchor;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
@@ -99,7 +96,6 @@ import org.cip4.jdflib.resource.process.JDFLayoutElementPart;
 import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
 import org.cip4.jdflib.resource.process.JDFPositionObj;
 import org.cip4.jdflib.resource.process.JDFRunList;
-import org.cip4.jdflib.util.StatusCounter;
 import org.junit.Test;
 
 /**
@@ -195,7 +191,7 @@ public class ContentCreationTest extends PreflightTest
 
 		writeRoundTrip(n, "resources/layoutElementProductionParamsPositionObjFuzzy");
 		//		d.write2File(sm_dirTestDataTemp + File.separator + "LayoutPositionObj.jdf", 2, false);
-		writeTest(n, "resources/layoutElementProductionParamsPositionObj.jdf", true, null);
+		writeTest(n, "resources/layoutElementProductionParamsPositionObj.jdf", false, null);
 	}
 
 	/**
@@ -430,10 +426,12 @@ public class ContentCreationTest extends PreflightTest
 
 		// now some simple tests...
 		appendNumPagesAction();
-		appendSeparationAction();
-		appendBWSeparationAction();
+		//		appendSeparationAction();
+		//		appendBWSeparationAction();
 		appendTrimBoxAction();
 		appendResolutionAction();
+		/*
+		 *
 		StatusCounter su = new StatusCounter(n, null, null);
 		su.setPhase(EnumNodeStatus.InProgress, "Creative Work", EnumDeviceStatus.Running, null);
 
@@ -446,7 +444,9 @@ public class ContentCreationTest extends PreflightTest
 		su = new StatusCounter(n, null, null);
 		su.setPhase(EnumNodeStatus.Completed, "done", EnumDeviceStatus.Idle, null);
 		su.getDocJMFPhaseTime();
-		d.write2File(sm_dirTestDataTemp + File.separator + "LayoutPreflight.jdf", 2, false);
+				 */
+
+		writeTest(n, "resources/layoutElementProductionParamsPreflight.jdf", false, null);
 
 	}
 
