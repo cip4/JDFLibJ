@@ -1133,7 +1133,7 @@
             <xs:attribute name="AgentName" type="string" use="optional"/>
             <xs:attribute name="AgentVersion" type="string" use="optional"/>
             <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
             <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
             <xs:attribute name="ID" type="ID" use="optional"/>
             <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
@@ -1711,7 +1711,7 @@
                 <xs:attribute name="CostCenterID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="DescriptiveName" type="string" use="optional"/>
                 <xs:attribute name="DeviceClass" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
                 <xs:attribute name="DeviceType" type="string" use="optional"/>
                 <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="JDFVersions" use="optional">
