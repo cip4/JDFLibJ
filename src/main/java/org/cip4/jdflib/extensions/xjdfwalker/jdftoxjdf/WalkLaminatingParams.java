@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -66,25 +66,24 @@
  *
  *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.jmf.JDFJobPhase;
-import org.cip4.jdflib.resource.JDFModuleStatus;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
  */
-public class WalkJobPhase extends WalkXElement
+public class WalkLaminatingParams extends WalkResource
 {
 	/**
 	 *
 	 */
-	public WalkJobPhase()
+	public WalkLaminatingParams()
 	{
 		super();
 	}
@@ -97,7 +96,7 @@ public class WalkJobPhase extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFJobPhase;
+		return !jdfToXJDF.isRetainAll();
 	}
 
 	/**
@@ -106,34 +105,17 @@ public class WalkJobPhase extends WalkXElement
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.JOBPHASE, null);
+		return new VString(ElementName.LAMINATINGPARAMS, null);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(final KElement elem)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
-		moveCostCenterID(elem);
-		updateModuleIDS(elem);
-		super.updateAttributes(elem);
-	}
-
-	private void updateModuleIDS(final KElement elem)
-	{
-		final VString modules = VString.getVString(elem.getNonEmpty(XJDFConstants.ModuleIDs), null);
-		elem.removeAttribute(XJDFConstants.ModuleIDs);
-		if (modules != null)
-		{
-			for (final String module : modules)
-			{
-				final JDFModuleStatus mp = (JDFModuleStatus) elem.appendElement(ElementName.MODULESTATUS);
-				mp.setModuleID(module);
-				mp.copyAttribute(AttributeName.DEVICESTATUS, elem.getParentNode_KElement());
-				mp.setModuleType("Unknown");
-			}
-		}
+		updateModule(map);
+		super.updateAttributes(map);
 	}
 
 }

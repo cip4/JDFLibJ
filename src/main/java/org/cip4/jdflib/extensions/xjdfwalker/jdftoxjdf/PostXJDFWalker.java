@@ -98,6 +98,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFHeadBandApplicationParams;
+import org.cip4.jdflib.resource.JDFLaminatingParams;
 import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFStrippingParams;
@@ -1325,6 +1326,10 @@ class PostXJDFWalker extends BaseElementWalker
 			return ret;
 		}
 
+		/**
+		 *
+		 * @param xjdf
+		 */
 		void moveToMisconsumable(final KElement xjdf)
 		{
 			// nop hook
@@ -2029,6 +2034,69 @@ class PostXJDFWalker extends BaseElementWalker
 				tsp.removeAttribute(AttributeName.COREMATERIAL);
 				tsp.removeAttribute(AttributeName.CASTINGMATERIAL);
 			}
+		}
+
+	}
+
+	/**
+	 *
+	 * @author rainer prosi
+	 *
+	 */
+	public class WalkLaminatingParams extends WalkResourceElement
+	{
+		/**
+		 *
+		 */
+		public WalkLaminatingParams()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return !isRetainAll();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ElementName.LAMINATINGPARAMS, null);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
+		 */
+		@Override
+		void moveToMisconsumable(final KElement xjdf)
+		{
+			final JDFLaminatingParams lp = (JDFLaminatingParams) xjdf;
+			final String adhesive = lp.getNonEmpty(AttributeName.ADHESIVETYPE);
+			if (adhesive != null)
+			{
+				final MiscConsumableMaker mm = new MiscConsumableMaker(ResourceHelper.getHelper(xjdf));
+				mm.create("Glue", null);
+				mm.setTypeDetails(adhesive);
+				lp.removeAttribute(AttributeName.ADHESIVETYPE);
+			}
+			final String hard = lp.getNonEmpty(AttributeName.HARDENERTYPE);
+			if (hard != null)
+			{
+				final MiscConsumableMaker mm = new MiscConsumableMaker(ResourceHelper.getHelper(xjdf));
+				mm.create("Hardener", null);
+				mm.setTypeDetails(hard);
+				lp.removeAttribute(AttributeName.HARDENERTYPE);
+			}
+
 		}
 
 	}

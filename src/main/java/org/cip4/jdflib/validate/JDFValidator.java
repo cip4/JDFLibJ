@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -99,6 +99,7 @@ import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.JDFParserFactory;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
@@ -122,16 +123,16 @@ import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
 /**
- * 
+ *
  * this is the non-commandline part of the original checkJDF and used both by the JDF Editor and checkJDF
- * 
+ *
  * Refactored JDFValidator to be non-static in order to make it thread compatible. Previously, only one thread at a time could call JDFValidator from within the
  * same JVM. Now an instance of JDFValidator and the the method validate should be called. JDFValidator can still be called from the command line in the same
  * way as before.
- * 
+ *
  * TODO Break out validation error handling logging so that new error handlers can easily be registered. For example, there should be an error handler for
  * logging to the XML log file and an error handler for logging to the <code>sysOut</code>. Perhaps <code>org.xml.sax.ErrorHandler</code> could be used?
- * 
+ *
  * @author Claes Buckwalter (clabu@itn.liu.se)
  * @version 2008-01-02
  */
@@ -140,11 +141,11 @@ public class JDFValidator
 	VString foundNameSpaces = new VString();
 	VString vID = new VString();
 	/**
-	 * 
+	 *
 	 */
 	public VString vBadID = new VString();
 	/**
-	 * 
+	 *
 	 */
 	public VString vMultiID = null;
 	VString vBadJobPartID = new VString();
@@ -194,7 +195,7 @@ public class JDFValidator
 			+ "Build version " + JDFAudit.software();
 
 	/**
-	 * 
+	 *
 	 */
 	public JDFValidator()
 	{
@@ -219,6 +220,13 @@ public class JDFValidator
 		return checkOut.getAttribute("Message", null, null);
 	}
 
+	/**
+	 *
+	 * @param reportElem
+	 * @param type
+	 * @param message
+	 * @param indent
+	 */
 	private void setErrorType(final KElement reportElem, final String type, final String message, final int indent)
 	{
 		if (reportElem == null)
@@ -241,7 +249,7 @@ public class JDFValidator
 
 	/**
 	 * set the JDFDoc (JDF or JMF) to set
-	 * 
+	 *
 	 * @param d the JDFDoc to set this to
 	 */
 	public void setDoc(final JDFDoc d)
@@ -253,7 +261,7 @@ public class JDFValidator
 
 	/**
 	 * if bI
-	 * 
+	 *
 	 * @param bIgnore
 	 */
 	public void setIgnorePrivate(final boolean bIgnore)
@@ -263,7 +271,7 @@ public class JDFValidator
 
 	/**
 	 * sets the System.out print on or off
-	 * 
+	 *
 	 * @param b
 	 */
 	public void setPrint(final boolean b)
@@ -273,7 +281,7 @@ public class JDFValidator
 
 	/**
 	 * simple helper to create an indented string with leading blanks
-	 * 
+	 *
 	 * @param indent number of leadingbla
 	 */
 	private String indent(final int indent)
@@ -288,7 +296,7 @@ public class JDFValidator
 
 	/**
 	 * the subroutine to print out invalid parts of a jdf.
-	 * 
+	 *
 	 * @param JDFElement jdfElement - the element to test
 	 * @param bool bQuiet - flag what to do with valid elements; quiet if true
 	 * @param indent - indent for println() to console window
@@ -339,13 +347,7 @@ public class JDFValidator
 				sysOut.println("Probable namespace Typo: xmlns=" + nameSpaceURI + " should be:" + JDFConstants.JDFNAMESPACE);
 				if (testElement != null)
 				{
-					bTypo = true;
-					testElement.setAttribute("NSPrefix", pref);
-					testElement.setAttribute("NSURI", nsURI);
-					testElement.setAttribute("IsPrivate", true, null);
-					testElement.setAttribute("Status", "Skipping");
-					setErrorType(testElement, "PrivateElement", "Element in Private NameSpace - probable Namespace Typo in: " + elmName + " Correct ns URI="
-							+ JDFConstants.JDFNAMESPACE);
+					bTypo = setTypo(pref, elmName, nsURI, testElement);
 				}
 			}
 			if (bPrintNameSpace)
@@ -564,7 +566,7 @@ public class JDFValidator
 			final VString swapAtt = new VString();
 			VString vTmp = jdfElement.knownElements();
 			// compare missing elements with unknown attributes to find elem <->  attrib swaps
-			for (String unknownAttr : unknownAttributes)
+			for (final String unknownAttr : unknownAttributes)
 			{
 				if (vTmp.contains(unknownAttr))
 				{
@@ -576,7 +578,7 @@ public class JDFValidator
 			// attrib swaps
 			final VString swapElem = new VString();
 			vTmp = jdfElement.knownAttributes();
-			for (String unknownElem : unknownElements)
+			for (final String unknownElem : unknownElements)
 			{
 				if (vTmp.contains(unknownElem))
 				{
@@ -610,23 +612,19 @@ public class JDFValidator
 			unknownElements.removeStrings(deprecatedElements, 99999);
 			unknownElements.removeStrings(prereleaseElements, 99999);
 
-			// swapped elements are also invalid -> remove them from the print
-			// list
+			// swapped elements are also invalid -> remove them from the print list
 			unknownElements.removeStrings(swapElem, 99999);
-			// swapped attributes are also invalid -> remove them from the print
-			// list
+			// swapped attributes are also invalid -> remove them from the print list
 			unknownAttributes.removeStrings(swapAtt, 99999);
 
 			// find missing elements and attributes
 			if (level.getValue() >= EnumValidationLevel.Complete.getValue())
 			{
 				missingAttributes = new VString(jdfElement.getMissingAttributes(9999999));
-				// missing attributes are also invalid -> remove them from the
-				// print list
+				// missing attributes are also invalid -> remove them from the print list
 				invalidAttributes.removeStrings(missingAttributes, 99999);
 				missingElements = new VString(jdfElement.getMissingElements(9999999));
-				// missing elements are also invalid -> remove them from the
-				// print list
+				// missing elements are also invalid -> remove them from the print list
 				invalidElements.removeStrings(missingElements, 99999);
 			}
 
@@ -652,7 +650,7 @@ public class JDFValidator
 			printAttributeList(indent, testElement, jdfElement, printMissElms, missingAttributes, "Missing", "Missing Attribute");
 			printAttributeList(indent, testElement, jdfElement, printMissElms, swapAtt, "Swap", "Element written as Attribute");
 
-			for (String swEl : swapElem)
+			for (final String swEl : swapElem)
 			{
 				sysOut.println(indent(indent + 2) + "Attribute is written as Element: " + swEl);
 			}
@@ -664,7 +662,7 @@ public class JDFValidator
 
 			if (printMissElms)
 			{
-				for (String missEl : missingElements)
+				for (final String missEl : missingElements)
 				{
 					sysOut.println(indent(indent + 2) + "Missing Element: " + missEl);
 
@@ -681,7 +679,7 @@ public class JDFValidator
 					testElement.setAttribute("MissingElements", StringUtil.setvString(missingElements, JDFConstants.BLANK, null, null));
 				}
 			}
-			for (String elem : unknownElements)
+			for (final String elem : unknownElements)
 			{
 				sysOut.println(indent(indent + 2) + "Unknown Element: " + elem);
 			}
@@ -702,7 +700,7 @@ public class JDFValidator
 				if (!res.isLeaf())
 				{ // handle partitioned resources
 					final VElement vr = res.getLeaves(false);
-					for (KElement leaf : vr)
+					for (final KElement leaf : vr)
 					{
 						printBad(leaf, indent + 2, testElement, false);
 					}
@@ -712,10 +710,22 @@ public class JDFValidator
 
 		// recurse through all child elements :
 		final VElement ve = jdfElement.getChildElementVector(null, null, null, true, 0, false);
-		for (KElement e : ve)
+		for (final KElement e : ve)
 		{
 			printBad(e, indent + 2, testElement, false);
 		}
+	}
+
+	private boolean setTypo(final String pref, final String elmName, final String nsURI, final KElement testElement)
+	{
+		boolean bTypo;
+		bTypo = true;
+		testElement.setAttribute("NSPrefix", pref);
+		testElement.setAttribute("NSURI", nsURI);
+		testElement.setAttribute("IsPrivate", true, null);
+		testElement.setAttribute("Status", "Skipping");
+		setErrorType(testElement, "PrivateElement", "Element in Private NameSpace - probable Namespace Typo in: " + elmName + " Correct ns URI=" + JDFConstants.JDFNAMESPACE);
+		return bTypo;
 	}
 
 	/**
@@ -930,7 +940,7 @@ public class JDFValidator
 	/**
 	 * For all subnodes that 'root' consist of makes the total check of Links, Resources and separations fill in the vectors 'vLinkedResources', 'vResources',
 	 * 'vBadResourceLinks', 'vColorPoolSeparations', 'vSeparations'. Print the warnings
-	 * 
+	 *
 	 * @param root - Node root we test
 	 * @param bQuiet - Mode '-q' quiet
 	 * @param level - validation level
@@ -1063,7 +1073,7 @@ public class JDFValidator
 
 	/**
 	 * Print private contents
-	 * 
+	 *
 	 * @param privateAttributes - vector of private attributes
 	 * @param privateElements - vector of private elements
 	 * @param jdfElement - jdfElement we test
@@ -1134,7 +1144,7 @@ public class JDFValidator
 
 	/**
 	 * Check a whole Node and print the problems if exist
-	 * 
+	 *
 	 * @param jdfNode - JDFNode we check
 	 * @param level - validation level
 	 * @param indent - indent for println() to console window
@@ -1295,7 +1305,7 @@ public class JDFValidator
 
 	/**
 	 * Check ResourceLinkPool and print the problem if it contains missing resourceLinks
-	 * 
+	 *
 	 * @param rlp - JDFResourceLinkPool we check
 	 * @param level - validation level
 	 * @param indent - indent for println() to console window
@@ -1338,7 +1348,7 @@ public class JDFValidator
 
 	/**
 	 * Check RefElements and print the problem if they are not valid
-	 * 
+	 *
 	 * @param r - refElement we check
 	 * @param level - validation level
 	 * @param indent - indent for println() to console window
@@ -1413,7 +1423,8 @@ public class JDFValidator
 					final String targID = targJDF == null ? "" : targJDF.getID();
 					final JDFNode refJDF = re.getParentJDF();
 					final String refID = refJDF == null ? "" : refJDF.getID();
-					setErrorType(testElement, "InvalidRefElement", "Invalid Context: Resource node (ID=" + targID + ") is not an ancestor of RefElement node (ID=" + refID + ")", indent);
+					setErrorType(testElement, "InvalidRefElement", "Invalid Context: Resource node (ID=" + targID + ") is not an ancestor of RefElement node (ID=" + refID
+							+ ")", indent);
 				}
 			}
 		}
@@ -1422,7 +1433,7 @@ public class JDFValidator
 
 	/**
 	 * Check Resources if they are not in the vector of linked resources 'vLinkedResources', print the problem
-	 * 
+	 *
 	 * @param r - resource we check
 	 * @param indent - indent for println() to console window
 	 * @param testElement - test element of the XML output (if '-x' set) we "stand in"
@@ -1454,7 +1465,7 @@ public class JDFValidator
 
 	/**
 	 * Check ResourceLinks if they are in the vector of bad resourceLinks 'vBadResourceLinks', print the problem
-	 * 
+	 *
 	 * @param rl - resource link we check
 	 * @param level - validation level
 	 * @param indent - indent for println() to console window
@@ -1612,7 +1623,7 @@ public class JDFValidator
 
 	/**
 	 * print Device Capabilities: executable nodes and bugReport if exist
-	 * 
+	 *
 	 * @param jdfRoot - node to test
 	 * @param devCapFile - Device Capabilities fileName to test Node against
 	 * @param testlists - Allowed or Present testLists (parameter '-P')
@@ -1627,8 +1638,7 @@ public class JDFValidator
 		}
 
 		final JDFNode jdfNode = (JDFNode) jdfRoot;
-		final JDFParser p = new JDFParser();
-		final JDFDoc docDevCap = p.parseFile(devCapFile);
+		final JDFDoc docDevCap = JDFDoc.parseFile(devCapFile);
 
 		final JDFJMF jmfRoot = docDevCap.getJMFRoot();
 
@@ -1707,7 +1717,7 @@ public class JDFValidator
 
 	/**
 	 * print Device Capabilities: executable nodes and bugReport if exist
-	 * 
+	 *
 	 * @param jdfRoot - node to test
 	 * @param devCapFile - Device Capabilities fileName to test Node against
 	 * @param testlists - Allowed or Present testLists (parameter '-P')
@@ -1766,10 +1776,10 @@ public class JDFValidator
 	/**
 	 * Sets correct validation status of the nodes that has invalid entries. E.g. if ResourcePool has invalid children sets its status as invalid ["IsValid" =
 	 * false].
-	 * 
+	 *
 	 * Check the Validation Status of all children for Mode [bQuiet=true] and if there are no invalid child nodes and it has no private contents - removes valid
 	 * entries
-	 * 
+	 *
 	 * @param root - xml output root.
 	 * @param bQuiet - mode is quiet set by "-q"
 	 */
@@ -1857,7 +1867,7 @@ public class JDFValidator
 
 	/**
 	 * Parses file and if schemaLocation is not null validates against Schema.
-	 * 
+	 *
 	 * @param xmlFile - File Name to parse
 	 * @param schemaLocation - schema location
 	 * @param errorHandler - error handler
@@ -1866,7 +1876,7 @@ public class JDFValidator
 	private JDFDoc parseFile(final String xmlFile, final XMLErrorHandler errorHandler)
 	{
 		JDFDoc gd = null;
-		final JDFParser p = new JDFParser();
+		final JDFParser p = JDFParserFactory.getFactory().get();
 		p.setJDFSchemaLocation(UrlUtil.urlToFile(schemaLocation));
 		p.m_ErrorHandler = errorHandler;
 
@@ -1875,7 +1885,7 @@ public class JDFValidator
 		{
 			sysOut.println("Error parsing File: " + xmlFile);
 		}
-
+		JDFParserFactory.getFactory().push(p);
 		return gd;
 	}
 
@@ -1899,7 +1909,7 @@ public class JDFValidator
 
 	/**
 	 * processes all files that have been placed into the public VString member JDFValidator.allFiles
-	 * 
+	 *
 	 * @return XMLDoc the xml output document
 	 */
 	public XMLDoc processAllFiles()
@@ -1918,9 +1928,8 @@ public class JDFValidator
 			if (argFile.isDirectory())
 			{
 				final File[] lFiles = argFile.listFiles();
-				for (int i = 0; i < lFiles.length; i++)
+				for (final File fil : lFiles)
 				{
-					final File fil = lFiles[i];
 					if (fil.isDirectory())
 					{
 						continue;
@@ -1984,7 +1993,7 @@ public class JDFValidator
 
 	/**
 	 * we may want to create something similar for a zip stream
-	 * 
+	 *
 	 * @param argFile
 	 * @return XMLDoc the output file
 	 */
@@ -2059,7 +2068,7 @@ public class JDFValidator
 
 	/**
 	 * process a mime file
-	 * 
+	 *
 	 * @param argFile
 	 * @return
 	 */
@@ -2119,7 +2128,7 @@ public class JDFValidator
 
 	/**
 	 * process a single document as specified by doc if doc==null, reprocess the currently stored document
-	 * 
+	 *
 	 * @param doc the parsed document to process
 	 * @return the xml output of the validation
 	 */
@@ -2134,7 +2143,7 @@ public class JDFValidator
 
 	/**
 	 * process a single document as specified by doc if doc==null, reprocess the currently stored document
-	 * 
+	 *
 	 * @param doc the parsed document to process
 	 * @return the xml output of the validation
 	 */
@@ -2159,10 +2168,10 @@ public class JDFValidator
 
 	/**
 	 * process a single document as specified by doc
-	 * 
+	 *
 	 * @param stream the input stream
 	 * @param url the url that the stream is sent to
-	 * 
+	 *
 	 * @return the xml output of the validation
 	 */
 	public XMLDoc processSingleURLStream(final InputStream stream, final String url)
@@ -2173,11 +2182,11 @@ public class JDFValidator
 
 	/**
 	 * process a single document as specified by doc
-	 * 
+	 *
 	 * @param stream the input stream
 	 * @param fileName the fileName that the stream originated from
-	 * @param bp 
-	 * 
+	 * @param bp
+	 *
 	 * @return the xml output of the validation
 	 */
 	public XMLDoc processSingleStream(final InputStream stream, final String fileName, final BodyPart bp)
@@ -2188,7 +2197,7 @@ public class JDFValidator
 
 	/**
 	 * process a single file document as specified by fileName
-	 * 
+	 *
 	 * @param fileName the path of the file to parse and validate
 	 * @return the xml output of the validation
 	 */
@@ -2223,7 +2232,7 @@ public class JDFValidator
 
 	/**
 	 * processes a single file
-	 * 
+	 *
 	 * @param inStream
 	 * @param url
 	 * @param xmlFile
@@ -2238,7 +2247,7 @@ public class JDFValidator
 
 	/**
 	 * processes a single file
-	 * 
+	 *
 	 * @param inStream
 	 * @param url
 	 * @param xmlFile
@@ -2260,7 +2269,7 @@ public class JDFValidator
 		vID.clear();
 		vBadID.clear();
 		vJobPartID.clear();
-		vJobPartID.add("");
+		vJobPartID.add(JDFConstants.EMPTYSTRING);
 		vResources.clear();
 		vLinkedResources.clear();
 		vBadResourceLinks = new VElement();
@@ -2412,17 +2421,7 @@ public class JDFValidator
 
 					if (root == null)
 					{ // no jdf, maybe jmf
-						if (jmf != null)
-						{
-							printMultipleIDs(url, xmlFile, jmf, checkJDFxmlRoot);
-
-							printBad(jmf, 0, checkJDFxmlRoot, true);
-							printJMFDevCap(jmf, checkJDFxmlRoot);
-						}
-						else
-						{
-							checkJDFxmlRoot.setAttribute("FoundJDF", false, null);
-						}
+						processNonJDF(url, xmlFile, checkJDFxmlRoot, jmf);
 					}
 					else
 					{ // we have a jdf
@@ -2542,6 +2541,21 @@ public class JDFValidator
 		return pOut;
 	}
 
+	private void processNonJDF(final String url, final String xmlFile, final KElement checkJDFxmlRoot, final JDFJMF jmf)
+	{
+		if (jmf != null)
+		{
+			printMultipleIDs(url, xmlFile, jmf, checkJDFxmlRoot);
+
+			printBad(jmf, 0, checkJDFxmlRoot, true);
+			printJMFDevCap(jmf, checkJDFxmlRoot);
+		}
+		else
+		{
+			checkJDFxmlRoot.setAttribute("FoundJDF", false, null);
+		}
+	}
+
 	private long evalDevCaps(final KElement testFileRoot, final long lDevCapsTime, final JDFElement root)
 	{
 		long lDevCapsTimeLocal = lDevCapsTime;
@@ -2598,35 +2612,40 @@ public class JDFValidator
 				sysOut.println("Multiple ID elements:\n");
 				for (int i = 0; i < vMultiID.size(); i++)
 				{
-					final String id = vMultiID.get(i);
-					final VElement v = root.getChildrenByTagName(null, null, new JDFAttributeMap("ID", id), false, true, 0);
-					if (id.equals(root.getAttribute("ID")))
-					{
-						v.add(root);
-					}
-
-					for (int ii = 0; ii < v.size(); ii++)
-					{
-						final KElement e = v.item(ii);
-						sysOut.println(id + " \t:" + e.buildXPath(null, 2));
-						if (outRootLocal != null)
-						{
-							KElement idRoot = outRootLocal.getChildWithAttribute("MultiID", "ID", null, e.getAttribute("ID"), 0, true);
-							if (idRoot == null)
-							{
-								idRoot = outRootLocal.appendElement("MultiID");
-							}
-							idRoot.setAttribute("ID", e.getAttribute("ID"));
-							final KElement idInst = idRoot.appendElement("IDInstance");
-							idInst.setAttribute("XPath", e.buildXPath(null, 2));
-							idInst.setAttribute("Name", e.getNodeName());
-						}
-					}
+					processMultiID(root, outRootLocal, i);
 				}
 			}
 			else
 			{
 				sysOut.println("No Multiple ID elements!");
+			}
+		}
+	}
+
+	private void processMultiID(final KElement root, final KElement outRootLocal, final int i)
+	{
+		final String id = vMultiID.get(i);
+		final VElement v = root.getChildrenByTagName(null, null, new JDFAttributeMap("ID", id), false, true, 0);
+		if (id.equals(root.getAttribute("ID")))
+		{
+			v.add(root);
+		}
+
+		for (int ii = 0; ii < v.size(); ii++)
+		{
+			final KElement e = v.item(ii);
+			sysOut.println(id + " \t:" + e.buildXPath(null, 2));
+			if (outRootLocal != null)
+			{
+				KElement idRoot = outRootLocal.getChildWithAttribute("MultiID", "ID", null, e.getAttribute("ID"), 0, true);
+				if (idRoot == null)
+				{
+					idRoot = outRootLocal.appendElement("MultiID");
+				}
+				idRoot.setAttribute("ID", e.getAttribute("ID"));
+				final KElement idInst = idRoot.appendElement("IDInstance");
+				idInst.setAttribute("XPath", e.buildXPath(null, 2));
+				idInst.setAttribute("Name", e.getNodeName());
 			}
 		}
 	}
@@ -2687,9 +2706,9 @@ public class JDFValidator
 	// ////////////////////////////////////////////////////////////////
 	/**
 	 * This is just a quick and dirty class to centrally switch print on and off
-	 * 
+	 *
 	 * @author prosirai
-	 * 
+	 *
 	 */
 	protected static class MySysOut
 	{
@@ -2726,9 +2745,6 @@ public class JDFValidator
 		}
 	}
 
-	// ////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////
 	/**
 	 * @return the bWarning
 	 */

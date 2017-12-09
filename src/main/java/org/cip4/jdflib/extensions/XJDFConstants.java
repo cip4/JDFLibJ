@@ -117,6 +117,7 @@ public abstract class XJDFConstants
 
 	public static final String ModifyQueueEntry = "ModifyQueueEntry";
 	public static final String ModifyQueueEntryParams = "ModifyQueueEntryParams";
+	public static final String ModuleIDs = "ModuleIDs";
 
 	public static final String Parent = "Parent";
 	public static final String ParentID = "ParentID";
@@ -149,6 +150,8 @@ public abstract class XJDFConstants
 	public static final String SheetHeightMin = "SheetHeightMin";
 	public static final String SheetWidthMax = "SheetWidthMax";
 	public static final String SheetWidthMin = "SheetWidthMin";
+	public static final String SourceFrequencyMax = "SourceFrequencyMax";
+	public static final String SourceFrequencyMin = "SourceFrequencyMin";
 	public static final String StickOn = "StickOn";
 	public static final String SurfaceColor = "SurfaceColor";
 

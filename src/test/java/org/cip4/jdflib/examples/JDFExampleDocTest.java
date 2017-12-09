@@ -222,13 +222,11 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 	 */
 	public int doExample(final String strDocType, final String action, final String inFile, final String outFile)
 	{
-		final JDFParser p = new JDFParser();
 		JDFElement root = null;
-
 		// parse the input, if it exists
 		if (inFile != null && !inFile.equals(JDFConstants.EMPTYSTRING))
 		{
-			m_doc = p.parseFile(sm_dirTestDataTemp + inFile);
+			m_doc = JDFDoc.parseFile(sm_dirTestDataTemp + inFile);
 			root = (JDFElement) m_doc.getRoot();
 		}
 		else

@@ -179,9 +179,9 @@ public class JDFElementTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode r = d.getJDFRoot();
 		assertNull(r.appendGeneralID("null", null));
-		JDFGeneralID gi1 = r.setGeneralID("foo", "bar");
+		final JDFGeneralID gi1 = r.setGeneralID("foo", "bar");
 		assertEquals(gi1.getNextSiblingElement(), r.getAuditPool());
-		JDFGeneralID gi2 = r.appendGeneralID("foo2", "bar2");
+		final JDFGeneralID gi2 = r.appendGeneralID("foo2", "bar2");
 		assertEquals(gi1.getNextSiblingElement(), gi2);
 		assertEquals(gi2.getNextSiblingElement(), r.getAuditPool());
 	}
@@ -195,9 +195,9 @@ public class JDFElementTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode r = d.getJDFRoot();
 		assertNull(r.setGeneralID("null", null));
-		JDFGeneralID gi1 = r.setGeneralID("foo", "bar");
+		final JDFGeneralID gi1 = r.setGeneralID("foo", "bar");
 		assertEquals(gi1.getNextSiblingElement(), r.getAuditPool());
-		JDFGeneralID gi2 = r.setGeneralID("foo2", "bar2");
+		final JDFGeneralID gi2 = r.setGeneralID("foo2", "bar2");
 		assertEquals(gi1.getNextSiblingElement(), gi2);
 		assertEquals(gi2.getNextSiblingElement(), r.getAuditPool());
 	}
@@ -278,10 +278,7 @@ public class JDFElementTest extends JDFTestCaseBase
 		// setup the fixture
 		final String xmlFile = "bookintent.jdf";
 
-		// test jdf functions
-		// ==================
-		final JDFParser p = new JDFParser();
-		m_jdfDoc = p.parseFile(sm_dirTestData + xmlFile);
+		m_jdfDoc = JDFDoc.parseFile(sm_dirTestData + xmlFile);
 
 		assertTrue(sm_dirTestData + xmlFile + ": Parse Error", m_jdfDoc != null);
 
@@ -300,7 +297,7 @@ public class JDFElementTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
 		root.setType("foo:bar", false);
-		String fooNS = "www.foo.com";
+		final String fooNS = "www.foo.com";
 		root.addNameSpace("foo", fooNS);
 		final JDFResource r = root.addResource("foo:res", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
 		final JDFResourceLink rl = root.getLink(r, null);
@@ -752,7 +749,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	@Test
 	public void testGetValueForNewAttribute()
 	{
-		JDFElement e = new JDFDoc(ElementName.JMF).getJMFRoot();
+		final JDFElement e = new JDFDoc(ElementName.JMF).getJMFRoot();
 		assertTrue(JDFElement.getValueForNewAttribute(e, "ID").startsWith("I"));
 		assertNull(JDFElement.getValueForNewAttribute(e, null));
 	}
@@ -774,7 +771,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	@Test
 	public void testOrientationMap()
 	{
-		Map<String, EnumOrientation> map = EnumOrientation.getEnumMap();
+		final Map<String, EnumOrientation> map = EnumOrientation.getEnumMap();
 		assertEquals(map.get("Flip0"), EnumOrientation.Flip0);
 	}
 
@@ -898,10 +895,10 @@ public class JDFElementTest extends JDFTestCaseBase
 	@Test
 	public void testIsDeprecated()
 	{
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		assertFalse(n.isDeprecated());
 		assertFalse(n.getCreateAuditPool().isDeprecated());
-		JDFNodeInfo ni = (JDFNodeInfo) n.appendElement(ElementName.NODEINFO);
+		final JDFNodeInfo ni = (JDFNodeInfo) n.appendElement(ElementName.NODEINFO);
 		assertTrue(ni.isDeprecated());
 		assertFalse(n.appendComment().isDeprecated());
 	}
@@ -1131,10 +1128,10 @@ public class JDFElementTest extends JDFTestCaseBase
 	@Test
 	public void testWriteToDirJMF()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSignal(EnumDeviceDetails.Brief, EnumJobDetails.Full);
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSignal(EnumDeviceDetails.Brief, EnumJobDetails.Full);
 		File out = jmf.write2Dir(sm_dirTestDataTemp + "jdfdir");
 		assertEquals(FileUtil.getExtension(out), "jmf");
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setJobID("j1");
 		n.setJobPartID("p1");
 		out = n.write2Dir(sm_dirTestDataTemp + "jdfdir");
@@ -1149,15 +1146,15 @@ public class JDFElementTest extends JDFTestCaseBase
 	public void testCloneNewDoc() throws CloneNotSupportedException
 	{
 		final XMLDoc doc = new JDFDoc("JDF");
-		KElement e = doc.getRoot();
-		KElement d = e.getCreateXPathElement("a/b/c/d[3]");
-		KElement c_clone = d.getParentNode_KElement().cloneNewDoc();
+		final KElement e = doc.getRoot();
+		final KElement d = e.getCreateXPathElement("a/b/c/d[3]");
+		final KElement c_clone = d.getParentNode_KElement().cloneNewDoc();
 		assertNotNull(c_clone);
 		assertTrue(c_clone.isEqual(c_clone.cloneNewDoc()));
 		assertNotSame(c_clone, c_clone.cloneNewDoc());
 		assertNotSame(c_clone.getOwnerDocument(), c_clone.cloneNewDoc().getOwnerDocument());
 
-		KElement rootClone = e.cloneNewDoc();
+		final KElement rootClone = e.cloneNewDoc();
 		assertTrue(rootClone.isEqual(e.cloneNewDoc()));
 		assertNotSame(rootClone, e.cloneNewDoc());
 		assertNotSame(rootClone.getOwnerDocument(), e.cloneNewDoc().getOwnerDocument());

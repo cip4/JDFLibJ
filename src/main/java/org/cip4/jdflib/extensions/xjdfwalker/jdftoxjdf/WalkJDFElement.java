@@ -327,6 +327,15 @@ public class WalkJDFElement extends WalkElement
 		}
 	}
 
+	protected void updateModule(final JDFAttributeMap map)
+	{
+		final String oldModule = map.remove(AttributeName.MODULEINDEX);
+		if (!StringUtil.isEmpty(oldModule) && map.getNonEmpty(AttributeName.MODULEID) == null)
+		{
+			map.put(AttributeName.MODULEID, "Mod" + oldModule);
+		}
+	}
+
 	/**
 	 *
 	 * @param r

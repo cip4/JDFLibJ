@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.cip4.jdflib.util.mime;
 
@@ -19,6 +19,7 @@ import javax.mail.internet.MimeBodyPart;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.JDFParserFactory;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -32,7 +33,7 @@ import org.cip4.jdflib.util.UrlUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * Jul 24, 2009
  */
 public class BodyPartHelper
@@ -41,7 +42,7 @@ public class BodyPartHelper
 
 	/**
 	 * @param bp
-	 * 
+	 *
 	 */
 	public BodyPartHelper(final BodyPart bp)
 	{
@@ -67,7 +68,7 @@ public class BodyPartHelper
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void createBodyPart()
 	{
@@ -76,7 +77,7 @@ public class BodyPartHelper
 
 	/**
 	 * @param cid
-	 * 
+	 *
 	 */
 	public void setContentID(final String cid)
 	{
@@ -141,7 +142,7 @@ public class BodyPartHelper
 		s = getContentID();
 		if (s == null)
 		{
-			int index = getIndex();
+			final int index = getIndex();
 			s = StringUtil.sprintf("part_%04i.txt", "" + index);
 		}
 
@@ -298,12 +299,13 @@ public class BodyPartHelper
 				return null;
 			}
 			final InputStream is = theBodyPart.getInputStream();
-			final JDFParser p = new JDFParser();
+			final JDFParser p = JDFParserFactory.getFactory().get();
 			final JDFDoc doc = p.parseStream(is);
 			if (doc != null)
 			{
 				doc.setBodyPart(theBodyPart);
 			}
+			JDFParserFactory.getFactory().push(p);
 			return doc;
 		}
 		catch (final IOException e)
@@ -375,11 +377,11 @@ public class BodyPartHelper
 	 */
 	public int getIndex()
 	{
-		Multipart mp = theBodyPart.getParent();
+		final Multipart mp = theBodyPart.getParent();
 		if (mp == null)
 			return 0;
-		MimeHelper mh = new MimeHelper(mp);
-		BodyPart[] bps = mh.getBodyParts();
+		final MimeHelper mh = new MimeHelper(mp);
+		final BodyPart[] bps = mh.getBodyParts();
 		for (int i = 0; i < bps.length; i++)
 		{
 			if (bps[i] == theBodyPart)

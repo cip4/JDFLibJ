@@ -73,7 +73,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.resource.process.postpress.JDFCrease;
 
 /**
  *
@@ -98,7 +97,7 @@ public class WalkCrease extends WalkJDFElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFCrease);
+		return !jdfToXJDF.isRetainAll();
 	}
 
 	/**
@@ -114,7 +113,7 @@ public class WalkCrease extends WalkJDFElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.RELATIVESTARTPOSITION);
 		map.remove(AttributeName.RELATIVETRAVEL);

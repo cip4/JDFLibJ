@@ -111,7 +111,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 
 		final VElement vr = ri.getChildElementVector(null, null);
 		int nRes = 0;
-		for (KElement e : vr)
+		for (final KElement e : vr)
 		{
 			if (e instanceof JDFResource)
 			{
@@ -134,23 +134,23 @@ public class WalkResourceInfo extends WalkJDFSubElement
 		return null; // we are done with all relevant kids from JDF
 	}
 
-	void updateInfos(JDFResourceInfo eNew)
+	void updateInfos(final JDFResourceInfo eNew)
 	{
-		VElement v = eNew.getChildElementVector(XJDFConstants.ResourceSet, null);
-		int size = v.size();
+		final VElement v = eNew.getChildElementVector(XJDFConstants.ResourceSet, null);
+		final int size = v.size();
 		if (size > 1)
 		{
-			KElement parent = eNew.getParentNode_KElement();
+			final KElement parent = eNew.getParentNode_KElement();
 			if (parent != null)
 			{
 				int n = 0;
-				VElement vRI = new VElement();
+				final VElement vRI = new VElement();
 				vRI.add(eNew);
 				for (int i = 1; i < size; i++)
 				{
 					vRI.add(parent.copyElement(eNew, null));
 				}
-				for (KElement ri : vRI)
+				for (final KElement ri : vRI)
 				{
 					for (int ii = size - 1; ii >= 0; ii--)
 					{
@@ -170,11 +170,11 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	 * @param ri
 	 * @param ap
 	 */
-	private void moveToResourceSet(JDFResourceInfo ri, JDFResourceInfo jdfRI)
+	private void moveToResourceSet(final JDFResourceInfo ri, final JDFResourceInfo jdfRI)
 	{
-		VJDFAttributeMap vPartMap = jdfRI.getPartMapVector();
+		final VJDFAttributeMap vPartMap = jdfRI.getPartMapVector();
 		setAmountPool(jdfRI, jdfRI, null);
-		JDFAmountPool ap = jdfRI.getAmountPool();
+		final JDFAmountPool ap = jdfRI.getAmountPool();
 		String resName = ri.getXPathAttribute("ResourceSet/@Name", null);
 		if (resName == null)
 		{
@@ -191,9 +191,9 @@ public class WalkResourceInfo extends WalkJDFSubElement
 		set.moveAttribute(AttributeName.ORIENTATION, ri);
 		set.moveAttribute(AttributeName.USAGE, ri);
 
-		SetHelper sh = new SetHelper(set);
-		Vector<ResourceHelper> newParts = sh.getCreatePartitions(vPartMap, false);
-		for (ResourceHelper ph : newParts)
+		final SetHelper sh = new SetHelper(set);
+		final Vector<ResourceHelper> newParts = sh.getCreatePartitions(vPartMap, false);
+		for (final ResourceHelper ph : newParts)
 		{
 			if (ap == null)
 			{
@@ -207,7 +207,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 			}
 			else if (ph.getRoot().getElement(ElementName.AMOUNTPOOL) == null)
 			{
-				JDFAmountPool ap2 = (JDFAmountPool) ap.getParentNode_KElement().copyElement(ap, null);
+				final JDFAmountPool ap2 = (JDFAmountPool) ap.getParentNode_KElement().copyElement(ap, null);
 				ap2.reducePartAmounts(ph.getPartMapVector());
 				jdfToXJDF.walkTree(ap2, ph.getRoot());
 				ap2.deleteNode();
@@ -239,7 +239,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.ACTUALAMOUNT);
 		map.remove(AttributeName.AMOUNT);
@@ -248,6 +248,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 		map.remove(AttributeName.LOTCONTROLLED);
 		map.remove(AttributeName.RESOURCEID);
 		map.remove(AttributeName.STATUS);
+		updateModule(map);
 		super.updateAttributes(map);
 	}
 
@@ -255,7 +256,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#makeRefElements(org.cip4.jdflib.core.JDFElement)
 	 */
 	@Override
-	void makeRefElements(JDFElement je)
+	void makeRefElements(final JDFElement je)
 	{
 		// nop
 	}

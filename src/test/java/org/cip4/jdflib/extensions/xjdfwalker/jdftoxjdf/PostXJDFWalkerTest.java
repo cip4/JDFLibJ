@@ -172,6 +172,34 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testLaminateHardener()
+	{
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
+		final KElement tsp = h.appendResourceSet(ElementName.LAMINATINGPARAMS, EnumUsage.Input).appendPartition(null, true).getResource();
+		tsp.setAttribute(AttributeName.HARDENERTYPE, "toughstough");
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.walkTree(h.getRoot(), null);
+		assertEquals("toughstough", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Hardener").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testLaminateGlue()
+	{
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
+		final KElement tsp = h.appendResourceSet(ElementName.LAMINATINGPARAMS, EnumUsage.Input).appendPartition(null, true).getResource();
+		tsp.setAttribute(AttributeName.ADHESIVETYPE, "toughstough");
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.walkTree(h.getRoot(), null);
+		assertEquals("toughstough", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Glue").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testStitchGauge()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);

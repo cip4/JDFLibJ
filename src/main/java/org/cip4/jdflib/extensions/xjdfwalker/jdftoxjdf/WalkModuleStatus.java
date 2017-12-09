@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,24 +54,29 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.resource.JDFModuleStatus;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -81,7 +86,7 @@ import org.cip4.jdflib.util.StringUtil;
 public class WalkModuleStatus extends WalkJDFSubElement
 {
 	/**
-	 * 
+	 *
 	 */
 	public WalkModuleStatus()
 	{
@@ -96,7 +101,7 @@ public class WalkModuleStatus extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFModuleStatus);
+		return !jdfToXJDF.isRetainAll();
 	}
 
 	/**
@@ -112,21 +117,35 @@ public class WalkModuleStatus extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(KElement jdf, KElement xjdf)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		JDFModuleStatus ms = (JDFModuleStatus) jdf;
-		String id = StringUtil.getNonEmpty(ms.getModuleID());
-		JDFIntegerRangeList index = ms.getModuleIndex();
-		if (id == null && index != null && (index.size() > 0))
+		final JDFModuleStatus ms = (JDFModuleStatus) jdf;
+		final EnumDeviceStatus ds = ms.getDeviceStatus();
+		final EnumDeviceStatus dsi = (xjdf instanceof JDFDeviceInfo) ? ((JDFDeviceInfo) xjdf).getDeviceStatus() : null;
+		final EnumNodeStatus ns = (xjdf instanceof JDFJobPhase) ? ((JDFJobPhase) xjdf).getStatus() : null;
+		final boolean bModuleIdle = EnumDeviceStatus.Down.equals(ds) || EnumDeviceStatus.Idle.equals(ds) || EnumDeviceStatus.Stopped.equals(ds);
+		final boolean bPhaseeIdle = !EnumNodeStatus.InProgress.equals(ns);
+		final boolean needCopy = dsi != null ? dsi.equals(ds) : bModuleIdle == bPhaseeIdle;
+		if (needCopy)
 		{
-			id = "" + index.getElement(0);
+			String id = StringUtil.getNonEmpty(ms.getModuleID());
+			if (id != null && xjdf != null)
+			{
+				xjdf.appendAttribute(XJDFConstants.ModuleIDs, id, null, null, true);
+			}
+			else
+			{
+				final JDFIntegerRangeList index = ms.getModuleIndex();
+				if (index != null)
+				{
+					for (int i = 0; i < index.size(); i++)
+					{
+						id = "" + index.getElement(i);
+						xjdf.appendAttribute("ModuleIDs", id, null, null, true);
+					}
+				}
+			}
 		}
-
-		if (id != null && xjdf != null)
-		{
-			xjdf.appendAttribute("ModuleIDs", id, null, null, true);
-		}
-
 		return null;
 	}
 

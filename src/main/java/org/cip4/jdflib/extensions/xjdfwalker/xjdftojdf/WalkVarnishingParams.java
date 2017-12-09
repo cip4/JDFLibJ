@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,41 +72,19 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.jmf.JDFJobPhase;
-import org.cip4.jdflib.resource.JDFModuleStatus;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkJobPhase extends WalkXElement
+public class WalkVarnishingParams extends WalkResource
 {
 	/**
 	 *
 	 */
-	public WalkJobPhase()
+	public WalkVarnishingParams()
 	{
 		super();
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return toCheck instanceof JDFJobPhase;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return new VString(ElementName.JOBPHASE, null);
 	}
 
 	/**
@@ -115,25 +93,29 @@ public class WalkJobPhase extends WalkXElement
 	@Override
 	protected void updateAttributes(final KElement elem)
 	{
-		moveCostCenterID(elem);
-		updateModuleIDS(elem);
+		final String m = elem.getNonEmpty(AttributeName.MODULEID);
+		if (m != null)
+		{
+			elem.removeAttribute(AttributeName.MODULEID);
+			for (int i = m.length(); i > 0; i--)
+			{
+				final int parsed = StringUtil.parseInt(StringUtil.rightStr(m, i), -1);
+				if (parsed >= 0)
+				{
+					elem.setAttribute(AttributeName.MODULEINDEX, StringUtil.rightStr(m, i));
+					break;
+				}
+			}
+		}
 		super.updateAttributes(elem);
 	}
 
-	private void updateModuleIDS(final KElement elem)
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
 	{
-		final VString modules = VString.getVString(elem.getNonEmpty(XJDFConstants.ModuleIDs), null);
-		elem.removeAttribute(XJDFConstants.ModuleIDs);
-		if (modules != null)
-		{
-			for (final String module : modules)
-			{
-				final JDFModuleStatus mp = (JDFModuleStatus) elem.appendElement(ElementName.MODULESTATUS);
-				mp.setModuleID(module);
-				mp.copyAttribute(AttributeName.DEVICESTATUS, elem.getParentNode_KElement());
-				mp.setModuleType("Unknown");
-			}
-		}
+		return VString.getVString(ElementName.VARNISHINGPARAMS, null);
 	}
-
 }

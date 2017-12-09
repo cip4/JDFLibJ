@@ -89,6 +89,7 @@ import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.JDFParserFactory;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
@@ -200,6 +201,7 @@ public abstract class JDFTestCaseBase
 		final String string = root.getOwnerDocument_JDFElement().write2String(2);
 		final JDFParser jdfParser = getSchemaParser();
 		final JDFDoc doc = jdfParser.parseString(string);
+		JDFParserFactory.getFactory().push(jdfParser);
 		assertEquals(doc.getValidationResult().getRoot().getAttribute("ValidationResult"), "Valid");
 		assertTrue(((JDFElement) doc.getRoot()).isValid(level));
 	}
@@ -485,7 +487,12 @@ public abstract class JDFTestCaseBase
 	protected void writeRoundTrip(final JDFElement root, final String fileBase)
 	{
 		root.write2File(sm_dirTestDataTemp + fileBase + ".jdf");
-		assertTrue(fileBase + ".jdf", root.isValid(EnumValidationLevel.Complete));
+		boolean valid = root.isValid(EnumValidationLevel.Complete);
+		if (!valid)
+		{
+			printValid(root.getOwnerDocument_JDFElement());
+		}
+		assertTrue(fileBase + ".jdf", valid);
 
 		final XJDF20 xjdfConv = new XJDF20();
 		final KElement xjdfRoot = xjdfConv.convert(root);
@@ -508,7 +515,21 @@ public abstract class JDFTestCaseBase
 		JDFElement jxRoot = converted.getJDFRoot();
 		if (jxRoot == null)
 			jxRoot = converted.getJMFRoot();
-		assertTrue(fileBase + ".xjdf.jdf", jxRoot.isValid(EnumValidationLevel.Complete));
+		valid = jxRoot.isValid(EnumValidationLevel.Complete);
+		if (!valid)
+		{
+			printValid(converted);
+		}
+
+		assertTrue(fileBase + ".xjdf.jdf", valid);
+	}
+
+	private XMLDoc printValid(final JDFDoc converted)
+	{
+		final JDFValidator jdfValidator = new JDFValidator();
+		jdfValidator.bQuiet = true;
+		jdfValidator.level = EnumValidationLevel.Complete;
+		return jdfValidator.processSingleDocument(converted);
 	}
 
 	/**
@@ -542,7 +563,7 @@ public abstract class JDFTestCaseBase
 		final boolean valid = jxRoot.isValid(EnumValidationLevel.Complete);
 		if (!valid)
 		{
-			new JDFValidator().processSingleDocument(converted);
+			printValid(converted);
 		}
 		assertTrue(fileBase + ".xjdf.jdf", valid);
 
@@ -637,7 +658,7 @@ public abstract class JDFTestCaseBase
 	 */
 	protected JDFParser getSchemaParser()
 	{
-		final JDFParser parser = new JDFParser();
+		final JDFParser parser = JDFParserFactory.getFactory().get();
 		final File jdfxsd = new File(sm_dirTestSchema + File.separator + "JDF.xsd");
 		assertTrue(jdfxsd.canRead());
 		parser.setJDFSchemaLocation(jdfxsd);

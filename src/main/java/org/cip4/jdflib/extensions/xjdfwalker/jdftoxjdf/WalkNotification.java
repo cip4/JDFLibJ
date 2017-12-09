@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.pool.JDFAuditPool;
@@ -105,7 +106,7 @@ public class WalkNotification extends WalkAudit
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.TIMESTAMP);
 		map.remove(AttributeName.ID);
@@ -115,11 +116,17 @@ public class WalkNotification extends WalkAudit
 		map.remove(AttributeName.AGENTVERSION);
 		map.remove(AttributeName.AGENTNAME);
 		map.remove(AttributeName.TYPE);
-		String clas = map.get(AttributeName.CLASS);
-		if (clas == null || "Event".equals(clas))
+		updateModule(map);
+		updateEvent(map);
+		super.updateAttributes(map);
+	}
+
+	private void updateEvent(final JDFAttributeMap map)
+	{
+		final String clas = map.get(AttributeName.CLASS);
+		if (clas == null || ElementName.EVENT.equals(clas))
 		{
 			map.put(AttributeName.CLASS, "Information");
 		}
-		super.updateAttributes(map);
 	}
 }

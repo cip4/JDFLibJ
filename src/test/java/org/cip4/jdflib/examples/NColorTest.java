@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,6 +69,8 @@
  */
 package org.cip4.jdflib.examples;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.util.HashSet;
 
@@ -92,7 +94,6 @@ import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFModuleStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class NColorTest extends JDFTestCaseBase
@@ -111,15 +112,15 @@ public class NColorTest extends JDFTestCaseBase
 	{
 		KElement.setLongID(false);
 		setup(null, 2);
-		JDFAttributeMap mapS1F = new JDFAttributeMap();
+		final JDFAttributeMap mapS1F = new JDFAttributeMap();
 		mapS1F.put("SheetName", "Sheet2");
 		mapS1F.put("Side", "Front");
 
-		JDFAttributeMap mapS0F = new JDFAttributeMap();
+		final JDFAttributeMap mapS0F = new JDFAttributeMap();
 		mapS0F.put("SheetName", "Sheet1");
 		mapS0F.put("Side", "Front");
 
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		vMap.add(mapS0F);
 		vMap.add(mapS1F);
 		node.getNodeInfo().setIdentical(vMap);
@@ -143,13 +144,13 @@ public class NColorTest extends JDFTestCaseBase
 	public void testPerfectingJMF() throws Exception
 	{
 		KElement.setLongID(false);
-		JDFJMF jmfStatus = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
+		final JDFJMF jmfStatus = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
 		jmfStatus.setSenderID("thePress");
-		JDFSignal sig = jmfStatus.getSignal(0);
-		JDFDeviceInfo di = sig.appendDeviceInfo();
+		final JDFSignal sig = jmfStatus.getSignal(0);
+		final JDFDeviceInfo di = sig.appendDeviceInfo();
 		di.setDeviceStatus(EnumDeviceStatus.Running);
 
-		JDFJobPhase jp = di.appendJobPhase();
+		final JDFJobPhase jp = di.appendJobPhase();
 		jp.setJobID("jobID");
 		jp.setJobPartID("jobPartID");
 		jp.setStatus(EnumNodeStatus.InProgress);
@@ -169,8 +170,9 @@ public class NColorTest extends JDFTestCaseBase
 		ms.setDeviceStatus(EnumDeviceStatus.Idle);
 		ms.setModuleIndex(new JDFIntegerRangeList("2"));
 
-		jmfStatus.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "StatusPerfecting.jmf", 2, false);
-		Assert.assertTrue("known defect - wait for autoclass fix", jmfStatus.isValid(EnumValidationLevel.Complete));
+		//jmfStatus.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "StatusPerfecting.jmf", 2, false);
+		writeRoundTrip(jmfStatus, "StatusPerfecting.jmf");
+		assertTrue("known defect - wait for autoclass fix", jmfStatus.isValid(EnumValidationLevel.Complete));
 	}
 
 	/**
@@ -238,19 +240,19 @@ public class NColorTest extends JDFTestCaseBase
 
 	/**
 	 * simulate running 2 separations on one press
-	 * 
+	 *
 	 * @param bLast
 	 *            TODO
 	 */
-	private void run2Seps(String sheet, EnumSide side, String sep1, String sep2, @SuppressWarnings("unused") int good, @SuppressWarnings("unused") int waste, @SuppressWarnings("unused") String deviceID, @SuppressWarnings("unused") EnumNodeStatus endStatus, boolean bLast)
+	private void run2Seps(final String sheet, final EnumSide side, final String sep1, final String sep2, @SuppressWarnings("unused") final int good, @SuppressWarnings("unused") final int waste, @SuppressWarnings("unused") final String deviceID, @SuppressWarnings("unused") final EnumNodeStatus endStatus, final boolean bLast)
 	{
 		String jmfFile = sm_dirTestDataTemp + File.separator + "NColorStatus";
-		JDFAttributeMap[] map = new JDFAttributeMap[sep1 == null ? 1 : 2];
+		final JDFAttributeMap[] map = new JDFAttributeMap[sep1 == null ? 1 : 2];
 		map[0] = new JDFAttributeMap(EnumPartIDKey.SheetName, sheet);
 		map[0].put(EnumPartIDKey.Side, side);
 		map[0].put(EnumPartIDKey.SignatureName, "Sig1");
 		jmfFile += sheet + "_" + side.getName();
-		boolean bFirst = !doneSheets.contains(sheet);
+		final boolean bFirst = !doneSheets.contains(sheet);
 		if (bFirst)
 		{
 			doneSheets.add(sheet);
@@ -264,12 +266,12 @@ public class NColorTest extends JDFTestCaseBase
 			map[1].put(EnumPartIDKey.Separation, sep2);
 			jmfFile += "_" + sep1 + "_" + sep2;
 		}
-		VJDFAttributeMap vMap = new VJDFAttributeMap(map);
+		final VJDFAttributeMap vMap = new VJDFAttributeMap(map);
 		bgt.makeReady();
 		bgt.execute(vMap, bLast, bFirst);
-		JDFDoc jmfStatus = bgt.getStatusCounter().getDocJMFPhaseTime();
+		final JDFDoc jmfStatus = bgt.getStatusCounter().getDocJMFPhaseTime();
 		jmfStatus.write2File(jmfFile + "_status.jmf", 2, false);
-		JDFDoc jmfRes = bgt.getStatusCounter().getDocJMFResource();
+		final JDFDoc jmfRes = bgt.getStatusCounter().getDocJMFResource();
 		jmfRes.write2File(jmfFile + "_resource.jmf", 2, false);
 	}
 
@@ -278,10 +280,10 @@ public class NColorTest extends JDFTestCaseBase
 	/**
 	 * create 2 sheets with 2 surfaces of 4 seps each
 	 */
-	private void setup(EnumPartIDKey scheduleDepth, int nSheet)
+	private void setup(final EnumPartIDKey scheduleDepth, final int nSheet)
 	{
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
-		JDFAttributeMap map = new JDFAttributeMap();
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap();
 		map.put(EnumPartIDKey.SignatureName, "Sig1");
 		for (int i = 1; i <= nSheet; i++)
 		{
