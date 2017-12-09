@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,7 +74,7 @@ import org.cip4.jdflib.core.KElement;
 import junit.framework.TestCase;
 
 /**
- * 
+ *
  * @author rainer prosi
  *
  */
@@ -82,13 +82,28 @@ public class AuditHelperTest extends TestCase
 {
 
 	/**
-	 * 
+	 *
 	 */
 	public void testCleanup()
 	{
-		KElement audit = KElement.createRoot(ElementName.CREATED, null);
-		MessageHelper ah = new MessageHelper(audit);
+		final KElement audit = KElement.createRoot(ElementName.CREATED, null);
+		final MessageHelper ah = new MessageHelper(audit);
+		ah.appendElement(XJDFConstants.Header);
 		ah.cleanUp();
 		assertNotNull(ah);
 	}
+
+	/**
+	 *
+	 */
+	public void testCleanupResource()
+	{
+		final KElement audit = KElement.createRoot(XJDFConstants.AuditResource, null);
+		final MessageHelper ah = new MessageHelper(audit);
+		final KElement header = ah.appendElement(XJDFConstants.Header);
+		final KElement rs = ah.appendElement(XJDFConstants.ResourceSet);
+		ah.cleanUp();
+		assertEquals(header.getNextSiblingElement(), rs);
+	}
+
 }

@@ -93,12 +93,12 @@ class XJDFCleanupComparator extends KElement.SimpleElementNameComparator
 	 * @see org.cip4.jdflib.core.KElement.SimpleElementNameComparator#compare(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public int compare(KElement o1, KElement o2)
+	public int compare(final KElement o1, final KElement o2)
 	{
 		if (o1 != null && o2 != null)
 		{
-			String name1 = o1.getLocalName();
-			String name2 = o2.getLocalName();
+			final String name1 = o1.getLocalName();
+			final String name2 = o2.getLocalName();
 			if (XJDFConstants.Header.equals(name1))
 			{
 				return XJDFConstants.Header.equals(name2) ? 0 : -1;
@@ -108,18 +108,21 @@ class XJDFCleanupComparator extends KElement.SimpleElementNameComparator
 				return 1;
 			}
 
-			KElement parent = o1.getParentNode_KElement();
+			final KElement parent = o1.getParentNode_KElement();
 			if (mustRetain(parent))
 			{
 				return 0;
 			}
-			if (ElementName.SUBSCRIPTION.equals(name1))
+			for (final String elemName : new String[] { ElementName.SUBSCRIPTION, ElementName.NOTIFICATION })
 			{
-				return ElementName.SUBSCRIPTION.equals(name2) ? 0 : -1;
-			}
-			if (ElementName.SUBSCRIPTION.equals(name2))
-			{
-				return 1;
+				if (elemName.equals(name1))
+				{
+					return elemName.equals(name2) ? 0 : -1;
+				}
+				if (elemName.equals(name2))
+				{
+					return 1;
+				}
 			}
 			if (JDFElement.isInXJDFNameSpaceStatic(o2.getNamespaceURI()) && !JDFElement.isInXJDFNameSpaceStatic(o1.getNamespaceURI()))
 			{
@@ -137,7 +140,7 @@ class XJDFCleanupComparator extends KElement.SimpleElementNameComparator
 		return super.compare(o1, o2);
 	}
 
-	private boolean mustRetain(KElement parent)
+	private boolean mustRetain(final KElement parent)
 	{
 		if (retain == null)
 		{

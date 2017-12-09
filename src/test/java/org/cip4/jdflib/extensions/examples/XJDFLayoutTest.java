@@ -218,7 +218,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 
 		for (final JDFLayout lo : vLO)
 		{
-			lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndTurn.getName());
+			lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.getName());
 			lo.setAutomated(true);
 			final ResourceHelper helper = ResourceHelper.getHelper(lo);
 			final JDFAttributeMap partMap = helper.getPartMap();

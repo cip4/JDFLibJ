@@ -77,9 +77,12 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.jmf.JDFKnownMsgQuParams;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.jmf.JDFSubscription;
+import org.cip4.jdflib.resource.JDFNotification;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -103,9 +106,9 @@ public class MessageHelperTest extends JDFTestCaseBase
 	@Test
 	public void testSubscribe()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
-		JDFSubscription sub = mh.subscribe("http://foo");
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
+		final JDFSubscription sub = mh.subscribe("http://foo");
 		assertNotNull(sub);
 		writeRoundTripX(xjmfHelper.theElement, "subscribe.xjmf");
 	}
@@ -114,9 +117,44 @@ public class MessageHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testCleanupNotification()
+	{
+		final KElement resp = new XJMFHelper().getRoot().appendElement("ResponseKnownMessages");
+		final JDFMessageService ms = (JDFMessageService) resp.appendElement(ElementName.MESSAGESERVICE);
+		ms.setType("ResponseKnownMessages");
+		final JDFNotification not = (JDFNotification) resp.appendElement(ElementName.NOTIFICATION);
+		not.setType("bar");
+		final MessageHelper ah = new MessageHelper(resp);
+		final KElement header = resp.appendElement(XJDFConstants.Header);
+		ah.cleanUp();
+		assertEquals(not.getNextSiblingElement(), ms);
+		assertEquals(header.getNextSiblingElement(), not);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCleanupSubscription()
+	{
+		final KElement resp = new XJMFHelper().getRoot().appendElement("ResponseKnownMessages");
+		final JDFKnownMsgQuParams ms = (JDFKnownMsgQuParams) resp.appendElement(ElementName.KNOWNMSGQUPARAMS);
+		final JDFSubscription sub = (JDFSubscription) resp.appendElement(ElementName.SUBSCRIPTION);
+		sub.setURL("bar");
+		final MessageHelper ah = new MessageHelper(resp);
+		final KElement header = resp.appendElement(XJDFConstants.Header);
+		ah.cleanUp();
+		assertEquals(sub.getNextSiblingElement(), ms);
+		assertEquals(header.getNextSiblingElement(), sub);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testIsQuery()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
+		final XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
 		assertTrue(mh.isQuery());
 		mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
@@ -129,7 +167,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	@Test
 	public void testIsCommand()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
+		final XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
 		assertTrue(mh.isCommand());
 		mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
@@ -142,7 +180,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	@Test
 	public void testIsSignal()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
+		final XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
 		assertTrue(mh.isSignal());
 		mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
@@ -155,7 +193,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	@Test
 	public void testIsResponse()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
+		final XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
 		assertTrue(mh.isResponse());
 		mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
@@ -168,8 +206,8 @@ public class MessageHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetReturnCode()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
 		assertEquals(0, mh.getReturnCode());
 		mh.setAttribute(AttributeName.RETURNCODE, "6");
 		assertEquals(6, mh.getReturnCode());
@@ -181,9 +219,9 @@ public class MessageHelperTest extends JDFTestCaseBase
 	@Test
 	public void testSetQuery()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
-		MessageHelper mhc = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Status);
+		final MessageHelper mhc = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
 		mh.setQuery(mhc);
 		assertEquals(mhc.getHeader().getID(), mh.getHeader().getAttribute(AttributeName.REFID));
 		writeRoundTripX(xjmfHelper.theElement, "setQuery.xjmf");
@@ -195,14 +233,28 @@ public class MessageHelperTest extends JDFTestCaseBase
 	@Test
 	public void testSetQuerySignal()
 	{
-		XJMFHelper xjmfHelper = new XJMFHelper();
-		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
 		mh.appendElement(ElementName.DEVICEINFO).setAttribute(AttributeName.STATUS, "Idle");
 
-		MessageHelper mhc = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
+		final MessageHelper mhc = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
 		mh.setQuery(mhc);
 		assertEquals(mhc.getHeader().getID(), mh.getHeader().getAttribute(AttributeName.REFID));
 		writeRoundTripX(xjmfHelper.theElement, "setQuerySignal.xjmf");
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testSchemaNotification()
+	{
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.KnownMessages);
+		mh.appendElement(ElementName.MESSAGESERVICE).setAttribute(AttributeName.TYPE, "KnownMessages");
+		mh.appendElement(ElementName.NOTIFICATION).setAttribute(AttributeName.CLASS, "Event");
+		mh.cleanUp();
+		writeRoundTripX(xjmfHelper.theElement, "knownMessagesResponse.xjmf");
 	}
 
 }
