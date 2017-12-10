@@ -86,6 +86,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoFileSpec;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.ifaces.IURLSetter;
+import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.mime.MimeReader;
@@ -193,7 +194,11 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	public void setMimeURL(final String url)
 	{
 		setURL(url);
-		setMimeType(UrlUtil.getMimeTypeFromURL(url));
+		final String mimeTypeFromURL = UrlUtil.getMimeTypeFromURL(url);
+		if (!MimeUtil.TEXT_UNKNOWN.equals(mimeTypeFromURL))
+		{
+			setMimeType(mimeTypeFromURL);
+		}
 	}
 
 	/**

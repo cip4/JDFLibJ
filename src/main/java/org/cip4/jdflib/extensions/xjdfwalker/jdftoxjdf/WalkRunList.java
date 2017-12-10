@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,32 +54,37 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFRunList;
 
 /**
- * 
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class WalkRunList extends WalkResource
 {
 	/**
-	 * 
+	 *
 	 */
 	public WalkRunList()
 	{
@@ -94,6 +99,57 @@ public class WalkRunList extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFRunList);
+		return !jdfToXJDF.isRetainAll();
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(final JDFAttributeMap map)
+	{
+		map.remove(AttributeName.DIRECTORY);
+		map.remove(AttributeName.DOCNAMES);
+		map.remove(AttributeName.ENDOFBUNDLEITEM);
+		map.remove(AttributeName.FIRSTPAGE);
+		map.remove(AttributeName.IGNORECONTEXT);
+		map.remove(AttributeName.ISPAGE);
+		map.remove(AttributeName.PAGECOPIES);
+		map.remove(AttributeName.PAGENAMES);
+		map.remove(AttributeName.PAGELISTINDEX);
+		map.remove(AttributeName.SETNAMES);
+		map.remove(AttributeName.SHEETSIDES);
+		map.remove(AttributeName.SKIPPAGE);
+		map.remove(AttributeName.SORTED);
+		super.updateAttributes(map);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
+	{
+		return VString.getVString(ElementName.RUNLIST, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#setAttributes(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void setAttributes(final KElement jdf, final KElement eNew)
+	{
+		final String dir = jdf.getNonEmpty(AttributeName.DIRECTORY);
+		if (dir != null)
+		{
+			final JDFRunList rl = (JDFRunList) jdf;
+			final JDFFileSpec fs = rl.getFileSpec();
+			if (fs == null || !fs.hasNonEmpty(AttributeName.URL))
+			{
+				rl.setFileURL(dir);
+			}
+
+		}
+		super.setAttributes(jdf, eNew);
 	}
 }

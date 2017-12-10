@@ -105,6 +105,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -952,6 +953,37 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		conv.setRetainAll(true);
 		xjdf = conv.makeNewJDF(n, null);
 		assertNotNull(xjdf);
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testRunListDir()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.RasterReading);
+		final JDFRunList r1 = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		r1.setFileURL("file:///foo.pdf");
+		final JDFRunList r2 = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Output);
+		r2.setDirectory("file:///dir");
+		writeRoundTrip(n, "RunListDir");
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testRunListCopies()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.RasterReading);
+		final JDFRunList r1 = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		r1.setFileURL("file:///foo.pdf");
+		r1.setDocCopies(new JDFIntegerRangeList(new JDFIntegerRange(42)));
+		final JDFRunList r2 = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Output);
+		r2.setFileURL("file:///fooout.pdf");
+		writeRoundTrip(n, "RunListCopies");
 	}
 
 	/**

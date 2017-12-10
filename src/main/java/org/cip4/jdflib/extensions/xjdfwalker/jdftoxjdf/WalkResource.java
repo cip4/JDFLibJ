@@ -72,6 +72,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.JDFResource;
@@ -118,6 +119,18 @@ public class WalkResource extends WalkJDFElement
 			}
 		}
 		return newResLeaf;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(final JDFAttributeMap map)
+	{
+		map.remove(AttributeName.DOCCOPIES);
+		map.remove(AttributeName.SETCOPIES);
+		map.remove(AttributeName.RUNTAG);
+		super.updateAttributes(map);
 	}
 
 	/**

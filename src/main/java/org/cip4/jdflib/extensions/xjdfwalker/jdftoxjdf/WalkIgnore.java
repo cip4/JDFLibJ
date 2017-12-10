@@ -133,6 +133,7 @@ public class WalkIgnore extends WalkElement
 		v.add(ElementName.DEVCAP);
 		v.add(ElementName.DEVICECAP);
 		v.add(ElementName.DIGITALDELIVERYPARAMS);
+		v.add(ElementName.DISPOSITION);
 		v.add(ElementName.ELEMENTCOLORPARAMS);
 		v.add(ElementName.FILEALIAS);
 		v.add(ElementName.FOLDOPERATION);
