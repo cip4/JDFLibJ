@@ -125,7 +125,7 @@ public class WalkModuleStatus extends WalkJDFSubElement
 		final EnumNodeStatus ns = (xjdf instanceof JDFJobPhase) ? ((JDFJobPhase) xjdf).getStatus() : null;
 		final boolean bModuleIdle = EnumDeviceStatus.Down.equals(ds) || EnumDeviceStatus.Idle.equals(ds) || EnumDeviceStatus.Stopped.equals(ds);
 		final boolean bPhaseeIdle = !EnumNodeStatus.InProgress.equals(ns);
-		final boolean needCopy = dsi != null ? dsi.equals(ds) : bModuleIdle == bPhaseeIdle;
+		final boolean needCopy = ds == null || (dsi != null ? dsi.equals(ds) : bModuleIdle == bPhaseeIdle);
 		if (needCopy)
 		{
 			String id = StringUtil.getNonEmpty(ms.getModuleID());
