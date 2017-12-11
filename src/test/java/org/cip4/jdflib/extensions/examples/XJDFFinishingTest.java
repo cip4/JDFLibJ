@@ -226,13 +226,13 @@ public class XJDFFinishingTest extends JDFTestCaseBase
 		final JDFMetadataMap md0 = (JDFMetadataMap) idf.appendElement(ElementName.METADATAMAP);
 		md0.setName("JobID");
 		md0.setValueFormat("Job_%s");
-		md0.setValueTemplate("sheet");
+		md0.setValueTemplate("job");
 		final JDFMetadataMap md2 = (JDFMetadataMap) idf.appendElement(ElementName.METADATAMAP);
 		md2.setName("DocIndex");
 		md2.setValueFormat("%i %i");
 		md2.setValueTemplate("doc doc");
 		final JDFMetadataMap md1 = (JDFMetadataMap) idf.appendElement(ElementName.METADATAMAP);
-		md1.setName("RunIndex");
+		md1.setName("SheetIndex");
 		md1.setValueFormat("%i %i");
 		md1.setValueTemplate("sheet sheet");
 		cleanSnippets(xjdfHelper);
