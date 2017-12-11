@@ -517,53 +517,6 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	}
 
 	/**
-	 * getFirstEnd with some better defaulting in case end or last is set
-	 * @return
-	 */
-	@Override
-	public JDFDate getFirstEnd()
-	{
-		JDFDate firstEnd = super.getFirstEnd();
-		return firstEnd == null ? getEnd() : firstEnd;
-	}
-
-	/**
-	 * getFirstStart with some better defaulting  
-	 * 
-	 * @return
-	 */
-	@Override
-	public JDFDate getFirstStart()
-	{
-		JDFDate firstStart = super.getFirstStart();
-		return firstStart == null ? getStart() : firstStart;
-	}
-
-	/**
-	 * getLastEnd with some better defaulting  
-	 * 
-	 * @return
-	 */
-	@Override
-	public JDFDate getLastEnd()
-	{
-		JDFDate lastEnd = super.getLastEnd();
-		return lastEnd == null ? getEnd() : lastEnd;
-	}
-
-	/**
-	 * getLastStart with some better defaulting  
-	 * 
-	 * @return
-	 */
-	@Override
-	public JDFDate getLastStart()
-	{
-		JDFDate lastStart = super.getLastStart();
-		return lastStart == null ? getStart() : lastStart;
-	}
-
-	/**
 	 * getStart with some better defaulting  
 	 * 
 	 * @return

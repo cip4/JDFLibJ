@@ -751,10 +751,6 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	public JDFResource getTarget()
 	{
 		final VElement v = getTargetVector(-1);
-		if (v == null)
-		{
-			return null;
-		}
 		return (JDFResource) v.getCommonAncestor();
 	}
 
@@ -1250,24 +1246,21 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 			return true;
 		}
 
-		if (vRes != null)
+		for (final KElement e : vRes)
 		{
-			for (final KElement e : vRes)
+			final JDFResource r = (JDFResource) e;
+			// reslinks that point to nothing may be valid but they certainly aren't valid if they point to the wrong resource
+			if (!getNodeName().equals(r.getLinkString()))
 			{
-				final JDFResource r = (JDFResource) e;
-				// reslinks that point to nothing may be valid but they certainly aren't valid if they point to the wrong resource
-				if (!getNodeName().equals(r.getLinkString()))
+				return false;
+			}
+
+			if (levelLocal.getValue() >= EnumValidationLevel.RecursiveIncomplete.getValue())
+			{
+				final EnumValidationLevel valDown = (levelLocal == EnumValidationLevel.RecursiveIncomplete) ? EnumValidationLevel.Incomplete : EnumValidationLevel.Complete;
+				if (!r.isValid(valDown))
 				{
 					return false;
-				}
-
-				if (levelLocal.getValue() >= EnumValidationLevel.RecursiveIncomplete.getValue())
-				{
-					final EnumValidationLevel valDown = (levelLocal == EnumValidationLevel.RecursiveIncomplete) ? EnumValidationLevel.Incomplete : EnumValidationLevel.Complete;
-					if (!r.isValid(valDown))
-					{
-						return false;
-					}
 				}
 			}
 		}

@@ -1872,19 +1872,22 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
-			final JDFIdentical id = (JDFIdentical) xjdf;
-			final KElement xjdfRes = xjdf.getDeepParent(XJDFConstants.Resource, 0);
-			final KElement set = xjdfRes == null ? null : xjdfRes.getDeepParent(XJDFConstants.ResourceSet, 0);
-			if (set != null)
+			if (xjdf instanceof JDFIdentical)
 			{
-				final JDFAttributeMap trgMap = id.getPartMap();
-				final SetHelper sh = new SetHelper(set);
-				final ResourceHelper targetHelper = sh.getPartition(trgMap);
-				if (targetHelper != null)
+				final JDFIdentical id = (JDFIdentical) xjdf;
+				final KElement xjdfRes = xjdf.getDeepParent(XJDFConstants.Resource, 0);
+				final KElement set = xjdfRes == null ? null : xjdfRes.getDeepParent(XJDFConstants.ResourceSet, 0);
+				if (set != null)
 				{
-					targetHelper.appendPartMap(new ResourceHelper(xjdfRes).getPartMap());
+					final JDFAttributeMap trgMap = id.getPartMap();
+					final SetHelper sh = new SetHelper(set);
+					final ResourceHelper targetHelper = sh.getPartition(trgMap);
+					if (targetHelper != null)
+					{
+						targetHelper.appendPartMap(new ResourceHelper(xjdfRes).getPartMap());
+					}
+					xjdfRes.deleteNode();
 				}
-				xjdfRes.deleteNode();
 			}
 			return null;
 		}
