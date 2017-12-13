@@ -886,6 +886,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
 
 		final ResourceHelper res = h.appendResourceSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input).appendPartition(map, true);
+		res.getResource().setAttribute(AttributeName.WORKSTYLE, "Simplex");
 		final JDFAttributeMap s2 = new JDFAttributeMap(AttributeName.SHEETNAME, "s2");
 		res.appendPartMap(s2);
 		final JDFDoc d = xCon.convert(e);

@@ -8347,7 +8347,7 @@ public class JDFResource extends JDFElement
 
 	/**
 	 * if true, subelements are initialized with a class attribute
-	
+
 	 * @param autoSubElementClass
 	 */
 	public static void setAutoSubElementClass(final boolean autoSubElementClass)
@@ -8367,5 +8367,16 @@ public class JDFResource extends JDFElement
 		if (JDFResource.class != e.getClass())
 			return (JDFResource) (getClass() == e.getClass() ? e : null);
 		return (JDFResource) (e.getNodeName().equals(getNodeName()) ? e : null);
+	}
+
+	/**
+	 * get a leaf, null if index out of bounds
+	 * @param i
+	 * @return
+	 */
+	public JDFResource getLeaf(final int i)
+	{
+		final VElement v = getLeaves(false);
+		return v == null ? null : (JDFResource) v.get(i);
 	}
 }
