@@ -171,7 +171,7 @@ public class WalkJDFElement extends WalkElement
 	 * @param je
 	 * @param r
 	 */
-	private void cleanRefs(final JDFElement je, JDFResource r)
+	void cleanRefs(final JDFElement je, JDFResource r)
 	{
 		final JDFNode parentJDF = je.getParentJDF();
 		if (parentJDF != null)
@@ -182,6 +182,7 @@ public class WalkJDFElement extends WalkElement
 			{
 				r = removeDuplicateRefs(r, prevPool);
 			}
+			jdfToXJDF.getResourceAlias().add(r.getID());
 		}
 		else if (je.getJMFRoot() != null)
 		{
@@ -212,8 +213,8 @@ public class WalkJDFElement extends WalkElement
 				{
 					continue;
 				}
-				final String pid = getID(prev);
-				final String rid = getID(r);
+				final String pid = prev.getID();
+				final String rid = r.getID();
 				prev.removeAttribute(AttributeName.ID); // for comparing
 				r.removeAttribute(AttributeName.ID);
 				if (r.isEqual(prev)) // found duplicate - remove and ref the original
@@ -384,7 +385,7 @@ public class WalkJDFElement extends WalkElement
 			linkTarget.expand(false);
 		}
 
-		final String resID = getID(linkTarget);
+		final String resID = getResID(linkTarget, rl);
 		KElement resourceSet = getSet(resID, xRoot, className);
 		if (resourceSet == null)
 		{
@@ -420,15 +421,17 @@ public class WalkJDFElement extends WalkElement
 	/**
 	 *
 	 * @param linkTarget
+	 * @param rl
 	 * @return
 	 */
-	protected String getID(JDFResource linkTarget)
+	protected String getResID(final JDFResource linkTarget, final JDFElement rl)
 	{
-		linkTarget = linkTarget.getResourceRoot();
-		if (linkTarget.isResourceRootRoot())
-			return linkTarget.getID();
-		final KElement e = linkTarget.getParentNode_KElement();
-		return e == null ? null : e.getLocalName();
+		String resID = linkTarget.getID();
+		if (jdfToXJDF.getResourceAlias().contains(resID) && (rl instanceof JDFRefElement))
+		{
+			resID = rl.getParentNode_KElement().getLocalName();
+		}
+		return resID;
 	}
 
 	/**

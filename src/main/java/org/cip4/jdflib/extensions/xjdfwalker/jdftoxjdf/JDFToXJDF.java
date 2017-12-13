@@ -131,15 +131,24 @@ public class JDFToXJDF extends PackageElementWalker
 		rootID = null;
 		KElement.uniqueID(-1000); // don't start at zero to avoid collisions in short ID scenarios
 		componentProductMap = new JDFAttributeMap();
+		resourceAlias = new HashSet<>();
+	}
+
+	/**
+	 * @return the resourceAlias
+	 */
+	protected Set<String> getResourceAlias()
+	{
+		return resourceAlias;
 	}
 
 	/**
 	 * @see org.cip4.jdflib.elementwalker.PackageElementWalker#constructWalker(java.lang.String)
 	 */
 	@Override
-	protected BaseWalker constructWalker(String name)
+	protected BaseWalker constructWalker(final String name)
 	{
-		WalkElement constructWalker = (WalkElement) super.constructWalker(name);
+		final WalkElement constructWalker = (WalkElement) super.constructWalker(name);
 		if (constructWalker != null)
 			constructWalker.setParent(this);
 		return constructWalker;
@@ -153,7 +162,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	protected String getClassName(final JDFResource r)
 	{
-		WalkResource w = getWalker(r);
+		final WalkResource w = getWalker(r);
 		return (w == null) ? null : w.getClassName(r);
 	}
 
@@ -162,11 +171,11 @@ public class JDFToXJDF extends PackageElementWalker
 	 * @param r
 	 * @return
 	 */
-	protected WalkResource getWalker(JDFResource r)
+	protected WalkResource getWalker(final JDFResource r)
 	{
 		if (r == null)
 			return null;
-		IWalker walker = theFactory.getWalker(r);
+		final IWalker walker = theFactory.getWalker(r);
 		return (walker instanceof WalkResource) ? (WalkResource) walker : null;
 	}
 
@@ -175,7 +184,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * if true, add a modified audit
 	 * @param trackAudits
 	 */
-	public void setTrackAudits(boolean trackAudits)
+	public void setTrackAudits(final boolean trackAudits)
 	{
 		this.trackAudits = trackAudits;
 	}
@@ -225,7 +234,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * Setter for bExplicitWaste attribute. if true PartAmount has explicit amounts for good and waste rather than partitions
 	 * @param bExplicitWaste the bExplicitWaste to set
 	 */
-	public void setExplicitWaste(boolean bExplicitWaste)
+	public void setExplicitWaste(final boolean bExplicitWaste)
 	{
 		this.bExplicitWaste = bExplicitWaste;
 	}
@@ -293,7 +302,7 @@ public class JDFToXJDF extends PackageElementWalker
 	/**
 	 * @param bParameterSet the bParameterSet to set
 	 */
-	public void setParameterSet(boolean bParameterSet)
+	public void setParameterSet(final boolean bParameterSet)
 	{
 		this.bParameterSet = bParameterSet;
 	}
@@ -304,6 +313,7 @@ public class JDFToXJDF extends PackageElementWalker
 	private boolean wantProduct;
 
 	final private JDFAttributeMap componentProductMap;
+	final Set<String> resourceAlias;
 
 	/**
 	 *
@@ -318,7 +328,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 *
 	 * @param wantProduct
 	 */
-	public void setWantProduct(boolean wantProduct)
+	public void setWantProduct(final boolean wantProduct)
 	{
 		this.wantProduct = wantProduct;
 	}
@@ -340,7 +350,7 @@ public class JDFToXJDF extends PackageElementWalker
 	/**
 	 * @param bProcessList the ProcessList to set
 	 */
-	public void setProcessPart(EnumProcessPartition process)
+	public void setProcessPart(final EnumProcessPartition process)
 	{
 		this.processPartition = process;
 	}
@@ -358,7 +368,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 *
 	 * @param removeSignatureName
 	 */
-	public void setRemoveSignatureName(boolean removeSignatureName)
+	public void setRemoveSignatureName(final boolean removeSignatureName)
 	{
 		this.removeSignatureName = removeSignatureName;
 	}
@@ -416,7 +426,7 @@ public class JDFToXJDF extends PackageElementWalker
 			rootID = node.getID();
 			preFixVersion(root);
 
-			String id = StringUtil.getNonEmpty(node.getID());
+			final String id = StringUtil.getNonEmpty(node.getID());
 			oldRoot = id == null ? root : (JDFNode) root.getChildWithAttribute(null, "ID", null, id, 0, false);
 			if (oldRoot == null)
 			{
@@ -447,7 +457,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	private void preFixVersion(final JDFElement root)
 	{
-		FixVersion vers = new FixVersion(EnumVersion.Version_2_0);
+		final FixVersion vers = new FixVersion(EnumVersion.Version_2_0);
 		vers.setLayoutPrepToStripping(bMergeLayoutPrep);
 		vers.setZappDeprecated(true);
 
@@ -458,9 +468,9 @@ public class JDFToXJDF extends PackageElementWalker
 	 *
 	 * @param bJMF
 	 */
-	private void postWalk(boolean bJMF)
+	private void postWalk(final boolean bJMF)
 	{
-		PostXJDFWalker pw = new PostXJDFWalker((JDFElement) newRoot);
+		final PostXJDFWalker pw = new PostXJDFWalker((JDFElement) newRoot);
 		pw.setMergeLayout(bMergeLayout);
 		pw.setIntentPartition(bIntentPartition);
 		pw.setRemoveSignatureName(removeSignatureName);
@@ -484,12 +494,12 @@ public class JDFToXJDF extends PackageElementWalker
 		{
 			if (trackAudits)
 			{
-				JDFAuditPool auditPool = (JDFAuditPool) newRoot.getCreateElement(ElementName.AUDITPOOL);
-				boolean hasCreated = auditPool.hasChildElement(ElementName.CREATED, null) || auditPool.hasChildElement("AuditCreated", null);
+				final JDFAuditPool auditPool = (JDFAuditPool) newRoot.getCreateElement(ElementName.AUDITPOOL);
+				final boolean hasCreated = auditPool.hasChildElement(ElementName.CREATED, null) || auditPool.hasChildElement("AuditCreated", null);
 				if (!hasCreated)
 				{
-					KElement c = auditPool.appendElement("AuditCreated");
-					KElement header = c.appendElement(XJDFConstants.Header);
+					final KElement c = auditPool.appendElement("AuditCreated");
+					final KElement header = c.appendElement(XJDFConstants.Header);
 					header.setAttribute(AttributeName.AGENTNAME, "JDF To XJDF Converter");
 					header.setAttribute(AttributeName.AGENTVERSION, JDFAudit.getStaticAgentVersion());
 					header.setAttribute(AttributeName.TIME, new JDFDate().getDateTimeISO());
@@ -500,7 +510,7 @@ public class JDFToXJDF extends PackageElementWalker
 				new XJDFHelper(newRoot).cleanUp();
 			}
 		}
-		RemoveEmpty removeEmpty = new RemoveEmpty();
+		final RemoveEmpty removeEmpty = new RemoveEmpty();
 		removeEmpty.addIgnoreElement(XJDFConstants.Header);
 		removeEmpty.addIgnoreElement(ElementName.MARKOBJECT);
 		removeEmpty.addIgnoreElement(ElementName.CONTENTOBJECT);
@@ -512,7 +522,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * prepares the root so that inherited stuff from the ancestorpool does not get lost
 	 * @param node
 	 */
-	private void prepareRoot(JDFNode node)
+	private void prepareRoot(final JDFNode node)
 	{
 		if (node != null)
 		{
@@ -534,7 +544,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * @param bJMF if true, create a jmf
 	 *
 	 */
-	private void prepareNewDoc(boolean bJMF)
+	private void prepareNewDoc(final boolean bJMF)
 	{
 		final JDFDoc newDoc = new JDFDoc(bJMF ? (bTypeSafeMessage ? XJDFConstants.XJMF : rootJMF) : XJDFConstants.XJDF, EnumVersion.Version_2_0);
 		newDoc.setInitOnCreate(false);
@@ -548,7 +558,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * @param compID
 	 * @param productID
 	 */
-	protected void putComponentProduct(String compID, String productID)
+	protected void putComponentProduct(final String compID, final String productID)
 	{
 		componentProductMap.put(compID, productID);
 	}
@@ -558,7 +568,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * @param compID
 	 * @return
 	 */
-	protected String getProduct(String compID)
+	protected String getProduct(final String compID)
 	{
 		return componentProductMap.get(compID);
 	}
@@ -598,7 +608,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * @param root
 	 * @return
 	 */
-	public Vector<XJDFHelper> getXJDFs(JDFNode root)
+	public Vector<XJDFHelper> getXJDFs(final JDFNode root)
 	{
 		return new MultiJDFToXJDF().getXJDFs(root);
 	}
@@ -644,7 +654,7 @@ public class JDFToXJDF extends PackageElementWalker
 		 */
 		void writeStream(final OutputStream os, final JDFNode rootNode, final JDFJMF jmf)
 		{
-			KElement xjmf = makeNewJMF(jmf);
+			final KElement xjmf = makeNewJMF(jmf);
 			writeZipStream(rootNode, os, "xjdfs", xjmf);
 		}
 
@@ -652,7 +662,7 @@ public class JDFToXJDF extends PackageElementWalker
 		 * @param rootNode
 		 * @param fos
 		 */
-		private void writeZipStream(final JDFNode rootNode, final OutputStream fos, String dirName, KElement xjmf)
+		private void writeZipStream(final JDFNode rootNode, final OutputStream fos, final String dirName, final KElement xjmf)
 		{
 			setSingleNode(true);
 			try
@@ -662,7 +672,7 @@ public class JDFToXJDF extends PackageElementWalker
 				final ZipOutputStream zos = new ZipOutputStream(fos);
 				writeXJMF(xjmf, zos);
 				int nZip = 0;
-				for (XJDFHelper h : vXJDFs)
+				for (final XJDFHelper h : vXJDFs)
 				{
 					try
 					{
@@ -691,7 +701,7 @@ public class JDFToXJDF extends PackageElementWalker
 		 * @param zos
 		 * @throws IOException
 		 */
-		private void writeXJMF(KElement xjmf, final ZipOutputStream zos) throws IOException
+		private void writeXJMF(final KElement xjmf, final ZipOutputStream zos) throws IOException
 		{
 			if (xjmf != null)
 			{
@@ -722,24 +732,24 @@ public class JDFToXJDF extends PackageElementWalker
 		 * @param root
 		 * @return
 		 */
-		Vector<XJDFHelper> getXJDFs(JDFNode root)
+		Vector<XJDFHelper> getXJDFs(final JDFNode root)
 		{
 			if (root == null)
 				return null;
 			setSingleNode(true);
-			Vector<XJDFHelper> vRet = new Vector<XJDFHelper>();
-			VElement v = getProcessNodes(root);
-			boolean keepProduct = wantProduct;
+			final Vector<XJDFHelper> vRet = new Vector<XJDFHelper>();
+			final VElement v = getProcessNodes(root);
+			final boolean keepProduct = wantProduct;
 			wantProduct = true;
 			if (JDFConstants.PRODUCT.equals(root.getType()))
 			{
-				XJDFHelper xjdfHelper = convertSingle(root);
+				final XJDFHelper xjdfHelper = convertSingle(root);
 				vRet.add(xjdfHelper);
 			}
 			wantProduct = false;
-			for (KElement n : v)
+			for (final KElement n : v)
 			{
-				XJDFHelper xjdfHelper = convertSingle(n);
+				final XJDFHelper xjdfHelper = convertSingle(n);
 				vRet.add(xjdfHelper);
 			}
 			wantProduct = keepProduct;
@@ -751,10 +761,10 @@ public class JDFToXJDF extends PackageElementWalker
 		 * @param n
 		 * @return
 		 */
-		private XJDFHelper convertSingle(KElement n)
+		private XJDFHelper convertSingle(final KElement n)
 		{
 			final KElement xjdf = makeNewJDF((JDFNode) n, null);
-			XJDFHelper xjdfHelper = new XJDFHelper(xjdf);
+			final XJDFHelper xjdfHelper = new XJDFHelper(xjdf);
 			xjdfHelper.cleanUp();
 			return xjdfHelper;
 		}
@@ -787,7 +797,7 @@ public class JDFToXJDF extends PackageElementWalker
 		 * @param i
 		 * @param n
 		 */
-		private void ensureJobPartID(int i, final JDFNode n)
+		private void ensureJobPartID(final int i, final JDFNode n)
 		{
 			String nam = n.getJobPartID(false);
 			if (StringUtil.getNonEmpty(nam) == null)
@@ -833,7 +843,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * Setter for bUpdateVersion attribute.
 	 * @param bUpdateVersion the bUpdateVersion to set
 	 */
-	public void setUpdateVersion(boolean bUpdateVersion)
+	public void setUpdateVersion(final boolean bUpdateVersion)
 	{
 		this.bUpdateVersion = bUpdateVersion;
 	}
@@ -851,7 +861,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * Setter for bMergeLayout attribute.
 	 * @param bMergeLayout the bMergeLayout to set
 	 */
-	public void setMergeLayout(boolean bMergeLayout)
+	public void setMergeLayout(final boolean bMergeLayout)
 	{
 		this.bMergeLayout = bMergeLayout;
 	}
@@ -869,7 +879,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * Setter for bMergeLayoutPrep attribute.
 	 * @param bMergeLayoutPrep the bMergeLayoutPrep to set
 	 */
-	public void setMergeLayoutPrep(boolean bMergeLayoutPrep)
+	public void setMergeLayoutPrep(final boolean bMergeLayoutPrep)
 	{
 		this.bMergeLayoutPrep = bMergeLayoutPrep;
 	}
@@ -887,7 +897,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * Setter for bMergeRunList attribute.
 	 * @param bMergeRunList the bMergeRunList to set
 	 */
-	public void setMergeRunList(boolean bMergeRunList)
+	public void setMergeRunList(final boolean bMergeRunList)
 	{
 		this.bMergeRunList = bMergeRunList;
 	}
@@ -905,7 +915,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * Setter for bRetainSpawnInfo attribute.
 	 * @param bRetainSpawnInfo the bRetainSpawnInfo to set
 	 */
-	public void setRetainSpawnInfo(boolean bRetainSpawnInfo)
+	public void setRetainSpawnInfo(final boolean bRetainSpawnInfo)
 	{
 		this.bRetainSpawnInfo = bRetainSpawnInfo;
 	}
@@ -923,7 +933,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * Setter for bSingleNode attribute.
 	 * @param bSingleNode the bSingleNode to set
 	 */
-	public void setSingleNode(boolean bSingleNode)
+	public void setSingleNode(final boolean bSingleNode)
 	{
 		this.bSingleNode = bSingleNode;
 	}
@@ -952,7 +962,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 *
 	 * @param bTypeSafeMessage the bTypeSafeMessage to set
 	 */
-	public void setTypeSafeMessage(boolean bTypeSafeMessage)
+	public void setTypeSafeMessage(final boolean bTypeSafeMessage)
 	{
 		this.bTypeSafeMessage = bTypeSafeMessage;
 	}
@@ -970,7 +980,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * Setter for bAbstractMessage attribute.
 	 * @param bAbstractMessage the bAbstractMessage to set
 	 */
-	public void setAbstractMessage(boolean bAbstractMessage)
+	public void setAbstractMessage(final boolean bAbstractMessage)
 	{
 		this.bAbstractMessage = bAbstractMessage;
 	}
@@ -988,7 +998,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * Setter for bSpanAsAttribute attribute.
 	 * @param bSpanAsAttribute the bSpanAsAttribute to set
 	 */
-	public void setSpanAsAttribute(boolean bSpanAsAttribute)
+	public void setSpanAsAttribute(final boolean bSpanAsAttribute)
 	{
 		this.bSpanAsAttribute = bSpanAsAttribute;
 	}
@@ -1006,7 +1016,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * Setter for bIntentPartition attribute.
 	 * @param bIntentPartition the bIntentPartition to set
 	 */
-	public void setIntentPartition(boolean bIntentPartition)
+	public void setIntentPartition(final boolean bIntentPartition)
 	{
 		this.bIntentPartition = bIntentPartition;
 	}
@@ -1024,7 +1034,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * Setter for bHTMLColor attribute.
 	 * @param bHTMLColor the bHTMLColor to set
 	 */
-	public void setHTMLColor(boolean bHTMLColor)
+	public void setHTMLColor(final boolean bHTMLColor)
 	{
 		this.bHTMLColor = bHTMLColor;
 	}
@@ -1042,7 +1052,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * Setter for bConvertTilde attribute.
 	 * @param bConvertTilde the bConvertTilde to set
 	 */
-	public void setConvertTilde(boolean bConvertTilde)
+	public void setConvertTilde(final boolean bConvertTilde)
 	{
 		this.bConvertTilde = bConvertTilde;
 	}
@@ -1052,9 +1062,9 @@ public class JDFToXJDF extends PackageElementWalker
 	 * @param r
 	 * @return
 	 */
-	protected String getSetName(JDFResource r)
+	protected String getSetName(final JDFResource r)
 	{
-		WalkResource w = getWalker(r);
+		final WalkResource w = getWalker(r);
 		return (w == null) ? null : w.getXJDFName(r);
 	}
 
@@ -1065,7 +1075,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	protected boolean isProductResource(final JDFResource linkTarget)
 	{
-		WalkResource w = getWalker(linkTarget);
+		final WalkResource w = getWalker(linkTarget);
 		return w == null ? false : w.isProductResource(linkTarget);
 	}
 
@@ -1082,7 +1092,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 *
 	 * @param bRetainAll
 	 */
-	public void setRetainAll(boolean bRetainAll)
+	public void setRetainAll(final boolean bRetainAll)
 	{
 		this.bRetainAll = bRetainAll;
 		if (bRetainAll)
@@ -1136,7 +1146,7 @@ public class JDFToXJDF extends PackageElementWalker
 	/**
 	 * @param bCleanup the bCleanup to set
 	 */
-	public void setCleanup(boolean bCleanup)
+	public void setCleanup(final boolean bCleanup)
 	{
 		this.bCleanup = bCleanup;
 	}

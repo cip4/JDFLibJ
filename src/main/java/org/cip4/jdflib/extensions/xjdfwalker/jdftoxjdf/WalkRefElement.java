@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
@@ -86,7 +86,7 @@ import org.cip4.jdflib.resource.intent.JDFProductionIntent;
 public class WalkRefElement extends WalkJDFElement
 {
 	/**
-	 * 
+	 *
 	 */
 	public WalkRefElement()
 	{
@@ -109,7 +109,7 @@ public class WalkRefElement extends WalkJDFElement
 				final JDFElement e = refElem.inlineRef();
 				jdfToXJDF.walkTree(e, xjdf);
 			}
-			catch (JDFException x)
+			catch (final JDFException x)
 			{
 				log.error("Problems converting refElement: " + refElem.getNodeName(), x);
 			}
@@ -125,17 +125,17 @@ public class WalkRefElement extends WalkJDFElement
 		return null;
 	}
 
-	private boolean wantRef(JDFRefElement refElem)
+	private boolean wantRef(final JDFRefElement refElem)
 	{
 		return !(refElem.getParentNode_KElement() instanceof JDFProductionIntent);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param refElem
 	 * @param xjdf
 	 */
-	private void refProduct(JDFRefElement refElem, KElement xjdf)
+	private void refProduct(final JDFRefElement refElem, final KElement xjdf)
 	{
 		final String attName = "ItemRef";
 		final String id = jdfToXJDF.getProduct(refElem.getrRef());
@@ -143,28 +143,28 @@ public class WalkRefElement extends WalkJDFElement
 	}
 
 	/**
-	 * 
+	 *
 	 * @param refElem
 	 * @return
 	 */
-	private boolean isProduct(JDFRefElement refElem)
+	private boolean isProduct(final JDFRefElement refElem)
 	{
 		return jdfToXJDF.getProduct(refElem.getrRef()) != null;
 	}
 
 	/**
 	 * @param re
-	 * @param xjdf 
+	 * @param xjdf
 	 */
 	protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
 	{
 		final JDFResource target = re.getTarget();
 		final JDFResourceLink rl = getLinkForRef(re, target);
-		final VElement v = setResource(rl, target, getRefRoot(xjdf));
+		final VElement v = setResource(rl == null ? re : rl, target, getRefRoot(xjdf));
 		if (v != null)
 		{
 			final String attName = getRefName(re);
-			for (KElement ref : v)
+			for (final KElement ref : v)
 			{
 				xjdf.appendAttribute(attName, ref.getID(), null, JDFConstants.BLANK, true);
 			}
@@ -173,14 +173,14 @@ public class WalkRefElement extends WalkJDFElement
 	}
 
 	/**
-	 * 
+	 *
 	 * @param re
 	 * @param xjdf
 	 */
 	protected void makeSetRefAttribute(final JDFRefElement re, final KElement xjdf)
 	{
 		final String attName = getRefName(re);
-		final VElement v = setResource(null, re.getTarget(), jdfToXJDF.newRoot);
+		final VElement v = setResource(re, re.getTarget(), jdfToXJDF.newRoot);
 		// we want a ref to the set rather than the standard ref to the list of elements
 		if (v != null && v.size() > 0)
 		{
