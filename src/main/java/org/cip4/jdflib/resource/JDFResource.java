@@ -3226,7 +3226,7 @@ public class JDFResource extends JDFElement
 	 * @param bAll if true include all intermediate and leaf nodes including this<br>
 	 * if false, include only the final leaves
 	 *
-	 * @return VElement - the vector of all leaves
+	 * @return VElement - the vector of all leaves - never null
 	 *
 	 * @default getLeaves(false)
 	 */
@@ -8377,6 +8377,6 @@ public class JDFResource extends JDFElement
 	public JDFResource getLeaf(final int i)
 	{
 		final VElement v = getLeaves(false);
-		return v == null ? null : (JDFResource) v.get(i);
+		return (JDFResource) v.get(i);
 	}
 }
