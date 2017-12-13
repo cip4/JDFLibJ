@@ -390,7 +390,7 @@ public class WalkJDFElement extends WalkElement
 		if (resourceSet == null)
 		{
 			resourceSet = xRoot.appendElement(className + SetHelper.SET);
-			resourceSet.setID(linkTarget.getID());
+			resourceSet.setID(resID);
 		}
 
 		// TODO what if we have resources used as in and out in the same node?
@@ -476,10 +476,18 @@ public class WalkJDFElement extends WalkElement
 	 */
 	protected KElement setBaseResource(final JDFElement rl, final JDFResource r, final KElement xjdfSet)
 	{
-		JDFAttributeMap map = r.getPartMap();
-		map = convertRanges(map, r);
 		final SetHelper sh = new SetHelper(xjdfSet);
-		final KElement newLeaf = sh.getCreatePartition(map, false).getPartition();
+		final KElement newLeaf;
+		if (jdfToXJDF.getResourceAlias().contains(r.getID()))
+		{
+			newLeaf = sh.appendPartition(null, false).getPartition();
+		}
+		else
+		{
+			JDFAttributeMap map = r.getPartMap();
+			map = convertRanges(map, r);
+			newLeaf = sh.getCreatePartition(map, false).getPartition();
+		}
 		setLeafAttributes(r, rl, newLeaf);
 		return newLeaf;
 	}
