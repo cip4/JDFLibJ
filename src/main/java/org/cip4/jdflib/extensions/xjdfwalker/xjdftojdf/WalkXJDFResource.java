@@ -163,10 +163,12 @@ public class WalkXJDFResource extends WalkXElement
 	{
 		if (vParts.size() > 1)
 		{
+			final JDFAttributeMap targetMap = vParts.get(0);
 			for (int i = 1; i < vParts.size(); i++)
 			{
-				final JDFResource r = createPartition(res, vParts.get(i), rl);
-				r.appendIdentical().setPartMap(vParts.get(0));
+				final JDFAttributeMap partMap = vParts.get(i);
+				final JDFResource rPart = res.getCreatePartition(partMap, JDFPart.guessPartIDKeys(partMap));
+				rPart.appendIdentical().setPartMap(targetMap);
 			}
 		}
 
@@ -379,19 +381,7 @@ public class WalkXJDFResource extends WalkXElement
 		{
 			return jdfRes;
 		}
-		final JDFResourceLink rll = theNode.getLink(jdfRes, null);
-		return createPartition(jdfRes, partMap, rll);
-	}
-
-	protected JDFResource createPartition(final JDFResource jdfRes, final JDFAttributeMap partMap, final JDFResourceLink rll)
-	{
-		final VJDFAttributeMap partMapVector = rll != null ? rll.getPartMapVector() : null;
-		if (rll != null && (partMapVector == null || !partMapVector.contains(partMap)))
-		{
-			rll.appendPart().setPartMap(partMap);
-		}
-		final JDFResource rPart = jdfRes.getCreatePartition(partMap, JDFPart.guessPartIDKeys(partMap));
-		return rPart;
+		return jdfRes.getCreatePartition(partMap, JDFPart.guessPartIDKeys(partMap));
 	}
 
 	/**

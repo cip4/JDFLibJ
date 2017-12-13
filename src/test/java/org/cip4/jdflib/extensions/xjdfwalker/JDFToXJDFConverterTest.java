@@ -134,6 +134,7 @@ import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
@@ -1223,6 +1224,23 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFDoc d = invert.convert(xjdf);
 		final JDFNode n2 = d.getJDFRoot();
 		assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.PhaseTime, null, null).getEmployee(0).getDescriptiveName(), "me");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testArtDeliveryRunLists()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Product);
+		final JDFArtDeliveryIntent adi = (JDFArtDeliveryIntent) n.addResource(ElementName.ARTDELIVERYINTENT, EnumUsage.Input);
+		adi.appendArtDelivery().appendRunList().setFileURL("f1.pdf");
+		adi.appendArtDelivery().appendRunList().setFileURL("f2.pdf");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		final XJDFHelper h = new XJDFHelper(xjdf);
+		assertEquals(2, h.getSet(ElementName.RUNLIST, 0).getPartitions().size());
 	}
 
 	/**

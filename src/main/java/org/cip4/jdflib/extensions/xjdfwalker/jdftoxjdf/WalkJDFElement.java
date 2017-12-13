@@ -212,8 +212,8 @@ public class WalkJDFElement extends WalkElement
 				{
 					continue;
 				}
-				final String pid = prev.getID();
-				final String rid = r.getID();
+				final String pid = getID(prev);
+				final String rid = getID(r);
 				prev.removeAttribute(AttributeName.ID); // for comparing
 				r.removeAttribute(AttributeName.ID);
 				if (r.isEqual(prev)) // found duplicate - remove and ref the original
@@ -384,7 +384,7 @@ public class WalkJDFElement extends WalkElement
 			linkTarget.expand(false);
 		}
 
-		final String resID = linkTarget.getID();
+		final String resID = getID(linkTarget);
 		KElement resourceSet = getSet(resID, xRoot, className);
 		if (resourceSet == null)
 		{
@@ -415,6 +415,20 @@ public class WalkJDFElement extends WalkElement
 			}
 		}
 		return v;
+	}
+
+	/**
+	 *
+	 * @param linkTarget
+	 * @return
+	 */
+	protected String getID(JDFResource linkTarget)
+	{
+		linkTarget = linkTarget.getResourceRoot();
+		if (linkTarget.isResourceRootRoot())
+			return linkTarget.getID();
+		final KElement e = linkTarget.getParentNode_KElement();
+		return e == null ? null : e.getLocalName();
 	}
 
 	/**
