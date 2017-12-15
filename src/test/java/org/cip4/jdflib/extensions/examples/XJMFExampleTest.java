@@ -326,12 +326,12 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	public void testSignalStatus()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
-		final XJMFHelper xjmfHelper = new XJMFHelper();
-		xjmfHelper.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
+		XJMFHelper xjmfHelper = new XJMFHelper();
+		xjmfHelper.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(16, 59, 0).getDateTimeISO());
 		MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
 		s.getHeader().setID("S1");
 		s.getHeader().setAttribute(AttributeName.REFID, "Sub1");
-		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
+		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(16, 59, 0).getDateTimeISO());
 		JDFDeviceInfo di = (JDFDeviceInfo) s.getRoot().appendElement(ElementName.DEVICEINFO);
 		di.setAttribute(AttributeName.STATUS, "Production");
 		JDFJobPhase p = di.appendJobPhase();
@@ -339,6 +339,12 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		p.setJobPartID("p1");
 		p.setStatus(EnumNodeStatus.Setup);
 		p.setStartTime(new JDFDate().setTime(16, 0, 0));
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "jmf/statusSignalSetup.xjmf");
+
+		xjmfHelper = new XJMFHelper();
+		xjmfHelper.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 00, 0).getDateTimeISO());
 		s = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
 		s.getHeader().setID("S2");
 		s.getHeader().setAttribute(AttributeName.REFID, "Sub1");
