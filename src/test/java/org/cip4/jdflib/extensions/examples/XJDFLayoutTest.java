@@ -90,6 +90,7 @@ import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.resource.JDFJobField;
 import org.cip4.jdflib.resource.JDFPageCondition;
 import org.cip4.jdflib.resource.JDFPart;
@@ -402,6 +403,20 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		((JDFAssembly) rhAss.getResource()).setOrder(EnumOrder.Collecting);
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "processes/StrippingF16-6.xjdf");
+	}
+
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	public void setUp() throws Exception
+	{
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentName(null);
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setAgentVersion(null);
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID(null);
+		KElement.setLongID(false);
+
+		super.setUp();
 	}
 
 }

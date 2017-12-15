@@ -88,10 +88,11 @@ public class XJDFExampleConvertTest extends JDFTestCaseBase
 	@Test
 	public void testLayoutElementProduction()
 	{
-		JDFNode n = JDFNode.parseFile(sm_dirTestData + "dielayoutproduction.jdf");
-		KElement x = convertToXJDF(n);
-		XJDFHelper h = XJDFHelper.getHelper(x);
+		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "dielayoutproduction.jdf");
+		final KElement x = convertToXJDF(n);
+		final XJDFHelper h = XJDFHelper.getHelper(x);
 		h.getSet(ElementName.NODEINFO, 0);
+		h.getSet(ElementName.SHAPEDEF, 0).setUsage(null);
 		h.cleanUp();
 		setSnippet(h, true);
 		setSnippet(h.getSet(ElementName.NODEINFO, 0), false);

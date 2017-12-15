@@ -73,6 +73,7 @@ import static org.junit.Assert.assertNotNull;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -106,7 +107,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 	{
 		for (int i = 0; i < 6; i++)
 		{
-			KElement e = addGang();
+			final KElement e = addGang();
 			e.setAttribute("NPage", "1");
 			e.setAttribute("PageDimension", "333 222");
 		}
@@ -114,13 +115,13 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 		writeTest(xjdfHelper, "SimpleGangIn.xjdf");
 		for (int i = 0; i < 6; i++)
 		{
-			JDFAttributeMap partMap = new JDFAttributeMap("BinderySignatureID", "BS" + i);
-			String sn = "S" + (i / 3);
+			final JDFAttributeMap partMap = new JDFAttributeMap("BinderySignatureID", "BS" + i);
+			final String sn = "S" + (i / 3);
 			partMap.put("SheetName", sn);
-			ResourceHelper phLO = layout.appendPartition(partMap, true);
+			final ResourceHelper phLO = layout.appendPartition(partMap, true);
 			phLO.setAmount(1000, partMap, true);
-			JDFLayout lo = (JDFLayout) phLO.getCreateResource();
-			SetHelper sh = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+			final JDFLayout lo = (JDFLayout) phLO.getCreateResource();
+			final SetHelper sh = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 			sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS" + i), true).getResource();
 			lo.appendElement(ElementName.POSITION).setAttribute(XJDFConstants.BinderySignatureID, "BS" + i);
 		}
@@ -168,15 +169,15 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 	 * @param i
 	 * @param j
 	 */
-	private void addOutLayout(int i, int j)
+	private void addOutLayout(final int i, final int j)
 	{
-		JDFAttributeMap partMap = new JDFAttributeMap("SheetName", "Sheet1");
-		String bsIJ = "BS_" + i + "_" + j;
+		final JDFAttributeMap partMap = new JDFAttributeMap("SheetName", "Sheet1");
+		final String bsIJ = "BS_" + i + "_" + j;
 		partMap.put(XJDFConstants.BinderySignatureID, bsIJ);
-		JDFLayout lo = (JDFLayout) layout.getCreatePartition(partMap, true).getResource();
-		SetHelper sh = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		final JDFLayout lo = (JDFLayout) layout.getCreatePartition(partMap, true).getResource();
+		final SetHelper sh = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 		sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsIJ), true).getResource();
-		JDFPosition p = JDFPosition.createPosition(lo, i, j, 2, 2);
+		final JDFPosition p = JDFPosition.createPosition(lo, i, j, 2, 2);
 		p.setAttribute(XJDFConstants.BinderySignatureID, bsIJ);
 		assertNotNull(p);
 	}
@@ -187,7 +188,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 	 */
 	private KElement addGang()
 	{
-		KElement gang = sheetOptimizingParams.appendElement(ElementName.GANGELEMENT);
+		final KElement gang = sheetOptimizingParams.appendElement(ElementName.GANGELEMENT);
 		gang.setAttribute(AttributeName.GANGELEMENTID, "Gang_" + gang.numSiblingElements(ElementName.GANGELEMENT, null));
 		gang.setAttribute("MinQuantity", 1000, null);
 		return gang;
@@ -202,7 +203,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 		super.setUp();
 		xjdfHelper = new XJDFHelper("job", "root", null);
 		xjdfHelper.setTypes("SheetOptimizing");
-
+		JDFElement.setLongID(false);
 		prepareSheetOptimizing();
 		prepareLayout();
 	}
@@ -215,8 +216,8 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 
 	private void prepareSheetOptimizing()
 	{
-		SetHelper hsSheetOptim = xjdfHelper.getCreateSet(XJDFConstants.Resource, "SheetOptimizingParams", EnumUsage.Input);
-		ResourceHelper hpSheetOptim = hsSheetOptim.getCreatePartition(0, true);
+		final SetHelper hsSheetOptim = xjdfHelper.getCreateSet(XJDFConstants.Resource, "SheetOptimizingParams", EnumUsage.Input);
+		final ResourceHelper hpSheetOptim = hsSheetOptim.getCreatePartition(0, true);
 		sheetOptimizingParams = hpSheetOptim.getCreateResource();
 
 		convertingConfig = (JDFConvertingConfig) sheetOptimizingParams.appendElement(ElementName.CONVERTINGCONFIG);
