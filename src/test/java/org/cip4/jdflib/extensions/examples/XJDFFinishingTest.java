@@ -221,7 +221,7 @@ public class XJDFFinishingTest extends JDFTestCaseBase
 		final SetHelper shComp = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Input);
 		final ResourceHelper rh = shComp.getCreatePartition(0, true);
 		final JDFIdentificationField idf = (JDFIdentificationField) rh.getCreateResource().appendElement(ElementName.IDENTIFICATIONFIELD);
-		idf.setValueFormat("%6i%3i%2i");
+		idf.setValueFormat("%6s%3i%2i");
 		idf.setValueTemplate("job doc sheet");
 		final JDFMetadataMap md0 = (JDFMetadataMap) idf.appendElement(ElementName.METADATAMAP);
 		md0.setName("JobID");
