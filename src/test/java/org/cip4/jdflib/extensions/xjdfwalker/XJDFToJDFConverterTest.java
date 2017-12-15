@@ -753,7 +753,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
 		final SetHelper sh = xjdf.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
-		final ResourceHelper ph = sh.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+		final ResourceHelper ph = sh.getCreatePartition(0, true);
 		ph.setAmount(33, new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
 		final KElement e = xjdf.getRoot();
 		final JDFDoc d = xCon.convert(e);
@@ -763,6 +763,30 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(m);
 		final JDFResourceLink rl = root.getLink(m, null);
 		assertNotNull(rl.getAmountPool());
+		assertNull(m.getElement(ElementName.AMOUNTPOOL));
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testAmountPoolNoPart()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
+		final SetHelper sh = xjdf.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
+		final ResourceHelper ph = sh.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+		ph.setAmount(33, new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+		final KElement e = xjdf.getRoot();
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		final JDFNode root = d.getJDFRoot();
+		final JDFMedia m = (JDFMedia) root.getResource(ElementName.MEDIA, EnumUsage.Input, 0);
+		assertNotNull(m);
+		final JDFResourceLink rl = root.getLink(m, null);
+		assertNull(rl.getAmountPool());
+		assertEquals(33, rl.getAmount(), 0.0);
 		assertNull(m.getElement(ElementName.AMOUNTPOOL));
 	}
 
@@ -800,7 +824,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
 		final SetHelper sh = xjdf.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
-		final ResourceHelper ph = sh.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+		final ResourceHelper ph = sh.getCreatePartition(0, true);
 		ph.setAmount(33, new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
 
 		final AuditPoolHelper ah = xjdf.getCreateAuditPool();
@@ -820,6 +844,37 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(amountPool);
 		final JDFPartAmount partAmount = amountPool.getPartAmount(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"));
 		assertEquals(33, partAmount.getAmount(), 0.3);
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testAmountPoolAuditNoPart()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
+		final SetHelper sh = xjdf.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
+		final ResourceHelper ph = sh.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+		ph.setAmount(33, new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+
+		final AuditPoolHelper ah = xjdf.getCreateAuditPool();
+		final MessageHelper ra = ah.appendMessage(XJDFConstants.AuditResource);
+		ra.getRoot().appendElement(ElementName.RESOURCEINFO).copyElement(sh.getRoot(), null);
+		xjdf.cleanUp();
+		final KElement e = xjdf.getRoot();
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		final JDFNode root = d.getJDFRoot();
+		final JDFAuditPool ap = root.getAuditPool();
+		final JDFResourceAudit ra2 = (JDFResourceAudit) ap.getAudit(0, EnumAuditType.ResourceAudit, null, null);
+		assertNotNull(ra2);
+		final JDFResourceLink rl = ra2.getNewLink();
+		assertNotNull(rl);
+		final JDFAmountPool amountPool = rl.getAmountPool();
+		assertNull(amountPool);
+		assertEquals(33, rl.getAmount(), 0.3);
 	}
 
 	/**
