@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -268,9 +268,9 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		m2.put("a3", "v3");
 		final VJDFAttributeMap v = new VJDFAttributeMap();
 		v.add(m1);
-		int i = v.hashCode();
+		final int i = v.hashCode();
 		v.add(m2);
-		int i2 = v.hashCode();
+		final int i2 = v.hashCode();
 		assertNotSame(i, i2);
 
 	}
@@ -557,7 +557,26 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		assertEquals(v5.size(), 1);
 	}
 
-	// /////////////////////////////////////////////////////////////
+	/**
+	* tests put method
+	*/
+	@Test
+	public void testPutMap()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		final VJDFAttributeMap v2 = new VJDFAttributeMap();
+		v2.add(m1);
+		final VJDFAttributeMap v3 = new VJDFAttributeMap(v2);
+		assertEquals(v2, v3);
+		v3.put(new JDFAttributeMap("a2", "b"));
+		m1.put("a2", "b");
+		assertEquals(v2, v3);
+		v3.put(new JDFAttributeMap("a3", "c"));
+		m1.put("a3", "c");
+		assertEquals(v2, v3);
+
+	}
+
 	/**
 	 * test reduceMap()
 	 */

@@ -74,6 +74,7 @@ import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.IAmountPoolContainer;
@@ -353,7 +354,14 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public void setVAmount(final double amount, final VJDFAttributeMap moreMaps, final boolean bGood)
 	{
 		final JDFAmountPool ap = getCreateAmountPool();
-		final JDFPartAmount pa0 = ap.getCreatePartAmount(moreMaps);
+		final VJDFAttributeMap vMap = moreMaps == null ? null : moreMaps.clone();
+		if (vMap != null)
+		{
+			final VJDFAttributeMap partMap = getPartMapVector();
+			final VString keys = partMap == null ? null : partMap.getKeys();
+			vMap.removeKeys(keys);
+		}
+		final JDFPartAmount pa0 = ap.getCreatePartAmount(vMap);
 		pa0.setAttribute((bGood ? AttributeName.AMOUNT : AttributeName.WASTE), StringUtil.formatDouble(amount), null);
 	}
 

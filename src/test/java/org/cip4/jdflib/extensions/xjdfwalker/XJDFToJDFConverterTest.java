@@ -366,6 +366,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 *
 	 */
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testParameterSet()
 	{
@@ -763,6 +764,30 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFResourceLink rl = root.getLink(m, null);
 		assertNotNull(rl.getAmountPool());
 		assertNull(m.getElement(ElementName.AMOUNTPOOL));
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testPartAmountMap()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
+		final SetHelper sh = xjdf.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
+		final ResourceHelper ph = sh.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+		ph.setAmount(33, new JDFAttributeMap(AttributeName.SIDE, "Front"), true);
+		final KElement e = xjdf.getRoot();
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		final JDFNode root = d.getJDFRoot();
+		final JDFMedia m = (JDFMedia) root.getResource(ElementName.MEDIA, EnumUsage.Input, 0);
+		assertNotNull(m);
+		final JDFResourceLink rl = root.getLink(m, null);
+		final JDFAmountPool amountPool = rl.getAmountPool();
+		assertNotNull(amountPool);
+		assertEquals("S1", amountPool.getPartAmount(0).getPartMap().get(AttributeName.SHEETNAME));
 	}
 
 	/**

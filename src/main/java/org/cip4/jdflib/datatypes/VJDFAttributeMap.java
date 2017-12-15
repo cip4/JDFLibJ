@@ -2,35 +2,35 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress (CIP4). All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification, are permitted
  * provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this list of conditions
  * and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice, this list of
  * conditions and the following disclaimer in the documentation and/or other materials provided with
  * the distribution.
- * 
+ *
  * 3. The end-user documentation included with the redistribution, if any, must include the
  * following acknowledgment: "This product includes software developed by the The International
  * Cooperation for the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)"
  * Alternately, this acknowledgment may appear in the software itself, if and wherever such
  * third-party acknowledgments normally appear.
- * 
+ *
  * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress" must not be used to endorse or promote products derived from this
  * software without prior written permission. For written permission, please contact info@cip4.org.
- * 
+ *
  * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their
  * name, without prior written permission of the CIP4 organization
- * 
+ *
  * Usage of this software in commercial products is subject to restrictions. For details please
  * consult info@cip4.org.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
  * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN
@@ -74,18 +74,18 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.HashUtil;
 
 /**
- * 
+ *
  * Description: This class represents a vector of JDFAttributeMaps
- * 
+ *
  * @author Torsten Kaehlert
- * 
+ *
  * @version 1.0 2002-01-24
- * 
+ *
  */
 public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -101,7 +101,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * copy constructor, the map elements are cloned
-	 * 
+	 *
 	 * @param toAdd Vector of elements to clone
 	 */
 	public VJDFAttributeMap(final Vector<JDFAttributeMap> toAdd)
@@ -109,7 +109,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 		super();
 		if (toAdd != null)
 		{
-			for (JDFAttributeMap map : toAdd)
+			for (final JDFAttributeMap map : toAdd)
 			{
 				add(map.clone());
 			}
@@ -118,7 +118,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * constructor from array, the map elements are not cloned
-	 * 
+	 *
 	 * @param toAdd the array
 	 */
 	public VJDFAttributeMap(final JDFAttributeMap[] toAdd)
@@ -126,7 +126,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 		clear();
 		if (toAdd != null)
 		{
-			for (JDFAttributeMap map : toAdd)
+			for (final JDFAttributeMap map : toAdd)
 			{
 				add(map);
 			}
@@ -136,7 +136,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * @param moreMap the single attribute map to add
 	 */
-	public VJDFAttributeMap(JDFAttributeMap moreMap)
+	public VJDFAttributeMap(final JDFAttributeMap moreMap)
 	{
 		this();
 		if (moreMap != null)
@@ -145,7 +145,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -178,7 +178,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * Returns the vector with JDFAttributeMap elements
-	 * 
+	 *
 	 * @return Vector - the vector with JDFAttributeMap elements
 	 * @deprecated - use this
 	 */
@@ -197,7 +197,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	{
 		final VString vsPartValues = new VString();
 
-		for (JDFAttributeMap map : this)
+		for (final JDFAttributeMap map : this)
 		{
 			final String strValue = map.get(strKey);
 			if (strValue != null)
@@ -226,9 +226,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 		final VJDFAttributeMap vec = new VJDFAttributeMap();
 
-		for (JDFAttributeMap map : this)
+		for (final JDFAttributeMap map : this)
 		{
-			for (String val : vsValues)
+			for (final String val : vsValues)
 			{
 				final JDFAttributeMap mapNew = new JDFAttributeMap(map);
 				mapNew.put(strKey, val);
@@ -241,7 +241,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * andMap - builds a new vector of maps with identical pairs of both maps does not modify this
-	 * 
+	 *
 	 * @param map the given map
 	 * @return the anded map, null if mismatches occurred
 	 */
@@ -277,7 +277,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * andMap - builds a new vector of maps with identical pairs of both maps does not modify this
-	 * 
+	 *
 	 * @param map the given map
 	 * @return the anded map, null if mismatches occurred
 	 */
@@ -332,7 +332,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * sets the Vector with JDFAttributeMap elements
-	 * 
+	 *
 	 * @param vec the Vector with JDFAttributeMap elements
 	 */
 	public void setVector(final Vector<JDFAttributeMap> vec)
@@ -344,13 +344,13 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * Return the maximum size size of a JDFAttributeMap in this
-	 * 
+	 *
 	 * @return int - the size
 	 */
 	public int maxSize()
 	{
 		int maxSize = 0;
-		for (JDFAttributeMap map : this)
+		for (final JDFAttributeMap map : this)
 		{
 			if (map != null && map.size() > maxSize)
 			{
@@ -362,7 +362,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * Return the minimum size size of a JDFAttributeMap in this
-	 * 
+	 *
 	 * @return int - the size
 	 */
 	public int minSize()
@@ -370,7 +370,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 		int minSize = 9999999;
 		if (size() > 0)
 		{
-			for (JDFAttributeMap map : this)
+			for (final JDFAttributeMap map : this)
 			{
 				if (map != null && map.size() < minSize)
 				{
@@ -389,7 +389,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * Returns the element at the given position
-	 * 
+	 *
 	 * @param i the given position (may be<0 to count backwards)
 	 * @return JDFAttributeMap - the selected element
 	 */
@@ -405,7 +405,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * Returns the element at the given position (may be<0 to count backwards)
-	 * 
+	 *
 	 * @param i the given position
 	 * @return JDFAttributeMap - the selected element
 	 */
@@ -421,7 +421,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * remove the keys specified in set and then erase any duplicates and emptys
-	 * 
+	 *
 	 * @param set
 	 */
 	public void removeKeys(final Collection<String> set)
@@ -439,7 +439,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * remove the key specified and then erase any duplicates and emptys
-	 * 
+	 *
 	 * @param key
 	 */
 	public void removeKey(final String key)
@@ -457,7 +457,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * Tests whether this has a entry with the same key and value entries not more nor less keys
-	 * 
+	 *
 	 * @param attmap the given JDFAttributeMap element
 	 * @deprecated use contains
 	 * @return boolean - true if and only if the specified AttributeMap has the some number of keys and values and the same keys and values as a entry in this
@@ -520,7 +520,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * 
+	 *
 	 * @param vKeys
 	 * @deprecated use reduceMap
 	 */
@@ -546,14 +546,14 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * reduce each JDFAttributeMap in <code>this</code> by keySet (only entries in keyset are retained)
-	 * 
+	 *
 	 * @param keySet
 	 */
 	public void reduceMap(final Collection<String> keySet)
 	{
 		final VJDFAttributeMap v = new VJDFAttributeMap();
 
-		for (JDFAttributeMap map : this)
+		for (final JDFAttributeMap map : this)
 		{
 			final boolean bNullMap = map.isEmpty();
 			map.reduceMap(keySet);
@@ -569,14 +569,14 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * reduce each JDFAttributeMap in <code>this</code> by keySet
-	 * 
+	 *
 	 * @return the vector of all keys
 	 */
 	public VString getKeys()
 	{
 		final VString v = new VString();
 
-		for (JDFAttributeMap map : this)
+		for (final JDFAttributeMap map : this)
 		{
 			v.addAll(map.getKeys());
 
@@ -587,27 +587,27 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * return the map that is common to all elements of this. All keys exist and have the same value
-	 * 
+	 *
 	 * @return the vector of all keys
 	 */
 	public JDFAttributeMap getCommonMap()
 	{
-		JDFAttributeMap newMap = new JDFAttributeMap();
+		final JDFAttributeMap newMap = new JDFAttributeMap();
 
 		if (size() == 0)
 			return null;
 		else if (size() == 1)
 			return get(0);
-		JDFAttributeMap map0 = get(0);
-		VString keys = map0.getKeys();
-		for (String key : keys)
+		final JDFAttributeMap map0 = get(0);
+		final VString keys = map0.getKeys();
+		for (final String key : keys)
 		{
 			String val0 = map0.get(key);
 			if (val0 != null)
 			{
-				for (JDFAttributeMap map : this)
+				for (final JDFAttributeMap map : this)
 				{
-					String val = map.get(key);
+					final String val = map.get(key);
 					if (!val0.equals(val))
 					{
 						val0 = null;
@@ -625,7 +625,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * 
+	 *
 	 * @param map map to append
 	 */
 	public void appendUnique(final JDFAttributeMap map)
@@ -651,7 +651,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * Method appendUnique.
-	 * 
+	 *
 	 * @param map maps to append
 	 */
 	public void appendUnique(final VJDFAttributeMap map)
@@ -661,20 +661,20 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * 
+	 *
 	 * deprecated legacy support
 	 * @param v
 	 * @deprecated use addAll
 	 */
 	@Deprecated
-	public void addall(VJDFAttributeMap v)
+	public void addall(final VJDFAttributeMap v)
 	{
 		addAll(v);
 	}
 
 	/**
 	 * Method overlapMap. removes all non-overlapping maps from this
-	 * 
+	 *
 	 * @param map the map to check against
 	 */
 	public void overlapMap(final JDFAttributeMap map)
@@ -690,14 +690,14 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * Method overlapMap. get a copy of this with all overlapping maps the maps are NOT cloned
-	 * 
+	 *
 	 * @param map the map to check against
 	 * @return a new VJDFAttributemap with the overlapping entries of this - never null
 	 */
 	public VJDFAttributeMap getOverlapMaps(final JDFAttributeMap map)
 	{
-		VJDFAttributeMap newV = new VJDFAttributeMap();
-		for (JDFAttributeMap m : this)
+		final VJDFAttributeMap newV = new VJDFAttributeMap();
+		for (final JDFAttributeMap m : this)
 		{
 			if (m.overlapMap(map))
 			{
@@ -709,16 +709,16 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * Method overlapMap. get a copy of this with all matching maps the maps are NOT cloned
-	 * 
+	 *
 	 * @param key the key to match
 	 * @param regExp the simplified regexp
 	 * @param ignoreCase duh...
 	 * @return a new VJDFAttributemap with the matching entries of this - never null (may be safely daisy-chained)
 	 */
-	public VJDFAttributeMap getMatchingMaps(String key, String regExp, boolean ignoreCase)
+	public VJDFAttributeMap getMatchingMaps(final String key, final String regExp, final boolean ignoreCase)
 	{
-		VJDFAttributeMap newV = new VJDFAttributeMap();
-		for (JDFAttributeMap m : this)
+		final VJDFAttributeMap newV = new VJDFAttributeMap();
+		for (final JDFAttributeMap m : this)
 		{
 			if (m.matches(key, regExp, ignoreCase))
 			{
@@ -730,17 +730,17 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * Method overlapMap. only entries that contain at least one matching map entry are retained
-	 * 
+	 *
 	 * @param map the map to check against
 	 */
 	public void overlapMap(final VJDFAttributeMap map)
 	{
 		if (map == null)
 			return;
-		Set<JDFAttributeMap> set = ContainerUtil.toHashSet(this);
+		final Set<JDFAttributeMap> set = ContainerUtil.toHashSet(this);
 		for (int i = this.size() - 1; i >= 0; i--)
 		{
-			JDFAttributeMap attributeMap = get(i);
+			final JDFAttributeMap attributeMap = get(i);
 			if (!set.contains(attributeMap) && !attributeMap.overlapMap(map))
 			{
 				removeElementAt(i);
@@ -750,9 +750,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * Method overlapMap.
-	 * 
+	 *
 	 * @param map the map to check against
-	 * @return 
+	 * @return
 	 */
 	public boolean overlapsMap(final JDFAttributeMap map)
 	{
@@ -768,7 +768,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * Method subMap.
-	 * 
+	 *
 	 * @param map the submap to check against
 	 * @return true if this has at least one entry that subMap is a submap of
 	 */
@@ -786,7 +786,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * Method subMap.
-	 * 
+	 *
 	 * @param vMap the vector submaps to check against
 	 * @return true if this has at least one entry that vMap contains at least a submap of
 	 */
@@ -808,7 +808,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * Method overlapsMap. returns true if at least one element exists that has no non-matching key value pairs
-	 * 
+	 *
 	 * @param vMap the vector to check against
 	 * @return true if this has at least one entry that vMap contains at least a submap of
 	 */
@@ -836,9 +836,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * equals - Compares two map vectors, returns true if content equal regardless of element order, otherwise false.<br>
 	 * If input is not of type VJDFAttributeMap, result of superclasses equals method is returned.
-	 * 
+	 *
 	 * @param other in this case VJDFAttributeMap to compare
-	 * 
+	 *
 	 * @return boolean - true if the maps are equal, otherwise false
 	 */
 	@Override
@@ -865,7 +865,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 		final VJDFAttributeMap vOther = new VJDFAttributeMap();
 		vOther.addAll((VJDFAttributeMap) other);
-		for (JDFAttributeMap map : this)
+		for (final JDFAttributeMap map : this)
 		{
 			final int index = vOther.indexOf(map);
 			if (index < 0)
@@ -879,7 +879,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * hashCode complements equals() to fulfill the equals/hashCode contract
-	 * 
+	 *
 	 * @return int
 	 */
 	@Override
@@ -890,7 +890,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * put the key value pair into all entries
-	 * 
+	 *
 	 * @param key the key to set - may be either String or Enum
 	 * @param value the value to set - may be either String or Enum
 	 * @throws IllegalArgumentException if key or value have the wrong type
@@ -929,7 +929,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * put the key value pair into all entries; if no entries are there, create exactly one entry with the given key value pair
-	 * 
+	 *
 	 * @param key the key to set
 	 * @param value the value to set
 	 */
@@ -964,7 +964,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * remove all matching maps from this i.e. if map is subMap of this
 	 * @param map
 	 */
-	public void removeMaps(JDFAttributeMap map)
+	public void removeMaps(final JDFAttributeMap map)
 	{
 		if (map == null || map.size() == 0)
 		{
@@ -972,12 +972,28 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 		}
 		for (int i = size() - 1; i >= 0; i--)
 		{
-			JDFAttributeMap map0 = get(i);
+			final JDFAttributeMap map0 = get(i);
 			if (map0 != null && map0.subMap(map))
 			{
 				removeElementAt(i);
 			}
 		}
+	}
+
+	/**
+	 * put the value of all keys into every existing map
+	 * @param commonMap
+	 */
+	public void put(final JDFAttributeMap commonMap)
+	{
+		if (commonMap != null)
+		{
+			for (final String key : commonMap.keySet())
+			{
+				put(key, commonMap.get(key));
+			}
+		}
+
 	}
 
 }

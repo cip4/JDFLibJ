@@ -76,6 +76,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.util.StringUtil;
@@ -109,15 +110,15 @@ public class WalkPartAmount extends WalkXElement
 	 * @param xjdfPartAmount
 	 * @return the created resource
 	 */
-	private void walkSingle(JDFAttributeMap map, final KElement xjdfPartAmount, KElement jdfAmountPool)
+	private void walkSingle(final JDFAttributeMap map, final KElement xjdfPartAmount, final KElement jdfAmountPool)
 	{
 		if (xjdfPartAmount != null && map != null)
 		{
 			xjdfPartAmount.removeAttributes(null);
-			String condition = map.remove(AttributeName.CONDITION);
+			final String condition = map.remove(AttributeName.CONDITION);
 			xjdfPartAmount.setAttributes(map);
-			JDFPartAmount pa = (JDFPartAmount) xjdfPartAmount;
-			JDFPartAmount newPA = (JDFPartAmount) super.walk(xjdfPartAmount, jdfAmountPool);
+			final JDFPartAmount pa = (JDFPartAmount) xjdfPartAmount;
+			final JDFPartAmount newPA = (JDFPartAmount) super.walk(xjdfPartAmount, jdfAmountPool);
 			VJDFAttributeMap vPartMap = pa.getPartMapVector();
 			if (condition != null)
 			{
@@ -127,6 +128,18 @@ public class WalkPartAmount extends WalkXElement
 				}
 				vPartMap.put(AttributeName.CONDITION, condition);
 			}
+			final KElement res = xjdfPartAmount.getDeepParent((String) null, 2);
+			final ResourceHelper rh = ResourceHelper.getHelper(res);
+			final VJDFAttributeMap rlMap = rh == null ? null : rh.getPartMapVector();
+			if (rlMap != null)
+			{
+				final JDFAttributeMap commonMap = rlMap.getCommonMap();
+				if (commonMap != null)
+				{
+					vPartMap.put(commonMap);
+				}
+			}
+
 			newPA.setPartMapVector(vPartMap);
 		}
 	}
@@ -136,20 +149,20 @@ public class WalkPartAmount extends WalkXElement
 	 * @return the created resource
 	 */
 	@Override
-	public KElement walk(final KElement xjdfPartAmount, KElement jdfAmountPool)
+	public KElement walk(final KElement xjdfPartAmount, final KElement jdfAmountPool)
 	{
-		VJDFAttributeMap split = splitWaste(xjdfPartAmount, true);
+		final VJDFAttributeMap split = splitWaste(xjdfPartAmount, true);
 
 		if (split.size() <= 1)
 		{
-			JDFPart part = (JDFPart) xjdfPartAmount.getElement(ElementName.PART);
-			JDFAttributeMap partMap = part == null ? null : part.getPartMap();
+			final JDFPart part = (JDFPart) xjdfPartAmount.getElement(ElementName.PART);
+			final JDFAttributeMap partMap = part == null ? null : part.getPartMap();
 			if (partMap == null || partMap.isEmpty())
 			{
-				KElement parent = jdfAmountPool.getParentNode_KElement();
+				final KElement parent = jdfAmountPool.getParentNode_KElement();
 				if (parent instanceof JDFResourceLink)
 				{
-					JDFResourceLink rl = (JDFResourceLink) parent;
+					final JDFResourceLink rl = (JDFResourceLink) parent;
 					rl.copyAttribute(AttributeName.AMOUNT, xjdfPartAmount);
 					rl.copyAttribute(AttributeName.ACTUALAMOUNT, xjdfPartAmount);
 					rl.copyAttribute(AttributeName.MAXAMOUNT, xjdfPartAmount);
@@ -158,7 +171,7 @@ public class WalkPartAmount extends WalkXElement
 				}
 			}
 		}
-		for (JDFAttributeMap map : split)
+		for (final JDFAttributeMap map : split)
 		{
 			walkSingle(map, xjdfPartAmount, jdfAmountPool);
 		}
@@ -172,12 +185,12 @@ public class WalkPartAmount extends WalkXElement
 	 * @param bGood
 	 * @return
 	 */
-	private VJDFAttributeMap splitWaste(KElement xjdfPartAmount, boolean bGood)
+	private VJDFAttributeMap splitWaste(final KElement xjdfPartAmount, final boolean bGood)
 	{
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
-		JDFAttributeMap map = xjdfPartAmount.getAttributeMap();
-		boolean bAmount = map.containsKey(AttributeName.ACTUALAMOUNT) || map.containsKey(AttributeName.AMOUNT);
-		boolean bWaste = map.containsKey(XJDFConstants.Waste);
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final JDFAttributeMap map = xjdfPartAmount.getAttributeMap();
+		final boolean bAmount = map.containsKey(AttributeName.ACTUALAMOUNT) || map.containsKey(AttributeName.AMOUNT);
+		final boolean bWaste = map.containsKey(XJDFConstants.Waste);
 		String wasteKey = map.remove(XJDFConstants.WasteDetails);
 		if (StringUtil.isEmpty(wasteKey))
 		{
@@ -189,7 +202,7 @@ public class WalkPartAmount extends WalkXElement
 		}
 		if (bWaste)
 		{
-			JDFAttributeMap mapWaste = map.clone();
+			final JDFAttributeMap mapWaste = map.clone();
 			mapWaste.put(AttributeName.CONDITION, wasteKey);
 			mapWaste.put(AttributeName.AMOUNT, mapWaste.remove(XJDFConstants.Waste));
 			mapWaste.remove(AttributeName.MINAMOUNT);

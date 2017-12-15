@@ -119,7 +119,7 @@ public class XJDFAdditionalExampleTest extends JDFTestCaseBase
 		plateMedia.setMediaType(EnumMediaType.Plate);
 
 		final SetHelper compH = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
-		final ResourceHelper compR = compH.getCreatePartition(0, true);
+		final ResourceHelper compR = compH.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
 
 		final SetHelper xmH = xjdfHelper.getCreateSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
 		final SetHelper colorH = xjdfHelper.getCreateSet(ElementName.COLOR, EnumUsage.Input);
