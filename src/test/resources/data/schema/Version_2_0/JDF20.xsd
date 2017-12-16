@@ -1624,8 +1624,8 @@
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Glue"/>
                 </xs:sequence>
                 <xs:attribute name="CaseRadius" type="float" use="optional"/>
-                <xs:attribute name="CoverBoardWidth" type="float" use="optional"/>
-                <xs:attribute name="SpineBoardWidth" type="float" use="optional"/>
+                <xs:attribute name="CoverWidth" type="float" use="optional"/>
+                <xs:attribute name="SpineWidth" type="float" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2720,7 +2720,7 @@
             <xs:attribute name="Manufacturer" type="string" use="optional"/>
             <xs:attribute name="ManufacturerURL" type="URL" use="optional"/>
             <xs:attribute name="ModuleID" type="NMTOKEN" use="required"/>
-            <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ModuleType" type="NMTOKENS" use="optional"/>
             <xs:attribute name="Revision" type="string" use="optional"/>
             <xs:attribute name="SerialNumber" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -3349,7 +3349,7 @@
             <xs:sequence>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="AssemblySection"/>
             </xs:sequence>
-            <xs:attribute name="BinderySignatureID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="BinderySignatureID" type="NMTOKEN" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
