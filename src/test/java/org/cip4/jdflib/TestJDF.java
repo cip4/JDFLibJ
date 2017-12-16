@@ -71,20 +71,29 @@
 
 package org.cip4.jdflib;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.io.File;
+import java.util.Vector;
+
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -111,17 +120,43 @@ public class TestJDF extends JDFTestCaseBase
 	/**
 	 *
 	 */
-	// @Test
-	//	public void testWriteJMF()
-	//	{
-	//		final JDFDoc d = new JDFDoc("JMF");
-	//		JDFJMF jmf = d.getJMFRoot();
-	//		jmf.appendCommand().setType("getVersion");
-	//		// JDFDoc d2 = d.write2URL("http://kie-schielke-nb:6311/StorageService-J/Storage");
-	//		JDFDoc d2 = d.write2URL("http://kie-wf16prdy:6311/StorageService-J/Storage");
-	//
-	//	}
-
+	@Test
+	@Ignore
+	public void fixExampleVersions()
+	{
+		final Vector<File> v = FileUtil.listFilesInTree(new File("/gitreps/samples/src/main/resources/jdf"), "*.jdf");
+		for (final File f : v)
+		{
+			final JDFDoc d = JDFDoc.parseFile(f);
+			final KElement e = d == null ? null : d.getRoot();
+			final VElement vAll = e == null ? null : e.getChildrenByTagName_KElement(null, null, null, false, true, 0);
+			if (vAll != null)
+			{
+				vAll.add(e);
+				boolean b = false;
+				for (final KElement e2 : vAll)
+				{
+					String s = e2.getNonEmpty(AttributeName.VERSION);
+					if (s != null && !"1.6".equals(s))
+					{
+						e2.setAttribute(AttributeName.VERSION, "1.6");
+						b = true;
+					}
+					s = e2.getNonEmpty(AttributeName.MAXVERSION);
+					if (s != null && !"1.6".equals(s))
+					{
+						e2.setAttribute(AttributeName.MAXVERSION, "1.6");
+						b = true;
+					}
+				}
+				if (b)
+				{
+					log.info(f.getAbsolutePath());
+					d.write2File(f, 2, false);
+				}
+			}
+		}
+	}
 	/**
 	 *
 	 * TODO Please insert comment!
@@ -143,7 +178,7 @@ public class TestJDF extends JDFTestCaseBase
 			spawn.bSpawnIdentical = true;
 			spawn.bSpawnRWPartsMultiple = true;
 			JDFMerge m = new JDFMerge(jdfRoot);
-	
+
 			Vector<JDFNode> vSpawned = new Vector<JDFNode>();
 			for (int ii = 1; ii < 21; ii++)
 			{
@@ -162,7 +197,7 @@ public class TestJDF extends JDFTestCaseBase
 					vamParts.add(amParts0);
 				}
 				final VString vsRWResourceIDs = new VString("Output", null);
-	
+
 				ct.start();
 				JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
 				vSpawned.add(nodeSubJDF);
@@ -183,7 +218,7 @@ public class TestJDF extends JDFTestCaseBase
 			}
 			strOutJDFPath = "/share/data/fehler/PD-68493/giant_merged.jdf";
 			jdfDoc.write2File(strOutJDFPath, 2, false);
-	
+
 		}*/
 
 	/**
@@ -192,21 +227,21 @@ public class TestJDF extends JDFTestCaseBase
 	 */
 	public void _testSpawnf() throws Throwable
 	{
-		JDFDoc jdfDoc = JDFDoc.parseFile("/data/JDF/FrankB.jdf");
+		final JDFDoc jdfDoc = JDFDoc.parseFile("/data/JDF/FrankB.jdf");
 
-		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("PP153.D", JDFConstants.EMPTYSTRING);
-		VJDFAttributeMap vamParts = new VJDFAttributeMap();
-		JDFAttributeMap amParts0 = new JDFAttributeMap();
+		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("PP153.D", JDFConstants.EMPTYSTRING);
+		final VJDFAttributeMap vamParts = new VJDFAttributeMap();
+		final JDFAttributeMap amParts0 = new JDFAttributeMap();
 
 		amParts0.put("Run", "_160421_143800168_022360m1");
 
 		vamParts.add(amParts0);
 
-		VString vsRWResourceIDs = new VString();
+		final VString vsRWResourceIDs = new VString();
 
 		vsRWResourceIDs.add("Output");
 
-		JDFSpawn spawn = new JDFSpawn(nodeProc);
+		final JDFSpawn spawn = new JDFSpawn(nodeProc);
 
 		spawn.setNode(nodeProc);
 		spawn.bFixResources = false;
@@ -214,7 +249,7 @@ public class TestJDF extends JDFTestCaseBase
 		spawn.bSpawnIdentical = true;
 		spawn.bSpawnROPartsOnly = true;
 
-		JDFNode nodeSubJDF = spawn.spawn("", null, vsRWResourceIDs, vamParts, true, true, true, false);
+		final JDFNode nodeSubJDF = spawn.spawn("", null, vsRWResourceIDs, vamParts, true, true, true, false);
 		nodeSubJDF.write2File("/data/JDF/FrankB.spawn.jdf");
 
 	}
@@ -223,15 +258,17 @@ public class TestJDF extends JDFTestCaseBase
 	 *
 	 * @throws Throwable
 	 */
+	@Test
+	@Ignore
 	public void _testSpawn() throws Throwable
 	{
 		if (true)
 			return;
-		JDFDoc jdfDoc = JDFDoc.parseFile("/data/Fehler/118558-PD/main.jdf");
+		final JDFDoc jdfDoc = JDFDoc.parseFile("/data/Fehler/118558-PD/main.jdf");
 
-		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("PAGE_PROOFING_SEQ.M", JDFConstants.EMPTYSTRING);
-		VJDFAttributeMap vamParts = new VJDFAttributeMap();
-		JDFAttributeMap amParts0 = new JDFAttributeMap();
+		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("PAGE_PROOFING_SEQ.M", JDFConstants.EMPTYSTRING);
+		final VJDFAttributeMap vamParts = new VJDFAttributeMap();
+		final JDFAttributeMap amParts0 = new JDFAttributeMap();
 
 		amParts0.put("SheetName", "Umschlag");
 		amParts0.put("Side", "Front");
@@ -239,30 +276,24 @@ public class TestJDF extends JDFTestCaseBase
 
 		vamParts.add(amParts0);
 
-		VString vsRWResourceIDs = new VString();
+		final VString vsRWResourceIDs = new VString();
 
 		vsRWResourceIDs.add("Output");
 
-		JDFSpawn spawn = new JDFSpawn(nodeProc);
+		final JDFSpawn spawn = new JDFSpawn(nodeProc);
 
 		spawn.setNode(nodeProc);
 		spawn.bFixResources = false;
 		spawn.bSpawnRWPartsMultiple = true;
 		spawn.bSpawnIdentical = true;
 
-		JDFNode nodeSubJDF = spawn.spawn("", null, vsRWResourceIDs, null, true, true, true, false);
+		final JDFNode nodeSubJDF = spawn.spawn("", null, vsRWResourceIDs, null, true, true, true, false);
 		nodeSubJDF.setPartStatus(vamParts, EnumNodeStatus.Completed, "test");
 		assertNotNull(nodeSubJDF);
-		JDFMerge m = new JDFMerge(jdfDoc.getJDFRoot());
+		final JDFMerge m = new JDFMerge(jdfDoc.getJDFRoot());
 		m.mergeJDF(nodeSubJDF);
-		JDFNode nodeProcMerged = jdfDoc.getJDFRoot().getJobPart("1001", JDFConstants.EMPTYSTRING);
+		final JDFNode nodeProcMerged = jdfDoc.getJDFRoot().getJobPart("1001", JDFConstants.EMPTYSTRING);
 		assertEquals(nodeProcMerged.getPartStatus(amParts0, 0), EnumNodeStatus.Completed);
-
-	}
-
-	private void assertEquals(EnumNodeStatus partStatus, EnumNodeStatus completed)
-	{
-		// TODO Auto-generated method stub
 
 	}
 
