@@ -104,18 +104,18 @@ public class XJDFMediaTest extends JDFTestCaseBase
 	@Test
 	public void testCorrugated()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper("Converting", "Corrugated", null);
+		final XJDFHelper xjdfHelper = new XJDFHelper("Converting", "Corrugated", null);
 		xjdfHelper.setTypes(JDFConstants.CONVENTIONALPRINTING);
-		SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
-		ResourceHelper rh = shMedia.appendPartition(null, true);
-		JDFMedia m = (JDFMedia) rh.getResource();
+		final SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
+		final ResourceHelper rh = shMedia.appendPartition(null, true);
+		final JDFMedia m = (JDFMedia) rh.getResource();
 		m.setMediaType(EnumMediaType.CorrugatedBoard);
 		m.setDimensionCM(new JDFXYPair(100, 70));
 		m.setThickness(2382);
 		m.setInsideLoss(1000);
 		m.setOutsideGain(1380);
 		m.setMediaTypeDetails("SingleWall");
-		JDFMediaLayers ml = m.appendMediaLayers();
+		final JDFMediaLayers ml = m.appendMediaLayers();
 		JDFMedia m2 = ml.appendMedia();
 		m2.setMediaType(EnumMediaType.Paper);
 		m2.setWeight(190);
@@ -139,19 +139,19 @@ public class XJDFMediaTest extends JDFTestCaseBase
 	@Test
 	public void testFlexoPlate()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper("Flexo", "Plate", null);
+		final XJDFHelper xjdfHelper = new XJDFHelper("Flexo", "Plate", null);
 		xjdfHelper.setTypes(JDFConstants.CONVENTIONALPRINTING);
-		SetHelper shMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, EnumUsage.Input, "Plate");
-		ResourceHelper rh = shMedia.appendPartition(AttributeName.SEPARATION, "Black", true);
+		final SetHelper shMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, EnumUsage.Input, "Plate");
+		final ResourceHelper rh = shMedia.appendPartition(AttributeName.SEPARATION, "Black", true);
 		rh.setBrand("FlexoBrand");
-		JDFMedia m = (JDFMedia) rh.getResource();
+		final JDFMedia m = (JDFMedia) rh.getResource();
 		m.setMediaType(EnumMediaType.Plate);
 		m.setDimensionCM(new JDFXYPair(90, 120));
 		m.setThickness(1143);
 		m.setPlateTechnology(EnumPlateTechnology.FlexoDigitalThermal);
 		m.setReliefThickness(500);
 
-		JDFMediaLayers ml = m.appendMediaLayers();
+		final JDFMediaLayers ml = m.appendMediaLayers();
 		JDFMedia m2 = ml.appendMedia();
 		m2.setMediaType(EnumMediaType.Plate);
 		m2.setThickness(966);
@@ -164,8 +164,8 @@ public class XJDFMediaTest extends JDFTestCaseBase
 		cleanSnippets(xjdfHelper);
 
 		writeTest(xjdfHelper, "resources/FlexoPlate.xjdf");
-		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
-		JDFDoc d = xc.convert(xjdfHelper);
+		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		final JDFDoc d = xc.convert(xjdfHelper);
 		writeTest(d.getRoot(), "resources/FlexoPlate.jdf", false, null);
 	}
 
@@ -175,19 +175,19 @@ public class XJDFMediaTest extends JDFTestCaseBase
 	@Test
 	public void testFlexoSleeve()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper("Flexo", "Sleeve", null);
+		final XJDFHelper xjdfHelper = new XJDFHelper("Flexo", "Sleeve", null);
 		xjdfHelper.setTypes(JDFConstants.CONVENTIONALPRINTING);
-		SetHelper shMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, EnumUsage.Input, "Plate");
-		ResourceHelper rh = shMedia.appendPartition(null, true);
+		final SetHelper shMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, EnumUsage.Input, "Plate");
+		final ResourceHelper rh = shMedia.appendPartition(null, true);
 		rh.setBrand("FlexoBrand");
-		JDFMedia m = (JDFMedia) rh.getResource();
+		final JDFMedia m = (JDFMedia) rh.getResource();
 		m.setMediaType(EnumMediaType.Sleeve);
 		m.setDimensionCM(new JDFXYPair(50, 25));
 		m.setThickness(2810);
 		m.setPlateTechnology(EnumPlateTechnology.FlexoDigitalSolvent);
 		m.setReliefThickness(500);
 
-		JDFMediaLayers ml = m.appendMediaLayers();
+		final JDFMediaLayers ml = m.appendMediaLayers();
 		JDFMedia m2 = ml.appendMedia();
 		m2.setMediaType(EnumMediaType.Sleeve);
 		m2.setThickness(1570);
@@ -200,8 +200,8 @@ public class XJDFMediaTest extends JDFTestCaseBase
 		cleanSnippets(xjdfHelper);
 
 		writeTest(xjdfHelper, "resources/FlexoSleeve.xjdf");
-		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
-		JDFDoc d = xc.convert(xjdfHelper);
+		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		final JDFDoc d = xc.convert(xjdfHelper);
 		writeTest(d.getRoot(), "resources/FlexoSleeve.jdf", false, null);
 	}
 
@@ -211,20 +211,20 @@ public class XJDFMediaTest extends JDFTestCaseBase
 	@Test
 	public void testAdhesive()
 	{
-		XJDFHelper xjdfHelper = new XJDFHelper("Converting", "Corrugated", null);
+		final XJDFHelper xjdfHelper = new XJDFHelper("Converting", "Corrugated", null);
 		xjdfHelper.setTypes(JDFConstants.CONVENTIONALPRINTING);
-		SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
-		ResourceHelper rh = shMedia.appendPartition(null, true);
-		JDFMedia m = (JDFMedia) rh.getResource();
+		final SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
+		final ResourceHelper rh = shMedia.appendPartition(null, true);
+		final JDFMedia m = (JDFMedia) rh.getResource();
 		m.setMediaType(EnumMediaType.SelfAdhesive);
 		m.setDimensionCM(new JDFXYPair(42, 0));
 		m.setMediaUnit(EnumMediaUnit.Roll);
 		m.setThickness(900);
-		JDFMediaLayers ml = m.appendMediaLayers();
+		final JDFMediaLayers ml = m.appendMediaLayers();
 		JDFMedia m2 = ml.appendMedia();
 		m2.setMediaType(EnumMediaType.Paper);
 		m2.setWeight(90);
-		JDFGlue g = (JDFGlue) ml.appendElement(ElementName.GLUE);
+		final JDFGlue g = (JDFGlue) ml.appendElement(ElementName.GLUE);
 		g.setAttribute(AttributeName.AREAGLUE, "" + true);
 		g.setAttribute(AttributeName.GLUETYPE, "Removable");
 		m2 = ml.appendMedia();
@@ -242,5 +242,6 @@ public class XJDFMediaTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		KElement.setLongID(false);
+		super.setUp();
 	}
 }
