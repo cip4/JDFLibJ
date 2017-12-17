@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -140,7 +140,7 @@ public class JDFNotificationTest extends JDFTestCaseBase
 	public void testMatches()
 	{
 		assertTrue(n.matches(n));
-		JDFNotification n2 = (JDFNotification) new JDFDoc("Notification").getRoot();
+		final JDFNotification n2 = (JDFNotification) new JDFDoc("Notification").getRoot();
 		assertTrue(n.matches(n2));
 		n2.setModuleID("m1");
 		assertFalse(n.matches(n2));
@@ -192,6 +192,115 @@ public class JDFNotificationTest extends JDFTestCaseBase
 		assertEquals(e.getEventID(), "id2");
 		assertEquals(e.getEventValue(), "value2");
 		assertEquals(n.getComment(0).getText(), "bullshit2");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetEvent()
+	{
+		final JDFEvent e = n.setEvent("id", "value", "bullshit");
+		assertEquals(e, n.getEvent());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetError()
+	{
+		final JDFError e = n.appendError();
+		assertEquals(e, n.getError());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetErrorBad()
+	{
+		n.appendFCNKey();
+		assertNull(n.getError());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetMilestone()
+	{
+		final JDFMilestone ms = n.appendMilestone();
+		ms.setMilestoneType("ms");
+		assertEquals(ms, n.getMilestone());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetCreateEvent()
+	{
+		assertNotNull(n.getCreateEvent());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetCreateMilestone()
+	{
+		assertNotNull(n.getCreateMilestone());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetCreateMilestoneBad()
+	{
+		n.appendBarcode();
+		assertNull(n.getCreateMilestone());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetMilestoneBad()
+	{
+		n.appendBarcode();
+		assertNull(n.getMilestone());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetFCNBad()
+	{
+		n.appendBarcode();
+		assertNull(n.getFCNKey());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetEventBad()
+	{
+		n.appendBarcode();
+		assertNull(n.getEvent());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetCreateEventBad()
+	{
+		n.appendBarcode();
+		assertNull(n.getCreateEvent());
 	}
 
 	/**

@@ -97,6 +97,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.IMatches;
@@ -307,7 +308,10 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	 */
 	public JDFBarcode getBarcode()
 	{
-		return (JDFBarcode) getNotificationDetails();
+		final JDFElement notificationDetails = getNotificationDetails();
+		if (notificationDetails == null || !(notificationDetails instanceof JDFBarcode))
+			return (JDFBarcode) getElement(ElementName.EVENT);
+		return (JDFBarcode) notificationDetails;
 	}
 
 	/**
@@ -334,7 +338,10 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	 */
 	public JDFFCNKey getFCNKey()
 	{
-		return (JDFFCNKey) getNotificationDetails();
+		final JDFElement notificationDetails = getNotificationDetails();
+		if (notificationDetails == null || !(notificationDetails instanceof JDFFCNKey))
+			return (JDFFCNKey) getElement(ElementName.FCNKEY);
+		return (JDFFCNKey) notificationDetails;
 	}
 
 	/**
@@ -361,7 +368,10 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	 */
 	public JDFSystemTimeSet getSystemTimeSet()
 	{
-		return (JDFSystemTimeSet) getNotificationDetails();
+		final JDFElement notificationDetails = getNotificationDetails();
+		if (notificationDetails == null || !(notificationDetails instanceof JDFSystemTimeSet))
+			return (JDFSystemTimeSet) getElement(ElementName.SYSTEMTIMESET);
+		return (JDFSystemTimeSet) notificationDetails;
 	}
 
 	/**
@@ -388,7 +398,10 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	 */
 	public JDFCounterReset getCounterReset()
 	{
-		return (JDFCounterReset) getNotificationDetails();
+		final JDFElement notificationDetails = getNotificationDetails();
+		if (notificationDetails == null || !(notificationDetails instanceof JDFCounterReset))
+			return (JDFCounterReset) getElement(ElementName.COUNTERRESET);
+		return (JDFCounterReset) notificationDetails;
 	}
 
 	/**
@@ -441,11 +454,11 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	 */
 	public JDFError getError()
 	{
-		JDFError notificationDetails = (JDFError) getNotificationDetails();
-		if (notificationDetails == null)
+		final KElement notificationDetails = getNotificationDetails();
+		if (notificationDetails == null || !(notificationDetails instanceof JDFError))
 			return (JDFError) getElement(ElementName.ERROR);
 
-		return notificationDetails;
+		return (JDFError) notificationDetails;
 	}
 
 	/**
@@ -579,10 +592,10 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	 */
 	public JDFEvent getEvent()
 	{
-		JDFEvent notificationDetails = (JDFEvent) getNotificationDetails();
-		if (notificationDetails == null)
+		final JDFElement notificationDetails = getNotificationDetails();
+		if (notificationDetails == null || !(notificationDetails instanceof JDFEvent))
 			return (JDFEvent) getElement(ElementName.EVENT);
-		return notificationDetails;
+		return (JDFEvent) notificationDetails;
 	}
 
 	/**
@@ -609,7 +622,10 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	 */
 	public JDFMilestone getMilestone()
 	{
-		return (JDFMilestone) getNotificationDetails();
+		final JDFElement notificationDetails = getNotificationDetails();
+		if (notificationDetails == null || !(notificationDetails instanceof JDFMilestone))
+			return (JDFMilestone) getElement(ElementName.MILESTONE);
+		return (JDFMilestone) notificationDetails;
 	}
 
 	/**
@@ -655,13 +671,13 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 	 */
 	@Override
-	public boolean matches(Object subset)
+	public boolean matches(final Object subset)
 	{
 		if (!(subset instanceof JDFNotification))
 			return false;
-		JDFNotification other = (JDFNotification) subset;
-		JDFAttributeMap map = getAttributeMap();
-		JDFAttributeMap map2 = other.getAttributeMap();
+		final JDFNotification other = (JDFNotification) subset;
+		final JDFAttributeMap map = getAttributeMap();
+		final JDFAttributeMap map2 = other.getAttributeMap();
 
 		map.remove(AttributeName.ID);
 		map2.remove(AttributeName.ID);
