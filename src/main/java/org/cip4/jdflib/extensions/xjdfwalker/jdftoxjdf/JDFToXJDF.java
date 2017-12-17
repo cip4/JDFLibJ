@@ -74,8 +74,6 @@ import java.io.OutputStream;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -98,6 +96,7 @@ import org.cip4.jdflib.elementwalker.PackageElementWalker;
 import org.cip4.jdflib.elementwalker.RemoveEmpty;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.XJDFZipWriter;
 import org.cip4.jdflib.extensions.XJMFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
@@ -106,10 +105,7 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
-import org.cip4.jdflib.util.NumberFormatter;
-import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.StringUtil;
-import org.cip4.jdflib.util.UrlUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG <br/>
@@ -600,7 +596,14 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	public void writeStream(final OutputStream os, final JDFNode rootNode, final JDFJMF jmf)
 	{
-		new MultiJDFToXJDF().writeStream(os, rootNode, jmf);
+		try
+		{
+			new MultiJDFToXJDF().getZipWriter(rootNode).writeStream(os);
+		}
+		catch (final IOException e)
+		{
+			log.error("oops", e);
+		}
 	}
 
 	/**
@@ -640,83 +643,25 @@ public class JDFToXJDF extends PackageElementWalker
 					throw new JDFException("output file exists: " + file.getPath());
 				}
 			}
-
-			final OutputStream fos = FileUtil.getBufferedOutputStream(new File(fileName));
-			writeZipStream(rootNode, fos, null, null);
-			StreamUtil.close(fos);
+			FileUtil.writeFile(getZipWriter(rootNode), new File(fileName));
 		}
 
 		/**
-		 *
-		 * @param os
+		 * @param jmf
 		 * @param rootNode
-		 * @param xjmf
-		 */
-		void writeStream(final OutputStream os, final JDFNode rootNode, final JDFJMF jmf)
-		{
-			final KElement xjmf = makeNewJMF(jmf);
-			writeZipStream(rootNode, os, "xjdfs", xjmf);
-		}
-
-		/**
 		 * @param rootNode
 		 * @param fos
 		 */
-		private void writeZipStream(final JDFNode rootNode, final OutputStream fos, final String dirName, final KElement xjmf)
+		XJDFZipWriter getZipWriter(final JDFNode rootNode)
 		{
 			setSingleNode(true);
-			try
+			final Vector<XJDFHelper> vXJDFs = getXJDFs(rootNode);
+			final XJDFZipWriter w = new XJDFZipWriter();
+			for (final XJDFHelper h : vXJDFs)
 			{
-				final Vector<XJDFHelper> vXJDFs = getXJDFs(rootNode);
-
-				final ZipOutputStream zos = new ZipOutputStream(fos);
-				writeXJMF(xjmf, zos);
-				int nZip = 0;
-				for (final XJDFHelper h : vXJDFs)
-				{
-					try
-					{
-						String nam = new NumberFormatter().formatInt(nZip++, 2) + "_" + h.getJobPartID() + "." + XJDFConstants.XJDF;
-						nam = UrlUtil.getURLWithDirectory(dirName, nam);
-						final ZipEntry ze = new ZipEntry(nam);
-						zos.putNextEntry(ze);
-						h.writeToStream(zos);
-						zos.closeEntry();
-					}
-					catch (final Exception x)
-					{
-						log.error("oops: ", x);
-					}
-				}
-				zos.close();
+				w.addXJDF(h);
 			}
-			catch (final IOException x)
-			{
-				log.error("oops: ", x);
-			}
-		}
-
-		/**
-		 * @param xjmf
-		 * @param zos
-		 * @throws IOException
-		 */
-		private void writeXJMF(final KElement xjmf, final ZipOutputStream zos) throws IOException
-		{
-			if (xjmf != null)
-			{
-				try
-				{
-					final ZipEntry ze = new ZipEntry("root.xjmf");
-					zos.putNextEntry(ze);
-					xjmf.write2Stream(zos);
-					zos.closeEntry();
-				}
-				catch (final Exception x)
-				{
-					log.error("oops: ", x);
-				}
-			}
+			return w;
 		}
 
 		/**
@@ -807,8 +752,6 @@ public class JDFToXJDF extends PackageElementWalker
 			}
 		}
 	}
-
-	// //////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * @param res

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,7 @@ import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.zip.ZipReader;
 
 /**
- * class to unpack multi-xjdf zip files and convert the package to a single zip file
+ * class to unpack multi-xjdf zip files and convert the package to a single jdf and jmf file
  * @author rainer prosi
  *
  */
@@ -101,17 +101,17 @@ public class XJDFZipReader implements IStreamWriter
 	private XJDFToJDFConverter converter;
 
 	/**
-	 * 
+	 *
 	 */
-	public XJDFZipReader(InputStream inStream)
+	public XJDFZipReader(final InputStream inStream)
 	{
 		this(ZipReader.getZipReader(inStream));
 	}
 
 	/**
-	 * 
+	 *
 	 */
-	public XJDFZipReader(ZipReader zipReader)
+	public XJDFZipReader(final ZipReader zipReader)
 	{
 		super();
 		theReader = zipReader;
@@ -128,15 +128,15 @@ public class XJDFZipReader implements IStreamWriter
 	/**
 	 * @param path the path to set
 	 */
-	public void setPath(String path)
+	public void setPath(final String path)
 	{
 		this.path = UrlUtil.cleanDots(path);
 	}
 
 	/**
-	 * 
+	 *
 	 */
-	public XJDFZipReader(File inFile)
+	public XJDFZipReader(final File inFile)
 	{
 		this(FileUtil.getBufferedInputStream(inFile));
 	}
@@ -146,10 +146,10 @@ public class XJDFZipReader implements IStreamWriter
 	private JDFDoc newJMF;
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
-	public void writeStream(OutputStream os) throws IOException
+	public void writeStream(final OutputStream os) throws IOException
 	{
 		if (newDoc == null)
 		{
@@ -162,7 +162,7 @@ public class XJDFZipReader implements IStreamWriter
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void convert()
 	{
@@ -171,49 +171,94 @@ public class XJDFZipReader implements IStreamWriter
 	}
 
 	/**
-	 * 
+	 *
+	 */
+	public XMLDoc getXJDF(int i)
+	{
+		if (theReader != null)
+		{
+			final String pathExpression = UrlUtil.getURLWithDirectory(path, "*.xjdf");
+			final Vector<ZipEntry> vze = theReader.getMatchingEntries(pathExpression, true);
+			if (i < 0)
+			{
+				i = vze.size() + i;
+			}
+			if (i >= 0 && i < vze.size())
+			{
+				final ZipEntry ze = vze.get(i);
+				theReader.setEntry(ze);
+				return theReader.getXMLDoc();
+			}
+		}
+		return null;
+	}
+
+	/**
+	 *
+	 */
+	public Vector<XMLDoc> getXJDFs()
+	{
+		final Vector<XMLDoc> vRet = new Vector<>();
+		if (theReader != null)
+		{
+			final String pathExpression = UrlUtil.getURLWithDirectory(path, "*.xjdf");
+			final Vector<ZipEntry> vze = theReader.getMatchingEntries(pathExpression, true);
+			for (final ZipEntry ze : vze)
+			{
+				theReader.setEntry(ze);
+				final XMLDoc xmlDoc = theReader.getXMLDoc();
+				if (xmlDoc != null)
+				{
+					vRet.add(xmlDoc);
+				}
+			}
+		}
+		return vRet.size() == 0 ? null : vRet;
+	}
+
+	/**
+	 *
 	 */
 	public void convertXJDF()
 	{
 		newDoc = null;
 		if (theReader != null)
 		{
-			String pathExpression = UrlUtil.getURLWithDirectory(path, "*.xjdf");
-			XJDFToJDFConverter localConverter = getConverter();
-			Vector<ZipEntry> vze = theReader.getMatchingEntries(pathExpression, true);
-			for (ZipEntry ze : vze)
+			final Vector<XMLDoc> vXJDF = getXJDFs();
+			if (vXJDF != null)
 			{
-				theReader.setEntry(ze);
-				XMLDoc xdoc = theReader.getXMLDoc();
-				if (xdoc != null)
+				final XJDFToJDFConverter localConverter = getConverter();
+				for (final XMLDoc xdoc : vXJDF)
 				{
-					newDoc = localConverter.convert(xdoc.getRoot());
+					if (xdoc != null)
+					{
+						newDoc = localConverter.convert(xdoc.getRoot());
+					}
 				}
 			}
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	void convertXJMF()
 	{
 		newJMF = null;
 		if (theReader != null)
 		{
-			XJDFToJDFConverter c = getConverter();
-			ZipEntry ze = theReader.getMatchingEntry("*.xjmf", 0);
-			XMLDoc xdoc = ze == null ? null : theReader.getXMLDoc();
+			final XMLDoc xdoc = getXJMF();
 			if (xdoc != null)
 			{
+				final XJDFToJDFConverter c = getConverter();
 				newJMF = c.convert(xdoc.getRoot());
-				JDFJMF jmf = newJMF == null ? null : newJMF.getJMFRoot();
-				JDFCommand command = jmf == null ? null : jmf.getCommand(0);
+				final JDFJMF jmf = newJMF == null ? null : newJMF.getJMFRoot();
+				final JDFCommand command = jmf == null ? null : jmf.getCommand(0);
 				if (command != null)
 				{
-					VString validParams = new VString(new String[] { ElementName.QUEUESUBMISSIONPARAMS, ElementName.RESUBMISSIONPARAMS, ElementName.RETURNQUEUEENTRYPARAMS });
-					IURLSetter params = (IURLSetter) command.getChildFromList(validParams, 0, null, true);
-					String url = params.getURL();
+					final VString validParams = new VString(new String[] { ElementName.QUEUESUBMISSIONPARAMS, ElementName.RESUBMISSIONPARAMS, ElementName.RETURNQUEUEENTRYPARAMS });
+					final IURLSetter params = (IURLSetter) command.getChildFromList(validParams, 0, null, true);
+					final String url = params.getURL();
 					if (UrlUtil.isRelativeURL(url))
 					{
 						setPath(url);
@@ -221,6 +266,13 @@ public class XJDFZipReader implements IStreamWriter
 				}
 			}
 		}
+	}
+
+	public XMLDoc getXJMF()
+	{
+		final ZipEntry ze = theReader.getMatchingEntry("*.xjmf", 0);
+		final XMLDoc xdoc = ze == null ? null : theReader.getXMLDoc();
+		return xdoc;
 	}
 
 	/**
@@ -233,7 +285,7 @@ public class XJDFZipReader implements IStreamWriter
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFNode getJDFRoot()
@@ -242,7 +294,7 @@ public class XJDFZipReader implements IStreamWriter
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFJMF getJMFRoot()
@@ -251,7 +303,7 @@ public class XJDFZipReader implements IStreamWriter
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public XJDFToJDFConverter getConverter()
@@ -263,10 +315,10 @@ public class XJDFZipReader implements IStreamWriter
 	}
 
 	/**
-	 * 
+	 *
 	 * @param converter
 	 */
-	public void setConverter(XJDFToJDFConverter converter)
+	public void setConverter(final XJDFToJDFConverter converter)
 	{
 		this.converter = converter;
 	}
@@ -274,7 +326,7 @@ public class XJDFZipReader implements IStreamWriter
 	/**
 	 * @param newJMF the newJMF to set
 	 */
-	protected void setNewJMF(JDFDoc newJMF)
+	protected void setNewJMF(final JDFDoc newJMF)
 	{
 		this.newJMF = newJMF;
 	}
