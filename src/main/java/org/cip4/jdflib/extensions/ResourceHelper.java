@@ -358,7 +358,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 		if (vMap != null)
 		{
 			final VJDFAttributeMap partMap = getPartMapVector();
-			final VString keys = partMap == null ? null : partMap.getKeys();
+			final VString keys = partMap.getKeys();
 			vMap.removeKeys(keys);
 		}
 		final JDFPartAmount pa0 = ap.getCreatePartAmount(vMap);
