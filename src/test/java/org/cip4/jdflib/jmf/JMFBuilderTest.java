@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,7 @@ package org.cip4.jdflib.jmf;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -117,7 +118,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	@Test
 	public void testBuildMilestone()
 	{
-		JDFJMF jmf = b.buildMilestone("PrepressCompleted", "jobID");
+		final JDFJMF jmf = b.buildMilestone("PrepressCompleted", "jobID");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "milestone");
 	}
 
@@ -128,8 +129,8 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	@Test
 	public void testBuildSubmitQueueEntry()
 	{
-		JDFJMF jmf = b.buildSubmitQueueEntry("retURL", "xxx");
-		JDFQueueSubmissionParams queueSubmissionParams = jmf.getCommand(0).getQueueSubmissionParams(0);
+		final JDFJMF jmf = b.buildSubmitQueueEntry("retURL", "xxx");
+		final JDFQueueSubmissionParams queueSubmissionParams = jmf.getCommand(0).getQueueSubmissionParams(0);
 		assertEquals(queueSubmissionParams.getURL(), "xxx");
 		assertEquals(queueSubmissionParams.getReturnJMF(), "retURL");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "submitQueueEntry");
@@ -141,17 +142,17 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	 * @param level
 	 * @param dir
 	 */
-	private void roundTrip(JDFJMF jmf, EnumValidationLevel level, String dir)
+	private void roundTrip(final JDFJMF jmf, final EnumValidationLevel level, final String dir)
 	{
 		assertTrue(jmf.isValid(level));
 		jmf.write2File(dir + ".jmf");
-		JDFToXJDF xc = new XJDF20();
+		final JDFToXJDF xc = new XJDF20();
 		xc.setTypeSafeMessage(true);
-		KElement e = xc.convert(jmf);
+		final KElement e = xc.convert(jmf);
 		assertNotNull(e);
 		e.write2File(dir + ".xjmf");
-		XJDFToJDFConverter xc2 = new XJDFToJDFConverter(null);
-		JDFDoc doc = xc2.convert(e);
+		final XJDFToJDFConverter xc2 = new XJDFToJDFConverter(null);
+		final JDFDoc doc = xc2.convert(e);
 		doc.write2File(dir + ".xjmf.xjdf", 2, false);
 		assertTrue(doc.getJMFRoot().isValid(level));
 
@@ -164,7 +165,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	@Test
 	public void testBuildResourceSignal()
 	{
-		JDFJMF jmf = b.buildResourceSignal(true, null);
+		final JDFJMF jmf = b.buildResourceSignal(true, null);
 		assertEquals(jmf.getSignal(0).getType(), "Resource");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "resourceSignal");
 	}
@@ -176,23 +177,23 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	@Test
 	public void testBuildResourceSignalInkLot()
 	{
-		JDFJMF jmf = b.buildResourceSignal(false, null);
+		final JDFJMF jmf = b.buildResourceSignal(false, null);
 
-		JDFSignal signal = jmf.getSignal(0);
-		JDFResourceQuParams rqp = signal.getCreateResourceQuParams(0);
+		final JDFSignal signal = jmf.getSignal(0);
+		final JDFResourceQuParams rqp = signal.getCreateResourceQuParams(0);
 		rqp.setJobID("job1");
 		rqp.setJobPartID("ConvPrint.1");
-		JDFResourceInfo ri = signal.getCreateResourceInfo(0);
+		final JDFResourceInfo ri = signal.getCreateResourceInfo(0);
 		ri.setResourceName(ElementName.INK);
 		ri.setUnit("g");
-		JDFAmountPool ap = ri.getCreateAmountPool();
-		JDFAttributeMap map = new JDFAttributeMap();
+		final JDFAmountPool ap = ri.getCreateAmountPool();
+		final JDFAttributeMap map = new JDFAttributeMap();
 		map.put(AttributeName.SIGNATURENAME, "sig1");
 		map.put(AttributeName.SHEETNAME, "s1");
 		map.put(AttributeName.SIDE, "Front");
 		for (int i = 1; i < 3; i++)
 		{
-			for (String sep : new VString("Cyan Magenta Yellow Black Grün", null))
+			for (final String sep : new VString("Cyan Magenta Yellow Black Grün", null))
 			{
 				map.put(AttributeName.SEPARATION, sep);
 				map.put(AttributeName.LOTID, "Los_" + i + "_" + sep);
@@ -210,7 +211,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	@Test
 	public void testBuildStatusSignal()
 	{
-		JDFJMF jmf = b.buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
+		final JDFJMF jmf = b.buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
 		assertEquals(jmf.getSignal(0).getType(), "Status");
 		roundTrip(jmf, EnumValidationLevel.Incomplete, sm_dirTestDataTemp + "statusSignal");
 	}
@@ -222,8 +223,13 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	@Test
 	public void testBuildNewJDFCommand()
 	{
-		JDFJMF jmf = b.buildNewJDFCommand();
-		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "newJDF");
+		final JDFJMF jmf = b.buildNewJDFCommand();
+		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+		final JDFToXJDF xc = new XJDF20();
+		xc.setTypeSafeMessage(true);
+		final KElement e = xc.convert(jmf);
+		assertNull(e);
+
 	}
 
 	/**
@@ -233,7 +239,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	@Test
 	public void testBuildStatusSubscription()
 	{
-		JDFJMF jmf = b.buildStatusSubscription("signalurl", 30, -1, null);
+		final JDFJMF jmf = b.buildStatusSubscription("signalurl", 30, -1, null);
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "SubscriptionStatus");
 	}
 
@@ -244,7 +250,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	@Test
 	public void testBuildResourceSubscription()
 	{
-		JDFJMF jmf = b.buildResourceSubscription("signalurl", 30, -1, null);
+		final JDFJMF jmf = b.buildResourceSubscription("signalurl", 30, -1, null);
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "SubscriptionResource");
 	}
 
@@ -255,7 +261,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	@Test
 	public void testBuildNotificationSubscription()
 	{
-		JDFJMF jmf = b.buildNotificationSubscription("signalurl");
+		final JDFJMF jmf = b.buildNotificationSubscription("signalurl");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "SubscriptionNotification");
 	}
 
@@ -266,7 +272,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	@Test
 	public void testBuildQueueStatusSubscription()
 	{
-		JDFJMF jmf = b.buildQueueStatusSubscription("signalurl");
+		final JDFJMF jmf = b.buildQueueStatusSubscription("signalurl");
 		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "SubscriptionQueueStatus");
 	}
 

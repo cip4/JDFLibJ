@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,7 +73,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.jmf.JDFStatusQuParams;
+import org.cip4.jdflib.resource.JDFPart;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
@@ -96,17 +96,20 @@ public class WalkStatusQuParams extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFStatusQuParams;
+		return !jdfToXJDF.isRetainAll();
 	}
 
 	/**
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.DEVICEDETAILS);
+		map.remove(AttributeName.EMPLOYEEINFO);
 		map.remove(AttributeName.JOBDETAILS);
+		map.remove(AttributeName.JOBID);
+		map.remove(AttributeName.JOBPARTID);
 		super.updateAttributes(map);
 	}
 
@@ -117,6 +120,16 @@ public class WalkStatusQuParams extends WalkJDFSubElement
 	public VString getElementNames()
 	{
 		return new VString(ElementName.STATUSQUPARAMS, null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void removeUnusedElements(final KElement jdf)
+	{
+		jdf.removeChildrenByClass(JDFPart.class);
+		super.removeUnusedElements(jdf);
 	}
 
 }

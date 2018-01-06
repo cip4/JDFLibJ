@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -98,22 +98,27 @@ public class WalkResourceQuParams extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFResourceQuParams;
+		return !jdfToXJDF.isRetainAll();
 	}
 
 	/**
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
-		String val = map.renameKey(AttributeName.CONTEXT, AttributeName.SCOPE);
+		final String val = map.renameKey(AttributeName.CONTEXT, AttributeName.SCOPE);
 		if (!"Job".equals(val))
 			map.put(AttributeName.SCOPE, "Present");
+
+		map.remove(AttributeName.CLASSES);
 		map.remove(AttributeName.LOTDETAILS);
 		map.remove(AttributeName.LOTID);
-		map.remove(AttributeName.CLASSES);
-		String exact = map.remove(AttributeName.EXACT);
+		map.remove(AttributeName.LOCATION);
+		map.remove(AttributeName.PROCESSUSAGE);
+		map.remove(AttributeName.USAGE);
+
+		final String exact = map.remove(AttributeName.EXACT);
 		String det = map.get(AttributeName.RESOURCEDETAILS);
 		if (StringUtil.isEmpty(det))
 		{
@@ -136,19 +141,22 @@ public class WalkResourceQuParams extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#setAttributes(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void setAttributes(KElement jdf, KElement eNew)
+	protected void setAttributes(final KElement jdf, final KElement eNew)
 	{
-		JDFResourceQuParams jdfResourceQuParams = (JDFResourceQuParams) jdf;
-		String lotID = jdfResourceQuParams.getLotID();
-		if (!StringUtil.isEmpty(lotID))
+		final JDFResourceQuParams jdfResourceQuParams = (JDFResourceQuParams) jdf;
+		for (final String key : new String[] { AttributeName.LOTID, AttributeName.LOCATION })
 		{
-			VJDFAttributeMap map = jdfResourceQuParams.getPartMapVector();
-			if (map == null)
+			final String val = jdfResourceQuParams.getNonEmpty(key);
+			if (val != null)
 			{
-				map = new VJDFAttributeMap();
+				VJDFAttributeMap map = jdfResourceQuParams.getPartMapVector();
+				if (map == null)
+				{
+					map = new VJDFAttributeMap();
+				}
+				map.put(key, val);
+				jdfResourceQuParams.setPartMapVector(map);
 			}
-			map.put(AttributeName.LOTID, lotID);
-			jdfResourceQuParams.setPartMapVector(map);
 		}
 		super.setAttributes(jdf, eNew);
 	}

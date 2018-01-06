@@ -68,25 +68,22 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.resource.JDFDevice;
-import org.cip4.jdflib.resource.JDFDeviceList;
-import org.cip4.jdflib.util.StringUtil;
 
+//TODO copy global update stuff to ResourceSet
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
-public class WalkDeviceInfo extends WalkJDFSubElement
+public class WalkResourceCmdParams extends WalkJDFSubElement
 {
 	/**
 	 *
 	 */
-	public WalkDeviceInfo()
+	public WalkResourceCmdParams()
 	{
 		super();
 	}
@@ -108,37 +105,20 @@ public class WalkDeviceInfo extends WalkJDFSubElement
 	@Override
 	protected void updateAttributes(final JDFAttributeMap map)
 	{
-		updateDeviceStatus(map);
+
+		map.remove(AttributeName.ACTIVATION);
+		map.remove(AttributeName.EXACT);
+		map.remove(AttributeName.JOBID);
+		map.remove(AttributeName.JOBPARTID);
+		map.remove(AttributeName.PROCESSUSAGE);
+		map.remove(AttributeName.PRODUCTID);
+		map.remove(AttributeName.PRODUCTIONAMOUNT);
+		map.remove(AttributeName.QUEUEENTRYID);
+		map.remove(AttributeName.RESOURCEID);
+		map.remove(AttributeName.RESOURCENAME);
+		map.remove(AttributeName.STATUS);
+		map.remove(AttributeName.USAGE);
 		super.updateAttributes(map);
-	}
-
-	/**
-	 *
-	 * @param map
-	 */
-	private void updateDeviceStatus(final JDFAttributeMap map)
-	{
-		map.renameKey(AttributeName.DEVICESTATUS, AttributeName.STATUS);
-		String status = map.get(AttributeName.STATUS);
-		final String opMode = map.remove(AttributeName.DEVICEOPERATIONMODE);
-
-		final EnumDeviceOperationMode eOpMode = EnumDeviceOperationMode.getEnum(opMode);
-		if (EnumDeviceOperationMode.NonProductive.equals(eOpMode) || EnumDeviceOperationMode.Maintenance.equals(eOpMode))
-		{
-			status = "NonProductive";
-		}
-		else if (StringUtil.getNonEmpty(status) != null)
-		{
-			if ("Unknown".equals(status) || "Down".equals(status))
-			{
-				status = "Offline";
-			}
-			else if ("Setup".equals(status) || "Running".equals(status) || "Cleanup".equals(status))
-			{
-				status = "Production";
-			}
-		}
-		map.put(AttributeName.STATUS, status);
 	}
 
 	/**
@@ -147,59 +127,7 @@ public class WalkDeviceInfo extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.DEVICEINFO, null);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#setAttributes(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	protected void setAttributes(final KElement jdf, final KElement eNew)
-	{
-		super.setAttributes(jdf, eNew);
-		final KElement parent = eNew.getParentNode_KElement();
-		if (parent != null)
-		{
-			parent.moveAttribute(AttributeName.DEVICEID, eNew);
-		}
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		final KElement e = jdf.getParentNode_KElement();
-		if (e instanceof JDFDeviceList)
-		{
-			final String devID = jdf.getNonEmpty(AttributeName.DEVICEID);
-			if (devID != null)
-			{
-				jdf.getCreateElement(ElementName.DEVICE).setAttribute(AttributeName.DEVICEID, devID);
-			}
-			return xjdf;
-		}
-		return super.walk(jdf, xjdf);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	protected void removeUnusedElements(final KElement jdf)
-	{
-		final JDFDevice dev = (JDFDevice) jdf.getElement(ElementName.DEVICE);
-		if (dev != null)
-		{
-			final String devID = dev.getDeviceID();
-			if (devID != null && jdf.getNonEmpty(AttributeName.DEVICEID) == null)
-			{
-				jdf.setAttribute(AttributeName.DEVICEID, devID);
-			}
-			dev.deleteNode();
-		}
-		super.removeUnusedElements(jdf);
+		return new VString(ElementName.RESOURCECMDPARAMS, null);
 	}
 
 }

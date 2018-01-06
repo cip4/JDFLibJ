@@ -71,7 +71,6 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFPart;
@@ -133,17 +132,7 @@ public class WalkSubscriptionInfo extends WalkJDFSubElement
 	@Override
 	protected void removeUnusedElements(final KElement jdf)
 	{
-		final VElement v = jdf.getChildElementVector(null, null);
-		if (v != null)
-		{
-			for (final KElement e : v)
-			{
-				if (e instanceof JDFPart)
-				{
-					e.deleteNode();
-				}
-			}
-		}
+		jdf.removeChildrenByClass(JDFPart.class);
 		super.removeUnusedElements(jdf);
 	}
 }
