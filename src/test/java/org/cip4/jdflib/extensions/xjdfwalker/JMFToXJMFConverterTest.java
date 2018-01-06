@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -181,6 +181,42 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		assertEquals(mqp.getAttribute(AttributeName.OPERATION), "Hold");
 
 		writeRoundTrip(jmf, "holdqe.jmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testHoldQueue()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.HoldQueue);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertNull(xjmf);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testOpenQueue()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.OpenQueue);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertNull(xjmf);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCloseQueue()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.CloseQueue);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertNull(xjmf);
 	}
 
 	/**

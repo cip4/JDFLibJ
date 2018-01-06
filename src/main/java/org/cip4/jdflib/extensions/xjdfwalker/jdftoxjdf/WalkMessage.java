@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
@@ -73,6 +73,8 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
@@ -81,7 +83,7 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 public class WalkMessage extends WalkJDFElement
 {
 	/**
-	 * 
+	 *
 	 */
 	public WalkMessage()
 	{
@@ -95,11 +97,11 @@ public class WalkMessage extends WalkJDFElement
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		JDFMessage m = (JDFMessage) jdf;
+		final JDFMessage m = (JDFMessage) jdf;
 
 		if (jdfToXJDF.isTypeSafeMessage())
 		{
-			JDFMessage m2 = makeTypesafe(m);
+			final JDFMessage m2 = makeTypesafe(m);
 			if (m2 == null)
 			{
 				return null;
@@ -112,7 +114,7 @@ public class WalkMessage extends WalkJDFElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		super.updateAttributes(map);
 		if (jdfToXJDF.isTypeSafeMessage())
@@ -130,54 +132,77 @@ public class WalkMessage extends WalkJDFElement
 	}
 
 	/**
-	 * 
+	 *
 	 * @param m
 	 */
-	JDFMessage makeTypesafe(JDFMessage m)
+	JDFMessage makeTypesafe(final JDFMessage m)
 	{
-		EnumFamily family = getNewFamily(m);
-		if (family == null)
+		final EnumFamily family = getNewFamily(m);
+		final String type = family == null ? null : getMessageType(m);
+		if (type == null)
 		{
-			log.error("cannot convert message with null family");
 			return null;
 		}
 		else
 		{
-			String type = getMessageType(m);
 			m.renameElement(getFamilyName(family) + type, null);
 		}
 		return m;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param family
 	 * @return
 	 */
-	String getFamilyName(EnumFamily family)
+	String getFamilyName(final EnumFamily family)
 	{
 		return family.getName();
 	}
 
 	/**
-	 * 
+	 *
 	 * @param m
 	 * @return
 	 */
-	String getMessageType(JDFMessage m)
+	String getMessageType(final JDFMessage m)
 	{
-		String type = m.getType();
-		return type;
+		final EnumType type = m.getEnumType();
+		final boolean zappType = isZappType(type);
+		if (zappType)
+		{
+			log.warn("Removing unsupported message Type: " + m.getType());
+		}
+		return zappType ? null : type.getName();
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 * @param type
+	 * @return
+	 */
+	boolean isZappType(final EnumType type)
+	{
+		return EnumType.CloseQueue.equals(type) || EnumType.Events.equals(type) || EnumType.FlushResources.equals(type) || EnumType.HoldQueue.equals(type)
+				|| EnumType.KnownControllers.equals(type) || EnumType.KnownJDFServices.equals(type) || EnumType.ModifyNode.equals(type) || EnumType.NewJDF.equals(type)
+				|| EnumType.NodeInfo.equals(type) || EnumType.Occupation.equals(type) || EnumType.OpenQueue.equals(type) || EnumType.QueueEntryStatus.equals(type)
+				|| EnumType.RepeatMessages.equals(type) || EnumType.RequestForAuthentication.equals(type) || EnumType.ResumeQueue.equals(type)
+				|| EnumType.SubmissionMethods.equals(type) || EnumType.Track.equals(type) || EnumType.UpdateJDF.equals(type);
+	}
+
+	/**
+	 *
+	 *
 	 * @param m
 	 * @return
 	 */
-	private EnumFamily getNewFamily(JDFMessage m)
+	EnumFamily getNewFamily(final JDFMessage m)
 	{
+		final String type = m.getType();
+		if (StringUtil.isEmpty(type))
+		{
+			return null;
+		}
 		EnumFamily family = m.getFamily();
 		if (jdfToXJDF.isAbstractMessage())
 		{
