@@ -330,6 +330,34 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testSubscriptionFilter()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Query, JDFMessage.EnumType.KnownSubscriptions);
+		jmf.getQuery(0).getCreateSubscriptionFilter().setJobID("J1");
+		jmf.getQuery(0).getCreateSubscriptionFilter().setFamilies(new VString("Signal", null));
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertNull(xjmf.getChildByTagName(ElementName.SUBSCRIPTIONFILTER, null, 0, null, false, false));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSubscriptionFilterKeep()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Query, JDFMessage.EnumType.KnownSubscriptions);
+		jmf.getQuery(0).getCreateSubscriptionFilter().setJobID("J1");
+		jmf.getQuery(0).getCreateSubscriptionFilter().setURL("aaa");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertNotNull(xjmf.getChildByTagName(ElementName.SUBSCRIPTIONFILTER, null, 0, null, false, false));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testKnownDevicesResponse()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Response, EnumType.KnownDevices);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -101,14 +101,14 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.FAMILIES, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.MESSAGETYPES, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.URL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELID, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FAMILIES, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x44431111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x44431111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MESSAGETYPES, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x44431111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.URL, 0x33331111, AttributeInfo.EnumAttributeType.URL, null, null);
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x44431111);
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSubscriptionFilter(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoSubscriptionFilter(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -145,7 +145,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSubscriptionFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoSubscriptionFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -157,7 +157,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSubscriptionFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoSubscriptionFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -183,7 +183,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	  * (36) set attribute ChannelID
 	  * @param value the value to set the attribute to
 	  */
-	public void setChannelID(String value)
+	public void setChannelID(final String value)
 	{
 		setAttribute(AttributeName.CHANNELID, value, null);
 	}
@@ -204,7 +204,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	  * (36) set attribute DeviceID
 	  * @param value the value to set the attribute to
 	  */
-	public void setDeviceID(String value)
+	public void setDeviceID(final String value)
 	{
 		setAttribute(AttributeName.DEVICEID, value, null);
 	}
@@ -225,7 +225,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	  * (36) set attribute Families
 	  * @param value the value to set the attribute to
 	  */
-	public void setFamilies(VString value)
+	public void setFamilies(final VString value)
 	{
 		setAttribute(AttributeName.FAMILIES, value, null);
 	}
@@ -249,7 +249,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	  * (36) set attribute JobID
 	  * @param value the value to set the attribute to
 	  */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -270,7 +270,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	  * (36) set attribute JobPartID
 	  * @param value the value to set the attribute to
 	  */
-	public void setJobPartID(String value)
+	public void setJobPartID(final String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
@@ -291,7 +291,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	  * (36) set attribute MessageTypes
 	  * @param value the value to set the attribute to
 	  */
-	public void setMessageTypes(VString value)
+	public void setMessageTypes(final VString value)
 	{
 		setAttribute(AttributeName.MESSAGETYPES, value, null);
 	}
@@ -315,7 +315,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	  * (36) set attribute QueueEntryID
 	  * @param value the value to set the attribute to
 	  */
-	public void setQueueEntryID(String value)
+	public void setQueueEntryID(final String value)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, value, null);
 	}
@@ -336,7 +336,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	  * (36) set attribute URL
 	  * @param value the value to set the attribute to
 	  */
-	public void setURL(String value)
+	public void setURL(final String value)
 	{
 		setAttribute(AttributeName.URL, value, null);
 	}
@@ -356,11 +356,11 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	 */
 
 	/** (26) getCreatePart
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
 	}
@@ -370,14 +370,14 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 * default is getPart(0)     */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}
 
 	/**
 	 * Get all Part from the current element
-	 * 
+	 *
 	 * @return Collection<JDFPart>, null if none are available
 	 */
 	public Collection<JDFPart> getAllPart()
