@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,8 +73,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.jmf.JDFQueueSubmissionParams;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
+import org.cip4.jdflib.resource.process.JDFDisposition;
 
 /**
  *
@@ -99,7 +99,7 @@ public class WalkQueueSubmissionParams extends WalkJDFElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFQueueSubmissionParams);
+		return !jdfToXJDF.isRetainAll();
 	}
 
 	/**
@@ -115,14 +115,27 @@ public class WalkQueueSubmissionParams extends WalkJDFElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
-		boolean hold = map.getBool(AttributeName.HOLD, false);
+		final boolean hold = map.getBool(AttributeName.HOLD, false);
 		map.remove(AttributeName.HOLD);
+		map.remove(AttributeName.REFID);
+		map.remove(AttributeName.RETURNURL);
 		if (hold)
 		{
 			map.put(AttributeName.ACTIVATION, EnumActivation.Held.getName());
 		}
 		super.updateAttributes(map);
 	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void removeUnusedElements(final KElement jdf)
+	{
+		jdf.removeChildrenByClass(JDFDisposition.class);
+		super.removeUnusedElements(jdf);
+	}
+
 }
