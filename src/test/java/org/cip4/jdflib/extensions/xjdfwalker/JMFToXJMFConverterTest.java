@@ -102,6 +102,7 @@ import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFResourceQuParams;
 import org.cip4.jdflib.jmf.JDFResumeQueueEntryParams;
 import org.cip4.jdflib.jmf.JDFSignal;
+import org.cip4.jdflib.jmf.JDFSubscriptionInfo;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
@@ -338,6 +339,23 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
 		assertNull(xjmf.getChildByTagName(ElementName.SUBSCRIPTIONFILTER, null, 0, null, false, false));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSubscriptionInfo()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.KnownSubscriptions);
+		final JDFSubscriptionInfo si = jmf.getResponse(0).getCreateSubscriptionInfo(0);
+		si.setMessageType(EnumType.Status);
+		si.setChannelID("c1");
+		si.appendSubscription().setURL("u1");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals("SignalStatus", xjmf.getChildByTagName(ElementName.SUBSCRIPTIONINFO, null, 0, null, false, false).getAttribute(AttributeName.MESSAGETYPE));
+		writeRoundTrip(jmf, "SubFilter");
 	}
 
 	/**

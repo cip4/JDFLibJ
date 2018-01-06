@@ -72,17 +72,16 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkGangSource extends WalkXElement
+public class WalkSubscriptionInfo extends WalkXElement
 {
 	/**
 	 *
 	 */
-	public WalkGangSource()
+	public WalkSubscriptionInfo()
 	{
 		super();
 	}
@@ -93,7 +92,7 @@ public class WalkGangSource extends WalkXElement
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.GANGSOURCE, null);
+		return new VString(ElementName.SUBSCRIPTIONINFO, null);
 	}
 
 	/**
@@ -102,7 +101,11 @@ public class WalkGangSource extends WalkXElement
 	@Override
 	protected void updateAttributes(final KElement elem)
 	{
-		elem.renameAttribute(XJDFConstants.BinderySignatureID, AttributeName.ASSEMBLYID);
+		final String typ = elem.getNonEmpty(AttributeName.MESSAGETYPE);
+		if (typ != null && typ.startsWith(ElementName.SIGNAL))
+		{
+			elem.setAttribute(AttributeName.MESSAGETYPE, typ.substring(6));
+		}
 		super.updateAttributes(elem);
 	}
 
