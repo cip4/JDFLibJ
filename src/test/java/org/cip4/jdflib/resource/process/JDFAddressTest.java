@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,11 +70,13 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
 import org.junit.Test;
@@ -94,10 +96,23 @@ public class JDFAddressTest extends JDFTestCaseBase
 	@Test
 	public final void testExtendedAddress()
 	{
-		JDFDoc doc = new JDFDoc("Address");
-		JDFAddress ad = (JDFAddress) doc.getRoot();
-		JDFComment c = (JDFComment) ad.appendExtendedAddress();
+		final JDFDoc doc = new JDFDoc(ElementName.ADDRESS);
+		final JDFAddress ad = (JDFAddress) doc.getRoot();
+		final JDFComment c = (JDFComment) ad.appendExtendedAddress();
 		assertFalse(c.hasAttribute(AttributeName.ID));
+	}
+
+	/**
+	 * tests the JDFAddress class
+	 *
+	 */
+	@Test
+	public final void testExtendedAddressText()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.ADDRESS);
+		final JDFAddress ad = (JDFAddress) doc.getRoot();
+		ad.setExtendedAddressText("suite");
+		assertEquals("suite", ad.getExtendedAddressText());
 	}
 
 	/**
@@ -107,9 +122,9 @@ public class JDFAddressTest extends JDFTestCaseBase
 	@Test
 	public final void testMatches()
 	{
-		JDFDoc doc = new JDFDoc("Address");
-		JDFAddress ad = (JDFAddress) doc.getRoot();
-		JDFAddress ad2 = (JDFAddress) new JDFDoc("Address").getRoot();
+		final JDFDoc doc = new JDFDoc("Address");
+		final JDFAddress ad = (JDFAddress) doc.getRoot();
+		final JDFAddress ad2 = (JDFAddress) new JDFDoc("Address").getRoot();
 		assertTrue(ad.matches(ad));
 		ad.setCity("cc1");
 		ad2.setCity("cc2");

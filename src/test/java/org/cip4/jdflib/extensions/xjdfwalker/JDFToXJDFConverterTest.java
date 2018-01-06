@@ -148,6 +148,8 @@ import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
@@ -174,6 +176,26 @@ import org.junit.Test;
  */
 public class JDFToXJDFConverterTest extends JDFTestCaseBase
 {
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testExtendedAddress()
+	{
+		final JDFToXJDF conv = new JDFToXJDF();
+		final JDFNode n = JDFNode.createRoot();
+		final JDFContact c = n.appendCustomerInfo().appendContact();
+		c.makeRootResource(null, null, true);
+		c.setContactTypes(EnumContactType.Customer);
+		c.appendAddress().setExtendedAddressText("foo");
+		n.ensureLink(c, EnumUsage.Input, null);
+		final KElement e = conv.convert(n);
+		final KElement resource = new XJDFHelper(e).getSet(ElementName.CONTACT, null).getPartition(0).getResource();
+		assertEquals("foo", resource.getElement(ElementName.ADDRESS).getAttribute(ElementName.EXTENDEDADDRESS));
+	}
+
 	/**
 	 *
 	 *

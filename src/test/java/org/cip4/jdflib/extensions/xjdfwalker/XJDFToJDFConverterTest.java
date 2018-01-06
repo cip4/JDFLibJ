@@ -150,7 +150,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	public void testCompany()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
-		final KElement e = new XMLDoc("XJDF", null).getRoot();
+		final KElement e = new XMLDoc(XJDFConstants.XJDF, null).getRoot();
 		final KElement c = e.appendElement(SetHelper.RESOURCE_SET);
 		c.setAttribute("Name", "Contact");
 		c.setAttribute("Usage", "Input");
@@ -160,6 +160,26 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFNode root = d.getJDFRoot();
 		final JDFContact contact = (JDFContact) root.getResource("Contact", EnumUsage.Input, 0);
 		assertEquals(contact.getCompany().getProductID(), "company_id");
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testExtendedAddress()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final KElement e = new XMLDoc(XJDFConstants.XJDF, null).getRoot();
+		final KElement c = e.appendElement(SetHelper.RESOURCE_SET);
+		c.setAttribute("Name", "Contact");
+		c.setAttribute("Usage", "Input");
+		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.CONTACT).appendElement(ElementName.ADDRESS).setAttribute(ElementName.EXTENDEDADDRESS, "suite");
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		final JDFNode root = d.getJDFRoot();
+		final JDFContact contact = (JDFContact) root.getResource("Contact", EnumUsage.Input, 0);
+		assertEquals(contact.getAddress().getExtendedAddressText(), "suite");
 	}
 
 	/**
