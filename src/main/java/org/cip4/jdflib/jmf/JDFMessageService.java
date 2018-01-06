@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
@@ -86,6 +86,9 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDevCaps.EnumContext;
 import org.cip4.jdflib.auto.JDFAutoMessageService;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -106,36 +109,52 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 
 	/**
 	 * Constructor for JDFMessageService
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFMessageService(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFMessageService(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFMessageService
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFMessageService(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFMessageService(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.INTEGERSTATE, 0x66661111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.NAMESTATE, 0x66661111);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.STRINGSTATE, 0x66661111);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.DURATIONSTATE, 0x66661111);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.ENUMERATIONSTATE, 0x66661111);
+	}
+
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
+
 	/**
 	 * Constructor for JDFMessageService
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFMessageService(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFMessageService(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -152,7 +171,7 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 
 	/**
 	 * Typesafe enumerated attribute Type
-	 * 
+	 *
 	 * @return EnumType: the enumeration value of the attribute
 	 */
 	public EnumType getEnumType()
@@ -162,10 +181,10 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 
 	/**
 	 * Set attribute Type
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setType(EnumType value)
+	public void setType(final EnumType value)
 	{
 		final String typeName = value == null ? null : value.getName();
 		setType(typeName);
@@ -173,7 +192,7 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 
 	/**
 	 * Method isCommand.
-	 * 
+	 *
 	 * @return boolean
 	 * @deprecated use getCommand
 	 */
@@ -185,7 +204,7 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 
 	/**
 	 * Method isQuery.
-	 * 
+	 *
 	 * @return boolean
 	 * @deprecated use getQuery
 	 */
@@ -201,7 +220,7 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 	@Override
 	public JDFDevCaps appendDevCaps()
 	{
-		JDFDevCaps dcs = super.appendDevCaps();
+		final JDFDevCaps dcs = super.appendDevCaps();
 		dcs.setContext(EnumContext.JMF);
 		return dcs;
 	}
@@ -210,13 +229,14 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 	 * @see org.cip4.jdflib.ifaces.IDeviceCapable#getNamePathVector()
 	 * @return the vector of name paths
 	 */
+	@Override
 	public final VString getNamePathVector()
 	{
-		VString vResult = new VString();
-		Vector<EnumFamily> families = getFamilies();
+		final VString vResult = new VString();
+		final Vector<EnumFamily> families = getFamilies();
 		if (families != null)
 		{
-			int siz = families.size();
+			final int siz = families.size();
 			for (int i = 0; i < siz; i++)
 				vResult.add(families.get(i).getName());
 		}
@@ -226,12 +246,12 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 
 	/**
 	 * get the list of supported families
-	 * 
+	 *
 	 * @return EnumFamily[] the list of supported families
 	 */
 	public Vector<EnumFamily> getFamilies()
 	{
-		Vector<EnumFamily> fams = new Vector<EnumFamily>();
+		final Vector<EnumFamily> fams = new Vector<EnumFamily>();
 		if (getCommand())
 			fams.add(EnumFamily.Command);
 		if (getSignal())
@@ -247,10 +267,10 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 
 	/**
 	 * set the list of supported families
-	 * 
+	 *
 	 * @param fams the Vector of EnumFamily of supported families
 	 */
-	public void setFamilies(Vector<EnumFamily> fams)
+	public void setFamilies(final Vector<EnumFamily> fams)
 	{
 		setCommand(false);
 		setSignal(false);
@@ -265,12 +285,12 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 		{
 			try
 			{
-				EnumFamily family = fams.elementAt(i);
+				final EnumFamily family = fams.elementAt(i);
 				setFamily(family);
 				if (EnumFamily.Signal.equals(family))
 					setPersistent(true);
 			}
-			catch (JDFException x)
+			catch (final JDFException x)
 			{ /* nop */
 			}
 		}
@@ -278,10 +298,10 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 
 	/**
 	 * set the value of the family name to true
-	 * 
+	 *
 	 * @param family
 	 */
-	public void setFamily(EnumFamily family)
+	public void setFamily(final EnumFamily family)
 	{
 		if (family == null || EnumFamily.Response.equals(family))
 			throw new JDFException("setFamily: illegal family:" + family);
@@ -289,13 +309,14 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 	}
 
 	/**
-	 * @param id 
+	 * @param id
 	 * @return the capabilty description
-	 * 
+	 *
 	 */
-	public ICapabilityElement getTargetCap(String id)
+	@Override
+	public ICapabilityElement getTargetCap(final String id)
 	{
-		KElement e = getTarget(id, null);
+		final KElement e = getTarget(id, null);
 		if (e instanceof ICapabilityElement)
 			return (ICapabilityElement) e;
 		return null;

@@ -72,6 +72,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
@@ -79,6 +80,7 @@ import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -88,6 +90,7 @@ import org.cip4.jdflib.jmf.JDFAbortQueueEntryParams;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFHoldQueueEntryParams;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFKnownMsgQuParams;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -101,6 +104,7 @@ import org.cip4.jdflib.jmf.JDFResumeQueueEntryParams;
 import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.pool.JDFAmountPool;
+import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
 import org.cip4.jdflib.resource.process.JDFPerson;
 import org.junit.Test;
 
@@ -267,6 +271,42 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final KElement xjmf = conv.makeNewJMF(jmf);
 		assertEquals(xjmf.getXPathAttribute("ResponseKnownMessages/MessageService/@ResponseModes", null), "FireAndForget");
 		writeRoundTrip(jmf, "MessageService");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMessageServiceState()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.KnownMessages);
+		final JDFMessageService ms = jmf.getResponse(0).appendMessageService();
+		ms.setChannelMode(EnumChannelMode.FireAndForget);
+		ms.setType(EnumType.KnownMessages);
+		final JDFIntegerState is = (JDFIntegerState) ms.appendElement(ElementName.INTEGERSTATE);
+		is.setName("n");
+		assertTrue(is.isValid(EnumValidationLevel.Complete));
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertNull(xjmf.getXPathAttribute("ResponseKnownMessages/MessageService/IntegerState", null));
+		writeRoundTrip(jmf, "MessageServiceState");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testKnownMessages()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Query, JDFMessage.EnumType.KnownMessages);
+		final JDFKnownMsgQuParams ms = jmf.getQuery(0).appendKnownMsgQuParams();
+		ms.setExact(false);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertNotNull(xjmf.getXPathElement("QueryKnownMessages"));
+		assertNull(xjmf.getXPathElement("QueryKnownMessages/KnownMessageQuParams"));
+
+		writeRoundTrip(jmf, "KnownMessages");
 	}
 
 	/**

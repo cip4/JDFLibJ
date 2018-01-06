@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -118,16 +118,16 @@ public class WalkMessageService extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.ACKNOWLEDGE);
 		map.remove(AttributeName.COMMAND);
-		map.remove(AttributeName.SIGNAL);
-		map.remove(AttributeName.QUERY);
-		map.remove(AttributeName.REGISTRATION);
 		map.remove(AttributeName.GENERICATTRIBUTES);
 		map.remove(AttributeName.PERSISTENT);
-		String urlschemes = map.get(AttributeName.URLSCHEMES);
+		map.remove(AttributeName.QUERY);
+		map.remove(AttributeName.REGISTRATION);
+		map.remove(AttributeName.SIGNAL);
+		final String urlschemes = map.get(AttributeName.URLSCHEMES);
 		if (urlschemes != null)
 		{
 			map.put(AttributeName.URLSCHEMES, StringUtil.removeToken(urlschemes, "file", null));
@@ -140,12 +140,12 @@ public class WalkMessageService extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void removeUnusedElements(KElement jdf)
+	protected void removeUnusedElements(final KElement jdf)
 	{
-		VElement v = jdf.getChildElementVector(null, null);
+		final VElement v = jdf.getChildElementVector(null, null);
 		if (v != null)
 		{
-			for (KElement e : v)
+			for (final KElement e : v)
 			{
 				if (e instanceof JDFAbstractState)
 				{

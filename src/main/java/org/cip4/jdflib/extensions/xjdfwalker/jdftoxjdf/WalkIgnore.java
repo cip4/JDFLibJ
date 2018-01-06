@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -140,6 +140,8 @@ public class WalkIgnore extends WalkElement
 		v.add(ElementName.FORMATCONVERSIONPARAMS);
 		v.add(ElementName.IMAGEREPLACEMENTPARAMS);
 		v.add(ElementName.INTERPRETEDPDLDATA);
+		v.add(ElementName.KNOWNMSGQUPARAMS);
+
 		v.add(ElementName.LONGITUDINALRIBBONOPERATIONPARAMS);
 		v.add(ElementName.MERGED);
 		v.add(ElementName.MODIFIED);
