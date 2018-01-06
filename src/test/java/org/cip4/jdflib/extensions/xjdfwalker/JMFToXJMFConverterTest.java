@@ -91,6 +91,7 @@ import org.cip4.jdflib.jmf.JDFAbortQueueEntryParams;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFHoldQueueEntryParams;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.jmf.JDFKnownMsgQuParams;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -251,6 +252,51 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final KElement xjmf = conv.makeNewJMF(jmf);
 		final XJMFHelper xh = new XJMFHelper(xjmf);
 		assertEquals("d1", xh.getMessageHelper(0).getHeader().getAttribute(AttributeName.DEVICEID));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testJobPhaseSpeed()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
+		final JDFJobPhase jp = jmf.getSignal(0).appendDeviceInfo().appendJobPhase();
+		jp.setSpeed(42);
+		jp.setJobID("j1");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertNull(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/JobPhase/@Speed", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testJobPhaseWaste()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
+		final JDFJobPhase jp = jmf.getSignal(0).appendDeviceInfo().appendJobPhase();
+		jp.setWaste(42);
+		jp.setJobID("j1");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals("42", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/JobPhase/@Waste", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testJobPhaseTotal()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
+		final JDFJobPhase jp = jmf.getSignal(0).appendDeviceInfo().appendJobPhase();
+		jp.setTotalAmount(42);
+		jp.setJobID("j1");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertNull(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/JobPhase/@TotalAmount", null));
 	}
 
 	/**
