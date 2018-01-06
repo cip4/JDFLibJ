@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -2863,8 +2863,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				assertTrue(nodeRoot.toString().indexOf(spawnID) < 0);
 				final long t2 = System.currentTimeMillis();
 				tMerge += (t2 - t11);
-				System.out.println("j= " + j + " i= " + i + " of " + (vNodes.size() - 1) + " : " + jobPartID + " time Spawn: " + (t1 - t0) + " time Write: " + (t11 - t1)
-						+ " time Merge: " + (t2 - t11) + " / " + tMerge + " total " + (t2 - t00));
+				log.info("j= " + j + " i= " + i + " of " + (vNodes.size() - 1) + " : " + jobPartID + " time Spawn: " + (t1 - t0) + " time Write: " + (t11 - t1) + " time Merge: "
+						+ (t2 - t11) + " / " + tMerge + " total " + (t2 - t00));
 				t0 = t2;
 			}
 			jdfDoc.write2File(sm_dirTestDataTemp + "bigMainMany.jdf", 2, true);
@@ -3321,7 +3321,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		map.put("Run", "Run_100303_102859963_000349");
 		JDFNode n2s = root;
 		final CPUTimer ct = new CPUTimer(true);
-		for (int i = 1; i < 21; i++)
+		for (int i = 1; i < 14; i++)
 		{
 			final JDFSpawn sp = new JDFSpawn(n2s);
 			final VJDFAttributeMap v = new VJDFAttributeMap();
@@ -3358,7 +3358,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFSpawn sp = new JDFSpawn(n2s);
 		final VElement nodes = new VElement();
 		nodes.add(null);
-		for (int i = 1; i < 100; i++)
+		for (int i = 1; i < 42; i++)
 		{
 			final VJDFAttributeMap v = new VJDFAttributeMap();
 			final JDFAttributeMap map2 = new JDFAttributeMap(map);
@@ -3372,7 +3372,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			ct.stop();
 		}
 		ct = new CPUTimer(false);
-		for (int i = 1; i < 100; i++)
+		for (int i = 1; i < 42; i++)
 		{
 			ct.start();
 			final JDFMerge m = new JDFMerge(root);
@@ -3397,7 +3397,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 		final JDFNode main = JDFDoc.parseFile(sm_dirTestData + "rootMainNest.jdf").getJDFRoot();
 		final CPUTimer ct = new CPUTimer(false);
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 2; i++)
 		{
 			final JDFNode clone = (JDFNode) main.clone();
 			final JDFNode cloneSub = (JDFNode) sub.clone();
