@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,7 +95,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		assertNotNull(new UrlCheck("https://www.google.com").ping(5555));
+		assertNotNull(new UrlCheck("https://www.google.com").ping(7777));
 	}
 
 	/**
@@ -107,9 +107,9 @@ public class UrlCheckTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		UrlCheck urlCheck = new UrlCheck("https://www.google.com");
+		final UrlCheck urlCheck = new UrlCheck("https://www.google.com");
 		urlCheck.setBuffer(true);
-		UrlPart ping = urlCheck.ping(5555);
+		final UrlPart ping = urlCheck.ping(5555);
 		assertNotNull(ping.getResponseStream());
 	}
 
@@ -147,7 +147,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		UrlCheck urlCheck = new UrlCheck("https://www.google.com", UrlUtil.POST);
+		final UrlCheck urlCheck = new UrlCheck("https://www.google.com", UrlUtil.POST);
 		urlCheck.setStream(new ByteArrayIOStream("test".getBytes()).getInputStream());
 		assertTrue("Google does not accept post... ", urlCheck.pingRC(5555) > 200);
 	}
@@ -161,7 +161,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		UrlCheck urlCheck = new UrlCheck("https://www.google.com");
+		final UrlCheck urlCheck = new UrlCheck("https://www.google.com");
 		urlCheck.startPing(5555);
 		ThreadUtil.sleep(111);
 		assertEquals(200, urlCheck.getPingRC());
