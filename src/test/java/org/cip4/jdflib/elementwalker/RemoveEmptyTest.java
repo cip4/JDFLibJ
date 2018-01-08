@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,7 @@ package org.cip4.jdflib.elementwalker;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
@@ -83,6 +84,7 @@ import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFContact;
@@ -102,8 +104,8 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	@Test
 	public void testRemove()
 	{
-		JDFNode n = JDFDoc.parseFile(sm_dirTestData + "job4.jdf").getJDFRoot();
-		RemoveEmpty emp = new RemoveEmpty();
+		final JDFNode n = JDFDoc.parseFile(sm_dirTestData + "job4.jdf").getJDFRoot();
+		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
 		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "job4.jdf", 2, false);
 	}
@@ -115,10 +117,10 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	@Test
 	public void testRemoveAttributes()
 	{
-		XMLDoc d = new XMLDoc("doc", null);
-		KElement root = d.getRoot();
+		final XMLDoc d = new XMLDoc("doc", null);
+		final KElement root = d.getRoot();
 		root.setXPathAttribute("foo/@bar", "");
-		RemoveEmpty emp = new RemoveEmpty();
+		final RemoveEmpty emp = new RemoveEmpty();
 		assertNotNull(root.getXPathAttribute("foo/@bar", null));
 		emp.removEmptyAttributes(root);
 		assertNull(root.getXPathAttribute("foo/@bar", null));
@@ -130,12 +132,42 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testRemoveResource()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		n.addResource(ElementName.LAYOUT, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "s1").addPartition(EnumPartIDKey.Side, "Front");
+		final RemoveEmpty emp = new RemoveEmpty();
+		emp.removEmpty(n);
+		assertFalse(n.toXML().contains(ElementName.LAYOUT));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testRemoveXMLComment()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		n.addResource(ElementName.LAYOUT, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "s1").addPartition(EnumPartIDKey.Side, "Front").appendXMLComment("foo", null);
+		final RemoveEmpty emp = new RemoveEmpty();
+		emp.removEmpty(n);
+		assertTrue(n.toXML().contains(ElementName.LAYOUT));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testRemoveComment()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.appendComment();
-		RemoveEmpty emp = new RemoveEmpty();
+		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
 		assertFalse(n.toXML().contains(ElementName.COMMENT));
 	}
@@ -147,13 +179,13 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	@Test
 	public void testRemovePosition()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
-		JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		final JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
 		sp.appendPosition();
-		RemoveEmpty emp = new RemoveEmpty();
+		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
-		JDFStrippingParams sp2 = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+		final JDFStrippingParams sp2 = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
 		assertNotNull(sp2.getPosition(0));
 	}
 
@@ -164,8 +196,8 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	@Test
 	public void testRemoveJMF()
 	{
-		JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
-		RemoveEmpty emp = new RemoveEmpty();
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
+		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmptyElement(jmf);
 		assertNotNull(jmf.getResponse(0));
 	}
@@ -177,11 +209,11 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	@Test
 	public void testRemoveExtend()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
 		n.appendComment();
 		n.appendElement("foo");
-		ExtendedRemoveEmpty emp = new ExtendedRemoveEmpty();
+		final ExtendedRemoveEmpty emp = new ExtendedRemoveEmpty();
 		emp.removEmpty(n);
 		assertFalse(n.toXML().contains("<foo"));
 	}
@@ -193,13 +225,13 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	@Test
 	public void testRemoveComChannel()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
-		JDFContact jdfContact = (JDFContact) n.addResource(ElementName.CONTACT, EnumUsage.Input);
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		final JDFContact jdfContact = (JDFContact) n.addResource(ElementName.CONTACT, EnumUsage.Input);
 		jdfContact.setDescriptiveName("c1");
-		JDFComChannel c = jdfContact.appendComChannel();
+		final JDFComChannel c = jdfContact.appendComChannel();
 		c.setChannelType(EnumChannelType.Email);
-		RemoveEmpty emp = new RemoveEmpty();
+		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
 		assertFalse(n.toXML().contains(ElementName.COMCHANNEL));
 	}

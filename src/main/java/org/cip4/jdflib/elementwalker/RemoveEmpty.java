@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -114,7 +114,7 @@ public class RemoveEmpty extends BaseElementWalker
 		new BaseWalker(getFactory()); // need a default walker
 	}
 
-	public void addIgnoreElement(String name)
+	public void addIgnoreElement(final String name)
 	{
 		ignoreElements.add(name);
 	}
@@ -124,9 +124,9 @@ public class RemoveEmpty extends BaseElementWalker
 	 * remove all unlinked crap and empty string attributes
 	 * @param n
 	 */
-	public void removEmpty(JDFNode n)
+	public void removEmpty(final JDFNode n)
 	{
-		UnLinkFinder unLinkFinder = new UnLinkFinder();
+		final UnLinkFinder unLinkFinder = new UnLinkFinder();
 		unLinkFinder.eraseUnlinked(n);
 		removEmptyElement(n);
 		unLinkFinder.eraseUnlinked(n);
@@ -137,7 +137,7 @@ public class RemoveEmpty extends BaseElementWalker
 	 *
 	 * @param e
 	 */
-	public void removEmptyElement(KElement e)
+	public void removEmptyElement(final KElement e)
 	{
 		walkTreeKidsFirst(e);
 	}
@@ -147,9 +147,9 @@ public class RemoveEmpty extends BaseElementWalker
 	 * remove all empty string attributes
 	 * @param e
 	 */
-	public void removEmptyAttributes(KElement e)
+	public void removEmptyAttributes(final KElement e)
 	{
-		boolean keep = zappElements;
+		final boolean keep = zappElements;
 		zappElements = false;
 		walkTreeKidsFirst(e);
 		zappElements = keep;
@@ -181,8 +181,8 @@ public class RemoveEmpty extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e1, final KElement trackElem)
 		{
-			boolean hasGood = walkAttributes(e1);
-			if (zappElements && !hasGood && e1.getFirstChildElement() == null && e1.getText() == null)
+			final boolean hasGood = walkAttributes(e1);
+			if (zappElements && !hasGood && e1.getFirstChildElement() == null && e1.getText() == null && e1.getXMLComment(0) == null)
 			{
 				e1.deleteNode();
 				return null;
@@ -200,11 +200,11 @@ public class RemoveEmpty extends BaseElementWalker
 		 */
 		protected boolean walkAttributes(final KElement e1)
 		{
-			JDFAttributeMap map = e1.getAttributeMap_KElement();
-			VString allKeys = map.getKeys();
+			final JDFAttributeMap map = e1.getAttributeMap_KElement();
+			final VString allKeys = map.getKeys();
 			boolean hasGood = false;
-			VString dummy = zappElements ? getDummyAttributes() : null;
-			for (String key : allKeys)
+			final VString dummy = zappElements ? getDummyAttributes() : null;
+			for (final String key : allKeys)
 			{
 				if (StringUtil.isEmpty(map.get(key)))
 				{
@@ -224,7 +224,7 @@ public class RemoveEmpty extends BaseElementWalker
 		 */
 		protected VString getDummyAttributes()
 		{
-			VString dummy = new VString();
+			final VString dummy = new VString();
 			dummy.add(AttributeName.ID);
 			dummy.add(AttributeName.AGENTNAME);
 			dummy.add(AttributeName.AGENTVERSION);
@@ -261,8 +261,8 @@ public class RemoveEmpty extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			String idUsage = ((JDFGeneralID) e).getIDUsage();
-			String idValue = ((JDFGeneralID) e).getIDValue();
+			final String idUsage = ((JDFGeneralID) e).getIDUsage();
+			final String idValue = ((JDFGeneralID) e).getIDValue();
 			if (StringUtil.getNonEmpty(idUsage) == null || StringUtil.getNonEmpty(idValue) == null)
 			{
 				e.deleteNode();
@@ -313,7 +313,7 @@ public class RemoveEmpty extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			String text = StringUtil.getNonEmpty(e.getText());
+			final String text = StringUtil.getNonEmpty(e.getText());
 			if (text == null)
 			{
 				e.deleteNode();
@@ -363,7 +363,7 @@ public class RemoveEmpty extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			JDFResourceAudit ra = (JDFResourceAudit) e;
+			final JDFResourceAudit ra = (JDFResourceAudit) e;
 			if (ra.getNewLink() == null)
 			{
 				ra.deleteNode();
@@ -438,14 +438,14 @@ public class RemoveEmpty extends BaseElementWalker
 		@Override
 		protected VString getDummyAttributes()
 		{
-			VString v = super.getDummyAttributes();
+			final VString v = super.getDummyAttributes();
 			v.add(AttributeName.CLASS);
 			v.add(AttributeName.STATUS);
 			v.add(AttributeName.PARTIDKEYS);
 			v.add(AttributeName.PARTUSAGE);
-			VString partAttribs = part.knownAttributes();
-			JDFElement foo = (JDFElement) part.getElement("foo");
-			VString fooAttribs = foo.knownAttributes();
+			final VString partAttribs = part.knownAttributes();
+			final JDFElement foo = (JDFElement) part.getElement("foo");
+			final VString fooAttribs = foo.knownAttributes();
 			partAttribs.removeStrings(fooAttribs, 0);
 
 			v.appendUnique(partAttribs);
@@ -468,32 +468,32 @@ public class RemoveEmpty extends BaseElementWalker
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		public KElement walk(KElement e1, KElement trackElem)
+		public KElement walk(final KElement e1, final KElement trackElem)
 		{
 			boolean hasGood = false;
 			if (zappElements)
 			{
 				hasGood = walkAttributes(e1);
-				JDFResource r = (JDFResource) e1;
+				final JDFResource r = (JDFResource) e1;
 				if (!hasGood && r.getLinksAndRefs(false, true) != null)
 				{
 					hasGood = true;
 				}
 				if (!hasGood)
 				{
-					VElement links = r.getLinksAndRefs(true, false);
+					final VElement links = r.getLinksAndRefs(true, false);
 					if (links != null)
 					{
-						for (KElement e : links)
+						for (final KElement e : links)
 						{
-							JDFResourceLink rl = (JDFResourceLink) e;
+							final JDFResourceLink rl = (JDFResourceLink) e;
 							removEmptyElement(rl);
 							if (rl.getAmountPool() != null || rl.getPart(0) != null)
 							{
 								hasGood = true;
 								break;
 							}
-							JDFAttributeMap map = rl.getAttributeMap();
+							final JDFAttributeMap map = rl.getAttributeMap();
 							map.removeKeys(super.getDummyAttributes());
 							map.remove(AttributeName.RREF);
 							map.remove(AttributeName.USAGE);
@@ -524,7 +524,7 @@ public class RemoveEmpty extends BaseElementWalker
 		@Override
 		protected VString getDummyAttributes()
 		{
-			VString v = super.getDummyAttributes();
+			final VString v = super.getDummyAttributes();
 			// if only channeltype is specified, we have an empty dummy
 			v.add(AttributeName.CHANNELTYPE);
 			return v;
@@ -568,7 +568,7 @@ public class RemoveEmpty extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			String localName = toCheck.getLocalName();
+			final String localName = toCheck.getLocalName();
 			return localName.startsWith(ElementName.RESPONSE) || localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.COMMAND);
 		}
 
@@ -576,7 +576,7 @@ public class RemoveEmpty extends BaseElementWalker
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		public KElement walk(KElement e1, KElement trackElem)
+		public KElement walk(final KElement e1, final KElement trackElem)
 		{
 			//always keep all
 			return e1;
@@ -588,7 +588,7 @@ public class RemoveEmpty extends BaseElementWalker
 	 * if set to true, attributes with proprietary namespace prefixes are zapped, else kept
 	 * @param zappElements if true, zapp 'em (the default) else keep 'em
 	 */
-	public void setZappElements(boolean zappElements)
+	public void setZappElements(final boolean zappElements)
 	{
 		this.zappElements = zappElements;
 	}
