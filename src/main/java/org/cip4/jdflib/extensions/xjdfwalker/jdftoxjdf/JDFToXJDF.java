@@ -418,8 +418,8 @@ public class JDFToXJDF extends PackageElementWalker
 		prepareNewDoc(false);
 		if (node != null)
 		{
-			final JDFNode root = (JDFNode) node.getJDFRoot().cloneNewDoc();
 			rootID = node.appendAnchor(null);
+			final JDFNode root = (JDFNode) node.getJDFRoot().cloneNewDoc();
 			preFixVersion(root);
 
 			final String id = StringUtil.getNonEmpty(node.getID());
