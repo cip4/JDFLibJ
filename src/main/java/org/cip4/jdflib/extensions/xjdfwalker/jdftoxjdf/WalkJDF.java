@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -145,6 +145,7 @@ public class WalkJDF extends WalkJDFElement
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
+		jdf.appendAnchor(null);
 		if (jdfToXJDF.first.contains(jdf.getID()) || jdfToXJDF.isSingleNode() && jdfToXJDF.first.size() > 0)
 		{
 			return null;
@@ -160,7 +161,7 @@ public class WalkJDF extends WalkJDFElement
 		else
 		{
 			final JDFNode nodeKid = node.getChildJDFNode(jdfToXJDF.rootID, false);
-			if (nodeKid != null)
+			if (nodeKid != null && !nodeKid.equals(jdf))
 			{
 				jdfToXJDF.walkTree(nodeKid, xjdf);
 			}
