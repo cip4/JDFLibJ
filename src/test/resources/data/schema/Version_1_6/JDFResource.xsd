@@ -18430,6 +18430,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="BindingIntent" type="jdf:BindingIntent_r" substitutionGroup="jdf:Resource"/>
   <xs:element name="BindingIntentRef" type="jdf:ResourceRef" substitutionGroup="jdf:ResourceRef"/>
   <xs:element name="BindingIntentLink" type="jdf:ResourceLink" substitutionGroup="jdf:ResourceLink"/>
@@ -18462,6 +18463,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntentBookCase" mixed="false">
     <xs:annotation>
       <xs:appinfo>
@@ -18482,6 +18484,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntentChannelBinding" mixed="false">
     <xs:annotation>
       <xs:appinfo>
@@ -18502,14 +18505,17 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntentCoilBinding" mixed="false">
     <xs:annotation>
       <xs:appinfo>
         <Version Path="CoilBrand" First="1.3"/>
         <Version Path="HoleList" First="1.2"/>
+        <Version Path="HoleType" First="1.6"/>
         <Constraint Path="CoilBrand" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="CoilMaterial" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="HoleList" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="HoleType" minOccurs="0" maxOccurs="1"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexContent mixed="false">
@@ -18519,10 +18525,12 @@
           <xs:element name="CoilBrand" type="jdf:StringSpan" minOccurs="0"/>
           <xs:element name="CoilMaterial" type="jdf:EnumerationSpan" minOccurs="0"/>
           <xs:element name="HoleList" type="jdf:HoleList_re" minOccurs="0"/>
+          <xs:element name="HoleType" type="jdf:EnumerationSpan" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntentEdgeGluing" mixed="false">
     <xs:annotation>
       <xs:appinfo>
@@ -18539,6 +18547,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntentHardCoverBinding" mixed="false">
     <xs:annotation>
       <xs:appinfo>
@@ -18599,13 +18608,16 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntentPlasticCombBinding" mixed="false">
     <xs:annotation>
       <xs:appinfo>
         <Version Path="CombBrand" First="1.3"/>
         <Version Path="HoleList" First="1.2"/>
+        <Version Path="HoleType" First="1.6"/>
         <Constraint Path="CombBrand" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="HoleList" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="HoleType" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="PlasticCombType" minOccurs="0" maxOccurs="1"/>
       </xs:appinfo>
     </xs:annotation>
@@ -18616,10 +18628,12 @@
           <xs:element name="CombBrand" type="jdf:StringSpan" minOccurs="0"/>
           <xs:element name="PlasticCombType" type="jdf:NameSpan" minOccurs="0"/>
           <xs:element name="HoleList" type="jdf:HoleList_re" minOccurs="0"/>
+          <xs:element name="HoleType" type="jdf:EnumerationSpan" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntentRingBinding" mixed="false">
     <xs:annotation>
       <xs:appinfo>
@@ -18654,6 +18668,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntentSaddleStitching" mixed="false">
     <xs:annotation>
       <xs:appinfo>
@@ -18670,6 +18685,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntentSideSewing" mixed="false">
     <xs:complexContent mixed="false">
       <xs:extension base="jdf:BaseElement_">
@@ -18679,6 +18695,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntentSideStitching" mixed="false">
     <xs:annotation>
       <xs:appinfo>
@@ -18695,6 +18712,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntentSoftCoverBinding" mixed="false">
     <xs:annotation>
       <xs:appinfo>
@@ -18740,6 +18758,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntentTape" mixed="false">
     <xs:annotation>
       <xs:appinfo>
@@ -18756,6 +18775,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntentTabs" mixed="false">
     <xs:annotation>
       <xs:appinfo>
@@ -18789,6 +18809,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntentThreadSealing" mixed="false">
     <xs:complexContent mixed="false">
       <xs:extension base="jdf:BaseElement_">
@@ -18813,11 +18834,14 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntentStripBinding" mixed="false">
     <xs:annotation>
       <xs:appinfo>
         <Version Path="HoleList" First="1.2"/>
+        <Version Path="HoleType" First="1.6"/>
         <Constraint Path="HoleList" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="HoleType" minOccurs="0" maxOccurs="1"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexContent mixed="false">
@@ -18825,21 +18849,23 @@
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
           <xs:element name="HoleList" type="jdf:HoleList_re" minOccurs="0"/>
+          <xs:element name="HoleType" type="jdf:EnumerationSpan" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntentWireCombBinding" mixed="false">
     <xs:annotation>
       <xs:appinfo>
         <Version Path="HoleList" First="1.2"/>
-        <Version Path="HoleListRef" First="1.2"/>
+        <Version Path="HoleType" First="1.6"/>
         <Version Path="WireCombBrand" First="1.3"/>
         <Constraint Path="WireCombBrand" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="WireCombMaterial" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="WireCombShape" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="HoleList" minOccurs="0" maxOccurs="1"/>
-        <Constraint Path="HoleListRef" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="HoleType" minOccurs="0" maxOccurs="1"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexContent mixed="false">
@@ -18850,9 +18876,11 @@
           <xs:element name="WireCombMaterial" type="jdf:EnumerationSpan" minOccurs="0"/>
           <xs:element name="WireCombShape" type="jdf:NameSpan" minOccurs="0"/>
           <xs:element name="HoleList" type="jdf:HoleList_re" minOccurs="0"/>
+          <xs:element name="HoleType" type="jdf:EnumerationSpan" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
+    
   </xs:complexType>
   <xs:complexType name="BindingIntent_BindList_lr" mixed="false">
     <xs:annotation>
@@ -18922,6 +18950,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="BindingIntent_r" mixed="false">
     <xs:annotation>
       <xs:appinfo>
