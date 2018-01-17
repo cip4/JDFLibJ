@@ -128,6 +128,7 @@
 		<xs:annotation>
 			<xs:appinfo>
 				<Version Path="ResourceLinkPool/SizeIntentIntentLink" Usage="Input" Last="1.1"/>
+				<Version Path="ResourceLinkPool/VariableIntentIntentLink" Usage="Input" First="1.6"/>
 				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
 				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Cover" minOccurs="0" maxOccurs="1"/>
 				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Parent" minOccurs="0" maxOccurs="1"/>
@@ -150,6 +151,7 @@
 				<Constraint Path="ResourceLinkPool/ScreeningIntentLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
 				<Constraint Path="ResourceLinkPool/ShapeCuttingIntentLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
 				<Constraint Path="ResourceLinkPool/SizeIntentIntentLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/VariableIntentIntentLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
 				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="unbounded"/>
 				<!--Generic Process Elements-->
 				<Version Path="ResourceLinkPool/PreflightReportLink" First="1.2"/>
@@ -199,6 +201,7 @@
 					<xs:element ref="jdf:ScreeningIntentLink" minOccurs="0"/>
 					<xs:element ref="jdf:ShapeCuttingIntentLink" minOccurs="0"/>
 					<xs:element ref="jdf:SizeIntentLink" minOccurs="0"/>
+					<xs:element ref="jdf:VariableIntentLink" minOccurs="0"/>
 					<xs:element ref="jdf:ApprovalSuccessLink" minOccurs="0"/>
 					<xs:element ref="jdf:DeviceLink" minOccurs="0"/>
 					<xs:element ref="jdf:EmployeeLink" minOccurs="0"/>

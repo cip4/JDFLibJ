@@ -19838,6 +19838,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="LayoutIntent" type="jdf:LayoutIntent_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
@@ -20626,6 +20627,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="SizeIntent" type="jdf:SizeIntent_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
@@ -20674,6 +20676,74 @@
           <xs:element name="Identical" type="jdf:Identical" minOccurs="0"/>
         </xs:choice>
         <xs:attributeGroup ref="jdf:SizeIntentAttribs_u"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+    <xs:element name="VariableIntent" type="jdf:VariableIntent_r" substitutionGroup="jdf:Resource">
+    <xs:annotation>
+      <xs:appinfo>
+        <Version Path="." First="1.6"/>
+        <Constraint Path="Area" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="AveragePages" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="MaxPages" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="MinPages" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="NumberOfCopies" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="VariableType" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="VariableQuality" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="ColorsUsed" minOccurs="0" maxOccurs="1"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="VariableIntentRef" type="jdf:ResourceRef" substitutionGroup="jdf:ResourceRef"/>
+  <xs:element name="VariableIntentLink" type="jdf:ResourceLink" substitutionGroup="jdf:ResourceLink"/>
+  <xs:attributeGroup name="VariableIntentAttribs_c"/>
+  <xs:attributeGroup name="VariableIntentAttribs_u">
+    <xs:attributeGroup ref="jdf:VariableIntentAttribs_c"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="VariableIntentAttribs_r">
+    <xs:attributeGroup ref="jdf:VariableIntentAttribs_c"/>
+  </xs:attributeGroup>
+  <xs:complexType name="VariableIntent_r" mixed="false">
+    <xs:complexContent mixed="false">
+      <xs:extension base="jdf:IntentResource">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="jdf:GenericElements" minOccurs="0"/>
+          <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
+          <xs:element name="Area" type="jdf:NumberSpan" minOccurs="0"/>
+          <xs:element name="AveragePages" type="jdf:IntegerSpan" minOccurs="0"/>
+          <xs:element name="maxPages" type="jdf:IntegerSpan" minOccurs="0"/>
+          <xs:element name="MinPages" type="jdf:IntegerSpan" minOccurs="0"/>
+          <xs:element name="NumberOfCopies" type="jdf:IntegerSpan" minOccurs="0"/>
+          <xs:element name="VariableType" type="jdf:EnumerationSpan" minOccurs="0"/>
+          <xs:element name="VariableQuality" type="jdf:EnumerationSpan" minOccurs="0"/>
+          <xs:element name="ColorsUsed" type="jdf:SeparationList" minOccurs="0"/>
+          <xs:element name="VariableIntent" type="jdf:VariableIntent_rp" minOccurs="0"/>
+         </xs:sequence>
+        <xs:attributeGroup ref="jdf:VariableIntentAttribs_r"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="VariableIntent_rp" mixed="false">
+    <xs:complexContent mixed="false">
+      <xs:extension base="jdf:IntentResourceLeaf">
+        <xs:choice>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="jdf:GenericElements" minOccurs="0"/>
+            <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
+          <xs:element name="Area" type="jdf:NumberSpan" minOccurs="0"/>
+          <xs:element name="AveragePages" type="jdf:IntegerSpan" minOccurs="0"/>
+          <xs:element name="maxPages" type="jdf:IntegerSpan" minOccurs="0"/>
+          <xs:element name="MinPages" type="jdf:IntegerSpan" minOccurs="0"/>
+          <xs:element name="NumberOfCopies" type="jdf:IntegerSpan" minOccurs="0"/>
+          <xs:element name="VariableType" type="jdf:EnumerationSpan" minOccurs="0"/>
+          <xs:element name="VariableQuality" type="jdf:EnumerationSpan" minOccurs="0"/>
+          <xs:element name="ColorsUsed" type="jdf:SeparationList" minOccurs="0"/>
+          <xs:element name="VariableIntent" type="jdf:VariableIntent_rp" minOccurs="0"/>
+          </xs:sequence>
+          <xs:element name="Identical" type="jdf:Identical" minOccurs="0"/>
+        </xs:choice>
+        <xs:attributeGroup ref="jdf:VariableIntentAttribs_u"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>

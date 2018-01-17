@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1850,6 +1850,8 @@ public final class ElementName
 	public static final String VALUELOC = "ValueLoc";
 	/** */
 	public static final String VARNISHINGPARAMS = "VarnishingParams";
+	public static final String VARIABLEINTENT = "VariableIntent";
+
 	/** */
 	public static final String VELOBINDING = "VeloBinding";
 	/** */

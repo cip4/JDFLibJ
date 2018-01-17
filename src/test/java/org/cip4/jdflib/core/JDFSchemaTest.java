@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -143,7 +143,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	@Test
 	public void testLot()
 	{
-		final JDFDoc d0 = new JDFDoc("JDF");
+		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d0.getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
 		final JDFResource r = n.addResource(ElementName.MEDIA, EnumUsage.Input);
@@ -153,6 +153,27 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		lot.setLotID("lllll");
 		String s = d0.write2String(2);
 		s = StringUtil.replaceString(s, "<Lot LotID=\"lllll\"/>", "<Lot LotID=\"lllll\">  \n  </Lot>");
+		final JDFDoc d = p.parseString(s);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
+	}
+
+	/**
+	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
+	 *
+	 */
+	@Test
+	public void testVariableIntent()
+	{
+		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d0.getJDFRoot();
+		n.setType(EnumType.Product);
+		final JDFResource r = n.addResource(ElementName.VARIABLEINTENT, EnumUsage.Input);
+		r.setResourceClass(EnumResourceClass.Intent);
+		final KElement vt = r.appendElement("VariableType");
+		vt.setAttribute(AttributeName.ACTUAL, "AddressField");
+		vt.setAttribute(AttributeName.DATATYPE, "EnumerationSpan");
+		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
 		assertNotNull(d);
 		assertNull(p.m_lastExcept);
