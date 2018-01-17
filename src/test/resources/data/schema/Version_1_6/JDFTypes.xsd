@@ -863,9 +863,10 @@
 		<xs:restriction base="jdftyp:EnumerationBaseType">
 			<xs:enumeration value="DieLine"/>
 			<xs:enumeration value="Normal"/>
-			<xs:enumeration value="Transparent"/>
 			<xs:enumeration value="Opaque"/>
 			<xs:enumeration value="OpaqueIgnore"/>
+			<xs:enumeration value="Primer"/>
+			<xs:enumeration value="Transparent"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="eColorType1_">
