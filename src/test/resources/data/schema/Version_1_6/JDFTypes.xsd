@@ -3340,6 +3340,12 @@
 			<xs:enumeration value="SpawnedRW"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="eSpreadType_">
+		<xs:restriction base="jdftyp:EnumerationBaseType">
+			<xs:enumeration value="SinglePage"/>
+			<xs:enumeration value="Spread"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="eStapleShape_">
 		<xs:restriction base="jdftyp:EnumerationBaseType">
 			<xs:enumeration value="Crown"/>

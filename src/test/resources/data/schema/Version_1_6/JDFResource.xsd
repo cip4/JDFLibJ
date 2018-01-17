@@ -19850,8 +19850,10 @@
         <Version Path="@FolioCount" First="1.1"/>
         <Version Path="Pages" First="1.1"/>
         <Version Path="PageVariance" First="1.1"/>
+        <Version Path="@Orientation" First="1.6"/>
         <Version Path="@RotatePolicy" First="1.2"/>
         <Version Path="SizePolicy" First="1.2"/>
+        <Version Path="@SpreadType" First="1.6"/>
         <Version Path="Layout" First="1.1"/>
         <Version Path="LayouRef" First="1.1"/>
         <Constraint Path="Dimensions" minOccurs="0" maxOccurs="1"/>
@@ -19869,7 +19871,9 @@
   <xs:element name="LayoutIntentLink" type="jdf:ResourceLink" substitutionGroup="jdf:ResourceLink"/>
   <xs:attributeGroup name="LayoutIntentAttribs_c">
     <xs:attribute name="FinishedPageOrientation" type="jdftyp:ePortraitOrLandscape_" use="optional"/>
+    <xs:attribute name="Orientation" type="jdftyp:Orientation" use="optional"/>
     <xs:attribute name="RotatePolicy" type="jdftyp:eRotatePolicy_" use="optional"/>
+    <xs:attribute name="SpreadType" type="jdftyp:eSpreadType_" use="optional"/>
     <xs:attribute name="Sides" type="jdftyp:eSides3_" use="optional"/>
   </xs:attributeGroup>
   <xs:attributeGroup name="LayoutIntentAttribs_u">
@@ -19926,6 +19930,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="MediaIntent" type="jdf:MediaIntent_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
