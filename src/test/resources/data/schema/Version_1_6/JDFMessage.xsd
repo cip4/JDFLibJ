@@ -2046,6 +2046,7 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	
 	<xs:complexType name="QueryStatus" mixed="false">
 		<xs:annotation>
 			<xs:appinfo>
@@ -2066,6 +2067,7 @@
 	<xs:complexType name="ResponseStatus" mixed="false">
 		<xs:annotation>
 			<xs:appinfo>
+				<Version Path="Queue" Last="1.5"/>
 				<Constraint Path="DeviceInfo" minOccurs="1" maxOccurs="unbounded"/>
 				<Constraint Path="Queue" minOccurs="0" maxOccurs="unbounded"/>
 				<Constraint Path="Notification" minOccurs="0" maxOccurs="1"/>
@@ -2085,6 +2087,7 @@
 	<xs:complexType name="SignalStatus" mixed="false">
 		<xs:annotation>
 			<xs:appinfo>
+				<Version Path="Queue" Last="1.5"/>
 				<Constraint Path="StatusQuParams" minOccurs="1" maxOccurs="1"/>
 				<Constraint Path="DeviceInfo" minOccurs="1" maxOccurs="unbounded"/>
 				<Constraint Path="Queue" minOccurs="0" maxOccurs="unbounded"/>
@@ -2110,6 +2113,7 @@
 			<xs:appinfo>
 				<Version Path="@QueueEntryID" First="1.2"/>
 				<Version Path="Part" First="1.2"/>
+				<Version Path="@QueueInfo" Last="1.5"/>
 				<Constraint Path="Part" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:appinfo>
 		</xs:annotation>
@@ -2145,7 +2149,7 @@
 				<xs:attribute name="JobID" type="jdftyp:shortString" use="optional"/>
 				<xs:attribute name="JobPartID" type="jdftyp:shortString" use="optional"/>
 				<xs:attribute name="QueueEntryID" type="jdftyp:shortString" use="optional"/>
-				<xs:attribute name="QueueInfo" type="jdftyp:boolean" default="false"/>
+				<xs:attribute name="QueueInfo" type="jdftyp:boolean" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
