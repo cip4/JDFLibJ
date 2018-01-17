@@ -20522,9 +20522,11 @@
   <xs:element name="ShapeCuttingIntent" type="jdf:ShapeCuttingIntent_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
-        <Version Path="ShapeCut/ShapeDepth" First="1.1"/>
+        <Version Path="ShapeCut/ShapeDepth" First="1.1" Last="1.5"/>
+        <Version Path="ShapeCut/CutDepth" First="1.6"/>
         <Constraint Path="ShapeCut" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="ShapeCut/Material" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="ShapeCut/CutDepth" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ShapeCut/CutType" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ShapeCut/ShapeDepth" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ShapeCut/ShapeType" minOccurs="1" maxOccurs="1"/>
@@ -20548,6 +20550,7 @@
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
           <xs:element name="Material" type="jdf:StringSpan" minOccurs="0"/>
           <xs:element name="CutType" type="jdf:EnumerationSpan" minOccurs="0"/>
+          <xs:element name="CutDepth" type="jdf:EnumerationSpan" minOccurs="0"/>
           <xs:element name="ShapeDepth" type="jdf:NumberSpan" minOccurs="0"/>
           <xs:element name="ShapeType" type="jdf:EnumerationSpan" minOccurs="0"/>
           <xs:element name="TeethPerDimension" type="jdf:NumberSpan" minOccurs="0"/>
