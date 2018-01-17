@@ -20307,6 +20307,8 @@
         <Version Path="ProofItem/SeparationSpecRef" First="1.1"/>
         <Version Path="ProofItem/ApprovalParams" First="1.2"/>
         <Version Path="ProofItem/ApprovalParamsRef" First="1.2"/>
+        <Version Path="PreflightItem" First="1.6"/>
+        <Version Path="PreflightItem/@PreflightLevel" First="1.6"/>
         <Constraint Path="ProofItem" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="ProofItem/Amount" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ProofItem/BrandName" minOccurs="0" maxOccurs="1"/>
@@ -20319,6 +20321,7 @@
         <Constraint Path="ProofItem/SeparationSpecRef" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="ProofItem/ApprovalParams" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ProofItem/ApprovalParamsRef" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="PreflightItem" minOccurs="0" maxOccurs="unbounded"/> 
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -20355,6 +20358,17 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  <xs:complexType name="ProofingIntent_PreflightItem_lr" mixed="false">
+    <xs:complexContent mixed="false">
+      <xs:extension base="jdf:BaseElement_">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="jdf:GenericElements" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="PreflightLevel" type="jdftyp:ePreflightLevel_" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
   <xs:complexType name="ProofingIntent_r" mixed="false">
     <xs:complexContent mixed="false">
       <xs:extension base="jdf:IntentResource">
@@ -20362,6 +20376,7 @@
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
           <xs:element name="ProofItem" type="jdf:ProofingIntent_ProofItem_lr" minOccurs="0"/>
+          <xs:element name="PreflightItem" type="jdf:ProofingIntent_PreflightItem_lr" minOccurs="0"/>
           <xs:element name="ProofingIntent" type="jdf:ProofingIntent_rp" minOccurs="0"/>
         </xs:sequence>
         <xs:attributeGroup ref="jdf:ProofingIntentAttribs_r"/>
@@ -20376,6 +20391,7 @@
             <xs:group ref="jdf:GenericElements" minOccurs="0"/>
             <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
             <xs:element name="ProofItem" type="jdf:ProofingIntent_ProofItem_lr" minOccurs="0"/>
+            <xs:element name="PreflightItemItem" type="jdf:ProofingIntent_PreflightItem_lr" minOccurs="0"/>
             <xs:element name="ProofingIntent" type="jdf:ProofingIntent_rp" minOccurs="0"/>
           </xs:sequence>
           <xs:element name="Identical" type="jdf:Identical" minOccurs="0"/>
@@ -20384,6 +20400,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="PublishingIntent" type="jdf:PublishingIntent_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>

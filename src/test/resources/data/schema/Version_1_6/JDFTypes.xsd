@@ -2693,6 +2693,13 @@
 			<xs:enumeration value="Top"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="ePreflightLevel_">
+		<xs:restriction base="jdftyp:EnumerationBaseType">
+			<xs:enumeration value="Basic"/>
+			<xs:enumeration value="Extended"/>
+			<xs:enumeration value="Premium"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="ePreflightStatus_">
 		<xs:restriction base="jdftyp:EnumerationBaseType">
 			<xs:enumeration value="NotPerformed"/>
