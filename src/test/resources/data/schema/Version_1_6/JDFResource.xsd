@@ -18961,6 +18961,7 @@
         <Version Path="AdhesiveBinding" Last="1.0"/>
         <Version Path="BindingColorDetails" First="1.4"/>
         <Version Path="BindList" First="1.1"/>
+        <Version Path="BindingLength" Last="1.5"/>
         <Version Path="BookCase" Last="1.0"/>
         <Version Path="CoverColorDetails" First="1.4"/>
         <Version Path="EdgeGluing" First="1.1"/>
