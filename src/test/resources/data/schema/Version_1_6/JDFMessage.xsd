@@ -4320,6 +4320,7 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	
 	<xs:element name="QueueFilter" type="jdf:QueueFilter_m" substitutionGroup="jdf:CommandOrQueryTypeObj">
 		<xs:annotation>
 			<xs:appinfo>
@@ -4330,6 +4331,10 @@
 				<Version Path="@PreviewUsages" First="1.4"/>
 				<Version Path="@UpdateGranularity" First="1.4"/>
 				<Version Path="@Activation" First="1.5"/>
+				<Version Path="@FirstEntry" First="1.6"/>
+				<Version Path="@LastEntry" First="1.6"/>
+				<Version Path="@MaxPriority" First="1.6"/>
+				<Version Path="@MinPriority" First="1.6"/>
 				<Version Path="Part" First="1.4"/>
 				<Constraint Path="QueueEntryDef" minOccurs="0" maxOccurs="unbounded"/>
 				<Constraint Path="Device" minOccurs="0" maxOccurs="unbounded"/>
@@ -4346,10 +4351,14 @@
 					<xs:element name="Part" type="jdf:Part" minOccurs="0"/>
 				</xs:sequence>
 				<xs:attribute name="Activation" type="jdftyp:eActivation_" use="optional"/>
+				<xs:attribute name="FirstEntry" type="jdftyp:string" use="optional"/>
 				<xs:attribute name="GangNames" type="jdftyp:NMTOKENS" use="optional"/>
 				<xs:attribute name="JobID" type="jdftyp:string" use="optional"/>
 				<xs:attribute name="JobPartID" type="jdftyp:string" use="optional"/>
+				<xs:attribute name="LastEntry" type="jdftyp:string" use="optional"/>
 				<xs:attribute name="MaxEntries" type="jdftyp:Integer" use="optional"/>
+				<xs:attribute name="MaxPriority" type="jdftyp:Integer" use="optional"/>
+				<xs:attribute name="MinPriority" type="jdftyp:Integer" use="optional"/>
 				<xs:attribute name="OlderThan" type="jdftyp:dateTime" use="optional"/>
 				<xs:attribute name="PreviewUsages" type="jdftyp:ePreviewUsageList_" default="Separation"/>
 				<xs:attribute name="NewerThan" type="jdftyp:dateTime" use="optional"/>
@@ -4359,6 +4368,7 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	
 	<xs:element name="GangCmdFilter" type="jdf:GangCmdFilter_m" substitutionGroup="jdf:CommandTypeObj"/>
 	<xs:element name="GangQuFilter" type="jdf:GangQuFilter_m" substitutionGroup="jdf:QueryTypeObj"/>
 	<xs:element name="GangInfo" type="jdf:GangInfo_m" substitutionGroup="jdf:ResponseTypeObj"/>
