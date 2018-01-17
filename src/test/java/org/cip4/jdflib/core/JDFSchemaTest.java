@@ -159,7 +159,6 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
 	 *
 	 */
 	@Test
@@ -173,6 +172,24 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		final KElement vt = r.appendElement("VariableType");
 		vt.setAttribute(AttributeName.ACTUAL, "AddressField");
 		vt.setAttribute(AttributeName.DATATYPE, "EnumerationSpan");
+		final String s = d0.write2String(2);
+		final JDFDoc d = p.parseString(s);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCertification()
+	{
+		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d0.getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		final JDFResource r = n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		final KElement c = r.appendElement(ElementName.CERTIFICATION);
+		c.setAttribute("Claim", "AddressField");
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
 		assertNotNull(d);

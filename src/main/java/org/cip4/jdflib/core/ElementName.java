@@ -297,6 +297,7 @@ public final class ElementName
 	public static final String CCITTFAXPARAMS = "CCITTFaxParams";
 	/** */
 	public static final String CERTIFICATE = "Certificate";
+	public static final String CERTIFICATION = "Certification";
 	/** */
 	public static final String CHANGEDATTRIBUTE = "ChangedAttribute";
 	/** */

@@ -8835,6 +8835,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="OCGControl_re" mixed="false">
     <xs:annotation>
       <xs:appinfo>
@@ -8855,6 +8856,25 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>  
+  
+  <xs:complexType name="Certification_re" mixed="false">
+    <xs:annotation>
+      <xs:appinfo>
+        <Version Path="." First="1.6"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="jdf:BaseElement_">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="jdf:GenericElements" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Claim" type="jdftyp:string" use="optional"/>
+        <xs:attribute name="Identifier" type="jdftyp:string" use="optional"/>
+        <xs:attribute name="Organization" type="jdftyp:NMTOKEN" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>  
+  
   <xs:complexType name="InterpretingParams_PDFInterpretingParams_ReferenceXObjParams_lr" mixed="false">
     <xs:complexContent mixed="false">
       <xs:extension base="jdf:BaseElement_">
@@ -10490,6 +10510,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="Media" type="jdf:Media_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
@@ -10527,6 +10548,7 @@
         <Version Path="@Texture" First="1.1"/>
         <Version Path="@UserMediaType" Last="1.0"/>
         <Version Path="@WrapperWeight" First="1.3"/>
+        <Version Path="Certification" First="1.6"/>
         <Version Path="Color" Last="1.0"/>
         <Version Path="ColorRef" Last="1.0"/>
         <Version Path="ColorMeasurementConditions" First="1.2"/>
@@ -10535,6 +10557,7 @@
         <Version Path="MediaLayers" First="1.3"/>
         <Version Path="MediaLayersRef" First="1.3"/>
         <Version Path="TableDimensions" First="1.4"/>
+        <Constraint Path="Certification" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="Color" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ColorRef" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ColorMeasurementConditions" minOccurs="0" maxOccurs="1"/>
@@ -10617,6 +10640,7 @@
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
           <xs:group ref="jdf:PhysicalResourceSubElements" minOccurs="0"/>
+          <xs:element name="Certification" type="jdf:Certification_re" minOccurs="0"/>
           <xs:element name="Color" type="jdf:Color_re" minOccurs="0"/>
           <xs:element ref="jdf:ColorRef" minOccurs="0"/>
           <xs:element name="ColorMeasurementConditions" type="jdf:ColorMeasurementConditions_re" minOccurs="0"/>
@@ -10638,6 +10662,7 @@
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
           <xs:group ref="jdf:PhysicalResourceSubElements" minOccurs="0"/>
+          <xs:element name="Certification" type="jdf:Certification_re" minOccurs="0"/>
           <xs:element name="Color" type="jdf:Color_re" minOccurs="0"/>
           <xs:element ref="jdf:ColorRef" minOccurs="0"/>
           <xs:element name="ColorMeasurementConditions" type="jdf:ColorMeasurementConditions_re" minOccurs="0"/>
@@ -10658,6 +10683,7 @@
             <xs:group ref="jdf:GenericElements" minOccurs="0"/>
             <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
             <xs:group ref="jdf:PhysicalResourceSubElements" minOccurs="0"/>
+            <xs:element name="Certification" type="jdf:Certification_re" minOccurs="0"/>
             <xs:element name="Color" type="jdf:Color_re" minOccurs="0"/>
             <xs:element ref="jdf:ColorRef" minOccurs="0"/>
             <xs:element name="ColorMeasurementConditions" type="jdf:ColorMeasurementConditions_re" minOccurs="0"/>
@@ -19957,9 +19983,11 @@
         <Version Path="Thickness" First="1.1"/>
         <Version Path="USWeight" Last="1.1"/>
         <Version Path="MediaLayers" First="1.4"/>
+        <Version Path="Certification" First="1.6"/>
         <Constraint Path="BackCoatings" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="Brightness" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="BuyerSupplied" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="Certification" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="Dimensions" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="Flute" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="FluteDirection" minOccurs="0" maxOccurs="1"/>
@@ -20012,6 +20040,7 @@
           <xs:element name="BackCoatings" type="jdf:EnumerationSpan" minOccurs="0"/>
           <xs:element name="Brightness" type="jdf:NumberSpan" minOccurs="0"/>
           <xs:element name="BuyerSupplied" type="jdf:OptionSpan" minOccurs="0"/>
+          <xs:element name="Certification" type="jdf:Certification_re" minOccurs="0"/>
           <xs:element name="Dimensions" type="jdf:XYPairSpan" minOccurs="0"/>
           <xs:element name="Flute" type="jdf:NameSpan" minOccurs="0"/>
           <xs:element name="FluteDirection" type="jdf:EnumerationSpan" minOccurs="0"/>
@@ -20053,6 +20082,7 @@
           <xs:element name="BackCoatings" type="jdf:EnumerationSpan" minOccurs="0"/>
           <xs:element name="Brightness" type="jdf:NumberSpan" minOccurs="0"/>
           <xs:element name="BuyerSupplied" type="jdf:OptionSpan" minOccurs="0"/>
+          <xs:element name="Certification" type="jdf:Certification_re" minOccurs="0"/>
           <xs:element name="Dimensions" type="jdf:XYPairSpan" minOccurs="0"/>
           <xs:element name="FrontCoatings" type="jdf:EnumerationSpan" minOccurs="0"/>
           <xs:element name="Grade" type="jdf:IntegerSpan" minOccurs="0"/>
@@ -20090,6 +20120,7 @@
             <xs:element name="BackCoatings" type="jdf:EnumerationSpan" minOccurs="0"/>
             <xs:element name="Brightness" type="jdf:NumberSpan" minOccurs="0"/>
             <xs:element name="BuyerSupplied" type="jdf:OptionSpan" minOccurs="0"/>
+            <xs:element name="Certification" type="jdf:Certification_re" minOccurs="0"/>
             <xs:element name="Dimensions" type="jdf:XYPairSpan" minOccurs="0"/>
             <xs:element name="FrontCoatings" type="jdf:EnumerationSpan" minOccurs="0"/>
             <xs:element name="Grade" type="jdf:IntegerSpan" minOccurs="0"/>
@@ -20119,6 +20150,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="NumberingIntent" type="jdf:NumberingIntent_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
