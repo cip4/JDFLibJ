@@ -20524,11 +20524,13 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="ShapeCuttingIntent" type="jdf:ShapeCuttingIntent_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
         <Version Path="ShapeCut/ShapeDepth" First="1.1" Last="1.5"/>
         <Version Path="ShapeCut/CutDepth" First="1.6"/>
+        <Version Path="ShapeCut/@ShapeTypeDetails" First="1.6"/>
         <Constraint Path="ShapeCut" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="ShapeCut/Material" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ShapeCut/CutDepth" minOccurs="0" maxOccurs="1"/>
@@ -20548,6 +20550,7 @@
   <xs:attributeGroup name="ShapeCuttingIntentAttribs_r">
     <xs:attributeGroup ref="jdf:ShapeCuttingIntentAttribs_c"/>
   </xs:attributeGroup>
+  
   <xs:complexType name="ShapeCuttingIntent_ShapeCut_lr" mixed="false">
     <xs:complexContent mixed="false">
       <xs:extension base="jdf:BaseElement_">
@@ -20564,6 +20567,7 @@
         <xs:attribute name="CutOut" type="jdftyp:boolean" default="false"/>
         <xs:attribute name="CutPath" type="jdftyp:PDFPath" use="optional"/>
         <xs:attribute name="Pages" type="jdftyp:IntegerRangeList" use="optional"/>
+        <xs:attribute name="ShapeTypeDetails" type="jdftyp:string" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
