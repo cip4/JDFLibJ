@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
   <!--
     The CIP4 Software License, Version 1.0 
-    Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). 
+    Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). 
     All rights reserved. Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
     following conditions are met: 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following
     disclaimer. 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
@@ -3361,6 +3361,9 @@
     <xs:annotation>
       <xs:appinfo>
         <Version Path="." First="1.4"/>
+        <Version Path="@ISBN" First="1.6"/>
+        <Version Path="@ISBN10" Last="1.5"/>
+        <Version Path="@ISBN13" Last="1.5"/>
         <Constraint Path="Contact" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="ContactRef" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="Empoyee" minOccurs="0" maxOccurs="unbounded"/>
@@ -3378,6 +3381,7 @@
           <xs:element ref="jdf:EmployeeRef" minOccurs="0"/>
           <xs:element name="Part" type="jdf:Part" minOccurs="0"/>
         </xs:sequence>
+        <xs:attribute name="ISBN" type="jdftyp:NMTOKEN"/>
         <xs:attribute name="ISBN10" type="jdftyp:string"/>
         <xs:attribute name="ISBN13" type="jdftyp:string"/>
         <xs:attribute name="Title" type="jdftyp:string"/>
