@@ -1630,10 +1630,11 @@
 		<xs:annotation>
 			<xs:appinfo>
 				<Version Path="@ChannelMode" First="1.4"/>
-				<Version Path="@Format" First="1.2"/>
+				<Version Path="@Format" First="1.2" Last="1.4"/>
+				<Version Path="@Languages" First="1.6"/>
 				<Version Path="@MinDelayTime" First="1.3"/>
 				<Version Path="@RetryPolicy" First="1.4"/>
-				<Version Path="@Template" First="1.2"/>
+				<Version Path="@Template" First="1.2" Last="1.4"/>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexContent mixed="false">
@@ -1644,6 +1645,7 @@
 				</xs:sequence>
 				<xs:attribute name="ChannelMode" type="jdftyp:eChannelMode_" use="optional"/>
 				<xs:attribute name="Format" type="jdftyp:string" use="optional"/>
+				<xs:attribute name="Languages" type="jdftyp:languages" use="optional"/>
 				<xs:attribute name="MinDelayTime" type="jdftyp:duration" use="optional"/>
 				<xs:attribute name="RepeatStep" type="jdftyp:Integer" use="optional"/>
 				<xs:attribute name="RepeatTime" type="jdftyp:double" use="optional"/>
