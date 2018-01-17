@@ -19590,6 +19590,7 @@
     <xs:annotation>
       <xs:appinfo>
         <Version Path="@Folds" Last="1.0"/>
+        <Version Path="@FoldingDetails" First="1.6"/>
         <Version Path="Fold" First="1.1"/>
         <Version Path="Orientation" First="1.6"/>
         <Constraint Path="FoldingCatalog" minOccurs="1" maxOccurs="1"/>
@@ -19602,6 +19603,7 @@
   <xs:element name="FoldingIntentLink" type="jdf:ResourceLink" substitutionGroup="jdf:ResourceLink"/>
   <xs:attributeGroup name="FoldingIntentAttribs_c">
     <xs:attribute name="Folds" type="jdftyp:XYPair" use="optional"/>
+    <xs:attribute name="FoldingDetails" type="jdftyp:string" use="optional"/>
   </xs:attributeGroup>
   <xs:attributeGroup name="FoldingIntentAttribs_u">
     <xs:attributeGroup ref="jdf:FoldingIntentAttribs_c"/>
@@ -19641,6 +19643,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="HoleMakingIntent" type="jdf:HoleMakingIntent_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
@@ -19695,6 +19698,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="InsertingIntent" type="jdf:InsertingIntent_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
