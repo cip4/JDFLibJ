@@ -1,0 +1,22 @@
+<JDF ID="n_000004" JobID="J1" JobPartID="n_000002.1" MaxVersion="1.4" Status="Waiting" Type="Combined" Types="DigitalPrinting" Version="1.4" xmlns="http://www.CIP4.org/JDFSchema_1_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Combined">
+	<AuditPool>
+		<Created AgentName="CIP4 JDF Writer Java" AgentVersion="1.4a BLD 74" ID="a_000005" TimeStamp="2013-09-19T15:36:28+02:00"/>
+	</AuditPool>
+	<ResourcePool>
+		<RunList Automation="Dynamic" Class="Parameter" ID="r_000006" Status="Available"/>
+		<DigitalPrintingParams Class="Parameter" ID="r_000007" Status="Available"/>
+		<Component Automation="Dynamic" Class="Quantity" ComponentType="PartialProduct Sheet" ID="r_000008" PartIDKeys="SetIndex DocTags" PipeID="PipeSheet" PipeProtocol="JMFPush" Status="Unavailable">
+			<Component SetIndex="0~-1">
+				<Component DocTags="Cover" SurfaceCount="2"/>
+				<Component DocTags="Body" SurfaceCount="-1"/>
+			</Component>
+		</Component>
+	</ResourcePool>
+	<ResourceLinkPool>
+		<RunListLink CombinedProcessIndex="0" Usage="Input" rRef="r_000006"/>
+		<DigitalPrintingParamsLink CombinedProcessIndex="0" Usage="Input" rRef="r_000007"/>
+		<ComponentLink Amount="1" CombinedProcessIndex="0" Usage="Output" rRef="r_000008">
+			<Part SetIndex="0~-1"/>
+		</ComponentLink>
+	</ResourceLinkPool>
+</JDF>

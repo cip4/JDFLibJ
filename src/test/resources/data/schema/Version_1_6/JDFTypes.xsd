@@ -202,12 +202,14 @@
 		<xs:list itemType="jdftyp:IntegerAndSeparator_"/>
 	</xs:simpleType>
 	<xs:simpleType name="IntegerRange">
-		<xs:restriction base="jdftyp:IntegerAndSeparators_">
-			<xs:length value="3"/>
+		<xs:restriction base="jdftyp:string">
+		 	<xs:pattern value="([-+]?\d+|INF)(\s*\~\s*([-+]?\d+|INF))?"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="IntegerRangeList">
-		<xs:restriction base="jdftyp:IntegerAndSeparators_"/>
+		<xs:restriction base="jdftyp:string">
+		 	<xs:pattern value="(([-+]?\d+|INF)(\s*\~\s*([-+]?\d+|INF))?)+"/>
+		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Integer0To100">
 		<xs:restriction base="xs:integer">
