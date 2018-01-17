@@ -7888,6 +7888,7 @@
         <Version Path="ImageCompression/@ImageAutoFilterStrategy" First="1.2"/>
         <Version Path="ImageCompression/@JPXQuality" First="1.2"/>
         <Version Path="ImageCompression/CCITTFaxParams" First="1.2"/>
+        <Version Path="ImageCompression/DCTParams/@SourceCSs" First="1.2" Last="1.5"/>
         <Version Path="ImageCompression/DCTParams" First="1.2"/>
         <Version Path="ImageCompression/FlateParams" First="1.2"/>
         <Version Path="ImageCompression/JBIG2Params" First="1.3"/>
@@ -7910,6 +7911,7 @@
   <xs:attributeGroup name="ImageCompressionParamsAttribs_r">
     <xs:attributeGroup ref="jdf:ImageCompressionParamsAttribs_c"/>
   </xs:attributeGroup>
+  
   <xs:complexType name="ImageCompressionParams_ImageCompression_lr" mixed="false">
     <xs:complexContent mixed="false">
       <xs:extension base="jdf:BaseElement_">
@@ -7939,6 +7941,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="ImageCompressionParams_ImageCompression_CCITTFaxParams_lr" mixed="false">
     <xs:complexContent mixed="false">
       <xs:extension base="jdf:BaseElement_">
@@ -7953,13 +7956,14 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:complexType name="ImageCompressionParams_ImageCompression_DCTParams_lr" mixed="false">
     <xs:complexContent mixed="false">
       <xs:extension base="jdf:BaseElement_">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
         </xs:sequence>
-        <xs:attribute name="SourceCSs" type="jdftyp:eSourceCSsList_" use="required"/>
+        <xs:attribute name="SourceCSs" type="jdftyp:eSourceCSsList_" use="optional"/>
         <xs:attribute name="HSamples" type="jdftyp:IntegerList" use="optional"/>
         <xs:attribute name="VSamples" type="jdftyp:IntegerList" use="optional"/>
         <xs:attribute name="QFactor" type="jdftyp:double" default="1.0"/>
