@@ -1695,6 +1695,7 @@
 	<xs:simpleType name="eGrainDirection_">
 		<xs:restriction base="jdftyp:EnumerationBaseType">
 			<xs:enumeration value="Any"/><!-- First in 1.5 -->
+			<xs:enumeration value="Both"/><!-- Last in 1.5 -->
 			<xs:enumeration value="ShortEdge"/><!-- Last in 1.4 -->
 			<xs:enumeration value="LongEdge"/><!-- Last in 1.4 -->
 			<xs:enumeration value="SameDirection"/><!-- First in 1.5 -->

@@ -19862,6 +19862,7 @@
   <xs:element name="MediaIntent" type="jdf:MediaIntent_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
+        <Version Path="@UserMediaType" Last="1.5"/>
         <Version Path="Dimensions" Last="1.1"/>
         <Version Path="Flute" First="1.4"/>
         <Version Path="FluteDirection" First="1.4"/>
