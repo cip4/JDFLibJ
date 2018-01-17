@@ -11772,6 +11772,9 @@
     <xs:annotation>
       <xs:appinfo>
         <Version Path="." First="1.3"/>
+        <Version Path="FontParams" First="1.6"/>
+        <Constraint Path="FontParams" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="FontParamsRef" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="PDFToPSConversionParams" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="PDFToPSConversionParamsRef" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="PSToPDFConversionParams" minOccurs="0" maxOccurs="1"/>
@@ -11796,6 +11799,8 @@
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
+          <xs:element name="FontParams" type="jdf:FontParams_re" minOccurs="0"/>
+          <xs:element ref="jdf:FontParamsRef" minOccurs="0"/>
           <xs:element name="PDFToPSConversionParams" type="jdf:PDFToPSConversionParams_re" minOccurs="0"/>
           <xs:element ref="jdf:PDFToPSConversionParamsRef" minOccurs="0"/>
           <xs:element name="PSToPDFConversionParams" type="jdf:PSToPDFConversionParams_re" minOccurs="0"/>
