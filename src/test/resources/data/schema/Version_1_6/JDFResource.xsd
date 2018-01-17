@@ -4433,7 +4433,7 @@
         <Constraint Path="Contact" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="ContactRef" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="Drop" minOccurs="1" maxOccurs="unbounded"/>
-        <Constraint Path="FileSpec" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="FileSpec" minOccurs="0" maxOccurs="2"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -4496,11 +4496,14 @@
         <Version Path="CompanyRef" Last="1.0"/>
         <Version Path="Contact" First="1.1"/>
         <Version Path="ContactRef" First="1.1"/>
+        <Version Path="FileSpec" First="1.6"/>
         <Constraint Path="Company" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="CompanyRef" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="Contact" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="ContactRef" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="DropItem" minOccurs="1" maxOccurs="unbounded"/>
+        <Constraint Path="FileSpec" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="FileSpecRef" minOccurs="0" maxOccurs="1"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexContent mixed="false">
@@ -4511,6 +4514,8 @@
           <xs:element ref="jdf:CompanyRef" minOccurs="0"/>
           <xs:element name="Contact" type="jdf:Contact_re" minOccurs="0"/>
           <xs:element ref="jdf:ContactRef" minOccurs="0"/>
+          <xs:element name="FileSpec" type="jdf:FileSpec_re" minOccurs="0"/>
+          <xs:element ref="jdf:FileSpecRef" minOccurs="0"/>
           <xs:element name="DropItem" type="jdf:DeliveryParams_Drop_DropItem_lr" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute name="DropID" type="jdftyp:string" use="optional"/>
@@ -4538,6 +4543,7 @@
           <xs:element name="DeliveryParamsUpdate" type="jdf:DeliveryParams_re" minOccurs="0"/>
           <xs:element name="DeliveryParams" type="jdf:DeliveryParams_rp" minOccurs="0"/>
           <xs:element name="FileSpec" type="jdf:FileSpec_re" minOccurs="0"/>
+          <xs:element ref="jdf:FileSpecRef" minOccurs="0"/>
         </xs:sequence>
         <xs:attributeGroup ref="jdf:DeliveryParamsAttribs_r"/>
       </xs:extension>
@@ -4554,7 +4560,9 @@
           <xs:element name="Contact" type="jdf:Contact_re" minOccurs="0"/>
           <xs:element ref="jdf:ContactRef" minOccurs="0"/>
           <xs:element name="Drop" type="jdf:DeliveryParams_Drop_lr" minOccurs="0"/>
-        </xs:sequence>
+         <xs:element name="FileSpec" type="jdf:FileSpec_re" minOccurs="0"/>
+          <xs:element ref="jdf:FileSpecRef" minOccurs="0"/>
+         </xs:sequence>
         <xs:attributeGroup ref="jdf:DeliveryParamsAttribs_r"/>
       </xs:extension>
     </xs:complexContent>
@@ -4572,13 +4580,16 @@
             <xs:element ref="jdf:ContactRef" minOccurs="0"/>
             <xs:element name="Drop" type="jdf:DeliveryParams_Drop_lr" minOccurs="0"/>
             <xs:element name="DeliveryParams" type="jdf:DeliveryParams_rp" minOccurs="0"/>
-          </xs:sequence>
+            <xs:element name="FileSpec" type="jdf:FileSpec_re" minOccurs="0"/>
+            <xs:element ref="jdf:FileSpecRef" minOccurs="0"/>
+           </xs:sequence>
           <xs:element name="Identical" type="jdf:Identical" minOccurs="0"/>
         </xs:choice>
         <xs:attributeGroup ref="jdf:DeliveryParamsAttribs_u"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="DensityMeasuringField" type="jdf:DensityMeasuringField_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
@@ -19214,6 +19225,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="DeliveryIntent" type="jdf:DeliveryIntent_r" substitutionGroup="jdf:Resource"/>
   <xs:element name="DeliveryIntentRef" type="jdf:ResourceRef" substitutionGroup="jdf:ResourceRef"/>
   <xs:element name="DeliveryIntentLink" type="jdf:ResourceLink" substitutionGroup="jdf:ResourceLink"/>
@@ -19249,6 +19261,8 @@
         <Version Path="CompanyRef" Last="1.0"/>
         <Version Path="Contact" First="1.1"/>
         <Version Path="ContactRef" First="1.1"/>
+        <Version Path="FileSpec" First="1.6"/>
+        <Version Path="FileSpecRef" First="1.6"/>
         <Constraint Path="Earliest" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="EarliestDuration" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="Method" minOccurs="0" maxOccurs="1"/>
@@ -19264,6 +19278,8 @@
         <Constraint Path="ContactRef" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="DropItemIntent" minOccurs="1" maxOccurs="unbounded"/>
         <Constraint Path="Pricing" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="FileSpec" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="FileSpecRef" minOccurs="0" maxOccurs="1"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexContent mixed="false">
@@ -19282,6 +19298,8 @@
           <xs:element name="Company" type="jdf:Company_re" minOccurs="0"/>
           <xs:element ref="jdf:CompanyRef" minOccurs="0"/>
           <xs:element name="Contact" type="jdf:Contact_re" minOccurs="0"/>
+          <xs:element name="FileSpec" type="jdf:FileSpec_re" minOccurs="0"/>
+          <xs:element ref="jdf:FileSpecRef" minOccurs="0"/>
           <xs:element ref="jdf:ContactRef" minOccurs="0"/>
           <xs:element name="DropItemIntent" type="jdf:DeliveryIntent_DropIntent_DropItemIntent_lr" minOccurs="0"/>
           <xs:element name="Pricing" type="jdf:DeliveryIntent_Pricing_lr" minOccurs="0"/>
@@ -19393,6 +19411,8 @@
         <Version Path="Transfer" First="1.1"/>
         <Version Path="Company" Last="1.0"/>
         <Version Path="CompanyRef" Last="1.0"/>
+        <Version Path="FileSpec" First="1.5"/>
+        <Version Path="FileSpecRef" First="1.0"/>
         <Version Path="Contact" First="1.1"/>
         <Version Path="ContactRef" First="1.1"/>
         <Version Path="Pricing" Last="1.2"/>
@@ -19410,6 +19430,8 @@
         <Constraint Path="Underage" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="Company" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="CompanyRef" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="FileSpec" minOccurs="0" maxOccurs="2"/>
+        <Constraint Path="FileSpecRef" minOccurs="0" maxOccurs="2"/>
         <Constraint Path="Contact" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="ContactRef" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="DropIntent" minOccurs="1" maxOccurs="unbounded"/>
@@ -19435,6 +19457,8 @@
           <xs:element name="Underage" type="jdf:NumberSpan" minOccurs="0"/>
           <xs:element name="Company" type="jdf:Company_re" minOccurs="0"/>
           <xs:element ref="jdf:CompanyRef" minOccurs="0"/>
+          <xs:element name="FileSpec" type="jdf:FileSpec_re" minOccurs="0"/>
+          <xs:element ref="jdf:FileSpecRef" minOccurs="0"/>
           <xs:element name="Contact" type="jdf:Contact_re" minOccurs="0"/>
           <xs:element ref="jdf:ContactRef" minOccurs="0"/>
           <xs:element name="DropIntent" type="jdf:DeliveryIntent_DropIntent_lr" minOccurs="0"/>
@@ -19466,6 +19490,8 @@
             <xs:element name="Underage" type="jdf:NumberSpan" minOccurs="0"/>
             <xs:element name="Company" type="jdf:Company_re" minOccurs="0"/>
             <xs:element ref="jdf:CompanyRef" minOccurs="0"/>
+            <xs:element name="FileSpec" type="jdf:FileSpec_re" minOccurs="0"/>
+            <xs:element ref="jdf:FileSpecRef" minOccurs="0"/>
             <xs:element name="Contact" type="jdf:Contact_re" minOccurs="0"/>
             <xs:element ref="jdf:ContactRef" minOccurs="0"/>
             <xs:element name="DropIntent" type="jdf:DeliveryIntent_DropIntent_lr" minOccurs="0"/>
