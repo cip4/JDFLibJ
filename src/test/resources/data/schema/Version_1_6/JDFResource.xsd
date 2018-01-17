@@ -19419,6 +19419,8 @@
       <xs:appinfo>
         <Version Path="." First="1.1"/>
         <Version Path="EmbossingItem/FoilColorDetails" First="1.4"/>
+        <Version Path="EmbossingItem/@Separation" First="1.6"/>
+        <Version Path="EmbossingItem/@ToolName" First="1.6"/>
         <Constraint Path="EmbossingItem" minOccurs="1" maxOccurs="unbounded"/>
         <Constraint Path="EmbossingItem/Direction" minOccurs="1" maxOccurs="1"/>
         <Constraint Path="EmbossingItem/EdgeAngle" minOccurs="0" maxOccurs="1"/>
@@ -19435,7 +19437,10 @@
   </xs:element>
   <xs:element name="EmbossingIntentRef" type="jdf:ResourceRef" substitutionGroup="jdf:ResourceRef"/>
   <xs:element name="EmbossingIntentLink" type="jdf:ResourceLink" substitutionGroup="jdf:ResourceLink"/>
-  <xs:attributeGroup name="EmbossingIntentAttribs_c"/>
+  <xs:attributeGroup name="EmbossingIntentAttribs_c">
+      <xs:attribute name="Separation" type="jdftyp:string" use="optional"/>
+      <xs:attribute name="ToolName" type="jdftyp:NMTOKEN" use="optional"/>
+  </xs:attributeGroup>
   <xs:attributeGroup name="EmbossingIntentAttribs_u">
     <xs:attributeGroup ref="jdf:EmbossingIntentAttribs_c"/>
   </xs:attributeGroup>
