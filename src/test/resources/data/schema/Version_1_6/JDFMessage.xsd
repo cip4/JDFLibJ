@@ -4299,6 +4299,7 @@
 		<xs:annotation>
 			<xs:appinfo>
 				<Version Path="@QueueSize" First="1.2"/>
+				<Version Path="@MaxQueueSize" First="1.6"/>
 				<Constraint Path="Device" minOccurs="0" maxOccurs="unbounded"/>
 				<Constraint Path="QueueEntry" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:appinfo>
@@ -4314,6 +4315,7 @@
 				</xs:sequence>
 				<xs:attribute name="Status" type="jdftyp:eQueueStatus_" use="required"/>
 				<xs:attribute name="DeviceID" type="jdftyp:shortString" use="required"/>
+				<xs:attribute name="MaxQueueSize" type="jdftyp:Integer" use="optional"/>
 				<xs:attribute name="QueueSize" type="jdftyp:Integer" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
