@@ -9055,6 +9055,8 @@
       <xs:appinfo>
         <Version Path="." First="1.1"/>
 		<Version Path="FileSpec" First="1.5"/>
+ 		<Version Path="@CTM" Last="1.5"/>
+ 		<Version Path="@Offset" First="1.6"/>
         <Constraint Path="Filespec" minOccurs="0" maxOccurs="1"/>
       </xs:appinfo>
     </xs:annotation>
