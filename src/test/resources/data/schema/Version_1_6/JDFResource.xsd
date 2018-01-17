@@ -18848,7 +18848,7 @@
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
           <xs:element name="WireCombBrand" type="jdf:StringSpan" minOccurs="0"/>
           <xs:element name="WireCombMaterial" type="jdf:EnumerationSpan" minOccurs="0"/>
-          <xs:element name="WireCombShape" type="jdf:EnumerationSpan" minOccurs="0"/>
+          <xs:element name="WireCombShape" type="jdf:NameSpan" minOccurs="0"/>
           <xs:element name="HoleList" type="jdf:HoleList_re" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
