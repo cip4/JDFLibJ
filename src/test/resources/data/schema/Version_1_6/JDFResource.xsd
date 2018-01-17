@@ -19414,6 +19414,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="EmbossingIntent" type="jdf:EmbossingIntent_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
@@ -19437,10 +19438,7 @@
   </xs:element>
   <xs:element name="EmbossingIntentRef" type="jdf:ResourceRef" substitutionGroup="jdf:ResourceRef"/>
   <xs:element name="EmbossingIntentLink" type="jdf:ResourceLink" substitutionGroup="jdf:ResourceLink"/>
-  <xs:attributeGroup name="EmbossingIntentAttribs_c">
-      <xs:attribute name="Separation" type="jdftyp:string" use="optional"/>
-      <xs:attribute name="ToolName" type="jdftyp:NMTOKEN" use="optional"/>
-  </xs:attributeGroup>
+  <xs:attributeGroup name="EmbossingIntentAttribs_c"/>
   <xs:attributeGroup name="EmbossingIntentAttribs_u">
     <xs:attributeGroup ref="jdf:EmbossingIntentAttribs_c"/>
   </xs:attributeGroup>
@@ -19463,6 +19461,8 @@
           <xs:element name="Level" type="jdf:EnumerationSpan" minOccurs="0"/>
           <xs:element name="Position" type="jdf:XYPairSpan" minOccurs="0"/>
         </xs:sequence>
+        <xs:attribute name="Separation" type="jdftyp:string" use="optional"/>
+        <xs:attribute name="ToolName" type="jdftyp:NMTOKEN" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -19495,6 +19495,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="FitPolicy" type="jdf:FitPolicy_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
