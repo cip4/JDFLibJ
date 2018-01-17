@@ -19558,12 +19558,15 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="FoldingIntent" type="jdf:FoldingIntent_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
         <Version Path="@Folds" Last="1.0"/>
         <Version Path="Fold" First="1.1"/>
+        <Version Path="Orientation" First="1.6"/>
         <Constraint Path="FoldingCatalog" minOccurs="1" maxOccurs="1"/>
+        <Constraint Path="Orientation" minOccurs="1" maxOccurs="1"/>
         <Constraint Path="Fold" minOccurs="0" maxOccurs="unbounded"/>
       </xs:appinfo>
     </xs:annotation>
@@ -19587,6 +19590,7 @@
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
           <xs:element name="FoldingCatalog" type="jdf:NameSpan" minOccurs="0"/>
           <xs:element name="Fold" type="jdf:Fold_re" minOccurs="0"/>
+          <xs:element name="Orientation" type="jdf:EnumerationSpan" minOccurs="0"/>
           <xs:element name="FoldingIntent" type="jdf:FoldingIntent_rp" minOccurs="0"/>
         </xs:sequence>
         <xs:attributeGroup ref="jdf:FoldingIntentAttribs_r"/>
