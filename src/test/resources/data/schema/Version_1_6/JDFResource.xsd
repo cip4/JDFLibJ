@@ -3321,11 +3321,13 @@
         <Version Path="@ContentRefs" First="1.4"/>
         <Version Path="@ID" First="1.4"/>
         <Version Path="ContentMetaData" First="1.4"/>
+        <Version Path="OCGControl" First="1.6"/>
         <Constraint Path="ContentMetaData" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ElementColorParams" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ElementColorParamsRef" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ImageCompressionParams" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ImageCompressionParamsRef" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="OCGControl" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="ScreeningParams" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ScreeningParamsRef" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="SeparationSpec" minOccurs="0" maxOccurs="unbounded"/>
@@ -3340,6 +3342,7 @@
           <xs:element ref="jdf:ElementColorParamsRef" minOccurs="0"/>
           <xs:element name="ImageCompressionParams" type="jdf:ImageCompressionParams_re" minOccurs="0"/>
           <xs:element ref="jdf:ImageCompressionParamsRef" minOccurs="0"/>
+          <xs:element name="OCGControl" type="jdf:OCGControl_re" minOccurs="0"/>
           <xs:element name="ScreeningParams" type="jdf:ScreeningParams_re" minOccurs="0"/>
           <xs:element ref="jdf:ScreeningParamsRef" minOccurs="0"/>
           <xs:element name="SeparationSpec" type="jdf:SeparationSpec_re" minOccurs="0"/>
@@ -8813,7 +8816,7 @@
       <xs:extension base="jdf:BaseElement_">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
-          <xs:element name="OCGControl" type="jdf:InterpretingParams_PDFInterpretingParams_OCGControl_lr" minOccurs="0"/>
+          <xs:element name="OCGControl" type="jdf:OCGControl_re" minOccurs="0"/>
           <xs:element name="ReferenceXObjParams" type="jdf:InterpretingParams_PDFInterpretingParams_ReferenceXObjParams_lr" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute name="EmitPDFBG" type="jdftyp:boolean" default="true"/>
@@ -8832,14 +8835,23 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="InterpretingParams_PDFInterpretingParams_OCGControl_lr" mixed="false">
+  <xs:complexType name="OCGControl_re" mixed="false">
+    <xs:annotation>
+      <xs:appinfo>
+        <Version Path="." First="1.3"/>
+        <Version Path="@ProcStepsGroup" First="1.6"/>
+        <Version Path="@ProcStepsType" First="1.6"/>
+       </xs:appinfo>
+    </xs:annotation>
     <xs:complexContent mixed="false">
       <xs:extension base="jdf:BaseElement_">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute name="IncludeOCG" type="jdftyp:boolean" default="true"/>
-        <xs:attribute name="OCGName" type="jdftyp:string" use="required"/>
+        <xs:attribute name="OCGName" type="jdftyp:string" use="optional"/>
+        <xs:attribute name="ProcStepsGroup" type="jdftyp:NMTOKEN" use="optional"/>
+        <xs:attribute name="ProcStepsType" type="jdftyp:NMTOKEN" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>  
@@ -11437,11 +11449,13 @@
         <Version Path="@PageIndex" First="1.4"/>
         <Version Path="@PageStatus" First="1.3"/>
         <Version Path="PageElement" First="1.3"/>
+        <Version Path="OCGControl" First="1.6"/>
         <Constraint Path="ElementColorParams" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ElementColorParamsRef" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ImageCompressionParams" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ImageCompressionParamsRef" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="PageElement" minOccurs="0" maxOccurs="unbounded"/>
+        <Constraint Path="OCGControl" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="ScreeningParams" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ScreeningParamsRef" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="SeparationSpec" minOccurs="0" maxOccurs="unbounded"/>
@@ -11455,6 +11469,7 @@
           <xs:element ref="jdf:ElementColorParamsRef" minOccurs="0"/>
           <xs:element name="ImageCompressionParams" type="jdf:ImageCompressionParams_re" minOccurs="0"/>
           <xs:element ref="jdf:ImageCompressionParamsRef" minOccurs="0"/>
+          <xs:element name="OCGControl" type="jdf:OCGControl_re" minOccurs="0"/>
           <xs:element name="PageElement" type="jdf:PageList_PageData_PageElement_lr" minOccurs="0"/>
           <xs:element name="ScreeningParams" type="jdf:ScreeningParams_re" minOccurs="0"/>
           <xs:element ref="jdf:ScreeningParamsRef" minOccurs="0"/>
