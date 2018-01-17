@@ -126,7 +126,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	@Test
 	public void testDieMaking()
 	{
-		final JDFDoc d0 = new JDFDoc("JDF");
+		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d0.getJDFRoot();
 		n.setType(EnumType.DieMaking);
 		n.addResource(ElementName.TOOL, EnumUsage.Output);
@@ -146,9 +146,9 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		final JDFDoc d0 = new JDFDoc("JDF");
 		final JDFNode n = d0.getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
-		JDFResource r = n.addResource(ElementName.MEDIA, EnumUsage.Input);
-		JDFResourceLink rl = n.getLink(r, null);
-		JDFLot lot = rl.appendLot();
+		final JDFResource r = n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		final JDFResourceLink rl = n.getLink(r, null);
+		final JDFLot lot = rl.appendLot();
 		lot.setText(" ");
 		lot.setLotID("lllll");
 		String s = d0.write2String(2);
@@ -192,11 +192,11 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		final JDFDoc d0 = new JDFDoc("JDF");
 		final JDFNode n = d0.getJDFRoot();
 		n.setType(EnumType.ImageSetting);
-		JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
+		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
 		xm.appendMedia().setResourceClass(EnumResourceClass.Consumable);
-		JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
 		rl.addRun("file://foo.pdf", 0, 33);
-		String s = d0.write2String(2);
+		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
 		assertNotNull(d);
 		assertNull(p.m_lastExcept);
@@ -244,9 +244,9 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	@Test
 	public void testSchemafolder()
 	{
-		File[] jdfs = FileUtil.listFilesWithExtension(new File(sm_dirTestData + "schema"), "jdf");
+		final File[] jdfs = FileUtil.listFilesWithExtension(new File(sm_dirTestData + "schema"), "jdf");
 
-		for (File jdf : jdfs)
+		for (final File jdf : jdfs)
 		{
 			final JDFDoc d = p.parseFile(jdf);
 			assertNotNull(d);
@@ -262,9 +262,9 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	@Test
 	public void testSchemafolderJMF()
 	{
-		File[] jdfs = FileUtil.listFilesWithExtension(new File(sm_dirTestData + "schema"), "jmf");
+		final File[] jdfs = FileUtil.listFilesWithExtension(new File(sm_dirTestData + "schema"), "jmf");
 
-		for (File jdf : jdfs)
+		for (final File jdf : jdfs)
 		{
 			final JDFDoc d = p.parseFile(jdf);
 			assertNotNull(d);
