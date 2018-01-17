@@ -1719,6 +1719,7 @@
 				<Version Path="@ProductID" First="1.2"/>
 				<Version Path="@Scope" First="1.5"/>
 				<Version Path="@Status" First="1.2"/>
+				<Version Path="@TotalAmount" First="1.6"/>
 				<Version Path="@Usage" First="1.3"/>
 				<Version Path="AmountPool" First="1.3"/>
 				<Version Path="Lot" First="1.4"/>
@@ -1821,6 +1822,7 @@
 				<xs:attribute name="ResourceName" type="jdftyp:NMTOKEN" use="optional"/>
 				<xs:attribute name="Scope" type="jdftyp:eValueUsage_" use="optional"/>
 				<xs:attribute name="Status" type="jdftyp:eResourceStatus_" use="optional"/>
+				<xs:attribute name="TotalAmount" type="jdftyp:double" use="optional"/>
 				<xs:attribute name="Unit" type="jdftyp:string" use="optional"/>
 				<xs:attribute name="Usage" type="jdftyp:eUsage_" use="optional"/>
 			</xs:extension>
