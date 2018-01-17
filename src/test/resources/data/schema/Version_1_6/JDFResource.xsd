@@ -13851,11 +13851,15 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="QualityControlParams" type="jdf:QualityControlParams_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
         <Version Path="." First="1.2"/>
+        <Version Path="FileSpec" First="1.6"/>
         <Constraint Path="BindingQualityParams" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="FileSpec" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="FileSpecRef" minOccurs="0" maxOccurs="1"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -13878,6 +13882,8 @@
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
           <xs:element name="BindingQualityParams" type="jdf:QualityControlParams_BindingQualityParams_lr" minOccurs="0"/>
+         <xs:element name="FileSpec" type="jdf:FileSpec_re" minOccurs="0"/>
+          <xs:element ref="jdf:FileSpecRef" minOccurs="0"/>
           <xs:element name="QualityControlParamsUpdate" type="jdf:QualityControlParams_re" minOccurs="0"/>
           <xs:element name="QualityControlParams" type="jdf:QualityControlParams_rp" minOccurs="0"/>
         </xs:sequence>
@@ -13891,6 +13897,8 @@
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
+         <xs:element name="FileSpec" type="jdf:FileSpec_re" minOccurs="0"/>
+          <xs:element ref="jdf:FileSpecRef" minOccurs="0"/>
           <xs:element name="BindingQualityParams" type="jdf:QualityControlParams_BindingQualityParams_lr" minOccurs="0"/>
         </xs:sequence>
         <xs:attributeGroup ref="jdf:QualityControlParamsAttribs_r"/>
@@ -13905,6 +13913,8 @@
             <xs:group ref="jdf:GenericElements" minOccurs="0"/>
             <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
             <xs:element name="BindingQualityParams" type="jdf:QualityControlParams_BindingQualityParams_lr" minOccurs="0"/>
+            <xs:element name="FileSpec" type="jdf:FileSpec_re" minOccurs="0"/>
+            <xs:element ref="jdf:FileSpecRef" minOccurs="0"/>
             <xs:element name="QualityControlParams" type="jdf:QualityControlParams_rp" minOccurs="0"/>
           </xs:sequence>
           <xs:element name="Identical" type="jdf:Identical" minOccurs="0"/>
@@ -13924,6 +13934,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="QualityControlResult" type="jdf:QualityControlResult_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
