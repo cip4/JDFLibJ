@@ -1771,6 +1771,7 @@
 				<Version Path="@MaxVersion" First="1.2"/>
 				<Version Path="@RelatedJobID" First="1.2"/>
 				<Version Path="@RelatedJobPartID" First="1.2"/>
+				<Version Path="@RelatedProjectID" First="1.6"/>
 				<Version Path="@SpawnID" First="1.1"/>
 				<Version Path="@StatusDetails" First="1.2"/>
 				<Version Path="CustomerInfo" First="1.1"/>
@@ -1799,6 +1800,7 @@
 				<xs:attribute name="ProjectID" type="jdftyp:shortString" use="optional"/>
 				<xs:attribute name="RelatedJobID" type="jdftyp:shortString" use="optional"/>
 				<xs:attribute name="RelatedJobPartID" type="jdftyp:shortString" use="optional"/>
+				<xs:attribute name="RelatedProjectID" type="jdftyp:shortString" use="optional"/>
 				<xs:attribute name="SpawnID" type="jdftyp:shortString" use="optional"/>
 				<xs:attribute name="Status" type="jdftyp:eNodeStatus_" use="optional"/>
 				<xs:attribute name="StatusDetails" type="jdftyp:shortString" use="optional"/>
@@ -2057,6 +2059,7 @@
 				<Version Path="@ProjectID" First="1.1"/>
 				<Version Path="@RelatedJobID" First="1.2"/>
 				<Version Path="@RelatedJobPartID" First="1.2"/>
+				<Version Path="@RelatedProjectID" First="1.6"/>
 				<Version Path="@SettingsPolicy" First="1.1"/>
 				<Version Path="@SpawnID" First="1.1"/>
 				<Version Path="@StatusDetails" First="1.2"/>
@@ -2096,6 +2099,7 @@
 				<xs:attribute name="ProjectID" type="jdftyp:shortString" use="optional"/>
 				<xs:attribute name="RelatedJobID" type="jdftyp:shortString" use="optional"/>
 				<xs:attribute name="RelatedJobPartID" type="jdftyp:shortString" use="optional"/>
+				<xs:attribute name="RelatedProjectID" type="jdftyp:shortString" use="optional"/>
 				<xs:attribute name="SpawnID" type="jdftyp:NMTOKEN" use="optional"/>
 				<xs:attribute name="Status" type="jdftyp:eNodeStatus_" use="required"/>
 				<xs:attribute name="StatusDetails" type="jdftyp:shortString" use="optional"/>
@@ -2118,6 +2122,7 @@
 				<Version Path="@ProjectID" First="1.1"/>
 				<Version Path="@RelatedJobID" First="1.2"/>
 				<Version Path="@RelatedJobPartID" First="1.2"/>
+				<Version Path="@RelatedProjectID" First="1.6"/>
 				<Version Path="@SettingsPolicy" First="1.1"/>
 				<Version Path="@SpawnID" First="1.1"/>
 				<Version Path="@StatusDetails" First="1.2"/>
@@ -2151,6 +2156,7 @@
 				<xs:attribute name="ProjectID" type="jdftyp:shortString" use="optional"/>
 				<xs:attribute name="RelatedJobID" type="jdftyp:shortString" use="optional"/>
 				<xs:attribute name="RelatedJobPartID" type="jdftyp:shortString" use="optional"/>
+				<xs:attribute name="RelatedProjectID" type="jdftyp:shortString" use="optional"/>
 				<xs:attribute name="SpawnID" type="jdftyp:NMTOKEN" use="optional"/>
 				<xs:attribute name="Status" type="jdftyp:eNodeStatus_" use="required"/>
 				<xs:attribute name="StatusDetails" type="jdftyp:shortString" use="optional"/>

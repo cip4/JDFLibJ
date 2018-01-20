@@ -1720,6 +1720,7 @@
 				<Version Path="@Scope" First="1.5"/>
 				<Version Path="@Status" First="1.2"/>
 				<Version Path="@TotalAmount" First="1.6"/>
+				<Version Path="@Transformation" First="1.6"/>
 				<Version Path="@Usage" First="1.3"/>
 				<Version Path="AmountPool" First="1.3"/>
 				<Version Path="Lot" First="1.4"/>
@@ -1815,7 +1816,7 @@
 				<xs:attribute name="LotControlled" type="jdftyp:boolean" use="optional"/>
 				<xs:attribute name="ModuleID" type="jdftyp:string" use="optional"/>
 				<xs:attribute name="ModuleIndex" type="jdftyp:IntegerRangeList" use="optional"/>
-				<xs:attribute name="Orientation" type="jdftyp:eOrientation1_" use="optional"/>
+				<xs:attribute name="Orientation" type="jdftyp:Orientation" use="optional"/>
 				<xs:attribute name="ProcessUsage" type="jdftyp:NMTOKEN" use="optional"/>
 				<xs:attribute name="ProductID" type="jdftyp:shortString" use="optional"/>
 				<xs:attribute name="ResourceID" type="jdftyp:NMTOKEN" use="optional"/>
@@ -1823,6 +1824,7 @@
 				<xs:attribute name="Scope" type="jdftyp:eValueUsage_" use="optional"/>
 				<xs:attribute name="Status" type="jdftyp:eResourceStatus_" use="optional"/>
 				<xs:attribute name="TotalAmount" type="jdftyp:double" use="optional"/>
+				<xs:attribute name="Transformation" type="jdftyp:matrix" use="optional"/>
 				<xs:attribute name="Unit" type="jdftyp:string" use="optional"/>
 				<xs:attribute name="Usage" type="jdftyp:eUsage_" use="optional"/>
 			</xs:extension>
@@ -2824,6 +2826,7 @@
 				<Version Path="ModuleStatus" First="1.3"/>
 				<Version Path="Activity" First="1.5"/>
 				<Version Path="JDF" Last="1.3"/>
+				<Version Path="GangSource" First="1.6"/>
 				<Version Path="ModuleStatus/Employee" Last="1.4"/>
 				<Constraint Path="Activity" minOccurs="0" maxOccurs="unbounded"/>
 				<Constraint Path="CostCenter" minOccurs="0" maxOccurs="1"/>
@@ -2832,6 +2835,7 @@
 				<Constraint Path="ModuleStatus/Employee" minOccurs="0" maxOccurs="unbounded"/>
 				<Constraint Path="MISDetails" minOccurs="0" maxOccurs="1"/>
 				<Constraint Path="Part" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="GangSource" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:appinfo>
 		</xs:annotation>
 	</xs:element>
@@ -2860,6 +2864,7 @@
 					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
 					<xs:element name="Activity" type="jdf:PhaseTimeAudit_Activity" minOccurs="0"/>
 					<xs:element name="CostCenter" type="jdf:CostCenter_re" minOccurs="0"/>
+					<xs:element name="GangSource" type="jdf:GangSource_re" minOccurs="0"/>
 					<xs:element name="JDF" type="jdf:JDFProcessNode" minOccurs="0"/>
 					<xs:element name="MISDetails" type="jdf:MISDetails_re" minOccurs="0"/>
 					<xs:element name="ModuleStatus" type="jdf:DeviceInfo_ModuleStatus_" minOccurs="0"/>
@@ -3622,9 +3627,11 @@
 				<Version Path="@EndTime" First="1.2"/>
 				<Version Path="@StartTime" First="1.1"/>
 				<Version Path="@StatusDetails" First="1.5"/>
+				<Version Path="GangSource" First="1.6"/>
 				<Version Path="JobPhase" First="1.2"/>
 				<Version Path="Part" First="1.2"/>
 				<Version Path="Preview" First="1.2"/>
+				<Constraint Path="GangSource" minOccurs="0" maxOccurs="unbounded"/>
 				<Constraint Path="JobPhase" minOccurs="0" maxOccurs="unbounded"/>
 				<Constraint Path="Part" minOccurs="0" maxOccurs="unbounded"/>
 				<Constraint Path="Preview" minOccurs="0" maxOccurs="unbounded"/>
@@ -3637,6 +3644,7 @@
 				<xs:sequence minOccurs="0" maxOccurs="unbounded">
 					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
 					<xs:element ref="jdf:JobPhase" minOccurs="0"/>
+					<xs:element name="GangSource" type="jdf:GangSource_re" minOccurs="0"/>
 					<xs:element name="Part" type="jdf:Part" minOccurs="0"/>
 				</xs:sequence>
 				<xs:attribute name="Activation" type="jdftyp:eActivation_" use="optional"/>
@@ -4342,6 +4350,8 @@
 				<Version Path="@MaxPriority" First="1.6"/>
 				<Version Path="@MinPriority" First="1.6"/>
 				<Version Path="Part" First="1.4"/>
+				<Version Path="GangSource" First="1.6"/>
+				<Constraint Path="GangSource" minOccurs="0" maxOccurs="unbounded"/>
 				<Constraint Path="QueueEntryDef" minOccurs="0" maxOccurs="unbounded"/>
 				<Constraint Path="Device" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:appinfo>
@@ -4354,6 +4364,7 @@
 					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
 					<xs:element ref="jdf:QueueEntryDef" minOccurs="0"/>
 					<xs:element name="Device" type="jdf:Device_re" minOccurs="0"/>
+					<xs:element name="GangSource" type="jdf:GangSource_re" minOccurs="0"/>
 					<xs:element name="Part" type="jdf:Part" minOccurs="0"/>
 				</xs:sequence>
 				<xs:attribute name="Activation" type="jdftyp:eActivation_" use="optional"/>

@@ -284,6 +284,28 @@
 		</xs:complexContent>
 	</xs:complexType>
 
+	<xs:attributeGroup name="GangSourceAttribs_c">
+		<xs:attribute name="AssemblyID" type="jdftyp:NMTOKEN" use="optional"/>
+		<xs:attribute name="Copies" type="jdftyp:Integer" use="required"/>
+		<xs:attribute name="JobID" type="jdftyp:string" use="required"/>
+	</xs:attributeGroup>
+	<xs:complexType name="GangSource_re" mixed="false">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.6"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent mixed="false">
+			<xs:extension base="jdf:ResourceElement">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attributeGroup ref="jdf:GangSourceAttribs_c"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
 	<xs:attributeGroup name="MarkColorAttribs_c">
 	</xs:attributeGroup>
 	<xs:attributeGroup name="MarkColorAttribs_r">

@@ -5156,12 +5156,14 @@
         <Version Path="RuleLength" First="1.4"/>
         <Version Path="Station/ShapeDef" First="1.4"/>
         <Version Path="Station/ShapeDefRef" First="1.4"/>
+        <Version Path="CutLines" First="1.6"/>
         <Constraint Path="Device" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="DeviceRef" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="FileSpec" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="FileSpecRef" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="Media" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="MediaRef" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="CutLines" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="RuleLength" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="Station" minOccurs="0" maxOccurs="unbounded"/>
       </xs:appinfo>
@@ -5198,7 +5200,8 @@
           <xs:element name="Station" type="jdf:DieLayout_Station_lr" minOccurs="0"/>
           <xs:element name="DieLayoutUpdate" type="jdf:DieLayout_re" minOccurs="0"/>
           <xs:element name="DieLayout" type="jdf:DieLayout_rp" minOccurs="0"/>
-        </xs:sequence>
+          <xs:element name="CutLines" type="jdf:SeparationList" minOccurs="0"/>
+         </xs:sequence>
         <xs:attributeGroup ref="jdf:DieLayoutAttribs_r"/>
       </xs:extension>
     </xs:complexContent>
@@ -5212,7 +5215,11 @@
           <xs:element ref="jdf:FileSpecRef" minOccurs="0"/>
           <xs:element name="Station" type="jdf:DieLayout_Station_lr" minOccurs="0"/>
           <xs:element name="FileSpec" type="jdf:FileSpec_re" minOccurs="0"/>
-        </xs:sequence>
+          <xs:element name="CutLines" type="jdf:SeparationList" minOccurs="0"/>
+          <xs:element name="Media" type="jdf:Media_re" minOccurs="0"/>
+          <xs:element ref="jdf:MediaRef" minOccurs="0"/>
+          <xs:element name="RuleLength" type="jdf:DieLayout_RuleLength_lr" minOccurs="0"/>
+         </xs:sequence>
         <xs:attributeGroup ref="jdf:DieLayoutAttribs_r"/>
       </xs:extension>
     </xs:complexContent>
@@ -5228,7 +5235,11 @@
             <xs:element ref="jdf:FileSpecRef" minOccurs="0"/>
             <xs:element name="Station" type="jdf:DieLayout_Station_lr" minOccurs="0"/>
             <xs:element name="DieLayout" type="jdf:DieLayout_rp" minOccurs="0"/>
-          </xs:sequence>
+            <xs:element name="CutLines" type="jdf:SeparationList" minOccurs="0"/>
+            <xs:element name="Media" type="jdf:Media_re" minOccurs="0"/>
+            <xs:element ref="jdf:MediaRef" minOccurs="0"/>
+            <xs:element name="RuleLength" type="jdf:DieLayout_RuleLength_lr" minOccurs="0"/>
+           </xs:sequence>
           <xs:element name="Identical" type="jdf:Identical" minOccurs="0"/>
         </xs:choice>
         <xs:attributeGroup ref="jdf:DieLayoutAttribs_u"/>
@@ -10879,11 +10890,13 @@
         <Version Path="@MergeTarget" Last="1.0"/>
         <Version Path="@rRefs" Last="1.1"/>
         <Version Path="@WorkStepID" First="1.4"/>
+		<Version Path="GangSource" First="1.6"/>
 		<Version Path="JMF" Last="1.4"/>
         <Version Path="MISDetails" First="1.2"/>
         <Constraint Path="BusniessInfo" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="Employee" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="EmployeeRef" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="GangSource" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="JMF" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="MISDetails" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="NotificationFilter" minOccurs="0" maxOccurs="unbounded"/>
@@ -10929,6 +10942,7 @@
           <xs:element name="BusinessInfo" type="jdf:NodeInfo_BusinessInfo_l" minOccurs="0"/>
           <xs:element name="Employee" type="jdf:Employee_re" minOccurs="0"/>
           <xs:element ref="jdf:EmployeeRef" minOccurs="0"/>
+          <xs:element name="GangSource" type="jdf:GangSource_re" minOccurs="0"/>
           <xs:element name="JMF" type="jdf:JMFRootMessage" minOccurs="0"/>
           <xs:element name="MISDetails" type="jdf:MISDetails_re" minOccurs="0"/>
           <xs:element name="NotificationFilter" type="jdf:NotificationFilter_m" minOccurs="0"/>
@@ -10948,6 +10962,7 @@
           <xs:element name="BusinessInfo" type="jdf:NodeInfo_BusinessInfo_l" minOccurs="0"/>
           <xs:element name="Employee" type="jdf:Employee_re" minOccurs="0"/>
           <xs:element ref="jdf:EmployeeRef" minOccurs="0"/>
+          <xs:element name="GangSource" type="jdf:GangSource_re" minOccurs="0"/>
           <xs:element name="JMF" type="jdf:JMFRootMessage" minOccurs="0"/>
           <xs:element name="MISDetails" type="jdf:MISDetails_re" minOccurs="0"/>
           <xs:element name="NotificationFilter" type="jdf:NotificationFilter_m" minOccurs="0"/>
@@ -10966,6 +10981,7 @@
             <xs:element name="BusinessInfo" type="jdf:NodeInfo_BusinessInfo_lr" minOccurs="0"/>
             <xs:element name="Employee" type="jdf:Employee_re" minOccurs="0"/>
             <xs:element ref="jdf:EmployeeRef" minOccurs="0"/>
+            <xs:element name="GangSource" type="jdf:GangSource_re" minOccurs="0"/>
             <xs:element name="JMF" type="jdf:JMFRootMessage" minOccurs="0"/>
             <xs:element name="MISDetails" type="jdf:MISDetails_re" minOccurs="0"/>
             <xs:element name="NotificationFilter" type="jdf:NotificationFilter_m" minOccurs="0"/>
@@ -15443,7 +15459,7 @@
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>		  
           <xs:element name="ColorPool" type="jdf:ColorPool_re" minOccurs="0"/>
           <xs:element ref="jdf:ColorPoolRef" minOccurs="0"/>
-          <xs:element name="CutLines" type="jdf:ShapeDef_CutLines_lr" minOccurs="0"/>
+          <xs:element name="CutLines" type="jdf:SeparationList" minOccurs="0"/>
           <xs:element name="FileSpec" type="jdf:FileSpec_re" minOccurs="0"/>
           <xs:element ref="jdf:FileSpecRef" minOccurs="0"/>
           <xs:element name="Media" type="jdf:Media_re" minOccurs="0"/>
@@ -15463,7 +15479,7 @@
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
           <xs:element name="ColorPool" type="jdf:ColorPool_re" minOccurs="0"/>
           <xs:element ref="jdf:ColorPoolRef" minOccurs="0"/>
-          <xs:element name="CutLines" type="jdf:ShapeDef_CutLines_lr" minOccurs="0"/>
+          <xs:element name="CutLines" type="jdf:SeparationList" minOccurs="0"/>
           <xs:element name="FileSpec" type="jdf:FileSpec_re" minOccurs="0"/>
           <xs:element ref="jdf:FileSpecRef" minOccurs="0"/>
           <xs:element name="Media" type="jdf:Media_re" minOccurs="0"/>
@@ -15484,7 +15500,7 @@
             <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
             <xs:element name="ColorPool" type="jdf:ColorPool_re" minOccurs="0"/>
             <xs:element ref="jdf:ColorPoolRef" minOccurs="0"/>
-            <xs:element name="CutLines" type="jdf:ShapeDef_CutLines_lr" minOccurs="0"/>
+            <xs:element name="CutLines" type="jdf:SeparationList" minOccurs="0"/>
             <xs:element name="FileSpec" type="jdf:FileSpec_re" minOccurs="0"/>
             <xs:element ref="jdf:FileSpecRef" minOccurs="0"/>
             <xs:element name="Media" type="jdf:Media_re" minOccurs="0"/>
@@ -15499,16 +15515,6 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>   
-  <xs:complexType name="ShapeDef_CutLines_lr" mixed="false">
-    <xs:complexContent mixed="false">
-      <xs:extension base="jdf:BaseElement_">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:group ref="jdf:GenericElements" minOccurs="0"/>
-		  <xs:element name="SeparationSpec" type="jdf:SeparationSpec_re" minOccurs="0"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>  
   <xs:element name="ShapeDefProductionParams" type="jdf:ShapeDefProductionParams_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
