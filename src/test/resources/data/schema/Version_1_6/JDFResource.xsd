@@ -3014,7 +3014,7 @@
   </xs:attributeGroup>
   <xs:attributeGroup name="ComponentAttribs_r">
     <xs:attributeGroup ref="jdf:ComponentAttribs_c"/>
-    <xs:attribute name="ComponentType" type="jdftyp:eComponentTypeList_" use="required"/>
+    <xs:attribute name="ComponentType" type="jdftyp:eComponentTypeList_" use="optional"/>
   </xs:attributeGroup>
   <xs:complexType name="Component_r" mixed="false">
     <xs:complexContent mixed="false">

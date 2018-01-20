@@ -208,7 +208,7 @@
 	</xs:simpleType>
 	<xs:simpleType name="IntegerRangeList">
 		<xs:restriction base="jdftyp:string">
-		 	<xs:pattern value="(([-+]?\d+|INF)(\s*\~\s*([-+]?\d+|INF))?)+"/>
+		 	<xs:pattern value="(([-+]?\d+|INF)(\s*\~\s*([-+]?\d+|INF))?\s*)+"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Integer0To100">
