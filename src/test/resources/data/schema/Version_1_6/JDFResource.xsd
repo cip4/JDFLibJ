@@ -10824,14 +10824,20 @@
     <xs:annotation>
       <xs:appinfo>
         <Version Path="." First="1.3"/>
-        <Constraint Path="ConsumableType" minOccurs="0" maxOccurs="1"/>
-      </xs:appinfo>
+        <Version Path="@Color" First="1.6"/>
+        <Version Path="@ColorDetails" First="1.6"/>
+        <Version Path="@TypeDetails" First="1.6"/>
+        <Version Path="IdentificationField" First="1.6"/>
+       </xs:appinfo>
     </xs:annotation>
   </xs:element>
   <xs:element name="MiscConsumableRef" type="jdf:ResourceRef" substitutionGroup="jdf:ResourceRef"/>
   <xs:element name="MiscConsumableLink" type="jdf:ResourceLink" substitutionGroup="jdf:ResourceLink"/>
   <xs:attributeGroup name="MiscConsumableAttribs_c">
+    <xs:attribute name="Color" type="jdftyp:NamedColor" use="optional"/>
+    <xs:attribute name="ColorDetails" type="jdftyp:string" use="optional"/>
     <xs:attribute name="ConsumableType" type="jdftyp:NMTOKEN" use="optional"/>
+    <xs:attribute name="TypeDetails" type="jdftyp:NMTOKEN" use="optional"/>
   </xs:attributeGroup>
   <xs:attributeGroup name="MiscConsumableAttribs_u">
     <xs:attributeGroup ref="jdf:MiscConsumableAttribs_c"/>
@@ -10881,6 +10887,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="NodeInfo" type="jdf:NodeInfo_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>

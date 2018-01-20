@@ -94,6 +94,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFLot;
+import org.cip4.jdflib.resource.process.JDFMiscConsumable;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
@@ -318,13 +319,34 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	@Test
 	public void testIdentificationField()
 	{
-		final JDFDoc d0 = new JDFDoc("JDF");
+		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d0.getJDFRoot();
 		n.setType(EnumType.Verification);
 		final JDFIdentificationField idf = (JDFIdentificationField) n.addResource(ElementName.IDENTIFICATIONFIELD, EnumUsage.Input);
 		idf.setEncoding(EnumEncoding.Barcode);
 		idf.setEncodingDetails("D1");
 		idf.setPartUsage(EnumPartUsage.Explicit);
+		final String s = d0.write2String(2);
+		final JDFDoc d = p.parseString(s);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
+	}
+
+	/**
+	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
+	 *
+	 */
+	@Test
+	public void testMiscConsumableIdentificationField()
+	{
+		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d0.getJDFRoot();
+		n.setType(EnumType.Verification);
+		final JDFMiscConsumable misc = (JDFMiscConsumable) n.addResource(ElementName.MISCCONSUMABLE, EnumUsage.Input);
+		misc.setConsumableType("typ");
+		final JDFIdentificationField idf = misc.appendIdentificationField();
+		idf.setEncoding(EnumEncoding.Barcode);
+		idf.setEncodingDetails("D1");
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
 		assertNotNull(d);
