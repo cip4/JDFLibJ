@@ -10902,6 +10902,7 @@
 		<Version Path="GangSource" First="1.6"/>
 		<Version Path="JMF" Last="1.4"/>
         <Version Path="MISDetails" First="1.2"/>
+		<Version Path="NotificationFilter" Last="1.5"/>
         <Constraint Path="BusniessInfo" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="Employee" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="EmployeeRef" minOccurs="0" maxOccurs="1"/>
