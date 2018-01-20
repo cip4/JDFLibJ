@@ -2356,6 +2356,7 @@
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
           <xs:element name="ColorantAlias" type="jdf:ColorantAlias_re" minOccurs="0"/>
           <xs:element ref="jdf:ColorantAliasRef" minOccurs="0"/>
+          <xs:element name="ColorantConvertProcess" type="jdf:SeparationList" minOccurs="0"/>
           <xs:element name="ColorantOrder" type="jdf:SeparationList" minOccurs="0"/>
           <xs:element name="ColorantParams" type="jdf:SeparationList" minOccurs="0"/>
           <xs:element name="ColorPool" type="jdf:ColorPool_re" minOccurs="0"/>
@@ -2378,6 +2379,7 @@
             <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
             <xs:element name="ColorantAlias" type="jdf:ColorantAlias_re" minOccurs="0"/>
             <xs:element ref="jdf:ColorantAliasRef" minOccurs="0"/>
+            <xs:element name="ColorantConvertProcess" type="jdf:SeparationList" minOccurs="0"/>
             <xs:element name="ColorantOrder" type="jdf:SeparationList" minOccurs="0"/>
             <xs:element name="ColorantParams" type="jdf:SeparationList" minOccurs="0"/>
             <xs:element name="ColorPool" type="jdf:ColorPool_re" minOccurs="0"/>
