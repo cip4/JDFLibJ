@@ -1696,8 +1696,8 @@
 		<xs:annotation>
 			<xs:appinfo>
 				<Version Path="@Context" First="1.5"/>
-				<Version Path="@LotDetails" First="1.4"/>
-				<Version Path="@LotID" First="1.4"/>
+				<Version Path="@LotDetails" First="1.4" Last="1.5"/>
+				<Version Path="@LotID" First="1.4" Last="1.5"/>
 				<Version Path="@ProductID" First="1.2"/>
 				<Version Path="@ResourceDetails" First="1.4"/>
 				<Version Path="@ResourceID" First="1.3"/>
@@ -1758,8 +1758,8 @@
 		<xs:annotation>
 			<xs:appinfo>
 				<Version Path="@Context" First="1.5"/>
-				<Version Path="@LotDetails" First="1.4"/>
-				<Version Path="@LotID" First="1.4"/>
+				<Version Path="@LotDetails" First="1.4" Last="1.5"/>
+				<Version Path="@LotID" First="1.4" Last="1.5"/>
 				<Version Path="@ProductID" First="1.2"/>
 				<Version Path="@QueueEntryID" First="1.2"/>
 				<Version Path="@ResourceDetails" First="1.4"/>

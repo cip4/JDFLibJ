@@ -170,10 +170,10 @@
 		<xs:annotation>
 			<xs:appinfo>
 				<Version Path="@Depth" First="1.2"/>
-				<Version Path="@RelativeTravel" First="1.2"/>
+				<Version Path="@RelativeTravel" First="1.2" Last="1.5"/>
 				<Version Path="@RelativeStartPosition" First="1.2"/>
 				<Version Path="@RelativeWorkingPath" First="1.2"/>
-				<Version Path="@Travel" First="1.2"/>
+				<Version Path="@Travel" First="1.2" Last="1.5"/>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:complexContent mixed="false">
