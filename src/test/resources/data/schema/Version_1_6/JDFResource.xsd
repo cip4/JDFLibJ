@@ -1210,6 +1210,8 @@
     <xs:annotation>
       <xs:appinfo>
         <Version Path="." First="1.1"/>
+        <Version Path="@BoxType" First="1.6"/>
+        <Version Path="@BoxTypeDetails" First="1.6"/>
         <Version Path="@ComponentsPerRow" First="1.3"/>
         <Version Path="@Columns" First="1.4"/>
         <Version Path="@ComponentOrientation" First="1.4"/>
@@ -1225,6 +1227,8 @@
   <xs:element name="BoxPackingParamsRef" type="jdf:ResourceRef" substitutionGroup="jdf:ResourceRef"/>
   <xs:element name="BoxPackingParamsLink" type="jdf:ResourceLink" substitutionGroup="jdf:ResourceLink"/>
   <xs:attributeGroup name="BoxPackingParamsAttribs_c">
+    <xs:attribute name="BoxType" type="jdftyp:eBoxType" use="optional"/>
+    <xs:attribute name="BoxTypeDetails" type="jdftyp:string" use="optional"/>
     <xs:attribute name="ComponentsPerRow" type="jdftyp:Integer" use="optional"/>
     <xs:attribute name="Columns" type="jdftyp:Integer" use="optional"/>
     <xs:attribute name="ComponentOrientation" type="jdftyp:eComponentOrientation_" use="optional"/>

@@ -760,6 +760,13 @@
 			<xs:enumeration value="Type20"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="eBoxType_">
+		<xs:restriction base="jdftyp:EnumerationBaseType">
+			<xs:enumeration value="Box"/>
+			<xs:enumeration value="Carton"/>
+			<xs:enumeration value="Envelope"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="eBundleType_">
 		<xs:restriction base="jdftyp:EnumerationBaseType">
 			<xs:enumeration value="BoundSet"/>
@@ -3002,6 +3009,8 @@
 			<xs:enumeration value="Empty"/>
 			<xs:enumeration value="Low"/>
 			<xs:enumeration value="OK"/>
+			<xs:enumeration value="High"/>
+			<xs:enumeration value="Full"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="eResourceStatus_">
