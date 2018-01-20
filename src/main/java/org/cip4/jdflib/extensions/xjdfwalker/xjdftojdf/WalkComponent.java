@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,6 +68,9 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
@@ -102,10 +105,11 @@ public class WalkComponent extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void updateAttributes(KElement elem)
+	protected void updateAttributes(final KElement elem)
 	{
-		JDFComponent comp = (JDFComponent) elem;
-		if (comp.getComponentType() == null)
+		final JDFComponent comp = (JDFComponent) elem;
+		final Vector<? extends ValuedEnum> componentType = comp.getComponentType();
+		if (componentType == null || componentType.isEmpty())
 		{
 			comp.setComponentType(EnumComponentType.PartialProduct, null);
 		}
