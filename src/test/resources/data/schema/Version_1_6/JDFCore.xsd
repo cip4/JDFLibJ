@@ -827,6 +827,7 @@
 				<Version Path="@ModuleID" First="1.4"/>
 				<Version Path="@ModuleIndex" First="1.4"/>
 				<Version Path="@ModuleType" First="1.4"/>
+				<Version Path="@QueueEntryID" First="1.6"/>
 				<Version Path="Event" First="1.2"/>
 				<Version Path="Event" First="1.2"/>
 				<Version Path="Part" First="1.1"/>
@@ -850,6 +851,7 @@
 				<xs:attribute name="ModuleID" type="jdftyp:string" use="optional"/>
 				<xs:attribute name="ModuleIndex" type="jdftyp:IntegerRangeList" use="optional"/>
 				<xs:attribute name="ModuleType" type="jdftyp:NMTOKEN" use="optional"/>
+				<xs:attribute name="QueueEntryID" type="jdftyp:NMTOKEN" use="optional"/>
 				<xs:attribute name="Type" type="jdftyp:NMTOKEN" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
