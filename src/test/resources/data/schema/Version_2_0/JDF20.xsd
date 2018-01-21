@@ -3744,6 +3744,7 @@
         <xs:complexType>
             <xs:attribute name="ChannelType" type="NMTOKEN" use="required"/>
             <xs:attribute name="ChannelUsage" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="DescriptiveName" type="string" use="optional"/>
             <xs:attribute name="Locator" type="string" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -3755,6 +3756,7 @@
                 <xs:element maxOccurs="unbounded" minOccurs="0" name="OrganizationalUnit" type="textElement"/>
             </xs:sequence>
             <xs:attribute name="CompanyID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DescriptiveName" type="string" use="optional"/>
             <xs:attribute name="OrganizationName" type="string" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -4850,6 +4852,7 @@
     <xs:element name="Person">
         <xs:complexType>
             <xs:attribute name="AdditionalNames" type="string" use="optional"/>
+            <xs:attribute name="DescriptiveName" type="string" use="optional"/>
             <xs:attribute name="FamilyName" type="string" use="optional"/>
             <xs:attribute name="FirstName" type="string" use="optional"/>
             <xs:attribute name="JobTitle" type="string" use="optional"/>
