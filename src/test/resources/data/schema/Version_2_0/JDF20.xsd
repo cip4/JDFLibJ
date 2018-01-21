@@ -3219,12 +3219,14 @@
     <xs:element name="Address">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" name="ExtendedAddress" type="textElement"/>
+                <xs:element name="AddressLine" maxOccurs="unbounded" minOccurs="0" type="textElement"/>
             </xs:sequence>
+            <xs:attribute name="AddressUsage" type="xs:NMTOKEN" use="optional"/>
             <xs:attribute name="City" type="string" use="optional"/>
             <xs:attribute name="CivicNumber" type="string" use="optional"/>
             <xs:attribute name="Country" type="string" use="optional"/>
-            <xs:attribute name="CountryCode" type="string" use="optional"/>
+            <xs:attribute name="CountryCode" type="xs:NMTOKEN" use="optional"/>
+            <xs:attribute name="ExtendedAddress" type="string" use="optional"/>
             <xs:attribute name="PostalCode" type="string" use="optional"/>
             <xs:attribute name="PostBox" type="string" use="optional"/>
             <xs:attribute name="Region" type="string" use="optional"/>
