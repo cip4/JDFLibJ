@@ -111,6 +111,8 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContentMetaData;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
+import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
@@ -139,8 +141,6 @@ public class FixVersionTest extends JDFTestCaseBase
 		n = mDoc.getJDFRoot();
 
 	}
-
-	// /////////////////////////////////////////////////////////////////////
 
 	/**
 	 *
@@ -469,6 +469,34 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertNull(ci.getAttribute(AttributeName.NUMCOLORS, null, null));
 		assertEquals(ci.getColorsUsed().getSeparations().size(), 1);
 		assertEquals("K", ci.getColorsUsed().getSeparations().get(0));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSourceObjects()
+	{
+		final JDFColorSpaceConversionOp co = ((JDFColorSpaceConversionParams) n.getCreateResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input, 0)).appendColorSpaceConversionOp();
+
+		co.addSourceObject(JDFColorSpaceConversionOp.EnumSourceObjects.All);
+		final boolean converted = new FixVersion(EnumVersion.Version_1_6).convert(co);
+		assertTrue(converted);
+		assertNull(co.getSourceObjects());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSourceObjects2()
+	{
+		final JDFColorSpaceConversionOp co = ((JDFColorSpaceConversionParams) n.getCreateResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input, 0)).appendColorSpaceConversionOp();
+
+		co.addSourceObject(JDFColorSpaceConversionOp.EnumSourceObjects.ImagePhotographic);
+		final boolean converted = new FixVersion(EnumVersion.Version_1_6).convert(co);
+		assertTrue(converted);
+		assertEquals(1, co.getSourceObjects().size());
 	}
 
 	/**

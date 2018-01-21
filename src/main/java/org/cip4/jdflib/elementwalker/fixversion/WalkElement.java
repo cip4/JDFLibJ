@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,6 +76,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -234,6 +235,10 @@ public class WalkElement extends BaseWalker
 			final JDFShape shape = JDFShape.createShape(value);
 			el.setAttribute(key, shape, null);
 		}
+		else if (EnumAttributeType.enumerations.equals(attType))
+		{
+			fixSourceObjects(el, key, value);
+		}
 		if (fixVersion.bFixIDs && value.length() > 0 && StringUtils.isNumeric(value.substring(0, 1)))
 		{
 			fixIDs(el, ai, key, value);
@@ -245,6 +250,23 @@ public class WalkElement extends BaseWalker
 		if (fixVersion.bZappInvalid && !AttributeInfo.validStringForType(value, attType, null))
 		{
 			el.removeAttribute_KElement(key, null);
+		}
+	}
+
+	/**
+	 *
+	 * @param el
+	 * @param key
+	 * @param value
+	 */
+	protected void fixSourceObjects(final JDFElement el, final String key, final String value)
+	{
+		if (AttributeName.SOURCEOBJECTS.equals(key) && fixVersion.version.isGreater(EnumVersion.Version_1_5))
+		{
+			if (StringUtil.hasToken(value, "All", null, 0))
+			{
+				el.removeAttribute_KElement(key, null);
+			}
 		}
 	}
 

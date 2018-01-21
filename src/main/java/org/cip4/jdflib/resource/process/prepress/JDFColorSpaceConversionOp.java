@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  *
@@ -79,6 +79,9 @@
  */
 package org.cip4.jdflib.resource.process.prepress;
 
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp;
 import org.cip4.jdflib.core.AttributeName;
@@ -91,36 +94,36 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 
 	/**
 	 * Constructor for JDFColorSpaceConversionOp
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFColorSpaceConversionOp(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFColorSpaceConversionOp(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFColorSpaceConversionOp
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFColorSpaceConversionOp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFColorSpaceConversionOp(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFColorSpaceConversionOp
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFColorSpaceConversionOp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFColorSpaceConversionOp(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -129,7 +132,7 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -140,7 +143,7 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 
 	/**
 	 * Gets of 'this' an existing child FileSpec(AbstractProfile) element
-	 * 
+	 *
 	 * @return JDFFileSpec the matching AbstractProfile element
 	 */
 	public JDFFileSpec getAbstractProfile()
@@ -151,7 +154,7 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 	/**
 	 * Gets of 'this' child FileSpec(AbstractProfile) element, optionally
 	 * creates it, if it doesn't exist.
-	 * 
+	 *
 	 * @return JDFFileSpec the matching AbstractProfile element
 	 */
 	public JDFFileSpec getCreateAbstractProfile()
@@ -166,12 +169,12 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 
 	/**
 	 * Appends new FileSpec(AbstractProfile) element to the end of 'this'
-	 * 
+	 *
 	 * @return JDFFileSpec newly created child AbstractProfile element
 	 */
 	public JDFFileSpec appendAbstractProfile()
 	{
-		JDFFileSpec res = appendFileSpec();
+		final JDFFileSpec res = appendFileSpec();
 		res.setResourceUsage("AbstractProfile");
 
 		return res;
@@ -179,7 +182,7 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 
 	/**
 	 * Gets of 'this' an existing child FileSpec(SourceProfile) element
-	 * 
+	 *
 	 * @return JDFFileSpec the matching SourceProfile element
 	 */
 	public JDFFileSpec getSourceProfile()
@@ -190,7 +193,7 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 	/**
 	 * Gets of 'this' child FileSpec(SourceProfile) element, optionally creates
 	 * it, if it doesn't exist.
-	 * 
+	 *
 	 * @return JDFFileSpec the matching SourceProfile element
 	 */
 	public JDFFileSpec getCreateSourceProfile()
@@ -205,15 +208,34 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 
 	/**
 	 * Appends new FileSpec(SourceProfile) element to the end of 'this'
-	 * 
+	 *
 	 * @return JDFFileSpec newly created child SourceProfile element
 	 */
 	public JDFFileSpec appendSourceProfile()
 	{
-		JDFFileSpec res = appendFileSpec();
+		final JDFFileSpec res = appendFileSpec();
 		res.setResourceUsage("SourceProfile");
 
 		return res;
+	}
+
+	/**
+	 *
+	 * @param val
+	 */
+	public void addSourceObject(final EnumSourceObjects val)
+	{
+		@SuppressWarnings("unchecked")
+		final Vector<ValuedEnum> v = (Vector<ValuedEnum>) getSourceObjects();
+		if (val != null && v == null)
+		{
+			setAttribute(AttributeName.SOURCEOBJECTS, val.getName());
+		}
+		else if (val != null && !v.contains(val))
+		{
+			v.add(val);
+			setSourceObjects(v);
+		}
 	}
 
 }
