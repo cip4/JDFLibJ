@@ -2902,7 +2902,7 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
-                <xs:attribute name="PrintProcess" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="PrintProcess" type="NMTOKENS" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
