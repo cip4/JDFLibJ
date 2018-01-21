@@ -5112,7 +5112,7 @@
                 <xs:attribute name="Automation" type="EnumAutomation" use="optional"/>
                 <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
                 <xs:attribute name="ContentRefs" type="IDREFS" use="optional"/>
-                <xs:attribute name="Docs" type="IntegerList" use="optional"/>
+                <xs:attribute name="Docs" type="IntegerRange" use="optional"/>
                 <xs:attribute name="EndOfDocument" type="boolean" use="optional"/>
                 <xs:attribute name="EndOfSet" type="boolean" use="optional"/>
                 <xs:attribute name="FinishedPages" type="integer" use="optional"/>
