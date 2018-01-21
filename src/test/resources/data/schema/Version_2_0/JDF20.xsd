@@ -686,7 +686,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="SourceObjects">
+    <xs:simpleType name="SourceObject">
         <xs:restriction base="xs:string">
             <xs:enumeration value="ImagePhotographic"/>
             <xs:enumeration value="ImageScreenShot"/>
@@ -695,6 +695,11 @@
             <xs:enumeration value="Text"/>
         </xs:restriction>
     </xs:simpleType>
+                   
+    <xs:simpleType name="SourceObjects">
+        <xs:list itemType="SourceObject"/>
+    </xs:simpleType>
+
 
     <xs:simpleType name="textElement">
         <xs:restriction base="xs:string"/>
@@ -5895,11 +5900,7 @@
             <xs:attribute name="AdjustHue" type="float" use="optional"/>
             <xs:attribute name="AdjustLightness" type="float" use="optional"/>
             <xs:attribute name="AdjustSaturation" type="float" use="optional"/>
-            <xs:attribute name="SourceObjects" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="SourceObjects"/>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="SourceObjects" type="SourceObjects" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5963,11 +5964,7 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="SourceObjects" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="SourceObjects"/>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="SourceObjects" type="SourceObjects" use="optional"/>
             <xs:attribute name="SourceRenderingIntent" type="RenderingIntent" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
