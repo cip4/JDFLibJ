@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -2161,6 +2161,54 @@ class PostXJDFWalker extends BaseElementWalker
 
 	}
 
+	public class WalkCustomerInfo extends WalkResourceElement
+	{
+
+		/**
+		 *
+		 */
+		public WalkCustomerInfo()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return !isRetainAll();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ElementName.CUSTOMERINFO, null);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#updateAttributes(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		void updateAttributes(final KElement xjdf)
+		{
+			super.updateAttributes(xjdf);
+			xjdf.removeAttribute("ContactRefs");
+		}
+
+	}
+
+	/**
+	 *
+	 *
+	 *
+	 */
 	public class WalkLooseBindindingParams extends WalkResourceElement
 	{
 

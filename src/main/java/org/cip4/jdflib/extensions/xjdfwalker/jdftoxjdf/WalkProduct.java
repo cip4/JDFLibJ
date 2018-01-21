@@ -105,7 +105,7 @@ public class WalkProduct extends WalkJDF
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final JDFNode node = (JDFNode) jdf;
-		boolean matchesID = matchesRootID(node);
+		final boolean matchesID = matchesRootID(node);
 		if (matchesID)
 		{
 			prepareRoot(node, xjdf);
@@ -150,7 +150,7 @@ public class WalkProduct extends WalkJDF
 		final VElement vComp = node.getPredecessors(true, true);
 		if (vComp != null)
 		{
-			for (KElement e : vComp)
+			for (final KElement e : vComp)
 			{
 				final JDFNode nPre = (JDFNode) e;
 				if (EnumType.Product.equals(nPre.getEnumType()))
@@ -160,7 +160,7 @@ public class WalkProduct extends WalkJDF
 			}
 		}
 
-		for (String kid : kids)
+		for (final String kid : kids)
 		{
 			prod.appendAttribute(XJDFConstants.ChildRefs, "IDP_" + kid, null, null, false);
 		}
@@ -175,7 +175,7 @@ public class WalkProduct extends WalkJDF
 		final JDFResourceLink cOutLink = node.getLink(0, ElementName.COMPONENT, new JDFAttributeMap(AttributeName.USAGE, EnumUsage.Output), null);
 		if (cOutLink == null)
 			return false;
-		int amount = (int) cOutLink.getAmountPoolSumDouble(AttributeName.AMOUNT, null);
+		final int amount = (int) cOutLink.getAmountPoolSumDouble(AttributeName.AMOUNT, null);
 		if (amount > 0)
 		{
 			prod.setAttribute(AttributeName.AMOUNT, amount, null);
@@ -183,12 +183,12 @@ public class WalkProduct extends WalkJDF
 		prod.renameAttribute("AmountGood", "Amount", null, null);
 		prod.removeAttribute("AmountWaste");
 
-		JDFComponent component = (JDFComponent) cOutLink.getTarget();
+		final JDFComponent component = (JDFComponent) cOutLink.getTarget();
 		if (component != null)
 		{
 			prod.copyAttribute(AttributeName.PRODUCTTYPE, component);
 			prod.copyAttribute(AttributeName.PRODUCTTYPEDETAILS, component);
-			prod.copyAttribute(AttributeName.PRODUCTID, component);
+			prod.copyAttribute(XJDFConstants.ExternalID, component, AttributeName.PRODUCTID, null, null);
 			prod.copyAttribute(AttributeName.DESCRIPTIVENAME, component);
 			if (component.isComponentType(EnumComponentType.FinalProduct))
 			{
@@ -216,7 +216,7 @@ public class WalkProduct extends WalkJDF
 
 		if (readComponent(node, prod))
 		{
-			JDFAttributeMap map = jdf.getAttributeMap();
+			final JDFAttributeMap map = jdf.getAttributeMap();
 			map.remove(AttributeName.ID);
 			map.remove(AttributeName.TYPE);
 			map.remove(AttributeName.ACTIVATION);
@@ -228,7 +228,7 @@ public class WalkProduct extends WalkJDF
 			map.remove(AttributeName.XMLNS);
 			map.remove(AttributeName.XSITYPE);
 			map.remove(AttributeName.JOBID);
-			if (prod.getNonEmpty(AttributeName.PRODUCTID) == null)
+			if (prod.getNonEmpty(XJDFConstants.ExternalID) == null)
 			{
 				map.renameKey(AttributeName.JOBPARTID, XJDFConstants.ExternalID);
 			}

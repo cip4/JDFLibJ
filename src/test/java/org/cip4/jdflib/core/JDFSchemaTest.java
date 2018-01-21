@@ -82,10 +82,12 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumEncoding;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
@@ -326,6 +328,25 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		idf.setEncoding(EnumEncoding.Barcode);
 		idf.setEncodingDetails("D1");
 		idf.setPartUsage(EnumPartUsage.Explicit);
+		final String s = d0.write2String(2);
+		final JDFDoc d = p.parseString(s);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
+	}
+
+	/**
+	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
+	 * @throws DataFormatException
+	 *
+	 */
+	@Test
+	public void testIntegerrange() throws DataFormatException
+	{
+		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d0.getJDFRoot();
+		n.setType(EnumType.ColorSpaceConversion);
+		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		rl.setPages(new JDFIntegerRangeList("1 ~ 3 5 7 9~-1"));
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
 		assertNotNull(d);

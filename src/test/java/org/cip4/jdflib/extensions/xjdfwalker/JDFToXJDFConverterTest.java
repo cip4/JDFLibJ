@@ -79,6 +79,7 @@ import java.util.Vector;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
+import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoExposedMedia.EnumPlateType;
 import org.cip4.jdflib.auto.JDFAutoGlue.EnumWorkingDirection;
@@ -151,6 +152,7 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFContentObject;
+import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -185,15 +187,28 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	public void testExtendedAddress()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
-		final JDFNode n = JDFNode.createRoot();
+		final JDFNode n = createBaseProductNode();
 		final JDFContact c = n.appendCustomerInfo().appendContact();
 		c.makeRootResource(null, null, true);
 		c.setContactTypes(EnumContactType.Customer);
 		c.appendAddress().setExtendedAddressText("foo");
-		n.ensureLink(c, EnumUsage.Input, null);
+		//n.ensureLink(c, EnumUsage.Input, null);
 		final KElement e = conv.convert(n);
 		final KElement resource = new XJDFHelper(e).getSet(ElementName.CONTACT, null).getPartition(0).getResource();
 		assertEquals("foo", resource.getElement(ElementName.ADDRESS).getAttribute(ElementName.EXTENDEDADDRESS));
+		writeRoundTrip(n, "extendedAddress");
+	}
+
+	protected JDFNode createBaseProductNode()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.setType(EnumType.Product);
+		n.setDescriptiveName("description");
+
+		final JDFComponent jdfComponent = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		jdfComponent.setProductType("foo");
+		jdfComponent.setComponentType(EnumComponentType.PartialProduct, null);
+		return n;
 	}
 
 	/**
@@ -207,9 +222,12 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ImageSetting);
 		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
+		n.addResource(ElementName.RUNLIST, EnumUsage.Input).setAttribute(AttributeName.NPAGE, "4");
 		xm.appendMedia().setMediaSetCount(42);
 		final KElement xjdf = conv.convert(n);
 		assertNotNull(new XJDFHelper(xjdf).getSet(ElementName.MEDIA, 0));
+		writeRoundTrip(n, "xm");
+
 	}
 
 	/**
@@ -353,7 +371,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	@Test
 	public void testSpanIntent()
 	{
-		final JDFNode nP = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFNode nP = createBaseProductNode();
 		nP.setType(EnumType.Product);
 		nP.setDescriptiveName("desc");
 		final JDFMediaIntent mi = (JDFMediaIntent) nP.addResource(ElementName.MEDIAINTENT, EnumUsage.Input);
@@ -369,6 +387,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/MediaIntent/@MediaQuality", null), "foo");
 		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/MediaIntent/Brightness"));
 		assertNull(xjdf.getXPathElement("ProductList/Product/Intent/MediaIntent/@Brightness"));
+		writeRoundTrip(nP, "intent");
 	}
 
 	/**
@@ -395,9 +414,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	@Test
 	public void testPackingIntent()
 	{
-		final JDFNode nP = new JDFDoc(ElementName.JDF).getJDFRoot();
-		nP.setType(EnumType.Product);
-		nP.setDescriptiveName("desc");
+		final JDFNode nP = createBaseProductNode();
 		final JDFPackingIntent pi = (JDFPackingIntent) nP.addResource(ElementName.PACKINGINTENT, EnumUsage.Input);
 		pi.appendBoxedQuantity().setActual(43);
 
@@ -413,6 +430,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf.write2File(sm_dirTestDataTemp + "packretain.xjdf");
 		assertNotNull(xjdf);
 		assertNotNull(xjdf.getXPathElement("ProductList/Product/Intent/PackingIntent"));
+		writeRoundTrip(nP, "pack");
 	}
 
 	/**
@@ -422,9 +440,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	@Test
 	public void testScreeningIntent()
 	{
-		final JDFNode nP = new JDFDoc(ElementName.JDF).getJDFRoot();
-		nP.setType(EnumType.Product);
-		nP.setDescriptiveName("desc");
+		final JDFNode nP = createBaseProductNode();
 		final JDFScreeningIntent pi = (JDFScreeningIntent) nP.addResource(ElementName.SCREENINGINTENT, EnumUsage.Input);
 		pi.appendScreeningType().setActual(EnumSpanScreeningType.AM);
 
@@ -440,6 +456,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf.write2File(sm_dirTestDataTemp + "screenretain.xjdf");
 		assertNotNull(xjdf);
 		assertNotNull(xjdf.getXPathElement("ProductList/Product/Intent/ScreeningIntent"));
+		writeRoundTrip(nP, "screen");
 	}
 
 	/**
@@ -449,9 +466,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	@Test
 	public void testRetainResPool()
 	{
-		final JDFNode nP = new JDFDoc(ElementName.JDF).getJDFRoot();
-		nP.setType(EnumType.Product);
-		nP.setDescriptiveName("desc");
+		final JDFNode nP = createBaseProductNode();
 		final JDFScreeningIntent pi = (JDFScreeningIntent) nP.addResource(ElementName.SCREENINGINTENT, EnumUsage.Input);
 		pi.appendScreeningType().setActual(EnumSpanScreeningType.AM);
 
@@ -463,6 +478,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf.write2File(sm_dirTestDataTemp + "retain.xjdf");
 		assertNotNull(xjdf);
 		assertNull(xjdf.getChildByTagName(ElementName.RESOURCEPOOL, null, 0, null, false, false));
+		writeRoundTrip(nP, "pack");
 	}
 
 	/**
@@ -580,14 +596,19 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
-		final JDFResource c = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		final JDFConventionalPrintingParams cp = (JDFConventionalPrintingParams) n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
+		cp.setWorkStyle(EnumWorkStyle.WorkAndBack);
+		final JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		c.setDescriptiveName("desc");
+		c.setComponentType(EnumComponentType.PartialProduct, null);
 		c.addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "s1");
 		final KElement x = conv.convert(n);
 		assertEquals(x.toXML().indexOf(AttributeName.SIGNATURENAME), -1);
 		conv.setRemoveSignatureName(false);
 		final KElement x2 = conv.convert(n);
 		assertTrue(x2.toXML().indexOf(AttributeName.SIGNATURENAME) > 0);
+		writeRoundTrip(n, "print");
+
 	}
 
 	/**
@@ -651,12 +672,14 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		conv.setWantProduct(true);
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Product);
-		final JDFResource c = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		final JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		c.setDescriptiveName("desc");
 		c.setProductID("prodID");
+		c.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 		n.setStatus(EnumNodeStatus.Cleanup);
 		final KElement xjdf = conv.convert(n);
-		assertEquals(xjdf.getXPathAttribute("ProductList/Product/@ProductID", null), "prodID");
+		assertEquals(xjdf.getXPathAttribute("ProductList/Product/@ExternalID", null), "prodID");
+		writeRoundTrip(n, "pid");
 	}
 
 	/**
@@ -673,6 +696,13 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		cc.getCreateDeviceColorantOrder().setSeparations(new VString("Magenta Cyan Yellow Black", null));
 		cc.setProcessColorModel("DeviceCMYK");
 
+		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
+		xm.setPunchType("pt");
+		xm.appendMedia().setMediaType(EnumMediaType.Plate);
+
+		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		rl.setPages(JDFIntegerRangeList.createIntegerRangeList("3~5"));
+
 		final JDFResourceLink ccl = n.getLink(cc, null);
 		ccl.appendPart().setSeparation("Cyan");
 		ccl.appendPart().setSeparation("Black");
@@ -686,6 +716,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(ccNew.getAttribute(ElementName.COLORANTPARAMS), "Cyan Magenta Yellow Black");
 		assertEquals(ccNew.getAttribute(ElementName.COLORANTORDER), "Cyan Black");
 		assertNull(ccNew.getNonEmpty(ElementName.DEVICECOLORANTORDER));
+
+		writeRoundTrip(n, "colorcont");
 	}
 
 	/**
@@ -701,9 +733,17 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		cc.getCreateColorantOrder().setSeparations(new VString("Cyan Magenta Yellow Black", null));
 		cc.getCreateDeviceColorantOrder().setSeparations(new VString("Magenta Cyan Yellow Black", null));
 		cc.setProcessColorModel("DeviceCMYK");
+
+		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
+		xm.setPunchType("pt");
+		xm.appendMedia().setMediaType(EnumMediaType.Plate);
+
+		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		rl.setPages(JDFIntegerRangeList.createIntegerRangeList("3~5"));
+
 		final JDFColorPool cp = (JDFColorPool) cc.appendColorPool().makeRootResource(null, null, true);
 		final JDFColor color = cp.appendColor();
-		color.setSeparation("spot");
+		color.setName("spot");
 		color.setGray(44);
 
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -711,6 +751,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFColorantControl ccNew = (JDFColorantControl) new XJDFHelper(xjdf).getPartition(ElementName.COLORANTCONTROL, 0, 0).getResource();
 		assertNull(ccNew.getNonEmpty("ColorRef"));
+		writeRoundTrip(n, "colorpool");
 
 	}
 
@@ -748,6 +789,17 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		cp.appendColorWithName("sep 1", null);
 		cp.appendColorWithName("sep 2", null);
 
+		final JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		cc.getCreateColorantOrder().setSeparations(new VString("Cyan,Magenta,Yellow,Black,sep 1,sep 2", ","));
+		cc.setProcessColorModel("DeviceCMYK");
+
+		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
+		xm.setPunchType("pt");
+		xm.appendMedia().setMediaType(EnumMediaType.Plate);
+
+		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		rl.setPages(JDFIntegerRangeList.createIntegerRangeList("3~5"));
+
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
 
@@ -758,6 +810,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 			assertEquals(cNew.getAttribute(AttributeName.ACTUALCOLORNAME), "sep " + (i + 1));
 			assertEquals(partition.getPartMap().get(AttributeName.SEPARATION), "sep_" + (i + 1));
 		}
+		writeRoundTrip(n, "colorspaces");
 	}
 
 	/**

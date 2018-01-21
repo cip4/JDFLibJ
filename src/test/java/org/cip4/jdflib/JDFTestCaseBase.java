@@ -531,11 +531,10 @@ public abstract class JDFTestCaseBase
 		{
 			printValid(converted);
 		}
-
 		assertTrue(fileBase + ".xjdf.jdf", valid);
 	}
 
-	private XMLDoc printValid(final JDFDoc converted)
+	static protected XMLDoc printValid(final JDFDoc converted)
 	{
 		final JDFValidator jdfValidator = new JDFValidator();
 		jdfValidator.bQuiet = true;

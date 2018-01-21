@@ -72,6 +72,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.process.JDFContact;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
@@ -110,9 +111,9 @@ public class WalkCustomerInfo extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void removeUnusedElements(KElement jdf)
+	protected void removeUnusedElements(final KElement jdf)
 	{
-		jdf.removeChildren(ElementName.CONTACT, null, null);
+		jdf.removeChildrenByClass(JDFContact.class);
 		super.removeUnusedElements(jdf);
 	}
 

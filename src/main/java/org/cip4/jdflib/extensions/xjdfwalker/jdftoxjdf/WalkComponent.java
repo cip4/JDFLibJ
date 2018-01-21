@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,7 +74,6 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -113,7 +112,7 @@ public class WalkComponent extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFComponent;
+		return !jdfToXJDF.isRetainAll();
 	}
 
 	/**
@@ -129,7 +128,7 @@ public class WalkComponent extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void removeUnusedElements(KElement jdf)
+	protected void removeUnusedElements(final KElement jdf)
 	{
 		jdf.removeChild(ElementName.LAYOUT, null, 0);
 		jdf.removeChild(ElementName.ASSEMBLY, null, 0);
@@ -141,9 +140,9 @@ public class WalkComponent extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
-		String prodType = map.get(AttributeName.PRODUCTTYPE);
+		final String prodType = map.get(AttributeName.PRODUCTTYPE);
 		if ("Unknown".equals(prodType))
 			map.remove(AttributeName.PRODUCTTYPE);
 		updateComponentType(map);

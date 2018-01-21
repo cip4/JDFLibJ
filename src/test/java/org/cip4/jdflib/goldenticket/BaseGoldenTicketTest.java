@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -152,7 +152,7 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 	 * @param templateName the file name root of the 3 files
 	 * @param checkSchema TODO
 	 */
-	public static void write9GTFiles(final BaseGoldenTicket goldenTicket, final String templateName, Boolean checkSchema)
+	public static void write9GTFiles(final BaseGoldenTicket goldenTicket, final String templateName, final Boolean checkSchema)
 	{
 		writeRoundTrip(goldenTicket, "GoldenTicket_Manager_", templateName, checkSchema);
 
@@ -171,32 +171,37 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 	 * @param templateName
 	 * @param checkSchema TODO
 	 */
-	protected static void writeRoundTrip(final BaseGoldenTicket goldenTicket, String gtType, final String templateName, Boolean checkSchema)
+	protected static void writeRoundTrip(final BaseGoldenTicket goldenTicket, final String gtType, final String templateName, final Boolean checkSchema)
 	{
 
 		goldenTicket.write2File(sm_dirTestDataTemp + gtType + templateName + ".jdf", 2);
 		assertTrue(gtType + templateName + ".jdf", goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
 
-		XJDF20 xjdfConv = new XJDF20();
+		final XJDF20 xjdfConv = new XJDF20();
 
-		KElement xjdfRoot = xjdfConv.convert(goldenTicket.getExpandedNode());
-		String tmpXJDF = sm_dirTestDataTemp + gtType + templateName + ".xjdf";
+		final KElement xjdfRoot = xjdfConv.convert(goldenTicket.getExpandedNode());
+		final String tmpXJDF = sm_dirTestDataTemp + gtType + templateName + ".xjdf";
 		xjdfRoot.getOwnerDocument_KElement().write2File(tmpXJDF, 2, false);
 
-		JDFParser p = getXJDFSchemaParser();
-		JDFDoc docXJDF = p.parseFile(tmpXJDF);
-		XMLDoc dVal = docXJDF.getValidationResult();
-		String schemapath = sm_dirTestDataTemp + gtType + templateName + ".schema.xml";
+		final JDFParser p = getXJDFSchemaParser();
+		final JDFDoc docXJDF = p.parseFile(tmpXJDF);
+		final XMLDoc dVal = docXJDF.getValidationResult();
+		final String schemapath = sm_dirTestDataTemp + gtType + templateName + ".schema.xml";
 		dVal.write2File(schemapath, 2, false);
-		boolean localCheckSchema = checkSchema == null ? defaultCheckSchema : checkSchema.booleanValue();
+		final boolean localCheckSchema = checkSchema == null ? defaultCheckSchema : checkSchema.booleanValue();
 		if (localCheckSchema)
 		{
 			assertEquals(schemapath, "Valid", dVal.getRoot().getAttribute("ValidationResult"));
 		}
-		XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
-		JDFDoc converted = jdfConverter.convert(xjdfRoot);
+		final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
+		final JDFDoc converted = jdfConverter.convert(xjdfRoot);
 		converted.write2File(sm_dirTestDataTemp + gtType + templateName + ".xjdf.jdf", 2, false);
-		assertTrue(gtType + templateName + ".xjdf.jdf", converted.getJDFRoot().isValid(EnumValidationLevel.Complete));
+		final boolean valid = converted.getJDFRoot().isValid(EnumValidationLevel.Complete);
+		if (!valid)
+		{
+			printValid(converted);
+		}
+		assertTrue(gtType + templateName + ".xjdf.jdf", valid);
 	}
 
 }
