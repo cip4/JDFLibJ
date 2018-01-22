@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -111,7 +111,7 @@ public class XJDFAdditionalExampleTest extends JDFTestCaseBase
 		final SetHelper cp = xjdfHelper.getCreateSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
 		cp.getCreatePartition(null, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.getName());
 
-		final SetHelper pm = xjdfHelper.getCreateSet(ElementName.MEDIA, EnumUsage.Input);
+		final SetHelper pm = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
 		final SetHelper dev = xjdfHelper.getCreateSet(ElementName.DEVICE, EnumUsage.Input);
 		final ResourceHelper mediaPart = pm.getCreatePartition(null, true);
 		final JDFMedia plateMedia = (JDFMedia) mediaPart.getResource();
@@ -125,6 +125,7 @@ public class XJDFAdditionalExampleTest extends JDFTestCaseBase
 		final SetHelper colorH = xjdfHelper.getCreateSet(ElementName.COLOR, EnumUsage.Input);
 
 		final SetHelper niH = xjdfHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
+		niH.removePartitions();
 
 		final JDFAttributeMap surfaceMap = new JDFAttributeMap(AttributeName.SHEETNAME, "S1");
 		surfaceMap.put(AttributeName.SIDE, "Back");
