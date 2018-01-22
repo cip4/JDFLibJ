@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -316,6 +316,28 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		assertTrue(v.overlapsMap(v2));
 		v2.put("foo", "notbar");
 		assertFalse(v.overlapsMap(v2));
+	}
+
+	/**
+	 * tests OvelapsMap for vectors of maps
+	 */
+	@Test
+	public void testOverlapMapVector()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		final JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		m2.put("a2", "v3");
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		v.add(m1);
+		v.add(m2);
+		final VJDFAttributeMap v2 = new VJDFAttributeMap();
+		final VJDFAttributeMap clone = v.clone();
+		clone.overlapMap(v2);
+		assertEquals(v.size(), clone.size());
+		v2.add(new JDFAttributeMap("a2", "v2"));
+		clone.overlapMap(v2);
+		assertEquals(1, clone.size());
 	}
 
 	/**

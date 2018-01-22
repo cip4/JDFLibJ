@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -731,17 +731,17 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * Method overlapMap. only entries that contain at least one matching map entry are retained
 	 *
-	 * @param map the map to check against
+	 * @param vMap the map to check against
 	 */
-	public void overlapMap(final VJDFAttributeMap map)
+	public void overlapMap(final VJDFAttributeMap vMap)
 	{
-		if (map == null)
+		if (vMap == null)
 			return;
-		final Set<JDFAttributeMap> set = ContainerUtil.toHashSet(this);
-		for (int i = this.size() - 1; i >= 0; i--)
+		final Set<JDFAttributeMap> set = ContainerUtil.toHashSet(vMap);
+		for (int i = size() - 1; i >= 0; i--)
 		{
 			final JDFAttributeMap attributeMap = get(i);
-			if (!set.contains(attributeMap) && !attributeMap.overlapMap(map))
+			if (!set.contains(attributeMap) && !attributeMap.overlapMap(vMap))
 			{
 				removeElementAt(i);
 			}
