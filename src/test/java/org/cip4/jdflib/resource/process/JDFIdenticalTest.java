@@ -71,6 +71,7 @@ package org.cip4.jdflib.resource.process;
 import static org.junit.Assert.assertEquals;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -178,6 +179,26 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 		b.setIdentical(f);
 		sh.setDescriptiveName("sh");
 		dpp.collapse(false, false);
+		assertEquals("sh", sh.getDescriptiveName());
+	}
+
+	/**
+	* test expand and collapse methods
+	*/
+	@Test
+	public void testUpdateFromLeavesIdentical()
+	{
+		final JDFNode n = JDFNode.createRoot();
+
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
+		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
+		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
+		final JDFResource b = sh.addPartition(EnumPartIDKey.Side, "Back");
+		f.setDescriptiveName("s");
+		b.setIdentical(f);
+		sh.setDescriptiveName("sh");
+		dpp.updateAttributeFromLeaves(AttributeName.DESCRIPTIVENAME, null, false);
 		assertEquals("sh", sh.getDescriptiveName());
 	}
 

@@ -5108,7 +5108,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String updateAttributeFromLeaves(final String attName, final String nsURI, final boolean bDirect)
 	{
-		final VElement v = getLeaves(false);
+		final VElement v = JDFIdentical.removeIdenticals(getLeaves(false));
 		final int size = v == null ? 0 : v.size();
 		if (size == 0 || (size == 1 && this == v.get(0)))
 		{
@@ -8346,7 +8346,7 @@ public class JDFResource extends JDFElement
 
 	/**
 	 * if true, subelements are initialized with a class attribute
-	
+
 	 * @param autoSubElementClass
 	 */
 	public static void setAutoSubElementClass(final boolean autoSubElementClass)
