@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,6 +72,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
@@ -87,8 +89,8 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 	@Test
 	public void testGetTargetRoot()
 	{
-		JDFNode n = JDFNode.createRoot();
-		JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
 		r.appendIdentical();
 		assertEquals(r, r.getIdentical().getTarget());
 	}
@@ -99,10 +101,10 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 	@Test
 	public void testGetTargetLeafGood()
 	{
-		JDFNode n = JDFNode.createRoot();
-		JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
-		JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
-		JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
+		final JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
 		r1.setIdentical(r2);
 		assertEquals(r2, r.getPartition(new JDFAttributeMap(EnumPartIDKey.SheetName, "s1"), null));
 		assertEquals(r2, r.getPartition(new JDFAttributeMap(EnumPartIDKey.SheetName, "s2"), null));
@@ -114,10 +116,10 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 	@Test
 	public void testGetTargetLeafBad()
 	{
-		JDFNode n = JDFNode.createRoot();
-		JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
-		JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
-		JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
+		final JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
 		r1.setIdentical(r2);
 		r1.getIdentical().setPartMap(new JDFAttributeMap(EnumPartIDKey.SheetName, "s1"));
 		assertEquals(r1, r.getPartition(new JDFAttributeMap(EnumPartIDKey.SheetName, "s1"), null));
@@ -128,14 +130,50 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetLeaves()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
+		final JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		r2.setDescriptiveName("foo");
+		r1.setIdentical(r2);
+		assertEquals("", ((JDFElement) r.getLeaves(false).get(0)).getDescriptiveName());
+		assertEquals("foo", ((JDFElement) r.getLeaves(false).get(1)).getDescriptiveName());
+	}
+
+	/**
+	 * test expand and collapse methods
+	 */
+	@Test
+	public void testCollapseIdentical()
+	{
+		final JDFNode n = JDFNode.createRoot();
+
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
+		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
+		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
+		final JDFResource b = sh.addPartition(EnumPartIDKey.Side, "Back");
+		f.setDescriptiveName("s");
+		b.setIdentical(f);
+		sh.setDescriptiveName("sh");
+		dpp.collapse(false, false);
+		assertEquals("sh", sh.getDescriptiveName());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetTargetBad()
 	{
-		JDFNode n = JDFNode.createRoot();
-		JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
-		JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
-		JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
+		final JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
 		r1.setIdentical(r2);
-		JDFIdentical identical = r1.getIdentical();
+		final JDFIdentical identical = r1.getIdentical();
 		identical.setPartMap(new JDFAttributeMap(EnumPartIDKey.SheetName, "s1"));
 		assertEquals(r1, identical.getTarget());
 	}
@@ -146,12 +184,12 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 	@Test
 	public void testGetTargetGood()
 	{
-		JDFNode n = JDFNode.createRoot();
-		JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
-		JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
-		JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
+		final JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
 		r1.setIdentical(r2);
-		JDFIdentical identical = r1.getIdentical();
+		final JDFIdentical identical = r1.getIdentical();
 		assertEquals(r2, identical.getTarget());
 	}
 

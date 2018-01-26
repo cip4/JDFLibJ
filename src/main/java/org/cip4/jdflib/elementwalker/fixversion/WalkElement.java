@@ -87,6 +87,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.span.JDFTimeSpan;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
@@ -261,7 +262,7 @@ public class WalkElement extends BaseWalker
 	 */
 	protected void fixSourceObjects(final JDFElement el, final String key, final String value)
 	{
-		if (AttributeName.SOURCEOBJECTS.equals(key) && fixVersion.version.isGreater(EnumVersion.Version_1_5))
+		if (AttributeName.SOURCEOBJECTS.equals(key) && EnumUtil.aLessEqualsThanB(EnumVersion.Version_1_5, fixVersion.version))
 		{
 			if (StringUtil.hasToken(value, "All", null, 0))
 			{

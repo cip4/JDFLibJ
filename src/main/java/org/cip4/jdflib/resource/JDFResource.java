@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -4367,7 +4367,7 @@ public class JDFResource extends JDFElement
 		/**
 		 * collapse all redundant attributes and elements
 		 *
-		 * @param bCollapseToNode only collapse redundant attriutes and elements that pre-exist in the nodes
+		 * @param bCollapseToNode only collapse redundant attributes and elements that pre-exist in the nodes
 		 * @param bCollapseElements if true, collapse elements, else only collapse attributes
 		 *
 		 * @default Collapse(false)
@@ -4375,6 +4375,7 @@ public class JDFResource extends JDFElement
 		void collapse(final boolean bCollapseToNode, final boolean bCollapseElements)
 		{
 			final VElement leaves = getLeaves(false);
+			removeIdenticals(leaves);
 			if (leaves.size() == 1 && leaves.elementAt(0) == JDFResource.this)
 			{
 				return; // this is a non partitioned root node
@@ -4391,6 +4392,7 @@ public class JDFResource extends JDFElement
 				while (true)
 				{
 					final VElement localLeaves = parent.getChildElementVector_JDFElement(getNodeName(), null, null, true, 0, false);
+					removeIdenticals(localLeaves);
 					collapseAttributes(bCollapseToNode, leaf, atts, parent, localLeaves, true);
 					// since 190602 also collapse elements
 					if (bCollapseElements)
@@ -4408,12 +4410,26 @@ public class JDFResource extends JDFElement
 			}
 		}
 
+		/**
+		 *
+		 * @param leaves
+		 */
+		void removeIdenticals(final VElement leaves)
+		{
+			for (int n = leaves.size() - 1; n >= 0; n--)
+			{
+				if (leaves.get(n).hasChildElement(ElementName.IDENTICAL, null))
+				{
+					leaves.remove(n);
+				}
+			}
+		}
+
 		private void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent, final VElement localLeaves, final boolean removeEqual)
 		{
 			final int localSize = localLeaves.size();
-			for (int j = 0; j < atts.size(); j++)
+			for (final String att : atts)
 			{
-				final String att = atts.get(j);
 				// reduce lower stuff
 				if ((!bCollapseToNode) && (!parent.hasAttribute(att, null, false)))
 				{
@@ -8347,7 +8363,7 @@ public class JDFResource extends JDFElement
 
 	/**
 	 * if true, subelements are initialized with a class attribute
-
+	
 	 * @param autoSubElementClass
 	 */
 	public static void setAutoSubElementClass(final boolean autoSubElementClass)

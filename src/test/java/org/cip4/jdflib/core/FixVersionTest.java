@@ -503,6 +503,21 @@ public class FixVersionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testSourceObjectsNull()
+	{
+		final JDFColorSpaceConversionOp co = ((JDFColorSpaceConversionParams) n.getCreateResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input, 0)).appendColorSpaceConversionOp();
+
+		co.addSourceObject(JDFColorSpaceConversionOp.EnumSourceObjects.ImagePhotographic);
+		co.addSourceObject(JDFColorSpaceConversionOp.EnumSourceObjects.All);
+		final boolean converted = new FixVersion((EnumVersion) null).convert(co);
+		assertTrue(converted);
+		assertEquals(2, co.getSourceObjects().size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testNumColors15()
 	{
 		final JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
