@@ -74,6 +74,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
@@ -140,6 +141,24 @@ public class JDFIdenticalTest extends JDFTestCaseBase
 		r1.setIdentical(r2);
 		assertEquals("", ((JDFElement) r.getLeaves(false).get(0)).getDescriptiveName());
 		assertEquals("foo", ((JDFElement) r.getLeaves(false).get(1)).getDescriptiveName());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testRemoveIdentical()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
+		final JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		r2.setDescriptiveName("foo");
+		r1.setIdentical(r2);
+		VElement leaves = r.getLeaves(false);
+		leaves = JDFIdentical.removeIdenticals(leaves);
+		assertEquals("foo", ((JDFElement) leaves.get(0)).getDescriptiveName());
+		assertEquals(1, leaves.size());
 	}
 
 	/**

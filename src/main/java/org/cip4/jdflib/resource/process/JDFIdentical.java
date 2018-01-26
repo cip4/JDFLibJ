@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoIdentical;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFPart;
@@ -179,10 +180,10 @@ public class JDFIdentical extends JDFAutoIdentical
 	public JDFResource getTarget()
 	{
 		final JDFAttributeMap identityMap = getPartMap();
-		JDFResource parentResource = getParentResource();
+		final JDFResource parentResource = getParentResource();
 		if (parentResource == null)
 			return null;
-		JDFAttributeMap myMap = parentResource.getPartMap();
+		final JDFAttributeMap myMap = parentResource.getPartMap();
 		if (ContainerUtil.equals(identityMap, myMap))
 			return parentResource;
 		else
@@ -218,4 +219,22 @@ public class JDFIdentical extends JDFAutoIdentical
 		return v;
 	}
 
+	/**
+	 *
+	 * @param leaves
+	 */
+	public static VElement removeIdenticals(final VElement leaves)
+	{
+		if (leaves != null)
+		{
+			for (int n = leaves.size() - 1; n >= 0; n--)
+			{
+				if (leaves.get(n).hasChildElement(ElementName.IDENTICAL, null))
+				{
+					leaves.remove(n);
+				}
+			}
+		}
+		return leaves;
+	}
 }
