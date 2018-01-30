@@ -237,7 +237,7 @@ public class StringUtil
 	 */
 	public static String zappTokenWS(final String str, final String delim)
 	{
-		StringBuffer s = new StringBuffer();
+		final StringBuffer s = new StringBuffer();
 
 		final VString vs = new VString(str, delim);
 		final int size = vs.size();
@@ -448,7 +448,7 @@ public class StringUtil
 			buf.append(back);
 		}
 
-		String ret = buf.toString();
+		final String ret = buf.toString();
 		return getNonEmpty(ret);
 	}
 
@@ -595,7 +595,7 @@ public class StringUtil
 	 * @param delimOut
 	 * @return
 	 */
-	public static VString tokenizeBrackets(String strWork, final char delimIn, final char delimOut)
+	public static VString tokenizeBrackets(final String strWork, final char delimIn, final char delimOut)
 	{
 		if (strWork == null)
 			return null;
@@ -605,7 +605,7 @@ public class StringUtil
 		int pos0 = 0;
 		for (int i = 0; i < strWork.length(); i++)
 		{
-			char c = strWork.charAt(i);
+			final char c = strWork.charAt(i);
 			if (c == delimIn)
 			{
 				if (v.size() == 0)
@@ -669,7 +669,7 @@ public class StringUtil
 			{
 				posToken1--; // go back one in case the char before the first token was not the deliminator
 			}
-			String substring = strWork.substring(posToken1);
+			final String substring = strWork.substring(posToken1);
 			final StringTokenizer st = new StringTokenizer(substring, delim, false);
 			int n = 0;
 			while (st.hasMoreTokens())
@@ -701,7 +701,7 @@ public class StringUtil
 		if (strWork != null)
 		{
 			int n = 0;
-			for (String element : strWork)
+			for (final String element : strWork)
 			{
 				if (element.equals(token))
 				{
@@ -722,7 +722,7 @@ public class StringUtil
 	 * @param newToken the new token, if null said token is removed
 	 * @return the modified string
 	 */
-	public static String addToken(String strWork, String delim, String newToken)
+	public static String addToken(String strWork, final String delim, String newToken)
 	{
 		if (strWork == null)
 			return newToken;
@@ -744,7 +744,7 @@ public class StringUtil
 	 *
 	 * @return the modified string, null if last token was removed
 	 */
-	public static String removeToken(final String strWork, int index, String delim)
+	public static String removeToken(final String strWork, final int index, final String delim)
 	{
 		return getNonEmpty(replaceToken(strWork, index, delim, null));
 	}
@@ -757,9 +757,9 @@ public class StringUtil
 	 * @param newToken
 	 * @return
 	 */
-	public static String replaceToken(final String strWork, String oldToken, String delim, String newToken)
+	public static String replaceToken(final String strWork, final String oldToken, final String delim, final String newToken)
 	{
-		int pos = posOfToken(strWork, oldToken, delim, 0);
+		final int pos = posOfToken(strWork, oldToken, delim, 0);
 		return (pos >= 0) ? replaceToken(strWork, pos, delim, newToken) : strWork;
 	}
 
@@ -771,7 +771,7 @@ public class StringUtil
 	 * @param newToken
 	 * @return
 	 */
-	public static String removeToken(final String strWork, String oldToken, String delim)
+	public static String removeToken(final String strWork, final String oldToken, final String delim)
 	{
 		return replaceToken(strWork, oldToken, delim, null);
 	}
@@ -785,21 +785,21 @@ public class StringUtil
 	 * @param newToken the new token, if null said token is removed
 	 * @return the modified string - never null
 	 */
-	public static String replaceToken(final String strWork, int index, String delim, String newToken)
+	public static String replaceToken(final String strWork, int index, String delim, final String newToken)
 	{
 		if (delim == null)
 			delim = JDFConstants.BLANK;
-		VString v = tokenize(strWork, delim, false);
+		final VString v = tokenize(strWork, delim, false);
 		if (v == null)
 			return null;
 		if (index < 0)
 			index += v.size();
 		if (index >= v.size() || index < 0)
 			return strWork;
-		VString v2 = tokenize(strWork, delim, true);
+		final VString v2 = tokenize(strWork, delim, true);
 		int n = 0;
 		int i = 0;
-		for (String token : v2)
+		for (final String token : v2)
 		{
 			if (!delim.equals(token))
 			{
@@ -962,7 +962,7 @@ public class StringUtil
 	 * @param replaceBy String to insert for toReplace, null if nothing should be inserted
 	 * @return the String with replaced characters
 	 */
-	public static String replaceString(String strWork, final String toReplace, final String replaceBy)
+	public static String replaceString(final String strWork, final String toReplace, final String replaceBy)
 	{
 		return new StringReplacer(strWork).replaceString(toReplace, replaceBy);
 	}
@@ -983,7 +983,7 @@ public class StringUtil
 		 * the algorithm continues after the replacement
 		 * @param reRead
 		 */
-		public void setReRead(boolean reRead)
+		public void setReRead(final boolean reRead)
 		{
 			this.reRead = reRead;
 		}
@@ -992,7 +992,7 @@ public class StringUtil
 		 *
 		 * @param str
 		 */
-		public StringReplacer(String str)
+		public StringReplacer(final String str)
 		{
 			super();
 			this.strWork = str;
@@ -1007,7 +1007,7 @@ public class StringUtil
 		 * @param replaceBy String to insert for toReplace, null if nothing should be inserted
 		 * @return the String with replaced characters
 		 */
-		public String replaceString(String toReplace, final String replaceBy)
+		public String replaceString(final String toReplace, final String replaceBy)
 		{
 			if ((getNonEmpty(toReplace) == null) || StringUtil.equals(toReplace, replaceBy))
 				return strWork;
@@ -1096,7 +1096,7 @@ public class StringUtil
 	 * @param toLower if true return all lower case
 	 * @return the output; null if all characters were removed
 	 */
-	public static String normalize(String strWork, boolean toLower)
+	public static String normalize(final String strWork, final boolean toLower)
 	{
 		return normalize(strWork, toLower, JDFConstants.BLANK);
 	}
@@ -1109,7 +1109,7 @@ public class StringUtil
 	 * @param replace the replace character, if null remove all whitespace
 	 * @return the output; null if all characters were removed
 	 */
-	public static String normalize(String strWork, boolean toLower, String replace)
+	public static String normalize(String strWork, final boolean toLower, String replace)
 	{
 		if (strWork == null)
 			return null;
@@ -1148,16 +1148,12 @@ public class StringUtil
 	 * @param ignoreEmpty if true, the result is 0 if one of the two strings is null or ""
 	 * @return the Levenshtein distance
 	 */
-	public static int getDistance(String s1, String s2, boolean normalize, boolean ignoreCase, boolean ignoreEmpty)
+	public static int getDistance(String s1, String s2, final boolean normalize, final boolean ignoreCase, final boolean ignoreEmpty)
 	{
 		if (s1 == null)
 			s1 = JDFConstants.EMPTYSTRING;
 		if (s2 == null)
 			s2 = JDFConstants.EMPTYSTRING;
-		if (ignoreEmpty && (JDFConstants.EMPTYSTRING.equals(s1) || JDFConstants.EMPTYSTRING.equals(s2)))
-		{
-			return 0;
-		}
 
 		if (ignoreCase)
 		{
@@ -1173,7 +1169,21 @@ public class StringUtil
 			if (s2 == null)
 				s2 = JDFConstants.EMPTYSTRING;
 		}
-		return StringUtils.getLevenshteinDistance(s1, s2);
+		if (s1.equals(s2) || ignoreEmpty && (JDFConstants.EMPTYSTRING.equals(s1) || JDFConstants.EMPTYSTRING.equals(s2)))
+		{
+			return 0;
+		}
+		// we weight deviations of shorter strings higher so that a,b doesent pass distance==1...
+		final int minLen = Math.min(s1.length(), s2.length());
+		int factor = 1;
+		for (int i = 0; i < 4; i++)
+		{
+			if (minLen <= i)
+			{
+				factor *= 2;
+			}
+		}
+		return factor * StringUtils.getLevenshteinDistance(s1, s2);
 	}
 
 	/**
@@ -1193,7 +1203,7 @@ public class StringUtil
 	 * @param s
 	 * @return
 	 */
-	public static boolean isEmpty(String s)
+	public static boolean isEmpty(final String s)
 	{
 		return s == null || JDFConstants.EMPTYSTRING.equals(s);
 	}
@@ -1207,7 +1217,7 @@ public class StringUtil
 	 * @deprecated use UrlUtil.newExtension
 	 */
 	@Deprecated
-	public static String newExtension(final String strWork, String newExt)
+	public static String newExtension(final String strWork, final String newExt)
 	{
 		return UrlUtil.newExtension(strWork, newExt);
 	}
@@ -1513,7 +1523,7 @@ public class StringUtil
 			return -1;
 
 		int posOfToken = -1;
-		VString vNames = StringUtil.tokenize(strWork, separator, false);
+		final VString vNames = StringUtil.tokenize(strWork, separator, false);
 
 		if (iSkip == -1 || iSkip == 0)
 		{
@@ -1565,18 +1575,18 @@ public class StringUtil
 	 * @param start position to search in the string
 	 * @return
 	 */
-	public static int indexOfToken(final String strWork, final String token, String delim, int start)
+	public static int indexOfToken(final String strWork, final String token, String delim, final int start)
 	{
 		if (delim == null)
 			delim = JDFConstants.BLANK;
 		if (strWork != null)
 		{
-			int tl = token.length();
-			int sl = strWork.length();
+			final int tl = token.length();
+			final int sl = strWork.length();
 			int p0 = start;
 			while ((tl + p0) <= sl)
 			{
-				int posToken1 = strWork.indexOf(token, p0);
+				final int posToken1 = strWork.indexOf(token, p0);
 				if (posToken1 < 0)
 				{
 					return posToken1;
@@ -1840,7 +1850,7 @@ public class StringUtil
 	 * @return
 	 */
 	@Deprecated
-	public static byte[] setUTF8String(String strUnicode)
+	public static byte[] setUTF8String(final String strUnicode)
 	{
 		return getUTF8Bytes(strUnicode);
 	}
@@ -2002,7 +2012,7 @@ public class StringUtil
 	 *
 	 * @return the string where all required sequences have been replaced by their escaped representation
 	 */
-	public static String escape(final String strToEscape, final String strCharSet, String strEscapeChar, final int iRadix, final int iEscapeLen, final int iEscapeBelow, int iEscapeAbove)
+	public static String escape(final String strToEscape, final String strCharSet, final String strEscapeChar, final int iRadix, final int iEscapeLen, final int iEscapeBelow, final int iEscapeAbove)
 	{
 		final byte[] a_toEscape = getUTF8Bytes(strToEscape);
 		return getUTF8String(escape(a_toEscape, strCharSet, strEscapeChar, iRadix, iEscapeLen, iEscapeBelow, iEscapeAbove));
@@ -2069,7 +2079,7 @@ public class StringUtil
 
 			if ((cToEscape > iEscapeAbove) || (cToEscape < iEscapeBelow) || (strCharSet != null && strCharSet.indexOf(cToEscape) != -1))
 			{ // the character must be escaped
-				for (byte escapeCharbyte : escapeCharbytes)
+				for (final byte escapeCharbyte : escapeCharbytes)
 				{
 					escaped[posE] = escapeCharbyte;
 					posE++;
@@ -2116,7 +2126,7 @@ public class StringUtil
 					}
 
 					final byte[] bufbytes = buf.toString().getBytes();
-					for (byte bufbyte : bufbytes)
+					for (final byte bufbyte : bufbytes)
 					{
 						escaped[posE] = bufbyte;
 						posE++;
@@ -2142,7 +2152,7 @@ public class StringUtil
 				posE++;
 			}
 		}
-		byte[] stringByte = new byte[posE];
+		final byte[] stringByte = new byte[posE];
 		for (int i = 0; i < posE; i++)
 		{
 			stringByte[i] = escaped[i];
@@ -2208,7 +2218,7 @@ public class StringUtil
 					final Integer integer = Integer.valueOf(strIsEscaped, iRadix);// and get the int value
 					byteEscape[n++] = (byte) integer.intValue();
 				}
-				catch (NumberFormatException ex)
+				catch (final NumberFormatException ex)
 				{
 					byteEscape[n++] = escapeChar;
 					for (int j = 0; j < escapeLen; j++)
@@ -2356,7 +2366,7 @@ public class StringUtil
 		}
 		int i = def;
 		s = s.trim().toLowerCase();
-		int pos0x = s.indexOf("0x");
+		final int pos0x = s.indexOf("0x");
 		if (pos0x >= 0)
 		{
 			s = (pos0x > 0 ? StringUtil.leftStr(s, pos0x) : "") + s.substring(pos0x + 2);
@@ -2432,7 +2442,7 @@ public class StringUtil
 		}
 		long i = def;
 		s = s.trim().toLowerCase();
-		int pos0x = s.indexOf("0x");
+		final int pos0x = s.indexOf("0x");
 		if (pos0x >= 0)
 		{
 			s = (pos0x > 0 ? StringUtil.leftStr(s, pos0x) : "") + s.substring(pos0x + 2);
@@ -2604,7 +2614,7 @@ public class StringUtil
 	 * @param regExp the expression to match against
 	 * @return true, if str matches regExp or regexp is empty
 	 */
-	public static boolean matches(final String str, String regExp)
+	public static boolean matches(final String str, final String regExp)
 	{
 		// the null expression is assumed to match anything
 		if ((regExp == null) || (regExp.length() == 0) || "*".equals(regExp))
@@ -2666,24 +2676,24 @@ public class StringUtil
 	 * @param is the input stream
 	 * @return the string representation
 	 */
-	public static String createString(InputStream is)
+	public static String createString(final InputStream is)
 	{
-		StringBuilder b = new StringBuilder();
+		final StringBuilder b = new StringBuilder();
 		int n = 0;
-		byte[] by = new byte[4000];
+		final byte[] by = new byte[4000];
 		do
 		{
 			try
 			{
 				n = is.read(by);
 			}
-			catch (IOException e)
+			catch (final IOException e)
 			{
 				n = -1;
 			}
 			if (n > 0)
 			{
-				String s = new String(by, 0, n);
+				final String s = new String(by, 0, n);
 				b.append(s);
 			}
 		}
@@ -2787,7 +2797,7 @@ public class StringUtil
 	 * @param bIgnoreCase if true ignore the case of the prefix
 	 * @return
 	 */
-	public static String stripPrefix(String str, String prefix, final boolean bIgnoreCase)
+	public static String stripPrefix(String str, final String prefix, final boolean bIgnoreCase)
 	{
 		if (str != null && prefix != null)
 		{
@@ -2807,7 +2817,7 @@ public class StringUtil
 	 *
 	 * @return the work string trimmed and trailing + leading quote chars removed
 	 */
-	public static String stripQuote(String str, String quote, boolean bTrim)
+	public static String stripQuote(String str, final String quote, final boolean bTrim)
 	{
 		if (str == null || quote == null)
 		{
@@ -2890,7 +2900,7 @@ public class StringUtil
 				break;
 			}
 		}
-		String trimmed = work.substring(nStart, nEnd);
+		final String trimmed = work.substring(nStart, nEnd);
 		return trimmed.length() > 0 ? trimmed : null;
 	}
 
@@ -2901,7 +2911,7 @@ public class StringUtil
 	 * @param precision number of digits after the "."
 	 * @return
 	 */
-	public static String formatDouble(double value, int precision)
+	public static String formatDouble(final double value, final int precision)
 	{
 		return new NumberFormatter().formatDouble(value, precision);
 	}

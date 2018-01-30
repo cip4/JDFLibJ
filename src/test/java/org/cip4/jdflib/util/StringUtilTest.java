@@ -185,11 +185,15 @@ public class StringUtilTest extends JDFTestCaseBase
 	{
 		assertEquals(StringUtil.getDistance("", null, false, false, false), 0);
 		assertEquals(StringUtil.getDistance("", "A", false, true, true), 0);
+		assertEquals(StringUtil.getDistance("B", "A", false, true, true), 8);
+		assertEquals(StringUtil.getDistance("BB", "BA", false, true, true), 4);
+		assertEquals(StringUtil.getDistance("BBB", "BBA", false, true, true), 2);
+		assertEquals(StringUtil.getDistance("BBBB", "BBBA", false, true, true), 1);
 		assertEquals(StringUtil.getDistance(null, "A", false, true, true), 0);
 		assertEquals(StringUtil.getDistance("a", null, false, true, true), 0);
 		assertEquals(StringUtil.getDistance("a", "", false, true, true), 0);
 		assertEquals(StringUtil.getDistance("a", "A", false, true, false), 0);
-		assertEquals(StringUtil.getDistance("a", "AA", false, true, false), 1);
+		assertEquals(StringUtil.getDistance("a", "AA", false, true, false), 8);
 		assertEquals(StringUtil.getDistance("a  b", "a B", true, true, false), 0);
 		assertEquals(StringUtil.getDistance("hallo", "hllo", true, true, false), 1);
 		assertEquals(StringUtil.getDistance("hasso", "haßo", true, true, false), 2);
@@ -684,7 +688,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	@Test
 	public void testRegExpPerformance()
 	{
-		CPUTimer ct = new CPUTimer(false);
+		final CPUTimer ct = new CPUTimer(false);
 		int b = 0;
 		for (int i = 0; i < 100000; i++)
 		{
@@ -1023,7 +1027,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	{
 		final String s = "1 2 33 3 \n15\n4";
 		final String s2 = "ab123456 ab1234567 ab 1234568";
-		long t0 = System.currentTimeMillis();
+		final long t0 = System.currentTimeMillis();
 		assertTrue(StringUtil.hasToken(s, "33", " ", 0));
 		assertFalse(StringUtil.hasToken(s, "34", " ", 0));
 		assertFalse(StringUtil.hasToken(s2, "ab12345679", " ", 0));
@@ -1037,7 +1041,7 @@ public class StringUtilTest extends JDFTestCaseBase
 			StringUtil.hasToken(s2, "ab1234567", " ", 0);
 			StringUtil.hasToken(s2, "ab", " ", 0);
 		}
-		long t2 = System.currentTimeMillis();
+		final long t2 = System.currentTimeMillis();
 		System.out.println(t2 - t0);
 	}
 
@@ -1228,7 +1232,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	@Test
 	public void testCreateString()
 	{
-		ByteArrayIOStream ios = new ByteArrayIOStream("abc".getBytes());
+		final ByteArrayIOStream ios = new ByteArrayIOStream("abc".getBytes());
 		assertEquals(StringUtil.createString(ios.getInputStream()), "abc");
 		ios.close();
 	}
