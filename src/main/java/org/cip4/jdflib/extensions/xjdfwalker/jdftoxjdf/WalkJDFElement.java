@@ -668,14 +668,9 @@ public class WalkJDFElement extends WalkElement
 							dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
 							dependent.copyAttribute(AttributeName.JMFURL, depNode);
 							dependent.copyAttribute(AttributeName.JOBPARTID, depNode);
-							dependent.moveAttribute(AttributeName.PIPEPAUSE, linkRoot);
-							dependent.moveAttribute(AttributeName.PIPEPAUSE, resLink);
-							dependent.moveAttribute(AttributeName.PIPERESUME, linkRoot);
-							dependent.moveAttribute(AttributeName.PIPERESUME, resLink);
 							dependent.moveAttribute(AttributeName.PIPEPROTOCOL, linkRoot);
 							dependent.moveAttribute(AttributeName.PIPEPROTOCOL, resLink);
 							dependent.moveAttribute(AttributeName.PIPEID, linkRoot);
-							dependent.copyAttribute(AttributeName.PIPEPARTIDKEYS, resLink);
 							removeDuplicateDependents(resourceSet);
 						}
 					}

@@ -2464,6 +2464,8 @@ class PostXJDFWalker extends BaseElementWalker
 			sender.moveAttribute(AttributeName.PERSONALID, xjdf);
 			sender.moveAttribute(AttributeName.ID, xjdf);
 			sender.moveAttribute(AttributeName.REFID, xjdf);
+			if (!sender.hasAttribute(AttributeName.DEVICEID))
+				sender.setAttribute(AttributeName.DEVICEID, "dummy");
 			final VElement v = xjdf.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.ID, JDFConstants.STAR), false, true, 0);
 			if (v != null)
 			{

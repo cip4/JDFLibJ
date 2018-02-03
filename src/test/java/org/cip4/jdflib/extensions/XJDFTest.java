@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -889,7 +889,7 @@ public class XJDFTest extends JDFTestCaseBase
 		m.setMediaColorNameDetails("Pink");
 		n.getLink(m, null).setCombinedProcessIndex(1);
 		xjdf = new XJDF20().makeNewJDF(n, null);
-		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/@CombinedProcessIndex", null));
+		assertEquals("1", xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/@CombinedProcessIndex", null));
 		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"NodeInfo\"]/@CombinedProcessIndex", null));
 	}
 

@@ -257,20 +257,20 @@ public class DigiPrintTest extends JDFTestCaseBase
 	@Test
 	public void testHoldPipeRIP()
 	{
-		JDFDoc jdfDoc = new JDFDoc("JDF");
-		JDFNode n = jdfDoc.getJDFRoot();
+		final JDFDoc jdfDoc = new JDFDoc("JDF");
+		final JDFNode n = jdfDoc.getJDFRoot();
 		n.setCombined(new VString("LayoutPreparation Interpreting Rendering DigitalPrinting", null));
-		JDFRunList rl0 = (JDFRunList) n.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 0);
-		JDFResourceLink rll0 = n.getLink(rl0, EnumUsage.Input);
+		final JDFRunList rl0 = (JDFRunList) n.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 0);
+		final JDFResourceLink rll0 = n.getLink(rl0, EnumUsage.Input);
 		rll0.setCombinedProcessIndex(0);
-		JDFRunList ruLi = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Output);
+		final JDFRunList ruLi = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Output);
 		ruLi.setResStatus(EnumResStatus.Unavailable, true);
 		ruLi.setPipeProtocol("Internal");
 		ruLi.setDescriptiveName("Internal RunList for Hold");
-		JDFResourceLink rll = n.getLink(ruLi, EnumUsage.Output);
-		int pos = n.getTypes().index("Rendering");
+		final JDFResourceLink rll = n.getLink(ruLi, EnumUsage.Output);
+		final int pos = n.getTypes().index("Rendering");
 		rll.setCombinedProcessIndex(pos);
-		JDFResourceLink rll2 = n.ensureLink(ruLi, EnumUsage.Input, null);
+		final JDFResourceLink rll2 = n.ensureLink(ruLi, EnumUsage.Input, null);
 		rll2.setCombinedProcessIndex(pos + 1);
 		rll2.setMinStatus(EnumResStatus.Available);
 		writeTest(jdfDoc, "HoldRIP.jdf");
@@ -285,20 +285,20 @@ public class DigiPrintTest extends JDFTestCaseBase
 	@Test
 	public void testHoldQueueRIP()
 	{
-		JDFDoc jdfDoc = new JDFDoc("JDF");
-		JDFNode n = jdfDoc.getJDFRoot();
+		final JDFDoc jdfDoc = new JDFDoc("JDF");
+		final JDFNode n = jdfDoc.getJDFRoot();
 		n.setCombined(new VString("LayoutPreparation Interpreting Rendering DigitalPrinting", null));
-		JDFRunList rl0 = (JDFRunList) n.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 0);
-		JDFResourceLink rll0 = n.getLink(rl0, EnumUsage.Input);
+		final JDFRunList rl0 = (JDFRunList) n.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 0);
+		final JDFResourceLink rll0 = n.getLink(rl0, EnumUsage.Input);
 		rll0.setCombinedProcessIndex(0);
-		JDFApprovalSuccess apSuc = (JDFApprovalSuccess) n.addResource(ElementName.APPROVALSUCCESS, EnumUsage.Input);
+		final JDFApprovalSuccess apSuc = (JDFApprovalSuccess) n.addResource(ElementName.APPROVALSUCCESS, EnumUsage.Input);
 		apSuc.setResStatus(EnumResStatus.Unavailable, true);
 		apSuc.setDescriptiveName("This can be set Available either by a JMF Resource Command or from the printer UI");
-		JDFResourceLink rll = n.getLink(apSuc, EnumUsage.Input);
+		final JDFResourceLink rll = n.getLink(apSuc, EnumUsage.Input);
 		rll.setCombinedProcessIndex(0);
 		rll.setMinStatus(EnumResStatus.Unavailable);
-		int pos = n.getTypes().index("DigitalPrinting");
-		JDFResourceLink rll2 = n.ensureLink(apSuc, EnumUsage.Input, null);
+		final int pos = n.getTypes().index("DigitalPrinting");
+		final JDFResourceLink rll2 = n.ensureLink(apSuc, EnumUsage.Input, null);
 		rll2.setCombinedProcessIndex(pos);
 		rll2.setMinStatus(EnumResStatus.Available);
 		writeTest(jdfDoc, "HoldQRIP.jdf");
@@ -310,34 +310,34 @@ public class DigiPrintTest extends JDFTestCaseBase
 	 */
 	public void testPipePushSheet()
 	{
-		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setSenderID("DFE");
-		VString frontback = new VString("Front Back", null);
-		VString coverBody = new VString("Cover Body", null);
-		VString cmyk = new VString("Cyan Magenta Yellow Black ", null);
+		final VString frontback = new VString("Front Back", null);
+		final VString coverBody = new VString("Cover Body", null);
+		final VString cmyk = new VString("Cyan Magenta Yellow Black ", null);
 		for (int j = 0; j < 2; j++)
 		{
-			for (String cb : coverBody)
+			for (final String cb : coverBody)
 			{
 				for (int i = 0; i < 3 + j; i++)
 				{
 					if (i > 0 && cb.equals("Cover"))
 						break;
-					for (String fb : frontback)
+					for (final String fb : frontback)
 					{
-						for (String sep : cmyk)
+						for (final String sep : cmyk)
 						{
-							JDFCommand command = jmf.appendCommand();
+							final JDFCommand command = jmf.appendCommand();
 							command.setXMLComment("The " + (i + 1) + " push: " + (3 + j) + " body sheets");
 							command.setType(JDFMessage.EnumType.PipePush);
 							command.setSenderID("RIP");
-							JDFPipeParams pp = createPipeParams(command);
-							JDFAttributeMap m = createRunListPartition(j, cb, i, fb, sep, pp);
-							JDFAttributeMap m2 = m.clone().removeKeys(new VString("DocTags SheetIndex Side Separation", null));
-							JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
-							JDFPartAmount pa2 = ap.getCreatePartAmount(m2);
+							final JDFPipeParams pp = createPipeParams(command);
+							final JDFAttributeMap m = createRunListPartition(j, cb, i, fb, sep, pp);
+							final JDFAttributeMap m2 = m.clone().removeKeys(new VString("DocTags SheetIndex Side Separation", null));
+							final JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
+							final JDFPartAmount pa2 = ap.getCreatePartAmount(m2);
 							pa2.setActualAmount(2 * 4 * (4 + j), null);
-							JDFPartAmount pa = ap.getCreatePartAmount(m);
+							final JDFPartAmount pa = ap.getCreatePartAmount(m);
 							pa.setActualAmount(1, null);
 						}
 					}
@@ -758,11 +758,11 @@ public class DigiPrintTest extends JDFTestCaseBase
 	 */
 	public void testVariableRipBookletPipe()
 	{
-		JDFDoc jdfDoc = new JDFDoc("JDF");
-		JDFNode n = jdfDoc.getJDFRoot();
+		final JDFDoc jdfDoc = new JDFDoc("JDF");
+		final JDFNode n = jdfDoc.getJDFRoot();
 		n.setJobID("J1");
 		n.setType(JDFNode.EnumType.ProcessGroup);
-		JDFNode idp = n.addCombined(new VString("Imposition Interpreting Rendering", null));
+		final JDFNode idp = n.addCombined(new VString("Imposition Interpreting Rendering", null));
 		JDFRunList rl = (JDFRunList) idp.addResource(ElementName.RUNLIST, null);
 		rl.setAttribute("Automation", "Dynamic");
 		rl.setPipeID("PipeByteMap");
@@ -770,10 +770,10 @@ public class DigiPrintTest extends JDFTestCaseBase
 		rl.setPartIDKeys(new VString("SetIndex DocTags SheetIndex Side Separation", null));
 		rl = (JDFRunList) rl.addPartition(EnumPartIDKey.SetIndex, "0~-1");
 		idp.ensureLink(rl, EnumUsage.Output, null);
-		JDFRunList cover = (JDFRunList) rl.addPartition(EnumPartIDKey.DocTags, "Cover");
+		final JDFRunList cover = (JDFRunList) rl.addPartition(EnumPartIDKey.DocTags, "Cover");
 		cover.setNPage(2);
 		rl.addPartition(EnumPartIDKey.DocTags, "Body");
-		JDFNode print = n.addCombined(new VString("DigitalPrinting", null));
+		final JDFNode print = n.addCombined(new VString("DigitalPrinting", null));
 		print.ensureLink(rl, EnumUsage.Input, null);
 		writeTest(jdfDoc, "BookletPipeRunList.jdf");
 	}
@@ -784,9 +784,9 @@ public class DigiPrintTest extends JDFTestCaseBase
 	 * @param command
 	 * @return
 	 */
-	JDFPipeParams createPipeParams(JDFCommand command)
+	JDFPipeParams createPipeParams(final JDFCommand command)
 	{
-		JDFPipeParams pp = command.appendPipeParams();
+		final JDFPipeParams pp = command.appendPipeParams();
 		pp.setPipeID("PipeByteMap");
 		pp.setJobID("J1");
 		pp.setJobPartID("Part");
@@ -799,34 +799,34 @@ public class DigiPrintTest extends JDFTestCaseBase
 	 */
 	public void testPipePushSheetMeta()
 	{
-		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setSenderID("DFE");
-		VString frontback = new VString("Front Back", null);
-		VString coverBody = new VString("Cover Body", null);
-		VString cmyk = new VString("Cyan Magenta Yellow Black ", null);
+		final VString frontback = new VString("Front Back", null);
+		final VString coverBody = new VString("Cover Body", null);
+		final VString cmyk = new VString("Cyan Magenta Yellow Black ", null);
 		for (int j = 0; j < 2; j++)
 		{
-			for (String cb : coverBody)
+			for (final String cb : coverBody)
 			{
 				for (int i = 0; i < 2 + j; i++)
 				{
 					if (i > 0 && cb.equals("Cover"))
 						break;
-					for (String fb : frontback)
+					for (final String fb : frontback)
 					{
-						for (String sep : cmyk)
+						for (final String sep : cmyk)
 						{
-							JDFCommand command = jmf.appendCommand();
+							final JDFCommand command = jmf.appendCommand();
 							command.setXMLComment("The " + (i + 1) + " push: " + (3 + j) + " body sheets");
 							command.setType(JDFMessage.EnumType.PipePush);
 							command.setSenderID("RIP");
-							JDFPipeParams pp = createPipeParams(command);
-							JDFAttributeMap m = createRunListPartition(j, cb, i, fb, sep, pp);
-							JDFAttributeMap m2 = m.clone().removeKeys(new VString("DocTags SheetIndex Side Separation", null));
-							JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
-							JDFPartAmount pa2 = ap.getCreatePartAmount(m2);
+							final JDFPipeParams pp = createPipeParams(command);
+							final JDFAttributeMap m = createRunListPartition(j, cb, i, fb, sep, pp);
+							final JDFAttributeMap m2 = m.clone().removeKeys(new VString("DocTags SheetIndex Side Separation", null));
+							final JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
+							final JDFPartAmount pa2 = ap.getCreatePartAmount(m2);
 							pa2.setActualAmount(2 * 4 * (4 + j), null);
-							JDFPartAmount pa = ap.getCreatePartAmount(m);
+							final JDFPartAmount pa = ap.getCreatePartAmount(m);
 							pa.setActualAmount(1, null);
 							pa2.getPart(0).setAttribute(EnumPartIDKey.Metadata0.getName(), ((j == 0) ? "Fuzzy" : "Crisp"));
 						}
@@ -843,37 +843,37 @@ public class DigiPrintTest extends JDFTestCaseBase
 	 */
 	public void testPipePushSetMeta()
 	{
-		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setSenderID("DFE");
-		VString frontback = new VString("Front Back", null);
-		VString coverBody = new VString("Cover Body", null);
-		VString cmyk = new VString("Cyan Magenta Yellow Black ", null);
+		final VString frontback = new VString("Front Back", null);
+		final VString coverBody = new VString("Cover Body", null);
+		final VString cmyk = new VString("Cyan Magenta Yellow Black ", null);
 		for (int j = 0; j < 2; j++)
 		{
-			JDFCommand command = jmf.appendCommand();
+			final JDFCommand command = jmf.appendCommand();
 			command.setXMLComment("The " + j + " set: ");
 			command.setType(JDFMessage.EnumType.PipePush);
 			command.setSenderID("RIP");
-			JDFPipeParams pp = createPipeParams(command);
-			JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
-			JDFPartAmount pa0 = ap.getCreatePartAmount(new JDFAttributeMap("SetIndex", "" + j));
+			final JDFPipeParams pp = createPipeParams(command);
+			final JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
+			final JDFPartAmount pa0 = ap.getCreatePartAmount(new JDFAttributeMap("SetIndex", "" + j));
 			pa0.getPart(0).setAttribute(EnumPartIDKey.Metadata0.getName(), ((j == 0) ? "Nice" : "Nasty"));
 			pa0.getPart(0).setAttribute(EnumPartIDKey.Metadata1.getName(), ((j == 0) ? "Hot" : "Cold"));
 			pa0.setActualAmount(2 * (j + 3), null);
 			pa0.setAmount((j + 1) * 200, null);
 			pa0.setXMLComment("is this the right place for requested number of copies?");
-			for (String cb : coverBody)
+			for (final String cb : coverBody)
 			{
 				for (int i = 0; i < 2 + j; i++)
 				{
 					if (i > 0 && cb.equals("Cover"))
 						break;
-					for (String fb : frontback)
+					for (final String fb : frontback)
 					{
-						for (String sep : cmyk)
+						for (final String sep : cmyk)
 						{
-							JDFAttributeMap m = createRunListPartition(j, cb, i, fb, sep, pp);
-							JDFPartAmount pa = ap.getCreatePartAmount(m);
+							final JDFAttributeMap m = createRunListPartition(j, cb, i, fb, sep, pp);
+							final JDFPartAmount pa = ap.getCreatePartAmount(m);
 							pa.setActualAmount(1, null);
 						}
 					}
@@ -883,12 +883,12 @@ public class DigiPrintTest extends JDFTestCaseBase
 		writeTest(jmf, "RIPPipePushRunListSet.jmf", true, null);
 	}
 
-	JDFAttributeMap createRunListPartition(int set, String cb, int sheet, String fb, String sep, JDFPipeParams pp)
+	JDFAttributeMap createRunListPartition(final int set, final String cb, final int sheet, final String fb, final String sep, final JDFPipeParams pp)
 	{
 		JDFRunList rl = (JDFRunList) pp.getCreateResource(ElementName.RUNLIST);
 		rl.setID("ByteMap");
 		rl.setAttribute("Automation", "Dynamic");
-		JDFAttributeMap m = new JDFAttributeMap("SetIndex", "" + set);
+		final JDFAttributeMap m = new JDFAttributeMap("SetIndex", "" + set);
 		m.put(EnumPartIDKey.DocTags, cb);
 		m.put(EnumPartIDKey.SheetIndex, "" + sheet);
 		m.put(EnumPartIDKey.Side, fb);

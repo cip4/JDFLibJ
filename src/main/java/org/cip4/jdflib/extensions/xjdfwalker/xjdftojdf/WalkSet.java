@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.node.JDFNode;
@@ -101,7 +102,7 @@ public class WalkSet extends WalkXElement
 		if (jdf instanceof JDFNode)
 		{
 			final JDFNode parentNode = (JDFNode) jdf;
-			String procUsage = StringUtil.getNonEmpty(xjdf.getAttribute(AttributeName.PROCESSUSAGE));
+			final String procUsage = StringUtil.getNonEmpty(xjdf.getAttribute(AttributeName.PROCESSUSAGE));
 			if (ProductHelper.PRODUCT.equals(procUsage))
 			{
 				if (!EnumType.Product.equals(parentNode.getEnumType()))
@@ -109,7 +110,13 @@ public class WalkSet extends WalkXElement
 					return null;
 				}
 			}
+			final VString types = parentNode.getTypes();
+			if (types == null || types.size() <= 1)
+			{
+				xjdf.removeAttribute(AttributeName.COMBINEDPROCESSINDEX);
+			}
 		}
+
 		return jdf;
 	}
 
