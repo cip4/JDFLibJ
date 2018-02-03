@@ -341,7 +341,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	private boolean removeSignatureName = true;
 
-	private EnumProcessPartition processPartition = EnumProcessPartition.jobPartID;
+	private EnumProcessPartition processPartition = EnumProcessPartition.processTypes;
 
 	/**
 	 * @param bProcessList the ProcessList to set

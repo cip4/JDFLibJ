@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
@@ -76,6 +76,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.XJDF20;
@@ -93,7 +94,7 @@ public class WalkResLink extends WalkJDFElement
 {
 
 	/**
-	 * 
+	 *
 	 */
 	public WalkResLink()
 	{
@@ -110,7 +111,7 @@ public class WalkResLink extends WalkJDFElement
 	{
 		final JDFResourceLink rl = (JDFResourceLink) jdf;
 		final JDFResource linkTarget = rl.getLinkRoot();
-		JDFNode n = rl.getParentJDF();
+		final JDFNode n = rl.getParentJDF();
 		if (jdfToXJDF.getClassName(linkTarget) == null)
 		{
 			return null;
@@ -125,7 +126,7 @@ public class WalkResLink extends WalkJDFElement
 			}
 			if (jdfToXJDF.isProductResource(linkTarget))
 			{
-				KElement product = getProductForElement(xjdf, rl);
+				final KElement product = getProductForElement(xjdf, rl);
 				setResource(rl, linkTarget, product);
 			}
 			else
@@ -148,12 +149,12 @@ public class WalkResLink extends WalkJDFElement
 	/**
 	 * @param rl
 	 */
-	private void setProcess(JDFResourceLink rl)
+	private void setProcess(final JDFResourceLink rl)
 	{
 		if (!jdfToXJDF.isWantProcessList() || rl == null)
 			return;
 
-		KElement process = getProcess(rl);
+		final KElement process = getProcess(rl);
 		setLink(process, rl);
 	}
 
@@ -161,12 +162,12 @@ public class WalkResLink extends WalkJDFElement
 	 * @param process
 	 * @param rl
 	 */
-	private void setLink(KElement process, JDFResourceLink rl)
+	private void setLink(final KElement process, final JDFResourceLink rl)
 	{
 		if (rl == null || process == null)
 			return;
-		EnumUsage usage = rl.getUsage();
-		String usageName = usage == null ? null : usage.getName();
+		final EnumUsage usage = rl.getUsage();
+		final String usageName = usage == null ? null : usage.getName();
 		if (usageName != null)
 		{
 			process.appendAttribute(usageName, rl.getrRef(), null, JDFConstants.BLANK, true);
@@ -175,11 +176,11 @@ public class WalkResLink extends WalkJDFElement
 
 	/**
 	 * @param rl
-	 * @return 
+	 * @return
 	 */
-	private KElement getProcess(JDFResourceLink rl)
+	private KElement getProcess(final JDFResourceLink rl)
 	{
-		JDFNode parent = rl.getParentJDF();
+		final JDFNode parent = rl.getParentJDF();
 		if (parent == null || parent.isProduct())
 		{
 			// products are handled by productList
@@ -189,11 +190,11 @@ public class WalkResLink extends WalkJDFElement
 		{
 			return null;
 		}
-		String jobPartID = getJobPartID(parent);
+		final String jobPartID = getJobPartID(parent);
 		if (jobPartID == null)
 			return null;
 
-		KElement processList = jdfToXJDF.newRoot.getCreateElement(XJDFConstants.ProcessList, null, 0);
+		final KElement processList = jdfToXJDF.newRoot.getCreateElement(XJDFConstants.ProcessList, null, 0);
 		KElement process = processList.getChildWithAttribute(XJDFConstants.Process, AttributeName.JOBPARTID, null, jobPartID, 0, true);
 		if (process == null)
 		{
@@ -229,7 +230,7 @@ public class WalkResLink extends WalkJDFElement
 	 * @param parent
 	 * @return
 	 */
-	private String getJobPartID(JDFNode parent)
+	private String getJobPartID(final JDFNode parent)
 	{
 		String jobPartID = StringUtil.getNonEmpty(parent.getJobPartID(false));
 		if (jobPartID == null)
@@ -252,9 +253,9 @@ public class WalkResLink extends WalkJDFElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#setResource(org.cip4.jdflib.core.JDFElement, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected VElement setResource(JDFElement rl, JDFResource linkTarget, KElement xRoot)
+	protected VElement setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
 	{
-		VElement newResources = super.setResource(rl, linkTarget, xRoot);
+		final VElement newResources = super.setResource(rl, linkTarget, xRoot);
 		if (XJDF20.rootName.equals(xRoot.getLocalName()))
 		{
 			setNodePartitions(rl, newResources);
@@ -263,45 +264,53 @@ public class WalkResLink extends WalkJDFElement
 		return newResources;
 	}
 
-	private void setNodePartitions(JDFElement rl, VElement newResources)
+	private void setNodePartitions(final JDFElement rl, final VElement newResources)
 	{
 		if (newResources != null && newResources.size() > 0 && !jdfToXJDF.isWantProcessList() && !jdfToXJDF.isSingleNode())
 		{
-			JDFNode parentNode = rl.getParentJDF();
-			JDFNode parentProduct = parentNode.getParentProduct();
-			for (KElement newResource : newResources)
+			final JDFNode parentNode = rl.getParentJDF();
+			final JDFNode parentProduct = getParentProduct(parentNode);
+			final VString xTypes = VString.getVString(jdfToXJDF.newRoot.getNonEmpty(AttributeName.TYPES), null);
+			final VString jTypes = VString.getVString(parentNode.getTypesString(), null);
+
+			for (final KElement newResource : newResources)
 			{
-				ResourceHelper ph = new ResourceHelper(newResource);
-				VJDFAttributeMap partMaps = ph.getPartMapVector();
+				final ResourceHelper ph = new ResourceHelper(newResource);
+				final VJDFAttributeMap partMaps = ph.getPartMapVector();
 				boolean bChange = false;
+				if (parentProduct != null)
+				{
+					partMaps.put(XJDFConstants.ProductPart, parentProduct.getID());
+					bChange = true;
+				}
 				if (EnumProcessPartition.processTypes.equals(jdfToXJDF.getProcessPart()))
 				{
-					if (parentProduct != null)
-					{
-						partMaps.put(XJDFConstants.ProductPart, parentProduct.getID());
-						bChange = true;
-					}
 					if (parentNode != parentProduct)
 					{
-						String typesString = StringUtil.getNonEmpty(parentNode.getTypesString());
-						if (typesString != null)
+						if (xTypes != null && jTypes != null)
 						{
-							partMaps.put(XJDFConstants.ProcessTypes, typesString);
-							bChange = true;
+							final VString cpi = new VString();
+							for (final String jtyp : jTypes)
+							{
+								final int i = xTypes.indexOf(jtyp);
+								if (i >= 0)
+								{
+									cpi.add("" + i);
+								}
+							}
+							if (!cpi.isEmpty())
+							{
+								final KElement set = newResource.getParentNode_KElement();
+								set.setAttribute(AttributeName.COMBINEDPROCESSINDEX, StringUtil.setvString(cpi));
+							}
 						}
 					}
 				}
 				else if (EnumProcessPartition.jobPartID.equals(jdfToXJDF.getProcessPart()))
 				{
-					if (parentProduct != null)
-					{
-						// TODO change to externalID or productID
-						partMaps.put(XJDFConstants.ProductPart, parentProduct.getID());
-						bChange = true;
-					}
 					if (parentNode != parentProduct)
 					{
-						String jobPartID = StringUtil.getNonEmpty(parentNode.getJobPartID(false));
+						final String jobPartID = StringUtil.getNonEmpty(parentNode.getJobPartID(false));
 						if (jobPartID != null)
 						{
 							partMaps.put(XJDFConstants.ProductPart, jobPartID);
@@ -309,26 +318,22 @@ public class WalkResLink extends WalkJDFElement
 						}
 					}
 				}
-				else if (EnumProcessPartition.processUsageJobPartID.equals(jdfToXJDF.getProcessPart()))
-				{
-					if (parentProduct != null)
-					{
-						// TODO change to externalID or productID
-						partMaps.put(XJDFConstants.ProductPart, parentProduct.getID());
-						bChange = true;
-					}
-					if (parentNode != parentProduct)
-					{
-						KElement set = newResource.getParentNode_KElement();
-						String jobPartID = StringUtil.getNonEmpty(parentNode.getJobPartID(false));
-						set.setAttribute(AttributeName.JOBPARTID, jobPartID);
-					}
-				}
+
 				if (bChange)
 				{
 					ph.setPartMapVector(partMaps);
 				}
 			}
 		}
+	}
+
+	protected JDFNode getParentProduct(final JDFNode parentNode)
+	{
+		JDFNode parentProduct = parentNode.getParentProduct();
+		if (parentProduct != null && parentProduct.isJDFRoot())
+		{
+			parentProduct = null;
+		}
+		return parentProduct;
 	}
 }

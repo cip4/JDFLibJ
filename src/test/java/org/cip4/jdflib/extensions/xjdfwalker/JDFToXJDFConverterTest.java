@@ -427,6 +427,21 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
+	public void testMultiTypeProductPart()
+	{
+		final JDFNode nP = createBaseProductNode();
+		nP.addJDFNode(EnumType.ImageSetting).setJobPartID("j1");
+		nP.addJDFNode(EnumType.ConventionalPrinting).setJobPartID("j2");
+		final JDFToXJDF xjdf20 = new JDFToXJDF();
+		final KElement xjdf = xjdf20.convert(nP);
+		assertEquals(3, new XJDFHelper(xjdf).getSets(ElementName.NODEINFO, null).size());
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@Test
 	public void testSingleTypes()
 	{
 		final JDFNode nP = createBaseProductNode();

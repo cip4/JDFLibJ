@@ -1643,7 +1643,6 @@ class PostXJDFWalker extends BaseElementWalker
 						if (lcpi == null || lcpi.contains(j))
 						{
 							v.set(i, null);
-							e.removeAttribute(AttributeName.COMBINEDPROCESSINDEX);
 							n--;
 						}
 						else
@@ -1710,7 +1709,7 @@ class PostXJDFWalker extends BaseElementWalker
 			if (same)
 				same = ContainerUtil.equals(firstSet.getUsage(), next.getUsage());
 			if (same)
-				same = ContainerUtil.equals(firstSet.getXPathValue("@JobPartID"), next.getXPathValue("@JobPartID"));
+				same = ContainerUtil.equals(firstSet.getXPathValue("@CombinedProcessIndex"), next.getXPathValue("@CombinedProcessIndex"));
 			if (same)
 				same = ContainerUtil.equals(firstSet.getXPathValue("Resource/Media/@MediaType"), next.getXPathValue("Resource/Media/@MediaType"));
 
