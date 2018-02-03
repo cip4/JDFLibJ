@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -405,6 +405,35 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf.write2File(sm_dirTestDataTemp + "dielayoutproduction.xjdf");
 		assertNotNull(xjdf);
 		assertEquals("2267.72", xjdf.getXPathAttribute("ResourceSet/Resource/DieLayoutProductionParams/ConvertingConfig/@SheetHeightMax", null));
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@Test
+	public void testMultiTypes()
+	{
+		final JDFNode nP = createBaseProductNode();
+		nP.addJDFNode(EnumType.ImageSetting);
+		nP.addJDFNode(EnumType.ConventionalPrinting);
+		final JDFToXJDF xjdf20 = new JDFToXJDF();
+		final KElement xjdf = xjdf20.convert(nP);
+		assertEquals("Product ImageSetting ConventionalPrinting", xjdf.getAttribute("Types"));
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@Test
+	public void testSingleTypes()
+	{
+		final JDFNode nP = createBaseProductNode();
+		nP.setType(EnumType.ImageSetting);
+		final JDFToXJDF xjdf20 = new JDFToXJDF();
+		final KElement xjdf = xjdf20.convert(nP);
+		assertEquals("ImageSetting", xjdf.getAttribute("Types"));
 	}
 
 	/**

@@ -205,13 +205,16 @@ public class WalkJDF extends WalkJDFElement
 		{
 			setRootAttributes(node, newRootP);
 		}
+		else
+		{
+			updateTypes(newRootP, node.getTypesString());
+		}
 	}
 
 	private void setRootAttributes(final JDFNode node, final KElement newRootP)
 	{
 		newRootP.setXMLComment("JDFToXJDF version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion());
 		newRootP.setAttribute(AttributeName.JOBID, node.getJobID(true));
-		final String types = newRootP.getAttribute(AttributeName.TYPES, null, null);
 		setAttributes(node, newRootP);
 
 		removeUnusedElements(newRootP);
@@ -220,7 +223,7 @@ public class WalkJDF extends WalkJDFElement
 		{
 			newRootP.setID(null);
 		}
-		updateTypes(newRootP, types);
+		updateTypes(newRootP, node.getTypesString());
 		namedFeaturesToGeneralID(node, newRootP);
 		updateSpawnInfo(node, newRootP);
 		final JDFNode parentProduct = node.getParentProduct();
@@ -253,7 +256,6 @@ public class WalkJDF extends WalkJDFElement
 
 	/**
 	 * @param newRootP
-	 * @param types
 	 */
 	private void updateTypes(final KElement newRootP, final String types)
 	{
@@ -265,12 +267,12 @@ public class WalkJDF extends WalkJDFElement
 		{
 			newRootP.renameAttribute(AttributeName.TYPE, AttributeName.TYPES, null, null);
 		}
-		final VString t1 = StringUtil.tokenize(types, null, false);
-		final VString t2 = StringUtil.tokenize(newRootP.getAttribute(AttributeName.TYPES), null, false);
-		t1.removeStrings("Product", 0);
+		final VString t2 = StringUtil.tokenize(types, null, false);
+		final VString t1 = StringUtil.tokenize(newRootP.getAttribute(AttributeName.TYPES), null, false);
+		//t1.removeStrings(JDFConstants.PRODUCT, 0);
 		t1.appendUnique(t2);
-		t1.removeStrings("ProcessGroup", 0);
-		t1.removeStrings("Combined", 0);
+		t1.removeStrings(JDFConstants.PROCESSGROUP, 0);
+		t1.removeStrings(JDFConstants.COMBINED, 0);
 
 		removeDeprecatedTypes(t1);
 		if (t1.isEmpty())
