@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,12 +73,15 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -88,8 +91,10 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.util.JDFDate;
 import org.junit.Test;
 
 /**
@@ -183,6 +188,69 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 
 		d.write2File(sm_dirTestDataTemp + "splitDevxjdf.jdf", 2, false);
 		assertTrue(d.getJDFRoot().isValid(EnumValidationLevel.Incomplete));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testSplitProductNodeInfo()
+	{
+		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		h.addType(EnumType.Product);
+		h.addType(EnumType.ConventionalPrinting);
+		h.appendProduct().setProductType("foo");
+		final SetHelper niProduct = h.getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
+		niProduct.setCombinedProcessIndex(new JDFIntegerList(0));
+		final JDFNodeInfo nip0 = (JDFNodeInfo) niProduct.getCreatePartition(0, true).getResource();
+		nip0.setEnd(new JDFDate().addOffset(0, 0, 0, 10));
+
+		final SetHelper niCP = h.appendResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+		niCP.setCombinedProcessIndex(new JDFIntegerList(1));
+		final JDFNodeInfo nicp0 = (JDFNodeInfo) niCP.getCreatePartition(0, true).getResource();
+		nicp0.setEnd(new JDFDate().addOffset(0, 0, 0, 5));
+
+		final Vector<XJDFHelper> splitted = (Vector<XJDFHelper>) splitter.splitXJDF(h);
+		assertEquals(2, splitted.size());
+		assertEquals(1, splitted.get(0).getSets(ElementName.NODEINFO, EnumUsage.Input).size());
+		assertEquals(1, splitted.get(1).getSets(ElementName.NODEINFO, EnumUsage.Input).size());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testProductNodeInfo()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+		xCon.setSplitter(splitter);
+
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		h.addType(EnumType.Product);
+		h.addType(EnumType.ConventionalPrinting);
+		h.appendProduct().setProductType("foo");
+		final SetHelper niProduct = h.getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
+		niProduct.setCombinedProcessIndex(new JDFIntegerList(0));
+		final JDFNodeInfo nip0 = (JDFNodeInfo) niProduct.getCreatePartition(0, true).getResource();
+		final JDFDate d10 = new JDFDate().addOffset(0, 0, 0, 10);
+		nip0.setEnd(d10);
+
+		final SetHelper niCP = h.appendResourceSet(ElementName.NODEINFO, EnumUsage.Input);
+		niCP.setCombinedProcessIndex(new JDFIntegerList(1));
+		final JDFNodeInfo nicp0 = (JDFNodeInfo) niCP.getCreatePartition(0, true).getResource();
+		final JDFDate d5 = new JDFDate().addOffset(0, 0, 0, 5);
+		nicp0.setEnd(d5);
+
+		final JDFDoc d = xCon.convert(h);
+		assertNotNull(d);
+		final JDFNode root = d.getJDFRoot();
+		assertEquals(d10, root.getNodeInfo().getEnd());
+		assertEquals(d5, root.getJDF(0).getNodeInfo().getEnd());
 	}
 
 	/**

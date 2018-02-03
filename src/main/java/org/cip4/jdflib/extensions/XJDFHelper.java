@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -119,11 +119,11 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param doc the xmldoc to parse
 	 * @return the helper
 	 */
-	public static XJDFHelper getHelper(XMLDoc doc)
+	public static XJDFHelper getHelper(final XMLDoc doc)
 	{
 		if (doc == null)
 			return null;
-		KElement root = doc.getRoot();
+		final KElement root = doc.getRoot();
 		return getHelper(root);
 	}
 
@@ -145,7 +145,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	/**
 	 * @param xjdf if null a new XJDF is generated, else the xjdf root to be manipulated
 	 */
-	public XJDFHelper(KElement xjdf)
+	public XJDFHelper(final KElement xjdf)
 	{
 		super();
 		if (xjdf == null)
@@ -167,7 +167,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param jobPartID
 	 * @param parts
 	 */
-	public XJDFHelper(String jobID, String jobPartID, VJDFAttributeMap parts)
+	public XJDFHelper(String jobID, final String jobPartID, final VJDFAttributeMap parts)
 	{
 		super();
 		newXJDF();
@@ -182,9 +182,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	/**
 	 * @param parts
 	 */
-	private void setParts(VJDFAttributeMap parts)
+	private void setParts(final VJDFAttributeMap parts)
 	{
-		SetHelper niHelper = getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
+		final SetHelper niHelper = getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
 		niHelper.getCreatePartitions(parts, true);
 	}
 
@@ -193,10 +193,10 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	void newXJDF()
 	{
-		JDFDoc doc = new JDFDoc(XJDFConstants.XJDF, EnumVersion.Version_2_0);
+		final JDFDoc doc = new JDFDoc(XJDFConstants.XJDF, EnumVersion.Version_2_0);
 		doc.setInitOnCreate(false);
 		theElement = doc.getRoot();
-		AuditPoolHelper aph = getCreateAuditPool();
+		final AuditPoolHelper aph = getCreateAuditPool();
 		aph.appendMessage(XJDFConstants.AuditCreated);
 	}
 
@@ -214,15 +214,15 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param usage
 	 * @return the vector of parametersets and resourcesets
 	 */
-	public Vector<SetHelper> getSets(String setName, EnumUsage usage)
+	public Vector<SetHelper> getSets(final String setName, final EnumUsage usage)
 	{
-		Vector<SetHelper> v = new Vector<SetHelper>();
+		final Vector<SetHelper> v = new Vector<SetHelper>();
 		KElement e = theElement.getFirstChildElement();
 		while (e != null)
 		{
 			if (SetHelper.isSet(e))
 			{
-				SetHelper set = new SetHelper(e);
+				final SetHelper set = new SetHelper(e);
 				if ((setName == null || setName.equals(set.getName())) && (usage == null || usage.equals(set.getUsage())))
 				{
 					v.add(set);
@@ -239,7 +239,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public AuditPoolHelper getAuditPool()
 	{
-		KElement auditPool = theElement.getElement(ElementName.AUDITPOOL);
+		final KElement auditPool = theElement.getElement(ElementName.AUDITPOOL);
 		return auditPool == null ? null : new AuditPoolHelper(auditPool);
 	}
 
@@ -249,7 +249,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public AuditPoolHelper getCreateAuditPool()
 	{
-		KElement auditPool = theElement.getCreateElement(ElementName.AUDITPOOL);
+		final KElement auditPool = theElement.getCreateElement(ElementName.AUDITPOOL);
 		return new AuditPoolHelper(auditPool);
 	}
 
@@ -257,7 +257,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param id
 	 * @return the  parameterset and resourceset with ID=iD
 	 */
-	public SetHelper getSet(String id)
+	public SetHelper getSet(final String id)
 	{
 		if (id == null)
 			return null;
@@ -276,9 +276,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param id
 	 * @return the  parameterset and resourceset with a child partiton with ID=iD
 	 */
-	public SetHelper getSetForPartition(String id)
+	public SetHelper getSetForPartition(final String id)
 	{
-		ResourceHelper ph = getPartition(id);
+		final ResourceHelper ph = getPartition(id);
 		if (ph != null)
 		{
 			return ph.getSet();
@@ -293,7 +293,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param id
 	 * @return the  parameterset and resourceset with ID=iD
 	 */
-	public ResourceHelper getPartition(String id)
+	public ResourceHelper getPartition(final String id)
 	{
 		if (id == null)
 			return null;
@@ -302,7 +302,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		{
 			if (SetHelper.isSet(e))
 			{
-				ResourceHelper ph = new SetHelper(e).getPartition(id);
+				final ResourceHelper ph = new SetHelper(e).getPartition(id);
 				if (ph != null)
 				{
 					return ph;
@@ -321,7 +321,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @deprecated use SetHelper.isSet
 	 */
 	@Deprecated
-	public boolean isSet(KElement e)
+	public boolean isSet(final KElement e)
 	{
 		return SetHelper.isSet(e);
 	}
@@ -341,13 +341,13 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 *
 	 * @return the list of dependents, null if none were found
 	 */
-	public VString getDependentJobParts(EnumUsage usage)
+	public VString getDependentJobParts(final EnumUsage usage)
 	{
-		Vector<SetHelper> vsh = getSets(null, usage);
-		VString ret = new VString();
+		final Vector<SetHelper> vsh = getSets(null, usage);
+		final VString ret = new VString();
 		if (vsh != null)
 		{
-			for (SetHelper sh : vsh)
+			for (final SetHelper sh : vsh)
 			{
 				ret.appendUnique(sh.getDependentJobParts());
 			}
@@ -360,10 +360,10 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param id
 	 * @return
 	 */
-	public ProductHelper getProduct(String id)
+	public ProductHelper getProduct(final String id)
 	{
-		KElement productList = theElement == null ? null : theElement.getElement(ProductHelper.PRODUCTLIST);
-		KElement productElement = productList == null ? null : productList.getChildWithAttribute(ProductHelper.PRODUCT, AttributeName.ID, null, id, 0, true);
+		final KElement productList = theElement == null ? null : theElement.getElement(ProductHelper.PRODUCTLIST);
+		final KElement productElement = productList == null ? null : productList.getChildWithAttribute(ProductHelper.PRODUCT, AttributeName.ID, null, id, 0, true);
 		return productElement == null ? null : new ProductHelper(productElement);
 	}
 
@@ -372,7 +372,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param id
 	 * @return
 	 */
-	public ProductHelper getCreateProduct(String id)
+	public ProductHelper getCreateProduct(final String id)
 	{
 		ProductHelper ph = getProduct(id);
 		if (ph == null)
@@ -401,7 +401,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 			iProduct = rootProductHelpers.size() + iProduct;
 		if (iProduct >= rootProductHelpers.size() || iProduct < 0)
 			return null;
-		ProductHelper productHelper = rootProductHelpers.get(iProduct);
+		final ProductHelper productHelper = rootProductHelpers.get(iProduct);
 		return productHelper;
 	}
 
@@ -412,7 +412,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param iProduct the index of root products
 	 * @return the product, null if no matching product exists
 	 */
-	public ProductHelper getCreateRootProduct(int iProduct)
+	public ProductHelper getCreateRootProduct(final int iProduct)
 	{
 		ProductHelper productHelper = getRootProduct(iProduct);
 		if (productHelper == null)
@@ -428,9 +428,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param rootOnly
 	 * @return
 	 */
-	public int numProductHelpers(boolean rootOnly)
+	public int numProductHelpers(final boolean rootOnly)
 	{
-		Vector<ProductHelper> v = rootOnly ? getRootProductHelpers() : getProductHelpers();
+		final Vector<ProductHelper> v = rootOnly ? getRootProductHelpers() : getProductHelpers();
 		return v == null ? 0 : v.size();
 	}
 
@@ -440,12 +440,12 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public Vector<ProductHelper> getRootProductHelpers()
 	{
-		Vector<ProductHelper> vp = getProductHelpers();
+		final Vector<ProductHelper> vp = getProductHelpers();
 		if (vp == null)
 			return null;
-		Vector<ProductHelper> vp2 = new Vector<ProductHelper>();
+		final Vector<ProductHelper> vp2 = new Vector<ProductHelper>();
 
-		for (ProductHelper ph : vp)
+		for (final ProductHelper ph : vp)
 		{
 			if (ph.isRootProduct())
 			{
@@ -462,13 +462,13 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public Vector<ProductHelper> getProductHelpers()
 	{
-		KElement productList = theElement == null ? null : theElement.getElement(ProductHelper.PRODUCTLIST);
-		VElement products = productList == null ? null : productList.getChildElementVector(ProductHelper.PRODUCT, null);
+		final KElement productList = theElement == null ? null : theElement.getElement(ProductHelper.PRODUCTLIST);
+		final VElement products = productList == null ? null : productList.getChildElementVector(ProductHelper.PRODUCT, null);
 		if (products == null || products.size() == 0)
 			return null;
 
-		Vector<ProductHelper> vph = new Vector<ProductHelper>();
-		for (KElement e : products)
+		final Vector<ProductHelper> vph = new Vector<ProductHelper>();
+		for (final KElement e : products)
 		{
 			vph.add(new ProductHelper(e));
 		}
@@ -481,9 +481,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param iPart
 	 * @return PartitionHelper for the requested partition, null if it ain't there
 	 */
-	public ResourceHelper getPartition(String name, int iSet, int iPart)
+	public ResourceHelper getPartition(final String name, final int iSet, final int iPart)
 	{
-		SetHelper sh = getSet(name, iSet);
+		final SetHelper sh = getSet(name, iSet);
 		return sh == null ? null : sh.getPartition(iPart);
 	}
 
@@ -493,9 +493,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param iPart
 	 * @return resource for the requested partition, null if it ain't there
 	 */
-	public KElement getResource(String name, int iSet, int iPart)
+	public KElement getResource(final String name, final int iSet, final int iPart)
 	{
-		ResourceHelper ph = getPartition(name, iSet, iPart);
+		final ResourceHelper ph = getPartition(name, iSet, iPart);
 		return ph == null ? null : ph.getResource();
 	}
 
@@ -504,7 +504,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param iSkip
 	 * @return the SetHelper for the vector of parametersets and resourcesets
 	 */
-	public SetHelper getSet(String name, int iSkip)
+	public SetHelper getSet(final String name, final int iSkip)
 	{
 		KElement e = theElement.getFirstChildElement();
 		int n = 0;
@@ -531,10 +531,10 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 *
 	 * @return the SetHelper for the vector of resourcesets
 	 */
-	public SetHelper getSet(String name, EnumUsage usage, String processUsage)
+	public SetHelper getSet(final String name, final EnumUsage usage, final String processUsage)
 	{
 		KElement e = theElement.getFirstChildElement();
-		String usageString = usage == null ? null : usage.getName();
+		final String usageString = usage == null ? null : usage.getName();
 		while (e != null)
 		{
 			if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))) && StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE))
@@ -553,10 +553,10 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 *
 	 * @return the SetHelper for the vector of resourcesets
 	 */
-	public SetHelper getSet(String name, EnumUsage usage)
+	public SetHelper getSet(final String name, final EnumUsage usage)
 	{
 		KElement e = theElement.getFirstChildElement();
-		String usageString = usage == null ? null : usage.getName();
+		final String usageString = usage == null ? null : usage.getName();
 		while (e != null)
 		{
 			if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))) && StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE)))
@@ -586,15 +586,15 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param usage
 	 * @return a new set element
 	 */
-	public SetHelper appendSet(String family, String name, EnumUsage usage)
+	public SetHelper appendSet(String family, String name, final EnumUsage usage)
 	{
 		if (family == null)
 			family = XJDFConstants.Resource;
-		KElement newSet = theElement.appendElement(family + "Set");
+		final KElement newSet = theElement.appendElement(family + "Set");
 		newSet.setAttribute("Name", name);
 		if (name == null)
 			name = "Set";
-		SetHelper h = new SetHelper(newSet);
+		final SetHelper h = new SetHelper(newSet);
 		h.setID(name + KElement.uniqueID(0));
 		if (usage != null)
 			h.setUsage(usage);
@@ -607,7 +607,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param usage
 	 * @return a new set element
 	 */
-	public SetHelper getCreateSet(String family, String name, EnumUsage usage)
+	public SetHelper getCreateSet(final String family, final String name, final EnumUsage usage)
 	{
 		SetHelper newSet = getSet(name, usage, null);
 		if (newSet == null)
@@ -625,7 +625,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @deprecated use getCreateSet
 	 */
 	@Deprecated
-	public SetHelper getCreateResourceSet(String name, EnumUsage usage)
+	public SetHelper getCreateResourceSet(final String name, final EnumUsage usage)
 	{
 		return getCreateSet(XJDFConstants.Resource, name, usage);
 	}
@@ -636,7 +636,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param usage
 	 * @return a new set element
 	 */
-	public SetHelper getCreateSet(String name, EnumUsage usage)
+	public SetHelper getCreateSet(final String name, final EnumUsage usage)
 	{
 		SetHelper set = getSet(name, usage);
 		if (set == null)
@@ -652,7 +652,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param processUsage
 	 * @return a new set element
 	 */
-	public SetHelper getCreateSet(String name, EnumUsage usage, String processUsage)
+	public SetHelper getCreateSet(final String name, final EnumUsage usage, final String processUsage)
 	{
 		SetHelper set = getSet(name, usage, processUsage);
 		if (set == null)
@@ -671,7 +671,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @deprecated
 	 */
 	@Deprecated
-	public SetHelper getCreateParameterSet(String name, EnumUsage usage)
+	public SetHelper getCreateParameterSet(final String name, final EnumUsage usage)
 	{
 		return getCreateSet(XJDFConstants.Resource, name, usage);
 	}
@@ -679,9 +679,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	/**
 	 * @param name
 	 */
-	public void removeSet(String name)
+	public void removeSet(final String name)
 	{
-		SetHelper newSet = getSet(name, 0);
+		final SetHelper newSet = getSet(name, 0);
 		if (newSet != null)
 		{
 			newSet.getSet().deleteNode();
@@ -696,7 +696,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 *
 	 */
 	@Deprecated
-	public SetHelper appendParameter(String name, EnumUsage usage)
+	public SetHelper appendParameter(final String name, final EnumUsage usage)
 	{
 		return appendResourceSet(name, usage);
 	}
@@ -706,9 +706,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public ProductHelper appendProduct()
 	{
-		KElement product = theElement.getCreateElement(ProductHelper.PRODUCTLIST).appendElement(ProductHelper.PRODUCT);
+		final KElement product = theElement.getCreateElement(ProductHelper.PRODUCTLIST).appendElement(ProductHelper.PRODUCT);
 		reorder();
-		ProductHelper productHelper = new ProductHelper(product);
+		final ProductHelper productHelper = new ProductHelper(product);
 		productHelper.setRoot(productHelper.isRootProduct());
 		return productHelper;
 	}
@@ -720,7 +720,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @deprecated
 	 */
 	@Deprecated
-	public SetHelper appendResource(String name, EnumUsage usage)
+	public SetHelper appendResource(final String name, final EnumUsage usage)
 	{
 		return appendResourceSet(name, usage);
 	}
@@ -730,7 +730,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param usage
 	 * @return a new set element
 	 */
-	public SetHelper appendResourceSet(String name, EnumUsage usage)
+	public SetHelper appendResourceSet(final String name, final EnumUsage usage)
 	{
 		return appendSet(XJDFConstants.Resource, name, usage);
 	}
@@ -749,10 +749,10 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param file
 	 * @return
 	 */
-	public boolean writeToFile(String file)
+	public boolean writeToFile(final String file)
 	{
 		cleanUp();
-		boolean b = getRoot().getOwnerDocument_KElement().write2File(file, 2, false);
+		final boolean b = getRoot().getOwnerDocument_KElement().write2File(file, 2, false);
 		return b;
 	}
 
@@ -761,7 +761,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param dir
 	 * @return
 	 */
-	public File writeToDir(String dir)
+	public File writeToDir(final String dir)
 	{
 		String jobID = getJobID();
 		if (StringUtil.getNonEmpty(jobID) == null)
@@ -778,9 +778,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 			}
 			jobPartID = types;
 		}
-		String file = jobID + "." + jobPartID + ".xjdf";
-		String newURL = UrlUtil.getURLWithDirectory(dir, file);
-		boolean ok = writeToFile(newURL);
+		final String file = jobID + "." + jobPartID + ".xjdf";
+		final String newURL = UrlUtil.getURLWithDirectory(dir, file);
+		final boolean ok = writeToFile(newURL);
 		return ok ? new File(newURL) : null;
 	}
 
@@ -788,7 +788,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param os
 	 * @throws IOException
 	 */
-	public void writeToStream(OutputStream os) throws IOException
+	public void writeToStream(final OutputStream os) throws IOException
 	{
 		cleanUp();
 		getRoot().getOwnerDocument_KElement().write2Stream(os, 2, false);
@@ -798,9 +798,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 *
 	 * @param types
 	 */
-	public void setTypes(String types)
+	public void setTypes(final String types)
 	{
-		VString vtypes = VString.getVString(types, null);
+		final VString vtypes = VString.getVString(types, null);
 		setTypes(vtypes);
 	}
 
@@ -808,7 +808,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 *
 	 * @param vtypes
 	 */
-	public void setTypes(VString vtypes)
+	public void setTypes(final VString vtypes)
 	{
 		setXPathValue("@Types", StringUtil.setvString(vtypes));
 	}
@@ -837,7 +837,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public VJDFAttributeMap getPartMapVector()
 	{
-		SetHelper sh = getSet(ElementName.NODEINFO, EnumUsage.Input, null);
+		final SetHelper sh = getSet(ElementName.NODEINFO, EnumUsage.Input, null);
 		return sh == null ? null : sh.getPartMapVector();
 	}
 
@@ -847,7 +847,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public EnumType getType()
 	{
-		VString types = VString.getVString(getXPathValue("@Types"), null);
+		final VString types = VString.getVString(getXPathValue("@Types"), null);
 		EnumType typ = null;
 		if (types != null && types.size() == 1)
 		{
@@ -863,16 +863,16 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	public void cleanUp()
 	{
 		theElement.sortChildren(new KElement.SimpleElementNameComparator(), false);
-		Vector<SetHelper> v = getSets();
+		final Vector<SetHelper> v = getSets();
 		if (v != null)
 		{
-			for (SetHelper sh : v)
+			for (final SetHelper sh : v)
 			{
 				sh.cleanUp();
 				theElement.moveElement(sh.getSet(), null);
 			}
 		}
-		AuditPoolHelper auditPool = getAuditPool();
+		final AuditPoolHelper auditPool = getAuditPool();
 		if (auditPool != null)
 		{
 			auditPool.cleanUp();
@@ -887,7 +887,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	@Override
 	public XJDFHelper clone()
 	{
-		KElement k = (theElement == null) ? null : theElement.cloneNewDoc();
+		final KElement k = (theElement == null) ? null : theElement.cloneNewDoc();
 		return new XJDFHelper(k);
 	}
 
@@ -904,7 +904,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 *
 	 * @param jobPartID
 	 */
-	public void setJobPartID(String jobPartID)
+	public void setJobPartID(final String jobPartID)
 	{
 		setXPathValue("@" + AttributeName.JOBPARTID, jobPartID);
 	}
@@ -913,7 +913,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 *
 	 * @param jobID
 	 */
-	public void setJobID(String jobID)
+	public void setJobID(final String jobID)
 	{
 		setXPathValue("@" + AttributeName.JOBID, jobID);
 	}
@@ -926,8 +926,8 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	@Override
 	public void reorder()
 	{
-		KElement pl = theElement.getElement(ProductHelper.PRODUCTLIST);
-		KElement ap = theElement.getElement(ElementName.AUDITPOOL);
+		final KElement pl = theElement.getElement(ProductHelper.PRODUCTLIST);
+		final KElement ap = theElement.getElement(ElementName.AUDITPOOL);
 		if (pl != null)
 		{
 			KElement f = theElement.getFirstChildElement();
@@ -939,7 +939,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		}
 		if (ap != null)
 		{
-			KElement f = theElement.getFirstChildElement();
+			final KElement f = theElement.getFirstChildElement();
 			theElement.moveElement(ap, f);
 		}
 	}
@@ -949,18 +949,18 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param typ
 	 * @param iSkip
 	 */
-	public void removeType(String typ, int iSkip)
+	public void removeType(final String typ, final int iSkip)
 	{
-		VString types = getTypes();
+		final VString types = getTypes();
 		if (types != null && types.indexOf(typ, iSkip) >= 0)
 		{
-			int pos = types.indexOf(typ, iSkip);
+			final int pos = types.indexOf(typ, iSkip);
 			types.remove(pos);
 			setTypes(types);
-			Vector<SetHelper> sets = getSets();
+			final Vector<SetHelper> sets = getSets();
 			if (sets != null)
 			{
-				for (SetHelper set : sets)
+				for (final SetHelper set : sets)
 				{
 					set.removeTypeFromCPI(pos);
 				}
@@ -973,7 +973,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param typ
 	 *
 	 */
-	public XJDFHelper addType(String typ)
+	public XJDFHelper addType(final String typ)
 	{
 		addType(typ, -1);
 		return this;
@@ -984,7 +984,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param typ
 	 *
 	 */
-	public XJDFHelper addType(EnumType typ)
+	public XJDFHelper addType(final EnumType typ)
 	{
 		return addType(typ.getName());
 	}
@@ -994,14 +994,14 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @param typ
 	 * @param iSkip <0 for append
 	 */
-	public void addType(String typ, int iSkip)
+	public void addType(final String typ, int iSkip)
 	{
 		VString types = getTypes();
 		if (types == null)
 		{
 			types = new VString();
 		}
-		int lastPos = types.size();
+		final int lastPos = types.size();
 		if (iSkip < 0)
 			iSkip = lastPos;
 
@@ -1009,14 +1009,44 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		{
 			types.insertElementAt(typ, iSkip);
 			setTypes(types);
-			Vector<SetHelper> sets = getSets();
+			final Vector<SetHelper> sets = getSets();
 			if (sets != null)
 			{
-				for (SetHelper set : sets)
+				for (final SetHelper set : sets)
 				{
 					set.addTypeToCPI(iSkip);
 				}
 			}
 		}
+	}
+
+	/**
+	 *
+	 * @param typ
+	 * @param iSkip
+	 * @return the cpi of the iSkip occurrence of typ
+	 */
+	public int indexOfType(final String typ, int iSkip)
+	{
+		final VString types = getTypes();
+		if (types == null)
+		{
+			return -1;
+		}
+		int n = -1;
+		while (iSkip-- >= 0)
+		{
+			final int i = types.indexOf(typ, n + 1);
+			if (i >= 0)
+			{
+				n = i;
+			}
+			else
+			{
+				n = -1;
+				break;
+			}
+		}
+		return n;
 	}
 }
