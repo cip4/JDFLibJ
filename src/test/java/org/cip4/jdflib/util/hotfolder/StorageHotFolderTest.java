@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -229,7 +229,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		d.write2File(hfPath + "/dummy.jdf", 2, false);
 		final File file = new File(hfPath + "/dummy.jdf");
 		assertTrue(file.exists());
-		for (int i = 0; i < 400; i++)
+		for (int i = 0; i < 800; i++)
 		{
 			ThreadUtil.sleep(100);
 			if (!file.exists() && !content.exists())
