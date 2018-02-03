@@ -74,6 +74,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
@@ -167,8 +168,8 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 
 	File theHFDir;
 	File tmpHFDir;
-
-	static int n = 0;
+	static AtomicInteger ai = new AtomicInteger(0);
+	int n = 0;
 
 	/**
 	 *
@@ -180,7 +181,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	{
 		OrderedTaskQueue.shutDownAll();
 		super.setUp();
-		n++;
+		n = ai.incrementAndGet();
 		theHFDir = new File(sm_dirTestDataTemp + File.separator + "StHFTest" + n);
 		FileUtil.deleteAll(theHFDir);
 		theHFDir.mkdirs();
