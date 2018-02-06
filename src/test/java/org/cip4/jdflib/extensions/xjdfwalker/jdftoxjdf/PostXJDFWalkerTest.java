@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -68,6 +68,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.junit.Test;
@@ -105,7 +106,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		pi.getAmountPool().getPartAmount(0).setActualAmount(66);
 
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
-		w.walkTree(h.getRoot(), null);
+		w.walkTreeKidsFirst(h.getRoot());
 		assertEquals(h.getRoot().getXPathAttribute("AuditPool/AuditResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null), "66");
 
 	}
@@ -244,4 +245,19 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		assertEquals(h.getNextSibling(), h2);
 	}
 
+	/**
+	 *
+	 */
+	@Test
+	public void testHeaderMessageNameSpace()
+	{
+		final KElement x = new JDFDoc(XJDFConstants.XJMF, EnumVersion.Version_1_6).getRoot();
+		final KElement c = x.appendElement("SignalNotification");
+		x.setAttribute(AttributeName.DEVICEID, "d1");
+		c.setAttribute(AttributeName.DEVICEID, "d1");
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) x);
+		w.walkTreeKidsFirst(x);
+		assertEquals(XJDF20.getSchemaURL(), x.getElement(XJDFConstants.Header).getNamespaceURI());
+		assertEquals(XJDF20.getSchemaURL(), c.getElement(XJDFConstants.Header).getNamespaceURI());
+	}
 }

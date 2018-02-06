@@ -2477,7 +2477,8 @@ class PostXJDFWalker extends BaseElementWalker
 					}
 				}
 			}
-
+			// ensure clean namespaces
+			getFactory().getWalker(sender).walk(sender, null);
 		}
 	}
 
