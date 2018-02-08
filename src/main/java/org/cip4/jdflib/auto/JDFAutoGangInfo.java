@@ -89,10 +89,11 @@ public abstract class JDFAutoGangInfo extends JDFElement
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.GANGNAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -106,7 +107,7 @@ public abstract class JDFAutoGangInfo extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGangInfo(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoGangInfo(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -117,7 +118,7 @@ public abstract class JDFAutoGangInfo extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGangInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoGangInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -129,7 +130,7 @@ public abstract class JDFAutoGangInfo extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoGangInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoGangInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -155,7 +156,7 @@ public abstract class JDFAutoGangInfo extends JDFElement
 	  * (36) set attribute GangName
 	  * @param value the value to set the attribute to
 	  */
-	public void setGangName(String value)
+	public void setGangName(final String value)
 	{
 		setAttribute(AttributeName.GANGNAME, value, null);
 	}
