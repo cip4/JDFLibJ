@@ -82,7 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 public class JDFActivity extends JDFAutoActivity
 {
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[0];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ENDTIME, 0x31111111, AttributeInfo.EnumAttributeType.dateTime, null, null);
