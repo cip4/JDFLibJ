@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1007,7 +1007,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	@Override
 	public DocumentJDFImpl clone()
 	{
-		DocumentJDFImpl clon = (DocumentJDFImpl) super.clone();
+		final DocumentJDFImpl clon = (DocumentJDFImpl) super.clone();
 		clon.myXMLUserDat = new XMLDocUserData(clon);
 		clon.bInitOnCreate = bInitOnCreate;
 		clon.bKElementOnly = bKElementOnly;
@@ -1086,7 +1086,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		bInJDFJMF = bInJDFJMF || jdfNSURI.equals(namespaceURI) || xjdfNSURI.equals(namespaceURI) || ElementName.JDF.equals(localPart) || XJDFConstants.XJDF.equals(localPart)
 				|| XJDFConstants.XJMF.equals(localPart) || ElementName.JMF.equals(localPart);
 
-		DocumentData theData = data;
+		final DocumentData theData = data;
 		synchronized (theData.sm_hashCtorElementNS)
 		{
 			constructi = theData.sm_hashCtorElementNS.get(qualifiedName);
@@ -1147,7 +1147,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	 * @param qualifiedName
 	 * @param constructi
 	 */
-	private void putConstructorToHashMap(final String qualifiedName, final Constructor<?> constructi, String path)
+	private void putConstructorToHashMap(final String qualifiedName, final Constructor<?> constructi, final String path)
 	{
 		// only put the constructor into the map if its not a Resource or an element
 		// there are a couple of nodes which can be both resource and element depending on the occurrence
@@ -1341,58 +1341,23 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		{
 			if (ElementName.HOLETYPE.equals(strName))
 			{
-				if ("org.cip4.jdflib.resource.process.postpress.JDFRingBinding".equals(strParentNodeClass))
-				{
-					strClassPath = "org.cip4.jdflib.span.JDFSpanHoleType";
-				}
-				else
-				{
-					strClassPath = "org.cip4.jdflib.span.JDFStringSpan";
-				}
+				strClassPath = getHoleTypeClass(strParentNodeClass);
 			}
 			else if (ElementName.METHOD.equals(strName))
 			{
-				if ("org.cip4.jdflib.resource.intent.JDFInsertingIntent".equals(strParentNodeClass) || "org.cip4.jdflib.resource.JDFInsert".equals(strParentNodeClass))
-				{
-					strClassPath = "org.cip4.jdflib.span.JDFSpanMethod";
-				}
-				else
-				{
-					strClassPath = "org.cip4.jdflib.span.JDFNameSpan";
-				}
+				strClassPath = getMethodClass(strParentNodeClass);
 			}
 			else if (ElementName.SHAPE.equals(strName))
 			{
-				if ("org.cip4.jdflib.resource.intent.JDFBookCase".equals(strParentNodeClass))
-				{
-					strClassPath = "org.cip4.jdflib.span.JDFSpanShape";
-				}
-				else
-				{
-					strClassPath = "org.cip4.jdflib.resource.JDFShapeElement";
-				}
+				strClassPath = getShapeClass(strParentNodeClass);
 			}
 			else if (ElementName.SURFACE.equals(strName))
 			{
-				if ("org.cip4.jdflib.resource.intent.JDFLaminatingIntent".equals(strParentNodeClass))
-				{
-					strClassPath = "org.cip4.jdflib.span.JDFSpanSurface";
-				}
-				else
-				{
-					strClassPath = "org.cip4.jdflib.resource.process.JDFLayout";
-				}
+				strClassPath = getSurfaceClass(strParentNodeClass);
 			}
 			else if (ElementName.POSITION.equals(strName))
 			{
-				if ("org.cip4.jdflib.resource.JDFEmbossingItem".equals(strParentNodeClass))
-				{
-					strClassPath = "org.cip4.jdflib.span.JDFXYPairSpan";
-				}
-				else
-				{
-					strClassPath = "org.cip4.jdflib.resource.process.JDFPosition";
-				}
+				strClassPath = getPositionClass(strParentNodeClass);
 			}
 			else
 			{
@@ -1414,6 +1379,76 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			}
 		}
 
+		return strClassPath;
+	}
+
+	protected String getPositionClass(final String strParentNodeClass)
+	{
+		final String strClassPath;
+		if ("org.cip4.jdflib.resource.JDFEmbossingItem".equals(strParentNodeClass))
+		{
+			strClassPath = "org.cip4.jdflib.span.JDFXYPairSpan";
+		}
+		else
+		{
+			strClassPath = "org.cip4.jdflib.resource.process.JDFPosition";
+		}
+		return strClassPath;
+	}
+
+	protected String getSurfaceClass(final String strParentNodeClass)
+	{
+		final String strClassPath;
+		if ("org.cip4.jdflib.resource.intent.JDFLaminatingIntent".equals(strParentNodeClass))
+		{
+			strClassPath = "org.cip4.jdflib.span.JDFSpanSurface";
+		}
+		else
+		{
+			strClassPath = "org.cip4.jdflib.resource.process.JDFLayout";
+		}
+		return strClassPath;
+	}
+
+	protected String getShapeClass(final String strParentNodeClass)
+	{
+		final String strClassPath;
+		if ("org.cip4.jdflib.resource.intent.JDFBookCase".equals(strParentNodeClass))
+		{
+			strClassPath = "org.cip4.jdflib.span.JDFSpanShape";
+		}
+		else
+		{
+			strClassPath = "org.cip4.jdflib.resource.JDFShapeElement";
+		}
+		return strClassPath;
+	}
+
+	protected String getMethodClass(final String strParentNodeClass)
+	{
+		final String strClassPath;
+		if ("org.cip4.jdflib.resource.intent.JDFInsertingIntent".equals(strParentNodeClass) || "org.cip4.jdflib.resource.JDFInsert".equals(strParentNodeClass))
+		{
+			strClassPath = "org.cip4.jdflib.span.JDFSpanMethod";
+		}
+		else
+		{
+			strClassPath = "org.cip4.jdflib.span.JDFNameSpan";
+		}
+		return strClassPath;
+	}
+
+	protected String getHoleTypeClass(final String strParentNodeClass)
+	{
+		final String strClassPath;
+		if ("org.cip4.jdflib.resource.process.postpress.JDFRingBinding".equals(strParentNodeClass))
+		{
+			strClassPath = "org.cip4.jdflib.span.JDFSpanHoleType";
+		}
+		else
+		{
+			strClassPath = "org.cip4.jdflib.span.JDFStringSpan";
+		}
 		return strClassPath;
 	}
 
@@ -1441,7 +1476,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		m_ParentNode = node;
 	}
 
-	private boolean isDeepResource(final String strName, String nameSpaceURI)
+	private boolean isDeepResource(final String strName, final String nameSpaceURI)
 	{
 		if (m_ParentNode == null)
 		{
