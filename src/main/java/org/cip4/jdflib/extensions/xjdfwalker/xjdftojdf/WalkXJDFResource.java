@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -190,6 +190,7 @@ public class WalkXJDFResource extends WalkXElement
 		}
 		if (vMap.isEmpty())
 			vMap.add(new JDFAttributeMap());
+		vMap.unify();
 		return vMap;
 	}
 
@@ -416,8 +417,6 @@ public class WalkXJDFResource extends WalkXElement
 		p.remove(AttributeName.PRODUCTPART);
 		p.remove(AttributeName.DROPID);
 		p.remove(XJDFConstants.ContactType);
-		p.remove(XJDFConstants.ProcessTypes);
-
 		return p;
 	}
 

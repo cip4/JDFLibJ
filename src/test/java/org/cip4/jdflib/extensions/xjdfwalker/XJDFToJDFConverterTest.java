@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,6 +93,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.AuditPoolHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.MessageHelper;
@@ -939,6 +940,34 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(ci);
 		final JDFContact contact = (JDFContact) d.getJDFRoot().getResource(ElementName.CONTACT, null, 0);
 		assertEquals(EnumContactType.Customer.getName(), contact.getContactTypes().get(0));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testCustomerInfoMultiContacts()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		final KElement e = h.getRoot();
+		h.getCreateSet(XJDFConstants.Resource, ElementName.CUSTOMERINFO, EnumUsage.Input).getCreatePartition(0, true).getResource().setAttribute(AttributeName.CUSTOMERORDERID, "cc");
+		final SetHelper sh = h.getCreateSet(XJDFConstants.Resource, ElementName.CONTACT, EnumUsage.Input);
+		final ResourceHelper ph = sh.getCreatePartition(0, true);
+		final VJDFAttributeMap vPart = new VJDFAttributeMap();
+		vPart.add(new JDFAttributeMap(XJDFConstants.ContactType, EnumContactType.Customer.getName()));
+		vPart.add(new JDFAttributeMap(XJDFConstants.ContactType, EnumContactType.Billing.getName()));
+		vPart.add(new JDFAttributeMap(XJDFConstants.ContactType, EnumContactType.Delivery.getName()));
+		ph.setPartMapVector(vPart);
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		final JDFCustomerInfo ci = d.getJDFRoot().getCustomerInfo();
+		assertNotNull(ci);
+		final JDFContact contact = (JDFContact) d.getJDFRoot().getResource(ElementName.CONTACT, null, 0);
+		assertTrue(contact.getContactTypes().contains(EnumContactType.Customer.getName()));
+		assertTrue(contact.getContactTypes().contains(EnumContactType.Billing.getName()));
+		assertTrue(contact.getContactTypes().contains(EnumContactType.Delivery.getName()));
 	}
 
 	/**
