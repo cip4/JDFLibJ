@@ -121,7 +121,7 @@ public class JDFValidatorTest extends JDFTestCaseBase
 		final JDFNode node = doc.getJDFRoot();
 		final JDFResource cc = node.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
 		final JDFColorPool cp = (JDFColorPool) cc.appendElement(ElementName.COLORPOOL);
-		cp.appendColorWithName("B", "A");
+		cp.appendColorWithName("B", null).setActualColorName("A");
 		cp.appendColorWithName("C", null).setActualColorName("A");
 
 		assertFalse(validator.isValid(doc));

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,6 +78,7 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -148,6 +149,21 @@ public class JDFColorTest extends JDFTestCaseBase
 		c3.setName("aa");
 		c3.set8BitNames("a".getBytes());
 		assertTrue(c3.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0).contains("RawName"));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testDuplicateActualName()
+	{
+		final JDFColor c = cp.appendColorWithName("a", null);
+		final JDFColor c1 = cp.appendColorWithName("a2", null);
+		c.setActualColorName("act");
+		c1.setActualColorName("act");
+		assertTrue(c1.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0).contains(AttributeName.ACTUALCOLORNAME));
+		assertFalse(c.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0).contains(AttributeName.ACTUALCOLORNAME));
 
 	}
 

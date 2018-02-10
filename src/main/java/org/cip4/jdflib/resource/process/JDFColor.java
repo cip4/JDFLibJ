@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * 23.01.2009
  */
 public class JDFColor extends JDFAutoColor
@@ -93,7 +93,7 @@ public class JDFColor extends JDFAutoColor
 
 	/**
 	 * Constructor for JDFColor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -106,7 +106,7 @@ public class JDFColor extends JDFAutoColor
 	 * Constructor for JDFColor
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
-	 * 
+	 *
 	 * @param qualifiedName
 	 */
 	public JDFColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
@@ -130,7 +130,7 @@ public class JDFColor extends JDFAutoColor
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -141,7 +141,7 @@ public class JDFColor extends JDFAutoColor
 
 	/**
 	 * Set the Name and RawName attributes to the value given in pName The value in Name uses the default encoding
-	 * 
+	 *
 	 * @param cName the 8 bit string to set the name to
 	 */
 	public void set8BitNames(final byte[] cName)
@@ -152,7 +152,7 @@ public class JDFColor extends JDFAutoColor
 		{
 			setName(new String(cName));
 		}
-		catch (Exception x)
+		catch (final Exception x)
 		{
 			// nop - we ignore it if the encoding is snafu
 		}
@@ -190,7 +190,7 @@ public class JDFColor extends JDFAutoColor
 
 	/**
 	 * Gets the ActualColorName or Name if no ActualColorName is set
-	 * 
+	 *
 	 * @return String Name of the color extracted from RawName, or if this is missing from Name, using the default transcoder
 	 */
 	@Override
@@ -202,7 +202,7 @@ public class JDFColor extends JDFAutoColor
 
 	/**
 	 * Gets the 16 bit representation of the 8 bit color name Use String GetRawBytes() to extract the 8 bit representation
-	 * 
+	 *
 	 * @return String Name of the color extracted from RawName, or if this is missing from Name, using the default transcoder
 	 */
 	public String get8BitName()
@@ -340,26 +340,31 @@ public class JDFColor extends JDFAutoColor
 	 * @return
 	*/
 	@Override
-	public VString getInvalidAttributes(EnumValidationLevel level, boolean ignorePrivate, int max)
+	public VString getInvalidAttributes(final EnumValidationLevel level, final boolean ignorePrivate, final int max)
 	{
-		VString v = super.getInvalidAttributes(level, ignorePrivate, max);
+		final VString v = super.getInvalidAttributes(level, ignorePrivate, max);
 		if ((v.size() > max && max > 0) || v.contains(AttributeName.NAME))
 			return v;
-		KElement parent = getParentNode_KElement();
+		final KElement parent = getParentNode_KElement();
 		if (parent instanceof JDFColorPool)
 		{
 			JDFColor last = (JDFColor) getPreviousSiblingElement(ElementName.COLOR, null);
-			String colName = getName();
-			String colRawName = getAttribute(AttributeName.RAWNAME, null, null);
+			final String colName = getName();
+			final String actualName = StringUtil.getNonEmpty(getActualColorName());
+			final String colRawName = getNonEmpty(AttributeName.RAWNAME);
 			while (last != null)
 			{
 				if (ContainerUtil.equals(colName, last.getName()))
 				{
-					v.add("Name");
+					v.add(AttributeName.NAME);
 				}
 				if (colRawName != null && ContainerUtil.equals(colRawName, last.getRawName()))
 				{
-					v.add("RawName");
+					v.add(AttributeName.RAWNAME);
+				}
+				if (actualName != null && ContainerUtil.equals(actualName, last.getActualColorName()))
+				{
+					v.add(AttributeName.ACTUALCOLORNAME);
 				}
 				last = (JDFColor) last.getPreviousSiblingElement(ElementName.COLOR, null);
 			}
