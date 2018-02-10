@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -117,6 +117,7 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
+import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.MyArgs;
 import org.cip4.jdflib.util.StringUtil;
@@ -311,19 +312,7 @@ public class JDFValidator
 		final String elmName = kElement.getNodeName();
 		final String nsURI = kElement.getNamespaceURI();
 
-		KElement testElement = null;
-
-		if (xmlParent != null)
-		{
-			testElement = xmlParent.appendElement("TestElement");
-			testElement.setAttribute("XPath", kElement.buildXPath(null, 1));
-			testElement.setAttribute("NodeName", kElement.getNodeName());
-			final String strID = kElement.getAttribute(AttributeName.ID, null, null);
-			if (strID != null)
-			{
-				testElement.setAttribute("ID", strID);
-			}
-		}
+		final KElement testElement = getTestElement(kElement, xmlParent);
 
 		if (kElement instanceof JDFNode)
 		{
@@ -337,54 +326,10 @@ public class JDFValidator
 		}
 
 		final boolean isJDFNS = JDFElement.isInJDFNameSpaceStatic(kElement);
-		boolean bTypo = false;
+		final boolean bTypo = false;
 		if (!isJDFNS)
 		{
-			final String nameSpaceURI = kElement.getNamespaceURI();
-			final String nsLower = nameSpaceURI.toLowerCase();
-			if (nsLower.contains(JDFConstants.CIP4ORG) && !nsLower.equals(JDFConstants.JDFNAMESPACE))
-			{
-				sysOut.println("Probable namespace Typo: xmlns=" + nameSpaceURI + " should be:" + JDFConstants.JDFNAMESPACE);
-				if (testElement != null)
-				{
-					bTypo = setTypo(pref, elmName, nsURI, testElement);
-				}
-			}
-			if (bPrintNameSpace)
-			{
-				sysOut.print(indent(indent + 2));
-				final String status = isJDFNS ? "Testing" : "Skipping";
-				sysOut.print(status + " ");
-
-				sysOut.println("Element that is not in JDF nameSpace: <" + kElement.getLocalName() + "> namespace:" + pref + "  uri: " + nsURI);
-				setErrorType(testElement, "PrivateElement", "Element in Private NameSpace: " + elmName);
-				if (testElement != null)
-				{
-					testElement.setAttribute("NSPrefix", pref);
-					testElement.setAttribute("NSURI", nsURI);
-					testElement.setAttribute("IsPrivate", true, null);
-					testElement.setAttribute("Status", "Skipping");
-				}
-			}
-			if (kElement instanceof JDFResourceLink)
-			{
-				printResourceLink((JDFResourceLink) kElement, indent, testElement);
-			}
-
-			if (kElement instanceof JDFRefElement)
-			{
-				printRefElement((JDFRefElement) kElement, indent, testElement);
-			}
-
-			if (kElement instanceof JDFResource)
-			{
-				printResource((JDFResource) kElement, indent, testElement);
-			}
-
-			if (!bPrintNameSpace && !bTypo && xmlParent != null && testElement != null && !testElement.hasChildElements())
-			{
-				testElement.deleteNode();
-			}
+			printNonNamespace(kElement, indent, xmlParent, pref, elmName, nsURI, testElement, isJDFNS, bTypo);
 			return;
 		}
 
@@ -392,12 +337,24 @@ public class JDFValidator
 		// is used for identity of variable names for JDFValidator in Java and
 		// C++.
 		// In C++ here a factory object is created.
-		boolean bIsValid = privateValidation(kElement, testElement);
+		final boolean bIsValid = privateValidation(kElement, testElement);
 
 		if (!(kElement instanceof JDFElement))
 		{
 			return; // TODO more
 		}
+		final JDFElement jdfElement = printBadJDF(kElement, indent, xmlParent, bIsNodeRoot, id, elmName, testElement, bIsValid);
+
+		// recurse through all child elements :
+		final VElement ve = jdfElement.getChildElementVector(null, null, null, true, 0, false);
+		for (final KElement e : ve)
+		{
+			printBad(e, indent + 2, testElement, false);
+		}
+	}
+
+	protected JDFElement printBadJDF(final KElement kElement, final int indent, final KElement xmlParent, final boolean bIsNodeRoot, final String id, final String elmName, final KElement testElement, boolean bIsValid)
+	{
 		final JDFElement jdfElement = (JDFElement) kElement;
 		bIsValid = isValidElement(bIsValid, jdfElement);
 
@@ -538,10 +495,10 @@ public class JDFValidator
 			{
 				testElement.setAttribute("IsValid", false, null);
 			}
-			sysOut.println(indent(indent + 2) + "Invalid Element " + elmName + " is not valid, see child elements for details");
+			sysOut.println(indent(indent + 2) + "Invalid Element " + elmName + getInvalidText(jdfElement));
 			if (testElement != null && !testElement.hasAttribute("ErrorType"))
 			{
-				setErrorType(testElement, "InvalidElement", elmName + " is not valid, see child elements for details", 2);
+				setErrorType(testElement, "InvalidElement", elmName + getInvalidText(jdfElement), 2);
 			}
 
 			if (!bValidID && testElement != null)
@@ -707,13 +664,87 @@ public class JDFValidator
 				}
 			}
 		}
+		return jdfElement;
+	}
 
-		// recurse through all child elements :
-		final VElement ve = jdfElement.getChildElementVector(null, null, null, true, 0, false);
-		for (final KElement e : ve)
+	protected void printNonNamespace(final KElement kElement, final int indent, final KElement xmlParent, final String pref, final String elmName, final String nsURI, final KElement testElement, final boolean isJDFNS, boolean bTypo)
+	{
+		final String nameSpaceURI = kElement.getNamespaceURI();
+		final String nsLower = nameSpaceURI.toLowerCase();
+		if (nsLower.contains(JDFConstants.CIP4ORG) && !nsLower.equals(JDFConstants.JDFNAMESPACE))
 		{
-			printBad(e, indent + 2, testElement, false);
+			sysOut.println("Probable namespace Typo: xmlns=" + nameSpaceURI + " should be:" + JDFConstants.JDFNAMESPACE);
+			if (testElement != null)
+			{
+				bTypo = setTypo(pref, elmName, nsURI, testElement);
+			}
 		}
+		if (bPrintNameSpace)
+		{
+			sysOut.print(indent(indent + 2));
+			final String status = isJDFNS ? "Testing" : "Skipping";
+			sysOut.print(status + " ");
+
+			sysOut.println("Element that is not in JDF nameSpace: <" + kElement.getLocalName() + "> namespace:" + pref + "  uri: " + nsURI);
+			setErrorType(testElement, "PrivateElement", "Element in Private NameSpace: " + elmName);
+			if (testElement != null)
+			{
+				testElement.setAttribute("NSPrefix", pref);
+				testElement.setAttribute("NSURI", nsURI);
+				testElement.setAttribute("IsPrivate", true, null);
+				testElement.setAttribute("Status", "Skipping");
+			}
+		}
+		if (kElement instanceof JDFResourceLink)
+		{
+			printResourceLink((JDFResourceLink) kElement, indent, testElement);
+		}
+
+		if (kElement instanceof JDFRefElement)
+		{
+			printRefElement((JDFRefElement) kElement, indent, testElement);
+		}
+
+		if (kElement instanceof JDFResource)
+		{
+			printResource((JDFResource) kElement, indent, testElement);
+		}
+
+		if (!bPrintNameSpace && !bTypo && xmlParent != null && testElement != null && !testElement.hasChildElements())
+		{
+			testElement.deleteNode();
+		}
+	}
+
+	protected KElement getTestElement(final KElement kElement, final KElement xmlParent)
+	{
+		KElement testElement = null;
+
+		if (xmlParent != null)
+		{
+			testElement = xmlParent.appendElement("TestElement");
+			testElement.setAttribute("XPath", kElement.buildXPath(null, 1));
+			testElement.setAttribute("NodeName", kElement.getNodeName());
+			final String strID = kElement.getAttribute(AttributeName.ID, null, null);
+			if (strID != null)
+			{
+				testElement.setAttribute("ID", strID);
+			}
+		}
+		return testElement;
+	}
+
+	protected String getInvalidText(final JDFElement jdfElement)
+	{
+		if (jdfElement instanceof JDFColorPool)
+		{
+			final VString duplicateColors = ((JDFColorPool) jdfElement).getDuplicateColors();
+			if (duplicateColors != null)
+			{
+				return " duplicate colors in colorPool: " + StringUtil.setvString(duplicateColors);
+			}
+		}
+		return " is not valid, see child elements for details";
 	}
 
 	private boolean setTypo(final String pref, final String elmName, final String nsURI, final KElement testElement)

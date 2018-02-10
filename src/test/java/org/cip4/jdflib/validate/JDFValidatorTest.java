@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,7 @@
 
 package org.cip4.jdflib.validate;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -84,6 +85,7 @@ import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
+import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.junit.Test;
 
 /**
@@ -93,8 +95,49 @@ import org.junit.Test;
  */
 public class JDFValidatorTest extends JDFTestCaseBase
 {
-	private JDFNode node;
 	private JDFValidator validator;
+	private JDFDoc doc;
+
+	/**
+	 *
+	 */
+	@Test
+	public void testInlineColorPool()
+	{
+		final JDFNode node = doc.getJDFRoot();
+		final JDFResource cc = node.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		final JDFColorPool cp = (JDFColorPool) cc.appendElement(ElementName.COLORPOOL);
+		cp.appendColorWithName("B", null);
+		cp.appendColorWithName("C", null);
+		assertTrue(validator.isValid(doc));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testInlineMultiColorPool()
+	{
+		final JDFNode node = doc.getJDFRoot();
+		final JDFResource cc = node.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		final JDFColorPool cp = (JDFColorPool) cc.appendElement(ElementName.COLORPOOL);
+		cp.appendColorWithName("B", "A");
+		cp.appendColorWithName("C", null).setActualColorName("A");
+
+		assertFalse(validator.isValid(doc));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testInlineEmptyColorPool()
+	{
+		final JDFNode node = doc.getJDFRoot();
+		final JDFResource cc = node.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		final JDFColorPool cp = (JDFColorPool) cc.appendElement(ElementName.COLORPOOL);
+		assertTrue(validator.isValid(doc));
+	}
 
 	/**
 	 *
@@ -102,13 +145,14 @@ public class JDFValidatorTest extends JDFTestCaseBase
 	@Test
 	public void testResourceAuditLinks()
 	{
+		final JDFNode node = doc.getJDFRoot();
 		final JDFResource media = node.addResource(ElementName.MEDIA, EnumUsage.Input);
 		final JDFResourceAudit ra = node.getCreateAuditPool().addResourceAudit("dummy");
 		final JDFResourceLink rl = ra.addNewOldLink(true, media, EnumUsage.Input);
 		rl.setActualAmount(42, null);
 		validator.setWarning(false);
 		assertNotNull(rl.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0));
-		assertTrue(node.isValid(EnumValidationLevel.Incomplete));
+		assertTrue(validator.isValid(doc));
 	}
 
 	/**
@@ -118,7 +162,7 @@ public class JDFValidatorTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		node = new JDFDoc("JDF").getJDFRoot();
+		doc = new JDFDoc(ElementName.JDF);
 		validator = new JDFValidator();
 	}
 
@@ -128,7 +172,7 @@ public class JDFValidatorTest extends JDFTestCaseBase
 	@Override
 	public String toString()
 	{
-		return super.toString() + "\n" + node;
+		return super.toString() + "\n" + doc;
 	}
 
 	/**
@@ -137,8 +181,8 @@ public class JDFValidatorTest extends JDFTestCaseBase
 	@Test
 	public void testResourceInfo()
 	{
-		JDFJMF jmf = JDFDoc.parseFile(sm_dirTestData + "ResourceInfo.jmf").getJMFRoot();
-		JDFResourceInfo resourceInfo = jmf.getResponse(0).getResourceInfo(0);
+		final JDFJMF jmf = JDFDoc.parseFile(sm_dirTestData + "ResourceInfo.jmf").getJMFRoot();
+		final JDFResourceInfo resourceInfo = jmf.getResponse(0).getResourceInfo(0);
 		assertTrue(resourceInfo.isValid(EnumValidationLevel.Complete));
 		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 	}
