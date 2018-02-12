@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -997,6 +997,39 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(t22.getAttribute("a"), "2");
 		assertEquals(t22.getAttribute("b"), "1");
 		assertEquals(t22.getAttribute("c"), "2");
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMergeElementMultiElements()
+	{
+		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
+		final KElement root = doc.getRoot();
+		final KElement t2 = root.appendElement("foo");
+		final KElement t22 = t2.appendElement("bar");
+		t22.setAttribute("a", "1");
+		t22.setAttribute("b", "1");
+
+		final XMLDoc doc2 = new XMLDoc("Test", "www.test.com");
+		final KElement root2 = doc2.getRoot();
+		final KElement t3 = root2.appendElement("foo");
+		final KElement t32 = t3.appendElement("bar");
+		t32.setAttribute("a", "2");
+		t32.setAttribute("c", "2");
+		final KElement t33 = t3.appendElement("bar");
+		t33.setAttribute("a", "4");
+		t33.setAttribute("b", "4");
+
+		t2.mergeElement(t3, false);
+		assertEquals(t2.getElement("bar", null, 0), t22);
+		assertEquals(t22.getAttribute("a"), "1");
+		assertEquals(t22.getAttribute("b"), "1");
+		assertEquals(t22.getAttribute("c"), "");
+		assertEquals(t2.getElement("bar", null, 1).toXML(), t32.toXML());
+		assertEquals(t2.getElement("bar", null, 2).toXML(), t33.toXML());
 
 	}
 

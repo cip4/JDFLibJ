@@ -68,7 +68,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashSet;
@@ -78,11 +77,9 @@ import java.util.Vector;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -96,14 +93,12 @@ import org.cip4.jdflib.elementwalker.PackageElementWalker;
 import org.cip4.jdflib.elementwalker.RemoveEmpty;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
-import org.cip4.jdflib.extensions.XJDFZipWriter;
 import org.cip4.jdflib.extensions.XJMFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -306,7 +301,7 @@ public class JDFToXJDF extends PackageElementWalker
 	/**
 	 *  if true, we want a productList from the kids
 	 */
-	private boolean wantProduct;
+	boolean wantProduct;
 
 	final private JDFAttributeMap componentProductMap;
 	final Set<String> resourceAlias;
@@ -585,7 +580,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	public void saveZip(final String fileName, final JDFNode rootNode, final boolean replace)
 	{
-		new MultiJDFToXJDF().saveZip(fileName, rootNode, replace);
+		new MultiJDFToXJDF(this).saveZip(fileName, rootNode, replace);
 	}
 
 	/**
@@ -598,7 +593,7 @@ public class JDFToXJDF extends PackageElementWalker
 	{
 		try
 		{
-			new MultiJDFToXJDF().getZipWriter(rootNode).writeStream(os);
+			new MultiJDFToXJDF(this).getZipWriter(rootNode).writeStream(os);
 		}
 		catch (final IOException e)
 		{
@@ -613,144 +608,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	public Vector<XJDFHelper> getXJDFs(final JDFNode root)
 	{
-		return new MultiJDFToXJDF().getXJDFs(root);
-	}
-
-	/**
-	 * class that generates a set of multiple JDF elements from the leaf nodes of a JDF
-	 * @author rainer prosi
-	 *
-	 */
-	private class MultiJDFToXJDF
-	{
-
-		/**
-		 * @param fileName the filename of the zip file to save to
-		 * @param rootNode the root jdf to save
-		 * @param replace if true, overwrite existing files
-		 */
-		void saveZip(final String fileName, final JDFNode rootNode, final boolean replace)
-		{
-			final File file = new File(fileName);
-			if (file.canRead())
-			{
-				if (replace)
-				{
-					file.delete();
-				}
-				else
-				{
-					throw new JDFException("output file exists: " + file.getPath());
-				}
-			}
-			FileUtil.writeFile(getZipWriter(rootNode), new File(fileName));
-		}
-
-		/**
-		 * @param jmf
-		 * @param rootNode
-		 * @param rootNode
-		 * @param fos
-		 */
-		XJDFZipWriter getZipWriter(final JDFNode rootNode)
-		{
-			setSingleNode(true);
-			final Vector<XJDFHelper> vXJDFs = getXJDFs(rootNode);
-			final XJDFZipWriter w = new XJDFZipWriter();
-			for (final XJDFHelper h : vXJDFs)
-			{
-				w.addXJDF(h);
-			}
-			return w;
-		}
-
-		/**
-		 *
-		 */
-		MultiJDFToXJDF()
-		{
-			super();
-		}
-
-		/**
-		 *
-		 * @param root
-		 * @return
-		 */
-		Vector<XJDFHelper> getXJDFs(final JDFNode root)
-		{
-			if (root == null)
-				return null;
-			setSingleNode(true);
-			final Vector<XJDFHelper> vRet = new Vector<XJDFHelper>();
-			final VElement v = getProcessNodes(root);
-			final boolean keepProduct = wantProduct;
-			wantProduct = true;
-			if (JDFConstants.PRODUCT.equals(root.getType()))
-			{
-				final XJDFHelper xjdfHelper = convertSingle(root);
-				vRet.add(xjdfHelper);
-			}
-			wantProduct = false;
-			for (final KElement n : v)
-			{
-				final XJDFHelper xjdfHelper = convertSingle(n);
-				vRet.add(xjdfHelper);
-			}
-			wantProduct = keepProduct;
-			return vRet;
-		}
-
-		/**
-		 *
-		 * @param n
-		 * @return
-		 */
-		private XJDFHelper convertSingle(final KElement n)
-		{
-			final KElement xjdf = makeNewJDF((JDFNode) n, null);
-			final XJDFHelper xjdfHelper = new XJDFHelper(xjdf);
-			xjdfHelper.cleanUp();
-			return xjdfHelper;
-		}
-
-		/**
-		 *
-		 * @param rootNode
-		 * @return
-		 */
-		VElement getProcessNodes(final JDFNode rootNode)
-		{
-			final VElement v = rootNode.getvJDFNode(null, null, false);
-			for (int i = v.size() - 1; i >= 0; i--)
-			{
-				final JDFNode n = (JDFNode) v.elementAt(i);
-				if (!n.isProcessNode())
-				{
-					v.remove(i);
-				}
-				else
-				{
-					ensureJobPartID(i, n);
-				}
-			}
-			return v;
-		}
-
-		/**
-		 *
-		 * @param i
-		 * @param n
-		 */
-		private void ensureJobPartID(final int i, final JDFNode n)
-		{
-			String nam = n.getJobPartID(false);
-			if (StringUtil.getNonEmpty(nam) == null)
-			{
-				nam = "Part_" + i;
-				n.setJobPartID(nam);
-			}
-		}
+		return new MultiJDFToXJDF(this).getXJDFs(root);
 	}
 
 	/**
@@ -1092,5 +950,25 @@ public class JDFToXJDF extends PackageElementWalker
 	public void setCleanup(final boolean bCleanup)
 	{
 		this.bCleanup = bCleanup;
+	}
+
+	/**
+	 *
+	 * @param node
+	 * @return
+	 */
+	public XJDFHelper getCombined(final JDFNode node)
+	{
+		final boolean oldCleanup = isCleanup();
+		setCleanup(false);
+		final Vector<XJDFHelper> v = getXJDFs(node);
+
+		final XJDFHelper combinedHelper = new MultiXJDFCombiner(v).getCombinedHelper();
+		setCleanup(oldCleanup);
+		if (isCleanup() && combinedHelper != null)
+		{
+			combinedHelper.cleanUp();
+		}
+		return combinedHelper;
 	}
 }

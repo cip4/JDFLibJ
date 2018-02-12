@@ -1932,6 +1932,20 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	@Test
 	public void testgetXJDFs1()
 	{
+		final JDFNode product = prepareProduct();
+
+		product.write2File(sm_dirTestDataTemp + "getXJDFS.jdf");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final Vector<XJDFHelper> v = conv.getXJDFs(product);
+		assertEquals(v.size(), 3);
+		for (final XJDFHelper h : v)
+		{
+			h.writeToFile(sm_dirTestDataTemp + "getXJDFS." + h.getJobPartID() + ".xjdf");
+		}
+	}
+
+	private JDFNode prepareProduct()
+	{
 		JDFElement.setLongID(false);
 		final JDFNode product = new JDFDoc(ElementName.JDF).getJDFRoot();
 		product.setType(EnumType.Product);
@@ -1956,15 +1970,46 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFNode cp = product.addCombined(new VString("InkZoneCalculation ConventionalPrinting", " "));
 		cp.ensureLink(xm, EnumUsage.Input, null);
 		cp.addResource(ElementName.MEDIA, EnumUsage.Input).setProductID("p2");
+		return product;
+	}
 
-		product.write2File(sm_dirTestDataTemp + "getXJDFS.jdf");
+	/**
+	 *
+	 */
+	@Test
+	public void testgetCombinedXJDFTypes()
+	{
+		final JDFNode product = prepareProduct();
+
 		final JDFToXJDF conv = new JDFToXJDF();
-		final Vector<XJDFHelper> v = conv.getXJDFs(product);
-		assertEquals(v.size(), 3);
-		for (final XJDFHelper h : v)
-		{
-			h.writeToFile(sm_dirTestDataTemp + "getXJDFS." + h.getJobPartID() + ".xjdf");
-		}
+		final XJDFHelper h = conv.getCombined(product);
+		assertEquals(new VString("Product Impositioning Interpreting Rendering ImageSetting InkZoneCalculation ConventionalPrinting", null), h.getTypes());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testgetCombinedXJDFSets()
+	{
+		final JDFNode product = prepareProduct();
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final XJDFHelper h = conv.getCombined(product);
+		assertEquals(1, h.getSets(ElementName.EXPOSEDMEDIA, null).size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testgetCombinedXJDF()
+	{
+		final JDFNode product = prepareProduct();
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final XJDFHelper h = conv.getCombined(product);
+		h.writeToFile(sm_dirTestDataTemp + "combined.xjdf");
 	}
 
 	/**

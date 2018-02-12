@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -115,7 +115,7 @@ public class SetHelper extends BaseXJDFHelper
 	/**
 	 * @param set the set to help on
 	 */
-	public SetHelper(KElement set)
+	public SetHelper(final KElement set)
 	{
 		super();
 		this.theElement = set;
@@ -127,9 +127,9 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param e
 	 * @return
 	 */
-	public static boolean isSet(KElement e)
+	public static boolean isSet(final KElement e)
 	{
-		String localName = e == null ? null : e.getLocalName();
+		final String localName = e == null ? null : e.getLocalName();
 		return isSet(localName);
 	}
 
@@ -138,7 +138,7 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param localName
 	 * @return
 	 */
-	public static boolean isSet(String localName)
+	public static boolean isSet(final String localName)
 	{
 		return RESOURCE_SET.equals(localName) || PARAMETER_SET.equals(localName);
 	}
@@ -147,10 +147,10 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param map
 	 * @return
 	 */
-	public ResourceHelper getPartition(JDFAttributeMap map)
+	public ResourceHelper getPartition(final JDFAttributeMap map)
 	{
-		Vector<ResourceHelper> v = getPartitions();
-		for (ResourceHelper ph : v)
+		final Vector<ResourceHelper> v = getPartitions();
+		for (final ResourceHelper ph : v)
 		{
 			if (ph.matches(map))
 			{
@@ -164,7 +164,7 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param map
 	 * @return
 	 */
-	public ResourceHelper getPartition(String key, String value)
+	public ResourceHelper getPartition(final String key, final String value)
 	{
 		return getPartition(new JDFAttributeMap(key, value));
 	}
@@ -175,7 +175,7 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public ResourceHelper getPartition(int index)
 	{
-		Vector<ResourceHelper> v = getPartitions();
+		final Vector<ResourceHelper> v = getPartitions();
 		if (index < 0)
 			index += v.size();
 		if (index >= v.size())
@@ -188,7 +188,7 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param addRes
 	 * @return
 	 */
-	public ResourceHelper getCreatePartition(JDFAttributeMap map, boolean addRes)
+	public ResourceHelper getCreatePartition(final JDFAttributeMap map, final boolean addRes)
 	{
 		ResourceHelper e = getPartition(map);
 		if (e == null)
@@ -210,9 +210,9 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param addRes
 	 * @return
 	 */
-	public ResourceHelper getCreateVPartition(VJDFAttributeMap vmap, boolean addRes)
+	public ResourceHelper getCreateVPartition(final VJDFAttributeMap vmap, final boolean addRes)
 	{
-		JDFAttributeMap map = vmap != null && !vmap.isEmpty() ? vmap.get(0) : null;
+		final JDFAttributeMap map = vmap != null && !vmap.isEmpty() ? vmap.get(0) : null;
 		ResourceHelper e = getPartition(map);
 		if (e == null)
 		{
@@ -234,12 +234,12 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param addRes
 	 * @return
 	 */
-	public ResourceHelper insertPartitionBefore(ResourceHelper e, JDFAttributeMap map, boolean addRes)
+	public ResourceHelper insertPartitionBefore(final ResourceHelper e, final JDFAttributeMap map, final boolean addRes)
 	{
-		ResourceHelper e2 = appendPartition(map, addRes);
+		final ResourceHelper e2 = appendPartition(map, addRes);
 		if (e != null)
 		{
-			KElement e3 = e.getPartition();
+			final KElement e3 = e.getPartition();
 			e3.getParentNode_KElement().moveElement(e2.getPartition(), e3);
 		}
 		return e2;
@@ -252,15 +252,15 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param addRes
 	 * @return
 	 */
-	public Vector<ResourceHelper> getCreatePartitions(VJDFAttributeMap vmap, boolean addRes)
+	public Vector<ResourceHelper> getCreatePartitions(VJDFAttributeMap vmap, final boolean addRes)
 	{
 		if (vmap == null)
 		{
 			vmap = new VJDFAttributeMap();
 			vmap.add(null);
 		}
-		Vector<ResourceHelper> vp = new Vector<ResourceHelper>();
-		for (JDFAttributeMap m : vmap)
+		final Vector<ResourceHelper> vp = new Vector<ResourceHelper>();
+		for (final JDFAttributeMap m : vmap)
 		{
 			vp.add(getCreatePartition(m, addRes));
 		}
@@ -272,7 +272,7 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param addRes
 	 * @return
 	 */
-	public ResourceHelper getCreatePartition(int index, boolean addRes)
+	public ResourceHelper getCreatePartition(int index, final boolean addRes)
 	{
 		Vector<ResourceHelper> v = getPartitions();
 		int size = v.size();
@@ -290,7 +290,7 @@ public class SetHelper extends BaseXJDFHelper
 		}
 		if (size != v.size())
 			v = getPartitions();
-		ResourceHelper ph = v.get(index);
+		final ResourceHelper ph = v.get(index);
 		if (addRes)
 			ph.getCreateResource();
 		return ph;
@@ -301,8 +301,8 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public void removePartitions()
 	{
-		Vector<ResourceHelper> v = getPartitions();
-		for (ResourceHelper ph : v)
+		final Vector<ResourceHelper> v = getPartitions();
+		for (final ResourceHelper ph : v)
 		{
 			ph.getPartition().deleteNode();
 		}
@@ -316,7 +316,7 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param addRes
 	 * @return
 	 */
-	public ResourceHelper appendPartition(String partKey, String partValue, boolean addRes)
+	public ResourceHelper appendPartition(final String partKey, final String partValue, final boolean addRes)
 	{
 		return appendPartition(new JDFAttributeMap(partKey, partValue), addRes);
 	}
@@ -329,7 +329,7 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param addRes
 	 * @return
 	 */
-	public ResourceHelper getCreatePartition(String partKey, String partValue, boolean addRes)
+	public ResourceHelper getCreatePartition(final String partKey, final String partValue, final boolean addRes)
 	{
 		return getCreatePartition(new JDFAttributeMap(partKey, partValue), addRes);
 	}
@@ -339,22 +339,22 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param addRes if true, also add the detailed resource element, e.g. Layout
 	 * @return
 	 */
-	public ResourceHelper appendPartition(JDFAttributeMap partMap, boolean addRes)
+	public ResourceHelper appendPartition(final JDFAttributeMap partMap, final boolean addRes)
 	{
-		KElement newPart = theElement.appendElement(getPartitionName());
-		ResourceHelper partitionHelper = new ResourceHelper(newPart);
+		final KElement newPart = theElement.appendElement(getPartitionName());
+		final ResourceHelper partitionHelper = new ResourceHelper(newPart);
 		partitionHelper.cleanUp();
 		if (partMap != null && partMap.size() > 0)
 		{
-			JDFPart part = (JDFPart) newPart.appendElement(ElementName.PART);
+			final JDFPart part = (JDFPart) newPart.appendElement(ElementName.PART);
 			updatePartitions(partMap);
 			part.setPartMap(partMap);
 		}
 
-		String resName = getName();
+		final String resName = getName();
 		if (resName != null && addRes)
 		{
-			KElement newRes = newPart.appendElement(resName);
+			final KElement newRes = newPart.appendElement(resName);
 			newRes.removeAttribute(AttributeName.CLASS);
 		}
 		return partitionHelper;
@@ -373,9 +373,9 @@ public class SetHelper extends BaseXJDFHelper
 	 * modify all partitions here
 	 * @param partMap
 	 */
-	private void updatePartitions(JDFAttributeMap partMap)
+	private void updatePartitions(final JDFAttributeMap partMap)
 	{
-		String sep = partMap.get(AttributeName.SEPARATION);
+		final String sep = partMap.get(AttributeName.SEPARATION);
 		if (sep != null)
 			partMap.put(AttributeName.SEPARATION, StringUtil.replaceChar(sep, ' ', "_", 0));
 	}
@@ -385,12 +385,12 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public Vector<ResourceHelper> getPartitions()
 	{
-		VElement v = theElement.getChildElementVector(getPartitionName(), null);
+		final VElement v = theElement.getChildElementVector(getPartitionName(), null);
 
-		Vector<ResourceHelper> v2 = new Vector<ResourceHelper>();
+		final Vector<ResourceHelper> v2 = new Vector<ResourceHelper>();
 		if (v != null)
 		{
-			for (KElement e : v)
+			for (final KElement e : v)
 			{
 				v2.add(new ResourceHelper(e));
 			}
@@ -408,10 +408,10 @@ public class SetHelper extends BaseXJDFHelper
 		{
 			theElement.setAttribute(AttributeName.NAME, getName());
 		}
-		Vector<ResourceHelper> kids = getPartitions();
+		final Vector<ResourceHelper> kids = getPartitions();
 		if (kids != null)
 		{
-			for (ResourceHelper kid : kids)
+			for (final ResourceHelper kid : kids)
 			{
 				kid.cleanUp();
 			}
@@ -427,10 +427,10 @@ public class SetHelper extends BaseXJDFHelper
 		String name = theElement.getAttribute(AttributeName.NAME, null, null);
 		if (name == null)
 		{
-			Vector<ResourceHelper> v = getPartitions();
-			for (ResourceHelper ph : v)
+			final Vector<ResourceHelper> v = getPartitions();
+			for (final ResourceHelper ph : v)
 			{
-				KElement res = ph.getResource();
+				final KElement res = ph.getResource();
 				if (res != null)
 				{
 					name = res.getNodeName();
@@ -448,7 +448,7 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public String getPartitionName()
 	{
-		String name = getSetName(theElement.getLocalName());
+		final String name = getSetName(theElement.getLocalName());
 		return name;
 	}
 
@@ -457,7 +457,7 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param e the element to test
 	 * @return  then asset type name (Parameter, Resource etc)
 	 */
-	public static String getSetName(KElement e)
+	public static String getSetName(final KElement e)
 	{
 		return e == null ? null : getSetName(e.getLocalName());
 	}
@@ -467,7 +467,7 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param setName the name of the set element
 	 * @return then asset type name (Parameter, Resource etc)
 	 */
-	public static String getSetName(String setName)
+	public static String getSetName(final String setName)
 	{
 		return (isSet(setName) || "IntentSet".equals(setName)) ? StringUtil.leftStr(setName, -3) : null;
 	}
@@ -476,10 +476,10 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param vmap
 	 * @return
 	 */
-	public ResourceHelper getPartition(VJDFAttributeMap vmap)
+	public ResourceHelper getPartition(final VJDFAttributeMap vmap)
 	{
-		Vector<ResourceHelper> v = getPartitions();
-		for (ResourceHelper ph : v)
+		final Vector<ResourceHelper> v = getPartitions();
+		for (final ResourceHelper ph : v)
 		{
 			if (ph.matches(vmap))
 			{
@@ -493,11 +493,11 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param vmap
 	 * @return
 	 */
-	public Vector<ResourceHelper> getPartitions(VJDFAttributeMap vmap)
+	public Vector<ResourceHelper> getPartitions(final VJDFAttributeMap vmap)
 	{
-		Vector<ResourceHelper> v = getPartitions();
-		Vector<ResourceHelper> vRet = new Vector<ResourceHelper>();
-		for (ResourceHelper ph : v)
+		final Vector<ResourceHelper> v = getPartitions();
+		final Vector<ResourceHelper> vRet = new Vector<ResourceHelper>();
+		for (final ResourceHelper ph : v)
 		{
 			if (ph.matches(vmap))
 			{
@@ -511,11 +511,11 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param map
 	 * @return
 	 */
-	public Vector<ResourceHelper> getPartitions(JDFAttributeMap map)
+	public Vector<ResourceHelper> getPartitions(final JDFAttributeMap map)
 	{
-		Vector<ResourceHelper> v = getPartitions();
-		Vector<ResourceHelper> vRet = new Vector<ResourceHelper>();
-		for (ResourceHelper ph : v)
+		final Vector<ResourceHelper> v = getPartitions();
+		final Vector<ResourceHelper> vRet = new Vector<ResourceHelper>();
+		for (final ResourceHelper ph : v)
 		{
 			if (ph.matches(map))
 			{
@@ -536,7 +536,7 @@ public class SetHelper extends BaseXJDFHelper
 	/**
 	 * @param value
 	 */
-	public void setUsage(EnumUsage value)
+	public void setUsage(final EnumUsage value)
 	{
 		theElement.setAttribute(AttributeName.USAGE, value == null ? null : value.getName());
 	}
@@ -576,15 +576,15 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param typ
 	 * @param pos
 	 */
-	public void removeTypeFromCPI(int pos)
+	public void removeTypeFromCPI(final int pos)
 	{
-		JDFIntegerList il = getCombinedProcessIndex();
+		final JDFIntegerList il = getCombinedProcessIndex();
 		if (il != null)
 		{
 			boolean mod = false;
 			for (int i = 0; i < il.size(); i++)
 			{
-				int iPos = il.getInt(i);
+				final int iPos = il.getInt(i);
 				if (iPos == pos)
 				{
 					il.remove(i);
@@ -605,19 +605,19 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * remove a CPI process
+	 * add a CPI process
 	 * @param typ
 	 * @param pos
 	 */
-	public void addTypeToCPI(int pos)
+	public void addTypeToCPI(final int pos)
 	{
-		JDFIntegerList il = getCombinedProcessIndex();
+		final JDFIntegerList il = getCombinedProcessIndex();
 		if (il != null)
 		{
 			boolean mod = false;
 			for (int i = 0; i < il.size(); i++)
 			{
-				int iPos = il.getInt(i);
+				final int iPos = il.getInt(i);
 				if (iPos >= pos)
 				{
 					il.setInt(i, iPos + 1);
@@ -636,7 +636,7 @@ public class SetHelper extends BaseXJDFHelper
 	 *
 	 * @return
 	 */
-	public void setCombinedProcessIndex(JDFIntegerList cpi)
+	public void setCombinedProcessIndex(final JDFIntegerList cpi)
 	{
 		setAttribute(AttributeName.COMBINEDPROCESSINDEX, cpi == null || cpi.isEmpty() ? null : cpi.toString());
 	}
@@ -646,7 +646,7 @@ public class SetHelper extends BaseXJDFHelper
 	 *
 	 * @return
 	 */
-	public void setProcessUsage(String processUsage)
+	public void setProcessUsage(final String processUsage)
 	{
 		setAttribute(AttributeName.PROCESSUSAGE, processUsage);
 	}
@@ -664,7 +664,7 @@ public class SetHelper extends BaseXJDFHelper
 	 *
 	 * @param descriptiveName
 	 */
-	public void setDescriptiveName(String descriptiveName)
+	public void setDescriptiveName(final String descriptiveName)
 	{
 		setAttribute(AttributeName.DESCRIPTIVENAME, descriptiveName);
 	}
@@ -684,11 +684,11 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param id
 	 * @return
 	 */
-	public ResourceHelper getPartition(String id)
+	public ResourceHelper getPartition(final String id)
 	{
 		if (id == null)
 			return null;
-		String partitionName = getPartitionName();
+		final String partitionName = getPartitionName();
 		KElement e = theElement.getFirstChildElement(partitionName, null);
 		while (e != null)
 		{
@@ -717,14 +717,14 @@ public class SetHelper extends BaseXJDFHelper
 	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setID(java.lang.String)
 	 */
 	@Override
-	public void setID(String newID)
+	public void setID(final String newID)
 	{
-		String oldID = getID();
+		final String oldID = getID();
 		super.setID(newID);
-		Vector<ResourceHelper> parts = getPartitions();
+		final Vector<ResourceHelper> parts = getPartitions();
 		if (parts != null)
 		{
-			for (ResourceHelper part : parts)
+			for (final ResourceHelper part : parts)
 			{
 				String partID = part.getID();
 				partID = StringUtil.replaceString(partID, oldID, newID);
@@ -739,9 +739,9 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public VJDFAttributeMap getPartMapVector()
 	{
-		Vector<ResourceHelper> vph = getPartitions();
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
-		for (ResourceHelper ph : vph)
+		final Vector<ResourceHelper> vph = getPartitions();
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		for (final ResourceHelper ph : vph)
 		{
 			vMap.addAll(ph.getPartMapVector());
 		}
@@ -755,13 +755,13 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public VString getDependentJobParts()
 	{
-		VElement deps = theElement.getChildElementVector(XJDFConstants.Dependent, null);
-		VString ret = new VString();
+		final VElement deps = theElement.getChildElementVector(XJDFConstants.Dependent, null);
+		final VString ret = new VString();
 		if (deps != null)
 		{
-			for (KElement dep : deps)
+			for (final KElement dep : deps)
 			{
-				String jpID = dep.getNonEmpty(AttributeName.JOBPARTID);
+				final String jpID = dep.getNonEmpty(AttributeName.JOBPARTID);
 				ret.appendUnique(jpID);
 			}
 		}
@@ -772,7 +772,7 @@ public class SetHelper extends BaseXJDFHelper
 	 *
 	 * @param name
 	 */
-	public void setName(String name)
+	public void setName(final String name)
 	{
 		setAttribute(AttributeName.NAME, name);
 	}
@@ -780,10 +780,10 @@ public class SetHelper extends BaseXJDFHelper
 	public void removeIDs()
 	{
 		removeAttribute(AttributeName.ID, null);
-		Vector<ResourceHelper> v = getPartitions();
+		final Vector<ResourceHelper> v = getPartitions();
 		if (v != null)
 		{
-			for (ResourceHelper ph : v)
+			for (final ResourceHelper ph : v)
 			{
 				ph.removeAttribute(AttributeName.ID, null);
 			}
@@ -796,11 +796,11 @@ public class SetHelper extends BaseXJDFHelper
 	 * @param bsHelper
 	 * @return
 	 */
-	public int indexOf(ResourceHelper bsHelper)
+	public int indexOf(final ResourceHelper bsHelper)
 	{
 		if (bsHelper == null)
 			return -1;
-		VElement v = theElement.getChildElementVector(getPartitionName(), null);
+		final VElement v = theElement.getChildElementVector(getPartitionName(), null);
 		if (v == null)
 			return -1;
 		return v.indexOf(bsHelper.getRoot());

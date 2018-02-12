@@ -259,7 +259,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public SetHelper getSet(final String id)
 	{
-		if (id == null)
+		if (StringUtil.isEmpty(id))
 			return null;
 		KElement e = theElement.getFirstChildElement();
 		while (e != null)
