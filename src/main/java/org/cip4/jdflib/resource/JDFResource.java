@@ -154,6 +154,83 @@ public class JDFResource extends JDFElement
 			super(JDFResource.this);
 		}
 
+		@Override
+		public String toString()
+		{
+			// TODO Auto-generated method stub
+			return super.toString();
+		}
+
+		@Override
+		public boolean isFollowIdentical()
+		{
+			// TODO Auto-generated method stub
+			return super.isFollowIdentical();
+		}
+
+		@Override
+		public void setFollowIdentical(final boolean followIdentical)
+		{
+			// TODO Auto-generated method stub
+			super.setFollowIdentical(followIdentical);
+		}
+
+		@Override
+		public VElement getPartitionVector(final VJDFAttributeMap vm, final EnumPartUsage partUsage)
+		{
+			// TODO Auto-generated method stub
+			return super.getPartitionVector(vm, partUsage);
+		}
+
+		@Override
+		public VJDFAttributeMap getPartitionMaps(final VJDFAttributeMap vm, final EnumPartUsage partUsage)
+		{
+			// TODO Auto-generated method stub
+			return super.getPartitionMaps(vm, partUsage);
+		}
+
+		@Override
+		public VElement getPartitionVector(final JDFAttributeMap m, final EnumPartUsage partUsage)
+		{
+			// TODO Auto-generated method stub
+			return super.getPartitionVector(m, partUsage);
+		}
+
+		@Override
+		public JDFResource getPartition(final JDFAttributeMap m, final EnumPartUsage partUsage)
+		{
+			// TODO Auto-generated method stub
+			return super.getPartition(m, partUsage);
+		}
+
+		@Override
+		protected JDFResource getDeepPart(final JDFAttributeMap m, final EnumPartUsage partUsage)
+		{
+			// TODO Auto-generated method stub
+			return super.getDeepPart(m, partUsage);
+		}
+
+		@Override
+		public JDFResource getCreatePartition(final JDFAttributeMap partMap, final VString vPartKeys)
+		{
+			// TODO Auto-generated method stub
+			return super.getCreatePartition(partMap, vPartKeys);
+		}
+
+		@Override
+		public JDFResource addPartition(final EnumPartIDKey partType, final String value)
+		{
+			// TODO Auto-generated method stub
+			return super.addPartition(partType, value);
+		}
+
+		@Override
+		public void setStrictPartVersion(final boolean strictPartVersion)
+		{
+			// TODO Auto-generated method stub
+			super.setStrictPartVersion(strictPartVersion);
+		}
+
 	}
 
 	private static AtrInfoTable[] atrInfoTable_Abstract = new AtrInfoTable[17];
