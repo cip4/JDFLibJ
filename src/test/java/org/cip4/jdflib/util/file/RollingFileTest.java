@@ -105,7 +105,7 @@ public class RollingFileTest extends JDFTestCaseBase
 				break;
 			ThreadUtil.sleep(123);
 		}
-		assertEquals(100, files.size());
+		assertEquals(100, files.size(), 1);
 	}
 
 	/**
