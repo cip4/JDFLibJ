@@ -140,6 +140,22 @@ public class JDFResource extends JDFElement
 		}
 	}
 
+	/**
+	 *
+	 * @deprecated - use the local file type
+	 *
+	 */
+	@Deprecated
+	public class PartionGetter extends PartitionGetter
+	{
+
+		public PartionGetter()
+		{
+			super(JDFResource.this);
+		}
+
+	}
+
 	private static AtrInfoTable[] atrInfoTable_Abstract = new AtrInfoTable[17];
 	static
 	{
