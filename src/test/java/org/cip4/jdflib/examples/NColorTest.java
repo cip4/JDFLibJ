@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -77,6 +45,7 @@ import java.util.HashSet;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -100,7 +69,7 @@ public class NColorTest extends JDFTestCaseBase
 {
 	private JDFNode node;
 	private MISCPGoldenTicket bgt;
-	private final HashSet<String> doneSheets = new HashSet<String>();
+	private final HashSet<String> doneSheets = new HashSet<>();
 
 	// /////////////////////////////////////////////////////////////////
 
@@ -113,10 +82,12 @@ public class NColorTest extends JDFTestCaseBase
 		KElement.setLongID(false);
 		setup(null, 2);
 		final JDFAttributeMap mapS1F = new JDFAttributeMap();
+		mapS1F.put(AttributeName.SIGNATURENAME, "Sig1");
 		mapS1F.put("SheetName", "Sheet2");
 		mapS1F.put("Side", "Front");
 
 		final JDFAttributeMap mapS0F = new JDFAttributeMap();
+		mapS0F.put(AttributeName.SIGNATURENAME, "Sig1");
 		mapS0F.put("SheetName", "Sheet1");
 		mapS0F.put("Side", "Front");
 
@@ -170,7 +141,7 @@ public class NColorTest extends JDFTestCaseBase
 		ms.setDeviceStatus(EnumDeviceStatus.Idle);
 		ms.setModuleIndex(new JDFIntegerRangeList("2"));
 
-		//jmfStatus.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "StatusPerfecting.jmf", 2, false);
+		// jmfStatus.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "StatusPerfecting.jmf", 2, false);
 		writeRoundTrip(jmfStatus, "StatusPerfecting.jmf");
 		assertTrue("known defect - wait for autoclass fix", jmfStatus.isValid(EnumValidationLevel.Complete));
 	}
@@ -191,6 +162,7 @@ public class NColorTest extends JDFTestCaseBase
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "FrontBack_Back0.jdf", 2);
 		run2Seps("Sheet1", EnumSide.Front, null, null, 1000, 150, "press0", EnumNodeStatus.Completed, false);
 		final JDFAttributeMap attributeMapS0 = new JDFAttributeMap("SheetName", "Sheet1");
+		attributeMapS0.put(AttributeName.SIGNATURENAME, "Sig1");
 		// node.getLink(component, null).setAmountPoolAttribute("ActualAmount",
 		// String.valueOf(500), null, attributeMapS0);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "FrontBack_Front1.jdf", 2);
@@ -241,10 +213,10 @@ public class NColorTest extends JDFTestCaseBase
 	/**
 	 * simulate running 2 separations on one press
 	 *
-	 * @param bLast
-	 *            TODO
+	 * @param bLast TODO
 	 */
-	private void run2Seps(final String sheet, final EnumSide side, final String sep1, final String sep2, @SuppressWarnings("unused") final int good, @SuppressWarnings("unused") final int waste, @SuppressWarnings("unused") final String deviceID, @SuppressWarnings("unused") final EnumNodeStatus endStatus, final boolean bLast)
+	private void run2Seps(final String sheet, final EnumSide side, final String sep1, final String sep2, @SuppressWarnings("unused") final int good, @SuppressWarnings("unused") final int waste,
+			@SuppressWarnings("unused") final String deviceID, @SuppressWarnings("unused") final EnumNodeStatus endStatus, final boolean bLast)
 	{
 		String jmfFile = sm_dirTestDataTemp + File.separator + "NColorStatus";
 		final JDFAttributeMap[] map = new JDFAttributeMap[sep1 == null ? 1 : 2];

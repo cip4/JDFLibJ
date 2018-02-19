@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -66,13 +66,14 @@
  * <http://www.cip4.org/>.
  *
  *
- * 
+ *
  */
 package org.cip4.jdflib.util.file;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -82,26 +83,31 @@ import org.cip4.jdflib.util.UrlUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * class to generate rolling backup files using a simple <FileName>.n naming algorithm.
- * 
- * The oldest file dies when the maximum number is reached
- * 
- * 08.12.2008
+ *
+ *         class to generate rolling backup files using a simple <FileName>.n
+ *         naming algorithm.
+ *
+ *         The oldest file dies when the maximum number is reached
+ *
+ *         08.12.2008
  */
 public class RollingFile extends File
 {
-	private int pos;
+	private final AtomicInteger pos;
 	private final String base;
 	private final String ext;
 	private int digits;
 	protected final Log log;
 
 	/**
-	 * @param pathname the base filename
-	 * @param baseName the name of the base file, <br/>
-	 * if a filename with double "." , e.g. xxx..txt is specified, the algorithm will generate names such as xxx.000001.txt, <br/>
-	 * if a single "." e.g. xxx.txt is specified, the algorithm will generate names such as xxx000001.txt, <br/>
+	 * @param pathname
+	 *            the base filename
+	 * @param baseName
+	 *            the name of the base file, <br/>
+	 *            if a filename with double "." , e.g. xxx..txt is specified, the
+	 *            algorithm will generate names such as xxx.000001.txt, <br/>
+	 *            if a single "." e.g. xxx.txt is specified, the algorithm will
+	 *            generate names such as xxx000001.txt, <br/>
 	 */
 	public RollingFile(final String pathname, final String baseName)
 	{
@@ -109,40 +115,45 @@ public class RollingFile extends File
 		ext = UrlUtil.extension(baseName);
 		base = UrlUtil.prefix(baseName);
 		digits = 6;
-		calcPos();
+		pos = new AtomicInteger(calcPos());
 		log = LogFactory.getLog(getClass());
 		mkdirs();
 	}
 
 	/**
-	 * 
+	 * @return
+	 *
 	 */
-	protected void calcPos()
+	protected int calcPos()
 	{
-		File[] list = readAll();
-		pos = 0;
+		final File[] list = readAll();
+		int p = 0;
 		if (list == null)
-			return;
-		for (File f : list)
+			return p;
+		for (final File f : list)
 		{
 			String name = f.getName();
 			name = UrlUtil.newExtension(name, null);
 			if (base != null)
 				name = name.substring(base.length());
-			int n = StringUtil.parseInt(name, -1);
-			if (n > pos)
-				pos = n;
+			final int n = StringUtil.parseInt(name, -1);
+			if (n > p)
+			{
+				p = n;
+			}
 		}
+		return p;
 	}
 
 	/**
 	 * read all matching files from this
+	 *
 	 * @return array of all matching files
 	 */
 	public File[] readAll()
 	{
-		String expression = getFileExpression();
-		File[] list = FileUtil.listFilesWithExpression(this, expression);
+		final String expression = getFileExpression();
+		final File[] list = FileUtil.listFilesWithExpression(this, expression);
 		if (list != null)
 			Arrays.sort(list);
 		return list;
@@ -173,7 +184,7 @@ public class RollingFile extends File
 			{
 				file.createNewFile();
 			}
-			catch (IOException x)
+			catch (final IOException x)
 			{
 				file = null;
 			}
@@ -188,19 +199,20 @@ public class RollingFile extends File
 	{
 		String exp = getFileExpression();
 		exp = StringUtil.replaceString(exp, "(.)*", "%0" + digits + "i");
-		exp = StringUtil.sprintf(exp, "" + ++pos);
+		exp = StringUtil.sprintf(exp, "" + pos.incrementAndGet());
 		return exp;
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1521423479897L;
 
 	/**
-	 * @param digits the digits to set
+	 * @param digits
+	 *            the digits to set
 	 */
-	public void setDigits(int digits)
+	public void setDigits(final int digits)
 	{
 		this.digits = digits;
 	}

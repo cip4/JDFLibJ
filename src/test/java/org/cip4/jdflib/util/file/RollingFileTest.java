@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -66,43 +66,82 @@
  * <http://www.cip4.org/>.
  *
  *
- * 
+ *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.util.file;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Assert;
+import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.Test;
+
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class RollingFileTest extends JDFTestCaseBase
 {
 
 	private RollingFile r;
+	private Set<File> files;
+
+	class AddRunner implements Runnable
+	{
+
+		@Override
+		public void run()
+		{
+			files.add(r.getNewFile());
+
+		}
+
+	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetNewFile()
 	{
 		for (int i = 1; i < 100; i++)
 		{
-			Assert.assertEquals(r.getNewFile().getName(), StringUtil.sprintf("dummy%06i.tst", "" + i));
+			assertEquals(r.getNewFile().getName(), StringUtil.sprintf("dummy%06i.tst", "" + i));
 		}
 	}
 
 	/**
-	 * 
+	 *
+	 */
+	@Test
+	public void testGetNewFileThread()
+	{
+		for (int i = 0; i < 100; i++)
+		{
+			new Thread(new AddRunner()).start();
+		}
+		for (int i = 0; i < 42; i++)
+		{
+			if (files.size() == 100)
+				break;
+			ThreadUtil.sleep(123);
+		}
+		assertEquals(100, files.size());
+	}
+
+	/**
+	 *
 	 */
 	@Test
 	public void testGetNewFileDir()
@@ -110,18 +149,18 @@ public class RollingFileTest extends JDFTestCaseBase
 		r = new RollingFile(sm_dirTestDataTemp + "RollingFile", "dummyDir");
 		for (int i = 1; i < 100; i++)
 		{
-			File newFile = r.getNewFile();
-			Assert.assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
-			Assert.assertFalse(newFile.isDirectory());
-			Assert.assertTrue(newFile.delete());
+			final File newFile = r.getNewFile();
+			assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
+			assertFalse(newFile.isDirectory());
+			assertTrue(newFile.delete());
 			newFile.mkdir();
-			Assert.assertTrue(newFile.isDirectory());
-			Assert.assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
+			assertTrue(newFile.isDirectory());
+			assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetNewDeepFile()
@@ -129,46 +168,47 @@ public class RollingFileTest extends JDFTestCaseBase
 		r = new RollingFile(sm_dirTestDataTemp + "RollingFile/foo/bar", "dummyDir");
 		for (int i = 1; i < 100; i++)
 		{
-			File newFile = r.getNewFile();
-			Assert.assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
-			Assert.assertTrue(newFile.canRead());
+			final File newFile = r.getNewFile();
+			assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
+			assertTrue(newFile.canRead());
 		}
 	}
 
 	/**
-	 * @throws IOException 
-	 * 
+	 * @throws IOException
+	 *
 	 */
 	@Test
 	public void testPreExist() throws IOException
 	{
 		FileUtil.getFileInDirectory(r, new File("dummy1234.tst")).createNewFile();
 		r = new RollingFile(sm_dirTestDataTemp + "RollingFile", "dummy.tst");
-		Assert.assertEquals(r.getNewFile().getName(), "dummy001235.tst");
+		assertEquals(r.getNewFile().getName(), "dummy001235.tst");
 	}
 
 	/**
-	 * 
+	 *
 	 * TODO Please insert comment!
 	 */
 	@Test
 	public void testDoubleDot()
 	{
 		r = new RollingFile(sm_dirTestDataTemp + "RollingFile", "dummy..tst");
-		Assert.assertEquals(r.getNewFile().getName(), "dummy.000001.tst");
+		assertEquals(r.getNewFile().getName(), "dummy.000001.tst");
 	}
 
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 * @throws Exception
-	*/
+	 */
 	@Override
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		File f = new File(sm_dirTestDataTemp + "RollingFile");
+		final File f = new File(sm_dirTestDataTemp + "RollingFile");
 		FileUtil.deleteAll(f);
 		f.mkdirs();
 		r = new RollingFile(sm_dirTestDataTemp + "RollingFile", "dummy.tst");
+		files = new HashSet<>();
 	}
 }

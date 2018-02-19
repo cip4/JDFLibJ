@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -113,7 +113,7 @@ import org.junit.Test;
 /**
  * @author Rainer Prosi
  *
- * Test of the Resource JMF
+ *         Test of the Resource JMF
  */
 public class JMFResourceTest extends JDFTestCaseBase
 {
@@ -141,7 +141,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		jmf.setSenderID("MISSenderID");
 		c.setType(EnumType.Resource);
 		final JDFResourceQuParams rqp = c.getCreateResourceQuParams(0);
-		final Vector<EnumResourceClass> vClasses = new Vector<EnumResourceClass>();
+		final Vector<EnumResourceClass> vClasses = new Vector<>();
 		vClasses.add(EnumResourceClass.Consumable);
 		vClasses.add(EnumResourceClass.Handling);
 		rqp.setClasses(vClasses);
@@ -285,7 +285,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		rqp.setResourceName(new VString(ElementName.MEDIA, null));
 		// rqp.setAttribute("Scope", "Allowed");
 
-		JDFSignal signal = q.createSignal().getSignal(0);
+		final JDFSignal signal = q.createSignal().getSignal(0);
 		doc = signal.getOwnerDocument_JDFElement();
 		signal.setXMLComment("This is a signal based on the query - generally it will be in it's own jmf...\nThe list of ResourceInfo + the ResourceQuParams could also be specified in a Signal.");
 
@@ -324,7 +324,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		rqp.setExact(true);
 		rqp.setXMLComment("Scope=Allowed is a new attribute to describe that we want a complete list of all known resources");
 		rqp.setResourceName(new VString(ElementName.MEDIA, null));
-		//		rqp.setAttribute("Scope", "Allowed");
+		// rqp.setAttribute("Scope", "Allowed");
 
 		JDFResponse r = q.createResponse().getResponse(0);
 		r = (JDFResponse) jmf.moveElement(r, null);
@@ -336,8 +336,8 @@ public class JMFResourceTest extends JDFTestCaseBase
 			ri.setResourceName(ElementName.SHAPEDEFPRODUCTIONPARAMS);
 			final JDFShapeDefProductionParams m = (JDFShapeDefProductionParams) ri.appendResource(null);
 			m.setDescriptiveName("Description of ShapeTemplate #" + i);
-			JDFShapeTemplate shapeTemp = m.appendShapeTemplate();
-			String standard = i < 3 ? "FEFCO" : "ECMA";
+			final JDFShapeTemplate shapeTemp = m.appendShapeTemplate();
+			final String standard = i < 3 ? "FEFCO" : "ECMA";
 			shapeTemp.setStandard(standard);
 			shapeTemp.setName(standard + "_" + i);
 
@@ -424,6 +424,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		rqp.setPartMap(sheetMap);
 		niRQPS1.setAttributes(sheetMap);
 		niRQPS1.setNodeStatus(EnumNodeStatus.Completed);
+		niRQP.clearPartitions();
 
 		rqp.applyResourceCommand(jdf);
 		assertEquals(jdf.getStatus(), EnumNodeStatus.Part);
@@ -496,7 +497,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		mPartRQP.setAttribute(AttributeName.DIMENSION, "");
 		mediaRQP.removeAttribute(AttributeName.DIMENSION);
 		rqp.applyResourceCommand(jdf);
-		//		final JDFMedia m2Sheet4 = (JDFMedia)
+		// final JDFMedia m2Sheet4 = (JDFMedia)
 		m2.getPartition(sheetMap, null);
 		assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
 		// assertFalse("removed leaf dimension", m2Sheet4.hasAttribute_KElement(AttributeName.DIMENSION, null, false));
@@ -598,14 +599,14 @@ public class JMFResourceTest extends JDFTestCaseBase
 		final JDFNode n = root.getJobPart(partID, null);
 		final JDFNodeInfo ni = (JDFNodeInfo) n.getChildWithAttribute(ElementName.NODEINFO, "ID", null, resID, 0, false);
 		assertNotNull(ni);
-		JDFResource niPart = ni.getPartition(amParts, null);
-		JDFAttributeMap map2 = amParts.clone();
+		final JDFResource niPart = ni.getPartition(amParts, null);
+		final JDFAttributeMap map2 = amParts.clone();
 		map2.put("Side", "Back");
 		assertNotNull(niPart);
-		JDFResource niBack = ni.getCreatePartition(map2, null);
+		final JDFResource niBack = ni.getCreatePartition(map2, null);
 		niBack.setIdentical(niPart);
 
-		JDFResourceCmdParams params = createResourceParams(partID, resID, map2, amAttr);
+		final JDFResourceCmdParams params = createResourceParams(partID, resID, map2, amAttr);
 		params.applyResourceCommand(n);
 		assertNotNull(n);
 		final JDFNodeInfo nip = (JDFNodeInfo) ni.getPartition(amParts, null);

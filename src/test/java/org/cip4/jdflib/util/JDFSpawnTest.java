@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -648,7 +616,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFConventionalPrintingParams cpp = (JDFConventionalPrintingParams) n2.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
 		final JDFComponent comp = (JDFComponent) n2.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		final JDFNodeInfo ni = n2.getCreateNodeInfo();
-		final Vector<JDFResource> vr = new Vector<JDFResource>();
+		final Vector<JDFResource> vr = new Vector<>();
 		vr.add(ni);
 		vr.add(cpp);
 		vr.add(comp);
@@ -2031,7 +1999,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFAuditPool auditPoolMerged = jobPart.getAuditPool();
 			if (i == 0)
 			{
-				assertEquals(((JDFProcessRun) auditPoolMerged.getAudit(0, EnumAuditType.ProcessRun, null, null)).getSubmissionTime(), n.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null).getTimeStamp());
+				assertEquals(((JDFProcessRun) auditPoolMerged.getAudit(0, EnumAuditType.ProcessRun, null, null)).getSubmissionTime(),
+						n.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null).getTimeStamp());
 			}
 			assertNotNull(auditPoolMerged.getAudit(3, EnumAuditType.Notification, null, null));
 			assertNull(auditPoolMerged.getAudit(4, EnumAuditType.Notification, null, null));
@@ -2863,8 +2832,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				assertTrue(nodeRoot.toString().indexOf(spawnID) < 0);
 				final long t2 = System.currentTimeMillis();
 				tMerge += (t2 - t11);
-				log.info("j= " + j + " i= " + i + " of " + (vNodes.size() - 1) + " : " + jobPartID + " time Spawn: " + (t1 - t0) + " time Write: " + (t11 - t1) + " time Merge: "
-						+ (t2 - t11) + " / " + tMerge + " total " + (t2 - t00));
+				log.info("j= " + j + " i= " + i + " of " + (vNodes.size() - 1) + " : " + jobPartID + " time Spawn: " + (t1 - t0) + " time Write: " + (t11 - t1) + " time Merge: " + (t2 - t11) + " / "
+						+ tMerge + " total " + (t2 - t00));
 				t0 = t2;
 			}
 			jdfDoc.write2File(sm_dirTestDataTemp + "bigMainMany.jdf", 2, true);
@@ -2996,12 +2965,12 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFResource comp = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		comp.setPartUsage(EnumPartUsage.Sparse);
 		final JDFResource comps = comp.addPartition(EnumPartIDKey.SheetName, "S1");
-		partMap.put("PartVersion", "En De");
+		partMap.put("PartVersion", "En");
 		comps.addPartition(EnumPartIDKey.PartVersion, "En De");
 		comps.addPartition(EnumPartIDKey.PartVersion, "Fr De");
-		comps.addPartition(EnumPartIDKey.PartVersion, "En");
-		comps.addPartition(EnumPartIDKey.PartVersion, "De");
-		comps.addPartition(EnumPartIDKey.PartVersion, "Fr");
+		comps.addPartition(EnumPartIDKey.PartVersion, "En En");
+		comps.addPartition(EnumPartIDKey.PartVersion, "De De");
+		comps.addPartition(EnumPartIDKey.PartVersion, "Fr Fr");
 		final JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
 		n2.linkResource(comp, EnumUsage.Output, null);
 
@@ -3074,30 +3043,30 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	/**
 	 * TODO @Rainer (2013-03-10) - This test case is not independent from other cases!
 	 */
-	//	@Test
-	//	public void testBigMerge()
-	//	{
-	//		// testBigSpawn();
-	//		final JDFParser parser = new JDFParser();
-	//		final JDFDoc jdfDoc = parser.parseFile(sm_dirTestDataTemp + "bigMainPost.jdf");
-	//		for (int i = 9; i > 0; i--)
-	//		{
-	//			File f = new File(sm_dirTestDataTemp + "bigSub" + i + ".jdf");
-	//			assertTrue(String.format("File %s does not exist.", f.getAbsolutePath()), f.exists());
+	// @Test
+	// public void testBigMerge()
+	// {
+	// // testBigSpawn();
+	// final JDFParser parser = new JDFParser();
+	// final JDFDoc jdfDoc = parser.parseFile(sm_dirTestDataTemp + "bigMainPost.jdf");
+	// for (int i = 9; i > 0; i--)
+	// {
+	// File f = new File(sm_dirTestDataTemp + "bigSub" + i + ".jdf");
+	// assertTrue(String.format("File %s does not exist.", f.getAbsolutePath()), f.exists());
 	//
-	//			final JDFParser parser2 = new JDFParser();
-	//			final JDFDoc jdfDocSub = parser2.parseFile(sm_dirTestDataTemp + "bigSub" + i + ".jdf");
-	//			final JDFNode nodeMain = jdfDoc.getJDFRoot();
-	//			final JDFNode nodeSub = jdfDocSub.getJDFRoot();
-	//			final JDFNode overWrite = new JDFMerge(nodeMain).mergeJDF(nodeSub, null, EnumCleanUpMerge.RemoveRRefs, EnumAmountMerge.UpdateLink);
-	//			final JDFAuditPool ap = overWrite.getAuditPool();
-	//			final JDFAudit audit = ap.getAudit(0, EnumAuditType.Merged, null, null);
-	//			assertNotNull(audit);
-	//			assertFalse(audit.hasAttribute(AttributeName.SPAWNID));
-	//			assertNull(nodeMain.getMultipleIDs("ID"));
-	//		}
-	//		jdfDoc.write2File(sm_dirTestDataTemp + "BigMerge.jdf", 2, true);
-	//	}
+	// final JDFParser parser2 = new JDFParser();
+	// final JDFDoc jdfDocSub = parser2.parseFile(sm_dirTestDataTemp + "bigSub" + i + ".jdf");
+	// final JDFNode nodeMain = jdfDoc.getJDFRoot();
+	// final JDFNode nodeSub = jdfDocSub.getJDFRoot();
+	// final JDFNode overWrite = new JDFMerge(nodeMain).mergeJDF(nodeSub, null, EnumCleanUpMerge.RemoveRRefs, EnumAmountMerge.UpdateLink);
+	// final JDFAuditPool ap = overWrite.getAuditPool();
+	// final JDFAudit audit = ap.getAudit(0, EnumAuditType.Merged, null, null);
+	// assertNotNull(audit);
+	// assertFalse(audit.hasAttribute(AttributeName.SPAWNID));
+	// assertNull(nodeMain.getMultipleIDs("ID"));
+	// }
+	// jdfDoc.write2File(sm_dirTestDataTemp + "BigMerge.jdf", 2, true);
+	// }
 
 	// /////////////////////////////////////////////////////////////////////
 
@@ -3286,7 +3255,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		JDFNode n2s = root;
 		final VJDFAttributeMap v = new VJDFAttributeMap();
 		final JDFAttributeMap map2 = new JDFAttributeMap(map);
-		final Vector<JDFNode> vn = new Vector<JDFNode>();
+		final Vector<JDFNode> vn = new Vector<>();
 		for (int i = 1; i < 10; i++)
 		{
 			for (int j = i; j < 40; j++)
@@ -3460,7 +3429,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		assertTrue(rl.toString().indexOf("SpawnedRW") > 0);
 		assertEquals(spawned.getAncestorPool().getPartMapVector(), vm);
 
-		//		assertEquals(rl.getPartition(ms2, null).getAttribute_KElement(AttributeName.SPAWNSTATUS), "SpawnedRW");
+		// assertEquals(rl.getPartition(ms2, null).getAttribute_KElement(AttributeName.SPAWNSTATUS), "SpawnedRW");
 		// assertEquals(rl.getPartition(ms,
 		// null).getAttribute_KElement(AttributeName.SPAWNSTATUS),"");
 
@@ -4017,8 +3986,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFParser p = new JDFParser();
 		m_jdfDoc = p.parseFile(sm_dirTestDataTemp + m_xmlFile1);
 
-		assertNotNull(sm_dirTestDataTemp + m_xmlFile1 + ": Parse Error\n" + "MergeJDF: JDF merger simulation;\n" + "Arguments: 1=parent input JDF, 2=child input JDF;\n"
-				+ "-o: output JDF;\n" + "-d: delete completed tasks from the output JDF\n", m_jdfDoc);
+		assertNotNull(sm_dirTestDataTemp + m_xmlFile1 + ": Parse Error\n" + "MergeJDF: JDF merger simulation;\n" + "Arguments: 1=parent input JDF, 2=child input JDF;\n" + "-o: output JDF;\n"
+				+ "-d: delete completed tasks from the output JDF\n", m_jdfDoc);
 
 		final JDFParser p2 = new JDFParser();
 		m_jdfDoc2 = p2.parseFile(sm_dirTestDataTemp + m_xmlFile2);

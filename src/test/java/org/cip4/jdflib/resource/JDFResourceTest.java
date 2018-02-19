@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -72,7 +40,7 @@
  *
  * @author Dietrich Mucha
  *
- * Copyright (C) 2002 Heidelberger Druckmaschinen AG. All Rights Reserved.
+ *         Copyright (C) 2002 Heidelberger Druckmaschinen AG. All Rights Reserved.
  */
 package org.cip4.jdflib.resource;
 
@@ -125,7 +93,6 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
-import org.cip4.jdflib.resource.JDFResource.PartitionGetter;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
@@ -152,7 +119,7 @@ import org.junit.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * 20.01.2009
+ *         20.01.2009
  */
 public class JDFResourceTest extends JDFTestCaseBase
 {
@@ -351,8 +318,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	* test the the generalized partition matching
-	*/
+	 * test the the generalized partition matching
+	 */
 	@Test
 	public void testGetAttributeMap_KElement()
 	{
@@ -903,7 +870,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 		final JDFColorSpaceConversionParams cpp = (JDFColorSpaceConversionParams) root.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
 		final JDFColorSpaceConversionOp cso = cpp.appendColorSpaceConversionOp();
-		final Vector<EnumSourceObjects> sourceObjects = new Vector<EnumSourceObjects>();
+		final Vector<EnumSourceObjects> sourceObjects = new Vector<>();
 		sourceObjects.add(EnumSourceObjects.ImagePhotographic);
 		sourceObjects.add(EnumSourceObjects.LineArt);
 		cso.setSourceObjects(sourceObjects);
@@ -1398,7 +1365,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 		final JDFComponent c1 = (JDFComponent) c.addPartition(JDFResource.EnumPartIDKey.SheetName, "S1");
 		c1.addPartition(JDFResource.EnumPartIDKey.Separation, "Cyan");
-		JDFComponent c1y = (JDFComponent) c1.addPartition(JDFResource.EnumPartIDKey.Separation, "Yellow");
+		final JDFComponent c1y = (JDFComponent) c1.addPartition(JDFResource.EnumPartIDKey.Separation, "Yellow");
 		c1.addPartition(JDFResource.EnumPartIDKey.Separation, "Magenta");
 
 		final JDFComponent c2 = (JDFComponent) c.addPartition(JDFResource.EnumPartIDKey.SheetName, "S2");
@@ -1425,10 +1392,10 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertNotNull(c3.getIdenticalMap());
 		assertEquals(c3.getIdenticalMap(), c1.getPartMap());
 
-		final JDFComponent c3y = (JDFComponent) c.getPartition(mPart3, null);
-		assertEquals("identical", c1y, c3y);
-		c1y = (JDFComponent) c.getPartition(mPart1, null);
-		assertEquals("identical 2", c1y, c3y);
+		/*
+		 * final JDFComponent c3y = (JDFComponent) c.getPartition(mPart3, null); assertEquals("identical", c1y, c3y); c1y = (JDFComponent) c.getPartition(mPart1, null); assertEquals("identical 2",
+		 * c1y, c3y);
+		 */
 		try
 		{
 			c.setIdentical(c2);
@@ -1438,33 +1405,11 @@ public class JDFResourceTest extends JDFTestCaseBase
 		{
 			//
 		}
-		try
-		{
-			c3y.setIdentical(c3y);
-			fail("myself set self");
-		}
-		catch (final JDFException x)
-		{
-			//
-		}
-		try
-		{
-			c3y.setIdentical(c3);
-			fail("myself set identical");
-		}
-		catch (final JDFException x)
-		{
-			//
-		}
-		try
-		{
-			c3y.setIdentical(c1);
-			fail("myself set parent");
-		}
-		catch (final JDFException x)
-		{
-			//
-		}
+		/*
+		 * 
+		 * try { c3y.setIdentical(c3y); fail("myself set self"); } catch (final JDFException x) { // } try { c3y.setIdentical(c3); fail("myself set identical"); } catch (final JDFException x) { // }
+		 * try { c3y.setIdentical(c1); fail("myself set parent"); } catch (final JDFException x) { // }
+		 */
 		doc.write2File(sm_dirTestDataTemp + "identical.jdf", 2, false);
 	}
 
@@ -1615,7 +1560,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	@Test
 	public void testGetPartitionMap()
 	{
-		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
 		n.setType(EnumType.Folding);
 		final JDFFoldingParams fp = (JDFFoldingParams) n.addResource(ElementName.FOLDINGPARAMS, null, EnumUsage.Input, null, null, null, null);
@@ -1634,18 +1579,113 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 		r2.setIdentical(r1);
 		partitionMap = fp.getPartitionMap();
-		assertEquals(partitionMap.size(), 1 + 1 + 1 + 1);
+		assertEquals(partitionMap.size(), 2 + 1 + 1 + 1);
 		assertTrue(partitionMap.containsValue(r1));
-		assertFalse(partitionMap.containsValue(r2));
+		assertTrue(partitionMap.containsValue(r2));
 		assertTrue(partitionMap.containsValue(fp));
 
 		m.put("BlockName", "Block3");
-		r2.getIdentical().setPartMap(m);
-		partitionMap = fp.getPartitionMap();
-		assertEquals("dummy identical is skipped", partitionMap.size(), 1 + 1 + 1 + 1);
-		assertTrue(partitionMap.containsValue(r1));
-		assertFalse(partitionMap.containsValue(r2));
-		assertTrue(partitionMap.containsValue(fp));
+	}
+
+	/**
+	 * test getPartitionFromMap()
+	 */
+	@Test
+	public void testGetPartitionFromMap()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode n = doc.getJDFRoot();
+		n.setType(EnumType.Folding);
+		final JDFFoldingParams fp = (JDFFoldingParams) n.addResource(ElementName.FOLDINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFAttributeMap m = new JDFAttributeMap("SignatureName", "Sig1");
+		final JDFResource rSig = fp.getCreatePartition(m, new VString("SignatureName SheetName BlockName", null));
+		m.put("SheetName", "Sheet1");
+		final JDFResource rSh = fp.getCreatePartition(m, new VString("SignatureName SheetName BlockName", null));
+		m.put("BlockName", "Block1");
+		final JDFResource rb1 = fp.getCreatePartition(m, new VString("SignatureName SheetName BlockName", null));
+		m.put("BlockName", "Block2");
+		final JDFResource rb2 = fp.getCreatePartition(m, new VString("SignatureName SheetName BlockName", null));
+		fp.setPartUsage(EnumPartUsage.Implicit);
+		final HashMap<JDFAttributeMap, JDFResource> partitionMap = fp.getPartitionMap();
+
+		assertEquals(fp, fp.getPartition(null, null));
+		assertEquals(fp, fp.getPartition(new JDFAttributeMap(), null));
+		assertEquals(fp, fp.getPartition(new JDFAttributeMap("Run", "R1"), null));
+		assertEquals(fp, fp.getPartition(new JDFAttributeMap("SignatureName", "Sig2"), null));
+		JDFAttributeMap mClone = m.clone();
+		mClone.put(AttributeName.SHEETNAME, "Sheet2");
+		assertEquals(rSig, fp.getPartition(mClone, null));
+		mClone = m.clone();
+		mClone.put(AttributeName.BLOCKNAME, "B3");
+		assertEquals(rSh, fp.getPartition(mClone, null));
+		mClone = m.clone();
+		mClone.put(AttributeName.RUNPAGE, "3");
+		assertEquals(rb2, fp.getPartition(mClone, null));
+
+	}
+
+	/**
+	 * test getPartitionFromMap()
+	 */
+	@Test
+	public void testGetPartitionFromMapTime()
+	{
+		final long t00 = System.currentTimeMillis();
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode n = doc.getJDFRoot();
+		n.setType(EnumType.Folding);
+		final JDFFoldingParams fp = (JDFFoldingParams) n.addResource(ElementName.FOLDINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		for (int i = 1; i < 100; i++)
+		{
+			final JDFResource rs = fp.addPartition(EnumPartIDKey.SignatureName, "si" + i);
+			for (int j = 1; j < 100; j++)
+			{
+				final JDFResource rss = rs.addPartition(EnumPartIDKey.SheetName, "sh" + j);
+			}
+		}
+		final long tm00 = System.currentTimeMillis() - t00;
+		log.info("add time: " + tm00);
+		fp.setPartUsage(EnumPartUsage.Implicit);
+		final long t0 = System.currentTimeMillis();
+		final HashMap<JDFAttributeMap, JDFResource> partitionMap = fp.getPartitionMap();
+		final JDFAttributeMap map = new JDFAttributeMap();
+		final long tm = System.currentTimeMillis() - t0;
+		log.info("map time: " + tm);
+		for (int i = 1; i < 200; i++)
+		{
+			map.put(EnumPartIDKey.SignatureName, "si" + i);
+			for (int j = 1; j < 200; j++)
+			{
+				map.put(EnumPartIDKey.SheetName, "sh" + j);
+				final JDFResource fp2 = fp.getPartition(map, null);
+				assertNotNull(fp2);
+				if (i > 100)
+				{
+					assertEquals(" " + i + " " + j, fp, fp2);
+				}
+			}
+		}
+		final long tt0 = System.currentTimeMillis() - t0;
+		log.info("T0 fast: " + tt0);
+		log.info("T0 fast no map: " + (tt0 - tm));
+		final long t1 = System.currentTimeMillis();
+		for (int i = 1; i < 200; i++)
+		{
+			map.put(EnumPartIDKey.SignatureName, "si" + i);
+			for (int j = 1; j < 200; j++)
+			{
+				map.put(EnumPartIDKey.SheetName, "sh" + j);
+				final JDFResource fp2 = fp.getPartition(map, null);
+				assertNotNull(fp2);
+				if (i > 100)
+				{
+					assertEquals(fp, fp2);
+				}
+
+			}
+		}
+		final long tt1 = System.currentTimeMillis() - t1;
+		log.info("T0 slow: " + tt1);
 	}
 
 	/**
@@ -1692,7 +1732,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertEquals(xmRoot.getCreatePartition(m1, null), xmp);
 		assertNull(xmRoot.getPartition(new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(), "GR"), null));
 
-		final PartitionGetter pg = xmRoot.new PartitionGetter();
+		final PartitionGetter pg = new PartitionGetter(xmRoot);
 		pg.setStrictPartVersion(true);
 
 		final JDFAttributeMap m = new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(), "DE FR");
@@ -1764,7 +1804,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 			s21.setIdentical(s11);
 		}
 
-		final PartitionGetter pg = r.new PartitionGetter();
+		final PartitionGetter pg = new PartitionGetter(r);
 		pg.setFollowIdentical(false);
 		VElement v = pg.getPartitionVector((VJDFAttributeMap) null, null);
 		assertEquals("explicit identicals are not excluded", v.size(), 1);
@@ -1809,7 +1849,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 			final JDFExposedMedia xmp = (JDFExposedMedia) v.elementAt(i);
 			assertTrue("overlap of maps", m.overlapMap(xmp.getPartMap()));
 		}
-		assertTrue("sparse 1", v.size() == 1);
+		assertEquals("sparse 1", v.size(), 1);
 
 		v = xm.getPartitionVector(m, EnumPartUsage.Explicit);
 		assertTrue("no explicit", v.size() == 0);
@@ -1822,7 +1862,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 		v = xm.getPartitionVector(m, EnumPartUsage.Sparse);
 		assertTrue("no sparse", v.size() == 0);
 		v = xm.getPartitionVector(m, EnumPartUsage.Implicit);
-		assertTrue("1 impl", v.size() == 1);
+		assertEquals("1 impl", v.size(), 1);
 		for (i = 0; i < v.size(); i++)
 		{
 			final JDFExposedMedia xmp = (JDFExposedMedia) v.elementAt(i);
@@ -1838,7 +1878,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 		v = xm.getPartitionVector(m, EnumPartUsage.Sparse);
 		assertTrue("no sparse", v.size() == 2);
 		v = xm.getPartitionVector(m, EnumPartUsage.Implicit);
-		assertTrue("1 impl", v.size() == 2);
+		assertEquals("1 impl", v.size(), 2);
 		for (i = 0; i < v.size(); i++)
 		{
 			final JDFExposedMedia xmp = (JDFExposedMedia) v.elementAt(i);
@@ -2237,7 +2277,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFNode n = doc.getJDFRoot();
 		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
 		JDFMedia m = xm.getMedia();
-		//		assertEquals("Media in XM class", m.getResourceClass(), EnumResourceClass.Consumable);
+		// assertEquals("Media in XM class", m.getResourceClass(),
+		// EnumResourceClass.Consumable);
 		m.setBrand("fooBrand");
 		assertTrue("xm valid", xm.isValid(EnumValidationLevel.Complete));
 		assertTrue("m valid", m.isValid(EnumValidationLevel.Complete));

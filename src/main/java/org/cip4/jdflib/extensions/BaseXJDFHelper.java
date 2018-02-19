@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,6 +72,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.util.ContainerUtil;
 
@@ -95,7 +96,7 @@ public abstract class BaseXJDFHelper
 	/**
 	 *
 	 */
-	protected BaseXJDFHelper(KElement theElement)
+	protected BaseXJDFHelper(final KElement theElement)
 	{
 		super();
 		log = LogFactory.getLog(BaseXJDFHelper.class);
@@ -107,7 +108,7 @@ public abstract class BaseXJDFHelper
 	 * @param xpath
 	 * @return
 	 */
-	public String getXPathValue(String xpath)
+	public String getXPathValue(final String xpath)
 	{
 		return theElement == null ? null : theElement.getXPathAttribute(xpath, null);
 	}
@@ -117,7 +118,7 @@ public abstract class BaseXJDFHelper
 	 * @param xpath
 	 * @return
 	 */
-	public KElement getXPathElement(String xpath)
+	public KElement getXPathElement(final String xpath)
 	{
 		return theElement == null ? null : theElement.getXPathElement(xpath);
 	}
@@ -127,7 +128,7 @@ public abstract class BaseXJDFHelper
 	 * @param attName
 	 * @return
 	 */
-	public String getAttribute(String attName)
+	public String getAttribute(final String attName)
 	{
 		return theElement == null ? null : theElement.getNonEmpty(attName);
 	}
@@ -137,7 +138,7 @@ public abstract class BaseXJDFHelper
 	 * @param attrib
 	 * @param nameSpaceURI
 	 */
-	public void removeAttribute(String attrib, String nameSpaceURI)
+	public void removeAttribute(final String attrib, final String nameSpaceURI)
 	{
 		if (theElement != null)
 		{
@@ -151,7 +152,7 @@ public abstract class BaseXJDFHelper
 	 * @param value
 	 * @return
 	 */
-	public void setAttribute(String attName, String value)
+	public void setAttribute(final String attName, final String value)
 	{
 		if (theElement != null)
 		{
@@ -173,7 +174,7 @@ public abstract class BaseXJDFHelper
 	 * @param xpath
 	 * @param value
 	 */
-	public void setXPathValue(String xpath, String value)
+	public void setXPathValue(final String xpath, final String value)
 	{
 		if (theElement != null)
 		{
@@ -183,11 +184,11 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 *
-	 *generic cleanup routine
+	 * generic cleanup routine
 	 */
 	public void cleanUp()
 	{
-		XJDFCleanupComparator comparator = new XJDFCleanupComparator();
+		final XJDFCleanupComparator comparator = new XJDFCleanupComparator();
 		theElement.sortChildren(comparator, true);
 	}
 
@@ -208,7 +209,7 @@ public abstract class BaseXJDFHelper
 	 */
 	public KElement deleteNode()
 	{
-		KElement ret = theElement;
+		final KElement ret = theElement;
 		if (theElement != null)
 		{
 			theElement.deleteNode();
@@ -221,7 +222,7 @@ public abstract class BaseXJDFHelper
 	 *
 	 * @return
 	 */
-	public boolean isEqual(BaseXJDFHelper other)
+	public boolean isEqual(final BaseXJDFHelper other)
 	{
 		if (theElement == null)
 			return other == null || other.theElement == null;
@@ -230,6 +231,7 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 * get the ID from the generic Parameter or Resource element
+	 *
 	 * @return the ID , may be null
 	 */
 	public String getID()
@@ -239,6 +241,7 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 * get the ID from the generic Parameter or Resource element
+	 *
 	 * @return the ID , may never be null
 	 */
 	public String ensureID()
@@ -250,7 +253,7 @@ public abstract class BaseXJDFHelper
 	 *
 	 * @param newID
 	 */
-	public void setID(String newID)
+	public void setID(final String newID)
 	{
 		setAttribute(AttributeName.ID, KElement.xmlnsLocalName(newID));
 	}
@@ -275,7 +278,7 @@ public abstract class BaseXJDFHelper
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (this == obj)
 			return true;
@@ -283,14 +286,14 @@ public abstract class BaseXJDFHelper
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		BaseXJDFHelper other = (BaseXJDFHelper) obj;
+		final BaseXJDFHelper other = (BaseXJDFHelper) obj;
 		return ContainerUtil.equals(theElement, other.theElement);
 	}
 
 	/**
 	 * @see java.lang.Object#toString()
 	 * @return
-	*/
+	 */
 	@Override
 	public String toString()
 	{
@@ -302,7 +305,7 @@ public abstract class BaseXJDFHelper
 	 * @return
 	 * @see org.cip4.jdflib.core.KElement#appendElement(java.lang.String)
 	 */
-	public KElement appendElement(String elementName)
+	public KElement appendElement(final String elementName)
 	{
 		return theElement == null ? null : theElement.appendElement(elementName);
 	}
@@ -312,9 +315,39 @@ public abstract class BaseXJDFHelper
 	 * @return
 	 * @see org.cip4.jdflib.core.KElement#getCreateElement(java.lang.String)
 	 */
-	public KElement getCreateElement(String nodeName)
+	public KElement getCreateElement(final String nodeName)
 	{
 		return theElement == null ? null : theElement.getCreateElement(nodeName);
+	}
+
+	/**
+	 *
+	 * @param idUsage
+	 * @param idValue
+	 */
+	public void setGeneralID(final String idUsage, final String idValue)
+	{
+		if (theElement instanceof JDFElement)
+		{
+			((JDFElement) theElement).setGeneralID(idUsage, idValue);
+		}
+	}
+
+	/**
+	 *
+	 * @param idUsage
+	 * @param idValue
+	 */
+	public String getGeneralID(final String idUsage)
+	{
+		if (theElement instanceof JDFElement)
+		{
+			return ((JDFElement) theElement).getGeneralID(idUsage, 0);
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 }
