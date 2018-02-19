@@ -340,14 +340,10 @@ public class PartitionGetter
 	VElement getPartitionLeafVector(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
 		final VElement v = getPartitionVector(m, partUsage);
-		if (v == null)
-		{
-			return null;
-		}
 		final VElement vNew = new VElement();
-		for (int i = 0; i < v.size(); i++)
+		for (final KElement e : v)
 		{
-			final JDFResource r = (JDFResource) v.get(i);
+			final JDFResource r = (JDFResource) e;
 			final VElement vr = r.getLeaves(false);
 			vNew.addAll(vr);
 		}
@@ -390,52 +386,9 @@ public class PartitionGetter
 			partUsage = resourceRoot.getPartUsage();
 		if (m != null)
 			m = removeImplicitPartions(m, partUsage);
-		final VJDFAttributeMap v = new VJDFAttributeMap();
+
 		JDFAttributeMap fast = getPartitionFromMap(m, EnumPartUsage.Explicit);
-		if (fast != null)
-		{
-			v.add(fast);
-		}
-		else if (containsEvil(m) || missingKeys(m))
-		{
-			for (final JDFAttributeMap map : leafMap.keySet())
-			{
-				if (JDFPart.subPartMap(map, m, strictPartVersion))
-				{
-					v.add(map);
-				}
-				else if (EnumPartUsage.Implicit.equals(partUsage) && JDFPart.overlapPartMap(map, m, strictPartVersion))
-				{
-					v.add(map);
-				}
-				else if (EnumPartUsage.Sparse.equals(partUsage) && JDFPart.overlapPartMap(map, m, strictPartVersion) && leafMap.get(map).getDirectPartition(0) == null)
-				{
-					v.add(map);
-				}
-			}
-
-			v.unify();
-			if (EnumPartUsage.Implicit.equals(partUsage))
-			{
-				for (int i = v.size() - 1; i >= 0; i--)
-				{
-					for (int j = i - 1; j >= 0; j--)
-					{
-						if (v.get(j).subMap(v.get(i)))
-						{
-							v.remove(i);
-							break;
-						}
-						else if (v.get(i).subMap(v.get(j)))
-						{
-							v.remove(j);
-							i--;
-						}
-					}
-
-				}
-			}
-		}
+		final VJDFAttributeMap v = (fast != null) ? new VJDFAttributeMap(fast) : specialSearch(m, partUsage);
 
 		if (v.isEmpty())
 		{
@@ -448,6 +401,66 @@ public class PartitionGetter
 		return v;
 	}
 
+	/**
+	 * @param m
+	 * @param partUsage
+	 * @param v
+	 */
+	VJDFAttributeMap specialSearch(JDFAttributeMap m, EnumPartUsage partUsage)
+	{
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		for (final JDFAttributeMap map : leafMap.keySet())
+		{
+			if (JDFPart.subPartMap(map, m, strictPartVersion))
+			{
+				v.add(map);
+			}
+			else if (EnumPartUsage.Implicit.equals(partUsage) && JDFPart.overlapPartMap(map, m, strictPartVersion))
+			{
+				v.add(map);
+			}
+			else if (EnumPartUsage.Sparse.equals(partUsage) && JDFPart.overlapPartMap(map, m, strictPartVersion) && leafMap.get(map).getDirectPartition(0) == null)
+			{
+				v.add(map);
+			}
+		}
+
+		v.unify();
+		if (EnumPartUsage.Implicit.equals(partUsage))
+		{
+			removeImplicitDuplicates(v);
+		}
+		return v;
+	}
+
+	/**
+	 * @param v
+	 */
+	void removeImplicitDuplicates(final VJDFAttributeMap v)
+	{
+		for (int i = v.size() - 1; i >= 0; i--)
+		{
+			for (int j = i - 1; j >= 0; j--)
+			{
+				if (v.get(j).subMap(v.get(i)))
+				{
+					v.remove(i);
+					break;
+				}
+				else if (v.get(i).subMap(v.get(j)))
+				{
+					v.remove(j);
+					i--;
+				}
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param m
+	 * @return
+	 */
 	boolean missingKeys(final JDFAttributeMap m)
 	{
 		int s = m.size();
@@ -459,7 +472,6 @@ public class PartitionGetter
 				return true;
 			if (--s == 0)
 				return false;
-
 		}
 		return false;
 	}
@@ -763,7 +775,8 @@ public class PartitionGetter
 
 		if (vPartIDKeys.size() < partMap.size())
 		{
-			throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + "insufficient partIDKeys " + partIDKeys + " for " + partMap);
+			throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + "insufficient partIDKeys " + partIDKeys + " for "
+					+ partMap);
 		}
 		// create all partitions
 		JDFAttributeMap map = thisMap;
@@ -782,8 +795,8 @@ public class PartitionGetter
 			}
 			else
 			{
-				throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + " attempting to fill non-matching partIDKeys: " + key + " valid keys: "
-						+ "Current PartIDKeys: " + resourceRoot.getPartIDKeys() + " complete map: " + partMap);
+				throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + " attempting to fill non-matching partIDKeys: " + key
+						+ " valid keys: " + "Current PartIDKeys: " + resourceRoot.getPartIDKeys() + " complete map: " + partMap);
 			}
 		}
 		return r;
