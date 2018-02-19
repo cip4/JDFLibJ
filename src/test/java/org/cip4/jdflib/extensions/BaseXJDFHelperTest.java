@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
@@ -151,6 +152,31 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	{
 		assertEquals(theHelper, theHelper);
 		assertEquals(theHelper, new XJDFHelper(theHelper.getRoot()));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testClone()
+	{
+		assertEquals(theHelper, theHelper);
+		assertFalse(theHelper.equals(theHelper.clone()));
+		assertEquals(theHelper.toString(), theHelper.clone().toString());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testCopy()
+	{
+		final XJDFHelper clone = theHelper.clone();
+		final SetHelper s = clone.appendSet(null, "foo", null);
+		theHelper.copyHelper(s);
+		assertNotNull(theHelper.getSet("foo", null));
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -129,6 +129,38 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
 		writeTest(xjmfHelper, "jmf/CommandModifyQE.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCommandAbortQE()
+	{
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, XJDFConstants.ModifyQueueEntry);
+		command.getHeader().setAttribute(AttributeName.ID, "C1");
+		command.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/@" + AttributeName.OPERATION, "Abort");
+		command.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/" + ElementName.QUEUEFILTER + "/@" + AttributeName.JOBID, "j1");
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeRoundTripX(xjmfHelper.getRoot(), "jmf/CommandAbortQE.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCommandRemoveQE()
+	{
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, XJDFConstants.ModifyQueueEntry);
+		command.getHeader().setAttribute(AttributeName.ID, "C1");
+		command.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/@" + AttributeName.OPERATION, "Remove");
+		command.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/" + ElementName.QUEUEFILTER + "/@" + AttributeName.JOBID, "j1");
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeRoundTripX(xjmfHelper.getRoot(), "jmf/CommandRemoveQE.xjmf");
 	}
 
 	/**
