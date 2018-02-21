@@ -7524,7 +7524,7 @@ public class JDFResource extends JDFElement
 	{
 		if (src != null && src.getNodeName().equals(getNodeName()))
 		{
-			getResourceRoot().partitionMap = null;
+			((JDFResource) src).getResourceRoot().partitionMap = null;
 		}
 
 		final KElement moveElement = super.moveElement(src, beforeChild);
