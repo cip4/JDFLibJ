@@ -88,6 +88,7 @@ import org.cip4.jdflib.resource.process.JDFSourceResource;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.StringUtil;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
 /**
@@ -7525,20 +7526,17 @@ public class JDFResource extends JDFElement
 		{
 			getResourceRoot().partitionMap = null;
 		}
-		return super.moveElement(src, beforeChild);
+
+		final KElement moveElement = super.moveElement(src, beforeChild);
+		updatePartitionMap(moveElement);
+		return moveElement;
 	}
 
 	@Override
 	public KElement copyElement(final KElement src, final KElement beforeChild)
 	{
 		final KElement copy = super.copyElement(src, beforeChild);
-		if (src != null && src.getNodeName().equals(getNodeName()))
-		{
-			if (getResourceRoot().partitionMap != null)
-			{
-				getResourceRoot().partitionMap.addPartitionMap(getPartMap(), (JDFResource) copy);
-			}
-		}
+		updatePartitionMap(copy);
 		return copy;
 	}
 
@@ -7564,6 +7562,29 @@ public class JDFResource extends JDFElement
 	{
 		getResourceRoot().partitionMap = null;
 		return super.mergeElement(kElem, bDelete);
+	}
+
+	@Override
+	public synchronized Node insertBefore(final Node src, final Node arg1) throws DOMException
+	{
+		final Node insertBefore = super.insertBefore(src, arg1);
+		updatePartitionMap(insertBefore);
+		return insertBefore;
+	}
+
+	void updatePartitionMap(final Node src)
+	{
+		if (src != null && src.getNodeName().equals(getNodeName()))
+		{
+			if (getResourceRoot().partitionMap != null)
+			{
+				final JDFAttributeMap newPartMap = ((JDFResource) src).getPartMap();
+				if (!newPartMap.isEmpty())
+				{
+					getResourceRoot().partitionMap.addPartitionMap(newPartMap, (JDFResource) src);
+				}
+			}
+		}
 	}
 
 }
