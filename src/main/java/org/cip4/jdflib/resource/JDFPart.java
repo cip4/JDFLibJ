@@ -37,6 +37,7 @@
 
 package org.cip4.jdflib.resource;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -245,8 +246,7 @@ public class JDFPart extends JDFAutoPart
 			return true;
 		}
 		// speed up typical keys
-		else if (AttributeName.SIGNATURENAME.equals(key) || AttributeName.SHEETNAME.equals(key) || AttributeName.SIDE.equals(key) || AttributeName.SEPARATION.equals(key)
-				|| AttributeName.RUN.equals(key))
+		else if (fastparts.contains(linkValue))
 		{
 			return false;
 		}
@@ -432,6 +432,8 @@ public class JDFPart extends JDFAutoPart
 		atrInfoTable[4] = new AtrInfoTable(XJDFConstants.TransferCurveName, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
+	static Set<String> fastparts = fillFastParts();
+
 	/**
 	 * @see org.cip4.jdflib.core.JDFElement#getTheElementInfo()
 	 * @return
@@ -445,6 +447,22 @@ public class JDFPart extends JDFAutoPart
 		ai = super.getTheElementInfo();
 		ElementInfo.fixedMap.put("JDFPart", ai);
 		return ai;
+	}
+
+	static Set<String> fillFastParts()
+	{
+		final HashSet<String> hashSet = new HashSet<>();
+		for (final EnumPartIDKey e : EnumPartIDKey.getEnumList())
+		{
+			final String key = e.getName();
+			if (!(AttributeName.ITEMNAMES.equals(key) || key.endsWith("Tags") || AttributeName.PAGENUMBER.equals(key) || key.endsWith("Index") || AttributeName.LAYERIDS.equals(key)
+					|| AttributeName.DOCCOPIES.equals(key)))
+			{
+				hashSet.add(key);
+			}
+
+		}
+		return hashSet;
 	}
 
 	/**

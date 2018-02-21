@@ -2,77 +2,52 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in
- * Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted
- * provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions
- * and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of
- * conditions and the following disclaimer in the documentation and/or other materials provided with
- * the distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the
- * following acknowledgment: "This product includes software developed by the The International
- * Cooperation for the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)"
- * Alternately, this acknowledgment may appear in the software itself, if and wherever such
- * third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in
- * Prepress, Press and Postpress" must not be used to endorse or promote products derived from this
- * software without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their
- * name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please
- * consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN
- * PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
- * THE POSSIBILITY OF SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The
- * International Cooperation for the Integration of Processes in Prepress, Press and Postpress and
- * was originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the Integration of Processes in
- * Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  *//**
-	*
-	* Copyright (c) 2001-2005 Heidelberger Druckmaschinen AG, All Rights Reserved.
-	*
-	* JDFResourceLink.java
-	*
-	* Last changes 2002-07-02 JG - added Get/SetProcessUsage 2002-07-02 JG - MyString -> KString :
-	* all strings now 16 bit 2002-07-02 JG - now inherits from JDFElement 2002-07-02 JG -
-	* GetProcessUsage and GetLinkedResourceName are now 2 sepaarte functions 2002-07-02 JG -
-	* completely removed selector handling 2002-07-02 JG - HasResourcePartMap bug fix if no parts
-	* in this - now returns true for no parts in this 2002-07-02 JG - removed JDFResource
-	* GetPartition(boolean bCreate=false, int i=0); 2002-07-02 JG - added AppendPart 2002-07-02 JG -
-	* added CombinedProcessIndex, PipeProtocol support 2002-07-02 JG - added AmountPool 2002-07-02
-	* JG - added Transformation + Orientation support 2002-07-02 JG - removed GetAmount(boolean
-	* bSelector) 2002-07-02 JG - removed GetPartTarget(int iPart=0,int iSelector=-1); 2002-07-02 JG -
-	* modified GetNamedProcessUsage to default to xxx:Input / xxx:Output respectively 2002-07-02 JG -
-	* SetPartition() now uses JDFResource::EnumPartIDKey 2002-07-02 JG - added GetTarget 2002-07-02
-	* JG - GetTargetVector is now const 2002-07-02 JG - added GetTarget() 22-10-2003 KM -
-	* IsExecutable() added bCheckChildren 22-10-2003 KM - IsExecutable() fixed bCheckChildren
-	* 22-10-2003 KM - GetTarget() now returns the lowest common denominator resource if all leaves
-	* are available
-	*/
+	 *
+	 * Copyright (c) 2001-2005 Heidelberger Druckmaschinen AG, All Rights Reserved.
+	 *
+	 * JDFResourceLink.java
+	 *
+	 * Last changes 2002-07-02 JG - added Get/SetProcessUsage 2002-07-02 JG - MyString -> KString : all strings now 16 bit 2002-07-02 JG - now inherits from JDFElement 2002-07-02 JG - GetProcessUsage
+	 * and GetLinkedResourceName are now 2 sepaarte functions 2002-07-02 JG - completely removed selector handling 2002-07-02 JG - HasResourcePartMap bug fix if no parts in this - now returns true for
+	 * no parts in this 2002-07-02 JG - removed JDFResource GetPartition(boolean bCreate=false, int i=0); 2002-07-02 JG - added AppendPart 2002-07-02 JG - added CombinedProcessIndex, PipeProtocol
+	 * support 2002-07-02 JG - added AmountPool 2002-07-02 JG - added Transformation + Orientation support 2002-07-02 JG - removed GetAmount(boolean bSelector) 2002-07-02 JG - removed
+	 * GetPartTarget(int iPart=0,int iSelector=-1); 2002-07-02 JG - modified GetNamedProcessUsage to default to xxx:Input / xxx:Output respectively 2002-07-02 JG - SetPartition() now uses
+	 * JDFResource::EnumPartIDKey 2002-07-02 JG - added GetTarget 2002-07-02 JG - GetTargetVector is now const 2002-07-02 JG - added GetTarget() 22-10-2003 KM - IsExecutable() added bCheckChildren
+	 * 22-10-2003 KM - IsExecutable() fixed bCheckChildren 22-10-2003 KM - GetTarget() now returns the lowest common denominator resource if all leaves are available
+	 */
 
 package org.cip4.jdflib.core;
 
@@ -127,7 +102,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 	/**
 	 * check whether e is a "real" resourceLink and NOT a partamount
-	 * 
+	 *
 	 * @param e
 	 */
 	public static boolean isResourceLink(final KElement e)
@@ -137,8 +112,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.JDFElement.EnumValidationLevel,
-	 *      boolean, int)
+	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.JDFElement.EnumValidationLevel, boolean, int)
 	 */
 	@Override
 	public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
@@ -166,8 +140,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		}
 
 		/**
-		 * @param enumName
-		 *            the string to convert
+		 * @param enumName the string to convert
 		 * @return the enum
 		 */
 		public static EnumUsage getEnum(final String enumName)
@@ -176,8 +149,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		}
 
 		/**
-		 * @param enumValue
-		 *            the integer to convert
+		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
 		public static EnumUsage getEnum(final int enumValue)
@@ -230,15 +202,12 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods
-	 * for Attribute Usage
-	 * ---------------------------------------------------------------------
+	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Usage
-	 * 
-	 * @param enumVar
-	 *            the enumVar to set the attribute to
+	 *
+	 * @param enumVar the enumVar to set the attribute to
 	 */
 	@Override
 	public void setUsage(final EnumUsage enumVar)
@@ -248,7 +217,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 	/**
 	 * (9) get attribute Usage
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	@Override
@@ -317,10 +286,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * Constructor for JDFResourceLink
 	 *
-	 * @param myOwnerDocument
-	 *            owner document
-	 * @param qualifiedName
-	 *            qualified name
+	 * @param myOwnerDocument owner document
+	 * @param qualifiedName qualified name
 	 */
 	public JDFResourceLink(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
@@ -330,12 +297,9 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * Constructor for JDFResourceLink
 	 *
-	 * @param myOwnerDocument
-	 *            owner documen
-	 * @param myNamespaceURI
-	 *            namespace URI
-	 * @param qualifiedName
-	 *            qualified name
+	 * @param myOwnerDocument owner documen
+	 * @param myNamespaceURI namespace URI
+	 * @param qualifiedName qualified name
 	 */
 	public JDFResourceLink(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
@@ -345,14 +309,10 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * Constructor for JDFResourceLink
 	 *
-	 * @param myOwnerDocument
-	 *            owner documen
-	 * @param myNamespaceURI
-	 *            namespace URI
-	 * @param qualifiedName
-	 *            qualified name
-	 * @param myLocalName
-	 *            local name
+	 * @param myOwnerDocument owner documen
+	 * @param myNamespaceURI namespace URI
+	 * @param qualifiedName qualified name
+	 * @param myLocalName local name
 	 */
 	public JDFResourceLink(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
@@ -375,11 +335,9 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 *
 	 * remove all partition stuff
-	 * 
+	 *
 	 * @param bRemovePartMapVector
-	 * @param bRemoveAmountPool
-	 *            if true, assume all amounts apply to the main resource and copy
-	 *            from the first partamount
+	 * @param bRemoveAmountPool if true, assume all amounts apply to the main resource and copy from the first partamount
 	 */
 	public void unpartition(final boolean bRemovePartMapVector, final boolean bRemoveAmountPool)
 	{
@@ -395,14 +353,11 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * setTarget - sets the link to the target defined by partLeaf. Automatically
-	 * generates a part subelement, if partleaf is not the root resource
+	 * setTarget - sets the link to the target defined by partLeaf. Automatically generates a part subelement, if partleaf is not the root resource
 	 *
-	 * @param resourceTarget
-	 *            the resource that this ResourceLink shoud refer to
+	 * @param resourceTarget the resource that this ResourceLink shoud refer to
 	 *
-	 * @throws JDFException
-	 *             if an attempt is made to link to a resource sub-element
+	 * @throws JDFException if an attempt is made to link to a resource sub-element
 	 * @return boolean - always true
 	 */
 	public boolean setTarget(final JDFResource resourceTarget)
@@ -429,11 +384,9 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * get double attribute Amount, defaults to the value of Amount for the linked
-	 * partition
+	 * get double attribute Amount, defaults to the value of Amount for the linked partition
 	 *
-	 * @param mPart
-	 *            partition map to retrieve Amount for
+	 * @param mPart partition map to retrieve Amount for
 	 * @return the amount, -1 if none is specified
 	 *
 	 * @default getAmount(null)
@@ -446,8 +399,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * get double attribute MinAmount, defaults to getAmount if MinAmount is not set
 	 *
-	 * @param mPart
-	 *            partition map to retrieve MinAmount for
+	 * @param mPart partition map to retrieve MinAmount for
 	 * @return the MinAmount value
 	 * @default getAmount(null)
 	 */
@@ -459,8 +411,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * get double attribute MaxAmount, defaults to getAmount if MinAmount is not set
 	 *
-	 * @param mPart
-	 *            partition map to retrieve MaxAmount for
+	 * @param mPart partition map to retrieve MaxAmount for
 	 * @return the MaxAmount value
 	 * @default getAmount(null)
 	 */
@@ -513,10 +464,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * setAmount in PartAmount or in this if partAmount=null
 	 *
-	 * @param value
-	 *            amount to set
-	 * @param mPart
-	 *            partition map to set amount for
+	 * @param value amount to set
+	 * @param mPart partition map to set amount for
 	 *
 	 * @default setAmount(double value, null)
 	 */
@@ -528,10 +477,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * set MinAmount in PartAmount or in this if partAmount=null
 	 *
-	 * @param value
-	 *            amount to set
-	 * @param mPart
-	 *            partition map to set amount for
+	 * @param value amount to set
+	 * @param mPart partition map to set amount for
 	 *
 	 * @default setAmount(double value, null)
 	 */
@@ -543,10 +490,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * set MaxAmount in PartAmount or in this if partAmount=null
 	 *
-	 * @param value
-	 *            amount to set
-	 * @param mPart
-	 *            partition map to set amount for
+	 * @param value amount to set
+	 * @param mPart partition map to set amount for
 	 *
 	 * @default setAmount(double value, null)
 	 */
@@ -569,8 +514,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * set the status of the Resource that is linked by this link
 	 *
-	 * @param s
-	 *            value to set
+	 * @param s value to set
 	 */
 	public void setStatus(final JDFResource.EnumResStatus s)
 	{
@@ -596,8 +540,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * get first Part element beyond i
 	 *
-	 * @param i
-	 *            number of elements to skip
+	 * @param i number of elements to skip
 	 *
 	 * @return JDFResource
 	 *
@@ -611,8 +554,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * get element Part, create if it does not exist
 	 *
-	 * @param i
-	 *            number of elements to skip
+	 * @param i number of elements to skip
 	 *
 	 * @return JDFResource
 	 *
@@ -635,8 +577,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * getParts - get the vector of part elements, note that a resource link with
-	 * multiple part elements is effectively an OR of these parts
+	 * getParts - get the vector of part elements, note that a resource link with multiple part elements is effectively an OR of these parts
 	 *
 	 * @return VElement
 	 */
@@ -646,13 +587,10 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * setPart - shorthand if only one part is required, should be set to key =
-	 * value
+	 * setPart - shorthand if only one part is required, should be set to key = value
 	 *
-	 * @param key
-	 *            the partition key
-	 * @param value
-	 *            the partition value
+	 * @param key the partition key
+	 * @param value the partition value
 	 */
 	public void setPart(final String key, final String value)
 	{
@@ -663,10 +601,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * shorthand if only one part is required, should be set to key = value
 	 *
-	 * @param key
-	 *            the partition key
-	 * @param value
-	 *            the partition value
+	 * @param key the partition key
+	 * @param value the partition value
 	 */
 	public void setPartition(final JDFResource.EnumPartIDKey key, final String value)
 	{
@@ -682,8 +618,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * remove element Part
 	 *
-	 * @param iSkip
-	 *            number of elements to skip
+	 * @param iSkip number of elements to skip
 	 *
 	 * @default removePart(0)
 	 */
@@ -693,15 +628,10 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * isExecutable - checks whether the resource link links to a resource, which is
-	 * in a state that will allow a node to execute
+	 * isExecutable - checks whether the resource link links to a resource, which is in a state that will allow a node to execute
 	 *
-	 * @param partMap
-	 *            the attribute map of parts
-	 * @param bCheckChildren
-	 *            if true, calculates the availability status of a resource from all
-	 *            child partition leaves, else the status is taken from the
-	 *            appropriate leaf itself
+	 * @param partMap the attribute map of parts
+	 * @param bCheckChildren if true, calculates the availability status of a resource from all child partition leaves, else the status is taken from the appropriate leaf itself
 	 *
 	 * @return boolean - true if the node is executable, false if not
 	 *
@@ -787,13 +717,11 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 	/**
 	 * gets the first resource leaf that this resourcelink refers to<br>
-	 * see the description of {@link #getTargetVector(int) getTargetVector} for
-	 * details
+	 * see the description of {@link #getTargetVector(int) getTargetVector} for details
 	 *
 	 * overrides the deprecated method JDFElement.getTarget()
 	 *
-	 * @since 102103 GetTarget returns the lowest common denominator if all children
-	 *        of a resource are referenced
+	 * @since 102103 GetTarget returns the lowest common denominator if all children of a resource are referenced
 	 *
 	 * @return JDFResource - the first leaf that is referenced by this ResourceLink
 	 */
@@ -806,20 +734,13 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * Method getTargetVector gets the resource nodes this resourcelink refers to.
-	 * Skips links that do not exist or where the name mangling is illegal.<br>
-	 * Actual behavior varies according to the value of PartUsage of the referenced
-	 * resource:<br>
-	 * if PartUsage="Explicit", all elements that are referenced in PartIDKeys and
-	 * the ResourceLink must exist and fit<br>
-	 * if PartUsage="Implicit", the best fitting intermediate node of the
-	 * partitioned resource is returned.<br>
-	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are
-	 * assumed to be logical attributes (e.g. RunIndex of a RunList) and ignored
-	 * when searching the part.
+	 * Method getTargetVector gets the resource nodes this resourcelink refers to. Skips links that do not exist or where the name mangling is illegal.<br>
+	 * Actual behavior varies according to the value of PartUsage of the referenced resource:<br>
+	 * if PartUsage="Explicit", all elements that are referenced in PartIDKeys and the ResourceLink must exist and fit<br>
+	 * if PartUsage="Implicit", the best fitting intermediate node of the partitioned resource is returned.<br>
+	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are assumed to be logical attributes (e.g. RunIndex of a RunList) and ignored when searching the part.
 	 *
-	 * @param nMax
-	 *            maximum number of requested resources; -1= all
+	 * @param nMax maximum number of requested resources; -1= all
 	 *
 	 * @return VElement - the set of leaves that are referenced by this ResourceLink
 	 *
@@ -834,21 +755,13 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * Method getTargetVector gets the resource nodes this resourcelink refers to
-	 * including all leaves with identical elements. Skips links that do not exist
-	 * or where the name mangling is illegal.<br>
-	 * Actual behavior varies according to the value of PartUsage of the referenced
-	 * resource:<br>
-	 * if PartUsage="Explicit", all elements that are referenced in PartIDKeys and
-	 * the ResourceLink must exist and fit<br>
-	 * if PartUsage="Implicit", the best fitting intermediate node of the
-	 * partitioned resource is returned.<br>
-	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are
-	 * assumed to be logical attributes (e.g. RunIndex of a RunList) and ignored
-	 * when searching the part.
+	 * Method getTargetVector gets the resource nodes this resourcelink refers to including all leaves with identical elements. Skips links that do not exist or where the name mangling is illegal.<br>
+	 * Actual behavior varies according to the value of PartUsage of the referenced resource:<br>
+	 * if PartUsage="Explicit", all elements that are referenced in PartIDKeys and the ResourceLink must exist and fit<br>
+	 * if PartUsage="Implicit", the best fitting intermediate node of the partitioned resource is returned.<br>
+	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are assumed to be logical attributes (e.g. RunIndex of a RunList) and ignored when searching the part.
 	 *
-	 * @param nMax
-	 *            maximum number of requested resources; -1= all
+	 * @param nMax maximum number of requested resources; -1= all
 	 *
 	 * @return VElement - the set of leaves that are referenced by this ResourceLink
 	 *
@@ -861,22 +774,14 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * Gets the resource nodes this resourcelink refers to. Skips links that do not
-	 * exist or where the name mangling is illegal.<br>
-	 * Actual behavior varies according to the value of PartUsage of the referenced
-	 * resource:<br>
-	 * if PartUsage="Explicit", all elements that are referenced in PartIDKeys and
-	 * the ResourceLink must exist and fit<br>
-	 * if PartUsage="Implicit", the best fitting intermediate node of the
-	 * partitioned resource is returned.<br>
-	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are
-	 * assumed to be logical attributes (e.g. RunIndex of a RunList) and ignored
-	 * when searching the part.
+	 * Gets the resource nodes this resourcelink refers to. Skips links that do not exist or where the name mangling is illegal.<br>
+	 * Actual behavior varies according to the value of PartUsage of the referenced resource:<br>
+	 * if PartUsage="Explicit", all elements that are referenced in PartIDKeys and the ResourceLink must exist and fit<br>
+	 * if PartUsage="Implicit", the best fitting intermediate node of the partitioned resource is returned.<br>
+	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are assumed to be logical attributes (e.g. RunIndex of a RunList) and ignored when searching the part.
 	 *
-	 * @param vmParts
-	 *            target map to use
-	 * @param nMax
-	 *            maximum number of requested resources; -1= all
+	 * @param vmParts target map to use
+	 * @param nMax maximum number of requested resources; -1= all
 	 * @return VElement the set of leaves that are referenced by this ResourceLink
 	 */
 	private VElement getMapTargetVector(final VJDFAttributeMap vmParts, final int nMax, final boolean followIdentical)
@@ -907,8 +812,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 			return v;
 		}
 
-		final boolean sameIdent = followIdentical == resRoot.getPartitionGetter().isFollowIdentical();
-		final PartitionGetter partitionGetter = sameIdent ? resRoot.getPartitionGetter() : new PartitionGetter(resRoot);
+		final PartitionGetter partitionGetter = new PartitionGetter(resRoot);
 		partitionGetter.setFollowIdentical(followIdentical);
 		v = partitionGetter.getPartitionVector(vmParts, partUsage);
 		return v;
@@ -932,11 +836,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * checks whether a given partMap is compatible with this link
 	 *
-	 * @param partMap
-	 *            the map of parts that this link is compared to
-	 * @param bCheckResource
-	 *            if true, also recurse into the resource and check if the parts
-	 *            exist
+	 * @param partMap the map of parts that this link is compared to
+	 * @param bCheckResource if true, also recurse into the resource and check if the parts exist
 	 *
 	 * @return boolean - true if this is compatible with partMap
 	 *
@@ -1071,14 +972,11 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 	/**
 	 * Check whether a resource is selected by a ResourceLink.<br>
-	 * A resource is selected if all (partition) leaves are selected by the resource
-	 * link
+	 * A resource is selected if all (partition) leaves are selected by the resource link
 	 *
-	 * @param resourceToCheck
-	 *            The resource which may be selected by the ResourceLink.
+	 * @param resourceToCheck The resource which may be selected by the ResourceLink.
 	 *
-	 *            This ResourceLink must always be the full ResourceLink, i.e. Part
-	 *            Elements are not allowed as parameters.
+	 *            This ResourceLink must always be the full ResourceLink, i.e. Part Elements are not allowed as parameters.
 	 *
 	 * @return true, if the resource link selects the resource
 	 */
@@ -1147,8 +1045,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * get part map vector as defined by the linked resource. This returns the
-	 * vector of leaves that would be returned.
+	 * get part map vector as defined by the linked resource. This returns the vector of leaves that would be returned.
 	 *
 	 * @return vector of mAttribute, one for each part
 	 */
@@ -1243,9 +1140,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * Get the expected name of the linked resource and an optional processusage in
-	 * name:usage format. If no processusage is available, return
-	 * GetLinkedResourceName:input / GetLinkedResourceName:output respectively.
+	 * Get the expected name of the linked resource and an optional processusage in name:usage format. If no processusage is available, return GetLinkedResourceName:input /
+	 * GetLinkedResourceName:output respectively.
 	 *
 	 * @return String
 	 */
@@ -1267,8 +1163,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * checks whether the resource lives in the same node or an ancestor node of the
-	 * link
+	 * checks whether the resource lives in the same node or an ancestor node of the link
 	 *
 	 * @return true, if the linked resource resides in a legal node
 	 */
@@ -1280,8 +1175,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * default validator
 	 *
-	 * @param level
-	 *            validation level
+	 * @param level validation level
 	 * @see org.cip4.jdflib.core.JDFElement#isValid(org.cip4.jdflib.core.KElement.EnumValidationLevel)
 	 */
 	@Override
@@ -1353,8 +1247,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 	/**
 	 * checks whether this is a link to a physical resource.<br>
-	 * Note that this method only works on links to resources that have a valid
-	 * "Class" attribute.
+	 * Note that this method only works on links to resources that have a valid "Class" attribute.
 	 *
 	 * @return true, if the link links to a physical resource
 	 */
@@ -1389,7 +1282,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 	/**
 	 * append element Part
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFPart appendPart()
@@ -1428,8 +1321,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * get the nTh Lot element
 	 *
-	 * @param n
-	 *            the index of the element
+	 * @param n the index of the element
 	 * @return the nth Lot, null if it does not exist
 	 */
 	@Override
@@ -1439,9 +1331,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * reduce the parts to the canonical representation. If all children of a parent
-	 * node are in defined in parts, they are replaced by their parent. E.g. the
-	 * canonical representation of all leaves is the root.
+	 * reduce the parts to the canonical representation. If all children of a parent node are in defined in parts, they are replaced by their parent. E.g. the canonical representation of all leaves is
+	 * the root.
 	 */
 	public void reduceParts()
 	{
@@ -1461,11 +1352,9 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 	/**
 	 * Expand the target resource to contain all parts specified in the link. <br>
-	 * If PartUsage==Explicit or bForce==true, loop over all part elements as
-	 * well.<br>
+	 * If PartUsage==Explicit or bForce==true, loop over all part elements as well.<br>
 	 *
-	 * @param bForce
-	 *            if true, implicitly referenced partitions are also expanded
+	 * @param bForce if true, implicitly referenced partitions are also expanded
 	 */
 	public void expandTarget(final boolean bForce)
 	{
@@ -1494,8 +1383,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * create an Amountpool and fill it with the values of Amount and ActualAmount
-	 * <br>
+	 * create an Amountpool and fill it with the values of Amount and ActualAmount <br>
 	 */
 	public void expandAmountPool()
 	{
@@ -1526,15 +1414,10 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * returns the minimum value of attribute occurence in PartAmount,
 	 *
-	 * @param attrib
-	 *            the attribute name
-	 * @param nameSpaceURI
-	 *            the XML-namespace URI
-	 * @param mPart
-	 *            defines which part of this ResourceLink the amount belongs to. If
-	 *            empty get the ResourceLink root attribute.
-	 * @param def
-	 *            the default value id, if no matching attribute is found
+	 * @param attrib the attribute name
+	 * @param nameSpaceURI the XML-namespace URI
+	 * @param mPart defines which part of this ResourceLink the amount belongs to. If empty get the ResourceLink root attribute.
+	 * @param def the default value id, if no matching attribute is found
 	 * @return double - the value of attribute found, def if no matches found
 	 * @since 060630
 	 */
@@ -1565,7 +1448,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 	/**
 	 * get an AmountMap for the child Amountpool of this
-	 * 
+	 *
 	 * @param vPartIDKeys
 	 * @return the AmountMap for the Amountpool, null if no amountpool exists
 	 */
@@ -1575,16 +1458,11 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * returns the attribute occurence in PartAmount, or the default in the
-	 * ResourceLink
+	 * returns the attribute occurence in PartAmount, or the default in the ResourceLink
 	 *
-	 * @param attrib
-	 *            the attribute name
-	 * @param nameSpaceURI
-	 *            the XML-namespace
-	 * @param mPart
-	 *            defines which part of this ResourceLink the Amount belongs to. If
-	 *            empty get the ResourceLink root attribute.
+	 * @param attrib the attribute name
+	 * @param nameSpaceURI the XML-namespace
+	 * @param mPart defines which part of this ResourceLink the Amount belongs to. If empty get the ResourceLink root attribute.
 	 * @param iSkip
 	 * @return value of attribute found, null if not available
 	 * @since 071103
@@ -1595,16 +1473,11 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * returns the attribute occurence in PartAmount, or the default in the
-	 * ResourceLink
+	 * returns the attribute occurence in PartAmount, or the default in the ResourceLink
 	 *
-	 * @param attrib
-	 *            the attribute name
-	 * @param nameSpaceURI
-	 *            the XML-namespace
-	 * @param vPart
-	 *            defines which part of this ResourceLink the Amount belongs to. If
-	 *            null get the ResourceLink root attribute.
+	 * @param attrib the attribute name
+	 * @param nameSpaceURI the XML-namespace
+	 * @param vPart defines which part of this ResourceLink the Amount belongs to. If null get the ResourceLink root attribute.
 	 * @return value of attribute found, null if not available
 	 * @since 071103
 	 */
@@ -1616,16 +1489,11 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * returns true if the attribute occurrs
 	 *
-	 * @param attrib
-	 *            the attribute name
-	 * @param nameSpaceURI
-	 *            the XML-namespace
-	 * @param mPart
-	 *            which part of this ResourceLink the Amount belongs to, if empty
-	 *            get the ResourceLink root attribute
+	 * @param attrib the attribute name
+	 * @param nameSpaceURI the XML-namespace
+	 * @param mPart which part of this ResourceLink the Amount belongs to, if empty get the ResourceLink root attribute
 	 * @return true if available
-	 * @deprecated 060601 use
-	 *             getAmountPoolAttribute(attrib,nameSpaceURI,mPart,0)!=null;
+	 * @deprecated 060601 use getAmountPoolAttribute(attrib,nameSpaceURI,mPart,0)!=null;
 	 * @since 071103
 	 */
 	@Deprecated
@@ -1635,21 +1503,13 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * sets the attribute occurence in the appropriate PartAmount when called for a
-	 * resourceLink and creates the AmountPool and/or PartAmount(s) if they are not
-	 * yet there
+	 * sets the attribute occurence in the appropriate PartAmount when called for a resourceLink and creates the AmountPool and/or PartAmount(s) if they are not yet there
 	 *
-	 * @param attrib
-	 *            the attribute name
-	 * @param value
-	 *            value to set in string form.
-	 * @param nameSpaceURI
-	 *            the XML-namespace
-	 * @param vPart
-	 *            defines which part of this ResourceLink the Amount belongs to, if
-	 *            empty set the ResourceLink root attribute.
-	 * @throws JDFException
-	 *             when called directly on a PartAmount
+	 * @param attrib the attribute name
+	 * @param value value to set in string form.
+	 * @param nameSpaceURI the XML-namespace
+	 * @param vPart defines which part of this ResourceLink the Amount belongs to, if empty set the ResourceLink root attribute.
+	 * @throws JDFException when called directly on a PartAmount
 	 * @since 060630
 	 */
 	public void setAmountPoolAttribute(final String attrib, final String value, final String nameSpaceURI, final VJDFAttributeMap vPart)
@@ -1658,21 +1518,13 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * sets the attribute occurence in the appropriate PartAmount when called for a
-	 * resourceLink and creates the AmountPool and/or PartAmount if it is not yet
-	 * there
+	 * sets the attribute occurence in the appropriate PartAmount when called for a resourceLink and creates the AmountPool and/or PartAmount if it is not yet there
 	 *
-	 * @param attrib
-	 *            the attribute name
-	 * @param value
-	 *            value to set in string form.
-	 * @param nameSpaceURI
-	 *            the XML-namespace
-	 * @param mPart
-	 *            defines which part of this ResourceLink the Amount belongs to, if
-	 *            empty set the ResourceLink root attribute
-	 * @throws JDFException
-	 *             when called directly on a PartAmount
+	 * @param attrib the attribute name
+	 * @param value value to set in string form.
+	 * @param nameSpaceURI the XML-namespace
+	 * @param mPart defines which part of this ResourceLink the Amount belongs to, if empty set the ResourceLink root attribute
+	 * @throws JDFException when called directly on a PartAmount
 	 * @since 071103
 	 */
 	public void setAmountPoolAttribute(final String attrib, final String value, final String nameSpaceURI, final JDFAttributeMap mPart)
@@ -1699,8 +1551,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	 * @param attName
 	 * @param vPart
 	 * @return double -
-	 * @throws JDFException
-	 *             if the element can not be cast to double
+	 * @throws JDFException if the element can not be cast to double
 	 */
 	public double getAmountPoolDouble(final String attName, final VJDFAttributeMap vPart)
 	{
@@ -1708,17 +1559,13 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * get the sum of all matching AmountPool/PartAmount/@attName as a double
-	 * PartAmounts match if all attributes match those in PartAmount, i.e. mPart is
-	 * a submap of the searched PartAmount elements
+	 * get the sum of all matching AmountPool/PartAmount/@attName as a double PartAmounts match if all attributes match those in PartAmount, i.e. mPart is a submap of the searched PartAmount elements
 	 *
 	 *
-	 * @param attName
-	 *            the Attribute name , e.g Amount, ActualAmount
+	 * @param attName the Attribute name , e.g Amount, ActualAmount
 	 * @param mPart
 	 * @return double - the element
-	 * @throws JDFException
-	 *             if the element can not be cast to double
+	 * @throws JDFException if the element can not be cast to double
 	 */
 	public double getAmountPoolDouble(final String attName, final JDFAttributeMap mPart)
 	{
@@ -1776,13 +1623,10 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * Set attribute ActualAmount in the AmountPool or in the link, depending on the
-	 * value of mPart
+	 * Set attribute ActualAmount in the AmountPool or in the link, depending on the value of mPart
 	 *
-	 * @param value
-	 *            the value to set ActualAmount to
-	 * @param mPart
-	 *            the part map of AmountPool/PartAmount
+	 * @param value the value to set ActualAmount to
+	 * @param mPart the part map of AmountPool/PartAmount
 	 */
 	public void setActualAmount(final double value, final JDFAttributeMap mPart)
 	{
@@ -1820,8 +1664,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * getMinStatus - get the minimum status of the ResourceLink in a JDF node. If
-	 * usage is input or not available, check DraftOK as well.
+	 * getMinStatus - get the minimum status of the ResourceLink in a JDF node. If usage is input or not available, check DraftOK as well.
 	 *
 	 * @return the status of the ResourceLink
 	 */
@@ -1871,8 +1714,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * Sets the value of PipePartIDKeys
 	 *
-	 * @param keys
-	 *            vector of values to set
+	 * @param keys vector of values to set
 	 * @deprecated use setPipePartIDKeys(Vector enum)
 	 */
 	@SuppressWarnings("unchecked")
@@ -1920,8 +1762,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * sets attribute CombinedProcessIndex
 	 *
-	 * @param value
-	 *            attribute value to set
+	 * @param value attribute value to set
 	 */
 	@Override
 	public void setCombinedProcessIndex(JDFIntegerList value)
@@ -1936,8 +1777,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * sets attribute CombinedProcessIndex
 	 *
-	 * @param value
-	 *            attribute value to set
+	 * @param value attribute value to set
 	 */
 	public void setCombinedProcessIndex(final int value)
 	{
@@ -1945,8 +1785,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * gets list of all types referenced by CombinedProccessIndex or
-	 * CombinedProcessType
+	 * gets list of all types referenced by CombinedProccessIndex or CombinedProcessType
 	 *
 	 * @return VString - the list of types. Each type occurs at most once
 	 */
@@ -1993,11 +1832,9 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	}
 
 	/**
-	 * sets attribute DraftOK if version>=1.3, set MinStatus=Draft instead of
-	 * DraftOK=true
+	 * sets attribute DraftOK if version>=1.3, set MinStatus=Draft instead of DraftOK=true
 	 *
-	 * @param value
-	 *            attribute value to set
+	 * @param value attribute value to set
 	 */
 	@Override
 	public void setDraftOK(final boolean value)
@@ -2102,8 +1939,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * set all parts to those define in vParts
 	 *
-	 * @param vParts
-	 *            vector of attribute maps for the parts
+	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
 	public void setPartMapVector(final VJDFAttributeMap vParts)
@@ -2114,8 +1950,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * set all parts to those defined in vParts
 	 *
-	 * @param mPart
-	 *            attribute map for the part to set
+	 * @param mPart attribute map for the part to set
 	 */
 	@Override
 	public void setPartMap(final JDFAttributeMap mPart)
@@ -2126,8 +1961,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * remove the part defined in mPart
 	 *
-	 * @param mPart
-	 *            attribute map for the part to remove
+	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
 	public void removePartMap(final JDFAttributeMap mPart)
@@ -2138,8 +1972,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	/**
 	 * check whether the part defined in mPart is included
 	 *
-	 * @param mPart
-	 *            attribute map for the part to remove
+	 * @param mPart attribute map for the part to remove
 	 * @return boolean - returns true if the part exists
 	 */
 	@Override

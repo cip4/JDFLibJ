@@ -41,7 +41,6 @@ package org.cip4.jdflib.resource;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -105,37 +104,36 @@ public class JDFResource extends JDFElement
 
 	private static HashSet<String> validParentNodeNameSet = null;
 	private static HashSet<String> validRootParentNodeNameSet = null;
-	private PartitionGetter partitionGetter;
+	private PartitionMap partitionMap;
 
 	/**
 	 *
 	 * @return
 	 */
-	public synchronized PartitionGetter getPartitionGetter()
+	synchronized PartitionMap getPartitionMapper()
 	{
 		if (isResourceRoot())
 		{
-			if (partitionGetter == null)
+			if (partitionMap == null)
 			{
-				partitionGetter = new PartitionGetter(this);
+				partitionMap = new PartitionMap(this);
 			}
-			return partitionGetter;
+			return partitionMap;
 		}
 		else
 		{
 			final JDFResource resourceRoot = getResourceRoot();
 			if (resourceRoot == this) // should never happen
 			{
-				if (partitionGetter == null)
+				if (partitionMap == null)
 				{
-					partitionGetter = new PartitionGetter(this);
+					partitionMap = new PartitionMap(this);
 				}
-				return partitionGetter;
-
+				return partitionMap;
 			}
 			else
 			{
-				return resourceRoot.getPartitionGetter();
+				return resourceRoot.getPartitionMapper();
 			}
 		}
 	}
@@ -2116,8 +2114,7 @@ public class JDFResource extends JDFElement
 	{
 		if (isResourceElement())
 			return this;
-		final JDFAttributeMap completePartMap = getCompletePartMap(m, null, false);
-		return completePartMap == null ? null : getPartitionGetter().getPartition(completePartMap, partUsage);
+		return new PartitionGetter(this).getPartition(m, partUsage);
 	}
 
 	/**
@@ -2126,8 +2123,8 @@ public class JDFResource extends JDFElement
 	public HashMap<JDFAttributeMap, JDFResource> getPartitionMap()
 	{
 
-		final PartitionGetter partitionGetter = getPartitionGetter();
-		return partitionGetter.getPartitionMap(new JDFAttributeMap(), new LinkedHashMap<JDFAttributeMap, JDFResource>());
+		final PartitionMap partitionMap = getPartitionMapper();
+		return partitionMap.getLeafMap();
 	}
 
 	/**
@@ -2202,33 +2199,7 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFResource getCreatePartition(final JDFAttributeMap partMap, final VString vPartKeys)
 	{
-		return getPartitionGetter().getCreatePartition(getCompletePartMap(partMap, null, true), vPartKeys);
-	}
-
-	JDFAttributeMap getCompletePartMap(final JDFAttributeMap partMap, JDFAttributeMap localPartMap, final boolean create)
-	{
-		if (localPartMap == null)
-			localPartMap = getPartMap();
-
-		if (localPartMap.isEmpty())
-		{
-			return partMap == null ? new JDFAttributeMap() : partMap;
-		}
-		else
-		{
-			if (partMap != null && !partMap.isEmpty())
-			{
-				if (!localPartMap.overlapMap(partMap))
-				{
-					if (create)
-						throw new JDFException("Incompatible part maps: local: " + localPartMap.showKeys(null) + " request: " + partMap.showKeys(null) + " ID=" + getID());
-					else
-						return null;
-				}
-				localPartMap.putAll(partMap);
-			}
-		}
-		return localPartMap;
+		return new PartitionGetter(this).getCreatePartition(partMap, vPartKeys);
 	}
 
 	/**
@@ -2350,12 +2321,12 @@ public class JDFResource extends JDFElement
 	 * returns the closest ancestor of all matching elements within the target vector
 	 *
 	 * @param m map of attributes that should fit
-	 * @param partUsage lso accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is specified
+	 * @param partUsage also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is specified
 	 * @return the first found matching resource node or leaf
 	 */
 	public JDFResource getDeepPart(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
-		return getPartitionGetter().getDeepPart(m, partUsage);
+		return new PartitionGetter(this).getDeepPart(m, partUsage);
 	}
 
 	/**
@@ -2754,7 +2725,7 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFResource addPartition(final EnumPartIDKey partType, final String value)
 	{
-		return getPartitionGetter().addPartition(partType, value, this);
+		return new PartitionGetter(this).addPartition(partType, value);
 	}
 
 	/**
@@ -3073,7 +3044,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void clearPartitions()
 	{
-		partitionGetter = null;
+		partitionMap = null;
 	}
 
 	/**
@@ -3854,7 +3825,7 @@ public class JDFResource extends JDFElement
 	@Deprecated
 	public VElement getPartitionVector(final JDFAttributeMap m, final boolean bIncomplete)
 	{
-		return getPartitionGetter().getPartitionVector(m, bIncomplete ? EnumPartUsage.Implicit : EnumPartUsage.Explicit);
+		return getPartitionVector(m, bIncomplete ? EnumPartUsage.Implicit : EnumPartUsage.Explicit);
 	}
 
 	/**
@@ -3869,29 +3840,7 @@ public class JDFResource extends JDFElement
 	 */
 	public VElement getPartitionVector(final VJDFAttributeMap vm, final EnumPartUsage partUsage)
 	{
-		final VJDFAttributeMap completePartMapVector = getCompletePartMapVector(vm);
-		return completePartMapVector == null ? null : getPartitionGetter().getPartitionVector(completePartMapVector, partUsage);
-	}
-
-	VJDFAttributeMap getCompletePartMapVector(VJDFAttributeMap vm)
-	{
-		if (vm == null)
-			vm = new VJDFAttributeMap();
-		if (vm.isEmpty())
-			vm.add(new JDFAttributeMap());
-		final JDFAttributeMap localMap = getPartMap();
-		if (localMap.isEmpty())
-			return vm;
-		final VJDFAttributeMap newMap = new VJDFAttributeMap();
-		for (final JDFAttributeMap m : vm)
-		{
-			final JDFAttributeMap completePartMap = getCompletePartMap(m, localMap.clone(), false);
-			if (completePartMap != null)
-			{
-				newMap.add(completePartMap);
-			}
-		}
-		return newMap.size() > 0 ? newMap : null;
+		return new PartitionGetter(this).getPartitionVector(vm, partUsage);
 	}
 
 	/**
@@ -3906,7 +3855,7 @@ public class JDFResource extends JDFElement
 	 */
 	public VElement getPartitionLeafVector(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
-		return getPartitionGetter().getPartitionLeafVector(m, partUsage);
+		return new PartitionGetter(this).getPartitionLeafVector(m, partUsage);
 	}
 
 	/**
@@ -3921,8 +3870,7 @@ public class JDFResource extends JDFElement
 	 */
 	public VElement getPartitionVector(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
-		final JDFAttributeMap completePartMap = getCompletePartMap(m, null, false);
-		return completePartMap == null ? null : getPartitionGetter().getPartitionVector(completePartMap, partUsage);
+		return new PartitionGetter(this).getPartitionVector(m, partUsage);
 	}
 
 	/**
@@ -5837,7 +5785,7 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Sets the value of attibute, specified by key
+	 * Sets the value of attribute, specified by key
 	 *
 	 * @param key the PartIDKey attribute name
 	 * @param value the value to set key to
@@ -5852,7 +5800,7 @@ public class JDFResource extends JDFElement
 			addPartIDKey(key);
 			if (old != null)
 			{
-				getResourceRoot().partitionGetter = null;
+				getResourceRoot().partitionMap = null;
 			}
 		}
 	}
@@ -7274,7 +7222,7 @@ public class JDFResource extends JDFElement
 	 */
 	public VElement createPartitions(final VJDFAttributeMap vPartMap, final VString vPartIDKeys)
 	{
-		return getPartitionGetter().createPartitions(vPartMap, vPartIDKeys);
+		return new PartitionGetter(this).createPartitions(vPartMap, vPartIDKeys);
 	}
 
 	/**
@@ -7575,7 +7523,7 @@ public class JDFResource extends JDFElement
 	{
 		if (src != null && src.getNodeName().equals(getNodeName()))
 		{
-			getResourceRoot().partitionGetter = null;
+			getResourceRoot().partitionMap = null;
 		}
 		return super.moveElement(src, beforeChild);
 	}
@@ -7583,11 +7531,15 @@ public class JDFResource extends JDFElement
 	@Override
 	public KElement copyElement(final KElement src, final KElement beforeChild)
 	{
+		final KElement copy = super.copyElement(src, beforeChild);
 		if (src != null && src.getNodeName().equals(getNodeName()))
 		{
-			getResourceRoot().partitionGetter = null;
+			if (getResourceRoot().partitionMap != null)
+			{
+				getResourceRoot().partitionMap.addPartitionMap(getPartMap(), (JDFResource) copy);
+			}
 		}
-		return super.copyElement(src, beforeChild);
+		return copy;
 	}
 
 	@Override
@@ -7595,7 +7547,7 @@ public class JDFResource extends JDFElement
 	{
 		if (src != null && src.getNodeName().equals(getNodeName()))
 		{
-			getResourceRoot().partitionGetter = null;
+			getResourceRoot().partitionMap = null;
 		}
 		return super.replaceElement(src);
 	}
@@ -7603,14 +7555,14 @@ public class JDFResource extends JDFElement
 	@Override
 	public KElement deleteNode()
 	{
-		getResourceRoot().partitionGetter = null;
+		getResourceRoot().partitionMap = null;
 		return super.deleteNode();
 	}
 
 	@Override
 	public KElement mergeElement(final KElement kElem, final boolean bDelete)
 	{
-		getResourceRoot().partitionGetter = null;
+		getResourceRoot().partitionMap = null;
 		return super.mergeElement(kElem, bDelete);
 	}
 

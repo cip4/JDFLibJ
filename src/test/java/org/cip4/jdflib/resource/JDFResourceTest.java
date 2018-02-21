@@ -1406,7 +1406,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 			//
 		}
 		/*
-		 * 
+		 *
 		 * try { c3y.setIdentical(c3y); fail("myself set self"); } catch (final JDFException x) { // } try { c3y.setIdentical(c3); fail("myself set identical"); } catch (final JDFException x) { // }
 		 * try { c3y.setIdentical(c1); fail("myself set parent"); } catch (final JDFException x) { // }
 		 */
@@ -1927,11 +1927,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 		m.put(EnumPartIDKey.SheetName, "1");
 		m.put(EnumPartIDKey.PartVersion, "v1");
 		final VElement v = r.getPartitionVector(m, EnumPartUsage.Explicit);
-		assertEquals(v.get(0), f);
-		assertEquals(v.get(1), b);
+		assertTrue(v.contains(f));
+		assertTrue(v.contains(b));
 	}
-
-	// //////////////////////////////////////////////////////////////////////////
 
 	/**
 	 *

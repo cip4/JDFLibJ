@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -120,8 +88,7 @@ import org.cip4.jdflib.resource.PartitionGetter;
 import org.cip4.jdflib.resource.process.JDFIdentical;
 
 /**
- * @author Rainer Prosi This class is used when spawning a JDF node it
- *         summarizes all spawning routines the had been part of JDF Node
+ * @author Rainer Prosi This class is used when spawning a JDF node it summarizes all spawning routines the had been part of JDF Node
  */
 public class JDFSpawn
 {
@@ -143,8 +110,7 @@ public class JDFSpawn
 	public boolean bSpawnROPartsOnly = true;
 
 	/**
-	 * if true, allow multiple rw spawning of resources note that this feature
-	 * causes race conditions when merging
+	 * if true, allow multiple rw spawning of resources note that this feature causes race conditions when merging
 	 */
 	public boolean bSpawnRWPartsMultiple = false;
 
@@ -169,8 +135,7 @@ public class JDFSpawn
 	public boolean bCopyComments = false;
 
 	/**
-	 * if true, ensure sufficient partitioning of rw resources, else do not add
-	 * missing partitions
+	 * if true, ensure sufficient partitioning of rw resources, else do not add missing partitions
 	 */
 	public boolean bFixResources = true;
 	/**
@@ -203,8 +168,7 @@ public class JDFSpawn
 
 	/**
 	 *
-	 * @param nodeToSpawn
-	 *            the node to be spawned
+	 * @param nodeToSpawn the node to be spawned
 	 */
 	public JDFSpawn(final JDFNode nodeToSpawn)
 	{
@@ -222,11 +186,9 @@ public class JDFSpawn
 
 	/**
 	 * set the node to spawn
-	 * 
-	 * @param newNode
-	 *            the node to set
-	 * @throws JDFException
-	 *             if node is NOT in the same document as the initial node
+	 *
+	 * @param newNode the node to set
+	 * @throws JDFException if node is NOT in the same document as the initial node
 	 */
 	public void setNode(final JDFNode newNode)
 	{
@@ -242,22 +204,18 @@ public class JDFSpawn
 	}
 
 	/**
-	 * spawn a node; url is the file name of the new node, vRWResourceUsage is the
-	 * vector of Resources Usages (or Names if no usage exists for the process) that
-	 * are spawned RW, all others are spawned read only; vParts is the vector of
-	 * part maps that are to be spawned, defaults to no part, i.e. the whole thing
+	 * spawn a node; url is the file name of the new node, vRWResourceUsage is the vector of Resources Usages (or Names if no usage exists for the process) that are spawned RW, all others are spawned
+	 * read only; vParts is the vector of part maps that are to be spawned, defaults to no part, i.e. the whole thing
 	 *
 	 * the format is one of:<br>
 	 * ResName:Input<br>
 	 * ResName:Output<br>
 	 * ResName:ProcessUsage<br>
-	 * 
-	 * @return The spawned node
-	 * @since 050831 added bCopyComments @ tbd enhance nested spawning of
-	 *        partitioned nodes
 	 *
-	 *        default: spawn(parentURL, null, null, null, false, false, false,
-	 *        false)
+	 * @return The spawned node
+	 * @since 050831 added bCopyComments @ tbd enhance nested spawning of partitioned nodes
+	 *
+	 *        default: spawn(parentURL, null, null, null, false, false, false, false)
 	 */
 	public JDFNode spawn()
 	{
@@ -387,8 +345,7 @@ public class JDFSpawn
 
 	/**
 	 * cleans up node so that no multiple spawnIDs remain <br/>
-	 * removes SpawnIDS and SpawnStatus from all resources that are spawnedRW by
-	 * this spawn;<br/>
+	 * removes SpawnIDS and SpawnStatus from all resources that are spawnedRW by this spawn;<br/>
 	 * note that the vRWResources_in and vSpawnParts MUST be populated<br/>
 	 * audits are not modified
 	 *
@@ -414,8 +371,7 @@ public class JDFSpawn
 	 * return the resources that would be spawned RW multiple times
 	 *
 	 *
-	 * @return Collection: set of resources or resource partitions that would be
-	 *         spawned rw multiple times null if all is well
+	 * @return Collection: set of resources or resource partitions that would be spawned rw multiple times null if all is well
 	 */
 	public Collection<JDFResource> checkSpawnedResources()
 	{
@@ -441,7 +397,7 @@ public class JDFSpawn
 
 	/**
 	 *
-	 * 
+	 *
 	 * @param vRWResources
 	 * @param vMultiRes
 	 * @param liRoot
@@ -607,8 +563,7 @@ public class JDFSpawn
 	/**
 	 * add any resources that live in ancestor nodes to this node
 	 *
-	 * @param spawnAudit
-	 *            :
+	 * @param spawnAudit :
 	 * @return int number of resources added to the spawned node
 	 */
 	private int addSpawnedResources(final JDFSpawned spawnAudit)
@@ -764,7 +719,9 @@ public class JDFSpawn
 						final JDFResource rRoot1 = (JDFResource) vResRoot.elementAt(resParts);
 						final PartSpawn partSpawner = new PartSpawn();
 						if (!bInformative)
+						{
 							partSpawner.spawnPart(rRoot1, spawnID, copyStatus, true, bSpawnROPartsOnly);
+						}
 						partSpawner.spawnPart(r, spawnID, copyStatus, false, bSpawnROPartsOnly);
 
 						if (resParts == 0 && vSpawnParts != null && vSpawnParts.size() != 0 && (bResRW || bSpawnROPartsOnly))
@@ -854,7 +811,7 @@ public class JDFSpawn
 
 	/**
 	 * cache resources by id for performance
-	 * 
+	 *
 	 * @param refID
 	 * @return
 	 */
@@ -1202,7 +1159,7 @@ public class JDFSpawn
 	/**
 	 *
 	 * get the actual nodeinfo attribute map based on vmAttribute
-	 * 
+	 *
 	 * @return
 	 */
 	private VJDFAttributeMap getNIPartitions()
@@ -1262,11 +1219,8 @@ public class JDFSpawn
 	/**
 	 * calculate whether a link should be RW or RO
 	 *
-	 * @param li
-	 *            the link to check
-	 * @param vRWResources
-	 *            the list of resource ids, process usages, usages, names. If any
-	 *            match, the referenced resource is considered rw
+	 * @param li the link to check
+	 * @param vRWResources the list of resource ids, process usages, usages, names. If any match, the referenced resource is considered rw
 	 * @return boolean true if rw
 	 */
 	private boolean linkFitsRWRes(final JDFResourceLink li, final VString vRWResources)
@@ -1294,7 +1248,7 @@ public class JDFSpawn
 
 	/**
 	 * Reduces partition so that only the parts that overlap with vResources remain
-	 * 
+	 *
 	 * @param r
 	 * @param nodeName
 	 * @param nsURI
@@ -1457,7 +1411,7 @@ public class JDFSpawn
 
 	/**
 	 *
-	 * 
+	 *
 	 * @param r
 	 */
 	private void reducePartitions(final JDFResource r)
@@ -1519,7 +1473,7 @@ public class JDFSpawn
 
 	/**
 	 *
-	 * 
+	 *
 	 * @param r
 	 * @param partIDKeys
 	 * @param depth
@@ -1561,11 +1515,8 @@ public class JDFSpawn
 	/**
 	 * calculate whether a link should be RW or RO
 	 *
-	 * @param r
-	 *            the resource to check
-	 * @param vRWResources
-	 *            the list of resource ids, process usages, usages, names. If any
-	 *            match, the referenced resource is considered rw
+	 * @param r the resource to check
+	 * @param vRWResources the list of resource ids, process usages, usages, names. If any match, the referenced resource is considered rw
 	 * @return boolean true if rw
 	 */
 	private boolean resFitsRWRes(final JDFResource r, final VString vRWResources)
@@ -1591,19 +1542,13 @@ public class JDFSpawn
 	}
 
 	/**
-	 * copies a resource recursively and optionally fixes status flags and locks in
-	 * the source resource
+	 * copies a resource recursively and optionally fixes status flags and locks in the source resource
 	 *
-	 * @param targetResPool
-	 *            the pool to copy r into
-	 * @param r
-	 *            the resource to copy
-	 * @param copyStatus
-	 *            rw or ro
-	 * @param spawnID
-	 *            the spawnID of the spawning that initiated the copy
-	 * @param vRWResources
-	 *            write resources
+	 * @param targetResPool the pool to copy r into
+	 * @param r the resource to copy
+	 * @param copyStatus rw or ro
+	 * @param spawnID the spawnID of the spawning that initiated the copy
+	 * @param vRWResources write resources
 	 * @param vRWIDs
 	 * @param vROIDs
 	 * @param allIDsCopied
@@ -1716,7 +1661,7 @@ public class JDFSpawn
 	}
 
 	/**
-	 * 
+	 *
 	 * @param rNew
 	 * @param r
 	 * @param idMap
@@ -1882,7 +1827,7 @@ public class JDFSpawn
 
 		/**
 		 *
-		 * 
+		 *
 		 * @param r
 		 * @param partMap
 		 * @return
@@ -1902,11 +1847,13 @@ public class JDFSpawn
 
 				// 100208 spawn only as requested - NOT explicit, don't automatically create
 				// anything
-				final PartitionGetter partitionGetter = bSpawnIdentical ? r.getPartitionGetter() : new PartitionGetter(r);
+				final PartitionGetter partitionGetter = new PartitionGetter(r.getResourceRoot());
 				partitionGetter.setFollowIdentical(bSpawnIdentical);
 				vSubParts = partitionGetter.getPartitionVector(vSpawnParts, null);
 				if (bSpawnIdentical && (vSubParts == null || vSubParts.size() == 0) && !EnumPartUsage.Implicit.equals(r.getPartUsage()))
+				{
 					vSubParts = partitionGetter.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
+				}
 			}
 			return vSubParts;
 		}
@@ -1952,14 +1899,11 @@ public class JDFSpawn
 	// ///////////////////////////////////////////////////////////////////////
 
 	/**
-	 * spawn a node in informative mode without modifying the root JDF; url is the
-	 * file name of the new node, the parameters except for the list of rw
-	 * resources, which are by definition empty, are identical to those of Spawn
+	 * spawn a node in informative mode without modifying the root JDF; url is the file name of the new node, the parameters except for the list of rw resources, which are by definition empty, are
+	 * identical to those of Spawn
 	 *
-	 * vRWResourceUsage is the vector of Resources Usages, Resource Names or
-	 * Resource IDs that are spawned RW, all others are spawned read only; vParts is
-	 * the vector of part maps that are to be spawned, defaults to no part, i.e. the
-	 * whole thing
+	 * vRWResourceUsage is the vector of Resources Usages, Resource Names or Resource IDs that are spawned RW, all others are spawned read only; vParts is the vector of part maps that are to be
+	 * spawned, defaults to no part, i.e. the whole thing
 	 *
 	 * @return JDFDoc: The spawned node's owner document.
 	 *
@@ -2005,38 +1949,24 @@ public class JDFSpawn
 	}
 
 	/**
-	 * spawn a node; url is the file name of the new node, vRWResourceUsage is the
-	 * vector of Resources Usages (or Names if no usage exists for the process) that
-	 * are spawned RW, all others are spawned read only; vParts is the vector of
-	 * part maps that are to be spawned, defaults to no part, i.e. the whole thing
+	 * spawn a node; url is the file name of the new node, vRWResourceUsage is the vector of Resources Usages (or Names if no usage exists for the process) that are spawned RW, all others are spawned
+	 * read only; vParts is the vector of part maps that are to be spawned, defaults to no part, i.e. the whole thing
 	 *
 	 * @param _parentURL
-	 * @param _spawnURL
-	 *            : URL of the spawned JDF file
-	 * @param _vRWResources_in
-	 *            : vector of resource names and Usage / ProcessUsage that are
-	 *            spawned as rw <br>
+	 * @param _spawnURL : URL of the spawned JDF file
+	 * @param _vRWResources_in : vector of resource names and Usage / ProcessUsage that are spawned as rw <br>
 	 *            the format is one of:<br>
 	 *            ResName:Input<br>
 	 *            ResName:Output<br>
 	 *            ResName:ProcessUsage<br>
-	 * @param _vSpawnParts
-	 *            vector of mAttributes that describe the parts to spawn, only valid
-	 *            PartIDKeys are allowed
-	 * @param _bSpawnROPartsOnly
-	 *            if true, only the parts of RO resources that are specified in
-	 *            vParts are spawned, else the complete resource is spawned
-	 * @param _bCopyNodeInfo
-	 *            copy the NodeInfo elements into the Ancestors
-	 * @param _bCopyCustomerInfo
-	 *            copy the CustomerInfo elements into the Ancestors
-	 * @param _bCopyComments
-	 *            copy the Comment elements into the Ancestors
+	 * @param _vSpawnParts vector of mAttributes that describe the parts to spawn, only valid PartIDKeys are allowed
+	 * @param _bSpawnROPartsOnly if true, only the parts of RO resources that are specified in vParts are spawned, else the complete resource is spawned
+	 * @param _bCopyNodeInfo copy the NodeInfo elements into the Ancestors
+	 * @param _bCopyCustomerInfo copy the CustomerInfo elements into the Ancestors
+	 * @param _bCopyComments copy the Comment elements into the Ancestors
 	 *
 	 * @return The spawned node
-	 * @since 050831 added bCopyComments @ tbd enhance nested spawning of
-	 *        partitioned nodes default: spawn(parentURL, null, null, null, false,
-	 *        false, false, false)
+	 * @since 050831 added bCopyComments @ tbd enhance nested spawning of partitioned nodes default: spawn(parentURL, null, null, null, false, false, false, false)
 	 */
 	public JDFNode spawn(final String _parentURL, final String _spawnURL, final VString _vRWResources_in, final VJDFAttributeMap _vSpawnParts, final boolean _bSpawnROPartsOnly,
 			final boolean _bCopyNodeInfo, final boolean _bCopyCustomerInfo, final boolean _bCopyComments)
@@ -2056,30 +1986,20 @@ public class JDFSpawn
 	// ///////////////////////////////////////////////////////////////////////
 
 	/**
-	 * spawn a node in informative mode without modifying the root JDF; url is the
-	 * file name of the new node, the parameters except for the list of rw
-	 * resources, which are by definition empty, are identical to those of Spawn
+	 * spawn a node in informative mode without modifying the root JDF; url is the file name of the new node, the parameters except for the list of rw resources, which are by definition empty, are
+	 * identical to those of Spawn
 	 *
-	 * vRWResourceUsage is the vector of Resources Usages, Resource Names or
-	 * Resource IDs that are spawned RW, all others are spawned read only; vParts is
-	 * the vector of part maps that are to be spawned, defaults to no part, i.e. the
-	 * whole thing
-	 * 
+	 * vRWResourceUsage is the vector of Resources Usages, Resource Names or Resource IDs that are spawned RW, all others are spawned read only; vParts is the vector of part maps that are to be
+	 * spawned, defaults to no part, i.e. the whole thing
+	 *
 	 * @param _parentURL
 	 *
-	 * @param _spawnURL
-	 *            : URL of the spawned JDF file
-	 * @param _vSpawnParts
-	 *            : vector of mAttributes that describe the parts to spawn
-	 * @param _bSpawnROPartsOnly
-	 *            if true, only the parts of RO resources that are specified in
-	 *            vParts are spawned, else the complete resource is spawned
-	 * @param _bCopyNodeInfo
-	 *            copy the NodeInfo elements into the Ancestors
-	 * @param _bCopyCustomerInfo
-	 *            copy the CustomerInfo elements into the Ancestors
-	 * @param _bCopyComments
-	 *            copy the Comment elements into the Ancestors
+	 * @param _spawnURL : URL of the spawned JDF file
+	 * @param _vSpawnParts : vector of mAttributes that describe the parts to spawn
+	 * @param _bSpawnROPartsOnly if true, only the parts of RO resources that are specified in vParts are spawned, else the complete resource is spawned
+	 * @param _bCopyNodeInfo copy the NodeInfo elements into the Ancestors
+	 * @param _bCopyCustomerInfo copy the CustomerInfo elements into the Ancestors
+	 * @param _bCopyComments copy the Comment elements into the Ancestors
 	 * @return JDFDoc: The spawned node's owner document.
 	 *
 	 * @default spawnInformative(parentURL, null, null, false, false, false, false);
@@ -2102,11 +2022,9 @@ public class JDFSpawn
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * Method unSpawn. undo a spawn, removing any and all bookkeeping of that
-	 * spawning
+	 * Method unSpawn. undo a spawn, removing any and all bookkeeping of that spawning
 	 *
-	 * @param spawnID
-	 *            spawnID of the spawn to undo, if null find the first spawned node
+	 * @param spawnID spawnID of the spawn to undo, if null find the first spawned node
 	 * @return the fixed unspawned node
 	 */
 	public JDFNode unSpawn(String spawnID)
@@ -2179,12 +2097,10 @@ public class JDFSpawn
 		}
 
 		/**
-		 * unSpawnNode - undo a spawn of a node hier muss noch nachportiert werden - es
-		 * gibt jetzt in JDFRoot eine Methode gleichen Namens, bei der man komfortabler
-		 * das undo aufrufen kann. die Methode hier in JDFNode wird dann umbenannt
-		 * (protected) und aus JDFRoot heraus aufgerufen.
-		 * 
-		 * 
+		 * unSpawnNode - undo a spawn of a node hier muss noch nachportiert werden - es gibt jetzt in JDFRoot eine Methode gleichen Namens, bei der man komfortabler das undo aufrufen kann. die Methode
+		 * hier in JDFNode wird dann umbenannt (protected) und aus JDFRoot heraus aufgerufen.
+		 *
+		 *
 		 *
 		 *
 		 * @return the fixed unspawned node
@@ -2353,7 +2269,7 @@ public class JDFSpawn
 
 	/**
 	 * remove all spawn related stuff from the spawned childNode
-	 * 
+	 *
 	 * @param childNode
 	 */
 	public void unSpawnChild(final JDFNode childNode)
