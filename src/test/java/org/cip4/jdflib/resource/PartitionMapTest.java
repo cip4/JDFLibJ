@@ -35,144 +35,76 @@
  *
  *
  */
+
 package org.cip4.jdflib.resource;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Set;
-import java.util.Vector;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.junit.Test;
 
-class PartitionMap
+public class PartitionMapTest
 {
+
 	/**
 	 *
-	 * @param r
 	 */
-	PartitionMap(final JDFResource r)
+	@Test
+	public void testCreate()
 	{
-		super();
-		partIDKeys = r.getPartIDKeys();
-		leafMap = new LinkedHashMap<>();
-		addPartitionMap(new JDFAttributeMap(), r.getResourceRoot());
-	}
-
-	private final HashMap<JDFAttributeMap, JDFResource> leafMap;
-	private final VString partIDKeys;
-
-	/**
-	 * @return
-	 */
-	void addPartitionMap(final JDFAttributeMap parentMap, final JDFResource parent)
-	{
-		leafMap.put(parentMap, parent);
-		final String key = partIDKeys.get(parentMap.size());
-		final Vector<? extends KElement> v = key == null ? null : parent.getDirectPartitionVector();
-		if (v != null && !v.isEmpty())
-		{
-			for (final KElement e : v)
-			{
-				final JDFResource r = (JDFResource) e;
-				final JDFAttributeMap newMap = parentMap.clone();
-				final String val = r.getAttribute_KElement(key);
-				newMap.put(key, val);
-				addPartitionMap(newMap, r);
-			}
-		}
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final PartitionMap map = new PartitionMap(r);
+		assertEquals(1, map.size());
 	}
 
 	/**
 	 *
-	 * @param arg0
-	 * @return
 	 */
-	JDFResource get(final JDFAttributeMap arg0)
+	@Test
+	public void testHasMissingKeys()
 	{
-		return leafMap.get(arg0);
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		r.setPartIDKeys(new VString("SignatureName SheetName Side", null));
+		final PartitionMap map = new PartitionMap(r);
+		assertFalse(map.hasMissingKeys(new JDFAttributeMap()));
+		final JDFAttributeMap m = new JDFAttributeMap(AttributeName.SIGNATURENAME, "s1");
+		assertFalse(map.hasMissingKeys(m));
+		final JDFAttributeMap m2 = m.clone();
+		m2.put(AttributeName.SHEETNAME, "S1");
+		assertFalse(map.hasMissingKeys(m2));
+		final JDFAttributeMap m3 = m.clone();
+		m3.put(AttributeName.SIDE, "Front");
+		assertTrue(map.hasMissingKeys(m3));
 	}
 
 	/**
 	 *
-	 * @return
 	 */
-	Set<JDFAttributeMap> keySet()
+	@Test
+	public void testGet()
 	{
-		return leafMap.keySet();
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final PartitionMap map = new PartitionMap(r);
+		assertEquals(r, map.get(new JDFAttributeMap()));
 	}
 
 	/**
 	 *
-	 * @return
 	 */
-	VString getPartIDKeys()
+	@Test
+	public void testAdd()
 	{
-		return partIDKeys;
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
+		final PartitionMap map = new PartitionMap(r);
+		assertEquals(r2, map.get(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1")));
 	}
 
-	/**
-	 *
-	 * @param m
-	 * @return true if at least one key in @PartIDKeys is missing and leaves a gap
-	 */
-	boolean hasMissingKeys(final JDFAttributeMap m)
-	{
-		int s = m.size();
-		if (s == 0)
-			return false;
-		for (final String k : partIDKeys)
-		{
-			if (!m.containsKey(k))
-				return true;
-			if (--s == 0)
-				return false;
-		}
-		return false;
-	}
-
-	/**
-	 *
-	 * @param arg0
-	 * @param arg1
-	 * @return
-	 */
-	JDFResource put(final JDFAttributeMap arg0, final JDFResource arg1)
-	{
-		return leafMap.put(arg0, arg1);
-	}
-
-	/**
-	 *
-	 * @param vPartIDKeys
-	 */
-	void updatePartIDKeys(final VString vPartIDKeys)
-	{
-		partIDKeys.appendUnique(vPartIDKeys);
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	HashMap<JDFAttributeMap, JDFResource> getLeafMap()
-	{
-		return leafMap;
-	}
-
-	@Override
-	public String toString()
-	{
-		return "PartitionMap [leafMap=" + leafMap + ", partIDKeys=" + partIDKeys + "]";
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	int size()
-	{
-		return leafMap.size();
-	}
 }

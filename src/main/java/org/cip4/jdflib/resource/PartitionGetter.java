@@ -54,6 +54,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.util.ContainerUtil;
 
 /**
+ * class that evaluates the partitions based on the underlying PartitionMap This class will typically return JDFAttributeMaps that exist in the PartitionMap
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -108,7 +109,7 @@ public class PartitionGetter
 
 	JDFAttributeMap checkPV(final JDFAttributeMap partMap)
 	{
-		if (containsEvil(partMap) && !leafMap.missingKeys(partMap))
+		if (containsEvil(partMap) && !leafMap.hasMissingKeys(partMap))
 		{
 			for (final JDFAttributeMap map : leafMap.keySet())
 			{
@@ -149,6 +150,12 @@ public class PartitionGetter
 		return !partMap.isEmpty();
 	}
 
+	/**
+	 * loop to find partitions - will NOT find explicit matches which need to be checked first with a get()
+	 *
+	 * @param partMap
+	 * @return
+	 */
 	JDFAttributeMap getImplicitPartitionFromMap(final JDFAttributeMap partMap)
 	{
 		int size = partMap.size();

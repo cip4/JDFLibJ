@@ -35,144 +35,87 @@
  *
  *
  */
+
 package org.cip4.jdflib.resource;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Set;
-import java.util.Vector;
+import static org.junit.Assert.assertEquals;
 
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
+import org.junit.Test;
 
-class PartitionMap
+public class PartitionGetterTest
 {
+
 	/**
 	 *
-	 * @param r
 	 */
-	PartitionMap(final JDFResource r)
+	@Test
+	public void testGetExplicit()
 	{
-		super();
-		partIDKeys = r.getPartIDKeys();
-		leafMap = new LinkedHashMap<>();
-		addPartitionMap(new JDFAttributeMap(), r.getResourceRoot());
-	}
-
-	private final HashMap<JDFAttributeMap, JDFResource> leafMap;
-	private final VString partIDKeys;
-
-	/**
-	 * @return
-	 */
-	void addPartitionMap(final JDFAttributeMap parentMap, final JDFResource parent)
-	{
-		leafMap.put(parentMap, parent);
-		final String key = partIDKeys.get(parentMap.size());
-		final Vector<? extends KElement> v = key == null ? null : parent.getDirectPartitionVector();
-		if (v != null && !v.isEmpty())
-		{
-			for (final KElement e : v)
-			{
-				final JDFResource r = (JDFResource) e;
-				final JDFAttributeMap newMap = parentMap.clone();
-				final String val = r.getAttribute_KElement(key);
-				newMap.put(key, val);
-				addPartitionMap(newMap, r);
-			}
-		}
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
+		final PartitionGetter g = new PartitionGetter(r);
+		assertEquals(r, g.getPartition(new JDFAttributeMap(), EnumPartUsage.Explicit));
+		assertEquals(r2, g.getPartition(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1"), EnumPartUsage.Explicit));
 	}
 
 	/**
 	 *
-	 * @param arg0
-	 * @return
 	 */
-	JDFResource get(final JDFAttributeMap arg0)
+	@Test
+	public void testGetimplicit()
 	{
-		return leafMap.get(arg0);
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final PartitionGetter g = new PartitionGetter(r);
+		assertEquals(r, g.getPartition(new JDFAttributeMap(), EnumPartUsage.Explicit));
+		assertEquals(r, g.getPartition(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1"), EnumPartUsage.Implicit));
 	}
 
 	/**
 	 *
-	 * @return
 	 */
-	Set<JDFAttributeMap> keySet()
+	@Test
+	public void testGetimplicitFromMap()
 	{
-		return leafMap.keySet();
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final PartitionGetter g = new PartitionGetter(r);
+		assertEquals(new JDFAttributeMap(), g.getImplicitPartitionFromMap(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1")));
 	}
 
 	/**
 	 *
-	 * @return
 	 */
-	VString getPartIDKeys()
+	@Test
+	public void testGetimplicitFromMap2()
 	{
-		return partIDKeys;
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.SignatureName, "S1");
+		final PartitionGetter g = new PartitionGetter(r);
+		assertEquals(new JDFAttributeMap(), g.getImplicitPartitionFromMap(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1")));
+		final JDFAttributeMap p1 = new JDFAttributeMap(EnumPartIDKey.SignatureName, "S1");
+		final JDFAttributeMap p2 = p1.clone();
+		p2.put(EnumPartIDKey.SheetName, "SH1");
+		assertEquals(p1, g.getImplicitPartitionFromMap(p2));
 	}
 
 	/**
 	 *
-	 * @param m
-	 * @return true if at least one key in @PartIDKeys is missing and leaves a gap
 	 */
-	boolean hasMissingKeys(final JDFAttributeMap m)
+	@Test
+	public void testGetimplicitFromMapnix()
 	{
-		int s = m.size();
-		if (s == 0)
-			return false;
-		for (final String k : partIDKeys)
-		{
-			if (!m.containsKey(k))
-				return true;
-			if (--s == 0)
-				return false;
-		}
-		return false;
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.SignatureName, "S1");
+		final PartitionGetter g = new PartitionGetter(r);
+		assertEquals(new JDFAttributeMap(), g.getImplicitPartitionFromMap(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1")));
+		final JDFAttributeMap p1 = new JDFAttributeMap(EnumPartIDKey.SignatureName, "S1");
+		final JDFAttributeMap p2 = p1.clone();
+		p2.put(EnumPartIDKey.SheetName, "SH1");
+		assertEquals(p1, g.getImplicitPartitionFromMap(p2));
 	}
 
-	/**
-	 *
-	 * @param arg0
-	 * @param arg1
-	 * @return
-	 */
-	JDFResource put(final JDFAttributeMap arg0, final JDFResource arg1)
-	{
-		return leafMap.put(arg0, arg1);
-	}
-
-	/**
-	 *
-	 * @param vPartIDKeys
-	 */
-	void updatePartIDKeys(final VString vPartIDKeys)
-	{
-		partIDKeys.appendUnique(vPartIDKeys);
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	HashMap<JDFAttributeMap, JDFResource> getLeafMap()
-	{
-		return leafMap;
-	}
-
-	@Override
-	public String toString()
-	{
-		return "PartitionMap [leafMap=" + leafMap + ", partIDKeys=" + partIDKeys + "]";
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	int size()
-	{
-		return leafMap.size();
-	}
 }
