@@ -1,74 +1,43 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
@@ -205,6 +174,30 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNull(ccNew.getColorantParams());
 		assertEquals(ccNew.getColorantOrder().getSeparations(), new VString("Cyan Black", null));
 		assertNull(ccNew.getDeviceColorantOrder());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testMultiProcess()
+	{
+		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		JDFDoc docjdf = null;
+		for (int i = 0; i < 2; i++)
+		{
+			final XJDFHelper h = new XJDFHelper("j", "p", null);
+			h.setTypes(EnumType.ConventionalPrinting.getName());
+			final SetHelper cIn = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
+			cIn.appendPartition(AttributeName.SHEETNAME, "S" + i, true);
+
+			docjdf = conv.convert(h);
+
+		}
+		final JDFNode n = docjdf.getJDFRoot();
+
+		assertNotNull(n);
 	}
 
 	/**
@@ -350,7 +343,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFColorantControl cc = (JDFColorantControl) h.getCreateSet(XJDFConstants.Resource, ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true).getResource();
 		cc.setAttribute(ElementName.COLORANTPARAMS, "Sep_1");
 		cc.setAttribute(ElementName.COLORANTORDER, "Sep_1");
-		h.getCreateSet(XJDFConstants.Resource, ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME, "Sep 1");
+		h.getCreateSet(XJDFConstants.Resource, ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME,
+				"Sep 1");
 
 		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
 		final JDFDoc docjdf = conv.convert(h);
@@ -435,7 +429,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final KElement c = e.appendElement(SetHelper.RESOURCE_SET);
 		c.setAttribute("Name", "Layout");
 		c.setAttribute("Usage", "Input");
-		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL", "file://foo.xml");
+		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL",
+				"file://foo.xml");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		final JDFNode root = d.getJDFRoot();
@@ -711,9 +706,9 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	*
-	* @return
-	*/
+	 *
+	 * @return
+	 */
 	@Test
 	public void testNPageFileSpec()
 	{
@@ -1027,6 +1022,121 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFResource partition = pg.getPartition(s2, null);
 		final JDFIdentical id = partition.getIdentical();
 		assertTrue(id.getPartMap().overlapMap(map));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testResourceLinkPart()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		final KElement e = h.getRoot();
+		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
+
+		final ResourceHelper res = h.appendResourceSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input).appendPartition(map, true);
+		res.getResource().setAttribute(AttributeName.WORKSTYLE, "Simplex");
+		final JDFDoc d = xCon.convert(e);
+		final JDFNode jdfRoot = d.getJDFRoot();
+		final JDFConventionalPrintingParams cp = (JDFConventionalPrintingParams) jdfRoot.getResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input, 0);
+		assertEquals("s1", cp.getSheetName());
+		assertEquals(1, jdfRoot.getLink(cp, null).getPartMapVector().size());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testResourceLinkRun()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		final KElement e = h.getRoot();
+		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.RUN, "r1");
+
+		final ResourceHelper res = h.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input).appendPartition(map, true);
+		res.getResource().setAttribute(AttributeName.NPAGE, "2");
+		final JDFDoc d = xCon.convert(e);
+		final JDFNode jdfRoot = d.getJDFRoot();
+		final JDFRunList rl = (JDFRunList) jdfRoot.getResource(ElementName.RUNLIST, EnumUsage.Input, 0);
+		assertEquals("r1", rl.getLeaf(0).getRun());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testResourceLinkRunIndex()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		final KElement e = h.getRoot();
+		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.RUN, "r1");
+		map.put(AttributeName.RUNINDEX, "3 5");
+		final ResourceHelper res = h.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input).appendPartition(map, true);
+		res.getResource().setAttribute(AttributeName.NPAGE, "2");
+		final JDFDoc d = xCon.convert(e);
+		final JDFNode jdfRoot = d.getJDFRoot();
+		final JDFRunList rl = (JDFRunList) jdfRoot.getResource(ElementName.RUNLIST, EnumUsage.Input, 0);
+		assertEquals("r1", rl.getLeaf(0).getRun());
+		assertFalse(rl.getLeaf(0).hasNonEmpty(AttributeName.RUNINDEX));
+		final JDFResourceLink resL = jdfRoot.getLink(rl, null);
+		assertEquals("3 ~ 5", resL.getPartMapVector().get(0).get("RunIndex"));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testResourceLinkRunIndex2()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		final KElement e = h.getRoot();
+		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.RUN, "r1");
+		map.put(AttributeName.RUNINDEX, "3 5");
+		final JDFAttributeMap m2 = new JDFAttributeMap(map);
+		m2.put(AttributeName.RUNINDEX, "7 -1");
+
+		final ResourceHelper res = h.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input).appendPartition(map, true);
+		res.appendPartMap(m2);
+		res.getResource().setAttribute(AttributeName.NPAGE, "2");
+		final JDFDoc d = xCon.convert(e);
+		final JDFNode jdfRoot = d.getJDFRoot();
+		final JDFRunList rl = (JDFRunList) jdfRoot.getResource(ElementName.RUNLIST, EnumUsage.Input, 0);
+		assertEquals("r1", rl.getLeaf(0).getRun());
+		assertFalse(rl.getLeaf(0).hasNonEmpty(AttributeName.RUNINDEX));
+		final JDFResourceLink resL = jdfRoot.getLink(rl, null);
+		assertEquals("3 ~ 5 7 ~ -1", resL.getPartMapVector().get(0).get("RunIndex"));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testResourceLinkPart2()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		final KElement e = h.getRoot();
+		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
+
+		final ResourceHelper res = h.appendResourceSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input).appendPartition(map, true);
+		res.getResource().setAttribute(AttributeName.WORKSTYLE, "Simplex");
+		xCon.convert(e);
+		map.put(AttributeName.SHEETNAME, "s2");
+		res.setPartMap(map);
+		final JDFDoc d = xCon.convert(e);
+		final JDFNode jdfRoot = d.getJDFRoot();
+		final JDFConventionalPrintingParams cp = (JDFConventionalPrintingParams) jdfRoot.getResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input, 0);
+		assertEquals(2, cp.getLeaves(false).size());
+		assertEquals(2, jdfRoot.getLink(cp, null).getPartMapVector().size());
 	}
 
 	/**
