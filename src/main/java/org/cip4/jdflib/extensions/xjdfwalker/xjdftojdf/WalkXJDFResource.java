@@ -142,6 +142,9 @@ public class WalkXJDFResource extends WalkXElement
 		handleIdentical(vParts, res, rl);
 	}
 
+	private final static VString keepKeys = new VString("SignatureName SheetName Side PartVersion Separation BlockName Run DocIndex RunIndex SetIndex SheetIndex", null);
+	private final static VString indexKeys = new VString("RunIndex DocIndex SetIndex SheetIndex", null);
+
 	/**
 	 *
 	 * @param vParts
@@ -152,11 +155,20 @@ public class WalkXJDFResource extends WalkXElement
 		if (rl != null && ContainerUtil.getNonEmpty(vParts) != null)
 		{
 			final VJDFAttributeMap clone = vParts.clone();
-			final VString keepKeys = new VString("SignatureName SheetName Side PartVersion Separation BlockName DocIndex RunIndex SetIndex SheetIndex", null);
 			clone.reduceMap(keepKeys);
+			if (clone.containsKey(AttributeName.RUN))
+			{
+				for (final String index : indexKeys)
+				{
+					if (clone.containsKey(index))
+					{
+						clone.removeKey(AttributeName.RUN);
+						break;
+					}
+				}
+			}
 			if (clone.size() > 1)
 			{
-				final VString indexKeys = new VString("RunIndex DocIndex SetIndex SheetIndex", null);
 				for (final String index : indexKeys)
 				{
 					final VString values = clone.getPartValues(index, false);

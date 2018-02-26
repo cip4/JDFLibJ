@@ -119,6 +119,9 @@ public abstract class XJDFConstants
 	public static final String SheetHeightMin = "SheetHeightMin";
 	public static final String SheetWidthMax = "SheetWidthMax";
 	public static final String SheetWidthMin = "SheetWidthMin";
+	public static final String SignalResource = "SignalResource";
+	public static final String SignalStatus = "SignalStatus";
+
 	public static final String SourceFrequencyMax = "SourceFrequencyMax";
 	public static final String SourceFrequencyMin = "SourceFrequencyMin";
 	public static final String StickOn = "StickOn";
