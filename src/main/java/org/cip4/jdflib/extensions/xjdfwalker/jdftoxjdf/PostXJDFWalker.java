@@ -220,7 +220,7 @@ class PostXJDFWalker extends BaseElementWalker
 
 		/**
 		 * rename hook
-		 * 
+		 *
 		 * @param xjdf
 		 */
 		void updateAttributes(final KElement xjdf)
@@ -519,7 +519,7 @@ class PostXJDFWalker extends BaseElementWalker
 
 		/**
 		 * we do everything on the jdf side so that all other tests are done by the call to super
-		 * 
+		 *
 		 * @param xjdf
 		 *
 		 * @return
@@ -807,7 +807,13 @@ class PostXJDFWalker extends BaseElementWalker
 			return map;
 		}
 
-		public String getBSID(final JDFStrippingParams strippingParams, final JDFAttributeMap map)
+		/**
+		 * 
+		 * @param strippingParams
+		 * @param map
+		 * @return
+		 */
+		String getBSID(final JDFStrippingParams strippingParams, final JDFAttributeMap map)
 		{
 			String bsName = map == null ? null : map.remove(AttributeName.BINDERYSIGNATURENAME);
 			final String bsn2 = strippingParams.getNonEmpty(XJDFConstants.BinderySignatureIDs);
@@ -848,7 +854,7 @@ class PostXJDFWalker extends BaseElementWalker
 
 		/**
 		 * move appropriate stuff from StrippingParams to BinderySignature
-		 * 
+		 *
 		 * @param bs
 		 * @param strippingParams
 		 */
@@ -866,7 +872,7 @@ class PostXJDFWalker extends BaseElementWalker
 		/**
 		 *
 		 * move and merge stripcellparams and signaturecells
-		 * 
+		 *
 		 * @param bindSig
 		 * @param childElementVector
 		 */
