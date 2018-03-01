@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment mrSubRefay appear in the software itself, if and wherever such third-party
+ * acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior writtenrestartProcesses() permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software restartProcesses()
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software restartProcesses() copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
@@ -121,8 +89,7 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * some generic postprocessing that is better done on the XJDF after JDF to XJDF Conversion
- * such as merging stripping and Layout
+ * some generic postprocessing that is better done on the XJDF after JDF to XJDF Conversion such as merging stripping and Layout
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -253,6 +220,7 @@ class PostXJDFWalker extends BaseElementWalker
 
 		/**
 		 * rename hook
+		 * 
 		 * @param xjdf
 		 */
 		void updateAttributes(final KElement xjdf)
@@ -551,6 +519,7 @@ class PostXJDFWalker extends BaseElementWalker
 
 		/**
 		 * we do everything on the jdf side so that all other tests are done by the call to super
+		 * 
 		 * @param xjdf
 		 *
 		 * @return
@@ -739,7 +708,7 @@ class PostXJDFWalker extends BaseElementWalker
 				super.walk(strippingParams, dummy);
 				return strippingParams; // nuff done
 			}
-			//TODO multiple lower level stripparams partitions
+			// TODO multiple lower level stripparams partitions
 			final SetHelper layoutseth = newRootHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
 
 			final VJDFAttributeMap vmap = new ResourceHelper(strippingParams.getParentNode_KElement()).getPartMapVector();
@@ -764,7 +733,7 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				map.remove(AttributeName.SIGNATURENAME);
 			}
-			String bsName = map == null ? null : map.remove(AttributeName.BINDERYSIGNATURENAME);
+			String bsName = getBSID(strippingParams, map);
 			final String cellIndex = map == null ? null : map.remove(AttributeName.CELLINDEX);
 			final ResourceHelper layoutPartitionH = layoutseth.getCreatePartition(map, true);
 			final JDFLayout layoutPartition = (JDFLayout) layoutPartitionH.getResource();
@@ -838,6 +807,15 @@ class PostXJDFWalker extends BaseElementWalker
 			return map;
 		}
 
+		public String getBSID(final JDFStrippingParams strippingParams, final JDFAttributeMap map)
+		{
+			String bsName = map == null ? null : map.remove(AttributeName.BINDERYSIGNATURENAME);
+			final String bsn2 = strippingParams.getNonEmpty(XJDFConstants.BinderySignatureIDs);
+			if (bsn2 != null)
+				bsName = bsn2;
+			return bsName;
+		}
+
 		/**
 		 *
 		 *
@@ -870,6 +848,7 @@ class PostXJDFWalker extends BaseElementWalker
 
 		/**
 		 * move appropriate stuff from StrippingParams to BinderySignature
+		 * 
 		 * @param bs
 		 * @param strippingParams
 		 */
@@ -881,12 +860,13 @@ class PostXJDFWalker extends BaseElementWalker
 			bs.moveAttribute(AttributeName.JOBID, bs);
 			bs.moveAttribute(AttributeName.INNERMOSTSHINGLING, bs);
 			bs.moveAttribute(AttributeName.OUTERMOSTSHINGLING, bs);
-			//TODO where to move stripmarks? - stay in strippingparams or move to the appropriate binderysignature, stripcell or strippingparams
+			// TODO where to move stripmarks? - stay in strippingparams or move to the appropriate binderysignature, stripcell or strippingparams
 		}
 
 		/**
 		 *
 		 * move and merge stripcellparams and signaturecells
+		 * 
 		 * @param bindSig
 		 * @param childElementVector
 		 */
@@ -920,7 +900,7 @@ class PostXJDFWalker extends BaseElementWalker
 		private Vector<JDFSignatureCell> getSigCellForIndex(final JDFBinderySignature bindSig, final JDFIntegerList il)
 		{
 			final Vector<JDFSignatureCell> v = bindSig.getChildrenByClass(JDFSignatureCell.class, true, 0);
-			final Vector<JDFSignatureCell> vRet = new Vector<JDFSignatureCell>();
+			final Vector<JDFSignatureCell> vRet = new Vector<>();
 			if (v == null || v.size() == 0)
 			{
 				vRet.add(bindSig.appendSignatureCell());
@@ -959,7 +939,7 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				return false;
 			}
-			//TODO simplex duplex evaluation
+			// TODO simplex duplex evaluation
 			il.scale(2);
 			final JDFIntegerList fp = sc.getFrontPages();
 			// we assume that any match is valid for all
@@ -973,7 +953,7 @@ class PostXJDFWalker extends BaseElementWalker
 		{
 			// TODO merge surfaces that match map
 			// 2 options
-			//- either add @Side to the respective content / mark objects + dynamic marks
+			// - either add @Side to the respective content / mark objects + dynamic marks
 			// add Surface elements
 		}
 
@@ -1010,7 +990,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param xjdf
 		 * @param dummy
 		 * @return null or super depending on the value of mergelayout
-		*/
+		 */
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
@@ -1062,7 +1042,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param xjdf
 		 * @param dummy
 		 * @return
-		*/
+		 */
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
@@ -1128,7 +1108,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param xjdf
 		 * @param dummy
 		 * @return
-		*/
+		 */
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
@@ -1176,7 +1156,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param xjdf
 		 * @param dummy
 		 * @return
-		*/
+		 */
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
@@ -1261,7 +1241,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param xjdf
 		 * @param dummy
 		 * @return
-		*/
+		 */
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
@@ -1311,7 +1291,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param xjdf
 		 * @param dummy
 		 * @return
-		*/
+		 */
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
@@ -1368,7 +1348,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param xjdf
 		 * @param dummy
 		 * @return
-		*/
+		 */
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
@@ -1382,24 +1362,10 @@ class PostXJDFWalker extends BaseElementWalker
 				return null;
 			}
 			/*
-			KElement realRes = xjdf.getElement(name);
-			if (realRes != null)
-				return ret;
-			KElement aPool = xjdf.getElement(ElementName.AMOUNTPOOL);
-			if (aPool != null)
-				return ret;
-			KElement comment = xjdf.getElement(ElementName.COMMENT);
-			if (comment != null)
-				return ret;
-			JDFAttributeMap map = xjdf.getAttributeMap();
-			map.remove(AttributeName.ID);
-			map.remove(AttributeName.STATUS);
-			if (map.size() == 0)
-			{
-				xjdf.deleteNode();
-				return null;
-			}
-			*/
+			 * KElement realRes = xjdf.getElement(name); if (realRes != null) return ret; KElement aPool = xjdf.getElement(ElementName.AMOUNTPOOL); if (aPool != null) return ret; KElement comment =
+			 * xjdf.getElement(ElementName.COMMENT); if (comment != null) return ret; JDFAttributeMap map = xjdf.getAttributeMap(); map.remove(AttributeName.ID); map.remove(AttributeName.STATUS); if
+			 * (map.size() == 0) { xjdf.deleteNode(); return null; }
+			 */
 			return ret;
 		}
 
@@ -1450,7 +1416,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param set
 		 * @param dummy
 		 * @return
-		*/
+		 */
 		@Override
 		public KElement walk(final KElement set, final KElement dummy)
 		{
@@ -1585,7 +1551,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param xjdf
 		 * @param dummy
 		 * @return
-		*/
+		 */
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
@@ -1636,7 +1602,7 @@ class PostXJDFWalker extends BaseElementWalker
 						}
 						catch (final DataFormatException dfe)
 						{
-							//nop
+							// nop
 						}
 
 						// have a matching cpi entry - place set here and remove from further tests
@@ -1653,7 +1619,7 @@ class PostXJDFWalker extends BaseElementWalker
 				}
 				j++;
 			}
-			//TODO treat outputs backwards...
+			// TODO treat outputs backwards...
 			combineSameSets(xjdf);
 		}
 
@@ -1667,7 +1633,7 @@ class PostXJDFWalker extends BaseElementWalker
 
 			while (v.size() > 0)
 			{
-				final Vector<SetHelper> sameSets = new Vector<SetHelper>();
+				final Vector<SetHelper> sameSets = new Vector<>();
 				final SetHelper firstSet = v.remove(0);
 				sameSets.add(firstSet);
 				for (int j = 0; j < v.size(); j++)
@@ -1748,7 +1714,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param xjdf
 		 * @param dummy
 		 * @return
-		*/
+		 */
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
@@ -1806,7 +1772,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param xjdf
 		 * @param dummy
 		 * @return
-		*/
+		 */
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
@@ -1828,7 +1794,7 @@ class PostXJDFWalker extends BaseElementWalker
 			}
 			else
 			{
-				//TODO fix to subelements
+				// TODO fix to subelements
 				final IntentHelper insert = ph.getIntent(ElementName.INSERTINGINTENT);
 				if (insert != null)
 				{
@@ -1867,7 +1833,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param xjdf
 		 * @param dummy
 		 * @return
-		*/
+		 */
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
@@ -1953,7 +1919,7 @@ class PostXJDFWalker extends BaseElementWalker
 			final String brand = hap.getNonEmpty(AttributeName.TOPBRAND);
 			if (col != null || brand != null)
 			{
-				//TODO worry about top and bottom
+				// TODO worry about top and bottom
 				final MiscConsumableMaker mm = new MiscConsumableMaker(ResourceHelper.getHelper(xjdf));
 				mm.create("HeadBand", null);
 				mm.setColor(col);
@@ -2313,7 +2279,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param xjdf
 		 * @param dummy
 		 * @return
-		*/
+		 */
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
@@ -2401,8 +2367,7 @@ class PostXJDFWalker extends BaseElementWalker
 		public boolean matches(final KElement e)
 		{
 			final String localName = e.getLocalName();
-			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE)
-					|| localName.startsWith(ElementName.COMMAND);
+			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE) || localName.startsWith(ElementName.COMMAND);
 		}
 
 	}
@@ -2488,7 +2453,7 @@ class PostXJDFWalker extends BaseElementWalker
 	@Override
 	public String toString()
 	{
-		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll
-				+ ", removeSignatureName=" + removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
+		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll + ", removeSignatureName="
+				+ removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
 	}
 }
