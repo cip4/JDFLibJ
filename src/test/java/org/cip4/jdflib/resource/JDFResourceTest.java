@@ -1939,7 +1939,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
-		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.AnyInput, null, 0);
 		JDFMedia m = xm.getMedia();
 		m = (JDFMedia) m.makeRootResource(null, null, true);
 		final JDFResourceLink rl = n.linkResource(m, EnumUsage.Input, null);
@@ -1953,9 +1953,6 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertNull(m.getParentNode());
 
 	}
-
-	// //////////////////////////////////////////////////////////////////////////
-	// /
 
 	/**
 	 *
@@ -2480,8 +2477,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 	@Test
 	public void testCollapseElement()
 	{
-		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
-		final JDFRunList rl = (JDFRunList) n.addResource("RunList", EnumUsage.Input);
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
 		final JDFLayoutElement le = rl.appendLayoutElement();
 		final JDFSeparationSpec ss1 = le.appendSeparationSpec();
 		ss1.setName("n1");
@@ -2637,6 +2634,45 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertFalse(f.hasAttribute_KElement(AttributeName.DESCRIPTIVENAME, null, false));
 		assertFalse(b.hasAttribute_KElement(AttributeName.DESCRIPTIVENAME, null, false));
 		assertFalse(sh.hasAttribute_KElement(AttributeName.DESCRIPTIVENAME, null, false));
+	}
+
+	/**
+	 * test expand and collapse methods
+	 */
+	@Test
+	public void testDeleteNodePartition()
+	{
+		final JDFNode n = JDFNode.createRoot();
+
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
+		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
+		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
+		final JDFResource b = sh.addPartition(EnumPartIDKey.Side, "Back");
+		assertEquals(b, sh.getPartition(new JDFAttributeMap(EnumPartIDKey.Side, "Back"), EnumPartUsage.Explicit));
+		b.deleteNode();
+		assertNull(sh.getPartition(new JDFAttributeMap(EnumPartIDKey.Side, "Back"), EnumPartUsage.Explicit));
+		assertEquals(f, sh.getPartition(new JDFAttributeMap(EnumPartIDKey.Side, "Front"), EnumPartUsage.Explicit));
+	}
+
+	/**
+	 * test expand and collapse methods
+	 */
+	@Test
+	public void testDeleteNodePartition2()
+	{
+		final JDFNode n = JDFNode.createRoot();
+
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
+		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
+		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
+		final JDFResource b = sh.addPartition(EnumPartIDKey.Side, "Back");
+		final JDFAttributeMap m = new JDFAttributeMap(EnumPartIDKey.Side, "Back");
+		m.put(EnumPartIDKey.SheetName, "sh1");
+		assertEquals(b, sig.getPartition(m, EnumPartUsage.Explicit));
+		sh.deleteNode();
+		assertNull(sig.getPartition(m, EnumPartUsage.Explicit));
 	}
 
 	/**

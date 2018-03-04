@@ -3571,9 +3571,8 @@ public class KElement extends ElementNSImpl implements Element
 
 		final VElement v = kElem.getChildElementVector(null, null, null, true, 0, false);
 
-		for (int i = 0; i < v.size(); i++)
+		for (final KElement m : v)
 		{
-			final KElement m = v.elementAt(i);
 			final int nThis = numChildElements(m.getNodeName(), null);
 
 			if (nThis == 1)

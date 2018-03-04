@@ -105,7 +105,7 @@ public class JDFResource extends JDFElement
 
 	private static HashSet<String> validParentNodeNameSet = null;
 	private static HashSet<String> validRootParentNodeNameSet = null;
-	private PartitionMap partitionMap;
+	PartitionMap partitionMap;
 
 	/**
 	 *
@@ -246,8 +246,7 @@ public class JDFResource extends JDFElement
 		atrInfoTable_Abstract[8] = new AtrInfoTable(AttributeName.PIPEURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable_Abstract[9] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_Abstract[10] = new AtrInfoTable(AttributeName.RREFS, 0x44444433, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSpawnStatus.getEnum(0),
-				EnumSpawnStatus.NotSpawned.getName());
+		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSpawnStatus.getEnum(0), EnumSpawnStatus.NotSpawned.getName());
 		atrInfoTable_Abstract[12] = new AtrInfoTable(AttributeName.SPAWNIDS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable_Abstract[13] = new AtrInfoTable(AttributeName.SORTING, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable_Abstract[14] = new AtrInfoTable(AttributeName.SORTAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
@@ -282,8 +281,7 @@ public class JDFResource extends JDFElement
 	{
 		atrInfoTable_ID_Class_Required[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
 		atrInfoTable_ID_Class_Required[1] = new AtrInfoTable(AttributeName.CLASS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumResourceClass.getEnum(0), null);
-		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0),
-				EnumPartUsage.Explicit.getName());
+		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0), EnumPartUsage.Explicit.getName());
 
 	}
 
@@ -2036,7 +2034,7 @@ public class JDFResource extends JDFElement
 		{
 			validParentNodeNameSet = new HashSet<>();
 			final String nodeNames[] = { "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams", // copy of
-																											// validRootParentNodeNames
+					// validRootParentNodeNames
 					"DeviceInfo", "DropItemIntent", "DropItem", "ProductionIntent", "CustomerInfo", "NodeInfo", "Ancestor", "Occupation", ElementName.PHASETIME };
 			for (final String nodeName2 : nodeNames)
 			{
@@ -3803,7 +3801,8 @@ public class JDFResource extends JDFElement
 		for (int i = v2.size() - 1; i >= 0; i--)
 		{
 			final JDFElement e = (JDFElement) v2.elementAt(i);
-			if (!e.hasAttribute_KElement(AttributeName.SPAWNIDS, null, false) || !e.includesMatchingAttribute(AttributeName.SPAWNIDS, spawnID, AttributeInfo.EnumAttributeType.NMTOKENS))
+			if (!e.hasAttribute_KElement(AttributeName.SPAWNIDS, null, false)
+					|| !e.includesMatchingAttribute(AttributeName.SPAWNIDS, spawnID, AttributeInfo.EnumAttributeType.NMTOKENS))
 			{
 				v2.remove(i);
 			}
@@ -4591,9 +4590,9 @@ public class JDFResource extends JDFElement
 			// Check found part ID key.
 			if (strPartIDKey != null)
 			{
-				if ((strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCCOPIES)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCRUNINDEX))
-						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCSHEETINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_RUNINDEX))
-						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_SHEETINDEX))
+				if ((strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCCOPIES))
+						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCRUNINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCSHEETINDEX))
+						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_RUNINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_SHEETINDEX))
 				// values not allowed according to JDF 1.2, 3.8.2.4
 				// || (strPartIDKey.equals (AttributeName.SORTING))
 				// || (strPartIDKey.equals (AttributeName.SORTAMOUNT))
@@ -7383,8 +7382,7 @@ public class JDFResource extends JDFElement
 			// partition attribute values
 			{
 				final KElement parent = getParentNode_KElement();
-				final VElement vThis = parent.getChildElementVector_KElement(getNodeName(), getNamespaceURI(), new JDFAttributeMap(currentPartition, getAttribute_KElement(currentPartition)), true,
-						999);
+				final VElement vThis = parent.getChildElementVector_KElement(getNodeName(), getNamespaceURI(), new JDFAttributeMap(currentPartition, getAttribute_KElement(currentPartition)), true, 999);
 				if (vThis.size() > 1)
 				{
 					vAtts.appendUnique(currentPartition);
@@ -7550,20 +7548,42 @@ public class JDFResource extends JDFElement
 		return super.replaceElement(src);
 	}
 
+	/**
+	 *
+	 * @see org.cip4.jdflib.core.KElement#deleteNode()
+	 */
 	@Override
 	public KElement deleteNode()
 	{
-		getResourceRoot().partitionMap = null;
+		if (isLeaf())
+		{
+			final PartitionMap m = getResourceRoot().partitionMap;
+			if (m != null)
+			{
+				m.remove(getPartMap());
+			}
+		}
+		else
+		{
+			getResourceRoot().partitionMap = null;
+		}
 		return super.deleteNode();
 	}
 
 	@Override
 	public KElement mergeElement(final KElement kElem, final boolean bDelete)
 	{
-		getResourceRoot().partitionMap = null;
+		if (kElem != null && !((JDFResource) kElem).isLeaf())
+		{
+			getResourceRoot().partitionMap = null;
+		}
 		return super.mergeElement(kElem, bDelete);
 	}
 
+	/**
+	 *
+	 * @see org.cip4.jdflib.core.KElement#insertBefore(org.w3c.dom.Node, org.w3c.dom.Node)
+	 */
 	@Override
 	public synchronized Node insertBefore(final Node src, final Node arg1) throws DOMException
 	{
