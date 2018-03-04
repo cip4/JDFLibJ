@@ -228,6 +228,10 @@ class PostXJDFWalker extends BaseElementWalker
 			// nop
 		}
 
+		/**
+		 *
+		 * @param xjdf
+		 */
 		void updateNamespaces(final KElement xjdf)
 		{
 			if (xjdf.hasAttribute(AttributeName.XMLNS))
@@ -264,25 +268,71 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @param part
-		 * @return true if must continue
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#updateAttributes(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		public KElement walk(final KElement part, final KElement dummy)
+		void updateAttributes(final KElement part)
 		{
+			if (retainAll)
+				return;
+
 			if (isRemoveSignatureName())
 			{
 				part.removeAttribute(AttributeName.SIGNATURENAME);
 			}
-			part.removeAttribute(AttributeName.DOCTAGS);
-			part.renameAttribute(AttributeName.METADATA0, AttributeName.METADATA);
-			return super.walk(part, dummy);
-		}
 
-		@Override
-		public boolean matches(final KElement e)
-		{
-			return (e instanceof JDFPart);
+			part.removeAttribute(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX);
+			part.removeAttribute(AttributeName.BUNDLEITEMINDEX);
+			part.removeAttribute(AttributeName.CELLINDEX);
+			part.removeAttribute(AttributeName.DOCCOPIES);
+			part.renameAttribute(AttributeName.DOCRUNINDEX, AttributeName.RUNINDEX);
+			part.renameAttribute(AttributeName.DOCSHEETINDEX, AttributeName.SHEETINDEX);
+
+			part.removeAttribute(AttributeName.DELIVERYUNIT0);
+			part.removeAttribute(AttributeName.DELIVERYUNIT1);
+			part.removeAttribute(AttributeName.DELIVERYUNIT2);
+			part.removeAttribute(AttributeName.DELIVERYUNIT3);
+			part.removeAttribute(AttributeName.DELIVERYUNIT4);
+			part.removeAttribute(AttributeName.DELIVERYUNIT5);
+			part.removeAttribute(AttributeName.DELIVERYUNIT6);
+			part.removeAttribute(AttributeName.DELIVERYUNIT7);
+			part.removeAttribute(AttributeName.DELIVERYUNIT8);
+			part.removeAttribute(AttributeName.DELIVERYUNIT9);
+			part.removeAttribute(AttributeName.DOCTAGS);
+			part.removeAttribute(AttributeName.EDITION);
+			part.removeAttribute(AttributeName.EDITIONVERSION);
+			part.removeAttribute(AttributeName.FOUNTAINNUMBER);
+			part.removeAttribute(AttributeName.ITEMNAMES);
+			part.removeAttribute(AttributeName.LAYERIDS);
+
+			part.renameAttribute(AttributeName.METADATA0, AttributeName.METADATA);
+			part.removeAttribute(AttributeName.METADATA1);
+			part.removeAttribute(AttributeName.METADATA2);
+			part.removeAttribute(AttributeName.METADATA3);
+			part.removeAttribute(AttributeName.METADATA4);
+			part.removeAttribute(AttributeName.METADATA5);
+			part.removeAttribute(AttributeName.METADATA6);
+			part.removeAttribute(AttributeName.METADATA7);
+			part.removeAttribute(AttributeName.METADATA8);
+			part.removeAttribute(AttributeName.METADATA9);
+
+			part.removeAttribute(AttributeName.PAGETAGS);
+			part.removeAttribute(AttributeName.PLATELAYOUT);
+			part.removeAttribute(AttributeName.PREFLIGHTRULE);
+			part.removeAttribute(AttributeName.RUNPAGE);
+			part.removeAttribute(AttributeName.RUNPAGERANGE);
+			part.removeAttribute(AttributeName.RUNSET);
+			part.removeAttribute(AttributeName.RUNTAGS);
+			part.removeAttribute(AttributeName.SECTIONINDEX);
+			part.removeAttribute(AttributeName.SETCOPIES);
+			part.renameAttribute(AttributeName.SETDOCINDEX, AttributeName.DOCINDEX);
+			part.renameAttribute(AttributeName.SETRUNINDEX, AttributeName.RUNINDEX);
+			part.renameAttribute(AttributeName.SETSHEETINDEX, AttributeName.SHEETINDEX);
+
+			part.removeAttribute(AttributeName.SUBRUN);
+			part.renameAttribute(AttributeName.WEBPRODUCT, AttributeName.PRODUCTPART);
+			part.removeAttribute(AttributeName.WEBSETUP);
+			super.updateAttributes(part);
 		}
 	}
 
@@ -677,17 +727,6 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-		 * @param toCheck
-		 * @return true if it matches
-		 */
-		@Override
-		public boolean matches(final KElement toCheck)
-		{
-			return toCheck instanceof JDFStrippingParams;
-		}
-
-		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
 		 */
 		@Override
@@ -808,7 +847,7 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * 
+		 *
 		 * @param strippingParams
 		 * @param map
 		 * @return
@@ -2373,7 +2412,8 @@ class PostXJDFWalker extends BaseElementWalker
 		public boolean matches(final KElement e)
 		{
 			final String localName = e.getLocalName();
-			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE) || localName.startsWith(ElementName.COMMAND);
+			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE)
+					|| localName.startsWith(ElementName.COMMAND);
 		}
 
 	}
@@ -2459,7 +2499,7 @@ class PostXJDFWalker extends BaseElementWalker
 	@Override
 	public String toString()
 	{
-		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll + ", removeSignatureName="
-				+ removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
+		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll
+				+ ", removeSignatureName=" + removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
 	}
 }

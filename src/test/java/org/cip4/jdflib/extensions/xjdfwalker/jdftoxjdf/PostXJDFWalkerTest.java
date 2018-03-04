@@ -66,6 +66,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDF20;
@@ -153,6 +154,36 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		w.walkTree(h.getRoot(), null);
 		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getResource().getAttribute(AttributeName.COLOR), "Black");
 		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getBrand(), "b1");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSignatureName()
+	{
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
+		final ResourceHelper r = h.appendResourceSet(ElementName.COMPONENT, EnumUsage.Input).appendPartition(null, true);
+		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.SIGNATURENAME, "s1");
+		r.setPartMap(map);
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.walkTree(h.getRoot(), null);
+		assertEquals(new JDFAttributeMap(), r.getPartMap());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testDocRunIndex()
+	{
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
+		final ResourceHelper r = h.appendResourceSet(ElementName.COMPONENT, EnumUsage.Input).appendPartition(null, true);
+		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.DOCRUNINDEX, "3");
+		r.setPartMap(map);
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.walkTree(h.getRoot(), null);
+		assertEquals(new JDFAttributeMap(AttributeName.RUNINDEX, "3"), r.getPartMap());
 	}
 
 	/**

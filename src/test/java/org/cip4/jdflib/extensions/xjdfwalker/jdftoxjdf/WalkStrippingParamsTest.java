@@ -68,56 +68,46 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-/**
- *
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
- */
-public class WalkStrippingParams extends WalkResource
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.junit.Test;
+
+public class WalkStrippingParamsTest extends JDFTestCaseBase
 {
+
 	/**
 	 *
 	 */
-	public WalkStrippingParams()
+	@Test
+	public void testSectionList()
 	{
-		super();
+		final JDFStrippingParams sp = (JDFStrippingParams) new JDFDoc(ElementName.STRIPPINGPARAMS).getRoot();
+		sp.setSectionList(JDFIntegerList.createIntegerList("1"));
+		final WalkStrippingParams wa = new WalkStrippingParams();
+		wa.setParent(new JDFToXJDF());
+		final KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
+		wa.walk(sp, root);
+		final JDFStrippingParams sp2 = (JDFStrippingParams) root.getElement(ElementName.STRIPPINGPARAMS);
+
+		assertNull(sp2.getSectionList());
 	}
 
 	/**
-	 * @param xjdf
-	 * @return true if must continue
+	 *
 	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	@Test
+	public void testGetElementNames()
 	{
-		final KElement e = super.walk(jdf, xjdf);
-		//TODO fix or remove
-		jdf.removeChildren(ElementName.DEVICE, null, null);
-		return e;
+		final JDFStrippingParams sp = (JDFStrippingParams) new JDFDoc(ElementName.STRIPPINGPARAMS).getRoot();
+		final WalkStrippingParams wa = new WalkStrippingParams();
+		assertTrue(wa.getElementNames().contains(sp.getLocalName()));
 	}
 
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return new VString(ElementName.STRIPPINGPARAMS, null);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResource#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
-	 */
-	@Override
-	protected void updateAttributes(final JDFAttributeMap map)
-	{
-		map.remove(AttributeName.SECTIONLIST);
-		super.updateAttributes(map);
-	}
 }
