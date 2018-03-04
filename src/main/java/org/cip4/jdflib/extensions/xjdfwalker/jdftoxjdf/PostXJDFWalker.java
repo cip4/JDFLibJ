@@ -1002,6 +1002,15 @@ class PostXJDFWalker extends BaseElementWalker
 			// add Surface elements
 		}
 
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#matches(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFStrippingParams;
+		}
+
 	}
 
 	/**
