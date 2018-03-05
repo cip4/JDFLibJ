@@ -87,7 +87,7 @@
                 <configuration>
                     <forkCount>2</forkCount>
                     <reuseForks>true</reuseForks>
-                    <argLine>-Xmx2048M -XX:MaxPermSize=512m -Dfile.encoding=UTF-8</argLine>
+                    <argLine>-Xmx4096m -XX:MaxPermSize=512m -Dfile.encoding=UTF-8</argLine>
                 </configuration>
 			</plugin>
 			<plugin>
