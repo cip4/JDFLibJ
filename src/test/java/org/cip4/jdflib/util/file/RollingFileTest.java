@@ -95,17 +95,17 @@ public class RollingFileTest extends JDFTestCaseBase
 	@Test
 	public void testGetNewFileThread()
 	{
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 42; i++)
 		{
 			new Thread(new AddRunner()).start();
 		}
-		for (int i = 0; i < 142; i++)
+		for (int i = 0; i < 62; i++)
 		{
-			if (files.size() == 100)
+			if (files.size() == 42)
 				break;
 			ThreadUtil.sleep(123);
 		}
-		assertEquals(100, files.size(), 1);
+		assertEquals(42, files.size(), 1);
 	}
 
 	/**
