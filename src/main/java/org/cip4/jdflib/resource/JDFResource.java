@@ -7520,7 +7520,7 @@ public class JDFResource extends JDFElement
 	@Override
 	public KElement moveElement(final KElement src, final KElement beforeChild)
 	{
-		if (src != null && src.getNodeName().equals(getNodeName()))
+		if (src != null && src.getNodeName().equals(getNodeName()) && !((JDFResource) src).isResourceElement())
 		{
 			((JDFResource) src).getResourceRoot().partitionMap = null;
 		}
@@ -7541,7 +7541,7 @@ public class JDFResource extends JDFElement
 	@Override
 	public KElement replaceElement(final KElement src)
 	{
-		if (src != null && src.getNodeName().equals(getNodeName()))
+		if (src != null && src.getNodeName().equals(getNodeName()) && !isResourceElement())
 		{
 			getResourceRoot().partitionMap = null;
 		}
@@ -7555,17 +7555,20 @@ public class JDFResource extends JDFElement
 	@Override
 	public KElement deleteNode()
 	{
-		if (isLeaf())
+		if (!isResourceElement())
 		{
-			final PartitionMap m = getResourceRoot().partitionMap;
-			if (m != null)
+			if (isLeaf())
 			{
-				m.remove(getPartMap());
+				final PartitionMap m = getResourceRoot().partitionMap;
+				if (m != null)
+				{
+					m.remove(getPartMap());
+				}
 			}
-		}
-		else
-		{
-			getResourceRoot().partitionMap = null;
+			else
+			{
+				getResourceRoot().partitionMap = null;
+			}
 		}
 		return super.deleteNode();
 	}
@@ -7573,7 +7576,7 @@ public class JDFResource extends JDFElement
 	@Override
 	public KElement mergeElement(final KElement kElem, final boolean bDelete)
 	{
-		if (kElem != null && !((JDFResource) kElem).isLeaf())
+		if (kElem != null && !((JDFResource) kElem).isLeaf() && !isResourceElement())
 		{
 			getResourceRoot().partitionMap = null;
 		}
@@ -7594,7 +7597,7 @@ public class JDFResource extends JDFElement
 
 	void updatePartitionMap(final Node src)
 	{
-		if (src != null && src.getNodeName().equals(getNodeName()))
+		if (src != null && src.getNodeName().equals(getNodeName()) && !isResourceElement())
 		{
 			if (getResourceRoot().partitionMap != null)
 			{
