@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,241 +84,241 @@ import org.junit.Test;
  */
 public class JDFVersionTest extends JDFTestCaseBase
 {
-    boolean canTest;
-    
-    @Test
-    public void testLibArtifactId()
-    {
-        if (!canTest)
-            return;
-        
-        // arrange
-        String expected = "JDFLibJ";
-        
-        // act
-        String actual = JDFVersion.LIB_ARTIFACT_ID;
-        
-        // assert
-        assertEquals("ArtifactID number is wrong.", expected, actual);
-        System.out.println("JDFLibJ ArtifactID: " + actual);
-    }
-    
-    @Test
-    public void testLibName()
-    {
-        if (!canTest)
-            return;
-        
-        // arrange
-        String expected = "CIP4 JDF Writer Java";
-        
-        // act
-        String actual = JDFVersion.LIB_NAME;
-        
-        // assert
-        assertEquals("Name number is wrong.", expected, actual);
-        System.out.println("JDFLibJ Name: " + actual);
-    }
-    
-    @Test
-    public void testLibReleaseDate()
-    {
-        if (!canTest)
-            return;
-        
-        // arrange
-        
-        // act
-        String actual = JDFVersion.LIB_RELEASE_DATE;
-        
-        // assert
-        //assertTrue("ReleaseDate is wrong.", actual.matches("(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2})"));
-        System.out.println("JDFLibJ Release Date: " + actual);
-    }
-    
-    @Test
-    public void testLibVersion()
-    {
-        if (!canTest)
-            return;
-        
-        // arrange
-        
-        // act
-        String actual = JDFVersion.LIB_VERSION;
-        
-        // assert
-        assertFalse("Version is wrong.", StringUtils.isEmpty(actual));
-        System.out.println("JDFLibJ Version: " + actual);
-    }
-    
-    @Test
-    public void testLibMajorVersion()
-    {
-        if (!canTest)
-            return;
-        
-        // arrange
-        
-        // act
-        String actual = JDFVersion.LIB_MAJOR_VERSION;
-        
-        // assert
-        assertFalse("Version is wrong.", StringUtils.isEmpty(actual));
-        assertEquals("Major Version is wrong.", 3, StringUtils.split(actual, ".").length);
-        assertEquals("Major Version is wrong.", 1, StringUtils.split(actual, "-").length);
-        System.out.println("JDFLibJ Major Version: " + actual);
-    }
-    
-    @Test
-    public void testLibMinorVersion()
-    {
-        
-        if (!canTest)
-            return;
-        // arrange
-        
-        // act
-        String actual = JDFVersion.LIB_MINOR_VERSION;
-        
-        // assert
-        assertFalse("Version is wrong.", StringUtils.isEmpty(actual));
-        assertEquals("Major Version is wrong.", 1, StringUtils.split(actual, ".").length);
-        assertEquals("Major Version is wrong.", 1, StringUtils.split(actual, "-").length);
-        System.out.println("JDFLibJ Major Version: " + actual);
-    }
-    
-    @Test
-    public void testJdfVersion()
-    {
-        if (!canTest)
-            return;
-        // arrange
-        String expected = "1.5";
-        
-        // act
-        String actual = JDFVersion.JDF_VERSION;
-        
-        // assert
-        assertEquals("JDF Version number is wrong.", expected, actual);
-        System.out.println("JDF Version: " + actual);
-    }
-    
-    @Test
-    public void testJdfVersion_LibVersion()
-    {
-        if (!canTest)
-            return;
-        
-        // arrange
-        String jdfVersion = JDFVersion.JDF_VERSION;
-        String libVersion = JDFVersion.LIB_VERSION;
-        
-        // act
-        int i = libVersion.indexOf(".") + 1;
-        int n = libVersion.lastIndexOf(".");
-        
-        String extractedVersion = libVersion.substring(i, n);
-        
-        // assert
-        assertEquals("JDF Version doesn't match the Lib Version.", jdfVersion, extractedVersion);
-        System.out.println(String.format("JDF Version: %s - Lib Version: %s (OK)", jdfVersion, libVersion));
-    }
-    
-    @Test
-    public void testMinorVersion_1() throws Exception
-    {
-        if (!canTest)
-            return;
-        
-        // arrange
-        Method method = JDFVersion.class.getDeclaredMethod("getMinorVersion", String.class);
-        method.setAccessible(true);
-        
-        String version = "2.1.4a.69";
-        String expected = "69";
-        
-        // act
-        String actual = (String) method.invoke(null, version);
-        
-        // assert
-        assertEquals("Minor Version is wrong.", expected, actual);
-    }
-    
-    @Test
-    public void testMinorVersion_2() throws Exception
-    {
-        if (!canTest)
-            return;
-        
-        // arrange
-        Method method = JDFVersion.class.getDeclaredMethod("getMinorVersion", String.class);
-        method.setAccessible(true);
-        
-        String version = "2.1.5.80-SNAPSHOT";
-        String expected = "80";
-        
-        // act
-        String actual = (String) method.invoke(null, version);
-        
-        // assert
-        assertEquals("Minor Version is wrong.", expected, actual);
-    }
-    
-    @Test
-    public void testMajorVersion_1() throws Exception
-    {
-        if (!canTest)
-            return;
-        
-        // arrange
-        Method method = JDFVersion.class.getDeclaredMethod("getMajorVersion", String.class);
-        method.setAccessible(true);
-        
-        String version = "2.1.4a.69";
-        String expected = "2.1.4a";
-        
-        // act
-        String actual = (String) method.invoke(null, version);
-        
-        // assert
-        assertEquals("Major Version is wrong.", expected, actual);
-    }
-    
-    @Test
-    public void testMajorVersion_2() throws Exception
-    {
-        if (!canTest)
-            return;
-        
-        // arrange
-        Method method = JDFVersion.class.getDeclaredMethod("getMajorVersion", String.class);
-        method.setAccessible(true);
-        
-        String version = "2.1.5.80-SNAPSHOT";
-        String expected = "2.1.5";
-        
-        // act
-        String actual = (String) method.invoke(null, version);
-        
-        // assert
-        assertEquals("Major Version is wrong.", expected, actual);
-    }
-    
-    /**
-     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
-     */
-    @Override
-    public void setUp() throws Exception
-    {
-        try
-        {
-            canTest = JDFVersion.JDF_VERSION != null;
-        }
-        catch (Throwable t)
-        {
-            canTest = false;
-        }
-        super.setUp();
-    }
+	boolean canTest;
+
+	@Test
+	public void testLibArtifactId()
+	{
+		if (!canTest)
+			return;
+
+		// arrange
+		final String expected = "JDFLibJ";
+
+		// act
+		final String actual = JDFVersion.LIB_ARTIFACT_ID;
+
+		// assert
+		assertEquals("ArtifactID number is wrong.", expected, actual);
+		System.out.println("JDFLibJ ArtifactID: " + actual);
+	}
+
+	@Test
+	public void testLibName()
+	{
+		if (!canTest)
+			return;
+
+		// arrange
+		final String expected = "CIP4 JDF Writer Java";
+
+		// act
+		final String actual = JDFVersion.LIB_NAME;
+
+		// assert
+		assertEquals("Name number is wrong.", expected, actual);
+		System.out.println("JDFLibJ Name: " + actual);
+	}
+
+	@Test
+	public void testLibReleaseDate()
+	{
+		if (!canTest)
+			return;
+
+		// arrange
+
+		// act
+		final String actual = JDFVersion.LIB_RELEASE_DATE;
+
+		// assert
+		//assertTrue("ReleaseDate is wrong.", actual.matches("(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2})"));
+		System.out.println("JDFLibJ Release Date: " + actual);
+	}
+
+	@Test
+	public void testLibVersion()
+	{
+		if (!canTest)
+			return;
+
+		// arrange
+
+		// act
+		final String actual = JDFVersion.LIB_VERSION;
+
+		// assert
+		assertFalse("Version is wrong.", StringUtils.isEmpty(actual));
+		System.out.println("JDFLibJ Version: " + actual);
+	}
+
+	@Test
+	public void testLibMajorVersion()
+	{
+		if (!canTest)
+			return;
+
+		// arrange
+
+		// act
+		final String actual = JDFVersion.LIB_MAJOR_VERSION;
+
+		// assert
+		assertFalse("Version is wrong.", StringUtils.isEmpty(actual));
+		assertEquals("Major Version is wrong.", 3, StringUtils.split(actual, ".").length);
+		assertEquals("Major Version is wrong.", 1, StringUtils.split(actual, "-").length);
+		System.out.println("JDFLibJ Major Version: " + actual);
+	}
+
+	@Test
+	public void testLibMinorVersion()
+	{
+
+		if (!canTest)
+			return;
+		// arrange
+
+		// act
+		final String actual = JDFVersion.LIB_MINOR_VERSION;
+
+		// assert
+		assertFalse("Version is wrong.", StringUtils.isEmpty(actual));
+		assertEquals("Major Version is wrong.", 1, StringUtils.split(actual, ".").length);
+		assertEquals("Major Version is wrong.", 1, StringUtils.split(actual, "-").length);
+		System.out.println("JDFLibJ Major Version: " + actual);
+	}
+
+	@Test
+	public void testJdfVersion()
+	{
+		if (!canTest)
+			return;
+		// arrange
+		final String expected = "1.6";
+
+		// act
+		final String actual = JDFVersion.JDF_VERSION;
+
+		// assert
+		assertEquals("JDF Version number is wrong.", expected, actual);
+		System.out.println("JDF Version: " + actual);
+	}
+
+	@Test
+	public void testJdfVersion_LibVersion()
+	{
+		if (!canTest)
+			return;
+
+		// arrange
+		final String jdfVersion = JDFVersion.JDF_VERSION;
+		final String libVersion = JDFVersion.LIB_VERSION;
+
+		// act
+		final int i = libVersion.indexOf(".") + 1;
+		final int n = libVersion.lastIndexOf(".");
+
+		final String extractedVersion = libVersion.substring(i, n);
+
+		// assert
+		assertEquals("JDF Version doesn't match the Lib Version.", jdfVersion, extractedVersion);
+		System.out.println(String.format("JDF Version: %s - Lib Version: %s (OK)", jdfVersion, libVersion));
+	}
+
+	@Test
+	public void testMinorVersion_1() throws Exception
+	{
+		if (!canTest)
+			return;
+
+		// arrange
+		final Method method = JDFVersion.class.getDeclaredMethod("getMinorVersion", String.class);
+		method.setAccessible(true);
+
+		final String version = "2.1.4a.69";
+		final String expected = "69";
+
+		// act
+		final String actual = (String) method.invoke(null, version);
+
+		// assert
+		assertEquals("Minor Version is wrong.", expected, actual);
+	}
+
+	@Test
+	public void testMinorVersion_2() throws Exception
+	{
+		if (!canTest)
+			return;
+
+		// arrange
+		final Method method = JDFVersion.class.getDeclaredMethod("getMinorVersion", String.class);
+		method.setAccessible(true);
+
+		final String version = "2.1.5.80-SNAPSHOT";
+		final String expected = "80";
+
+		// act
+		final String actual = (String) method.invoke(null, version);
+
+		// assert
+		assertEquals("Minor Version is wrong.", expected, actual);
+	}
+
+	@Test
+	public void testMajorVersion_1() throws Exception
+	{
+		if (!canTest)
+			return;
+
+		// arrange
+		final Method method = JDFVersion.class.getDeclaredMethod("getMajorVersion", String.class);
+		method.setAccessible(true);
+
+		final String version = "2.1.4a.69";
+		final String expected = "2.1.4a";
+
+		// act
+		final String actual = (String) method.invoke(null, version);
+
+		// assert
+		assertEquals("Major Version is wrong.", expected, actual);
+	}
+
+	@Test
+	public void testMajorVersion_2() throws Exception
+	{
+		if (!canTest)
+			return;
+
+		// arrange
+		final Method method = JDFVersion.class.getDeclaredMethod("getMajorVersion", String.class);
+		method.setAccessible(true);
+
+		final String version = "2.1.5.80-SNAPSHOT";
+		final String expected = "2.1.5";
+
+		// act
+		final String actual = (String) method.invoke(null, version);
+
+		// assert
+		assertEquals("Major Version is wrong.", expected, actual);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	public void setUp() throws Exception
+	{
+		try
+		{
+			canTest = JDFVersion.JDF_VERSION != null;
+		}
+		catch (final Throwable t)
+		{
+			canTest = false;
+		}
+		super.setUp();
+	}
 }
