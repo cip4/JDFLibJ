@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1996,7 +1996,7 @@ public class UrlUtil
 		}
 		final File localFile = fileName == null ? null : new File(fileName);
 		File out = FileUtil.getFileInDirectory(dir, localFile);
-		if (out.exists())
+		if (out != null && out.exists())
 		{
 			if (overWrite)
 			{

@@ -205,6 +205,30 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testMultiComponent()
+	{
+		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j", "p", null);
+		h.setTypes(EnumType.ConventionalPrinting.getName());
+		final SetHelper cIn = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
+		cIn.appendPartition(AttributeName.SHEETNAME, "S", true);
+
+		final ProductHelper p = h.getCreateRootProduct(0);
+		p.setAmount(400);
+		p.setAttribute(AttributeName.DESCRIPTIVENAME, "desc");
+		p.appendIntent(ElementName.LAYOUTINTENT).getResource().setAttribute(AttributeName.NPAGE, "4");
+		final JDFDoc docjdf = conv.convert(h);
+
+		final JDFNode n = docjdf.getJDFRoot();
+		assertNotNull(n.getResource(ElementName.COMPONENT, EnumUsage.Output, null, 0));
+		assertNull(n.getResource(ElementName.COMPONENT, EnumUsage.Output, null, 1));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testInputStatus()
 	{
 		for (int i = 0; i < 3; i++)
@@ -343,8 +367,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFColorantControl cc = (JDFColorantControl) h.getCreateSet(XJDFConstants.Resource, ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true).getResource();
 		cc.setAttribute(ElementName.COLORANTPARAMS, "Sep_1");
 		cc.setAttribute(ElementName.COLORANTORDER, "Sep_1");
-		h.getCreateSet(XJDFConstants.Resource, ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME,
-				"Sep 1");
+		h.getCreateSet(XJDFConstants.Resource, ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME, "Sep 1");
 
 		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
 		final JDFDoc docjdf = conv.convert(h);
@@ -429,8 +452,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final KElement c = e.appendElement(SetHelper.RESOURCE_SET);
 		c.setAttribute("Name", "Layout");
 		c.setAttribute("Usage", "Input");
-		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL",
-				"file://foo.xml");
+		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL", "file://foo.xml");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		final JDFNode root = d.getJDFRoot();

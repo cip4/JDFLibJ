@@ -204,32 +204,12 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 					return e;
 				}
 			}
-			if (UrlUtil.isFile(url))
+			final boolean fileOK = checkFile(url);
+			if (!fileOK)
 			{
-				final File f = UrlUtil.urlToFile(url);
-				if (f != null)
-				{
-					if (!f.exists())
-					{
-						final File parentDir = f.getParentFile();
-						if (parentDir != null && !parentDir.exists())
-						{
-							log.warn("No such parent directory: " + parentDir);
-						}
-						else if (parentDir != null && !parentDir.canRead())
-						{
-							log.warn("Cannot read parent directory: " + parentDir);
-						}
-						log.warn("No such file: " + f);
-						return null;
-					}
-					if (!f.canRead())
-					{
-						log.warn("Cannot read file: " + f);
-						return null;
-					}
-				}
+				return null;
 			}
+
 			final boolean bOverwrite = !saved.contains(url);
 			File newFile = UrlUtil.moveToDir(urlSetter, dir, currentURL, bOverwrite, deleteFile);
 			for (int i = 1; i < 4; i++)
@@ -262,6 +242,42 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 			}
 			saved.add(url);
 			return e; // continue
+		}
+
+		private boolean checkFile(final String url)
+		{
+			if (!UrlUtil.isFile(url))
+			{
+				return true;
+			}
+			final File f = UrlUtil.urlToFile(url);
+			if (f != null)
+			{
+				if (!f.exists())
+				{
+					final File parentDir = f.getParentFile();
+					if (parentDir != null && !parentDir.exists())
+					{
+						log.warn("No such parent directory: " + parentDir);
+					}
+					else if (parentDir != null && !parentDir.canRead())
+					{
+						log.warn("Cannot read parent directory: " + parentDir);
+					}
+					log.warn("No such file: " + f);
+					return false;
+				}
+				if (!f.canRead())
+				{
+					log.warn("Cannot read file: " + f);
+					return false;
+				}
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		/**
