@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -223,8 +223,8 @@ public class JDFParserTest extends JDFTestCaseBase
 	public void testParseStringJDF()
 	{
 		final JDFParser parser = new JDFParser();
-		JDFDoc d = parser.parseString("<JDF/>");
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = parser.parseString("<JDF/>");
+		final JDFNode n = d.getJDFRoot();
 		assertEquals(n.getNamespaceURI(), JDFConstants.JDFNAMESPACE);
 		JDFAuditPool ap = n.getAuditPool();
 		assertNull(ap);
@@ -255,8 +255,8 @@ public class JDFParserTest extends JDFTestCaseBase
 	public void testParseStringJDFWrongNS()
 	{
 		final JDFParser parser = new JDFParser();
-		JDFDoc d = parser.parseString("<JDF xmlns=\"www.cip4.org\"/>");
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = parser.parseString("<JDF xmlns=\"www.cip4.org\"/>");
+		final JDFNode n = d.getJDFRoot();
 		assertEquals(n.getNamespaceURI(), JDFConstants.JDFNAMESPACE);
 		JDFAuditPool ap = n.getAuditPool();
 		assertNull(ap);
@@ -296,8 +296,8 @@ public class JDFParserTest extends JDFTestCaseBase
 	@Test
 	public void testMyDocClass()
 	{
-		MyParser p = new MyParser();
-		JDFDoc doc = p.parseString("<JMF/>");
+		final MyParser p = new MyParser();
+		final JDFDoc doc = p.parseString("<JMF/>");
 		assertEquals(doc.getRoot().getLocalName(), "JMF");
 		new JDFDoc(doc.getMemberDocument());
 	}
@@ -327,7 +327,7 @@ public class JDFParserTest extends JDFTestCaseBase
 			p.parseString(s);
 		}
 		log.info("mem reuse:   " + getCurrentMem() + " " + mem);
-		assertTrue(getCurrentMem() - mem < 2000000);
+		assertTrue(getCurrentMem() - mem < 4200000);
 		log.info("reuse: " + (System.nanoTime() - l1) / 1000000);
 	}
 
@@ -357,8 +357,8 @@ public class JDFParserTest extends JDFTestCaseBase
 	@Test
 	public void testInit()
 	{
-		JDFDoc d = new JDFParser().parseString(new JDFDoc("JDF").write2String(2));
-		JDFCreated c = d.getJDFRoot().getCreateAuditPool().addCreated(null, null);
+		final JDFDoc d = new JDFParser().parseString(new JDFDoc("JDF").write2String(2));
+		final JDFCreated c = d.getJDFRoot().getCreateAuditPool().addCreated(null, null);
 		assertTrue(c.getID().length() > 2);
 	}
 
@@ -373,7 +373,7 @@ public class JDFParserTest extends JDFTestCaseBase
 		final File[] dirs = FileUtil.listFilesWithExpression(foo, "*Version_1*");
 		assertTrue(dirs.length > 0);
 		int nCheck = 0;
-		for (File dir2 : dirs)
+		for (final File dir2 : dirs)
 		{
 			final File dir = dir2;
 			if (!dir.isDirectory())
