@@ -73,6 +73,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.JDFStrippingParams;
 
 /**
  *
@@ -119,5 +120,14 @@ public class WalkStrippingParams extends WalkResource
 	{
 		map.remove(AttributeName.SECTIONLIST);
 		super.updateAttributes(map);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResource#matches(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public boolean matches(final KElement toCheck)
+	{
+		return toCheck instanceof JDFStrippingParams;
 	}
 }
