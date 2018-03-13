@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  *
@@ -96,9 +96,9 @@ import org.cip4.jdflib.ifaces.IMatches;
 /**
  * class with utilities for containers, e.g. Vectors, sets etc. <br/>
  * also simple object utilities
- * 
+ *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * before June 18, 2009
  */
 public class ContainerUtil
@@ -128,13 +128,25 @@ public class ContainerUtil
 	/**
 	 * return null if c==null or c.isEmpty=true
 	 * used to zapp empty collections
-	 * 
+	 *
 	 * @param c the Collection to test
 	 * @return the converted Collecion
 	 */
 	public static Collection<?> getNonEmpty(final Collection<?> c)
 	{
 		return c == null || c.isEmpty() ? null : c;
+	}
+
+	/**
+	 * return null if c==null or c.isEmpty=true or c contains an empty collection
+	 * used to zapp empty collections
+	 *
+	 * @param c the Collection to test
+	 * @return the converted Collecion
+	 */
+	public static Collection<?> getNonEmptyCollection(final Collection<? extends Collection<?>> c)
+	{
+		return c == null || c.isEmpty() || (c.size() == 1 && getNonEmpty(c.iterator().next()) == null) ? null : c;
 	}
 
 	/**
@@ -149,7 +161,7 @@ public class ContainerUtil
 		{
 			return null;
 		}
-		int size = list.size();
+		final int size = list.size();
 		final HashSet<a> s = new HashSet<a>(size + 10);
 
 		for (int i = 0; i < size; i++)
@@ -172,9 +184,9 @@ public class ContainerUtil
 			return null;
 		}
 		final Set<a> s = new HashSet<a>(l.length + 10);
-		for (int i = 0; i < l.length; i++)
+		for (final a element : l)
 		{
-			s.add(l[i]);
+			s.add(element);
 		}
 		return s;
 	}
@@ -193,22 +205,22 @@ public class ContainerUtil
 		}
 		final Vector<a> v = new Vector<a>();
 		v.ensureCapacity(array.length);
-		for (int i = 0; i < array.length; i++)
+		for (final a element : array)
 		{
-			if (array[i] != null)
-				v.add(array[i]);
+			if (element != null)
+				v.add(element);
 		}
 		return v;
 	}
 
 	/**
 	 * null safe addAll
-	 * 
+	 *
 	 * @param c1 first collection
 	 * @param c2 second collection
 	 * @param <a> type
 	 * @return c1 with c2 added, c2 if c1==null
-	 * 
+	 *
 	 */
 	public static <a> Collection<a> addAll(final Collection<a> c1, final Collection<a> c2)
 	{
@@ -226,7 +238,7 @@ public class ContainerUtil
 
 	/**
 	 * return a matching element from a collection of IMatches
-	 * 
+	 *
 	 * @param <a> the data type
 	 * @param c the collection to search
 	 * @param obj the search key for matches
@@ -257,7 +269,7 @@ public class ContainerUtil
 			return v.get(iSkip);
 		}
 
-		for (IMatches m : c)
+		for (final IMatches m : c)
 		{
 			if (m.matches(obj) && iSkip-- <= 0)
 			{
@@ -270,14 +282,14 @@ public class ContainerUtil
 
 	/**
 	 * return a matching element from a collection of IMatches
-	 * 
+	 *
 	 * @param <a> the data type
 	 * @param match the matcher
 	 * @param c the {@link Collection}
 	 * @param iSkip which one to grab, may be negative in which case we count -1=last, -2=second last...
 	 * @return the matching <a>
 	 */
-	public static <a> a getMatch(IMatches match, final Collection<a> c, int iSkip)
+	public static <a> a getMatch(final IMatches match, final Collection<a> c, int iSkip)
 	{
 		if (c == null)
 		{
@@ -301,7 +313,7 @@ public class ContainerUtil
 			return v.get(iSkip);
 		}
 
-		for (a b : c)
+		for (final a b : c)
 		{
 			if (match.matches(b) && iSkip-- <= 0)
 			{
@@ -326,7 +338,7 @@ public class ContainerUtil
 			return null;
 		}
 		final Vector<IMatches> v = new Vector<IMatches>();
-		for (IMatches m : c)
+		for (final IMatches m : c)
 		{
 			if (m.matches(obj))
 			{
@@ -337,21 +349,21 @@ public class ContainerUtil
 	}
 
 	/**
-	 * return a matching element from a collection 
-	 * 
+	 * return a matching element from a collection
+	 *
 	 * @param <a> the data type
 	 * @param c the collection to search
 	 * @param obj the matches
 	 * @return Vector of matching a
 	 */
-	public static <a> Vector<a> getMatches(IMatches m, final Collection<a> c)
+	public static <a> Vector<a> getMatches(final IMatches m, final Collection<a> c)
 	{
 		if (c == null)
 		{
 			return null;
 		}
 		final Vector<a> v = new Vector<a>();
-		for (a b : c)
+		for (final a b : c)
 		{
 			if (m.matches(b))
 			{
@@ -429,7 +441,7 @@ public class ContainerUtil
 
 		synchronized (m)
 		{
-			Vector<b> v = new Vector<b>();
+			final Vector<b> v = new Vector<b>();
 			final Collection<b> values = m.values();
 			if (values.size() == 0)
 			{
@@ -457,15 +469,15 @@ public class ContainerUtil
 
 		synchronized (m)
 		{
-			VectorMap<b, a> inv = new VectorMap<b, a>();
+			final VectorMap<b, a> inv = new VectorMap<b, a>();
 			final Collection<a> keys = m.keySet();
 			if (keys.size() == 0)
 			{
 				return null;
 			}
-			for (a key : keys)
+			for (final a key : keys)
 			{
-				b val = m.get(key);
+				final b val = m.get(key);
 				if (val != null)
 				{
 					inv.putOne(val, key);
@@ -640,7 +652,7 @@ public class ContainerUtil
 
 		for (final a el : c)
 		{
-			Vector<IMatches> mm = getMatches(vect, el);
+			final Vector<IMatches> mm = getMatches(vect, el);
 			if (mm == null)
 			{
 				vect.add(el);
@@ -648,10 +660,10 @@ public class ContainerUtil
 		}
 		if (vect.size() < c.size())
 		{
-			Vector<a> v2 = new Vector<a>();
+			final Vector<a> v2 = new Vector<a>();
 			for (int i = vect.size() - 1; i >= 0; i--)
 			{
-				Vector<IMatches> mm = getMatches(v2, vect.get(i));
+				final Vector<IMatches> mm = getMatches(v2, vect.get(i));
 				if (mm == null)
 				{
 					v2.add(vect.get(i));

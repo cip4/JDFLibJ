@@ -89,8 +89,6 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 */
 	private static final long serialVersionUID = 1L;
 
-	// **************************************** Constructors
-	// ****************************************
 	/**
 	 * constructor
 	 */
@@ -155,6 +153,16 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	public String toString()
 	{
 		return "VJDFAttributeMap: " + showKeys("\n", " ");
+	}
+
+	public static VJDFAttributeMap getNonEmpty(final VJDFAttributeMap v)
+	{
+		return isEmpty(v) ? null : v;
+	}
+
+	public static boolean isEmpty(final VJDFAttributeMap v)
+	{
+		return v == null || v.isEmpty() || v.size() == 1 && v.get(0).isEmpty();
 	}
 
 	/**
@@ -222,7 +230,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * replace all maps in this with n maps that have the values strKey, vsValues
-	 * 
+	 *
 	 * @param strKey
 	 *            the new key to add
 	 * @param vsValues
@@ -687,7 +695,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 *
 	 * deprecated legacy support
-	 * 
+	 *
 	 * @param v
 	 * @deprecated use addAll
 	 */
@@ -1013,7 +1021,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * remove all matching maps from this i.e. if map is subMap of this
-	 * 
+	 *
 	 * @param map
 	 */
 	public void removeMaps(final JDFAttributeMap map)
@@ -1034,7 +1042,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * put the value of all keys into every existing map
-	 * 
+	 *
 	 * @param commonMap
 	 */
 	public void put(final JDFAttributeMap commonMap)

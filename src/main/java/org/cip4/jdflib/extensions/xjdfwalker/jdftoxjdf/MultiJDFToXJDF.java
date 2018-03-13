@@ -164,6 +164,19 @@ class MultiJDFToXJDF
 			vRet.add(xjdfHelper);
 		}
 		this.jdfToXJDF.wantProduct = false;
+		for (int i = 0; i < v.size(); i++)
+		{
+			for (int j = 0; j < i; j++)
+			{
+				final JDFNode ni = (JDFNode) v.get(i);
+				final JDFNode nj = (JDFNode) v.get(j);
+				if (nj.getPredecessors(true, false).contains(ni))
+				{
+					v.remove(ni);
+					v.insertElementAt(ni, j);
+				}
+			}
+		}
 		for (final KElement n : v)
 		{
 			final XJDFHelper xjdfHelper = convertSingle(n);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -168,7 +168,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		@Override
 		public boolean matches(final Object subset)
 		{
-			FilterMatch f = (FilterMatch) subset;
+			final FilterMatch f = (FilterMatch) subset;
 			return f.s.startsWith(s);
 		}
 
@@ -193,9 +193,9 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	@Test
 	public void testMatches()
 	{
-		JDFCostCenter cs = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
+		final JDFCostCenter cs = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
 		cs.setCostCenterID("CS");
-		JDFCostCenter cs2 = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
+		final JDFCostCenter cs2 = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
 		cs2.setCostCenterID("CS");
 		assertTrue(ContainerUtil.matches(cs, cs2));
 		assertTrue(ContainerUtil.matches(cs, "CS"));
@@ -213,9 +213,9 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	@Test
 	public void testMatchesExisting()
 	{
-		JDFCostCenter cs = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
+		final JDFCostCenter cs = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
 		cs.setCostCenterID("CS");
-		JDFCostCenter cs2 = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
+		final JDFCostCenter cs2 = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
 		cs2.setCostCenterID("CS");
 		assertTrue(ContainerUtil.matchesExisting(cs, cs2));
 		assertTrue(ContainerUtil.matchesExisting(cs, "CS"));
@@ -233,13 +233,13 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	@Test
 	public void testUnifyMatches()
 	{
-		JDFCostCenter cs = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
+		final JDFCostCenter cs = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
 		cs.setCostCenterID("CS");
-		JDFCostCenter cs2 = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
+		final JDFCostCenter cs2 = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
 		cs2.setCostCenterID("CS2");
-		JDFCostCenter cs3 = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
+		final JDFCostCenter cs3 = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
 		cs2.setCostCenterID("CS");
-		Vector<JDFCostCenter> vcs = new Vector<JDFCostCenter>();
+		final Vector<JDFCostCenter> vcs = new Vector<JDFCostCenter>();
 		vcs.add(cs);
 		vcs.add(cs2);
 		vcs.add(cs3);
@@ -252,9 +252,9 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	@Test
 	public void testUnifyFilterMatches()
 	{
-		FilterMatch ma = new FilterMatch("a");
-		FilterMatch mb = new FilterMatch("b");
-		Vector<FilterMatch> vcs = new Vector<FilterMatch>();
+		final FilterMatch ma = new FilterMatch("a");
+		final FilterMatch mb = new FilterMatch("b");
+		final Vector<FilterMatch> vcs = new Vector<FilterMatch>();
 		vcs.add(mb);
 		for (int i = 0; i < 20; i++)
 		{
@@ -418,6 +418,22 @@ public class ContainerUtilTest extends JDFTestCaseBase
 
 		v.add("a");
 		assertEquals(v, ContainerUtil.getNonEmpty(v));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetNonEmptyCollection()
+	{
+		final Vector<VString> v = new Vector<VString>();
+		assertNull(ContainerUtil.getNonEmptyCollection(v));
+		assertNull(ContainerUtil.getNonEmptyCollection(null));
+
+		v.add(new VString());
+		assertNull(ContainerUtil.getNonEmptyCollection(v));
+		v.add(new VString());
+		assertEquals(v, ContainerUtil.getNonEmptyCollection(v));
 	}
 
 	/**

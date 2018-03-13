@@ -539,6 +539,36 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * tests maxSize method
+	 */
+	@Test
+	public void testIsEmpty()
+	{
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		assertTrue(VJDFAttributeMap.isEmpty(v));
+		assertTrue(VJDFAttributeMap.isEmpty(null));
+		v.add(new JDFAttributeMap());
+		assertTrue(VJDFAttributeMap.isEmpty(v));
+		v.add(new JDFAttributeMap());
+		assertFalse(VJDFAttributeMap.isEmpty(v));
+	}
+
+	/**
+	 * tests maxSize method
+	 */
+	@Test
+	public void testGetNonEmpty()
+	{
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		assertNull(VJDFAttributeMap.getNonEmpty(v));
+		assertNull(VJDFAttributeMap.getNonEmpty(null));
+		v.add(new JDFAttributeMap());
+		assertNull(VJDFAttributeMap.getNonEmpty(v));
+		v.add(new JDFAttributeMap());
+		assertEquals(v, VJDFAttributeMap.getNonEmpty(v));
+	}
+
+	/**
 	 *
 	 */
 	@Test

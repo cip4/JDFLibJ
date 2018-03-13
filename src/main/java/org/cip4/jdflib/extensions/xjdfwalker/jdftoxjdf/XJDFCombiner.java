@@ -2,23 +2,34 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import java.util.Vector;
 
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.util.ContainerUtil;
 
 class XJDFCombiner
 {
 
 	private final XJDFHelper mainHelper;
+	private final XJDFHelper h;
 	int typeIndex[];
 
-	XJDFCombiner(final XJDFHelper helper)
+	/**
+	 *
+	 * @param mainHelper
+	 * @param helper
+	 */
+	XJDFCombiner(final XJDFHelper mainHelper, final XJDFHelper helper)
 	{
 		super();
-		mainHelper = helper;
+		this.mainHelper = mainHelper;
+		this.h = helper;
 		typeIndex = null;
 	}
 
@@ -28,12 +39,12 @@ class XJDFCombiner
 	@Override
 	public String toString()
 	{
-		return "XJDFCombiner [" + (mainHelper != null ? "mainHelper=" + mainHelper : "") + "]";
+		return "XJDFCombiner [" + (mainHelper != null ? "mainHelper=" + mainHelper : "") + (h != null ? "h=" + h : "") + "]";
 	}
 
-	public void combine(final XJDFHelper h)
+	public void combine()
 	{
-		typeIndex = combineTypes(h);
+		typeIndex = combineTypes();
 		if (typeIndex != null)
 		{
 			final Vector<SetHelper> v = h.getSets();
@@ -48,26 +59,60 @@ class XJDFCombiner
 
 	}
 
-	private void combineSet(final SetHelper s)
+	/**
+	 *
+	 * @param s
+	 */
+	void combineSet(final SetHelper s)
 	{
-		final SetHelper mainSet = mainHelper.getSet(s.getID());
+		SetHelper mainSet = getMainSet(s);
 		if (mainSet == null)
 		{
-			copySet(s);
+			mainSet = copySet(s);
 		}
-		else
-		{
-			mergeSet(mainSet, s);
-		}
+		mergeSet(mainSet, s);
 
 	}
 
-	private void mergeSet(final SetHelper mainSet, final SetHelper s)
+	/**
+	 *
+	 * @param s
+	 * @return
+	 */
+	SetHelper getMainSet(final SetHelper s)
+	{
+		SetHelper set = mainHelper.getSet(s.getID());
+		if (set == null)
+		{
+			JDFIntegerList cpi = s.getCombinedProcessIndex();
+			if (ContainerUtil.getNonEmpty(cpi) == null)
+			{
+				cpi = new JDFIntegerList(typeIndex);
+			}
+			else
+			{
+				final JDFIntegerList il = new JDFIntegerList();
+				for (int i = 0; i < cpi.size(); i++)
+				{
+					final int pos = cpi.getInt(i);
+					if (pos >= 0 && pos < typeIndex.length)
+					{
+						il.add(typeIndex[pos]);
+					}
+				}
+				cpi = il;
+			}
+			set = mainHelper.getSet(s.getName(), s.getUsage(), s.getProcessUsage(), cpi);
+		}
+		return set;
+	}
+
+	void mergeSet(final SetHelper mainSet, final SetHelper s)
 	{
 		final Vector<ResourceHelper> v = s.getPartitions();
 		for (final ResourceHelper r : v)
 		{
-			final ResourceHelper partition = mainSet.getPartition(r.getPartMapVector());
+			final ResourceHelper partition = mainSet.getPartition(getPartitions(r));
 			if (partition != null)
 			{
 				partition.getRoot().setAttributes(r.getRoot());
@@ -79,13 +124,36 @@ class XJDFCombiner
 			}
 			else
 			{
-				mainSet.copyHelper(r);
+				new ResourceHelper(mainSet.copyHelper(r)).setPartMapVector(getPartitions(r));
 			}
 		}
 
 	}
 
-	void copySet(final SetHelper s)
+	/**
+	 *
+	 * @param r
+	 * @return
+	 */
+	VJDFAttributeMap getPartitions(final ResourceHelper r)
+	{
+		VJDFAttributeMap partMapVector = r.getPartMapVector();
+		if (VJDFAttributeMap.isEmpty(partMapVector))
+		{
+			partMapVector = h.getPartMapVector();
+			if (VJDFAttributeMap.isEmpty(partMapVector))
+			{
+				final SetHelper component = h.getSet(ElementName.COMPONENT, EnumUsage.Output);
+				if (component != null)
+				{
+					partMapVector = component.getPartMapVector();
+				}
+			}
+		}
+		return partMapVector;
+	}
+
+	SetHelper copySet(final SetHelper s)
 	{
 		final SetHelper copied = new SetHelper(mainHelper.copyHelper(s));
 		if (typeIndex != null)
@@ -93,6 +161,8 @@ class XJDFCombiner
 			final JDFIntegerList cpi = getMainCPI(copied);
 			copied.setCombinedProcessIndex(cpi);
 		}
+		copied.removePartitions();
+		return copied;
 	}
 
 	protected JDFIntegerList getMainCPI(final SetHelper copied)
@@ -116,7 +186,7 @@ class XJDFCombiner
 		return cpi;
 	}
 
-	int[] combineTypes(final XJDFHelper h)
+	int[] combineTypes()
 	{
 		final VString types = h.getTypes();
 		final VString oldTypes = mainHelper.getTypes();

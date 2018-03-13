@@ -284,6 +284,7 @@ class PostXJDFWalker extends BaseElementWalker
 			part.removeAttribute(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX);
 			part.removeAttribute(AttributeName.BUNDLEITEMINDEX);
 			part.removeAttribute(AttributeName.CELLINDEX);
+			part.removeAttribute(AttributeName.CONDITION);
 			part.removeAttribute(AttributeName.DOCCOPIES);
 			part.renameAttribute(AttributeName.DOCRUNINDEX, AttributeName.RUNINDEX);
 			part.renameAttribute(AttributeName.DOCSHEETINDEX, AttributeName.SHEETINDEX);

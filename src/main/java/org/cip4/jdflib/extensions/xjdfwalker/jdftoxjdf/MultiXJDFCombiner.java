@@ -94,6 +94,10 @@ class MultiXJDFCombiner
 		helper = helpers.remove(0).clone();
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	XJDFHelper getCombinedHelper()
 	{
 		for (final XJDFHelper h : helpers)
@@ -104,9 +108,13 @@ class MultiXJDFCombiner
 		return helper;
 	}
 
+	/**
+	 *
+	 * @param h
+	 */
 	private void mergeHelper(final XJDFHelper h)
 	{
-		new XJDFCombiner(helper).combine(h);
+		new XJDFCombiner(helper, h).combine();
 	}
 
 	/**

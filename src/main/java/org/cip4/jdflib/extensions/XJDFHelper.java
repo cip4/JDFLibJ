@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.xjdfwalker.IDRemover;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -533,12 +534,24 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public SetHelper getSet(final String name, final EnumUsage usage, final String processUsage)
 	{
+		return getSet(name, usage, processUsage, null);
+	}
+
+	/**
+	 * @param name
+	 * @param usage
+	 * @param processUsage
+	 *
+	 * @return the SetHelper for the vector of resourcesets
+	 */
+	public SetHelper getSet(final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi)
+	{
 		KElement e = theElement.getFirstChildElement();
 		final String usageString = usage == null ? null : usage.getName();
 		while (e != null)
 		{
 			if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))) && StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE))
-					&& StringUtil.equals(processUsage, e.getNonEmpty(AttributeName.PROCESSUSAGE)))
+					&& StringUtil.equals(processUsage, e.getNonEmpty(AttributeName.PROCESSUSAGE)) && (cpi == null || cpi.equals(new SetHelper(e).getCombinedProcessIndex())))
 			{
 				return new SetHelper(e);
 			}

@@ -1944,7 +1944,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		}
 	}
 
-	private JDFNode prepareProduct()
+	static JDFNode prepareProduct()
 	{
 		JDFElement.setLongID(false);
 		final JDFNode product = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -2010,6 +2010,19 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final XJDFHelper h = conv.getCombined(product);
 		h.writeToFile(sm_dirTestDataTemp + "combined.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testgetCombinedComplex()
+	{
+		final JDFNode product = JDFNode.parseFile(sm_dirTestData + "SampleFiles/MISPrepress-ICS-Complex.jdf");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final XJDFHelper h = conv.getCombined(product);
+		h.writeToFile(sm_dirTestDataTemp + "prepress.xjdf");
 	}
 
 	/**
