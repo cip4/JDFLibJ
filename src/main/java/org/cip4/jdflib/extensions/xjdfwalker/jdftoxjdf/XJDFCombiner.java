@@ -85,9 +85,11 @@ class XJDFCombiner
 		if (set == null)
 		{
 			JDFIntegerList cpi = s.getCombinedProcessIndex();
+			boolean complete;
 			if (ContainerUtil.getNonEmpty(cpi) == null)
 			{
-				cpi = new JDFIntegerList(typeIndex);
+				cpi = typeIndex == null ? null : new JDFIntegerList(typeIndex);
+				complete = true;
 			}
 			else
 			{
@@ -101,8 +103,13 @@ class XJDFCombiner
 					}
 				}
 				cpi = il;
+				complete = false;
 			}
 			set = mainHelper.getSet(s.getName(), s.getUsage(), s.getProcessUsage(), cpi);
+			if (complete && set == null)
+			{
+				set = mainHelper.getSet(s.getName(), s.getUsage(), s.getProcessUsage(), null);
+			}
 		}
 		return set;
 	}

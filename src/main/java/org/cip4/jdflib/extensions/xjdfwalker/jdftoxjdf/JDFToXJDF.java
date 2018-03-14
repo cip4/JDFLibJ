@@ -227,7 +227,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	public void setExplicitWaste(final boolean bExplicitWaste)
 	{
-		this.bExplicitWaste = bExplicitWaste;
+		this.bExplicitWaste = true;
 	}
 
 	/**
@@ -900,7 +900,6 @@ public class JDFToXJDF extends PackageElementWalker
 		{
 			setAbstractMessage(false);
 			setConvertTilde(false);
-			setExplicitWaste(false);
 			setHTMLColor(false);
 			setMergeLayout(false);
 			setMergeLayoutPrep(false);

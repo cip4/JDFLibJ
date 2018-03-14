@@ -1444,43 +1444,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAmountPoolNoExplicitWaste()
-	{
-		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		final JDFResource media = n.addResource(ElementName.MEDIA, EnumUsage.Input);
-		final JDFResourceLink rl = n.getLink(media, null);
-
-		final JDFAttributeMap mPart = new JDFAttributeMap(AttributeName.CONDITION, "Good");
-		mPart.put("SheetName", "S1");
-		mPart.put(AttributeName.CONDITION, "Good");
-		rl.setAmount(10, mPart);
-		mPart.put(AttributeName.CONDITION, "Waste");
-		rl.setAmount(15, mPart);
-
-		final JDFToXJDF conv = new JDFToXJDF();
-		conv.setExplicitWaste(false);
-		final KElement xjdf = conv.convert(n);
-
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/Part[@Condition=\"Waste\"]/../@Amount", null), "15");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/Part[@Condition=\"Good\"]/../@Amount", null), "10");
-		conv.setRetainAll(true);
-		final KElement xjdf2 = conv.convert(n);
-
-		assertEquals(xjdf2.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/Part[@Condition=\"Waste\"]/../@Amount", null), "15");
-		assertEquals(xjdf2.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/Part[@Condition=\"Good\"]/../@Amount", null), "10");
-
-		rl.removeChild(ElementName.AMOUNTPOOL, null, 0);
-		rl.setAmount(42);
-		final KElement xjdf3 = conv.convert(n);
-		//		assertEquals(xjdf3.getXPathAttribute("ResourceSet/Resource/@Amount", null), "42");
-		assertEquals(xjdf3.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/@Amount", null), "42");
-
-	}
-
-	/**
-	 *
-	 */
-	@Test
 	public void testMediaComponentIn()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
