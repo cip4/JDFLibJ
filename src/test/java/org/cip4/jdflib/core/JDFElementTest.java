@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -896,6 +896,21 @@ public class JDFElementTest extends JDFTestCaseBase
 	public void testIsDeprecated()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		assertFalse(n.isDeprecated());
+		assertFalse(n.getCreateAuditPool().isDeprecated());
+		final JDFNodeInfo ni = (JDFNodeInfo) n.appendElement(ElementName.NODEINFO);
+		assertTrue(ni.isDeprecated());
+		assertFalse(n.appendComment().isDeprecated());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testIsDeprecated16()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setVersion(EnumVersion.Version_1_6);
 		assertFalse(n.isDeprecated());
 		assertFalse(n.getCreateAuditPool().isDeprecated());
 		final JDFNodeInfo ni = (JDFNodeInfo) n.appendElement(ElementName.NODEINFO);
