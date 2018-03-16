@@ -227,7 +227,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	public void setExplicitWaste(final boolean bExplicitWaste)
 	{
-		this.bExplicitWaste = true;
+		this.bExplicitWaste = bExplicitWaste;
 	}
 
 	/**

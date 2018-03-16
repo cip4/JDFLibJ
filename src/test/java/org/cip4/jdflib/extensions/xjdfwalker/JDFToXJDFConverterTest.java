@@ -125,6 +125,7 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFCoilBindingParams;
 import org.cip4.jdflib.resource.JDFHoleLine;
 import org.cip4.jdflib.resource.JDFInsert;
@@ -1456,6 +1457,68 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
 		assertTrue(xjdf.getXPathAttribute("ResourceSet/Resource/Component/@MediaRef", null).startsWith(med.getID()));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAmountsSimple()
+	{
+		final JDFNode n1 = JDFNode.createRoot();
+		n1.setType(EnumType.ConventionalPrinting);
+		final JDFResource c1 = n1.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		final JDFResourceLink rl1 = n1.getLink(c1, null);
+		rl1.setAmount(100, new JDFAttributeMap(AttributeName.CONDITION, "Good"));
+		rl1.setAmount(10, new JDFAttributeMap(AttributeName.CONDITION, "Waste"));
+		final JDFToXJDF conv = new JDFToXJDF();
+		conv.setExplicitWaste(false);
+		conv.setRetainAll(true);
+
+		final KElement xjdf = conv.convert(n1);
+		final SetHelper sh = new XJDFHelper(xjdf).getSet(ElementName.COMPONENT, EnumUsage.Output);
+		final ResourceHelper rh = sh.getPartition(0);
+		final JDFAmountPool ap = rh.getAmountPool();
+		assertEquals(2, ap.numChildElements(ElementName.PARTAMOUNT, null));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAmountPoolNoExplicitWaste()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFResource media = n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		final JDFResourceLink rl = n.getLink(media, null);
+
+		final JDFAttributeMap mPart = new JDFAttributeMap(AttributeName.CONDITION, "Good");
+		mPart.put("SheetName", "S1");
+		mPart.put(AttributeName.CONDITION, "Good");
+		rl.setAmount(10, mPart);
+		mPart.put(AttributeName.CONDITION, "Waste");
+		rl.setAmount(15, mPart);
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		conv.setExplicitWaste(false);
+		conv.setRetainAll(true);
+		final KElement xjdf = conv.convert(n);
+
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/Part[@Condition=\"Waste\"]/../@Amount", null), "15");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/Part[@Condition=\"Good\"]/../@Amount", null), "10");
+		conv.setRetainAll(true);
+		final KElement xjdf2 = conv.convert(n);
+
+		assertEquals(xjdf2.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/Part[@Condition=\"Waste\"]/../@Amount", null), "15");
+		assertEquals(xjdf2.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/Part[@Condition=\"Good\"]/../@Amount", null), "10");
+
+		rl.removeChild(ElementName.AMOUNTPOOL, null, 0);
+		rl.setAmount(42);
+		final KElement xjdf3 = conv.convert(n);
+		//		assertEquals(xjdf3.getXPathAttribute("ResourceSet/Resource/@Amount", null), "42");
+		assertEquals(xjdf3.getXPathAttribute("ResourceSet/Resource/AmountPool/PartAmount/@Amount", null), "42");
+
 	}
 
 	/**
