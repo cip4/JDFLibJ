@@ -177,6 +177,11 @@ public class JDFVersions
 		if (forceVersion || (i <= 0) || (i > jdfVersions.length))
 			i = JDFElement.getDefaultJDFVersion().getValue();
 
+		if (i <= 0)
+			i = 0;
+		else if (i > jdfVersions.length)
+			i = jdfVersions.length;
+
 		i--; // must be removed if unknown is removed
 		return i;
 	}
