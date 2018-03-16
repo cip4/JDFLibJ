@@ -213,7 +213,7 @@ public class KElementTest extends JDFTestCaseBase
 		final long currentMem = getCurrentMem();
 		if (currentMem > mem)
 		{
-			assertEquals(currentMem, mem, 4200000);
+			assertEquals(currentMem, mem, 6660000);
 		}
 	}
 
