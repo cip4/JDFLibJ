@@ -1472,7 +1472,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		rl1.setAmount(100, new JDFAttributeMap(AttributeName.CONDITION, "Good"));
 		rl1.setAmount(10, new JDFAttributeMap(AttributeName.CONDITION, "Waste"));
 		final JDFToXJDF conv = new JDFToXJDF();
-		conv.setExplicitWaste(false);
 		conv.setRetainAll(true);
 
 		final KElement xjdf = conv.convert(n1);

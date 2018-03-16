@@ -900,6 +900,7 @@ public class JDFToXJDF extends PackageElementWalker
 		{
 			setAbstractMessage(false);
 			setConvertTilde(false);
+			setExplicitWaste(false);
 			setHTMLColor(false);
 			setMergeLayout(false);
 			setMergeLayoutPrep(false);
