@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,6 +76,7 @@ import static org.junit.Assert.assertTrue;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFKnownMsgQuParams;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -110,7 +111,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
 		final JDFSubscription sub = mh.subscribe("http://foo");
 		assertNotNull(sub);
-		writeRoundTripX(xjmfHelper.theElement, "subscribe.xjmf");
+		writeRoundTripX(xjmfHelper.theElement, "subscribe.xjmf", EnumValidationLevel.Complete);
 	}
 
 	/**
@@ -224,7 +225,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 		final MessageHelper mhc = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
 		mh.setQuery(mhc);
 		assertEquals(mhc.getHeader().getID(), mh.getHeader().getAttribute(AttributeName.REFID));
-		writeRoundTripX(xjmfHelper.theElement, "setQuery.xjmf");
+		writeRoundTripX(xjmfHelper.theElement, "setQuery.xjmf", EnumValidationLevel.Complete);
 	}
 
 	/**
@@ -240,7 +241,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 		final MessageHelper mhc = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.Status);
 		mh.setQuery(mhc);
 		assertEquals(mhc.getHeader().getID(), mh.getHeader().getAttribute(AttributeName.REFID));
-		writeRoundTripX(xjmfHelper.theElement, "setQuerySignal.xjmf");
+		writeRoundTripX(xjmfHelper.theElement, "setQuerySignal.xjmf", EnumValidationLevel.Complete);
 	}
 
 	/**
@@ -254,7 +255,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 		mh.appendElement(ElementName.MESSAGESERVICE).setAttribute(AttributeName.TYPE, "KnownMessages");
 		mh.appendElement(ElementName.NOTIFICATION).setAttribute(AttributeName.CLASS, "Event");
 		mh.cleanUp();
-		writeRoundTripX(xjmfHelper.theElement, "knownMessagesResponse.xjmf");
+		writeRoundTripX(xjmfHelper.theElement, "knownMessagesResponse.xjmf", EnumValidationLevel.Complete);
 	}
 
 }

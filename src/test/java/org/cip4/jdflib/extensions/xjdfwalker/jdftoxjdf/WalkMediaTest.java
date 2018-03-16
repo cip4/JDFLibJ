@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,73 +68,34 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
-import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.util.StringUtil;
+import static org.junit.Assert.assertEquals;
 
-/**
- *
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
- */
-public class WalkMedia extends WalkIntentResource
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.process.JDFMedia;
+import org.junit.Test;
+
+public class WalkMediaTest extends JDFTestCaseBase
 {
+
 	/**
 	 *
 	 */
-	public WalkMedia()
+	@Test
+	public void testGrade()
 	{
-		super();
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFMedia);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return new VString(ElementName.MEDIA, null);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
-	 */
-	@Override
-	protected void updateAttributes(final JDFAttributeMap map)
-	{
-		map.remove(AttributeName.MEDIASETCOUNT);
-		if (map.get(AttributeName.MEDIATYPE) == null)
-		{
-			map.put(AttributeName.MEDIATYPE, EnumMediaType.Paper);
-		}
-		final String grade = map.remove(AttributeName.GRADE);
-		if (map.getNonEmpty(AttributeName.ISOPAPERSUBSTRATE) == null)
-		{
-			final int igrade = StringUtil.parseInt(grade, 0);
-			final EnumISOPaperSubstrate ips = JDFMedia.getIsoPaperFromGrade(igrade);
-			if (ips != null)
-			{
-				map.put(AttributeName.ISOPAPERSUBSTRATE, ips.getName());
-			}
-		}
-		super.updateAttributes(map);
+		final JDFNode n = JDFNode.createRoot();
+		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
+		m.setGrade(5);
+		final KElement res = new JDFDoc("Resource").getRoot();
+		final WalkMedia walkMedia = new WalkMedia();
+		walkMedia.jdfToXJDF = new JDFToXJDF();
+		walkMedia.walk(m, res);
+		assertEquals(EnumISOPaperSubstrate.PS8, ((JDFMedia) res.getElement(ElementName.MEDIA)).getISOPaperSubstrate());
 	}
 
 }

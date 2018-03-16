@@ -1657,15 +1657,55 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		mediaLink.setAmount(123, amountMap);
 
 		JDFToXJDF conv = new JDFToXJDF();
-		KElement xjdf = conv.convert(n);
+		final KElement xjdf = conv.convert(n);
 		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/@Amount", null), "1234");
 		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/@Waste", null), "123");
 
 		mediaLink.removeChild(ElementName.AMOUNTPOOL, null, 0);
 		mediaLink.setAmount(5678, (JDFAttributeMap) null);
 		conv = new JDFToXJDF();
-		xjdf = conv.convert(n);
-		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/@Amount", null), "5678");
+		final KElement xjdfc = conv.convert(n);
+		assertEquals(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/@Amount", null), "5678");
+		writeRoundTripX(xjdf, "CompAmount", EnumValidationLevel.Incomplete);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMediaGrade()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		final JDFMedia med = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		med.setMediaType(EnumMediaType.Paper);
+		med.setWeight(42);
+		med.setGrade(1);
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdfc = conv.convert(n);
+		assertEquals(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@ISOPaperSubstrate", null), "PS1");
+		assertNull(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@Grade", null));
+		writeRoundTripX(xjdfc, "MediaGrade", EnumValidationLevel.Incomplete);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMediaUMT()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		final JDFMedia med = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		med.setMediaType(EnumMediaType.Paper);
+		med.setUserMediaType("mtd");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdfc = conv.convert(n);
+		assertEquals(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@MediaTypeDetails", null), "mtd");
+		assertNull(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@UserMediaType", null));
+		writeRoundTripX(xjdfc, "MediaType", EnumValidationLevel.Incomplete);
 	}
 
 	/**

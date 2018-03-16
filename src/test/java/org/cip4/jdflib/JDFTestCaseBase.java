@@ -547,8 +547,9 @@ public abstract class JDFTestCaseBase
 	 *
 	 * @param xjdfRoot the xjdf node or xjmf root
 	 * @param fileBase the filename without extension
+	 * @param level the level to validate the returned JDF
 	 */
-	protected void writeRoundTripX(final KElement xjdfRoot, final String fileBase)
+	protected void writeRoundTripX(final KElement xjdfRoot, final String fileBase, final EnumValidationLevel level)
 	{
 
 		final String tmpXJDF = sm_dirTestDataTemp + fileBase + ".xjdf";
@@ -571,7 +572,7 @@ public abstract class JDFTestCaseBase
 		JDFElement jxRoot = converted.getJDFRoot();
 		if (jxRoot == null)
 			jxRoot = converted.getJMFRoot();
-		final boolean valid = jxRoot.isValid(EnumValidationLevel.Complete);
+		final boolean valid = jxRoot.isValid(level);
 		if (!valid)
 		{
 			printValid(converted);

@@ -78,6 +78,7 @@ import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumResourceDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -144,7 +145,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		command.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/" + ElementName.QUEUEFILTER + "/@" + AttributeName.JOBID, "j1");
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
-		writeRoundTripX(xjmfHelper.getRoot(), "jmf/CommandAbortQE.xjmf");
+		writeRoundTripX(xjmfHelper.getRoot(), "jmf/CommandAbortQE.xjmf", EnumValidationLevel.Complete);
 	}
 
 	/**
@@ -160,7 +161,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		command.setXPathValue(XJDFConstants.ModifyQueueEntryParams + "/" + ElementName.QUEUEFILTER + "/@" + AttributeName.JOBID, "j1");
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
-		writeRoundTripX(xjmfHelper.getRoot(), "jmf/CommandRemoveQE.xjmf");
+		writeRoundTripX(xjmfHelper.getRoot(), "jmf/CommandRemoveQE.xjmf", EnumValidationLevel.Complete);
 	}
 
 	/**
@@ -697,7 +698,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		sub.setRepeatTime(120);
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
-		writeRoundTripX(xjmfHelper.getRoot(), "QualityControlSubscription");
+		writeRoundTripX(xjmfHelper.getRoot(), "QualityControlSubscription", EnumValidationLevel.Complete);
 	}
 
 	/**
@@ -721,7 +722,7 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		qcr.setPassed(42);
 		qcr.setFailed(3);
 		setSnippet(xjmfHelper, true);
-		writeRoundTripX(xjmfHelper.getRoot(), "QualityControlSignalCxF");
+		writeRoundTripX(xjmfHelper.getRoot(), "QualityControlSignalCxF", EnumValidationLevel.Complete);
 
 	}
 

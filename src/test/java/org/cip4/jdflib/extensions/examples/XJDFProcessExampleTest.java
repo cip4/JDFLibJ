@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,6 +73,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -161,7 +162,7 @@ public class XJDFProcessExampleTest extends JDFTestCaseBase
 		qpr.getRoot().appendElement("cc:CxF", "http://colorexchangeformat.com/CxF3-core").setText("CxF data is in here");
 		qpr.getResource().setAttribute(AttributeName.SAMPLEINTERVAL, "42");
 		cleanSnippets(xjdfHelper);
-		writeRoundTripX(xjdfHelper.getRoot(), "QualityControlCxF");
+		writeRoundTripX(xjdfHelper.getRoot(), "QualityControlCxF", EnumValidationLevel.Complete);
 
 	}
 

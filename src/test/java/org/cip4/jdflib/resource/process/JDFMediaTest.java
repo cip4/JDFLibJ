@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,25 +56,32 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 package org.cip4.jdflib.resource.process;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Vector;
 
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumBackCoatings;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumHoleType;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -88,23 +95,12 @@ import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
 /**
- * 
+ *
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class JDFMediaTest extends TestCase
+public class JDFMediaTest extends JDFTestCaseBase
 {
-
-	/**
-	 * 
-	 * @param arg0
-	 */
-	public JDFMediaTest(String arg0)
-	{
-		super(arg0);
-	}
 
 	/**
 	 * Test method for
@@ -113,12 +109,12 @@ public class JDFMediaTest extends TestCase
 	@Test
 	public final void testSetGetDimension()
 	{
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode root = doc.getJDFRoot();
-		JDFResourcePool resPool = root.getCreateResourcePool();
-		KElement kElem = resPool.appendResource(ElementName.MEDIA, EnumResourceClass.Consumable, null);
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode root = doc.getJDFRoot();
+		final JDFResourcePool resPool = root.getCreateResourcePool();
+		final KElement kElem = resPool.appendResource(ElementName.MEDIA, EnumResourceClass.Consumable, null);
 		assertTrue(kElem instanceof JDFMedia);
-		JDFMedia media = ((JDFMedia) kElem);
+		final JDFMedia media = ((JDFMedia) kElem);
 		assertNull(media.getDimensionCM());
 		assertNull(media.getDimensionInch());
 		media.setDimensionCM(new JDFXYPair(2.54, 2.54));
@@ -147,34 +143,32 @@ public class JDFMediaTest extends TestCase
 	// //////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testThicknessFromWeight()
 	{
-		JDFMedia m = (JDFMedia) new JDFDoc("Media").getRoot();
+		final JDFMedia m = (JDFMedia) new JDFDoc("Media").getRoot();
 		m.setThicknessFromWeight(true, false);
 		m.setMediaType(EnumMediaType.Paper);
 		assertFalse(m.hasAttribute(AttributeName.THICKNESS));
 		m.setWeight(80.);
 		m.setThicknessFromWeight(true, false);
 		assertEquals(m.getThickness(), 100., 1.);
-		JDFMedia m2 = (JDFMedia) m.addPartition(EnumPartIDKey.Run, "r1");
+		final JDFMedia m2 = (JDFMedia) m.addPartition(EnumPartIDKey.Run, "r1");
 		m2.setWeight(40.);
 		m.setThicknessFromWeight(true, true);
 		assertEquals(m2.getThickness(), 50., 1.);
 		assertEquals(m.getThickness(), 100., 1.);
 	}
 
-	// //////////////////////////////////////////////////////////////////
-
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testGetBackGrade()
 	{
-		JDFMedia m = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
+		final JDFMedia m = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
 		m.setGrade(5);
 		assertEquals(m.getBackGrade(), 5, 0);
 		m.setGrade(1);
@@ -186,33 +180,60 @@ public class JDFMediaTest extends TestCase
 	}
 
 	/**
+	 *
+	 */
+	@Test
+	public final void testGradeFromISOGrade()
+	{
+		assertEquals(1, JDFMedia.getGradeFromIsoPaper(EnumISOPaperSubstrate.PS1));
+		assertEquals(0, JDFMedia.getGradeFromIsoPaper(null));
+		assertEquals(3, JDFMedia.getGradeFromIsoPaper(EnumISOPaperSubstrate.PS2));
+		assertEquals(4, JDFMedia.getGradeFromIsoPaper(EnumISOPaperSubstrate.PS7));
+		assertEquals(5, JDFMedia.getGradeFromIsoPaper(EnumISOPaperSubstrate.PS8));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public final void testISOGrade()
+	{
+		for (int i = 1; i <= 5; i++)
+		{
+			assertEquals(i, JDFMedia.getGradeFromIsoPaper(JDFMedia.getIsoPaperFromGrade(i)));
+		}
+		assertNull(JDFMedia.getIsoPaperFromGrade(-2));
+		assertNull(JDFMedia.getIsoPaperFromGrade(42));
+	}
+
+	/**
 	 * 1.5 enums...
 	 */
 	@Test
 	public final void testMediaType()
 	{
-		JDFMedia m = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
+		final JDFMedia m = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
 		m.setMediaType(EnumMediaType.Vinyl);
 		assertEquals(m.getMediaType(), EnumMediaType.Vinyl);
 		assertEquals(m.getMediaType().getName(), "Vinyl");
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public final void testHoleType()
 	{
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode root = doc.getJDFRoot();
-		JDFResourcePool resPool = root.getCreateResourcePool();
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode root = doc.getJDFRoot();
+		final JDFResourcePool resPool = root.getCreateResourcePool();
 
 		// check HoleType for JDFMedia
 		KElement kElem = resPool.appendResource(ElementName.MEDIA, EnumResourceClass.Consumable, null);
 		assertTrue(kElem instanceof JDFMedia);
-		JDFMedia media = ((JDFMedia) kElem);
+		final JDFMedia media = ((JDFMedia) kElem);
 
-		Vector<EnumHoleType> v = new Vector<EnumHoleType>();
+		final Vector<EnumHoleType> v = new Vector<EnumHoleType>();
 		v.addElement(EnumHoleType.None);
 		v.addElement(EnumHoleType.C9_5m_round_0t);
 		assertEquals(EnumHoleType.C9_5m_round_0t.getName(), "C9.5m-round-0t");
@@ -230,7 +251,7 @@ public class JDFMediaTest extends TestCase
 		// now check the same with JDFHoleMakingParams
 		kElem = resPool.appendResource(ElementName.HOLEMAKINGPARAMS, EnumResourceClass.Consumable, null);
 		assertTrue(kElem instanceof JDFHoleMakingParams);
-		JDFHoleMakingParams holeMakingParams = ((JDFHoleMakingParams) kElem);
+		final JDFHoleMakingParams holeMakingParams = ((JDFHoleMakingParams) kElem);
 
 		holeMakingParams.setHoleType(v);
 		assertEquals(holeMakingParams.getHoleType(), v);
@@ -239,15 +260,15 @@ public class JDFMediaTest extends TestCase
 	}
 
 	/**
-	 *  
-	 * 
+	 *
+	 *
 	 */
 	@Test
 	public final void testMatches()
 	{
-		JDFDoc doc = new JDFDoc("Media");
-		JDFMedia m = (JDFMedia) doc.getRoot();
-		JDFMedia m2 = (JDFMedia) new JDFDoc("Media").getRoot();
+		final JDFDoc doc = new JDFDoc("Media");
+		final JDFMedia m = (JDFMedia) doc.getRoot();
+		final JDFMedia m2 = (JDFMedia) new JDFDoc("Media").getRoot();
 		assertTrue(m.matches(m2));
 		m.setGrade(4);
 		m2.setGrade(4);

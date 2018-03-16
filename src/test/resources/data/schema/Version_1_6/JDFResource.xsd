@@ -3059,6 +3059,8 @@
           <xs:element ref="jdf:SheetRef" minOccurs="0"/>
           <xs:element name="Layout" type="jdf:Layout_re" minOccurs="0"/>
           <xs:element ref="jdf:LayoutRef" minOccurs="0"/>
+          <xs:element name="Media" type="jdf:Media_re" minOccurs="0"/>
+          <xs:element ref="jdf:MediaRef" minOccurs="0"/>
           <xs:element name="PageList" type="jdf:PageList_re" minOccurs="0"/>
           <xs:element ref="jdf:PageListRef" minOccurs="0"/>
         </xs:sequence>
@@ -3083,6 +3085,8 @@
             <xs:element ref="jdf:SheetRef" minOccurs="0"/>
             <xs:element name="Layout" type="jdf:Layout_re" minOccurs="0"/>
             <xs:element ref="jdf:LayoutRef" minOccurs="0"/>
+            <xs:element name="Media" type="jdf:Media_re" minOccurs="0"/>
+            <xs:element ref="jdf:MediaRef" minOccurs="0"/>
             <xs:element name="PageList" type="jdf:PageList_re" minOccurs="0"/>
             <xs:element ref="jdf:PageListRef" minOccurs="0"/>
             <xs:element name="Component" type="jdf:Component_rp" minOccurs="0"/>
