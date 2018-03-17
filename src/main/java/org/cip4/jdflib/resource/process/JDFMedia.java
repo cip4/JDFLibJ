@@ -255,7 +255,7 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	}
 
 	/**
-	 * Set attribute Dimension (in point)
+	 * Set attribute Dimension (in cm)
 	 *
 	 * @param  value the value (in centimeter) to set the dimension to
 	 */
@@ -264,6 +264,16 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 		final JDFXYPair xyp = new JDFXYPair(value); // don't change the original
 		xyp.scale(72.0 / 2.54);
 		setDimension(xyp);
+	}
+
+	/**
+	 * Set attribute Dimension (in cm)
+	 *
+	 * @param  value the value (in centimeter) to set the dimension to
+	 */
+	public void setDimensionCM(final int x, final int y)
+	{
+		setDimensionCM(new JDFXYPair(x, y));
 	}
 
 	/**
@@ -280,7 +290,7 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	}
 
 	/**
-	 * Set attribute Dimension (in point)
+	 * Set attribute Dimension (in inch)
 	 *
 	 * @param   value  the value (in inch) to set the dimension to
 	 */

@@ -89,6 +89,8 @@ import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPolarity;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumCostType;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumFluteDirection;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AttributeName;
@@ -1687,6 +1689,30 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@ISOPaperSubstrate", null), "PS1");
 		assertNull(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@Grade", null));
 		writeRoundTripX(xjdfc, "MediaGrade", EnumValidationLevel.Incomplete);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMediaGrain()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		final JDFMedia med = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		med.setMediaType(EnumMediaType.Paper);
+		med.setWeight(42);
+		med.setGrade(1);
+		med.setDimensionCM(29, 42);
+		med.setGrainDirection(EnumGrainDirection.LongEdge);
+		med.setFluteDirection(EnumFluteDirection.ShortEdge);
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdfc = conv.convert(n);
+		final JDFMedia m = (JDFMedia) xjdfc.getXPathElement("ResourceSet[@Name=\"Media\"]/Resource/Media");
+		assertEquals(EnumGrainDirection.YDirection, m.getGrainDirection());
+		assertEquals(EnumFluteDirection.XDirection, m.getFluteDirection());
+		writeRoundTripX(xjdfc, "MediaFlute", EnumValidationLevel.Incomplete);
 	}
 
 	/**

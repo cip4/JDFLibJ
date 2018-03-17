@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
@@ -75,6 +76,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -134,7 +136,40 @@ public class WalkMedia extends WalkIntentResource
 				map.put(AttributeName.ISOPAPERSUBSTRATE, ips.getName());
 			}
 		}
+		updateFluteGrain(AttributeName.FLUTEDIRECTION, map);
+		updateFluteGrain(AttributeName.GRAINDIRECTION, map);
 		super.updateAttributes(map);
+	}
+
+	private void updateFluteGrain(final String att, final JDFAttributeMap map)
+	{
+		String value = map.getNonEmpty(att);
+		if (EnumGrainDirection.LongEdge.getName().equals(value))
+		{
+			final JDFXYPair dim = JDFXYPair.createXYPair(map.get(AttributeName.DIMENSION));
+			if (dim != null)
+			{
+				value = dim.getX() > dim.getY() ? EnumGrainDirection.XDirection.getName() : EnumGrainDirection.YDirection.getName();
+			}
+			else
+			{
+				value = null;
+			}
+		}
+		else if (EnumGrainDirection.ShortEdge.getName().equals(value))
+		{
+			final JDFXYPair dim = JDFXYPair.createXYPair(map.get(AttributeName.DIMENSION));
+			if (dim != null)
+			{
+				value = dim.getX() < dim.getY() ? EnumGrainDirection.XDirection.getName() : EnumGrainDirection.YDirection.getName();
+			}
+			else
+			{
+				value = null;
+			}
+		}
+		map.remove(att);
+		map.putNotNull(att, value);
 	}
 
 }

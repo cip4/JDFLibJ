@@ -71,6 +71,8 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import static org.junit.Assert.assertEquals;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumFluteDirection;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -96,6 +98,40 @@ public class WalkMediaTest extends JDFTestCaseBase
 		walkMedia.jdfToXJDF = new JDFToXJDF();
 		walkMedia.walk(m, res);
 		assertEquals(EnumISOPaperSubstrate.PS8, ((JDFMedia) res.getElement(ElementName.MEDIA)).getISOPaperSubstrate());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGrain()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
+		m.setDimensionCM(100, 30);
+		m.setGrainDirection(EnumGrainDirection.LongEdge);
+		final KElement res = new JDFDoc("Resource").getRoot();
+		final WalkMedia walkMedia = new WalkMedia();
+		walkMedia.jdfToXJDF = new JDFToXJDF();
+		walkMedia.walk(m, res);
+		assertEquals(EnumGrainDirection.XDirection, ((JDFMedia) res.getElement(ElementName.MEDIA)).getGrainDirection());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testFlute()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
+		m.setDimensionCM(10, 30);
+		m.setFluteDirection(EnumFluteDirection.LongEdge);
+		final KElement res = new JDFDoc("Resource").getRoot();
+		final WalkMedia walkMedia = new WalkMedia();
+		walkMedia.jdfToXJDF = new JDFToXJDF();
+		walkMedia.walk(m, res);
+		assertEquals(EnumFluteDirection.YDirection, ((JDFMedia) res.getElement(ElementName.MEDIA)).getFluteDirection());
 	}
 
 }
