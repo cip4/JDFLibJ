@@ -889,12 +889,39 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testColorIntentStandard()
+	{
+		final JDFToXJDF conv = new JDFToXJDF();
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Product);
+		final JDFComponent co = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		co.setComponentType(EnumComponentType.PartialProduct, null);
+		final JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
+		ci.appendColorsUsed().setCMYK();
+		ci.appendColorStandard().setActual("CMYK");
+		ci.appendColorICCStandard().setActual("ICC");
+		final KElement xjdf = conv.convert(n);
+		final ProductHelper ph = new XJDFHelper(xjdf).getProductHelpers().get(0);
+		assertNotNull(ph);
+		final IntentHelper ih = ph.getIntent("ColorIntent");
+		final KElement e = ih.getResource();
+		assertEquals(e.getChildElementVector("SurfaceColor", null).size(), 2);
+		assertEquals("CMYK", e.getChildElementVector("SurfaceColor", null).get(0).getAttribute(XJDFConstants.PrintStandard));
+		writeRoundTrip(n, "ColorIntent");
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testColorIntent()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
-		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Product);
-		n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		final JDFComponent co = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		co.setComponentType(EnumComponentType.PartialProduct, null);
 		final JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
 		final JDFColorIntent cif = (JDFColorIntent) ci.addPartition(EnumPartIDKey.Side, "Front");
 		cif.appendColorsUsed().setCMYK();
@@ -908,6 +935,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final IntentHelper ih = ph.getIntent("ColorIntent");
 		final KElement e = ih.getResource();
 		assertEquals(e.getChildElementVector("SurfaceColor", null).size(), 2);
+		writeRoundTrip(n, "ColorIntent");
 	}
 
 	/**

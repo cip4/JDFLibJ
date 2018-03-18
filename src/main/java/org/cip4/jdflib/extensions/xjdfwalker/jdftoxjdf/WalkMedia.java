@@ -126,19 +126,25 @@ public class WalkMedia extends WalkIntentResource
 		{
 			map.put(AttributeName.MEDIATYPE, EnumMediaType.Paper);
 		}
-		final String grade = map.remove(AttributeName.GRADE);
-		if (map.getNonEmpty(AttributeName.ISOPAPERSUBSTRATE) == null)
+		updateGrade(map, AttributeName.GRADE, AttributeName.ISOPAPERSUBSTRATE);
+		updateGrade(map, "BackGrade", AttributeName.BACKISOPAPERSUBSTRATE);
+		updateFluteGrain(AttributeName.FLUTEDIRECTION, map);
+		updateFluteGrain(AttributeName.GRAINDIRECTION, map);
+		super.updateAttributes(map);
+	}
+
+	private void updateGrade(final JDFAttributeMap map, final String oldGrade, final String newGrade)
+	{
+		final String grade = map.remove(oldGrade);
+		if (map.getNonEmpty(newGrade) == null)
 		{
 			final int igrade = StringUtil.parseInt(grade, 0);
 			final EnumISOPaperSubstrate ips = JDFMedia.getIsoPaperFromGrade(igrade);
 			if (ips != null)
 			{
-				map.put(AttributeName.ISOPAPERSUBSTRATE, ips.getName());
+				map.put(newGrade, ips.getName());
 			}
 		}
-		updateFluteGrain(AttributeName.FLUTEDIRECTION, map);
-		updateFluteGrain(AttributeName.GRAINDIRECTION, map);
-		super.updateAttributes(map);
 	}
 
 	private void updateFluteGrain(final String att, final JDFAttributeMap map)

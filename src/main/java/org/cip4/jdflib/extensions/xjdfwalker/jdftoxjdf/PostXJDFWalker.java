@@ -717,6 +717,42 @@ class PostXJDFWalker extends BaseElementWalker
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 *
 	 */
+	protected class WalkSurfaceColor extends WalkElement
+	{
+		/**
+		 *
+		 */
+		public WalkSurfaceColor()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#updateAttributes(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		void updateAttributes(final KElement xjdf)
+		{
+			xjdf.renameAttribute(ElementName.COLORICCSTANDARD, XJDFConstants.PrintStandard);
+			xjdf.renameAttribute(ElementName.COLORSTANDARD, XJDFConstants.PrintStandard);
+			super.updateAttributes(xjdf);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(XJDFConstants.SurfaceColor, null);
+		}
+	}
+
+	/**
+	 *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 *
+	 */
 	protected class WalkStrippingParams extends WalkResourceElement
 	{
 		/**

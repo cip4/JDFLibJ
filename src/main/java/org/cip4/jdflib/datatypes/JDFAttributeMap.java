@@ -820,4 +820,14 @@ public class JDFAttributeMap extends HashMap<String, String>
 	{
 		return new JDFAttributeMap(this);
 	}
+
+	/**
+	 *
+	 * @param jdfAttributeMap
+	 * @return true if jdfAttributeMap==null or jdfAttributeMap is empty
+	 */
+	public static boolean isEmpty(final JDFAttributeMap jdfAttributeMap)
+	{
+		return jdfAttributeMap == null || jdfAttributeMap.isEmpty();
+	}
 }

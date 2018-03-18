@@ -155,14 +155,24 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 		return "VJDFAttributeMap: " + showKeys("\n", " ");
 	}
 
+	/**
+	 *
+	 * @param v
+	 * @return
+	 */
 	public static VJDFAttributeMap getNonEmpty(final VJDFAttributeMap v)
 	{
 		return isEmpty(v) ? null : v;
 	}
 
+	/**
+	 * are we null or empty or contain only an empty JDFAttributeMap
+	 * @param v
+	 * @return
+	 */
 	public static boolean isEmpty(final VJDFAttributeMap v)
 	{
-		return v == null || v.isEmpty() || v.size() == 1 && v.get(0).isEmpty();
+		return v == null || v.isEmpty() || v.size() == 1 && JDFAttributeMap.isEmpty(v.get(0));
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -331,6 +331,7 @@ public final class AttributeName
 	public static final String BACKGLOSSVALUE = "BackGlossValue";
 	/** */
 	public static final String BACKING = "Backing";
+	public static final String BACKISOPAPERSUBSTRATE = "BackISOPaperSubstrate";
 	/** */
 	public static final String BACKMARKLIST = "BackMarkList";
 	/** */

@@ -322,19 +322,40 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	 */
 	public int getBackGrade()
 	{
-		final int frontGrade = getGrade();
-		if (frontGrade == 0 || frontGrade >= 4)
-			return frontGrade; // uncoated or web crap paper
+		final EnumISOPaperSubstrate backIso = EnumISOPaperSubstrate.getEnum(getNonEmpty(AttributeName.BACKISOPAPERSUBSTRATE));
+		if (backIso != null)
+		{
+			return getGradeFromIsoPaper(backIso);
+		}
+		else
+		{
+			final int frontGrade = getGrade();
+			if (frontGrade == 0 || frontGrade >= 4)
+				return frontGrade; // uncoated or web crap paper
 
-		final EnumBackCoatings coatings = super.getBackCoatings();
-		if (coatings == null)
-			return frontGrade; // no back details
-		if (EnumBackCoatings.None.equals(coatings))
-			return 4; // uncoated
-		if (EnumBackCoatings.Matte.equals(coatings))
-			return 2; // matte
+			final EnumBackCoatings coatings = super.getBackCoatings();
+			if (coatings == null)
+				return frontGrade; // no back details
+			if (EnumBackCoatings.None.equals(coatings))
+				return 4; // uncoated
+			if (EnumBackCoatings.Matte.equals(coatings))
+				return 2; // matte
 
-		return frontGrade;
+			return frontGrade;
+		}
+	}
+
+	/**
+	 *
+	 * @param checkIsoPaper
+	 * @return
+	 */
+	public int getGrade(final boolean checkIsoPaper)
+	{
+		final int grade = super.getGrade();
+		if (grade > 0 || !checkIsoPaper)
+			return grade;
+		return getGradeFromIsoPaper(getISOPaperSubstrate());
 	}
 
 	@Override

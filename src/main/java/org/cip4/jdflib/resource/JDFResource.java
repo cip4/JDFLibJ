@@ -467,6 +467,11 @@ public class JDFResource extends JDFElement
 		elemInfoTable_Physical[1] = new ElemInfoTable(ElementName.CONTACT, 0x33333333);
 		elemInfoTable_Physical[2] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333331);
 	}
+	static
+	{
+		fillValidRootParentNodeName();
+		fillValidParentNodeName();
+	}
 
 	@Override
 	protected ElementInfo getTheElementInfo()
@@ -2028,7 +2033,12 @@ public class JDFResource extends JDFElement
 	 * @param nodeName the name of the node to check against
 	 * @return {@link Boolean} true if nodeName is the name of a valid resource parent element
 	 */
-	private static synchronized boolean isValidParentNodeName(final String nodeName)
+	private static boolean isValidParentNodeName(final String nodeName)
+	{
+		return validParentNodeNameSet.contains(nodeName);
+	}
+
+	private static void fillValidParentNodeName()
 	{
 		if (validParentNodeNameSet == null)
 		{
@@ -2041,7 +2051,6 @@ public class JDFResource extends JDFElement
 				validParentNodeNameSet.add(nodeName2);
 			}
 		}
-		return validParentNodeNameSet.contains(nodeName);
 	}
 
 	/**
@@ -2050,7 +2059,12 @@ public class JDFResource extends JDFElement
 	 * @param nodeName the name of the node to check against
 	 * @return {@link Boolean} true if nodeName is the name of a valid resource parent element
 	 */
-	private static synchronized boolean isValidRootParentNodeName(final String nodeName)
+	private static boolean isValidRootParentNodeName(final String nodeName)
+	{
+		return validRootParentNodeNameSet.contains(nodeName);
+	}
+
+	private static void fillValidRootParentNodeName()
 	{
 		if (validRootParentNodeNameSet == null)
 		{
@@ -2062,7 +2076,6 @@ public class JDFResource extends JDFElement
 				validRootParentNodeNameSet.add(nodeName2);
 			}
 		}
-		return validRootParentNodeNameSet.contains(nodeName);
 	}
 
 	/**

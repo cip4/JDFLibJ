@@ -170,13 +170,27 @@ public class JDFMediaTest extends JDFTestCaseBase
 	{
 		final JDFMedia m = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
 		m.setGrade(5);
-		assertEquals(m.getBackGrade(), 5, 0);
+		assertEquals(m.getBackGrade(), 5);
 		m.setGrade(1);
-		assertEquals(m.getBackGrade(), 1, 0);
+		assertEquals(m.getBackGrade(), 1);
 		m.setBackCoatings(EnumBackCoatings.Matte);
-		assertEquals(m.getBackGrade(), 2, 0);
+		assertEquals(m.getBackGrade(), 2);
 		m.setBackCoatings(EnumBackCoatings.None);
-		assertEquals(m.getBackGrade(), 4, 0);
+		assertEquals(m.getBackGrade(), 4);
+		m.setAttribute(AttributeName.BACKISOPAPERSUBSTRATE, "PS1");
+		assertEquals(m.getBackGrade(), 1);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public final void testGetGrade()
+	{
+		final JDFMedia m = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
+		m.setISOPaperSubstrate(EnumISOPaperSubstrate.PS4);
+		assertEquals(2, m.getGrade(true));
+		assertEquals(0, m.getGrade(false));
 	}
 
 	/**

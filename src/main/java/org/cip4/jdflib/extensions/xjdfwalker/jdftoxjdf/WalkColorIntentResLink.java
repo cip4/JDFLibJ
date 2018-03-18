@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
@@ -80,8 +80,8 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- * 
- *  
+ *
+ *
  * @author rainer prosi
  * @date Feb 26, 2013
  */
@@ -89,7 +89,7 @@ public class WalkColorIntentResLink extends WalkResLink
 {
 
 	/**
-	 * 
+	 *
 	 */
 	public WalkColorIntentResLink()
 	{
@@ -97,29 +97,27 @@ public class WalkColorIntentResLink extends WalkResLink
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#setResource(org.cip4.jdflib.core.JDFResourceLink, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected VElement setResource(JDFElement rl, JDFResource linkTarget, KElement xjdf)
+	protected VElement setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xjdf)
 	{
-		VElement v = super.setResource(rl, linkTarget, xjdf);
-		VString frontBack = new VString("ColorsUsed Coatings ColorStandard Coverage", null);
+		final VElement v = super.setResource(rl, linkTarget, xjdf);
 		KElement thecolorIntent = null;
-		for (KElement e1 : v)
+		for (final KElement e1 : v)
 		{
-			JDFPart part = (JDFPart) e1.getElement(ElementName.PART);
-			KElement colorIntent = e1.getElement(ElementName.COLORINTENT);
+			final JDFPart part = (JDFPart) e1.getElement(ElementName.PART);
+			final KElement colorIntent = e1.getElement(ElementName.COLORINTENT);
 			if (thecolorIntent == null)
 				thecolorIntent = colorIntent;
 
-			EnumSide side = part == null ? null : part.getSide();
-			VString surfaces = new VString();
+			final EnumSide side = part == null ? null : part.getSide();
+			final VString surfaces = new VString();
 			if (side == null)
 			{
 				surfaces.add("Front");
 				surfaces.add("Back");
-
 			}
 			else
 			{
@@ -127,27 +125,22 @@ public class WalkColorIntentResLink extends WalkResLink
 			}
 			if (thecolorIntent != null)
 			{
-				for (String surface : surfaces)
+				for (final String surface : surfaces)
 				{
-					KElement surfaceColor = thecolorIntent.getCreateChildWithAttribute("SurfaceColor", "Surface", null, surface, 0);
+					final KElement surfaceColor = thecolorIntent.getCreateChildWithAttribute("SurfaceColor", "Surface", null, surface, 0);
 					fixNumColors(surfaceColor, colorIntent);
 					if (part != null)
 					{
 						part.deleteNode();
 					}
-					for (String att : frontBack)
-					{
-						String attVal = colorIntent.getAttribute(att, null, null);
-						if (attVal != null)
-						{
-							surfaceColor.setAttribute(att, attVal);
-							thecolorIntent.removeAttribute(att);
-						}
-					}
+					surfaceColor.setAttributes(thecolorIntent.getAttributeMap());
+					thecolorIntent.removeAttributes(null);
 				}
 			}
 		}
+
 		return v;
+
 	}
 
 	/**
@@ -155,18 +148,18 @@ public class WalkColorIntentResLink extends WalkResLink
 	 * @param surfaceColor
 	 * @param colorIntent
 	 */
-	private void fixNumColors(KElement surfaceColor, KElement colorIntent)
+	private void fixNumColors(final KElement surfaceColor, final KElement colorIntent)
 	{
-		int nCols = colorIntent.getIntAttribute(AttributeName.NUMCOLORS, null, -1);
+		final int nCols = colorIntent.getIntAttribute(AttributeName.NUMCOLORS, null, -1);
 		if (nCols >= 0)
 		{
-			KElement parentCI = surfaceColor.getParentNode_KElement();
+			final KElement parentCI = surfaceColor.getParentNode_KElement();
 			JDFXYPair xy = JDFXYPair.createXYPair(parentCI.getAttribute(AttributeName.NUMCOLORS));
 			if (xy == null)
 			{
 				xy = new JDFXYPair(0, 0);
 			}
-			String surface = surfaceColor.getAttribute("Surface");
+			final String surface = surfaceColor.getAttribute("Surface");
 			if ("Both".equals(surface) || "Front".equals(surface))
 			{
 				xy.setX(nCols);
@@ -180,22 +173,22 @@ public class WalkColorIntentResLink extends WalkResLink
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(KElement jdf, KElement xjdf)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		KElement e = super.walk(jdf, xjdf);
+		final KElement e = super.walk(jdf, xjdf);
 		return e;
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#matches(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public boolean matches(KElement toCheck)
+	public boolean matches(final KElement toCheck)
 	{
 		return !jdfToXJDF.isRetainAll() && super.matches(toCheck) && "ColorIntentLink".equals(toCheck.getLocalName());
 	}
