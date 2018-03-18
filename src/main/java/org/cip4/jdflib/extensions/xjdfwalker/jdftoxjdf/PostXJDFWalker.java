@@ -214,7 +214,10 @@ class PostXJDFWalker extends BaseElementWalker
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			updateNamespaces(xjdf);
-			updateAttributes(xjdf);
+			if (!retainAll)
+			{
+				updateAttributes(xjdf);
+			}
 			return xjdf;
 		}
 
