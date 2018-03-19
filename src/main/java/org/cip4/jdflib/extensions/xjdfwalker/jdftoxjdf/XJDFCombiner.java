@@ -13,7 +13,7 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.util.ContainerUtil;
 
-class XJDFCombiner
+public class XJDFCombiner
 {
 
 	private final XJDFHelper mainHelper;
