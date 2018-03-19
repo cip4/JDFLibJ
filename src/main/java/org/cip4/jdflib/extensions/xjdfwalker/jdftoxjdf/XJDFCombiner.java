@@ -25,7 +25,7 @@ class XJDFCombiner
 	 * @param mainHelper
 	 * @param helper
 	 */
-	XJDFCombiner(final XJDFHelper mainHelper, final XJDFHelper helper)
+	public XJDFCombiner(final XJDFHelper mainHelper, final XJDFHelper helper)
 	{
 		super();
 		this.mainHelper = mainHelper;
@@ -42,7 +42,7 @@ class XJDFCombiner
 		return "XJDFCombiner [" + (mainHelper != null ? "mainHelper=" + mainHelper : "") + (h != null ? "h=" + h : "") + "]";
 	}
 
-	public void combine()
+	public XJDFHelper combine()
 	{
 		typeIndex = combineTypes();
 		if (typeIndex != null)
@@ -56,7 +56,7 @@ class XJDFCombiner
 				}
 			}
 		}
-
+		return mainHelper;
 	}
 
 	/**

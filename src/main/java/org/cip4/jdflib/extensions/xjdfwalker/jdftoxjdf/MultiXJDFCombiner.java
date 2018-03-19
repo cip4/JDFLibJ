@@ -77,7 +77,7 @@ import org.cip4.jdflib.extensions.XJDFHelper;
  * @author rainer prosi
  *
  */
-class MultiXJDFCombiner
+public class MultiXJDFCombiner
 {
 
 	private final Vector<XJDFHelper> helpers;
@@ -87,7 +87,7 @@ class MultiXJDFCombiner
 	 *
 	 *
 	 */
-	MultiXJDFCombiner(final Vector<XJDFHelper> helpers)
+	public MultiXJDFCombiner(final Vector<XJDFHelper> helpers)
 	{
 		super();
 		this.helpers = helpers;
@@ -98,7 +98,7 @@ class MultiXJDFCombiner
 	 *
 	 * @return
 	 */
-	XJDFHelper getCombinedHelper()
+	public XJDFHelper getCombinedHelper()
 	{
 		for (final XJDFHelper h : helpers)
 		{
