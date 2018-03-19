@@ -103,8 +103,34 @@ public class JDFResource extends JDFElement
 	private static boolean autoSubElementClass = false;
 	private static boolean bUnpartitiondImplicit = false;
 
-	private static HashSet<String> validParentNodeNameSet = null;
-	private static HashSet<String> validRootParentNodeNameSet = null;
+	private static HashSet<String> validParentNodeNameSet = fillValidParentNodeName();
+
+	private static HashSet<String> fillValidParentNodeName()
+	{
+		final HashSet<String> validParentNodeNameSet = new HashSet<String>();
+		final String nodeNames[] = { "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams", // copy of validRootParentNodeNames
+				"DeviceInfo", "DropItemIntent", "DropItem", "ProductionIntent", "CustomerInfo", "NodeInfo", "Ancestor", "Occupation", ElementName.PHASETIME };
+		for (final String nodeName2 : nodeNames)
+		{
+			validParentNodeNameSet.add(nodeName2);
+		}
+		return validParentNodeNameSet;
+	}
+
+	private static HashSet<String> validRootParentNodeNameSet = fillValidRootParentNodeName();
+
+	private static HashSet<String> fillValidRootParentNodeName()
+	{
+		final HashSet<String> validRootParentNodeNameSet = new HashSet<String>();
+		final String[] nodeNames = { "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams" }; // must
+		// also copy to validParentNodeNames
+		for (final String nodeName2 : nodeNames)
+		{
+			validRootParentNodeNameSet.add(nodeName2);
+		}
+		return validRootParentNodeNameSet;
+	}
+
 	PartitionMap partitionMap;
 
 	/**
@@ -2038,21 +2064,6 @@ public class JDFResource extends JDFElement
 		return validParentNodeNameSet.contains(nodeName);
 	}
 
-	private static void fillValidParentNodeName()
-	{
-		if (validParentNodeNameSet == null)
-		{
-			validParentNodeNameSet = new HashSet<>();
-			final String nodeNames[] = { "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams", // copy of
-					// validRootParentNodeNames
-					"DeviceInfo", "DropItemIntent", "DropItem", "ProductionIntent", "CustomerInfo", "NodeInfo", "Ancestor", "Occupation", ElementName.PHASETIME };
-			for (final String nodeName2 : nodeNames)
-			{
-				validParentNodeNameSet.add(nodeName2);
-			}
-		}
-	}
-
 	/**
 	 * list of valid node names of potential parents for a resource that impy a real resource root with class, id etc list of valid node names of potential parents for a resource
 	 *
@@ -2062,20 +2073,6 @@ public class JDFResource extends JDFElement
 	private static boolean isValidRootParentNodeName(final String nodeName)
 	{
 		return validRootParentNodeNameSet.contains(nodeName);
-	}
-
-	private static void fillValidRootParentNodeName()
-	{
-		if (validRootParentNodeNameSet == null)
-		{
-			validRootParentNodeNameSet = new HashSet<>();
-			final String[] nodeNames = { "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams" }; // must
-			// also copy to validParentNodeNames
-			for (final String nodeName2 : nodeNames)
-			{
-				validRootParentNodeNameSet.add(nodeName2);
-			}
-		}
 	}
 
 	/**

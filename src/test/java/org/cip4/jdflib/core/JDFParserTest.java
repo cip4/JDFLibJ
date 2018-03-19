@@ -177,7 +177,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	public void testSpeed1()
 	{
 		final long l1 = System.nanoTime();
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 2222; i++)
 		{
 			new JDFParser().parseString(s);
 		}
@@ -185,7 +185,7 @@ public class JDFParserTest extends JDFTestCaseBase
 		log.info("mem new:   " + currentMem + " " + mem);
 		if (currentMem < mem)
 			currentMem = mem;
-		assertEquals("parese memory", currentMem, mem, 2000000);
+		assertEquals("parese memory", currentMem, mem, 4200000);
 		log.info("new:   " + (System.nanoTime() - l1) / 1000000);
 	}
 
@@ -322,7 +322,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	{
 		final long l1 = System.nanoTime();
 		final JDFParser p = new JDFParser();
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 2222; i++)
 		{
 			p.parseString(s);
 		}
@@ -340,12 +340,12 @@ public class JDFParserTest extends JDFTestCaseBase
 	{
 		JDFParser.m_searchStream = true;
 		final String s2 = "        ------ end of header ----!\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n <JMF ID=\"abc\"/>";
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 2222; i++)
 		{
 			assertNotNull(new JDFParser().parseString(s2));
 		}
 		log.info("mem new:   " + getCurrentMem() + " " + mem);
-		assertTrue(getCurrentMem() - mem < 2000000);
+		assertTrue(getCurrentMem() - mem < 4200000);
 		JDFParser.m_searchStream = false;
 		assertNull(new JDFParser().parseString(s2));
 	}
