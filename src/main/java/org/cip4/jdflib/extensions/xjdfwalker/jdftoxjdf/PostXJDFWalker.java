@@ -1306,6 +1306,42 @@ class PostXJDFWalker extends BaseElementWalker
 
 	/**
 	 *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	public class WalkDropItem extends WalkElement
+	{
+		/**
+		 *
+		 */
+		public WalkDropItem()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#updateAttributes(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		void updateAttributes(final KElement xjdf)
+		{
+			xjdf.renameAttribute("ProductRef", XJDFConstants.ItemRef);
+			xjdf.renameAttribute("ComponentRef", XJDFConstants.ItemRef);
+			super.updateAttributes(xjdf);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString(ElementName.DROPITEM, null);
+		}
+
+	}
+
+	/**
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 *
 	 */
