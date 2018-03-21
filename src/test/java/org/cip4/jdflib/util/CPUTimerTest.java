@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -179,7 +179,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 		assertNull(ct0);
 		ct0 = fac.getCreateCurrentTimer(null);
 		assertNotNull(ct0);
-		CPUTimer ct1 = fac.getCreateCurrentTimer("1");
+		final CPUTimer ct1 = fac.getCreateCurrentTimer("1");
 		assertNotNull(ct1);
 		assertNotSame(ct0, ct1);
 	}
@@ -205,7 +205,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 		int ii;
 		for (ii = 1; ii < 142; ii++)
 		{
-			CPUTimer t1 = new CPUTimer(true);
+			final CPUTimer t1 = new CPUTimer(true);
 			for (int i = 0; i < 1000; i++)
 			{
 				t.toXML();
@@ -219,8 +219,8 @@ public class CPUTimerTest extends JDFTestCaseBase
 		}
 		assertTrue(t.getTotalCPUTime() > 0);
 		assertEquals(t.getNumStarts(), ii);
-		assertEquals(t.getTotalCPUTime(), lCPU, lCPU / 42);
-		assertEquals(t.getTotalRealTime(), l, l / 42);
+		assertEquals(t.getTotalCPUTime(), lCPU, lCPU / 21);
+		assertEquals(t.getTotalRealTime(), l, l / 21);
 
 	}
 

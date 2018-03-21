@@ -76,6 +76,7 @@ import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.intent.JDFProductionIntent;
@@ -165,7 +166,9 @@ public class WalkRefElement extends WalkJDFElement
 		{
 			setResource(rl, target, refRoot);
 		}
-		final VElement v = setResource(re, target, refRoot);
+		final VJDFAttributeMap partMapVector = rl == null ? null : rl.getPartMapVector();
+		final boolean overlap = VJDFAttributeMap.isEmpty(partMapVector) || partMapVector.overlapsMap(re.getPartMap());
+		final VElement v = overlap ? setResource(re, target, refRoot) : null;
 		if (v != null)
 		{
 			final String attName = getRefName(re);
