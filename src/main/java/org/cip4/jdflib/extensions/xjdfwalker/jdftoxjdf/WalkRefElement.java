@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -160,7 +160,12 @@ public class WalkRefElement extends WalkJDFElement
 	{
 		final JDFResource target = re.getTarget();
 		final JDFResourceLink rl = getLinkForRef(re, target);
-		final VElement v = setResource(rl == null ? re : rl, target, getRefRoot(xjdf));
+		final KElement refRoot = getRefRoot(xjdf);
+		if (rl != null)
+		{
+			setResource(rl, target, refRoot);
+		}
+		final VElement v = setResource(re, target, refRoot);
 		if (v != null)
 		{
 			final String attName = getRefName(re);
