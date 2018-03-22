@@ -674,4 +674,13 @@ public class ContainerUtil
 		}
 		return c;
 	}
+
+	/**
+	 * @param c the collection to check
+	 * @return 0 for null or size
+	 */
+	public static int size(Collection<?> c)
+	{
+		return c == null ? 0 : c.size();
+	}
 }

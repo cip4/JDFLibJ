@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -156,26 +156,26 @@ public class IDRemover extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			String id = e.getNonEmpty(AttributeName.ID);
+			final String id = e.getNonEmpty(AttributeName.ID);
 			if (id != null)
 			{
 				theMap.put(id, e);
 			}
-			JDFAttributeMap map = e.getAttributeMap();
+			final JDFAttributeMap map = e.getAttributeMap();
 			if (map != null)
 			{
-				for (String key : map.keySet())
+				for (final String key : map.keySet())
 				{
-					if (key.toLowerCase().endsWith("ref"))
+					if (key.toLowerCase().endsWith("ref") || XJDFConstants.ProductPart.equals(key))
 					{
 						refSet.add(map.get(key));
 					}
 					else if (key.toLowerCase().endsWith("refs"))
 					{
-						VString v = VString.getVString(map.get(key), null);
+						final VString v = VString.getVString(map.get(key), null);
 						if (v != null && !v.isEmpty())
 						{
-							for (String val : v)
+							for (final String val : v)
 							{
 								refSet.add(val);
 							}
@@ -199,11 +199,11 @@ public class IDRemover extends BaseElementWalker
 	public void removeIDs(KElement e)
 	{
 		walkTree(e, null);
-		for (String ref : refSet)
+		for (final String ref : refSet)
 		{
 			theMap.remove(ref);
 		}
-		for (KElement eId : theMap.values())
+		for (final KElement eId : theMap.values())
 		{
 			eId.removeAttribute(AttributeName.ID);
 		}

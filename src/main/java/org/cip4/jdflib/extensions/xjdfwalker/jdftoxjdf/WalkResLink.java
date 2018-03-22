@@ -124,16 +124,7 @@ public class WalkResLink extends WalkJDFElement
 			{
 				return null;
 			}
-			if (jdfToXJDF.isProductResource(linkTarget))
-			{
-				final KElement product = getProductForElement(xjdf, rl);
-				setResource(rl, linkTarget, product);
-			}
-			else
-			{
-				rl.setProcessUsage("Product");
-				setResource(rl, linkTarget, jdfToXJDF.newRoot);
-			}
+			walkProductLink(xjdf, rl, linkTarget, n);
 		}
 		else
 		{
@@ -144,6 +135,36 @@ public class WalkResLink extends WalkJDFElement
 			setResource(rl, linkTarget, jdfToXJDF.newRoot);
 		}
 		return null;
+	}
+
+	/**
+	 * @param xjdf
+	 * @param rl
+	 * @param linkTarget
+	 * @param n
+	 */
+	void walkProductLink(final KElement xjdf, final JDFResourceLink rl, final JDFResource linkTarget, final JDFNode n)
+	{
+		if (jdfToXJDF.isProductResource(linkTarget))
+		{
+			final KElement product = getProductForElement(xjdf, rl);
+			setResource(rl, linkTarget, product);
+		}
+		else
+		{
+			rl.setProcessUsage("Product");
+			final VElement v = setResource(rl, linkTarget, jdfToXJDF.newRoot);
+			if (v != null)
+			{
+				for (final KElement e : v)
+				{
+					final ResourceHelper resourceHelper = new ResourceHelper(e);
+					final VJDFAttributeMap partMapVector = resourceHelper.getPartMapVector();
+					partMapVector.put(XJDFConstants.ProductPart, n.getID());
+					resourceHelper.setPartMapVector(partMapVector);
+				}
+			}
+		}
 	}
 
 	/**

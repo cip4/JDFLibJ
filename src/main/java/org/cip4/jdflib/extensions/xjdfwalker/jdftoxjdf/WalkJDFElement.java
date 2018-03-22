@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -93,9 +94,11 @@ import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPageData;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -302,10 +305,35 @@ public class WalkJDFElement extends WalkElement
 	KElement getProductForElement(final KElement xjdf, final JDFElement rl)
 	{
 		final JDFNode rlParent = (rl instanceof JDFNode) ? (JDFNode) rl : rl.getParentJDF();
-		String parentID = rlParent.getID();
-		parentID = "IDP_" + parentID;
+		final String parentID = getXJDFProductID(rlParent);
+		rlParent.setID(parentID);
 		final KElement product = new XJDFHelper(xjdf).getCreateProduct(parentID).getProduct();
 		return product;
+	}
+
+	/**
+	 * @param node
+	 * @return
+	 */
+	String getXJDFProductID(final JDFNode node)
+	{
+		final JDFComponent c = (JDFComponent) node.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+		if (c != null)
+		{
+			final VString cid = c.getAssemblyIDs();
+			if (ContainerUtil.size(cid) == 1)
+			{
+				return cid.get(0);
+			}
+			final String productID = c.getProductID();
+			if (!StringUtil.isEmpty(productID))
+			{
+				return productID;
+			}
+		}
+		final String jpID = node.getJobPartID(false);
+		final String id = StringUtil.isEmpty(jpID) ? node.getID() : jpID;
+		return id;
 	}
 
 	/**

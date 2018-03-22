@@ -812,13 +812,14 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				map.remove(AttributeName.SIGNATURENAME);
 			}
-			String bsName = getBSID(strippingParams, map);
+			boolean cloneBS = map != null && map.containsKey(AttributeName.BINDERYSIGNATURENAME);
+			final String bsName = getBSID(strippingParams, map);
+			final JDFAttributeMap bsMap = new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsName);
 			final String cellIndex = map == null ? null : map.remove(AttributeName.CELLINDEX);
 			final ResourceHelper layoutPartitionH = layoutseth.getCreatePartition(map, true);
 			final JDFLayout layoutPartition = (JDFLayout) layoutPartitionH.getResource();
 			ensureLayoutPositions(strippingParams, layoutPartition, bsName);
 
-			final JDFBinderySignature bsOld = (JDFBinderySignature) layoutPartition.getChildWithAttribute(ElementName.BINDERYSIGNATURE, AttributeName.BINDERYSIGNATURENAME, null, bsName, 0, true);
 			final VElement childElementVector = strippingParams.getChildElementVector(ElementName.SIGNATURECELL, null);
 			if (childElementVector != null)
 			{
@@ -828,61 +829,50 @@ class PostXJDFWalker extends BaseElementWalker
 					scp.setAttribute(AttributeName.CELLINDEX, cellIndex);
 				}
 			}
-			if (bsOld != null)
+
+			final SetHelper bsSet = newRootHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+			ResourceHelper bsHelper = bsSet.getPartition(XJDFConstants.BinderySignatureID, bsName);
+			if (bsHelper == null)
 			{
-				moveStripCells(bsOld, childElementVector);
+				bsHelper = bsSet.getPartition(0);
+			}
+			if (bsHelper == null)
+				bsHelper = bsSet.appendPartition(bsMap, true);
+
+			final VJDFAttributeMap vMap = bsHelper.getPartMapVector();
+			if (VJDFAttributeMap.isEmpty(vMap))
+			{
+				cloneBS = false;
+			}
+			if (cloneBS && !(vMap.size() == 1 && bsName.equals(vMap.get(0).get(XJDFConstants.BinderySignatureID))))
+			{
+				final ResourceHelper newHelper = new ResourceHelper(bsSet.copyHelper(bsHelper));
+				newHelper.setPartMap(bsMap);
+				vMap.removeMaps(bsMap);
+				bsHelper.setPartMapVector(vMap);
+				bsHelper = newHelper;
 			}
 			else
 			{
-				final String bsRef = strippingParams.getNonEmpty(ElementName.BINDERYSIGNATURE + "Ref");
-				final ResourceHelper bsHelper = XJDFHelper.getHelper(layoutPartition).getPartition(bsRef);
-				if (bsHelper != null)
+				bsHelper.ensurePart(XJDFConstants.BinderySignatureID, bsName);
+			}
+
+			final JDFBinderySignature bs = (JDFBinderySignature) bsHelper.getCreateResource();
+			moveStripCells(bs, childElementVector);
+			moveBSFromStripping(bs, strippingParams);
+			final VElement positions = layoutPartition.getChildElementVector(ElementName.POSITION, null);
+			if (positions != null)
+			{
+				for (final KElement position : positions)
 				{
-					JDFAttributeMap partMap = bsHelper.getPartMap();
-					if (partMap == null)
+					if (!position.hasAttribute(XJDFConstants.BinderySignatureID))
 					{
-						partMap = new JDFAttributeMap();
-					}
-					final String bsID = partMap.get(XJDFConstants.BinderySignatureID);
-					if (bsID == null)
-					{
-						final SetHelper sh = bsHelper.getSet();
-						if (bsName == null)
-						{
-							bsName = "BS_" + sh.indexOf(bsHelper);
-						}
-						partMap.put(XJDFConstants.BinderySignatureID, bsName);
-						bsHelper.setPartMap(partMap);
-					}
-					else if (!bsID.equals(bsName) && bsName != null)
-					{
-						final VJDFAttributeMap partMaps = bsHelper.getPartMapVector();
-						final JDFAttributeMap map2 = partMap.clone();
-						map2.put(XJDFConstants.BinderySignatureID, bsName);
-						partMaps.appendUnique(map2);
-						bsHelper.setPartMapVector(partMaps);
-					}
-					final JDFBinderySignature bs = (JDFBinderySignature) bsHelper.getResource();
-					if (bs != null)
-					{
-						moveStripCells(bs, childElementVector);
-						moveBSFromStripping(bs, strippingParams);
-						final VElement positions = layoutPartition.getChildElementVector(ElementName.POSITION, null);
-						if (positions != null)
-						{
-							for (final KElement position : positions)
-							{
-								if (!position.hasAttribute(XJDFConstants.BinderySignatureID))
-								{
-									position.setAttribute(XJDFConstants.BinderySignatureID, bsID);
-								}
-							}
-						}
-						strippingParams.removeAttribute(ElementName.BINDERYSIGNATURE + "Ref");
+						position.setAttribute(XJDFConstants.BinderySignatureID, bsName);
 					}
 				}
-				layoutPartition.copyInto(strippingParams, false);
 			}
+			strippingParams.removeAttribute(ElementName.BINDERYSIGNATURE + "Ref");
+			layoutPartition.copyInto(strippingParams, false);
 			return map;
 		}
 
@@ -897,7 +887,13 @@ class PostXJDFWalker extends BaseElementWalker
 			String bsName = map == null ? null : map.remove(AttributeName.BINDERYSIGNATURENAME);
 			final String bsn2 = strippingParams.getNonEmpty(XJDFConstants.BinderySignatureIDs);
 			if (bsn2 != null)
+			{
 				bsName = bsn2;
+			}
+			if (bsName == null)
+			{
+				bsName = "BS";
+			}
 			return bsName;
 		}
 
