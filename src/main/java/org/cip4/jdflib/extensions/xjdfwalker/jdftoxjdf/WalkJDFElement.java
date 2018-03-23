@@ -306,7 +306,6 @@ public class WalkJDFElement extends WalkElement
 	{
 		final JDFNode rlParent = (rl instanceof JDFNode) ? (JDFNode) rl : rl.getParentJDF();
 		final String parentID = getXJDFProductID(rlParent);
-		rlParent.setID(parentID);
 		final KElement product = new XJDFHelper(xjdf).getCreateProduct(parentID).getProduct();
 		return product;
 	}
@@ -318,22 +317,25 @@ public class WalkJDFElement extends WalkElement
 	String getXJDFProductID(final JDFNode node)
 	{
 		final JDFComponent c = (JDFComponent) node.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+		String jpID = node.getJobPartID(false);
 		if (c != null)
 		{
 			final VString cid = c.getAssemblyIDs();
 			if (ContainerUtil.size(cid) == 1)
 			{
-				return cid.get(0);
+				jpID = cid.get(0);
 			}
-			final String productID = c.getProductID();
-			if (!StringUtil.isEmpty(productID))
+			else
 			{
-				return productID;
+				final String productID = c.getProductID();
+				if (!StringUtil.isEmpty(productID))
+				{
+					jpID = productID;
+				}
 			}
 		}
-		final String jpID = node.getJobPartID(false);
 		final String id = StringUtil.isEmpty(jpID) ? node.getID() : jpID;
-		return id;
+		return "IDP_" + id;
 	}
 
 	/**

@@ -155,14 +155,14 @@ public class WalkProduct extends WalkJDF
 				final JDFNode nPre = (JDFNode) e;
 				if (EnumType.Product.equals(nPre.getEnumType()))
 				{
-					kids.add(nPre.getID());
+					kids.add(getXJDFProductID(nPre));
 				}
 			}
 		}
 
 		for (final String kid : kids)
 		{
-			prod.appendAttribute(XJDFConstants.ChildRefs, "IDP_" + kid, null, null, false);
+			prod.appendAttribute(XJDFConstants.ChildRefs, kid, null, null, false);
 		}
 	}
 

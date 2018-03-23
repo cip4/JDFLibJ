@@ -156,11 +156,12 @@ public class WalkResLink extends WalkJDFElement
 			final VElement v = setResource(rl, linkTarget, jdfToXJDF.newRoot);
 			if (v != null)
 			{
+				final String productID = getXJDFProductID(n);
 				for (final KElement e : v)
 				{
 					final ResourceHelper resourceHelper = new ResourceHelper(e);
 					final VJDFAttributeMap partMapVector = resourceHelper.getPartMapVector();
-					partMapVector.put(XJDFConstants.ProductPart, n.getID());
+					partMapVector.put(XJDFConstants.ProductPart, productID);
 					resourceHelper.setPartMapVector(partMapVector);
 				}
 			}
