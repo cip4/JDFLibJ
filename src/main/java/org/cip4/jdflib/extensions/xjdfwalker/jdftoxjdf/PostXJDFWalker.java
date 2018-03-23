@@ -830,7 +830,9 @@ class PostXJDFWalker extends BaseElementWalker
 				}
 			}
 
-			final SetHelper bsSet = newRootHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+			SetHelper bsSet = newRootHelper.getSet(ElementName.BINDERYSIGNATURE, 0);
+			if (bsSet == null)
+				bsSet = newRootHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 			ResourceHelper bsHelper = bsSet.getPartition(XJDFConstants.BinderySignatureID, bsName);
 			if (bsHelper == null)
 			{
