@@ -151,6 +151,7 @@ public class WalkCutBlock extends WalkJDFSubElement
 	@Override
 	protected void updateAttributes(final JDFAttributeMap map)
 	{
+		map.remove(AttributeName.CLASS);
 		map.renameKey(AttributeName.ASSEMBLYIDS, XJDFConstants.BinderySignatureIDs);
 		super.updateAttributes(map);
 		map.remove(AttributeName.BLOCKELEMENTTYPE);
