@@ -44,6 +44,10 @@ public class XJDFCombiner
 		return "XJDFCombiner [" + (mainHelper != null ? "mainHelper=" + mainHelper : "") + (h != null ? "h=" + h : "") + "]";
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public XJDFHelper combine()
 	{
 		typeIndex = combineTypes();
