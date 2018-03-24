@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFRefElement;
@@ -114,6 +115,7 @@ public class WalkJDFSubElement extends WalkJDFElement
 	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.removeKeys(JDFToXJDFDataCache.getElemAttribs());
+		map.remove(AttributeName.CLASS);
 		super.updateAttributes(map);
 	}
 

@@ -79,7 +79,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen at this point only a dummy since we have a specific WalkResourceAudit child
  */
-public class WalkAudit extends WalkJDFSubElement
+public class WalkAudit extends WalkJDFElement
 {
 
 	/**

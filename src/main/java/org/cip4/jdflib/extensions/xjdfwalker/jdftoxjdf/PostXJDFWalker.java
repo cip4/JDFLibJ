@@ -235,7 +235,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 */
 		void updateAttributes(final KElement xjdf)
 		{
-			xjdf.removeAttribute(AttributeName.CLASS);
+			//NOP
 		}
 
 		/**
