@@ -94,6 +94,7 @@ import org.cip4.jdflib.elementwalker.RemoveEmpty;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.XJMFHelper;
+import org.cip4.jdflib.extensions.xjdfwalker.RemoveEmptyXJDF;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
@@ -501,11 +502,7 @@ public class JDFToXJDF extends PackageElementWalker
 				new XJDFHelper(newRoot).cleanUp();
 			}
 		}
-		final RemoveEmpty removeEmpty = new RemoveEmpty();
-		removeEmpty.addIgnoreElement(XJDFConstants.Header);
-		removeEmpty.addIgnoreElement(ElementName.MARKOBJECT);
-		removeEmpty.addIgnoreElement(ElementName.CONTENTOBJECT);
-		removeEmpty.addIgnoreElement(ElementName.NODEINFO);
+		final RemoveEmpty removeEmpty = new RemoveEmptyXJDF();
 		removeEmpty.removEmptyElement(newRoot);
 	}
 

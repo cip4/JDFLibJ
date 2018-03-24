@@ -2,6 +2,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import java.util.Vector;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -11,6 +12,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.ContainerUtil;
 
 public class XJDFCombiner
@@ -47,6 +49,14 @@ public class XJDFCombiner
 		typeIndex = combineTypes();
 		if (typeIndex != null)
 		{
+			final Vector<SetHelper> v0 = mainHelper.getSets();
+			if (v0 != null)
+			{
+				for (final SetHelper s : v0)
+				{
+					prepareSet(s);
+				}
+			}
 			final Vector<SetHelper> v = h.getSets();
 			if (v != null)
 			{
@@ -59,12 +69,32 @@ public class XJDFCombiner
 		return mainHelper;
 	}
 
+	private void prepareSet(final SetHelper s)
+	{
+		String pu = s.getProcessUsage();
+		if (pu == null)
+		{
+			final String name = s.getName();
+			if (ElementName.MEDIA.equals(name))
+			{
+				final ResourceHelper r = s.getPartition(0);
+				final JDFMedia m = (JDFMedia) (r == null ? null : r.getResource());
+				pu = m == null ? null : m.getNonEmpty(AttributeName.MEDIATYPE);
+				if (pu != null)
+				{
+					s.setProcessUsage(pu);
+				}
+			}
+		}
+	}
+
 	/**
 	 *
 	 * @param s
 	 */
 	void combineSet(final SetHelper s)
 	{
+		prepareSet(s);
 		SetHelper mainSet = getMainSet(s);
 		if (mainSet == null)
 		{
@@ -85,11 +115,9 @@ public class XJDFCombiner
 		if (set == null)
 		{
 			JDFIntegerList cpi = s.getCombinedProcessIndex();
-			boolean complete;
 			if (ContainerUtil.getNonEmpty(cpi) == null)
 			{
 				cpi = typeIndex == null ? null : new JDFIntegerList(typeIndex);
-				complete = true;
 			}
 			else
 			{
@@ -103,13 +131,8 @@ public class XJDFCombiner
 					}
 				}
 				cpi = il;
-				complete = false;
 			}
 			set = mainHelper.getSet(s.getName(), s.getUsage(), s.getProcessUsage(), cpi);
-			if (complete && set == null)
-			{
-				set = mainHelper.getSet(s.getName(), s.getUsage(), s.getProcessUsage(), null);
-			}
 		}
 		return set;
 	}
@@ -193,14 +216,18 @@ public class XJDFCombiner
 		return cpi;
 	}
 
+	/**
+	 *
+	 * @return a list of the index into the combined types list for each index in h.types
+	 */
 	int[] combineTypes()
 	{
 		final VString types = h.getTypes();
 		final VString oldTypes = mainHelper.getTypes();
-		if (types != null && types.size() > 0)
+		if (ContainerUtil.getNonEmpty(oldTypes) != null)
 		{
 			final int typeList[] = new int[types.size()];
-			if (oldTypes == null || oldTypes.size() == 0)
+			if (ContainerUtil.getNonEmpty(oldTypes) == null)
 			{
 				for (int i = 0; i < types.size(); i++)
 				{

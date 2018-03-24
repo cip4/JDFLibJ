@@ -70,6 +70,9 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import java.util.Vector;
 
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 
 /**
@@ -100,12 +103,35 @@ public class MultiXJDFCombiner
 	 */
 	public XJDFHelper getCombinedHelper()
 	{
+		prepareHelper();
 		for (final XJDFHelper h : helpers)
 		{
 			mergeHelper(h);
 		}
-
+		helper.cleanUp();
 		return helper;
+	}
+
+	private void prepareHelper()
+	{
+		final Vector<SetHelper> vsh = helper.getSets();
+		final VString typs = helper.getTypes();
+		if (typs != null)
+		{
+			final JDFIntegerList il = new JDFIntegerList();
+			for (int i = 0; i < typs.size(); i++)
+			{
+				il.add(i);
+			}
+			for (final SetHelper sh : vsh)
+			{
+				if (sh.getCombinedProcessIndex() == null)
+				{
+					sh.setCombinedProcessIndex(il);
+				}
+			}
+		}
+
 	}
 
 	/**
@@ -114,7 +140,8 @@ public class MultiXJDFCombiner
 	 */
 	private void mergeHelper(final XJDFHelper h)
 	{
-		new XJDFCombiner(helper, h).combine();
+		final XJDFCombiner xjdfCombiner = new XJDFCombiner(helper, h);
+		xjdfCombiner.combine();
 	}
 
 	/**

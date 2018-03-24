@@ -68,72 +68,58 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFRefElement;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.JDFMatrix;
-import org.cip4.jdflib.datatypes.JDFRectangle;
-import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.resource.process.JDFCutBlock;
+import org.cip4.jdflib.extensions.ResourceHelper;
+import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.resource.JDFResource;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
  */
-public class WalkCutBlock extends WalkJDFSubElement
+public class WalkTransferCurvePoolRef extends WalkRefElement
 {
 	/**
 	 *
 	 */
-	public WalkCutBlock()
+	public WalkTransferCurvePoolRef()
 	{
 		super();
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * @param re
 	 */
 	@Override
-	public boolean matches(final KElement toCheck)
+	protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
 	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFCutBlock);
+		makeSetRefAttribute(re, xjdf);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * @param xjdf
+	 * @return true if must continue
 	 */
 	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		final JDFCutBlock cutBlock = (JDFCutBlock) e;
-		copyToBox(cutBlock);
-		return super.walk(e, trackElem);
-	}
-
-	/**
-	 *
-	 * @param cutBlock
-	 */
-	private void copyToBox(final JDFCutBlock cutBlock)
-	{
-		final JDFXYPair size = cutBlock.getBlockSize();
-		if (size != null)
+		final JDFRefElement refElem = (JDFRefElement) jdf;
+		final JDFResource tcp = refElem.getTargetRoot();
+		if (tcp != null)
 		{
-			final JDFMatrix blockTrf = cutBlock.getBlockTrf();
-			final JDFRectangle box = new JDFRectangle(0, 0, size.getX(), size.getY());
-			if (blockTrf != null)
-			{
-				final JDFXYPair shift = blockTrf.getShift();
-				box.shift(shift);
-			}
-			cutBlock.setAttribute(AttributeName.BOX, box, null);
+			updateTransferCurve(tcp);
 		}
-		cutBlock.removeAttribute(AttributeName.BLOCKSIZE);
-		cutBlock.removeAttribute(AttributeName.BLOCKTRF);
+		refElem.renameElement("TransferCurveRef", null);
+		final KElement ret = super.walk(jdf, xjdf);
+		xjdf.removeAttribute("TransferCurveRef");
+
+		return ret;
 	}
 
 	/**
@@ -142,18 +128,35 @@ public class WalkCutBlock extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.CUTBLOCK, null);
+		return VString.getVString("TransferCurvePoolRef", null);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#matches(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void updateAttributes(final JDFAttributeMap map)
+	public boolean matches(final KElement toCheck)
 	{
-		map.renameKey(AttributeName.ASSEMBLYIDS, XJDFConstants.BinderySignatureIDs);
-		super.updateAttributes(map);
-		map.remove(AttributeName.BLOCKELEMENTTYPE);
-		map.remove(AttributeName.BLOCKTYPE);
+		return !jdfToXJDF.isRetainAll();
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#setResource(org.cip4.jdflib.core.JDFElement, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected VElement setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
+	{
+		final VElement vRes = super.setResource(rl, linkTarget, xRoot);
+		if (!jdfToXJDF.isRetainAll() && vRes != null && vRes.size() > 0)
+		{
+			final KElement res = vRes.get(0);
+			final ResourceHelper ph = new ResourceHelper(res);
+			final SetHelper sh = ph.getSet();
+			if (sh != null && sh.getUsage() == null)
+			{
+				sh.setUsage(EnumUsage.Input);
+			}
+		}
+		return vRes;
 	}
 }

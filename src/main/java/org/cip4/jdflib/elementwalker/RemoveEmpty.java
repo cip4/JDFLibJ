@@ -182,7 +182,8 @@ public class RemoveEmpty extends BaseElementWalker
 		public KElement walk(final KElement e1, final KElement trackElem)
 		{
 			final boolean hasGood = walkAttributes(e1);
-			if (zappElements && !hasGood && e1.getFirstChildElement() == null && e1.getText() == null && e1.getXMLComment(0) == null)
+			final boolean b = !hasGood && zappElements ? !hasChild(e1) : false;
+			if (b)
 			{
 				e1.deleteNode();
 				return null;
@@ -191,6 +192,11 @@ public class RemoveEmpty extends BaseElementWalker
 			{
 				return e1;
 			}
+		}
+
+		protected boolean hasChild(final KElement e1)
+		{
+			return e1.getFirstChildElement() != null || e1.getText() != null || e1.getXMLComment(0) != null;
 		}
 
 		/**

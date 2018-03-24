@@ -1723,6 +1723,26 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testMediaPlatePaper()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		final JDFMedia med = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		med.setMediaType(EnumMediaType.Paper);
+		med.setWeight(42);
+		med.setGrade(1);
+		final JDFMedia med2 = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		med2.setMediaType(EnumMediaType.Plate);
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		assertNotNull(new XJDFHelper(xjdf).getSet(ElementName.MEDIA, 1));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testMediaGrain()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();

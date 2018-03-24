@@ -68,72 +68,24 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.JDFMatrix;
-import org.cip4.jdflib.datatypes.JDFRectangle;
-import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.resource.process.JDFCutBlock;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
  */
-public class WalkCutBlock extends WalkJDFSubElement
+public class WalkTransferCurve extends WalkResource
 {
 	/**
 	 *
 	 */
-	public WalkCutBlock()
+	public WalkTransferCurve()
 	{
 		super();
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFCutBlock);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
-	{
-		final JDFCutBlock cutBlock = (JDFCutBlock) e;
-		copyToBox(cutBlock);
-		return super.walk(e, trackElem);
-	}
-
-	/**
-	 *
-	 * @param cutBlock
-	 */
-	private void copyToBox(final JDFCutBlock cutBlock)
-	{
-		final JDFXYPair size = cutBlock.getBlockSize();
-		if (size != null)
-		{
-			final JDFMatrix blockTrf = cutBlock.getBlockTrf();
-			final JDFRectangle box = new JDFRectangle(0, 0, size.getX(), size.getY());
-			if (blockTrf != null)
-			{
-				final JDFXYPair shift = blockTrf.getShift();
-				box.shift(shift);
-			}
-			cutBlock.setAttribute(AttributeName.BOX, box, null);
-		}
-		cutBlock.removeAttribute(AttributeName.BLOCKSIZE);
-		cutBlock.removeAttribute(AttributeName.BLOCKTRF);
 	}
 
 	/**
@@ -142,18 +94,18 @@ public class WalkCutBlock extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.CUTBLOCK, null);
+		return new VString(ElementName.TRANSFERCURVE, null);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResource#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
 	protected void updateAttributes(final JDFAttributeMap map)
 	{
-		map.renameKey(AttributeName.ASSEMBLYIDS, XJDFConstants.BinderySignatureIDs);
+		final String name = map.get(XJDFConstants.TransferCurveName);
+		if ("Paper".equals(name))
+			map.put(XJDFConstants.TransferCurveName, "Substrate");
 		super.updateAttributes(map);
-		map.remove(AttributeName.BLOCKELEMENTTYPE);
-		map.remove(AttributeName.BLOCKTYPE);
 	}
 }

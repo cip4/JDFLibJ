@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -111,7 +111,7 @@ public class WalkElement extends BaseWalker
 	 * @param parent
 	 *
 	 */
-	public void setParent(JDFToXJDF parent)
+	public void setParent(final JDFToXJDF parent)
 	{
 		jdfToXJDF = parent;
 	}
@@ -128,7 +128,7 @@ public class WalkElement extends BaseWalker
 		{
 			nsURI = XJDF20.getSchemaURL();
 		}
-		String nodeName = getXJDFName(jdf);
+		final String nodeName = getXJDFName(jdf);
 		final KElement eNew = nodeName == null ? xjdf : xjdf.appendElement(nodeName, nsURI);
 
 		setAttributes(jdf, eNew);
@@ -136,10 +136,10 @@ public class WalkElement extends BaseWalker
 		Node before = null;
 		for (int i = 0; true; i++)
 		{
-			String xmlComment = jdf.getXMLComment(i);
+			final String xmlComment = jdf.getXMLComment(i);
 			if (xmlComment == null)
 				break;
-			Node comment = eNew.appendXMLComment(xmlComment, null);
+			final Node comment = eNew.appendXMLComment(xmlComment, null);
 			if (before == null)
 			{
 				before = comment.getNextSibling();
@@ -173,13 +173,13 @@ public class WalkElement extends BaseWalker
 	 */
 	protected void setAttributes(final KElement jdf, final KElement eNew)
 	{
-		JDFAttributeMap map = (jdf instanceof JDFElement) ? convertRanges((JDFElement) jdf) : jdf.getAttributeMap_KElement();
+		final JDFAttributeMap map = (jdf instanceof JDFElement) ? convertRanges((JDFElement) jdf) : jdf.getAttributeMap_KElement();
 		if (map != null)
 		{
-			Set<String> keySet = map.keySet();
-			for (String key : keySet)
+			final Set<String> keySet = map.keySet();
+			for (final String key : keySet)
 			{
-				String prefix = KElement.xmlnsPrefix(key);
+				final String prefix = KElement.xmlnsPrefix(key);
 				if (prefix != null)
 				{
 					String uri = eNew.getNamespaceURIFromPrefix(prefix);
@@ -207,12 +207,12 @@ public class WalkElement extends BaseWalker
 	 *
 	 * @param map
 	 */
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		if (!jdfToXJDF.isRetainAll())
 		{
 			map.renameKey(AttributeName.PRODUCTID, XJDFConstants.ExternalID);
-			map.renameKey(AttributeName.ASSEMBLYIDS, XJDFConstants.BinderySignatureIDs);
+			map.renameKey(AttributeName.ASSEMBLYIDS, XJDFConstants.BinderySignatureID);
 			map.remove(AttributeName.XSITYPE);
 		}
 	}
@@ -222,28 +222,28 @@ public class WalkElement extends BaseWalker
 	 * @param jdf
 	 * @return
 	 */
-	JDFAttributeMap convertRanges(JDFElement jdf)
+	JDFAttributeMap convertRanges(final JDFElement jdf)
 	{
-		JDFAttributeMap map = jdf.getAttributeMap_KElement();
+		final JDFAttributeMap map = jdf.getAttributeMap_KElement();
 		return convertRanges(map, jdf);
 	}
 
-	JDFAttributeMap convertRanges(JDFAttributeMap map, JDFElement jdf)
+	JDFAttributeMap convertRanges(final JDFAttributeMap map, final JDFElement jdf)
 	{
 		if (jdfToXJDF.isConvertTilde())
 		{
-			VString keys = map.getKeys();
-			for (String key : keys)
+			final VString keys = map.getKeys();
+			for (final String key : keys)
 			{
 				if (EnumAttributeType.isRange(jdf.getAtrType(key)))
 				{
-					JDFNameRangeList rl = JDFNameRangeList.createNameRangeList(map.get(key));
+					final JDFNameRangeList rl = JDFNameRangeList.createNameRangeList(map.get(key));
 					if (rl != null)
 					{
-						StringBuffer buf = new StringBuffer();
+						final StringBuffer buf = new StringBuffer();
 						for (int i = 0; i < rl.size(); i++)
 						{
-							JDFNameRange r = (JDFNameRange) rl.at(i);
+							final JDFNameRange r = (JDFNameRange) rl.at(i);
 							if (i > 0)
 							{
 								buf.append(JDFConstants.BLANK);
@@ -276,20 +276,20 @@ public class WalkElement extends BaseWalker
 	 * @param allLeaves if true, loop over all leaves of a resource
 	 * @return
 	 */
-	protected KElement safeRename(final KElement original, String newName, boolean allLeaves)
+	protected KElement safeRename(final KElement original, final String newName, final boolean allLeaves)
 	{
 		if (original == null)
 			return null;
 		if (allLeaves && original instanceof JDFResource)
 		{
-			VElement leaves = ((JDFResource) original).getLeaves(true);
+			final VElement leaves = ((JDFResource) original).getLeaves(true);
 			leaves.remove(original);
-			for (KElement leaf : leaves)
+			for (final KElement leaf : leaves)
 			{
 				safeRename(leaf, newName, false);
 			}
 		}
-		KElement newElement = original.getParentNode_KElement().insertBefore(newName, original, null);
+		final KElement newElement = original.getParentNode_KElement().insertBefore(newName, original, null);
 		newElement.copyInto(original, true);
 		original.deleteNode();
 		return newElement;

@@ -5781,7 +5781,7 @@ public class JDFResource extends JDFElement
 	 *
 	 * @throws JDFException if here is an attempt to add implicit partition
 	 */
-	protected void addPartIDKey(final EnumPartIDKey partType)
+	public void addPartIDKey(final EnumPartIDKey partType)
 	{
 		final String s = partType.getName();
 		final JDFResource r = getResourceRoot();

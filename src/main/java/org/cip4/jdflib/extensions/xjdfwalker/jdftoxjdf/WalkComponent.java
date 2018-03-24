@@ -73,7 +73,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -146,7 +145,7 @@ public class WalkComponent extends WalkResource
 		if ("Unknown".equals(prodType))
 			map.remove(AttributeName.PRODUCTTYPE);
 		updateComponentType(map);
-		map.renameKey(AttributeName.ASSEMBLYIDS, XJDFConstants.BinderySignatureIDs);
+		map.remove(AttributeName.ASSEMBLYIDS);
 		map.remove(AttributeName.COMPONENTTYPE);
 		map.remove(AttributeName.PAGELISTINDEX);
 		map.remove(AttributeName.SPINETHICKNESS);

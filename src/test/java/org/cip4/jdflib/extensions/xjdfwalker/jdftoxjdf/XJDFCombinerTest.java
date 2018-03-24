@@ -62,7 +62,9 @@ import java.util.Vector;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
@@ -112,6 +114,37 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 		final XJDFCombiner c = new XJDFCombiner(h0, h1);
 		final SetHelper mainSet = c.getMainSet(h1.getSet(ElementName.NODEINFO, 0));
 		assertEquals(h0.getSet(ElementName.NODEINFO, 0), mainSet);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMergeMediaSet()
+	{
+		final Vector<XJDFHelper> vh = new Vector<>();
+		for (int i = 1; i < 3; i++)
+		{
+			final XJDFHelper h = new XJDFHelper("j1", "p1", null);
+			h.addType(EnumType.ConventionalPrinting);
+			final JDFAttributeMap m = new JDFAttributeMap(AttributeName.SHEETNAME, "S" + i);
+			final SetHelper s1 = h.appendResourceSet(ElementName.MEDIA, EnumUsage.Input);
+			s1.appendPartition(m, true).getResource().setAttribute(AttributeName.MEDIATYPE, "Paper");
+			s1.setCombinedProcessIndex(new JDFIntegerList(0));
+			final SetHelper s2 = h.appendResourceSet(ElementName.MEDIA, EnumUsage.Input);
+			s2.setCombinedProcessIndex(new JDFIntegerList(0));
+			s2.appendPartition(m, true).getResource().setAttribute(AttributeName.MEDIATYPE, "Plate");
+
+			vh.add(h);
+		}
+		final XJDFHelper h0 = vh.get(0);
+		final XJDFHelper h1 = vh.get(1);
+		final XJDFCombiner c = new XJDFCombiner(h0, h1);
+		final XJDFHelper hc = c.combine();
+		assertEquals(2, hc.getSet(ElementName.MEDIA, 0).getPartitions().size());
+		assertEquals(2, hc.getSet(ElementName.MEDIA, 1).getPartitions().size());
+		assertNull(hc.getSet(ElementName.MEDIA, 2));
+
 	}
 
 	/**

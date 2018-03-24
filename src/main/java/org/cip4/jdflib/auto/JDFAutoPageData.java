@@ -81,8 +81,8 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
@@ -101,7 +101,7 @@ class JDFAutoPageData : public JDFElement
 *****************************************************************************
 */
 
-public abstract class JDFAutoPageData extends JDFElement
+public abstract class JDFAutoPageData extends JDFSeparationList
 {
 
 	private static final long serialVersionUID = 1L;
@@ -159,7 +159,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPageData(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPageData(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -170,7 +170,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPageData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPageData(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -182,7 +182,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPageData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPageData(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -208,7 +208,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute AssemblyID
 	  * @param value the value to set the attribute to
 	  */
-	public void setAssemblyID(String value)
+	public void setAssemblyID(final String value)
 	{
 		setAttribute(AttributeName.ASSEMBLYID, value, null);
 	}
@@ -229,7 +229,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute AssemblyIDs
 	  * @param value the value to set the attribute to
 	  */
-	public void setAssemblyIDs(VString value)
+	public void setAssemblyIDs(final VString value)
 	{
 		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
 	}
@@ -253,7 +253,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute CatalogID
 	  * @param value the value to set the attribute to
 	  */
-	public void setCatalogID(String value)
+	public void setCatalogID(final String value)
 	{
 		setAttribute(AttributeName.CATALOGID, value, null);
 	}
@@ -274,7 +274,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute CatalogDetails
 	  * @param value the value to set the attribute to
 	  */
-	public void setCatalogDetails(String value)
+	public void setCatalogDetails(final String value)
 	{
 		setAttribute(AttributeName.CATALOGDETAILS, value, null);
 	}
@@ -295,7 +295,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute FoldOutPages
 	  * @param value the value to set the attribute to
 	  */
-	public void setFoldOutPages(JDFIntegerList value)
+	public void setFoldOutPages(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.FOLDOUTPAGES, value, null);
 	}
@@ -319,7 +319,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute HasBleeds
 	  * @param value the value to set the attribute to
 	  */
-	public void setHasBleeds(boolean value)
+	public void setHasBleeds(final boolean value)
 	{
 		setAttribute(AttributeName.HASBLEEDS, value, null);
 	}
@@ -340,7 +340,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute IsBlank
 	  * @param value the value to set the attribute to
 	  */
-	public void setIsBlank(boolean value)
+	public void setIsBlank(final boolean value)
 	{
 		setAttribute(AttributeName.ISBLANK, value, null);
 	}
@@ -361,7 +361,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute IsPrintable
 	  * @param value the value to set the attribute to
 	  */
-	public void setIsPrintable(boolean value)
+	public void setIsPrintable(final boolean value)
 	{
 		setAttribute(AttributeName.ISPRINTABLE, value, null);
 	}
@@ -382,7 +382,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute IsTrapped
 	  * @param value the value to set the attribute to
 	  */
-	public void setIsTrapped(boolean value)
+	public void setIsTrapped(final boolean value)
 	{
 		setAttribute(AttributeName.ISTRAPPED, value, null);
 	}
@@ -403,7 +403,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute JobID
 	  * @param value the value to set the attribute to
 	  */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -424,7 +424,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute PageFormat
 	  * @param value the value to set the attribute to
 	  */
-	public void setPageFormat(String value)
+	public void setPageFormat(final String value)
 	{
 		setAttribute(AttributeName.PAGEFORMAT, value, null);
 	}
@@ -445,7 +445,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute PageIndex
 	  * @param value the value to set the attribute to
 	  */
-	public void setPageIndex(JDFIntegerRangeList value)
+	public void setPageIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PAGEINDEX, value, null);
 	}
@@ -469,7 +469,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute PageLabel
 	  * @param value the value to set the attribute to
 	  */
-	public void setPageLabel(String value)
+	public void setPageLabel(final String value)
 	{
 		setAttribute(AttributeName.PAGELABEL, value, null);
 	}
@@ -490,7 +490,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute PageLabelPrefix
 	  * @param value the value to set the attribute to
 	  */
-	public void setPageLabelPrefix(String value)
+	public void setPageLabelPrefix(final String value)
 	{
 		setAttribute(AttributeName.PAGELABELPREFIX, value, null);
 	}
@@ -511,7 +511,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute PageLabelSuffix
 	  * @param value the value to set the attribute to
 	  */
-	public void setPageLabelSuffix(String value)
+	public void setPageLabelSuffix(final String value)
 	{
 		setAttribute(AttributeName.PAGELABELSUFFIX, value, null);
 	}
@@ -532,7 +532,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute PageStatus
 	  * @param value the value to set the attribute to
 	  */
-	public void setPageStatus(String value)
+	public void setPageStatus(final String value)
 	{
 		setAttribute(AttributeName.PAGESTATUS, value, null);
 	}
@@ -553,7 +553,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute ProductID
 	  * @param value the value to set the attribute to
 	  */
-	public void setProductID(String value)
+	public void setProductID(final String value)
 	{
 		setAttribute(AttributeName.PRODUCTID, value, null);
 	}
@@ -574,7 +574,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute SourceBleedBox
 	  * @param value the value to set the attribute to
 	  */
-	public void setSourceBleedBox(JDFRectangle value)
+	public void setSourceBleedBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.SOURCEBLEEDBOX, value, null);
 	}
@@ -598,7 +598,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute SourceClipBox
 	  * @param value the value to set the attribute to
 	  */
-	public void setSourceClipBox(JDFRectangle value)
+	public void setSourceClipBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.SOURCECLIPBOX, value, null);
 	}
@@ -622,7 +622,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute SourceTrimBox
 	  * @param value the value to set the attribute to
 	  */
-	public void setSourceTrimBox(JDFRectangle value)
+	public void setSourceTrimBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.SOURCETRIMBOX, value, null);
 	}
@@ -646,7 +646,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (36) set attribute Template
 	  * @param value the value to set the attribute to
 	  */
-	public void setTemplate(boolean value)
+	public void setTemplate(final boolean value)
 	{
 		setAttribute(AttributeName.TEMPLATE, value, null);
 	}
@@ -675,7 +675,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/** (25) getCreateElementColorParams
-	 * 
+	 *
 	 * @return JDFElementColorParams the element
 	 */
 	public JDFElementColorParams getCreateElementColorParams()
@@ -697,7 +697,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (31) create inter-resource link to refTarget
 	  * @param refTarget the element that is referenced
 	  */
-	public void refElementColorParams(JDFElementColorParams refTarget)
+	public void refElementColorParams(final JDFElementColorParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -712,7 +712,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/** (25) getCreateImageCompressionParams
-	 * 
+	 *
 	 * @return JDFImageCompressionParams the element
 	 */
 	public JDFImageCompressionParams getCreateImageCompressionParams()
@@ -734,17 +734,17 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (31) create inter-resource link to refTarget
 	  * @param refTarget the element that is referenced
 	  */
-	public void refImageCompressionParams(JDFImageCompressionParams refTarget)
+	public void refImageCompressionParams(final JDFImageCompressionParams refTarget)
 	{
 		refElement(refTarget);
 	}
 
 	/** (26) getCreatePageElement
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFPageElement the element
 	 */
-	public JDFPageElement getCreatePageElement(int iSkip)
+	public JDFPageElement getCreatePageElement(final int iSkip)
 	{
 		return (JDFPageElement) getCreateElement_KElement(ElementName.PAGEELEMENT, null, iSkip);
 	}
@@ -754,14 +754,14 @@ public abstract class JDFAutoPageData extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPageElement the element
 	 * default is getPageElement(0)     */
-	public JDFPageElement getPageElement(int iSkip)
+	public JDFPageElement getPageElement(final int iSkip)
 	{
 		return (JDFPageElement) getElement(ElementName.PAGEELEMENT, null, iSkip);
 	}
 
 	/**
 	 * Get all PageElement from the current element
-	 * 
+	 *
 	 * @return Collection<JDFPageElement>, null if none are available
 	 */
 	public Collection<JDFPageElement> getAllPageElement()
@@ -800,7 +800,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/** (25) getCreateScreeningParams
-	 * 
+	 *
 	 * @return JDFScreeningParams the element
 	 */
 	public JDFScreeningParams getCreateScreeningParams()
@@ -822,17 +822,18 @@ public abstract class JDFAutoPageData extends JDFElement
 	  * (31) create inter-resource link to refTarget
 	  * @param refTarget the element that is referenced
 	  */
-	public void refScreeningParams(JDFScreeningParams refTarget)
+	public void refScreeningParams(final JDFScreeningParams refTarget)
 	{
 		refElement(refTarget);
 	}
 
 	/** (26) getCreateSeparationSpec
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
-	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
+	@Override
+	public JDFSeparationSpec getCreateSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
@@ -842,16 +843,18 @@ public abstract class JDFAutoPageData extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 * default is getSeparationSpec(0)     */
-	public JDFSeparationSpec getSeparationSpec(int iSkip)
+	@Override
+	public JDFSeparationSpec getSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
 
 	/**
 	 * Get all SeparationSpec from the current element
-	 * 
+	 *
 	 * @return Collection<JDFSeparationSpec>, null if none are available
 	 */
+	@Override
 	public Collection<JDFSeparationSpec> getAllSeparationSpec()
 	{
 		final VElement vc = getChildElementVector(ElementName.SEPARATIONSPEC, null);
@@ -873,6 +876,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	 * (30) append element SeparationSpec
 	 * @return JDFSeparationSpec the element
 	 */
+	@Override
 	public JDFSeparationSpec appendSeparationSpec()
 	{
 		return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);

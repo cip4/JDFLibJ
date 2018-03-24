@@ -170,6 +170,7 @@ public class WalkIgnore extends WalkElement
 		v.add(ElementName.SADDLESTITCHINGPARAMS);
 		v.add(ElementName.SCANPARAMS);
 		v.add(ElementName.SCREENINGINTENT);
+		v.add(ElementName.SEPARATIONSPEC);
 		v.add(ElementName.SIDESEWINGPARAMS);
 		v.add(ElementName.SOURCERESOURCE);
 		v.add(ElementName.SPAWNED);

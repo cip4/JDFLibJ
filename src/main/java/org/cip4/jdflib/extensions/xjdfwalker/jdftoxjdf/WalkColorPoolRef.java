@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
@@ -79,14 +79,14 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- * 
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class WalkColorPoolRef extends WalkRefElement
 {
 	/**
-	 * 
+	 *
 	 */
 	public WalkColorPoolRef()
 	{
@@ -103,17 +103,6 @@ public class WalkColorPoolRef extends WalkRefElement
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return toCheck instanceof JDFRefElement && "ColorPoolRef".equals(toCheck.getLocalName());
-	}
-
-	/**
 	 * @param xjdf
 	 * @return true if must continue
 	 */
@@ -127,7 +116,7 @@ public class WalkColorPoolRef extends WalkRefElement
 			updateColorPoolColors(colorPool);
 		}
 		refElem.renameElement("ColorRef", null);
-		KElement ret = super.walk(jdf, xjdf);
+		final KElement ret = super.walk(jdf, xjdf);
 		if (!jdfToXJDF.isRetainAll())
 		{
 			xjdf.removeAttribute("ColorRef");
@@ -149,14 +138,14 @@ public class WalkColorPoolRef extends WalkRefElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#setResource(org.cip4.jdflib.core.JDFElement, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected VElement setResource(JDFElement rl, JDFResource linkTarget, KElement xRoot)
+	protected VElement setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
 	{
-		VElement vRes = super.setResource(rl, linkTarget, xRoot);
+		final VElement vRes = super.setResource(rl, linkTarget, xRoot);
 		if (!jdfToXJDF.isRetainAll() && vRes != null && vRes.size() > 0)
 		{
-			KElement res = vRes.get(0);
-			ResourceHelper ph = new ResourceHelper(res);
-			SetHelper sh = ph.getSet();
+			final KElement res = vRes.get(0);
+			final ResourceHelper ph = new ResourceHelper(res);
+			final SetHelper sh = ph.getSet();
 			if (sh != null && sh.getUsage() == null)
 			{
 				sh.setUsage(EnumUsage.Input);
