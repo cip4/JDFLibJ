@@ -6569,4 +6569,14 @@ public class JDFElement extends KElement
 		else
 			return null;
 	}
+
+	/**
+	 * @see org.cip4.jdflib.core.KElement#init()
+	 */
+	@Override
+	public boolean init()
+	{
+		infotables = null;
+		return super.init();
+	}
 }

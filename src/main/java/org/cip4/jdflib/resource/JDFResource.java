@@ -1676,7 +1676,7 @@ public class JDFResource extends JDFElement
 				}
 			}
 		}
-		return true;
+		return super.init();
 	}
 
 	/**
@@ -1696,12 +1696,10 @@ public class JDFResource extends JDFElement
 	public JDFResource makeRootResource(String alias, final JDFElement parentPool, final boolean bLinkHere)
 	{
 		JDFResource retRes = this;
-
 		// if this is already in the resource pool do nothing
 		if (isResourceElement())
 		{
 			JDFElement link = null;
-
 			if (bLinkHere)
 			{
 				// create a RefElement at the same (in front of) position as

@@ -268,7 +268,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		rl.removeAttribute(AttributeName.MINSTATUS);
 
 		n.setVersion(JDFElement.EnumVersion.Version_1_2);
+		rl.init();
 		rl.setDraftOK(true);
+
 		assertTrue("draft", rl.getMinStatus() == JDFResource.EnumResStatus.Draft);
 		assertTrue("has draft", rl.hasAttribute(AttributeName.DRAFTOK));
 		assertTrue("has no MinStatus", !rl.hasAttribute(AttributeName.MINSTATUS));

@@ -73,6 +73,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StringUtil;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -121,6 +122,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	@Ignore
 	public void testSammel19()
 	{
 		for (int i = 0; i < 999; i++)
