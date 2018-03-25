@@ -91,8 +91,9 @@ public class RemoveEmptyXJDF extends RemoveEmpty
 	{
 		super();
 		addIgnoreElement(XJDFConstants.Header);
-		addIgnoreElement(ElementName.MARKOBJECT);
 		addIgnoreElement(ElementName.CONTENTOBJECT);
+		addIgnoreElement(ElementName.EXPOSEDMEDIA);
+		addIgnoreElement(ElementName.MARKOBJECT);
 		addIgnoreElement(ElementName.NODEINFO);
 	}
 

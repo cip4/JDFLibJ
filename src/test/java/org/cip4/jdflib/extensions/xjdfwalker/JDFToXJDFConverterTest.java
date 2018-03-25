@@ -2103,12 +2103,17 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		ip.setPolarity(EnumPolarity.Negative);
 		final JDFRunList ruli = (JDFRunList) plateset.addResource(ElementName.RUNLIST, EnumUsage.Input);
 		ruli.setFileURL("file:///foo.pdf");
-		plateset.addResource(ElementName.MEDIA, EnumUsage.Input).setProductID("p1");
+		final JDFMedia plate = (JDFMedia) plateset.addResource(ElementName.MEDIA, EnumUsage.Input);
+		plate.setMediaType(EnumMediaType.Plate);
+		plate.setProductID("p1");
+
 		plateset.addResource(ElementName.LAYOUT, EnumUsage.Input);
 		final JDFExposedMedia xm = (JDFExposedMedia) plateset.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
 		final JDFNode cp = product.addCombined(new VString("InkZoneCalculation ConventionalPrinting", " "));
 		cp.ensureLink(xm, EnumUsage.Input, null);
-		cp.addResource(ElementName.MEDIA, EnumUsage.Input).setProductID("p2");
+		final JDFMedia paper = (JDFMedia) cp.addResource(ElementName.MEDIA, EnumUsage.Input);
+		paper.setProductID("p2");
+		paper.setMediaType(EnumMediaType.Paper);
 		return product;
 	}
 

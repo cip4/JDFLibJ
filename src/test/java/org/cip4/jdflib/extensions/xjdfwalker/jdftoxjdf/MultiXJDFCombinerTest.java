@@ -121,6 +121,25 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testSammel19()
+	{
+		for (int i = 0; i < 999; i++)
+		{
+			final JDFToXJDF conv = new JDFToXJDF();
+			conv.setCleanup(false);
+			conv.setWantDependent(false);
+			final JDFNode root = JDFNode.parseFile(sm_dirTestData + "sammel19.jdf");
+			final Vector<XJDFHelper> v = conv.getXJDFs(root);
+			assertEquals(11, v.size());
+			final XJDFHelper hc = new MultiXJDFCombiner(v).getCombinedHelper();
+			//writeRoundTripX(hc.getRoot(), "sammel19", null);
+		}
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testSammelDrop()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
