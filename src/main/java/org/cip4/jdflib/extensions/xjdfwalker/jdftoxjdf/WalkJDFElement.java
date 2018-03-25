@@ -701,7 +701,7 @@ public class WalkJDFElement extends WalkElement
 			resourceSet.copyAttribute(AttributeName.USAGE, rl);
 			resourceSet.copyAttribute(AttributeName.PROCESSUSAGE, rl);
 		}
-		if (jdfToXJDF.isSingleNode())
+		if (jdfToXJDF.isSingleNode() && jdfToXJDF.wantDependent())
 		{
 			setDependent(resourceSet, rl, linkRoot);
 		}

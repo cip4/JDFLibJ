@@ -3137,9 +3137,25 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			return null;
 		}
-
-		// return contents as vector
-		return resList.getPoolChildren(null, mLinkAtt, null);
+		if (mLinkAtt == null)
+		{
+			final VElement v = new VElement();
+			final Vector<JDFResourceLink> vrl = resList.getLinks();
+			if (vrl != null && !vrl.isEmpty())
+			{
+				v.addAll(vrl);
+				return v;
+			}
+			else
+			{
+				return null;
+			}
+		}
+		else
+		{
+			// return contents as vector
+			return resList.getPoolChildren(null, mLinkAtt, null);
+		}
 	}
 
 	/**
@@ -3397,7 +3413,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 *
-
+	
 	 *
 	 */
 
@@ -6083,7 +6099,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public JDFResourceLinkPool getResourceLinkPool()
 	{
-		return (JDFResourceLinkPool) getElement(ElementName.RESOURCELINKPOOL, null, 0);
+		return (JDFResourceLinkPool) getElement_KElement(ElementName.RESOURCELINKPOOL, null, 0);
 	}
 
 	// ////////////////////////////////////////////////////////////////////
@@ -6115,10 +6131,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public JDFResourcePool getResourcePool()
 	{
-		return (JDFResourcePool) getElement(ElementName.RESOURCEPOOL, null, 0);
+		return (JDFResourcePool) getElement_KElement(ElementName.RESOURCEPOOL, null, 0);
 	}
-
-	// ////////////////////////////////////////////////////////////////////
 
 	/**
 	 * Get element StatusPool, create if it doesn't exist

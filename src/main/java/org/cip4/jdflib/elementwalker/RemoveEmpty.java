@@ -71,6 +71,8 @@
  */
 package org.cip4.jdflib.elementwalker;
 
+import java.util.Set;
+
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
@@ -181,9 +183,10 @@ public class RemoveEmpty extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e1, final KElement trackElem)
 		{
-			final boolean hasGood = walkAttributes(e1);
-			final boolean b = !hasGood && zappElements ? !hasChild(e1) : false;
-			if (b)
+			final boolean hasreq = zappElements ? hasRequiredChild(e1) : true;
+			final boolean b = walkAttributes(e1);
+			final boolean hasAny = hasreq && (b || hasChild(e1));
+			if (!hasAny)
 			{
 				e1.deleteNode();
 				return null;
@@ -194,9 +197,22 @@ public class RemoveEmpty extends BaseElementWalker
 			}
 		}
 
+		/**
+		 *
+		 * @param e1
+		 * @return
+		 */
 		protected boolean hasChild(final KElement e1)
 		{
 			return e1.getFirstChildElement() != null || e1.getText() != null || e1.getXMLComment(0) != null;
+		}
+
+		/*Ü
+		 *
+		 */
+		protected boolean hasRequiredChild(final KElement e1)
+		{
+			return true;
 		}
 
 		/**
@@ -207,8 +223,8 @@ public class RemoveEmpty extends BaseElementWalker
 		protected boolean walkAttributes(final KElement e1)
 		{
 			final JDFAttributeMap map = e1.getAttributeMap_KElement();
-			final VString allKeys = map.getKeys();
-			boolean hasGood = false;
+			final Set<String> allKeys = map.keySet();
+			boolean hasGood = !zappElements;
 			final VString dummy = zappElements ? getDummyAttributes() : null;
 			for (final String key : allKeys)
 			{
@@ -216,7 +232,7 @@ public class RemoveEmpty extends BaseElementWalker
 				{
 					e1.removeAttribute(key);
 				}
-				else if (zappElements && !hasGood && !dummy.contains(key))
+				else if (!hasGood && !dummy.contains(key))
 				{
 					hasGood = true;
 				}

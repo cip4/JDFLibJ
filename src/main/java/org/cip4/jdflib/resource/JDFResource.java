@@ -2021,7 +2021,7 @@ public class JDFResource extends JDFElement
 						for (final KElement lE : vTmp)
 						{
 							final JDFResourceLink link = (JDFResourceLink) lE;
-							if (resID.equals(link.getrRef()))
+							if (resID.equals(link.getAttributeRaw(AttributeName.RREF)))
 							{
 								vRet.add(link);
 							}
@@ -5836,7 +5836,7 @@ public class JDFResource extends JDFElement
 		final JDFResource partRoot = getResourceRoot();
 		if (partRoot != null)
 		{
-			final String idKeys = partRoot.getAttribute(AttributeName.PARTIDKEYS, null, null);
+			final String idKeys = partRoot.getAttributeRaw(AttributeName.PARTIDKEYS);
 			return StringUtil.tokenize(idKeys, JDFConstants.BLANK, false);
 		}
 		return null;

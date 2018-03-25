@@ -123,11 +123,14 @@ public class MultiXJDFCombiner
 			{
 				il.add(i);
 			}
-			for (final SetHelper sh : vsh)
+			if (vsh != null)
 			{
-				if (sh.getCombinedProcessIndex() == null)
+				for (final SetHelper sh : vsh)
 				{
-					sh.setCombinedProcessIndex(il);
+					if (sh.getCombinedProcessIndex() == null)
+					{
+						sh.setCombinedProcessIndex(il);
+					}
 				}
 			}
 		}

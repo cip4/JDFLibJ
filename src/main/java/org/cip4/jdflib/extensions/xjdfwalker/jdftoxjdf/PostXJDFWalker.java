@@ -1597,8 +1597,21 @@ class PostXJDFWalker extends BaseElementWalker
 		{
 			moveToSet(xjdf);
 			final ResourceHelper rh = new ResourceHelper(xjdf);
+			moveAmountToPool(rh);
 			final KElement ret = super.walk(xjdf, dummy);
 			return ret;
+		}
+
+		private void moveAmountToPool(final ResourceHelper rh)
+		{
+			final KElement res = rh.getRoot();
+			final int amount = res.getIntAttribute(AttributeName.AMOUNT, null, 0);
+			res.removeAttribute(AttributeName.AMOUNT);
+			if (amount > 0 && rh.getAmountPool() == null)
+			{
+				rh.setAmount(amount, null, true);
+			}
+
 		}
 
 		/**

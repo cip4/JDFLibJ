@@ -148,11 +148,11 @@ public class RemoveEmptyXJDF extends RemoveEmpty
 		}
 
 		/**
-		 * part elements are ignored
-		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#hasChild(org.cip4.jdflib.core.KElement)
+		 *
+		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#hasRequiredChild(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		protected boolean hasChild(final KElement e1)
+		protected boolean hasRequiredChild(final KElement e1)
 		{
 			return e1.hasChildElement(ElementName.RESOURCEINFO, null);
 		}

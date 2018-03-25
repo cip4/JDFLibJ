@@ -223,7 +223,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	@Override
 	public EnumUsage getUsage()
 	{
-		return EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
+		return EnumUsage.getEnum(getAttributeRaw(AttributeName.USAGE));
 	}
 
 	/**
@@ -662,7 +662,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		}
 		else
 		{ // calculate availability directly, but only for the subelements as specified by
-			// partMap
+				// partMap
 			final VElement leaves2 = getTargetVector(-1);
 			for (final KElement e : leaves2)
 			{

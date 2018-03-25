@@ -124,6 +124,7 @@ public class JDFToXJDF extends PackageElementWalker
 		KElement.uniqueID(-1000); // don't start at zero to avoid collisions in short ID scenarios
 		componentProductMap = new JDFAttributeMap();
 		resourceAlias = new HashSet<>();
+		wantDependent = true;
 	}
 
 	/**
@@ -338,6 +339,7 @@ public class JDFToXJDF extends PackageElementWalker
 	private boolean removeSignatureName = true;
 
 	private EnumProcessPartition processPartition = EnumProcessPartition.processTypes;
+	private boolean wantDependent;
 
 	/**
 	 * @param bProcessList the ProcessList to set
@@ -958,6 +960,7 @@ public class JDFToXJDF extends PackageElementWalker
 	{
 		final boolean oldCleanup = isCleanup();
 		setCleanup(false);
+		setWantDependent(false);
 		final Vector<XJDFHelper> v = getXJDFs(node);
 
 		final XJDFHelper combinedHelper = new MultiXJDFCombiner(v).getCombinedHelper();
@@ -967,5 +970,18 @@ public class JDFToXJDF extends PackageElementWalker
 			combinedHelper.cleanUp();
 		}
 		return combinedHelper;
+	}
+
+	public boolean wantDependent()
+	{
+		return wantDependent;
+	}
+
+	/**
+	 * @param wantDependent the wantDependent to set
+	 */
+	public void setWantDependent(final boolean wantDependent)
+	{
+		this.wantDependent = wantDependent;
 	}
 }
