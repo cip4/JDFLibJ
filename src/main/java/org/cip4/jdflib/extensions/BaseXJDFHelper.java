@@ -51,7 +51,7 @@ import org.cip4.jdflib.util.ContainerUtil;
  */
 public abstract class BaseXJDFHelper
 {
-	protected final Log log;
+	protected final static Log log = LogFactory.getLog(BaseXJDFHelper.class);
 
 	/**
 	 *
@@ -67,7 +67,6 @@ public abstract class BaseXJDFHelper
 	protected BaseXJDFHelper(final KElement theElement)
 	{
 		super();
-		log = LogFactory.getLog(BaseXJDFHelper.class);
 		this.theElement = theElement;
 	}
 
