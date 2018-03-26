@@ -305,10 +305,17 @@ public class WalkXJDFResource extends WalkXElement
 		return res;
 	}
 
+	/**
+	 *
+	 * @param theNode
+	 * @param name
+	 * @param id
+	 * @param setRoot
+	 * @return
+	 */
 	protected JDFResource createNewResource(final JDFNode theNode, final String name, final String id, final KElement setRoot)
 	{
-		JDFResource res;
-		res = theNode.addResource(name, null);
+		final JDFResource res = theNode.addResource(name, null);
 		res.setID(id);
 		res.copyAttribute(AttributeName.DESCRIPTIVENAME, setRoot);
 		res.copyAttribute(AttributeName.COMMENTURL, setRoot);
