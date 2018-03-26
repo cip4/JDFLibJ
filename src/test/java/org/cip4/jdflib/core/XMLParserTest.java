@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,8 @@ package org.cip4.jdflib.core;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.io.File;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.After;
 import org.junit.Test;
@@ -89,10 +91,24 @@ public class XMLParserTest extends JDFTestCaseBase
 	@Test
 	public void testStar()
 	{
-		XMLDoc d = new XMLDoc("a*", null);
-		String xml = d.toXML();
-		XMLParser p = new XMLParser();
+		final XMLDoc d = new XMLDoc("a*", null);
+		final String xml = d.toXML();
+		final XMLParser p = new XMLParser();
 		assertNull(p.parseString(xml));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testParseFile()
+	{
+		for (int i = 0; i < 444; i++)
+		{
+			final XMLParser p = XMLParserFactory.getFactory().get();
+			assertNotNull(p.parseFile(new File(sm_dirTestData + "ResourceInfo.jmf")));
+		}
 	}
 
 	/**
@@ -102,8 +118,8 @@ public class XMLParserTest extends JDFTestCaseBase
 	@Test
 	public void testFatalError()
 	{
-		String xml = "<a>aaa</b>";
-		XMLParser p = new XMLParser();
+		final String xml = "<a>aaa</b>";
+		final XMLParser p = new XMLParser();
 		assertNull(p.parseString(xml));
 	}
 
@@ -114,7 +130,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	@Test
 	public void testFatalErrorFile()
 	{
-		XMLParser p = new XMLParser();
+		final XMLParser p = new XMLParser();
 		assertNull(p.parseFile(sm_dirTestData + "corrupt.jdf"));
 	}
 
@@ -125,11 +141,11 @@ public class XMLParserTest extends JDFTestCaseBase
 	@Test
 	public void testMeanChars()
 	{
-		XMLParser p = new XMLParser();
-		XMLDoc d = p.parseString("<foo a=\"SchuÌˆtz_Teil5_bel\"/>");
+		final XMLParser p = new XMLParser();
+		final XMLDoc d = p.parseString("<foo a=\"SchuÌˆtz_Teil5_bel\"/>");
 		assertNotNull(d);
-		String s = d.write2String(2);
-		XMLDoc d2 = p.parseString(s);
+		final String s = d.write2String(2);
+		final XMLDoc d2 = p.parseString(s);
 		assertNotNull(d2);
 	}
 
@@ -140,7 +156,7 @@ public class XMLParserTest extends JDFTestCaseBase
 	@Test
 	public void testWantLog()
 	{
-		XMLParser p = new XMLParser();
+		final XMLParser p = new XMLParser();
 		XMLErrorHandler.isWantLog();
 		XMLDoc d = p.parseString("<foo a=\"SchuÌˆtz_Teil5_bel\">");
 		XMLErrorHandler.setWantLog(false);
@@ -157,15 +173,15 @@ public class XMLParserTest extends JDFTestCaseBase
 	@Test
 	public void testSkip()
 	{
-		XMLParser p = new XMLParser();
-		boolean b = XMLParser.m_searchStream;
+		final XMLParser p = new XMLParser();
+		final boolean b = XMLParser.m_searchStream;
 		XMLParser.m_searchStream = true;
-		XMLDoc d = p.parseString("aaaabbb  ss<?xml version='1.0' encoding='utf-8' ?>\n<foo />");
+		final XMLDoc d = p.parseString("aaaabbb  ss<?xml version='1.0' encoding='utf-8' ?>\n<foo />");
 		XMLParser.m_searchStream = b;
 
 		assertNotNull(d);
-		String s = d.write2String(2);
-		XMLDoc d2 = p.parseString(s);
+		final String s = d.write2String(2);
+		final XMLDoc d2 = p.parseString(s);
 		assertNotNull(d2);
 	}
 

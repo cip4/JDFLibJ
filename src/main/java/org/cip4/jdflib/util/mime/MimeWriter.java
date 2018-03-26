@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,24 +56,23 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.util.mime;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -107,17 +106,19 @@ import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
+import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
 
 /**
  * class to create and write mime files
- * 
+ *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * July 24, 2009
  */
 public class MimeWriter extends MimeHelper
@@ -142,7 +143,7 @@ public class MimeWriter extends MimeHelper
 			super(_out);
 		}
 
-		/**  
+		/**
 		 * replaces replace 'content-type:foo;' with 'content-type:foo\n' if necessary
 		 * @see java.io.BufferedOutputStream#write(int)
 		 */
@@ -176,7 +177,7 @@ public class MimeWriter extends MimeHelper
 			super.write(b);
 		}
 
-		/** 
+		/**
 		 * @see java.io.BufferedOutputStream#write(byte[], int, int)
 		 */
 		@Override
@@ -214,13 +215,13 @@ public class MimeWriter extends MimeHelper
 	 */
 	public InputStream getInputStream() throws IOException, MessagingException
 	{
-		ByteArrayIOStream bis = new ByteArrayIOStream();
+		final ByteArrayIOStream bis = new ByteArrayIOStream();
 		writeToStream(bis);
 		return bis.getInputStream();
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public MimeWriter()
 	{
@@ -231,7 +232,7 @@ public class MimeWriter extends MimeHelper
 
 	/**
 	 * @param mp
-	 * 
+	 *
 	 */
 	public MimeWriter(final Multipart mp)
 	{
@@ -280,7 +281,7 @@ public class MimeWriter extends MimeHelper
 		}
 		try
 		{
-			ByteArrayIOInputStream inputStream = ByteArrayIOStream.getBufferedInputStream(is);
+			final ByteArrayIOInputStream inputStream = ByteArrayIOStream.getBufferedInputStream(is);
 			final ByteArrayDataSource ds = new ByteArrayDataSource(inputStream, contentType);
 			bp.setDataHandler(new DataHandler(ds));
 		}
@@ -288,7 +289,7 @@ public class MimeWriter extends MimeHelper
 		{
 			log.error("cannot update mime package", e);
 		}
-		catch (IOException x)
+		catch (final IOException x)
 		{
 			log.error("cannot update mime package", x);
 		}
@@ -349,21 +350,14 @@ public class MimeWriter extends MimeHelper
 		final File file = new File(fileName);
 		try
 		{
-			final FileOutputStream fos = new FileOutputStream(file);
-			writeToStream(fos);
+			final OutputStream fos = FileUtil.getBufferedOutputStream(file);
+			if (fos != null)
+			{
+				writeToStream(fos);
+			}
 			return file;
 		}
-		catch (final FileNotFoundException e)
-		{
-			log.error("cannot write mime package", e);
-			return null;
-		}
-		catch (final IOException e)
-		{
-			log.error("cannot write mime package", e);
-			return null;
-		}
-		catch (final MessagingException e)
+		catch (final Exception e)
 		{
 			log.error("cannot write mime package", e);
 			return null;
@@ -447,8 +441,7 @@ public class MimeWriter extends MimeHelper
 		}
 
 		mm.writeTo(outStream);
-		outStream.flush();
-		outStream.close();
+		StreamUtil.close(outStream);
 	}
 
 	/**
@@ -464,13 +457,13 @@ public class MimeWriter extends MimeHelper
 		final URL url = UrlUtil.stringToURL(strUrl);
 		if ("File".equalsIgnoreCase(url.getProtocol()))
 		{
-			File outFile = writeToFile(UrlUtil.urlToFile(strUrl).getAbsolutePath());
+			final File outFile = writeToFile(UrlUtil.urlToFile(strUrl).getAbsolutePath());
 			p = outFile == null ? null : new UrlPart(outFile);
 		}
 		else
 		// assume http
 		{
-			ByteArrayIOStream bos = new ByteArrayIOStream();
+			final ByteArrayIOStream bos = new ByteArrayIOStream();
 			writeToStream(bos);
 			p = UrlUtil.writeToURL(strUrl, bos.getInputStream(), UrlUtil.POST, theMultipart.getContentType(), md == null ? null : md.httpDetails);
 		}
@@ -551,7 +544,7 @@ public class MimeWriter extends MimeHelper
 
 	/**
 	 * Adds a JDF document to a multipart. Any files referenced by the JDF document using FileSpec/@URL are also included in the multipart.
-	 * 
+	 *
 	 * @param docJDF the JDF document
 	 * @param cid the CID the JDF document should have in the multipart
 	 * @return the number of files added to the multipart

@@ -118,8 +118,10 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.process.JDFColorPool;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.MyArgs;
+import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
@@ -2249,14 +2251,9 @@ public class JDFValidator
 		}
 		if (bTryFormats)
 		{
-			try
-			{
-				d = processMimeStream(new FileInputStream(file));
-			}
-			catch (final FileNotFoundException x)
-			{
-				// nop
-			}
+			final InputStream inStream = FileUtil.getBufferedInputStream(file);
+			d = processMimeStream(inStream);
+			StreamUtil.close(inStream);
 		}
 		return d;
 	}
