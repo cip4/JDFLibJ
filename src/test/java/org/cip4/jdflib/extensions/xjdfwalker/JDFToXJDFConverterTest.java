@@ -674,7 +674,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		conv.setParameterSet(true);
 		final KElement xjdf = conv.convert(n);
 		assertEquals(xjdf.getXPathAttribute("ParameterSet/Parameter/NodeInfo/@Status", null), "Cleanup");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/@DescriptiveName", null), "desc");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/@DescriptiveName", null), "desc");
 	}
 
 	/**
@@ -1577,6 +1577,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		n.setType(EnumType.ConventionalPrinting);
 		final JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Input);
 		c.setDescriptiveName("c1");
+		c.setProductID("p1");
 		c.appendLocationElement().setLocID("L1");
 
 		final JDFToXJDF conv = new JDFToXJDF();

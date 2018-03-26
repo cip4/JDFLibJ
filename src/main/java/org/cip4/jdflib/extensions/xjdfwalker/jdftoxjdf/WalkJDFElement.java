@@ -681,9 +681,10 @@ public class WalkJDFElement extends WalkElement
 		resourceSet.setAttribute(AttributeName.NAME, jdfToXJDF.getSetName(linkRoot));
 		if (rl instanceof JDFResourceLink)
 			resourceSet.setAttributes(rl);
-		resourceSet.moveAttribute(AttributeName.DESCRIPTIVENAME, linkRoot);
-		resourceSet.moveAttribute(AttributeName.COMMENTURL, linkRoot);
-		resourceSet.moveAttribute(AttributeName.UNIT, linkRoot);
+		final JDFResource rootroot = linkRoot == null ? null : linkRoot.getResourceRoot();
+		resourceSet.copyAttribute(AttributeName.DESCRIPTIVENAME, rootroot);
+		resourceSet.moveAttribute(AttributeName.COMMENTURL, rootroot);
+		resourceSet.copyAttribute(AttributeName.UNIT, rootroot);
 
 		//TODO orientation + coordinate system stuff
 		resourceSet.removeAttribute(AttributeName.RREF);
