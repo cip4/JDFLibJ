@@ -840,22 +840,23 @@ class PostXJDFWalker extends BaseElementWalker
 		/**
 		 * @param strippingParams
 		 * @param layoutseth
-		 * @param map
+		 * @param layoutMap
 		 * @return
 		 */
-		private JDFAttributeMap mergeStrippingParamsLayout(final JDFStrippingParams strippingParams, final SetHelper layoutseth, final JDFAttributeMap map)
+		private JDFAttributeMap mergeStrippingParamsLayout(final JDFStrippingParams strippingParams, final SetHelper layoutseth, final JDFAttributeMap layoutMap)
 		{
-			if (isRemoveSignatureName() && map != null)
+			if (isRemoveSignatureName() && layoutMap != null)
 			{
-				map.remove(AttributeName.SIGNATURENAME);
+				layoutMap.remove(AttributeName.SIGNATURENAME);
 			}
-			boolean cloneBS = map != null && map.containsKey(AttributeName.BINDERYSIGNATURENAME);
-			final String bsName = getBSID(strippingParams, map);
-			final JDFAttributeMap bsMap = new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsName);
-			final String cellIndex = map == null ? null : map.remove(AttributeName.CELLINDEX);
-			final ResourceHelper layoutPartitionH = layoutseth.getCreatePartition(map, true);
+			boolean cloneBS = layoutMap != null && layoutMap.containsKey(AttributeName.BINDERYSIGNATURENAME);
+			final String bsName = getBSName(strippingParams, layoutMap);
+			final String bsID = getBSID(strippingParams, bsName);
+			final JDFAttributeMap bsMap = new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsID);
+			final String cellIndex = layoutMap == null ? null : layoutMap.remove(AttributeName.CELLINDEX);
+			final ResourceHelper layoutPartitionH = layoutseth.getCreatePartition(layoutMap, true);
 			final JDFLayout layoutPartition = (JDFLayout) layoutPartitionH.getResource();
-			ensureLayoutPositions(strippingParams, layoutPartition, bsName);
+			ensureLayoutPositions(strippingParams, layoutPartition, bsID);
 
 			final VElement childElementVector = strippingParams.getChildElementVector(ElementName.SIGNATURECELL, null);
 			if (childElementVector != null)
@@ -870,7 +871,7 @@ class PostXJDFWalker extends BaseElementWalker
 			SetHelper bsSet = newRootHelper.getSet(ElementName.BINDERYSIGNATURE, 0);
 			if (bsSet == null)
 				bsSet = newRootHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
-			ResourceHelper bsHelper = bsSet.getPartition(XJDFConstants.BinderySignatureID, bsName);
+			ResourceHelper bsHelper = bsSet.getPartition(XJDFConstants.BinderySignatureID, bsID);
 			if (bsHelper == null)
 			{
 				bsHelper = bsSet.getPartition(0);
@@ -883,7 +884,7 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				cloneBS = false;
 			}
-			if (cloneBS && !(vMap.size() == 1 && bsName.equals(vMap.get(0).get(XJDFConstants.BinderySignatureID))))
+			if (cloneBS && !(vMap.size() == 1 && bsID.equals(vMap.get(0).get(XJDFConstants.BinderySignatureID))))
 			{
 				final ResourceHelper newHelper = new ResourceHelper(bsSet.copyHelper(bsHelper));
 				newHelper.setPartMap(bsMap);
@@ -894,15 +895,15 @@ class PostXJDFWalker extends BaseElementWalker
 			}
 			else
 			{
-				bsHelper.ensurePart(XJDFConstants.BinderySignatureID, bsName);
+				bsHelper.ensurePart(XJDFConstants.BinderySignatureID, bsID);
 			}
 
 			final JDFBinderySignature bs = (JDFBinderySignature) bsHelper.getCreateResource();
 			moveStripCells(bs, childElementVector);
 			moveBSFromStripping(bs, strippingParams);
 			final SetHelper niSet = newRootHelper.getSet(ElementName.NODEINFO, 0);
-			final ResourceHelper ni = niSet == null ? null : niSet.getPartition(map);
-			moveGangSourceFromStripping(ni, bsName, strippingParams);
+			final ResourceHelper ni = niSet == null ? null : niSet.getPartition(layoutMap);
+			moveGangSourceFromStripping(ni, bsID, strippingParams);
 
 			final VElement positions = layoutPartition.getChildElementVector(ElementName.POSITION, null);
 			if (positions != null)
@@ -911,14 +912,25 @@ class PostXJDFWalker extends BaseElementWalker
 				{
 					if (!position.hasAttribute(XJDFConstants.BinderySignatureID))
 					{
-						position.setAttribute(XJDFConstants.BinderySignatureID, bsName);
+						position.setAttribute(XJDFConstants.BinderySignatureID, bsID);
 					}
 				}
 			}
 			strippingParams.removeAttribute(ElementName.BINDERYSIGNATURE + "Ref");
 			strippingParams.removeAttribute(XJDFConstants.BinderySignatureID);
 			layoutPartition.copyInto(strippingParams, false);
-			return map;
+			return layoutMap;
+		}
+
+		/**
+		 * @param strippingParams
+		 * @param bsName
+		 * @return
+		 */
+		private String getBSID(JDFStrippingParams strippingParams, String bsName)
+		{
+			final String bsID = strippingParams.getNonEmpty(XJDFConstants.BinderySignatureID);
+			return bsID == null ? bsName : bsID;
 		}
 
 		private void moveGangSourceFromStripping(final ResourceHelper nih, final String bsName, final JDFStrippingParams strippingParams)
@@ -974,7 +986,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param map
 		 * @return
 		 */
-		String getBSID(final JDFStrippingParams strippingParams, final JDFAttributeMap map)
+		String getBSName(final JDFStrippingParams strippingParams, final JDFAttributeMap map)
 		{
 			String bsName = map == null ? null : map.remove(AttributeName.BINDERYSIGNATURENAME);
 			final String bsn2 = strippingParams.getNonEmpty(XJDFConstants.BinderySignatureIDs);
@@ -994,9 +1006,9 @@ class PostXJDFWalker extends BaseElementWalker
 		 *
 		 * @param strippingParams
 		 * @param layoutPartition
-		 * @param bsName
+		 * @param bsID
 		 */
-		private void ensureLayoutPositions(final JDFStrippingParams strippingParams, final JDFLayout layoutPartition, final String bsName)
+		private void ensureLayoutPositions(final JDFStrippingParams strippingParams, final JDFLayout layoutPartition, final String bsID)
 		{
 			VElement positions = strippingParams.getChildElementVector(ElementName.POSITION, null);
 			if (positions != null && positions.size() > 0)
@@ -1013,7 +1025,7 @@ class PostXJDFWalker extends BaseElementWalker
 			final String attribute = AttributeName.STACKDEPTH;
 			for (final KElement position : positions)
 			{
-				position.setAttribute(XJDFConstants.BinderySignatureID, bsName);
+				position.setAttribute(XJDFConstants.BinderySignatureID, bsID);
 				position.copyAttribute(attribute, strippingParams);
 			}
 			strippingParams.removeAttribute(attribute);
