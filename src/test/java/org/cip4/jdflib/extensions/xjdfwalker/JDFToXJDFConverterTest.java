@@ -1608,6 +1608,43 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testLayoutDescName()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Imposition);
+		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Input);
+		lo.setName("n1");
+		lo.setDescriptiveName("d1");
+		final JDFLayout sheet = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s1");
+		sheet.setDescriptiveName("s1");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		assertEquals("n1", new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getDescriptiveName());
+		assertEquals("s1", new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getPartition(0).getDescriptiveName());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testExternalID()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Imposition);
+		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Input);
+		lo.setProductID("p1");
+		final JDFLayout sheet = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s1");
+		sheet.setDescriptiveName("s1");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		assertNull(new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getAttribute(XJDFConstants.ExternalID));
+		assertEquals("p1", new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getPartition(0).getExternalID());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testLayoutMedia()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();

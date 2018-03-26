@@ -504,6 +504,15 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 
 	/**
 	 *
+	 * @return
+	 */
+	public String getDescriptiveName()
+	{
+		return getAttribute(AttributeName.DESCRIPTIVENAME);
+	}
+
+	/**
+	 *
 	 * @param available
 	 */
 	public void setStatus(final EnumResStatus status)
