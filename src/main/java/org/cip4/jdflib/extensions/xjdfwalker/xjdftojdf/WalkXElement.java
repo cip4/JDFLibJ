@@ -321,13 +321,18 @@ public class WalkXElement extends BaseWalker
 		for (final String value : vValues)
 		{
 			final IDPart p = xjdfToJDFImpl.idMap.get(value);
-			if (p != null)
+			final String refName = getRefName(val);
+			if (refName != null)
 			{
-				final String refName = getRefName(val);
-				if (refName != null)
+				final KElement refOld = trackElem != null ? trackElem.getElement(refName) : null;
+				final KElement ref = e.appendElement(refName);
+				if (p == null)
 				{
-					final KElement refOld = trackElem != null ? trackElem.getElement(refName) : null;
-					final KElement ref = e.appendElement(refName);
+					ref.setAttribute("rRef", value);
+
+				}
+				else
+				{
 					ref.setAttribute("rRef", p.getID());
 
 					final VJDFAttributeMap vpartmap = p.getPartMap();
@@ -338,11 +343,11 @@ public class WalkXElement extends BaseWalker
 							ref.appendElement(ElementName.PART).setAttributes(vpartmap.get(j));
 						}
 					}
-					// we've been here already
-					if (ref.isEqual(refOld))
-					{
-						ref.deleteNode();
-					}
+				}
+				// we've been here already
+				if (ref.isEqual(refOld))
+				{
+					ref.deleteNode();
 				}
 				e.removeAttribute(val);
 			}
