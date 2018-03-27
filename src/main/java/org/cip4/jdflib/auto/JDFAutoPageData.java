@@ -81,8 +81,8 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
@@ -101,7 +101,7 @@ class JDFAutoPageData : public JDFElement
 *****************************************************************************
 */
 
-public abstract class JDFAutoPageData extends JDFSeparationList
+public abstract class JDFAutoPageData extends JDFElement
 {
 
 	private static final long serialVersionUID = 1L;
@@ -832,7 +832,6 @@ public abstract class JDFAutoPageData extends JDFSeparationList
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
-	@Override
 	public JDFSeparationSpec getCreateSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
@@ -843,7 +842,6 @@ public abstract class JDFAutoPageData extends JDFSeparationList
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 * default is getSeparationSpec(0)     */
-	@Override
 	public JDFSeparationSpec getSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
@@ -854,7 +852,6 @@ public abstract class JDFAutoPageData extends JDFSeparationList
 	 *
 	 * @return Collection<JDFSeparationSpec>, null if none are available
 	 */
-	@Override
 	public Collection<JDFSeparationSpec> getAllSeparationSpec()
 	{
 		final VElement vc = getChildElementVector(ElementName.SEPARATIONSPEC, null);
@@ -876,7 +873,6 @@ public abstract class JDFAutoPageData extends JDFSeparationList
 	 * (30) append element SeparationSpec
 	 * @return JDFSeparationSpec the element
 	 */
-	@Override
 	public JDFSeparationSpec appendSeparationSpec()
 	{
 		return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);

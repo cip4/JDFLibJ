@@ -56,6 +56,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.Vector;
 
@@ -71,6 +72,7 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Ignore;
@@ -122,10 +124,23 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testSammelSepSpec()
+	{
+		final JDFToXJDF conv = new JDFToXJDF();
+		final JDFNode root = JDFNode.parseFile(sm_dirTestData + "sammel18.jdf");
+		final Vector<XJDFHelper> v = conv.getXJDFs(root);
+		final XJDFHelper hc = new MultiXJDFCombiner(v).getCombinedHelper();
+		assertNull(hc.getRoot().getElementByClass(JDFSeparationSpec.class, 0, true));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	@Ignore
 	public void testSammel19()
 	{
-		for (int i = 0; i < 999; i++)
+		for (int i = 0; i < 1; i++)
 		{
 			final JDFToXJDF conv = new JDFToXJDF();
 			conv.setCleanup(false);
@@ -134,7 +149,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 			final Vector<XJDFHelper> v = conv.getXJDFs(root);
 			assertEquals(11, v.size());
 			final XJDFHelper hc = new MultiXJDFCombiner(v).getCombinedHelper();
-			//writeRoundTripX(hc.getRoot(), "sammel19", null);
+			writeRoundTripX(hc.getRoot(), "sammel19", null);
 		}
 	}
 
