@@ -107,6 +107,11 @@ public class PartitionGetter
 
 	}
 
+	/**
+	 *
+	 * @param partMap
+	 * @return
+	 */
 	JDFAttributeMap checkPV(final JDFAttributeMap partMap)
 	{
 		if (containsEvil(partMap) && !leafMap.hasMissingKeys(partMap))
@@ -742,7 +747,8 @@ public class PartitionGetter
 
 		if (vPartIDKeys.size() < partMap.size())
 		{
-			throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + "insufficient partIDKeys " + leafMap.getPartIDKeys() + " for " + partMap);
+			throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + "insufficient partIDKeys " + leafMap.getPartIDKeys()
+					+ " for " + partMap);
 		}
 		// create all partitions
 		JDFAttributeMap map = thisMap;
@@ -753,7 +759,7 @@ public class PartitionGetter
 
 			if (value != null)
 			{
-				r = (JDFResource) r.appendElement(resourceRoot.getNodeName(), resourceRoot.getNamespaceURI());
+				r = (JDFResource) r.appendElementRaw(resourceRoot.getNodeName(), resourceRoot.getNamespaceURI());
 				r.setAttribute(key, value);
 				map = map.clone();
 				map.put(key, value);
@@ -761,8 +767,8 @@ public class PartitionGetter
 			}
 			else
 			{
-				throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + " attempting to fill non-matching partIDKeys: " + key + " valid keys: "
-						+ "Current PartIDKeys: " + resourceRoot.getPartIDKeys() + " complete map: " + partMap);
+				throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + " attempting to fill non-matching partIDKeys: " + key
+						+ " valid keys: " + "Current PartIDKeys: " + resourceRoot.getPartIDKeys() + " complete map: " + partMap);
 			}
 		}
 		return r;
@@ -826,7 +832,7 @@ public class PartitionGetter
 			throw new JDFException("addPartition: adding duplicate partition for ID=" + resourceRoot.getID() + " " + partType + "=" + value);
 		}
 
-		final JDFResource p = (JDFResource) parent.appendElement(resourceRoot.getNodeName(), resourceRoot.getNamespaceURI());
+		final JDFResource p = (JDFResource) parent.appendElementRaw(resourceRoot.getNodeName(), resourceRoot.getNamespaceURI());
 		p.setPartIDKey(partType, value);
 		leafMap.put(map, p);
 		return p;
@@ -972,7 +978,8 @@ public class PartitionGetter
 				if (!localPartMap.overlapMap(partMap))
 				{
 					if (create)
-						throw new JDFException("Incompatible part maps: local: " + localPartMap.showKeys(null) + " request: " + partMap.showKeys(null) + " ID=" + resourceRoot.getID());
+						throw new JDFException("Incompatible part maps: local: " + localPartMap.showKeys(null) + " request: " + partMap.showKeys(null) + " ID="
+								+ resourceRoot.getID());
 					else
 						return null;
 				}

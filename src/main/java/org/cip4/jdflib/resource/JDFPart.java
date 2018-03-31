@@ -54,6 +54,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -283,11 +284,11 @@ public class JDFPart extends JDFAutoPart
 			final int iLinkPos = linkValue.indexOf(' ');
 			if (iResPos < 0 && iLinkPos >= 0)
 			{
-				b = AtrInfo.matchesAttribute(resourceValue, linkValue, AttributeInfo.EnumAttributeType.NMTOKENS);
+				b = StringUtil.hasToken(linkValue, resourceValue, null, 0);
 			}
 			else if (iLinkPos < 0 && iResPos >= 0)
 			{
-				b = AtrInfo.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.NMTOKENS);
+				b = StringUtil.hasToken(resourceValue, linkValue, null, 0);
 			}
 		}
 		return b;
