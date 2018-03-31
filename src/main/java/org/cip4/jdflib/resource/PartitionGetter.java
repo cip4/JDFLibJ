@@ -760,6 +760,7 @@ public class PartitionGetter
 			if (value != null)
 			{
 				r = (JDFResource) r.appendElementRaw(resourceRoot.getNodeName(), resourceRoot.getNamespaceURI());
+				r.init();
 				r.setAttribute(key, value);
 				map = map.clone();
 				map.put(key, value);
@@ -833,6 +834,7 @@ public class PartitionGetter
 		}
 
 		final JDFResource p = (JDFResource) parent.appendElementRaw(resourceRoot.getNodeName(), resourceRoot.getNamespaceURI());
+		p.init();
 		p.setPartIDKey(partType, value);
 		leafMap.put(map, p);
 		return p;
