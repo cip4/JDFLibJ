@@ -762,7 +762,18 @@ public class JDFElementTest extends JDFTestCaseBase
 	{
 		assertEquals(EnumVersion.getEnum("1.5"), EnumVersion.Version_1_5);
 		assertEquals(EnumVersion.getEnum("1.6"), EnumVersion.Version_1_6);
-		assertEquals(EnumVersion.getEnum("1.6 "), EnumVersion.Version_1_6);
+		assertEquals(EnumVersion.getEnum("2.1"), EnumVersion.Version_2_0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetVersionMajor()
+	{
+		assertEquals(EnumVersion.getEnum(1, 5), EnumVersion.Version_1_5);
+		assertEquals(EnumVersion.getEnum(1, 6), EnumVersion.Version_1_6);
+		assertEquals(EnumVersion.getEnum(2, 0), EnumVersion.Version_2_0);
 	}
 
 	/**

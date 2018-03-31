@@ -1062,4 +1062,13 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		}
 		return n;
 	}
+
+	/** 
+	 * 
+	 * @return  default version - currently 2.0
+	 */
+	public static EnumVersion defaultVersion()
+	{
+		return EnumVersion.Version_2_0;
+	}
 }

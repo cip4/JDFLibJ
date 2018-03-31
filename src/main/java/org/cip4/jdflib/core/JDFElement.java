@@ -5115,23 +5115,23 @@ public class JDFElement extends KElement
 			{
 				return EnumVersion.Version_1_9;
 			}
-			if ("1.8".equals(enumName))
+			else if ("1.8".equals(enumName))
 			{
 				return EnumVersion.Version_1_8;
 			}
-			if ("1.7".equals(enumName))
+			else if ("1.7".equals(enumName))
 			{
 				return EnumVersion.Version_1_7;
 			}
-			if ("1.6".equals(enumName))
+			else if ("1.6".equals(enumName))
 			{
 				return EnumVersion.Version_1_6;
 			}
-			if ("1.5".equals(enumName))
+			else if ("1.5".equals(enumName))
 			{
 				return EnumVersion.Version_1_5;
 			}
-			if ("1.4".equals(enumName))
+			else if ("1.4".equals(enumName))
 			{
 				return EnumVersion.Version_1_4;
 			}
@@ -5155,7 +5155,7 @@ public class JDFElement extends KElement
 			{
 				return EnumVersion.Version_2_0;
 			}
-			return EnumVersion.Version_1_5; // the default
+			return enumName != null && enumName.startsWith("2") ? EnumVersion.Version_2_0 : JDFElement.getDefaultJDFVersion(); // the default
 		}
 
 		/**
@@ -5167,6 +5167,17 @@ public class JDFElement extends KElement
 		public static EnumVersion getEnum(final int enumValue)
 		{
 			return (EnumVersion) getEnum(EnumVersion.class, enumValue);
+		}
+
+		/**
+		 * casts a EnumVersion into its corresponding String
+		 *
+		 * @param enumValue the EnumVersion to cast
+		 * @return the corresponding String
+		 */
+		public static EnumVersion getEnum(final int major, final int minor)
+		{
+			return getEnum(major + "." + minor);
 		}
 
 		/**
