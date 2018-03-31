@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * Aug 10, 2009
  */
 public class JDFCutBlock extends JDFAutoCutBlock
@@ -111,7 +111,7 @@ public class JDFCutBlock extends JDFAutoCutBlock
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
+	 *
 	 */
 	public JDFCutBlock(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -122,7 +122,7 @@ public class JDFCutBlock extends JDFAutoCutBlock
 	 * Constructor for JDFCutBlock
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
-	 * 
+	 *
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
@@ -138,7 +138,7 @@ public class JDFCutBlock extends JDFAutoCutBlock
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 * 
+	 *
 	 */
 	public JDFCutBlock(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
@@ -149,7 +149,7 @@ public class JDFCutBlock extends JDFAutoCutBlock
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -176,4 +176,13 @@ public class JDFCutBlock extends JDFAutoCutBlock
 		return v;
 	}
 
+	/**
+	 * @see org.cip4.jdflib.resource.JDFResource#setBlockName(java.lang.String)
+	 */
+	@Override
+	public void setBlockName(final String value)
+	{
+
+		setAttribute(AttributeName.BLOCKNAME, value);
+	}
 }
