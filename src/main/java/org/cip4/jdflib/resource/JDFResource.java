@@ -5266,7 +5266,10 @@ public class JDFResource extends JDFElement
 	 */
 	public void setBlockName(final String value)
 	{
-		setPartIDKey(EnumPartIDKey.BlockName, value);
+		if (isResourceElement())
+			setAttribute(AttributeName.BLOCKNAME, value);
+		else
+			setPartIDKey(EnumPartIDKey.BlockName, value);
 	}
 
 	/**
