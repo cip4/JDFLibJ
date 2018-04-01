@@ -236,7 +236,7 @@ public class KElementTest extends JDFTestCaseBase
 		}
 		final long currentMem = getCurrentMem();
 		if (currentMem > mem)
-			assertEquals(currentMem, mem, 100 * 50000); // allow 100 per element
+			assertEquals(currentMem, mem, 142 * 50000); // allow 142 per element
 	}
 
 	/**
