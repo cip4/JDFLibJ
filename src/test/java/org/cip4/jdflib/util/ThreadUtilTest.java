@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -121,7 +121,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWaitTimeout()
+	public synchronized void testWaitTimeout()
 	{
 		assertEquals(new TestWait(1400, 1000).getWaitedObject().intValue(), 42);
 		assertNull(new TestWait(2, 5000).getWaitedObject());
@@ -131,9 +131,9 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testPeekWaitTimeout()
+	public synchronized void testPeekWaitTimeout()
 	{
-		TestWait testWait = new TestWait(1400, 1000);
+		final TestWait testWait = new TestWait(1400, 1000);
 		assertNull(testWait.peekWaitedObject());
 		assertEquals(testWait.getWaitedObject().intValue(), 42);
 		assertEquals(testWait.peekWaitedObject().intValue(), 42);
@@ -143,11 +143,11 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWaitTimeoutDelay()
+	public synchronized void testWaitTimeoutDelay()
 	{
-		TestWait testWait = new TestWait(2000, 1000);
+		final TestWait testWait = new TestWait(2000, 1000);
 		ThreadUtil.sleep(1200);
-		long t0 = System.currentTimeMillis();
+		final long t0 = System.currentTimeMillis();
 		assertNotNull(testWait.getWaitedObject());
 		assertTrue(System.currentTimeMillis() - t0 < 1000);
 	}
@@ -156,7 +156,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWaitTimeoutFail()
+	public synchronized void testWaitTimeoutFail()
 	{
 		assertNull(new TestWait(2, 14200).getWaitedObject());
 	}
@@ -165,11 +165,11 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testWaitTimeoutMany()
+	public synchronized void testWaitTimeoutMany()
 	{
 		for (int i = 1; i < 666; i++)
 		{
-			TestWait testWait = new TestWait(142, 0);
+			final TestWait testWait = new TestWait(142, 0);
 			for (int j = 0; j < 42; j++)
 			{
 				if (testWait.getWaitedObject() != null)
@@ -177,7 +177,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 				ThreadUtil.sleep(j);
 			}
 			ThreadUtil.sleep(1);
-			Integer waitedObject = testWait.getWaitedObject();
+			final Integer waitedObject = testWait.getWaitedObject();
 			assertNotNull("Waited Loop " + i, waitedObject);
 			assertEquals("Loop " + i, waitedObject.intValue(), 42);
 		}
@@ -192,7 +192,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 		int nLast = -1;
 		for (int i = 0; i < 10000; i++)
 		{
-			int n = StringUtil.parseInt(StringUtil.token(new MyMutex().toString(), 1, " "), 0);
+			final int n = StringUtil.parseInt(StringUtil.token(new MyMutex().toString(), 1, " "), 0);
 			assertTrue(n > nLast);
 			nLast = n;
 		}
