@@ -1930,7 +1930,7 @@ public class KElementTest extends JDFTestCaseBase
 		final CPUTimer ct = new CPUTimer(false);
 		final JDFDoc d = new JDFParser().parseFile(sm_dirTestData + "bigWhite.jdf");
 
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 5; i++)
 		{
 			ct.start();
 			d.getRoot().getXPathValueMap();
