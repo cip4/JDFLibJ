@@ -1074,9 +1074,8 @@ public class JDFValidator
 				}
 			}
 		}
-		for (i = 0; i < vSeparations.size(); i++)
+		for (final String sep : vSeparations)
 		{
-			final String sep = vSeparations.get(i);
 			sysOut.println("Warning: Separation Name not in ColorPool: " + sep);
 			if (sepPool != null)
 			{
@@ -1085,9 +1084,8 @@ public class JDFValidator
 				warn.setAttribute("Separation", sep);
 			}
 		}
-		for (i = 0; i < vColorPoolSeparations.size(); i++)
+		for (final String sep : vColorPoolSeparations)
 		{
-			final String sep = vColorPoolSeparations.get(i);
 			sysOut.println("Warning: Unreferenced Separation Name    : " + sep);
 			if (sepPool != null)
 			{

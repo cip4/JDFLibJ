@@ -516,6 +516,32 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testBadType()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
+		jmf.getSignal(0).setType("BadType");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertNull(xjmf);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testBadTypeQES()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.QueueEntryStatus);
+		jmf.getSignal(0).setType("BadType");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertNull(xjmf);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testMoveToSender()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceQuery(true);
