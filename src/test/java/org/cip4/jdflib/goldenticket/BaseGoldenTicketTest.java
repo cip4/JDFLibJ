@@ -75,6 +75,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFParser;
@@ -82,6 +83,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
+import org.cip4.jdflib.node.JDFNode;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -178,8 +180,9 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 		assertTrue(gtType + templateName + ".jdf", goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
 
 		final XJDF20 xjdfConv = new XJDF20();
-
-		final KElement xjdfRoot = xjdfConv.convert(goldenTicket.getExpandedNode());
+		final JDFNode expandedNode = goldenTicket.getExpandedNode();
+		xjdfConv.setWantProduct(JDFConstants.PRODUCT.equals(expandedNode.getType()));
+		final KElement xjdfRoot = xjdfConv.convert(expandedNode);
 		final String tmpXJDF = sm_dirTestDataTemp + gtType + templateName + ".xjdf";
 		xjdfRoot.getOwnerDocument_KElement().write2File(tmpXJDF, 2, false);
 

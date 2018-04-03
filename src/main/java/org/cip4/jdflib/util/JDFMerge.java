@@ -75,6 +75,7 @@ package org.cip4.jdflib.util;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.Vector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -260,7 +261,7 @@ public class JDFMerge
 		{
 			return mergeJDF(_toMerge);
 		}
-		catch (JDFException x)
+		catch (final JDFException x)
 		{
 			log.error("Snafu merging - trying default merge", x);
 		}
@@ -276,8 +277,8 @@ public class JDFMerge
 		mergeLocalLinks();
 		remergeAuditPools();
 
-		JDFNode overwriteParent = parts == null ? overWriteNode.getParentJDF() : overWriteNode;
-		JDFAuditPool ap = overwriteParent.getCreateAuditPool();
+		final JDFNode overwriteParent = parts == null ? overWriteNode.getParentJDF() : overWriteNode;
+		final JDFAuditPool ap = overwriteParent.getCreateAuditPool();
 		if (!EnumCleanUpMerge.RemoveAll.equals(cleanPolicy))
 			createMergeAudit(ap, null);
 
@@ -296,8 +297,8 @@ public class JDFMerge
 		// merge local (internal) partitioned resource links
 		for (int nod = 0; nod < size; nod++)
 		{
-			JDFNode toMergeLocalNode = (JDFNode) vn.elementAt(nod);
-			JDFNode overwriteLocalNode = subJDFNode.getChildJDFNode(toMergeLocalNode.getID(), false);
+			final JDFNode toMergeLocalNode = (JDFNode) vn.elementAt(nod);
+			final JDFNode overwriteLocalNode = subJDFNode.getChildJDFNode(toMergeLocalNode.getID(), false);
 			// swap from / to in case of remerge, since we do not overwrite the main node
 			mergeAuditPool(overwriteLocalNode, toMergeLocalNode, true);
 
@@ -324,7 +325,7 @@ public class JDFMerge
 	 * find matching audits
 	 *
 	 */
-	private void analyzeAncestorPool(boolean bFindSpawnAudit)
+	private void analyzeAncestorPool(final boolean bFindSpawnAudit)
 	{
 		// tbd multiple ancestor handling
 		final String subJDFID = subJDFNode.getID();
@@ -384,7 +385,7 @@ public class JDFMerge
 			for (int isp = vSpawnAudit.size() - 1; isp >= 0; isp--)
 			{ // loop backwards because the latest is assumed correct
 				final JDFSpawned testSpawn = (JDFSpawned) vSpawnAudit.elementAt(isp);
-				String newSpawnID = testSpawn.getNewSpawnID();
+				final String newSpawnID = testSpawn.getNewSpawnID();
 				if (newSpawnID != null && newSpawnID.equals(spawnID))
 				{
 					// tbd check for matching merged...
@@ -421,7 +422,7 @@ public class JDFMerge
 	 * @param _overWriteNode
 	 * @param toMerge the source node of the audit pool to merge into this
 	 */
-	private void mergeAuditPool(final JDFNode _overWriteNode, final JDFNode toMerge, boolean remerge)
+	private void mergeAuditPool(final JDFNode _overWriteNode, final JDFNode toMerge, final boolean remerge)
 	{
 		// merge audit pool
 		final JDFAuditPool overWriteAuditPool = _overWriteNode.getAuditPool();
@@ -499,15 +500,15 @@ public class JDFMerge
 		// merge local (internal) partitioned resource links
 		for (int nod = 0; nod < size; nod++)
 		{
-			JDFNode overwriteLocalNode = (JDFNode) vn.elementAt(nod);
-			JDFNode toMergeLocalNode = subJDFNode.getChildJDFNode(overwriteLocalNode.getID(), false);
+			final JDFNode overwriteLocalNode = (JDFNode) vn.elementAt(nod);
+			final JDFNode toMergeLocalNode = subJDFNode.getChildJDFNode(overwriteLocalNode.getID(), false);
 			// swap from / to in case of remerge, since we do not overwrite the main node
 			mergeResourceLinkPool(overwriteLocalNode, toMergeLocalNode);
 			fixPartStatus(numParts, toMergeLocalNode);
 		}
 	}
 
-	private void fixPartStatus(final int numParts, JDFNode toMergeLocalNode)
+	private void fixPartStatus(final int numParts, final JDFNode toMergeLocalNode)
 	{
 		final EnumVersion version = toMergeLocalNode.getVersion(true);
 		if ((version != null) && (version.getValue() >= EnumVersion.Version_1_3.getValue()))
@@ -621,7 +622,7 @@ public class JDFMerge
 		if (poolOverWrite != null)
 		{
 			final VElement vResOverWrite = poolOverWrite.getPoolChildren(null, null, null);
-			for (KElement res : vResOverWrite)
+			for (final KElement res : vResOverWrite)
 			{
 				final JDFResource res1 = (JDFResource) res;
 				mergeLocalResource(amountPolicy, poolToMerge, res1);
@@ -815,7 +816,7 @@ public class JDFMerge
 		{
 			boolean bWrite = bLocal;
 
-			for (String resSpawnID : spawnIDs) // check for multiple rw spawns
+			for (final String resSpawnID : spawnIDs) // check for multiple rw spawns
 			{
 				final JDFSpawned spawnedAudit = newSpawnMap.get(resSpawnID);
 				if (spawnedAudit != null)
@@ -997,9 +998,9 @@ public class JDFMerge
 		return mergeAudit;
 	}
 
-	private JDFMerged createMergeAudit(JDFAuditPool ap, final VString vs)
+	private JDFMerged createMergeAudit(final JDFAuditPool ap, final VString vs)
 	{
-		JDFMerged lastMerged = (JDFMerged) ap.getAudit(-1, EnumAuditType.Merged, new JDFAttributeMap(AttributeName.MERGEID, spawnID), null);
+		final JDFMerged lastMerged = (JDFMerged) ap.getAudit(-1, EnumAuditType.Merged, new JDFAttributeMap(AttributeName.MERGEID, spawnID), null);
 		final JDFMerged mergeAudit = ap.addMerged(subJDFNode, vs, null, parts);
 		mergeAudit.setRef(lastMerged);
 
@@ -1178,19 +1179,15 @@ public class JDFMerge
 	 */
 	private void expandLinkedResources(final JDFResourceLinkPool resourceLinkPool)
 	{
-		final VElement links = resourceLinkPool == null ? null : resourceLinkPool.getPoolChildren(null, null, null);
+		final Vector<JDFResourceLink> links = resourceLinkPool == null ? null : resourceLinkPool.getLinks();
 		if (links != null)
 		{
-			final int size = links.size();
-			for (int i = 0; i < size; i++)
-			{
-				final JDFResourceLink rl = (JDFResourceLink) links.elementAt(i);
+			for (final JDFResourceLink rl : links)
 				// 071214 only expand if rw
 				if (vsRW.contains(rl.getrRef()))
 				{
 					rl.expandTarget(false);
 				}
-			}
 		}
 	}
 
@@ -1229,10 +1226,10 @@ public class JDFMerge
 
 		final VString partIDKeys = mainRes.getPartIDKeys();
 
-		for (KElement leaf : allLeaves)
+		for (final KElement leaf : allLeaves)
 		{
 			final JDFResource thisResNode = (JDFResource) leaf;
-			JDFAttributeMap partMap = thisResNode.getPartMap(partIDKeys);
+			final JDFAttributeMap partMap = thisResNode.getPartMap(partIDKeys);
 			final JDFResource mergeResNode = resToMerge.getPartition(partMap, EnumPartUsage.Explicit);
 
 			if (mergeResNode != null)
@@ -1280,7 +1277,7 @@ public class JDFMerge
 	private void mergeRWResources()
 	{
 		// merge rw resources
-		for (String s : vsRW)
+		for (final String s : vsRW)
 		{
 			JDFResource oldRes = overWriteNode.getLinkRoot(s);
 			if (oldRes == null) // also check in tree below
@@ -1288,7 +1285,7 @@ public class JDFMerge
 				oldRes = overWriteNode.getTargetResource(s);
 				if (oldRes == null) // also check in entire tree below root
 				{
-					JDFNode jdfRoot = overWriteNode.getJDFRoot();
+					final JDFNode jdfRoot = overWriteNode.getJDFRoot();
 					if (jdfRoot != null)
 					{
 						oldRes = jdfRoot.getTargetResource(s);
@@ -1322,14 +1319,14 @@ public class JDFMerge
 					}
 					catch (final Exception e)
 					{
-						JDFException jdfException = new JDFException("JDFNode:mergeJDF, error in mergePartition: ID=" + newRes.getID() + " SpawnID=" + spawnID);
+						final JDFException jdfException = new JDFException("JDFNode:mergeJDF, error in mergePartition: ID=" + newRes.getID() + " SpawnID=" + spawnID);
 						jdfException.initCause(e);
 						throw jdfException;
 					}
 				}
 
 				final VElement oldResLeafsSpawned = oldRes.getNodesWithSpawnID(spawnID);
-				for (KElement leaf : oldResLeafsSpawned)
+				for (final KElement leaf : oldResLeafsSpawned)
 				{
 					final JDFResource leafRes = (JDFResource) leaf;
 					leafRes.removeFromSpawnIDs(spawnID);
@@ -1472,12 +1469,12 @@ public class JDFMerge
 	 * in case we screwed up somewhere...
 	 * @param oldRes the resource to clean up
 	 */
-	private void cleanupSpawn(JDFResource oldRes)
+	private void cleanupSpawn(final JDFResource oldRes)
 	{
-		VElement v = oldRes.getLeaves(true);
-		for (KElement e : v)
+		final VElement v = oldRes.getLeaves(true);
+		for (final KElement e : v)
 		{
-			JDFResource r = (JDFResource) e;
+			final JDFResource r = (JDFResource) e;
 			if (!r.hasAttribute_KElement(AttributeName.SPAWNIDS, null, false))
 			{
 				removeSpawnAttributes(r);
@@ -1629,7 +1626,7 @@ public class JDFMerge
 	 *
 	 * @param cleanPolicy
 	 */
-	public void setCleanPolicy(EnumCleanUpMerge cleanPolicy)
+	public void setCleanPolicy(final EnumCleanUpMerge cleanPolicy)
 	{
 		this.cleanPolicy = cleanPolicy;
 	}
@@ -1649,7 +1646,7 @@ public class JDFMerge
 	 *
 	 * @param amountPolicy
 	 */
-	public void setAmountPolicy(EnumAmountMerge amountPolicy)
+	public void setAmountPolicy(final EnumAmountMerge amountPolicy)
 	{
 		this.amountPolicy = amountPolicy;
 	}

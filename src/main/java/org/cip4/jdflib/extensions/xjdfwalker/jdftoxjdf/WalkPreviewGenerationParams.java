@@ -68,21 +68,24 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.ResourceHelper;
 
 /**
  *
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen at this point only a dummy since we have a specific WalkResourceAudit child
  */
-public class WalkDropItemIntent extends WalkJDFSubElement
+public class WalkPreviewGenerationParams extends WalkResource
 {
+
 	/**
 	 *
 	 */
-	public WalkDropItemIntent()
+	public WalkPreviewGenerationParams()
 	{
 		super();
 	}
@@ -100,12 +103,16 @@ public class WalkDropItemIntent extends WalkJDFSubElement
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected String getXJDFName(final KElement jdf)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		return ElementName.DROPITEM;
+		final String typ = jdf.getAttribute(AttributeName.PREVIEWUSAGE);
+		final KElement xjdfPreview = super.walk(jdf, xjdf);
+		final ResourceHelper ph = new ResourceHelper(xjdfPreview.getParentNode_KElement());
+		ph.ensurePart(AttributeName.PREVIEWTYPE, typ);
+		return xjdfPreview;
 	}
 
 	/**
@@ -114,7 +121,18 @@ public class WalkDropItemIntent extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString(ElementName.DROPITEMINTENT, null);
+		return new VString(ElementName.PREVIEWGENERATIONPARAMS, null);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(final JDFAttributeMap map)
+	{
+		map.remove(AttributeName.COMPENSATION);
+		map.remove(AttributeName.PREVIEWFILETYPE);
+		map.remove(AttributeName.PREVIEWUSAGE);
+		super.updateAttributes(map);
+	}
 }

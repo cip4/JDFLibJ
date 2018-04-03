@@ -1676,7 +1676,7 @@ public class JDFResource extends JDFElement
 				}
 			}
 		}
-		return true;
+		return super.init();
 	}
 
 	/**
@@ -1696,12 +1696,10 @@ public class JDFResource extends JDFElement
 	public JDFResource makeRootResource(String alias, final JDFElement parentPool, final boolean bLinkHere)
 	{
 		JDFResource retRes = this;
-
 		// if this is already in the resource pool do nothing
 		if (isResourceElement())
 		{
 			JDFElement link = null;
-
 			if (bLinkHere)
 			{
 				// create a RefElement at the same (in front of) position as
@@ -2021,7 +2019,7 @@ public class JDFResource extends JDFElement
 						for (final KElement lE : vTmp)
 						{
 							final JDFResourceLink link = (JDFResourceLink) lE;
-							if (resID.equals(link.getrRef()))
+							if (resID.equals(link.getAttributeRaw(AttributeName.RREF)))
 							{
 								vRet.add(link);
 							}
@@ -5248,7 +5246,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setBinderySignatureName(final String value)
 	{
-		setAttribute(AttributeName.BINDERYSIGNATURENAME, value);
+		setPartIDKey(EnumPartIDKey.BinderySignatureName, value);
 	}
 
 	/**
@@ -5268,7 +5266,10 @@ public class JDFResource extends JDFElement
 	 */
 	public void setBlockName(final String value)
 	{
-		setAttribute(AttributeName.BLOCKNAME, value);
+		if (isResourceElement())
+			setAttribute(AttributeName.BLOCKNAME, value);
+		else
+			setPartIDKey(EnumPartIDKey.BlockName, value);
 	}
 
 	/**
@@ -5496,7 +5497,7 @@ public class JDFResource extends JDFElement
 			throw new JDFException("setDeliveryUnit: invalid iUnit: " + String.valueOf(iUnit));
 		}
 
-		setAttribute(AttributeName.DELIVERYUNIT + String.valueOf(iUnit), value);
+		setPartIDKey(EnumPartIDKey.getEnum(AttributeName.DELIVERYUNIT + String.valueOf(iUnit)), value);
 	}
 
 	/**
@@ -5584,8 +5585,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setFountainNumber(final int value)
 	{
-		final Integer i = Integer.valueOf(value);
-		setAttribute(AttributeName.FOUNTAINNUMBER, i.toString());
+		setPartIDKey(EnumPartIDKey.FountainNumber, "" + value);
 	}
 
 	/**
@@ -5635,18 +5635,8 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIntegerRangeList getLayerIDs()
 	{
-		String strAttrName = JDFConstants.EMPTYSTRING;
-		JDFIntegerRangeList nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.LAYERIDS, null, JDFConstants.EMPTYSTRING);
-		try
-		{
-			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-		}
-		catch (final DataFormatException e)
-		{
-			// do nothing
-		}
-		return nPlaceHolder;
+		final String strAttrName = getAttribute(AttributeName.LAYERIDS);
+		return JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 	}
 
 	/**
@@ -5781,7 +5771,7 @@ public class JDFResource extends JDFElement
 	 *
 	 * @throws JDFException if here is an attempt to add implicit partition
 	 */
-	protected void addPartIDKey(final EnumPartIDKey partType)
+	public void addPartIDKey(final EnumPartIDKey partType)
 	{
 		final String s = partType.getName();
 		final JDFResource r = getResourceRoot();
@@ -5823,7 +5813,11 @@ public class JDFResource extends JDFElement
 	public JDFResource getParentPartition()
 	{
 		final KElement parent = getParentNode_KElement();
-		return getMyPartitionResource(parent);
+		if (!(parent instanceof JDFResource))
+			return null;
+		if (JDFResource.class != parent.getClass())
+			return (JDFResource) (getClass() == parent.getClass() ? parent : null);
+		return (JDFResource) (parent.getNodeName().equals(getNodeName()) ? parent : null);
 	}
 
 	/**
@@ -5836,7 +5830,7 @@ public class JDFResource extends JDFElement
 		final JDFResource partRoot = getResourceRoot();
 		if (partRoot != null)
 		{
-			final String idKeys = partRoot.getAttribute(AttributeName.PARTIDKEYS, null, null);
+			final String idKeys = partRoot.getAttributeRaw(AttributeName.PARTIDKEYS);
 			return StringUtil.tokenize(idKeys, JDFConstants.BLANK, false);
 		}
 		return null;
@@ -6362,7 +6356,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setRunSet(final String value)
 	{
-		setAttribute(AttributeName.RUNSET, value, null);
+		setPartIDKey(EnumPartIDKey.RunSet, value);
 	}
 
 	/**
@@ -6413,7 +6407,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setRunPage(final int value)
 	{
-		setAttribute(AttributeName.RUNPAGE, value, null);
+		setPartIDKey(EnumPartIDKey.RunPage, "" + value);
 	}
 
 	/**
@@ -6438,7 +6432,7 @@ public class JDFResource extends JDFElement
 		{
 			strBuff.append(value.elementAt(i));
 		}
-		setAttribute(AttributeName.RUNTAGS, strBuff.toString(), null);
+		setPartIDKey(EnumPartIDKey.RunTags, strBuff.toString());
 	}
 
 	/**
@@ -6493,7 +6487,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setSeparation(final String value)
 	{
-		setAttribute(AttributeName.SEPARATION, value, null);
+		setPartIDKey(EnumPartIDKey.Separation, value);
 	}
 
 	/**
@@ -6637,7 +6631,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setSheetIndex(final JDFIntegerRangeList value)
 	{
-		setAttribute(AttributeName.SHEETINDEX, value.toString());
+		setPartIDKey(EnumPartIDKey.SheetIndex, value == null ? null : value.toString());
 	}
 
 	/**
@@ -6668,7 +6662,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setSheetName(final String value)
 	{
-		setAttribute(AttributeName.SHEETNAME, value);
+		setPartIDKey(EnumPartIDKey.SheetName, value);
 	}
 
 	/**
@@ -6688,7 +6682,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setSide(final JDFPart.EnumSide value)
 	{
-		setAttribute(AttributeName.SIDE, value.getName(), null);
+		setPartIDKey(EnumPartIDKey.Side, value == null ? null : value.getName());
 	}
 
 	/**
@@ -6708,7 +6702,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setSignatureName(final String value)
 	{
-		setAttribute(AttributeName.SIGNATURENAME, value);
+		setPartIDKey(EnumPartIDKey.SignatureName, value);
 	}
 
 	/**
@@ -7079,7 +7073,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setWebName(final String value)
 	{
-		setAttribute(AttributeName.WEBNAME, value);
+		setPartIDKey(EnumPartIDKey.WebName, value);
 	}
 
 	/**
@@ -7099,7 +7093,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setWebProduct(final String value)
 	{
-		setAttribute(AttributeName.WEBPRODUCT, value);
+		setPartIDKey(EnumPartIDKey.WebProduct, value);
 	}
 
 	/**
@@ -7119,7 +7113,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setWebSetup(final String value)
 	{
-		setAttribute(AttributeName.WEBSETUP, value);
+		setPartIDKey(EnumPartIDKey.WebSetup, value);
 	}
 
 	/**
@@ -7502,20 +7496,6 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 *
-	 * @param e
-	 * @return
-	 */
-	private JDFResource getMyPartitionResource(final Node e)
-	{
-		if (!(e instanceof JDFResource))
-			return null;
-		if (JDFResource.class != e.getClass())
-			return (JDFResource) (getClass() == e.getClass() ? e : null);
-		return (JDFResource) (e.getNodeName().equals(getNodeName()) ? e : null);
-	}
-
-	/**
 	 * get a leaf, null if index out of bounds
 	 *
 	 * @param i
@@ -7618,6 +7598,32 @@ public class JDFResource extends JDFElement
 				}
 			}
 		}
+	}
+
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#copyInto(org.cip4.jdflib.core.KElement, boolean)
+	 */
+	@Override
+	public KElement copyInto(final KElement src, final boolean bRemove)
+	{
+		if (src != null && src.getNodeName().equals(getNodeName()) && !isResourceElement())
+		{
+			getResourceRoot().partitionMap = null;
+		}
+		return super.copyInto(src, bRemove);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#appendElement(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public synchronized KElement appendElement(final String elementName, final String nameSpaceURI)
+	{
+		if (elementName.equals(getNodeName()) && !isResourceElement())
+		{
+			getResourceRoot().partitionMap = null;
+		}
+		return super.appendElement(elementName, nameSpaceURI);
 	}
 
 }

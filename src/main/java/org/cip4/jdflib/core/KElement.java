@@ -999,7 +999,8 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public static boolean isWildCard(final String nodeName)
 	{
-		return (nodeName == null) || JDFCoreConstants.EMPTYSTRING.equals(nodeName) || JDFCoreConstants.STAR.equals(nodeName);
+		final int length = (nodeName == null) ? 0 : nodeName.length();
+		return length == 0 || length == 1 && nodeName.charAt(0) == '*';
 	}
 
 	/**
@@ -1015,27 +1016,33 @@ public class KElement extends ElementNSImpl implements Element
 
 	protected boolean fitsName_KElement(final String nodeName, final String nameSpaceURI)
 	{
-		boolean bNameOK = nodeName == null || isWildCard(nodeName);
-
-		// first check name, since it is faster
+		boolean bNameOK = isWildCard(nodeName);
 		if (!bNameOK)
 		{
+			// first check name, since it is faster
 			final String s = getNodeName();
-			bNameOK = s.endsWith(nodeName);
-			if (bNameOK && !s.equals(nodeName) && nodeName != null)
+			final int l1 = nodeName.length();
+			final int l2 = s.length();
+			if (l1 > l2 || l2 + 1 == l1) // ":name" is illegal
 			{
-				bNameOK = nodeName.equals(xmlnsLocalName(s));
+				return false;
 			}
+			else if (l1 == l2)
+			{
+				bNameOK = s.equals(nodeName);
+			}
+			else
+			{
+				bNameOK = s.endsWith(nodeName) && (s.indexOf(':') == (l2 - l1 - 1));
+			}
+		}
+		// only check ns, if the name is ok
+		final boolean bNSNotWild = bNameOK && !isWildCard(nameSpaceURI);
+		if (bNSNotWild && !nameSpaceURI.equals(getNamespaceURI()))
+		{
+			bNameOK = false;
 		}
 
-		// only check ns, if the name is ok
-		if (bNameOK && nameSpaceURI != null && !isWildCard(nameSpaceURI))
-		{
-			if (!nameSpaceURI.equals(getNamespaceURI()))
-			{
-				bNameOK = false;
-			}
-		}
 		return bNameOK;
 	}
 

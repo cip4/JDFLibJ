@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -322,7 +322,7 @@ public class QueueTest extends JDFTestCaseBase
 		assertNull("date", d);
 		qe.setEndTime(null);
 		d = qe.getEndTime();
-		assertEquals("date", d.getTimeInMillis(), new JDFDate().getTimeInMillis(), 30000);
+		assertEquals("date", d.getTimeInMillis(), new JDFDate().getTimeInMillis(), 42000);
 	}
 
 	/**
@@ -374,7 +374,7 @@ public class QueueTest extends JDFTestCaseBase
 			qe.setQueueEntryID("q" + i);
 			qe.setPriority((i * 317) % 99);
 			qe.setQueueEntryStatus(EnumQueueEntryStatus.Completed);
-			JDFDate d = new JDFDate(System.currentTimeMillis() + i * 1000000);
+			final JDFDate d = new JDFDate(System.currentTimeMillis() + i * 1000000);
 			qe.setEndTime(d);
 		}
 		assertTrue(q.getQueueEntry(2).getEndTime().isEarlier(q.getQueueEntry(1).getEndTime()));
@@ -425,7 +425,7 @@ public class QueueTest extends JDFTestCaseBase
 		{
 			final JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
 			System.out.println(i + " " + qe.getPriority() + " " + qe.getQueueEntryID() + " " + qe.getQueueEntryStatus());
-			boolean b = qe.compareTo(qeLast) >= 0;
+			final boolean b = qe.compareTo(qeLast) >= 0;
 			assertTrue(b);
 			qeLast = qe;
 		}
@@ -592,11 +592,11 @@ public class QueueTest extends JDFTestCaseBase
 		q.setMaxRunningEntries(2);
 		q.sortChildren();
 
-		JDFQueueEntry qe2 = q.getQueueEntry("qe2");
+		final JDFQueueEntry qe2 = q.getQueueEntry("qe2");
 		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
 		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
 		qe2.setActivation(EnumActivation.Held);
-		JDFQueueEntry next = q.getNextExecutableQueueEntry();
+		final JDFQueueEntry next = q.getNextExecutableQueueEntry();
 		assertEquals(next, q.getQueueEntry("qe1"));
 	}
 

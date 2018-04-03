@@ -236,7 +236,7 @@ public class KElementTest extends JDFTestCaseBase
 		}
 		final long currentMem = getCurrentMem();
 		if (currentMem > mem)
-			assertEquals(currentMem, mem, 100 * 50000); // allow 100 per element
+			assertEquals(currentMem, mem, 142 * 50000); // allow 142 per element
 	}
 
 	/**
@@ -1930,7 +1930,7 @@ public class KElementTest extends JDFTestCaseBase
 		final CPUTimer ct = new CPUTimer(false);
 		final JDFDoc d = new JDFParser().parseFile(sm_dirTestData + "bigWhite.jdf");
 
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 5; i++)
 		{
 			ct.start();
 			d.getRoot().getXPathValueMap();

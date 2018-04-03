@@ -260,6 +260,7 @@ public class WalkXJDFResource extends WalkXElement
 		final String id = xjdfToJDFImpl.idMap.get(xjdfRes.getID()).getID();
 		JDFResource res = (JDFResource) newRoot.getCreateResourcePool().getChildWithAttribute(null, AttributeName.ID, null, id, 0, true);
 		boolean isNew = false;
+		final KElement setRoot = sh.getRoot();
 		if (res == null)
 		{
 			final boolean combine = !StringUtil.equals(id, sh.getID());
@@ -267,8 +268,7 @@ public class WalkXJDFResource extends WalkXElement
 			if (res == null)
 			{
 				isNew = true;
-				res = theNode.addResource(name, null);
-				res.setID(id);
+				res = createNewResource(theNode, name, id, setRoot);
 			}
 			if (theNode != newRoot)
 			{
@@ -281,7 +281,7 @@ public class WalkXJDFResource extends WalkXElement
 			if (rl == null)
 			{
 				rl = theNode.ensureLinkPU(res, inOut, processUsage);
-				rl.copyAttribute(AttributeName.COMBINEDPROCESSINDEX, sh.getRoot());
+				rl.copyAttribute(AttributeName.COMBINEDPROCESSINDEX, setRoot);
 				rl.setrRef(id);
 				res.removeAttribute(AttributeName.USAGE);
 				final VString reslinks = XJDFToJDFConverter.getResLinkAttribs();
@@ -295,12 +295,31 @@ public class WalkXJDFResource extends WalkXElement
 			}
 			// parameters and consumables are assumed to be available by default
 			final EnumResourceClass resClass = res.getResourceClass();
-			if (isNew && EnumUsage.Input.equals(inOut) && (EnumResourceClass.Parameter.equals(resClass) || EnumResourceClass.Consumable.equals(resClass) || EnumResourceClass.Intent.equals(resClass)))
+			if (isNew && EnumUsage.Input.equals(inOut)
+					&& (EnumResourceClass.Parameter.equals(resClass) || EnumResourceClass.Consumable.equals(resClass) || EnumResourceClass.Intent.equals(resClass)))
 			{
 				res.setResStatus(EnumResStatus.Available, false);
 			}
 
 		}
+		return res;
+	}
+
+	/**
+	 *
+	 * @param theNode
+	 * @param name
+	 * @param id
+	 * @param setRoot
+	 * @return
+	 */
+	protected JDFResource createNewResource(final JDFNode theNode, final String name, final String id, final KElement setRoot)
+	{
+		final JDFResource res = theNode.addResource(name, null);
+		res.setID(id);
+		res.copyAttribute(AttributeName.DESCRIPTIVENAME, setRoot);
+		res.copyAttribute(AttributeName.COMMENTURL, setRoot);
+		res.copyAttribute(AttributeName.UNIT, setRoot);
 		return res;
 	}
 
@@ -310,7 +329,8 @@ public class WalkXJDFResource extends WalkXElement
 		if (inOut == null && xjdfToJDFImpl.isHeuristicLink())
 		{
 			if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name) && !ElementName.COMPONENT.equals(name)
-					&& !ElementName.COLORPOOL.equals(name) && !ElementName.MEDIA.equals(name) && !ElementName.EXPOSEDMEDIA.equals(name) && theNode.isValidLink(name, EnumUsage.Input, processUsage))
+					&& !ElementName.COLORPOOL.equals(name) && !ElementName.MEDIA.equals(name) && !ElementName.EXPOSEDMEDIA.equals(name)
+					&& theNode.isValidLink(name, EnumUsage.Input, processUsage))
 			{
 				inOut = EnumUsage.Input;
 			}

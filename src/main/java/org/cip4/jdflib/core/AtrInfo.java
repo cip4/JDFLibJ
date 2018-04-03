@@ -148,24 +148,7 @@ public class AtrInfo
 		if ((dataType.equals(AttributeInfo.EnumAttributeType.NMTOKENS)) || (dataType.equals(AttributeInfo.EnumAttributeType.enumerations))
 				|| (dataType.equals(AttributeInfo.EnumAttributeType.IDREFS)))
 		{
-			// check for matching individual NMTOKEN
-			if (smallAtt.indexOf(" ") > 0)
-			{
-				final VString vSmall = StringUtil.tokenize(smallAtt, JDFConstants.BLANK, false);
-				for (int i = 0; i < vSmall.size(); i++)
-				{
-					if (!StringUtil.hasToken(bigAtt, vSmall.get(i), JDFConstants.BLANK, 0))
-					{
-						return false;
-					}
-				}
-			}
-			else if (!StringUtil.hasToken(bigAtt, smallAtt, JDFConstants.BLANK, 0))
-			{
-				return false;
-			}
-
-			return true;
+			return matchesTokenList(smallAtt, bigAtt);
 		}
 
 		if (dataType.equals(AttributeInfo.EnumAttributeType.NumberRange))
@@ -335,6 +318,28 @@ public class AtrInfo
 		}
 
 		return false;
+	}
+
+	public static boolean matchesTokenList(final String smallAtt, final String bigAtt)
+	{
+		// check for matching individual NMTOKEN
+		if (smallAtt.indexOf(" ") > 0)
+		{
+			final VString vSmall = StringUtil.tokenize(smallAtt, JDFConstants.BLANK, false);
+			for (int i = 0; i < vSmall.size(); i++)
+			{
+				if (!StringUtil.hasToken(bigAtt, vSmall.get(i), JDFConstants.BLANK, 0))
+				{
+					return false;
+				}
+			}
+		}
+		else if (!StringUtil.hasToken(bigAtt, smallAtt, JDFConstants.BLANK, 0))
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	/**

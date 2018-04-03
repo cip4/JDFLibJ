@@ -71,18 +71,19 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class WalkDropItemIntent extends WalkJDFSubElement
+public class WalkColorantAlias extends WalkJDFSubElement
 {
 	/**
 	 *
 	 */
-	public WalkDropItemIntent()
+	public WalkColorantAlias()
 	{
 		super();
 	}
@@ -99,22 +100,22 @@ public class WalkDropItemIntent extends WalkJDFSubElement
 	}
 
 	/**
-	 *
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	protected String getXJDFName(final KElement jdf)
-	{
-		return ElementName.DROPITEM;
-	}
-
-	/**
 	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
 	 */
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString(ElementName.DROPITEMINTENT, null);
+		return VString.getVString(ElementName.COLORANTALIAS, null);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		final KElement walk = super.walk(jdf, xjdf);
+		setSeparations(jdf, walk, XJDFConstants.ColorantName);
+		return walk;
+	}
 }

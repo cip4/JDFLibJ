@@ -129,6 +129,7 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.MyPair;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.URLReader;
 import org.cip4.jdflib.util.UrlUtil;
@@ -159,10 +160,10 @@ public class JDFElement extends KElement
 		KElement.setLongID(bLong);
 	}
 
+	private MyPair<AttributeInfo, ElementInfo> infotables;
 	private static final long serialVersionUID = 1L;
 	private static final Log jLog = LogFactory.getLog(JDFElement.class);
 	private static EnumVersion defaultVersion = EnumVersion.Version_1_5;
-
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
@@ -187,9 +188,13 @@ public class JDFElement extends KElement
 	 * public version of getTheAttributeInfo
 	 * @return
 	 */
-	public AttributeInfo getAttributeInfo()
+	public final AttributeInfo getAttributeInfo()
 	{
-		return getTheAttributeInfo();
+		if (infotables == null)
+		{
+			infotables = new MyPair<AttributeInfo, ElementInfo>(getTheAttributeInfo(), getTheElementInfo());
+		}
+		return infotables.a;
 	}
 
 	/**
@@ -199,7 +204,7 @@ public class JDFElement extends KElement
 	 */
 	public EnumAttributeType getAtrType(final String attributeName)
 	{
-		final AttributeInfo ai = getTheAttributeInfo();
+		final AttributeInfo ai = getAttributeInfo();
 		return ai.getAttributeType(attributeName);
 	}
 
@@ -214,12 +219,12 @@ public class JDFElement extends KElement
 		EnumVersion v = null;
 		if (bElement)
 		{
-			final ElementInfo ei = getTheElementInfo();
+			final ElementInfo ei = getElementInfo();
 			v = ei.getFirstVersion(eaName);
 		}
 		else
 		{
-			final AttributeInfo ai = getTheAttributeInfo();
+			final AttributeInfo ai = getAttributeInfo();
 			v = ai.getFirstVersion(eaName);
 		}
 		if (v == null)
@@ -253,7 +258,7 @@ public class JDFElement extends KElement
 		final KElement parent = getParentNode_KElement();
 		if (parent instanceof JDFElement)
 		{
-			final VString v = ((JDFElement) parent).getTheElementInfo().deprecatedElements();
+			final VString v = ((JDFElement) parent).getElementInfo().deprecatedElements();
 			return v != null && v.contains(getLocalName());
 		}
 		return false;
@@ -297,12 +302,12 @@ public class JDFElement extends KElement
 		EnumVersion v = null;
 		if (bElement)
 		{
-			final ElementInfo ei = getTheElementInfo();
+			final ElementInfo ei = getElementInfo();
 			v = ei.getLastVersion(eaName);
 		}
 		else
 		{
-			final AttributeInfo ai = getTheAttributeInfo();
+			final AttributeInfo ai = getAttributeInfo();
 			v = ai.getLastVersion(eaName);
 		}
 		return v;
@@ -314,7 +319,7 @@ public class JDFElement extends KElement
 	 */
 	public VString requiredAttributes()
 	{
-		return getTheAttributeInfo().requiredAttribs();
+		return getAttributeInfo().requiredAttribs();
 	}
 
 	/**
@@ -324,7 +329,7 @@ public class JDFElement extends KElement
 	 */
 	public VString optionalAttributes()
 	{
-		return getTheAttributeInfo().optionalAttribs();
+		return getAttributeInfo().optionalAttribs();
 	}
 
 	/**
@@ -333,7 +338,7 @@ public class JDFElement extends KElement
 	 */
 	public JDFAttributeMap getDefaultAttributeMap()
 	{
-		return getTheAttributeInfo().getDefaultAttributeMap();
+		return getAttributeInfo().getDefaultAttributeMap();
 	}
 
 	/**
@@ -380,7 +385,7 @@ public class JDFElement extends KElement
 	 */
 	public VString deprecatedAttributes()
 	{
-		return getTheAttributeInfo().deprecatedAttribs();
+		return getAttributeInfo().deprecatedAttribs();
 	}
 
 	/**
@@ -389,7 +394,7 @@ public class JDFElement extends KElement
 	 */
 	public VString prereleaseAttributes()
 	{
-		return getTheAttributeInfo().prereleaseAttribs();
+		return getAttributeInfo().prereleaseAttribs();
 	}
 
 	/**
@@ -399,7 +404,7 @@ public class JDFElement extends KElement
 	 */
 	public VString knownAttributes()
 	{
-		return getTheAttributeInfo().knownAttribs();
+		return getAttributeInfo().knownAttribs();
 	}
 
 	/**
@@ -482,6 +487,18 @@ public class JDFElement extends KElement
 	}
 
 	/**
+	 * @return the elementinfo
+	 */
+	public final ElementInfo getElementInfo()
+	{
+		if (infotables == null)
+		{
+			infotables = new MyPair<AttributeInfo, ElementInfo>(getTheAttributeInfo(), getTheElementInfo());
+		}
+		return infotables.b;
+	}
+
+	/**
 	 * get the missing elements as a vector
 	 * <p>
 	 * default: getMissingElements(99999999)
@@ -490,7 +507,7 @@ public class JDFElement extends KElement
 	 */
 	public VString getMissingElements(final int nMax)
 	{
-		final VString v = getTheElementInfo().requiredElements();
+		final VString v = getElementInfo().requiredElements();
 		return getMissingElementVector(v, nMax);
 	}
 
@@ -500,7 +517,7 @@ public class JDFElement extends KElement
 	 */
 	public VString requiredElements()
 	{
-		return getTheElementInfo().requiredElements();
+		return getElementInfo().requiredElements();
 	}
 
 	/**
@@ -509,7 +526,7 @@ public class JDFElement extends KElement
 	 */
 	public VString optionalElements()
 	{
-		return getTheElementInfo().optionalElements();
+		return getElementInfo().optionalElements();
 	}
 
 	/**
@@ -518,7 +535,7 @@ public class JDFElement extends KElement
 	 */
 	public VString uniqueElements()
 	{
-		return getTheElementInfo().uniqueElements();
+		return getElementInfo().uniqueElements();
 	}
 
 	/**
@@ -527,7 +544,7 @@ public class JDFElement extends KElement
 	 */
 	public String prereleaseElements()
 	{
-		final VString v = getTheElementInfo().prereleaseElements();
+		final VString v = getElementInfo().prereleaseElements();
 		return StringUtil.setvString(v, JDFConstants.COMMA, null, null);
 	}
 
@@ -540,7 +557,7 @@ public class JDFElement extends KElement
 	 */
 	public VString getPrereleaseElements(final int nMax)
 	{
-		final VString v = getTheElementInfo().prereleaseElements();
+		final VString v = getElementInfo().prereleaseElements();
 		return getMatchingElementVector(v, nMax);
 	}
 
@@ -553,7 +570,7 @@ public class JDFElement extends KElement
 	 */
 	public VString getDeprecatedElements(final int nMax)
 	{
-		final VString v = getTheElementInfo().deprecatedElements();
+		final VString v = getElementInfo().deprecatedElements();
 		return getMatchingElementVector(v, nMax);
 	}
 
@@ -602,7 +619,7 @@ public class JDFElement extends KElement
 	 */
 	public VString getMissingAttributes(final int nMax)
 	{
-		final VString v = getTheAttributeInfo().requiredAttribs();
+		final VString v = getAttributeInfo().requiredAttribs();
 		return getMissingAttributeVector(v, nMax);
 	}
 
@@ -765,7 +782,7 @@ public class JDFElement extends KElement
 	 */
 	public ValuedEnum getTypeForAttribute(final String key)
 	{
-		return getTheAttributeInfo().getAttributeType(key);
+		return getAttributeInfo().getAttributeType(key);
 	}
 
 	/**
@@ -779,7 +796,7 @@ public class JDFElement extends KElement
 	 */
 	public boolean validAttribute(final String key, final String nameSpaceURI, final EnumValidationLevel level)
 	{
-		return getTheAttributeInfo().validAttribute(key, getAttribute(key, nameSpaceURI, null), level);
+		return getAttributeInfo().validAttribute(key, getAttribute(key, nameSpaceURI, null), level);
 	}
 
 	/**
@@ -789,7 +806,7 @@ public class JDFElement extends KElement
 	 */
 	public ValuedEnum getEnumforAttribute(final String key)
 	{
-		return getTheAttributeInfo().getAttributeEnum(key);
+		return getAttributeInfo().getAttributeEnum(key);
 	}
 
 	/**
@@ -879,7 +896,7 @@ public class JDFElement extends KElement
 		AttributeInfo ai = null;
 		if (!v.isEmpty())
 		{
-			ai = getTheAttributeInfo();
+			ai = getAttributeInfo();
 		}
 
 		// ideally we would find a better method to recognize schema placed
@@ -943,7 +960,7 @@ public class JDFElement extends KElement
 	 */
 	public AttributeInfo.EnumAttributeType attributeType(final String attributeName)
 	{
-		return getTheAttributeInfo().getAttributeType(attributeName);
+		return getAttributeInfo().getAttributeType(attributeName);
 	}
 
 	/**
@@ -1020,6 +1037,7 @@ public class JDFElement extends KElement
 	public JDFElement(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, null, qualifiedName);
+		infotables = null;
 	}
 
 	/**
@@ -1032,6 +1050,7 @@ public class JDFElement extends KElement
 	public JDFElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+		infotables = null;
 	}
 
 	/**
@@ -1045,12 +1064,12 @@ public class JDFElement extends KElement
 	public JDFElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+		infotables = null;
 	}
 
 	/**
 	 * Boolean Enumeration from JDF Spec Orientation of a physical resource.
 	 */
-	@SuppressWarnings("unchecked")
 	public static final class EnumBoolean extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -3738,7 +3757,7 @@ public class JDFElement extends KElement
 	public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
 	{
 
-		final AttributeInfo ai = getTheAttributeInfo();
+		final AttributeInfo ai = getAttributeInfo();
 		VString v = getInvalidAttributes_JDFElement(level, bIgnorePrivate, nMax, ai);
 		String s = getNamespaceURI();
 		if (s != null && s.toLowerCase().indexOf(JDFConstants.CIP4ORG) >= 0 && !s.equals(JDFConstants.JDFNAMESPACE))
@@ -3783,7 +3802,7 @@ public class JDFElement extends KElement
 
 		if (EnumValidationLevel.isRequired(level) && !isIncomplete())
 		{
-			vReq = getTheAttributeInfo().requiredAttribs().getSet();
+			vReq = getAttributeInfo().requiredAttribs().getSet();
 		}
 		else
 		{
@@ -5096,23 +5115,23 @@ public class JDFElement extends KElement
 			{
 				return EnumVersion.Version_1_9;
 			}
-			if ("1.8".equals(enumName))
+			else if ("1.8".equals(enumName))
 			{
 				return EnumVersion.Version_1_8;
 			}
-			if ("1.7".equals(enumName))
+			else if ("1.7".equals(enumName))
 			{
 				return EnumVersion.Version_1_7;
 			}
-			if ("1.6".equals(enumName))
+			else if ("1.6".equals(enumName))
 			{
 				return EnumVersion.Version_1_6;
 			}
-			if ("1.5".equals(enumName))
+			else if ("1.5".equals(enumName))
 			{
 				return EnumVersion.Version_1_5;
 			}
-			if ("1.4".equals(enumName))
+			else if ("1.4".equals(enumName))
 			{
 				return EnumVersion.Version_1_4;
 			}
@@ -5136,7 +5155,7 @@ public class JDFElement extends KElement
 			{
 				return EnumVersion.Version_2_0;
 			}
-			return EnumVersion.Version_1_5; // the default
+			return enumName != null && enumName.startsWith("2") ? EnumVersion.Version_2_0 : JDFElement.getDefaultJDFVersion(); // the default
 		}
 
 		/**
@@ -5148,6 +5167,17 @@ public class JDFElement extends KElement
 		public static EnumVersion getEnum(final int enumValue)
 		{
 			return (EnumVersion) getEnum(EnumVersion.class, enumValue);
+		}
+
+		/**
+		 * casts a EnumVersion into its corresponding String
+		 *
+		 * @param enumValue the EnumVersion to cast
+		 * @return the corresponding String
+		 */
+		public static EnumVersion getEnum(final int major, final int minor)
+		{
+			return getEnum(major + "." + minor);
 		}
 
 		/**
@@ -6549,5 +6579,15 @@ public class JDFElement extends KElement
 			return getSchemaURL(2, 0);
 		else
 			return null;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.core.KElement#init()
+	 */
+	@Override
+	public boolean init()
+	{
+		infotables = null;
+		return super.init();
 	}
 }

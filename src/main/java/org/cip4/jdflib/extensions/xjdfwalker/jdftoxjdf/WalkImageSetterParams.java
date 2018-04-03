@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -114,14 +114,15 @@ public class WalkImageSetterParams extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.NONPRINTABLEMARGINBOTTOM);
 		map.remove(AttributeName.NONPRINTABLEMARGINLEFT);
 		map.remove(AttributeName.NONPRINTABLEMARGINRIGHT);
 		map.remove(AttributeName.NONPRINTABLEMARGINTOP);
-		map.remove(AttributeName.SOURCEWORKSTYLE);
+		map.remove(AttributeName.RESOLUTION);
 		map.remove(AttributeName.SIDES);
+		map.remove(AttributeName.SOURCEWORKSTYLE);
 		map.remove(AttributeName.TRANSFERCURVE);
 		super.updateAttributes(map);
 	}
@@ -130,7 +131,7 @@ public class WalkImageSetterParams extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void removeUnusedElements(KElement jdf)
+	protected void removeUnusedElements(final KElement jdf)
 	{
 		jdf.removeChild(ElementName.FITPOLICY, null, 0);
 		super.removeUnusedElements(jdf);

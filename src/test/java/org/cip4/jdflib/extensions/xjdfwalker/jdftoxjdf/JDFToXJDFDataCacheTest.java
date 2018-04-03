@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,7 @@ public class JDFToXJDFDataCacheTest extends JDFTestCaseBase
 	@Test
 	public void testGetResAttribs()
 	{
-		VString resAtts = JDFToXJDFDataCache.getResAttribs();
+		final VString resAtts = JDFToXJDFDataCache.getResAttribs();
 		assertNotNull(resAtts);
 		assertTrue(resAtts.contains(AttributeName.AMOUNT));
 	}
@@ -94,9 +94,31 @@ public class JDFToXJDFDataCacheTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetResAttribsStatus()
+	{
+		final VString resAtts = JDFToXJDFDataCache.getResAttribs();
+		assertNotNull(resAtts);
+		assertTrue(resAtts.contains(AttributeName.STATUS));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetResAttribsPageNumber()
+	{
+		final VString resAtts = JDFToXJDFDataCache.getResAttribs();
+		assertNotNull(resAtts);
+		assertTrue(resAtts.contains(AttributeName.PAGENUMBER));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetPOAttribs()
 	{
-		VString resAtts = JDFToXJDFDataCache.getPlacedObjectAttribs();
+		final VString resAtts = JDFToXJDFDataCache.getPlacedObjectAttribs();
 		assertNotNull(resAtts);
 		assertTrue(resAtts.contains(AttributeName.ORD));
 		assertTrue(resAtts.contains(AttributeName.ANCHOR));

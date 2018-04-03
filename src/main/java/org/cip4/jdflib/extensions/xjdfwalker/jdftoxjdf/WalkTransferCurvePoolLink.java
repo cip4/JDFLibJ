@@ -68,44 +68,42 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.JDFResource;
 
 /**
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class WalkDropItemIntent extends WalkJDFSubElement
+public class WalkTransferCurvePoolLink extends WalkResLink
 {
 	/**
 	 *
 	 */
-	public WalkDropItemIntent()
+	public WalkTransferCurvePoolLink()
 	{
 		super();
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * @param jdf
+	 * @param xjdf
+	 * @return true if must continue
 	 */
 	@Override
-	public boolean matches(final KElement toCheck)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		return !jdfToXJDF.isRetainAll();
-	}
-
-	/**
-	 *
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	protected String getXJDFName(final KElement jdf)
-	{
-		return ElementName.DROPITEM;
+		final JDFResourceLink rl = (JDFResourceLink) jdf;
+		final JDFResource r = rl.getLinkRoot();
+		if (r != null)
+		{
+			updateTransferCurve(r);
+			rl.renameElement("TransferCurveLink", null);
+		}
+		return super.walk(jdf, xjdf);
 	}
 
 	/**
@@ -114,7 +112,15 @@ public class WalkDropItemIntent extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString(ElementName.DROPITEMINTENT, null);
+		return VString.getVString("TransferCurvePoolLink", null);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#matches(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public boolean matches(final KElement toCheck)
+	{
+		return !jdfToXJDF.isRetainAll();
+	}
 }

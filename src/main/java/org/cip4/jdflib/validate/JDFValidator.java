@@ -118,8 +118,10 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.process.JDFColorPool;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.MyArgs;
+import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
@@ -1072,9 +1074,8 @@ public class JDFValidator
 				}
 			}
 		}
-		for (i = 0; i < vSeparations.size(); i++)
+		for (final String sep : vSeparations)
 		{
-			final String sep = vSeparations.get(i);
 			sysOut.println("Warning: Separation Name not in ColorPool: " + sep);
 			if (sepPool != null)
 			{
@@ -1083,9 +1084,8 @@ public class JDFValidator
 				warn.setAttribute("Separation", sep);
 			}
 		}
-		for (i = 0; i < vColorPoolSeparations.size(); i++)
+		for (final String sep : vColorPoolSeparations)
 		{
-			final String sep = vColorPoolSeparations.get(i);
 			sysOut.println("Warning: Unreferenced Separation Name    : " + sep);
 			if (sepPool != null)
 			{
@@ -2249,14 +2249,9 @@ public class JDFValidator
 		}
 		if (bTryFormats)
 		{
-			try
-			{
-				d = processMimeStream(new FileInputStream(file));
-			}
-			catch (final FileNotFoundException x)
-			{
-				// nop
-			}
+			final InputStream inStream = FileUtil.getBufferedInputStream(file);
+			d = processMimeStream(inStream);
+			StreamUtil.close(inStream);
 		}
 		return d;
 	}

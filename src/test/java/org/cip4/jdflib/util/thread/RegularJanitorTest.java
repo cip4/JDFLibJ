@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -154,12 +154,12 @@ public class RegularJanitorTest extends JDFTestCaseBase
 	@Test
 	public void testSweep()
 	{
-		RegularJanitor janitor = RegularJanitor.getJanitor();
+		final RegularJanitor janitor = RegularJanitor.getJanitor();
 		janitor.setInterval(1);
-		Runner runner = new Runner();
+		final Runner runner = new Runner();
 		janitor.addSweeper(new TimeSweeper(1, runner), true);
 		janitor.startSweep(1);
-		ThreadUtil.sleep(5811);
+		ThreadUtil.sleep(8888);
 		assertTrue(runner.i >= 3);
 	}
 
@@ -169,9 +169,9 @@ public class RegularJanitorTest extends JDFTestCaseBase
 	@Test
 	public void testSweepStart()
 	{
-		RegularJanitor janitor = RegularJanitor.getJanitor();
+		final RegularJanitor janitor = RegularJanitor.getJanitor();
 		janitor.setInterval(1);
-		Runner runner = new Runner();
+		final Runner runner = new Runner();
 		janitor.addSweeper(new TimeSweeper(1, runner), true);
 		janitor.startSweep(10);
 		ThreadUtil.sleep(811);
@@ -184,7 +184,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 	@Test
 	public void testHasSweeper()
 	{
-		RegularJanitor janitor = RegularJanitor.getJanitor();
+		final RegularJanitor janitor = RegularJanitor.getJanitor();
 		janitor.addSweeper(new TimeSweeper(42, new Runner()), true);
 		assertTrue(janitor.hasSweeper(new Runner()));
 		assertTrue(janitor.hasSweeper(new TimeSweeper(42, new Runner())));
@@ -201,7 +201,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 	@Test
 	public void testAddSweeper()
 	{
-		RegularJanitor janitor = RegularJanitor.getJanitor();
+		final RegularJanitor janitor = RegularJanitor.getJanitor();
 		janitor.addSweeper(new TimeSweeper(42, new Runner()), true);
 		assertEquals(janitor.numSweepers(), 1);
 		janitor.addSweeper(new TimeSweeper(42, new Runner()), true);

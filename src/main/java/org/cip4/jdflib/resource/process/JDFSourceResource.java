@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,8 +86,8 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- * 
- * 
+ *
+ *
  * @author rainer prosi
  * @date Jun 5, 2012
  */
@@ -97,9 +97,9 @@ public class JDFSourceResource extends JDFElement
 
 	/**
 	 * Constructor for JDFSourceResource
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
-	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 *
 	 *
 	 */
 	public JDFSourceResource(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
@@ -109,10 +109,10 @@ public class JDFSourceResource extends JDFElement
 
 	/**
 	 * Constructor for JDFSourceResource
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 *
 	 */
 	public JDFSourceResource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
@@ -121,11 +121,11 @@ public class JDFSourceResource extends JDFElement
 
 	/**
 	 * Constructor for JDFSourceResource
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
-	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 *
 	 */
 	public JDFSourceResource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
@@ -136,7 +136,7 @@ public class JDFSourceResource extends JDFElement
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -146,7 +146,7 @@ public class JDFSourceResource extends JDFElement
 	}
 
 	/**
-	 * 
+	 *
 	 * get the refelement
 	 * @return
 	 */
@@ -169,7 +169,7 @@ public class JDFSourceResource extends JDFElement
 
 	/**
 	 * gets the link of the linked route
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFResource getLinkRoot()
@@ -185,7 +185,7 @@ public class JDFSourceResource extends JDFElement
 
 	/**
 	 * overrides the deprecated method JDFElement.getTarget()
-	 * 
+	 *
 	 * @see org.cip4.jdflib.core.JDFElement#getTarget()
 	 * @return
 	 */
@@ -203,11 +203,11 @@ public class JDFSourceResource extends JDFElement
 
 	/**
 	 * return a vector of unknown element nodenames
-	 * 
+	 *
 	 * @param  bIgnorePrivate - used by JDFElement during the validation !!! Do not change the signature of this method
 	 * @param  nMax - maximum size of the returned vector
 	 * @return Vector - vector of unknown element nodenames
-	 * 
+	 *
 	 * default: GetInvalidElements(true, 999999)
 	 */
 	@Override
@@ -220,7 +220,7 @@ public class JDFSourceResource extends JDFElement
 	 * @see org.cip4.jdflib.core.JDFElement#getInvalidElements(org.cip4.jdflib.core.JDFElement.EnumValidationLevel, boolean, int)
 	 */
 	@Override
-	public VString getInvalidElements(final EnumValidationLevel level, boolean bIgnorePrivate, final int nMax)
+	public VString getInvalidElements(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
 	{
 		final VString v = super.getInvalidElements(level, bIgnorePrivate, nMax);
 		if (v.size() >= nMax)
@@ -255,7 +255,7 @@ public class JDFSourceResource extends JDFElement
 
 	/**
 	 * return the LocalName of the referenced resource
-	 * 
+	 *
 	 * @return the LocalName of the referenced resource
 	 */
 	public String getSourceLocalName()
@@ -270,7 +270,7 @@ public class JDFSourceResource extends JDFElement
 
 	/**
 	 * return the ID of the referenced resource
-	 * 
+	 *
 	 * @return the ID of the referenced resource
 	 */
 	public String getSourceID()
@@ -285,7 +285,7 @@ public class JDFSourceResource extends JDFElement
 
 	/**
 	 * return the NodeName of the referenced resource
-	 * 
+	 *
 	 * @return the nodename of the referenced resource
 	 */
 	public String getSourcefNodeName()
@@ -300,7 +300,7 @@ public class JDFSourceResource extends JDFElement
 
 	/**
 	 * delete this sourceResource and it's target
-	 * 
+	 *
 	 * @param  bCheckRefCount if true, check that no other element refers to the target before deleting<br>
 	 * if bCheckRefCount=false, the target is force deleted
 	 * @return JDFElement the deleted target element
@@ -320,13 +320,13 @@ public class JDFSourceResource extends JDFElement
 	// //
 	/**
 	 * get list of missing elements
-	 * 
+	 *
 	 * @param nMax maximum size of the returned vector
 	 */
 	@Override
 	public VString getMissingElements(final int nMax)
 	{
-		VString vs = getTheElementInfo().requiredElements();
+		VString vs = getElementInfo().requiredElements();
 		vs = getMissingElementVector(vs, nMax);
 		final VElement v2 = getChildElementVector_KElement(null, null, null, true, 0);
 		int n = 0;

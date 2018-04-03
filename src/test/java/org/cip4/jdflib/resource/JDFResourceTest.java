@@ -615,6 +615,46 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testAppendRaw()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
+		final JDFResource r3 = (JDFResource) r2.appendElement(ElementName.EMBOSSINGPARAMS);
+		r3.setAttribute(AttributeName.DELIVERYUNIT1, "dd1");
+		r.appendAttribute(AttributeName.PARTIDKEYS, AttributeName.DELIVERYUNIT1, null, null, true);
+		assertEquals(r, r.getPartition(new JDFAttributeMap(), EnumPartUsage.Explicit));
+		final JDFAttributeMap m = new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1");
+		assertEquals(r2, r.getPartition(m, EnumPartUsage.Explicit));
+		m.put(EnumPartIDKey.DeliveryUnit1, "dd1");
+		assertEquals(r3, r.getPartition(m, EnumPartUsage.Explicit));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAppendRawAtt()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
+		final JDFResource r3 = (JDFResource) r2.appendElement(ElementName.EMBOSSINGPARAMS);
+		r3.setAttribute(AttributeName.DELIVERYUNIT1, "dd1");
+		r.appendAttribute(AttributeName.PARTIDKEYS, AttributeName.DELIVERYUNIT1, null, null, true);
+		assertEquals(r, r.getPartition(new JDFAttributeMap(), EnumPartUsage.Explicit));
+		final JDFAttributeMap m = new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1");
+		assertEquals(r2, r.getPartition(m, EnumPartUsage.Explicit));
+		m.put(EnumPartIDKey.DeliveryUnit1, "dd1");
+		assertEquals(r3, r.getPartition(m, EnumPartUsage.Explicit));
+		r3.setDeliveryUnit(1, "dd2");
+		assertNull(r.getPartition(m, EnumPartUsage.Explicit));
+		m.put(EnumPartIDKey.DeliveryUnit1, "dd2");
+		assertEquals(r3, r.getPartition(m, EnumPartUsage.Explicit));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testgetPartMap()
 	{
 		final String strFileName = sm_dirTestData + "partitioned_private_resources.jdf";

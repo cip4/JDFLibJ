@@ -674,7 +674,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		conv.setParameterSet(true);
 		final KElement xjdf = conv.convert(n);
 		assertEquals(xjdf.getXPathAttribute("ParameterSet/Parameter/NodeInfo/@Status", null), "Cleanup");
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/@DescriptiveName", null), "desc");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/@DescriptiveName", null), "desc");
 	}
 
 	/**
@@ -1577,6 +1577,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		n.setType(EnumType.ConventionalPrinting);
 		final JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Input);
 		c.setDescriptiveName("c1");
+		c.setProductID("p1");
 		c.appendLocationElement().setLocID("L1");
 
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -1602,6 +1603,43 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.convert(n);
 		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/@Ord", null), "0");
 		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/Layout/PlacedObject/MarkObject/CIELABMeasuringField/@Center", null), "2 2");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testLayoutDescName()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Imposition);
+		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Input);
+		lo.setName("n1");
+		lo.setDescriptiveName("d1");
+		final JDFLayout sheet = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s1");
+		sheet.setDescriptiveName("s1");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		assertEquals("n1", new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getDescriptiveName());
+		assertEquals("s1", new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getPartition(0).getDescriptiveName());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testExternalID()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Imposition);
+		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Input);
+		lo.setProductID("p1");
+		final JDFLayout sheet = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s1");
+		sheet.setDescriptiveName("s1");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		assertNull(new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getAttribute(XJDFConstants.ExternalID));
+		assertEquals("p1", new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getPartition(0).getExternalID());
 	}
 
 	/**
@@ -1717,6 +1755,26 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@ISOPaperSubstrate", null), "PS1");
 		assertNull(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@Grade", null));
 		writeRoundTripX(xjdfc, "MediaGrade", EnumValidationLevel.Incomplete);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMediaPlatePaper()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		final JDFMedia med = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		med.setMediaType(EnumMediaType.Paper);
+		med.setWeight(42);
+		med.setGrade(1);
+		final JDFMedia med2 = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		med2.setMediaType(EnumMediaType.Plate);
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		assertNotNull(new XJDFHelper(xjdf).getSet(ElementName.MEDIA, 1));
 	}
 
 	/**
@@ -2083,12 +2141,17 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		ip.setPolarity(EnumPolarity.Negative);
 		final JDFRunList ruli = (JDFRunList) plateset.addResource(ElementName.RUNLIST, EnumUsage.Input);
 		ruli.setFileURL("file:///foo.pdf");
-		plateset.addResource(ElementName.MEDIA, EnumUsage.Input).setProductID("p1");
+		final JDFMedia plate = (JDFMedia) plateset.addResource(ElementName.MEDIA, EnumUsage.Input);
+		plate.setMediaType(EnumMediaType.Plate);
+		plate.setProductID("p1");
+
 		plateset.addResource(ElementName.LAYOUT, EnumUsage.Input);
 		final JDFExposedMedia xm = (JDFExposedMedia) plateset.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
 		final JDFNode cp = product.addCombined(new VString("InkZoneCalculation ConventionalPrinting", " "));
 		cp.ensureLink(xm, EnumUsage.Input, null);
-		cp.addResource(ElementName.MEDIA, EnumUsage.Input).setProductID("p2");
+		final JDFMedia paper = (JDFMedia) cp.addResource(ElementName.MEDIA, EnumUsage.Input);
+		paper.setProductID("p2");
+		paper.setMediaType(EnumMediaType.Paper);
 		return product;
 	}
 

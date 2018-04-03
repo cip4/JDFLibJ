@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -151,8 +151,10 @@ public class WalkCutBlock extends WalkJDFSubElement
 	@Override
 	protected void updateAttributes(final JDFAttributeMap map)
 	{
-		super.updateAttributes(map);
+		map.remove(AttributeName.CLASS);
 		map.renameKey(AttributeName.ASSEMBLYIDS, XJDFConstants.BinderySignatureIDs);
+		super.updateAttributes(map);
 		map.remove(AttributeName.BLOCKELEMENTTYPE);
+		map.remove(AttributeName.BLOCKTYPE);
 	}
 }

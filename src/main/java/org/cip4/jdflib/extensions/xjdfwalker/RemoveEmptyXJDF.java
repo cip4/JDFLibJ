@@ -66,55 +66,124 @@
  *
  *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.elementwalker.RemoveEmpty;
+import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.util.ContainerUtil;
 
 /**
  *
- * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * @author rainer prosi
  *
  */
-public class WalkDropItemIntent extends WalkJDFSubElement
+public class RemoveEmptyXJDF extends RemoveEmpty
 {
+
 	/**
 	 *
 	 */
-	public WalkDropItemIntent()
+	public RemoveEmptyXJDF()
 	{
 		super();
+		addIgnoreElement(XJDFConstants.Header);
+		addIgnoreElement(ElementName.CONTENTOBJECT);
+		addIgnoreElement(ElementName.EXPOSEDMEDIA);
+		addIgnoreElement(ElementName.MARKOBJECT);
+		addIgnoreElement(ElementName.NODEINFO);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * zapp me
+	 *
+	 * @author rainer prosi
+	 *
 	 */
-	@Override
-	public boolean matches(final KElement toCheck)
+	public class WalkResourceSet extends WalkElement
 	{
-		return !jdfToXJDF.isRetainAll();
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString(XJDFConstants.ResourceSet, null);
+		}
+
+		/**
+		 *
+		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#getDummyAttributes()
+		 */
+		@Override
+		protected VString getDummyAttributes()
+		{
+			final VString v = super.getDummyAttributes();
+			v.add(AttributeName.COMBINEDPROCESSINDEX);
+			v.add(AttributeName.NAME);
+			v.add(AttributeName.USAGE);
+			v.add(AttributeName.PROCESSUSAGE);
+			v.add(AttributeName.ID);
+			return v;
+		}
+
 	}
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
 	 */
-	@Override
-	protected String getXJDFName(final KElement jdf)
+	public class WalkAuditResource extends WalkElement
 	{
-		return ElementName.DROPITEM;
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString(XJDFConstants.AuditResource, null);
+		}
+
+		/**
+		 *
+		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#hasRequiredChild(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		protected boolean hasRequiredChild(final KElement e1)
+		{
+			return e1.hasChildElement(ElementName.RESOURCEINFO, null);
+		}
+
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 *
 	 */
-	@Override
-	public VString getElementNames()
+	public class WalkResourceXJDF extends WalkElement
 	{
-		return VString.getVString(ElementName.DROPITEMINTENT, null);
-	}
 
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString(XJDFConstants.Resource, null);
+		}
+
+		/**
+		 * part elements are ignored
+		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#hasChild(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		protected boolean hasChild(final KElement e1)
+		{
+			return ContainerUtil.getNonEmpty(e1.getChildrenIgnoreList(VString.getVString(ElementName.PART, null), true, null)) != null;
+		}
+
+	}
 }

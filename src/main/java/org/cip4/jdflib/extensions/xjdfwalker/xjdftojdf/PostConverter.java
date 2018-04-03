@@ -219,7 +219,7 @@ class PostConverter
 	{
 		final JDFDeliveryParams dp = (JDFDeliveryParams) theNode.getResource(ElementName.DELIVERYPARAMS, EnumUsage.Input, 0);
 		final VString allTypes = theNode.getAllTypes();
-		if (dp != null && allTypes.contains(XJDFConstants.Product))
+		if (dp != null && (allTypes.contains(XJDFConstants.Product) || dp.getChildWithAttribute(ElementName.PART, AttributeName.PRODUCTPART, null, "*", 0, false) != null))
 		{
 			boolean keepDI = theNode.getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0) != null;
 			final JDFDeliveryIntent di = (JDFDeliveryIntent) theNode.getCreateResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);

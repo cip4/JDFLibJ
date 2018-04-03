@@ -394,6 +394,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 		setUsage(resourceLink.getUsage());
 		setResourceName(resourceLink.getLinkedResourceName());
 		setResourceID(resourceLink.getrRef());
+		copyAttribute(AttributeName.ORIENTATION, resourceLink);
 
 		final JDFResource r = resourceLink.getTarget();
 		if (r != null)

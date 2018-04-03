@@ -181,7 +181,7 @@ class PartitionMap
 	 * @return
 	 * @see java.util.HashMap#remove(java.lang.Object)
 	 */
-	public JDFResource remove(final Object key)
+	public JDFResource remove(final JDFAttributeMap key)
 	{
 		return leafMap.remove(key);
 	}

@@ -95,9 +95,9 @@ public class StreamUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetLines() throws IOException
 	{
-		ByteArrayIOStream bos = new ByteArrayIOStream();
+		final ByteArrayIOStream bos = new ByteArrayIOStream();
 		bos.write("foooo\nbar\nbar2".getBytes());
-		VString vs = StreamUtil.getLines(bos.getInputStream());
+		final VString vs = StreamUtil.getLines(bos.getInputStream());
 		assertEquals(3, vs.size());
 		bos.close();
 	}
@@ -110,9 +110,9 @@ public class StreamUtilTest extends JDFTestCaseBase
 	@Test
 	public void testReset() throws IOException
 	{
-		InputStream s = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
+		final InputStream s = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
 		s.mark(42);
-		byte[] b = new byte[4];
+		final byte[] b = new byte[4];
 		s.read(b);
 		assertEquals(new String(b), "%PDF");
 		StreamUtil.reset(s);
@@ -129,14 +129,39 @@ public class StreamUtilTest extends JDFTestCaseBase
 	 * @throws IOException
 	 */
 	@Test
+	public void testClose() throws IOException
+	{
+		for (int i = 0; i < 42; i++)
+		{
+			final InputStream s = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
+			s.mark(42);
+			final byte[] b = new byte[4];
+			s.read(b);
+			assertEquals(new String(b), "%PDF");
+			StreamUtil.reset(s);
+			s.read(b);
+			assertEquals(new String(b), "%PDF");
+			StreamUtil.reset(null);
+			s.read(b);
+			assertNotSame(new String(b), "%PDF");
+			StreamUtil.close(s);
+		}
+	}
+
+	/**
+	 *
+	 *
+	 * @throws IOException
+	 */
+	@Test
 	public void testGetMD5() throws IOException
 	{
-		InputStream s = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
-		byte[] md5 = StreamUtil.getMD5(s);
+		final InputStream s = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
+		final byte[] md5 = StreamUtil.getMD5(s);
 		assertNotNull(md5);
 		s.close();
-		InputStream s2 = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
-		byte[] md52 = StreamUtil.getMD5(s2);
+		final InputStream s2 = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
+		final byte[] md52 = StreamUtil.getMD5(s2);
 		for (int i = 0; i < md5.length; i++)
 			assertEquals(md5[i], md52[i]);
 		s2.close();

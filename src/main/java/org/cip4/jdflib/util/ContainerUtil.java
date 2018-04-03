@@ -679,8 +679,18 @@ public class ContainerUtil
 	 * @param c the collection to check
 	 * @return 0 for null or size
 	 */
-	public static int size(Collection<?> c)
+	public static int size(final Collection<?> c)
 	{
 		return c == null ? 0 : c.size();
+	}
+
+	/**
+	 *
+	 * @param c
+	 * @return
+	 */
+	public static boolean isEmpty(final Collection<?> c)
+	{
+		return c == null ? true : c.isEmpty();
 	}
 }

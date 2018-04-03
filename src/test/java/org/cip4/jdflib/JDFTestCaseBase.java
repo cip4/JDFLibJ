@@ -565,37 +565,40 @@ public abstract class JDFTestCaseBase
 		}
 		assertEquals(valResult, "Valid");
 
-		final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
-		final JDFDoc converted = jdfConverter.convert(xjdfRoot);
-		final String fileXJ = sm_dirTestDataTemp + fileBase + ".xjdf.jdf";
-		converted.write2File(fileXJ, 2, false);
-		JDFElement jxRoot = converted.getJDFRoot();
-		if (jxRoot == null)
-			jxRoot = converted.getJMFRoot();
-		final boolean valid = jxRoot.isValid(level);
-		if (!valid)
+		if (level != null)
 		{
-			printValid(converted);
-		}
-		assertTrue(fileBase + ".xjdf.jdf", valid);
-		final JDFDoc schemaParsed = getSchemaParser().parseFile(fileXJ);
-		dVal = schemaParsed.getValidationResult();
-		valResult = dVal.getRoot().getAttribute("ValidationResult");
-		assertEquals(valResult, "Valid");
+			final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
+			final JDFDoc converted = jdfConverter.convert(xjdfRoot);
+			final String fileXJ = sm_dirTestDataTemp + fileBase + ".xjdf.jdf";
+			converted.write2File(fileXJ, 2, false);
+			JDFElement jxRoot = converted.getJDFRoot();
+			if (jxRoot == null)
+				jxRoot = converted.getJMFRoot();
+			final boolean valid = jxRoot.isValid(level);
+			if (!valid)
+			{
+				printValid(converted);
+			}
+			assertTrue(fileBase + ".xjdf.jdf", valid);
+			final JDFDoc schemaParsed = getSchemaParser().parseFile(fileXJ);
+			dVal = schemaParsed.getValidationResult();
+			valResult = dVal.getRoot().getAttribute("ValidationResult");
+			assertEquals(valResult, "Valid");
 
-		final XJDF20 xjdfConv = new XJDF20();
-		final KElement root = xjdfConv.convert(jxRoot);
+			final XJDF20 xjdfConv = new XJDF20();
+			final KElement root = xjdfConv.convert(jxRoot);
 
-		final String roundXjdf = sm_dirTestDataTemp + fileBase + ".jdf.xjdf";
-		root.write2File(roundXjdf);
-		docXJDF = p.parseFile(roundXjdf);
-		dVal = docXJDF.getValidationResult();
-		valResult = dVal.getRoot().getAttribute("ValidationResult");
-		if (!"Valid".equals(valResult))
-		{
-			dVal.write2File(sm_dirTestDataTemp + fileBase + ".val.jdf.xml", 2, false);
+			final String roundXjdf = sm_dirTestDataTemp + fileBase + ".jdf.xjdf";
+			root.write2File(roundXjdf);
+			docXJDF = p.parseFile(roundXjdf);
+			dVal = docXJDF.getValidationResult();
+			valResult = dVal.getRoot().getAttribute("ValidationResult");
+			if (!"Valid".equals(valResult))
+			{
+				dVal.write2File(sm_dirTestDataTemp + fileBase + ".val.jdf.xml", 2, false);
+			}
+			assertEquals(valResult, "Valid");
 		}
-		assertEquals(valResult, "Valid");
 	}
 
 	/**

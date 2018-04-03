@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,8 +76,6 @@ package org.cip4.jdflib.core;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -90,7 +88,9 @@ import org.apache.xerces.xni.NamespaceContext;
 import org.apache.xerces.xni.XMLLocator;
 import org.apache.xerces.xni.XNIException;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.SkipInputStream;
+import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.xml.sax.ErrorHandler;
@@ -215,29 +215,31 @@ public class XMLParser extends DOMParser
 		}
 		inputID = file.getAbsolutePath();
 
-		XMLDoc doc = null;
 		if (file.canRead())
 		{
 			try
 			{
-				doc = parseStream(new FileInputStream(file));
-				if (doc != null)
+				final BufferedInputStream is = FileUtil.getBufferedInputStream(file);
+				if (is != null)
 				{
-					doc.setOriginalFileName(file.getAbsolutePath());
+					final XMLDoc doc = parseStream(is);
+					if (doc != null)
+					{
+						doc.setOriginalFileName(file.getAbsolutePath());
+					}
+					StreamUtil.close(is);
+					return doc;
 				}
-				return doc;
-
 			}
-			catch (final FileNotFoundException e)
+			catch (final Exception e)
 			{
 				if (XMLErrorHandler.isWantLog())
 				{
 					log.error("cannot find file to parse:", e);
 				}
-				return null;
 			}
 		}
-		return doc;
+		return null;
 	}
 
 	/**
@@ -303,14 +305,14 @@ public class XMLParser extends DOMParser
 		else
 		{
 			final InputStream bis = (inStream instanceof BufferedInputStream) || (inStream instanceof ByteArrayIOInputStream) ? inStream : new BufferedInputStream(inStream);
-			InputSource inSource = new InputSource(bis);
+			final InputSource inSource = new InputSource(bis);
 			d = parseInputSource(inSource);
 		}
 		try
 		{
 			inStream.close();
 		}
-		catch (IOException x)
+		catch (final IOException x)
 		{
 			//NOP
 		}
@@ -455,7 +457,7 @@ public class XMLParser extends DOMParser
 
 	protected XMLDoc getXMLDoc()
 	{
-		XMLDoc doc = new XMLDoc();
+		final XMLDoc doc = new XMLDoc();
 		return doc;
 	}
 
@@ -470,7 +472,7 @@ public class XMLParser extends DOMParser
 	 * @param nsURI the schema namespace uri
 	 * @param locationURL the schema location url
 	 */
-	public void setSchemaLocation(String nsURI, String locationURL)
+	public void setSchemaLocation(final String nsURI, final String locationURL)
 	{
 		m_SchemaLocation = nsURI + JDFCoreConstants.BLANK + locationURL;
 	}
@@ -519,7 +521,7 @@ public class XMLParser extends DOMParser
 	 * set the input id attribute for error logging
 	 * @param inputID
 	 */
-	public void setInputID(String inputID)
+	public void setInputID(final String inputID)
 	{
 		this.inputID = inputID;
 	}

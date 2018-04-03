@@ -69,43 +69,23 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class WalkDropItemIntent extends WalkJDFSubElement
+public class WalkTransferCurve extends WalkResource
 {
 	/**
 	 *
 	 */
-	public WalkDropItemIntent()
+	public WalkTransferCurve()
 	{
 		super();
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return !jdfToXJDF.isRetainAll();
-	}
-
-	/**
-	 *
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	protected String getXJDFName(final KElement jdf)
-	{
-		return ElementName.DROPITEM;
 	}
 
 	/**
@@ -114,7 +94,18 @@ public class WalkDropItemIntent extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString(ElementName.DROPITEMINTENT, null);
+		return new VString(ElementName.TRANSFERCURVE, null);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResource#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(final JDFAttributeMap map)
+	{
+		final String name = map.get(XJDFConstants.TransferCurveName);
+		if ("Paper".equals(name))
+			map.put(XJDFConstants.TransferCurveName, "Substrate");
+		super.updateAttributes(map);
+	}
 }

@@ -1024,6 +1024,23 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testSetDescName()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		final KElement e = h.getRoot();
+		final SetHelper set = h.appendResourceSet(ElementName.DIELAYOUT, EnumUsage.Input);
+		set.setDescriptiveName("desc");
+		set.appendPartition(null, true).setAmount(5, null, true);
+		final JDFDoc d = xCon.convert(e);
+		assertEquals("desc", d.getJDFRoot().getResource(ElementName.DIELAYOUT, null, 0).getDescriptiveName());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testMultiResourcePart()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);

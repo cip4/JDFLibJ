@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -223,12 +223,12 @@ public class XMLDoc implements Cloneable
 	 * @param document
 	 * @return
 	 */
-	private DocumentXMLImpl reparseDOM(Document document)
+	private DocumentXMLImpl reparseDOM(final Document document)
 	{
 
-		XMLDoc d = createRoot(document);
+		final XMLDoc d = createRoot(document);
 
-		DocumentXMLImpl newDoc = d.getMemberDocument();
+		final DocumentXMLImpl newDoc = d.getMemberDocument();
 		reparseElement(newDoc.getDocumentElement(), document.getDocumentElement());
 		return newDoc;
 	}
@@ -238,19 +238,19 @@ public class XMLDoc implements Cloneable
 	 * @param dst
 	 * @param src
 	 */
-	private void reparseElement(Element dst, Element src)
+	private void reparseElement(final Element dst, final Element src)
 	{
-		NamedNodeMap atts = src.getAttributes();
+		final NamedNodeMap atts = src.getAttributes();
 		for (int i = 0; i < atts.getLength(); i++)
 		{
-			Attr item = (Attr) atts.item(i);
+			final Attr item = (Attr) atts.item(i);
 			dst.setAttribute(item.getNodeName(), item.getNodeValue());
 		}
-		NodeList nl = src.getChildNodes();
+		final NodeList nl = src.getChildNodes();
 		for (int i = 0; i < nl.getLength(); i++)
 		{
-			Node n = nl.item(i);
-			Node childNode = dst.getOwnerDocument().importNode(n, true);
+			final Node n = nl.item(i);
+			final Node childNode = dst.getOwnerDocument().importNode(n, true);
 			dst.insertBefore(childNode, null);
 		}
 
@@ -766,12 +766,12 @@ public class XMLDoc implements Cloneable
 	 */
 	public String getXSLTURL()
 	{
-		ProcessingInstruction pi = getProcessingInstruction(0, "xml-stylesheet");
-		String val = pi == null ? null : pi.getNodeValue();
-		VString v = StringUtil.tokenize(val, null, false);
+		final ProcessingInstruction pi = getProcessingInstruction(0, "xml-stylesheet");
+		final String val = pi == null ? null : pi.getNodeValue();
+		final VString v = StringUtil.tokenize(val, null, false);
 		if (v != null)
 		{
-			for (String pair : v)
+			for (final String pair : v)
 			{
 				if ("href".equalsIgnoreCase(StringUtil.token(pair, 0, "=")))
 				{
@@ -820,7 +820,7 @@ public class XMLDoc implements Cloneable
 	 * @param name
 	 * @return
 	 */
-	public ProcessingInstruction getProcessingInstruction(int skip, String name)
+	public ProcessingInstruction getProcessingInstruction(final int skip, final String name)
 	{
 		return (ProcessingInstruction) getNode(Document.PROCESSING_INSTRUCTION_NODE, skip, name);
 	}
@@ -831,7 +831,7 @@ public class XMLDoc implements Cloneable
 	 * @param skip the number onodes to skip
 	 * @return
 	 */
-	public Node getNode(short type, int skip, String nodeName)
+	public Node getNode(final short type, int skip, final String nodeName)
 	{
 		if (m_doc == null)
 			return null;
@@ -1524,10 +1524,10 @@ public class XMLDoc implements Cloneable
 		else
 		{
 			final UrlPart p = write2HttpURL(url, strContentType, null);
-			InputStream inStream = p == null ? null : p.getResponseStream();
+			final InputStream inStream = p == null ? null : p.getResponseStream();
 			if (inStream != null)
 			{
-				XMLParser xmlParser = getXMLParser();
+				final XMLParser xmlParser = getXMLParser();
 				docResponse = xmlParser.parseStream(inStream);
 				pushParser(xmlParser);
 			}
@@ -1540,7 +1540,7 @@ public class XMLDoc implements Cloneable
 	 *
 	 * @param xmlParser
 	 */
-	protected void pushParser(XMLParser xmlParser)
+	protected void pushParser(final XMLParser xmlParser)
 	{
 		XMLParserFactory.getFactory().push(xmlParser);
 	}
@@ -1617,7 +1617,7 @@ public class XMLDoc implements Cloneable
 	 * @param det the details to set
 	 * @return the HttpURLConnection, null if failure
 	 */
-	public HttpURLConnection write2HTTPURL(final URL url, String strContentType, final HTTPDetails det)
+	public HttpURLConnection write2HTTPURL(final URL url, final String strContentType, final HTTPDetails det)
 	{
 		UrlPart p = null;
 		for (int i = 0; i < 2; i++) //
@@ -1650,7 +1650,7 @@ public class XMLDoc implements Cloneable
 		}
 		try
 		{
-			ByteArrayIOStream ios = new ByteArrayIOStream(1000);
+			final ByteArrayIOStream ios = new ByteArrayIOStream(1000);
 			write2Stream(ios, 0, true);
 			return UrlUtil.writeToURL(url.toExternalForm(), ios.getInputStream(), UrlUtil.POST, strContentType, det);
 		}
@@ -1828,13 +1828,13 @@ public class XMLDoc implements Cloneable
 	 * @param is
 	 * @return the parsed JDFDoc
 	 */
-	public static XMLDoc parseStream(InputStream is)
+	public static XMLDoc parseStream(final InputStream is)
 	{
 		if (is == null)
 			return null;
 		final XMLParserFactory factory = XMLParserFactory.getFactory();
 		final XMLParser p = factory.get();
-		XMLDoc d = p.parseStream(is);
+		final XMLDoc d = p.parseStream(is);
 		factory.push(p);
 		return d;
 	}
@@ -1849,7 +1849,7 @@ public class XMLDoc implements Cloneable
 	{
 		final XMLParserFactory factory = XMLParserFactory.getFactory();
 		final XMLParser p = factory.get();
-		XMLDoc d = p.parseFile(fileName);
+		final XMLDoc d = p.parseFile(fileName);
 		factory.push(p);
 		return d;
 	}
@@ -1864,7 +1864,7 @@ public class XMLDoc implements Cloneable
 	{
 		final XMLParserFactory factory = XMLParserFactory.getFactory();
 		final XMLParser p = factory.get();
-		XMLDoc d = p.parseString(string);
+		final XMLDoc d = p.parseString(string);
 		factory.push(p);
 		return d;
 	}
@@ -1879,7 +1879,7 @@ public class XMLDoc implements Cloneable
 	{
 		final XMLParserFactory factory = XMLParserFactory.getFactory();
 		final XMLParser p = factory.get();
-		XMLDoc d = p.parseFile(file);
+		final XMLDoc d = p.parseFile(file);
 		factory.push(p);
 		return d;
 	}
@@ -1919,7 +1919,7 @@ public class XMLDoc implements Cloneable
 	 * copy metadata from other document
 	 * @param dMine
 	 */
-	public void copyMeta(XMLDoc dMine)
+	public void copyMeta(final XMLDoc dMine)
 	{
 		setBodyPart(dMine.getBodyPart());
 		setZipReader(dMine.getZipReader());

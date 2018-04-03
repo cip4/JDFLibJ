@@ -73,6 +73,7 @@ import java.util.Vector;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFRefElement;
@@ -92,12 +93,14 @@ import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPageData;
+import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -347,18 +350,19 @@ public class WalkJDFElement extends WalkElement
 	{
 		if (!jdfToXJDF.isRetainAll())
 		{
-			map.remove(AttributeName.SPAWNID);
-			map.remove(AttributeName.SETTINGSPOLICY);
-			map.remove(AttributeName.MUSTHONOREXCEPTIONS);
 			map.remove(AttributeName.BESTEFFORTEXCEPTIONS);
 			map.remove(AttributeName.LOCKED);
 			map.remove(AttributeName.MAXVERSION);
+			map.remove(AttributeName.MUSTHONOREXCEPTIONS);
 			map.remove(AttributeName.OPERATORINTERVENTIONEXCEPTIONS);
+			map.remove(AttributeName.PIPEPARTIDKEYS);
 			map.remove(AttributeName.PIPEPAUSE);
 			map.remove(AttributeName.PIPERESUME);
 			map.remove(AttributeName.REMOTEPIPEENDPAUSE);
 			map.remove(AttributeName.REMOTEPIPEENDRESUME);
-			map.remove(AttributeName.PIPEPARTIDKEYS);
+			map.remove(AttributeName.SETTINGSPOLICY);
+			map.remove(AttributeName.SOURCEWORKSTYLE);
+			map.remove(AttributeName.SPAWNID);
 			super.updateAttributes(map);
 		}
 	}
@@ -370,6 +374,21 @@ public class WalkJDFElement extends WalkElement
 		{
 			map.put(AttributeName.MODULEID, "Mod" + oldModule);
 		}
+	}
+
+	void updateTransferCurve(final JDFResource tcp)
+	{
+		final VElement v = tcp.getChildElementVector(ElementName.TRANSFERCURVESET, null);
+		for (final KElement e : v)
+		{
+			e.renameAttribute(AttributeName.NAME, XJDFConstants.TransferCurveName);
+			safeRename(e, ElementName.TRANSFERCURVE, true);
+		}
+
+		final JDFResource cNew = (JDFResource) safeRename(tcp, ElementName.TRANSFERCURVE, true);
+		cNew.addPartIDKey(EnumPartIDKey.TransferCurveName);
+		cNew.appendAttribute(AttributeName.PARTIDKEYS, AttributeName.SEPARATION, null, JDFConstants.BLANK, true);
+
 	}
 
 	/**
@@ -588,6 +607,26 @@ public class WalkJDFElement extends WalkElement
 		}
 	}
 
+	void setSeparations(final KElement jdf, final KElement xjdf, final String attName)
+	{
+		final VElement v = jdf.getChildElementVector(ElementName.SEPARATIONSPEC, null, null, false, 0, false);
+		final VString vsep = new VString();
+		for (final KElement e : v)
+		{
+			final JDFSeparationSpec sep = (JDFSeparationSpec) e;
+			final String sepName = sep.getName();
+			if (!StringUtil.isEmpty(sepName))
+			{
+				vsep.add(StringUtil.replaceChar(sepName, ' ', "_", 0));
+			}
+			e.deleteNode();
+		}
+		if (!vsep.isEmpty())
+		{
+			xjdf.setAttribute(attName, StringUtil.setvString(vsep));
+		}
+	}
+
 	/**
 	 *
 	 * @param newAP
@@ -642,8 +681,10 @@ public class WalkJDFElement extends WalkElement
 		resourceSet.setAttribute(AttributeName.NAME, jdfToXJDF.getSetName(linkRoot));
 		if (rl instanceof JDFResourceLink)
 			resourceSet.setAttributes(rl);
-		if (linkRoot.hasAttribute(AttributeName.UNIT))
-			resourceSet.moveAttribute(AttributeName.UNIT, linkRoot);
+		final JDFResource rootroot = linkRoot == null ? null : linkRoot.getResourceRoot();
+		resourceSet.copyAttribute(AttributeName.DESCRIPTIVENAME, rootroot);
+		resourceSet.moveAttribute(AttributeName.COMMENTURL, rootroot);
+		resourceSet.copyAttribute(AttributeName.UNIT, rootroot);
 
 		//TODO orientation + coordinate system stuff
 		resourceSet.removeAttribute(AttributeName.RREF);
@@ -662,7 +703,7 @@ public class WalkJDFElement extends WalkElement
 			resourceSet.copyAttribute(AttributeName.USAGE, rl);
 			resourceSet.copyAttribute(AttributeName.PROCESSUSAGE, rl);
 		}
-		if (jdfToXJDF.isSingleNode())
+		if (jdfToXJDF.isSingleNode() && jdfToXJDF.wantDependent())
 		{
 			setDependent(resourceSet, rl, linkRoot);
 		}
@@ -765,11 +806,17 @@ public class WalkJDFElement extends WalkElement
 			final Vector<JDFPageData> vpd = cNew.getChildrenByClass(JDFPageData.class, true, 0);
 			if (vpd != null)
 			{
+				int i = 0;
 				for (final JDFPageData pd : vpd)
 				{
+					if (!pd.hasNonEmpty(AttributeName.PAGEINDEX))
+					{
+						pd.setPageIndex(i);
+					}
 					pd.renameAttribute(AttributeName.PAGEINDEX, AttributeName.PAGENUMBER, null, null);
 					pd.setAttribute(AttributeName.CONTENTTYPE, "Page");
 					safeRename(pd, XJDFConstants.Content, false);
+					i++;
 				}
 			}
 		}

@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.HashSet;
+
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -82,12 +84,39 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class WalkMessage extends WalkJDFElement
 {
+	private final static HashSet<EnumType> badtypes = fillBadTypes();
+
 	/**
 	 *
 	 */
 	public WalkMessage()
 	{
 		super();
+	}
+
+	private static HashSet<EnumType> fillBadTypes()
+	{
+		final HashSet<EnumType> s = new HashSet<>();
+		s.add(EnumType.CloseQueue);
+		s.add(EnumType.FlushResources);
+		s.add(EnumType.HoldQueue);
+		s.add(EnumType.Events);
+		s.add(EnumType.KnownControllers);
+		s.add(EnumType.KnownJDFServices);
+		s.add(EnumType.ModifyNode);
+		s.add(EnumType.NewJDF);
+		s.add(EnumType.NodeInfo);
+		s.add(EnumType.Occupation);
+		s.add(EnumType.OpenQueue);
+		s.add(EnumType.QueueEntryStatus);
+		s.add(EnumType.RepeatMessages);
+		s.add(EnumType.RequestForAuthentication);
+		s.add(EnumType.ResumeQueue);
+		s.add(EnumType.SubmissionMethods);
+		s.add(EnumType.Track);
+		s.add(EnumType.UpdateJDF);
+		return s;
+
 	}
 
 	/**
@@ -183,11 +212,7 @@ public class WalkMessage extends WalkJDFElement
 	 */
 	boolean isZappType(final EnumType type)
 	{
-		return EnumType.CloseQueue.equals(type) || EnumType.Events.equals(type) || EnumType.FlushResources.equals(type) || EnumType.HoldQueue.equals(type)
-				|| EnumType.KnownControllers.equals(type) || EnumType.KnownJDFServices.equals(type) || EnumType.ModifyNode.equals(type) || EnumType.NewJDF.equals(type)
-				|| EnumType.NodeInfo.equals(type) || EnumType.Occupation.equals(type) || EnumType.OpenQueue.equals(type) || EnumType.QueueEntryStatus.equals(type)
-				|| EnumType.RepeatMessages.equals(type) || EnumType.RequestForAuthentication.equals(type) || EnumType.ResumeQueue.equals(type)
-				|| EnumType.SubmissionMethods.equals(type) || EnumType.Track.equals(type) || EnumType.UpdateJDF.equals(type);
+		return type == null || badtypes.contains(type);
 	}
 
 	/**

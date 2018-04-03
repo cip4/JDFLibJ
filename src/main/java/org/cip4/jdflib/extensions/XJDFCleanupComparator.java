@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -124,7 +124,7 @@ class XJDFCleanupComparator extends KElement.SimpleElementNameComparator
 					return 1;
 				}
 			}
-			if (JDFElement.isInXJDFNameSpaceStatic(o2.getNamespaceURI()) && !JDFElement.isInXJDFNameSpaceStatic(o1.getNamespaceURI()))
+			if (JDFElement.isInXJDFNameSpaceStatic(o2.getNamespaceURI()) ^ JDFElement.isInXJDFNameSpaceStatic(o1.getNamespaceURI()))
 			{
 				return JDFElement.isInXJDFNameSpaceStatic(o2.getNamespaceURI()) ? 1 : -1;
 			}

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -106,17 +106,17 @@ public class WalkAudit extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(KElement jdf, KElement xjdf)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		JDFAudit a = (JDFAudit) jdf;
+		final JDFAudit a = (JDFAudit) jdf;
 		employeeToAuthor(a);
-		KElement e = super.walk(jdf, xjdf);
+		final KElement e = super.walk(jdf, xjdf);
 		return e;
 	}
 
-	private void employeeToAuthor(JDFAudit a)
+	private void employeeToAuthor(final JDFAudit a)
 	{
-		JDFEmployee emp = a.getEmployee(0);
+		final JDFEmployee emp = a.getEmployee(0);
 		if (emp != null)
 		{
 			a.setAuthor(emp.getDescriptiveName());
@@ -129,13 +129,13 @@ public class WalkAudit extends WalkJDFSubElement
 	 * @param jdf
 	 * @param auditParent
 	 */
-	void moveToParentAudit(final KElement jdf, KElement auditParent)
+	void moveToParentAudit(final KElement jdf, final KElement auditParent)
 	{
 		auditParent.moveAttribute(AttributeName.AGENTNAME, jdf);
 		auditParent.moveAttribute(AttributeName.AGENTVERSION, jdf);
 		auditParent.moveAttribute(AttributeName.ID, jdf);
 		auditParent.moveAttribute(AttributeName.TIME, jdf, AttributeName.TIMESTAMP, null, null);
-		JDFEmployee emp = (JDFEmployee) jdf.getElement(ElementName.EMPLOYEE);
+		final JDFEmployee emp = (JDFEmployee) jdf.getElement(ElementName.EMPLOYEE);
 		if (emp != null)
 		{
 			auditParent.setAttribute(AttributeName.AUTHOR, emp.getDescriptiveName());
@@ -152,10 +152,11 @@ public class WalkAudit extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.AGENTNAME);
 		map.remove(AttributeName.AGENTVERSION);
+		map.remove(AttributeName.REF);
 		map.renameKey(AttributeName.TIMESTAMP, AttributeName.TIME);
 		super.updateAttributes(map);
 	}

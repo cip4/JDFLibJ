@@ -424,6 +424,20 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testIsEmpty()
+	{
+		final Vector<String> v = new Vector<String>();
+		assertTrue(ContainerUtil.isEmpty(v));
+		assertTrue(ContainerUtil.isEmpty(null));
+
+		v.add("a");
+		assertFalse(ContainerUtil.isEmpty(v));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetNonEmptyCollection()
 	{
 		final Vector<VString> v = new Vector<VString>();

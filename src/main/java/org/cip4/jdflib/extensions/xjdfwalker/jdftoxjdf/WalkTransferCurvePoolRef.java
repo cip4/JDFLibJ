@@ -68,44 +68,58 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFRefElement;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.ResourceHelper;
+import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.resource.JDFResource;
 
 /**
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class WalkDropItemIntent extends WalkJDFSubElement
+public class WalkTransferCurvePoolRef extends WalkRefElement
 {
 	/**
 	 *
 	 */
-	public WalkDropItemIntent()
+	public WalkTransferCurvePoolRef()
 	{
 		super();
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * @param re
 	 */
 	@Override
-	public boolean matches(final KElement toCheck)
+	protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
 	{
-		return !jdfToXJDF.isRetainAll();
+		makeSetRefAttribute(re, xjdf);
 	}
 
 	/**
-	 *
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
+	 * @param xjdf
+	 * @return true if must continue
 	 */
 	@Override
-	protected String getXJDFName(final KElement jdf)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		return ElementName.DROPITEM;
+		final JDFRefElement refElem = (JDFRefElement) jdf;
+		final JDFResource tcp = refElem.getTargetRoot();
+		if (tcp != null)
+		{
+			updateTransferCurve(tcp);
+		}
+		refElem.renameElement("TransferCurveRef", null);
+		final KElement ret = super.walk(jdf, xjdf);
+		xjdf.removeAttribute("TransferCurveRef");
+
+		return ret;
 	}
 
 	/**
@@ -114,7 +128,35 @@ public class WalkDropItemIntent extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString(ElementName.DROPITEMINTENT, null);
+		return VString.getVString("TransferCurvePoolRef", null);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#matches(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public boolean matches(final KElement toCheck)
+	{
+		return !jdfToXJDF.isRetainAll();
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#setResource(org.cip4.jdflib.core.JDFElement, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected VElement setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
+	{
+		final VElement vRes = super.setResource(rl, linkTarget, xRoot);
+		if (!jdfToXJDF.isRetainAll() && vRes != null && vRes.size() > 0)
+		{
+			final KElement res = vRes.get(0);
+			final ResourceHelper ph = new ResourceHelper(res);
+			final SetHelper sh = ph.getSet();
+			if (sh != null && sh.getUsage() == null)
+			{
+				sh.setUsage(EnumUsage.Input);
+			}
+		}
+		return vRes;
+	}
 }
