@@ -207,7 +207,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 			final boolean fileOK = checkFile(url);
 			if (!fileOK)
 			{
-				return null;
+				return e;
 			}
 
 			final boolean bOverwrite = !saved.contains(url);
@@ -244,7 +244,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 			return e; // continue
 		}
 
-		private boolean checkFile(final String url)
+		protected boolean checkFile(final String url)
 		{
 			if (!UrlUtil.isFile(url))
 			{
