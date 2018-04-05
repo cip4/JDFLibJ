@@ -172,7 +172,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	/**
 	 * ensure we don't accidentally introduce artifacts if we add characters for escaping
-	 * 
+	 *
 	 * @throws UnsupportedEncodingException
 	 */
 	@Test
@@ -324,7 +324,13 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		assertEquals(UrlUtil.writeToURL("https://google.ch", null, UrlUtil.GET, null, null).getResponseCode(), 200);
+		UrlPart writeToURL = UrlUtil.writeToURL("https://google.ch", null, UrlUtil.GET, null, null);
+		if (writeToURL == null)
+		{
+			ThreadUtil.sleep(1234);
+			writeToURL = UrlUtil.writeToURL("https://google.ch", null, UrlUtil.GET, null, null);
+		}
+		assertEquals(writeToURL.getResponseCode(), 200);
 	}
 
 	/**
