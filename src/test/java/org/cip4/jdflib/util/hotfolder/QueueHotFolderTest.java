@@ -107,7 +107,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testSubmitSingleFile() throws Exception
+	public synchronized void testSubmitSingleFile() throws Exception
 	{
 		final MyListener myListener = new MyListener();
 		final File file = new File(theHF + File.separator + "f1.jdf");
@@ -138,7 +138,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testOKFile() throws Exception
+	public synchronized void testOKFile() throws Exception
 	{
 		final MyListener myListener = new MyListener();
 		final File file = new File(theHF + File.separator + "f1.jdf");
@@ -171,7 +171,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testOKFile2() throws Exception
+	public synchronized void testOKFile2() throws Exception
 	{
 		final MyListener myListener = new MyListener();
 		final File file = new File(theHF + File.separator + "f1.jdf");
@@ -213,7 +213,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void teststopStart() throws Exception
+	public synchronized void teststopStart() throws Exception
 	{
 		final MyListener myListener = new MyListener();
 		final File file = new File(theHF + File.separator + "f1.jdf");
