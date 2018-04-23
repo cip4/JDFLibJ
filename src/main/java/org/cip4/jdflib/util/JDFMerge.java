@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -171,13 +139,13 @@ public class JDFMerge
 	 * @param cleanPolicy policy how to clean up the spawn and merge audits after merging
 	 * @param amountPolicy policy how to clean up the Resource amounts after merging
 	 * @return JDFNode - the merged node in the new document<br>
-	 * note that the return value used to be boolean. The boolean value is now replaced by exceptions. This corresponds to <code>true</code> always.
+	 *         note that the return value used to be boolean. The boolean value is now replaced by exceptions. This corresponds to <code>true</code> always.
 	 *
 	 * @throws JDFException if subJDFNode has already been merged
 	 * @throws JDFException if subJDFNode was not spawned from this
 	 * @throws JDFException if subJDFNode has no AncestorPool
 	 *
-	 * default: mergeJDF(subJDFNode, null, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None)
+	 *             default: mergeJDF(subJDFNode, null, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None)
 	 */
 	public JDFNode mergeJDF(final JDFNode _toMerge, final String urlMerge, final EnumCleanUpMerge cleanPolicy, final JDFResource.EnumAmountMerge amountPolicy)
 	{
@@ -191,13 +159,13 @@ public class JDFMerge
 	 * merge a previously spawned JDF into a node that is a child of, or this root
 	 *
 	 * @param _toMerge the previously spawned jdf node
-		 * @return JDFNode - the merged node in the new document<br>
-		 * note that the return value used to be boolean. The boolean value is now replaced by exceptions. This corresponds to <code>true</code> always.
-		 *
-		 * @throws JDFException if subJDFNode has already been merged
-		 * @throws JDFException if subJDFNode was not spawned from this
-		 * @throws JDFException if subJDFNode has no AncestorPool
-		 */
+	 * @return JDFNode - the merged node in the new document<br>
+	 *         note that the return value used to be boolean. The boolean value is now replaced by exceptions. This corresponds to <code>true</code> always.
+	 *
+	 * @throws JDFException if subJDFNode has already been merged
+	 * @throws JDFException if subJDFNode was not spawned from this
+	 * @throws JDFException if subJDFNode has no AncestorPool
+	 */
 	public synchronized JDFNode mergeJDF(final JDFNode _toMerge)
 	{
 		subJDFNode = _toMerge;
@@ -250,11 +218,11 @@ public class JDFMerge
 	 * merge a previously spawned and previously merged JDF into a node that is a child of, or this root
 	 *
 	 * @param _toMerge the previously spawned jdf node
-		 * @return JDFNode - the merged node in the new document<br>
-		 * note that the return value used to be boolean. The boolean value is now replaced by exceptions. This corresponds to <code>true</code> always.
-		 *
-		 * @throws JDFException if subJDFNode has no AncestorPool
-		 */
+	 * @return JDFNode - the merged node in the new document<br>
+	 *         note that the return value used to be boolean. The boolean value is now replaced by exceptions. This corresponds to <code>true</code> always.
+	 *
+	 * @throws JDFException if subJDFNode has no AncestorPool
+	 */
 	public synchronized JDFNode remergeJDF(final JDFNode _toMerge)
 	{
 		try
@@ -307,6 +275,7 @@ public class JDFMerge
 
 	/**
 	 * find the node to overwrite in main
+	 *
 	 * @throws JDFException if no node is found
 	 */
 	private void findOverwriteNode()
@@ -516,8 +485,7 @@ public class JDFMerge
 			final JDFNode.EnumNodeStatus stat = toMergeLocalNode.getStatus();
 			if (stat != null && !stat.equals(JDFElement.EnumNodeStatus.Part) && !stat.equals(JDFElement.EnumNodeStatus.Pool) && numParts > 0)
 			{
-				log.error("updating inconsistent node status from root status JobID=" + toMergeLocalNode.getJobID(true) + " / " + toMergeLocalNode.getJobPartID(false) + " "
-						+ parts);
+				log.error("updating inconsistent node status from root status JobID=" + toMergeLocalNode.getJobID(true) + " / " + toMergeLocalNode.getJobPartID(false) + " " + parts);
 				toMergeLocalNode.setPartStatus(parts, stat, null);
 			}
 		}
@@ -632,6 +600,7 @@ public class JDFMerge
 
 	/**
 	 * Merges partitioned resources into this resource uses PartIDKey to identify the correct resources
+	 *
 	 * @param targetRes
 	 *
 	 * @param resToMerge the resource leaf to merge into this
@@ -690,7 +659,7 @@ public class JDFMerge
 
 			// RP 220605 - not puristic, but pragmatic
 			// found only a root or high level partition for an rw resource partition
-			// try to create the new partition and pray that it will not be  subsequently completely overwritten
+			// try to create the new partition and pray that it will not be subsequently completely overwritten
 			// this is still better than throwing an exception or silently ignoring the rw resource
 			if ((src.getLocked() == false) && (trgMap.getKeys().size() < srcMap.getKeys().size()))
 			{
@@ -882,7 +851,7 @@ public class JDFMerge
 			return;
 		}
 
-		newSpawnMap = new HashMap<String, JDFSpawned>();
+		newSpawnMap = new HashMap<>();
 		// collect in main AND sub jdf in case someone spawned in the sub jdf...
 		final JDFNode[] array = new JDFNode[2];
 		array[0] = subJDFNode;
@@ -1022,6 +991,7 @@ public class JDFMerge
 
 	/**
 	 * merge the resource link pools
+	 *
 	 * @param mainNode
 	 * @param toMerge the source node of the status pool to merge into this
 	 */
@@ -1046,38 +1016,7 @@ public class JDFMerge
 			{
 				for (int rl = 0; rl < toMergeLinks.size(); rl++)
 				{
-					JDFResourceLink overWriteLink = null;
-					final JDFResourceLink toMergeLink = (JDFResourceLink) toMergeLinks.elementAt(rl);
-					final String rRef = toMergeLink.getAttribute(AttributeName.RREF);
-
-					for (int k = 0; k < overWriteLinks.size(); k++)
-					{
-						if (((JDFResourceLink) overWriteLinks.elementAt(k)).getAttribute(AttributeName.RREF).equals(rRef))
-						{
-							overWriteLink = (JDFResourceLink) overWriteLinks.elementAt(k);
-							overWriteLinks.remove(overWriteLinks.elementAt(k));
-							break;
-						}
-					}
-
-					if (overWriteLink != null)
-					{
-						if (toMergeLink.hasChildElement(ElementName.PART, null))
-						{
-							fixPartAmountAttributes(overWriteLink, toMergeLink);
-						}
-						else
-						{
-							// blast the spawned link into the overWritePool completely
-							overWriteLink.replaceElement(toMergeLink);
-						}
-					}
-					else
-					// 100119 RP the link was created within the spawned process - must copy it
-					{
-						toMergeLink.setPartMapVector(null);
-						overWriteRLP.copyElement(toMergeLink, null);
-					}
+					mergeResourceLink(rl, overWriteRLP, overWriteLinks, toMergeLinks);
 				}
 			}
 
@@ -1089,6 +1028,42 @@ public class JDFMerge
 		{
 			overWriteRLP.deleteNode();
 			mainNode.copyElement(toMergeRLP, null);
+		}
+	}
+
+	void mergeResourceLink(final int rl, final JDFResourceLinkPool overWriteRLP, final VElement overWriteLinks, final VElement toMergeLinks)
+	{
+		JDFResourceLink overWriteLink = null;
+		final JDFResourceLink toMergeLink = (JDFResourceLink) toMergeLinks.elementAt(rl);
+		final String rRef = toMergeLink.getAttribute(AttributeName.RREF);
+
+		for (int k = 0; k < overWriteLinks.size(); k++)
+		{
+			if (((JDFResourceLink) overWriteLinks.elementAt(k)).getAttribute(AttributeName.RREF).equals(rRef))
+			{
+				overWriteLink = (JDFResourceLink) overWriteLinks.elementAt(k);
+				overWriteLinks.remove(overWriteLinks.elementAt(k));
+				break;
+			}
+		}
+
+		if (overWriteLink != null)
+		{
+			if (toMergeLink.hasChildElement(ElementName.PART, null))
+			{
+				fixPartAmountAttributes(overWriteLink, toMergeLink);
+			}
+			else
+			{
+				// blast the spawned link into the overWritePool completely
+				overWriteLink.replaceElement(toMergeLink);
+			}
+		}
+		else
+		// 100119 RP the link was created within the spawned process - must copy it
+		{
+			toMergeLink.setPartMapVector(null);
+			overWriteRLP.copyElement(toMergeLink, null);
 		}
 	}
 
@@ -1215,7 +1190,7 @@ public class JDFMerge
 		final VElement spawnedLeaves = mainRes.getNodesWithSpawnID(spawnID);
 
 		// Only manipulate leaves and subleaves that were explicitly spawned
-		if (spawnedLeaves != null)
+		if (spawnedLeaves != null && !spawnedLeaves.isEmpty())
 		{
 			for (int i = 0; i < spawnedLeaves.size(); i++)
 			{
@@ -1228,42 +1203,54 @@ public class JDFMerge
 
 		for (final KElement leaf : allLeaves)
 		{
-			final JDFResource thisResNode = (JDFResource) leaf;
-			final JDFAttributeMap partMap = thisResNode.getPartMap(partIDKeys);
-			final JDFResource mergeResNode = resToMerge.getPartition(partMap, EnumPartUsage.Explicit);
+			mergeSpawnLeaf(resToMerge, bReadOnly, partIDKeys, leaf);
+		}
+	}
 
-			if (mergeResNode != null)
+	/**
+	 *
+	 * @param resToMerge
+	 * @param bReadOnly
+	 * @param partIDKeys
+	 * @param leaf
+	 */
+	void mergeSpawnLeaf(final JDFResource resToMerge, final boolean bReadOnly, final VString partIDKeys, final KElement leaf)
+	{
+		final JDFResource thisResNode = (JDFResource) leaf;
+		final JDFAttributeMap partMap = thisResNode.getPartMap(partIDKeys);
+		final JDFResource mergeResNode = resToMerge.getPartition(partMap, EnumPartUsage.Explicit);
+
+		if (mergeResNode != null)
+		{
+			VString vSpawnIDs = thisResNode.getSpawnIDs(false);
+			final int siz = vSpawnIDs == null ? 0 : vSpawnIDs.size();
+			if (!bReadOnly) // only append from rw resources, not from ro
 			{
-				VString vSpawnIDs = thisResNode.getSpawnIDs(false);
-				final int siz = vSpawnIDs == null ? 0 : vSpawnIDs.size();
-				if (!bReadOnly) // only append from rw resources, not from ro
+				if (vSpawnIDs == null)
 				{
-					if (vSpawnIDs == null)
-					{
-						vSpawnIDs = mergeResNode.getSpawnIDs(false);
-					}
-					else
-					{
-						vSpawnIDs.appendUnique(mergeResNode.getSpawnIDs(false));
-					}
+					vSpawnIDs = mergeResNode.getSpawnIDs(false);
 				}
-				if (vSpawnIDs != null)
+				else
 				{
-					vSpawnIDs.removeStrings(previousMergeIDs, 999999);
+					vSpawnIDs.appendUnique(mergeResNode.getSpawnIDs(false));
 				}
+			}
+			if (vSpawnIDs != null)
+			{
+				vSpawnIDs.removeStrings(previousMergeIDs, 999999);
+			}
 
-				if (vSpawnIDs == null || vSpawnIDs.isEmpty())
+			if (vSpawnIDs == null || vSpawnIDs.isEmpty())
+			{
+				removeSpawnAttributes(thisResNode);
+			}
+			else if (siz < vSpawnIDs.size())
+			{
+				thisResNode.setSpawnIDs(vSpawnIDs);
+				// one of the spawnstatus elements was rw, must also be valid here
+				if (EnumSpawnStatus.SpawnedRW.equals(mergeResNode.getSpawnStatus()))
 				{
-					removeSpawnAttributes(thisResNode);
-				}
-				else if (siz < vSpawnIDs.size())
-				{
-					thisResNode.setSpawnIDs(vSpawnIDs);
-					// one of the spawnstatus elements was rw, must also be valid here
-					if (EnumSpawnStatus.SpawnedRW.equals(mergeResNode.getSpawnStatus()))
-					{
-						thisResNode.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
-					}
+					thisResNode.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
 				}
 			}
 		}
@@ -1279,61 +1266,66 @@ public class JDFMerge
 		// merge rw resources
 		for (final String s : vsRW)
 		{
-			JDFResource oldRes = overWriteNode.getLinkRoot(s);
-			if (oldRes == null) // also check in tree below
+			mergeRWResource(s);
+		}
+	}
+
+	void mergeRWResource(final String s)
+	{
+		JDFResource oldRes = overWriteNode.getLinkRoot(s);
+		if (oldRes == null) // also check in tree below
+		{
+			oldRes = overWriteNode.getTargetResource(s);
+			if (oldRes == null) // also check in entire tree below root
 			{
-				oldRes = overWriteNode.getTargetResource(s);
-				if (oldRes == null) // also check in entire tree below root
+				final JDFNode jdfRoot = overWriteNode.getJDFRoot();
+				if (jdfRoot != null)
 				{
-					final JDFNode jdfRoot = overWriteNode.getJDFRoot();
-					if (jdfRoot != null)
-					{
-						oldRes = jdfRoot.getTargetResource(s);
-					}
-					else
-					{
-						log.error("Already deleted JDF resource leaf ID=" + s);
-					}
+					oldRes = jdfRoot.getTargetResource(s);
+				}
+				else
+				{
+					log.error("Already deleted JDF resource leaf ID=" + s);
+				}
+			}
+		}
+
+		if (oldRes != null)
+		{
+			final JDFResource newRes = subJDFNode.getTargetResource(s);
+
+			// merge all potential new spawnIds from this to subJDFNode before merging them
+			mergeSpawnIDs(oldRes, newRes, false);
+			// do both, since some leaves may be RO
+			mergeSpawnIDs(newRes, oldRes, false);
+
+			if (newRes != null)
+			{
+				try
+				{
+					// merge the resource from the spawned node into the lower level resourcepool
+					oldRes = mergePartition(oldRes, newRes, spawnID, amountPolicy, false);
+				}
+				catch (final JDFException e)
+				{
+					throw e;
+				}
+				catch (final Exception e)
+				{
+					final JDFException jdfException = new JDFException("JDFNode:mergeJDF, error in mergePartition: ID=" + newRes.getID() + " SpawnID=" + spawnID);
+					jdfException.initCause(e);
+					throw jdfException;
 				}
 			}
 
-			if (oldRes != null)
+			final VElement oldResLeafsSpawned = oldRes.getNodesWithSpawnID(spawnID);
+			for (final KElement leaf : oldResLeafsSpawned)
 			{
-				final JDFResource newRes = subJDFNode.getTargetResource(s);
-
-				// merge all potential new spawnIds from this to subJDFNode before merging them
-				mergeSpawnIDs(oldRes, newRes, false);
-				// do both, since some leaves may be RO
-				mergeSpawnIDs(newRes, oldRes, false);
-
-				if (newRes != null)
-				{
-					try
-					{
-						// merge the resource from the spawned node into the lower level resourcepool
-						oldRes = mergePartition(oldRes, newRes, spawnID, amountPolicy, false);
-					}
-					catch (final JDFException e)
-					{
-						throw e;
-					}
-					catch (final Exception e)
-					{
-						final JDFException jdfException = new JDFException("JDFNode:mergeJDF, error in mergePartition: ID=" + newRes.getID() + " SpawnID=" + spawnID);
-						jdfException.initCause(e);
-						throw jdfException;
-					}
-				}
-
-				final VElement oldResLeafsSpawned = oldRes.getNodesWithSpawnID(spawnID);
-				for (final KElement leaf : oldResLeafsSpawned)
-				{
-					final JDFResource leafRes = (JDFResource) leaf;
-					leafRes.removeFromSpawnIDs(spawnID);
-					calcSpawnStatus(leafRes, false);
-				}
-				cleanupSpawn(oldRes);
+				final JDFResource leafRes = (JDFResource) leaf;
+				leafRes.removeFromSpawnIDs(spawnID);
+				calcSpawnStatus(leafRes, false);
 			}
+			cleanupSpawn(oldRes);
 		}
 	}
 
@@ -1380,15 +1372,6 @@ public class JDFMerge
 							final JDFAttributeMap m = ps.getPartMap();
 							overWriteStatusPool.setStatus(m, ps.getStatus(), ps.getStatusDetails());
 						}
-
-						// 100305 RP the following lines cause problems with nested
-						// spawn and therefore are commented out
-						// final JDFPartStatus
-						// ps=overWriteStatusPool.getPartStatus(parts.elementAt(i));
-						// just in case someone updated detailed partstatus elements
-						// if (ps != null && ps.getStatus() ==
-						// EnumNodeStatus.Spawned)
-						// ps.deleteNode();
 					}
 				}
 
@@ -1467,6 +1450,7 @@ public class JDFMerge
 
 	/**
 	 * in case we screwed up somewhere...
+	 *
 	 * @param oldRes the resource to clean up
 	 */
 	private void cleanupSpawn(final JDFResource oldRes)
@@ -1486,10 +1470,10 @@ public class JDFMerge
 	 * clean up the spawn and merge audits in this Node
 	 * <p>
 	 * default: CleanUpMerge(EnumCleanUpMerge cleanPolicy, JDFConstants.EMPTYSTRING, false)
+	 *
 	 * @param overWriteTmpNode
 	 *
-	 * @param cleanPolicy policy how to clean up the spawn and merge audits after merging
-	 * If not specified all spawns will be cleaned up.
+	 * @param cleanPolicy policy how to clean up the spawn and merge audits after merging If not specified all spawns will be cleaned up.
 	 * @param bRecurse if true also recurse into all child JDF nodes; default=false
 	 */
 

@@ -1999,7 +1999,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFAuditPool auditPoolMerged = jobPart.getAuditPool();
 			if (i == 0)
 			{
-				assertEquals(((JDFProcessRun) auditPoolMerged.getAudit(0, EnumAuditType.ProcessRun, null, null)).getSubmissionTime(), n.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null).getTimeStamp());
+				assertEquals(((JDFProcessRun) auditPoolMerged.getAudit(0, EnumAuditType.ProcessRun, null, null)).getSubmissionTime(),
+						n.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null).getTimeStamp());
 			}
 			assertNotNull(auditPoolMerged.getAudit(3, EnumAuditType.Notification, null, null));
 			assertNull(auditPoolMerged.getAudit(4, EnumAuditType.Notification, null, null));
@@ -2831,8 +2832,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				assertTrue(nodeRoot.toString().indexOf(spawnID) < 0);
 				final long t2 = System.currentTimeMillis();
 				tMerge += (t2 - t11);
-				log.info("j= " + j + " i= " + i + " of " + (vNodes.size() - 1) + " : " + jobPartID + " time Spawn: " + (t1 - t0) + " time Write: " + (t11 - t1) + " time Merge: "
-						+ (t2 - t11) + " / " + tMerge + " total " + (t2 - t00));
+				log.info("j= " + j + " i= " + i + " of " + (vNodes.size() - 1) + " : " + jobPartID + " time Spawn: " + (t1 - t0) + " time Write: " + (t11 - t1) + " time Merge: " + (t2 - t11) + " / "
+						+ tMerge + " total " + (t2 - t00));
 				t0 = t2;
 			}
 			jdfDoc.write2File(sm_dirTestDataTemp + "bigMainMany.jdf", 2, true);
@@ -3740,6 +3741,42 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testMergeKeepPart()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		final JDFAttributeMap partMap = new JDFAttributeMap();
+		partMap.put("SheetName", "S1");
+		partMap.put("Side", "Front");
+		final JDFTransferCurvePool tcp = (JDFTransferCurvePool) n.addResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output);
+		tcp.getCreatePartition(partMap, new VString("SheetName Side", null));
+
+		final JDFSpawn sp = new JDFSpawn(n);
+		final VJDFAttributeMap spawnParts = new VJDFAttributeMap();
+
+		spawnParts.add(partMap); // want more granular
+		final JDFNode spNode = sp.spawn(null, null, new VString(ElementName.TRANSFERCURVEPOOL, null), spawnParts, false, false, false, false);
+
+		final JDFTransferCurvePool tcpSpawn = (JDFTransferCurvePool) spNode.getResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output, 0);
+		final JDFAttributeMap spawnMap = partMap.clone();
+		spawnMap.put(EnumPartIDKey.Separation, "Cyan");
+		tcpSpawn.getCreatePartition(spawnMap, null);
+
+		final JDFTransferCurvePool tcpN = (JDFTransferCurvePool) n.getResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output, 0);
+		final JDFMerge m = new JDFMerge(n);
+		assertNull("Cyan", tcp.getPartition(spawnMap, EnumPartUsage.Explicit));
+		final JDFNode merged = m.mergeJDF(spNode, null, null, null);
+		assertTrue(merged.toString().indexOf("SpawnIDS") < 0);
+		final JDFTransferCurvePool tcpMerged = (JDFTransferCurvePool) merged.getResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output, 0);
+
+		assertEquals(tcpMerged.getPartIDKeys().get(2), "Separation");
+		assertEquals("Cyan", tcpN.getPartition(spawnMap, EnumPartUsage.Explicit).getSeparation());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testMergeResourceOrder()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -3987,8 +4024,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFParser p = new JDFParser();
 		m_jdfDoc = p.parseFile(sm_dirTestDataTemp + m_xmlFile1);
 
-		assertNotNull(sm_dirTestDataTemp + m_xmlFile1 + ": Parse Error\n" + "MergeJDF: JDF merger simulation;\n" + "Arguments: 1=parent input JDF, 2=child input JDF;\n"
-				+ "-o: output JDF;\n" + "-d: delete completed tasks from the output JDF\n", m_jdfDoc);
+		assertNotNull(sm_dirTestDataTemp + m_xmlFile1 + ": Parse Error\n" + "MergeJDF: JDF merger simulation;\n" + "Arguments: 1=parent input JDF, 2=child input JDF;\n" + "-o: output JDF;\n"
+				+ "-d: delete completed tasks from the output JDF\n", m_jdfDoc);
 
 		final JDFParser p2 = new JDFParser();
 		m_jdfDoc2 = p2.parseFile(sm_dirTestDataTemp + m_xmlFile2);
