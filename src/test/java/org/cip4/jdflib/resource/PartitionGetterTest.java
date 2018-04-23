@@ -69,6 +69,34 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
+	public void testGet()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFResource r1 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
+		final PartitionGetter g = new PartitionGetter(r);
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d2");
+		assertEquals(r2, g.getPartition(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d2"), EnumPartUsage.Explicit));
+		assertEquals(r1, g.getPartition(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1"), EnumPartUsage.Explicit));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetCreate()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFResource r1 = r.getCreatePartition(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1"), null);
+		final PartitionGetter g = new PartitionGetter(r);
+		final JDFResource r2 = r.getCreatePartition(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d2"), null);
+		assertEquals(r2, g.getPartition(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d2"), EnumPartUsage.Explicit));
+		assertEquals(r1, g.getPartition(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1"), EnumPartUsage.Explicit));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetimplicit()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
@@ -153,6 +181,20 @@ public class PartitionGetterTest
 		final JDFAttributeMap p2 = p1.clone();
 		p2.put(EnumPartIDKey.SheetName, "SH1");
 		assertEquals(p1, g.getImplicitPartitionFromMap(p2));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetMissing()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.SignatureName, "S1");
+		final JDFResource r3 = r2.addPartition(EnumPartIDKey.SheetName, "SH1");
+		final PartitionGetter g = new PartitionGetter(r);
+		final JDFAttributeMap p1 = new JDFAttributeMap(EnumPartIDKey.SheetName, "SH1");
+		assertEquals(r3, g.getPartition(p1, null));
 	}
 
 	/**

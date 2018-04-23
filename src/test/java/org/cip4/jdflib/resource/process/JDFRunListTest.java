@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -57,6 +57,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.node.JDFNode;
@@ -240,6 +241,20 @@ public class JDFRunListTest extends JDFTestCaseBase
 		final JDFRunList rl2 = rl.addRun("f1.pdf", 0, -1);
 		assertFalse(rl2.hasAttribute_KElement(AttributeName.NPAGE, null, false));
 		assertFalse(rl.hasAttribute_KElement(AttributeName.NPAGE, null, false));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public final void testAppendElement()
+	{
+		final JDFRunList rl2 = rl.addRun("f1.pdf", 0, -1);
+		final JDFRunList rl3 = (JDFRunList) rl2.appendElement(ElementName.RUNLIST);
+		rl3.setRunPage(3);
+		rl.addPartIDKey(EnumPartIDKey.RunPage);
+		assertEquals(rl3, rl.getPartition(new JDFAttributeMap(AttributeName.RUNPAGE, "3"), null));
+
 	}
 
 	/**
