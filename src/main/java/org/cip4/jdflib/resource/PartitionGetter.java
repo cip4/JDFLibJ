@@ -747,8 +747,7 @@ public class PartitionGetter
 
 		if (vPartIDKeys.size() < partMap.size())
 		{
-			throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + "insufficient partIDKeys " + leafMap.getPartIDKeys()
-					+ " for " + partMap);
+			throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + "insufficient partIDKeys " + leafMap.getPartIDKeys() + " for " + partMap);
 		}
 		// create all partitions
 		JDFAttributeMap map = thisMap;
@@ -768,8 +767,8 @@ public class PartitionGetter
 			}
 			else
 			{
-				throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + " attempting to fill non-matching partIDKeys: " + key
-						+ " valid keys: " + "Current PartIDKeys: " + resourceRoot.getPartIDKeys() + " complete map: " + partMap);
+				throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + " attempting to fill non-matching partIDKeys: " + key + " valid keys: "
+						+ "Current PartIDKeys: " + resourceRoot.getPartIDKeys() + " complete map: " + partMap);
 			}
 		}
 		return r;
@@ -853,7 +852,7 @@ public class PartitionGetter
 	 *
 	 * @default createPartitions(vPartMap, VString.emptyVector)
 	 */
-	VElement createPartitions(final VJDFAttributeMap vPartMap, final VString vPartIDKeys)
+	public VElement createPartitions(final VJDFAttributeMap vPartMap, final VString vPartIDKeys)
 	{
 		final VElement v = new VElement();
 		if (vPartMap != null)
@@ -980,8 +979,7 @@ public class PartitionGetter
 				if (!localPartMap.overlapMap(partMap))
 				{
 					if (create)
-						throw new JDFException("Incompatible part maps: local: " + localPartMap.showKeys(null) + " request: " + partMap.showKeys(null) + " ID="
-								+ resourceRoot.getID());
+						throw new JDFException("Incompatible part maps: local: " + localPartMap.showKeys(null) + " request: " + partMap.showKeys(null) + " ID=" + resourceRoot.getID());
 					else
 						return null;
 				}
