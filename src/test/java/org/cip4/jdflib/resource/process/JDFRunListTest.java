@@ -158,6 +158,18 @@ public class JDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 */
+	@Test
+	public final void testCollapseLarge()
+	{
+		final JDFRunList rl = (JDFRunList) JDFNode.parseFile(sm_dirTestData + "collapse.jdf").getResource(ElementName.RUNLIST, EnumUsage.Input, 0);
+		final long t0 = System.currentTimeMillis();
+		rl.collapse(false, true);
+		assertTrue(System.currentTimeMillis() - t0 < 30000);
+	}
+
+	/**
 	 * @throws DataFormatException
 	 *
 	 */

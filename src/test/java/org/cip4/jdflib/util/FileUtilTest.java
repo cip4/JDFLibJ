@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  * 04022005 VF initial version
@@ -71,8 +39,7 @@
 /*
  * Created on Aug 26, 2004
  *
- * To change the template for this generated file go to
- * Window - Preferences - Java - Code Generation - Code and Comments
+ * To change the template for this generated file go to Window - Preferences - Java - Code Generation - Code and Comments
  */
 package org.cip4.jdflib.util;
 
@@ -131,7 +98,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertFalse(FileUtil.isDirectory((File) null));
 		assertTrue(FileUtil.isDirectory("/"));
 		assertTrue(FileUtil.isDirectory(sm_dirTestData + "SampleFiles"));
-		//		assertTrue(FileUtil.isDirectory(sm_dirTestData + "Samples2"));
+		// assertTrue(FileUtil.isDirectory(sm_dirTestData + "Samples2"));
 
 	}
 
@@ -151,17 +118,17 @@ public class FileUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetAuxDir()
 	{
-		File theHFDir = new File(sm_dirTestDataTemp + File.separator + "Foo");
+		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "Foo");
 		FileUtil.deleteAll(theHFDir);
 		theHFDir.mkdirs();
-		File aaa = FileUtil.getFileInDirectory(theHFDir, new File("aaa.txt"));
+		final File aaa = FileUtil.getFileInDirectory(theHFDir, new File("aaa.txt"));
 		FileUtil.createNewFile(aaa);
 
 		assertNull(FileUtil.getAuxDir(aaa));
-		File aaaDir = FileUtil.newExtension(aaa, null);
+		final File aaaDir = FileUtil.newExtension(aaa, null);
 		aaaDir.mkdirs();
 		assertEquals(aaaDir, FileUtil.getAuxDir(aaa));
-		File aaaDir2 = FileUtil.newExtension(aaaDir, "dir");
+		final File aaaDir2 = FileUtil.newExtension(aaaDir, "dir");
 		aaaDir.renameTo(aaaDir2);
 		assertEquals(aaaDir2, FileUtil.getAuxDir(aaa));
 		assertNull(FileUtil.getAuxDir(new File(".xyz")));
@@ -175,9 +142,9 @@ public class FileUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetBufferedOutputStream() throws IOException
 	{
-		File file = new File(sm_dirTestDataTemp + "bufOut.txt");
+		final File file = new File(sm_dirTestDataTemp + "bufOut.txt");
 		file.delete();
-		OutputStream os = FileUtil.getBufferedOutputStream(file);
+		final OutputStream os = FileUtil.getBufferedOutputStream(file);
 		os.write("abc".getBytes());
 		os.close();
 		assertTrue(file.exists());
@@ -244,14 +211,34 @@ public class FileUtilTest extends JDFTestCaseBase
 	@Test
 	public void testgetFastMD5() throws Exception
 	{
-		byte[] b1 = FileUtil.getFastMD5(new File(sm_dirTestData + "dir1.zip"), 1000000);
-		byte[] b2 = FileUtil.getFastMD5(new File(sm_dirTestData + "dir1.zip"), 1000000);
+		final byte[] b1 = FileUtil.getFastMD5(new File(sm_dirTestData + "dir1.zip"), 1000000);
+		final byte[] b2 = FileUtil.getFastMD5(new File(sm_dirTestData + "dir1.zip"), 1000000);
 		for (int i = 0; i < b1.length; i++)
 		{
 			assertEquals(b1[i], b2[i]);
 		}
-		byte[] b3 = FileUtil.getFastMD5(new File(sm_dirTestData + "FixVersion.jdf"), 1000000);
+		final byte[] b3 = FileUtil.getFastMD5(new File(sm_dirTestData + "FixVersion.jdf"), 1000000);
 		assertNotNull(b3);
+	}
+
+	/**
+	 * @throws Exception x
+	 */
+	@Test
+	public void testgetFastMD5NonExist() throws Exception
+	{
+		final byte[] b1 = FileUtil.getFastMD5(new File(sm_dirTestData + "nix"), 1000000);
+		assertNull(b1);
+	}
+
+	/**
+	 * @throws Exception x
+	 */
+	@Test
+	public void testgetFastMD5Null() throws Exception
+	{
+		final byte[] b1 = FileUtil.getFastMD5(null, 1000000);
+		assertNull(b1);
 	}
 
 	/**
@@ -316,7 +303,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2b"))));
 		list = FileUtil.listFilesInTree(root, StringUtil.simpleRegExptoRegExp("dir*/*.txt"));
 		assertEquals(list.size(), 4);
-		Vector<File> list2 = FileUtil.listFilesInTree(root, StringUtil.simpleRegExptoRegExp("*.txt"));
+		final Vector<File> list2 = FileUtil.listFilesInTree(root, StringUtil.simpleRegExptoRegExp("*.txt"));
 		assertEquals(list2.size(), 6);
 	}
 
@@ -327,8 +314,8 @@ public class FileUtilTest extends JDFTestCaseBase
 	public void testListTreeFilter()
 	{
 		final File root = new File(sm_dirTestData + File.separator + "dir1");
-		Vector<File> list = FileUtil.listFilesInTree(root, new FileUtil.DirectoryFileFilter());
-		for (File f : list)
+		final Vector<File> list = FileUtil.listFilesInTree(root, new FileUtil.DirectoryFileFilter());
+		for (final File f : list)
 			assertTrue(f.isDirectory());
 		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2a"))));
 		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2b"))));
@@ -394,7 +381,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		FileUtil.createNewFile(f1);
 		final File f2 = FileUtil.getFileInDirectory(f, new File("b.c"));
 		FileUtil.createNewFile(f2);
-		File[] listFilesWithExpression = FileUtil.listFilesWithExpression(f, "*.b.c");
+		final File[] listFilesWithExpression = FileUtil.listFilesWithExpression(f, "*.b.c");
 		assertEquals(listFilesWithExpression[0], f1);
 		assertEquals(listFilesWithExpression.length, 1);
 	}
@@ -461,13 +448,13 @@ public class FileUtilTest extends JDFTestCaseBase
 	@Test
 	public void testForceDelete() throws Exception
 	{
-		File f = new File(sm_dirTestDataTemp + "forcedelete.txt");
+		final File f = new File(sm_dirTestDataTemp + "forcedelete.txt");
 		assertTrue(FileUtil.forceDelete(null));
 		assertTrue(FileUtil.forceDelete(f));
 		f.createNewFile();
 		assertTrue(FileUtil.forceDelete(f));
 		f.createNewFile();
-		FileOutputStream fos = new FileOutputStream(f);
+		final FileOutputStream fos = new FileOutputStream(f);
 		fos.write(32);
 		fos.flush();
 		fos.close();
@@ -578,7 +565,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		FileUtil.deleteAll(dir);
 		FileUtil.deleteAll(dir2);
 		dir.mkdirs();
-		File sm = new File("streamMove.dat");
+		final File sm = new File("streamMove.dat");
 		final File f = FileUtil.getFileInDirectory(dir, sm);
 		FileUtil.streamToFile(is, f.getPath());
 		final File f2 = FileUtil.getFileInDirectory(dir, new File("streamMove2.dat"));
@@ -655,7 +642,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		fd.mkdirs();
 		final File nf = FileUtil.ensureFileInDir(f, fd);
 		assertNotNull(nf);
-		File parentDir = nf.getParentFile();
+		final File parentDir = nf.getParentFile();
 		assertEquals(parentDir, fd);
 		assertEquals(nf.getName(), f.getName());
 		assertTrue(f.exists());
@@ -768,14 +755,14 @@ public class FileUtilTest extends JDFTestCaseBase
 			f.delete();
 		}
 
-		MyPair<File, byte[]> pair = FileUtil.streamToMD5File(is.getInputStream(), f);
+		final MyPair<File, byte[]> pair = FileUtil.streamToMD5File(is.getInputStream(), f);
 		assertTrue(f.exists());
 		assertEquals(f, pair.a);
 		assertEquals(f.length(), 55555, 2000);
 		assertNotNull(pair.b);
 
 		f.delete();
-		MyPair<File, byte[]> pair2 = FileUtil.streamToMD5File(is.getInputStream(), f);
+		final MyPair<File, byte[]> pair2 = FileUtil.streamToMD5File(is.getInputStream(), f);
 		assertTrue(f.exists());
 		assertEquals(f, pair2.a);
 		assertEquals(f.length(), 55555, 2000);

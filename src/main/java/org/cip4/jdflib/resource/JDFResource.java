@@ -3510,7 +3510,9 @@ public class JDFResource extends JDFElement
 		 */
 		void collapse(final boolean bCollapseToNode, final boolean bCollapseElements)
 		{
-			final VElement leaves = JDFIdentical.removeIdenticals(getLeaves(false));
+			final boolean hasIdentical = getElementByClass(JDFIdentical.class, 0, true) != null;
+			final VElement leaves2 = getLeaves(false);
+			final VElement leaves = hasIdentical ? JDFIdentical.removeIdenticals(leaves2) : leaves2;
 			if (leaves.size() == 1 && leaves.elementAt(0) == JDFResource.this)
 			{
 				return; // this is a non partitioned root node
@@ -3526,7 +3528,8 @@ public class JDFResource extends JDFElement
 
 				while (true)
 				{
-					final VElement localLeaves = JDFIdentical.removeIdenticals(parent.getChildElementVector_JDFElement(getNodeName(), null, null, true, 0, false));
+					final VElement kids = parent.getChildElementVector_JDFElement(getNodeName(), null, null, true, 0, false);
+					final VElement localLeaves = hasIdentical ? JDFIdentical.removeIdenticals(kids) : kids;
 					collapseAttributes(bCollapseToNode, leaf, atts, parent, localLeaves, true);
 					// since 190602 also collapse elements
 					if (bCollapseElements)

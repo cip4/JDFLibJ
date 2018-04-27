@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -138,29 +106,25 @@ public class StringUtil
 			"Ihr Instrumente freilich spottet mein, Mit Rad und Kämmen, Walz und Bügel: Ich stand am Tor, ihr solltet Schlüssel sein; Zwar euer Bart ist kraus, doch hebt ihr nicht die Riegel.",
 			"What do you expect from a simulator", "Paper Jam", "Strawberry jam", "Elderberry jam", "Your mother was a hamster and your father smelt of elderberries!",
 			"I'm French! Why do think I have this outrageous accent, you silly king-a?!", "It's just a flesh wound.", "All right, we'll call it a draw.",
-			"Oh, oh, I see! Running away, eh? You yellow bastards! Come back here and take what's coming to you! I'll bite your legs off!",
-			"You don't frighten us, English pig-dogs!", "Go and boil your bottom, sons of a silly person.",
-			"I blow my nose at you, so-called Arthur King, you and all your silly English k-nnnnniggets. Thpppppt! Thppt! Thppt!",
+			"Oh, oh, I see! Running away, eh? You yellow bastards! Come back here and take what's coming to you! I'll bite your legs off!", "You don't frighten us, English pig-dogs!",
+			"Go and boil your bottom, sons of a silly person.", "I blow my nose at you, so-called Arthur King, you and all your silly English k-nnnnniggets. Thpppppt! Thppt! Thppt!",
 			"I don't wanna talk to you no more, you empty headed animal food trough wiper!", "I fart in your general direction!",
 			"Listen, strange women lyin' in ponds distributin' swords is no basis for a system of government. Supreme executive power derives from a mandate from the masses, not from some farcical aquatic ceremony",
 			"C'est un lapin, lapin de bois.", "Quoi? Un cadeau. What? A present. Oh, un cadeau. Oui, oui. Hurry. What? Let's go. Oh. On y va. Bon magne. Over here...",
 			"Oh. Oh, I see. Running away, eh? You yellow bastards! Come back here and take what's coming to you. I'll bite your legs off!", "You're using coconuts!",
 			"The swallow may fly south with the sun or the house martin or the plover may seek warmer climes in winter, yet these are not strangers to our land?",
-			"Are you suggesting coconuts migrate?",
-			"It's not a question of where he grips it! It's a simple question of weight ratios! A five ounce bird could not carry a one pound coconut.",
+			"Are you suggesting coconuts migrate?", "It's not a question of where he grips it! It's a simple question of weight ratios! A five ounce bird could not carry a one pound coconut.",
 			"Listen. In order to maintain air-speed velocity, a swallow needs to beat its wings forty-three times every second, right?",
 			"Oh, King, eh, very nice. And how d'you get that, eh? By exploiting the workers! By 'anging on to outdated imperialist dogma which perpetuates the economic and social differences in our society. If there's ever going to be any progress with the--",
 			"Oh! Come and see the violence inherent in the system! Help! Help! I'm being repressed!",
 			"Here I am, brain the size of a planet, and they ask me to take you to the bridge. Call that job satisfaction, 'cause I don't.",
 			"Ghastly, isn't it? All the doors on this spaceship have been programmed to have a cheery and sunny disposition.", "whazzap?",
 			"Explain again how sheep's bladders may be employed to prevent earthquakes.",
-			"Pardon me for breathing, which I never do anyway so I don't know why I even bothered to say it. Oh god, I'm so depressed.",
-			"I've got this pain in all the diodes down my left side",
+			"Pardon me for breathing, which I never do anyway so I don't know why I even bothered to say it. Oh god, I'm so depressed.", "I've got this pain in all the diodes down my left side",
 			"I would like to say that it is a very great pleasure, honour and privilege for me to open this bridge, but I can't because my lying circuits are all out of commission",
 			"Do you want me to sit in the corner and rust, or just fall apart where I'm standing?",
 			"You may think you've read Hamlet before, but you can't really appreciate it until you've read it in the original Klingon.",
-			"What's this, then? \"Romanes eunt domus\"? People called Romanes, they go, the house?",
-			"Life's a piece of shit when you look at it. Life's a laugh and death's a joke; it's true.",
+			"What's this, then? \"Romanes eunt domus\"? People called Romanes, they go, the house?", "Life's a piece of shit when you look at it. Life's a laugh and death's a joke; it's true.",
 			"Excuse me. Are you the Judean People's Front? Fuck off! We're the People's Front of Judea",
 			"How many Romans? - Aaaaagh ! Plural, plural, er, \"ite\" ! - \"Domus\"? Nominative? \"Go home\" is motion towards, isn't it? - Dative ! -  Aaagh ! Not the dative, not the dative ! Er, er, accusative, \"Domum\" ! - But \"Domus\" takes the locative, which is...? Er, \"Domum\" ! ",
 			"Making it worse? How can it be worse? Jehovah! Jehovah! Jehovah! ",
@@ -185,9 +149,9 @@ public class StringUtil
 			"E: Look, there's no need to panic. Someone in the crew will know how to steer this thing.\nR: The crew, milord?\nE: Yes, the crew.\nR: What crew?\nE: I was under the impression that it was common maritime practice for a ship to have a crew.\nR: Opinion is divided on the subject.\n",
 			"If we do happen to step on a mine, Sir, what do we do ?\nNormal procedure, Lieutenant, is to jump 200 feet in the air and scatter oneself over a wide area.",
 			"Gentlemen, you can't fight in here, this is the War Room!", "I love it when a plan comes together", "Das also war des Pudels Kern!",
-			"I feel that if a person can't communicate the very least he can do is to shut up",
-			"Always carry a flagon of whiskey in case of snakebite and furthermore always carry a small snake.", "Anyone who hates children and animals can't be all bad.",
-			"Ein Teil von jener Kraft, Die stets das Böse will und stets das Gute schafft.", "Von allen Geistern, die verneinen, ist mir der Schalk am wenigsten zur Last.",
+			"I feel that if a person can't communicate the very least he can do is to shut up", "Always carry a flagon of whiskey in case of snakebite and furthermore always carry a small snake.",
+			"Anyone who hates children and animals can't be all bad.", "Ein Teil von jener Kraft, Die stets das Böse will und stets das Gute schafft.",
+			"Von allen Geistern, die verneinen, ist mir der Schalk am wenigsten zur Last.",
 			"And the Lord spake, saying, 'First shalt thou take out the Holy Pin. Then, shalt thou count to three, no more, no less. Three shalt be the number thou shalt count, and the number of the counting shall be three. Four shalt thou not count, nor either count thou two, excepting that thou then proceed to three. Five is right out. Once the number three, being the third number, be reached, then lobbest thou thy Holy Hand Grenade of Antioch towards thy foe, who, being naughty in my sight, shall snuff it.",
 			"The slightest thought hadn't even begun to speculate about the merest possibility of crossing my mind.",
 			"Right, Baldrick, let's try again, shall we? This is called adding. If I have two beans, and then I add two more beans, what do I have?\nSome beans.\nYes...and no. Let's try again, shall we? I have two beans, then I add two more beans. What does that make?\nA very small casserole.\nBaldrick, the ape creatures of the Indus have mastered this. Now try again. One, two, three, four. So how many are there?\nThree\nWhat?\nAnd that one.\nThree and that one. So if I add that one to the three what will I have?\nOh! Some beans.\nYes. To you Baldrick, the Renaissance was just something that happened to other people wasn't it?",
@@ -208,8 +172,8 @@ public class StringUtil
 			"If they take the ship they will rape us to death, eat our flesh, and sew our skins in to their clothing, and if we're very, very lucky, they’ll do it in that order.",
 			"Hier konnte niemand sonst Einlaß erhalten, denn dieser Eingang war nur für dich bestimmt. Ich gehe jetzt und schließe ihn.",
 			"Hohe Herren von der Akademie! Sie erweisen mir die Ehre, mich aufzufordern, der Akademie einen Bericht über mein äffisches Vorleben einzureichen.",
-			"Not only is this incomprehensible, but the ink is ugly and the paper is from the wrong kind of tree.",
-			"If the code and the comments disagree, then both are probably wrong.", "A radioactive cat has eighteen half-lives.", "Silence! I kill you!",
+			"Not only is this incomprehensible, but the ink is ugly and the paper is from the wrong kind of tree.", "If the code and the comments disagree, then both are probably wrong.",
+			"A radioactive cat has eighteen half-lives.", "Silence! I kill you!",
 			"Although golf was originally restricted to wealthy, overweight Protestants, today it's open to anybody who owns hideous clothing.",
 			"Biology is the only science in which multiplication means the same thing as division.", "Last quote" };
 
@@ -227,8 +191,7 @@ public class StringUtil
 	/**
 	 * Returns a string with deleted whitespaces near 'delim' and from the both ends of the string (if they were there)<br>
 	 *
-	 * tokenizes a given string 'str' into tokens without separators. Trims every token from both sides to remove the whitespaces and builds a new string from
-	 * these tokens separated by 'delim'.
+	 * tokenizes a given string 'str' into tokens without separators. Trims every token from both sides to remove the whitespaces and builds a new string from these tokens separated by 'delim'.
 	 *
 	 * @param str working string
 	 * @param delim the delimiter
@@ -259,8 +222,8 @@ public class StringUtil
 	 * format a string using C++ sprintf functionality
 	 *
 	 * @param format the format to print, see C++ spec for details
-	 * @param template - comma separated string - the values are parsed and the appropriate objects are created more objects exist in template than the number
-	 * of '%' tokens in format, the remainder of objects is ignored duplicate '\\,' is taken as literal ','
+	 * @param template - comma separated string - the values are parsed and the appropriate objects are created more objects exist in template than the number of '%' tokens in format, the remainder of
+	 *            objects is ignored duplicate '\\,' is taken as literal ','
 	 * @return String the formatted string
 	 * @throws IllegalArgumentException in case format and o do not match, i.e. not enough objects are passed to fill format
 	 */
@@ -297,9 +260,8 @@ public class StringUtil
 	 * format a string using C++ sprintf functionality
 	 *
 	 * @param format the format to print, see C++ spec for details
-	 * @param objects the array of objects, either String, Double, Integer or ValuedEnum, if objects is longer than the number of '%' tokens in format, the
-	 * remainder of objects is ignored The method works fairly loosely typed, thus doubles are printed as integers, Strings are converted to numbers, if
-	 * possible etc.
+	 * @param objects the array of objects, either String, Double, Integer or ValuedEnum, if objects is longer than the number of '%' tokens in format, the remainder of objects is ignored The method
+	 *            works fairly loosely typed, thus doubles are printed as integers, Strings are converted to numbers, if possible etc.
 	 *
 	 * @return String the formatted string
 	 * @throws IllegalArgumentException in case format and o do not match, i.e. not eough objects are passed to fill format
@@ -364,7 +326,7 @@ public class StringUtil
 	 * @param back the back end of the string
 	 * @return String - the vector as String
 	 *
-	 * default: setvString(v, JDFConstants.BLANK, null, null)
+	 *         default: setvString(v, JDFConstants.BLANK, null, null)
 	 */
 	public static String setvString(final String[] a, final String sep, final String front, final String back)
 	{
@@ -400,7 +362,7 @@ public class StringUtil
 	 *
 	 * @return String - the vector as String
 	 *
-	 * default: setvString(v, JDFConstants.BLANK, null, null)
+	 *         default: setvString(v, JDFConstants.BLANK, null, null)
 	 */
 	public static String setvString(final List<?> v, final String sep, final String front, final String back)
 	{
@@ -453,8 +415,8 @@ public class StringUtil
 	}
 
 	/**
-	 * n > 0 substring(0, n) take the first n chars (leftmost) n < 0 substring(0, s.length()+n) take the string and cut n chars on the right example: string =
-	 * "abcdefgh" string.leftStr( 2) = "ab" string.leftStr(-3) = "abcde"
+	 * n > 0 substring(0, n) take the first n chars (leftmost) n < 0 substring(0, s.length()+n) take the string and cut n chars on the right example: string = "abcdefgh" string.leftStr( 2) = "ab"
+	 * string.leftStr(-3) = "abcde"
 	 *
 	 * @param strWork the string to work on
 	 * @param n number of characters to cut (negative) or retain (positive)
@@ -524,8 +486,8 @@ public class StringUtil
 	}
 
 	/**
-	 * get the end of a string n > 0 str.substring(str.length() - n) take the rightmost n chars n < 0 substring(-n) take the string and cut n chars on the left
-	 * example: string = "abcdefgh" string.rightStr( 2) = "gh" string.rightStr(-3) = "defgh"
+	 * get the end of a string n > 0 str.substring(str.length() - n) take the rightmost n chars n < 0 substring(-n) take the string and cut n chars on the left example: string = "abcdefgh"
+	 * string.rightStr( 2) = "gh" string.rightStr(-3) = "defgh"
 	 *
 	 * @param strWork the string to work on
 	 * @param n number of characters to cut (negative) or retain (positive)
@@ -587,8 +549,7 @@ public class StringUtil
 	}
 
 	/**
-	 * tokenize while counting the referenced in and out so that internal tokens are skipped
-	 * used e.g for "?:" of "()"
+	 * tokenize while counting the referenced in and out so that internal tokens are skipped used e.g for "?:" of "()"
 	 *
 	 * @param strWork
 	 * @param delimIn the
@@ -717,6 +678,7 @@ public class StringUtil
 
 	/**
 	 * replace a token in a string
+	 *
 	 * @param strWork the String to work on
 	 * @param delim the delimiter
 	 * @param newToken the new token, if null said token is removed
@@ -737,9 +699,9 @@ public class StringUtil
 
 	/**
 	 * replace a token in a string
+	 *
 	 * @param strWork the String to work on
-	 * @param index index of the token to replace
-	 * if<0 return from end (e.g. -1 is the last token)
+	 * @param index index of the token to replace if<0 return from end (e.g. -1 is the last token)
 	 * @param delim the delimiter
 	 *
 	 * @return the modified string, null if last token was removed
@@ -778,9 +740,9 @@ public class StringUtil
 
 	/**
 	 * replace a token in a string
+	 *
 	 * @param strWork the String to work on
-	 * @param index index of the token to replace
-	 * if<0 return from end (e.g. -1 is the last token)
+	 * @param index index of the token to replace if<0 return from end (e.g. -1 is the last token)
 	 * @param delim the delimiter
 	 * @param newToken the new token, if null said token is removed
 	 * @return the modified string - never null
@@ -824,12 +786,13 @@ public class StringUtil
 	}
 
 	/**
-	 * get a single token from a String <p/>
+	 * get a single token from a String
+	 * <p/>
 	 * default: Token(strWork, index," \t\n")
 	 *
 	 * @param strWork the String to work on
 	 * @param index index of the token to return<br>
-	 * if<0 return from end (e.g. -1 is the last token)
+	 *            if<0 return from end (e.g. -1 is the last token)
 	 * @param delim the delimiter
 	 * @return the single token (<code>null</code> if no token found)
 	 */
@@ -954,8 +917,8 @@ public class StringUtil
 	}
 
 	/**
-	 * replace a string in a given String if the replacement string is contained by the string to replace, recursively replace until no ocurrences of the
-	 * original remain thus replaceString("a000000", "00", "0") will return "a0" rather than "a000"
+	 * replace a string in a given String if the replacement string is contained by the string to replace, recursively replace until no ocurrences of the original remain thus replaceString("a000000",
+	 * "00", "0") will return "a0" rather than "a000"
 	 *
 	 * @param strWork String to work on
 	 * @param toReplace String to match and replace
@@ -969,6 +932,7 @@ public class StringUtil
 
 	/**
 	 * class that provides additional functionality for replacing string
+	 *
 	 * @author rainer prosi
 	 * @date Apr 3, 2011
 	 */
@@ -979,8 +943,8 @@ public class StringUtil
 
 		/**
 		 *
-		 * set the reread algorithm - if true (the default) the replaced string is checked again. If false
-		 * the algorithm continues after the replacement
+		 * set the reread algorithm - if true (the default) the replaced string is checked again. If false the algorithm continues after the replacement
+		 *
 		 * @param reRead
 		 */
 		public void setReRead(final boolean reRead)
@@ -1000,8 +964,8 @@ public class StringUtil
 		}
 
 		/**
-		 * replace a string in a given String if the replacement string is contained by the string to replace, recursively replace until no ocurrences of the
-		 * original remain thus replaceString("a000000", "00", "0") will return "a0" rather than "a000"
+		 * replace a string in a given String if the replacement string is contained by the string to replace, recursively replace until no ocurrences of the original remain thus
+		 * replaceString("a000000", "00", "0") will return "a0" rather than "a000"
 		 *
 		 * @param toReplace String to match and replace
 		 * @param replaceBy String to insert for toReplace, null if nothing should be inserted
@@ -1079,6 +1043,7 @@ public class StringUtil
 
 	/**
 	 * inverse of extension
+	 *
 	 * @param strWork the string to work on
 	 * @return the prefix
 	 * @deprecated use UrlUtil.prefix(strWork);
@@ -1092,6 +1057,7 @@ public class StringUtil
 	/**
 	 *
 	 * normalize a string by stripping and converting any internal whitespace to a single blank
+	 *
 	 * @param strWork the input
 	 * @param toLower if true return all lower case
 	 * @return the output; null if all characters were removed
@@ -1104,6 +1070,7 @@ public class StringUtil
 	/**
 	 *
 	 * normalize a string by stripping and converting any internal whitespace to the value of replace
+	 *
 	 * @param strWork the input
 	 * @param toLower if true return all lower case
 	 * @param replace the replace character, if null remove all whitespace
@@ -1200,6 +1167,7 @@ public class StringUtil
 
 	/**
 	 * return true if s==null or s=="", else s<br/>
+	 *
 	 * @param s
 	 * @return
 	 */
@@ -1609,8 +1577,8 @@ public class StringUtil
 	}
 
 	/**
-	 * counts the number of occurrences of subString in String
-	 * the total number of occurrences is counted, e.g "aaa" contains "aa" twice
+	 * counts the number of occurrences of subString in String the total number of occurrences is counted, e.g "aaa" contains "aa" twice
+	 *
 	 * @param strWork
 	 * @param subString
 	 * @return the number of occurrences
@@ -1676,6 +1644,7 @@ public class StringUtil
 	/**
 	 * get the raw bytes specified in strUnicode, bypassing all transcoders<br>
 	 * any character values above 255 is truncated (c=c&0xff)
+	 *
 	 * @param strUnicode the unicode string
 	 *
 	 * @return char array of the raw bytes assigned to this
@@ -1701,7 +1670,7 @@ public class StringUtil
 	 *
 	 * @param buffer the String which you want to encode to HexBinary
 	 * @param len the length of the buffer. <br>
-	 * If<0, default is -1. In this case the lenght of the char array will be used.
+	 *            If<0, default is -1. In this case the lenght of the char array will be used.
 	 * @return the hexbinary representation
 	 */
 
@@ -1709,7 +1678,7 @@ public class StringUtil
 	{
 		char[] target = null;
 
-		if (buffer.length >= 0)
+		if (buffer != null && buffer.length >= 0)
 		{
 			if (len < 0)
 			{
@@ -1748,7 +1717,7 @@ public class StringUtil
 	public static byte[] getHexBinaryBytes(final byte[] unicodeArray)
 	{
 		final byte emptyArray[] = new byte[0];
-		final int len = unicodeArray.length;
+		final int len = unicodeArray == null ? 0 : unicodeArray.length;
 
 		// check if there is at least one 16Bit unicode char
 		if (len % 2 > 0)
@@ -1856,8 +1825,7 @@ public class StringUtil
 	}
 
 	/**
-	 * get the unicode string representing the UTF8 representation of the byte buffer fall back on default encoding in case someone accidentally sends in non
-	 * utf-8
+	 * get the unicode string representing the UTF8 representation of the byte buffer fall back on default encoding in case someone accidentally sends in non utf-8
 	 *
 	 * @param utf8 the utf-8 encoded byte array
 	 *
@@ -1992,8 +1960,7 @@ public class StringUtil
 	}
 
 	/**
-	 * escape a string by prepending escapeChar and a numerical representation of the string. Characters to be escaped are defined by toEscape, escapeBelow and
-	 * escapeAbove
+	 * escape a string by prepending escapeChar and a numerical representation of the string. Characters to be escaped are defined by toEscape, escapeBelow and escapeAbove
 	 * <p>
 	 * default: escape(String toEscape, null, 0, 0, 0, 256); //Note that an escaped character can't be unescaped without the knowledge of the escapelength
 	 *
@@ -2002,9 +1969,9 @@ public class StringUtil
 	 * @param strEscapeChar the character sequence that marks an escape sequence. If <code>null</code>, "\\" is used
 	 *
 	 * @param iRadix the numerical representation base of the escaped chars, e.g. 8 for octal, 16 for hex<br>
-	 * if radix == 0 the escape char is merely inserted in front of the char to escape<br>
-	 * if radix <0 the escape char is replaced by the prefix<br>
-	 * valid radix: -1,0,2,8,10,16
+	 *            if radix == 0 the escape char is merely inserted in front of the char to escape<br>
+	 *            if radix <0 the escape char is replaced by the prefix<br>
+	 *            valid radix: -1,0,2,8,10,16
 	 *
 	 * @param iEscapeLen the number of digits per escaped char, not including escapeChar
 	 * @param iEscapeBelow all characters with an encoding below escapeBelow should also be escaped, if negative, no lower limit applies
@@ -2020,6 +1987,7 @@ public class StringUtil
 
 	/**
 	 * return true if a equals b or both are null or ""
+	 *
 	 * @param a String to compare
 	 * @param b String to compare
 	 * @return boolean true if a equals b or both are one of null or ""
@@ -2030,8 +1998,7 @@ public class StringUtil
 	}
 
 	/**
-	 * escape a string by prepending escapeChar and a numerical representation of the string. Characters to be escaped are defined by toEscape, escapeBelow and
-	 * escapeAbove
+	 * escape a string by prepending escapeChar and a numerical representation of the string. Characters to be escaped are defined by toEscape, escapeBelow and escapeAbove
 	 * <p>
 	 * default: escape(String toEscape, null, 0, 0, 0, 256); //Note that an escaped character can't be unescaped without the knowledge of the escapelength
 	 *
@@ -2040,9 +2007,9 @@ public class StringUtil
 	 * @param strEscapeChar the character sequence that marks an escape sequence. If <code>null</code>, "\\" is used
 	 *
 	 * @param iRadix the numerical representation base of the escaped chars, e.g. 8 for octal, 16 for hex<br>
-	 * if radix == 0 the escape char is merely inserted in front of the char to escape<br>
-	 * if radix <0 the escape char is replaced by the prefix<br>
-	 * valid radix: -1,0,2,8,10,16
+	 *            if radix == 0 the escape char is merely inserted in front of the char to escape<br>
+	 *            if radix <0 the escape char is replaced by the prefix<br>
+	 *            valid radix: -1,0,2,8,10,16
 	 *
 	 * @param iEscapeLen the number of digits per escaped char, not including escapeChar
 	 * @param iEscapeBelow all characters with an encoding below escapeBelow should also be escaped, if negative, no lower limit applies
@@ -2112,7 +2079,7 @@ public class StringUtil
 
 					if (iEscapeLen > 0)
 					{ // check if the length of the buffer is smaler then the
-							// ordered escape length. If this is the case
+						// ordered escape length. If this is the case
 						// insert some 0 in front of. for Example buf = 12345
 						// iEscapeLen is 7. The result String is 0012345
 						final int lenBuf = buf.length();
@@ -2141,7 +2108,7 @@ public class StringUtil
 				}
 				else
 				{ // radix = 0; just insert the escape character in front of the
-						// actual char
+					// actual char
 					escaped[posE] = a_toEscape[i];
 					posE++;
 				}
@@ -2194,7 +2161,7 @@ public class StringUtil
 		if (byteUnEscape == null)
 			return null;
 		final byte[] byteEscape = new byte[byteUnEscape.length];
-		final byte escapeChar = strEscapeChar.getBytes()[0]; // dont even dream of using � as an escape  char
+		final byte escapeChar = strEscapeChar.getBytes()[0]; // dont even dream of using � as an escape char
 		int n = 0;
 		final byte[] escapeSeq = new byte[escapeLen];
 
@@ -2247,6 +2214,7 @@ public class StringUtil
 
 	/**
 	 * converts a VString to a single string represents all members of the VString concatenated together
+	 *
 	 * @param vs
 	 *
 	 * @deprecated use vs.getString(" ",null,null)
@@ -2312,8 +2280,7 @@ public class StringUtil
 	}
 
 	/**
-	 * parses a string to boolean and catches any format exception
-	 * "1" and "0" are treated as true and false respectively
+	 * parses a string to boolean and catches any format exception "1" and "0" are treated as true and false respectively
 	 *
 	 * @param s the string to parse
 	 * @param def the default to return in case of error
@@ -2438,7 +2405,7 @@ public class StringUtil
 		}
 		catch (final NumberFormatException nfe)
 		{
-			//nop
+			// nop
 		}
 		long i = def;
 		s = s.trim().toLowerCase();
@@ -2548,8 +2515,7 @@ public class StringUtil
 	 * converts a simple regexp to a real regexp <br/>
 	 * * --> (.*) (any # of chars) <br/>
 	 * . --> \. (literal ".")<br/>
-	 * ? --> . (exactly one character)
-	 * if one of ([|\ is found in the expression we assume it is a real regexp that has already been converted
+	 * ? --> . (exactly one character) if one of ([|\ is found in the expression we assume it is a real regexp that has already been converted
 	 *
 	 * @param simpleRegExp the simple regexp
 	 * @return the converted real regexp
@@ -2592,8 +2558,7 @@ public class StringUtil
 	}
 
 	/**
-	 * match a regular expression using String.matches(), but also catch exceptions and handle simplified regexp. The <code>null</code> expression is assumed to
-	 * match anything.
+	 * match a regular expression using String.matches(), but also catch exceptions and handle simplified regexp. The <code>null</code> expression is assumed to match anything.
 	 *
 	 * @param str the string to match
 	 * @param regExp the expression to match against
@@ -2607,8 +2572,7 @@ public class StringUtil
 
 	/**
 	 * match a regular expression using String.matches(), but also catch exceptions </br>
-	 * does NOT handle simplified regexp. The <code>null</code> expression is assumed to
-	 * match anything.
+	 * does NOT handle simplified regexp. The <code>null</code> expression is assumed to match anything.
 	 *
 	 * @param str the string to match
 	 * @param regExp the expression to match against
@@ -2640,8 +2604,7 @@ public class StringUtil
 	}
 
 	/**
-	 * match a regular expression using ignoring cases using String.matches(), but also catch exceptions and handle simplified regexp. The <code>null</code>
-	 * expression is assumed to match anything.
+	 * match a regular expression using ignoring cases using String.matches(), but also catch exceptions and handle simplified regexp. The <code>null</code> expression is assumed to match anything.
 	 *
 	 * @param str the string to match
 	 * @param regExp the simplified expression to match against
@@ -2673,6 +2636,7 @@ public class StringUtil
 
 	/**
 	 * create a string from an input stream
+	 *
 	 * @param is the input stream
 	 * @return the string representation
 	 */
@@ -2725,7 +2689,7 @@ public class StringUtil
 	 * @param baseDir the file that describes cwd, if null cwd is calculated
 	 * @param bEscape128 if true, escape > 128 (URL) else retain (IRL)
 	 * @return
-	 *@deprecated use URLUtil.getRelativeURL
+	 * @deprecated use URLUtil.getRelativeURL
 	 */
 	@Deprecated
 	public static String getRelativeURL(final File f, final File baseDir, final boolean bEscape128)
@@ -2811,6 +2775,7 @@ public class StringUtil
 
 	/**
 	 * strip leading and trailing quotes from a string
+	 *
 	 * @param str the work string
 	 * @param quote the quote character
 	 * @param bTrim if true, trim whitespace prior to trimming quotes
@@ -2907,6 +2872,7 @@ public class StringUtil
 	/**
 	 * returns a formatted double. Truncates to @param precision digits after the "." <br>
 	 * If the double is representable as an integer, any ".0" is stripped.
+	 *
 	 * @param value
 	 * @param precision number of digits after the "."
 	 * @return

@@ -92,7 +92,7 @@ import org.w3c.dom.DOMException;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * Jul 9, 2009
+ *         Jul 9, 2009
  */
 public class JDFIdentical extends JDFAutoIdentical
 {
@@ -112,6 +112,7 @@ public class JDFIdentical extends JDFAutoIdentical
 
 	/**
 	 * Constructor for JDFIdentical
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -124,6 +125,7 @@ public class JDFIdentical extends JDFAutoIdentical
 
 	/**
 	 * Constructor for JDFIdentical
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -174,6 +176,7 @@ public class JDFIdentical extends JDFAutoIdentical
 
 	/**
 	 * return the target resource of this
+	 *
 	 * @see org.cip4.jdflib.core.JDFElement#getTarget()
 	 */
 	@Override
@@ -203,6 +206,7 @@ public class JDFIdentical extends JDFAutoIdentical
 
 	/**
 	 * add Part in case it is inconsistent
+	 *
 	 * @see org.cip4.jdflib.core.JDFElement#getInvalidElements(org.cip4.jdflib.core.JDFElement.EnumValidationLevel, boolean, int)
 	 */
 	@Override
@@ -229,7 +233,7 @@ public class JDFIdentical extends JDFAutoIdentical
 		{
 			for (int n = leaves.size() - 1; n >= 0; n--)
 			{
-				if (leaves.get(n).hasChildElement(ElementName.IDENTICAL, null))
+				if (leaves.get(n).getElementByClass(JDFIdentical.class, 0, false) != null)
 				{
 					leaves.remove(n);
 				}
