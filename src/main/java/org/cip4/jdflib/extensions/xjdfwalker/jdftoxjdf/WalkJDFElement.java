@@ -745,32 +745,28 @@ public class WalkJDFElement extends WalkElement
 	 *
 	 * @param r
 	 */
-	void moveToContent(final JDFResource r)
+	void moveToContent(final JDFPageList pl)
 	{
-		if (r != null)
+		if (!pl.isIndexed())
 		{
-			final JDFPageList pl = (JDFPageList) r;
-			if (!pl.isIndexed())
+			pl.uniqueIndex();
+		}
+		final KElement cNew = safeRename(pl, XJDFConstants.Content, true);
+		cNew.appendAttribute(AttributeName.PARTIDKEYS, AttributeName.PAGENUMBER, null, null, true);
+		final Vector<JDFPageData> vpd = cNew.getChildrenByClass(JDFPageData.class, true, 0);
+		if (vpd != null)
+		{
+			int i = 0;
+			for (final JDFPageData pd : vpd)
 			{
-				pl.uniqueIndex();
-			}
-			final KElement cNew = safeRename(r, XJDFConstants.Content, true);
-			cNew.appendAttribute(AttributeName.PARTIDKEYS, AttributeName.PAGENUMBER, null, null, true);
-			final Vector<JDFPageData> vpd = cNew.getChildrenByClass(JDFPageData.class, true, 0);
-			if (vpd != null)
-			{
-				int i = 0;
-				for (final JDFPageData pd : vpd)
+				if (!pd.hasNonEmpty(AttributeName.PAGEINDEX))
 				{
-					if (!pd.hasNonEmpty(AttributeName.PAGEINDEX))
-					{
-						pd.setPageIndex(i);
-					}
-					pd.renameAttribute(AttributeName.PAGEINDEX, AttributeName.PAGENUMBER, null, null);
-					pd.setAttribute(AttributeName.CONTENTTYPE, "Page");
-					safeRename(pd, XJDFConstants.Content, false);
-					i++;
+					pd.setPageIndex(i);
 				}
+				pd.renameAttribute(AttributeName.PAGEINDEX, AttributeName.PAGENUMBER, null, null);
+				pd.setAttribute(AttributeName.CONTENTTYPE, "Page");
+				safeRename(pd, XJDFConstants.Content, false);
+				i++;
 			}
 		}
 	}

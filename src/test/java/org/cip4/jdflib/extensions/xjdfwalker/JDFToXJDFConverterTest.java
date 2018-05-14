@@ -37,6 +37,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -614,6 +615,26 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	public void testPageListEmpty()
 	{
 		_testPageListEmpty();
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@Test
+	public void testPageListNS()
+	{
+		final JDFNode root = new JDFDoc(ElementName.JDF).getJDFRoot();
+		root.setType(EnumType.Trapping);
+		root.setDescriptiveName("desc");
+		root.addNameSpace("Foo", "www.foo.com");
+		final JDFResource pList = root.addResource("Foo:" + ElementName.PAGELIST, EnumUsage.Input);
+		pList.setDescriptiveName("Desc");
+		assertFalse(pList instanceof JDFPageList);
+		final XJDF20 xjdf20 = new XJDF20();
+		xjdf20.setSingleNode(true);
+		final KElement xjdf = xjdf20.makeNewJDF(root, null);
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Foo:PageList\"]/Resource/@DescriptiveName", null), "Desc");
 
 	}
 
@@ -623,7 +644,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 */
 	public KElement _testPageListEmpty()
 	{
-		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
+		final JDFNode root = new JDFDoc(ElementName.JDF).getJDFRoot();
 		root.setType(EnumType.Trapping);
 		root.setDescriptiveName("desc");
 
