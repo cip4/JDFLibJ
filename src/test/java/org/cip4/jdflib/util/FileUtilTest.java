@@ -118,7 +118,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetAuxDir()
 	{
-		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "Foo");
+		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "FooAux");
 		FileUtil.deleteAll(theHFDir);
 		theHFDir.mkdirs();
 		final File aaa = FileUtil.getFileInDirectory(theHFDir, new File("aaa.txt"));
@@ -128,7 +128,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		final File aaaDir = FileUtil.newExtension(aaa, null);
 		aaaDir.mkdirs();
 		assertEquals(aaaDir, FileUtil.getAuxDir(aaa));
-		final File aaaDir2 = FileUtil.newExtension(aaaDir, "dir");
+		final File aaaDir2 = new File(aaaDir.getAbsolutePath() + ".dir");
 		aaaDir.renameTo(aaaDir2);
 		assertEquals(aaaDir2, FileUtil.getAuxDir(aaa));
 		assertNull(FileUtil.getAuxDir(new File(".xyz")));
