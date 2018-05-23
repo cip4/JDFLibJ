@@ -70,7 +70,7 @@ public class DumpDirTest extends JDFTestCaseBase
 		final Runtime rt = Runtime.getRuntime();
 		for (int i = 0; i < 1000; i++)
 			dumpDir.newFileFromStream("header", bis.getInputStream(), "a" + i);
-		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 500, 111);
+		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 666, 111);
 		bis.close();
 		for (int i = 0; i < 10; i++)
 		{
@@ -92,7 +92,7 @@ public class DumpDirTest extends JDFTestCaseBase
 		final DumpDir dumpDir = new DumpDir(theDir);
 		for (int i = 0; i < 1000; i++)
 			dumpDir.newFileFromStream("header", null, "a" + i);
-		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 500, 111);
+		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 666, 111);
 
 	}
 
@@ -125,7 +125,7 @@ public class DumpDirTest extends JDFTestCaseBase
 		final Runtime rt = Runtime.getRuntime();
 		for (int i = 0; i < 1000; i++)
 			dumpDir.newFileFromStream("header", bis.getInputStream(), "a" + (i % 2 == 0 ? "x." : "y.") + i);
-		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 500, 111);
+		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 666, 111);
 		bis.close();
 		for (int i = 0; i < 10; i++)
 		{
