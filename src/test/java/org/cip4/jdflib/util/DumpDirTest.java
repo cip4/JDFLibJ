@@ -100,6 +100,19 @@ public class DumpDirTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	public void testInc() throws Exception
+	{
+		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir");
+		final DumpDir dumpDir = new DumpDir(theDir);
+		int i = dumpDir.increment();
+		assertEquals(++i, dumpDir.increment());
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	public void testCleanup() throws Exception
 	{
 		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir");

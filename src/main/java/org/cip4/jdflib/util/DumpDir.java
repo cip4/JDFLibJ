@@ -3,70 +3,38 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *  
- * 
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ *
+ *
  */
 package org.cip4.jdflib.util;
 
@@ -82,26 +50,30 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * 
+ *
  * @author rainer
- * 
- * very trivial temp file dump
- * 
+ *
+ *         very trivial temp file dump
+ *
  */
 public class DumpDir
 {
 
 	// ////////////////////////////////////////////////////////////////////////
 	private File baseDir = null;
-	private static HashMap<File, MyInteger> listMap = new HashMap<File, MyInteger>();
-	private final int maxKeep = 500;
+	private static HashMap<File, MyInteger> listMap = new HashMap<>();
+	private final int maxKeep = 666;
 	final protected Log log;
 	/**
 	 * if true, no printouts
 	 */
 	public boolean quiet = true;
 
-	private int increment()
+	/**
+	 *
+	 * @return
+	 */
+	int increment()
 	{
 		synchronized (listMap)
 		{
@@ -112,6 +84,7 @@ public class DumpDir
 
 	/**
 	 * create a dumpdir with dir as the root
+	 *
 	 * @param dir
 	 */
 	public DumpDir(final File dir)
@@ -142,7 +115,7 @@ public class DumpDir
 					{
 						l = 0;
 					}
-					if (l > max)
+					if (l >= max)
 					{
 						max = l + 1;
 					}
@@ -154,7 +127,7 @@ public class DumpDir
 
 	/**
 	 * returns the base directory as a File
-	 * 
+	 *
 	 * @return
 	 */
 	public File getDir()
@@ -164,7 +137,7 @@ public class DumpDir
 
 	/**
 	 * create a new File in this dump
-	 * 
+	 *
 	 * @param header the header to print prior to the xml
 	 * @return
 	 * @deprecated - use 2 parameter version; default= newFile(header,null);
@@ -177,13 +150,13 @@ public class DumpDir
 
 	/**
 	 * create a new File in this dump
-	 * 
+	 *
 	 * @param header the header to print prior to the xml
 	 * @param ext the additional extension to add prior to .tmp
 	 * @return
-	 * 
+	 *
 	 */
-	public File newFile(final String header, String ext)
+	public File newFile(final String header, final String ext)
 	{
 		final int inc = increment();
 		if (!quiet && (inc % 200 == 0))
@@ -204,28 +177,28 @@ public class DumpDir
 
 	/**
 	 * create a new File in this dump and fill it from is
-	 * 
+	 *
 	 * @param header the header to print prior to the stream
 	 * @param is the input stream to fill
 	 * @return the new file
 	 * @deprecated use the 3 parameter version
 	 */
 	@Deprecated
-	public File newFileFromStream(final String header, InputStream is)
+	public File newFileFromStream(final String header, final InputStream is)
 	{
 		return newFileFromStream(header, is, null);
 	}
 
 	/**
 	 * create a new File in this dump and fill it from is
-	 * 
+	 *
 	 * @param header the header to print prior to the stream
 	 * @param is the input stream to fill
 	 * @param ext the additional extension
 	 * @return the new file
-	 * 
+	 *
 	 */
-	public File newFileFromStream(final String header, InputStream is, String ext)
+	public File newFileFromStream(final String header, InputStream is, final String ext)
 	{
 		final File dump = newFile(null, ext);
 		is = ByteArrayIOStream.getBufferedInputStream(is);
@@ -258,8 +231,8 @@ public class DumpDir
 	/**
 	 * @param header
 	 * @param f
-	 * @param bClose 
-	 * @return 
+	 * @param bClose
+	 * @return
 	 */
 	private OutputStream newHeader(final String header, final File f, final boolean bClose)
 	{
@@ -276,7 +249,7 @@ public class DumpDir
 					fs.close();
 				}
 			}
-			catch (IOException e)
+			catch (final IOException e)
 			{
 				// nop
 			}
@@ -287,9 +260,9 @@ public class DumpDir
 	/**
 	 * @param inc
 	 */
-	private void cleanup(final int inc)
+	void cleanup(final int inc)
 	{
-		if ((inc % 100) == 0)
+		if ((inc % 42) == 0)
 		{
 			synchronized (listMap.get(baseDir))
 			{
@@ -299,7 +272,7 @@ public class DumpDir
 					Arrays.sort(names);
 					for (int i = 0; i < names.length - maxKeep; i++)
 					{
-						File f = names[i];
+						final File f = names[i];
 						cleanupSingle(f);
 					}
 				}
@@ -308,11 +281,12 @@ public class DumpDir
 	}
 
 	/**
-	 * 
+	 *
 	 * clean up single file including any unpacked directories
+	 *
 	 * @param f
 	 */
-	private void cleanupSingle(File f)
+	void cleanupSingle(final File f)
 	{
 		if (f != null)
 		{
@@ -322,7 +296,7 @@ public class DumpDir
 			final File[] dirnames = FileUtil.listFilesWithExpression(baseDir, name);
 			if (dirnames != null)
 			{
-				for (File dir : dirnames)
+				for (final File dir : dirnames)
 				{
 					FileUtil.deleteAll(dir);
 				}
