@@ -361,7 +361,7 @@ public class WalkJDFElement extends WalkElement
 			e.setAttribute(AttributeName.SEPARATION, sep);
 			e.removeAttribute(AttributeName.NAME);
 		}
-		final KElement cNew = safeRename(r, ElementName.COLOR, true);
+		final KElement cNew = safeRename(r, ElementName.COLOR);
 		cNew.setAttribute(AttributeName.PARTIDKEYS, AttributeName.SEPARATION);
 	}
 
@@ -751,7 +751,7 @@ public class WalkJDFElement extends WalkElement
 		{
 			pl.uniqueIndex();
 		}
-		final KElement cNew = safeRename(pl, XJDFConstants.Content, true);
+		final KElement cNew = safeRename(pl, XJDFConstants.Content);
 		cNew.appendAttribute(AttributeName.PARTIDKEYS, AttributeName.PAGENUMBER, null, null, true);
 		final Vector<JDFPageData> vpd = cNew.getChildrenByClass(JDFPageData.class, true, 0);
 		if (vpd != null)
@@ -765,7 +765,7 @@ public class WalkJDFElement extends WalkElement
 				}
 				pd.renameAttribute(AttributeName.PAGEINDEX, AttributeName.PAGENUMBER, null, null);
 				pd.setAttribute(AttributeName.CONTENTTYPE, "Page");
-				safeRename(pd, XJDFConstants.Content, false);
+				safeRename(pd, XJDFConstants.Content);
 				i++;
 			}
 		}

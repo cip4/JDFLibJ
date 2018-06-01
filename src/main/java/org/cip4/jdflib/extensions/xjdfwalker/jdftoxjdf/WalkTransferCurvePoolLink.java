@@ -80,7 +80,7 @@ public class WalkTransferCurvePoolLink extends WalkResLink
 			{
 				updateTransferCurvePool((JDFResource) leaf);
 			}
-			final JDFResource cNew = (JDFResource) safeRename(r, ElementName.TRANSFERCURVE, true);
+			final JDFResource cNew = (JDFResource) safeRename(r, ElementName.TRANSFERCURVE);
 			cNew.addPartIDKey(EnumPartIDKey.TransferCurveName);
 			cNew.appendAttribute(AttributeName.PARTIDKEYS, AttributeName.SEPARATION, null, JDFConstants.BLANK, true);
 
@@ -108,7 +108,7 @@ public class WalkTransferCurvePoolLink extends WalkResLink
 		for (final KElement e : v)
 		{
 			e.renameAttribute(AttributeName.NAME, XJDFConstants.TransferCurveName);
-			safeRename(e, ElementName.TRANSFERCURVE, true);
+			safeRename(e, ElementName.TRANSFERCURVE);
 		}
 
 	}
