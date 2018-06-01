@@ -471,6 +471,50 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	/**
 	 *
 	 * @return
+	 * @throws DataFormatException
+	 */
+	@Test
+	public void testTCPSet() throws DataFormatException
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.setType(EnumType.Stripping);
+		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Input);
+		final JDFLayout lo1 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFLayout lo2 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s2");
+
+		final JDFTransferCurvePool tcp = (JDFTransferCurvePool) n.addResource(ElementName.TRANSFERCURVEPOOL, null);
+		final JDFTransferCurvePool tcp1 = (JDFTransferCurvePool) tcp.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFTransferCurveSet tcs1 = tcp.appendTransferCurveSet();
+		tcs1.setName("Paper");
+		tcs1.setDescriptiveName("ddd");
+		final JDFTransferCurve tc1 = tcs1.appendTransferCurve();
+		tc1.setCurve(new JDFTransferFunction("0 0 1 1"));
+		tc1.setSeparation("Cyan");
+
+		final JDFTransferCurvePool tcp2 = (JDFTransferCurvePool) tcp.addPartition(EnumPartIDKey.SheetName, "s2");
+		final JDFTransferCurveSet tcs2 = tcp.appendTransferCurveSet();
+		tcs2.setName("Plate");
+		tcs2.setDescriptiveName("eee");
+		final JDFTransferCurve tc2 = tcs2.appendTransferCurve();
+		tc2.setCurve(new JDFTransferFunction("1 1 0 0"));
+		tc2.setSeparation("Cyan");
+		lo1.refElement(tcp1);
+		lo2.refElement(tcp2);
+
+		final JDFToXJDF xjdf20 = new JDFToXJDF();
+		xjdf20.setSingleNode(true);
+		final KElement xjdf = xjdf20.makeNewJDF(n, null);
+		xjdf.write2File(sm_dirTestDataTemp + "tcp.xjdf");
+		assertNotNull(xjdf);
+		assertEquals("0 0 1 1", xjdf.getXPathAttribute("ResourceSet/Resource/TransferCurve/@Curve", null));
+		assertEquals("1 1 0 0", xjdf.getXPathAttribute("ResourceSet/Resource[2]/TransferCurve/@Curve", null));
+		assertEquals("0 0 1 1", xjdf.getXPathAttribute("ResourceSet/Resource[3]/TransferCurve/@Curve", null));
+		assertEquals("1 1 0 0", xjdf.getXPathAttribute("ResourceSet/Resource[4]/TransferCurve/@Curve", null));
+	}
+
+	/**
+	 *
+	 * @return
 	 */
 	@Test
 	public void testMultiTypes()

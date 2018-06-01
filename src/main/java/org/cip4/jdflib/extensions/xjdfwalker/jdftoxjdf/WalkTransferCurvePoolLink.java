@@ -74,7 +74,16 @@ public class WalkTransferCurvePoolLink extends WalkResLink
 		final JDFResource r = rl.getLinkRoot();
 		if (r != null)
 		{
-			updateTransferCurvePool(r);
+			r.expand(true);
+			final VElement v = r.getLeaves(true);
+			for (final KElement leaf : v)
+			{
+				updateTransferCurvePool((JDFResource) leaf);
+			}
+			final JDFResource cNew = (JDFResource) safeRename(r, ElementName.TRANSFERCURVE, true);
+			cNew.addPartIDKey(EnumPartIDKey.TransferCurveName);
+			cNew.appendAttribute(AttributeName.PARTIDKEYS, AttributeName.SEPARATION, null, JDFConstants.BLANK, true);
+
 			rl.renameElement("TransferCurveLink", null);
 		}
 		return super.walk(jdf, xjdf);
@@ -95,16 +104,12 @@ public class WalkTransferCurvePoolLink extends WalkResLink
 	 */
 	void updateTransferCurvePool(final JDFResource tcp)
 	{
-		final VElement v = tcp.getChildrenByTagName(ElementName.TRANSFERCURVESET, null, null, false, true, 0);
+		final VElement v = tcp.getChildrenByTagName(ElementName.TRANSFERCURVESET, null, null, true, true, 0);
 		for (final KElement e : v)
 		{
 			e.renameAttribute(AttributeName.NAME, XJDFConstants.TransferCurveName);
 			safeRename(e, ElementName.TRANSFERCURVE, true);
 		}
-
-		final JDFResource cNew = (JDFResource) safeRename(tcp, ElementName.TRANSFERCURVE, true);
-		cNew.addPartIDKey(EnumPartIDKey.TransferCurveName);
-		cNew.appendAttribute(AttributeName.PARTIDKEYS, AttributeName.SEPARATION, null, JDFConstants.BLANK, true);
 
 	}
 
