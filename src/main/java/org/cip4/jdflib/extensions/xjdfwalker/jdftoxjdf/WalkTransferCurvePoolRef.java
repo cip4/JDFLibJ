@@ -83,7 +83,11 @@ public class WalkTransferCurvePoolRef extends WalkRefElement
 		final JDFResource tcp = refElem.getTargetRoot();
 		if (tcp != null)
 		{
-			final JDFNode n = refElem.getJDFRoot();
+			JDFNode n = refElem.getJDFRoot();
+			if (n.isAncestor(jdfToXJDF.oldRoot))
+			{
+				n = jdfToXJDF.oldRoot;
+			}
 			final JDFResourceLink rl = n.ensureLink(tcp, EnumUsage.Input, null);
 			jdfToXJDF.walkTree(rl, jdfToXJDF.newRoot);
 			tcp.deleteNode();
