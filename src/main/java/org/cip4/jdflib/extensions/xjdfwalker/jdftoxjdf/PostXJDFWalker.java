@@ -235,7 +235,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 */
 		void updateAttributes(final KElement xjdf)
 		{
-			//NOP
+			// NOP
 		}
 
 		/**
@@ -331,8 +331,8 @@ class PostXJDFWalker extends BaseElementWalker
 			part.removeAttribute(AttributeName.PAGETAGS);
 			part.removeAttribute(AttributeName.PLATELAYOUT);
 			part.removeAttribute(AttributeName.PREFLIGHTRULE);
-			part.removeAttribute(AttributeName.RUNPAGE);
-			part.removeAttribute(AttributeName.RUNPAGERANGE);
+			part.renameAttribute(AttributeName.RUNPAGE, AttributeName.PAGENUMBER);
+			part.renameAttribute(AttributeName.RUNPAGERANGE, AttributeName.PAGENUMBER);
 			part.removeAttribute(AttributeName.RUNSET);
 			part.removeAttribute(AttributeName.RUNTAGS);
 			part.removeAttribute(AttributeName.SECTIONINDEX);
@@ -849,7 +849,7 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				layoutMap.remove(AttributeName.SIGNATURENAME);
 			}
-			boolean cloneBS = layoutMap != null && layoutMap.containsKey(AttributeName.BINDERYSIGNATURENAME);
+			final boolean cloneBS = layoutMap != null && layoutMap.containsKey(AttributeName.BINDERYSIGNATURENAME);
 			final String bsName = getBSName(strippingParams, layoutMap);
 			final String bsID = getBSID(strippingParams, bsName);
 			final JDFAttributeMap bsMap = new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsID);
@@ -860,7 +860,7 @@ class PostXJDFWalker extends BaseElementWalker
 
 			final VElement childElementVector = updateCells(strippingParams, cellIndex);
 
-			ResourceHelper bsHelper = getBSHelper(cloneBS, bsID, bsMap);
+			final ResourceHelper bsHelper = getBSHelper(cloneBS, bsID, bsMap);
 
 			final JDFBinderySignature bs = (JDFBinderySignature) bsHelper.getCreateResource();
 			moveStripCells(bs, childElementVector);
@@ -944,7 +944,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param bsName
 		 * @return
 		 */
-		private String getBSID(JDFStrippingParams strippingParams, String bsName)
+		private String getBSID(final JDFStrippingParams strippingParams, final String bsName)
 		{
 			final String bsID = strippingParams.getNonEmpty(XJDFConstants.BinderySignatureID);
 			return bsID == null ? bsName : bsID;
@@ -2608,8 +2608,7 @@ class PostXJDFWalker extends BaseElementWalker
 		public boolean matches(final KElement e)
 		{
 			final String localName = e.getLocalName();
-			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE)
-					|| localName.startsWith(ElementName.COMMAND);
+			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE) || localName.startsWith(ElementName.COMMAND);
 		}
 
 	}
@@ -2695,7 +2694,7 @@ class PostXJDFWalker extends BaseElementWalker
 	@Override
 	public String toString()
 	{
-		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll
-				+ ", removeSignatureName=" + removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
+		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll + ", removeSignatureName="
+				+ removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
 	}
 }
