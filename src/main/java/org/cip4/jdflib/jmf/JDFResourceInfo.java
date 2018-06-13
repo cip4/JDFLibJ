@@ -393,23 +393,32 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 		setProcessUsage(StringUtil.getNonEmpty(resourceLink.getProcessUsage()));
 		setUsage(resourceLink.getUsage());
 		setResourceName(resourceLink.getLinkedResourceName());
-		setResourceID(resourceLink.getrRef());
 		copyAttribute(AttributeName.ORIENTATION, resourceLink);
 
 		final JDFResource r = resourceLink.getTarget();
 		if (r != null)
 		{
-			copyAttribute(AttributeName.PRODUCTID, r);
-			copyAttribute(AttributeName.DESCRIPTIVENAME, r);
-			setResStatus(r.getResStatus(false));
-			if (copyResource)
-			{
-				// create a copy of the resource in the original jdf
-				final JDFResource rr = (JDFResource) r.getParentNode_KElement().copyElement(r, null);
-				rr.inlineRefElements(null, null, true);
-				// move resource copy from the original node into this document
-				moveElement(rr, null);
-			}
+			setLinkResource(copyResource, r);
+		}
+	}
+
+	/**
+	 *
+	 * @param copyResource
+	 * @param r
+	 */
+	void setLinkResource(final boolean copyResource, final JDFResource r)
+	{
+		copyAttribute(AttributeName.PRODUCTID, r);
+		copyAttribute(AttributeName.DESCRIPTIVENAME, r);
+		setResStatus(r.getResStatus(false));
+		if (copyResource)
+		{
+			// create a copy of the resource in the original jdf
+			final JDFResource rr = (JDFResource) r.getResourceRoot().getParentNode_KElement().copyElement(r, null);
+			rr.inlineRefElements(null, null, true);
+			// move resource copy from the original node into this document
+			moveElement(rr, null);
 		}
 	}
 
