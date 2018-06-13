@@ -1355,7 +1355,7 @@ public class StringUtil
 	 */
 	public static boolean isBoolean(final String strWork)
 	{
-		return "true".equals(strWork) || "false".equals(strWork);
+		return parseBoolean(strWork, true) == parseBoolean(strWork, false);
 	}
 
 	/**

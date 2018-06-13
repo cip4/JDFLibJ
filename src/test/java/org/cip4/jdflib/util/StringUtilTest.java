@@ -1304,8 +1304,6 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(0, StringUtil.compareTo(2 + 0.5 * JDFBaseDataTypes.EPSILON, 2));
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -1324,7 +1322,16 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertFalse(StringUtil.isNMTOKEN("abc "));
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 *
+	 */
+	@Test
+	public void testIsBoolean()
+	{
+		assertTrue(StringUtil.isBoolean("1 "));
+		assertFalse(StringUtil.isBoolean("abc "));
+	}
+
 	/**
 	 *
 	 */

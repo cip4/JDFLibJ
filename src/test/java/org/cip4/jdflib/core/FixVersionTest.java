@@ -74,6 +74,7 @@ import org.cip4.jdflib.resource.process.JDFApprovalDetails;
 import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFAssemblySection;
+import org.cip4.jdflib.resource.process.JDFBendingParams;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContentMetaData;
@@ -896,6 +897,32 @@ public class FixVersionTest extends JDFTestCaseBase
 		rl.setAttribute(AttributeName.AMOUNT, "333.0");
 		n.fixVersion(null);
 		assertEquals(rl.getAttribute(AttributeName.AMOUNT), "333");
+	}
+
+	/**
+	 * tests updating multiple versions at once
+	 */
+	@Test
+	public void testBoolean()
+	{
+		n.setVersion(EnumVersion.Version_1_4);
+		final JDFBendingParams c = (JDFBendingParams) n.addResource(ElementName.BENDINGPARAMS, EnumUsage.Input);
+		c.setAttribute(AttributeName.BEND, "1");
+		n.fixVersion(null);
+		assertEquals("true", c.getAttribute(AttributeName.BEND));
+	}
+
+	/**
+	 * tests updating multiple versions at once
+	 */
+	@Test
+	public void testBoolean0()
+	{
+		n.setVersion(EnumVersion.Version_1_4);
+		final JDFBendingParams c = (JDFBendingParams) n.addResource(ElementName.BENDINGPARAMS, EnumUsage.Input);
+		c.setAttribute(AttributeName.BEND, "0");
+		n.fixVersion(null);
+		assertEquals("false", c.getAttribute(AttributeName.BEND));
 	}
 
 	/**

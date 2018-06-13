@@ -82,4 +82,22 @@ public class AttributeInfoTest
 		assertTrue(AttributeInfo.validStringForType("a", EnumAttributeType.NMTOKENS, null));
 	}
 
+	/**
+	 *
+	 */
+	@Test
+	public void testvalidStringForTypeBool()
+	{
+		assertFalse(AttributeInfo.validStringForType("2", EnumAttributeType.boolean_, null));
+		assertFalse(AttributeInfo.validStringForType("", EnumAttributeType.boolean_, null));
+		assertFalse(AttributeInfo.validStringForType("a\nb", EnumAttributeType.boolean_, null));
+		assertFalse(AttributeInfo.validStringForType("true true", EnumAttributeType.boolean_, null));
+		assertTrue(AttributeInfo.validStringForType("true", EnumAttributeType.boolean_, null));
+		assertTrue(AttributeInfo.validStringForType("TRUE", EnumAttributeType.boolean_, null));
+		assertTrue(AttributeInfo.validStringForType(" TRUE", EnumAttributeType.boolean_, null));
+		assertTrue(AttributeInfo.validStringForType("false", EnumAttributeType.boolean_, null));
+		assertTrue(AttributeInfo.validStringForType("0", EnumAttributeType.boolean_, null));
+		assertTrue(AttributeInfo.validStringForType("1", EnumAttributeType.boolean_, null));
+	}
+
 }

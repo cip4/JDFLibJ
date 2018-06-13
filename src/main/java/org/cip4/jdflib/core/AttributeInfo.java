@@ -832,7 +832,7 @@ public class AttributeInfo
 			}
 			if (iType == AttributeInfo.EnumAttributeType.string)
 			{
-				return val.length() < 1024;
+				return true;
 			}
 			if (iType == AttributeInfo.EnumAttributeType.shortString)
 			{

@@ -168,6 +168,10 @@ public class WalkElement extends BaseWalker
 		{
 			fixDuration(el, key, value);
 		}
+		else if (EnumAttributeType.boolean_.equals(attType))
+		{
+			fixBoolean(el, key, value);
+		}
 		else if (EnumAttributeType.integer.equals(attType))
 		{
 			final int i = StringUtil.parseInt(value, Integer.MIN_VALUE + 42);
@@ -227,6 +231,16 @@ public class WalkElement extends BaseWalker
 				el.removeAttribute_KElement(key, null);
 			}
 		}
+	}
+
+	private void fixBoolean(final JDFElement el, final String key, final String value)
+	{
+		if (!"false".equals(value) && !"true".equals(value) && StringUtil.isBoolean(value))
+		{
+			final boolean newVal = StringUtil.parseBoolean(value, true);
+			el.setAttribute(key, "" + newVal);
+		}
+
 	}
 
 	/**
