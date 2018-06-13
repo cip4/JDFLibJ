@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  * 04022005 VF initial version
@@ -108,8 +76,7 @@ import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
 /**
- * The maintainer of version-specific attribute information: - attribute type (for current version only) - validity per
- * version
+ * The maintainer of version-specific attribute information: - attribute type (for current version only) - validity per version
  */
 public class AttributeInfo
 {
@@ -117,17 +84,17 @@ public class AttributeInfo
 	/**
 	 *
 	 */
-	public static final HashMap<String, AttributeInfo> fixedMap = new HashMap<String, AttributeInfo>();
+	public static final HashMap<String, AttributeInfo> fixedMap = new HashMap<>();
 
-	HashMap<String, AtrInfo> attribInfoTable = new HashMap<String, AtrInfo>();
+	HashMap<String, AtrInfo> attribInfoTable = new HashMap<>();
 	private EnumVersion version = null;
 
 	/**
 	 * Constructor
 	 *
-		 * @param attrInfo_own : table with element-specific attribute info
+	 * @param attrInfo_own : table with element-specific attribute info
 	 */
-	protected AttributeInfo(AtrInfoTable[] attrInfo_own)
+	protected AttributeInfo(final AtrInfoTable[] attrInfo_own)
 	{
 		// fill table with the attributes specific to this element type (if any)
 		updateReplace(attrInfo_own);
@@ -137,18 +104,17 @@ public class AttributeInfo
 	/**
 	 * Constructor
 	 *
-	 * @param attrInfo_super corresponding attrib info of super; if null: start from scratch, otherwise
-	 *            initialize from other AttributeInfo
+	 * @param attrInfo_super corresponding attrib info of super; if null: start from scratch, otherwise initialize from other AttributeInfo
 	 * @param attrInfo_own table with element-specific attribute info
 	 * @deprecated
 	 */
 	@Deprecated
-	public AttributeInfo(AttributeInfo attrInfo_super, AtrInfoTable[] attrInfo_own)
+	public AttributeInfo(final AttributeInfo attrInfo_super, final AtrInfoTable[] attrInfo_own)
 	{
 		// use AttributeInfo of super as a starting point
 		if (attrInfo_super != null)
 		{
-			attribInfoTable = new HashMap<String, AtrInfo>(attrInfo_super.attribInfoTable);
+			attribInfoTable = new HashMap<>(attrInfo_super.attribInfoTable);
 			version = attrInfo_super.version;
 		}
 
@@ -164,7 +130,7 @@ public class AttributeInfo
 	 * @param attrInfo_update table with element-specific attribute info
 	 * @return
 	 */
-	public AttributeInfo updateAdd(AtrInfoTable attrInfo_update)
+	public AttributeInfo updateAdd(final AtrInfoTable attrInfo_update)
 	{
 		if (attrInfo_update != null)
 		{
@@ -179,11 +145,11 @@ public class AttributeInfo
 	 * @param attrInfo_update table with element-specific attribute info
 	 * @return
 	 */
-	public AttributeInfo updateAdd(AtrInfoTable[] attrInfo_update)
+	public AttributeInfo updateAdd(final AtrInfoTable[] attrInfo_update)
 	{
 		if (attrInfo_update != null)
 		{
-			for (AtrInfoTable element : attrInfo_update)
+			for (final AtrInfoTable element : attrInfo_update)
 			{
 				attribInfoTable.put(element.getAttributeName(), element.getAtrInfo());
 			}
@@ -197,7 +163,7 @@ public class AttributeInfo
 	 * @param attrInfo_update table with element-specific attribute info
 	 * @return
 	 */
-	public AttributeInfo updateRemove(AtrInfoTable attrInfo_update)
+	public AttributeInfo updateRemove(final AtrInfoTable attrInfo_update)
 	{
 		if (attrInfo_update != null)
 		{
@@ -215,11 +181,11 @@ public class AttributeInfo
 	 * @param attrInfo_update table with element-specific attribute info to remove from attribInfoTable
 	 * @return
 	 */
-	public AttributeInfo updateRemove(AtrInfoTable[] attrInfo_update)
+	public AttributeInfo updateRemove(final AtrInfoTable[] attrInfo_update)
 	{
 		if (attrInfo_update != null)
 		{
-			for (AtrInfoTable element : attrInfo_update)
+			for (final AtrInfoTable element : attrInfo_update)
 			{
 				if (attribInfoTable.containsKey(element.getAttributeName()))
 				{
@@ -234,7 +200,7 @@ public class AttributeInfo
 	 * @param attrInfo_update
 	 * @return
 	 */
-	public AttributeInfo updateReplace(AtrInfoTable attrInfo_update)
+	public AttributeInfo updateReplace(final AtrInfoTable attrInfo_update)
 	{
 		if (attrInfo_update != null)
 		{
@@ -247,7 +213,7 @@ public class AttributeInfo
 	 * @param attrInfo_update
 	 * @return
 	 */
-	public AttributeInfo updateReplace(AtrInfoTable[] attrInfo_update)
+	public AttributeInfo updateReplace(final AtrInfoTable[] attrInfo_update)
 	{
 		if (attrInfo_update != null)
 		{
@@ -265,18 +231,18 @@ public class AttributeInfo
 	 * @param attrValidity requested validity
 	 * @return VString: list of strings containing the names of the matching attributes
 	 */
-	public VString conformingAttribs(EnumAttributeValidity attrValidity)
+	public VString conformingAttribs(final EnumAttributeValidity attrValidity)
 	{
-		VString matchingAttribs = new VString();
-		long l2 = JDFVersions.getTheMask(version);
-		long v2 = JDFVersions.getTheOffset(version);
+		final VString matchingAttribs = new VString();
+		final long l2 = JDFVersions.getTheMask(version);
+		final long v2 = JDFVersions.getTheOffset(version);
 
-		Iterator<String> iter = attribInfoTable.keySet().iterator();
-		boolean bOK = attrValidity == null;
+		final Iterator<String> iter = attribInfoTable.keySet().iterator();
+		final boolean bOK = attrValidity == null;
 		while (iter.hasNext())
 		{
-			String theKey = iter.next();
-			AtrInfo ai = attribInfoTable.get(theKey);
+			final String theKey = iter.next();
+			final AtrInfo ai = attribInfoTable.get(theKey);
 			if (bOK)
 			{
 				matchingAttribs.add(theKey);
@@ -286,12 +252,12 @@ public class AttributeInfo
 				if (attrValidity != null)
 				{
 					// grab values from tables
-					long l1 = ai.getAtrValidityStatus();
-					long l3 = l1 & l2;
+					final long l1 = ai.getAtrValidityStatus();
+					final long l3 = l1 & l2;
 
 					// calculate correct mask from attrValidity and version
-					long v1 = attrValidity.getValue();
-					long v3 = v1 << v2;
+					final long v1 = attrValidity.getValue();
+					final long v3 = v1 << v2;
 
 					// tables and version coincide
 					if (l3 == v3)
@@ -308,20 +274,19 @@ public class AttributeInfo
 	/**
 	 * Returns a map of attributes with defaults for the specified JDF version.
 	 *
-	 * @return JDFAttributeMap: map of strings containing the names and defaults of the matching attributes, null if no
-	 *         defaults exist
+	 * @return JDFAttributeMap: map of strings containing the names and defaults of the matching attributes, null if no defaults exist
 	 */
 	public JDFAttributeMap getDefaultAttributeMap()
 	{
-		JDFAttributeMap matchingAttribs = new JDFAttributeMap();
+		final JDFAttributeMap matchingAttribs = new JDFAttributeMap();
 
-		Iterator<String> iter = attribInfoTable.keySet().iterator();
+		final Iterator<String> iter = attribInfoTable.keySet().iterator();
 		while (iter.hasNext())
 		{
-			String theKey = iter.next();
-			AtrInfo ai = attribInfoTable.get(theKey);
-			long l2 = JDFVersions.getTheMask(version);
-			long v2 = JDFVersions.getTheOffset(version);
+			final String theKey = iter.next();
+			final AtrInfo ai = attribInfoTable.get(theKey);
+			final long l2 = JDFVersions.getTheMask(version);
+			final long v2 = JDFVersions.getTheOffset(version);
 			final EnumAttributeValidity versionVal = EnumAttributeValidity.getEnum((int) ((ai.getAtrValidityStatus() & l2) >> v2));
 			if (versionVal.equals(EnumAttributeValidity.Optional) || versionVal.equals(EnumAttributeValidity.Required))
 			{
@@ -338,18 +303,18 @@ public class AttributeInfo
 	/**
 	 * Returns true if there is at least one attribute matching the requested validity for the specified JDF version.
 	 *
-	 * @param  attrValidity requested validity
+	 * @param attrValidity requested validity
 	 * @return boolean: true if at least one attribute matches the requested validity
 	 */
-	public boolean hasConformingAttrib(EnumAttributeValidity attrValidity)
+	public boolean hasConformingAttrib(final EnumAttributeValidity attrValidity)
 	{
-		Set<String> set = attribInfoTable.keySet();
+		final Set<String> set = attribInfoTable.keySet();
 
-		long l2 = JDFVersions.getTheMask(version);
-		long v2 = JDFVersions.getTheOffset(version);
-		for (String s : set)
+		final long l2 = JDFVersions.getTheMask(version);
+		final long v2 = JDFVersions.getTheOffset(version);
+		for (final String s : set)
 		{
-			AtrInfo ai = attribInfoTable.get(s);
+			final AtrInfo ai = attribInfoTable.get(s);
 			if ((ai.getAtrValidityStatus() & l2) == ((long) attrValidity.getValue() << v2))
 			{
 				return true;
@@ -370,21 +335,21 @@ public class AttributeInfo
 	}
 
 	/**
-	 * Returns the list of optional attributes for the specified JDF version. Note: This includes attributes marked as
-	 * optional as well as attributes marked as deprecated (since, for backward compatibility, these are also optional).
+	 * Returns the list of optional attributes for the specified JDF version. Note: This includes attributes marked as optional as well as attributes marked as deprecated (since, for backward
+	 * compatibility, these are also optional).
 	 *
 	 * @return VString: list of strings containing the names of the optional attributes
 	 */
 	public VString optionalAttribs()
 	{
-		VString optionals = new VString(conformingAttribs(EnumAttributeValidity.Optional));
+		final VString optionals = new VString(conformingAttribs(EnumAttributeValidity.Optional));
 		optionals.appendUnique(conformingAttribs(EnumAttributeValidity.Deprecated));
-		Iterator<String> iter = attribInfoTable.keySet().iterator();
+		final Iterator<String> iter = attribInfoTable.keySet().iterator();
 		// anything with a default is at least optional
 		while (iter.hasNext())
 		{
-			String theKey = iter.next();
-			String defaultVal = getAttributeDefault(theKey);
+			final String theKey = iter.next();
+			final String defaultVal = getAttributeDefault(theKey);
 			if (defaultVal != null)
 				optionals.appendUnique(theKey);
 		}
@@ -413,8 +378,7 @@ public class AttributeInfo
 	}
 
 	/**
-	 * Returns the list of prerelease attributes (those that are only valid in a later version) for the specified JDF
-	 * version.
+	 * Returns the list of prerelease attributes (those that are only valid in a later version) for the specified JDF version.
 	 *
 	 * @return VString: list of strings containing the names of the prerelease attributes
 	 */
@@ -424,15 +388,14 @@ public class AttributeInfo
 	}
 
 	/**
-	 * Returns the type of the given attribute for the latest JDF version. Attribute types of previous versions have to
-	 * be provided by attribute-specific functions (if necessary).
+	 * Returns the type of the given attribute for the latest JDF version. Attribute types of previous versions have to be provided by attribute-specific functions (if necessary).
 	 *
 	 * @param attributeName name of the attribute
 	 * @return EnumAttributeType: the attribute's type
 	 */
-	public EnumAttributeType getAttributeType(String attributeName)
+	public EnumAttributeType getAttributeType(final String attributeName)
 	{
-		AtrInfo atrInfo = attribInfoTable.get(attributeName);
+		final AtrInfo atrInfo = attribInfoTable.get(attributeName);
 		if (atrInfo != null)
 		{
 			return atrInfo.getAtrType();
@@ -441,20 +404,19 @@ public class AttributeInfo
 	}
 
 	/**
-	 * Returns the validity of the given attribute for the latest JDF version. Attribute types of previous versions have
-	 * to be provided by attribute-specific functions (if necessary).
+	 * Returns the validity of the given attribute for the latest JDF version. Attribute types of previous versions have to be provided by attribute-specific functions (if necessary).
 	 *
-	 * @param  attributeName name of the attribute
+	 * @param attributeName name of the attribute
 	 * @return EnumAttributeType: the attribute's type
 	 */
-	public EnumAttributeValidity getAttributeValidity(String attributeName)
+	public EnumAttributeValidity getAttributeValidity(final String attributeName)
 	{
-		AtrInfo atrInfo = attribInfoTable.get(attributeName);
+		final AtrInfo atrInfo = attribInfoTable.get(attributeName);
 		if (atrInfo != null)
 		{
 			long l = atrInfo.getAtrValidityStatus();
-			long l2 = JDFVersions.getTheMask(version);
-			long v2 = JDFVersions.getTheOffset(version);
+			final long l2 = JDFVersions.getTheMask(version);
+			final long v2 = JDFVersions.getTheOffset(version);
 			l = (l & l2) >> v2;
 			return EnumAttributeValidity.getEnum((int) l);
 
@@ -468,9 +430,9 @@ public class AttributeInfo
 	 * @param attributeName : name of the attribute
 	 * @return EnumAttributeType: the attribute's type
 	 */
-	public ValuedEnum getAttributeEnum(String attributeName)
+	public ValuedEnum getAttributeEnum(final String attributeName)
 	{
-		AtrInfo atrInfo = attribInfoTable.get(attributeName);
+		final AtrInfo atrInfo = attribInfoTable.get(attributeName);
 		if (atrInfo != null)
 		{
 			return atrInfo.getEnumEnum();
@@ -484,9 +446,9 @@ public class AttributeInfo
 	 * @param attributeName : name of the attribute
 	 * @return EnumAttributeType: the attribute's type
 	 */
-	public String getAttributeDefault(String attributeName)
+	public String getAttributeDefault(final String attributeName)
 	{
-		AtrInfo atrInfo = attribInfoTable.get(attributeName);
+		final AtrInfo atrInfo = attribInfoTable.get(attributeName);
 		if (atrInfo != null)
 		{
 			return atrInfo.getAtrDefault();
@@ -495,8 +457,7 @@ public class AttributeInfo
 	}
 
 	/*
-	 * ----------------------------------------------------------------------- Enumeration of valid attribute types
-	 * -----------------------------------------------------------------------
+	 * ----------------------------------------------------------------------- Enumeration of valid attribute types -----------------------------------------------------------------------
 	 */
 
 	/**
@@ -511,7 +472,7 @@ public class AttributeInfo
 		/**
 		 * @param name
 		 */
-		private EnumAttributeType(String name)
+		private EnumAttributeType(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -520,9 +481,9 @@ public class AttributeInfo
 		 * @param enumName the name of the enum object to return
 		 * @return the enum object if enumName is valid. Otherwise null
 		 */
-		public static EnumAttributeType getEnum(String enumName)
+		public static EnumAttributeType getEnum(final String enumName)
 		{
-			EnumAttributeType eat = (EnumAttributeType) getEnum(EnumAttributeType.class, enumName);
+			final EnumAttributeType eat = (EnumAttributeType) getEnum(EnumAttributeType.class, enumName);
 			return (eat == null) ? EnumAttributeType.Any : eat;
 		}
 
@@ -530,7 +491,7 @@ public class AttributeInfo
 		 * @param enumValue the value of the enum object to return
 		 * @return the enum object if enumName is valid. Otherwise null
 		 */
-		public static EnumAttributeType getEnum(int enumValue)
+		public static EnumAttributeType getEnum(final int enumValue)
 		{
 			return (EnumAttributeType) getEnum(EnumAttributeType.class, enumValue);
 		}
@@ -563,11 +524,11 @@ public class AttributeInfo
 		 * @param test
 		 * @return true if test is a range data type
 		 */
-		public static boolean isRange(EnumAttributeType test)
+		public static boolean isRange(final EnumAttributeType test)
 		{
 			if (setRange == null)
 			{
-				HashSet<EnumAttributeType> setRangeLocal = new HashSet<EnumAttributeType>();
+				final HashSet<EnumAttributeType> setRangeLocal = new HashSet<>();
 				setRangeLocal.add(EnumAttributeType.DateTimeRange);
 				setRangeLocal.add(EnumAttributeType.DateTimeRangeList);
 				setRangeLocal.add(EnumAttributeType.DurationRange);
@@ -697,8 +658,7 @@ public class AttributeInfo
 	}
 
 	/*
-	 * ----------------------------------------------------------------------- Enumeration of attribute validity values
-	 * -----------------------------------------------------------------------
+	 * ----------------------------------------------------------------------- Enumeration of attribute validity values -----------------------------------------------------------------------
 	 */
 
 	/**
@@ -712,7 +672,7 @@ public class AttributeInfo
 		/**
 		 * @param name
 		 */
-		private EnumAttributeValidity(String name)
+		private EnumAttributeValidity(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -721,7 +681,7 @@ public class AttributeInfo
 		 * @param enumName the name of the enum object to return
 		 * @return the enum object if enumName is valid. Otherwise null
 		 */
-		public static EnumAttributeValidity getEnum(String enumName)
+		public static EnumAttributeValidity getEnum(final String enumName)
 		{
 			return (EnumAttributeValidity) getEnum(EnumAttributeValidity.class, enumName);
 		}
@@ -730,7 +690,7 @@ public class AttributeInfo
 		 * @param enumValue the value of the enum object to return
 		 * @return the enum object if enumName is valid. Otherwise null
 		 */
-		public static EnumAttributeValidity getEnum(int enumValue)
+		public static EnumAttributeValidity getEnum(final int enumValue)
 		{
 			return (EnumAttributeValidity) getEnum(EnumAttributeValidity.class, enumValue);
 		}
@@ -776,7 +736,7 @@ public class AttributeInfo
 	/**
 	 * @param v
 	 */
-	public void setVersion(EnumVersion v)
+	public void setVersion(final EnumVersion v)
 	{
 		version = v;
 	}
@@ -789,9 +749,9 @@ public class AttributeInfo
 	 * @deprecated 2005-08-26
 	 */
 	@Deprecated
-	public EnumAttributeType getAtrType(String attributeName)
+	public EnumAttributeType getAtrType(final String attributeName)
 	{
-		AtrInfo ai = attribInfoTable.get(attributeName);
+		final AtrInfo ai = attribInfoTable.get(attributeName);
 		if (ai == null)
 		{
 			return null;
@@ -805,9 +765,9 @@ public class AttributeInfo
 	 * @param level
 	 * @return
 	 */
-	public boolean validAttribute(String key, String attribute, EnumValidationLevel level)
+	public boolean validAttribute(final String key, final String attribute, final EnumValidationLevel level)
 	{
-		EnumAttributeType typ = getAttributeType(key);
+		final EnumAttributeType typ = getAttributeType(key);
 		if (typ == null) // unknown attributes are by definition valid, the check is done in the unknown method
 			return true;
 
@@ -822,7 +782,7 @@ public class AttributeInfo
 			enu = EnumVersion.getEnum(0);
 		}
 
-		EnumAttributeValidity val = getAttributeValidity(key);
+		final EnumAttributeValidity val = getAttributeValidity(key);
 		if (val == EnumAttributeValidity.Unknown)
 		{
 			return (attribute == null);
@@ -849,9 +809,6 @@ public class AttributeInfo
 		return true;
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /////////////
-
 	/**
 	 * @param val
 	 * @param iType
@@ -859,9 +816,9 @@ public class AttributeInfo
 	 * @return
 	 *
 	 */
-	public static boolean validStringForType(String val, EnumAttributeType iType, ValuedEnum enu)
+	public static boolean validStringForType(final String val, final EnumAttributeType iType, final ValuedEnum enu)
 	{
-		if (val == null)
+		if (val == null || val.isEmpty())
 			return false;
 
 		if (iType == null)
@@ -932,7 +889,7 @@ public class AttributeInfo
 			{
 				if (enu != null)
 				{
-					ValuedEnum ve = (ValuedEnum) EnumUtils.getEnum(enu.getClass(), val);
+					final ValuedEnum ve = (ValuedEnum) EnumUtils.getEnum(enu.getClass(), val);
 					return ve != null;
 				}
 				// limp along if something went wrong
@@ -942,10 +899,10 @@ public class AttributeInfo
 			{
 				if (enu != null)
 				{
-					VString vs = StringUtil.tokenize(val, JDFConstants.BLANK, false);
+					final VString vs = StringUtil.tokenize(val, JDFConstants.BLANK, false);
 					for (int i = 0; i < vs.size(); i++)
 					{
-						ValuedEnum ve = (ValuedEnum) EnumUtils.getEnum(enu.getClass(), vs.get(i));
+						final ValuedEnum ve = (ValuedEnum) EnumUtils.getEnum(enu.getClass(), vs.get(i));
 						// there was an invalid token
 						if (ve == null)
 							return false;
@@ -1067,7 +1024,7 @@ public class AttributeInfo
 			}
 			else if (iType == AttributeInfo.EnumAttributeType.languages)
 			{
-				VString v = StringUtil.tokenize(val, JDFConstants.BLANK, false);
+				final VString v = StringUtil.tokenize(val, JDFConstants.BLANK, false);
 				for (int i = 0; i < v.size(); i++)
 				{
 					if (!validLanguageString(v.elementAt(i)))
@@ -1091,7 +1048,7 @@ public class AttributeInfo
 			}
 			else if (iType == AttributeInfo.EnumAttributeType.TransferFunction)
 			{
-				JDFNumberList nl = new JDFNumberList(val);
+				final JDFNumberList nl = new JDFNumberList(val);
 				return nl.size() % 2 == 0;
 			}
 			else
@@ -1099,17 +1056,17 @@ public class AttributeInfo
 				return false;
 			}
 		}
-		catch (DataFormatException excep)
+		catch (final DataFormatException excep)
 		{
 			return false;
 		}
 	}
 
-	private static boolean validLanguageString(String val)
+	private static boolean validLanguageString(final String val)
 	{
 		// TODO better regexp
-		int l = val.length();
-		int posDash = val.indexOf("-");
+		final int l = val.length();
+		final int posDash = val.indexOf("-");
 		return l >= 2 && l <= 3 || l > 4 && (posDash >= 2 && posDash < 4);
 		// 2=en , de , ...
 	}
@@ -1117,7 +1074,7 @@ public class AttributeInfo
 	/**
 	 * @see java.lang.Object#toString()
 	 * @return
-	*/
+	 */
 	@Override
 	public String toString()
 	{
@@ -1132,7 +1089,7 @@ public class AttributeInfo
 	 * @param attributeName the name of the queried attribute
 	 * @return
 	 */
-	public EnumVersion getFirstVersion(String attributeName)
+	public EnumVersion getFirstVersion(final String attributeName)
 	{
 		if (attribInfoTable.containsKey(attributeName))
 		{
@@ -1147,7 +1104,7 @@ public class AttributeInfo
 	 * @param attributeName the name of the queried attribute
 	 * @return
 	 */
-	public EnumVersion getLastVersion(String attributeName)
+	public EnumVersion getLastVersion(final String attributeName)
 	{
 		if (attribInfoTable.containsKey(attributeName))
 		{
