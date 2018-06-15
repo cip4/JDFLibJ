@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,8 +89,8 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * This abstract class is the representation of a number list (Integer and Double object). Intern these objects are collected in a vector and there are several
- * methods to provide an access to the data.
+ * This abstract class is the representation of a number list (Integer and Double object). Intern these objects are collected in a vector and there are several methods to provide an access to the
+ * data.
  */
 public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTypes, Cloneable
 {
@@ -181,8 +181,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	}
 
 	/**
-	 * constructor - constructs a number list with the given String; if the sub class is of type JDFIntegerList all object will be Integer in all other cases
-	 * the object will be a Double
+	 * constructor - constructs a number list with the given String; if the sub class is of type JDFIntegerList all object will be Integer in all other cases the object will be a Double
 	 *
 	 * @param sl the given String
 	 *
@@ -208,6 +207,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	/**
 	 *
 	 * sets this to the value specified in string
+	 *
 	 * @param string
 	 * @throws DataFormatException
 	 */
@@ -280,6 +280,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	/**
 	 *
 	 * get the list of values as doubles
+	 *
 	 * @return
 	 */
 	public double[] getDoubleList()
@@ -328,6 +329,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * getString - returns the JDFNumList as a String
+	 *
 	 * @param precision # of digits to print
 	 * @return String - the JDFNumList as a String
 	 */
@@ -449,6 +451,26 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	}
 
 	/**
+	 * getElementAt - returns the element at the ith position
+	 *
+	 * @param i the index
+	 * @return double - the double value given position, 0.0 if out of range
+	 */
+	public int intAt(final int i)
+	{
+		final Object o = elementAt(i);
+		if (o instanceof Integer)
+		{
+			return ((Integer) o).intValue();
+		}
+		if (o instanceof Double)
+		{
+			return ((Double) o).intValue();
+		}
+		return 0;
+	}
+
+	/**
 	 * copyNumList - returns a clone of the numList vector
 	 *
 	 * @return Vector - the clone of the numList vector
@@ -511,6 +533,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * isValidString - true if all instances are Double or Integer types
+	 *
 	 * @param st the string to check
 	 *
 	 * @return boolean - true if all instances are Double or Integer types
@@ -536,6 +559,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * scale all values of this to points from millimeters
+	 *
 	 * @return
 	 *
 	 */
@@ -546,6 +570,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * scale all values of this to points from millimeters
+	 *
 	 * @return
 	 *
 	 */
@@ -556,6 +581,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * scale all values of this to points from centimeters
+	 *
 	 * @return
 	 *
 	 */
@@ -566,6 +592,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * scale all values of this to points from centimeters
+	 *
 	 * @return
 	 *
 	 */
@@ -576,6 +603,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * scale all values of this to points from millimeters
+	 *
 	 * @return
 	 *
 	 */
@@ -586,6 +614,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * scale all values of this to points from millimeters
+	 *
 	 * @return
 	 *
 	 */
@@ -596,6 +625,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * scale all values of this to points from centimeters
+	 *
 	 * @return
 	 *
 	 */
@@ -606,6 +636,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * scale all values of this to points from centimeters
+	 *
 	 * @return
 	 *
 	 */
@@ -651,6 +682,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * modify numlist to absolute values
+	 *
 	 * @see Math#abs
 	 * @return
 	 */
@@ -677,6 +709,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * are all values within +/- delta?
+	 *
 	 * @param other
 	 * @param delta
 	 * @see Math#abs
@@ -702,6 +735,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 	/**
 	 * subtract l from this,
+	 *
 	 * @param l the list to subtract from this
 	 * @throws IllegalArgumentException if sizes don't match
 	 */
@@ -726,7 +760,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 */
 	public void unify()
 	{
-		final Set<Object> set = new HashSet<Object>();
+		final Set<Object> set = new HashSet<>();
 		int j = 0;
 		for (int i = 0; i < size(); i++)
 		{
@@ -754,10 +788,20 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 
 		for (int i = 0; i < size; i++)
 		{
-			intArray[i] = ((Double) elementAt(i)).intValue();
+			intArray[i] = intAt(i);
 		}
 
 		return intArray;
+	}
+
+	/**
+	 *
+	 * @param i
+	 * @return the Double object
+	 */
+	public Double getDouble(final int i)
+	{
+		return (Double) elementAt(i);
 	}
 
 	public void sort()

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,17 +84,18 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.core.JDFConstants;
 
 /**
- * This class is a representation of a whitespace separated list of numbers representing a set of XY coordinates of a transfer function. The total number of x y
- * values must be even because of the pairs.
+ * This class is a representation of a whitespace separated list of numbers representing a set of XY coordinates of a transfer function. The total number of x y values must be even because of the
+ * pairs.
  */
 public class JDFTransferFunction extends JDFNumList
 {
 	/**
 	 * factory for JDFTransferFunction that silently returns null in case of illegal strings
+	 *
 	 * @param s the string to parse
 	 * @return the JDFTransferFunction, null if s is not compatible
 	 */
-	public static JDFTransferFunction createTransferFunction(String s)
+	public static JDFTransferFunction createTransferFunction(final String s)
 	{
 		if (s != null && s.length() > 0)
 		{
@@ -102,7 +103,7 @@ public class JDFTransferFunction extends JDFNumList
 			{
 				return new JDFTransferFunction(s);
 			}
-			catch (DataFormatException x)
+			catch (final DataFormatException x)
 			{
 				return null;
 			}
@@ -114,27 +115,24 @@ public class JDFTransferFunction extends JDFNumList
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
-	// **************************************** Constructors
-	// ****************************************
 	/**
 	 * constructs a xy pair with all values set to 0.0 Double
-	 * 
-	 * @throws DataFormatException - if the String has not a valid format
+	 *
 	 */
-	public JDFTransferFunction() throws DataFormatException
+	public JDFTransferFunction()
 	{
-		super(JDFConstants.EMPTYSTRING);
+		super();
 	}
 
 	/**
 	 * constructs a number list with the given string the number of tokens must be even
-	 * 
+	 *
 	 * @param s the given String in number list format
-	 * 
+	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFTransferFunction(final String s) throws DataFormatException
@@ -144,9 +142,9 @@ public class JDFTransferFunction extends JDFNumList
 
 	/**
 	 * constructs a number list with the given vector the number of elements must be even
-	 * 
+	 *
 	 * @param v the number list as a vector
-	 * 
+	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 * @deprecated use typesafe constructors
 	 */
@@ -158,9 +156,9 @@ public class JDFTransferFunction extends JDFNumList
 
 	/**
 	 * constructs a number list with the given number list
-	 * 
+	 *
 	 * @param nl the given number list
-	 * 
+	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFTransferFunction(final JDFNumList nl) throws DataFormatException
@@ -171,9 +169,9 @@ public class JDFTransferFunction extends JDFNumList
 	/**
 	 * copy constructor<br>
 	 * constructs a number list with the given transfer function
-	 * 
+	 *
 	 * @param tf the given number list
-	 * 
+	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFTransferFunction(final JDFTransferFunction tf)
@@ -186,7 +184,7 @@ public class JDFTransferFunction extends JDFNumList
 	// *********************************************
 	/**
 	 * isValid - true if the size of the vector is even and all instances are Double types
-	 * 
+	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
 	@Override
@@ -197,7 +195,7 @@ public class JDFTransferFunction extends JDFNumList
 			throw new DataFormatException("Data format exception!");
 		}
 
-		for (Object o : this)
+		for (final Object o : this)
 		{
 			if (!(o instanceof Double))
 			{
@@ -209,7 +207,7 @@ public class JDFTransferFunction extends JDFNumList
 
 	/**
 	 * add - adds a xy coordinate to the vector
-	 * 
+	 *
 	 * @param xy the xy coordinate to add
 	 */
 	public void add(final JDFXYPair xy)
@@ -220,7 +218,7 @@ public class JDFTransferFunction extends JDFNumList
 
 	/**
 	 * add - adds a x and a y coordinate to the vector
-	 * 
+	 *
 	 * @param x the x coordinate to add
 	 * @param y the y coordinate to add
 	 */
@@ -232,7 +230,7 @@ public class JDFTransferFunction extends JDFNumList
 
 	/**
 	 * add - adds a x and a y coordinate to the vector
-	 * 
+	 *
 	 * @param x the x coordinate to add
 	 * @param y the y coordinate to add
 	 */
@@ -243,10 +241,54 @@ public class JDFTransferFunction extends JDFNumList
 	}
 
 	/**
+	 * sets a vector of y coordinates with a common distance between points
+	 *
+	 * @param x0
+	 * @param dx
+	 * @param v
+	 */
+	public void set(final double x0, final double dx, final Vector<Double> v)
+	{
+		clear();
+		if (v != null)
+		{
+			double x = x0;
+			for (final Double d : v)
+			{
+				add(x);
+				add(d);
+				x += dx;
+			}
+		}
+	}
+
+	/**
+	 * get the x value at index note that each index consumes 2 elements (the x and y value)
+	 *
+	 * @param index
+	 * @return
+	 */
+	public double getX(final int index)
+	{
+		return doubleAt(2 * index);
+	}
+
+	/**
+	 * get the Y value at index i
+	 *
+	 * @param index
+	 * @return
+	 */
+	public double getY(final int index)
+	{
+		return doubleAt(2 * index + 1);
+	}
+
+	/**
 	 * add - adds a x and a y coordinate to the vector
-	 * 
+	 *
 	 * @param s a string with the x and y coordinate to add
-	 * 
+	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public void add(final String s) throws DataFormatException
@@ -275,7 +317,7 @@ public class JDFTransferFunction extends JDFNumList
 
 	/**
 	 * add - adds a complete transfer function to the vector
-	 * 
+	 *
 	 * @param tf the given transfer function to add
 	 */
 	public void add(final JDFTransferFunction tf)

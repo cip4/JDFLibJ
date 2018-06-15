@@ -36,11 +36,15 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFTransferFunction;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.MessageResourceHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
@@ -63,6 +67,9 @@ import org.junit.Test;
  */
 public class XJMFQCExampleTest extends JDFTestCaseBase
 {
+
+	public static final String PATCH = "Patch";
+	public static final String COLOR_MEASUREMENT = "ColorMeasurement";
 
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
@@ -103,7 +110,7 @@ public class XJMFQCExampleTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public final void testQualityControlSignal()
+	public final void testQualityControlSignalCxF()
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		final XJMFHelper xjmfHelper = new XJMFHelper();
@@ -120,6 +127,44 @@ public class XJMFQCExampleTest extends JDFTestCaseBase
 		qcr.setFailed(3);
 		setSnippet(xjmfHelper, true);
 		writeRoundTripX(xjmfHelper.getRoot(), "QualityControlSignalCxF", EnumValidationLevel.Complete);
+
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public final void testQualityControlSignalRaw()
+	{
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Resource);
+		s.getHeader().setID("S1");
+		s.getHeader().setAttribute(AttributeName.REFID, "QC1");
+		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(17, 0, 0).getDateTimeISO());
+		final MessageResourceHelper mr = new MessageResourceHelper(s.getRoot());
+		final SetHelper qqp = mr.appendSet(ElementName.QUALITYCONTROLRESULT);
+		final ResourceHelper qpr = qqp.appendPartition(null, true);
+		final JDFQualityControlResult qcr = (JDFQualityControlResult) qpr.getResource();
+		final KElement cm = qcr.appendElement(COLOR_MEASUREMENT);
+		cm.appendElement(ElementName.COLORMEASUREMENTCONDITIONS);
+		final KElement ccs = cm.appendElement(ElementName.COLORCONTROLSTRIP);
+		for (int i = 0; i < 2; i++)
+		{
+			final KElement patch = ccs.appendElement(PATCH);
+			final JDFTransferFunction tf = new JDFTransferFunction();
+			final Vector<Double> v = new Vector<>();
+			for (int j = 1; j < 40; j++)
+				v.add(Double.valueOf(60.345 * (i + 1) * j % 567));
+			tf.set(380, 5, v);
+			patch.setAttribute("Spectrum", tf.getString(2));
+			patch.setAttribute(AttributeName.POSITION, new JDFXYPair(10, 10 + i * 30).getString(1));
+
+		}
+		setSnippet(xjmfHelper, true);
+		xjmfHelper.writeToFile(sm_dirTestDataTemp + "QualityControlSignalRaw.xjmf");
+		// writeRoundTripX(xjmfHelper.getRoot(), "QualityControlSignalRaw", EnumValidationLevel.Complete);
 
 	}
 
