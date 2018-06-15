@@ -414,8 +414,9 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 		setResStatus(r.getResStatus(false));
 		if (copyResource)
 		{
-			// create a copy of the resource in the original jdf
-			final JDFResource rr = (JDFResource) r.getResourceRoot().getParentNode_KElement().copyElement(r, null);
+			// create a copy of the resource root in the original jdf
+			final JDFResource resourceRoot = r.getResourceRoot();
+			final JDFResource rr = (JDFResource) resourceRoot.getParentNode_KElement().copyElement(resourceRoot, null);
 			rr.inlineRefElements(null, null, true);
 			// move resource copy from the original node into this document
 			moveElement(rr, null);

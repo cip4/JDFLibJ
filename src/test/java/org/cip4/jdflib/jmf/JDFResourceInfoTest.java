@@ -199,6 +199,7 @@ public class JDFResourceInfoTest extends JDFTestCaseBase
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "S1");
 		final JDFResourceLink rl = n.getLink(m, null);
+		rl.setPartMap(m.getPartMap());
 		final JDFJMF jmfSignal = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		final JDFResourceInfo ri = JDFResourceInfo.createResourceInfo(jmfSignal.getSignal(0), rl, true);
 		assertEquals(new VString("SignatureName SheetName", null), ri.getResource(ElementName.MEDIA).getPartIDKeys());
