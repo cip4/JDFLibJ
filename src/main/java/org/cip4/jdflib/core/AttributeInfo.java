@@ -84,7 +84,7 @@ public class AttributeInfo
 	/**
 	 *
 	 */
-	public static final HashMap<String, AttributeInfo> fixedMap = new HashMap<>();
+	protected static final Map<String, AttributeInfo> fixedMap = new HashMap<>();
 
 	HashMap<String, AtrInfo> attribInfoTable = new HashMap<>();
 	private EnumVersion version = null;
@@ -165,13 +165,11 @@ public class AttributeInfo
 	 */
 	public AttributeInfo updateRemove(final AtrInfoTable attrInfo_update)
 	{
-		if (attrInfo_update != null)
+		if (attrInfo_update != null && attribInfoTable.containsKey(attrInfo_update.getAttributeName()))
 		{
-			if (attribInfoTable.containsKey(attrInfo_update.getAttributeName()))
-			{
-				attribInfoTable.remove(attrInfo_update.getAttributeName());
-			}
+			attribInfoTable.remove(attrInfo_update.getAttributeName());
 		}
+
 		return this;
 	}
 
@@ -249,21 +247,18 @@ public class AttributeInfo
 			}
 			else
 			{
-				if (attrValidity != null)
+				// grab values from tables
+				final long l1 = ai.getAtrValidityStatus();
+				final long l3 = l1 & l2;
+
+				// calculate correct mask from attrValidity and version
+				final long v1 = attrValidity.getValue();
+				final long v3 = v1 << v2;
+
+				// tables and version coincide
+				if (l3 == v3)
 				{
-					// grab values from tables
-					final long l1 = ai.getAtrValidityStatus();
-					final long l3 = l1 & l2;
-
-					// calculate correct mask from attrValidity and version
-					final long v1 = attrValidity.getValue();
-					final long v3 = v1 << v2;
-
-					// tables and version coincide
-					if (l3 == v3)
-					{
-						matchingAttribs.add(theKey);
-					}
+					matchingAttribs.add(theKey);
 				}
 			}
 		}
@@ -826,57 +821,48 @@ public class AttributeInfo
 
 		try
 		{
-			if (iType == AttributeInfo.EnumAttributeType.Any)
+			if (iType == AttributeInfo.EnumAttributeType.Any || iType == AttributeInfo.EnumAttributeType.string)
 			{
 				return true;
 			}
-			if (iType == AttributeInfo.EnumAttributeType.string)
-			{
-				return true;
-			}
-			if (iType == AttributeInfo.EnumAttributeType.shortString)
+			else if (iType == AttributeInfo.EnumAttributeType.shortString)
 			{
 				return val.length() < 64;
 			}
-			if (iType == AttributeInfo.EnumAttributeType.ID)
+			else if (iType == AttributeInfo.EnumAttributeType.ID || iType == AttributeInfo.EnumAttributeType.IDREF)
 			{
 				return StringUtil.isID(val);
 			}
-			if (iType == AttributeInfo.EnumAttributeType.NMTOKEN)
+			else if (iType == AttributeInfo.EnumAttributeType.NMTOKEN)
 			{
 				return StringUtil.isNMTOKEN(val);
 			}
-			if (iType == AttributeInfo.EnumAttributeType.NMTOKENS)
+			else if (iType == AttributeInfo.EnumAttributeType.NMTOKENS)
 			{
 				return StringUtil.isNMTOKENS(val, false);
 			}
-			if (iType == AttributeInfo.EnumAttributeType.IDREF)
-			{
-				return StringUtil.isID(val);
-			}
-			if (iType == AttributeInfo.EnumAttributeType.IDREFS)
+			else if (iType == AttributeInfo.EnumAttributeType.IDREFS)
 			{
 				return StringUtil.isNMTOKENS(val, true);
 			}
-			if (iType == AttributeInfo.EnumAttributeType.boolean_)
+			else if (iType == AttributeInfo.EnumAttributeType.boolean_)
 			{
 				return StringUtil.isBoolean(val);
 			}
-			if (iType == AttributeInfo.EnumAttributeType.double_)
+			else if (iType == AttributeInfo.EnumAttributeType.double_)
 			{
 				return StringUtil.isNumber(val);
 			}
-			if (iType == AttributeInfo.EnumAttributeType.integer)
+			else if (iType == AttributeInfo.EnumAttributeType.integer)
 			{
 				return StringUtil.isInteger(val);
 			}
 			// integer or unbounded
-			if (iType == AttributeInfo.EnumAttributeType.unbounded)
+			else if (iType == AttributeInfo.EnumAttributeType.unbounded)
 			{
 				return JDFConstants.UNBOUNDED.equals(val) || StringUtil.isInteger(val);
 			}
-
-			if ((iType == AttributeInfo.EnumAttributeType.URI) || (iType == AttributeInfo.EnumAttributeType.URL))
+			else if ((iType == AttributeInfo.EnumAttributeType.URI) || (iType == AttributeInfo.EnumAttributeType.URL))
 			{
 				return UrlUtil.isIRL(val);
 			}
@@ -884,34 +870,13 @@ public class AttributeInfo
 			{
 				return true;
 			}
-
 			else if ((iType == AttributeInfo.EnumAttributeType.enumeration) || (iType == AttributeInfo.EnumAttributeType.JDFJMFVersion))
 			{
-				if (enu != null)
-				{
-					final ValuedEnum ve = (ValuedEnum) EnumUtils.getEnum(enu.getClass(), val);
-					return ve != null;
-				}
-				// limp along if something went wrong
-				return StringUtil.isNMTOKEN(val);
+				return isEnum(val, enu);
 			}
 			else if (iType == AttributeInfo.EnumAttributeType.enumerations)
 			{
-				if (enu != null)
-				{
-					final VString vs = StringUtil.tokenize(val, JDFConstants.BLANK, false);
-					for (int i = 0; i < vs.size(); i++)
-					{
-						final ValuedEnum ve = (ValuedEnum) EnumUtils.getEnum(enu.getClass(), vs.get(i));
-						// there was an invalid token
-						if (ve == null)
-							return false;
-					}
-					// all were ok
-					return true;
-				}
-				// limp along if something went wrong
-				return StringUtil.isNMTOKENS(val, false);
+				return isEnums(val, enu);
 			}
 			else if (iType == AttributeInfo.EnumAttributeType.IntegerRange)
 			{
@@ -976,7 +941,7 @@ public class AttributeInfo
 			else if (iType == AttributeInfo.EnumAttributeType.dateTime)
 			{
 				new JDFDate(val);
-				return val.indexOf("T") == 10; // pure dates are not valid
+				return val.indexOf('T') == 10; // pure dates are not valid
 			}
 			else if (iType == AttributeInfo.EnumAttributeType.duration)
 			{
@@ -1062,11 +1027,41 @@ public class AttributeInfo
 		}
 	}
 
+	static boolean isEnums(final String val, final ValuedEnum enu)
+	{
+		if (enu != null)
+		{
+			final VString vs = StringUtil.tokenize(val, JDFConstants.BLANK, false);
+			for (int i = 0; i < vs.size(); i++)
+			{
+				final ValuedEnum ve = (ValuedEnum) EnumUtils.getEnum(enu.getClass(), vs.get(i));
+				// there was an invalid token
+				if (ve == null)
+					return false;
+			}
+			// all were ok
+			return true;
+		}
+		// limp along if something went wrong
+		return StringUtil.isNMTOKENS(val, false);
+	}
+
+	static boolean isEnum(final String val, final ValuedEnum enu)
+	{
+		if (enu != null)
+		{
+			final ValuedEnum ve = (ValuedEnum) EnumUtils.getEnum(enu.getClass(), val);
+			return ve != null;
+		}
+		// limp along if something went wrong
+		return StringUtil.isNMTOKEN(val);
+	}
+
 	private static boolean validLanguageString(final String val)
 	{
 		// TODO better regexp
 		final int l = val.length();
-		final int posDash = val.indexOf("-");
+		final int posDash = val.indexOf('-');
 		return l >= 2 && l <= 3 || l > 4 && (posDash >= 2 && posDash < 4);
 		// 2=en , de , ...
 	}
