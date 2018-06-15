@@ -84,7 +84,7 @@ public class AttributeInfo
 	/**
 	 *
 	 */
-	protected static final Map<String, AttributeInfo> fixedMap = new HashMap<>();
+	public static final Map<String, AttributeInfo> fixedMap = new HashMap<>();
 
 	HashMap<String, AtrInfo> attribInfoTable = new HashMap<>();
 	private EnumVersion version = null;
