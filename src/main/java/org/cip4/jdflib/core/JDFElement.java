@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,20 +73,6 @@
  *
  * JDFElement.java
  *
- * Last changes
- *
- * 2001-07-30   Torsten Kaehlert - delete isNull() and throwNull() methods in parent class KNode
- *              TKAE20010730
- * 2002-07-02 JG add SettingsPolicy Support
- * 2002-07-02 JG removed AppendElement - it is now only in KElement
- * 2002-07-02 JG added IsJDFNode()
- * 2002-07-02 JG added RemoveChild() / RemoveChildren
- * 2002-07-02 JG GetEnumerationsAttribute() bug fix in loop counter
- * 2002-07-02 JG removed GetTarget(int id,const KString & attrib) const;
- * 2002-07-02 JG GetJDFRoot, GetJMFRoot now const
- * 2002-07-02 JG GetLinks added rSubRef check to map of checked attributes
- * 2002-07-02 JG added NamedColor support
- * 2002-07-02 JG GetElement - added a check that returns the refElement if a refElement is explicitly required
  */
 
 package org.cip4.jdflib.core;
@@ -145,7 +131,7 @@ import org.w3c.dom.NodeList;
 /**
  * @author Dietrich Mucha
  *
- * JDFElement contains generic JDF element functionality in general only elements in the JDF namespace will inherit from JDFElement
+ *         JDFElement contains generic JDF element functionality in general only elements in the JDF namespace will inherit from JDFElement
  */
 
 public class JDFElement extends KElement
@@ -186,19 +172,21 @@ public class JDFElement extends KElement
 
 	/**
 	 * public version of getTheAttributeInfo
+	 *
 	 * @return
 	 */
 	public final AttributeInfo getAttributeInfo()
 	{
 		if (infotables == null)
 		{
-			infotables = new MyPair<AttributeInfo, ElementInfo>(getTheAttributeInfo(), getTheElementInfo());
+			infotables = new MyPair<>(getTheAttributeInfo(), getTheElementInfo());
 		}
 		return infotables.a;
 	}
 
 	/**
 	 * returns the data type of a given attribute
+	 *
 	 * @param attributeName the localname of the attribute to check
 	 * @return the data type of attributeName
 	 */
@@ -210,6 +198,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * get the first JDF version where attribute name or element name is valid
+	 *
 	 * @param eaName attribute name
 	 * @param bElement true - get ElementInfo, false - get AttributeInfo
 	 * @return JDF version, Version_1_0 if no Info is found
@@ -236,6 +225,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Get the dirty status of this element
+	 *
 	 * @return boolean true if dirty
 	 */
 	@Override
@@ -266,6 +256,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Set this element as dirty
+	 *
 	 * @param bAttribute if true, only attributes are dirty, else also sub-elements
 	 */
 	@Override
@@ -284,6 +275,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * get/create the associated XMLDocUserData
+	 *
 	 * @return the XMLDocUserData of this
 	 */
 	protected XMLDocUserData getXMLDocUserData()
@@ -293,6 +285,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * get the last JDF version where attribute name or element name is valid
+	 *
 	 * @param eaName attribute name
 	 * @param bElement true - get ElementInfo, false - get AttributeInfo
 	 * @return JDF version, Version_1_0 if no Info is found
@@ -315,6 +308,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Comma separated list of all required attributes. KElement is generic, therefore the list is empty
+	 *
 	 * @return String the comma separated list of required attribute keys
 	 */
 	public VString requiredAttributes()
@@ -325,6 +319,7 @@ public class JDFElement extends KElement
 	/**
 	 * Comma separated list of all optional attributes. KElement is generic, therefore only the XML generic attributes are listed <br>
 	 * xmlns: the namespace declaration
+	 *
 	 * @return String the comma separated list of optional attribute keys
 	 */
 	public VString optionalAttributes()
@@ -334,6 +329,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * map of all defaults from the schema
+	 *
 	 * @return JDFAttributeMap the comma separated list of deprecated attribute keys
 	 */
 	public JDFAttributeMap getDefaultAttributeMap()
@@ -381,6 +377,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * list of all deprecated attributes. KElement is generic, therefore the list is empty
+	 *
 	 * @return String the comma separated list of deprecated attribute keys
 	 */
 	public VString deprecatedAttributes()
@@ -390,6 +387,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Comma separated list of all deprecated attributes. KElement is generic, therefore the list is empty
+	 *
 	 * @return String the comma separated list of deprecated attribute keys
 	 */
 	public VString prereleaseAttributes()
@@ -408,8 +406,9 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * checks if the curent element has other attributes then also present in vReqKeys. If the attribute is not present in vReqKeys, the attribut is added to a
-	 * new vector. The new vector is returned if there is no missing element left or the new vector has reached the given size nMax.
+	 * checks if the curent element has other attributes then also present in vReqKeys. If the attribute is not present in vReqKeys, the attribut is added to a new vector. The new vector is returned
+	 * if there is no missing element left or the new vector has reached the given size nMax.
+	 *
 	 * @param vReqKeys the vector with the attributes you already have
 	 * @param nMax vector with the missing attributes
 	 * @return Vector the vector with the missing attributes
@@ -445,8 +444,9 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * checks if the curent element has other attributes that are present in vReqKeys. If the attribute is present in vReqKeys, the attribut is added to a new
-	 * vector. The new vector is returned if there is no missing element left or the new vector has reached the given size nMax.
+	 * checks if the curent element has other attributes that are present in vReqKeys. If the attribute is present in vReqKeys, the attribut is added to a new vector. The new vector is returned if
+	 * there is no missing element left or the new vector has reached the given size nMax.
+	 *
 	 * @param vReqKeys the vector with the attributes you already have
 	 * @param nMax vector with the missing attributes
 	 * @return Vector the vector with the missing attributes
@@ -493,7 +493,7 @@ public class JDFElement extends KElement
 	{
 		if (infotables == null)
 		{
-			infotables = new MyPair<AttributeInfo, ElementInfo>(getTheAttributeInfo(), getTheElementInfo());
+			infotables = new MyPair<>(getTheAttributeInfo(), getTheElementInfo());
 		}
 		return infotables.b;
 	}
@@ -502,6 +502,7 @@ public class JDFElement extends KElement
 	 * get the missing elements as a vector
 	 * <p>
 	 * default: getMissingElements(99999999)
+	 *
 	 * @param nMax maximum value of missing elements to return
 	 * @return VString vector with nMax missing elements
 	 */
@@ -522,6 +523,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * list of all optional element names; KElement is generic, therefore the list is empty
+	 *
 	 * @return VString the comma separated list of optional element names
 	 */
 	public VString optionalElements()
@@ -531,6 +533,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * list of all unique Elements that may occur at most once; KElement is generic, therefore the list is empty
+	 *
 	 * @return String the comma separated list of required element names
 	 */
 	public VString uniqueElements()
@@ -540,6 +543,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * comma separated list of all prerelease Elements that may occur in a future version
+	 *
 	 * @return String the comma separated list of required element names
 	 */
 	public String prereleaseElements()
@@ -552,6 +556,7 @@ public class JDFElement extends KElement
 	 * Comma separated list of all prerelease elements.
 	 * <p>
 	 * default: getPrereleaseElements(99999999)
+	 *
 	 * @param nMax
 	 * @return VString vector with nMax missing elements
 	 */
@@ -565,6 +570,7 @@ public class JDFElement extends KElement
 	 * Vector of deprecated elements below the current element.
 	 * <p>
 	 * default: getDeprecatedElements(99999999)
+	 *
 	 * @param nMax
 	 * @return VString vector with nMax missing elements
 	 */
@@ -576,6 +582,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Comma separated list of all known element names;
+	 *
 	 * @return String the comma separated list of known element names
 	 */
 	public VString knownElements()
@@ -591,6 +598,7 @@ public class JDFElement extends KElement
 	 * Returns a vector with matching elements
 	 * <p>
 	 * default: getMissingElementVector(vReqKeys, 9999999)
+	 *
 	 * @param vReqKeys vector with all element wich are required
 	 * @param nMax maximum amount of missing element inside the returned vector
 	 * @return Vector the vector with the missing elements
@@ -613,6 +621,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * This function first, gets all required attributes and then compare them with the attributes present and returns a Vector with the missing attributes
+	 *
 	 * @param nMax maximum size of the returned Vector
 	 * @return VString vector with the missing attribute names
 	 * @default getMissingAttributes(9999999)
@@ -625,6 +634,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * This function first, gets all deprecated attributes
+	 *
 	 * @param nMax maximum size of the returned Vector
 	 * @return Vector vector with the deprecated attributes
 	 * @default getMissingAttributes(9999999)
@@ -639,6 +649,7 @@ public class JDFElement extends KElement
 	 * Get the unknown attributes
 	 * <p>
 	 * default: getUnknownAttributes(bIgnorePrivate, 9999999)
+	 *
 	 * @param bIgnorePrivate if true the private attributes will be ignored
 	 * @param nMax mamimum amount of unknown attributes to return
 	 * @return Vector a vector with all unknown atttributes the Element have
@@ -654,6 +665,7 @@ public class JDFElement extends KElement
 	 * Gets the unknown attributes
 	 * <p>
 	 * default: getUnknownAttributeVector(vKnownKeys, new Vector(), 99999999)
+	 *
 	 * @param vKnownKeys vector with all known keys
 	 * @param vInNameSpace vector with all namespaces to search in
 	 * @param nMax maximum amount of unknown attributes to return
@@ -712,6 +724,7 @@ public class JDFElement extends KElement
 	 * Get a vector with the unknown elements
 	 * <p>
 	 * default: getUnknownElements(bIgnorePrivate, 99999999)
+	 *
 	 * @param bIgnorePrivate true, to ignore the private elements
 	 * @param nMax maximum number of elements in the vector returned
 	 * @return Vector a vector with nMax unknown elements in the actual element.
@@ -728,6 +741,7 @@ public class JDFElement extends KElement
 	 * Get a vector with the unknown elements
 	 * <p>
 	 * default: getUnknownElementVector(vKnownKeys, vInNameSpace, 9999999)
+	 *
 	 * @param vKnownKeys vector of all known elements
 	 * @param vInNameSpace vector of all namespaces to search in
 	 * @param nMax maximum amount of elements to return
@@ -777,6 +791,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Get the EnumAttributeType for an attribute
+	 *
 	 * @param key the local name of the attribute
 	 * @return EnumAttributeType of the attribute
 	 */
@@ -789,6 +804,7 @@ public class JDFElement extends KElement
 	 * is the attribute valid and of type iType. iType is of type EnumAttributeType but may be expanded in child classes
 	 * <p>
 	 * default: validAttribute(key, null)
+	 *
 	 * @param key the attribute name
 	 * @param nameSpaceURI attribute namespace uri
 	 * @param level the validation level
@@ -801,6 +817,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Get the ValuedEnum for an enumerated attribute
+	 *
 	 * @param key the local name of the attribute
 	 * @return ValuedEnum.Unknown of the requested attribute or null if the attribute is not an enum
 	 */
@@ -811,6 +828,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * remove all default attributes from this i.e. all attributes whose value matches the schema default
+	 *
 	 * @param bRecurse if true, also recurse subelements, else only local
 	 */
 	public void eraseDefaultAttributes(final boolean bRecurse)
@@ -848,6 +866,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Checks, if this has any missing attributes
+	 *
 	 * @return boolean true, if one or more attributes are missing
 	 */
 	public boolean hasMissingAttributes()
@@ -857,6 +876,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Checks, if this has are any unknown attributes
+	 *
 	 * @param bIgnorePrivate if true, looks only in default and JDF namespaces
 	 * @return boolean true, if one or more attributes are unknown
 	 */
@@ -867,6 +887,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Tests, whether 'this' has any missing direct child elements
+	 *
 	 * @return boolean true, if one or more direct child elements are missing
 	 */
 	public boolean hasMissingElements()
@@ -876,6 +897,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Tests, whether 'this' has any unknown direct child elements
+	 *
 	 * @param bIgnorePrivate if true, only looks in default and JDF namespaces
 	 * @return boolean true if there are any unknown elements (in respect to the parameter)
 	 */
@@ -886,6 +908,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * This function first, gets all prerelease attributes It ignores any atrributes that have been added by a schema parser
+	 *
 	 * @param nMax maximum size of the returned Vector
 	 * @return Vector vector with the prerelease attributes
 	 * @default getMissingAttributes(9999999)
@@ -914,6 +937,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Get a vector of direct child element names that exist but are unknown in this element.
+	 *
 	 * @return a <code>vString</code> that contains missing element keys
 	 */
 	public VString getInsertElements()
@@ -925,12 +949,12 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * get a <code>vString</code> vector of direct child element names that may be inserted in this element. This means that a element which is already present
-	 * as a child and has a max occurs of 1 will not be part of the returned <code>vString</code>
-	 * @param vKnownKeys a <code>vString</code> list of known element tag names. If you want a complete list of all known Elements use
-	 * <code>KnownElements()</code> from KElement to get a list. Or call <code>GetInsertElements(int nMax)</code>
-	 * @param vUnique <code>vString</code> a list of elements that may occur only once. Use UniqueElements() to get a <code>String</code> which contains all
-	 * valid unique Elements from this.
+	 * get a <code>vString</code> vector of direct child element names that may be inserted in this element. This means that a element which is already present as a child and has a max occurs of 1
+	 * will not be part of the returned <code>vString</code>
+	 *
+	 * @param vKnownKeys a <code>vString</code> list of known element tag names. If you want a complete list of all known Elements use <code>KnownElements()</code> from KElement to get a list. Or call
+	 *            <code>GetInsertElements(int nMax)</code>
+	 * @param vUnique <code>vString</code> a list of elements that may occur only once. Use UniqueElements() to get a <code>String</code> which contains all valid unique Elements from this.
 	 * @return VString a vector of strings that contains insertable element keys
 	 * @see #knownElements()
 	 * @see #getInsertElements()
@@ -953,8 +977,8 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * Returns the type of the given attribute for the latest JDF version. Attribute types of previous versions have to be provided by attribute-specific
-	 * functions (if necessary).
+	 * Returns the type of the given attribute for the latest JDF version. Attribute types of previous versions have to be provided by attribute-specific functions (if necessary).
+	 *
 	 * @param attributeName name of the attribute
 	 * @return EnumAttributeType the attribute's type
 	 */
@@ -965,6 +989,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Get the vector of valid attribute values for an enumerated attribute
+	 *
 	 * @param key the local name of the attribute
 	 * @return vector of valid names, null if key is not an enumeration
 	 */
@@ -1000,6 +1025,7 @@ public class JDFElement extends KElement
 	 * Returns a vector with missing elements
 	 * <p>
 	 * default: getMissingElementVector(vRequiredKeys, 9999999)
+	 *
 	 * @param vRequiredKeys vector with all element which are required
 	 * @param nMax maximum amount of missing element inside the returned vector
 	 * @return Vector the vector with the missing elements
@@ -1365,8 +1391,7 @@ public class JDFElement extends KElement
 	 * <p>
 	 * <ul>
 	 * <li><b>Composite</b> - Non-separated resource.
-	 * <li><b>Separated</b> - The resource is separated, but the separation definition is handled internally by the resource, such as a PDF file that contains
-	 * SeparationInfo dictionaries.
+	 * <li><b>Separated</b> - The resource is separated, but the separation definition is handled internally by the resource, such as a PDF file that contains SeparationInfo dictionaries.
 	 * <li><b>Cyan</b> - Process color.
 	 * <li><b>Magenta</b> - Process color.
 	 * <li><b>Yellow</b> - Process color.
@@ -1379,8 +1404,8 @@ public class JDFElement extends KElement
 	 * <li><b>Varnish</b> - Varnish.
 	 * </ul>
 	 * Other values may be any separation name defined in the Name attribute of a {@link org.cip4.jdflib.resource.process.JDFColor} element in the
-	 * {@link org.cip4.jdflib.resource.process.JDFColorPool}. When Separation is applied to a ColorantControlLink, it defines an implicit partition that selects
-	 * a subset of separations for the process that is described by the ColorantControl.
+	 * {@link org.cip4.jdflib.resource.process.JDFColorPool}. When Separation is applied to a ColorantControlLink, it defines an implicit partition that selects a subset of separations for the process
+	 * that is described by the ColorantControl.
 	 */
 	@SuppressWarnings("unchecked")
 	public static final class EnumSeparation extends ValuedEnum
@@ -1536,21 +1561,20 @@ public class JDFElement extends KElement
 	 * <ul>
 	 * <li><b>Waiting</b> - The node may be executed, but it has not completed a test run.
 	 * <li><b>TestRunInProgress</b> - The node is currently executing a test run.
-	 * <li><b>Ready</b> - As indicated by the successful completion of a test run, all ResourceLinks are correct, required resources are available, and the
-	 * parameters of resources are valid. The node is ready to start.
-	 * <li><b>FailedTestRun</b> - An error occurred during the test run. Error information is logged in the Notification element, which is an optional
-	 * subelement of the AuditPool element described in Section 3.9, AuditPool.
+	 * <li><b>Ready</b> - As indicated by the successful completion of a test run, all ResourceLinks are correct, required resources are available, and the parameters of resources are valid. The node
+	 * is ready to start.
+	 * <li><b>FailedTestRun</b> - An error occurred during the test run. Error information is logged in the Notification element, which is an optional subelement of the AuditPool element described in
+	 * Section 3.9, AuditPool.
 	 * <li><b>Setup</b> - The process represented by this node is currently being set up.
 	 * <li><b>InProgress</b> - The node is currently executing.
 	 * <li><b>Cleanup</b> - The process represented by this node is currently being cleaned up.
-	 * <li><b>Spawned</b> - The node is spawned in the form of a separate spawned JDF. The status Spawned can only be assigned to the original instance of the
-	 * spawned job. For details, see Section 4.4, Spawning and Merging.
-	 * <li><b>Stopped</b> - Execution has been stopped. If a job is Stopped, running may be resumed later. This status may indicate a break, a pause,
-	 * maintenance, or a breakdown - in short, any pause that does not lead the job to be aborted.
+	 * <li><b>Spawned</b> - The node is spawned in the form of a separate spawned JDF. The status Spawned can only be assigned to the original instance of the spawned job. For details, see Section
+	 * 4.4, Spawning and Merging.
+	 * <li><b>Stopped</b> - Execution has been stopped. If a job is Stopped, running may be resumed later. This status may indicate a break, a pause, maintenance, or a breakdown - in short, any pause
+	 * that does not lead the job to be aborted.
 	 * <li><b>Completed</b> - Indicates that the node has been executed correctly, and is finished.
 	 * <li><b>Aborted</b> - Indicates that the process executing the node has been aborted, which means that execution will not be resumed again.
-	 * <li><b>Pool</b> - Indicates that the node processes partitioned resources and that the Status varies depending on the partition keys. Details are
-	 * provided in the StatusPool element of the node.
+	 * <li><b>Pool</b> - Indicates that the node processes partitioned resources and that the Status varies depending on the partition keys. Details are provided in the StatusPool element of the node.
 	 * <p>
 	 * Derivation of the Status of a parent node from the Status of child nodes is non-trivial and implementation-dependent
 	 * </ul>
@@ -1723,7 +1747,7 @@ public class JDFElement extends KElement
 		/**
 		 * returns the node status corresponding to a queueEntry status
 		 *
-		 * @param qes the queueEntry  status to test agains
+		 * @param qes the queueEntry status to test agains
 		 * @return the node status that corresponds to qes;
 		 */
 		public static EnumNodeStatus getNodeStatus(final EnumQueueEntryStatus qes)
@@ -1801,6 +1825,7 @@ public class JDFElement extends KElement
 		/**
 		 *
 		 * returns true if we are in an end phase (Completed or Aborted)
+		 *
 		 * @param nodeStatus the status to compare
 		 * @return true if we are in an end phase (Completed or Aborted)
 		 */
@@ -1812,19 +1837,17 @@ public class JDFElement extends KElement
 
 	/**
 	 *
-	 * The policy for this element indicates what happens when unsupported settings, (i.e., subelements, attributes or attribute values), are present in the
-	 * element. Possible values are:
+	 * The policy for this element indicates what happens when unsupported settings, (i.e., subelements, attributes or attribute values), are present in the element. Possible values are:
 	 * <p>
 	 * <ul>
-	 * <li><b>BestEffort</b> - Substitute or ignore unsupported attributes, attribute values, default attribute values, or elements and continue processing the
-	 * job.
+	 * <li><b>BestEffort</b> - Substitute or ignore unsupported attributes, attribute values, default attribute values, or elements and continue processing the job.
 	 * <li><b>MustHonor</b> - Reject the job when any unsupported attributes, attribute values, or elements are present.
-	 * <li><b>OperatorIntervention</b> - Pause job and query the operator when any unsupported attributes, attribute values, or elements are present. If a
-	 * device has no operator intervention capabilities, OperatorIntervention is treated as MustHonor.
+	 * <li><b>OperatorIntervention</b> - Pause job and query the operator when any unsupported attributes, attribute values, or elements are present. If a device has no operator intervention
+	 * capabilities, OperatorIntervention is treated as MustHonor.
 	 * <p>
-	 * If not specified, SettingsPolicy is inherited from the parent element, and if not specified in the parent element or further superior element, the
-	 * default value defaults to "BestEffort". In JDF 1.1 SettingsPolicy was specified in "Contents of a JDF node" and
-	 * "Contents of the abstract Resource element". It has been removed from JDF node and Resource and been promoted to all JDF elements.
+	 * If not specified, SettingsPolicy is inherited from the parent element, and if not specified in the parent element or further superior element, the default value defaults to "BestEffort". In JDF
+	 * 1.1 SettingsPolicy was specified in "Contents of a JDF node" and "Contents of the abstract Resource element". It has been removed from JDF node and Resource and been promoted to all JDF
+	 * elements.
 	 */
 	@SuppressWarnings("unchecked")
 	public static final class EnumSettingsPolicy extends ValuedEnum
@@ -1888,9 +1911,8 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * Colors of preprocessed products such as Wire-O binders and cover leaflets. The entries in the following table may be prefixed by either "Dark" or
-	 * "Light". The result may additionally be prefixed by "Clear" to indicate translucent material. For example, "ClearDarkBlue" indicates a translucent dark
-	 * blue, "ClearBlue" a translucent blue and "Blue" indicates an opaque blue.
+	 * Colors of preprocessed products such as Wire-O binders and cover leaflets. The entries in the following table may be prefixed by either "Dark" or "Light". The result may additionally be
+	 * prefixed by "Clear" to indicate translucent material. For example, "ClearDarkBlue" indicates a translucent dark blue, "ClearBlue" a translucent blue and "Blue" indicates an opaque blue.
 	 * <ul>
 	 * <li>Black
 	 * <li>Blue
@@ -2202,14 +2224,14 @@ public class JDFElement extends KElement
 	 * Mother of all validators
 	 *
 	 * @param level validation level
-	 * <ul>
-	 * <li>level EnumValidationLevel.None: always return true;
-	 * <li>level EnumValidationLevel.Construct: incomplete and null elements are valid.
-	 * <li>level EnumValidationLevel.Incomplete: incomplete elements are valid
-	 * <li>level EnumValidationLevel.Complete: full validation
-	 * <li>level EnumValidationLevel.RecursiveIncomplete: incomplete validation but follow links
-	 * <li>level EnumValidationLevel.RecursiveComplete: full validation and follow links downward
-	 * </ul>
+	 *            <ul>
+	 *            <li>level EnumValidationLevel.None: always return true;
+	 *            <li>level EnumValidationLevel.Construct: incomplete and null elements are valid.
+	 *            <li>level EnumValidationLevel.Incomplete: incomplete elements are valid
+	 *            <li>level EnumValidationLevel.Complete: full validation
+	 *            <li>level EnumValidationLevel.RecursiveIncomplete: incomplete validation but follow links
+	 *            <li>level EnumValidationLevel.RecursiveComplete: full validation and follow links downward
+	 *            </ul>
 	 *
 	 * @return boolean the validity of the node
 	 */
@@ -2222,14 +2244,14 @@ public class JDFElement extends KElement
 	 * Mother of all validators; this method is for direct access to the JDFElement valid method and short-circuit all overriding virtual methods
 	 *
 	 * @param level validation level
-	 * <ul>
-	 * <li>level EnumValidationLevel.None: always return true;
-	 * <li>level EnumValidationLevel.Construct: incomplete and null elements are valid.
-	 * <li>level EnumValidationLevel.Incomplete: incomplete elements are valid
-	 * <li>level EnumValidationLevel.Complete: full validation
-	 * <li>level EnumValidationLevel.RecursiveIncomplete: incomplete validation but follow links
-	 * <li>level EnumValidationLevel.RecursiveComplete: full validation and follow links downward
-	 * </ul>
+	 *            <ul>
+	 *            <li>level EnumValidationLevel.None: always return true;
+	 *            <li>level EnumValidationLevel.Construct: incomplete and null elements are valid.
+	 *            <li>level EnumValidationLevel.Incomplete: incomplete elements are valid
+	 *            <li>level EnumValidationLevel.Complete: full validation
+	 *            <li>level EnumValidationLevel.RecursiveIncomplete: incomplete validation but follow links
+	 *            <li>level EnumValidationLevel.RecursiveComplete: full validation and follow links downward
+	 *            </ul>
 	 *
 	 * @return boolean the validity of the node
 	 */
@@ -2244,9 +2266,12 @@ public class JDFElement extends KElement
 
 		try
 		{
-			final VString invalidAttributes = getInvalidAttributes(level, true, 1);
+			final VString invalidAttributes = getInvalidAttributes(level, true, 0);
 			if (invalidAttributes.size() > 0)
+			{
+				jLog.info("Invalid attributes " + invalidAttributes);
 				return false;
+			}
 
 			final VString invalidElements = getInvalidElements(level, true, 1);
 			if (invalidElements.size() > 0)
@@ -2281,8 +2306,8 @@ public class JDFElement extends KElement
 	/**
 	 * Mother of all version fixing routines
 	 *
-	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to high
-	 * versions but potentially fail when attempting to move from higher to lower versions
+	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to high versions but potentially fail when attempting
+	 * to move from higher to lower versions
 	 *
 	 * @param version version the resulting element should correspond to
 	 * @return true if successful
@@ -2407,7 +2432,7 @@ public class JDFElement extends KElement
 	 * @param value the JDFDuration to set
 	 * @param nameSpaceURI the nameSpace the attribute is in
 	 *
-	 * default: setAttribute(key, value, null)
+	 *            default: setAttribute(key, value, null)
 	 */
 	public void setAttribute(final String key, final JDFDuration value, final String nameSpaceURI)
 	{
@@ -2443,15 +2468,15 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	* Sets an element attribute
-	*
-	* @param key the name of the attribute to set
-	* @param value the JDFNumList to set
-	* @param nameSpaceURI the nameSpace the attribute is in
-	* @param precision number of digits
-	*
-	* @default setAttribute(key, value, null)
-	*/
+	 * Sets an element attribute
+	 *
+	 * @param key the name of the attribute to set
+	 * @param value the JDFNumList to set
+	 * @param nameSpaceURI the nameSpace the attribute is in
+	 * @param precision number of digits
+	 *
+	 * @default setAttribute(key, value, null)
+	 */
 	public void setAttribute(final String key, final JDFNumList value, final String nameSpaceURI, final int precision)
 	{
 		if (value == null)
@@ -2679,6 +2704,7 @@ public class JDFElement extends KElement
 	 * Offers access to exactly KElements implementation of GetTarget even if called for an instance of one of it's subclasses.
 	 * <p>
 	 * default: getTarget(id, JDFCoreConstants.ID)
+	 *
 	 * @param id value of the ID tag to search
 	 * @param attrib name of the ID tag, defaults to "ID"
 	 * @return KElement - the element if existing, otherwise <code>null</code>
@@ -2723,6 +2749,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * IsRefElement - is this thing a RefElement?
+	 *
 	 * @param kElem
 	 *
 	 * @return true, if this is a refElement
@@ -2748,6 +2775,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * tests whether this Element is a Resource.
+	 *
 	 * @param e
 	 *
 	 * @return boolean - true, if it is a Resource.
@@ -2834,6 +2862,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * are we an XJDF or child of XJDF/XJMF
+	 *
 	 * @return
 	 */
 	public boolean isXJDF()
@@ -2854,7 +2883,7 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 *remove all private extensions form a jdf element and its children
+	 * remove all private extensions form a jdf element and its children
 	 *
 	 */
 	public void removeExtensions()
@@ -2933,11 +2962,11 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	* checks whether kElem is in the JDF namespace
-	*
-	* @param kElem the KElement to check
-	* @return boolean - true, if kElem is in the JDF namespace
-	*/
+	 * checks whether kElem is in the JDF namespace
+	 *
+	 * @param kElem the KElement to check
+	 * @return boolean - true, if kElem is in the JDF namespace
+	 */
 	public static boolean isInXJDFNameSpaceStatic(final KElement kElem)
 	{
 		if (kElem == null)
@@ -3115,6 +3144,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * UpDates rRefs attribute of this Element, corresponding to the child reference Elements of this Element.
+	 *
 	 * @return
 	 *
 	 * @deprecated use KElement.fillHashSet(ElementName.RREF,null,hashSet)
@@ -3187,12 +3217,12 @@ public class JDFElement extends KElement
 	 * @param bAnd if true, a child is only added if it has all attributes specified in Attributes mAttrib
 	 * @param maxSize maximum size of the element vector
 	 * @param bResolveTarget if true, returns the targets of the refElements<br>
-	 * else the refElements are returned (if mAttrib != null), additionally the attributes of the target are checked)
+	 *            else the refElements are returned (if mAttrib != null), additionally the attributes of the target are checked)
 	 *
 	 * @return VElement - vector with all elements found
 	 *
-	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int,
-	 * boolean) default: getChildElementVector(null, null,null, true, 0, false)
+	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int, boolean) default:
+	 *      getChildElementVector(null, null,null, true, 0, false)
 	 */
 	@Override
 	public VElement getChildElementVector(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize, final boolean bResolveTarget)
@@ -3207,16 +3237,15 @@ public class JDFElement extends KElement
 	 * @param elementName elementname you are searching for
 	 * @param nameSpaceURI nameSpace you are searching for
 	 * @param mAttrib map of attributes you are looking for <br>
-	 * Wildcards in the attribute map are supported
+	 *            Wildcards in the attribute map are supported
 	 * @param bDirect if true, return value is a vector only of all direct child elements. <br>
-	 * Otherwise the returned vector contains nodes of arbitrary depth
+	 *            Otherwise the returned vector contains nodes of arbitrary depth
 	 * @param bAnd if true, a child is only added, if it includes all attributes, specified in mAttrib
 	 * @param maxSize maximum size of the element vector. maxSize is ignored if bDirect is false
 	 *
 	 * @return VElement: vector with all found elements
 	 *
-	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int,
-	 * boolean)
+	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int, boolean)
 	 *
 	 * @default getChildrenByTagName(s,null,null, false, true, 0)
 	 */
@@ -3235,21 +3264,21 @@ public class JDFElement extends KElement
 	 * @param elementName elementname you are searching for
 	 * @param nameSpaceURI nameSpace you are searching for
 	 * @param mAttrib map of attributes you are looking for <br>
-	 * Wildcards in the attribute map are supported
+	 *            Wildcards in the attribute map are supported
 	 * @param bDirect if true, return value is a vector only of all direct child elements. <br>
-	 * Otherwise the returned vector contains nodes of arbitrary depth
+	 *            Otherwise the returned vector contains nodes of arbitrary depth
 	 * @param bAnd if true, a child is only added, if it includes all attributes, specified in mAttrib
 	 * @param maxSize maximum size of the element vector. maxSize is ignored if bDirect is false
 	 * @param bFollowRefs if true follow references of refElements, else return the refElement
 	 *
 	 * @return VElement: vector with all found elements
 	 *
-	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int,
-	 * boolean)
+	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int, boolean)
 	 *
 	 * @default getChildrenByTagName(s,null,null, false, true, 0)
 	 */
-	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize, final boolean bFollowRefs)
+	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize,
+			final boolean bFollowRefs)
 	{
 		final VElement v = super.getChildrenByTagName_KElement(bFollowRefs ? null : elementName, nameSpaceURI, mAttrib, bDirect, bAnd, bFollowRefs ? -1 : maxSize);
 
@@ -3298,8 +3327,7 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int,
-	 * boolean)
+	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int, boolean)
 	 *
 	 * @param nodeName
 	 * @param nameSpaceURI
@@ -3351,7 +3379,7 @@ public class JDFElement extends KElement
 						// be null and will be skipped
 						if (target != null)
 						{ // we want the jdfElem version of IncludesAttributes,
-								// so we must upcast
+							// so we must upcast
 							if (bMapEmpty || target.includesAttributes(mAttrib, bAnd))
 							{
 								v.addElement(target);
@@ -3413,8 +3441,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * same as KElement.GetElement, but follows references as well.<br>
-	 * Thus the returned value is the target of the refElement unless the requested element is explicitely a refElement, which is specified by requesting an
-	 * element with nodeName="XXXRef".<br>
+	 * Thus the returned value is the target of the refElement unless the requested element is explicitely a refElement, which is specified by requesting an element with nodeName="XXXRef".<br>
 	 * Invalid refelements are simply skipped and are not filled into the vector
 	 *
 	 * @param nodeName name of the child node to get
@@ -3585,6 +3612,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * create and append a unique id, keep the existing one if it already exists
+	 *
 	 * @param strName
 	 *
 	 * @return String - the value of the ID attribute after setting
@@ -3647,8 +3675,9 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * Sets the attributes from the curent element to the attributes from kElem. If the Attributes map from kElem is empty (kElem has no attributes), zero is
-	 * returned. Otherwhise the size of the map (number of attributes from kElem) is returned.
+	 * Sets the attributes from the curent element to the attributes from kElem. If the Attributes map from kElem is empty (kElem has no attributes), zero is returned. Otherwhise the size of the map
+	 * (number of attributes from kElem) is returned.
+	 *
 	 * @param kElem the attribute source
 	 * @param ignoreList
 	 * @return int number of elements from kElem
@@ -3871,7 +3900,8 @@ public class JDFElement extends KElement
 	 */
 	private boolean isIncomplete()
 	{
-		final JDFResource r = JDFResource.getResourceRoot(this);
+		final boolean isLocal = (this instanceof JDFResource) && ((JDFResource) this).isResourceElement();
+		final JDFResource r = (JDFResource) (isLocal ? this : JDFResource.getResourceRoot(this));
 		return r == null ? false : "Incomplete".equals(r.getAttribute(AttributeName.STATUS, null, null));
 	}
 
@@ -3912,7 +3942,7 @@ public class JDFElement extends KElement
 			if ((e instanceof JDFElement) && !((JDFElement) e).isValid(level))
 			{
 				vBad.add(e.getLocalName());
-				jLog.warn(e.getLocalName());
+				jLog.warn("invalid element: " + e.getLocalName());
 				if (++num >= nMax)
 				{
 					return vBad;
@@ -3979,8 +4009,7 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * returns the official JDF schema URI for a particular version
-	 * fool proof schema url as of November 5th, 2003
+	 * returns the official JDF schema URI for a particular version fool proof schema url as of November 5th, 2003
 	 *
 	 * @return the URL that fits to majorVersion and minorVersion - null if not supported
 	 */
@@ -4184,7 +4213,7 @@ public class JDFElement extends KElement
 	public Vector<? extends ValuedEnum> getEnumerationsAttribute(final String key, final String nameSpaceURI, final ValuedEnum enu, final boolean bInherit)
 	{
 		String strAtt = null;
-		final Vector<ValuedEnum> vEnum = new Vector<ValuedEnum>();
+		final Vector<ValuedEnum> vEnum = new Vector<>();
 
 		if (bInherit)
 		{
@@ -4372,6 +4401,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Gets the target of link. Follows an ID-IDREF pair by recursively searching for an attrib with the value id
+	 *
 	 * @param id value of the ID tag to search
 	 * @param attrib name of the ID tag, defaults to "ID"
 	 * @return KElement the target of link - the element node.
@@ -4441,11 +4471,11 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * Inserts the Element elementName before the existing Element node beforeChild. If beforeChild is <code>null</code> , insert elementName at the end of the
-	 * list of children. If elementName is a DocumentFragment object, all of its children are inserted, in the same order, before beforeChild. If the
-	 * elementName is already in the tree, it is removed first.
+	 * Inserts the Element elementName before the existing Element node beforeChild. If beforeChild is <code>null</code> , insert elementName at the end of the list of children. If elementName is a
+	 * DocumentFragment object, all of its children are inserted, in the same order, before beforeChild. If the elementName is already in the tree, it is removed first.
 	 * <p>
 	 * default: insertBefore(elementName, beforeChild, null)
+	 *
 	 * @param elementName The elementName to insert the element itself will be created
 	 * @param beforeChild The reference element, i.e., the elemente before which the new element must be inserted
 	 * @param nameSpaceURI The namespace to create elementName in
@@ -4489,9 +4519,10 @@ public class JDFElement extends KElement
 
 	/**
 	 * same as @see clone but the clone is in a new document
+	 *
 	 * @see java.lang.Object#clone()
 	 * @return
-	*/
+	 */
 	@Override
 	public KElement cloneNewDoc()
 	{
@@ -4759,7 +4790,7 @@ public class JDFElement extends KElement
 			vDoneRefs = new VString();
 		}
 
-		HashSet<String> h = new HashSet<String>();
+		HashSet<String> h = new HashSet<>();
 		if (bExpand && (this instanceof JDFResource))
 		{
 			final VElement vLeaves = ((JDFResource) this).getLeaves(true);
@@ -4869,6 +4900,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Get string attribute rRefs, i.e. split the blank separed attribute list
+	 *
 	 * @return
 	 *
 	 * @deprecated rRefs was deprecated in JDF 1.2
@@ -4995,6 +5027,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * write to a directory - potentially generating a jobPartID
+	 *
 	 * @param dir
 	 * @return
 	 */
@@ -5061,7 +5094,7 @@ public class JDFElement extends KElement
 	 * @param bInherit if true recurse through ancestors when searching
 	 * @return EnumVersion - attribute value
 	 *
-	 * default - getMaxVersion(false)
+	 *         default - getMaxVersion(false)
 	 */
 	public EnumVersion getMaxVersion(final boolean bInherit)
 	{
@@ -5104,6 +5137,7 @@ public class JDFElement extends KElement
 
 		/**
 		 * casts a String into a corresponding EnumVersion hand coded for speed!
+		 *
 		 * @param enumName the name of the EnumVersion
 		 * @return the corresponding EnumVersion
 		 */
@@ -5208,6 +5242,7 @@ public class JDFElement extends KElement
 
 		/**
 		 * returns true if this is greater than other
+		 *
 		 * @param other
 		 *
 		 * @return boolean true if this>other
@@ -5262,6 +5297,7 @@ public class JDFElement extends KElement
 
 		/**
 		 * gets the integer value of the minor version, e.g 2 for 1.3 etc
+		 *
 		 * @return
 		 */
 		public int getMinorVersion()
@@ -5271,6 +5307,7 @@ public class JDFElement extends KElement
 
 		/**
 		 * gets the integer value of the major version, e.g 2 for 1.3 etc
+		 *
 		 * @return
 		 */
 		public int getMajorVersion()
@@ -5348,6 +5385,7 @@ public class JDFElement extends KElement
 
 		/**
 		 * return true if vl is a recursvive EnumValidationLevel
+		 *
 		 * @param vl the EnumValidationLevel to check
 		 * @return true if vl is recursive
 		 */
@@ -5358,6 +5396,7 @@ public class JDFElement extends KElement
 
 		/**
 		 * return true if vl is a recursvive EnumValidationLevel
+		 *
 		 * @param vl the EnumValidationLevel to check
 		 * @return true if vl is recursive
 		 */
@@ -5368,6 +5407,7 @@ public class JDFElement extends KElement
 
 		/**
 		 * returns true if the enumeration level is either Complete, NoWarnComplete or RecursiveComplete, i.e. if the parameter is required
+		 *
 		 * @param level the level to check
 		 * @return true if required
 		 */
@@ -5408,6 +5448,7 @@ public class JDFElement extends KElement
 
 		/**
 		 * calculate the corresponding nowarn level based on level
+		 *
 		 * @param level the level to strip warnings from
 		 * @param noWarning if true, set to nowarne, else set to standard
 		 * @return the validationlevel withot warnings
@@ -5427,6 +5468,7 @@ public class JDFElement extends KElement
 
 		/**
 		 * calculate the corresponding incomplete level based on level
+		 *
 		 * @param level the level to test
 		 * @return EnumValidationLevel - the modified level
 		 */
@@ -5464,7 +5506,7 @@ public class JDFElement extends KElement
 	 *
 	 * @return JDFElement[]
 	 * @deprecated use {@link KElement#getChildElementArray KElement.getChildElementArray()}<br>
-	 * not typesafe in case of elements in foreign namespaces note that this method previously returned JDFElement[]
+	 *             not typesafe in case of elements in foreign namespaces note that this method previously returned JDFElement[]
 	 */
 	@Deprecated
 	public KElement[] getChildElements()
@@ -5531,14 +5573,12 @@ public class JDFElement extends KElement
 				continue;
 			}
 
-			if (((EnumPoolType.ResourcePool.equals(poolType)) || (EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType)))
-					&& e instanceof JDFResource)
+			if (((EnumPoolType.ResourcePool.equals(poolType)) || (EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType))) && e instanceof JDFResource)
 			{
 				continue;
 			}
 
-			if (((EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.RefElement.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType)))
-					&& e instanceof JDFRefElement)
+			if (((EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.RefElement.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType))) && e instanceof JDFRefElement)
 			{
 				continue;
 			}
@@ -5774,8 +5814,7 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * append a GeneralID with idValue, duplicate entries are retained
-	 * generalID elements are always placed first and new GeneralID elements are appended at the end of the list
+	 * append a GeneralID with idValue, duplicate entries are retained generalID elements are always placed first and new GeneralID elements are appended at the end of the list
 	 *
 	 * @param idUsage the IDUsage attribute of the generalID
 	 * @param idValue the IDValue attribute of the generalID
@@ -5787,8 +5826,7 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * append a GeneralID with idValue, duplicate entries are retained
-	 * generalID elements are always placed first and new GeneralID elements are appended at the end of the list
+	 * append a GeneralID with idValue, duplicate entries are retained generalID elements are always placed first and new GeneralID elements are appended at the end of the list
 	 *
 	 * @param idUsage the IDUsage attribute of the generalID
 	 * @param idValue the IDValue attribute of the generalID
@@ -5870,6 +5908,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Gets IDValue of the GeneralID with IDUsage=idUsage null, if none exists
+	 *
 	 * @param idUsage
 	 *
 	 * @return String the attribute value
@@ -5883,6 +5922,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Gets IDValue of the GeneralID with IDUsage=idUsage null, if none exists
+	 *
 	 * @param idUsage
 	 * @param iPos
 	 *
@@ -5902,8 +5942,7 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * Gets a map of all GeneralID key-value Pair lists
-	 * if multiple generalIDs with the same IDUsage are specified, each GeneralID is added to the VectorMap
+	 * Gets a map of all GeneralID key-value Pair lists if multiple generalIDs with the same IDUsage are specified, each GeneralID is added to the VectorMap
 	 *
 	 *
 	 * @return VectorMap<String, JDFGeneralID> the map of lists of attribute values
@@ -5915,7 +5954,7 @@ public class JDFElement extends KElement
 		{
 			return null;
 		}
-		final VectorMap<String, JDFGeneralID> vm = new VectorMap<String, JDFGeneralID>();
+		final VectorMap<String, JDFGeneralID> vm = new VectorMap<>();
 		for (final KElement e : v)
 		{
 			final JDFGeneralID gid = (JDFGeneralID) e;
@@ -5925,8 +5964,7 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * Gets a map of all GeneralID key-value Pairs
-	 * if multiple generalIDs with the same IDUsage are specified, the last one is added to the map
+	 * Gets a map of all GeneralID key-value Pairs if multiple generalIDs with the same IDUsage are specified, the last one is added to the map
 	 *
 	 *
 	 * @return JDFAttributeMap the map of attribute values
@@ -5949,8 +5987,8 @@ public class JDFElement extends KElement
 
 	/**
 	 * @param elementName the elementname with namespace prefix "xyz:abc"
-	 * @param nameSpaceURI the namespace of the element "null" is valid if the namespace was specified already above. The method will lookup the namespace for
-	 * you. Performance wise its better to add it nevertheless.
+	 * @param nameSpaceURI the namespace of the element "null" is valid if the namespace was specified already above. The method will lookup the namespace for you. Performance wise its better to add
+	 *            it nevertheless.
 	 * @return KElement the appended element or null
 	 * @throws JDFException if you tried to append an element into an unspecified namespace
 	 */
@@ -6065,7 +6103,8 @@ public class JDFElement extends KElement
 	 *
 	 * @default getChildWithMatchingAttribute(nodeName, attName, null, null, 0, true, EnumAttributeType.Any);
 	 */
-	public JDFElement getChildWithMatchingAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index, final boolean bDirect, final AttributeInfo.EnumAttributeType dataType)
+	public JDFElement getChildWithMatchingAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index, final boolean bDirect,
+			final AttributeInfo.EnumAttributeType dataType)
 	{
 		final VElement v = getChildrenByTagName(nodeName, nameSpaceURI, null, bDirect, true, 0);
 		final int siz = v.size();
@@ -6088,6 +6127,7 @@ public class JDFElement extends KElement
 	 * GetChildWithAttribute - Get a child with matching attributes
 	 * <p>
 	 * default: getChildWithAttribute(nodeName, attName, null,attValue, 0, true)
+	 *
 	 * @param nodeName name of the child node to search for
 	 * @param attName attribute name to search for
 	 * @param nameSpaceURI namespace to search for
@@ -6235,8 +6275,9 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * this is an optimized version of GetDeepElement() which returns a complete list of elements. Here we abort, when we found the first element that fits.
-	 * (There is only one element, because the id must be unique)
+	 * this is an optimized version of GetDeepElement() which returns a complete list of elements. Here we abort, when we found the first element that fits. (There is only one element, because the id
+	 * must be unique)
+	 *
 	 * @param base
 	 * @param attName attribute name
 	 * @param id attribute ID value
@@ -6279,14 +6320,14 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	* Gets inter-resource linked resource IDs
-	*
-	* @param vDoneRefs (use null as default value)
-	* @param bRecurse if true, return recursively linked IDs as well
-	* @return the HashSet of all refElements
-	*
-	* @default getAllRefs(null, false)
-	*/
+	 * Gets inter-resource linked resource IDs
+	 *
+	 * @param vDoneRefs (use null as default value)
+	 * @param bRecurse if true, return recursively linked IDs as well
+	 * @return the HashSet of all refElements
+	 *
+	 * @default getAllRefs(null, false)
+	 */
 	public HashSet<JDFElement> getAllRefs(HashSet<JDFElement> vDoneRefs, final boolean bRecurse)
 	{
 
@@ -6403,6 +6444,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * gets a reasonable value for an attribute
+	 *
 	 * @param ke
 	 * @param attName
 	 * @return
@@ -6543,6 +6585,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * returns the jdf doc referenced by url
+	 *
 	 * @param url
 	 *
 	 *
@@ -6556,6 +6599,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * get the input stream that reads from URL
+	 *
 	 * @param url
 	 *
 	 * @return InputStream the input stream that the url points to, null if the url is inaccessible
@@ -6567,7 +6611,8 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	* get the schemaURL based on a version
+	 * get the schemaURL based on a version
+	 *
 	 * @param version
 	 * @return
 	 */

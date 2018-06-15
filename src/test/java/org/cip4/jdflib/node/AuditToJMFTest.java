@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,6 +68,9 @@
  */
 package org.cip4.jdflib.node;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.ElementName;
@@ -81,32 +84,31 @@ import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * 14.11.2008
+ *
+ *         14.11.2008
  */
 public class AuditToJMFTest extends JDFTestCaseBase
 {
 	JDFNode node = null;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLocalJMFs()
 	{
 		final AuditToJMF aj = new AuditToJMF(node, null, true);
 		final VElement vJMF = aj.getLocalJMFs(EnumAuditType.PhaseTime);
-		Assert.assertEquals(vJMF.size(), 3);
+		assertEquals(vJMF.size(), 3);
 		for (int i = 0; i < vJMF.size(); i++)
 		{
 			final JDFJMF jmf = (JDFJMF) vJMF.get(i);
 			jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "auditToJMF.jmf", 2, false);
-			Assert.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+			assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 		}
 	}
 
@@ -120,6 +122,7 @@ public class AuditToJMFTest extends JDFTestCaseBase
 		// get the JDF document root element
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		node = jdfDoc.getJDFRoot();
+		node.setJobID("j1");
 		node.setType(EnumType.ImageSetting);
 		node.addResource("ExposedMedia", EnumUsage.Output);
 		node.addResource("Media", EnumUsage.Input);

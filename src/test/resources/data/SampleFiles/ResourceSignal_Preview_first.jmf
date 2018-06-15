@@ -25,8 +25,8 @@
 							<Preview Separation="Cyan" Status="Available" URL="http://gs2136.eps.agfa.be/JDFData/SHT1059600001_01_prevCyan.png"/>
 							<Preview Separation="Magenta" Status="Available" URL="http://gs2136.eps.agfa.be/JDFData/SHT1059600001_01_prevMagenta.png"/>
 							<!-- need to supply URL to satisfy CheckJDF-->
-							<Preview Separation="Black"  URL=""/>
-							<Preview Separation="Yellow" URL=""/>
+							<Preview Separation="Black"  Status="Incomplete"/>
+							<Preview Separation="Yellow" Status="Incomplete"/>
 						</Preview>
 					</Preview>
 				</Preview>
