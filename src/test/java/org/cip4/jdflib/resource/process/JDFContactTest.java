@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-20186 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -73,6 +41,7 @@ package org.cip4.jdflib.resource.process;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -83,7 +52,6 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -105,8 +73,8 @@ public class JDFContactTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode n = doc.getJDFRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode n = doc.getJDFRoot();
 		n.setType(EnumType.Imposition);
 		co = (JDFContact) n.addResource(ElementName.CONTACT, null);
 	}
@@ -119,7 +87,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	public void testSetContactTypeEnum()
 	{
 		co.setContactTypes(EnumContactType.Accounting);
-		Assert.assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
+		assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
 	}
 
 	/**
@@ -130,12 +98,12 @@ public class JDFContactTest extends JDFTestCaseBase
 	public void testaddContactType()
 	{
 		co.addContactTypes(null);
-		Assert.assertTrue(co.getContactTypes().isEmpty());
+		assertTrue(co.getContactTypes().isEmpty());
 		co.addContactTypes(EnumContactType.Accounting);
-		Assert.assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
+		assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
 		co.addContactTypes(EnumContactType.Delivery);
-		Assert.assertTrue(co.getContactTypes().contains("Accounting"));
-		Assert.assertTrue(co.getContactTypes().contains("Delivery"));
+		assertTrue(co.getContactTypes().contains("Accounting"));
+		assertTrue(co.getContactTypes().contains("Delivery"));
 	}
 
 	/**
@@ -146,7 +114,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	public void testSetContactType()
 	{
 		co.setContactTypes("Customer");
-		Assert.assertEquals(co.getContactTypes().get(0), "Customer");
+		assertEquals(co.getContactTypes().get(0), "Customer");
 	}
 
 	/**
@@ -156,15 +124,103 @@ public class JDFContactTest extends JDFTestCaseBase
 	@Test
 	public void testsetPerson()
 	{
-		Assert.assertNull(co.setPerson(null, null));
+		assertNull(co.setPerson(null, null));
 
 		co.setPerson("foo", "bar");
-		Assert.assertEquals(co.getPerson().getFirstName(), "foo");
-		Assert.assertEquals(co.getPerson().getFamilyName(), "bar");
+		assertEquals(co.getPerson().getFirstName(), "foo");
+		assertEquals(co.getPerson().getFamilyName(), "bar");
 
 		co.setPerson("foo", null);
-		Assert.assertEquals(co.getPerson().getFirstName(), "foo");
-		Assert.assertEquals(co.getPerson().getFamilyName(), "");
+		assertEquals(co.getPerson().getFirstName(), "foo");
+		assertEquals(co.getPerson().getFamilyName(), "");
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testGetCreateCompany()
+	{
+		final JDFNode root = co.getJDFRoot();
+		final JDFCompany comp = (JDFCompany) root.addResource(ElementName.COMPANY, null);
+		comp.setOrganizationName("ccc");
+		co.refElement(comp);
+
+		assertEquals(comp, co.getCreateCompany());
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testGetCompany()
+	{
+		final JDFNode root = co.getJDFRoot();
+		final JDFCompany comp = (JDFCompany) root.addResource(ElementName.COMPANY, null);
+		comp.setOrganizationName("ccc");
+		co.refElement(comp);
+
+		assertEquals(comp, co.getCompany());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testGetAddress()
+	{
+		final JDFNode root = co.getJDFRoot();
+		final JDFAddress comp = (JDFAddress) root.addResource(ElementName.ADDRESS, null);
+
+		co.refElement(comp);
+
+		assertEquals(comp, co.getAddress());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testGetCreateAddress()
+	{
+		final JDFNode root = co.getJDFRoot();
+		final JDFAddress comp = (JDFAddress) root.addResource(ElementName.ADDRESS, null);
+
+		co.refElement(comp);
+
+		assertEquals(comp, co.getCreateAddress());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testGetCreatePerson()
+	{
+		final JDFNode root = co.getJDFRoot();
+		final JDFPerson comp = (JDFPerson) root.addResource(ElementName.PERSON, null);
+		co.refElement(comp);
+
+		assertEquals(comp, co.getCreatePerson());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testGetPerson()
+	{
+		final JDFNode root = co.getJDFRoot();
+		final JDFPerson comp = (JDFPerson) root.addResource(ElementName.PERSON, null);
+		co.refElement(comp);
+
+		assertEquals(comp, co.getPerson());
 	}
 
 	/**
@@ -174,12 +230,12 @@ public class JDFContactTest extends JDFTestCaseBase
 	@Test
 	public final void testMatches()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.CONTACT);
-		JDFContact c = (JDFContact) doc.getRoot();
-		JDFContact c2 = (JDFContact) new JDFDoc(ElementName.CONTACT).getRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.CONTACT);
+		final JDFContact c = (JDFContact) doc.getRoot();
+		final JDFContact c2 = (JDFContact) new JDFDoc(ElementName.CONTACT).getRoot();
 		assertFalse(c.matches(c2));
-		JDFPerson p = c.appendPerson();
-		JDFPerson p2 = c2.appendPerson();
+		final JDFPerson p = c.appendPerson();
+		final JDFPerson p2 = c2.appendPerson();
 		assertTrue(c.matches(c2));
 		p.setFirstName("foo");
 		assertTrue(c.matches(c2));
@@ -200,13 +256,13 @@ public class JDFContactTest extends JDFTestCaseBase
 	@Test
 	public final void testMerge()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.CONTACT);
-		JDFContact c = (JDFContact) doc.getRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.CONTACT);
+		final JDFContact c = (JDFContact) doc.getRoot();
 		c.addContactTypes(EnumContactType.Accounting);
-		JDFContact c2 = (JDFContact) new JDFDoc(ElementName.CONTACT).getRoot();
+		final JDFContact c2 = (JDFContact) new JDFDoc(ElementName.CONTACT).getRoot();
 		c2.addContactTypes(EnumContactType.Accounting);
 		c2.addContactTypes(EnumContactType.Billing);
-		JDFPerson p = c2.appendPerson();
+		final JDFPerson p = c2.appendPerson();
 
 		c.appendComChannel(EnumChannelType.Email).setEMailLocator("a@b.com");
 		c2.appendComChannel(EnumChannelType.Email).setEMailLocator("a@b.com");
@@ -224,13 +280,13 @@ public class JDFContactTest extends JDFTestCaseBase
 	@Test
 	public final void testMergeNoComChannel()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.CONTACT);
-		JDFContact c = (JDFContact) doc.getRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.CONTACT);
+		final JDFContact c = (JDFContact) doc.getRoot();
 		c.addContactTypes(EnumContactType.Accounting);
-		JDFContact c2 = (JDFContact) new JDFDoc(ElementName.CONTACT).getRoot();
+		final JDFContact c2 = (JDFContact) new JDFDoc(ElementName.CONTACT).getRoot();
 		c2.addContactTypes(EnumContactType.Accounting);
 		c2.addContactTypes(EnumContactType.Billing);
-		JDFPerson p = c2.appendPerson();
+		final JDFPerson p = c2.appendPerson();
 
 		c2.appendComChannel(EnumChannelType.Email).setEMailLocator("a@b.com");
 		c2.appendComChannel(EnumChannelType.Phone).setPhoneNumber("+12345");
