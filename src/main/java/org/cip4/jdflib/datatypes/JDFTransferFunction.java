@@ -77,11 +77,8 @@
  */
 package org.cip4.jdflib.datatypes;
 
-import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
-
-import org.cip4.jdflib.core.JDFConstants;
 
 /**
  * This class is a representation of a whitespace separated list of numbers representing a set of XY coordinates of a transfer function. The total number of x y values must be even because of the
@@ -274,6 +271,17 @@ public class JDFTransferFunction extends JDFNumList
 	}
 
 	/**
+	 * get the x value at index note that each index consumes 2 elements (the x and y value)
+	 *
+	 * @param index
+	 * @return
+	 */
+	public JDFXYPair getXRange()
+	{
+		return new JDFXYPair(getX(0), getX(numPoints() - 1));
+	}
+
+	/**
 	 * get the Y value at index i
 	 *
 	 * @param index
@@ -285,6 +293,69 @@ public class JDFTransferFunction extends JDFNumList
 	}
 
 	/**
+	 * get the Y value at index i
+	 *
+	 * @param index
+	 * @return
+	 */
+	public double getValue(final double x)
+	{
+		final int indexX0 = getPos(x, false);
+		final int indexX1 = getPos(x, true);
+		if (indexX0 == indexX1)
+		{
+			return getY(indexX0);
+		}
+		else
+		{
+			final double range = getX(indexX1) - getX(indexX0);
+			if (range <= 0)
+			{
+				return getY(indexX0);
+			}
+			else
+			{
+				final double rx = x - getX(indexX0);
+				final double y0 = getY(indexX0);
+				final double y1 = getY(indexX1);
+				return y0 + (y1 - y0) * (rx / range);
+			}
+		}
+	}
+
+	/**
+	 *
+	 * @return the number of points
+	 */
+	public int numPoints()
+	{
+		return size() / 2;
+	}
+
+	/**
+	 *
+	 * @param x
+	 * @param upper
+	 * @return
+	 */
+	int getPos(final double x, final boolean upper)
+	{
+		for (int i = 0; i < numPoints(); i++)
+		{
+			final double x2 = getX(i);
+			if (x2 > x)
+			{
+				return upper ? i : i - 1;
+			}
+			else if (x2 == x)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	/**
 	 * add - adds a x and a y coordinate to the vector
 	 *
 	 * @param s a string with the x and y coordinate to add
@@ -293,25 +364,14 @@ public class JDFTransferFunction extends JDFNumList
 	 */
 	public void add(final String s) throws DataFormatException
 	{
-		final StringTokenizer sToken = new StringTokenizer(s, JDFConstants.BLANK);
-
-		if ((sToken.countTokens() % 2) != 0)
+		final JDFXYPair xyp = JDFXYPair.createXYPair(s);
+		if (xyp != null)
 		{
-			throw new DataFormatException("Data format exception!");
+			add(xyp);
 		}
-
-		while (sToken.hasMoreTokens())
+		else
 		{
-			final String t = sToken.nextToken().trim();
-
-			try
-			{
-				addElement(Double.valueOf(t));
-			}
-			catch (final NumberFormatException e)
-			{
-				throw new DataFormatException("Data format exception!");
-			}
+			throw new DataFormatException("Invalid string: " + s);
 		}
 	}
 

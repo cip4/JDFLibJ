@@ -71,6 +71,7 @@ package org.cip4.jdflib.datatypes;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Vector;
+import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.Test;
@@ -83,6 +84,14 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction();
 		assertEquals(0, tf.size());
+	}
+
+	@Test
+	public void testAdd() throws DataFormatException
+	{
+		final JDFTransferFunction tf = new JDFTransferFunction();
+		tf.add("1 2");
+		assertEquals(2, tf.size());
 	}
 
 	@Test
@@ -117,6 +126,58 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 		v.add(Double.valueOf(150));
 		tf.set(10, 5, v);
 		assertEquals("10 100 15 150", tf.toString());
+	}
+
+	@Test
+	public void testGetPos() throws DataFormatException
+	{
+		final JDFTransferFunction tf = new JDFTransferFunction("10 0.1 20 0.2 30 0.3 100 1.0");
+		assertEquals(0, tf.getPos(0, true));
+		assertEquals(-1, tf.getPos(0, false));
+		assertEquals(0, tf.getPos(10, false));
+		assertEquals(0, tf.getPos(10, true));
+		assertEquals(0, tf.getPos(15, false));
+		assertEquals(1, tf.getPos(15, true));
+		assertEquals(2, tf.getPos(55, false));
+		assertEquals(3, tf.getPos(55, true));
+		assertEquals(3, tf.getPos(100, true));
+		assertEquals(3, tf.getPos(100, false));
+		assertEquals(-1, tf.getPos(155, false));
+		assertEquals(-1, tf.getPos(155, true));
+	}
+
+	@Test
+	public void testGetVal() throws DataFormatException
+	{
+		final JDFTransferFunction tf = new JDFTransferFunction("0 0 10 0.1 20 0.2 30 0.3 100 1.0");
+		assertEquals(0, tf.getValue(0), 0);
+		for (int i = 0; i < 100; i++)
+			assertEquals(0.01 * i, tf.getValue(i), 0.000001);
+	}
+
+	@Test
+	public void testGetValDesc() throws DataFormatException
+	{
+		final JDFTransferFunction tf = new JDFTransferFunction("0 1.0 100 0");
+		assertEquals(1, tf.getValue(0), 0);
+		for (int i = 0; i < 100; i++)
+			assertEquals(1 - 0.01 * i, tf.getValue(i), 0.000001);
+	}
+
+	@Test
+	public void testGetRange() throws DataFormatException
+	{
+		final JDFTransferFunction tf = new JDFTransferFunction("10 1.0 100 0");
+		assertEquals(10, tf.getXRange().getX(), 0);
+		assertEquals(100, tf.getXRange().getY(), 0);
+	}
+
+	@Test
+	public void testGetRangeEmpty()
+	{
+		final JDFTransferFunction tf = new JDFTransferFunction();
+		assertEquals(0, tf.getXRange().getX(), 0);
+		assertEquals(0, tf.getXRange().getY(), 0);
 	}
 
 }

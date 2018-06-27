@@ -121,7 +121,11 @@ public class XJMFQCExampleTest extends JDFTestCaseBase
 		final MessageResourceHelper mr = new MessageResourceHelper(s.getRoot());
 		final SetHelper qqp = mr.appendSet(ElementName.QUALITYCONTROLRESULT);
 		final ResourceHelper qpr = qqp.appendPartition(null, true);
-		qpr.getRoot().appendElement("cc:CxF", "http://colorexchangeformat.com/CxF3-core").setText("CxF Measurement datas in here");
+		final KElement cxf = qpr.getRoot().appendElement("cc:CxF", "http://colorexchangeformat.com/CxF3-core");
+		cxf.setText("CxF Measurement datas in the Object elements");
+		cxf.setXPathAttribute("cc:Resources/cc:ObjectCollection/cc:Object/@Id", "patch1ID");
+		cxf.setXPathAttribute("cc:Resources/cc:ObjectCollection/cc:Object[2]/@Id", "patch2ID");
+
 		final JDFQualityControlResult qcr = (JDFQualityControlResult) qpr.getResource();
 		qcr.setPassed(42);
 		qcr.setFailed(3);

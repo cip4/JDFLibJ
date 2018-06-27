@@ -151,6 +151,25 @@ public class JDFContactTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testGetCreateCompany2()
+	{
+		final JDFNode root = co.getJDFRoot();
+
+		final JDFCompany comp = (JDFCompany) root.addResource(ElementName.COMPANY, null);
+		comp.setOrganizationName("ccc");
+		co.refElement(comp);
+		final JDFCompany comp2 = co.appendCompany();
+		assertEquals(comp, co.getCreateCompany());
+		comp.deleteNode();
+		assertEquals(comp2, co.getCreateCompany());
+
+	}
+
+	/**
 	*
 	*
 	*/

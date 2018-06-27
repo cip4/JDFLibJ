@@ -146,6 +146,32 @@ public class JDFElement extends KElement
 		KElement.setLongID(bLong);
 	}
 
+	/**
+	 *
+	 * create a new root document
+	 *
+	 * @param nodename
+	 * @param namespaceURI
+	 * @return
+	 */
+	public static JDFElement createRoot(final String nodename)
+	{
+		return (JDFElement) new JDFDoc(nodename).getRoot();
+	}
+
+	/**
+	 *
+	 * create a new root document
+	 *
+	 * @param nodename
+	 * @param namespaceURI
+	 * @return
+	 */
+	public static JDFElement createRoot(final String nodename, final EnumVersion v)
+	{
+		return (JDFElement) new JDFDoc(nodename, v).getRoot();
+	}
+
 	private MyPair<AttributeInfo, ElementInfo> infotables;
 	private static final long serialVersionUID = 1L;
 	private static final Log jLog = LogFactory.getLog(JDFElement.class);

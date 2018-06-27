@@ -475,6 +475,20 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetDoubleVector() throws Exception
+	{
+		final JDFNumberList nl = new JDFNumberList("1.1 2.2 3.3");
+		final Vector<Double> dv = nl.getDoubleVector();
+		assertEquals(dv.size(), 3);
+		assertEquals(dv.get(1).doubleValue(), 2.2, 0.0);
+		assertEquals(dv.get(2).doubleValue(), 3.3, 0.0);
+	}
+
+	/**
+	 * @throws Exception
+	 *
+	 */
+	@Test
 	public void testPerformance() throws Exception
 	{
 		final CPUTimer ct = new CPUTimer(true);

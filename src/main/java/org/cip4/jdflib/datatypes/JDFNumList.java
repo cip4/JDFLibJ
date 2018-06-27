@@ -292,6 +292,22 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	}
 
 	/**
+	 *
+	 * get the list of values as doubles
+	 *
+	 * @return
+	 */
+	public Vector<Double> getDoubleVector()
+	{
+		final Vector<Double> v = new Vector<>();
+		for (int i = 0; i < size(); i++)
+		{
+			v.add(Double.valueOf(doubleAt(i)));
+		}
+		return v;
+	}
+
+	/**
 	 * toString - returns the JDFNumList as a String
 	 *
 	 * @return String - the JDFNumList as a String
