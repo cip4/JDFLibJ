@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment mrSubRefay appear in the software itself, if and wherever such third-party
+ * acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior writtenrestartProcesses() permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software restartProcesses()
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software restartProcesses() copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  */
 package org.cip4.jdflib.extensions;
@@ -76,7 +44,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class ProductHelper extends BaseXJDFHelper
 {
@@ -100,7 +68,7 @@ public class ProductHelper extends BaseXJDFHelper
 	/**
 	 * @param product
 	 */
-	public ProductHelper(KElement product)
+	public ProductHelper(final KElement product)
 	{
 		theElement = product;
 		theElement.appendAnchor(null);
@@ -118,7 +86,7 @@ public class ProductHelper extends BaseXJDFHelper
 	 *
 	 * @param isRoot
 	 */
-	public void setRoot(boolean isRoot)
+	public void setRoot(final boolean isRoot)
 	{
 		theElement.setAttribute(rootProduct, isRoot, null);
 	}
@@ -127,7 +95,7 @@ public class ProductHelper extends BaseXJDFHelper
 	 * @param name
 	 * @return
 	 */
-	public IntentHelper getCreateIntent(String name)
+	public IntentHelper getCreateIntent(final String name)
 	{
 		IntentHelper ih = getIntent(name);
 		if (ih == null)
@@ -143,9 +111,9 @@ public class ProductHelper extends BaseXJDFHelper
 	 * @param ih
 	 * @return
 	 */
-	public IntentHelper appendIntent(String name)
+	public IntentHelper appendIntent(final String name)
 	{
-		KElement intent = theElement.appendElement(XJDFConstants.Intent);
+		final KElement intent = theElement.appendElement(XJDFConstants.Intent);
 		intent.appendElement(name);
 		intent.setAttribute(AttributeName.NAME, name);
 		return new IntentHelper(intent);
@@ -155,20 +123,38 @@ public class ProductHelper extends BaseXJDFHelper
 	 * @param name
 	 * @return
 	 */
-	public IntentHelper getIntent(String name)
+	public IntentHelper getIntent(final String name)
 	{
-		KElement intent = theElement.getChildWithAttribute(XJDFConstants.Intent, AttributeName.NAME, null, name, 0, true);
+		final KElement intent = theElement.getChildWithAttribute(XJDFConstants.Intent, AttributeName.NAME, null, name, 0, true);
 		return intent == null ? null : new IntentHelper(intent);
 	}
 
 	/**
-	 *get an attribute from an explicit intent resource
+	 * @return the vector of intent helpers
+	 */
+	public Vector<IntentHelper> getIntents()
+	{
+		final VElement v = theElement.getChildElementVector(XJDFConstants.Intent, null);
+
+		final Vector<IntentHelper> v2 = new Vector<>();
+		if (v != null)
+		{
+			for (final KElement e : v)
+			{
+				v2.add(new IntentHelper(e));
+			}
+		}
+		return v2;
+	}
+
+	/**
+	 * get an attribute from an explicit intent resource
 	 *
 	 * @param intentName
 	 * @param attName
 	 * @return
 	 */
-	public String getIntentAttribute(String intentName, String attName)
+	public String getIntentAttribute(final String intentName, final String attName)
 	{
 		KElement intent = theElement.getChildWithAttribute(XJDFConstants.Intent, AttributeName.NAME, null, intentName, 0, true);
 		intent = intent == null ? null : intent.getElement(intentName);
@@ -186,7 +172,7 @@ public class ProductHelper extends BaseXJDFHelper
 	/**
 	 * @param amount the amount to set
 	 */
-	public void setAmount(int amount)
+	public void setAmount(final int amount)
 	{
 		theElement.setAttribute(AttributeName.AMOUNT, amount, null);
 	}
@@ -196,7 +182,7 @@ public class ProductHelper extends BaseXJDFHelper
 	 */
 	public int getMaxAmount()
 	{
-		int a = theElement.getIntAttribute(AttributeName.MAXAMOUNT, null, -4242);
+		final int a = theElement.getIntAttribute(AttributeName.MAXAMOUNT, null, -4242);
 		return a == -4242 ? getAmount() : a;
 	}
 
@@ -231,7 +217,7 @@ public class ProductHelper extends BaseXJDFHelper
 	 *
 	 * @param productType
 	 */
-	public void setProductType(String productType)
+	public void setProductType(final String productType)
 	{
 		theElement.setNonEmpty(AttributeName.PRODUCTTYPE, productType);
 	}
@@ -241,15 +227,15 @@ public class ProductHelper extends BaseXJDFHelper
 	 */
 	public double getOverproduction()
 	{
-		int a1 = getAmount();
-		int max = getMaxAmount();
+		final int a1 = getAmount();
+		final int max = getMaxAmount();
 		return a1 > 0 ? (100.0 * (max - a1)) / a1 : 0;
 	}
 
 	/**
 	 * @param amount the amount to set
 	 */
-	public void setMaxAmount(int amount)
+	public void setMaxAmount(final int amount)
 	{
 		theElement.setAttribute(AttributeName.MAXAMOUNT, amount, null);
 	}
@@ -259,14 +245,14 @@ public class ProductHelper extends BaseXJDFHelper
 	 */
 	public int getMinAmount()
 	{
-		int a = theElement.getIntAttribute(AttributeName.MINAMOUNT, null, -4242);
+		final int a = theElement.getIntAttribute(AttributeName.MINAMOUNT, null, -4242);
 		return a == -4242 ? getAmount() : a;
 	}
 
 	/**
 	 * @param amount the amount to set
 	 */
-	public void setMinAmount(int amount)
+	public void setMinAmount(final int amount)
 	{
 		theElement.setAttribute(AttributeName.MINAMOUNT, amount, null);
 	}
@@ -277,7 +263,7 @@ public class ProductHelper extends BaseXJDFHelper
 	 * @deprecated
 	 */
 	@Deprecated
-	public void setChild(ProductHelper phCover, int amount)
+	public void setChild(final ProductHelper phCover, final int amount)
 	{
 		KElement e = theElement.getChildWithAttribute("ChildProduct", "Childref", null, phCover.theElement.getID(), 0, true);
 		if (e == null)
@@ -294,44 +280,46 @@ public class ProductHelper extends BaseXJDFHelper
 
 	/**
 	 * get the nth child of this
+	 *
 	 * @param nChild the index of the child
 	 * @return
 	 * @deprecated
 	 */
 	@Deprecated
-	public ProductHelper getChild(int nChild)
+	public ProductHelper getChild(final int nChild)
 	{
-		KElement e = theElement.getElement("ChildProduct", null, nChild);
+		final KElement e = theElement.getElement("ChildProduct", null, nChild);
 		if (e == null)
 		{
 			return null;
 		}
-		String id = e.getAttribute("ChildRef", null, null);
+		final String id = e.getAttribute("ChildRef", null, null);
 		if (id == null)
 		{
 			return null;
 		}
-		KElement list = theElement.getParentNode_KElement();
-		KElement kid = list.getChildWithAttribute("Product", "ID", null, id, 0, true);
+		final KElement list = theElement.getParentNode_KElement();
+		final KElement kid = list.getChildWithAttribute("Product", "ID", null, id, 0, true);
 		return kid == null ? null : new ProductHelper(kid);
 	}
 
 	/**
 	 * get the nth child of this
+	 *
 	 * @param productType the productType attribute
 	 * @param n the index of the child
 	 * @return
 	 * @deprecated
 	 */
 	@Deprecated
-	public ProductHelper getChild(String productType, int n)
+	public ProductHelper getChild(final String productType, int n)
 	{
-		Vector<ProductHelper> v = getChildren();
+		final Vector<ProductHelper> v = getChildren();
 		if (v == null || v.size() < n)
 		{
 			return null;
 		}
-		for (ProductHelper p : v)
+		for (final ProductHelper p : v)
 		{
 			if (productType == null || productType.equals(p.getProduct().getAttribute(AttributeName.PRODUCTTYPE)))
 			{
@@ -351,21 +339,21 @@ public class ProductHelper extends BaseXJDFHelper
 	@Deprecated
 	public Vector<ProductHelper> getChildren()
 	{
-		VElement v = theElement.getChildElementVector("ChildProduct", null);
+		final VElement v = theElement.getChildElementVector("ChildProduct", null);
 		if (v == null)
 		{
 			return null;
 		}
-		Vector<ProductHelper> vRet = new Vector<ProductHelper>();
-		KElement list = theElement.getParentNode_KElement();
-		for (KElement e : v)
+		final Vector<ProductHelper> vRet = new Vector<>();
+		final KElement list = theElement.getParentNode_KElement();
+		for (final KElement e : v)
 		{
-			String id = e.getAttribute("ChildRef", null, null);
+			final String id = e.getAttribute("ChildRef", null, null);
 			if (id == null)
 			{
 				continue;
 			}
-			KElement kid = list.getChildWithAttribute("Product", "ID", null, id, 0, true);
+			final KElement kid = list.getChildWithAttribute("Product", "ID", null, id, 0, true);
 			if (kid != null)
 				vRet.add(new ProductHelper(kid));
 		}
@@ -389,18 +377,18 @@ public class ProductHelper extends BaseXJDFHelper
 		boolean b = theElement.getBoolAttribute(rootProduct, null, false);
 		if (!b && theElement.getBoolAttribute(rootProduct, null, true))
 		{
-			KElement list = theElement.getParentNode_KElement();
-			b = (list != null && list.getElement(XJDFConstants.Product, null, 0) == theElement
-					&& list.getChildWithAttribute(XJDFConstants.Product, rootProduct, null, "true", 0, true) == null);
+			final KElement list = theElement.getParentNode_KElement();
+			b = (list != null && list.getElement(XJDFConstants.Product, null, 0) == theElement && list.getChildWithAttribute(XJDFConstants.Product, rootProduct, null, "true", 0, true) == null);
 		}
 		return b;
 	}
 
 	/**
 	 * reference the customerinfo specified by ph
+	 *
 	 * @param cuph
 	 */
-	public void setCustomerInfo(ResourceHelper cuph)
+	public void setCustomerInfo(final ResourceHelper cuph)
 	{
 		if (cuph != null)
 			getRoot().setAttribute(ElementName.CUSTOMERINFO + "Ref", cuph.getID());
