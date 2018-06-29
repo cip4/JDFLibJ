@@ -222,7 +222,16 @@ public abstract class BaseXJDFHelper
 	 */
 	public void setID(final String newID)
 	{
-		setAttribute(AttributeName.ID, KElement.xmlnsLocalName(newID));
+		setAttribute(AttributeName.ID, newID);
+	}
+
+	/**
+	 *
+	 * @param newID
+	 */
+	public void setExternalID(final String newID)
+	{
+		setAttribute(XJDFConstants.ExternalID, newID);
 	}
 
 	/**
