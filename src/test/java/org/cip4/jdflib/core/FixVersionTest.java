@@ -362,6 +362,24 @@ public class FixVersionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testIgnore()
+	{
+		final JDFComChannel c = (JDFComChannel) new JDFDoc("ComChannel").getRoot();
+		c.setAttribute("bad", "blah");
+		c.setAttribute("notbad", "blah");
+		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_1);
+		fixVersion.setBZappInvalid(true);
+		fixVersion.addIgnore(ElementName.COMCHANNEL, "notbad");
+		assertTrue(fixVersion.convert(c));
+		assertNull(c.getNonEmpty("bad"));
+		assertEquals("blah", c.getAttribute("notbad"));
+		assertTrue(new FixVersion(EnumVersion.Version_1_5).convert(c));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testFriendlyName()
 	{
 		final JDFDevice d = (JDFDevice) new JDFDoc(ElementName.DEVICE).getRoot();

@@ -120,10 +120,15 @@ public class WalkElement extends BaseWalker
 		final AttributeInfo ai = el.getAttributeInfo();
 		if (keys != null)
 		{
+			final String localName = el.getLocalName();
+			final Vector<String> ignore = fixVersion.ignoreMap.get(localName);
 			for (final String key : keys)
 			{
 				final String value = m.get(key);
-				walkSingleAttribute(el, ai, key, value);
+				if (ignore == null || !ignore.contains(key))
+				{
+					walkSingleAttribute(el, ai, key, value);
+				}
 			}
 		}
 		return el;
@@ -148,7 +153,8 @@ public class WalkElement extends BaseWalker
 	 */
 	void walkSingleAttribute(final JDFElement el, final AttributeInfo ai, final String key, final String value)
 	{
-		if (fixVersion.bZappDeprecated)
+		final EnumAttributeType attType = ai.getAttributeType(key);
+		if (fixVersion.bZappDeprecated || fixVersion.bZappInvalid && attType == null)
 		{
 			final String prefix = KElement.xmlnsPrefix(key);
 			final String uri = prefix == null ? null : el.getNamespaceURIFromPrefix(prefix);
@@ -159,7 +165,6 @@ public class WalkElement extends BaseWalker
 			}
 		}
 
-		final EnumAttributeType attType = ai.getAttributeType(key);
 		if (EnumAttributeType.isRange(attType))
 		{
 			fixRange(el, key, value);

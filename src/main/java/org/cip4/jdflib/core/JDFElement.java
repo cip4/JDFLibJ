@@ -4031,7 +4031,7 @@ public class JDFElement extends KElement
 	 */
 	public String jdfVersion()
 	{
-		return "1.4";
+		return "1.6";
 	}
 
 	/**
