@@ -154,7 +154,17 @@ public class WalkElement extends BaseWalker
 	void walkSingleAttribute(final JDFElement el, final AttributeInfo ai, final String key, final String value)
 	{
 		final EnumAttributeType attType = ai.getAttributeType(key);
-		if (fixVersion.bZappDeprecated || fixVersion.bZappInvalid && attType == null)
+		if (fixVersion.bZappInvalid && attType == null)
+		{
+			final String prefix = KElement.xmlnsPrefix(key);
+			final String uri = prefix == null ? null : el.getNamespaceURIFromPrefix(prefix);
+			if ((uri == null || JDFElement.isInJDFNameSpaceStatic(uri)) && ai.getLastVersion(key) == null)
+			{
+				el.removeAttribute_KElement(key, null);
+				return;
+			}
+		}
+		else if (fixVersion.bZappDeprecated && fixVersion.version != null && attType == null)
 		{
 			final String prefix = KElement.xmlnsPrefix(key);
 			final String uri = prefix == null ? null : el.getNamespaceURIFromPrefix(prefix);

@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment mrSubRefay appear in the software itself, if and wherever such third-party
+ * acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior writtenrestartProcesses() permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software restartProcesses()
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software restartProcesses() copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
@@ -105,10 +73,10 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG <br/>
- * conversion class to convert JDF 1.x to the experimental JDF 2.0<br/>
- * very experimental and subject to change without notice
+ *         conversion class to convert JDF 1.x to the experimental JDF 2.0<br/>
+ *         very experimental and subject to change without notice
  *
- * 15.01.2009
+ *         15.01.2009
  */
 public class JDFToXJDF extends PackageElementWalker
 {
@@ -175,6 +143,7 @@ public class JDFToXJDF extends PackageElementWalker
 	/**
 	 *
 	 * if true, add a modified audit
+	 *
 	 * @param trackAudits
 	 */
 	public void setTrackAudits(final boolean trackAudits)
@@ -192,7 +161,7 @@ public class JDFToXJDF extends PackageElementWalker
 	public final static String rootJMF = "JMF";
 
 	/**
-	 * returns the official JDF schema URI for  2.0
+	 * returns the official JDF schema URI for 2.0
 	 *
 	 *
 	 * @return the URL that fits to majorVersion and minorVersion - null if not supported
@@ -208,7 +177,7 @@ public class JDFToXJDF extends PackageElementWalker
 	private boolean trackAudits = true;
 	protected KElement newRoot = null;
 	protected JDFNode oldRoot = null;
-	protected Set<String> first = new HashSet<String>();
+	protected Set<String> first = new HashSet<>();
 	/**
 	 * if true merge explicitly call out waste
 	 */
@@ -216,6 +185,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Getter for bExplicitWaste attribute.
+	 *
 	 * @return the bExplicitWaste
 	 */
 	public boolean isExplicitWaste()
@@ -225,6 +195,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Setter for bExplicitWaste attribute. if true PartAmount has explicit amounts for good and waste rather than partitions
+	 *
 	 * @param bExplicitWaste the bExplicitWaste to set
 	 */
 	public void setExplicitWaste(final boolean bExplicitWaste)
@@ -233,8 +204,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * if true we retain as much of the initial JDF details as possible and do as little nice to have conversion as possible
-	 * this setting is useful e.g. for jdf xml display
+	 * if true we retain as much of the initial JDF details as possible and do as little nice to have conversion as possible this setting is useful e.g. for jdf xml display
 	 */
 	private boolean bRetainAll = false;
 	private boolean bCleanup = true;
@@ -301,7 +271,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *  if true, we want a productList from the kids
+	 * if true, we want a productList from the kids
 	 */
 	boolean wantProduct;
 
@@ -449,11 +419,12 @@ public class JDFToXJDF extends PackageElementWalker
 	 *
 	 * @param root
 	 */
-	private void preFixVersion(final JDFElement root)
+	void preFixVersion(final JDFElement root)
 	{
 		final FixVersion vers = new FixVersion(EnumVersion.Version_2_0);
 		vers.setLayoutPrepToStripping(bMergeLayoutPrep);
 		vers.setZappDeprecated(true);
+		vers.addIgnore(ElementName.ACTIVITY, AttributeName.ROLES);
 
 		vers.walkTree(root, null);
 	}
@@ -510,6 +481,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * prepares the root so that inherited stuff from the ancestorpool does not get lost
+	 *
 	 * @param node
 	 */
 	private void prepareRoot(final JDFNode node)
@@ -540,7 +512,7 @@ public class JDFToXJDF extends PackageElementWalker
 		newDoc.setInitOnCreate(false);
 		newRoot = newDoc.getRoot();
 		newRoot.setNamespaceURI(getSchemaURL());
-		first = new HashSet<String>();
+		first = new HashSet<>();
 	}
 
 	/**
@@ -565,6 +537,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * calculate a file extension name based of rootName
+	 *
 	 * @return String
 	 */
 	public static String getExtension()
@@ -586,7 +559,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 *
 	 * @param os the output stream
 	 * @param rootNode the root jdf to save
-	 * @param jmf the submission or return  jmf
+	 * @param jmf the submission or return jmf
 	 */
 	public void writeStream(final OutputStream os, final JDFNode rootNode, final JDFJMF jmf)
 	{
@@ -631,6 +604,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * set to keep as much of the original structure as possible - used e.g. for xslt display of JDF nodes
+	 *
 	 * @deprecated
 	 */
 	@Deprecated
@@ -641,6 +615,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Setter for bUpdateVersion attribute.
+	 *
 	 * @param bUpdateVersion the bUpdateVersion to set
 	 */
 	public void setUpdateVersion(final boolean bUpdateVersion)
@@ -650,6 +625,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Getter for bMergeLayout attribute.
+	 *
 	 * @return the bMergeLayout
 	 */
 	public boolean isMergeLayout()
@@ -659,6 +635,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Setter for bMergeLayout attribute.
+	 *
 	 * @param bMergeLayout the bMergeLayout to set
 	 */
 	public void setMergeLayout(final boolean bMergeLayout)
@@ -668,6 +645,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Getter for bMergeLayoutPrep attribute.
+	 *
 	 * @return the bMergeLayoutPrep
 	 */
 	public boolean isMergeLayoutPrep()
@@ -677,6 +655,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Setter for bMergeLayoutPrep attribute.
+	 *
 	 * @param bMergeLayoutPrep the bMergeLayoutPrep to set
 	 */
 	public void setMergeLayoutPrep(final boolean bMergeLayoutPrep)
@@ -686,6 +665,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Getter for bMergeRunList attribute.
+	 *
 	 * @return the bMergeRunList
 	 */
 	public boolean isMergeRunList()
@@ -695,6 +675,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Setter for bMergeRunList attribute.
+	 *
 	 * @param bMergeRunList the bMergeRunList to set
 	 */
 	public void setMergeRunList(final boolean bMergeRunList)
@@ -704,6 +685,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Getter for bRetainSpawnInfo attribute.
+	 *
 	 * @return the bRetainSpawnInfo
 	 */
 	public boolean isRetainSpawnInfo()
@@ -713,6 +695,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Setter for bRetainSpawnInfo attribute.
+	 *
 	 * @param bRetainSpawnInfo the bRetainSpawnInfo to set
 	 */
 	public void setRetainSpawnInfo(final boolean bRetainSpawnInfo)
@@ -722,6 +705,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Getter for bSingleNode attribute.
+	 *
 	 * @return the bSingleNode
 	 */
 	public boolean isSingleNode()
@@ -731,6 +715,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Setter for bSingleNode attribute.
+	 *
 	 * @param bSingleNode the bSingleNode to set
 	 */
 	public void setSingleNode(final boolean bSingleNode)
@@ -740,6 +725,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Getter for bUpdateVersion attribute.
+	 *
 	 * @return the bUpdateVersion
 	 */
 	public boolean isUpdateVersion()
@@ -749,6 +735,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Getter for bTypeSafeMessage attribute.
+	 *
 	 * @return the bTypeSafeMessage
 	 */
 	public boolean isTypeSafeMessage()
@@ -757,8 +744,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * Setter for bTypeSafeMessage attribute.
-	 * also switches the JMF Root element name to XJMF
+	 * Setter for bTypeSafeMessage attribute. also switches the JMF Root element name to XJMF
 	 *
 	 * @param bTypeSafeMessage the bTypeSafeMessage to set
 	 */
@@ -769,6 +755,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Getter for bAbstractMessage attribute.
+	 *
 	 * @return the bAbstractMessage
 	 */
 	public boolean isAbstractMessage()
@@ -778,6 +765,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Setter for bAbstractMessage attribute.
+	 *
 	 * @param bAbstractMessage the bAbstractMessage to set
 	 */
 	public void setAbstractMessage(final boolean bAbstractMessage)
@@ -787,6 +775,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Getter for bSpanAsAttribute attribute.
+	 *
 	 * @return the bSpanAsAttribute
 	 */
 	public boolean isSpanAsAttribute()
@@ -796,6 +785,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Setter for bSpanAsAttribute attribute.
+	 *
 	 * @param bSpanAsAttribute the bSpanAsAttribute to set
 	 */
 	public void setSpanAsAttribute(final boolean bSpanAsAttribute)
@@ -805,6 +795,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Getter for bIntentPartition attribute.
+	 *
 	 * @return the bIntentPartition
 	 */
 	public boolean isIntentPartition()
@@ -814,6 +805,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Setter for bIntentPartition attribute.
+	 *
 	 * @param bIntentPartition the bIntentPartition to set
 	 */
 	public void setIntentPartition(final boolean bIntentPartition)
@@ -823,6 +815,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Getter for bHTMLColor attribute.
+	 *
 	 * @return the bHTMLColor
 	 */
 	public boolean isHTMLColor()
@@ -832,6 +825,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Setter for bHTMLColor attribute.
+	 *
 	 * @param bHTMLColor the bHTMLColor to set
 	 */
 	public void setHTMLColor(final boolean bHTMLColor)
@@ -841,6 +835,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Getter for bConvertTilde attribute. if true, we zapp tilde
+	 *
 	 * @return the bConvertTilde
 	 */
 	public boolean isConvertTilde()
@@ -850,6 +845,7 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Setter for bConvertTilde attribute.
+	 *
 	 * @param bConvertTilde the bConvertTilde to set
 	 */
 	public void setConvertTilde(final boolean bConvertTilde)
