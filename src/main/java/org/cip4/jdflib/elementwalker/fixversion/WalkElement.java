@@ -164,7 +164,7 @@ public class WalkElement extends BaseWalker
 				return;
 			}
 		}
-		else if (fixVersion.bZappDeprecated && fixVersion.version != null && attType == null)
+		else if (fixVersion.bZappDeprecated && fixVersion.version != null)
 		{
 			final String prefix = KElement.xmlnsPrefix(key);
 			final String uri = prefix == null ? null : el.getNamespaceURIFromPrefix(prefix);
