@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment mrSubRefay appear in the software itself, if and wherever such third-party
+ * acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior writtenrestartProcesses() permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software restartProcesses()
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software restartProcesses() copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  */
 /**
@@ -71,7 +39,7 @@
  *
  * @author Dietrich Mucha
  *
- * Copyright (C) 2002 Heidelberger Druckmaschinen AG. All Rights Reserved.
+ *         Copyright (C) 2002 Heidelberger Druckmaschinen AG. All Rights Reserved.
  */
 package org.cip4.jdflib.util;
 
@@ -93,7 +61,7 @@ import org.junit.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * before June 10, 2009
+ *         before June 10, 2009
  */
 public class JDFDateTest extends JDFTestCaseBase
 {
@@ -113,9 +81,9 @@ public class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
-	* @throws DataFormatException
-	*
-	*/
+	 * @throws DataFormatException
+	 *
+	 */
 	@Test
 	public void testCreateDateNormalize() throws DataFormatException
 	{
@@ -124,9 +92,9 @@ public class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
-	* @throws DataFormatException
-	*
-	*/
+	 * @throws DataFormatException
+	 *
+	 */
 	@Test
 	public void testCreateDateBlank() throws DataFormatException
 	{
@@ -257,6 +225,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * Method testdateOnly
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -271,6 +240,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * Method testdateOnly
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -292,6 +262,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * Method testdateOnly
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -306,6 +277,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * Method testdateOnly
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -320,6 +292,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * Method testdateOnly
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -334,6 +307,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * Method testdateOnly
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -348,6 +322,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * Method testYearMonth
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -362,6 +337,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * Method testdateTimeZone.
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -378,17 +354,18 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * Method testdateTimeZone.
+	 *
 	 * @throws Exception
 	 */
-	//@Test
-	//	public void testConstructLocalDate() throws Exception
-	//	{
-	//		LocalDateTime now = LocalDateTime.now();
-	//		JDFDate date = new JDFDate(now);
-	//		JDFDate date2 = new JDFDate(System.currentTimeMillis());
-	//		assertEquals(date.getTimeZoneOffsetInMillis(), date2.getTimeZoneOffsetInMillis());
-	//		assertEquals(date.getTimeInMillis(), date2.getTimeInMillis(), 1000);
-	//	}
+	// @Test
+	// public void testConstructLocalDate() throws Exception
+	// {
+	// LocalDateTime now = LocalDateTime.now();
+	// JDFDate date = new JDFDate(now);
+	// JDFDate date2 = new JDFDate(System.currentTimeMillis());
+	// assertEquals(date.getTimeZoneOffsetInMillis(), date2.getTimeZoneOffsetInMillis());
+	// assertEquals(date.getTimeInMillis(), date2.getTimeInMillis(), 1000);
+	// }
 
 	/**
 	 * Method testdateMillis.
@@ -404,6 +381,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * Method testdateMillis.
+	 *
 	 * @throws DataFormatException
 	 */
 	@Test
@@ -421,6 +399,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * Method testdateTimeISO.
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -501,6 +480,48 @@ public class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * Method testdateTimeISO.
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testdateTimeISOMillis() throws Exception
+	{
+		JDFDate.setWantISOMilliseconds(true);
+		JDFDate date = new JDFDate();
+		String strDate = date.getDateTimeISO();
+		// summer
+		date = new JDFDate("1999-09-26T11:43:10+03:00");
+		strDate = date.getDateTimeISO();
+		assertEquals(strDate, "1999-09-26T11:43:10.000+03:00");
+		date = new JDFDate("2018-09-26T11:43:10.777+07:00");
+		strDate = date.getDateTimeISO();
+		assertEquals(strDate, "2018-09-26T11:43:10.777+07:00");
+
+	}
+
+	/**
+	 * Method testdateTimeISO.
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testTimeISOMillis() throws Exception
+	{
+		JDFDate.setWantISOMilliseconds(true);
+		JDFDate date = new JDFDate();
+		String strDate = date.getDateTimeISO();
+		// summer
+		date = new JDFDate("1999-09-26T11:43:10+03:00");
+		strDate = date.getTimeISO();
+		assertEquals(strDate, "11:43:10.000");
+		date = new JDFDate("2018-09-26T11:43:10.777+07:00");
+		strDate = date.getTimeISO();
+		assertEquals(strDate, "11:43:10.777");
+
+	}
+
+	/**
 	 *
 	 */
 	@Test
@@ -519,8 +540,10 @@ public class JDFDateTest extends JDFTestCaseBase
 	@Test
 	public void testRegexp()
 	{
-		assertTrue(StringUtil.matches(new JDFDate().getDateTimeISO(), "(19|20)\\d\\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])[T](0[0-9]|1[0-9]|2[0123])[:]([0-5][0-9])[:]([0-5][0-9])([.](\\d)*)?(([+-](0[0-9]|1[0-9]|2[0123])[:](00))|[a-zA-Z])"));
-		assertTrue(StringUtil.matches(new JDFDate().getDateTimeISO(), "(19|20)\\d\\d(-)(0[1-9]|1[012])(-)(0[1-9]|[12][0-9]|3[01])[T](0[0-9]|1[0-9]|2[0123])(:)([0-5][0-9])(:)([0-5][0-9])((.)(\\d)*)?(([+-](0[0-9]|1[0-9]|2[0123])(:)(00))|[a-zA-Z])"));
+		assertTrue(StringUtil.matches(new JDFDate().getDateTimeISO(),
+				"(19|20)\\d\\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])[T](0[0-9]|1[0-9]|2[0123])[:]([0-5][0-9])[:]([0-5][0-9])([.](\\d)*)?(([+-](0[0-9]|1[0-9]|2[0123])[:](00))|[a-zA-Z])"));
+		assertTrue(StringUtil.matches(new JDFDate().getDateTimeISO(),
+				"(19|20)\\d\\d(-)(0[1-9]|1[012])(-)(0[1-9]|[12][0-9]|3[01])[T](0[0-9]|1[0-9]|2[0123])(:)([0-5][0-9])(:)([0-5][0-9])((.)(\\d)*)?(([+-](0[0-9]|1[0-9]|2[0123])(:)(00))|[a-zA-Z])"));
 	}
 
 	/**
@@ -568,7 +591,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	public void testBefore()
 	{
 		final JDFDate date1 = new JDFDate();
-		final JDFDate date2 = new JDFDate();
+		final JDFDate date2 = new JDFDate(date1);
 		assertFalse(date1.before(date2.getTimeInMillis()));
 		assertFalse(date2.before(date1.getTimeInMillis()));
 		date1.addOffset(22, 22, 22, 22);
@@ -711,7 +734,7 @@ public class JDFDateTest extends JDFTestCaseBase
 		}
 		catch (final IllegalArgumentException x)
 		{
-			//NOP
+			// NOP
 		}
 	}
 
@@ -727,7 +750,7 @@ public class JDFDateTest extends JDFTestCaseBase
 		assertEquals("11", date.getFormattedDateTime("MM"));
 		assertEquals("Nov", date.getFormattedDateTime("MMM"));
 		assertEquals("Nov 19 2008 - 20:00", date.getFormattedDateTime("MMM dd yyyy - HH:mm"));
-		assertEquals("300", date.getFormattedDateTime("SSS")); // test for  milliseconds
+		assertEquals("300", date.getFormattedDateTime("SSS")); // test for milliseconds
 		assertEquals("300", date.getFormattedDateTime("S")); // test for milliseconds
 		assertEquals(dateString, date.getFormattedDateTime("yyyy'-'MM'-'dd'T'HH:mm:ss.SSSZZ"));
 		assertEquals(dateString, date.getFormattedDateTime("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"));
@@ -879,9 +902,9 @@ public class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
-	* @throws DataFormatException
-	*
-	*/
+	 * @throws DataFormatException
+	 *
+	 */
 	@Test
 	public void testTimeZoneSwitch() throws DataFormatException
 	{
@@ -913,6 +936,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	{
 		super.setUp();
 		defaultTime = JDFDate.defaultHour;
+		JDFDate.setWantISOMilliseconds(false);
 	}
 
 	/**
@@ -922,6 +946,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	public void tearDown() throws Exception
 	{
 		JDFDate.setDefaultHour(defaultTime);
+		JDFDate.setWantISOMilliseconds(false);
 		super.tearDown();
 	}
 }

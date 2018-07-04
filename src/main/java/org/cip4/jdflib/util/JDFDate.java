@@ -3,82 +3,46 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
 
 /**
- * ==========================================================================
- * class JDFDate
+ * ========================================================================== class JDFDate
  *
- * JDFDate additionally stores the timezone offset of the original date,
- * so that after mDate = new JDFDate("1999-09-26T11:43:10+03:00") the following
- * equation holds: mDate.dateTimeISO() == "1999-09-26T11:43:10+03:00"
- * independent of the default timezone
- * ==========================================================================
- * COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2003. ALL RIGHTS RESERVED
+ * JDFDate additionally stores the timezone offset of the original date, so that after mDate = new JDFDate("1999-09-26T11:43:10+03:00") the following equation holds: mDate.dateTimeISO() ==
+ * "1999-09-26T11:43:10+03:00" independent of the default timezone ========================================================================== COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2003. ALL
+ * RIGHTS RESERVED
  **/
 
 package org.cip4.jdflib.util;
@@ -98,6 +62,7 @@ import org.cip4.jdflib.core.VString;
 /**
  * class to manipulate date and time according to ISO 8601<br/>
  * the date and time are in local time with the respective time zone specified
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
@@ -106,9 +71,27 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	private long lTimeInMillis;
 	private int m_TimeZoneOffsetInMillis; // in milliseconds from GMT-tim
 	static int defaultHour = 12;
+	static boolean wantISOMilliseconds = false;
+
+	/**
+	 * @return the wantISOMilliseconds
+	 */
+	public static boolean isWantISOMilliseconds()
+	{
+		return wantISOMilliseconds;
+	}
+
+	/**
+	 * @param wantISOMilliseconds the wantISOMilliseconds to set
+	 */
+	public static void setWantISOMilliseconds(final boolean wantISOMilliseconds)
+	{
+		JDFDate.wantISOMilliseconds = wantISOMilliseconds;
+	}
 
 	/**
 	 * Setter for defaultHour attribute.
+	 *
 	 * @param defaultHour the defaultHour to set
 	 */
 	public static void setDefaultHour(final int defaultHour)
@@ -127,10 +110,12 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 *
 	 */
 	final static String TIMEISO = "HH:mm:ss";
+	final static String TIMEISO_MILLI = "HH:mm:ss.SSS";
 	/**
 	 *
 	 */
 	public static final String DATETIMEISO = "yyyy'-'MM'-'dd'T'HH:mm:ssZZ";
+	public static final String DATETIMEISO_MILLI = "yyyy'-'MM'-'dd'T'HH:mm:ss.SSSZZ";
 	/**
 	 * iso - seconds are 0
 	 */
@@ -216,6 +201,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 		/**
 		 * parse a substring for integers - this is a bit faster then the original substring.intvalue...
+		 *
 		 * @param strDateTime
 		 * @param pos1
 		 * @param pos2
@@ -236,8 +222,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * Allocates a <code>JDFDate</code> object and initializes it so that it represents the time at which it was allocated, measured to the nearest millisecond.
-	 * Also sets the current time zone to the system default time zone
+	 * Allocates a <code>JDFDate</code> object and initializes it so that it represents the time at which it was allocated, measured to the nearest millisecond. Also sets the current time zone to the
+	 * system default time zone
 	 */
 	public JDFDate()
 	{
@@ -245,11 +231,10 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * Allocates a <code>JDFDate</code> object and initializes it so that it represents the time point, expressed in milliseconds after January 1, 1970, 0:00:00
-	 * GMT. Also sets the current time zone to the system default time zone
+	 * Allocates a <code>JDFDate</code> object and initializes it so that it represents the time point, expressed in milliseconds after January 1, 1970, 0:00:00 GMT. Also sets the current time zone to
+	 * the system default time zone
 	 *
-	 * @param iTime current time in milliseconds after January 1, 1970, 0:00:00 GMT. Use JDFDuration instead. This class will be modified to handle only JDFDate
-	 * objects
+	 * @param iTime current time in milliseconds after January 1, 1970, 0:00:00 GMT. Use JDFDuration instead. This class will be modified to handle only JDFDate objects
 	 */
 	public JDFDate(final long iTime)
 	{
@@ -280,20 +265,19 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 * @param other the date to clone
 	 */
-	//	public JDFDate(final LocalDateTime dateTime)
-	//	{
-	//		this();
-	//		if (dateTime != null)
-	//		{
-	//			JDFDate date = createDate(dateTime.toString());
-	//			lTimeInMillis = date.getTimeInMillis();
-	//			m_TimeZoneOffsetInMillis = date.getTimeZoneOffsetInMillis();
-	//		}
-	//	}
+	// public JDFDate(final LocalDateTime dateTime)
+	// {
+	// this();
+	// if (dateTime != null)
+	// {
+	// JDFDate date = createDate(dateTime.toString());
+	// lTimeInMillis = date.getTimeInMillis();
+	// m_TimeZoneOffsetInMillis = date.getTimeZoneOffsetInMillis();
+	// }
+	// }
 
 	/**
-	 * Allocates a <code>JDFDate</code> object and initializes it so that the JDFDate represents a date set by <code>strDateTime</code> Format of
-	 * <code>strDateTime</code>
+	 * Allocates a <code>JDFDate</code> object and initializes it so that the JDFDate represents a date set by <code>strDateTime</code> Format of <code>strDateTime</code>
 	 * <p>
 	 * Valid DataTime Strings are:
 	 * <li>"yyyy-mm-ddThh:mm:ss.sss+hh:00"</li>
@@ -302,14 +286,12 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * <li>"yyyy-mm-ddThh:mm:ssZ"</li>
 	 * <p>
 	 * Attention!<br>
-	 * you can enter milliseconds, but <code>getDateTimeISO()</code> still returns the time rounded to full seconds. Only <code>long getTimeInMillis()</code>
-	 * returns the exact time
+	 * you can enter milliseconds, but <code>getDateTimeISO()</code> still returns the time rounded to full seconds. Only <code>long getTimeInMillis()</code> returns the exact time
 	 *
 	 * @param strDateTime formatted date and time
 	 * @throws DataFormatException if strDateTime is not a valid DateTime
 	 *
-	 * Attention! you can enter milliseconds, but getDateTimeISO() still returns the time rounded to full seconds only long getTimeInMillis() returns the exact
-	 * time
+	 *             Attention! you can enter milliseconds, but getDateTimeISO() still returns the time rounded to full seconds only long getTimeInMillis() returns the exact time
 	 */
 	public JDFDate(final String strDateTime) throws DataFormatException
 	{
@@ -327,6 +309,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * factory style constructor that catches all exceptions and returns null if date is invalid
+	 *
 	 * @param date the formatted date string
 	 * @return the JDFDate , null if date is not a valid string
 	 */
@@ -362,8 +345,10 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 * init - initializes a JDFDate object with a formatted ISO DateTime value<br>
 	 * Method init handles Strings of type: <br>
-	 * <li>yyyy-mm-ddThh:mm:ss+hh:00</li> <li>yyyy-mm-ddThh:mm:ss-hh:00</li> <li>
-	 * yyyy-mm-ddThh:mm:ssZ</li> <li>yyyy-mm-dd</li>
+	 * <li>yyyy-mm-ddThh:mm:ss+hh:00</li>
+	 * <li>yyyy-mm-ddThh:mm:ss-hh:00</li>
+	 * <li>yyyy-mm-ddThh:mm:ssZ</li>
+	 * <li>yyyy-mm-dd</li>
 	 * <p>
 	 * The values for month, time etc must be valid time values (e.g. 27 hours or 87 sec are invalid)
 	 * <p>
@@ -539,6 +524,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 		/**
 		 * TODO Please insert comment!
+		 *
 		 * @throws DataFormatException
 		 */
 		private void cleanDate() throws DataFormatException
@@ -734,8 +720,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * setOffset: set the offset to this time. Note: The time stored in this is not resetted if you want an offset based on current time use 'public MyDate(int
-	 * iOffset)'
+	 * setOffset: set the offset to this time. Note: The time stored in this is not resetted if you want an offset based on current time use 'public MyDate(int iOffset)'
 	 *
 	 * @param iOffset offset time in seconds
 	 * @deprecated use addOffset
@@ -764,6 +749,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 *
 	 * create a date with a relative offset defined in duration
+	 *
 	 * @param duration
 	 * @param hour the fixed hour, if -1 don't set
 	 * @param minute the fixed minute, if -1 don't set
@@ -791,13 +777,14 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public String getDateTimeISO()
 	{
-		return getFormattedDateTime(DATETIMEISO);
+		return getFormattedDateTime(wantISOMilliseconds ? DATETIMEISO_MILLI : DATETIMEISO);
 	}
 
 	/**
 	 * format the date with no time added
+	 *
 	 * @return date and time as String of form yyyy-mm-dd
-	* @deprecated use @see {@link JDFDate#getDateISO()}
+	 * @deprecated use @see {@link JDFDate#getDateISO()}
 	 */
 	@Deprecated
 	public String getDateTimeISOBD()
@@ -818,6 +805,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 * the date formated as defined in ISO 8601<br/>
 	 * the date is in local time with the respective time zone specified
+	 *
 	 * @return String: the date of this of form yyyy-mm-dd
 	 */
 	public String getDateISO()
@@ -833,7 +821,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public String getTimeISO()
 	{
-		return getFormattedDateTime(TIMEISO);
+		return getFormattedDateTime(wantISOMilliseconds ? TIMEISO_MILLI : TIMEISO);
 	}
 
 	/**
@@ -907,7 +895,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 *
-	 *set the time without modifying the date
+	 * set the time without modifying the date
+	 *
 	 * @param h
 	 * @param m
 	 * @param s
@@ -977,6 +966,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * why the %&$/ is this called getTime, when it returns a date???
+	 *
 	 * @return
 	 * @deprecated
 	 */
@@ -988,7 +978,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 *
-	 *get the month as an integer
+	 * get the month as an integer
+	 *
 	 * @return (1-12)
 	 */
 	public int getMonth()
@@ -998,7 +989,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 *
-	 *get the year as an integer
+	 * get the year as an integer
+	 *
 	 * @return the year
 	 */
 	public int getYear()
@@ -1008,7 +1000,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 *
-	 *get the day of month as an integer
+	 * get the day of month as an integer
+	 *
 	 * @return the year
 	 */
 	public int getDay()
@@ -1018,6 +1011,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * why the %&$/ is this called setTime, when it uses a date???
+	 *
 	 * @param date
 	 * @deprecated
 	 */
@@ -1029,11 +1023,10 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * Compares two JDFDates for equality.<br>
-	 * The result is <code>true</code> if and only if the argument is not <code>null</code> and is a <code>JDFDate</code> object that represents the same point
-	 * in time, to the millisecond, as this object.
+	 * The result is <code>true</code> if and only if the argument is not <code>null</code> and is a <code>JDFDate</code> object that represents the same point in time, to the millisecond, as this
+	 * object.
 	 * <p>
-	 * Thus, two <code>JDFDate</code> objects are equal if and only if the <code>getTimeInMillis</code> method returns the same <code>long</code> value for
-	 * both.
+	 * Thus, two <code>JDFDate</code> objects are equal if and only if the <code>getTimeInMillis</code> method returns the same <code>long</code> value for both.
 	 */
 	@Override
 	public boolean equals(final Object other)
@@ -1065,8 +1058,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 *
-	 * @see java.lang.Comparable#compareTo(java.lang.Object) the value 0 if the argument is a Date equal to this Date; a value less than 0 if the argument is a
-	 * Date after this Date; and a value greater than 0 if the argument is a Date before this Date.
+	 * @see java.lang.Comparable#compareTo(java.lang.Object) the value 0 if the argument is a Date equal to this Date; a value less than 0 if the argument is a Date after this Date; and a value
+	 *      greater than 0 if the argument is a Date before this Date.
 	 */
 	@Override
 	public int compareTo(final Object arg0)
