@@ -40,6 +40,7 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -116,11 +117,14 @@ public class WalkXJDFResource extends WalkXElement
 		if (newPartitionElement instanceof JDFResource)
 		{
 			final JDFResource newPartition = (JDFResource) newPartitionElement;
-			JDFResourceLink rl = null;
+			JDFElement rl = null;
 			if (theNode != null)
 			{
-				// theNode.getLink(newPartition, null);
-				rl = ensureLink(theNode, newPartition, rl);
+				rl = ensureLink(theNode, newPartition);
+			}
+			else if (parent instanceof JDFResourceInfo)
+			{
+				rl = (JDFResourceInfo) parent;
 			}
 			final JDFAttributeMap partMap = vParts.get(0);
 			handleParts(res, vParts, rl);
@@ -136,10 +140,10 @@ public class WalkXJDFResource extends WalkXElement
 	 * @param vParts
 	 * @param rl
 	 */
-	protected void handleParts(final JDFResource res, final VJDFAttributeMap vParts, final JDFResourceLink rl)
+	protected void handleParts(final JDFResource res, final VJDFAttributeMap vParts, final JDFElement rl)
 	{
 		handleLinkParts(vParts, rl);
-		handleIdentical(vParts, res, rl);
+		handleIdentical(vParts, res);
 	}
 
 	private final static VString keepKeys = new VString("SignatureName SheetName Side PartVersion Separation BlockName Run DocIndex RunIndex SetIndex SheetIndex", null);
@@ -150,7 +154,7 @@ public class WalkXJDFResource extends WalkXElement
 	 * @param vParts
 	 * @param rl
 	 */
-	protected void handleLinkParts(final VJDFAttributeMap vParts, final JDFResourceLink rl)
+	protected void handleLinkParts(final VJDFAttributeMap vParts, final JDFElement rl)
 	{
 		if (rl != null && ContainerUtil.getNonEmpty(vParts) != null)
 		{
@@ -184,20 +188,28 @@ public class WalkXJDFResource extends WalkXElement
 				}
 			}
 			clone.remove(new JDFAttributeMap());
-			VJDFAttributeMap oldParts = rl.getPartMapVector();
-			if (oldParts != null)
-			{
-				oldParts.appendUnique(clone);
-			}
-			else
-			{
-				oldParts = clone;
-			}
-			rl.setPartMapVector(oldParts);
+			updatePartMaps(rl, clone);
 		}
 	}
 
-	private void handleIdentical(final VJDFAttributeMap vParts, final JDFResource res, final JDFResourceLink rl)
+	void updatePartMaps(final JDFElement rl, final VJDFAttributeMap clone)
+	{
+		VJDFAttributeMap oldParts = (rl instanceof JDFResourceLink) ? ((JDFResourceLink) rl).getPartMapVector() : ((JDFResourceInfo) rl).getPartMapVector();
+		if (oldParts != null)
+		{
+			oldParts.appendUnique(clone);
+		}
+		else
+		{
+			oldParts = clone;
+		}
+		if (rl instanceof JDFResourceLink)
+			((JDFResourceLink) rl).setPartMapVector(oldParts);
+		else
+			((JDFResourceInfo) rl).setPartMapVector(oldParts);
+	}
+
+	private void handleIdentical(final VJDFAttributeMap vParts, final JDFResource res)
 	{
 		if (vParts.size() > 1)
 		{
@@ -295,8 +307,7 @@ public class WalkXJDFResource extends WalkXElement
 			}
 			// parameters and consumables are assumed to be available by default
 			final EnumResourceClass resClass = res.getResourceClass();
-			if (isNew && EnumUsage.Input.equals(inOut)
-					&& (EnumResourceClass.Parameter.equals(resClass) || EnumResourceClass.Consumable.equals(resClass) || EnumResourceClass.Intent.equals(resClass)))
+			if (isNew && EnumUsage.Input.equals(inOut) && (EnumResourceClass.Parameter.equals(resClass) || EnumResourceClass.Consumable.equals(resClass) || EnumResourceClass.Intent.equals(resClass)))
 			{
 				res.setResStatus(EnumResStatus.Available, false);
 			}
@@ -329,8 +340,7 @@ public class WalkXJDFResource extends WalkXElement
 		if (inOut == null && xjdfToJDFImpl.isHeuristicLink())
 		{
 			if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name) && !ElementName.COMPONENT.equals(name)
-					&& !ElementName.COLORPOOL.equals(name) && !ElementName.MEDIA.equals(name) && !ElementName.EXPOSEDMEDIA.equals(name)
-					&& theNode.isValidLink(name, EnumUsage.Input, processUsage))
+					&& !ElementName.COLORPOOL.equals(name) && !ElementName.MEDIA.equals(name) && !ElementName.EXPOSEDMEDIA.equals(name) && theNode.isValidLink(name, EnumUsage.Input, processUsage))
 			{
 				inOut = EnumUsage.Input;
 			}
@@ -383,12 +393,12 @@ public class WalkXJDFResource extends WalkXElement
 	 * @param map
 	 * @param rl
 	 */
-	private void handleAmountPool(final KElement xjdfRes, final JDFAttributeMap partmap, final JDFAttributeMap map, final JDFResourceLink rl)
+	private void handleAmountPool(final KElement xjdfRes, final JDFAttributeMap partmap, final JDFAttributeMap map, final JDFElement rl)
 	{
 		final KElement ap = xjdfRes.getElement(ElementName.AMOUNTPOOL);
 		if (ap != null)
 		{
-			final KElement newAmountPool = rl.getCreateAmountPool();
+			final KElement newAmountPool = rl.getCreateElement(ElementName.AMOUNTPOOL);
 			final Vector<JDFPartAmount> vpa = ap.getChildrenByClass(JDFPartAmount.class, false, 0);
 			for (final JDFPartAmount pa : vpa)
 			{
@@ -396,7 +406,8 @@ public class WalkXJDFResource extends WalkXElement
 			}
 			ap.deleteNode();
 		}
-		xjdfToJDFImpl.moveAmountsToLink(partmap, map, rl);
+		if (rl instanceof JDFResourceLink)
+			xjdfToJDFImpl.moveAmountsToLink(partmap, map, (JDFResourceLink) rl);
 	}
 
 	/**
@@ -406,23 +417,13 @@ public class WalkXJDFResource extends WalkXElement
 	 * @param rl
 	 * @return
 	 */
-	private JDFResourceLink ensureLink(final JDFNode partialProductNode, final JDFResource newPartition, JDFResourceLink rl)
+	private JDFResourceLink ensureLink(final JDFNode partialProductNode, final JDFResource newPartition)
 	{
 		if (partialProductNode != null)
 		{
-			JDFResourceLink rlpart = partialProductNode.getLink(newPartition, null);
-			final EnumUsage newUsage = rl == null ? null : rl.getUsage();
-			if (rlpart == null && newUsage != null)
-			{
-				rlpart = partialProductNode.ensureLink(newPartition, newUsage, null);
-			}
-			if (rlpart != null)
-			{
-				rl = rlpart;
-			}
-
+			return partialProductNode.getLink(newPartition, null);
 		}
-		return rl;
+		return null;
 	}
 
 	/**
