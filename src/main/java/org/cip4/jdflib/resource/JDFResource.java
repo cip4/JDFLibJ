@@ -43,6 +43,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
@@ -96,6 +97,7 @@ import org.w3c.dom.Node;
  *
  *         May 7, 2009
  */
+@SuppressWarnings("unchecked")
 public class JDFResource extends JDFElement
 {
 	private static final long serialVersionUID = 1L;
@@ -5800,11 +5802,16 @@ public class JDFResource extends JDFElement
 		final String old = getNonEmpty_KElement(keyName);
 		if (old == null || !old.equals(value))
 		{
-			setAttribute(keyName, value, null);
+			setAttributeRaw(keyName, value);
 			addPartIDKey(key);
+			final JDFResource resourceRoot = getResourceRoot();
 			if (old != null)
 			{
-				getResourceRoot().partitionMap = null;
+				resourceRoot.partitionMap = null;
+			}
+			else if (resourceRoot.partitionMap != null)
+			{
+				resourceRoot.partitionMap.put(getPartMap(), this);
 			}
 		}
 	}
@@ -7629,6 +7636,28 @@ public class JDFResource extends JDFElement
 			getResourceRoot().partitionMap = null;
 		}
 		return super.appendElement(elementName, nameSpaceURI);
+	}
+
+	static final Set<String> setPartIDKeys = new HashSet<>();
+	static
+	{
+		setPartIDKeys.addAll(EnumPartIDKey.getEnumMap().keySet());
+	}
+
+	/**
+	 * @see org.cip4.jdflib.core.KElement#setAttribute(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void setAttribute(final String key, final String value, final String nameSpaceURI)
+	{
+		if (key != null && setPartIDKeys.contains(key))
+		{
+			setPartIDKey(EnumPartIDKey.getEnum(key), value);
+		}
+		else
+		{
+			super.setAttribute(key, value, nameSpaceURI);
+		}
 	}
 
 }

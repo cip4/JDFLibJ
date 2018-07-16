@@ -891,7 +891,7 @@ public class KElement extends ElementNSImpl implements Element
 	{
 		double d = getRealAttribute(key, nameSpaceURI, 0);
 		d += inc;
-		setAttribute(key, d, namespaceURI);
+		setAttribute(key, d, nameSpaceURI);
 		return d;
 	}
 
@@ -907,7 +907,7 @@ public class KElement extends ElementNSImpl implements Element
 	{
 		int i = getIntAttribute(key, nameSpaceURI, 0);
 		i += inc;
-		setAttribute(key, i, namespaceURI);
+		setAttribute(key, i, nameSpaceURI);
 		return i;
 	}
 
@@ -1387,7 +1387,7 @@ public class KElement extends ElementNSImpl implements Element
 				for (int i = 0; i < siz; i++)
 				{
 					final Node a = nm.item(i);
-					if (ignoreList == null || !ignoreList.contains(a.getLocalName()))
+					if (ignoreList == null || (!ignoreList.contains(a.getLocalName()) && !ignoreList.contains(a.getNodeName())))
 					{
 						try
 						{

@@ -3529,6 +3529,37 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
+	*
+	*/
+	@Test
+	public void testAppendAttributeNS()
+	{
+
+		final XMLDoc d = new XMLDoc("e", null);
+		final KElement e = d.getRoot();
+		assertNull(e.getNamespaceURI());
+		final KElement foo = e.appendElement("foo");
+		foo.appendAttribute("foo:bar", "a", "www.foo.com", null, false);
+		foo.appendAttribute("foo:bar", "b", "www.foo.com", null, false);
+		assertEquals("a b", foo.getAttribute("bar", "www.foo.com", null));
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testAddAttributeNS()
+	{
+		final XMLDoc d = new XMLDoc("e", null);
+		final KElement e = d.getRoot();
+		assertNull(e.getNamespaceURI());
+		final KElement foo = e.appendElement("foo");
+		foo.addAttribute("foo:bar", 1, "www.foo.com");
+		foo.addAttribute("foo:bar", 2, "www.foo.com");
+		assertEquals(3, foo.getIntAttribute("bar", "www.foo.com", 0));
+	}
+
+	/**
 	 *
 	 */
 	@Test

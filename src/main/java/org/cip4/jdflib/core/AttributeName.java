@@ -3160,7 +3160,7 @@ public final class AttributeName
 	public static final String SPLITDOCUMENTS = "SplitDocuments";
 	/** */
 	public static final String SPOTFUNCTION = "SpotFunction";
-	/** */
+	public static final String SPREADTYPE = "SpreadType";
 	public static final String SRGB = "sRGB";
 	/** */
 	public static final String STACKAMOUNT = "StackAmount";

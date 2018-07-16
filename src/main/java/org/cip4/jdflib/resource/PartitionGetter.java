@@ -835,7 +835,6 @@ public class PartitionGetter
 		final JDFResource p = (JDFResource) parent.appendElementRaw(resourceRoot.getNodeName(), resourceRoot.getNamespaceURI());
 		p.init();
 		p.setPartIDKey(partType, value);
-		leafMap.put(map, p);
 		return p;
 	}
 
