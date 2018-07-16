@@ -7650,7 +7650,7 @@ public class JDFResource extends JDFElement
 	@Override
 	public void setAttribute(final String key, final String value, final String nameSpaceURI)
 	{
-		if (key != null && setPartIDKeys.contains(key))
+		if (key != null && setPartIDKeys.contains(key) && !isResourceElement())
 		{
 			setPartIDKey(EnumPartIDKey.getEnum(key), value);
 		}
