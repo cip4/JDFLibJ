@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -73,9 +41,9 @@
  *
  * @author Dietrich Mucha
  *
- * This method creates at least a KElement !!! (was JDFElement until 11.2005)
+ *         This method creates at least a KElement !!! (was JDFElement until 11.2005)
  *
- * Copyright (C) 2003 Heidelberger Druckmaschinen AG. All Rights Reserved.
+ *         Copyright (C) 2003 Heidelberger Druckmaschinen AG. All Rights Reserved.
  */
 
 package org.cip4.jdflib.core;
@@ -98,6 +66,7 @@ import org.w3c.dom.Node;
 
 /**
  * implementation of the JDFLib class factory
+ * 
  * @author prosirai
  *
  */
@@ -114,7 +83,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	/**
 	 * this is a singlton data container for the parser
 	 *
-	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	private static class DocumentData
 	{
@@ -514,6 +483,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			sm_PackageNames.put(ElementName.INTERPRETEDPDLDATA, "org.cip4.jdflib.resource.process.JDFInterpretedPDLData");
 			sm_PackageNames.put(ElementName.INTERPRETINGDETAILS, "org.cip4.jdflib.resource.process.prepress.JDFInterpretingDetails");
 			sm_PackageNames.put(ElementName.INTERPRETINGPARAMS, "org.cip4.jdflib.resource.JDFInterpretingParams");
+			sm_PackageNames.put(ElementName.ISOPAPERSUBSTRATE, "org.cip4.jdflib.span.JDFSpanISOPaperSubstrate");
 			sm_PackageNames.put(ElementName.ISPRESENTEVALUATION, "org.cip4.jdflib.resource.devicecapability.JDFIsPresentEvaluation");
 			sm_PackageNames.put(ElementName.ISSUEDATE, "org.cip4.jdflib.span.JDFTimeSpan");
 			sm_PackageNames.put(ElementName.ISSUENAME, "org.cip4.jdflib.span.JDFStringSpan");
@@ -949,17 +919,17 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		}
 
 		/** Caches default package name classes of files. */
-		private final HashMap<String, String> sm_PackageNames = new HashMap<String, String>();
+		private final HashMap<String, String> sm_PackageNames = new HashMap<>();
 		/** Caches default package name classes of files. */
-		private final HashSet<String> contextSensitive = new HashSet<String>();
+		private final HashSet<String> contextSensitive = new HashSet<>();
 
 		/** Caches Classes */
-		private final HashMap<String, Class<?>> sm_ClassAlreadyInstantiated = new HashMap<String, Class<?>>();
+		private final HashMap<String, Class<?>> sm_ClassAlreadyInstantiated = new HashMap<>();
 
 		/** Caches JDF element constructors (namespace variant) */
-		private final HashMap<String, Constructor<?>> sm_hashCtorElementNS = new HashMap<String, Constructor<?>>();
+		private final HashMap<String, Constructor<?>> sm_hashCtorElementNS = new HashMap<>();
 		/** Caches JDF element classes based on class paths to avoid heavy use of forName */
-		private final HashMap<String, Class<?>> sm_hashPathToClass = new HashMap<String, Class<?>>();
+		private final HashMap<String, Class<?>> sm_hashPathToClass = new HashMap<>();
 	}
 
 	private static DocumentData data = new DocumentData();
@@ -1071,7 +1041,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	 * @param qualifiedName
 	 * @param localPart
 	 * @return
-	*/
+	 */
 	@Override
 	public Element createElementNS(final String namespaceURI, final String qualifiedName, final String localPart)
 	{
@@ -1109,8 +1079,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 					classOfConstructor = getFactoryClass(namespaceURI, qualifiedName, localPart, path);
 					if (classOfConstructor != null)
 					{
-						final Class<?>[] constructorParameters = { org.apache.xerces.dom.CoreDocumentImpl.class, java.lang.String.class, java.lang.String.class,
-								java.lang.String.class, };
+						final Class<?>[] constructorParameters = { org.apache.xerces.dom.CoreDocumentImpl.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, };
 
 						constructi = classOfConstructor.getDeclaredConstructor(constructorParameters);
 						putConstructorToHashMap(qualifiedName, constructi, path);
@@ -1223,10 +1192,11 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	}
 
 	/**
-	 * Searches for the matching factory class in sm_PackageNames If a match could not be found then JDFResource.class is returned if the element is in a
-	 * resource pool else if the element is in the default name space JDFElement.class is returned else KElement.class is returned
+	 * Searches for the matching factory class in sm_PackageNames If a match could not be found then JDFResource.class is returned if the element is in a resource pool else if the element is in the
+	 * default name space JDFElement.class is returned else KElement.class is returned
 	 *
 	 * will return JDFElement.class or JDFResource.class only.
+	 * 
 	 * @param qualifiedName the qualified name of the class
 	 * @return
 	 */
@@ -1318,8 +1288,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		else
 		{
 			strClassPath = data.sm_PackageNames.get(qualifiedName);
-			if (strClassPath == null
-					&& (null == strNameSpaceURI || (strNameSpaceURI != null && strNameSpaceURI.startsWith(jdfNSURIPrefix)) || JDFConstants.EMPTYSTRING.equals(strNameSpaceURI)))
+			if (strClassPath == null && (null == strNameSpaceURI || (strNameSpaceURI != null && strNameSpaceURI.startsWith(jdfNSURIPrefix)) || JDFConstants.EMPTYSTRING.equals(strNameSpaceURI)))
 			{ // the maps only contain local names for jdf - recheck in case of prefix
 				strClassPath = data.sm_PackageNames.get(localPart);
 			}
@@ -1362,8 +1331,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			else
 			{
 				// should never get her - needed for compiler happiness
-				strClassPath = (nameSpaceURI == null && bInJDFJMF
-						|| (nameSpaceURI != null && nameSpaceURI.startsWith(jdfNSURIPrefix))) ? data.sm_PackageNames.get("EleDefault") : data.sm_PackageNames.get("OtherNSDefault");
+				strClassPath = (nameSpaceURI == null && bInJDFJMF || (nameSpaceURI != null && nameSpaceURI.startsWith(jdfNSURIPrefix))) ? data.sm_PackageNames.get("EleDefault")
+						: data.sm_PackageNames.get("OtherNSDefault");
 			}
 		}
 		else
@@ -1374,8 +1343,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			}
 			else
 			{
-				strClassPath = (nameSpaceURI == null && bInJDFJMF
-						|| (nameSpaceURI != null && nameSpaceURI.startsWith(jdfNSURIPrefix))) ? data.sm_PackageNames.get("EleDefault") : data.sm_PackageNames.get("OtherNSDefault");
+				strClassPath = (nameSpaceURI == null && bInJDFJMF || (nameSpaceURI != null && nameSpaceURI.startsWith(jdfNSURIPrefix))) ? data.sm_PackageNames.get("EleDefault")
+						: data.sm_PackageNames.get("OtherNSDefault");
 			}
 		}
 
@@ -1539,7 +1508,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 
 	/**
 	 * @return
-	*/
+	 */
 	public XMLDocUserData getMyUserData()
 	{
 		return myXMLUserDat;

@@ -40,7 +40,6 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFShape;
@@ -135,7 +134,8 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 		final ProductHelper phPos = xjdfHelper.getCreateRootProduct(1);
 		createPoster(phPos);
 
-		writeRoundTripX(xjdfHelper.getRoot(), "GTComplexVT", EnumValidationLevel.Complete);
+		writeRoundTripX(xjdfHelper.getRoot(), "GTComplexVT", null);
+		// writeRoundTripX(xjdfHelper.getRoot(), "GTComplexVT", EnumValidationLevel.NoWarnComplete);
 	}
 
 	void createBook(final ProductHelper ph)
