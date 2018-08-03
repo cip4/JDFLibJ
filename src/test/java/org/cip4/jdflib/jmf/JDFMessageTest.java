@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -78,6 +46,7 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
 
 import junit.framework.TestCase;
@@ -85,7 +54,7 @@ import junit.framework.TestCase;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * far before May 17, 2009
+ *         far before May 17, 2009
  */
 public class JDFMessageTest extends TestCase
 {
@@ -100,6 +69,18 @@ public class JDFMessageTest extends TestCase
 	{
 		assertEquals(EnumFamily.getEnumMap().get("Signal"), EnumFamily.Signal);
 		assertNotNull(EnumFamily.getEnumList().get(2));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testInit()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
+		final JDFSignal s = jmf.getSignal(0);
+		assertNotNull(StringUtil.getNonEmpty(s.getID()));
 	}
 
 	/**
@@ -158,8 +139,8 @@ public class JDFMessageTest extends TestCase
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Status);
 		assertNull(sig.getDeviceInfo("DevID"));
-		JDFDeviceInfo d1 = sig.getCreateDeviceInfo("DevID");
-		JDFDeviceInfo d2 = sig.getCreateDeviceInfo("DevID2");
+		final JDFDeviceInfo d1 = sig.getCreateDeviceInfo("DevID");
+		final JDFDeviceInfo d2 = sig.getCreateDeviceInfo("DevID2");
 		assertNotNull(d1);
 		assertNotNull(d2);
 		assertNotSame(d1, d2);
@@ -167,16 +148,16 @@ public class JDFMessageTest extends TestCase
 
 		final JDFResponse res = (JDFResponse) jmf.appendMessageElement(EnumFamily.Response, EnumType.Status);
 		assertNull(res.getDeviceInfo("DevID"));
-		JDFDeviceInfo d21 = res.getCreateDeviceInfo("DevID");
-		JDFDeviceInfo d22 = res.getCreateDeviceInfo("DevID2");
+		final JDFDeviceInfo d21 = res.getCreateDeviceInfo("DevID");
+		final JDFDeviceInfo d22 = res.getCreateDeviceInfo("DevID2");
 		assertNotNull(d21);
 		assertNotNull(d22);
 		assertNotSame(d21, d22);
 
 		final JDFAcknowledge ack = (JDFAcknowledge) jmf.appendMessageElement(EnumFamily.Acknowledge, EnumType.Status);
 		assertNull(ack.getDeviceInfo("DevID"));
-		JDFDeviceInfo d31 = ack.getCreateDeviceInfo("DevID");
-		JDFDeviceInfo d32 = ack.getCreateDeviceInfo("DevID2");
+		final JDFDeviceInfo d31 = ack.getCreateDeviceInfo("DevID");
+		final JDFDeviceInfo d32 = ack.getCreateDeviceInfo("DevID2");
 		assertNotNull(d31);
 		assertNotNull(d32);
 		assertNotSame(d31, d32);
@@ -188,7 +169,7 @@ public class JDFMessageTest extends TestCase
 			assertNull(ack2.getDeviceInfo("DevID"));
 			fail("nogo here");
 		}
-		catch (JDFException x)
+		catch (final JDFException x)
 		{
 			// nop
 		}
@@ -209,7 +190,7 @@ public class JDFMessageTest extends TestCase
 			sig.appendStatusQuParams();
 			fail("strict checking must fail");
 		}
-		catch (Exception x)
+		catch (final Exception x)
 		{
 			// nop
 		}
@@ -218,7 +199,7 @@ public class JDFMessageTest extends TestCase
 			sig.appendUpdateJDFCmdParams();
 			fail("strict checking must fail on 2nd element");
 		}
-		catch (Exception x)
+		catch (final Exception x)
 		{
 			// nop
 		}
@@ -233,7 +214,7 @@ public class JDFMessageTest extends TestCase
 			sig.appendStatusQuParams();
 			fail("strict checking must fail");
 		}
-		catch (Exception x)
+		catch (final Exception x)
 		{
 			// nop
 		}
@@ -242,7 +223,7 @@ public class JDFMessageTest extends TestCase
 			sig.appendUpdateJDFCmdParams();
 			fail("strict checking must fail on 2nd element");
 		}
-		catch (Exception x)
+		catch (final Exception x)
 		{
 			// nop
 		}
@@ -382,12 +363,9 @@ public class JDFMessageTest extends TestCase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		final JDFDoc doc = new JDFDoc(ElementName.JMF);
-		jmf = doc.getJMFRoot();
+		jmf = new JDFDoc(ElementName.JMF).getJMFRoot();
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
 	/**
 	 *
 	 */
@@ -422,12 +400,12 @@ public class JDFMessageTest extends TestCase
 		long t0 = System.currentTimeMillis();
 		for (int l = 0; l < 2; l++)
 		{
-			boolean strict = l == 0;
+			final boolean strict = l == 0;
 			JDFMessage.setStrictValidation(strict);
 			for (int i = 0; i < 10000; i++)
 			{
 				jmf = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
-				JDFSignal s = jmf.getSignal(0);
+				final JDFSignal s = jmf.getSignal(0);
 				for (int ii = 0; ii < 10; ii++)
 				{
 					s.appendDeviceInfo();
@@ -435,7 +413,7 @@ public class JDFMessageTest extends TestCase
 				}
 				s.appendStatusQuParams();
 			}
-			long t1 = System.currentTimeMillis();
+			final long t1 = System.currentTimeMillis();
 			System.out.println((strict ? "strict t val: " : "loose t val: ") + ((t1 - t0) * 0.001));
 			t0 = t1;
 		}

@@ -3,70 +3,38 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *  
- * 
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ *
+ *
  */
 
 package org.cip4.jdflib.jmf;
@@ -93,10 +61,10 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * factory for creating JMF messages
- * 
+ *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * June 20, 2009 split off from JMFFactory
+ *
+ *         June 20, 2009 split off from JMFFactory
  */
 public class JMFBuilder implements Cloneable
 {
@@ -122,7 +90,7 @@ public class JMFBuilder implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public JMFBuilder()
 	{
@@ -135,6 +103,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF SuspendQueueEntry command
+	 *
 	 * @param queueEntryId queue entry ID of the queue to suspend
 	 * @return the message
 	 */
@@ -146,6 +115,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF HoldQueueEntry command
+	 *
 	 * @param queueEntryId queue entry ID of the queue to hold
 	 * @return the message
 	 */
@@ -157,6 +127,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF ResumeQueueEntry command
+	 *
 	 * @param queueEntryId queue entry ID of the queue to resume
 	 * @return the message
 	 */
@@ -168,6 +139,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF AbortQueueEntry command
+	 *
 	 * @param queueEntryId queue entry ID of the queue to abort
 	 * @return the message
 	 */
@@ -179,6 +151,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF AbortQueueEntry command
+	 *
 	 * @param queueEntryId queue entry ID of the queue to abort
 	 * @return the message
 	 */
@@ -210,6 +183,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * create a JMF that has all builder specific details filled in
+	 *
 	 * @param family
 	 * @param typ
 	 * @return
@@ -244,13 +218,14 @@ public class JMFBuilder implements Cloneable
 	 * @param jmf
 	 * @return
 	 */
-	private JDFJMF finalize(JDFJMF jmf)
+	private JDFJMF finalize(final JDFJMF jmf)
 	{
 		return jmf;
 	}
 
 	/**
 	 * build a JMF RemoveQueueEntry command
+	 *
 	 * @param queueEntryId queue entry ID of the queue to remove
 	 * @return the message
 	 */
@@ -262,14 +237,15 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF Status query
+	 *
 	 * @param deviceDetails the device details
 	 * @param jobDetails the status details
 	 * @return the message
 	 */
-	public JDFJMF buildStatus(EnumDeviceDetails deviceDetails, EnumJobDetails jobDetails)
+	public JDFJMF buildStatus(final EnumDeviceDetails deviceDetails, final EnumJobDetails jobDetails)
 	{
 		final JDFJMF jmf = createJMF(EnumFamily.Query, EnumType.Status);
-		JDFStatusQuParams statusQuParams = jmf.getCreateQuery(0).getCreateStatusQuParams(0);
+		final JDFStatusQuParams statusQuParams = jmf.getCreateQuery(0).getCreateStatusQuParams(0);
 		statusQuParams.setDeviceDetails(deviceDetails);
 		statusQuParams.setJobDetails(jobDetails);
 		return finalize(jmf);
@@ -277,24 +253,26 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF Status query
-	 * @param bExact if true 
+	 *
+	 * @param bExact if true
 	 * @return the message
 	 */
-	public JDFJMF buildResourceQuery(boolean bExact)
+	public JDFJMF buildResourceQuery(final boolean bExact)
 	{
 		final JDFJMF jmf = createJMF(EnumFamily.Query, EnumType.Resource);
-		JDFResourceQuParams resParams = jmf.getCreateQuery(0).getCreateResourceQuParams(0);
+		final JDFResourceQuParams resParams = jmf.getCreateQuery(0).getCreateResourceQuParams(0);
 		resParams.setExact(bExact);
 		return finalize(jmf);
 	}
 
 	/**
 	 * build a JMF Status query
-	 * @param bExact if true 
-	 * @param resLink 
+	 *
+	 * @param bExact if true
+	 * @param resLink
 	 * @return the message
 	 */
-	public JDFJMF buildResourceSignal(boolean bExact, JDFResourceLink resLink)
+	public JDFJMF buildResourceSignal(final boolean bExact, final JDFResourceLink resLink)
 	{
 		final JDFJMF jmf = buildResourceQuery(bExact);
 		final JDFJMF jmfSignal = createJMF(EnumFamily.Signal, EnumType.Resource);
@@ -310,11 +288,12 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF Status query
+	 *
 	 * @param deviceDetails the device details
 	 * @param jobDetails the status details
 	 * @return the message
 	 */
-	public JDFJMF buildStatusSignal(EnumDeviceDetails deviceDetails, EnumJobDetails jobDetails)
+	public JDFJMF buildStatusSignal(final EnumDeviceDetails deviceDetails, final EnumJobDetails jobDetails)
 	{
 		final JDFJMF jmf = buildStatus(deviceDetails, jobDetails);
 		final JDFJMF jmfSignal = createJMF(EnumFamily.Signal, EnumType.Status);
@@ -329,6 +308,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF Status subscription
+	 *
 	 * @param subscriberURL
 	 * @param repeatTime
 	 * @param repeatStep
@@ -352,6 +332,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF Resource subscription
+	 *
 	 * @param subscriberURL
 	 * @param repeatTime
 	 * @param repeatStep
@@ -363,7 +344,7 @@ public class JMFBuilder implements Cloneable
 		final JDFJMF jmf = buildSubscription(EnumType.Resource, subscriberURL, repeatTime, repeatStep);
 		final JDFQuery query = jmf.getQuery(0);
 		final JDFResourceQuParams resourceQuParams = query.getCreateResourceQuParams(0);
-		final Vector<EnumResourceClass> c = new Vector<EnumResourceClass>();
+		final Vector<EnumResourceClass> c = new Vector<>();
 		c.add(EnumResourceClass.Consumable);
 		c.add(EnumResourceClass.Handling);
 		c.add(EnumResourceClass.Implementation);
@@ -377,6 +358,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF Knownmessages query
+	 *
 	 * @return the message
 	 */
 	public JDFJMF buildKnownMessagesQuery()
@@ -386,13 +368,14 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF Resource query
+	 *
 	 * @param resType type of resource to query, e.g. Media
 	 * @return the message
 	 */
-	public JDFJMF buildResourceCatalogQuery(String resType)
+	public JDFJMF buildResourceCatalogQuery(final String resType)
 	{
-		JDFQuery query = createQuery(JDFMessage.EnumType.Resource);
-		JDFResourceQuParams quParams = query.getCreateResourceQuParams(0);
+		final JDFQuery query = createQuery(JDFMessage.EnumType.Resource);
+		final JDFResourceQuParams quParams = query.getCreateResourceQuParams(0);
 		quParams.setResourceName(resType);
 		quParams.setExact(true);
 		quParams.setResourceDetails(EnumResourceDetails.Full);
@@ -401,32 +384,34 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF Milestone querysignal
+	 *
 	 * @param milestoneType the milestone type
-	 * @param jobID the jobID  
+	 * @param jobID the jobID
 	 * @return the message
 	 */
-	public JDFJMF buildMilestone(String milestoneType, String jobID)
+	public JDFJMF buildMilestone(final String milestoneType, final String jobID)
 	{
-		JDFJMF jmf = createJMF(EnumFamily.Signal, JDFMessage.EnumType.Notification);
-		JDFSignal s = jmf.getSignal(0);
-		JDFNotification n = s.appendNotification();
+		final JDFJMF jmf = createJMF(EnumFamily.Signal, JDFMessage.EnumType.Notification);
+		final JDFSignal s = jmf.getSignal(0);
+		final JDFNotification n = s.appendNotification();
 		n.setClass(EnumClass.Event);
 		n.setJobID(jobID);
-		JDFMilestone ms = n.appendMilestone();
+		final JDFMilestone ms = n.appendMilestone();
 		ms.setMilestoneType(milestoneType);
 		return jmf;
 	}
 
 	/**
 	 * build a JMF KnownSubscriptions query
+	 *
 	 * @param url the url of the subscription - typically the sender of the message
 	 * @param slaveQEID the queuentryID at the slave
 	 * @return the message
 	 */
-	public JDFJMF buildKnownSubscriptionsQuery(String url, String slaveQEID)
+	public JDFJMF buildKnownSubscriptionsQuery(final String url, final String slaveQEID)
 	{
-		JDFQuery q = createQuery(JDFMessage.EnumType.KnownSubscriptions);
-		JDFSubscriptionFilter sf = q.appendSubscriptionFilter();
+		final JDFQuery q = createQuery(JDFMessage.EnumType.KnownSubscriptions);
+		final JDFSubscriptionFilter sf = q.appendSubscriptionFilter();
 		sf.setURL(url);
 		sf.setQueueEntryID(slaveQEID);
 		return q.getJMFRoot();
@@ -434,6 +419,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF Knownmessages query
+	 *
 	 * @return the message
 	 */
 	public JDFJMF buildSubmissionMethodsQuery()
@@ -443,6 +429,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a ResubmitQueueEntry message
+	 *
 	 * @param returnUrl the url of the jdf to send back to
 	 * @return the jmf
 	 */
@@ -453,10 +440,11 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a ResubmitQueueEntry message
+	 *
 	 * @param returnUrl the url of the jdf to send back to
 	 * @return the jmf
 	 */
-	public JDFJMF buildSubmitQueueEntry(final String returnUrl, String submitURL)
+	public JDFJMF buildSubmitQueueEntry(final String returnUrl, final String submitURL)
 	{
 		final JDFCommand c = createCommand(EnumType.SubmitQueueEntry);
 		createDefaultFilter(c);
@@ -472,12 +460,13 @@ public class JMFBuilder implements Cloneable
 	 */
 	private void createDefaultFilter(final JDFCommand c)
 	{
-		JDFQueueFilter f = c.appendQueueFilter();
+		final JDFQueueFilter f = c.appendQueueFilter();
 		f.setMaxEntries(0);
 	}
 
 	/**
 	 * build a JMF Knowndevices query
+	 *
 	 * @param details
 	 * @return the message
 	 */
@@ -491,6 +480,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMFNewJDF query
+	 *
 	 * @param jobID
 	 * @param jobPartID
 	 * @return the message
@@ -505,6 +495,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMFNewJDF query
+	 *
 	 * @return the message
 	 */
 	public JDFJMF buildNewJDFCommand()
@@ -518,6 +509,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF Notification subscription
+	 *
 	 * @param subscriberURL
 	 * @return the message
 	 */
@@ -529,6 +521,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a generic query for a given type
+	 *
 	 * @param typ
 	 * @return the query
 	 */
@@ -540,6 +533,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a generic query for a given type
+	 *
 	 * @param typ
 	 * @return the query
 	 */
@@ -551,6 +545,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a generic subscription for a given type
+	 *
 	 * @param typ
 	 * @param subscriberURL
 	 * @param repeatTime
@@ -578,6 +573,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF QueueStatus query
+	 *
 	 * @return the message
 	 */
 	public JDFJMF buildQueueStatus()
@@ -588,6 +584,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a JMF QueueStatus query
+	 *
 	 * @param subscriberURL
 	 * @return the message
 	 */
@@ -602,6 +599,7 @@ public class JMFBuilder implements Cloneable
 	/**
 	 * build a JMF RequestQueueEntry command <br/>
 	 * default: JMFFactory.buildRequestQueueEntry(theQueueURL,null)
+	 *
 	 * @param queueURL the queue URL of the device sending the command ("where do you want your SubmitQE's delivered to?")
 	 * @param nid the nodeidentifier of the requested qe, default=null
 	 * @return the message
@@ -619,11 +617,12 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * create a set of default subscriptions
+	 *
 	 * @param url
 	 * @param queueEntryID
 	 * @param repeatTime
 	 * @param repeatStep
-	 *@return the array of subscriptions to be sent
+	 * @return the array of subscriptions to be sent
 	 */
 	public JDFJMF[] createSubscriptions(final String url, final String queueEntryID, final double repeatTime, final int repeatStep)
 	{
@@ -637,6 +636,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a ResubmitQueueEntry message
+	 *
 	 * @param qeID
 	 * @param url the url of the jdf to resubmit
 	 * @return the jmf
@@ -653,11 +653,12 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a Shutdown message
+	 *
 	 * @param typ hard or soft shutdown?
-	 *  
+	 *
 	 * @return the jmf
 	 */
-	public JDFJMF buildShutdownCommand(EnumShutDownType typ)
+	public JDFJMF buildShutdownCommand(final EnumShutDownType typ)
 	{
 		final JDFCommand c = createCommand(EnumType.ShutDown);
 		createDefaultFilter(c);
@@ -668,6 +669,7 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * build a stopPersistentChannelParams message
+	 *
 	 * @param channelID
 	 * @param qeID
 	 * @param url the url of the subscription
@@ -685,13 +687,14 @@ public class JMFBuilder implements Cloneable
 
 	/**
 	 * create a new jmf message with some heuristic parameters
+	 *
 	 * @param family
 	 * @param type
 	 * @return
 	 */
-	public JDFJMF newJMF(EnumFamily family, String type)
+	public JDFJMF newJMF(final EnumFamily family, final String type)
 	{
-		EnumType typ = EnumType.getEnum(type);
+		final EnumType typ = EnumType.getEnum(type);
 		final JDFJMF jmfRoot;
 		if (EnumType.Status.getName().equals(type) && EnumFamily.Query.equals(family))
 		{
@@ -710,8 +713,9 @@ public class JMFBuilder implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * get the SenderId used for this builder
+	 *
 	 * @return
 	 */
 	public String getSenderID()
@@ -720,23 +724,24 @@ public class JMFBuilder implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * set the SenderId used for this builder
+	 *
 	 * @param senderID the new default senderID, if null use the static default from {@link JDFJMF}
 	 */
-	public void setSenderID(String senderID)
+	public void setSenderID(final String senderID)
 	{
 		this.senderID = senderID;
 	}
 
 	/**
-	 * 
+	 *
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
 	public JMFBuilder clone()
 	{
-		JMFBuilder bNew = new JMFBuilder();
+		final JMFBuilder bNew = new JMFBuilder();
 		bNew.setAcknowledgeURL(getAcknowledgeURL());
 		bNew.setSenderID(getSenderID());
 		bNew.setAgentName(getAgentName());
@@ -745,7 +750,7 @@ public class JMFBuilder implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -755,7 +760,7 @@ public class JMFBuilder implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public String getAgentName()
@@ -764,16 +769,16 @@ public class JMFBuilder implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @param agentName
 	 */
-	public void setAgentName(String agentName)
+	public void setAgentName(final String agentName)
 	{
 		this.agentName = StringUtil.getNonEmpty(agentName);
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public String getAgentVersion()
@@ -782,10 +787,10 @@ public class JMFBuilder implements Cloneable
 	}
 
 	/**
-	 * 
+	 *
 	 * @param agentVersion
 	 */
-	public void setAgentVersion(String agentVersion)
+	public void setAgentVersion(final String agentVersion)
 	{
 		this.agentVersion = StringUtil.getNonEmpty(agentVersion);
 	}

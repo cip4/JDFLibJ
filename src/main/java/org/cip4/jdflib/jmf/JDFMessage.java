@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -112,6 +112,7 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * super class for all message families Signal, Command,...
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
@@ -123,6 +124,7 @@ public class JDFMessage extends JDFAutoMessage
 
 	/**
 	 * if true, all typesafe calls are strictly validated
+	 *
 	 * @return the strictValidation
 	 */
 	public static boolean isStrictValidation()
@@ -131,11 +133,11 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 * set false to switch off jmf validation when adding elements
-	 * set true (default) to enable run time checking when constructing JMF messages
+	 * set false to switch off jmf validation when adding elements set true (default) to enable run time checking when constructing JMF messages
+	 *
 	 * @param strictValidation the strictValidation to set
 	 */
-	public static void setStrictValidation(boolean strictValidation)
+	public static void setStrictValidation(final boolean strictValidation)
 	{
 		JDFMessage.strictValidation = strictValidation;
 	}
@@ -203,9 +205,10 @@ public class JDFMessage extends JDFAutoMessage
 
 	/**
 	 * Enumerations for message families
+	 *
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
 	 *
-	 * May 17, 2009
+	 *         May 17, 2009
 	 */
 	@SuppressWarnings("unchecked")
 	public static class EnumFamily extends ValuedEnum
@@ -260,9 +263,9 @@ public class JDFMessage extends JDFAutoMessage
 			if (families == null)
 			{
 				families = new VString();
-				List<EnumFamily> enumList = getEnumList(EnumFamily.class);
+				final List<EnumFamily> enumList = getEnumList(EnumFamily.class);
 
-				for (EnumFamily f : enumList)
+				for (final EnumFamily f : enumList)
 				{
 					families.add(f.getName());
 				}
@@ -308,7 +311,7 @@ public class JDFMessage extends JDFAutoMessage
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
 	 *
-	 * < July 21, 2009
+	 *         < July 21, 2009
 	 */
 	@SuppressWarnings("unchecked")
 	public static class EnumType extends ValuedEnum
@@ -737,7 +740,7 @@ public class JDFMessage extends JDFAutoMessage
 		}
 
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, null);
-		JDFSignal signal = jmf.getSignal(0);
+		final JDFSignal signal = jmf.getSignal(0);
 		signal.setQuery(this);
 		signal.copyElements(getChildElementVector(null, null), null);
 		signal.removeChild(ElementName.SUBSCRIPTION, null, 0);
@@ -799,14 +802,14 @@ public class JDFMessage extends JDFAutoMessage
 	 */
 	private Vector<EnumType> getValidTypeVector(final String elementName, final int iSkip)
 	{
-		final Vector<EnumType> validList = new Vector<EnumType>();
+		final Vector<EnumType> validList = new Vector<>();
 
 		// Commands
 		if (elementName.equals(ElementName.FLUSHQUEUEPARAMS))
 		{
 			if (iSkip == 0)
 			{ // validation for cardinality '?' or '-', when no more than 1
-					// element are allowed
+				// element are allowed
 				validList.addElement(EnumType.FlushQueue);
 			}
 
@@ -815,7 +818,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{ // validation for cardinality '?' or '-', when no more than 1
-					// element are allowed
+				// element are allowed
 				validList.addElement(EnumType.FlushQueue);
 			}
 
@@ -1357,12 +1360,11 @@ public class JDFMessage extends JDFAutoMessage
 	 *
 	 * @returnString comma separated list of enumerated string values
 	 */
-	private static String[] commandTypeObjString = { ElementName.AUTHENTICATIONCMDPARAMS, ElementName.ABORTQUEUEENTRYPARAMS, ElementName.HOLDQUEUEENTRYPARAMS,
-			ElementName.RESUMEQUEUEENTRYPARAMS, ElementName.REMOVEQUEUEENTRYPARAMS, ElementName.FLUSHQUEUEPARAMS, ElementName.FLUSHRESOURCEPARAMS, ElementName.MODIFYNODECMDPARAMS,
-			ElementName.NEWJDFCMDPARAMS, ElementName.NODEINFOCMDPARAMS, ElementName.PIPEPARAMS, ElementName.QUEUEENTRYDEF, ElementName.QUEUEENTRYPRIPARAMS,
-			ElementName.QUEUEENTRYPOSPARAMS, ElementName.QUEUEFILTER, ElementName.QUEUESUBMISSIONPARAMS, ElementName.REQUESTQUEUEENTRYPARAMS, ElementName.RESOURCECMDPARAMS,
-			ElementName.RESOURCEPULLPARAMS, ElementName.RESUBMISSIONPARAMS, ElementName.RETURNQUEUEENTRYPARAMS, ElementName.SHUTDOWNCMDPARAMS, ElementName.STOPPERSCHPARAMS,
-			ElementName.UPDATEJDFCMDPARAMS, ElementName.WAKEUPCMDPARAMS };
+	private static String[] commandTypeObjString = { ElementName.AUTHENTICATIONCMDPARAMS, ElementName.ABORTQUEUEENTRYPARAMS, ElementName.HOLDQUEUEENTRYPARAMS, ElementName.RESUMEQUEUEENTRYPARAMS,
+			ElementName.REMOVEQUEUEENTRYPARAMS, ElementName.FLUSHQUEUEPARAMS, ElementName.FLUSHRESOURCEPARAMS, ElementName.MODIFYNODECMDPARAMS, ElementName.NEWJDFCMDPARAMS,
+			ElementName.NODEINFOCMDPARAMS, ElementName.PIPEPARAMS, ElementName.QUEUEENTRYDEF, ElementName.QUEUEENTRYPRIPARAMS, ElementName.QUEUEENTRYPOSPARAMS, ElementName.QUEUEFILTER,
+			ElementName.QUEUESUBMISSIONPARAMS, ElementName.REQUESTQUEUEENTRYPARAMS, ElementName.RESOURCECMDPARAMS, ElementName.RESOURCEPULLPARAMS, ElementName.RESUBMISSIONPARAMS,
+			ElementName.RETURNQUEUEENTRYPARAMS, ElementName.SHUTDOWNCMDPARAMS, ElementName.STOPPERSCHPARAMS, ElementName.UPDATEJDFCMDPARAMS, ElementName.WAKEUPCMDPARAMS };
 
 	/**
 	 * Enumeration strings for list of CommandTypeObj
@@ -1376,10 +1378,9 @@ public class JDFMessage extends JDFAutoMessage
 	 *
 	 * @returnString comma separated list of enumerated string values
 	 */
-	private static String[] queryTypeObjString = { ElementName.AUTHENTICATIONQUPARAMS, ElementName.DEVICEFILTER, ElementName.EMPLOYEEDEF, ElementName.KNOWNMSGQUPARAMS,
-			ElementName.MSGFILTER, ElementName.MODIFYNODECMDPARAMS, ElementName.NEWJDFQUPARAMS, ElementName.NODEINFOQUPARAMS, ElementName.NOTIFICATIONFILTER,
-			ElementName.QUEUEENTRYDEFLIST, ElementName.QUEUEFILTER, ElementName.RESOURCEQUPARAMS, ElementName.STATUSQUPARAMS, ElementName.SUBSCRIPTIONFILTER,
-			ElementName.TRACKFILTER, ElementName.UPDATEJDFCMDPARAMS };
+	private static String[] queryTypeObjString = { ElementName.AUTHENTICATIONQUPARAMS, ElementName.DEVICEFILTER, ElementName.EMPLOYEEDEF, ElementName.KNOWNMSGQUPARAMS, ElementName.MSGFILTER,
+			ElementName.MODIFYNODECMDPARAMS, ElementName.NEWJDFQUPARAMS, ElementName.NODEINFOQUPARAMS, ElementName.NOTIFICATIONFILTER, ElementName.QUEUEENTRYDEFLIST, ElementName.QUEUEFILTER,
+			ElementName.RESOURCEQUPARAMS, ElementName.STATUSQUPARAMS, ElementName.SUBSCRIPTIONFILTER, ElementName.TRACKFILTER, ElementName.UPDATEJDFCMDPARAMS };
 
 	/**
 	 * Enumeration strings for list of ResponseTypeObj
@@ -1387,9 +1388,9 @@ public class JDFMessage extends JDFAutoMessage
 	 * @returnString comma separated list of enumerated string values
 	 */
 	private static String[] responseTypeObjString = { ElementName.DEVICELIST, ElementName.DEVICEINFO, ElementName.FLUSHQUEUEINFO, ElementName.FLUSHEDRESOURCES, ElementName.IDINFO,
-			ElementName.JDFCONTROLLER, ElementName.JDFSERVICE, ElementName.JOBPHASE, ElementName.MESSAGESERVICE, ElementName.NODEINFORESP, ElementName.NOTIFICATIONDEF,
-			ElementName.OCCUPATION, ElementName.QUEUE, ElementName.QUEUEENTRY, ElementName.RESOURCEINFO, ElementName.SUBSCRIPTIONINFO, ElementName.SUBMISSIONMETHODS,
-			ElementName.TRACKRESULT, ElementName.COMMAND, ElementName.QUERY, ElementName.ACKNOWLEDGE, ElementName.RESPONSE, ElementName.SIGNAL, ElementName.REGISTRATION };
+			ElementName.JDFCONTROLLER, ElementName.JDFSERVICE, ElementName.JOBPHASE, ElementName.MESSAGESERVICE, ElementName.NODEINFORESP, ElementName.NOTIFICATIONDEF, ElementName.OCCUPATION,
+			ElementName.QUEUE, ElementName.QUEUEENTRY, ElementName.RESOURCEINFO, ElementName.SUBSCRIPTIONINFO, ElementName.SUBMISSIONMETHODS, ElementName.TRACKRESULT, ElementName.COMMAND,
+			ElementName.QUERY, ElementName.ACKNOWLEDGE, ElementName.RESPONSE, ElementName.SIGNAL, ElementName.REGISTRATION };
 
 	private static String[] signalTypeObjString = null;
 	private static String[] elemArray = null;
@@ -1591,7 +1592,7 @@ public class JDFMessage extends JDFAutoMessage
 	 * @param deviceID the deviceID of the device to get
 	 * @return
 	 */
-	public JDFDeviceInfo getDeviceInfo(String deviceID)
+	public JDFDeviceInfo getDeviceInfo(final String deviceID)
 	{
 		if (strictValidation && !isValidMessageElement(ElementName.DEVICEINFO, 0))
 		{
@@ -1600,7 +1601,7 @@ public class JDFMessage extends JDFAutoMessage
 		JDFDeviceInfo d = (JDFDeviceInfo) getChildWithAttribute(ElementName.DEVICEINFO, AttributeName.DEVICEID, null, deviceID, 0, true);
 		if (d == null)
 		{
-			JDFDevice dev = (JDFDevice) getChildWithAttribute(ElementName.DEVICE, AttributeName.DEVICEID, null, deviceID, 0, false);
+			final JDFDevice dev = (JDFDevice) getChildWithAttribute(ElementName.DEVICE, AttributeName.DEVICEID, null, deviceID, 0, false);
 			if (dev != null)
 			{
 				d = (JDFDeviceInfo) dev.getParentNode_KElement();
@@ -1615,7 +1616,7 @@ public class JDFMessage extends JDFAutoMessage
 	 * @param deviceID the deviceID of the device to get
 	 * @return
 	 */
-	public JDFDeviceInfo getCreateDeviceInfo(String deviceID)
+	public JDFDeviceInfo getCreateDeviceInfo(final String deviceID)
 	{
 		JDFDeviceInfo d = getDeviceInfo(deviceID);
 		if (d == null)
@@ -1877,6 +1878,7 @@ public class JDFMessage extends JDFAutoMessage
 
 	/**
 	 * append element <code>MessageService</code>
+	 *
 	 * @return
 	 */
 	public JDFMessageService appendMessageService()
@@ -2542,7 +2544,7 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 * get  StatusQuParams
+	 * get StatusQuParams
 	 *
 	 *
 	 * @return JDFStatusQuParams: the element
@@ -2734,6 +2736,7 @@ public class JDFMessage extends JDFAutoMessage
 
 	/**
 	 * append element <code>IDInfo</code> JDFIDInfo: the element
+	 *
 	 * @return
 	 */
 	public JDFIDInfo appendIDInfo()
@@ -3327,15 +3330,15 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			return vElem;
 		}
-		final Set<String> s = new HashSet<String>();
-		for (KElement element : ae)
+		final Set<String> s = new HashSet<>();
+		for (final KElement element : ae)
 		{
 			s.add(element.getLocalName());
 		}
 
 		final String[] elementArray = getElementArray();
 
-		for (String element2 : elementArray)
+		for (final String element2 : elementArray)
 		{
 			final String element = element2;
 			if (!s.contains(element))
@@ -3407,7 +3410,7 @@ public class JDFMessage extends JDFAutoMessage
 		if (vObjs == null)
 			return s;
 		// for each object, check whether it is compatible with the type of this
-		for (String vObj : vObjs)
+		for (final String vObj : vObjs)
 		{
 			final Vector<EnumType> vt = getValidTypeVector(vObj, 0);
 			// is it there ?
@@ -3459,12 +3462,12 @@ public class JDFMessage extends JDFAutoMessage
 	// //////////////////////////////////////////////////////////////////////////
 	// ////
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ICSVersions
-	 * ---------------------------------------------------------------------
+	 * --------------------------------------------------------------------- Methods for Attribute ICSVersions ---------------------------------------------------------------------
 	 */
 
 	/**
 	 * (21) get VString attribute ICSVersions, grab from parent JMF if none exists here
+	 *
 	 * @return VString the value of the attribute
 	 *
 	 */
