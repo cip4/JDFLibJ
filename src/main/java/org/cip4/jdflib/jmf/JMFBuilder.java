@@ -45,10 +45,12 @@ import org.cip4.jdflib.auto.JDFAutoDeviceFilter;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.auto.JDFAutoQueueFilter.EnumUpdateGranularity;
+import org.cip4.jdflib.auto.JDFAutoResourceInfo.EnumScope;
 import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumResourceDetails;
 import org.cip4.jdflib.auto.JDFAutoShutDownCmdParams.EnumShutDownType;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -379,6 +381,7 @@ public class JMFBuilder implements Cloneable
 		quParams.setResourceName(resType);
 		quParams.setExact(true);
 		quParams.setResourceDetails(EnumResourceDetails.Full);
+		quParams.setAttribute(AttributeName.SCOPE, EnumScope.Allowed.getName());
 		return query.getJMFRoot();
 	}
 

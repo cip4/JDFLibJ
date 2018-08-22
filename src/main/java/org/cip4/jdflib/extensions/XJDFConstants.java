@@ -46,6 +46,7 @@ public abstract class XJDFConstants
 	public static final String AuditResource = "AuditResource";
 	public static final String AuditStatus = "AuditStatus";
 
+	public static final String BackCoating = "BackCoating";
 	public static final String BindIn = "BindIn";
 	public static final String BinderySignatureID = "BinderySignatureID";
 	public static final String BinderySignatureIDs = "BinderySignatureIDs";
