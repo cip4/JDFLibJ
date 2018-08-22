@@ -402,6 +402,8 @@ public class JDFJMFTest extends JDFTestCaseBase
 	@Test
 	public void testInitAgent()
 	{
+		JDFAudit.setStaticAgentName("foo");
+		JDFAudit.setStaticAgentVersion("v1");
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
 		assertEquals(JDFAudit.getStaticAgentName(), jmf.getAgentName());
 		assertEquals(JDFAudit.getStaticAgentVersion(), jmf.getAgentVersion());

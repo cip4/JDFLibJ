@@ -40,6 +40,7 @@ package org.cip4.jdflib.util.thread;
 
 import java.util.Vector;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import org.cip4.jdflib.util.ThreadUtil;
@@ -54,6 +55,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	private int maxParallel;
 	private ThreadPoolExecutor executor;
 	private final Vector<TaskRunner> current;
+	int nThread;
 
 	private class NextRunner extends TaskRunner
 	{
@@ -115,8 +117,21 @@ public class MultiTaskQueue extends OrderedTaskQueue
 			this.maxParallel = maxParallel;
 			if (executor != null)
 				executor.shutdown();
-			executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(maxParallel);
+			executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(maxParallel, new MyThreadFactory());
 		}
+	}
+
+	class MyThreadFactory implements ThreadFactory
+	{
+
+		@Override
+		public Thread newThread(final Runnable r)
+		{
+			final Thread t = new Thread(r, MultiTaskQueue.this.getName() + "_" + (nThread++));
+			t.setDaemon(true);
+			return t;
+		}
+
 	}
 
 	/**
@@ -216,6 +231,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 		current = new Vector<>();
 		maxParallel = 0;
 		setMaxParallel(2);
+		nThread = 1;
 	}
 
 	/**
