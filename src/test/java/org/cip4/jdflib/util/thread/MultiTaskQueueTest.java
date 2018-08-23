@@ -80,6 +80,15 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 			log.info(b + " waited: " + i);
 			nRun++;
 		}
+
+		/**
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString()
+		{
+			return "WaitRunner [i=" + i + ", t=" + t + "]";
+		}
 	}
 
 	/**
@@ -90,6 +99,10 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	{
 		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multi0", 3);
 		assertEquals(0, q.size());
+		q.queue(new WaitRunner(0, 1000));
+		assertEquals(1, q.size());
+		ThreadUtil.sleep(42);
+		assertEquals(1, q.size());
 	}
 
 	/**
@@ -173,5 +186,28 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 		}
 		ThreadUtil.sleep(42);
 		assertEquals(nRun, 1000, 2);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testInterruptMulti()
+	{
+		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multiZapp", 3);
+		for (int i = 0; i < 10; i++)
+			q.queue(new WaitRunner(i, 333));
+
+		while (q.size() > 7)
+			ThreadUtil.sleep(10);
+
+		final long t0 = System.currentTimeMillis();
+		while (q.size() > 0)
+		{
+			q.interruptCurrent(1);
+			ThreadUtil.sleep(10);
+		}
+		assertTrue(System.currentTimeMillis() - t0 < 300);
 	}
 }

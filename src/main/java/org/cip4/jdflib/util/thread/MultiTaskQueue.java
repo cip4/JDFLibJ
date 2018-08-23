@@ -191,12 +191,21 @@ public class MultiTaskQueue extends OrderedTaskQueue
 
 	private void interruptRunner(final TaskRunner next)
 	{
-		int n = 0;
-		while (current.contains(next))
+		int n = 1;
+		if (next.myThread == null)
 		{
-			ThreadUtil.notify(next);
-			if (!ThreadUtil.sleep(++n) || n > 10)
-				break;
+			current.remove(next);
+			log.info("Zapped idle " + next);
+		}
+		else
+		{
+			while (current.contains(next))
+			{
+				next.interrupt();
+				if (!ThreadUtil.sleep(++n) || n > 10)
+					break;
+
+			}
 		}
 	}
 
@@ -252,7 +261,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 		idle = 0;
 		final NextRunner nr = new NextRunner(r);
 		current.add(nr);
-		executor.execute(nr);
+		executor.submit(nr);
 	}
 
 	/**
@@ -269,7 +278,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	@Override
 	public int size()
 	{
-		return super.size() + current.size();
+		return super.size() + Math.max(executor.getActiveCount(), current.size());
 	}
 
 	/**
@@ -278,10 +287,10 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	@Override
 	public void shutDown()
 	{
+		super.shutDown();
 		if (executor != null)
 			executor.shutdown();
 		executor = null;
-		super.shutDown();
 	}
 
 }

@@ -43,7 +43,6 @@ import static org.junit.Assert.assertTrue;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -83,43 +82,10 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		@Override
 		public void run()
 		{
-			log.info("queued: " + i);
+			log.info("started: " + i);
 			final boolean b = ThreadUtil.sleep(t);
-			log.info(b + " waited: " + i);
+			log.info("Sleep=" + b + " waited: " + i);
 		}
-	}
-
-	/**
-	 *
-	 *
-	 */
-	@Test
-	@Ignore
-	public void testInterruptMulti()
-	{
-		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi", 3);
-		for (int i = 0; i < 10; i++)
-			q.queue(new WaitRunner(i, 1000));
-
-		while (q.size() > 7)
-			ThreadUtil.sleep(10);
-
-		assertEquals(q.size(), 7, 1);
-		q.interruptCurrent(1);
-		ThreadUtil.sleep(20);
-		assertEquals(q.size(), 4, 3);
-		q.interruptCurrent(100);
-		ThreadUtil.sleep(10);
-		assertEquals(q.size(), 4, 3);
-		q.interruptCurrent(1);
-		ThreadUtil.sleep(10);
-		assertEquals(q.size(), 1, 3);
-		q.interruptCurrent(1);
-		ThreadUtil.sleep(10);
-		assertEquals(q.size(), 0, 1);
-		q.interruptCurrent(1);
-		ThreadUtil.sleep(10);
-		assertEquals(q.size(), 0, 1);
 	}
 
 	/**
@@ -127,7 +93,6 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	@Ignore
 	public void testInterruptTask()
 	{
 		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multi2", 3);

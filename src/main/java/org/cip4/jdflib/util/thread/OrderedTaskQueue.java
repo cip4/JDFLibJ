@@ -60,6 +60,7 @@ public class OrderedTaskQueue extends Thread
 		long tStart;
 		long tEnd;
 		Runnable theTask;
+		Thread myThread;
 
 		/**
 		 *
@@ -71,6 +72,26 @@ public class OrderedTaskQueue extends Thread
 			tQueue = System.currentTimeMillis();
 			tStart = 0;
 			tEnd = 0;
+			myThread = null;
+		}
+
+		/**
+		 *
+		 */
+		void interrupt()
+		{
+			if (myThread != null)
+			{
+				try
+				{
+					myThread.interrupt();
+					log.info("Interrupted " + toString());
+				}
+				catch (final Throwable t)
+				{
+					// nop
+				}
+			}
 		}
 
 		/**
@@ -80,6 +101,7 @@ public class OrderedTaskQueue extends Thread
 		public void run()
 		{
 			tStart = System.currentTimeMillis();
+			myThread = Thread.currentThread();
 			started++;
 			sumQueue += getWaitTime();
 			try
@@ -95,6 +117,7 @@ public class OrderedTaskQueue extends Thread
 				tEnd = System.currentTimeMillis();
 				sumRun += getRunTime();
 				done++;
+				myThread = null;
 			}
 		}
 
