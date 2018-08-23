@@ -278,7 +278,8 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	@Override
 	public int size()
 	{
-		return super.size() + Math.max(executor.getActiveCount(), current.size());
+		final int n = executor == null ? 0 : executor.getActiveCount();
+		return super.size() + Math.max(n, current.size());
 	}
 
 	/**
