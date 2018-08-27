@@ -86,10 +86,6 @@ public class PartitionGetter
 		JDFAttributeMap ret = mapRes == null ? null : partMap;
 		if (ret == null)
 		{
-			ret = getExplicitPartitionFromMap(partMap);
-		}
-		if (ret == null)
-		{
 			ret = checkPV(partMap);
 		}
 		if (ret == null) // no explicit hit
@@ -98,7 +94,11 @@ public class PartitionGetter
 			{
 				partUsage = resourceRoot.getPartUsage();
 			}
-			if (!EnumPartUsage.Explicit.equals(partUsage))
+			if (!EnumPartUsage.Sparse.equals(partUsage))
+			{
+				ret = getExplicitPartitionFromMap(partMap);
+			}
+			if (ret == null && !EnumPartUsage.Explicit.equals(partUsage))
 			{
 				ret = getImplicitPartitionFromMap(partMap);
 				if (EnumPartUsage.Sparse.equals(partUsage) && leafMap.get(ret).getDirectPartition(0) != null)
@@ -425,7 +425,7 @@ public class PartitionGetter
 		if (m != null)
 			m = removeImplicitPartions(m, partUsage);
 
-		JDFAttributeMap fast = getPartitionFromMap(m, EnumPartUsage.Explicit);
+		JDFAttributeMap fast = getPartitionFromMap(m, EnumPartUsage.Sparse.equals(partUsage) ? EnumPartUsage.Sparse : EnumPartUsage.Explicit);
 		final VJDFAttributeMap v = (fast != null) ? new VJDFAttributeMap(fast) : specialSearch(m, partUsage);
 
 		if (v.isEmpty())
