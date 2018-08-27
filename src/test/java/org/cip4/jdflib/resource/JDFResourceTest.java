@@ -2350,6 +2350,32 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	public void testSetAttributePartition()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		final JDFResource r1 = n.addResource(ElementName.SPINETAPINGPARAMS, EnumUsage.Input);
+		final JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SheetName, "s1");
+		final JDFResource r1p = r1.getCreatePartition(m1, null);
+		final JDFAttributeMap m2 = new JDFAttributeMap(EnumPartIDKey.Side, EnumSide.Front.getName());
+		m2.putAll(m1);
+		final JDFResource r2p = r1.getCreatePartition(m2, null);
+		r1p.setAttribute(AttributeName.SHEETNAME, "s2");
+		assertNull(r1.getPartition(m1, EnumPartUsage.Explicit));
+		assertNull(r1.getPartition(m2, EnumPartUsage.Explicit));
+
+		m1.put(AttributeName.SHEETNAME, "s2");
+		m2.put(AttributeName.SHEETNAME, "s2");
+
+		assertEquals(r1p, r1.getPartition(m1, EnumPartUsage.Explicit));
+		assertEquals(r2p, r1.getPartition(m2, EnumPartUsage.Explicit));
+
+	}
+
+	/**
+	*
+	*/
+	@Test
 	public void testRunPage()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
