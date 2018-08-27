@@ -171,6 +171,34 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
+	public void testGetexplicitFromMap()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final PartitionGetter g = new PartitionGetter(r);
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.SignatureName, "Sig1");
+		final JDFResource r23 = r2.addPartition(EnumPartIDKey.SheetName, "S1");
+
+		final JDFAttributeMap pm = new JDFAttributeMap();
+		pm.put(EnumPartIDKey.SignatureName, "Sig1");
+		pm.put(EnumPartIDKey.SheetName, "S1");
+		assertEquals(pm, g.getExplicitPartitionFromMap(new JDFAttributeMap(EnumPartIDKey.SheetName, "S1")));
+
+		for (int i = 0; i < 4; i++)
+		{
+			r23.addPartition(EnumPartIDKey.RibbonName, "R" + i);
+		}
+		assertEquals(pm, g.getExplicitPartitionFromMap(new JDFAttributeMap(EnumPartIDKey.SheetName, "S1")));
+
+		final JDFResource r3 = r.addPartition(EnumPartIDKey.SignatureName, "Sig2");
+		final JDFResource r33 = r3.addPartition(EnumPartIDKey.SheetName, "S1");
+		assertNull(g.getExplicitPartitionFromMap(new JDFAttributeMap(EnumPartIDKey.SheetName, "S1")));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetimplicitFromMap2()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();

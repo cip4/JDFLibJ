@@ -7655,7 +7655,7 @@ public class JDFResource extends JDFElement
 			final JDFResource resourceRoot = getResourceRoot();
 			final Object pm = resourceRoot.partitionMap;
 
-			if (pm != null && getImplicitPartitions() != null && getImplicitPartitions().contains(EnumPartIDKey.getEnum(key)))
+			if (pm == null || (getImplicitPartitions() != null && getImplicitPartitions().contains(EnumPartIDKey.getEnum(key))))
 			{
 				super.setAttribute(key, value, nameSpaceURI);
 			}

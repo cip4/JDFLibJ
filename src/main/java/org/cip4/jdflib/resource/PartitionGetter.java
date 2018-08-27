@@ -86,6 +86,10 @@ public class PartitionGetter
 		JDFAttributeMap ret = mapRes == null ? null : partMap;
 		if (ret == null)
 		{
+			ret = getExplicitPartitionFromMap(partMap);
+		}
+		if (ret == null)
+		{
 			ret = checkPV(partMap);
 		}
 		if (ret == null) // no explicit hit
@@ -194,6 +198,52 @@ public class PartitionGetter
 			}
 		}
 		return new JDFAttributeMap();
+	}
+
+	/**
+	 * loop to find partitions - will NOT find explicit matches which need to be checked first with a get()
+	 *
+	 * @param partMap
+	 * @return
+	 */
+	JDFAttributeMap getExplicitPartitionFromMap(final JDFAttributeMap partMap)
+	{
+		final VString keys = partMap.getKeys();
+		final VString partIDKeys = resourceRoot.getPartIDKeys();
+		final int size = keys.size();
+		if (size >= partIDKeys.size() || !leafMap.hasMissingKeys(partMap) || !partIDKeys.containsAll(keys))
+		{
+			return null;
+		}
+		int lastIndex = -1;
+		for (final String key : keys)
+		{
+			lastIndex = Math.max(lastIndex, partIDKeys.index(key));
+		}
+		final VString ignore = lastIndex >= partIDKeys.size() - 1 ? null : new VString();
+		for (int i = lastIndex + 1; i < partIDKeys.size(); i++)
+		{
+			ignore.add(partIDKeys.get(i));
+		}
+
+		JDFAttributeMap ret = null;
+		for (final JDFAttributeMap map : leafMap.keySet())
+		{
+			if (((ignore == null || !ignore.containsAny(map.getKeys()))) && JDFPart.subPartMap(map, partMap, strictPartVersion))
+			{
+				if (ret != null)
+				{
+					return null; // we have more than 1
+				}
+				else
+				{
+					ret = map;
+				}
+			}
+		}
+
+		return ret;
+
 	}
 
 	/**

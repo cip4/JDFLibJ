@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -127,11 +95,11 @@ public class VString extends Vector<String>
 	}
 
 	/**
-	 * constructs a VString by tokenizing a string
+	 * convenience - constructs a VString by tokenizing a string
+	 *
 	 * @param strIn the string to tokenize by blank
-	 * @deprecated use VString (String strIn, null)
+	 *
 	 */
-	@Deprecated
 	public VString(final String strIn)
 	{
 		this(strIn, null);
@@ -144,7 +112,7 @@ public class VString extends Vector<String>
 	 * @param strSep
 	 * @return
 	 */
-	public static VString getVString(final String strIn, String strSep)
+	public static VString getVString(final String strIn, final String strSep)
 	{
 		return StringUtil.getNonEmpty(strIn) == null ? null : new VString(strIn, strSep);
 	}
@@ -152,6 +120,7 @@ public class VString extends Vector<String>
 	/**
 	 *
 	 * constructs a VString by tokenizing a string
+	 *
 	 * @param strIn the string to tokenize
 	 * @param strSep the separator character
 	 */
@@ -183,12 +152,13 @@ public class VString extends Vector<String>
 
 	/**
 	 * creates a VString from an array of Strings
+	 *
 	 * @param a the array
 	 */
 	public VString(final String[] a)
 	{
 		super(a == null ? 0 : a.length);
-		int l = a == null ? 0 : a.length;
+		final int l = a == null ? 0 : a.length;
 		for (int i = 0; i < l; i++)
 		{
 			add(a[i]);
@@ -197,9 +167,10 @@ public class VString extends Vector<String>
 
 	/**
 	 * creates a VString from an Enumeration of Strings
+	 *
 	 * @param a the Enumeration
 	 */
-	public VString(Enumeration<String> a)
+	public VString(final Enumeration<String> a)
 	{
 		super();
 		while (a.hasMoreElements())
@@ -214,7 +185,7 @@ public class VString extends Vector<String>
 	 * @deprecated - simply use get
 	 */
 	@Deprecated
-	public String stringAt(int index)
+	public String stringAt(final int index)
 	{
 		return get(index);
 	}
@@ -260,6 +231,7 @@ public class VString extends Vector<String>
 
 	/**
 	 * Method getAllStrings - returns all strings concatenated together
+	 *
 	 * @param strSep separation between the strings
 	 * @return String
 	 * @deprecated use getString(strSep,null,null)
@@ -283,6 +255,7 @@ public class VString extends Vector<String>
 	/**
 	 * Method setAllStrings - put a separated string into the vString<br>
 	 * e.g. "asdf asdf asdf asdf"
+	 *
 	 * @param strIn separated string
 	 * @param strSep string separator
 	 */
@@ -453,6 +426,7 @@ public class VString extends Vector<String>
 
 	/**
 	 * serialize to a string
+	 *
 	 * @param sep separator between strings
 	 * @param front string before the first entry
 	 * @param back string after the last entry
@@ -468,6 +442,7 @@ public class VString extends Vector<String>
 
 	/**
 	 * create a string from a vector of tokens
+	 *
 	 * @param v vector of tokens
 	 * @param sep separator between tokens
 	 * @param front prefix to string (before the first token)
@@ -505,6 +480,7 @@ public class VString extends Vector<String>
 
 	/**
 	 * get a string from <code>this</code>
+	 *
 	 * @param s the String you are looking for
 	 * @return the String if found or null if <code>this</code> does not contain s
 	 */
@@ -522,11 +498,12 @@ public class VString extends Vector<String>
 	/**
 	 * gets a set with all entries of the VString<br/>
 	 * note that the set retains ordering (LinkedHashSet)
+	 *
 	 * @return the set corresponding to this
 	 */
 	public Set<String> getSet()
 	{
-		final HashSet<String> set = new LinkedHashSet<String>();
+		final HashSet<String> set = new LinkedHashSet<>();
 		final Iterator<String> it = iterator();
 		while (it.hasNext())
 		{
@@ -547,12 +524,13 @@ public class VString extends Vector<String>
 
 	/**
 	 * appends all strings of an array to <code>this</code>
+	 *
 	 * @param strings the array of strings to append to <code>this</code>
 	 */
 	public void addAll(final String[] strings)
 	{
 		ensureCapacity(size() + strings.length);
-		for (String string : strings)
+		for (final String string : strings)
 		{
 			add(string);
 		}
@@ -570,7 +548,7 @@ public class VString extends Vector<String>
 		{
 			return false;
 		}
-		for (String other : others)
+		for (final String other : others)
 		{
 			if (contains(other))
 			{
@@ -581,7 +559,7 @@ public class VString extends Vector<String>
 	}
 
 	/**
-	 * vector  of strings that is contained in <code>this</code>
+	 * vector of strings that is contained in <code>this</code>
 	 *
 	 * @param others the VString of values to test
 	 * @return true if at least one String in other is in <code>this</code>
@@ -592,8 +570,8 @@ public class VString extends Vector<String>
 		{
 			return null;
 		}
-		VString ret = new VString();
-		for (String s : this)
+		final VString ret = new VString();
+		for (final String s : this)
 		{
 			if (others.contains(s))
 			{
@@ -617,6 +595,7 @@ public class VString extends Vector<String>
 
 	/**
 	 * remove but also implementing the usual neg number syntax
+	 *
 	 * @param index if 0, or positive count from front, else if negative from back
 	 * @see java.util.Vector#remove(int)
 	 */
