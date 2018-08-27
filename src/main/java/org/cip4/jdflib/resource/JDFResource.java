@@ -7652,14 +7652,16 @@ public class JDFResource extends JDFElement
 	{
 		if (key != null && setPartIDKeys.contains(key) && !isResourceElement())
 		{
-			final EnumPartIDKey ePart = EnumPartIDKey.getEnum(key);
-			if (getImplicitPartitions() != null && getImplicitPartitions().contains(ePart))
+			final JDFResource resourceRoot = getResourceRoot();
+			final Object pm = resourceRoot.partitionMap;
+
+			if (pm != null && getImplicitPartitions() != null && getImplicitPartitions().contains(EnumPartIDKey.getEnum(key)))
 			{
 				super.setAttribute(key, value, nameSpaceURI);
 			}
 			else
 			{
-				setPartIDKey(ePart, value);
+				setPartIDKey(EnumPartIDKey.getEnum(key), value);
 			}
 		}
 		else
