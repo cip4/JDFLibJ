@@ -39,12 +39,14 @@
 package org.cip4.jdflib.resource;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.junit.Test;
@@ -63,6 +65,58 @@ public class PartitionGetterTest
 		final PartitionGetter g = new PartitionGetter(r);
 		assertEquals(r, g.getPartition(new JDFAttributeMap(), EnumPartUsage.Explicit));
 		assertEquals(r2, g.getPartition(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1"), EnumPartUsage.Explicit));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testRemoveExplicitDup()
+	{
+		final VJDFAttributeMap vmap = new VJDFAttributeMap();
+		for (int i = 0; i < 4; i++)
+		{
+			final JDFAttributeMap m = new JDFAttributeMap("a", "v" + i);
+			vmap.add(m);
+			final JDFAttributeMap m2 = m.clone();
+			m2.put("b", "w" + i);
+			vmap.add(m2);
+		}
+
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final PartitionGetter g = new PartitionGetter(r);
+		g.removeExplicitDuplicates(vmap);
+		assertEquals(4, vmap.size());
+		for (int i = 0; i < 4; i++)
+		{
+			assertEquals(1, vmap.get(i).size());
+		}
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testRemoveImplicitDup()
+	{
+		final VJDFAttributeMap vmap = new VJDFAttributeMap();
+		for (int i = 0; i < 4; i++)
+		{
+			final JDFAttributeMap m = new JDFAttributeMap("a", "v" + i);
+			vmap.add(m);
+			final JDFAttributeMap m2 = m.clone();
+			m2.put("b", "w" + i);
+			vmap.add(m2);
+		}
+
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final PartitionGetter g = new PartitionGetter(r);
+		g.removeImplicitDuplicates(vmap);
+		assertEquals(4, vmap.size());
+		for (int i = 0; i < 4; i++)
+		{
+			assertEquals(2, vmap.get(i).size());
+		}
 	}
 
 	/**
@@ -171,7 +225,7 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testGetexplicitFromMap()
+	public void testSpecialFromMap()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final PartitionGetter g = new PartitionGetter(r);
@@ -181,17 +235,17 @@ public class PartitionGetterTest
 		final JDFAttributeMap pm = new JDFAttributeMap();
 		pm.put(EnumPartIDKey.SignatureName, "Sig1");
 		pm.put(EnumPartIDKey.SheetName, "S1");
-		assertEquals(pm, g.getExplicitPartitionFromMap(new JDFAttributeMap(EnumPartIDKey.SheetName, "S1")));
+		assertEquals(pm, g.specialSearch(new JDFAttributeMap(EnumPartIDKey.SheetName, "S1"), EnumPartUsage.Explicit).get(0));
 
 		for (int i = 0; i < 4; i++)
 		{
 			r23.addPartition(EnumPartIDKey.RibbonName, "R" + i);
 		}
-		assertEquals(pm, g.getExplicitPartitionFromMap(new JDFAttributeMap(EnumPartIDKey.SheetName, "S1")));
+		assertEquals(pm, g.specialSearch(new JDFAttributeMap(EnumPartIDKey.SheetName, "S1"), EnumPartUsage.Explicit).get(0));
 
 		final JDFResource r3 = r.addPartition(EnumPartIDKey.SignatureName, "Sig2");
 		final JDFResource r33 = r3.addPartition(EnumPartIDKey.SheetName, "S1");
-		assertNull(g.getExplicitPartitionFromMap(new JDFAttributeMap(EnumPartIDKey.SheetName, "S1")));
+		assertNotNull(g.specialSearch(new JDFAttributeMap(EnumPartIDKey.SheetName, "S1"), EnumPartUsage.Explicit).get(1));
 
 	}
 

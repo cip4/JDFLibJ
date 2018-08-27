@@ -94,11 +94,7 @@ public class PartitionGetter
 			{
 				partUsage = resourceRoot.getPartUsage();
 			}
-			if (!EnumPartUsage.Sparse.equals(partUsage))
-			{
-				ret = getExplicitPartitionFromMap(partMap);
-			}
-			if (ret == null && !EnumPartUsage.Explicit.equals(partUsage))
+			if (!EnumPartUsage.Explicit.equals(partUsage))
 			{
 				ret = getImplicitPartitionFromMap(partMap);
 				if (EnumPartUsage.Sparse.equals(partUsage) && leafMap.get(ret).getDirectPartition(0) != null)
@@ -168,7 +164,7 @@ public class PartitionGetter
 	JDFAttributeMap getImplicitPartitionFromMap(final JDFAttributeMap partMap)
 	{
 		int size = partMap.size();
-		if (size > 1)
+		if (size > 1 || leafMap.hasMissingKeys(partMap))
 		{
 			final JDFAttributeMap reducedMap = partMap.clone();
 			final VString partIDKeys = resourceRoot.getPartIDKeys();
@@ -198,52 +194,6 @@ public class PartitionGetter
 			}
 		}
 		return new JDFAttributeMap();
-	}
-
-	/**
-	 * loop to find partitions - will NOT find explicit matches which need to be checked first with a get()
-	 *
-	 * @param partMap
-	 * @return
-	 */
-	JDFAttributeMap getExplicitPartitionFromMap(final JDFAttributeMap partMap)
-	{
-		final VString keys = partMap.getKeys();
-		final VString partIDKeys = resourceRoot.getPartIDKeys();
-		final int size = keys.size();
-		if (size >= partIDKeys.size() || !leafMap.hasMissingKeys(partMap) || !partIDKeys.containsAll(keys))
-		{
-			return null;
-		}
-		int lastIndex = -1;
-		for (final String key : keys)
-		{
-			lastIndex = Math.max(lastIndex, partIDKeys.index(key));
-		}
-		final VString ignore = lastIndex >= partIDKeys.size() - 1 ? null : new VString();
-		for (int i = lastIndex + 1; i < partIDKeys.size(); i++)
-		{
-			ignore.add(partIDKeys.get(i));
-		}
-
-		JDFAttributeMap ret = null;
-		for (final JDFAttributeMap map : leafMap.keySet())
-		{
-			if (((ignore == null || !ignore.containsAny(map.getKeys()))) && JDFPart.subPartMap(map, partMap, strictPartVersion))
-			{
-				if (ret != null)
-				{
-					return null; // we have more than 1
-				}
-				else
-				{
-					ret = map;
-				}
-			}
-		}
-
-		return ret;
-
 	}
 
 	/**
@@ -425,17 +375,12 @@ public class PartitionGetter
 		if (m != null)
 			m = removeImplicitPartions(m, partUsage);
 
-		JDFAttributeMap fast = getPartitionFromMap(m, EnumPartUsage.Sparse.equals(partUsage) ? EnumPartUsage.Sparse : EnumPartUsage.Explicit);
+		final JDFAttributeMap fast = getPartitionFromMap(m, EnumPartUsage.Explicit);
 		final VJDFAttributeMap v = (fast != null) ? new VJDFAttributeMap(fast) : specialSearch(m, partUsage);
 
-		if (v.isEmpty())
-		{
-			fast = getPartitionFromMap(m, partUsage);
-			if (fast != null)
-			{
-				v.add(fast);
-			}
-		}
+		/*
+		 * if (v.isEmpty()) { fast = getPartitionFromMap(m, partUsage); if (fast != null) { v.add(fast); } }
+		 */
 		return v;
 	}
 
@@ -468,6 +413,10 @@ public class PartitionGetter
 		{
 			removeImplicitDuplicates(v);
 		}
+		else
+		{
+			removeExplicitDuplicates(v);
+		}
 		return v;
 	}
 
@@ -486,6 +435,29 @@ public class PartitionGetter
 					break;
 				}
 				else if (v.get(i).subMap(v.get(j)))
+				{
+					v.remove(j);
+					i--;
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param v
+	 */
+	void removeExplicitDuplicates(final VJDFAttributeMap v)
+	{
+		for (int i = v.size() - 1; i >= 0; i--)
+		{
+			for (int j = i - 1; j >= 0; j--)
+			{
+				if (v.get(i).subMap(v.get(j)))
+				{
+					v.remove(i);
+					break;
+				}
+				else if (v.get(j).subMap(v.get(i)))
 				{
 					v.remove(j);
 					i--;
