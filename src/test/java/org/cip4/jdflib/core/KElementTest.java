@@ -1588,8 +1588,8 @@ public class KElementTest extends JDFTestCaseBase
 		}
 		catch (final JDFException expected)
 		{
-			final String partOfErrorMessage = "KElement.setAttribute:";
-			assertTrue("Exception message doesn't even mention '" + partOfErrorMessage + "'?!", expected.getMessage().indexOf(partOfErrorMessage) >= 0);
+
+			assertTrue(expected.getMessage().indexOf("HDM:Foo_2") >= 0);
 		}
 	}
 

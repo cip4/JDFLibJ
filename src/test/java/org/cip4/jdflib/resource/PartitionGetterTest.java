@@ -234,7 +234,7 @@ public class PartitionGetterTest
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final PartitionGetter g = new PartitionGetter(r);
 		assertTrue(g.hasGap(new JDFAttributeMap("b", "b1"), v));
-		assertTrue(g.hasGap(new JDFAttributeMap("d", "b1"), v));
+		assertFalse(g.hasGap(new JDFAttributeMap("d", "b1"), v));
 		final JDFAttributeMap next = new JDFAttributeMap("a", "b1");
 		assertFalse(g.hasGap(next, v));
 		next.put("b", "ccc");
@@ -253,16 +253,16 @@ public class PartitionGetterTest
 		final VString v = new VString("a b c");
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final PartitionGetter g = new PartitionGetter(r);
-		assertEquals(1, g.lastPos(new JDFAttributeMap("b", "b1"), v));
-		assertEquals(3, g.lastPos(new JDFAttributeMap("d", "b1"), v));
+		assertEquals(1, g.lastPos(new JDFAttributeMap("b", "b1"), v, true));
+		assertEquals(3, g.lastPos(new JDFAttributeMap("d", "b1"), v, true));
 		final JDFAttributeMap next = new JDFAttributeMap("a", "b1");
-		assertEquals(0, g.lastPos(new JDFAttributeMap("a", "b1"), v));
+		assertEquals(0, g.lastPos(new JDFAttributeMap("a", "b1"), v, true));
 		next.put("b", "ccc");
-		assertEquals(1, g.lastPos(next, v));
+		assertEquals(1, g.lastPos(next, v, true));
 		next.put("c", "ccc");
-		assertEquals(2, g.lastPos(next, v));
+		assertEquals(2, g.lastPos(next, v, true));
 		next.remove("b");
-		assertEquals(2, g.lastPos(next, v));
+		assertEquals(2, g.lastPos(next, v, true));
 	}
 
 	/**

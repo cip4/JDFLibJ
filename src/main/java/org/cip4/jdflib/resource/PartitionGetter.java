@@ -388,7 +388,7 @@ public class PartitionGetter
 	 */
 	VJDFAttributeMap specialSearch(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
-		final int maxSize = 1 + lastPos(m, resourceRoot.getPartIDKeys());
+		final int maxSize = 1 + lastPos(m, resourceRoot.getPartIDKeys(), true);
 		final VJDFAttributeMap v = new VJDFAttributeMap();
 		for (final JDFAttributeMap map : leafMap.keySet())
 		{
@@ -913,7 +913,7 @@ public class PartitionGetter
 	 */
 	boolean hasGap(final JDFAttributeMap next, final VString vPartIDKeys)
 	{
-		return lastPos(next, vPartIDKeys) > next.size() - 1;
+		return lastPos(next, vPartIDKeys, false) > next.size() - 1;
 	}
 
 	/**
@@ -922,7 +922,7 @@ public class PartitionGetter
 	 * @param vPartIDKeys
 	 * @return
 	 */
-	int lastPos(final JDFAttributeMap next, final VString vPartIDKeys)
+	int lastPos(final JDFAttributeMap next, final VString vPartIDKeys, final boolean newIsGap)
 	{
 		int last = -1;
 		if (vPartIDKeys != null)
@@ -931,7 +931,7 @@ public class PartitionGetter
 			for (final String pik : keys)
 			{
 				int nextlast = vPartIDKeys.index(pik);
-				if (nextlast == -1)
+				if (newIsGap && nextlast == -1)
 					nextlast = Math.max(vPartIDKeys.size(), next.size());
 				last = Math.max(last, nextlast);
 			}
