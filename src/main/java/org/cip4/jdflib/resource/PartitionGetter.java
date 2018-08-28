@@ -378,9 +378,6 @@ public class PartitionGetter
 		final JDFAttributeMap fast = getPartitionFromMap(m, EnumPartUsage.Explicit);
 		final VJDFAttributeMap v = (fast != null) ? new VJDFAttributeMap(fast) : specialSearch(m, partUsage);
 
-		/*
-		 * if (v.isEmpty()) { fast = getPartitionFromMap(m, partUsage); if (fast != null) { v.add(fast); } }
-		 */
 		return v;
 	}
 
@@ -391,20 +388,24 @@ public class PartitionGetter
 	 */
 	VJDFAttributeMap specialSearch(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
+		final int maxSize = 1 + lastPos(m, resourceRoot.getPartIDKeys());
 		final VJDFAttributeMap v = new VJDFAttributeMap();
 		for (final JDFAttributeMap map : leafMap.keySet())
 		{
-			if (JDFPart.subPartMap(map, m, strictPartVersion))
+			if (map.size() <= maxSize)
 			{
-				v.add(map);
-			}
-			else if (EnumPartUsage.Implicit.equals(partUsage) && JDFPart.overlapPartMap(map, m, strictPartVersion))
-			{
-				v.add(map);
-			}
-			else if (EnumPartUsage.Sparse.equals(partUsage) && JDFPart.overlapPartMap(map, m, strictPartVersion) && leafMap.get(map).getDirectPartition(0) == null)
-			{
-				v.add(map);
+				if (JDFPart.subPartMap(map, m, strictPartVersion))
+				{
+					v.add(map);
+				}
+				else if (EnumPartUsage.Implicit.equals(partUsage) && JDFPart.overlapPartMap(map, m, strictPartVersion))
+				{
+					v.add(map);
+				}
+				else if (EnumPartUsage.Sparse.equals(partUsage) && JDFPart.overlapPartMap(map, m, strictPartVersion) && leafMap.get(map).getDirectPartition(0) == null)
+				{
+					v.add(map);
+				}
 			}
 		}
 
@@ -412,10 +413,6 @@ public class PartitionGetter
 		if (EnumPartUsage.Implicit.equals(partUsage))
 		{
 			removeImplicitDuplicates(v);
-		}
-		else
-		{
-			removeExplicitDuplicates(v);
 		}
 		return v;
 	}
@@ -908,27 +905,38 @@ public class PartitionGetter
 		return newMap;
 	}
 
-	private boolean hasGap(final JDFAttributeMap next, final VString vPartIDKeys)
+	/**
+	 *
+	 * @param next
+	 * @param vPartIDKeys
+	 * @return
+	 */
+	boolean hasGap(final JDFAttributeMap next, final VString vPartIDKeys)
 	{
-		boolean gap = false;
-		int siz = next.size();
-		for (final String pik : vPartIDKeys)
+		return lastPos(next, vPartIDKeys) > next.size() - 1;
+	}
+
+	/**
+	 *
+	 * @param next
+	 * @param vPartIDKeys
+	 * @return
+	 */
+	int lastPos(final JDFAttributeMap next, final VString vPartIDKeys)
+	{
+		int last = -1;
+		if (vPartIDKeys != null)
 		{
-			if (next.containsKey(pik))
+			final Set<String> keys = next.keySet();
+			for (final String pik : keys)
 			{
-				if (gap)
-					return true;
-				if (--siz == 0)
-					return false;
-			}
-			else
-			{
-				if (gap)
-					return true;
-				gap = true;
+				int nextlast = vPartIDKeys.index(pik);
+				if (nextlast == -1)
+					nextlast = Math.max(vPartIDKeys.size(), next.size());
+				last = Math.max(last, nextlast);
 			}
 		}
-		return false;
+		return last;
 	}
 
 	/**

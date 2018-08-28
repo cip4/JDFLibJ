@@ -39,12 +39,15 @@
 package org.cip4.jdflib.resource;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -219,6 +222,47 @@ public class PartitionGetterTest
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final PartitionGetter g = new PartitionGetter(r);
 		assertEquals(new JDFAttributeMap(), g.getImplicitPartitionFromMap(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1")));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testHasGap()
+	{
+		final VString v = new VString("a b c");
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final PartitionGetter g = new PartitionGetter(r);
+		assertTrue(g.hasGap(new JDFAttributeMap("b", "b1"), v));
+		assertTrue(g.hasGap(new JDFAttributeMap("d", "b1"), v));
+		final JDFAttributeMap next = new JDFAttributeMap("a", "b1");
+		assertFalse(g.hasGap(next, v));
+		next.put("b", "ccc");
+		assertFalse(g.hasGap(next, v));
+		next.put("c", "ccc");
+		next.remove("b");
+		assertTrue(g.hasGap(next, v));
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testLastPos()
+	{
+		final VString v = new VString("a b c");
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final PartitionGetter g = new PartitionGetter(r);
+		assertEquals(1, g.lastPos(new JDFAttributeMap("b", "b1"), v));
+		assertEquals(3, g.lastPos(new JDFAttributeMap("d", "b1"), v));
+		final JDFAttributeMap next = new JDFAttributeMap("a", "b1");
+		assertEquals(0, g.lastPos(new JDFAttributeMap("a", "b1"), v));
+		next.put("b", "ccc");
+		assertEquals(1, g.lastPos(next, v));
+		next.put("c", "ccc");
+		assertEquals(2, g.lastPos(next, v));
+		next.remove("b");
+		assertEquals(2, g.lastPos(next, v));
 	}
 
 	/**

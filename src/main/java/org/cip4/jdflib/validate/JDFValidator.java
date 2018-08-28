@@ -2,76 +2,43 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment mrSubRefay appear in the software itself, if and wherever such third-party
+ * acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior writtenrestartProcesses() permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE. ====================================================================
  *
- }
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software restartProcesses()
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * } This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software restartProcesses() copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  */
-//Titel:        check a jdf file, if is valid
-//Version:
-//Copyright:    Copyright (c) 2002
-//Autor:        Joerg Gonnermann, Dietrich Mucha
-//Firma:        Heidelberger Druckmaschinen AG
+// Titel: check a jdf file, if is valid
+// Version:
+// Copyright: Copyright (c) 2002
+// Autor: Joerg Gonnermann, Dietrich Mucha
+// Firma: Heidelberger Druckmaschinen AG
 package org.cip4.jdflib.validate;
 
 import java.io.File;
@@ -129,18 +96,20 @@ import org.cip4.jdflib.util.UrlUtil;
  *
  * this is the non-commandline part of the original checkJDF and used both by the JDF Editor and checkJDF
  *
- * Refactored JDFValidator to be non-static in order to make it thread compatible. Previously, only one thread at a time could call JDFValidator from within the
- * same JVM. Now an instance of JDFValidator and the the method validate should be called. JDFValidator can still be called from the command line in the same
- * way as before.
+ * Refactored JDFValidator to be non-static in order to make it thread compatible. Previously, only one thread at a time could call JDFValidator from within the same JVM. Now an instance of
+ * JDFValidator and the the method validate should be called. JDFValidator can still be called from the command line in the same way as before.
  *
- * TODO Break out validation error handling logging so that new error handlers can easily be registered. For example, there should be an error handler for
- * logging to the XML log file and an error handler for logging to the <code>sysOut</code>. Perhaps <code>org.xml.sax.ErrorHandler</code> could be used?
+ * TODO Break out validation error handling logging so that new error handlers can easily be registered. For example, there should be an error handler for logging to the XML log file and an error
+ * handler for logging to the <code>sysOut</code>. Perhaps <code>org.xml.sax.ErrorHandler</code> could be used?
  *
  * @author Claes Buckwalter (clabu@itn.liu.se)
  * @version 2008-01-02
  */
 public class JDFValidator
 {
+	private static final String ERROR_TYPE = "ErrorType";
+	private static final String IS_VALID = "IsValid";
+	private static final String MESSAGE = "Message";
 	VString foundNameSpaces = new VString();
 	VString vID = new VString();
 	/**
@@ -159,11 +128,11 @@ public class JDFValidator
 	VString vSeparations = new VString();
 	VString vSeparations2 = new VString();
 	VString vColorPoolSeparations = new VString();
-	//	protected XMLDoc pOut = new XMLDoc("CheckOutput", "http://www.cip4.org/validate");
+	// protected XMLDoc pOut = new XMLDoc("CheckOutput", "http://www.cip4.org/validate");
 	protected XMLDoc pOut;
 	// list of gray boxes that are ignored when checking types for extensions
-	static final String[] aGBList = { "ImpositionRIPing", "PlateMaking", "ProofAndPlateMaking", "ImpositionProofing", "PageProofing", "RIPing", "PrePressPreparation",
-			"ImpositionPreparation", "ProofImaging" };
+	static final String[] aGBList = { "ImpositionRIPing", "PlateMaking", "ProofAndPlateMaking", "ImpositionProofing", "PageProofing", "RIPing", "PrePressPreparation", "ImpositionPreparation",
+			"ProofImaging" };
 
 	JDFDoc theDoc = null;
 	protected String translation = null;
@@ -194,8 +163,8 @@ public class JDFValidator
 	public boolean bMultiID = false;
 	private boolean inOutputLoop = false;
 
-	final protected static String version = "JDFValidator: JDF validator; -- (c) 2001-2015 CIP4" + "\nJDF 1.5 compatible version\n" + "\nCode based on schema JDF_1.5.xsd\n"
-			+ "Build version " + JDFAudit.software();
+	final protected static String version = "JDFValidator: JDF validator; -- (c) 2001-2015 CIP4" + "\nJDF 1.5 compatible version\n" + "\nCode based on schema JDF_1.5.xsd\n" + "Build version "
+			+ JDFAudit.software();
 
 	/**
 	 *
@@ -220,7 +189,7 @@ public class JDFValidator
 		{
 			return null;
 		}
-		return checkOut.getAttribute("Message", null, null);
+		return checkOut.getAttribute(MESSAGE, null, null);
 	}
 
 	/**
@@ -236,9 +205,9 @@ public class JDFValidator
 		{
 			return;
 		}
-		reportElem.setAttribute("IsValid", false, null);
-		reportElem.setAttribute("ErrorType", type, null);
-		reportElem.setAttribute("Message", message, null);
+		reportElem.setAttribute(IS_VALID, false, null);
+		reportElem.setAttribute(ERROR_TYPE, type, null);
+		reportElem.setAttribute(MESSAGE, message, null);
 		if (indent > 0)
 		{
 			sysOut.println(indent(indent) + message);
@@ -355,7 +324,8 @@ public class JDFValidator
 		}
 	}
 
-	protected JDFElement printBadJDF(final KElement kElement, final int indent, final KElement xmlParent, final boolean bIsNodeRoot, final String id, final String elmName, final KElement testElement, boolean bIsValid)
+	protected JDFElement printBadJDF(final KElement kElement, final int indent, final KElement xmlParent, final boolean bIsNodeRoot, final String id, final String elmName, final KElement testElement,
+			boolean bIsValid)
 	{
 		final JDFElement jdfElement = (JDFElement) kElement;
 		bIsValid = isValidElement(bIsValid, jdfElement);
@@ -413,8 +383,8 @@ public class JDFValidator
 				{
 					final EnumVersion v = ((JDFElement) jdfElement.getParentNode_KElement()).getFirstVersion(elmName, true);
 					testElement.setAttribute("FirstVersion", v.getName());
-					setErrorType(testElement, "PreReleaseElement", elmName + " is not valid in JDF Version" + jdfElement.getVersion(true).getName() + " First Valid version: "
-							+ v.getName(), indent + 2);
+					setErrorType(testElement, "PreReleaseElement", elmName + " is not valid in JDF Version" + jdfElement.getVersion(true).getName() + " First Valid version: " + v.getName(),
+							indent + 2);
 				}
 			}
 
@@ -426,8 +396,8 @@ public class JDFValidator
 				{
 					final EnumVersion v = ((JDFElement) jdfElement.getParentNode_KElement()).getLastVersion(elmName, true);
 					testElement.setAttribute("LastVersion", v.getName());
-					setErrorType(testElement, "DeprecatedElement", elmName + " is not valid in JDF Version" + jdfElement.getVersion(true).getName() + " Last Valid version: "
-							+ v.getName(), indent + 2);
+					setErrorType(testElement, "DeprecatedElement", elmName + " is not valid in JDF Version" + jdfElement.getVersion(true).getName() + " Last Valid version: " + v.getName(),
+							indent + 2);
 				}
 			}
 
@@ -466,7 +436,7 @@ public class JDFValidator
 
 		if (bUnknownElem && testElement != null)
 		{
-			testElement.setAttribute("IsValid", false, null);
+			testElement.setAttribute(IS_VALID, false, null);
 		}
 		else if (bIsValid && bValidID && bIsOK)
 		{
@@ -477,11 +447,11 @@ public class JDFValidator
 			}
 			if (testElement != null)
 			{
-				testElement.setAttribute("IsValid", true, null);
+				testElement.setAttribute(IS_VALID, true, null);
 			}
 			if (bIsNodeRoot && xmlParent != null)
 			{
-				xmlParent.setAttribute("IsValid", true, null);
+				xmlParent.setAttribute(IS_VALID, true, null);
 			}
 
 		}
@@ -495,10 +465,10 @@ public class JDFValidator
 			}
 			if (testElement != null)
 			{
-				testElement.setAttribute("IsValid", false, null);
+				testElement.setAttribute(IS_VALID, false, null);
 			}
 			sysOut.println(indent(indent + 2) + "Invalid Element " + elmName + getInvalidText(jdfElement));
-			if (testElement != null && !testElement.hasAttribute("ErrorType"))
+			if (testElement != null && !testElement.hasAttribute(ERROR_TYPE))
 			{
 				setErrorType(testElement, "InvalidElement", elmName + getInvalidText(jdfElement), 2);
 			}
@@ -524,7 +494,7 @@ public class JDFValidator
 
 			final VString swapAtt = new VString();
 			VString vTmp = jdfElement.knownElements();
-			// compare missing elements with unknown attributes to find elem <->  attrib swaps
+			// compare missing elements with unknown attributes to find elem <-> attrib swaps
 			for (final String unknownAttr : unknownAttributes)
 			{
 				if (vTmp.contains(unknownAttr))
@@ -602,10 +572,8 @@ public class JDFValidator
 
 			printAttributeList(indent, testElement, jdfElement, printMissElms, unknownAttributes, "Unknown", "Unknown Attribute");
 			printAttributeList(indent, testElement, jdfElement, printMissElms, invalidAttributes, "Invalid", "Invalid attribute Value");
-			printAttributeList(indent, testElement, jdfElement, printMissElms, deprecatedAttributes, "Deprecated", "Deprecated Attribute in JDF Version "
-					+ jdfElement.getVersion(true).getName());
-			printAttributeList(indent, testElement, jdfElement, printMissElms, prereleaseAttributes, "PreRelease", "Attribute not yet defined in JDF Version "
-					+ jdfElement.getVersion(true).getName());
+			printAttributeList(indent, testElement, jdfElement, printMissElms, deprecatedAttributes, "Deprecated", "Deprecated Attribute in JDF Version " + jdfElement.getVersion(true).getName());
+			printAttributeList(indent, testElement, jdfElement, printMissElms, prereleaseAttributes, "PreRelease", "Attribute not yet defined in JDF Version " + jdfElement.getVersion(true).getName());
 			printAttributeList(indent, testElement, jdfElement, printMissElms, missingAttributes, "Missing", "Missing Attribute");
 			printAttributeList(indent, testElement, jdfElement, printMissElms, swapAtt, "Swap", "Element written as Attribute");
 
@@ -669,7 +637,8 @@ public class JDFValidator
 		return jdfElement;
 	}
 
-	protected void printNonNamespace(final KElement kElement, final int indent, final KElement xmlParent, final String pref, final String elmName, final String nsURI, final KElement testElement, final boolean isJDFNS, boolean bTypo)
+	protected void printNonNamespace(final KElement kElement, final int indent, final KElement xmlParent, final String pref, final String elmName, final String nsURI, final KElement testElement,
+			final boolean isJDFNS, boolean bTypo)
 	{
 		final String nameSpaceURI = kElement.getNamespaceURI();
 		final String nsLower = nameSpaceURI.toLowerCase();
@@ -883,7 +852,8 @@ public class JDFValidator
 		}
 	}
 
-	private void printAttributeList(final int indent, final KElement testElement, final JDFElement part, final boolean printMissElms, final VString attributeVector, final String whatType, String message)
+	private void printAttributeList(final int indent, final KElement testElement, final JDFElement part, final boolean printMissElms, final VString attributeVector, final String whatType,
+			String message)
 	{
 		if (attributeVector == null)
 		{
@@ -971,8 +941,8 @@ public class JDFValidator
 	}
 
 	/**
-	 * For all subnodes that 'root' consist of makes the total check of Links, Resources and separations fill in the vectors 'vLinkedResources', 'vResources',
-	 * 'vBadResourceLinks', 'vColorPoolSeparations', 'vSeparations'. Print the warnings
+	 * For all subnodes that 'root' consist of makes the total check of Links, Resources and separations fill in the vectors 'vLinkedResources', 'vResources', 'vBadResourceLinks',
+	 * 'vColorPoolSeparations', 'vSeparations'. Print the warnings
 	 *
 	 * @param root - Node root we test
 	 * @param bQuiet - Mode '-q' quiet
@@ -1158,7 +1128,7 @@ public class JDFValidator
 					e.setAttribute("IsPrivate", "true");
 					e.setAttribute("NSPrefix", prefix);
 					e.setAttribute("NSURI", jdfElement.getNamespaceURIFromPrefix(prefix));
-					e.setAttribute("ErrorType", "PrivateAttribute");
+					e.setAttribute(ERROR_TYPE, "PrivateAttribute");
 					e.setAttribute("NodeName", privateAttribute);
 					e.setAttribute("Value", jdfElement.getAttribute(privateAttribute));
 					e.setAttribute("XPath", jdfElement.buildXPath(null, 1) + "/@" + privateAttribute);
@@ -1444,9 +1414,9 @@ public class JDFValidator
 			{
 				isValid = false;
 				sysOut.println(errMessage);
-				sysOut.println(indent(indent) + "Invalid RefElement: " + refName + " rRef=" + rRef
-						+ (re.hasAttribute(AttributeName.RSUBREF) ? (" rSubRef=" + re.getrSubRef()) : JDFConstants.EMPTYSTRING) + ". Points to " + re.getRefNodeName() + " ID="
-						+ targEl.getAttribute(AttributeName.ID, null, ""));
+				sysOut.println(
+						indent(indent) + "Invalid RefElement: " + refName + " rRef=" + rRef + (re.hasAttribute(AttributeName.RSUBREF) ? (" rSubRef=" + re.getrSubRef()) : JDFConstants.EMPTYSTRING)
+								+ ". Points to " + re.getRefNodeName() + " ID=" + targEl.getAttribute(AttributeName.ID, null, ""));
 
 				if (!re.validResourcePosition())
 				{
@@ -1454,8 +1424,7 @@ public class JDFValidator
 					final String targID = targJDF == null ? "" : targJDF.getID();
 					final JDFNode refJDF = re.getParentJDF();
 					final String refID = refJDF == null ? "" : refJDF.getID();
-					setErrorType(testElement, "InvalidRefElement", "Invalid Context: Resource node (ID=" + targID + ") is not an ancestor of RefElement node (ID=" + refID
-							+ ")", indent);
+					setErrorType(testElement, "InvalidRefElement", "Invalid Context: Resource node (ID=" + targID + ") is not an ancestor of RefElement node (ID=" + refID + ")", indent);
 				}
 			}
 		}
@@ -1510,8 +1479,8 @@ public class JDFValidator
 		{
 			final String rRef = rl.getrRef();
 			final String resLinkName = rl.getNodeName();
-			final String procUsage = (rl.hasAttribute(AttributeName.PROCESSUSAGE) && !rl.getProcessUsage().equals(JDFConstants.EMPTYSTRING)) ? "(ProcessUsage:"
-					+ rl.getProcessUsage() + ")" : JDFConstants.EMPTYSTRING;
+			final String procUsage = (rl.hasAttribute(AttributeName.PROCESSUSAGE) && !rl.getProcessUsage().equals(JDFConstants.EMPTYSTRING)) ? "(ProcessUsage:" + rl.getProcessUsage() + ")"
+					: JDFConstants.EMPTYSTRING;
 
 			final String errMessage = indent(indent) + "!!! InValid Element: " + rl.buildXPath(null, 1) + " !!! ";
 
@@ -1533,8 +1502,7 @@ public class JDFValidator
 			{
 				isValid = false;
 				sysOut.println(errMessage);
-				sysOut.println(indent(indent) + "Invalid " + rl.getAttribute("Usage") + " ResLink: " + resLinkName + procUsage + "\nrRef points to the multiply defined ID=\""
-						+ rRef + "\"");
+				sysOut.println(indent(indent) + "Invalid " + rl.getAttribute("Usage") + " ResLink: " + resLinkName + procUsage + "\nrRef points to the multiply defined ID=\"" + rRef + "\"");
 				if (testElement != null)
 				{
 					setErrorType(testElement, "ResLinkMultipleID", "ResourceLink rRef points to the multiply defined ID:" + rRef);
@@ -1679,7 +1647,7 @@ public class JDFValidator
 			if (testElement != null)
 			{
 				final KElement kEl = testElement.appendElement("Error");
-				kEl.setAttribute("Message", "JMFNode == null. Can't start Test");
+				kEl.setAttribute(MESSAGE, "JMFNode == null. Can't start Test");
 			}
 			return;
 		}
@@ -1691,7 +1659,7 @@ public class JDFValidator
 			if (testElement != null)
 			{
 				final KElement kEl = testElement.appendElement("Error");
-				kEl.setAttribute("Message", "No DeviceCap element found. Can't start Test");
+				kEl.setAttribute(MESSAGE, "No DeviceCap element found. Can't start Test");
 			}
 			return;
 		}
@@ -1729,7 +1697,7 @@ public class JDFValidator
 			sysOut.println("\nNo executable nodes that fit device capabilities were found");
 			if (execRoot != null)
 			{
-				execRoot.setAttribute("Message", "No Executable Nodes were found");
+				execRoot.setAttribute(MESSAGE, "No Executable Nodes were found");
 			}
 		}
 
@@ -1738,7 +1706,7 @@ public class JDFValidator
 		{
 			sysOut.println("\nResult of getBadJDFInfo: No bad JDF are found\n");
 			final KElement bugReportRoot = testElement.appendElement("BugReport");
-			bugReportRoot.setAttribute("Message", "No bad JDF were found");
+			bugReportRoot.setAttribute(MESSAGE, "No bad JDF were found");
 		}
 		else
 		{
@@ -1774,7 +1742,7 @@ public class JDFValidator
 			if (testElement != null)
 			{
 				final KElement kEl = testElement.appendElement("Error");
-				kEl.setAttribute("Message", "JMFNode == null. Can't start Test");
+				kEl.setAttribute(MESSAGE, "JMFNode == null. Can't start Test");
 			}
 			return;
 		}
@@ -1790,14 +1758,14 @@ public class JDFValidator
 		{
 			sysOut.println("\nResult of getBadJDFInfo: No bad JDF are found\n");
 			final KElement bugReportRoot = testElement.appendElement("BugReport");
-			bugReportRoot.setAttribute("Message", "No bad JDF were found");
+			bugReportRoot.setAttribute(MESSAGE, "No bad JDF were found");
 		}
 		else
 		{
 			final KElement jRoot = testElement.copyElement(testResult.getRoot(), null);
-			if (!jRoot.getBoolAttribute("IsValid", null, true))
+			if (!jRoot.getBoolAttribute(IS_VALID, null, true))
 			{
-				testElement.setAttribute("IsValid", false, null);
+				testElement.setAttribute(IS_VALID, false, null);
 			}
 			sysOut.println("\nResult of getBadJDFInfo: " + testResult.toString());
 
@@ -1805,11 +1773,9 @@ public class JDFValidator
 	}
 
 	/**
-	 * Sets correct validation status of the nodes that has invalid entries. E.g. if ResourcePool has invalid children sets its status as invalid ["IsValid" =
-	 * false].
+	 * Sets correct validation status of the nodes that has invalid entries. E.g. if ResourcePool has invalid children sets its status as invalid ["IsValid" = false].
 	 *
-	 * Check the Validation Status of all children for Mode [bQuiet=true] and if there are no invalid child nodes and it has no private contents - removes valid
-	 * entries
+	 * Check the Validation Status of all children for Mode [bQuiet=true] and if there are no invalid child nodes and it has no private contents - removes valid entries
 	 *
 	 * @param root - xml output root.
 	 * @param bQuiet - mode is quiet set by "-q"
@@ -1820,8 +1786,8 @@ public class JDFValidator
 		{
 			return;
 		}
-		final JDFAttributeMap mInv = new JDFAttributeMap("IsValid", "false");
-		final JDFAttributeMap mVal = new JDFAttributeMap("IsValid", "true");
+		final JDFAttributeMap mInv = new JDFAttributeMap(IS_VALID, "false");
+		final JDFAttributeMap mVal = new JDFAttributeMap(IS_VALID, "true");
 		final VElement vEl = root.getChildElementVector_KElement(null, null, null, true, 0);
 		boolean bValid = true;
 		for (int i = vEl.size() - 1; i >= 0; i--)
@@ -1834,7 +1800,7 @@ public class JDFValidator
 				continue;
 			}
 
-			if (el.hasAttribute("IsValid") && el.getBoolAttribute("IsValid", null, false)) // has
+			if (el.hasAttribute(IS_VALID) && el.getBoolAttribute(IS_VALID, null, false)) // has
 			// attr
 			// "Valid"
 			// and
@@ -1855,8 +1821,7 @@ public class JDFValidator
 
 						removeValidEntriesIfQuiet(el, false);
 
-						if (!el.getBoolAttribute("HasPrivateContents", null, false) && eName != "ForeignNSFound"
-								&& (el.getChildByTagName(null, null, 0, mPrivate, false, false) == null))
+						if (!el.getBoolAttribute("HasPrivateContents", null, false) && eName != "ForeignNSFound" && (el.getChildByTagName(null, null, 0, mPrivate, false, false) == null))
 						{
 							el.deleteNode(); // if node is valid and bQuiet is
 							// true - remove it
@@ -1867,10 +1832,10 @@ public class JDFValidator
 				{// if node "el" contains invalid nodes, set it as invalid.
 					removeValidEntriesIfQuiet(el, false);
 					final KElement valChild = el.getChildByTagName(null, null, 0, null, false, true);
-					if (valChild != null && !el.hasAttribute("ErrorType"))
+					if (valChild != null && !el.hasAttribute(ERROR_TYPE))
 					{
 						setErrorType(el, "InvalidElement", "Element is not valid, see child elements for details");
-						el.setAttribute("IsValid", false, null);
+						el.setAttribute(IS_VALID, false, null);
 						bValid = false;
 					}
 				}
@@ -1884,7 +1849,7 @@ public class JDFValidator
 					removeValidEntriesIfQuiet(el, false);
 				}
 				valChild = el.getChildByTagName(null, null, 0, mVal, false, true);
-				if (valChild != null && !el.hasAttribute("ErrorType"))
+				if (valChild != null && !el.hasAttribute(ERROR_TYPE))
 				{
 					setErrorType(el, "InvalidElement", "Element is not valid, see child elements for details");
 				}
@@ -1892,7 +1857,7 @@ public class JDFValidator
 		}
 		if (!bValid && bRoot)
 		{
-			root.setAttribute("IsValid", false, null);
+			root.setAttribute(IS_VALID, false, null);
 		}
 	}
 
@@ -1922,6 +1887,7 @@ public class JDFValidator
 
 	/**
 	 * this can be either a file or a network url
+	 *
 	 * @param _schemaLocation
 	 */
 	public void setJDFSchemaLocation(final String _schemaLocation)
@@ -2031,26 +1997,14 @@ public class JDFValidator
 	public XMLDoc processZipFile(final File argFile)
 	{
 		boolean bTryKeep = bTryFormats;
-
+		ZipFile zip = null;
 		try
 		{
-			final ZipFile zip = new ZipFile(argFile);
+			zip = new ZipFile(argFile);
 			final Enumeration<? extends ZipEntry> zipEnum = zip.entries();
 			int n = 0;
 			while (zipEnum.hasMoreElements())
 			{
-				// no use here - it looks as if the dom documents leak
-				// if ((n % 10) == 9) // close all and gc!
-				// {
-				// zip.close();
-				// zip = null;
-				// System.gc();
-				// zip = new ZipFile(argFile);
-				//
-				// zipEnum = zip.entries();
-				// for (int i = 0; i < n; i++)
-				// zipEnum.nextElement();
-				// }
 
 				final ZipEntry ze = zipEnum.nextElement();
 
@@ -2079,7 +2033,7 @@ public class JDFValidator
 			{
 				KElement testFileRoot = pOut.getRoot().appendElement("TestFile");
 				testFileRoot = testFileRoot.appendElement("Error");
-				testFileRoot.setAttribute("Message", "Invalid zip file, Bailing out!");
+				testFileRoot.setAttribute(MESSAGE, "Invalid zip file, Bailing out!");
 				sysOut.println("Invalid zip file, Bailing out!");
 			}
 		}
@@ -2089,8 +2043,22 @@ public class JDFValidator
 			{
 				KElement testFileRoot = pOut.getRoot().appendElement("TestFile");
 				testFileRoot = testFileRoot.appendElement("Error");
-				testFileRoot.setAttribute("Message", "I/O Exception on zip file, Bailing out!");
+				testFileRoot.setAttribute(MESSAGE, "I/O Exception on zip file, Bailing out!");
 				sysOut.println("I/O Exception on zip file, Bailing out!");
+			}
+		}
+		finally
+		{
+			if (zip != null)
+			{
+				try
+				{
+					zip.close();
+				}
+				catch (final IOException e)
+				{
+					// nop
+				}
 			}
 		}
 		bTryFormats = bTryKeep;
@@ -2285,7 +2253,7 @@ public class JDFValidator
 		if (inStream == null && url == null && xmlFile == null && theDoc == null)
 		{
 			testFileRoot = testFileRoot.appendElement("Error");
-			testFileRoot.setAttribute("Message", "No input URL, stream or file. Bailing out!");
+			testFileRoot.setAttribute(MESSAGE, "No input URL, stream or file. Bailing out!");
 			sysOut.println("No input URL, stream or file. Bailing out!");
 			return pOut;
 		}
@@ -2384,7 +2352,7 @@ public class JDFValidator
 				else
 				{
 					final KElement kEl = testFileRoot.appendElement("Error");
-					kEl.setAttribute("Message", "File " + xmlFile + " not found or not parsed");
+					kEl.setAttribute(MESSAGE, "File " + xmlFile + " not found or not parsed");
 				}
 			}
 			else
@@ -2525,7 +2493,7 @@ public class JDFValidator
 					removeValidEntriesIfQuiet(checkJDFxmlRoot, true);
 					if (!checkJDFxmlRoot.hasAttributes() && !checkJDFxmlRoot.hasChildElements())
 					{
-						checkJDFxmlRoot.setAttribute("IsValid", true, null);
+						checkJDFxmlRoot.setAttribute(IS_VALID, true, null);
 					}
 					lEndTime_InternalCheckJDF = System.currentTimeMillis();
 
@@ -2541,7 +2509,7 @@ public class JDFValidator
 		{
 			sysOut.println("Caught Exception: " + e.getMessage());
 			final KElement er = testFileRoot.appendElement("Error");
-			er.setAttribute("Message", "Caught Exception: " + e.getMessage());
+			er.setAttribute(MESSAGE, "Caught Exception: " + e.getMessage());
 		}
 
 		sysOut.println("\n**********************************************************");
@@ -2632,7 +2600,7 @@ public class JDFValidator
 				if (outRootLocal != null)
 				{
 					outRootLocal = outRootLocal.appendElement("MultiIDs");
-					outRootLocal.setAttribute("IsValid", false, null);
+					outRootLocal.setAttribute(IS_VALID, false, null);
 				}
 
 				sysOut.println("Multiple ID elements:\n");
@@ -2724,7 +2692,7 @@ public class JDFValidator
 			final KElement xmlRoot = pOut.getRoot();
 			final KElement testFileRoot = xmlRoot.appendElement("TestFile");
 			testFileRoot.setAttribute("FileName", xmlFile);
-			testFileRoot.setAttribute("Message", "Could not find file: " + xmlFile);
+			testFileRoot.setAttribute(MESSAGE, "Could not find file: " + xmlFile);
 		}
 	}
 

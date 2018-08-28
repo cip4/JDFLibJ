@@ -546,12 +546,12 @@ public class KElement extends ElementNSImpl implements Element
 		else
 		// standard attribute (not xmlns)
 		{
-			bDirty = serRegularDomVal(key, value, nameSpaceURI);
+			bDirty = setRegularDomVal(key, value, nameSpaceURI);
 		}
 		return bDirty;
 	}
 
-	boolean serRegularDomVal(final String key, final String value, String nameSpaceURI)
+	boolean setRegularDomVal(final String key, final String value, String nameSpaceURI)
 	{
 		boolean bDirty = false;
 		final Node a = getAttributeNodeNS(nameSpaceURI, xmlnsLocalName(key));
@@ -563,8 +563,7 @@ public class KElement extends ElementNSImpl implements Element
 				final String nodeName = a.getNodeName();
 
 				if (nodeName.equals(key))
-				{ // overwrite default namespace with qualified
-					// namespace or vice versa
+				{ // overwrite default namespace with qualified namespace or vice versa
 					super.setAttributeNS(nameSpaceURI, key, value);
 				}
 				else
@@ -581,8 +580,7 @@ public class KElement extends ElementNSImpl implements Element
 					namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), false);
 					if (!ContainerUtil.equals(namespaceURI2, nameSpaceURI))
 					{
-						final String message = "KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2 + "; attempting to set URI: "
-								+ nameSpaceURI;
+						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2 + "; attempting to set URI: " + nameSpaceURI;
 						kLog.error(message);
 						throw new JDFException(message);
 					}
@@ -592,8 +590,7 @@ public class KElement extends ElementNSImpl implements Element
 				removeAttribute(key);
 				if (nameSpaceURI.equals(getNamespaceURI()))
 				{
-					// clean up any attribute that may be in the same ns
-					// but with a different prefix
+					// clean up any attribute that may be in the same ns but with a different prefix
 					removeAttributeNS(nameSpaceURI, xmlnsLocalName(key));
 					if (xmlnsPrefix(key) == null)
 					{

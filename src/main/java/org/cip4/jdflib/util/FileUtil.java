@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -96,6 +64,7 @@ import org.cip4.jdflib.ifaces.IStreamWriter;
 
 /**
  * collection of helper routines to work with files
+ *
  * @author prosirai
  */
 public class FileUtil
@@ -103,29 +72,30 @@ public class FileUtil
 
 	/**
 	 * get any auxiliary directory with the same name as a file
+	 *
 	 * @param hotFile
 	 * @return
 	 */
-	public static File getAuxDir(File hotFile)
+	public static File getAuxDir(final File hotFile)
 	{
 		if (hotFile == null)
 		{
 			return null;
 		}
-		String name = hotFile.getName();
-		String base = UrlUtil.newExtension(name, null);
+		final String name = hotFile.getName();
+		final String base = UrlUtil.newExtension(name, null);
 		if (StringUtil.getNonEmpty(base) == null)
 			return null;
-		File parentDir = hotFile.getParentFile();
+		final File parentDir = hotFile.getParentFile();
 		File auxFile = getFileInDirectory(parentDir, new File(base));
 		if (!auxFile.isDirectory())
 		{
 			auxFile = null;
-			File[] v = listDirectories(parentDir);
+			final File[] v = listDirectories(parentDir);
 			if (v != null)
 			{
-				String ext = getExtension(hotFile);
-				for (File f : v)
+				final String ext = getExtension(hotFile);
+				for (final File f : v)
 				{
 					if (newExtension(f, ext).getName().equals(name))
 					{
@@ -140,6 +110,7 @@ public class FileUtil
 
 	/**
 	 * list all files with a given extension (directories are skipped
+	 *
 	 * @param dir the directory to search
 	 * @param extension comma separated list of extensions to check for (null = list all)
 	 * @return Files[] the matching files, null if none are found
@@ -156,6 +127,7 @@ public class FileUtil
 
 	/**
 	 * list all files matching given regexp
+	 *
 	 * @param dir the directory to search
 	 * @param expression regular expression - uses the simplified syntax
 	 * @return Files[] the matching files, null if none are found
@@ -172,9 +144,10 @@ public class FileUtil
 
 	/**
 	 * list all files matching given regexp
+	 *
 	 * @param dir the directory to search
 	 * @param filter the filter to apply to files
-	 * @return Vector<File>  the matching files, null if none are found
+	 * @return Vector<File> the matching files, null if none are found
 	 */
 	public static Vector<File> listFilesInTree(final File dir, final FileFilter filter)
 	{
@@ -185,12 +158,12 @@ public class FileUtil
 		}
 		final File[] f = dir.listFiles(filter);
 		v = ContainerUtil.toVector(f);
-		File[] dirs = listDirectories(dir);
+		final File[] dirs = listDirectories(dir);
 		if (dirs != null)
 		{
-			for (File d : dirs)
+			for (final File d : dirs)
 			{
-				Vector<File> v2 = listFilesInTree(d, filter);
+				final Vector<File> v2 = listFilesInTree(d, filter);
 				v = (Vector<File>) ContainerUtil.addAll(v, v2);
 			}
 		}
@@ -199,6 +172,7 @@ public class FileUtil
 
 	/**
 	 * list all files matching given regexp
+	 *
 	 * @param dir the directory to search
 	 * @param expression comma separated list of regular expression of a tree with slashes separating directories
 	 * @return Files[] the matching files, null if none are found
@@ -215,59 +189,72 @@ public class FileUtil
 		final int posSlash = expression.indexOf('/');
 		if (posSlash < 0)
 		{
-			final File[] f = listFilesWithExpression(dir, expression);
-			v = ContainerUtil.toVector(f);
-			File[] dirs = listDirectories(dir);
-			if (dirs != null)
-			{
-				for (File d : dirs)
-				{
-					Vector<File> v2 = listFilesInTree(d, expression);
-					v = (Vector<File>) ContainerUtil.addAll(v, v2);
-				}
-			}
+			v = listNoSlash(dir, expression);
 		}
 		else
 		{
-			final String nextDir = expression.substring(0, posSlash);
-			final File[] files = listFilesWithExpression(dir, nextDir);
-			if (files != null)
+			v = listSlash(dir, expression, posSlash);
+		}
+
+		return v;
+	}
+
+	static Vector<File> listSlash(final File dir, final String expression, final int posSlash)
+	{
+		final String nextDir = expression.substring(0, posSlash);
+		final File[] files = listFilesWithExpression(dir, nextDir);
+		Vector<File> v = new Vector<>();
+		if (files != null)
+		{
+			for (final File file : files)
 			{
-				v = new Vector<File>();
-				for (File file : files)
+				if (file.isDirectory())
 				{
-					if (file.isDirectory())
-					{
-						v.add(file);
-					}
+					v.add(file);
 				}
+			}
 
-				if (v.size() == 0)
-				{
-					v = null;
-				}
+			if (v.size() == 0)
+			{
+				v = null;
+			}
 
-				if (posSlash + 1 != expression.length()) // last token ends with /
+			if (posSlash + 1 != expression.length()) // last token ends with /
+			{
+				if (v != null)
 				{
-					if (v != null)
+					final Vector<File> ret = new Vector<>();
+					final String next = expression.substring(posSlash + 1);
+					for (int i = 0; i < v.size(); i++)
 					{
-						final Vector<File> ret = new Vector<File>();
-						final String next = expression.substring(posSlash + 1);
-						for (int i = 0; i < v.size(); i++)
+						final Vector<File> v2 = listFilesInTree(v.get(i), next);
+						if (v2 != null)
 						{
-							final Vector<File> v2 = listFilesInTree(v.get(i), next);
-							if (v2 != null)
-							{
-								ret.addAll(v2);
-							}
+							ret.addAll(v2);
 						}
-
-						v = ret.size() == 0 ? null : ret;
 					}
+
+					v = ret.size() == 0 ? null : ret;
 				}
 			}
 		}
+		return v;
+	}
 
+	static Vector<File> listNoSlash(final File dir, final String expression)
+	{
+		Vector<File> v;
+		final File[] f = listFilesWithExpression(dir, expression);
+		v = ContainerUtil.toVector(f);
+		final File[] dirs = listDirectories(dir);
+		if (dirs != null)
+		{
+			for (final File d : dirs)
+			{
+				final Vector<File> v2 = listFilesInTree(d, expression);
+				v = (Vector<File>) ContainerUtil.addAll(v, v2);
+			}
+		}
 		return v;
 	}
 
@@ -275,6 +262,7 @@ public class FileUtil
 	// //////
 	/**
 	 * list all direct child directories
+	 *
 	 * @param dir the directory to search
 	 * @return Files[] the matching directories, null if none are found
 	 */
@@ -305,7 +293,7 @@ public class FileUtil
 			if (fileExtension != null)
 			{
 				final VString list = StringUtil.tokenize(fileExtension, ",", false);
-				m_extension = new HashSet<String>();
+				m_extension = new HashSet<>();
 				for (int i = 0; i < list.size(); i++)
 				{
 					String st = list.get(i);
@@ -326,7 +314,7 @@ public class FileUtil
 		{
 			if (fileExtensionVector != null)
 			{
-				m_extension = new HashSet<String>();
+				m_extension = new HashSet<>();
 				for (String st : fileExtensionVector)
 				{
 					if (st.startsWith("."))
@@ -341,6 +329,7 @@ public class FileUtil
 
 		/**
 		 * (non-Javadoc)
+		 *
 		 * @see java.io.FileFilter#accept(java.io.File)
 		 */
 		@Override
@@ -370,6 +359,7 @@ public class FileUtil
 
 	/**
 	 * simple file filter that lists all directories
+	 *
 	 * @author prosirai
 	 */
 	protected static class DirectoryFileFilter implements FileFilter
@@ -388,6 +378,7 @@ public class FileUtil
 
 	/**
 	 * simple file filter that lists all files that match a regular expression
+	 *
 	 * @author Rainer Prosi
 	 */
 	protected static class ExpressionFileFilter implements FileFilter
@@ -404,6 +395,7 @@ public class FileUtil
 
 		/**
 		 * true if a file matches a regular expression
+		 *
 		 * @see java.io.FileFilter#accept(java.io.File)
 		 */
 		@Override
@@ -415,6 +407,7 @@ public class FileUtil
 
 	/**
 	 * very brutal tree zapper that will delete a file or directory tree recursively
+	 *
 	 * @param dirToZapp the file directory to utterly anihilate
 	 * @return true if ciao
 	 */
@@ -445,6 +438,7 @@ public class FileUtil
 	// //////////////////////////////////////////////////////////////////////////
 	/**
 	 * dump a stream to a newly created file
+	 *
 	 * @param fis the inputstream to read
 	 * @param fileName the file to stream to
 	 * @return the file created by the stream, null if snafu
@@ -471,15 +465,15 @@ public class FileUtil
 	 *
 	 * @return the file that was created, null if snafu
 	 */
-	public static File writeFile(IStreamWriter w, File file)
+	public static File writeFile(final IStreamWriter w, final File file)
 	{
-		boolean b = FileUtil.createNewFile(file);
+		final boolean b = FileUtil.createNewFile(file);
 		if (!b)
 			return null;
 
 		try
 		{
-			OutputStream fos = FileUtil.getBufferedOutputStream(file);
+			final OutputStream fos = FileUtil.getBufferedOutputStream(file);
 			if (fos == null)
 				return null;
 
@@ -487,11 +481,11 @@ public class FileUtil
 			fos.flush();
 			fos.close();
 		}
-		catch (FileNotFoundException e)
+		catch (final FileNotFoundException e)
 		{
 			return null;
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			return null;
 		}
@@ -500,12 +494,13 @@ public class FileUtil
 
 	/**
 	 * create a File object with a new extension
+	 *
 	 * @see UrlUtil#newExtension(String, String) for details of handling null etc.
 	 * @param f the file, if null always returns null
 	 * @param newExt the new extension
 	 * @return the file with the new extension
 	 */
-	public static File newExtension(File f, String newExt)
+	public static File newExtension(final File f, final String newExt)
 	{
 		if (f == null)
 		{
@@ -543,26 +538,27 @@ public class FileUtil
 
 	/**
 	 * get an md5 from a file that reads at most 2*maxSize bytes of which maxSize are from the front and maxSize are from the back
+	 *
 	 * @param f
 	 * @param maxSize if<=0 always use entir length
 	 * @return
 	 */
-	public static byte[] getFastMD5(File f, int maxSize)
+	public static byte[] getFastMD5(final File f, final int maxSize)
 	{
-		BufferedInputStream bufferedInputStream = getBufferedInputStream(f);
+		final BufferedInputStream bufferedInputStream = getBufferedInputStream(f);
 		if (bufferedInputStream == null || !f.canRead())
 			return null;
 		if (maxSize <= 0 || f.length() <= maxSize * 2)
 		{
 			return StreamUtil.getMD5(bufferedInputStream);
 		}
-		byte[] b = new byte[maxSize];
+		final byte[] b = new byte[maxSize];
 		MessageDigest md5;
 		try
 		{
 			md5 = MessageDigest.getInstance(JDFConstants.MD5);
 		}
-		catch (NoSuchAlgorithmException e)
+		catch (final NoSuchAlgorithmException e)
 		{
 			return null;
 		}
@@ -585,7 +581,7 @@ public class FileUtil
 				return md5.digest();
 			}
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			return null;
 		}
@@ -608,20 +604,21 @@ public class FileUtil
 		{
 			md5 = MessageDigest.getInstance(JDFConstants.MD5);
 		}
-		catch (NoSuchAlgorithmException e)
+		catch (final NoSuchAlgorithmException e)
 		{
 			return null;
 		}
 		synchronized (md5)
 		{
-			DigestInputStream dis = new DigestInputStream(fis, md5);
-			File fRet = streamToFile(dis, fil);
-			return fRet == null ? null : new MyPair<File, byte[]>(fRet, md5.digest());
+			final DigestInputStream dis = new DigestInputStream(fis, md5);
+			final File fRet = streamToFile(dis, fil);
+			return fRet == null ? null : new MyPair<>(fRet, md5.digest());
 		}
 	}
 
 	/**
 	 * read a file into a byte array
+	 *
 	 * @param file the file to read into a byte array
 	 * @return the correctly sized byte array, null if no bytes were read
 	 */
@@ -667,6 +664,7 @@ public class FileUtil
 
 	/**
 	 * moves a File to directory by trying to rename, if this fails, a copy with subsequent delete is performed. if toFile exists, it is brutally overwritten
+	 *
 	 * @param fromFile the File to move
 	 * @param toDir the Directory to move to
 	 * @return File the moved File if success, else null, i.e. toFile exists with the contents of fromFile
@@ -688,6 +686,7 @@ public class FileUtil
 
 	/**
 	 * moves a File by trying to rename, if this fails, a copy with subsequent delete is performed. if toFile exists, it is brutally overwritten
+	 *
 	 * @param fromFile the File to move
 	 * @param toFile the File to create
 	 * @return boolean true if success, i.e. toFile exists with the contents of fromFile
@@ -704,8 +703,8 @@ public class FileUtil
 		}
 		if (fromFile.isDirectory())
 		{
-			File parent = toFile.getParentFile();
-			String parentPath = parent == null ? null : parent.getAbsolutePath();
+			final File parent = toFile.getParentFile();
+			final String parentPath = parent == null ? null : parent.getAbsolutePath();
 
 			getCreateDirectory(parentPath);
 		}
@@ -737,12 +736,13 @@ public class FileUtil
 		{
 			createNewFile(toFile);
 		}
+		FileOutputStream fileOutputStream = null;
 		try
 		{
-			final FileOutputStream fileOutputStream = new FileOutputStream(toFile, true);
+			fileOutputStream = new FileOutputStream(toFile, true);
 			fileOutputStream.write(buf);
 			fileOutputStream.flush();
-			fileOutputStream.close();
+
 			return true;
 		}
 		catch (final FileNotFoundException e)
@@ -753,11 +753,24 @@ public class FileUtil
 		{
 			//
 		}
+		finally
+		{
+			try
+			{
+				if (fileOutputStream != null)
+					fileOutputStream.close();
+			}
+			catch (final IOException e)
+			{
+				// nop
+			}
+		}
 		return false;
 	}
 
 	/**
 	 * copy a file, unless fromFile and toFile are equal
+	 *
 	 * @param fromFile the source File
 	 * @param toFile the destination File
 	 * @return true if success
@@ -830,6 +843,7 @@ public class FileUtil
 
 	/**
 	 * copies a File to directory if toFile exists, it is brutally overwritten unless fromFile equals toFile
+	 *
 	 * @param fromFile the File to move
 	 * @param toDir the Directory to move to
 	 * @return File the moved File if success, else null, i.e. toFile exists with the contents of fromFile
@@ -851,6 +865,7 @@ public class FileUtil
 
 	/**
 	 * returns a File object corresponding to an instance of localFile placed in dir - No OS calls are made and File is NOT created
+	 *
 	 * @param dir the File Object representing the directory
 	 * @param localFile the local file to place in dir, note that only the path is copied - this does copy trees
 	 * @return File the File object that represents localFile in Dir
@@ -865,13 +880,14 @@ public class FileUtil
 		{
 			return null;
 		}
-		String fullPath = dir.getPath() + File.separator + localFile.getPath();
-		File fullFile = new File(fullPath);
+		final String fullPath = dir.getPath() + File.separator + localFile.getPath();
+		final File fullFile = new File(fullPath);
 		return cleanDots(fullFile);
 	}
 
 	/**
 	 * forces deletion of a file
+	 *
 	 * @param file the file to delete
 	 * @return true if the file no longer exists
 	 */
@@ -882,11 +898,12 @@ public class FileUtil
 
 	/**
 	 * forces deletion of a file
+	 *
 	 * @param file the file to delete
-	 * @param # of 42 msec * loop  loops to wait
+	 * @param # of 42 msec * loop loops to wait
 	 * @return true if the file no longer exists
 	 */
-	public static boolean forceDelete(final File file, int loops)
+	public static boolean forceDelete(final File file, final int loops)
 	{
 		if (file == null)
 		{
@@ -904,7 +921,7 @@ public class FileUtil
 			file.setExecutable(true);
 			file.setWritable(true);
 
-			boolean bInterupt = !ThreadUtil.sleep(i * 42);
+			final boolean bInterupt = !ThreadUtil.sleep(i * 42);
 			bOK = file.delete();
 			if (bInterupt || i++ > loops)
 			{
@@ -951,6 +968,7 @@ public class FileUtil
 
 	/**
 	 * check whether a file is a directory. If a unix file is a symbolic link to a directory, it is also assumed to be a directory
+	 *
 	 * @param f the file to test
 	 * @return true if f is a directory or link to a directory
 	 */
@@ -963,10 +981,10 @@ public class FileUtil
 
 		try
 		{
-			File canonical = f.getCanonicalFile();
+			final File canonical = f.getCanonicalFile();
 			return canonical.isDirectory();
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			return false;
 		}
@@ -974,6 +992,7 @@ public class FileUtil
 
 	/**
 	 * check whether a file is a directory. If a unix file is a symbolic link to a directory, it is also assumed to be a directory
+	 *
 	 * @param s the file to test
 	 * @return true if f is a directory or link to a directory
 	 */
@@ -984,6 +1003,7 @@ public class FileUtil
 
 	/**
 	 * check whether a file is absolute
+	 *
 	 * @param f the file to test
 	 * @return true if f is absolute;
 	 */
@@ -1013,7 +1033,7 @@ public class FileUtil
 		if (roots != null)
 		{
 			f = f.toLowerCase();
-			for (File root : roots)
+			for (final File root : roots)
 			{
 				if (f.startsWith(root.getPath().toLowerCase()))
 				{
@@ -1036,6 +1056,7 @@ public class FileUtil
 
 	/**
 	 * similar to File.createFile but also creates any required directories
+	 *
 	 * @param file the file to create
 	 * @return true if the file exists after the call, else false
 	 */
@@ -1066,6 +1087,7 @@ public class FileUtil
 
 	/**
 	 * checks the equivalence of files - todo os specific behavior (just in case)
+	 *
 	 * @param file1
 	 * @param file2
 	 * @return
@@ -1077,10 +1099,11 @@ public class FileUtil
 
 	/**
 	 * create a buffered input stream for a file
+	 *
 	 * @param file
 	 * @return the buffered input stream, null if snafu
 	 */
-	public static BufferedInputStream getBufferedInputStream(File file)
+	public static BufferedInputStream getBufferedInputStream(final File file)
 	{
 		if (file == null)
 		{
@@ -1092,32 +1115,34 @@ public class FileUtil
 		{
 			fis = new FileInputStream(file);
 		}
-		catch (FileNotFoundException x)
+		catch (final FileNotFoundException x)
 		{
 			LogFactory.getLog(FileUtil.class).warn("extracting stream from non-existing file: " + file.getAbsolutePath(), x);
 			return null;
 		}
-		BufferedInputStream bis = new BufferedInputStream(fis);
+		final BufferedInputStream bis = new BufferedInputStream(fis);
 		return bis;
 	}
 
 	/**
 	 * create a buffered output stream for a file
+	 *
 	 * @param file
 	 * @return the buffered output stream, null if snafu
 	 */
-	public static BufferedOutputStream getBufferedOutputStream(File file)
+	public static BufferedOutputStream getBufferedOutputStream(final File file)
 	{
 		return getBufferedOutputStream(file, false);
 	}
 
 	/**
 	 * create a buffered output stream for a file
+	 *
 	 * @param file
 	 * @param append
 	 * @return the buffered output stream, null if snafu
 	 */
-	public static BufferedOutputStream getBufferedOutputStream(File file, boolean append)
+	public static BufferedOutputStream getBufferedOutputStream(final File file, final boolean append)
 	{
 		if (file == null)
 			return null;
@@ -1130,11 +1155,11 @@ public class FileUtil
 		{
 			fos = new FileOutputStream(file, append);
 		}
-		catch (FileNotFoundException x)
+		catch (final FileNotFoundException x)
 		{
 			return null;
 		}
-		BufferedOutputStream bos = new BufferedOutputStream(fos);
+		final BufferedOutputStream bos = new BufferedOutputStream(fos);
 		return bos;
 	}
 

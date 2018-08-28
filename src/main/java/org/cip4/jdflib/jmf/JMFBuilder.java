@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -124,7 +124,7 @@ public class JMFBuilder implements Cloneable
 	public JDFJMF buildHoldQueueEntry(final String queueEntryId)
 	{
 		final JDFJMF jmf = buildQueueEntryCommand(queueEntryId, EnumType.HoldQueueEntry);
-		return finalize(jmf);
+		return lastSteps(jmf);
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class JMFBuilder implements Cloneable
 	public JDFJMF buildResumeQueueEntry(final String queueEntryId)
 	{
 		final JDFJMF jmf = buildQueueEntryCommand(queueEntryId, EnumType.ResumeQueueEntry);
-		return finalize(jmf);
+		return lastSteps(jmf);
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class JMFBuilder implements Cloneable
 	public JDFJMF buildAbortQueueEntry(final String queueEntryId)
 	{
 		final JDFJMF jmf = buildQueueEntryCommand(queueEntryId, EnumType.AbortQueueEntry);
-		return finalize(jmf);
+		return lastSteps(jmf);
 	}
 
 	/**
@@ -162,7 +162,7 @@ public class JMFBuilder implements Cloneable
 		final JDFJMF jmf = createJMF(EnumFamily.Command, EnumType.ReturnQueueEntry);
 		final JDFCommand command = jmf.getCommand(0);
 		command.appendReturnQueueEntryParams().setQueueEntryID(queueEntryId);
-		return finalize(jmf);
+		return lastSteps(jmf);
 	}
 
 	/**
@@ -180,7 +180,7 @@ public class JMFBuilder implements Cloneable
 		final JDFCommand command = jmf.getCommand(0);
 
 		command.appendQueueEntryDef().setQueueEntryID(queueEntryId);
-		return finalize(jmf);
+		return lastSteps(jmf);
 	}
 
 	/**
@@ -220,7 +220,7 @@ public class JMFBuilder implements Cloneable
 	 * @param jmf
 	 * @return
 	 */
-	private JDFJMF finalize(final JDFJMF jmf)
+	JDFJMF lastSteps(final JDFJMF jmf)
 	{
 		return jmf;
 	}
@@ -234,7 +234,7 @@ public class JMFBuilder implements Cloneable
 	public JDFJMF buildRemoveQueueEntry(final String queueEntryId)
 	{
 		final JDFJMF jmf = buildQueueEntryCommand(queueEntryId, EnumType.RemoveQueueEntry);
-		return finalize(jmf);
+		return lastSteps(jmf);
 	}
 
 	/**
@@ -250,7 +250,7 @@ public class JMFBuilder implements Cloneable
 		final JDFStatusQuParams statusQuParams = jmf.getCreateQuery(0).getCreateStatusQuParams(0);
 		statusQuParams.setDeviceDetails(deviceDetails);
 		statusQuParams.setJobDetails(jobDetails);
-		return finalize(jmf);
+		return lastSteps(jmf);
 	}
 
 	/**
@@ -264,7 +264,7 @@ public class JMFBuilder implements Cloneable
 		final JDFJMF jmf = createJMF(EnumFamily.Query, EnumType.Resource);
 		final JDFResourceQuParams resParams = jmf.getCreateQuery(0).getCreateResourceQuParams(0);
 		resParams.setExact(bExact);
-		return finalize(jmf);
+		return lastSteps(jmf);
 	}
 
 	/**
@@ -285,7 +285,7 @@ public class JMFBuilder implements Cloneable
 		}
 		signal.setQuery(jmf.getQuery(0));
 		signal.copyElement(jmf.getQuery(0).getResourceQuParams(), null);
-		return finalize(jmfSignal);
+		return lastSteps(jmfSignal);
 	}
 
 	/**
@@ -305,7 +305,7 @@ public class JMFBuilder implements Cloneable
 		final JDFDeviceInfo di = signal.appendDeviceInfo();
 		di.setDeviceStatus(EnumDeviceStatus.Unknown);
 		di.appendJobPhase();
-		return finalize(jmfSignal);
+		return lastSteps(jmfSignal);
 	}
 
 	/**
@@ -329,7 +329,7 @@ public class JMFBuilder implements Cloneable
 		{
 			statusQuParams.setQueueEntryID(queueEntryID);
 		}
-		return finalize(jmf);
+		return lastSteps(jmf);
 	}
 
 	/**
@@ -355,7 +355,7 @@ public class JMFBuilder implements Cloneable
 		{
 			resourceQuParams.setQueueEntryID(queueEntryID);
 		}
-		return finalize(jmf);
+		return lastSteps(jmf);
 	}
 
 	/**
