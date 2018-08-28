@@ -2210,7 +2210,8 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFResource getCreatePartition(final JDFAttributeMap partMap, final VString vPartKeys)
 	{
-		return new org.cip4.jdflib.resource.PartitionGetter(this).getCreatePartition(partMap, vPartKeys);
+		final org.cip4.jdflib.resource.PartitionGetter partitionGetter = new org.cip4.jdflib.resource.PartitionGetter(this);
+		return partitionGetter.getCreatePartition(partMap, vPartKeys);
 	}
 
 	/**
@@ -6132,7 +6133,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setPreviewType(final JDFPart.EnumPreviewType value)
 	{
-		setAttribute(AttributeName.PREVIEWTYPE, value.getName(), null);
+		setAttribute(AttributeName.PREVIEWTYPE, value == null ? null : value.getName(), null);
 	}
 
 	/**
@@ -7655,19 +7656,25 @@ public class JDFResource extends JDFElement
 			final JDFResource resourceRoot = getResourceRoot();
 			final Object pm = resourceRoot.partitionMap;
 
-			if (pm == null || (getImplicitPartitions() != null && getImplicitPartitions().contains(EnumPartIDKey.getEnum(key))))
+			if (pm != null)
 			{
-				super.setAttribute(key, value, nameSpaceURI);
-			}
-			else
-			{
-				setPartIDKey(EnumPartIDKey.getEnum(key), value);
+				final String old = getNonEmpty_KElement(key);
+				if (!StringUtil.equals(old, value))
+				{
+					if (old != null)
+					{
+						resourceRoot.partitionMap = null;
+					}
+					else
+					{
+						super.setAttribute(key, value, nameSpaceURI);
+						final JDFAttributeMap partMap = getPartMap();
+						resourceRoot.partitionMap.put(partMap, this);
+					}
+				}
 			}
 		}
-		else
-		{
-			super.setAttribute(key, value, nameSpaceURI);
-		}
+		super.setAttribute(key, value, nameSpaceURI);
 	}
 
 }
