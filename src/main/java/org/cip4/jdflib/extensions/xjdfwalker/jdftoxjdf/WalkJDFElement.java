@@ -374,7 +374,7 @@ public class WalkJDFElement extends WalkElement
 	protected VElement setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
 	{
 		final String className = jdfToXJDF.getClassName(linkTarget);
-		if (className == null || xRoot == null)
+		if (className == null || xRoot == null || linkTarget == null)
 		{
 			return null;
 		}
