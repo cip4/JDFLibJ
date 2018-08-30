@@ -77,6 +77,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 			super.run();
 			current.remove(this);
 			ThreadUtil.notifyAll(mutex);
+			idle = 0;
 		}
 
 	}

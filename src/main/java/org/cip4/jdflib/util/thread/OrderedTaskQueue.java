@@ -118,6 +118,7 @@ public class OrderedTaskQueue extends Thread
 				sumRun += getRunTime();
 				done++;
 				myThread = null;
+				idle = 0;
 			}
 		}
 
@@ -259,7 +260,7 @@ public class OrderedTaskQueue extends Thread
 	 */
 	public void shutDown()
 	{
-		log.info("shutting down ordered queue");
+		log.info("shutting down " + toString());
 		idle = -1;
 		theMap.remove(getName());
 		ThreadUtil.notify(mutex);
@@ -323,6 +324,7 @@ public class OrderedTaskQueue extends Thread
 		{
 			queue.add(new TaskRunner(task));
 		}
+		idle = 0;
 		ThreadUtil.notifyAll(mutex);
 		return true;
 	}
