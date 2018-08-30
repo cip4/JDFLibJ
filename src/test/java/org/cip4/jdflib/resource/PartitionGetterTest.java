@@ -74,32 +74,6 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	public void testRemoveExplicitDup()
-	{
-		final VJDFAttributeMap vmap = new VJDFAttributeMap();
-		for (int i = 0; i < 4; i++)
-		{
-			final JDFAttributeMap m = new JDFAttributeMap("a", "v" + i);
-			vmap.add(m);
-			final JDFAttributeMap m2 = m.clone();
-			m2.put("b", "w" + i);
-			vmap.add(m2);
-		}
-
-		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
-		final PartitionGetter g = new PartitionGetter(r);
-		g.removeExplicitDuplicates(vmap);
-		assertEquals(4, vmap.size());
-		for (int i = 0; i < 4; i++)
-		{
-			assertEquals(1, vmap.get(i).size());
-		}
-	}
-
-	/**
-	 *
-	 */
-	@Test
 	public void testRemoveImplicitDup()
 	{
 		final VJDFAttributeMap vmap = new VJDFAttributeMap();
@@ -148,6 +122,21 @@ public class PartitionGetterTest
 		final JDFResource r2 = r.getCreatePartition(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d2"), null);
 		assertEquals(r2, g.getPartition(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d2"), EnumPartUsage.Explicit));
 		assertEquals(r1, g.getPartition(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1"), EnumPartUsage.Explicit));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetCreate_PartIDKeys()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFAttributeMap partMap = new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1");
+		partMap.put(EnumPartIDKey.DeliveryUnit1, "d2");
+		final VString pik = new VString("DeliveryUnit0 DeliveryUnit1 DeliveryUnit2");
+		final JDFResource r1 = r.getCreatePartition(partMap, pik);
+		assertEquals(partMap, r1.getPartMap());
+		assertEquals(new VString("DeliveryUnit0 DeliveryUnit1"), r.getPartIDKeys());
 	}
 
 	/**

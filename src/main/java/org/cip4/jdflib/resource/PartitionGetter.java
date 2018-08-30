@@ -440,29 +440,6 @@ public class PartitionGetter
 		}
 	}
 
-	/**
-	 * @param v
-	 */
-	void removeExplicitDuplicates(final VJDFAttributeMap v)
-	{
-		for (int i = v.size() - 1; i >= 0; i--)
-		{
-			for (int j = i - 1; j >= 0; j--)
-			{
-				if (v.get(i).subMap(v.get(j)))
-				{
-					v.remove(i);
-					break;
-				}
-				else if (v.get(j).subMap(v.get(i)))
-				{
-					v.remove(j);
-					i--;
-				}
-			}
-		}
-	}
-
 	private JDFAttributeMap updateIdentical(JDFAttributeMap fast)
 	{
 		if (fast != null && isFollowIdentical())
@@ -729,7 +706,7 @@ public class PartitionGetter
 	 *
 	 * @default getCreatePartition(partMap, null)
 	 */
-	public JDFResource getCreatePartition(JDFAttributeMap partMap, final VString vPartKeys)
+	public JDFResource getCreatePartition(JDFAttributeMap partMap, VString vPartKeys)
 	{
 		partMap = getCompletePartMap(partMap, true);
 		if (partMap == null || partMap.isEmpty())
@@ -745,6 +722,15 @@ public class PartitionGetter
 		final VString localKeys = thisMap.getKeys();
 		if (thisMap.size() == partMap.size())
 			return r;
+		final int lastPos = 1 + lastPos(partMap, vPartKeys, false);
+		if (vPartKeys != null && lastPos < vPartKeys.size())
+		{
+			vPartKeys = new VString(vPartKeys);
+			while (lastPos < vPartKeys.size())
+			{
+				vPartKeys.remove(lastPos);
+			}
+		}
 		VString vPartIDKeys = reorderPartKeys(vPartKeys);
 		// check whether we are already ok
 		final VString newKeys = partMap.getKeys();
