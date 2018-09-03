@@ -45,6 +45,7 @@ import java.util.Vector;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.util.ContainerUtil;
 
 class PartitionMap
 {
@@ -177,6 +178,15 @@ class PartitionMap
 	}
 
 	/**
+	 *
+	 * @return
+	 */
+	int partSize()
+	{
+		return partIDKeys.size();
+	}
+
+	/**
 	 * @param key
 	 * @return
 	 * @see java.util.HashMap#remove(java.lang.Object)
@@ -184,5 +194,14 @@ class PartitionMap
 	public JDFResource remove(final JDFAttributeMap key)
 	{
 		return leafMap.remove(key);
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	Vector<JDFAttributeMap> keyVector()
+	{
+		return ContainerUtil.getKeyVector(leafMap);
 	}
 }

@@ -107,4 +107,30 @@ public class PartitionMapTest
 		assertEquals(r2, map.get(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1")));
 	}
 
+	/**
+	 *
+	 */
+	@Test
+	public void testSize()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d2");
+		r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
+		final PartitionMap map = new PartitionMap(r);
+		assertEquals(3, map.size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMapSize()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
+		r.addPartition(EnumPartIDKey.DeliveryUnit0, "d2");
+		final PartitionMap map = new PartitionMap(r);
+		assertEquals(1, map.partSize());
+	}
+
 }

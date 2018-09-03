@@ -7654,22 +7654,36 @@ public class JDFResource extends JDFElement
 		if (key != null && setPartIDKeys.contains(key) && !isResourceElement())
 		{
 			final JDFResource resourceRoot = getResourceRoot();
-			final Object pm = resourceRoot.partitionMap;
+			final PartitionMap pm = resourceRoot.partitionMap;
 
 			if (pm != null)
 			{
 				final String old = getNonEmpty_KElement(key);
 				if (!StringUtil.equals(old, value))
 				{
-					if (old != null)
+					final JDFAttributeMap partMapOld = old == null ? null : getPartMap();
+					super.setAttribute(key, value, nameSpaceURI);
+					final JDFAttributeMap partMap = getPartMap();
+					if (old != null && pm.partSize() > partMap.size())
 					{
-						resourceRoot.partitionMap = null;
+						final Vector<JDFAttributeMap> keySet = pm.keyVector();
+						for (final JDFAttributeMap map : keySet)
+						{
+							if (old.equals(map.get(key)))
+							{
+								// need to remove and put to ensure valid hash - do not simply modify the map; it is a hash key
+								final JDFResource r = pm.remove(map);
+								map.put(key, value);
+								pm.put(map, r);
+							}
+
+						}
 					}
 					else
 					{
-						super.setAttribute(key, value, nameSpaceURI);
-						final JDFAttributeMap partMap = getPartMap();
-						resourceRoot.partitionMap.put(partMap, this);
+						if (partMapOld != null)
+							pm.remove(partMapOld);
+						pm.put(partMap, this);
 					}
 				}
 			}

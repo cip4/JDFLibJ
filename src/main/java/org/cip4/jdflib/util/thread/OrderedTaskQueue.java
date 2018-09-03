@@ -408,6 +408,7 @@ public class OrderedTaskQueue extends Thread
 		{
 			if (queue.size() > 0)
 			{
+				idle = 0;
 				return queue.remove(0);
 			}
 		}

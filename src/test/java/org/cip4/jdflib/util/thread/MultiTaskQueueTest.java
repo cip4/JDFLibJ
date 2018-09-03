@@ -193,6 +193,35 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testManyMultiIdle()
+	{
+		nRun = 0;
+		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi2", 3);
+		assertEquals(0, q.getAvQueue());
+		assertEquals(0, q.getAvRun());
+		for (int i = 0; i < 1000; i++)
+		{
+			q.queue(new WaitRunner(i, 10));
+			assertEquals(0, q.idle, 1);
+		}
+
+		for (int i = 0; i < 442; i++)
+		{
+			ThreadUtil.sleep(42);
+			if (q.size() == 0)
+			{
+				break;
+			}
+		}
+		ThreadUtil.sleep(42);
+		assertEquals(nRun, 1000, 2);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testInterruptMulti()
 	{
 		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multiZapp", 3);
