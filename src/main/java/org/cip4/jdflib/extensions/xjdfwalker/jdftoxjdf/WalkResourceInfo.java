@@ -146,7 +146,8 @@ public class WalkResourceInfo extends WalkJDFSubElement
 			final SetHelper sh = SetHelper.getHelper(ri.getElement(XJDFConstants.ResourceSet));
 			vPartMap = sh == null ? null : sh.getPartMapVector();
 		}
-		// setAmountPool(jdfRI, ri, null);
+		// needed for no amountpool in original
+		setAmountPool(jdfRI, jdfRI, null);
 		final JDFAmountPool ap = jdfRI.getAmountPool();
 		String resName = ri.getXPathAttribute("ResourceSet/@Name", null);
 		if (resName == null)
