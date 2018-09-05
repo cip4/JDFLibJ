@@ -413,6 +413,18 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
+	 *
+	 * @param partMap
+	 * @return
+	 */
+	public double getAmount(final JDFAttributeMap partMap, final boolean bGood)
+	{
+		final JDFAmountPool p = getAmountPool();
+		final JDFPartAmount pa = p == null ? null : p.getPartAmount(partMap);
+		return pa == null ? 0 : pa.getRealAttribute((bGood ? AttributeName.AMOUNT : AttributeName.WASTE), null, 0);
+	}
+
+	/**
 	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getAttribute(java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
@@ -488,6 +500,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 *
 	 * @param externalID
 	 */
+	@Override
 	public void setExternalID(final String externalID)
 	{
 		setAttribute(XJDFConstants.ExternalID, externalID);

@@ -53,6 +53,8 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.MessageHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
+import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJMFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
@@ -78,6 +80,7 @@ import org.cip4.jdflib.jmf.JDFSubscriptionInfo;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
+import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFPerson;
 import org.junit.Test;
 
@@ -659,6 +662,49 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		assertEquals(10, xjmf.getXPathElementVector("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount", 0).size());
 
 		xjmf.write2File(sm_dirTestDataTemp + "resourceInk.xjmf");
+	}
+
+	/**
+	 *
+	 * test ink resource signal
+	 */
+	@Test
+	public void testBuildResourceSignalPlate()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
+
+		final JDFSignal signal = jmf.getSignal(0);
+		final JDFResourceQuParams rqp = signal.getCreateResourceQuParams(0);
+		rqp.setJobID("job1");
+		rqp.setJobPartID("ConvPrint.1");
+		final JDFResourceInfo ri = signal.getCreateResourceInfo(0);
+		ri.setResourceName(ElementName.EXPOSEDMEDIA);
+		final JDFAmountPool ap = ri.getCreateAmountPool();
+		final JDFAttributeMap map = new JDFAttributeMap();
+		final JDFExposedMedia xm = (JDFExposedMedia) ri.appendResource(null);
+		map.put(AttributeName.SIGNATURENAME, "sig1");
+		xm.getCreatePartition(map, null);
+		map.put(AttributeName.SHEETNAME, "s1");
+		xm.getCreatePartition(map, null);
+		map.put(AttributeName.SIDE, "Front");
+		xm.getCreatePartition(map, null);
+		map.put(AttributeName.SEPARATION, "Black");
+		ap.appendPartAmount(map).setActualAmount(1);
+		xm.getCreatePartition(map, null).setDescriptiveName("keep dis");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		xjmf.write2File(sm_dirTestDataTemp + "resourcePlate.xjmf");
+		assertEquals(1, xjmf.numChildrenByClass(JDFAmountPool.class, true));
+		final KElement set = xjmf.getElement(XJDFConstants.SignalResource).getElement(ElementName.RESOURCEINFO).getElement(XJDFConstants.ResourceSet);
+		final SetHelper sh = SetHelper.getHelper(set);
+		assertEquals(1, sh.getPartitions().size());
+		final ResourceHelper ph = sh.getPartition(0);
+		map.remove(AttributeName.SIGNATURENAME);
+		assertEquals(map, ph.getPartMap());
+		final JDFAmountPool aPool = ph.getAmountPool();
+		assertEquals(1, aPool.numChildElements(ElementName.PARTAMOUNT, null));
+		assertTrue(JDFAttributeMap.isEmpty(aPool.getPartAmount(0).getPartMap()));
 	}
 
 	/**

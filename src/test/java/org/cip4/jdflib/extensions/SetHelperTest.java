@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment mrSubRefay appear in the software itself, if and wherever such third-party
+ * acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior writtenrestartProcesses() permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software restartProcesses()
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software restartProcesses() copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  */
 package org.cip4.jdflib.extensions;
@@ -86,7 +54,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.junit.Test;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class SetHelperTest extends JDFTestCaseBase
 {
@@ -96,9 +64,20 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetSet()
+	{
+		assertNull(SetHelper.getHelper(null));
+		final SetHelper sh = SetHelper.getHelper(root.getElement(SetHelper.RESOURCE_SET));
+		assertEquals(sh.getName(), "Media");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetName()
 	{
-		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
 	}
 
@@ -120,7 +99,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetPartition()
 	{
-		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), ElementName.MEDIA);
 		assertNull(sh.getPartition(1));
 		assertNotNull(sh.getCreatePartition(1, true));
@@ -134,7 +113,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetCPI()
 	{
-		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		sh.setCombinedProcessIndex(new JDFIntegerList(3));
 		assertEquals(3, sh.getCombinedProcessIndex().getInt(0));
 
@@ -146,7 +125,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetXJDF()
 	{
-		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getXJDF(), new XJDFHelper(root));
 	}
 
@@ -156,8 +135,8 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testSetName()
 	{
-		KElement set = KElement.createRoot(XJDFConstants.ResourceSet, null);
-		SetHelper sh = new SetHelper(set);
+		final KElement set = KElement.createRoot(XJDFConstants.ResourceSet, null);
+		final SetHelper sh = new SetHelper(set);
 		sh.setName("foo");
 		assertEquals("foo", sh.getName());
 	}
@@ -168,7 +147,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetDependentJobPart()
 	{
-		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertNull(sh.getDependentJobParts());
 		sh.setXPathValue("Dependent[1]/@JobPartID", "p1");
 		assertEquals(sh.getDependentJobParts().get(0), "p1");
@@ -183,12 +162,12 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetPartitionMap()
 	{
-		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
-		ResourceHelper ph1 = sh.getPartition(new JDFAttributeMap("SheetName", "S1"));
-		ResourceHelper ph2 = sh.getCreatePartition(new JDFAttributeMap("SheetName", "S1"), true);
+		final ResourceHelper ph1 = sh.getPartition(new JDFAttributeMap("SheetName", "S1"));
+		final ResourceHelper ph2 = sh.getCreatePartition(new JDFAttributeMap("SheetName", "S1"), true);
 		assertNotSame(ph2, ph1);
-		ResourceHelper ph3 = sh.getPartition(new JDFAttributeMap("SheetName", "S1"));
+		final ResourceHelper ph3 = sh.getPartition(new JDFAttributeMap("SheetName", "S1"));
 		assertNotNull(ph3);
 		assertEquals(ph2, ph3);
 	}
@@ -199,7 +178,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetPartitionsMap()
 	{
-		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
 		sh.getCreatePartition(new JDFAttributeMap("SheetName", "S1"), true);
 		sh.getCreatePartition(new JDFAttributeMap("SheetName", "S2"), true);
@@ -212,17 +191,17 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetPartMapVector()
 	{
-		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
-		VJDFAttributeMap v = new VJDFAttributeMap();
-		JDFAttributeMap map1 = new JDFAttributeMap("SheetName", "S1");
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		final JDFAttributeMap map1 = new JDFAttributeMap("SheetName", "S1");
 		v.add(map1);
 		sh.getCreatePartition(map1, true);
-		JDFAttributeMap map2 = new JDFAttributeMap("SheetName", "S2");
+		final JDFAttributeMap map2 = new JDFAttributeMap("SheetName", "S2");
 		v.add(map2);
 		v.add(new JDFAttributeMap());
 		sh.getCreatePartition(map2, true);
-		VJDFAttributeMap vp = sh.getPartMapVector();
+		final VJDFAttributeMap vp = sh.getPartMapVector();
 		assertEquals(vp, v);
 	}
 
@@ -232,7 +211,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetPartitionsVMap()
 	{
-		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
 		sh.getCreatePartition(new JDFAttributeMap("SheetName", "S1"), true);
 		sh.getCreatePartition(new JDFAttributeMap("SheetName", "S2"), true);
@@ -245,11 +224,11 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetPartitionByID()
 	{
-		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertNull(sh.getPartition("fooo"));
 		assertNotNull(sh.getCreatePartition(1, true));
 		sh.setID("id");
-		String id = sh.getPartition(0).getID();
+		final String id = sh.getPartition(0).getID();
 		assertEquals(sh.getPartition(0), sh.getPartition(id));
 	}
 
@@ -259,7 +238,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetCreatePartition()
 	{
-		SetHelper sh = new XJDFHelper(root).getCreateSet(XJDFConstants.Resource, "FoldingParams", EnumUsage.Input);
+		final SetHelper sh = new XJDFHelper(root).getCreateSet(XJDFConstants.Resource, "FoldingParams", EnumUsage.Input);
 		assertEquals(sh.getName(), "FoldingParams");
 		assertNotNull(sh.getCreatePartition(0, false));
 		assertNotNull(sh.getPartition(-1));
@@ -273,9 +252,9 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testIndexOf()
 	{
-		SetHelper sh = new XJDFHelper(root).getCreateSet(XJDFConstants.Resource, "FoldingParams", EnumUsage.Input);
+		final SetHelper sh = new XJDFHelper(root).getCreateSet(XJDFConstants.Resource, "FoldingParams", EnumUsage.Input);
 		assertEquals(sh.indexOf(null), -1);
-		ResourceHelper rh = sh.getCreatePartition(0, false);
+		final ResourceHelper rh = sh.getCreatePartition(0, false);
 		assertEquals(sh.indexOf(rh), 0);
 	}
 
@@ -285,7 +264,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testAddTypeToCPI()
 	{
-		SetHelper sh = new XJDFHelper(root).getCreateSet(XJDFConstants.Resource, "FoldingParams", EnumUsage.Input);
+		final SetHelper sh = new XJDFHelper(root).getCreateSet(XJDFConstants.Resource, "FoldingParams", EnumUsage.Input);
 		sh.addTypeToCPI(0);
 		assertNull(sh.getCombinedProcessIndex());
 		sh.setCombinedProcessIndex(JDFIntegerList.createIntegerList("1 3"));
@@ -300,7 +279,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testRemoveTypeFromCPI()
 	{
-		SetHelper sh = new XJDFHelper(root).getCreateSet(XJDFConstants.Resource, "FoldingParams", EnumUsage.Input);
+		final SetHelper sh = new XJDFHelper(root).getCreateSet(XJDFConstants.Resource, "FoldingParams", EnumUsage.Input);
 		sh.addTypeToCPI(0);
 		assertNull(sh.getCombinedProcessIndex());
 		sh.setCombinedProcessIndex(JDFIntegerList.createIntegerList("1 4"));
@@ -317,8 +296,8 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testCleanup()
 	{
-		KElement element = root.getElement("ResourceSet");
-		SetHelper sh = new SetHelper(element);
+		final KElement element = root.getElement("ResourceSet");
+		final SetHelper sh = new SetHelper(element);
 		sh.cleanUp();
 		assertEquals(element.getAttribute("Name"), "Media");
 	}
@@ -329,7 +308,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Override
 	public void setUp()
 	{
-		JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
+		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
 		root = d.getRoot();
 		root.getCreateXPathElement("ResourceSet/Resource/Part");
 		root.getCreateXPathElement("ResourceSet/Resource/Media");
