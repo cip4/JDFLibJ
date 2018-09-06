@@ -530,14 +530,13 @@ public class PartitionGetter
 				}
 				else if (vMap.size() > 1)
 				{
+					return null;
 					// not nice, but this is what the old algorithm did - find the closest common ancestor
-					partitionFromMap = vMap.getCommonMap();
-					final VString partIDKeys = resourceRoot.getPartIDKeys();
-					final int lastPos = lastPos(partitionFromMap, partIDKeys, false) - 1;
-					for (int i = lastPos; i < partIDKeys.size(); i++)
-					{
-						partitionFromMap.remove(partIDKeys.get(i));
-					}
+					/*
+					 * partitionFromMap = vMap.getCommonMap(); final VString partIDKeys = resourceRoot.getPartIDKeys(); final int lastPos = lastPos(partitionFromMap, partIDKeys, false) - 1; for (int i
+					 * = lastPos; i < partIDKeys.size(); i++) { partitionFromMap.remove(partIDKeys.get(i)); } for (final JDFAttributeMap testMap : leafMap.keySet()) { if
+					 * (testMap.subMap(partitionFromMap) && !m.overlapMap(testMap)) { return null; } }
+					 */
 				}
 			}
 		}
@@ -875,6 +874,16 @@ public class PartitionGetter
 		final VElement v = new VElement();
 		if (vPartMap != null)
 		{
+			VString currentPartIDKeys = resourceRoot.getPartIDKeys();
+			if (currentPartIDKeys != null)
+			{
+				currentPartIDKeys.appendUnique(vPartIDKeys);
+			}
+			else
+			{
+				currentPartIDKeys = vPartIDKeys;
+			}
+
 			final VJDFAttributeMap newMaps = updateCreate(vPartMap, vPartIDKeys);
 			for (final JDFAttributeMap partMap : newMaps)
 			{
