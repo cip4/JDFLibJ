@@ -991,15 +991,15 @@ public class PartitionGetter
 		{
 			if (partMap != null && !partMap.isEmpty())
 			{
-				if (!localPartMap.overlapMap(partMap))
+				if (!JDFPart.overlapPartMap(localPartMap, partMap, strictPartVersion))
 				{
 					if (create)
 						throw new JDFException("Incompatible part maps: local: " + localPartMap.showKeys(null) + " request: " + partMap.showKeys(null) + " ID=" + resourceRoot.getID());
 					else
 						return null;
 				}
-				final JDFAttributeMap clone = localPartMap.clone();
-				clone.putAll(partMap);
+				final JDFAttributeMap clone = partMap.clone();
+				clone.putAll(localPartMap);
 				return clone;
 			}
 		}

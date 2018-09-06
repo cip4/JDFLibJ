@@ -208,6 +208,18 @@ public class MessageHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	public void testGetDeviceID()
+	{
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
+		mh.getHeader().setAttribute(AttributeName.DEVICEID, "d");
+		assertEquals("d", mh.getDeviceID());
+	}
+
+	/**
+	*
+	*/
+	@Test
 	public void testSetQuery()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
