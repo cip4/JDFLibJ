@@ -239,7 +239,6 @@ public class PartitionGetterTest
 	@Test
 	public void testHasGapRange()
 	{
-		final VString v = new VString("a b c");
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFAttributeMap partMap = new JDFAttributeMap();
 		partMap.put(AttributeName.SIGNATURENAME, "sig1");
@@ -275,6 +274,33 @@ public class PartitionGetterTest
 
 		assertEquals(leaf, leaf.getPartition(m2, null));
 
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetCompleteMap()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFAttributeMap partMap = new JDFAttributeMap();
+		partMap.put(AttributeName.SIGNATURENAME, "sig1");
+		partMap.put(AttributeName.SHEETNAME, "s1");
+		partMap.put(AttributeName.BINDERYSIGNATURENAME, "bs1");
+		partMap.put(AttributeName.CELLINDEX, "0");
+		r.getCreatePartition(partMap, new VString("SignatureName SheetName BinderySignatureName CellIndex"));
+		partMap.put(AttributeName.CELLINDEX, "2 ~ 4");
+		final JDFResource leaf = r.getCreatePartition(partMap, new VString("SignatureName SheetName BinderySignatureName CellIndex"));
+		final PartitionGetter g = new PartitionGetter(r);
+		final JDFAttributeMap m2 = new JDFAttributeMap(partMap);
+		m2.put(AttributeName.CELLINDEX, "3");
+		final PartitionGetter g2 = new PartitionGetter(leaf);
+		assertEquals(g2.getCompletePartMap(m2, false), partMap);
+
+		m2.remove(AttributeName.BINDERYSIGNATURENAME);
+		assertEquals(g2.getCompletePartMap(m2, false), partMap);
+		m2.remove(AttributeName.SIGNATURENAME);
+		assertEquals(g2.getCompletePartMap(m2, false), partMap);
 	}
 
 	/**
