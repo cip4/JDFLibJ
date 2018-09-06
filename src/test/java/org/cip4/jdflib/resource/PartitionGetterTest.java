@@ -280,6 +280,39 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
+	public void testMultiGapRange()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFAttributeMap partMap = new JDFAttributeMap();
+		partMap.put(AttributeName.SIGNATURENAME, "sig1");
+		partMap.put(AttributeName.SHEETNAME, "s1");
+		final JDFAttributeMap pSheet = new JDFAttributeMap(partMap);
+		partMap.put(AttributeName.BINDERYSIGNATURENAME, "bs1");
+		partMap.put(AttributeName.CELLINDEX, "0");
+		r.getCreatePartition(partMap, new VString("SignatureName SheetName BinderySignatureName CellIndex"));
+		partMap.put(AttributeName.BINDERYSIGNATURENAME, "bs2");
+		r.getCreatePartition(partMap, new VString("SignatureName SheetName BinderySignatureName CellIndex"));
+		final JDFResource leaf = r.getCreatePartition(partMap, new VString("SignatureName SheetName BinderySignatureName CellIndex"));
+		final PartitionGetter g = new PartitionGetter(r);
+		final JDFAttributeMap m2 = new JDFAttributeMap(partMap);
+		final JDFResource sheet = g.getPartition(pSheet, null);
+
+		m2.remove(AttributeName.BINDERYSIGNATURENAME);
+		assertEquals(sheet, g.getPartition(m2, null));
+		assertEquals(sheet, r.getPartition(m2, null));
+		assertEquals(sheet, sheet.getPartition(m2, null));
+		assertEquals(leaf, leaf.getPartition(m2, null));
+		m2.remove(AttributeName.SIGNATURENAME);
+		assertEquals(sheet, g.getPartition(m2, null));
+		assertEquals(sheet, r.getPartition(m2, null));
+		assertEquals(sheet, sheet.getPartition(m2, null));
+		assertEquals(leaf, leaf.getPartition(m2, null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetCompleteMap()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();

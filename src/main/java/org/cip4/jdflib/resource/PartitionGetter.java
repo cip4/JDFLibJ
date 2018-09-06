@@ -522,9 +522,23 @@ public class PartitionGetter
 		if (partitionFromMap == null)
 		{
 			final VJDFAttributeMap vMap = getPartitionMaps(m, partUsage);
-			if (vMap != null && vMap.size() == 1)
+			if (vMap != null)
 			{
-				partitionFromMap = vMap.get(0);
+				if (vMap.size() == 1)
+				{
+					partitionFromMap = vMap.get(0);
+				}
+				else if (vMap.size() > 1)
+				{
+					// not nice, but this is what the old algorithm did - find the closest common ancestor
+					partitionFromMap = vMap.getCommonMap();
+					final VString partIDKeys = resourceRoot.getPartIDKeys();
+					final int lastPos = lastPos(partitionFromMap, partIDKeys, false) - 1;
+					for (int i = lastPos; i < partIDKeys.size(); i++)
+					{
+						partitionFromMap.remove(partIDKeys.get(i));
+					}
+				}
 			}
 		}
 		return partitionFromMap == null ? null : leafMap.get(partitionFromMap);
