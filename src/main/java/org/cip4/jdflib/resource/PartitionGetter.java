@@ -82,6 +82,10 @@ public class PartitionGetter
 		{
 			return partMap;
 		}
+		else if (hasGap(partMap, null))
+		{
+			return null;
+		}
 		final JDFResource mapRes = leafMap.get(partMap);
 		JDFAttributeMap ret = mapRes == null ? null : partMap;
 		if (ret == null)
@@ -519,29 +523,47 @@ public class PartitionGetter
 			return resourceRoot;
 		}
 		JDFAttributeMap partitionFromMap = getPartitionFromMap(m, partUsage);
-		if (partitionFromMap == null)
+		if (partitionFromMap == null || !m.equals(partitionFromMap) && (!JDFPart.getFastparts().containsAll(partitionFromMap.keySet())))
 		{
-			final VJDFAttributeMap vMap = getPartitionMaps(m, partUsage);
-			if (vMap != null)
-			{
-				if (vMap.size() == 1)
-				{
-					partitionFromMap = vMap.get(0);
-				}
-				else if (vMap.size() > 1)
-				{
-					return null;
-					// not nice, but this is what the old algorithm did - find the closest common ancestor
-					/*
-					 * partitionFromMap = vMap.getCommonMap(); final VString partIDKeys = resourceRoot.getPartIDKeys(); final int lastPos = lastPos(partitionFromMap, partIDKeys, false) - 1; for (int i
-					 * = lastPos; i < partIDKeys.size(); i++) { partitionFromMap.remove(partIDKeys.get(i)); } for (final JDFAttributeMap testMap : leafMap.keySet()) { if
-					 * (testMap.subMap(partitionFromMap) && !m.overlapMap(testMap)) { return null; } }
-					 */
-				}
-			}
+			partitionFromMap = reducePartMap(m, partUsage);
 		}
 		return partitionFromMap == null ? null : leafMap.get(partitionFromMap);
 
+	}
+
+	/**
+	 */
+	JDFAttributeMap reducePartMap(final JDFAttributeMap m, final EnumPartUsage partUsage)
+	{
+		JDFAttributeMap partitionFromMap = null;
+		final VJDFAttributeMap vMap = getPartitionMaps(m, partUsage);
+		if (vMap != null)
+		{
+			if (vMap.size() == 1)
+			{
+				partitionFromMap = vMap.get(0);
+			}
+			else if (vMap.size() > 1)
+			{
+				if (EnumPartUsage.Explicit.equals(partUsage))
+				{
+					partitionFromMap = null;
+				}
+				else
+				{
+					// not nice, but this is what the old algorithm did - find the closest common ancestor
+
+					partitionFromMap = vMap.getCommonMap();
+					final VString partIDKeys = resourceRoot.getPartIDKeys();
+					final int lastPos = lastPos(partitionFromMap, partIDKeys, false) - 1;
+					for (int i = lastPos; i < partIDKeys.size(); i++)
+					{
+						partitionFromMap.remove(partIDKeys.get(i));
+					}
+				}
+			}
+		}
+		return partitionFromMap;
 	}
 
 	/**
@@ -884,7 +906,7 @@ public class PartitionGetter
 				currentPartIDKeys = vPartIDKeys;
 			}
 
-			final VJDFAttributeMap newMaps = updateCreate(vPartMap, vPartIDKeys);
+			final VJDFAttributeMap newMaps = updateCreate(vPartMap, currentPartIDKeys);
 			for (final JDFAttributeMap partMap : newMaps)
 			{
 				v.add(getCreatePartition(partMap, vPartIDKeys));
@@ -920,8 +942,10 @@ public class PartitionGetter
 	 * @param vPartIDKeys
 	 * @return
 	 */
-	boolean hasGap(final JDFAttributeMap next, final VString vPartIDKeys)
+	boolean hasGap(final JDFAttributeMap next, VString vPartIDKeys)
 	{
+		if (vPartIDKeys == null)
+			vPartIDKeys = resourceRoot.getPartIDKeys();
 		return lastPos(next, vPartIDKeys, false) > next.size() - 1;
 	}
 

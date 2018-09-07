@@ -999,7 +999,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			spawn.vSpawnParts = new VJDFAttributeMap();
 			spawn.vSpawnParts.add(new JDFAttributeMap(EnumPartIDKey.PartVersion, "EN"));
 			spawn.vRWResources_in = new VString("Output", null);
-			spawn.bFixResources = i == 0;
+			spawn.bFixResources = i == 1;
 
 			final JDFNode spawnedNode = spawn.spawn();
 
@@ -1007,9 +1007,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 			final JDFRunList rlOutSpawn = (JDFRunList) spawnedNode.getMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null, 0);
 			VElement vOut = rlOutSpawn.getPartitionVector(new JDFAttributeMap(EnumPartIDKey.PartVersion, "DE"), null);
-			// assertEquals(vOut.size(), 0);
 			vOut = rlOutSpawn.getPartitionVector(new JDFAttributeMap(EnumPartIDKey.PartVersion, "EN"), null);
-			assertEquals(vOut.size(), 4);
+			assertEquals(vOut.size(), 4 + 4 * i);
 			for (int j = 0; j < vOut.size(); j++)
 			{
 				((JDFResource) vOut.item(j)).setResStatus(EnumResStatus.Available, false);
@@ -1023,7 +1022,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			assertEquals(vOut.size(), 4);
 
 			vOut = rlOutMerge.getPartitionVector(new JDFAttributeMap(EnumPartIDKey.PartVersion, "EN"), null);
-			assertEquals(vOut.size(), 4);
+			assertEquals(vOut.size(), 4 + 4 * i);
 			for (int j = 0; j < vOut.size(); j++)
 			{
 				assertEquals("bad status: " + j, ((JDFResource) vOut.item(j)).getResStatus(false), EnumResStatus.Available);

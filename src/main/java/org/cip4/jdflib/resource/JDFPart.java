@@ -479,4 +479,12 @@ public class JDFPart extends JDFAutoPart
 		setAttribute(AttributeName.METADATA + iMetaData, value, null);
 	}
 
-} // class JDFPart
+	/**
+	 * @return the fastparts
+	 */
+	public static Set<String> getFastparts()
+	{
+		return fastparts;
+	}
+
+}

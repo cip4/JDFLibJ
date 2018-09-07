@@ -52,7 +52,6 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class PartitionGetterTest
@@ -281,10 +280,10 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
-	@Ignore
 	public void testMultiGapRange()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		r.setPartUsage(EnumPartUsage.Implicit);
 		final JDFAttributeMap partMap = new JDFAttributeMap();
 		partMap.put(AttributeName.SIGNATURENAME, "sig1");
 		partMap.put(AttributeName.SHEETNAME, "s1");
