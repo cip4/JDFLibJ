@@ -186,6 +186,25 @@ public class PartitionGetterTest
 	}
 
 	/**
+	*
+	*/
+	@Test
+	public void testPVResDouble()
+	{
+		final JDFResource r0 = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
+		final JDFResource r = r0.addPartition(EnumPartIDKey.SheetName, "s1");
+
+		final JDFResource a = r.addPartition(EnumPartIDKey.PartVersion, "a");
+		final JDFResource b = r.addPartition(EnumPartIDKey.PartVersion, "b");
+		final JDFResource c = r.addPartition(EnumPartIDKey.PartVersion, "c");
+		final PartitionGetter pg = new PartitionGetter(r0);
+
+		final JDFAttributeMap m = new JDFAttributeMap(AttributeName.PARTVERSION, "a b");
+		m.put(AttributeName.SHEETNAME, "s1");
+		assertEquals(r, pg.getPartition(m, EnumPartUsage.Sparse));
+	}
+
+	/**
 	 *
 	 */
 	@Test
@@ -210,7 +229,7 @@ public class PartitionGetterTest
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final PartitionGetter g = new PartitionGetter(r);
-		assertEquals(new JDFAttributeMap(), g.getImplicitPartitionFromMap(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1")));
+		assertEquals(new JDFAttributeMap(), g.getImplicitPartitionFromMap(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1"), EnumPartUsage.Implicit));
 	}
 
 	/**
@@ -395,11 +414,11 @@ public class PartitionGetterTest
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.SignatureName, "S1");
 		final PartitionGetter g = new PartitionGetter(r);
-		assertEquals(new JDFAttributeMap(), g.getImplicitPartitionFromMap(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1")));
+		assertEquals(new JDFAttributeMap(), g.getImplicitPartitionFromMap(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1"), EnumPartUsage.Implicit));
 		final JDFAttributeMap p1 = new JDFAttributeMap(EnumPartIDKey.SignatureName, "S1");
 		final JDFAttributeMap p2 = p1.clone();
 		p2.put(EnumPartIDKey.SheetName, "SH1");
-		assertEquals(p1, g.getImplicitPartitionFromMap(p2));
+		assertEquals(p1, g.getImplicitPartitionFromMap(p2, EnumPartUsage.Implicit));
 	}
 
 	/**
@@ -425,11 +444,11 @@ public class PartitionGetterTest
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.SignatureName, "S1");
 		final PartitionGetter g = new PartitionGetter(r);
-		assertEquals(new JDFAttributeMap(), g.getImplicitPartitionFromMap(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1")));
+		assertEquals(new JDFAttributeMap(), g.getImplicitPartitionFromMap(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1"), EnumPartUsage.Implicit));
 		final JDFAttributeMap p1 = new JDFAttributeMap(EnumPartIDKey.SignatureName, "S1");
 		final JDFAttributeMap p2 = p1.clone();
 		p2.put(EnumPartIDKey.SheetName, "SH1");
-		assertEquals(p1, g.getImplicitPartitionFromMap(p2));
+		assertEquals(p1, g.getImplicitPartitionFromMap(p2, EnumPartUsage.Implicit));
 	}
 
 	/**

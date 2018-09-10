@@ -90,7 +90,7 @@ public class PartitionGetter
 		JDFAttributeMap ret = mapRes == null ? null : partMap;
 		if (ret == null)
 		{
-			ret = checkPV(partMap);
+			ret = checkPV(partMap, partUsage);
 		}
 		if (ret == null) // no explicit hit
 		{
@@ -100,7 +100,7 @@ public class PartitionGetter
 			}
 			if (!EnumPartUsage.Explicit.equals(partUsage))
 			{
-				ret = getImplicitPartitionFromMap(partMap);
+				ret = getImplicitPartitionFromMap(partMap, partUsage);
 				if (EnumPartUsage.Sparse.equals(partUsage) && leafMap.get(ret).getDirectPartition(0) != null)
 				{
 					ret = null;
@@ -114,22 +114,30 @@ public class PartitionGetter
 	/**
 	 *
 	 * @param partMap
+	 * @param partUsage
 	 * @return
 	 */
-	JDFAttributeMap checkPV(final JDFAttributeMap partMap)
+	JDFAttributeMap checkPV(final JDFAttributeMap partMap, final EnumPartUsage partUsage)
 	{
+		JDFAttributeMap onlyMap = null;
 		if (containsEvil(partMap) && !leafMap.hasMissingKeys(partMap))
 		{
 			for (final JDFAttributeMap map : leafMap.keySet())
 			{
 				if (JDFPart.subPartMap(map, partMap, strictPartVersion))
 				{
-					return map;
+					if (onlyMap != null)
+					{
+						onlyMap.remove(AttributeName.PARTVERSION);
+						return EnumPartUsage.Explicit.equals(partUsage) || leafMap.get(onlyMap) == null ? null : onlyMap;
+					}
+					else
+						onlyMap = map.clone();
 				}
 			}
 		}
 
-		return null;
+		return onlyMap;
 	}
 
 	boolean containsEvil(final JDFAttributeMap partMap)
@@ -163,9 +171,10 @@ public class PartitionGetter
 	 * loop to find partitions - will NOT find explicit matches which need to be checked first with a get()
 	 *
 	 * @param partMap
+	 * @param partUsage
 	 * @return
 	 */
-	JDFAttributeMap getImplicitPartitionFromMap(final JDFAttributeMap partMap)
+	JDFAttributeMap getImplicitPartitionFromMap(final JDFAttributeMap partMap, final EnumPartUsage partUsage)
 	{
 		int size = partMap.size();
 		if (size > 1 || leafMap.hasMissingKeys(partMap))
@@ -188,7 +197,7 @@ public class PartitionGetter
 					}
 					else
 					{
-						final JDFAttributeMap pv = checkPV(reducedMap);
+						final JDFAttributeMap pv = checkPV(reducedMap, partUsage);
 						if (pv != null)
 						{
 							return pv;
