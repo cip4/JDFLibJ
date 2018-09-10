@@ -778,7 +778,8 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	{
 		final Set<Object> set = new HashSet<>();
 		int j = 0;
-		for (int i = 0; i < size(); i++)
+		int size = size();
+		for (int i = 0; i < size; i++)
 		{
 			if (set.contains(elementAt(j)))
 			{
