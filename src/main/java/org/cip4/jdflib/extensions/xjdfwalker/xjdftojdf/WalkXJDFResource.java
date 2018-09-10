@@ -402,6 +402,19 @@ public class WalkXJDFResource extends WalkXElement
 			final Vector<JDFPartAmount> vpa = ap.getChildrenByClass(JDFPartAmount.class, false, 0);
 			for (final JDFPartAmount pa : vpa)
 			{
+				VJDFAttributeMap vParts = pa.getPartMapVector();
+				if (vParts == null)
+				{
+					if (!JDFAttributeMap.isEmpty(partmap))
+					{
+						vParts = new VJDFAttributeMap(partmap);
+					}
+				}
+				else
+				{
+					vParts.put(partmap);
+				}
+				pa.setPartMapVector(vParts);
 				xjdfToJDFImpl.walkTree(pa, newAmountPool);
 			}
 			ap.deleteNode();

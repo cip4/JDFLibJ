@@ -367,7 +367,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFColorantControl cc = (JDFColorantControl) h.getCreateSet(XJDFConstants.Resource, ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true).getResource();
 		cc.setAttribute(ElementName.COLORANTPARAMS, "Sep_1");
 		cc.setAttribute(ElementName.COLORANTORDER, "Sep_1");
-		h.getCreateSet(XJDFConstants.Resource, ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME, "Sep 1");
+		h.getCreateSet(XJDFConstants.Resource, ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME,
+				"Sep 1");
 
 		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
 		final JDFDoc docjdf = conv.convert(h);
@@ -452,7 +453,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final KElement c = e.appendElement(SetHelper.RESOURCE_SET);
 		c.setAttribute("Name", "Layout");
 		c.setAttribute("Usage", "Input");
-		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL", "file://foo.xml");
+		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL",
+				"file://foo.xml");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		final JDFNode root = d.getJDFRoot();
@@ -801,6 +803,35 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(m);
 		final JDFResourceLink rl = root.getLink(m, null);
 		assertNotNull(rl.getAmountPool());
+		assertNull(m.getElement(ElementName.AMOUNTPOOL));
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testAmountPoolPart2()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
+		final SetHelper sh = xjdf.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
+		final JDFAttributeMap map1 = new JDFAttributeMap(AttributeName.SHEETNAME, "S1");
+		final ResourceHelper ph1 = sh.getCreatePartition(map1, true);
+		ph1.setAmount(33, null, true);
+		final JDFAttributeMap map2 = new JDFAttributeMap(AttributeName.SHEETNAME, "S2");
+		final ResourceHelper ph2 = sh.getCreatePartition(map2, true);
+		ph2.setAmount(44, null, true);
+		final KElement e = xjdf.getRoot();
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		final JDFNode root = d.getJDFRoot();
+		final JDFMedia m = (JDFMedia) root.getResource(ElementName.MEDIA, EnumUsage.Input, 0);
+		assertNotNull(m);
+		final JDFResourceLink rl = root.getLink(m, null);
+		assertNotNull(rl.getAmountPool());
+		assertEquals(33, rl.getAmount(map1), 0.1);
+		assertEquals(44, rl.getAmount(map2), 0.1);
 		assertNull(m.getElement(ElementName.AMOUNTPOOL));
 	}
 
