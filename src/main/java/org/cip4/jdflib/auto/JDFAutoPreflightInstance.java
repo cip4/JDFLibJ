@@ -198,7 +198,7 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
 	 */
 	public JDFPreflightInstanceDetail getCreatePreflightInstanceDetail(int iSkip)
 	{
-		return (JDFPreflightInstanceDetail) getCreateElement_KElement(ElementName.PREFLIGHTINSTANCEDETAIL, null, iSkip);
+		return (JDFPreflightInstanceDetail) getCreateElement(ElementName.PREFLIGHTINSTANCEDETAIL, null, iSkip);
 	}
 
 	/**

@@ -526,7 +526,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 */
 	public JDFLoc getCreateLoc(int iSkip)
 	{
-		return (JDFLoc) getCreateElement_KElement(ElementName.LOC, null, iSkip);
+		return (JDFLoc) getCreateElement(ElementName.LOC, null, iSkip);
 	}
 
 	/**
@@ -568,7 +568,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 */
 	public JDFValueLoc getCreateValueLoc(int iSkip)
 	{
-		return (JDFValueLoc) getCreateElement_KElement(ElementName.VALUELOC, null, iSkip);
+		return (JDFValueLoc) getCreateElement(ElementName.VALUELOC, null, iSkip);
 	}
 
 	/**

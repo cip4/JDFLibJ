@@ -559,7 +559,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 */
 	public JDFBinderySignature getCreateBinderySignature()
 	{
-		return (JDFBinderySignature) getCreateElement_KElement(ElementName.BINDERYSIGNATURE, null, 0);
+		return (JDFBinderySignature) getCreateElement(ElementName.BINDERYSIGNATURE, null, 0);
 	}
 
 	/**
@@ -591,7 +591,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 */
 	public JDFDevice getCreateDevice(int iSkip)
 	{
-		return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
+		return (JDFDevice) getCreateElement(ElementName.DEVICE, null, iSkip);
 	}
 
 	/**
@@ -652,7 +652,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 */
 	public JDFExternalImpositionTemplate getCreateExternalImpositionTemplate()
 	{
-		return (JDFExternalImpositionTemplate) getCreateElement_KElement(ElementName.EXTERNALIMPOSITIONTEMPLATE, null, 0);
+		return (JDFExternalImpositionTemplate) getCreateElement(ElementName.EXTERNALIMPOSITIONTEMPLATE, null, 0);
 	}
 
 	/**
@@ -684,7 +684,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 */
 	public JDFMedia getCreateMedia(int iSkip)
 	{
-		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, iSkip);
+		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, iSkip);
 	}
 
 	/**
@@ -736,7 +736,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 */
 	public JDFPosition getCreatePosition(int iSkip)
 	{
-		return (JDFPosition) getCreateElement_KElement(ElementName.POSITION, null, iSkip);
+		return (JDFPosition) getCreateElement(ElementName.POSITION, null, iSkip);
 	}
 
 	/**
@@ -787,7 +787,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 */
 	public JDFStripCellParams getCreateStripCellParams()
 	{
-		return (JDFStripCellParams) getCreateElement_KElement(ElementName.STRIPCELLPARAMS, null, 0);
+		return (JDFStripCellParams) getCreateElement(ElementName.STRIPCELLPARAMS, null, 0);
 	}
 
 	/**
@@ -809,7 +809,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 */
 	public JDFStripMark getCreateStripMark(int iSkip)
 	{
-		return (JDFStripMark) getCreateElement_KElement(ElementName.STRIPMARK, null, iSkip);
+		return (JDFStripMark) getCreateElement(ElementName.STRIPMARK, null, iSkip);
 	}
 
 	/**

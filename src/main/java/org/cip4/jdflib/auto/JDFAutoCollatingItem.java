@@ -424,7 +424,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 */
 	public JDFComponent getCreateComponent()
 	{
-		return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, 0);
+		return (JDFComponent) getCreateElement(ElementName.COMPONENT, null, 0);
 	}
 
 	/**
@@ -465,7 +465,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 */
 	public JDFMedia getCreateMedia()
 	{
-		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
+		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**

@@ -618,7 +618,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 	 */
 	public JDFIdentificationField getCreateIdentificationField(int iSkip)
 	{
-		return (JDFIdentificationField) getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+		return (JDFIdentificationField) getCreateElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
 
 	/**
@@ -679,7 +679,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 	 */
 	public JDFMedia getCreateMedia()
 	{
-		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
+		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**
@@ -720,7 +720,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 	 */
 	public JDFMedia getCreateTool()
 	{
-		return (JDFMedia) getCreateElement_KElement(ElementName.TOOL, null, 0);
+		return (JDFMedia) getCreateElement(ElementName.TOOL, null, 0);
 	}
 
 	/**

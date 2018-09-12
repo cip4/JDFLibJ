@@ -128,7 +128,7 @@ public abstract class JDFAutoQueueEntryDefList extends JDFElement
 	 */
 	public JDFQueueEntryDef getCreateQueueEntryDef(int iSkip)
 	{
-		return (JDFQueueEntryDef) getCreateElement_KElement(ElementName.QUEUEENTRYDEF, null, iSkip);
+		return (JDFQueueEntryDef) getCreateElement(ElementName.QUEUEENTRYDEF, null, iSkip);
 	}
 
 	/**

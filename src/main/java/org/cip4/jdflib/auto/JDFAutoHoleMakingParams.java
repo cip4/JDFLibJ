@@ -551,7 +551,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 */
 	public JDFHole getCreateHole(int iSkip)
 	{
-		return (JDFHole) getCreateElement_KElement(ElementName.HOLE, null, iSkip);
+		return (JDFHole) getCreateElement(ElementName.HOLE, null, iSkip);
 	}
 
 	/**
@@ -593,7 +593,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 */
 	public JDFHoleLine getCreateHoleLine(int iSkip)
 	{
-		return (JDFHoleLine) getCreateElement_KElement(ElementName.HOLELINE, null, iSkip);
+		return (JDFHoleLine) getCreateElement(ElementName.HOLELINE, null, iSkip);
 	}
 
 	/**
@@ -644,7 +644,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 */
 	public JDFRegisterMark getCreateRegisterMark()
 	{
-		return (JDFRegisterMark) getCreateElement_KElement(ElementName.REGISTERMARK, null, 0);
+		return (JDFRegisterMark) getCreateElement(ElementName.REGISTERMARK, null, 0);
 	}
 
 	/**

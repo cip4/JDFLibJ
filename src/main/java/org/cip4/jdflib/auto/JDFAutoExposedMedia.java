@@ -673,7 +673,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec()
 	{
-		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**
@@ -714,7 +714,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 */
 	public JDFMedia getCreateMedia()
 	{
-		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
+		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**
@@ -755,7 +755,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 */
 	public JDFPageList getCreatePageList()
 	{
-		return (JDFPageList) getCreateElement_KElement(ElementName.PAGELIST, null, 0);
+		return (JDFPageList) getCreateElement(ElementName.PAGELIST, null, 0);
 	}
 
 	/**
@@ -796,7 +796,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 */
 	public JDFScreeningParams getCreateScreeningParams()
 	{
-		return (JDFScreeningParams) getCreateElement_KElement(ElementName.SCREENINGPARAMS, null, 0);
+		return (JDFScreeningParams) getCreateElement(ElementName.SCREENINGPARAMS, null, 0);
 	}
 
 	/**
@@ -828,7 +828,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 */
 	public JDFContact getCreateContact(int iSkip)
 	{
-		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+		return (JDFContact) getCreateElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**
@@ -882,7 +882,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	@Override
 	public JDFIdentificationField getCreateIdentificationField(int iSkip)
 	{
-		return (JDFIdentificationField) getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+		return (JDFIdentificationField) getCreateElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
 
 	/**

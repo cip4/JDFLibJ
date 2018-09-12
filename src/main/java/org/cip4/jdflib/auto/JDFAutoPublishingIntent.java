@@ -191,7 +191,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	 */
 	public JDFTimeSpan getCreateIssueDate()
 	{
-		return (JDFTimeSpan) getCreateElement_KElement(ElementName.ISSUEDATE, null, 0);
+		return (JDFTimeSpan) getCreateElement(ElementName.ISSUEDATE, null, 0);
 	}
 
 	/**
@@ -222,7 +222,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	 */
 	public JDFStringSpan getCreateIssueName()
 	{
-		return (JDFStringSpan) getCreateElement_KElement(ElementName.ISSUENAME, null, 0);
+		return (JDFStringSpan) getCreateElement(ElementName.ISSUENAME, null, 0);
 	}
 
 	/**
@@ -253,7 +253,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreateIssueType()
 	{
-		return (JDFNameSpan) getCreateElement_KElement(ElementName.ISSUETYPE, null, 0);
+		return (JDFNameSpan) getCreateElement(ElementName.ISSUETYPE, null, 0);
 	}
 
 	/**
@@ -284,7 +284,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	 */
 	public JDFIntegerSpan getCreateCirculation()
 	{
-		return (JDFIntegerSpan) getCreateElement_KElement(ElementName.CIRCULATION, null, 0);
+		return (JDFIntegerSpan) getCreateElement(ElementName.CIRCULATION, null, 0);
 	}
 
 	/**
@@ -315,7 +315,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	 */
 	public JDFContentList getCreateContentList()
 	{
-		return (JDFContentList) getCreateElement_KElement(ElementName.CONTENTLIST, null, 0);
+		return (JDFContentList) getCreateElement(ElementName.CONTENTLIST, null, 0);
 	}
 
 	/**

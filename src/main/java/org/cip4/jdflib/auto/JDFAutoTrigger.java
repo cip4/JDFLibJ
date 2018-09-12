@@ -221,7 +221,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 	 */
 	public JDFChangedAttribute getCreateChangedAttribute(int iSkip)
 	{
-		return (JDFChangedAttribute) getCreateElement_KElement(ElementName.CHANGEDATTRIBUTE, null, iSkip);
+		return (JDFChangedAttribute) getCreateElement(ElementName.CHANGEDATTRIBUTE, null, iSkip);
 	}
 
 	/**
@@ -272,7 +272,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 	 */
 	public JDFAdded getCreateAdded()
 	{
-		return (JDFAdded) getCreateElement_KElement(ElementName.ADDED, null, 0);
+		return (JDFAdded) getCreateElement(ElementName.ADDED, null, 0);
 	}
 
 	/**
@@ -294,7 +294,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 	 */
 	public JDFChangedPath getCreateChangedPath(int iSkip)
 	{
-		return (JDFChangedPath) getCreateElement_KElement(ElementName.CHANGEDPATH, null, iSkip);
+		return (JDFChangedPath) getCreateElement(ElementName.CHANGEDPATH, null, iSkip);
 	}
 
 	/**
@@ -345,7 +345,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 	 */
 	public JDFRemoved getCreateRemoved()
 	{
-		return (JDFRemoved) getCreateElement_KElement(ElementName.REMOVED, null, 0);
+		return (JDFRemoved) getCreateElement(ElementName.REMOVED, null, 0);
 	}
 
 	/**

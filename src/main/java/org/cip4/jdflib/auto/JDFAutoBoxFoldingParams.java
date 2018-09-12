@@ -332,7 +332,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 */
 	public JDFBoxFoldAction getCreateBoxFoldAction(int iSkip)
 	{
-		return (JDFBoxFoldAction) getCreateElement_KElement(ElementName.BOXFOLDACTION, null, iSkip);
+		return (JDFBoxFoldAction) getCreateElement(ElementName.BOXFOLDACTION, null, iSkip);
 	}
 
 	/**
@@ -374,7 +374,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 */
 	public JDFGlueLine getCreateGlueLine(int iSkip)
 	{
-		return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
+		return (JDFGlueLine) getCreateElement(ElementName.GLUELINE, null, iSkip);
 	}
 
 	/**
@@ -426,7 +426,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 */
 	public JDFBoxApplication getCreateBoxApplication(int iSkip)
 	{
-		return (JDFBoxApplication) getCreateElement_KElement(ElementName.BOXAPPLICATION, null, iSkip);
+		return (JDFBoxApplication) getCreateElement(ElementName.BOXAPPLICATION, null, iSkip);
 	}
 
 	/**

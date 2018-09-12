@@ -70,10 +70,10 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.FAMILIES, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x44433333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x44433333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.MESSAGETYPES, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x44433333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.URL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
 	}
 
@@ -86,7 +86,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x44433333);
 	}
 
 	@Override
@@ -346,7 +346,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
 	}
 
 	/**

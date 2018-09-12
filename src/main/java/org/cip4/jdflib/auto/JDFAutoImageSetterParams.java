@@ -959,7 +959,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 */
 	public JDFMedia getCreateMedia()
 	{
-		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
+		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**
@@ -1000,7 +1000,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 */
 	public JDFFitPolicy getCreateFitPolicy()
 	{
-		return (JDFFitPolicy) getCreateElement_KElement(ElementName.FITPOLICY, null, 0);
+		return (JDFFitPolicy) getCreateElement(ElementName.FITPOLICY, null, 0);
 	}
 
 	/**

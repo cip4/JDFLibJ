@@ -179,7 +179,7 @@ public abstract class JDFAutoset extends JDFElement
 	 */
 	public JDFFeatureAttribute getCreateFeatureAttribute()
 	{
-		return (JDFFeatureAttribute) getCreateElement_KElement(ElementName.FEATUREATTRIBUTE, null, 0);
+		return (JDFFeatureAttribute) getCreateElement(ElementName.FEATUREATTRIBUTE, null, 0);
 	}
 
 	/**

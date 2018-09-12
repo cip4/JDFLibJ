@@ -148,7 +148,7 @@ public abstract class JDFAutoContentList extends JDFResource
 	 */
 	public JDFContentData getCreateContentData(int iSkip)
 	{
-		return (JDFContentData) getCreateElement_KElement(ElementName.CONTENTDATA, null, iSkip);
+		return (JDFContentData) getCreateElement(ElementName.CONTENTDATA, null, iSkip);
 	}
 
 	/**

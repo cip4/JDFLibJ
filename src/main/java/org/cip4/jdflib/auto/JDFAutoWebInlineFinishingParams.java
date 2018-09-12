@@ -148,7 +148,7 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
 	 */
 	public JDFFolderProduction getCreateFolderProduction(int iSkip)
 	{
-		return (JDFFolderProduction) getCreateElement_KElement(ElementName.FOLDERPRODUCTION, null, iSkip);
+		return (JDFFolderProduction) getCreateElement(ElementName.FOLDERPRODUCTION, null, iSkip);
 	}
 
 	/**

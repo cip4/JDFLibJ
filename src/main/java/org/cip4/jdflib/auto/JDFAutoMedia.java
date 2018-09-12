@@ -2366,7 +2366,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	 */
 	public JDFColor getCreateColor()
 	{
-		return (JDFColor) getCreateElement_KElement(ElementName.COLOR, null, 0);
+		return (JDFColor) getCreateElement(ElementName.COLOR, null, 0);
 	}
 
 	/**
@@ -2407,7 +2407,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	 */
 	public JDFColorMeasurementConditions getCreateColorMeasurementConditions()
 	{
-		return (JDFColorMeasurementConditions) getCreateElement_KElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
+		return (JDFColorMeasurementConditions) getCreateElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
 	}
 
 	/**
@@ -2448,7 +2448,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	 */
 	public JDFMediaLayers getCreateMediaLayers()
 	{
-		return (JDFMediaLayers) getCreateElement_KElement(ElementName.MEDIALAYERS, null, 0);
+		return (JDFMediaLayers) getCreateElement(ElementName.MEDIALAYERS, null, 0);
 	}
 
 	/**
@@ -2479,7 +2479,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	 */
 	public JDFHoleList getCreateHoleList()
 	{
-		return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
+		return (JDFHoleList) getCreateElement(ElementName.HOLELIST, null, 0);
 	}
 
 	/**
@@ -2501,7 +2501,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	 */
 	public JDFTabDimensions getCreateTabDimensions(int iSkip)
 	{
-		return (JDFTabDimensions) getCreateElement_KElement(ElementName.TABDIMENSIONS, null, iSkip);
+		return (JDFTabDimensions) getCreateElement(ElementName.TABDIMENSIONS, null, iSkip);
 	}
 
 	/**
@@ -2543,7 +2543,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	 */
 	public JDFContact getCreateContact(int iSkip)
 	{
-		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+		return (JDFContact) getCreateElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**
@@ -2597,7 +2597,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	@Override
 	public JDFIdentificationField getCreateIdentificationField(int iSkip)
 	{
-		return (JDFIdentificationField) getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+		return (JDFIdentificationField) getCreateElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
 
 	/**

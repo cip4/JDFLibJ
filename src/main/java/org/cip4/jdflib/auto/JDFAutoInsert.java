@@ -267,7 +267,7 @@ public abstract class JDFAutoInsert extends JDFElement
 	 */
 	public JDFSpanGlueType getCreateGlueType()
 	{
-		return (JDFSpanGlueType) getCreateElement_KElement(ElementName.GLUETYPE, null, 0);
+		return (JDFSpanGlueType) getCreateElement(ElementName.GLUETYPE, null, 0);
 	}
 
 	/**
@@ -298,7 +298,7 @@ public abstract class JDFAutoInsert extends JDFElement
 	 */
 	public JDFSpanMethod getCreateMethod()
 	{
-		return (JDFSpanMethod) getCreateElement_KElement(ElementName.METHOD, null, 0);
+		return (JDFSpanMethod) getCreateElement(ElementName.METHOD, null, 0);
 	}
 
 	/**
@@ -320,7 +320,7 @@ public abstract class JDFAutoInsert extends JDFElement
 	 */
 	public JDFGlueLine getCreateGlueLine(int iSkip)
 	{
-		return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
+		return (JDFGlueLine) getCreateElement(ElementName.GLUELINE, null, iSkip);
 	}
 
 	/**

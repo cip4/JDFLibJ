@@ -198,7 +198,7 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	 */
 	public JDFTransferCurve getCreateTransferCurve(int iSkip)
 	{
-		return (JDFTransferCurve) getCreateElement_KElement(ElementName.TRANSFERCURVE, null, iSkip);
+		return (JDFTransferCurve) getCreateElement(ElementName.TRANSFERCURVE, null, iSkip);
 	}
 
 	/**

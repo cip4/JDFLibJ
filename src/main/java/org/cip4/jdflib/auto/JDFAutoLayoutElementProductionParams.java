@@ -166,7 +166,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	 */
 	public JDFActionPool getCreateActionPool()
 	{
-		return (JDFActionPool) getCreateElement_KElement(ElementName.ACTIONPOOL, null, 0);
+		return (JDFActionPool) getCreateElement(ElementName.ACTIONPOOL, null, 0);
 	}
 
 	/**
@@ -197,7 +197,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec()
 	{
-		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**
@@ -229,7 +229,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	 */
 	public JDFLayoutElementPart getCreateLayoutElementPart(int iSkip)
 	{
-		return (JDFLayoutElementPart) getCreateElement_KElement(ElementName.LAYOUTELEMENTPART, null, iSkip);
+		return (JDFLayoutElementPart) getCreateElement(ElementName.LAYOUTELEMENTPART, null, iSkip);
 	}
 
 	/**
@@ -280,7 +280,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	 */
 	public JDFShapeDef getCreateShapeDef()
 	{
-		return (JDFShapeDef) getCreateElement_KElement(ElementName.SHAPEDEF, null, 0);
+		return (JDFShapeDef) getCreateElement(ElementName.SHAPEDEF, null, 0);
 	}
 
 	/**
@@ -321,7 +321,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	 */
 	public JDFTestPool getCreateTestPool()
 	{
-		return (JDFTestPool) getCreateElement_KElement(ElementName.TESTPOOL, null, 0);
+		return (JDFTestPool) getCreateElement(ElementName.TESTPOOL, null, 0);
 	}
 
 	/**

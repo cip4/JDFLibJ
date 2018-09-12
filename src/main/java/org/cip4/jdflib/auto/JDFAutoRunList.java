@@ -1038,7 +1038,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 */
 	public JDFByteMap getCreateByteMap()
 	{
-		return (JDFByteMap) getCreateElement_KElement(ElementName.BYTEMAP, null, 0);
+		return (JDFByteMap) getCreateElement(ElementName.BYTEMAP, null, 0);
 	}
 
 	/**
@@ -1070,7 +1070,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 */
 	public JDFDynamicInput getCreateDynamicInput(int iSkip)
 	{
-		return (JDFDynamicInput) getCreateElement_KElement(ElementName.DYNAMICINPUT, null, iSkip);
+		return (JDFDynamicInput) getCreateElement(ElementName.DYNAMICINPUT, null, iSkip);
 	}
 
 	/**
@@ -1112,7 +1112,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 */
 	public JDFMetadataMap getCreateMetadataMap(int iSkip)
 	{
-		return (JDFMetadataMap) getCreateElement_KElement(ElementName.METADATAMAP, null, iSkip);
+		return (JDFMetadataMap) getCreateElement(ElementName.METADATAMAP, null, iSkip);
 	}
 
 	/**
@@ -1154,7 +1154,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 */
 	public JDFInsertSheet getCreateInsertSheet(int iSkip)
 	{
-		return (JDFInsertSheet) getCreateElement_KElement(ElementName.INSERTSHEET, null, iSkip);
+		return (JDFInsertSheet) getCreateElement(ElementName.INSERTSHEET, null, iSkip);
 	}
 
 	/**
@@ -1215,7 +1215,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 */
 	public JDFLayoutElement getCreateLayoutElement()
 	{
-		return (JDFLayoutElement) getCreateElement_KElement(ElementName.LAYOUTELEMENT, null, 0);
+		return (JDFLayoutElement) getCreateElement(ElementName.LAYOUTELEMENT, null, 0);
 	}
 
 	/**
@@ -1256,7 +1256,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 */
 	public JDFInterpretedPDLData getCreateInterpretedPDLData()
 	{
-		return (JDFInterpretedPDLData) getCreateElement_KElement(ElementName.INTERPRETEDPDLDATA, null, 0);
+		return (JDFInterpretedPDLData) getCreateElement(ElementName.INTERPRETEDPDLDATA, null, 0);
 	}
 
 	/**
@@ -1297,7 +1297,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 */
 	public JDFDisposition getCreateDisposition()
 	{
-		return (JDFDisposition) getCreateElement_KElement(ElementName.DISPOSITION, null, 0);
+		return (JDFDisposition) getCreateElement(ElementName.DISPOSITION, null, 0);
 	}
 
 	/**
@@ -1328,7 +1328,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 */
 	public JDFPageList getCreatePageList()
 	{
-		return (JDFPageList) getCreateElement_KElement(ElementName.PAGELIST, null, 0);
+		return (JDFPageList) getCreateElement(ElementName.PAGELIST, null, 0);
 	}
 
 	/**

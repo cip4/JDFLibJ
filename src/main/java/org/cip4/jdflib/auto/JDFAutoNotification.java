@@ -432,7 +432,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 */
 	public JDFCostCenter getCreateCostCenter()
 	{
-		return (JDFCostCenter) getCreateElement_KElement(ElementName.COSTCENTER, null, 0);
+		return (JDFCostCenter) getCreateElement(ElementName.COSTCENTER, null, 0);
 	}
 
 	/**
@@ -455,7 +455,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	@Override
 	public JDFEmployee getCreateEmployee(int iSkip)
 	{
-		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+		return (JDFEmployee) getCreateElement(ElementName.EMPLOYEE, null, iSkip);
 	}
 
 	/**
@@ -500,7 +500,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
 	}
 
 	/**

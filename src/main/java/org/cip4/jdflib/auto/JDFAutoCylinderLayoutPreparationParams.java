@@ -156,7 +156,7 @@ public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
 	 */
 	public JDFProductionPath getCreateProductionPath()
 	{
-		return (JDFProductionPath) getCreateElement_KElement(ElementName.PRODUCTIONPATH, null, 0);
+		return (JDFProductionPath) getCreateElement(ElementName.PRODUCTIONPATH, null, 0);
 	}
 
 	/**

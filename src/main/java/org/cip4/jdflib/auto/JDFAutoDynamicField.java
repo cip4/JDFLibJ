@@ -299,7 +299,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	 */
 	public JDFDeviceMark getCreateDeviceMark()
 	{
-		return (JDFDeviceMark) getCreateElement_KElement(ElementName.DEVICEMARK, null, 0);
+		return (JDFDeviceMark) getCreateElement(ElementName.DEVICEMARK, null, 0);
 	}
 
 	/**

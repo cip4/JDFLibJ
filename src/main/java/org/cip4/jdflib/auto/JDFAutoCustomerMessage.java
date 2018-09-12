@@ -226,7 +226,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	 */
 	public JDFComChannel getCreateComChannel(int iSkip)
 	{
-		return (JDFComChannel) getCreateElement_KElement(ElementName.COMCHANNEL, null, iSkip);
+		return (JDFComChannel) getCreateElement(ElementName.COMCHANNEL, null, iSkip);
 	}
 
 	/**

@@ -227,7 +227,7 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
 	 */
 	public JDFPart getCreatePart()
 	{
-		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, 0);
+		return (JDFPart) getCreateElement(ElementName.PART, null, 0);
 	}
 
 	/**

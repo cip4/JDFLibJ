@@ -148,7 +148,7 @@ public abstract class JDFAutoNumberingParams extends JDFResource
 	 */
 	public JDFNumberingParam getCreateNumberingParam(int iSkip)
 	{
-		return (JDFNumberingParam) getCreateElement_KElement(ElementName.NUMBERINGPARAM, null, iSkip);
+		return (JDFNumberingParam) getCreateElement(ElementName.NUMBERINGPARAM, null, iSkip);
 	}
 
 	/**

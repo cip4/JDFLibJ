@@ -130,7 +130,7 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 	 */
 	public JDFBoxArgument getCreateBoxArgument(int iSkip)
 	{
-		return (JDFBoxArgument) getCreateElement_KElement(ElementName.BOXARGUMENT, null, iSkip);
+		return (JDFBoxArgument) getCreateElement(ElementName.BOXARGUMENT, null, iSkip);
 	}
 
 	/**
@@ -172,7 +172,7 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 	 */
 	public JDFBoxToBoxDifference getCreateBoxToBoxDifference(int iSkip)
 	{
-		return (JDFBoxToBoxDifference) getCreateElement_KElement(ElementName.BOXTOBOXDIFFERENCE, null, iSkip);
+		return (JDFBoxToBoxDifference) getCreateElement(ElementName.BOXTOBOXDIFFERENCE, null, iSkip);
 	}
 
 	/**

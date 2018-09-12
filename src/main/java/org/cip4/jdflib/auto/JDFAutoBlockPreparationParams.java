@@ -309,7 +309,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 */
 	public JDFRegisterRibbon getCreateRegisterRibbon(int iSkip)
 	{
-		return (JDFRegisterRibbon) getCreateElement_KElement(ElementName.REGISTERRIBBON, null, iSkip);
+		return (JDFRegisterRibbon) getCreateElement(ElementName.REGISTERRIBBON, null, iSkip);
 	}
 
 	/**

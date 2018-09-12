@@ -310,7 +310,7 @@ public abstract class JDFAutoValue extends JDFElement
 	 */
 	public JDFLoc getCreateLoc(int iSkip)
 	{
-		return (JDFLoc) getCreateElement_KElement(ElementName.LOC, null, iSkip);
+		return (JDFLoc) getCreateElement(ElementName.LOC, null, iSkip);
 	}
 
 	/**

@@ -455,7 +455,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	 */
 	public JDFHoleMakingParams getCreateHoleMakingParams()
 	{
-		return (JDFHoleMakingParams) getCreateElement_KElement(ElementName.HOLEMAKINGPARAMS, null, 0);
+		return (JDFHoleMakingParams) getCreateElement(ElementName.HOLEMAKINGPARAMS, null, 0);
 	}
 
 	/**

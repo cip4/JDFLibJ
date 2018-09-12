@@ -375,7 +375,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	 */
 	public JDFDevice getCreateDevice()
 	{
-		return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, 0);
+		return (JDFDevice) getCreateElement(ElementName.DEVICE, null, 0);
 	}
 
 	/**

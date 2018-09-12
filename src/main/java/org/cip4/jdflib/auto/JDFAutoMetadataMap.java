@@ -435,7 +435,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 */
 	public JDFExpr getCreateExpr(int iSkip)
 	{
-		return (JDFExpr) getCreateElement_KElement(ElementName.EXPR, null, iSkip);
+		return (JDFExpr) getCreateElement(ElementName.EXPR, null, iSkip);
 	}
 
 	/**

@@ -288,7 +288,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 */
 	public JDFCutBlock getCreateCutBlock(int iSkip)
 	{
-		return (JDFCutBlock) getCreateElement_KElement(ElementName.CUTBLOCK, null, iSkip);
+		return (JDFCutBlock) getCreateElement(ElementName.CUTBLOCK, null, iSkip);
 	}
 
 	/**
@@ -340,7 +340,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 */
 	public JDFCutMark getCreateCutMark(int iSkip)
 	{
-		return (JDFCutMark) getCreateElement_KElement(ElementName.CUTMARK, null, iSkip);
+		return (JDFCutMark) getCreateElement(ElementName.CUTMARK, null, iSkip);
 	}
 
 	/**
@@ -392,7 +392,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 */
 	public JDFCut getCreateCut(int iSkip)
 	{
-		return (JDFCut) getCreateElement_KElement(ElementName.CUT, null, iSkip);
+		return (JDFCut) getCreateElement(ElementName.CUT, null, iSkip);
 	}
 
 	/**

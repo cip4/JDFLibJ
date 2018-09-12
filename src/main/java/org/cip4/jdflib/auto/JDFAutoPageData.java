@@ -686,7 +686,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	 */
 	public JDFElementColorParams getCreateElementColorParams()
 	{
-		return (JDFElementColorParams) getCreateElement_KElement(ElementName.ELEMENTCOLORPARAMS, null, 0);
+		return (JDFElementColorParams) getCreateElement(ElementName.ELEMENTCOLORPARAMS, null, 0);
 	}
 
 	/**
@@ -727,7 +727,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	 */
 	public JDFImageCompressionParams getCreateImageCompressionParams()
 	{
-		return (JDFImageCompressionParams) getCreateElement_KElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
+		return (JDFImageCompressionParams) getCreateElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
 	}
 
 	/**
@@ -759,7 +759,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	 */
 	public JDFPageElement getCreatePageElement(int iSkip)
 	{
-		return (JDFPageElement) getCreateElement_KElement(ElementName.PAGEELEMENT, null, iSkip);
+		return (JDFPageElement) getCreateElement(ElementName.PAGEELEMENT, null, iSkip);
 	}
 
 	/**
@@ -810,7 +810,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	 */
 	public JDFScreeningParams getCreateScreeningParams()
 	{
-		return (JDFScreeningParams) getCreateElement_KElement(ElementName.SCREENINGPARAMS, null, 0);
+		return (JDFScreeningParams) getCreateElement(ElementName.SCREENINGPARAMS, null, 0);
 	}
 
 	/**
@@ -842,7 +842,7 @@ public abstract class JDFAutoPageData extends JDFElement
 	 */
 	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
 	{
-		return (JDFSeparationSpec) getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
+		return (JDFSeparationSpec) getCreateElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
 
 	/**

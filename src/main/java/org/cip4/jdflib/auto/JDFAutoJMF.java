@@ -364,7 +364,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 */
 	public JDFEmployee getCreateEmployee(int iSkip)
 	{
-		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+		return (JDFEmployee) getCreateElement(ElementName.EMPLOYEE, null, iSkip);
 	}
 
 	/**
@@ -406,7 +406,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 */
 	public JDFCommand getCreateCommand(int iSkip)
 	{
-		return (JDFCommand) getCreateElement_KElement(ElementName.COMMAND, null, iSkip);
+		return (JDFCommand) getCreateElement(ElementName.COMMAND, null, iSkip);
 	}
 
 	/**
@@ -448,7 +448,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 */
 	public JDFAcknowledge getCreateAcknowledge(int iSkip)
 	{
-		return (JDFAcknowledge) getCreateElement_KElement(ElementName.ACKNOWLEDGE, null, iSkip);
+		return (JDFAcknowledge) getCreateElement(ElementName.ACKNOWLEDGE, null, iSkip);
 	}
 
 	/**
@@ -490,7 +490,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 */
 	public JDFResponse getCreateResponse(int iSkip)
 	{
-		return (JDFResponse) getCreateElement_KElement(ElementName.RESPONSE, null, iSkip);
+		return (JDFResponse) getCreateElement(ElementName.RESPONSE, null, iSkip);
 	}
 
 	/**
@@ -532,7 +532,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 */
 	public JDFSignal getCreateSignal(int iSkip)
 	{
-		return (JDFSignal) getCreateElement_KElement(ElementName.SIGNAL, null, iSkip);
+		return (JDFSignal) getCreateElement(ElementName.SIGNAL, null, iSkip);
 	}
 
 	/**
@@ -574,7 +574,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 */
 	public JDFQuery getCreateQuery(int iSkip)
 	{
-		return (JDFQuery) getCreateElement_KElement(ElementName.QUERY, null, iSkip);
+		return (JDFQuery) getCreateElement(ElementName.QUERY, null, iSkip);
 	}
 
 	/**
@@ -616,7 +616,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 */
 	public JDFRegistration getCreateRegistration(int iSkip)
 	{
-		return (JDFRegistration) getCreateElement_KElement(ElementName.REGISTRATION, null, iSkip);
+		return (JDFRegistration) getCreateElement(ElementName.REGISTRATION, null, iSkip);
 	}
 
 	/**

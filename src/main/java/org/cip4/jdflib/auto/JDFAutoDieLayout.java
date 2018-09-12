@@ -430,7 +430,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 */
 	public JDFDevice getCreateDevice(int iSkip)
 	{
-		return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
+		return (JDFDevice) getCreateElement(ElementName.DEVICE, null, iSkip);
 	}
 
 	/**
@@ -491,7 +491,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec()
 	{
-		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**
@@ -532,7 +532,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 */
 	public JDFMedia getCreateMedia()
 	{
-		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
+		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**
@@ -564,7 +564,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 */
 	public JDFRuleLength getCreateRuleLength(int iSkip)
 	{
-		return (JDFRuleLength) getCreateElement_KElement(ElementName.RULELENGTH, null, iSkip);
+		return (JDFRuleLength) getCreateElement(ElementName.RULELENGTH, null, iSkip);
 	}
 
 	/**
@@ -606,7 +606,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 */
 	public JDFStation getCreateStation(int iSkip)
 	{
-		return (JDFStation) getCreateElement_KElement(ElementName.STATION, null, iSkip);
+		return (JDFStation) getCreateElement(ElementName.STATION, null, iSkip);
 	}
 
 	/**

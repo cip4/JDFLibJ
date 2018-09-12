@@ -982,7 +982,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 */
 	public JDFAmountPool getCreateAmountPool()
 	{
-		return (JDFAmountPool) getCreateElement_KElement(ElementName.AMOUNTPOOL, null, 0);
+		return (JDFAmountPool) getCreateElement(ElementName.AMOUNTPOOL, null, 0);
 	}
 
 	/**
@@ -1013,7 +1013,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 */
 	public JDFCostCenter getCreateCostCenter()
 	{
-		return (JDFCostCenter) getCreateElement_KElement(ElementName.COSTCENTER, null, 0);
+		return (JDFCostCenter) getCreateElement(ElementName.COSTCENTER, null, 0);
 	}
 
 	/**
@@ -1035,7 +1035,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 */
 	public JDFLot getCreateLot(int iSkip)
 	{
-		return (JDFLot) getCreateElement_KElement(ElementName.LOT, null, iSkip);
+		return (JDFLot) getCreateElement(ElementName.LOT, null, iSkip);
 	}
 
 	/**
@@ -1086,7 +1086,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 */
 	public JDFMISDetails getCreateMISDetails()
 	{
-		return (JDFMISDetails) getCreateElement_KElement(ElementName.MISDETAILS, null, 0);
+		return (JDFMISDetails) getCreateElement(ElementName.MISDETAILS, null, 0);
 	}
 
 	/**
@@ -1108,7 +1108,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
 	}
 
 	/**

@@ -492,7 +492,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 */
 	public JDFGlueLine getCreateGlueLine(int iSkip)
 	{
-		return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
+		return (JDFGlueLine) getCreateElement(ElementName.GLUELINE, null, iSkip);
 	}
 
 	/**

@@ -389,7 +389,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	 */
 	public JDFScreeningParams getCreateScreeningParams()
 	{
-		return (JDFScreeningParams) getCreateElement_KElement(ElementName.SCREENINGPARAMS, null, 0);
+		return (JDFScreeningParams) getCreateElement(ElementName.SCREENINGPARAMS, null, 0);
 	}
 
 	/**

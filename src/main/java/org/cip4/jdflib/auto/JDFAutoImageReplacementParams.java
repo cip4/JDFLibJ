@@ -477,7 +477,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
+		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**
@@ -529,7 +529,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 */
 	public JDFElement getCreateSearchPath(int iSkip)
 	{
-		return (JDFElement) getCreateElement_KElement(ElementName.SEARCHPATH, null, iSkip);
+		return (JDFElement) getCreateElement(ElementName.SEARCHPATH, null, iSkip);
 	}
 
 	/**

@@ -179,7 +179,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 */
 	public JDFIDPFolding getCreateIDPFolding(int iSkip)
 	{
-		return (JDFIDPFolding) getCreateElement_KElement(ElementName.IDPFOLDING, null, iSkip);
+		return (JDFIDPFolding) getCreateElement(ElementName.IDPFOLDING, null, iSkip);
 	}
 
 	/**
@@ -221,7 +221,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 */
 	public JDFIDPHoleMaking getCreateIDPHoleMaking(int iSkip)
 	{
-		return (JDFIDPHoleMaking) getCreateElement_KElement(ElementName.IDPHOLEMAKING, null, iSkip);
+		return (JDFIDPHoleMaking) getCreateElement(ElementName.IDPHOLEMAKING, null, iSkip);
 	}
 
 	/**
@@ -263,7 +263,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 */
 	public JDFIDPStitching getCreateIDPStitching(int iSkip)
 	{
-		return (JDFIDPStitching) getCreateElement_KElement(ElementName.IDPSTITCHING, null, iSkip);
+		return (JDFIDPStitching) getCreateElement(ElementName.IDPSTITCHING, null, iSkip);
 	}
 
 	/**
@@ -305,7 +305,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 */
 	public JDFIDPTrimming getCreateIDPTrimming(int iSkip)
 	{
-		return (JDFIDPTrimming) getCreateElement_KElement(ElementName.IDPTRIMMING, null, iSkip);
+		return (JDFIDPTrimming) getCreateElement(ElementName.IDPTRIMMING, null, iSkip);
 	}
 
 	/**

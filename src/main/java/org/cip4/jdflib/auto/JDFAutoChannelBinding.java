@@ -140,7 +140,7 @@ public abstract class JDFAutoChannelBinding extends JDFElement
 	 */
 	public JDFStringSpan getCreateChannelBrand()
 	{
-		return (JDFStringSpan) getCreateElement_KElement(ElementName.CHANNELBRAND, null, 0);
+		return (JDFStringSpan) getCreateElement(ElementName.CHANNELBRAND, null, 0);
 	}
 
 	/**
@@ -171,7 +171,7 @@ public abstract class JDFAutoChannelBinding extends JDFElement
 	 */
 	public JDFOptionSpan getCreateCover()
 	{
-		return (JDFOptionSpan) getCreateElement_KElement(ElementName.COVER, null, 0);
+		return (JDFOptionSpan) getCreateElement(ElementName.COVER, null, 0);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public abstract class JDFAutoChannelBinding extends JDFElement
 	 */
 	public JDFNumberSpan getCreateThickness()
 	{
-		return (JDFNumberSpan) getCreateElement_KElement(ElementName.THICKNESS, null, 0);
+		return (JDFNumberSpan) getCreateElement(ElementName.THICKNESS, null, 0);
 	}
 
 	/**

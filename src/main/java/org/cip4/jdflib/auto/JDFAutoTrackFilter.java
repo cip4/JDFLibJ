@@ -244,7 +244,7 @@ public abstract class JDFAutoTrackFilter extends JDFElement
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
 	}
 
 	/**

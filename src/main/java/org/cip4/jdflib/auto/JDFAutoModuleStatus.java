@@ -298,7 +298,7 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	 */
 	public JDFEmployee getCreateEmployee(int iSkip)
 	{
-		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+		return (JDFEmployee) getCreateElement(ElementName.EMPLOYEE, null, iSkip);
 	}
 
 	/**

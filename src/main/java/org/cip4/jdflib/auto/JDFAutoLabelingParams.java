@@ -344,7 +344,7 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
+		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**

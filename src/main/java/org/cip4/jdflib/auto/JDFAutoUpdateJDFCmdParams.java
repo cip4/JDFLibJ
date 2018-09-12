@@ -134,7 +134,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 */
 	public JDFCreateLink getCreateCreateLink(int iSkip)
 	{
-		return (JDFCreateLink) getCreateElement_KElement(ElementName.CREATELINK, null, iSkip);
+		return (JDFCreateLink) getCreateElement(ElementName.CREATELINK, null, iSkip);
 	}
 
 	/**
@@ -176,7 +176,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 */
 	public JDFCreateResource getCreateCreateResource(int iSkip)
 	{
-		return (JDFCreateResource) getCreateElement_KElement(ElementName.CREATERESOURCE, null, iSkip);
+		return (JDFCreateResource) getCreateElement(ElementName.CREATERESOURCE, null, iSkip);
 	}
 
 	/**
@@ -218,7 +218,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 */
 	public JDFMoveResource getCreateMoveResource(int iSkip)
 	{
-		return (JDFMoveResource) getCreateElement_KElement(ElementName.MOVERESOURCE, null, iSkip);
+		return (JDFMoveResource) getCreateElement(ElementName.MOVERESOURCE, null, iSkip);
 	}
 
 	/**
@@ -260,7 +260,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 */
 	public JDFRemoveLink getCreateRemoveLink(int iSkip)
 	{
-		return (JDFRemoveLink) getCreateElement_KElement(ElementName.REMOVELINK, null, iSkip);
+		return (JDFRemoveLink) getCreateElement(ElementName.REMOVELINK, null, iSkip);
 	}
 
 	/**

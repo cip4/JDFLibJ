@@ -231,7 +231,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	 */
 	public JDFCompany getCreateCompany()
 	{
-		return (JDFCompany) getCreateElement_KElement(ElementName.COMPANY, null, 0);
+		return (JDFCompany) getCreateElement(ElementName.COMPANY, null, 0);
 	}
 
 	/**
@@ -263,7 +263,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	 */
 	public JDFContact getCreateContact(int iSkip)
 	{
-		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+		return (JDFContact) getCreateElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**

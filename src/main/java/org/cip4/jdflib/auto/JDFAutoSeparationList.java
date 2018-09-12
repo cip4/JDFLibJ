@@ -128,7 +128,7 @@ public abstract class JDFAutoSeparationList extends JDFElement
 	 */
 	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
 	{
-		return (JDFSeparationSpec) getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
+		return (JDFSeparationSpec) getCreateElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
 
 	/**

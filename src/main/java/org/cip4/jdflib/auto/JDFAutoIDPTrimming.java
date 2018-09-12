@@ -128,7 +128,7 @@ public abstract class JDFAutoIDPTrimming extends JDFElement
 	 */
 	public JDFTrimmingParams getCreateTrimmingParams(int iSkip)
 	{
-		return (JDFTrimmingParams) getCreateElement_KElement(ElementName.TRIMMINGPARAMS, null, iSkip);
+		return (JDFTrimmingParams) getCreateElement(ElementName.TRIMMINGPARAMS, null, iSkip);
 	}
 
 	/**

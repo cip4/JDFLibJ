@@ -367,7 +367,7 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	 */
 	public JDFGlueLine getCreateGlueLine()
 	{
-		return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, 0);
+		return (JDFGlueLine) getCreateElement(ElementName.GLUELINE, null, 0);
 	}
 
 	/**

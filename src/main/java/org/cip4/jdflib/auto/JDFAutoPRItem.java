@@ -224,7 +224,7 @@ public abstract class JDFAutoPRItem extends JDFElement
 	 */
 	public JDFPRError getCreatePRError(int iSkip)
 	{
-		return (JDFPRError) getCreateElement_KElement(ElementName.PRERROR, null, iSkip);
+		return (JDFPRError) getCreateElement(ElementName.PRERROR, null, iSkip);
 	}
 
 	/**
@@ -266,7 +266,7 @@ public abstract class JDFAutoPRItem extends JDFElement
 	 */
 	public JDFPRGroup getCreatePRGroup(int iSkip)
 	{
-		return (JDFPRGroup) getCreateElement_KElement(ElementName.PRGROUP, null, iSkip);
+		return (JDFPRGroup) getCreateElement(ElementName.PRGROUP, null, iSkip);
 	}
 
 	/**

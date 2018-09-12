@@ -514,7 +514,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 */
 	public JDFAssembly getCreateAssembly()
 	{
-		return (JDFAssembly) getCreateElement_KElement(ElementName.ASSEMBLY, null, 0);
+		return (JDFAssembly) getCreateElement(ElementName.ASSEMBLY, null, 0);
 	}
 
 	/**
@@ -555,7 +555,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 */
 	public JDFColorPool getCreateColorPool()
 	{
-		return (JDFColorPool) getCreateElement_KElement(ElementName.COLORPOOL, null, 0);
+		return (JDFColorPool) getCreateElement(ElementName.COLORPOOL, null, 0);
 	}
 
 	/**
@@ -596,7 +596,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 */
 	public JDFContentList getCreateContentList()
 	{
-		return (JDFContentList) getCreateElement_KElement(ElementName.CONTENTLIST, null, 0);
+		return (JDFContentList) getCreateElement(ElementName.CONTENTLIST, null, 0);
 	}
 
 	/**
@@ -637,7 +637,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 */
 	public JDFImageCompressionParams getCreateImageCompressionParams()
 	{
-		return (JDFImageCompressionParams) getCreateElement_KElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
+		return (JDFImageCompressionParams) getCreateElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
 	}
 
 	/**
@@ -669,7 +669,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 */
 	public JDFPageData getCreatePageData(int iSkip)
 	{
-		return (JDFPageData) getCreateElement_KElement(ElementName.PAGEDATA, null, iSkip);
+		return (JDFPageData) getCreateElement(ElementName.PAGEDATA, null, iSkip);
 	}
 
 	/**
@@ -720,7 +720,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 */
 	public JDFScreeningParams getCreateScreeningParams()
 	{
-		return (JDFScreeningParams) getCreateElement_KElement(ElementName.SCREENINGPARAMS, null, 0);
+		return (JDFScreeningParams) getCreateElement(ElementName.SCREENINGPARAMS, null, 0);
 	}
 
 	/**
@@ -752,7 +752,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 */
 	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
 	{
-		return (JDFSeparationSpec) getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
+		return (JDFSeparationSpec) getCreateElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
 
 	/**
@@ -803,7 +803,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 */
 	public JDFElementColorParams getCreateElementColorParams()
 	{
-		return (JDFElementColorParams) getCreateElement_KElement(ElementName.ELEMENTCOLORPARAMS, null, 0);
+		return (JDFElementColorParams) getCreateElement(ElementName.ELEMENTCOLORPARAMS, null, 0);
 	}
 
 	/**

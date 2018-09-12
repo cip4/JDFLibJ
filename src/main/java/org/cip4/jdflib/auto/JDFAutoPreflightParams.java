@@ -153,7 +153,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	 */
 	public JDFActionPool getCreateActionPool(int iSkip)
 	{
-		return (JDFActionPool) getCreateElement_KElement(ElementName.ACTIONPOOL, null, iSkip);
+		return (JDFActionPool) getCreateElement(ElementName.ACTIONPOOL, null, iSkip);
 	}
 
 	/**
@@ -204,7 +204,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec()
 	{
-		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**
@@ -245,7 +245,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	 */
 	public JDFTestPool getCreateTestPool()
 	{
-		return (JDFTestPool) getCreateElement_KElement(ElementName.TESTPOOL, null, 0);
+		return (JDFTestPool) getCreateElement(ElementName.TESTPOOL, null, 0);
 	}
 
 	/**

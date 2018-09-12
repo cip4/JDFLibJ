@@ -199,7 +199,7 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	 */
 	public JDFPRGroupOccurrence getCreatePRGroupOccurrence(int iSkip)
 	{
-		return (JDFPRGroupOccurrence) getCreateElement_KElement(ElementName.PRGROUPOCCURRENCE, null, iSkip);
+		return (JDFPRGroupOccurrence) getCreateElement(ElementName.PRGROUPOCCURRENCE, null, iSkip);
 	}
 
 	/**
@@ -241,7 +241,7 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	 */
 	public JDFPROccurrence getCreatePROccurrence(int iSkip)
 	{
-		return (JDFPROccurrence) getCreateElement_KElement(ElementName.PROCCURRENCE, null, iSkip);
+		return (JDFPROccurrence) getCreateElement(ElementName.PROCCURRENCE, null, iSkip);
 	}
 
 	/**

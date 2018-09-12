@@ -138,7 +138,7 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
 	 */
 	public JDFBarcodeReproParams getCreateBarcodeReproParams()
 	{
-		return (JDFBarcodeReproParams) getCreateElement_KElement(ElementName.BARCODEREPROPARAMS, null, 0);
+		return (JDFBarcodeReproParams) getCreateElement(ElementName.BARCODEREPROPARAMS, null, 0);
 	}
 
 	/**
@@ -169,7 +169,7 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
 	 */
 	public JDFIdentificationField getCreateIdentificationField()
 	{
-		return (JDFIdentificationField) getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, 0);
+		return (JDFIdentificationField) getCreateElement(ElementName.IDENTIFICATIONFIELD, null, 0);
 	}
 
 	/**

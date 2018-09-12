@@ -240,7 +240,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	 */
 	public JDFGlueApplication getCreateGlueApplication(int iSkip)
 	{
-		return (JDFGlueApplication) getCreateElement_KElement(ElementName.GLUEAPPLICATION, null, iSkip);
+		return (JDFGlueApplication) getCreateElement(ElementName.GLUEAPPLICATION, null, iSkip);
 	}
 
 	/**
@@ -292,7 +292,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	 */
 	public JDFGlueLine getCreateGlueLine(int iSkip)
 	{
-		return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
+		return (JDFGlueLine) getCreateElement(ElementName.GLUELINE, null, iSkip);
 	}
 
 	/**

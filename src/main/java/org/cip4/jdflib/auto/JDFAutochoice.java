@@ -131,7 +131,7 @@ public abstract class JDFAutochoice extends JDFElement
 	 */
 	public JDFwhen getCreatewhen(int iSkip)
 	{
-		return (JDFwhen) getCreateElement_KElement(ElementName.WHEN, null, iSkip);
+		return (JDFwhen) getCreateElement(ElementName.WHEN, null, iSkip);
 	}
 
 	/**
@@ -182,7 +182,7 @@ public abstract class JDFAutochoice extends JDFElement
 	 */
 	public JDFotherwise getCreateotherwise()
 	{
-		return (JDFotherwise) getCreateElement_KElement(ElementName.OTHERWISE, null, 0);
+		return (JDFotherwise) getCreateElement(ElementName.OTHERWISE, null, 0);
 	}
 
 	/**

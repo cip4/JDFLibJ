@@ -178,7 +178,7 @@ public abstract class JDFAutoNewJDFCmdParams extends JDFElement
 	 */
 	public JDFIDInfo getCreateIDInfo()
 	{
-		return (JDFIDInfo) getCreateElement_KElement(ElementName.IDINFO, null, 0);
+		return (JDFIDInfo) getCreateElement(ElementName.IDINFO, null, 0);
 	}
 
 	/**

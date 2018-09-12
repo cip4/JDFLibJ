@@ -386,7 +386,7 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 */
 	public JDFComponent getCreateComponent(int iSkip)
 	{
-		return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, iSkip);
+		return (JDFComponent) getCreateElement(ElementName.COMPONENT, null, iSkip);
 	}
 
 	/**
@@ -438,7 +438,7 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 */
 	public JDFExposedMedia getCreateExposedMedia(int iSkip)
 	{
-		return (JDFExposedMedia) getCreateElement_KElement(ElementName.EXPOSEDMEDIA, null, iSkip);
+		return (JDFExposedMedia) getCreateElement(ElementName.EXPOSEDMEDIA, null, iSkip);
 	}
 
 	/**
@@ -490,7 +490,7 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 */
 	public JDFInk getCreateInk(int iSkip)
 	{
-		return (JDFInk) getCreateElement_KElement(ElementName.INK, null, iSkip);
+		return (JDFInk) getCreateElement(ElementName.INK, null, iSkip);
 	}
 
 	/**
@@ -542,7 +542,7 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 */
 	public JDFMedia getCreateMedia(int iSkip)
 	{
-		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, iSkip);
+		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, iSkip);
 	}
 
 	/**
@@ -594,7 +594,7 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 */
 	public JDFPallet getCreatePallet(int iSkip)
 	{
-		return (JDFPallet) getCreateElement_KElement(ElementName.PALLET, null, iSkip);
+		return (JDFPallet) getCreateElement(ElementName.PALLET, null, iSkip);
 	}
 
 	/**
@@ -646,7 +646,7 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 */
 	public JDFRegisterRibbon getCreateRegisterRibbon(int iSkip)
 	{
-		return (JDFRegisterRibbon) getCreateElement_KElement(ElementName.REGISTERRIBBON, null, iSkip);
+		return (JDFRegisterRibbon) getCreateElement(ElementName.REGISTERRIBBON, null, iSkip);
 	}
 
 	/**
@@ -698,7 +698,7 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 */
 	public JDFStrap getCreateStrap(int iSkip)
 	{
-		return (JDFStrap) getCreateElement_KElement(ElementName.STRAP, null, iSkip);
+		return (JDFStrap) getCreateElement(ElementName.STRAP, null, iSkip);
 	}
 
 	/**
@@ -750,7 +750,7 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 */
 	public JDFBundle getCreateBundle(int iSkip)
 	{
-		return (JDFBundle) getCreateElement_KElement(ElementName.BUNDLE, null, iSkip);
+		return (JDFBundle) getCreateElement(ElementName.BUNDLE, null, iSkip);
 	}
 
 	/**
@@ -802,7 +802,7 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 */
 	public JDFDigitalMedia getCreateDigitalMedia(int iSkip)
 	{
-		return (JDFDigitalMedia) getCreateElement_KElement(ElementName.DIGITALMEDIA, null, iSkip);
+		return (JDFDigitalMedia) getCreateElement(ElementName.DIGITALMEDIA, null, iSkip);
 	}
 
 	/**
@@ -854,7 +854,7 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 */
 	public JDFRollStand getCreateRollStand(int iSkip)
 	{
-		return (JDFRollStand) getCreateElement_KElement(ElementName.ROLLSTAND, null, iSkip);
+		return (JDFRollStand) getCreateElement(ElementName.ROLLSTAND, null, iSkip);
 	}
 
 	/**
@@ -906,7 +906,7 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 */
 	public JDFTool getCreateTool(int iSkip)
 	{
-		return (JDFTool) getCreateElement_KElement(ElementName.TOOL, null, iSkip);
+		return (JDFTool) getCreateElement(ElementName.TOOL, null, iSkip);
 	}
 
 	/**

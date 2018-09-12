@@ -128,7 +128,7 @@ public abstract class JDFAutoBindList extends JDFElement
 	 */
 	public JDFBindItem getCreateBindItem(int iSkip)
 	{
-		return (JDFBindItem) getCreateElement_KElement(ElementName.BINDITEM, null, iSkip);
+		return (JDFBindItem) getCreateElement(ElementName.BINDITEM, null, iSkip);
 	}
 
 	/**

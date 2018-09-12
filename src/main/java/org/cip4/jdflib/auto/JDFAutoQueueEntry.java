@@ -628,7 +628,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 */
 	public JDFJobPhase getCreateJobPhase(int iSkip)
 	{
-		return (JDFJobPhase) getCreateElement_KElement(ElementName.JOBPHASE, null, iSkip);
+		return (JDFJobPhase) getCreateElement(ElementName.JOBPHASE, null, iSkip);
 	}
 
 	/**
@@ -670,7 +670,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
 	}
 
 	/**

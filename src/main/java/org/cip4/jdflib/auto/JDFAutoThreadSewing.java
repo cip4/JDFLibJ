@@ -136,7 +136,7 @@ public abstract class JDFAutoThreadSewing extends JDFElement
 	 */
 	public JDFOptionSpan getCreateSealing()
 	{
-		return (JDFOptionSpan) getCreateElement_KElement(ElementName.SEALING, null, 0);
+		return (JDFOptionSpan) getCreateElement(ElementName.SEALING, null, 0);
 	}
 
 	/**

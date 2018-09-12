@@ -440,7 +440,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 */
 	public JDFGlueApplication getCreateGlueApplication(int iSkip)
 	{
-		return (JDFGlueApplication) getCreateElement_KElement(ElementName.GLUEAPPLICATION, null, iSkip);
+		return (JDFGlueApplication) getCreateElement(ElementName.GLUEAPPLICATION, null, iSkip);
 	}
 
 	/**

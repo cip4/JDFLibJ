@@ -140,7 +140,7 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 	 */
 	public JDFSpanGlueType getCreateGlueType()
 	{
-		return (JDFSpanGlueType) getCreateElement_KElement(ElementName.GLUETYPE, null, 0);
+		return (JDFSpanGlueType) getCreateElement(ElementName.GLUETYPE, null, 0);
 	}
 
 	/**
@@ -171,7 +171,7 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 	 */
 	public JDFInsertList getCreateInsertList()
 	{
-		return (JDFInsertList) getCreateElement_KElement(ElementName.INSERTLIST, null, 0);
+		return (JDFInsertList) getCreateElement(ElementName.INSERTLIST, null, 0);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 	 */
 	public JDFSpanMethod getCreateMethod()
 	{
-		return (JDFSpanMethod) getCreateElement_KElement(ElementName.METHOD, null, 0);
+		return (JDFSpanMethod) getCreateElement(ElementName.METHOD, null, 0);
 	}
 
 	/**

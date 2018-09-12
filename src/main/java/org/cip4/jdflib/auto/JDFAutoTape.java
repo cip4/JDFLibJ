@@ -136,7 +136,7 @@ public abstract class JDFAutoTape extends JDFElement
 	 */
 	public JDFSpanNamedColor getCreateTapeColor()
 	{
-		return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.TAPECOLOR, null, 0);
+		return (JDFSpanNamedColor) getCreateElement(ElementName.TAPECOLOR, null, 0);
 	}
 
 	/**

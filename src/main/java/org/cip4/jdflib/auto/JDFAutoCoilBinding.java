@@ -140,7 +140,7 @@ public abstract class JDFAutoCoilBinding extends JDFElement
 	 */
 	public JDFStringSpan getCreateCoilBrand()
 	{
-		return (JDFStringSpan) getCreateElement_KElement(ElementName.COILBRAND, null, 0);
+		return (JDFStringSpan) getCreateElement(ElementName.COILBRAND, null, 0);
 	}
 
 	/**
@@ -171,7 +171,7 @@ public abstract class JDFAutoCoilBinding extends JDFElement
 	 */
 	public JDFSpanCoilMaterial getCreateCoilMaterial()
 	{
-		return (JDFSpanCoilMaterial) getCreateElement_KElement(ElementName.COILMATERIAL, null, 0);
+		return (JDFSpanCoilMaterial) getCreateElement(ElementName.COILMATERIAL, null, 0);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public abstract class JDFAutoCoilBinding extends JDFElement
 	 */
 	public JDFHoleList getCreateHoleList()
 	{
-		return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
+		return (JDFHoleList) getCreateElement(ElementName.HOLELIST, null, 0);
 	}
 
 	/**

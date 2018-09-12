@@ -128,7 +128,7 @@ public abstract class JDFAutoInsertList extends JDFElement
 	 */
 	public JDFInsert getCreateInsert(int iSkip)
 	{
-		return (JDFInsert) getCreateElement_KElement(ElementName.INSERT, null, iSkip);
+		return (JDFInsert) getCreateElement(ElementName.INSERT, null, iSkip);
 	}
 
 	/**

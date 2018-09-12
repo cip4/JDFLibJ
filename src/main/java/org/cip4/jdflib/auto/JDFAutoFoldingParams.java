@@ -396,7 +396,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 */
 	public JDFFold getCreateFold(int iSkip)
 	{
-		return (JDFFold) getCreateElement_KElement(ElementName.FOLD, null, iSkip);
+		return (JDFFold) getCreateElement(ElementName.FOLD, null, iSkip);
 	}
 
 	/**

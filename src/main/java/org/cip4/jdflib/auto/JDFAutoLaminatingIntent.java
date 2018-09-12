@@ -144,7 +144,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 	 */
 	public JDFOptionSpan getCreateLaminated()
 	{
-		return (JDFOptionSpan) getCreateElement_KElement(ElementName.LAMINATED, null, 0);
+		return (JDFOptionSpan) getCreateElement(ElementName.LAMINATED, null, 0);
 	}
 
 	/**
@@ -175,7 +175,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 	 */
 	public JDFSpanTemperature getCreateTemperature()
 	{
-		return (JDFSpanTemperature) getCreateElement_KElement(ElementName.TEMPERATURE, null, 0);
+		return (JDFSpanTemperature) getCreateElement(ElementName.TEMPERATURE, null, 0);
 	}
 
 	/**
@@ -206,7 +206,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 	 */
 	public JDFSpanSurface getCreateSurface()
 	{
-		return (JDFSpanSurface) getCreateElement_KElement(ElementName.SURFACE, null, 0);
+		return (JDFSpanSurface) getCreateElement(ElementName.SURFACE, null, 0);
 	}
 
 	/**
@@ -237,7 +237,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreateTexture()
 	{
-		return (JDFNameSpan) getCreateElement_KElement(ElementName.TEXTURE, null, 0);
+		return (JDFNameSpan) getCreateElement(ElementName.TEXTURE, null, 0);
 	}
 
 	/**
@@ -268,7 +268,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreateThickness()
 	{
-		return (JDFNumberSpan) getCreateElement_KElement(ElementName.THICKNESS, null, 0);
+		return (JDFNumberSpan) getCreateElement(ElementName.THICKNESS, null, 0);
 	}
 
 	/**

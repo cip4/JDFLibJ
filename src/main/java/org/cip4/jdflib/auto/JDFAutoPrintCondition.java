@@ -256,7 +256,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	 */
 	public JDFColorMeasurementConditions getCreateColorMeasurementConditions()
 	{
-		return (JDFColorMeasurementConditions) getCreateElement_KElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
+		return (JDFColorMeasurementConditions) getCreateElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
 	}
 
 	/**
@@ -297,7 +297,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	 */
 	public JDFDevice getCreateDevice()
 	{
-		return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, 0);
+		return (JDFDevice) getCreateElement(ElementName.DEVICE, null, 0);
 	}
 
 	/**
@@ -329,7 +329,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
+		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**

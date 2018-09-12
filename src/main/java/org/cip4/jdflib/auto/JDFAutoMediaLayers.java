@@ -130,7 +130,7 @@ public abstract class JDFAutoMediaLayers extends JDFElement
 	 */
 	public JDFGlueLine getCreateGlueLine(int iSkip)
 	{
-		return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
+		return (JDFGlueLine) getCreateElement(ElementName.GLUELINE, null, iSkip);
 	}
 
 	/**
@@ -172,7 +172,7 @@ public abstract class JDFAutoMediaLayers extends JDFElement
 	 */
 	public JDFMedia getCreateMedia(int iSkip)
 	{
-		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, iSkip);
+		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, iSkip);
 	}
 
 	/**

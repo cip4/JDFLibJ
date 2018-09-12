@@ -489,7 +489,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	 */
 	public JDFDisposition getCreateDisposition()
 	{
-		return (JDFDisposition) getCreateElement_KElement(ElementName.DISPOSITION, null, 0);
+		return (JDFDisposition) getCreateElement(ElementName.DISPOSITION, null, 0);
 	}
 
 	/**

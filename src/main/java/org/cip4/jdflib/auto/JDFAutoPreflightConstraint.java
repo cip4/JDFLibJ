@@ -219,7 +219,7 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
 	 */
 	public JDFElement getCreateConstraintValue(int iSkip)
 	{
-		return (JDFElement) getCreateElement_KElement(ElementName.CONSTRAINTVALUE, null, iSkip);
+		return (JDFElement) getCreateElement(ElementName.CONSTRAINTVALUE, null, iSkip);
 	}
 
 	/**

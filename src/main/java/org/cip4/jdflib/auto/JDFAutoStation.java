@@ -223,7 +223,7 @@ public abstract class JDFAutoStation extends JDFElement
 	 */
 	public JDFShapeDef getCreateShapeDef(int iSkip)
 	{
-		return (JDFShapeDef) getCreateElement_KElement(ElementName.SHAPEDEF, null, iSkip);
+		return (JDFShapeDef) getCreateElement(ElementName.SHAPEDEF, null, iSkip);
 	}
 
 	/**

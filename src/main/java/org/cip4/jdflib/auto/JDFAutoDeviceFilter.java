@@ -272,7 +272,7 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	 */
 	public JDFDevice getCreateDevice(int iSkip)
 	{
-		return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
+		return (JDFDevice) getCreateElement(ElementName.DEVICE, null, iSkip);
 	}
 
 	/**

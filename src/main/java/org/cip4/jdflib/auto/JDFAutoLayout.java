@@ -933,7 +933,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public JDFContentObject getCreateContentObject(int iSkip)
 	{
-		return (JDFContentObject) getCreateElement_KElement(ElementName.CONTENTOBJECT, null, iSkip);
+		return (JDFContentObject) getCreateElement(ElementName.CONTENTOBJECT, null, iSkip);
 	}
 
 	/**
@@ -975,7 +975,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public JDFInsertSheet getCreateInsertSheet(int iSkip)
 	{
-		return (JDFInsertSheet) getCreateElement_KElement(ElementName.INSERTSHEET, null, iSkip);
+		return (JDFInsertSheet) getCreateElement(ElementName.INSERTSHEET, null, iSkip);
 	}
 
 	/**
@@ -1036,7 +1036,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public JDFLayerList getCreateLayerList()
 	{
-		return (JDFLayerList) getCreateElement_KElement(ElementName.LAYERLIST, null, 0);
+		return (JDFLayerList) getCreateElement(ElementName.LAYERLIST, null, 0);
 	}
 
 	/**
@@ -1067,7 +1067,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public JDFLogicalStackParams getCreateLogicalStackParams()
 	{
-		return (JDFLogicalStackParams) getCreateElement_KElement(ElementName.LOGICALSTACKPARAMS, null, 0);
+		return (JDFLogicalStackParams) getCreateElement(ElementName.LOGICALSTACKPARAMS, null, 0);
 	}
 
 	/**
@@ -1089,7 +1089,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public JDFMarkObject getCreateMarkObject(int iSkip)
 	{
-		return (JDFMarkObject) getCreateElement_KElement(ElementName.MARKOBJECT, null, iSkip);
+		return (JDFMarkObject) getCreateElement(ElementName.MARKOBJECT, null, iSkip);
 	}
 
 	/**
@@ -1131,7 +1131,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public JDFMedia getCreateMedia(int iSkip)
 	{
-		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, iSkip);
+		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, iSkip);
 	}
 
 	/**
@@ -1192,7 +1192,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public JDFMediaSource getCreateMediaSource()
 	{
-		return (JDFMediaSource) getCreateElement_KElement(ElementName.MEDIASOURCE, null, 0);
+		return (JDFMediaSource) getCreateElement(ElementName.MEDIASOURCE, null, 0);
 	}
 
 	/**
@@ -1224,7 +1224,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public JDFPageCondition getCreatePageCondition(int iSkip)
 	{
-		return (JDFPageCondition) getCreateElement_KElement(ElementName.PAGECONDITION, null, iSkip);
+		return (JDFPageCondition) getCreateElement(ElementName.PAGECONDITION, null, iSkip);
 	}
 
 	/**
@@ -1266,7 +1266,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public JDFSheetCondition getCreateSheetCondition(int iSkip)
 	{
-		return (JDFSheetCondition) getCreateElement_KElement(ElementName.SHEETCONDITION, null, iSkip);
+		return (JDFSheetCondition) getCreateElement(ElementName.SHEETCONDITION, null, iSkip);
 	}
 
 	/**
@@ -1308,7 +1308,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public JDFSignature getCreateSignature(int iSkip)
 	{
-		return (JDFSignature) getCreateElement_KElement(ElementName.SIGNATURE, null, iSkip);
+		return (JDFSignature) getCreateElement(ElementName.SIGNATURE, null, iSkip);
 	}
 
 	/**
@@ -1359,7 +1359,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public JDFTransferCurvePool getCreateTransferCurvePool()
 	{
-		return (JDFTransferCurvePool) getCreateElement_KElement(ElementName.TRANSFERCURVEPOOL, null, 0);
+		return (JDFTransferCurvePool) getCreateElement(ElementName.TRANSFERCURVEPOOL, null, 0);
 	}
 
 	/**

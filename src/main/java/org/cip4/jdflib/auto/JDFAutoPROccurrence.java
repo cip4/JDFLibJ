@@ -170,7 +170,7 @@ public abstract class JDFAutoPROccurrence extends JDFElement
 	 */
 	public JDFPRGroup getCreatePRGroup(int iSkip)
 	{
-		return (JDFPRGroup) getCreateElement_KElement(ElementName.PRGROUP, null, iSkip);
+		return (JDFPRGroup) getCreateElement(ElementName.PRGROUP, null, iSkip);
 	}
 
 	/**

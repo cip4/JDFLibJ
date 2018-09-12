@@ -259,7 +259,7 @@ public abstract class JDFAutoContact extends JDFResource
 	 */
 	public JDFAddress getCreateAddress()
 	{
-		return (JDFAddress) getCreateElement_KElement(ElementName.ADDRESS, null, 0);
+		return (JDFAddress) getCreateElement(ElementName.ADDRESS, null, 0);
 	}
 
 	/**
@@ -291,7 +291,7 @@ public abstract class JDFAutoContact extends JDFResource
 	 */
 	public JDFComChannel getCreateComChannel(int iSkip)
 	{
-		return (JDFComChannel) getCreateElement_KElement(ElementName.COMCHANNEL, null, iSkip);
+		return (JDFComChannel) getCreateElement(ElementName.COMCHANNEL, null, iSkip);
 	}
 
 	/**
@@ -352,7 +352,7 @@ public abstract class JDFAutoContact extends JDFResource
 	 */
 	public JDFCompany getCreateCompany()
 	{
-		return (JDFCompany) getCreateElement_KElement(ElementName.COMPANY, null, 0);
+		return (JDFCompany) getCreateElement(ElementName.COMPANY, null, 0);
 	}
 
 	/**
@@ -393,7 +393,7 @@ public abstract class JDFAutoContact extends JDFResource
 	 */
 	public JDFPerson getCreatePerson()
 	{
-		return (JDFPerson) getCreateElement_KElement(ElementName.PERSON, null, 0);
+		return (JDFPerson) getCreateElement(ElementName.PERSON, null, 0);
 	}
 
 	/**

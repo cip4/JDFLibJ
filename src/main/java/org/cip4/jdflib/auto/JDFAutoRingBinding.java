@@ -148,7 +148,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 	 */
 	public JDFStringSpan getCreateBinderBrand()
 	{
-		return (JDFStringSpan) getCreateElement_KElement(ElementName.BINDERBRAND, null, 0);
+		return (JDFStringSpan) getCreateElement(ElementName.BINDERBRAND, null, 0);
 	}
 
 	/**
@@ -179,7 +179,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 	 */
 	public JDFNameSpan getCreateBinderMaterial()
 	{
-		return (JDFNameSpan) getCreateElement_KElement(ElementName.BINDERMATERIAL, null, 0);
+		return (JDFNameSpan) getCreateElement(ElementName.BINDERMATERIAL, null, 0);
 	}
 
 	/**
@@ -210,7 +210,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 	 */
 	public JDFSpanHoleType getCreateHoleType()
 	{
-		return (JDFSpanHoleType) getCreateElement_KElement(ElementName.HOLETYPE, null, 0);
+		return (JDFSpanHoleType) getCreateElement(ElementName.HOLETYPE, null, 0);
 	}
 
 	/**
@@ -241,7 +241,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 	 */
 	public JDFNumberSpan getCreateRingDiameter()
 	{
-		return (JDFNumberSpan) getCreateElement_KElement(ElementName.RINGDIAMETER, null, 0);
+		return (JDFNumberSpan) getCreateElement(ElementName.RINGDIAMETER, null, 0);
 	}
 
 	/**
@@ -272,7 +272,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 	 */
 	public JDFOptionSpan getCreateRingMechanic()
 	{
-		return (JDFOptionSpan) getCreateElement_KElement(ElementName.RINGMECHANIC, null, 0);
+		return (JDFOptionSpan) getCreateElement(ElementName.RINGMECHANIC, null, 0);
 	}
 
 	/**
@@ -303,7 +303,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 	 */
 	public JDFNameSpan getCreateRingShape()
 	{
-		return (JDFNameSpan) getCreateElement_KElement(ElementName.RINGSHAPE, null, 0);
+		return (JDFNameSpan) getCreateElement(ElementName.RINGSHAPE, null, 0);
 	}
 
 	/**
@@ -334,7 +334,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 	 */
 	public JDFNameSpan getCreateRingSystem()
 	{
-		return (JDFNameSpan) getCreateElement_KElement(ElementName.RINGSYSTEM, null, 0);
+		return (JDFNameSpan) getCreateElement(ElementName.RINGSYSTEM, null, 0);
 	}
 
 	/**
@@ -365,7 +365,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 	 */
 	public JDFOptionSpan getCreateRivetsExposed()
 	{
-		return (JDFOptionSpan) getCreateElement_KElement(ElementName.RIVETSEXPOSED, null, 0);
+		return (JDFOptionSpan) getCreateElement(ElementName.RIVETSEXPOSED, null, 0);
 	}
 
 	/**
@@ -396,7 +396,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 	 */
 	public JDFNameSpan getCreateViewBinder()
 	{
-		return (JDFNameSpan) getCreateElement_KElement(ElementName.VIEWBINDER, null, 0);
+		return (JDFNameSpan) getCreateElement(ElementName.VIEWBINDER, null, 0);
 	}
 
 	/**

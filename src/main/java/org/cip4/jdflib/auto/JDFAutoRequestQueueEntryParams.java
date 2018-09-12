@@ -340,7 +340,7 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
 	}
 
 	/**
@@ -391,7 +391,7 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 */
 	public JDFQueue getCreateQueue()
 	{
-		return (JDFQueue) getCreateElement_KElement(ElementName.QUEUE, null, 0);
+		return (JDFQueue) getCreateElement(ElementName.QUEUE, null, 0);
 	}
 
 	/**

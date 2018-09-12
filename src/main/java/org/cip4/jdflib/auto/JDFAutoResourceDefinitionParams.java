@@ -306,7 +306,7 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	 */
 	public JDFResourceParam getCreateResourceParam(int iSkip)
 	{
-		return (JDFResourceParam) getCreateElement_KElement(ElementName.RESOURCEPARAM, null, iSkip);
+		return (JDFResourceParam) getCreateElement(ElementName.RESOURCEPARAM, null, iSkip);
 	}
 
 	/**

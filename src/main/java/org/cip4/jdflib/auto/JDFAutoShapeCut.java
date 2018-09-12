@@ -264,7 +264,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	 */
 	public JDFStringSpan getCreateMaterial()
 	{
-		return (JDFStringSpan) getCreateElement_KElement(ElementName.MATERIAL, null, 0);
+		return (JDFStringSpan) getCreateElement(ElementName.MATERIAL, null, 0);
 	}
 
 	/**
@@ -295,7 +295,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	 */
 	public JDFSpanCutType getCreateCutType()
 	{
-		return (JDFSpanCutType) getCreateElement_KElement(ElementName.CUTTYPE, null, 0);
+		return (JDFSpanCutType) getCreateElement(ElementName.CUTTYPE, null, 0);
 	}
 
 	/**
@@ -326,7 +326,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	 */
 	public JDFNumberSpan getCreateShapeDepth()
 	{
-		return (JDFNumberSpan) getCreateElement_KElement(ElementName.SHAPEDEPTH, null, 0);
+		return (JDFNumberSpan) getCreateElement(ElementName.SHAPEDEPTH, null, 0);
 	}
 
 	/**
@@ -357,7 +357,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	 */
 	public JDFSpanShapeType getCreateShapeType()
 	{
-		return (JDFSpanShapeType) getCreateElement_KElement(ElementName.SHAPETYPE, null, 0);
+		return (JDFSpanShapeType) getCreateElement(ElementName.SHAPETYPE, null, 0);
 	}
 
 	/**
@@ -388,7 +388,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	 */
 	public JDFNumberSpan getCreateTeethPerDimension()
 	{
-		return (JDFNumberSpan) getCreateElement_KElement(ElementName.TEETHPERDIMENSION, null, 0);
+		return (JDFNumberSpan) getCreateElement(ElementName.TEETHPERDIMENSION, null, 0);
 	}
 
 	/**

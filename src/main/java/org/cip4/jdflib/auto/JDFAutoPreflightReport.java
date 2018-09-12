@@ -323,7 +323,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec()
 	{
-		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**
@@ -364,7 +364,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 */
 	public JDFPreflightParams getCreatePreflightParams()
 	{
-		return (JDFPreflightParams) getCreateElement_KElement(ElementName.PREFLIGHTPARAMS, null, 0);
+		return (JDFPreflightParams) getCreateElement(ElementName.PREFLIGHTPARAMS, null, 0);
 	}
 
 	/**
@@ -405,7 +405,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 */
 	public JDFPreflightReportRulePool getCreatePreflightReportRulePool()
 	{
-		return (JDFPreflightReportRulePool) getCreateElement_KElement(ElementName.PREFLIGHTREPORTRULEPOOL, null, 0);
+		return (JDFPreflightReportRulePool) getCreateElement(ElementName.PREFLIGHTREPORTRULEPOOL, null, 0);
 	}
 
 	/**
@@ -446,7 +446,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 */
 	public JDFRunList getCreateRunList()
 	{
-		return (JDFRunList) getCreateElement_KElement(ElementName.RUNLIST, null, 0);
+		return (JDFRunList) getCreateElement(ElementName.RUNLIST, null, 0);
 	}
 
 	/**
@@ -478,7 +478,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 */
 	public JDFPRItem getCreatePRItem(int iSkip)
 	{
-		return (JDFPRItem) getCreateElement_KElement(ElementName.PRITEM, null, iSkip);
+		return (JDFPRItem) getCreateElement(ElementName.PRITEM, null, iSkip);
 	}
 
 	/**

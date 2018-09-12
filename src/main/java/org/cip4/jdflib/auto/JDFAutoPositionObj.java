@@ -628,7 +628,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 */
 	public JDFRefAnchor getCreateRefAnchor()
 	{
-		return (JDFRefAnchor) getCreateElement_KElement(ElementName.REFANCHOR, null, 0);
+		return (JDFRefAnchor) getCreateElement(ElementName.REFANCHOR, null, 0);
 	}
 
 	/**

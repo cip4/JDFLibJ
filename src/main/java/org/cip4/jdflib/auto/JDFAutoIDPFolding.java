@@ -128,7 +128,7 @@ public abstract class JDFAutoIDPFolding extends JDFElement
 	 */
 	public JDFFoldingParams getCreateFoldingParams(int iSkip)
 	{
-		return (JDFFoldingParams) getCreateElement_KElement(ElementName.FOLDINGPARAMS, null, iSkip);
+		return (JDFFoldingParams) getCreateElement(ElementName.FOLDINGPARAMS, null, iSkip);
 	}
 
 	/**

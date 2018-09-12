@@ -193,7 +193,7 @@ public abstract class JDFAutoCompany extends JDFResource
 	 */
 	public JDFContact getCreateContact(int iSkip)
 	{
-		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+		return (JDFContact) getCreateElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**
@@ -246,7 +246,7 @@ public abstract class JDFAutoCompany extends JDFResource
 	 */
 	public JDFElement getCreateOrganizationalUnit(int iSkip)
 	{
-		return (JDFElement) getCreateElement_KElement(ElementName.ORGANIZATIONALUNIT, null, iSkip);
+		return (JDFElement) getCreateElement(ElementName.ORGANIZATIONALUNIT, null, iSkip);
 	}
 
 	/**

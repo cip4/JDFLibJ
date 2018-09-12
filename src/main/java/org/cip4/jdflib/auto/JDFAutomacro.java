@@ -177,7 +177,7 @@ public abstract class JDFAutomacro extends JDFElement
 	 */
 	public JDFchoice getCreatechoice(int iSkip)
 	{
-		return (JDFchoice) getCreateElement_KElement(ElementName.CHOICE, null, iSkip);
+		return (JDFchoice) getCreateElement(ElementName.CHOICE, null, iSkip);
 	}
 
 	/**
@@ -219,7 +219,7 @@ public abstract class JDFAutomacro extends JDFElement
 	 */
 	public JDFset getCreateset(int iSkip)
 	{
-		return (JDFset) getCreateElement_KElement(ElementName.SET, null, iSkip);
+		return (JDFset) getCreateElement(ElementName.SET, null, iSkip);
 	}
 
 	/**
@@ -261,7 +261,7 @@ public abstract class JDFAutomacro extends JDFElement
 	 */
 	public JDFcall getCreatecall(int iSkip)
 	{
-		return (JDFcall) getCreateElement_KElement(ElementName.CALL, null, iSkip);
+		return (JDFcall) getCreateElement(ElementName.CALL, null, iSkip);
 	}
 
 	/**

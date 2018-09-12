@@ -839,7 +839,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 */
 	public JDFCIELABMeasuringField getCreateCIELABMeasuringField(int iSkip)
 	{
-		return (JDFCIELABMeasuringField) getCreateElement_KElement(ElementName.CIELABMEASURINGFIELD, null, iSkip);
+		return (JDFCIELABMeasuringField) getCreateElement(ElementName.CIELABMEASURINGFIELD, null, iSkip);
 	}
 
 	/**
@@ -891,7 +891,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 */
 	public JDFColorControlStrip getCreateColorControlStrip(int iSkip)
 	{
-		return (JDFColorControlStrip) getCreateElement_KElement(ElementName.COLORCONTROLSTRIP, null, iSkip);
+		return (JDFColorControlStrip) getCreateElement(ElementName.COLORCONTROLSTRIP, null, iSkip);
 	}
 
 	/**
@@ -943,7 +943,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 */
 	public JDFCutMark getCreateCutMark(int iSkip)
 	{
-		return (JDFCutMark) getCreateElement_KElement(ElementName.CUTMARK, null, iSkip);
+		return (JDFCutMark) getCreateElement(ElementName.CUTMARK, null, iSkip);
 	}
 
 	/**
@@ -995,7 +995,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 */
 	public JDFDensityMeasuringField getCreateDensityMeasuringField(int iSkip)
 	{
-		return (JDFDensityMeasuringField) getCreateElement_KElement(ElementName.DENSITYMEASURINGFIELD, null, iSkip);
+		return (JDFDensityMeasuringField) getCreateElement(ElementName.DENSITYMEASURINGFIELD, null, iSkip);
 	}
 
 	/**
@@ -1056,7 +1056,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 */
 	public JDFDeviceMark getCreateDeviceMark()
 	{
-		return (JDFDeviceMark) getCreateElement_KElement(ElementName.DEVICEMARK, null, 0);
+		return (JDFDeviceMark) getCreateElement(ElementName.DEVICEMARK, null, 0);
 	}
 
 	/**
@@ -1088,7 +1088,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 */
 	public JDFDynamicField getCreateDynamicField(int iSkip)
 	{
-		return (JDFDynamicField) getCreateElement_KElement(ElementName.DYNAMICFIELD, null, iSkip);
+		return (JDFDynamicField) getCreateElement(ElementName.DYNAMICFIELD, null, iSkip);
 	}
 
 	/**
@@ -1130,7 +1130,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 */
 	public JDFFillMark getCreateFillMark(int iSkip)
 	{
-		return (JDFFillMark) getCreateElement_KElement(ElementName.FILLMARK, null, iSkip);
+		return (JDFFillMark) getCreateElement(ElementName.FILLMARK, null, iSkip);
 	}
 
 	/**
@@ -1172,7 +1172,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 */
 	public JDFIdentificationField getCreateIdentificationField(int iSkip)
 	{
-		return (JDFIdentificationField) getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+		return (JDFIdentificationField) getCreateElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
 
 	/**
@@ -1233,7 +1233,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 */
 	public JDFJobField getCreateJobField()
 	{
-		return (JDFJobField) getCreateElement_KElement(ElementName.JOBFIELD, null, 0);
+		return (JDFJobField) getCreateElement(ElementName.JOBFIELD, null, 0);
 	}
 
 	/**
@@ -1274,7 +1274,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 */
 	public JDFLayoutElement getCreateLayoutElement()
 	{
-		return (JDFLayoutElement) getCreateElement_KElement(ElementName.LAYOUTELEMENT, null, 0);
+		return (JDFLayoutElement) getCreateElement(ElementName.LAYOUTELEMENT, null, 0);
 	}
 
 	/**
@@ -1306,7 +1306,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 */
 	public JDFMarkActivation getCreateMarkActivation(int iSkip)
 	{
-		return (JDFMarkActivation) getCreateElement_KElement(ElementName.MARKACTIVATION, null, iSkip);
+		return (JDFMarkActivation) getCreateElement(ElementName.MARKACTIVATION, null, iSkip);
 	}
 
 	/**
@@ -1357,7 +1357,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 */
 	public JDFRefAnchor getCreateRefAnchor()
 	{
-		return (JDFRefAnchor) getCreateElement_KElement(ElementName.REFANCHOR, null, 0);
+		return (JDFRefAnchor) getCreateElement(ElementName.REFANCHOR, null, 0);
 	}
 
 	/**
@@ -1379,7 +1379,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 */
 	public JDFRegisterMark getCreateRegisterMark(int iSkip)
 	{
-		return (JDFRegisterMark) getCreateElement_KElement(ElementName.REGISTERMARK, null, iSkip);
+		return (JDFRegisterMark) getCreateElement(ElementName.REGISTERMARK, null, iSkip);
 	}
 
 	/**
@@ -1431,7 +1431,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 */
 	public JDFScavengerArea getCreateScavengerArea(int iSkip)
 	{
-		return (JDFScavengerArea) getCreateElement_KElement(ElementName.SCAVENGERAREA, null, iSkip);
+		return (JDFScavengerArea) getCreateElement(ElementName.SCAVENGERAREA, null, iSkip);
 	}
 
 	/**

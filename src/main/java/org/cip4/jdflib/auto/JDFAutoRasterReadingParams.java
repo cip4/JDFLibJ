@@ -489,7 +489,7 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 	 */
 	public JDFFitPolicy getCreateFitPolicy()
 	{
-		return (JDFFitPolicy) getCreateElement_KElement(ElementName.FITPOLICY, null, 0);
+		return (JDFFitPolicy) getCreateElement(ElementName.FITPOLICY, null, 0);
 	}
 
 	/**
@@ -521,7 +521,7 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 	 */
 	public JDFMedia getCreateMedia(int iSkip)
 	{
-		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, iSkip);
+		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, iSkip);
 	}
 
 	/**

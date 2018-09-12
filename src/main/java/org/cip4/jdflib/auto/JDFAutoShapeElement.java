@@ -544,7 +544,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 */
 	public JDFShapeElement getCreateShape(int iSkip)
 	{
-		return (JDFShapeElement) getCreateElement_KElement(ElementName.SHAPE, null, iSkip);
+		return (JDFShapeElement) getCreateElement(ElementName.SHAPE, null, iSkip);
 	}
 
 	/**

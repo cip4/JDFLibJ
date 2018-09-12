@@ -128,7 +128,7 @@ public abstract class JDFAutowhen extends JDFElement
 	 */
 	public JDFset getCreateset(int iSkip)
 	{
-		return (JDFset) getCreateElement_KElement(ElementName.SET, null, iSkip);
+		return (JDFset) getCreateElement(ElementName.SET, null, iSkip);
 	}
 
 	/**

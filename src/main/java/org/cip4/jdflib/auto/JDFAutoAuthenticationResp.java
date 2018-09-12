@@ -170,7 +170,7 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
 	 */
 	public JDFElement getCreateCertificate(int iSkip)
 	{
-		return (JDFElement) getCreateElement_KElement(ElementName.CERTIFICATE, null, iSkip);
+		return (JDFElement) getCreateElement(ElementName.CERTIFICATE, null, iSkip);
 	}
 
 	/**

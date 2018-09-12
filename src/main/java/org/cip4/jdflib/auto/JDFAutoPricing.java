@@ -269,7 +269,7 @@ public abstract class JDFAutoPricing extends JDFElement
 	 */
 	public JDFPayment getCreatePayment(int iSkip)
 	{
-		return (JDFPayment) getCreateElement_KElement(ElementName.PAYMENT, null, iSkip);
+		return (JDFPayment) getCreateElement(ElementName.PAYMENT, null, iSkip);
 	}
 
 	/**
@@ -311,7 +311,7 @@ public abstract class JDFAutoPricing extends JDFElement
 	 */
 	public JDFPricing getCreatePricing(int iSkip)
 	{
-		return (JDFPricing) getCreateElement_KElement(ElementName.PRICING, null, iSkip);
+		return (JDFPricing) getCreateElement(ElementName.PRICING, null, iSkip);
 	}
 
 	/**

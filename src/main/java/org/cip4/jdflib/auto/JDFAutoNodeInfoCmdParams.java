@@ -315,7 +315,7 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
 	}
 
 	/**
@@ -366,7 +366,7 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 	 */
 	public JDFNodeInfo getCreateNodeInfo()
 	{
-		return (JDFNodeInfo) getCreateElement_KElement(ElementName.NODEINFO, null, 0);
+		return (JDFNodeInfo) getCreateElement(ElementName.NODEINFO, null, 0);
 	}
 
 	/**

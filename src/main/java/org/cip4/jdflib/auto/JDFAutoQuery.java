@@ -325,7 +325,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 */
 	public JDFSubscription getCreateSubscription()
 	{
-		return (JDFSubscription) getCreateElement_KElement(ElementName.SUBSCRIPTION, null, 0);
+		return (JDFSubscription) getCreateElement(ElementName.SUBSCRIPTION, null, 0);
 	}
 
 	/**
@@ -347,7 +347,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 */
 	public JDFEmployee getCreateEmployee(int iSkip)
 	{
-		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+		return (JDFEmployee) getCreateElement(ElementName.EMPLOYEE, null, iSkip);
 	}
 
 	/**

@@ -278,7 +278,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 */
 	public JDFTrappingOrder getCreateTrappingOrder()
 	{
-		return (JDFTrappingOrder) getCreateElement_KElement(ElementName.TRAPPINGORDER, null, 0);
+		return (JDFTrappingOrder) getCreateElement(ElementName.TRAPPINGORDER, null, 0);
 	}
 
 	/**
@@ -309,7 +309,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 */
 	public JDFTrappingParams getCreateTrappingParams()
 	{
-		return (JDFTrappingParams) getCreateElement_KElement(ElementName.TRAPPINGPARAMS, null, 0);
+		return (JDFTrappingParams) getCreateElement(ElementName.TRAPPINGPARAMS, null, 0);
 	}
 
 	/**
@@ -341,7 +341,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 */
 	public JDFObjectResolution getCreateObjectResolution(int iSkip)
 	{
-		return (JDFObjectResolution) getCreateElement_KElement(ElementName.OBJECTRESOLUTION, null, iSkip);
+		return (JDFObjectResolution) getCreateElement(ElementName.OBJECTRESOLUTION, null, iSkip);
 	}
 
 	/**
@@ -393,7 +393,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 */
 	public JDFTrapRegion getCreateTrapRegion(int iSkip)
 	{
-		return (JDFTrapRegion) getCreateElement_KElement(ElementName.TRAPREGION, null, iSkip);
+		return (JDFTrapRegion) getCreateElement(ElementName.TRAPREGION, null, iSkip);
 	}
 
 	/**

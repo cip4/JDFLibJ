@@ -150,7 +150,7 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	 */
 	public JDFFeeder getCreateFeeder(int iSkip)
 	{
-		return (JDFFeeder) getCreateElement_KElement(ElementName.FEEDER, null, iSkip);
+		return (JDFFeeder) getCreateElement(ElementName.FEEDER, null, iSkip);
 	}
 
 	/**
@@ -192,7 +192,7 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	 */
 	public JDFCollatingItem getCreateCollatingItem(int iSkip)
 	{
-		return (JDFCollatingItem) getCreateElement_KElement(ElementName.COLLATINGITEM, null, iSkip);
+		return (JDFCollatingItem) getCreateElement(ElementName.COLLATINGITEM, null, iSkip);
 	}
 
 	/**

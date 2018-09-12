@@ -191,7 +191,7 @@ public abstract class JDFAutoGluingParams extends JDFResource
 	 */
 	public JDFGlue getCreateGlue(int iSkip)
 	{
-		return (JDFGlue) getCreateElement_KElement(ElementName.GLUE, null, iSkip);
+		return (JDFGlue) getCreateElement(ElementName.GLUE, null, iSkip);
 	}
 
 	/**

@@ -439,7 +439,7 @@ public abstract class JDFAutoDrop extends JDFElement
 	 */
 	public JDFCompany getCreateCompany()
 	{
-		return (JDFCompany) getCreateElement_KElement(ElementName.COMPANY, null, 0);
+		return (JDFCompany) getCreateElement(ElementName.COMPANY, null, 0);
 	}
 
 	/**
@@ -471,7 +471,7 @@ public abstract class JDFAutoDrop extends JDFElement
 	 */
 	public JDFContact getCreateContact(int iSkip)
 	{
-		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+		return (JDFContact) getCreateElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**
@@ -523,7 +523,7 @@ public abstract class JDFAutoDrop extends JDFElement
 	 */
 	public JDFDropItem getCreateDropItem(int iSkip)
 	{
-		return (JDFDropItem) getCreateElement_KElement(ElementName.DROPITEM, null, iSkip);
+		return (JDFDropItem) getCreateElement(ElementName.DROPITEM, null, iSkip);
 	}
 
 	/**

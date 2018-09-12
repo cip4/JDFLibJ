@@ -268,7 +268,7 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	 */
 	public JDFTransferCurvePool getCreateTransferCurvePool()
 	{
-		return (JDFTransferCurvePool) getCreateElement_KElement(ElementName.TRANSFERCURVEPOOL, null, 0);
+		return (JDFTransferCurvePool) getCreateElement(ElementName.TRANSFERCURVEPOOL, null, 0);
 	}
 
 	/**

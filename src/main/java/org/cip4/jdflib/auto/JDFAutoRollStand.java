@@ -228,7 +228,7 @@ public abstract class JDFAutoRollStand extends JDFResource
 	 */
 	public JDFDevice getCreateDevice()
 	{
-		return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, 0);
+		return (JDFDevice) getCreateElement(ElementName.DEVICE, null, 0);
 	}
 
 	/**
@@ -260,7 +260,7 @@ public abstract class JDFAutoRollStand extends JDFResource
 	 */
 	public JDFContact getCreateContact(int iSkip)
 	{
-		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+		return (JDFContact) getCreateElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**
@@ -314,7 +314,7 @@ public abstract class JDFAutoRollStand extends JDFResource
 	@Override
 	public JDFIdentificationField getCreateIdentificationField(int iSkip)
 	{
-		return (JDFIdentificationField) getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+		return (JDFIdentificationField) getCreateElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
 
 	/**

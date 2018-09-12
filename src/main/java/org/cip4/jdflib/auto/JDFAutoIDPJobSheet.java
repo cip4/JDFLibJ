@@ -368,7 +368,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 */
 	public JDFIDPFinishing getCreateIDPFinishing(int iSkip)
 	{
-		return (JDFIDPFinishing) getCreateElement_KElement(ElementName.IDPFINISHING, null, iSkip);
+		return (JDFIDPFinishing) getCreateElement(ElementName.IDPFINISHING, null, iSkip);
 	}
 
 	/**
@@ -410,7 +410,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 */
 	public JDFIDPLayout getCreateIDPLayout(int iSkip)
 	{
-		return (JDFIDPLayout) getCreateElement_KElement(ElementName.IDPLAYOUT, null, iSkip);
+		return (JDFIDPLayout) getCreateElement(ElementName.IDPLAYOUT, null, iSkip);
 	}
 
 	/**
@@ -452,7 +452,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 */
 	public JDFMediaIntent getCreateMediaIntent(int iSkip)
 	{
-		return (JDFMediaIntent) getCreateElement_KElement(ElementName.MEDIAINTENT, null, iSkip);
+		return (JDFMediaIntent) getCreateElement(ElementName.MEDIAINTENT, null, iSkip);
 	}
 
 	/**
@@ -504,7 +504,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 */
 	public JDFMediaSource getCreateMediaSource(int iSkip)
 	{
-		return (JDFMediaSource) getCreateElement_KElement(ElementName.MEDIASOURCE, null, iSkip);
+		return (JDFMediaSource) getCreateElement(ElementName.MEDIASOURCE, null, iSkip);
 	}
 
 	/**

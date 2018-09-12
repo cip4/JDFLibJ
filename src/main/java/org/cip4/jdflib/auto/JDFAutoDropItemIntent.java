@@ -297,7 +297,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 */
 	public JDFPricing getCreatePricing()
 	{
-		return (JDFPricing) getCreateElement_KElement(ElementName.PRICING, null, 0);
+		return (JDFPricing) getCreateElement(ElementName.PRICING, null, 0);
 	}
 
 	/**
@@ -328,7 +328,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 */
 	public JDFComponent getCreateComponent()
 	{
-		return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, 0);
+		return (JDFComponent) getCreateElement(ElementName.COMPONENT, null, 0);
 	}
 
 	/**
@@ -369,7 +369,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 */
 	public JDFExposedMedia getCreateExposedMedia()
 	{
-		return (JDFExposedMedia) getCreateElement_KElement(ElementName.EXPOSEDMEDIA, null, 0);
+		return (JDFExposedMedia) getCreateElement(ElementName.EXPOSEDMEDIA, null, 0);
 	}
 
 	/**
@@ -410,7 +410,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 */
 	public JDFInk getCreateInk()
 	{
-		return (JDFInk) getCreateElement_KElement(ElementName.INK, null, 0);
+		return (JDFInk) getCreateElement(ElementName.INK, null, 0);
 	}
 
 	/**
@@ -451,7 +451,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 */
 	public JDFMedia getCreateMedia()
 	{
-		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
+		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**
@@ -492,7 +492,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 */
 	public JDFPallet getCreatePallet()
 	{
-		return (JDFPallet) getCreateElement_KElement(ElementName.PALLET, null, 0);
+		return (JDFPallet) getCreateElement(ElementName.PALLET, null, 0);
 	}
 
 	/**
@@ -533,7 +533,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 */
 	public JDFRegisterRibbon getCreateRegisterRibbon()
 	{
-		return (JDFRegisterRibbon) getCreateElement_KElement(ElementName.REGISTERRIBBON, null, 0);
+		return (JDFRegisterRibbon) getCreateElement(ElementName.REGISTERRIBBON, null, 0);
 	}
 
 	/**
@@ -574,7 +574,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 */
 	public JDFStrap getCreateStrap()
 	{
-		return (JDFStrap) getCreateElement_KElement(ElementName.STRAP, null, 0);
+		return (JDFStrap) getCreateElement(ElementName.STRAP, null, 0);
 	}
 
 	/**
@@ -615,7 +615,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 */
 	public JDFBundle getCreateBundle()
 	{
-		return (JDFBundle) getCreateElement_KElement(ElementName.BUNDLE, null, 0);
+		return (JDFBundle) getCreateElement(ElementName.BUNDLE, null, 0);
 	}
 
 	/**
@@ -656,7 +656,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 */
 	public JDFDigitalMedia getCreateDigitalMedia()
 	{
-		return (JDFDigitalMedia) getCreateElement_KElement(ElementName.DIGITALMEDIA, null, 0);
+		return (JDFDigitalMedia) getCreateElement(ElementName.DIGITALMEDIA, null, 0);
 	}
 
 	/**
@@ -697,7 +697,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 */
 	public JDFRollStand getCreateRollStand()
 	{
-		return (JDFRollStand) getCreateElement_KElement(ElementName.ROLLSTAND, null, 0);
+		return (JDFRollStand) getCreateElement(ElementName.ROLLSTAND, null, 0);
 	}
 
 	/**
@@ -738,7 +738,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 */
 	public JDFTool getCreateTool()
 	{
-		return (JDFTool) getCreateElement_KElement(ElementName.TOOL, null, 0);
+		return (JDFTool) getCreateElement(ElementName.TOOL, null, 0);
 	}
 
 	/**

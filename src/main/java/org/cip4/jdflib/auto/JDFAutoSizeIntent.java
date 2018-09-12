@@ -248,7 +248,7 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	 */
 	public JDFXYPairSpan getCreateDimensions()
 	{
-		return (JDFXYPairSpan) getCreateElement_KElement(ElementName.DIMENSIONS, null, 0);
+		return (JDFXYPairSpan) getCreateElement(ElementName.DIMENSIONS, null, 0);
 	}
 
 	/**
@@ -279,7 +279,7 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	 */
 	public JDFIntegerSpan getCreatePages()
 	{
-		return (JDFIntegerSpan) getCreateElement_KElement(ElementName.PAGES, null, 0);
+		return (JDFIntegerSpan) getCreateElement(ElementName.PAGES, null, 0);
 	}
 
 	/**

@@ -203,7 +203,7 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
 	 */
 	public JDFLayout getCreateLayout()
 	{
-		return (JDFLayout) getCreateElement_KElement(ElementName.LAYOUT, null, 0);
+		return (JDFLayout) getCreateElement(ElementName.LAYOUT, null, 0);
 	}
 
 	/**
@@ -235,7 +235,7 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
 	 */
 	public JDFCylinderPosition getCreateCylinderPosition(int iSkip)
 	{
-		return (JDFCylinderPosition) getCreateElement_KElement(ElementName.CYLINDERPOSITION, null, iSkip);
+		return (JDFCylinderPosition) getCreateElement(ElementName.CYLINDERPOSITION, null, iSkip);
 	}
 
 	/**

@@ -604,7 +604,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	 */
 	public JDFImageSetterParams getCreateImageSetterParams()
 	{
-		return (JDFImageSetterParams) getCreateElement_KElement(ElementName.IMAGESETTERPARAMS, null, 0);
+		return (JDFImageSetterParams) getCreateElement(ElementName.IMAGESETTERPARAMS, null, 0);
 	}
 
 	/**

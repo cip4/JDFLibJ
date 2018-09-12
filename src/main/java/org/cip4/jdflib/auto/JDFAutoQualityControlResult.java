@@ -228,7 +228,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 */
 	public JDFBindingQualityParams getCreateBindingQualityParams()
 	{
-		return (JDFBindingQualityParams) getCreateElement_KElement(ElementName.BINDINGQUALITYPARAMS, null, 0);
+		return (JDFBindingQualityParams) getCreateElement(ElementName.BINDINGQUALITYPARAMS, null, 0);
 	}
 
 	/**
@@ -259,7 +259,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec()
 	{
-		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**
@@ -291,7 +291,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 */
 	public JDFQualityMeasurement getCreateQualityMeasurement(int iSkip)
 	{
-		return (JDFQualityMeasurement) getCreateElement_KElement(ElementName.QUALITYMEASUREMENT, null, iSkip);
+		return (JDFQualityMeasurement) getCreateElement(ElementName.QUALITYMEASUREMENT, null, iSkip);
 	}
 
 	/**

@@ -136,7 +136,7 @@ public abstract class JDFAutoSideStitching extends JDFElement
 	 */
 	public JDFIntegerSpan getCreateStitchNumber()
 	{
-		return (JDFIntegerSpan) getCreateElement_KElement(ElementName.STITCHNUMBER, null, 0);
+		return (JDFIntegerSpan) getCreateElement(ElementName.STITCHNUMBER, null, 0);
 	}
 
 	/**

@@ -318,7 +318,7 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
 	}
 
 	/**
@@ -369,7 +369,7 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 	 */
 	public JDFSubscription getCreateSubscription()
 	{
-		return (JDFSubscription) getCreateElement_KElement(ElementName.SUBSCRIPTION, null, 0);
+		return (JDFSubscription) getCreateElement(ElementName.SUBSCRIPTION, null, 0);
 	}
 
 	/**

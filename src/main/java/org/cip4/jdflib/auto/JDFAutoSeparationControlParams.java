@@ -150,7 +150,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	 */
 	public JDFAutomatedOverPrintParams getCreateAutomatedOverPrintParams(int iSkip)
 	{
-		return (JDFAutomatedOverPrintParams) getCreateElement_KElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, iSkip);
+		return (JDFAutomatedOverPrintParams) getCreateElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, iSkip);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	 */
 	public JDFTransferFunctionControl getCreateTransferFunctionControl(int iSkip)
 	{
-		return (JDFTransferFunctionControl) getCreateElement_KElement(ElementName.TRANSFERFUNCTIONCONTROL, null, iSkip);
+		return (JDFTransferFunctionControl) getCreateElement(ElementName.TRANSFERFUNCTIONCONTROL, null, iSkip);
 	}
 
 	/**

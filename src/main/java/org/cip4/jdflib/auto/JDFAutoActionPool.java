@@ -128,7 +128,7 @@ public abstract class JDFAutoActionPool extends JDFElement
 	 */
 	public JDFAction getCreateAction(int iSkip)
 	{
-		return (JDFAction) getCreateElement_KElement(ElementName.ACTION, null, iSkip);
+		return (JDFAction) getCreateElement(ElementName.ACTION, null, iSkip);
 	}
 
 	/**

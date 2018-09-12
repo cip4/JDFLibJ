@@ -246,7 +246,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 */
 	public JDFDevice getCreateDevice(int iSkip)
 	{
-		return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
+		return (JDFDevice) getCreateElement(ElementName.DEVICE, null, iSkip);
 	}
 
 	/**
@@ -299,7 +299,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	@Override
 	public JDFEmployee getCreateEmployee(int iSkip)
 	{
-		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+		return (JDFEmployee) getCreateElement(ElementName.EMPLOYEE, null, iSkip);
 	}
 
 	/**
@@ -354,7 +354,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 */
 	public JDFActivity getCreateActivity(int iSkip)
 	{
-		return (JDFActivity) getCreateElement_KElement(ElementName.ACTIVITY, null, iSkip);
+		return (JDFActivity) getCreateElement(ElementName.ACTIVITY, null, iSkip);
 	}
 
 	/**
@@ -405,7 +405,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 */
 	public JDFMISDetails getCreateMISDetails()
 	{
-		return (JDFMISDetails) getCreateElement_KElement(ElementName.MISDETAILS, null, 0);
+		return (JDFMISDetails) getCreateElement(ElementName.MISDETAILS, null, 0);
 	}
 
 	/**
@@ -427,7 +427,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 */
 	public JDFModulePhase getCreateModulePhase(int iSkip)
 	{
-		return (JDFModulePhase) getCreateElement_KElement(ElementName.MODULEPHASE, null, iSkip);
+		return (JDFModulePhase) getCreateElement(ElementName.MODULEPHASE, null, iSkip);
 	}
 
 	/**
@@ -469,7 +469,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
 	}
 
 	/**

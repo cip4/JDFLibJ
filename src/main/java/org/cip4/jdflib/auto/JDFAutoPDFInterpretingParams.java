@@ -596,7 +596,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 */
 	public JDFOCGControl getCreateOCGControl(int iSkip)
 	{
-		return (JDFOCGControl) getCreateElement_KElement(ElementName.OCGCONTROL, null, iSkip);
+		return (JDFOCGControl) getCreateElement(ElementName.OCGCONTROL, null, iSkip);
 	}
 
 	/**
@@ -647,7 +647,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 */
 	public JDFReferenceXObjParams getCreateReferenceXObjParams()
 	{
-		return (JDFReferenceXObjParams) getCreateElement_KElement(ElementName.REFERENCEXOBJPARAMS, null, 0);
+		return (JDFReferenceXObjParams) getCreateElement(ElementName.REFERENCEXOBJPARAMS, null, 0);
 	}
 
 	/**

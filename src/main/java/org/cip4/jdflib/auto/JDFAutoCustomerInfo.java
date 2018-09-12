@@ -267,7 +267,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 */
 	public JDFCompany getCreateCompany()
 	{
-		return (JDFCompany) getCreateElement_KElement(ElementName.COMPANY, null, 0);
+		return (JDFCompany) getCreateElement(ElementName.COMPANY, null, 0);
 	}
 
 	/**
@@ -299,7 +299,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 */
 	public JDFContact getCreateContact(int iSkip)
 	{
-		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+		return (JDFContact) getCreateElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**
@@ -352,7 +352,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 */
 	public JDFCustomerMessage getCreateCustomerMessage(int iSkip)
 	{
-		return (JDFCustomerMessage) getCreateElement_KElement(ElementName.CUSTOMERMESSAGE, null, iSkip);
+		return (JDFCustomerMessage) getCreateElement(ElementName.CUSTOMERMESSAGE, null, iSkip);
 	}
 
 	/**

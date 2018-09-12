@@ -203,7 +203,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	 */
 	public JDFProductionSubPath getCreateFolderSuperstructureWebPath()
 	{
-		return (JDFProductionSubPath) getCreateElement_KElement(ElementName.FOLDERSUPERSTRUCTUREWEBPATH, null, 0);
+		return (JDFProductionSubPath) getCreateElement(ElementName.FOLDERSUPERSTRUCTUREWEBPATH, null, 0);
 	}
 
 	/**
@@ -225,7 +225,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	 */
 	public JDFProductionSubPath getCreatePostPressComponentPath(int iSkip)
 	{
-		return (JDFProductionSubPath) getCreateElement_KElement(ElementName.POSTPRESSCOMPONENTPATH, null, iSkip);
+		return (JDFProductionSubPath) getCreateElement(ElementName.POSTPRESSCOMPONENTPATH, null, iSkip);
 	}
 
 	/**
@@ -267,7 +267,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	 */
 	public JDFProductionSubPath getCreatePrintingUnitWebPath(int iSkip)
 	{
-		return (JDFProductionSubPath) getCreateElement_KElement(ElementName.PRINTINGUNITWEBPATH, null, iSkip);
+		return (JDFProductionSubPath) getCreateElement(ElementName.PRINTINGUNITWEBPATH, null, iSkip);
 	}
 
 	/**

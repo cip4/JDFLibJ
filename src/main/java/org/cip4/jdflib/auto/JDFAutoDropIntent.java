@@ -274,7 +274,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 */
 	public JDFTimeSpan getCreateEarliest()
 	{
-		return (JDFTimeSpan) getCreateElement_KElement(ElementName.EARLIEST, null, 0);
+		return (JDFTimeSpan) getCreateElement(ElementName.EARLIEST, null, 0);
 	}
 
 	/**
@@ -305,7 +305,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 */
 	public JDFDurationSpan getCreateEarliestDuration()
 	{
-		return (JDFDurationSpan) getCreateElement_KElement(ElementName.EARLIESTDURATION, null, 0);
+		return (JDFDurationSpan) getCreateElement(ElementName.EARLIESTDURATION, null, 0);
 	}
 
 	/**
@@ -336,7 +336,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 */
 	public JDFNameSpan getCreateMethod()
 	{
-		return (JDFNameSpan) getCreateElement_KElement(ElementName.METHOD, null, 0);
+		return (JDFNameSpan) getCreateElement(ElementName.METHOD, null, 0);
 	}
 
 	/**
@@ -367,7 +367,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 */
 	public JDFTimeSpan getCreateRequired()
 	{
-		return (JDFTimeSpan) getCreateElement_KElement(ElementName.REQUIRED, null, 0);
+		return (JDFTimeSpan) getCreateElement(ElementName.REQUIRED, null, 0);
 	}
 
 	/**
@@ -398,7 +398,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 */
 	public JDFDurationSpan getCreateRequiredDuration()
 	{
-		return (JDFDurationSpan) getCreateElement_KElement(ElementName.REQUIREDDURATION, null, 0);
+		return (JDFDurationSpan) getCreateElement(ElementName.REQUIREDDURATION, null, 0);
 	}
 
 	/**
@@ -429,7 +429,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 */
 	public JDFNameSpan getCreateReturnMethod()
 	{
-		return (JDFNameSpan) getCreateElement_KElement(ElementName.RETURNMETHOD, null, 0);
+		return (JDFNameSpan) getCreateElement(ElementName.RETURNMETHOD, null, 0);
 	}
 
 	/**
@@ -460,7 +460,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 */
 	public JDFStringSpan getCreateServiceLevel()
 	{
-		return (JDFStringSpan) getCreateElement_KElement(ElementName.SERVICELEVEL, null, 0);
+		return (JDFStringSpan) getCreateElement(ElementName.SERVICELEVEL, null, 0);
 	}
 
 	/**
@@ -491,7 +491,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 */
 	public JDFSpanSurplusHandling getCreateSurplusHandling()
 	{
-		return (JDFSpanSurplusHandling) getCreateElement_KElement(ElementName.SURPLUSHANDLING, null, 0);
+		return (JDFSpanSurplusHandling) getCreateElement(ElementName.SURPLUSHANDLING, null, 0);
 	}
 
 	/**
@@ -522,7 +522,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 */
 	public JDFSpanTransfer getCreateTransfer()
 	{
-		return (JDFSpanTransfer) getCreateElement_KElement(ElementName.TRANSFER, null, 0);
+		return (JDFSpanTransfer) getCreateElement(ElementName.TRANSFER, null, 0);
 	}
 
 	/**
@@ -553,7 +553,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 */
 	public JDFCompany getCreateCompany()
 	{
-		return (JDFCompany) getCreateElement_KElement(ElementName.COMPANY, null, 0);
+		return (JDFCompany) getCreateElement(ElementName.COMPANY, null, 0);
 	}
 
 	/**
@@ -585,7 +585,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 */
 	public JDFContact getCreateContact(int iSkip)
 	{
-		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+		return (JDFContact) getCreateElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**
@@ -637,7 +637,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 */
 	public JDFDropItemIntent getCreateDropItemIntent(int iSkip)
 	{
-		return (JDFDropItemIntent) getCreateElement_KElement(ElementName.DROPITEMINTENT, null, iSkip);
+		return (JDFDropItemIntent) getCreateElement(ElementName.DROPITEMINTENT, null, iSkip);
 	}
 
 	/**
@@ -688,7 +688,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 */
 	public JDFPricing getCreatePricing()
 	{
-		return (JDFPricing) getCreateElement_KElement(ElementName.PRICING, null, 0);
+		return (JDFPricing) getCreateElement(ElementName.PRICING, null, 0);
 	}
 
 	/**

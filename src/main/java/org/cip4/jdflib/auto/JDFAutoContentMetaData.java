@@ -224,7 +224,7 @@ public abstract class JDFAutoContentMetaData extends JDFElement
 	 */
 	public JDFContact getCreateContact(int iSkip)
 	{
-		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+		return (JDFContact) getCreateElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**
@@ -285,7 +285,7 @@ public abstract class JDFAutoContentMetaData extends JDFElement
 	 */
 	public JDFEmployee getCreateEmployee()
 	{
-		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, 0);
+		return (JDFEmployee) getCreateElement(ElementName.EMPLOYEE, null, 0);
 	}
 
 	/**
@@ -326,7 +326,7 @@ public abstract class JDFAutoContentMetaData extends JDFElement
 	 */
 	public JDFPart getCreatePart()
 	{
-		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, 0);
+		return (JDFPart) getCreateElement(ElementName.PART, null, 0);
 	}
 
 	/**

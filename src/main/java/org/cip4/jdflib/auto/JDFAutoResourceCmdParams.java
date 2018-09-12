@@ -563,7 +563,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
 	}
 
 	/**
@@ -614,7 +614,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 */
 	public JDFMISDetails getCreateMISDetails()
 	{
-		return (JDFMISDetails) getCreateElement_KElement(ElementName.MISDETAILS, null, 0);
+		return (JDFMISDetails) getCreateElement(ElementName.MISDETAILS, null, 0);
 	}
 
 	/**
@@ -636,7 +636,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 */
 	public JDFResource getCreateResource(int iSkip)
 	{
-		return (JDFResource) getCreateElement_KElement(ElementName.RESOURCE, null, iSkip);
+		return (JDFResource) getCreateElement(ElementName.RESOURCE, null, iSkip);
 	}
 
 	/**

@@ -66,7 +66,7 @@ import org.w3c.dom.Node;
 
 /**
  * implementation of the JDFLib class factory
- * 
+ *
  * @author prosirai
  *
  */
@@ -529,6 +529,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			sm_PackageNames.put(ElementName.MACRO, "org.cip4.jdflib.resource.devicecapability.JDFmacro");
 			sm_PackageNames.put(ElementName.MACROPOOL, "org.cip4.jdflib.resource.devicecapability.JDFMacroPool");
 			sm_PackageNames.put(ElementName.MANUALLABORPARAMS, "org.cip4.jdflib.resource.process.JDFManualLaborParams");
+			sm_PackageNames.put(ElementName.MARKCOLOR, "org.cip4.jdflib.resource.process.JDFMarkColor");
 			sm_PackageNames.put(ElementName.MARKOBJECT, "org.cip4.jdflib.resource.JDFMarkObject");
 			sm_PackageNames.put(ElementName.MARKACTIVATION, "org.cip4.jdflib.resource.JDFMarkActivation");
 			sm_PackageNames.put(ElementName.MATERIAL, "org.cip4.jdflib.span.JDFStringSpan");
@@ -1196,7 +1197,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	 * default name space JDFElement.class is returned else KElement.class is returned
 	 *
 	 * will return JDFElement.class or JDFResource.class only.
-	 * 
+	 *
 	 * @param qualifiedName the qualified name of the class
 	 * @return
 	 */

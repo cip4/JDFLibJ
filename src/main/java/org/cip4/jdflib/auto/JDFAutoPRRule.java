@@ -175,7 +175,7 @@ public abstract class JDFAutoPRRule extends JDFElement
 	 */
 	public JDFPRRuleAttr getCreatePRRuleAttr(int iSkip)
 	{
-		return (JDFPRRuleAttr) getCreateElement_KElement(ElementName.PRRULEATTR, null, iSkip);
+		return (JDFPRRuleAttr) getCreateElement(ElementName.PRRULEATTR, null, iSkip);
 	}
 
 	/**

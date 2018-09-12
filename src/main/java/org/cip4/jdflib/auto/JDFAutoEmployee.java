@@ -253,7 +253,7 @@ public abstract class JDFAutoEmployee extends JDFResource
 	 */
 	public JDFCostCenter getCreateCostCenter()
 	{
-		return (JDFCostCenter) getCreateElement_KElement(ElementName.COSTCENTER, null, 0);
+		return (JDFCostCenter) getCreateElement(ElementName.COSTCENTER, null, 0);
 	}
 
 	/**
@@ -284,7 +284,7 @@ public abstract class JDFAutoEmployee extends JDFResource
 	 */
 	public JDFPerson getCreatePerson()
 	{
-		return (JDFPerson) getCreateElement_KElement(ElementName.PERSON, null, 0);
+		return (JDFPerson) getCreateElement(ElementName.PERSON, null, 0);
 	}
 
 	/**

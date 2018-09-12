@@ -318,7 +318,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec()
 	{
-		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**
@@ -350,7 +350,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	 */
 	public JDFColorSpaceConversionOp getCreateColorSpaceConversionOp(int iSkip)
 	{
-		return (JDFColorSpaceConversionOp) getCreateElement_KElement(ElementName.COLORSPACECONVERSIONOP, null, iSkip);
+		return (JDFColorSpaceConversionOp) getCreateElement(ElementName.COLORSPACECONVERSIONOP, null, iSkip);
 	}
 
 	/**

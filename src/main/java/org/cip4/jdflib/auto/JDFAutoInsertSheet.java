@@ -577,7 +577,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 */
 	public JDFRunList getCreateRunList()
 	{
-		return (JDFRunList) getCreateElement_KElement(ElementName.RUNLIST, null, 0);
+		return (JDFRunList) getCreateElement(ElementName.RUNLIST, null, 0);
 	}
 
 	/**
@@ -618,7 +618,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 */
 	public JDFLayout getCreateLayout()
 	{
-		return (JDFLayout) getCreateElement_KElement(ElementName.LAYOUT, null, 0);
+		return (JDFLayout) getCreateElement(ElementName.LAYOUT, null, 0);
 	}
 
 	/**
@@ -659,7 +659,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 */
 	public JDFSheet getCreateSheet()
 	{
-		return (JDFSheet) getCreateElement_KElement(ElementName.SHEET, null, 0);
+		return (JDFSheet) getCreateElement(ElementName.SHEET, null, 0);
 	}
 
 	/**

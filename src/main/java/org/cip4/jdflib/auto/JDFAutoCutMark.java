@@ -327,7 +327,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 */
 	public JDFAssembly getCreateAssembly(int iSkip)
 	{
-		return (JDFAssembly) getCreateElement_KElement(ElementName.ASSEMBLY, null, iSkip);
+		return (JDFAssembly) getCreateElement(ElementName.ASSEMBLY, null, iSkip);
 	}
 
 	/**

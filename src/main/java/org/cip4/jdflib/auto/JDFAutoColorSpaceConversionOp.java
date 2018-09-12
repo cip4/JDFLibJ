@@ -783,7 +783,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	public JDFDeviceNSpace getCreateDeviceNSpace()
 	{
-		return (JDFDeviceNSpace) getCreateElement_KElement(ElementName.DEVICENSPACE, null, 0);
+		return (JDFDeviceNSpace) getCreateElement(ElementName.DEVICENSPACE, null, 0);
 	}
 
 	/**
@@ -814,7 +814,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	public JDFFileSpec getCreateFileSpec()
 	{
-		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**
@@ -846,7 +846,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
 	{
-		return (JDFSeparationSpec) getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
+		return (JDFSeparationSpec) getCreateElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
 
 	/**

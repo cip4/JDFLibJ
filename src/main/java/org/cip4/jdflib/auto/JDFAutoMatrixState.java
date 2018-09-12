@@ -357,7 +357,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 */
 	public JDFLoc getCreateLoc(int iSkip)
 	{
-		return (JDFLoc) getCreateElement_KElement(ElementName.LOC, null, iSkip);
+		return (JDFLoc) getCreateElement(ElementName.LOC, null, iSkip);
 	}
 
 	/**
@@ -399,7 +399,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 */
 	public JDFValue getCreateValue(int iSkip)
 	{
-		return (JDFValue) getCreateElement_KElement(ElementName.VALUE, null, iSkip);
+		return (JDFValue) getCreateElement(ElementName.VALUE, null, iSkip);
 	}
 
 	/**

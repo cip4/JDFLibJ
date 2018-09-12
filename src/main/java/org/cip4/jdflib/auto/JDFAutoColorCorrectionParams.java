@@ -193,7 +193,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
+		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**
@@ -245,7 +245,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	 */
 	public JDFColorCorrectionOp getCreateColorCorrectionOp(int iSkip)
 	{
-		return (JDFColorCorrectionOp) getCreateElement_KElement(ElementName.COLORCORRECTIONOP, null, iSkip);
+		return (JDFColorCorrectionOp) getCreateElement(ElementName.COLORCORRECTIONOP, null, iSkip);
 	}
 
 	/**

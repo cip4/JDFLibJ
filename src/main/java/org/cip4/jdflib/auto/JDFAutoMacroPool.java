@@ -128,7 +128,7 @@ public abstract class JDFAutoMacroPool extends JDFElement
 	 */
 	public JDFmacro getCreatemacro(int iSkip)
 	{
-		return (JDFmacro) getCreateElement_KElement(ElementName.MACRO, null, iSkip);
+		return (JDFmacro) getCreateElement(ElementName.MACRO, null, iSkip);
 	}
 
 	/**

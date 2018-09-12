@@ -144,7 +144,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	 */
 	public JDFSpanNamedColor getCreateColorName()
 	{
-		return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.COLORNAME, null, 0);
+		return (JDFSpanNamedColor) getCreateElement(ElementName.COLORNAME, null, 0);
 	}
 
 	/**
@@ -166,7 +166,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	 */
 	public JDFStringSpan getCreateColorNameDetails(int iSkip)
 	{
-		return (JDFStringSpan) getCreateElement_KElement(ElementName.COLORNAMEDETAILS, null, iSkip);
+		return (JDFStringSpan) getCreateElement(ElementName.COLORNAMEDETAILS, null, iSkip);
 	}
 
 	/**
@@ -217,7 +217,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	 */
 	public JDFColorPool getCreateColorPool()
 	{
-		return (JDFColorPool) getCreateElement_KElement(ElementName.COLORPOOL, null, 0);
+		return (JDFColorPool) getCreateElement(ElementName.COLORPOOL, null, 0);
 	}
 
 	/**
@@ -249,7 +249,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	 */
 	public JDFNumberItem getCreateNumberItem(int iSkip)
 	{
-		return (JDFNumberItem) getCreateElement_KElement(ElementName.NUMBERITEM, null, iSkip);
+		return (JDFNumberItem) getCreateElement(ElementName.NUMBERITEM, null, iSkip);
 	}
 
 	/**

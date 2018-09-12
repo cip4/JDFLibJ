@@ -171,7 +171,7 @@ public abstract class JDFAutoArgumentValue extends JDFElement
 	 */
 	public JDFPreflightArgument getCreatePreflightArgument(int iSkip)
 	{
-		return (JDFPreflightArgument) getCreateElement_KElement(ElementName.PREFLIGHTARGUMENT, null, iSkip);
+		return (JDFPreflightArgument) getCreateElement(ElementName.PREFLIGHTARGUMENT, null, iSkip);
 	}
 
 	/**

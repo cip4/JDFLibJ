@@ -142,7 +142,7 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 	 */
 	public JDFStringSpan getCreateWireCombBrand()
 	{
-		return (JDFStringSpan) getCreateElement_KElement(ElementName.WIRECOMBBRAND, null, 0);
+		return (JDFStringSpan) getCreateElement(ElementName.WIRECOMBBRAND, null, 0);
 	}
 
 	/**
@@ -173,7 +173,7 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 	 */
 	public JDFSpanWireCombMaterial getCreateWireCombMaterial()
 	{
-		return (JDFSpanWireCombMaterial) getCreateElement_KElement(ElementName.WIRECOMBMATERIAL, null, 0);
+		return (JDFSpanWireCombMaterial) getCreateElement(ElementName.WIRECOMBMATERIAL, null, 0);
 	}
 
 	/**
@@ -204,7 +204,7 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 	 */
 	public JDFSpanWireCombShape getCreateWireCombShape()
 	{
-		return (JDFSpanWireCombShape) getCreateElement_KElement(ElementName.WIRECOMBSHAPE, null, 0);
+		return (JDFSpanWireCombShape) getCreateElement(ElementName.WIRECOMBSHAPE, null, 0);
 	}
 
 	/**
@@ -235,7 +235,7 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 	 */
 	public JDFHoleList getCreateHoleList()
 	{
-		return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
+		return (JDFHoleList) getCreateElement(ElementName.HOLELIST, null, 0);
 	}
 
 	/**

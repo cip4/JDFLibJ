@@ -226,7 +226,7 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 	 */
 	public JDFTrappingParams getCreateTrappingParams()
 	{
-		return (JDFTrappingParams) getCreateElement_KElement(ElementName.TRAPPINGPARAMS, null, 0);
+		return (JDFTrappingParams) getCreateElement(ElementName.TRAPPINGPARAMS, null, 0);
 	}
 
 	/**

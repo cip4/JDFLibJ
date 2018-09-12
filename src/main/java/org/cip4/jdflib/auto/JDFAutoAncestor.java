@@ -575,7 +575,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 */
 	public JDFCustomerInfo getCreateCustomerInfo()
 	{
-		return (JDFCustomerInfo) getCreateElement_KElement(ElementName.CUSTOMERINFO, null, 0);
+		return (JDFCustomerInfo) getCreateElement(ElementName.CUSTOMERINFO, null, 0);
 	}
 
 	/**
@@ -606,7 +606,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 */
 	public JDFNodeInfo getCreateNodeInfo()
 	{
-		return (JDFNodeInfo) getCreateElement_KElement(ElementName.NODEINFO, null, 0);
+		return (JDFNodeInfo) getCreateElement(ElementName.NODEINFO, null, 0);
 	}
 
 	/**

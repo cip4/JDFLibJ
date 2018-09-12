@@ -386,7 +386,7 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
 	}
 
 	/**
@@ -428,7 +428,7 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	 */
 	public JDFElement getCreateCertificate(int iSkip)
 	{
-		return (JDFElement) getCreateElement_KElement(ElementName.CERTIFICATE, null, iSkip);
+		return (JDFElement) getCreateElement(ElementName.CERTIFICATE, null, iSkip);
 	}
 
 	/**

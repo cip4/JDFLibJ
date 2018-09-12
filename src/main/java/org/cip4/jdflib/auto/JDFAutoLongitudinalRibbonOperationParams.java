@@ -154,7 +154,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 */
 	public JDFLongFold getCreateLongFold(int iSkip)
 	{
-		return (JDFLongFold) getCreateElement_KElement(ElementName.LONGFOLD, null, iSkip);
+		return (JDFLongFold) getCreateElement(ElementName.LONGFOLD, null, iSkip);
 	}
 
 	/**
@@ -196,7 +196,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 */
 	public JDFLongGlue getCreateLongGlue(int iSkip)
 	{
-		return (JDFLongGlue) getCreateElement_KElement(ElementName.LONGGLUE, null, iSkip);
+		return (JDFLongGlue) getCreateElement(ElementName.LONGGLUE, null, iSkip);
 	}
 
 	/**
@@ -238,7 +238,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 */
 	public JDFLongPerforate getCreateLongPerforate(int iSkip)
 	{
-		return (JDFLongPerforate) getCreateElement_KElement(ElementName.LONGPERFORATE, null, iSkip);
+		return (JDFLongPerforate) getCreateElement(ElementName.LONGPERFORATE, null, iSkip);
 	}
 
 	/**
@@ -280,7 +280,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 */
 	public JDFLongSlit getCreateLongSlit(int iSkip)
 	{
-		return (JDFLongSlit) getCreateElement_KElement(ElementName.LONGSLIT, null, iSkip);
+		return (JDFLongSlit) getCreateElement(ElementName.LONGSLIT, null, iSkip);
 	}
 
 	/**

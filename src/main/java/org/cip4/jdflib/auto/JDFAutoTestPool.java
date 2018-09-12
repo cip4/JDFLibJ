@@ -128,7 +128,7 @@ public abstract class JDFAutoTestPool extends JDFElement
 	 */
 	public JDFTest getCreateTest(int iSkip)
 	{
-		return (JDFTest) getCreateElement_KElement(ElementName.TEST, null, iSkip);
+		return (JDFTest) getCreateElement(ElementName.TEST, null, iSkip);
 	}
 
 	/**

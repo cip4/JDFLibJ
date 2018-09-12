@@ -246,7 +246,7 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	 */
 	public JDFQueueFilter getCreateQueueFilter()
 	{
-		return (JDFQueueFilter) getCreateElement_KElement(ElementName.QUEUEFILTER, null, 0);
+		return (JDFQueueFilter) getCreateElement(ElementName.QUEUEFILTER, null, 0);
 	}
 
 	/**

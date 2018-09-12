@@ -272,7 +272,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 */
 	public JDFCIELABMeasuringField getCreateCIELABMeasuringField(int iSkip)
 	{
-		return (JDFCIELABMeasuringField) getCreateElement_KElement(ElementName.CIELABMEASURINGFIELD, null, iSkip);
+		return (JDFCIELABMeasuringField) getCreateElement(ElementName.CIELABMEASURINGFIELD, null, iSkip);
 	}
 
 	/**
@@ -324,7 +324,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 */
 	public JDFDensityMeasuringField getCreateDensityMeasuringField(int iSkip)
 	{
-		return (JDFDensityMeasuringField) getCreateElement_KElement(ElementName.DENSITYMEASURINGFIELD, null, iSkip);
+		return (JDFDensityMeasuringField) getCreateElement(ElementName.DENSITYMEASURINGFIELD, null, iSkip);
 	}
 
 	/**
@@ -376,7 +376,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 */
 	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
 	{
-		return (JDFSeparationSpec) getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
+		return (JDFSeparationSpec) getCreateElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
 
 	/**

@@ -211,7 +211,7 @@ public abstract class JDFAutoIntegerEvaluation extends JDFResource
 	 */
 	public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
 	{
-		return (JDFBasicPreflightTest) getCreateElement_KElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
+		return (JDFBasicPreflightTest) getCreateElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
 	}
 
 	/**
