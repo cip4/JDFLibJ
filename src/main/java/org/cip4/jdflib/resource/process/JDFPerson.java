@@ -31,14 +31,14 @@
  *
  * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
  * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- * 
+ *
  * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
- * 
+ *
  *
  */
 /**
  * ========================================================================== class JDFPerson ==========================================================================
- * 
+ *
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED Warning! very preliminary test version. Interface subject to change without prior notice!
  */
 
@@ -76,7 +76,7 @@ public class JDFPerson extends JDFAutoPerson implements IMatches
 
 	/**
 	 * Constructor for JDFPerson
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -90,7 +90,7 @@ public class JDFPerson extends JDFAutoPerson implements IMatches
 
 	/**
 	 * Constructor for JDFPerson
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -175,7 +175,7 @@ public class JDFPerson extends JDFAutoPerson implements IMatches
 
 	/**
 	 * get first + last name if descname does not exist
-	 * 
+	 *
 	 * @see org.cip4.jdflib.core.JDFElement#getDescriptiveName()
 	 */
 	@Override
@@ -250,5 +250,15 @@ public class JDFPerson extends JDFAutoPerson implements IMatches
 	{
 
 		return super.getAddress();
+	}
+
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoPerson#getCreateAddress() for some reason - the old generator allowed multiple adrresses
+	 */
+	@Deprecated
+	public JDFAddress getCreateAddress(final int i)
+	{
+
+		return super.getCreateAddress();
 	}
 }
