@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -91,11 +59,11 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMedia;
 
 /**
-*****************************************************************************
-class JDFAutoImageSetterParams : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoImageSetterParams : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoImageSetterParams extends JDFResource
 {
@@ -146,6 +114,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoImageSetterParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -156,6 +125,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoImageSetterParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -167,6 +137,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoImageSetterParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -178,7 +149,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -187,7 +158,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -207,8 +178,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for MirrorAround
-	*/
+	 * Enumeration strings for MirrorAround
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumMirrorAround extends ValuedEnum
@@ -274,8 +245,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for Polarity
-	*/
+	 * Enumeration strings for Polarity
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumPolarity extends ValuedEnum
@@ -337,8 +308,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for Sides
-	*/
+	 * Enumeration strings for Sides
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumSides extends ValuedEnum
@@ -406,8 +377,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for CenterAcross
-	*/
+	 * Enumeration strings for CenterAcross
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumCenterAcross extends ValuedEnum
@@ -473,8 +444,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for SourceWorkStyle
-	*/
+	 * Enumeration strings for SourceWorkStyle
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumSourceWorkStyle extends ValuedEnum
@@ -543,112 +514,120 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		public static final EnumSourceWorkStyle WorkAndTwist = new EnumSourceWorkStyle("WorkAndTwist");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MirrorAround
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MirrorAround ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute MirrorAround
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute MirrorAround
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setMirrorAround(EnumMirrorAround enumVar)
 	{
 		setAttribute(AttributeName.MIRRORAROUND, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute MirrorAround
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute MirrorAround
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumMirrorAround getMirrorAround()
 	{
 		return EnumMirrorAround.getEnum(getAttribute(AttributeName.MIRRORAROUND, null, "None"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Polarity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Polarity ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Polarity
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Polarity
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setPolarity(EnumPolarity enumVar)
 	{
 		setAttribute(AttributeName.POLARITY, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Polarity
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Polarity
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumPolarity getPolarity()
 	{
 		return EnumPolarity.getEnum(getAttribute(AttributeName.POLARITY, null, "Positive"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Sides
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Sides ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Sides
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Sides
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setSides(EnumSides enumVar)
 	{
 		setAttribute(AttributeName.SIDES, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Sides
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Sides
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumSides getSides()
 	{
 		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, "OneSidedFront"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AdvanceDistance
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AdvanceDistance ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute AdvanceDistance
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute AdvanceDistance
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAdvanceDistance(double value)
 	{
 		setAttribute(AttributeName.ADVANCEDISTANCE, value, null);
 	}
 
 	/**
-	  * (17) get double attribute AdvanceDistance
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute AdvanceDistance
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getAdvanceDistance()
 	{
 		return getRealAttribute(AttributeName.ADVANCEDISTANCE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BurnOutArea
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BurnOutArea ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute BurnOutArea
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute BurnOutArea
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setBurnOutArea(JDFXYPair value)
 	{
 		setAttribute(AttributeName.BURNOUTAREA, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute BurnOutArea
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute BurnOutArea
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getBurnOutArea()
 	{
 		final String strAttrName = getAttribute(AttributeName.BURNOUTAREA, null, null);
@@ -656,212 +635,231 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CenterAcross
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CenterAcross ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute CenterAcross
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute CenterAcross
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setCenterAcross(EnumCenterAcross enumVar)
 	{
 		setAttribute(AttributeName.CENTERACROSS, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute CenterAcross
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute CenterAcross
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumCenterAcross getCenterAcross()
 	{
 		return EnumCenterAcross.getEnum(getAttribute(AttributeName.CENTERACROSS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CutMedia
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CutMedia ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute CutMedia
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute CutMedia
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setCutMedia(boolean value)
 	{
 		setAttribute(AttributeName.CUTMEDIA, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute CutMedia
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute CutMedia
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getCutMedia()
 	{
 		return getBoolAttribute(AttributeName.CUTMEDIA, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ManualFeed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ManualFeed ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ManualFeed
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ManualFeed
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setManualFeed(boolean value)
 	{
 		setAttribute(AttributeName.MANUALFEED, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute ManualFeed
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute ManualFeed
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getManualFeed()
 	{
 		return getBoolAttribute(AttributeName.MANUALFEED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NonPrintableMarginBottom
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginBottom ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute NonPrintableMarginBottom
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute NonPrintableMarginBottom
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setNonPrintableMarginBottom(double value)
 	{
 		setAttribute(AttributeName.NONPRINTABLEMARGINBOTTOM, value, null);
 	}
 
 	/**
-	  * (17) get double attribute NonPrintableMarginBottom
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute NonPrintableMarginBottom
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getNonPrintableMarginBottom()
 	{
 		return getRealAttribute(AttributeName.NONPRINTABLEMARGINBOTTOM, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NonPrintableMarginLeft
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginLeft ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute NonPrintableMarginLeft
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute NonPrintableMarginLeft
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setNonPrintableMarginLeft(double value)
 	{
 		setAttribute(AttributeName.NONPRINTABLEMARGINLEFT, value, null);
 	}
 
 	/**
-	  * (17) get double attribute NonPrintableMarginLeft
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute NonPrintableMarginLeft
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getNonPrintableMarginLeft()
 	{
 		return getRealAttribute(AttributeName.NONPRINTABLEMARGINLEFT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NonPrintableMarginRight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginRight ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute NonPrintableMarginRight
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute NonPrintableMarginRight
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setNonPrintableMarginRight(double value)
 	{
 		setAttribute(AttributeName.NONPRINTABLEMARGINRIGHT, value, null);
 	}
 
 	/**
-	  * (17) get double attribute NonPrintableMarginRight
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute NonPrintableMarginRight
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getNonPrintableMarginRight()
 	{
 		return getRealAttribute(AttributeName.NONPRINTABLEMARGINRIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NonPrintableMarginTop
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginTop ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute NonPrintableMarginTop
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute NonPrintableMarginTop
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setNonPrintableMarginTop(double value)
 	{
 		setAttribute(AttributeName.NONPRINTABLEMARGINTOP, value, null);
 	}
 
 	/**
-	  * (17) get double attribute NonPrintableMarginTop
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute NonPrintableMarginTop
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getNonPrintableMarginTop()
 	{
 		return getRealAttribute(AttributeName.NONPRINTABLEMARGINTOP, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Punch
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Punch ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Punch
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Punch
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPunch(boolean value)
 	{
 		setAttribute(AttributeName.PUNCH, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute Punch
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute Punch
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getPunch()
 	{
 		return getBoolAttribute(AttributeName.PUNCH, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PunchType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PunchType ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PunchType
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PunchType
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPunchType(String value)
 	{
 		setAttribute(AttributeName.PUNCHTYPE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute PunchType
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute PunchType
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getPunchType()
 	{
 		return getAttribute(AttributeName.PUNCHTYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Resolution
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Resolution ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Resolution
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Resolution
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setResolution(JDFXYPair value)
 	{
 		setAttribute(AttributeName.RESOLUTION, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute Resolution
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute Resolution
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getResolution()
 	{
 		final String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
@@ -869,65 +867,70 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RollCut
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RollCut ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute RollCut
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute RollCut
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setRollCut(double value)
 	{
 		setAttribute(AttributeName.ROLLCUT, value, null);
 	}
 
 	/**
-	  * (17) get double attribute RollCut
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute RollCut
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getRollCut()
 	{
 		return getRealAttribute(AttributeName.ROLLCUT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceWorkStyle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceWorkStyle ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute SourceWorkStyle
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute SourceWorkStyle
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setSourceWorkStyle(EnumSourceWorkStyle enumVar)
 	{
 		setAttribute(AttributeName.SOURCEWORKSTYLE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute SourceWorkStyle
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute SourceWorkStyle
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumSourceWorkStyle getSourceWorkStyle()
 	{
 		return EnumSourceWorkStyle.getEnum(getAttribute(AttributeName.SOURCEWORKSTYLE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TransferCurve
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TransferCurve ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute TransferCurve
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute TransferCurve
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setTransferCurve(JDFTransferFunction value)
 	{
 		setAttribute(AttributeName.TRANSFERCURVE, value, null);
 	}
 
 	/**
-	  * (20) get JDFTransferFunction attribute TransferCurve
-	  * @return JDFTransferFunction the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFTransferFunction
-	  */
+	 * (20) get JDFTransferFunction attribute TransferCurve
+	 * 
+	 * @return JDFTransferFunction the value of the attribute, null if a the attribute value is not a valid to create a JDFTransferFunction
+	 */
 	public JDFTransferFunction getTransferCurve()
 	{
 		final String strAttrName = getAttribute(AttributeName.TRANSFERCURVE, null, null);
@@ -935,13 +938,13 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element Media
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getMedia()
@@ -949,7 +952,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
 	}
 
-	/** (25) getCreateMedia
+	/**
+	 * (25) getCreateMedia
 	 * 
 	 * @return JDFMedia the element
 	 */
@@ -960,6 +964,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 
 	/**
 	 * (29) append element Media
+	 * 
 	 * @return JDFMedia the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -969,9 +974,10 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refMedia(JDFMedia refTarget)
 	{
 		refElement(refTarget);
@@ -979,6 +985,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 
 	/**
 	 * (24) const get element FitPolicy
+	 * 
 	 * @return JDFFitPolicy the element
 	 */
 	public JDFFitPolicy getFitPolicy()
@@ -986,7 +993,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		return (JDFFitPolicy) getElement(ElementName.FITPOLICY, null, 0);
 	}
 
-	/** (25) getCreateFitPolicy
+	/**
+	 * (25) getCreateFitPolicy
 	 * 
 	 * @return JDFFitPolicy the element
 	 */
@@ -997,12 +1005,23 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 
 	/**
 	 * (29) append element FitPolicy
+	 * 
 	 * @return JDFFitPolicy the element
 	 * @throws JDFException if the element already exists
 	 */
 	public JDFFitPolicy appendFitPolicy() throws JDFException
 	{
 		return (JDFFitPolicy) appendElementN(ElementName.FITPOLICY, 1, null);
+	}
+
+	/**
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
+	public void refFitPolicy(JDFFitPolicy refTarget)
+	{
+		refElement(refTarget);
 	}
 
 }// end namespace JDF

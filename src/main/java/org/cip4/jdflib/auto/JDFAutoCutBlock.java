@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -86,11 +54,11 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
-*****************************************************************************
-class JDFAutoCutBlock : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoCutBlock : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoCutBlock extends JDFResource
 {
@@ -118,6 +86,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoCutBlock
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -128,6 +97,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoCutBlock
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -139,6 +109,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoCutBlock
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -150,7 +121,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -159,7 +130,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -179,8 +150,8 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for BlockType
-	*/
+	 * Enumeration strings for BlockType
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumBlockType extends ValuedEnum
@@ -246,8 +217,8 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for BlockElementType
-	*/
+	 * Enumeration strings for BlockElementType
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumBlockElementType extends ValuedEnum
@@ -308,28 +279,28 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		public static final EnumBlockElementType PunchElement = new EnumBlockElementType("PunchElement");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlockSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlockSize ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute BlockSize
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute BlockSize
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setBlockSize(JDFXYPair value)
 	{
 		setAttribute(AttributeName.BLOCKSIZE, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute BlockSize
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute BlockSize
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getBlockSize()
 	{
 		final String strAttrName = getAttribute(AttributeName.BLOCKSIZE, null, null);
@@ -337,23 +308,24 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlockSubdivision
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlockSubdivision ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute BlockSubdivision
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute BlockSubdivision
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setBlockSubdivision(JDFXYPair value)
 	{
 		setAttribute(AttributeName.BLOCKSUBDIVISION, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute BlockSubdivision
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute BlockSubdivision
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getBlockSubdivision()
 	{
 		final String strAttrName = getAttribute(AttributeName.BLOCKSUBDIVISION, null, null);
@@ -361,23 +333,24 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlockTrf
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlockTrf ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute BlockTrf
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute BlockTrf
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setBlockTrf(JDFMatrix value)
 	{
 		setAttribute(AttributeName.BLOCKTRF, value, null);
 	}
 
 	/**
-	  * (20) get JDFMatrix attribute BlockTrf
-	  * @return JDFMatrix the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFMatrix
-	  */
+	 * (20) get JDFMatrix attribute BlockTrf
+	 * 
+	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 */
 	public JDFMatrix getBlockTrf()
 	{
 		final String strAttrName = getAttribute(AttributeName.BLOCKTRF, null, null);
@@ -385,43 +358,47 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlockType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlockType ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute BlockType
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute BlockType
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setBlockType(EnumBlockType enumVar)
 	{
 		setAttribute(AttributeName.BLOCKTYPE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute BlockType
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute BlockType
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumBlockType getBlockType()
 	{
 		return EnumBlockType.getEnum(getAttribute(AttributeName.BLOCKTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AssemblyIDs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute AssemblyIDs
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute AssemblyIDs
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAssemblyIDs(VString value)
 	{
 		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute AssemblyIDs
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute AssemblyIDs
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getAssemblyIDs()
 	{
 		final VString vStrAttrib = new VString();
@@ -430,44 +407,47 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CutWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CutWidth ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute CutWidth
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute CutWidth
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setCutWidth(double value)
 	{
 		setAttribute(AttributeName.CUTWIDTH, value, null);
 	}
 
 	/**
-	  * (17) get double attribute CutWidth
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute CutWidth
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getCutWidth()
 	{
 		return getRealAttribute(AttributeName.CUTWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlockElementSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlockElementSize ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute BlockElementSize
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute BlockElementSize
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setBlockElementSize(JDFXYPair value)
 	{
 		setAttribute(AttributeName.BLOCKELEMENTSIZE, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute BlockElementSize
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute BlockElementSize
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getBlockElementSize()
 	{
 		final String strAttrName = getAttribute(AttributeName.BLOCKELEMENTSIZE, null, null);
@@ -475,22 +455,24 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BlockElementType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlockElementType ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute BlockElementType
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute BlockElementType
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setBlockElementType(EnumBlockElementType enumVar)
 	{
 		setAttribute(AttributeName.BLOCKELEMENTTYPE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute BlockElementType
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute BlockElementType
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumBlockElementType getBlockElementType()
 	{
 		return EnumBlockElementType.getEnum(getAttribute(AttributeName.BLOCKELEMENTTYPE, null, null));

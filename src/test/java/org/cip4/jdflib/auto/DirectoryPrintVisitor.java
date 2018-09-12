@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,21 +69,25 @@
 package org.cip4.jdflib.auto;
 
 import java.io.File;
+
 public class DirectoryPrintVisitor implements DirectoryVisitor
 {
 	String indent = "";
 
+	@Override
 	public void enterDirectory(File dir)
 	{
 		System.out.println(indent + "[" + dir.getName() + "]");
 		indent += "  ";
 	}
 
+	@Override
 	public void leaveDirectory(File dir)
 	{
 		indent = indent.substring(2);
 	}
 
+	@Override
 	public void visitFile(File file)
 	{
 		System.out.println(indent + file.getName());

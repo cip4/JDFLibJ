@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -74,7 +42,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,7 +53,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFLayerList;
@@ -103,11 +69,11 @@ import org.cip4.jdflib.resource.process.JDFMediaSource;
 import org.cip4.jdflib.resource.process.JDFTransferCurvePool;
 
 /**
-*****************************************************************************
-class JDFAutoLayout : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoLayout : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoLayout extends JDFResource
 {
@@ -166,6 +132,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoLayout
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -176,6 +143,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoLayout
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -187,6 +155,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoLayout
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -198,7 +167,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -207,7 +176,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -227,8 +196,8 @@ public abstract class JDFAutoLayout extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for OrdReset
-	*/
+	 * Enumeration strings for OrdReset
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumOrdReset extends ValuedEnum
@@ -292,8 +261,8 @@ public abstract class JDFAutoLayout extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for SheetCountReset
-	*/
+	 * Enumeration strings for SheetCountReset
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumSheetCountReset extends ValuedEnum
@@ -357,8 +326,8 @@ public abstract class JDFAutoLayout extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for BaseOrdReset
-	*/
+	 * Enumeration strings for BaseOrdReset
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumBaseOrdReset extends ValuedEnum
@@ -420,8 +389,8 @@ public abstract class JDFAutoLayout extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for SourceWorkStyle
-	*/
+	 * Enumeration strings for SourceWorkStyle
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumSourceWorkStyle extends ValuedEnum
@@ -491,8 +460,8 @@ public abstract class JDFAutoLayout extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for TemplateType
-	*/
+	 * Enumeration strings for TemplateType
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumTemplateType extends ValuedEnum
@@ -553,259 +522,281 @@ public abstract class JDFAutoLayout extends JDFResource
 		public static final EnumTemplateType ConditionalSheets = new EnumTemplateType("ConditionalSheets");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Automated
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Automated ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Automated
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Automated
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAutomated(boolean value)
 	{
 		setAttribute(AttributeName.AUTOMATED, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute Automated
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute Automated
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getAutomated()
 	{
 		return getBoolAttribute(AttributeName.AUTOMATED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LockOrigins
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LockOrigins ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute LockOrigins
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute LockOrigins
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setLockOrigins(boolean value)
 	{
 		setAttribute(AttributeName.LOCKORIGINS, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute LockOrigins
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute LockOrigins
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getLockOrigins()
 	{
 		return getBoolAttribute(AttributeName.LOCKORIGINS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxDocOrd
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxDocOrd ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute MaxDocOrd
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute MaxDocOrd
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setMaxDocOrd(int value)
 	{
 		setAttribute(AttributeName.MAXDOCORD, value, null);
 	}
 
 	/**
-	  * (15) get int attribute MaxDocOrd
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute MaxDocOrd
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getMaxDocOrd()
 	{
 		return getIntAttribute(AttributeName.MAXDOCORD, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxSetOrd
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxSetOrd ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute MaxSetOrd
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute MaxSetOrd
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setMaxSetOrd(int value)
 	{
 		setAttribute(AttributeName.MAXSETORD, value, null);
 	}
 
 	/**
-	  * (15) get int attribute MaxSetOrd
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute MaxSetOrd
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getMaxSetOrd()
 	{
 		return getIntAttribute(AttributeName.MAXSETORD, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OrdReset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OrdReset ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute OrdReset
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute OrdReset
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setOrdReset(EnumOrdReset enumVar)
 	{
 		setAttribute(AttributeName.ORDRESET, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute OrdReset
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute OrdReset
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumOrdReset getOrdReset()
 	{
 		return EnumOrdReset.getEnum(getAttribute(AttributeName.ORDRESET, null, "Continue"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetCountReset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetCountReset ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute SheetCountReset
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute SheetCountReset
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setSheetCountReset(EnumSheetCountReset enumVar)
 	{
 		setAttribute(AttributeName.SHEETCOUNTRESET, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute SheetCountReset
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute SheetCountReset
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumSheetCountReset getSheetCountReset()
 	{
 		return EnumSheetCountReset.getEnum(getAttribute(AttributeName.SHEETCOUNTRESET, null, "Continue"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Name
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Name
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Name
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setName(String value)
 	{
 		setAttribute(AttributeName.NAME, value, null);
 	}
 
 	/**
-	  * (23) get String attribute Name
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute Name
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getName()
 	{
 		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BaseOrdReset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BaseOrdReset ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute BaseOrdReset
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute BaseOrdReset
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setBaseOrdReset(EnumBaseOrdReset enumVar)
 	{
 		setAttribute(AttributeName.BASEORDRESET, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute BaseOrdReset
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute BaseOrdReset
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumBaseOrdReset getBaseOrdReset()
 	{
 		return EnumBaseOrdReset.getEnum(getAttribute(AttributeName.BASEORDRESET, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxCollect
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxCollect ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute MaxCollect
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute MaxCollect
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setMaxCollect(int value)
 	{
 		setAttribute(AttributeName.MAXCOLLECT, value, null);
 	}
 
 	/**
-	  * (15) get int attribute MaxCollect
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute MaxCollect
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getMaxCollect()
 	{
 		return getIntAttribute(AttributeName.MAXCOLLECT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxOrd
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxOrd ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute MaxOrd
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute MaxOrd
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setMaxOrd(int value)
 	{
 		setAttribute(AttributeName.MAXORD, value, null);
 	}
 
 	/**
-	  * (15) get int attribute MaxOrd
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute MaxOrd
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getMaxOrd()
 	{
 		return getIntAttribute(AttributeName.MAXORD, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinCollect
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinCollect ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute MinCollect
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute MinCollect
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setMinCollect(int value)
 	{
 		setAttribute(AttributeName.MINCOLLECT, value, null);
 	}
 
 	/**
-	  * (15) get int attribute MinCollect
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute MinCollect
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getMinCollect()
 	{
 		return getIntAttribute(AttributeName.MINCOLLECT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OrdsConsumed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OrdsConsumed ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute OrdsConsumed
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute OrdsConsumed
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setOrdsConsumed(JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.ORDSCONSUMED, value, null);
 	}
 
 	/**
-	  * (20) get JDFIntegerRangeList attribute OrdsConsumed
-	  * @return JDFIntegerRangeList the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFIntegerRangeList
-	  */
+	 * (20) get JDFIntegerRangeList attribute OrdsConsumed
+	 * 
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 */
 	public JDFIntegerRangeList getOrdsConsumed()
 	{
 		final String strAttrName = getAttribute(AttributeName.ORDSCONSUMED, null, null);
@@ -813,86 +804,93 @@ public abstract class JDFAutoLayout extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetNameFormat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetNameFormat ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute SheetNameFormat
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute SheetNameFormat
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSheetNameFormat(String value)
 	{
 		setAttribute(AttributeName.SHEETNAMEFORMAT, value, null);
 	}
 
 	/**
-	  * (23) get String attribute SheetNameFormat
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute SheetNameFormat
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getSheetNameFormat()
 	{
 		return getAttribute(AttributeName.SHEETNAMEFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetNameTemplate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetNameTemplate ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute SheetNameTemplate
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute SheetNameTemplate
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSheetNameTemplate(String value)
 	{
 		setAttribute(AttributeName.SHEETNAMETEMPLATE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute SheetNameTemplate
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute SheetNameTemplate
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getSheetNameTemplate()
 	{
 		return getAttribute(AttributeName.SHEETNAMETEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceWorkStyle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceWorkStyle ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute SourceWorkStyle
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute SourceWorkStyle
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setSourceWorkStyle(EnumSourceWorkStyle enumVar)
 	{
 		setAttribute(AttributeName.SOURCEWORKSTYLE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute SourceWorkStyle
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute SourceWorkStyle
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumSourceWorkStyle getSourceWorkStyle()
 	{
 		return EnumSourceWorkStyle.getEnum(getAttribute(AttributeName.SOURCEWORKSTYLE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SurfaceContentsBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SurfaceContentsBox ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute SurfaceContentsBox
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute SurfaceContentsBox
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSurfaceContentsBox(JDFRectangle value)
 	{
 		setAttribute(AttributeName.SURFACECONTENTSBOX, value, null);
 	}
 
 	/**
-	  * (20) get JDFRectangle attribute SurfaceContentsBox
-	  * @return JDFRectangle the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFRectangle
-	  */
+	 * (20) get JDFRectangle attribute SurfaceContentsBox
+	 * 
+	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 */
 	public JDFRectangle getSurfaceContentsBox()
 	{
 		final String strAttrName = getAttribute(AttributeName.SURFACECONTENTSBOX, null, null);
@@ -900,33 +898,35 @@ public abstract class JDFAutoLayout extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TemplateType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TemplateType ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute TemplateType
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute TemplateType
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setTemplateType(EnumTemplateType enumVar)
 	{
 		setAttribute(AttributeName.TEMPLATETYPE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute TemplateType
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute TemplateType
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumTemplateType getTemplateType()
 	{
 		return EnumTemplateType.getEnum(getAttribute(AttributeName.TEMPLATETYPE, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
-	/** (26) getCreateContentObject
+	/**
+	 * (26) getCreateContentObject
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContentObject the element
@@ -938,9 +938,10 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (27) const get element ContentObject
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFContentObject the element
-	 * default is getContentObject(0)     */
+	 * @return JDFContentObject the element default is getContentObject(0)
+	 */
 	public JDFContentObject getContentObject(int iSkip)
 	{
 		return (JDFContentObject) getElement(ElementName.CONTENTOBJECT, null, iSkip);
@@ -953,23 +954,12 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public Collection<JDFContentObject> getAllContentObject()
 	{
-		final VElement vc = getChildElementVector(ElementName.CONTENTOBJECT, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFContentObject> v = new Vector<JDFContentObject>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFContentObject) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFContentObject.class, false, 0);
 	}
 
 	/**
 	 * (30) append element ContentObject
+	 * 
 	 * @return JDFContentObject the element
 	 */
 	public JDFContentObject appendContentObject()
@@ -977,7 +967,8 @@ public abstract class JDFAutoLayout extends JDFResource
 		return (JDFContentObject) appendElement(ElementName.CONTENTOBJECT, null);
 	}
 
-	/** (26) getCreateInsertSheet
+	/**
+	 * (26) getCreateInsertSheet
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFInsertSheet the element
@@ -989,9 +980,10 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (27) const get element InsertSheet
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFInsertSheet the element
-	 * default is getInsertSheet(0)     */
+	 * @return JDFInsertSheet the element default is getInsertSheet(0)
+	 */
 	public JDFInsertSheet getInsertSheet(int iSkip)
 	{
 		return (JDFInsertSheet) getElement(ElementName.INSERTSHEET, null, iSkip);
@@ -1004,23 +996,12 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public Collection<JDFInsertSheet> getAllInsertSheet()
 	{
-		final VElement vc = getChildElementVector(ElementName.INSERTSHEET, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFInsertSheet> v = new Vector<JDFInsertSheet>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFInsertSheet) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFInsertSheet.class, false, 0);
 	}
 
 	/**
 	 * (30) append element InsertSheet
+	 * 
 	 * @return JDFInsertSheet the element
 	 */
 	public JDFInsertSheet appendInsertSheet()
@@ -1029,9 +1010,10 @@ public abstract class JDFAutoLayout extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refInsertSheet(JDFInsertSheet refTarget)
 	{
 		refElement(refTarget);
@@ -1039,6 +1021,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (24) const get element LayerList
+	 * 
 	 * @return JDFLayerList the element
 	 */
 	public JDFLayerList getLayerList()
@@ -1046,7 +1029,8 @@ public abstract class JDFAutoLayout extends JDFResource
 		return (JDFLayerList) getElement(ElementName.LAYERLIST, null, 0);
 	}
 
-	/** (25) getCreateLayerList
+	/**
+	 * (25) getCreateLayerList
 	 * 
 	 * @return JDFLayerList the element
 	 */
@@ -1057,6 +1041,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (29) append element LayerList
+	 * 
 	 * @return JDFLayerList the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -1067,6 +1052,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (24) const get element LogicalStackParams
+	 * 
 	 * @return JDFLogicalStackParams the element
 	 */
 	public JDFLogicalStackParams getLogicalStackParams()
@@ -1074,7 +1060,8 @@ public abstract class JDFAutoLayout extends JDFResource
 		return (JDFLogicalStackParams) getElement(ElementName.LOGICALSTACKPARAMS, null, 0);
 	}
 
-	/** (25) getCreateLogicalStackParams
+	/**
+	 * (25) getCreateLogicalStackParams
 	 * 
 	 * @return JDFLogicalStackParams the element
 	 */
@@ -1085,6 +1072,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (29) append element LogicalStackParams
+	 * 
 	 * @return JDFLogicalStackParams the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -1093,7 +1081,8 @@ public abstract class JDFAutoLayout extends JDFResource
 		return (JDFLogicalStackParams) appendElementN(ElementName.LOGICALSTACKPARAMS, 1, null);
 	}
 
-	/** (26) getCreateMarkObject
+	/**
+	 * (26) getCreateMarkObject
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMarkObject the element
@@ -1105,9 +1094,10 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (27) const get element MarkObject
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFMarkObject the element
-	 * default is getMarkObject(0)     */
+	 * @return JDFMarkObject the element default is getMarkObject(0)
+	 */
 	public JDFMarkObject getMarkObject(int iSkip)
 	{
 		return (JDFMarkObject) getElement(ElementName.MARKOBJECT, null, iSkip);
@@ -1120,23 +1110,12 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public Collection<JDFMarkObject> getAllMarkObject()
 	{
-		final VElement vc = getChildElementVector(ElementName.MARKOBJECT, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFMarkObject> v = new Vector<JDFMarkObject>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFMarkObject) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFMarkObject.class, false, 0);
 	}
 
 	/**
 	 * (30) append element MarkObject
+	 * 
 	 * @return JDFMarkObject the element
 	 */
 	public JDFMarkObject appendMarkObject()
@@ -1144,7 +1123,8 @@ public abstract class JDFAutoLayout extends JDFResource
 		return (JDFMarkObject) appendElement(ElementName.MARKOBJECT, null);
 	}
 
-	/** (26) getCreateMedia
+	/**
+	 * (26) getCreateMedia
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMedia the element
@@ -1156,9 +1136,10 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (27) const get element Media
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFMedia the element
-	 * default is getMedia(0)     */
+	 * @return JDFMedia the element default is getMedia(0)
+	 */
 	public JDFMedia getMedia(int iSkip)
 	{
 		return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
@@ -1171,23 +1152,12 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public Collection<JDFMedia> getAllMedia()
 	{
-		final VElement vc = getChildElementVector(ElementName.MEDIA, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFMedia> v = new Vector<JDFMedia>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFMedia) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFMedia.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Media
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia appendMedia()
@@ -1196,9 +1166,10 @@ public abstract class JDFAutoLayout extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refMedia(JDFMedia refTarget)
 	{
 		refElement(refTarget);
@@ -1206,6 +1177,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (24) const get element MediaSource
+	 * 
 	 * @return JDFMediaSource the element
 	 */
 	public JDFMediaSource getMediaSource()
@@ -1213,7 +1185,8 @@ public abstract class JDFAutoLayout extends JDFResource
 		return (JDFMediaSource) getElement(ElementName.MEDIASOURCE, null, 0);
 	}
 
-	/** (25) getCreateMediaSource
+	/**
+	 * (25) getCreateMediaSource
 	 * 
 	 * @return JDFMediaSource the element
 	 */
@@ -1224,6 +1197,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (29) append element MediaSource
+	 * 
 	 * @return JDFMediaSource the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -1233,15 +1207,17 @@ public abstract class JDFAutoLayout extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refMediaSource(JDFMediaSource refTarget)
 	{
 		refElement(refTarget);
 	}
 
-	/** (26) getCreatePageCondition
+	/**
+	 * (26) getCreatePageCondition
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPageCondition the element
@@ -1253,9 +1229,10 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (27) const get element PageCondition
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFPageCondition the element
-	 * default is getPageCondition(0)     */
+	 * @return JDFPageCondition the element default is getPageCondition(0)
+	 */
 	public JDFPageCondition getPageCondition(int iSkip)
 	{
 		return (JDFPageCondition) getElement(ElementName.PAGECONDITION, null, iSkip);
@@ -1268,23 +1245,12 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public Collection<JDFPageCondition> getAllPageCondition()
 	{
-		final VElement vc = getChildElementVector(ElementName.PAGECONDITION, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFPageCondition> v = new Vector<JDFPageCondition>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFPageCondition) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFPageCondition.class, false, 0);
 	}
 
 	/**
 	 * (30) append element PageCondition
+	 * 
 	 * @return JDFPageCondition the element
 	 */
 	public JDFPageCondition appendPageCondition()
@@ -1292,7 +1258,8 @@ public abstract class JDFAutoLayout extends JDFResource
 		return (JDFPageCondition) appendElement(ElementName.PAGECONDITION, null);
 	}
 
-	/** (26) getCreateSheetCondition
+	/**
+	 * (26) getCreateSheetCondition
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSheetCondition the element
@@ -1304,9 +1271,10 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (27) const get element SheetCondition
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFSheetCondition the element
-	 * default is getSheetCondition(0)     */
+	 * @return JDFSheetCondition the element default is getSheetCondition(0)
+	 */
 	public JDFSheetCondition getSheetCondition(int iSkip)
 	{
 		return (JDFSheetCondition) getElement(ElementName.SHEETCONDITION, null, iSkip);
@@ -1319,23 +1287,12 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public Collection<JDFSheetCondition> getAllSheetCondition()
 	{
-		final VElement vc = getChildElementVector(ElementName.SHEETCONDITION, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFSheetCondition> v = new Vector<JDFSheetCondition>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFSheetCondition) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFSheetCondition.class, false, 0);
 	}
 
 	/**
 	 * (30) append element SheetCondition
+	 * 
 	 * @return JDFSheetCondition the element
 	 */
 	public JDFSheetCondition appendSheetCondition()
@@ -1343,7 +1300,8 @@ public abstract class JDFAutoLayout extends JDFResource
 		return (JDFSheetCondition) appendElement(ElementName.SHEETCONDITION, null);
 	}
 
-	/** (26) getCreateSignature
+	/**
+	 * (26) getCreateSignature
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSignature the element
@@ -1355,9 +1313,10 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (27) const get element Signature
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFSignature the element
-	 * default is getSignature(0)     */
+	 * @return JDFSignature the element default is getSignature(0)
+	 */
 	public JDFSignature getSignature(int iSkip)
 	{
 		return (JDFSignature) getElement(ElementName.SIGNATURE, null, iSkip);
@@ -1370,23 +1329,12 @@ public abstract class JDFAutoLayout extends JDFResource
 	 */
 	public Collection<JDFSignature> getAllSignature()
 	{
-		final VElement vc = getChildElementVector(ElementName.SIGNATURE, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFSignature> v = new Vector<JDFSignature>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFSignature) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFSignature.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Signature
+	 * 
 	 * @return JDFSignature the element
 	 */
 	public JDFSignature appendSignature()
@@ -1396,6 +1344,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (24) const get element TransferCurvePool
+	 * 
 	 * @return JDFTransferCurvePool the element
 	 */
 	public JDFTransferCurvePool getTransferCurvePool()
@@ -1403,7 +1352,8 @@ public abstract class JDFAutoLayout extends JDFResource
 		return (JDFTransferCurvePool) getElement(ElementName.TRANSFERCURVEPOOL, null, 0);
 	}
 
-	/** (25) getCreateTransferCurvePool
+	/**
+	 * (25) getCreateTransferCurvePool
 	 * 
 	 * @return JDFTransferCurvePool the element
 	 */
@@ -1414,6 +1364,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
 	/**
 	 * (29) append element TransferCurvePool
+	 * 
 	 * @return JDFTransferCurvePool the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -1423,9 +1374,10 @@ public abstract class JDFAutoLayout extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refTransferCurvePool(JDFTransferCurvePool refTarget)
 	{
 		refElement(refTarget);

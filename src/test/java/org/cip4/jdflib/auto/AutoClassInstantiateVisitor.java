@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,25 +76,28 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.w3c.dom.DOMException;
+
 public class AutoClassInstantiateVisitor implements DirectoryVisitor
 {
 	boolean totalResult = true;
 
+	@Override
 	public void enterDirectory(File dir)
 	{
 		totalResult = true;
 	}
 
+	@Override
 	public void leaveDirectory(File dir)
 	{
 		if (!totalResult)
 		{
 			totalResult = true;
-			throw new DOMException(DOMException.NOT_FOUND_ERR,
-					"Error!!! There were classes, which could not be instantiated");
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "Error!!! There were classes, which could not be instantiated");
 		}
 	}
 
+	@Override
 	public void visitFile(File file)
 	{
 		testJDFClass(file.getName());
@@ -105,48 +108,43 @@ public class AutoClassInstantiateVisitor implements DirectoryVisitor
 		boolean result = false;
 
 		String elementName = fileName;
-		String prefix = elementName.startsWith("JDFAuto") ? "JDFAuto" : "JDF";
+		final String prefix = elementName.startsWith("JDFAuto") ? "JDFAuto" : "JDF";
 
-		elementName = elementName.substring(prefix.length(), elementName
-				.length()
-				- ".java".length());
+		elementName = elementName.substring(prefix.length(), elementName.length() - ".java".length());
 
 		// adjust the element name
 		if (elementName.startsWith("Span"))
+		{
 			elementName = elementName.substring("Span".length());
+		}
 		else if (elementName.equals("ShapeElement"))
+		{
 			elementName = "Shape";
+		}
 		else if (elementName.equals("Node"))
+		{
 			elementName = "JDF";
+		}
 
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		final JDFNode jdfRoot = (JDFNode) jdfDoc.getRoot();
 
-		KElement kElem = jdfRoot.appendElement(elementName); // create a class
-																// for
-																// elementName
+		final KElement kElem = jdfRoot.appendElement(elementName); // create a class
+																	// for
+																	// elementName
 
 		String createdClass = kElem.getClass().toString();
-		createdClass = createdClass
-				.substring(createdClass.lastIndexOf(".") + 1);
+		createdClass = createdClass.substring(createdClass.lastIndexOf(".") + 1);
 
-		result = elementName.equals(createdClass.substring("JDF".length()))
-				|| (elementName.equals(ElementName.COLORSUSED) && createdClass
-						.equals("JDFSeparationList"))
-				|| (elementName.equals(ElementName.SHAPE) && createdClass
-						.equals("JDFShapeElement"))
-				|| (elementName.endsWith(JDFConstants.LINK) && createdClass
-						.substring("JDF".length()).equals(
-								ElementName.RESOURCELINK));
+		result = elementName.equals(createdClass.substring("JDF".length())) || (elementName.equals(ElementName.COLORSUSED) && createdClass.equals("JDFSeparationList"))
+				|| (elementName.equals(ElementName.SHAPE) && createdClass.equals("JDFShapeElement"))
+				|| (elementName.endsWith(JDFConstants.LINK) && createdClass.substring("JDF".length()).equals(ElementName.RESOURCELINK));
 
 		if (!result)
 		{
 			totalResult = false;
-			throw new DOMException(
-					DOMException.NOT_FOUND_ERR,
-					"AutoClassIntantiateVisitor: Class JDF" + elementName
-							+ " (for " + fileName + ") could not be instantiated!"
-							+ " --> missing entry in DocumentJDFImpl.sm_PackageNames ???");
+			throw new DOMException(DOMException.NOT_FOUND_ERR,
+					"AutoClassIntantiateVisitor: Class JDF" + elementName + " (for " + fileName + ") could not be instantiated!" + " --> missing entry in DocumentJDFImpl.sm_PackageNames ???");
 		}
 	}
 }

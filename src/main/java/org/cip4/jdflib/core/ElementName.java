@@ -50,7 +50,7 @@ package org.cip4.jdflib.core;
 /**
  *
  * list of xml element names for JDF
- * 
+ *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
  *         July 23, 2009
@@ -1018,6 +1018,7 @@ public final class ElementName
 	public static final String MANUALLABORPARAMS = "ManualLaborParams";
 	/** */
 	public static final String MARKACTIVATION = "MarkActivation";
+	public static final String MARKCOLOR = "MarkColor";
 	/** */
 	public static final String MARKOBJECT = "MarkObject";
 	/** */

@@ -2,76 +2,41 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
 
 package org.cip4.jdflib.auto;
-
-import java.util.Collection;
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,19 +46,19 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFDeviceMark;
+import org.cip4.jdflib.resource.JDFResource;
 
 /**
-*****************************************************************************
-class JDFAutoJobField : public JDFElement
+ *****************************************************************************
+ * class JDFAutoJobField : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
-*****************************************************************************
-*/
-
-public abstract class JDFAutoJobField extends JDFElement
+public abstract class JDFAutoJobField extends JDFResource
 {
 
 	private static final long serialVersionUID = 1L;
@@ -101,11 +66,11 @@ public abstract class JDFAutoJobField extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHOWLIST, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBFORMAT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBTEMPLATE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.OPERATORTEXT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.USERTEXT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHOWLIST, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBFORMAT, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBTEMPLATE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OPERATORTEXT, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.USERTEXT, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -117,7 +82,7 @@ public abstract class JDFAutoJobField extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEMARK, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEMARK, 0x66666661);
 	}
 
 	@Override
@@ -128,6 +93,7 @@ public abstract class JDFAutoJobField extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoJobField
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -138,6 +104,7 @@ public abstract class JDFAutoJobField extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoJobField
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -149,6 +116,7 @@ public abstract class JDFAutoJobField extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoJobField
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -160,7 +128,7 @@ public abstract class JDFAutoJobField extends JDFElement
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -168,27 +136,48 @@ public abstract class JDFAutoJobField extends JDFElement
 		return " JDFAutoJobField[  --> " + super.toString() + " ]";
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * @return true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
+
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ShowList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShowList ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ShowList
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ShowList
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setShowList(VString value)
 	{
 		setAttribute(AttributeName.SHOWLIST, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute ShowList
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute ShowList
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getShowList()
 	{
 		final VString vStrAttrib = new VString();
@@ -197,144 +186,141 @@ public abstract class JDFAutoJobField extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobFormat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobFormat ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute JobFormat
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute JobFormat
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setJobFormat(String value)
 	{
 		setAttribute(AttributeName.JOBFORMAT, value, null);
 	}
 
 	/**
-	  * (23) get String attribute JobFormat
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute JobFormat
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getJobFormat()
 	{
 		return getAttribute(AttributeName.JOBFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobTemplate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobTemplate ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute JobTemplate
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute JobTemplate
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setJobTemplate(String value)
 	{
 		setAttribute(AttributeName.JOBTEMPLATE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute JobTemplate
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute JobTemplate
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getJobTemplate()
 	{
 		return getAttribute(AttributeName.JOBTEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OperatorText
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OperatorText ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute OperatorText
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute OperatorText
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setOperatorText(String value)
 	{
 		setAttribute(AttributeName.OPERATORTEXT, value, null);
 	}
 
 	/**
-	  * (23) get String attribute OperatorText
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute OperatorText
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getOperatorText()
 	{
 		return getAttribute(AttributeName.OPERATORTEXT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UserText
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UserText ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute UserText
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute UserText
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setUserText(String value)
 	{
 		setAttribute(AttributeName.USERTEXT, value, null);
 	}
 
 	/**
-	  * (23) get String attribute UserText
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute UserText
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getUserText()
 	{
 		return getAttribute(AttributeName.USERTEXT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
-	/** (26) getCreateDeviceMark
+	/**
+	 * (24) const get element DeviceMark
 	 * 
-	 * @param iSkip number of elements to skip
 	 * @return JDFDeviceMark the element
 	 */
-	public JDFDeviceMark getCreateDeviceMark(int iSkip)
+	public JDFDeviceMark getDeviceMark()
 	{
-		return (JDFDeviceMark) getCreateElement_KElement(ElementName.DEVICEMARK, null, iSkip);
+		return (JDFDeviceMark) getElement(ElementName.DEVICEMARK, null, 0);
 	}
 
 	/**
-	 * (27) const get element DeviceMark
-	 * @param iSkip number of elements to skip
-	 * @return JDFDeviceMark the element
-	 * default is getDeviceMark(0)     */
-	public JDFDeviceMark getDeviceMark(int iSkip)
-	{
-		return (JDFDeviceMark) getElement(ElementName.DEVICEMARK, null, iSkip);
-	}
-
-	/**
-	 * Get all DeviceMark from the current element
+	 * (25) getCreateDeviceMark
 	 * 
-	 * @return Collection<JDFDeviceMark>, null if none are available
+	 * @return JDFDeviceMark the element
 	 */
-	public Collection<JDFDeviceMark> getAllDeviceMark()
+	public JDFDeviceMark getCreateDeviceMark()
 	{
-		final VElement vc = getChildElementVector(ElementName.DEVICEMARK, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFDeviceMark> v = new Vector<JDFDeviceMark>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFDeviceMark) vc.get(i));
-		}
-
-		return v;
+		return (JDFDeviceMark) getCreateElement_KElement(ElementName.DEVICEMARK, null, 0);
 	}
 
 	/**
-	 * (30) append element DeviceMark
+	 * (29) append element DeviceMark
+	 * 
 	 * @return JDFDeviceMark the element
+	 * @throws JDFException if the element already exists
 	 */
-	public JDFDeviceMark appendDeviceMark()
+	public JDFDeviceMark appendDeviceMark() throws JDFException
 	{
-		return (JDFDeviceMark) appendElement(ElementName.DEVICEMARK, null);
+		return (JDFDeviceMark) appendElementN(ElementName.DEVICEMARK, 1, null);
+	}
+
+	/**
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
+	public void refDeviceMark(JDFDeviceMark refTarget)
+	{
+		refElement(refTarget);
 	}
 
 }// end namespace JDF

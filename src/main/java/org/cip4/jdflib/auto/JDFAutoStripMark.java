@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -74,7 +42,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -87,42 +54,44 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFJobField;
 import org.cip4.jdflib.resource.JDFRefAnchor;
+import org.cip4.jdflib.resource.process.JDFMarkColor;
 import org.cip4.jdflib.resource.process.JDFPosition;
 
 /**
-*****************************************************************************
-class JDFAutoStripMark : public JDFElement
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoStripMark : public JDFElement
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoStripMark extends JDFElement
 {
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[15];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[17];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ABSOLUTEHEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ABSOLUTEWIDTH, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.ANCHOR, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.HORIZONTALFITPOLICY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumHorizontalFitPolicy.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ID, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.MARKCONTEXT, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumMarkContext.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MARKNAME, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MARKSIDE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumMarkSide.getEnum(0), null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.OFFSET, 0x33333111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.ORD, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.RELATIVEHEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.RELATIVEWIDTH, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.STRIPMARKDETAILS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.VERTICALFITPOLICY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumVerticalFitPolicy.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.FONT, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.FONTSIZE, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.HORIZONTALFITPOLICY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumHorizontalFitPolicy.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.ID, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MARKCONTEXT, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumMarkContext.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.MARKNAME, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.MARKSIDE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumMarkSide.getEnum(0), null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.OFFSET, 0x33333111, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.ORD, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.RELATIVEHEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.RELATIVEWIDTH, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.STRIPMARKDETAILS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.VERTICALFITPOLICY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumVerticalFitPolicy.getEnum(0), null);
 	}
 
 	@Override
@@ -131,12 +100,13 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.POSITION, 0x66666111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.JOBFIELD, 0x66666111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.REFANCHOR, 0x33333111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.MARKCOLOR, 0x33333111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.POSITION, 0x66666111);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.JOBFIELD, 0x66666111);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.REFANCHOR, 0x33333111);
 	}
 
 	@Override
@@ -147,6 +117,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoStripMark
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -157,6 +128,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoStripMark
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -168,6 +140,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoStripMark
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -179,7 +152,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -188,8 +161,8 @@ public abstract class JDFAutoStripMark extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for Anchor
-	*/
+	 * Enumeration strings for Anchor
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumAnchor extends ValuedEnum
@@ -265,8 +238,8 @@ public abstract class JDFAutoStripMark extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for HorizontalFitPolicy
-	*/
+	 * Enumeration strings for HorizontalFitPolicy
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumHorizontalFitPolicy extends ValuedEnum
@@ -334,8 +307,8 @@ public abstract class JDFAutoStripMark extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for MarkContext
-	*/
+	 * Enumeration strings for MarkContext
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumMarkContext extends ValuedEnum
@@ -403,8 +376,8 @@ public abstract class JDFAutoStripMark extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for MarkSide
-	*/
+	 * Enumeration strings for MarkSide
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumMarkSide extends ValuedEnum
@@ -470,8 +443,8 @@ public abstract class JDFAutoStripMark extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for Orientation
-	*/
+	 * Enumeration strings for Orientation
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumOrientation extends ValuedEnum
@@ -545,8 +518,8 @@ public abstract class JDFAutoStripMark extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for VerticalFitPolicy
-	*/
+	 * Enumeration strings for VerticalFitPolicy
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumVerticalFitPolicy extends ValuedEnum
@@ -613,102 +586,156 @@ public abstract class JDFAutoStripMark extends JDFElement
 		public static final EnumVerticalFitPolicy RepeatUnclipped = new EnumVerticalFitPolicy("RepeatUnclipped");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AbsoluteHeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AbsoluteHeight ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute AbsoluteHeight
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute AbsoluteHeight
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAbsoluteHeight(double value)
 	{
 		setAttribute(AttributeName.ABSOLUTEHEIGHT, value, null);
 	}
 
 	/**
-	  * (17) get double attribute AbsoluteHeight
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute AbsoluteHeight
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getAbsoluteHeight()
 	{
 		return getRealAttribute(AttributeName.ABSOLUTEHEIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AbsoluteWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AbsoluteWidth ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute AbsoluteWidth
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute AbsoluteWidth
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAbsoluteWidth(double value)
 	{
 		setAttribute(AttributeName.ABSOLUTEWIDTH, value, null);
 	}
 
 	/**
-	  * (17) get double attribute AbsoluteWidth
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute AbsoluteWidth
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getAbsoluteWidth()
 	{
 		return getRealAttribute(AttributeName.ABSOLUTEWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Anchor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Anchor
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Anchor
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setAnchor(EnumAnchor enumVar)
 	{
 		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Anchor
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Anchor
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumAnchor getAnchor()
 	{
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HorizontalFitPolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Font ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute HorizontalFitPolicy
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (36) set attribute Font
+	 * 
+	 * @param value the value to set the attribute to
+	 */
+	public void setFont(String value)
+	{
+		setAttribute(AttributeName.FONT, value, null);
+	}
+
+	/**
+	 * (23) get String attribute Font
+	 * 
+	 * @return the value of the attribute
+	 */
+	public String getFont()
+	{
+		return getAttribute(AttributeName.FONT, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FontSize ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute FontSize
+	 * 
+	 * @param value the value to set the attribute to
+	 */
+	public void setFontSize(double value)
+	{
+		setAttribute(AttributeName.FONTSIZE, value, null);
+	}
+
+	/**
+	 * (17) get double attribute FontSize
+	 * 
+	 * @return double the value of the attribute
+	 */
+	public double getFontSize()
+	{
+		return getRealAttribute(AttributeName.FONTSIZE, null, 0.0);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HorizontalFitPolicy ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute HorizontalFitPolicy
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setHorizontalFitPolicy(EnumHorizontalFitPolicy enumVar)
 	{
 		setAttribute(AttributeName.HORIZONTALFITPOLICY, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute HorizontalFitPolicy
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute HorizontalFitPolicy
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumHorizontalFitPolicy getHorizontalFitPolicy()
 	{
 		return EnumHorizontalFitPolicy.getEnum(getAttribute(AttributeName.HORIZONTALFITPOLICY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	@Override
 	public void setID(String value)
 	{
@@ -716,95 +743,103 @@ public abstract class JDFAutoStripMark extends JDFElement
 	}
 
 	/**
-	  * (23) get String attribute ID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute ID
+	 * 
+	 * @return the value of the attribute
+	 */
 	@Override
 	public String getID()
 	{
 		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarkContext
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkContext ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute MarkContext
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute MarkContext
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setMarkContext(EnumMarkContext enumVar)
 	{
 		setAttribute(AttributeName.MARKCONTEXT, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute MarkContext
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute MarkContext
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumMarkContext getMarkContext()
 	{
 		return EnumMarkContext.getEnum(getAttribute(AttributeName.MARKCONTEXT, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarkName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkName ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute MarkName
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute MarkName
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setMarkName(String value)
 	{
 		setAttribute(AttributeName.MARKNAME, value, null);
 	}
 
 	/**
-	  * (23) get String attribute MarkName
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute MarkName
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getMarkName()
 	{
 		return getAttribute(AttributeName.MARKNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarkSide
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkSide ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute MarkSide
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute MarkSide
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setMarkSide(EnumMarkSide enumVar)
 	{
 		setAttribute(AttributeName.MARKSIDE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute MarkSide
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute MarkSide
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumMarkSide getMarkSide()
 	{
 		return EnumMarkSide.getEnum(getAttribute(AttributeName.MARKSIDE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Offset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Offset
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Offset
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setOffset(JDFXYPair value)
 	{
 		setAttribute(AttributeName.OFFSET, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute Offset
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute Offset
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getOffset()
 	{
 		final String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
@@ -812,139 +847,193 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Ord
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Ord ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Ord
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Ord
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setOrd(int value)
 	{
 		setAttribute(AttributeName.ORD, value, null);
 	}
 
 	/**
-	  * (15) get int attribute Ord
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute Ord
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getOrd()
 	{
 		return getIntAttribute(AttributeName.ORD, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Orientation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Orientation
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Orientation
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setOrientation(EnumOrientation enumVar)
 	{
 		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Orientation
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Orientation
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumOrientation getOrientation()
 	{
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RelativeHeight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RelativeHeight ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute RelativeHeight
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute RelativeHeight
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setRelativeHeight(double value)
 	{
 		setAttribute(AttributeName.RELATIVEHEIGHT, value, null);
 	}
 
 	/**
-	  * (17) get double attribute RelativeHeight
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute RelativeHeight
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getRelativeHeight()
 	{
 		return getRealAttribute(AttributeName.RELATIVEHEIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RelativeWidth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RelativeWidth ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute RelativeWidth
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute RelativeWidth
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setRelativeWidth(double value)
 	{
 		setAttribute(AttributeName.RELATIVEWIDTH, value, null);
 	}
 
 	/**
-	  * (17) get double attribute RelativeWidth
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute RelativeWidth
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getRelativeWidth()
 	{
 		return getRealAttribute(AttributeName.RELATIVEWIDTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StripMarkDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StripMarkDetails ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute StripMarkDetails
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute StripMarkDetails
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setStripMarkDetails(String value)
 	{
 		setAttribute(AttributeName.STRIPMARKDETAILS, value, null);
 	}
 
 	/**
-	  * (23) get String attribute StripMarkDetails
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute StripMarkDetails
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getStripMarkDetails()
 	{
 		return getAttribute(AttributeName.STRIPMARKDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute VerticalFitPolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute VerticalFitPolicy ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute VerticalFitPolicy
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute VerticalFitPolicy
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setVerticalFitPolicy(EnumVerticalFitPolicy enumVar)
 	{
 		setAttribute(AttributeName.VERTICALFITPOLICY, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute VerticalFitPolicy
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute VerticalFitPolicy
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumVerticalFitPolicy getVerticalFitPolicy()
 	{
 		return EnumVerticalFitPolicy.getEnum(getAttribute(AttributeName.VERTICALFITPOLICY, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
+	 * (26) getCreateMarkColor
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFMarkColor the element
+	 */
+	public JDFMarkColor getCreateMarkColor(int iSkip)
+	{
+		return (JDFMarkColor) getCreateElement_KElement(ElementName.MARKCOLOR, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element MarkColor
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFMarkColor the element default is getMarkColor(0)
+	 */
+	public JDFMarkColor getMarkColor(int iSkip)
+	{
+		return (JDFMarkColor) getElement(ElementName.MARKCOLOR, null, iSkip);
+	}
+
+	/**
+	 * Get all MarkColor from the current element
+	 * 
+	 * @return Collection<JDFMarkColor>, null if none are available
+	 */
+	public Collection<JDFMarkColor> getAllMarkColor()
+	{
+		return getChildrenByClass(JDFMarkColor.class, false, 0);
+	}
+
+	/**
+	 * (30) append element MarkColor
+	 * 
+	 * @return JDFMarkColor the element
+	 */
+	public JDFMarkColor appendMarkColor()
+	{
+		return (JDFMarkColor) appendElement(ElementName.MARKCOLOR, null);
+	}
+
+	/**
 	 * (24) const get element Position
+	 * 
 	 * @return JDFPosition the element
 	 */
 	public JDFPosition getPosition()
@@ -952,7 +1041,8 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return (JDFPosition) getElement(ElementName.POSITION, null, 0);
 	}
 
-	/** (25) getCreatePosition
+	/**
+	 * (25) getCreatePosition
 	 * 
 	 * @return JDFPosition the element
 	 */
@@ -963,6 +1053,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (29) append element Position
+	 * 
 	 * @return JDFPosition the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -973,6 +1064,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (24) const get element JobField
+	 * 
 	 * @return JDFJobField the element
 	 */
 	public JDFJobField getJobField()
@@ -980,7 +1072,8 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return (JDFJobField) getElement(ElementName.JOBFIELD, null, 0);
 	}
 
-	/** (25) getCreateJobField
+	/**
+	 * (25) getCreateJobField
 	 * 
 	 * @return JDFJobField the element
 	 */
@@ -991,6 +1084,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (29) append element JobField
+	 * 
 	 * @return JDFJobField the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -999,7 +1093,18 @@ public abstract class JDFAutoStripMark extends JDFElement
 		return (JDFJobField) appendElementN(ElementName.JOBFIELD, 1, null);
 	}
 
-	/** (26) getCreateRefAnchor
+	/**
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
+	public void refJobField(JDFJobField refTarget)
+	{
+		refElement(refTarget);
+	}
+
+	/**
+	 * (26) getCreateRefAnchor
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFRefAnchor the element
@@ -1011,9 +1116,10 @@ public abstract class JDFAutoStripMark extends JDFElement
 
 	/**
 	 * (27) const get element RefAnchor
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFRefAnchor the element
-	 * default is getRefAnchor(0)     */
+	 * @return JDFRefAnchor the element default is getRefAnchor(0)
+	 */
 	public JDFRefAnchor getRefAnchor(int iSkip)
 	{
 		return (JDFRefAnchor) getElement(ElementName.REFANCHOR, null, iSkip);
@@ -1026,23 +1132,12 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 */
 	public Collection<JDFRefAnchor> getAllRefAnchor()
 	{
-		final VElement vc = getChildElementVector(ElementName.REFANCHOR, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFRefAnchor> v = new Vector<JDFRefAnchor>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFRefAnchor) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFRefAnchor.class, false, 0);
 	}
 
 	/**
 	 * (30) append element RefAnchor
+	 * 
 	 * @return JDFRefAnchor the element
 	 */
 	public JDFRefAnchor appendRefAnchor()

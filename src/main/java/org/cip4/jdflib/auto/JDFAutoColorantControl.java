@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -93,11 +61,11 @@ import org.cip4.jdflib.resource.process.JDFDeviceNSpace;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceSubstitute;
 
 /**
-*****************************************************************************
-class JDFAutoColorantControl : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoColorantControl : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoColorantControl extends JDFResource
 {
@@ -140,6 +108,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoColorantControl
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -150,6 +119,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoColorantControl
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -161,6 +131,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoColorantControl
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -172,7 +143,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -181,12 +152,12 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -201,8 +172,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for InternalColorModel
-	*/
+	 * Enumeration strings for InternalColorModel
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumInternalColorModel extends ValuedEnum
@@ -266,8 +237,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for MappingSelection
-	*/
+	 * Enumeration strings for MappingSelection
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumMappingSelection extends ValuedEnum
@@ -330,101 +301,108 @@ public abstract class JDFAutoColorantControl extends JDFResource
 		public static final EnumMappingSelection UseProcessColorValues = new EnumMappingSelection("UseProcessColorValues");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ForceSeparations
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ForceSeparations ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ForceSeparations
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ForceSeparations
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setForceSeparations(boolean value)
 	{
 		setAttribute(AttributeName.FORCESEPARATIONS, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute ForceSeparations
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute ForceSeparations
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getForceSeparations()
 	{
 		return getBoolAttribute(AttributeName.FORCESEPARATIONS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute InternalColorModel
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InternalColorModel ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute InternalColorModel
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute InternalColorModel
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setInternalColorModel(EnumInternalColorModel enumVar)
 	{
 		setAttribute(AttributeName.INTERNALCOLORMODEL, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute InternalColorModel
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute InternalColorModel
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumInternalColorModel getInternalColorModel()
 	{
 		return EnumInternalColorModel.getEnum(getAttribute(AttributeName.INTERNALCOLORMODEL, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MappingSelection
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MappingSelection ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute MappingSelection
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute MappingSelection
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setMappingSelection(EnumMappingSelection enumVar)
 	{
 		setAttribute(AttributeName.MAPPINGSELECTION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute MappingSelection
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute MappingSelection
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumMappingSelection getMappingSelection()
 	{
 		return EnumMappingSelection.getEnum(getAttribute(AttributeName.MAPPINGSELECTION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProcessColorModel
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProcessColorModel ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ProcessColorModel
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ProcessColorModel
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setProcessColorModel(String value)
 	{
 		setAttribute(AttributeName.PROCESSCOLORMODEL, value, null);
 	}
 
 	/**
-	  * (23) get String attribute ProcessColorModel
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute ProcessColorModel
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getProcessColorModel()
 	{
 		return getAttribute(AttributeName.PROCESSCOLORMODEL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
-	/** (26) getCreateColorantAlias
+	/**
+	 * (26) getCreateColorantAlias
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorantAlias the element
@@ -436,9 +414,10 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (27) const get element ColorantAlias
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFColorantAlias the element
-	 * default is getColorantAlias(0)     */
+	 * @return JDFColorantAlias the element default is getColorantAlias(0)
+	 */
 	public JDFColorantAlias getColorantAlias(int iSkip)
 	{
 		return (JDFColorantAlias) getElement(ElementName.COLORANTALIAS, null, iSkip);
@@ -456,6 +435,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (30) append element ColorantAlias
+	 * 
 	 * @return JDFColorantAlias the element
 	 */
 	public JDFColorantAlias appendColorantAlias()
@@ -464,9 +444,10 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refColorantAlias(JDFColorantAlias refTarget)
 	{
 		refElement(refTarget);
@@ -474,6 +455,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (24) const get element ColorantConvertProcess
+	 * 
 	 * @return JDFSeparationList the element
 	 */
 	public JDFSeparationList getColorantConvertProcess()
@@ -481,7 +463,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 		return (JDFSeparationList) getElement(ElementName.COLORANTCONVERTPROCESS, null, 0);
 	}
 
-	/** (25) getCreateColorantConvertProcess
+	/**
+	 * (25) getCreateColorantConvertProcess
 	 * 
 	 * @return JDFSeparationList the element
 	 */
@@ -492,6 +475,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (29) append element ColorantConvertProcess
+	 * 
 	 * @return JDFSeparationList the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -502,6 +486,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (24) const get element ColorantOrder
+	 * 
 	 * @return JDFSeparationList the element
 	 */
 	public JDFSeparationList getColorantOrder()
@@ -509,7 +494,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 		return (JDFSeparationList) getElement(ElementName.COLORANTORDER, null, 0);
 	}
 
-	/** (25) getCreateColorantOrder
+	/**
+	 * (25) getCreateColorantOrder
 	 * 
 	 * @return JDFSeparationList the element
 	 */
@@ -520,6 +506,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (29) append element ColorantOrder
+	 * 
 	 * @return JDFSeparationList the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -530,6 +517,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (24) const get element ColorantParams
+	 * 
 	 * @return JDFSeparationList the element
 	 */
 	public JDFSeparationList getColorantParams()
@@ -537,7 +525,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 		return (JDFSeparationList) getElement(ElementName.COLORANTPARAMS, null, 0);
 	}
 
-	/** (25) getCreateColorantParams
+	/**
+	 * (25) getCreateColorantParams
 	 * 
 	 * @return JDFSeparationList the element
 	 */
@@ -548,6 +537,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (29) append element ColorantParams
+	 * 
 	 * @return JDFSeparationList the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -558,6 +548,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (24) const get element ColorPool
+	 * 
 	 * @return JDFColorPool the element
 	 */
 	public JDFColorPool getColorPool()
@@ -565,7 +556,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 		return (JDFColorPool) getElement(ElementName.COLORPOOL, null, 0);
 	}
 
-	/** (25) getCreateColorPool
+	/**
+	 * (25) getCreateColorPool
 	 * 
 	 * @return JDFColorPool the element
 	 */
@@ -576,6 +568,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (29) append element ColorPool
+	 * 
 	 * @return JDFColorPool the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -585,15 +578,17 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refColorPool(JDFColorPool refTarget)
 	{
 		refElement(refTarget);
 	}
 
-	/** (26) getCreateColorSpaceSubstitute
+	/**
+	 * (26) getCreateColorSpaceSubstitute
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorSpaceSubstitute the element
@@ -605,9 +600,10 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (27) const get element ColorSpaceSubstitute
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFColorSpaceSubstitute the element
-	 * default is getColorSpaceSubstitute(0)     */
+	 * @return JDFColorSpaceSubstitute the element default is getColorSpaceSubstitute(0)
+	 */
 	public JDFColorSpaceSubstitute getColorSpaceSubstitute(int iSkip)
 	{
 		return (JDFColorSpaceSubstitute) getElement(ElementName.COLORSPACESUBSTITUTE, null, iSkip);
@@ -625,6 +621,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (30) append element ColorSpaceSubstitute
+	 * 
 	 * @return JDFColorSpaceSubstitute the element
 	 */
 	public JDFColorSpaceSubstitute appendColorSpaceSubstitute()
@@ -634,6 +631,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (24) const get element DeviceColorantOrder
+	 * 
 	 * @return JDFSeparationList the element
 	 */
 	public JDFSeparationList getDeviceColorantOrder()
@@ -641,7 +639,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 		return (JDFSeparationList) getElement(ElementName.DEVICECOLORANTORDER, null, 0);
 	}
 
-	/** (25) getCreateDeviceColorantOrder
+	/**
+	 * (25) getCreateDeviceColorantOrder
 	 * 
 	 * @return JDFSeparationList the element
 	 */
@@ -652,6 +651,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (29) append element DeviceColorantOrder
+	 * 
 	 * @return JDFSeparationList the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -660,7 +660,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 		return (JDFSeparationList) appendElementN(ElementName.DEVICECOLORANTORDER, 1, null);
 	}
 
-	/** (26) getCreateDeviceNSpace
+	/**
+	 * (26) getCreateDeviceNSpace
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDeviceNSpace the element
@@ -672,9 +673,10 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (27) const get element DeviceNSpace
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFDeviceNSpace the element
-	 * default is getDeviceNSpace(0)     */
+	 * @return JDFDeviceNSpace the element default is getDeviceNSpace(0)
+	 */
 	public JDFDeviceNSpace getDeviceNSpace(int iSkip)
 	{
 		return (JDFDeviceNSpace) getElement(ElementName.DEVICENSPACE, null, iSkip);
@@ -692,11 +694,22 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
 	/**
 	 * (30) append element DeviceNSpace
+	 * 
 	 * @return JDFDeviceNSpace the element
 	 */
 	public JDFDeviceNSpace appendDeviceNSpace()
 	{
 		return (JDFDeviceNSpace) appendElement(ElementName.DEVICENSPACE, null);
+	}
+
+	/**
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
+	public void refDeviceNSpace(JDFDeviceNSpace refTarget)
+	{
+		refElement(refTarget);
 	}
 
 }// end namespace JDF

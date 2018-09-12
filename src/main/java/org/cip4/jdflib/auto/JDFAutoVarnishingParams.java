@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -83,11 +51,11 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
-*****************************************************************************
-class JDFAutoVarnishingParams : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoVarnishingParams : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoVarnishingParams extends JDFResource
 {
@@ -111,6 +79,7 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoVarnishingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -121,6 +90,7 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoVarnishingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -132,6 +102,7 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoVarnishingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -143,7 +114,7 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -152,7 +123,7 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -172,8 +143,8 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for VarnishArea
-	*/
+	 * Enumeration strings for VarnishArea
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumVarnishArea extends ValuedEnum
@@ -235,8 +206,8 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for VarnishMethod
-	*/
+	 * Enumeration strings for VarnishMethod
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumVarnishMethod extends ValuedEnum
@@ -299,90 +270,97 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 		public static final EnumVarnishMethod Method = new EnumVarnishMethod("Method");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ModuleIndex
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ModuleIndex
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setModuleIndex(int value)
 	{
 		setAttribute(AttributeName.MODULEINDEX, value, null);
 	}
 
 	/**
-	  * (15) get int attribute ModuleIndex
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute ModuleIndex
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getModuleIndex()
 	{
 		return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleType ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ModuleType
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ModuleType
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setModuleType(String value)
 	{
 		setAttribute(AttributeName.MODULETYPE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute ModuleType
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute ModuleType
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getModuleType()
 	{
 		return getAttribute(AttributeName.MODULETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute VarnishArea
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute VarnishArea ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute VarnishArea
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute VarnishArea
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setVarnishArea(EnumVarnishArea enumVar)
 	{
 		setAttribute(AttributeName.VARNISHAREA, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute VarnishArea
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute VarnishArea
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumVarnishArea getVarnishArea()
 	{
 		return EnumVarnishArea.getEnum(getAttribute(AttributeName.VARNISHAREA, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute VarnishMethod
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute VarnishMethod ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute VarnishMethod
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute VarnishMethod
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setVarnishMethod(EnumVarnishMethod enumVar)
 	{
 		setAttribute(AttributeName.VARNISHMETHOD, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute VarnishMethod
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute VarnishMethod
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumVarnishMethod getVarnishMethod()
 	{
 		return EnumVarnishMethod.getEnum(getAttribute(AttributeName.VARNISHMETHOD, null, null));

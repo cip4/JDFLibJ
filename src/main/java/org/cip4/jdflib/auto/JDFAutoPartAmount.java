@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -74,7 +42,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,7 +53,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFLot;
@@ -94,11 +60,11 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 
 /**
-*****************************************************************************
-class JDFAutoPartAmount : public JDFElement
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoPartAmount : public JDFElement
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoPartAmount extends JDFElement
 {
@@ -147,6 +113,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPartAmount
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -157,6 +124,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPartAmount
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -168,6 +136,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPartAmount
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -179,7 +148,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -188,8 +157,8 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for MinLateStatus
-	*/
+	 * Enumeration strings for MinLateStatus
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumMinLateStatus extends ValuedEnum
@@ -261,8 +230,8 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for MinStatus
-	*/
+	 * Enumeration strings for MinStatus
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumMinStatus extends ValuedEnum
@@ -334,8 +303,8 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for Orientation
-	*/
+	 * Enumeration strings for Orientation
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumOrientation extends ValuedEnum
@@ -408,91 +377,97 @@ public abstract class JDFAutoPartAmount extends JDFElement
 		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ActualAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ActualAmount ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ActualAmount
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ActualAmount
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setActualAmount(double value)
 	{
 		setAttribute(AttributeName.ACTUALAMOUNT, value, null);
 	}
 
 	/**
-	  * (17) get double attribute ActualAmount
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute ActualAmount
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getActualAmount()
 	{
 		return getRealAttribute(AttributeName.ACTUALAMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Amount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Amount
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Amount
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAmount(double value)
 	{
 		setAttribute(AttributeName.AMOUNT, value, null);
 	}
 
 	/**
-	  * (17) get double attribute Amount
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute Amount
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getAmount()
 	{
 		return getRealAttribute(AttributeName.AMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DraftOK
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DraftOK ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute DraftOK
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute DraftOK
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setDraftOK(boolean value)
 	{
 		setAttribute(AttributeName.DRAFTOK, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute DraftOK
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute DraftOK
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getDraftOK()
 	{
 		return getBoolAttribute(AttributeName.DRAFTOK, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Duration
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Duration ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Duration
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Duration
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setDuration(JDFDuration value)
 	{
 		setAttribute(AttributeName.DURATION, value, null);
 	}
 
 	/**
-	  * (20) get JDFDuration attribute Duration
-	  * @return JDFDuration the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFDuration
-	  */
+	 * (20) get JDFDuration attribute Duration
+	 * 
+	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 */
 	public JDFDuration getDuration()
 	{
 		final String strAttrName = getAttribute(AttributeName.DURATION, null, null);
@@ -500,223 +475,244 @@ public abstract class JDFAutoPartAmount extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxAmount ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute MaxAmount
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute MaxAmount
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setMaxAmount(double value)
 	{
 		setAttribute(AttributeName.MAXAMOUNT, value, null);
 	}
 
 	/**
-	  * (17) get double attribute MaxAmount
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute MaxAmount
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getMaxAmount()
 	{
 		return getRealAttribute(AttributeName.MAXAMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinAmount ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute MinAmount
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute MinAmount
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setMinAmount(double value)
 	{
 		setAttribute(AttributeName.MINAMOUNT, value, null);
 	}
 
 	/**
-	  * (17) get double attribute MinAmount
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute MinAmount
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getMinAmount()
 	{
 		return getRealAttribute(AttributeName.MINAMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinLateStatus
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinLateStatus ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute MinLateStatus
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute MinLateStatus
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setMinLateStatus(EnumNodeStatus enumVar)
 	{
 		setAttribute(AttributeName.MINLATESTATUS, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute MinLateStatus
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute MinLateStatus
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumNodeStatus getMinLateStatus()
 	{
 		return EnumNodeStatus.getEnum(getAttribute(AttributeName.MINLATESTATUS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinStatus
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinStatus ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute MinStatus
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute MinStatus
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setMinStatus(EnumNodeStatus enumVar)
 	{
 		setAttribute(AttributeName.MINSTATUS, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute MinStatus
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute MinStatus
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumNodeStatus getMinStatus()
 	{
 		return EnumNodeStatus.getEnum(getAttribute(AttributeName.MINSTATUS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Orientation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Orientation
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Orientation
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setOrientation(EnumOrientation enumVar)
 	{
 		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Orientation
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Orientation
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumOrientation getOrientation()
 	{
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PipePause
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PipePause ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PipePause
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PipePause
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPipePause(double value)
 	{
 		setAttribute(AttributeName.PIPEPAUSE, value, null);
 	}
 
 	/**
-	  * (17) get double attribute PipePause
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute PipePause
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getPipePause()
 	{
 		return getRealAttribute(AttributeName.PIPEPAUSE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PipeResume
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PipeResume ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PipeResume
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PipeResume
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPipeResume(double value)
 	{
 		setAttribute(AttributeName.PIPERESUME, value, null);
 	}
 
 	/**
-	  * (17) get double attribute PipeResume
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute PipeResume
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getPipeResume()
 	{
 		return getRealAttribute(AttributeName.PIPERESUME, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PipeURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PipeURL ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PipeURL
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PipeURL
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPipeURL(String value)
 	{
 		setAttribute(AttributeName.PIPEURL, value, null);
 	}
 
 	/**
-	  * (23) get String attribute PipeURL
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute PipeURL
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getPipeURL()
 	{
 		return getAttribute(AttributeName.PIPEURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RemotePipeEndPause
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RemotePipeEndPause ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute RemotePipeEndPause
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute RemotePipeEndPause
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setRemotePipeEndPause(double value)
 	{
 		setAttribute(AttributeName.REMOTEPIPEENDPAUSE, value, null);
 	}
 
 	/**
-	  * (17) get double attribute RemotePipeEndPause
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute RemotePipeEndPause
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getRemotePipeEndPause()
 	{
 		return getRealAttribute(AttributeName.REMOTEPIPEENDPAUSE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RemotePipeEndResume
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RemotePipeEndResume ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute RemotePipeEndResume
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute RemotePipeEndResume
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setRemotePipeEndResume(double value)
 	{
 		setAttribute(AttributeName.REMOTEPIPEENDRESUME, value, null);
 	}
 
 	/**
-	  * (17) get double attribute RemotePipeEndResume
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute RemotePipeEndResume
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getRemotePipeEndResume()
 	{
 		return getRealAttribute(AttributeName.REMOTEPIPEENDRESUME, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Start
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Start ---------------------------------------------------------------------
+	 */
 	/**
-	  * (11) set attribute Start
-	  * @param value the value to set the attribute to or null
-	  */
+	 * (11) set attribute Start
+	 * 
+	 * @param value the value to set the attribute to or null
+	 */
 	public void setStart(JDFDate value)
 	{
 		JDFDate date = value;
@@ -728,9 +724,10 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	}
 
 	/**
-	  * (12) get JDFDate attribute Start
-	  * @return JDFDate the value of the attribute
-	  */
+	 * (12) get JDFDate attribute Start
+	 * 
+	 * @return JDFDate the value of the attribute
+	 */
 	public JDFDate getStart()
 	{
 		final String str = getAttribute(AttributeName.START, null, null);
@@ -738,23 +735,24 @@ public abstract class JDFAutoPartAmount extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StartOffset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StartOffset ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute StartOffset
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute StartOffset
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setStartOffset(JDFDuration value)
 	{
 		setAttribute(AttributeName.STARTOFFSET, value, null);
 	}
 
 	/**
-	  * (20) get JDFDuration attribute StartOffset
-	  * @return JDFDuration the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFDuration
-	  */
+	 * (20) get JDFDuration attribute StartOffset
+	 * 
+	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 */
 	public JDFDuration getStartOffset()
 	{
 		final String strAttrName = getAttribute(AttributeName.STARTOFFSET, null, null);
@@ -762,23 +760,24 @@ public abstract class JDFAutoPartAmount extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Transformation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Transformation ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Transformation
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Transformation
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setTransformation(JDFMatrix value)
 	{
 		setAttribute(AttributeName.TRANSFORMATION, value, null);
 	}
 
 	/**
-	  * (20) get JDFMatrix attribute Transformation
-	  * @return JDFMatrix the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFMatrix
-	  */
+	 * (20) get JDFMatrix attribute Transformation
+	 * 
+	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 */
 	public JDFMatrix getTransformation()
 	{
 		final String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
@@ -786,12 +785,12 @@ public abstract class JDFAutoPartAmount extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
-	/** (26) getCreateLot
+	/**
+	 * (26) getCreateLot
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLot the element
@@ -803,9 +802,10 @@ public abstract class JDFAutoPartAmount extends JDFElement
 
 	/**
 	 * (27) const get element Lot
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFLot the element
-	 * default is getLot(0)     */
+	 * @return JDFLot the element default is getLot(0)
+	 */
 	public JDFLot getLot(int iSkip)
 	{
 		return (JDFLot) getElement(ElementName.LOT, null, iSkip);
@@ -818,23 +818,12 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 */
 	public Collection<JDFLot> getAllLot()
 	{
-		final VElement vc = getChildElementVector(ElementName.LOT, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFLot> v = new Vector<JDFLot>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFLot) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFLot.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Lot
+	 * 
 	 * @return JDFLot the element
 	 */
 	public JDFLot appendLot()

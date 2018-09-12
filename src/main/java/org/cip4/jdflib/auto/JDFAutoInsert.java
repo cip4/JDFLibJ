@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -71,7 +39,6 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -82,7 +49,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -91,11 +57,11 @@ import org.cip4.jdflib.span.JDFSpanGlueType;
 import org.cip4.jdflib.span.JDFSpanMethod;
 
 /**
-*****************************************************************************
-class JDFAutoInsert : public JDFElement
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoInsert : public JDFElement
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoInsert extends JDFElement
 {
@@ -133,6 +99,7 @@ public abstract class JDFAutoInsert extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoInsert
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -143,6 +110,7 @@ public abstract class JDFAutoInsert extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoInsert
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -154,6 +122,7 @@ public abstract class JDFAutoInsert extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoInsert
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -165,7 +134,7 @@ public abstract class JDFAutoInsert extends JDFElement
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -173,28 +142,28 @@ public abstract class JDFAutoInsert extends JDFElement
 		return " JDFAutoInsert[  --> " + super.toString() + " ]";
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Folio
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Folio ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Folio
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Folio
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setFolio(JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.FOLIO, value, null);
 	}
 
 	/**
-	  * (20) get JDFIntegerRangeList attribute Folio
-	  * @return JDFIntegerRangeList the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFIntegerRangeList
-	  */
+	 * (20) get JDFIntegerRangeList attribute Folio
+	 * 
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 */
 	public JDFIntegerRangeList getFolio()
 	{
 		final String strAttrName = getAttribute(AttributeName.FOLIO, null, null);
@@ -202,23 +171,24 @@ public abstract class JDFAutoInsert extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetOffset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetOffset ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute SheetOffset
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute SheetOffset
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSheetOffset(JDFXYPair value)
 	{
 		setAttribute(AttributeName.SHEETOFFSET, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute SheetOffset
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute SheetOffset
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getSheetOffset()
 	{
 		final String strAttrName = getAttribute(AttributeName.SHEETOFFSET, null, null);
@@ -226,23 +196,24 @@ public abstract class JDFAutoInsert extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Transformation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Transformation ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Transformation
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Transformation
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setTransformation(JDFMatrix value)
 	{
 		setAttribute(AttributeName.TRANSFORMATION, value, null);
 	}
 
 	/**
-	  * (20) get JDFMatrix attribute Transformation
-	  * @return JDFMatrix the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFMatrix
-	  */
+	 * (20) get JDFMatrix attribute Transformation
+	 * 
+	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 */
 	public JDFMatrix getTransformation()
 	{
 		final String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
@@ -250,23 +221,24 @@ public abstract class JDFAutoInsert extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WrapPages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WrapPages ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute WrapPages
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute WrapPages
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setWrapPages(JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.WRAPPAGES, value, null);
 	}
 
 	/**
-	  * (20) get JDFIntegerRangeList attribute WrapPages
-	  * @return JDFIntegerRangeList the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFIntegerRangeList
-	  */
+	 * (20) get JDFIntegerRangeList attribute WrapPages
+	 * 
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 */
 	public JDFIntegerRangeList getWrapPages()
 	{
 		final String strAttrName = getAttribute(AttributeName.WRAPPAGES, null, null);
@@ -274,13 +246,13 @@ public abstract class JDFAutoInsert extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element GlueType
+	 * 
 	 * @return JDFSpanGlueType the element
 	 */
 	public JDFSpanGlueType getGlueType()
@@ -288,7 +260,8 @@ public abstract class JDFAutoInsert extends JDFElement
 		return (JDFSpanGlueType) getElement(ElementName.GLUETYPE, null, 0);
 	}
 
-	/** (25) getCreateGlueType
+	/**
+	 * (25) getCreateGlueType
 	 * 
 	 * @return JDFSpanGlueType the element
 	 */
@@ -299,6 +272,7 @@ public abstract class JDFAutoInsert extends JDFElement
 
 	/**
 	 * (29) append element GlueType
+	 * 
 	 * @return JDFSpanGlueType the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -309,6 +283,7 @@ public abstract class JDFAutoInsert extends JDFElement
 
 	/**
 	 * (24) const get element Method
+	 * 
 	 * @return JDFSpanMethod the element
 	 */
 	public JDFSpanMethod getMethod()
@@ -316,7 +291,8 @@ public abstract class JDFAutoInsert extends JDFElement
 		return (JDFSpanMethod) getElement(ElementName.METHOD, null, 0);
 	}
 
-	/** (25) getCreateMethod
+	/**
+	 * (25) getCreateMethod
 	 * 
 	 * @return JDFSpanMethod the element
 	 */
@@ -327,6 +303,7 @@ public abstract class JDFAutoInsert extends JDFElement
 
 	/**
 	 * (29) append element Method
+	 * 
 	 * @return JDFSpanMethod the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -335,7 +312,8 @@ public abstract class JDFAutoInsert extends JDFElement
 		return (JDFSpanMethod) appendElementN(ElementName.METHOD, 1, null);
 	}
 
-	/** (26) getCreateGlueLine
+	/**
+	 * (26) getCreateGlueLine
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
@@ -347,9 +325,10 @@ public abstract class JDFAutoInsert extends JDFElement
 
 	/**
 	 * (27) const get element GlueLine
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFGlueLine the element
-	 * default is getGlueLine(0)     */
+	 * @return JDFGlueLine the element default is getGlueLine(0)
+	 */
 	public JDFGlueLine getGlueLine(int iSkip)
 	{
 		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
@@ -362,23 +341,12 @@ public abstract class JDFAutoInsert extends JDFElement
 	 */
 	public Collection<JDFGlueLine> getAllGlueLine()
 	{
-		final VElement vc = getChildElementVector(ElementName.GLUELINE, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFGlueLine) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFGlueLine.class, false, 0);
 	}
 
 	/**
 	 * (30) append element GlueLine
+	 * 
 	 * @return JDFGlueLine the element
 	 */
 	public JDFGlueLine appendGlueLine()

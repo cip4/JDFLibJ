@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -78,11 +46,11 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
-*****************************************************************************
-class JDFAutoChangedAttribute : public JDFElement
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoChangedAttribute : public JDFElement
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoChangedAttribute extends JDFElement
 {
@@ -107,6 +75,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoChangedAttribute
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -117,6 +86,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoChangedAttribute
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -128,6 +98,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoChangedAttribute
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -139,7 +110,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -147,111 +118,120 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 		return " JDFAutoChangedAttribute[  --> " + super.toString() + " ]";
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AttributeName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AttributeName ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute AttributeName
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute AttributeName
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAttributeName(String value)
 	{
 		setAttribute(AttributeName.ATTRIBUTENAME, value, null);
 	}
 
 	/**
-	  * (23) get String attribute AttributeName
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute AttributeName
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getAttributeName()
 	{
 		return getAttribute(AttributeName.ATTRIBUTENAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ElementID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ElementID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ElementID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ElementID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setElementID(String value)
 	{
 		setAttribute(AttributeName.ELEMENTID, value, null);
 	}
 
 	/**
-	  * (23) get String attribute ElementID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute ElementID
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getElementID()
 	{
 		return getAttribute(AttributeName.ELEMENTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ElementType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ElementType ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ElementType
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ElementType
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setElementType(String value)
 	{
 		setAttribute(AttributeName.ELEMENTTYPE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute ElementType
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute ElementType
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getElementType()
 	{
 		return getAttribute(AttributeName.ELEMENTTYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OldValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OldValue ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute OldValue
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute OldValue
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setOldValue(String value)
 	{
 		setAttribute(AttributeName.OLDVALUE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute OldValue
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute OldValue
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getOldValue()
 	{
 		return getAttribute(AttributeName.OLDVALUE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NewValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NewValue ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute NewValue
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute NewValue
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setNewValue(String value)
 	{
 		setAttribute(AttributeName.NEWVALUE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute NewValue
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute NewValue
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getNewValue()
 	{
 		return getAttribute(AttributeName.NEWVALUE, null, JDFCoreConstants.EMPTYSTRING);

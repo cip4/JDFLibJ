@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -87,18 +55,17 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFDeviceNSpace;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 
 /**
-*****************************************************************************
-class JDFAutoColorSpaceConversionOp : public JDFElement
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoColorSpaceConversionOp : public JDFElement
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 {
@@ -142,6 +109,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoColorSpaceConversionOp
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -152,6 +120,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoColorSpaceConversionOp
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -163,6 +132,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoColorSpaceConversionOp
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -174,7 +144,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -183,8 +153,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for RenderingIntent
-	*/
+	 * Enumeration strings for RenderingIntent
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumRenderingIntent extends ValuedEnum
@@ -252,8 +222,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for SourceObjects
-	*/
+	 * Enumeration strings for SourceObjects
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumSourceObjects extends ValuedEnum
@@ -323,8 +293,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for Operation
-	*/
+	 * Enumeration strings for Operation
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumOperation extends ValuedEnum
@@ -392,8 +362,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for SourceCS
-	*/
+	 * Enumeration strings for SourceCS
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumSourceCS extends ValuedEnum
@@ -487,8 +457,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for SourceRenderingIntent
-	*/
+	 * Enumeration strings for SourceRenderingIntent
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumSourceRenderingIntent extends ValuedEnum
@@ -555,153 +525,166 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 		public static final EnumSourceRenderingIntent AbsoluteColorimetric = new EnumSourceRenderingIntent("AbsoluteColorimetric");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreserveBlack
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreserveBlack ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PreserveBlack
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PreserveBlack
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPreserveBlack(boolean value)
 	{
 		setAttribute(AttributeName.PRESERVEBLACK, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute PreserveBlack
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute PreserveBlack
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getPreserveBlack()
 	{
 		return getBoolAttribute(AttributeName.PRESERVEBLACK, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RenderingIntent
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RenderingIntent ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute RenderingIntent
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute RenderingIntent
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setRenderingIntent(EnumRenderingIntent enumVar)
 	{
 		setAttribute(AttributeName.RENDERINGINTENT, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute RenderingIntent
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute RenderingIntent
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumRenderingIntent getRenderingIntent()
 	{
 		return EnumRenderingIntent.getEnum(getAttribute(AttributeName.RENDERINGINTENT, null, "ColorSpaceDependent"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RGBGray2Black
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RGBGray2Black ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute RGBGray2Black
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute RGBGray2Black
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setRGBGray2Black(boolean value)
 	{
 		setAttribute(AttributeName.RGBGRAY2BLACK, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute RGBGray2Black
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute RGBGray2Black
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getRGBGray2Black()
 	{
 		return getBoolAttribute(AttributeName.RGBGRAY2BLACK, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RGBGray2BlackThreshold
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RGBGray2BlackThreshold ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute RGBGray2BlackThreshold
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute RGBGray2BlackThreshold
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setRGBGray2BlackThreshold(double value)
 	{
 		setAttribute(AttributeName.RGBGRAY2BLACKTHRESHOLD, value, null);
 	}
 
 	/**
-	  * (17) get double attribute RGBGray2BlackThreshold
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute RGBGray2BlackThreshold
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getRGBGray2BlackThreshold()
 	{
 		return getRealAttribute(AttributeName.RGBGRAY2BLACKTHRESHOLD, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceObjects
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5.2) set attribute SourceObjects
-	  * @param v vector of the enumeration values
-	  */
+	 * (5.2) set attribute SourceObjects
+	 * 
+	 * @param v vector of the enumeration values
+	 */
 	public void setSourceObjects(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
 	}
 
 	/**
-	  * (9.2) get SourceObjects attribute SourceObjects
-	  * @return Vector of the enumerations
-	  */
+	 * (9.2) get SourceObjects attribute SourceObjects
+	 * 
+	 * @return Vector of the enumerations
+	 */
 	public Vector<? extends ValuedEnum> getSourceObjects()
 	{
 		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IgnoreEmbeddedICC
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IgnoreEmbeddedICC ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute IgnoreEmbeddedICC
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute IgnoreEmbeddedICC
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setIgnoreEmbeddedICC(boolean value)
 	{
 		setAttribute(AttributeName.IGNOREEMBEDDEDICC, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute IgnoreEmbeddedICC
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute IgnoreEmbeddedICC
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getIgnoreEmbeddedICC()
 	{
 		return getBoolAttribute(AttributeName.IGNOREEMBEDDEDICC, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ObjectTags
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ObjectTags ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ObjectTags
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ObjectTags
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setObjectTags(VString value)
 	{
 		setAttribute(AttributeName.OBJECTTAGS, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute ObjectTags
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute ObjectTags
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getObjectTags()
 	{
 		final VString vStrAttrib = new VString();
@@ -710,76 +693,82 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Operation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Operation ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Operation
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Operation
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setOperation(EnumOperation enumVar)
 	{
 		setAttribute(AttributeName.OPERATION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Operation
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Operation
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumOperation getOperation()
 	{
 		return EnumOperation.getEnum(getAttribute(AttributeName.OPERATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceCS
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceCS ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute SourceCS
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute SourceCS
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setSourceCS(EnumSourceCS enumVar)
 	{
 		setAttribute(AttributeName.SOURCECS, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute SourceCS
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute SourceCS
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumSourceCS getSourceCS()
 	{
 		return EnumSourceCS.getEnum(getAttribute(AttributeName.SOURCECS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceRenderingIntent
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceRenderingIntent ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute SourceRenderingIntent
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute SourceRenderingIntent
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setSourceRenderingIntent(EnumSourceRenderingIntent enumVar)
 	{
 		setAttribute(AttributeName.SOURCERENDERINGINTENT, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute SourceRenderingIntent
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute SourceRenderingIntent
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumSourceRenderingIntent getSourceRenderingIntent()
 	{
 		return EnumSourceRenderingIntent.getEnum(getAttribute(AttributeName.SOURCERENDERINGINTENT, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element DeviceNSpace
+	 * 
 	 * @return JDFDeviceNSpace the element
 	 */
 	public JDFDeviceNSpace getDeviceNSpace()
@@ -787,7 +776,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 		return (JDFDeviceNSpace) getElement(ElementName.DEVICENSPACE, null, 0);
 	}
 
-	/** (25) getCreateDeviceNSpace
+	/**
+	 * (25) getCreateDeviceNSpace
 	 * 
 	 * @return JDFDeviceNSpace the element
 	 */
@@ -798,6 +788,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (29) append element DeviceNSpace
+	 * 
 	 * @return JDFDeviceNSpace the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -808,6 +799,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (24) const get element FileSpec
+	 * 
 	 * @return JDFFileSpec the element
 	 */
 	public JDFFileSpec getFileSpec()
@@ -815,7 +807,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
 	}
 
-	/** (25) getCreateFileSpec
+	/**
+	 * (25) getCreateFileSpec
 	 * 
 	 * @return JDFFileSpec the element
 	 */
@@ -826,6 +819,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (29) append element FileSpec
+	 * 
 	 * @return JDFFileSpec the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -835,15 +829,17 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refFileSpec(JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}
 
-	/** (26) getCreateSeparationSpec
+	/**
+	 * (26) getCreateSeparationSpec
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
@@ -855,9 +851,10 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 
 	/**
 	 * (27) const get element SeparationSpec
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFSeparationSpec the element
-	 * default is getSeparationSpec(0)     */
+	 * @return JDFSeparationSpec the element default is getSeparationSpec(0)
+	 */
 	public JDFSeparationSpec getSeparationSpec(int iSkip)
 	{
 		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
@@ -870,23 +867,12 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	public Collection<JDFSeparationSpec> getAllSeparationSpec()
 	{
-		final VElement vc = getChildElementVector(ElementName.SEPARATIONSPEC, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFSeparationSpec) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFSeparationSpec.class, false, 0);
 	}
 
 	/**
 	 * (30) append element SeparationSpec
+	 * 
 	 * @return JDFSeparationSpec the element
 	 */
 	public JDFSeparationSpec appendSeparationSpec()

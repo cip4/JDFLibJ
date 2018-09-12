@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -74,7 +42,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,7 +53,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.resource.JDFPageList;
@@ -95,11 +61,11 @@ import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFPageAssignedList;
 
 /**
-*****************************************************************************
-class JDFAutoAssembly : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoAssembly : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoAssembly extends JDFResource
 {
@@ -128,8 +94,8 @@ public abstract class JDFAutoAssembly extends JDFResource
 	static
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.ASSEMBLYSECTION, 0x33333311);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PAGELIST, 0x66666111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.PAGEASSIGNEDLIST, 0x33333111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PAGELIST, 0x66666611);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PAGEASSIGNEDLIST, 0x33333311);
 	}
 
 	@Override
@@ -140,6 +106,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoAssembly
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -150,6 +117,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoAssembly
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -161,6 +129,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoAssembly
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -172,7 +141,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -181,7 +150,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -201,8 +170,8 @@ public abstract class JDFAutoAssembly extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for JogSide
-	*/
+	 * Enumeration strings for JogSide
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumJogSide extends ValuedEnum
@@ -270,8 +239,8 @@ public abstract class JDFAutoAssembly extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for Order
-	*/
+	 * Enumeration strings for Order
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumOrder extends ValuedEnum
@@ -337,8 +306,8 @@ public abstract class JDFAutoAssembly extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for BindingSide
-	*/
+	 * Enumeration strings for BindingSide
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumBindingSide extends ValuedEnum
@@ -403,111 +372,120 @@ public abstract class JDFAutoAssembly extends JDFResource
 		public static final EnumBindingSide Bottom = new EnumBindingSide("Bottom");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JogSide
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JogSide ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute JogSide
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute JogSide
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setJogSide(EnumJogSide enumVar)
 	{
 		setAttribute(AttributeName.JOGSIDE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute JogSide
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute JogSide
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumJogSide getJogSide()
 	{
 		return EnumJogSide.getEnum(getAttribute(AttributeName.JOGSIDE, null, "Top"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Order
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Order ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Order
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Order
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setOrder(EnumOrder enumVar)
 	{
 		setAttribute(AttributeName.ORDER, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Order
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Order
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumOrder getOrder()
 	{
 		return EnumOrder.getEnum(getAttribute(AttributeName.ORDER, null, "Gathering"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BindingSide
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BindingSide ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute BindingSide
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute BindingSide
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setBindingSide(EnumBindingSide enumVar)
 	{
 		setAttribute(AttributeName.BINDINGSIDE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute BindingSide
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute BindingSide
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumBindingSide getBindingSide()
 	{
 		return EnumBindingSide.getEnum(getAttribute(AttributeName.BINDINGSIDE, null, "Left"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AssemblyID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AssemblyID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute AssemblyID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute AssemblyID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAssemblyID(String value)
 	{
 		setAttribute(AttributeName.ASSEMBLYID, value, null);
 	}
 
 	/**
-	  * (23) get String attribute AssemblyID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute AssemblyID
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getAssemblyID()
 	{
 		return getAttribute(AttributeName.ASSEMBLYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AssemblyIDs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute AssemblyIDs
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute AssemblyIDs
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAssemblyIDs(VString value)
 	{
 		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute AssemblyIDs
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute AssemblyIDs
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getAssemblyIDs()
 	{
 		final VString vStrAttrib = new VString();
@@ -516,44 +494,47 @@ public abstract class JDFAutoAssembly extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute JobID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute JobID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setJobID(String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
 
 	/**
-	  * (23) get String attribute JobID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute JobID
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getJobID()
 	{
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PhysicalSection
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PhysicalSection ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PhysicalSection
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PhysicalSection
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPhysicalSection(JDFIntegerList value)
 	{
 		setAttribute(AttributeName.PHYSICALSECTION, value, null);
 	}
 
 	/**
-	  * (20) get JDFIntegerList attribute PhysicalSection
-	  * @return JDFIntegerList the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFIntegerList
-	  */
+	 * (20) get JDFIntegerList attribute PhysicalSection
+	 * 
+	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 */
 	public JDFIntegerList getPhysicalSection()
 	{
 		final String strAttrName = getAttribute(AttributeName.PHYSICALSECTION, null, null);
@@ -561,12 +542,12 @@ public abstract class JDFAutoAssembly extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
-	/** (26) getCreateAssemblySection
+	/**
+	 * (26) getCreateAssemblySection
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFAssemblySection the element
@@ -578,9 +559,10 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * (27) const get element AssemblySection
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFAssemblySection the element
-	 * default is getAssemblySection(0)     */
+	 * @return JDFAssemblySection the element default is getAssemblySection(0)
+	 */
 	public JDFAssemblySection getAssemblySection(int iSkip)
 	{
 		return (JDFAssemblySection) getElement(ElementName.ASSEMBLYSECTION, null, iSkip);
@@ -593,23 +575,12 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 */
 	public Collection<JDFAssemblySection> getAllAssemblySection()
 	{
-		final VElement vc = getChildElementVector(ElementName.ASSEMBLYSECTION, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFAssemblySection> v = new Vector<JDFAssemblySection>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFAssemblySection) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFAssemblySection.class, false, 0);
 	}
 
 	/**
 	 * (30) append element AssemblySection
+	 * 
 	 * @return JDFAssemblySection the element
 	 */
 	public JDFAssemblySection appendAssemblySection()
@@ -619,6 +590,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * (24) const get element PageList
+	 * 
 	 * @return JDFPageList the element
 	 */
 	public JDFPageList getPageList()
@@ -626,7 +598,8 @@ public abstract class JDFAutoAssembly extends JDFResource
 		return (JDFPageList) getElement(ElementName.PAGELIST, null, 0);
 	}
 
-	/** (25) getCreatePageList
+	/**
+	 * (25) getCreatePageList
 	 * 
 	 * @return JDFPageList the element
 	 */
@@ -637,6 +610,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * (29) append element PageList
+	 * 
 	 * @return JDFPageList the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -646,15 +620,17 @@ public abstract class JDFAutoAssembly extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refPageList(JDFPageList refTarget)
 	{
 		refElement(refTarget);
 	}
 
-	/** (26) getCreatePageAssignedList
+	/**
+	 * (26) getCreatePageAssignedList
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPageAssignedList the element
@@ -666,9 +642,10 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * (27) const get element PageAssignedList
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFPageAssignedList the element
-	 * default is getPageAssignedList(0)     */
+	 * @return JDFPageAssignedList the element default is getPageAssignedList(0)
+	 */
 	public JDFPageAssignedList getPageAssignedList(int iSkip)
 	{
 		return (JDFPageAssignedList) getElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
@@ -681,23 +658,12 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 */
 	public Collection<JDFPageAssignedList> getAllPageAssignedList()
 	{
-		final VElement vc = getChildElementVector(ElementName.PAGEASSIGNEDLIST, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFPageAssignedList> v = new Vector<JDFPageAssignedList>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFPageAssignedList) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFPageAssignedList.class, false, 0);
 	}
 
 	/**
 	 * (30) append element PageAssignedList
+	 * 
 	 * @return JDFPageAssignedList the element
 	 */
 	public JDFPageAssignedList appendPageAssignedList()

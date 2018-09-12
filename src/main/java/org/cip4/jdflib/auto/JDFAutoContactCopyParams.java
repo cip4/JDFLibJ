@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -88,11 +56,11 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.prepress.JDFScreeningParams;
 
 /**
-*****************************************************************************
-class JDFAutoContactCopyParams : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoContactCopyParams : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoContactCopyParams extends JDFResource
 {
@@ -130,6 +98,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoContactCopyParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -140,6 +109,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoContactCopyParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -151,6 +121,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoContactCopyParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -162,7 +133,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -171,7 +142,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -191,8 +162,8 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for Diffusion
-	*/
+	 * Enumeration strings for Diffusion
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumDiffusion extends ValuedEnum
@@ -253,70 +224,74 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 		public static final EnumDiffusion Off = new EnumDiffusion("Off");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ContactScreen
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ContactScreen ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ContactScreen
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ContactScreen
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setContactScreen(boolean value)
 	{
 		setAttribute(AttributeName.CONTACTSCREEN, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute ContactScreen
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute ContactScreen
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getContactScreen()
 	{
 		return getBoolAttribute(AttributeName.CONTACTSCREEN, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PolarityChange
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PolarityChange ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PolarityChange
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PolarityChange
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPolarityChange(boolean value)
 	{
 		setAttribute(AttributeName.POLARITYCHANGE, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute PolarityChange
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute PolarityChange
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getPolarityChange()
 	{
 		return getBoolAttribute(AttributeName.POLARITYCHANGE, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RepeatStep
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RepeatStep ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute RepeatStep
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute RepeatStep
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setRepeatStep(JDFXYPair value)
 	{
 		setAttribute(AttributeName.REPEATSTEP, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute RepeatStep
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute RepeatStep
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getRepeatStep()
 	{
 		final String strAttrName = getAttribute(AttributeName.REPEATSTEP, null, null);
@@ -324,76 +299,82 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Cycle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Cycle ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Cycle
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Cycle
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setCycle(int value)
 	{
 		setAttribute(AttributeName.CYCLE, value, null);
 	}
 
 	/**
-	  * (15) get int attribute Cycle
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute Cycle
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getCycle()
 	{
 		return getIntAttribute(AttributeName.CYCLE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Diffusion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Diffusion ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Diffusion
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Diffusion
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setDiffusion(EnumDiffusion enumVar)
 	{
 		setAttribute(AttributeName.DIFFUSION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Diffusion
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Diffusion
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumDiffusion getDiffusion()
 	{
 		return EnumDiffusion.getEnum(getAttribute(AttributeName.DIFFUSION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Vacuum
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Vacuum ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Vacuum
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Vacuum
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setVacuum(double value)
 	{
 		setAttribute(AttributeName.VACUUM, value, null);
 	}
 
 	/**
-	  * (17) get double attribute Vacuum
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute Vacuum
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getVacuum()
 	{
 		return getRealAttribute(AttributeName.VACUUM, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element ScreeningParams
+	 * 
 	 * @return JDFScreeningParams the element
 	 */
 	public JDFScreeningParams getScreeningParams()
@@ -401,7 +382,8 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 		return (JDFScreeningParams) getElement(ElementName.SCREENINGPARAMS, null, 0);
 	}
 
-	/** (25) getCreateScreeningParams
+	/**
+	 * (25) getCreateScreeningParams
 	 * 
 	 * @return JDFScreeningParams the element
 	 */
@@ -412,6 +394,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 
 	/**
 	 * (29) append element ScreeningParams
+	 * 
 	 * @return JDFScreeningParams the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -421,9 +404,10 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refScreeningParams(JDFScreeningParams refTarget)
 	{
 		refElement(refTarget);

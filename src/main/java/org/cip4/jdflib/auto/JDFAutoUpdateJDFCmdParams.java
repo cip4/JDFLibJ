@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -71,25 +39,23 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFCreateLink;
 import org.cip4.jdflib.jmf.JDFCreateResource;
 import org.cip4.jdflib.jmf.JDFMoveResource;
 import org.cip4.jdflib.jmf.JDFRemoveLink;
 
 /**
-*****************************************************************************
-class JDFAutoUpdateJDFCmdParams : public JDFElement
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoUpdateJDFCmdParams : public JDFElement
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 {
@@ -113,6 +79,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoUpdateJDFCmdParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -123,6 +90,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoUpdateJDFCmdParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -134,6 +102,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoUpdateJDFCmdParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -145,7 +114,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -153,12 +122,12 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 		return " JDFAutoUpdateJDFCmdParams[  --> " + super.toString() + " ]";
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
-	/** (26) getCreateCreateLink
+	/**
+	 * (26) getCreateCreateLink
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCreateLink the element
@@ -170,9 +139,10 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 
 	/**
 	 * (27) const get element CreateLink
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFCreateLink the element
-	 * default is getCreateLink(0)     */
+	 * @return JDFCreateLink the element default is getCreateLink(0)
+	 */
 	public JDFCreateLink getCreateLink(int iSkip)
 	{
 		return (JDFCreateLink) getElement(ElementName.CREATELINK, null, iSkip);
@@ -185,23 +155,12 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 */
 	public Collection<JDFCreateLink> getAllCreateLink()
 	{
-		final VElement vc = getChildElementVector(ElementName.CREATELINK, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFCreateLink> v = new Vector<JDFCreateLink>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFCreateLink) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFCreateLink.class, false, 0);
 	}
 
 	/**
 	 * (30) append element CreateLink
+	 * 
 	 * @return JDFCreateLink the element
 	 */
 	public JDFCreateLink appendCreateLink()
@@ -209,7 +168,8 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 		return (JDFCreateLink) appendElement(ElementName.CREATELINK, null);
 	}
 
-	/** (26) getCreateCreateResource
+	/**
+	 * (26) getCreateCreateResource
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFCreateResource the element
@@ -221,9 +181,10 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 
 	/**
 	 * (27) const get element CreateResource
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFCreateResource the element
-	 * default is getCreateResource(0)     */
+	 * @return JDFCreateResource the element default is getCreateResource(0)
+	 */
 	public JDFCreateResource getCreateResource(int iSkip)
 	{
 		return (JDFCreateResource) getElement(ElementName.CREATERESOURCE, null, iSkip);
@@ -236,23 +197,12 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 */
 	public Collection<JDFCreateResource> getAllCreateResource()
 	{
-		final VElement vc = getChildElementVector(ElementName.CREATERESOURCE, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFCreateResource> v = new Vector<JDFCreateResource>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFCreateResource) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFCreateResource.class, false, 0);
 	}
 
 	/**
 	 * (30) append element CreateResource
+	 * 
 	 * @return JDFCreateResource the element
 	 */
 	public JDFCreateResource appendCreateResource()
@@ -260,7 +210,8 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 		return (JDFCreateResource) appendElement(ElementName.CREATERESOURCE, null);
 	}
 
-	/** (26) getCreateMoveResource
+	/**
+	 * (26) getCreateMoveResource
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMoveResource the element
@@ -272,9 +223,10 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 
 	/**
 	 * (27) const get element MoveResource
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFMoveResource the element
-	 * default is getMoveResource(0)     */
+	 * @return JDFMoveResource the element default is getMoveResource(0)
+	 */
 	public JDFMoveResource getMoveResource(int iSkip)
 	{
 		return (JDFMoveResource) getElement(ElementName.MOVERESOURCE, null, iSkip);
@@ -287,23 +239,12 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 */
 	public Collection<JDFMoveResource> getAllMoveResource()
 	{
-		final VElement vc = getChildElementVector(ElementName.MOVERESOURCE, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFMoveResource> v = new Vector<JDFMoveResource>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFMoveResource) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFMoveResource.class, false, 0);
 	}
 
 	/**
 	 * (30) append element MoveResource
+	 * 
 	 * @return JDFMoveResource the element
 	 */
 	public JDFMoveResource appendMoveResource()
@@ -311,7 +252,8 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 		return (JDFMoveResource) appendElement(ElementName.MOVERESOURCE, null);
 	}
 
-	/** (26) getCreateRemoveLink
+	/**
+	 * (26) getCreateRemoveLink
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFRemoveLink the element
@@ -323,9 +265,10 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 
 	/**
 	 * (27) const get element RemoveLink
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFRemoveLink the element
-	 * default is getRemoveLink(0)     */
+	 * @return JDFRemoveLink the element default is getRemoveLink(0)
+	 */
 	public JDFRemoveLink getRemoveLink(int iSkip)
 	{
 		return (JDFRemoveLink) getElement(ElementName.REMOVELINK, null, iSkip);
@@ -338,23 +281,12 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 */
 	public Collection<JDFRemoveLink> getAllRemoveLink()
 	{
-		final VElement vc = getChildElementVector(ElementName.REMOVELINK, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFRemoveLink> v = new Vector<JDFRemoveLink>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFRemoveLink) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFRemoveLink.class, false, 0);
 	}
 
 	/**
 	 * (30) append element RemoveLink
+	 * 
 	 * @return JDFRemoveLink the element
 	 */
 	public JDFRemoveLink appendRemoveLink()

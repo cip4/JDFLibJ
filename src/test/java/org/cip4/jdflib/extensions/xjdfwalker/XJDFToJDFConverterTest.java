@@ -1120,6 +1120,28 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testResourceGeneralID()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		final KElement e = h.getRoot();
+		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
+
+		final ResourceHelper res = h.appendResourceSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input).appendPartition(map, true);
+		res.setGeneralID("key", "val");
+		final JDFDoc d = xCon.convert(e);
+		final JDFNode jdfRoot = d.getJDFRoot();
+		final JDFConventionalPrintingParams cp = (JDFConventionalPrintingParams) jdfRoot.getResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input, 0);
+		assertEquals("s1", cp.getSheetName());
+		assertEquals("val", cp.getGeneralID("key", 0));
+		assertNull(cp.getResourceRoot().getGeneralID("key", 0));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testResourceLinkRun()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);

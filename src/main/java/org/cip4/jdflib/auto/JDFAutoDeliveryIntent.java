@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -74,7 +42,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,7 +53,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.intent.JDFDropIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFPricing;
@@ -102,11 +68,11 @@ import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
 
 /**
-*****************************************************************************
-class JDFAutoDeliveryIntent : public JDFIntentResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoDeliveryIntent : public JDFIntentResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 {
@@ -158,6 +124,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoDeliveryIntent
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -168,6 +135,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoDeliveryIntent
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -179,6 +147,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoDeliveryIntent
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -190,7 +159,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -199,8 +168,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	}
 
 	/**
-	* Enumeration strings for Ownership
-	*/
+	 * Enumeration strings for Ownership
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumOwnership extends ValuedEnum
@@ -261,123 +230,132 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		public static final EnumOwnership Destination = new EnumOwnership("Destination");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Accepted
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Accepted ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Accepted
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Accepted
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAccepted(boolean value)
 	{
 		setAttribute(AttributeName.ACCEPTED, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute Accepted
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute Accepted
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getAccepted()
 	{
 		return getBoolAttribute(AttributeName.ACCEPTED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AdditionalAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AdditionalAmount ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute AdditionalAmount
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute AdditionalAmount
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAdditionalAmount(int value)
 	{
 		setAttribute(AttributeName.ADDITIONALAMOUNT, value, null);
 	}
 
 	/**
-	  * (15) get int attribute AdditionalAmount
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute AdditionalAmount
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getAdditionalAmount()
 	{
 		return getIntAttribute(AttributeName.ADDITIONALAMOUNT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Ownership
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Ownership ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Ownership
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Ownership
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setOwnership(EnumOwnership enumVar)
 	{
 		setAttribute(AttributeName.OWNERSHIP, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Ownership
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Ownership
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumOwnership getOwnership()
 	{
 		return EnumOwnership.getEnum(getAttribute(AttributeName.OWNERSHIP, null, "Origin"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BuyerAccount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BuyerAccount ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute BuyerAccount
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute BuyerAccount
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setBuyerAccount(String value)
 	{
 		setAttribute(AttributeName.BUYERACCOUNT, value, null);
 	}
 
 	/**
-	  * (23) get String attribute BuyerAccount
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute BuyerAccount
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getBuyerAccount()
 	{
 		return getAttribute(AttributeName.BUYERACCOUNT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Pickup
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Pickup ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Pickup
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Pickup
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPickup(boolean value)
 	{
 		setAttribute(AttributeName.PICKUP, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute Pickup
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute Pickup
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getPickup()
 	{
 		return getBoolAttribute(AttributeName.PICKUP, null, false);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element DeliveryCharge
+	 * 
 	 * @return JDFSpanDeliveryCharge the element
 	 */
 	public JDFSpanDeliveryCharge getDeliveryCharge()
@@ -385,7 +363,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return (JDFSpanDeliveryCharge) getElement(ElementName.DELIVERYCHARGE, null, 0);
 	}
 
-	/** (25) getCreateDeliveryCharge
+	/**
+	 * (25) getCreateDeliveryCharge
 	 * 
 	 * @return JDFSpanDeliveryCharge the element
 	 */
@@ -396,6 +375,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element DeliveryCharge
+	 * 
 	 * @return JDFSpanDeliveryCharge the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -406,6 +386,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element Earliest
+	 * 
 	 * @return JDFTimeSpan the element
 	 */
 	public JDFTimeSpan getEarliest()
@@ -413,7 +394,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return (JDFTimeSpan) getElement(ElementName.EARLIEST, null, 0);
 	}
 
-	/** (25) getCreateEarliest
+	/**
+	 * (25) getCreateEarliest
 	 * 
 	 * @return JDFTimeSpan the element
 	 */
@@ -424,6 +406,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Earliest
+	 * 
 	 * @return JDFTimeSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -434,6 +417,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element EarliestDuration
+	 * 
 	 * @return JDFDurationSpan the element
 	 */
 	public JDFDurationSpan getEarliestDuration()
@@ -441,7 +425,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return (JDFDurationSpan) getElement(ElementName.EARLIESTDURATION, null, 0);
 	}
 
-	/** (25) getCreateEarliestDuration
+	/**
+	 * (25) getCreateEarliestDuration
 	 * 
 	 * @return JDFDurationSpan the element
 	 */
@@ -452,6 +437,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element EarliestDuration
+	 * 
 	 * @return JDFDurationSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -462,6 +448,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element Method
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getMethod()
@@ -469,7 +456,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return (JDFNameSpan) getElement(ElementName.METHOD, null, 0);
 	}
 
-	/** (25) getCreateMethod
+	/**
+	 * (25) getCreateMethod
 	 * 
 	 * @return JDFNameSpan the element
 	 */
@@ -480,6 +468,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Method
+	 * 
 	 * @return JDFNameSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -490,6 +479,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element Overage
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getOverage()
@@ -497,7 +487,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return (JDFNumberSpan) getElement(ElementName.OVERAGE, null, 0);
 	}
 
-	/** (25) getCreateOverage
+	/**
+	 * (25) getCreateOverage
 	 * 
 	 * @return JDFNumberSpan the element
 	 */
@@ -508,6 +499,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Overage
+	 * 
 	 * @return JDFNumberSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -518,6 +510,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element Required
+	 * 
 	 * @return JDFTimeSpan the element
 	 */
 	public JDFTimeSpan getRequired()
@@ -525,7 +518,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return (JDFTimeSpan) getElement(ElementName.REQUIRED, null, 0);
 	}
 
-	/** (25) getCreateRequired
+	/**
+	 * (25) getCreateRequired
 	 * 
 	 * @return JDFTimeSpan the element
 	 */
@@ -536,6 +530,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Required
+	 * 
 	 * @return JDFTimeSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -546,6 +541,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element RequiredDuration
+	 * 
 	 * @return JDFDurationSpan the element
 	 */
 	public JDFDurationSpan getRequiredDuration()
@@ -553,7 +549,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return (JDFDurationSpan) getElement(ElementName.REQUIREDDURATION, null, 0);
 	}
 
-	/** (25) getCreateRequiredDuration
+	/**
+	 * (25) getCreateRequiredDuration
 	 * 
 	 * @return JDFDurationSpan the element
 	 */
@@ -564,6 +561,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element RequiredDuration
+	 * 
 	 * @return JDFDurationSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -574,6 +572,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element ReturnMethod
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getReturnMethod()
@@ -581,7 +580,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return (JDFNameSpan) getElement(ElementName.RETURNMETHOD, null, 0);
 	}
 
-	/** (25) getCreateReturnMethod
+	/**
+	 * (25) getCreateReturnMethod
 	 * 
 	 * @return JDFNameSpan the element
 	 */
@@ -592,6 +592,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element ReturnMethod
+	 * 
 	 * @return JDFNameSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -602,6 +603,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element ServiceLevel
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getServiceLevel()
@@ -609,7 +611,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return (JDFStringSpan) getElement(ElementName.SERVICELEVEL, null, 0);
 	}
 
-	/** (25) getCreateServiceLevel
+	/**
+	 * (25) getCreateServiceLevel
 	 * 
 	 * @return JDFStringSpan the element
 	 */
@@ -620,6 +623,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element ServiceLevel
+	 * 
 	 * @return JDFStringSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -630,6 +634,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element SurplusHandling
+	 * 
 	 * @return JDFSpanSurplusHandling the element
 	 */
 	public JDFSpanSurplusHandling getSurplusHandling()
@@ -637,7 +642,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return (JDFSpanSurplusHandling) getElement(ElementName.SURPLUSHANDLING, null, 0);
 	}
 
-	/** (25) getCreateSurplusHandling
+	/**
+	 * (25) getCreateSurplusHandling
 	 * 
 	 * @return JDFSpanSurplusHandling the element
 	 */
@@ -648,6 +654,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element SurplusHandling
+	 * 
 	 * @return JDFSpanSurplusHandling the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -658,6 +665,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element Transfer
+	 * 
 	 * @return JDFSpanTransfer the element
 	 */
 	public JDFSpanTransfer getTransfer()
@@ -665,7 +673,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return (JDFSpanTransfer) getElement(ElementName.TRANSFER, null, 0);
 	}
 
-	/** (25) getCreateTransfer
+	/**
+	 * (25) getCreateTransfer
 	 * 
 	 * @return JDFSpanTransfer the element
 	 */
@@ -676,6 +685,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Transfer
+	 * 
 	 * @return JDFSpanTransfer the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -686,6 +696,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element Underage
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getUnderage()
@@ -693,7 +704,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return (JDFNumberSpan) getElement(ElementName.UNDERAGE, null, 0);
 	}
 
-	/** (25) getCreateUnderage
+	/**
+	 * (25) getCreateUnderage
 	 * 
 	 * @return JDFNumberSpan the element
 	 */
@@ -704,6 +716,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Underage
+	 * 
 	 * @return JDFNumberSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -714,6 +727,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element Company
+	 * 
 	 * @return JDFCompany the element
 	 */
 	public JDFCompany getCompany()
@@ -721,7 +735,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return (JDFCompany) getElement(ElementName.COMPANY, null, 0);
 	}
 
-	/** (25) getCreateCompany
+	/**
+	 * (25) getCreateCompany
 	 * 
 	 * @return JDFCompany the element
 	 */
@@ -732,6 +747,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Company
+	 * 
 	 * @return JDFCompany the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -741,15 +757,17 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refCompany(JDFCompany refTarget)
 	{
 		refElement(refTarget);
 	}
 
-	/** (26) getCreateContact
+	/**
+	 * (26) getCreateContact
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
@@ -761,9 +779,10 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (27) const get element Contact
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element
-	 * default is getContact(0)     */
+	 * @return JDFContact the element default is getContact(0)
+	 */
 	public JDFContact getContact(int iSkip)
 	{
 		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
@@ -776,23 +795,12 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public Collection<JDFContact> getAllContact()
 	{
-		final VElement vc = getChildElementVector(ElementName.CONTACT, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFContact> v = new Vector<JDFContact>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFContact) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFContact.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Contact
+	 * 
 	 * @return JDFContact the element
 	 */
 	@Override
@@ -802,15 +810,17 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refContact(JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}
 
-	/** (26) getCreateDropIntent
+	/**
+	 * (26) getCreateDropIntent
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDropIntent the element
@@ -822,9 +832,10 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (27) const get element DropIntent
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFDropIntent the element
-	 * default is getDropIntent(0)     */
+	 * @return JDFDropIntent the element default is getDropIntent(0)
+	 */
 	public JDFDropIntent getDropIntent(int iSkip)
 	{
 		return (JDFDropIntent) getElement(ElementName.DROPINTENT, null, iSkip);
@@ -837,23 +848,12 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public Collection<JDFDropIntent> getAllDropIntent()
 	{
-		final VElement vc = getChildElementVector(ElementName.DROPINTENT, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFDropIntent> v = new Vector<JDFDropIntent>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFDropIntent) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFDropIntent.class, false, 0);
 	}
 
 	/**
 	 * (30) append element DropIntent
+	 * 
 	 * @return JDFDropIntent the element
 	 */
 	public JDFDropIntent appendDropIntent()
@@ -863,6 +863,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element Pricing
+	 * 
 	 * @return JDFPricing the element
 	 */
 	public JDFPricing getPricing()
@@ -870,7 +871,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 		return (JDFPricing) getElement(ElementName.PRICING, null, 0);
 	}
 
-	/** (25) getCreatePricing
+	/**
+	 * (25) getCreatePricing
 	 * 
 	 * @return JDFPricing the element
 	 */
@@ -881,6 +883,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Pricing
+	 * 
 	 * @return JDFPricing the element
 	 * @throws JDFException if the element already exists
 	 */

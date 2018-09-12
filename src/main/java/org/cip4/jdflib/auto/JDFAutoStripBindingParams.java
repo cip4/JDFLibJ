@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -83,11 +51,11 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 
 /**
-*****************************************************************************
-class JDFAutoStripBindingParams : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoStripBindingParams : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoStripBindingParams extends JDFResource
 {
@@ -113,7 +81,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x66666611);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x66666661);
 	}
 
 	@Override
@@ -124,6 +92,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoStripBindingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -134,6 +103,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoStripBindingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -145,6 +115,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoStripBindingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -156,7 +127,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -165,7 +136,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -184,18 +155,18 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Brand
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Brand ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Brand
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Brand
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	@Override
 	public void setBrand(String value)
 	{
@@ -203,73 +174,80 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	}
 
 	/**
-	  * (23) get String attribute Brand
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute Brand
+	 * 
+	 * @return the value of the attribute
+	 */
 	@Override
 	public String getBrand()
 	{
 		return getAttribute(AttributeName.BRAND, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Distance
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Distance ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Distance
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Distance
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setDistance(double value)
 	{
 		setAttribute(AttributeName.DISTANCE, value, null);
 	}
 
 	/**
-	  * (17) get double attribute Distance
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute Distance
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getDistance()
 	{
 		return getRealAttribute(AttributeName.DISTANCE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LengthJDF
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LengthJDF ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute LengthJDF
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute LengthJDF
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setLengthJDF(double value)
 	{
 		setAttribute(AttributeName.LENGTHJDF, value, null);
 	}
 
 	/**
-	  * (17) get double attribute LengthJDF
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute LengthJDF
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getLengthJDF()
 	{
 		return getRealAttribute(AttributeName.LENGTHJDF, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StripColor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StripColor ---------------------------------------------------------------------
+	 */
 	/**
-	  * (13) set attribute StripColor
-	  * @param value the value to set the attribute to
-	  */
+	 * (13) set attribute StripColor
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setStripColor(EnumNamedColor value)
 	{
 		setAttribute(AttributeName.STRIPCOLOR, value == null ? null : value.getName(), null);
 	}
 
 	/**
-	  * (19) get EnumNamedColor attribute StripColor
-	  * @return EnumNamedColor the value of the attribute
-	  */
+	 * (19) get EnumNamedColor attribute StripColor
+	 * 
+	 * @return EnumNamedColor the value of the attribute
+	 */
 	public EnumNamedColor getStripColor()
 	{
 		String strAttrName = "";
@@ -279,34 +257,36 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StripColorDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StripColorDetails ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute StripColorDetails
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute StripColorDetails
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setStripColorDetails(String value)
 	{
 		setAttribute(AttributeName.STRIPCOLORDETAILS, value, null);
 	}
 
 	/**
-	  * (23) get String attribute StripColorDetails
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute StripColorDetails
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getStripColorDetails()
 	{
 		return getAttribute(AttributeName.STRIPCOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element HoleMakingParams
+	 * 
 	 * @return JDFHoleMakingParams the element
 	 */
 	public JDFHoleMakingParams getHoleMakingParams()
@@ -314,7 +294,8 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 		return (JDFHoleMakingParams) getElement(ElementName.HOLEMAKINGPARAMS, null, 0);
 	}
 
-	/** (25) getCreateHoleMakingParams
+	/**
+	 * (25) getCreateHoleMakingParams
 	 * 
 	 * @return JDFHoleMakingParams the element
 	 */
@@ -325,6 +306,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 
 	/**
 	 * (29) append element HoleMakingParams
+	 * 
 	 * @return JDFHoleMakingParams the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -334,9 +316,10 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refHoleMakingParams(JDFHoleMakingParams refTarget)
 	{
 		refElement(refTarget);

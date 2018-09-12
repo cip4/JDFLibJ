@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,21 +71,25 @@ package org.cip4.jdflib.auto;
 /* DirectorySizeVisitor.java */
 
 import java.io.File;
+
 public class DirectorySizeVisitor implements DirectoryVisitor
 {
 	int files = 0;
 	int dirs = 0;
 	long size = 0;
 
+	@Override
 	public void enterDirectory(File dir)
 	{
 		++dirs;
 	}
 
+	@Override
 	public void leaveDirectory(File dir)
 	{ /**/
 	}
 
+	@Override
 	public void visitFile(File file)
 	{
 		++files;

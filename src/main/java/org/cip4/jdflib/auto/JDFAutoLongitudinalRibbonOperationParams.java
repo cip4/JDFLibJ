@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -71,13 +39,11 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFLongFold;
 import org.cip4.jdflib.resource.process.JDFLongGlue;
@@ -85,11 +51,11 @@ import org.cip4.jdflib.resource.process.JDFLongPerforate;
 import org.cip4.jdflib.resource.process.JDFLongSlit;
 
 /**
-*****************************************************************************
-class JDFAutoLongitudinalRibbonOperationParams : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoLongitudinalRibbonOperationParams : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResource
 {
@@ -113,6 +79,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
 	/**
 	 * Constructor for JDFAutoLongitudinalRibbonOperationParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -123,6 +90,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
 	/**
 	 * Constructor for JDFAutoLongitudinalRibbonOperationParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -134,6 +102,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
 	/**
 	 * Constructor for JDFAutoLongitudinalRibbonOperationParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -145,7 +114,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -154,7 +123,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -173,12 +142,12 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
-	/** (26) getCreateLongFold
+	/**
+	 * (26) getCreateLongFold
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLongFold the element
@@ -190,9 +159,10 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
 	/**
 	 * (27) const get element LongFold
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFLongFold the element
-	 * default is getLongFold(0)     */
+	 * @return JDFLongFold the element default is getLongFold(0)
+	 */
 	public JDFLongFold getLongFold(int iSkip)
 	{
 		return (JDFLongFold) getElement(ElementName.LONGFOLD, null, iSkip);
@@ -205,23 +175,12 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 */
 	public Collection<JDFLongFold> getAllLongFold()
 	{
-		final VElement vc = getChildElementVector(ElementName.LONGFOLD, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFLongFold> v = new Vector<JDFLongFold>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFLongFold) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFLongFold.class, false, 0);
 	}
 
 	/**
 	 * (30) append element LongFold
+	 * 
 	 * @return JDFLongFold the element
 	 */
 	public JDFLongFold appendLongFold()
@@ -229,7 +188,8 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 		return (JDFLongFold) appendElement(ElementName.LONGFOLD, null);
 	}
 
-	/** (26) getCreateLongGlue
+	/**
+	 * (26) getCreateLongGlue
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLongGlue the element
@@ -241,9 +201,10 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
 	/**
 	 * (27) const get element LongGlue
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFLongGlue the element
-	 * default is getLongGlue(0)     */
+	 * @return JDFLongGlue the element default is getLongGlue(0)
+	 */
 	public JDFLongGlue getLongGlue(int iSkip)
 	{
 		return (JDFLongGlue) getElement(ElementName.LONGGLUE, null, iSkip);
@@ -256,23 +217,12 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 */
 	public Collection<JDFLongGlue> getAllLongGlue()
 	{
-		final VElement vc = getChildElementVector(ElementName.LONGGLUE, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFLongGlue> v = new Vector<JDFLongGlue>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFLongGlue) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFLongGlue.class, false, 0);
 	}
 
 	/**
 	 * (30) append element LongGlue
+	 * 
 	 * @return JDFLongGlue the element
 	 */
 	public JDFLongGlue appendLongGlue()
@@ -280,7 +230,8 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 		return (JDFLongGlue) appendElement(ElementName.LONGGLUE, null);
 	}
 
-	/** (26) getCreateLongPerforate
+	/**
+	 * (26) getCreateLongPerforate
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLongPerforate the element
@@ -292,9 +243,10 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
 	/**
 	 * (27) const get element LongPerforate
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFLongPerforate the element
-	 * default is getLongPerforate(0)     */
+	 * @return JDFLongPerforate the element default is getLongPerforate(0)
+	 */
 	public JDFLongPerforate getLongPerforate(int iSkip)
 	{
 		return (JDFLongPerforate) getElement(ElementName.LONGPERFORATE, null, iSkip);
@@ -307,23 +259,12 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 */
 	public Collection<JDFLongPerforate> getAllLongPerforate()
 	{
-		final VElement vc = getChildElementVector(ElementName.LONGPERFORATE, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFLongPerforate> v = new Vector<JDFLongPerforate>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFLongPerforate) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFLongPerforate.class, false, 0);
 	}
 
 	/**
 	 * (30) append element LongPerforate
+	 * 
 	 * @return JDFLongPerforate the element
 	 */
 	public JDFLongPerforate appendLongPerforate()
@@ -331,7 +272,8 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 		return (JDFLongPerforate) appendElement(ElementName.LONGPERFORATE, null);
 	}
 
-	/** (26) getCreateLongSlit
+	/**
+	 * (26) getCreateLongSlit
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFLongSlit the element
@@ -343,9 +285,10 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
 	/**
 	 * (27) const get element LongSlit
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFLongSlit the element
-	 * default is getLongSlit(0)     */
+	 * @return JDFLongSlit the element default is getLongSlit(0)
+	 */
 	public JDFLongSlit getLongSlit(int iSkip)
 	{
 		return (JDFLongSlit) getElement(ElementName.LONGSLIT, null, iSkip);
@@ -358,23 +301,12 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 */
 	public Collection<JDFLongSlit> getAllLongSlit()
 	{
-		final VElement vc = getChildElementVector(ElementName.LONGSLIT, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFLongSlit> v = new Vector<JDFLongSlit>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFLongSlit) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFLongSlit.class, false, 0);
 	}
 
 	/**
 	 * (30) append element LongSlit
+	 * 
 	 * @return JDFLongSlit the element
 	 */
 	public JDFLongSlit appendLongSlit()

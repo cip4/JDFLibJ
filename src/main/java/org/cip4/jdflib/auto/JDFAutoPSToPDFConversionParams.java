@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -90,11 +58,11 @@ import org.cip4.jdflib.resource.process.JDFPDFXParams;
 import org.cip4.jdflib.resource.process.JDFThinPDFParams;
 
 /**
-*****************************************************************************
-class JDFAutoPSToPDFConversionParams : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoPSToPDFConversionParams : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 {
@@ -143,6 +111,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoPSToPDFConversionParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -153,6 +122,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoPSToPDFConversionParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -164,6 +134,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoPSToPDFConversionParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -175,7 +146,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -184,7 +155,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -204,8 +175,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for Binding
-	*/
+	 * Enumeration strings for Binding
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumBinding extends ValuedEnum
@@ -267,8 +238,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for AutoRotatePages
-	*/
+	 * Enumeration strings for AutoRotatePages
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumAutoRotatePages extends ValuedEnum
@@ -332,8 +303,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for DefaultRenderingIntent
-	*/
+	 * Enumeration strings for DefaultRenderingIntent
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumDefaultRenderingIntent extends ValuedEnum
@@ -400,238 +371,258 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		public static final EnumDefaultRenderingIntent AbsoluteColorimetric = new EnumDefaultRenderingIntent("AbsoluteColorimetric");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ASCII85EncodePages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ASCII85EncodePages ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ASCII85EncodePages
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ASCII85EncodePages
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setASCII85EncodePages(boolean value)
 	{
 		setAttribute(AttributeName.ASCII85ENCODEPAGES, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute ASCII85EncodePages
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute ASCII85EncodePages
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getASCII85EncodePages()
 	{
 		return getBoolAttribute(AttributeName.ASCII85ENCODEPAGES, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Binding
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Binding ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Binding
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Binding
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setBinding(EnumBinding enumVar)
 	{
 		setAttribute(AttributeName.BINDING, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Binding
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Binding
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumBinding getBinding()
 	{
 		return EnumBinding.getEnum(getAttribute(AttributeName.BINDING, null, "Left"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DetectBlend
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DetectBlend ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute DetectBlend
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute DetectBlend
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setDetectBlend(boolean value)
 	{
 		setAttribute(AttributeName.DETECTBLEND, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute DetectBlend
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute DetectBlend
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getDetectBlend()
 	{
 		return getBoolAttribute(AttributeName.DETECTBLEND, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DoThumbnails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DoThumbnails ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute DoThumbnails
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute DoThumbnails
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setDoThumbnails(boolean value)
 	{
 		setAttribute(AttributeName.DOTHUMBNAILS, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute DoThumbnails
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute DoThumbnails
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getDoThumbnails()
 	{
 		return getBoolAttribute(AttributeName.DOTHUMBNAILS, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Optimize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Optimize ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Optimize
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Optimize
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setOptimize(boolean value)
 	{
 		setAttribute(AttributeName.OPTIMIZE, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute Optimize
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute Optimize
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getOptimize()
 	{
 		return getBoolAttribute(AttributeName.OPTIMIZE, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AutoRotatePages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AutoRotatePages ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute AutoRotatePages
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute AutoRotatePages
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setAutoRotatePages(EnumAutoRotatePages enumVar)
 	{
 		setAttribute(AttributeName.AUTOROTATEPAGES, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute AutoRotatePages
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute AutoRotatePages
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumAutoRotatePages getAutoRotatePages()
 	{
 		return EnumAutoRotatePages.getEnum(getAttribute(AttributeName.AUTOROTATEPAGES, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CompressPages
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CompressPages ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute CompressPages
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute CompressPages
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setCompressPages(boolean value)
 	{
 		setAttribute(AttributeName.COMPRESSPAGES, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute CompressPages
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute CompressPages
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getCompressPages()
 	{
 		return getBoolAttribute(AttributeName.COMPRESSPAGES, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DefaultRenderingIntent
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefaultRenderingIntent ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute DefaultRenderingIntent
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute DefaultRenderingIntent
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setDefaultRenderingIntent(EnumDefaultRenderingIntent enumVar)
 	{
 		setAttribute(AttributeName.DEFAULTRENDERINGINTENT, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute DefaultRenderingIntent
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute DefaultRenderingIntent
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumDefaultRenderingIntent getDefaultRenderingIntent()
 	{
 		return EnumDefaultRenderingIntent.getEnum(getAttribute(AttributeName.DEFAULTRENDERINGINTENT, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EndPage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EndPage ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute EndPage
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute EndPage
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setEndPage(int value)
 	{
 		setAttribute(AttributeName.ENDPAGE, value, null);
 	}
 
 	/**
-	  * (15) get int attribute EndPage
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute EndPage
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getEndPage()
 	{
 		return getIntAttribute(AttributeName.ENDPAGE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImageMemory
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImageMemory ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ImageMemory
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ImageMemory
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setImageMemory(int value)
 	{
 		setAttribute(AttributeName.IMAGEMEMORY, value, null);
 	}
 
 	/**
-	  * (15) get int attribute ImageMemory
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute ImageMemory
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getImageMemory()
 	{
 		return getIntAttribute(AttributeName.IMAGEMEMORY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute InitialPageSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InitialPageSize ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute InitialPageSize
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute InitialPageSize
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setInitialPageSize(JDFXYPair value)
 	{
 		setAttribute(AttributeName.INITIALPAGESIZE, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute InitialPageSize
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute InitialPageSize
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getInitialPageSize()
 	{
 		final String strAttrName = getAttribute(AttributeName.INITIALPAGESIZE, null, null);
@@ -639,23 +630,24 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute InitialResolution
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InitialResolution ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute InitialResolution
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute InitialResolution
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setInitialResolution(JDFXYPair value)
 	{
 		setAttribute(AttributeName.INITIALRESOLUTION, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute InitialResolution
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute InitialResolution
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getInitialResolution()
 	{
 		final String strAttrName = getAttribute(AttributeName.INITIALRESOLUTION, null, null);
@@ -663,76 +655,82 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OverPrintMode
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OverPrintMode ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute OverPrintMode
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute OverPrintMode
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setOverPrintMode(int value)
 	{
 		setAttribute(AttributeName.OVERPRINTMODE, value, null);
 	}
 
 	/**
-	  * (15) get int attribute OverPrintMode
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute OverPrintMode
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getOverPrintMode()
 	{
 		return getIntAttribute(AttributeName.OVERPRINTMODE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PDFVersion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PDFVersion ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PDFVersion
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PDFVersion
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPDFVersion(double value)
 	{
 		setAttribute(AttributeName.PDFVERSION, value, null);
 	}
 
 	/**
-	  * (17) get double attribute PDFVersion
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute PDFVersion
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getPDFVersion()
 	{
 		return getRealAttribute(AttributeName.PDFVERSION, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StartPage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StartPage ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute StartPage
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute StartPage
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setStartPage(int value)
 	{
 		setAttribute(AttributeName.STARTPAGE, value, null);
 	}
 
 	/**
-	  * (15) get int attribute StartPage
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute StartPage
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getStartPage()
 	{
 		return getIntAttribute(AttributeName.STARTPAGE, null, 0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element AdvancedParams
+	 * 
 	 * @return JDFAdvancedParams the element
 	 */
 	public JDFAdvancedParams getAdvancedParams()
@@ -740,7 +738,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return (JDFAdvancedParams) getElement(ElementName.ADVANCEDPARAMS, null, 0);
 	}
 
-	/** (25) getCreateAdvancedParams
+	/**
+	 * (25) getCreateAdvancedParams
 	 * 
 	 * @return JDFAdvancedParams the element
 	 */
@@ -751,6 +750,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (29) append element AdvancedParams
+	 * 
 	 * @return JDFAdvancedParams the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -761,6 +761,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (24) const get element PDFXParams
+	 * 
 	 * @return JDFPDFXParams the element
 	 */
 	public JDFPDFXParams getPDFXParams()
@@ -768,7 +769,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return (JDFPDFXParams) getElement(ElementName.PDFXPARAMS, null, 0);
 	}
 
-	/** (25) getCreatePDFXParams
+	/**
+	 * (25) getCreatePDFXParams
 	 * 
 	 * @return JDFPDFXParams the element
 	 */
@@ -779,6 +781,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (29) append element PDFXParams
+	 * 
 	 * @return JDFPDFXParams the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -789,6 +792,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (24) const get element ThinPDFParams
+	 * 
 	 * @return JDFThinPDFParams the element
 	 */
 	public JDFThinPDFParams getThinPDFParams()
@@ -796,7 +800,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		return (JDFThinPDFParams) getElement(ElementName.THINPDFPARAMS, null, 0);
 	}
 
-	/** (25) getCreateThinPDFParams
+	/**
+	 * (25) getCreateThinPDFParams
 	 * 
 	 * @return JDFThinPDFParams the element
 	 */
@@ -807,6 +812,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 
 	/**
 	 * (29) append element ThinPDFParams
+	 * 
 	 * @return JDFThinPDFParams the element
 	 * @throws JDFException if the element already exists
 	 */

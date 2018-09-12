@@ -39,7 +39,6 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -50,7 +49,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAddress;
@@ -62,7 +60,7 @@ import org.cip4.jdflib.resource.process.JDFPerson;
  *****************************************************************************
  * class JDFAutoContact : public JDFResource
  *****************************************************************************
- *
+ * 
  */
 
 public abstract class JDFAutoContact extends JDFResource
@@ -101,36 +99,36 @@ public abstract class JDFAutoContact extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoContact
-	 *
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoContact(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
+	protected JDFAutoContact(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAutoContact
-	 *
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoContact(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
+	protected JDFAutoContact(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAutoContact
-	 *
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoContact(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+	protected JDFAutoContact(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -173,17 +171,17 @@ public abstract class JDFAutoContact extends JDFResource
 	 */
 	/**
 	 * (36) set attribute ContactTypes
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setContactTypes(final VString value)
+	public void setContactTypes(VString value)
 	{
 		setAttribute(AttributeName.CONTACTTYPES, value, null);
 	}
 
 	/**
 	 * (21) get VString attribute ContactTypes
-	 *
+	 * 
 	 * @return VString the value of the attribute
 	 */
 	public VString getContactTypes()
@@ -199,17 +197,17 @@ public abstract class JDFAutoContact extends JDFResource
 	 */
 	/**
 	 * (36) set attribute ContactTypeDetails
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setContactTypeDetails(final String value)
+	public void setContactTypeDetails(String value)
 	{
 		setAttribute(AttributeName.CONTACTTYPEDETAILS, value, null);
 	}
 
 	/**
 	 * (23) get String attribute ContactTypeDetails
-	 *
+	 * 
 	 * @return the value of the attribute
 	 */
 	public String getContactTypeDetails()
@@ -222,17 +220,17 @@ public abstract class JDFAutoContact extends JDFResource
 	 */
 	/**
 	 * (36) set attribute UserID
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setUserID(final String value)
+	public void setUserID(String value)
 	{
 		setAttribute(AttributeName.USERID, value, null);
 	}
 
 	/**
 	 * (23) get String attribute UserID
-	 *
+	 * 
 	 * @return the value of the attribute
 	 */
 	public String getUserID()
@@ -246,7 +244,7 @@ public abstract class JDFAutoContact extends JDFResource
 
 	/**
 	 * (24) const get element Address
-	 *
+	 * 
 	 * @return JDFAddress the element
 	 */
 	public JDFAddress getAddress()
@@ -256,17 +254,17 @@ public abstract class JDFAutoContact extends JDFResource
 
 	/**
 	 * (25) getCreateAddress
-	 *
+	 * 
 	 * @return JDFAddress the element
 	 */
 	public JDFAddress getCreateAddress()
 	{
-		return (JDFAddress) getCreateElement(ElementName.ADDRESS, null, 0);
+		return (JDFAddress) getCreateElement_KElement(ElementName.ADDRESS, null, 0);
 	}
 
 	/**
 	 * (29) append element Address
-	 *
+	 * 
 	 * @return JDFAddress the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -276,52 +274,50 @@ public abstract class JDFAutoContact extends JDFResource
 	}
 
 	/**
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
+	public void refAddress(JDFAddress refTarget)
+	{
+		refElement(refTarget);
+	}
+
+	/**
 	 * (26) getCreateComChannel
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFComChannel the element
 	 */
-	public JDFComChannel getCreateComChannel(final int iSkip)
+	public JDFComChannel getCreateComChannel(int iSkip)
 	{
 		return (JDFComChannel) getCreateElement_KElement(ElementName.COMCHANNEL, null, iSkip);
 	}
 
 	/**
 	 * (27) const get element ComChannel
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFComChannel the element default is getComChannel(0)
 	 */
-	public JDFComChannel getComChannel(final int iSkip)
+	public JDFComChannel getComChannel(int iSkip)
 	{
 		return (JDFComChannel) getElement(ElementName.COMCHANNEL, null, iSkip);
 	}
 
 	/**
 	 * Get all ComChannel from the current element
-	 *
+	 * 
 	 * @return Collection<JDFComChannel>, null if none are available
 	 */
 	public Collection<JDFComChannel> getAllComChannel()
 	{
-		final VElement vc = getChildElementVector(ElementName.COMCHANNEL, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFComChannel> v = new Vector<>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFComChannel) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFComChannel.class, false, 0);
 	}
 
 	/**
 	 * (30) append element ComChannel
-	 *
+	 * 
 	 * @return JDFComChannel the element
 	 */
 	public JDFComChannel appendComChannel()
@@ -330,8 +326,18 @@ public abstract class JDFAutoContact extends JDFResource
 	}
 
 	/**
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
+	public void refComChannel(JDFComChannel refTarget)
+	{
+		refElement(refTarget);
+	}
+
+	/**
 	 * (24) const get element Company
-	 *
+	 * 
 	 * @return JDFCompany the element
 	 */
 	public JDFCompany getCompany()
@@ -341,17 +347,17 @@ public abstract class JDFAutoContact extends JDFResource
 
 	/**
 	 * (25) getCreateCompany
-	 *
+	 * 
 	 * @return JDFCompany the element
 	 */
 	public JDFCompany getCreateCompany()
 	{
-		return (JDFCompany) getCreateElement(ElementName.COMPANY, null, 0);
+		return (JDFCompany) getCreateElement_KElement(ElementName.COMPANY, null, 0);
 	}
 
 	/**
 	 * (29) append element Company
-	 *
+	 * 
 	 * @return JDFCompany the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -362,17 +368,17 @@ public abstract class JDFAutoContact extends JDFResource
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 *
+	 * 
 	 * @param refTarget the element that is referenced
 	 */
-	public void refCompany(final JDFCompany refTarget)
+	public void refCompany(JDFCompany refTarget)
 	{
 		refElement(refTarget);
 	}
 
 	/**
 	 * (24) const get element Person
-	 *
+	 * 
 	 * @return JDFPerson the element
 	 */
 	public JDFPerson getPerson()
@@ -382,23 +388,33 @@ public abstract class JDFAutoContact extends JDFResource
 
 	/**
 	 * (25) getCreatePerson
-	 *
+	 * 
 	 * @return JDFPerson the element
 	 */
 	public JDFPerson getCreatePerson()
 	{
-		return (JDFPerson) getCreateElement(ElementName.PERSON, null, 0);
+		return (JDFPerson) getCreateElement_KElement(ElementName.PERSON, null, 0);
 	}
 
 	/**
 	 * (29) append element Person
-	 *
+	 * 
 	 * @return JDFPerson the element
 	 * @throws JDFException if the element already exists
 	 */
 	public JDFPerson appendPerson() throws JDFException
 	{
 		return (JDFPerson) appendElementN(ElementName.PERSON, 1, null);
+	}
+
+	/**
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
+	public void refPerson(JDFPerson refTarget)
+	{
+		refElement(refTarget);
 	}
 
 }// end namespace JDF

@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -74,7 +42,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,7 +53,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFResource;
@@ -95,11 +61,11 @@ import org.cip4.jdflib.resource.process.JDFExtraValues;
 import org.cip4.jdflib.resource.process.JDFMetadataMap;
 
 /**
-*****************************************************************************
-class JDFAutoIdentificationField : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoIdentificationField : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoIdentificationField extends JDFResource
 {
@@ -145,6 +111,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoIdentificationField
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -155,6 +122,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoIdentificationField
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -166,6 +134,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoIdentificationField
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -177,7 +146,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -186,7 +155,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -206,8 +175,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for Encoding
-	*/
+	 * Enumeration strings for Encoding
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumEncoding extends ValuedEnum
@@ -277,8 +246,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for Position
-	*/
+	 * Enumeration strings for Position
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumPosition extends ValuedEnum
@@ -356,8 +325,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for Purpose
-	*/
+	 * Enumeration strings for Purpose
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumPurpose extends ValuedEnum
@@ -420,70 +389,74 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 		public static final EnumPurpose Label = new EnumPurpose("Label");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Encoding
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Encoding ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Encoding
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Encoding
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setEncoding(EnumEncoding enumVar)
 	{
 		setAttribute(AttributeName.ENCODING, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Encoding
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Encoding
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumEncoding getEncoding()
 	{
 		return EnumEncoding.getEnum(getAttribute(AttributeName.ENCODING, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EncodingDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EncodingDetails ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute EncodingDetails
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute EncodingDetails
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setEncodingDetails(String value)
 	{
 		setAttribute(AttributeName.ENCODINGDETAILS, value, null);
 	}
 
 	/**
-	  * (23) get String attribute EncodingDetails
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute EncodingDetails
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getEncodingDetails()
 	{
 		return getAttribute(AttributeName.ENCODINGDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BoundingBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BoundingBox ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute BoundingBox
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute BoundingBox
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setBoundingBox(JDFRectangle value)
 	{
 		setAttribute(AttributeName.BOUNDINGBOX, value, null);
 	}
 
 	/**
-	  * (20) get JDFRectangle attribute BoundingBox
-	  * @return JDFRectangle the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFRectangle
-	  */
+	 * (20) get JDFRectangle attribute BoundingBox
+	 * 
+	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 */
 	public JDFRectangle getBoundingBox()
 	{
 		final String strAttrName = getAttribute(AttributeName.BOUNDINGBOX, null, null);
@@ -491,44 +464,47 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Format
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Format ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Format
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Format
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setFormat(String value)
 	{
 		setAttribute(AttributeName.FORMAT, value, null);
 	}
 
 	/**
-	  * (23) get String attribute Format
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute Format
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getFormat()
 	{
 		return getAttribute(AttributeName.FORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Orientation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Orientation
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Orientation
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setOrientation(JDFMatrix value)
 	{
 		setAttribute(AttributeName.ORIENTATION, value, null);
 	}
 
 	/**
-	  * (20) get JDFMatrix attribute Orientation
-	  * @return JDFMatrix the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFMatrix
-	  */
+	 * (20) get JDFMatrix attribute Orientation
+	 * 
+	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 */
 	public JDFMatrix getOrientation()
 	{
 		final String strAttrName = getAttribute(AttributeName.ORIENTATION, null, null);
@@ -536,160 +512,174 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Page
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Page ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Page
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Page
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPage(int value)
 	{
 		setAttribute(AttributeName.PAGE, value, null);
 	}
 
 	/**
-	  * (15) get int attribute Page
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute Page
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getPage()
 	{
 		return getIntAttribute(AttributeName.PAGE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Position
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Position
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Position
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setPosition(EnumPosition enumVar)
 	{
 		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Position
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Position
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumPosition getPosition()
 	{
 		return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Purpose
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Purpose ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Purpose
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Purpose
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setPurpose(EnumPurpose enumVar)
 	{
 		setAttribute(AttributeName.PURPOSE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Purpose
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Purpose
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumPurpose getPurpose()
 	{
 		return EnumPurpose.getEnum(getAttribute(AttributeName.PURPOSE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PurposeDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PurposeDetails ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PurposeDetails
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PurposeDetails
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPurposeDetails(String value)
 	{
 		setAttribute(AttributeName.PURPOSEDETAILS, value, null);
 	}
 
 	/**
-	  * (23) get String attribute PurposeDetails
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute PurposeDetails
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getPurposeDetails()
 	{
 		return getAttribute(AttributeName.PURPOSEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Value
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Value ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Value
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Value
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setValue(String value)
 	{
 		setAttribute(AttributeName.VALUE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute Value
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute Value
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getValue()
 	{
 		return getAttribute(AttributeName.VALUE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ValueFormat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ValueFormat ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ValueFormat
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ValueFormat
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setValueFormat(String value)
 	{
 		setAttribute(AttributeName.VALUEFORMAT, value, null);
 	}
 
 	/**
-	  * (23) get String attribute ValueFormat
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute ValueFormat
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getValueFormat()
 	{
 		return getAttribute(AttributeName.VALUEFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ValueTemplate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ValueTemplate ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ValueTemplate
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ValueTemplate
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setValueTemplate(String value)
 	{
 		setAttribute(AttributeName.VALUETEMPLATE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute ValueTemplate
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute ValueTemplate
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getValueTemplate()
 	{
 		return getAttribute(AttributeName.VALUETEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element BarcodeDetails
+	 * 
 	 * @return JDFBarcodeDetails the element
 	 */
 	public JDFBarcodeDetails getBarcodeDetails()
@@ -697,7 +687,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 		return (JDFBarcodeDetails) getElement(ElementName.BARCODEDETAILS, null, 0);
 	}
 
-	/** (25) getCreateBarcodeDetails
+	/**
+	 * (25) getCreateBarcodeDetails
 	 * 
 	 * @return JDFBarcodeDetails the element
 	 */
@@ -708,6 +699,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 
 	/**
 	 * (29) append element BarcodeDetails
+	 * 
 	 * @return JDFBarcodeDetails the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -718,6 +710,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 
 	/**
 	 * (24) const get element ExtraValues
+	 * 
 	 * @return JDFExtraValues the element
 	 */
 	public JDFExtraValues getExtraValues()
@@ -725,7 +718,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 		return (JDFExtraValues) getElement(ElementName.EXTRAVALUES, null, 0);
 	}
 
-	/** (25) getCreateExtraValues
+	/**
+	 * (25) getCreateExtraValues
 	 * 
 	 * @return JDFExtraValues the element
 	 */
@@ -736,6 +730,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 
 	/**
 	 * (29) append element ExtraValues
+	 * 
 	 * @return JDFExtraValues the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -744,7 +739,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 		return (JDFExtraValues) appendElementN(ElementName.EXTRAVALUES, 1, null);
 	}
 
-	/** (26) getCreateMetadataMap
+	/**
+	 * (26) getCreateMetadataMap
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMetadataMap the element
@@ -756,9 +752,10 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 
 	/**
 	 * (27) const get element MetadataMap
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFMetadataMap the element
-	 * default is getMetadataMap(0)     */
+	 * @return JDFMetadataMap the element default is getMetadataMap(0)
+	 */
 	public JDFMetadataMap getMetadataMap(int iSkip)
 	{
 		return (JDFMetadataMap) getElement(ElementName.METADATAMAP, null, iSkip);
@@ -771,23 +768,12 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 */
 	public Collection<JDFMetadataMap> getAllMetadataMap()
 	{
-		final VElement vc = getChildElementVector(ElementName.METADATAMAP, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFMetadataMap> v = new Vector<JDFMetadataMap>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFMetadataMap) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFMetadataMap.class, false, 0);
 	}
 
 	/**
 	 * (30) append element MetadataMap
+	 * 
 	 * @return JDFMetadataMap the element
 	 */
 	public JDFMetadataMap appendMetadataMap()

@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -88,11 +56,11 @@ import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
 
 /**
-*****************************************************************************
-class JDFAutoPublishingIntent : public JDFIntentResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoPublishingIntent : public JDFIntentResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 {
@@ -118,7 +86,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 		elemInfoTable[1] = new ElemInfoTable(ElementName.ISSUENAME, 0x55555111);
 		elemInfoTable[2] = new ElemInfoTable(ElementName.ISSUETYPE, 0x55555111);
 		elemInfoTable[3] = new ElemInfoTable(ElementName.CIRCULATION, 0x66666111);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.CONTENTLIST, 0x66661111);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.CONTENTLIST, 0x66666111);
 	}
 
 	@Override
@@ -129,6 +97,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoPublishingIntent
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -139,6 +108,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoPublishingIntent
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -150,6 +120,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoPublishingIntent
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -161,7 +132,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -169,27 +140,28 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 		return " JDFAutoPublishingIntent[  --> " + super.toString() + " ]";
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ContentDataRefs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ContentDataRefs ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ContentDataRefs
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ContentDataRefs
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setContentDataRefs(VString value)
 	{
 		setAttribute(AttributeName.CONTENTDATAREFS, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute ContentDataRefs
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute ContentDataRefs
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getContentDataRefs()
 	{
 		final VString vStrAttrib = new VString();
@@ -198,13 +170,13 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 		return vStrAttrib;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element IssueDate
+	 * 
 	 * @return JDFTimeSpan the element
 	 */
 	public JDFTimeSpan getIssueDate()
@@ -212,7 +184,8 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 		return (JDFTimeSpan) getElement(ElementName.ISSUEDATE, null, 0);
 	}
 
-	/** (25) getCreateIssueDate
+	/**
+	 * (25) getCreateIssueDate
 	 * 
 	 * @return JDFTimeSpan the element
 	 */
@@ -223,6 +196,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element IssueDate
+	 * 
 	 * @return JDFTimeSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -233,6 +207,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element IssueName
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getIssueName()
@@ -240,7 +215,8 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 		return (JDFStringSpan) getElement(ElementName.ISSUENAME, null, 0);
 	}
 
-	/** (25) getCreateIssueName
+	/**
+	 * (25) getCreateIssueName
 	 * 
 	 * @return JDFStringSpan the element
 	 */
@@ -251,6 +227,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element IssueName
+	 * 
 	 * @return JDFStringSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -261,6 +238,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element IssueType
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getIssueType()
@@ -268,7 +246,8 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 		return (JDFNameSpan) getElement(ElementName.ISSUETYPE, null, 0);
 	}
 
-	/** (25) getCreateIssueType
+	/**
+	 * (25) getCreateIssueType
 	 * 
 	 * @return JDFNameSpan the element
 	 */
@@ -279,6 +258,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element IssueType
+	 * 
 	 * @return JDFNameSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -289,6 +269,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element Circulation
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCirculation()
@@ -296,7 +277,8 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 		return (JDFIntegerSpan) getElement(ElementName.CIRCULATION, null, 0);
 	}
 
-	/** (25) getCreateCirculation
+	/**
+	 * (25) getCreateCirculation
 	 * 
 	 * @return JDFIntegerSpan the element
 	 */
@@ -307,6 +289,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element Circulation
+	 * 
 	 * @return JDFIntegerSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -317,6 +300,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element ContentList
+	 * 
 	 * @return JDFContentList the element
 	 */
 	public JDFContentList getContentList()
@@ -324,7 +308,8 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 		return (JDFContentList) getElement(ElementName.CONTENTLIST, null, 0);
 	}
 
-	/** (25) getCreateContentList
+	/**
+	 * (25) getCreateContentList
 	 * 
 	 * @return JDFContentList the element
 	 */
@@ -335,6 +320,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element ContentList
+	 * 
 	 * @return JDFContentList the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -344,9 +330,10 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refContentList(JDFContentList refTarget)
 	{
 		refElement(refTarget);

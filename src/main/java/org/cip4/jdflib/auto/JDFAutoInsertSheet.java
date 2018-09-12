@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -91,11 +59,11 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
 
 /**
-*****************************************************************************
-class JDFAutoInsertSheet : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoInsertSheet : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoInsertSheet extends JDFResource
 {
@@ -136,6 +104,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoInsertSheet
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -146,6 +115,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoInsertSheet
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -157,6 +127,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoInsertSheet
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -168,7 +139,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -177,7 +148,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -197,8 +168,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for SheetType
-	*/
+	 * Enumeration strings for SheetType
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumSheetType extends ValuedEnum
@@ -268,8 +239,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for SheetUsage
-	*/
+	 * Enumeration strings for SheetUsage
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumSheetUsage extends ValuedEnum
@@ -351,8 +322,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for IncludeInBundleItem
-	*/
+	 * Enumeration strings for IncludeInBundleItem
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumIncludeInBundleItem extends ValuedEnum
@@ -417,111 +388,120 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		public static final EnumIncludeInBundleItem New = new EnumIncludeInBundleItem("New");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetType ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute SheetType
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute SheetType
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setSheetType(EnumSheetType enumVar)
 	{
 		setAttribute(AttributeName.SHEETTYPE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute SheetType
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute SheetType
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumSheetType getSheetType()
 	{
 		return EnumSheetType.getEnum(getAttribute(AttributeName.SHEETTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetUsage ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute SheetUsage
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute SheetUsage
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setSheetUsage(EnumSheetUsage enumVar)
 	{
 		setAttribute(AttributeName.SHEETUSAGE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute SheetUsage
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute SheetUsage
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumSheetUsage getSheetUsage()
 	{
 		return EnumSheetUsage.getEnum(getAttribute(AttributeName.SHEETUSAGE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IncludeInBundleItem
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IncludeInBundleItem ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute IncludeInBundleItem
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute IncludeInBundleItem
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setIncludeInBundleItem(EnumIncludeInBundleItem enumVar)
 	{
 		setAttribute(AttributeName.INCLUDEINBUNDLEITEM, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute IncludeInBundleItem
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute IncludeInBundleItem
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumIncludeInBundleItem getIncludeInBundleItem()
 	{
 		return EnumIncludeInBundleItem.getEnum(getAttribute(AttributeName.INCLUDEINBUNDLEITEM, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute IsWaste
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IsWaste ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute IsWaste
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute IsWaste
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setIsWaste(boolean value)
 	{
 		setAttribute(AttributeName.ISWASTE, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute IsWaste
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute IsWaste
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getIsWaste()
 	{
 		return getBoolAttribute(AttributeName.ISWASTE, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarkList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkList ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute MarkList
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute MarkList
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setMarkList(VString value)
 	{
 		setAttribute(AttributeName.MARKLIST, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute MarkList
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute MarkList
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getMarkList()
 	{
 		final VString vStrAttrib = new VString();
@@ -530,55 +510,59 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetFormat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetFormat ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute SheetFormat
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute SheetFormat
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSheetFormat(String value)
 	{
 		setAttribute(AttributeName.SHEETFORMAT, value, null);
 	}
 
 	/**
-	  * (23) get String attribute SheetFormat
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute SheetFormat
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getSheetFormat()
 	{
 		return getAttribute(AttributeName.SHEETFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Usage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Usage
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Usage
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setUsage(EnumSheetUsage enumVar)
 	{
 		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Usage
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Usage
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumSheetUsage getUsage()
 	{
 		return EnumSheetUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element RunList
+	 * 
 	 * @return JDFRunList the element
 	 */
 	public JDFRunList getRunList()
@@ -586,7 +570,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		return (JDFRunList) getElement(ElementName.RUNLIST, null, 0);
 	}
 
-	/** (25) getCreateRunList
+	/**
+	 * (25) getCreateRunList
 	 * 
 	 * @return JDFRunList the element
 	 */
@@ -597,6 +582,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 
 	/**
 	 * (29) append element RunList
+	 * 
 	 * @return JDFRunList the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -606,9 +592,10 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refRunList(JDFRunList refTarget)
 	{
 		refElement(refTarget);
@@ -616,6 +603,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 
 	/**
 	 * (24) const get element Layout
+	 * 
 	 * @return JDFLayout the element
 	 */
 	public JDFLayout getLayout()
@@ -623,7 +611,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		return (JDFLayout) getElement(ElementName.LAYOUT, null, 0);
 	}
 
-	/** (25) getCreateLayout
+	/**
+	 * (25) getCreateLayout
 	 * 
 	 * @return JDFLayout the element
 	 */
@@ -634,6 +623,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 
 	/**
 	 * (29) append element Layout
+	 * 
 	 * @return JDFLayout the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -643,9 +633,10 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refLayout(JDFLayout refTarget)
 	{
 		refElement(refTarget);
@@ -653,6 +644,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 
 	/**
 	 * (24) const get element Sheet
+	 * 
 	 * @return JDFSheet the element
 	 */
 	public JDFSheet getSheet()
@@ -660,7 +652,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		return (JDFSheet) getElement(ElementName.SHEET, null, 0);
 	}
 
-	/** (25) getCreateSheet
+	/**
+	 * (25) getCreateSheet
 	 * 
 	 * @return JDFSheet the element
 	 */
@@ -671,6 +664,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 
 	/**
 	 * (29) append element Sheet
+	 * 
 	 * @return JDFSheet the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -680,9 +674,10 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refSheet(JDFSheet refTarget)
 	{
 		refElement(refTarget);

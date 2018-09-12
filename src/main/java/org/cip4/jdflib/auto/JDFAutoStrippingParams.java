@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -74,7 +42,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,7 +53,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.resource.JDFDevice;
@@ -99,11 +65,11 @@ import org.cip4.jdflib.resource.process.JDFStripCellParams;
 import org.cip4.jdflib.resource.process.JDFStripMark;
 
 /**
-*****************************************************************************
-class JDFAutoStrippingParams : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoStrippingParams : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoStrippingParams extends JDFResource
 {
@@ -138,11 +104,11 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.BINDERYSIGNATURE, 0x66666611);
 		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICE, 0x33333311);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.EXTERNALIMPOSITIONTEMPLATE, 0x66666111);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.EXTERNALIMPOSITIONTEMPLATE, 0x66666611);
 		elemInfoTable[3] = new ElemInfoTable(ElementName.MEDIA, 0x33333311);
 		elemInfoTable[4] = new ElemInfoTable(ElementName.POSITION, 0x33333311);
 		elemInfoTable[5] = new ElemInfoTable(ElementName.STRIPCELLPARAMS, 0x66666611);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.STRIPMARK, 0x33333111);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.STRIPMARK, 0x33333311);
 	}
 
 	@Override
@@ -153,6 +119,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoStrippingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -163,6 +130,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoStrippingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -174,6 +142,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoStrippingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -185,7 +154,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -194,7 +163,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -214,8 +183,8 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for WorkStyle
-	*/
+	 * Enumeration strings for WorkStyle
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumWorkStyle extends ValuedEnum
@@ -284,48 +253,51 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		public static final EnumWorkStyle WorkAndTwist = new EnumWorkStyle("WorkAndTwist");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AssemblyID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AssemblyID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute AssemblyID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute AssemblyID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAssemblyID(String value)
 	{
 		setAttribute(AttributeName.ASSEMBLYID, value, null);
 	}
 
 	/**
-	  * (23) get String attribute AssemblyID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute AssemblyID
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getAssemblyID()
 	{
 		return getAttribute(AttributeName.ASSEMBLYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AssemblyIDs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute AssemblyIDs
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute AssemblyIDs
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAssemblyIDs(VString value)
 	{
 		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute AssemblyIDs
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute AssemblyIDs
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getAssemblyIDs()
 	{
 		final VString vStrAttrib = new VString();
@@ -334,128 +306,139 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Automated
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Automated ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Automated
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Automated
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAutomated(boolean value)
 	{
 		setAttribute(AttributeName.AUTOMATED, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute Automated
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute Automated
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getAutomated()
 	{
 		return getBoolAttribute(AttributeName.AUTOMATED, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GangElementID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GangElementID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute GangElementID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute GangElementID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setGangElementID(String value)
 	{
 		setAttribute(AttributeName.GANGELEMENTID, value, null);
 	}
 
 	/**
-	  * (23) get String attribute GangElementID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute GangElementID
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getGangElementID()
 	{
 		return getAttribute(AttributeName.GANGELEMENTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute InnermostShingling
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InnermostShingling ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute InnermostShingling
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute InnermostShingling
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setInnermostShingling(double value)
 	{
 		setAttribute(AttributeName.INNERMOSTSHINGLING, value, null);
 	}
 
 	/**
-	  * (17) get double attribute InnermostShingling
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute InnermostShingling
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getInnermostShingling()
 	{
 		return getRealAttribute(AttributeName.INNERMOSTSHINGLING, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute JobID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute JobID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setJobID(String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
 
 	/**
-	  * (23) get String attribute JobID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute JobID
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getJobID()
 	{
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OutermostShingling
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OutermostShingling ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute OutermostShingling
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute OutermostShingling
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setOutermostShingling(double value)
 	{
 		setAttribute(AttributeName.OUTERMOSTSHINGLING, value, null);
 	}
 
 	/**
-	  * (17) get double attribute OutermostShingling
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute OutermostShingling
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getOutermostShingling()
 	{
 		return getRealAttribute(AttributeName.OUTERMOSTSHINGLING, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SectionList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SectionList ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute SectionList
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute SectionList
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSectionList(JDFIntegerList value)
 	{
 		setAttribute(AttributeName.SECTIONLIST, value, null);
 	}
 
 	/**
-	  * (20) get JDFIntegerList attribute SectionList
-	  * @return JDFIntegerList the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFIntegerList
-	  */
+	 * (20) get JDFIntegerList attribute SectionList
+	 * 
+	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 */
 	public JDFIntegerList getSectionList()
 	{
 		final String strAttrName = getAttribute(AttributeName.SECTIONLIST, null, null);
@@ -463,97 +446,105 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetNameFormat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetNameFormat ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute SheetNameFormat
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute SheetNameFormat
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSheetNameFormat(String value)
 	{
 		setAttribute(AttributeName.SHEETNAMEFORMAT, value, null);
 	}
 
 	/**
-	  * (23) get String attribute SheetNameFormat
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute SheetNameFormat
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getSheetNameFormat()
 	{
 		return getAttribute(AttributeName.SHEETNAMEFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetNameTemplate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetNameTemplate ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute SheetNameTemplate
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute SheetNameTemplate
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSheetNameTemplate(String value)
 	{
 		setAttribute(AttributeName.SHEETNAMETEMPLATE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute SheetNameTemplate
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute SheetNameTemplate
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getSheetNameTemplate()
 	{
 		return getAttribute(AttributeName.SHEETNAMETEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StackDepth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StackDepth ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute StackDepth
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute StackDepth
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setStackDepth(int value)
 	{
 		setAttribute(AttributeName.STACKDEPTH, value, null);
 	}
 
 	/**
-	  * (15) get int attribute StackDepth
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute StackDepth
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getStackDepth()
 	{
 		return getIntAttribute(AttributeName.STACKDEPTH, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WorkStyle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WorkStyle ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute WorkStyle
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute WorkStyle
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setWorkStyle(EnumWorkStyle enumVar)
 	{
 		setAttribute(AttributeName.WORKSTYLE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute WorkStyle
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute WorkStyle
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumWorkStyle getWorkStyle()
 	{
 		return EnumWorkStyle.getEnum(getAttribute(AttributeName.WORKSTYLE, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element BinderySignature
+	 * 
 	 * @return JDFBinderySignature the element
 	 */
 	public JDFBinderySignature getBinderySignature()
@@ -561,7 +552,8 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return (JDFBinderySignature) getElement(ElementName.BINDERYSIGNATURE, null, 0);
 	}
 
-	/** (25) getCreateBinderySignature
+	/**
+	 * (25) getCreateBinderySignature
 	 * 
 	 * @return JDFBinderySignature the element
 	 */
@@ -572,6 +564,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (29) append element BinderySignature
+	 * 
 	 * @return JDFBinderySignature the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -581,15 +574,17 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refBinderySignature(JDFBinderySignature refTarget)
 	{
 		refElement(refTarget);
 	}
 
-	/** (26) getCreateDevice
+	/**
+	 * (26) getCreateDevice
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element
@@ -601,9 +596,10 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (27) const get element Device
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFDevice the element
-	 * default is getDevice(0)     */
+	 * @return JDFDevice the element default is getDevice(0)
+	 */
 	public JDFDevice getDevice(int iSkip)
 	{
 		return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
@@ -616,23 +612,12 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 */
 	public Collection<JDFDevice> getAllDevice()
 	{
-		final VElement vc = getChildElementVector(ElementName.DEVICE, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFDevice> v = new Vector<JDFDevice>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFDevice) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFDevice.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Device
+	 * 
 	 * @return JDFDevice the element
 	 */
 	public JDFDevice appendDevice()
@@ -641,9 +626,10 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refDevice(JDFDevice refTarget)
 	{
 		refElement(refTarget);
@@ -651,6 +637,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (24) const get element ExternalImpositionTemplate
+	 * 
 	 * @return JDFExternalImpositionTemplate the element
 	 */
 	public JDFExternalImpositionTemplate getExternalImpositionTemplate()
@@ -658,7 +645,8 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return (JDFExternalImpositionTemplate) getElement(ElementName.EXTERNALIMPOSITIONTEMPLATE, null, 0);
 	}
 
-	/** (25) getCreateExternalImpositionTemplate
+	/**
+	 * (25) getCreateExternalImpositionTemplate
 	 * 
 	 * @return JDFExternalImpositionTemplate the element
 	 */
@@ -669,6 +657,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (29) append element ExternalImpositionTemplate
+	 * 
 	 * @return JDFExternalImpositionTemplate the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -678,15 +667,17 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refExternalImpositionTemplate(JDFExternalImpositionTemplate refTarget)
 	{
 		refElement(refTarget);
 	}
 
-	/** (26) getCreateMedia
+	/**
+	 * (26) getCreateMedia
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMedia the element
@@ -698,9 +689,10 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (27) const get element Media
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFMedia the element
-	 * default is getMedia(0)     */
+	 * @return JDFMedia the element default is getMedia(0)
+	 */
 	public JDFMedia getMedia(int iSkip)
 	{
 		return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
@@ -713,23 +705,12 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 */
 	public Collection<JDFMedia> getAllMedia()
 	{
-		final VElement vc = getChildElementVector(ElementName.MEDIA, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFMedia> v = new Vector<JDFMedia>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFMedia) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFMedia.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Media
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia appendMedia()
@@ -738,15 +719,17 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refMedia(JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}
 
-	/** (26) getCreatePosition
+	/**
+	 * (26) getCreatePosition
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPosition the element
@@ -758,9 +741,10 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (27) const get element Position
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFPosition the element
-	 * default is getPosition(0)     */
+	 * @return JDFPosition the element default is getPosition(0)
+	 */
 	public JDFPosition getPosition(int iSkip)
 	{
 		return (JDFPosition) getElement(ElementName.POSITION, null, iSkip);
@@ -773,23 +757,12 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 */
 	public Collection<JDFPosition> getAllPosition()
 	{
-		final VElement vc = getChildElementVector(ElementName.POSITION, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFPosition> v = new Vector<JDFPosition>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFPosition) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFPosition.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Position
+	 * 
 	 * @return JDFPosition the element
 	 */
 	public JDFPosition appendPosition()
@@ -799,6 +772,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (24) const get element StripCellParams
+	 * 
 	 * @return JDFStripCellParams the element
 	 */
 	public JDFStripCellParams getStripCellParams()
@@ -806,7 +780,8 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return (JDFStripCellParams) getElement(ElementName.STRIPCELLPARAMS, null, 0);
 	}
 
-	/** (25) getCreateStripCellParams
+	/**
+	 * (25) getCreateStripCellParams
 	 * 
 	 * @return JDFStripCellParams the element
 	 */
@@ -817,6 +792,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (29) append element StripCellParams
+	 * 
 	 * @return JDFStripCellParams the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -825,7 +801,8 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		return (JDFStripCellParams) appendElementN(ElementName.STRIPCELLPARAMS, 1, null);
 	}
 
-	/** (26) getCreateStripMark
+	/**
+	 * (26) getCreateStripMark
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFStripMark the element
@@ -837,9 +814,10 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	/**
 	 * (27) const get element StripMark
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFStripMark the element
-	 * default is getStripMark(0)     */
+	 * @return JDFStripMark the element default is getStripMark(0)
+	 */
 	public JDFStripMark getStripMark(int iSkip)
 	{
 		return (JDFStripMark) getElement(ElementName.STRIPMARK, null, iSkip);
@@ -852,23 +830,12 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 */
 	public Collection<JDFStripMark> getAllStripMark()
 	{
-		final VElement vc = getChildElementVector(ElementName.STRIPMARK, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFStripMark> v = new Vector<JDFStripMark>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFStripMark) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFStripMark.class, false, 0);
 	}
 
 	/**
 	 * (30) append element StripMark
+	 * 
 	 * @return JDFStripMark the element
 	 */
 	public JDFStripMark appendStripMark()

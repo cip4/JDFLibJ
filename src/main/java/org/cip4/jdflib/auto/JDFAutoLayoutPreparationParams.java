@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -74,7 +42,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,7 +53,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
@@ -102,11 +68,11 @@ import org.cip4.jdflib.resource.process.JDFInsertSheet;
 import org.cip4.jdflib.resource.process.JDFMedia;
 
 /**
-*****************************************************************************
-class JDFAutoLayoutPreparationParams : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoLayoutPreparationParams : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 {
@@ -153,7 +119,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		elemInfoTable[0] = new ElemInfoTable(ElementName.IMAGESHIFT, 0x66666661);
 		elemInfoTable[1] = new ElemInfoTable(ElementName.INSERTSHEET, 0x33333331);
 		elemInfoTable[2] = new ElemInfoTable(ElementName.DEVICEMARK, 0x66666661);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.EXTERNALIMPOSITIONTEMPLATE, 0x66666111);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.EXTERNALIMPOSITIONTEMPLATE, 0x66666661);
 		elemInfoTable[4] = new ElemInfoTable(ElementName.FITPOLICY, 0x66666661);
 		elemInfoTable[5] = new ElemInfoTable(ElementName.JOBFIELD, 0x33333331);
 		elemInfoTable[6] = new ElemInfoTable(ElementName.MEDIA, 0x66666661);
@@ -168,6 +134,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoLayoutPreparationParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -178,6 +145,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoLayoutPreparationParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -189,6 +157,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoLayoutPreparationParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -200,7 +169,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -209,7 +178,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -229,8 +198,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for FinishingOrder
-	*/
+	 * Enumeration strings for FinishingOrder
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumFinishingOrder extends ValuedEnum
@@ -296,8 +265,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for FoldCatalogOrientation
-	*/
+	 * Enumeration strings for FoldCatalogOrientation
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumFoldCatalogOrientation extends ValuedEnum
@@ -371,8 +340,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for Rotate
-	*/
+	 * Enumeration strings for Rotate
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumRotate extends ValuedEnum
@@ -438,8 +407,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for Sides
-	*/
+	 * Enumeration strings for Sides
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumSides extends ValuedEnum
@@ -507,8 +476,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for BindingEdge
-	*/
+	 * Enumeration strings for BindingEdge
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumBindingEdge extends ValuedEnum
@@ -575,174 +544,189 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		public static final EnumBindingEdge None = new EnumBindingEdge("None");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FinishingOrder
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FinishingOrder ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute FinishingOrder
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute FinishingOrder
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setFinishingOrder(EnumFinishingOrder enumVar)
 	{
 		setAttribute(AttributeName.FINISHINGORDER, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute FinishingOrder
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute FinishingOrder
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumFinishingOrder getFinishingOrder()
 	{
 		return EnumFinishingOrder.getEnum(getAttribute(AttributeName.FINISHINGORDER, null, "GatherFold"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FoldCatalogOrientation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FoldCatalogOrientation ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute FoldCatalogOrientation
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute FoldCatalogOrientation
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setFoldCatalogOrientation(EnumFoldCatalogOrientation enumVar)
 	{
 		setAttribute(AttributeName.FOLDCATALOGORIENTATION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute FoldCatalogOrientation
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute FoldCatalogOrientation
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumFoldCatalogOrientation getFoldCatalogOrientation()
 	{
 		return EnumFoldCatalogOrientation.getEnum(getAttribute(AttributeName.FOLDCATALOGORIENTATION, null, "Rotate0"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PageDistributionScheme
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageDistributionScheme ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PageDistributionScheme
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PageDistributionScheme
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPageDistributionScheme(String value)
 	{
 		setAttribute(AttributeName.PAGEDISTRIBUTIONSCHEME, value, null);
 	}
 
 	/**
-	  * (23) get String attribute PageDistributionScheme
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute PageDistributionScheme
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getPageDistributionScheme()
 	{
 		return getAttribute(AttributeName.PAGEDISTRIBUTIONSCHEME, null, "Sequential");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PageOrder
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageOrder ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PageOrder
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PageOrder
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPageOrder(String value)
 	{
 		setAttribute(AttributeName.PAGEORDER, value, null);
 	}
 
 	/**
-	  * (23) get String attribute PageOrder
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute PageOrder
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getPageOrder()
 	{
 		return getAttribute(AttributeName.PAGEORDER, null, "Reader");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Rotate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Rotate ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Rotate
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Rotate
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setRotate(EnumRotate enumVar)
 	{
 		setAttribute(AttributeName.ROTATE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Rotate
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Rotate
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumRotate getRotate()
 	{
 		return EnumRotate.getEnum(getAttribute(AttributeName.ROTATE, null, "Rotate0"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Sides
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Sides ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Sides
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Sides
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setSides(EnumSides enumVar)
 	{
 		setAttribute(AttributeName.SIDES, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Sides
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Sides
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumSides getSides()
 	{
 		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, "OneSidedFront"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BindingEdge
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BindingEdge ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute BindingEdge
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute BindingEdge
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setBindingEdge(EnumBindingEdge enumVar)
 	{
 		setAttribute(AttributeName.BINDINGEDGE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute BindingEdge
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute BindingEdge
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumBindingEdge getBindingEdge()
 	{
 		return EnumBindingEdge.getEnum(getAttribute(AttributeName.BINDINGEDGE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BackMarkList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BackMarkList ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute BackMarkList
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute BackMarkList
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setBackMarkList(VString value)
 	{
 		setAttribute(AttributeName.BACKMARKLIST, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute BackMarkList
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute BackMarkList
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getBackMarkList()
 	{
 		final VString vStrAttrib = new VString();
@@ -751,23 +735,24 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CreepValue
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CreepValue ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute CreepValue
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute CreepValue
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setCreepValue(JDFXYPair value)
 	{
 		setAttribute(AttributeName.CREEPVALUE, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute CreepValue
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute CreepValue
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getCreepValue()
 	{
 		final String strAttrName = getAttribute(AttributeName.CREEPVALUE, null, null);
@@ -775,43 +760,47 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FoldCatalog
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FoldCatalog ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute FoldCatalog
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute FoldCatalog
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setFoldCatalog(String value)
 	{
 		setAttribute(AttributeName.FOLDCATALOG, value, null);
 	}
 
 	/**
-	  * (23) get String attribute FoldCatalog
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute FoldCatalog
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getFoldCatalog()
 	{
 		return getAttribute(AttributeName.FOLDCATALOG, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FrontMarkList
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FrontMarkList ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute FrontMarkList
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute FrontMarkList
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setFrontMarkList(VString value)
 	{
 		setAttribute(AttributeName.FRONTMARKLIST, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute FrontMarkList
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute FrontMarkList
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getFrontMarkList()
 	{
 		final VString vStrAttrib = new VString();
@@ -820,23 +809,24 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Gutter
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Gutter ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Gutter
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Gutter
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setGutter(JDFXYPair value)
 	{
 		setAttribute(AttributeName.GUTTER, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute Gutter
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute Gutter
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getGutter()
 	{
 		final String strAttrName = getAttribute(AttributeName.GUTTER, null, null);
@@ -844,23 +834,24 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GutterMinimumLimit
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GutterMinimumLimit ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute GutterMinimumLimit
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute GutterMinimumLimit
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setGutterMinimumLimit(JDFXYPair value)
 	{
 		setAttribute(AttributeName.GUTTERMINIMUMLIMIT, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute GutterMinimumLimit
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute GutterMinimumLimit
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getGutterMinimumLimit()
 	{
 		final String strAttrName = getAttribute(AttributeName.GUTTERMINIMUMLIMIT, null, null);
@@ -868,23 +859,24 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HorizontalCreep
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HorizontalCreep ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute HorizontalCreep
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute HorizontalCreep
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setHorizontalCreep(JDFIntegerList value)
 	{
 		setAttribute(AttributeName.HORIZONTALCREEP, value, null);
 	}
 
 	/**
-	  * (20) get JDFIntegerList attribute HorizontalCreep
-	  * @return JDFIntegerList the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFIntegerList
-	  */
+	 * (20) get JDFIntegerList attribute HorizontalCreep
+	 * 
+	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 */
 	public JDFIntegerList getHorizontalCreep()
 	{
 		final String strAttrName = getAttribute(AttributeName.HORIZONTALCREEP, null, null);
@@ -892,23 +884,24 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImplicitGutter
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImplicitGutter ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ImplicitGutter
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ImplicitGutter
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setImplicitGutter(JDFXYPair value)
 	{
 		setAttribute(AttributeName.IMPLICITGUTTER, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute ImplicitGutter
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute ImplicitGutter
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getImplicitGutter()
 	{
 		final String strAttrName = getAttribute(AttributeName.IMPLICITGUTTER, null, null);
@@ -916,23 +909,24 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ImplicitGutterMinimumLimit
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImplicitGutterMinimumLimit ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ImplicitGutterMinimumLimit
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ImplicitGutterMinimumLimit
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setImplicitGutterMinimumLimit(JDFXYPair value)
 	{
 		setAttribute(AttributeName.IMPLICITGUTTERMINIMUMLIMIT, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute ImplicitGutterMinimumLimit
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute ImplicitGutterMinimumLimit
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getImplicitGutterMinimumLimit()
 	{
 		final String strAttrName = getAttribute(AttributeName.IMPLICITGUTTERMINIMUMLIMIT, null, null);
@@ -940,23 +934,24 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NumberUp
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NumberUp ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute NumberUp
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute NumberUp
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setNumberUp(JDFXYPair value)
 	{
 		setAttribute(AttributeName.NUMBERUP, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute NumberUp
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute NumberUp
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getNumberUp()
 	{
 		final String strAttrName = getAttribute(AttributeName.NUMBERUP, null, null);
@@ -964,65 +959,70 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentationDirection
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentationDirection ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PresentationDirection
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PresentationDirection
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPresentationDirection(String value)
 	{
 		setAttribute(AttributeName.PRESENTATIONDIRECTION, value, null);
 	}
 
 	/**
-	  * (23) get String attribute PresentationDirection
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute PresentationDirection
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getPresentationDirection()
 	{
 		return getAttribute(AttributeName.PRESENTATIONDIRECTION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StackDepth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StackDepth ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute StackDepth
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute StackDepth
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setStackDepth(int value)
 	{
 		setAttribute(AttributeName.STACKDEPTH, value, null);
 	}
 
 	/**
-	  * (15) get int attribute StackDepth
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute StackDepth
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getStackDepth()
 	{
 		return getIntAttribute(AttributeName.STACKDEPTH, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StepDocs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StepDocs ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute StepDocs
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute StepDocs
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setStepDocs(JDFXYPair value)
 	{
 		setAttribute(AttributeName.STEPDOCS, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute StepDocs
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute StepDocs
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getStepDocs()
 	{
 		final String strAttrName = getAttribute(AttributeName.STEPDOCS, null, null);
@@ -1030,23 +1030,24 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StepRepeat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StepRepeat ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute StepRepeat
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute StepRepeat
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setStepRepeat(JDFIntegerList value)
 	{
 		setAttribute(AttributeName.STEPREPEAT, value, null);
 	}
 
 	/**
-	  * (20) get JDFIntegerList attribute StepRepeat
-	  * @return JDFIntegerList the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFIntegerList
-	  */
+	 * (20) get JDFIntegerList attribute StepRepeat
+	 * 
+	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 */
 	public JDFIntegerList getStepRepeat()
 	{
 		final String strAttrName = getAttribute(AttributeName.STEPREPEAT, null, null);
@@ -1054,23 +1055,24 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SurfaceContentsBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SurfaceContentsBox ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute SurfaceContentsBox
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute SurfaceContentsBox
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSurfaceContentsBox(JDFRectangle value)
 	{
 		setAttribute(AttributeName.SURFACECONTENTSBOX, value, null);
 	}
 
 	/**
-	  * (20) get JDFRectangle attribute SurfaceContentsBox
-	  * @return JDFRectangle the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFRectangle
-	  */
+	 * (20) get JDFRectangle attribute SurfaceContentsBox
+	 * 
+	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 */
 	public JDFRectangle getSurfaceContentsBox()
 	{
 		final String strAttrName = getAttribute(AttributeName.SURFACECONTENTSBOX, null, null);
@@ -1078,23 +1080,24 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute VerticalCreep
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute VerticalCreep ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute VerticalCreep
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute VerticalCreep
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setVerticalCreep(JDFIntegerList value)
 	{
 		setAttribute(AttributeName.VERTICALCREEP, value, null);
 	}
 
 	/**
-	  * (20) get JDFIntegerList attribute VerticalCreep
-	  * @return JDFIntegerList the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFIntegerList
-	  */
+	 * (20) get JDFIntegerList attribute VerticalCreep
+	 * 
+	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 */
 	public JDFIntegerList getVerticalCreep()
 	{
 		final String strAttrName = getAttribute(AttributeName.VERTICALCREEP, null, null);
@@ -1102,13 +1105,13 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element ImageShift
+	 * 
 	 * @return JDFImageShift the element
 	 */
 	public JDFImageShift getImageShift()
@@ -1116,7 +1119,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return (JDFImageShift) getElement(ElementName.IMAGESHIFT, null, 0);
 	}
 
-	/** (25) getCreateImageShift
+	/**
+	 * (25) getCreateImageShift
 	 * 
 	 * @return JDFImageShift the element
 	 */
@@ -1127,6 +1131,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (29) append element ImageShift
+	 * 
 	 * @return JDFImageShift the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -1135,7 +1140,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return (JDFImageShift) appendElementN(ElementName.IMAGESHIFT, 1, null);
 	}
 
-	/** (26) getCreateInsertSheet
+	/**
+	 * (26) getCreateInsertSheet
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFInsertSheet the element
@@ -1147,9 +1153,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (27) const get element InsertSheet
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFInsertSheet the element
-	 * default is getInsertSheet(0)     */
+	 * @return JDFInsertSheet the element default is getInsertSheet(0)
+	 */
 	public JDFInsertSheet getInsertSheet(int iSkip)
 	{
 		return (JDFInsertSheet) getElement(ElementName.INSERTSHEET, null, iSkip);
@@ -1162,23 +1169,12 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public Collection<JDFInsertSheet> getAllInsertSheet()
 	{
-		final VElement vc = getChildElementVector(ElementName.INSERTSHEET, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFInsertSheet> v = new Vector<JDFInsertSheet>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFInsertSheet) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFInsertSheet.class, false, 0);
 	}
 
 	/**
 	 * (30) append element InsertSheet
+	 * 
 	 * @return JDFInsertSheet the element
 	 */
 	public JDFInsertSheet appendInsertSheet()
@@ -1187,9 +1183,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refInsertSheet(JDFInsertSheet refTarget)
 	{
 		refElement(refTarget);
@@ -1197,6 +1194,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (24) const get element DeviceMark
+	 * 
 	 * @return JDFDeviceMark the element
 	 */
 	public JDFDeviceMark getDeviceMark()
@@ -1204,7 +1202,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return (JDFDeviceMark) getElement(ElementName.DEVICEMARK, null, 0);
 	}
 
-	/** (25) getCreateDeviceMark
+	/**
+	 * (25) getCreateDeviceMark
 	 * 
 	 * @return JDFDeviceMark the element
 	 */
@@ -1215,6 +1214,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (29) append element DeviceMark
+	 * 
 	 * @return JDFDeviceMark the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -1224,7 +1224,18 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
+	public void refDeviceMark(JDFDeviceMark refTarget)
+	{
+		refElement(refTarget);
+	}
+
+	/**
 	 * (24) const get element ExternalImpositionTemplate
+	 * 
 	 * @return JDFExternalImpositionTemplate the element
 	 */
 	public JDFExternalImpositionTemplate getExternalImpositionTemplate()
@@ -1232,7 +1243,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return (JDFExternalImpositionTemplate) getElement(ElementName.EXTERNALIMPOSITIONTEMPLATE, null, 0);
 	}
 
-	/** (25) getCreateExternalImpositionTemplate
+	/**
+	 * (25) getCreateExternalImpositionTemplate
 	 * 
 	 * @return JDFExternalImpositionTemplate the element
 	 */
@@ -1243,6 +1255,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (29) append element ExternalImpositionTemplate
+	 * 
 	 * @return JDFExternalImpositionTemplate the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -1252,9 +1265,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refExternalImpositionTemplate(JDFExternalImpositionTemplate refTarget)
 	{
 		refElement(refTarget);
@@ -1262,6 +1276,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (24) const get element FitPolicy
+	 * 
 	 * @return JDFFitPolicy the element
 	 */
 	public JDFFitPolicy getFitPolicy()
@@ -1269,7 +1284,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return (JDFFitPolicy) getElement(ElementName.FITPOLICY, null, 0);
 	}
 
-	/** (25) getCreateFitPolicy
+	/**
+	 * (25) getCreateFitPolicy
 	 * 
 	 * @return JDFFitPolicy the element
 	 */
@@ -1280,6 +1296,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (29) append element FitPolicy
+	 * 
 	 * @return JDFFitPolicy the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -1288,7 +1305,18 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return (JDFFitPolicy) appendElementN(ElementName.FITPOLICY, 1, null);
 	}
 
-	/** (26) getCreateJobField
+	/**
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
+	public void refFitPolicy(JDFFitPolicy refTarget)
+	{
+		refElement(refTarget);
+	}
+
+	/**
+	 * (26) getCreateJobField
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFJobField the element
@@ -1300,9 +1328,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (27) const get element JobField
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFJobField the element
-	 * default is getJobField(0)     */
+	 * @return JDFJobField the element default is getJobField(0)
+	 */
 	public JDFJobField getJobField(int iSkip)
 	{
 		return (JDFJobField) getElement(ElementName.JOBFIELD, null, iSkip);
@@ -1315,23 +1344,12 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public Collection<JDFJobField> getAllJobField()
 	{
-		final VElement vc = getChildElementVector(ElementName.JOBFIELD, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFJobField> v = new Vector<JDFJobField>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFJobField) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFJobField.class, false, 0);
 	}
 
 	/**
 	 * (30) append element JobField
+	 * 
 	 * @return JDFJobField the element
 	 */
 	public JDFJobField appendJobField()
@@ -1340,7 +1358,18 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
+	public void refJobField(JDFJobField refTarget)
+	{
+		refElement(refTarget);
+	}
+
+	/**
 	 * (24) const get element Media
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getMedia()
@@ -1348,7 +1377,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
 	}
 
-	/** (25) getCreateMedia
+	/**
+	 * (25) getCreateMedia
 	 * 
 	 * @return JDFMedia the element
 	 */
@@ -1359,6 +1389,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (29) append element Media
+	 * 
 	 * @return JDFMedia the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -1368,9 +1399,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refMedia(JDFMedia refTarget)
 	{
 		refElement(refTarget);
@@ -1378,6 +1410,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (24) const get element PageCell
+	 * 
 	 * @return JDFPageCell the element
 	 */
 	public JDFPageCell getPageCell()
@@ -1385,7 +1418,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return (JDFPageCell) getElement(ElementName.PAGECELL, null, 0);
 	}
 
-	/** (25) getCreatePageCell
+	/**
+	 * (25) getCreatePageCell
 	 * 
 	 * @return JDFPageCell the element
 	 */
@@ -1396,6 +1430,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (29) append element PageCell
+	 * 
 	 * @return JDFPageCell the element
 	 * @throws JDFException if the element already exists
 	 */

@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -83,11 +51,11 @@ import org.cip4.jdflib.span.JDFShapeSpan;
 import org.cip4.jdflib.span.JDFXYPairSpan;
 
 /**
-*****************************************************************************
-class JDFAutoPackingIntent : public JDFIntentResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoPackingIntent : public JDFIntentResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoPackingIntent extends JDFIntentResource
 {
@@ -123,6 +91,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoPackingIntent
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -133,6 +102,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoPackingIntent
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -144,6 +114,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * Constructor for JDFAutoPackingIntent
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -155,7 +126,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -163,13 +134,13 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return " JDFAutoPackingIntent[  --> " + super.toString() + " ]";
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element BoxedQuantity
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getBoxedQuantity()
@@ -177,7 +148,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return (JDFIntegerSpan) getElement(ElementName.BOXEDQUANTITY, null, 0);
 	}
 
-	/** (25) getCreateBoxedQuantity
+	/**
+	 * (25) getCreateBoxedQuantity
 	 * 
 	 * @return JDFIntegerSpan the element
 	 */
@@ -188,6 +160,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element BoxedQuantity
+	 * 
 	 * @return JDFIntegerSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -198,6 +171,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element BoxShape
+	 * 
 	 * @return JDFShapeSpan the element
 	 */
 	public JDFShapeSpan getBoxShape()
@@ -205,7 +179,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return (JDFShapeSpan) getElement(ElementName.BOXSHAPE, null, 0);
 	}
 
-	/** (25) getCreateBoxShape
+	/**
+	 * (25) getCreateBoxShape
 	 * 
 	 * @return JDFShapeSpan the element
 	 */
@@ -216,6 +191,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element BoxShape
+	 * 
 	 * @return JDFShapeSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -226,6 +202,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element CartonQuantity
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getCartonQuantity()
@@ -233,7 +210,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return (JDFIntegerSpan) getElement(ElementName.CARTONQUANTITY, null, 0);
 	}
 
-	/** (25) getCreateCartonQuantity
+	/**
+	 * (25) getCreateCartonQuantity
 	 * 
 	 * @return JDFIntegerSpan the element
 	 */
@@ -244,6 +222,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element CartonQuantity
+	 * 
 	 * @return JDFIntegerSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -254,6 +233,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element CartonShape
+	 * 
 	 * @return JDFShapeSpan the element
 	 */
 	public JDFShapeSpan getCartonShape()
@@ -261,7 +241,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return (JDFShapeSpan) getElement(ElementName.CARTONSHAPE, null, 0);
 	}
 
-	/** (25) getCreateCartonShape
+	/**
+	 * (25) getCreateCartonShape
 	 * 
 	 * @return JDFShapeSpan the element
 	 */
@@ -272,6 +253,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element CartonShape
+	 * 
 	 * @return JDFShapeSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -282,6 +264,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element CartonMaxWeight
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCartonMaxWeight()
@@ -289,7 +272,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return (JDFNumberSpan) getElement(ElementName.CARTONMAXWEIGHT, null, 0);
 	}
 
-	/** (25) getCreateCartonMaxWeight
+	/**
+	 * (25) getCreateCartonMaxWeight
 	 * 
 	 * @return JDFNumberSpan the element
 	 */
@@ -300,6 +284,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element CartonMaxWeight
+	 * 
 	 * @return JDFNumberSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -310,6 +295,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element CartonStrength
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCartonStrength()
@@ -317,7 +303,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return (JDFNumberSpan) getElement(ElementName.CARTONSTRENGTH, null, 0);
 	}
 
-	/** (25) getCreateCartonStrength
+	/**
+	 * (25) getCreateCartonStrength
 	 * 
 	 * @return JDFNumberSpan the element
 	 */
@@ -328,6 +315,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element CartonStrength
+	 * 
 	 * @return JDFNumberSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -338,6 +326,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element FoldingCatalog
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getFoldingCatalog()
@@ -345,7 +334,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return (JDFNameSpan) getElement(ElementName.FOLDINGCATALOG, null, 0);
 	}
 
-	/** (25) getCreateFoldingCatalog
+	/**
+	 * (25) getCreateFoldingCatalog
 	 * 
 	 * @return JDFNameSpan the element
 	 */
@@ -356,6 +346,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element FoldingCatalog
+	 * 
 	 * @return JDFNameSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -366,6 +357,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element PalletCornerBoards
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getPalletCornerBoards()
@@ -373,7 +365,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return (JDFNameSpan) getElement(ElementName.PALLETCORNERBOARDS, null, 0);
 	}
 
-	/** (25) getCreatePalletCornerBoards
+	/**
+	 * (25) getCreatePalletCornerBoards
 	 * 
 	 * @return JDFNameSpan the element
 	 */
@@ -384,6 +377,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element PalletCornerBoards
+	 * 
 	 * @return JDFNameSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -394,6 +388,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element PalletQuantity
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getPalletQuantity()
@@ -401,7 +396,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return (JDFIntegerSpan) getElement(ElementName.PALLETQUANTITY, null, 0);
 	}
 
-	/** (25) getCreatePalletQuantity
+	/**
+	 * (25) getCreatePalletQuantity
 	 * 
 	 * @return JDFIntegerSpan the element
 	 */
@@ -412,6 +408,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element PalletQuantity
+	 * 
 	 * @return JDFIntegerSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -422,6 +419,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element PalletSize
+	 * 
 	 * @return JDFXYPairSpan the element
 	 */
 	public JDFXYPairSpan getPalletSize()
@@ -429,7 +427,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return (JDFXYPairSpan) getElement(ElementName.PALLETSIZE, null, 0);
 	}
 
-	/** (25) getCreatePalletSize
+	/**
+	 * (25) getCreatePalletSize
 	 * 
 	 * @return JDFXYPairSpan the element
 	 */
@@ -440,6 +439,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element PalletSize
+	 * 
 	 * @return JDFXYPairSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -450,6 +450,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element PalletMaxHeight
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getPalletMaxHeight()
@@ -457,7 +458,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return (JDFNumberSpan) getElement(ElementName.PALLETMAXHEIGHT, null, 0);
 	}
 
-	/** (25) getCreatePalletMaxHeight
+	/**
+	 * (25) getCreatePalletMaxHeight
 	 * 
 	 * @return JDFNumberSpan the element
 	 */
@@ -468,6 +470,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element PalletMaxHeight
+	 * 
 	 * @return JDFNumberSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -478,6 +481,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element PalletMaxWeight
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getPalletMaxWeight()
@@ -485,7 +489,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return (JDFNumberSpan) getElement(ElementName.PALLETMAXWEIGHT, null, 0);
 	}
 
-	/** (25) getCreatePalletMaxWeight
+	/**
+	 * (25) getCreatePalletMaxWeight
 	 * 
 	 * @return JDFNumberSpan the element
 	 */
@@ -496,6 +501,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element PalletMaxWeight
+	 * 
 	 * @return JDFNumberSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -506,6 +512,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element PalletType
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getPalletType()
@@ -513,7 +520,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return (JDFNameSpan) getElement(ElementName.PALLETTYPE, null, 0);
 	}
 
-	/** (25) getCreatePalletType
+	/**
+	 * (25) getCreatePalletType
 	 * 
 	 * @return JDFNameSpan the element
 	 */
@@ -524,6 +532,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element PalletType
+	 * 
 	 * @return JDFNameSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -534,6 +543,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element PalletWrapping
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getPalletWrapping()
@@ -541,7 +551,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return (JDFNameSpan) getElement(ElementName.PALLETWRAPPING, null, 0);
 	}
 
-	/** (25) getCreatePalletWrapping
+	/**
+	 * (25) getCreatePalletWrapping
 	 * 
 	 * @return JDFNameSpan the element
 	 */
@@ -552,6 +563,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element PalletWrapping
+	 * 
 	 * @return JDFNameSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -562,6 +574,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element WrappedQuantity
+	 * 
 	 * @return JDFIntegerSpan the element
 	 */
 	public JDFIntegerSpan getWrappedQuantity()
@@ -569,7 +582,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return (JDFIntegerSpan) getElement(ElementName.WRAPPEDQUANTITY, null, 0);
 	}
 
-	/** (25) getCreateWrappedQuantity
+	/**
+	 * (25) getCreateWrappedQuantity
 	 * 
 	 * @return JDFIntegerSpan the element
 	 */
@@ -580,6 +594,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element WrappedQuantity
+	 * 
 	 * @return JDFIntegerSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -590,6 +605,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (24) const get element WrappingMaterial
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getWrappingMaterial()
@@ -597,7 +613,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 		return (JDFNameSpan) getElement(ElementName.WRAPPINGMATERIAL, null, 0);
 	}
 
-	/** (25) getCreateWrappingMaterial
+	/**
+	 * (25) getCreateWrappingMaterial
 	 * 
 	 * @return JDFNameSpan the element
 	 */
@@ -608,6 +625,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
 	/**
 	 * (29) append element WrappingMaterial
+	 * 
 	 * @return JDFNameSpan the element
 	 * @throws JDFException if the element already exists
 	 */

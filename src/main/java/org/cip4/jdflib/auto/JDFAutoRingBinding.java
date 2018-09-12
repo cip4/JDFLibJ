@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -83,11 +51,11 @@ import org.cip4.jdflib.span.JDFSpanHoleType;
 import org.cip4.jdflib.span.JDFStringSpan;
 
 /**
-*****************************************************************************
-class JDFAutoRingBinding : public JDFElement
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoRingBinding : public JDFElement
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoRingBinding extends JDFElement
 {
@@ -116,6 +84,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoRingBinding
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -126,6 +95,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoRingBinding
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -137,6 +107,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoRingBinding
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -148,7 +119,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -156,13 +127,13 @@ public abstract class JDFAutoRingBinding extends JDFElement
 		return " JDFAutoRingBinding[  --> " + super.toString() + " ]";
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element BinderBrand
+	 * 
 	 * @return JDFStringSpan the element
 	 */
 	public JDFStringSpan getBinderBrand()
@@ -170,7 +141,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 		return (JDFStringSpan) getElement(ElementName.BINDERBRAND, null, 0);
 	}
 
-	/** (25) getCreateBinderBrand
+	/**
+	 * (25) getCreateBinderBrand
 	 * 
 	 * @return JDFStringSpan the element
 	 */
@@ -181,6 +153,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (29) append element BinderBrand
+	 * 
 	 * @return JDFStringSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -191,6 +164,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (24) const get element BinderMaterial
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getBinderMaterial()
@@ -198,7 +172,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 		return (JDFNameSpan) getElement(ElementName.BINDERMATERIAL, null, 0);
 	}
 
-	/** (25) getCreateBinderMaterial
+	/**
+	 * (25) getCreateBinderMaterial
 	 * 
 	 * @return JDFNameSpan the element
 	 */
@@ -209,6 +184,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (29) append element BinderMaterial
+	 * 
 	 * @return JDFNameSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -219,6 +195,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (24) const get element HoleType
+	 * 
 	 * @return JDFSpanHoleType the element
 	 */
 	public JDFSpanHoleType getHoleType()
@@ -226,7 +203,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 		return (JDFSpanHoleType) getElement(ElementName.HOLETYPE, null, 0);
 	}
 
-	/** (25) getCreateHoleType
+	/**
+	 * (25) getCreateHoleType
 	 * 
 	 * @return JDFSpanHoleType the element
 	 */
@@ -237,6 +215,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (29) append element HoleType
+	 * 
 	 * @return JDFSpanHoleType the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -247,6 +226,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (24) const get element RingDiameter
+	 * 
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getRingDiameter()
@@ -254,7 +234,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 		return (JDFNumberSpan) getElement(ElementName.RINGDIAMETER, null, 0);
 	}
 
-	/** (25) getCreateRingDiameter
+	/**
+	 * (25) getCreateRingDiameter
 	 * 
 	 * @return JDFNumberSpan the element
 	 */
@@ -265,6 +246,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (29) append element RingDiameter
+	 * 
 	 * @return JDFNumberSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -275,6 +257,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (24) const get element RingMechanic
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getRingMechanic()
@@ -282,7 +265,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 		return (JDFOptionSpan) getElement(ElementName.RINGMECHANIC, null, 0);
 	}
 
-	/** (25) getCreateRingMechanic
+	/**
+	 * (25) getCreateRingMechanic
 	 * 
 	 * @return JDFOptionSpan the element
 	 */
@@ -293,6 +277,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (29) append element RingMechanic
+	 * 
 	 * @return JDFOptionSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -303,6 +288,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (24) const get element RingShape
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getRingShape()
@@ -310,7 +296,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 		return (JDFNameSpan) getElement(ElementName.RINGSHAPE, null, 0);
 	}
 
-	/** (25) getCreateRingShape
+	/**
+	 * (25) getCreateRingShape
 	 * 
 	 * @return JDFNameSpan the element
 	 */
@@ -321,6 +308,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (29) append element RingShape
+	 * 
 	 * @return JDFNameSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -331,6 +319,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (24) const get element RingSystem
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getRingSystem()
@@ -338,7 +327,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 		return (JDFNameSpan) getElement(ElementName.RINGSYSTEM, null, 0);
 	}
 
-	/** (25) getCreateRingSystem
+	/**
+	 * (25) getCreateRingSystem
 	 * 
 	 * @return JDFNameSpan the element
 	 */
@@ -349,6 +339,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (29) append element RingSystem
+	 * 
 	 * @return JDFNameSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -359,6 +350,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (24) const get element RivetsExposed
+	 * 
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getRivetsExposed()
@@ -366,7 +358,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 		return (JDFOptionSpan) getElement(ElementName.RIVETSEXPOSED, null, 0);
 	}
 
-	/** (25) getCreateRivetsExposed
+	/**
+	 * (25) getCreateRivetsExposed
 	 * 
 	 * @return JDFOptionSpan the element
 	 */
@@ -377,6 +370,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (29) append element RivetsExposed
+	 * 
 	 * @return JDFOptionSpan the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -387,6 +381,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (24) const get element ViewBinder
+	 * 
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getViewBinder()
@@ -394,7 +389,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 		return (JDFNameSpan) getElement(ElementName.VIEWBINDER, null, 0);
 	}
 
-	/** (25) getCreateViewBinder
+	/**
+	 * (25) getCreateViewBinder
 	 * 
 	 * @return JDFNameSpan the element
 	 */
@@ -405,6 +401,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
 	/**
 	 * (29) append element ViewBinder
+	 * 
 	 * @return JDFNameSpan the element
 	 * @throws JDFException if the element already exists
 	 */

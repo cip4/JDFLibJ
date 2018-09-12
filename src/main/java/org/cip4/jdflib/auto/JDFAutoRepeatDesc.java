@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -84,11 +52,11 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 
 /**
-*****************************************************************************
-class JDFAutoRepeatDesc : public JDFElement
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoRepeatDesc : public JDFElement
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoRepeatDesc extends JDFElement
 {
@@ -116,6 +84,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoRepeatDesc
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -126,6 +95,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoRepeatDesc
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -137,6 +107,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoRepeatDesc
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -148,7 +119,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -157,8 +128,8 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for AllowedRotate
-	*/
+	 * Enumeration strings for AllowedRotate
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumAllowedRotate extends ValuedEnum
@@ -223,132 +194,143 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 		public static final EnumAllowedRotate CrossGrain = new EnumAllowedRotate("CrossGrain");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AllowedRotate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedRotate ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute AllowedRotate
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute AllowedRotate
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setAllowedRotate(EnumAllowedRotate enumVar)
 	{
 		setAttribute(AttributeName.ALLOWEDROTATE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute AllowedRotate
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute AllowedRotate
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumAllowedRotate getAllowedRotate()
 	{
 		return EnumAllowedRotate.getEnum(getAttribute(AttributeName.ALLOWEDROTATE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GutterX
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GutterX ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute GutterX
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute GutterX
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setGutterX(double value)
 	{
 		setAttribute(AttributeName.GUTTERX, value, null);
 	}
 
 	/**
-	  * (17) get double attribute GutterX
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute GutterX
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getGutterX()
 	{
 		return getRealAttribute(AttributeName.GUTTERX, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GutterX2
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GutterX2 ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute GutterX2
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute GutterX2
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setGutterX2(double value)
 	{
 		setAttribute(AttributeName.GUTTERX2, value, null);
 	}
 
 	/**
-	  * (17) get double attribute GutterX2
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute GutterX2
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getGutterX2()
 	{
 		return getRealAttribute(AttributeName.GUTTERX2, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GutterY
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GutterY ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute GutterY
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute GutterY
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setGutterY(double value)
 	{
 		setAttribute(AttributeName.GUTTERY, value, null);
 	}
 
 	/**
-	  * (17) get double attribute GutterY
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute GutterY
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getGutterY()
 	{
 		return getRealAttribute(AttributeName.GUTTERY, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GutterY2
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GutterY2 ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute GutterY2
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute GutterY2
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setGutterY2(double value)
 	{
 		setAttribute(AttributeName.GUTTERY2, value, null);
 	}
 
 	/**
-	  * (17) get double attribute GutterY2
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute GutterY2
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getGutterY2()
 	{
 		return getRealAttribute(AttributeName.GUTTERY2, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LayoutStyle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LayoutStyle ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute LayoutStyle
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute LayoutStyle
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setLayoutStyle(VString value)
 	{
 		setAttribute(AttributeName.LAYOUTSTYLE, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute LayoutStyle
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute LayoutStyle
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getLayoutStyle()
 	{
 		final VString vStrAttrib = new VString();
@@ -357,43 +339,47 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OrderQuantity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OrderQuantity ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute OrderQuantity
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute OrderQuantity
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setOrderQuantity(int value)
 	{
 		setAttribute(AttributeName.ORDERQUANTITY, value, null);
 	}
 
 	/**
-	  * (15) get int attribute OrderQuantity
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute OrderQuantity
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getOrderQuantity()
 	{
 		return getIntAttribute(AttributeName.ORDERQUANTITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UseBleeds
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UseBleeds ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute UseBleeds
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute UseBleeds
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setUseBleeds(boolean value)
 	{
 		setAttribute(AttributeName.USEBLEEDS, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute UseBleeds
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute UseBleeds
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getUseBleeds()
 	{
 		return getBoolAttribute(AttributeName.USEBLEEDS, null, false);

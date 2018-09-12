@@ -71,7 +71,7 @@
  *
  * @author Dietrich Mucha
  *
- * Copyright (C) 2005-2006 Heidelberger Druckmaschinen AG. All Rights Reserved.
+ *         Copyright (C) 2005-2006 Heidelberger Druckmaschinen AG. All Rights Reserved.
  */
 package org.cip4.jdflib.auto;
 
@@ -101,14 +101,14 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 		}
 
 		visitor.enterDirectory(dir);
-		File[] entries = dir.listFiles(new FileFilter()
+		final File[] entries = dir.listFiles(new FileFilter()
 		{
 			@Override
 			public boolean accept(File pathname)
 			{
 				boolean acceptFile = false;
 
-				String name = pathname.getName();
+				final String name = pathname.getName();
 
 				if (pathname.isDirectory())
 				{
@@ -119,11 +119,12 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 				{
 					// ignoreList : abstract classes, classes which are no jdf
 					// elements ...
-					VString ignoreList = new VString("JDFConstants.java JDFCoreConstants.java JDFDoc.java JDFDocumentBuilder.java "
-							+ "JDFException.java JDFParser.java JDFVersions.java JDFAbstractState.java "
-							+ "JDFEvaluation.java JDFNodeTerm.java JDFTerm.java JDFEnumerationSpan.java " + "JDFSpan.java JDFSpanBase.java "
-							+ "JDFDurationSpan.java JDFIntegerSpan.java JDFNameSpan.java JDFNumberSpan.java " + "JDFOptionSpan.java JDFShapeSpan.java JDFSpanNamedColor.java "
-							+ "JDFStringSpan.java JDFTimeSpan.java JDFXYPairSpan.java " + "JDFResourceLink.java " + "JDFPool.java " + "JDFCapsConverter.java", null);
+					final VString ignoreList = new VString(
+							"JDFConstants.java JDFCoreConstants.java JDFDoc.java JDFDocumentBuilder.java " + "JDFException.java JDFParser.java JDFVersions.java JDFAbstractState.java "
+									+ "JDFEvaluation.java JDFNodeTerm.java JDFTerm.java JDFEnumerationSpan.java " + "JDFSpan.java JDFSpanBase.java "
+									+ "JDFDurationSpan.java JDFIntegerSpan.java JDFNameSpan.java JDFNumberSpan.java " + "JDFOptionSpan.java JDFShapeSpan.java JDFSpanNamedColor.java "
+									+ "JDFStringSpan.java JDFTimeSpan.java JDFXYPairSpan.java " + "JDFResourceLink.java " + "JDFPool.java " + "JDFCapsConverter.java",
+							null);
 
 					acceptFile = !ignoreList.contains(name) && name.startsWith("JDF") && name.toLowerCase().endsWith(".java");
 				}
@@ -132,7 +133,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 			}
 		});
 
-		for (File entrie : entries)
+		for (final File entrie : entries)
 		{
 			if (entrie.isDirectory())
 			{
@@ -148,13 +149,13 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * get the fileName for every class JDFxxx below "./src/org/cip4/jdflib" which is not in ignoreList and extract from it elementName (=xxx) With elementName
-	 * instantiate the corresponding class (using jdfRoot.appendElement(elementName) and factory DocumentJDFImpl.java)
+	 * get the fileName for every class JDFxxx below "./src/org/cip4/jdflib" which is not in ignoreList and extract from it elementName (=xxx) With elementName instantiate the corresponding class
+	 * (using jdfRoot.appendElement(elementName) and factory DocumentJDFImpl.java)
 	 *
 	 * Then createdClass+".java" should be equal to fileName, i.e. the factory DocumentJDFImpl creates a class at the correct point in the hierarchy
 	 *
-	 * result = fileName.equals(createdClass + ".java") || (fileName.startsWith("JDFAuto") && createdClass.equals(JDFConstants.JDFELEMENT)) ||
-	 * fileName.equals(JDFConstants.JDFNODE) || !createdClass.equals(JDFConstants.JDFELEMENT);
+	 * result = fileName.equals(createdClass + ".java") || (fileName.startsWith("JDFAuto") && createdClass.equals(JDFConstants.JDFELEMENT)) || fileName.equals(JDFConstants.JDFNODE) ||
+	 * !createdClass.equals(JDFConstants.JDFELEMENT);
 	 *
 	 */
 	@Test
@@ -166,7 +167,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 			// instantiate all classes starting with JDF
 			traverseNormalClassesAndInstantiate(dir, new DirectoryInstantiateVisitor());
 		}
-		catch (DOMException e)
+		catch (final DOMException e)
 		{
 			fail("DOMException : " + e.getMessage());
 		}
@@ -180,14 +181,14 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 		}
 
 		visitor.enterDirectory(dir);
-		File[] entries = dir.listFiles(new FileFilter()
+		final File[] entries = dir.listFiles(new FileFilter()
 		{
 			@Override
 			public boolean accept(File pathname)
 			{
 				boolean acceptFile = false;
 
-				String name = pathname.getName();
+				final String name = pathname.getName();
 
 				if (pathname.isDirectory())
 				{
@@ -203,7 +204,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 		});
 
 		File entry;
-		for (File entrie : entries)
+		for (final File entrie : entries)
 		{
 			entry = entrie;
 			if (entry.isDirectory())
@@ -216,7 +217,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 				{
 					visitor.visitFile(entry);
 				}
-				catch (DOMException e)
+				catch (final DOMException e)
 				{
 					System.out.println(e.getLocalizedMessage());
 					throw e;
@@ -239,7 +240,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 			// instantiate all classes starting with JDF
 			traverseAutoClassesAndCheckForCorrespondingNormalClass(dir, new AutoClassInstantiateVisitor());
 		}
-		catch (DOMException e)
+		catch (final DOMException e)
 		{
 			fail("DOMException : " + e.getMessage());
 		}
@@ -255,7 +256,9 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 		super.setUp();
 		dir = new File("./src/main/java/org/cip4/jdflib/auto");
 		if (!dir.isDirectory())
+		{
 			dir = new File("./src/org/cip4/jdflib/auto");
+		}
 
 	}
 

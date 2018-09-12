@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -74,7 +42,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -87,7 +54,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.node.JDFActivity;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.JDFModuleStatus;
@@ -98,11 +64,11 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 
 /**
-*****************************************************************************
-class JDFAutoJobPhase : public JDFElement
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoJobPhase : public JDFElement
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoJobPhase extends JDFElement
 {
@@ -157,6 +123,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoJobPhase
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -167,6 +134,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoJobPhase
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -178,6 +146,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoJobPhase
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -189,7 +158,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -198,8 +167,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for DeadLine
-	*/
+	 * Enumeration strings for DeadLine
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumDeadLine extends ValuedEnum
@@ -262,165 +231,179 @@ public abstract class JDFAutoJobPhase extends JDFElement
 		public static final EnumDeadLine Late = new EnumDeadLine("Late");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Activation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Activation
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Activation
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setActivation(EnumActivation enumVar)
 	{
 		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Activation
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Activation
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumActivation getActivation()
 	{
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Amount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Amount
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Amount
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAmount(double value)
 	{
 		setAttribute(AttributeName.AMOUNT, value, null);
 	}
 
 	/**
-	  * (17) get double attribute Amount
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute Amount
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getAmount()
 	{
 		return getRealAttribute(AttributeName.AMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeadLine
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeadLine ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute DeadLine
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute DeadLine
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setDeadLine(EnumDeadLine enumVar)
 	{
 		setAttribute(AttributeName.DEADLINE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute DeadLine
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute DeadLine
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumDeadLine getDeadLine()
 	{
 		return EnumDeadLine.getEnum(getAttribute(AttributeName.DEADLINE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute JobID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute JobID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setJobID(String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
 
 	/**
-	  * (23) get String attribute JobID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute JobID
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getJobID()
 	{
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobPartID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute JobPartID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute JobPartID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setJobPartID(String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
 
 	/**
-	  * (23) get String attribute JobPartID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute JobPartID
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getJobPartID()
 	{
 		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PercentCompleted
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PercentCompleted ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PercentCompleted
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PercentCompleted
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPercentCompleted(double value)
 	{
 		setAttribute(AttributeName.PERCENTCOMPLETED, value, null);
 	}
 
 	/**
-	  * (17) get double attribute PercentCompleted
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute PercentCompleted
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getPercentCompleted()
 	{
 		return getRealAttribute(AttributeName.PERCENTCOMPLETED, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PhaseAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PhaseAmount ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PhaseAmount
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PhaseAmount
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPhaseAmount(double value)
 	{
 		setAttribute(AttributeName.PHASEAMOUNT, value, null);
 	}
 
 	/**
-	  * (17) get double attribute PhaseAmount
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute PhaseAmount
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getPhaseAmount()
 	{
 		return getRealAttribute(AttributeName.PHASEAMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PhaseStartTime
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PhaseStartTime ---------------------------------------------------------------------
+	 */
 	/**
-	  * (11) set attribute PhaseStartTime
-	  * @param value the value to set the attribute to or null
-	  */
+	 * (11) set attribute PhaseStartTime
+	 * 
+	 * @param value the value to set the attribute to or null
+	 */
 	public void setPhaseStartTime(JDFDate value)
 	{
 		JDFDate date = value;
@@ -432,9 +415,10 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/**
-	  * (12) get JDFDate attribute PhaseStartTime
-	  * @return JDFDate the value of the attribute
-	  */
+	 * (12) get JDFDate attribute PhaseStartTime
+	 * 
+	 * @return JDFDate the value of the attribute
+	 */
 	public JDFDate getPhaseStartTime()
 	{
 		final String str = getAttribute(AttributeName.PHASESTARTTIME, null, null);
@@ -442,65 +426,70 @@ public abstract class JDFAutoJobPhase extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PhaseWaste
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PhaseWaste ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PhaseWaste
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PhaseWaste
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPhaseWaste(double value)
 	{
 		setAttribute(AttributeName.PHASEWASTE, value, null);
 	}
 
 	/**
-	  * (17) get double attribute PhaseWaste
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute PhaseWaste
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getPhaseWaste()
 	{
 		return getRealAttribute(AttributeName.PHASEWASTE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute QueueEntryID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute QueueEntryID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute QueueEntryID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setQueueEntryID(String value)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, value, null);
 	}
 
 	/**
-	  * (23) get String attribute QueueEntryID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute QueueEntryID
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getQueueEntryID()
 	{
 		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RestTime
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RestTime ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute RestTime
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute RestTime
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setRestTime(JDFDuration value)
 	{
 		setAttribute(AttributeName.RESTTIME, value, null);
 	}
 
 	/**
-	  * (20) get JDFDuration attribute RestTime
-	  * @return JDFDuration the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFDuration
-	  */
+	 * (20) get JDFDuration attribute RestTime
+	 * 
+	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 */
 	public JDFDuration getRestTime()
 	{
 		final String strAttrName = getAttribute(AttributeName.RESTTIME, null, null);
@@ -508,55 +497,60 @@ public abstract class JDFAutoJobPhase extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Speed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Speed ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Speed
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Speed
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSpeed(double value)
 	{
 		setAttribute(AttributeName.SPEED, value, null);
 	}
 
 	/**
-	  * (17) get double attribute Speed
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute Speed
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getSpeed()
 	{
 		return getRealAttribute(AttributeName.SPEED, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SpawnID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SpawnID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute SpawnID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute SpawnID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSpawnID(String value)
 	{
 		setAttribute(AttributeName.SPAWNID, value, null);
 	}
 
 	/**
-	  * (23) get String attribute SpawnID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute SpawnID
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getSpawnID()
 	{
 		return getAttribute(AttributeName.SPAWNID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StartTime
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StartTime ---------------------------------------------------------------------
+	 */
 	/**
-	  * (11) set attribute StartTime
-	  * @param value the value to set the attribute to or null
-	  */
+	 * (11) set attribute StartTime
+	 * 
+	 * @param value the value to set the attribute to or null
+	 */
 	public void setStartTime(JDFDate value)
 	{
 		JDFDate date = value;
@@ -568,9 +562,10 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/**
-	  * (12) get JDFDate attribute StartTime
-	  * @return JDFDate the value of the attribute
-	  */
+	 * (12) get JDFDate attribute StartTime
+	 * 
+	 * @return JDFDate the value of the attribute
+	 */
 	public JDFDate getStartTime()
 	{
 		final String str = getAttribute(AttributeName.STARTTIME, null, null);
@@ -578,96 +573,104 @@ public abstract class JDFAutoJobPhase extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StatusDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StatusDetails ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute StatusDetails
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute StatusDetails
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setStatusDetails(String value)
 	{
 		setAttribute(AttributeName.STATUSDETAILS, value, null);
 	}
 
 	/**
-	  * (23) get String attribute StatusDetails
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute StatusDetails
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getStatusDetails()
 	{
 		return getAttribute(AttributeName.STATUSDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TotalAmount
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TotalAmount ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute TotalAmount
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute TotalAmount
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setTotalAmount(double value)
 	{
 		setAttribute(AttributeName.TOTALAMOUNT, value, null);
 	}
 
 	/**
-	  * (17) get double attribute TotalAmount
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute TotalAmount
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getTotalAmount()
 	{
 		return getRealAttribute(AttributeName.TOTALAMOUNT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute URL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute URL
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute URL
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setURL(String value)
 	{
 		setAttribute(AttributeName.URL, value, null);
 	}
 
 	/**
-	  * (23) get String attribute URL
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute URL
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getURL()
 	{
 		return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Waste
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Waste ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Waste
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Waste
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setWaste(double value)
 	{
 		setAttribute(AttributeName.WASTE, value, null);
 	}
 
 	/**
-	  * (17) get double attribute Waste
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute Waste
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getWaste()
 	{
 		return getRealAttribute(AttributeName.WASTE, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
-	/** (26) getCreateActivity
+	/**
+	 * (26) getCreateActivity
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFActivity the element
@@ -679,9 +682,10 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (27) const get element Activity
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFActivity the element
-	 * default is getActivity(0)     */
+	 * @return JDFActivity the element default is getActivity(0)
+	 */
 	public JDFActivity getActivity(int iSkip)
 	{
 		return (JDFActivity) getElement(ElementName.ACTIVITY, null, iSkip);
@@ -694,23 +698,12 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	public Collection<JDFActivity> getAllActivity()
 	{
-		final VElement vc = getChildElementVector(ElementName.ACTIVITY, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFActivity> v = new Vector<JDFActivity>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFActivity) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFActivity.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Activity
+	 * 
 	 * @return JDFActivity the element
 	 */
 	public JDFActivity appendActivity()
@@ -720,6 +713,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (24) const get element CostCenter
+	 * 
 	 * @return JDFCostCenter the element
 	 */
 	public JDFCostCenter getCostCenter()
@@ -727,7 +721,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 		return (JDFCostCenter) getElement(ElementName.COSTCENTER, null, 0);
 	}
 
-	/** (25) getCreateCostCenter
+	/**
+	 * (25) getCreateCostCenter
 	 * 
 	 * @return JDFCostCenter the element
 	 */
@@ -738,6 +733,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (29) append element CostCenter
+	 * 
 	 * @return JDFCostCenter the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -748,6 +744,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (24) const get element MISDetails
+	 * 
 	 * @return JDFMISDetails the element
 	 */
 	public JDFMISDetails getMISDetails()
@@ -755,7 +752,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 		return (JDFMISDetails) getElement(ElementName.MISDETAILS, null, 0);
 	}
 
-	/** (25) getCreateMISDetails
+	/**
+	 * (25) getCreateMISDetails
 	 * 
 	 * @return JDFMISDetails the element
 	 */
@@ -766,6 +764,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (29) append element MISDetails
+	 * 
 	 * @return JDFMISDetails the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -774,7 +773,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 		return (JDFMISDetails) appendElementN(ElementName.MISDETAILS, 1, null);
 	}
 
-	/** (26) getCreateModuleStatus
+	/**
+	 * (26) getCreateModuleStatus
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFModuleStatus the element
@@ -786,9 +786,10 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (27) const get element ModuleStatus
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFModuleStatus the element
-	 * default is getModuleStatus(0)     */
+	 * @return JDFModuleStatus the element default is getModuleStatus(0)
+	 */
 	public JDFModuleStatus getModuleStatus(int iSkip)
 	{
 		return (JDFModuleStatus) getElement(ElementName.MODULESTATUS, null, iSkip);
@@ -801,23 +802,12 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	public Collection<JDFModuleStatus> getAllModuleStatus()
 	{
-		final VElement vc = getChildElementVector(ElementName.MODULESTATUS, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFModuleStatus> v = new Vector<JDFModuleStatus>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFModuleStatus) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFModuleStatus.class, false, 0);
 	}
 
 	/**
 	 * (30) append element ModuleStatus
+	 * 
 	 * @return JDFModuleStatus the element
 	 */
 	public JDFModuleStatus appendModuleStatus()
@@ -825,7 +815,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 		return (JDFModuleStatus) appendElement(ElementName.MODULESTATUS, null);
 	}
 
-	/** (26) getCreatePart
+	/**
+	 * (26) getCreatePart
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
@@ -837,9 +828,10 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
 	/**
 	 * (27) const get element Part
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element
-	 * default is getPart(0)     */
+	 * @return JDFPart the element default is getPart(0)
+	 */
 	public JDFPart getPart(int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
@@ -852,23 +844,12 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	public Collection<JDFPart> getAllPart()
 	{
-		final VElement vc = getChildElementVector(ElementName.PART, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFPart> v = new Vector<JDFPart>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFPart) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFPart.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Part
+	 * 
 	 * @return JDFPart the element
 	 */
 	public JDFPart appendPart()

@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -84,11 +52,11 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
-*****************************************************************************
-class JDFAutoFontParams : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoFontParams : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoFontParams extends JDFResource
 {
@@ -114,6 +82,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoFontParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -124,6 +93,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoFontParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -135,6 +105,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoFontParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -146,7 +117,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -155,7 +126,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -175,8 +146,8 @@ public abstract class JDFAutoFontParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for CannotEmbedFontPolicy
-	*/
+	 * Enumeration strings for CannotEmbedFontPolicy
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumCannotEmbedFontPolicy extends ValuedEnum
@@ -239,69 +210,74 @@ public abstract class JDFAutoFontParams extends JDFResource
 		public static final EnumCannotEmbedFontPolicy OK = new EnumCannotEmbedFontPolicy("OK");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EmbedAllFonts
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EmbedAllFonts ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute EmbedAllFonts
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute EmbedAllFonts
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setEmbedAllFonts(boolean value)
 	{
 		setAttribute(AttributeName.EMBEDALLFONTS, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute EmbedAllFonts
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute EmbedAllFonts
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getEmbedAllFonts()
 	{
 		return getBoolAttribute(AttributeName.EMBEDALLFONTS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CannotEmbedFontPolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CannotEmbedFontPolicy ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute CannotEmbedFontPolicy
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute CannotEmbedFontPolicy
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setCannotEmbedFontPolicy(EnumCannotEmbedFontPolicy enumVar)
 	{
 		setAttribute(AttributeName.CANNOTEMBEDFONTPOLICY, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute CannotEmbedFontPolicy
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute CannotEmbedFontPolicy
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumCannotEmbedFontPolicy getCannotEmbedFontPolicy()
 	{
 		return EnumCannotEmbedFontPolicy.getEnum(getAttribute(AttributeName.CANNOTEMBEDFONTPOLICY, null, "Warning"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AlwaysEmbed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AlwaysEmbed ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute AlwaysEmbed
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute AlwaysEmbed
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAlwaysEmbed(VString value)
 	{
 		setAttribute(AttributeName.ALWAYSEMBED, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute AlwaysEmbed
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute AlwaysEmbed
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getAlwaysEmbed()
 	{
 		final VString vStrAttrib = new VString();
@@ -310,43 +286,47 @@ public abstract class JDFAutoFontParams extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxSubsetPct
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxSubsetPct ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute MaxSubsetPct
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute MaxSubsetPct
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setMaxSubsetPct(int value)
 	{
 		setAttribute(AttributeName.MAXSUBSETPCT, value, null);
 	}
 
 	/**
-	  * (15) get int attribute MaxSubsetPct
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute MaxSubsetPct
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getMaxSubsetPct()
 	{
 		return getIntAttribute(AttributeName.MAXSUBSETPCT, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NeverEmbed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NeverEmbed ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute NeverEmbed
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute NeverEmbed
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setNeverEmbed(VString value)
 	{
 		setAttribute(AttributeName.NEVEREMBED, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute NeverEmbed
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute NeverEmbed
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getNeverEmbed()
 	{
 		final VString vStrAttrib = new VString();
@@ -355,22 +335,24 @@ public abstract class JDFAutoFontParams extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SubsetFonts
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SubsetFonts ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute SubsetFonts
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute SubsetFonts
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSubsetFonts(boolean value)
 	{
 		setAttribute(AttributeName.SUBSETFONTS, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute SubsetFonts
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute SubsetFonts
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getSubsetFonts()
 	{
 		return getBoolAttribute(AttributeName.SUBSETFONTS, null, false);

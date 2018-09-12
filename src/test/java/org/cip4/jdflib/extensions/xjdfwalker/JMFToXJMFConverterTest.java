@@ -669,6 +669,32 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
+	public void testResourceSignalSpeed()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
+
+		final JDFSignal signal = jmf.getSignal(0);
+		final JDFResourceQuParams rqp = signal.getCreateResourceQuParams(0);
+		rqp.setJobID("job1");
+		final JDFResourceInfo ri = signal.getCreateResourceInfo(0);
+		ri.setResourceName(ElementName.MISCCONSUMABLE);
+		ri.setUnit("kwh");
+		ri.setActualAmount(10);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertNotNull(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/Part/@LotID", null));
+		assertEquals(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/Part/@LotID", null),
+				jmf.getXPathAttribute("Signal/ResourceInfo/AmountPool/PartAmount/Part/@LotID", null));
+		assertEquals(10, xjmf.getXPathElementVector("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount", 0).size());
+
+		xjmf.write2File(sm_dirTestDataTemp + "resourceInk.xjmf");
+	}
+
+	/**
+	 *
+	 * test ink resource signal
+	 */
+	@Test
 	public void testBuildResourceSignalPlate()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);

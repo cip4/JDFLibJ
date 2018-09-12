@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -74,7 +42,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -88,7 +55,6 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFSeparationList;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFStrippingParams;
@@ -97,11 +63,11 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
-*****************************************************************************
-class JDFAutoGangElement : public JDFElement
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoGangElement : public JDFElement
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoGangElement extends JDFElement
 {
@@ -156,6 +122,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoGangElement
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -166,6 +133,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoGangElement
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -177,6 +145,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoGangElement
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -188,7 +157,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -197,8 +166,8 @@ public abstract class JDFAutoGangElement extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for GrainDirection
-	*/
+	 * Enumeration strings for GrainDirection
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumGrainDirection extends ValuedEnum
@@ -267,27 +236,28 @@ public abstract class JDFAutoGangElement extends JDFElement
 		public static final EnumGrainDirection YDirection = new EnumGrainDirection("YDirection");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AssemblyIDs
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute AssemblyIDs
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute AssemblyIDs
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAssemblyIDs(VString value)
 	{
 		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute AssemblyIDs
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute AssemblyIDs
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getAssemblyIDs()
 	{
 		final VString vStrAttrib = new VString();
@@ -296,44 +266,47 @@ public abstract class JDFAutoGangElement extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CollapseBleeds
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CollapseBleeds ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute CollapseBleeds
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute CollapseBleeds
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setCollapseBleeds(boolean value)
 	{
 		setAttribute(AttributeName.COLLAPSEBLEEDS, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute CollapseBleeds
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute CollapseBleeds
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getCollapseBleeds()
 	{
 		return getBoolAttribute(AttributeName.COLLAPSEBLEEDS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Dimension
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Dimension ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Dimension
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Dimension
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setDimension(JDFXYPair value)
 	{
 		setAttribute(AttributeName.DIMENSION, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute Dimension
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute Dimension
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getDimension()
 	{
 		final String strAttrName = getAttribute(AttributeName.DIMENSION, null, null);
@@ -341,13 +314,14 @@ public abstract class JDFAutoGangElement extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DueDate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DueDate ---------------------------------------------------------------------
+	 */
 	/**
-	  * (11) set attribute DueDate
-	  * @param value the value to set the attribute to or null
-	  */
+	 * (11) set attribute DueDate
+	 * 
+	 * @param value the value to set the attribute to or null
+	 */
 	public void setDueDate(JDFDate value)
 	{
 		JDFDate date = value;
@@ -359,9 +333,10 @@ public abstract class JDFAutoGangElement extends JDFElement
 	}
 
 	/**
-	  * (12) get JDFDate attribute DueDate
-	  * @return JDFDate the value of the attribute
-	  */
+	 * (12) get JDFDate attribute DueDate
+	 * 
+	 * @return JDFDate the value of the attribute
+	 */
 	public JDFDate getDueDate()
 	{
 		final String str = getAttribute(AttributeName.DUEDATE, null, null);
@@ -369,191 +344,208 @@ public abstract class JDFAutoGangElement extends JDFElement
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FillPriority
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FillPriority ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute FillPriority
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute FillPriority
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setFillPriority(int value)
 	{
 		setAttribute(AttributeName.FILLPRIORITY, value, null);
 	}
 
 	/**
-	  * (15) get int attribute FillPriority
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute FillPriority
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getFillPriority()
 	{
 		return getIntAttribute(AttributeName.FILLPRIORITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GangElementID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GangElementID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute GangElementID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute GangElementID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setGangElementID(String value)
 	{
 		setAttribute(AttributeName.GANGELEMENTID, value, null);
 	}
 
 	/**
-	  * (23) get String attribute GangElementID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute GangElementID
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getGangElementID()
 	{
 		return getAttribute(AttributeName.GANGELEMENTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GrainDirection
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GrainDirection ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute GrainDirection
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute GrainDirection
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setGrainDirection(EnumGrainDirection enumVar)
 	{
 		setAttribute(AttributeName.GRAINDIRECTION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute GrainDirection
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute GrainDirection
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumGrainDirection getGrainDirection()
 	{
 		return EnumGrainDirection.getEnum(getAttribute(AttributeName.GRAINDIRECTION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute GroupCode
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GroupCode ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute GroupCode
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute GroupCode
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setGroupCode(String value)
 	{
 		setAttribute(AttributeName.GROUPCODE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute GroupCode
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute GroupCode
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getGroupCode()
 	{
 		return getAttribute(AttributeName.GROUPCODE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JobID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute JobID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute JobID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setJobID(String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
 
 	/**
-	  * (23) get String attribute JobID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute JobID
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getJobID()
 	{
 		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MaxQuantity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxQuantity ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute MaxQuantity
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute MaxQuantity
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setMaxQuantity(int value)
 	{
 		setAttribute(AttributeName.MAXQUANTITY, value, null);
 	}
 
 	/**
-	  * (15) get int attribute MaxQuantity
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute MaxQuantity
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getMaxQuantity()
 	{
 		return getIntAttribute(AttributeName.MAXQUANTITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MinQuantity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinQuantity ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute MinQuantity
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute MinQuantity
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setMinQuantity(int value)
 	{
 		setAttribute(AttributeName.MINQUANTITY, value, null);
 	}
 
 	/**
-	  * (15) get int attribute MinQuantity
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute MinQuantity
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getMinQuantity()
 	{
 		return getIntAttribute(AttributeName.MINQUANTITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NPage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NPage ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute NPage
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute NPage
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setNPage(int value)
 	{
 		setAttribute(AttributeName.NPAGE, value, null);
 	}
 
 	/**
-	  * (15) get int attribute NPage
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute NPage
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getNPage()
 	{
 		return getIntAttribute(AttributeName.NPAGE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NumColors
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NumColors ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute NumColors
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute NumColors
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setNumColors(JDFXYPair value)
 	{
 		setAttribute(AttributeName.NUMCOLORS, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute NumColors
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute NumColors
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getNumColors()
 	{
 		final String strAttrName = getAttribute(AttributeName.NUMCOLORS, null, null);
@@ -561,23 +553,24 @@ public abstract class JDFAutoGangElement extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NumberUp
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NumberUp ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute NumberUp
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute NumberUp
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setNumberUp(JDFXYPair value)
 	{
 		setAttribute(AttributeName.NUMBERUP, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute NumberUp
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute NumberUp
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getNumberUp()
 	{
 		final String strAttrName = getAttribute(AttributeName.NUMBERUP, null, null);
@@ -585,65 +578,70 @@ public abstract class JDFAutoGangElement extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OneSheet
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OneSheet ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute OneSheet
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute OneSheet
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setOneSheet(String value)
 	{
 		setAttribute(AttributeName.ONESHEET, value, null);
 	}
 
 	/**
-	  * (23) get String attribute OneSheet
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute OneSheet
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getOneSheet()
 	{
 		return getAttribute(AttributeName.ONESHEET, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OrderQuantity
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OrderQuantity ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute OrderQuantity
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute OrderQuantity
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setOrderQuantity(int value)
 	{
 		setAttribute(AttributeName.ORDERQUANTITY, value, null);
 	}
 
 	/**
-	  * (15) get int attribute OrderQuantity
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute OrderQuantity
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getOrderQuantity()
 	{
 		return getIntAttribute(AttributeName.ORDERQUANTITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PageDimension
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageDimension ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PageDimension
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PageDimension
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPageDimension(JDFXYPair value)
 	{
 		setAttribute(AttributeName.PAGEDIMENSION, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute PageDimension
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute PageDimension
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getPageDimension()
 	{
 		final String strAttrName = getAttribute(AttributeName.PAGEDIMENSION, null, null);
@@ -651,54 +649,58 @@ public abstract class JDFAutoGangElement extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Priority
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Priority ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Priority
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Priority
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPriority(int value)
 	{
 		setAttribute(AttributeName.PRIORITY, value, null);
 	}
 
 	/**
-	  * (15) get int attribute Priority
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute Priority
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getPriority()
 	{
 		return getIntAttribute(AttributeName.PRIORITY, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ProductID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProductID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ProductID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ProductID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setProductID(String value)
 	{
 		setAttribute(AttributeName.PRODUCTID, value, null);
 	}
 
 	/**
-	  * (23) get String attribute ProductID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute ProductID
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getProductID()
 	{
 		return getAttribute(AttributeName.PRODUCTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
-	/** (26) getCreateMedia
+	/**
+	 * (26) getCreateMedia
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFMedia the element
@@ -710,9 +712,10 @@ public abstract class JDFAutoGangElement extends JDFElement
 
 	/**
 	 * (27) const get element Media
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFMedia the element
-	 * default is getMedia(0)     */
+	 * @return JDFMedia the element default is getMedia(0)
+	 */
 	public JDFMedia getMedia(int iSkip)
 	{
 		return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
@@ -725,23 +728,12 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 */
 	public Collection<JDFMedia> getAllMedia()
 	{
-		final VElement vc = getChildElementVector(ElementName.MEDIA, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFMedia> v = new Vector<JDFMedia>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFMedia) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFMedia.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Media
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia appendMedia()
@@ -750,15 +742,17 @@ public abstract class JDFAutoGangElement extends JDFElement
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refMedia(JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}
 
-	/** (26) getCreateRunList
+	/**
+	 * (26) getCreateRunList
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFRunList the element
@@ -770,9 +764,10 @@ public abstract class JDFAutoGangElement extends JDFElement
 
 	/**
 	 * (27) const get element RunList
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFRunList the element
-	 * default is getRunList(0)     */
+	 * @return JDFRunList the element default is getRunList(0)
+	 */
 	public JDFRunList getRunList(int iSkip)
 	{
 		return (JDFRunList) getElement(ElementName.RUNLIST, null, iSkip);
@@ -785,23 +780,12 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 */
 	public Collection<JDFRunList> getAllRunList()
 	{
-		final VElement vc = getChildElementVector(ElementName.RUNLIST, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFRunList> v = new Vector<JDFRunList>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFRunList) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFRunList.class, false, 0);
 	}
 
 	/**
 	 * (30) append element RunList
+	 * 
 	 * @return JDFRunList the element
 	 */
 	public JDFRunList appendRunList()
@@ -810,9 +794,10 @@ public abstract class JDFAutoGangElement extends JDFElement
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refRunList(JDFRunList refTarget)
 	{
 		refElement(refTarget);
@@ -820,6 +805,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 
 	/**
 	 * (24) const get element SeparationListBack
+	 * 
 	 * @return JDFSeparationList the element
 	 */
 	public JDFSeparationList getSeparationListBack()
@@ -827,7 +813,8 @@ public abstract class JDFAutoGangElement extends JDFElement
 		return (JDFSeparationList) getElement(ElementName.SEPARATIONLISTBACK, null, 0);
 	}
 
-	/** (25) getCreateSeparationListBack
+	/**
+	 * (25) getCreateSeparationListBack
 	 * 
 	 * @return JDFSeparationList the element
 	 */
@@ -838,6 +825,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 
 	/**
 	 * (29) append element SeparationListBack
+	 * 
 	 * @return JDFSeparationList the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -848,6 +836,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 
 	/**
 	 * (24) const get element SeparationListFront
+	 * 
 	 * @return JDFSeparationList the element
 	 */
 	public JDFSeparationList getSeparationListFront()
@@ -855,7 +844,8 @@ public abstract class JDFAutoGangElement extends JDFElement
 		return (JDFSeparationList) getElement(ElementName.SEPARATIONLISTFRONT, null, 0);
 	}
 
-	/** (25) getCreateSeparationListFront
+	/**
+	 * (25) getCreateSeparationListFront
 	 * 
 	 * @return JDFSeparationList the element
 	 */
@@ -866,6 +856,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 
 	/**
 	 * (29) append element SeparationListFront
+	 * 
 	 * @return JDFSeparationList the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -876,6 +867,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 
 	/**
 	 * (24) const get element StrippingParams
+	 * 
 	 * @return JDFStrippingParams the element
 	 */
 	public JDFStrippingParams getStrippingParams()
@@ -883,7 +875,8 @@ public abstract class JDFAutoGangElement extends JDFElement
 		return (JDFStrippingParams) getElement(ElementName.STRIPPINGPARAMS, null, 0);
 	}
 
-	/** (25) getCreateStrippingParams
+	/**
+	 * (25) getCreateStrippingParams
 	 * 
 	 * @return JDFStrippingParams the element
 	 */
@@ -894,6 +887,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 
 	/**
 	 * (29) append element StrippingParams
+	 * 
 	 * @return JDFStrippingParams the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -903,9 +897,10 @@ public abstract class JDFAutoGangElement extends JDFElement
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refStrippingParams(JDFStrippingParams refTarget)
 	{
 		refElement(refTarget);

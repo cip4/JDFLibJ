@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -74,7 +42,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,18 +53,17 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFTrigger;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 
 /**
-*****************************************************************************
-class JDFAutoSignal : public JDFMessage
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoSignal : public JDFMessage
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoSignal extends JDFMessage
 {
@@ -134,6 +100,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * Constructor for JDFAutoSignal
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -144,6 +111,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * Constructor for JDFAutoSignal
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -155,6 +123,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * Constructor for JDFAutoSignal
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -166,7 +135,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -175,8 +144,8 @@ public abstract class JDFAutoSignal extends JDFMessage
 	}
 
 	/**
-	* Enumeration strings for ChannelMode
-	*/
+	 * Enumeration strings for ChannelMode
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumChannelMode extends ValuedEnum
@@ -237,60 +206,64 @@ public abstract class JDFAutoSignal extends JDFMessage
 		public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ChannelMode
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ChannelMode ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute ChannelMode
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute ChannelMode
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setChannelMode(EnumChannelMode enumVar)
 	{
 		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute ChannelMode
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute ChannelMode
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumChannelMode getChannelMode()
 	{
 		return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, "FireAndForget"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute LastRepeat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LastRepeat ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute LastRepeat
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute LastRepeat
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setLastRepeat(boolean value)
 	{
 		setAttribute(AttributeName.LASTREPEAT, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute LastRepeat
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute LastRepeat
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getLastRepeat()
 	{
 		return getBoolAttribute(AttributeName.LASTREPEAT, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute refID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute refID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute refID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute refID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	@Override
 	public void setrefID(String value)
 	{
@@ -298,21 +271,22 @@ public abstract class JDFAutoSignal extends JDFMessage
 	}
 
 	/**
-	  * (23) get String attribute refID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute refID
+	 * 
+	 * @return the value of the attribute
+	 */
 	@Override
 	public String getrefID()
 	{
 		return getAttribute(AttributeName.REFID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
-	/** (26) getCreateEmployee
+	/**
+	 * (26) getCreateEmployee
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
@@ -324,9 +298,10 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * (27) const get element Employee
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element
-	 * default is getEmployee(0)     */
+	 * @return JDFEmployee the element default is getEmployee(0)
+	 */
 	public JDFEmployee getEmployee(int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
@@ -339,23 +314,12 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 */
 	public Collection<JDFEmployee> getAllEmployee()
 	{
-		final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFEmployee) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFEmployee.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Employee
+	 * 
 	 * @return JDFEmployee the element
 	 */
 	public JDFEmployee appendEmployee()
@@ -363,7 +327,8 @@ public abstract class JDFAutoSignal extends JDFMessage
 		return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
 	}
 
-	/** (26) getCreateNotification
+	/**
+	 * (26) getCreateNotification
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFNotification the element
@@ -375,9 +340,10 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * (27) const get element Notification
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFNotification the element
-	 * default is getNotification(0)     */
+	 * @return JDFNotification the element default is getNotification(0)
+	 */
 	public JDFNotification getNotification(int iSkip)
 	{
 		return (JDFNotification) getElement(ElementName.NOTIFICATION, null, iSkip);
@@ -390,23 +356,12 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 */
 	public Collection<JDFNotification> getAllNotification()
 	{
-		final VElement vc = getChildElementVector(ElementName.NOTIFICATION, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFNotification> v = new Vector<JDFNotification>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFNotification) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFNotification.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Notification
+	 * 
 	 * @return JDFNotification the element
 	 */
 	public JDFNotification appendNotification()
@@ -416,6 +371,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * (24) const get element Trigger
+	 * 
 	 * @return JDFTrigger the element
 	 */
 	public JDFTrigger getTrigger()
@@ -423,7 +379,8 @@ public abstract class JDFAutoSignal extends JDFMessage
 		return (JDFTrigger) getElement(ElementName.TRIGGER, null, 0);
 	}
 
-	/** (25) getCreateTrigger
+	/**
+	 * (25) getCreateTrigger
 	 * 
 	 * @return JDFTrigger the element
 	 */
@@ -434,6 +391,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 
 	/**
 	 * (29) append element Trigger
+	 * 
 	 * @return JDFTrigger the element
 	 * @throws JDFException if the element already exists
 	 */

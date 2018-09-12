@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -74,7 +42,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,16 +52,15 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 
 /**
-*****************************************************************************
-class JDFAutoHeadBandApplicationParams : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoHeadBandApplicationParams : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 {
@@ -136,6 +102,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoHeadBandApplicationParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -146,6 +113,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoHeadBandApplicationParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -157,6 +125,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoHeadBandApplicationParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -168,7 +137,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -177,7 +146,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -197,8 +166,8 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for StripMaterial
-	*/
+	 * Enumeration strings for StripMaterial
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumStripMaterial extends ValuedEnum
@@ -269,48 +238,51 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 		public static final EnumStripMaterial Tape = new EnumStripMaterial("Tape");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BottomBrand
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BottomBrand ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute BottomBrand
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute BottomBrand
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setBottomBrand(String value)
 	{
 		setAttribute(AttributeName.BOTTOMBRAND, value, null);
 	}
 
 	/**
-	  * (23) get String attribute BottomBrand
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute BottomBrand
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getBottomBrand()
 	{
 		return getAttribute(AttributeName.BOTTOMBRAND, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BottomColor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BottomColor ---------------------------------------------------------------------
+	 */
 	/**
-	  * (13) set attribute BottomColor
-	  * @param value the value to set the attribute to
-	  */
+	 * (13) set attribute BottomColor
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setBottomColor(EnumNamedColor value)
 	{
 		setAttribute(AttributeName.BOTTOMCOLOR, value == null ? null : value.getName(), null);
 	}
 
 	/**
-	  * (19) get EnumNamedColor attribute BottomColor
-	  * @return EnumNamedColor the value of the attribute
-	  */
+	 * (19) get EnumNamedColor attribute BottomColor
+	 * 
+	 * @return EnumNamedColor the value of the attribute
+	 */
 	public EnumNamedColor getBottomColor()
 	{
 		String strAttrName = "";
@@ -320,85 +292,93 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BottomColorDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BottomColorDetails ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute BottomColorDetails
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute BottomColorDetails
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setBottomColorDetails(String value)
 	{
 		setAttribute(AttributeName.BOTTOMCOLORDETAILS, value, null);
 	}
 
 	/**
-	  * (23) get String attribute BottomColorDetails
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute BottomColorDetails
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getBottomColorDetails()
 	{
 		return getAttribute(AttributeName.BOTTOMCOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute BottomLength
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BottomLength ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute BottomLength
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute BottomLength
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setBottomLength(double value)
 	{
 		setAttribute(AttributeName.BOTTOMLENGTH, value, null);
 	}
 
 	/**
-	  * (17) get double attribute BottomLength
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute BottomLength
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getBottomLength()
 	{
 		return getRealAttribute(AttributeName.BOTTOMLENGTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TopBrand
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TopBrand ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute TopBrand
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute TopBrand
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setTopBrand(String value)
 	{
 		setAttribute(AttributeName.TOPBRAND, value, null);
 	}
 
 	/**
-	  * (23) get String attribute TopBrand
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute TopBrand
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getTopBrand()
 	{
 		return getAttribute(AttributeName.TOPBRAND, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TopColor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TopColor ---------------------------------------------------------------------
+	 */
 	/**
-	  * (13) set attribute TopColor
-	  * @param value the value to set the attribute to
-	  */
+	 * (13) set attribute TopColor
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setTopColor(EnumNamedColor value)
 	{
 		setAttribute(AttributeName.TOPCOLOR, value == null ? null : value.getName(), null);
 	}
 
 	/**
-	  * (19) get EnumNamedColor attribute TopColor
-	  * @return EnumNamedColor the value of the attribute
-	  */
+	 * (19) get EnumNamedColor attribute TopColor
+	 * 
+	 * @return EnumNamedColor the value of the attribute
+	 */
 	public EnumNamedColor getTopColor()
 	{
 		String strAttrName = "";
@@ -408,96 +388,104 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TopColorDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TopColorDetails ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute TopColorDetails
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute TopColorDetails
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setTopColorDetails(String value)
 	{
 		setAttribute(AttributeName.TOPCOLORDETAILS, value, null);
 	}
 
 	/**
-	  * (23) get String attribute TopColorDetails
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute TopColorDetails
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getTopColorDetails()
 	{
 		return getAttribute(AttributeName.TOPCOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TopLength
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TopLength ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute TopLength
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute TopLength
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setTopLength(double value)
 	{
 		setAttribute(AttributeName.TOPLENGTH, value, null);
 	}
 
 	/**
-	  * (17) get double attribute TopLength
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute TopLength
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getTopLength()
 	{
 		return getRealAttribute(AttributeName.TOPLENGTH, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StripMaterial
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StripMaterial ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute StripMaterial
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute StripMaterial
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setStripMaterial(EnumStripMaterial enumVar)
 	{
 		setAttribute(AttributeName.STRIPMATERIAL, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute StripMaterial
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute StripMaterial
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumStripMaterial getStripMaterial()
 	{
 		return EnumStripMaterial.getEnum(getAttribute(AttributeName.STRIPMATERIAL, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Width
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Width ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Width
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Width
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setWidth(double value)
 	{
 		setAttribute(AttributeName.WIDTH, value, null);
 	}
 
 	/**
-	  * (17) get double attribute Width
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute Width
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getWidth()
 	{
 		return getRealAttribute(AttributeName.WIDTH, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
-	/** (26) getCreateGlueLine
+	/**
+	 * (26) getCreateGlueLine
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
@@ -509,9 +497,10 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 
 	/**
 	 * (27) const get element GlueLine
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFGlueLine the element
-	 * default is getGlueLine(0)     */
+	 * @return JDFGlueLine the element default is getGlueLine(0)
+	 */
 	public JDFGlueLine getGlueLine(int iSkip)
 	{
 		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
@@ -524,28 +513,27 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 */
 	public Collection<JDFGlueLine> getAllGlueLine()
 	{
-		final VElement vc = getChildElementVector(ElementName.GLUELINE, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFGlueLine) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFGlueLine.class, false, 0);
 	}
 
 	/**
 	 * (30) append element GlueLine
+	 * 
 	 * @return JDFGlueLine the element
 	 */
 	public JDFGlueLine appendGlueLine()
 	{
 		return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
+	}
+
+	/**
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
+	public void refGlueLine(JDFGlueLine refTarget)
+	{
+		refElement(refTarget);
 	}
 
 }// end namespace JDF

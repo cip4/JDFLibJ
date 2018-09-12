@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -88,11 +56,11 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 
 /**
-*****************************************************************************
-class JDFAutoWireCombBindingParams : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoWireCombBindingParams : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoWireCombBindingParams extends JDFResource
 {
@@ -133,6 +101,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoWireCombBindingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -143,6 +112,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoWireCombBindingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -154,6 +124,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoWireCombBindingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -165,7 +136,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -174,7 +145,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -194,8 +165,8 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for Shape
-	*/
+	 * Enumeration strings for Shape
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumShape extends ValuedEnum
@@ -257,8 +228,8 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for Material
-	*/
+	 * Enumeration strings for Material
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumMaterial extends ValuedEnum
@@ -321,60 +292,64 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 		public static final EnumMaterial ZincsSteel = new EnumMaterial("ZincsSteel");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FlipBackCover
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FlipBackCover ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute FlipBackCover
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute FlipBackCover
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setFlipBackCover(boolean value)
 	{
 		setAttribute(AttributeName.FLIPBACKCOVER, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute FlipBackCover
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute FlipBackCover
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getFlipBackCover()
 	{
 		return getBoolAttribute(AttributeName.FLIPBACKCOVER, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Shape
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Shape ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Shape
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Shape
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setShape(EnumShape enumVar)
 	{
 		setAttribute(AttributeName.SHAPE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Shape
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Shape
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumShape getShape()
 	{
 		return EnumShape.getEnum(getAttribute(AttributeName.SHAPE, null, "Single"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Brand
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Brand ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Brand
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Brand
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	@Override
 	public void setBrand(String value)
 	{
@@ -382,31 +357,34 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 	}
 
 	/**
-	  * (23) get String attribute Brand
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute Brand
+	 * 
+	 * @return the value of the attribute
+	 */
 	@Override
 	public String getBrand()
 	{
 		return getAttribute(AttributeName.BRAND, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Color
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Color ---------------------------------------------------------------------
+	 */
 	/**
-	  * (13) set attribute Color
-	  * @param value the value to set the attribute to
-	  */
+	 * (13) set attribute Color
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setColor(EnumNamedColor value)
 	{
 		setAttribute(AttributeName.COLOR, value == null ? null : value.getName(), null);
 	}
 
 	/**
-	  * (19) get EnumNamedColor attribute Color
-	  * @return EnumNamedColor the value of the attribute
-	  */
+	 * (19) get EnumNamedColor attribute Color
+	 * 
+	 * @return EnumNamedColor the value of the attribute
+	 */
 	public EnumNamedColor getColor()
 	{
 		String strAttrName = "";
@@ -416,118 +394,128 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ColorDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorDetails ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ColorDetails
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ColorDetails
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setColorDetails(String value)
 	{
 		setAttribute(AttributeName.COLORDETAILS, value, null);
 	}
 
 	/**
-	  * (23) get String attribute ColorDetails
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute ColorDetails
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getColorDetails()
 	{
 		return getAttribute(AttributeName.COLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Diameter
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Diameter ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Diameter
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Diameter
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setDiameter(double value)
 	{
 		setAttribute(AttributeName.DIAMETER, value, null);
 	}
 
 	/**
-	  * (17) get double attribute Diameter
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute Diameter
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getDiameter()
 	{
 		return getRealAttribute(AttributeName.DIAMETER, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Distance
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Distance ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Distance
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Distance
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setDistance(double value)
 	{
 		setAttribute(AttributeName.DISTANCE, value, null);
 	}
 
 	/**
-	  * (17) get double attribute Distance
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute Distance
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getDistance()
 	{
 		return getRealAttribute(AttributeName.DISTANCE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Material
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Material ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Material
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Material
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setMaterial(EnumMaterial enumVar)
 	{
 		setAttribute(AttributeName.MATERIAL, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Material
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Material
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumMaterial getMaterial()
 	{
 		return EnumMaterial.getEnum(getAttribute(AttributeName.MATERIAL, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Thickness
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Thickness ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Thickness
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Thickness
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setThickness(double value)
 	{
 		setAttribute(AttributeName.THICKNESS, value, null);
 	}
 
 	/**
-	  * (17) get double attribute Thickness
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute Thickness
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getThickness()
 	{
 		return getRealAttribute(AttributeName.THICKNESS, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element HoleMakingParams
+	 * 
 	 * @return JDFHoleMakingParams the element
 	 */
 	public JDFHoleMakingParams getHoleMakingParams()
@@ -535,7 +523,8 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 		return (JDFHoleMakingParams) getElement(ElementName.HOLEMAKINGPARAMS, null, 0);
 	}
 
-	/** (25) getCreateHoleMakingParams
+	/**
+	 * (25) getCreateHoleMakingParams
 	 * 
 	 * @return JDFHoleMakingParams the element
 	 */
@@ -546,6 +535,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 
 	/**
 	 * (29) append element HoleMakingParams
+	 * 
 	 * @return JDFHoleMakingParams the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -555,9 +545,10 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refHoleMakingParams(JDFHoleMakingParams refTarget)
 	{
 		refElement(refTarget);

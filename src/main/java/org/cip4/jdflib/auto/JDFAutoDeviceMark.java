@@ -2,74 +2,43 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -79,18 +48,22 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFBarcodeReproParams;
 
 /**
-*****************************************************************************
-class JDFAutoDeviceMark : public JDFElement
+ *****************************************************************************
+ * class JDFAutoDeviceMark : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
-*****************************************************************************
-*/
-
-public abstract class JDFAutoDeviceMark extends JDFElement
+public abstract class JDFAutoDeviceMark extends JDFResource
 {
 
 	private static final long serialVersionUID = 1L;
@@ -98,15 +71,15 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANCHOR, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.FONT, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.FONTSIZE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.HORIZONTALFITPOLICY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumHorizontalFitPolicy.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MARKJUSTIFICATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMarkJustification.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.MARKOFFSET, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MARKORIENTATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMarkOrientation.getEnum(0), null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MARKPOSITION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMarkPosition.getEnum(0), null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.VERTICALFITPOLICY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumVerticalFitPolicy.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANCHOR, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FONT, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FONTSIZE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.HORIZONTALFITPOLICY, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumHorizontalFitPolicy.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MARKJUSTIFICATION, 0x44443331, AttributeInfo.EnumAttributeType.enumeration, EnumMarkJustification.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MARKOFFSET, 0x44443331, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MARKORIENTATION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumMarkOrientation.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MARKPOSITION, 0x44443331, AttributeInfo.EnumAttributeType.enumeration, EnumMarkPosition.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.VERTICALFITPOLICY, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumVerticalFitPolicy.getEnum(0), null);
 	}
 
 	@Override
@@ -115,8 +88,21 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODEREPROPARAMS, 0x33333331);
+	}
+
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
+
 	/**
 	 * Constructor for JDFAutoDeviceMark
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -127,6 +113,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoDeviceMark
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -138,6 +125,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoDeviceMark
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -149,7 +137,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -158,8 +146,28 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for Anchor
-	*/
+	 * @return true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
+
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	 * Enumeration strings for Anchor
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumAnchor extends ValuedEnum
@@ -235,8 +243,8 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for HorizontalFitPolicy
-	*/
+	 * Enumeration strings for HorizontalFitPolicy
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumHorizontalFitPolicy extends ValuedEnum
@@ -304,8 +312,8 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for MarkJustification
-	*/
+	 * Enumeration strings for MarkJustification
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumMarkJustification extends ValuedEnum
@@ -369,8 +377,8 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for MarkOrientation
-	*/
+	 * Enumeration strings for MarkOrientation
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumMarkOrientation extends ValuedEnum
@@ -432,8 +440,8 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for MarkPosition
-	*/
+	 * Enumeration strings for MarkPosition
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumMarkPosition extends ValuedEnum
@@ -499,8 +507,8 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for VerticalFitPolicy
-	*/
+	 * Enumeration strings for VerticalFitPolicy
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumVerticalFitPolicy extends ValuedEnum
@@ -567,133 +575,143 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 		public static final EnumVerticalFitPolicy RepeatUnclipped = new EnumVerticalFitPolicy("RepeatUnclipped");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Anchor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Anchor
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Anchor
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setAnchor(EnumAnchor enumVar)
 	{
 		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Anchor
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Anchor
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumAnchor getAnchor()
 	{
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Font
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Font ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Font
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Font
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setFont(String value)
 	{
 		setAttribute(AttributeName.FONT, value, null);
 	}
 
 	/**
-	  * (23) get String attribute Font
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute Font
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getFont()
 	{
 		return getAttribute(AttributeName.FONT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FontSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FontSize ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute FontSize
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute FontSize
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setFontSize(double value)
 	{
 		setAttribute(AttributeName.FONTSIZE, value, null);
 	}
 
 	/**
-	  * (17) get double attribute FontSize
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute FontSize
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getFontSize()
 	{
 		return getRealAttribute(AttributeName.FONTSIZE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HorizontalFitPolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HorizontalFitPolicy ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute HorizontalFitPolicy
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute HorizontalFitPolicy
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setHorizontalFitPolicy(EnumHorizontalFitPolicy enumVar)
 	{
 		setAttribute(AttributeName.HORIZONTALFITPOLICY, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute HorizontalFitPolicy
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute HorizontalFitPolicy
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumHorizontalFitPolicy getHorizontalFitPolicy()
 	{
 		return EnumHorizontalFitPolicy.getEnum(getAttribute(AttributeName.HORIZONTALFITPOLICY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarkJustification
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkJustification ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute MarkJustification
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute MarkJustification
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setMarkJustification(EnumMarkJustification enumVar)
 	{
 		setAttribute(AttributeName.MARKJUSTIFICATION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute MarkJustification
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute MarkJustification
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumMarkJustification getMarkJustification()
 	{
 		return EnumMarkJustification.getEnum(getAttribute(AttributeName.MARKJUSTIFICATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarkOffset
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkOffset ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute MarkOffset
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute MarkOffset
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setMarkOffset(JDFXYPair value)
 	{
 		setAttribute(AttributeName.MARKOFFSET, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute MarkOffset
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute MarkOffset
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getMarkOffset()
 	{
 		final String strAttrName = getAttribute(AttributeName.MARKOFFSET, null, null);
@@ -701,67 +719,129 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarkOrientation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkOrientation ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute MarkOrientation
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute MarkOrientation
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setMarkOrientation(EnumMarkOrientation enumVar)
 	{
 		setAttribute(AttributeName.MARKORIENTATION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute MarkOrientation
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute MarkOrientation
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumMarkOrientation getMarkOrientation()
 	{
 		return EnumMarkOrientation.getEnum(getAttribute(AttributeName.MARKORIENTATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MarkPosition
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkPosition ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute MarkPosition
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute MarkPosition
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setMarkPosition(EnumMarkPosition enumVar)
 	{
 		setAttribute(AttributeName.MARKPOSITION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute MarkPosition
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute MarkPosition
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumMarkPosition getMarkPosition()
 	{
 		return EnumMarkPosition.getEnum(getAttribute(AttributeName.MARKPOSITION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute VerticalFitPolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute VerticalFitPolicy ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute VerticalFitPolicy
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute VerticalFitPolicy
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setVerticalFitPolicy(EnumVerticalFitPolicy enumVar)
 	{
 		setAttribute(AttributeName.VERTICALFITPOLICY, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute VerticalFitPolicy
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute VerticalFitPolicy
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumVerticalFitPolicy getVerticalFitPolicy()
 	{
 		return EnumVerticalFitPolicy.getEnum(getAttribute(AttributeName.VERTICALFITPOLICY, null, null));
+	}
+
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 */
+
+	/**
+	 * (26) getCreateBarcodeReproParams
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFBarcodeReproParams the element
+	 */
+	public JDFBarcodeReproParams getCreateBarcodeReproParams(int iSkip)
+	{
+		return (JDFBarcodeReproParams) getCreateElement_KElement(ElementName.BARCODEREPROPARAMS, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element BarcodeReproParams
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFBarcodeReproParams the element default is getBarcodeReproParams(0)
+	 */
+	public JDFBarcodeReproParams getBarcodeReproParams(int iSkip)
+	{
+		return (JDFBarcodeReproParams) getElement(ElementName.BARCODEREPROPARAMS, null, iSkip);
+	}
+
+	/**
+	 * Get all BarcodeReproParams from the current element
+	 * 
+	 * @return Collection<JDFBarcodeReproParams>, null if none are available
+	 */
+	public Collection<JDFBarcodeReproParams> getAllBarcodeReproParams()
+	{
+		return getChildrenByClass(JDFBarcodeReproParams.class, false, 0);
+	}
+
+	/**
+	 * (30) append element BarcodeReproParams
+	 * 
+	 * @return JDFBarcodeReproParams the element
+	 */
+	public JDFBarcodeReproParams appendBarcodeReproParams()
+	{
+		return (JDFBarcodeReproParams) appendElement(ElementName.BARCODEREPROPARAMS, null);
+	}
+
+	/**
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
+	public void refBarcodeReproParams(JDFBarcodeReproParams refTarget)
+	{
+		refElement(refTarget);
 	}
 
 }// end namespace JDF

@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -71,7 +39,6 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -83,7 +50,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.node.JDFActivity;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFModulePhase;
@@ -93,11 +59,11 @@ import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
-*****************************************************************************
-class JDFAutoPhaseTime : public JDFAudit
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoPhaseTime : public JDFAudit
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoPhaseTime extends JDFAudit
 {
@@ -138,6 +104,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * Constructor for JDFAutoPhaseTime
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -148,6 +115,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * Constructor for JDFAutoPhaseTime
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -159,6 +127,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * Constructor for JDFAutoPhaseTime
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -170,7 +139,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -178,18 +147,18 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 		return " JDFAutoPhaseTime[  --> " + super.toString() + " ]";
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute End
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute End ---------------------------------------------------------------------
+	 */
 	/**
-	  * (11) set attribute End
-	  * @param value the value to set the attribute to or null
-	  */
+	 * (11) set attribute End
+	 * 
+	 * @param value the value to set the attribute to or null
+	 */
 	public void setEnd(JDFDate value)
 	{
 		JDFDate date = value;
@@ -201,9 +170,10 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	}
 
 	/**
-	  * (12) get JDFDate attribute End
-	  * @return JDFDate the value of the attribute
-	  */
+	 * (12) get JDFDate attribute End
+	 * 
+	 * @return JDFDate the value of the attribute
+	 */
 	public JDFDate getEnd()
 	{
 		final String str = getAttribute(AttributeName.END, null, null);
@@ -211,13 +181,14 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Start
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Start ---------------------------------------------------------------------
+	 */
 	/**
-	  * (11) set attribute Start
-	  * @param value the value to set the attribute to or null
-	  */
+	 * (11) set attribute Start
+	 * 
+	 * @param value the value to set the attribute to or null
+	 */
 	public void setStart(JDFDate value)
 	{
 		JDFDate date = value;
@@ -229,9 +200,10 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	}
 
 	/**
-	  * (12) get JDFDate attribute Start
-	  * @return JDFDate the value of the attribute
-	  */
+	 * (12) get JDFDate attribute Start
+	 * 
+	 * @return JDFDate the value of the attribute
+	 */
 	public JDFDate getStart()
 	{
 		final String str = getAttribute(AttributeName.START, null, null);
@@ -239,33 +211,35 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 		return ret;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute StatusDetails
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StatusDetails ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute StatusDetails
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute StatusDetails
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setStatusDetails(String value)
 	{
 		setAttribute(AttributeName.STATUSDETAILS, value, null);
 	}
 
 	/**
-	  * (23) get String attribute StatusDetails
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute StatusDetails
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getStatusDetails()
 	{
 		return getAttribute(AttributeName.STATUSDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
-	/** (26) getCreateDevice
+	/**
+	 * (26) getCreateDevice
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element
@@ -277,9 +251,10 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * (27) const get element Device
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFDevice the element
-	 * default is getDevice(0)     */
+	 * @return JDFDevice the element default is getDevice(0)
+	 */
 	public JDFDevice getDevice(int iSkip)
 	{
 		return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
@@ -292,23 +267,12 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 */
 	public Collection<JDFDevice> getAllDevice()
 	{
-		final VElement vc = getChildElementVector(ElementName.DEVICE, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFDevice> v = new Vector<JDFDevice>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFDevice) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFDevice.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Device
+	 * 
 	 * @return JDFDevice the element
 	 */
 	public JDFDevice appendDevice()
@@ -317,15 +281,17 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refDevice(JDFDevice refTarget)
 	{
 		refElement(refTarget);
 	}
 
-	/** (26) getCreateEmployee
+	/**
+	 * (26) getCreateEmployee
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
@@ -338,9 +304,10 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * (27) const get element Employee
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element
-	 * default is getEmployee(0)     */
+	 * @return JDFEmployee the element default is getEmployee(0)
+	 */
 	@Override
 	public JDFEmployee getEmployee(int iSkip)
 	{
@@ -355,23 +322,12 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	@Override
 	public Collection<JDFEmployee> getAllEmployee()
 	{
-		final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFEmployee) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFEmployee.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Employee
+	 * 
 	 * @return JDFEmployee the element
 	 */
 	@Override
@@ -381,15 +337,17 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refEmployee(JDFEmployee refTarget)
 	{
 		refElement(refTarget);
 	}
 
-	/** (26) getCreateActivity
+	/**
+	 * (26) getCreateActivity
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFActivity the element
@@ -401,9 +359,10 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * (27) const get element Activity
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFActivity the element
-	 * default is getActivity(0)     */
+	 * @return JDFActivity the element default is getActivity(0)
+	 */
 	public JDFActivity getActivity(int iSkip)
 	{
 		return (JDFActivity) getElement(ElementName.ACTIVITY, null, iSkip);
@@ -416,23 +375,12 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 */
 	public Collection<JDFActivity> getAllActivity()
 	{
-		final VElement vc = getChildElementVector(ElementName.ACTIVITY, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFActivity> v = new Vector<JDFActivity>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFActivity) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFActivity.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Activity
+	 * 
 	 * @return JDFActivity the element
 	 */
 	public JDFActivity appendActivity()
@@ -442,6 +390,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * (24) const get element MISDetails
+	 * 
 	 * @return JDFMISDetails the element
 	 */
 	public JDFMISDetails getMISDetails()
@@ -449,7 +398,8 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 		return (JDFMISDetails) getElement(ElementName.MISDETAILS, null, 0);
 	}
 
-	/** (25) getCreateMISDetails
+	/**
+	 * (25) getCreateMISDetails
 	 * 
 	 * @return JDFMISDetails the element
 	 */
@@ -460,6 +410,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * (29) append element MISDetails
+	 * 
 	 * @return JDFMISDetails the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -468,7 +419,8 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 		return (JDFMISDetails) appendElementN(ElementName.MISDETAILS, 1, null);
 	}
 
-	/** (26) getCreateModulePhase
+	/**
+	 * (26) getCreateModulePhase
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFModulePhase the element
@@ -480,9 +432,10 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * (27) const get element ModulePhase
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFModulePhase the element
-	 * default is getModulePhase(0)     */
+	 * @return JDFModulePhase the element default is getModulePhase(0)
+	 */
 	public JDFModulePhase getModulePhase(int iSkip)
 	{
 		return (JDFModulePhase) getElement(ElementName.MODULEPHASE, null, iSkip);
@@ -495,23 +448,12 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 */
 	public Collection<JDFModulePhase> getAllModulePhase()
 	{
-		final VElement vc = getChildElementVector(ElementName.MODULEPHASE, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFModulePhase> v = new Vector<JDFModulePhase>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFModulePhase) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFModulePhase.class, false, 0);
 	}
 
 	/**
 	 * (30) append element ModulePhase
+	 * 
 	 * @return JDFModulePhase the element
 	 */
 	public JDFModulePhase appendModulePhase()
@@ -519,7 +461,8 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 		return (JDFModulePhase) appendElement(ElementName.MODULEPHASE, null);
 	}
 
-	/** (26) getCreatePart
+	/**
+	 * (26) getCreatePart
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
@@ -531,9 +474,10 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
 	/**
 	 * (27) const get element Part
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element
-	 * default is getPart(0)     */
+	 * @return JDFPart the element default is getPart(0)
+	 */
 	public JDFPart getPart(int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
@@ -546,23 +490,12 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 */
 	public Collection<JDFPart> getAllPart()
 	{
-		final VElement vc = getChildElementVector(ElementName.PART, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFPart> v = new Vector<JDFPart>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFPart) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFPart.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Part
+	 * 
 	 * @return JDFPart the element
 	 */
 	public JDFPart appendPart()

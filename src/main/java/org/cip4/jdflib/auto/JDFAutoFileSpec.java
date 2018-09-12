@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -93,11 +61,11 @@ import org.cip4.jdflib.resource.process.JDFDisposition;
 import org.cip4.jdflib.resource.process.JDFFileAlias;
 
 /**
-*****************************************************************************
-class JDFAutoFileSpec : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoFileSpec : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoFileSpec extends JDFResource
 {
@@ -156,6 +124,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoFileSpec
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -166,6 +135,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoFileSpec
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -177,6 +147,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoFileSpec
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -188,7 +159,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -197,7 +168,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -217,8 +188,8 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for Disposition
-	*/
+	 * Enumeration strings for Disposition
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumDisposition extends ValuedEnum
@@ -282,8 +253,8 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for OverwritePolicy
-	*/
+	 * Enumeration strings for OverwritePolicy
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumOverwritePolicy extends ValuedEnum
@@ -353,8 +324,8 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for PageOrder
-	*/
+	 * Enumeration strings for PageOrder
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumPageOrder extends ValuedEnum
@@ -415,546 +386,595 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		public static final EnumPageOrder Descending = new EnumPageOrder("Descending");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Compression
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Compression ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Compression
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Compression
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setCompression(String value)
 	{
 		setAttribute(AttributeName.COMPRESSION, value, null);
 	}
 
 	/**
-	  * (23) get String attribute Compression
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute Compression
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getCompression()
 	{
 		return getAttribute(AttributeName.COMPRESSION, null, "None");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Application
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Application ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Application
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Application
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setApplication(String value)
 	{
 		setAttribute(AttributeName.APPLICATION, value, null);
 	}
 
 	/**
-	  * (23) get String attribute Application
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute Application
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getApplication()
 	{
 		return getAttribute(AttributeName.APPLICATION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AppOS
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AppOS ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute AppOS
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute AppOS
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAppOS(String value)
 	{
 		setAttribute(AttributeName.APPOS, value, null);
 	}
 
 	/**
-	  * (23) get String attribute AppOS
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute AppOS
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getAppOS()
 	{
 		return getAttribute(AttributeName.APPOS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AppVersion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AppVersion ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute AppVersion
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute AppVersion
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAppVersion(String value)
 	{
 		setAttribute(AttributeName.APPVERSION, value, null);
 	}
 
 	/**
-	  * (23) get String attribute AppVersion
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute AppVersion
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getAppVersion()
 	{
 		return getAttribute(AttributeName.APPVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CheckSum
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CheckSum ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute CheckSum
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute CheckSum
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setCheckSum(String value)
 	{
 		setAttribute(AttributeName.CHECKSUM, value, null);
 	}
 
 	/**
-	  * (23) get String attribute CheckSum
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute CheckSum
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getCheckSum()
 	{
 		return getAttribute(AttributeName.CHECKSUM, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Disposition
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Disposition ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Disposition
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Disposition
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setDisposition(EnumDisposition enumVar)
 	{
 		setAttribute(AttributeName.DISPOSITION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Disposition
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Disposition
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumDisposition getDisposition()
 	{
 		return EnumDisposition.getEnum(getAttribute(AttributeName.DISPOSITION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DocumentNaturalLang
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DocumentNaturalLang ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute DocumentNaturalLang
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute DocumentNaturalLang
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setDocumentNaturalLang(String value)
 	{
 		setAttribute(AttributeName.DOCUMENTNATURALLANG, value, null);
 	}
 
 	/**
-	  * (23) get String attribute DocumentNaturalLang
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute DocumentNaturalLang
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getDocumentNaturalLang()
 	{
 		return getAttribute(AttributeName.DOCUMENTNATURALLANG, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Encoding
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Encoding ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Encoding
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Encoding
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setEncoding(String value)
 	{
 		setAttribute(AttributeName.ENCODING, value, null);
 	}
 
 	/**
-	  * (23) get String attribute Encoding
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute Encoding
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getEncoding()
 	{
 		return getAttribute(AttributeName.ENCODING, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FileFormat
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FileFormat ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute FileFormat
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute FileFormat
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setFileFormat(String value)
 	{
 		setAttribute(AttributeName.FILEFORMAT, value, null);
 	}
 
 	/**
-	  * (23) get String attribute FileFormat
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute FileFormat
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getFileFormat()
 	{
 		return getAttribute(AttributeName.FILEFORMAT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FileSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FileSize ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute FileSize
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute FileSize
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setFileSize(String value)
 	{
 		setAttribute(AttributeName.FILESIZE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute FileSize
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute FileSize
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getFileSize()
 	{
 		return getAttribute(AttributeName.FILESIZE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FileTargetDeviceModel
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FileTargetDeviceModel ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute FileTargetDeviceModel
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute FileTargetDeviceModel
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setFileTargetDeviceModel(String value)
 	{
 		setAttribute(AttributeName.FILETARGETDEVICEMODEL, value, null);
 	}
 
 	/**
-	  * (23) get String attribute FileTargetDeviceModel
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute FileTargetDeviceModel
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getFileTargetDeviceModel()
 	{
 		return getAttribute(AttributeName.FILETARGETDEVICEMODEL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FileTemplate
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FileTemplate ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute FileTemplate
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute FileTemplate
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setFileTemplate(String value)
 	{
 		setAttribute(AttributeName.FILETEMPLATE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute FileTemplate
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute FileTemplate
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getFileTemplate()
 	{
 		return getAttribute(AttributeName.FILETEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FileVersion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FileVersion ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute FileVersion
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute FileVersion
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setFileVersion(String value)
 	{
 		setAttribute(AttributeName.FILEVERSION, value, null);
 	}
 
 	/**
-	  * (23) get String attribute FileVersion
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute FileVersion
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getFileVersion()
 	{
 		return getAttribute(AttributeName.FILEVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MimeType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MimeType ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute MimeType
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute MimeType
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setMimeType(String value)
 	{
 		setAttribute(AttributeName.MIMETYPE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute MimeType
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute MimeType
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getMimeType()
 	{
 		return getAttribute(AttributeName.MIMETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MimeTypeVersion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MimeTypeVersion ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute MimeTypeVersion
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute MimeTypeVersion
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setMimeTypeVersion(String value)
 	{
 		setAttribute(AttributeName.MIMETYPEVERSION, value, null);
 	}
 
 	/**
-	  * (23) get String attribute MimeTypeVersion
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute MimeTypeVersion
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getMimeTypeVersion()
 	{
 		return getAttribute(AttributeName.MIMETYPEVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OverwritePolicy
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OverwritePolicy ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute OverwritePolicy
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute OverwritePolicy
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setOverwritePolicy(EnumOverwritePolicy enumVar)
 	{
 		setAttribute(AttributeName.OVERWRITEPOLICY, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute OverwritePolicy
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute OverwritePolicy
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumOverwritePolicy getOverwritePolicy()
 	{
 		return EnumOverwritePolicy.getEnum(getAttribute(AttributeName.OVERWRITEPOLICY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OSVersion
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OSVersion ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute OSVersion
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute OSVersion
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setOSVersion(String value)
 	{
 		setAttribute(AttributeName.OSVERSION, value, null);
 	}
 
 	/**
-	  * (23) get String attribute OSVersion
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute OSVersion
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getOSVersion()
 	{
 		return getAttribute(AttributeName.OSVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PageOrder
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageOrder ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute PageOrder
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute PageOrder
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setPageOrder(EnumPageOrder enumVar)
 	{
 		setAttribute(AttributeName.PAGEORDER, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute PageOrder
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute PageOrder
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumPageOrder getPageOrder()
 	{
 		return EnumPageOrder.getEnum(getAttribute(AttributeName.PAGEORDER, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Password
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Password ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Password
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Password
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPassword(String value)
 	{
 		setAttribute(AttributeName.PASSWORD, value, null);
 	}
 
 	/**
-	  * (23) get String attribute Password
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute Password
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getPassword()
 	{
 		return getAttribute(AttributeName.PASSWORD, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute RequestQuality
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RequestQuality ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute RequestQuality
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute RequestQuality
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setRequestQuality(double value)
 	{
 		setAttribute(AttributeName.REQUESTQUALITY, value, null);
 	}
 
 	/**
-	  * (17) get double attribute RequestQuality
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute RequestQuality
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getRequestQuality()
 	{
 		return getRealAttribute(AttributeName.REQUESTQUALITY, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ResourceUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ResourceUsage ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ResourceUsage
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ResourceUsage
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setResourceUsage(String value)
 	{
 		setAttribute(AttributeName.RESOURCEUSAGE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute ResourceUsage
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute ResourceUsage
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getResourceUsage()
 	{
 		return getAttribute(AttributeName.RESOURCEUSAGE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SearchDepth
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SearchDepth ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute SearchDepth
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute SearchDepth
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSearchDepth(int value)
 	{
 		setAttribute(AttributeName.SEARCHDEPTH, value, null);
 	}
 
 	/**
-	  * (15) get int attribute SearchDepth
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute SearchDepth
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getSearchDepth()
 	{
 		return getIntAttribute(AttributeName.SEARCHDEPTH, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute UID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute UID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setUID(String value)
 	{
 		setAttribute(AttributeName.UID, value, null);
 	}
 
 	/**
-	  * (23) get String attribute UID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute UID
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getUID()
 	{
 		return getAttribute(AttributeName.UID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute URL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute URL
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute URL
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setURL(String value)
 	{
 		setAttribute(AttributeName.URL, value, null);
 	}
 
 	/**
-	  * (23) get String attribute URL
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute URL
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getURL()
 	{
 		return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UserFileName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UserFileName ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute UserFileName
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute UserFileName
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setUserFileName(String value)
 	{
 		setAttribute(AttributeName.USERFILENAME, value, null);
 	}
 
 	/**
-	  * (23) get String attribute UserFileName
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute UserFileName
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getUserFileName()
 	{
 		return getAttribute(AttributeName.USERFILENAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (28) const get element Container
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFContainer the element
-	 * default is getContainer(0)     */
+	 * @return JDFContainer the element default is getContainer(0)
+	 */
 	public JDFContainer getContainer(int iSkip)
 	{
 		return (JDFContainer) getElement(ElementName.CONTAINER, null, iSkip);
@@ -973,7 +993,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 			return null;
 		}
 
-		final Vector<JDFContainer> v = new Vector<JDFContainer>();
+		final Vector<JDFContainer> v = new Vector<>();
 		for (int i = 0; i < vc.size(); i++)
 		{
 			v.add((JDFContainer) vc.get(i));
@@ -982,7 +1002,8 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return v;
 	}
 
-	/** (25) getCreateContainer
+	/**
+	 * (25) getCreateContainer
 	 * 
 	 * @return JDFContainer the element
 	 */
@@ -993,6 +1014,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (29) append element Container
+	 * 
 	 * @return JDFContainer the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -1003,9 +1025,10 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (28) const get element Disposition
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFDisposition the element
-	 * default is getDisposition(0)     */
+	 * @return JDFDisposition the element default is getDisposition(0)
+	 */
 	public JDFDisposition getDisposition(int iSkip)
 	{
 		return (JDFDisposition) getElement(ElementName.DISPOSITION, null, iSkip);
@@ -1024,7 +1047,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 			return null;
 		}
 
-		final Vector<JDFDisposition> v = new Vector<JDFDisposition>();
+		final Vector<JDFDisposition> v = new Vector<>();
 		for (int i = 0; i < vc.size(); i++)
 		{
 			v.add((JDFDisposition) vc.get(i));
@@ -1033,7 +1056,8 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return v;
 	}
 
-	/** (25) getCreateDisposition
+	/**
+	 * (25) getCreateDisposition
 	 * 
 	 * @return JDFDisposition the element
 	 */
@@ -1044,6 +1068,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (29) append element Disposition
+	 * 
 	 * @return JDFDisposition the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -1052,7 +1077,8 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		return (JDFDisposition) appendElementN(ElementName.DISPOSITION, 1, null);
 	}
 
-	/** (26) getCreateFileAlias
+	/**
+	 * (26) getCreateFileAlias
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileAlias the element
@@ -1064,9 +1090,10 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
 	/**
 	 * (27) const get element FileAlias
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFFileAlias the element
-	 * default is getFileAlias(0)     */
+	 * @return JDFFileAlias the element default is getFileAlias(0)
+	 */
 	public JDFFileAlias getFileAlias(int iSkip)
 	{
 		return (JDFFileAlias) getElement(ElementName.FILEALIAS, null, iSkip);
@@ -1079,23 +1106,12 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	 */
 	public Collection<JDFFileAlias> getAllFileAlias()
 	{
-		final VElement vc = getChildElementVector(ElementName.FILEALIAS, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFFileAlias> v = new Vector<JDFFileAlias>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFFileAlias) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFFileAlias.class, false, 0);
 	}
 
 	/**
 	 * (30) append element FileAlias
+	 * 
 	 * @return JDFFileAlias the element
 	 */
 	public JDFFileAlias appendFileAlias()

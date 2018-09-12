@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -74,7 +42,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,18 +53,17 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFApprovalParams;
 import org.cip4.jdflib.resource.process.prepress.JDFInk;
 
 /**
-*****************************************************************************
-class JDFAutoConventionalPrintingParams : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoConventionalPrintingParams : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 {
@@ -149,6 +115,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoConventionalPrintingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -159,6 +126,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoConventionalPrintingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -170,6 +138,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoConventionalPrintingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -181,7 +150,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -190,7 +159,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -210,8 +179,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for Drying
-	*/
+	 * Enumeration strings for Drying
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumDrying extends ValuedEnum
@@ -279,8 +248,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for FirstSurface
-	*/
+	 * Enumeration strings for FirstSurface
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumFirstSurface extends ValuedEnum
@@ -344,8 +313,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for FountainSolution
-	*/
+	 * Enumeration strings for FountainSolution
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumFountainSolution extends ValuedEnum
@@ -407,8 +376,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for ModuleDrying
-	*/
+	 * Enumeration strings for ModuleDrying
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumModuleDrying extends ValuedEnum
@@ -476,8 +445,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for PrintingType
-	*/
+	 * Enumeration strings for PrintingType
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumPrintingType extends ValuedEnum
@@ -545,8 +514,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for PrintingTechnology
-	*/
+	 * Enumeration strings for PrintingTechnology
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumPrintingTechnology extends ValuedEnum
@@ -612,8 +581,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for SheetLay
-	*/
+	 * Enumeration strings for SheetLay
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumSheetLay extends ValuedEnum
@@ -677,8 +646,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for WorkStyle
-	*/
+	 * Enumeration strings for WorkStyle
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumWorkStyle extends ValuedEnum
@@ -747,133 +716,143 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		public static final EnumWorkStyle WorkAndTwist = new EnumWorkStyle("WorkAndTwist");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DirectProof
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DirectProof ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute DirectProof
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute DirectProof
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setDirectProof(boolean value)
 	{
 		setAttribute(AttributeName.DIRECTPROOF, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute DirectProof
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute DirectProof
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getDirectProof()
 	{
 		return getBoolAttribute(AttributeName.DIRECTPROOF, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Drying
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Drying ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Drying
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Drying
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setDrying(EnumDrying enumVar)
 	{
 		setAttribute(AttributeName.DRYING, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Drying
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Drying
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumDrying getDrying()
 	{
 		return EnumDrying.getEnum(getAttribute(AttributeName.DRYING, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FirstSurface
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FirstSurface ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute FirstSurface
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute FirstSurface
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setFirstSurface(EnumFirstSurface enumVar)
 	{
 		setAttribute(AttributeName.FIRSTSURFACE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute FirstSurface
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute FirstSurface
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumFirstSurface getFirstSurface()
 	{
 		return EnumFirstSurface.getEnum(getAttribute(AttributeName.FIRSTSURFACE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FountainSolution
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FountainSolution ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute FountainSolution
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute FountainSolution
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setFountainSolution(EnumFountainSolution enumVar)
 	{
 		setAttribute(AttributeName.FOUNTAINSOLUTION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute FountainSolution
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute FountainSolution
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumFountainSolution getFountainSolution()
 	{
 		return EnumFountainSolution.getEnum(getAttribute(AttributeName.FOUNTAINSOLUTION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute MediaLocation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MediaLocation ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute MediaLocation
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute MediaLocation
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setMediaLocation(String value)
 	{
 		setAttribute(AttributeName.MEDIALOCATION, value, null);
 	}
 
 	/**
-	  * (23) get String attribute MediaLocation
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute MediaLocation
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getMediaLocation()
 	{
 		return getAttribute(AttributeName.MEDIALOCATION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleAvailableIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleAvailableIndex ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ModuleAvailableIndex
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ModuleAvailableIndex
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setModuleAvailableIndex(JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.MODULEAVAILABLEINDEX, value, null);
 	}
 
 	/**
-	  * (20) get JDFIntegerRangeList attribute ModuleAvailableIndex
-	  * @return JDFIntegerRangeList the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFIntegerRangeList
-	  */
+	 * (20) get JDFIntegerRangeList attribute ModuleAvailableIndex
+	 * 
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 */
 	public JDFIntegerRangeList getModuleAvailableIndex()
 	{
 		final String strAttrName = getAttribute(AttributeName.MODULEAVAILABLEINDEX, null, null);
@@ -881,44 +860,47 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleDrying
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleDrying ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute ModuleDrying
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute ModuleDrying
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setModuleDrying(EnumModuleDrying enumVar)
 	{
 		setAttribute(AttributeName.MODULEDRYING, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute ModuleDrying
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute ModuleDrying
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumModuleDrying getModuleDrying()
 	{
 		return EnumModuleDrying.getEnum(getAttribute(AttributeName.MODULEDRYING, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModuleIndex
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ModuleIndex
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ModuleIndex
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setModuleIndex(JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.MODULEINDEX, value, null);
 	}
 
 	/**
-	  * (20) get JDFIntegerRangeList attribute ModuleIndex
-	  * @return JDFIntegerRangeList the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFIntegerRangeList
-	  */
+	 * (20) get JDFIntegerRangeList attribute ModuleIndex
+	 * 
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 */
 	public JDFIntegerRangeList getModuleIndex()
 	{
 		final String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
@@ -926,243 +908,265 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NonPrintableMarginBottom
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginBottom ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute NonPrintableMarginBottom
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute NonPrintableMarginBottom
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setNonPrintableMarginBottom(double value)
 	{
 		setAttribute(AttributeName.NONPRINTABLEMARGINBOTTOM, value, null);
 	}
 
 	/**
-	  * (17) get double attribute NonPrintableMarginBottom
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute NonPrintableMarginBottom
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getNonPrintableMarginBottom()
 	{
 		return getRealAttribute(AttributeName.NONPRINTABLEMARGINBOTTOM, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NonPrintableMarginLeft
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginLeft ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute NonPrintableMarginLeft
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute NonPrintableMarginLeft
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setNonPrintableMarginLeft(double value)
 	{
 		setAttribute(AttributeName.NONPRINTABLEMARGINLEFT, value, null);
 	}
 
 	/**
-	  * (17) get double attribute NonPrintableMarginLeft
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute NonPrintableMarginLeft
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getNonPrintableMarginLeft()
 	{
 		return getRealAttribute(AttributeName.NONPRINTABLEMARGINLEFT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NonPrintableMarginRight
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginRight ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute NonPrintableMarginRight
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute NonPrintableMarginRight
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setNonPrintableMarginRight(double value)
 	{
 		setAttribute(AttributeName.NONPRINTABLEMARGINRIGHT, value, null);
 	}
 
 	/**
-	  * (17) get double attribute NonPrintableMarginRight
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute NonPrintableMarginRight
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getNonPrintableMarginRight()
 	{
 		return getRealAttribute(AttributeName.NONPRINTABLEMARGINRIGHT, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute NonPrintableMarginTop
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginTop ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute NonPrintableMarginTop
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute NonPrintableMarginTop
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setNonPrintableMarginTop(double value)
 	{
 		setAttribute(AttributeName.NONPRINTABLEMARGINTOP, value, null);
 	}
 
 	/**
-	  * (17) get double attribute NonPrintableMarginTop
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute NonPrintableMarginTop
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getNonPrintableMarginTop()
 	{
 		return getRealAttribute(AttributeName.NONPRINTABLEMARGINTOP, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PerfectingModule
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PerfectingModule ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PerfectingModule
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PerfectingModule
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPerfectingModule(int value)
 	{
 		setAttribute(AttributeName.PERFECTINGMODULE, value, null);
 	}
 
 	/**
-	  * (15) get int attribute PerfectingModule
-	  * @return int the value of the attribute
-	  */
+	 * (15) get int attribute PerfectingModule
+	 * 
+	 * @return int the value of the attribute
+	 */
 	public int getPerfectingModule()
 	{
 		return getIntAttribute(AttributeName.PERFECTINGMODULE, null, 0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Powder
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Powder ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Powder
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Powder
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPowder(double value)
 	{
 		setAttribute(AttributeName.POWDER, value, null);
 	}
 
 	/**
-	  * (17) get double attribute Powder
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute Powder
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getPowder()
 	{
 		return getRealAttribute(AttributeName.POWDER, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PrintingType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PrintingType ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute PrintingType
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute PrintingType
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setPrintingType(EnumPrintingType enumVar)
 	{
 		setAttribute(AttributeName.PRINTINGTYPE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute PrintingType
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute PrintingType
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumPrintingType getPrintingType()
 	{
 		return EnumPrintingType.getEnum(getAttribute(AttributeName.PRINTINGTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PrintingTechnology
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PrintingTechnology ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute PrintingTechnology
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute PrintingTechnology
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setPrintingTechnology(EnumPrintingTechnology enumVar)
 	{
 		setAttribute(AttributeName.PRINTINGTECHNOLOGY, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute PrintingTechnology
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute PrintingTechnology
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumPrintingTechnology getPrintingTechnology()
 	{
 		return EnumPrintingTechnology.getEnum(getAttribute(AttributeName.PRINTINGTECHNOLOGY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SheetLay
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetLay ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute SheetLay
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute SheetLay
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setSheetLay(EnumSheetLay enumVar)
 	{
 		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute SheetLay
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute SheetLay
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumSheetLay getSheetLay()
 	{
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Speed
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Speed ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Speed
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Speed
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSpeed(double value)
 	{
 		setAttribute(AttributeName.SPEED, value, null);
 	}
 
 	/**
-	  * (17) get double attribute Speed
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute Speed
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getSpeed()
 	{
 		return getRealAttribute(AttributeName.SPEED, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute WorkStyle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WorkStyle ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute WorkStyle
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute WorkStyle
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setWorkStyle(EnumWorkStyle enumVar)
 	{
 		setAttribute(AttributeName.WORKSTYLE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute WorkStyle
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute WorkStyle
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumWorkStyle getWorkStyle()
 	{
 		return EnumWorkStyle.getEnum(getAttribute(AttributeName.WORKSTYLE, null, null));
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
-	/** (26) getCreateInk
+	/**
+	 * (26) getCreateInk
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFInk the element
@@ -1174,9 +1178,10 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (27) const get element Ink
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFInk the element
-	 * default is getInk(0)     */
+	 * @return JDFInk the element default is getInk(0)
+	 */
 	public JDFInk getInk(int iSkip)
 	{
 		return (JDFInk) getElement(ElementName.INK, null, iSkip);
@@ -1189,23 +1194,12 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 */
 	public Collection<JDFInk> getAllInk()
 	{
-		final VElement vc = getChildElementVector(ElementName.INK, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFInk> v = new Vector<JDFInk>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFInk) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFInk.class, false, 0);
 	}
 
 	/**
 	 * (30) append element Ink
+	 * 
 	 * @return JDFInk the element
 	 */
 	public JDFInk appendInk()
@@ -1214,9 +1208,10 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refInk(JDFInk refTarget)
 	{
 		refElement(refTarget);
@@ -1224,6 +1219,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (24) const get element ApprovalParams
+	 * 
 	 * @return JDFApprovalParams the element
 	 */
 	public JDFApprovalParams getApprovalParams()
@@ -1231,7 +1227,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		return (JDFApprovalParams) getElement(ElementName.APPROVALPARAMS, null, 0);
 	}
 
-	/** (25) getCreateApprovalParams
+	/**
+	 * (25) getCreateApprovalParams
 	 * 
 	 * @return JDFApprovalParams the element
 	 */
@@ -1242,6 +1239,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 
 	/**
 	 * (29) append element ApprovalParams
+	 * 
 	 * @return JDFApprovalParams the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -1251,9 +1249,10 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refApprovalParams(JDFApprovalParams refTarget)
 	{
 		refElement(refTarget);

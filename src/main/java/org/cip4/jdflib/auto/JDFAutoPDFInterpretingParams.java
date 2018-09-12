@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -74,7 +42,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -87,16 +54,15 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFOCGControl;
 import org.cip4.jdflib.resource.process.JDFReferenceXObjParams;
 
 /**
-*****************************************************************************
-class JDFAutoPDFInterpretingParams : public JDFElement
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoPDFInterpretingParams : public JDFElement
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 {
@@ -130,8 +96,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.OCGCONTROL, 0x33333111);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.REFERENCEXOBJPARAMS, 0x66661111);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.OCGCONTROL, 0x33333331);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.REFERENCEXOBJPARAMS, 0x66666661);
 	}
 
 	@Override
@@ -142,6 +108,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPDFInterpretingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -152,6 +119,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPDFInterpretingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -163,6 +131,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoPDFInterpretingParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -174,7 +143,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -183,8 +152,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for OCGDefault
-	*/
+	 * Enumeration strings for OCGDefault
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumOCGDefault extends ValuedEnum
@@ -248,8 +217,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for OCGProcess
-	*/
+	 * Enumeration strings for OCGProcess
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumOCGProcess extends ValuedEnum
@@ -312,290 +281,315 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		public static final EnumOCGProcess View = new EnumOCGProcess("View");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EmitPDFBG
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EmitPDFBG ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute EmitPDFBG
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute EmitPDFBG
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setEmitPDFBG(boolean value)
 	{
 		setAttribute(AttributeName.EMITPDFBG, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute EmitPDFBG
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute EmitPDFBG
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getEmitPDFBG()
 	{
 		return getBoolAttribute(AttributeName.EMITPDFBG, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EmitPDFHalftones
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EmitPDFHalftones ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute EmitPDFHalftones
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute EmitPDFHalftones
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setEmitPDFHalftones(boolean value)
 	{
 		setAttribute(AttributeName.EMITPDFHALFTONES, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute EmitPDFHalftones
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute EmitPDFHalftones
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getEmitPDFHalftones()
 	{
 		return getBoolAttribute(AttributeName.EMITPDFHALFTONES, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EmitPDFTransfers
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EmitPDFTransfers ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute EmitPDFTransfers
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute EmitPDFTransfers
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setEmitPDFTransfers(boolean value)
 	{
 		setAttribute(AttributeName.EMITPDFTRANSFERS, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute EmitPDFTransfers
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute EmitPDFTransfers
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getEmitPDFTransfers()
 	{
 		return getBoolAttribute(AttributeName.EMITPDFTRANSFERS, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute EmitPDFUCR
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EmitPDFUCR ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute EmitPDFUCR
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute EmitPDFUCR
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setEmitPDFUCR(boolean value)
 	{
 		setAttribute(AttributeName.EMITPDFUCR, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute EmitPDFUCR
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute EmitPDFUCR
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getEmitPDFUCR()
 	{
 		return getBoolAttribute(AttributeName.EMITPDFUCR, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute HonorPDFOverprint
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HonorPDFOverprint ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute HonorPDFOverprint
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute HonorPDFOverprint
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setHonorPDFOverprint(boolean value)
 	{
 		setAttribute(AttributeName.HONORPDFOVERPRINT, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute HonorPDFOverprint
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute HonorPDFOverprint
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getHonorPDFOverprint()
 	{
 		return getBoolAttribute(AttributeName.HONORPDFOVERPRINT, null, true);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ICCColorAsDeviceColor
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ICCColorAsDeviceColor ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ICCColorAsDeviceColor
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ICCColorAsDeviceColor
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setICCColorAsDeviceColor(boolean value)
 	{
 		setAttribute(AttributeName.ICCCOLORASDEVICECOLOR, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute ICCColorAsDeviceColor
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute ICCColorAsDeviceColor
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getICCColorAsDeviceColor()
 	{
 		return getBoolAttribute(AttributeName.ICCCOLORASDEVICECOLOR, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OCGDefault
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OCGDefault ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute OCGDefault
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute OCGDefault
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setOCGDefault(EnumOCGDefault enumVar)
 	{
 		setAttribute(AttributeName.OCGDEFAULT, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute OCGDefault
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute OCGDefault
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumOCGDefault getOCGDefault()
 	{
 		return EnumOCGDefault.getEnum(getAttribute(AttributeName.OCGDEFAULT, null, "FromPDF"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OCGIntent
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OCGIntent ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute OCGIntent
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute OCGIntent
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setOCGIntent(String value)
 	{
 		setAttribute(AttributeName.OCGINTENT, value, null);
 	}
 
 	/**
-	  * (23) get String attribute OCGIntent
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute OCGIntent
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getOCGIntent()
 	{
 		return getAttribute(AttributeName.OCGINTENT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OCGProcess
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OCGProcess ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute OCGProcess
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute OCGProcess
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setOCGProcess(EnumOCGProcess enumVar)
 	{
 		setAttribute(AttributeName.OCGPROCESS, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute OCGProcess
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute OCGProcess
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumOCGProcess getOCGProcess()
 	{
 		return EnumOCGProcess.getEnum(getAttribute(AttributeName.OCGPROCESS, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute OCGZoom
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OCGZoom ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute OCGZoom
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute OCGZoom
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setOCGZoom(double value)
 	{
 		setAttribute(AttributeName.OCGZOOM, value, null);
 	}
 
 	/**
-	  * (17) get double attribute OCGZoom
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute OCGZoom
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getOCGZoom()
 	{
 		return getRealAttribute(AttributeName.OCGZOOM, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PrintPDFAnnotations
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PrintPDFAnnotations ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PrintPDFAnnotations
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PrintPDFAnnotations
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPrintPDFAnnotations(boolean value)
 	{
 		setAttribute(AttributeName.PRINTPDFANNOTATIONS, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute PrintPDFAnnotations
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute PrintPDFAnnotations
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getPrintPDFAnnotations()
 	{
 		return getBoolAttribute(AttributeName.PRINTPDFANNOTATIONS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PrintTrapAnnotations
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PrintTrapAnnotations ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PrintTrapAnnotations
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PrintTrapAnnotations
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPrintTrapAnnotations(boolean value)
 	{
 		setAttribute(AttributeName.PRINTTRAPANNOTATIONS, value, null);
 	}
 
 	/**
-	  * (18) get boolean attribute PrintTrapAnnotations
-	  * @return boolean the value of the attribute
-	  */
+	 * (18) get boolean attribute PrintTrapAnnotations
+	 * 
+	 * @return boolean the value of the attribute
+	 */
 	public boolean getPrintTrapAnnotations()
 	{
 		return getBoolAttribute(AttributeName.PRINTTRAPANNOTATIONS, null, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute TransparencyRenderingQuality
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TransparencyRenderingQuality ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute TransparencyRenderingQuality
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute TransparencyRenderingQuality
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setTransparencyRenderingQuality(double value)
 	{
 		setAttribute(AttributeName.TRANSPARENCYRENDERINGQUALITY, value, null);
 	}
 
 	/**
-	  * (17) get double attribute TransparencyRenderingQuality
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute TransparencyRenderingQuality
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getTransparencyRenderingQuality()
 	{
 		return getRealAttribute(AttributeName.TRANSPARENCYRENDERINGQUALITY, null, 0.0);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
-	/** (26) getCreateOCGControl
+	/**
+	 * (26) getCreateOCGControl
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFOCGControl the element
@@ -607,9 +601,10 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (27) const get element OCGControl
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFOCGControl the element
-	 * default is getOCGControl(0)     */
+	 * @return JDFOCGControl the element default is getOCGControl(0)
+	 */
 	public JDFOCGControl getOCGControl(int iSkip)
 	{
 		return (JDFOCGControl) getElement(ElementName.OCGCONTROL, null, iSkip);
@@ -622,23 +617,12 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 */
 	public Collection<JDFOCGControl> getAllOCGControl()
 	{
-		final VElement vc = getChildElementVector(ElementName.OCGCONTROL, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFOCGControl> v = new Vector<JDFOCGControl>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFOCGControl) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFOCGControl.class, false, 0);
 	}
 
 	/**
 	 * (30) append element OCGControl
+	 * 
 	 * @return JDFOCGControl the element
 	 */
 	public JDFOCGControl appendOCGControl()
@@ -648,6 +632,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (24) const get element ReferenceXObjParams
+	 * 
 	 * @return JDFReferenceXObjParams the element
 	 */
 	public JDFReferenceXObjParams getReferenceXObjParams()
@@ -655,7 +640,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		return (JDFReferenceXObjParams) getElement(ElementName.REFERENCEXOBJPARAMS, null, 0);
 	}
 
-	/** (25) getCreateReferenceXObjParams
+	/**
+	 * (25) getCreateReferenceXObjParams
 	 * 
 	 * @return JDFReferenceXObjParams the element
 	 */
@@ -666,6 +652,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
 	/**
 	 * (29) append element ReferenceXObjParams
+	 * 
 	 * @return JDFReferenceXObjParams the element
 	 * @throws JDFException if the element already exists
 	 */

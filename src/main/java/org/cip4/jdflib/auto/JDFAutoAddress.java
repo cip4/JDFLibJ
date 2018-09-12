@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -83,11 +51,11 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
-*****************************************************************************
-class JDFAutoAddress : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoAddress : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoAddress extends JDFResource
 {
@@ -126,6 +94,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoAddress
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -136,6 +105,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoAddress
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -147,6 +117,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoAddress
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -158,7 +129,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -167,7 +138,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -177,165 +148,187 @@ public abstract class JDFAutoAddress extends JDFResource
 		return bRet;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute City
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute City ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute City
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute City
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setCity(String value)
 	{
 		setAttribute(AttributeName.CITY, value, null);
 	}
 
 	/**
-	  * (23) get String attribute City
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute City
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getCity()
 	{
 		return getAttribute(AttributeName.CITY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Country
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Country ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Country
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Country
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setCountry(String value)
 	{
 		setAttribute(AttributeName.COUNTRY, value, null);
 	}
 
 	/**
-	  * (23) get String attribute Country
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute Country
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getCountry()
 	{
 		return getAttribute(AttributeName.COUNTRY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute CountryCode
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CountryCode ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute CountryCode
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute CountryCode
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setCountryCode(String value)
 	{
 		setAttribute(AttributeName.COUNTRYCODE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute CountryCode
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute CountryCode
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getCountryCode()
 	{
 		return getAttribute(AttributeName.COUNTRYCODE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PostBox
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PostBox ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PostBox
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PostBox
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPostBox(String value)
 	{
 		setAttribute(AttributeName.POSTBOX, value, null);
 	}
 
 	/**
-	  * (23) get String attribute PostBox
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute PostBox
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getPostBox()
 	{
 		return getAttribute(AttributeName.POSTBOX, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PostalCode
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PostalCode ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PostalCode
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PostalCode
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPostalCode(String value)
 	{
 		setAttribute(AttributeName.POSTALCODE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute PostalCode
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute PostalCode
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getPostalCode()
 	{
 		return getAttribute(AttributeName.POSTALCODE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Region
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Region ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Region
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Region
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setRegion(String value)
 	{
 		setAttribute(AttributeName.REGION, value, null);
 	}
 
 	/**
-	  * (23) get String attribute Region
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute Region
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getRegion()
 	{
 		return getAttribute(AttributeName.REGION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Street
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Street ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Street
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Street
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setStreet(String value)
 	{
 		setAttribute(AttributeName.STREET, value, null);
 	}
 
 	/**
-	  * (23) get String attribute Street
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute Street
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getStreet()
 	{
 		return getAttribute(AttributeName.STREET, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element ExtendedAddress
+	 * 
 	 * @return JDFElement the element
 	 */
 	public JDFElement getExtendedAddress()
@@ -343,7 +336,8 @@ public abstract class JDFAutoAddress extends JDFResource
 		return (JDFElement) getElement(ElementName.EXTENDEDADDRESS, null, 0);
 	}
 
-	/** (25) getCreateExtendedAddress
+	/**
+	 * (25) getCreateExtendedAddress
 	 * 
 	 * @return JDFElement the element
 	 */
@@ -354,6 +348,7 @@ public abstract class JDFAutoAddress extends JDFResource
 
 	/**
 	 * (29) append element ExtendedAddress
+	 * 
 	 * @return JDFElement the element
 	 * @throws JDFException if the element already exists
 	 */

@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -89,11 +57,11 @@ import org.cip4.jdflib.resource.devicecapability.JDFModule;
 import org.cip4.jdflib.resource.process.JDFCostCenter;
 
 /**
-*****************************************************************************
-class JDFAutoDevice : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoDevice : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoDevice extends JDFResource
 {
@@ -152,6 +120,7 @@ public abstract class JDFAutoDevice extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoDevice
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -162,6 +131,7 @@ public abstract class JDFAutoDevice extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoDevice
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -173,6 +143,7 @@ public abstract class JDFAutoDevice extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoDevice
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -184,7 +155,7 @@ public abstract class JDFAutoDevice extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -193,7 +164,7 @@ public abstract class JDFAutoDevice extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -212,27 +183,28 @@ public abstract class JDFAutoDevice extends JDFResource
 		return JDFResource.EnumResourceClass.Implementation;
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceClass
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceClass ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute DeviceClass
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute DeviceClass
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setDeviceClass(VString value)
 	{
 		setAttribute(AttributeName.DEVICECLASS, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute DeviceClass
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute DeviceClass
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getDeviceClass()
 	{
 		final VString vStrAttrib = new VString();
@@ -241,127 +213,139 @@ public abstract class JDFAutoDevice extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceFamily
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceFamily ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute DeviceFamily
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute DeviceFamily
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setDeviceFamily(String value)
 	{
 		setAttribute(AttributeName.DEVICEFAMILY, value, null);
 	}
 
 	/**
-	  * (23) get String attribute DeviceFamily
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute DeviceFamily
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getDeviceFamily()
 	{
 		return getAttribute(AttributeName.DEVICEFAMILY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute DeviceID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute DeviceID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setDeviceID(String value)
 	{
 		setAttribute(AttributeName.DEVICEID, value, null);
 	}
 
 	/**
-	  * (23) get String attribute DeviceID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute DeviceID
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getDeviceID()
 	{
 		return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DeviceType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceType ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute DeviceType
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute DeviceType
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setDeviceType(String value)
 	{
 		setAttribute(AttributeName.DEVICETYPE, value, null);
 	}
 
 	/**
-	  * (23) get String attribute DeviceType
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute DeviceType
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getDeviceType()
 	{
 		return getAttribute(AttributeName.DEVICETYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Directory
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Directory ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Directory
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Directory
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setDirectory(String value)
 	{
 		setAttribute(AttributeName.DIRECTORY, value, null);
 	}
 
 	/**
-	  * (23) get String attribute Directory
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute Directory
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getDirectory()
 	{
 		return getAttribute(AttributeName.DIRECTORY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute FriendlyName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FriendlyName ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute FriendlyName
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute FriendlyName
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setFriendlyName(String value)
 	{
 		setAttribute(AttributeName.FRIENDLYNAME, value, null);
 	}
 
 	/**
-	  * (23) get String attribute FriendlyName
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute FriendlyName
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getFriendlyName()
 	{
 		return getAttribute(AttributeName.FRIENDLYNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ICSVersions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ICSVersions ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ICSVersions
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ICSVersions
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setICSVersions(VString value)
 	{
 		setAttribute(AttributeName.ICSVERSIONS, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute ICSVersions
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute ICSVersions
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getICSVersions()
 	{
 		final VString vStrAttrib = new VString();
@@ -370,148 +354,162 @@ public abstract class JDFAutoDevice extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JDFErrorURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JDFErrorURL ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute JDFErrorURL
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute JDFErrorURL
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setJDFErrorURL(String value)
 	{
 		setAttribute(AttributeName.JDFERRORURL, value, null);
 	}
 
 	/**
-	  * (23) get String attribute JDFErrorURL
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute JDFErrorURL
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getJDFErrorURL()
 	{
 		return getAttribute(AttributeName.JDFERRORURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JDFInputURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JDFInputURL ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute JDFInputURL
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute JDFInputURL
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setJDFInputURL(String value)
 	{
 		setAttribute(AttributeName.JDFINPUTURL, value, null);
 	}
 
 	/**
-	  * (23) get String attribute JDFInputURL
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute JDFInputURL
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getJDFInputURL()
 	{
 		return getAttribute(AttributeName.JDFINPUTURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JDFOutputURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JDFOutputURL ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute JDFOutputURL
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute JDFOutputURL
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setJDFOutputURL(String value)
 	{
 		setAttribute(AttributeName.JDFOUTPUTURL, value, null);
 	}
 
 	/**
-	  * (23) get String attribute JDFOutputURL
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute JDFOutputURL
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getJDFOutputURL()
 	{
 		return getAttribute(AttributeName.JDFOUTPUTURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JDFVersions
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JDFVersions ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute JDFVersions
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute JDFVersions
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setJDFVersions(String value)
 	{
 		setAttribute(AttributeName.JDFVERSIONS, value, null);
 	}
 
 	/**
-	  * (23) get String attribute JDFVersions
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute JDFVersions
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getJDFVersions()
 	{
 		return getAttribute(AttributeName.JDFVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JMFSenderID
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JMFSenderID ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute JMFSenderID
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute JMFSenderID
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setJMFSenderID(String value)
 	{
 		setAttribute(AttributeName.JMFSENDERID, value, null);
 	}
 
 	/**
-	  * (23) get String attribute JMFSenderID
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute JMFSenderID
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getJMFSenderID()
 	{
 		return getAttribute(AttributeName.JMFSENDERID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute JMFURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JMFURL ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute JMFURL
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute JMFURL
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setJMFURL(String value)
 	{
 		setAttribute(AttributeName.JMFURL, value, null);
 	}
 
 	/**
-	  * (23) get String attribute JMFURL
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute JMFURL
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getJMFURL()
 	{
 		return getAttribute(AttributeName.JMFURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute KnownLocalizations
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute KnownLocalizations ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute KnownLocalizations
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute KnownLocalizations
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setKnownLocalizations(VString value)
 	{
 		setAttribute(AttributeName.KNOWNLOCALIZATIONS, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute KnownLocalizations
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute KnownLocalizations
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getKnownLocalizations()
 	{
 		final VString vStrAttrib = new VString();
@@ -520,13 +518,14 @@ public abstract class JDFAutoDevice extends JDFResource
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Manufacturer
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Manufacturer ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Manufacturer
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Manufacturer
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	@Override
 	public void setManufacturer(String value)
 	{
@@ -534,211 +533,230 @@ public abstract class JDFAutoDevice extends JDFResource
 	}
 
 	/**
-	  * (23) get String attribute Manufacturer
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute Manufacturer
+	 * 
+	 * @return the value of the attribute
+	 */
 	@Override
 	public String getManufacturer()
 	{
 		return getAttribute(AttributeName.MANUFACTURER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ManufacturerURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ManufacturerURL ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ManufacturerURL
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ManufacturerURL
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setManufacturerURL(String value)
 	{
 		setAttribute(AttributeName.MANUFACTURERURL, value, null);
 	}
 
 	/**
-	  * (23) get String attribute ManufacturerURL
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute ManufacturerURL
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getManufacturerURL()
 	{
 		return getAttribute(AttributeName.MANUFACTURERURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModelDescription
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModelDescription ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ModelDescription
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ModelDescription
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setModelDescription(String value)
 	{
 		setAttribute(AttributeName.MODELDESCRIPTION, value, null);
 	}
 
 	/**
-	  * (23) get String attribute ModelDescription
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute ModelDescription
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getModelDescription()
 	{
 		return getAttribute(AttributeName.MODELDESCRIPTION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModelName
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModelName ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ModelName
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ModelName
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setModelName(String value)
 	{
 		setAttribute(AttributeName.MODELNAME, value, null);
 	}
 
 	/**
-	  * (23) get String attribute ModelName
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute ModelName
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getModelName()
 	{
 		return getAttribute(AttributeName.MODELNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModelNumber
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModelNumber ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ModelNumber
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ModelNumber
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setModelNumber(String value)
 	{
 		setAttribute(AttributeName.MODELNUMBER, value, null);
 	}
 
 	/**
-	  * (23) get String attribute ModelNumber
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute ModelNumber
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getModelNumber()
 	{
 		return getAttribute(AttributeName.MODELNUMBER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ModelURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ModelURL ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ModelURL
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ModelURL
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setModelURL(String value)
 	{
 		setAttribute(AttributeName.MODELURL, value, null);
 	}
 
 	/**
-	  * (23) get String attribute ModelURL
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute ModelURL
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getModelURL()
 	{
 		return getAttribute(AttributeName.MODELURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SerialNumber
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SerialNumber ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute SerialNumber
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute SerialNumber
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSerialNumber(String value)
 	{
 		setAttribute(AttributeName.SERIALNUMBER, value, null);
 	}
 
 	/**
-	  * (23) get String attribute SerialNumber
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute SerialNumber
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getSerialNumber()
 	{
 		return getAttribute(AttributeName.SERIALNUMBER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PresentationURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentationURL ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute PresentationURL
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute PresentationURL
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setPresentationURL(String value)
 	{
 		setAttribute(AttributeName.PRESENTATIONURL, value, null);
 	}
 
 	/**
-	  * (23) get String attribute PresentationURL
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute PresentationURL
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getPresentationURL()
 	{
 		return getAttribute(AttributeName.PRESENTATIONURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SecureJMFURL
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SecureJMFURL ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute SecureJMFURL
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute SecureJMFURL
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSecureJMFURL(String value)
 	{
 		setAttribute(AttributeName.SECUREJMFURL, value, null);
 	}
 
 	/**
-	  * (23) get String attribute SecureJMFURL
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute SecureJMFURL
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getSecureJMFURL()
 	{
 		return getAttribute(AttributeName.SECUREJMFURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute UPC
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UPC ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute UPC
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute UPC
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setUPC(String value)
 	{
 		setAttribute(AttributeName.UPC, value, null);
 	}
 
 	/**
-	  * (23) get String attribute UPC
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute UPC
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getUPC()
 	{
 		return getAttribute(AttributeName.UPC, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element CostCenter
+	 * 
 	 * @return JDFCostCenter the element
 	 */
 	public JDFCostCenter getCostCenter()
@@ -746,7 +764,8 @@ public abstract class JDFAutoDevice extends JDFResource
 		return (JDFCostCenter) getElement(ElementName.COSTCENTER, null, 0);
 	}
 
-	/** (25) getCreateCostCenter
+	/**
+	 * (25) getCreateCostCenter
 	 * 
 	 * @return JDFCostCenter the element
 	 */
@@ -757,6 +776,7 @@ public abstract class JDFAutoDevice extends JDFResource
 
 	/**
 	 * (29) append element CostCenter
+	 * 
 	 * @return JDFCostCenter the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -765,7 +785,8 @@ public abstract class JDFAutoDevice extends JDFResource
 		return (JDFCostCenter) appendElementN(ElementName.COSTCENTER, 1, null);
 	}
 
-	/** (26) getCreateDeviceCap
+	/**
+	 * (26) getCreateDeviceCap
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFDeviceCap the element
@@ -777,9 +798,10 @@ public abstract class JDFAutoDevice extends JDFResource
 
 	/**
 	 * (27) const get element DeviceCap
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFDeviceCap the element
-	 * default is getDeviceCap(0)     */
+	 * @return JDFDeviceCap the element default is getDeviceCap(0)
+	 */
 	public JDFDeviceCap getDeviceCap(int iSkip)
 	{
 		return (JDFDeviceCap) getElement(ElementName.DEVICECAP, null, iSkip);
@@ -797,6 +819,7 @@ public abstract class JDFAutoDevice extends JDFResource
 
 	/**
 	 * (30) append element DeviceCap
+	 * 
 	 * @return JDFDeviceCap the element
 	 */
 	public JDFDeviceCap appendDeviceCap()
@@ -806,6 +829,7 @@ public abstract class JDFAutoDevice extends JDFResource
 
 	/**
 	 * (24) const get element IconList
+	 * 
 	 * @return JDFIconList the element
 	 */
 	public JDFIconList getIconList()
@@ -813,7 +837,8 @@ public abstract class JDFAutoDevice extends JDFResource
 		return (JDFIconList) getElement(ElementName.ICONLIST, null, 0);
 	}
 
-	/** (25) getCreateIconList
+	/**
+	 * (25) getCreateIconList
 	 * 
 	 * @return JDFIconList the element
 	 */
@@ -824,6 +849,7 @@ public abstract class JDFAutoDevice extends JDFResource
 
 	/**
 	 * (29) append element IconList
+	 * 
 	 * @return JDFIconList the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -832,7 +858,8 @@ public abstract class JDFAutoDevice extends JDFResource
 		return (JDFIconList) appendElementN(ElementName.ICONLIST, 1, null);
 	}
 
-	/** (26) getCreateModule
+	/**
+	 * (26) getCreateModule
 	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFModule the element
@@ -844,9 +871,10 @@ public abstract class JDFAutoDevice extends JDFResource
 
 	/**
 	 * (27) const get element Module
+	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFModule the element
-	 * default is getModule(0)     */
+	 * @return JDFModule the element default is getModule(0)
+	 */
 	public JDFModule getModule(int iSkip)
 	{
 		return (JDFModule) getElement(ElementName.MODULE, null, iSkip);
@@ -864,6 +892,7 @@ public abstract class JDFAutoDevice extends JDFResource
 
 	/**
 	 * (30) append element Module
+	 * 
 	 * @return JDFModule the element
 	 */
 	public JDFModule appendModule()

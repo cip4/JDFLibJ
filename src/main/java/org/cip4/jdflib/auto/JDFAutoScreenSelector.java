@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -86,11 +54,11 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
 
 /**
-*****************************************************************************
-class JDFAutoScreenSelector : public JDFElement
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoScreenSelector : public JDFElement
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoScreenSelector extends JDFElement
 {
@@ -121,6 +89,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoScreenSelector
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -131,6 +100,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoScreenSelector
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -142,6 +112,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoScreenSelector
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -153,7 +124,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -162,8 +133,8 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for SourceObjects
-	*/
+	 * Enumeration strings for SourceObjects
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumSourceObjects extends ValuedEnum
@@ -233,8 +204,8 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for ScreeningType
-	*/
+	 * Enumeration strings for ScreeningType
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumScreeningType extends ValuedEnum
@@ -303,153 +274,166 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 		public static final EnumScreeningType HybridAMline_dot = new EnumScreeningType("HybridAMline-dot");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Separation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Separation ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Separation
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Separation
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSeparation(String value)
 	{
 		setAttribute(AttributeName.SEPARATION, value, null);
 	}
 
 	/**
-	  * (23) get String attribute Separation
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute Separation
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getSeparation()
 	{
 		return getAttribute(AttributeName.SEPARATION, null, "All");
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceObjects
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5.2) set attribute SourceObjects
-	  * @param v vector of the enumeration values
-	  */
+	 * (5.2) set attribute SourceObjects
+	 * 
+	 * @param v vector of the enumeration values
+	 */
 	public void setSourceObjects(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
 	}
 
 	/**
-	  * (9.2) get SourceObjects attribute SourceObjects
-	  * @return Vector of the enumerations
-	  */
+	 * (9.2) get SourceObjects attribute SourceObjects
+	 * 
+	 * @return Vector of the enumerations
+	 */
 	public Vector<? extends ValuedEnum> getSourceObjects()
 	{
 		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Angle
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Angle ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Angle
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Angle
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAngle(double value)
 	{
 		setAttribute(AttributeName.ANGLE, value, null);
 	}
 
 	/**
-	  * (17) get double attribute Angle
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute Angle
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getAngle()
 	{
 		return getRealAttribute(AttributeName.ANGLE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AngleMap
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AngleMap ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute AngleMap
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute AngleMap
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setAngleMap(String value)
 	{
 		setAttribute(AttributeName.ANGLEMAP, value, null);
 	}
 
 	/**
-	  * (23) get String attribute AngleMap
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute AngleMap
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getAngleMap()
 	{
 		return getAttribute(AttributeName.ANGLEMAP, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute DotSize
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DotSize ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute DotSize
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute DotSize
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setDotSize(double value)
 	{
 		setAttribute(AttributeName.DOTSIZE, value, null);
 	}
 
 	/**
-	  * (17) get double attribute DotSize
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute DotSize
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getDotSize()
 	{
 		return getRealAttribute(AttributeName.DOTSIZE, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Frequency
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Frequency ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Frequency
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Frequency
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setFrequency(double value)
 	{
 		setAttribute(AttributeName.FREQUENCY, value, null);
 	}
 
 	/**
-	  * (17) get double attribute Frequency
-	  * @return double the value of the attribute
-	  */
+	 * (17) get double attribute Frequency
+	 * 
+	 * @return double the value of the attribute
+	 */
 	public double getFrequency()
 	{
 		return getRealAttribute(AttributeName.FREQUENCY, null, 0.0);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ObjectTags
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ObjectTags ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ObjectTags
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ObjectTags
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setObjectTags(VString value)
 	{
 		setAttribute(AttributeName.OBJECTTAGS, value, null);
 	}
 
 	/**
-	  * (21) get VString attribute ObjectTags
-	  * @return VString the value of the attribute
-	  */
+	 * (21) get VString attribute ObjectTags
+	 * 
+	 * @return VString the value of the attribute
+	 */
 	public VString getObjectTags()
 	{
 		final VString vStrAttrib = new VString();
@@ -458,65 +442,70 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 		return vStrAttrib;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ScreeningFamily
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ScreeningFamily ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute ScreeningFamily
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute ScreeningFamily
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setScreeningFamily(String value)
 	{
 		setAttribute(AttributeName.SCREENINGFAMILY, value, null);
 	}
 
 	/**
-	  * (23) get String attribute ScreeningFamily
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute ScreeningFamily
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getScreeningFamily()
 	{
 		return getAttribute(AttributeName.SCREENINGFAMILY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ScreeningType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ScreeningType ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute ScreeningType
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute ScreeningType
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setScreeningType(EnumScreeningType enumVar)
 	{
 		setAttribute(AttributeName.SCREENINGTYPE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute ScreeningType
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute ScreeningType
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumScreeningType getScreeningType()
 	{
 		return EnumScreeningType.getEnum(getAttribute(AttributeName.SCREENINGTYPE, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SourceFrequency
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceFrequency ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute SourceFrequency
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute SourceFrequency
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSourceFrequency(JDFNumberRange value)
 	{
 		setAttribute(AttributeName.SOURCEFREQUENCY, value, null);
 	}
 
 	/**
-	  * (20) get JDFNumberRange attribute SourceFrequency
-	  * @return JDFNumberRange the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFNumberRange
-	  */
+	 * (20) get JDFNumberRange attribute SourceFrequency
+	 * 
+	 * @return JDFNumberRange the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberRange
+	 */
 	public JDFNumberRange getSourceFrequency()
 	{
 		final String strAttrName = getAttribute(AttributeName.SOURCEFREQUENCY, null, null);
@@ -524,22 +513,24 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute SpotFunction
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SpotFunction ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute SpotFunction
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute SpotFunction
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSpotFunction(String value)
 	{
 		setAttribute(AttributeName.SPOTFUNCTION, value, null);
 	}
 
 	/**
-	  * (23) get String attribute SpotFunction
-	  * @return the value of the attribute
-	  */
+	 * (23) get String attribute SpotFunction
+	 * 
+	 * @return the value of the attribute
+	 */
 	public String getSpotFunction()
 	{
 		return getAttribute(AttributeName.SPOTFUNCTION, null, JDFCoreConstants.EMPTYSTRING);

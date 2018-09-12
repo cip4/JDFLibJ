@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
-  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -88,11 +56,11 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFImageSetterParams;
 
 /**
-*****************************************************************************
-class JDFAutoPreviewGenerationParams : public JDFResource
-
-*****************************************************************************
-*/
+ *****************************************************************************
+ * class JDFAutoPreviewGenerationParams : public JDFResource
+ *****************************************************************************
+ * 
+ */
 
 public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 {
@@ -130,6 +98,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoPreviewGenerationParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -140,6 +109,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoPreviewGenerationParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -151,6 +121,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoPreviewGenerationParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -162,7 +133,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	}
 
 	/**
-	 * @return  the string representation
+	 * @return the string representation
 	 */
 	@Override
 	public String toString()
@@ -171,7 +142,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	}
 
 	/**
-	 * @return  true if ok
+	 * @return true if ok
 	 */
 	@Override
 	public boolean init()
@@ -191,8 +162,8 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for AspectRatio
-	*/
+	 * Enumeration strings for AspectRatio
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumAspectRatio extends ValuedEnum
@@ -260,8 +231,8 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for PreviewFileType
-	*/
+	 * Enumeration strings for PreviewFileType
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumPreviewFileType extends ValuedEnum
@@ -325,8 +296,8 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	}
 
 	/**
-	* Enumeration strings for PreviewUsage
-	*/
+	 * Enumeration strings for PreviewUsage
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumPreviewUsage extends ValuedEnum
@@ -382,6 +353,10 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		}
 
 		/**  */
+		public static final EnumPreviewUsage Animation = new EnumPreviewUsage("Animation");
+		/**  */
+		public static final EnumPreviewUsage Identification = new EnumPreviewUsage("Identification");
+		/**  */
 		public static final EnumPreviewUsage Separation = new EnumPreviewUsage("Separation");
 		/**  */
 		public static final EnumPreviewUsage SeparatedThumbNail = new EnumPreviewUsage("SeparatedThumbNail");
@@ -390,12 +365,14 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		/**  */
 		public static final EnumPreviewUsage ThumbNail = new EnumPreviewUsage("ThumbNail");
 		/**  */
+		public static final EnumPreviewUsage Static3D = new EnumPreviewUsage("Static3D");
+		/**  */
 		public static final EnumPreviewUsage Viewable = new EnumPreviewUsage("Viewable");
 	}
 
 	/**
-	* Enumeration strings for Compensation
-	*/
+	 * Enumeration strings for Compensation
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static class EnumCompensation extends ValuedEnum
@@ -460,112 +437,120 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		public static final EnumCompensation Press = new EnumCompensation("Press");
 	}
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/*
+	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AspectRatio
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AspectRatio ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute AspectRatio
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute AspectRatio
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setAspectRatio(EnumAspectRatio enumVar)
 	{
 		setAttribute(AttributeName.ASPECTRATIO, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute AspectRatio
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute AspectRatio
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumAspectRatio getAspectRatio()
 	{
 		return EnumAspectRatio.getEnum(getAttribute(AttributeName.ASPECTRATIO, null, "Ignore"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreviewFileType
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreviewFileType ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute PreviewFileType
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute PreviewFileType
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setPreviewFileType(EnumPreviewFileType enumVar)
 	{
 		setAttribute(AttributeName.PREVIEWFILETYPE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute PreviewFileType
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute PreviewFileType
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumPreviewFileType getPreviewFileType()
 	{
 		return EnumPreviewFileType.getEnum(getAttribute(AttributeName.PREVIEWFILETYPE, null, "PNG"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute PreviewUsage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreviewUsage ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute PreviewUsage
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute PreviewUsage
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setPreviewUsage(EnumPreviewUsage enumVar)
 	{
 		setAttribute(AttributeName.PREVIEWUSAGE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute PreviewUsage
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute PreviewUsage
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumPreviewUsage getPreviewUsage()
 	{
 		return EnumPreviewUsage.getEnum(getAttribute(AttributeName.PREVIEWUSAGE, null, "Separation"));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Compensation
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Compensation ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Compensation
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Compensation
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	public void setCompensation(EnumCompensation enumVar)
 	{
 		setAttribute(AttributeName.COMPENSATION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Compensation
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Compensation
+	 * 
+	 * @return the value of the attribute
+	 */
 	public EnumCompensation getCompensation()
 	{
 		return EnumCompensation.getEnum(getAttribute(AttributeName.COMPENSATION, null, null));
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Resolution
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Resolution ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Resolution
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Resolution
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setResolution(JDFXYPair value)
 	{
 		setAttribute(AttributeName.RESOLUTION, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute Resolution
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute Resolution
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getResolution()
 	{
 		final String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
@@ -573,23 +558,24 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Size
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Size ---------------------------------------------------------------------
+	 */
 	/**
-	  * (36) set attribute Size
-	  * @param value the value to set the attribute to
-	  */
+	 * (36) set attribute Size
+	 * 
+	 * @param value the value to set the attribute to
+	 */
 	public void setSize(JDFXYPair value)
 	{
 		setAttribute(AttributeName.SIZE, value, null);
 	}
 
 	/**
-	  * (20) get JDFXYPair attribute Size
-	  * @return JDFXYPair the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFXYPair
-	  */
+	 * (20) get JDFXYPair attribute Size
+	 * 
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
 	public JDFXYPair getSize()
 	{
 		final String strAttrName = getAttribute(AttributeName.SIZE, null, null);
@@ -597,13 +583,13 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		return nPlaceHolder;
 	}
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
+	/*
+	 * *********************************************************************** Element getter / setter ***********************************************************************
 	 */
 
 	/**
 	 * (24) const get element ImageSetterParams
+	 * 
 	 * @return JDFImageSetterParams the element
 	 */
 	public JDFImageSetterParams getImageSetterParams()
@@ -611,7 +597,8 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		return (JDFImageSetterParams) getElement(ElementName.IMAGESETTERPARAMS, null, 0);
 	}
 
-	/** (25) getCreateImageSetterParams
+	/**
+	 * (25) getCreateImageSetterParams
 	 * 
 	 * @return JDFImageSetterParams the element
 	 */
@@ -622,6 +609,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 
 	/**
 	 * (29) append element ImageSetterParams
+	 * 
 	 * @return JDFImageSetterParams the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -631,9 +619,10 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
+	 * (31) create inter-resource link to refTarget
+	 * 
+	 * @param refTarget the element that is referenced
+	 */
 	public void refImageSetterParams(JDFImageSetterParams refTarget)
 	{
 		refElement(refTarget);

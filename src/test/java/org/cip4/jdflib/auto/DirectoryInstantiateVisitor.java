@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,16 +76,20 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.w3c.dom.DOMException;
+
 public class DirectoryInstantiateVisitor implements DirectoryVisitor
 {
+	@Override
 	public void enterDirectory(File dir)
 	{ /**/
 	}
 
+	@Override
 	public void leaveDirectory(File dir)
 	{ /**/
 	}
 
+	@Override
 	public void visitFile(File file)
 	{
 		testJDFClass(file.getName());
@@ -96,42 +100,40 @@ public class DirectoryInstantiateVisitor implements DirectoryVisitor
 		boolean result = false;
 
 		String elementName = fileName;
-		String prefix = elementName.startsWith("JDFAuto") ? "JDFAuto" : "JDF";
+		final String prefix = elementName.startsWith("JDFAuto") ? "JDFAuto" : "JDF";
 
-		elementName = elementName.substring(prefix.length(), elementName
-				.length()
-				- ".java".length());
+		elementName = elementName.substring(prefix.length(), elementName.length() - ".java".length());
 
 		// adjust the element name
 		if (elementName.startsWith("Span"))
+		{
 			elementName = elementName.substring("Span".length());
+		}
 		else if (elementName.equals("ShapeElement"))
+		{
 			elementName = "Shape";
+		}
 		else if (elementName.equals("Node"))
+		{
 			elementName = "JDF";
+		}
 
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		final JDFNode jdfRoot = (JDFNode) jdfDoc.getRoot();
 
 		// create a class for elementName
-		KElement kElem = jdfRoot.appendElement(elementName);
+		final KElement kElem = jdfRoot.appendElement(elementName);
 
 		String createdClass = kElem.getClass().toString();
-		createdClass = createdClass
-				.substring(createdClass.lastIndexOf(".") + 1);
+		createdClass = createdClass.substring(createdClass.lastIndexOf(".") + 1);
 
-		result = fileName.equals(createdClass + ".java")
-				|| (fileName.startsWith("JDFAuto") && createdClass
-						.equals(JDFConstants.JDFELEMENT))
-				|| fileName.equals(JDFConstants.JDFNODE)
+		result = fileName.equals(createdClass + ".java") || (fileName.startsWith("JDFAuto") && createdClass.equals(JDFConstants.JDFELEMENT)) || fileName.equals(JDFConstants.JDFNODE)
 				|| !createdClass.equals(JDFConstants.JDFELEMENT);
 
 		if (!result)
 		{
-			throw new DOMException(DOMException.NOT_FOUND_ERR, 
-					"DirectoryInstantiateVisitor: Class JDF" + elementName 
-					+ " could not be instantiated!"
-					+ " --> missing entry in DocumentJDFImpl.sm_PackageNames ???");
+			throw new DOMException(DOMException.NOT_FOUND_ERR,
+					"DirectoryInstantiateVisitor: Class JDF" + elementName + " could not be instantiated!" + " --> missing entry in DocumentJDFImpl.sm_PackageNames ???");
 		}
 	}
 }
