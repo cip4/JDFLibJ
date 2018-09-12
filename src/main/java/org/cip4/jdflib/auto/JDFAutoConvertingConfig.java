@@ -305,7 +305,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 */
 	public JDFDevice getCreateDevice()
 	{
-		return (JDFDevice) getCreateElement(ElementName.DEVICE, null, 0);
+		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, 0);
 	}
 
 	/**
@@ -346,7 +346,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 */
 	public JDFMedia getCreateMedia()
 	{
-		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, 0);
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**

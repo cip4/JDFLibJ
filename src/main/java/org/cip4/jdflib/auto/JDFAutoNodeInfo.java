@@ -729,7 +729,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 */
 	public JDFBusinessInfo getCreateBusinessInfo()
 	{
-		return (JDFBusinessInfo) getCreateElement(ElementName.BUSINESSINFO, null, 0);
+		return (JDFBusinessInfo) getCreateElement_JDFElement(ElementName.BUSINESSINFO, null, 0);
 	}
 
 	/**
@@ -760,7 +760,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 */
 	public JDFEmployee getCreateEmployee()
 	{
-		return (JDFEmployee) getCreateElement(ElementName.EMPLOYEE, null, 0);
+		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, 0);
 	}
 
 	/**
@@ -792,7 +792,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 */
 	public JDFJMF getCreateJMF(int iSkip)
 	{
-		return (JDFJMF) getCreateElement(ElementName.JMF, null, iSkip);
+		return (JDFJMF) getCreateElement_JDFElement(ElementName.JMF, null, iSkip);
 	}
 
 	/**
@@ -843,7 +843,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 */
 	public JDFMISDetails getCreateMISDetails()
 	{
-		return (JDFMISDetails) getCreateElement(ElementName.MISDETAILS, null, 0);
+		return (JDFMISDetails) getCreateElement_JDFElement(ElementName.MISDETAILS, null, 0);
 	}
 
 	/**
@@ -865,7 +865,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 */
 	public JDFNotificationFilter getCreateNotificationFilter(int iSkip)
 	{
-		return (JDFNotificationFilter) getCreateElement(ElementName.NOTIFICATIONFILTER, null, iSkip);
+		return (JDFNotificationFilter) getCreateElement_JDFElement(ElementName.NOTIFICATIONFILTER, null, iSkip);
 	}
 
 	/**

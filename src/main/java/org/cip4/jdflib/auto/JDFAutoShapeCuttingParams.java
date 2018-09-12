@@ -384,7 +384,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 */
 	public JDFDieLayout getCreateDieLayout()
 	{
-		return (JDFDieLayout) getCreateElement(ElementName.DIELAYOUT, null, 0);
+		return (JDFDieLayout) getCreateElement_JDFElement(ElementName.DIELAYOUT, null, 0);
 	}
 
 	/**
@@ -416,7 +416,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 */
 	public JDFShapeElement getCreateShape(int iSkip)
 	{
-		return (JDFShapeElement) getCreateElement(ElementName.SHAPE, null, iSkip);
+		return (JDFShapeElement) getCreateElement_JDFElement(ElementName.SHAPE, null, iSkip);
 	}
 
 	/**

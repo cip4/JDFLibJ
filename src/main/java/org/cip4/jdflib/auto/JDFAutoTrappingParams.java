@@ -742,7 +742,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 */
 	public JDFColorantZoneDetails getCreateColorantZoneDetails(int iSkip)
 	{
-		return (JDFColorantZoneDetails) getCreateElement(ElementName.COLORANTZONEDETAILS, null, iSkip);
+		return (JDFColorantZoneDetails) getCreateElement_JDFElement(ElementName.COLORANTZONEDETAILS, null, iSkip);
 	}
 
 	/**

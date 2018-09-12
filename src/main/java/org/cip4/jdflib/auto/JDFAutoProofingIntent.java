@@ -128,7 +128,7 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 	 */
 	public JDFProofItem getCreateProofItem(int iSkip)
 	{
-		return (JDFProofItem) getCreateElement(ElementName.PROOFITEM, null, iSkip);
+		return (JDFProofItem) getCreateElement_JDFElement(ElementName.PROOFITEM, null, iSkip);
 	}
 
 	/**

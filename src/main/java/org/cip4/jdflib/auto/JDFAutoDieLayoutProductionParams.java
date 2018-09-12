@@ -299,7 +299,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 */
 	public JDFConvertingConfig getCreateConvertingConfig(int iSkip)
 	{
-		return (JDFConvertingConfig) getCreateElement(ElementName.CONVERTINGCONFIG, null, iSkip);
+		return (JDFConvertingConfig) getCreateElement_JDFElement(ElementName.CONVERTINGCONFIG, null, iSkip);
 	}
 
 	/**
@@ -341,7 +341,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 */
 	public JDFRepeatDesc getCreateRepeatDesc(int iSkip)
 	{
-		return (JDFRepeatDesc) getCreateElement(ElementName.REPEATDESC, null, iSkip);
+		return (JDFRepeatDesc) getCreateElement_JDFElement(ElementName.REPEATDESC, null, iSkip);
 	}
 
 	/**
@@ -383,7 +383,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 */
 	public JDFContact getCreateContact(int iSkip)
 	{
-		return (JDFContact) getCreateElement(ElementName.CONTACT, null, iSkip);
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**

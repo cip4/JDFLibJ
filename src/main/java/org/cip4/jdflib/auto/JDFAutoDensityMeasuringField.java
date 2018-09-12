@@ -505,7 +505,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 */
 	public JDFColorMeasurementConditions getCreateColorMeasurementConditions()
 	{
-		return (JDFColorMeasurementConditions) getCreateElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
+		return (JDFColorMeasurementConditions) getCreateElement_JDFElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
 	}
 
 	/**

@@ -167,7 +167,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFOptionSpan getCreateBlockThreadSewing()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.BLOCKTHREADSEWING, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.BLOCKTHREADSEWING, null, 0);
 	}
 
 	/**
@@ -198,7 +198,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFNameSpan getCreateCoverStyle()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.COVERSTYLE, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.COVERSTYLE, null, 0);
 	}
 
 	/**
@@ -229,7 +229,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFOptionSpan getCreateEndSheets()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.ENDSHEETS, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.ENDSHEETS, null, 0);
 	}
 
 	/**
@@ -260,7 +260,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFOptionSpan getCreateHeadBands()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.HEADBANDS, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.HEADBANDS, null, 0);
 	}
 
 	/**
@@ -291,7 +291,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFSpanNamedColor getCreateHeadBandColor()
 	{
-		return (JDFSpanNamedColor) getCreateElement(ElementName.HEADBANDCOLOR, null, 0);
+		return (JDFSpanNamedColor) getCreateElement_JDFElement(ElementName.HEADBANDCOLOR, null, 0);
 	}
 
 	/**
@@ -313,7 +313,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFStringSpan getCreateHeadBandColorDetails(int iSkip)
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.HEADBANDCOLORDETAILS, null, iSkip);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.HEADBANDCOLORDETAILS, null, iSkip);
 	}
 
 	/**
@@ -364,7 +364,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFSpanJacket getCreateJacket()
 	{
-		return (JDFSpanJacket) getCreateElement(ElementName.JACKET, null, 0);
+		return (JDFSpanJacket) getCreateElement_JDFElement(ElementName.JACKET, null, 0);
 	}
 
 	/**
@@ -395,7 +395,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFNumberSpan getCreateJacketFoldingWidth()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.JACKETFOLDINGWIDTH, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.JACKETFOLDINGWIDTH, null, 0);
 	}
 
 	/**
@@ -426,7 +426,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFOptionSpan getCreateJapanBind()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.JAPANBIND, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.JAPANBIND, null, 0);
 	}
 
 	/**
@@ -457,7 +457,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFOptionSpan getCreateSpineBrushing()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.SPINEBRUSHING, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.SPINEBRUSHING, null, 0);
 	}
 
 	/**
@@ -488,7 +488,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFOptionSpan getCreateSpineFiberRoughing()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.SPINEFIBERROUGHING, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.SPINEFIBERROUGHING, null, 0);
 	}
 
 	/**
@@ -519,7 +519,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFSpanGlue getCreateSpineGlue()
 	{
-		return (JDFSpanGlue) getCreateElement(ElementName.SPINEGLUE, null, 0);
+		return (JDFSpanGlue) getCreateElement_JDFElement(ElementName.SPINEGLUE, null, 0);
 	}
 
 	/**
@@ -550,7 +550,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFOptionSpan getCreateSpineLevelling()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.SPINELEVELLING, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.SPINELEVELLING, null, 0);
 	}
 
 	/**
@@ -581,7 +581,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFOptionSpan getCreateSpineMilling()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.SPINEMILLING, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.SPINEMILLING, null, 0);
 	}
 
 	/**
@@ -612,7 +612,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFOptionSpan getCreateSpineNotching()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.SPINENOTCHING, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.SPINENOTCHING, null, 0);
 	}
 
 	/**
@@ -643,7 +643,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFOptionSpan getCreateSpineSanding()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.SPINESANDING, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.SPINESANDING, null, 0);
 	}
 
 	/**
@@ -674,7 +674,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFOptionSpan getCreateSpineShredding()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.SPINESHREDDING, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.SPINESHREDDING, null, 0);
 	}
 
 	/**
@@ -705,7 +705,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFSpanStripMaterial getCreateStripMaterial()
 	{
-		return (JDFSpanStripMaterial) getCreateElement(ElementName.STRIPMATERIAL, null, 0);
+		return (JDFSpanStripMaterial) getCreateElement_JDFElement(ElementName.STRIPMATERIAL, null, 0);
 	}
 
 	/**
@@ -736,7 +736,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFSpanTightBacking getCreateTightBacking()
 	{
-		return (JDFSpanTightBacking) getCreateElement(ElementName.TIGHTBACKING, null, 0);
+		return (JDFSpanTightBacking) getCreateElement_JDFElement(ElementName.TIGHTBACKING, null, 0);
 	}
 
 	/**
@@ -767,7 +767,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFNumberSpan getCreateThickness()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.THICKNESS, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.THICKNESS, null, 0);
 	}
 
 	/**
@@ -789,7 +789,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 */
 	public JDFRegisterRibbon getCreateRegisterRibbon(int iSkip)
 	{
-		return (JDFRegisterRibbon) getCreateElement(ElementName.REGISTERRIBBON, null, iSkip);
+		return (JDFRegisterRibbon) getCreateElement_JDFElement(ElementName.REGISTERRIBBON, null, iSkip);
 	}
 
 	/**

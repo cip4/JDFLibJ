@@ -128,7 +128,7 @@ public abstract class JDFAutoModulePool extends JDFElement
 	 */
 	public JDFModuleCap getCreateModuleCap(int iSkip)
 	{
-		return (JDFModuleCap) getCreateElement(ElementName.MODULECAP, null, iSkip);
+		return (JDFModuleCap) getCreateElement_JDFElement(ElementName.MODULECAP, null, iSkip);
 	}
 
 	/**

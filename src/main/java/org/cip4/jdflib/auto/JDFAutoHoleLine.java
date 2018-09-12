@@ -198,7 +198,7 @@ public abstract class JDFAutoHoleLine extends JDFResource
 	 */
 	public JDFHole getCreateHole()
 	{
-		return (JDFHole) getCreateElement(ElementName.HOLE, null, 0);
+		return (JDFHole) getCreateElement_JDFElement(ElementName.HOLE, null, 0);
 	}
 
 	/**

@@ -419,7 +419,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	 */
 	public JDFPreflightArgument getCreatePreflightArgument()
 	{
-		return (JDFPreflightArgument) getCreateElement(ElementName.PREFLIGHTARGUMENT, null, 0);
+		return (JDFPreflightArgument) getCreateElement_JDFElement(ElementName.PREFLIGHTARGUMENT, null, 0);
 	}
 
 	/**

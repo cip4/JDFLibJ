@@ -180,7 +180,7 @@ public abstract class JDFAutoPartStatus extends JDFElement
 	 */
 	public JDFPart getCreatePart()
 	{
-		return (JDFPart) getCreateElement(ElementName.PART, null, 0);
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, 0);
 	}
 
 	/**

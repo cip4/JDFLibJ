@@ -343,7 +343,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	 */
 	public JDFElement getCreateExtendedAddress()
 	{
-		return (JDFElement) getCreateElement(ElementName.EXTENDEDADDRESS, null, 0);
+		return (JDFElement) getCreateElement_JDFElement(ElementName.EXTENDEDADDRESS, null, 0);
 	}
 
 	/**

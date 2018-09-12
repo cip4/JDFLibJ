@@ -573,7 +573,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec()
 	{
-		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**
@@ -614,7 +614,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 */
 	public JDFMedia getCreateMedia()
 	{
-		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, 0);
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**

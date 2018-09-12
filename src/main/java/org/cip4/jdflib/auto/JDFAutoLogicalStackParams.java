@@ -263,7 +263,7 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	 */
 	public JDFStack getCreateStack(int iSkip)
 	{
-		return (JDFStack) getCreateElement(ElementName.STACK, null, iSkip);
+		return (JDFStack) getCreateElement_JDFElement(ElementName.STACK, null, iSkip);
 	}
 
 	/**

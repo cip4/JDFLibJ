@@ -190,7 +190,7 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 	 */
 	public JDFEmboss getCreateEmboss(int iSkip)
 	{
-		return (JDFEmboss) getCreateElement(ElementName.EMBOSS, null, iSkip);
+		return (JDFEmboss) getCreateElement_JDFElement(ElementName.EMBOSS, null, iSkip);
 	}
 
 	/**

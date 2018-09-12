@@ -319,7 +319,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 */
 	public JDFBundle getCreateBundle(int iSkip)
 	{
-		return (JDFBundle) getCreateElement(ElementName.BUNDLE, null, iSkip);
+		return (JDFBundle) getCreateElement_JDFElement(ElementName.BUNDLE, null, iSkip);
 	}
 
 	/**

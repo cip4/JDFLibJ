@@ -140,7 +140,7 @@ public abstract class JDFAutoBookCase extends JDFElement
 	 */
 	public JDFOptionSpan getCreateHeadBands()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.HEADBANDS, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.HEADBANDS, null, 0);
 	}
 
 	/**
@@ -171,7 +171,7 @@ public abstract class JDFAutoBookCase extends JDFElement
 	 */
 	public JDFSpanShape getCreateShape()
 	{
-		return (JDFSpanShape) getCreateElement(ElementName.SHAPE, null, 0);
+		return (JDFSpanShape) getCreateElement_JDFElement(ElementName.SHAPE, null, 0);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public abstract class JDFAutoBookCase extends JDFElement
 	 */
 	public JDFNumberSpan getCreateThickness()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.THICKNESS, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.THICKNESS, null, 0);
 	}
 
 	/**

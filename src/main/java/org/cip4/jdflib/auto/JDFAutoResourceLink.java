@@ -1228,7 +1228,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 */
 	public JDFAmountPool getCreateAmountPool()
 	{
-		return (JDFAmountPool) getCreateElement(ElementName.AMOUNTPOOL, null, 0);
+		return (JDFAmountPool) getCreateElement_JDFElement(ElementName.AMOUNTPOOL, null, 0);
 	}
 
 	/**
@@ -1250,7 +1250,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 */
 	public JDFLot getCreateLot(int iSkip)
 	{
-		return (JDFLot) getCreateElement(ElementName.LOT, null, iSkip);
+		return (JDFLot) getCreateElement_JDFElement(ElementName.LOT, null, iSkip);
 	}
 
 	/**

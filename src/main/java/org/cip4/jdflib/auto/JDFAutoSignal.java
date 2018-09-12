@@ -293,7 +293,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 */
 	public JDFEmployee getCreateEmployee(int iSkip)
 	{
-		return (JDFEmployee) getCreateElement(ElementName.EMPLOYEE, null, iSkip);
+		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
 
 	/**
@@ -335,7 +335,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 */
 	public JDFNotification getCreateNotification(int iSkip)
 	{
-		return (JDFNotification) getCreateElement(ElementName.NOTIFICATION, null, iSkip);
+		return (JDFNotification) getCreateElement_JDFElement(ElementName.NOTIFICATION, null, iSkip);
 	}
 
 	/**
@@ -386,7 +386,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 */
 	public JDFTrigger getCreateTrigger()
 	{
-		return (JDFTrigger) getCreateElement(ElementName.TRIGGER, null, 0);
+		return (JDFTrigger) getCreateElement_JDFElement(ElementName.TRIGGER, null, 0);
 	}
 
 	/**

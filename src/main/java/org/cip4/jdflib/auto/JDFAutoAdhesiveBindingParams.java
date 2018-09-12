@@ -220,7 +220,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 */
 	public JDFSpinePreparationParams getCreateSpinePreparationParams(int iSkip)
 	{
-		return (JDFSpinePreparationParams) getCreateElement(ElementName.SPINEPREPARATIONPARAMS, null, iSkip);
+		return (JDFSpinePreparationParams) getCreateElement_JDFElement(ElementName.SPINEPREPARATIONPARAMS, null, iSkip);
 	}
 
 	/**
@@ -262,7 +262,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 */
 	public JDFGlueApplication getCreateGlueApplication(int iSkip)
 	{
-		return (JDFGlueApplication) getCreateElement(ElementName.GLUEAPPLICATION, null, iSkip);
+		return (JDFGlueApplication) getCreateElement_JDFElement(ElementName.GLUEAPPLICATION, null, iSkip);
 	}
 
 	/**
@@ -304,7 +304,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 */
 	public JDFSpineTapingParams getCreateSpineTapingParams(int iSkip)
 	{
-		return (JDFSpineTapingParams) getCreateElement(ElementName.SPINETAPINGPARAMS, null, iSkip);
+		return (JDFSpineTapingParams) getCreateElement_JDFElement(ElementName.SPINETAPINGPARAMS, null, iSkip);
 	}
 
 	/**
@@ -346,7 +346,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 */
 	public JDFCoverApplicationParams getCreateCoverApplicationParams(int iSkip)
 	{
-		return (JDFCoverApplicationParams) getCreateElement(ElementName.COVERAPPLICATIONPARAMS, null, iSkip);
+		return (JDFCoverApplicationParams) getCreateElement_JDFElement(ElementName.COVERAPPLICATIONPARAMS, null, iSkip);
 	}
 
 	/**

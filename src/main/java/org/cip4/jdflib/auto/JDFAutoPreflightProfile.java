@@ -161,7 +161,7 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 	 */
 	public JDFElement getCreateColorsConstraintsPool()
 	{
-		return (JDFElement) getCreateElement(ElementName.COLORSCONSTRAINTSPOOL, null, 0);
+		return (JDFElement) getCreateElement_JDFElement(ElementName.COLORSCONSTRAINTSPOOL, null, 0);
 	}
 
 	/**
@@ -192,7 +192,7 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 	 */
 	public JDFElement getCreateDocumentConstraintsPool()
 	{
-		return (JDFElement) getCreateElement(ElementName.DOCUMENTCONSTRAINTSPOOL, null, 0);
+		return (JDFElement) getCreateElement_JDFElement(ElementName.DOCUMENTCONSTRAINTSPOOL, null, 0);
 	}
 
 	/**
@@ -223,7 +223,7 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 	 */
 	public JDFElement getCreateFontsConstraintsPool()
 	{
-		return (JDFElement) getCreateElement(ElementName.FONTSCONSTRAINTSPOOL, null, 0);
+		return (JDFElement) getCreateElement_JDFElement(ElementName.FONTSCONSTRAINTSPOOL, null, 0);
 	}
 
 	/**
@@ -254,7 +254,7 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 	 */
 	public JDFElement getCreateFileTypeConstraintsPool()
 	{
-		return (JDFElement) getCreateElement(ElementName.FILETYPECONSTRAINTSPOOL, null, 0);
+		return (JDFElement) getCreateElement_JDFElement(ElementName.FILETYPECONSTRAINTSPOOL, null, 0);
 	}
 
 	/**
@@ -285,7 +285,7 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 	 */
 	public JDFElement getCreateImagesConstraintsPool()
 	{
-		return (JDFElement) getCreateElement(ElementName.IMAGESCONSTRAINTSPOOL, null, 0);
+		return (JDFElement) getCreateElement_JDFElement(ElementName.IMAGESCONSTRAINTSPOOL, null, 0);
 	}
 
 	/**
@@ -316,7 +316,7 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 	 */
 	public JDFElement getCreatePagesConstraintsPool()
 	{
-		return (JDFElement) getCreateElement(ElementName.PAGESCONSTRAINTSPOOL, null, 0);
+		return (JDFElement) getCreateElement_JDFElement(ElementName.PAGESCONSTRAINTSPOOL, null, 0);
 	}
 
 	/**

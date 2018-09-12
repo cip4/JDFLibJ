@@ -800,7 +800,7 @@ public abstract class JDFAutoDeviceMark extends JDFResource
 	 */
 	public JDFBarcodeReproParams getCreateBarcodeReproParams(int iSkip)
 	{
-		return (JDFBarcodeReproParams) getCreateElement(ElementName.BARCODEREPROPARAMS, null, iSkip);
+		return (JDFBarcodeReproParams) getCreateElement_JDFElement(ElementName.BARCODEREPROPARAMS, null, iSkip);
 	}
 
 	/**

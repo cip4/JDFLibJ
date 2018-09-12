@@ -151,7 +151,7 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 	 */
 	public JDFObjectModel getCreateObjectModel(int iSkip)
 	{
-		return (JDFObjectModel) getCreateElement(ElementName.OBJECTMODEL, null, iSkip);
+		return (JDFObjectModel) getCreateElement_JDFElement(ElementName.OBJECTMODEL, null, iSkip);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 	 */
 	public JDFShapeTemplate getCreateShapeTemplate()
 	{
-		return (JDFShapeTemplate) getCreateElement(ElementName.SHAPETEMPLATE, null, 0);
+		return (JDFShapeTemplate) getCreateElement_JDFElement(ElementName.SHAPETEMPLATE, null, 0);
 	}
 
 	/**

@@ -186,7 +186,7 @@ public abstract class JDFAutoEnumerationEvaluation extends JDFResource
 	 */
 	public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
 	{
-		return (JDFBasicPreflightTest) getCreateElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
+		return (JDFBasicPreflightTest) getCreateElement_JDFElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
 	}
 
 	/**

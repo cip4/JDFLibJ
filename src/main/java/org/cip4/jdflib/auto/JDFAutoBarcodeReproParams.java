@@ -468,7 +468,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 	 */
 	public JDFBarcodeCompParams getCreateBarcodeCompParams(int iSkip)
 	{
-		return (JDFBarcodeCompParams) getCreateElement(ElementName.BARCODECOMPPARAMS, null, iSkip);
+		return (JDFBarcodeCompParams) getCreateElement_JDFElement(ElementName.BARCODECOMPPARAMS, null, iSkip);
 	}
 
 	/**

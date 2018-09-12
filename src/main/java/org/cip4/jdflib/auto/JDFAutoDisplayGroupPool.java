@@ -128,7 +128,7 @@ public abstract class JDFAutoDisplayGroupPool extends JDFElement
 	 */
 	public JDFDisplayGroup getCreateDisplayGroup(int iSkip)
 	{
-		return (JDFDisplayGroup) getCreateElement(ElementName.DISPLAYGROUP, null, iSkip);
+		return (JDFDisplayGroup) getCreateElement_JDFElement(ElementName.DISPLAYGROUP, null, iSkip);
 	}
 
 	/**

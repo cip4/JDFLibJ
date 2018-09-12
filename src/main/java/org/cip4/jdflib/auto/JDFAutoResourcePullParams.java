@@ -485,7 +485,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
 
 	/**
@@ -536,7 +536,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 */
 	public JDFDisposition getCreateDisposition()
 	{
-		return (JDFDisposition) getCreateElement(ElementName.DISPOSITION, null, 0);
+		return (JDFDisposition) getCreateElement_JDFElement(ElementName.DISPOSITION, null, 0);
 	}
 
 	/**
@@ -567,7 +567,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 */
 	public JDFMISDetails getCreateMISDetails()
 	{
-		return (JDFMISDetails) getCreateElement(ElementName.MISDETAILS, null, 0);
+		return (JDFMISDetails) getCreateElement_JDFElement(ElementName.MISDETAILS, null, 0);
 	}
 
 	/**

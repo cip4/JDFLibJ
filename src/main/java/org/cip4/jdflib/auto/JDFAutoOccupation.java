@@ -248,7 +248,7 @@ public abstract class JDFAutoOccupation extends JDFElement
 	 */
 	public JDFDevice getCreateDevice(int iSkip)
 	{
-		return (JDFDevice) getCreateElement(ElementName.DEVICE, null, iSkip);
+		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, iSkip);
 	}
 
 	/**
@@ -299,7 +299,7 @@ public abstract class JDFAutoOccupation extends JDFElement
 	 */
 	public JDFEmployee getCreateEmployee()
 	{
-		return (JDFEmployee) getCreateElement(ElementName.EMPLOYEE, null, 0);
+		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, 0);
 	}
 
 	/**
@@ -321,7 +321,7 @@ public abstract class JDFAutoOccupation extends JDFElement
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
 
 	/**

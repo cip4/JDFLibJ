@@ -451,7 +451,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 */
 	public JDFTIFFtag getCreateTIFFtag(int iSkip)
 	{
-		return (JDFTIFFtag) getCreateElement(ElementName.TIFFTAG, null, iSkip);
+		return (JDFTIFFtag) getCreateElement_JDFElement(ElementName.TIFFTAG, null, iSkip);
 	}
 
 	/**
@@ -493,7 +493,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 */
 	public JDFTIFFEmbeddedFile getCreateTIFFEmbeddedFile(int iSkip)
 	{
-		return (JDFTIFFEmbeddedFile) getCreateElement(ElementName.TIFFEMBEDDEDFILE, null, iSkip);
+		return (JDFTIFFEmbeddedFile) getCreateElement_JDFElement(ElementName.TIFFEMBEDDEDFILE, null, iSkip);
 	}
 
 	/**

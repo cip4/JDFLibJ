@@ -372,7 +372,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 */
 	public JDFIdentificationField getCreateIdentificationField(int iSkip)
 	{
-		return (JDFIdentificationField) getCreateElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+		return (JDFIdentificationField) getCreateElement_JDFElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
 
 	/**
@@ -423,7 +423,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 */
 	public JDFInsertSheet getCreateInsertSheet()
 	{
-		return (JDFInsertSheet) getCreateElement(ElementName.INSERTSHEET, null, 0);
+		return (JDFInsertSheet) getCreateElement_JDFElement(ElementName.INSERTSHEET, null, 0);
 	}
 
 	/**

@@ -195,7 +195,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	 */
 	public JDFGlueApplication getCreateGlueApplication(int iSkip)
 	{
-		return (JDFGlueApplication) getCreateElement(ElementName.GLUEAPPLICATION, null, iSkip);
+		return (JDFGlueApplication) getCreateElement_JDFElement(ElementName.GLUEAPPLICATION, null, iSkip);
 	}
 
 	/**
@@ -247,7 +247,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	 */
 	public JDFScore getCreateScore(int iSkip)
 	{
-		return (JDFScore) getCreateElement(ElementName.SCORE, null, iSkip);
+		return (JDFScore) getCreateElement_JDFElement(ElementName.SCORE, null, iSkip);
 	}
 
 	/**

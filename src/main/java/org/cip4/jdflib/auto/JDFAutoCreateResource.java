@@ -195,7 +195,7 @@ public abstract class JDFAutoCreateResource extends JDFElement
 	 */
 	public JDFResource getCreateResource(int iSkip)
 	{
-		return (JDFResource) getCreateElement(ElementName.RESOURCE, null, iSkip);
+		return (JDFResource) getCreateElement_JDFElement(ElementName.RESOURCE, null, iSkip);
 	}
 
 	/**

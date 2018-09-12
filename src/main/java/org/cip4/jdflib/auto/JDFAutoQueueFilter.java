@@ -718,7 +718,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 */
 	public JDFQueueEntryDef getCreateQueueEntryDef(int iSkip)
 	{
-		return (JDFQueueEntryDef) getCreateElement(ElementName.QUEUEENTRYDEF, null, iSkip);
+		return (JDFQueueEntryDef) getCreateElement_JDFElement(ElementName.QUEUEENTRYDEF, null, iSkip);
 	}
 
 	/**
@@ -760,7 +760,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 */
 	public JDFDevice getCreateDevice(int iSkip)
 	{
-		return (JDFDevice) getCreateElement(ElementName.DEVICE, null, iSkip);
+		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, iSkip);
 	}
 
 	/**
@@ -802,7 +802,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
 
 	/**

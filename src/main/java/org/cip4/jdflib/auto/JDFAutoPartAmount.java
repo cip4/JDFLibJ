@@ -797,7 +797,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 */
 	public JDFLot getCreateLot(int iSkip)
 	{
-		return (JDFLot) getCreateElement(ElementName.LOT, null, iSkip);
+		return (JDFLot) getCreateElement_JDFElement(ElementName.LOT, null, iSkip);
 	}
 
 	/**

@@ -350,7 +350,7 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	 */
 	public JDFStitchingParams getCreateStitchingParams(int iSkip)
 	{
-		return (JDFStitchingParams) getCreateElement(ElementName.STITCHINGPARAMS, null, iSkip);
+		return (JDFStitchingParams) getCreateElement_JDFElement(ElementName.STITCHINGPARAMS, null, iSkip);
 	}
 
 	/**

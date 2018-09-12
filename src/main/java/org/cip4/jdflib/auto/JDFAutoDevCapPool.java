@@ -128,7 +128,7 @@ public abstract class JDFAutoDevCapPool extends JDFElement
 	 */
 	public JDFDevCap getCreateDevCap(int iSkip)
 	{
-		return (JDFDevCap) getCreateElement(ElementName.DEVCAP, null, iSkip);
+		return (JDFDevCap) getCreateElement_JDFElement(ElementName.DEVCAP, null, iSkip);
 	}
 
 	/**

@@ -302,7 +302,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 */
 	public JDFAutomatedOverPrintParams getCreateAutomatedOverPrintParams()
 	{
-		return (JDFAutomatedOverPrintParams) getCreateElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
+		return (JDFAutomatedOverPrintParams) getCreateElement_JDFElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
 	}
 
 	/**
@@ -334,7 +334,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 */
 	public JDFColorantAlias getCreateColorantAlias(int iSkip)
 	{
-		return (JDFColorantAlias) getCreateElement(ElementName.COLORANTALIAS, null, iSkip);
+		return (JDFColorantAlias) getCreateElement_JDFElement(ElementName.COLORANTALIAS, null, iSkip);
 	}
 
 	/**
@@ -386,7 +386,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 */
 	public JDFColorCorrectionOp getCreateColorCorrectionOp(int iSkip)
 	{
-		return (JDFColorCorrectionOp) getCreateElement(ElementName.COLORCORRECTIONOP, null, iSkip);
+		return (JDFColorCorrectionOp) getCreateElement_JDFElement(ElementName.COLORCORRECTIONOP, null, iSkip);
 	}
 
 	/**
@@ -437,7 +437,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 */
 	public JDFColorSpaceConversionOp getCreateColorSpaceConversionOp()
 	{
-		return (JDFColorSpaceConversionOp) getCreateElement(ElementName.COLORSPACECONVERSIONOP, null, 0);
+		return (JDFColorSpaceConversionOp) getCreateElement_JDFElement(ElementName.COLORSPACECONVERSIONOP, null, 0);
 	}
 
 	/**
@@ -468,7 +468,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec()
 	{
-		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**

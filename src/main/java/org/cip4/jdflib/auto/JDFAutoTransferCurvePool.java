@@ -148,7 +148,7 @@ public abstract class JDFAutoTransferCurvePool extends JDFResource
 	 */
 	public JDFTransferCurveSet getCreateTransferCurveSet(int iSkip)
 	{
-		return (JDFTransferCurveSet) getCreateElement(ElementName.TRANSFERCURVESET, null, iSkip);
+		return (JDFTransferCurveSet) getCreateElement_JDFElement(ElementName.TRANSFERCURVESET, null, iSkip);
 	}
 
 	/**

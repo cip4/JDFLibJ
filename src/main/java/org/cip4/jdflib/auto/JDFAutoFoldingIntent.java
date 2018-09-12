@@ -185,7 +185,7 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreateFoldingCatalog()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.FOLDINGCATALOG, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.FOLDINGCATALOG, null, 0);
 	}
 
 	/**
@@ -207,7 +207,7 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	 */
 	public JDFFold getCreateFold(int iSkip)
 	{
-		return (JDFFold) getCreateElement(ElementName.FOLD, null, iSkip);
+		return (JDFFold) getCreateElement_JDFElement(ElementName.FOLD, null, iSkip);
 	}
 
 	/**

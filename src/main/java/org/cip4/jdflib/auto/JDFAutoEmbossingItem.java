@@ -151,7 +151,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	 */
 	public JDFSpanDirection getCreateDirection()
 	{
-		return (JDFSpanDirection) getCreateElement(ElementName.DIRECTION, null, 0);
+		return (JDFSpanDirection) getCreateElement_JDFElement(ElementName.DIRECTION, null, 0);
 	}
 
 	/**
@@ -182,7 +182,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	 */
 	public JDFNumberSpan getCreateEdgeAngle()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.EDGEANGLE, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.EDGEANGLE, null, 0);
 	}
 
 	/**
@@ -213,7 +213,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	 */
 	public JDFSpanEdgeShape getCreateEdgeShape()
 	{
-		return (JDFSpanEdgeShape) getCreateElement(ElementName.EDGESHAPE, null, 0);
+		return (JDFSpanEdgeShape) getCreateElement_JDFElement(ElementName.EDGESHAPE, null, 0);
 	}
 
 	/**
@@ -244,7 +244,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	 */
 	public JDFStringSpan getCreateEmbossingType()
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.EMBOSSINGTYPE, null, 0);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.EMBOSSINGTYPE, null, 0);
 	}
 
 	/**
@@ -275,7 +275,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	 */
 	public JDFSpanNamedColor getCreateFoilColor()
 	{
-		return (JDFSpanNamedColor) getCreateElement(ElementName.FOILCOLOR, null, 0);
+		return (JDFSpanNamedColor) getCreateElement_JDFElement(ElementName.FOILCOLOR, null, 0);
 	}
 
 	/**
@@ -306,7 +306,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	 */
 	public JDFStringSpan getCreateFoilColorDetails()
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.FOILCOLORDETAILS, null, 0);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.FOILCOLORDETAILS, null, 0);
 	}
 
 	/**
@@ -337,7 +337,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	 */
 	public JDFNumberSpan getCreateHeight()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.HEIGHT, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.HEIGHT, null, 0);
 	}
 
 	/**
@@ -368,7 +368,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	 */
 	public JDFXYPairSpan getCreateImageSize()
 	{
-		return (JDFXYPairSpan) getCreateElement(ElementName.IMAGESIZE, null, 0);
+		return (JDFXYPairSpan) getCreateElement_JDFElement(ElementName.IMAGESIZE, null, 0);
 	}
 
 	/**
@@ -399,7 +399,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	 */
 	public JDFSpanLevel getCreateLevel()
 	{
-		return (JDFSpanLevel) getCreateElement(ElementName.LEVEL, null, 0);
+		return (JDFSpanLevel) getCreateElement_JDFElement(ElementName.LEVEL, null, 0);
 	}
 
 	/**
@@ -430,7 +430,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	 */
 	public JDFXYPairSpan getCreatePosition()
 	{
-		return (JDFXYPairSpan) getCreateElement(ElementName.POSITION, null, 0);
+		return (JDFXYPairSpan) getCreateElement_JDFElement(ElementName.POSITION, null, 0);
 	}
 
 	/**

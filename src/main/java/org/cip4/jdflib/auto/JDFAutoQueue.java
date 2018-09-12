@@ -296,7 +296,7 @@ public abstract class JDFAutoQueue extends JDFElement
 	 */
 	public JDFDevice getCreateDevice(int iSkip)
 	{
-		return (JDFDevice) getCreateElement(ElementName.DEVICE, null, iSkip);
+		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, iSkip);
 	}
 
 	/**
@@ -338,7 +338,7 @@ public abstract class JDFAutoQueue extends JDFElement
 	 */
 	public JDFQueueEntry getCreateQueueEntry(int iSkip)
 	{
-		return (JDFQueueEntry) getCreateElement(ElementName.QUEUEENTRY, null, iSkip);
+		return (JDFQueueEntry) getCreateElement_JDFElement(ElementName.QUEUEENTRY, null, iSkip);
 	}
 
 	/**

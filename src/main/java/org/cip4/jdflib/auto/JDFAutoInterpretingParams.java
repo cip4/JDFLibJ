@@ -599,7 +599,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 */
 	public JDFObjectResolution getCreateObjectResolution(int iSkip)
 	{
-		return (JDFObjectResolution) getCreateElement(ElementName.OBJECTRESOLUTION, null, iSkip);
+		return (JDFObjectResolution) getCreateElement_JDFElement(ElementName.OBJECTRESOLUTION, null, iSkip);
 	}
 
 	/**
@@ -660,7 +660,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 */
 	public JDFFitPolicy getCreateFitPolicy()
 	{
-		return (JDFFitPolicy) getCreateElement(ElementName.FITPOLICY, null, 0);
+		return (JDFFitPolicy) getCreateElement_JDFElement(ElementName.FITPOLICY, null, 0);
 	}
 
 	/**
@@ -692,7 +692,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 */
 	public JDFInterpretingDetails getCreateInterpretingDetails(int iSkip)
 	{
-		return (JDFInterpretingDetails) getCreateElement(ElementName.INTERPRETINGDETAILS, null, iSkip);
+		return (JDFInterpretingDetails) getCreateElement_JDFElement(ElementName.INTERPRETINGDETAILS, null, iSkip);
 	}
 
 	/**
@@ -734,7 +734,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 */
 	public JDFMedia getCreateMedia(int iSkip)
 	{
-		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, iSkip);
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, iSkip);
 	}
 
 	/**
@@ -795,7 +795,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 */
 	public JDFPDFInterpretingParams getCreatePDFInterpretingParams()
 	{
-		return (JDFPDFInterpretingParams) getCreateElement(ElementName.PDFINTERPRETINGPARAMS, null, 0);
+		return (JDFPDFInterpretingParams) getCreateElement_JDFElement(ElementName.PDFINTERPRETINGPARAMS, null, 0);
 	}
 
 	/**

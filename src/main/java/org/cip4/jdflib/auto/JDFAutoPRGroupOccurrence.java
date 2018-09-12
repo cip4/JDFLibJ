@@ -130,7 +130,7 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 	 */
 	public JDFStringListValue getCreateStringListValue(int iSkip)
 	{
-		return (JDFStringListValue) getCreateElement(ElementName.STRINGLISTVALUE, null, iSkip);
+		return (JDFStringListValue) getCreateElement_JDFElement(ElementName.STRINGLISTVALUE, null, iSkip);
 	}
 
 	/**
@@ -172,7 +172,7 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 	 */
 	public JDFArgumentValue getCreateArgumentValue(int iSkip)
 	{
-		return (JDFArgumentValue) getCreateElement(ElementName.ARGUMENTVALUE, null, iSkip);
+		return (JDFArgumentValue) getCreateElement_JDFElement(ElementName.ARGUMENTVALUE, null, iSkip);
 	}
 
 	/**

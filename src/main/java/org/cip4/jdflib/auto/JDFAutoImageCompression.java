@@ -661,7 +661,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 */
 	public JDFCCITTFaxParams getCreateCCITTFaxParams()
 	{
-		return (JDFCCITTFaxParams) getCreateElement(ElementName.CCITTFAXPARAMS, null, 0);
+		return (JDFCCITTFaxParams) getCreateElement_JDFElement(ElementName.CCITTFAXPARAMS, null, 0);
 	}
 
 	/**
@@ -692,7 +692,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 */
 	public JDFDCTParams getCreateDCTParams()
 	{
-		return (JDFDCTParams) getCreateElement(ElementName.DCTPARAMS, null, 0);
+		return (JDFDCTParams) getCreateElement_JDFElement(ElementName.DCTPARAMS, null, 0);
 	}
 
 	/**
@@ -714,7 +714,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 */
 	public JDFJBIG2Params getCreateJBIG2Params(int iSkip)
 	{
-		return (JDFJBIG2Params) getCreateElement(ElementName.JBIG2PARAMS, null, iSkip);
+		return (JDFJBIG2Params) getCreateElement_JDFElement(ElementName.JBIG2PARAMS, null, iSkip);
 	}
 
 	/**
@@ -756,7 +756,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 */
 	public JDFJPEG2000Params getCreateJPEG2000Params(int iSkip)
 	{
-		return (JDFJPEG2000Params) getCreateElement(ElementName.JPEG2000PARAMS, null, iSkip);
+		return (JDFJPEG2000Params) getCreateElement_JDFElement(ElementName.JPEG2000PARAMS, null, iSkip);
 	}
 
 	/**
@@ -807,7 +807,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 */
 	public JDFLZWParams getCreateLZWParams()
 	{
-		return (JDFLZWParams) getCreateElement(ElementName.LZWPARAMS, null, 0);
+		return (JDFLZWParams) getCreateElement_JDFElement(ElementName.LZWPARAMS, null, 0);
 	}
 
 	/**

@@ -547,7 +547,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreateBleed(int iSkip)
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.BLEED, null, iSkip);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.BLEED, null, iSkip);
 	}
 
 	/**
@@ -598,7 +598,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 */
 	public JDFXYPairSpan getCreateDimensions()
 	{
-		return (JDFXYPairSpan) getCreateElement(ElementName.DIMENSIONS, null, 0);
+		return (JDFXYPairSpan) getCreateElement_JDFElement(ElementName.DIMENSIONS, null, 0);
 	}
 
 	/**
@@ -629,7 +629,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 */
 	public JDFShapeSpan getCreateFinishedDimensions()
 	{
-		return (JDFShapeSpan) getCreateElement(ElementName.FINISHEDDIMENSIONS, null, 0);
+		return (JDFShapeSpan) getCreateElement_JDFElement(ElementName.FINISHEDDIMENSIONS, null, 0);
 	}
 
 	/**
@@ -660,7 +660,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 */
 	public JDFSpanFinishedGrainDirection getCreateFinishedGrainDirection()
 	{
-		return (JDFSpanFinishedGrainDirection) getCreateElement(ElementName.FINISHEDGRAINDIRECTION, null, 0);
+		return (JDFSpanFinishedGrainDirection) getCreateElement_JDFElement(ElementName.FINISHEDGRAINDIRECTION, null, 0);
 	}
 
 	/**
@@ -691,7 +691,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 */
 	public JDFIntegerSpan getCreatePages()
 	{
-		return (JDFIntegerSpan) getCreateElement(ElementName.PAGES, null, 0);
+		return (JDFIntegerSpan) getCreateElement_JDFElement(ElementName.PAGES, null, 0);
 	}
 
 	/**
@@ -722,7 +722,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 */
 	public JDFIntegerSpan getCreatePageVariance()
 	{
-		return (JDFIntegerSpan) getCreateElement(ElementName.PAGEVARIANCE, null, 0);
+		return (JDFIntegerSpan) getCreateElement_JDFElement(ElementName.PAGEVARIANCE, null, 0);
 	}
 
 	/**
@@ -753,7 +753,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 */
 	public JDFLayout getCreateLayout()
 	{
-		return (JDFLayout) getCreateElement(ElementName.LAYOUT, null, 0);
+		return (JDFLayout) getCreateElement_JDFElement(ElementName.LAYOUT, null, 0);
 	}
 
 	/**
@@ -794,7 +794,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 */
 	public JDFSpanSizePolicy getCreateSizePolicy()
 	{
-		return (JDFSpanSizePolicy) getCreateElement(ElementName.SIZEPOLICY, null, 0);
+		return (JDFSpanSizePolicy) getCreateElement_JDFElement(ElementName.SIZEPOLICY, null, 0);
 	}
 
 	/**

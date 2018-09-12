@@ -268,7 +268,7 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	 */
 	public JDFGlueLine getCreateGlueLine()
 	{
-		return (JDFGlueLine) getCreateElement(ElementName.GLUELINE, null, 0);
+		return (JDFGlueLine) getCreateElement_JDFElement(ElementName.GLUELINE, null, 0);
 	}
 
 	/**

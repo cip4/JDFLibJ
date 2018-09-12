@@ -1173,7 +1173,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 */
 	public JDFInk getCreateInk(int iSkip)
 	{
-		return (JDFInk) getCreateElement(ElementName.INK, null, iSkip);
+		return (JDFInk) getCreateElement_JDFElement(ElementName.INK, null, iSkip);
 	}
 
 	/**
@@ -1234,7 +1234,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 */
 	public JDFApprovalParams getCreateApprovalParams()
 	{
-		return (JDFApprovalParams) getCreateElement(ElementName.APPROVALPARAMS, null, 0);
+		return (JDFApprovalParams) getCreateElement_JDFElement(ElementName.APPROVALPARAMS, null, 0);
 	}
 
 	/**

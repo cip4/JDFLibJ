@@ -248,7 +248,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 */
 	public JDFNotification getCreateNotification(int iSkip)
 	{
-		return (JDFNotification) getCreateElement(ElementName.NOTIFICATION, null, iSkip);
+		return (JDFNotification) getCreateElement_JDFElement(ElementName.NOTIFICATION, null, iSkip);
 	}
 
 	/**
@@ -290,7 +290,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 */
 	public JDFEmployee getCreateEmployee(int iSkip)
 	{
-		return (JDFEmployee) getCreateElement(ElementName.EMPLOYEE, null, iSkip);
+		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
 
 	/**

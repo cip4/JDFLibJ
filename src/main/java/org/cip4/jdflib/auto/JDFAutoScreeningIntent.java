@@ -141,7 +141,7 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreateDotSize()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.DOTSIZE, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.DOTSIZE, null, 0);
 	}
 
 	/**
@@ -172,7 +172,7 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreateFrequency()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.FREQUENCY, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.FREQUENCY, null, 0);
 	}
 
 	/**
@@ -203,7 +203,7 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 	 */
 	public JDFSpanFrequencySelection getCreateFrequencySelection()
 	{
-		return (JDFSpanFrequencySelection) getCreateElement(ElementName.FREQUENCYSELECTION, null, 0);
+		return (JDFSpanFrequencySelection) getCreateElement_JDFElement(ElementName.FREQUENCYSELECTION, null, 0);
 	}
 
 	/**
@@ -234,7 +234,7 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 	 */
 	public JDFSpanScreeningType getCreateScreeningType()
 	{
-		return (JDFSpanScreeningType) getCreateElement(ElementName.SCREENINGTYPE, null, 0);
+		return (JDFSpanScreeningType) getCreateElement_JDFElement(ElementName.SCREENINGTYPE, null, 0);
 	}
 
 	/**

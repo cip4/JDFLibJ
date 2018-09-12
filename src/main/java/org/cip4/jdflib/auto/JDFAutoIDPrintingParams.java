@@ -511,7 +511,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 */
 	public JDFCover getCreateCover(int iSkip)
 	{
-		return (JDFCover) getCreateElement(ElementName.COVER, null, iSkip);
+		return (JDFCover) getCreateElement_JDFElement(ElementName.COVER, null, iSkip);
 	}
 
 	/**
@@ -562,7 +562,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 */
 	public JDFIDPFinishing getCreateIDPFinishing()
 	{
-		return (JDFIDPFinishing) getCreateElement(ElementName.IDPFINISHING, null, 0);
+		return (JDFIDPFinishing) getCreateElement_JDFElement(ElementName.IDPFINISHING, null, 0);
 	}
 
 	/**
@@ -593,7 +593,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 */
 	public JDFIDPLayout getCreateIDPLayout()
 	{
-		return (JDFIDPLayout) getCreateElement(ElementName.IDPLAYOUT, null, 0);
+		return (JDFIDPLayout) getCreateElement_JDFElement(ElementName.IDPLAYOUT, null, 0);
 	}
 
 	/**
@@ -615,7 +615,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 */
 	public JDFJobSheet getCreateJobSheet(int iSkip)
 	{
-		return (JDFJobSheet) getCreateElement(ElementName.JOBSHEET, null, iSkip);
+		return (JDFJobSheet) getCreateElement_JDFElement(ElementName.JOBSHEET, null, iSkip);
 	}
 
 	/**
@@ -666,7 +666,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 */
 	public JDFMediaIntent getCreateMediaIntent()
 	{
-		return (JDFMediaIntent) getCreateElement(ElementName.MEDIAINTENT, null, 0);
+		return (JDFMediaIntent) getCreateElement_JDFElement(ElementName.MEDIAINTENT, null, 0);
 	}
 
 	/**
@@ -707,7 +707,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 */
 	public JDFMediaSource getCreateMediaSource()
 	{
-		return (JDFMediaSource) getCreateElement(ElementName.MEDIASOURCE, null, 0);
+		return (JDFMediaSource) getCreateElement_JDFElement(ElementName.MEDIASOURCE, null, 0);
 	}
 
 	/**

@@ -175,7 +175,7 @@ public abstract class JDFAutoPageCondition extends JDFElement
 	 */
 	public JDFRunList getCreateRunList(int iSkip)
 	{
-		return (JDFRunList) getCreateElement(ElementName.RUNLIST, null, iSkip);
+		return (JDFRunList) getCreateElement_JDFElement(ElementName.RUNLIST, null, iSkip);
 	}
 
 	/**
@@ -227,7 +227,7 @@ public abstract class JDFAutoPageCondition extends JDFElement
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
 
 	/**

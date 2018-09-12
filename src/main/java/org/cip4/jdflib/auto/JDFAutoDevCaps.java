@@ -576,7 +576,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 */
 	public JDFDevCap getCreateDevCap(int iSkip)
 	{
-		return (JDFDevCap) getCreateElement(ElementName.DEVCAP, null, iSkip);
+		return (JDFDevCap) getCreateElement_JDFElement(ElementName.DEVCAP, null, iSkip);
 	}
 
 	/**
@@ -618,7 +618,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 */
 	public JDFLoc getCreateLoc(int iSkip)
 	{
-		return (JDFLoc) getCreateElement(ElementName.LOC, null, iSkip);
+		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, iSkip);
 	}
 
 	/**

@@ -272,7 +272,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 */
 	public JDFIntegerSpan getCreateAmount()
 	{
-		return (JDFIntegerSpan) getCreateElement(ElementName.AMOUNT, null, 0);
+		return (JDFIntegerSpan) getCreateElement_JDFElement(ElementName.AMOUNT, null, 0);
 	}
 
 	/**
@@ -303,7 +303,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 */
 	public JDFStringSpan getCreateBrandName()
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.BRANDNAME, null, 0);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.BRANDNAME, null, 0);
 	}
 
 	/**
@@ -334,7 +334,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 */
 	public JDFSpanColorType getCreateColorType()
 	{
-		return (JDFSpanColorType) getCreateElement(ElementName.COLORTYPE, null, 0);
+		return (JDFSpanColorType) getCreateElement_JDFElement(ElementName.COLORTYPE, null, 0);
 	}
 
 	/**
@@ -365,7 +365,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 */
 	public JDFOptionSpan getCreateHalfTone()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.HALFTONE, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.HALFTONE, null, 0);
 	}
 
 	/**
@@ -396,7 +396,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 */
 	public JDFSpanImageStrategy getCreateImageStrategy()
 	{
-		return (JDFSpanImageStrategy) getCreateElement(ElementName.IMAGESTRATEGY, null, 0);
+		return (JDFSpanImageStrategy) getCreateElement_JDFElement(ElementName.IMAGESTRATEGY, null, 0);
 	}
 
 	/**
@@ -427,7 +427,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 */
 	public JDFNameSpan getCreateTechnology()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.TECHNOLOGY, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.TECHNOLOGY, null, 0);
 	}
 
 	/**
@@ -458,7 +458,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 */
 	public JDFSpanProofType getCreateProofType()
 	{
-		return (JDFSpanProofType) getCreateElement(ElementName.PROOFTYPE, null, 0);
+		return (JDFSpanProofType) getCreateElement_JDFElement(ElementName.PROOFTYPE, null, 0);
 	}
 
 	/**
@@ -480,7 +480,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 */
 	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
 	{
-		return (JDFSeparationSpec) getCreateElement(ElementName.SEPARATIONSPEC, null, iSkip);
+		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
 
 	/**
@@ -531,7 +531,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 */
 	public JDFApprovalParams getCreateApprovalParams()
 	{
-		return (JDFApprovalParams) getCreateElement(ElementName.APPROVALPARAMS, null, 0);
+		return (JDFApprovalParams) getCreateElement_JDFElement(ElementName.APPROVALPARAMS, null, 0);
 	}
 
 	/**

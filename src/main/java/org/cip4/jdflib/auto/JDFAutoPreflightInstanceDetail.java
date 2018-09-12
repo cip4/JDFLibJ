@@ -171,7 +171,7 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 	 */
 	public JDFElement getCreateValue(int iSkip)
 	{
-		return (JDFElement) getCreateElement(ElementName.VALUE, null, iSkip);
+		return (JDFElement) getCreateElement_JDFElement(ElementName.VALUE, null, iSkip);
 	}
 
 	/**

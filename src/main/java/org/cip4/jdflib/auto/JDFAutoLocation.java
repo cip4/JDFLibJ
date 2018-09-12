@@ -195,7 +195,7 @@ public abstract class JDFAutoLocation extends JDFElement
 	 */
 	public JDFAddress getCreateAddress(int iSkip)
 	{
-		return (JDFAddress) getCreateElement(ElementName.ADDRESS, null, iSkip);
+		return (JDFAddress) getCreateElement_JDFElement(ElementName.ADDRESS, null, iSkip);
 	}
 
 	/**

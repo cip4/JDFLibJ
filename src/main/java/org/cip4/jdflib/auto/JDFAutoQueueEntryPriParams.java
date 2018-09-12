@@ -203,7 +203,7 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 	 */
 	public JDFQueueFilter getCreateQueueFilter()
 	{
-		return (JDFQueueFilter) getCreateElement(ElementName.QUEUEFILTER, null, 0);
+		return (JDFQueueFilter) getCreateElement_JDFElement(ElementName.QUEUEFILTER, null, 0);
 	}
 
 	/**

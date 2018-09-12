@@ -128,7 +128,7 @@ public abstract class JDFAutoEmbossingIntent extends JDFIntentResource
 	 */
 	public JDFEmbossingItem getCreateEmbossingItem(int iSkip)
 	{
-		return (JDFEmbossingItem) getCreateElement(ElementName.EMBOSSINGITEM, null, iSkip);
+		return (JDFEmbossingItem) getCreateElement_JDFElement(ElementName.EMBOSSINGITEM, null, iSkip);
 	}
 
 	/**

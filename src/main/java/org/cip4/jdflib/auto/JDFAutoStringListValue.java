@@ -171,7 +171,7 @@ public abstract class JDFAutoStringListValue extends JDFElement
 	 */
 	public JDFValue getCreateValue(int iSkip)
 	{
-		return (JDFValue) getCreateElement(ElementName.VALUE, null, iSkip);
+		return (JDFValue) getCreateElement_JDFElement(ElementName.VALUE, null, iSkip);
 	}
 
 	/**

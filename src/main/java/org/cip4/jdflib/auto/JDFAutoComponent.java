@@ -946,7 +946,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 */
 	public JDFAssembly getCreateAssembly()
 	{
-		return (JDFAssembly) getCreateElement(ElementName.ASSEMBLY, null, 0);
+		return (JDFAssembly) getCreateElement_JDFElement(ElementName.ASSEMBLY, null, 0);
 	}
 
 	/**
@@ -987,7 +987,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 */
 	public JDFBundle getCreateBundle()
 	{
-		return (JDFBundle) getCreateElement(ElementName.BUNDLE, null, 0);
+		return (JDFBundle) getCreateElement_JDFElement(ElementName.BUNDLE, null, 0);
 	}
 
 	/**
@@ -1028,7 +1028,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 */
 	public JDFDisjointing getCreateDisjointing()
 	{
-		return (JDFDisjointing) getCreateElement(ElementName.DISJOINTING, null, 0);
+		return (JDFDisjointing) getCreateElement_JDFElement(ElementName.DISJOINTING, null, 0);
 	}
 
 	/**
@@ -1059,7 +1059,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 */
 	public JDFSheet getCreateSheet()
 	{
-		return (JDFSheet) getCreateElement(ElementName.SHEET, null, 0);
+		return (JDFSheet) getCreateElement_JDFElement(ElementName.SHEET, null, 0);
 	}
 
 	/**
@@ -1100,7 +1100,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 */
 	public JDFLayout getCreateLayout()
 	{
-		return (JDFLayout) getCreateElement(ElementName.LAYOUT, null, 0);
+		return (JDFLayout) getCreateElement_JDFElement(ElementName.LAYOUT, null, 0);
 	}
 
 	/**
@@ -1141,7 +1141,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 */
 	public JDFMedia getCreateMedia()
 	{
-		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, 0);
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**
@@ -1182,7 +1182,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 */
 	public JDFPageList getCreatePageList()
 	{
-		return (JDFPageList) getCreateElement(ElementName.PAGELIST, null, 0);
+		return (JDFPageList) getCreateElement_JDFElement(ElementName.PAGELIST, null, 0);
 	}
 
 	/**
@@ -1214,7 +1214,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 */
 	public JDFContact getCreateContact(int iSkip)
 	{
-		return (JDFContact) getCreateElement(ElementName.CONTACT, null, iSkip);
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**
@@ -1268,7 +1268,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	@Override
 	public JDFIdentificationField getCreateIdentificationField(int iSkip)
 	{
-		return (JDFIdentificationField) getCreateElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+		return (JDFIdentificationField) getCreateElement_JDFElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
 
 	/**

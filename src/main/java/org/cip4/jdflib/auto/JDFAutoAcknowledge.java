@@ -304,7 +304,7 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	 */
 	public JDFNotification getCreateNotification()
 	{
-		return (JDFNotification) getCreateElement(ElementName.NOTIFICATION, null, 0);
+		return (JDFNotification) getCreateElement_JDFElement(ElementName.NOTIFICATION, null, 0);
 	}
 
 	/**
@@ -326,7 +326,7 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	 */
 	public JDFEmployee getCreateEmployee(int iSkip)
 	{
-		return (JDFEmployee) getCreateElement(ElementName.EMPLOYEE, null, iSkip);
+		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
 
 	/**

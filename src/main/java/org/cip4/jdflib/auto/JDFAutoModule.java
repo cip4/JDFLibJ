@@ -435,7 +435,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 */
 	public JDFModule getCreateModule(int iSkip)
 	{
-		return (JDFModule) getCreateElement(ElementName.MODULE, null, iSkip);
+		return (JDFModule) getCreateElement_JDFElement(ElementName.MODULE, null, iSkip);
 	}
 
 	/**

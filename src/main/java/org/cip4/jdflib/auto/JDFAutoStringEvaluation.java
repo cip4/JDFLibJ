@@ -211,7 +211,7 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 	 */
 	public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
 	{
-		return (JDFBasicPreflightTest) getCreateElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
+		return (JDFBasicPreflightTest) getCreateElement_JDFElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
 	}
 
 	/**
@@ -253,7 +253,7 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 	 */
 	public JDFValue getCreateValue(int iSkip)
 	{
-		return (JDFValue) getCreateElement(ElementName.VALUE, null, iSkip);
+		return (JDFValue) getCreateElement_JDFElement(ElementName.VALUE, null, iSkip);
 	}
 
 	/**

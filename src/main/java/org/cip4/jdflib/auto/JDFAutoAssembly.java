@@ -554,7 +554,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 */
 	public JDFAssemblySection getCreateAssemblySection(int iSkip)
 	{
-		return (JDFAssemblySection) getCreateElement(ElementName.ASSEMBLYSECTION, null, iSkip);
+		return (JDFAssemblySection) getCreateElement_JDFElement(ElementName.ASSEMBLYSECTION, null, iSkip);
 	}
 
 	/**
@@ -605,7 +605,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 */
 	public JDFPageList getCreatePageList()
 	{
-		return (JDFPageList) getCreateElement(ElementName.PAGELIST, null, 0);
+		return (JDFPageList) getCreateElement_JDFElement(ElementName.PAGELIST, null, 0);
 	}
 
 	/**
@@ -637,7 +637,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 */
 	public JDFPageAssignedList getCreatePageAssignedList(int iSkip)
 	{
-		return (JDFPageAssignedList) getCreateElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
+		return (JDFPageAssignedList) getCreateElement_JDFElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
 	}
 
 	/**

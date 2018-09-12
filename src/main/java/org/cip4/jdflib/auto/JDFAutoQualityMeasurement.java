@@ -265,7 +265,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	 */
 	public JDFBindingQualityMeasurement getCreateBindingQualityMeasurement()
 	{
-		return (JDFBindingQualityMeasurement) getCreateElement(ElementName.BINDINGQUALITYMEASUREMENT, null, 0);
+		return (JDFBindingQualityMeasurement) getCreateElement_JDFElement(ElementName.BINDINGQUALITYMEASUREMENT, null, 0);
 	}
 
 	/**

@@ -286,7 +286,7 @@ public abstract class JDFAutoError extends JDFElement
 	 */
 	public JDFErrorData getCreateErrorData(int iSkip)
 	{
-		return (JDFErrorData) getCreateElement(ElementName.ERRORDATA, null, iSkip);
+		return (JDFErrorData) getCreateElement_JDFElement(ElementName.ERRORDATA, null, iSkip);
 	}
 
 	/**

@@ -193,7 +193,7 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 	 */
 	public JDFPRRule getCreatePRRule(int iSkip)
 	{
-		return (JDFPRRule) getCreateElement(ElementName.PRRULE, null, iSkip);
+		return (JDFPRRule) getCreateElement_JDFElement(ElementName.PRRULE, null, iSkip);
 	}
 
 	/**
@@ -244,7 +244,7 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 	 */
 	public JDFPRRuleAttr getCreatePRRuleAttr()
 	{
-		return (JDFPRRuleAttr) getCreateElement(ElementName.PRRULEATTR, null, 0);
+		return (JDFPRRuleAttr) getCreateElement_JDFElement(ElementName.PRRULEATTR, null, 0);
 	}
 
 	/**

@@ -128,7 +128,7 @@ public abstract class JDFAutoSheetCondition extends JDFElement
 	 */
 	public JDFRunList getCreateRunList(int iSkip)
 	{
-		return (JDFRunList) getCreateElement(ElementName.RUNLIST, null, iSkip);
+		return (JDFRunList) getCreateElement_JDFElement(ElementName.RUNLIST, null, iSkip);
 	}
 
 	/**

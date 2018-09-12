@@ -707,7 +707,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 */
 	public JDFMedia getCreateMedia(int iSkip)
 	{
-		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, iSkip);
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, iSkip);
 	}
 
 	/**
@@ -759,7 +759,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 */
 	public JDFRunList getCreateRunList(int iSkip)
 	{
-		return (JDFRunList) getCreateElement(ElementName.RUNLIST, null, iSkip);
+		return (JDFRunList) getCreateElement_JDFElement(ElementName.RUNLIST, null, iSkip);
 	}
 
 	/**
@@ -820,7 +820,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 */
 	public JDFSeparationList getCreateSeparationListBack()
 	{
-		return (JDFSeparationList) getCreateElement(ElementName.SEPARATIONLISTBACK, null, 0);
+		return (JDFSeparationList) getCreateElement_JDFElement(ElementName.SEPARATIONLISTBACK, null, 0);
 	}
 
 	/**
@@ -851,7 +851,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 */
 	public JDFSeparationList getCreateSeparationListFront()
 	{
-		return (JDFSeparationList) getCreateElement(ElementName.SEPARATIONLISTFRONT, null, 0);
+		return (JDFSeparationList) getCreateElement_JDFElement(ElementName.SEPARATIONLISTFRONT, null, 0);
 	}
 
 	/**
@@ -882,7 +882,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 */
 	public JDFStrippingParams getCreateStrippingParams()
 	{
-		return (JDFStrippingParams) getCreateElement(ElementName.STRIPPINGPARAMS, null, 0);
+		return (JDFStrippingParams) getCreateElement_JDFElement(ElementName.STRIPPINGPARAMS, null, 0);
 	}
 
 	/**

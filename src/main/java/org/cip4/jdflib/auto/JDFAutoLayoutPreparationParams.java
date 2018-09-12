@@ -1126,7 +1126,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFImageShift getCreateImageShift()
 	{
-		return (JDFImageShift) getCreateElement(ElementName.IMAGESHIFT, null, 0);
+		return (JDFImageShift) getCreateElement_JDFElement(ElementName.IMAGESHIFT, null, 0);
 	}
 
 	/**
@@ -1148,7 +1148,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFInsertSheet getCreateInsertSheet(int iSkip)
 	{
-		return (JDFInsertSheet) getCreateElement(ElementName.INSERTSHEET, null, iSkip);
+		return (JDFInsertSheet) getCreateElement_JDFElement(ElementName.INSERTSHEET, null, iSkip);
 	}
 
 	/**
@@ -1209,7 +1209,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFDeviceMark getCreateDeviceMark()
 	{
-		return (JDFDeviceMark) getCreateElement(ElementName.DEVICEMARK, null, 0);
+		return (JDFDeviceMark) getCreateElement_JDFElement(ElementName.DEVICEMARK, null, 0);
 	}
 
 	/**
@@ -1250,7 +1250,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFExternalImpositionTemplate getCreateExternalImpositionTemplate()
 	{
-		return (JDFExternalImpositionTemplate) getCreateElement(ElementName.EXTERNALIMPOSITIONTEMPLATE, null, 0);
+		return (JDFExternalImpositionTemplate) getCreateElement_JDFElement(ElementName.EXTERNALIMPOSITIONTEMPLATE, null, 0);
 	}
 
 	/**
@@ -1291,7 +1291,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFFitPolicy getCreateFitPolicy()
 	{
-		return (JDFFitPolicy) getCreateElement(ElementName.FITPOLICY, null, 0);
+		return (JDFFitPolicy) getCreateElement_JDFElement(ElementName.FITPOLICY, null, 0);
 	}
 
 	/**
@@ -1323,7 +1323,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFJobField getCreateJobField(int iSkip)
 	{
-		return (JDFJobField) getCreateElement(ElementName.JOBFIELD, null, iSkip);
+		return (JDFJobField) getCreateElement_JDFElement(ElementName.JOBFIELD, null, iSkip);
 	}
 
 	/**
@@ -1384,7 +1384,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFMedia getCreateMedia()
 	{
-		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, 0);
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**
@@ -1425,7 +1425,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFPageCell getCreatePageCell()
 	{
-		return (JDFPageCell) getCreateElement(ElementName.PAGECELL, null, 0);
+		return (JDFPageCell) getCreateElement_JDFElement(ElementName.PAGECELL, null, 0);
 	}
 
 	/**

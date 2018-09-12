@@ -128,7 +128,7 @@ public abstract class JDFAutoAmountPool extends JDFPool
 	 */
 	public JDFPartAmount getCreatePartAmount(int iSkip)
 	{
-		return (JDFPartAmount) getCreateElement(ElementName.PARTAMOUNT, null, iSkip);
+		return (JDFPartAmount) getCreateElement_JDFElement(ElementName.PARTAMOUNT, null, iSkip);
 	}
 
 	/**

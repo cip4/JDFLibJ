@@ -582,7 +582,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 */
 	public JDFColorPool getCreateColorPool()
 	{
-		return (JDFColorPool) getCreateElement(ElementName.COLORPOOL, null, 0);
+		return (JDFColorPool) getCreateElement_JDFElement(ElementName.COLORPOOL, null, 0);
 	}
 
 	/**
@@ -623,7 +623,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 */
 	public JDFSeparationList getCreateCutLines()
 	{
-		return (JDFSeparationList) getCreateElement(ElementName.CUTLINES, null, 0);
+		return (JDFSeparationList) getCreateElement_JDFElement(ElementName.CUTLINES, null, 0);
 	}
 
 	/**
@@ -654,7 +654,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec()
 	{
-		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**
@@ -695,7 +695,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 */
 	public JDFMedia getCreateMedia()
 	{
-		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, 0);
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**
@@ -736,7 +736,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 */
 	public JDFShapeElement getCreateShape()
 	{
-		return (JDFShapeElement) getCreateElement(ElementName.SHAPE, null, 0);
+		return (JDFShapeElement) getCreateElement_JDFElement(ElementName.SHAPE, null, 0);
 	}
 
 	/**

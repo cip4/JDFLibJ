@@ -301,7 +301,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFSpanNamedColor getCreateBackCoverColor()
 	{
-		return (JDFSpanNamedColor) getCreateElement(ElementName.BACKCOVERCOLOR, null, 0);
+		return (JDFSpanNamedColor) getCreateElement_JDFElement(ElementName.BACKCOVERCOLOR, null, 0);
 	}
 
 	/**
@@ -323,7 +323,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFStringSpan getCreateBackCoverColorDetails(int iSkip)
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.BACKCOVERCOLORDETAILS, null, iSkip);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.BACKCOVERCOLORDETAILS, null, iSkip);
 	}
 
 	/**
@@ -374,7 +374,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFSpanBindingType getCreateBindingType()
 	{
-		return (JDFSpanBindingType) getCreateElement(ElementName.BINDINGTYPE, null, 0);
+		return (JDFSpanBindingType) getCreateElement_JDFElement(ElementName.BINDINGTYPE, null, 0);
 	}
 
 	/**
@@ -405,7 +405,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFSpanNamedColor getCreateBindingColor()
 	{
-		return (JDFSpanNamedColor) getCreateElement(ElementName.BINDINGCOLOR, null, 0);
+		return (JDFSpanNamedColor) getCreateElement_JDFElement(ElementName.BINDINGCOLOR, null, 0);
 	}
 
 	/**
@@ -427,7 +427,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFStringSpan getCreateBindingColorDetails(int iSkip)
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.BINDINGCOLORDETAILS, null, iSkip);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.BINDINGCOLORDETAILS, null, iSkip);
 	}
 
 	/**
@@ -478,7 +478,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFSpanBindingLength getCreateBindingLength()
 	{
-		return (JDFSpanBindingLength) getCreateElement(ElementName.BINDINGLENGTH, null, 0);
+		return (JDFSpanBindingLength) getCreateElement_JDFElement(ElementName.BINDINGLENGTH, null, 0);
 	}
 
 	/**
@@ -509,7 +509,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFSpanBindingSide getCreateBindingSide()
 	{
-		return (JDFSpanBindingSide) getCreateElement(ElementName.BINDINGSIDE, null, 0);
+		return (JDFSpanBindingSide) getCreateElement_JDFElement(ElementName.BINDINGSIDE, null, 0);
 	}
 
 	/**
@@ -540,7 +540,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFSpanNamedColor getCreateCoverColor()
 	{
-		return (JDFSpanNamedColor) getCreateElement(ElementName.COVERCOLOR, null, 0);
+		return (JDFSpanNamedColor) getCreateElement_JDFElement(ElementName.COVERCOLOR, null, 0);
 	}
 
 	/**
@@ -562,7 +562,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFStringSpan getCreateCoverColorDetails(int iSkip)
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.COVERCOLORDETAILS, null, iSkip);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.COVERCOLORDETAILS, null, iSkip);
 	}
 
 	/**
@@ -613,7 +613,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFAdhesiveBinding getCreateAdhesiveBinding()
 	{
-		return (JDFAdhesiveBinding) getCreateElement(ElementName.ADHESIVEBINDING, null, 0);
+		return (JDFAdhesiveBinding) getCreateElement_JDFElement(ElementName.ADHESIVEBINDING, null, 0);
 	}
 
 	/**
@@ -644,7 +644,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFBindList getCreateBindList()
 	{
-		return (JDFBindList) getCreateElement(ElementName.BINDLIST, null, 0);
+		return (JDFBindList) getCreateElement_JDFElement(ElementName.BINDLIST, null, 0);
 	}
 
 	/**
@@ -675,7 +675,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFBookCase getCreateBookCase()
 	{
-		return (JDFBookCase) getCreateElement(ElementName.BOOKCASE, null, 0);
+		return (JDFBookCase) getCreateElement_JDFElement(ElementName.BOOKCASE, null, 0);
 	}
 
 	/**
@@ -706,7 +706,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFChannelBinding getCreateChannelBinding()
 	{
-		return (JDFChannelBinding) getCreateElement(ElementName.CHANNELBINDING, null, 0);
+		return (JDFChannelBinding) getCreateElement_JDFElement(ElementName.CHANNELBINDING, null, 0);
 	}
 
 	/**
@@ -737,7 +737,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFCoilBinding getCreateCoilBinding()
 	{
-		return (JDFCoilBinding) getCreateElement(ElementName.COILBINDING, null, 0);
+		return (JDFCoilBinding) getCreateElement_JDFElement(ElementName.COILBINDING, null, 0);
 	}
 
 	/**
@@ -768,7 +768,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFEdgeGluing getCreateEdgeGluing()
 	{
-		return (JDFEdgeGluing) getCreateElement(ElementName.EDGEGLUING, null, 0);
+		return (JDFEdgeGluing) getCreateElement_JDFElement(ElementName.EDGEGLUING, null, 0);
 	}
 
 	/**
@@ -799,7 +799,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFHardCoverBinding getCreateHardCoverBinding()
 	{
-		return (JDFHardCoverBinding) getCreateElement(ElementName.HARDCOVERBINDING, null, 0);
+		return (JDFHardCoverBinding) getCreateElement_JDFElement(ElementName.HARDCOVERBINDING, null, 0);
 	}
 
 	/**
@@ -830,7 +830,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFPlasticCombBinding getCreatePlasticCombBinding()
 	{
-		return (JDFPlasticCombBinding) getCreateElement(ElementName.PLASTICCOMBBINDING, null, 0);
+		return (JDFPlasticCombBinding) getCreateElement_JDFElement(ElementName.PLASTICCOMBBINDING, null, 0);
 	}
 
 	/**
@@ -861,7 +861,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFRingBinding getCreateRingBinding()
 	{
-		return (JDFRingBinding) getCreateElement(ElementName.RINGBINDING, null, 0);
+		return (JDFRingBinding) getCreateElement_JDFElement(ElementName.RINGBINDING, null, 0);
 	}
 
 	/**
@@ -892,7 +892,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFSaddleStitching getCreateSaddleStitching()
 	{
-		return (JDFSaddleStitching) getCreateElement(ElementName.SADDLESTITCHING, null, 0);
+		return (JDFSaddleStitching) getCreateElement_JDFElement(ElementName.SADDLESTITCHING, null, 0);
 	}
 
 	/**
@@ -923,7 +923,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFSideSewing getCreateSideSewing()
 	{
-		return (JDFSideSewing) getCreateElement(ElementName.SIDESEWING, null, 0);
+		return (JDFSideSewing) getCreateElement_JDFElement(ElementName.SIDESEWING, null, 0);
 	}
 
 	/**
@@ -954,7 +954,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFSideStitching getCreateSideStitching()
 	{
-		return (JDFSideStitching) getCreateElement(ElementName.SIDESTITCHING, null, 0);
+		return (JDFSideStitching) getCreateElement_JDFElement(ElementName.SIDESTITCHING, null, 0);
 	}
 
 	/**
@@ -985,7 +985,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFSoftCoverBinding getCreateSoftCoverBinding()
 	{
-		return (JDFSoftCoverBinding) getCreateElement(ElementName.SOFTCOVERBINDING, null, 0);
+		return (JDFSoftCoverBinding) getCreateElement_JDFElement(ElementName.SOFTCOVERBINDING, null, 0);
 	}
 
 	/**
@@ -1016,7 +1016,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFTape getCreateTape()
 	{
-		return (JDFTape) getCreateElement(ElementName.TAPE, null, 0);
+		return (JDFTape) getCreateElement_JDFElement(ElementName.TAPE, null, 0);
 	}
 
 	/**
@@ -1047,7 +1047,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFTabs getCreateTabs()
 	{
-		return (JDFTabs) getCreateElement(ElementName.TABS, null, 0);
+		return (JDFTabs) getCreateElement_JDFElement(ElementName.TABS, null, 0);
 	}
 
 	/**
@@ -1078,7 +1078,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFThreadSealing getCreateThreadSealing()
 	{
-		return (JDFThreadSealing) getCreateElement(ElementName.THREADSEALING, null, 0);
+		return (JDFThreadSealing) getCreateElement_JDFElement(ElementName.THREADSEALING, null, 0);
 	}
 
 	/**
@@ -1109,7 +1109,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFThreadSewing getCreateThreadSewing()
 	{
-		return (JDFThreadSewing) getCreateElement(ElementName.THREADSEWING, null, 0);
+		return (JDFThreadSewing) getCreateElement_JDFElement(ElementName.THREADSEWING, null, 0);
 	}
 
 	/**
@@ -1140,7 +1140,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFStripBinding getCreateStripBinding()
 	{
-		return (JDFStripBinding) getCreateElement(ElementName.STRIPBINDING, null, 0);
+		return (JDFStripBinding) getCreateElement_JDFElement(ElementName.STRIPBINDING, null, 0);
 	}
 
 	/**
@@ -1171,7 +1171,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 */
 	public JDFWireCombBinding getCreateWireCombBinding()
 	{
-		return (JDFWireCombBinding) getCreateElement(ElementName.WIRECOMBBINDING, null, 0);
+		return (JDFWireCombBinding) getCreateElement_JDFElement(ElementName.WIRECOMBBINDING, null, 0);
 	}
 
 	/**

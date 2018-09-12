@@ -443,7 +443,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 */
 	public JDFFileSpec getCreateFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, iSkip);
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**

@@ -363,7 +363,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 */
 	public JDFColor getCreateColor()
 	{
-		return (JDFColor) getCreateElement(ElementName.COLOR, null, 0);
+		return (JDFColor) getCreateElement_JDFElement(ElementName.COLOR, null, 0);
 	}
 
 	/**
@@ -404,7 +404,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 */
 	public JDFDeviceMark getCreateDeviceMark()
 	{
-		return (JDFDeviceMark) getCreateElement(ElementName.DEVICEMARK, null, 0);
+		return (JDFDeviceMark) getCreateElement_JDFElement(ElementName.DEVICEMARK, null, 0);
 	}
 
 	/**
@@ -445,7 +445,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 */
 	public JDFFitPolicy getCreateFitPolicy()
 	{
-		return (JDFFitPolicy) getCreateElement(ElementName.FITPOLICY, null, 0);
+		return (JDFFitPolicy) getCreateElement_JDFElement(ElementName.FITPOLICY, null, 0);
 	}
 
 	/**
@@ -486,7 +486,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 */
 	public JDFImageShift getCreateImageShift()
 	{
-		return (JDFImageShift) getCreateElement(ElementName.IMAGESHIFT, null, 0);
+		return (JDFImageShift) getCreateElement_JDFElement(ElementName.IMAGESHIFT, null, 0);
 	}
 
 	/**

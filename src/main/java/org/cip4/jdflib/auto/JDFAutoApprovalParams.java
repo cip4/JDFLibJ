@@ -190,7 +190,7 @@ public abstract class JDFAutoApprovalParams extends JDFResource
 	 */
 	public JDFApprovalPerson getCreateApprovalPerson(int iSkip)
 	{
-		return (JDFApprovalPerson) getCreateElement(ElementName.APPROVALPERSON, null, iSkip);
+		return (JDFApprovalPerson) getCreateElement_JDFElement(ElementName.APPROVALPERSON, null, iSkip);
 	}
 
 	/**

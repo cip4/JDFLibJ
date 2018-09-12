@@ -445,7 +445,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 */
 	public JDFComponent getCreateComponent()
 	{
-		return (JDFComponent) getCreateElement(ElementName.COMPONENT, null, 0);
+		return (JDFComponent) getCreateElement_JDFElement(ElementName.COMPONENT, null, 0);
 	}
 
 	/**
@@ -486,7 +486,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 */
 	public JDFFeederQualityParams getCreateFeederQualityParams()
 	{
-		return (JDFFeederQualityParams) getCreateElement(ElementName.FEEDERQUALITYPARAMS, null, 0);
+		return (JDFFeederQualityParams) getCreateElement_JDFElement(ElementName.FEEDERQUALITYPARAMS, null, 0);
 	}
 
 	/**
@@ -517,7 +517,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 */
 	public JDFMedia getCreateMedia()
 	{
-		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, 0);
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**

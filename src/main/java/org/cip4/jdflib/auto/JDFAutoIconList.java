@@ -128,7 +128,7 @@ public abstract class JDFAutoIconList extends JDFElement
 	 */
 	public JDFIcon getCreateIcon(int iSkip)
 	{
-		return (JDFIcon) getCreateElement(ElementName.ICON, null, iSkip);
+		return (JDFIcon) getCreateElement_JDFElement(ElementName.ICON, null, iSkip);
 	}
 
 	/**

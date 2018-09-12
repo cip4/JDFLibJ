@@ -840,7 +840,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 */
 	public JDFColorMeasurementConditions getCreateColorMeasurementConditions()
 	{
-		return (JDFColorMeasurementConditions) getCreateElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
+		return (JDFColorMeasurementConditions) getCreateElement_JDFElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
 	}
 
 	/**
@@ -872,7 +872,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, iSkip);
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**
@@ -924,7 +924,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 */
 	public JDFDeviceNColor getCreateDeviceNColor(int iSkip)
 	{
-		return (JDFDeviceNColor) getCreateElement(ElementName.DEVICENCOLOR, null, iSkip);
+		return (JDFDeviceNColor) getCreateElement_JDFElement(ElementName.DEVICENCOLOR, null, iSkip);
 	}
 
 	/**
@@ -966,7 +966,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 */
 	public JDFPrintConditionColor getCreatePrintConditionColor(int iSkip)
 	{
-		return (JDFPrintConditionColor) getCreateElement(ElementName.PRINTCONDITIONCOLOR, null, iSkip);
+		return (JDFPrintConditionColor) getCreateElement_JDFElement(ElementName.PRINTCONDITIONCOLOR, null, iSkip);
 	}
 
 	/**
@@ -1008,7 +1008,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 */
 	public JDFTransferCurve getCreateTransferCurve(int iSkip)
 	{
-		return (JDFTransferCurve) getCreateElement(ElementName.TRANSFERCURVE, null, iSkip);
+		return (JDFTransferCurve) getCreateElement_JDFElement(ElementName.TRANSFERCURVE, null, iSkip);
 	}
 
 	/**

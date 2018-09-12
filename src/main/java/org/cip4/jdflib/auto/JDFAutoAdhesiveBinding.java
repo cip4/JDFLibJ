@@ -140,7 +140,7 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
 	 */
 	public JDFSpanScoring getCreateScoring()
 	{
-		return (JDFSpanScoring) getCreateElement(ElementName.SCORING, null, 0);
+		return (JDFSpanScoring) getCreateElement_JDFElement(ElementName.SCORING, null, 0);
 	}
 
 	/**
@@ -171,7 +171,7 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
 	 */
 	public JDFSpanGlue getCreateSpineGlue()
 	{
-		return (JDFSpanGlue) getCreateElement(ElementName.SPINEGLUE, null, 0);
+		return (JDFSpanGlue) getCreateElement_JDFElement(ElementName.SPINEGLUE, null, 0);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
 	 */
 	public JDFOptionSpan getCreateTapeBinding()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.TAPEBINDING, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.TAPEBINDING, null, 0);
 	}
 
 	/**

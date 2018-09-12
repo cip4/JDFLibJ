@@ -306,7 +306,7 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 	 */
 	public JDFContact getCreateContact(int iSkip)
 	{
-		return (JDFContact) getCreateElement(ElementName.CONTACT, null, iSkip);
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**

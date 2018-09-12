@@ -1009,7 +1009,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	 */
 	public JDFContainer getCreateContainer()
 	{
-		return (JDFContainer) getCreateElement(ElementName.CONTAINER, null, 0);
+		return (JDFContainer) getCreateElement_JDFElement(ElementName.CONTAINER, null, 0);
 	}
 
 	/**
@@ -1063,7 +1063,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	 */
 	public JDFDisposition getCreateDisposition()
 	{
-		return (JDFDisposition) getCreateElement(ElementName.DISPOSITION, null, 0);
+		return (JDFDisposition) getCreateElement_JDFElement(ElementName.DISPOSITION, null, 0);
 	}
 
 	/**
@@ -1085,7 +1085,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	 */
 	public JDFFileAlias getCreateFileAlias(int iSkip)
 	{
-		return (JDFFileAlias) getCreateElement(ElementName.FILEALIAS, null, iSkip);
+		return (JDFFileAlias) getCreateElement_JDFElement(ElementName.FILEALIAS, null, iSkip);
 	}
 
 	/**

@@ -1052,7 +1052,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 */
 	public JDFDieLayout getCreateDieLayout()
 	{
-		return (JDFDieLayout) getCreateElement(ElementName.DIELAYOUT, null, 0);
+		return (JDFDieLayout) getCreateElement_JDFElement(ElementName.DIELAYOUT, null, 0);
 	}
 
 	/**
@@ -1084,7 +1084,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 */
 	public JDFFold getCreateFold(int iSkip)
 	{
-		return (JDFFold) getCreateElement(ElementName.FOLD, null, iSkip);
+		return (JDFFold) getCreateElement_JDFElement(ElementName.FOLD, null, iSkip);
 	}
 
 	/**
@@ -1126,7 +1126,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 */
 	public JDFSignatureCell getCreateSignatureCell(int iSkip)
 	{
-		return (JDFSignatureCell) getCreateElement(ElementName.SIGNATURECELL, null, iSkip);
+		return (JDFSignatureCell) getCreateElement_JDFElement(ElementName.SIGNATURECELL, null, iSkip);
 	}
 
 	/**

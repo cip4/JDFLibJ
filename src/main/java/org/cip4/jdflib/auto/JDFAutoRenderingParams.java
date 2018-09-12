@@ -394,7 +394,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 */
 	public JDFAutomatedOverPrintParams getCreateAutomatedOverPrintParams()
 	{
-		return (JDFAutomatedOverPrintParams) getCreateElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
+		return (JDFAutomatedOverPrintParams) getCreateElement_JDFElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
 	}
 
 	/**
@@ -426,7 +426,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 */
 	public JDFObjectResolution getCreateObjectResolution(int iSkip)
 	{
-		return (JDFObjectResolution) getCreateElement(ElementName.OBJECTRESOLUTION, null, iSkip);
+		return (JDFObjectResolution) getCreateElement_JDFElement(ElementName.OBJECTRESOLUTION, null, iSkip);
 	}
 
 	/**
@@ -487,7 +487,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 */
 	public JDFMedia getCreateMedia()
 	{
-		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, 0);
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**
@@ -528,7 +528,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 */
 	public JDFTIFFFormatParams getCreateTIFFFormatParams()
 	{
-		return (JDFTIFFFormatParams) getCreateElement(ElementName.TIFFFORMATPARAMS, null, 0);
+		return (JDFTIFFFormatParams) getCreateElement_JDFElement(ElementName.TIFFFORMATPARAMS, null, 0);
 	}
 
 	/**

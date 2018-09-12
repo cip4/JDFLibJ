@@ -172,7 +172,7 @@ public abstract class JDFAutoStatusPool extends JDFPool
 	 */
 	public JDFPartStatus getCreatePartStatus(int iSkip)
 	{
-		return (JDFPartStatus) getCreateElement(ElementName.PARTSTATUS, null, iSkip);
+		return (JDFPartStatus) getCreateElement_JDFElement(ElementName.PARTSTATUS, null, iSkip);
 	}
 
 	/**

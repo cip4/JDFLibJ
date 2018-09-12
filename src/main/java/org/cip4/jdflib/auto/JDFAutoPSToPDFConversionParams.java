@@ -745,7 +745,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 */
 	public JDFAdvancedParams getCreateAdvancedParams()
 	{
-		return (JDFAdvancedParams) getCreateElement(ElementName.ADVANCEDPARAMS, null, 0);
+		return (JDFAdvancedParams) getCreateElement_JDFElement(ElementName.ADVANCEDPARAMS, null, 0);
 	}
 
 	/**
@@ -776,7 +776,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 */
 	public JDFPDFXParams getCreatePDFXParams()
 	{
-		return (JDFPDFXParams) getCreateElement(ElementName.PDFXPARAMS, null, 0);
+		return (JDFPDFXParams) getCreateElement_JDFElement(ElementName.PDFXPARAMS, null, 0);
 	}
 
 	/**
@@ -807,7 +807,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 */
 	public JDFThinPDFParams getCreateThinPDFParams()
 	{
-		return (JDFThinPDFParams) getCreateElement(ElementName.THINPDFPARAMS, null, 0);
+		return (JDFThinPDFParams) getCreateElement_JDFElement(ElementName.THINPDFPARAMS, null, 0);
 	}
 
 	/**

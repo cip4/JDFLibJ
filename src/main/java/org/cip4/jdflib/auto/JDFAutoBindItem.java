@@ -293,7 +293,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFSpanBindingType getCreateBindingType()
 	{
-		return (JDFSpanBindingType) getCreateElement(ElementName.BINDINGTYPE, null, 0);
+		return (JDFSpanBindingType) getCreateElement_JDFElement(ElementName.BINDINGTYPE, null, 0);
 	}
 
 	/**
@@ -324,7 +324,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFChannelBinding getCreateChannelBinding()
 	{
-		return (JDFChannelBinding) getCreateElement(ElementName.CHANNELBINDING, null, 0);
+		return (JDFChannelBinding) getCreateElement_JDFElement(ElementName.CHANNELBINDING, null, 0);
 	}
 
 	/**
@@ -355,7 +355,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFCoilBinding getCreateCoilBinding()
 	{
-		return (JDFCoilBinding) getCreateElement(ElementName.COILBINDING, null, 0);
+		return (JDFCoilBinding) getCreateElement_JDFElement(ElementName.COILBINDING, null, 0);
 	}
 
 	/**
@@ -386,7 +386,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFEdgeGluing getCreateEdgeGluing()
 	{
-		return (JDFEdgeGluing) getCreateElement(ElementName.EDGEGLUING, null, 0);
+		return (JDFEdgeGluing) getCreateElement_JDFElement(ElementName.EDGEGLUING, null, 0);
 	}
 
 	/**
@@ -417,7 +417,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFHardCoverBinding getCreateHardCoverBinding()
 	{
-		return (JDFHardCoverBinding) getCreateElement(ElementName.HARDCOVERBINDING, null, 0);
+		return (JDFHardCoverBinding) getCreateElement_JDFElement(ElementName.HARDCOVERBINDING, null, 0);
 	}
 
 	/**
@@ -448,7 +448,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFPlasticCombBinding getCreatePlasticCombBinding()
 	{
-		return (JDFPlasticCombBinding) getCreateElement(ElementName.PLASTICCOMBBINDING, null, 0);
+		return (JDFPlasticCombBinding) getCreateElement_JDFElement(ElementName.PLASTICCOMBBINDING, null, 0);
 	}
 
 	/**
@@ -479,7 +479,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFRingBinding getCreateRingBinding()
 	{
-		return (JDFRingBinding) getCreateElement(ElementName.RINGBINDING, null, 0);
+		return (JDFRingBinding) getCreateElement_JDFElement(ElementName.RINGBINDING, null, 0);
 	}
 
 	/**
@@ -510,7 +510,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFSaddleStitching getCreateSaddleStitching()
 	{
-		return (JDFSaddleStitching) getCreateElement(ElementName.SADDLESTITCHING, null, 0);
+		return (JDFSaddleStitching) getCreateElement_JDFElement(ElementName.SADDLESTITCHING, null, 0);
 	}
 
 	/**
@@ -541,7 +541,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFSideSewing getCreateSideSewing()
 	{
-		return (JDFSideSewing) getCreateElement(ElementName.SIDESEWING, null, 0);
+		return (JDFSideSewing) getCreateElement_JDFElement(ElementName.SIDESEWING, null, 0);
 	}
 
 	/**
@@ -572,7 +572,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFSideStitching getCreateSideStitching()
 	{
-		return (JDFSideStitching) getCreateElement(ElementName.SIDESTITCHING, null, 0);
+		return (JDFSideStitching) getCreateElement_JDFElement(ElementName.SIDESTITCHING, null, 0);
 	}
 
 	/**
@@ -603,7 +603,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFSoftCoverBinding getCreateSoftCoverBinding()
 	{
-		return (JDFSoftCoverBinding) getCreateElement(ElementName.SOFTCOVERBINDING, null, 0);
+		return (JDFSoftCoverBinding) getCreateElement_JDFElement(ElementName.SOFTCOVERBINDING, null, 0);
 	}
 
 	/**
@@ -634,7 +634,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFTape getCreateTape()
 	{
-		return (JDFTape) getCreateElement(ElementName.TAPE, null, 0);
+		return (JDFTape) getCreateElement_JDFElement(ElementName.TAPE, null, 0);
 	}
 
 	/**
@@ -665,7 +665,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFTabs getCreateTabs()
 	{
-		return (JDFTabs) getCreateElement(ElementName.TABS, null, 0);
+		return (JDFTabs) getCreateElement_JDFElement(ElementName.TABS, null, 0);
 	}
 
 	/**
@@ -696,7 +696,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFThreadSealing getCreateThreadSealing()
 	{
-		return (JDFThreadSealing) getCreateElement(ElementName.THREADSEALING, null, 0);
+		return (JDFThreadSealing) getCreateElement_JDFElement(ElementName.THREADSEALING, null, 0);
 	}
 
 	/**
@@ -727,7 +727,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFThreadSewing getCreateThreadSewing()
 	{
-		return (JDFThreadSewing) getCreateElement(ElementName.THREADSEWING, null, 0);
+		return (JDFThreadSewing) getCreateElement_JDFElement(ElementName.THREADSEWING, null, 0);
 	}
 
 	/**
@@ -758,7 +758,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFStripBinding getCreateStripBinding()
 	{
-		return (JDFStripBinding) getCreateElement(ElementName.STRIPBINDING, null, 0);
+		return (JDFStripBinding) getCreateElement_JDFElement(ElementName.STRIPBINDING, null, 0);
 	}
 
 	/**
@@ -789,7 +789,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFWireCombBinding getCreateWireCombBinding()
 	{
-		return (JDFWireCombBinding) getCreateElement(ElementName.WIRECOMBBINDING, null, 0);
+		return (JDFWireCombBinding) getCreateElement_JDFElement(ElementName.WIRECOMBBINDING, null, 0);
 	}
 
 	/**

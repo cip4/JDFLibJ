@@ -373,7 +373,7 @@ public abstract class JDFAutoDevCap extends JDFElement
 	 */
 	public JDFLoc getCreateLoc(int iSkip)
 	{
-		return (JDFLoc) getCreateElement(ElementName.LOC, null, iSkip);
+		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, iSkip);
 	}
 
 	/**

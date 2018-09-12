@@ -3069,6 +3069,27 @@ public class JDFElement extends KElement
 	}
 
 	/**
+	 * Gets the iSkip-th child node with matching nodeName and nameSpaceURI, optionally creates it if it doesn't exist. <br>
+	 * If iSkip is more than one larger that the number of elements only one is appended
+	 *
+	 * @param nodeName name of the child node to get
+	 * @param nameSpaceURI namespace to search for
+	 * @param iSkip number of matching child nodes to skip
+	 * @return KElement the matching child element
+	 */
+	public KElement getCreateElement_JDFElement(final String nodeName, final String nameSpaceURI, final int iSkip)
+	{
+		KElement kElem = getElement_JDFElement(nodeName, nameSpaceURI, iSkip);
+
+		if (kElem == null)
+		{
+			kElem = appendElement(nodeName, nameSpaceURI);
+		}
+
+		return kElem;
+	}
+
+	/**
 	 * Creates an inter resource link to a target resource.<br/>
 	 * note that if target is a subelement rather than a root resource, it WILL be promoted to root level (rSubRef is deprecated)
 	 *

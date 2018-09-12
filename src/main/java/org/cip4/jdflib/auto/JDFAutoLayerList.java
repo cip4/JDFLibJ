@@ -128,7 +128,7 @@ public abstract class JDFAutoLayerList extends JDFElement
 	 */
 	public JDFLayerDetails getCreateLayerDetails(int iSkip)
 	{
-		return (JDFLayerDetails) getCreateElement(ElementName.LAYERDETAILS, null, iSkip);
+		return (JDFLayerDetails) getCreateElement_JDFElement(ElementName.LAYERDETAILS, null, iSkip);
 	}
 
 	/**

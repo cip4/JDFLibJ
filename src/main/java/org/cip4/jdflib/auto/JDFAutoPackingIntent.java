@@ -155,7 +155,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	 */
 	public JDFIntegerSpan getCreateBoxedQuantity()
 	{
-		return (JDFIntegerSpan) getCreateElement(ElementName.BOXEDQUANTITY, null, 0);
+		return (JDFIntegerSpan) getCreateElement_JDFElement(ElementName.BOXEDQUANTITY, null, 0);
 	}
 
 	/**
@@ -186,7 +186,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	 */
 	public JDFShapeSpan getCreateBoxShape()
 	{
-		return (JDFShapeSpan) getCreateElement(ElementName.BOXSHAPE, null, 0);
+		return (JDFShapeSpan) getCreateElement_JDFElement(ElementName.BOXSHAPE, null, 0);
 	}
 
 	/**
@@ -217,7 +217,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	 */
 	public JDFIntegerSpan getCreateCartonQuantity()
 	{
-		return (JDFIntegerSpan) getCreateElement(ElementName.CARTONQUANTITY, null, 0);
+		return (JDFIntegerSpan) getCreateElement_JDFElement(ElementName.CARTONQUANTITY, null, 0);
 	}
 
 	/**
@@ -248,7 +248,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	 */
 	public JDFShapeSpan getCreateCartonShape()
 	{
-		return (JDFShapeSpan) getCreateElement(ElementName.CARTONSHAPE, null, 0);
+		return (JDFShapeSpan) getCreateElement_JDFElement(ElementName.CARTONSHAPE, null, 0);
 	}
 
 	/**
@@ -279,7 +279,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreateCartonMaxWeight()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.CARTONMAXWEIGHT, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.CARTONMAXWEIGHT, null, 0);
 	}
 
 	/**
@@ -310,7 +310,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreateCartonStrength()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.CARTONSTRENGTH, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.CARTONSTRENGTH, null, 0);
 	}
 
 	/**
@@ -341,7 +341,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreateFoldingCatalog()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.FOLDINGCATALOG, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.FOLDINGCATALOG, null, 0);
 	}
 
 	/**
@@ -372,7 +372,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreatePalletCornerBoards()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.PALLETCORNERBOARDS, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.PALLETCORNERBOARDS, null, 0);
 	}
 
 	/**
@@ -403,7 +403,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	 */
 	public JDFIntegerSpan getCreatePalletQuantity()
 	{
-		return (JDFIntegerSpan) getCreateElement(ElementName.PALLETQUANTITY, null, 0);
+		return (JDFIntegerSpan) getCreateElement_JDFElement(ElementName.PALLETQUANTITY, null, 0);
 	}
 
 	/**
@@ -434,7 +434,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	 */
 	public JDFXYPairSpan getCreatePalletSize()
 	{
-		return (JDFXYPairSpan) getCreateElement(ElementName.PALLETSIZE, null, 0);
+		return (JDFXYPairSpan) getCreateElement_JDFElement(ElementName.PALLETSIZE, null, 0);
 	}
 
 	/**
@@ -465,7 +465,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreatePalletMaxHeight()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.PALLETMAXHEIGHT, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.PALLETMAXHEIGHT, null, 0);
 	}
 
 	/**
@@ -496,7 +496,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreatePalletMaxWeight()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.PALLETMAXWEIGHT, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.PALLETMAXWEIGHT, null, 0);
 	}
 
 	/**
@@ -527,7 +527,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreatePalletType()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.PALLETTYPE, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.PALLETTYPE, null, 0);
 	}
 
 	/**
@@ -558,7 +558,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreatePalletWrapping()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.PALLETWRAPPING, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.PALLETWRAPPING, null, 0);
 	}
 
 	/**
@@ -589,7 +589,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	 */
 	public JDFIntegerSpan getCreateWrappedQuantity()
 	{
-		return (JDFIntegerSpan) getCreateElement(ElementName.WRAPPEDQUANTITY, null, 0);
+		return (JDFIntegerSpan) getCreateElement_JDFElement(ElementName.WRAPPEDQUANTITY, null, 0);
 	}
 
 	/**
@@ -620,7 +620,7 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreateWrappingMaterial()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.WRAPPINGMATERIAL, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.WRAPPINGMATERIAL, null, 0);
 	}
 
 	/**

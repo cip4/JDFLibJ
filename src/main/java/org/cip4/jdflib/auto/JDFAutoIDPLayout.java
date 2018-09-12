@@ -453,7 +453,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	 */
 	public JDFImageShift getCreateImageShift(int iSkip)
 	{
-		return (JDFImageShift) getCreateElement(ElementName.IMAGESHIFT, null, iSkip);
+		return (JDFImageShift) getCreateElement_JDFElement(ElementName.IMAGESHIFT, null, iSkip);
 	}
 
 	/**

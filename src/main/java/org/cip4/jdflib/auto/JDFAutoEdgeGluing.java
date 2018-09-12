@@ -136,7 +136,7 @@ public abstract class JDFAutoEdgeGluing extends JDFElement
 	 */
 	public JDFSpanGlue getCreateEdgeGlue()
 	{
-		return (JDFSpanGlue) getCreateElement(ElementName.EDGEGLUE, null, 0);
+		return (JDFSpanGlue) getCreateElement_JDFElement(ElementName.EDGEGLUE, null, 0);
 	}
 
 	/**

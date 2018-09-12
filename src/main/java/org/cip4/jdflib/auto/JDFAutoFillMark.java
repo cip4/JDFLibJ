@@ -294,7 +294,7 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 */
 	public JDFMarkColor getCreateMarkColor(int iSkip)
 	{
-		return (JDFMarkColor) getCreateElement(ElementName.MARKCOLOR, null, iSkip);
+		return (JDFMarkColor) getCreateElement_JDFElement(ElementName.MARKCOLOR, null, iSkip);
 	}
 
 	/**

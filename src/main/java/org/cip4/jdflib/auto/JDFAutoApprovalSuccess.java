@@ -153,7 +153,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	 */
 	public JDFApprovalDetails getCreateApprovalDetails(int iSkip)
 	{
-		return (JDFApprovalDetails) getCreateElement(ElementName.APPROVALDETAILS, null, iSkip);
+		return (JDFApprovalDetails) getCreateElement_JDFElement(ElementName.APPROVALDETAILS, null, iSkip);
 	}
 
 	/**
@@ -204,7 +204,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec()
 	{
-		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**
@@ -236,7 +236,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	 */
 	public JDFContact getCreateContact(int iSkip)
 	{
-		return (JDFContact) getCreateElement(ElementName.CONTACT, null, iSkip);
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**

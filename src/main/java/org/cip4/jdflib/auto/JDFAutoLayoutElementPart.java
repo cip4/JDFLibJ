@@ -193,7 +193,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 */
 	public JDFBarcodeProductionParams getCreateBarcodeProductionParams()
 	{
-		return (JDFBarcodeProductionParams) getCreateElement(ElementName.BARCODEPRODUCTIONPARAMS, null, 0);
+		return (JDFBarcodeProductionParams) getCreateElement_JDFElement(ElementName.BARCODEPRODUCTIONPARAMS, null, 0);
 	}
 
 	/**
@@ -215,7 +215,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 */
 	public JDFColorCorrectionParams getCreateColorCorrectionParams(int iSkip)
 	{
-		return (JDFColorCorrectionParams) getCreateElement(ElementName.COLORCORRECTIONPARAMS, null, iSkip);
+		return (JDFColorCorrectionParams) getCreateElement_JDFElement(ElementName.COLORCORRECTIONPARAMS, null, iSkip);
 	}
 
 	/**
@@ -267,7 +267,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 */
 	public JDFImageCompressionParams getCreateImageCompressionParams(int iSkip)
 	{
-		return (JDFImageCompressionParams) getCreateElement(ElementName.IMAGECOMPRESSIONPARAMS, null, iSkip);
+		return (JDFImageCompressionParams) getCreateElement_JDFElement(ElementName.IMAGECOMPRESSIONPARAMS, null, iSkip);
 	}
 
 	/**
@@ -319,7 +319,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 */
 	public JDFImageEnhancementParams getCreateImageEnhancementParams(int iSkip)
 	{
-		return (JDFImageEnhancementParams) getCreateElement(ElementName.IMAGEENHANCEMENTPARAMS, null, iSkip);
+		return (JDFImageEnhancementParams) getCreateElement_JDFElement(ElementName.IMAGEENHANCEMENTPARAMS, null, iSkip);
 	}
 
 	/**
@@ -380,7 +380,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 */
 	public JDFLayoutElement getCreateLayoutElement()
 	{
-		return (JDFLayoutElement) getCreateElement(ElementName.LAYOUTELEMENT, null, 0);
+		return (JDFLayoutElement) getCreateElement_JDFElement(ElementName.LAYOUTELEMENT, null, 0);
 	}
 
 	/**
@@ -421,7 +421,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 */
 	public JDFPositionObj getCreatePositionObj()
 	{
-		return (JDFPositionObj) getCreateElement(ElementName.POSITIONOBJ, null, 0);
+		return (JDFPositionObj) getCreateElement_JDFElement(ElementName.POSITIONOBJ, null, 0);
 	}
 
 	/**

@@ -607,7 +607,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 */
 	public JDFActivity getCreateActivity(int iSkip)
 	{
-		return (JDFActivity) getCreateElement(ElementName.ACTIVITY, null, iSkip);
+		return (JDFActivity) getCreateElement_JDFElement(ElementName.ACTIVITY, null, iSkip);
 	}
 
 	/**
@@ -658,7 +658,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 */
 	public JDFDevice getCreateDevice()
 	{
-		return (JDFDevice) getCreateElement(ElementName.DEVICE, null, 0);
+		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, 0);
 	}
 
 	/**
@@ -680,7 +680,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 */
 	public JDFEmployee getCreateEmployee(int iSkip)
 	{
-		return (JDFEmployee) getCreateElement(ElementName.EMPLOYEE, null, iSkip);
+		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
 
 	/**
@@ -722,7 +722,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 */
 	public JDFJobPhase getCreateJobPhase(int iSkip)
 	{
-		return (JDFJobPhase) getCreateElement(ElementName.JOBPHASE, null, iSkip);
+		return (JDFJobPhase) getCreateElement_JDFElement(ElementName.JOBPHASE, null, iSkip);
 	}
 
 	/**
@@ -764,7 +764,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 */
 	public JDFModuleStatus getCreateModuleStatus(int iSkip)
 	{
-		return (JDFModuleStatus) getCreateElement(ElementName.MODULESTATUS, null, iSkip);
+		return (JDFModuleStatus) getCreateElement_JDFElement(ElementName.MODULESTATUS, null, iSkip);
 	}
 
 	/**

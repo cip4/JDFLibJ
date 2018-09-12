@@ -588,7 +588,7 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	 */
 	public JDFLoc getCreateLoc(int iSkip)
 	{
-		return (JDFLoc) getCreateElement(ElementName.LOC, null, iSkip);
+		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, iSkip);
 	}
 
 	/**
@@ -630,7 +630,7 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	 */
 	public JDFValueLoc getCreateValueLoc(int iSkip)
 	{
-		return (JDFValueLoc) getCreateElement(ElementName.VALUELOC, null, iSkip);
+		return (JDFValueLoc) getCreateElement_JDFElement(ElementName.VALUELOC, null, iSkip);
 	}
 
 	/**

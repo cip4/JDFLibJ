@@ -225,7 +225,7 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 */
 	public JDFBindingQualityParams getCreateBindingQualityParams()
 	{
-		return (JDFBindingQualityParams) getCreateElement(ElementName.BINDINGQUALITYPARAMS, null, 0);
+		return (JDFBindingQualityParams) getCreateElement_JDFElement(ElementName.BINDINGQUALITYPARAMS, null, 0);
 	}
 
 	/**

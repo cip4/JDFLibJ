@@ -694,7 +694,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 */
 	public JDFBarcodeDetails getCreateBarcodeDetails()
 	{
-		return (JDFBarcodeDetails) getCreateElement(ElementName.BARCODEDETAILS, null, 0);
+		return (JDFBarcodeDetails) getCreateElement_JDFElement(ElementName.BARCODEDETAILS, null, 0);
 	}
 
 	/**
@@ -725,7 +725,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 */
 	public JDFExtraValues getCreateExtraValues()
 	{
-		return (JDFExtraValues) getCreateElement(ElementName.EXTRAVALUES, null, 0);
+		return (JDFExtraValues) getCreateElement_JDFElement(ElementName.EXTRAVALUES, null, 0);
 	}
 
 	/**
@@ -747,7 +747,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 */
 	public JDFMetadataMap getCreateMetadataMap(int iSkip)
 	{
-		return (JDFMetadataMap) getCreateElement(ElementName.METADATAMAP, null, iSkip);
+		return (JDFMetadataMap) getCreateElement_JDFElement(ElementName.METADATAMAP, null, iSkip);
 	}
 
 	/**

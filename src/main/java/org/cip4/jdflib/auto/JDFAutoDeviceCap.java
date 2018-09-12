@@ -606,7 +606,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public JDFActionPool getCreateActionPool()
 	{
-		return (JDFActionPool) getCreateElement(ElementName.ACTIONPOOL, null, 0);
+		return (JDFActionPool) getCreateElement_JDFElement(ElementName.ACTIONPOOL, null, 0);
 	}
 
 	/**
@@ -637,7 +637,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public JDFDevCapPool getCreateDevCapPool()
 	{
-		return (JDFDevCapPool) getCreateElement(ElementName.DEVCAPPOOL, null, 0);
+		return (JDFDevCapPool) getCreateElement_JDFElement(ElementName.DEVCAPPOOL, null, 0);
 	}
 
 	/**
@@ -659,7 +659,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public JDFDevCaps getCreateDevCaps(int iSkip)
 	{
-		return (JDFDevCaps) getCreateElement(ElementName.DEVCAPS, null, iSkip);
+		return (JDFDevCaps) getCreateElement_JDFElement(ElementName.DEVCAPS, null, iSkip);
 	}
 
 	/**
@@ -710,7 +710,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public JDFDisplayGroupPool getCreateDisplayGroupPool()
 	{
-		return (JDFDisplayGroupPool) getCreateElement(ElementName.DISPLAYGROUPPOOL, null, 0);
+		return (JDFDisplayGroupPool) getCreateElement_JDFElement(ElementName.DISPLAYGROUPPOOL, null, 0);
 	}
 
 	/**
@@ -741,7 +741,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public JDFFeaturePool getCreateFeaturePool()
 	{
-		return (JDFFeaturePool) getCreateElement(ElementName.FEATUREPOOL, null, 0);
+		return (JDFFeaturePool) getCreateElement_JDFElement(ElementName.FEATUREPOOL, null, 0);
 	}
 
 	/**
@@ -772,7 +772,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public JDFMacroPool getCreateMacroPool()
 	{
-		return (JDFMacroPool) getCreateElement(ElementName.MACROPOOL, null, 0);
+		return (JDFMacroPool) getCreateElement_JDFElement(ElementName.MACROPOOL, null, 0);
 	}
 
 	/**
@@ -803,7 +803,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public JDFModulePool getCreateModulePool()
 	{
-		return (JDFModulePool) getCreateElement(ElementName.MODULEPOOL, null, 0);
+		return (JDFModulePool) getCreateElement_JDFElement(ElementName.MODULEPOOL, null, 0);
 	}
 
 	/**
@@ -825,7 +825,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public JDFPerformance getCreatePerformance(int iSkip)
 	{
-		return (JDFPerformance) getCreateElement(ElementName.PERFORMANCE, null, iSkip);
+		return (JDFPerformance) getCreateElement_JDFElement(ElementName.PERFORMANCE, null, iSkip);
 	}
 
 	/**
@@ -876,7 +876,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public JDFTestPool getCreateTestPool()
 	{
-		return (JDFTestPool) getCreateElement(ElementName.TESTPOOL, null, 0);
+		return (JDFTestPool) getCreateElement_JDFElement(ElementName.TESTPOOL, null, 0);
 	}
 
 	/**

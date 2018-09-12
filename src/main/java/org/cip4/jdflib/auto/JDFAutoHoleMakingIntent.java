@@ -281,7 +281,7 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	 */
 	public JDFStringSpan getCreateHoleType()
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.HOLETYPE, null, 0);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.HOLETYPE, null, 0);
 	}
 
 	/**
@@ -312,7 +312,7 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	 */
 	public JDFHoleList getCreateHoleList()
 	{
-		return (JDFHoleList) getCreateElement(ElementName.HOLELIST, null, 0);
+		return (JDFHoleList) getCreateElement_JDFElement(ElementName.HOLELIST, null, 0);
 	}
 
 	/**

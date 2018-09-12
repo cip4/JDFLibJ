@@ -220,7 +220,7 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	 */
 	public JDFNewComment getCreateNewComment(int iSkip)
 	{
-		return (JDFNewComment) getCreateElement(ElementName.NEWCOMMENT, null, iSkip);
+		return (JDFNewComment) getCreateElement_JDFElement(ElementName.NEWCOMMENT, null, iSkip);
 	}
 
 	/**

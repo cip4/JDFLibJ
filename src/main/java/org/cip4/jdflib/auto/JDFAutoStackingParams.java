@@ -609,7 +609,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 */
 	public JDFDisjointing getCreateDisjointing()
 	{
-		return (JDFDisjointing) getCreateElement(ElementName.DISJOINTING, null, 0);
+		return (JDFDisjointing) getCreateElement_JDFElement(ElementName.DISJOINTING, null, 0);
 	}
 
 	/**

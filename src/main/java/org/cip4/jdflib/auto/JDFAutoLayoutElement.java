@@ -686,7 +686,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 */
 	public JDFColorPool getCreateColorPool()
 	{
-		return (JDFColorPool) getCreateElement(ElementName.COLORPOOL, null, 0);
+		return (JDFColorPool) getCreateElement_JDFElement(ElementName.COLORPOOL, null, 0);
 	}
 
 	/**
@@ -718,7 +718,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 */
 	public JDFContentList getCreateContentList(int iSkip)
 	{
-		return (JDFContentList) getCreateElement(ElementName.CONTENTLIST, null, iSkip);
+		return (JDFContentList) getCreateElement_JDFElement(ElementName.CONTENTLIST, null, iSkip);
 	}
 
 	/**
@@ -779,7 +779,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 */
 	public JDFDependencies getCreateDependencies()
 	{
-		return (JDFDependencies) getCreateElement(ElementName.DEPENDENCIES, null, 0);
+		return (JDFDependencies) getCreateElement_JDFElement(ElementName.DEPENDENCIES, null, 0);
 	}
 
 	/**
@@ -810,7 +810,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 */
 	public JDFElementColorParams getCreateElementColorParams()
 	{
-		return (JDFElementColorParams) getCreateElement(ElementName.ELEMENTCOLORPARAMS, null, 0);
+		return (JDFElementColorParams) getCreateElement_JDFElement(ElementName.ELEMENTCOLORPARAMS, null, 0);
 	}
 
 	/**
@@ -851,7 +851,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec()
 	{
-		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**
@@ -892,7 +892,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 */
 	public JDFImageCompressionParams getCreateImageCompressionParams()
 	{
-		return (JDFImageCompressionParams) getCreateElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
+		return (JDFImageCompressionParams) getCreateElement_JDFElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
 	}
 
 	/**
@@ -933,7 +933,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 */
 	public JDFPageList getCreatePageList()
 	{
-		return (JDFPageList) getCreateElement(ElementName.PAGELIST, null, 0);
+		return (JDFPageList) getCreateElement_JDFElement(ElementName.PAGELIST, null, 0);
 	}
 
 	/**
@@ -974,7 +974,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 */
 	public JDFScreeningParams getCreateScreeningParams()
 	{
-		return (JDFScreeningParams) getCreateElement(ElementName.SCREENINGPARAMS, null, 0);
+		return (JDFScreeningParams) getCreateElement_JDFElement(ElementName.SCREENINGPARAMS, null, 0);
 	}
 
 	/**
@@ -1006,7 +1006,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 */
 	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
 	{
-		return (JDFSeparationSpec) getCreateElement(ElementName.SEPARATIONSPEC, null, iSkip);
+		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
 
 	/**

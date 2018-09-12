@@ -130,7 +130,7 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 	 */
 	public JDFAncestor getCreateAncestor(int iSkip)
 	{
-		return (JDFAncestor) getCreateElement(ElementName.ANCESTOR, null, iSkip);
+		return (JDFAncestor) getCreateElement_JDFElement(ElementName.ANCESTOR, null, iSkip);
 	}
 
 	/**
@@ -172,7 +172,7 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
 
 	/**

@@ -334,7 +334,7 @@ public abstract class JDFAutoBundleItem extends JDFElement
 	 */
 	public JDFComponent getCreateComponent()
 	{
-		return (JDFComponent) getCreateElement(ElementName.COMPONENT, null, 0);
+		return (JDFComponent) getCreateElement_JDFElement(ElementName.COMPONENT, null, 0);
 	}
 
 	/**

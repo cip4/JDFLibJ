@@ -280,7 +280,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 */
 	public JDFAmountPool getCreateAmountPool()
 	{
-		return (JDFAmountPool) getCreateElement(ElementName.AMOUNTPOOL, null, 0);
+		return (JDFAmountPool) getCreateElement_JDFElement(ElementName.AMOUNTPOOL, null, 0);
 	}
 
 	/**
@@ -302,7 +302,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 */
 	public JDFResource getCreateResource(int iSkip)
 	{
-		return (JDFResource) getCreateElement(ElementName.RESOURCE, null, iSkip);
+		return (JDFResource) getCreateElement_JDFElement(ElementName.RESOURCE, null, iSkip);
 	}
 
 	/**

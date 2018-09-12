@@ -175,7 +175,7 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	 */
 	public JDFComponent getCreateComponent(int iSkip)
 	{
-		return (JDFComponent) getCreateElement(ElementName.COMPONENT, null, iSkip);
+		return (JDFComponent) getCreateElement_JDFElement(ElementName.COMPONENT, null, iSkip);
 	}
 
 	/**
@@ -227,7 +227,7 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	 */
 	public JDFGlueLine getCreateGlueLine(int iSkip)
 	{
-		return (JDFGlueLine) getCreateElement(ElementName.GLUELINE, null, iSkip);
+		return (JDFGlueLine) getCreateElement_JDFElement(ElementName.GLUELINE, null, iSkip);
 	}
 
 	/**

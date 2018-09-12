@@ -137,7 +137,7 @@ public abstract class JDFAutoPayment extends JDFElement
 	 */
 	public JDFElement getCreatePayTerm()
 	{
-		return (JDFElement) getCreateElement(ElementName.PAYTERM, null, 0);
+		return (JDFElement) getCreateElement_JDFElement(ElementName.PAYTERM, null, 0);
 	}
 
 	/**
@@ -168,7 +168,7 @@ public abstract class JDFAutoPayment extends JDFElement
 	 */
 	public JDFCreditCard getCreateCreditCard()
 	{
-		return (JDFCreditCard) getCreateElement(ElementName.CREDITCARD, null, 0);
+		return (JDFCreditCard) getCreateElement_JDFElement(ElementName.CREDITCARD, null, 0);
 	}
 
 	/**

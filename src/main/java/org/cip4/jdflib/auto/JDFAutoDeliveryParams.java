@@ -413,7 +413,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 */
 	public JDFCompany getCreateCompany()
 	{
-		return (JDFCompany) getCreateElement(ElementName.COMPANY, null, 0);
+		return (JDFCompany) getCreateElement_JDFElement(ElementName.COMPANY, null, 0);
 	}
 
 	/**
@@ -445,7 +445,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 */
 	public JDFContact getCreateContact(int iSkip)
 	{
-		return (JDFContact) getCreateElement(ElementName.CONTACT, null, iSkip);
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**
@@ -498,7 +498,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 */
 	public JDFDrop getCreateDrop(int iSkip)
 	{
-		return (JDFDrop) getCreateElement(ElementName.DROP, null, iSkip);
+		return (JDFDrop) getCreateElement_JDFElement(ElementName.DROP, null, iSkip);
 	}
 
 	/**
@@ -549,7 +549,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec()
 	{
-		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**

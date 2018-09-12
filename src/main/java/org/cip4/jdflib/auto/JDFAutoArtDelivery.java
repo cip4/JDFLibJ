@@ -428,7 +428,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 */
 	public JDFTimeSpan getCreateArtDeliveryDate()
 	{
-		return (JDFTimeSpan) getCreateElement(ElementName.ARTDELIVERYDATE, null, 0);
+		return (JDFTimeSpan) getCreateElement_JDFElement(ElementName.ARTDELIVERYDATE, null, 0);
 	}
 
 	/**
@@ -459,7 +459,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 */
 	public JDFDurationSpan getCreateArtDeliveryDuration()
 	{
-		return (JDFDurationSpan) getCreateElement(ElementName.ARTDELIVERYDURATION, null, 0);
+		return (JDFDurationSpan) getCreateElement_JDFElement(ElementName.ARTDELIVERYDURATION, null, 0);
 	}
 
 	/**
@@ -490,7 +490,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 */
 	public JDFSpanArtHandling getCreateArtHandling()
 	{
-		return (JDFSpanArtHandling) getCreateElement(ElementName.ARTHANDLING, null, 0);
+		return (JDFSpanArtHandling) getCreateElement_JDFElement(ElementName.ARTHANDLING, null, 0);
 	}
 
 	/**
@@ -521,7 +521,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 */
 	public JDFSpanDeliveryCharge getCreateDeliveryCharge()
 	{
-		return (JDFSpanDeliveryCharge) getCreateElement(ElementName.DELIVERYCHARGE, null, 0);
+		return (JDFSpanDeliveryCharge) getCreateElement_JDFElement(ElementName.DELIVERYCHARGE, null, 0);
 	}
 
 	/**
@@ -552,7 +552,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 */
 	public JDFNameSpan getCreateMethod()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.METHOD, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.METHOD, null, 0);
 	}
 
 	/**
@@ -583,7 +583,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 */
 	public JDFNameSpan getCreateReturnMethod()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.RETURNMETHOD, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.RETURNMETHOD, null, 0);
 	}
 
 	/**
@@ -614,7 +614,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 */
 	public JDFStringSpan getCreateServiceLevel()
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.SERVICELEVEL, null, 0);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.SERVICELEVEL, null, 0);
 	}
 
 	/**
@@ -645,7 +645,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 */
 	public JDFSpanTransfer getCreateTransfer()
 	{
-		return (JDFSpanTransfer) getCreateElement(ElementName.TRANSFER, null, 0);
+		return (JDFSpanTransfer) getCreateElement_JDFElement(ElementName.TRANSFER, null, 0);
 	}
 
 	/**
@@ -676,7 +676,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 */
 	public JDFCompany getCreateCompany()
 	{
-		return (JDFCompany) getCreateElement(ElementName.COMPANY, null, 0);
+		return (JDFCompany) getCreateElement_JDFElement(ElementName.COMPANY, null, 0);
 	}
 
 	/**
@@ -717,7 +717,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 */
 	public JDFComponent getCreateComponent()
 	{
-		return (JDFComponent) getCreateElement(ElementName.COMPONENT, null, 0);
+		return (JDFComponent) getCreateElement_JDFElement(ElementName.COMPONENT, null, 0);
 	}
 
 	/**
@@ -749,7 +749,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 */
 	public JDFContact getCreateContact(int iSkip)
 	{
-		return (JDFContact) getCreateElement(ElementName.CONTACT, null, iSkip);
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**
@@ -810,7 +810,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 */
 	public JDFDigitalMedia getCreateDigitalMedia()
 	{
-		return (JDFDigitalMedia) getCreateElement(ElementName.DIGITALMEDIA, null, 0);
+		return (JDFDigitalMedia) getCreateElement_JDFElement(ElementName.DIGITALMEDIA, null, 0);
 	}
 
 	/**
@@ -851,7 +851,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 */
 	public JDFExposedMedia getCreateExposedMedia()
 	{
-		return (JDFExposedMedia) getCreateElement(ElementName.EXPOSEDMEDIA, null, 0);
+		return (JDFExposedMedia) getCreateElement_JDFElement(ElementName.EXPOSEDMEDIA, null, 0);
 	}
 
 	/**
@@ -892,7 +892,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 */
 	public JDFRunList getCreateRunList()
 	{
-		return (JDFRunList) getCreateElement(ElementName.RUNLIST, null, 0);
+		return (JDFRunList) getCreateElement_JDFElement(ElementName.RUNLIST, null, 0);
 	}
 
 	/**
@@ -933,7 +933,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 */
 	public JDFScanParams getCreateScanParams()
 	{
-		return (JDFScanParams) getCreateElement(ElementName.SCANPARAMS, null, 0);
+		return (JDFScanParams) getCreateElement_JDFElement(ElementName.SCANPARAMS, null, 0);
 	}
 
 	/**
@@ -974,7 +974,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 */
 	public JDFTool getCreateTool()
 	{
-		return (JDFTool) getCreateElement(ElementName.TOOL, null, 0);
+		return (JDFTool) getCreateElement_JDFElement(ElementName.TOOL, null, 0);
 	}
 
 	/**

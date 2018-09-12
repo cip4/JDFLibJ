@@ -201,7 +201,7 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	 */
 	public JDFPDFToPSConversionParams getCreatePDFToPSConversionParams()
 	{
-		return (JDFPDFToPSConversionParams) getCreateElement(ElementName.PDFTOPSCONVERSIONPARAMS, null, 0);
+		return (JDFPDFToPSConversionParams) getCreateElement_JDFElement(ElementName.PDFTOPSCONVERSIONPARAMS, null, 0);
 	}
 
 	/**
@@ -242,7 +242,7 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	 */
 	public JDFPSToPDFConversionParams getCreatePSToPDFConversionParams()
 	{
-		return (JDFPSToPDFConversionParams) getCreateElement(ElementName.PSTOPDFCONVERSIONPARAMS, null, 0);
+		return (JDFPSToPDFConversionParams) getCreateElement_JDFElement(ElementName.PSTOPDFCONVERSIONPARAMS, null, 0);
 	}
 
 	/**

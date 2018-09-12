@@ -291,7 +291,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 */
 	public JDFIDPFinishing getCreateIDPFinishing(int iSkip)
 	{
-		return (JDFIDPFinishing) getCreateElement(ElementName.IDPFINISHING, null, iSkip);
+		return (JDFIDPFinishing) getCreateElement_JDFElement(ElementName.IDPFINISHING, null, iSkip);
 	}
 
 	/**
@@ -333,7 +333,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 */
 	public JDFIDPLayout getCreateIDPLayout(int iSkip)
 	{
-		return (JDFIDPLayout) getCreateElement(ElementName.IDPLAYOUT, null, iSkip);
+		return (JDFIDPLayout) getCreateElement_JDFElement(ElementName.IDPLAYOUT, null, iSkip);
 	}
 
 	/**
@@ -375,7 +375,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 */
 	public JDFMediaIntent getCreateMediaIntent(int iSkip)
 	{
-		return (JDFMediaIntent) getCreateElement(ElementName.MEDIAINTENT, null, iSkip);
+		return (JDFMediaIntent) getCreateElement_JDFElement(ElementName.MEDIAINTENT, null, iSkip);
 	}
 
 	/**
@@ -427,7 +427,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 */
 	public JDFMediaSource getCreateMediaSource(int iSkip)
 	{
-		return (JDFMediaSource) getCreateElement(ElementName.MEDIASOURCE, null, iSkip);
+		return (JDFMediaSource) getCreateElement_JDFElement(ElementName.MEDIASOURCE, null, iSkip);
 	}
 
 	/**

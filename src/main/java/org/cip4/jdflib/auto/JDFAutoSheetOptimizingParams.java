@@ -150,7 +150,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 */
 	public JDFConvertingConfig getCreateConvertingConfig(int iSkip)
 	{
-		return (JDFConvertingConfig) getCreateElement(ElementName.CONVERTINGCONFIG, null, iSkip);
+		return (JDFConvertingConfig) getCreateElement_JDFElement(ElementName.CONVERTINGCONFIG, null, iSkip);
 	}
 
 	/**
@@ -192,7 +192,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 */
 	public JDFGangElement getCreateGangElement(int iSkip)
 	{
-		return (JDFGangElement) getCreateElement(ElementName.GANGELEMENT, null, iSkip);
+		return (JDFGangElement) getCreateElement_JDFElement(ElementName.GANGELEMENT, null, iSkip);
 	}
 
 	/**

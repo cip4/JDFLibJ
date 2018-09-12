@@ -480,7 +480,7 @@ public abstract class JDFAutoPreview extends JDFResource
 	@Override
 	public JDFComment getCreateComment(int iSkip)
 	{
-		return (JDFComment) getCreateElement(ElementName.COMMENT, null, iSkip);
+		return (JDFComment) getCreateElement_JDFElement(ElementName.COMMENT, null, iSkip);
 	}
 
 	/**
@@ -524,7 +524,7 @@ public abstract class JDFAutoPreview extends JDFResource
 	 */
 	public JDFGeneralID getCreateGeneralID(int iSkip)
 	{
-		return (JDFGeneralID) getCreateElement(ElementName.GENERALID, null, iSkip);
+		return (JDFGeneralID) getCreateElement_JDFElement(ElementName.GENERALID, null, iSkip);
 	}
 
 	/**

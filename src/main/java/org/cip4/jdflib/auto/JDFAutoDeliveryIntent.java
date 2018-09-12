@@ -370,7 +370,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public JDFSpanDeliveryCharge getCreateDeliveryCharge()
 	{
-		return (JDFSpanDeliveryCharge) getCreateElement(ElementName.DELIVERYCHARGE, null, 0);
+		return (JDFSpanDeliveryCharge) getCreateElement_JDFElement(ElementName.DELIVERYCHARGE, null, 0);
 	}
 
 	/**
@@ -401,7 +401,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public JDFTimeSpan getCreateEarliest()
 	{
-		return (JDFTimeSpan) getCreateElement(ElementName.EARLIEST, null, 0);
+		return (JDFTimeSpan) getCreateElement_JDFElement(ElementName.EARLIEST, null, 0);
 	}
 
 	/**
@@ -432,7 +432,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public JDFDurationSpan getCreateEarliestDuration()
 	{
-		return (JDFDurationSpan) getCreateElement(ElementName.EARLIESTDURATION, null, 0);
+		return (JDFDurationSpan) getCreateElement_JDFElement(ElementName.EARLIESTDURATION, null, 0);
 	}
 
 	/**
@@ -463,7 +463,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreateMethod()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.METHOD, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.METHOD, null, 0);
 	}
 
 	/**
@@ -494,7 +494,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreateOverage()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.OVERAGE, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.OVERAGE, null, 0);
 	}
 
 	/**
@@ -525,7 +525,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public JDFTimeSpan getCreateRequired()
 	{
-		return (JDFTimeSpan) getCreateElement(ElementName.REQUIRED, null, 0);
+		return (JDFTimeSpan) getCreateElement_JDFElement(ElementName.REQUIRED, null, 0);
 	}
 
 	/**
@@ -556,7 +556,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public JDFDurationSpan getCreateRequiredDuration()
 	{
-		return (JDFDurationSpan) getCreateElement(ElementName.REQUIREDDURATION, null, 0);
+		return (JDFDurationSpan) getCreateElement_JDFElement(ElementName.REQUIREDDURATION, null, 0);
 	}
 
 	/**
@@ -587,7 +587,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreateReturnMethod()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.RETURNMETHOD, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.RETURNMETHOD, null, 0);
 	}
 
 	/**
@@ -618,7 +618,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public JDFStringSpan getCreateServiceLevel()
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.SERVICELEVEL, null, 0);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.SERVICELEVEL, null, 0);
 	}
 
 	/**
@@ -649,7 +649,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public JDFSpanSurplusHandling getCreateSurplusHandling()
 	{
-		return (JDFSpanSurplusHandling) getCreateElement(ElementName.SURPLUSHANDLING, null, 0);
+		return (JDFSpanSurplusHandling) getCreateElement_JDFElement(ElementName.SURPLUSHANDLING, null, 0);
 	}
 
 	/**
@@ -680,7 +680,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public JDFSpanTransfer getCreateTransfer()
 	{
-		return (JDFSpanTransfer) getCreateElement(ElementName.TRANSFER, null, 0);
+		return (JDFSpanTransfer) getCreateElement_JDFElement(ElementName.TRANSFER, null, 0);
 	}
 
 	/**
@@ -711,7 +711,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreateUnderage()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.UNDERAGE, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.UNDERAGE, null, 0);
 	}
 
 	/**
@@ -742,7 +742,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public JDFCompany getCreateCompany()
 	{
-		return (JDFCompany) getCreateElement(ElementName.COMPANY, null, 0);
+		return (JDFCompany) getCreateElement_JDFElement(ElementName.COMPANY, null, 0);
 	}
 
 	/**
@@ -774,7 +774,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public JDFContact getCreateContact(int iSkip)
 	{
-		return (JDFContact) getCreateElement(ElementName.CONTACT, null, iSkip);
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
 
 	/**
@@ -827,7 +827,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public JDFDropIntent getCreateDropIntent(int iSkip)
 	{
-		return (JDFDropIntent) getCreateElement(ElementName.DROPINTENT, null, iSkip);
+		return (JDFDropIntent) getCreateElement_JDFElement(ElementName.DROPINTENT, null, iSkip);
 	}
 
 	/**
@@ -878,7 +878,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 */
 	public JDFPricing getCreatePricing()
 	{
-		return (JDFPricing) getCreateElement(ElementName.PRICING, null, 0);
+		return (JDFPricing) getCreateElement_JDFElement(ElementName.PRICING, null, 0);
 	}
 
 	/**

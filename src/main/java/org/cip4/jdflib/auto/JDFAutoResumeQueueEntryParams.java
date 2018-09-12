@@ -128,7 +128,7 @@ public abstract class JDFAutoResumeQueueEntryParams extends JDFElement
 	 */
 	public JDFQueueFilter getCreateQueueFilter(int iSkip)
 	{
-		return (JDFQueueFilter) getCreateElement(ElementName.QUEUEFILTER, null, iSkip);
+		return (JDFQueueFilter) getCreateElement_JDFElement(ElementName.QUEUEFILTER, null, iSkip);
 	}
 
 	/**

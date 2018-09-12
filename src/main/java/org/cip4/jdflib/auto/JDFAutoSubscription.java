@@ -472,7 +472,7 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 */
 	public JDFObservationTarget getCreateObservationTarget(int iSkip)
 	{
-		return (JDFObservationTarget) getCreateElement(ElementName.OBSERVATIONTARGET, null, iSkip);
+		return (JDFObservationTarget) getCreateElement_JDFElement(ElementName.OBSERVATIONTARGET, null, iSkip);
 	}
 
 	/**

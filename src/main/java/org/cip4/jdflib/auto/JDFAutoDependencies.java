@@ -128,7 +128,7 @@ public abstract class JDFAutoDependencies extends JDFElement
 	 */
 	public JDFLayoutElement getCreateLayoutElement(int iSkip)
 	{
-		return (JDFLayoutElement) getCreateElement(ElementName.LAYOUTELEMENT, null, iSkip);
+		return (JDFLayoutElement) getCreateElement_JDFElement(ElementName.LAYOUTELEMENT, null, iSkip);
 	}
 
 	/**

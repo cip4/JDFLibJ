@@ -1031,7 +1031,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 */
 	public JDFComponent getCreateComponent()
 	{
-		return (JDFComponent) getCreateElement(ElementName.COMPONENT, null, 0);
+		return (JDFComponent) getCreateElement_JDFElement(ElementName.COMPONENT, null, 0);
 	}
 
 	/**
@@ -1072,7 +1072,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 */
 	public JDFApprovalParams getCreateApprovalParams()
 	{
-		return (JDFApprovalParams) getCreateElement(ElementName.APPROVALPARAMS, null, 0);
+		return (JDFApprovalParams) getCreateElement_JDFElement(ElementName.APPROVALPARAMS, null, 0);
 	}
 
 	/**
@@ -1113,7 +1113,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 */
 	public JDFDisjointing getCreateDisjointing()
 	{
-		return (JDFDisjointing) getCreateElement(ElementName.DISJOINTING, null, 0);
+		return (JDFDisjointing) getCreateElement_JDFElement(ElementName.DISJOINTING, null, 0);
 	}
 
 	/**
@@ -1144,7 +1144,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 */
 	public JDFInk getCreateInk()
 	{
-		return (JDFInk) getCreateElement(ElementName.INK, null, 0);
+		return (JDFInk) getCreateElement_JDFElement(ElementName.INK, null, 0);
 	}
 
 	/**
@@ -1185,7 +1185,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 */
 	public JDFMedia getCreateMedia()
 	{
-		return (JDFMedia) getCreateElement(ElementName.MEDIA, null, 0);
+		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, 0);
 	}
 
 	/**
@@ -1226,7 +1226,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 */
 	public JDFMediaSource getCreateMediaSource()
 	{
-		return (JDFMediaSource) getCreateElement(ElementName.MEDIASOURCE, null, 0);
+		return (JDFMediaSource) getCreateElement_JDFElement(ElementName.MEDIASOURCE, null, 0);
 	}
 
 	/**

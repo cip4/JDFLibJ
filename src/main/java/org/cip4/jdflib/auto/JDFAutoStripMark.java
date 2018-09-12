@@ -997,7 +997,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 */
 	public JDFMarkColor getCreateMarkColor(int iSkip)
 	{
-		return (JDFMarkColor) getCreateElement(ElementName.MARKCOLOR, null, iSkip);
+		return (JDFMarkColor) getCreateElement_JDFElement(ElementName.MARKCOLOR, null, iSkip);
 	}
 
 	/**
@@ -1048,7 +1048,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 */
 	public JDFPosition getCreatePosition()
 	{
-		return (JDFPosition) getCreateElement(ElementName.POSITION, null, 0);
+		return (JDFPosition) getCreateElement_JDFElement(ElementName.POSITION, null, 0);
 	}
 
 	/**
@@ -1079,7 +1079,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 */
 	public JDFJobField getCreateJobField()
 	{
-		return (JDFJobField) getCreateElement(ElementName.JOBFIELD, null, 0);
+		return (JDFJobField) getCreateElement_JDFElement(ElementName.JOBFIELD, null, 0);
 	}
 
 	/**
@@ -1111,7 +1111,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 */
 	public JDFRefAnchor getCreateRefAnchor(int iSkip)
 	{
-		return (JDFRefAnchor) getCreateElement(ElementName.REFANCHOR, null, iSkip);
+		return (JDFRefAnchor) getCreateElement_JDFElement(ElementName.REFANCHOR, null, iSkip);
 	}
 
 	/**

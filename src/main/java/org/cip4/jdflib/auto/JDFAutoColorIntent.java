@@ -188,7 +188,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	 */
 	public JDFStringSpan getCreateCoatings()
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.COATINGS, null, 0);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.COATINGS, null, 0);
 	}
 
 	/**
@@ -219,7 +219,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreateColorStandard()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.COLORSTANDARD, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.COLORSTANDARD, null, 0);
 	}
 
 	/**
@@ -250,7 +250,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	 */
 	public JDFStringSpan getCreateColorICCStandard()
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.COLORICCSTANDARD, null, 0);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.COLORICCSTANDARD, null, 0);
 	}
 
 	/**
@@ -281,7 +281,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreateCoverage()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.COVERAGE, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.COVERAGE, null, 0);
 	}
 
 	/**
@@ -312,7 +312,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreateInkManufacturer()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.INKMANUFACTURER, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.INKMANUFACTURER, null, 0);
 	}
 
 	/**
@@ -343,7 +343,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	 */
 	public JDFColorPool getCreateColorPool()
 	{
-		return (JDFColorPool) getCreateElement(ElementName.COLORPOOL, null, 0);
+		return (JDFColorPool) getCreateElement_JDFElement(ElementName.COLORPOOL, null, 0);
 	}
 
 	/**
@@ -384,7 +384,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	 */
 	public JDFSeparationList getCreateColorsUsed()
 	{
-		return (JDFSeparationList) getCreateElement(ElementName.COLORSUSED, null, 0);
+		return (JDFSeparationList) getCreateElement_JDFElement(ElementName.COLORSUSED, null, 0);
 	}
 
 	/**

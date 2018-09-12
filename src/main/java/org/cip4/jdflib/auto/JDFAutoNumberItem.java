@@ -212,7 +212,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	 */
 	public JDFSpanNamedColor getCreateColorName()
 	{
-		return (JDFSpanNamedColor) getCreateElement(ElementName.COLORNAME, null, 0);
+		return (JDFSpanNamedColor) getCreateElement_JDFElement(ElementName.COLORNAME, null, 0);
 	}
 
 	/**
@@ -234,7 +234,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	 */
 	public JDFStringSpan getCreateColorNameDetails(int iSkip)
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.COLORNAMEDETAILS, null, iSkip);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.COLORNAMEDETAILS, null, iSkip);
 	}
 
 	/**
@@ -285,7 +285,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	 */
 	public JDFNumberSpan getCreateXPosition()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.XPOSITION, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.XPOSITION, null, 0);
 	}
 
 	/**
@@ -316,7 +316,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	 */
 	public JDFNumberSpan getCreateYPosition()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.YPOSITION, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.YPOSITION, null, 0);
 	}
 
 	/**
@@ -347,7 +347,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	 */
 	public JDFNumberSpan getCreateOrientation()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.ORIENTATION, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.ORIENTATION, null, 0);
 	}
 
 	/**
@@ -378,7 +378,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	 */
 	public JDFSeparationSpec getCreateSeparationSpec()
 	{
-		return (JDFSeparationSpec) getCreateElement(ElementName.SEPARATIONSPEC, null, 0);
+		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, 0);
 	}
 
 	/**

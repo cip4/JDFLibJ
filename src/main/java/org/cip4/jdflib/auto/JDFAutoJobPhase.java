@@ -677,7 +677,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	public JDFActivity getCreateActivity(int iSkip)
 	{
-		return (JDFActivity) getCreateElement(ElementName.ACTIVITY, null, iSkip);
+		return (JDFActivity) getCreateElement_JDFElement(ElementName.ACTIVITY, null, iSkip);
 	}
 
 	/**
@@ -728,7 +728,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	public JDFCostCenter getCreateCostCenter()
 	{
-		return (JDFCostCenter) getCreateElement(ElementName.COSTCENTER, null, 0);
+		return (JDFCostCenter) getCreateElement_JDFElement(ElementName.COSTCENTER, null, 0);
 	}
 
 	/**
@@ -759,7 +759,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	public JDFMISDetails getCreateMISDetails()
 	{
-		return (JDFMISDetails) getCreateElement(ElementName.MISDETAILS, null, 0);
+		return (JDFMISDetails) getCreateElement_JDFElement(ElementName.MISDETAILS, null, 0);
 	}
 
 	/**
@@ -781,7 +781,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	public JDFModuleStatus getCreateModuleStatus(int iSkip)
 	{
-		return (JDFModuleStatus) getCreateElement(ElementName.MODULESTATUS, null, iSkip);
+		return (JDFModuleStatus) getCreateElement_JDFElement(ElementName.MODULESTATUS, null, iSkip);
 	}
 
 	/**
@@ -823,7 +823,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	public JDFPart getCreatePart(int iSkip)
 	{
-		return (JDFPart) getCreateElement(ElementName.PART, null, iSkip);
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
 
 	/**

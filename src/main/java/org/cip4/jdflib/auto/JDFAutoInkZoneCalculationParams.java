@@ -324,7 +324,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 	 */
 	public JDFDevice getCreateDevice()
 	{
-		return (JDFDevice) getCreateElement(ElementName.DEVICE, null, 0);
+		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, 0);
 	}
 
 	/**

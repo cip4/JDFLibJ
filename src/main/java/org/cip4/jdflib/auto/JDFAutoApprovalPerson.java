@@ -299,7 +299,7 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 	 */
 	public JDFContact getCreateContact()
 	{
-		return (JDFContact) getCreateElement(ElementName.CONTACT, null, 0);
+		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, 0);
 	}
 
 	/**

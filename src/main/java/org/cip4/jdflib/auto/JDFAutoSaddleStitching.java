@@ -136,7 +136,7 @@ public abstract class JDFAutoSaddleStitching extends JDFElement
 	 */
 	public JDFIntegerSpan getCreateStitchNumber()
 	{
-		return (JDFIntegerSpan) getCreateElement(ElementName.STITCHNUMBER, null, 0);
+		return (JDFIntegerSpan) getCreateElement_JDFElement(ElementName.STITCHNUMBER, null, 0);
 	}
 
 	/**

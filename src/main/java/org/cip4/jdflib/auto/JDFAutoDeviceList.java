@@ -128,7 +128,7 @@ public abstract class JDFAutoDeviceList extends JDFElement
 	 */
 	public JDFDeviceInfo getCreateDeviceInfo(int iSkip)
 	{
-		return (JDFDeviceInfo) getCreateElement(ElementName.DEVICEINFO, null, iSkip);
+		return (JDFDeviceInfo) getCreateElement_JDFElement(ElementName.DEVICEINFO, null, iSkip);
 	}
 
 	/**

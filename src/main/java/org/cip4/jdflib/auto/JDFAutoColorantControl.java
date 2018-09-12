@@ -409,7 +409,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 */
 	public JDFColorantAlias getCreateColorantAlias(int iSkip)
 	{
-		return (JDFColorantAlias) getCreateElement(ElementName.COLORANTALIAS, null, iSkip);
+		return (JDFColorantAlias) getCreateElement_JDFElement(ElementName.COLORANTALIAS, null, iSkip);
 	}
 
 	/**
@@ -470,7 +470,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 */
 	public JDFSeparationList getCreateColorantConvertProcess()
 	{
-		return (JDFSeparationList) getCreateElement(ElementName.COLORANTCONVERTPROCESS, null, 0);
+		return (JDFSeparationList) getCreateElement_JDFElement(ElementName.COLORANTCONVERTPROCESS, null, 0);
 	}
 
 	/**
@@ -501,7 +501,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 */
 	public JDFSeparationList getCreateColorantOrder()
 	{
-		return (JDFSeparationList) getCreateElement(ElementName.COLORANTORDER, null, 0);
+		return (JDFSeparationList) getCreateElement_JDFElement(ElementName.COLORANTORDER, null, 0);
 	}
 
 	/**
@@ -532,7 +532,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 */
 	public JDFSeparationList getCreateColorantParams()
 	{
-		return (JDFSeparationList) getCreateElement(ElementName.COLORANTPARAMS, null, 0);
+		return (JDFSeparationList) getCreateElement_JDFElement(ElementName.COLORANTPARAMS, null, 0);
 	}
 
 	/**
@@ -563,7 +563,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 */
 	public JDFColorPool getCreateColorPool()
 	{
-		return (JDFColorPool) getCreateElement(ElementName.COLORPOOL, null, 0);
+		return (JDFColorPool) getCreateElement_JDFElement(ElementName.COLORPOOL, null, 0);
 	}
 
 	/**
@@ -595,7 +595,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 */
 	public JDFColorSpaceSubstitute getCreateColorSpaceSubstitute(int iSkip)
 	{
-		return (JDFColorSpaceSubstitute) getCreateElement(ElementName.COLORSPACESUBSTITUTE, null, iSkip);
+		return (JDFColorSpaceSubstitute) getCreateElement_JDFElement(ElementName.COLORSPACESUBSTITUTE, null, iSkip);
 	}
 
 	/**
@@ -646,7 +646,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 */
 	public JDFSeparationList getCreateDeviceColorantOrder()
 	{
-		return (JDFSeparationList) getCreateElement(ElementName.DEVICECOLORANTORDER, null, 0);
+		return (JDFSeparationList) getCreateElement_JDFElement(ElementName.DEVICECOLORANTORDER, null, 0);
 	}
 
 	/**
@@ -668,7 +668,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 */
 	public JDFDeviceNSpace getCreateDeviceNSpace(int iSkip)
 	{
-		return (JDFDeviceNSpace) getCreateElement(ElementName.DEVICENSPACE, null, iSkip);
+		return (JDFDeviceNSpace) getCreateElement_JDFElement(ElementName.DEVICENSPACE, null, iSkip);
 	}
 
 	/**

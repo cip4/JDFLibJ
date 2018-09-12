@@ -136,7 +136,7 @@ public abstract class JDFAutoStripBinding extends JDFElement
 	 */
 	public JDFHoleList getCreateHoleList()
 	{
-		return (JDFHoleList) getCreateElement(ElementName.HOLELIST, null, 0);
+		return (JDFHoleList) getCreateElement_JDFElement(ElementName.HOLELIST, null, 0);
 	}
 
 	/**

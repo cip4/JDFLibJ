@@ -172,7 +172,7 @@ public abstract class JDFAutoDeleted extends JDFAudit
 	@Override
 	public JDFEmployee getCreateEmployee(int iSkip)
 	{
-		return (JDFEmployee) getCreateElement(ElementName.EMPLOYEE, null, iSkip);
+		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
 
 	/**

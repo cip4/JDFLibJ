@@ -524,7 +524,7 @@ public abstract class JDFAutoByteMap extends JDFResource
 	 */
 	public JDFBand getCreateBand(int iSkip)
 	{
-		return (JDFBand) getCreateElement(ElementName.BAND, null, iSkip);
+		return (JDFBand) getCreateElement_JDFElement(ElementName.BAND, null, iSkip);
 	}
 
 	/**
@@ -575,7 +575,7 @@ public abstract class JDFAutoByteMap extends JDFResource
 	 */
 	public JDFColorPool getCreateColorPool()
 	{
-		return (JDFColorPool) getCreateElement(ElementName.COLORPOOL, null, 0);
+		return (JDFColorPool) getCreateElement_JDFElement(ElementName.COLORPOOL, null, 0);
 	}
 
 	/**
@@ -607,7 +607,7 @@ public abstract class JDFAutoByteMap extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec(int iSkip)
 	{
-		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, iSkip);
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
 
 	/**
@@ -659,7 +659,7 @@ public abstract class JDFAutoByteMap extends JDFResource
 	 */
 	public JDFPixelColorant getCreatePixelColorant(int iSkip)
 	{
-		return (JDFPixelColorant) getCreateElement(ElementName.PIXELCOLORANT, null, iSkip);
+		return (JDFPixelColorant) getCreateElement_JDFElement(ElementName.PIXELCOLORANT, null, iSkip);
 	}
 
 	/**

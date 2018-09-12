@@ -142,7 +142,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	 */
 	public JDFSpanPrintPreference getCreatePrintPreference()
 	{
-		return (JDFSpanPrintPreference) getCreateElement(ElementName.PRINTPREFERENCE, null, 0);
+		return (JDFSpanPrintPreference) getCreateElement_JDFElement(ElementName.PRINTPREFERENCE, null, 0);
 	}
 
 	/**
@@ -173,7 +173,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreatePrintProcess()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.PRINTPROCESS, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.PRINTPROCESS, null, 0);
 	}
 
 	/**
@@ -195,7 +195,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	 */
 	public JDFResource getCreateResource(int iSkip)
 	{
-		return (JDFResource) getCreateElement(ElementName.RESOURCE, null, iSkip);
+		return (JDFResource) getCreateElement_JDFElement(ElementName.RESOURCE, null, iSkip);
 	}
 
 	/**

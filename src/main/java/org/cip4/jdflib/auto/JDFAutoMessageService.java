@@ -566,7 +566,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	public JDFActionPool getCreateActionPool()
 	{
-		return (JDFActionPool) getCreateElement(ElementName.ACTIONPOOL, null, 0);
+		return (JDFActionPool) getCreateElement_JDFElement(ElementName.ACTIONPOOL, null, 0);
 	}
 
 	/**
@@ -597,7 +597,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	public JDFDevCapPool getCreateDevCapPool()
 	{
-		return (JDFDevCapPool) getCreateElement(ElementName.DEVCAPPOOL, null, 0);
+		return (JDFDevCapPool) getCreateElement_JDFElement(ElementName.DEVCAPPOOL, null, 0);
 	}
 
 	/**
@@ -619,7 +619,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	public JDFDevCaps getCreateDevCaps(int iSkip)
 	{
-		return (JDFDevCaps) getCreateElement(ElementName.DEVCAPS, null, iSkip);
+		return (JDFDevCaps) getCreateElement_JDFElement(ElementName.DEVCAPS, null, iSkip);
 	}
 
 	/**
@@ -670,7 +670,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	public JDFModulePool getCreateModulePool()
 	{
-		return (JDFModulePool) getCreateElement(ElementName.MODULEPOOL, null, 0);
+		return (JDFModulePool) getCreateElement_JDFElement(ElementName.MODULEPOOL, null, 0);
 	}
 
 	/**
@@ -701,7 +701,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	public JDFTestPool getCreateTestPool()
 	{
-		return (JDFTestPool) getCreateElement(ElementName.TESTPOOL, null, 0);
+		return (JDFTestPool) getCreateElement_JDFElement(ElementName.TESTPOOL, null, 0);
 	}
 
 	/**

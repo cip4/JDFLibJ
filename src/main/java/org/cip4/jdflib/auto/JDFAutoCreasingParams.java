@@ -148,7 +148,7 @@ public abstract class JDFAutoCreasingParams extends JDFResource
 	 */
 	public JDFCrease getCreateCrease(int iSkip)
 	{
-		return (JDFCrease) getCreateElement(ElementName.CREASE, null, iSkip);
+		return (JDFCrease) getCreateElement_JDFElement(ElementName.CREASE, null, iSkip);
 	}
 
 	/**

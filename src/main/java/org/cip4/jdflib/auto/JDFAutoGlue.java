@@ -248,7 +248,7 @@ public abstract class JDFAutoGlue extends JDFElement
 	 */
 	public JDFGlueApplication getCreateGlueApplication()
 	{
-		return (JDFGlueApplication) getCreateElement(ElementName.GLUEAPPLICATION, null, 0);
+		return (JDFGlueApplication) getCreateElement_JDFElement(ElementName.GLUEAPPLICATION, null, 0);
 	}
 
 	/**
@@ -289,7 +289,7 @@ public abstract class JDFAutoGlue extends JDFElement
 	 */
 	public JDFGlueLine getCreateGlueLine()
 	{
-		return (JDFGlueLine) getCreateElement(ElementName.GLUELINE, null, 0);
+		return (JDFGlueLine) getCreateElement_JDFElement(ElementName.GLUELINE, null, 0);
 	}
 
 	/**

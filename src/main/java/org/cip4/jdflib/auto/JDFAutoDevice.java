@@ -771,7 +771,7 @@ public abstract class JDFAutoDevice extends JDFResource
 	 */
 	public JDFCostCenter getCreateCostCenter()
 	{
-		return (JDFCostCenter) getCreateElement(ElementName.COSTCENTER, null, 0);
+		return (JDFCostCenter) getCreateElement_JDFElement(ElementName.COSTCENTER, null, 0);
 	}
 
 	/**
@@ -793,7 +793,7 @@ public abstract class JDFAutoDevice extends JDFResource
 	 */
 	public JDFDeviceCap getCreateDeviceCap(int iSkip)
 	{
-		return (JDFDeviceCap) getCreateElement(ElementName.DEVICECAP, null, iSkip);
+		return (JDFDeviceCap) getCreateElement_JDFElement(ElementName.DEVICECAP, null, iSkip);
 	}
 
 	/**
@@ -844,7 +844,7 @@ public abstract class JDFAutoDevice extends JDFResource
 	 */
 	public JDFIconList getCreateIconList()
 	{
-		return (JDFIconList) getCreateElement(ElementName.ICONLIST, null, 0);
+		return (JDFIconList) getCreateElement_JDFElement(ElementName.ICONLIST, null, 0);
 	}
 
 	/**
@@ -866,7 +866,7 @@ public abstract class JDFAutoDevice extends JDFResource
 	 */
 	public JDFModule getCreateModule(int iSkip)
 	{
-		return (JDFModule) getCreateElement(ElementName.MODULE, null, iSkip);
+		return (JDFModule) getCreateElement_JDFElement(ElementName.MODULE, null, iSkip);
 	}
 
 	/**

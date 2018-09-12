@@ -399,7 +399,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 */
 	public JDFAddress getCreateAddress()
 	{
-		return (JDFAddress) getCreateElement(ElementName.ADDRESS, null, 0);
+		return (JDFAddress) getCreateElement_JDFElement(ElementName.ADDRESS, null, 0);
 	}
 
 	/**
@@ -431,7 +431,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 */
 	public JDFComChannel getCreateComChannel(int iSkip)
 	{
-		return (JDFComChannel) getCreateElement(ElementName.COMCHANNEL, null, iSkip);
+		return (JDFComChannel) getCreateElement_JDFElement(ElementName.COMCHANNEL, null, iSkip);
 	}
 
 	/**

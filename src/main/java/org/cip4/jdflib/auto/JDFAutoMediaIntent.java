@@ -269,7 +269,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFSpanCoatings getCreateBackCoatings()
 	{
-		return (JDFSpanCoatings) getCreateElement(ElementName.BACKCOATINGS, null, 0);
+		return (JDFSpanCoatings) getCreateElement_JDFElement(ElementName.BACKCOATINGS, null, 0);
 	}
 
 	/**
@@ -300,7 +300,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreateBrightness()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.BRIGHTNESS, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.BRIGHTNESS, null, 0);
 	}
 
 	/**
@@ -331,7 +331,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFOptionSpan getCreateBuyerSupplied()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.BUYERSUPPLIED, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.BUYERSUPPLIED, null, 0);
 	}
 
 	/**
@@ -362,7 +362,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFXYPairSpan getCreateDimensions()
 	{
-		return (JDFXYPairSpan) getCreateElement(ElementName.DIMENSIONS, null, 0);
+		return (JDFXYPairSpan) getCreateElement_JDFElement(ElementName.DIMENSIONS, null, 0);
 	}
 
 	/**
@@ -393,7 +393,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreateFlute()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.FLUTE, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.FLUTE, null, 0);
 	}
 
 	/**
@@ -424,7 +424,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFSpanFluteDirection getCreateFluteDirection()
 	{
-		return (JDFSpanFluteDirection) getCreateElement(ElementName.FLUTEDIRECTION, null, 0);
+		return (JDFSpanFluteDirection) getCreateElement_JDFElement(ElementName.FLUTEDIRECTION, null, 0);
 	}
 
 	/**
@@ -455,7 +455,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFSpanCoatings getCreateFrontCoatings()
 	{
-		return (JDFSpanCoatings) getCreateElement(ElementName.FRONTCOATINGS, null, 0);
+		return (JDFSpanCoatings) getCreateElement_JDFElement(ElementName.FRONTCOATINGS, null, 0);
 	}
 
 	/**
@@ -486,7 +486,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFIntegerSpan getCreateGrade()
 	{
-		return (JDFIntegerSpan) getCreateElement(ElementName.GRADE, null, 0);
+		return (JDFIntegerSpan) getCreateElement_JDFElement(ElementName.GRADE, null, 0);
 	}
 
 	/**
@@ -517,7 +517,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFSpanGrainDirection getCreateGrainDirection()
 	{
-		return (JDFSpanGrainDirection) getCreateElement(ElementName.GRAINDIRECTION, null, 0);
+		return (JDFSpanGrainDirection) getCreateElement_JDFElement(ElementName.GRAINDIRECTION, null, 0);
 	}
 
 	/**
@@ -548,7 +548,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFIntegerSpan getCreateHoleCount()
 	{
-		return (JDFIntegerSpan) getCreateElement(ElementName.HOLECOUNT, null, 0);
+		return (JDFIntegerSpan) getCreateElement_JDFElement(ElementName.HOLECOUNT, null, 0);
 	}
 
 	/**
@@ -579,7 +579,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFStringSpan getCreateHoleType()
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.HOLETYPE, null, 0);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.HOLETYPE, null, 0);
 	}
 
 	/**
@@ -610,7 +610,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFSpanISOPaperSubstrate getCreateISOPaperSubstrate()
 	{
-		return (JDFSpanISOPaperSubstrate) getCreateElement(ElementName.ISOPAPERSUBSTRATE, null, 0);
+		return (JDFSpanISOPaperSubstrate) getCreateElement_JDFElement(ElementName.ISOPAPERSUBSTRATE, null, 0);
 	}
 
 	/**
@@ -641,7 +641,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFSpanNamedColor getCreateMediaColor()
 	{
-		return (JDFSpanNamedColor) getCreateElement(ElementName.MEDIACOLOR, null, 0);
+		return (JDFSpanNamedColor) getCreateElement_JDFElement(ElementName.MEDIACOLOR, null, 0);
 	}
 
 	/**
@@ -672,7 +672,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFStringSpan getCreateMediaColorDetails()
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.MEDIACOLORDETAILS, null, 0);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.MEDIACOLORDETAILS, null, 0);
 	}
 
 	/**
@@ -703,7 +703,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFStringSpan getCreateMediaQuality()
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.MEDIAQUALITY, null, 0);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.MEDIAQUALITY, null, 0);
 	}
 
 	/**
@@ -734,7 +734,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFSpanMediaType getCreateMediaType()
 	{
-		return (JDFSpanMediaType) getCreateElement(ElementName.MEDIATYPE, null, 0);
+		return (JDFSpanMediaType) getCreateElement_JDFElement(ElementName.MEDIATYPE, null, 0);
 	}
 
 	/**
@@ -765,7 +765,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreateMediaTypeDetails()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.MEDIATYPEDETAILS, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.MEDIATYPEDETAILS, null, 0);
 	}
 
 	/**
@@ -796,7 +796,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFSpanMediaUnit getCreateMediaUnit()
 	{
-		return (JDFSpanMediaUnit) getCreateElement(ElementName.MEDIAUNIT, null, 0);
+		return (JDFSpanMediaUnit) getCreateElement_JDFElement(ElementName.MEDIAUNIT, null, 0);
 	}
 
 	/**
@@ -827,7 +827,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFSpanOpacity getCreateOpacity()
 	{
-		return (JDFSpanOpacity) getCreateElement(ElementName.OPACITY, null, 0);
+		return (JDFSpanOpacity) getCreateElement_JDFElement(ElementName.OPACITY, null, 0);
 	}
 
 	/**
@@ -858,7 +858,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreateOpacityLevel()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.OPACITYLEVEL, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.OPACITYLEVEL, null, 0);
 	}
 
 	/**
@@ -889,7 +889,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFOptionSpan getCreateRecycled()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.RECYCLED, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.RECYCLED, null, 0);
 	}
 
 	/**
@@ -920,7 +920,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreateRecycledPercentage()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.RECYCLEDPERCENTAGE, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.RECYCLEDPERCENTAGE, null, 0);
 	}
 
 	/**
@@ -951,7 +951,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFStringSpan getCreateStockBrand()
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.STOCKBRAND, null, 0);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.STOCKBRAND, null, 0);
 	}
 
 	/**
@@ -982,7 +982,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreateStockType()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.STOCKTYPE, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.STOCKTYPE, null, 0);
 	}
 
 	/**
@@ -1013,7 +1013,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFNameSpan getCreateTexture()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.TEXTURE, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.TEXTURE, null, 0);
 	}
 
 	/**
@@ -1044,7 +1044,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreateThickness()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.THICKNESS, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.THICKNESS, null, 0);
 	}
 
 	/**
@@ -1075,7 +1075,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreateUSWeight()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.USWEIGHT, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.USWEIGHT, null, 0);
 	}
 
 	/**
@@ -1106,7 +1106,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFNumberSpan getCreateWeight()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.WEIGHT, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.WEIGHT, null, 0);
 	}
 
 	/**
@@ -1137,7 +1137,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 */
 	public JDFMediaLayers getCreateMediaLayers()
 	{
-		return (JDFMediaLayers) getCreateElement(ElementName.MEDIALAYERS, null, 0);
+		return (JDFMediaLayers) getCreateElement_JDFElement(ElementName.MEDIALAYERS, null, 0);
 	}
 
 	/**

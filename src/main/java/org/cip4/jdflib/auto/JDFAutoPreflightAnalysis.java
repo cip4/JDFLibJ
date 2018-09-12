@@ -161,7 +161,7 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 	 */
 	public JDFElement getCreateColorsResultsPool()
 	{
-		return (JDFElement) getCreateElement(ElementName.COLORSRESULTSPOOL, null, 0);
+		return (JDFElement) getCreateElement_JDFElement(ElementName.COLORSRESULTSPOOL, null, 0);
 	}
 
 	/**
@@ -192,7 +192,7 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 	 */
 	public JDFElement getCreateDocumentResultsPool()
 	{
-		return (JDFElement) getCreateElement(ElementName.DOCUMENTRESULTSPOOL, null, 0);
+		return (JDFElement) getCreateElement_JDFElement(ElementName.DOCUMENTRESULTSPOOL, null, 0);
 	}
 
 	/**
@@ -223,7 +223,7 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 	 */
 	public JDFElement getCreateFontsResultsPool()
 	{
-		return (JDFElement) getCreateElement(ElementName.FONTSRESULTSPOOL, null, 0);
+		return (JDFElement) getCreateElement_JDFElement(ElementName.FONTSRESULTSPOOL, null, 0);
 	}
 
 	/**
@@ -254,7 +254,7 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 	 */
 	public JDFElement getCreateFileTypeResultsPool()
 	{
-		return (JDFElement) getCreateElement(ElementName.FILETYPERESULTSPOOL, null, 0);
+		return (JDFElement) getCreateElement_JDFElement(ElementName.FILETYPERESULTSPOOL, null, 0);
 	}
 
 	/**
@@ -285,7 +285,7 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 	 */
 	public JDFElement getCreateImagesResultsPool()
 	{
-		return (JDFElement) getCreateElement(ElementName.IMAGESRESULTSPOOL, null, 0);
+		return (JDFElement) getCreateElement_JDFElement(ElementName.IMAGESRESULTSPOOL, null, 0);
 	}
 
 	/**
@@ -316,7 +316,7 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 	 */
 	public JDFElement getCreatePagesResultsPool()
 	{
-		return (JDFElement) getCreateElement(ElementName.PAGESRESULTSPOOL, null, 0);
+		return (JDFElement) getCreateElement_JDFElement(ElementName.PAGESRESULTSPOOL, null, 0);
 	}
 
 	/**

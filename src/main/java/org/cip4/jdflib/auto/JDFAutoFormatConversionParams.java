@@ -162,7 +162,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	 */
 	public JDFFileSpec getCreateFileSpec()
 	{
-		return (JDFFileSpec) getCreateElement(ElementName.FILESPEC, null, 0);
+		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, 0);
 	}
 
 	/**
@@ -203,7 +203,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	 */
 	public JDFTIFFFormatParams getCreateTIFFFormatParams()
 	{
-		return (JDFTIFFFormatParams) getCreateElement(ElementName.TIFFFORMATPARAMS, null, 0);
+		return (JDFTIFFFormatParams) getCreateElement_JDFElement(ElementName.TIFFFORMATPARAMS, null, 0);
 	}
 
 	/**
@@ -234,7 +234,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	 */
 	public JDFImageCompressionParams getCreateImageCompressionParams()
 	{
-		return (JDFImageCompressionParams) getCreateElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
+		return (JDFImageCompressionParams) getCreateElement_JDFElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
 	}
 
 	/**
@@ -275,7 +275,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	 */
 	public JDFColorPool getCreateColorPool()
 	{
-		return (JDFColorPool) getCreateElement(ElementName.COLORPOOL, null, 0);
+		return (JDFColorPool) getCreateElement_JDFElement(ElementName.COLORPOOL, null, 0);
 	}
 
 	/**

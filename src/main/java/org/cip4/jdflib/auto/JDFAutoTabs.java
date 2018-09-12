@@ -237,7 +237,7 @@ public abstract class JDFAutoTabs extends JDFElement
 	 */
 	public JDFStringSpan getCreateTabBrand()
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.TABBRAND, null, 0);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.TABBRAND, null, 0);
 	}
 
 	/**
@@ -268,7 +268,7 @@ public abstract class JDFAutoTabs extends JDFElement
 	 */
 	public JDFNumberSpan getCreateTabExtensionDistance()
 	{
-		return (JDFNumberSpan) getCreateElement(ElementName.TABEXTENSIONDISTANCE, null, 0);
+		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.TABEXTENSIONDISTANCE, null, 0);
 	}
 
 	/**
@@ -299,7 +299,7 @@ public abstract class JDFAutoTabs extends JDFElement
 	 */
 	public JDFOptionSpan getCreateTabExtensionMylar()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.TABEXTENSIONMYLAR, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.TABEXTENSIONMYLAR, null, 0);
 	}
 
 	/**
@@ -330,7 +330,7 @@ public abstract class JDFAutoTabs extends JDFElement
 	 */
 	public JDFOptionSpan getCreateTabBindMylar()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.TABBINDMYLAR, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.TABBINDMYLAR, null, 0);
 	}
 
 	/**
@@ -361,7 +361,7 @@ public abstract class JDFAutoTabs extends JDFElement
 	 */
 	public JDFOptionSpan getCreateTabBodyCopy()
 	{
-		return (JDFOptionSpan) getCreateElement(ElementName.TABBODYCOPY, null, 0);
+		return (JDFOptionSpan) getCreateElement_JDFElement(ElementName.TABBODYCOPY, null, 0);
 	}
 
 	/**
@@ -392,7 +392,7 @@ public abstract class JDFAutoTabs extends JDFElement
 	 */
 	public JDFSpanNamedColor getCreateTabMylarColor()
 	{
-		return (JDFSpanNamedColor) getCreateElement(ElementName.TABMYLARCOLOR, null, 0);
+		return (JDFSpanNamedColor) getCreateElement_JDFElement(ElementName.TABMYLARCOLOR, null, 0);
 	}
 
 	/**
@@ -414,7 +414,7 @@ public abstract class JDFAutoTabs extends JDFElement
 	 */
 	public JDFStringSpan getCreateTabMylarColorDetails(int iSkip)
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.TABMYLARCOLORDETAILS, null, iSkip);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.TABMYLARCOLORDETAILS, null, iSkip);
 	}
 
 	/**

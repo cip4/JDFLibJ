@@ -140,7 +140,7 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
 	 */
 	public JDFStringSpan getCreateCombBrand()
 	{
-		return (JDFStringSpan) getCreateElement(ElementName.COMBBRAND, null, 0);
+		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.COMBBRAND, null, 0);
 	}
 
 	/**
@@ -171,7 +171,7 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
 	 */
 	public JDFNameSpan getCreatePlasticCombType()
 	{
-		return (JDFNameSpan) getCreateElement(ElementName.PLASTICCOMBTYPE, null, 0);
+		return (JDFNameSpan) getCreateElement_JDFElement(ElementName.PLASTICCOMBTYPE, null, 0);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
 	 */
 	public JDFHoleList getCreateHoleList()
 	{
-		return (JDFHoleList) getCreateElement(ElementName.HOLELIST, null, 0);
+		return (JDFHoleList) getCreateElement_JDFElement(ElementName.HOLELIST, null, 0);
 	}
 
 	/**

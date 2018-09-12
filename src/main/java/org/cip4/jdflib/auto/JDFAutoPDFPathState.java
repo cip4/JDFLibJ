@@ -261,7 +261,7 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 */
 	public JDFLoc getCreateLoc(int iSkip)
 	{
-		return (JDFLoc) getCreateElement(ElementName.LOC, null, iSkip);
+		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, iSkip);
 	}
 
 	/**
@@ -303,7 +303,7 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 */
 	public JDFValue getCreateValue(int iSkip)
 	{
-		return (JDFValue) getCreateElement(ElementName.VALUE, null, iSkip);
+		return (JDFValue) getCreateElement_JDFElement(ElementName.VALUE, null, iSkip);
 	}
 
 	/**

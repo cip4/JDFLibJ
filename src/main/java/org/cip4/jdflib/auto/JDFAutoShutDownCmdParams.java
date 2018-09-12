@@ -246,7 +246,7 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	 */
 	public JDFFlushQueueParams getCreateFlushQueueParams()
 	{
-		return (JDFFlushQueueParams) getCreateElement(ElementName.FLUSHQUEUEPARAMS, null, 0);
+		return (JDFFlushQueueParams) getCreateElement_JDFElement(ElementName.FLUSHQUEUEPARAMS, null, 0);
 	}
 
 	/**
