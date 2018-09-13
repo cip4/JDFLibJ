@@ -63,7 +63,15 @@ public class UrlCheckTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		assertNotNull(new UrlCheck("https://www.google.com").ping(9999));
+		UrlPart ping = null;
+		for (int i = 0; i < 3; i++)
+		{
+			ping = new UrlCheck("https://www.google.com").ping(9999);
+			if (ping != null)
+				break;
+		}
+
+		assertNotNull(ping);
 	}
 
 	/**

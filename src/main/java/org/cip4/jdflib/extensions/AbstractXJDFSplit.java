@@ -42,6 +42,7 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
@@ -63,6 +64,8 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	{
 		super();
 	}
+
+	private static VString productResNames = new VString(new String[] { ElementName.CUSTOMERINFO, ElementName.NODEINFO });
 
 	/**
 	 * @see org.cip4.jdflib.ifaces.IXJDFSplit#splitXJDF(org.cip4.jdflib.extensions.XJDFHelper)
@@ -130,9 +133,35 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 		{
 			set = checkProcessUsage(set, types);
 			set = checkCPI(set, types, allTypes);
+			set = checkProduct(set, types);
 		}
 		return set;
 
+	}
+
+	/**
+	 *
+	 * @param set
+	 * @param types
+	 * @return
+	 */
+	protected SetHelper checkProduct(SetHelper set, final VString types)
+	{
+		if (set != null && types.contains(JDFConstants.PRODUCT))
+		{
+			final String name = set.getName();
+			if (name == null || !getProductResources().contains(name))
+			{
+				set.deleteNode();
+				set = null;
+			}
+		}
+		return set;
+	}
+
+	private VString getProductResources()
+	{
+		return productResNames;
 	}
 
 	protected SetHelper checkProcessUsage(SetHelper set, final VString types)

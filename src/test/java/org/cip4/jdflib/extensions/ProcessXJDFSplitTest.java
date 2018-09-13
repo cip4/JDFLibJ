@@ -47,6 +47,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFNodeInfo;
@@ -95,6 +96,20 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		assertNotNull(c.get(1).getSet(ElementName.COMPONENT, EnumUsage.Output));
 		assertNotNull(c.get(2).getSet(ElementName.COMPONENT, EnumUsage.Input));
 		assertNotNull(c.get(2).getSet(ElementName.COMPONENT, EnumUsage.Output).getPartition(0));
+	}
+
+	/**
+	 * @throws Throwable
+	 *
+	 */
+	@Test
+	public void testSplitTypesCuttingProduct() throws Throwable
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
+		h.setTypes("ConventionalPrinting Cutting Product");
+
+		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+		assertEquals(new VString("Product"), splitter.splitTypes(h).get(0));
 	}
 
 	/**
@@ -209,6 +224,50 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		assertEquals(2, splitted.size());
 		assertEquals(1, splitted.get(0).getSets(ElementName.NODEINFO, EnumUsage.Input).size());
 		assertEquals(1, splitted.get(1).getSets(ElementName.NODEINFO, EnumUsage.Input).size());
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testProductComponent()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+		xCon.setSplitter(splitter);
+
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		h.setTypes(JDFConstants.PRODUCT);
+		h.addType(EnumType.ConventionalPrinting);
+		final SetHelper csh = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
+		csh.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "s1"), true).setAmount(5, null, true);
+		csh.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "s2"), true).setAmount(8, null, true);
+		h.appendProduct().setAmount(10);
+		h.cleanUp();
+		final JDFDoc d = xCon.convert(h);
+		assertNotNull(d);
+		final JDFNode n = d.getJDFRoot();
+		assertNull(n.getResource(ElementName.COMPONENT, EnumUsage.Output, 1));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testCheckProduct()
+	{
+		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		h.addType(EnumType.Product);
+		final SetHelper niProduct = h.getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
+		final SetHelper color = h.getCreateSet(ElementName.COLOR, EnumUsage.Input);
+		assertNull(splitter.checkProduct(color, new VString("Product")));
+		assertNotNull(splitter.checkProduct(color, new VString("Climbing")));
+		assertNotNull(splitter.checkProduct(niProduct, new VString("Product")));
+
 	}
 
 	/**

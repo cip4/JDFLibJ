@@ -48,6 +48,7 @@ import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
@@ -508,6 +509,28 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFDoc d = xCon.convert(h);
 		assertNotNull(d);
 		assertEquals(d.getJDFRoot().getResourcePool().numChildElements(ElementName.RUNLIST, null), 1);
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testProductComponent()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		h.setTypes(JDFConstants.PRODUCT);
+		h.addType(EnumType.ConventionalPrinting);
+		final SetHelper csh = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
+		csh.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "s1"), true).setAmount(5, null, true);
+		csh.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "s2"), true).setAmount(8, null, true);
+		h.appendProduct().setAmount(10);
+		h.cleanUp();
+		final JDFDoc d = xCon.convert(h);
+		assertNotNull(d);
+		final JDFNode n = d.getJDFRoot();
+		assertNull(n.getResource(ElementName.COMPONENT, EnumUsage.Output, 1));
 	}
 
 	/**
