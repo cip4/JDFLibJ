@@ -560,6 +560,44 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	public synchronized void testMaxAux() throws Exception
+	{
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		hf.setStabilizeTime(100);
+		File error = new File("error");
+		hf.setErrorStorage(error);
+		File ok = new File("ok");
+		hf.setOKStorage(ok);
+		hf.setMaxStore(40);
+		hf.setMaxAux(10);
+		hf.restart();
+		ThreadUtil.sleep(1000);
+
+		for (int i = 0; i < 100; i++)
+			createPair(i);
+
+		ok = FileUtil.getFileInDirectory(theHFDir, ok);
+		error = FileUtil.getFileInDirectory(theHFDir, error);
+		for (int i = 0; i < 100; i++)
+		{
+			ThreadUtil.sleep(200);
+			if (tmpHFDir.listFiles().length == 0 && theHFDir.listFiles().length <= 2)
+				break;
+		}
+
+		assertTrue(FileUtil.listDirectories(ok).length < 15);
+		assertTrue(FileUtil.listDirectories(error).length < 15);
+
+		hf.stop();
+	}
+
+	/**
+	 *
+	 * ok or error folder testing
+	 *
+	 * @throws Exception
+	 */
+	@Test
 	public synchronized void testAux() throws Exception
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());

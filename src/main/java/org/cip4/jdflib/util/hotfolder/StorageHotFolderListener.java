@@ -1,68 +1,36 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -80,6 +48,7 @@ import org.cip4.jdflib.util.file.FileSorter;
 
 /**
  * hotfolder listener that also moves to a done dir
+ *
  * @author rainer prosi
  * @date Feb 14, 2011
  */
@@ -121,6 +90,7 @@ class StorageHotFolderListener implements HotFolderListener
 	/**
 	 *
 	 * set the directory for successful done
+	 *
 	 * @param ok
 	 */
 	void setOKStorage(final File ok)
@@ -140,6 +110,7 @@ class StorageHotFolderListener implements HotFolderListener
 	/**
 	 *
 	 * set the directory for error done
+	 *
 	 * @param error
 	 */
 	void setErrorStorage(final File error)
@@ -157,6 +128,7 @@ class StorageHotFolderListener implements HotFolderListener
 	}
 
 	HotFolderListener theListener;
+	private int maxAux;
 
 	/**
 	 * @see org.cip4.jdflib.util.hotfolder.HotFolderListener#hotFile(java.io.File)
@@ -179,6 +151,7 @@ class StorageHotFolderListener implements HotFolderListener
 
 	/**
 	 * copy to ok or completed
+	 *
 	 * @param storedFile the file to move
 	 * @param bOK if true, ok else error
 	 */
@@ -308,16 +281,18 @@ class StorageHotFolderListener implements HotFolderListener
 
 	/**
 	 * remove old stuff from ok and error folder
+	 *
 	 * @param bOK if true cleanup the ok folder, else the error folder
 	 */
 	private void cleanup(final boolean bOK)
 	{
 		final int nHot = bOK ? nHotOK++ : nHotError++;
-		if (nHot % 13 == 0)
+		final int check = Math.max(1, maxAux / 4);
+		if (nHot % check == 0)
 		{
 			final FileSorter fs = new FileSorter(bOK ? okStorage : errorStorage);
 			final File[] list = fs.sortLastModified(true);
-			final Vector<File> vList = new Vector<File>();
+			final Vector<File> vList = new Vector<>();
 			for (final File f : list)
 			{
 				if (!f.isDirectory())
@@ -325,15 +300,17 @@ class StorageHotFolderListener implements HotFolderListener
 					vList.add(f);
 				}
 			}
-			for (int i = maxStore; i < vList.size(); i++)
+			int i = 0;
+			for (final File hotFile : vList)
 			{
-				final File hotFile = vList.get(i);
-				final File aux = FileUtil.getAuxDir(hotFile);
-				boolean ok = FileUtil.forceDelete(hotFile);
+				i++;
+				boolean ok = i > maxStore ? FileUtil.forceDelete(hotFile) : true;
 				if (!ok)
 				{
 					log.warn("failed to delete temporary file " + hotFile.getAbsolutePath());
 				}
+
+				final File aux = i > maxAux ? FileUtil.getAuxDir(hotFile) : null;
 				if (aux != null)
 				{
 					ok = FileUtil.deleteAll(aux);
@@ -408,12 +385,14 @@ class StorageHotFolderListener implements HotFolderListener
 	}
 
 	/**
-	 * Setter for maxStore attribute.
+	 * Setter for maxStore attribute. also sets maxAux which may be overridden later
+	 *
 	 * @param maxStore the maxStore to set
 	 */
 	void setMaxStore(final int maxStore)
 	{
 		this.maxStore = maxStore;
+		this.maxAux = maxStore;
 	}
 
 	/**
@@ -424,6 +403,14 @@ class StorageHotFolderListener implements HotFolderListener
 	public String toString()
 	{
 		return "StorageHotFolderListener: ok=" + okStorage + " error=" + errorStorage + " " + parent;
+	}
+
+	/**
+	 * @param maxAuxDirs the auxFactor to set if >1 then aux files get zapped earlier
+	 */
+	public void setMaxAux(final int maxAuxDirs)
+	{
+		this.maxAux = maxAuxDirs;
 	}
 
 }
