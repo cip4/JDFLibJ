@@ -159,7 +159,11 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 		return set;
 	}
 
-	private VString getProductResources()
+	/**
+	 *
+	 * @return
+	 */
+	protected VString getProductResources()
 	{
 		return productResNames;
 	}
