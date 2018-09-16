@@ -134,6 +134,8 @@ public class DumpDirTest extends JDFTestCaseBase
 		}
 		final long mem2 = rt.totalMemory() - rt.freeMemory();
 		if (mem2 > mem)
-			assertEquals(mem, mem2, 24200000);
+		{
+			assertEquals(mem, mem2, 44200000);
+		}
 	}
 }
