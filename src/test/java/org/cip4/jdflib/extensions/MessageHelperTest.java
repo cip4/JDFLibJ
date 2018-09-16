@@ -148,6 +148,19 @@ public class MessageHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetFamily()
+	{
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
+		assertEquals(EnumFamily.Command, mh.getFamily());
+		mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
+		assertEquals(EnumFamily.Signal, mh.getFamily());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testIsSignal()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
@@ -176,6 +189,16 @@ public class MessageHelperTest extends JDFTestCaseBase
 	{
 		final XMLDoc d = new XMLDoc("foo:CommandBar", "foo");
 		assertTrue(MessageHelper.isMessage(d.getRoot()));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testFamilyMessageForeign()
+	{
+		final XMLDoc d = new XMLDoc("foo:CommandBar", "foo");
+		assertEquals(EnumFamily.Command, new MessageHelper(d.getRoot()).getFamily());
 	}
 
 	/**

@@ -110,7 +110,7 @@ public class IDRemoverTest extends JDFTestCaseBase
 		XJDFHelper h = XJDFHelper.getHelper(root);
 		h.getCreateAuditPool().appendMessage(XJDFConstants.AuditResource);
 		finder.removeIDs(root);
-		assertNotNull(h.getAuditPool().getAuditHelpers().get(0).getHeader().getID());
+		assertNotNull(h.getAuditPool().getMessageHelpers().get(0).getHeader().getID());
 	}
 
 	/**

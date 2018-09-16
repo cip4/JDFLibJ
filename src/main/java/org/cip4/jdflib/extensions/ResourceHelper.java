@@ -156,6 +156,18 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
+	 * convenience to get the partmap of the first (and typically only) part element
+	 *
+	 * @return one non-null part element that may be empty
+	 */
+	public String getPartKey(final String key)
+	{
+		final VJDFAttributeMap vjdfAttributeMap = getPartMapVector();
+		final JDFAttributeMap cm = vjdfAttributeMap == null ? null : vjdfAttributeMap.getCommonMap();
+		return cm == null ? null : cm.get(key);
+	}
+
+	/**
 	 *
 	 * @param map the partmap to set the part element
 	 */

@@ -43,6 +43,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
@@ -238,6 +239,20 @@ public class MessageHelper extends BaseXJDFHelper
 			return;
 		final String id = ensureHeader(hQuery.theElement).appendAnchor(null);
 		ensureHeader(theElement).setAttribute(AttributeName.REFID, id);
+	}
+
+	public EnumFamily getFamily()
+	{
+		if (isCommand())
+			return EnumFamily.Command;
+		else if (isQuery())
+			return EnumFamily.Query;
+		else if (isSignal())
+			return EnumFamily.Signal;
+		else if (isResponse())
+			return EnumFamily.Response;
+		return null;
+
 	}
 
 }

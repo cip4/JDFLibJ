@@ -4103,7 +4103,7 @@ public class JDFElement extends KElement
 	 *
 	 * @param vers the new default version
 	 */
-	public static synchronized void setDefaultJDFVersion(final EnumVersion vers)
+	public static void setDefaultJDFVersion(final EnumVersion vers)
 	{
 		defaultVersion = vers;
 	}

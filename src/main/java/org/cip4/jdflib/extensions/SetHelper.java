@@ -497,6 +497,27 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * returns all partitions that are a superset of map
+	 * 
+	 * @param map
+	 * @return
+	 */
+	public Vector<ResourceHelper> getSuperPartitions(final JDFAttributeMap map)
+	{
+		final Vector<ResourceHelper> v = getPartitions();
+		final Vector<ResourceHelper> vRet = new Vector<>();
+		for (final ResourceHelper ph : v)
+		{
+			final VJDFAttributeMap vMap = ph.getPartMapVector();
+			if (map == null || vMap != null && vMap.subMap(map))
+			{
+				vRet.add(ph);
+			}
+		}
+		return vRet;
+	}
+
+	/**
 	 * @return
 	 */
 	public KElement getSet()

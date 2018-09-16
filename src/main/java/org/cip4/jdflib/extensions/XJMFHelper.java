@@ -38,6 +38,7 @@ package org.cip4.jdflib.extensions;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Vector;
 
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -58,6 +59,22 @@ public class XJMFHelper extends MessagePoolHelper
 	public XJMFHelper(final KElement pool)
 	{
 		super(pool);
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public Vector<MessageHelper> getMessageHelpers(final EnumFamily family)
+	{
+		final Vector<MessageHelper> vA = getMessageHelpers();
+		final Vector<MessageHelper> vM = new Vector<>();
+		for (final MessageHelper mh : vA)
+		{
+			if (family == null || family.equals(mh.getFamily()))
+				vM.add(mh);
+		}
+		return vM;
 	}
 
 	/**

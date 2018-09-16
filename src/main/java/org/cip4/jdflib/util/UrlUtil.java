@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -122,11 +90,11 @@ public class UrlUtil
 	 */
 	public static final String POST = "POST";
 	/**
-	 *  http get method
+	 * http get method
 	 */
 	public static final String GET = "GET";
 	/**
-	 *  http head method
+	 * http head method
 	 */
 	public static final String HEAD = "HEAD";
 
@@ -204,6 +172,7 @@ public class UrlUtil
 
 		/**
 		 * Getter for chunkSize attribute.
+		 *
 		 * @return the chunkSize
 		 */
 		public int getChunkSize()
@@ -213,6 +182,7 @@ public class UrlUtil
 
 		/**
 		 * Setter for chunkSize attribute.
+		 *
 		 * @param chunkSize the chunkSize to set
 		 */
 		public void setChunkSize(final int chunkSize)
@@ -222,6 +192,7 @@ public class UrlUtil
 
 		/**
 		 * Getter for bKeepAlive attribute.
+		 *
 		 * @return the bKeepAlive
 		 */
 		public boolean isbKeepAlive()
@@ -231,6 +202,7 @@ public class UrlUtil
 
 		/**
 		 * Setter for bKeepAlive attribute.
+		 *
 		 * @param bKeepAlive the bKeepAlive to set
 		 */
 		public void setbKeepAlive(final boolean bKeepAlive)
@@ -268,6 +240,7 @@ public class UrlUtil
 
 		/**
 		 * get a redirect incremented by 1, if null create o defaut first
+		 *
 		 * @param details
 		 * @return
 		 */
@@ -310,6 +283,7 @@ public class UrlUtil
 	/**
 	 * zip, maybe?
 	 */
+	public static final String APPLICATION_CFF2 = "application/cff2";
 	public static final String APPLICATION_ZIP = "application/zip";
 	/**
 	 * zip, maybe?
@@ -373,7 +347,7 @@ public class UrlUtil
 	/**
 	 * rough classification of protocol type
 	 *
-	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	public static enum URLProtocol
 	{
@@ -412,6 +386,7 @@ public class UrlUtil
 
 	/**
 	 * get a prinect url for this host and path
+	 *
 	 * @param bSecure if true, make https
 	 * @param host hostname
 	 * @param port the port, duh
@@ -510,6 +485,7 @@ public class UrlUtil
 
 	/**
 	 * get the file name for a url. extract it from a mime package, if appropriate
+	 *
 	 * @param url
 	 * @param mp
 	 * @return
@@ -550,9 +526,7 @@ public class UrlUtil
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * get the filename extension of pathName excluding the '.'
-	 * if no '.' is found, returns null
-	 * if trailing . is found, returns ""
+	 * get the filename extension of pathName excluding the '.' if no '.' is found, returns null if trailing . is found, returns ""
 	 *
 	 * @param pathName the pathName to get the extension for
 	 * @return String - the filename extension
@@ -583,6 +557,7 @@ public class UrlUtil
 
 	/**
 	 * get an array of urlparts, regardless of whether this was mime or not if the stream is mime/multipart get also extract that
+	 *
 	 * @param connection
 	 *
 	 * @return the array of body parts input stream
@@ -740,11 +715,11 @@ public class UrlUtil
 	}
 
 	/**
-	* Retrieve a file for a relative or absolute file url
-	*
+	 * Retrieve a file for a relative or absolute file url
+	 *
 	 * @param urlString the file url to retrieve a file for
-	* @return the file located at url
-	*/
+	 * @return the file located at url
+	 */
 	public static File urlToFile(String urlString)
 	{
 		if (urlString == null || isCID(urlString) || isNet(urlString))
@@ -807,7 +782,7 @@ public class UrlUtil
 	/**
 	 * Retrieve a UNC path for a relative or absolute file url, any of '/'or "\\" is assumed a path separator
 	 *
-	 * @param urlString the file url to retrieve a UNC path  for
+	 * @param urlString the file url to retrieve a UNC path for
 	 * @return the UNC
 	 */
 	public static String urlToUNC(String urlString)
@@ -852,6 +827,7 @@ public class UrlUtil
 
 	/**
 	 * null safe url to string converter
+	 *
 	 * @param url
 	 * @return
 	 */
@@ -866,6 +842,7 @@ public class UrlUtil
 
 	/**
 	 * adds a parameter to a given url using either ? or &
+	 *
 	 * @param baseUrl the base url - already escaped and ready to go
 	 * @param key the key to add - NOT escaped
 	 * @param val the value to add - NOT escaped - if null nothing is set
@@ -887,6 +864,7 @@ public class UrlUtil
 
 	/**
 	 * adds a path to a given url , keeping the parameters
+	 *
 	 * @param baseUrl the base url - already escaped and ready to go
 	 * @param path the path to add
 	 * @return the escaped new url
@@ -907,6 +885,7 @@ public class UrlUtil
 
 	/**
 	 * standard url escaping
+	 *
 	 * @param toEscape the string to escape
 	 * @param bEscape128 if true, also escape >128, else leave non-ascii7 as is
 	 * @return the escaped string
@@ -930,6 +909,7 @@ public class UrlUtil
 
 	/**
 	 * standard url unescaping
+	 *
 	 * @param toEscape the string to unescape
 	 * @return the escaped string
 	 */
@@ -1068,7 +1048,7 @@ public class UrlUtil
 	{
 		if (mimeMap == null)
 		{
-			mimeMap = new BiHashMap<String, String>();
+			mimeMap = new BiHashMap<>();
 			mimeMap.setUnique(false);
 			mimeMap.put("pdf", JDFCoreConstants.MIME_PDF);
 			mimeMap.put("ps", JDFCoreConstants.MIME_PS);
@@ -1098,6 +1078,7 @@ public class UrlUtil
 			mimeMap.put("mim", MimeUtil.MULTIPART_RELATED);
 
 			mimeMap.put("zip", APPLICATION_ZIP);
+			mimeMap.put("cf2", APPLICATION_CFF2);
 		}
 		final String extension = UrlUtil.extension(url);
 		final String mimeType = extension == null ? null : mimeMap.get(extension.toLowerCase());
@@ -1154,6 +1135,7 @@ public class UrlUtil
 
 	/**
 	 * is this a valid file url
+	 *
 	 * @param url
 	 * @return
 	 */
@@ -1174,8 +1156,7 @@ public class UrlUtil
 		{
 			return false;
 		}
-		return StringUtils.isAlpha(pathName.substring(0, 1)) && pathName.substring(1, 2).equals(":")
-				|| StringUtils.countMatches(pathName, "\\") > StringUtils.countMatches(pathName, "/");
+		return StringUtils.isAlpha(pathName.substring(0, 1)) && pathName.substring(1, 2).equals(":") || StringUtils.countMatches(pathName, "\\") > StringUtils.countMatches(pathName, "/");
 
 	}
 
@@ -1198,11 +1179,11 @@ public class UrlUtil
 	}
 
 	/**
-	* test whether a given url is an http url (excluding https - @see isHttps)
-	*
-	* @param url the url to test
-	* @return
-	*/
+	 * test whether a given url is an http url (excluding https - @see isHttps)
+	 *
+	 * @param url the url to test
+	 * @return
+	 */
 	public static boolean isFtp(final String url)
 	{
 		if (url == null)
@@ -1280,6 +1261,7 @@ public class UrlUtil
 
 	/**
 	 * test whether a given url is a unc path
+	 *
 	 * @param pathName
 	 * @return
 	 */
@@ -1316,6 +1298,7 @@ public class UrlUtil
 
 	/**
 	 * returns the general protocol type of a url
+	 *
 	 * @param url
 	 * @return
 	 */
@@ -1334,6 +1317,7 @@ public class UrlUtil
 
 	/**
 	 * get the ip address as a string with the left byte at pos 0
+	 *
 	 * @param ip
 	 * @return
 	 */
@@ -1355,6 +1339,7 @@ public class UrlUtil
 
 	/**
 	 * get the ip address as a set of bytes with the left byte at pos 0
+	 *
 	 * @param ip
 	 * @return
 	 */
@@ -1414,6 +1399,7 @@ public class UrlUtil
 
 	/**
 	 * remove athe protocol part of a url, if it is specified
+	 *
 	 * @param url the url string to work on
 	 * @return the input string without the protocol and ":"
 	 */
@@ -1459,8 +1445,7 @@ public class UrlUtil
 	}
 
 	/**
-	 * get the local url without directory
-	 * schemes in the base url are case insensitive, all others are case sensitive
+	 * get the local url without directory schemes in the base url are case insensitive, all others are case sensitive
 	 *
 	 * @param directory the url of the directory
 	 * @param url the absolute url
@@ -1562,6 +1547,7 @@ public class UrlUtil
 
 	/**
 	 * get the parent directory of a file or url
+	 *
 	 * @param url
 	 * @return
 	 */
@@ -1630,8 +1616,7 @@ public class UrlUtil
 	}
 
 	/**
-	 * create a "real" url from a user input url
-	 * add http://
+	 * create a "real" url from a user input url add http://
 	 *
 	 * @param url the input url
 	 * @return the - hopefully - usable url
@@ -1909,9 +1894,9 @@ public class UrlUtil
 
 	/**
 	 * physically store the file at the location specified in dir and also modify this to reflect the new location
+	 *
 	 * @param parent the parent element, trypically a filespec or preview
-	 * @param dir the directory to move to. dir is created if it does not exist.
-	 * If dir exists and dir is not a directory, the call fails and null is returned
+	 * @param dir the directory to move to. dir is created if it does not exist. If dir exists and dir is not a directory, the call fails and null is returned
 	 * @param overWrite if true, zapp any old files with the same name
 	 * @return the file that corresponds to the moved url reference, null if an error occurred
 	 * @deprecated use moveToDir(parent, dir, null, overWrite);
@@ -1926,8 +1911,7 @@ public class UrlUtil
 	 * physically store the file at the location specified in dir and also modify parent to reflect the new location
 	 *
 	 * @param urlSetter the parent element, typically a filespec or preview
-	 * @param dir the directory to move to. dir is created if it does not exist.
-	 * If dir exists and dir is not a directory, the call fails and null is returned
+	 * @param dir the directory to move to. dir is created if it does not exist. If dir exists and dir is not a directory, the call fails and null is returned
 	 * @param cwd the current working dir for local urls
 	 * @param overWrite if true, zapp any old files with the same name
 	 * @return the file that corresponds to the moved url reference, null if an error occurred
@@ -1941,8 +1925,7 @@ public class UrlUtil
 	 * physically store the file at the location specified in dir and also modify parent to reflect the new location
 	 *
 	 * @param urlSetter the parent element, typically a filespec or preview
-	 * @param dir the directory to move to. dir is created if it does not exist.
-	 * If dir exists and dir is not a directory, the call fails and null is returned
+	 * @param dir the directory to move to. dir is created if it does not exist. If dir exists and dir is not a directory, the call fails and null is returned
 	 * @param cwd the current working dir for local urls
 	 * @param overWrite if true, zapp any old files with the same name
 	 * @return the file that corresponds to the moved url reference, null if an error occurred
@@ -2036,6 +2019,7 @@ public class UrlUtil
 
 	/**
 	 * if true this url is relative
+	 *
 	 * @param url the url string to test
 	 * @return true if relative
 	 */
@@ -2048,6 +2032,7 @@ public class UrlUtil
 
 	/**
 	 * check whether the mime type is a known xml dialect
+	 *
 	 * @param contentType
 	 * @return
 	 */
@@ -2067,6 +2052,7 @@ public class UrlUtil
 
 	/**
 	 * check whether the mime type is a known zip dialect
+	 *
 	 * @param contentType
 	 * @return
 	 */
@@ -2104,6 +2090,7 @@ public class UrlUtil
 
 	/**
 	 * inverse of extension
+	 *
 	 * @param strWork the string to work on
 	 * @return the prefix
 	 */

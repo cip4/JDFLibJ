@@ -129,7 +129,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	@Override
 	public void cleanUp()
 	{
-		final Vector<MessageHelper> vA = getAuditHelpers();
+		final Vector<MessageHelper> vA = getMessageHelpers();
 		if (vA != null)
 		{
 			for (final MessageHelper ah : vA)
@@ -143,8 +143,19 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	/**
 	 *
 	 * @return
+	 * @deprecated use getMessageHelpes
 	 */
+	@Deprecated
 	public Vector<MessageHelper> getAuditHelpers()
+	{
+		return getMessageHelpers();
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public Vector<MessageHelper> getMessageHelpers()
 	{
 		final Vector<MessageHelper> vA = new Vector<>();
 		final VElement v = theElement.getChildElementVector(null, null);
@@ -185,7 +196,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	 */
 	public MessageHelper getMessageHelper(int i)
 	{
-		final Vector<MessageHelper> v = getAuditHelpers();
+		final Vector<MessageHelper> v = getMessageHelpers();
 		if (v == null)
 			return null;
 		if (i < 0)

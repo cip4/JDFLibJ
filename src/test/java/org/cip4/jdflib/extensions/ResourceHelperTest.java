@@ -57,6 +57,33 @@ import org.junit.Test;
  */
 public class ResourceHelperTest extends JDFTestCaseBase
 {
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetPartMap()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
+		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
+		final ResourceHelper rh = sh.getCreatePartition(map, false);
+		assertEquals(map, rh.getPartMap());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetPartKey()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
+		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
+		final ResourceHelper rh = sh.getCreatePartition(map, false);
+		assertEquals("s1", rh.getPartKey(AttributeName.SHEETNAME));
+	}
+
 	/**
 	 *
 	 */

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,6 +44,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -183,6 +184,36 @@ public class SetHelperTest extends JDFTestCaseBase
 		sh.getCreatePartition(new JDFAttributeMap("SheetName", "S1"), true);
 		sh.getCreatePartition(new JDFAttributeMap("SheetName", "S2"), true);
 		assertEquals(sh.getPartitions(new JDFAttributeMap("SheetName", "S2")).size(), 2);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetSuperPartitionsMap()
+	{
+		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		assertEquals(sh.getName(), "Media");
+		sh.getCreatePartition(new JDFAttributeMap("SheetName", "S1"), true);
+		sh.getCreatePartition(new JDFAttributeMap("SheetName", "S2"), true);
+		assertEquals(sh.getSuperPartitions(new JDFAttributeMap("SheetName", "S2")).size(), 1);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetSuperPartitionsMap2()
+	{
+		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
+		assertEquals(sh.getName(), "Media");
+		final JDFAttributeMap map = new JDFAttributeMap("SheetName", "S1");
+		map.put(AttributeName.SIDE, "Front");
+		sh.getCreatePartition(map, true);
+		final JDFAttributeMap map2 = new JDFAttributeMap("SheetName", "S2");
+		map2.put(AttributeName.SIDE, "Front");
+		sh.getCreatePartition(map2, true);
+		assertEquals(2, sh.getSuperPartitions(new JDFAttributeMap("Side", "Front")).size());
 	}
 
 	/**
