@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -128,7 +96,7 @@ import org.junit.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * June 11, 2009
+ *         June 11, 2009
  */
 public class MimeUtilTest extends JDFTestCaseBase
 {
@@ -175,10 +143,10 @@ public class MimeUtilTest extends JDFTestCaseBase
 			}
 			final File out = MimeUtil.writeToFile(m, sm_dirTestDataTemp + File.separator + "testMimePackageDoc" + ii + ".mjm", md);
 			assertTrue(out.canRead());
-			MimeReader mr = new MimeReader(FileUtil.getBufferedInputStream(out));
-			Multipart mp = mr.getMultiPart();
+			final MimeReader mr = new MimeReader(FileUtil.getBufferedInputStream(out));
+			final Multipart mp = mr.getMultiPart();
 			assertEquals(mr.getBodyParts().length, 5);
-			MimeWriter mw = new MimeWriter(mp);
+			final MimeWriter mw = new MimeWriter(mp);
 			mw.writeToDir(new File(UrlUtil.newExtension(out.getPath(), null)));
 		}
 	}
@@ -193,11 +161,11 @@ public class MimeUtilTest extends JDFTestCaseBase
 		n.setType(EnumType.ColorSpaceConversion);
 		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
 		final JDFFileSpec fs0 = cscp.appendFinalTargetDevice();
-		String unc = sm_dirTestData + File.separator + "test.icc";
+		final String unc = sm_dirTestData + File.separator + "test.icc";
 		fs0.setURL(StringUtil.uncToUrl(unc, true));
 		final JDFFileSpec fs1 = cscp.appendColorSpaceConversionOp().appendSourceProfile();
-		String unc2 = sm_dirTestDataTemp + File.separator + "4% von test äöüß€.icc";
-		String uncToUrl = StringUtil.uncToUrl(unc2, true);
+		final String unc2 = sm_dirTestDataTemp + File.separator + "4% von test äöüß€.icc";
+		final String uncToUrl = StringUtil.uncToUrl(unc2, true);
 		if (!new File(unc2).exists())
 			FileUtil.copyFile(new File(unc), new File(unc2));
 		fs1.setURL(uncToUrl);
@@ -211,18 +179,15 @@ public class MimeUtilTest extends JDFTestCaseBase
 	public void testBuildMimePackageDocJMFURL()
 	{
 		/*
-		 * final JDFDoc docJMF = new JDFDoc("JMF"); docJMF.setOriginalFileName("JMF.jmf"); final JDFJMF jmf = docJMF.getJMFRoot(); final JDFCommand com =
-		 * (JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
-		 * com.appendQueueSubmissionParams().setURL("TheJDF");
+		 * final JDFDoc docJMF = new JDFDoc("JMF"); docJMF.setOriginalFileName("JMF.jmf"); final JDFJMF jmf = docJMF.getJMFRoot(); final JDFCommand com = (JDFCommand)
+		 * jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry); com.appendQueueSubmissionParams().setURL("TheJDF");
 		 *
-		 * final JDFDoc doc = new JDFDoc("JDF"); doc.setOriginalFileName("JDF.jdf"); final JDFNode n = doc.getJDFRoot();
-		 * n.setType(EnumType.ColorSpaceConversion); final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams)
-		 * n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null); final JDFFileSpec fs0 =
-		 * cscp.appendFinalTargetDevice(); fs0.setURL(StringUtil.uncToUrl(sm_dirTestData + File.separator + "test.icc", true)); final JDFRunList rl =
-		 * (JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null); rl.addPDF(StringUtil.uncToUrl(sm_dirTestData +
-		 * File.separator + "url1.pdf", false), 0, -1); for (int i = 0; i < 100; i++) { rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator +
-		 * "url?.pdf", false), 0, -1); } final Multipart m = MimeUtil.buildMimePackage(docJMF, doc, true); final HttpURLConnection uc = MimeUtil.writeToURL(m,
-		 * "http://192.168.14.143:8010/FJC/Fiery", null); assertEquals(uc.getResponseCode(), 200); assertTrue(uc.getContentLength() > 0); final InputStream is =
+		 * final JDFDoc doc = new JDFDoc("JDF"); doc.setOriginalFileName("JDF.jdf"); final JDFNode n = doc.getJDFRoot(); n.setType(EnumType.ColorSpaceConversion); final JDFColorSpaceConversionParams
+		 * cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null); final JDFFileSpec fs0 =
+		 * cscp.appendFinalTargetDevice(); fs0.setURL(StringUtil.uncToUrl(sm_dirTestData + File.separator + "test.icc", true)); final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST,
+		 * null, EnumUsage.Input, null, null, null, null); rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator + "url1.pdf", false), 0, -1); for (int i = 0; i < 100; i++) {
+		 * rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator + "url?.pdf", false), 0, -1); } final Multipart m = MimeUtil.buildMimePackage(docJMF, doc, true); final HttpURLConnection uc =
+		 * MimeUtil.writeToURL(m, "http://192.168.14.143:8010/FJC/Fiery", null); assertEquals(uc.getResponseCode(), 200); assertTrue(uc.getContentLength() > 0); final InputStream is =
 		 * uc.getInputStream(); IOUtils.copy(is, System.out);
 		 */
 	}
@@ -390,19 +355,20 @@ public class MimeUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	* @throws Exception
-	*/
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetJDFDocFromRawStream() throws Exception
 	{
 		final MimeReader mr = new MimeReader();
-		String xml = "<xml />";
+		final String xml = "<xml />";
 		assertNotNull(mr.getXMLDoc(new ByteArrayIOStream(xml.getBytes()).getInputStream(), 0));
 		assertNotNull(mr.getXMLDoc(new ByteArrayIOStream(new FileInputStream(new File(sm_dirTestData + File.separator + "matsch.jdf"))).getInputStream(), 0));
 	}
 
 	/**
 	 * test for mjd creation
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -565,7 +531,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		assertNotNull(jdf);
 		final VElement fileSpecs = jdf.getChildrenByTagName(ElementName.FILESPEC, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
 		assertEquals(3, fileSpecs.size());
-		for (KElement kElement : fileSpecs)
+		for (final KElement kElement : fileSpecs)
 		{
 			final JDFFileSpec fileSpec = (JDFFileSpec) kElement;
 			final String cid = fileSpec.getURL();
@@ -587,7 +553,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		d1.setOriginalFileName("JMF.jmf");
 		final JDFDoc d2 = new JDFDoc("JDF");
 		d2.setOriginalFileName("JDF.jdf");
-		final Vector<JDFDoc> vXMLDocs = new Vector<JDFDoc>();
+		final Vector<JDFDoc> vXMLDocs = new Vector<>();
 		vXMLDocs.add(d1);
 		vXMLDocs.add(d2);
 
@@ -608,10 +574,10 @@ public class MimeUtilTest extends JDFTestCaseBase
 	@Test
 	public void testMeanCharsXML() throws Exception
 	{
-		XMLParser p = new XMLParser();
-		XMLDoc d = p.parseString("<foo a=\"SchuÌˆtz_Teil5_bel\"/>");
+		final XMLParser p = new XMLParser();
+		final XMLDoc d = p.parseString("<foo a=\"SchuÌˆtz_Teil5_bel\"/>");
 		d.setOriginalFileName("foo.xml");
-		final Vector<XMLDoc> vXMLDocs = new Vector<XMLDoc>();
+		final Vector<XMLDoc> vXMLDocs = new Vector<>();
 		vXMLDocs.add(d);
 
 		final Multipart m = MimeUtil.buildMimePackage(vXMLDocs);
@@ -622,8 +588,8 @@ public class MimeUtilTest extends JDFTestCaseBase
 		assertEquals(aBp.length, 1);
 
 		assertEquals(aBp[0].getFileName(), "foo.xml");
-		BodyPartHelper bh = new BodyPartHelper(aBp[0]);
-		XMLDoc xmlDoc = bh.getXMLDoc();
+		final BodyPartHelper bh = new BodyPartHelper(aBp[0]);
+		final XMLDoc xmlDoc = bh.getXMLDoc();
 		assertNotNull(xmlDoc);
 	}
 
@@ -697,8 +663,22 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// //////////////////
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testWriteToFileMimeMessage() throws Exception
+	{
+		testBuildMimePackageDocJMF();
+
+		final File f1 = new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc1.mjm");
+
+		final StringWriter sw = new StringWriter();
+		IOUtils.copy(new FileInputStream(f1), sw);
+		assertEquals(sw.getBuffer().toString().indexOf("Message-ID"), -1);
+
+	}
+
 	/**
 	 * @throws Exception
 	 */
@@ -772,7 +752,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		try
 		{
 			final long write = System.currentTimeMillis();
-			String mjm = sm_dirTestDataTemp + File.separator + "performance.mjm";
+			final String mjm = sm_dirTestDataTemp + File.separator + "performance.mjm";
 			if (!new File(mjm).exists())
 			{
 				testWritePerformance();

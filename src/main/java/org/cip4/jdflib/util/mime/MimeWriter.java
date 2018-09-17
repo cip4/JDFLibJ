@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -119,14 +87,34 @@ import org.cip4.jdflib.util.UrlUtil;
  *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * July 24, 2009
+ *         July 24, 2009
  */
 public class MimeWriter extends MimeHelper
 {
 	private final Log log;
 
+	private static class MyMimeMessage extends MimeMessage
+	{
+
+		MyMimeMessage(final Session session)
+		{
+			super(session);
+		}
+
+		/**
+		 * @see javax.mail.internet.MimeMessage#updateMessageID()
+		 */
+		@Override
+		protected void updateMessageID() throws MessagingException
+		{
+			removeHeader("Message-ID");
+		}
+
+	}
+
 	/**
 	 * used for some after the fact cleanup - beware as it may hurt performance
+	 *
 	 * @author prosirai
 	 */
 	static class FixSemiColonStream extends BufferedOutputStream
@@ -145,6 +133,7 @@ public class MimeWriter extends MimeHelper
 
 		/**
 		 * replaces replace 'content-type:foo;' with 'content-type:foo\n' if necessary
+		 *
 		 * @see java.io.BufferedOutputStream#write(int)
 		 */
 		@Override
@@ -209,6 +198,7 @@ public class MimeWriter extends MimeHelper
 
 	/**
 	 * gets an input s
+	 *
 	 * @return
 	 * @throws IOException
 	 * @throws MessagingException
@@ -342,6 +332,7 @@ public class MimeWriter extends MimeHelper
 
 	/**
 	 * write a Multipart to an output file
+	 *
 	 * @param fileName the file name
 	 * @return
 	 */
@@ -366,6 +357,7 @@ public class MimeWriter extends MimeHelper
 
 	/**
 	 * write a Message to a directory
+	 *
 	 * @param directory the directory to use as '.' for writing the mime parts
 	 * @throws MessagingException
 	 * @throws IOException
@@ -402,6 +394,7 @@ public class MimeWriter extends MimeHelper
 
 	/**
 	 * write a Multipart to a Stream
+	 *
 	 * @param outStream the existing output stream, note that a buffered output stream is created in case outStream is unbuffered
 	 * @throws IOException
 	 * @throws MessagingException
@@ -413,8 +406,9 @@ public class MimeWriter extends MimeHelper
 		{
 			throw new MessagingException("Multipart must be non null");
 		}
-		final MimeMessage mm = new MimeMessage((Session) null);
+		final MimeMessage mm = new MyMimeMessage(null);
 		mm.setContent(theMultipart);
+
 		// buffers are good - the encoders decoders otherwise hit stream
 		// read/write once per byte...
 		if (!(outStream instanceof BufferedOutputStream) && !(outStream instanceof ByteArrayIOStream))
@@ -439,13 +433,13 @@ public class MimeWriter extends MimeHelper
 				}
 			}
 		}
-
 		mm.writeTo(outStream);
 		StreamUtil.close(outStream);
 	}
 
 	/**
 	 * write a Multipart to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
+	 *
 	 * @param strUrl the URL to write to
 	 * @return {@link HttpURLConnection} the opened http connection, null in case of error or file
 	 * @throws IOException
@@ -472,6 +466,7 @@ public class MimeWriter extends MimeHelper
 
 	/**
 	 * Builds a MIME package.
+	 *
 	 * @param vXMLDocs the Vector of XMLDoc representing the JMF and JDFs to be stored as the first part of the package t
 	 */
 	public void buildMimePackage(final Vector<? extends XMLDoc> vXMLDocs)
@@ -487,8 +482,8 @@ public class MimeWriter extends MimeHelper
 
 	/**
 	 * build a MIME package that contains all references in all FileSpecs of a given JDFDoc the doc is modified so that all URLs are cids
-	 * @param docJMF the JDFDoc representation of the JMF that references the jdf to package, if null only the jdf is packaged note that the URL of docJDF must
-	 * already be specified as a CID
+	 *
+	 * @param docJMF the JDFDoc representation of the JMF that references the jdf to package, if null only the jdf is packaged note that the URL of docJDF must already be specified as a CID
 	 * @param docJDF the JDFDoc representation of the JDF to package
 	 * @param extendReferenced if true, also package any further reeferenced files
 	 */
@@ -644,9 +639,10 @@ public class MimeWriter extends MimeHelper
 
 	/**
 	 * Returns the values of the <i>URL</i> attribute of each element in the input list.
+	 *
 	 * @param fileSpecs a list of elements with <i>URL</i> attributes
-	 * @return an array containing the value of the <i>URL</i> attribute of each element in the input list. The order of values in the returned array
-	 * corresponds to the order of the elements in the input list.
+	 * @return an array containing the value of the <i>URL</i> attribute of each element in the input list. The order of values in the returned array corresponds to the order of the elements in the
+	 *         input list.
 	 */
 	private static String[] listURLs(final VElement fileSpecs)
 	{
@@ -667,6 +663,7 @@ public class MimeWriter extends MimeHelper
 
 	/**
 	 * submit a multipart file to a queue
+	 *
 	 * @param docJMF the jmf document containing the submitqueueentry or resubmitqueueentry
 	 * @param docJDF the jdf to submit
 	 * @param strUrl the url to submit to
