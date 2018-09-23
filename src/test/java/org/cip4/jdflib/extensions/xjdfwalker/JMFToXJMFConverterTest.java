@@ -45,6 +45,8 @@ import static org.junit.Assert.assertTrue;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
@@ -77,8 +79,10 @@ import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.jmf.JDFResumeQueueEntryParams;
 import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.jmf.JDFSubscriptionInfo;
+import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.pool.JDFAmountPool;
+import org.cip4.jdflib.resource.JDFEvent;
 import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFPerson;
@@ -491,6 +495,18 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testStatusJMFQueueSubscription()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSubscription("url", 42, 21, "qe33");
+		jmf.getQuery(0).getSubscription().appendObservationTarget().setAttributes(new VString("a", null));
+		jmf.getQuery(0).getStatusQuParams().setQueueInfo(true);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		final KElement statusquparams = xjmf.getChildByTagName(ElementName.STATUSQUPARAMS, null, 0, null, false, false);
+		assertFalse(statusquparams.hasAttribute(AttributeName.QUEUEINFO));
+		// writeTest(jmf, "../StatusJMF.jmf", true);
+	}
+
 	public void testStatusJMF()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSubscription("url", 42, 21, "qe33");
@@ -501,6 +517,24 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final KElement statusquparams = xjmf.getChildByTagName(ElementName.STATUSQUPARAMS, null, 0, null, false, false);
 		assertFalse(statusquparams.hasAttribute(AttributeName.QUEUEINFO));
 		// writeTest(jmf, "../StatusJMF.jmf", true);
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testEventID()
+	{
+		final JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Brief);
+		final JDFDeviceInfo di2 = jmf.getSignal(0).getCreateDeviceInfo(0);
+		final JDFEvent ev = di2.appendEvent("e3");
+		assertEquals("e3", ev.getEventID());
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		final XJMFHelper h = new XJMFHelper(xjmf);
+		final JDFDeviceInfo di = (JDFDeviceInfo) h.getMessageHelper(0).getRoot().getElement(ElementName.DEVICEINFO);
+		final JDFEvent e = di.getEvent(0);
+		assertEquals("e3", e.getEventID());
 	}
 
 	/**

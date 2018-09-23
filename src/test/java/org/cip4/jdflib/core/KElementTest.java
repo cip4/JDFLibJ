@@ -1008,11 +1008,9 @@ public class KElementTest extends JDFTestCaseBase
 
 		t2.mergeElement(t3, false);
 		assertEquals(t2.getElement("bar", null, 0), t22);
-		assertEquals(t22.getAttribute("a"), "1");
+		assertEquals(t22.getAttribute("a"), "2");
 		assertEquals(t22.getAttribute("b"), "1");
-		assertEquals(t22.getAttribute("c"), "");
-		assertEquals(t2.getElement("bar", null, 1).toXML(), t32.toXML());
-		assertEquals(t2.getElement("bar", null, 2).toXML(), t33.toXML());
+		assertEquals(t22.getAttribute("c"), "2");
 
 	}
 

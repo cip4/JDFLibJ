@@ -3714,31 +3714,30 @@ public class KElement extends ElementNSImpl implements Element
 		}
 
 		final VElement v = kElem.getChildElementVector(null, null, null, true, 0, false);
-
+		final VElement vThis = getChildElementVector(null, null, null, true, 0, false);
 		for (final KElement m : v)
 		{
-			final int nThis = numChildElements(m.getNodeName(), null);
 
-			if (nThis == 1)
+			final int index = vThis.nameIndex(m.getNodeName(), 0);
+			if (index >= 0)
 			{
-				final int nE = kElem.numChildElements(m.getNodeName(), null);
-				if (nE == 1)
-				{
-					getElement(m.getNodeName(), null, 0).mergeElement(m, bDelete);
-					continue; // we've merged the only element and can continue
-					// with the next
-				}
-			}
-			// it was impossible to merge, therefore simply copy over
-			if (bDelete)
-			{
-				moveElement(m, null);
+				final KElement em = vThis.remove(index);
+				em.mergeElement(m, bDelete);
 			}
 			else
 			{
-				copyElement(m, null);
+				// it was impossible to merge, therefore simply copy over
+				if (bDelete)
+				{
+					moveElement(m, null);
+				}
+				else
+				{
+					copyElement(m, null);
+				}
 			}
 		}
+
 		setAttributes(kElem);
 
 		return this;

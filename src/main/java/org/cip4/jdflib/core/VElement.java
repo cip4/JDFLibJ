@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -106,7 +74,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * constructor
-	 * 
+	 *
 	 * @param m
 	 */
 	@SuppressWarnings("unchecked")
@@ -118,7 +86,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * constructor
-	 * 
+	 *
 	 * @param n
 	 */
 	public VElement(final NodeList n)
@@ -143,7 +111,7 @@ public class VElement extends Vector<KElement>
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -154,9 +122,9 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * index - get the index of s in the vector using isEquals or ID rather than equals
-	 * 
+	 *
 	 * @param s KElement to search for
-	 * 
+	 *
 	 * @return int - the index of s in the vector
 	 */
 	public int index(final KElement s)
@@ -186,7 +154,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * hasElement - checks if kElem is in the vector in contrast to contains, this uses the isEquals method
-	 * 
+	 *
 	 * @param kElem the element to look for
 	 * @deprecated 060216 use containsElement
 	 * @return true if s is contained in this
@@ -199,7 +167,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * appendUniqueNotNull - append a string but ignore multiple entries
-	 * 
+	 *
 	 * @param v
 	 * @deprecated simply use appendUnique
 	 */
@@ -214,7 +182,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * AppendUniqueNotNull - append a vector but ignore multiple entries
-	 * 
+	 *
 	 * @param v
 	 * @deprecated simply use appendUnique
 	 */
@@ -232,7 +200,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * AppendUnique - append a string but ignore multiple entries
-	 * 
+	 *
 	 * @param elem the element to append
 	 */
 	public void appendUnique(final KElement elem)
@@ -245,7 +213,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * addAll ignoring null collections
-	 * 
+	 *
 	 * @param elem the vector of elements to append
 	 */
 	public void addAll(final VElement elem)
@@ -260,6 +228,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * create a all elements of an Array
+	 *
 	 * @param <a>
 	 * @param l
 	 */
@@ -279,7 +248,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * does this contain an equivalent element similar to contains but uses isEqual() instead of equals()
-	 * 
+	 *
 	 * @param elem the element to look for
 	 * @return true, if v is contained in this
 	 */
@@ -298,7 +267,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * are the two vectors equivalent, i.e. do thay only contain elements that are isEqual() or if this is empty and the comparison is against null
-	 * 
+	 *
 	 * @param v the vector to compare
 	 * @return true, if v is equal to this
 	 */
@@ -330,7 +299,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * AppendUnique - append a vector but ignore multiple entries - equivalence is calculated with .equals
-	 * 
+	 *
 	 * @param v the vector of elements to append
 	 */
 	public void appendUnique(final VElement v)
@@ -346,7 +315,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * AppendUnique - append a vector but ignore multiple entries - equivalence is calculated with isEqual,
-	 * 
+	 *
 	 * @param v the vector of elements to append
 	 */
 	public void appendUniqueElement(final VElement v)
@@ -362,11 +331,11 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * set the values of attribute key to the values defined in vValue
-	 * 
+	 *
 	 * @param key key the attribute name
 	 * @param vValue vValue the vector of values
 	 * @param nameSpaceURI nameSpace of the attribute to set
-	 * 
+	 *
 	 * @default setAttributes(key, vValue, null)
 	 * @throws IllegalArgumentException if size mismatch of vValue anf this
 	 */
@@ -386,7 +355,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * sorts the vector in canonical order using SimpleNodeComparator
-	 * 
+	 *
 	 */
 	public void sort()
 	{
@@ -395,11 +364,11 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * SetAttribute in all elements of this
-	 * 
+	 *
 	 * @param key key the attribute name
 	 * @param value the value
 	 * @param nameSpaceURI nameSpace of the attribute to set
-	 * 
+	 *
 	 * @default SetAttributes(key, value, null)
 	 */
 	public void setAttribute(final String key, final String value, final String nameSpaceURI)
@@ -414,10 +383,10 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * Remove Attribute in all elements of this
-	 * 
+	 *
 	 * @param key key the attribute name
 	 * @param nameSpaceURI nameSpace of the attribute to set
-	 * 
+	 *
 	 * @default removeAttributes(key, null)
 	 */
 	public void removeAttribute(final String key, final String nameSpaceURI)
@@ -432,7 +401,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * Remove elements listed in v from this
-	 * 
+	 *
 	 * @param v elements to remove
 	 */
 	public void removeElements(final VElement v)
@@ -453,12 +422,12 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * RemoveElements
-	 * 
+	 *
 	 * @param testElem the element to remove
 	 * @param nMax maximum number of dulicate elements to remove
-	 * 
+	 *
 	 * @default RemoveElements(e, 0)
-	 *  
+	 *
 	 */
 	public void removeElements(final KElement testElem, final int nMax)
 	{
@@ -484,7 +453,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * get the node names of this vector in the same order
-	 * 
+	 *
 	 * @param bLocal if true use getLocalName() else getNodeName() o each item
 	 * @return VString vector of node names
 	 */
@@ -501,9 +470,9 @@ public class VElement extends Vector<KElement>
 	}
 
 	/**
-	 * ToVector - parse a node list for elements spezified through parameters note that the vector is static - i.e. the elements are NOT modified by operations
-	 * to the nodeList. This behavior is different than that of the actual nodelist!
-	 * 
+	 * ToVector - parse a node list for elements spezified through parameters note that the vector is static - i.e. the elements are NOT modified by operations to the nodeList. This behavior is
+	 * different than that of the actual nodelist!
+	 *
 	 * @param element name of the element typ you want
 	 * @param mAttrib a attribute typ you want
 	 * @param bAnd true, if you want to add the element if mAttrib was found in the element
@@ -552,7 +521,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * item - returns null if index is out of bounds or the requested item is not an ELEMENT_NODE !
-	 * 
+	 *
 	 * @param index vector index of the element you want
 	 * @return KElement - the requested item or null, if index is out of bounds
 	 */
@@ -572,7 +541,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * item - returns null if index is out of bounds or the requested item is not an ELEMENT_NODE !
-	 * 
+	 *
 	 * @param index vector index of the element you want
 	 * @return KElement - the requested item or null, if index is out of bounds
 	 */
@@ -592,7 +561,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * item - returns null if index is out of bounds or the requested item is not an ELEMENT_NODE !
-	 * 
+	 *
 	 * @param index vector index of the element you want
 	 * @return KElement - the requested item or null, if index is out of bounds
 	 */
@@ -604,7 +573,7 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * returns the common ancestor of all entries of this
-	 * 
+	 *
 	 * @return the element that is a common ancestor of all vector members
 	 * @since 050721
 	 */
@@ -673,5 +642,29 @@ public class VElement extends Vector<KElement>
 				}
 			}
 		}
+	}
+
+	/**
+	 * similar to index but only compares nodenames
+	 *
+	 * @param nodeName
+	 * @return
+	 */
+	public int nameIndex(final String nodeName, int skip)
+	{
+		int i = 0;
+
+		for (final KElement e : this)
+		{
+			if (nodeName == null || nodeName.equals(e.getNodeName()))
+			{
+				if (skip-- == 0)
+				{
+					return i;
+				}
+			}
+			i++;
+		}
+		return -1;
 	}
 }

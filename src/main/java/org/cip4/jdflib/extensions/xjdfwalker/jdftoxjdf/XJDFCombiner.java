@@ -151,7 +151,7 @@ public class XJDFCombiner
 			{
 				partition.getRoot().setAttributes(r.getRoot());
 				final KElement r2 = r.getResource();
-				if (r2 != null)
+				if (r2 != null && !r2.isEqual(partition.getCreateResource()))
 				{
 					partition.getCreateResource().mergeElement(r2, false);
 				}

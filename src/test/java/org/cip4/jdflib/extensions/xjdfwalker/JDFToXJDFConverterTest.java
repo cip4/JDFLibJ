@@ -47,6 +47,7 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
@@ -118,6 +119,8 @@ import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.resource.intent.JDFPackingIntent;
 import org.cip4.jdflib.resource.intent.JDFScreeningIntent;
+import org.cip4.jdflib.resource.process.JDFAssembly;
+import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
@@ -1871,6 +1874,35 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
 		assertEquals(new XJDFHelper(xjdf).getSets(ElementName.MEDIA, null).size(), 2);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAssemblySection()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Stripping);
+		final JDFAssembly med = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
+		final JDFAssembly[] a = new JDFAssembly[2];
+		a[0] = (JDFAssembly) med.addPartition(EnumPartIDKey.PartVersion, "loc1");
+		a[1] = (JDFAssembly) med.addPartition(EnumPartIDKey.PartVersion, "loc2");
+		for (final JDFAssembly as : a)
+		{
+			as.setOrder(EnumOrder.None);
+			as.appendAssemblySection().setAssemblyID("a1");
+			as.appendAssemblySection().setAssemblyID("a2");
+
+		}
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		final SetHelper sh = new XJDFHelper(xjdf).getSet(ElementName.ASSEMBLY, EnumUsage.Input);
+		assertEquals(4, sh.getRoot().getChildrenByClass(JDFAssemblySection.class, true, 0).size());
+
+		sh.cleanUp();
+		assertEquals(4, sh.getRoot().getChildrenByClass(JDFAssemblySection.class, true, 0).size());
 	}
 
 	/**

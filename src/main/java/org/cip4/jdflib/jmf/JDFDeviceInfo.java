@@ -67,17 +67,15 @@
  *
  */
 /**
- ==========================================================================
- class JDFDeviceInfo extends JDFResource
- ==========================================================================
- @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
- ALL RIGHTS RESERVED
- Author: sabjon@topmail.de   using a code generator
- Warning! very preliminary test version. Interface subject to change without prior notice!
- Revision history:    ...
+ * ========================================================================== class JDFDeviceInfo extends JDFResource ==========================================================================
+ *
+ * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED Author: sabjon@topmail.de using a code generator Warning! very preliminary test version. Interface subject to change without
+ *            prior notice! Revision history: ...
  **/
 
 package org.cip4.jdflib.jmf;
+
+import java.util.Collection;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo;
@@ -94,6 +92,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.JDFEvent;
 import org.cip4.jdflib.resource.JDFModulePhase;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.process.JDFEmployee;
@@ -101,11 +100,11 @@ import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
-//----------------------------------
+// ----------------------------------
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * much prior to May 17, 2009
+ *
+ *         much prior to May 17, 2009
  */
 public class JDFDeviceInfo extends JDFAutoDeviceInfo
 {
@@ -124,10 +123,11 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EVENT, 0x33333333);
 	}
 
 	@Override
@@ -140,6 +140,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	/**
 	 * Constructor for JDFDeviceInfo
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -150,6 +151,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	/**
 	 * Constructor for JDFDeviceInfo
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -161,6 +163,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	/**
 	 * Constructor for JDFDeviceInfo
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -173,6 +176,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	/**
 	 * toString()
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoDeviceInfo#toString()
 	 */
 	@Override
@@ -183,6 +187,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	/**
 	 * Method getJobCount.
+	 *
 	 * @return int
 	 * @deprecated use numChildElements(ElementName.JOBPHASE,null)
 	 */
@@ -194,6 +199,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	/**
 	 * create a JobPhase message from a phaseTime Audit
+	 *
 	 * @param pt the phasetime audit
 	 * @return JDFJobPhase: the jobphase element that has been filled by the phaseTime
 	 */
@@ -236,6 +242,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	/**
 	 * gets the deviceID from @DeviceID if it exists, otherwise searches Device/@DeviceID
+	 *
 	 * @return the appropriate deviceID for this deviceInfo
 	 */
 	@Override
@@ -260,6 +267,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	/**
 	 * gets the DescriptiveName from @DescriptiveName if it exists, otherwise searches Device/@DescriptiveName
+	 *
 	 * @return the appropriate deviceID for this deviceInfo
 	 */
 	@Override
@@ -275,6 +283,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	/**
 	 * returns true if this is the same phase, i.e. the
+	 *
 	 * @param lastInfo the deviceInfo to compare with
 	 * @param bExact if true, use startTime as hook, else compare stati
 	 * @return true if same
@@ -331,9 +340,9 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 		}
 		if (bSame)
 		{
-			VString ignore = new VString(new String[] { ElementName.PART, ElementName.EMPLOYEE, ElementName.JOBPHASE });
-			VElement childrenIgnoreList = getChildrenIgnoreList(ignore, true, null);
-			VElement lastchildrenIgnoreList = lastInfo.getChildrenIgnoreList(ignore, true, null);
+			final VString ignore = new VString(new String[] { ElementName.PART, ElementName.EMPLOYEE, ElementName.JOBPHASE });
+			final VElement childrenIgnoreList = getChildrenIgnoreList(ignore, true, null);
+			final VElement lastchildrenIgnoreList = lastInfo.getChildrenIgnoreList(ignore, true, null);
 			if (childrenIgnoreList.size() > 0 || lastchildrenIgnoreList.size() > 0)
 			{
 				if (childrenIgnoreList.size() != lastchildrenIgnoreList.size())
@@ -359,6 +368,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	/**
 	 * creates a new deviceInfo that spans lastphase and this phase note that phase amounts are not merged when the phase start times are identical. <br/>
 	 * In this case, we assume that the more recent phase already contains the sum of both
+	 *
 	 * @param lastInfo the deviceInfo to merge
 	 * @return true if successful
 	 */
@@ -380,6 +390,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	/**
 	 * set the parameters of this to the values from device
+	 *
 	 * @param device the device to copy here
 	 * @param bCopy if true, also copy the device element
 	 */
@@ -395,4 +406,59 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 			copyElement(device, null);
 		}
 	}
+
+	/**
+	 * (26) getCreateEvent
+	 *
+	 * @param iSkip number of elements to skip
+	 * @return JDFEvent the element
+	 */
+	public JDFEvent getCreateEvent(final int iSkip)
+	{
+		return (JDFEvent) getCreateElement_JDFElement(ElementName.EVENT, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element Event
+	 *
+	 * @param iSkip number of elements to skip
+	 * @return JDFEvent the element default is getEvent(0)
+	 */
+	public JDFEvent getEvent(final int iSkip)
+	{
+		return (JDFEvent) getElement(ElementName.EVENT, null, iSkip);
+	}
+
+	/**
+	 * Get all Event from the current element
+	 *
+	 * @return Collection<JDFEvent>, null if none are available
+	 */
+	public Collection<JDFEvent> getAllEvent()
+	{
+		return getChildrenByClass(JDFEvent.class, false, 0);
+	}
+
+	/**
+	 * (30) append element Event
+	 *
+	 * @return JDFEvent the element
+	 */
+	public JDFEvent appendEvent()
+	{
+		return (JDFEvent) appendElement(ElementName.EVENT, null);
+	}
+
+	/**
+	 * (30) append element Event
+	 *
+	 * @return JDFEvent the element
+	 */
+	public JDFEvent appendEvent(final String eventID)
+	{
+		final JDFEvent e = appendEvent();
+		e.setEventID(StringUtil.getNonEmpty(eventID));
+		return e;
+	}
+
 }

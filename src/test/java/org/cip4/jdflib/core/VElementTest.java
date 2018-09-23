@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -87,7 +55,7 @@ import org.junit.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * 05.12.2008
+ *         05.12.2008
  */
 public class VElementTest extends JDFTestCaseBase
 {
@@ -137,7 +105,7 @@ public class VElementTest extends JDFTestCaseBase
 		assertEquals(v.size(), 0);
 		v.add(e);
 		assertEquals(v.size(), 1);
-		KElement[] k = new KElement[4];
+		final KElement[] k = new KElement[4];
 		k[0] = e;
 		k[1] = e.appendElement("b");
 		k[2] = e.appendElement("c");
@@ -351,13 +319,13 @@ public class VElementTest extends JDFTestCaseBase
 		final VElement v = new VElement();
 		for (int i = 0; i < 100; i++)
 		{
-			KElement e1 = e.appendElement("e1");
+			final KElement e1 = e.appendElement("e1");
 			e1.setAttribute("a", "b");
 			v.add(e1);
-			KElement e2 = e.appendElement("e1");
+			final KElement e2 = e.appendElement("e1");
 			e1.setAttribute("a", "c");
 			v.add(e2);
-			KElement e3 = e.appendElement("e3");
+			final KElement e3 = e.appendElement("e3");
 			e1.setAttribute("a", "c");
 			v.add(e3);
 		}
@@ -373,22 +341,22 @@ public class VElementTest extends JDFTestCaseBase
 	@Test
 	public void testUnifyElementPerformance()
 	{
-		JDFDoc dBDoc = creatXMDoc();
+		final JDFDoc dBDoc = creatXMDoc();
 
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement e = d.getRoot();
 		final VElement v = new VElement();
-		long t00 = System.currentTimeMillis();
+		final long t00 = System.currentTimeMillis();
 		for (int i = 0; i < 1000; i++)
 		{
-			KElement newRoot = dBDoc.clone().getRoot();
+			final KElement newRoot = dBDoc.clone().getRoot();
 			e.copyElement(newRoot, null);
 			v.add(newRoot);
 		}
 		System.out.println("t00: " + (System.currentTimeMillis() - t00));
 		v.unify();
 		assertEquals(v.size(), 1000);
-		long t0 = System.currentTimeMillis();
+		final long t0 = System.currentTimeMillis();
 		v.unifyElement();
 		assertEquals(v.size(), 1);
 		System.out.println("t: " + (System.currentTimeMillis() - t0));
@@ -469,6 +437,27 @@ public class VElementTest extends JDFTestCaseBase
 		assertEquals(v.index(e4), -1);
 		v.add(e3);
 		assertEquals("test for equivalent ID aqttribute", v.index(e4), 2);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testNameIndex()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		final KElement e = d.getRoot();
+		final KElement e1 = e.appendElement("e1");
+		final KElement e2 = e.appendElement("e2");
+
+		final VElement v = new VElement();
+		v.add(e1);
+		v.add(e2);
+		v.add(e1);
+		v.add(e1);
+		assertEquals(0, v.nameIndex("e1", 0));
+		assertEquals(2, v.nameIndex("e1", 1));
+		assertEquals(3, v.nameIndex("e1", 2));
 	}
 
 }
