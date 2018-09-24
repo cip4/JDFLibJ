@@ -49,7 +49,6 @@
 package org.cip4.jdflib.core;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -1046,9 +1045,6 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	@Override
 	public Element createElementNS(final String namespaceURI, final String qualifiedName, final String localPart)
 	{
-		Constructor<?> constructi;
-		Class<?> classOfConstructor = null;
-		// we are not yet in a JDF or JMF
 		if (bKElementOnly)
 		{
 			return new KElement(this, namespaceURI, qualifiedName, localPart);
@@ -1058,9 +1054,10 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 				|| XJDFConstants.XJMF.equals(localPart) || ElementName.JMF.equals(localPart);
 
 		final DocumentData theData = data;
+		// we are not yet in a JDF or JMF
 		synchronized (theData.sm_hashCtorElementNS)
 		{
-			constructi = theData.sm_hashCtorElementNS.get(qualifiedName);
+			Constructor<?> constructi = theData.sm_hashCtorElementNS.get(qualifiedName);
 
 			String path = null;
 			// otherwhise don't use hashtableentry
@@ -1075,6 +1072,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			}
 			if (constructi == null)// AS 17.09.02
 			{
+				Class<?> classOfConstructor = null;
 				try
 				{
 					classOfConstructor = getFactoryClass(namespaceURI, qualifiedName, localPart, path);
@@ -1105,12 +1103,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 				}
 			}
 		}
-
-		final Object[] constructorArguments = { this, namespaceURI, qualifiedName, localPart };
-
-		final KElement newElement = createKElement(constructi, constructorArguments);
-
-		return newElement;
+		return new KElement(this, namespaceURI, qualifiedName, localPart);
 	}
 
 	/**
@@ -1139,57 +1132,10 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	 * @param className
 	 * @return
 	 */
-	private boolean isSpecialClass(String qualifiedName, final String className)
+	boolean isSpecialClass(String qualifiedName, final String className)
 	{
 		qualifiedName = KElement.xmlnsLocalName(qualifiedName);
 		return !data.contextSensitive.contains(qualifiedName) && (className == null || !data.contextSensitive.contains(className));
-	}
-
-	/**
-	 * Method createKElement
-	 *
-	 * @param constructi
-	 * @param constructorArguments
-	 * @return KElement (always != <code>null</code>)
-	 */
-	private KElement createKElement(final Constructor<?> constructi, final Object[] constructorArguments)
-	{
-		KElement newElement = null;
-		String message = null;
-
-		try
-		{
-			newElement = (KElement) constructi.newInstance(constructorArguments);
-		}
-		// re-throw on error is done below
-		catch (final IllegalAccessException e)
-		{
-			message = "(DocumentJDFImpl.createKElement) IllegalAccessException caught :" + e.getMessage();
-		}
-		catch (final InstantiationException e)
-		{
-			message = "(DocumentJDFImpl.createKElement) InstantiationException caught (abstract class?) : " + constructi.getName() + "(CoreDocumentImpl, String, String, String)";
-		}
-		catch (final InvocationTargetException e)
-		{
-			message = "(DocumentJDFImpl.createKElement) InvocationTargetException caught :" + e.getMessage();
-		}
-		catch (final Exception e)
-		{
-			message = "(DocumentJDFImpl.createKElement) Exception caught :" + e.getMessage();
-		}
-
-		if (newElement == null)
-		{
-			if (message == null)
-			{
-				message = "(DocumentJDFImpl.createKElement) Could not create an element with " + constructi.getName() + "(CoreDocumentImpl, String, String, String)";
-			}
-			// something went wrong
-			throw new DOMException(DOMException.SYNTAX_ERR, message);
-		}
-
-		return newElement;
 	}
 
 	/**
@@ -1484,11 +1430,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	@Override
 	public Node removeChild(final Node arg0) throws DOMException
 	{
-		final XMLDocUserData ud = getXMLDocUserData();
-		if (ud != null)
-		{
-			ud.clearTargets();
-		}
+		clearCache();
 
 		return super.removeChild(arg0);
 	}
@@ -1499,12 +1441,17 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	@Override
 	public Node replaceChild(final Node arg0, final Node arg1) throws DOMException
 	{
+		clearCache();
+		return super.replaceChild(arg0, arg1);
+	}
+
+	void clearCache()
+	{
 		final XMLDocUserData ud = getXMLDocUserData();
 		if (ud != null)
 		{
 			ud.clearTargets();
 		}
-		return super.replaceChild(arg0, arg1);
 	}
 
 	/**
