@@ -3,47 +3,79 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer. 
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
- * distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
- * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
- * normally appear.
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:  
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of 
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
- * without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written 
+ *    permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
- * OF SUCH DAMAGE. ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
- * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration 
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software 
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
+ *  
+ * For more information on The International Cooperation for the 
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *  
  * 
- * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
- * 
- *
  */
 /**
  * DocumentJDFImpl.java - JDFElement Factory
  *
  * @author Dietrich Mucha
+ * 
+ * This method creates at least a KElement !!! (was JDFElement until 11.2005)
  *
- *         This method creates at least a KElement !!! (was JDFElement until 11.2005)
- *
- *         Copyright (C) 2003 Heidelberger Druckmaschinen AG. All Rights Reserved.
+ * Copyright (C) 2003 Heidelberger Druckmaschinen AG. All Rights Reserved.
  */
 
 package org.cip4.jdflib.core;
@@ -62,9 +94,8 @@ import org.w3c.dom.Element;
 
 /**
  * implementation of the JDFLib class factory
- * 
  * @author prosirai
- *
+ * 
  */
 public class DocumentXMLImpl extends DocumentImpl
 {
@@ -133,7 +164,7 @@ public class DocumentXMLImpl extends DocumentImpl
 
 	/**
 	 * rough guestimate of the memory used by this if called after parsing
-	 *
+	 * 
 	 * @return the difference of memory used when calling compared to construction time
 	 */
 	public long getDocMemoryUsed()
@@ -175,21 +206,21 @@ public class DocumentXMLImpl extends DocumentImpl
 	/**
 	 * @param documentJDFImpl
 	 */
-	void setNSMap(final DocumentXMLImpl documentJDFImpl)
+	void setNSMap(DocumentXMLImpl documentJDFImpl)
 	{
 		if (documentJDFImpl == null)
 			return;
 
 		nsMap.putAll(documentJDFImpl.nsMap);
-		final Element e = getDocumentElement();
+		Element e = getDocumentElement();
 		if (e != null)
 		{
-			final Vector<String> keys = ContainerUtil.getKeyVector(nsMap);
+			Vector<String> keys = ContainerUtil.getKeyVector(nsMap);
 			if (keys != null)
 			{
 				for (int i = 0; i < keys.size(); i++)
 				{
-					final String prefix = keys.get(i);
+					String prefix = keys.get(i);
 					setRootNSAttribute(prefix, nsMap.get(prefix));
 				}
 			}
@@ -205,23 +236,24 @@ public class DocumentXMLImpl extends DocumentImpl
 
 		final Runtime rt = Runtime.getRuntime();
 		initialMem = rt.totalMemory() - rt.freeMemory();
-		nsMap = new HashMap<>();
+		nsMap = new HashMap<String, String>();
 		ignoreNSDefault = false;
 		strictNSCheck = bStaticStrictNSCheck;
 	}
 
 	/**
 	 * Factory method; creates an <code>Element</code> having this <code>Document</code> as its OwnerDoc.
-	 *
+	 * 
 	 * @param qualifiedName The name of the element type to instantiate. For XML, this is case-sensitive.
-	 *
+	 * 
 	 */
 	@Override
 	public Element createElement(final String qualifiedName)
 	{
+		final String namespaceURI = null;
 		final String localPart = KElement.xmlnsLocalName(qualifiedName);
 
-		return createElementNS(null, qualifiedName, localPart);
+		return createElementNS(namespaceURI, qualifiedName, localPart);
 	}
 
 	/**
@@ -229,7 +261,7 @@ public class DocumentXMLImpl extends DocumentImpl
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @return
-	 */
+	*/
 	@Override
 	public Element createElementNS(final String namespaceURI, final String qualifiedName)
 	{
@@ -243,7 +275,7 @@ public class DocumentXMLImpl extends DocumentImpl
 	 * @param qualifiedName
 	 * @param localPart
 	 * @return
-	 */
+	*/
 	@Override
 	public Element createElementNS(final String namespaceURI, final String qualifiedName, final String localPart)
 	{
@@ -286,7 +318,7 @@ public class DocumentXMLImpl extends DocumentImpl
 	}
 
 	/**
-	 * @return the setIgnoreNSDefault; if true no namespaces are collected
+	 * @return the setIgnoreNSDefault; if true no namespaces are collected 
 	 */
 	public boolean isIgnoreNSDefault()
 	{
@@ -295,7 +327,7 @@ public class DocumentXMLImpl extends DocumentImpl
 
 	/**
 	 * if true no namespaces are heuristically gathered
-	 *
+	 * 
 	 * @param _setIgnoreNSDefault the setIgnoreNSDefault to set
 	 */
 	public void setIgnoreNSDefault(final boolean _setIgnoreNSDefault)
@@ -320,11 +352,11 @@ public class DocumentXMLImpl extends DocumentImpl
 	 * @param prefix
 	 * @param strNamespaceURI
 	 */
-	public void setNamespaceURIFromPrefix(String prefix, final String strNamespaceURI)
+	public void setNamespaceURIFromPrefix(String prefix, String strNamespaceURI)
 	{
 		if (StringUtil.getNonEmpty(prefix) == null)
 			prefix = JDFCoreConstants.COLON;
-		final String old = nsMap.get(prefix);
+		String old = nsMap.get(prefix);
 		if (old == null)
 		{
 			setRootNSAttribute(prefix, strNamespaceURI);
@@ -336,12 +368,12 @@ public class DocumentXMLImpl extends DocumentImpl
 	 * @param prefix
 	 * @param strNamespaceURI
 	 */
-	private void setRootNSAttribute(final String prefix, final String strNamespaceURI)
+	private void setRootNSAttribute(String prefix, String strNamespaceURI)
 	{
 		String qualifiedName = "xmlns";
 		if (!JDFCoreConstants.COLON.equals(prefix))
 			qualifiedName += JDFCoreConstants.COLON + prefix;
-		final KElement element = (KElement) getDocumentElement();
+		KElement element = (KElement) getDocumentElement();
 		if (element != null)
 		{
 			element.setAttributeNS(JDFCoreConstants.XMLNSURI, qualifiedName, strNamespaceURI);
