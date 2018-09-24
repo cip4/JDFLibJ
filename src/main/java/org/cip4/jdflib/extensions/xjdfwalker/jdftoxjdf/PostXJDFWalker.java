@@ -36,9 +36,12 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.Collection;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
+import org.cip4.jdflib.auto.JDFAutoStripCellParams.EnumSides;
+import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -869,14 +872,14 @@ class PostXJDFWalker extends BaseElementWalker
 			final ResourceHelper ni = niSet == null ? null : niSet.getPartition(layoutMap);
 			moveGangSourceFromStripping(ni, bsID, strippingParams);
 
-			uodatePositions(bsID, layoutPartition);
+			updatePositions(bsID, layoutPartition);
 			strippingParams.removeAttribute(ElementName.BINDERYSIGNATURE + "Ref");
 			strippingParams.removeAttribute(XJDFConstants.BinderySignatureID);
 			layoutPartition.copyInto(strippingParams, false);
 			return layoutMap;
 		}
 
-		protected void uodatePositions(final String bsID, final JDFLayout layoutPartition)
+		protected void updatePositions(final String bsID, final JDFLayout layoutPartition)
 		{
 			final VElement positions = layoutPartition.getChildElementVector(ElementName.POSITION, null);
 			if (positions != null)
@@ -1065,6 +1068,20 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				bs.moveAttribute(AttributeName.INNERMOSTSHINGLING, strippingParams);
 				bs.moveAttribute(AttributeName.OUTERMOSTSHINGLING, strippingParams);
+				final EnumWorkStyle ws = strippingParams.getWorkStyle();
+				if (EnumWorkStyle.Simplex.equals(ws))
+				{
+					bs.getCreateSignatureCell(0);
+					final Collection<JDFSignatureCell> scs = bs.getAllSignatureCell();
+					for (final JDFSignatureCell sc : scs)
+					{
+						if (!sc.hasNonEmpty(AttributeName.SIDES))
+						{
+							sc.setAttribute(AttributeName.SIDES, EnumSides.OneSided.getName());
+						}
+					}
+				}
+
 			}
 			// TODO where to move stripmarks? - stay in strippingparams or move to the appropriate binderysignature, stripcell or strippingparams
 		}

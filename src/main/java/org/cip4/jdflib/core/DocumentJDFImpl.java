@@ -49,10 +49,10 @@
 package org.cip4.jdflib.core;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.ParentNode;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
@@ -1110,7 +1110,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 
 		final KElement newElement = createKElement(constructi, constructorArguments);
 
-		return newElement;
+		return newElement == null ? new KElement(this, namespaceURI, qualifiedName, localPart) : newElement;
 	}
 
 	/**
@@ -1150,46 +1150,22 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	 *
 	 * @param constructi
 	 * @param constructorArguments
-	 * @return KElement (always != <code>null</code>)
+	 * @return KElement
 	 */
-	private KElement createKElement(final Constructor<?> constructi, final Object[] constructorArguments)
+	KElement createKElement(final Constructor<?> constructi, final Object[] constructorArguments)
 	{
-		KElement newElement = null;
-		String message = null;
 
 		try
 		{
-			newElement = (KElement) constructi.newInstance(constructorArguments);
-		}
-		// re-throw on error is done below
-		catch (final IllegalAccessException e)
-		{
-			message = "(DocumentJDFImpl.createKElement) IllegalAccessException caught :" + e.getMessage();
-		}
-		catch (final InstantiationException e)
-		{
-			message = "(DocumentJDFImpl.createKElement) InstantiationException caught (abstract class?) : " + constructi.getName() + "(CoreDocumentImpl, String, String, String)";
-		}
-		catch (final InvocationTargetException e)
-		{
-			message = "(DocumentJDFImpl.createKElement) InvocationTargetException caught :" + e.getMessage();
+			return (KElement) constructi.newInstance(constructorArguments);
 		}
 		catch (final Exception e)
 		{
-			message = "(DocumentJDFImpl.createKElement) Exception caught :" + e.getMessage();
-		}
+			LogFactory.getLog(DocumentJDFImpl.class).error(" Exception caught :", e);
 
-		if (newElement == null)
-		{
-			if (message == null)
-			{
-				message = "(DocumentJDFImpl.createKElement) Could not create an element with " + constructi.getName() + "(CoreDocumentImpl, String, String, String)";
-			}
-			// something went wrong
-			throw new DOMException(DOMException.SYNTAX_ERR, message);
 		}
+		return null;
 
-		return newElement;
 	}
 
 	/**
