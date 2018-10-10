@@ -3,70 +3,38 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *  
- * 
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ *
+ *
  */
 package org.cip4.jdflib.goldenticket;
 
@@ -123,12 +91,11 @@ import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
 /**
- * @author rainer prosi class that generates golden tickets based on ICS levels etc basegolden ticket should generally be the last in the cascade domain - mis - jmf
- * - base
- * 
- * To generate a new golden ticket, follow these steps 1.) construct the appropriate domain subclass, e.g. MISCPGoldenTicket for mis to conventional print 2.)
- * call .assign(null) (or your favorite hand-coded jdf node) 3.) retrieve the updated copy with .getNode()
- * 
+ * @author rainer prosi class that generates golden tickets based on ICS levels etc basegolden ticket should generally be the last in the cascade domain - mis - jmf - base
+ *
+ *         To generate a new golden ticket, follow these steps 1.) construct the appropriate domain subclass, e.g. MISCPGoldenTicket for mis to conventional print 2.) call .assign(null) (or your
+ *         favorite hand-coded jdf node) 3.) retrieve the updated copy with .getNode()
+ *
  */
 public class BaseGoldenTicket
 {
@@ -138,9 +105,9 @@ public class BaseGoldenTicket
 	protected JDFNode thePreviousNode = null;
 	protected JDFNode theParentNode = null;
 	protected String category;
-	protected Map<String, VString> catMap = new HashMap<String, VString>();
+	protected Map<String, VString> catMap = new HashMap<>();
 	/**
-	 * 
+	 *
 	 */
 	public JDFNode theParentProduct = null;
 	protected EnumVersion theVersion = null;
@@ -148,16 +115,16 @@ public class BaseGoldenTicket
 	protected int icsLevel = 0;
 	protected StatusCounter theStatusCounter;
 	/**
-	 * 
+	 *
 	 */
 	public static String misURL = null;
 	/**
-	 * 
+	 *
 	 */
 	public static String deviceURL = null;
-	private final Vector<BaseGoldenTicket> vKids = new Vector<BaseGoldenTicket>();
+	private final Vector<BaseGoldenTicket> vKids = new Vector<>();
 	/**
-	 * 
+	 *
 	 */
 	public VJDFAttributeMap vParts = null;
 	/**
@@ -166,7 +133,7 @@ public class BaseGoldenTicket
 	public VString cols = getCols();
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	protected VString getCols()
@@ -175,7 +142,7 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public VString colsActual = new VString("Schwarz,Cyan,Magenta,Gelb,RIP 4711,RIP 4712,RIP 4713,RIP 4714", ",");
 	/**
@@ -183,22 +150,22 @@ public class BaseGoldenTicket
 	 */
 	public String plateReduction = "Side Separation PartVersion";
 	/**
-	 * 
+	 *
 	 */
 	public int[] nCols = { 0, 0 };
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 * @param n
 	 * @return
 	 */
-	public static VJDFAttributeMap createSheetMap(int n)
+	public static VJDFAttributeMap createSheetMap(final int n)
 	{
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		for (int i = 1; i <= n; i++)
 		{
-			JDFAttributeMap map = new JDFAttributeMap();
+			final JDFAttributeMap map = new JDFAttributeMap();
 			map.put(EnumPartIDKey.SignatureName, "Sig1");
 			map.put(EnumPartIDKey.SheetName, "Sheet1");
 			map.put(EnumPartIDKey.Side, "Front");
@@ -210,16 +177,16 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public String paperProductID;
 	protected VString partIDKeys = null;
 	/**
-	 * 
+	 *
 	 */
 	public EnumWorkStyle workStyle = EnumWorkStyle.Simplex;
 	/**
-	 * 
+	 *
 	 */
 	public String devID = "DeviceID";
 	/**
@@ -231,23 +198,23 @@ public class BaseGoldenTicket
 	 */
 	public int waste = 100;
 	/**
-	 * 
+	 *
 	 */
 	public int partsAtOnce = 0; // 0 = all
 	/**
-	 * 
+	 *
 	 */
 	public int partsForAvailable = 1; // 1=1 loop and all is available
 	/**
-	 * 
+	 *
 	 */
 	public boolean bExpandGrayBox = true;
 	/**
-	 * 
+	 *
 	 */
 	public boolean bPartitionedPlateMedia = false;
 	/**
-	 * 
+	 *
 	 */
 	public JDFMedia paperMedia;
 	/**
@@ -255,17 +222,17 @@ public class BaseGoldenTicket
 	 */
 	public String returnURL = null;
 	/**
-	 * 
+	 *
 	 */
 	public boolean getNIFromParent = false;
 	/**
-	 * 
+	 *
 	 */
 	public String m_pdfFile = "file://server/dir/file.pdf";
 
 	/**
 	 * create a BaseGoldenTicket
-	 * 
+	 *
 	 * @param pIcsLevel the level to init to (1,2 or 3)
 	 * @param jdfVersion the version to generate a golden ticket for
 	 */
@@ -282,9 +249,9 @@ public class BaseGoldenTicket
 
 	/**
 	 * create a BaseGoldenTicket
-	 * 
+	 *
 	 * @param parent
-	 * 
+	 *
 	 */
 	public BaseGoldenTicket(final BaseGoldenTicket parent)
 	{
@@ -315,8 +282,8 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * @return 
-	 * 
+	 * @return
+	 *
 	 */
 	protected JDFNodeInfo initNodeInfo()
 	{
@@ -341,7 +308,7 @@ public class BaseGoldenTicket
 
 	/**
 	 * assign a node to this golden ticket instance
-	 * 
+	 *
 	 * @param node the node to assign, if null a new conforming node is generated from scratch
 	 */
 	public void assign(final JDFNode node)
@@ -373,7 +340,7 @@ public class BaseGoldenTicket
 
 	/**
 	 * assign a previous node to this golden ticket instance, e.g. an imagesetting node
-	 * 
+	 *
 	 * @param node the node to assign, if null a new conforming node is generated from scratch
 	 */
 	public void setPreviousNode(final JDFNode node)
@@ -383,7 +350,7 @@ public class BaseGoldenTicket
 
 	/**
 	 * add a kid to be makeready and executed
-	 * 
+	 *
 	 * @param bt the golden ticket to assign, if null a new conforming node is generated from scratch
 	 */
 	public void addKid(final BaseGoldenTicket bt)
@@ -396,12 +363,12 @@ public class BaseGoldenTicket
 
 	/**
 	 * makeready for all kids
-	 * 
+	 *
 	 */
 
 	public void makeReadyAll()
 	{
-		for (BaseGoldenTicket kid : vKids)
+		for (final BaseGoldenTicket kid : vKids)
 		{
 			kid.makeReady();
 		}
@@ -472,12 +439,13 @@ public class BaseGoldenTicket
 
 	/**
 	 * execute for all kids
+	 *
 	 * @param parts
-	 * 
+	 *
 	 */
 	public void executeAll(final VJDFAttributeMap parts)
 	{
-		final Vector<VJDFAttributeMap> vvMap = new Vector<VJDFAttributeMap>();
+		final Vector<VJDFAttributeMap> vvMap = new Vector<>();
 
 		if (parts == null)
 		{
@@ -516,6 +484,7 @@ public class BaseGoldenTicket
 
 	/**
 	 * simulate execution of this node the internal node will be modified to reflect the excution
+	 *
 	 * @param vMap
 	 * @param bOutAvail
 	 * @param bFirst
@@ -533,12 +502,13 @@ public class BaseGoldenTicket
 	{
 		theStatusCounter.setPhase(EnumNodeStatus.InProgress, "NodeDetails", EnumDeviceStatus.Running, "DeviceDetails");
 		runSinglePhase(pgood, pwaste, bOutAvail, bFirst);
-		finalize(); // prior to processRun
+		finalizeProcess(); // prior to processRun
 		theStatusCounter.setPhase(EnumNodeStatus.Completed, "NodeDetails", EnumDeviceStatus.Idle, "DeviceDetails");
 	}
 
 	/**
 	 * schedule this node the nodeinfo will be modified
+	 *
 	 * @param partsToSchedule
 	 * @param starthours
 	 * @param durationhours
@@ -572,8 +542,8 @@ public class BaseGoldenTicket
 	/**
 	 * @param pgood
 	 * @param pwaste
-	 * @param bOutAvail 
-	 * @param bFirst 
+	 * @param bOutAvail
+	 * @param bFirst
 	 */
 	final protected void runSinglePhase(final int pgood, final int pwaste, final boolean bOutAvail, final boolean bFirst)
 	{
@@ -598,8 +568,7 @@ public class BaseGoldenTicket
 	/**
 	 * do the last steps prior to processrun
 	 */
-	@Override
-	protected void finalize()
+	protected void finalizeProcess()
 	{
 		theStatusCounter.setEvent("ID_42", "Event", StringUtil.getRandomString());
 	}
@@ -617,27 +586,27 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 * @param bProduct
 	 */
-	public void setParent(boolean bProduct)
+	public void setParent(final boolean bProduct)
 	{
 		theParentNode = new JDFDoc("JDF").getJDFRoot();
 		theParentNode.setType(bProduct ? EnumType.Product : EnumType.ProcessGroup);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param bProduct
 	 */
-	public void setParent(ProductGoldenTicket parent)
+	public void setParent(final ProductGoldenTicket parent)
 	{
 		theParentNode = parent == null ? null : parent.theNode;
 	}
 
 	/**
 	 * initializes this node to a given ICS version
-	 * 
+	 *
 	 */
 	public void init()
 	{
@@ -647,9 +616,9 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * @param previousNode 
-	 * @return 
-	 * 
+	 * @param previousNode
+	 * @return
+	 *
 	 */
 	protected JDFDevice initDevice(final JDFNode previousNode)
 	{
@@ -679,7 +648,7 @@ public class BaseGoldenTicket
 
 	/**
 	 * @param node
-	 * 
+	 *
 	 */
 	public void initAuditPool(final JDFNode node)
 	{
@@ -705,7 +674,7 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	protected void initJDF()
 	{
@@ -773,7 +742,7 @@ public class BaseGoldenTicket
 
 	/**
 	 * gets the current state of the node
-	 * 
+	 *
 	 * @return the theNode
 	 */
 	public JDFNode getNode()
@@ -783,7 +752,7 @@ public class BaseGoldenTicket
 
 	/**
 	 * gets the current state of the node
-	 * 
+	 *
 	 * @return the theNode
 	 */
 	public JDFNode getExpandedNode()
@@ -792,7 +761,7 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -862,9 +831,10 @@ public class BaseGoldenTicket
 
 	/**
 	 * add a signature sheet combination
+	 *
 	 * @param sheetName
 	 */
-	public void addSheet(String sheetName)
+	public void addSheet(final String sheetName)
 	{
 		if (vParts == null)
 			vParts = new VJDFAttributeMap();
@@ -882,7 +852,7 @@ public class BaseGoldenTicket
 
 	/**
 	 * add the type of amount link for resource audits etc
-	 * 
+	 *
 	 * @param link
 	 */
 	public void addAmountLink(final String link)
@@ -895,7 +865,7 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	protected void initColorantControl()
 	{
@@ -912,7 +882,7 @@ public class BaseGoldenTicket
 		final JDFColorantControl cc = (JDFColorantControl) (ccLink == null ? (JDFColorantControl) theNode.getCreateResource(ElementName.COLORANTCONTROL, EnumUsage.Input, 0) : ccLink.getTarget());
 		cc.setResStatus(EnumResStatus.Available, false);
 
-		JDFColorPool cp = initColorPool();
+		final JDFColorPool cp = initColorPool();
 
 		cc.refColorPool(cp);
 		for (int i = 4; i < getNCols(); i++)
@@ -942,7 +912,7 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	protected JDFColorPool initColorPool()
@@ -998,8 +968,8 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * @return 
-	 * 
+	 * @return
+	 *
 	 */
 	protected JDFMedia initPaperMedia()
 	{
@@ -1085,7 +1055,7 @@ public class BaseGoldenTicket
 
 	/**
 	 * get a reduced partionmap missing the keys in reduceKeys
-	 * 
+	 *
 	 * @param reduceKeys
 	 * @return the reduced map
 	 */
@@ -1105,7 +1075,7 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 * @param usage
 	 */
 	protected void initPlateXM(final EnumUsage usage)
@@ -1241,8 +1211,8 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * @return 
-	 * 
+	 * @return
+	 *
 	 */
 	protected JDFRunList initDocumentRunList()
 	{
@@ -1262,7 +1232,7 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	protected JDFComponent initOutputComponent()
@@ -1325,7 +1295,7 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	protected void fillCatMaps()
 	{
@@ -1334,6 +1304,7 @@ public class BaseGoldenTicket
 
 	/**
 	 * get the correct Types from category
+	 *
 	 * @return
 	 */
 	public VString getTypes()

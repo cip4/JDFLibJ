@@ -3,90 +3,57 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *  
- * 
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
- * JDFDateTimeRange.java
+ *         JDFDateTimeRange.java
  *
  */
 package org.cip4.jdflib.datatypes;
 
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
- * 
- * 
+ *
+ *
  * @author rainer prosi
  * @date Apr 12, 2013
  */
@@ -116,40 +83,42 @@ public class JDFDateTimeRange extends JDFRange
 
 	/**
 	 * Constructor - creates a DateTime range defined by x ("from x to x")
-	 * 
+	 *
 	 * @param x boundary of the date/time range
 	 */
-	public JDFDateTimeRange(JDFDate x)
+	public JDFDateTimeRange(final JDFDate x)
 	{
 		init(x, x);
 	}
 
 	/**
 	 * Constructor - creates a DateTime range defined by xmin and xmax
-	 * 
+	 *
 	 * @param xmin
 	 * @param xmax
 	 */
-	public JDFDateTimeRange(JDFDate xmin, JDFDate xmax)
+	public JDFDateTimeRange(final JDFDate xmin, final JDFDate xmax)
 	{
 		init(xmin, xmax);
 	}
 
 	/**
 	 * copy constructor
-	 * @param r 
+	 *
+	 * @param r
 	 */
-	public JDFDateTimeRange(JDFDateTimeRange r)
+	public JDFDateTimeRange(final JDFDateTimeRange r)
 	{
 		init(r.getLeft(), r.getRight());
 	}
 
 	/**
 	 * Initialization
-	 * @param xmin 
-	 * @param xmax 
+	 *
+	 * @param xmin
+	 * @param xmax
 	 */
-	protected void init(JDFDate xmin, JDFDate xmax)
+	protected void init(final JDFDate xmin, final JDFDate xmax)
 	{
 		m_left = xmin;
 		m_right = xmax;
@@ -157,6 +126,7 @@ public class JDFDateTimeRange extends JDFRange
 
 	/**
 	 * factory style constructor that catches all exceptions and returns null if date is invalid
+	 *
 	 * @param date the formatted date string
 	 * @return the JDFDate , null if date is not a valid string
 	 */
@@ -178,13 +148,14 @@ public class JDFDateTimeRange extends JDFRange
 
 	/**
 	 * Construct a JDFDateTimeRange from a string
-	 * @param s 
-	 * 
+	 *
+	 * @param s
+	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFDateTimeRange(String s) throws DataFormatException
+	public JDFDateTimeRange(final String s) throws DataFormatException
 	{
-		String[] strArray = s.split("~");
+		final String[] strArray = s.split("~");
 		if (strArray.length <= 0 || strArray.length > 2)
 		{
 			throw new DataFormatException("JDFDateTimeRange illegal string: " + s);
@@ -205,7 +176,7 @@ public class JDFDateTimeRange extends JDFRange
 				m_right = new JDFDate(strArray[1].trim());
 			}
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new DataFormatException("JDFDateTimeRange illegal string: " + s);
 		}
@@ -213,7 +184,7 @@ public class JDFDateTimeRange extends JDFRange
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -228,18 +199,18 @@ public class JDFDateTimeRange extends JDFRange
 
 	/**
 	 * isValid - validate the given String
-	 * 
+	 *
 	 * @param s the given string
-	 * 
+	 *
 	 * @return boolean - false if the String has not a valid format
 	 */
-	public boolean isValid(String s)
+	public boolean isValid(final String s)
 	{
 		try
 		{
 			new JDFDateTimeRange(s);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			return false;
 		}
@@ -247,48 +218,39 @@ public class JDFDateTimeRange extends JDFRange
 	}
 
 	/**
-	 * hashCode complements equals() to fulfill the equals/hashCode contract
-	 */
-	@Override
-	public int hashCode()
-	{
-		return HashUtil.hashCode(0, this.toString());
-	}
-
-	/**
 	 * inRange - returns true if 'x' is within the range defined by 'this'
-	 * 
+	 *
 	 * @param x JDFDate that is to be compared with 'this'
 	 * @return boolean - true if 'x' is within the range defined by 'this'
 	 */
-	public boolean inRange(JDFDate x)
+	public boolean inRange(final JDFDate x)
 	{
-		JDFDate min = this.getLowerValue();
-		JDFDate max = this.getUpperValue();
+		final JDFDate min = this.getLowerValue();
+		final JDFDate max = this.getUpperValue();
 		return ((x.isLater(min) || x.equals(min)) && (x.isEarlier(max) || x.equals(max)));
 	}
 
 	/**
 	 * isPartOfRange - is range 'r' within this range?
-	 * 
+	 *
 	 * @param ra the range to test
-	 * 
+	 *
 	 * @return boolean - true if range 'r' is within this range, else false
 	 */
 	@Override
-	public boolean isPartOfRange(JDFRange ra)
+	public boolean isPartOfRange(final JDFRange ra)
 	{
-		JDFDateTimeRange r = (JDFDateTimeRange) ra;
-		JDFDate min = this.getLowerValue();
-		JDFDate r_min = r.getLowerValue();
-		JDFDate max = this.getUpperValue();
-		JDFDate r_max = r.getUpperValue();
+		final JDFDateTimeRange r = (JDFDateTimeRange) ra;
+		final JDFDate min = this.getLowerValue();
+		final JDFDate r_min = r.getLowerValue();
+		final JDFDate max = this.getUpperValue();
+		final JDFDate r_max = r.getUpperValue();
 		return r_min.isLater(min) && r_max.isEarlier(max);
 	}
 
 	/**
 	 * getLeft - get the left of the two range deliminators xmin ~ xmax
-	 * 
+	 *
 	 * @return JDFDate - the left value
 	 */
 	public JDFDate getLeft()
@@ -298,7 +260,7 @@ public class JDFDateTimeRange extends JDFRange
 
 	/**
 	 * getRight - get the right of the two range deliminators xmin ~ xmax
-	 * 
+	 *
 	 * @return JDFDate - the right value
 	 */
 	public JDFDate getRight()
@@ -308,27 +270,27 @@ public class JDFDateTimeRange extends JDFRange
 
 	/**
 	 * setLeft - sets the left JDFDate object of the range
-	 * 
+	 *
 	 * @param x the left JDFDate object of the range
 	 */
-	public void setLeft(JDFDate x)
+	public void setLeft(final JDFDate x)
 	{
 		m_left = x;
 	}
 
 	/**
 	 * setRight - sets the right JDFDate object of the range
-	 * 
+	 *
 	 * @param x the right JDFDate object of the range
 	 */
-	public void setRight(JDFDate x)
+	public void setRight(final JDFDate x)
 	{
 		m_right = x;
 	}
 
 	/**
 	 * getUpperValue - returns the upper value of the bounds
-	 * 
+	 *
 	 * @return JDFDate - the upper value of the range
 	 */
 	public JDFDate getUpperValue()
@@ -338,7 +300,7 @@ public class JDFDateTimeRange extends JDFRange
 
 	/**
 	 * getLowerValue - returns the lower value of the bounds
-	 * 
+	 *
 	 * @return JDFDate - the lower value of the range
 	 */
 	public JDFDate getLowerValue()
@@ -359,7 +321,7 @@ public class JDFDateTimeRange extends JDFRange
 	}
 
 	@Override
-	protected boolean inObjectRange(Object other)
+	protected boolean inObjectRange(final Object other)
 	{
 		return inRange((JDFDate) other);
 	}

@@ -3,70 +3,38 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *  
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  * 
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * 
+ *
  */
 package org.cip4.jdflib.goldenticket;
 
@@ -103,11 +71,11 @@ import org.cip4.jdflib.resource.process.postpress.JDFTrimmingParams;
 public class MISFinGoldenTicket extends MISGoldenTicket
 {
 	/**
-	 * 
+	 *
 	 */
 	public static final String MISFIN = "MISFin";
 	/**
-	 * 
+	 *
 	 */
 	public static final String MISFIN_SHEETFIN = "MISFin.SheetFin";
 	/**
@@ -132,18 +100,19 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	public static final String MISFIN_HARDCOVERFIN = "MISFin.HardcoverFin";
 
 	/**
-	 * 
+	 *
 	 */
 	public String foldCatalog = "F8-2";
 
 	/**
 	 * create a BaseGoldenTicket
+	 * 
 	 * @param _icsLevel
 	 * @param jdfVersion
 	 * @param _jmfLevel
 	 * @param _misLevel
 	 * @param vPartMap
-	 * 
+	 *
 	 */
 	public MISFinGoldenTicket(final int _icsLevel, final EnumVersion jdfVersion, final int _jmfLevel, final int _misLevel, final VJDFAttributeMap vPartMap)
 	{
@@ -155,7 +124,7 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	protected void fillCatMaps()
@@ -173,7 +142,7 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * create a BaseGoldenTicket
-	 * 
+	 *
 	 * @param parent the previous node, may be null
 	 */
 	public MISFinGoldenTicket(final MISFinGoldenTicket parent)
@@ -183,7 +152,7 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * initializes this node to a given ICS version
-	 * 
+	 *
 	 */
 	@Override
 	public void init()
@@ -213,7 +182,7 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void initBlockPreparation()
 	{
@@ -225,20 +194,20 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void initCasingIn()
 	{
 		if (theNode.getTypes().contains("CasingIn"))
 		{
 			final JDFCasingInParams cip = (JDFCasingInParams) theNode.getCreateResource(ElementName.CASINGINPARAMS, EnumUsage.Input, 0);
-			JDFGlueApplication glue = cip.appendGlueApplication();
+			final JDFGlueApplication glue = cip.appendGlueApplication();
 			glue.setGluingTechnique(EnumGluingTechnique.SpineGluing);
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void initStitching()
 	{
@@ -251,8 +220,8 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @return 
-	 * 
+	 * @return
+	 *
 	 */
 	private JDFCollectingParams initCollecting()
 	{
@@ -265,7 +234,7 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void initFolding()
 	{
@@ -277,7 +246,7 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void initTrimming()
 	{
@@ -305,7 +274,7 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	protected JDFComponent initOutputComponent()
@@ -372,8 +341,8 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @return 
-	 * 
+	 * @return
+	 *
 	 */
 	protected JDFComponent initInputComponent()
 	{
@@ -390,7 +359,7 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 			theNode.linkResource(comp, EnumUsage.Input, null);
 		}
 
-		//		final JDFResourceLink rl = 
+		// final JDFResourceLink rl =
 		theNode.getLink(comp, EnumUsage.Input);
 		comp.setResStatus(EnumResStatus.Available, true);
 		return comp;
@@ -402,7 +371,7 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	{
 		theStatusCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, "Printing");
 		runSinglePhase(pgood, pwaste, bOutAvail, bFirst);
-		finalize(); // prior to processRun
+		finalizeProcess(); // prior to processRun
 		theStatusCounter.setPhase(EnumNodeStatus.Completed, "Done", EnumDeviceStatus.Idle, "Waiting");
 	}
 
