@@ -396,7 +396,7 @@ public class WalkXJDFResource extends WalkXElement
 	private void handleAmountPool(final KElement xjdfRes, final JDFAttributeMap partmap, final JDFAttributeMap map, final JDFElement rl)
 	{
 		final KElement ap = xjdfRes.getElement(ElementName.AMOUNTPOOL);
-		if (ap != null)
+		if (ap != null && rl != null)
 		{
 			final KElement newAmountPool = rl.getCreateElement(ElementName.AMOUNTPOOL);
 			final Vector<JDFPartAmount> vpa = ap.getChildrenByClass(JDFPartAmount.class, false, 0);
