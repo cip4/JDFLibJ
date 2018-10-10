@@ -2392,7 +2392,7 @@ public class JDFResource extends JDFElement
 		if (clazz.equals(JDFResource.class))
 			return getChildElementVector_KElement(getNodeName(), null, null, true, 0);
 		else
-			return getChildrenByClass(clazz, false, 0);
+			return super.getChildrenByClass(clazz, false, 0);
 	}
 
 	/**

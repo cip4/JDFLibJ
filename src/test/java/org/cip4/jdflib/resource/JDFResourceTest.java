@@ -112,6 +112,7 @@ import org.cip4.jdflib.resource.process.JDFStripCellParams;
 import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
+import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.VectorMap;
 import org.junit.Test;
@@ -2221,7 +2222,6 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertFalse(xm.getInvalidAttributes(EnumValidationLevel.NoWarnIncomplete, true, 999).contains("PartUsage"));
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
 	/**
 	*
 	*/
@@ -2242,6 +2242,34 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 		vL = xm.getLeaves(true);
 		assertEquals("size false", vL.size(), 15);
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testGetLeavesPerformance()
+	{
+
+		final JDFNode n = JDFNode.createRoot();
+		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
+		for (int i = 0; i < 2222; i++)
+		{
+			xm.addPartition(EnumPartIDKey.SignatureName, "Sig" + i).addPartition(EnumPartIDKey.SheetName, "Sheet" + i).addPartition(EnumPartIDKey.Side, "Front")
+					.addPartition(EnumPartIDKey.Separation, "Black").appendElement(ElementName.MEDIA);
+		}
+
+		final CPUTimer ct = new CPUTimer(false);
+		for (int i = 0; i < 2222; i++)
+		{
+			ct.start();
+			final VElement vL = xm.getLeaves(false);
+			ct.stop();
+			if (i % 22 == 0)
+				log.info(ct.toString());
+			assertEquals("size false", vL.size(), 2222);
+
+		}
 	}
 
 	/**

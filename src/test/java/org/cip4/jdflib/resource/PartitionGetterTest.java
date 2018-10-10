@@ -439,6 +439,25 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
+	public void testGetMissingWierd()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.SignatureName, "S1");
+		final JDFResource r3 = r2.addPartition(EnumPartIDKey.SheetName, "SH1");
+		final JDFResource r41 = r3.addPartition(EnumPartIDKey.PartVersion, "PV1");
+		final JDFResource r411 = r41.addPartition(EnumPartIDKey.BlockName, "B1.1");
+		final JDFResource r42 = r3.addPartition(EnumPartIDKey.PartVersion, "PV2");
+		final JDFResource r421 = r42.addPartition(EnumPartIDKey.BlockName, "B1.2");
+		final PartitionGetter g = new PartitionGetter(r);
+		final JDFAttributeMap p1 = r3.getPartMap();
+		p1.put(EnumPartIDKey.BlockName, "B1");
+		assertEquals(r3, g.getPartition(p1, EnumPartUsage.Implicit));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetimplicitFromMapnix()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();

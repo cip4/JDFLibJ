@@ -561,11 +561,11 @@ public class PartitionGetter
 				else
 				{
 					// not nice, but this is what the old algorithm did - find the closest common ancestor
-
 					partitionFromMap = vMap.getCommonMap();
 					final VString partIDKeys = resourceRoot.getPartIDKeys();
 					final int lastPos = lastPos(partitionFromMap, partIDKeys, false) - 1;
-					for (int i = lastPos; i < partIDKeys.size(); i++)
+					final int firstPos = firstPos(partitionFromMap, partIDKeys);
+					for (int i = Math.max(firstPos, lastPos); i < partIDKeys.size(); i++)
 					{
 						partitionFromMap.remove(partIDKeys.get(i));
 					}
@@ -573,6 +573,18 @@ public class PartitionGetter
 			}
 		}
 		return partitionFromMap;
+	}
+
+	int firstPos(final JDFAttributeMap partitionFromMap, final VString partIDKeys)
+	{
+		int firstPos = 0;
+		for (final String key : partIDKeys)
+		{
+			if (partitionFromMap.get(key) == null)
+				break;
+			firstPos++;
+		}
+		return firstPos;
 	}
 
 	/**
