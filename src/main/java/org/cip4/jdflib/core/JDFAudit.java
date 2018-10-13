@@ -2,76 +2,43 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment mrSubRefay appear in the software itself, if and wherever such third-party
+ * acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior writtenrestartProcesses() permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software restartProcesses()
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software restartProcesses() copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  */
 /**
  *
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
  *
- * 07082002 KM moved JDFElement.EnumNodeStatus GetStatus to JDFElement
- * 05092002 KM deleted GetStart() and GetEnd() if you need them use JDFProcessRun methods
+ * 07082002 KM moved JDFElement.EnumNodeStatus GetStatus to JDFElement 05092002 KM deleted GetStart() and GetEnd() if you need them use JDFProcessRun methods
  */
 package org.cip4.jdflib.core;
 
@@ -102,7 +69,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	private static final long serialVersionUID = 1L;
 	final private static String m_libAgentName = "CIP4 JDF Writer Java";
-	final private static String m_libAgentVersion = "1.6 BLD 000";
+	final private static String m_libAgentVersion = "1.6 BLD 001";
 
 	// use reasonable defaults
 	private static String m_strAgentName = m_libAgentName;
@@ -126,6 +93,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * Constructor for JDFAudit
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -136,6 +104,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * Constructor for JDFAudit
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -159,7 +128,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
 	 *
-	 * before June 3, 2009
+	 *         before June 3, 2009
 	 */
 	@SuppressWarnings("rawtypes")
 	public static class EnumAuditType extends ValuedEnum
@@ -255,7 +224,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
 	 *
-	 * July 20, 2009
+	 *         July 20, 2009
 	 */
 	@SuppressWarnings("rawtypes")
 	public static final class EnumSeverity extends ValuedEnum
@@ -337,6 +306,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * toString
+	 * 
 	 * @return String
 	 */
 	@Override
@@ -347,6 +317,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * sort by timestamp
+	 * 
 	 * @param a1 an audit
 	 * @param a2 another audit
 	 * @return @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
@@ -362,6 +333,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * SetSeverity
+	 * 
 	 * @param s
 	 * @deprecated - only valid in the respective subclasses
 	 */
@@ -373,6 +345,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * GetSeverity
+	 * 
 	 * @return EnumSeverity
 	 * @deprecated - only valid in the respective subclasses
 	 */
@@ -384,6 +357,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * SetStatus
+	 * 
 	 * @param s
 	 */
 	@Override
@@ -394,6 +368,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * SetEndStatus
+	 * 
 	 * @param s
 	 * @deprecated - only valid in the respective subclasses
 	 */
@@ -405,6 +380,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * GetEndStatus
+	 * 
 	 * @return JDFElement.EnumNodeStatus
 	 */
 	protected JDFElement.EnumNodeStatus getEndStatus()
@@ -414,6 +390,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * GetAuditType
+	 * 
 	 * @return EnumAuditType
 	 */
 	public EnumAuditType getAuditType()
@@ -424,6 +401,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * GetPhase
+	 * 
 	 * @deprecated use JDFPhaseTime.getStatus()
 	 * @return JDFElement.EnumNodeStatus
 	 */
@@ -440,6 +418,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * SetPart
+	 * 
 	 * @param m
 	 * @deprecated 2005-10-20 - use setPartMap() in the various subclasses instead
 	 */
@@ -451,6 +430,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * get part map vector
+	 * 
 	 * @return VJDFAttributeMap: vector of mAttribute, one for each part
 	 */
 	@Override
@@ -461,6 +441,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * Set attribute refID to the ID of previous
+	 * 
 	 * @param previous the previous audit that is referenced
 	 */
 	public void setRef(final JDFAudit previous)
@@ -474,6 +455,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * SetBy
+	 * 
 	 * @param by
 	 * @deprecated 2005-09-01 use setAuthor()
 	 */
@@ -490,6 +472,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * Software
+	 * 
 	 * @return String
 	 */
 	public static String software()
@@ -499,6 +482,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * init
+	 * 
 	 * @return boolean
 	 */
 	@Override
@@ -541,6 +525,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * SetTimeStamp
+	 * 
 	 * @deprecated 2005-12-02 use setTimeStamp(null)
 	 */
 	@Deprecated
@@ -551,6 +536,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * (12) get JDFDate attribute TimeStamp
+	 * 
 	 * @return JDFDate the value of the attribute
 	 * @deprecated - use getTimeStamp
 	 */
@@ -570,6 +556,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * create an update audit for this
+	 * 
 	 * @return a new audit that updates this
 	 */
 	public JDFAudit createUpdateAudit()
@@ -590,6 +577,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * get the previous updated audit that was updated by this
+	 * 
 	 * @return the audit that was replaced by this
 	 */
 	public JDFAudit getUpdatedPreviousAudit()
@@ -609,6 +597,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * Gets the default static AgentName that is used to preset @AgentName when generating a new Audit
+	 * 
 	 * @return Returns the m_strAgentName.
 	 */
 	public static synchronized String getStaticAgentName()
@@ -618,6 +607,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * sets the default static AgentName that is used to preset @AgentName when generating a new Audit
+	 * 
 	 * @param agentName The m_strAgentName to set.
 	 */
 	public static synchronized void setStaticAgentName(final String agentName)
@@ -627,6 +617,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * Gets the default static Author that is used to preset @AgentName when generating a new Audit
+	 * 
 	 * @return Returns the m_Author.
 	 */
 	public static synchronized String getStaticAuthor()
@@ -636,6 +627,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * sets the default static Author that is used to preset @Author when generating a new Audit
+	 * 
 	 * @param author The m_strAuthor to set.
 	 */
 	public static synchronized void setStaticAuthor(final String author)
@@ -645,6 +637,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * gets the default static AgentVersion that is used to preset @AgentName when generating a new Audit
+	 * 
 	 * @return sTRING the m_strAgentVersion.
 	 */
 	public static synchronized String getStaticAgentVersion()
@@ -654,6 +647,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * Sets the default static AgentVersion that is used to preset @AgentName when generating a new Audit
+	 * 
 	 * @param agentVersion The m_strAgentVersion to set.
 	 */
 	public static synchronized void setStaticAgentVersion(final String agentVersion)
@@ -674,6 +668,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * (27) const get element Employee
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element default is getEmployee(0)
 	 */
@@ -689,7 +684,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	 */
 	public Collection<JDFEmployee> getAllEmployee()
 	{
-		final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+		final Vector<JDFEmployee> v = new Vector<>();
 		JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
 
 		while (kElem != null)
@@ -702,6 +697,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * (30) append element Employee
+	 * 
 	 * @return
 	 * @throws JDFException
 	 */

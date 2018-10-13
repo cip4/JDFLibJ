@@ -1268,13 +1268,6 @@ public class JDFMessage extends JDFAutoMessage
 				validList.addElement(EnumType.RequestForAuthentication);
 			}
 		}
-		else if (elementName.equals(ElementName.SUBSCRIPTIONFILTER))
-		{
-			if (iSkip == 0)
-			{
-				validList.addElement(EnumType.KnownSubscriptions);
-			}
-		}
 		else if (elementName.equals(ElementName.SUBSCRIPTIONINFO))
 		{
 			if (iSkip == 0)

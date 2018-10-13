@@ -1,68 +1,36 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -80,7 +48,8 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *implementation of the link validation routines
+ * implementation of the link validation routines
+ *
  * @author rainer prosi
  * @date May 27, 2014
  */
@@ -90,7 +59,7 @@ public class LinkValidatorMap
 	/**
 	 * Member Variables
 	 */
-	private final HashMap<String, LinkInfoMap> m_LinkInfoMap = new HashMap<String, LinkInfoMap>();
+	private final HashMap<String, LinkInfoMap> m_LinkInfoMap = new HashMap<>();
 
 	private final String[] m_GenericLinkInfo = { JDFConstants.INPUT_ZEROTOINFINITY, // APPROVALSUCCESS
 			JDFConstants.INPUT_ZEROTOONE, // COLORPOOL
@@ -105,8 +74,8 @@ public class LinkValidatorMap
 			JDFConstants.INPUT_ZEROTOINFINITY // USAGECOUNTER
 	};
 
-	private final String[] m_GenericLinkNames = { ElementName.APPROVALSUCCESS, ElementName.COLORPOOL, ElementName.CUSTOMERINFO, ElementName.DEVICE, ElementName.EMPLOYEE,
-			ElementName.MISCCONSUMABLE, ElementName.NODEINFO, ElementName.PREFLIGHTREPORT, ElementName.PREVIEW, ElementName.TOOL, ElementName.USAGECOUNTER };
+	private final String[] m_GenericLinkNames = { ElementName.APPROVALSUCCESS, ElementName.COLORPOOL, ElementName.CUSTOMERINFO, ElementName.DEVICE, ElementName.EMPLOYEE, ElementName.MISCCONSUMABLE,
+			ElementName.NODEINFO, ElementName.PREFLIGHTREPORT, ElementName.PREVIEW, ElementName.TOOL, ElementName.USAGECOUNTER };
 
 	private HashSet<String> nameSet = null;
 
@@ -166,8 +135,10 @@ public class LinkValidatorMap
 	// Note: This MUST be behind the enum declaration because the enums are used
 	private void initMaps()
 	{
-		mapPut(EnumType.Product.getName(), ",Component,ArtDeliveryIntent,BindingIntent,ColorIntent,DeliveryIntent,EmbossingIntent,FoldingIntent,HoleMakingIntent,InsertingIntent,LaminatingIntent,"
-				+ "LayoutIntent,MediaIntent,NumberingIntent,PackingIntent,ProductionIntent,ProofingIntent,ScreeningIntent,ShapeCuttingIntent,SizeIntent", ",o+ i* i*Cover i?Jacket i?Parent i*EndSheet,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?");
+		mapPut(EnumType.Product.getName(),
+				",Component,ArtDeliveryIntent,BindingIntent,ColorIntent,DeliveryIntent,EmbossingIntent,FoldingIntent,HoleMakingIntent,InsertingIntent,LaminatingIntent,"
+						+ "LayoutIntent,MediaIntent,NumberingIntent,PackingIntent,ProductionIntent,ProofingIntent,ScreeningIntent,ShapeCuttingIntent,SizeIntent,VariableIntent",
+				",o+ i* i*Cover i?Jacket i?Parent i*EndSheet,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?");
 		mapPut("*", "", "");
 		mapPut(EnumType.ProcessGroup.getName(), ",*", ",i* o*");
 		mapPut(EnumType.Combined.getName(), "", "");
@@ -183,7 +154,7 @@ public class LinkValidatorMap
 		mapPut(EnumType.QualityControl.getName(), ",*,QualityControlResult,QualityControlParams", ",o_ i_,o_,i_");
 		mapPut(EnumType.ResourceDefinition.getName(), ",*,ResourceDefinitionParams", ",o+ i*,i?");
 		mapPut(EnumType.Split.getName(), ",*", ",o+ i_");
-		mapPut(EnumType.Verification.getName(), ",*,DBSelection,ApprovalSuccess,VerificationParams,IdentificationField,DBSchema", ",o? i?,o? i?,o?,i_,i*,i?");
+		mapPut(EnumType.Verification.getName(), ",*,DBSelection,ApprovalSuccess,VerificationParams,IdentificationField,DBSchema,FileSpec", ",o? i?,o? i?,o?,i_,i*,i?,i? o*");
 		// ----- prepress ----
 		mapPut(EnumType.AssetListCreation.getName(), ",AssetListCreationParams,RunList", ",i_,i_ o_");
 		mapPut(EnumType.Bending.getName(), ",BendingParams,ExposedMedia,Media", ",i_,i? o_,i?");
@@ -215,20 +186,24 @@ public class LinkValidatorMap
 		mapPut(EnumType.Proofing.getName(), ",ColorantControl,ColorSpaceConversionParams,ExposedMedia,Layout,Media,ProofingParams,RunList", ",i?,i?,o_,i?,i_,i_,i?Marks i_Document");
 		mapPut(EnumType.PSToPDFConversion.getName(), ",FontParams,ImageCompressionParams,PSToPDFConversionParams,RunList", ",i?,i?,i?,o_ i_");
 		mapPut(EnumType.RasterReading.getName(), ",RasterReadingParams,RunList", ",i?,o_ i_");
-		mapPut(EnumType.Rendering.getName(), ",InterpretedPDLData,Media,RenderingParams,RunList", ",i?,i?,i?,o_ i?");
+		mapPut(EnumType.Rendering.getName(), ",InterpretedPDLData,Media,RenderingParams,RunList,ImageCompressionParams", ",i?,i?,i?,o_ i?,i?");
 		mapPut(EnumType.Scanning.getName(), ",ExposedMedia,ScanParams,RunList", ",i_,i_,o_");
 		mapPut(EnumType.Screening.getName(), ",RunList,ScreeningParams", ",o_ i_,i_");
 		mapPut(EnumType.Separation.getName(), ",ColorantControl,RunList,SeparationControlParams", ",i?,o_ i_,i_");
-		mapPut(EnumType.SheetOptimizing.getName(), ",SheetOptimizingParams,Assembly,StrippingParams", ",i?,i*,o_");
+		mapPut(EnumType.SheetOptimizing.getName(), ",SheetOptimizingParams,Assembly,BinderySignature,StrippingParams", ",i?,i*,i?,o_");
 		mapPut(EnumType.SoftProofing.getName(), ",ColorantControl,ColorSpaceConversionParams,Layout,ProofingParams,RunList", ",i?,i?,i?,i_,i?Marks i_Document");
-		mapPut(EnumType.Stripping.getName(), ",RunList,Layout,Assembly,TransferCurvePool,StrippingParams,ColorantControl", ",o?Marks o?Document i?Document,o_,i+,i?,i_,i?");
+		mapPut(EnumType.Stripping.getName(), ",RunList,Layout,Assembly,BinderySignature,TransferCurvePool,StrippingParams,ColorantControl", ",o?Marks o?Document i?Document,o_,i+,i?,i?,i_,i?");
 		mapPut(EnumType.Tiling.getName(), ",RunList,Tile", ",o_ i?Marks i_Surface,i_");
 		mapPut(EnumType.Trapping.getName(), ",ColorantControl,RunList,TrappingDetails,FontPolicy", ",i?,o_ i_,i_,i?");
 
 		// ----- press -----
-		mapPut(EnumType.ConventionalPrinting.getName(), ",ColorantControl,Component,ConventionalPrintingParams,ExposedMedia,Ink,InkZoneProfile,Layout,Media,PrintCondition,Sheet,TransferCurvePool", ",i?,o?Waste o_ i?Proof i?Input i?,i_,i?Plate i?Cylinder i?Proof,i?,i?,i?,i?,i?,i?,i? i?MountingTape");
-		mapPut(EnumType.DigitalPrinting.getName(), ",ColorantControl,Component,DigitalPrintingParams,ExposedMedia,Ink,PrintCondition,Media,RunList,Layout,Sheet,TransferCurvePool", ",i?,o?Waste o_ i?Proof i*Input i*,i_,i?,i?,i?,i*,i_,i?,i?,i?");
-		mapPut(EnumType.IDPrinting.getName(), ",ColorantControl,Component,ExposedMedia,FontPolicy,Ink,InterpretingParams,IDPrintingParams,Media,RenderingParams,RunList,ScreeningParams,TransferFunctionControl", ",i?,o?Waste o_Good i?Proof i?Input i?Cover,i?,i?,i?,i*,i?,i?,i?,i_,i?,i?");
+		mapPut(EnumType.ConventionalPrinting.getName(), ",ColorantControl,Component,ConventionalPrintingParams,ExposedMedia,Ink,InkZoneProfile,Layout,Media,PrintCondition,Sheet,TransferCurvePool",
+				",i?,o?Waste o_ i?Proof i?Input i?,i_,i?Plate i?Cylinder i?Proof,i?,i?,i?,i?,i?,i?,i? i?MountingTape");
+		mapPut(EnumType.DigitalPrinting.getName(), ",ColorantControl,Component,DigitalPrintingParams,ExposedMedia,Ink,PrintCondition,Media,RunList,Layout,Sheet,TransferCurvePool",
+				",i?,o?Waste o_ i?Proof i*Input i*,i_,i?,i?,i?,i*,i_,i?,i?,i?");
+		mapPut(EnumType.IDPrinting.getName(),
+				",ColorantControl,Component,ExposedMedia,FontPolicy,Ink,InterpretingParams,IDPrintingParams,Media,RenderingParams,RunList,ScreeningParams,TransferFunctionControl",
+				",i?,o?Waste o_Good i?Proof i?Input i?Cover,i?,i?,i?,i*,i?,i?,i?,i_,i?,i?");
 		mapPut(EnumType.Varnishing.getName(), ",Component,ExposedMedia,Ink,Media,VarnishingParams", ",i? o_,o*,i?,i?,i?");
 
 		// ----- postpress ----
@@ -247,7 +222,7 @@ public class LinkValidatorMap
 		mapPut(EnumType.Cutting.getName(), ",Component,CutBlock,CutMark,CuttingParams,Media", ",o* i?,i*,i*,i_,o* i?");
 		mapPut(EnumType.Dividing.getName(), ",Component,DividingParams", ",o_ i_,i_");
 		mapPut(EnumType.Embossing.getName(), ",Component,EmbossingParams,Media,Tool", ",o_ i_,i_,i?,i?");
-		mapPut(EnumType.EndSheetGluing.getName(), ",Component,EndSheetGluingParams", ",o_ i_FrontEndSheet i_BookBlock i_BackEndSheet,i_");
+		mapPut(EnumType.EndSheetGluing.getName(), ",Component,EndSheetGluingParams", ",o_ i?FrontEndSheet i_BookBlock i?BackEndSheet,i_");
 		mapPut(EnumType.Feeding.getName(), ",Component,FeedingParams,Media", ",o* i*,i_,o* i*");
 		mapPut(EnumType.Folding.getName(), ",Component,FoldingParams", ",o_ i_,i_");
 		mapPut(EnumType.Gathering.getName(), ",Assembly,Component,DBRules,DBSelection,GatheringParams,IdentificationField", ",i?,o_ i+,i*,i?,i_,i?");
@@ -283,7 +258,7 @@ public class LinkValidatorMap
 		mapPut(EnumType.WebInlineFinishing.getName(), ",Assembly,Component,ProductionPath,StrippingParams,WebInlineFinishingParams", ",i?,o_ i_,i?,i?,i?");
 		mapPut(EnumType.Winding.getName(), ",Component,Media,WindingParams", ",i_ o_,i? i?Core,i?");
 		mapPut(EnumType.WireCombBinding.getName(), ",Component,WireCombBindingParams", ",o_ i_,i_");
-		mapPut(EnumType.Wrapping.getName(), ",Component,WrappingParams,Media", ",o_ i_,i_,i?");
+		mapPut(EnumType.Wrapping.getName(), ",Component,WrappingParams,Media", ",o_ i_ i?Wrapper,i_,i?");
 
 		// Prepress gray boxes
 		mapPut(EnumType.PrepressPreparation.getName(), ",RunList,*", ",i_Document o_Document,i* o*");
@@ -302,6 +277,7 @@ public class LinkValidatorMap
 	// ////////////////////////////////////////////////////////////////////
 	/**
 	 * definition of resource link names in the JDF namespace
+	 *
 	 * @param typ
 	 *
 	 * @return String list of resource names that may be linked
@@ -318,13 +294,14 @@ public class LinkValidatorMap
 
 	/**
 	 * Getter for m_strGenericLinkNames attribute.
+	 *
 	 * @return the m_strGenericLinkNames
 	 */
 	HashSet<String> getGenericLinkNames()
 	{
 		if (nameSet == null)
 		{
-			nameSet = new HashSet<String>();
+			nameSet = new HashSet<>();
 			nameSet.addAll(new VString(m_GenericLinkNames));
 		}
 		return nameSet;

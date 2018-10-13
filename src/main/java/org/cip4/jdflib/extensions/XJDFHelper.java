@@ -285,7 +285,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	/**
 	 *
 	 * is the element a set?
-	 * 
+	 *
 	 * @param e
 	 * @return
 	 * @deprecated use SetHelper.isSet
@@ -637,6 +637,19 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
+	 *
+	 * @param name
+	 * @param usage
+	 * @return a new set element
+	 */
+	public KElement getCreateResource(final String name, final EnumUsage usage, final String processUsage)
+	{
+		final SetHelper set = getCreateSet(name, usage, processUsage);
+		final ResourceHelper rh = set.getCreatePartition(null, true);
+		return rh.getResource();
+	}
+
+	/**
 	 * get or create a ResourceSet with a name, usage and processUsage
 	 *
 	 * @param name
@@ -750,7 +763,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 
 	/**
 	 * write to a directory - potentially generating a jobPartID
-	 * 
+	 *
 	 * @param dir
 	 * @return
 	 */
@@ -939,7 +952,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 
 	/**
 	 * remove a types token
-	 * 
+	 *
 	 * @param typ
 	 * @param iSkip
 	 */
@@ -964,7 +977,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 
 	/**
 	 * append a types token
-	 * 
+	 *
 	 * @param typ
 	 *
 	 */
@@ -976,7 +989,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 
 	/**
 	 * append a enumerated types token
-	 * 
+	 *
 	 * @param typ
 	 *
 	 */
@@ -987,7 +1000,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 
 	/**
 	 * add a types token
-	 * 
+	 *
 	 * @param typ
 	 * @param iSkip <0 for append
 	 */

@@ -54,6 +54,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -199,6 +200,21 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		assertNotNull(sh2);
 		assertNotSame(sh1, sh2);
 
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testGetCreateResource()
+	{
+		assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input, null));
+		final JDFRunList rl = (JDFRunList) theHelper.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, null);
+		assertNotNull(rl);
+		final SetHelper sh = theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input, null);
+		assertNotNull(sh);
+		assertEquals(1, sh.getPartitions().size());
 	}
 
 	/**
