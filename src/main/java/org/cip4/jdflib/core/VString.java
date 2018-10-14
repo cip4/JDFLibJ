@@ -432,12 +432,24 @@ public class VString extends Vector<String>
 	 * @param back string after the last entry
 	 *
 	 * @return a tokenized string
-	 * @deprecated use StringUtil setVString default: getString(sep, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING)
 	 */
-	@Deprecated
 	public String getString(final String sep, final String front, final String back)
 	{
 		return StringUtil.setvString(this, sep, front, back);
+	}
+
+	/**
+	 * serialize to a string
+	 *
+	 * @param sep separator between strings
+	 * @param front string before the first entry
+	 * @param back string after the last entry
+	 *
+	 * @return a tokenized string
+	 */
+	public String getString()
+	{
+		return StringUtil.setvString(this, JDFConstants.BLANK, null, null);
 	}
 
 	/**
@@ -607,6 +619,19 @@ public class VString extends Vector<String>
 			index += size();
 		}
 		return super.remove(index);
+	}
+
+	/**
+	 * add a string if it is not empty
+	 *
+	 * @param text
+	 */
+	public void addNonEmpty(final String text)
+	{
+		final String t2 = StringUtil.getNonEmpty(text);
+		if (t2 != null)
+			add(t2);
+
 	}
 
 }
