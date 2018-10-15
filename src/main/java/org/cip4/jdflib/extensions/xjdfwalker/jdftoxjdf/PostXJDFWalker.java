@@ -40,6 +40,7 @@ import java.util.Collection;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
+import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoStripCellParams.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.AttributeName;
@@ -919,7 +920,12 @@ class PostXJDFWalker extends BaseElementWalker
 				bsHelper = bsSet.getPartition(0);
 			}
 			if (bsHelper == null)
+			{
 				bsHelper = bsSet.appendPartition(bsMap, true);
+				final JDFBinderySignature binderySignature = (JDFBinderySignature) bsHelper.getResource();
+				binderySignature.setBinderySignatureType(EnumBinderySignatureType.Grid);
+				binderySignature.setNumberUp(1, 1);
+			}
 
 			final VJDFAttributeMap vMap = bsHelper.getPartMapVector();
 			if (VJDFAttributeMap.isEmpty(vMap))

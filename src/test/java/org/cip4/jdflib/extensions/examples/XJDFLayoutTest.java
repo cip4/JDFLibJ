@@ -117,6 +117,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		final ResourceHelper rhBS = shBS.appendPartition(null, true);
 		final JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
 		bs.setFoldCatalog("F4-1");
+		bs.setBinderySignatureType(EnumBinderySignatureType.Fold);
 
 		final SetHelper shAss = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.ASSEMBLY, null);
 		final ResourceHelper rhAss = shAss.appendPartition(null, true);
