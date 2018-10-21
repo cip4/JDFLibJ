@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JDF Status="Waiting" Type="ProcessGroup" ICSVersions="Base_L2-1.3 Binding_L1-1.0" xmlns="http://www.CIP4.org/JDFSchema_1_1"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ProcessGroup" ID="n.H_PMmrB.33.1" Version="1.2" MaxVersion="1.2" JobID="YC201101128-003_33" JobPartID="n.H_PMmrB.33.1" DescriptiveName="ccc">
+    <AuditPool>
+        <Created Author="Fujifilm JDF+PPF Writer 1.0" TimeStamp="2015-12-08T02:26:15Z"/>
+    </AuditPool>
+    <ResourcePool>
+        <Component class="Quantity" IsWaste="false" ID="c.H_PMmrB.33.6" Status="Unavailable" ComponentType="Block" DescriptiveName="Sheet(1.1.0)" SurfaceCount="2" Dimensions="2406.61581 1692.28394 0.28346"/>
+        <Component class="Quantity" IsWaste="false" ID="c.H_PMmrB.33.9" Status="Available" ComponentType="Sheet" DescriptiveName="Sheet(2)" SurfaceCount="2" Dimensions="2834.65 2004.095 0.28346"/> 
+            <CuttingParams ID="p.H_PMmrB.33.10" class="Parameter" Status="Available">    
+                <CutBlock BlockType="CutBlock" BlockName="Block_1_0_0" BlockSize="2406.61581 1692.28394" BlockTrf="1 0 0 1 203.78003 182.33189"/>
+                <CutBlock BlockType="CutBlock" BlockName="Block_1_0_0" BlockSize="2406.61581 1692.28394" BlockTrf="1 0 0 1 203.78003 182.33189"/>
+            </CuttingParams> 
+        <Component class="Quantity" IsWaste="false" ID="c.H_PMmrB.33.11" Status="Unavailable" ComponentType="Block" DescriptiveName="Sheet(2.2.0)" SurfaceCount="2" Dimensions="2406.61581 1692.28394 0.28346"/>  
+        <Component class="Quantity" IsWaste="false" ID="c.H_PMmrB.33.14" Status="Unavailable" ComponentType="PartialProduct" DescriptiveName="Sheet(1.1.0)" SurfaceCount="2" Dimensions="603.77994 846.14197 2.26772"/> 
+        <FoldingParams FoldCatalog="F16-6" ID="p.H_PMmrB.33.15" Class="Parameter" Status="Available">  
+             <Fold From="Front" To="Up" Travel="1203.31"/>   
+             <Fold From="Left" To="Up" Travel="846.142"/>     
+             <Fold From="Front" To="Up" Travel="603.78"/>   
+        </FoldingParams> 
+        <Component class="Quantity" IsWaste="false" ID="c.H_PMmrB.33.18" Status="Unavailable" ComponentType="PartialProduct" DescriptiveName="Sheet(2.2.0)" SurfaceCount="2" Dimensions="603.77994 846.14197 2.26772"/>
+        <FoldingParams FoldCatalog="F16-6" ID="p.H_PMmrB.33.19" Class="Parameter" Status="Available">
+            <Fold From="Front" To="Up" Travel="1203.31"/>    
+            <Fold From="Left" To="Up" Travel="846.142"/> 
+            <Fold From="Front" To="Up" Travel="603.78"/>   
+        </FoldingParams>  
+        <Component class="Quantity" IsWaste="false" ID="c.H_PMmrB.33.22" Status="Unavailable" ComponentType="PartialProduct" DescriptiveName="Sheet(1.1.0)+Sheet(2.2.0)" SurfaceCount="4" Dimensions="603.77994 846.14197 4.53543"/>   
+        <GatheringParams ID="p.H_PMmrB.33.23" class="Parameter" Status="Available"/> 
+        <Component class="Quantity" IsWaste="false" ID="c.H_PMmrB.33.30" Status="Unavailable" ComponentType="FinalProduct" DescriptiveName="Sheet(1.1.0)+Sheet(2.2.0)" SurfaceCount="4" Dimensions="595.276 841.89 4.53543"/>  
+        <CoverApplicationParams ID="p.H_PMmrB.33.CAP" class="Parameter" Status="Available" CoverOffset="562 0"/>  
+        <Component class="Quantity" IsWaste="false" ID="c.H_PMmrB.33.Cov" Status="Unavailable" ComponentType="FinalProduct" DescriptiveName="Sheet(1.1.0)+Sheet(2.2.0)" SurfaceCount="12" Dimensions="595.276 841.89 4.53543"/>   
+        <TrimmingParams ID="p.H_PMmrB.33.31" class="Parameter" Status="Available" Width="595.276" Height="841.89" TrimmingOffset="4.25197"/>
+    </ResourcePool>
+    <ResourceLinkPool/>  
+    <NodeInfo JobPriority="50" FirstStart="2015-12-08T02:14:41Z" LastEnd="2015-12-11T02:14:38Z"/> 
+    <CustomerInfo BillingCode="" CustomerID="" CustomerOrderID=""/> 
+    <JDF Status="Waiting" ID="n.H_PMmrB.33.7" JobPartID="n.H_PMmrB.33.7" Type="Cutting" DescriptiveName="Sheet(2)">   
+        <ResourceLinkPool>     
+             <ComponentLink Usage="Input" rRef="c.H_PMmrB.33.9"/>  
+             <CuttingParamsLink Usage="Input" rRef="p.H_PMmrB.33.10"/>  
+             <ComponentLink Usage="Output" rRef="c.H_PMmrB.33.11"/>  
+        </ResourceLinkPool> 
+    </JDF>
+    <JDF Status="Waiting" ID="n.H_PMmrB.33.12" JobPartID="n.H_PMmrB.33.12" Type="Folding" DescriptiveName="Sheet(1.1.0)">  
+        <ResourceLinkPool>    
+            <ComponentLink Usage="Input" rRef="c.H_PMmrB.33.6"/>      
+            <ComponentLink Usage="Output" rRef="c.H_PMmrB.33.14"/>    
+            <FoldingParamsLink Usage="Input" rRef="p.H_PMmrB.33.15"/>   
+        </ResourceLinkPool> 
+    </JDF>  
+    <JDF Status="Waiting" ID="n.H_PMmrB.33.16" JobPartID="n.H_PMmrB.33.16" Type="Folding" DescriptiveName="Sheet(2.2.0)">
+        <ResourceLinkPool>      
+            <ComponentLink Usage="Input" rRef="c.H_PMmrB.33.11"/>          
+            <ComponentLink Usage="Output" rRef="c.H_PMmrB.33.18"/>
+            <FoldingParamsLink Usage="Input" rRef="p.H_PMmrB.33.19"/>  
+        </ResourceLinkPool>
+    </JDF> 
+    <JDF Status="Waiting" ID="n.H_PMmrB.33.20" JobPartID="n.H_PMmrB.33.20" Type="Gathering"   DescriptiveName="Sheet(1.1.0)+Sheet(2.2.0)">   
+        <ResourceLinkPool>     
+            <ComponentLink Usage="Input" rRef="c.H_PMmrB.33.18"/>   
+            <ComponentLink Usage="Input" rRef="c.H_PMmrB.33.14"/>  
+            <ComponentLink Usage="Output" rRef="c.H_PMmrB.33.22"/>    
+            <GatheringParamsLink Usage="Input" rRef="p.H_PMmrB.33.23"/>   
+        </ResourceLinkPool>
+    </JDF>
+    <JDF Status="Waiting" ID="n.H_PMmrB.33.24" JobPartID="n.H_PMmrB.33.24" Type="CoverApplication"   DescriptiveName="Sheet(1.1.0)+Sheet(2.2.0)">            
+        <ResourceLinkPool>
+            <ComponentLink Usage="Input" rRef="c.H_PMmrB.33.22"/>
+            <ComponentLink Usage="Input" rRef="c.H_PMmrB.33.Cov" ProcessUsage="Cover"/>
+            <ComponentLink Usage="Output" rRef="c.H_PMmrB.33.26"/>      
+            <CoverApplicationParamsLink Usage="Input" rRef="p.H_PMmrB.33.CAP"/>
+        </ResourceLinkPool>
+    </JDF> 
+    <JDF Status="Waiting" ID="n.H_PMmrB.33.28" JobPartID="n.H_PMmrB.33.28" Type="Trimming"   DescriptiveName="Sheet(1.1.0)+Sheet(2.2.0)">   
+        <ResourceLinkPool>    
+            <ComponentLink Usage="Input" rRef="c.H_PMmrB.33.26" Orientation="Rotate0"/> 
+            <ComponentLink Usage="Output" rRef="c.H_PMmrB.33.30"/>    
+            <TrimmingParamsLink Usage="Input" rRef="p.H_PMmrB.33.31"/>
+        </ResourceLinkPool>
+    </JDF>
+</JDF>
