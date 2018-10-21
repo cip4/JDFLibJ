@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -207,7 +175,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	public void testGetAllOrds()
 	{
 		final JDFLayout lo = prepare44();
-		Vector<Integer> v = lo.getAllOrds();
+		final Vector<Integer> v = lo.getAllOrds();
 		assertEquals(v.size(), 32);
 		for (int i = 0; i < 16; i++)
 			assertTrue("pos: " + i, v.contains(new Integer(i)));
@@ -246,14 +214,14 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		lo.appendMedia();
 		for (int i = 0; i < 4; i++)
 		{
-			JDFResource sheet = lo.addPartition(EnumPartIDKey.SheetName, "Sheet" + i);
-			VString fb = new VString("Front Back", null);
-			for (String side : fb)
+			final JDFResource sheet = lo.addPartition(EnumPartIDKey.SheetName, "Sheet" + i);
+			final VString fb = new VString("Front Back", null);
+			for (final String side : fb)
 			{
-				JDFLayout surf = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, side);
+				final JDFLayout surf = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, side);
 				for (int j = 0; j < 4; j++)
 				{
-					JDFContentObject co = surf.appendContentObject();
+					final JDFContentObject co = surf.appendContentObject();
 					co.setOrd(4 * i + j);
 				}
 			}
@@ -297,10 +265,10 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	{
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		lo.appendLogicalStackParams().appendStack().setLogicalStackOrd(1);
-		String s = lo.getOwnerDocument_JDFElement().write2String(2);
-		JDFParser p = getSchemaParser();
-		JDFDoc dNew = p.parseString(s);
-		XMLDoc dVal = dNew.getValidationResult();
+		final String s = lo.getOwnerDocument_JDFElement().write2String(2);
+		final JDFParser p = getSchemaParser();
+		final JDFDoc dNew = p.parseString(s);
+		final XMLDoc dVal = dNew.getValidationResult();
 		assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
 	}
 
@@ -908,10 +876,11 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	/**
 	 * GeneratedObject
 	 *
-	 * CTM or Position Position: See ImageShift PositionX and PositionY, Shift (Margins) � See ShiftFront RelativeShift?
+	 * CTM or Position Position: See ImageShift PositionX and PositionY, Shift (Margins) --> See ShiftFront RelativeShift?
 	 *
-	 * Anchor Point (same as position ll, ul, cc, spine�) (if CTM is given) Orientation (rotation, matrix or ll, ul, �) Contents Format/Template JobField
-	 * (Replace, DynamicField?) SeparationList Mark References (FoldMark, CIE, �)
+	 * Anchor Point (same as position ll, ul, cc, spine�) (if CTM is given) Orientation (rotation, matrix or ll, ul, ...) Contents Format/Template JobField (Replace, DynamicField?) SeparationList Mark
+	 * References (FoldMark, CIE, ...)
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -922,13 +891,17 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		final JDFRunList rlo = (JDFRunList) n.addResource("RunList", null, EnumUsage.Output, null, null, null, null);
 		rlo.setFileURL("output.pdf");
 
-		lo.appendXMLComment("This is a simple horizontal slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes error and endtime in the lower left corner of the scb", null);
+		lo.appendXMLComment(
+				"This is a simple horizontal slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes error and endtime in the lower left corner of the scb",
+				null);
 		JDFMarkObject mark = lo.appendMarkObject();
 		mark.setCTM(new JDFMatrix("1 0 0 1 0 0"));
 		JDFJobField jf = mark.appendJobField();
 		jf.setShowList(new VString("Error EndTime", " "));
 
-		lo.appendXMLComment("This is a simple vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes the operator name along the right side of the sheet text from top to bottom\nthe slug line (top right of the slug cs) is anchored in the bottom right of the sheet.\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)", null);
+		lo.appendXMLComment(
+				"This is a simple vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes the operator name along the right side of the sheet text from top to bottom\nthe slug line (top right of the slug cs) is anchored in the bottom right of the sheet.\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)",
+				null);
 		mark = lo.appendMarkObject();
 		mark.setCTM(new JDFMatrix("0 1 -1 0 555 444"));
 		jf = mark.appendJobField();
@@ -938,7 +911,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		dm.setFont("Arial");
 		dm.setFontSize(10);
 
-		lo.appendXMLComment("This is a formatted vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes a formatted line along the left side of the sheet text from top to bottom\nthe slug line (top left) is anchored in the bottom left of the sheet.\nThe text is defined in @Format with the sequence in ShowList defining the 5 placeholders marked by %s or %i\nAn example instance would be: \"This Cyan plate of Sheet1 was proudly produced by Joe Cool! Resolution: 600 x 600\"\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)", null);
+		lo.appendXMLComment(
+				"This is a formatted vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes a formatted line along the left side of the sheet text from top to bottom\nthe slug line (top left) is anchored in the bottom left of the sheet.\nThe text is defined in @Format with the sequence in ShowList defining the 5 placeholders marked by %s or %i\nAn example instance would be: \"This Cyan plate of Sheet1 was proudly produced by Joe Cool! Resolution: 600 x 600\"\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)",
+				null);
 		mark = lo.appendMarkObject();
 		mark.setCTM(new JDFMatrix("0 1 -1 0 0 0"));
 		jf = mark.appendJobField();
@@ -949,7 +924,8 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		dm.setFont("Arial");
 		dm.setFontSize(10);
 
-		lo.appendXMLComment("This is a positioned registermark\nthe center of the mark is translated by 666 999\n the JobField is empty and serves aa a Marker that no external Content is requested", null);
+		lo.appendXMLComment("This is a positioned registermark\nthe center of the mark is translated by 666 999\n the JobField is empty and serves aa a Marker that no external Content is requested",
+				null);
 		mark = lo.appendMarkObject();
 		mark.setCTM(new JDFMatrix("1 0 0 1 666 999"));
 		jf = mark.appendJobField();

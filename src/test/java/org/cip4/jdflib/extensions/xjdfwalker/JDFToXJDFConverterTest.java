@@ -144,6 +144,7 @@ import org.cip4.jdflib.resource.process.JDFTransferCurvePool;
 import org.cip4.jdflib.resource.process.JDFTransferCurveSet;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
 import org.cip4.jdflib.resource.process.postpress.JDFChannelBindingParams;
+import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
 import org.cip4.jdflib.resource.process.postpress.JDFGlue;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
@@ -469,6 +470,26 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(xjdf);
 		assertEquals("0 0 1 1", xjdf.getXPathAttribute("ResourceSet/Resource/TransferCurve/@Curve", null));
 		assertEquals("1 1 0 0", xjdf.getXPathAttribute("ResourceSet/Resource[2]/TransferCurve/@Curve", null));
+	}
+
+	/**
+	 *
+	 * @return
+	 * @throws DataFormatException
+	 */
+	@Test
+	public void testFold() throws DataFormatException
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.setType(EnumType.Folding);
+		final JDFFoldingParams fp = (JDFFoldingParams) n.addResource(ElementName.FOLDINGPARAMS, EnumUsage.Input);
+		fp.setFoldCatalog(4, 1);
+		fp.appendFold().setTravel(44);
+		final JDFToXJDF xjdf20 = new JDFToXJDF();
+		xjdf20.setSingleNode(true);
+		final KElement xjdf = xjdf20.makeNewJDF(n, null);
+		xjdf.write2File(sm_dirTestDataTemp + "fc.xjdf");
+		assertNotNull(xjdf);
 	}
 
 	/**
@@ -2320,6 +2341,19 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		{
 			h.writeToFile(sm_dirTestDataTemp + "getXJDFS." + h.getJobPartID() + ".xjdf");
 		}
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetCombinedFinishing()
+	{
+		final JDFNode jdf = JDFNode.parseFile(sm_dirTestData + "Folding_sample.jdf");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final XJDFHelper h = conv.getCombined(jdf);
+		h.writeToFile(sm_dirTestDataTemp + "Folding_sample.xjdf");
+		assertNotNull(h.getSet(ElementName.CUTTINGPARAMS, 0));
 	}
 
 	static JDFNode prepareProduct()

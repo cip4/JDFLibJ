@@ -39,8 +39,14 @@
 
 package org.cip4.jdflib.util.mime;
 
-import java.io.ByteArrayInputStream;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.jmf.JDFCommand;
@@ -48,15 +54,14 @@ import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFReturnQueueEntryParams;
 import org.cip4.jdflib.util.ByteArrayIOStream;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.mime.MimeWriter.FixSemiColonStream;
 import org.junit.Test;
-
-import junit.framework.TestCase;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class MimeWriterTest extends TestCase
+public class MimeWriterTest extends JDFTestCaseBase
 {
 
 	/**
@@ -122,4 +127,49 @@ public class MimeWriterTest extends TestCase
 		assertTrue(s.indexOf("\nbbb") > 0);
 	}
 
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testWriteStream() throws Exception
+	{
+		final JDFDoc docJMF = new JDFDoc("JMF");
+		final JDFJMF jmf = docJMF.getJMFRoot();
+		jmf.setSenderID("DeviceID");
+		final JDFCommand com = (JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.ReturnQueueEntry);
+		final JDFReturnQueueEntryParams returnQEParams = com.appendReturnQueueEntryParams();
+
+		final String queueEntryID = "qe1";
+		returnQEParams.setQueueEntryID(queueEntryID);
+		final JDFDoc docJDF = new JDFDoc(ElementName.JDF);
+		returnQEParams.setURL("cid:dummy"); // will be overwritten by buildMimePackage
+		final MimeWriter mw = new MimeWriter();
+		mw.buildMimePackage(docJMF, docJDF, false);
+		final File f = new File(sm_dirTestDataTemp + "mimestream.mjm");
+		assertNotNull(FileUtil.writeFile(mw, f));
+		assertTrue(f.exists());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testWriteURL() throws Exception
+	{
+		final JDFDoc docJMF = new JDFDoc("JMF");
+		final JDFJMF jmf = docJMF.getJMFRoot();
+		jmf.setSenderID("DeviceID");
+		final JDFCommand com = (JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.ReturnQueueEntry);
+		final JDFReturnQueueEntryParams returnQEParams = com.appendReturnQueueEntryParams();
+
+		final String queueEntryID = "qe1";
+		returnQEParams.setQueueEntryID(queueEntryID);
+		final JDFDoc docJDF = new JDFDoc(ElementName.JDF);
+		returnQEParams.setURL("cid:dummy"); // will be overwritten by buildMimePackage
+		final MimeWriter mw = new MimeWriter();
+		mw.buildMimePackage(docJMF, docJDF, false);
+		final File f = new File(sm_dirTestDataTemp + "mimeurl.mjm");
+		mw.writeToFile(f.getAbsolutePath());
+		assertTrue(f.exists());
+	}
 }

@@ -482,7 +482,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	/**
 	 * @param name
 	 * @param iSkip
-	 * @return the SetHelper for the vector of parametersets and resourcesets
+	 * @return the SetHelper for the resourceset with a given name
 	 */
 	public SetHelper getSet(final String name, final int iSkip)
 	{

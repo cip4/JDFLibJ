@@ -45,7 +45,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Vector;
 
 import javax.activation.DataHandler;
@@ -67,6 +66,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
@@ -89,7 +89,7 @@ import org.cip4.jdflib.util.UrlUtil;
  *
  *         July 24, 2009
  */
-public class MimeWriter extends MimeHelper
+public class MimeWriter extends MimeHelper implements IStreamWriter
 {
 	private final Log log;
 
@@ -338,21 +338,7 @@ public class MimeWriter extends MimeHelper
 	 */
 	public File writeToFile(final String fileName)
 	{
-		final File file = new File(fileName);
-		try
-		{
-			final OutputStream fos = FileUtil.getBufferedOutputStream(file);
-			if (fos != null)
-			{
-				writeToStream(fos);
-			}
-			return file;
-		}
-		catch (final Exception e)
-		{
-			log.error("cannot write mime package", e);
-			return null;
-		}
+		return FileUtil.writeFile(this, new File(fileName));
 	}
 
 	/**
@@ -447,21 +433,7 @@ public class MimeWriter extends MimeHelper
 	 */
 	public UrlPart writeToURL(final String strUrl) throws IOException, MessagingException
 	{
-		UrlPart p = null;
-		final URL url = UrlUtil.stringToURL(strUrl);
-		if ("File".equalsIgnoreCase(url.getProtocol()))
-		{
-			final File outFile = writeToFile(UrlUtil.urlToFile(strUrl).getAbsolutePath());
-			p = outFile == null ? null : new UrlPart(outFile);
-		}
-		else
-		// assume http
-		{
-			final ByteArrayIOStream bos = new ByteArrayIOStream();
-			writeToStream(bos);
-			p = UrlUtil.writeToURL(strUrl, bos.getInputStream(), UrlUtil.POST, theMultipart.getContentType(), md == null ? null : md.httpDetails);
-		}
-		return p;
+		return UrlUtil.writerToURL(strUrl, this, UrlUtil.POST, theMultipart.getContentType(), md == null ? null : md.httpDetails);
 	}
 
 	/**
@@ -716,5 +688,19 @@ public class MimeWriter extends MimeHelper
 		}
 		inputStream.close(); // always close the stream
 		return doc;
+	}
+
+	@Override
+	public void writeStream(final OutputStream os) throws IOException
+	{
+		try
+		{
+			writeToStream(os);
+		}
+		catch (final MessagingException e)
+		{
+			throw new IOException(e.getMessage());
+		}
+
 	}
 }
