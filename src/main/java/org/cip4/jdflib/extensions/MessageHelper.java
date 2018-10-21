@@ -184,7 +184,7 @@ public class MessageHelper extends BaseXJDFHelper
 	 */
 	public boolean isQuery()
 	{
-		return theElement != null && theElement.getLocalName().startsWith(ElementName.QUERY);
+		return getLocalName().startsWith(ElementName.QUERY);
 	}
 
 	/**
@@ -207,7 +207,7 @@ public class MessageHelper extends BaseXJDFHelper
 	 */
 	public boolean isCommand()
 	{
-		return theElement != null && theElement.getLocalName().startsWith(ElementName.COMMAND);
+		return getLocalName().startsWith(ElementName.COMMAND);
 	}
 
 	/**
@@ -216,7 +216,7 @@ public class MessageHelper extends BaseXJDFHelper
 	 */
 	public boolean isResponse()
 	{
-		return theElement != null && theElement.getLocalName().startsWith(ElementName.RESPONSE);
+		return getLocalName().startsWith(ElementName.RESPONSE);
 	}
 
 	/**
@@ -225,7 +225,7 @@ public class MessageHelper extends BaseXJDFHelper
 	 */
 	public boolean isSignal()
 	{
-		return theElement != null && theElement.getLocalName().startsWith(ElementName.SIGNAL);
+		return getLocalName().startsWith(ElementName.SIGNAL);
 	}
 
 	/**
@@ -252,6 +252,14 @@ public class MessageHelper extends BaseXJDFHelper
 		else if (isResponse())
 			return EnumFamily.Response;
 		return null;
+
+	}
+
+	public String getType()
+	{
+		final EnumFamily f = getFamily();
+		final String name = getLocalName();
+		return (f == null || f.getName().equals(name)) ? null : StringUtil.rightStr(name, -f.getName().length());
 
 	}
 

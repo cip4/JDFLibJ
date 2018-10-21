@@ -308,6 +308,15 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 *
+	 * @return the local name of the root
+	 */
+	public String getLocalName()
+	{
+		return theElement == null ? null : theElement.getLocalName();
+	}
+
+	/**
+	 *
 	 * @param idUsage
 	 * @param idValue
 	 */
