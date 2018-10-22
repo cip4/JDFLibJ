@@ -678,6 +678,35 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	public void testDescNameProduct()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		h.setAttribute(AttributeName.DESCRIPTIVENAME, "x1");
+		h.getCreateRootProduct(0).setAttribute(AttributeName.DESCRIPTIVENAME, "p2");
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(h);
+		assertEquals("x1", d.getJDFRoot().getDescriptiveName());
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testDescNameProduct2()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		h.getCreateRootProduct(0).setAttribute(AttributeName.DESCRIPTIVENAME, "p2");
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(h);
+		assertEquals("p2", d.getJDFRoot().getDescriptiveName());
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
 	public void testDropID()
 	{
 		final KElement xjdf = new JDFToXJDFConverterTest()._testDeliveryIntent();
