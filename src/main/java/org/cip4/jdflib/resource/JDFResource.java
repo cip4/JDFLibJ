@@ -86,6 +86,7 @@ import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFQualityControlResult;
 import org.cip4.jdflib.resource.process.JDFSourceResource;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.StringUtil;
@@ -3341,8 +3342,8 @@ public class JDFResource extends JDFElement
 			JDFResource.this.collapse(false, true);
 			final VElement v = getLeaves(true);
 			v.remove(JDFResource.this);
-			boolean clean = true;
-			// if force we simply zapp what is not equal
+			final VElement zapp = force ? v : new VElement();
+			final HashSet<String> keepPartIDKeys = new HashSet<>();
 			if (!force)
 			{
 				for (final KElement e : v)
@@ -3350,20 +3351,25 @@ public class JDFResource extends JDFElement
 					final JDFResource r = (JDFResource) e;
 					if (containsData(r))
 					{
-						clean = false;
-						break;
+						keepPartIDKeys.add(r.getLocalPartitionKey());
+					}
+					else
+					{
+						zapp.add(r);
 					}
 				}
 			}
-			if (clean)
+			for (final KElement e : zapp)
 			{
-				for (final KElement e : v)
-				{
-					e.deleteNode();
-				}
-				removeAttribute(AttributeName.PARTIDKEYS);
+				e.deleteNode();
 			}
-			return clean;
+			final VString partIdKeys = getPartIDKeys();
+			if (partIdKeys != null)
+			{
+				partIdKeys.retainAll(keepPartIDKeys);
+				setPartIDKeys(ContainerUtil.isEmpty(partIdKeys) ? null : partIdKeys);
+			}
+			return ContainerUtil.isEmpty(partIdKeys);
 		}
 
 		/**
@@ -3556,7 +3562,7 @@ public class JDFResource extends JDFElement
 			for (final String att : atts)
 			{
 				// reduce lower stuff
-				if ((!bCollapseToNode) && (!parent.hasAttribute(att, null, false)))
+				if (!bCollapseToNode && (!parent.hasAttribute(att, null, false)))
 				{
 					final String attVal = leaf.getAttribute_KElement(att, null, JDFConstants.EMPTYSTRING);
 					if (!parent.getAttribute(att).equals(attVal))

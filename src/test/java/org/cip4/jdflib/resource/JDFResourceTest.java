@@ -191,7 +191,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
 		((JDFExposedMedia) xm.getLeaves(false).get(0)).setBrand("foo"); // one is different...
 		xm.unpartition(false);
-		assertEquals(xm.getPartIDKeys().size(), 3);
+		assertEquals(xm.getPartIDKeys().size(), 1);
 		xm.unpartition(true);
 		assertEquals(xm.getPartIDKeys().size(), 0);
 	}
@@ -2564,7 +2564,6 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	}
 
-	// //////////////////////////////////////////////////////////////////
 	/**
 	 * test expand and collapse method for subelements
 	 */
@@ -2602,7 +2601,26 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertNotSame("no root element for collapse", rl.getLayoutElement(), rl1.getLayoutElement());
 	}
 
-	// //////////////////////////////////////////////////////////////////
+	/**
+	 * test expand and collapse method for subelements
+	 */
+	@Test
+	public void testCollapseBetween()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFResource xm = n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
+		xm.setDescriptiveName("d1");
+		final JDFResource sig = xm.addPartition(EnumPartIDKey.SignatureName, "sig1");
+		sig.setDescriptiveName("sh");
+		for (int i = 0; i < 3; i++)
+		{
+			sig.addPartition(EnumPartIDKey.SheetName, "s" + i).setDescriptiveName("sh");
+		}
+		xm.collapse(false, false);
+		xm.unpartition(false);
+		assertEquals(sig, sig.getLeaf(0));
+	}
+
 	/**
 	 * test expand and collapse methods
 	 */
