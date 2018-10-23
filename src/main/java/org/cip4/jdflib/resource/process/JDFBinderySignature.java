@@ -135,19 +135,6 @@ public class JDFBinderySignature extends JDFAutoBinderySignature
 	}
 
 	/**
-	 * @see org.cip4.jdflib.auto.JDFAutoBinderySignature#setNumberUp(org.cip4.jdflib.datatypes.JDFXYPair)
-	 */
-	@Override
-	public void setNumberUp(final JDFXYPair value)
-	{
-		if (!hasNonEmpty_KElement(AttributeName.BINDERYSIGNATURETYPE))
-		{
-			setBinderySignatureType(EnumBinderySignatureType.Grid);
-		}
-		super.setNumberUp(value);
-	}
-
-	/**
 	 * @see org.cip4.jdflib.auto.JDFAutoBinderySignature#appendDieLayout()
 	 */
 	@Override

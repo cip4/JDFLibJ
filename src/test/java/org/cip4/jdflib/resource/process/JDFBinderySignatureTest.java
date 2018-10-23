@@ -68,7 +68,7 @@ public class JDFBinderySignatureTest extends JDFTestCaseBase
 	{
 		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.setNumberUp(3, 3);
-		assertEquals(EnumBinderySignatureType.Grid, bs.getBinderySignatureType());
+		assertEquals(EnumBinderySignatureType.Fold, bs.getBinderySignatureType());
 	}
 
 	/**
