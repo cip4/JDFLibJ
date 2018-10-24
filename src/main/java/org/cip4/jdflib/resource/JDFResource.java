@@ -3572,7 +3572,7 @@ public class JDFResource extends JDFElement
 				if (!bCollapseToNode && (!parent.hasAttribute(att, null, false)))
 				{
 					final String attVal = leaf.getAttribute_KElement(att, null, JDFConstants.EMPTYSTRING);
-					if (!parent.getAttribute(att).equals(attVal))
+					if (!parent.getAttribute(att).equals(attVal) || !parent.hasAttribute(att))
 					{
 						// check all local children and grandchildren
 						boolean bAllSame = true;
