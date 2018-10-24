@@ -189,9 +189,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
 		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
-		((JDFExposedMedia) xm.getLeaves(false).get(0)).setBrand("foo"); // one is different...
+		((JDFExposedMedia) xm.getLeaves(false).get(0).getParentNode_KElement()).setBrand("foo"); // one is different...
 		xm.unpartition(false);
-		assertEquals(xm.getPartIDKeys().size(), 1);
+		assertEquals(xm.getPartIDKeys().size(), 2);
 		xm.unpartition(true);
 		assertEquals(xm.getPartIDKeys().size(), 0);
 	}

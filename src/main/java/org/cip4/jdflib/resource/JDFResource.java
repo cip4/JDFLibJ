@@ -3340,36 +3340,43 @@ public class JDFResource extends JDFElement
 
 			// this construct is required to pick up virtual overwrites - e.g. in RunList
 			JDFResource.this.collapse(false, true);
-			final VElement v = getLeaves(true);
-			v.remove(JDFResource.this);
-			final VElement zapp = force ? v : new VElement();
-			final HashSet<String> keepPartIDKeys = new HashSet<>();
-			if (!force)
+			boolean hasData = false;
+			while (!hasData)
 			{
-				for (final KElement e : v)
+				final VElement v = getLeaves(false);
+				v.remove(JDFResource.this);
+				if (v.isEmpty())
+					break;
+				final VElement zapp = force ? v : new VElement();
+				if (!force)
 				{
-					final JDFResource r = (JDFResource) e;
-					if (containsData(r))
+					for (final KElement e : v)
 					{
-						keepPartIDKeys.add(r.getLocalPartitionKey());
-					}
-					else
-					{
-						zapp.add(r);
+						final JDFResource r = (JDFResource) e;
+						if (containsData(r))
+						{
+							hasData = true;
+							break;
+						}
+						else
+						{
+							zapp.add(r);
+						}
 					}
 				}
+				if (!hasData)
+				{
+					for (final KElement e : zapp)
+					{
+						e.deleteNode();
+					}
+					final VString partIdKeys = getPartIDKeys();
+					partIdKeys.remove(-1);
+					setPartIDKeys(ContainerUtil.isEmpty(partIdKeys) ? null : partIdKeys);
+				}
+
 			}
-			for (final KElement e : zapp)
-			{
-				e.deleteNode();
-			}
-			final VString partIdKeys = getPartIDKeys();
-			if (partIdKeys != null)
-			{
-				partIdKeys.retainAll(keepPartIDKeys);
-				setPartIDKeys(ContainerUtil.isEmpty(partIdKeys) ? null : partIdKeys);
-			}
-			return ContainerUtil.isEmpty(partIdKeys);
+			return ContainerUtil.isEmpty(getPartIDKeys());
 		}
 
 		/**
