@@ -3578,7 +3578,8 @@ public class JDFResource extends JDFElement
 						boolean bAllSame = true;
 						for (int l = 0; l < localSize; l++)
 						{
-							if (!(localLeaves.elementAt(l)).getAttribute(att, null, JDFConstants.EMPTYSTRING).equals(attVal))
+							final String attVal2 = localLeaves.elementAt(l).getAttribute(att, null, JDFConstants.EMPTYSTRING);
+							if (!attVal.equals(attVal2) || JDFConstants.EMPTYSTRING.equals(attVal2) && !attVal.equals(localLeaves.elementAt(l).getAttribute(att, null, null)))
 							{
 								bAllSame = false;
 								break;

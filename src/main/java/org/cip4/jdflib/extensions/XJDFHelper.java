@@ -583,7 +583,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		if (family == null)
 			family = XJDFConstants.Resource;
 		final KElement newSet = theElement.appendElement(family + "Set");
-		newSet.setAttribute("Name", name);
+		newSet.setAttribute(AttributeName.NAME, name);
 		if (name == null)
 			name = "Set";
 		final SetHelper h = new SetHelper(newSet);
@@ -903,7 +903,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public String getJobPartID()
 	{
-		return getXPathValue("@" + AttributeName.JOBPARTID);
+		return getAttribute(AttributeName.JOBPARTID);
 	}
 
 	/**
@@ -912,7 +912,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public void setJobPartID(final String jobPartID)
 	{
-		setXPathValue("@" + AttributeName.JOBPARTID, jobPartID);
+		setAttribute(AttributeName.JOBPARTID, jobPartID);
 	}
 
 	/**
@@ -921,7 +921,16 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public void setJobID(final String jobID)
 	{
-		setXPathValue("@" + AttributeName.JOBID, jobID);
+		setAttribute(AttributeName.JOBID, jobID);
+	}
+
+	/**
+	 * @return the productID of the product
+	 *
+	 */
+	public String getDescriptiveName()
+	{
+		return getAttribute(AttributeName.DESCRIPTIVENAME);
 	}
 
 	/**

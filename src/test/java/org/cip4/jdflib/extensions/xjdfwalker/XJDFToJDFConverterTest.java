@@ -202,6 +202,24 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 
 	/**
 	 *
+	 */
+	@Test
+	public void testMultiProduct()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		h.getCreateRootProduct(0).setDescriptiveName("d1");
+		h.appendProduct().setDescriptiveName("d2");
+		h.appendProduct().setDescriptiveName("d3");
+		final JDFDoc d = xCon.convert(h);
+		assertNotNull(d);
+		final JDFNode root = d.getJDFRoot();
+		assertEquals(2, root.getvJDFNode(JDFConstants.PRODUCT, null, true).size());
+		assertEquals("d1", root.getDescriptiveName());
+	}
+
+	/**
+	 *
 	 *
 	 */
 	@Test

@@ -202,7 +202,33 @@ public class ProductHelper extends BaseXJDFHelper
 	 */
 	public String getExternalID()
 	{
-		return theElement.getNonEmpty(XJDFConstants.ExternalID);
+		return getAttribute(XJDFConstants.ExternalID);
+	}
+
+	/**
+	 * @param id
+	 */
+	@Override
+	public void setExternalID(final String id)
+	{
+		setAttribute(XJDFConstants.ExternalID, id);
+	}
+
+	/**
+	 * @return the productID of the product
+	 *
+	 */
+	public String getDescriptiveName()
+	{
+		return getAttribute(AttributeName.DESCRIPTIVENAME);
+	}
+
+	/**
+	 * @param id
+	 */
+	public void setDescriptiveName(final String id)
+	{
+		setAttribute(AttributeName.DESCRIPTIVENAME, id);
 	}
 
 	/**

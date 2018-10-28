@@ -498,7 +498,7 @@ public class SetHelper extends BaseXJDFHelper
 
 	/**
 	 * returns all partitions that are a superset of map
-	 * 
+	 *
 	 * @param map
 	 * @return
 	 */
@@ -661,6 +661,24 @@ public class SetHelper extends BaseXJDFHelper
 	public void setDescriptiveName(final String descriptiveName)
 	{
 		setAttribute(AttributeName.DESCRIPTIVENAME, descriptiveName);
+	}
+
+	/**
+	 * @return the productID of the product
+	 *
+	 */
+	public String getExternalID()
+	{
+		return getAttribute(XJDFConstants.ExternalID);
+	}
+
+	/**
+	 * @param id
+	 */
+	@Override
+	public void setExternalID(final String id)
+	{
+		setAttribute(XJDFConstants.ExternalID, id);
 	}
 
 	/**
