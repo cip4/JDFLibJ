@@ -644,6 +644,7 @@ public class WalkJDFElement extends WalkElement
 		resourceSet.removeAttribute(AttributeName.RSUBREF);
 		resourceSet.removeAttribute(AttributeName.AMOUNT);
 		resourceSet.removeAttribute(AttributeName.AMOUNTPRODUCED);
+		resourceSet.removeAttribute(AttributeName.AMOUNTREQUIRED);
 		resourceSet.removeAttribute(AttributeName.MINSTATUS);
 		resourceSet.removeAttribute(AttributeName.MINAMOUNT);
 		resourceSet.removeAttribute(AttributeName.MAXAMOUNT);

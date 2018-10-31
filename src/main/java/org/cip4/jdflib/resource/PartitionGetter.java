@@ -107,7 +107,7 @@ public class PartitionGetter
 				}
 			}
 		}
-		return updateIdentical(ret);
+		return ret;
 
 	}
 
@@ -315,7 +315,7 @@ public class PartitionGetter
 		{
 			for (final JDFAttributeMap map : vm)
 			{
-				final VJDFAttributeMap next = getPartitionMaps(map, partUsage);
+				final VJDFAttributeMap next = getPartitionMaps(map, partUsage, true);
 				v.addAll(next);
 			}
 		}
@@ -364,7 +364,7 @@ public class PartitionGetter
 		if (m == null)
 			return null;
 
-		final VJDFAttributeMap vMap = getPartitionMaps(m, partUsage);
+		final VJDFAttributeMap vMap = getPartitionMaps(m, partUsage, true);
 		final VElement v = new VElement();
 		for (final JDFAttributeMap map : vMap)
 			v.add(leafMap.get(map));
@@ -381,14 +381,16 @@ public class PartitionGetter
 	 *
 	 * @default getPartitionVector(m, null)
 	 */
-	VJDFAttributeMap getPartitionMaps(JDFAttributeMap m, EnumPartUsage partUsage)
+	VJDFAttributeMap getPartitionMaps(JDFAttributeMap m, EnumPartUsage partUsage, final boolean updateIdentical)
 	{
 		if (partUsage == null)
 			partUsage = resourceRoot.getPartUsage();
 		if (m != null)
 			m = removeImplicitPartions(m, partUsage);
 
-		final JDFAttributeMap fast = getPartitionFromMap(m, EnumPartUsage.Explicit);
+		JDFAttributeMap fast = getPartitionFromMap(m, EnumPartUsage.Explicit);
+		if (updateIdentical && fast != null)
+			fast = updateIdentical(fast);
 		final VJDFAttributeMap v = (fast != null) ? new VJDFAttributeMap(fast) : specialSearch(m, partUsage);
 
 		return v;
@@ -453,7 +455,7 @@ public class PartitionGetter
 		}
 	}
 
-	private JDFAttributeMap updateIdentical(JDFAttributeMap fast)
+	private JDFAttributeMap updateIdentical(final JDFAttributeMap fast)
 	{
 		if (fast != null && isFollowIdentical())
 		{
@@ -461,11 +463,7 @@ public class PartitionGetter
 			final JDFAttributeMap idMap = r == null ? null : r.getIdenticalMap();
 			if (idMap != null)
 			{
-				final JDFResource id = leafMap.get(idMap);
-				if (id != null)
-				{
-					fast = idMap;
-				}
+				return idMap;
 			}
 		}
 		return fast;
@@ -507,7 +505,21 @@ public class PartitionGetter
 	 * @return JDFResource: the first matching resource leaf or node
 	 * @default getPartition(m, null)
 	 */
-	public JDFResource getPartition(JDFAttributeMap m, EnumPartUsage partUsage)
+	public JDFResource getPartition(final JDFAttributeMap m, final EnumPartUsage partUsage)
+	{
+		JDFAttributeMap map = getPartitionImpl(m, partUsage);
+		if (map != null)
+		{
+			final JDFAttributeMap map2 = updateIdentical(map);
+			if (!map.equals(map2))
+			{
+				map = getPartitionImpl(map2, partUsage);
+			}
+		}
+		return map == null ? null : leafMap.get(map);
+	}
+
+	JDFAttributeMap getPartitionImpl(JDFAttributeMap m, EnumPartUsage partUsage)
 	{
 		m = getCompletePartMap(m, false);
 		if (m == null)
@@ -516,11 +528,11 @@ public class PartitionGetter
 		}
 		if (m.isEmpty())
 		{
-			return resourceRoot;
+			return m;
 		}
 		if (leafMap.get(m) != null)
 		{
-			return leafMap.get(updateIdentical(m));
+			return m;
 		}
 		if (partUsage == null)
 		{
@@ -529,14 +541,14 @@ public class PartitionGetter
 		m = removeImplicitPartions(m, partUsage);
 		if (m.isEmpty())
 		{
-			return resourceRoot;
+			return m;
 		}
 		JDFAttributeMap partitionFromMap = getPartitionFromMap(m, partUsage);
 		if (partitionFromMap == null || !m.equals(partitionFromMap) && (!JDFPart.getFastparts().containsAll(partitionFromMap.keySet())))
 		{
 			partitionFromMap = reducePartMap(m, partUsage);
 		}
-		return partitionFromMap == null ? null : leafMap.get(partitionFromMap);
+		return partitionFromMap;
 
 	}
 
@@ -545,7 +557,7 @@ public class PartitionGetter
 	JDFAttributeMap reducePartMap(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
 		JDFAttributeMap partitionFromMap = null;
-		final VJDFAttributeMap vMap = getPartitionMaps(m, partUsage);
+		final VJDFAttributeMap vMap = getPartitionMaps(m, partUsage, false);
 		if (vMap != null)
 		{
 			if (vMap.size() == 1)

@@ -47,11 +47,14 @@ import static org.junit.Assert.assertTrue;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
+import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.junit.Test;
 
 public class PartitionGetterTest
@@ -500,6 +503,37 @@ public class PartitionGetterTest
 	 *
 	 */
 	@Test
+	public void testIdenticalForeign()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.addResource("foo.Bar", EnumResourceClass.Parameter, EnumUsage.Input, null, null, "www.foo.com", null);
+		final PartitionGetter pg = new PartitionGetter(r);
+		final JDFResource rs = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource a = rs.addPartition(EnumPartIDKey.Separation, "a");
+		final JDFResource b = rs.addPartition(EnumPartIDKey.Separation, "b");
+		final JDFResource c = rs.addPartition(EnumPartIDKey.Separation, "c");
+		b.setIdentical(a);
+		c.setIdentical(a);
+		pg.setFollowIdentical(true);
+		final JDFAttributeMap m = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
+		m.put(AttributeName.SEPARATION, "a");
+		assertEquals(a, pg.getPartition(m, EnumPartUsage.Explicit));
+		assertEquals(a, r.getPartition(m, EnumPartUsage.Explicit));
+		m.put(AttributeName.SEPARATION, "b");
+		assertEquals(a, pg.getPartition(m, EnumPartUsage.Explicit));
+		assertEquals(a, r.getPartition(m, EnumPartUsage.Explicit));
+		m.put(AttributeName.SEPARATION, "c");
+		assertEquals(a, pg.getPartition(m, EnumPartUsage.Explicit));
+		assertEquals(a, r.getPartition(m, EnumPartUsage.Explicit));
+		m.put(AttributeName.SEPARATION, "d");
+		assertNull(pg.getPartition(m, EnumPartUsage.Explicit));
+		assertNull(r.getPartition(m, EnumPartUsage.Explicit));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testIdenticalFB()
 	{
 		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
@@ -571,6 +605,56 @@ public class PartitionGetterTest
 		m.put(AttributeName.PARTVERSION, "pc");
 		m.put(AttributeName.SEPARATION, "b");
 		assertEquals(a, pg.getPartition(m, EnumPartUsage.Explicit));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testImplicitIdenticalPV()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
+		r.setPartUsage(EnumPartUsage.Implicit);
+		final PartitionGetter pg = new PartitionGetter(r);
+
+		final JDFResource rs = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource rsf = rs.addPartition(EnumPartIDKey.PartVersion, "pa pb");
+		final JDFResource a = rsf.addPartition(EnumPartIDKey.Separation, "a");
+		final JDFResource rsb = rs.addPartition(EnumPartIDKey.PartVersion, "pc pd");
+		final JDFResource ab = rsb.addPartition(EnumPartIDKey.Separation, "a");
+		ab.setIdentical(a);
+		a.deleteNode();
+		pg.setFollowIdentical(true);
+		final JDFAttributeMap m = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
+		m.put(AttributeName.PARTVERSION, "pa");
+		m.put(AttributeName.SEPARATION, "a");
+		assertEquals(rsf, pg.getPartition(m, EnumPartUsage.Implicit));
+		m.put(AttributeName.PARTVERSION, "pc");
+		m.put(AttributeName.SEPARATION, "a");
+		assertEquals(rsf, pg.getPartition(m, EnumPartUsage.Implicit));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testIdenticalPVLeaf()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
+		final PartitionGetter pg = new PartitionGetter(r);
+
+		final JDFResource rs = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource rsf = rs.addPartition(EnumPartIDKey.PartVersion, "pa pb");
+		final JDFResource rsb = rs.addPartition(EnumPartIDKey.PartVersion, "pc pd");
+		rsf.setIdentical(rsb);
+		pg.setFollowIdentical(true);
+		final JDFAttributeMap m = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
+		m.put(AttributeName.PARTVERSION, "pa");
+		assertEquals(rsb, pg.getPartition(m, EnumPartUsage.Explicit));
+		m.put(AttributeName.PARTVERSION, "pa pb");
+		assertEquals(rsb, pg.getPartition(m, EnumPartUsage.Explicit));
+		m.put(AttributeName.PARTVERSION, "pc");
+		assertEquals(rsb, pg.getPartition(m, EnumPartUsage.Explicit));
 	}
 
 	/**

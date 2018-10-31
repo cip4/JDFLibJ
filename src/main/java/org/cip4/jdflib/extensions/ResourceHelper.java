@@ -519,12 +519,21 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 * @return the productID of the product
+	 * @return the descriptive name of the product
 	 *
 	 */
 	public String getDescriptiveName()
 	{
 		return getAttribute(AttributeName.DESCRIPTIVENAME);
+	}
+
+	/**
+	 * @return the productID of the product
+	 *
+	 */
+	public String getExternalID()
+	{
+		return getAttribute(XJDFConstants.ExternalID);
 	}
 
 	/**
