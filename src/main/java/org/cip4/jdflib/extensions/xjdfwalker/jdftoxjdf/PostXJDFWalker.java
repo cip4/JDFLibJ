@@ -82,6 +82,7 @@ import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDrop;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
@@ -876,6 +877,8 @@ class PostXJDFWalker extends BaseElementWalker
 			updatePositions(bsID, layoutPartition);
 			strippingParams.removeAttribute(ElementName.BINDERYSIGNATURE + "Ref");
 			strippingParams.removeAttribute(XJDFConstants.BinderySignatureID);
+			if (layoutPartition.hasChildElement(ElementName.FILESPEC, null))
+				strippingParams.removeChildrenByClass(JDFFileSpec.class);
 			layoutPartition.copyInto(strippingParams, false);
 			return layoutMap;
 		}

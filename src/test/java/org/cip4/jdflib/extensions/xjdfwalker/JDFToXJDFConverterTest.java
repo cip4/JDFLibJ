@@ -1838,6 +1838,26 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws Exception
+	 *
+	 */
+	@Test
+	public void testLayoutExternalImpoBS() throws Exception
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Stripping);
+		final JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
+		for (int i = 0; i < 2; i++)
+		{
+			((JDFStrippingParams) sp.addPartition(EnumPartIDKey.BinderySignatureName, "BS" + i)).appendExternalImpositionTemplate().appendFileSpec("foo");
+		}
+		final XJDF20 xjdf20 = new XJDF20();
+		xjdf20.setMergeLayout(true);
+		final KElement xjdf = xjdf20.makeNewJDF(n, null);
+		assertEquals(1, xjdf.getXPathElementVector("ResourceSet/Resource/Layout/FileSpec", 0).size());
+	}
+
+	/**
 	 *
 	 */
 	@Test
