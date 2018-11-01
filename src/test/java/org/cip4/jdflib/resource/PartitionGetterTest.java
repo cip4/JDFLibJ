@@ -500,6 +500,29 @@ public class PartitionGetterTest
 	}
 
 	/**
+	*
+	*/
+	@Test
+	public void testIdenticalSibling()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
+		final PartitionGetter pg = new PartitionGetter(r);
+		final JDFResource rs = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource rf = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		final JDFResource af = rf.addPartition(EnumPartIDKey.Separation, "a");
+		final JDFResource as = rs.addPartition(EnumPartIDKey.Separation, "a");
+		af.setIdentical(as);
+		pg.setFollowIdentical(true);
+		final JDFAttributeMap m = new JDFAttributeMap(AttributeName.SHEETNAME, "s2");
+		m.put(AttributeName.SEPARATION, "a");
+		assertEquals(as, af.getPartition(m, EnumPartUsage.Explicit));
+		assertEquals(as, rf.getPartition(m, EnumPartUsage.Explicit));
+		assertEquals(as, r.getPartition(m, EnumPartUsage.Explicit));
+		assertEquals(null, rs.getPartition(m, EnumPartUsage.Explicit));
+		assertEquals(null, as.getPartition(m, EnumPartUsage.Explicit));
+	}
+
+	/**
 	 *
 	 */
 	@Test

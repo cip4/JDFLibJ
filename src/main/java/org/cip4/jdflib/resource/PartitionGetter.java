@@ -507,7 +507,12 @@ public class PartitionGetter
 	 */
 	public JDFResource getPartition(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
-		JDFAttributeMap map = getPartitionImpl(m, partUsage);
+		final JDFAttributeMap map0 = getCompletePartMap(m, false);
+		if (map0 == null)
+		{
+			return null;
+		}
+		JDFAttributeMap map = getPartitionImpl(map0, partUsage);
 		if (map != null)
 		{
 			final JDFAttributeMap map2 = updateIdentical(map);
@@ -521,11 +526,6 @@ public class PartitionGetter
 
 	JDFAttributeMap getPartitionImpl(JDFAttributeMap m, EnumPartUsage partUsage)
 	{
-		m = getCompletePartMap(m, false);
-		if (m == null)
-		{
-			return null;
-		}
 		if (m.isEmpty())
 		{
 			return m;

@@ -2126,7 +2126,8 @@ public class JDFResource extends JDFElement
 	{
 		if (isResourceElement())
 			return this;
-		return new org.cip4.jdflib.resource.PartitionGetter(this).getPartition(m, partUsage);
+		org.cip4.jdflib.resource.PartitionGetter pg = new org.cip4.jdflib.resource.PartitionGetter(this);
+		return pg.getPartition(m, partUsage);
 	}
 
 	/**

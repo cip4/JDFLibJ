@@ -69,7 +69,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	private static final long serialVersionUID = 1L;
 	final private static String m_libAgentName = "CIP4 JDF Writer Java";
-	final private static String m_libAgentVersion = "1.6 BLD 001";
+	final private static String m_libAgentVersion = "1.6 BLD 002";
 
 	// use reasonable defaults
 	private static String m_strAgentName = m_libAgentName;
@@ -93,7 +93,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * Constructor for JDFAudit
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -104,7 +104,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * Constructor for JDFAudit
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -306,7 +306,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -317,7 +317,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * sort by timestamp
-	 * 
+	 *
 	 * @param a1 an audit
 	 * @param a2 another audit
 	 * @return @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
@@ -333,7 +333,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * SetSeverity
-	 * 
+	 *
 	 * @param s
 	 * @deprecated - only valid in the respective subclasses
 	 */
@@ -345,7 +345,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * GetSeverity
-	 * 
+	 *
 	 * @return EnumSeverity
 	 * @deprecated - only valid in the respective subclasses
 	 */
@@ -357,7 +357,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * SetStatus
-	 * 
+	 *
 	 * @param s
 	 */
 	@Override
@@ -368,7 +368,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * SetEndStatus
-	 * 
+	 *
 	 * @param s
 	 * @deprecated - only valid in the respective subclasses
 	 */
@@ -380,7 +380,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * GetEndStatus
-	 * 
+	 *
 	 * @return JDFElement.EnumNodeStatus
 	 */
 	protected JDFElement.EnumNodeStatus getEndStatus()
@@ -390,7 +390,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * GetAuditType
-	 * 
+	 *
 	 * @return EnumAuditType
 	 */
 	public EnumAuditType getAuditType()
@@ -401,7 +401,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * GetPhase
-	 * 
+	 *
 	 * @deprecated use JDFPhaseTime.getStatus()
 	 * @return JDFElement.EnumNodeStatus
 	 */
@@ -418,7 +418,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * SetPart
-	 * 
+	 *
 	 * @param m
 	 * @deprecated 2005-10-20 - use setPartMap() in the various subclasses instead
 	 */
@@ -430,7 +430,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * get part map vector
-	 * 
+	 *
 	 * @return VJDFAttributeMap: vector of mAttribute, one for each part
 	 */
 	@Override
@@ -441,7 +441,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * Set attribute refID to the ID of previous
-	 * 
+	 *
 	 * @param previous the previous audit that is referenced
 	 */
 	public void setRef(final JDFAudit previous)
@@ -455,7 +455,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * SetBy
-	 * 
+	 *
 	 * @param by
 	 * @deprecated 2005-09-01 use setAuthor()
 	 */
@@ -472,7 +472,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * Software
-	 * 
+	 *
 	 * @return String
 	 */
 	public static String software()
@@ -482,7 +482,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * init
-	 * 
+	 *
 	 * @return boolean
 	 */
 	@Override
@@ -525,7 +525,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * SetTimeStamp
-	 * 
+	 *
 	 * @deprecated 2005-12-02 use setTimeStamp(null)
 	 */
 	@Deprecated
@@ -536,7 +536,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * (12) get JDFDate attribute TimeStamp
-	 * 
+	 *
 	 * @return JDFDate the value of the attribute
 	 * @deprecated - use getTimeStamp
 	 */
@@ -556,7 +556,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * create an update audit for this
-	 * 
+	 *
 	 * @return a new audit that updates this
 	 */
 	public JDFAudit createUpdateAudit()
@@ -577,7 +577,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * get the previous updated audit that was updated by this
-	 * 
+	 *
 	 * @return the audit that was replaced by this
 	 */
 	public JDFAudit getUpdatedPreviousAudit()
@@ -597,7 +597,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * Gets the default static AgentName that is used to preset @AgentName when generating a new Audit
-	 * 
+	 *
 	 * @return Returns the m_strAgentName.
 	 */
 	public static synchronized String getStaticAgentName()
@@ -607,7 +607,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * sets the default static AgentName that is used to preset @AgentName when generating a new Audit
-	 * 
+	 *
 	 * @param agentName The m_strAgentName to set.
 	 */
 	public static synchronized void setStaticAgentName(final String agentName)
@@ -617,7 +617,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * Gets the default static Author that is used to preset @AgentName when generating a new Audit
-	 * 
+	 *
 	 * @return Returns the m_Author.
 	 */
 	public static synchronized String getStaticAuthor()
@@ -627,7 +627,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * sets the default static Author that is used to preset @Author when generating a new Audit
-	 * 
+	 *
 	 * @param author The m_strAuthor to set.
 	 */
 	public static synchronized void setStaticAuthor(final String author)
@@ -637,7 +637,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * gets the default static AgentVersion that is used to preset @AgentName when generating a new Audit
-	 * 
+	 *
 	 * @return sTRING the m_strAgentVersion.
 	 */
 	public static synchronized String getStaticAgentVersion()
@@ -647,7 +647,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * Sets the default static AgentVersion that is used to preset @AgentName when generating a new Audit
-	 * 
+	 *
 	 * @param agentVersion The m_strAgentVersion to set.
 	 */
 	public static synchronized void setStaticAgentVersion(final String agentVersion)
@@ -668,7 +668,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * (27) const get element Employee
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element default is getEmployee(0)
 	 */
@@ -697,7 +697,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * (30) append element Employee
-	 * 
+	 *
 	 * @return
 	 * @throws JDFException
 	 */
