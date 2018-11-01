@@ -36,54 +36,27 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
+import static org.junit.Assert.assertEquals;
 
-/**
- * any matching class will be ignored and all children will be moved into the respective parent element
- *
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
- */
-public class WalkSkip extends WalkJDFSubElement
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.resource.process.JDFExternalImpositionTemplate;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.junit.Test;
+
+public class WalkFileSpecTest
 {
 
 	/**
 	 *
 	 */
-	public WalkSkip()
+	@Test
+	public void testExternalImpo()
 	{
-		super();
+		final JDFExternalImpositionTemplate et = (JDFExternalImpositionTemplate) new JDFDoc(ElementName.EXTERNALIMPOSITIONTEMPLATE).getRoot();
+		final JDFFileSpec fs = et.appendFileSpec("./foo.jdf");
+		new WalkFileSpec().ensureResUsage(fs);
+		assertEquals(ElementName.EXTERNALIMPOSITIONTEMPLATE, fs.getResourceUsage());
 	}
 
-	/**
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		return xjdf;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return true;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return new VString(new String[] { ElementName.DEVICELIST, ElementName.EXTERNALIMPOSITIONTEMPLATE, ElementName.HOLELIST, ElementName.INSERTLIST });
-	}
 }

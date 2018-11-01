@@ -110,6 +110,7 @@ import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
@@ -1815,6 +1816,25 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.convert(n);
 		assertEquals("n1", new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getDescriptiveName());
 		assertEquals("s1", new XJDFHelper(xjdf).getSet(ElementName.LAYOUT, 0).getPartition(0).getDescriptiveName());
+	}
+
+	/**
+	 * @throws Exception
+	 *
+	 */
+	@Test
+	public void testLayoutExternalImpo() throws Exception
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Stripping);
+		final JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
+		sp.appendExternalImpositionTemplate().appendFileSpec("foo");
+
+		final XJDF20 xjdf20 = new XJDF20();
+		xjdf20.setMergeLayout(true);
+		final KElement xjdf = xjdf20.makeNewJDF(n, null);
+		assertEquals("foo", xjdf.getXPathAttribute("ResourceSet/Resource/Layout/FileSpec/@URL", null));
+		assertEquals(ElementName.EXTERNALIMPOSITIONTEMPLATE, xjdf.getXPathAttribute("ResourceSet/Resource/Layout/FileSpec/@ResourceUsage", null));
 	}
 
 	/**
