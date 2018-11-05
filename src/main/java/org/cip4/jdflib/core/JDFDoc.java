@@ -95,7 +95,7 @@ import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
-import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
+import org.cip4.jdflib.util.net.HTTPDetails;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

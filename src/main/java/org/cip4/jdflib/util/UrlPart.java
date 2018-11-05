@@ -55,7 +55,7 @@ import org.cip4.jdflib.util.net.IPollDetails;
 /**
  * simple struct to contain the stream and type of a bodypart
  *
- * @author prosirai
+ * @author rainer prosi
  *
  */
 public class UrlPart implements IPollDetails
@@ -264,4 +264,5 @@ public class UrlPart implements IPollDetails
 			bufferStream.close();
 		super.finalize();
 	}
+
 }

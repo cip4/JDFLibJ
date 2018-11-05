@@ -102,7 +102,7 @@ import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
-import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
+import org.cip4.jdflib.util.net.HTTPDetails;
 import org.cip4.jdflib.util.zip.ZipReader;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;

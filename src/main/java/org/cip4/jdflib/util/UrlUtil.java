@@ -53,12 +53,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.Proxy;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.util.List;
 
 import javax.mail.BodyPart;
 import javax.mail.MessagingException;
@@ -66,7 +63,6 @@ import javax.mail.Multipart;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -75,7 +71,7 @@ import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeHelper;
-import org.cip4.jdflib.util.net.ProxyUtil;
+import org.cip4.jdflib.util.net.HTTPDetails;
 
 /**
  * collection of helper routines to convert urls
@@ -134,127 +130,6 @@ public class UrlUtil
 	 *
 	 */
 	public static final String CONTENT_TRANSFER_ENCODING = "Content-Transfer-Encoding";
-
-	/**
-	 * helper class to set mime details
-	 *
-	 * @author prosirai
-	 *
-	 */
-	public static class HTTPDetails
-	{
-		public HTTPDetails()
-		{
-			super();
-			chunkSize = defaultChunkSize;
-			bKeepAlive = true;
-			redirect = 0;
-		}
-
-		/**
-		 * size of http chunks to be written, if <=0 no chunks
-		 *
-		 */
-		private int chunkSize;
-		private boolean bKeepAlive;
-
-		public int getRedirect()
-		{
-			return redirect;
-		}
-
-		public void setRedirect(final int redirect)
-		{
-			this.redirect = redirect;
-		}
-
-		private int redirect;
-
-		/**
-		 * Getter for chunkSize attribute.
-		 *
-		 * @return the chunkSize
-		 */
-		public int getChunkSize()
-		{
-			return chunkSize;
-		}
-
-		/**
-		 * Setter for chunkSize attribute.
-		 *
-		 * @param chunkSize the chunkSize to set
-		 */
-		public void setChunkSize(final int chunkSize)
-		{
-			this.chunkSize = chunkSize;
-		}
-
-		/**
-		 * Getter for bKeepAlive attribute.
-		 *
-		 * @return the bKeepAlive
-		 */
-		public boolean isbKeepAlive()
-		{
-			return bKeepAlive;
-		}
-
-		/**
-		 * Setter for bKeepAlive attribute.
-		 *
-		 * @param bKeepAlive the bKeepAlive to set
-		 */
-		public void setbKeepAlive(final boolean bKeepAlive)
-		{
-			this.bKeepAlive = bKeepAlive;
-		}
-
-		/**
-		 * the default chnk size; -1= don't chunk
-		 */
-		public static int defaultChunkSize = -1; // don't chunk by default
-
-		/**
-		 * apply these details to the connection specified
-		 *
-		 * @param urlCon
-		 */
-		public void applyTo(final HttpURLConnection urlCon)
-		{
-			if (urlCon != null)
-			{
-				if (chunkSize > 0)
-				{
-					urlCon.setChunkedStreamingMode(chunkSize);
-				}
-				urlCon.setRequestProperty("Connection", bKeepAlive ? KEEPALIVE : CLOSE);
-			}
-		}
-
-		@Override
-		public String toString()
-		{
-			return "HTTPDetails [chunkSize=" + chunkSize + ", bKeepAlive=" + bKeepAlive + ", redirect=" + redirect + "]";
-		}
-
-		/**
-		 * get a redirect incremented by 1, if null create o defaut first
-		 *
-		 * @param details
-		 * @return
-		 */
-		public static HTTPDetails getRedirect(HTTPDetails details)
-		{
-			if (details == null)
-			{
-				details = new HTTPDetails();
-			}
-			details.setRedirect(details.getRedirect() + 1);
-			return details;
-		}
-
-	}
 
 	/**
 	 * strings that must be escaped in urls
@@ -341,8 +216,8 @@ public class UrlUtil
 	 *
 	 */
 	public static final String BINARY = "binary";
-
-	private static int nLogged = 0;
+	public static final String CONNECTION = "Connection";
+	public static final String AUTHORIZATION = "Authorization";
 
 	/**
 	 * rough classification of protocol type
@@ -562,7 +437,7 @@ public class UrlUtil
 	 *
 	 * @return the array of body parts input stream
 	 */
-	public static org.cip4.jdflib.util.UrlPart[] getURLParts(final HttpURLConnection connection)
+	public static UrlPart[] getURLParts(final HttpURLConnection connection)
 	{
 		if (connection == null)
 		{
@@ -571,16 +446,16 @@ public class UrlUtil
 		final String urlContentType = connection.getContentType();
 		if (!MimeUtil.MULTIPART_RELATED.equalsIgnoreCase(urlContentType))
 		{
-			org.cip4.jdflib.util.UrlPart p;
+			UrlPart p;
 			try
 			{
-				p = new org.cip4.jdflib.util.UrlPart(connection);
+				p = new UrlPart(connection);
 			}
 			catch (final IOException x)
 			{
 				return null;
 			}
-			return new org.cip4.jdflib.util.UrlPart[] { p };
+			return new UrlPart[] { p };
 		}
 
 		Multipart mp;
@@ -1698,198 +1573,6 @@ public class UrlUtil
 	{
 		final URLWriter urlWriter = new URLWriter(strUrl, streamWriter, method, contentType, details);
 		return urlWriter.writeToURL();
-	}
-
-	static class URLWriter
-	{
-		/**
-		 * @see java.lang.Object#toString()
-		 */
-		@Override
-		public String toString()
-		{
-			return "UrlWriter: " + method + " / " + contentType + " --> " + strUrl;
-		}
-
-		private final String strUrl;
-		private IStreamWriter streamWriter;
-		private final String method;
-		private final String contentType;
-		private final HTTPDetails details;
-
-		/**
-		 * @param strUrl the URL to write to
-		 * @param stream the input stream to read from
-		 * @param streamWriter
-		 * @param method HEAD, GET or POST
-		 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
-		 * @param details
-		 */
-		URLWriter(final String strUrl, final IStreamWriter streamWriter, final String method, String contentType, final HTTPDetails details)
-		{
-			this.strUrl = strUrl;
-			this.streamWriter = streamWriter;
-			this.method = method;
-			if (contentType == null)
-				contentType = TEXT_UNKNOWN;
-			this.contentType = StringUtil.token(contentType, 0, "\r\n");
-
-			this.details = details;
-
-		}
-
-		/**
-		 * write a Stream to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
-		 *
-		 * @return {@link UrlPart} the opened http connection, null in case of error
-		 *
-		 */
-		protected UrlPart writeToURL()
-		{
-			UrlPart urlPart = null;
-			UrlPart fallBack = null;
-
-			if (isFile(strUrl))
-			{
-				urlPart = writeFile();
-			}
-			else
-			{
-				final URL url = UrlUtil.stringToURL(strUrl);
-				final URI uri = ProxyUtil.getHostURI(url);
-				if (uri == null) // redundant but makes compiler happy
-					return null;
-
-				final List<Proxy> list = ProxyUtil.getProxiesWithLocal(uri);
-
-				ByteArrayIOStream bufStream = streamWriter != null && list.size() > 1 ? new ByteArrayIOStream() : null;
-				if (bufStream != null)
-				{
-					try
-					{
-						streamWriter.writeStream(bufStream);
-					}
-					catch (final IOException e)
-					{
-						bufStream = null;
-					}
-				}
-				for (final Proxy proxy : list)
-				{
-					if (bufStream != null)
-					{
-						streamWriter = new StreamReader(bufStream.getInputStream());
-					}
-					final boolean bWantLog = list.size() == 1 || !proxy.equals(Proxy.NO_PROXY);
-					urlPart = callProxy(proxy, bWantLog);
-					if (urlPart != null)
-					{
-						final int responseCode = urlPart.getResponseCode();
-						if (responseCode == 200)
-						{
-							return urlPart;
-						}
-						else if (isRedirect(responseCode) && (details == null || details.getRedirect() < 42) && streamWriter == null)
-						{
-							final String newLocation = urlPart.getConnection().getHeaderField("Location");
-							if (newLocation != null)
-							{
-								fallBack = urlPart;
-								urlPart = new URLWriter(newLocation, null, method, contentType, HTTPDetails.getRedirect(details)).writeToURL();
-								if (urlPart == null)
-								{
-									urlPart = fallBack;
-								}
-								else if (urlPart.getResponseCode() == 200)
-								{
-									return urlPart;
-								}
-							}
-						}
-						else
-						{
-							fallBack = urlPart;
-						}
-					}
-				}
-			}
-			return urlPart == null ? fallBack : urlPart;
-		}
-
-		/**
-		 * @return
-		 */
-		private UrlPart writeFile()
-		{
-			File f = urlToFile(strUrl);
-			f = FileUtil.writeFile(streamWriter, f);
-			try
-			{
-				return new UrlPart(f);
-			}
-			catch (final IOException x)
-			{
-				return null;
-			}
-		}
-
-		/**
-		 * @param proxy
-		 * @param bWantLog
-		 * @return
-		 */
-		private UrlPart callProxy(final Proxy proxy, final boolean bWantLog)
-		{
-			final URL url = UrlUtil.stringToURL(strUrl);
-
-			try
-			{
-				final URLConnection urlConnection = url.openConnection(proxy);
-				urlConnection.setConnectTimeout(getConnectionTimeout());
-				urlConnection.setRequestProperty("Connection", KEEPALIVE);
-				urlConnection.setRequestProperty(CONTENT_TYPE, contentType);
-				if (urlConnection instanceof HttpURLConnection)
-				{
-					final HttpURLConnection httpUrlConnection = (HttpURLConnection) urlConnection;
-					httpUrlConnection.setRequestMethod(method);
-					if (details != null)
-					{
-						details.applyTo(httpUrlConnection);
-					}
-					output(httpUrlConnection);
-					return new UrlPart(httpUrlConnection);
-				}
-				else if (isFtp(strUrl))
-				{
-					return new UrlPart(urlConnection, false);
-				}
-			}
-			catch (final Throwable x)
-			{
-				if (bWantLog && (nLogged++ < 10 || nLogged % 100 == 0))
-				{
-					LogFactory.getLog(URLWriter.class).warn(x.getClass().getCanonicalName() + " snafu #" + nLogged + " writing to url: " + strUrl + " " + x.getMessage());
-				}
-			}
-			return null;
-		}
-
-		/**
-		 * @param httpURLconnection
-		 * @throws IOException
-		 */
-		private void output(final HttpURLConnection httpURLconnection) throws IOException
-		{
-			final boolean doOutput = streamWriter != null;
-			httpURLconnection.setDoOutput(doOutput);
-			if (doOutput)
-			{
-				final OutputStream out = httpURLconnection.getOutputStream();
-				streamWriter.writeStream(out);
-				out.flush();
-				out.close();
-			}
-		}
 	}
 
 	/**

@@ -95,6 +95,7 @@ import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeHelper;
 import org.cip4.jdflib.util.mime.MimeReader;
 import org.cip4.jdflib.util.mime.MimeWriter;
+import org.cip4.jdflib.util.net.HTTPDetails;
 
 /**
  * MIME utilities for reading and writing MIME/MULTIPART/RELATED streams

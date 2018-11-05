@@ -71,8 +71,8 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
-import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
 import org.cip4.jdflib.util.UrlUtil.URLProtocol;
+import org.cip4.jdflib.util.net.HTTPDetails;
 import org.junit.Test;
 
 /**
@@ -304,6 +304,23 @@ public class UrlUtilTest extends JDFTestCaseBase
 		final HTTPDetails det = new HTTPDetails();
 		det.setbKeepAlive(false);
 		assertNotNull(UrlUtil.writeToURL("http://google.com", new ByteArrayInputStream("foo".getBytes()), UrlUtil.POST, "foo/bar", det));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testWriteToURLBearer()
+	{
+		if (!isTestNetwork())
+			return;
+		final HTTPDetails det = new HTTPDetails();
+		det.setBearerToken("abc");
+		final UrlPart writeToURL = UrlUtil.writeToURL("http://google.com", null, UrlUtil.GET, null, det);
+		assertNotNull(writeToURL);
+		writeToURL.buffer();
+		final String s = new String(ByteArrayIOStream.getBufferedInputStream(writeToURL.getResponseStream()).getBuf());
+		assertEquals(200, writeToURL.getResponseCode());
 	}
 
 	/**
