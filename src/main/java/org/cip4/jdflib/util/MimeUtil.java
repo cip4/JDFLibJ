@@ -3,75 +3,41 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
 /**
- * Created on Jul 5, 2006, 11:45:44 AM
- * org.cip4.jdflib.util.MimeUtil.java
- * Project Name: mimeutil
+ * Created on Jul 5, 2006, 11:45:44 AM org.cip4.jdflib.util.MimeUtil.java Project Name: mimeutil
  */
 package org.cip4.jdflib.util;
 
@@ -95,10 +61,10 @@ import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeHelper;
 import org.cip4.jdflib.util.mime.MimeReader;
 import org.cip4.jdflib.util.mime.MimeWriter;
-import org.cip4.jdflib.util.net.HTTPDetails;
 
 /**
  * MIME utilities for reading and writing MIME/MULTIPART/RELATED streams
+ *
  * @author Markus Nyman, (markus.cip4@myman.se)
  */
 public class MimeUtil extends UrlUtil
@@ -106,6 +72,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * helper class to set mime details
+	 *
 	 * @author prosirai
 	 */
 	public static class MIMEDetails
@@ -117,20 +84,20 @@ public class MimeUtil extends UrlUtil
 		/**
 		 * http details
 		 */
-		public HTTPDetails httpDetails = new HTTPDetails();
+		public org.cip4.jdflib.util.net.HTTPDetails httpDetails = new org.cip4.jdflib.util.net.HTTPDetails();
 		/**
 		 *
 		 */
 		public String transferEncoding = defaultTransferEncoding;
 		/**
-		 * if true, the stream will be parsed for a semicolon after the mime multipart
-		 * and said semicolon will be replaced with a cr/lf
+		 * if true, the stream will be parsed for a semicolon after the mime multipart and said semicolon will be replaced with a cr/lf
 		 */
 		public boolean modifyBoundarySemicolon = false;
 	}
 
 	/**
 	 * data source for binary files
+	 *
 	 * @author prosirai
 	 */
 	public static class ByteArrayDataSource implements DataSource
@@ -140,6 +107,7 @@ public class MimeUtil extends UrlUtil
 
 		/**
 		 * create a data source from a byte array
+		 *
 		 * @param _ioStream the ByteArrayIOStream to use
 		 * @param _contentType the content type of the contents
 		 */
@@ -208,6 +176,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * set the filename header of a bodypart to a string
+	 *
 	 * @param bp the bodypart
 	 * @param path the path to set
 	 */
@@ -218,6 +187,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * get the filename header of a bodypart a string if no file name is set, a unique filename is generated from cid and content type
+	 *
 	 * @param bp the bodypart
 	 * @return the file name, null if bp is null
 	 */
@@ -228,6 +198,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * get the ContentID header of a bodypart a string
+	 *
 	 * @param bp the bodypart
 	 * @return the cid, null if there was an error
 	 */
@@ -238,6 +209,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * Extracts all the parts of a multipart MIME message and returns an array of InputStream for each of the separate MIME parts.
+	 *
 	 * @param mimeStream
 	 * @return
 	 */
@@ -249,6 +221,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * get all the parts of of a multipart an
+	 *
 	 * @param mp the multiPart to extract
 	 * @return the array of parts, null if snafu...
 	 */
@@ -259,6 +232,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * get the MIME BodyPart from a multiPart package with a given cid
+	 *
 	 * @param mp the multipart package to search in
 	 * @param cid the cid of the requested bodypart
 	 * @return BodyPart the matching BodyPart, null if none is found
@@ -270,6 +244,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * get the MIME BodyPart from a multiPart package with a given cid create one if it does not exist;
+	 *
 	 * @param mp the multipart package to search in
 	 * @param cid the cid of the requested bodypart
 	 * @return BodyPart the matching BodyPart, null if none is found
@@ -281,6 +256,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * get the JDF Doc from a stream, also handle non mime streams gracefully
+	 *
 	 * @param stream the stream to search in
 	 * @param index the index of the body part to search
 	 * @return JDFDoc the parsed xml JDFDoc, null if stream does not contain xml
@@ -293,6 +269,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * get the JDF Doc from a given body part
+	 *
 	 * @param bp the BodyPart to search in
 	 * @return JDFDoc the parsed xml JDFDoc, null if bp does not contain xml
 	 */
@@ -303,6 +280,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * check if a BodyPart matches a given cid
+	 *
 	 * @param bp the bodyPart to check
 	 * @param cid the cid string any '<' '>' or 'cid:' prefixes are removed if null, anything matches
 	 * @return true if this bp matches the cid
@@ -340,6 +318,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * helper to create a root multipart from a file
+	 *
 	 * @param fileName the name of the file used as input
 	 * @return MultiPart the Multipart that represents the root mime, null if something went wrong
 	 */
@@ -351,6 +330,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * create a root multipart from an input stream
+	 *
 	 * @param mimeStream the input stream
 	 * @return MultiPart the Multipart that represents the root mime, null if something went wrong
 	 */
@@ -361,6 +341,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * checkst whether the mime type corresponds to one of "application/vnd.cip4-jdf+xml"; "application/vnd.cip4-jmf+xml"; "text/xml";
+	 *
 	 * @param fileName the string to test
 	 * @return the mime type
 	 * @deprecated use UrlUtil.getMimeTypeFromURL(fileName);
@@ -374,6 +355,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * checks whether the mime type corresponds to one of "application/vnd.cip4-jdf+xml"; "application/vnd.cip4-jmf+xml"; "text/xml";
+	 *
 	 * @param mimeType the string to test
 	 * @return true if matches
 	 */
@@ -391,6 +373,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * checks whether the mime type corresponds to mimetyoe
+	 *
 	 * @param toCheck the string to check against
 	 * @param mimeType the mime type
 	 * @return true if matches
@@ -419,8 +402,8 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * build a MIME package that contains all references in all FileSpecs of a given JDFDoc the doc is modified so that all URLs are cids
-	 * @param docJMF the JDFDoc representation of the JMF that references the jdf to package, if null only the jdf is packaged note that the URL of docJDF must
-	 * already be specified as a CID
+	 *
+	 * @param docJMF the JDFDoc representation of the JMF that references the jdf to package, if null only the jdf is packaged note that the URL of docJDF must already be specified as a CID
 	 * @param docJDF the JDFDoc representation of the JDF to package
 	 * @param extendReferenced if true, also package any further referenced files
 	 * @return a Message representing the resulting MIME package, null if an error occurred
@@ -464,6 +447,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * Builds a MIME package.
+	 *
 	 * @param vXMLDocs the Vector of XMLDoc representing the JMF and JDFs to be stored as the first part of the package t
 	 * @return a Message representing the resulting MIME package, null if an error occured
 	 */
@@ -487,6 +471,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * sets the content of a bodypart to the xmlDoc - correctly handling non-ascii features and setting the correct content type
+	 *
 	 * @param messageBodyPart the BodyPart to fill
 	 * @param xmlDoc the xmlDoc to fill in
 	 * @throws MessagingException
@@ -502,6 +487,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * write a Multipart to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
+	 *
 	 * @param mp the mime MultiPart to write
 	 * @param strUrl the URL to write to
 	 * @return {@link HttpURLConnection} the opened http connection, null in case of error or file
@@ -515,6 +501,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * write a Multipart to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
+	 *
 	 * @param mp the mime MultiPart to write
 	 * @param strUrl the URL to write to
 	 * @param mimeDetails
@@ -532,6 +519,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * submit a multipart file to a queue
+	 *
 	 * @param docJMF the jmf document containing the submitqueueentry or resubmitqueueentry
 	 * @param docJDF the jdf to submit
 	 * @param strUrl the url to submit to
@@ -560,6 +548,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * write a Multipart to an output file
+	 *
 	 * @param m the mime MultiPart to write
 	 * @param fileName the file name
 	 * @param md
@@ -587,6 +576,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * write a Multipart to a Stream
+	 *
 	 * @param m the mime MultiPart to write
 	 * @param outStream the existing output stream, note that a buffered output stream is created in case outStream is unbuffered
 	 * @param md details for messaging
@@ -602,6 +592,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * write a Message to a directory
+	 *
 	 * @param mp the mime Message to write
 	 * @param directory the directory to use as '.' for writing the mime parts
 	 * @throws MessagingException
@@ -626,6 +617,7 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * gets the JMF document of a submitqueueentry or returnqueuentry and the attached jdf document
+	 *
 	 * @param mp the Multipart to search
 	 * @return one or two JDFDocs: bp[0] is the jmf, bp[1] is the jdf, if a JDF is referenced;
 	 */

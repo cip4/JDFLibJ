@@ -1550,14 +1550,14 @@ public class UrlUtil
 	 * @param stream the input stream to read from
 	 * @param method HEAD, GET or POST
 	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
-	 * @param details
+	 * @param det
 	 * @return {@link UrlPart} the opened http connection, null in case of error
 	 *
 	 */
-	public static UrlPart writeToURL(final String strUrl, final InputStream stream, final String method, final String contentType, final HTTPDetails details)
+	public static UrlPart writeToURL(final String strUrl, final InputStream stream, final String method, final String contentType, final org.cip4.jdflib.util.net.HTTPDetails det)
 	{
 		final StreamReader streamReader = stream == null ? null : new StreamReader(stream);
-		return writerToURL(strUrl, streamReader, method, contentType, details);
+		return writerToURL(strUrl, streamReader, method, contentType, det);
 	}
 
 	static class StreamReader implements IStreamWriter
@@ -1589,13 +1589,13 @@ public class UrlUtil
 	 * @param streamWriter the IStreamWriter to read from
 	 * @param method HEAD, GET or POST
 	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
-	 * @param details
+	 * @param det
 	 * @return {@link UrlPart} the opened http connection, null in case of error
 	 *
 	 */
-	public static UrlPart writerToURL(final String strUrl, final IStreamWriter streamWriter, final String method, final String contentType, final HTTPDetails details)
+	public static UrlPart writerToURL(final String strUrl, final IStreamWriter streamWriter, final String method, final String contentType, final org.cip4.jdflib.util.net.HTTPDetails det)
 	{
-		final URLWriter urlWriter = new URLWriter(strUrl, streamWriter, method, contentType, details);
+		final URLWriter urlWriter = new URLWriter(strUrl, streamWriter, method, contentType, det);
 		return urlWriter.writeToURL();
 	}
 
