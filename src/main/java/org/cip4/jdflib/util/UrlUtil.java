@@ -71,7 +71,6 @@ import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeHelper;
-import org.cip4.jdflib.util.net.HTTPDetails;
 
 /**
  * collection of helper routines to convert urls
@@ -81,6 +80,31 @@ import org.cip4.jdflib.util.net.HTTPDetails;
  */
 public class UrlUtil
 {
+
+	/**
+	 * @deprecated use the real class
+	 * @author prosirai
+	 *
+	 */
+	@Deprecated
+	public static class HTTPDetails extends org.cip4.jdflib.util.net.HTTPDetails
+	{
+	}
+
+	/**
+	 * @deprecated use the real class
+	 * @author prosirai
+	 *
+	 */
+	@Deprecated
+	public static class URLWriter extends org.cip4.jdflib.util.URLWriter
+	{
+		public URLWriter(final String strUrl, final IStreamWriter streamWriter, final String method, final String contentType, final org.cip4.jdflib.util.net.HTTPDetails details)
+		{
+			super(strUrl, streamWriter, method, contentType, details);
+		}
+	}
+
 	/**
 	 * http post method
 	 */
