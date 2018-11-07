@@ -51,6 +51,7 @@ import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFNodeInfo;
@@ -133,6 +134,30 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFNode root = d.getJDFRoot();
 		final JDFContact contact = (JDFContact) root.getResource("Contact", EnumUsage.Input, 0);
 		assertEquals(contact.getCompany().getProductID(), "company_id");
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testShapeTemplate()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", null);
+		final SetHelper sh = h.getCreateSet(ElementName.SHAPEDEFPRODUCTIONPARAMS, EnumUsage.Input);
+		final KElement sdp = sh.appendPartition(null, true).getResource();
+		final KElement st = sdp.appendElement(ElementName.SHAPETEMPLATE);
+		KElement sd = st.appendElement(XJDFConstants.ShapeDimension);
+		sd.setAttribute(AttributeName.USAGE, "L");
+		sd.setAttribute(AttributeName.VALUE, "1.234");
+		sd = st.appendElement(XJDFConstants.ShapeDimension);
+		sd.setAttribute(AttributeName.USAGE, "W");
+		sd.setAttribute(AttributeName.VALUE, "12.345");
+		final JDFNode n = xCon.convert(h).getJDFRoot();
+		final JDFElement resource = (JDFElement) n.getResource(ElementName.SHAPEDEFPRODUCTIONPARAMS, EnumUsage.Input, 0).getElement(ElementName.SHAPETEMPLATE);
+		assertEquals("1.234", resource.getGeneralID("L", 0));
+		assertEquals("12.345", resource.getGeneralID("W", 0));
 	}
 
 	/**

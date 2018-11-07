@@ -149,6 +149,16 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
+	 *
+	 * @param jobID
+	 * @param jobPartID
+	 */
+	public XJDFHelper(final String jobID, final String jobPartID)
+	{
+		this(jobID, jobPartID, null);
+	}
+
+	/**
 	 * @param parts
 	 */
 	private void setParts(final VJDFAttributeMap parts)

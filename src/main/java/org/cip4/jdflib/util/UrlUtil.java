@@ -1595,7 +1595,7 @@ public class UrlUtil
 	 */
 	public static UrlPart writerToURL(final String strUrl, final IStreamWriter streamWriter, final String method, final String contentType, final org.cip4.jdflib.util.net.HTTPDetails det)
 	{
-		final URLWriter urlWriter = new URLWriter(strUrl, streamWriter, method, contentType, det);
+		final org.cip4.jdflib.util.URLWriter urlWriter = new org.cip4.jdflib.util.URLWriter(strUrl, streamWriter, method, contentType, det);
 		return urlWriter.writeToURL();
 	}
 
