@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -85,53 +53,52 @@ import org.cip4.jdflib.auto.JDFAutoSeparationList;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 
 /**
- * This class represents a list of SeparationSpec elements it allows high level string manipulation of the separation
- * names by hiding the fact that the separations are written in SeparationSpec/@Name
+ * This class represents a list of SeparationSpec elements it allows high level string manipulation of the separation names by hiding the fact that the separations are written in SeparationSpec/@Name
  */
 public class JDFSeparationList extends JDFAutoSeparationList
 {
-	public static final VString SEPARATIONS_CMYK = new VString("Cyan Magenta Yellow Black", null);
+	public static final VString SEPARATIONS_CMYK = JDFConstants.SEPARATIONS_CMYK;
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFSeparationList
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFSeparationList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFSeparationList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSeparationList
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFSeparationList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFSeparationList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSeparationList
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFSeparationList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFSeparationList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -142,17 +109,17 @@ public class JDFSeparationList extends JDFAutoSeparationList
 
 	/**
 	 * Get a list of all separation names in the SeparationSpec elements
-	 * 
+	 *
 	 * @return the vector of separation names - empty VString if no separations are present
 	 */
 	public VString getSeparations()
 	{
-		VString vName = new VString();
-		VElement v = getChildElementVector(ElementName.SEPARATIONSPEC, null, null, false, 0, false);
-		for (KElement e : v)
+		final VString vName = new VString();
+		final VElement v = getChildElementVector(ElementName.SEPARATIONSPEC, null, null, false, 0, false);
+		for (final KElement e : v)
 		{
-			JDFSeparationSpec sep = (JDFSeparationSpec) e;
-			String sepName = sep.getName();
+			final JDFSeparationSpec sep = (JDFSeparationSpec) e;
+			final String sepName = sep.getName();
 			vName.add(sepName);
 		}
 		return vName;
@@ -160,10 +127,10 @@ public class JDFSeparationList extends JDFAutoSeparationList
 
 	/**
 	 * set all separation names in the SeparationSpec elements, remove any prior elements
-	 * 
+	 *
 	 * @param vSeps the vector of separation names to set
 	 */
-	public void setSeparations(VString vSeps)
+	public void setSeparations(final VString vSeps)
 	{
 		removeChildren(ElementName.SEPARATIONSPEC, null, null);
 		appendSeparations(vSeps);
@@ -171,15 +138,15 @@ public class JDFSeparationList extends JDFAutoSeparationList
 
 	/**
 	 * append all separation names in the SeparationSpec elements without removing any prior elements
-	 * 
+	 *
 	 * @param vSeps the vector of separation names to append
 	 */
-	public void appendSeparations(VString vSeps)
+	public void appendSeparations(final VString vSeps)
 	{
 		if (vSeps == null)
 			return;
 
-		for (String sep : vSeps)
+		for (final String sep : vSeps)
 		{
 			appendSeparation(sep);
 		}
@@ -187,15 +154,15 @@ public class JDFSeparationList extends JDFAutoSeparationList
 
 	/**
 	 * ensure all separation names in the SeparationSpec elements without removing any prior elements
-	 * 
+	 *
 	 * @param vSeps the vector of separation names to append
 	 */
-	public void ensureSeparations(VString vSeps)
+	public void ensureSeparations(final VString vSeps)
 	{
 		if (vSeps == null)
 			return;
 
-		for (String sep : vSeps)
+		for (final String sep : vSeps)
 		{
 			getCreateSeparation(sep);
 		}
@@ -203,7 +170,7 @@ public class JDFSeparationList extends JDFAutoSeparationList
 
 	/**
 	 * convenience utility to set to cmyk
-	 * 
+	 *
 	 *
 	 */
 	public void setCMYK()
@@ -213,10 +180,10 @@ public class JDFSeparationList extends JDFAutoSeparationList
 
 	/**
 	 * append a separationspec with a given name to this if it does not yet exist
-	 * 
+	 *
 	 * @param sep the separation name
 	 */
-	public JDFSeparationSpec getCreateSeparation(String sep)
+	public JDFSeparationSpec getCreateSeparation(final String sep)
 	{
 		JDFSeparationSpec separationSpec = getSeparationSpec(sep);
 		if (separationSpec == null)
@@ -229,35 +196,36 @@ public class JDFSeparationList extends JDFAutoSeparationList
 
 	/**
 	 * append a separationspec with a given name to this
-	 * 
+	 *
 	 * @param sep the separation name
 	 */
-	public JDFSeparationSpec appendSeparation(String sep)
+	public JDFSeparationSpec appendSeparation(final String sep)
 	{
-		JDFSeparationSpec separationSpec = appendSeparationSpec();
+		final JDFSeparationSpec separationSpec = appendSeparationSpec();
 		separationSpec.setName(sep);
 		return separationSpec;
 	}
 
 	/**
 	 * get the separationSpec for a given separartion
+	 *
 	 * @param sep
 	 * @return
 	 */
-	public JDFSeparationSpec getSeparationSpec(String sep)
+	public JDFSeparationSpec getSeparationSpec(final String sep)
 	{
 		return (JDFSeparationSpec) getChildWithAttribute(ElementName.SEPARATIONSPEC, AttributeName.NAME, null, sep, 0, true);
 	}
 
 	/**
 	 * remove a separationspec with a given name from this
-	 * 
+	 *
 	 * @param sep the separation name
 	 * @return int the index of the removed separation; -1 if none found
 	 */
-	public int removeSeparation(String sep)
+	public int removeSeparation(final String sep)
 	{
-		VString vs = getSeparations();
+		final VString vs = getSeparations();
 		final int index = vs.index(sep);
 		if (index >= 0)
 		{
@@ -268,13 +236,13 @@ public class JDFSeparationList extends JDFAutoSeparationList
 
 	/**
 	 * Get the n'th separation name in the SeparationSpec elements
-	 * 
+	 *
 	 * @param iSkip the index of the SeparationSpec
 	 * @return separation names, null if iSkip > nSeparations
 	 */
-	public String getSeparation(int iSkip)
+	public String getSeparation(final int iSkip)
 	{
-		JDFSeparationSpec ss = getSeparationSpec(iSkip);
+		final JDFSeparationSpec ss = getSeparationSpec(iSkip);
 		if (ss == null)
 		{
 			return null;
@@ -283,14 +251,15 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	}
 
 	/**
-	 * 
+	 *
 	 * ensure that all separations are unique
+	 *
 	 * @return the unified vector of separation names
 	 */
 	public VString unify()
 	{
-		VString v = getSeparations();
-		int l = v.size();
+		final VString v = getSeparations();
+		final int l = v.size();
 		v.unify();
 		if (v.size() != l)
 			setSeparations(v);
@@ -298,14 +267,14 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	}
 
 	/**
-	 * 
+	 *
 	 * @param seps
 	 */
-	public void removeSeparations(VString seps)
+	public void removeSeparations(final VString seps)
 	{
 		if (seps != null)
 		{
-			for (String sep : seps)
+			for (final String sep : seps)
 			{
 				removeSeparation(sep);
 			}
