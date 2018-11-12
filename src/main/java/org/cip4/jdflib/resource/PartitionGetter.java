@@ -297,7 +297,7 @@ public class PartitionGetter
 			for (final JDFAttributeMap map : vm)
 			{
 				final JDFAttributeMap removeImplicitPartions = removeImplicitPartions(map.clone(), partUsage);
-				if (!removeImplicitPartions.isEmpty())
+				if (removeImplicitPartions != null && !removeImplicitPartions.isEmpty())
 				{
 					vmNew.appendUnique(removeImplicitPartions);
 				}
@@ -818,7 +818,8 @@ public class PartitionGetter
 		resourceRoot.setPartIDKeys(vPartIDKeys);
 		leafMap.updatePartIDKeys(vPartIDKeys);
 
-		if (vPartIDKeys.size() < partMap.size())
+		final int s = vPartIDKeys == null ? 0 : vPartIDKeys.size();
+		if (s < partMap.size())
 		{
 			throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + "insufficient partIDKeys " + leafMap.getPartIDKeys() + " for " + partMap);
 		}
