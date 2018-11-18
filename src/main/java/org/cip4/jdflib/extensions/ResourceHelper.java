@@ -39,6 +39,7 @@ package org.cip4.jdflib.extensions;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -208,6 +209,25 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 
 	/**
 	 *
+	 * @param src
+	 * @param key
+	 *
+	 */
+	public void ensureReference(final KElement src, String key)
+	{
+		if (src != null || theElement != null)
+		{
+			if (StringUtil.isEmpty(key))
+				key = getName();
+			if (!key.endsWith(JDFConstants.REF) && !key.endsWith(JDFConstants.REFS))
+				key += JDFConstants.REF;
+			final String id = ensureID();
+			src.setAttribute(key, id);
+		}
+	}
+
+	/**
+	 *
 	 * @param vPart the vector of partmaps to set the part element
 	 */
 	public void setPartMapVector(final VJDFAttributeMap vPart)
@@ -351,8 +371,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 */
 	public KElement getResource()
 	{
-		final KElement set = theElement.getParentNode_KElement();
-		final String name = set != null ? set.getAttribute(AttributeName.NAME, null, null) : null;
+		final String name = getName();
 		if (name != null)
 		{
 			return theElement.getElement(name);
@@ -371,12 +390,22 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
+	 *
+	 * @return the name of this resource - calculated from ResourceSet/@Name
+	 */
+	public String getName()
+	{
+		final SetHelper set = getSet();
+		final String name = set != null ? set.getName() : null;
+		return name;
+	}
+
+	/**
 	 * @return
 	 */
 	public KElement getCreateResource()
 	{
-		final KElement set = theElement.getParentNode_KElement();
-		final String name = set != null ? set.getAttribute(AttributeName.NAME, null, null) : null;
+		final String name = getName();
 		if (name != null)
 			return theElement.getCreateElement(name);
 		return null;
@@ -455,15 +484,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#hasAttribute(java.lang.String)
-	 */
-	@Override
-	public boolean hasAttribute(final String attName)
-	{
-		return StringUtil.getNonEmpty(getAttribute(attName, null, null)) != null;
-	}
-
-	/**
 	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getLinkRoot()
 	 */
 	@Override
@@ -515,13 +535,14 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	@Override
 	public void setExternalID(final String externalID)
 	{
-		setAttribute(XJDFConstants.ExternalID, externalID);
+		super.setExternalID(externalID);
 	}
 
 	/**
 	 * @return the descriptive name of the product
 	 *
 	 */
+	@Override
 	public String getDescriptiveName()
 	{
 		return getAttribute(AttributeName.DESCRIPTIVENAME);
@@ -531,6 +552,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 * @return the productID of the product
 	 *
 	 */
+	@Override
 	public String getExternalID()
 	{
 		return getAttribute(XJDFConstants.ExternalID);
@@ -555,6 +577,24 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public EnumResStatus getStatus()
 	{
 		return EnumResStatus.getEnum(getAttribute(AttributeName.STATUS));
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setDescriptiveName(java.lang.String)
+	 */
+	@Override
+	public void setDescriptiveName(final String description)
+	{
+		super.setDescriptiveName(description);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setGeneralID(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void setGeneralID(final String idUsage, final String idValue)
+	{
+		super.setGeneralID(idUsage, idValue);
 	}
 
 }

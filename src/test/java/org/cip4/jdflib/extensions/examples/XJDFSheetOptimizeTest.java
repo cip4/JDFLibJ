@@ -146,7 +146,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 		final String bsIJ = "BS_" + i + "_" + j;
 		partMap.put(XJDFConstants.BinderySignatureID, bsIJ);
 		final JDFLayout lo = (JDFLayout) layout.getCreatePartition(partMap, true).getResource();
-		final SetHelper sh = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		final SetHelper sh = xjdfHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 		final JDFBinderySignature bs = (JDFBinderySignature) sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsIJ), true).getResource();
 		bs.setBinderySignatureType(EnumBinderySignatureType.Grid);
 		final JDFPosition p = JDFPosition.createPosition(lo, i, j, 2, 2);

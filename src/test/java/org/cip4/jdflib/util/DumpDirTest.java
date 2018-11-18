@@ -109,6 +109,42 @@ public class DumpDirTest extends JDFTestCaseBase
 
 	}
 
+	class TestThread extends Thread
+	{
+		public TestThread(final DumpDir d)
+		{
+			super();
+			this.d = d;
+		}
+
+		DumpDir d;
+
+		/**
+		 * @see java.lang.Thread#run()
+		 */
+		@Override
+		public void run()
+		{
+			d.increment();
+		}
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testIncThread() throws Exception
+	{
+		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir2");
+		final DumpDir dumpDir = new DumpDir(theDir);
+		final int j = dumpDir.increment();
+		for (int i = 0; i < 10; i++)
+			new TestThread(dumpDir).start();
+		ThreadUtil.sleep(1234);
+		assertEquals(j + 11, dumpDir.increment());
+	}
+
 	/**
 	 * @throws Exception
 	 */

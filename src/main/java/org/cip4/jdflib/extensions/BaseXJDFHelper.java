@@ -102,6 +102,16 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 *
+	 * @param attName
+	 * @return
+	 */
+	public boolean hasAttribute(final String attName)
+	{
+		return theElement == null ? false : theElement.hasNonEmpty(attName);
+	}
+
+	/**
+	 *
 	 * @param attrib
 	 * @param nameSpaceURI
 	 */
@@ -229,9 +239,18 @@ public abstract class BaseXJDFHelper
 	 *
 	 * @param newID
 	 */
-	public void setExternalID(final String newID)
+	void setExternalID(final String newID)
 	{
 		setAttribute(XJDFConstants.ExternalID, newID);
+	}
+
+	/**
+	 *
+	 * @param description
+	 */
+	void setDescriptiveName(final String description)
+	{
+		setAttribute(AttributeName.DESCRIPTIVENAME, description);
 	}
 
 	/**
@@ -320,7 +339,7 @@ public abstract class BaseXJDFHelper
 	 * @param idUsage
 	 * @param idValue
 	 */
-	public void setGeneralID(final String idUsage, final String idValue)
+	void setGeneralID(final String idUsage, final String idValue)
 	{
 		if (theElement instanceof JDFElement)
 		{
@@ -343,6 +362,24 @@ public abstract class BaseXJDFHelper
 		{
 			return null;
 		}
+	}
+
+	/**
+	 * @return the productID of the product
+	 *
+	 */
+	public String getExternalID()
+	{
+		return getAttribute(XJDFConstants.ExternalID);
+	}
+
+	/**
+	 * @return the descriptive name of the product
+	 *
+	 */
+	public String getDescriptiveName()
+	{
+		return getAttribute(AttributeName.DESCRIPTIVENAME);
 	}
 
 }

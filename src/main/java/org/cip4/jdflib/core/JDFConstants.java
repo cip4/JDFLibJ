@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -312,6 +312,7 @@ public abstract class JDFConstants extends JDFCoreConstants
 	public static final String RIPPING = "Ripping";
 	/** * */
 	public static final String REF = "Ref"; // important: upper case "R"
+	public static final String REFS = "Refs"; // important: upper case "R"
 	// see AttributeName.REF for "ref" as attribute name
 	/** * */
 	public static final String RREF = "rRef";

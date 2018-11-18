@@ -238,6 +238,22 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	public void testGetCreateSet4()
+	{
+		assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input));
+		final SetHelper sh1 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", new JDFIntegerList(1));
+		assertNotNull(sh1);
+		final SetHelper sh2 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", new JDFIntegerList(2));
+		assertNotNull(sh2);
+		assertNotSame(sh1, sh2);
+
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
 	public void testNumProduct()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "root", null);

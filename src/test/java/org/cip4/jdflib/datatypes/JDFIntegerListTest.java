@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -110,11 +110,21 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 	public void testUnify()
 	{
 		final JDFIntegerList l = new JDFIntegerList(3);
-		l.setInt(0, 2);
-		l.setInt(1, 2);
-		l.setInt(2, 2);
+		l.setInt(0, 2).setInt(1, 2).setInt(2, 2);
 		l.unify();
 		assertEquals(l.get(0), 2);
 		assertEquals(1, l.size());
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testAdd()
+	{
+		final JDFIntegerList l = new JDFIntegerList(3);
+		l.add(4).add(5);
+		assertEquals(4, l.get(1));
+		assertEquals(3, l.size());
 	}
 }

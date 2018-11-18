@@ -1364,7 +1364,6 @@ public class JDFResource extends JDFElement
 	/**
 	 * Enumeration for attribute SpawnStatus
 	 */
-	@SuppressWarnings("unchecked")
 	public static final class EnumSpawnStatus extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -1428,8 +1427,6 @@ public class JDFResource extends JDFElement
 			return iterator(EnumSpawnStatus.class);
 		}
 
-		// EnumSpawnStatus : enums accordng to JDF spec 3.7, Table 3-11
-		// SpawnStatus
 		/**
 		 *
 		 */
@@ -2126,7 +2123,7 @@ public class JDFResource extends JDFElement
 	{
 		if (isResourceElement())
 			return this;
-		org.cip4.jdflib.resource.PartitionGetter pg = new org.cip4.jdflib.resource.PartitionGetter(this);
+		final org.cip4.jdflib.resource.PartitionGetter pg = new org.cip4.jdflib.resource.PartitionGetter(this);
 		return pg.getPartition(m, partUsage);
 	}
 
@@ -3133,7 +3130,7 @@ public class JDFResource extends JDFElement
 	 * Gets a map of all partition key-value pairs for this leaf / node. This includes a recursion to the part root.
 	 *
 	 * @param ids
-	 * @return JDFAttributeMap - the part attribute map for 'this' leaf / node - reused for performance enhancement
+	 * @return the part attribute map for 'this' leaf / node - reused for performance enhancement; never null
 	 */
 	public JDFAttributeMap getPartMap(final VString ids)
 	{
@@ -3153,7 +3150,7 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Gets a map of all partition key-value pairs for this leaf / node this includes a recursion to the part root;
+	 * Gets a map of all partition key-value pairs for this leaf / node this includes a recursion to the part root; never null
 	 *
 	 * @return JDFAttributeMap - the part attribute map for 'this' leaf / node
 	 */
@@ -6047,7 +6044,6 @@ public class JDFResource extends JDFElement
 	 *
 	 * @return Vector - list of all PipePartIDKey enums
 	 */
-	@SuppressWarnings("unchecked")
 	public Vector<EnumPartIDKey> getPipePartIDKeysEnum()
 	{
 		final VString vPartIDKeys = getPartIDKeys();

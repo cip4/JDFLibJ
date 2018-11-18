@@ -44,6 +44,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
@@ -59,9 +60,8 @@ import org.apache.commons.logging.LogFactory;
 public class DumpDir
 {
 
-	// ////////////////////////////////////////////////////////////////////////
 	private File baseDir = null;
-	private static HashMap<File, MyInteger> listMap = new HashMap<>();
+	private static HashMap<File, AtomicInteger> listMap = new HashMap<>();
 	private final int maxKeep = 666;
 	final protected Log log;
 	/**
@@ -75,11 +75,8 @@ public class DumpDir
 	 */
 	int increment()
 	{
-		synchronized (listMap)
-		{
-			final MyInteger i = listMap.get(baseDir);
-			return i.i++;
-		}
+		final AtomicInteger i = listMap.get(baseDir);
+		return i.incrementAndGet();
 	}
 
 	/**
@@ -94,10 +91,10 @@ public class DumpDir
 		baseDir.mkdirs();
 		synchronized (listMap)
 		{
-			MyInteger index = listMap.get(baseDir);
+			AtomicInteger index = listMap.get(baseDir);
 			if (index == null)
 			{
-				index = new MyInteger(0);
+				index = new AtomicInteger(0);
 				listMap.put(baseDir, index);
 			}
 			final String[] names = baseDir.list();
@@ -121,7 +118,7 @@ public class DumpDir
 					}
 				}
 			}
-			index.i = max;
+			index.set(max);
 		}
 	}
 
@@ -310,7 +307,7 @@ public class DumpDir
 	@Override
 	public String toString()
 	{
-		return "DumpDir " + baseDir + " i=" + listMap.get(baseDir).i;
+		return "DumpDir " + baseDir + " i=" + listMap.get(baseDir).get();
 	}
 
 }

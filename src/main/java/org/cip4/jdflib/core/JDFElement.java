@@ -3300,7 +3300,7 @@ public class JDFElement extends KElement
 	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize)
 	{
 
-		return getChildrenByTagName(elementName, nameSpaceURI, mAttrib, bDirect, bAnd, maxSize, !isWildCard(elementName) && !elementName.endsWith("Ref"));
+		return getChildrenByTagName(elementName, nameSpaceURI, mAttrib, bDirect, bAnd, maxSize, !isWildCard(elementName) && !elementName.endsWith(JDFConstants.REF));
 
 	}
 
@@ -6451,10 +6451,9 @@ public class JDFElement extends KElement
 							{
 								subPath += "/" + v.get(k);
 							}
-							subPath += "Ref";
-							for (int j = 0; j < vRefs.size(); j++)
+							subPath += JDFConstants.REF;
+							for (final KElement eRef : vRefs)
 							{
-								final KElement eRef = vRefs.item(j);
 								final boolean b = eRef.matchesPath(subPath, bFollowRefs);
 								if (b)
 								{
@@ -6465,18 +6464,6 @@ public class JDFElement extends KElement
 
 					}
 				}
-				// xpath is xpath -lets try not to be too smart implicitly
-				// if(eLast!=null)
-				// {
-				// if(eLast instanceof JDFResource)
-				// {
-				// if(locName.equals(eLast.getLocalName())){
-				// e=e.getParentNode_KElement();
-				// i++; // undo i--
-				// continue;
-				// }
-				// }
-				// }
 				return false;
 			}
 			eLast = e;

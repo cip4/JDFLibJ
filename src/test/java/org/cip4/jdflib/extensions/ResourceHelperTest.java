@@ -45,6 +45,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -347,6 +348,30 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		map.put("Side", "Front");
 
 		assertEquals(ph.getPartMap(), map);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testEnsureReference()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null);
+		final ResourceHelper rhm = h.getCreateSet(ElementName.MEDIA, null).getCreatePartition(null, false);
+		final KElement comp = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Input).getCreatePartition(null, true).getResource();
+		rhm.ensureReference(comp, null);
+		assertEquals(rhm.getID(), comp.getAttribute("MediaRef"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetName()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null);
+		final ResourceHelper rhm = h.getCreateSet(ElementName.MEDIA, null).getCreatePartition(null, false);
+		assertEquals(ElementName.MEDIA, rhm.getName());
 	}
 
 }

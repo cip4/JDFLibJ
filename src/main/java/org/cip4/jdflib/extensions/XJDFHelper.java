@@ -552,6 +552,25 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	/**
 	 * @param name
 	 * @param usage
+	 * @param processUsage
+	 *
+	 * @return the SetHelper for the vector of resourcesets
+	 */
+	public SetHelper getCreateSet(final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi)
+	{
+		SetHelper s0 = getSet(name, usage, processUsage, cpi);
+		if (s0 == null)
+		{
+			s0 = appendResourceSet(name, usage);
+			s0.setProcessUsage(processUsage);
+			s0.setCombinedProcessIndex(cpi);
+		}
+		return s0;
+	}
+
+	/**
+	 * @param name
+	 * @param usage
 	 *
 	 * @return the SetHelper for the vector of resourcesets
 	 */
@@ -938,6 +957,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 * @return the productID of the product
 	 *
 	 */
+	@Override
 	public String getDescriptiveName()
 	{
 		return getAttribute(AttributeName.DESCRIPTIVENAME);
@@ -1086,5 +1106,33 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	public static EnumVersion defaultVersion()
 	{
 		return EnumVersion.Version_2_0;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setExternalID(java.lang.String)
+	 */
+	@Override
+	void setExternalID(final String newID)
+	{
+		// TODO Auto-generated method stub
+		super.setExternalID(newID);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setDescriptiveName(java.lang.String)
+	 */
+	@Override
+	public void setDescriptiveName(final String description)
+	{
+		super.setDescriptiveName(description);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setGeneralID(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void setGeneralID(final String idUsage, final String idValue)
+	{
+		super.setGeneralID(idUsage, idValue);
 	}
 }

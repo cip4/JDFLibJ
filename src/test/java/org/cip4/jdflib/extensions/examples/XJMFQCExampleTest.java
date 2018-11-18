@@ -43,6 +43,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFLabColor;
 import org.cip4.jdflib.datatypes.JDFTransferFunction;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.MessageHelper;
@@ -68,6 +69,7 @@ import org.junit.Test;
 public class XJMFQCExampleTest extends JDFTestCaseBase
 {
 
+	private static final String SPECTRUM = "Spectrum";
 	public static final String PATCH = "Patch";
 	public static final String COLOR_MEASUREMENT = "ColorMeasurement";
 
@@ -162,8 +164,9 @@ public class XJMFQCExampleTest extends JDFTestCaseBase
 			for (int j = 1; j < 40; j++)
 				v.add(Double.valueOf(60.345 * (i + 1) * j % 567));
 			tf.set(380, 5, v);
-			patch.setAttribute("Spectrum", tf.getString(2));
+			patch.setAttribute(SPECTRUM, tf.getString(2));
 			patch.setAttribute(AttributeName.POSITION, new JDFXYPair(10, 10 + i * 30).getString(1));
+			patch.setAttribute(AttributeName.CIELAB, new JDFLabColor(0, 0.6, 0.6).getString(4));
 
 		}
 		setSnippet(xjmfHelper, true);

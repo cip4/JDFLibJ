@@ -826,13 +826,20 @@ public class PartitionGetter
 		return r;
 	}
 
+	/**
+	 *
+	 * @param partMap
+	 * @param vPartKeys
+	 * @return
+	 */
 	VString updatePartIDKeys(final JDFAttributeMap partMap, VString vPartKeys)
 	{
 		final int lastPos = 1 + lastPos(partMap, vPartKeys, false);
-		if (vPartKeys != null && lastPos < vPartKeys.size())
+		final int size = vPartKeys.size();
+		if (vPartKeys != null && lastPos < size)
 		{
 			vPartKeys = new VString(vPartKeys);
-			while (lastPos < vPartKeys.size())
+			while (lastPos < size)
 			{
 				vPartKeys.remove(lastPos);
 			}
@@ -849,7 +856,7 @@ public class PartitionGetter
 			vPartIDKeys = (VString) ContainerUtil.addAll(vPartIDKeys, newKeys);
 		}
 		// only heuristically add stuff if needed...
-		if (newKeys.size() > 1)
+		else if (newKeys.size() > 1)
 		{
 			vPartIDKeys = expandKeysFromNode(partMap, vPartIDKeys);
 		}
@@ -1047,14 +1054,12 @@ public class PartitionGetter
 			{
 				if (!vPartIDKeysIterator.next().equals(nodeKeysIterator.next()))
 				{
-					return vPartIDKeys; // nodekeys and partkeys are
-					// incompatible, return the input
+					return vPartIDKeys; // nodekeys and partkeys are incompatible, return the input
 				}
 			}
 		}
 
-		// all beginning elements are equal but we have more - use these as a
-		// best guess
+		// all beginning elements are equal but we have more - use these as a best guess
 		return nodeKeys;
 	}
 

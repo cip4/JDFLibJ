@@ -875,7 +875,7 @@ class PostXJDFWalker extends BaseElementWalker
 			moveGangSourceFromStripping(ni, bsID, strippingParams);
 
 			updatePositions(bsID, layoutPartition);
-			strippingParams.removeAttribute(ElementName.BINDERYSIGNATURE + "Ref");
+			strippingParams.removeAttribute(ElementName.BINDERYSIGNATURE + JDFConstants.REF);
 			strippingParams.removeAttribute(XJDFConstants.BinderySignatureID);
 			if (layoutPartition.hasChildElement(ElementName.FILESPEC, null))
 				strippingParams.removeChildrenByClass(JDFFileSpec.class);

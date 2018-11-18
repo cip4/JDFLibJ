@@ -661,9 +661,10 @@ public class JDFMerge
 			// found only a root or high level partition for an rw resource partition
 			// try to create the new partition and pray that it will not be subsequently completely overwritten
 			// this is still better than throwing an exception or silently ignoring the rw resource
-			if ((src.getLocked() == false) && (trgMap.getKeys().size() < srcMap.getKeys().size()))
+			if ((src.getLocked() == false) && (trgMap.size() < srcMap.size()))
 			{
-				LogFactory.getLog(JDFMerge.class).warn(targetRes.getLocalName() + " ID=" + targetRes.getID() + " - creating non existing rw partition: " + srcMap);
+				LogFactory.getLog(JDFMerge.class)
+						.warn(targetRes.getLocalName() + " ID=" + targetRes.getID() + " - creating non existing rw partition: " + srcMap.showKeys(null) + " in " + trgMap.showKeys(null));
 				trg = targetRes.getCreatePartition(srcMap, partIDKeys);
 				// fool the algorithm to think that the new partition is rw (which it probably was)
 				trg.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
