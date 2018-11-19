@@ -215,7 +215,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 */
 	public void ensureReference(final KElement src, String key)
 	{
-		if (src != null || theElement != null)
+		if (src != null && theElement != null)
 		{
 			if (StringUtil.isEmpty(key))
 				key = getName();
