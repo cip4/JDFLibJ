@@ -262,8 +262,12 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		final File file = new File(theHFDir + File.separator + "42 äöü €.txt");
 		file.createNewFile();
-		assertTrue(file.exists());
-		ThreadUtil.sleep(2000);
+		for (int i = 0; i < 1234; i++)
+		{
+			ThreadUtil.sleep(42);
+			if (!file.exists())
+				break;
+		}
 		assertFalse(file.exists());
 		assertEquals(tmpHFDir.listFiles().length, 0, 0);
 		hf.stop();
