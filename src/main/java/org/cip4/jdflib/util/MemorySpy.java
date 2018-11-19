@@ -3,73 +3,41 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *  
- * 
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ *
+ *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.util;
 
@@ -85,16 +53,17 @@ import java.util.Map;
 import java.util.Vector;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class MemorySpy
 {
 	private final List<MemoryPoolMXBean> memList;
 	private final MemoryMXBean mainBean;
+	static final long MEGA = 1024l * 1024l;
+	private boolean wantMega;
 
 	/**
-	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
-	  * the scope of the 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen * the scope of the
 	 */
 	public static enum MemScope
 	{
@@ -111,27 +80,28 @@ public class MemorySpy
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public MemorySpy()
 	{
 		memList = ManagementFactory.getMemoryPoolMXBeans();
 		mainBean = ManagementFactory.getMemoryMXBean();
+		wantMega = false;
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public Map<String, Long> getSizeMap()
 	{
-		HashMap<String, Long> map = new HashMap<String, Long>();
+		final HashMap<String, Long> map = new HashMap<>();
 		map.put("heap", Long.valueOf(mainBean.getHeapMemoryUsage().getUsed()));
 		map.put("non-heap", Long.valueOf(mainBean.getNonHeapMemoryUsage().getUsed()));
-		Iterator<MemoryPoolMXBean> it = memList.iterator();
+		final Iterator<MemoryPoolMXBean> it = memList.iterator();
 		while (it.hasNext())
 		{
-			MemoryPoolMXBean poolBean = it.next();
+			final MemoryPoolMXBean poolBean = it.next();
 			map.put(poolBean.getName(), Long.valueOf(poolBean.getUsage().getUsed()));
 			map.put("comitted " + poolBean.getName(), Long.valueOf(poolBean.getUsage().getCommitted()));
 			map.put("peak " + poolBean.getName(), Long.valueOf(poolBean.getPeakUsage().getUsed()));
@@ -140,33 +110,33 @@ public class MemorySpy
 	}
 
 	/**
-	 * 
-	 * @param scope 
+	 *
+	 * @param scope
 	 * @return
 	 */
-	public long getHeapUsed(MemScope scope)
+	public long getHeapUsed(final MemScope scope)
 	{
-		MemoryUsage usage = mainBean.getHeapMemoryUsage();
-		return getMem(usage, scope);
+		final MemoryUsage usage = mainBean.getHeapMemoryUsage();
+		return getMem(usage, scope) / getFactor();
 	}
 
 	/**
-	 * 
-	 * @param scope 
+	 *
+	 * @param scope
 	 * @return
 	 */
-	public long getNonHeapUsed(MemScope scope)
+	public long getNonHeapUsed(final MemScope scope)
 	{
-		MemoryUsage usage = mainBean.getNonHeapMemoryUsage();
-		return getMem(usage, scope);
+		final MemoryUsage usage = mainBean.getNonHeapMemoryUsage();
+		return getMem(usage, scope) / getFactor();
 	}
 
 	/**
-	 * 
-	 * @param scope 
+	 *
+	 * @param scope
 	 * @return
 	 */
-	public long getPermGen(MemScope scope)
+	public long getPermGen(final MemScope scope)
 	{
 		return getMemFromPool("Perm Gen", scope);
 	}
@@ -175,19 +145,19 @@ public class MemorySpy
 	 * @param name
 	 * @return
 	 */
-	private MemoryPoolMXBean getBeanFromPool(String name)
+	private MemoryPoolMXBean getBeanFromPool(final String name)
 	{
-		Iterator<MemoryPoolMXBean> it = memList.iterator();
+		final Iterator<MemoryPoolMXBean> it = memList.iterator();
 		while (it.hasNext())
 		{
-			MemoryPoolMXBean poolBean = it.next();
+			final MemoryPoolMXBean poolBean = it.next();
 			if (name.endsWith(poolBean.getName()))
 				return poolBean;
 		}
 		return null;
 	}
 
-	private long getMem(MemoryUsage usage, MemScope scope)
+	private long getMem(final MemoryUsage usage, final MemScope scope)
 	{
 		if (MemScope.current.equals(scope) || MemScope.peak.equals(scope))
 		{
@@ -207,72 +177,82 @@ public class MemorySpy
 	}
 
 	/**
-	 * 
+	 *
 	 * @param name
 	 * @param scope
 	 * @return
 	 */
-	public long getMemFromPool(String name, MemScope scope)
+	public long getMemFromPool(final String name, final MemScope scope)
 	{
-		MemoryPoolMXBean bean = getBeanFromPool(name);
+		final MemoryPoolMXBean bean = getBeanFromPool(name);
 		if (bean == null)
 			return -1;
-		boolean peak = MemScope.peak.equals(scope) || MemScope.peakCommit.equals(scope);
-		MemoryUsage usage = peak ? bean.getPeakUsage() : bean.getUsage();
-		return getMem(usage, scope);
+		final boolean peak = MemScope.peak.equals(scope) || MemScope.peakCommit.equals(scope);
+		final MemoryUsage usage = peak ? bean.getPeakUsage() : bean.getUsage();
+		return getMem(usage, scope) / getFactor();
 	}
 
 	/**
-	 * 
+	 *
 	 * get a fast summary for debugging
+	 *
 	 * @return
 	 */
 	public String getSummary()
 	{
-		StringBuffer b = new StringBuffer();
-		Map<String, Long> map = getSummaryMap();
-		for (String s : map.keySet())
-			b.append("Mem ").append(s).append(": ").append(map.get(s) / 1000 / 1000.).append("\n");
+		final StringBuffer b = new StringBuffer();
+		final Map<String, Long> map = getSummaryMap();
+		for (final String s : map.keySet())
+			b.append("Mem ").append(s).append(": ").append(map.get(s)).append("\n");
 		return b.toString();
 	}
 
 	/**
 	 * get the currently used memory
+	 *
 	 * @return the used memory
 	 */
 	public long getCurrentMem()
 	{
 		final Runtime rt = Runtime.getRuntime();
-		return rt.totalMemory() - rt.freeMemory();
+		return (rt.totalMemory() - rt.freeMemory()) / getFactor();
 	}
 
 	/**
-	 * 
+	 *
 	 * get a fast summary for debugging
+	 *
 	 * @return
 	 */
 	public Map<String, Long> getSummaryMap()
 	{
-		HashMap<String, Long> map = new HashMap<String, Long>();
-		map.put("Free", Runtime.getRuntime().freeMemory());
-		map.put("Total", Runtime.getRuntime().totalMemory());
-		map.put("Current", getHeapUsed(MemScope.current));
+		final long div = getFactor();
+		final HashMap<String, Long> map = new HashMap<>();
+		map.put("Free", Runtime.getRuntime().freeMemory() / div);
+		map.put("Total", Runtime.getRuntime().totalMemory() / div);
+		map.put("Current", getHeapUsed(MemScope.current) / div);
 		return map;
 	}
 
+	long getFactor()
+	{
+		final long div = wantMega ? MEGA : 1l;
+		return div;
+	}
+
 	/**
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 * @return
 	 */
 	@Override
 	public String toString()
 	{
-		Map<String, Long> sizeMap = getSizeMap();
-		Vector<String> keys = ContainerUtil.getKeyVector(sizeMap);
+		final Map<String, Long> sizeMap = getSizeMap();
+		final Vector<String> keys = ContainerUtil.getKeyVector(sizeMap);
 		Collections.sort(keys);
-		StringBuffer b = new StringBuffer("MemorySpy: \n");
-		for (String key : keys)
+		final StringBuffer b = new StringBuffer("MemorySpy: \n");
+		for (final String key : keys)
 		{
 			b.append(key);
 			b.append(" = ");
@@ -280,5 +260,24 @@ public class MemorySpy
 			b.append("\n");
 		}
 		return b.toString();
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public boolean isWantMega()
+	{
+		return wantMega;
+	}
+
+	/**
+	 * if true we want it in Megabytes
+	 * 
+	 * @param wantMega
+	 */
+	public void setWantMega(final boolean wantMega)
+	{
+		this.wantMega = wantMega;
 	}
 }

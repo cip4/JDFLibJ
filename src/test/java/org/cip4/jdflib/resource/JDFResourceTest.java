@@ -2052,12 +2052,12 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 		}
 		final long t2 = System.currentTimeMillis();
-		log.info("time: " + (t2 - t1));
+		log.info("time 21: " + (t2 - t1));
 
 		final LinkRefFinder lrf = new LinkRefFinder(true, true);
 		final VectorMap<String, KElement> vm = lrf.getMap(n);
 		final long t3 = System.currentTimeMillis();
-		log.info("time: " + (t3 - t2));
+		log.info("time 32: " + (t3 - t2));
 		for (int i = 0; i < 500; i++)
 		{
 			final JDFMedia m2 = (JDFMedia) vM.get(i);
@@ -2066,7 +2066,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 			assertEquals("A link and a ref", vRef.size(), 2);
 		}
 		final long t4 = System.currentTimeMillis();
-		log.info("time: " + (t4 - t3));
+		log.info("time 43: " + (t4 - t3));
 	}
 
 	/**

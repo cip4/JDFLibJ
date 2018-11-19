@@ -2007,7 +2007,14 @@ public class JDFResource extends JDFElement
 			final VElement vRet;
 			if (bRef)
 			{
-				vRet = n.getChildrenFromList(refList, mID, false, null);
+				if (bLink)
+				{
+					vRet = n.getChildrenFromList(refList, mID, false, null);
+				}
+				else
+				{
+					vRet = n.getChildrenByTagName(getRefString(), null, mID, false, false, 0);
+				}
 			}
 			else
 			{
