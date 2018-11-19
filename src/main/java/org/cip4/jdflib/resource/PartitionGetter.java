@@ -835,7 +835,7 @@ public class PartitionGetter
 	VString updatePartIDKeys(final JDFAttributeMap partMap, VString vPartKeys)
 	{
 		final int lastPos = 1 + lastPos(partMap, vPartKeys, false);
-		final int size = vPartKeys.size();
+		final int size = vPartKeys == null ? 0 : vPartKeys.size();
 		if (vPartKeys != null && lastPos < size)
 		{
 			vPartKeys = new VString(vPartKeys);
