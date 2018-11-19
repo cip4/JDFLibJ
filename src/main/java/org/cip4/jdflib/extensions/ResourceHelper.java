@@ -396,7 +396,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public String getName()
 	{
 		final SetHelper set = getSet();
-		final String name = set != null ? set.getName() : null;
+		final String name = set != null ? set.getAttribute(AttributeName.NAME) : null;
 		return name;
 	}
 
