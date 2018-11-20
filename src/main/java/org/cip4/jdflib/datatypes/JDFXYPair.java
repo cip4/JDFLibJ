@@ -3,70 +3,38 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *  
- * 
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ *
+ *
  */
 /**
  *
@@ -82,6 +50,7 @@ package org.cip4.jdflib.datatypes;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -91,7 +60,7 @@ import org.cip4.jdflib.util.StringUtil;
 public class JDFXYPair extends JDFNumList
 {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -107,9 +76,9 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * constructs a xy pair with all values set via a Vector of Double objects
-	 * 
+	 *
 	 * @param v Vector of Double
-	 * 
+	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 * @deprecated use typesafe constructors
 	 */
@@ -120,11 +89,10 @@ public class JDFXYPair extends JDFNumList
 	}
 
 	/**
-	 * constructs a xy pair with all values set via a String
-	 * if a single numerical value is specified, s is padded with " 0"
-	 * 
+	 * constructs a xy pair with all values set via a String if a single numerical value is specified, s is padded with " 0"
+	 *
 	 * @param s the given String
-	 * 
+	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFXYPair(final String s) throws DataFormatException
@@ -134,10 +102,11 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * factory for JDFXYPair that silently returns null in case of illegal strings
+	 *
 	 * @param s the string to parse
 	 * @return the JDFXYPair, null if s is not compatible
 	 */
-	public static JDFXYPair createXYPair(String s)
+	public static JDFXYPair createXYPair(final String s)
 	{
 		if (s != null && s.length() > 0)
 		{
@@ -145,7 +114,7 @@ public class JDFXYPair extends JDFNumList
 			{
 				return new JDFXYPair(s);
 			}
-			catch (DataFormatException x)
+			catch (final DataFormatException x)
 			{
 				return null;
 			}
@@ -158,9 +127,9 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * constructs a xy pair with all values set via a JDFNumberList
-	 * 
+	 *
 	 * @param nl the given number list
-	 * 
+	 *
 	 * @throws DataFormatException - if the JDFNumberList has not a valid format
 	 */
 	public JDFXYPair(final JDFNumList nl) throws DataFormatException
@@ -170,9 +139,9 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * constructs a xy pair with all values set via a JDFNumberList
-	 * 
+	 *
 	 * @param shape the given number list
-	 * 
+	 *
 	 */
 	public JDFXYPair(final JDFShape shape)
 	{
@@ -183,10 +152,10 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * constructs a xy pair with all values set via a JDFNumberList
-	 * 
+	 *
 	 * @param nl the given number list
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	public JDFXYPair(final JDFXYPair nl)
 	{
@@ -196,7 +165,7 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * constructs a new JDFXYPair with the given double values
-	 * 
+	 *
 	 * @param x the x coordinate
 	 * @param y the y coordinate
 	 */
@@ -211,7 +180,7 @@ public class JDFXYPair extends JDFNumList
 	// *********************************************
 	/**
 	 * isValid - valid if the size of the vector is 2 and all instances are Double types
-	 * 
+	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
 	@Override
@@ -222,7 +191,7 @@ public class JDFXYPair extends JDFNumList
 			throw new DataFormatException("Data format exception!" + size());
 		}
 
-		for (Object o : this)
+		for (final Object o : this)
 		{
 			if (!(o instanceof Double))
 			{
@@ -234,7 +203,7 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * getX - returns the x coordinate
-	 * 
+	 *
 	 * @return double - the x coordinate
 	 */
 	public double getX()
@@ -244,7 +213,7 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * setX - sets the x coordinate
-	 * 
+	 *
 	 * @param x the x coordinate
 	 */
 	public void setX(final double x)
@@ -254,7 +223,7 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * getY - returns the y coordinate
-	 * 
+	 *
 	 * @return double - the y coordinate
 	 */
 	public double getY()
@@ -263,19 +232,19 @@ public class JDFXYPair extends JDFNumList
 	}
 
 	/**
-	 * swap x and y coordinates - 
-	 * 
+	 * swap x and y coordinates -
+	 *
 	 */
 	public void swapXY()
 	{
-		double tmp = getX();
+		final double tmp = getX();
 		setX(getY());
 		setY(tmp);
 	}
 
 	/**
 	 * setY - sets the y coordinate
-	 * 
+	 *
 	 * @param y the y coordinate
 	 */
 	public void setY(final double y)
@@ -285,7 +254,7 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * isGreaterOrEqual - equality operator >=
-	 * 
+	 *
 	 * @param x the JDFXYPair object to compare to
 	 * @return boolean - true if this >= x
 	 */
@@ -296,7 +265,7 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * isLessOrEqual - equality operator <=
-	 * 
+	 *
 	 * @param x the JDFXYPair object to compare to
 	 * @return boolean - true if this <= x
 	 */
@@ -307,7 +276,7 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * isGreater - equality operator >
-	 * 
+	 *
 	 * @param x the JDFXYPair object to compare to
 	 * @return boolean - true if this > x
 	 */
@@ -318,7 +287,7 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * return true if y is > x
-	 *  
+	 *
 	 * @return
 	 */
 	public boolean isPortrait()
@@ -328,7 +297,7 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * isLess - equality operator <
-	 * 
+	 *
 	 * @param x the JDFXYPair object to compare to
 	 * @return boolean - true if this < x
 	 */
@@ -339,25 +308,26 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * setString with some heuristics to allow for a single numerical or values like "i/j"
+	 *
 	 * @see org.cip4.jdflib.datatypes.JDFNumList#setString(java.lang.String)
 	 */
 	@Override
-	public void setString(String string) throws DataFormatException
+	public JDFXYPair setString(final String string) throws DataFormatException
 	{
 		try
 		{
 			super.setString(string);
 		}
-		catch (DataFormatException x)
+		catch (final DataFormatException x)
 		{
-			Double d = StringUtil.parseDouble(string, Double.NaN);
+			final Double d = StringUtil.parseDouble(string, Double.NaN);
 			if (!Double.isNaN(d))
 			{
 				super.setString(string + " 0");
 			}
 			else
 			{
-				VString v = StringUtil.tokenize(string, "/", false);
+				final VString v = StringUtil.tokenize(string, JDFConstants.SLASH, false);
 				if (v.size() == 2)
 				{
 					super.setString(StringUtil.replaceChar(string, '/', " ", 0));
@@ -368,5 +338,6 @@ public class JDFXYPair extends JDFNumList
 				}
 			}
 		}
+		return this;
 	}
 }

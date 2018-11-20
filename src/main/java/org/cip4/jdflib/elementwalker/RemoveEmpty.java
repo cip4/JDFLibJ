@@ -489,6 +489,11 @@ public class RemoveEmpty extends BaseElementWalker
 			return hasGood ? e1 : super.walk(e1, trackElem);
 		}
 
+		/**
+		 *
+		 * @param r
+		 * @return
+		 */
 		boolean checkLinks(final JDFResource r)
 		{
 			boolean hasGood = false;
