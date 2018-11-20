@@ -1723,7 +1723,7 @@ public class KElement extends ElementNSImpl implements Element
 
 	/**
 	 * Get all children from the actual element matching the given conditions<br>
-	 * does NOT get refElement targets although the attributes are checked in the target elements in case of refElements
+	 * does NOT get refElement targets although the attributes are checked in the target elements in case of refElements never null
 	 *
 	 * @param clazz
 	 * @param <a>

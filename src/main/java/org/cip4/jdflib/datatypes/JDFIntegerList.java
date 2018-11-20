@@ -456,18 +456,18 @@ public class JDFIntegerList extends JDFNumList
 	 * @throws IllegalArgumentException if sizes don't match
 	 */
 	@Override
-	public void subtract(final JDFNumList l)
+	public JDFIntegerList subtract(final JDFNumList l)
 	{
-		if (l == null || size() != l.size())
-			return;
-
-		final int[] me = getIntArray();
-		final int[] them = l.getIntArray();
-		for (int i = 0; i < me.length; i++)
+		if (l != null && size() == l.size())
 		{
-			me[i] -= them[i];
-			setElementAt(Integer.valueOf(me[i]), i);
+			final int[] me = getIntArray();
+			final int[] them = l.getIntArray();
+			for (int i = 0; i < me.length; i++)
+			{
+				me[i] -= them[i];
+				setElementAt(Integer.valueOf(me[i]), i);
+			}
 		}
+		return this;
 	}
-
 }

@@ -199,9 +199,10 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * @param pos
 	 * @param d
 	 */
-	public void set(final int pos, final double d)
+	public JDFNumList set(final int pos, final double d)
 	{
 		super.set(pos, Double.valueOf(d));
+		return this;
 	}
 
 	/**
@@ -211,7 +212,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * @param string
 	 * @throws DataFormatException
 	 */
-	public void setString(final String string) throws DataFormatException
+	public JDFNumList setString(final String string) throws DataFormatException
 	{
 		clear();
 		if (string != null && string.length() > 0)
@@ -247,6 +248,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 		{
 			throw new DataFormatException("JDFNumList: bad string value: " + string);
 		}
+		return this;
 	}
 
 	/**
@@ -755,18 +757,20 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * @param l the list to subtract from this
 	 * @throws IllegalArgumentException if sizes don't match
 	 */
-	public void subtract(final JDFNumList l)
+	public JDFNumList subtract(final JDFNumList l)
 	{
-		if (l == null || size() != l.size())
-			return;
-
-		final double[] me = getDoubleList();
-		final double[] them = l.getDoubleList();
-		for (int i = 0; i < me.length; i++)
+		if (l != null && size() == l.size())
 		{
-			me[i] -= them[i];
-			setElementAt(Double.valueOf(me[i]), i);
+
+			final double[] me = getDoubleList();
+			final double[] them = l.getDoubleList();
+			for (int i = 0; i < me.length; i++)
+			{
+				me[i] -= them[i];
+				setElementAt(Double.valueOf(me[i]), i);
+			}
 		}
+		return this;
 	}
 
 	/**
@@ -778,7 +782,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	{
 		final Set<Object> set = new HashSet<>();
 		int j = 0;
-		int size = size();
+		final int size = size();
 		for (int i = 0; i < size; i++)
 		{
 			if (set.contains(elementAt(j)))

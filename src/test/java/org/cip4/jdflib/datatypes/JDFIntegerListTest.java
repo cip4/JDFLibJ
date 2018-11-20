@@ -47,6 +47,8 @@ package org.cip4.jdflib.datatypes;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.zip.DataFormatException;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.Test;
 
@@ -126,5 +128,22 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 		l.add(4).add(5);
 		assertEquals(4, l.get(1));
 		assertEquals(3, l.size());
+	}
+
+	/**
+	 * @throws DataFormatException
+	 *
+	 */
+	@Test
+	public void testSubtract() throws DataFormatException
+	{
+		final JDFIntegerList l = new JDFIntegerList(3);
+		l.add(4);
+		final JDFIntegerList l2 = new JDFIntegerList(l);
+		l.subtract(l2);
+		assertEquals(0, l.get(0));
+		assertEquals(0, l.get(1));
+		assertEquals(2, l.size());
+
 	}
 }
