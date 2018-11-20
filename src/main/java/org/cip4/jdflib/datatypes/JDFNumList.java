@@ -94,6 +94,8 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTypes, Cloneable
 {
+	final private static int INT_NAN = Integer.MIN_VALUE + 42; // a bit off but rare...
+
 	/**
 	 *
 	 *
@@ -215,33 +217,15 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	public JDFNumList setString(final String string) throws DataFormatException
 	{
 		clear();
-		if (string != null && string.length() > 0)
+		final VString v = StringUtil.tokenize(string, null, false);
+		if (v != null)
 		{
-			final VString v = StringUtil.tokenize(string, null, false);
-			if (v != null)
+			final boolean bInteger = this instanceof JDFIntegerList;
+			for (final String s : v)
 			{
-				final int size = v.size();
-				final boolean bInteger = this instanceof JDFIntegerList;
-				final int minValue = Integer.MIN_VALUE + 42; // a bit off but rare...
-				for (int i = 0; i < size; i++)
-				{
-					final String s = v.get(i);
-					if (bInteger)
-					{
-						final int theInt = StringUtil.parseInt(s, minValue);
-						if (theInt == minValue)
-							throw new DataFormatException("JDFNumList: bad numeric value: " + s);
-						addElement(Integer.valueOf(theInt));
-					}
-					else
-					{
-						final double theDouble = StringUtil.parseDouble(s, Double.NaN);
-						if (Double.isNaN(theDouble))
-							throw new DataFormatException("JDFNumList: bad numeric value: " + s);
-						addElement(Double.valueOf(theDouble));
-					}
-				}
+				setSingle(bInteger, s);
 			}
+
 			isValid();
 		}
 		else
@@ -249,6 +233,24 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 			throw new DataFormatException("JDFNumList: bad string value: " + string);
 		}
 		return this;
+	}
+
+	void setSingle(final boolean bInteger, final String s) throws DataFormatException
+	{
+		if (bInteger)
+		{
+			final int theInt = StringUtil.parseInt(s, INT_NAN);
+			if (theInt == INT_NAN)
+				throw new DataFormatException("JDFNumList: bad numeric value: " + s);
+			addElement(Integer.valueOf(theInt));
+		}
+		else
+		{
+			final double theDouble = StringUtil.parseDouble(s, Double.NaN);
+			if (Double.isNaN(theDouble))
+				throw new DataFormatException("JDFNumList: bad numeric value: " + s);
+			addElement(Double.valueOf(theDouble));
+		}
 	}
 
 	/**
