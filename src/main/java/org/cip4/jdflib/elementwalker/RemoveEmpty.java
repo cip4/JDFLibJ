@@ -550,10 +550,10 @@ public class RemoveEmpty extends BaseElementWalker
 
 		Vector<JDFRefElement> getRefs(final JDFResource r)
 		{
-			final Vector<KElement> v = rf.getTheMap().get(r.getID());
-			final Vector<JDFRefElement> vr = new Vector<>();
+			final Vector<KElement> v = rf == null ? null : rf.getTheMap().get(r.getID());
 			if (v != null)
 			{
+				final Vector<JDFRefElement> vr = new Vector<>();
 				for (final KElement e : v)
 				{
 					if (e instanceof JDFRefElement)
@@ -561,16 +561,17 @@ public class RemoveEmpty extends BaseElementWalker
 						vr.add((JDFRefElement) e);
 					}
 				}
+				return vr.isEmpty() ? null : vr;
 			}
-			return vr.isEmpty() ? null : vr;
+			return null;
 		}
 
 		Vector<JDFResourceLink> getLinks(final JDFResource r)
 		{
-			final Vector<KElement> v = rf.getTheMap().get(r.getID());
-			final Vector<JDFResourceLink> vr = new Vector<>();
+			final Vector<KElement> v = rf == null ? null : rf.getTheMap().get(r.getID());
 			if (v != null)
 			{
+				final Vector<JDFResourceLink> vr = new Vector<>();
 				for (final KElement e : v)
 				{
 					if (e instanceof JDFResourceLink)
@@ -578,8 +579,9 @@ public class RemoveEmpty extends BaseElementWalker
 						vr.add((JDFResourceLink) e);
 					}
 				}
+				return vr.isEmpty() ? null : vr;
 			}
-			return vr.isEmpty() ? null : vr;
+			return null;
 		}
 	}
 
