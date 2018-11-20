@@ -39,6 +39,8 @@
  */
 package org.cip4.jdflib.elementwalker;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 import java.util.Vector;
 
@@ -497,7 +499,7 @@ public class RemoveEmpty extends BaseElementWalker
 		boolean checkLinks(final JDFResource r)
 		{
 			boolean hasGood = false;
-			final Vector<JDFResourceLink> links = getLinks(r);
+			final Collection<JDFResourceLink> links = getLinks(r);
 			if (links != null)
 			{
 				for (final JDFResourceLink rl : links)
@@ -525,7 +527,7 @@ public class RemoveEmpty extends BaseElementWalker
 		boolean checkRef(final JDFResource r)
 		{
 			boolean hasGood = false;
-			final Vector<JDFRefElement> v = getRefs(r);
+			final Collection<JDFRefElement> v = getRefs(r);
 			if (v != null)
 			{
 				final JDFAttributeMap myMap = r.getPartMap();
@@ -537,23 +539,22 @@ public class RemoveEmpty extends BaseElementWalker
 						hasGood = true;
 						break;
 					}
-					else
-					{
-						hasGood = true;
-					}
-					if (hasGood)
-						break;
 				}
 			}
 			return hasGood;
 		}
 
-		Vector<JDFRefElement> getRefs(final JDFResource r)
+		/**
+		 *
+		 * @param r
+		 * @return
+		 */
+		Collection<JDFRefElement> getRefs(final JDFResource r)
 		{
 			final Vector<KElement> v = rf == null ? null : rf.getTheMap().get(r.getID());
 			if (v != null)
 			{
-				final Vector<JDFRefElement> vr = new Vector<>();
+				final ArrayList<JDFRefElement> vr = new ArrayList<>();
 				for (final KElement e : v)
 				{
 					if (e instanceof JDFRefElement)
@@ -566,12 +567,17 @@ public class RemoveEmpty extends BaseElementWalker
 			return null;
 		}
 
-		Vector<JDFResourceLink> getLinks(final JDFResource r)
+		/**
+		 *
+		 * @param r
+		 * @return
+		 */
+		Collection<JDFResourceLink> getLinks(final JDFResource r)
 		{
 			final Vector<KElement> v = rf == null ? null : rf.getTheMap().get(r.getID());
 			if (v != null)
 			{
-				final Vector<JDFResourceLink> vr = new Vector<>();
+				final ArrayList<JDFResourceLink> vr = new ArrayList<>();
 				for (final KElement e : v)
 				{
 					if (e instanceof JDFResourceLink)

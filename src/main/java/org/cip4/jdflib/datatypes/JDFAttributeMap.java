@@ -356,7 +356,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public boolean overlapMap(final JDFAttributeMap subMap)
 	{
-		if (subMap == null || subMap.size() == 0)
+		if (subMap == null || subMap.isEmpty())
 		{
 			return true;
 		}

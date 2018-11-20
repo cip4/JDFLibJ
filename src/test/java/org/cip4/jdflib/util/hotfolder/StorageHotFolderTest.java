@@ -211,7 +211,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		ThreadUtil.sleep(420);
 		assertFalse(file.getAbsolutePath(), file.exists());
 		assertFalse(content.getAbsolutePath(), content.exists());
-		assertEquals(tmpHFDir.listFiles().length, 0, 0);
+		assertEquals(tmpHFDir.listFiles().length, 0, 1);
 		hf.stop();
 	}
 
