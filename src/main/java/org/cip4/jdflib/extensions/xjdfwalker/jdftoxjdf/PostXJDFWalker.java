@@ -364,6 +364,15 @@ class PostXJDFWalker extends BaseElementWalker
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			final KElement walk = super.walk(xjdf, dummy);
+			if (!retainAll)
+			{
+				splitPartVersion(xjdf, walk);
+			}
+			return walk;
+		}
+
+		void splitPartVersion(final KElement xjdf, final KElement walk)
+		{
 			final VString pv = StringUtil.tokenize(walk.getAttribute(AttributeName.PARTVERSION), null, false);
 			final KElement parent = xjdf.getParentNode_KElement();
 			int size = parent == null ? 0 : ContainerUtil.size(pv);
@@ -378,7 +387,6 @@ class PostXJDFWalker extends BaseElementWalker
 				}
 				xjdf.setAttribute(AttributeName.PARTVERSION, pv.remove(0));
 			}
-			return walk;
 		}
 	}
 

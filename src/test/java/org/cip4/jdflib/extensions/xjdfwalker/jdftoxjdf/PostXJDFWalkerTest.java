@@ -295,4 +295,32 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		assertEquals(XJDF20.getSchemaURL(), x.getElement(XJDFConstants.Header).getNamespaceURI());
 		assertEquals(XJDF20.getSchemaURL(), c.getElement(XJDFConstants.Header).getNamespaceURI());
 	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testPV()
+	{
+		final XJDFHelper h = new XJDFHelper("a", null);
+		h.appendResourceSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getCreatePartition(AttributeName.PARTVERSION, "P1 P2", true);
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.walkTree(h.getRoot(), null);
+		assertEquals("P1", h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartMapVector().get(0).get(AttributeName.PARTVERSION));
+		assertEquals("P2", h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartMapVector().get(1).get(AttributeName.PARTVERSION));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testPVRetain()
+	{
+		final XJDFHelper h = new XJDFHelper("a", null);
+		h.appendResourceSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getCreatePartition(AttributeName.PARTVERSION, "P1 P2", true);
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.setRetainAll(true);
+		w.walkTree(h.getRoot(), null);
+		assertEquals("P1 P2", h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartMapVector().get(0).get(AttributeName.PARTVERSION));
+	}
 }
