@@ -201,9 +201,20 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * @param pos
 	 * @param d
 	 */
-	public JDFNumList set(final int pos, final double d)
+	public void set(final int pos, final double d)
 	{
 		super.set(pos, Double.valueOf(d));
+	}
+
+	/**
+	 *
+	 *
+	 * @param pos
+	 * @param d
+	 */
+	public JDFNumList setX(final int pos, final double d)
+	{
+		set(pos, d);
 		return this;
 	}
 
@@ -759,7 +770,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * @param l the list to subtract from this
 	 * @throws IllegalArgumentException if sizes don't match
 	 */
-	public JDFNumList subtract(final JDFNumList l)
+	public void subtract(final JDFNumList l)
 	{
 		if (l != null && size() == l.size())
 		{
@@ -772,7 +783,6 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 				setElementAt(Double.valueOf(me[i]), i);
 			}
 		}
-		return this;
 	}
 
 	/**

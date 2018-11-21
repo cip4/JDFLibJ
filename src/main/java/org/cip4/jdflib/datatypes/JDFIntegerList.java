@@ -260,9 +260,19 @@ public class JDFIntegerList extends JDFNumList
 	 *
 	 * @param x the int value
 	 */
-	public JDFIntegerList add(final int x)
+	public void add(final int x)
 	{
 		add(Integer.valueOf(x));
+	}
+
+	/**
+	 * add - add an int to the vector
+	 *
+	 * @param x the int value
+	 */
+	public JDFIntegerList addX(final int x)
+	{
+		add(x);
 		return this;
 	}
 
@@ -327,6 +337,12 @@ public class JDFIntegerList extends JDFNumList
 		return i.intValue();
 	}
 
+	public JDFIntegerList setIntX(final int pos, final int val)
+	{
+		setInt(pos, val);
+		return this;
+	}
+
 	/**
 	 * setInt - sets the integer val at 'pos' from the list.<br>
 	 * Note: if pos is negative, setInt sets the pos'th integer counting from the end.
@@ -335,7 +351,7 @@ public class JDFIntegerList extends JDFNumList
 	 * @param val the value to set
 	 *
 	 */
-	public JDFIntegerList setInt(int pos, final int val)
+	public void setInt(int pos, final int val)
 	{
 
 		if (pos < 0)
@@ -355,7 +371,6 @@ public class JDFIntegerList extends JDFNumList
 		{
 			set(pos, Integer.valueOf(val));
 		}
-		return this;
 	}
 
 	@Override
@@ -428,10 +443,23 @@ public class JDFIntegerList extends JDFNumList
 	 *
 	 * @param i the value
 	 */
-	public JDFIntegerList setInt(final int i)
+	public void setInt(final int i)
 	{
 		clear();
-		return add(i);
+		add(i);
+	}
+
+	/**
+	 * setIntArray - sets this integer list to an int<br>
+	 * the RangeList is emptied, then the single value i is added
+	 *
+	 * @param i the value
+	 * @return
+	 */
+	public JDFIntegerList setIntX(final int i)
+	{
+		clear();
+		return addX(i);
 	}
 
 	/**
@@ -456,7 +484,7 @@ public class JDFIntegerList extends JDFNumList
 	 * @throws IllegalArgumentException if sizes don't match
 	 */
 	@Override
-	public JDFIntegerList subtract(final JDFNumList l)
+	public void subtract(final JDFNumList l)
 	{
 		if (l != null && size() == l.size())
 		{
@@ -468,6 +496,5 @@ public class JDFIntegerList extends JDFNumList
 				setElementAt(Integer.valueOf(me[i]), i);
 			}
 		}
-		return this;
 	}
 }

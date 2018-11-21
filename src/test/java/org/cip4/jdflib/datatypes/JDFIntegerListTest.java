@@ -112,7 +112,7 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 	public void testUnify()
 	{
 		final JDFIntegerList l = new JDFIntegerList(3);
-		l.setInt(0, 2).setInt(1, 2).setInt(2, 2);
+		l.setIntX(0, 2).setIntX(1, 2).setInt(2, 2);
 		l.unify();
 		assertEquals(l.get(0), 2);
 		assertEquals(1, l.size());
@@ -125,7 +125,7 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 	public void testAdd()
 	{
 		final JDFIntegerList l = new JDFIntegerList(3);
-		l.add(4).add(5);
+		l.addX(4).add(5);
 		assertEquals(4, l.get(1));
 		assertEquals(3, l.size());
 	}
