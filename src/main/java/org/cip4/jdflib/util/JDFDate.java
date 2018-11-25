@@ -903,6 +903,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public JDFDate setTime(final int h, final int m, final int s)
 	{
+		// round milliseconds
+		lTimeInMillis = ((lTimeInMillis + 500l) / 1000l) * 1000l;
 		final String st = getFormattedDateTime(DATETIMEISO_000);
 		try
 		{

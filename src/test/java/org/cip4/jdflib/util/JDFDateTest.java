@@ -137,6 +137,21 @@ public class JDFDateTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testSetTimeMillis()
+	{
+		final JDFDate d = new JDFDate();
+		final JDFDate d1 = new JDFDate();
+		d1.setTime(22, 0, 0);
+		assertTrue(d1.getFormattedDateTime(JDFDate.DATETIMEISO_MILLI).contains("T22:00:00.000"));
+		assertEquals(d.getDay(), d1.getDay());
+		assertEquals(0, d1.getTimeInMillis() % 1000l);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testDateChain()
 	{
 		final JDFDate d = new JDFDate();
