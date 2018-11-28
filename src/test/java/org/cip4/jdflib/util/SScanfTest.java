@@ -144,7 +144,7 @@ public class SScanfTest extends JDFTestCaseBase
 		ThreadUtil.sleep(123);
 		final long mem2 = new MemorySpy().getCurrentMem();
 
-		assertTrue(mem2 - mem < 10000000);
+		assertTrue(mem2 - mem < 20000000);
 	}
 
 	/**
