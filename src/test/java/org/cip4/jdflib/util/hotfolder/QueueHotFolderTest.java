@@ -98,7 +98,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		theHF.mkdirs();
 		FileUtil.deleteAll(theStorage);
 		theStorage.mkdirs();
-		HotFolder.setDefaultStabilizeTime(333);
+		HotFolder.setDefaultStabilizeTime(123);
 		doc = new JDFDoc("JDF");
 
 	}
@@ -217,22 +217,20 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 	{
 		final MyListener myListener = new MyListener();
 		final File file = new File(theHF + File.separator + "f1.jdf");
+		hf = new QueueHotFolder(theHF, theStorage, null, myListener, null);
+		hf.stop();
 		doc.write2File(file, 2, false);
 		assertTrue(file.exists());
 		assertNull(FileUtil.listFilesWithExtension(theStorage, null));
-		hf = new QueueHotFolder(theHF, theStorage, null, myListener, null);
-		hf.stop();
-		ThreadUtil.sleep(100);
+		ThreadUtil.sleep(222);
 		assertTrue(file.exists());
 		assertNull("File is still there after stop", FileUtil.listFilesWithExtension(theStorage, null));
 		assertEquals(myListener.vJMF.size(), 0);
 		hf.restart();
-		ThreadUtil.sleep(1000);
 		for (int i = 0; i < 420; i++)
 		{
-			if (!file.exists())
+			if (!file.exists() && !myListener.vJMF.isEmpty())
 			{
-				ThreadUtil.sleep(123);
 				break;
 			}
 			log.info("Waiting " + i);
@@ -246,8 +244,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		assertTrue(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL().endsWith(".jdf"));
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
@@ -257,7 +254,5 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		super.tearDown();
 		hf.stop();
 	}
-
-	// /////////////////////////////////////////////////////////////////////////
 
 }
