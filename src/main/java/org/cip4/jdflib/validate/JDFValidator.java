@@ -2585,7 +2585,7 @@ public class JDFValidator
 			if (bQuiet)
 			{
 				sysOut.println("\n**********************************************************");
-				sysOut.println("       *** Checking " + xmlFile == null ? "JDFDoc" : xmlFile + " *** ");
+				sysOut.println("       *** Checking " + ((xmlFile == null) ? "JDFDoc" : xmlFile) + " *** ");
 				if (url != null && url.length() > 0)
 				{
 					sysOut.println("           " + url);

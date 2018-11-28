@@ -116,14 +116,14 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		assertTrue(file.exists());
 		assertNull(FileUtil.listFilesWithExtension(theStorage, null));
 		hf = new QueueHotFolder(theHF, theStorage, null, myListener, null);
-		for (int i = 0; i < 200; i++)
+		for (int i = 0; i < 2000; i++)
 		{
 			if (!file.exists())
 			{
 				break;
 			}
 			log.info("Waiting " + i);
-			ThreadUtil.sleep(100);
+			ThreadUtil.sleep(10);
 		}
 		assertFalse(file.exists());
 		ThreadUtil.sleep(100);
@@ -149,14 +149,14 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		assertNull(FileUtil.listFilesWithExtension(theStorage, null));
 		hf = new QueueHotFolder(theHF, theStorage, null, myListener, null);
 		hf.setOKStorage(new File("ok"));
-		for (int i = 0; i < 200; i++)
+		for (int i = 0; i < 2000; i++)
 		{
 			if (!file.exists())
 			{
 				break;
 			}
 			log.info("Waiting " + i);
-			ThreadUtil.sleep(100);
+			ThreadUtil.sleep(10);
 		}
 		assertFalse(file.exists());
 		ThreadUtil.sleep(100);
@@ -228,14 +228,15 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		assertEquals(myListener.vJMF.size(), 0);
 		hf.restart();
 		ThreadUtil.sleep(1000);
-		for (int i = 0; i < 20; i++)
+		for (int i = 0; i < 420; i++)
 		{
 			if (!file.exists())
 			{
+				ThreadUtil.sleep(123);
 				break;
 			}
 			log.info("Waiting " + i);
-			ThreadUtil.sleep(100);
+			ThreadUtil.sleep(10);
 		}
 		assertFalse("File is gone after stop", file.exists());
 		assertNull(FileUtil.listFilesWithExtension(theStorage, null));
