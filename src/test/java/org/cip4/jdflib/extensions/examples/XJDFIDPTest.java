@@ -117,7 +117,7 @@ public class XJDFIDPTest extends JDFTestCaseBase
 		final JDFBinderySignature bs = (JDFBinderySignature) xjdfHelper.getCreateResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input, null);
 		bs.setFoldCatalog("F4-1");
 
-		final SetHelper shAss = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.ASSEMBLY, null);
+		final SetHelper shAss = xjdfHelper.getCreateSet(ElementName.ASSEMBLY, EnumUsage.Input);
 		final ResourceHelper rhAss = shAss.appendPartition(null, true);
 		final JDFAssembly ass = (JDFAssembly) rhAss.getResource();
 		ass.setOrder(EnumOrder.Collecting);

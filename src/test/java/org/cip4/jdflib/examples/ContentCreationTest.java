@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -99,7 +67,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.junit.Test;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class ContentCreationTest extends PreflightTest
 {
@@ -121,7 +89,8 @@ public class ContentCreationTest extends PreflightTest
 		outRun.setFileURL("output.pdf");
 
 		final JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null);
-		lep.appendXMLComment("This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed\nThe element to be placed is referenced by LayoutElement/FileSpec/URL", null);
+		lep.appendXMLComment("This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed\nThe element to be placed is referenced by LayoutElement/FileSpec/URL",
+				null);
 
 		final JDFContentList cl = null;
 		final JDFLayoutElementPart lePartPage = addLayoutElementPart(lep, cl);
@@ -136,8 +105,6 @@ public class ContentCreationTest extends PreflightTest
 		final JDFLayoutElement bkg = (JDFLayoutElement) lePart.appendElement("LayoutElement");
 		bkg.setMimeURL("bkg.pdf");
 
-		//TODO fix back conversion		writeRoundTrip(n, "LayoutPositionObj");
-		//		d.write2File(sm_dirTestDataTemp + File.separator + "LayoutPositionObj.jdf", 2, false);
 		writeRoundTrip(n, "resources/layoutElementProductionParamsPositionObjExact");
 	}
 
@@ -177,7 +144,9 @@ public class ContentCreationTest extends PreflightTest
 		JDFLayoutElement image = (JDFLayoutElement) lePart.appendElement("LayoutElement");
 		image.setElementType(EnumElementType.Image);
 		image.appendComment().setText("Please add an image of a palm tree on a beach here!");
-		lep.appendXMLComment("This is a \"roughly placed\" reservation 36 points below the previous image;\n NextPosition points from Anchor on this to NextAnchor on next,\n i.e. a positive vector specifies that next is shifted in the positive direction in the parent (in this case page) coordinate system", null);
+		lep.appendXMLComment(
+				"This is a \"roughly placed\" reservation 36 points below the previous image;\n NextPosition points from Anchor on this to NextAnchor on next,\n i.e. a positive vector specifies that next is shifted in the positive direction in the parent (in this case page) coordinate system",
+				null);
 		lePart = addLayoutElementPart(lep, cl);
 		positionObj = lePart.appendPositionObj();
 		positionObj.setAttribute("PageRange", "0");
@@ -190,7 +159,7 @@ public class ContentCreationTest extends PreflightTest
 		image.appendComment().setText("Please add an image of a beach ball below the palm tree!");
 
 		writeRoundTrip(n, "resources/layoutElementProductionParamsPositionObjFuzzy");
-		//		d.write2File(sm_dirTestDataTemp + File.separator + "LayoutPositionObj.jdf", 2, false);
+		// d.write2File(sm_dirTestDataTemp + File.separator + "LayoutPositionObj.jdf", 2, false);
 		writeTest(n, "resources/layoutElementProductionParamsPositionObj.jdf", false, null);
 	}
 
@@ -204,7 +173,7 @@ public class ContentCreationTest extends PreflightTest
 	{
 		// TBD: Fuzzy, Sizes, literal text via comments
 		KElement.setLongID(false);
-		final JDFDoc d = new JDFDoc("JDF");
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		n = d.getJDFRoot();
 		n.setType(EnumType.LayoutElementProduction);
 
@@ -212,13 +181,13 @@ public class ContentCreationTest extends PreflightTest
 		outRun.setFileURL("output.pdf");
 
 		final JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null);
-		lep.appendXMLComment("This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed\nThe element to be placed is referenced by LayoutElement/FileSpec/URL", null);
+		lep.appendXMLComment("This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed\nThe element to be placed is referenced by LayoutElement/FileSpec/URL",
+				null);
 
 		/*
-		JDFContentList cl = (JDFContentList) lep.appendElement(ElementName.CONTENTLIST);
-		cl = (JDFContentList) cl.makeRootResource(null, null, true);
-		cl.setXMLComment("this is an optional metadatapool for the content");
-		*/
+		 * JDFContentList cl = (JDFContentList) lep.appendElement(ElementName.CONTENTLIST); cl = (JDFContentList) cl.makeRootResource(null, null, true);
+		 * cl.setXMLComment("this is an optional metadatapool for the content");
+		 */
 		final JDFContentList cl = null;
 		final JDFLayoutElementPart lePartPage = addLayoutElementPart(lep, cl);
 		lePartPage.setID("IDPage");
@@ -246,7 +215,9 @@ public class ContentCreationTest extends PreflightTest
 		image.setElementType(EnumElementType.Image);
 		image.appendComment().setText("Please add an image of a palm tree on a beach here!");
 
-		lep.appendXMLComment("This is a \"roughly placed\" reservation 36 points below the previous image;\n NextPosition points from Anchor on this to NextAnchor on next,\n i.e. a positive vector specifies that next is shifted in the positive direction in the parent (in this case page) coordinate system", null);
+		lep.appendXMLComment(
+				"This is a \"roughly placed\" reservation 36 points below the previous image;\n NextPosition points from Anchor on this to NextAnchor on next,\n i.e. a positive vector specifies that next is shifted in the positive direction in the parent (in this case page) coordinate system",
+				null);
 		lePart = addLayoutElementPart(lep, cl);
 		positionObj = lePart.appendPositionObj();
 		positionObj.setAttribute("PageRange", "0");
@@ -275,7 +246,9 @@ public class ContentCreationTest extends PreflightTest
 		positionObj.appendXMLComment("This is a \"roughly placed\"  mark\nThe anchor at top right is placed at the right (=1.0) top(=1.0) position of the page.\nNo rotation is specified", null);
 		positionObj.setAttribute("PositionPolicy", "Exact");
 		addBarcode(lePart);
-		lep.appendXMLComment("This is a \"roughly placed\"  container for marks\nThe anchor at top left is defined in the !Unrotated! orientation.\n It is placed at the left (=0.0) bottom(=0.0) position of the page.\nThe text flows bottom to top (=Rotate 90 = counterclockwise)\n do we need margins?", null);
+		lep.appendXMLComment(
+				"This is a \"roughly placed\"  container for marks\nThe anchor at top left is defined in the !Unrotated! orientation.\n It is placed at the left (=0.0) bottom(=0.0) position of the page.\nThe text flows bottom to top (=Rotate 90 = counterclockwise)\n do we need margins?",
+				null);
 
 		lePart = addLayoutElementPart(lep, cl);
 		final String idParent = lePart.appendAnchor(null);
@@ -284,7 +257,9 @@ public class ContentCreationTest extends PreflightTest
 		positionObj.setAttribute("Anchor", "TopLeft");
 		positionObj.setAttribute("PositionPolicy", "Free");
 		setNextAnchor(positionObj, "IDPage", "BottomCenter", "0 0", null, "Parent", 90);
-		lep.appendXMLComment("This is a  barcode inside the previous container\nThe anchor at bottom left is defined in the !Unrotated! orientation.\n It is placed at the left (=0.0) bottom(=0.0) position of the container.", null);
+		lep.appendXMLComment(
+				"This is a  barcode inside the previous container\nThe anchor at bottom left is defined in the !Unrotated! orientation.\n It is placed at the left (=0.0) bottom(=0.0) position of the container.",
+				null);
 
 		lePart = addLayoutElementPart(lep, cl);
 		id = lePart.appendAnchor(null);
@@ -292,8 +267,10 @@ public class ContentCreationTest extends PreflightTest
 		positionObj.setAttribute("Anchor", "BottomLeft");
 		setNextAnchor(positionObj, idParent, "BottomLeft", "0 0", null, "Parent", 0);
 		addBarcode(lePart);
-		lep.appendXMLComment("This is a disclaimer text inside the previous container\nThe anchor at top left is defined in the !Unrotated! orientation.\n The barcode and text are justified with their top margins and spaced by 72 points\n which corresponds to the left of the page because the container is rotated 90�\n"
-				+ "AbsoluteSize specifies the size of the object in points", null);
+		lep.appendXMLComment(
+				"This is a disclaimer text inside the previous container\nThe anchor at top left is defined in the !Unrotated! orientation.\n The barcode and text are justified with their top margins and spaced by 72 points\n which corresponds to the left of the page because the container is rotated 90�\n"
+						+ "AbsoluteSize specifies the size of the object in points",
+				null);
 
 		lePart = addLayoutElementPart(lep, cl);
 		positionObj = lePart.appendPositionObj();
@@ -305,8 +282,8 @@ public class ContentCreationTest extends PreflightTest
 		JDFLayoutElement text = (JDFLayoutElement) lePart.appendElement("LayoutElement");
 		text.setElementType(EnumElementType.Text);
 		text.setMimeURL("file://myServer/disclaimers/de/aspirin.txt");
-		lep.appendXMLComment("This is a \"VERY roughly placed\" piece of text somewhere on pages 2-3\n"
-				+ "RelativeSize specifies the size of the object as a ratio of the size of the container", null);
+		lep.appendXMLComment("This is a \"VERY roughly placed\" piece of text somewhere on pages 2-3\n" + "RelativeSize specifies the size of the object as a ratio of the size of the container",
+				null);
 
 		lePart = addLayoutElementPart(lep, cl);
 		positionObj = lePart.appendPositionObj();
@@ -330,8 +307,6 @@ public class ContentCreationTest extends PreflightTest
 		textSrc.setText("Laurum Ipsum Blah blah blah!\n btw. this is unformatted plain text and nothing else!");
 
 		writeRoundTrip(n, "LayoutPositionObj");
-		//		d.write2File(sm_dirTestDataTemp + File.separator + "LayoutPositionObj.jdf", 2, false);
-		//writeTest(n, "LayoutPositionObj.jdf", true, null);
 	}
 
 	/**
@@ -371,7 +346,7 @@ public class ContentCreationTest extends PreflightTest
 			return null;
 
 		final JDFContentData cd = cl.appendContentData();
-		//		lePart.setAttribute("ContentDataIndex", cd.getIndex(), null);
+		// lePart.setAttribute("ContentDataIndex", cd.getIndex(), null);
 		return cd;
 	}
 
@@ -385,7 +360,8 @@ public class ContentCreationTest extends PreflightTest
 	 * @param rotation
 	 * @throws DataFormatException
 	 */
-	private static void setNextAnchor(final KElement sm2_2, final String idAnchor, final String anchor, final String absolutePosition, final String xmlComment, final String anchorType, final double rotation) throws DataFormatException
+	private static void setNextAnchor(final KElement sm2_2, final String idAnchor, final String anchor, final String absolutePosition, final String xmlComment, final String anchorType,
+			final double rotation) throws DataFormatException
 	{
 		final KElement nextAnchor = sm2_2.appendElement(ElementName.REFANCHOR);
 		nextAnchor.setAttribute("Anchor", anchor);
@@ -426,25 +402,17 @@ public class ContentCreationTest extends PreflightTest
 
 		// now some simple tests...
 		appendNumPagesAction();
-		//		appendSeparationAction();
-		//		appendBWSeparationAction();
+		// appendSeparationAction();
+		// appendBWSeparationAction();
 		appendTrimBoxAction();
 		appendResolutionAction();
 		/*
 		 *
-		StatusCounter su = new StatusCounter(n, null, null);
-		su.setPhase(EnumNodeStatus.InProgress, "Creative Work", EnumDeviceStatus.Running, null);
-
-		su.getDocJMFPhaseTime();
-		Thread.sleep(1000);
-		su = new StatusCounter(n, null, null);
-		su.setPhase(EnumNodeStatus.InProgress, "Creative Work", EnumDeviceStatus.Running, null);
-		su.getDocJMFPhaseTime();
-		Thread.sleep(1000);
-		su = new StatusCounter(n, null, null);
-		su.setPhase(EnumNodeStatus.Completed, "done", EnumDeviceStatus.Idle, null);
-		su.getDocJMFPhaseTime();
-				 */
+		 * StatusCounter su = new StatusCounter(n, null, null); su.setPhase(EnumNodeStatus.InProgress, "Creative Work", EnumDeviceStatus.Running, null);
+		 *
+		 * su.getDocJMFPhaseTime(); Thread.sleep(1000); su = new StatusCounter(n, null, null); su.setPhase(EnumNodeStatus.InProgress, "Creative Work", EnumDeviceStatus.Running, null);
+		 * su.getDocJMFPhaseTime(); Thread.sleep(1000); su = new StatusCounter(n, null, null); su.setPhase(EnumNodeStatus.Completed, "done", EnumDeviceStatus.Idle, null); su.getDocJMFPhaseTime();
+		 */
 
 		writeTest(n, "resources/layoutElementProductionParamsPreflight.jdf", false, null);
 

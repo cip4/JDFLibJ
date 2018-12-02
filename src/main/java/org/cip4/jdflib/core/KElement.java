@@ -4894,7 +4894,7 @@ public class KElement extends ElementNSImpl implements Element
 		}
 
 		final String attribute = src.getAttribute(strSrcAttrib, strNameSpace, null);
-		if (attribute != null)
+		if (!StringUtil.isEmpty(attribute))
 		{
 			src.removeAttribute(strSrcAttrib, strNameSpace);
 		}
