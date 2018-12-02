@@ -2,73 +2,42 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
 /*
  * MediaColorTest.java
+ *
  * @author Dietrich Mucha
  *
  * Copyright (C) 2004 Heidelberger Druckmaschinen AG. All Rights Reserved.
@@ -77,6 +46,7 @@ package org.cip4.jdflib.resource;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -93,6 +63,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFFileSpec.EnumResourceUsage;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.ByteArrayIOStream;
@@ -103,11 +74,10 @@ import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Test;
 
-////////////////////////////////////////////////////////////////
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * 26.11.2008
+ *         26.11.2008
  */
 public class JDFFilespecTest extends JDFTestCaseBase
 {
@@ -149,12 +119,37 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	public void testSetResourceUsage()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode n = doc.getJDFRoot();
+		final JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, EnumUsage.Input);
+		fs.setResourceUsage(EnumResourceUsage.CIP3);
+		assertEquals("CIP3", fs.getResourceUsage());
+		assertEquals(EnumResourceUsage.CIP3, fs.getResourceUsageEnum());
+	}
+
+	@Test
+	public void testGetResourceUsage()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode n = doc.getJDFRoot();
+		final JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, EnumUsage.Input);
+		fs.setResourceUsage("aa");
+		assertEquals("aa", fs.getResourceUsage());
+		assertNull(fs.getResourceUsageEnum());
+	}
+
+	/**
+	*
+	*/
+	@Test
 	public void testSetCheckSum()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode n = doc.getJDFRoot();
 		final JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, null, EnumUsage.Input, null, null, null, null);
-		byte[] b = new byte[] { 0, (byte) 255, (byte) 0x99, 64 };
+		final byte[] b = new byte[] { 0, (byte) 255, (byte) 0x99, 64 };
 		fs.setCheckSum(b);
 		assertEquals(fs.getCheckSum(), "00FF9940");
 		assertEquals(new String(fs.getCheckSumBytes()), new String(b));
@@ -196,13 +191,13 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		JDFRunList rli = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
 		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "localjdf.jdf", 2, false);
 		rli = rli.addRun("dummy.txt", 0, -1);
-		String contents = "Test contents";
-		ByteArrayIOStream bos = new ByteArrayIOStream(contents.getBytes());
+		final String contents = "Test contents";
+		final ByteArrayIOStream bos = new ByteArrayIOStream(contents.getBytes());
 		FileUtil.streamToFile(bos.getInputStream(), sm_dirTestDataTemp + "dummy.txt");
-		InputStream is = rli.getFileSpec().getURLInputStream();
+		final InputStream is = rli.getFileSpec().getURLInputStream();
 		assertNotNull(is);
 		bos.close();
-		ByteArrayIOStream bos2 = new ByteArrayIOStream(is);
+		final ByteArrayIOStream bos2 = new ByteArrayIOStream(is);
 		assertEquals(contents.getBytes().length, bos2.size());
 		bos2.close();
 	}
@@ -224,7 +219,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		assertNotNull(cscp);
 		final JDFFileSpec fs = cscp.getFinalTargetDevice();
 		final File newDir = new File(sm_dirTestDataTemp + "newDir");
-		File f = UrlUtil.moveToDir(fs, newDir, null, true);
+		final File f = UrlUtil.moveToDir(fs, newDir, null, true);
 		assertNotNull("error moving file to dir", f);
 		for (int i = 0; i < 10; i++)
 		{
@@ -247,10 +242,10 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	@Test
 	public void testMoveToDirUserFileName()
 	{
-		JDFFileSpec fileSpec = (JDFFileSpec) new JDFDoc(ElementName.FILESPEC).getRoot();
+		final JDFFileSpec fileSpec = (JDFFileSpec) new JDFDoc(ElementName.FILESPEC).getRoot();
 		fileSpec.setURL(sm_dirTestData + "url1.pdf");
 		fileSpec.setUserFileName("newName1.pdf");
-		File copy = UrlUtil.moveToDir(fileSpec, new File(sm_dirTestDataTemp).getAbsoluteFile(), null, true);
+		final File copy = UrlUtil.moveToDir(fileSpec, new File(sm_dirTestDataTemp).getAbsoluteFile(), null, true);
 		assertEquals(copy.getName(), "newName1.pdf");
 		assertEquals(UrlUtil.urlToFile(fileSpec.getURL()), copy);
 	}

@@ -88,6 +88,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -132,7 +133,7 @@ public class KElement extends ElementNSImpl implements Element
 	private static final long serialVersionUID = 1L;
 	private static final Log kLog = LogFactory.getLog(JDFElement.class);
 
-	private static int m_lStoreID = 0;
+	private static AtomicInteger m_lStoreID = new AtomicInteger();
 	private static boolean bIDDate = true;
 	private static final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyMMdd_kkmmssSSS");
 
@@ -5881,7 +5882,6 @@ public class KElement extends ElementNSImpl implements Element
 		bIDDate = bLong;
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
 	/**
 	 * UniqueID - create a unique id based on date and time + a counter - 6 digits are taken from id Normally this should only be used internally, @see JDFElement.appendAnchor() for details.
 	 *
@@ -5891,25 +5891,35 @@ public class KElement extends ElementNSImpl implements Element
 	 *
 	 * @default uniqueID(0)
 	 */
-	public synchronized static String uniqueID(int id)
+	public static String uniqueID(final int id)
+	{
+		return uniqueID(id, bIDDate);
+	}
+
+	/**
+	 *
+	 * @param id
+	 * @param bDate
+	 * @return
+	 */
+	public static String uniqueID(int id, final boolean bDate)
 	{
 		if (id != 0)
 		{
 			if (id < 0)
 			{
-				id = m_lStoreID - id; // just in case someone accidentally uses too large random numbers
+				id = m_lStoreID.get() - id; // just in case someone accidentally uses too large random numbers
 			}
-			m_lStoreID = id % 1000000;
+			m_lStoreID.set(id % 1000000);
 		}
-		final String s = "00000" + Integer.toString(m_lStoreID);
-		m_lStoreID = ++m_lStoreID % 1000000;
+		final String s = StringUtil.rightStr("000000" + m_lStoreID.getAndIncrement(), 6);
 		// time + 6 digits (ID)
-		if (bIDDate)
+		if (bDate)
 		{
 			final String date = dateFormatter.format(new Date());
-			return "_" + date + "_" + s.substring(s.length() - 6);
+			return "_" + date + "_" + s;
 		}
-		return "_" + s.substring(s.length() - 6);
+		return "_" + s;
 	}
 
 	/**

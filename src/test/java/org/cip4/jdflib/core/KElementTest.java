@@ -3766,6 +3766,19 @@ public class KElementTest extends JDFTestCaseBase
 
 	/**
 	 *
+	 *
+	 */
+	@Test
+	public void testUniqueID2()
+	{
+		for (int i = 0; i < 1000; i++)
+		{
+			assertTrue(StringUtil.isInteger(StringUtil.rightStr(KElement.uniqueID(0, false), -1)));
+		}
+	}
+
+	/**
+	 *
 	 */
 	@Test
 	public void testAppendAttribute()
