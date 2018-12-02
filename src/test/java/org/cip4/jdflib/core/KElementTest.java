@@ -209,7 +209,7 @@ public class KElementTest extends JDFTestCaseBase
 	{
 		final long currentMem0 = getCurrentMem();
 		final KElement k = new XMLDoc("root", null).getRoot();
-		for (int i = 0; i < 50000; i++)
+		for (int i = 0; i < 20000; i++)
 		{
 			final KElement d2 = new XMLDoc("mama", null).getRoot();
 
@@ -483,7 +483,7 @@ public class KElementTest extends JDFTestCaseBase
 		final KElement e = d.getRoot();
 		final KElement ec1 = e.appendElement("c1");
 		final long l = d.getDocMemoryUsed();
-		for (int i = 0; i < 100000; i++)
+		for (int i = 0; i < 50000; i++)
 		{
 			ec1.replaceElement(d.clone().getRoot().getFirstChildElement());
 		}
@@ -669,7 +669,7 @@ public class KElementTest extends JDFTestCaseBase
 		KElement e = d.getRoot();
 
 		final CPUTimer t = new CPUTimer(false);
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 1000; i++)
 		{
 			final KElement ee = e.appendElement("b" + (int) (Math.random() * 100));
 			for (int j = 0; j < 7; j++)
@@ -683,7 +683,7 @@ public class KElementTest extends JDFTestCaseBase
 		t.stop();
 		d = new JDFDoc("parent");
 		e = d.getRoot();
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 1000; i++)
 		{
 			final KElement ee = e.appendElement("b" + (int) (Math.random() * 100));
 			for (int j = 0; j < 7; j++)
@@ -1099,7 +1099,7 @@ public class KElementTest extends JDFTestCaseBase
 	public void testCopyElementMem()
 	{
 		final KElement k = new XMLDoc("root", null).getRoot();
-		for (int i = 0; i < 100000; i++)
+		for (int i = 0; i < 20000; i++)
 		{
 			final KElement d2 = new XMLDoc("mama", null).getRoot();
 
@@ -1914,7 +1914,7 @@ public class KElementTest extends JDFTestCaseBase
 		final CPUTimer ct = new CPUTimer(false);
 		final JDFDoc d = new JDFParser().parseFile(sm_dirTestData + "bigWhite.jdf");
 
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 2; i++)
 		{
 			ct.start();
 			d.getRoot().getXPathValueMap();
@@ -1922,8 +1922,6 @@ public class KElementTest extends JDFTestCaseBase
 			ct.stop();
 		}
 	}
-
-	// /////////////////////////////////////////////////////////////////
 
 	/**
 	 *
