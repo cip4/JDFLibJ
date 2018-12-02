@@ -207,6 +207,7 @@ public class KElementTest extends JDFTestCaseBase
 	@Test
 	public void testImportNode()
 	{
+		final long currentMem0 = getCurrentMem();
 		final KElement k = new XMLDoc("root", null).getRoot();
 		for (int i = 0; i < 50000; i++)
 		{
@@ -219,8 +220,8 @@ public class KElementTest extends JDFTestCaseBase
 			k.moveElement(d2.appendElement("kid"), null);
 		}
 		final long currentMem = getCurrentMem();
-		if (currentMem > mem)
-			assertEquals(currentMem, mem, 142 * 50000); // allow 142 per element
+		if (currentMem > currentMem0)
+			assertEquals(currentMem, currentMem0, 142 * 100000); // allow 142 per element
 	}
 
 	/**
