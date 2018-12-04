@@ -2633,8 +2633,8 @@ public class KElement extends ElementNSImpl implements Element
 		if (!ContainerUtil.equals(getText(), kElem.getText()))
 			return false;
 
-		final VElement l1 = getChildElementVector(null, null, null, true, 0, false);
-		final VElement l2 = kElem.getChildElementVector(null, null, null, true, 0, false);
+		final VElement l1 = getChildElementVector_KElement(null, null, null, true, 0);
+		final VElement l2 = kElem.getChildElementVector_KElement(null, null, null, true, 0);
 
 		if (l1.size() != l2.size())
 		{

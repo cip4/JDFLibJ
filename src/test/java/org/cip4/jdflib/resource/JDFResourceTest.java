@@ -579,6 +579,24 @@ public class JDFResourceTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	public void testIsEqual()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, null);
+		final JDFExposedMedia xm0 = (JDFExposedMedia) xm.getCreatePartition(new JDFAttributeMap("Side", "Front"), null);
+		final JDFExposedMedia xm1 = (JDFExposedMedia) xm.getCreatePartition(new JDFAttributeMap("Side", "Back"), null);
+
+		final JDFExposedMedia xmm = (JDFExposedMedia) xm.cloneNewDoc();
+		assertTrue(xmm.isEqual(xm));
+		xm0.setDescriptiveName("s1");
+
+		assertFalse(xmm.isEqual(xm));
+	}
+
+	/**
+	*
+	*/
+	@Test
 	public void testInvalidAttributes()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
