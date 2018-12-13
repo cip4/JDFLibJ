@@ -153,7 +153,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		merge.bUpdateStati = true;
 		final JDFNode nodeM = merge.mergeJDF(nested_spawn_node, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
 		assertNotNull(nodeM);
-		System.out.println("Merging took " + (endSpawnTime - endSpawnTime));
+		log.info("Merging took " + (endSpawnTime - endSpawnTime));
 	}
 
 	/**
@@ -821,7 +821,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 						vRWRes.clear();
 						final JDFExposedMedia xmSpawn = (JDFExposedMedia) spawnedNodeXMRW.getMatchingResource(ElementName.EXPOSEDMEDIA, EnumProcessUsage.AnyInput, null, 0);
 						assertNotNull(xmSpawn);
-						assertEquals(xmPart.getSpawnStatus(), j < 2 ? EnumSpawnStatus.SpawnedRW : EnumSpawnStatus.SpawnedRO);
+						assertEquals(i + " " + j, xmPart.getSpawnStatus(), j < 2 ? EnumSpawnStatus.SpawnedRW : EnumSpawnStatus.NotSpawned);
 						if (j >= 2)
 						{
 							vRWRes.add(ElementName.EXPOSEDMEDIA);
@@ -842,12 +842,10 @@ public class JDFSpawnTest extends JDFTestCaseBase
 						assertTrue("spawnID RW not gone", nRoot.toString().indexOf(spawnIDRW) >= 0);
 						xm = (JDFExposedMedia) n.getMatchingResource(ElementName.EXPOSEDMEDIA, EnumProcessUsage.AnyInput, null, 0);
 						xmPart = (JDFExposedMedia) xm.getPartition(map, null);
-						assertEquals(i + " " + j, xmPart.getSpawnStatus(), j == 0 || j == 3 ? EnumSpawnStatus.SpawnedRW : EnumSpawnStatus.SpawnedRO);
+						assertEquals(i + " " + j, xmPart.getSpawnStatus(), j == 0 || j == 1 || j == 3 ? EnumSpawnStatus.SpawnedRW : EnumSpawnStatus.NotSpawned);
 
 						// merge and immediately respawn the same thing
 						n = new JDFMerge(nRoot).mergeJDF(s2, null, EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
-						// n=new JDFMerge(nRoot).mergeJDF(s2, null,
-						// EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
 						assertTrue("spawnID gone " + i + " " + j + " " + k + " " + kk, nRoot.toString().indexOf(spawnIDRW) < 0);
 						assertTrue("spawnIDs gone " + i + " " + j + " " + k + " " + kk, nRoot.toString().indexOf("SpawnIDs") < 0);
 						xm = (JDFExposedMedia) n.getMatchingResource(ElementName.EXPOSEDMEDIA, EnumProcessUsage.AnyInput, null, 0);

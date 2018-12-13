@@ -821,8 +821,8 @@ public class JDFMerge
 			}
 			else
 			{
-				leafRes.setSpawnStatus(EnumSpawnStatus.SpawnedRO);
-				leafRes.setLocked(false);
+				// leafRes.setSpawnStatus(EnumSpawnStatus.SpawnedRO);
+				// leafRes.setLocked(false);
 			}
 		}
 		else
@@ -1191,11 +1191,11 @@ public class JDFMerge
 		final VElement spawnedLeaves = mainRes.getNodesWithSpawnID(spawnID);
 
 		// Only manipulate leaves and subleaves that were explicitly spawned
-		if (spawnedLeaves != null && !spawnedLeaves.isEmpty())
+		if (spawnedLeaves != null)
 		{
-			for (int i = 0; i < spawnedLeaves.size(); i++)
+			for (final KElement e : spawnedLeaves)
 			{
-				allLeaves.addAll(((JDFResource) spawnedLeaves.get(i)).getLeaves(true));
+				allLeaves.addAll(((JDFResource) e).getLeaves(true));
 			}
 			allLeaves.unify();
 		}

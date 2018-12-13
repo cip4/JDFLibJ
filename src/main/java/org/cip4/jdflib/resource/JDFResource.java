@@ -6882,7 +6882,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setSpawnStatus(final EnumSpawnStatus s)
 	{
-		setAttribute(AttributeName.SPAWNSTATUS, s.getName(), null);
+		setAttribute(AttributeName.SPAWNSTATUS, s == null ? null : s.getName(), null);
 	}
 
 	/**

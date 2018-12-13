@@ -922,14 +922,34 @@ public class JDFSpawn
 
 	private void finalizeSpawn(final JDFSpawned spawnAudit)
 	{
+		final VElement outLinks = prepareSpawnLinks(rootOut);
+		final VElement mainLinks = prepareSpawnLinks(node);
 		// add parts to resource links if necessary
 		if (vSpawnParts != null && !vSpawnParts.isEmpty())
 		{
-			final VElement outLinks = prepareSpawnLinks(rootOut);
-			final VElement mainLinks = prepareSpawnLinks(node);
 			finalizePartitions(spawnAudit, outLinks, mainLinks);
 		}
+		removeRO(outLinks, spawnAudit.getNewSpawnID());
+		removeRO(mainLinks, spawnAudit.getNewSpawnID());
 		finalizeStatusAndAudits(spawnAudit);
+	}
+
+	private void removeRO(final VElement outLinks, final String spawnID)
+	{
+		final String ro = EnumSpawnStatus.SpawnedRO.getName();
+		for (final KElement e : outLinks)
+		{
+			final VElement v = ((JDFResourceLink) e).getLinkRoot().getLeaves(true);
+			for (final KElement r : v)
+			{
+				if (ro.equals(r.getAttribute_KElement(AttributeName.SPAWNSTATUS)))
+				{
+					r.removeFromAttribute(AttributeName.SPAWNIDS, spawnID, null, null, 0);
+					r.removeAttribute_KElement(AttributeName.SPAWNSTATUS, null);
+				}
+			}
+		}
+
 	}
 
 	/**
@@ -939,7 +959,6 @@ public class JDFSpawn
 	 */
 	private void finalizePartitions(final JDFSpawned spawnAudit, final VElement outLinks, final VElement mainLinks)
 	{
-		final int mainLinkLen = mainLinks.size();
 		final int outLinkSize = outLinks.size();
 		final String spawnID = spawnAudit.getNewSpawnID();
 		for (int i = 0; i < outLinkSize; i++)
@@ -966,9 +985,9 @@ public class JDFSpawn
 				else
 				// the sequence of links changed - must search, hopefully we never get here
 				{
-					for (int ii = 0; ii < mainLinkLen; ii++)
+					for (final KElement e : mainLinks)
 					{
-						link = (JDFResourceLink) mainLinks.elementAt(ii);
+						link = (JDFResourceLink) e;
 						if (id.equals(link.getrRef()))
 						{
 							updateSpawnIDsInMain(spawnID, link, vPartMap);
@@ -1032,9 +1051,9 @@ public class JDFSpawn
 			}
 		}
 		final VElement vMainPart = rMain.getPartitionVector(vPartMap, null);
-		for (int kk = 0; kk < vMainPart.size(); kk++)
+		for (final KElement e : vMainPart)
 		{
-			final JDFResource rMainPart = (JDFResource) vMainPart.elementAt(kk);
+			final JDFResource rMainPart = (JDFResource) e;
 			if (rMainPart == null)
 			{
 				continue;
@@ -1044,9 +1063,9 @@ public class JDFSpawn
 			boolean bSpawnID = false;
 
 			// if any child node or leaf has this spawnID we need not do anything
-			for (int kkk = 0; kkk < leaves.size(); kkk++)
+			for (final KElement ee : leaves)
 			{
-				final JDFResource rMainLeaf = (JDFResource) leaves.elementAt(kkk);
+				final JDFResource rMainLeaf = (JDFResource) ee;
 				bSpawnID = rMainLeaf.includesMatchingAttribute(AttributeName.SPAWNIDS, spawnID, EnumAttributeType.NMTOKENS);
 				if (bSpawnID)
 				{
@@ -1116,11 +1135,10 @@ public class JDFSpawn
 	private void updateSpawnIDs(final String spawnID, final JDFResourceLink link)
 	{
 		final VElement vRes = link.getTargetVector(-1);
-		for (int t = 0; t < vRes.size(); t++)
+		for (final KElement e : vRes)
 		{
-			final JDFResource res = (JDFResource) vRes.elementAt(t);
-			// only fix those local resources that haven't been fixed along the
-			// way...
+			final JDFResource res = (JDFResource) e;
+			// only fix those local resources that haven't been fixed along the way...
 			if (!res.includesMatchingAttribute(AttributeName.SPAWNIDS, spawnID, EnumAttributeType.NMTOKENS))
 			{
 				res.appendSpawnIDs(spawnID);
@@ -1765,6 +1783,7 @@ public class JDFSpawn
 		 */
 		private EnumSpawnStatus spawnPart(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain, final boolean partsRO)
 		{
+			final boolean isRW = EnumSpawnStatus.SpawnedRW.equals(copyStatus);
 			if (vSpawnParts != null && vSpawnParts.size() > 0 && (JDFResource.EnumSpawnStatus.SpawnedRW.equals(copyStatus) || partsRO))
 			{
 				final JDFAttributeMap partMap = r.getPartMap();
@@ -1782,16 +1801,16 @@ public class JDFSpawn
 						// set the lock of the leaf to true if it is RO, else unlock it
 						if (bStayinMain)
 						{
-							if ((copyStatus == EnumSpawnStatus.SpawnedRW) || (pLeaf.getSpawnStatus() != EnumSpawnStatus.SpawnedRW))
+							if (isRW || !EnumSpawnStatus.SpawnedRW.equals(pLeaf.getSpawnStatus()))
 							{
 								pLeaf.setSpawnStatus(copyStatus);
-								pLeaf.setLocked(copyStatus == EnumSpawnStatus.SpawnedRW);
+								pLeaf.setLocked(isRW);
 							}
 							pLeaf.appendSpawnIDs(spawnID);
 						}
 						else
 						{
-							pLeaf.setLocked(copyStatus != EnumSpawnStatus.SpawnedRW);
+							pLeaf.setLocked(!isRW);
 							pLeaf.setSpawnIDs(spawnID);
 						}
 					}
@@ -1802,25 +1821,19 @@ public class JDFSpawn
 			{
 				if (bStayinMain)
 				{
-					if ((EnumSpawnStatus.SpawnedRW.equals(copyStatus)) || (!EnumSpawnStatus.SpawnedRW.equals(r.getSpawnStatus())))
+					if (isRW || (!EnumSpawnStatus.SpawnedRW.equals(r.getSpawnStatus())))
 					{
 						r.setSpawnStatus(copyStatus);
-						r.setLocked(copyStatus == EnumSpawnStatus.SpawnedRW);
+						r.setLocked(isRW);
 					}
-				}
-				else
-				{
-					r.setLocked(copyStatus != EnumSpawnStatus.SpawnedRW);
-				}
-
-				if (bStayinMain)
-				{
 					r.appendSpawnIDs(spawnID);
 				}
 				else
 				{
+					r.setLocked(!isRW);
 					r.setSpawnIDs(new VString(spawnID, null));
 				}
+
 			}
 			return copyStatus;
 		}
