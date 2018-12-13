@@ -175,8 +175,8 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi2", 3);
 		assertEquals(0, q.getAvQueue());
 		assertEquals(0, q.getAvRun());
-		for (int i = 0; i < 1000; i++)
-			q.queue(new WaitRunner(i, 10));
+		for (int i = 0; i < 333; i++)
+			q.queue(new WaitRunner(i, 5));
 
 		for (int i = 0; i < 442; i++)
 		{
@@ -187,7 +187,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 			}
 		}
 		ThreadUtil.sleep(42);
-		assertEquals(nRun, 1000, 2);
+		assertEquals(nRun, 333, 2);
 	}
 
 	/**
@@ -200,9 +200,9 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi2a", 3);
 		assertEquals(0, q.getAvQueue());
 		assertEquals(0, q.getAvRun());
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 555; i++)
 		{
-			final WaitRunner task = new WaitRunner(i, 10);
+			final WaitRunner task = new WaitRunner(i, 5);
 			task.addRun = false;
 			q.queue(task);
 			assertEquals(0, q.idle, 1);

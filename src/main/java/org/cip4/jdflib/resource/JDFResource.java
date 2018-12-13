@@ -6199,15 +6199,18 @@ public class JDFResource extends JDFElement
 		{
 			removeAttribute(AttributeName.CLASS, null);
 		}
-		// only set class for the root
-		if (isResourceRootRoot() || (autoSubElementClass && isResourceElement()))
-		{
-			setAttribute(AttributeName.CLASS, value.getName(), null);
-		}
 		else
-		// just in case, clean up
 		{
-			removeAttribute(AttributeName.CLASS, null);
+			// only set class for the root
+			if (isResourceRootRoot() || (autoSubElementClass && isResourceElement()))
+			{
+				setAttribute(AttributeName.CLASS, value.getName(), null);
+			}
+			else
+			// just in case, clean up
+			{
+				removeAttribute(AttributeName.CLASS, null);
+			}
 		}
 	}
 
