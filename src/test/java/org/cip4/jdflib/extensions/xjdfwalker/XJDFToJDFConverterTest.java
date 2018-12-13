@@ -1419,6 +1419,19 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 */
+	@Test
+	public void testNasty()
+	{
+		final XJDFHelper h = XJDFHelper.parseFile(sm_dirTestData + "nasty.xjdf");
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(h);
+		d.write2File(sm_dirTestDataTemp + "nasty.jdf", 2, false);
+		assertNotNull(d);
+	}
+
+	/**
 	*
 	*
 	*/

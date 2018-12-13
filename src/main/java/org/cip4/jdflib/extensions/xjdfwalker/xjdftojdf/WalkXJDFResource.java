@@ -453,7 +453,21 @@ public class WalkXJDFResource extends WalkXElement
 			return jdfRes;
 		}
 		final JDFAttributeMap reduced = removeImplicitParts(jdfRes, partMap);
-		return jdfRes.getCreatePartition(reduced, JDFPart.guessPartIDKeys(reduced));
+		if (reduced == null || reduced.isEmpty())
+		{
+			return jdfRes;
+		}
+		try
+		{
+			final JDFResource p = jdfRes.getCreatePartition(reduced, JDFPart.guessPartIDKeys(reduced));
+			return p;
+		}
+		catch (final Exception x)
+		{
+			log.error("Cannot create partition for: " + jdfRes.getNodeName(), x);
+
+		}
+		return null;
 	}
 
 	protected JDFAttributeMap removeImplicitParts(final JDFResource jdfRes, final JDFAttributeMap partMap)

@@ -112,6 +112,16 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
+	 *
+	 * @param fileName
+	 * @return
+	 */
+	public static XJDFHelper parseFile(final String fileName)
+	{
+		return getHelper(JDFDoc.parseFile(fileName));
+	}
+
+	/**
 	 * @param xjdf if null a new XJDF is generated, else the xjdf root to be manipulated
 	 */
 	public XJDFHelper(final KElement xjdf)
