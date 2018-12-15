@@ -132,7 +132,7 @@
                 <configuration>
                     <forkCount>2</forkCount>
                     <reuseForks>true</reuseForks>
-					<forkedProcessTimeoutInSeconds>142</forkedProcessTimeoutInSeconds>
+					<forkedProcessTimeoutInSeconds>2222</forkedProcessTimeoutInSeconds>
                     <argLine>-Xmx4096m -XX:MaxPermSize=512m -Dfile.encoding=UTF-8</argLine>
                 </configuration>
             </plugin>
