@@ -832,4 +832,31 @@ public class SetHelper extends BaseXJDFHelper
 	{
 		return isSet(e) ? new SetHelper(e) : null;
 	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setExternalID(java.lang.String)
+	 */
+	@Override
+	public void setExternalID(final String newID)
+	{
+		super.setExternalID(newID);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setDescriptiveName(java.lang.String)
+	 */
+	@Override
+	public void setDescriptiveName(final String description)
+	{
+		super.setDescriptiveName(description);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setGeneralID(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void setGeneralID(final String idUsage, final String idValue)
+	{
+		super.setGeneralID(idUsage, idValue);
+	}
 }
