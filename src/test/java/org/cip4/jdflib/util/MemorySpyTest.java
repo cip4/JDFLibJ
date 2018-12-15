@@ -127,6 +127,18 @@ public class MemorySpyTest extends TestCase
 	 *
 	 */
 	@Test
+	public void testCurrentMemMeg()
+	{
+		final MemorySpy ms = new MemorySpy();
+		ms.setWantMega(true);
+		final long summary = ms.getCurrentMem();
+		assertTrue(summary > 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testReuse()
 	{
 		final MemorySpy ms = new MemorySpy();

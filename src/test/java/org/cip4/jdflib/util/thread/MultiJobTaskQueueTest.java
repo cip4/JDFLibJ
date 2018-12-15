@@ -114,7 +114,7 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 			q.queue(new WaitRunner(i, 100), "" + (i % 3));
 		assertEquals(q.getAvQueue(), 0);
-		for (int i = 0; i < 142; i++)
+		for (int i = 0; i < 342; i++)
 		{
 			ThreadUtil.sleep(4);
 			if (q.size() <= 7)
@@ -123,12 +123,26 @@ public class MultiJobTaskQueueTest extends JDFTestCaseBase
 			}
 		}
 		assertEquals(q.size(), 7, 1);
-		ThreadUtil.sleep(1111);
+		for (int i = 0; i < 342; i++)
+		{
+			ThreadUtil.sleep(4);
+			if (q.size() == 0)
+			{
+				break;
+			}
+		}
 		assertTrue(q.getAvQueue() > 0);
 		assertTrue(q.getAvRun() > 0);
 		assertEquals(q.size(), 0, 1);
 		assertTrue(q.queue(new WaitRunner(4)));
-		ThreadUtil.sleep(222);
+		for (int i = 0; i < 342; i++)
+		{
+			ThreadUtil.sleep(4);
+			if (q.size() == 0)
+			{
+				break;
+			}
+		}
 		assertEquals(q.size(), 0, 1);
 		assertTrue(q.getAvQueue() > 0);
 	}

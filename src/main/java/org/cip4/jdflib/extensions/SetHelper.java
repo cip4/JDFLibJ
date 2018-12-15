@@ -36,6 +36,8 @@
  */
 package org.cip4.jdflib.extensions;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -649,36 +651,20 @@ public class SetHelper extends BaseXJDFHelper
 	 *
 	 * @return
 	 */
+	@Override
 	public String getDescriptiveName()
 	{
 		return getAttribute(AttributeName.DESCRIPTIVENAME);
 	}
 
 	/**
-	 *
-	 * @param descriptiveName
-	 */
-	public void setDescriptiveName(final String descriptiveName)
-	{
-		setAttribute(AttributeName.DESCRIPTIVENAME, descriptiveName);
-	}
-
-	/**
 	 * @return the productID of the product
 	 *
 	 */
+	@Override
 	public String getExternalID()
 	{
 		return getAttribute(XJDFConstants.ExternalID);
-	}
-
-	/**
-	 * @param id
-	 */
-	@Override
-	public void setExternalID(final String id)
-	{
-		setAttribute(XJDFConstants.ExternalID, id);
 	}
 
 	/**
@@ -747,6 +733,7 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * returns the unified partmaps
 	 *
 	 * @return
 	 */
@@ -759,6 +746,21 @@ public class SetHelper extends BaseXJDFHelper
 			vMap.addAll(ph.getPartMapVector());
 		}
 		vMap.unify();
+		return vMap;
+	}
+
+	/**
+	 *
+	 * @return the ordered collection of PartMapVectors of each child resource
+	 */
+	public Collection<VJDFAttributeMap> getPartMapVectors()
+	{
+		final Vector<ResourceHelper> vph = getPartitions();
+		final ArrayList<VJDFAttributeMap> vMap = new ArrayList<>();
+		for (final ResourceHelper ph : vph)
+		{
+			vMap.add(ph.getPartMapVector());
+		}
 		return vMap;
 	}
 

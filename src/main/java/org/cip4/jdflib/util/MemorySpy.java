@@ -61,6 +61,23 @@ public class MemorySpy
 	private final MemoryMXBean mainBean;
 	static final long MEGA = 1024l * 1024l;
 	private boolean wantMega;
+	private static boolean defaultMega = false;
+
+	/**
+	 * @return the defaultMega
+	 */
+	public static boolean isDefaultMega()
+	{
+		return defaultMega;
+	}
+
+	/**
+	 * @param defaultMega the defaultMega to set
+	 */
+	public static void setDefaultMega(final boolean defaultMega)
+	{
+		MemorySpy.defaultMega = defaultMega;
+	}
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen * the scope of the
@@ -86,7 +103,7 @@ public class MemorySpy
 	{
 		memList = ManagementFactory.getMemoryPoolMXBeans();
 		mainBean = ManagementFactory.getMemoryMXBean();
-		wantMega = false;
+		wantMega = defaultMega;
 	}
 
 	/**
@@ -273,7 +290,7 @@ public class MemorySpy
 
 	/**
 	 * if true we want it in Megabytes
-	 * 
+	 *
 	 * @param wantMega
 	 */
 	public void setWantMega(final boolean wantMega)
