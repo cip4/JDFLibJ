@@ -108,7 +108,6 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -1423,7 +1422,6 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	@Ignore
 	public void testNasty()
 	{
 		final XJDFHelper h = XJDFHelper.parseFile(sm_dirTestData + "nasty.xjdf");
