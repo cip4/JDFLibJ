@@ -64,7 +64,7 @@ public class DumpDirTest extends JDFTestCaseBase
 		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir");
 		final DumpDir dumpDir = new DumpDir(theDir);
 		final ByteArrayIOStream bis = new ByteArrayIOStream();
-		for (int i = 1; i < 1000; i++)
+		for (int i = 1; i < 100; i++)
 			bis.write("Fooooooooooooooooooooooooooooooooooooooooo".getBytes());
 		System.gc();
 		final Runtime rt = Runtime.getRuntime();
@@ -75,7 +75,7 @@ public class DumpDirTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 		{
 			System.gc();
-			ThreadUtil.sleep(123);
+			ThreadUtil.sleep(12);
 		}
 		final long mem2 = rt.totalMemory() - rt.freeMemory();
 		if (mem2 > mem)
@@ -154,7 +154,7 @@ public class DumpDirTest extends JDFTestCaseBase
 		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir");
 		final DumpDir dumpDir = new DumpDir(theDir);
 		final ByteArrayIOStream bis = new ByteArrayIOStream();
-		for (int i = 1; i < 100; i++)
+		for (int i = 1; i < 10; i++)
 			bis.write("Fooooooooooooooooooooooooooooooooooooooooo".getBytes());
 
 		System.gc();
@@ -166,7 +166,7 @@ public class DumpDirTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 		{
 			System.gc();
-			ThreadUtil.sleep(123);
+			ThreadUtil.sleep(12);
 		}
 		final long mem2 = rt.totalMemory() - rt.freeMemory();
 		if (mem2 > mem)

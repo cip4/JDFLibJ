@@ -133,12 +133,14 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test");
 		assertEquals(q.getAvQueue(), 0);
-		assertTrue(q.queue(new WaitRunner(1)));
-		assertTrue(q.queue(new WaitRunner(2)));
-		assertTrue(q.queue(new WaitRunner(3)));
-		ThreadUtil.sleep(500);
-		assertTrue(q.queue(new WaitRunner(4)));
-		ThreadUtil.sleep(500);
+		assertTrue(q.queue(new WaitRunner(1, 2)));
+		assertTrue(q.queue(new WaitRunner(2, 2)));
+		assertTrue(q.queue(new WaitRunner(3, 2)));
+		while (q.getAvRun() == 0)
+			ThreadUtil.sleep(5);
+		assertTrue(q.queue(new WaitRunner(4, 2)));
+		while (q.getAvRun() == 0)
+			ThreadUtil.sleep(5);
 		assertTrue(q.getAvRun() > 0);
 		assertTrue(q.getAvQueue() > 0);
 

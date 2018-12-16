@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -98,7 +66,7 @@ import org.junit.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * < July 4, 2009
+ *         < July 4, 2009
  */
 public class JDFQueueFilterTest extends JDFTestCaseBase
 {
@@ -121,7 +89,6 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		super.setUp();
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
 	/**
 	 * @throws Exception
 	 *
@@ -130,7 +97,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	public void testMatchDiff_RemoveNonMatching() throws Exception
 	{
 		JDFDoc d = new JDFDoc(ElementName.QUEUE);
-		JDFQueue newQueue = (JDFQueue) d.getRoot();
+		final JDFQueue newQueue = (JDFQueue) d.getRoot();
 		for (int i = 5; i < 10; i++)
 		{
 			final JDFQueueEntry qe = newQueue.appendQueueEntry();
@@ -141,7 +108,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		System.out.println("NewQueue:\n" + newQueue.toXML());
 
 		d = new JDFDoc(ElementName.QUEUE);
-		JDFQueue oldQueue = (JDFQueue) d.getRoot();
+		final JDFQueue oldQueue = (JDFQueue) d.getRoot();
 		for (int i = 0; i < 10; i++)
 		{
 			final JDFQueueEntry qe = oldQueue.appendQueueEntry();
@@ -152,14 +119,14 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		System.out.println("OldQueue:\n" + oldQueue.toXML());
 
 		d = new JDFDoc(ElementName.JMF);
-		JDFResponse resp = ((JDFJMF) d.getRoot()).appendResponse();
+		final JDFResponse resp = ((JDFJMF) d.getRoot()).appendResponse();
 		resp.setType(EnumType.AbortQueueEntry);
 
 		d = new JDFDoc(ElementName.JMF);
-		JDFJMF theJMF = d.getJMFRoot();
-		JDFQueueFilter filter = theJMF.appendCommand(EnumType.AbortQueueEntry).appendQueueFilter();
+		final JDFJMF theJMF = d.getJMFRoot();
+		final JDFQueueFilter filter = theJMF.appendCommand(EnumType.AbortQueueEntry).appendQueueFilter();
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
-		Vector<EnumQueueEntryStatus> v = new Vector<EnumQueueEntryStatus>();
+		final Vector<EnumQueueEntryStatus> v = new Vector<>();
 		v.add(EnumQueueEntryStatus.Aborted);
 		filter.setStatusList(v);
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.JobPhase);
@@ -251,12 +218,12 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	@Test
 	public void testGetStatusList() throws Exception
 	{
-		Vector<EnumQueueEntryStatus> vs = new Vector<EnumQueueEntryStatus>();
+		final Vector<EnumQueueEntryStatus> vs = new Vector<>();
 		vs.add(EnumQueueEntryStatus.Completed);
 		vs.add(EnumQueueEntryStatus.Aborted);
 		filter.setStatusList(vs);
 
-		Vector<EnumQueueEntryStatus> statusList = filter.getStatusList();
+		final Vector<EnumQueueEntryStatus> statusList = filter.getStatusList();
 		assertTrue(statusList.contains(EnumQueueEntryStatus.Completed));
 		assertTrue(statusList.contains(EnumQueueEntryStatus.Aborted));
 		assertFalse(statusList.contains(EnumQueueEntryStatus.Running));
@@ -268,7 +235,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	@Test
 	public void testGetIdentifier()
 	{
-		NodeIdentifier ni = new NodeIdentifier("j1", "p1", null);
+		final NodeIdentifier ni = new NodeIdentifier("j1", "p1", null);
 		filter.setIdentifier(ni);
 		assertEquals(filter.getIdentifier(), ni);
 	}
@@ -344,9 +311,9 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		assertFalse("jobID ", filter.matches(qe));
 		filter.setJobPartID("part");
 
-		JDFDate d = new JDFDate();
+		final JDFDate d = new JDFDate();
 		qe.setSubmissionTime(d);
-		JDFDate d2 = d.clone();
+		final JDFDate d2 = d.clone();
 		d2.addOffset(200, 0, 0, 0);
 		filter.setOlderThan(d2);
 		assertTrue("older ", filter.matches(qe));
@@ -454,7 +421,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
 		}
 		final JDFQueue qLast = (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
-		JDFQueue qCopy = filter.copy(theQueue, qLast, null);
+		final JDFQueue qCopy = filter.copy(theQueue, qLast, null);
 		assertNull(qCopy.getQueueEntry(0));
 		filter.setMaxEntries(0);
 		JDFQueue copy = filter.copy(theQueue, null, null);
@@ -480,7 +447,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 			qe.setQueueEntryID("q" + i);
 			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
 		}
-		JDFQueue qCopy = filter.copy(theQueue, null, null);
+		final JDFQueue qCopy = filter.copy(theQueue, null, null);
 		assertNull(qCopy.getQueueEntry(0));
 		assertEquals(120, qCopy.getQueueSize());
 	}
@@ -500,13 +467,13 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
 		}
 		final JDFQueue qLast = (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
-		JDFQueueEntry queueEntryLast = qLast.getQueueEntry(333);
-		JDFQueueEntry queueEntryNew = theQueue.getQueueEntry(333);
+		final JDFQueueEntry queueEntryLast = qLast.getQueueEntry(333);
+		final JDFQueueEntry queueEntryNew = theQueue.getQueueEntry(333);
 		queueEntryLast.setPriority(100);
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
 
 		final long l1 = System.currentTimeMillis();
-		JDFQueue qCopy = filter.copy(theQueue, qLast, null);
+		final JDFQueue qCopy = filter.copy(theQueue, qLast, null);
 		final long l2 = System.currentTimeMillis();
 		assertEquals("copy time <1 second", 1000, (l2 - l1), 1000);
 		assertEquals(qCopy.numEntries(null), 1);
@@ -546,7 +513,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 				filter.setActivation(EnumActivation.Inactive);
 
 			final long l1 = System.currentTimeMillis();
-			JDFQueue qCopy = filter.copy(theQueue, null, null);
+			final JDFQueue qCopy = filter.copy(theQueue, null, null);
 			final long l2 = System.currentTimeMillis();
 			assertEquals("copy time <1 second", 1000, (l2 - l1), 1000);
 			if (test < 3)
@@ -579,8 +546,8 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
 
 		final JDFQueue qLast = (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
-		JDFQueueEntry queueEntryLast = qLast.getQueueEntry(333);
-		JDFQueueEntry queueEntryNew = theQueue.getQueueEntry(333);
+		final JDFQueueEntry queueEntryLast = qLast.getQueueEntry(333);
+		final JDFQueueEntry queueEntryNew = theQueue.getQueueEntry(333);
 
 		queueEntryLast.getJobPhase(0).setStatusDetails("other");
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.JobPhase);
@@ -606,7 +573,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	public void testCopyToDeltaSubset()
 	{
 		theQueue.setAutomated(false);
-		HashSet<String> set = new HashSet<String>();
+		final HashSet<String> set = new HashSet<>();
 		for (int i = 0; i < 1200; i++)
 		{
 			final JDFQueueEntry qe = theQueue.appendQueueEntry();
@@ -629,7 +596,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.JobPhase);
 		JDFQueue qCopy = filter.copy(theQueue, qLast, null);
 		assertEquals(qCopy.getQueueEntryVector().size() - 1, 1200 / 13);
-		Set<String> ms = qCopy.getQueueEntryIDMap().keySet();
+		final Set<String> ms = qCopy.getQueueEntryIDMap().keySet();
 		assertTrue(ms.equals(set));
 		filter.setQueueEntrieDefs(new HashSet<String>());
 		qCopy = filter.copy(theQueue, qLast, null);
@@ -643,7 +610,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	public void testCopyToDeltaSubsetRemove()
 	{
 		theQueue.setAutomated(false);
-		HashSet<String> set = new HashSet<String>();
+		final HashSet<String> set = new HashSet<>();
 		for (int i = 0; i < 1200; i++)
 		{
 			final JDFQueueEntry qe = theQueue.appendQueueEntry();
@@ -665,7 +632,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.JobPhase);
 		JDFQueue qCopy = filter.copy(theQueue, qLast, null);
 		assertEquals(qCopy.getQueueEntryVector().size() - 1, 1000 / 13);
-		Set<String> ms = qCopy.getQueueEntryIDMap().keySet();
+		final Set<String> ms = qCopy.getQueueEntryIDMap().keySet();
 		assertTrue(set.containsAll(ms));
 		filter.setQueueEntrieDefs(new HashSet<String>());
 		qCopy = filter.copy(theQueue, qLast, null);
@@ -680,7 +647,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	{
 		theQueue.setAutomated(true);
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
-		CPUTimer ct = new CPUTimer(false);
+		final CPUTimer ct = new CPUTimer(false);
 		for (int i = 0; i < 9400; i++)
 		{
 			final JDFQueue qLast = i < 9000 ? null : (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
@@ -692,7 +659,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 			if (i > 9000)
 			{
 				ct.start();
-				JDFQueue qCopy = filter.copy(theQueue, qLast, null);
+				final JDFQueue qCopy = filter.copy(theQueue, qLast, null);
 				assertEquals("test " + i, qCopy.getQueueEntryVector().size(), 1);
 				assertEquals("test " + i, qCopy.getQueueEntry(0).getQueueEntryID(), "q" + i);
 				if ((i % 100) == 0)
@@ -711,22 +678,22 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	{
 		theQueue.setAutomated(true);
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
-		CPUTimer ct = new CPUTimer(false);
+		final CPUTimer ct = new CPUTimer(false);
 		final JDFQueue qLast = (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
-		JDFQueueEntry qeLast = qLast.appendQueueEntry();
-		for (int i = 0; i < 19400; i++)
+		final JDFQueueEntry qeLast = qLast.appendQueueEntry();
+		for (int i = 0; i < 9400; i++)
 		{
 			final JDFQueueEntry qe = theQueue.appendQueueEntry();
 			qe.setPriority((i * 317) % 99);
 			qe.setQueueEntryID("q" + i);
 			qeLast.setQueueEntryID("q" + i);
 			filter.getCreateQueueEntryDef(0).setQueueEntryID("q" + i);
-			if (i == 19000)
+			if (i == 9000)
 				log.info("startup");
-			if (i > 19000)
+			if (i > 9000)
 			{
 				ct.start();
-				JDFQueue qCopy = filter.copy(theQueue, qLast, null);
+				final JDFQueue qCopy = filter.copy(theQueue, qLast, null);
 				assertEquals("test " + i, qCopy.getQueueEntryVector().size(), 1);
 				assertEquals("test " + i, qCopy.getQueueEntry(0).getQueueEntryID(), "q" + i);
 				if ((i % 100) == 0)
