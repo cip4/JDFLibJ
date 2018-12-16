@@ -228,7 +228,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	{
 		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multiZapp", 3);
 		for (int i = 0; i < 10; i++)
-			q.queue(new WaitRunner(i, 333));
+			q.queue(new WaitRunner(i, 111));
 
 		while (q.size() > 7)
 			ThreadUtil.sleep(10);
@@ -239,6 +239,6 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 			q.interruptCurrent(1);
 			ThreadUtil.sleep(10);
 		}
-		assertTrue(System.currentTimeMillis() - t0 < 1200);
+		assertEquals(System.currentTimeMillis() - t0, 1200, 1200);
 	}
 }
