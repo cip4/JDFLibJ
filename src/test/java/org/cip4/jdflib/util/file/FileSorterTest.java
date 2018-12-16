@@ -63,11 +63,11 @@ public class FileSorterTest extends JDFTestCaseBase
 		final File dir = new File(sm_dirTestDataTemp + "filesort");
 		FileUtil.deleteAll(dir);
 		dir.mkdirs();
-		final VString names = new VString("a c g b e", null);
+		final VString names = new VString("a c b", null);
 		for (final String s : names)
 		{
 			FileUtil.getFileInDirectory(dir, new File(s)).createNewFile();
-			ThreadUtil.sleep(200);
+			ThreadUtil.sleep(1100);
 		}
 		final FileSorter fs = new FileSorter(dir);
 		File[] list = fs.sortLastModified(false);
