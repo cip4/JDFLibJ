@@ -239,6 +239,6 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 			q.interruptCurrent(1);
 			ThreadUtil.sleep(10);
 		}
-		assertTrue(System.currentTimeMillis() - t0 < 300);
+		assertTrue(System.currentTimeMillis() - t0 < 1200);
 	}
 }

@@ -166,7 +166,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 		final JDFRunList rl = (JDFRunList) JDFNode.parseFile(sm_dirTestData + "collapse.jdf").getResource(ElementName.RUNLIST, EnumUsage.Input, 0);
 		final long t0 = System.currentTimeMillis();
 		rl.collapse(false, true);
-		assertEquals(System.currentTimeMillis(), t0, 62000);
+		assertEquals(System.currentTimeMillis() - t0, 42000, 42000);
 	}
 
 	/**
