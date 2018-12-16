@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -113,20 +113,20 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		lo.setAutomated(true);
 		lo.appendElement(ElementName.POSITION);
 
-		final SetHelper shBS = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, null);
+		final SetHelper shBS = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 		final ResourceHelper rhBS = shBS.appendPartition(null, true);
 		final JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
 		bs.setFoldCatalog("F4-1");
 		bs.setBinderySignatureType(EnumBinderySignatureType.Fold);
 
-		final SetHelper shAss = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.ASSEMBLY, null);
+		final SetHelper shAss = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.ASSEMBLY, EnumUsage.Input);
 		final ResourceHelper rhAss = shAss.appendPartition(null, true);
 		final JDFAssembly ass = (JDFAssembly) rhAss.getResource();
 		ass.setOrder(EnumOrder.Collecting);
 		xjdfHelper.cleanUp();
 
 		cleanSnippets(xjdfHelper);
-		writeTest(xjdfHelper, "processes/IDPBooklet.xjdf");
+		writeTest(xjdfHelper, "processes/LayoutBooklet.xjdf");
 	}
 
 	/**
