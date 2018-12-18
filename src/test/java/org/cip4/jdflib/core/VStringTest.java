@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -184,6 +184,21 @@ public class VStringTest extends TestCase
 		assertTrue(v.containsAny(new VString("g c h", " ")));
 		assertTrue(v.containsAny(v));
 
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testIsEmpty()
+	{
+		assertTrue(VString.isEmpty(null));
+		final VString v = new VString();
+		assertTrue(VString.isEmpty(v));
+		v.appendUnique("");
+		assertTrue(VString.isEmpty(v));
+		v.set(0, "b");
+		assertFalse(VString.isEmpty(v));
 	}
 
 	/**

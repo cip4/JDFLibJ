@@ -2,53 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in
- * Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted
- * provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions
- * and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of
- * conditions and the following disclaimer in the documentation and/or other materials provided with
- * the distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution, if any, must include the
- * following acknowledgment: "This product includes software developed by the The International
- * Cooperation for the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)"
- * Alternately, this acknowledgment may appear in the software itself, if and wherever such
- * third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in
- * Prepress, Press and Postpress" must not be used to endorse or promote products derived from this
- * software without prior written permission. For written permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their
- * name, without prior written permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For details please
- * consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN
- * PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
- * THE POSSIBILITY OF SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many individuals on behalf of the The
- * International Cooperation for the Integration of Processes in Prepress, Press and Postpress and
- * was originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the Integration of Processes in
- * Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -100,8 +83,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * copy constructor, the map elements are cloned
 	 *
-	 * @param toAdd
-	 *            Vector of elements to clone
+	 * @param toAdd Vector of elements to clone
 	 */
 	public VJDFAttributeMap(final Vector<JDFAttributeMap> toAdd)
 	{
@@ -118,8 +100,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * constructor from array, the map elements are not cloned
 	 *
-	 * @param toAdd
-	 *            the array
+	 * @param toAdd the array
 	 */
 	public VJDFAttributeMap(final JDFAttributeMap[] toAdd)
 	{
@@ -134,8 +115,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * @param moreMap
-	 *            the single attribute map to add
+	 * @param moreMap the single attribute map to add
 	 */
 	public VJDFAttributeMap(final JDFAttributeMap moreMap)
 	{
@@ -167,6 +147,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * are we null or empty or contain only an empty JDFAttributeMap
+	 * 
 	 * @param v
 	 * @return
 	 */
@@ -176,10 +157,8 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * @param sepMap
-	 *            the separator between maps
-	 * @param sepEntry
-	 *            the separator between map entries
+	 * @param sepMap the separator between maps
+	 * @param sepEntry the separator between map entries
 	 * @return the string representation
 	 */
 	public String showKeys(final String sepMap, final String sepEntry)
@@ -212,11 +191,8 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * @param strKey
-	 *            the attribute to get values from
-	 * @param bUnique
-	 *            if true, ensure unique vector, else the vector corresponds to the
-	 *            vector of values
+	 * @param strKey the attribute to get values from
+	 * @param bUnique if true, ensure unique vector, else the vector corresponds to the vector of values
 	 * @return the Vector of all values
 	 */
 	public VString getPartValues(final String strKey, final boolean bUnique)
@@ -241,10 +217,8 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * replace all maps in this with n maps that have the values strKey, vsValues
 	 *
-	 * @param strKey
-	 *            the new key to add
-	 * @param vsValues
-	 *            String of values
+	 * @param strKey the new key to add
+	 * @param vsValues String of values
 	 */
 	public void extendMap(final String strKey, final VString vsValues)
 	{
@@ -255,6 +229,8 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 		final VJDFAttributeMap vec = new VJDFAttributeMap();
 
+		if (isEmpty())
+			add(new JDFAttributeMap());
 		for (final JDFAttributeMap map : this)
 		{
 			for (final String val : vsValues)
@@ -269,11 +245,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * andMap - builds a new vector of maps with identical pairs of both maps does
-	 * not modify this
+	 * andMap - builds a new vector of maps with identical pairs of both maps does not modify this
 	 *
-	 * @param map
-	 *            the given map
+	 * @param map the given map
 	 * @return the anded map, null if mismatches occurred
 	 */
 	public VJDFAttributeMap getAndMaps(final JDFAttributeMap map)
@@ -307,11 +281,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * andMap - builds a new vector of maps with identical pairs of both maps does
-	 * not modify this
+	 * andMap - builds a new vector of maps with identical pairs of both maps does not modify this
 	 *
-	 * @param map
-	 *            the given map
+	 * @param map the given map
 	 * @return the anded map, null if mismatches occurred
 	 */
 	public VJDFAttributeMap getOrMaps(final JDFAttributeMap map)
@@ -346,8 +318,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * @see java.util.Map#containsKey(java.lang.Object)
-	 * @param key
-	 *            the key to check for
+	 * @param key the key to check for
 	 * @return true if any of the maps contains key
 	 */
 	public boolean containsKey(final Object key)
@@ -367,8 +338,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * sets the Vector with JDFAttributeMap elements
 	 *
-	 * @param vec
-	 *            the Vector with JDFAttributeMap elements
+	 * @param vec the Vector with JDFAttributeMap elements
 	 */
 	public void setVector(final Vector<JDFAttributeMap> vec)
 	{
@@ -425,8 +395,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * Returns the element at the given position
 	 *
-	 * @param i
-	 *            the given position (may be<0 to count backwards)
+	 * @param i the given position (may be<0 to count backwards)
 	 * @return JDFAttributeMap - the selected element
 	 */
 	@Override
@@ -442,8 +411,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * Returns the element at the given position (may be<0 to count backwards)
 	 *
-	 * @param i
-	 *            the given position
+	 * @param i the given position
 	 * @return JDFAttributeMap - the selected element
 	 */
 	@Override
@@ -493,15 +461,11 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * Tests whether this has a entry with the same key and value entries not more
-	 * nor less keys
+	 * Tests whether this has a entry with the same key and value entries not more nor less keys
 	 *
-	 * @param attmap
-	 *            the given JDFAttributeMap element
+	 * @param attmap the given JDFAttributeMap element
 	 * @deprecated use contains
-	 * @return boolean - true if and only if the specified AttributeMap has the some
-	 *         number of keys and values and the same keys and values as a entry in
-	 *         this vector
+	 * @return boolean - true if and only if the specified AttributeMap has the some number of keys and values and the same keys and values as a entry in this vector
 	 */
 	@Deprecated
 	public boolean hasEntryWithEqualKeyValuePairs(final JDFAttributeMap attmap)
@@ -585,8 +549,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * reduce each JDFAttributeMap in <code>this</code> by keySet (only entries in
-	 * keyset are retained)
+	 * reduce each JDFAttributeMap in <code>this</code> by keySet (only entries in keyset are retained)
 	 *
 	 * @param keySet
 	 */
@@ -625,8 +588,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * return the map that is common to all elements of this. All keys exist and
-	 * have the same value
+	 * return the map that is common to all elements of this. All keys exist and have the same value
 	 *
 	 * @return the vector of all keys
 	 */
@@ -666,8 +628,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 *
-	 * @param map
-	 *            map to append
+	 * @param map map to append
 	 */
 	public void appendUnique(final JDFAttributeMap map)
 	{
@@ -693,8 +654,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * Method appendUnique.
 	 *
-	 * @param map
-	 *            maps to append
+	 * @param map maps to append
 	 */
 	public void appendUnique(final VJDFAttributeMap map)
 	{
@@ -718,8 +678,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * Method overlapMap. removes all non-overlapping maps from this
 	 *
-	 * @param map
-	 *            the map to check against
+	 * @param map the map to check against
 	 */
 	public void overlapMap(final JDFAttributeMap map)
 	{
@@ -733,13 +692,10 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * Method overlapMap. get a copy of this with all overlapping maps the maps are
-	 * NOT cloned
+	 * Method overlapMap. get a copy of this with all overlapping maps the maps are NOT cloned
 	 *
-	 * @param map
-	 *            the map to check against
-	 * @return a new VJDFAttributemap with the overlapping entries of this - never
-	 *         null
+	 * @param map the map to check against
+	 * @return a new VJDFAttributemap with the overlapping entries of this - never null
 	 */
 	public VJDFAttributeMap getOverlapMaps(final JDFAttributeMap map)
 	{
@@ -755,17 +711,12 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * Method overlapMap. get a copy of this with all matching maps the maps are NOT
-	 * cloned
+	 * Method overlapMap. get a copy of this with all matching maps the maps are NOT cloned
 	 *
-	 * @param key
-	 *            the key to match
-	 * @param regExp
-	 *            the simplified regexp
-	 * @param ignoreCase
-	 *            duh...
-	 * @return a new VJDFAttributemap with the matching entries of this - never null
-	 *         (may be safely daisy-chained)
+	 * @param key the key to match
+	 * @param regExp the simplified regexp
+	 * @param ignoreCase duh...
+	 * @return a new VJDFAttributemap with the matching entries of this - never null (may be safely daisy-chained)
 	 */
 	public VJDFAttributeMap getMatchingMaps(final String key, final String regExp, final boolean ignoreCase)
 	{
@@ -781,11 +732,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * Method overlapMap. only entries that contain at least one matching map entry
-	 * are retained
+	 * Method overlapMap. only entries that contain at least one matching map entry are retained
 	 *
-	 * @param vMap
-	 *            the map to check against
+	 * @param vMap the map to check against
 	 */
 	public void overlapMap(final VJDFAttributeMap vMap)
 	{
@@ -805,8 +754,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * Method overlapMap.
 	 *
-	 * @param map
-	 *            the map to check against
+	 * @param map the map to check against
 	 * @return
 	 */
 	public boolean overlapsMap(final JDFAttributeMap map)
@@ -824,8 +772,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * Method subMap.
 	 *
-	 * @param map
-	 *            the submap to check against
+	 * @param map the submap to check against
 	 * @return true if this has at least one entry that subMap is a submap of
 	 */
 	public boolean subMap(final JDFAttributeMap map)
@@ -843,10 +790,8 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * Method subMap.
 	 *
-	 * @param vMap
-	 *            the vector submaps to check against
-	 * @return true if this has at least one entry that vMap contains at least a
-	 *         submap of
+	 * @param vMap the vector submaps to check against
+	 * @return true if this has at least one entry that vMap contains at least a submap of
 	 */
 	public boolean subMap(final VJDFAttributeMap vMap)
 	{
@@ -865,13 +810,10 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * Method overlapsMap. returns true if at least one element exists that has no
-	 * non-matching key value pairs
+	 * Method overlapsMap. returns true if at least one element exists that has no non-matching key value pairs
 	 *
-	 * @param vMap
-	 *            the vector to check against
-	 * @return true if this has at least one entry that vMap contains at least a
-	 *         submap of
+	 * @param vMap the vector to check against
+	 * @return true if this has at least one entry that vMap contains at least a submap of
 	 */
 	public boolean overlapsMap(final VJDFAttributeMap vMap)
 	{
@@ -895,13 +837,10 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * equals - Compares two map vectors, returns true if content equal regardless
-	 * of element order, otherwise false.<br>
-	 * If input is not of type VJDFAttributeMap, result of superclasses equals
-	 * method is returned.
+	 * equals - Compares two map vectors, returns true if content equal regardless of element order, otherwise false.<br>
+	 * If input is not of type VJDFAttributeMap, result of superclasses equals method is returned.
 	 *
-	 * @param other
-	 *            in this case VJDFAttributeMap to compare
+	 * @param other in this case VJDFAttributeMap to compare
 	 *
 	 * @return boolean - true if the maps are equal, otherwise false
 	 */
@@ -955,12 +894,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * put the key value pair into all entries
 	 *
-	 * @param key
-	 *            the key to set - may be either String or Enum
-	 * @param value
-	 *            the value to set - may be either String or Enum
-	 * @throws IllegalArgumentException
-	 *             if key or value have the wrong type
+	 * @param key the key to set - may be either String or Enum
+	 * @param value the value to set - may be either String or Enum
+	 * @throws IllegalArgumentException if key or value have the wrong type
 	 */
 	public void put(final Object key, final Object value)
 	{
@@ -995,13 +931,10 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * put the key value pair into all entries; if no entries are there, create
-	 * exactly one entry with the given key value pair
+	 * put the key value pair into all entries; if no entries are there, create exactly one entry with the given key value pair
 	 *
-	 * @param key
-	 *            the key to set
-	 * @param value
-	 *            the value to set
+	 * @param key the key to set
+	 * @param value the value to set
 	 */
 	public void put(final String key, final String value)
 	{

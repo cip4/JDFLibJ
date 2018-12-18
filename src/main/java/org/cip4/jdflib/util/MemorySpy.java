@@ -247,7 +247,8 @@ public class MemorySpy
 		final HashMap<String, Long> map = new HashMap<>();
 		map.put("Free", Runtime.getRuntime().freeMemory() / div);
 		map.put("Total", Runtime.getRuntime().totalMemory() / div);
-		map.put("Current", getHeapUsed(MemScope.current) / div);
+		map.put("Current", getCurrentMem());
+		map.put("Peak", getHeapUsed(MemScope.peak));
 		return map;
 	}
 

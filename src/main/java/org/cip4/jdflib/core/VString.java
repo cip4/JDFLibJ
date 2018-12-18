@@ -71,7 +71,17 @@ public class VString extends Vector<String>
 	 */
 	final public static VString emptyVector = new VString();
 
-	// **************************************** Constructors ****************************************
+	/**
+	 * are we null or empty or contain only an empty JDFAttributeMap
+	 *
+	 * @param v
+	 * @return
+	 */
+	public static boolean isEmpty(final VString v)
+	{
+		return v == null || v.isEmpty() || v.size() == 1 && StringUtil.isEmpty(v.get(0));
+	}
+
 	/**
 	 * constructor
 	 */
