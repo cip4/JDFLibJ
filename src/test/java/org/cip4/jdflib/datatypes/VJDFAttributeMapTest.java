@@ -708,6 +708,8 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		v.removeKey("a2");
 		assertEquals(v, v2);
 		assertEquals(v.size(), 1);
+		v.removeKey("a1");
+		assertTrue(v.isEmpty());
 	}
 
 }

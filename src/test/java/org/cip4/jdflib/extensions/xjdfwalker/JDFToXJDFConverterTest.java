@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFTransferFunction;
@@ -288,6 +289,47 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		assertEquals(xjdff1.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.1");
 		assertEquals(xjdff2.getXPathAttribute("ResourceSet[@Name=\"Component\"]/Dependent/@JobPartID", null), "p.1");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCPI()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setJobPartID("p");
+		n.setType(EnumType.ProcessGroup);
+		n.addTypes(EnumType.ConventionalPrinting);
+		n.addTypes(EnumType.Folding);
+		final JDFResource r0 = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
+		r0.setDescriptiveName("input foobar");
+		final JDFResourceLink rl0 = n.ensureLink(r0, null, null);
+		rl0.setCombinedProcessIndex(0);
+		rl0.setAmount(40);
+		final JDFResource r1 = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		r1.setDescriptiveName("exchange foobar");
+		final JDFResourceLink rl2 = n.ensureLink(r1, EnumUsage.Input, null);
+		rl2.setCombinedProcessIndex(1);
+		rl2.setAmount(20);
+		final JDFResourceLink rl1 = n.ensureLink(r1, EnumUsage.Output, null);
+		rl1.setCombinedProcessIndex(0);
+		rl1.setAmount(30);
+		final JDFResource r2 = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		r2.setDescriptiveName("output foobar");
+		final JDFResourceLink rl3 = n.ensureLink(r2, null, null);
+		rl3.setCombinedProcessIndex(1);
+		rl3.setAmount(10);
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		conv.setSingleNode(true);
+		final KElement xjdf = conv.convert(n);
+		final XJDFHelper h = XJDFHelper.getHelper(xjdf);
+		assertNotNull(h.getSet(ElementName.COMPONENT, EnumUsage.Output, null, new JDFIntegerList(0)));
+		assertNotNull(h.getSet(ElementName.COMPONENT, EnumUsage.Output, null, new JDFIntegerList(1)));
+		assertNotNull(h.getSet(ElementName.COMPONENT, EnumUsage.Input, null, new JDFIntegerList(0)));
+		assertNull(h.getSet(ElementName.COMPONENT, EnumUsage.Input, null, new JDFIntegerList(1)));
+
 	}
 
 	/**
