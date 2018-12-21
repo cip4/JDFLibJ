@@ -224,7 +224,13 @@ public class WalkJDFElement extends WalkElement
 		{
 			name += 's';
 		}
-		if ("MediaRef".equals(re.getLocalName()))
+		name = getMediaRefName(re, name);
+		return name;
+	}
+
+	String getMediaRefName(final JDFRefElement re, String name)
+	{
+		if ("MediaRef".equals(name))
 		{
 			final KElement parent = re.getParentNode_KElement();
 			if ((parent instanceof JDFLayout) || (parent instanceof JDFStrippingParams))
@@ -235,11 +241,11 @@ public class WalkJDFElement extends WalkElement
 					final EnumMediaType t = m.getMediaType();
 					if (EnumMediaType.Paper.equals(t))
 					{
-						return "PaperRef";
+						name = "PaperRef";
 					}
 					if (EnumMediaType.Plate.equals(t))
 					{
-						return "PlateRef";
+						name = "PlateRef";
 					}
 				}
 			}
@@ -407,6 +413,11 @@ public class WalkJDFElement extends WalkElement
 		final int nLeaves = resourceSet.numChildElements(className, null);
 		final VElement vRes = expandLink ? ((JDFResourceLink) rl).getRawTargetVector(0) : linkTarget.getLeaves(false);
 
+		return loopLeaves(rl, className, resourceSet, nLeaves, vRes);
+	}
+
+	VElement loopLeaves(final JDFElement rl, final String className, final KElement resourceSet, final int nLeaves, final VElement vRes)
+	{
 		final VElement v = new VElement();
 		for (final KElement e : vRes)
 		{
@@ -548,16 +559,21 @@ public class WalkJDFElement extends WalkElement
 			}
 			else
 			{
-				final VElement vPartAmounts = ap.getMatchingPartAmountVector(partMap);
-				if (vPartAmounts != null && vPartAmounts.size() > 0)
-				{
-					ap = (JDFAmountPool) newLeaf.getCreateElement(ElementName.AMOUNTPOOL);
-					for (final KElement e : vPartAmounts)
-					{
-						final JDFPartAmount pa = (JDFPartAmount) e;
-						moveToAmountPool(ap, pa);
-					}
-				}
+				processAmountPool(newLeaf, partMap, ap);
+			}
+		}
+	}
+
+	void processAmountPool(final KElement newLeaf, final JDFAttributeMap partMap, JDFAmountPool ap)
+	{
+		final VElement vPartAmounts = ap.getMatchingPartAmountVector(partMap);
+		if (vPartAmounts != null && vPartAmounts.size() > 0)
+		{
+			ap = (JDFAmountPool) newLeaf.getCreateElement(ElementName.AMOUNTPOOL);
+			for (final KElement e : vPartAmounts)
+			{
+				final JDFPartAmount pa = (JDFPartAmount) e;
+				moveToAmountPool(ap, pa);
 			}
 		}
 	}
@@ -689,39 +705,48 @@ public class WalkJDFElement extends WalkElement
 					}
 				}
 				vCreators.unify();
-				if (vCreators != null && !vCreators.isEmpty())
+				if (vCreators.isEmpty())
 				{
-					for (final KElement creator : vCreators)
-					{
-						final JDFNode depNode = (JDFNode) creator;
-						if (!depNode.isGroupNode())
-						{
-							final KElement dependent = resourceSet.appendElement(XJDFConstants.Dependent);
-							dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
-							dependent.copyAttribute(AttributeName.JMFURL, depNode);
-							dependent.copyAttribute(AttributeName.JOBPARTID, depNode);
-							dependent.moveAttribute(AttributeName.PIPEPROTOCOL, linkRoot);
-							dependent.moveAttribute(AttributeName.PIPEPROTOCOL, resLink);
-							dependent.moveAttribute(AttributeName.PIPEID, linkRoot);
-							removeDuplicateDependents(resourceSet);
-						}
-					}
+					createNewDependent(resourceSet, linkRoot, resLink);
 				}
 				else
 				{
-					final KElement dependent = resourceSet.appendElement(XJDFConstants.Dependent);
-					dependent.moveAttribute(AttributeName.PIPEPAUSE, linkRoot);
-					dependent.moveAttribute(AttributeName.PIPEPAUSE, resLink);
-					dependent.moveAttribute(AttributeName.PIPERESUME, linkRoot);
-					dependent.moveAttribute(AttributeName.PIPERESUME, resLink);
-					dependent.moveAttribute(AttributeName.PIPEPROTOCOL, linkRoot);
-					dependent.moveAttribute(AttributeName.PIPEPROTOCOL, resLink);
-					dependent.moveAttribute(AttributeName.PIPEID, linkRoot);
-					dependent.copyAttribute(AttributeName.PIPEPARTIDKEYS, resLink);
-					removeDuplicateDependents(resourceSet);
+					for (final KElement creator : vCreators)
+					{
+						processCreator(resourceSet, linkRoot, resLink, creator);
+					}
 				}
-
 			}
+		}
+	}
+
+	void createNewDependent(final KElement resourceSet, final JDFResource linkRoot, final JDFResourceLink resLink)
+	{
+		final KElement dependent = resourceSet.appendElement(XJDFConstants.Dependent);
+		dependent.moveAttribute(AttributeName.PIPEPAUSE, linkRoot);
+		dependent.moveAttribute(AttributeName.PIPEPAUSE, resLink);
+		dependent.moveAttribute(AttributeName.PIPERESUME, linkRoot);
+		dependent.moveAttribute(AttributeName.PIPERESUME, resLink);
+		dependent.moveAttribute(AttributeName.PIPEPROTOCOL, linkRoot);
+		dependent.moveAttribute(AttributeName.PIPEPROTOCOL, resLink);
+		dependent.moveAttribute(AttributeName.PIPEID, linkRoot);
+		dependent.copyAttribute(AttributeName.PIPEPARTIDKEYS, resLink);
+		removeDuplicateDependents(resourceSet);
+	}
+
+	void processCreator(final KElement resourceSet, final JDFResource linkRoot, final JDFResourceLink resLink, final KElement creator)
+	{
+		final JDFNode depNode = (JDFNode) creator;
+		if (!depNode.isGroupNode())
+		{
+			final KElement dependent = resourceSet.appendElement(XJDFConstants.Dependent);
+			dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
+			dependent.copyAttribute(AttributeName.JMFURL, depNode);
+			dependent.copyAttribute(AttributeName.JOBPARTID, depNode);
+			dependent.moveAttribute(AttributeName.PIPEPROTOCOL, linkRoot);
+			dependent.moveAttribute(AttributeName.PIPEPROTOCOL, resLink);
+			dependent.moveAttribute(AttributeName.PIPEID, linkRoot);
+			removeDuplicateDependents(resourceSet);
 		}
 	}
 
