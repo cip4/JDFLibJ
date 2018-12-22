@@ -70,6 +70,11 @@ import org.cip4.jdflib.ifaces.IStreamWriter;
 public class FileUtil
 {
 
+	private FileUtil()
+	{
+		super();
+	}
+
 	/**
 	 * get any auxiliary directory with the same name as a file
 	 *
@@ -78,13 +83,9 @@ public class FileUtil
 	 */
 	public static File getAuxDir(final File hotFile)
 	{
-		if (hotFile == null)
-		{
-			return null;
-		}
-		final String name = hotFile.getName();
+		final String name = hotFile == null ? null : hotFile.getName();
 		final String base = UrlUtil.newExtension(name, null);
-		if (StringUtil.getNonEmpty(base) == null)
+		if (StringUtil.isEmpty(base))
 			return null;
 		final File parentDir = hotFile.getParentFile();
 		File auxFile = getFileInDirectory(parentDir, new File(base));
@@ -97,7 +98,8 @@ public class FileUtil
 				final String ext = getExtension(hotFile);
 				for (final File f : v)
 				{
-					if (newExtension(f, ext).getName().equals(name))
+					final File newExtension = newExtension(f, ext);
+					if (newExtension != null && name.equals(newExtension.getName()))
 					{
 						auxFile = f;
 						break;

@@ -3,70 +3,38 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *  
- * 
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ *
+ *
  */
 /**
  *
@@ -89,9 +57,9 @@ import org.apache.commons.io.IOUtils;
 
 /**
  * Shared input / outputStream class write once, read many...
- * 
+ *
  * @author rainer prosi
- * 
+ *
  */
 public class ByteArrayIOFileStream extends ByteArrayIOStream
 {
@@ -102,27 +70,29 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	private boolean isTmpFile;
 
 	/**
-	 * 
+	 *
 	 * get a completely buffered and resizable input stream
+	 *
 	 * @param is
 	 * @return
 	 */
-	public static ByteArrayIOInputStream getBufferedInputStream(InputStream is, long maxLen)
+	public static ByteArrayIOInputStream getBufferedInputStream(final InputStream is, final long maxLen)
 	{
 		if (is == null)
 			return null;
 		if (is instanceof ByteArrayIOInputStream)
 			return ((ByteArrayIOInputStream) is).getNewStream();
-		ByteArrayIOStream byteArrayIOStream = new ByteArrayIOFileStream(is, maxLen);
-		ByteArrayIOInputStream inputStream = byteArrayIOStream.getInputStream();
+		final ByteArrayIOStream byteArrayIOStream = new ByteArrayIOFileStream(is, maxLen);
+		final ByteArrayIOInputStream inputStream = byteArrayIOStream.getInputStream();
 		return inputStream;
 	}
 
 	/**
-	 * 
+	 *
 	 * bytearrayinputstream that allows duplication without copying
+	 *
 	 * @author rainer prosi
-	 *  
+	 *
 	 */
 	public static class ByteArrayIOFileInputStream extends ByteArrayIOInputStream
 	{
@@ -133,9 +103,9 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		/**
 		 * @param buf
 		 * @param count
-		 *  
+		 *
 		 */
-		ByteArrayIOFileInputStream(ByteArrayIOFileStream ios)
+		ByteArrayIOFileInputStream(final ByteArrayIOFileStream ios)
 		{
 			super(new byte[1], 0);
 			this.ios = ios;
@@ -144,21 +114,22 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 			{
 				pos = ios.os.getFilePointer();
 			}
-			catch (IOException e)
+			catch (final IOException e)
 			{
 				pos = 0;
 			}
 		}
 
 		/**
-		 * 
+		 *
 		 * get a new input stream that starts at current pos
+		 *
 		 * @return
 		 */
 		@Override
 		public ByteArrayIOInputStream getNewStream()
 		{
-			ByteArrayIOFileInputStream byteArrayIOFileInputStream = new ByteArrayIOFileInputStream(ios);
+			final ByteArrayIOFileInputStream byteArrayIOFileInputStream = new ByteArrayIOFileInputStream(ios);
 			byteArrayIOFileInputStream.pos = pos;
 
 			return byteArrayIOFileInputStream;
@@ -174,7 +145,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		}
 
 		/**
-		 * 
+		 *
 		 * @return
 		 */
 		@Override
@@ -184,7 +155,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 			{
 				return ios.os.length();
 			}
-			catch (IOException e)
+			catch (final IOException e)
 			{
 				return 0;
 			}
@@ -204,13 +175,13 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 					this.pos = pos;
 				}
 			}
-			catch (IOException e)
+			catch (final IOException e)
 			{
 			}
 		}
 
 		/**
-		 * 
+		 *
 		 * @see org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream#tell()
 		 */
 		@Override
@@ -231,36 +202,36 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 			try
 			{
 				ios.os.seek(pos);
-				int read = ios.os.read();
+				final int read = ios.os.read();
 				if (read >= 0)
 					pos++;
 				return read;
 			}
-			catch (IOException e)
+			catch (final IOException e)
 			{
 				return -1;
 			}
 		}
 
 		@Override
-		public synchronized int read(byte[] b, int off, int len)
+		public synchronized int read(final byte[] b, final int off, final int len)
 		{
 			try
 			{
 				seek(pos);
-				int read = ios.os.read(b, off, len);
+				final int read = ios.os.read(b, off, len);
 				if (read > 0)
 					pos += read;
 				return read;
 			}
-			catch (IOException e)
+			catch (final IOException e)
 			{
 				return 0;
 			}
 		}
 
 		@Override
-		public synchronized long skip(long n)
+		public synchronized long skip(final long n)
 		{
 			try
 			{
@@ -268,7 +239,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 				ios.os.seek(pos);
 				return pos;
 			}
-			catch (IOException e)
+			catch (final IOException e)
 			{
 				return 0;
 			}
@@ -287,13 +258,13 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		}
 
 		@Override
-		public void mark(int readAheadLimit)
+		public void mark(final int readAheadLimit)
 		{
 			mark = pos;
 		}
 
 		/**
-		 * 
+		 *
 		 */
 		@Override
 		public synchronized void reset()
@@ -302,7 +273,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		}
 
 		/**
-		 * 
+		 *
 		 * @throws IOException
 		 */
 		@Override
@@ -322,9 +293,10 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 
 	/**
 	 * creates an empty input output stream class
+	 *
 	 * @param maxLength the maximum length in memory
 	 */
-	public ByteArrayIOFileStream(long maxLength)
+	public ByteArrayIOFileStream(final long maxLength)
 	{
 		super();
 		this.maxLength = maxLength;
@@ -334,13 +306,12 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	}
 
 	/**
-	 * creates an input output stream class from any stream
-	 * if is alraedy is a buffered inputstream, no copy is made
-	 * 
+	 * creates an input output stream class from any stream if is alraedy is a buffered inputstream, no copy is made
+	 *
 	 * @param is the inputstream to buffer
 	 * @param maxLength the maximum length in memory
 	 */
-	public ByteArrayIOFileStream(final InputStream is, long maxLength)
+	public ByteArrayIOFileStream(final InputStream is, final long maxLength)
 	{
 		this(maxLength);
 		setStream(is);
@@ -349,13 +320,14 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 
 	/**
 	 * create a ByteArrayIOStream from a file
+	 *
 	 * @param f the file
 	 * @param maxLength the maximum length in memory
 	 * @param readOnly
-	 * 
+	 *
 	 * @throws IOException
 	 */
-	public ByteArrayIOFileStream(final File f, long maxLength, boolean readOnly)
+	public ByteArrayIOFileStream(final File f, final long maxLength, final boolean readOnly)
 	{
 		this(maxLength);
 		if (f == null)
@@ -369,7 +341,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 			{
 				os = new RandomAccessFile(f, readOnly ? "r" : "rw");
 			}
-			catch (FileNotFoundException e)
+			catch (final FileNotFoundException e)
 			{
 				log.error("cannot open file " + f, e);
 			}
@@ -383,7 +355,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 
 	/**
 	 * gets an input stream based on the current byte contents - note this operates on the internal data
-	 * 
+	 *
 	 * @return an input stream
 	 */
 	@Override
@@ -391,7 +363,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	{
 		if (os != null)
 		{
-			ByteArrayIOFileInputStream byteArrayIOFileInputStream = new ByteArrayIOFileInputStream(this);
+			final ByteArrayIOFileInputStream byteArrayIOFileInputStream = new ByteArrayIOFileInputStream(this);
 			byteArrayIOFileInputStream.seek(0);
 			return byteArrayIOFileInputStream;
 		}
@@ -408,21 +380,21 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	}
 
 	/**
-	* Writes the specified byte to this byte array output stream.
-	*
-	* @param   b   the byte to be written.
-	*/
+	 * Writes the specified byte to this byte array output stream.
+	 *
+	 * @param b the byte to be written.
+	 */
 	@Override
-	public synchronized void write(int b)
+	public synchronized void write(final int b)
 	{
-		ensureStream(count + 1);
+		ensureStream(count + 1l);
 		if (os != null)
 		{
 			try
 			{
 				os.write(b);
 			}
-			catch (IOException e)
+			catch (final IOException e)
 			{
 			}
 		}
@@ -433,10 +405,10 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	}
 
 	/**
-	 * 
+	 *
 	 * @param newSize
 	 */
-	private void ensureStream(long newSize)
+	private void ensureStream(final long newSize)
 	{
 		if (newSize > maxLength && os == null)
 		{
@@ -447,7 +419,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 					isTmpFile = true;
 					file = File.createTempFile("ByteArray", null);
 				}
-				catch (IOException e)
+				catch (final IOException e)
 				{
 					log.error("Cannot create temp file ", e);
 				}
@@ -459,7 +431,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 				buf = null;
 				count = 0;
 			}
-			catch (Exception e)
+			catch (final Exception e)
 			{
 				log.error("cannot create file " + file);
 			}
@@ -467,24 +439,23 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	}
 
 	/**
-	 * Writes <code>len</code> bytes from the specified byte array
-	 * starting at offset <code>off</code> to this byte array output stream.
+	 * Writes <code>len</code> bytes from the specified byte array starting at offset <code>off</code> to this byte array output stream.
 	 *
-	 * @param   b     the data.
-	 * @param   off   the start offset in the data.
-	 * @param   len   the number of bytes to write.
+	 * @param b the data.
+	 * @param off the start offset in the data.
+	 * @param len the number of bytes to write.
 	 */
 	@Override
-	public synchronized void write(byte b[], int off, int len)
+	public synchronized void write(final byte b[], final int off, final int len)
 	{
-		ensureStream(count + len);
+		ensureStream(count + (long) len);
 		if (os != null)
 		{
 			try
 			{
 				os.write(b, off, len);
 			}
-			catch (IOException e)
+			catch (final IOException e)
 			{
 			}
 		}
@@ -515,14 +486,14 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 			}
 			super.close();
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
-			// NOP -  super.close() is a nop anyhow
+			// NOP - super.close() is a nop anyhow
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 * @throws Throwable
 	 */
 	@Override
@@ -533,15 +504,15 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.util.ByteArrayIOStream#setStream(java.io.InputStream)
 	 */
 	@Override
-	void setStream(InputStream is)
+	void setStream(final InputStream is)
 	{
 		if (is instanceof ByteArrayIOFileInputStream)
 		{
-			ByteArrayIOFileInputStream bais = (ByteArrayIOFileInputStream) is;
+			final ByteArrayIOFileInputStream bais = (ByteArrayIOFileInputStream) is;
 			file = bais.ios.file;
 			isTmpFile = false;
 			os = bais.ios.os;
@@ -562,14 +533,14 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 					super.setStream(is);
 				}
 			}
-			catch (IOException e)
+			catch (final IOException e)
 			{
 			}
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
@@ -581,7 +552,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 			{
 				return (int) os.length();
 			}
-			catch (IOException e)
+			catch (final IOException e)
 			{
 				//
 			}

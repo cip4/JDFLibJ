@@ -3,70 +3,38 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *  
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  * 
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * 
+ *
  */
 
 /**
@@ -122,13 +90,13 @@ import org.cip4.jdflib.util.VectorMap;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * before Aug 10, 2009
+ *
+ *         before Aug 10, 2009
  */
 public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 {
 	/**
-	 * 
+	 *
 	 */
 	public static final String FITS_TYPE = "FitsType";
 	private static final long serialVersionUID = 1L;
@@ -138,7 +106,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * Constructor for JDFDeviceCap
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -149,7 +117,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * Constructor for JDFDeviceCap
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -161,7 +129,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * Constructor for JDFDeviceCap
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -200,7 +168,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	// *********************************************
 	/**
 	 * toString - StringRepresentation of JDFNode
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -211,8 +179,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 * 
-	 * Aug 10, 2009
+	 *
+	 *         Aug 10, 2009
 	 */
 	@SuppressWarnings("unchecked")
 	public static class EnumAvailability extends ValuedEnum
@@ -281,7 +249,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * Gets of this string attribute <code>TypeExpression</code> if it exists, otherwise returns the literal string defined in Types
-	 * 
+	 *
 	 * @return String - TypeExpression attribute value
 	 */
 	@Override
@@ -296,7 +264,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * (9.2) get CombinedMethod attribute <code>CombinedMethod</code>
-	 * 
+	 *
 	 * @return Vector of the enumerations
 	 */
 	@Override
@@ -305,12 +273,13 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 		Vector<ValuedEnum> v = (Vector<ValuedEnum>) getEnumerationsAttribute(AttributeName.COMBINEDMETHOD, null, EnumCombinedMethod.None, false);
 		if (v == null)
 		{
-			v = new Vector<ValuedEnum>();
+			v = new Vector<>();
 			v.add(EnumCombinedMethod.None);
 		}
 		return v;
 	}
 
+	@Override
 	public final VString getNamePathVector()
 	{
 		final VString vResult = new VString();
@@ -325,10 +294,10 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * Gets of jdfRoot a vector of all executable nodes (jdf root or children nodes that this Device may execute)
-	 * 
+	 *
 	 * @param jdfRoot the node we test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 * Will be used in fitsValue method of the State class.
+	 *            Will be used in fitsValue method of the State class.
 	 * @param level validation level
 	 * @return VElement - vector of executable JDFNodes, null if none found
 	 */
@@ -381,10 +350,10 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	/**
 	 * Composes a BugReport in XML form for the given JDFNode 'jdfRoot'. Gives a list of error messages for 'jdfRoot' and every child rejected Node.<br>
 	 * Returns <code>null</code> if there are no errors.
-	 * 
+	 *
 	 * @param jdfRoot the node to test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 * Will be used in fitsValue method of the State class.
+	 *            Will be used in fitsValue method of the State class.
 	 * @param level validation level
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is null there are no errors.
 	 */
@@ -423,13 +392,13 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	/**
 	 * Composes a BugReport in XML form for the given JMF message 'jmfRoot'. Gives a list of error messages for 'jmfRoot' and every child rejected element.<br>
 	 * Returns <code>null</code> if there are no errors.
-	 * 
+	 *
 	 * @param jmfRoot the node to test
-	 * @param knownMessagesResp 
+	 * @param knownMessagesResp
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 * Will be used in fitsValue method of the State class.
+	 *            Will be used in fitsValue method of the State class.
 	 * @param level validation level
-	 * @param ignoreExtensions 
+	 * @param ignoreExtensions
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is null there are no errors.
 	 */
 	static public XMLDoc getJMFInfo(final JDFJMF jmfRoot, final JDFResponse knownMessagesResp, final EnumFitsValue testlists, final EnumValidationLevel level, final boolean ignoreExtensions)
@@ -482,7 +451,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	/**
 	 * @param m the message to test
 	 * @param knownMessagesResp the Response that contains the relevant devcap fo the jmf
-	 * 
+	 *
 	 * @return the JMFMessageService element for this message based on family and type
 	 */
 	public static JDFMessageService getMessageServiceForJMFType(final JDFMessage m, final JDFResponse knownMessagesResp)
@@ -511,20 +480,19 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * Checks if Device can execute the given JDFNode 'jdfRoot'.<br>
-	 * First validates 'jdfRoot' and checks if its Type/Types attributes fit the values of DeviceCap/@Types and DeviceCap/@CombinedMethod. If Node is invalid or
-	 * Type/Types don't fit it doesn't check it more detailed.<br>
+	 * First validates 'jdfRoot' and checks if its Type/Types attributes fit the values of DeviceCap/@Types and DeviceCap/@CombinedMethod. If Node is invalid or Type/Types don't fit it doesn't check
+	 * it more detailed.<br>
 	 * If Type/Types fit, the whole JDFNode - all elements and attributes - will be tested iot check if a Device can accept it.<br>
 	 * This method composes a detailed report of the found errors in XML form, if jdfRoot is rejected.<br>
 	 * If XMLDoc is null, there are no errors and 'jdfRoot' is accepted
-	 * 
+	 *
 	 * @param jdfRoot the node to test
 	 * @param fitsValue testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 * Will be used in fitsValue method of the State class.
+	 *            Will be used in fitsValue method of the State class.
 	 * @param level validation level
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is <code>null</code> there are no errors, 'jdfRoot' is accepted
-	 * 
-	 * @throws JDFException if DeviceCapabilities file is invalid: illegal value of Types(TypeExpression) attribute (if CombinedMethod is None and Types
-	 * contains more than 1 process)
+	 *
+	 * @throws JDFException if DeviceCapabilities file is invalid: illegal value of Types(TypeExpression) attribute (if CombinedMethod is None and Types contains more than 1 process)
 	 * @throws JDFException if DeviceCapabilities file is invalid: illegal value of CombinedMethod attribute
 	 */
 	private final KElement report(final JDFNode jdfRoot, final EnumFitsValue fitsValue, final EnumValidationLevel level, final KElement parentRoot)
@@ -552,7 +520,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 			return root;
 		}
 
-		root = groupReport(jdfRoot, fitsValue, level, root);
+		groupReport(jdfRoot, fitsValue, level, root);
 		// TODO ???
 		if (!root.hasChildElements() && root.getBoolAttribute(FITS_TYPE, null, true))
 		{
@@ -587,12 +555,12 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * test whether a given node has the corect Types and Type Attribute
-	 * 
+	 *
 	 * @param testRoot the JDF or JMF to test
 	 * @param bLocal if true, only check the root of this, else check children as well
-	 * 
+	 *
 	 * @return boolean - true if this DeviceCaps TypeExpression fits testRoot/@Type and testRoot/@Types
-	 * 
+	 *
 	 */
 	public boolean matchesType(final JDFNode testRoot, final boolean bLocal)
 	{
@@ -610,11 +578,11 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * test whether a given node has the corect Types and Type Attribute
-	 * 
+	 *
 	 * @param testRoot the JDF or JMF to test
-	 * 
+	 *
 	 * @return VElement - the list of matching JDF nodes, null if none found
-	 * 
+	 *
 	 */
 	public VElement getMatchingTypeNodeVector(final JDFNode testRoot)
 	{
@@ -647,8 +615,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 					v.add(testRoot);
 				}
 			}
-			else if (combMethod.equals(EnumCombinedMethod.GrayBox) || combMethod.equals(EnumCombinedMethod.CombinedProcessGroup) && typeNode.equals("ProcessGroup")
-					&& !testRoot.isGroupNode())
+			else if (combMethod.equals(EnumCombinedMethod.GrayBox) || combMethod.equals(EnumCombinedMethod.CombinedProcessGroup) && typeNode.equals("ProcessGroup") && !testRoot.isGroupNode())
 			{
 				if (fitsTypes(testRoot.getAllTypes(), true))
 				{
@@ -701,9 +668,9 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	}
 
 	/**
-	 * Tests JDFNode/@Types (or its equivalent of Types in the ProcessGroupNodes - the concatenated string of all Type attributes in the children Nodes) iot
-	 * check whether it matches DeviceCap/@Types or DeviceCap/@TypeExpression
-	 * 
+	 * Tests JDFNode/@Types (or its equivalent of Types in the ProcessGroupNodes - the concatenated string of all Type attributes in the children Nodes) iot check whether it matches DeviceCap/@Types
+	 * or DeviceCap/@TypeExpression
+	 *
 	 * @param typesNode attribute Types of the tested JDFNode
 	 * @param bSubset if true, a match is sufficient if a subset is specified
 	 * @return boolean - true if JDFNode/@Types fits DeviceCap/@Types or DeviceCap/@TypeExpression
@@ -739,17 +706,17 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	}
 
 	/**
-	 * Checks whether a device can execute the given ProcessGroup JDFNode 'jdfRoot' (JDFNode/@Type=ProcessGroup). If JDFNode/@Types fits DeviceCap/@Types, the
-	 * whole JDFNode - all elements and attributes - is tested iot check whether a device can accept it.<br>
+	 * Checks whether a device can execute the given ProcessGroup JDFNode 'jdfRoot' (JDFNode/@Type=ProcessGroup). If JDFNode/@Types fits DeviceCap/@Types, the whole JDFNode - all elements and
+	 * attributes - is tested iot check whether a device can accept it.<br>
 	 * Composes a detailed report of the found errors in XML form, if JDFNode is rejected.
-	 * 
+	 *
 	 * @param jdfRoot the node to test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 * Will be used in fitsValue method of the State class.
+	 *            Will be used in fitsValue method of the State class.
 	 * @param level validation level
-	 * 
+	 *
 	 * @return XMLDoc - XMLDoc output of the error messages. <br>
-	 * If XMLDoc is <code>null</code> there are no errors, 'jdfRoot' is accepted
+	 *         If XMLDoc is <code>null</code> there are no errors, 'jdfRoot' is accepted
 	 */
 	private final KElement groupReport(final JDFNode jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level, final KElement parentRoot)
 	{
@@ -785,10 +752,10 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * devCapsReport - searches in JDFNode for appropriate elements for every DevCaps element that DeviceCap consists of, and tests them.<br>
 	 * Composes a detailed report of the found errors in XML form.<br>
 	 * If XMLDoc is <code>null</code> there are no errors
-	 * 
+	 *
 	 * @param jdfRoot the node we test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 * Will be used in fitsValue method of the State class.
+	 *            Will be used in fitsValue method of the State class.
 	 * @param level validation level
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is <code>null</code> there are no errors, 'jdfRoot' is accepted
 	 */
@@ -819,13 +786,14 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	/**
 	 * invalidDevCaps - tests if there are any invalid or missing Resources or NodeInfo/CustomerInfo elements in the JDFNode.<br>
 	 * Composes a detailed report of the found errors in XML form. If XMLDoc is <code>null</code> there are no errors.
-	 * 
+	 *
 	 * @param parent the devcaps parent element
 	 * @param jdfRoot node or jmf message element we test
 	 * @return boolean - true if invalid devcaps were found
 	 * @throws JDFException if DeviceCap is invalid: has a wrong attribute Context value
 	 */
-	private static boolean invalidDevCaps(final KElement parent, final KElement jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level, final KElement parentReport, final boolean ignoreExtensions)
+	private static boolean invalidDevCaps(final KElement parent, final KElement jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level, final KElement parentReport,
+			final boolean ignoreExtensions)
 	{
 		final KElement mrp = parentReport.appendElement((jdfRoot instanceof JDFNode) ? "MissingResources" : "MissingElements");
 		final KElement irp = parentReport.appendElement((jdfRoot instanceof JDFNode) ? "InvalidResources" : "InvalidElements");
@@ -858,7 +826,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * missingDevCaps - tests if there are any Resources or NodeInfo/CustomerInfo elements in the JDFNode, which are not described by DevCaps.<br>
 	 * If missing DevCaps are found, jdfRoot has elements unknown for this Device resources or elements.<br>
 	 * Composes a detailed report of the found errors in XML form. If XMLDoc is <code>null</code> there are no errors.
-	 * 
+	 *
 	 * @param jdfRoot node to test
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is <code>null</code> there are no errors
 	 */
@@ -918,9 +886,9 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	}
 
 	/**
-	 * checkNodeInfoCustomerInfo - tests if there are JDFNode/NodeInfo or JDFNode/CustomerInfo elements that are not described by DevCaps. If missing DevCaps
-	 * are found, jdfRoot has elements unknown for this Device resources or elements
-	 * 
+	 * checkNodeInfoCustomerInfo - tests if there are JDFNode/NodeInfo or JDFNode/CustomerInfo elements that are not described by DevCaps. If missing DevCaps are found, jdfRoot has elements unknown
+	 * for this Device resources or elements
+	 *
 	 * @param jdfRoot node to test
 	 * @param root root of the XMLDoc output
 	 * @param elementName "NodeInfo" or "CustomerInfo" or "StatusPool"
@@ -944,10 +912,9 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	/**
 	 * actionPoolReport - tests if the JDFNode fits Actions from ActionPool of this DeviceCap.<br>
 	 * Composes a detailed report of the found errors in XML form. If XMLDoc is <code>null</code> - there are no errors
-	 * 
+	 *
 	 * @param jdfRoot node to test
-	 * @return KElement - KElement output of the error messages. If KElement is <code>null</code> there are no errors, JDFNode fits the ActionPool of this
-	 * DeviceCap and will be accepted by the device.
+	 * @return KElement - KElement output of the error messages. If KElement is <code>null</code> there are no errors, JDFNode fits the ActionPool of this DeviceCap and will be accepted by the device.
 	 * @throws JDFException if DeviceCap is invalid: ActionPool refers to the non-existent TestPool
 	 * @throws JDFException if DeviceCap is invalid: Action refers to the non-existent Test
 	 */
@@ -1042,7 +1009,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * remove duplicate entries that are parents of lower level entries
-	 * 
+	 *
 	 * @param testResult XMLDoc to clean
 	 * @return XMLDoc - the cleaned doc
 	 */
@@ -1094,7 +1061,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * creates and links devcaps to modules
-	 * 
+	 *
 	 * @param includeNameExpression regexp of names to include
 	 */
 	public void createModuleCaps(final String includeNameExpression)
@@ -1120,7 +1087,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * set the defaults of node to the values defined in the child DevCap and State elements
-	 * 
+	 *
 	 * @param node the JDFNode in which to set defaults
 	 * @param bLocal if true, set only in the local node, else recurse children
 	 * @param bAll if false, only add if minOccurs>=1 and required=true or a default exists
@@ -1177,7 +1144,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * get all direct state elements of <this>
-	 * 
+	 *
 	 * @return the vector of state elements
 	 */
 	public VElement getStates()
@@ -1195,7 +1162,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * add any missing resources, links or elements that are described by devcaps elements
-	 * 
+	 *
 	 * @param bAll if false, only add if minOccurs>=1 and required=true or a default exists
 	 * @param node
 	 */
@@ -1222,7 +1189,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * get a DevCaps element by name and further restrictions. If an Enumerative restriction is null, the restriction is not checked.
-	 * 
+	 *
 	 * @param devCapsName the Name attribute of the DevCaps
 	 * @param context the Context attribute of the DevCaps
 	 * @param linkUsage the LinkUsage attribute of the DevCaps
@@ -1250,7 +1217,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * set attribute <code>CombinedMethod</code> to an individual method
-	 * 
+	 *
 	 * @param method the individual combined method to set
 	 */
 	public void setCombinedMethod(final EnumCombinedMethod method)
@@ -1260,7 +1227,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * set attribute <code>CombinedMethod</code> to an individual method
-	 * 
+	 *
 	 * @param method the individual combined method to set
 	 */
 	@Override
@@ -1302,9 +1269,10 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.IDeviceCapable#getTargetCap(java.lang.String)
 	 */
+	@Override
 	public ICapabilityElement getTargetCap(final String id)
 	{
 		final KElement e = getTarget(id, null);
@@ -1317,7 +1285,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * appends a BooleanState with @Name="name"
-	 * 
+	 *
 	 * @param nam the name attribute of the newly appended BooleanState
 	 * @return JDFBooleanState: the newly appended BooleanState
 	 */
@@ -1332,7 +1300,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * appends a NumberState with @Name="name"
-	 * 
+	 *
 	 * @param nam the name attribute of the newly appended NumberState
 	 * @return JDFNumberState: the newly appended NumberState
 	 */
@@ -1347,7 +1315,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * appends an IntegerState with @Name="name"
-	 * 
+	 *
 	 * @param nam the Name attribute of the newly appended IntegerState
 	 * @return JDFIntegerState: the newly appended IntegerState
 	 */
@@ -1362,7 +1330,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * appends a NameState with @Name="name"
-	 * 
+	 *
 	 * @param nam the name attribute of the newly appended NameState
 	 * @return JDFNameState: the newly appended NameState
 	 */
@@ -1377,7 +1345,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * appends a StringState with @Name="name"
-	 * 
+	 *
 	 * @param nam the Name attribute of the newly appended StringState
 	 * @return JDFStringState: the newly appended StringState
 	 */
@@ -1392,7 +1360,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * gets an existing BooleanState with @Name="name"
-	 * 
+	 *
 	 * @param nam the Name attribute of the newly appended BooleanState
 	 * @return JDFBooleanState: the existing BooleanState
 	 */
@@ -1405,7 +1373,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * gets a NumberState with @Name="name", appends it if it does not exist
-	 * 
+	 *
 	 * @param nam the name attribute of the newly appended NumberState
 	 * @return JDFNumberState: the existing or newly appended NumberState
 	 */
@@ -1423,7 +1391,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * gets a EnumerationState with @Name="name", appends it if it does not exist
-	 * 
+	 *
 	 * @param nam the name attribute of the newly appended EnumerationState
 	 * @return JDFEnumerationState the existing or newly appended EnumerationState
 	 */
@@ -1439,7 +1407,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * gets an IntegerState with @Name="name", appends it if it does not yet exist
-	 * 
+	 *
 	 * @param nam the name attribute of the newly appended IntegerState
 	 * @return JDFIntegerState: the existing or newly appended IntegerState
 	 */
@@ -1457,7 +1425,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * gets a NameState with @Name="name", appends it if it does not exist
-	 * 
+	 *
 	 * @param nam the name attribute of the newly appended NameState
 	 * @return JDFNameState: the existing or newly appended NameState
 	 */
@@ -1475,7 +1443,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * gets a StringState with @Name="name", appends it if it does not yet exist
-	 * 
+	 *
 	 * @param nam the Name attribute of the newly appended StringState
 	 * @return JDFStringState: the existing or newly appended StringState
 	 */
@@ -1493,7 +1461,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * gets an existing EnumerationState with @Name="name"
-	 * 
+	 *
 	 * @param nam the Name attribute of the newly appended EnumerationState
 	 * @return JDFEnumerationState: the existing EnumerationState
 	 */
@@ -1506,7 +1474,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * gets an existing IntegerState with @Name="name"
-	 * 
+	 *
 	 * @param nam the name attribute of the newly appended IntegerState
 	 * @return JDFIntegerState: the existing IntegerState
 	 */
@@ -1519,7 +1487,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * gets an existing NameState with @Name="name"
-	 * 
+	 *
 	 * @param nam the Name attribute of the newly appended NameState
 	 * @return JDFNameState: the existing NameState
 	 */
@@ -1531,7 +1499,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	// ///////////////////////////////////////////////////////////////////
 	/**
 	 * gets an existing NumberState with @Name="name"
-	 * 
+	 *
 	 * @param nam the Name attribute of the newly appended NumberState
 	 * @return JDFNumberState: the existing NumberState
 	 */
@@ -1544,7 +1512,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * gets an existing State with @Name="name"
-	 * 
+	 *
 	 * @param nam the Name attribute of the newly appended StringState
 	 * @return JDFStringState: the existing StringState
 	 */
@@ -1567,7 +1535,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 	/**
 	 * gets an existing StringState with @Name="name"
-	 * 
+	 *
 	 * @param nam the Name attribute of the newly appended StringState
 	 * @return JDFStringState: the existing StringState
 	 */

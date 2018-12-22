@@ -57,6 +57,10 @@ import java.util.Vector;
  */
 public class MemorySpy
 {
+	private static final String PEAK = "Peak";
+	public static final String CURRENT = "Current";
+	public static final String TOTAL = "Total";
+	public static final String FREE = "Free";
 	private final List<MemoryPoolMXBean> memList;
 	private final MemoryMXBean mainBean;
 	static final long MEGA = 1024l * 1024l;
@@ -243,13 +247,30 @@ public class MemorySpy
 	 */
 	public Map<String, Long> getSummaryMap()
 	{
-		final long div = getFactor();
 		final HashMap<String, Long> map = new HashMap<>();
-		map.put("Free", Runtime.getRuntime().freeMemory() / div);
-		map.put("Total", Runtime.getRuntime().totalMemory() / div);
-		map.put("Current", getCurrentMem());
-		map.put("Peak", getHeapUsed(MemScope.peak));
+		map.put(FREE, getFreeMem());
+		map.put(TOTAL, getTotalMemory());
+		map.put(CURRENT, getCurrentMem());
+		map.put(PEAK, getHeapUsed(MemScope.peak));
 		return map;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public long getTotalMemory()
+	{
+		return Runtime.getRuntime().totalMemory() / getFactor();
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public long getFreeMem()
+	{
+		return Runtime.getRuntime().freeMemory() / getFactor();
 	}
 
 	long getFactor()

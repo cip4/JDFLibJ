@@ -3,78 +3,46 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *  
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  * 
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * 
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
- * JDFStringEvaluation.java
+ *         JDFStringEvaluation.java
  *
  */
 
@@ -128,25 +96,25 @@ public class JDFStringEvaluation extends JDFEvaluation
 
 	/**
 	 * constructor for JDFStringEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFStringEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFStringEvaluation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFStringEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFStringEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFStringEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -158,7 +126,7 @@ public class JDFStringEvaluation extends JDFEvaluation
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFStringEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFStringEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +136,7 @@ public class JDFStringEvaluation extends JDFEvaluation
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -181,7 +149,7 @@ public class JDFStringEvaluation extends JDFEvaluation
 	 * // Attribute getter/ setter
 	 */
 
-	public void setLength(JDFIntegerRange value)
+	public void setLength(final JDFIntegerRange value)
 	{
 		setAttribute(AttributeName.LENGTH, value.toString());
 	}
@@ -192,14 +160,14 @@ public class JDFStringEvaluation extends JDFEvaluation
 		{
 			return new JDFIntegerRange(getAttribute(AttributeName.LENGTH));
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			throw new JDFException("JDFStringEvaluation.getLengthRange: Attribute LENGTH is not capable to create JDFIntegerRange");
 		}
 
 	}
 
-	public void setRegExp(String value)
+	public void setRegExp(final String value)
 	{
 		setAttribute(AttributeName.REGEXP, value);
 	}
@@ -213,14 +181,14 @@ public class JDFStringEvaluation extends JDFEvaluation
 	 * // Element getter / setter
 	 */
 
-	public JDFValue getValue(int iSkip)
+	public JDFValue getValue(final int iSkip)
 	{
 		return (JDFValue) getElement(ElementName.VALUE, JDFConstants.EMPTYSTRING, iSkip);
 	}
 
 	/**
 	 * append a <code>Value</code> element
-	 * 
+	 *
 	 * @return JDFValue - the newly created element
 	 */
 	public JDFValue appendValue()
@@ -230,15 +198,14 @@ public class JDFStringEvaluation extends JDFEvaluation
 
 	/**
 	 * append a <code>Value</code> element and set Value/@Value to value
-	 * 
-	 * @param value
-	 *            the value string to set
-	 * 
+	 *
+	 * @param value the value string to set
+	 *
 	 * @return JDFValue - the newly created element
 	 */
-	public JDFValue appendValueValue(String value)
+	public JDFValue appendValueValue(final String value)
 	{
-		JDFValue v = (JDFValue) appendElement(ElementName.VALUE, null);
+		final JDFValue v = (JDFValue) appendElement(ElementName.VALUE, null);
 		v.setValue(value);
 		return v;
 	}
@@ -248,32 +215,26 @@ public class JDFStringEvaluation extends JDFEvaluation
 	 */
 
 	/**
-	 * Sets the <code>Value</code> attribute of the iSkip'th subelement
-	 * <code>Value</code>
-	 * 
-	 * @param iSkip
-	 *            the number of <code>Value</code> elements to skip
-	 * @param value
-	 *            value to set the attribute to
+	 * Sets the <code>Value</code> attribute of the iSkip'th subelement <code>Value</code>
+	 *
+	 * @param iSkip the number of <code>Value</code> elements to skip
+	 * @param value value to set the attribute to
 	 */
-	public void setValueValue(int iSkip, String value)
+	public void setValueValue(final int iSkip, final String value)
 	{
-		JDFValue e = (JDFValue) getCreateElement(ElementName.VALUE, null, iSkip);
+		final JDFValue e = (JDFValue) getCreateElement(ElementName.VALUE, null, iSkip);
 		e.setValue(value);
 	}
 
 	/**
-	 * Gets the <code>Value</code> attribute of the iSkip'th subelement
-	 * <code>Value</code>
-	 * 
-	 * @param iSkip
-	 *            the number of <code>Value</code> elements to skip
-	 * @return String: the attribute value, <code>null</code> if no matching
-	 *         value element exists
+	 * Gets the <code>Value</code> attribute of the iSkip'th subelement <code>Value</code>
+	 *
+	 * @param iSkip the number of <code>Value</code> elements to skip
+	 * @return String: the attribute value, <code>null</code> if no matching value element exists
 	 */
-	public final String getValueValue(int iSkip)
+	public final String getValueValue(final int iSkip)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 		if (e == null)
 			return null;
 		return e.getValue();
@@ -284,49 +245,40 @@ public class JDFStringEvaluation extends JDFEvaluation
 	 */
 
 	/**
-	 * fitsValue - checks whether <code>value</code> matches the testlists
-	 * specified for this Evaluation
-	 * 
-	 * @param value
-	 *            value to test
-	 * @return boolean - true, if <code>value</code> matches the testlists or if
-	 *         testlists are not specified
+	 * fitsValue - checks whether <code>value</code> matches the testlists specified for this Evaluation
+	 *
+	 * @param value value to test
+	 * @return boolean - true, if <code>value</code> matches the testlists or if testlists are not specified
 	 */
 	@Override
-	public final boolean fitsValue(String value)
+	public final boolean fitsValue(final String value)
 	{
 		return fitsLength(value) && fitsRegExp(value) && fitsValueElem(value);
 	}
 
 	/**
-	 * fitsLength - checks whether <code>str</code> matches the attribute
-	 * <code>Length</code> specified for this Evaluation
-	 * 
-	 * @param str
-	 *            string to test
-	 * @return boolean - true, if <code>str</code> matches <code>Length</code>
-	 *         or if <code>Length</code> is not specified
+	 * fitsLength - checks whether <code>str</code> matches the attribute <code>Length</code> specified for this Evaluation
+	 *
+	 * @param str string to test
+	 * @return boolean - true, if <code>str</code> matches <code>Length</code> or if <code>Length</code> is not specified
 	 */
-	private final boolean fitsLength(String str)
+	private final boolean fitsLength(final String str)
 	{
 		if (!hasAttribute(AttributeName.LENGTH))
 		{
-			int len = str.length();
+			final int len = str.length();
 			return getLengthRange().inRange(len);
 		}
 		return true;
 	}
 
 	/**
-	 * fitsRegExp - checks whether <code>str</code> matches the RegExp specified
-	 * for this Evaluation
-	 * 
-	 * @param str
-	 *            string to test
-	 * @return boolean - true, if <code>str</code> matches RegExp or if RegExp
-	 *         is not specified
+	 * fitsRegExp - checks whether <code>str</code> matches the RegExp specified for this Evaluation
+	 *
+	 * @param str string to test
+	 * @return boolean - true, if <code>str</code> matches RegExp or if RegExp is not specified
 	 */
-	private final boolean fitsRegExp(String str)
+	private final boolean fitsRegExp(final String str)
 	{
 		if (!hasAttribute(AttributeName.REGEXP))
 			return true;
@@ -335,26 +287,24 @@ public class JDFStringEvaluation extends JDFEvaluation
 	}
 
 	/**
-	 * fitsValueElem - checks whether <code>str</code> matches the subelement
-	 * <code>Value</code> specified for this Evaluation
-	 * 
-	 * @param str
-	 *            string to test
-	 * @return boolean - true, if <code>str</code> matches subelement
-	 *         <code>Value</code>
+	 * fitsValueElem - checks whether <code>str</code> matches the subelement <code>Value</code> specified for this Evaluation
+	 *
+	 * @param str string to test
+	 * @return boolean - true, if <code>str</code> matches subelement <code>Value</code>
 	 */
-	private final boolean fitsValueElem(String str)
+	private final boolean fitsValueElem(final String str)
 	{
-		VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
-		int siz = v.size();
+		if (str == null)
+			return false;
+		final VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
+		final int siz = v.size();
 		if (siz == 0)
 			return true; // Evaluation has no Value elements
 
 		for (int i = 0; i < siz; i++)
 		{
-			String value = getValueValue(i); // JDFValue elm =(JDFValue)
-												// v.elementAt(i);
-			if (value.compareTo(str) == 0)
+			final String value = getValueValue(i);
+			if (str.equals(value))
 				return true; // we have found it
 
 		}

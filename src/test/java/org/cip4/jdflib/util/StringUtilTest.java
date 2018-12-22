@@ -1157,6 +1157,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.addToken("a/", "/", "/b"), "a/b");
 		assertEquals(StringUtil.addToken("a/", "/", "//b"), "a/b");
 		assertEquals(StringUtil.addToken("//a/", "/", "//b"), "//a/b");
+		assertEquals(StringUtil.addToken("/", "/", "b"), "/b");
 	}
 
 	/**

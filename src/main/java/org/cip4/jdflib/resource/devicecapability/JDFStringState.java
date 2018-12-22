@@ -3,78 +3,46 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *  
- * 
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
- * JDFStringState.java
+ *         JDFStringState.java
  *
  */
 
@@ -129,36 +97,36 @@ public class JDFStringState extends JDFAbstractState
 
 	/**
 	 * constructor for JDFStringState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFStringState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFStringState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFStringState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFStringState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFStringState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFStringState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFStringState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFStringState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +136,7 @@ public class JDFStringState extends JDFAbstractState
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -181,7 +149,7 @@ public class JDFStringState extends JDFAbstractState
 	 * // Attribute getter/ setter
 	 */
 
-	public void setCurrentValue(String value)
+	public void setCurrentValue(final String value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value);
 	}
@@ -191,7 +159,7 @@ public class JDFStringState extends JDFAbstractState
 		return getAttribute(AttributeName.CURRENTVALUE, null, JDFConstants.EMPTYSTRING);
 	}
 
-	public void setDefaultValue(String value)
+	public void setDefaultValue(final String value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value);
 	}
@@ -201,7 +169,7 @@ public class JDFStringState extends JDFAbstractState
 		return getAttribute(AttributeName.DEFAULTVALUE, null, JDFConstants.EMPTYSTRING);
 	}
 
-	public void setAllowedRegExp(String value)
+	public void setAllowedRegExp(final String value)
 	{
 		setAttribute(AttributeName.ALLOWEDREGEXP, value);
 	}
@@ -212,7 +180,7 @@ public class JDFStringState extends JDFAbstractState
 		return getAttribute(AttributeName.ALLOWEDREGEXP);
 	}
 
-	public void setPresentRegExp(String value)
+	public void setPresentRegExp(final String value)
 	{
 		setAttribute(AttributeName.PRESENTREGEXP, value);
 	}
@@ -231,9 +199,9 @@ public class JDFStringState extends JDFAbstractState
 	 * // Element getter / setter
 	 */
 
-	public JDFValue getValue(int iSkip)
+	public JDFValue getValue(final int iSkip)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 		return e;
 	}
 
@@ -247,68 +215,55 @@ public class JDFStringState extends JDFAbstractState
 	 */
 
 	/**
-	 * Gets the jSkip'th element <code>Loc</code> of the iSkip'th element
-	 * <code>Value</code>
-	 * 
-	 * @param iSkip
-	 *            number of <code>Value</code> elements to skip (iSkip=0 ->
-	 *            first <code>Value</code> element)
-	 * @param jSkip
-	 *            number of <code>Loc</code> subelements of iSkip'th
-	 *            <code>Value</code> element to skip (jSkip=0 -> first
-	 *            <code>Loc</code> element)
+	 * Gets the jSkip'th element <code>Loc</code> of the iSkip'th element <code>Value</code>
+	 *
+	 * @param iSkip number of <code>Value</code> elements to skip (iSkip=0 -> first <code>Value</code> element)
+	 * @param jSkip number of <code>Loc</code> subelements of iSkip'th <code>Value</code> element to skip (jSkip=0 -> first <code>Loc</code> element)
 	 * @return JDFLoc: the matching Loc element
 	 */
 	@Override
-	public JDFLoc getValueLocLoc(int iSkip, int jSkip)
+	public JDFLoc getValueLocLoc(final int iSkip, final int jSkip)
 	{
-		JDFValue val = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
-		JDFLoc loc = (JDFLoc) val.getElement(ElementName.LOC, null, jSkip);
+		final JDFValue val = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+		final JDFLoc loc = (JDFLoc) val.getElement(ElementName.LOC, null, jSkip);
 		return loc;
 	}
 
 	/**
-	 * Appends element <code>Loc</code> to the end of the iSkip'th subelement
-	 * <code>Value</code>
-	 * 
-	 * @param iSkip
-	 *            number of <code>Value</code> elements to skip (iSkip=0 ->
-	 *            first <code>Value</code> element)
+	 * Appends element <code>Loc</code> to the end of the iSkip'th subelement <code>Value</code>
+	 *
+	 * @param iSkip number of <code>Value</code> elements to skip (iSkip=0 -> first <code>Value</code> element)
 	 * @return JDFLoc: newly created <code>Loc</code> element
 	 */
 	@Override
-	public JDFLoc appendValueLocLoc(int iSkip)
+	public JDFLoc appendValueLocLoc(final int iSkip)
 	{
-		JDFValue val = getValue(iSkip);
+		final JDFValue val = getValue(iSkip);
 		if (val == null)
 			return null;
 		return val.appendLoc();
 	}
 
 	/**
-	 * Sets the <code>AllowedValue</code> attribute of the iSkip'th subelement
-	 * <code>Value</code>
-	 * 
-	 * @param value
-	 *            value to set the attribute to
+	 * Sets the <code>AllowedValue</code> attribute of the iSkip'th subelement <code>Value</code>
+	 *
+	 * @param value value to set the attribute to
 	 */
-	public void appendValueAllowedValue(String value)
+	public void appendValueAllowedValue(final String value)
 	{
-		JDFValue e = (JDFValue) appendElement(ElementName.VALUE, null);
+		final JDFValue e = (JDFValue) appendElement(ElementName.VALUE, null);
 		e.setAllowedValue(value);
 	}
 
 	/**
-	 * Gets the <code>AllowedValue</code> attribute of the iSkip'th subelement
-	 * <code>Value</code>
-	 * 
-	 * @param iSkip
-	 *            the number of <code>Value</code> elements to skip
+	 * Gets the <code>AllowedValue</code> attribute of the iSkip'th subelement <code>Value</code>
+	 *
+	 * @param iSkip the number of <code>Value</code> elements to skip
 	 * @return String: the attribute value
 	 */
-	public final String getValueAllowedValue(int iSkip)
+	public final String getValueAllowedValue(final int iSkip)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 		if (e == null)
 			return null;
 		return e.getAllowedValue();
@@ -316,54 +271,49 @@ public class JDFStringState extends JDFAbstractState
 
 	/**
 	 * Sets the ValueUsage attribute of the i-th subelement Value
-	 * 
+	 *
 	 * @param int iSkip: the number of Value elements to skip
-	 * @param EnumFitsValue
-	 *            value: value to set the attribute to
+	 * @param EnumFitsValue value: value to set the attribute to
 	 */
-	public void setValueValueUsage(int iSkip, EnumFitsValue value)
+	public void setValueValueUsage(final int iSkip, final EnumFitsValue value)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 		e.setValueUsage(EnumValueUsage.getEnum(value.getName()));
 	}
 
 	/**
-	 * Gets the value of attribute <code>ValueUsage</code> of the iSkip'th
-	 * subelement <code>Value</code>
-	 * 
-	 * @param iSkip
-	 *            the number of <code>Value</code> elements to skip
+	 * Gets the value of attribute <code>ValueUsage</code> of the iSkip'th subelement <code>Value</code>
+	 *
+	 * @param iSkip the number of <code>Value</code> elements to skip
 	 * @return EnumFitsValue: the attribute value
 	 */
-	public final EnumFitsValue getValueValueUsage(int iSkip)
+	public final EnumFitsValue getValueValueUsage(final int iSkip)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 		return EnumFitsValue.getEnum(e.getValueUsage().getName());
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java
-	 * .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
+	 *
+	 * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
 	 */
 	@Override
-	public void addValue(String value, EnumFitsValue testlists)
+	public void addValue(final String value, final EnumFitsValue testlists)
 	{
 		if (fitsValue(value, testlists))
 			return;
 
 		if (testlists == null || EnumFitsValue.Allowed.equals(testlists))
 		{
-			JDFValue v = appendValue();
+			final JDFValue v = appendValue();
 			v.setAllowedValue(value);
 			if (testlists != null)
 				v.setValueUsage(EnumValueUsage.Allowed);
 		}
 		if (EnumFitsValue.Present.equals(testlists))
 		{
-			JDFValue v = appendValue();
+			final JDFValue v = appendValue();
 			v.setAllowedValue(value);
 			if (testlists != null)
 				v.setValueUsage(EnumValueUsage.Present);
@@ -375,63 +325,54 @@ public class JDFStringState extends JDFAbstractState
 	 */
 
 	/**
-	 * fitsValue - checks whether <code>value</code> matches the Allowed/Present
-	 * test lists specified for this State
-	 * 
-	 * @param value
-	 *            value to test
-	 * @param testlists
-	 *            the test lists the value has to match. In this State the test
-	 *            lists are ValueList AND ValueMod.<br>
-	 *            Choose one of two values: FitsValue_Allowed or
-	 *            FitsValue_Present. (Defaults to Allowed)
-	 * 
-	 * @return boolean - true, if <code>value</code> matches testlists or if
-	 *         AllowedValueList and AllowedValueMod are not specified
+	 * fitsValue - checks whether <code>value</code> matches the Allowed/Present test lists specified for this State
+	 *
+	 * @param value value to test
+	 * @param testlists the test lists the value has to match. In this State the test lists are ValueList AND ValueMod.<br>
+	 *            Choose one of two values: FitsValue_Allowed or FitsValue_Present. (Defaults to Allowed)
+	 *
+	 * @return boolean - true, if <code>value</code> matches testlists or if AllowedValueList and AllowedValueMod are not specified
 	 */
 	@Override
-	public final boolean fitsValue(String value, EnumFitsValue testlists)
+	public final boolean fitsValue(final String value, final EnumFitsValue testlists)
 	{
 		return (fitsLength(value, testlists) && fitsRegExp(value, testlists) && fitsValueElem(value, testlists));
 	}
 
 	/**
-	 * fitsValueElem - checks whether <code>str</code> matches the subelement
-	 * <code>Value</code> specified for this State
-	 * 
-	 * @param str
-	 *            string to test
-	 * @param valueusage
-	 *            switches between Allowed and Present configuration in
-	 *            subelement <code>Value</code>
-	 * 
-	 * @return boolean - true, if <code>str</code> matches subelement Value or
-	 *         no corresponding value elements exist
+	 * fitsValueElem - checks whether <code>str</code> matches the subelement <code>Value</code> specified for this State
+	 *
+	 * @param str string to test
+	 * @param valueusage switches between Allowed and Present configuration in subelement <code>Value</code>
+	 *
+	 * @return boolean - true, if <code>str</code> matches subelement Value or no corresponding value elements exist
 	 */
-	private final boolean fitsValueElem(String str, EnumFitsValue valuelist)
+	private final boolean fitsValueElem(final String str, final EnumFitsValue valuelist)
 	{
-		VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
-		int siz = v.size();
+		if (str == null)
+			return false;
+		final VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
+		final int siz = v.size();
 		boolean hasValue = false;
 		for (int i = 0; i < siz; i++)
 		{
-			JDFValue elm = (JDFValue) v.elementAt(i);
+			final JDFValue elm = (JDFValue) v.elementAt(i);
 			if (elm.hasAttribute(AttributeName.VALUEUSAGE))
 			{
-				EnumFitsValue valueUsage = getValueValueUsage(i);
+				final EnumFitsValue valueUsage = getValueValueUsage(i);
 				if (valuelist.equals(valueUsage))
 				{
-					String value = getValueAllowedValue(i);
+					final String value = getValueAllowedValue(i);
 					hasValue = true;
-					if (value.compareTo(str) == 0)
+					if (str.equals(value))
 						return true; // we have found it
 				}
 			}
 			else
 			{
 				hasValue = true;
-				String value = getValueAllowedValue(i);
-				if (value.compareTo(str) == 0)
+				final String value = getValueAllowedValue(i);
+				if (str.equals(value))
 					return true; // we have found it
 			}
 		}
@@ -439,9 +380,9 @@ public class JDFStringState extends JDFAbstractState
 	}
 
 	@Override
-	public void setAllowedLength(JDFIntegerRange value)
+	public void setAllowedLength(final JDFIntegerRange value)
 	{
-		super.setPresentLength(value);
+		super.setAllowedLength(value);
 	}
 
 	@Override
@@ -451,9 +392,9 @@ public class JDFStringState extends JDFAbstractState
 	}
 
 	@Override
-	public void setPresentLength(JDFIntegerRange value)
+	public void setPresentLength(final JDFIntegerRange value)
 	{
-		super.setAllowedLength(value);
+		super.setPresentLength(value);
 	}
 
 	@Override
@@ -464,7 +405,7 @@ public class JDFStringState extends JDFAbstractState
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 */
 	@Override

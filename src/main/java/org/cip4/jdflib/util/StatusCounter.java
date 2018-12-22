@@ -3,75 +3,41 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
 /**
- * Created on Jul 5, 2006, 11:45:44 AM
- * org.cip4.jdflib.util.MimeUtil.java
- * Project Name: mimeutil
+ * Created on Jul 5, 2006, 11:45:44 AM org.cip4.jdflib.util.MimeUtil.java Project Name: mimeutil
  */
 package org.cip4.jdflib.util;
 
@@ -123,7 +89,7 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
 
-//TODO add time related metadata
+// TODO add time related metadata
 
 /**
  * Utility class for status JDF and JMF
@@ -150,13 +116,13 @@ public class StatusCounter
 	private String queueEntryID;
 	private EnumDeviceOperationMode operationMode = EnumDeviceOperationMode.Productive;
 	private EnumWorkType workType = null;
-	protected HashSet<String> setTrackWaste = new HashSet<String>();
-	protected HashSet<String> setCopyResInfo = new HashSet<String>();
+	protected HashSet<String> setTrackWaste = new HashSet<>();
+	protected HashSet<String> setCopyResInfo = new HashSet<>();
 	private EnumDeviceStatus status = null;
 	private String statusDetails = null;
 	private JDFDate startDate;
 	private NodeIdentifier nodeID = null;
-	private final Vector<JDFEmployee> vEmployees = new Vector<JDFEmployee>();
+	private final Vector<JDFEmployee> vEmployees = new Vector<>();
 
 	private double totalCounter = -1;
 	private VString icsVersions = null;
@@ -379,7 +345,7 @@ public class StatusCounter
 			refIDLocal = getFirstRefID();
 		}
 
-		for (LinkAmount element : vLinkAmount)
+		for (final LinkAmount element : vLinkAmount)
 		{
 			if (element.linkFitsKey(refIDLocal))
 			{
@@ -410,7 +376,7 @@ public class StatusCounter
 			refIDLocal = getFirstRefID();
 		}
 
-		for (LinkAmount element : vLinkAmount)
+		for (final LinkAmount element : vLinkAmount)
 		{
 			if (element.linkFitsKey(refIDLocal))
 			{
@@ -565,6 +531,7 @@ public class StatusCounter
 
 	/**
 	 * updates percentcomplete based on la
+	 *
 	 * @param la
 	 */
 	private void updatePercentComplete(final LinkAmount la)
@@ -616,6 +583,7 @@ public class StatusCounter
 
 	/**
 	 * get all total amounts of all tracked resources
+	 *
 	 * @return
 	 *
 	 */
@@ -635,6 +603,7 @@ public class StatusCounter
 
 	/**
 	 * get all total amounts of all tracked resources
+	 *
 	 * @return
 	 *
 	 */
@@ -906,7 +875,7 @@ public class StatusCounter
 	{
 		if (vLinkAmount != null)
 		{
-			for (LinkAmount element : vLinkAmount)
+			for (final LinkAmount element : vLinkAmount)
 			{
 				setResourceAudit(element.refID, EnumReason.ProcessResult);
 				element.updateNodeResource();
@@ -928,6 +897,7 @@ public class StatusCounter
 
 	/**
 	 * creates the base jmf
+	 *
 	 * @return the @see JDFDoc representing the JMF
 	 */
 	private JDFDoc createJMFDoc()
@@ -1000,7 +970,8 @@ public class StatusCounter
 
 	}
 
-	private void updateCurrentJobPhase(final EnumNodeStatus nodeStatus, final String nodeStatusDetails, final EnumDeviceStatus deviceStatus, final String deviceStatusDetails, final JDFJMF jmf, final LinkAmount la, final JDFPhaseTime pt2, final boolean bEnd)
+	private void updateCurrentJobPhase(final EnumNodeStatus nodeStatus, final String nodeStatusDetails, final EnumDeviceStatus deviceStatus, final String deviceStatusDetails, final JDFJMF jmf,
+			final LinkAmount la, final JDFPhaseTime pt2, final boolean bEnd)
 	{
 		final JDFResponse respStatus = (JDFResponse) jmf.appendMessageElement(JDFMessage.EnumFamily.Response, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo deviceInfo = respStatus.getCreateDeviceInfo(0);
@@ -1050,7 +1021,7 @@ public class StatusCounter
 		// cleanup!
 		if (vLinkAmount != null)
 		{
-			for (LinkAmount element : vLinkAmount)
+			for (final LinkAmount element : vLinkAmount)
 			{
 				element.addPhase(0, 0, true, true);
 			}
@@ -1337,8 +1308,6 @@ public class StatusCounter
 			}
 		} // end AmountBag
 
-		// ///////////////////////////////////////////////////////////////////
-
 		protected double startAmount = 0;
 		protected double startWaste = 0;
 		protected JDFResourceLink rl;
@@ -1405,6 +1374,7 @@ public class StatusCounter
 
 		/**
 		 * should the resource be displayed as an integer?
+		 *
 		 * @param target
 		 * @return true if the resource is an integer type
 		 */
@@ -1659,6 +1629,7 @@ public class StatusCounter
 
 		/**
 		 * change the value to integer, if required
+		 *
 		 * @param amount
 		 * @return the formatted amount, either as integer or double
 		 */
@@ -1973,6 +1944,7 @@ public class StatusCounter
 
 	/**
 	 * set percentComplete to percent
+	 *
 	 * @param percent the percentage to set
 	 */
 	public void setPercentComplete(final double percent)
@@ -1982,6 +1954,7 @@ public class StatusCounter
 
 	/**
 	 * update percentComplete by percent
+	 *
 	 * @param percent the percentage to increment
 	 */
 	public void updatePercentComplete(final double percent)
@@ -2009,6 +1982,7 @@ public class StatusCounter
 
 	/**
 	 * replace all employees in this - update phases if necessary
+	 *
 	 * @param employees
 	 */
 	public void replaceEmployees(final Vector<JDFEmployee> employees)

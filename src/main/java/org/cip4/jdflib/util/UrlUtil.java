@@ -1782,6 +1782,8 @@ public class UrlUtil
 	 */
 	public static String newExtension(final String strWork, String newExt)
 	{
+		if (strWork == null)
+			return null;
 		if (newExt == null)
 		{
 			return UrlUtil.prefix(strWork);
@@ -1803,6 +1805,9 @@ public class UrlUtil
 	 */
 	public static String prefix(final String strWork)
 	{
+		if (strWork == null)
+			return null;
+
 		final String ext = UrlUtil.extension(strWork);
 		if (ext == null)
 		{

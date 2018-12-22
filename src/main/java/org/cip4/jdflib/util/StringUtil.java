@@ -690,11 +690,11 @@ public class StringUtil
 			return newToken;
 		if (newToken == null)
 			return strWork;
-		while (strWork.endsWith(delim))
+		while (strWork != null && strWork.endsWith(delim))
 			strWork = leftStr(strWork, -delim.length());
-		while (newToken.startsWith(delim))
+		while (newToken != null && newToken.startsWith(delim))
 			newToken = rightStr(newToken, -delim.length());
-		return strWork + delim + newToken;
+		return ((strWork == null) ? JDFConstants.EMPTYSTRING : strWork) + delim + newToken;
 	}
 
 	/**
@@ -752,8 +752,6 @@ public class StringUtil
 		if (delim == null)
 			delim = JDFConstants.BLANK;
 		final VString v = tokenize(strWork, delim, false);
-		if (v == null)
-			return null;
 		if (index < 0)
 			index += v.size();
 		if (index >= v.size() || index < 0)
@@ -1617,26 +1615,18 @@ public class StringUtil
 
 		char[] target = null;
 
-		if (!(buffer.length < 0))
+		if (len > 0)
 		{
+			target = new char[len];
 
-			if (len > 0)
+			for (int i = 0; i < len; i++)
 			{
-				target = new char[len];
-
-				for (int i = 0; i < len; i++)
-				{
-					target[i] = (char) buffer[i];
-				}
-			}
-			else
-			{
-				target = new char[0]; // should never reached
+				target[i] = (char) buffer[i];
 			}
 		}
 		else
 		{
-			target = new char[0];
+			target = new char[0]; // should never reached
 		}
 		return new String(target);
 	}
@@ -1678,7 +1668,7 @@ public class StringUtil
 	{
 		char[] target = null;
 
-		if (buffer != null && buffer.length >= 0)
+		if (buffer != null)
 		{
 			if (len < 0)
 			{
@@ -2273,7 +2263,7 @@ public class StringUtil
 			}
 			catch (final NumberFormatException nfe2)
 			{
-				d = def;
+				// nop
 			}
 		}
 		return d;
@@ -2378,7 +2368,7 @@ public class StringUtil
 			}
 			catch (final NumberFormatException nfe2)
 			{
-				i = def;
+				// nop
 			}
 		}
 
@@ -2453,7 +2443,7 @@ public class StringUtil
 			}
 			catch (final NumberFormatException nfe2)
 			{
-				i = def;
+				// nop
 			}
 		}
 
