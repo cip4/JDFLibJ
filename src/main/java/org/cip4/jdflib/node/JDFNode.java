@@ -3413,7 +3413,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 *
-
+	
 	 *
 	 */
 
@@ -4189,7 +4189,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	@Override
 	public HashSet<JDFElement> getAllRefs(final HashSet<JDFElement> vDoneRefs, final boolean bRecurse)
 	{
-		HashSet<JDFElement> v1 = vDoneRefs != null ? vDoneRefs : new LinkedHashSet<>();
+		HashSet<JDFElement> v1 = vDoneRefs;
+		if (v1 == null)
+			v1 = new LinkedHashSet<>();
 		final JDFResourcePool rp = getResourcePool();
 		if (rp != null && bRecurse)
 		{
@@ -4202,16 +4204,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			v1 = rlp.getAllRefs(v1, bRecurse);
 		}
 
-		// only 1.2 direct element - resources are retrieved from the
-		// ResourcePool
+		// only 1.2 direct element - resources are retrieved from the ResourcePool
 		final JDFCustomerInfo ci = (JDFCustomerInfo) getElement(ElementName.CUSTOMERINFO);
 		if (ci != null)
 		{
 			v1 = ci.getAllRefs(v1, bRecurse);
 		}
 
-		// only 1.2 direct element - resources are retrieved from the
-		// ResourcePool
+		// only 1.2 direct element - resources are retrieved from the ResourcePool
 		final JDFNodeInfo ni = (JDFNodeInfo) getElement(ElementName.NODEINFO);
 		if (ni != null)
 		{
@@ -4225,10 +4225,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		}
 
 		final VElement vNodes = getvJDFNode(null, null, true);
-		final int size = vNodes.size();
-		for (int i = 0; i < size; i++)
+		for (final KElement e : vNodes)
 		{
-			v1 = ((JDFNode) vNodes.elementAt(i)).getAllRefs(v1, bRecurse);
+			v1 = ((JDFNode) e).getAllRefs(v1, bRecurse);
 		}
 
 		return v1;
