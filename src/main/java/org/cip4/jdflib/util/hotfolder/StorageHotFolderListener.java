@@ -329,10 +329,10 @@ class StorageHotFolderListener implements HotFolderListener
 		final File tmpDir = getTmpDir();
 		final File newAbsoluteFile = FileUtil.getFileInDirectory(tmpDir, new File(name));
 		boolean ok = false;
-		for (int i = 0; !ok; i++)
+		for (int i = 0; !ok && (i < parent.getRetry()); i++)
 		{
 			ok = FileUtil.moveFile(hotFile, newAbsoluteFile);
-			if (!ok && i < parent.getRetry())
+			if (!ok)
 			{
 				log.warn("retry " + i + " moving file from: " + hotFile.getAbsolutePath() + " to " + newAbsoluteFile.getAbsolutePath());
 
@@ -353,30 +353,35 @@ class StorageHotFolderListener implements HotFolderListener
 		}
 		if (ok)
 		{
-			final File aux = FileUtil.getAuxDir(hotFile);
-			if (aux != null)
+			processAux(hotFile, tmpDir);
+		}
+		return ok ? newAbsoluteFile : null;
+	}
+
+	void processAux(final File hotFile, final File tmpDir)
+	{
+		final File aux = FileUtil.getAuxDir(hotFile);
+		if (aux != null)
+		{
+			final File newaux = FileUtil.getFileInDirectory(tmpDir, new File(aux.getName()));
+			FileUtil.moveFile(aux, newaux);
+			log.info("moving aux file " + aux + " to " + tmpDir);
+			for (int i = 1; true; i++)
 			{
-				final File newaux = FileUtil.getFileInDirectory(tmpDir, new File(aux.getName()));
-				FileUtil.moveFile(aux, newaux);
-				log.info("moving aux file " + aux + " to " + tmpDir);
-				for (int i = 1; true; i++)
+				final File moved = FileUtil.moveFileToDir(newaux, tmpDir);
+				if (moved != null)
 				{
-					final File moved = FileUtil.moveFileToDir(newaux, tmpDir);
-					if (moved != null)
-					{
-						log.info("moved aux dir " + aux + " to " + moved);
+					log.info("moved aux dir " + aux + " to " + moved);
+					break;
+				}
+				else
+				{
+					log.warn("could not move aux dir " + aux + " to " + tmpDir + " #" + i);
+					if (i == 3 || !ThreadUtil.sleep(4242 * i))
 						break;
-					}
-					else
-					{
-						log.warn("could not move aux dir " + aux + " to " + tmpDir + " #" + i);
-						if (i == 3 || !ThreadUtil.sleep(4242 * i))
-							break;
-					}
 				}
 			}
 		}
-		return ok ? newAbsoluteFile : null;
 	}
 
 	private synchronized File getTmpDir()

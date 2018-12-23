@@ -63,6 +63,7 @@ import javax.mail.Multipart;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -568,15 +569,13 @@ public class UrlUtil
 			return null;
 		}
 		String s = f.getAbsolutePath();
-		if (File.separator.equals("\\"))
+		if (PlatformUtil.isWindows())
 		{
-			s = StringUtil.replaceChar(s, '\\', "/", 0);
+			s = StringUtil.replaceChar(s, '\\', JDFConstants.SLASH, 0);
 		}
 		s = UrlUtil.cleanDots(s);
 		s = escape(s, bEscape128);
-		// if(s.length()>2 && s.charAt(1)==':' && File.separator.equals("\\"))
-		// s=s.charAt(0)+s.substring(2);
-		if (s.charAt(0) != '/')
+		if (s != null && s.charAt(0) != '/')
 		{
 			s = "///" + s;
 		}
@@ -1732,7 +1731,7 @@ public class UrlUtil
 	 */
 	public static boolean isRelativeURL(final String url)
 	{
-		if (StringUtil.getNonEmpty(url) == null)
+		if (StringUtil.isEmpty(url))
 			return false;
 		return url.indexOf(":/") < 0 && url.indexOf(":\\") < 0 && !url.startsWith("/") && !url.startsWith("\\") && !isCID(url);
 	}

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -550,7 +550,8 @@ public class FileUtil
 		final BufferedInputStream bufferedInputStream = getBufferedInputStream(f);
 		if (bufferedInputStream == null || !f.canRead())
 			return null;
-		if (maxSize <= 0 || f.length() <= maxSize * 2)
+
+		if (maxSize <= 0 || f.length() <= maxSize * 2l)
 		{
 			return StreamUtil.getMD5(bufferedInputStream);
 		}
@@ -568,8 +569,15 @@ public class FileUtil
 		{
 			synchronized (md5)
 			{
-				bufferedInputStream.read(b);
-				md5.update(b);
+				int tmp = 0;
+				while (maxSize - tmp > 0)
+				{
+					final int read = bufferedInputStream.read(b);
+					md5.update(b, 0, read);
+					tmp += read;
+					if (read == 0)
+						break;
+				}
 				long toSkip = f.length() - 2l * maxSize;
 				long skipped = 42;
 				while (toSkip > 0 && skipped != 0)
@@ -577,8 +585,15 @@ public class FileUtil
 					skipped = bufferedInputStream.skip(toSkip);
 					toSkip -= skipped;
 				}
-				bufferedInputStream.read(b);
-				md5.update(b);
+				tmp = 0;
+				while (maxSize - tmp > 0)
+				{
+					final int read = bufferedInputStream.read(b);
+					md5.update(b, 0, read);
+					tmp += read;
+					if (read == 0)
+						break;
+				}
 				bufferedInputStream.close();
 				return md5.digest();
 			}

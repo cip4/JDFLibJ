@@ -157,7 +157,7 @@ public class StorageHotFolder
 	/**
 	 *
 	 * add a listener that also stores
-	 * 
+	 *
 	 * @param _hfl
 	 * @param ext
 	 * @return the newly added listener
@@ -183,7 +183,7 @@ public class StorageHotFolder
 	/**
 	 *
 	 * set the directory for successful done
-	 * 
+	 *
 	 * @param ok the local directory for ok files in the input hot folder
 	 */
 	public void setOKStorage(final File ok)
@@ -195,7 +195,7 @@ public class StorageHotFolder
 	/**
 	 *
 	 * copy any files to the ok or error files as set by the folder properties
-	 * 
+	 *
 	 * @param storedFile
 	 * @param ok
 	 */
@@ -207,7 +207,7 @@ public class StorageHotFolder
 	/**
 	 *
 	 * set the directory for error done
-	 * 
+	 *
 	 * @param error the local directory for error files in the input hot folder
 	 */
 	public void setErrorStorage(final File error)
@@ -218,7 +218,7 @@ public class StorageHotFolder
 
 	/**
 	 * Setter for maxStore attribute.
-	 * 
+	 *
 	 * @param maxStore the maxStore to set
 	 */
 	public void setMaxStore(final int maxStore)
@@ -229,7 +229,7 @@ public class StorageHotFolder
 
 	/**
 	 * Setter for maxStore attribute.
-	 * 
+	 *
 	 * @param maxStore the setMaxAux to set
 	 */
 	public void setMaxAux(final int maxStore)
@@ -274,7 +274,7 @@ public class StorageHotFolder
 	}
 
 	/**
-	 * @param retry the retry to set
+	 * @param retry the retry to set 1= no retry
 	 */
 	public void setRetry(int retry)
 	{
