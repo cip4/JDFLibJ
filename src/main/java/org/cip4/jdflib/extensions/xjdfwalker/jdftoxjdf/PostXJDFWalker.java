@@ -47,6 +47,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -65,7 +66,6 @@ import org.cip4.jdflib.extensions.MessageResourceHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.pool.JDFAmountPool;
@@ -87,6 +87,7 @@ import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
+import org.cip4.jdflib.resource.process.JDFStation;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
 import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
 import org.cip4.jdflib.resource.process.postpress.JDFThreadSewingParams;
@@ -131,6 +132,26 @@ class PostXJDFWalker extends BaseElementWalker
 	void setMergeLayout(final boolean mergeLayout)
 	{
 		this.mergeLayout = mergeLayout;
+	}
+
+	private EnumVersion newVersion;
+
+	/**
+	 * @return the newVersion
+	 */
+	public EnumVersion getNewVersion()
+	{
+		return newVersion;
+	}
+
+	/**
+	 * /**
+	 *
+	 * @param newVersion the newVersion to set
+	 */
+	public void setNewVersion(final EnumVersion newVersion)
+	{
+		this.newVersion = newVersion == null ? EnumVersion.Version_2_0 : newVersion;
 	}
 
 	/**
@@ -196,6 +217,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 */
 	protected class WalkElement extends BaseWalker
 	{
+
 		@SuppressWarnings("synthetic-access")
 		public WalkElement()
 		{
@@ -252,7 +274,7 @@ class PostXJDFWalker extends BaseElementWalker
 			if (xjdf.hasAttribute(AttributeName.XMLNS))
 				xjdf.removeAttribute(AttributeName.XMLNS);
 			if (xjdf.getNamespaceURI().equals(JDFElement.getSchemaURL()))
-				xjdf.setNamespaceURI(XJDF20.getSchemaURL());
+				xjdf.setNamespaceURI(JDFElement.getSchemaURL(newVersion));
 		}
 
 	}
@@ -967,7 +989,7 @@ class PostXJDFWalker extends BaseElementWalker
 		private String getBSID(final JDFStrippingParams strippingParams, final String bsName)
 		{
 			final String bsID = strippingParams.getNonEmpty(XJDFConstants.BinderySignatureID);
-			return bsID == null ? bsName : bsID;
+			return (bsID == null) ? bsName : bsID;
 		}
 
 		private void moveGangSourceFromStripping(final ResourceHelper nih, final String bsName, final JDFStrippingParams strippingParams)
@@ -1514,6 +1536,58 @@ class PostXJDFWalker extends BaseElementWalker
 
 	/**
 	 *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	public class WalkStation extends WalkElement
+	{
+		/**
+		 *
+		 */
+		public WalkStation()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString(ElementName.STATION, null);
+		}
+
+		/**
+		 * we zapp dropitems that don't reference anything
+		 *
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			final int sa = ((JDFStation) xjdf).getStationAmount();
+			final KElement ret = super.walk(xjdf, dummy);
+			for (int i = 1; i < sa; i++)
+			{
+				ret.getParentNode_KElement().copyElement(ret, ret);
+			}
+			return ret;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#updateAttributes(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		void updateAttributes(final KElement xjdf)
+		{
+			xjdf.removeAttribute(AttributeName.STATIONAMOUNT);
+			super.updateAttributes(xjdf);
+		}
+
+	}
+
+	/**
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 *
 	 */
@@ -1773,6 +1847,7 @@ class PostXJDFWalker extends BaseElementWalker
 		mergeLayout = true;
 		removeSignatureName = true;
 		retainAll = false;
+		newVersion = EnumVersion.Version_2_0;
 	}
 
 	/**

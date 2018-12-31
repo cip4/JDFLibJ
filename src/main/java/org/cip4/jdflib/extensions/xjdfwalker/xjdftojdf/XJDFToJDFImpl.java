@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment mrSubRefay appear in the software itself, if and wherever such third-party
+ * acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior writtenrestartProcesses() permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software restartProcesses()
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software restartProcesses() copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  */
 /**
@@ -80,6 +48,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.DocumentJDFImpl;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -101,8 +70,8 @@ import org.cip4.jdflib.extensions.xjdfwalker.IDFinder;
 import org.cip4.jdflib.extensions.xjdfwalker.IDPart;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UnitParser;
 
@@ -129,9 +98,9 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 * @see org.cip4.jdflib.elementwalker.PackageElementWalker#constructWalker(java.lang.String)
 	 */
 	@Override
-	protected BaseWalker constructWalker(String name)
+	protected BaseWalker constructWalker(final String name)
 	{
-		WalkXElement constructWalker = (WalkXElement) super.constructWalker(name);
+		final WalkXElement constructWalker = (WalkXElement) super.constructWalker(name);
 		if (constructWalker != null)
 			constructWalker.setParent(this);
 		return constructWalker;
@@ -139,6 +108,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 
 	/**
 	 * Getter for createProduct attribute.
+	 *
 	 * @return the createProduct
 	 */
 	public boolean isCreateProduct()
@@ -148,15 +118,17 @@ public class XJDFToJDFImpl extends PackageElementWalker
 
 	/**
 	 * Setter for createProduct attribute.
+	 *
 	 * @param createProduct the createProduct to set
 	 */
-	public void setCreateProduct(boolean createProduct)
+	public void setCreateProduct(final boolean createProduct)
 	{
 		this.createProduct = createProduct;
 	}
 
 	/**
 	 * Getter for convertUnits attribute.
+	 *
 	 * @return the convertUnits
 	 */
 	public boolean isConvertUnits()
@@ -166,15 +138,17 @@ public class XJDFToJDFImpl extends PackageElementWalker
 
 	/**
 	 * Setter for convertUnits attribute.
+	 *
 	 * @param convertUnits the convertUnits to set
 	 */
-	public void setConvertUnits(boolean convertUnits)
+	public void setConvertUnits(final boolean convertUnits)
 	{
 		this.convertUnits = convertUnits;
 	}
 
 	/**
 	 * Getter for bConvertTilde attribute.
+	 *
 	 * @return the bConvertTilde
 	 */
 	public boolean isbConvertTilde()
@@ -221,7 +195,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 
 	private EnumVersion getVersion(final JDFDoc template)
 	{
-		JDFNode n = template == null ? null : template.getJDFRoot();
+		final JDFNode n = template == null ? null : template.getJDFRoot();
 		EnumVersion v = (n != null) ? n.getVersion(true) : null;
 		if (v == null)
 			v = JDFAudit.getDefaultJDFVersion();
@@ -242,13 +216,13 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 * @param _xjdf
 	 * @return the converted jdf
 	 */
-	protected JDFDoc convert(KElement _xjdf)
+	protected JDFDoc convert(final KElement _xjdf)
 	{
 		if (_xjdf == null)
 		{
 			return null;
 		}
-		boolean isJMF = prepareConvert(_xjdf);
+		final boolean isJMF = prepareConvert(_xjdf);
 		if (isJMF)
 		{
 			convertXJMF();
@@ -282,20 +256,20 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 * @param _xjdf
 	 * @return
 	 */
-	private boolean prepareConvert(KElement _xjdf)
+	private boolean prepareConvert(final KElement _xjdf)
 	{
 		xjdf = _xjdf.cloneNewDoc();
-		String docType = xjdf.getLocalName();
-		boolean isJMF = ElementName.JMF.equals(docType) || XJDFConstants.XJMF.equals(docType);
+		final String docType = xjdf.getLocalName();
+		final boolean isJMF = ElementName.JMF.equals(docType) || XJDFConstants.XJMF.equals(docType);
 		if (jdfDoc == null)
 		{
-			String strDocType = isJMF ? ElementName.JMF : ElementName.JDF;
+			final String strDocType = isJMF ? ElementName.JMF : ElementName.JDF;
 			jdfDoc = new JDFDoc(strDocType);
 			jdfDoc.copyMeta(xjdf.getOwnerDocument_KElement());
 		}
 		xjdf = reparse(xjdf);
-		xjdf.setAttribute(AttributeName.VERSION, version.getName());
-		xjdf.setAttribute(AttributeName.MAXVERSION, version.getName());
+		xjdf.setAttribute(AttributeName.MAXVERSION, getXJDFVersion().getName());
+		xjdf.setAttribute(AttributeName.VERSION, getVersion().getName());
 		new XJDFHelper(xjdf).reorder();
 		return isJMF;
 	}
@@ -309,7 +283,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	{
 		if (xjdf != null && !(xjdf.getOwnerDocument() instanceof DocumentJDFImpl))
 		{
-			JDFDoc doc = new JDFDoc(xjdf.getOwnerDocument());
+			final JDFDoc doc = new JDFDoc(xjdf.getOwnerDocument());
 			doc.setInitOnCreate(false);
 			KElement xjdf2 = doc.getRoot();
 			if (!xjdf2.getLocalName().equals(xjdf.getLocalName()))
@@ -363,11 +337,12 @@ public class XJDFToJDFImpl extends PackageElementWalker
 
 	/**
 	 * find and optionally create the appropriate node
+	 *
 	 * @param xjdf
 	 * @param create if true, create the new node
 	 * @return the node
 	 */
-	private JDFNode findNode(KElement xjdf, final boolean create)
+	private JDFNode findNode(final KElement xjdf, final boolean create)
 	{
 		final JDFNode root = jdfDoc.getJDFRoot();
 		final String jpID = xjdf.getAttribute(AttributeName.JOBPARTID, null, null);
@@ -382,7 +357,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 			{
 				final VElement nodes = root.getvJDFNode(null, null, false);
 				final VString xTypes = StringUtil.tokenize(xjdf.getAttribute(AttributeName.TYPES), null, false);
-				for (KElement e : nodes)
+				for (final KElement e : nodes)
 				{
 					final JDFNode n2 = (JDFNode) e;
 					final VString vtypes = n2.getAllTypes();
@@ -454,15 +429,15 @@ public class XJDFToJDFImpl extends PackageElementWalker
 				final String val = map.get(key);
 				if ((e2 instanceof JDFElement) && EnumAttributeType.isRange(((JDFElement) e2).getAttributeInfo().getAttributeType(key)))
 				{
-					VString v = new VString(val, null);
+					final VString v = new VString(val, null);
 					if (v.size() % 2 == 0)
 					{
-						JDFNameRangeList nrl = new JDFNameRangeList();
+						final JDFNameRangeList nrl = new JDFNameRangeList();
 						for (int i = 0; i < v.size(); i += 2)
 						{
 							nrl.append(new JDFNameRange(v.get(i), v.get(i + 1)));
 						}
-						String newVal = nrl.getString(0);
+						final String newVal = nrl.getString(0);
 						if (!val.equals(newVal))
 						{
 							e2.setAttribute(key, newVal);
@@ -486,6 +461,15 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 */
 	public EnumVersion getVersion()
 	{
+		if (xjdf != null)
+		{
+			final String ns = xjdf.getNamespaceURI();
+			final int minor = StringUtil.parseInt(StringUtil.token(ns, -1, JDFConstants.UNDERSCORE), -1);
+			if (minor == 1)
+				version = (EnumVersion) EnumUtil.max(EnumVersion.Version_1_7, version);
+			if (minor == 2)
+				version = (EnumVersion) EnumUtil.max(EnumVersion.Version_1_8, version);
+		}
 		return version;
 	}
 
@@ -569,7 +553,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 			moveToLink(rl, partmap, map, AttributeName.MAXAMOUNT);
 			if (partmap == null && rl.getXPathElement("AmountPool/PartAmount/Part") == null && rl.getAmountPool() != null)
 			{
-				JDFPartAmount pa = rl.getAmountPool().getPartAmount(0);
+				final JDFPartAmount pa = rl.getAmountPool().getPartAmount(0);
 				rl.copyAttribute(AttributeName.AMOUNT, pa);
 				rl.copyAttribute(AttributeName.ACTUALAMOUNT, pa);
 				rl.copyAttribute(AttributeName.MAXAMOUNT, pa);
@@ -579,25 +563,28 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 * if true tildes are  converted to pairs in xjdf 2.0
+	 * if true tildes are converted to pairs in xjdf 2.0
+	 *
 	 * @param b
 	 */
-	public void setConvertTilde(boolean b)
+	public void setConvertTilde(final boolean b)
 	{
 		bConvertTilde = b;
 	}
 
 	/**
 	 * Setter for typeLinks attribute. if true, we will only create links that are appropriate for the respective type or types
+	 *
 	 * @param heuristicLink the typeLinks to set
 	 */
-	public void setTypeLinks(boolean typeLinks)
+	public void setTypeLinks(final boolean typeLinks)
 	{
 		this.typeLinks = typeLinks;
 	}
 
 	/**
 	 * Getter for typeLinks attribute.
+	 *
 	 * @return the typeLinks
 	 */
 	public boolean isTypeLinks()
@@ -616,10 +603,19 @@ public class XJDFToJDFImpl extends PackageElementWalker
 
 	/**
 	 * if true, we will find a @Usage for sets with no Usage using fuzzy heuristics
+	 *
 	 * @param heuristicLink
 	 */
-	public void setHeuristicLink(boolean heuristicLink)
+	public void setHeuristicLink(final boolean heuristicLink)
 	{
 		this.heuristicLink = heuristicLink;
+	}
+
+	public EnumVersion getXJDFVersion()
+	{
+		final EnumVersion v = getVersion();
+		if (EnumVersion.Version_1_7.equals(v))
+			return EnumVersion.Version_2_1;
+		return EnumVersion.Version_2_0;
 	}
 }

@@ -161,7 +161,7 @@ public class FixVersionImpl extends PackageElementWalker
 		bFixIDs = true;
 		bZappInvalid = false;
 		bZappDeprecated = false;
-		version = _version;
+		version = EnumUtil.aLessThanB(EnumVersion.Version_2_0, _version) ? EnumVersion.Version_2_0 : _version;
 		bOK = true;
 		fixICSVersions = false;
 		bLayoutPrepToStripping = false;

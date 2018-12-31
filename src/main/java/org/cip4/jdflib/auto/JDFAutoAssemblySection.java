@@ -60,7 +60,7 @@ import org.cip4.jdflib.resource.process.JDFPageAssignedList;
  *****************************************************************************
  * class JDFAutoAssemblySection : public JDFElement
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoAssemblySection extends JDFElement
@@ -68,13 +68,14 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x44444311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ORDER, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOrder.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.COMMONFOLDS, 0x31111111, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	@Override
@@ -97,36 +98,36 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoAssemblySection
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAssemblySection(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAssemblySection(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAutoAssemblySection
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAssemblySection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAssemblySection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAutoAssemblySection
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAssemblySection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAssemblySection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -150,7 +151,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOrder(String name)
+		private EnumOrder(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -159,7 +160,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumOrder getEnum(String enumName)
+		public static EnumOrder getEnum(final String enumName)
 		{
 			return (EnumOrder) getEnum(EnumOrder.class, enumName);
 		}
@@ -168,7 +169,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumOrder getEnum(int enumValue)
+		public static EnumOrder getEnum(final int enumValue)
 		{
 			return (EnumOrder) getEnum(EnumOrder.class, enumValue);
 		}
@@ -212,17 +213,17 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 */
 	/**
 	 * (36) set attribute AssemblyID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyID(String value)
+	public void setAssemblyID(final String value)
 	{
 		setAttribute(AttributeName.ASSEMBLYID, value, null);
 	}
 
 	/**
 	 * (23) get String attribute AssemblyID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getAssemblyID()
@@ -235,17 +236,17 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 */
 	/**
 	 * (36) set attribute AssemblyIDs
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyIDs(VString value)
+	public void setAssemblyIDs(final VString value)
 	{
 		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
 	}
 
 	/**
 	 * (21) get VString attribute AssemblyIDs
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getAssemblyIDs()
@@ -261,17 +262,17 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 */
 	/**
 	 * (36) set attribute JobID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
 
 	/**
 	 * (23) get String attribute JobID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getJobID()
@@ -284,17 +285,17 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 */
 	/**
 	 * (5) set attribute Order
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOrder(EnumOrder enumVar)
+	public void setOrder(final EnumOrder enumVar)
 	{
 		setAttribute(AttributeName.ORDER, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get attribute Order
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumOrder getOrder()
@@ -308,29 +309,29 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 
 	/**
 	 * (26) getCreatePageAssignedList
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFPageAssignedList the element
 	 */
-	public JDFPageAssignedList getCreatePageAssignedList(int iSkip)
+	public JDFPageAssignedList getCreatePageAssignedList(final int iSkip)
 	{
 		return (JDFPageAssignedList) getCreateElement_JDFElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
 	}
 
 	/**
 	 * (27) const get element PageAssignedList
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFPageAssignedList the element default is getPageAssignedList(0)
 	 */
-	public JDFPageAssignedList getPageAssignedList(int iSkip)
+	public JDFPageAssignedList getPageAssignedList(final int iSkip)
 	{
 		return (JDFPageAssignedList) getElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
 	}
 
 	/**
 	 * Get all PageAssignedList from the current element
-	 * 
+	 *
 	 * @return Collection<JDFPageAssignedList>, null if none are available
 	 */
 	public Collection<JDFPageAssignedList> getAllPageAssignedList()
@@ -340,7 +341,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 
 	/**
 	 * (30) append element PageAssignedList
-	 * 
+	 *
 	 * @return JDFPageAssignedList the element
 	 */
 	public JDFPageAssignedList appendPageAssignedList()

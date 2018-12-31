@@ -1,70 +1,38 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *  
- * 
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
@@ -78,14 +46,14 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFPreview;
 
 /**
- * 
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen at this point only a dummy since we have a specific WalkResourceAudit child
  */
 public class WalkPreview extends WalkResource
 {
 
 	/**
-	 * 
+	 *
 	 */
 	public WalkPreview()
 	{
@@ -104,28 +72,34 @@ public class WalkPreview extends WalkResource
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(KElement jdf, KElement xjdf)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		moveToFileSpec(jdf);
-		String typ = jdf.getAttribute(AttributeName.PREVIEWUSAGE);
-		KElement xjdfPreview = super.walk(jdf, xjdf);
-		ResourceHelper ph = new ResourceHelper(xjdfPreview.getParentNode_KElement());
+		final JDFPreview pv = (JDFPreview) jdf;
+		moveToFileSpec(pv);
+		final String typ = jdf.getAttribute(AttributeName.PREVIEWUSAGE);
+		final KElement xjdfPreview = super.walk(jdf, xjdf);
+		final ResourceHelper ph = new ResourceHelper(xjdfPreview.getParentNode_KElement());
 		ph.ensurePart(AttributeName.PREVIEWTYPE, typ);
 		return xjdfPreview;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param jdf
 	 */
-	void moveToFileSpec(KElement jdf)
+	void moveToFileSpec(final JDFPreview pv)
 	{
-		JDFFileSpec fs = (JDFFileSpec) jdf.appendElement(ElementName.FILESPEC);
-		fs.moveAttribute(AttributeName.URL, jdf);
+		final JDFFileSpec fs = (JDFFileSpec) pv.appendElement(ElementName.FILESPEC);
+		fs.moveAttribute(AttributeName.URL, pv);
+		if (pv.getEnumPreviewFileType() == null)
+		{
+			fs.moveAttribute(AttributeName.MIMETYPE, pv, AttributeName.PREVIEWFILETYPE, null, null);
+		}
+
 	}
 
 	/**
@@ -141,7 +115,7 @@ public class WalkPreview extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.DIRECTORY);
 		map.remove(AttributeName.MIMETYPEDETAILS);

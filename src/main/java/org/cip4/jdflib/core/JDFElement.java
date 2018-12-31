@@ -175,7 +175,7 @@ public class JDFElement extends KElement
 	private MyPair<AttributeInfo, ElementInfo> infotables;
 	private static final long serialVersionUID = 1L;
 	private static final Log jLog = LogFactory.getLog(JDFElement.class);
-	private static EnumVersion defaultVersion = EnumVersion.Version_1_5;
+	private static EnumVersion defaultVersion = EnumVersion.Version_1_6;
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
@@ -4096,7 +4096,6 @@ public class JDFElement extends KElement
 		return defaultVersion;
 	}
 
-	// ////////////////////////////////////////////////////////////////////
 	/**
 	 * sets the JDFElement::EnumVersion, where new elements will be generated in by default<br>
 	 * Attention this is static and global. Therefore it should generally be be called on initialization
@@ -5236,6 +5235,14 @@ public class JDFElement extends KElement
 			{
 				return EnumVersion.Version_2_0;
 			}
+			else if ("2.1".equals(enumName))
+			{
+				return EnumVersion.Version_2_1;
+			}
+			else if ("2.2".equals(enumName))
+			{
+				return EnumVersion.Version_2_2;
+			}
 			return enumName != null && enumName.startsWith("2") ? EnumVersion.Version_2_0 : JDFElement.getDefaultJDFVersion(); // the default
 		}
 
@@ -5339,8 +5346,10 @@ public class JDFElement extends KElement
 		public static final EnumVersion Version_1_8 = new EnumVersion(JDFConstants.VERSION_1_8);
 		/** * */
 		public static final EnumVersion Version_1_9 = new EnumVersion(JDFConstants.VERSION_1_9);
-		/** * */
+
 		public static final EnumVersion Version_2_0 = new EnumVersion(JDFConstants.VERSION_2_0);
+		public static final EnumVersion Version_2_1 = new EnumVersion(JDFConstants.VERSION_2_1);
+		public static final EnumVersion Version_2_2 = new EnumVersion(JDFConstants.VERSION_2_2);
 
 		/**
 		 * gets the integer value of the minor version, e.g 2 for 1.3 etc
@@ -6656,6 +6665,10 @@ public class JDFElement extends KElement
 			return getSchemaURL(1, 1);
 		else if (EnumVersion.Version_2_0.equals(version))
 			return getSchemaURL(2, 0);
+		else if (EnumVersion.Version_2_1.equals(version))
+			return getSchemaURL(2, 1);
+		else if (EnumVersion.Version_2_2.equals(version))
+			return getSchemaURL(2, 2);
 		else
 			return null;
 	}

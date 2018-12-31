@@ -38,6 +38,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -251,6 +252,21 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testStationAmount()
+	{
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
+		final KElement dl = h.appendResourceSet(ElementName.DIELAYOUT, EnumUsage.Input).appendPartition(null, true).getResource();
+		dl.appendElement(ElementName.STATION).setAttribute(AttributeName.STATIONAMOUNT, "3");
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.walkTree(h.getRoot(), null);
+		assertEquals(3, dl.numChildElements(ElementName.STATION, null));
+		assertFalse(dl.getElement(ElementName.STATION, null, 0).hasAttribute(AttributeName.STATIONAMOUNT));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testAuditOrder()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
@@ -294,6 +310,24 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		w.walkTreeKidsFirst(x);
 		assertEquals(XJDF20.getSchemaURL(), x.getElement(XJDFConstants.Header).getNamespaceURI());
 		assertEquals(XJDF20.getSchemaURL(), c.getElement(XJDFConstants.Header).getNamespaceURI());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSetNewVersion()
+	{
+		final KElement x = new JDFDoc(XJDFConstants.XJMF, EnumVersion.Version_1_6).getRoot();
+		final KElement c = x.appendElement("SignalNotification");
+		x.setAttribute(AttributeName.DEVICEID, "d1");
+		c.setAttribute(AttributeName.DEVICEID, "d1");
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) x);
+		w.setNewVersion(EnumVersion.Version_2_1);
+		w.walkTreeKidsFirst(x);
+		assertEquals(JDFElement.getSchemaURL(EnumVersion.Version_2_1), x.getElement(XJDFConstants.Header).getNamespaceURI());
+		assertEquals(JDFElement.getSchemaURL(EnumVersion.Version_2_1), c.getElement(XJDFConstants.Header).getNamespaceURI());
+		assertEquals(JDFElement.getSchemaURL(EnumVersion.Version_2_1), x.getNamespaceURI());
 	}
 
 	/**

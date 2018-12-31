@@ -49,7 +49,6 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNameRange;
 import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.elementwalker.BaseWalker;
-import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.w3c.dom.Node;
@@ -95,7 +94,7 @@ public class WalkElement extends BaseWalker
 		String nsURI = jdf.getNamespaceURI();
 		if (JDFConstants.JDFNAMESPACE.equals(nsURI))
 		{
-			nsURI = XJDF20.getSchemaURL();
+			nsURI = jdfToXJDF.getSchemaURL(null);
 		}
 		final String nodeName = getXJDFName(jdf);
 		final KElement eNew = nodeName == null ? xjdf : xjdf.appendElement(nodeName, nsURI);

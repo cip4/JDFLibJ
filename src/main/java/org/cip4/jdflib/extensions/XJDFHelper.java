@@ -129,7 +129,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		super();
 		if (xjdf == null)
 		{
-			newXJDF();
+			newXJDF(EnumVersion.Version_2_0);
 		}
 		else
 		{
@@ -149,12 +149,25 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	public XJDFHelper(String jobID, final String jobPartID, final VJDFAttributeMap parts)
 	{
 		super();
-		newXJDF();
+		newXJDF(null);
 		if (jobID == null)
 			jobID = "Job_" + new JDFDate().getFormattedDateTime("MMdd_hhmmss");
 		theElement.setAttribute(AttributeName.JOBID, jobID);
 		theElement.setAttribute(AttributeName.JOBPARTID, jobPartID);
 		setParts(parts);
+		cleanUp();
+	}
+
+	/**
+	 *
+	 * @param jobID
+	 * @param jobPartID
+	 */
+	public XJDFHelper(final EnumVersion version, final String jobID)
+	{
+		super();
+		newXJDF(version);
+		setJobID(jobID);
 		cleanUp();
 	}
 
@@ -178,11 +191,15 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
+	 * @param version2
 	 *
 	 */
-	void newXJDF()
+	void newXJDF(EnumVersion version)
 	{
-		final JDFDoc doc = new JDFDoc(XJDFConstants.XJDF, EnumVersion.Version_2_0);
+		if (version == null)
+			version = EnumVersion.Version_2_0;
+
+		final JDFDoc doc = new JDFDoc(XJDFConstants.XJDF, version);
 		doc.setInitOnCreate(false);
 		theElement = doc.getRoot();
 		final AuditPoolHelper aph = getCreateAuditPool();

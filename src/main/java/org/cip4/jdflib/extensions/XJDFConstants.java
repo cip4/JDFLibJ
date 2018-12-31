@@ -63,6 +63,7 @@ public abstract class XJDFConstants
 	public static final String Container = "Container";
 	public static final String Content = "Content";
 	public static final String ContentCheckIntent = "ContentCheckIntent";
+	public static final String ContentRef = "ContentRef";
 	public static final String ContentStatus = "ContentStatus";
 	public static final String Cover = "Cover";
 

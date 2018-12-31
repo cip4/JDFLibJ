@@ -185,8 +185,20 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public ResourceHelper getCreateVPartition(final VJDFAttributeMap vmap, final boolean addRes)
 	{
-		final JDFAttributeMap map = vmap != null && !vmap.isEmpty() ? vmap.get(0) : null;
-		ResourceHelper e = getPartition(map);
+		ResourceHelper e = null;
+		JDFAttributeMap map = null;
+		if (vmap != null)
+		{
+			for (final JDFAttributeMap map2 : vmap)
+			{
+				e = getPartition(map2);
+				if (e != null)
+				{
+					map = map2;
+					break;
+				}
+			}
+		}
 		if (e == null)
 		{
 			e = appendPartition(map, addRes);

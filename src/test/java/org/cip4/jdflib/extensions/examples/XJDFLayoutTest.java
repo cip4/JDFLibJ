@@ -53,7 +53,6 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -266,22 +265,75 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		po.setAttribute("Ord", "0");
 		po.setAttribute(AttributeName.CTM, JDFMatrix.getUnitMatrix().toString());
 		po.appendElement(ElementName.CONTENTOBJECT);
+		po.setID("po_0");
+
 		po = lo.appendElement(XJDFConstants.PlacedObject);
 		po.setAttribute("Ord", "1");
 		po.setAttribute(AttributeName.CTM, JDFMatrix.getUnitMatrix().shift(new JDFXYPair(500, 0)).toString());
+		po.setID("po_1");
 		po.appendElement(ElementName.CONTENTOBJECT);
+
 		final JDFPageCondition pc = (JDFPageCondition) po.appendElement(ElementName.PAGECONDITION);
 		final JDFAttributeMap mPart = new JDFAttributeMap(AttributeName.RUNINDEX, "0 0");
-		final VJDFAttributeMap vMap = new VJDFAttributeMap();
-		vMap.add(mPart);
 
-		pc.setPartMapVector(vMap);
+		pc.setPartMap(mPart);
 		final KElement cond = pc.appendElement(AttributeName.CONDITION);
 		cond.moveElements(pc.getChildElementVector(ElementName.PART, null), null);
 		cond.setAttribute(XJDFConstants.PartContext, AttributeName.DOCINDEX);
 		xjdfHelper.cleanUp();
 		setSnippet(shLO, true);
 		writeTest(xjdfHelper, "resources/pageCondition.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testContentRef()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "ContentRef", null);
+		xjdfHelper.setTypes("Imposition");
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper rh = shLO.appendPartition(AttributeName.SIDE, "Front", true);
+
+		final JDFLayout lo = (JDFLayout) rh.getResource();
+		lo.setAutomated(true);
+		KElement po = lo.appendElement(XJDFConstants.PlacedObject);
+		po.setAttribute("Ord", "0");
+		po.setAttribute(AttributeName.CTM, JDFMatrix.getUnitMatrix().toString());
+		po.appendElement(ElementName.CONTENTOBJECT);
+		po.setID("po_0");
+
+		po = lo.appendElement(XJDFConstants.PlacedObject);
+		po.setAttribute("Ord", "1");
+		po.setAttribute(AttributeName.CTM, JDFMatrix.getUnitMatrix().shift(new JDFXYPair(500, 0)).toString());
+		po.setID("po_1");
+		po.appendElement(ElementName.CONTENTOBJECT);
+
+		final JDFPageCondition pc = (JDFPageCondition) po.appendElement(ElementName.PAGECONDITION);
+		final JDFAttributeMap mPart = new JDFAttributeMap(AttributeName.RUNINDEX, "0 0");
+
+		pc.setPartMap(mPart);
+		final KElement cond = pc.appendElement(AttributeName.CONDITION);
+		cond.moveElements(pc.getChildElementVector(ElementName.PART, null), null);
+		cond.setAttribute(XJDFConstants.PartContext, AttributeName.DOCINDEX);
+
+		po = lo.appendElement(XJDFConstants.PlacedObject);
+		po.setAttribute("Ord", "0");
+		po.setAttribute(AttributeName.CTM, JDFMatrix.getUnitMatrix().shift(new JDFXYPair(0, 500)).toString());
+		final KElement mo1 = po.appendElement(ElementName.MARKOBJECT);
+		mo1.appendElement(ElementName.REGISTERMARK);
+
+		po = lo.appendElement(XJDFConstants.PlacedObject);
+		po.setAttribute("Ord", "1");
+		po.setAttribute(AttributeName.CTM, JDFMatrix.getUnitMatrix().shift(new JDFXYPair(500, 500)).toString());
+		final KElement mo2 = po.appendElement(ElementName.MARKOBJECT);
+		mo2.setAttribute(XJDFConstants.ContentRef, "po_1");
+		mo2.appendElement(ElementName.REGISTERMARK);
+
+		xjdfHelper.cleanUp();
+		setSnippet(shLO, true);
+		writeTest(xjdfHelper, "resources/contentRef.xjdf");
 	}
 
 	/**

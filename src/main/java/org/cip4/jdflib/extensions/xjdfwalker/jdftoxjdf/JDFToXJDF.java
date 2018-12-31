@@ -93,6 +93,7 @@ public class JDFToXJDF extends PackageElementWalker
 		componentProductMap = new JDFAttributeMap();
 		resourceAlias = new HashSet<>();
 		wantDependent = true;
+		newVersion = null;
 	}
 
 	/**
@@ -169,6 +170,16 @@ public class JDFToXJDF extends PackageElementWalker
 	public static String getSchemaURL()
 	{
 		return JDFElement.getSchemaURL(2, 0);
+	}
+
+	/**
+	 *
+	 *
+	 * @return the URL that fits to majorVersion and minorVersion - null if not supported
+	 */
+	String getSchemaURL(final EnumVersion version)
+	{
+		return JDFElement.getSchemaURL((version == null) ? getNewVersion() : version);
 	}
 
 	/**
@@ -310,6 +321,23 @@ public class JDFToXJDF extends PackageElementWalker
 
 	private EnumProcessPartition processPartition = EnumProcessPartition.processTypes;
 	private boolean wantDependent;
+	private EnumVersion newVersion;
+
+	/**
+	 * @return the newVersion
+	 */
+	public EnumVersion getNewVersion()
+	{
+		return newVersion == null ? EnumVersion.Version_2_0 : newVersion;
+	}
+
+	/**
+	 * @param newVersion the newVersion to set
+	 */
+	public void setNewVersion(final EnumVersion newVersion)
+	{
+		this.newVersion = newVersion == null ? EnumVersion.Version_2_0 : newVersion;
+	}
 
 	/**
 	 * @param bProcessList the ProcessList to set
@@ -421,7 +449,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	void preFixVersion(final JDFElement root)
 	{
-		final FixVersion vers = new FixVersion(EnumVersion.Version_2_0);
+		final FixVersion vers = new FixVersion(getNewVersion());
 		vers.setLayoutPrepToStripping(bMergeLayoutPrep);
 		vers.setZappDeprecated(true);
 		vers.addIgnore(ElementName.ACTIVITY, AttributeName.ROLES);
@@ -440,7 +468,7 @@ public class JDFToXJDF extends PackageElementWalker
 		pw.setIntentPartition(bIntentPartition);
 		pw.setRemoveSignatureName(removeSignatureName);
 		pw.setRetainAll(bRetainAll);
-
+		pw.setNewVersion(getNewVersion());
 		pw.walkTreeKidsFirst(newRoot);
 		if (bJMF)
 		{
@@ -508,10 +536,10 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	private void prepareNewDoc(final boolean bJMF)
 	{
-		final JDFDoc newDoc = new JDFDoc(bJMF ? (bTypeSafeMessage ? XJDFConstants.XJMF : rootJMF) : XJDFConstants.XJDF, EnumVersion.Version_2_0);
+		final JDFDoc newDoc = new JDFDoc(bJMF ? (bTypeSafeMessage ? XJDFConstants.XJMF : rootJMF) : XJDFConstants.XJDF, getNewVersion());
 		newDoc.setInitOnCreate(false);
 		newRoot = newDoc.getRoot();
-		newRoot.setNamespaceURI(getSchemaURL());
+		newRoot.setNamespaceURI(getSchemaURL(newVersion));
 		first = new HashSet<>();
 	}
 

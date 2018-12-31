@@ -1,5 +1,4 @@
 /*
- *
  * The CIP4 Software License, Version 1.0
  *
  *
@@ -37,59 +36,54 @@
  *
  */
 /*
- * Created on July 3, 2003
+ * JDFExampleDocTest.java
+ *
+ * @author muchadie
  */
-package org.cip4.jdflib.core;
+package org.cip4.jdflib.examples;
 
-/**
- * @author rainer prosi
- */
-public class JDFParserFactory extends XMLParserFactory
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFMarkObject;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.process.JDFLayout;
+import org.junit.Test;
+
+public class LayoutTest extends JDFTestCaseBase
 {
-	private static JDFParserFactory theFactory = new JDFParserFactory();
 
 	/**
 	 *
-	 * @return
 	 */
-	public static JDFParserFactory getFactory()
+	@Test
+	public void testContentRefs()
 	{
-		return theFactory;
+		final JDFNode n = JDFNode.createRoot();
+		n.setJobID("J_Content");
+		n.setType(EnumType.Imposition);
+		final JDFLayout layout = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Input);
+		final JDFLayout front = (JDFLayout) layout.addPartition(EnumPartIDKey.SignatureName, "sig1").addPartition(EnumPartIDKey.SheetName, "s1").addPartition(EnumPartIDKey.Side,
+				EnumSide.Front.getName());
+		final String id0 = front.appendContentObject(0, JDFMatrix.getUnitMatrix()).appendAnchor(null);
+		final String id1 = front.appendContentObject(1, JDFMatrix.getUnitMatrix().shift(420, 0)).appendAnchor(null);
+
+		final JDFMarkObject mo = front.appendMarkObject(0, JDFMatrix.getUnitMatrix().shift(400, 60));
 	}
 
 	/**
-	 * default constructor
-	 */
-	private JDFParserFactory()
-	{
-		super();
-	}
-
-	/**
-	 *
-	 * @return
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
-	public JDFParser get()
+	public void setUp() throws Exception
 	{
-		JDFParser first = (JDFParser) fifo.pop();
-		if (first == null)
-		{
-			first = new JDFParser();
-		}
-		return first;
+		super.setUp();
+		KElement.setLongID(false);
 	}
 
-	/**
-	 *
-	 * @return
-	 */
-	@Override
-	public void push(final XMLParser p)
-	{
-		if (p instanceof JDFParser)
-		{
-			super.push(p);
-		}
-	}
 }

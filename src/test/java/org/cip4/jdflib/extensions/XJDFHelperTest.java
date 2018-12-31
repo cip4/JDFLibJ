@@ -47,6 +47,8 @@ import java.io.File;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
@@ -479,6 +481,18 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		final KElement root = theHelper.getRoot();
 		assertNotNull(theHelper.getSet("NodeInfo", 0));
 		assertNotNull(root);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testCreate21()
+	{
+		theHelper = new XJDFHelper(EnumVersion.Version_2_1, "j1");
+		final KElement root = theHelper.getRoot();
+		assertEquals(JDFElement.getSchemaURL(2, 1), root.getNamespaceURI());
 	}
 
 	/**

@@ -64,7 +64,7 @@ import org.cip4.jdflib.resource.process.JDFPageAssignedList;
  *****************************************************************************
  * class JDFAutoAssembly : public JDFResource
  *****************************************************************************
- * 
+ *
  */
 
 public abstract class JDFAutoAssembly extends JDFResource
@@ -106,36 +106,36 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoAssembly
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAssembly(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAssembly(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAutoAssembly
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAssembly(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAssembly(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAutoAssembly
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAssembly(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAssembly(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -179,7 +179,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumJogSide(String name)
+		private EnumJogSide(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -188,7 +188,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumJogSide getEnum(String enumName)
+		public static EnumJogSide getEnum(final String enumName)
 		{
 			return (EnumJogSide) getEnum(EnumJogSide.class, enumName);
 		}
@@ -197,7 +197,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumJogSide getEnum(int enumValue)
+		public static EnumJogSide getEnum(final int enumValue)
 		{
 			return (EnumJogSide) getEnum(EnumJogSide.class, enumValue);
 		}
@@ -248,7 +248,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumOrder(String name)
+		private EnumOrder(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -257,7 +257,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumOrder getEnum(String enumName)
+		public static EnumOrder getEnum(final String enumName)
 		{
 			return (EnumOrder) getEnum(EnumOrder.class, enumName);
 		}
@@ -266,7 +266,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumOrder getEnum(int enumValue)
+		public static EnumOrder getEnum(final int enumValue)
 		{
 			return (EnumOrder) getEnum(EnumOrder.class, enumValue);
 		}
@@ -315,7 +315,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumBindingSide(String name)
+		private EnumBindingSide(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -324,7 +324,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumBindingSide getEnum(String enumName)
+		public static EnumBindingSide getEnum(final String enumName)
 		{
 			return (EnumBindingSide) getEnum(EnumBindingSide.class, enumName);
 		}
@@ -333,7 +333,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumBindingSide getEnum(int enumValue)
+		public static EnumBindingSide getEnum(final int enumValue)
 		{
 			return (EnumBindingSide) getEnum(EnumBindingSide.class, enumValue);
 		}
@@ -381,17 +381,17 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 */
 	/**
 	 * (5) set attribute JogSide
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setJogSide(EnumJogSide enumVar)
+	public void setJogSide(final EnumJogSide enumVar)
 	{
 		setAttribute(AttributeName.JOGSIDE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get attribute JogSide
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumJogSide getJogSide()
@@ -404,17 +404,17 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 */
 	/**
 	 * (5) set attribute Order
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOrder(EnumOrder enumVar)
+	public void setOrder(final EnumOrder enumVar)
 	{
 		setAttribute(AttributeName.ORDER, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get attribute Order
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumOrder getOrder()
@@ -427,17 +427,17 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 */
 	/**
 	 * (5) set attribute BindingSide
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setBindingSide(EnumBindingSide enumVar)
+	public void setBindingSide(final EnumBindingSide enumVar)
 	{
 		setAttribute(AttributeName.BINDINGSIDE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get attribute BindingSide
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public EnumBindingSide getBindingSide()
@@ -450,17 +450,17 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 */
 	/**
 	 * (36) set attribute AssemblyID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyID(String value)
+	public void setAssemblyID(final String value)
 	{
 		setAttribute(AttributeName.ASSEMBLYID, value, null);
 	}
 
 	/**
 	 * (23) get String attribute AssemblyID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getAssemblyID()
@@ -473,17 +473,17 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 */
 	/**
 	 * (36) set attribute AssemblyIDs
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyIDs(VString value)
+	public void setAssemblyIDs(final VString value)
 	{
 		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
 	}
 
 	/**
 	 * (21) get VString attribute AssemblyIDs
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	public VString getAssemblyIDs()
@@ -499,17 +499,17 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 */
 	/**
 	 * (36) set attribute JobID
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
 
 	/**
 	 * (23) get String attribute JobID
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getJobID()
@@ -522,17 +522,17 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 */
 	/**
 	 * (36) set attribute PhysicalSection
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPhysicalSection(JDFIntegerList value)
+	public void setPhysicalSection(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.PHYSICALSECTION, value, null);
 	}
 
 	/**
 	 * (20) get JDFIntegerList attribute PhysicalSection
-	 * 
+	 *
 	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getPhysicalSection()
@@ -548,29 +548,29 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * (26) getCreateAssemblySection
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFAssemblySection the element
 	 */
-	public JDFAssemblySection getCreateAssemblySection(int iSkip)
+	public JDFAssemblySection getCreateAssemblySection(final int iSkip)
 	{
 		return (JDFAssemblySection) getCreateElement_JDFElement(ElementName.ASSEMBLYSECTION, null, iSkip);
 	}
 
 	/**
 	 * (27) const get element AssemblySection
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFAssemblySection the element default is getAssemblySection(0)
 	 */
-	public JDFAssemblySection getAssemblySection(int iSkip)
+	public JDFAssemblySection getAssemblySection(final int iSkip)
 	{
 		return (JDFAssemblySection) getElement(ElementName.ASSEMBLYSECTION, null, iSkip);
 	}
 
 	/**
 	 * Get all AssemblySection from the current element
-	 * 
+	 *
 	 * @return Collection<JDFAssemblySection>, null if none are available
 	 */
 	public Collection<JDFAssemblySection> getAllAssemblySection()
@@ -580,7 +580,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * (30) append element AssemblySection
-	 * 
+	 *
 	 * @return JDFAssemblySection the element
 	 */
 	public JDFAssemblySection appendAssemblySection()
@@ -590,7 +590,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * (24) const get element PageList
-	 * 
+	 *
 	 * @return JDFPageList the element
 	 */
 	public JDFPageList getPageList()
@@ -600,7 +600,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * (25) getCreatePageList
-	 * 
+	 *
 	 * @return JDFPageList the element
 	 */
 	public JDFPageList getCreatePageList()
@@ -610,7 +610,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * (29) append element PageList
-	 * 
+	 *
 	 * @return JDFPageList the element
 	 * @throws JDFException if the element already exists
 	 */
@@ -621,39 +621,39 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refPageList(JDFPageList refTarget)
+	public void refPageList(final JDFPageList refTarget)
 	{
 		refElement(refTarget);
 	}
 
 	/**
 	 * (26) getCreatePageAssignedList
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFPageAssignedList the element
 	 */
-	public JDFPageAssignedList getCreatePageAssignedList(int iSkip)
+	public JDFPageAssignedList getCreatePageAssignedList(final int iSkip)
 	{
 		return (JDFPageAssignedList) getCreateElement_JDFElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
 	}
 
 	/**
 	 * (27) const get element PageAssignedList
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFPageAssignedList the element default is getPageAssignedList(0)
 	 */
-	public JDFPageAssignedList getPageAssignedList(int iSkip)
+	public JDFPageAssignedList getPageAssignedList(final int iSkip)
 	{
 		return (JDFPageAssignedList) getElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
 	}
 
 	/**
 	 * Get all PageAssignedList from the current element
-	 * 
+	 *
 	 * @return Collection<JDFPageAssignedList>, null if none are available
 	 */
 	public Collection<JDFPageAssignedList> getAllPageAssignedList()
@@ -663,7 +663,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 
 	/**
 	 * (30) append element PageAssignedList
-	 * 
+	 *
 	 * @return JDFPageAssignedList the element
 	 */
 	public JDFPageAssignedList appendPageAssignedList()

@@ -138,8 +138,9 @@ public abstract class JDFConstants extends JDFCoreConstants
 	public static final String VERSION_1_9 = "1.9";
 	/** * */
 	public static final String VERSION_2_0 = "2.0";
+	public static final String VERSION_2_1 = "2.1";
+	public static final String VERSION_2_2 = "2.2";
 
-	// status stuff
 	/** * */
 	public static final String UNKNOWN = "Unknown";
 

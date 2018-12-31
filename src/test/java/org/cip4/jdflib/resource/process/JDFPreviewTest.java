@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,6 +40,7 @@
 package org.cip4.jdflib.resource.process;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -94,6 +95,19 @@ public class JDFPreviewTest extends JDFTestCaseBase
 		assertEquals(1, pv.getPartIDKeys().size());
 		pv1.setPreviewType(EnumPreviewType.Separation);
 		assertEquals(1, pv.getPartIDKeys().size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public final void testSetPreviewFileType()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setVersion(EnumVersion.Version_1_4);
+		final JDFPreview pv = (JDFPreview) n.addResource(ElementName.PREVIEW, EnumUsage.Input);
+		pv.setPreviewFileType("AAA");
+		assertNull(pv.getEnumPreviewFileType());
 	}
 
 	/**

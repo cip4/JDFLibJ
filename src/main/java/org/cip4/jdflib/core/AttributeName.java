@@ -53,7 +53,6 @@ public final class AttributeName
 {
 	private AttributeName()
 	{
-		// to prohibit instantiation of this constant only class
 	}
 
 	/** */
@@ -623,8 +622,8 @@ public final class AttributeName
 	public static final String COMMANDRESULT = "CommandResult";
 	/** */
 	public static final String COMMENTID = "CommentID";
-	/** */
 	public static final String COMMENTURL = "CommentURL";
+	public static final String COMMONFOLDS = "CommonFolds";
 	/** */
 	public static final String COMPANY = "Company";
 	/** */
