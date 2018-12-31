@@ -409,12 +409,14 @@ public abstract class JDFTestCaseBase
 	protected XMLDoc writeTest(final KElement e, String filename, final boolean convertX, final String snippetPath)
 	{
 		String ext = UrlUtil.extension(filename);
+		int minor = 0;
 		if (ext.startsWith("x"))
 		{
 			if (e.getParentNode_KElement() == null)
 				e.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "xjdfexamples/" + filename, 2, false);
 			else
 				e.write2File(sm_dirTestDataTemp + "xjdfexamples/" + filename);
+			minor = getMinor(e);
 		}
 		else
 		{
@@ -443,11 +445,11 @@ public abstract class JDFTestCaseBase
 				filename = UrlUtil.newExtension(filename, ext);
 				final String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + filename;
 				x.getOwnerDocument_KElement().write2File(xjdfFile, 2, false);
+				minor = getMinor(x);
 			}
 		}
 		if (convertX)
 		{
-			final int minor = getMinor(e);
 			final String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + filename;
 			final JDFParser p = getXJDFSchemaParser(2, minor);
 			final JDFDoc xParsed = p.parseFile(xjdfFile);
