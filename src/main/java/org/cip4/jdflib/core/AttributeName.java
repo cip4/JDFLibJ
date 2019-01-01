@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -2671,7 +2671,7 @@ public final class AttributeName
 
 	/** */
 	public static final String QFACTOR = "QFactor";
-	/** */
+	public static final String QUALITYCONTROLMETHODS = "QualityControlMethods";
 	public static final String QUANTTABLE = "QuantTable";
 	/** */
 	public static final String QUERY = "Query";
