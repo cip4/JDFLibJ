@@ -3687,8 +3687,9 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
+                    <xs:element maxOccurs="1" minOccurs="0" ref="ColorMeasurementConditions"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="DeviceNColor"/>
-                </xs:sequence>
+               </xs:sequence>
                 <xs:attribute name="ActualColorName" type="string" use="optional"/>
                 <xs:attribute name="CMYK" type="CMYKColor" use="optional"/>
                 <xs:attribute name="ColorBook" type="string" use="optional"/>
@@ -3770,6 +3771,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="CIELABMeasuringField"/>
+                <xs:element maxOccurs="1" minOccurs="0" ref="ColorMeasurementConditions"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="DensityMeasuringField"/>
             </xs:sequence>
             <xs:attribute name="Center" type="XYPair" use="optional"/>
@@ -3778,6 +3780,55 @@
             <xs:attribute name="Size" type="XYPair" use="optional"/>
             <xs:attribute name="StripType" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+	
+    <xs:element name="ColorMeasurementConditions">
+        <xs:complexType>
+            <xs:attribute name="Aperture" type="float" use="optional"/>
+			<!-- See JDF-605 for enumeration -->
+            <xs:attribute name="DensityStandard" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Illumination" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="IlluminationAngle" type="integer" use="optional"/>
+            <xs:attribute name="InkState" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Dry"/>
+                        <xs:enumeration value="Wet"/>
+                    </xs:restriction>
+                </xs:simpleType>
+			</xs:attribute>
+            <xs:attribute name="MeasurementAngle" type="integer" use="optional"/>
+            <xs:attribute name="MeasurementFilter" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="None"/>
+                        <xs:enumeration value="Pol"/>
+                        <xs:enumeration value="UV"/>
+                    </xs:restriction>
+                </xs:simpleType>
+			</xs:attribute>
+            <xs:attribute name="MeasurementMode" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Observer" type="integer" use="optional"/>
+            <xs:attribute name="SampleBacking" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Black"/>
+                        <xs:enumeration value="Substrate"/>
+                        <xs:enumeration value="White"/>
+                    </xs:restriction>
+                </xs:simpleType>
+			</xs:attribute>
+           <xs:attribute name="SpectralResolution" type="float" use="optional"/>
+           <xs:attribute name="WhiteBase" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Absolute"/>
+                        <xs:enumeration value="Substrate"/>
+                    </xs:restriction>
+                </xs:simpleType>
+			</xs:attribute>
+           <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
 
