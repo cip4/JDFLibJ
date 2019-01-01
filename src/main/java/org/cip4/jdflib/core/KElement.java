@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1083,7 +1083,7 @@ public class KElement extends ElementNSImpl implements Element
 			}
 			else
 			{
-				bNameOK = s.endsWith(nodeName) && (s.indexOf(':') == (l2 - l1 - 1));
+				bNameOK = (s.indexOf(':') == (l2 - l1 - 1)) && s.endsWith(nodeName);
 			}
 		}
 		// only check ns, if the name is ok
@@ -2433,15 +2433,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public KElement getDocRoot()
 	{
-		KElement kDocRoot = null;
-		final Element rootElem = getOwnerDocument().getDocumentElement();
-
-		if (rootElem != null)
-		{
-			kDocRoot = (KElement) rootElem;
-		}
-
-		return kDocRoot;
+		return (KElement) getOwnerDocument().getDocumentElement();
 	}
 
 	/**

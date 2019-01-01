@@ -1,68 +1,36 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -77,6 +45,7 @@ import org.w3c.dom.Node;
 /**
  *
  * implementation class for all the KElement xpath stuff
+ *
  * @author rainer prosi
  * @date Dec 13, 2012
  */
@@ -119,8 +88,10 @@ class XPathHelper
 
 	/**
 	 * gets an element as defined by XPath to value and creates it if it does not exist <br>
+	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
+	 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
 	 * @return KElement the specified element
 	 */
 	KElement getCreateXPathElement(final String path)
@@ -132,8 +103,10 @@ class XPathHelper
 	{
 		/**
 		 * gets an element as defined by XPath to value and creates it if it does not exist <br>
+		 *
 		 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-		 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+		 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
+		 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
 		 * @return KElement the specified element
 		 */
 		KElement getCreateXPathElement(final String path)
@@ -337,10 +310,11 @@ class XPathHelper
 
 	/**
 	 * Gets the XPath full tree representation of 'this'
+	 *
 	 * @param relativeTo relative element to which to create an xpath
 	 * @param methCountSiblings , if 1 count siblings, i.e. add '[n]' if 0, only specify the path of parents if 2 or 3, add [@ID="id"]
 	 * @return String the XPath representation of 'this' e.g. <code>/root/parent/element</code><br>
-	 * <code>null</code> if parent of this is null (e.g. called on rootnode)
+	 *         <code>null</code> if parent of this is null (e.g. called on rootnode)
 	 */
 	String buildRelativeXPath(final KElement relativeTo, final int methCountSiblings)
 	{
@@ -359,10 +333,11 @@ class XPathHelper
 
 	/**
 	 * Gets the XPath full tree representation of 'this'
+	 *
 	 * @param relativeTo relative path to which to create an xpath
 	 * @param methCountSiblings , if 1 count siblings, i.e. add '[n]' if 0, only specify the path of parents if 2 or 3, add [@ID="id"]
 	 * @return String the XPath representation of 'this' e.g. <code>/root/parent/element</code><br>
-	 * <code>null</code> if parent of this is null (e.g. called on rootnode)
+	 *         <code>null</code> if parent of this is null (e.g. called on rootnode)
 	 */
 	String buildXPath(final String relativeTo, final int methCountSiblings)
 	{
@@ -378,13 +353,13 @@ class XPathHelper
 		{
 			if (path.startsWith(relativeTo))
 			{
-				path = "." + path.substring(relativeTo.length());
+				path = '.' + path.substring(relativeTo.length());
 				if (path.startsWith(".["))
 				{
-					final int iB = path.indexOf("]");
+					final int iB = path.indexOf(']');
 					if (iB > 0)
 					{
-						path = "." + path.substring(iB + 1);
+						path = '.' + path.substring(iB + 1);
 					}
 				}
 			}
@@ -400,43 +375,44 @@ class XPathHelper
 	 */
 	String buildLocalPath(final int methCountSiblings, final KElement parent)
 	{
-		final StringBuffer buf = new StringBuffer(theElement.getNodeName());
+		final String nodeName = theElement.getNodeName();
+		final StringBuffer buf = new StringBuffer(nodeName);
 		if (methCountSiblings > 0)
 		{
-			if (methCountSiblings == 3 && theElement.hasAttribute_KElement(JDFCoreConstants.ID, null, false))
+			if (methCountSiblings == 3 && theElement.getAttributeRaw(JDFCoreConstants.ID) != null)
 			{
-				buf.append("[@ID=\"").append(theElement.getAttribute(JDFCoreConstants.ID)).append("\"]");
+				buf.append("[@ID=\"").append(theElement.getAttributeRaw(JDFCoreConstants.ID)).append("\"]");
 			}
 			else
 			{
-				final String s = buf.toString();
-				Node e = (parent != null) ? parent.getElement_KElement(s, null, 0) : null;
+				Node e = (parent != null) ? parent.getElement_KElement(nodeName, null, 0) : null;
 				int i = 1;
 				while (e != null)
 				{
 					if (e == theElement)
 					{
-						buf.append("[").append(i).append("]");
+						buf.append('[').append(i).append(']');
 						break;
 					}
 					do
 					{
 						e = e.getNextSibling();
 					}
-					while (e != null && !s.equals(e.getNodeName()));
+					while (e != null && !nodeName.equals(e.getNodeName()));
 					i++;
 				}
 			}
 		}
 
-		return "/" + buf.toString();
+		return '/' + buf.toString();
 	}
 
 	/**
 	 * Sets an attribute as defined by XPath to value <br>
+	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code>
-	 * <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param path XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
+	 *            <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param value string to be set as attribute value
 	 */
 	void setXPathValue(final String path, final String value)
@@ -454,14 +430,14 @@ class XPathHelper
 			{
 				vEle = new VElement();
 			}
-			if (vEle.size() == 0)
+			if (vEle.isEmpty())
 			{
 				final KElement kEle = getCreateXPathElement(path);
 				vEle.add(kEle);
 			}
-			for (int i = 0; i < vEle.size(); i++)
+			for (final KElement e : vEle)
 			{
-				vEle.get(i).setText(value);
+				e.setText(value);
 			}
 		}
 	}
@@ -469,6 +445,7 @@ class XPathHelper
 	/**
 	 *
 	 * sets all xpaths to the values provided in map
+	 *
 	 * @param map map of XPath / values to set
 	 */
 	void setXPathValues(final JDFAttributeMap map)
@@ -497,9 +474,10 @@ class XPathHelper
 
 	/**
 	 * Sets an attribute as defined by XPath to value <br>
+	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code>
-	 * <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param path XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
+	 *            <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param value string to be set as attribute value
 	 * @throws JDFException if the defined path is a bad attribute path
 	 */
@@ -518,19 +496,20 @@ class XPathHelper
 		{
 			vEle = new VElement();
 		}
-		if (vEle.size() == 0)
+		if (vEle.isEmpty())
 		{
 			final KElement kEle = getCreateXPathElement(strAttrPath);
 			vEle.add(kEle);
 		}
-		for (int i = 0; i < vEle.size(); i++)
+		for (final KElement e : vEle)
 		{
-			vEle.get(i).setAttribute(att, value, null);
+			e.setAttribute(att, value, null);
 		}
 	}
 
 	/**
 	 * returns true if the element or attribute described by this XPath exists, else false
+	 *
 	 * @param path the XPath to test for
 	 * @return true if the element described by path exists
 	 */
@@ -547,9 +526,10 @@ class XPathHelper
 
 	/**
 	 * Gets an attribute value as defined by XPath namespace prefixes are resolved or the node text if an element is specified <br>
+	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported TODO fix bug for attribute searches where the att value contains xpath syntax
-	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code>
-	 * <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
+	 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param def default value if it doesn't exist
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
@@ -585,9 +565,10 @@ class XPathHelper
 	/**
 	 * Gets an attribute value as defined by XPath namespace prefixes are resolved <br>
 	 * Attributes are searched for in partitioned resources if appropriate
+	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported TODO fix bug for attribute searches where the att value contains xpath syntax
-	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code>
-	 * <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
+	 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param def default value if it doesn't exist
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
@@ -607,6 +588,7 @@ class XPathHelper
 
 	/**
 	 * remove an attribute or element that is described by the xpath path quietly returns if the element does not exist
+	 *
 	 * @param path the XPath to the attribute that is to be removed
 	 * @throws JDFException if the XPath is corrupt
 	 */
@@ -629,12 +611,11 @@ class XPathHelper
 	}
 
 	/**
-	 * Gets a map of attribute values as defined by XPath
-	 * namespace prefixes are resolved <br>
+	 * Gets a map of attribute values as defined by XPath namespace prefixes are resolved <br>
+	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code>
-	 * <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
-	 * if null, assume .//@*, i.e. all of this
+	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
+	 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code> if null, assume .//@*, i.e. all of this
 	 * @param bWantText if true, also add text
 	 *
 	 * @return String the String value of the attribute or null if the xpath element does not exist
@@ -661,7 +642,7 @@ class XPathHelper
 			if (prefix != null)
 			{
 				final String uri = e.getNamespaceURI();
-				map.put("/" + StringUtil.token(baseXPath, 0, "/") + "/@xmlns:" + prefix, uri);
+				map.put(JDFConstants.SLASH + StringUtil.token(baseXPath, 0, JDFConstants.SLASH) + "/@xmlns:" + prefix, uri);
 			}
 			if (vKeys != null)
 			{
@@ -674,7 +655,7 @@ class XPathHelper
 						if (prefix != null)
 						{
 							final String uri = e.getNamespaceURIFromPrefix(prefix);
-							map.put("/" + StringUtil.token(baseXPath, 0, "/") + "/@xmlns:" + prefix, uri);
+							map.put(JDFConstants.SLASH + StringUtil.token(baseXPath, 0, JDFConstants.SLASH) + "/@xmlns:" + prefix, uri);
 						}
 					}
 				}
@@ -685,19 +666,20 @@ class XPathHelper
 				if (text != null || vKeys == null || vKeys.size() == 0)
 				{
 					if (text == null)
-						text = "";
+						text = JDFConstants.EMPTYSTRING;
 					map.put(baseXPath, text);
 				}
 			}
 		}
-		return map.size() > 0 ? map : null;
+		return map.isEmpty() ? null : map;
 	}
 
 	/**
 	 * gets an element as defined by XPath to value <br>
+	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code>
-	 * <code>parentElement/thisElement[2]</code> <code>parentElement[@a=\"b\"]/thisElement[./foo/@foo=\"bar\"]</code>
+	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
+	 *            <code>parentElement[@a=\"b\"]/thisElement[./foo/@foo=\"bar\"]</code>
 	 * @return KElement the specified element
 	 * @throws IllegalArgumentException if path is not supported
 	 */
@@ -717,6 +699,7 @@ class XPathHelper
 
 	/**
 	 * remove an attribute or text that is described by the xpath path quietly returns if the attribute or text does not exist
+	 *
 	 * @param path the XPath to the attribute that is to be removed
 	 * @throws JDFException if the XPath is corrupt
 	 */
@@ -743,9 +726,10 @@ class XPathHelper
 
 	/**
 	 * gets an vector of elements element as defined by XPath to value <br>
+	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@,// are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code>
-	 * <code>parentElement/thisElement[2]</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
+	 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
 	 * @param maxSize
 	 * @param bLocal
 	 * @return VElement the vector of matching elements
@@ -760,9 +744,10 @@ class XPathHelper
 	{
 		/**
 		 * gets an vector of elements element as defined by XPath to value <br>
+		 *
 		 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@,// are supported
-		 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code>
-		 * <code>parentElement/thisElement[2]</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+		 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
+		 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
 		 * @param maxSize
 		 * @param bLocal
 		 * @return VElement the vector of matching elements
@@ -790,7 +775,7 @@ class XPathHelper
 				return evaluateDot(path, maxSize, vRet);
 			}
 
-			int posB0 = path.indexOf("[");
+			int posB0 = path.indexOf('[');
 			int posBAt = posB0;
 			if (posB0 >= 0)
 			{
@@ -812,7 +797,7 @@ class XPathHelper
 
 			if (posB0 != -1 && (posB0 < pos || pos == -1)) // parse for [n]
 			{
-				final int posB1 = path.indexOf("]");
+				final int posB1 = path.indexOf(']');
 
 				// TODO fix escape attribute values
 
@@ -835,21 +820,21 @@ class XPathHelper
 				bExplicitSkip = true;
 				final String childName = path.substring(0, posB0);
 				newPath = childName + path.substring(posB1 + 1);
-				pos = newPath.indexOf(JDFCoreConstants.SLASH);
+				pos = newPath.indexOf('/');
 			}
 			else if (posBAt != -1 && (posBAt < pos || pos == -1)) // parse for [@a="b"]
 			{
-				final int posB1 = path.indexOf("]");
+				final int posB1 = path.indexOf(']');
 				map = getXPathAtMap(path, posBAt, posB1);
 				newPath = path.substring(0, posBAt) + path.substring(posB1 + 1);
-				pos = newPath.indexOf(JDFCoreConstants.SLASH);
+				pos = newPath.indexOf('/');
 			}
 
 			if (pos != -1) // have another element
 			{
 				final String elmName = newPath.substring(0, pos);
 				final VElement ve = getLocalElements(bLocal, newPath, map, elmName, iSkip);
-				if (ve == null || ve.size() == 0)
+				if (ve == null || ve.isEmpty())
 				{
 					return null;
 				}
@@ -866,7 +851,7 @@ class XPathHelper
 					}
 				}
 
-				return vRet.size() > 0 ? vRet : null;
+				return vRet.isEmpty() ? null : vRet;
 			}
 			// last element
 			if (bExplicitSkip)
@@ -1001,9 +986,9 @@ class XPathHelper
 
 			final KElement r = theElement.getDocRoot();
 			final String rootNodeName = r.getLocalName();
-			final int nextPos = path.indexOf("/", 2);
+			final int nextPos = path.indexOf('/', 2);
 			final String rootPath = nextPos > 0 ? path.substring(1, nextPos) : path.substring(1);
-			final String nextPath = nextPos > 0 ? path.substring(nextPos + 1) : "";
+			final String nextPath = nextPos > 0 ? path.substring(nextPos + 1) : JDFConstants.EMPTYSTRING;
 			if (rootPath.equals(rootNodeName) || KElement.isWildCard(rootPath))
 			{
 				return new XPathHelper(r).getXPathElementVectorInternal(nextPath, maxSize, true);

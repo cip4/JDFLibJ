@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,12 +41,14 @@ package org.cip4.jdflib.examples;
 
 import java.util.zip.DataFormatException;
 
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumEncoding;
 import org.cip4.jdflib.auto.JDFAutoLayoutElement.EnumElementType;
 import org.cip4.jdflib.auto.JDFAutoPositionObj.EnumAnchor;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
@@ -64,6 +66,7 @@ import org.cip4.jdflib.resource.process.JDFLayoutElementPart;
 import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
 import org.cip4.jdflib.resource.process.JDFPositionObj;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.util.StatusCounter;
 import org.junit.Test;
 
 /**
@@ -406,13 +409,19 @@ public class ContentCreationTest extends PreflightTest
 		// appendBWSeparationAction();
 		appendTrimBoxAction();
 		appendResolutionAction();
-		/*
-		 *
-		 * StatusCounter su = new StatusCounter(n, null, null); su.setPhase(EnumNodeStatus.InProgress, "Creative Work", EnumDeviceStatus.Running, null);
-		 *
-		 * su.getDocJMFPhaseTime(); Thread.sleep(1000); su = new StatusCounter(n, null, null); su.setPhase(EnumNodeStatus.InProgress, "Creative Work", EnumDeviceStatus.Running, null);
-		 * su.getDocJMFPhaseTime(); Thread.sleep(1000); su = new StatusCounter(n, null, null); su.setPhase(EnumNodeStatus.Completed, "done", EnumDeviceStatus.Idle, null); su.getDocJMFPhaseTime();
-		 */
+
+		StatusCounter su = new StatusCounter(n, null, null);
+		su.setPhase(EnumNodeStatus.InProgress, "Creative Work", EnumDeviceStatus.Running, null);
+
+		su.getDocJMFPhaseTime();
+		Thread.sleep(1000);
+		su = new StatusCounter(n, null, null);
+		su.setPhase(EnumNodeStatus.InProgress, "Creative Work", EnumDeviceStatus.Running, null);
+		su.getDocJMFPhaseTime();
+		Thread.sleep(1000);
+		su = new StatusCounter(n, null, null);
+		su.setPhase(EnumNodeStatus.Completed, "done", EnumDeviceStatus.Idle, null);
+		su.getDocJMFPhaseTime();
 
 		writeTest(n, "resources/layoutElementProductionParamsPreflight.jdf", false, null);
 
