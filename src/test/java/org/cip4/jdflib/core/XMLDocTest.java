@@ -197,7 +197,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		public void runMyThread()
 		{
 			System.out.println("parsing " + sm_dirTestData + "job.jdf " + iLoop);
-			XMLDoc d = XMLDoc.parseFile(sm_dirTestData + "job.jdf");
+			final XMLDoc d = XMLDoc.parseFile(sm_dirTestData + "job.jdf");
 			assertNotNull("parsed " + sm_dirTestData + "job.jdf " + iLoop, d);
 		}
 	}
@@ -233,6 +233,7 @@ public class XMLDocTest extends JDFTestCaseBase
 
 	/**
 	 * thread class that writes a lot of documents
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 *
 	 */
@@ -301,10 +302,20 @@ public class XMLDocTest extends JDFTestCaseBase
 	public void testGetNode()
 	{
 		final XMLDoc doc = new XMLDoc("test", null);
-		KElement e = doc.getRoot();
+		final KElement e = doc.getRoot();
 		assertEquals(e, doc.getNode(Document.ELEMENT_NODE, 0, null));
 		assertEquals(e, doc.getNode(Document.ELEMENT_NODE, 0, "test"));
 		assertNull(doc.getNode(Document.ELEMENT_NODE, 1, "test"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetRootName()
+	{
+		final XMLDoc doc = new XMLDoc("test", null);
+		assertEquals("test", doc.getRootName());
 	}
 
 	/**
@@ -517,10 +528,10 @@ public class XMLDocTest extends JDFTestCaseBase
 	@Test
 	public void testParseDOM() throws SAXException, IOException
 	{
-		DOMParser domParser = new DOMParser();
+		final DOMParser domParser = new DOMParser();
 		domParser.parse(new InputSource(new StringReader("<JDF ID=\"1\"><AuditPool><Created ID=\"1\"/></AuditPool></JDF>")));
 		assertNotNull(domParser.getDocument());
-		XMLDoc d = new XMLDoc(domParser.getDocument());
+		final XMLDoc d = new XMLDoc(domParser.getDocument());
 		assertNotNull(d);
 		assertNotNull(d.getRoot());
 		assertEquals(d.getRoot().getAttribute("ID"), "1");
@@ -612,7 +623,7 @@ public class XMLDocTest extends JDFTestCaseBase
 			tt = (JDFTestType) n.appendElement("blub:JDFTestType", "WWW.fnarf2.com");
 			fail("ns extension noworks");
 		}
-		catch (ClassCastException exc)
+		catch (final ClassCastException exc)
 		{
 			// nop
 		}
@@ -714,8 +725,8 @@ public class XMLDocTest extends JDFTestCaseBase
 		final XMLDoc d1 = new XMLDoc("JDF", null);
 		final KElement root = d1.getRoot();
 		assertFalse(root instanceof JDFNode);
-		XMLDoc d = new XMLDoc(d1);
-		KElement n = d.getRoot();
+		final XMLDoc d = new XMLDoc(d1);
+		final KElement n = d.getRoot();
 		assertFalse(n instanceof JDFNode);
 	}
 
@@ -780,9 +791,9 @@ public class XMLDocTest extends JDFTestCaseBase
 	@Test
 	public void testWriteToStringHash13()
 	{
-		String s0 = "<Example at=\"a&#13;b\">AA&#13;BB</Example>";
+		final String s0 = "<Example at=\"a&#13;b\">AA&#13;BB</Example>";
 		final XMLDoc d = new XMLParser().parseString(s0);
-		String s = d.write2String(2);
+		final String s = d.write2String(2);
 		assertTrue(s.indexOf("&#xd;") >= 0);
 	}
 
@@ -860,7 +871,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	@Test
 	public void testParseFileThreadRead()
 	{
-		MyParseThread[] threads = new MyParseThread[10];
+		final MyParseThread[] threads = new MyParseThread[10];
 		for (int i = 0; i < 10; i++)
 		{
 			final MyParseThread pt = new MyParseThread();
@@ -977,7 +988,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	public void testWriteToFileBadFile()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
-		String out = "/bad::\\nogood\\junk.jdf";
+		final String out = "/bad::\\nogood\\junk.jdf";
 		final File f = new File(out);
 		f.delete();
 		if (FileUtil.isWindows())
@@ -994,7 +1005,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	public void testWriteToFileYen()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
-		String out = sm_dirTestDataTemp + "test-¥éç05-pdf - test-¥éç05";
+		final String out = sm_dirTestDataTemp + "test-¥éç05-pdf - test-¥éç05";
 		final File f = new File(out);
 		f.delete();
 		assertTrue(d.write2File(out, 2, true));
@@ -1008,7 +1019,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	public void testWriteToFileEscape()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
-		String out = sm_dirTestDataTemp + "foo %2f%20bar/fnarf.xml";
+		final String out = sm_dirTestDataTemp + "foo %2f%20bar/fnarf.xml";
 		final File f = new File(out);
 		f.delete();
 		assertTrue(d.write2File(out, 2, true));
@@ -1080,7 +1091,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	public void testWriteToFileNull()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
-		String file = sm_dirTestDataTemp + "null.jdf";
+		final String file = sm_dirTestDataTemp + "null.jdf";
 		new File(file).delete();
 		assertFalse(d.write2File((File) null, 2, false));
 		d.setOriginalFileName(file);

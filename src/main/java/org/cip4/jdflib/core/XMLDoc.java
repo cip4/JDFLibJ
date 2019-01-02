@@ -415,7 +415,7 @@ public class XMLDoc implements Cloneable
 
 		if (oFilePath == null)
 		{
-			log.error("writing to null File, bailing out");
+			log.error("not writing " + getRootName() + " to null File, bailing out");
 			return false;
 		}
 
@@ -444,7 +444,7 @@ public class XMLDoc implements Cloneable
 			}
 			else
 			{
-				log.error("writing to null File, bailing out");
+				log.error("not writing " + getRootName() + " to null File, bailing out");
 				return false;
 			}
 		}
@@ -502,6 +502,13 @@ public class XMLDoc implements Cloneable
 			}
 		}
 		return fSuccess;
+	}
+
+	public String getRootName()
+	{
+
+		final Element e = getDocumentElement();
+		return e == null ? null : e.getNodeName();
 	}
 
 	/**
