@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -78,7 +46,7 @@ import org.cip4.jdflib.core.JDFConstants;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * Aug 10, 2009
+ *         Aug 10, 2009
  */
 public class JDFDuration implements Comparable<JDFDuration>
 {
@@ -120,6 +88,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * does some heuristics to create a duration if duration is purely numeric, we guess days
+	 * 
 	 * @param duration
 	 * @return
 	 */
@@ -137,7 +106,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 			{
 				return new JDFDuration(duration);
 			}
-			catch (DataFormatException e)
+			catch (final DataFormatException e)
 			{
 				// NOP
 			}
@@ -146,8 +115,8 @@ public class JDFDuration implements Comparable<JDFDuration>
 		{
 			if (StringUtil.isNumber(duration))
 			{
-				//assume days
-				double d = StringUtil.parseDouble(duration, 0);
+				// assume days
+				final double d = StringUtil.parseDouble(duration, 0);
 				return d == Double.MAX_VALUE ? new JDFDuration(Long.MAX_VALUE) : new JDFDuration(d * 24 * 60 * 60);
 			}
 			else
@@ -157,8 +126,8 @@ public class JDFDuration implements Comparable<JDFDuration>
 		}
 		if (duration.length() < 3)
 			return null;
-		int posD = duration.indexOf("D");
-		int posT = duration.indexOf("T");
+		final int posD = duration.indexOf("D");
+		final int posT = duration.indexOf("T");
 		if (posD > 0 && posD < duration.length() - 1 && posT < 0)
 		{
 			return createDuration(StringUtil.replaceString(duration, "D", "DT"));
@@ -180,6 +149,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * Makes a copy of the<code>JDFDuration</code> object 'd'
+	 * 
 	 * @param d the duration
 	 */
 	public JDFDuration(final JDFDuration d)
@@ -226,8 +196,9 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * Allocates a <code>JDFDuration</code> object and initializes it with a value of <code>strDuration</code>, represented as a formatted duration string. <br>
-	 * Duration examples: <li>"P1Y2M3DT10H30M"</li> <li>"P8MT12M"</li> Durations with overflows, e.g. P13M (13 Months) are also handled and correctly output, in
-	 * this case P1Y1M
+	 * Duration examples:
+	 * <li>"P1Y2M3DT10H30M"</li>
+	 * <li>"P8MT12M"</li> Durations with overflows, e.g. P13M (13 Months) are also handled and correctly output, in this case P1Y1M
 	 *
 	 * @param strDuration - formatted duration
 	 * @throws DataFormatException if strDuration is not a valid string representation of JDFDuration
@@ -264,8 +235,11 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * Method init handles Strings of type: <br>
-	 * <li>"P1Y2M3DT10H30M"</li> <li>"PM8T12M"</li> <li>"PT30M"</li> <li>
-	 * "PT30M40S"</li> <li>"PT30M40.3333S"</li>
+	 * <li>"P1Y2M3DT10H30M"</li>
+	 * <li>"PM8T12M"</li>
+	 * <li>"PT30M"</li>
+	 * <li>"PT30M40S"</li>
+	 * <li>"PT30M40.3333S"</li>
 	 *
 	 * @param strDuration
 	 * @throws DataFormatException
@@ -308,7 +282,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 		int temp = Math.abs((int) m_lDuration);
 		final double abs = Math.abs(m_lDuration);
-		final StringBuffer iso = new StringBuffer(32);
+		final StringBuilder iso = new StringBuilder(32);
 		if (m_lDuration < 0)
 		{
 			iso.append("-");
@@ -385,19 +359,19 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 * Set a duration. Durations are not bound to time or date and can be set independently
 	 *
 	 * @return true - the duration was set<br>
-	 * false - the duration was not set, because a NumberFormatException was thrown (-> parseInt())
+	 *         false - the duration was not set, because a NumberFormatException was thrown (-> parseInt())
 	 *
 	 * @param a_aDuration formatted duration string 'P1Y2M3DT10H30M'
 	 */
 	public boolean setDurationISO(final String a_aDuration)
 	{
 		int iPPos = a_aDuration.indexOf("P");
-		int factor = parseFactor(a_aDuration, iPPos);
+		final int factor = parseFactor(a_aDuration, iPPos);
 
 		final String strPeriod = a_aDuration.substring(++iPPos, a_aDuration.length());
 
 		// divide periodInstant into date and time part, which are separated by 'T'
-		int iTPos = strPeriod.indexOf("T");
+		final int iTPos = strPeriod.indexOf("T");
 		final String strDate;
 		final String strTime;
 		if (iTPos == 0)
@@ -424,7 +398,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 		return true;
 	}
 
-	private int parseFactor(final String a_aDuration, int iPPos)
+	private int parseFactor(final String a_aDuration, final int iPPos)
 	{
 		int factor = 1; // the factor for negative durations
 		if (iPPos > 0) // check for negative duration
@@ -446,14 +420,14 @@ public class JDFDuration implements Comparable<JDFDuration>
 			int iTimeLastPos = 0;
 			if (iHPos > 0)
 			{
-				int iHours = Integer.parseInt(strTime.substring(0, iHPos));
+				final int iHours = Integer.parseInt(strTime.substring(0, iHPos));
 				m_lDuration += iHours * 60 * 60;
 				iTimeLastPos = ++iHPos;
 			}
 			int iMPos = strTime.indexOf("M");
 			if (iMPos > 0)
 			{
-				int iMinutes = Integer.parseInt(strTime.substring(iTimeLastPos, iMPos));
+				final int iMinutes = Integer.parseInt(strTime.substring(iTimeLastPos, iMPos));
 				m_lDuration += iMinutes * 60;
 				iTimeLastPos = ++iMPos;
 			}
@@ -464,7 +438,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 				int iDotPos = strTime.indexOf(".");
 				if (iDotPos > 0)
 				{
-					int iSeconds = Integer.parseInt(strTime.substring(iTimeLastPos, iDotPos));
+					final int iSeconds = Integer.parseInt(strTime.substring(iTimeLastPos, iDotPos));
 					iDotPos++;
 					final int mLen = iSPos - iDotPos;
 					if (mLen > 0)
@@ -476,7 +450,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 				}
 				else
 				{
-					int iSeconds = Integer.parseInt(strTime.substring(iTimeLastPos, iSPos));
+					final int iSeconds = Integer.parseInt(strTime.substring(iTimeLastPos, iSPos));
 					m_lDuration += iSeconds;
 				}
 			}
@@ -491,7 +465,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 			int iDateLastPos = 0;
 			if (iYPos > 0)
 			{
-				int iYears = Integer.parseInt(strDate.substring(0, iYPos));
+				final int iYears = Integer.parseInt(strDate.substring(0, iYPos));
 				m_lDuration += iYears * 365 * 24 * 60 * 60;
 				iDateLastPos = ++iYPos;
 			}
@@ -499,7 +473,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 			int iMPos = strDate.indexOf("M");
 			if (iMPos > 0)
 			{
-				int iMonths = Integer.parseInt(strDate.substring(iDateLastPos, iMPos));
+				final int iMonths = Integer.parseInt(strDate.substring(iDateLastPos, iMPos));
 				final int nYears = iMonths / 12;
 				m_lDuration += (iMonths * 30 + nYears * 5) * 24 * 60 * 60; // add
 				// 5 days for each complete year ( 360 --> 365)
@@ -509,7 +483,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 			final int iDPos = strDate.indexOf("D");
 			if (iDPos > 0)
 			{
-				int iDays = Integer.parseInt(strDate.substring(iDateLastPos, iDPos));
+				final int iDays = Integer.parseInt(strDate.substring(iDateLastPos, iDPos));
 				m_lDuration += iDays * 24 * 60 * 60;
 			}
 		}
@@ -526,8 +500,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	}
 
 	/**
-	 * setDuration: sets a duration for <code>this</code> in seconds, including fractions. This duration is used in multiple classes of the JDF (e.g. Heating
-	 * time).
+	 * setDuration: sets a duration for <code>this</code> in seconds, including fractions. This duration is used in multiple classes of the JDF (e.g. Heating time).
 	 *
 	 * @param seconds the duration in seconds.
 	 */
@@ -559,8 +532,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	}
 
 	/**
-	 * isLess - tests if the duration of this JDFDuration is longer than the duration of the specified JDFDuration. Compares the integer durations, thus -PT15S
-	 * is shorter than -PT5S
+	 * isLess - tests if the duration of this JDFDuration is longer than the duration of the specified JDFDuration. Compares the integer durations, thus -PT15S is shorter than -PT5S
 	 *
 	 * @param x the JDFDuration object to compare to <code>this</code>
 	 * @return boolean - true if the duration of this JDFDuration is longer than the duration of the JDFDuration 'x'.
@@ -571,8 +543,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	}
 
 	/**
-	 * isShorter - tests if the duration of this JDFDuration is less than the duration of the specified JDFDuration. Compares the integer durations, thus -PT15S
-	 * is shorter than -PT5S
+	 * isShorter - tests if the duration of this JDFDuration is less than the duration of the specified JDFDuration. Compares the integer durations, thus -PT15S is shorter than -PT5S
 	 *
 	 * @param x the JDFDuration object to compare to <code>this</code>
 	 * @return boolean - true if the duration of this JDFDuration is shorter than the duration of the JDFDuration 'x'.
@@ -584,8 +555,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * Compares two JDFDuration objects for equality.<br>
-	 * The result is <code>true</code> if and only if the argument is not <code>null</code> and is a <code>JDFDuration</code> object that represents the same
-	 * duration, as this object.
+	 * The result is <code>true</code> if and only if the argument is not <code>null</code> and is a <code>JDFDuration</code> object that represents the same duration, as this object.
 	 * <p>
 	 */
 	@Override

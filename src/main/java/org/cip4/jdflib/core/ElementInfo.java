@@ -4,68 +4,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  * 09022005 VF initial version
  */
@@ -84,35 +52,41 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 /**
  * @author MatternK
  * @See EnumElementValidity below for current list of validity value
- * 
- *      0 Unknown UNKNOWN); 1 None NONE); 2 Required REQUIRED); 3 Optional OPTIONAL); 4 Deprecated DEPRECATED); 5
- *      SingleRequired SINGLEREQUIRED); 6 SingleOptional SINGLEOPTIONAL); 7 SingleDeprecated SINGLEDEPRECATED); 8 Dummy
- *      DUMMY);
+ *
+ *      0 Unknown UNKNOWN); 1 None NONE); 2 Required REQUIRED); 3 Optional OPTIONAL); 4 Deprecated DEPRECATED); 5 SingleRequired SINGLEREQUIRED); 6 SingleOptional SINGLEOPTIONAL); 7 SingleDeprecated
+ *      SINGLEDEPRECATED); 8 Dummy DUMMY);
  */
 public class ElementInfo
 {
 
 	/**
-	 * 
+	 *
 	 */
-	public static final HashMap<String, ElementInfo> fixedMap = new HashMap<String, ElementInfo>();
+	static final Map<String, ElementInfo> fixedMap = new HashMap<>();
 
-	HashMap<String, ElemInfo> elementInfoTable = new HashMap<String, ElemInfo>();
+	/**
+	 * @return the fixedmap
+	 */
+	public static Map<String, ElementInfo> getFixedmap()
+	{
+		return fixedMap;
+	}
+
+	HashMap<String, ElemInfo> elementInfoTable = new HashMap<>();
 	private EnumVersion version = null;
 
 	/**
 	 * Constructor
-	 * 
-	 * @param elemInfo_super elemInfo_super: corresponding element info of super; if null: start from scratch, otherwise
-	 *            initialize from other ElementInfo
+	 *
+	 * @param elemInfo_super elemInfo_super: corresponding element info of super; if null: start from scratch, otherwise initialize from other ElementInfo
 	 * @param elemInfo_own [] elemInfo_own: table with element-specific element info
 	 */
-	public ElementInfo(ElementInfo elemInfo_super, ElemInfoTable[] elemInfo_own)
+	public ElementInfo(final ElementInfo elemInfo_super, final ElemInfoTable[] elemInfo_own)
 	{
 		// use ElementInfo of super as a starting point
 		if (elemInfo_super != null)
 		{
-			elementInfoTable = new HashMap<String, ElemInfo>(elemInfo_super.elementInfoTable);
+			elementInfoTable = new HashMap<>(elemInfo_super.elementInfoTable);
 			version = elemInfo_super.version;
 		}
 
@@ -125,11 +99,11 @@ public class ElementInfo
 
 	/**
 	 * Updater
-	 * 
+	 *
 	 * @param elemInfo_update [] elemInfo_update: table with element-specific attribute info
-	 * @return 
+	 * @return
 	 */
-	public ElementInfo updateAdd(ElemInfoTable elemInfo_update)
+	public ElementInfo updateAdd(final ElemInfoTable elemInfo_update)
 	{
 		if (elemInfo_update != null)
 		{
@@ -147,11 +121,11 @@ public class ElementInfo
 
 	/**
 	 * Updater
-	 * 
+	 *
 	 * @param elemInfo_update [] elemInfo_update: table with element-specific attribute info
-	 * @return 
+	 * @return
 	 */
-	public ElementInfo updateAdd(ElemInfoTable[] elemInfo_update)
+	public ElementInfo updateAdd(final ElemInfoTable[] elemInfo_update)
 	{
 		if (elemInfo_update != null)
 		{
@@ -175,11 +149,11 @@ public class ElementInfo
 
 	/**
 	 * Updater
-	 * 
+	 *
 	 * @param elemInfo_update : table with element-specific attribute info
-	 * @return 
+	 * @return
 	 */
-	public ElementInfo updateRemove(ElemInfoTable elemInfo_update)
+	public ElementInfo updateRemove(final ElemInfoTable elemInfo_update)
 	{
 		if (elemInfo_update != null)
 		{
@@ -193,11 +167,11 @@ public class ElementInfo
 
 	/**
 	 * Updater
-	 * 
-	 * @param elemInfo_update  table with element-specific attribute info to remove from attribInfoTable
-	 * @return 
+	 *
+	 * @param elemInfo_update table with element-specific attribute info to remove from attribInfoTable
+	 * @return
 	 */
-	public ElementInfo updateRemove(ElemInfoTable[] elemInfo_update)
+	public ElementInfo updateRemove(final ElemInfoTable[] elemInfo_update)
 	{
 		if (elemInfo_update != null)
 		{
@@ -216,7 +190,7 @@ public class ElementInfo
 	 * @param elemInfo_update
 	 * @return
 	 */
-	public ElementInfo updateReplace(ElemInfoTable elemInfo_update)
+	public ElementInfo updateReplace(final ElemInfoTable elemInfo_update)
 	{
 		if (elemInfo_update != null)
 		{
@@ -229,7 +203,7 @@ public class ElementInfo
 	 * @param elemInfo_update
 	 * @return
 	 */
-	public ElementInfo updateReplace(ElemInfoTable[] elemInfo_update)
+	public ElementInfo updateReplace(final ElemInfoTable[] elemInfo_update)
 	{
 		if (elemInfo_update != null)
 		{
@@ -243,24 +217,25 @@ public class ElementInfo
 
 	/**
 	 * Returns a list of element names matching the requested validity for the specified JDF version.
-	 * 
+	 *
 	 * @param elemValidity1 elemValidity: requested validity
-	 * @param elemValidity2 
-	 * @param elemValidity3 
-	 * @param elemValidity4 
+	 * @param elemValidity2
+	 * @param elemValidity3
+	 * @param elemValidity4
 	 * @return VString: list of strings containing the names of the matching elements
 	 */
-	private VString conformingElements(EnumElementValidity elemValidity1, EnumElementValidity elemValidity2, EnumElementValidity elemValidity3, EnumElementValidity elemValidity4)
+	private VString conformingElements(final EnumElementValidity elemValidity1, final EnumElementValidity elemValidity2, final EnumElementValidity elemValidity3,
+			final EnumElementValidity elemValidity4)
 	{
-		VString matchingElements = new VString();
-		Set<String> keySet = elementInfoTable.keySet();
+		final VString matchingElements = new VString();
+		final Set<String> keySet = elementInfoTable.keySet();
 
-		long l2 = JDFVersions.getTheMask(version);
-		long v2 = JDFVersions.getTheOffset(version);
-		for (String theKey : keySet)
+		final long l2 = JDFVersions.getTheMask(version);
+		final long v2 = JDFVersions.getTheOffset(version);
+		for (final String theKey : keySet)
 		{
 			final ElemInfo ei = elementInfoTable.get(theKey);
-			long eiValStatus = ei.getElemValidityStatus() & l2;
+			final long eiValStatus = ei.getElemValidityStatus() & l2;
 			if (eiValStatus == ((long) elemValidity1.getValue() << v2))
 			{
 				matchingElements.add(theKey);
@@ -284,21 +259,22 @@ public class ElementInfo
 
 	/**
 	 * Returns true if there is at least one sub-element matching the requested validity for the specified JDF version.
-	 * 
+	 *
 	 * @param elemValidity1 elemValidity: requested validity
-	 * @param elemValidity2 
-	 * @param elemValidity3 
-	 * @param elemValidity4 
+	 * @param elemValidity2
+	 * @param elemValidity3
+	 * @param elemValidity4
 	 * @return boolean: true if at least one sub-element matches the requested validity
 	 */
-	public boolean hasConformingElements(EnumElementValidity elemValidity1, EnumElementValidity elemValidity2, EnumElementValidity elemValidity3, EnumElementValidity elemValidity4)
+	public boolean hasConformingElements(final EnumElementValidity elemValidity1, final EnumElementValidity elemValidity2, final EnumElementValidity elemValidity3,
+			final EnumElementValidity elemValidity4)
 	{
 		return !conformingElements(elemValidity1, elemValidity2, elemValidity3, elemValidity4).isEmpty();
 	}
 
 	/**
 	 * Returns the list of required sub-elements for the specified JDF version.
-	 * 
+	 *
 	 * @return VString: list of strings containing the names of the required sub-elements
 	 */
 	public VString requiredElements()
@@ -307,9 +283,9 @@ public class ElementInfo
 	}
 
 	/**
-	 * Returns the list of optional sub-elements for the specified JDF version. Note: This includes elements marked as
-	 * optional as well as elements marked as deprecated (since, for backward compatibility, these are also optional).
-	 * 
+	 * Returns the list of optional sub-elements for the specified JDF version. Note: This includes elements marked as optional as well as elements marked as deprecated (since, for backward
+	 * compatibility, these are also optional).
+	 *
 	 * @return VString: list of strings containing the names of the optional attributes
 	 */
 	public VString optionalElements()
@@ -319,7 +295,7 @@ public class ElementInfo
 
 	/**
 	 * Returns the list of deprecated elements for the specified JDF version.
-	 * 
+	 *
 	 * @return VString: list of strings containing the names of the deprecated attributes
 	 */
 	public VString deprecatedElements()
@@ -329,7 +305,7 @@ public class ElementInfo
 
 	/**
 	 * Returns the list of unique elements for the specified JDF version.
-	 * 
+	 *
 	 * @return VString: list of strings containing the names of the deprecated attributes
 	 */
 	public VString uniqueElements()
@@ -338,9 +314,8 @@ public class ElementInfo
 	}
 
 	/**
-	 * Returns the list of prerelease attributes (those that are only valid in a later version) for the specified JDF
-	 * version.
-	 * 
+	 * Returns the list of prerelease attributes (those that are only valid in a later version) for the specified JDF version.
+	 *
 	 * @return VString: list of strings containing the names of the prerelease attributes
 	 */
 	public VString prereleaseElements()
@@ -349,8 +324,7 @@ public class ElementInfo
 	}
 
 	/*
-	 * ----------------------------------------------------------------------- Enumeration of element validity values
-	 * -----------------------------------------------------------------------
+	 * ----------------------------------------------------------------------- Enumeration of element validity values -----------------------------------------------------------------------
 	 */
 
 	/**
@@ -365,7 +339,7 @@ public class ElementInfo
 		/**
 		 * @param name
 		 */
-		private EnumElementValidity(String name)
+		private EnumElementValidity(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -374,7 +348,7 @@ public class ElementInfo
 		 * @param enumName the name of the enum object to return
 		 * @return the enum object if enumName is valid. Otherwise null
 		 */
-		public static EnumElementValidity getEnum(String enumName)
+		public static EnumElementValidity getEnum(final String enumName)
 		{
 			return (EnumElementValidity) getEnum(EnumElementValidity.class, enumName);
 		}
@@ -383,7 +357,7 @@ public class ElementInfo
 		 * @param enumValue the value of the enum object to return
 		 * @return the enum object if enumName is valid. Otherwise null
 		 */
-		public static EnumAttributeValidity getEnum(int enumValue)
+		public static EnumAttributeValidity getEnum(final int enumValue)
 		{
 			return (EnumAttributeValidity) getEnum(EnumAttributeValidity.class, enumValue);
 		}
@@ -435,7 +409,7 @@ public class ElementInfo
 	/**
 	 * @param v
 	 */
-	public void setVersion(EnumVersion v)
+	public void setVersion(final EnumVersion v)
 	{
 		version = v;
 	}
@@ -443,7 +417,7 @@ public class ElementInfo
 	/**
 	 * @see java.lang.Object#toString()
 	 * @return
-	*/
+	 */
 	@Override
 	public String toString()
 	{
@@ -454,11 +428,11 @@ public class ElementInfo
 
 	/**
 	 * get the first jdf version where an attrinute of this type is valid
-	 * 
+	 *
 	 * @param elementName the name of the queried attribute
 	 * @return
 	 */
-	public EnumVersion getFirstVersion(String elementName)
+	public EnumVersion getFirstVersion(final String elementName)
 	{
 		if (elementInfoTable.containsKey(elementName))
 		{
@@ -469,11 +443,11 @@ public class ElementInfo
 
 	/**
 	 * get the last jdf version where an attrinute of this type is valid
-	 * 
+	 *
 	 * @param elementName the name of the queried attribute
 	 * @return
 	 */
-	public EnumVersion getLastVersion(String elementName)
+	public EnumVersion getLastVersion(final String elementName)
 	{
 		if (elementInfoTable.containsKey(elementName))
 		{

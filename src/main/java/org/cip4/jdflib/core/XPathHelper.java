@@ -376,7 +376,7 @@ class XPathHelper
 	String buildLocalPath(final int methCountSiblings, final KElement parent)
 	{
 		final String nodeName = theElement.getNodeName();
-		final StringBuffer buf = new StringBuffer(nodeName);
+		final StringBuilder buf = new StringBuilder(nodeName);
 		if (methCountSiblings > 0)
 		{
 			if (methCountSiblings == 3 && theElement.getAttributeRaw(JDFCoreConstants.ID) != null)

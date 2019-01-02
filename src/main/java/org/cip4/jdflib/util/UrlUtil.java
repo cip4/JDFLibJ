@@ -752,7 +752,7 @@ public class UrlUtil
 			return baseUrl;
 		final int posQMark = baseUrl.indexOf("?");
 		final String flag = posQMark >= 0 ? "&" : "?";
-		final StringBuffer buf = new StringBuffer(baseUrl);
+		final StringBuilder buf = new StringBuilder(baseUrl);
 		key = escape(key, true);
 		val = escape(val, true);
 		val = StringUtil.escape(val, ":/", "%", 16, 2, -1, -1);
@@ -1225,7 +1225,7 @@ public class UrlUtil
 		{
 			return null;
 		}
-		final StringBuffer b = new StringBuffer(32);
+		final StringBuilder b = new StringBuilder(32);
 		for (int i = 0; i < ip.length; i++)
 		{
 			b.append(ip[i]);

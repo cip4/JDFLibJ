@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -147,18 +147,23 @@ public class WalkPosition extends WalkXElement
 				{
 					for (final KElement sigCell : vSigCell)
 					{
-						final JDFStripCellParams stripCell = stripParams.appendStripCellParams();
-						final VString stripCellKnown = stripCell.knownAttributes();
-						final JDFAttributeMap sigCelMap = sigCell.getAttributeMap();
-						sigCelMap.reduceMap(stripCellKnown);
-						if (sigCelMap.size() > 0)
-						{
-							stripCell.setAttributes(sigCelMap);
-							sigCell.removeAttributes(sigCelMap.keySet());
-						}
+						doCell(stripParams, sigCell);
 					}
 				}
 			}
+		}
+	}
+
+	void doCell(final JDFStrippingParams stripParams, final KElement sigCell)
+	{
+		final JDFStripCellParams stripCell = stripParams.appendStripCellParams();
+		final VString stripCellKnown = stripCell.knownAttributes();
+		final JDFAttributeMap sigCelMap = sigCell.getAttributeMap();
+		sigCelMap.reduceMap(stripCellKnown);
+		if (!sigCelMap.isEmpty())
+		{
+			stripCell.setAttributes(sigCelMap);
+			sigCell.removeAttributes(sigCelMap.keySet());
 		}
 	}
 

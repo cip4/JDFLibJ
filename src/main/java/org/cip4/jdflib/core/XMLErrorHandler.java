@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -58,6 +58,9 @@ import org.xml.sax.SAXParseException;
 public class XMLErrorHandler implements ErrorHandler
 {
 
+	private static final String FATAL_ERROR = "FatalError";
+	private static final String ERROR = "Error";
+	private static final String WARNING = "Warning";
 	public static final String VALIDATION_RESULT = "ValidationResult";
 	private KElement root;
 	XMLParser parser;
@@ -99,7 +102,7 @@ public class XMLErrorHandler implements ErrorHandler
 	public void warning(final SAXParseException exception)
 	{
 		final String warn = getErrorMsg(exception);
-		final KElement kEl = root.appendElement("Warning");
+		final KElement kEl = root.appendElement(WARNING);
 		kEl.setAttribute("Message", warn);
 		parser.m_lastExcept = exception;
 		if (wantLog)
@@ -119,7 +122,7 @@ public class XMLErrorHandler implements ErrorHandler
 		parser.m_lastExcept = exception;
 		if ((er.indexOf("http://www.CIP4.org/JDFSchema") != -1) || (er.indexOf("is not declared for") == -1))
 		{
-			final KElement kEl = root.appendElement("Error");
+			final KElement kEl = root.appendElement(ERROR);
 			kEl.setAttribute("Message", er);
 			if (wantLog)
 			{
@@ -136,7 +139,7 @@ public class XMLErrorHandler implements ErrorHandler
 	public void fatalError(final SAXParseException exception)
 	{
 		final String er = getErrorMsg(exception);
-		final KElement kEl = root.appendElement("FatalError");
+		final KElement kEl = root.appendElement(FATAL_ERROR);
 		kEl.setAttribute("Message", er);
 		parser.m_lastExcept = exception;
 		if (wantLog)
@@ -196,12 +199,12 @@ public class XMLErrorHandler implements ErrorHandler
 		else
 		{
 			root.setAttribute("SchemaLocation", schemaLocation);
-			if (root.hasChildElement("FatalError", null))
-				root.setAttribute(VALIDATION_RESULT, "FatalError");
-			else if (root.hasChildElement("Error", null))
-				root.setAttribute(VALIDATION_RESULT, "Error");
-			else if (root.hasChildElement("Warning", null))
-				root.setAttribute(VALIDATION_RESULT, "Warning");
+			if (root.hasChildElement(FATAL_ERROR, null))
+				root.setAttribute(VALIDATION_RESULT, FATAL_ERROR);
+			else if (root.hasChildElement(ERROR, null))
+				root.setAttribute(VALIDATION_RESULT, ERROR);
+			else if (root.hasChildElement(WARNING, null))
+				root.setAttribute(VALIDATION_RESULT, WARNING);
 			else
 				root.setAttribute(VALIDATION_RESULT, "Valid");
 		}
@@ -221,7 +224,7 @@ public class XMLErrorHandler implements ErrorHandler
 
 	/**
 	 * Setter for parser attribute.
-	 * 
+	 *
 	 * @param parser the parser to set
 	 */
 	public void setParser(final XMLParser parser)

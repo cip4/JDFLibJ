@@ -4927,7 +4927,7 @@ public class KElement extends ElementNSImpl implements Element
 	public String getText()
 	{
 		final int iBufferSize = 100;
-		final StringBuffer strBuff = new StringBuffer(iBufferSize);
+		final StringBuilder strBuff = new StringBuilder(iBufferSize);
 
 		final NodeList nodeList = getChildNodes();
 		final int length = nodeList.getLength();

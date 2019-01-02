@@ -5108,7 +5108,7 @@ public class JDFElement extends KElement
 	{
 		setAttribute(AttributeName.VERSION, enumVer == null ? null : enumVer.getName(), null);
 		AttributeInfo.fixedMap.clear();
-		ElementInfo.fixedMap.clear();
+		ElementInfo.getFixedmap().clear();
 	}
 
 	/**

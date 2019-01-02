@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -129,7 +97,7 @@ import org.w3c.dom.traversal.TreeWalker;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * < July 15, 2009
+ *         < July 15, 2009
  */
 @SuppressWarnings("deprecation")
 public class XMLDoc implements Cloneable
@@ -220,6 +188,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * reparse a document that
+	 *
 	 * @param document
 	 * @return
 	 */
@@ -235,6 +204,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * reparse an element in the context of the current document implemetation
+	 *
 	 * @param dst
 	 * @param src
 	 */
@@ -362,7 +332,7 @@ public class XMLDoc implements Cloneable
 	 *
 	 * @return JDFElement
 	 *
-	 * default: getRoot()
+	 *         default: getRoot()
 	 */
 	public KElement getRoot()
 	{
@@ -489,7 +459,12 @@ public class XMLDoc implements Cloneable
 			}
 
 			// ensure having an empty file in case it did not exist
-			file.delete();
+			if (file.exists())
+			{
+				final boolean zapped = file.delete();
+				if (!zapped)
+					log.warn("could not delete: " + file.getAbsolutePath());
+			}
 			fSuccess = FileUtil.createNewFile(file);
 			if (fSuccess)
 			{
@@ -522,6 +497,7 @@ public class XMLDoc implements Cloneable
 				catch (final IOException e1)
 				{
 					log.error("closing File, bailing out", e1);
+					fSuccess = false;
 				}
 			}
 		}
@@ -678,8 +654,7 @@ public class XMLDoc implements Cloneable
 	}
 
 	/**
-	 * createElement create a JDFElement that floats in nirvana. This must be appended to a node with appendChild (created in namespace JDFCoreConstants.NONAMESPACE
-	 * (DOM Level 2)).<br>
+	 * createElement create a JDFElement that floats in nirvana. This must be appended to a node with appendChild (created in namespace JDFCoreConstants.NONAMESPACE (DOM Level 2)).<br>
 	 * Another way would be to use KElement.appendElement(String elementName, String nameSpaceURI)
 	 *
 	 * @param elementName name of the element that is created
@@ -1191,8 +1166,7 @@ public class XMLDoc implements Cloneable
 	 * @param version version number of the package name to test
 	 *
 	 * @return boolean - true, if the feature is sopported
-	 * @see <a href="http://xerces.apache.org/xerces-j/apiDocs/org/apache/xerces/dom/NodeImpl.html#isSupported(java.lang.String,%20java.lang.String)"
-	 * <a>Xerxes-Documentation</a>
+	 * @see <a href="http://xerces.apache.org/xerces-j/apiDocs/org/apache/xerces/dom/NodeImpl.html#isSupported(java.lang.String,%20java.lang.String)" <a>Xerxes-Documentation</a>
 	 */
 	public boolean isSupported(final String feature, final String version)
 	{
@@ -1509,7 +1483,7 @@ public class XMLDoc implements Cloneable
 	 *
 	 * @return docResponse the response received from URL. if url is a file, an empty doc is returned
 	 *
-	 * A Null document if no response was received, or an exception occurred
+	 *         A Null document if no response was received, or an exception occurred
 	 */
 	public XMLDoc write2URL(final String strURL, final String strContentType)
 	{
@@ -1547,24 +1521,24 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * gets the n'th child node of nodetype <code>nodeType</code> with n = iPos
-	 * @param nodeType the DOM node type to get <blockquote>
-	 * - copy from KElement -
 	 *
-	 * <ul>
-	 * <li>ELEMENT_NODE = 1
-	 * <li>ATTRIBUTE_NODE = 2
-	 * <li>TEXT_NODE = 3
-	 * <li>CDATA_SECTION_NODE = 4
-	 * <li>ENTITY_REFERENCE_NODE = 5
-	 * <li>ENTITY_NODE = 6
-	 * <li>PROCESSING_INSTRUCTION_NODE = 7
-	 * <li>COMMENT_NODE = 8
-	 * <li>DOCUMENT_NODE = 9
-	 * <li>DOCUMENT_TYPE_NODE = 10
-	 * <li>DOCUMENT_FRAGMENT_NODE = 11
-	 * <li>NOTATION_NODE = 12
-	 * <li>XML_DECL_NODE = 13 </blockquote>
-	 * </ul>
+	 * @param nodeType the DOM node type to get <blockquote> - copy from KElement -
+	 *
+	 *            <ul>
+	 *            <li>ELEMENT_NODE = 1
+	 *            <li>ATTRIBUTE_NODE = 2
+	 *            <li>TEXT_NODE = 3
+	 *            <li>CDATA_SECTION_NODE = 4
+	 *            <li>ENTITY_REFERENCE_NODE = 5
+	 *            <li>ENTITY_NODE = 6
+	 *            <li>PROCESSING_INSTRUCTION_NODE = 7
+	 *            <li>COMMENT_NODE = 8
+	 *            <li>DOCUMENT_NODE = 9
+	 *            <li>DOCUMENT_TYPE_NODE = 10
+	 *            <li>DOCUMENT_FRAGMENT_NODE = 11
+	 *            <li>NOTATION_NODE = 12
+	 *            <li>XML_DECL_NODE = 13 </blockquote>
+	 *            </ul>
 	 * @param iPos the index of the node with default 0 for the first occurance
 	 * @return KElement: a node that matches the filter, null if iPos is higher then the number of child nodes
 	 */
@@ -1656,7 +1630,7 @@ public class XMLDoc implements Cloneable
 		}
 		catch (final IOException e)
 		{
-			//nop
+			// nop
 		}
 
 		return null;
@@ -1917,6 +1891,7 @@ public class XMLDoc implements Cloneable
 
 	/**
 	 * copy metadata from other document
+	 *
 	 * @param dMine
 	 */
 	public void copyMeta(final XMLDoc dMine)

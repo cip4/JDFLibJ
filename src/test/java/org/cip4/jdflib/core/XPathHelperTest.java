@@ -108,7 +108,7 @@ public class XPathHelperTest extends JDFTestCaseBase
 			final JDFAttributeMap map = d.getRoot().getXPathValueMap();
 			log.info("Read " + ct1.getSingleSummary());
 
-			for (int i = 0; i < 33; i++)
+			for (int i = 0; i < 1; i++)
 			{
 				ct.start();
 				final JDFDoc dNew = new JDFDoc(ElementName.JDF);

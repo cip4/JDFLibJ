@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -97,8 +97,8 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	public static class ByteArrayIOFileInputStream extends ByteArrayIOInputStream
 	{
 		private final ByteArrayIOFileStream ios;
-		private long pos;
-		private long mark;
+		private long filePos;
+		private long fileMark;
 
 		/**
 		 * @param buf
@@ -109,14 +109,14 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		{
 			super(new byte[1], 0);
 			this.ios = ios;
-			mark = 0;
+			fileMark = 0;
 			try
 			{
-				pos = ios.os.getFilePointer();
+				filePos = ios.os.getFilePointer();
 			}
 			catch (final IOException e)
 			{
-				pos = 0;
+				filePos = 0;
 			}
 		}
 
@@ -130,7 +130,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		public ByteArrayIOInputStream getNewStream()
 		{
 			final ByteArrayIOFileInputStream byteArrayIOFileInputStream = new ByteArrayIOFileInputStream(ios);
-			byteArrayIOFileInputStream.pos = pos;
+			byteArrayIOFileInputStream.filePos = filePos;
 
 			return byteArrayIOFileInputStream;
 		}
@@ -172,7 +172,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 				if (ios.os.getFilePointer() != pos)
 				{
 					ios.os.seek(pos);
-					this.pos = pos;
+					this.filePos = pos;
 				}
 			}
 			catch (final IOException e)
@@ -187,7 +187,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		@Override
 		public long tell()
 		{
-			return pos;
+			return filePos;
 		}
 
 		@Override
@@ -201,10 +201,10 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		{
 			try
 			{
-				ios.os.seek(pos);
+				ios.os.seek(filePos);
 				final int read = ios.os.read();
 				if (read >= 0)
-					pos++;
+					filePos++;
 				return read;
 			}
 			catch (final IOException e)
@@ -218,10 +218,10 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		{
 			try
 			{
-				seek(pos);
+				seek(filePos);
 				final int read = ios.os.read(b, off, len);
 				if (read > 0)
-					pos += read;
+					filePos += read;
 				return read;
 			}
 			catch (final IOException e)
@@ -235,9 +235,9 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		{
 			try
 			{
-				pos += n;
-				ios.os.seek(pos);
-				return pos;
+				filePos += n;
+				ios.os.seek(filePos);
+				return filePos;
 			}
 			catch (final IOException e)
 			{
@@ -248,7 +248,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		@Override
 		public synchronized int available()
 		{
-			return (int) (getCount() - pos);
+			return (int) (getCount() - filePos);
 		}
 
 		@Override
@@ -260,7 +260,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		@Override
 		public void mark(final int readAheadLimit)
 		{
-			mark = pos;
+			fileMark = filePos;
 		}
 
 		/**
@@ -269,7 +269,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		@Override
 		public synchronized void reset()
 		{
-			seek(mark);
+			seek(fileMark);
 		}
 
 		/**

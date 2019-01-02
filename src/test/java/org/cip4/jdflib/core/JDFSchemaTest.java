@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -386,7 +386,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	{
 		final JDFDoc d0 = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d0.getJDFRoot();
-		n.setVersion(EnumVersion.Version_1_7);
+		n.setVersion(EnumVersion.Version_1_6);
 		n.setType(EnumType.ProcessGroup);
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);

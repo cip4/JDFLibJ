@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -147,7 +147,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * are we null or empty or contain only an empty JDFAttributeMap
-	 * 
+	 *
 	 * @param v
 	 * @return
 	 */
@@ -163,7 +163,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 */
 	public String showKeys(final String sepMap, final String sepEntry)
 	{
-		final StringBuffer sb = new StringBuffer();
+		final StringBuilder sb = new StringBuilder();
 		final int nPartMaps = this.size();
 
 		for (int i = 0; i < nPartMaps; i++)

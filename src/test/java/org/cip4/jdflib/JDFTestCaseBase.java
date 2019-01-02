@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -159,7 +159,8 @@ public abstract class JDFTestCaseBase
 
 	static protected final String sm_dirTestData = getTestDataDir();
 	static protected final EnumVersion defaultVersion = JDFElement.getDefaultJDFVersion();
-	static protected final String sm_dirTestSchema = sm_dirTestData + "schema" + File.separator + "Version_1_7" + File.separator;
+	static protected final String sm_dirTestSchemaBase = sm_dirTestData + "schema" + File.separator + "Version_";
+	static protected final String sm_dirTestSchema = sm_dirTestSchemaBase + "1_6" + File.separator;
 	static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + File.separator;
 
 	private static String getTestDataDir()
@@ -508,7 +509,7 @@ public abstract class JDFTestCaseBase
 			printValid(root.getOwnerDocument_JDFElement());
 		}
 		assertTrue(tmpJDF, valid);
-		final JDFParser jdfparser = getSchemaParser();
+		final JDFParser jdfparser = getSchemaParser(version);
 		final JDFDoc docJDF = jdfparser.parseFile(tmpJDFPath);
 		final XMLDoc dVal0 = docJDF.getValidationResult();
 		final String valResult0 = dVal0.getRoot().getAttribute("ValidationResult");
@@ -707,8 +708,22 @@ public abstract class JDFTestCaseBase
 	 */
 	protected JDFParser getSchemaParser()
 	{
+		return getSchemaParser(EnumVersion.Version_1_6);
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	protected JDFParser getSchemaParser(final EnumVersion version)
+	{
+		int minor = 6;
+		if (EnumVersion.Version_2_1.equals(version) || EnumVersion.Version_1_7.equals(version))
+			minor = 7;
+		else if (EnumVersion.Version_2_2.equals(version) || EnumVersion.Version_1_8.equals(version))
+			minor = 8;
 		final JDFParser parser = JDFParserFactory.getFactory().get();
-		final File jdfxsd = new File(sm_dirTestSchema + File.separator + "JDF.xsd");
+		final File jdfxsd = new File(sm_dirTestSchemaBase + "1_" + minor + File.separator + "JDF.xsd");
 		assertTrue(jdfxsd.canRead());
 		parser.setJDFSchemaLocation(jdfxsd);
 		return parser;

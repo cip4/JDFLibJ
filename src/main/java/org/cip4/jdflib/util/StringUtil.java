@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -200,7 +200,7 @@ public class StringUtil
 	 */
 	public static String zappTokenWS(final String str, final String delim)
 	{
-		final StringBuffer s = new StringBuffer();
+		final StringBuilder s = new StringBuilder();
 
 		final VString vs = new VString(str, delim);
 		final int size = vs.size();
@@ -372,7 +372,7 @@ public class StringUtil
 		}
 
 		final int siz = v.size();
-		final StringBuffer buf = new StringBuffer(siz * 16); // guestimat 16 chars
+		final StringBuilder buf = new StringBuilder(siz * 16); // guestimat 16 chars
 		// per token max
 
 		if (front != null)
@@ -890,7 +890,7 @@ public class StringUtil
 			return strWork;
 		}
 
-		final StringBuffer b = new StringBuffer(strWork.length() * 2);
+		final StringBuilder b = new StringBuilder(strWork.length() * 2);
 		int lastPos = offset;
 		b.append(strWork.substring(0, offset));
 		while (lastPos >= 0)
@@ -990,7 +990,7 @@ public class StringUtil
 			}
 
 			final int len = toReplace.length();
-			final StringBuffer b = new StringBuffer(strWork.length() * 2);
+			final StringBuilder b = new StringBuilder(strWork.length() * 2);
 			do
 			{
 				b.append(strWork.substring(0, indexOf));
@@ -2044,7 +2044,7 @@ public class StringUtil
 
 				if (iRadix > 0)
 				{ // radix is a flag to convert to octal, hex etc.
-					final StringBuffer buf = new StringBuffer();
+					final StringBuilder buf = new StringBuilder();
 
 					if (iRadix == 2)
 					{
@@ -2089,7 +2089,7 @@ public class StringUtil
 						posE++;
 					}
 
-					// empty StringBuffer
+					// empty StringBuilder
 					buf.delete(0, buf.length());
 				}
 				else if (iRadix < 0)
@@ -2525,7 +2525,7 @@ public class StringUtil
 		final String[] out = new String[] { "\\.", "(.*)", "(.)" };
 		for (int i = 0; i < in.length; i++)
 		{
-			final StringBuffer b = new StringBuffer(simpleRegExp.length() * 2);
+			final StringBuilder b = new StringBuilder(simpleRegExp.length() * 2);
 			int lastPos = 0;
 			while (lastPos >= 0)
 			{
@@ -2801,7 +2801,7 @@ public class StringUtil
 		{
 			return null;
 		}
-		final StringBuffer b = new StringBuffer(work.length());
+		final StringBuilder b = new StringBuilder(work.length());
 		for (int i = 0; i < work.length(); i++)
 		{
 			if (keepChars.indexOf(work.charAt(i)) >= 0)
