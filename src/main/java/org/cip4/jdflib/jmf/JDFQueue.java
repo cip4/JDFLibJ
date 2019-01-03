@@ -2,75 +2,43 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
 /**
  * JDFQueue.java
- * @author Dietrich Mucha 
- * Copyright (C) 1999-2005 Heidelberger Druckmaschinen AG. All rights reserved.
+ *
+ * @author Dietrich Mucha Copyright (C) 1999-2005 Heidelberger Druckmaschinen AG. All rights reserved.
  **/
 
 package org.cip4.jdflib.jmf;
@@ -99,9 +67,10 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * The JDF Queue
+ *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * 01.12.2008
+ *
+ *         01.12.2008
  */
 public class JDFQueue extends JDFAutoQueue
 {
@@ -128,14 +97,15 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * callback class definition for cleaning up in cleanup called once for every qe that is removed
-	 * 
+	 *
 	 * @author prosirai
-	 * 
+	 *
 	 */
 	public abstract static class CleanupCallback
 	{
 		/**
 		 * cleans up when a QueueEntry is removed by whatever method
+		 *
 		 * @param qe
 		 */
 		public abstract void cleanEntry(JDFQueueEntry qe);
@@ -143,8 +113,9 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * callback class definition for specifying whether a QE may execute
+	 *
 	 * @author prosirai
-	 * 
+	 *
 	 */
 	public abstract static class ExecuteCallback
 	{
@@ -157,7 +128,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Constructor for JDFQueue
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -168,7 +139,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * set the status as if an OpenQueue command has been sent
-	 * 
+	 *
 	 * @return
 	 */
 	public EnumQueueStatus openQueue()
@@ -183,7 +154,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * set the status as if a CloseQueue command has been sent
-	 * 
+	 *
 	 * @return
 	 */
 	public EnumQueueStatus closeQueue()
@@ -198,7 +169,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * set the status as if a HoldQueue command has been sent
-	 * 
+	 *
 	 * @return
 	 */
 	public EnumQueueStatus holdQueue()
@@ -213,7 +184,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * set the status as if a HoldQueue command has been sent
-	 * 
+	 *
 	 * @return
 	 */
 	public EnumQueueStatus resumeQueue()
@@ -228,7 +199,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Constructor for JDFQueue
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -240,7 +211,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Constructor for JDFQueue
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -253,7 +224,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * toString()
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -264,7 +235,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Method getEntryCount.
-	 * 
+	 *
 	 * @return int quantity of QueueEntry children
 	 */
 	public int getEntryCount()
@@ -274,13 +245,13 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Get a vector of all queueentry elements
-	 * 
+	 *
 	 * @return VElement: the vector of queue entries
 	 */
 	public VElement getQueueEntryVector()
 	{
-		Vector<JDFQueueEntry> v1 = getChildrenByClass(JDFQueueEntry.class, false, -1);
-		VElement v = new VElement();
+		final Vector<JDFQueueEntry> v1 = getChildrenByClass(JDFQueueEntry.class, false, -1);
+		final VElement v = new VElement();
 		if (v1 != null)
 		{
 			v.ensureCapacity(v1.size());
@@ -291,9 +262,10 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Get a vector of queueentry elements with a given set of attributes and part maps
+	 *
 	 * @param attMap
 	 * @param parts
-	 * 
+	 *
 	 * @return VElement: the vector of queue entries
 	 */
 	public synchronized VElement getQueueEntryVector(final JDFAttributeMap attMap, final VJDFAttributeMap parts)
@@ -315,19 +287,20 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * get a map of queueentries that uses QueueEntryID as key
+	 *
 	 * @return the map, null if this is empty
 	 */
 	public synchronized Map<String, JDFQueueEntry> getQueueEntryIDMap()
 	{
 		HashMap<String, JDFQueueEntry> map = null;
 
-		Vector<JDFQueueEntry> v = getChildrenByClass(JDFQueueEntry.class, false, -1);
+		final Vector<JDFQueueEntry> v = getChildrenByClass(JDFQueueEntry.class, false, -1);
 		if (v != null)
 		{
 			final int siz = v.size();
 			if (siz > 0)
 			{
-				map = new HashMap<String, JDFQueueEntry>(siz);
+				map = new HashMap<>(siz);
 				for (int i = 0; i < siz; i++)
 				{
 					final JDFQueueEntry qe = v.get(i);
@@ -341,8 +314,9 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Get a vector of queueentry elements that matches a given nodeidentifier
+	 *
 	 * @param nid
-	 * 
+	 *
 	 * @return VElement: the vector of queue entries
 	 */
 	public synchronized VElement getQueueEntryVector(final NodeIdentifier nid)
@@ -367,7 +341,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Method getEntry: find a queuentry by position
-	 * 
+	 *
 	 * @param i the index of the queueentry
 	 * @return JDFQueueEntry
 	 * @deprecated use getQueueEntry(int)
@@ -380,7 +354,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * create a queueEntry if this queue is accepting
-	 * 
+	 *
 	 * @param bHeld , if true, set the qe Status to Held
 	 * @return the newly created queueEntry, null if failed
 	 */
@@ -399,7 +373,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * flush this queue according to the rules defined in qf
-	 * 
+	 *
 	 * @param qf
 	 * @return null if none were removed, else vector of removed queuentries
 	 */
@@ -411,7 +385,7 @@ public class JDFQueue extends JDFAutoQueue
 		if (ve != null)
 		{
 			siz = ve.size();
-			QueueEntryMatcher qeMatch = qf == null ? null : qf.new QueueEntryMatcher();
+			final QueueEntryMatcher qeMatch = qf == null ? null : qf.new QueueEntryMatcher();
 			for (int i = siz - 1; i >= 0; i--)
 			{
 				final JDFQueueEntry qe = (JDFQueueEntry) ve.get(i);
@@ -445,13 +419,13 @@ public class JDFQueue extends JDFAutoQueue
 	 * Method findQueueEntries
 	 * <p>
 	 * default: findQueueEntries(jobID, jobPartID, new VJDFAttributeMap(), null)
-	 * 
+	 *
 	 * @param strJobID Job ID.
 	 * @param strJobPartID Job part ID.
 	 * @param vamParts Partition to execute, may not be null
 	 * @param status Queue Entry Status, null means any status.
 	 * @deprecated use getQueueEntryVector(map, partmapvector)
-	 * 
+	 *
 	 * @return VString: vector of QueueEntry IDs
 	 */
 	@Deprecated
@@ -485,9 +459,9 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Find a queueEntry by QueueEntryID<br>
-	 * 
+	 *
 	 * note that you may want to use the generic getChildByTagName with the appropriate attribute map, if you have more information available
-	 * 
+	 *
 	 * @param strQEntryID the QueueEntryID of the requeste QueueEntry
 	 * @return the QueueEntry with QueueEntryID=strQEntryID, null if strQEntryID is null or empty string or the queueentry does not exist
 	 * @deprecated use getQueueEntry(id)
@@ -500,12 +474,12 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Find a queueEntry by QueueEntryID<br>
-	 * 
+	 *
 	 * note that you may want to use the generic getChildByTagName with the appropriate attribute map, if you have more information available
-	 * 
+	 *
 	 * @param strQEntryID the QueueEntryID of the requeste QueueEntry
 	 * @return the QueueEntry with QueueEntryID=strQEntryID, null if strQEntryID is null or empty string or the queueentry does not exist
-	 * 
+	 *
 	 */
 	public JDFQueueEntry getQueueEntry(final String strQEntryID)
 	{
@@ -525,13 +499,13 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Find a queueEntry by NodeIdentifier (jobid, jobpartid, part)<br>
-	 * 
+	 *
 	 * note that you may want to use the generic getChildByTagName with the appropriate attribute map, if you have more information available
-	 * 
+	 *
 	 * @param nodeID the identifier - jobID, jobPartID, parts - of the qe
 	 * @param nSkip the number of nodes to skip, cout backwards if<0
 	 * @return the QueueEntry with matching jobID, jobPartID, parts, null if nodeID is null or empty string or the queueentry does not exist
-	 * 
+	 *
 	 */
 	public JDFQueueEntry getQueueEntry(final NodeIdentifier nodeID, final int nSkip)
 	{
@@ -578,7 +552,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Find the position of a queueEntry by QueueEntryID
-	 * 
+	 *
 	 * @param strQEntryID the QueueEntryID of the requeste QueueEntry
 	 * @return the position in the queue, -1 if not there
 	 */
@@ -613,12 +587,13 @@ public class JDFQueue extends JDFAutoQueue
 	}
 
 	/**
-	 * Get the next QueueEntry to be processed the first entry with highest priority gets selected if deviceID is specified, the entries with an explicit non
-	 * matching deviceID are ignored the status of the QueueEntry MUST be waiting
-	 * 
+	 * Get the next QueueEntry to be processed the first entry with highest priority gets selected if deviceID is specified, the entries with an explicit non matching deviceID are ignored the status
+	 * of the QueueEntry MUST be waiting
+	 *
 	 * proxy and represents previously submitted jobs as waiting
+	 *
 	 * @param cb
-	 * 
+	 *
 	 * @return the executable queueEntry, null if none is available
 	 */
 	public synchronized JDFQueueEntry getNextExecutableQueueEntry(ExecuteCallback cb)
@@ -639,10 +614,10 @@ public class JDFQueue extends JDFAutoQueue
 		while (qe != null)
 		{
 
-			String qeStatus = qe.getAttribute(AttributeName.STATUS);
+			final String qeStatus = qe.getAttribute(AttributeName.STATUS);
 			if ("Waiting".equals(qeStatus))
 			{
-				String qeActivation = StringUtil.getNonEmpty(qe.getAttribute(AttributeName.ACTIVATION));
+				final String qeActivation = StringUtil.getNonEmpty(qe.getAttribute(AttributeName.ACTIVATION));
 				if ((qeActivation == null || "Active".equals(qeActivation)) && (cb == null || cb.canExecute(qe)))
 				{
 					theEntry = qe;
@@ -662,7 +637,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * if the outgoing device processor is accepting new entries
-	 * 
+	 *
 	 * @return true, if new entries are accepted
 	 */
 	public boolean canExecute()
@@ -688,14 +663,12 @@ public class JDFQueue extends JDFAutoQueue
 		{
 			return true;
 		}
-		// if(EnumQueueStatus.Blocked.equals(status))
-		// blocked or null(illegal)
 		return !maxRunning();
 	}
 
 	/**
 	 * if the incoming queue processor is accepting new entries
-	 * 
+	 *
 	 * @return true, if new entries are accepted
 	 */
 	public boolean canAccept()
@@ -717,14 +690,13 @@ public class JDFQueue extends JDFAutoQueue
 		{
 			return true;
 		}
-		// if(EnumQueueStatus.Blocked.equals(status))
-		// blocked or null(illegal)
-		return hasAttribute(AttributeName.QUEUESIZE) ? numEntries(null) < getQueueSize() : !maxWaiting();
+		final boolean b = hasAttribute(AttributeName.QUEUESIZE) ? numEntries(null) < getQueueSize() : !maxWaiting();
+		return b;
 	}
 
 	/**
 	 * remove all entries with Status=Removed and any entries over maxCompleted that are either aborted or completed @see {@link JDFQueueEntry} .isCompleted()
-	 * 
+	 *
 	 */
 
 	public synchronized void cleanup()
@@ -775,7 +747,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * copies this to the JDF Response resp, applying the filters defined in filter
-	 * 
+	 *
 	 * @param resp the JDFResponse to copy this to
 	 * @param filter the QueueFilter that sets the queue size
 	 * @return the copied queue
@@ -790,13 +762,13 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * copies this to the JDF Response resp, applying the filters defined in filter
-	 * 
+	 *
 	 * @param resp the JDFResponse to copy this to
 	 * @param filter the QueueFilter that sets the queue size
 	 * @param priorQueue the prior que to apply thr filter to incase updategranularity is incremental
 	 * @return the copied queue
 	 */
-	synchronized public JDFQueue copyToResponse(final JDFResponse resp, JDFQueueFilter filter, final JDFQueue priorQueue)
+	synchronized public JDFQueue copyToResponse(final JDFResponse resp, final JDFQueueFilter filter, final JDFQueue priorQueue)
 	{
 		if (resp == null)
 		{
@@ -822,7 +794,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * return the number of entries
-	 * 
+	 *
 	 * @param qeStatus the queueentry status of the enries to count, if null, do not filter
 	 * @return the number of active processors
 	 */
@@ -860,11 +832,12 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * return true if the queue has less than entries elements
+	 *
 	 * @param qeStatus the status of the JDFQueueEntry to count
 	 * @param entries the number of entries after which we stop counting
 	 * @return true if the queue has < entries entries with a given QE Status
 	 */
-	public boolean hasFewerEntries(EnumQueueEntryStatus qeStatus, int entries)
+	public boolean hasFewerEntries(final EnumQueueEntryStatus qeStatus, final int entries)
 	{
 		int n = 0;
 		JDFQueueEntry qe = getFirstChildElement(JDFQueueEntry.class);
@@ -884,7 +857,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * make this a smart queue when modifying queueentries
-	 * 
+	 *
 	 * @param _automated automate if true
 	 */
 	public void setAutomated(final boolean _automated)
@@ -898,7 +871,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * is this a smart queue when modifying queueentries
-	 * 
+	 *
 	 * @return true if this is automated
 	 */
 	public boolean isAutomated()
@@ -908,7 +881,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * get the queuesize attribute or if it does not exist, count queuentry elements
-	 * 
+	 *
 	 * @return the size of the queue
 	 */
 	@Override
@@ -923,7 +896,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * set the status of this queue based on the status values of the queueentries
-	 * 
+	 *
 	 * @return the newly set Status, null if not modified
 	 */
 	public synchronized EnumQueueStatus setStatusFromEntries()
@@ -988,7 +961,7 @@ public class JDFQueue extends JDFAutoQueue
 	// /////////////////////////////////////////////////////////////////////
 	/**
 	 * sorts all child elements by alphabet
-	 * 
+	 *
 	 */
 	@Override
 	public void sortChildren()
@@ -1009,7 +982,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * set the maximum number of completed entries to keep also call cleanup if we are automated
-	 * 
+	 *
 	 * @param _maxCompletedEntries the maxCompletedEntries to set
 	 */
 	public void setMaxCompletedEntries(final int _maxCompletedEntries)
@@ -1081,7 +1054,7 @@ public class JDFQueue extends JDFAutoQueue
 	/**
 	 * @param qe
 	 */
-	public void sortChild(JDFQueueEntry qe)
+	public void sortChild(final JDFQueueEntry qe)
 	{
 		if (queueSorter == null)
 			queueSorter = new QueueEntryComparator();
