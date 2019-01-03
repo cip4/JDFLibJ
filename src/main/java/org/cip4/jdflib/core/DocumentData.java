@@ -51,7 +51,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
  */
 class DocumentData
 {
-	private static final String JDFLIB = "org.cip4.JDFLIB.";
+	private static final String JDFLIB = "org.cip4.jdflib.";
 	private static final String LAYOUT = JDFLIB + "resource.process.JDFLayout";
 	private static final String SEPARATION_LIST = JDFLIB + "core.JDFSeparationList";
 	private static final String JDF_COMMENT = JDFLIB + "core.JDFComment";
