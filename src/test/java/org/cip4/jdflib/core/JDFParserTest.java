@@ -62,6 +62,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.util.FileUtil;
 import org.junit.Test;
 
@@ -201,6 +202,32 @@ public class JDFParserTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * check simple parsestring
+	 *
+	 */
+	@Test
+	public void testParseStringPrintTalk()
+	{
+		final JDFParser parser = new JDFParser();
+		final JDFDoc d = parser.parseString("<PrintTalk/>");
+		final KElement pt = d.getRoot();
+		assertTrue(pt instanceof JDFElement);
+	}
+
+	/**
+	 * check simple parsestring
+	 *
+	 */
+	@Test
+	public void testParseStringPrintTalkDeep()
+	{
+		final JDFParser parser = new JDFParser();
+		final JDFDoc d = parser.parseString("<PrintTalk><Request><XJDF><Contact/></XJDF></Request></PrintTalk>");
+		final KElement pt = d.getRoot();
+		assertNotNull(pt.getElementByClass(JDFContact.class, 0, true));
+	}
+
+	/**
 	 * check simple parsestring for invalid xml
 	 *
 	 */
@@ -234,7 +261,7 @@ public class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check simple parseStream
-	 * 
+	 *
 	 * @throws IOException
 	 *
 	 */

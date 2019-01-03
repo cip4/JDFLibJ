@@ -3,70 +3,38 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *  
- * 
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ *
+ *
  */
 /*
  * Created on July 3, 2003
@@ -99,6 +67,7 @@ public class JDFParser extends XMLParser
 {
 	/**
 	 * set bKElementOnly=true if you want the output ojects all to be instatnces of KElement rather than instantiated JDF instances
+	 *
 	 * @deprecated use XMLParse to parse pure XMLDoc instances
 	 */
 	@Deprecated
@@ -135,7 +104,7 @@ public class JDFParser extends XMLParser
 
 	/**
 	 * (non-Javadoc) reset all internal variables to a reasonable default
-	 * 
+	 *
 	 * @see org.apache.xerces.parsers.AbstractDOMParser#reset()
 	 */
 	@Override
@@ -147,7 +116,7 @@ public class JDFParser extends XMLParser
 
 	/**
 	 * parseFile - parse a file specified by strFile
-	 * 
+	 *
 	 * @param strFile link to the document to parse, may be either a file path or a url
 	 * @return JDFDoc or null if File not found
 	 */
@@ -169,7 +138,7 @@ public class JDFParser extends XMLParser
 
 	/**
 	 * parseFile - parse a file specified by strFile
-	 * 
+	 *
 	 * @param strFile link to the document to parse
 	 * @param schemaLocation link to the schema to use, null if no validation required
 	 * @return JDFDoc or null if File not found default: parseFile(strFile,null)
@@ -184,7 +153,7 @@ public class JDFParser extends XMLParser
 
 	/**
 	 * parseString - parse a string specified by stringInput
-	 * 
+	 *
 	 * @param stringInput string to parse
 	 * @return JDFDoc or null if parse failed default: parseString(stringInput)
 	 */
@@ -196,7 +165,7 @@ public class JDFParser extends XMLParser
 
 	/**
 	 * parseStream - parse a stream specified by inStream
-	 * 
+	 *
 	 * @param inStream stream to parse
 	 * @return JDFDoc or null if parse failed default: parseStream(inStream)
 	 */
@@ -208,21 +177,22 @@ public class JDFParser extends XMLParser
 
 	/**
 	 * This is the sophisticated parse function, where validation, error handlers et al. can be set
-	 * 
+	 *
 	 * @param inSource
 	 * @param schemaLocation schema location, null if no validation required
 	 * @param documentClassName
 	 * @param errorHandler
 	 * @param bEraseEmpty if true empty nodes are erased after parsing
 	 * @param bDoNamespaces if false a second parse is done, where namespaces are ignored
-	 * 
+	 *
 	 * @return JDFDoc
-	 * 
-	 * default: parseInputSource(inSource, null, DocumentJDFImpl.class.getName(), null, true, true);
+	 *
+	 *         default: parseInputSource(inSource, null, DocumentJDFImpl.class.getName(), null, true, true);
 	 * @deprecated set the parser members instead
 	 */
 	@Deprecated
-	public JDFDoc parseInputSource(final InputSource inSource, final String schemaLocation, final String documentClassName, final ErrorHandler errorHandler, final boolean bEraseEmpty, final boolean bDoNamespaces)
+	public JDFDoc parseInputSource(final InputSource inSource, final String schemaLocation, final String documentClassName, final ErrorHandler errorHandler, final boolean bEraseEmpty,
+			final boolean bDoNamespaces)
 	{
 		JDFDoc doc = null;
 		if (errorHandler instanceof XMLErrorHandler)
@@ -249,7 +219,7 @@ public class JDFParser extends XMLParser
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public String getDocumentClass()
@@ -277,7 +247,7 @@ public class JDFParser extends XMLParser
 	@Override
 	protected XMLDoc getXMLDoc()
 	{
-		XMLDoc doc = new JDFDoc();
+		final XMLDoc doc = new JDFDoc();
 		return doc;
 	}
 
@@ -319,8 +289,7 @@ public class JDFParser extends XMLParser
 	}
 
 	/**
-	 * @see org.apache.xerces.parsers.AbstractDOMParser#startDocument(org.apache.xerces.xni.XMLLocator, java.lang.String,
-	 * org.apache.xerces.xni.NamespaceContext, org.apache.xerces.xni.Augmentations)
+	 * @see org.apache.xerces.parsers.AbstractDOMParser#startDocument(org.apache.xerces.xni.XMLLocator, java.lang.String, org.apache.xerces.xni.NamespaceContext, org.apache.xerces.xni.Augmentations)
 	 */
 	@Override
 	public void startDocument(final XMLLocator locator, final String encoding, final NamespaceContext namespaceContext, final Augmentations augs) throws XNIException
@@ -334,22 +303,18 @@ public class JDFParser extends XMLParser
 	@Override
 	protected void setDocumentProperties(final KElement root, final DocumentXMLImpl memberDocument, final String namespaceURI)
 	{
-		boolean isXJDF = XJDFConstants.XJDF.equals(root.getLocalName()) || JDFElement.getSchemaURL(2, 0).equals(root.getNamespaceURI());
-		boolean bJDFRoot = (root instanceof JDFNode) || (root instanceof JDFJMF);
+		final boolean isXJDF = XJDFConstants.XJDF.equals(root.getLocalName()) || JDFElement.getSchemaURL(2, 0).equals(root.getNamespaceURI());
+		final boolean bJDFRoot = (root instanceof JDFNode) || (root instanceof JDFJMF);
 		if (bJDFRoot && !JDFConstants.JDFNAMESPACE.equals(namespaceURI) && !isXJDF)
 		{
 			root.setAttribute(JDFConstants.XMLNS, JDFConstants.JDFNAMESPACE);
 		}
-		if (!bJDFRoot && (namespaceURI == null || !namespaceURI.toLowerCase().contains(JDFConstants.CIP4ORG)))
-		{
-			((DocumentJDFImpl) memberDocument).bKElementOnly = true;
-		}
 	}
 
 	@Override
-	final protected XMLDoc runParser(InputSource inSource, boolean bEraseEmpty)
+	final protected XMLDoc runParser(final InputSource inSource, final boolean bEraseEmpty)
 	{
-		XMLDoc doc = super.runParser(inSource, bEraseEmpty);
+		final XMLDoc doc = super.runParser(inSource, bEraseEmpty);
 		if (doc != null)
 			((JDFDoc) doc).setInitOnCreate(true);
 		return doc;

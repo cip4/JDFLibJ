@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -73,7 +41,7 @@
  *
  * @author Kai Mattern
  *
- * Copyright (C) 2002 Heidelberger Druckmaschinen AG. All Rights Reserved.
+ *         Copyright (C) 2002 Heidelberger Druckmaschinen AG. All Rights Reserved.
  */
 package org.cip4.jdflib.core;
 
@@ -109,7 +77,7 @@ import org.xml.sax.SAXException;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * 14.01.2009
+ *         14.01.2009
  */
 public class JDFDocTest extends JDFTestCaseBase
 {
@@ -121,7 +89,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	public void testCreateElementNoNS()
 	{
 		final XMLDoc d = new JDFDoc("FOO:TEST");
-		KElement root = d.getRoot();
+		final KElement root = d.getRoot();
 		root.setAttribute("xmlns:FOO", "www.foo.com");
 		final KElement e = (KElement) d.createElement("FOO:bar");
 		assertNull(e.getNamespaceURI());
@@ -189,7 +157,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	{
 		for (int i = 0; i < 10000; i++)
 		{
-			JDFDoc doc = new JDFDoc("JDF");
+			final JDFDoc doc = new JDFDoc("JDF");
 			assertNotNull(doc);
 		}
 	}
@@ -236,11 +204,11 @@ public class JDFDocTest extends JDFTestCaseBase
 		final XMLDoc d1 = new XMLDoc("JDF", null);
 		KElement root = d1.getRoot();
 		assertFalse(root instanceof JDFNode);
-		JDFDoc d = new JDFDoc(d1);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(d1);
+		final JDFNode n = d.getJDFRoot();
 		assertNotNull(n);
 
-		XMLDoc d2 = new XMLDoc(d);
+		final XMLDoc d2 = new XMLDoc(d);
 		root = d2.getRoot();
 		assertTrue(root instanceof JDFNode);
 	}
@@ -312,10 +280,10 @@ public class JDFDocTest extends JDFTestCaseBase
 	public void testRegisterCustomClass()
 	{
 		JDFDoc.registerCustomClass("Foo123", JDFRunList.class.getName());
-		JDFResourcePool resourcePool = new JDFDoc("JDF").getJDFRoot().getCreateResourcePool();
-		KElement e = resourcePool.appendElement("Foo123");
+		final JDFResourcePool resourcePool = new JDFDoc("JDF").getJDFRoot().getCreateResourcePool();
+		final KElement e = resourcePool.appendElement("Foo123");
 		assertTrue(e instanceof JDFRunList);
-		KElement e2 = resourcePool.appendElement("WWW:Foo123", "WWW.com");
+		final KElement e2 = resourcePool.appendElement("WWW:Foo123", "WWW.com");
 		assertFalse(e2 instanceof JDFRunList);
 	}
 
@@ -337,25 +305,24 @@ public class JDFDocTest extends JDFTestCaseBase
 	@Test
 	public void testReparse()
 	{
-		XMLDoc d = new XMLDoc(ElementName.JDF, null);
+		final XMLDoc d = new XMLDoc(ElementName.JDF, null);
 		d.getRoot().appendElement(ElementName.AUDITPOOL);
-		JDFDoc d2 = new JDFDoc(d);
-		KElement root2 = d2.getRoot();
+		final JDFDoc d2 = new JDFDoc(d);
+		final KElement root2 = d2.getRoot();
 		assertEquals(1, root2.numChildElements(ElementName.AUDITPOOL, null));
 		assertTrue(d2.getFirstChild() instanceof JDFNode);
 	}
 
 	/**
 	 *
-	 * test graceful null handling
 	 */
 	@Test
 	public void testJDFElementXJDF()
 	{
-		XMLDoc d = new XMLDoc("PrintTalk", null);
-		d.getRoot().appendElement(XJDFConstants.XJDF);
-		JDFDoc d2 = new JDFDoc(d);
-		assertTrue(d2.getRoot().getElement(XJDFConstants.XJDF) instanceof JDFElement);
+		final XMLDoc d = new XMLDoc("PrintTalk", null);
+		d.getRoot().appendElement("Request").appendElement(XJDFConstants.XJDF);
+		final JDFDoc d2 = new JDFDoc(d);
+		assertTrue(d2.getRoot().getElement("Request").getElement(XJDFConstants.XJDF) instanceof JDFElement);
 	}
 
 	/**
@@ -440,9 +407,9 @@ public class JDFDocTest extends JDFTestCaseBase
 	@Test
 	public void testCreateElement()
 	{
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode root = doc.getJDFRoot();
-		JDFNode e = (JDFNode) doc.createElement("JDF");
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode root = doc.getJDFRoot();
+		final JDFNode e = (JDFNode) doc.createElement("JDF");
 		root.insertBefore(e, null);
 	}
 
@@ -452,8 +419,8 @@ public class JDFDocTest extends JDFTestCaseBase
 	@Test
 	public void testCreateElementNull()
 	{
-		JDFDoc doc = new JDFDoc();
-		JDFNode e = (JDFNode) doc.createElement("JDF");
+		final JDFDoc doc = new JDFDoc();
+		final JDFNode e = (JDFNode) doc.createElement("JDF");
 		doc.insertBefore(e, null);
 	}
 
@@ -463,10 +430,10 @@ public class JDFDocTest extends JDFTestCaseBase
 	@Test
 	public void testSetInitOnCreate()
 	{
-		JDFDoc doc = new JDFDoc();
+		final JDFDoc doc = new JDFDoc();
 		doc.setInitOnCreate(false);
 		doc.setRoot("JDF", null);
-		JDFNode n = doc.getJDFRoot();
+		final JDFNode n = doc.getJDFRoot();
 		assertNull(n.getAuditPool());
 	}
 
@@ -478,10 +445,10 @@ public class JDFDocTest extends JDFTestCaseBase
 	@Test
 	public void testParseDOM() throws SAXException, IOException
 	{
-		DOMParser domParser = new DOMParser();
+		final DOMParser domParser = new DOMParser();
 		domParser.parse(new InputSource(new StringReader("<JDF ID=\"1\"><AuditPool><Created ID=\"1\"/></AuditPool></JDF>")));
 		assertNotNull(domParser.getDocument());
-		JDFDoc d = new JDFDoc(domParser.getDocument());
+		final JDFDoc d = new JDFDoc(domParser.getDocument());
 		assertNotNull(d);
 		assertNotNull(d.getRoot());
 		assertEquals(d.getRoot().getAttribute("ID"), "1");
