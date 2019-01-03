@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -934,15 +934,15 @@ public class FileUtil
 		int i = 1;
 		while (!bOK)
 		{
-			file.setReadable(true);
-			file.setExecutable(true);
-			file.setWritable(true);
+			boolean bMod = file.setReadable(true);
+			bMod = file.setExecutable(true) && bMod;
+			bMod = file.setWritable(true) && bMod;
 
 			final boolean bInterupt = !ThreadUtil.sleep(i * 42);
 			bOK = file.delete();
 			if (bInterupt || i++ > loops)
 			{
-				LogFactory.getLog(FileUtil.class).warn("cannot force delete of file: " + file.getAbsolutePath());
+				LogFactory.getLog(FileUtil.class).warn("cannot force delete of file: " + file.getAbsolutePath() + " modifications=" + bMod);
 				break;
 			}
 		}
