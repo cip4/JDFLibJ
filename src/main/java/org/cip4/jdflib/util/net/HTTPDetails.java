@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -63,6 +63,23 @@ public class HTTPDetails
 		bKeepAlive = true;
 		redirect = 0;
 		bearerToken = null;
+		connectionTimeout = UrlUtil.getConnectionTimeout();
+	}
+
+	/**
+	 * @return the connectionTimeout
+	 */
+	public int getConnectionTimeout()
+	{
+		return connectionTimeout;
+	}
+
+	/**
+	 * @param connectionTimeout the connectionTimeout to set
+	 */
+	public void setConnectionTimeout(final int connectionTimeout)
+	{
+		this.connectionTimeout = connectionTimeout;
 	}
 
 	/**
@@ -100,6 +117,7 @@ public class HTTPDetails
 	}
 
 	private int redirect;
+	private int connectionTimeout;
 
 	/**
 	 * Getter for chunkSize attribute.
@@ -164,6 +182,7 @@ public class HTTPDetails
 			{
 				urlCon.setRequestProperty(UrlUtil.AUTHORIZATION, BEARER + " " + bearerToken);
 			}
+			urlCon.setConnectTimeout(getConnectionTimeout());
 
 		}
 		else
@@ -194,7 +213,7 @@ public class HTTPDetails
 	@Override
 	public String toString()
 	{
-		return "HTTPDetails [chunkSize=" + chunkSize + ", bKeepAlive=" + bKeepAlive + ", bearerToken=" + bearerToken + ", redirect=" + redirect + "]";
+		return "HTTPDetails [chunkSize=" + chunkSize + ", bKeepAlive=" + bKeepAlive + ", bearerToken=" + bearerToken + ", redirect=" + redirect + ", connectionTimeout=" + connectionTimeout + "]";
 	}
 
 }

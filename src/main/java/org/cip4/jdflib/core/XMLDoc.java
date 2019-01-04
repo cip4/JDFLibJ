@@ -1494,6 +1494,22 @@ public class XMLDoc implements Cloneable
 	 */
 	public XMLDoc write2URL(final String strURL, final String strContentType)
 	{
+		return write2URL(strURL, strContentType, null);
+	}
+
+	/**
+	 * This method sends the contents of this XMLDoc to the URL <code>strURL</code> and receives the response in the returned XMLDoc.
+	 *
+	 * @param strURL the URL to write to
+	 * @param strContentType the content type to write to
+	 *
+	 * @return docResponse the response received from URL. if url is a file, an empty doc is returned
+	 *
+	 *         A Null document if no response was received, or an exception occurred
+	 */
+
+	public XMLDoc write2URL(final String strURL, final String strContentType, final HTTPDetails details)
+	{
 		XMLDoc docResponse = null;
 		final URL url = UrlUtil.stringToURL(strURL);
 		final String protocol = url.getProtocol(); // file; ftp; http
@@ -1504,7 +1520,7 @@ public class XMLDoc implements Cloneable
 		}
 		else
 		{
-			final UrlPart p = write2HttpURL(url, strContentType, null);
+			final UrlPart p = write2HttpURL(url, strContentType, details);
 			final InputStream inStream = p == null ? null : p.getResponseStream();
 			if (inStream != null)
 			{

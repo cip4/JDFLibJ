@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -62,6 +62,18 @@ public class HTTPDetailsTest
 		assertNotNull(redirect);
 		assertEquals(1, redirect.getRedirect());
 		assertEquals(2, HTTPDetails.getRedirect(redirect).getRedirect());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testTimeOut()
+	{
+		final HTTPDetails redirect = new HTTPDetails();
+		assertEquals(UrlUtil.getConnectionTimeout(), redirect.getConnectionTimeout());
+		redirect.setConnectionTimeout(122);
+		assertEquals(122, redirect.getConnectionTimeout());
 	}
 
 	/**

@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -118,8 +86,7 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**
-	 * constructor from a document
-	 * note that the constructor will create a copy of the document in case it is not a typesafe DocumentJDFImpl
+	 * constructor from a document note that the constructor will create a copy of the document in case it is not a typesafe DocumentJDFImpl
 	 *
 	 * @param document
 	 */
@@ -134,8 +101,7 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**
-	 * constructor
-	 * note that the constructor will create a copy of the document in case it is not a typesafe DocumentJDFImpl
+	 * constructor note that the constructor will create a copy of the document in case it is not a typesafe DocumentJDFImpl
 	 *
 	 * @param document
 	 */
@@ -143,7 +109,7 @@ public class JDFDoc extends XMLDoc
 	{
 		super(document);
 		// we have to reparse type safe
-		Document memberDoc = document == null ? null : document.getMemberDocument();
+		final Document memberDoc = document == null ? null : document.getMemberDocument();
 		if ((memberDoc instanceof DocumentXMLImpl) && !(memberDoc instanceof DocumentJDFImpl))
 		{
 			reparse(memberDoc);
@@ -152,8 +118,8 @@ public class JDFDoc extends XMLDoc
 
 	protected void reparse(final Document document)
 	{
-		JDFDoc doc = createRoot(document);
-		KElement root = doc.getRoot();
+		final JDFDoc doc = createRoot(document);
+		final KElement root = doc.getRoot();
 		doc.setInitOnCreate(false);
 		doc.copyMeta(this);
 		if (root != null)
@@ -162,7 +128,7 @@ public class JDFDoc extends XMLDoc
 			root.removeAttributes(null);
 			root.removeXMLComment(0);
 			root.copyInto((KElement) document.getDocumentElement(), false);
-			Node nC = doc.getFirstChild();
+			final Node nC = doc.getFirstChild();
 			if (!(nC instanceof Element))
 			{
 				doc.removeChild(nC);
@@ -174,7 +140,7 @@ public class JDFDoc extends XMLDoc
 	@Override
 	protected JDFDoc createRoot(final Document document)
 	{
-		Element documentElement = document.getDocumentElement();
+		final Element documentElement = document.getDocumentElement();
 		return documentElement == null ? new JDFDoc() : new JDFDoc(documentElement.getNodeName());
 	}
 
@@ -206,7 +172,7 @@ public class JDFDoc extends XMLDoc
 	 * @param strDocType - ElementName.JDF, ElementName.JMF, "Config" ...
 	 * @param version
 	 */
-	public JDFDoc(final String strDocType, EnumVersion version)
+	public JDFDoc(final String strDocType, final EnumVersion version)
 	{
 		super(strDocType, JDFElement.getSchemaURL(version));
 		((DocumentJDFImpl) m_doc).bInitOnCreate = true;
@@ -427,12 +393,12 @@ public class JDFDoc extends XMLDoc
 	 * @param is
 	 * @return the parsed JDFDoc
 	 */
-	public static JDFDoc parseStream(InputStream is)
+	public static JDFDoc parseStream(final InputStream is)
 	{
 		if (is == null)
 			return null;
 		final JDFParser p = JDFParserFactory.getFactory().get();
-		JDFDoc doc = p.parseStream(is);
+		final JDFDoc doc = p.parseStream(is);
 		JDFParserFactory.getFactory().push(p);
 		return doc;
 	}
@@ -537,14 +503,27 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**
-	 * This method sends the contents of this JDFDoc to the URL <code>strURL</code> and receives the response in the returned JDFDoc. the content type is
-	 * automagically set to either text/xml for undefined xml or to application/vnd.cip4-jdf+xml or application/vnd.cip4-jmf+xml
+	 * This method sends the contents of this JDFDoc to the URL <code>strURL</code> and receives the response in the returned JDFDoc. the content type is automagically set to either text/xml for
+	 * undefined xml or to application/vnd.cip4-jdf+xml or application/vnd.cip4-jmf+xml
 	 *
 	 * @param strURL the URL to write to
 	 *
 	 * @return docResponse the response received from URL. A Null document if no response was received, or an exception occurred
 	 */
 	public JDFDoc write2URL(final String strURL)
+	{
+		return write2URL(strURL, (HTTPDetails) null);
+	}
+
+	/**
+	 * This method sends the contents of this JDFDoc to the URL <code>strURL</code> and receives the response in the returned JDFDoc. the content type is automagically set to either text/xml for
+	 * undefined xml or to application/vnd.cip4-jdf+xml or application/vnd.cip4-jmf+xml
+	 *
+	 * @param strURL the URL to write to
+	 *
+	 * @return docResponse the response received from URL. A Null document if no response was received, or an exception occurred
+	 */
+	public JDFDoc write2URL(final String strURL, final HTTPDetails details)
 	{
 		final KElement e = getRoot();
 		if (e == null)
@@ -557,7 +536,8 @@ public class JDFDoc extends XMLDoc
 		return d == null ? null : new JDFDoc(d.getMemberDocument());
 	}
 
-	/**get the correct parser for this type of document
+	/**
+	 * get the correct parser for this type of document
 	 *
 	 * @return
 	 */
@@ -572,7 +552,7 @@ public class JDFDoc extends XMLDoc
 	 * @param xmlParser
 	 */
 	@Override
-	protected void pushParser(XMLParser xmlParser)
+	protected void pushParser(final XMLParser xmlParser)
 	{
 		JDFParserFactory.getFactory().push(xmlParser);
 	}
@@ -632,9 +612,9 @@ public class JDFDoc extends XMLDoc
 	}
 
 	@Override
-	public Element createElement(String elementName)
+	public Element createElement(final String elementName)
 	{
-		Element elem = super.createElement(elementName);
+		final Element elem = super.createElement(elementName);
 		if (elem instanceof KElement)
 		{
 			if (((DocumentJDFImpl) m_doc).bInitOnCreate)
@@ -719,19 +699,17 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**
-	 * if true (the default) initialize element when they are created,
-	 * else don't call init() when an element is initially created
+	 * if true (the default) initialize element when they are created, else don't call init() when an element is initially created
 	 *
 	 * @param bInitOnCreate
 	 */
-	public void setInitOnCreate(boolean bInitOnCreate)
+	public void setInitOnCreate(final boolean bInitOnCreate)
 	{
 		((DocumentJDFImpl) m_doc).bInitOnCreate = bInitOnCreate;
 	}
 
 	/**
-	 * if true (the default) initialize element when they are created,
-	 * else don't call init() when an element is initially created
+	 * if true (the default) initialize element when they are created, else don't call init() when an element is initially created
 	 *
 	 * @return bInitOnCreate
 	 */
@@ -755,9 +733,9 @@ public class JDFDoc extends XMLDoc
 	 * @see org.cip4.jdflib.core.XMLDoc#setXPathValues(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	public void setXPathValues(JDFAttributeMap valueMap)
+	public void setXPathValues(final JDFAttributeMap valueMap)
 	{
-		boolean bOld = getInitOnCreate();
+		final boolean bOld = getInitOnCreate();
 		setInitOnCreate(false);
 		super.setXPathValues(valueMap);
 		setInitOnCreate(bOld);

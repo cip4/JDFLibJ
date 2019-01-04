@@ -135,6 +135,49 @@ public class JDFMessageTest extends TestCase
 	 *
 	 */
 	@Test
+	public void testAppendGangInfoQu()
+	{
+		final JDFQuery sig = (JDFQuery) jmf.appendMessageElement(EnumFamily.Query, EnumType.GangStatus);
+		assertNotNull(sig.appendGangQuFilter());
+		try
+		{
+			sig.appendValidElement(ElementName.GANGINFO, null);
+			fail("want exception");
+		}
+		catch (final JDFException x)
+		{
+			//
+		}
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAppendGangInfo()
+	{
+		final JDFResponse sig = (JDFResponse) jmf.appendMessageElement(EnumFamily.Response, EnumType.GangStatus);
+		sig.appendGangInfo();
+		sig.appendGangInfo();
+		try
+		{
+			assertNotNull(sig.appendGangQuFilter());
+			sig.appendValidElement(ElementName.GANGINFO, null);
+			fail("want exception");
+		}
+		catch (final JDFException x)
+		{
+			//
+		}
+		assertNotNull(sig.getGangInfo(1));
+		assertNotNull(sig.getGangInfo(-1));
+		assertNull(sig.getGangInfo(5));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetValidTypeVector()
 	{
 		final JDFMessage sig = jmf.appendMessageElement(EnumFamily.Signal, null);

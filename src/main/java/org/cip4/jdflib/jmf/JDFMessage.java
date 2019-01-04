@@ -555,8 +555,6 @@ public class JDFMessage extends JDFAutoMessage
 		public static final EnumType WakeUp = new EnumType("WakeUp");
 	}
 
-	// **************************************** Methods
-	// *********************************************
 	/**
 	 * toString
 	 *
@@ -756,8 +754,7 @@ public class JDFMessage extends JDFAutoMessage
 	public boolean isValidMessageElement(final String elementName, final int iSkip)
 	{
 		// this is not a standard jdf element, but rather an extension
-		// we assume that anyone calling the typesafe methods knows what he is
-		// doing
+		// we assume that anyone calling the typesafe methods knows what he is doing
 		if (!isInJDFNameSpaceStatic(this))
 		{
 			return true;
@@ -1275,6 +1272,24 @@ public class JDFMessage extends JDFAutoMessage
 				validList.add(EnumType.KnownControllers);
 			}
 		}
+		else if (elementName.equals(ElementName.GANGINFO))
+		{
+			validList.add(EnumType.GangStatus);
+		}
+		else if (elementName.equals(ElementName.GANGQUFILTER))
+		{
+			if (iSkip == 0)
+			{
+				validList.add(EnumType.GangStatus);
+			}
+		}
+		else if (elementName.equals(ElementName.GANGCMDFILTER))
+		{
+			if (iSkip == 0)
+			{
+				validList.add(EnumType.ForceGang);
+			}
+		}
 
 		else if (EnumFamily.getEnum(elementName) != null)
 		{
@@ -1373,10 +1388,10 @@ public class JDFMessage extends JDFAutoMessage
 	 *
 	 * @returnString comma separated list of enumerated string values
 	 */
-	private static String[] responseTypeObjString = { ElementName.DEVICELIST, ElementName.DEVICEINFO, ElementName.FLUSHQUEUEINFO, ElementName.FLUSHEDRESOURCES, ElementName.IDINFO,
-			ElementName.JDFCONTROLLER, ElementName.JDFSERVICE, ElementName.JOBPHASE, ElementName.MESSAGESERVICE, ElementName.NODEINFORESP, ElementName.NOTIFICATIONDEF, ElementName.OCCUPATION,
-			ElementName.QUEUE, ElementName.QUEUEENTRY, ElementName.RESOURCEINFO, ElementName.SUBSCRIPTIONINFO, ElementName.SUBMISSIONMETHODS, ElementName.TRACKRESULT, ElementName.COMMAND,
-			ElementName.QUERY, ElementName.ACKNOWLEDGE, ElementName.RESPONSE, ElementName.SIGNAL, ElementName.REGISTRATION };
+	private static String[] responseTypeObjString = { ElementName.DEVICELIST, ElementName.DEVICEINFO, ElementName.FLUSHQUEUEINFO, ElementName.FLUSHEDRESOURCES, ElementName.GANGINFO,
+			ElementName.IDINFO, ElementName.JDFCONTROLLER, ElementName.JDFSERVICE, ElementName.JOBPHASE, ElementName.MESSAGESERVICE, ElementName.NODEINFORESP, ElementName.NOTIFICATIONDEF,
+			ElementName.OCCUPATION, ElementName.QUEUE, ElementName.QUEUEENTRY, ElementName.RESOURCEINFO, ElementName.SUBSCRIPTIONINFO, ElementName.SUBMISSIONMETHODS, ElementName.TRACKRESULT,
+			ElementName.COMMAND, ElementName.QUERY, ElementName.ACKNOWLEDGE, ElementName.RESPONSE, ElementName.SIGNAL, ElementName.REGISTRATION };
 
 	private static String[] signalTypeObjString = null;
 	private static String[] elemArray = null;
@@ -1397,7 +1412,7 @@ public class JDFMessage extends JDFAutoMessage
 			final int iSkip = numChildElements(elementName, nameSpaceURI);
 			if (!isValidMessageElement(elementName, iSkip))
 			{
-				throw new JDFException("AppendValidElement: illegal element :" + elementName);
+				throw new JDFException("AppendValidElement: illegal element: " + elementName);
 			}
 		}
 		return appendElement(elementName, nameSpaceURI);
@@ -1688,10 +1703,6 @@ public class JDFMessage extends JDFAutoMessage
 		return (JDFEmployeeDef) getValidElement(ElementName.EMPLOYEEDEF, null, iSkip);
 	}
 
-	// ////////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////////
-
 	/**
 	 * get Element <code>JDFController</code>, create if it doesn't exist
 	 *
@@ -1703,8 +1714,6 @@ public class JDFMessage extends JDFAutoMessage
 		return (JDFJDFController) getCreateValidElement(ElementName.JDFCONTROLLER, null, iSkip);
 	}
 
-	// ///////////////////////////////////////////////////////////////////
-
 	/**
 	 * Append element <code>JDFController</code>
 	 *
@@ -1715,7 +1724,6 @@ public class JDFMessage extends JDFAutoMessage
 		return (JDFJDFController) appendValidElement(ElementName.JDFCONTROLLER, null);
 	}
 
-	// ///////////////////////////////////////////////////////////////////
 	/**
 	 * get iSkip'th JDFController element
 	 *
@@ -1742,8 +1750,6 @@ public class JDFMessage extends JDFAutoMessage
 		return (JDFJDFService) getCreateValidElement(ElementName.JDFSERVICE, null, iSkip);
 	}
 
-	// ///////////////////////////////////////////////////////////////////
-
 	/**
 	 * Append element <code>JDFService</code>
 	 *
@@ -1754,7 +1760,6 @@ public class JDFMessage extends JDFAutoMessage
 		return (JDFJDFService) appendValidElement(ElementName.JDFSERVICE, null);
 	}
 
-	// ///////////////////////////////////////////////////////////////////
 	/**
 	 * get iSkip'th <code>JDFService</code> element
 	 *
@@ -1766,9 +1771,37 @@ public class JDFMessage extends JDFAutoMessage
 		return (JDFJDFService) getValidElement(ElementName.JDFSERVICE, null, iSkip);
 	}
 
-	// ////////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////////
+	/**
+	 * get iSkip'th element <code>GangInfo</code>, create if it doesn't exist
+	 *
+	 * @param iSkip number of elements to skip
+	 * @return JDFGangInfo: the element
+	 */
+	public JDFGangInfo getCreateGangInfo(final int iSkip)
+	{
+		return (JDFGangInfo) getCreateValidElement(ElementName.GANGINFO, null, iSkip);
+	}
+
+	/**
+	 * Append element <code>GangInfo</code>
+	 *
+	 * @return JDFGangInfo the element
+	 */
+	public JDFGangInfo appendGangInfo()
+	{
+		return (JDFGangInfo) appendValidElement(ElementName.GANGINFO, null);
+	}
+
+	/**
+	 * get iSkip'th <code>GangInfo</code> element
+	 *
+	 * @param iSkip number of elements to skip
+	 * @return JDFGangInfo: the element
+	 */
+	public JDFGangInfo getGangInfo(final int iSkip)
+	{
+		return (JDFGangInfo) getValidElement(ElementName.GANGINFO, null, iSkip);
+	}
 
 	/**
 	 * get Element <code>JobPhase</code>, create if it doesn't exist
@@ -2739,6 +2772,48 @@ public class JDFMessage extends JDFAutoMessage
 	public JDFIDInfo getIDInfo(final int iSkip)
 	{
 		return (JDFIDInfo) getValidElement(ElementName.IDINFO, null, iSkip);
+	}
+
+	/**
+	 * append element <code>IDInfo</code> JDFIDInfo: the element
+	 *
+	 * @return
+	 */
+	public JDFGangQuFilter appendGangQuFilter()
+	{
+		return (JDFGangQuFilter) appendValidElement(ElementName.GANGQUFILTER, null);
+	}
+
+	/**
+	 * get iSkip'th element <code>IDInfo</code>
+	 *
+	 * @param iSkip number of elements to skip JDFIDInfo: the element
+	 * @return
+	 */
+	public JDFGangQuFilter getJDFGangQuFilter(final int iSkip)
+	{
+		return (JDFGangQuFilter) getValidElement(ElementName.GANGQUFILTER, null, iSkip);
+	}
+
+	/**
+	 * append element <code>IDInfo</code> JDFIDInfo: the element
+	 *
+	 * @return
+	 */
+	public JDFGangCmdFilter appendGangCmdFilter()
+	{
+		return (JDFGangCmdFilter) appendValidElement(ElementName.GANGCMDFILTER, null);
+	}
+
+	/**
+	 * get iSkip'th element <code>IDInfo</code>
+	 *
+	 * @param iSkip number of elements to skip JDFIDInfo: the element
+	 * @return
+	 */
+	public JDFGangCmdFilter getJDFGangCmdFilter(final int iSkip)
+	{
+		return (JDFGangCmdFilter) getValidElement(ElementName.GANGCMDFILTER, null, iSkip);
 	}
 
 	/**
