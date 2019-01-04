@@ -1362,7 +1362,7 @@ public class JDFMessage extends JDFAutoMessage
 	 * @returnString comma separated list of enumerated string values
 	 */
 	private static String[] commandTypeObjString = { ElementName.AUTHENTICATIONCMDPARAMS, ElementName.ABORTQUEUEENTRYPARAMS, ElementName.HOLDQUEUEENTRYPARAMS, ElementName.RESUMEQUEUEENTRYPARAMS,
-			ElementName.REMOVEQUEUEENTRYPARAMS, ElementName.FLUSHQUEUEPARAMS, ElementName.FLUSHRESOURCEPARAMS, ElementName.MODIFYNODECMDPARAMS, ElementName.NEWJDFCMDPARAMS,
+			ElementName.REMOVEQUEUEENTRYPARAMS, ElementName.FLUSHQUEUEPARAMS, ElementName.FLUSHRESOURCEPARAMS, ElementName.GANGCMDFILTER, ElementName.MODIFYNODECMDPARAMS, ElementName.NEWJDFCMDPARAMS,
 			ElementName.NODEINFOCMDPARAMS, ElementName.PIPEPARAMS, ElementName.QUEUEENTRYDEF, ElementName.QUEUEENTRYPRIPARAMS, ElementName.QUEUEENTRYPOSPARAMS, ElementName.QUEUEFILTER,
 			ElementName.QUEUESUBMISSIONPARAMS, ElementName.REQUESTQUEUEENTRYPARAMS, ElementName.RESOURCECMDPARAMS, ElementName.RESOURCEPULLPARAMS, ElementName.RESUBMISSIONPARAMS,
 			ElementName.RETURNQUEUEENTRYPARAMS, ElementName.SHUTDOWNCMDPARAMS, ElementName.STOPPERSCHPARAMS, ElementName.UPDATEJDFCMDPARAMS, ElementName.WAKEUPCMDPARAMS };
@@ -1379,9 +1379,9 @@ public class JDFMessage extends JDFAutoMessage
 	 *
 	 * @returnString comma separated list of enumerated string values
 	 */
-	private static String[] queryTypeObjString = { ElementName.AUTHENTICATIONQUPARAMS, ElementName.DEVICEFILTER, ElementName.EMPLOYEEDEF, ElementName.KNOWNMSGQUPARAMS, ElementName.MSGFILTER,
-			ElementName.MODIFYNODECMDPARAMS, ElementName.NEWJDFQUPARAMS, ElementName.NODEINFOQUPARAMS, ElementName.NOTIFICATIONFILTER, ElementName.QUEUEENTRYDEFLIST, ElementName.QUEUEFILTER,
-			ElementName.RESOURCEQUPARAMS, ElementName.STATUSQUPARAMS, ElementName.SUBSCRIPTIONFILTER, ElementName.TRACKFILTER, ElementName.UPDATEJDFCMDPARAMS };
+	private static String[] queryTypeObjString = { ElementName.AUTHENTICATIONQUPARAMS, ElementName.DEVICEFILTER, ElementName.EMPLOYEEDEF, ElementName.GANGQUFILTER, ElementName.KNOWNMSGQUPARAMS,
+			ElementName.MSGFILTER, ElementName.MODIFYNODECMDPARAMS, ElementName.NEWJDFQUPARAMS, ElementName.NODEINFOQUPARAMS, ElementName.NOTIFICATIONFILTER, ElementName.QUEUEENTRYDEFLIST,
+			ElementName.QUEUEFILTER, ElementName.RESOURCEQUPARAMS, ElementName.STATUSQUPARAMS, ElementName.SUBSCRIPTIONFILTER, ElementName.TRACKFILTER, ElementName.UPDATEJDFCMDPARAMS };
 
 	/**
 	 * Enumeration strings for list of ResponseTypeObj
