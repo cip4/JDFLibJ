@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Vector;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -788,7 +787,7 @@ public class JDFMessage extends JDFAutoMessage
 			return false;
 		}
 
-		final Vector<EnumType> validList = getValidTypeVector(elementName, iSkip);
+		final Set<EnumType> validList = getValidTypeVector(elementName, iSkip);
 		return validList.contains(typ);
 	}
 
@@ -800,9 +799,9 @@ public class JDFMessage extends JDFAutoMessage
 	 * @return vector of valid EnumTypes; empty if all are invalid
 	 * @default getValidTypeVector(elementName, 0)
 	 */
-	private Vector<EnumType> getValidTypeVector(final String elementName, final int iSkip)
+	Set<EnumType> getValidTypeVector(final String elementName, final int iSkip)
 	{
-		final Vector<EnumType> validList = new Vector<>();
+		final Set<EnumType> validList = new HashSet<>();
 
 		// Commands
 		if (elementName.equals(ElementName.FLUSHQUEUEPARAMS))
@@ -810,7 +809,7 @@ public class JDFMessage extends JDFAutoMessage
 			if (iSkip == 0)
 			{ // validation for cardinality '?' or '-', when no more than 1
 				// element are allowed
-				validList.addElement(EnumType.FlushQueue);
+				validList.add(EnumType.FlushQueue);
 			}
 
 		}
@@ -819,7 +818,7 @@ public class JDFMessage extends JDFAutoMessage
 			if (iSkip == 0)
 			{ // validation for cardinality '?' or '-', when no more than 1
 				// element are allowed
-				validList.addElement(EnumType.FlushQueue);
+				validList.add(EnumType.FlushQueue);
 			}
 
 		}
@@ -827,7 +826,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.FlushResources);
+				validList.add(EnumType.FlushResources);
 			}
 
 		}
@@ -835,7 +834,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.NewJDF);
+				validList.add(EnumType.NewJDF);
 			}
 
 		}
@@ -843,7 +842,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.NodeInfo);
+				validList.add(EnumType.NodeInfo);
 			}
 
 		}
@@ -851,10 +850,10 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.PipeClose);
-				validList.addElement(EnumType.PipePush);
-				validList.addElement(EnumType.PipePull);
-				validList.addElement(EnumType.PipePause);
+				validList.add(EnumType.PipeClose);
+				validList.add(EnumType.PipePush);
+				validList.add(EnumType.PipePull);
+				validList.add(EnumType.PipePause);
 			}
 
 		}
@@ -862,11 +861,11 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.AbortQueueEntry);
-				validList.addElement(EnumType.HoldQueueEntry);
-				validList.addElement(EnumType.RemoveQueueEntry);
-				validList.addElement(EnumType.ResumeQueueEntry);
-				validList.addElement(EnumType.SuspendQueueEntry);
+				validList.add(EnumType.AbortQueueEntry);
+				validList.add(EnumType.HoldQueueEntry);
+				validList.add(EnumType.RemoveQueueEntry);
+				validList.add(EnumType.ResumeQueueEntry);
+				validList.add(EnumType.SuspendQueueEntry);
 			}
 
 		}
@@ -874,7 +873,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.SetQueueEntryPriority);
+				validList.add(EnumType.SetQueueEntryPriority);
 			}
 
 		}
@@ -882,7 +881,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.SetQueueEntryPosition);
+				validList.add(EnumType.SetQueueEntryPosition);
 			}
 
 		}
@@ -890,25 +889,25 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.AbortQueueEntry);
-				validList.addElement(EnumType.CloseQueue);
-				validList.addElement(EnumType.FlushQueue);
-				validList.addElement(EnumType.FlushResources);
-				validList.addElement(EnumType.HoldQueue);
-				validList.addElement(EnumType.HoldQueueEntry);
-				validList.addElement(EnumType.OpenQueue);
-				validList.addElement(EnumType.RemoveQueueEntry);
-				validList.addElement(EnumType.ResourcePull);
-				validList.addElement(EnumType.ResubmitQueueEntry);
-				validList.addElement(EnumType.ResumeQueue);
-				validList.addElement(EnumType.ResumeQueueEntry);
-				validList.addElement(EnumType.SetQueueEntryPosition);
-				validList.addElement(EnumType.SetQueueEntryPriority);
-				validList.addElement(EnumType.ShutDown);
-				validList.addElement(EnumType.SubmitQueueEntry);
-				validList.addElement(EnumType.SuspendQueueEntry);
+				validList.add(EnumType.AbortQueueEntry);
+				validList.add(EnumType.CloseQueue);
+				validList.add(EnumType.FlushQueue);
+				validList.add(EnumType.FlushResources);
+				validList.add(EnumType.HoldQueue);
+				validList.add(EnumType.HoldQueueEntry);
+				validList.add(EnumType.OpenQueue);
+				validList.add(EnumType.RemoveQueueEntry);
+				validList.add(EnumType.ResourcePull);
+				validList.add(EnumType.ResubmitQueueEntry);
+				validList.add(EnumType.ResumeQueue);
+				validList.add(EnumType.ResumeQueueEntry);
+				validList.add(EnumType.SetQueueEntryPosition);
+				validList.add(EnumType.SetQueueEntryPriority);
+				validList.add(EnumType.ShutDown);
+				validList.add(EnumType.SubmitQueueEntry);
+				validList.add(EnumType.SuspendQueueEntry);
 				// Queries for QueueFilter
-				validList.addElement(EnumType.QueueStatus);
+				validList.add(EnumType.QueueStatus);
 			}
 
 		}
@@ -916,35 +915,35 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.AbortQueueEntry);
+				validList.add(EnumType.AbortQueueEntry);
 			}
 		}
 		else if (elementName.equals(ElementName.HOLDQUEUEENTRYPARAMS))
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.HoldQueueEntry);
+				validList.add(EnumType.HoldQueueEntry);
 			}
 		}
 		else if (elementName.equals(ElementName.RESUMEQUEUEENTRYPARAMS))
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.ResumeQueueEntry);
+				validList.add(EnumType.ResumeQueueEntry);
 			}
 		}
 		else if (elementName.equals(ElementName.REMOVEQUEUEENTRYPARAMS))
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.RemoveQueueEntry);
+				validList.add(EnumType.RemoveQueueEntry);
 			}
 		}
 		else if (elementName.equals(ElementName.QUEUESUBMISSIONPARAMS))
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.SubmitQueueEntry);
+				validList.add(EnumType.SubmitQueueEntry);
 			}
 
 		}
@@ -952,7 +951,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.RequestQueueEntry);
+				validList.add(EnumType.RequestQueueEntry);
 			}
 
 		}
@@ -960,7 +959,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.Resource);
+				validList.add(EnumType.Resource);
 			}
 
 		}
@@ -968,7 +967,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.ResourcePull);
+				validList.add(EnumType.ResourcePull);
 			}
 
 		}
@@ -976,7 +975,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.ResubmitQueueEntry);
+				validList.add(EnumType.ResubmitQueueEntry);
 			}
 
 		}
@@ -984,7 +983,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.ReturnQueueEntry);
+				validList.add(EnumType.ReturnQueueEntry);
 			}
 
 		}
@@ -992,7 +991,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.ShutDown);
+				validList.add(EnumType.ShutDown);
 			}
 
 		}
@@ -1000,7 +999,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.StopPersistentChannel);
+				validList.add(EnumType.StopPersistentChannel);
 			}
 
 		}
@@ -1008,7 +1007,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.WakeUp);
+				validList.add(EnumType.WakeUp);
 			}
 
 			// Queries
@@ -1017,20 +1016,20 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.KnownDevices);
+				validList.add(EnumType.KnownDevices);
 			}
 
 		}
 		else if (elementName.equals(ElementName.EMPLOYEEDEF))
 		{
-			validList.addElement(EnumType.Occupation);
+			validList.add(EnumType.Occupation);
 
 		}
 		else if (elementName.equals(ElementName.KNOWNMSGQUPARAMS))
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.KnownMessages);
+				validList.add(EnumType.KnownMessages);
 			}
 
 		}
@@ -1038,7 +1037,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.RepeatMessages);
+				validList.add(EnumType.RepeatMessages);
 			}
 
 		}
@@ -1046,7 +1045,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.NewJDF);
+				validList.add(EnumType.NewJDF);
 			}
 
 		}
@@ -1054,7 +1053,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.NodeInfo);
+				validList.add(EnumType.NodeInfo);
 			}
 
 		}
@@ -1062,7 +1061,8 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.Events);
+				validList.add(EnumType.Events);
+				validList.add(EnumType.Notification);
 			}
 
 		}
@@ -1070,7 +1070,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.QueueEntryStatus);
+				validList.add(EnumType.QueueEntryStatus);
 			}
 
 		}
@@ -1078,7 +1078,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.Resource);
+				validList.add(EnumType.Resource);
 			}
 
 		}
@@ -1086,7 +1086,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.Status);
+				validList.add(EnumType.Status);
 			}
 
 		}
@@ -1094,7 +1094,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.Track);
+				validList.add(EnumType.Track);
 			}
 
 			// Responses
@@ -1103,7 +1103,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.KnownDevices);
+				validList.add(EnumType.KnownDevices);
 			}
 
 		}
@@ -1111,88 +1111,88 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.ShutDown);
-				validList.addElement(EnumType.WakeUp);
+				validList.add(EnumType.ShutDown);
+				validList.add(EnumType.WakeUp);
 			}
-			validList.addElement(EnumType.Status);
+			validList.add(EnumType.Status);
 
 		}
 		else if (elementName.equals(ElementName.FLUSHEDRESOURCES))
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.FlushResources);
+				validList.add(EnumType.FlushResources);
 			}
 
 		}
 		else if (elementName.equals(ElementName.IDINFO))
 		{
-			validList.addElement(EnumType.NewJDF);
+			validList.add(EnumType.NewJDF);
 
 		}
 		else if (elementName.equals(ElementName.JDFCONTROLLER))
 		{
-			validList.addElement(EnumType.KnownControllers);
+			validList.add(EnumType.KnownControllers);
 
 		}
 		else if (elementName.equals(ElementName.JDFSERVICE))
 		{
-			validList.addElement(EnumType.KnownJDFServices);
+			validList.add(EnumType.KnownJDFServices);
 
 		}
 		else if (elementName.equals(ElementName.JOBPHASE))
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.PipeClose);
-				validList.addElement(EnumType.PipePush);
-				validList.addElement(EnumType.PipePull);
-				validList.addElement(EnumType.PipePause);
+				validList.add(EnumType.PipeClose);
+				validList.add(EnumType.PipePush);
+				validList.add(EnumType.PipePull);
+				validList.add(EnumType.PipePause);
 			}
 
 		}
 		else if (elementName.equals(ElementName.MESSAGESERVICE))
 		{
-			validList.addElement(EnumType.KnownMessages);
+			validList.add(EnumType.KnownMessages);
 
 		}
 		else if (elementName.equals(ElementName.NODEINFORESP))
 		{
-			validList.addElement(EnumType.NodeInfo);
+			validList.add(EnumType.NodeInfo);
 
 		}
 		else if (elementName.equals(ElementName.NOTIFICATIONDEF))
 		{
-			validList.addElement(EnumType.Events);
+			validList.add(EnumType.Events);
 
 		}
 		else if (elementName.equals(ElementName.OCCUPATION))
 		{
-			validList.addElement(EnumType.Occupation);
+			validList.add(EnumType.Occupation);
 
 		}
 		else if (elementName.equals(ElementName.QUEUE))
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.AbortQueueEntry);
-				validList.addElement(EnumType.CloseQueue);
-				validList.addElement(EnumType.FlushQueue);
-				validList.addElement(EnumType.HoldQueue);
-				validList.addElement(EnumType.HoldQueueEntry);
-				validList.addElement(EnumType.OpenQueue);
-				validList.addElement(EnumType.QueueStatus);
-				validList.addElement(EnumType.RemoveQueueEntry);
-				validList.addElement(EnumType.ResourcePull);
-				validList.addElement(EnumType.ResumeQueue);
-				validList.addElement(EnumType.ResubmitQueueEntry);
-				validList.addElement(EnumType.ResumeQueueEntry);
-				validList.addElement(EnumType.SetQueueEntryPosition);
-				validList.addElement(EnumType.SetQueueEntryPriority);
-				validList.addElement(EnumType.ShutDown);
-				validList.addElement(EnumType.Status);
-				validList.addElement(EnumType.SubmitQueueEntry);
-				validList.addElement(EnumType.SuspendQueueEntry);
+				validList.add(EnumType.AbortQueueEntry);
+				validList.add(EnumType.CloseQueue);
+				validList.add(EnumType.FlushQueue);
+				validList.add(EnumType.HoldQueue);
+				validList.add(EnumType.HoldQueueEntry);
+				validList.add(EnumType.OpenQueue);
+				validList.add(EnumType.QueueStatus);
+				validList.add(EnumType.RemoveQueueEntry);
+				validList.add(EnumType.ResourcePull);
+				validList.add(EnumType.ResumeQueue);
+				validList.add(EnumType.ResubmitQueueEntry);
+				validList.add(EnumType.ResumeQueueEntry);
+				validList.add(EnumType.SetQueueEntryPosition);
+				validList.add(EnumType.SetQueueEntryPriority);
+				validList.add(EnumType.ShutDown);
+				validList.add(EnumType.Status);
+				validList.add(EnumType.SubmitQueueEntry);
+				validList.add(EnumType.SuspendQueueEntry);
 			}
 
 		}
@@ -1200,85 +1200,85 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.ResourcePull);
-				validList.addElement(EnumType.SubmitQueueEntry);
+				validList.add(EnumType.ResourcePull);
+				validList.add(EnumType.SubmitQueueEntry);
 			}
-			validList.addElement(EnumType.QueueEntryStatus);
+			validList.add(EnumType.QueueEntryStatus);
 
 		}
 		else if (elementName.equals(ElementName.RESOURCEINFO))
 		{
-			validList.addElement(EnumType.Resource);
+			validList.add(EnumType.Resource);
 
 		}
 		else if (elementName.equals(ElementName.SUBMISSIONMETHODS))
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.SubmissionMethods);
+				validList.add(EnumType.SubmissionMethods);
 			}
 		}
 		else if (elementName.equals(ElementName.SUBSCRIPTIONFILTER))
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.KnownSubscriptions);
+				validList.add(EnumType.KnownSubscriptions);
 			}
 		}
 		else if (elementName.equals(ElementName.SUBSCRIPTIONINFO))
 		{
-			validList.addElement(EnumType.KnownSubscriptions);
+			validList.add(EnumType.KnownSubscriptions);
 		}
 		else if (elementName.equals(ElementName.TRACKRESULT))
 		{
-			validList.addElement(EnumType.Track);
+			validList.add(EnumType.Track);
 		}
 		else if (elementName.equals(ElementName.UPDATEJDFCMDPARAMS))
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.UpdateJDF);
+				validList.add(EnumType.UpdateJDF);
 			}
 		}
 		else if (elementName.equals(ElementName.MODIFYNODECMDPARAMS))
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.ModifyNode);
+				validList.add(EnumType.ModifyNode);
 			}
 		}
 		else if (elementName.equals(ElementName.AUTHENTICATIONCMDPARAMS))
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.RequestForAuthentication);
+				validList.add(EnumType.RequestForAuthentication);
 			}
 		}
 		else if (elementName.equals(ElementName.AUTHENTICATIONQUPARAMS))
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.RequestForAuthentication);
+				validList.add(EnumType.RequestForAuthentication);
 			}
 		}
 		else if (elementName.equals(ElementName.AUTHENTICATIONRESP))
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.RequestForAuthentication);
+				validList.add(EnumType.RequestForAuthentication);
 			}
 		}
 		else if (elementName.equals(ElementName.CONTROLLERFILTER))
 		{
 			if (iSkip == 0)
 			{
-				validList.addElement(EnumType.KnownControllers);
+				validList.add(EnumType.KnownControllers);
 			}
 		}
 
 		else if (EnumFamily.getEnum(elementName) != null)
 		{
-			validList.addElement(EnumType.RepeatMessages);
+			validList.add(EnumType.RepeatMessages);
 		}
 
 		return validList;
@@ -3398,18 +3398,13 @@ public class JDFMessage extends JDFAutoMessage
 		// for each object, check whether it is compatible with the type of this
 		for (final String vObj : vObjs)
 		{
-			final Vector<EnumType> vt = getValidTypeVector(vObj, 0);
+			final Set<EnumType> vt = getValidTypeVector(vObj, 0);
 			// is it there ?
-			for (int j = 0; j < vt.size(); j++)
+			if (vt.contains(t))
 			{
-				if (vt.elementAt(j).equals(t))
-				{
-					// obj x is compatible with this -> add it to the list of
-					// elements
-					s.appendUnique(vObj);
-					break;
-				}
+				s.appendUnique(vObj);
 			}
+
 		}
 		return s;
 	}
