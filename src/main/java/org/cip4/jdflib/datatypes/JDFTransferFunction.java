@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -293,7 +293,7 @@ public class JDFTransferFunction extends JDFNumList
 	}
 
 	/**
-	 * get the Y value at index i
+	 * get the Y value at x-value x - we interpolate linearly
 	 *
 	 * @param index
 	 * @return
@@ -340,7 +340,8 @@ public class JDFTransferFunction extends JDFNumList
 	 */
 	int getPos(final double x, final boolean upper)
 	{
-		for (int i = 0; i < numPoints(); i++)
+		int numPoints = numPoints();
+		for (int i = 0; i < numPoints; i++)
 		{
 			final double x2 = getX(i);
 			if (x2 > x)

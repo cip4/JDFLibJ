@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -79,6 +47,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -99,12 +68,13 @@ import org.cip4.jdflib.ifaces.IMatches;
  *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * before June 18, 2009
+ *         before June 18, 2009
  */
 public class ContainerUtil
 {
 	/**
 	 * create a HashSet from an enumeration
+	 *
 	 * @param <a> the data type of the sets
 	 * @param enumeration the enumeration
 	 * @return a Set created from list
@@ -116,7 +86,7 @@ public class ContainerUtil
 			return null;
 		}
 
-		final Set<a> s = new HashSet<a>();
+		final Set<a> s = new HashSet<>();
 		while (enumeration.hasMoreElements())
 		{
 			s.add(enumeration.nextElement());
@@ -126,8 +96,7 @@ public class ContainerUtil
 	}
 
 	/**
-	 * return null if c==null or c.isEmpty=true
-	 * used to zapp empty collections
+	 * return null if c==null or c.isEmpty=true used to zapp empty collections
 	 *
 	 * @param c the Collection to test
 	 * @return the converted Collecion
@@ -138,8 +107,7 @@ public class ContainerUtil
 	}
 
 	/**
-	 * return null if c==null or c.isEmpty=true or c contains an empty collection
-	 * used to zapp empty collections
+	 * return null if c==null or c.isEmpty=true or c contains an empty collection used to zapp empty collections
 	 *
 	 * @param c the Collection to test
 	 * @return the converted Collecion
@@ -151,6 +119,7 @@ public class ContainerUtil
 
 	/**
 	 * create a HashSet from a List (Vector...)
+	 *
 	 * @param <a> the data type of the sets
 	 * @param list the list
 	 * @return a Set created from list
@@ -162,7 +131,7 @@ public class ContainerUtil
 			return null;
 		}
 		final int size = list.size();
-		final HashSet<a> s = new HashSet<a>(size + 10);
+		final HashSet<a> s = new HashSet<>(size + 10);
 
 		for (int i = 0; i < size; i++)
 		{
@@ -173,6 +142,7 @@ public class ContainerUtil
 
 	/**
 	 * create a HashSet from an Array
+	 *
 	 * @param <a> datatype
 	 * @param l the array
 	 * @return a Set created from list
@@ -183,7 +153,7 @@ public class ContainerUtil
 		{
 			return null;
 		}
-		final Set<a> s = new HashSet<a>(l.length + 10);
+		final Set<a> s = new HashSet<>(l.length + 10);
 		for (final a element : l)
 		{
 			s.add(element);
@@ -193,6 +163,7 @@ public class ContainerUtil
 
 	/**
 	 * create a Vector from an Array, skipping null elements
+	 *
 	 * @param <a> the type
 	 * @param array the array to convert
 	 * @return a Vector<a>
@@ -203,7 +174,30 @@ public class ContainerUtil
 		{
 			return null;
 		}
-		final Vector<a> v = new Vector<a>();
+		final Vector<a> v = new Vector<>();
+		v.ensureCapacity(array.length);
+		for (final a element : array)
+		{
+			if (element != null)
+				v.add(element);
+		}
+		return v;
+	}
+
+	/**
+	 * create a Vector from an Array, skipping null elements
+	 *
+	 * @param <a> the type
+	 * @param array the array to convert
+	 * @return a Vector<a>
+	 */
+	public static <a> ArrayList<a> toArrayList(final a[] array)
+	{
+		if (array == null)
+		{
+			return null;
+		}
+		final ArrayList<a> v = new ArrayList<>();
 		v.ensureCapacity(array.length);
 		for (final a element : array)
 		{
@@ -326,6 +320,7 @@ public class ContainerUtil
 
 	/**
 	 * return a matching element from a collection of IMatches
+	 *
 	 * @param <a> the data type
 	 * @param c the collection to search
 	 * @param obj the search key for matches
@@ -337,7 +332,7 @@ public class ContainerUtil
 		{
 			return null;
 		}
-		final Vector<IMatches> v = new Vector<IMatches>();
+		final Vector<IMatches> v = new Vector<>();
 		for (final IMatches m : c)
 		{
 			if (m.matches(obj))
@@ -362,7 +357,7 @@ public class ContainerUtil
 		{
 			return null;
 		}
-		final Vector<a> v = new Vector<a>();
+		final Vector<a> v = new Vector<>();
 		for (final a b : c)
 		{
 			if (m.matches(b))
@@ -375,6 +370,7 @@ public class ContainerUtil
 
 	/**
 	 * create a Vector of entry values from a map
+	 *
 	 * @param <a> type of the map key
 	 * @param <b> type of the map entry
 	 * @param m the map to dump to an array
@@ -401,10 +397,63 @@ public class ContainerUtil
 				return null;
 			}
 
-			final Vector<b> v = new Vector<b>();
+			final Vector<b> v = new Vector<>();
 			v.ensureCapacity(entrySet.size());
 			final Iterator<Entry<a, b>> it = entrySet.iterator();
-			final Vector<a> keys = new Vector<a>();
+			final Vector<a> keys = new Vector<>();
+			keys.ensureCapacity(entrySet.size());
+
+			while (it.hasNext())
+			{
+				final a key = it.next().getKey();
+				if (key != null)
+				{
+					keys.add(key);
+				}
+			}
+
+			Collections.sort(keys);
+			for (int i = 0; i < keys.size(); i++)
+			{
+				v.add(m.get(keys.get(i)));
+			}
+			return v;
+		}
+	}
+
+	/**
+	 * create a Vector of entry values from a map
+	 *
+	 * @param <a> type of the map key
+	 * @param <b> type of the map entry
+	 * @param m the map to dump to an array
+	 * @param sortByKey , if true, sort the entries by key
+	 * @return the vector
+	 */
+	public static <a extends Comparable<? super a>, b> ArrayList<b> toArrayList(final Map<a, b> m, final boolean sortByKey)
+	{
+		if (!sortByKey)
+		{
+			return toArrayList(m);
+		}
+
+		if (m == null)
+		{
+			return null;
+		}
+
+		synchronized (m)
+		{
+			final Set<Entry<a, b>> entrySet = m.entrySet();
+			if (entrySet.size() == 0)
+			{
+				return null;
+			}
+
+			final ArrayList<b> v = new ArrayList<>();
+			v.ensureCapacity(entrySet.size());
+			final Iterator<Entry<a, b>> it = entrySet.iterator();
+			final ArrayList<a> keys = new ArrayList<>();
 			keys.ensureCapacity(entrySet.size());
 
 			while (it.hasNext())
@@ -427,6 +476,7 @@ public class ContainerUtil
 
 	/**
 	 * create a Vector copy of entry values from a map
+	 *
 	 * @param <a> data type of the map key
 	 * @param <b> data type of the map value
 	 * @param m the map to dump to an array
@@ -441,7 +491,35 @@ public class ContainerUtil
 
 		synchronized (m)
 		{
-			final Vector<b> v = new Vector<b>();
+			final Vector<b> v = new Vector<>();
+			final Collection<b> values = m.values();
+			if (values.size() == 0)
+			{
+				return null;
+			}
+			v.addAll(values);
+			return v;
+		}
+	}
+
+	/**
+	 * create a Vector copy of entry values from a map
+	 *
+	 * @param <a> data type of the map key
+	 * @param <b> data type of the map value
+	 * @param m the map to dump to an array
+	 * @return the vector
+	 */
+	public static <a, b> ArrayList<b> toArrayList(final Map<a, b> m)
+	{
+		if (m == null)
+		{
+			return null;
+		}
+
+		synchronized (m)
+		{
+			final ArrayList<b> v = new ArrayList<>();
 			final Collection<b> values = m.values();
 			if (values.size() == 0)
 			{
@@ -454,7 +532,8 @@ public class ContainerUtil
 
 	/**
 	 * create an inverted map with keys and values swapped.<br/>
-	 *  The new values are vectors since a map may have identical values for different keys
+	 * The new values are vectors since a map may have identical values for different keys
+	 *
 	 * @param <a> data type of the map key
 	 * @param <b> data type of the map value
 	 * @param m the map to invert
@@ -469,7 +548,7 @@ public class ContainerUtil
 
 		synchronized (m)
 		{
-			final VectorMap<b, a> inv = new VectorMap<b, a>();
+			final VectorMap<b, a> inv = new VectorMap<>();
 			final Collection<a> keys = m.keySet();
 			if (keys.size() == 0)
 			{
@@ -489,6 +568,7 @@ public class ContainerUtil
 
 	/**
 	 * create a Vector of key values from a map
+	 *
 	 * @param <a> data type of the map key
 	 * @param m the map to dump to an array
 	 * @return the vector of keys - note that this Vector goes NOT reflect changes to the map
@@ -507,7 +587,7 @@ public class ContainerUtil
 			{
 				return null;
 			}
-			final Vector<a> v = new Vector<a>();
+			final Vector<a> v = new Vector<>();
 			v.ensureCapacity(keySet.size());
 			v.addAll(keySet);
 			return v;
@@ -516,6 +596,7 @@ public class ContainerUtil
 
 	/**
 	 * return true if a equals b or both are null
+	 *
 	 * @param a Object to compare
 	 * @param b Object to compare
 	 * @return boolean true if a equals b or both are null
@@ -535,6 +616,7 @@ public class ContainerUtil
 
 	/**
 	 * return true if a matches b or both are null
+	 *
 	 * @param a Object to compare
 	 * @param b Object to compare
 	 * @return boolean true if a matches b or both are null
@@ -554,6 +636,7 @@ public class ContainerUtil
 
 	/**
 	 * return true if a matches b or one of a or b is null
+	 *
 	 * @param a Object to compare
 	 * @param b Object to compare
 	 * @return boolean true if a matches b or both are null
@@ -570,11 +653,11 @@ public class ContainerUtil
 	/**
 	 * static implementation of compare for any comparable object that gracefully handles null<br/>
 	 * null is always the smallest
+	 *
 	 * @param c0
 	 * @param c1
 	 * @return -1 if c0 &lt; c1, 0 if equal, 1 if c0 &gt; c1;
 	 */
-	@SuppressWarnings("unchecked")
 	public static int compare(final Comparable c0, final Comparable c1)
 	{
 		if (c0 == null)
@@ -590,6 +673,7 @@ public class ContainerUtil
 
 	/**
 	 * ensure that a collection has at least size elements and fill any newly created entries with nulls
+	 *
 	 * @param <a> anything - needed for the cast
 	 * @param size
 	 * @param coll
@@ -608,6 +692,7 @@ public class ContainerUtil
 
 	/**
 	 * unify a collection while retaining the initial order (if the input collection is ordered)
+	 *
 	 * @param <a> the data type of the collection
 	 * @param c the collection to unify
 	 * @return the unified collection - always the input collection
@@ -618,7 +703,7 @@ public class ContainerUtil
 		{
 			return c;
 		}
-		final LinkedHashSet<a> lhsIn = new LinkedHashSet<a>(c.size());
+		final LinkedHashSet<a> lhsIn = new LinkedHashSet<>(c.size());
 
 		for (final a el : c)
 		{
@@ -638,6 +723,7 @@ public class ContainerUtil
 
 	/**
 	 * unify a collection while retaining the initial order (if the input collection is ordered)
+	 *
 	 * @param <a> the data type of the collection
 	 * @param c the collection to unify
 	 * @return the unified collection - always the input collection
@@ -648,7 +734,7 @@ public class ContainerUtil
 		{
 			return c;
 		}
-		final Vector<a> vect = new Vector<a>(c.size());
+		final Vector<a> vect = new Vector<>(c.size());
 
 		for (final a el : c)
 		{
@@ -660,7 +746,7 @@ public class ContainerUtil
 		}
 		if (vect.size() < c.size())
 		{
-			final Vector<a> v2 = new Vector<a>();
+			final Vector<a> v2 = new Vector<>();
 			for (int i = vect.size() - 1; i >= 0; i--)
 			{
 				final Vector<IMatches> mm = getMatches(v2, vect.get(i));
