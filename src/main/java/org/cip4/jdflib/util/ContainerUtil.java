@@ -75,18 +75,18 @@ public class ContainerUtil
 	/**
 	 * create a HashSet from an enumeration
 	 *
-	 * @param <a> the data type of the sets
+	 * @param <A> the data type of the sets
 	 * @param enumeration the enumeration
 	 * @return a Set created from list
 	 */
-	public static <a> Set<a> toHashSet(final Enumeration<a> enumeration)
+	public static <A> Set<A> toHashSet(final Enumeration<A> enumeration)
 	{
 		if (enumeration == null)
 		{
 			return null;
 		}
 
-		final Set<a> s = new HashSet<>();
+		final Set<A> s = new HashSet<>();
 		while (enumeration.hasMoreElements())
 		{
 			s.add(enumeration.nextElement());
@@ -120,18 +120,18 @@ public class ContainerUtil
 	/**
 	 * create a HashSet from a List (Vector...)
 	 *
-	 * @param <a> the data type of the sets
+	 * @param <A> the data type of the sets
 	 * @param list the list
 	 * @return a Set created from list
 	 */
-	public static <a> Set<a> toHashSet(final List<a> list)
+	public static <A> Set<A> toHashSet(final List<A> list)
 	{
 		if (list == null)
 		{
 			return null;
 		}
 		final int size = list.size();
-		final HashSet<a> s = new HashSet<>(size + 10);
+		final HashSet<A> s = new HashSet<>(size + 10);
 
 		for (int i = 0; i < size; i++)
 		{
@@ -143,18 +143,18 @@ public class ContainerUtil
 	/**
 	 * create a HashSet from an Array
 	 *
-	 * @param <a> datatype
+	 * @param <A> datatype
 	 * @param l the array
 	 * @return a Set created from list
 	 */
-	public static <a> Set<a> toHashSet(final a[] l)
+	public static <A> Set<A> toHashSet(final A[] l)
 	{
 		if (l == null)
 		{
 			return null;
 		}
-		final Set<a> s = new HashSet<>(l.length + 10);
-		for (final a element : l)
+		final Set<A> s = new HashSet<>(l.length + 10);
+		for (final A element : l)
 		{
 			s.add(element);
 		}
@@ -164,19 +164,19 @@ public class ContainerUtil
 	/**
 	 * create a Vector from an Array, skipping null elements
 	 *
-	 * @param <a> the type
+	 * @param <A> the type
 	 * @param array the array to convert
 	 * @return a Vector<a>
 	 */
-	public static <a> Vector<a> toVector(final a[] array)
+	public static <A> Vector<A> toVector(final A[] array)
 	{
 		if (array == null)
 		{
 			return null;
 		}
-		final Vector<a> v = new Vector<>();
+		final Vector<A> v = new Vector<>();
 		v.ensureCapacity(array.length);
-		for (final a element : array)
+		for (final A element : array)
 		{
 			if (element != null)
 				v.add(element);
@@ -187,19 +187,19 @@ public class ContainerUtil
 	/**
 	 * create a Vector from an Array, skipping null elements
 	 *
-	 * @param <a> the type
+	 * @param <A> the type
 	 * @param array the array to convert
 	 * @return a Vector<a>
 	 */
-	public static <a> ArrayList<a> toArrayList(final a[] array)
+	public static <A> List<A> toArrayList(final A[] array)
 	{
 		if (array == null)
 		{
 			return null;
 		}
-		final ArrayList<a> v = new ArrayList<>();
+		final ArrayList<A> v = new ArrayList<>();
 		v.ensureCapacity(array.length);
-		for (final a element : array)
+		for (final A element : array)
 		{
 			if (element != null)
 				v.add(element);
@@ -212,11 +212,11 @@ public class ContainerUtil
 	 *
 	 * @param c1 first collection
 	 * @param c2 second collection
-	 * @param <a> type
+	 * @param <A> type
 	 * @return c1 with c2 added, c2 if c1==null
 	 *
 	 */
-	public static <a> Collection<a> addAll(final Collection<a> c1, final Collection<a> c2)
+	public static <A> Collection<A> addAll(final Collection<A> c1, final Collection<A> c2)
 	{
 		if (c1 == null)
 		{
@@ -277,13 +277,13 @@ public class ContainerUtil
 	/**
 	 * return a matching element from a collection of IMatches
 	 *
-	 * @param <a> the data type
+	 * @param <A> the data type
 	 * @param match the matcher
 	 * @param c the {@link Collection}
 	 * @param iSkip which one to grab, may be negative in which case we count -1=last, -2=second last...
 	 * @return the matching <a>
 	 */
-	public static <a> a getMatch(final IMatches match, final Collection<a> c, int iSkip)
+	public static <A> A getMatch(final IMatches match, final Collection<A> c, int iSkip)
 	{
 		if (c == null)
 		{
@@ -292,7 +292,7 @@ public class ContainerUtil
 
 		if (iSkip < 0)
 		{
-			final Vector<a> v = getMatches(match, c);
+			final Vector<A> v = getMatches(match, c);
 			if (v == null)
 			{
 				return null;
@@ -307,7 +307,7 @@ public class ContainerUtil
 			return v.get(iSkip);
 		}
 
-		for (final a b : c)
+		for (final A b : c)
 		{
 			if (match.matches(b) && iSkip-- <= 0)
 			{
@@ -321,12 +321,12 @@ public class ContainerUtil
 	/**
 	 * return a matching element from a collection of IMatches
 	 *
-	 * @param <a> the data type
+	 * @param <A> the data type
 	 * @param c the collection to search
 	 * @param obj the search key for matches
 	 * @return Vector of matching a
 	 */
-	public static <a> Vector<IMatches> getMatches(final Collection<? extends IMatches> c, final a obj)
+	public static <A> Vector<IMatches> getMatches(final Collection<? extends IMatches> c, final A obj)
 	{
 		if (c == null)
 		{
@@ -340,32 +340,32 @@ public class ContainerUtil
 				v.add(m);
 			}
 		}
-		return v.size() == 0 ? null : v;
+		return v.isEmpty() ? null : v;
 	}
 
 	/**
 	 * return a matching element from a collection
 	 *
-	 * @param <a> the data type
+	 * @param <A> the data type
 	 * @param c the collection to search
 	 * @param obj the matches
 	 * @return Vector of matching a
 	 */
-	public static <a> Vector<a> getMatches(final IMatches m, final Collection<a> c)
+	public static <A> Vector<A> getMatches(final IMatches m, final Collection<A> c)
 	{
 		if (c == null)
 		{
 			return null;
 		}
-		final Vector<a> v = new Vector<>();
-		for (final a b : c)
+		final Vector<A> v = new Vector<>();
+		for (final A b : c)
 		{
 			if (m.matches(b))
 			{
 				v.add(b);
 			}
 		}
-		return v.size() == 0 ? null : v;
+		return v.isEmpty() ? null : v;
 	}
 
 	/**
@@ -392,7 +392,7 @@ public class ContainerUtil
 		synchronized (m)
 		{
 			final Set<Entry<a, b>> entrySet = m.entrySet();
-			if (entrySet.size() == 0)
+			if (entrySet.isEmpty())
 			{
 				return null;
 			}
@@ -424,13 +424,13 @@ public class ContainerUtil
 	/**
 	 * create a Vector of entry values from a map
 	 *
-	 * @param <a> type of the map key
-	 * @param <b> type of the map entry
+	 * @param <A> type of the map key
+	 * @param <B> type of the map entry
 	 * @param m the map to dump to an array
 	 * @param sortByKey , if true, sort the entries by key
 	 * @return the vector
 	 */
-	public static <a extends Comparable<? super a>, b> ArrayList<b> toArrayList(final Map<a, b> m, final boolean sortByKey)
+	public static <A extends Comparable<? super A>, B> List<B> toArrayList(final Map<A, B> m, final boolean sortByKey)
 	{
 		if (!sortByKey)
 		{
@@ -444,21 +444,21 @@ public class ContainerUtil
 
 		synchronized (m)
 		{
-			final Set<Entry<a, b>> entrySet = m.entrySet();
-			if (entrySet.size() == 0)
+			final Set<Entry<A, B>> entrySet = m.entrySet();
+			if (entrySet.isEmpty())
 			{
 				return null;
 			}
 
-			final ArrayList<b> v = new ArrayList<>();
+			final ArrayList<B> v = new ArrayList<>();
 			v.ensureCapacity(entrySet.size());
-			final Iterator<Entry<a, b>> it = entrySet.iterator();
-			final ArrayList<a> keys = new ArrayList<>();
+			final Iterator<Entry<A, B>> it = entrySet.iterator();
+			final ArrayList<A> keys = new ArrayList<>();
 			keys.ensureCapacity(entrySet.size());
 
 			while (it.hasNext())
 			{
-				final a key = it.next().getKey();
+				final A key = it.next().getKey();
 				if (key != null)
 				{
 					keys.add(key);
@@ -477,12 +477,12 @@ public class ContainerUtil
 	/**
 	 * create a Vector copy of entry values from a map
 	 *
-	 * @param <a> data type of the map key
-	 * @param <b> data type of the map value
+	 * @param <A> data type of the map key
+	 * @param <B> data type of the map value
 	 * @param m the map to dump to an array
 	 * @return the vector
 	 */
-	public static <a, b> Vector<b> toValueVector(final Map<a, b> m)
+	public static <A, B> Vector<B> toValueVector(final Map<A, B> m)
 	{
 		if (m == null)
 		{
@@ -491,9 +491,9 @@ public class ContainerUtil
 
 		synchronized (m)
 		{
-			final Vector<b> v = new Vector<>();
-			final Collection<b> values = m.values();
-			if (values.size() == 0)
+			final Vector<B> v = new Vector<>();
+			final Collection<B> values = m.values();
+			if (values.isEmpty())
 			{
 				return null;
 			}
@@ -505,12 +505,12 @@ public class ContainerUtil
 	/**
 	 * create a Vector copy of entry values from a map
 	 *
-	 * @param <a> data type of the map key
-	 * @param <b> data type of the map value
+	 * @param <A> data type of the map key
+	 * @param <B> data type of the map value
 	 * @param m the map to dump to an array
 	 * @return the vector
 	 */
-	public static <a, b> ArrayList<b> toArrayList(final Map<a, b> m)
+	public static <A, B> List<B> toArrayList(final Map<A, B> m)
 	{
 		if (m == null)
 		{
@@ -519,8 +519,8 @@ public class ContainerUtil
 
 		synchronized (m)
 		{
-			final ArrayList<b> v = new ArrayList<>();
-			final Collection<b> values = m.values();
+			final ArrayList<B> v = new ArrayList<>();
+			final Collection<B> values = m.values();
 			if (values.size() == 0)
 			{
 				return null;
@@ -534,12 +534,12 @@ public class ContainerUtil
 	 * create an inverted map with keys and values swapped.<br/>
 	 * The new values are vectors since a map may have identical values for different keys
 	 *
-	 * @param <a> data type of the map key
-	 * @param <b> data type of the map value
+	 * @param <A> data type of the map key
+	 * @param <B> data type of the map value
 	 * @param m the map to invert
 	 * @return the inverted map
 	 */
-	public static <a, b> VectorMap<b, a> getInvertedMap(final Map<a, b> m)
+	public static <A, B> VectorMap<B, A> getInvertedMap(final Map<A, B> m)
 	{
 		if (m == null)
 		{
@@ -548,15 +548,15 @@ public class ContainerUtil
 
 		synchronized (m)
 		{
-			final VectorMap<b, a> inv = new VectorMap<>();
-			final Collection<a> keys = m.keySet();
+			final VectorMap<B, A> inv = new VectorMap<>();
+			final Collection<A> keys = m.keySet();
 			if (keys.size() == 0)
 			{
 				return null;
 			}
-			for (final a key : keys)
+			for (final A key : keys)
 			{
-				final b val = m.get(key);
+				final B val = m.get(key);
 				if (val != null)
 				{
 					inv.putOne(val, key);
@@ -569,11 +569,11 @@ public class ContainerUtil
 	/**
 	 * create a Vector of key values from a map
 	 *
-	 * @param <a> data type of the map key
+	 * @param <A> data type of the map key
 	 * @param m the map to dump to an array
 	 * @return the vector of keys - note that this Vector goes NOT reflect changes to the map
 	 */
-	public static <a> Vector<a> getKeyVector(final Map<a, ?> m)
+	public static <A> Vector<A> getKeyVector(final Map<A, ?> m)
 	{
 		if (m == null)
 		{
@@ -582,12 +582,12 @@ public class ContainerUtil
 
 		synchronized (m)
 		{
-			final Set<a> keySet = m.keySet();
+			final Set<A> keySet = m.keySet();
 			if (keySet.size() == 0)
 			{
 				return null;
 			}
-			final Vector<a> v = new Vector<>();
+			final Vector<A> v = new Vector<>();
 			v.ensureCapacity(keySet.size());
 			v.addAll(keySet);
 			return v;
@@ -674,18 +674,18 @@ public class ContainerUtil
 	/**
 	 * ensure that a collection has at least size elements and fill any newly created entries with nulls
 	 *
-	 * @param <a> anything - needed for the cast
+	 * @param <A> anything - needed for the cast
 	 * @param size
 	 * @param coll
 	 */
-	public static <a> void ensureSize(final int size, final Collection<a> coll)
+	public static <A> void ensureSize(final int size, final Collection<A> coll)
 	{
 		final int s2 = coll.size();
 		if (s2 < size)
 		{
 			for (int i = s2; i < size; i++)
 			{
-				coll.add((a) null);
+				coll.add((A) null);
 			}
 		}
 	}
@@ -693,19 +693,19 @@ public class ContainerUtil
 	/**
 	 * unify a collection while retaining the initial order (if the input collection is ordered)
 	 *
-	 * @param <a> the data type of the collection
+	 * @param <A> the data type of the collection
 	 * @param c the collection to unify
 	 * @return the unified collection - always the input collection
 	 */
-	public static <a> Collection<a> unify(final Collection<a> c)
+	public static <A> Collection<A> unify(final Collection<A> c)
 	{
 		if (c == null || c.size() < 2)
 		{
 			return c;
 		}
-		final LinkedHashSet<a> lhsIn = new LinkedHashSet<>(c.size());
+		final LinkedHashSet<A> lhsIn = new LinkedHashSet<>(c.size());
 
-		for (final a el : c)
+		for (final A el : c)
 		{
 			if (!lhsIn.contains(el))
 			{
@@ -724,19 +724,19 @@ public class ContainerUtil
 	/**
 	 * unify a collection while retaining the initial order (if the input collection is ordered)
 	 *
-	 * @param <a> the data type of the collection
+	 * @param <A> the data type of the collection
 	 * @param c the collection to unify
 	 * @return the unified collection - always the input collection
 	 */
-	public static <a extends IMatches> Collection<a> unifyMatches(final Collection<a> c)
+	public static <A extends IMatches> Collection<A> unifyMatches(final Collection<A> c)
 	{
 		if (c == null || c.size() < 2)
 		{
 			return c;
 		}
-		final Vector<a> vect = new Vector<>(c.size());
+		final Vector<A> vect = new Vector<>(c.size());
 
-		for (final a el : c)
+		for (final A el : c)
 		{
 			final Vector<IMatches> mm = getMatches(vect, el);
 			if (mm == null)
@@ -746,7 +746,7 @@ public class ContainerUtil
 		}
 		if (vect.size() < c.size())
 		{
-			final Vector<a> v2 = new Vector<>();
+			final Vector<A> v2 = new Vector<>();
 			for (int i = vect.size() - 1; i >= 0; i--)
 			{
 				final Vector<IMatches> mm = getMatches(v2, vect.get(i));

@@ -44,8 +44,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
@@ -307,7 +307,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	public void testToArray()
 	{
 		final String[] a = { "a", "b" };
-		final ArrayList<String> s = ContainerUtil.toArrayList(a);
+		final List<String> s = ContainerUtil.toArrayList(a);
 		assertTrue(s.contains("a"));
 		assertTrue(s.contains("b"));
 		assertFalse(s.contains("c"));
@@ -347,9 +347,9 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		{
 			hm.put("" + i, "a" + i);
 		}
-		final ArrayList<String> v = ContainerUtil.toArrayList(hm, false);
+		final List<String> v = ContainerUtil.toArrayList(hm, false);
 		assertEquals(v.size(), 10);
-		final ArrayList<String> vs = ContainerUtil.toArrayList(hm, true);
+		final List<String> vs = ContainerUtil.toArrayList(hm, true);
 		assertTrue(vs.containsAll(v));
 		assertTrue(v.containsAll(vs));
 		for (int i = 1; i < 10; i++)
