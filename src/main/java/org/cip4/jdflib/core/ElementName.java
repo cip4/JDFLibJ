@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -1210,7 +1210,7 @@ public final class ElementName
 	public static final String PARTAMOUNT = "PartAmount";
 	/** */
 	public static final String PARTSTATUS = "PartStatus";
-	/** */
+	public static final String PATCH = "Patch";
 	public static final String PAYMENT = "Payment";
 	/** */
 	public static final String PAYTERM = "PayTerm";
@@ -1535,7 +1535,7 @@ public final class ElementName
 	public static final String SEPARATIONLISTFRONT = "SeparationListFront";
 	/** */
 	public static final String SEPARATIONSPEC = "SeparationSpec";
-	/** */
+	public static final String SEPARATIONTINT = "SeparationTint";
 	public static final String SERVICELEVEL = "ServiceLevel";
 	/** */
 	public static final String SET = "set";

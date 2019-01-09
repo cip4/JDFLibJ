@@ -2366,7 +2366,7 @@ public final class AttributeName
 	public static final String PASSTHROUGHJPEGIMAGES = "PassThroughJPEGImages";
 	/** */
 	public static final String PASSWORD = "Password";
-	/** */
+	public static final String PATCHUSAGE = "PatchUsage";
 	public static final String PATH = "Path";
 	/** */
 	public static final String PATTERN = "Pattern";
@@ -2816,7 +2816,7 @@ public final class AttributeName
 	public static final String RETURNURL = "ReturnURL";
 	/** */
 	public static final String REVERSEPAGENUMBER = "ReversePageNumber";
-	/** */
+	public static final String RGB = "RGB";
 	public static final String RGBGRAY2BLACK = "RGBGray2Black";
 	/** */
 	public static final String RGBGRAY2BLACKTHRESHOLD = "RGBGray2BlackThreshold";
@@ -3141,7 +3141,7 @@ public final class AttributeName
 	public static final String SPECIALINK = "SpecialInk";
 	/** */
 	public static final String SPECIFICYIELD = "SpecificYield";
-	/** */
+	public static final String SPECTRUM = "Spectrum";
 	public static final String SPEED = "Speed";
 	/** */
 	public static final String SPINE = "Spine";

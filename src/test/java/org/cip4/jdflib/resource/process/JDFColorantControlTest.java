@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -106,7 +74,7 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFColorantControlTest extends JDFTestCaseBase
 {
@@ -156,8 +124,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 
 		colControl.setXMLComment("ColorantControl after prepress has correctly set ActualColorName based on pdl content");
 		JDFColor co = colPool.appendColorWithName("Black", null);
-		co.setXMLComment("Color that maps the predefined separation Black\n"
-				+ "ActualColorName is the new attribute that replaces ExposedMedia/@DescriptiveName as the \"Main\" PDL color");
+		co.setXMLComment("Color that maps the predefined separation Black\n" + "ActualColorName is the new attribute that replaces ExposedMedia/@DescriptiveName as the \"Main\" PDL color");
 		co.setCMYK(new JDFCMYKColor(0, 0, 0, 1));
 		assertTrue(co.isValid(EnumValidationLevel.Incomplete));
 		co.setAttribute("ActualColorName", "Schwarz");
@@ -298,16 +265,16 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
 		final JDFResource res = root.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
 		assertTrue(res instanceof JDFColorantControl);
-		JDFResourceLink rl = root.getLink(res, null);
+		final JDFResourceLink rl = root.getLink(res, null);
 		rl.appendPart().setSeparation("Blue");
 		rl.appendPart().setSeparation("Green");
 		assertNotNull(rl.getTarget());
 	}
 
 	/**
-	* tests the separationlist class
-	*
-	*/
+	 * tests the separationlist class
+	 *
+	 */
 	@Test
 	public final void testGetAllSeparations()
 	{
@@ -358,7 +325,41 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		assertTrue(col.contains(a3));
 	}
 
-	// //////////////////////////////////////////////////////////////////////
+	@Test
+	public void testGetColorantAlias()
+	{
+		final JDFColorantControl cBlatt = (JDFColorantControl) colControl.addPartition(EnumPartIDKey.SheetName, "s1");
+		final Collection<JDFColorantAlias> col = cBlatt.getAllColorantAlias();
+		assertEquals(col.size(), 0);
+		final JDFColorantAlias a1 = colControl.appendColorantAlias("s1", "t1");
+		final JDFColorantAlias a2 = colControl.appendColorantAlias("s2", "t2");
+		assertEquals(a1, colControl.getColorantAlias("s1"));
+		assertEquals(a2, colControl.getColorantAlias("s2"));
+		assertNull(colControl.getColorantAlias("t1"));
+
+	}
+
+	@Test
+	public void testGetColorantAliasMap()
+	{
+		final JDFColorantAlias a1 = colControl.appendColorantAlias("s1", "t1");
+		final JDFColorantAlias a2 = colControl.appendColorantAlias("s2", "t2");
+		assertEquals("t2", colControl.getColorantAliasMap().get("s2"));
+		assertEquals(2, colControl.getColorantAliasMap().size());
+
+	}
+
+	@Test
+	public void testGetColorantAliasMapRec()
+	{
+		final JDFColorantControl cBlatt = (JDFColorantControl) colControl.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFColorantAlias a1 = cBlatt.appendColorantAlias("s1", "t1");
+		final JDFColorantAlias a2 = cBlatt.appendColorantAlias("s2", "t2");
+		assertEquals("t2", colControl.getColorantAliasMap().get("s2"));
+		assertEquals(2, colControl.getColorantAliasMap().size());
+
+	}
+
 	/**
 	 *
 	 */
