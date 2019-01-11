@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -5956,9 +5956,9 @@ public class JDFElement extends KElement
 	public void removeGeneralID(final String idUsage)
 	{
 		final VElement v = getChildElementVector_JDFElement(ElementName.GENERALID, null, new JDFAttributeMap(AttributeName.IDUSAGE, idUsage), true, 0, true);
-		for (int i = 0; i < v.size(); i++)
+		for (final KElement e : v)
 		{
-			(v.elementAt(i)).deleteNode();
+			e.deleteNode();
 		}
 	}
 

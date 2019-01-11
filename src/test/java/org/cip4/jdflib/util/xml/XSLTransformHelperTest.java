@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -38,11 +38,14 @@ package org.cip4.jdflib.util.xml;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.XMLParser;
@@ -188,6 +191,22 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 		final XMLDoc d = new XSLTransformHelper(n, xsl).getTransformElement();
 		final JDFContact c2 = (new JDFDoc(d).getJDFRoot().getElementByClass(JDFContact.class, 0, true));
 		assertTrue(c2.getContactTypes().contains("Approver"));
+	}
 
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testJDFRemoveLayoutLink()
+	{
+		final XMLDoc xsl = XMLDoc.parseFile(sm_dirTestData + "xsl/removeLayout.xsl");
+		final JDFNode n = JDFNode.createRoot();
+		n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
+		n.addResource(ElementName.LAYOUT, EnumUsage.Output);
+		final XMLDoc d = new XSLTransformHelper(n, xsl).getTransformElement();
+		final JDFNode jdfRoot = new JDFDoc(d).getJDFRoot();
+		assertNull(jdfRoot.getResource(ElementName.LAYOUT, EnumUsage.Output, 0));
+		assertNotNull(jdfRoot.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0));
 	}
 }
