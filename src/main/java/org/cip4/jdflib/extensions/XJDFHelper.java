@@ -43,7 +43,6 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -926,11 +925,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	@Override
 	public void cleanUp()
 	{
-		final VString types = getTypes();
-		if (VString.isEmpty(types))
-		{
-			setTypes(JDFConstants.PRODUCT);
-		}
 		theElement.sortChildren(new XJDFCleanupComparator(), false);
 		final Vector<SetHelper> v = getSets();
 		if (v != null)
