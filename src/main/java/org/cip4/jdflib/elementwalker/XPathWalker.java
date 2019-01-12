@@ -248,7 +248,9 @@ public class XPathWalker extends BaseElementWalker
 			{
 				writer.println(s);
 				if (pathsFound != null)
+				{
 					pathsFound.add(s);
+				}
 			}
 			if (bAttribute)
 			{
@@ -325,7 +327,14 @@ public class XPathWalker extends BaseElementWalker
 	 */
 	public void setUnique(final boolean unique)
 	{
-		pathsFound = unique ? new HashSet<>() : null;
+		if (unique)
+		{
+			pathsFound = new HashSet<>();
+		}
+		else
+		{
+			pathsFound = null;
+		}
 	}
 
 	/**
