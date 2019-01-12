@@ -43,6 +43,7 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -55,6 +56,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.xjdfwalker.IDRemover;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -924,7 +926,12 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	@Override
 	public void cleanUp()
 	{
-		theElement.sortChildren(new KElement.SimpleElementNameComparator(), false);
+		final VString types = getTypes();
+		if (VString.isEmpty(types))
+		{
+			setTypes(JDFConstants.PRODUCT);
+		}
+		theElement.sortChildren(new XJDFCleanupComparator(), false);
 		final Vector<SetHelper> v = getSets();
 		if (v != null)
 		{
@@ -932,6 +939,14 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 			{
 				sh.cleanUp();
 				theElement.moveElement(sh.getSet(), null);
+			}
+		}
+		final Vector<ProductHelper> vp = getProductHelpers();
+		if (!ContainerUtil.isEmpty(vp))
+		{
+			for (final ProductHelper ph : vp)
+			{
+				ph.cleanUp();
 			}
 		}
 		final AuditPoolHelper auditPool = getAuditPool();

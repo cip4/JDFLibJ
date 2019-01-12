@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -97,8 +97,17 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	public static void setDefaultHour(final int defaultHour)
 	{
 		if (defaultHour >= 0 && defaultHour <= 23)
+		{
 			JDFDate.defaultHour = defaultHour;
+		}
+	}
 
+	/**
+	 * @return the defaultHour
+	 */
+	public static int getDefaultHour()
+	{
+		return defaultHour;
 	}
 
 	private static FastCalendar fastCalendar = new FastCalendar();
@@ -1124,5 +1133,32 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	public int compare(final JDFDate d0, final JDFDate d1)
 	{
 		return ContainerUtil.compare(d0, d1);
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public int getHour()
+	{
+		return getCalendar().get(Calendar.HOUR_OF_DAY);
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public int getMinute()
+	{
+		return getCalendar().get(Calendar.MINUTE);
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public int getSecond()
+	{
+		return getCalendar().get(Calendar.SECOND);
 	}
 }

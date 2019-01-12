@@ -58,9 +58,10 @@ import org.xml.sax.SAXParseException;
 public class XMLErrorHandler implements ErrorHandler
 {
 
-	private static final String FATAL_ERROR = "FatalError";
-	private static final String ERROR = "Error";
-	private static final String WARNING = "Warning";
+	public static final String VALID = "Valid";
+	public static final String FATAL_ERROR = "FatalError";
+	public static final String ERROR = "Error";
+	public static final String WARNING = "Warning";
 	public static final String VALIDATION_RESULT = "ValidationResult";
 	private KElement root;
 	XMLParser parser;
@@ -206,7 +207,7 @@ public class XMLErrorHandler implements ErrorHandler
 			else if (root.hasChildElement(WARNING, null))
 				root.setAttribute(VALIDATION_RESULT, WARNING);
 			else
-				root.setAttribute(VALIDATION_RESULT, "Valid");
+				root.setAttribute(VALIDATION_RESULT, VALID);
 		}
 	}
 

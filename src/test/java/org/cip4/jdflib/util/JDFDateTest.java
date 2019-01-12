@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -161,6 +161,19 @@ public class JDFDateTest extends JDFTestCaseBase
 		d1.setTime(0, 0, 0).addOffset(0, 0, 22, 3);
 		assertTrue(d1.getFormattedDateTime(JDFDate.DATETIMEISO).contains("T22:00:00"));
 		assertEquals(d.getDay() + 3, d1.getDay());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testDefaultHour()
+	{
+		JDFDate.setDefaultHour(4);
+		assertEquals(4, JDFDate.getDefaultHour());
+		JDFDate.setDefaultHour(44);
+		assertEquals(4, JDFDate.getDefaultHour());
 	}
 
 	/**
@@ -828,7 +841,35 @@ public class JDFDateTest extends JDFTestCaseBase
 		assertEquals(19, date.getDay());
 	}
 
-	// /////////////////////////////////////////////////////
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testGetHour() throws Exception
+	{
+		final JDFDate date = new JDFDate("2008-12-19T17:20:11.300+00:00");
+		assertEquals(17, date.getHour());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testGetMinute() throws Exception
+	{
+		final JDFDate date = new JDFDate("2008-12-19T07:20:11.300+00:00");
+		assertEquals(20, date.getMinute());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testGetSecond() throws Exception
+	{
+		final JDFDate date = new JDFDate("2008-12-19T07:20:11.800+00:00");
+		assertEquals(11, date.getSecond());
+	}
 
 	/**
 	 * @throws Exception
