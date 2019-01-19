@@ -58,6 +58,7 @@ import org.xml.sax.SAXParseException;
 public class XMLErrorHandler implements ErrorHandler
 {
 
+	public static final String MESSAGE = "Message";
 	public static final String VALID = "Valid";
 	public static final String FATAL_ERROR = "FatalError";
 	public static final String ERROR = "Error";
@@ -104,7 +105,7 @@ public class XMLErrorHandler implements ErrorHandler
 	{
 		final String warn = getErrorMsg(exception);
 		final KElement kEl = root.appendElement(WARNING);
-		kEl.setAttribute("Message", warn);
+		kEl.setAttribute(MESSAGE, warn);
 		parser.m_lastExcept = exception;
 		if (wantLog)
 		{
@@ -124,7 +125,7 @@ public class XMLErrorHandler implements ErrorHandler
 		if ((er.indexOf("http://www.CIP4.org/JDFSchema") != -1) || (er.indexOf("is not declared for") == -1))
 		{
 			final KElement kEl = root.appendElement(ERROR);
-			kEl.setAttribute("Message", er);
+			kEl.setAttribute(MESSAGE, er);
 			if (wantLog)
 			{
 				log.error("Parser error: " + er);
@@ -141,7 +142,7 @@ public class XMLErrorHandler implements ErrorHandler
 	{
 		final String er = getErrorMsg(exception);
 		final KElement kEl = root.appendElement(FATAL_ERROR);
-		kEl.setAttribute("Message", er);
+		kEl.setAttribute(MESSAGE, er);
 		parser.m_lastExcept = exception;
 		if (wantLog)
 		{

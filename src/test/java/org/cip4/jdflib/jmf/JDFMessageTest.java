@@ -208,6 +208,26 @@ public class JDFMessageTest extends TestCase
 	 *
 	 */
 	@Test
+	public void testAbortQEParams2()
+	{
+		final JDFCommand m = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.AbortQueueEntry);
+		assertNotNull(m.appendAbortQueueEntryParams());
+		try
+		{
+			m.appendAbortQueueEntryParams();
+			fail("only one bortQueueEntryParam");
+		}
+		catch (final Exception e)
+		{
+			// nop
+		}
+		assertEquals(m.getAbortQueueEntryParams(), m.getCreateAbortQueueEntryParams());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetDeviceInfo()
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Status);

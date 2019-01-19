@@ -52,6 +52,7 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.HashUtil;
@@ -132,7 +133,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	@Override
 	public String toString()
 	{
-		return "VJDFAttributeMap: " + showKeys("\n", " ");
+		return "VJDFAttributeMap: " + showKeys("\n", JDFConstants.SPACE);
 	}
 
 	/**
@@ -596,10 +597,11 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	{
 		final JDFAttributeMap newMap = new JDFAttributeMap();
 
-		if (size() == 0)
+		if (isEmpty())
 			return null;
 		else if (size() == 1)
-			return get(0);
+			return get(0).clone();
+
 		final JDFAttributeMap map0 = get(0);
 		final VString keys = map0.getKeys();
 		for (final String key : keys)

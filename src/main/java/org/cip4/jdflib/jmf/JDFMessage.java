@@ -2876,6 +2876,30 @@ public class JDFMessage extends JDFAutoMessage
 	/**
 	 * @return
 	 */
+	public JDFAbortQueueEntryParams appendAbortQueueEntryParams()
+	{
+		return (JDFAbortQueueEntryParams) appendValidElement(ElementName.ABORTQUEUEENTRYPARAMS, null);
+	}
+
+	/**
+	 * @return
+	 */
+	public JDFAbortQueueEntryParams getAbortQueueEntryParams()
+	{
+		return (JDFAbortQueueEntryParams) getValidElement(ElementName.ABORTQUEUEENTRYPARAMS, null, 0);
+	}
+
+	/**
+	 * @return
+	 */
+	public JDFAbortQueueEntryParams getCreateAbortQueueEntryParams()
+	{
+		return (JDFAbortQueueEntryParams) getCreateValidElement(ElementName.ABORTQUEUEENTRYPARAMS, null, 0);
+	}
+
+	/**
+	 * @return
+	 */
 	public JDFFlushQueueParams appendFlushQueueParams()
 	{
 		return (JDFFlushQueueParams) appendValidElement(ElementName.FLUSHQUEUEPARAMS, null);

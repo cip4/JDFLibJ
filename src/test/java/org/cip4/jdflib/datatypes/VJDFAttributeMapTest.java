@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -123,7 +123,7 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * tests OvelapsMap for individual maps
+	 * tests GetCommonMap for individual maps
 	 */
 	@Test
 	public void testGetCommonMap()
@@ -138,6 +138,22 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		assertEquals(v.getCommonMap(), m1);
 		v.add(m2);
 		assertEquals(v.getCommonMap(), new JDFAttributeMap("a1", "v1"));
+	}
+
+	/**
+	 * tests GetCommonMap for individual maps
+	 */
+	@Test
+	public void testGetCommonMap2()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		v.add(m1);
+		final JDFAttributeMap cm = v.getCommonMap();
+		assertEquals(cm, m1);
+		cm.put("aa", "bb");
+		assertNull(m1.get("aa"));
 	}
 
 	/**

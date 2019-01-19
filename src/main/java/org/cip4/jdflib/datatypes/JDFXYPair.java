@@ -330,7 +330,7 @@ public class JDFXYPair extends JDFNumList
 				final VString v = StringUtil.tokenize(string, JDFConstants.SLASH, false);
 				if (v.size() == 2)
 				{
-					super.setString(StringUtil.replaceChar(string, '/', " ", 0));
+					super.setString(StringUtil.replaceChar(string, '/', JDFConstants.SPACE, 0));
 				}
 				else
 				{

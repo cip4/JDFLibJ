@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -245,7 +245,32 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertEquals(r.getICSVersions(), ics1);
 	}
 
-	// //////////////////////////////////////////////////////////////////////
+	/**
+	 *
+	 */
+	@Test
+	public void testJobID()
+	{
+		final FixVersion f1 = new FixVersion(EnumVersion.Version_1_4);
+		n.removeAttribute(AttributeName.JOBID);
+		f1.convert(n);
+		assertTrue(n.hasNonEmpty(AttributeName.JOBID));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testJobPartID()
+	{
+		final FixVersion f1 = new FixVersion(EnumVersion.Version_1_7);
+		n.setJobID("j1");
+		n.removeAttribute(AttributeName.JOBPARTID);
+		f1.convert(n);
+		assertEquals("P_j1", n.getJobPartID(true));
+
+	}
 
 	/**
 	 *

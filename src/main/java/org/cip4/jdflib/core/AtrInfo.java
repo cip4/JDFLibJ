@@ -289,7 +289,7 @@ public class AtrInfo
 	public static boolean matchesTokenList(final String smallAtt, final String bigAtt)
 	{
 		// check for matching individual NMTOKEN
-		if (smallAtt.indexOf(" ") > 0)
+		if (smallAtt.indexOf(JDFConstants.BLANK) > 0)
 		{
 			final VString vSmall = StringUtil.tokenize(smallAtt, JDFConstants.BLANK, false);
 			for (int i = 0; i < vSmall.size(); i++)

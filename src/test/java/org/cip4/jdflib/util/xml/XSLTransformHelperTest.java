@@ -82,6 +82,23 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 	 * make sure we also get all valid deep elements
 	 */
 	@Test
+	public void testGetTransformElementV2()
+	{
+		final XMLDoc xsl = new XMLDoc("xsl:stylesheet", "http://www.w3.org/1999/XSL/Transform");
+		final KElement style = xsl.getRoot();
+		style.setAttribute("version", "2.0");
+		final KElement template = style.appendElement("xsl:template");
+		template.setAttribute("match", "*");
+		template.appendElement("html", "http://www.w3.org/1999/xhtml");
+		final KElement a = new XMLDoc("a", null).getRoot();
+		final KElement t = new XSLTransformHelper(a, xsl).getTransformElement().getRoot();
+		assertNotNull(t);
+	}
+
+	/**
+	 * make sure we also get all valid deep elements
+	 */
+	@Test
 	public void testGetTransformMetadata()
 	{
 		final XMLDoc xsl = new XMLDoc("xsl:stylesheet", "http://www.w3.org/1999/XSL/Transform");

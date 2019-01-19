@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -939,13 +939,17 @@ public class JDFSpawn
 		final String ro = EnumSpawnStatus.SpawnedRO.getName();
 		for (final KElement e : outLinks)
 		{
-			final VElement v = ((JDFResourceLink) e).getLinkRoot().getLeaves(true);
-			for (final KElement r : v)
+			final JDFResource linkRoot = ((JDFResourceLink) e).getLinkRoot();
+			if (linkRoot != null)
 			{
-				if (ro.equals(r.getAttribute_KElement(AttributeName.SPAWNSTATUS)))
+				final VElement v = linkRoot.getLeaves(true);
+				for (final KElement r : v)
 				{
-					r.removeFromAttribute(AttributeName.SPAWNIDS, spawnID, null, null, 0);
-					r.removeAttribute_KElement(AttributeName.SPAWNSTATUS, null);
+					if (ro.equals(r.getAttribute_KElement(AttributeName.SPAWNSTATUS)))
+					{
+						r.removeFromAttribute(AttributeName.SPAWNIDS, spawnID, null, null, 0);
+						r.removeAttribute_KElement(AttributeName.SPAWNSTATUS, null);
+					}
 				}
 			}
 		}

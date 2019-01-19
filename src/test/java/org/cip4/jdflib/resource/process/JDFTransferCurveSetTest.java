@@ -1,7 +1,9 @@
-/**
+/*
+ *
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ *
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -34,113 +36,43 @@
  *
  *
  */
-package org.cip4.jdflib.elementwalker.fixversion;
+package org.cip4.jdflib.resource.process;
 
-import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
-import org.cip4.jdflib.core.AttributeName;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.core.JDFDoc;
+import org.junit.Test;
 
-/**
- * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- *         June 7, 2009
- */
-public class WalkJDF extends WalkElement
+public class JDFTransferCurveSetTest extends JDFTestCaseBase
 {
+
 	/**
 	 *
 	 */
-	public WalkJDF()
+	@Test
+	public void testGetTransfercurve()
 	{
-		super();
+		final JDFTransferCurveSet p = (JDFTransferCurveSet) new JDFDoc(ElementName.TRANSFERCURVESET).getRoot();
+		assertNull(p.getTransferCurve(0));
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return (toCheck instanceof JDFNode);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return VString.getVString(ElementName.JDF, null);
-	}
-
-	/**
-	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine for JDF uses heuristics to modify this element and its children to be compatible with
-	 *      a given version in general, it will be able to move from low to high versions but potentially fail when attempting to move from higher to lower versions
-	 */
-	@Override
-	public KElement walk(final KElement e1, final KElement trackElem)
-	{
-		final JDFNode n = (JDFNode) e1;
-		if (fixVersion.version != null)
-		{
-			n.setVersion(fixVersion.version);
-			n.setMaxVersion(fixVersion.version);
-			n.fixNiCi(fixVersion.version);
-			fixNamedFeatures(n, trackElem);
-		}
-
-		if (n.isJDFRoot() && !n.hasAncestorAttribute(AttributeName.JOBID, null))
-		{
-			n.setJobID(n.generateDotID(AttributeName.JOBID, null));
-		}
-		if (!n.hasNonEmpty(AttributeName.JOBPARTID))
-		{
-			if (n.isJDFRoot())
-			{
-				n.setJobPartID("P_" + n.getJobID(true));
-			}
-			else
-			{
-				n.setJobPartID(n.generateDotID(AttributeName.JOBPARTID, null));
-			}
-		}
-
-		final EnumType enumType = n.getEnumType();
-		if (enumType != null)
-		{
-			n.setType(enumType); // fixes xsi:type stuff
-		}
-		return super.walk(e1, trackElem);
-	}
-
-	/**
-	 * move namedfeatures to generalID
 	 *
-	 * @param trackElem
-	 * @param n
 	 */
-	private void fixNamedFeatures(final JDFNode n, final KElement trackElem)
+	@Test
+	public void testGetTransfercurveName()
 	{
-		if (EnumUtil.aLessThanB(EnumVersion.Version_1_4, fixVersion.version))
-		{
-			final VString v = n.getNamedFeatures();
-			final int size = v == null ? 0 : v.size();
-			for (int i = 0; i < size / 2; i++)
-			{
-				final String key = v.get(i * 2);
-				final String val = v.get(i * 2 + 1);
-				n.appendGeneralID(key, val).setDataType(EnumDataType.NamedFeature);
-			}
-			n.removeAttribute(AttributeName.NAMEDFEATURES);
-		}
+		final JDFTransferCurveSet p = (JDFTransferCurveSet) new JDFDoc(ElementName.TRANSFERCURVESET).getRoot();
+		assertNull(p.getTransferCurve(null));
+		final JDFTransferCurve tc = p.getCreateTransferCurve("Cyan");
+		assertEquals(tc, p.getCreateTransferCurve("Cyan"));
+		assertEquals(tc, p.getTransferCurve("Cyan"));
+		assertNull(p.getTransferCurve("Magenta"));
+		assertEquals(tc, p.getTransferCurve("*"));
+
 	}
 
 }

@@ -834,7 +834,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		String jobPartID = getJobPartID();
 		if (StringUtil.getNonEmpty(jobPartID) == null)
 		{
-			String types = getXPathValue("@Types");
+			String types = getAttribute(AttributeName.TYPES);
 			if (StringUtil.getNonEmpty(types) == null)
 			{
 				types = "unknown";
@@ -873,7 +873,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public void setTypes(final VString vtypes)
 	{
-		setXPathValue("@Types", StringUtil.setvString(vtypes));
+		setAttribute(AttributeName.TYPES, StringUtil.setvString(vtypes));
 	}
 
 	/**
@@ -910,7 +910,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public EnumType getType()
 	{
-		final VString types = VString.getVString(getXPathValue("@Types"), null);
+		final VString types = getTypes();
 		EnumType typ = null;
 		if (types != null && types.size() == 1)
 		{

@@ -1756,7 +1756,7 @@ public class XMLDoc implements Cloneable
 		{
 			return null;
 		}
-		final VString strings = StringUtil.tokenize(schemaloc, " ", false);
+		final VString strings = StringUtil.tokenize(schemaloc, null, false);
 		final int indexOfNS = strings.indexOf(nsURI);
 		if (indexOfNS >= 0 && indexOfNS < strings.size() - 1)
 		{
@@ -1802,7 +1802,7 @@ public class XMLDoc implements Cloneable
 		if (_schemaLocation != null && _schemaLocation.length() != 0)
 		{
 			final String fileToUrl = UrlUtil.fileToUrl(_schemaLocation, false);
-			final String schemaLocation = nsURI + " " + fileToUrl;
+			final String schemaLocation = nsURI + JDFConstants.SPACE + fileToUrl;
 			final KElement root = getRoot();
 			if (root != null)
 			{
