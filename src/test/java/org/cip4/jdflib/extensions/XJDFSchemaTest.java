@@ -100,7 +100,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	public void testCMYKValidate()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
-		root.setXPathAttribute("ResourceSet[@Name=\"Color\"]/Resource/Color/@CMYK", "1 2 3 4");
+		root.setXPathAttribute("ResourceSet[@Name=\"Color\"]/Resource/Color/@CMYK", "1 0.2 0.3 0.4");
 		root.setAttribute("Types", "ConventionalPrinting");
 		writeTest(root, "../SimpleCMYK.xjdf", true, null);
 	}

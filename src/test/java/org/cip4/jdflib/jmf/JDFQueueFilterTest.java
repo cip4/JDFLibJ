@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -515,7 +515,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 			final long l1 = System.currentTimeMillis();
 			final JDFQueue qCopy = filter.copy(theQueue, null, null);
 			final long l2 = System.currentTimeMillis();
-			assertEquals("copy time <1 second", 1000, (l2 - l1), 1000);
+			assertEquals("copy time <1 second", 2000, (l2 - l1), 1000);
 			if (test < 3)
 				assertEquals(qCopy.numEntries(null), theQueue.numEntries(null));
 			if (test == 3)
