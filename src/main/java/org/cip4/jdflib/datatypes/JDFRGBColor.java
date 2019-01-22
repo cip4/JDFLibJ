@@ -205,6 +205,16 @@ public class JDFRGBColor extends JDFNumList
 	}
 
 	/**
+	 * setR - sets the red color
+	 *
+	 * @param red the red color
+	 */
+	public void setR255(final int red)
+	{
+		set(0, red / 255.);
+	}
+
+	/**
 	 * getG - returns the green color
 	 *
 	 * @return double - the green color
@@ -225,6 +235,16 @@ public class JDFRGBColor extends JDFNumList
 	}
 
 	/**
+	 * setGreen - sets the green color
+	 *
+	 * @param green the green color
+	 */
+	public void setG255(final int green)
+	{
+		set(1, green / 255.);
+	}
+
+	/**
 	 * getBlue - returns the blue color
 	 *
 	 * @return double - the blue color
@@ -235,6 +255,36 @@ public class JDFRGBColor extends JDFNumList
 	}
 
 	/**
+	 * getBlue - returns the red color
+	 *
+	 * @return int - the red color in 0-255
+	 */
+	public int getR255()
+	{
+		return (int) (255. * doubleAt(0));
+	}
+
+	/**
+	 * getBlue - returns the green color
+	 *
+	 * @return int - the green color in 0-255
+	 */
+	public int getG255()
+	{
+		return (int) (255. * doubleAt(1));
+	}
+
+	/**
+	 * getBlue - returns the blue color
+	 *
+	 * @return int - the blue color in 0-255
+	 */
+	public int getB255()
+	{
+		return (int) (255. * doubleAt(2));
+	}
+
+	/**
 	 * setBlue - sets the blue color
 	 *
 	 * @param blue the blue color
@@ -242,6 +292,16 @@ public class JDFRGBColor extends JDFNumList
 	public void setB(final double blue)
 	{
 		set(2, blue);
+	}
+
+	/**
+	 * setBlue - sets the blue color
+	 *
+	 * @param blue the blue color
+	 */
+	public void setB255(final int blue)
+	{
+		set(2, blue / 255.);
 	}
 
 	/**

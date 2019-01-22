@@ -46,6 +46,7 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import java.util.Collection;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -268,7 +269,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	 */
 	public JDFColorantAlias getColorantAlias(final String sourceColor)
 	{
-		final Vector<JDFColorantAlias> vcc = getChildrenByClass(JDFColorantAlias.class, false, 0);
+		final Collection<JDFColorantAlias> vcc = getChildrenByClass(JDFColorantAlias.class, false, 0);
 		for (final JDFColorantAlias ca : vcc)
 		{
 			final VString seps = ca.getSeparations();
@@ -288,7 +289,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
 		final JDFAttributeMap map = new JDFAttributeMap();
 		if (isLeaf())
 		{
-			final Vector<JDFColorantAlias> vcc = getChildrenByClass(JDFColorantAlias.class, false, 0);
+			final Collection<JDFColorantAlias> vcc = getChildrenByClass(JDFColorantAlias.class, false, 0);
 			for (final JDFColorantAlias ca : vcc)
 			{
 				final VString seps = ca.getSeparations();
