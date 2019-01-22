@@ -336,6 +336,9 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		assertEquals(a1, colControl.getColorantAlias("s1"));
 		assertEquals(a2, colControl.getColorantAlias("s2"));
 		assertNull(colControl.getColorantAlias("t1"));
+		assertEquals(a1, cBlatt.getColorantAlias("s1"));
+		assertEquals(a2, cBlatt.getColorantAlias("s2"));
+		assertNull(cBlatt.getColorantAlias("t1"));
 
 	}
 
@@ -347,6 +350,17 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		assertEquals("t2", colControl.getColorantAliasMap().get("s2"));
 		assertEquals(2, colControl.getColorantAliasMap().size());
 
+	}
+
+	@Test
+	public void testGetColorantAliasMapLeaf()
+	{
+		final JDFColorantAlias a1 = colControl.appendColorantAlias("s1", "t1");
+		final JDFColorantAlias a2 = colControl.appendColorantAlias("s2", "t2");
+		assertEquals("t2", colControl.getColorantAliasMap().get("s2"));
+		final JDFColorantControl leaf = (JDFColorantControl) colControl.addPartition(EnumPartIDKey.SheetName, "s1");
+		assertEquals(2, colControl.getColorantAliasMap().size());
+		assertEquals(2, leaf.getColorantAliasMap().size());
 	}
 
 	@Test
@@ -378,8 +392,6 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		assertEquals(col.size(), 1);
 		assertTrue(col.contains(a3));
 	}
-
-	// //////////////////////////////////////////////////////////////////////
 
 	/**
 	 *

@@ -268,13 +268,12 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	 */
 	public JDFColorantAlias getColorantAlias(final String sourceColor)
 	{
-		JDFColorantAlias ca = getFirstChildElement(JDFColorantAlias.class);
-		while (ca != null)
+		final Vector<JDFColorantAlias> vcc = getChildrenByClass(JDFColorantAlias.class, false, 0);
+		for (final JDFColorantAlias ca : vcc)
 		{
 			final VString seps = ca.getSeparations();
 			if (seps.contains(sourceColor))
 				return ca;
-			ca = ca.getNextSiblingElement(JDFColorantAlias.class);
 		}
 		return null;
 	}
@@ -289,14 +288,13 @@ public class JDFColorantControl extends JDFAutoColorantControl
 		final JDFAttributeMap map = new JDFAttributeMap();
 		if (isLeaf())
 		{
-			JDFColorantAlias ca = getFirstChildElement(JDFColorantAlias.class);
-			while (ca != null)
+			final Vector<JDFColorantAlias> vcc = getChildrenByClass(JDFColorantAlias.class, false, 0);
+			for (final JDFColorantAlias ca : vcc)
 			{
 				final VString seps = ca.getSeparations();
 				final String target = ca.getReplacementColorantName();
 				for (final String sep : seps)
 					map.put(sep, target);
-				ca = ca.getNextSiblingElement(JDFColorantAlias.class);
 			}
 		}
 		else

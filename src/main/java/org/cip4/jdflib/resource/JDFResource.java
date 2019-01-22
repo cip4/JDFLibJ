@@ -2500,7 +2500,7 @@ public class JDFResource extends JDFElement
 		Vector<a> v = super.getChildrenByClass(clazz, bRecurse, nMax);
 
 		KElement ke = this;
-		if (v.size() == 0 && clazz != getClass())
+		if (v.isEmpty() && clazz != getClass())
 		{
 			final String nodeName = getNodeName();
 			ke = ke.getParentNode_KElement();

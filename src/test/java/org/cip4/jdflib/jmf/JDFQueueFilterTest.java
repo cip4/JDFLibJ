@@ -515,7 +515,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 			final long l1 = System.currentTimeMillis();
 			final JDFQueue qCopy = filter.copy(theQueue, null, null);
 			final long l2 = System.currentTimeMillis();
-			assertEquals("copy time <1 second", 2000, (l2 - l1), 1000);
+			assertEquals("copy time <1 second", 2000, (l2 - l1), 2000);
 			if (test < 3)
 				assertEquals(qCopy.numEntries(null), theQueue.numEntries(null));
 			if (test == 3)
