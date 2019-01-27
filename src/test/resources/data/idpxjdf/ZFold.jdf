@@ -1,98 +1,122 @@
-<?xml version="1.0" encoding="utf-8"?>
- <JDF ID="JDFID" Types="LayoutPreparation Imposition Interpreting Rendering ColorSpaceConversion DigitalPrinting Folding Gathering Stitching HoleMaking" DescriptiveName="test" Activation="Active" Status="Waiting" Category="DigitalPrinting" Type="Combined" Version="1.3" Template="false" xmlns="http://www.CIP4.org/JDFSchema_1_1">
-    <ResourcePool>
-      <CustomerInfo Class="Parameter" ID="CustomerInfoID" Status="Available" CustomerJobName="test">
-        <ContactRef rRef="ContactID" />
-      </CustomerInfo>
-      <Contact ContactTypes="Owner Delivery" Class="Parameter" ID="ContactID" Status="Available" />
-      <Media PrePrinted="false" Class="Consumable" ID="MediaID1" Status="Available" Dimension="595 842" DescriptiveName="A4 Blue" MediaColorName="Blue" MediaSetCount="1" Weight="100" MediaType="Paper" MediaTypeDetails="TopColor" />
-      <Media PrePrinted="false" Class="Consumable" ID="MediaID2" Status="Available" Dimension="1191 842" DescriptiveName="A3 Orange" MediaColorName="Orange" MediaSetCount="1" Weight="160" MediaType="Paper"  />
-      <RunList Class="Parameter" ID="RunListID" Status="Available" NPage="10">
-        <LayoutElementRef rRef="LayoutElementID" />
-      </RunList>
-      <LayoutElement Class="Parameter" ID="LayoutElementID" Status="Available">
-        <FileSpec URL="cid:part3-PDF" MimeType="application/pdf" MimeTypeVersion="PDF/X-3:2003" />
-      </LayoutElement>
-      <Device ID="DeviceID" Status="Available" Class="Implementation" DeviceID="TestPBE2">
-        <GeneralID IDUsage="oce:QueueName" IDValue="print" />
-      </Device>
-      <ColorSpaceConversionParams ICCProfileUsage="UsePDL" Class="Parameter" ID="ColorSpaceConversionParamsID" Status="Available" />
-      <Layout Class="Parameter" ID="LayoutID" Status="Available" />
-      <LayoutPreparationParams FinishingOrder="FoldGather" Rotate="Rotate0" Sides="TwoSidedFlipY" Class="Parameter" ID="LayoutPreparationParamsID" Status="Available" PartIDKeys="RunIndex" BindingEdge="Left">
-        <MediaRef rRef="MediaID1" />
-        <LayoutPreparationParams Sides="TwoSidedFlipY" RunIndex="0 ~ 1 4 ~ 9" Rotate="Rotate0">
-          <MediaRef rRef="MediaID1" />
-        </LayoutPreparationParams>
-        <LayoutPreparationParams Sides="TwoSidedFlipY" RunIndex="2 ~ 3" Rotate="Rotate0">
-          <MediaRef rRef="$$$" />
-        </LayoutPreparationParams>
-      </LayoutPreparationParams>
-      <DigitalPrintingParams Class="Parameter" ID="DigitalPrintingID" Status="Available" PartIDKeys="RunIndex" Collate="Sheet" OutputBin="AutoSelect">
-        <MediaRef rRef="MediaID1" />
-        <Disjointing OffsetDirection="None" />
-        <DigitalPrintingParams RunIndex="0 ~ 1 4 ~ 9">
-          <MediaRef rRef="MediaID1" />
-        </DigitalPrintingParams>
-        <DigitalPrintingParams RunIndex="2 ~ 3">
-          <MediaRef rRef="MediaID2" />
-        </DigitalPrintingParams>
+<?xml version="1.0" encoding="UTF-8"?>
+<JDF Activation="Active" Category="DigitalPrinting"
+  DescriptiveName="test" ID="JDFID" JobID="J_000002"
+  JobPartID="n_000003" Status="Waiting" Type="Combined"
+  Types="LayoutPreparation Imposition Interpreting Rendering Screening ColorSpaceConversion DigitalPrinting Folding Gathering Stitching HoleMaking"
+  Version="1.3" xmlns="http://www.CIP4.org/JDFSchema_1_1">
+  <AuditPool>
+    <Created AgentName="Test" AgentVersion="1" ID="audit_1" TimeStamp="2018-12-12T09:41:03Z"/>
+  </AuditPool>
+  <ResourceLinkPool>
+    <CustomerInfoLink Usage="Input" rRef="CustomerInfoID"/>
+    <MediaLink Usage="Input" rRef="MediaID1"/>
+    <MediaLink Usage="Input" rRef="MediaID2"/>
+    <RunListLink Usage="Input" rRef="RunListID"/>
+    <DeviceLink Usage="Input" rRef="DeviceID"/>
+    <ColorSpaceConversionParamsLink Usage="Input" rRef="ColorSpaceConversionParamsID"/>
+    <LayoutLink Usage="Input" rRef="LayoutID"/>
+    <LayoutPreparationParamsLink Usage="Input" rRef="LayoutPreparationParamsID"/>
+    <DigitalPrintingParamsLink Usage="Input" rRef="DigitalPrintingID"/>
+    <InterpretingParamsLink Usage="Input" rRef="InterpretingID"/>
+    <RenderingParamsLink Usage="Input" rRef="RenderingID"/>
+    <ScreeningParamsLink Usage="Input" rRef="ScreeningID"/>
+    <StitchingParamsLink Usage="Input" rRef="StitchingID"/>
+    <FoldingParamsLink Usage="Input" rRef="FoldingID"/>
+    <HoleMakingParamsLink Usage="Input" rRef="HoldMakingID"/>
+    <ComponentLink CombinedProcessIndex="6" Usage="Input" rRef="ComponentID1">
+      <AmountPool>
+        <PartAmount Orientation="Rotate0">
+          <Part RunIndex="0 ~ 1 4 ~ 9"/>
+        </PartAmount>
+        <PartAmount Orientation="Flip180">
+          <Part RunIndex="2 ~ 3"/>
+        </PartAmount>
+      </AmountPool>
+    </ComponentLink>
+    <ComponentLink CombinedProcessIndex="6" Usage="Output" rRef="ComponentID2">
+      <AmountPool>
+        <PartAmount Orientation="Rotate0">
+          <Part RunIndex="0 ~ 1 4 ~ 9"/>
+        </PartAmount>
+        <PartAmount Orientation="Flip180">
+          <Part RunIndex="2 ~ 3"/>
+        </PartAmount>
+      </AmountPool>
+    </ComponentLink>
+    <ComponentLink Amount="1" CombinedProcessIndex="9"
+      Orientation="Rotate0" Usage="Output" rRef="ComponentIDFinal"/>
+  </ResourceLinkPool>
+  <ResourcePool>
+    <ColorSpaceConversionParams Class="Parameter"
+      ID="ColorSpaceConversionParamsID" Status="Available"/>
+    <Component Class="Quantity" ComponentType="PartialProduct"
+      ID="ComponentID1" PipeProtocol="Internal" Status="Unavailable"/>
+    <Component Class="Quantity" ComponentType="PartialProduct"
+      ID="ComponentID2" PipeProtocol="Internal" Status="Unavailable"/>
+    <Component Class="Quantity" ComponentType="FinalProduct"
+      ID="ComponentIDFinal" Status="Unavailable"/>
+    <Contact Class="Parameter" ContactTypes="Owner Delivery"
+      ID="ContactID" Status="Available"/>
+    <CustomerInfo Class="Parameter" CustomerJobName="test"
+      ID="CustomerInfoID" Status="Available">
+      <ContactRef rRef="ContactID"/>
+    </CustomerInfo>
+    <Device Class="Implementation" DeviceID="TestPBE2" ID="DeviceID" Status="Available">
+      <GeneralID IDUsage="oce:QueueName" IDValue="print"/>
+    </Device>
+    <DigitalPrintingParams Class="Parameter" Collate="Sheet"
+      ID="DigitalPrintingID" OutputBin="AutoSelect"
+      PartIDKeys="RunIndex" Status="Available">
+      <MediaRef rRef="MediaID1"/>
+      <Disjointing OffsetDirection="None"/>
+      <DigitalPrintingParams RunIndex="0 ~ 1 4 ~ 9">
+        <MediaRef rRef="MediaID1"/>
       </DigitalPrintingParams>
-      <InterpretingParams Class="Parameter" ID="InterpretingID" Status="Available">
-        <PDFInterpretingParams HonorPDFOverprint="false" />
-      </InterpretingParams>
-      <RenderingParams Class="Parameter" ID="RenderingID" Status="Available">
-        <ObjectResolution Resolution="1200 1200" AntiAliasing="None" />
-      </RenderingParams>
-      <ScreeningParams Class="Parameter" ID="ScreeningID" Status="Available" />
-      <StitchingParams Class="Parameter" ID="StitchingID" Status="Available" StitchType="Side" NumberOfStitches="2" />
-      <FoldingParams Class="Parameter" ID="FoldingID" Status="Available" PartIDKeys="RunIndex">
-        <FoldingParams RunIndex="0 ~ 1 4 ~ 9" FoldCatalog="F2-1" NoOp="true" />
-        <FoldingParams RunIndex="2 ~ 3" FoldCatalog="F6-7" />
-      </FoldingParams>
-      <HoleMakingParams HoleType="R2-generic" Class="Parameter" ID="HoldMakingID" Status="Available" />
-      <Component ComponentType="PartialProduct" Class="Quantity" ID="ComponentID1" Status="Unavailable" PipeProtocol="Internal" />
-      <Component ComponentType="PartialProduct" Class="Quantity" ID="ComponentID2" Status="Unavailable" PipeProtocol="Internal" />
-      <Component ComponentType="FinalProduct" Class="Quantity" ID="ComponentIDFinal" Status="Unavailable" />
-    </ResourcePool>
-    <ResourceLinkPool>
-      <CustomerInfoLink rRef="CustomerInfoID" Usage="Input" />
-      <MediaLink rRef="MediaID1" Usage="Input" />
-      <MediaLink rRef="MediaID2" Usage="Input" />
-      <RunListLink rRef="RunListID" Usage="Input" />
-      <DeviceLink rRef="DeviceID" Usage="Input" />
-      <ColorSpaceConversionParamsLink rRef="ColorSpaceConversionParamsID" Usage="Input" />
-      <LayoutLink rRef="LayoutID" Usage="Input" />
-      <LayoutPreparationParamsLink rRef="LayoutPreparationParamsID" Usage="Input" />
-      <DigitalPrintingParamsLink rRef="DigitalPrintingID" Usage="Input" />
-      <InterpretingParamsLink rRef="InterpretingID" Usage="Input" />
-      <RenderingParamsLink rRef="RenderingID" Usage="Input" />
-      <ScreeningParamsLink rRef="ScreeningID" Usage="Input" />
-      <StitchingParamsLink rRef="StitchingID" Usage="Input" />
-      <FoldingParamsLink rRef="FoldingID" Usage="Input" />
-      <HoleMakingParamsLink rRef="HoldMakingID" Usage="Input" />
-      <ComponentLink rRef="ComponentID1" Usage="Input" CombinedProcessIndex="6">
-        <AmountPool>
-          <PartAmount Orientation="Rotate0">
-            <Part RunIndex="0 ~ 1 4 ~ 9" />
-          </PartAmount>
-          <PartAmount Orientation="Flip180">
-            <Part RunIndex="2 ~ 3" />
-          </PartAmount>
-        </AmountPool>
-      </ComponentLink>
-      <ComponentLink rRef="ComponentID2" Usage="Output" CombinedProcessIndex="6">
-        <AmountPool>
-          <PartAmount Orientation="Rotate0">
-            <Part RunIndex="0 ~ 1 4 ~ 9" />
-          </PartAmount>
-          <PartAmount Orientation="Flip180">
-            <Part RunIndex="2 ~ 3" />
-          </PartAmount>
-        </AmountPool>
-      </ComponentLink>
-      <ComponentLink rRef="ComponentIDFinal" Usage="Output" Amount="1" CombinedProcessIndex="9" Orientation="Rotate0" />
-    </ResourceLinkPool>
-    <AuditPool>
-	  <Created TimeStamp="2018-12-12T09:41:03Z" ID="audit_1" AgentName="Test" AgentVersion="1" />
-    </AuditPool>
-  </JDF>
+      <DigitalPrintingParams RunIndex="2 ~ 3">
+        <MediaRef rRef="MediaID2"/>
+      </DigitalPrintingParams>
+    </DigitalPrintingParams>
+    <FoldingParams Class="Parameter" ID="FoldingID"
+      PartIDKeys="RunIndex" Status="Available">
+      <FoldingParams FoldCatalog="F2-1" NoOp="true" RunIndex="0 ~ 1 4 ~ 9"/>
+      <FoldingParams FoldCatalog="F6-7" RunIndex="2 ~ 3"/>
+    </FoldingParams>
+    <HoleMakingParams Class="Parameter" HoleType="R2-generic"
+      ID="HoldMakingID" Status="Available"/>
+    <InterpretingParams Class="Parameter" ID="InterpretingID" Status="Available">
+      <PDFInterpretingParams HonorPDFOverprint="false"/>
+    </InterpretingParams>
+    <Layout Class="Parameter" ID="LayoutID" Status="Available"/>
+    <LayoutElement Class="Parameter" ID="LayoutElementID" Status="Available">
+      <FileSpec MimeType="application/pdf"
+        MimeTypeVersion="PDF/X-3:2003" URL="cid:part3-PDF"/>
+    </LayoutElement>
+    <LayoutPreparationParams BindingEdge="Left" Class="Parameter"
+      FinishingOrder="FoldGather" ID="LayoutPreparationParamsID"
+      PartIDKeys="RunIndex" Sides="TwoSidedFlipY" Status="Available">
+      <MediaRef rRef="MediaID1"/>
+      <LayoutPreparationParams RunIndex="0 ~ 1 4 ~ 9" Sides="TwoSidedFlipY">
+        <MediaRef rRef="MediaID1"/>
+      </LayoutPreparationParams>
+      <LayoutPreparationParams RunIndex="2 ~ 3" Sides="TwoSidedFlipY">
+        <MediaRef rRef="MediaID2"/>
+      </LayoutPreparationParams>
+    </LayoutPreparationParams>
+    <Media Class="Consumable" DescriptiveName="A4 Blue"
+      Dimension="595 842" ID="MediaID1" MediaColorName="Blue"
+      MediaSetCount="1" MediaType="Paper" MediaTypeDetails="TopColor"
+      Status="Available" Weight="100"/>
+    <Media Class="Consumable" DescriptiveName="A3 Orange"
+      Dimension="1191 842" ID="MediaID2" MediaColorName="Orange"
+      MediaSetCount="1" MediaType="Paper" Status="Available" Weight="160"/>
+    <RenderingParams Class="Parameter" ID="RenderingID" Status="Available">
+      <ObjectResolution AntiAliasing="None" Resolution="1200 1200"/>
+    </RenderingParams>
+    <RunList Class="Parameter" ID="RunListID" NPage="10" Status="Available">
+      <LayoutElementRef rRef="LayoutElementID"/>
+    </RunList>
+    <ScreeningParams Class="Parameter" ID="ScreeningID" Status="Available"/>
+    <StitchingParams Class="Parameter" ID="StitchingID"
+      NumberOfStitches="2" Status="Available" StitchType="Side"/>
+  </ResourcePool>
+</JDF>

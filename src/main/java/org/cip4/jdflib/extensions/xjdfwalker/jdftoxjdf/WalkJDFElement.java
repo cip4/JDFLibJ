@@ -324,7 +324,6 @@ public class WalkJDFElement extends WalkElement
 	{
 		if (!jdfToXJDF.isRetainAll())
 		{
-			map.remove(AttributeName.ACTIVATION);
 			map.remove(AttributeName.BESTEFFORTEXCEPTIONS);
 			map.remove(AttributeName.LOCKED);
 			map.remove(AttributeName.MAXVERSION);
