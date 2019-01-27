@@ -157,7 +157,8 @@ public class WalkXJDFResource extends WalkXElement
 					final String newVal = vals.getString();
 					vParts.put(key, newVal);
 					vParts.unify();
-					res.setAttribute(key, newVal);
+					if (res.hasAttribute(key))
+						res.setAttribute(key, newVal);
 				}
 			}
 		}
