@@ -319,7 +319,7 @@ public class StrippingConverter
 	{
 		final int total = (int) (numberUp == null ? 1 : numberUp.getX() * numberUp.getY());
 
-		if (total == 1)
+		if (total == 1 || numberUp == null)
 			return new JDFRectangle(0, 0, 1, 1);
 		final double dx = 1.0 / numberUp.getX();
 		final double dy = 1.0 / numberUp.getY();
