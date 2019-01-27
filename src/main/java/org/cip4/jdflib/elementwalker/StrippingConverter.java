@@ -1,70 +1,38 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *  
- * 
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ *
+ *
  */
 package org.cip4.jdflib.elementwalker;
 
@@ -105,15 +73,16 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * sub-class that converts LayoutPreparationParams to the corresponding StrippingParams, Assembly and BinderySignature
+ *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * June 4, 2009
+ *
+ *         June 4, 2009
  */
 public class StrippingConverter
 {
 
 	/**
-	 * 
+	 *
 	 */
 	private final JDFLayoutPreparationParams layPrepParams;
 	private JDFAssembly assembly = null;
@@ -122,10 +91,10 @@ public class StrippingConverter
 	private final JDFNode parent;
 
 	/**
-	 * @param layoutPreparationParams 
+	 * @param layoutPreparationParams
 	 * @param n
 	 */
-	public StrippingConverter(JDFLayoutPreparationParams layoutPreparationParams, JDFNode n)
+	public StrippingConverter(final JDFLayoutPreparationParams layoutPreparationParams, final JDFNode n)
 	{
 		layPrepParams = layoutPreparationParams;
 		parent = n == null ? layPrepParams.getParentJDF() : n;
@@ -136,11 +105,11 @@ public class StrippingConverter
 	 */
 	public JDFBinderySignature getBinderySignature()
 	{
-		return binderySignature;
+		return binderySignature != null ? binderySignature : strippingParams.getBinderySignature();
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void convert()
 	{
@@ -148,21 +117,21 @@ public class StrippingConverter
 		convertAssembly();
 		strippingParams = (JDFStrippingParams) parent.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
 		strippingParams.clonePartitions(layPrepParams, null);
-		VElement vThis = layPrepParams.getLeaves(false);
-		for (KElement e : vThis)
+		final VElement vThis = layPrepParams.getLeaves(false);
+		for (final KElement e : vThis)
 		{
 			new StrippingConverter((JDFLayoutPreparationParams) e, parent).convertLeaf();
 		}
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	protected void convertLeaf()
 	{
 		strippingParams = (JDFStrippingParams) parent.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
-		JDFAttributeMap partMap = layPrepParams.getPartMap();
+		final JDFAttributeMap partMap = layPrepParams.getPartMap();
 		if (partMap != null && partMap.size() > 0)
 			strippingParams = (JDFStrippingParams) strippingParams.getPartition(partMap, null);
 		convertStrippingParams();
@@ -201,7 +170,7 @@ public class StrippingConverter
 			media.makeRootResource(null, null, true);
 			strippingParams.refElement(media);
 		}
-		JDFExternalImpositionTemplate template = layPrepParams.getExternalImpositionTemplate();
+		final JDFExternalImpositionTemplate template = layPrepParams.getExternalImpositionTemplate();
 		strippingParams.copyElement(template, null);
 		setPosition();
 		setStripMarks(layPrepParams.getFrontMarkList(), EnumMarkSide.Front);
@@ -209,20 +178,20 @@ public class StrippingConverter
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	private void setStripCellParams()
 	{
-		JDFPageCell pageCell = layPrepParams.getPageCell();
+		final JDFPageCell pageCell = layPrepParams.getPageCell();
 		if (pageCell != null)
 		{
-			JDFXYPair ts = pageCell.getTrimSize();
+			final JDFXYPair ts = pageCell.getTrimSize();
 			if (ts != null)
 			{
 				strippingParams.getCreateStripCellParams().setTrimSize(ts);
 			}
 		}
-		EnumSides sides = layPrepParams.getSides();
+		final EnumSides sides = layPrepParams.getSides();
 		if (EnumSides.OneSidedFront.equals(sides))
 		{
 			strippingParams.getCreateStripCellParams().setSides(JDFAutoStripCellParams.EnumSides.OneSided);
@@ -243,46 +212,47 @@ public class StrippingConverter
 	 */
 	private void setSignatureCell()
 	{
-		JDFPageCell pageCell = layPrepParams.getPageCell();
+		final JDFPageCell pageCell = layPrepParams.getPageCell();
 		if (pageCell == null)
 			return;
-		JDFSignatureCell signatureCell = getBinderySignature().getCreateSignatureCell(0);
+		final JDFSignatureCell signatureCell = getBinderySignature().getCreateSignatureCell(0);
 		signatureCell.setOrientation(getSigCellOrientation(pageCell.getRotate()));
 		convertImageShift(pageCell, signatureCell);
 		signatureCell.copyElement(pageCell.getFitPolicy(), null);
 	}
 
 	/**
-	 * 
-	 * convert the image shift to 
+	 *
+	 * convert the image shift to
+	 *
 	 * @param pageCell
 	 * @param signatureCell
 	 */
-	private void convertImageShift(JDFPageCell pageCell, JDFSignatureCell signatureCell)
+	private void convertImageShift(final JDFPageCell pageCell, final JDFSignatureCell signatureCell)
 	{
-		JDFImageShift imageShift = pageCell.getImageShift();
+		final JDFImageShift imageShift = pageCell.getImageShift();
 		if (imageShift == null)
 			return;
-		EnumPositionX posX = imageShift.getPositionX();
-		EnumPositionY posY = imageShift.getPositionY();
+		final EnumPositionX posX = imageShift.getPositionX();
+		final EnumPositionY posY = imageShift.getPositionY();
 		if (posX == null || posY == null)
 			return;
 
 		String anchor = posY.getName() + posX.getName();
 		if ("CenterCenter".equals(anchor))
 			anchor = "Center";
-		EnumAnchor ea = EnumAnchor.getEnum(anchor);
+		final EnumAnchor ea = EnumAnchor.getEnum(anchor);
 		if (ea != null)
 			signatureCell.setAttribute(AttributeName.ANCHOR, anchor);
 
 	}
 
 	/**
-	 * 
+	 *
 	 * @param rotate
 	 * @return
 	 */
-	private org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation getSigCellOrientation(org.cip4.jdflib.auto.JDFAutoPageCell.EnumRotate rotate)
+	private org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation getSigCellOrientation(final org.cip4.jdflib.auto.JDFAutoPageCell.EnumRotate rotate)
 	{
 		if (org.cip4.jdflib.auto.JDFAutoPageCell.EnumRotate.Rotate90.equals(rotate))
 			return org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation.Left;
@@ -299,17 +269,17 @@ public class StrippingConverter
 	 */
 	private void setPosition()
 	{
-		JDFIntegerList sr = layPrepParams.getStepRepeat();
+		final JDFIntegerList sr = layPrepParams.getStepRepeat();
 		if (sr == null)
 		{
 			addSinglePosition(1, 1, 0, null);
 		}
 		else
 		{
-			int iX = sr.getInt(0);
-			int iY = sr.getInt(1);
-			JDFXYPair numberUp = layPrepParams.getNumberUp();
-			int total = (int) (numberUp == null ? 1 : numberUp.getX() * numberUp.getY());
+			final int iX = sr.getInt(0);
+			final int iY = sr.getInt(1);
+			final JDFXYPair numberUp = layPrepParams.getNumberUp();
+			final int total = (int) (numberUp == null ? 1 : numberUp.getX() * numberUp.getY());
 			for (int i = 0; i < total; i++)
 			{
 				addSinglePosition(iX, iY, i, numberUp);
@@ -318,39 +288,41 @@ public class StrippingConverter
 	}
 
 	/**
-	 * 
+	 *
 	 * add a single position to the respective strippingparams
+	 *
 	 * @param x
 	 * @param y
 	 * @param n
 	 * @param numberUp
 	 */
-	private void addSinglePosition(int x, int y, int n, JDFXYPair numberUp)
+	private void addSinglePosition(final int x, final int y, final int n, final JDFXYPair numberUp)
 	{
-		String bsName = getBSName(x, y, n, numberUp);
-		JDFStrippingParams sp = (JDFStrippingParams) (bsName == null ? strippingParams : strippingParams.getCreatePartition(new JDFAttributeMap(AttributeName.BINDERYSIGNATURENAME, bsName), null));
+		final String bsName = getBSName(x, y, n, numberUp);
+		final JDFStrippingParams sp = (JDFStrippingParams) (bsName == null ? strippingParams
+				: strippingParams.getCreatePartition(new JDFAttributeMap(AttributeName.BINDERYSIGNATURENAME, bsName), null));
 		final JDFPosition position = sp.appendPosition();
 		position.setRelativeBox(getRelativeBox(x, y, n, numberUp));
 		position.copyAttribute(AttributeName.ORIENTATION, layPrepParams, AttributeName.ROTATE, null, null);
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @param srx
 	 * @param sry
 	 * @param n
 	 * @param numberUp
 	 * @return
 	 */
-	private JDFRectangle getRelativeBox(int srx, int sry, int n, JDFXYPair numberUp)
+	private JDFRectangle getRelativeBox(final int srx, final int sry, final int n, final JDFXYPair numberUp)
 	{
-		int total = (int) (numberUp == null ? 1 : numberUp.getX() * numberUp.getY());
+		final int total = (int) (numberUp == null ? 1 : numberUp.getX() * numberUp.getY());
 
 		if (total == 1)
 			return new JDFRectangle(0, 0, 1, 1);
-		double dx = 1.0 / numberUp.getX();
-		double dy = 1.0 / numberUp.getY();
+		final double dx = 1.0 / numberUp.getX();
+		final double dy = 1.0 / numberUp.getY();
 		double x = n % (int) numberUp.getX();
 		x /= numberUp.getX();
 		double y = n / (int) numberUp.getX();
@@ -360,15 +332,16 @@ public class StrippingConverter
 
 	/**
 	 * get binderysignaturename partition key based on steprepeat
+	 *
 	 * @param srx
 	 * @param sry
 	 * @param n
 	 * @param numberUp
 	 * @return
 	 */
-	private String getBSName(int srx, int sry, int n, JDFXYPair numberUp)
+	private String getBSName(final int srx, final int sry, final int n, final JDFXYPair numberUp)
 	{
-		int total = (int) (numberUp == null ? 1 : numberUp.getX() * numberUp.getY());
+		final int total = (int) (numberUp == null ? 1 : numberUp.getX() * numberUp.getY());
 		if (total == 1)
 			return null;
 		int x = n % (int) numberUp.getX();
@@ -384,7 +357,7 @@ public class StrippingConverter
 	 */
 	private void setStripMarks(final VString marks, final EnumMarkSide side)
 	{
-		for (String markName : marks)
+		for (final String markName : marks)
 		{
 			final JDFStripMark sm = strippingParams.appendStripMark();
 			sm.setMarkName(markName);
@@ -408,8 +381,8 @@ public class StrippingConverter
 
 		binderySignature.copyAttribute(AttributeName.FOLDCATALOG, layPrepParams);
 
-		String pageDistribution = layPrepParams.getPageDistributionScheme();
-		String foldcatalog = StringUtil.getNonEmpty(layPrepParams.getFoldCatalog());
+		final String pageDistribution = layPrepParams.getPageDistributionScheme();
+		final String foldcatalog = StringUtil.getNonEmpty(layPrepParams.getFoldCatalog());
 		if ("Sequential".equals(pageDistribution) && (foldcatalog == null || "F2-1".equals(foldcatalog)))
 			binderySignature.setBinderySignatureType(EnumBinderySignatureType.Grid);
 		else
@@ -440,7 +413,7 @@ public class StrippingConverter
 		}
 		else if (EnumFinishingOrder.GatherFold.equals(fo))
 		{
-			String pageDistribution = layPrepParams.getPageDistributionScheme();
+			final String pageDistribution = layPrepParams.getPageDistributionScheme();
 			if ("Saddle".equals(pageDistribution))
 				assembly.setOrder(EnumOrder.Collecting);
 			else
@@ -486,6 +459,15 @@ public class StrippingConverter
 	public JDFStrippingParams getStrippingParams()
 	{
 		return strippingParams;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "StrippingConverter [layPrepParams=" + layPrepParams + ", strippingParams=" + strippingParams + ", assembly=" + assembly + "]";
 	}
 
 }

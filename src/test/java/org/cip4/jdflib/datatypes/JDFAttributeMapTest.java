@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -322,6 +322,25 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		assertNull(m1.getOrMap(m3));
 		assertNull(m3.getOrMap(m1));
 
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetOrMapSplit()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMap m2 = new JDFAttributeMap("a2", "v2");
+		assertEquals(2, m1.getOrMap(m2).size());
+		final JDFAttributeMap m3 = new JDFAttributeMap(m2);
+		m3.put("a1", "v1");
+
+		assertEquals(m1.getOrMap(m2), m3);
+		assertEquals(m2.getOrMap(m1), m3);
+		m2.put("a1", "vbad");
+		assertNull(m1.getOrMap(m2));
+		assertNull(m2.getOrMap(m1));
 	}
 
 	/**

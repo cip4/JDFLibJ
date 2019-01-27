@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -29,81 +29,25 @@
  *
  * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
  * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- * 
+ *
  * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
- * 
+ *
  *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
+import static org.junit.Assert.assertEquals;
 
-/**
- *
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
- */
-public class WalkHoleMakingParams extends WalkResource
+import org.junit.Test;
+
+public class WalkXElementTest
 {
-	/**
-	 *
-	 */
-	public WalkHoleMakingParams()
+
+	@Test
+	public void testUpdateColor()
 	{
-		super();
+		final WalkXElement w = new WalkXElement();
+		assertEquals("Black", w.updateColor("black"));
 	}
 
-	/**
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		final JDFHoleMakingParams hp = (JDFHoleMakingParams) jdf;
-		KElement holePattern = hp.getHole(0);
-		if (holePattern == null)
-		{
-			holePattern = hp.getHoleLine(0);
-		}
-		if (holePattern == null)
-		{
-			holePattern = hp.appendHole();
-		}
-
-		holePattern.moveAttribute(AttributeName.CENTER, hp);
-		holePattern.moveAttribute(AttributeName.CENTERREFERENCE, hp);
-		holePattern.moveAttribute(AttributeName.EXTENT, hp);
-		holePattern.moveAttribute(AttributeName.HOLECOUNT, hp);
-		holePattern.moveAttribute(AttributeName.HOLEREFERENCEEDGE, hp);
-		holePattern.moveAttribute(XJDFConstants.Pattern, hp, AttributeName.HOLETYPE, null, null);
-		holePattern.moveAttribute(AttributeName.SHAPE, hp);
-		final KElement ret = super.walk(jdf, xjdf);
-		return ret;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFHoleMakingParams);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
-	@Override
-	public VString getElementNames()
-	{
-		return new VString(ElementName.HOLEMAKINGPARAMS, null);
-	}
 }

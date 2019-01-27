@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,6 +36,8 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
+import java.io.File;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides;
@@ -43,6 +45,7 @@ import org.cip4.jdflib.auto.JDFAutoStitchingParams.EnumStitchType;
 import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -51,6 +54,7 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
+import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
@@ -59,6 +63,8 @@ import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
+import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Test;
 
 /**
@@ -133,6 +139,32 @@ public class XJDFIDPTest extends JDFTestCaseBase
 		ResourceHelper.getHelper(comp).setAmount(42, null, true);
 
 		writeRoundTripX(xjdfHelper, "processes/IDPBooklet", EnumValidationLevel.Complete);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testIDPSamples()
+	{
+		final File[] jdfs = FileUtil.listFilesWithExtension(new File(sm_dirTestData + "idpxjdf"), "jdf");
+		for (final File jdf : jdfs)
+		{
+			if (jdf.getName().startsWith("Step___nope"))
+				continue;
+			log.info("Processing " + jdf);
+			final JDFNode root = JDFNode.parseFile(jdf);
+			if (root.getAllTypes().contains(JDFConstants.TYPE_SPINEPREPARATION))
+			{
+				root.getCreateResource(ElementName.SPINEPREPARATIONPARAMS, EnumUsage.Input, 0).setDescriptiveName("Spine preparation details");
+			}
+			if (root.getAllTypes().contains(JDFConstants.TYPE_GATHERING))
+			{
+				root.getCreateResource(ElementName.GATHERINGPARAMS, EnumUsage.Input, 0).setDescriptiveName("gathering details");
+			}
+			writeRoundTrip(root, "idpvjdf/" + UrlUtil.newExtension(jdf.getName(), null));
+		}
+
 	}
 
 	/**

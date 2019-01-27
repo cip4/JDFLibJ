@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,9 +36,12 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import java.util.Collection;
+
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumNamedColor;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -144,6 +147,21 @@ public class WalkXElement extends BaseWalker
 		elem.renameAttribute(XJDFConstants.ExternalID, AttributeName.PRODUCTID);
 		elem.renameAttribute(XJDFConstants.BinderySignatureIDs, AttributeName.ASSEMBLYIDS);
 		elem.renameAttribute(XJDFConstants.BinderySignatureID, AttributeName.ASSEMBLYIDS);
+	}
+
+	protected String updateColor(final String xjdfcolor)
+	{
+		if (StringUtil.isEmpty(xjdfcolor))
+			return null;
+		@SuppressWarnings("unchecked")
+		final Collection<String> values = EnumNamedColor.getEnumMap().keySet();
+		final String lower = xjdfcolor.toLowerCase();
+		for (final String value : values)
+		{
+			if (value.toLowerCase().equals(lower))
+				return value;
+		}
+		return null;
 	}
 
 	/**

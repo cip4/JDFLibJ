@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<JDF Template="false" DescriptiveName="A4 top with empty covers" Category="DigitalPrinting" JobPartID="RootNode" Activation="Active" JobID="Job-647bb61b-f4fd-47bc-a7c6-a30e86cc233e" Types="LayoutPreparation Imposition Interpreting Rendering ColorSpaceConversion DigitalPrinting" Status="Ready" ID="MainJDFId_cf2aa9b0-a555-4006-8913-86523601aeca" Version="1.3" Type="Combined" ICSVersions="IDP_L1-1.0" MaxVersion="1.3" xmlns="http://www.CIP4.org/JDFSchema_1_1">
+  <ResourcePool>
+    <CustomerInfo Class="Parameter" ID="LinkCustomerInfo" Status="Available" CustomerJobName="A4 top with empty covers" CustomerID="test">
+      <ContactRef rRef="Contact_ae3bc847-8f7d-45c0-9740-94a8737cdacd" />
+    </CustomerInfo>
+    <Contact ContactTypes="Owner Delivery" Class="Parameter" ID="Contact_ae3bc847-8f7d-45c0-9740-94a8737cdacd" Status="Available" />
+    <Media PrePrinted="false" Class="Consumable" ID="Media_dbcf2b9a-9ad6-4799-906e-3fc83e2bcce6" Status="Available" Dimension="595 842" DescriptiveName="MyFrontCover" MediaColorName="Orange" ImagableSide="Both" Weight="120" MediaType="Paper" MediaTypeDetails="Coated" FrontCoatings="Coated">
+      <Location LocationName="AutoSelect" />
+    </Media>
+    <Media PrePrinted="false" Class="Consumable" ID="Media_09493a74-2286-4500-8435-589eadbb8896" Status="Available" Dimension="595 842" DescriptiveName="MyDocMedia" MediaColorName="White" Weight="100" MediaType="Paper" MediaTypeDetails="Coated" FrontCoatings="Coated">
+      <Location LocationName="AutoSelect" />
+    </Media>
+    <Media PrePrinted="false" Class="Consumable" ID="Media_bf6b8530-741c-4dc1-844e-1aa9b3e72a26" Status="Available" Dimension="595 842" DescriptiveName="MyBackCover" MediaColorName="Blue" ImagableSide="Both" Weight="80" MediaType="Paper" MediaTypeDetails="Coated" FrontCoatings="Coated">
+      <Location LocationName="AutoSelect" />
+    </Media>
+    <RunList Class="Parameter" ID="RunList_be50fa5b-b14e-482e-9f5f-070f590c8191" Status="Available" NPage="10">
+      <LayoutElementRef rRef="LayoutElement_972ec9a5-7830-4b4a-b5e2-62d2e9a85dbf" />
+    </RunList>
+    <LayoutElement Class="Parameter" ID="LayoutElement_972ec9a5-7830-4b4a-b5e2-62d2e9a85dbf" Status="Available">
+      <FileSpec URL="cid:part3-PDF" MimeType="application/pdf" MimeTypeVersion="PDF/X-3:2003" />
+    </LayoutElement>
+    <ColorSpaceConversionParams ICCProfileUsage="UsePDL" Class="Parameter" ID="ColorSpaceConversion-1b07655c-0283-43b7-a98d-126b5acb3e84" Status="Available" />
+    <ColorantControl Class="Parameter" ID="ColorantControl-69a23704-2d58-4289-ab5a-9355387e9e2d" Status="Available" SettingsPolicy="MustHonor" ProcessColorModel="DeviceCMYK" />
+    <Layout Class="Parameter" ID="Layout-7803cc1a-e35a-48b6-b2c8-77cc1191e0dc" Status="Available" />
+    <LayoutPreparationParams Rotate="Rotate0" Sides="TwoSidedFlipX" Class="Parameter" ID="LayoutPreparationParams_68e36308-8a0d-491c-b0fe-63ea1706507b" Status="Available" PartIDKeys="RunIndex" BindingEdge="Top">
+      <FitPolicy RotatePolicy="RotateOrthogonal" />
+      <ImageShift PositionX="Center" PositionY="Center" />
+      <MediaRef rRef="Media_dbcf2b9a-9ad6-4799-906e-3fc83e2bcce6" />
+      <LayoutPreparationParams Sides="TwoSidedFlipX" RunIndex="0 ~ 9" Rotate="Rotate0">
+        <MediaRef rRef="Media_09493a74-2286-4500-8435-589eadbb8896" />
+        <InsertSheet SheetType="InsertSheet" SheetUsage="Header" SheetFormat="Blank">
+          <Layout>
+            <MediaRef rRef="Media_dbcf2b9a-9ad6-4799-906e-3fc83e2bcce6" />
+          </Layout>
+        </InsertSheet>
+        <InsertSheet SheetType="InsertSheet" SheetUsage="Trailer" SheetFormat="Blank">
+          <Layout>
+            <MediaRef rRef="Media_bf6b8530-741c-4dc1-844e-1aa9b3e72a26" />
+          </Layout>
+        </InsertSheet>
+      </LayoutPreparationParams>
+    </LayoutPreparationParams>
+    <DigitalPrintingParams Class="Parameter" ID="DigitalPrintingParams_55a38838-e52d-4a1c-8cc5-7819b7b56853" Status="Available" PartIDKeys="RunIndex" Collate="Sheet" OutputBin="AutoSelect">
+      <MediaRef rRef="Media_dbcf2b9a-9ad6-4799-906e-3fc83e2bcce6" />
+      <Disjointing OffsetDirection="None" />
+      <DigitalPrintingParams RunIndex="0 ~ 9">
+        <MediaRef rRef="Media_09493a74-2286-4500-8435-589eadbb8896" />
+      </DigitalPrintingParams>
+    </DigitalPrintingParams>
+    <InterpretingParams Class="Parameter" ID="Interpreting-d61d2398-1ce4-4ca2-b0c2-a3cbac58031c" Status="Available" />
+    <RenderingParams Class="Parameter" ID="Rendering-d5988213-d1cf-4415-8a09-8cb6205ea66c" Status="Available" >
+      <ObjectResolution Resolution="1200 1200" AntiAliasing="None" />
+    </RenderingParams>
+    <Component ComponentType="FinalProduct" Class="Quantity" ID="Component_bf815c7c-7a7c-49a9-816f-83ee9988d4af" Status="Unavailable" />
+  </ResourcePool>
+  <ResourceLinkPool>
+    <CustomerInfoLink rRef="LinkCustomerInfo" Usage="Input" />
+    <MediaLink rRef="Media_dbcf2b9a-9ad6-4799-906e-3fc83e2bcce6" Usage="Input" />
+    <MediaLink rRef="Media_09493a74-2286-4500-8435-589eadbb8896" Usage="Input" />
+    <MediaLink rRef="Media_bf6b8530-741c-4dc1-844e-1aa9b3e72a26" Usage="Input" />
+    <RunListLink rRef="RunList_be50fa5b-b14e-482e-9f5f-070f590c8191" Usage="Input" />
+    <ColorSpaceConversionParamsLink rRef="ColorSpaceConversion-1b07655c-0283-43b7-a98d-126b5acb3e84" Usage="Input" />
+    <ColorantControlLink rRef="ColorantControl-69a23704-2d58-4289-ab5a-9355387e9e2d" Usage="Input" />
+    <LayoutLink rRef="Layout-7803cc1a-e35a-48b6-b2c8-77cc1191e0dc" Usage="Input" />
+    <LayoutPreparationParamsLink rRef="LayoutPreparationParams_68e36308-8a0d-491c-b0fe-63ea1706507b" Usage="Input" />
+    <DigitalPrintingParamsLink rRef="DigitalPrintingParams_55a38838-e52d-4a1c-8cc5-7819b7b56853" Usage="Input" />
+    <InterpretingParamsLink rRef="Interpreting-d61d2398-1ce4-4ca2-b0c2-a3cbac58031c" Usage="Input" />
+    <RenderingParamsLink rRef="Rendering-d5988213-d1cf-4415-8a09-8cb6205ea66c" Usage="Input" />
+    <ComponentLink rRef="Component_bf815c7c-7a7c-49a9-816f-83ee9988d4af" Usage="Output" Amount="1" CombinedProcessIndex="5" />
+  </ResourceLinkPool>
+  <AuditPool>
+	  <Created TimeStamp="2018-12-12T09:41:03Z" ID="audit_1" AgentName="Test" AgentVersion="1" />
+  </AuditPool>
+</JDF>

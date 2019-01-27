@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -68,6 +68,7 @@ import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFHeadBandApplicationParams;
 import org.cip4.jdflib.resource.JDFLaminatingParams;
@@ -389,6 +390,10 @@ class PostXJDFWalker extends BaseElementWalker
 			if (!retainAll)
 			{
 				splitPartVersion(xjdf, walk);
+				splitIndex(xjdf, walk, AttributeName.DOCINDEX);
+				splitIndex(xjdf, walk, AttributeName.RUNINDEX);
+				splitIndex(xjdf, walk, AttributeName.SETINDEX);
+				splitIndex(xjdf, walk, AttributeName.SHEETINDEX);
 			}
 			return walk;
 		}
@@ -408,6 +413,24 @@ class PostXJDFWalker extends BaseElementWalker
 					clone.setAttribute(AttributeName.PARTVERSION, pv.remove(0));
 				}
 				xjdf.setAttribute(AttributeName.PARTVERSION, pv.remove(0));
+			}
+		}
+
+		void splitIndex(final KElement xjdf, final KElement walk, final String attribute)
+		{
+			final VString indexes = StringUtil.tokenize(walk.getAttribute(attribute), null, false);
+			final KElement parent = xjdf.getParentNode_KElement();
+			final int size = parent == null ? 0 : ContainerUtil.size(indexes);
+			if (size > 2)
+			{
+				for (int i = size - 2; i > 0; i -= 2)
+				{
+					final String single = indexes.remove(0) + " " + indexes.remove(0);
+					final KElement clone = parent.copyElement(xjdf, xjdf);
+					clone.setAttribute(attribute, single);
+				}
+				final String single = indexes.remove(0) + " " + indexes.remove(0);
+				xjdf.setAttribute(attribute, single);
 			}
 		}
 	}
@@ -438,16 +461,43 @@ class PostXJDFWalker extends BaseElementWalker
 			final JDFPartAmount partAmount = (JDFPartAmount) pa;
 			if (!retainAll)
 			{
+				moveToResource(partAmount);
 				removeRedundantPartKeys(partAmount);
 			}
 			return super.walk(partAmount, dummy);
+		}
+
+		void moveToResource(final JDFPartAmount partAmount)
+		{
+			if (partAmount.hasNonEmpty(AttributeName.TRANSFORMATION) || partAmount.hasNonEmpty(AttributeName.ORIENTATION))
+			{
+				final KElement parentRes = partAmount.getDeepParent(XJDFConstants.Resource, 0);
+				final Vector<JDFPartAmount> vPA = partAmount.getParentNode_KElement().getChildrenByClass(JDFPartAmount.class, false, 0);
+				for (int i = 1; i < vPA.size(); i++)
+				{
+					final KElement parentResClone = parentRes.getParentNode_KElement().copyElement(parentRes, parentRes.getNextSiblingElement());
+					final KElement ap = parentResClone.getElement(ElementName.AMOUNTPOOL);
+					ap.removeChildrenByClass(JDFPartAmount.class);
+					final JDFPartAmount paClone = (JDFPartAmount) ap.moveElement(partAmount, null);
+					moveToResource(paClone);
+				}
+				parentRes.moveAttribute(AttributeName.TRANSFORMATION, partAmount);
+				parentRes.moveAttribute(AttributeName.ORIENTATION, partAmount);
+				final ResourceHelper resourceHelper = new ResourceHelper(parentRes);
+				final VJDFAttributeMap map = resourceHelper.getPartMapVector();
+				final VJDFAttributeMap partMap = partAmount.getPartMapVector();
+				final VJDFAttributeMap combined = map.getOrMaps(partMap);
+				resourceHelper.setPartMapVector(combined);
+				partAmount.setPartMap(null);
+			}
+
 		}
 
 		/**
 		 *
 		 * @param partAmount
 		 */
-		private void removeRedundantPartKeys(final JDFPartAmount partAmount)
+		void removeRedundantPartKeys(final JDFPartAmount partAmount)
 		{
 			final VElement parentParts = getParentParts(partAmount);
 			if (parentParts != null)
@@ -499,15 +549,6 @@ class PostXJDFWalker extends BaseElementWalker
 			return VString.getVString(ElementName.PARTAMOUNT, null);
 		}
 
-		/**
-		 *
-		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-		 */
-		@Override
-		public boolean matches(final KElement e)
-		{
-			return (e instanceof JDFPartAmount);
-		}
 	}
 
 	/**
@@ -821,413 +862,6 @@ class PostXJDFWalker extends BaseElementWalker
 		{
 			return new VString(XJDFConstants.SurfaceColor, null);
 		}
-	}
-
-	/**
-	 *
-	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
-	 */
-	protected class WalkStrippingParams extends WalkResourceElement
-	{
-		/**
-		 *
-		 */
-		public WalkStrippingParams()
-		{
-			super();
-		}
-
-		/**
-		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-		 */
-		@Override
-		public VString getElementNames()
-		{
-			return new VString(ElementName.STRIPPINGPARAMS, null);
-		}
-
-		/**
-		 *
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 */
-		@Override
-		public KElement walk(final KElement strippingParams, final KElement dummy)
-		{
-			if (!mergeLayout)
-			{
-				super.walk(strippingParams, dummy);
-				return strippingParams; // nuff done
-			}
-			// TODO multiple lower level stripparams partitions
-			final SetHelper layoutseth = newRootHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
-
-			final VJDFAttributeMap vmap = new ResourceHelper(strippingParams.getParentNode_KElement()).getPartMapVector();
-			JDFAttributeMap map = vmap.size() == 0 ? null : vmap.get(0);
-			map = mergeStrippingParamsLayout((JDFStrippingParams) strippingParams, layoutseth, map);
-
-			mergeSurfaces(map);
-			super.walk(strippingParams, dummy);
-			return null; // stop after merging
-
-		}
-
-		/**
-		 * @param strippingParams
-		 * @param layoutseth
-		 * @param layoutMap
-		 * @return
-		 */
-		private JDFAttributeMap mergeStrippingParamsLayout(final JDFStrippingParams strippingParams, final SetHelper layoutseth, final JDFAttributeMap layoutMap)
-		{
-			if (isRemoveSignatureName() && layoutMap != null)
-			{
-				layoutMap.remove(AttributeName.SIGNATURENAME);
-			}
-			final boolean cloneBS = layoutMap != null && layoutMap.containsKey(AttributeName.BINDERYSIGNATURENAME);
-			final String bsName = getBSName(strippingParams, layoutMap);
-			final String bsID = getBSID(strippingParams, bsName);
-			final JDFAttributeMap bsMap = new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsID);
-			final String cellIndex = layoutMap == null ? null : layoutMap.remove(AttributeName.CELLINDEX);
-			final ResourceHelper layoutPartitionH = layoutseth.getCreatePartition(layoutMap, true);
-			final JDFLayout layoutPartition = (JDFLayout) layoutPartitionH.getResource();
-			ensureLayoutPositions(strippingParams, layoutPartition, bsID);
-
-			final VElement childElementVector = updateCells(strippingParams, cellIndex);
-
-			final ResourceHelper bsHelper = getBSHelper(cloneBS, bsID, bsMap);
-
-			final JDFBinderySignature bs = (JDFBinderySignature) bsHelper.getCreateResource();
-			moveStripCells(bs, childElementVector);
-			moveBSFromStripping(bs, strippingParams);
-			final SetHelper niSet = newRootHelper.getSet(ElementName.NODEINFO, 0);
-			final ResourceHelper ni = niSet == null ? null : niSet.getPartition(layoutMap);
-			moveGangSourceFromStripping(ni, bsID, strippingParams);
-
-			updatePositions(bsID, layoutPartition);
-			strippingParams.removeAttribute(ElementName.BINDERYSIGNATURE + JDFConstants.REF);
-			strippingParams.removeAttribute(XJDFConstants.BinderySignatureID);
-			if (layoutPartition.hasChildElement(ElementName.FILESPEC, null))
-				strippingParams.removeChildrenByClass(JDFFileSpec.class);
-			layoutPartition.copyInto(strippingParams, false);
-			return layoutMap;
-		}
-
-		protected void updatePositions(final String bsID, final JDFLayout layoutPartition)
-		{
-			final VElement positions = layoutPartition.getChildElementVector(ElementName.POSITION, null);
-			if (positions != null)
-			{
-				for (final KElement position : positions)
-				{
-					if (!position.hasAttribute(XJDFConstants.BinderySignatureID))
-					{
-						position.setAttribute(XJDFConstants.BinderySignatureID, bsID);
-					}
-				}
-			}
-		}
-
-		protected VElement updateCells(final JDFStrippingParams strippingParams, final String cellIndex)
-		{
-			final VElement childElementVector = strippingParams.getChildElementVector(ElementName.SIGNATURECELL, null);
-			if (childElementVector != null)
-			{
-				for (final KElement kid : childElementVector)
-				{
-					final JDFStripCellParams scp = (JDFStripCellParams) kid;
-					scp.setAttribute(AttributeName.CELLINDEX, cellIndex);
-				}
-			}
-			return childElementVector;
-		}
-
-		protected ResourceHelper getBSHelper(boolean cloneBS, final String bsID, final JDFAttributeMap bsMap)
-		{
-			SetHelper bsSet = newRootHelper.getSet(ElementName.BINDERYSIGNATURE, 0);
-			if (bsSet == null)
-				bsSet = newRootHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
-			ResourceHelper bsHelper = bsSet.getPartition(XJDFConstants.BinderySignatureID, bsID);
-			if (bsHelper == null)
-			{
-				bsHelper = bsSet.getPartition(0);
-			}
-			if (bsHelper == null)
-			{
-				bsHelper = bsSet.appendPartition(bsMap, true);
-				final JDFBinderySignature binderySignature = (JDFBinderySignature) bsHelper.getResource();
-				binderySignature.setBinderySignatureType(EnumBinderySignatureType.Grid);
-				binderySignature.setNumberUp(1, 1);
-			}
-
-			final VJDFAttributeMap vMap = bsHelper.getPartMapVector();
-			if (VJDFAttributeMap.isEmpty(vMap))
-			{
-				cloneBS = false;
-			}
-			if (cloneBS && !(vMap.size() == 1 && bsID.equals(vMap.get(0).get(XJDFConstants.BinderySignatureID))))
-			{
-				final ResourceHelper newHelper = new ResourceHelper(bsSet.copyHelper(bsHelper));
-				newHelper.setPartMap(bsMap);
-				vMap.removeMaps(bsMap);
-				bsHelper.setPartMapVector(vMap);
-				bsHelper = newHelper;
-				bsHelper.removeAttribute(AttributeName.ID, null);
-			}
-			else
-			{
-				bsHelper.ensurePart(XJDFConstants.BinderySignatureID, bsID);
-			}
-			return bsHelper;
-		}
-
-		/**
-		 * @param strippingParams
-		 * @param bsName
-		 * @return
-		 */
-		private String getBSID(final JDFStrippingParams strippingParams, final String bsName)
-		{
-			final String bsID = strippingParams.getNonEmpty(XJDFConstants.BinderySignatureID);
-			return (bsID == null) ? bsName : bsID;
-		}
-
-		private void moveGangSourceFromStripping(final ResourceHelper nih, final String bsName, final JDFStrippingParams strippingParams)
-		{
-			final String jobID = strippingParams.getNonEmpty(AttributeName.JOBID);
-			if (jobID != null)
-			{
-				if (nih == null)
-				{
-					strippingParams.removeAttribute(AttributeName.JOBID);
-				}
-				else
-				{
-					final KElement ni = nih.getCreateResource();
-					final KElement gangSrc = ni.getCreateChildWithAttribute(ElementName.GANGSOURCE, XJDFConstants.BinderySignatureID, null, bsName, 0);
-					gangSrc.moveAttribute(AttributeName.JOBID, strippingParams);
-					final ProductHelper ph = getProduct(jobID, bsName);
-					if (ph != null)
-					{
-						gangSrc.setAttribute(AttributeName.COPIES, ph.getAmount(), null);
-					}
-					else
-					{
-						gangSrc.setAttribute(AttributeName.COPIES, 0, null);
-					}
-				}
-			}
-		}
-
-		protected ProductHelper getProduct(final String jobID, final String bsName)
-		{
-			final Vector<ProductHelper> vph = newRootHelper.getProductHelpers();
-			if (vph != null)
-			{
-				for (final ProductHelper ph : vph)
-				{
-					for (final String s : new VString("ID ExternalID", null))
-					{
-						final String attribute = ph.getAttribute(s);
-						if (attribute != null && (attribute.indexOf(bsName) >= 0 || attribute.indexOf(jobID) >= 0))
-						{
-							return ph;
-						}
-					}
-				}
-			}
-			return null;
-		}
-
-		/**
-		 *
-		 * @param strippingParams
-		 * @param map
-		 * @return
-		 */
-		String getBSName(final JDFStrippingParams strippingParams, final JDFAttributeMap map)
-		{
-			String bsName = map == null ? null : map.remove(AttributeName.BINDERYSIGNATURENAME);
-			final String bsn2 = strippingParams.getNonEmpty(XJDFConstants.BinderySignatureIDs);
-			if (bsn2 != null)
-			{
-				bsName = bsn2;
-			}
-			if (bsName == null)
-			{
-				bsName = "BS";
-			}
-			return bsName;
-		}
-
-		/**
-		 *
-		 *
-		 * @param strippingParams
-		 * @param layoutPartition
-		 * @param bsID
-		 */
-		private void ensureLayoutPositions(final JDFStrippingParams strippingParams, final JDFLayout layoutPartition, final String bsID)
-		{
-			VElement positions = strippingParams.getChildElementVector(ElementName.POSITION, null);
-			if (positions != null && positions.size() > 0)
-			{
-				layoutPartition.moveElements(positions, null);
-			}
-			else
-			{
-				final JDFPosition newPos = (JDFPosition) layoutPartition.appendElement(ElementName.POSITION);
-				newPos.setRelativeBox(new JDFRectangle(0, 0, 1, 1));
-				positions = new VElement();
-				positions.add(newPos);
-			}
-			final String attribute = AttributeName.STACKDEPTH;
-			for (final KElement position : positions)
-			{
-				position.setAttribute(XJDFConstants.BinderySignatureID, bsID);
-				position.copyAttribute(attribute, strippingParams);
-			}
-			strippingParams.removeAttribute(attribute);
-		}
-
-		/**
-		 * move appropriate stuff from StrippingParams to BinderySignature
-		 *
-		 * @param bs
-		 * @param strippingParams
-		 */
-		private void moveBSFromStripping(final JDFBinderySignature bs, final JDFStrippingParams strippingParams)
-		{
-			if (bs == null)
-			{
-				strippingParams.removeAttribute(AttributeName.INNERMOSTSHINGLING);
-				strippingParams.removeAttribute(AttributeName.OUTERMOSTSHINGLING);
-			}
-			else
-			{
-				bs.moveAttribute(AttributeName.INNERMOSTSHINGLING, strippingParams);
-				bs.moveAttribute(AttributeName.OUTERMOSTSHINGLING, strippingParams);
-				final EnumWorkStyle ws = strippingParams.getWorkStyle();
-				if (EnumWorkStyle.Simplex.equals(ws))
-				{
-					bs.getCreateSignatureCell(0);
-					final Collection<JDFSignatureCell> scs = bs.getAllSignatureCell();
-					for (final JDFSignatureCell sc : scs)
-					{
-						if (!sc.hasNonEmpty(AttributeName.SIDES))
-						{
-							sc.setAttribute(AttributeName.SIDES, EnumSides.OneSided.getName());
-						}
-					}
-				}
-
-			}
-			// TODO where to move stripmarks? - stay in strippingparams or move to the appropriate binderysignature, stripcell or strippingparams
-		}
-
-		/**
-		 *
-		 * move and merge stripcellparams and signaturecells
-		 *
-		 * @param bindSig
-		 * @param childElementVector
-		 */
-		private void moveStripCells(final JDFBinderySignature bindSig, final VElement childElementVector)
-		{
-			if (childElementVector == null)
-				return;
-			for (final KElement sigCell : childElementVector)
-			{
-				final String cellindex = sigCell.getAttribute(AttributeName.CELLINDEX, null, null);
-				final JDFIntegerList il = JDFIntegerList.createIntegerList(cellindex);
-				final Vector<JDFSignatureCell> vbsCell = getSigCellForIndex(bindSig, il);
-				sigCell.removeAttribute(AttributeName.CELLINDEX);
-				if (vbsCell != null)
-				{
-					for (final JDFSignatureCell bsCell : vbsCell)
-					{
-						bsCell.mergeElement(sigCell, false);
-					}
-				}
-				sigCell.deleteNode();
-			}
-		}
-
-		/**
-		 *
-		 * @param bindSig
-		 * @param il
-		 * @return
-		 */
-		private Vector<JDFSignatureCell> getSigCellForIndex(final JDFBinderySignature bindSig, final JDFIntegerList il)
-		{
-			final Vector<JDFSignatureCell> v = bindSig.getChildrenByClass(JDFSignatureCell.class, true, 0);
-			final Vector<JDFSignatureCell> vRet = new Vector<>();
-			if (v == null || v.size() == 0)
-			{
-				vRet.add(bindSig.appendSignatureCell());
-			}
-			else
-			{
-				for (final JDFSignatureCell sc : v)
-				{
-					if (matchesIndex(sc, il))
-						vRet.add(sc);
-				}
-			}
-			if (vRet.size() == 0)
-			{
-				vRet.add(bindSig.appendSignatureCell());
-			}
-			return vRet;
-		}
-
-		/**
-		 *
-		 * @param sc
-		 * @param il
-		 * @return
-		 */
-		private boolean matchesIndex(final JDFSignatureCell sc, JDFIntegerList il)
-		{
-			if (il == null)
-				return true;
-
-			try
-			{
-				il = new JDFIntegerList(il);
-			}
-			catch (final DataFormatException e)
-			{
-				return false;
-			}
-			// TODO simplex duplex evaluation
-			il.scale(2);
-			final JDFIntegerList fp = sc.getFrontPages();
-			// we assume that any match is valid for all
-			return il.contains(fp);
-		}
-
-		/**
-		 * @param map
-		 */
-		private void mergeSurfaces(final JDFAttributeMap map)
-		{
-			// TODO merge surfaces that match map
-			// 2 options
-			// - either add @Side to the respective content / mark objects + dynamic marks
-			// add Surface elements
-		}
-
-		/**
-		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#matches(org.cip4.jdflib.core.KElement)
-		 */
-		@Override
-		public boolean matches(final KElement toCheck)
-		{
-			return toCheck instanceof JDFStrippingParams;
-		}
-
 	}
 
 	/**
@@ -1720,7 +1354,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return XJDFHelper.RESOURCE.equals(toCheck.getLocalName()) || "Parameter".equals(toCheck.getLocalName());
+			return XJDFHelper.RESOURCE.equals(toCheck.getLocalName());
 		}
 
 		/**
@@ -1775,20 +1409,54 @@ class PostXJDFWalker extends BaseElementWalker
 	protected class WalkResourceSet extends WalkElement
 	{
 		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			moveFromSet(xjdf);
+			return super.walk(xjdf, dummy);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return XJDFConstants.ResourceSet.equals(toCheck.getLocalName());
+		}
+
+		/**
+		 *
+		 * @param xjdf
+		 */
+		void moveFromSet(final KElement xjdf)
+		{
+			for (final String a : new String[] { AttributeName.ORIENTATION, AttributeName.TRANSFORMATION })
+			{
+				final String val = xjdf.getNonEmpty(a);
+				if (val != null)
+				{
+					xjdf.removeAttribute(a);
+					final VElement v = xjdf.getChildElementVector(ElementName.RESOURCE, null);
+					for (final KElement r : v)
+					{
+						r.setAttribute(a, val);
+					}
+				}
+			}
+
+		}
+
+		/**
 		 *
 		 */
 		public WalkResourceSet()
 		{
 			super();
-		}
-
-		/**
-		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-		 */
-		@Override
-		public VString getElementNames()
-		{
-			return VString.getVString(XJDFConstants.ResourceSet, null);
 		}
 
 	}
@@ -2476,6 +2144,102 @@ class PostXJDFWalker extends BaseElementWalker
 
 	}
 
+	/**
+	 *
+	 * @author rainer prosi
+	 *
+	 */
+	public class WalkDigitalPrintingParams extends WalkResourceElement
+	{
+		/**
+		 *
+		 */
+		public WalkDigitalPrintingParams()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return !isRetainAll();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ElementName.DIGITALPRINTINGPARAMS, null);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#moveToMisconsumable(org.cip4.jdflib.core.KElement, java.lang.String)
+		 */
+		void moveToStacking(final KElement xjdf)
+		{
+			final String bin = xjdf.getNonEmpty(AttributeName.OUTPUTBIN);
+			final String sa = xjdf.getNonEmpty(AttributeName.STACKAMOUNT);
+			if (bin != null || sa != null)
+			{
+				if (newRootHelper.indexOfType(JDFConstants.TYPE_STACKING, 0) < 0)
+				{
+					newRootHelper.addType(EnumType.Stacking);
+				}
+				final SetHelper sh = newRootHelper.getCreateSet(ElementName.STACKINGPARAMS, EnumUsage.Input);
+				final ResourceHelper rh2 = sh.getCreateVPartition(ResourceHelper.getHelper(xjdf).getPartMapVector(), true);
+				final KElement sp = rh2.getCreateResource();
+				sp.moveAttribute(AttributeName.OUTPUTBIN, xjdf);
+				sp.moveAttribute(AttributeName.STACKAMOUNT, xjdf);
+			}
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			moveToStacking(xjdf);
+			updateMedia(xjdf);
+			return super.walk(xjdf, dummy);
+		}
+
+		void updateMedia(final KElement xjdf)
+		{
+			final String ref = xjdf.getNonEmpty("MediaRef");
+			if (ref != null)
+			{
+				xjdf.removeAttribute("MediaRef");
+				final ResourceHelper helper = ResourceHelper.getHelper(xjdf);
+				final VJDFAttributeMap maps = helper == null ? null : helper.getPartMapVector();
+				if (!VJDFAttributeMap.isEmpty(maps))
+				{
+					// first check for automagically created component
+					KElement m = newRootHelper.getRoot().getChildWithAttribute(XJDFConstants.Resource, AttributeName.ID, null, "Comp." + ref, 0, false);
+					if (m == null)
+						m = newRootHelper.getRoot().getChildWithAttribute(XJDFConstants.Resource, AttributeName.ID, null, ref, 0, false);
+					final ResourceHelper medHelp = ResourceHelper.getHelper(m);
+					if (medHelp != null)
+					{
+
+						VJDFAttributeMap vPartMedia = medHelp.getPartMapVector();
+						vPartMedia = maps.getOrMaps(vPartMedia);
+						medHelp.setPartMapVector(vPartMedia);
+					}
+				}
+			}
+
+		}
+
+	}
+
 	public class WalkCustomerInfo extends WalkResourceElement
 	{
 
@@ -2757,6 +2521,401 @@ class PostXJDFWalker extends BaseElementWalker
 		{
 			final String localName = e.getLocalName();
 			return localName.startsWith(ElementName.AUDIT) && !ElementName.AUDITPOOL.equals(localName);
+		}
+
+	}
+
+	/**
+	 *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 *
+	 */
+	protected class WalkStrippingParams extends WalkResourceElement
+	{
+		/**
+		 *
+		 */
+		public WalkStrippingParams()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ElementName.STRIPPINGPARAMS, null);
+		}
+
+		/**
+		 *
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement strippingParams, final KElement dummy)
+		{
+			if (!mergeLayout)
+			{
+				super.walk(strippingParams, dummy);
+				return strippingParams; // nuff done
+			}
+			// TODO multiple lower level stripparams partitions
+			final SetHelper layoutseth = newRootHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+
+			final VJDFAttributeMap vmap = new ResourceHelper(strippingParams.getParentNode_KElement()).getPartMapVector();
+			mergeStrippingParamsLayout((JDFStrippingParams) strippingParams, layoutseth, vmap);
+
+			super.walk(strippingParams, dummy);
+			return null; // stop after merging
+
+		}
+
+		/**
+		 * @param strippingParams
+		 * @param layoutseth
+		 * @param layoutMap
+		 * @return
+		 */
+		private JDFAttributeMap mergeStrippingParamsLayout(final JDFStrippingParams strippingParams, final SetHelper layoutseth, final VJDFAttributeMap layoutMaps)
+		{
+			final JDFAttributeMap layoutMap = VJDFAttributeMap.isEmpty(layoutMaps) ? null : layoutMaps.get(0);
+			if (isRemoveSignatureName() && layoutMap != null)
+			{
+				layoutMap.remove(AttributeName.SIGNATURENAME);
+			}
+			final boolean cloneBS = layoutMap != null && layoutMap.containsKey(AttributeName.BINDERYSIGNATURENAME);
+			final String bsName = getBSName(strippingParams, layoutMap);
+			final String bsID = getBSID(strippingParams, bsName);
+			final JDFAttributeMap bsMap = new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsID);
+			final String cellIndex = layoutMap == null ? null : layoutMap.remove(AttributeName.CELLINDEX);
+			final ResourceHelper layoutPartitionH = layoutseth.getCreateVPartition(layoutMaps, true);
+			final JDFLayout layoutPartition = (JDFLayout) layoutPartitionH.getResource();
+			ensureLayoutPositions(strippingParams, layoutPartition, bsID);
+
+			final VElement childElementVector = updateCells(strippingParams, cellIndex);
+
+			final ResourceHelper bsHelper = getBSHelper(cloneBS, bsID, bsMap);
+
+			final JDFBinderySignature bs = (JDFBinderySignature) bsHelper.getCreateResource();
+			moveStripCells(bs, childElementVector);
+			moveBSFromStripping(bs, strippingParams);
+			final SetHelper niSet = newRootHelper.getSet(ElementName.NODEINFO, 0);
+			final ResourceHelper ni = niSet == null ? null : niSet.getPartition(layoutMap);
+			moveGangSourceFromStripping(ni, bsID, strippingParams);
+
+			updatePositions(bsID, layoutPartition);
+			strippingParams.removeAttribute(ElementName.BINDERYSIGNATURE + JDFConstants.REF);
+			strippingParams.removeAttribute(XJDFConstants.BinderySignatureID);
+			if (layoutPartition.hasChildElement(ElementName.FILESPEC, null))
+				strippingParams.removeChildrenByClass(JDFFileSpec.class);
+			layoutPartition.copyInto(strippingParams, false);
+			return layoutMap;
+		}
+
+		protected void updatePositions(final String bsID, final JDFLayout layoutPartition)
+		{
+			final VElement positions = layoutPartition.getChildElementVector(ElementName.POSITION, null);
+			if (positions != null)
+			{
+				for (final KElement position : positions)
+				{
+					if (!position.hasAttribute(XJDFConstants.BinderySignatureID))
+					{
+						position.setAttribute(XJDFConstants.BinderySignatureID, bsID);
+					}
+				}
+			}
+		}
+
+		protected VElement updateCells(final JDFStrippingParams strippingParams, final String cellIndex)
+		{
+			final VElement childElementVector = strippingParams.getChildElementVector(ElementName.SIGNATURECELL, null);
+			if (childElementVector != null)
+			{
+				for (final KElement kid : childElementVector)
+				{
+					final JDFStripCellParams scp = (JDFStripCellParams) kid;
+					scp.setAttribute(AttributeName.CELLINDEX, cellIndex);
+				}
+			}
+			return childElementVector;
+		}
+
+		protected ResourceHelper getBSHelper(boolean cloneBS, final String bsID, final JDFAttributeMap bsMap)
+		{
+			SetHelper bsSet = newRootHelper.getSet(ElementName.BINDERYSIGNATURE, 0);
+			if (bsSet == null)
+				bsSet = newRootHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+			ResourceHelper bsHelper = bsSet.getPartition(XJDFConstants.BinderySignatureID, bsID);
+			if (bsHelper == null)
+			{
+				bsHelper = bsSet.getPartition(0);
+			}
+			if (bsHelper == null)
+			{
+				bsHelper = bsSet.appendPartition(bsMap, true);
+				final JDFBinderySignature binderySignature = (JDFBinderySignature) bsHelper.getResource();
+				binderySignature.setBinderySignatureType(EnumBinderySignatureType.Grid);
+				binderySignature.setNumberUp(1, 1);
+			}
+
+			final VJDFAttributeMap vMap = bsHelper.getPartMapVector();
+			if (VJDFAttributeMap.isEmpty(vMap))
+			{
+				cloneBS = false;
+			}
+			if (cloneBS && !(vMap.size() == 1 && bsID.equals(vMap.get(0).get(XJDFConstants.BinderySignatureID))))
+			{
+				final ResourceHelper newHelper = new ResourceHelper(bsSet.copyHelper(bsHelper));
+				newHelper.setPartMap(bsMap);
+				vMap.removeMaps(bsMap);
+				bsHelper.setPartMapVector(vMap);
+				bsHelper = newHelper;
+				bsHelper.removeAttribute(AttributeName.ID, null);
+			}
+			else
+			{
+				bsHelper.ensurePart(XJDFConstants.BinderySignatureID, bsID);
+			}
+			return bsHelper;
+		}
+
+		/**
+		 * @param strippingParams
+		 * @param bsName
+		 * @return
+		 */
+		private String getBSID(final JDFStrippingParams strippingParams, final String bsName)
+		{
+			final String bsID = strippingParams.getNonEmpty(XJDFConstants.BinderySignatureID);
+			return (bsID == null) ? bsName : bsID;
+		}
+
+		private void moveGangSourceFromStripping(final ResourceHelper nih, final String bsName, final JDFStrippingParams strippingParams)
+		{
+			final String jobID = strippingParams.getNonEmpty(AttributeName.JOBID);
+			if (jobID != null)
+			{
+				if (nih == null)
+				{
+					strippingParams.removeAttribute(AttributeName.JOBID);
+				}
+				else
+				{
+					final KElement ni = nih.getCreateResource();
+					final KElement gangSrc = ni.getCreateChildWithAttribute(ElementName.GANGSOURCE, XJDFConstants.BinderySignatureID, null, bsName, 0);
+					gangSrc.moveAttribute(AttributeName.JOBID, strippingParams);
+					final ProductHelper ph = getProduct(jobID, bsName);
+					if (ph != null)
+					{
+						gangSrc.setAttribute(AttributeName.COPIES, ph.getAmount(), null);
+					}
+					else
+					{
+						gangSrc.setAttribute(AttributeName.COPIES, 0, null);
+					}
+				}
+			}
+		}
+
+		protected ProductHelper getProduct(final String jobID, final String bsName)
+		{
+			final Vector<ProductHelper> vph = newRootHelper.getProductHelpers();
+			if (vph != null)
+			{
+				for (final ProductHelper ph : vph)
+				{
+					for (final String s : new VString("ID ExternalID", null))
+					{
+						final String attribute = ph.getAttribute(s);
+						if (attribute != null && (attribute.indexOf(bsName) >= 0 || attribute.indexOf(jobID) >= 0))
+						{
+							return ph;
+						}
+					}
+				}
+			}
+			return null;
+		}
+
+		/**
+		 *
+		 * @param strippingParams
+		 * @param map
+		 * @return
+		 */
+		String getBSName(final JDFStrippingParams strippingParams, final JDFAttributeMap map)
+		{
+			String bsName = map == null ? null : map.remove(AttributeName.BINDERYSIGNATURENAME);
+			final String bsn2 = strippingParams.getNonEmpty(XJDFConstants.BinderySignatureIDs);
+			if (bsn2 != null)
+			{
+				bsName = bsn2;
+			}
+			if (bsName == null)
+			{
+				bsName = "BS";
+			}
+			return bsName;
+		}
+
+		/**
+		 *
+		 *
+		 * @param strippingParams
+		 * @param layoutPartition
+		 * @param bsID
+		 */
+		private void ensureLayoutPositions(final JDFStrippingParams strippingParams, final JDFLayout layoutPartition, final String bsID)
+		{
+			VElement positions = strippingParams.getChildElementVector(ElementName.POSITION, null);
+			if (positions != null && positions.size() > 0)
+			{
+				layoutPartition.moveElements(positions, null);
+			}
+			else
+			{
+				final JDFPosition newPos = (JDFPosition) layoutPartition.appendElement(ElementName.POSITION);
+				newPos.setRelativeBox(new JDFRectangle(0, 0, 1, 1));
+				positions = new VElement();
+				positions.add(newPos);
+			}
+			final String attribute = AttributeName.STACKDEPTH;
+			for (final KElement position : positions)
+			{
+				position.setAttribute(XJDFConstants.BinderySignatureID, bsID);
+				position.copyAttribute(attribute, strippingParams);
+			}
+			strippingParams.removeAttribute(attribute);
+		}
+
+		/**
+		 * move appropriate stuff from StrippingParams to BinderySignature
+		 *
+		 * @param bs
+		 * @param strippingParams
+		 */
+		private void moveBSFromStripping(final JDFBinderySignature bs, final JDFStrippingParams strippingParams)
+		{
+			if (bs == null)
+			{
+				strippingParams.removeAttribute(AttributeName.INNERMOSTSHINGLING);
+				strippingParams.removeAttribute(AttributeName.OUTERMOSTSHINGLING);
+			}
+			else
+			{
+				bs.moveAttribute(AttributeName.INNERMOSTSHINGLING, strippingParams);
+				bs.moveAttribute(AttributeName.OUTERMOSTSHINGLING, strippingParams);
+				final EnumWorkStyle ws = strippingParams.getWorkStyle();
+				if (EnumWorkStyle.Simplex.equals(ws))
+				{
+					bs.getCreateSignatureCell(0);
+					final Collection<JDFSignatureCell> scs = bs.getAllSignatureCell();
+					for (final JDFSignatureCell sc : scs)
+					{
+						if (!sc.hasNonEmpty(AttributeName.SIDES))
+						{
+							sc.setAttribute(AttributeName.SIDES, EnumSides.OneSided.getName());
+						}
+					}
+				}
+
+			}
+			// TODO where to move stripmarks? - stay in strippingparams or move to the appropriate binderysignature, stripcell or strippingparams
+		}
+
+		/**
+		 *
+		 * move and merge stripcellparams and signaturecells
+		 *
+		 * @param bindSig
+		 * @param childElementVector
+		 */
+		private void moveStripCells(final JDFBinderySignature bindSig, final VElement childElementVector)
+		{
+			if (childElementVector == null)
+				return;
+			for (final KElement sigCell : childElementVector)
+			{
+				final String cellindex = sigCell.getAttribute(AttributeName.CELLINDEX, null, null);
+				final JDFIntegerList il = JDFIntegerList.createIntegerList(cellindex);
+				final Vector<JDFSignatureCell> vbsCell = getSigCellForIndex(bindSig, il);
+				sigCell.removeAttribute(AttributeName.CELLINDEX);
+				if (vbsCell != null)
+				{
+					for (final JDFSignatureCell bsCell : vbsCell)
+					{
+						bsCell.mergeElement(sigCell, false);
+					}
+				}
+				sigCell.deleteNode();
+			}
+		}
+
+		/**
+		 *
+		 * @param bindSig
+		 * @param il
+		 * @return
+		 */
+		private Vector<JDFSignatureCell> getSigCellForIndex(final JDFBinderySignature bindSig, final JDFIntegerList il)
+		{
+			final Vector<JDFSignatureCell> v = bindSig.getChildrenByClass(JDFSignatureCell.class, true, 0);
+			final Vector<JDFSignatureCell> vRet = new Vector<>();
+			if (v == null || v.size() == 0)
+			{
+				vRet.add(bindSig.appendSignatureCell());
+			}
+			else
+			{
+				for (final JDFSignatureCell sc : v)
+				{
+					if (matchesIndex(sc, il))
+						vRet.add(sc);
+				}
+			}
+			if (vRet.size() == 0)
+			{
+				vRet.add(bindSig.appendSignatureCell());
+			}
+			return vRet;
+		}
+
+		/**
+		 *
+		 * @param sc
+		 * @param il
+		 * @return
+		 */
+		private boolean matchesIndex(final JDFSignatureCell sc, JDFIntegerList il)
+		{
+			if (il == null)
+				return true;
+
+			try
+			{
+				il = new JDFIntegerList(il);
+			}
+			catch (final DataFormatException e)
+			{
+				return false;
+			}
+			// TODO simplex duplex evaluation
+			il.scale(2);
+			final JDFIntegerList fp = sc.getFrontPages();
+			// we assume that any match is valid for all
+			return il.contains(fp);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#matches(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFStrippingParams;
 		}
 
 	}

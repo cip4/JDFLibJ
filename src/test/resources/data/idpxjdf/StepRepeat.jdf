@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<JDF JobID="Job-8eb362d4-b956-43a1-97c2-b04e9df08543" ID="MainJDFId_d6342353-6451-43e3-8457-bbada154fcc6" Status="Ready" Type="Combined" Activation="Active" Category="DigitalPrinting" DescriptiveName="A5 sameup on A4" Template="false" JobPartID="RootNode" Types="LayoutPreparation Imposition Interpreting Rendering ColorSpaceConversion DigitalPrinting" Version="1.3" ICSVersions="IDP_L1-1.0" MaxVersion="1.3" xmlns="http://www.CIP4.org/JDFSchema_1_1">
+    <ResourcePool>
+      <CustomerInfo Class="Parameter" ID="LinkCustomerInfo" Status="Available" CustomerJobName="A5 sameup on A4" CustomerID="test">
+        <ContactRef rRef="Contact_899344a0-3bf8-4eb9-ac31-a60a58e99be7" />
+      </CustomerInfo>
+      <Contact ContactTypes="Owner Delivery" Class="Parameter" ID="Contact_899344a0-3bf8-4eb9-ac31-a60a58e99be7" Status="Available" />
+      <Media PrePrinted="false" Class="Consumable" ID="Media_c8604a13-ee43-4511-a657-0d7f91238a16" Status="Available" Dimension="595 842" DescriptiveName="MyDocMedia" MediaColorNameDetails="Purple" Weight="100" MediaType="Paper" MediaTypeDetails="Coated" FrontCoatings="Coated">
+        <Location LocationName="AutoSelect" />
+      </Media>
+      <RunList Class="Parameter" ID="RunList_05089700-88cd-4f7d-bf6c-307c514179ac" Status="Available" NPage="10">
+        <LayoutElementRef rRef="LayoutElement_0872f30e-e0ce-49e7-b0c4-a11ad51309b2" />
+      </RunList>
+      <LayoutElement Class="Parameter" ID="LayoutElement_0872f30e-e0ce-49e7-b0c4-a11ad51309b2" Status="Available">
+        <FileSpec URL="cid:part3-PDF" MimeType="application/pdf" MimeTypeVersion="PDF/X-3:2003" />
+      </LayoutElement>
+      <ColorSpaceConversionParams ICCProfileUsage="UsePDL" Class="Parameter" ID="ColorSpaceConversion-e25b342e-e96e-4007-9476-93fa7bbe5dda" Status="Available" />
+      <ColorantControl Class="Parameter" ID="ColorantControl-6cafe17a-9198-4fc2-92bd-a490a670a7eb" Status="Available" SettingsPolicy="MustHonor" ProcessColorModel="DeviceCMYK" />
+      <Layout Class="Parameter" ID="Layout-ad0423a2-0420-47ca-8b51-fa29a2776c99" Status="Available" />
+      <LayoutPreparationParams Rotate="Rotate0" Sides="TwoSidedFlipY" Class="Parameter" ID="LayoutPreparationParams_3b8bc8bc-b3b5-4ba2-bde1-66e9d33bc9e2" Status="Available" BindingEdge="Left" NumberUp="2 1" StepRepeat="2 1 1">
+        <FitPolicy RotatePolicy="RotateOrthogonal" />
+        <ImageShift PositionX="Center" PositionY="Center" />
+        <MediaRef rRef="Media_c8604a13-ee43-4511-a657-0d7f91238a16" />
+      </LayoutPreparationParams>
+      <DigitalPrintingParams Class="Parameter" ID="DigitalPrintingParams_6e7b360b-16c4-4faa-9b28-acd49d964b4b" Status="Available" Collate="Sheet" OutputBin="AutoSelect">
+        <MediaRef rRef="Media_c8604a13-ee43-4511-a657-0d7f91238a16" />
+        <Disjointing OffsetDirection="None" />
+      </DigitalPrintingParams>
+      <InterpretingParams Class="Parameter" ID="Interpreting-dfce2b55-4f7d-4e68-8795-1843e97683f9" Status="Available" />
+      <RenderingParams Class="Parameter" ID="Rendering-c290e7d6-edc0-419a-8592-b85f62efcb59" Status="Available" >
+        <ObjectResolution Resolution="1200 1200" AntiAliasing="None" />
+      </RenderingParams>
+      <Component ComponentType="FinalProduct" Class="Quantity" ID="Component_f49098a9-a72f-4e06-8cea-bbb175b970b2" Status="Unavailable" />
+    </ResourcePool>
+    <ResourceLinkPool>
+      <CustomerInfoLink rRef="LinkCustomerInfo" Usage="Input" />
+      <MediaLink rRef="Media_c8604a13-ee43-4511-a657-0d7f91238a16" Usage="Input" />
+      <RunListLink rRef="RunList_05089700-88cd-4f7d-bf6c-307c514179ac" Usage="Input" />
+      <ColorSpaceConversionParamsLink rRef="ColorSpaceConversion-e25b342e-e96e-4007-9476-93fa7bbe5dda" Usage="Input" />
+      <ColorantControlLink rRef="ColorantControl-6cafe17a-9198-4fc2-92bd-a490a670a7eb" Usage="Input" />
+      <LayoutLink rRef="Layout-ad0423a2-0420-47ca-8b51-fa29a2776c99" Usage="Input" />
+      <LayoutPreparationParamsLink rRef="LayoutPreparationParams_3b8bc8bc-b3b5-4ba2-bde1-66e9d33bc9e2" Usage="Input" />
+      <DigitalPrintingParamsLink rRef="DigitalPrintingParams_6e7b360b-16c4-4faa-9b28-acd49d964b4b" Usage="Input" />
+      <InterpretingParamsLink rRef="Interpreting-dfce2b55-4f7d-4e68-8795-1843e97683f9" Usage="Input" />
+      <RenderingParamsLink rRef="Rendering-c290e7d6-edc0-419a-8592-b85f62efcb59" Usage="Input" />
+      <ComponentLink rRef="Component_f49098a9-a72f-4e06-8cea-bbb175b970b2" Usage="Output" Amount="1" CombinedProcessIndex="5" />
+    </ResourceLinkPool>
+    <AuditPool>
+	  <Created TimeStamp="2018-12-12T09:41:03Z" ID="audit_1" AgentName="Test" AgentVersion="1" />
+    </AuditPool>
+  </JDF>

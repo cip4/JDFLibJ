@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -56,6 +56,7 @@ public abstract class XJDFConstants
 	public static final String ChildProduct = "ChildProduct";
 	public static final String ChildRefs = "ChildRefs";
 	public static final String Coating = "Coating";
+	public static final String CoatingDetail = "CoatingDetail";
 	public static final String CoilBindingDetails = "CoilBindingDetails";
 	public static final String ColorantName = "ColorantName";
 	public static final String CompanyID = "CompanyID";
@@ -76,6 +77,8 @@ public abstract class XJDFConstants
 	public static final String FolioFrom = "FolioFrom";
 	public static final String FolioTo = "FolioTo";
 
+	public static final String GlossValue = "GlossValue";
+
 	public static final String Header = "Header";
 	public static final String HolePattern = "HolePattern";
 
@@ -95,6 +98,7 @@ public abstract class XJDFConstants
 	public static final String ParentID = "ParentID";
 	public static final String PartContext = "PartContext";
 	public static final String PartWaste = "PartWaste";
+	public static final String Pattern = "Pattern";
 	public static final String PlacedObject = "PlacedObject";
 	public static final String PreflightItem = "PreflightItem";
 	public static final String PrintStandard = "PrintStandard";

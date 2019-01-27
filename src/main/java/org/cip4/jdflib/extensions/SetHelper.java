@@ -179,7 +179,7 @@ public class SetHelper extends BaseXJDFHelper
 	/**
 	 * get an existing partition with at least a matching partmap
 	 *
-	 * @param map
+	 * @param vmap
 	 * @param addRes
 	 * @return
 	 */

@@ -1395,7 +1395,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(b.getAttribute("ns:cc"), "C");
 		assertEquals(b.getAttribute("cc", "www.ns.com", null), "C");
 
+		b.setAttribute("a", "old");
 		assertNull(b.copyAttribute("a", null));
+		assertNull(b.getNonEmpty("a"));
 	}
 
 	/**

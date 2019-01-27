@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<JDF Category="DigitalPrinting" ID="MainJDFId_7bc948e0-5d20-425d-98b9-3fcfc9a378ce" DescriptiveName="Colored PDF boxes - 40 pages.pdf" JobPartID="RootNode" JobID="Job-26f0be1f-6287-48d2-a339-6106aad03377" Type="Combined" Types="LayoutPreparation Imposition Interpreting Rendering ColorSpaceConversion DigitalPrinting" Template="false" Status="Ready" Version="1.3" Activation="Active" ICSVersions="IDP_L1-1.0" MaxVersion="1.3" xmlns="http://www.CIP4.org/JDFSchema_1_1">
+  <ResourcePool>
+    <CustomerInfo Class="Parameter" ID="LinkCustomerInfo" Status="Available" CustomerJobName="Colored PDF boxes - 40 pages.pdf" CustomerID="test">
+      <ContactRef rRef="Contact_8bbad6f0-17ab-49da-bf1d-4ebbc4995ff5" />
+    </CustomerInfo>
+    <Contact ContactTypes="Owner Delivery" Class="Parameter" ID="Contact_8bbad6f0-17ab-49da-bf1d-4ebbc4995ff5" Status="Available" />
+    <Media PrePrinted="false" Class="Consumable" ID="Media_120ee8fa-4fe4-4dbb-bea0-356545718a0c" Status="Available" Dimension="595.0 842.0" MediaType="Paper">
+      <Location LocationName="AutoSelect" />
+    </Media>
+    <RunList Class="Parameter" ID="RunList_1851abc4-dd57-4e1a-b4c8-36388eb3614b" Status="Available" NPage="40">
+      <LayoutElementRef rRef="LayoutElement_98cec043-0c75-4f28-af5b-4ec8b88924d0" />
+    </RunList>
+    <LayoutElement Class="Parameter" ID="LayoutElement_98cec043-0c75-4f28-af5b-4ec8b88924d0" Status="Available">
+      <FileSpec URL="cid:part3-PDF" MimeType="application/pdf" MimeTypeVersion="PDF/X-3:2003" />
+    </LayoutElement>
+    <ColorSpaceConversionParams ICCProfileUsage="UsePDL" Class="Parameter" ID="ColorSpaceConversion-3350bd0c-4fa3-4a4e-9836-79a006ba3bd8" Status="Available" />
+    <ColorantControl Class="Parameter" ID="ColorantControl-1b6edc51-b8ef-42e3-bd75-45be086b3dea" Status="Available" SettingsPolicy="MustHonor" ProcessColorModel="DeviceCMYK" />
+    <Layout Class="Parameter" ID="Layout-8ef1e345-5843-46e4-a3ba-d34fd28ba977" Status="Available" />
+    <LayoutPreparationParams Rotate="Rotate0" Sides="TwoSidedFlipY" Class="Parameter" ID="LayoutPreparationParams_633e4f23-501a-4d2c-9b33-353f0f2f4f05" Status="Available" BindingEdge="Left">
+      <MediaRef rRef="Media_120ee8fa-4fe4-4dbb-bea0-356545718a0c" />
+    </LayoutPreparationParams>
+    <DigitalPrintingParams Class="Parameter" ID="DigitalPrintingParams_4e3e9059-1545-4753-afe0-591530572bfe" Status="Available" Collate="Sheet" OutputBin="AutoSelect">
+      <MediaRef rRef="Media_120ee8fa-4fe4-4dbb-bea0-356545718a0c" />
+      <Disjointing OffsetDirection="None" />
+    </DigitalPrintingParams>
+    <InterpretingParams Class="Parameter" ID="Interpreting-e81146f0-1993-4429-8d2f-93f4371c76aa" Status="Available" />
+    <RenderingParams Class="Parameter" ID="Rendering-6a1e8884-72fa-4a70-8ab3-f5af8fbd93f4" Status="Available" >
+      <ObjectResolution Resolution="1200.0 1200.0" AntiAliasing="None" />
+    </RenderingParams>
+    <Component ComponentType="FinalProduct" Class="Quantity" ID="Component_e4c1027e-c26a-4bfe-98a2-aac519d3d73c" Status="Unavailable" />
+  </ResourcePool>
+  <ResourceLinkPool>
+    <CustomerInfoLink rRef="LinkCustomerInfo" Usage="Input" />
+    <MediaLink rRef="Media_120ee8fa-4fe4-4dbb-bea0-356545718a0c" Usage="Input" />
+    <RunListLink rRef="RunList_1851abc4-dd57-4e1a-b4c8-36388eb3614b" Usage="Input" />
+    <ColorSpaceConversionParamsLink rRef="ColorSpaceConversion-3350bd0c-4fa3-4a4e-9836-79a006ba3bd8" Usage="Input" />
+    <ColorantControlLink rRef="ColorantControl-1b6edc51-b8ef-42e3-bd75-45be086b3dea" Usage="Input" />
+    <LayoutLink rRef="Layout-8ef1e345-5843-46e4-a3ba-d34fd28ba977" Usage="Input" />
+    <LayoutPreparationParamsLink rRef="LayoutPreparationParams_633e4f23-501a-4d2c-9b33-353f0f2f4f05" Usage="Input" />
+    <DigitalPrintingParamsLink rRef="DigitalPrintingParams_4e3e9059-1545-4753-afe0-591530572bfe" Usage="Input" />
+    <InterpretingParamsLink rRef="Interpreting-e81146f0-1993-4429-8d2f-93f4371c76aa" Usage="Input" />
+    <RenderingParamsLink rRef="Rendering-6a1e8884-72fa-4a70-8ab3-f5af8fbd93f4" Usage="Input" />
+    <ComponentLink rRef="Component_e4c1027e-c26a-4bfe-98a2-aac519d3d73c" Usage="Output" Amount="1.0" CombinedProcessIndex="5" />
+  </ResourceLinkPool>
+  <AuditPool>
+    <Created TimeStamp="2018-12-19T10:55:48Z" ID="audit_1" AgentName="test" AgentVersion="1" />
+  </AuditPool>
+</JDF>

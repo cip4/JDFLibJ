@@ -44,6 +44,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoResourceLink.EnumOrientation;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -342,6 +343,22 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		w.walkTree(h.getRoot(), null);
 		assertEquals("P1", h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartMapVector().get(0).get(AttributeName.PARTVERSION));
 		assertEquals("P2", h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartMapVector().get(1).get(AttributeName.PARTVERSION));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testOrientation()
+	{
+		final XJDFHelper h = new XJDFHelper("a", null);
+		final SetHelper set = h.appendResourceSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
+		set.getRoot().setAttribute(AttributeName.ORIENTATION, EnumOrientation.Flip0.getName());
+		set.getCreatePartition(AttributeName.PARTVERSION, "P1", true);
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.walkTree(h.getRoot(), null);
+		assertEquals(EnumOrientation.Flip0.getName(), h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartition(0).getAttribute(AttributeName.ORIENTATION));
+		assertNull(h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getAttribute(AttributeName.ORIENTATION));
 	}
 
 	/**

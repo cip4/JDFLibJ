@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -324,6 +324,7 @@ public class WalkJDFElement extends WalkElement
 	{
 		if (!jdfToXJDF.isRetainAll())
 		{
+			map.remove(AttributeName.ACTIVATION);
 			map.remove(AttributeName.BESTEFFORTEXCEPTIONS);
 			map.remove(AttributeName.LOCKED);
 			map.remove(AttributeName.MAXVERSION);
@@ -605,8 +606,9 @@ public class WalkJDFElement extends WalkElement
 	 */
 	protected void moveToAmountPool(final JDFAmountPool newAP, final JDFPartAmount pa)
 	{
-		final JDFAttributeMap partMap = pa.getPartMap();
-		final VJDFAttributeMap partMapVector = pa.getPartMapVector();
+		JDFAttributeMap partMap = pa.getPartMap();
+		partMap = convertRanges(partMap, pa);
+		VJDFAttributeMap partMapVector = pa.getPartMapVector();
 		if (partMap != null && jdfToXJDF.isExplicitWaste())
 		{
 			final String condition = partMap.get(AttributeName.CONDITION);
@@ -614,6 +616,12 @@ public class WalkJDFElement extends WalkElement
 			if (partMapVector != null)
 			{
 				partMapVector.removeKey(AttributeName.CONDITION);
+				final VJDFAttributeMap converted = new VJDFAttributeMap();
+				for (final JDFAttributeMap m : partMapVector)
+				{
+					converted.add(convertRanges(m, pa.getPart(0)));
+				}
+				partMapVector = converted;
 			}
 			final JDFPartAmount paNew = newAP.getCreatePartAmount(partMapVector);
 			final JDFAttributeMap map = pa.getAttributeMap();

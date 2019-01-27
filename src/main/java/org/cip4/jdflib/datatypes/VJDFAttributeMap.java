@@ -289,30 +289,58 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 */
 	public VJDFAttributeMap getOrMaps(final JDFAttributeMap map)
 	{
-		if (map == null)
+		if (JDFAttributeMap.isEmpty(map))
 		{
 			return new VJDFAttributeMap(this);
 		}
 		VJDFAttributeMap newMap = new VJDFAttributeMap();
-		for (int i = 0; i < size(); i++)
+		for (JDFAttributeMap map0 : this)
 		{
-			JDFAttributeMap map0 = get(i);
-			if (map0 != null)
-			{
-				map0 = map0.getOrMap(map);
-			}
+			map0 = map0.getOrMap(map);
 			if (map0 != null)
 			{
 				newMap.add(map0);
 			}
 		}
-		if (newMap.size() > 0)
+		if (newMap.isEmpty())
 		{
-			newMap.unify();
+			newMap = null;
 		}
 		else
 		{
+			newMap.unify();
+		}
+		return newMap;
+	}
+
+	/**
+	 * andMap - builds a new vector of maps with identical pairs of both maps does not modify this
+	 *
+	 * @param map the given map
+	 * @return the anded map, null if mismatches occurred
+	 */
+	public VJDFAttributeMap getOrMaps(final VJDFAttributeMap vMap)
+	{
+		if (VJDFAttributeMap.isEmpty(vMap))
+		{
+			return new VJDFAttributeMap(this);
+		}
+		VJDFAttributeMap newMap = new VJDFAttributeMap();
+		for (final JDFAttributeMap map : vMap)
+		{
+			final VJDFAttributeMap maps0 = getOrMaps(map);
+			if (maps0 != null)
+			{
+				newMap.addAll(maps0);
+			}
+		}
+		if (newMap.isEmpty())
+		{
 			newMap = null;
+		}
+		else
+		{
+			newMap.unify();
 		}
 		return newMap;
 	}
@@ -801,9 +829,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 		{
 			return true;
 		}
-		for (int i = 0; i < vMap.size(); i++)
+		for (final JDFAttributeMap map : vMap)
 		{
-			if (subMap(vMap.elementAt(i)))
+			if (subMap(map))
 			{
 				return true;
 			}

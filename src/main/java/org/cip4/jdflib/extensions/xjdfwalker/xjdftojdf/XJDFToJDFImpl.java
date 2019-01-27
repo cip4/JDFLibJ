@@ -427,7 +427,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 			{
 				final String key = keyIt.next();
 				final String val = map.get(key);
-				if ((e2 instanceof JDFElement) && EnumAttributeType.isRange(((JDFElement) e2).getAttributeInfo().getAttributeType(key)))
+				if ((e2 instanceof JDFElement) && EnumAttributeType.isRange(((JDFElement) e2).getAttributeInfo().getAttributeType(key)) && val.indexOf(JDFConstants.TILDE) < 0)
 				{
 					final VString v = new VString(val, null);
 					if (v.size() % 2 == 0)
@@ -537,6 +537,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 				map.remove(a + gw);
 			}
 		}
+
 	}
 
 	/**

@@ -127,8 +127,13 @@ public class WalkXJDFResource extends WalkXElement
 				rl = (JDFResourceInfo) parent;
 			}
 			final JDFAttributeMap partMap = vParts.get(0);
-			handleParts(res, vParts, rl);
+			handleParts(newPartition, vParts, rl);
 			handleAmountPool(xjdfRes, partMap, map, rl);
+			if (rl != null)
+			{
+				rl.setAttribute(AttributeName.ORIENTATION, map.remove(AttributeName.ORIENTATION));
+				rl.setAttribute(AttributeName.TRANSFORMATION, map.remove(AttributeName.TRANSFORMATION));
+			}
 		}
 		newPartitionElement.setAttributes(map);
 		return newPartitionElement;
@@ -142,8 +147,22 @@ public class WalkXJDFResource extends WalkXElement
 	 */
 	protected void handleParts(final JDFResource res, final VJDFAttributeMap vParts, final JDFElement rl)
 	{
+		if (vParts.size() > 1)
+		{
+			for (final String key : indexKeys)
+			{
+				final VString vals = vParts.getPartValues(key, false);
+				if (ContainerUtil.size(vals) > 1)
+				{
+					final String newVal = vals.getString();
+					vParts.put(key, newVal);
+					vParts.unify();
+					res.setAttribute(key, newVal);
+				}
+			}
+		}
 		handleLinkParts(vParts, rl);
-		handleIdentical(vParts, res);
+		handleIdentical(vParts, res.getResourceRoot());
 	}
 
 	private final static VString keepKeys = new VString("SignatureName SheetName Side PartVersion Separation BlockName Run DocIndex RunIndex SetIndex SheetIndex", null);
@@ -420,7 +439,9 @@ public class WalkXJDFResource extends WalkXElement
 			ap.deleteNode();
 		}
 		if (rl instanceof JDFResourceLink)
+		{
 			xjdfToJDFImpl.moveAmountsToLink(partmap, map, (JDFResourceLink) rl);
+		}
 	}
 
 	/**

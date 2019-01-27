@@ -4715,15 +4715,14 @@ public class JDFElement extends KElement
 	protected void setPartMapVector(final VJDFAttributeMap vPart)
 	{
 		removeChildrenByClass(JDFPart.class);
-		if (vPart == null)
+		if (!VJDFAttributeMap.isEmpty(vPart))
 		{
-			return;
-		}
 
-		for (final JDFAttributeMap part : vPart)
-		{
-			final KElement p = appendElement(ElementName.PART, null);
-			p.setAttributes(part);
+			for (final JDFAttributeMap part : vPart)
+			{
+				final KElement p = appendElement(ElementName.PART, null);
+				p.setAttributes(part);
+			}
 		}
 	}
 
@@ -4735,7 +4734,7 @@ public class JDFElement extends KElement
 	protected void setPartMap(final JDFAttributeMap mPart)
 	{
 		removeChildren(ElementName.PART, null, null);
-		if ((mPart != null) && !mPart.isEmpty())
+		if (!JDFAttributeMap.isEmpty(mPart))
 		{
 			final KElement p = appendElement(ElementName.PART, null);
 			p.setAttributes(mPart);
