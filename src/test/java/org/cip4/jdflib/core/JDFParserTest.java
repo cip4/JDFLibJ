@@ -336,9 +336,11 @@ public class JDFParserTest extends JDFTestCaseBase
 	{
 		JDFParser.m_searchStream = true;
 		final String s2 = "        ------ end of header ----!\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n <JMF ID=\"abc\"/>";
-		for (int i = 0; i < 2222; i++)
+		final JDFParser jdfParser = JDFParserFactory.getFactory().get();
+		for (int i = 0; i < 444; i++)
 		{
-			assertNotNull(new JDFParser().parseString(s2));
+			assertNotNull(jdfParser.parseString(s2));
+
 		}
 		log.info("mem new:   " + getCurrentMem() + " " + mem);
 		assertTrue(getCurrentMem() - mem < 4200000);
