@@ -200,7 +200,7 @@ public class WalkElement extends BaseWalker
 
 	JDFAttributeMap convertRanges(final JDFAttributeMap map, final JDFElement jdf)
 	{
-		if (jdfToXJDF.isConvertTilde())
+		if (jdfToXJDF.isConvertTilde() && map != null)
 		{
 			final VString keys = map.getKeys();
 			for (final String key : keys)
