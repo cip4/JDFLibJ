@@ -1151,6 +1151,7 @@
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="JobPhase"/>
             </xs:sequence>
             <xs:attribute name="CounterUnit" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="EndTime" type="dateTime" use="optional"/>
             <xs:attribute name="HourCounter" type="duration" use="optional"/>
             <xs:attribute name="IdleStartTime" type="dateTime" use="optional"/>
             <xs:attribute name="ModuleIDs" type="NMTOKENS" use="optional"/>
@@ -1226,6 +1227,7 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
+            <xs:attribute name="EndTime" type="dateTime" use="optional"/>
             <xs:attribute name="JobID" type="NMTOKEN" use="required"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ModuleIDs" type="NMTOKENS" use="optional"/>
@@ -1247,6 +1249,7 @@
             </xs:sequence>
 			<xs:attribute name="ActivityID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ActivityName" type="string" use="optional"/>
+            <xs:attribute name="EndTime" type="dateTime" use="optional"/>
             <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="StartTime" type="dateTime" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -1254,7 +1257,7 @@
     </xs:element>
 
     <xs:element abstract="true" name="Message" type="Message"/>
-    <xs:complexType name="Message">
+    <xs:complexType abstract="true" name="Message">
         <xs:sequence>
             <xs:element maxOccurs="1" minOccurs="1" ref="Header"/>
         </xs:sequence>
@@ -1277,7 +1280,7 @@
     </xs:element>
 
     <xs:element abstract="true" name="Command" substitutionGroup="Message" type="Command"/>
-    <xs:complexType name="Command">
+    <xs:complexType abstract="true" name="Command">
         <xs:complexContent>
             <xs:extension base="Message">
             </xs:extension>
@@ -1285,7 +1288,7 @@
     </xs:complexType>
 
     <xs:element abstract="true" name="Query" substitutionGroup="Message" type="Query"/>
-    <xs:complexType name="Query">
+    <xs:complexType abstract="true" name="Query">
         <xs:complexContent>
             <xs:extension base="Message">
                 <xs:sequence>
@@ -1296,7 +1299,7 @@
     </xs:complexType>
 
     <xs:element abstract="true" name="Response" substitutionGroup="Message" type="Response"/>
-    <xs:complexType name="Response">
+    <xs:complexType abstract="true" name="Response">
         <xs:complexContent>
             <xs:extension base="Message">
                 <xs:sequence>
@@ -6331,7 +6334,7 @@
             <xs:attribute name="SetupProcsets" type="boolean" use="optional"/>
             <xs:attribute name="ShrinkToFit" type="boolean" use="optional"/>
             <xs:attribute name="SuppressCenter" type="boolean" use="optional"/>
-            <xs:attribute name="SuppressRotate" type="boolean" use="required"/>
+            <xs:attribute name="SuppressRotate" type="boolean" use="optional"/>
             <xs:attribute name="TTasT42" type="boolean" use="optional"/>
             <xs:attribute name="UseFontAliasNames" type="boolean" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
