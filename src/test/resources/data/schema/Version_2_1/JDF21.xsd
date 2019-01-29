@@ -1242,7 +1242,10 @@
 
     <xs:element name="Activity">
         <xs:complexType>
-            <xs:attribute name="ActivityID" type="NMTOKEN" use="optional"/>
+            <xs:sequence>
+				<xs:element maxOccurs="1" minOccurs="0" ref="Comment"/>
+            </xs:sequence>
+			<xs:attribute name="ActivityID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ActivityName" type="string" use="optional"/>
             <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="StartTime" type="dateTime" use="optional"/>
@@ -1509,6 +1512,7 @@
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Scope" type="Scope" use="optional"/>
             <xs:attribute name="Speed" type="float" use="optional"/>
+            <xs:attribute name="Types" type="NMTOKENS" use="optional"/>
             <xs:attribute name="TotalAmount" type="float" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -2910,7 +2914,13 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
-                <xs:attribute name="ChildRefs" type="IDREFS" use="optional"/>
+                <xs:attribute name="ChildRefs" use="optional">
+					<xs:simpleType>
+					<xs:restriction base="IDREFS">
+						<xs:minLength value="2"/>
+					</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
                 <xs:attribute name="CoverColor" type="NamedColor" use="optional"/>
                 <xs:attribute name="CoverColorDetails" type="string" use="optional"/>
             </xs:extension>
@@ -3468,7 +3478,6 @@
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="AssemblySection"/>
                 </xs:sequence>
                 <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="CommonFolds" type="integer" use="optional"/>
                 <xs:attribute name="Order" use="required">
                     <xs:simpleType>
                         <xs:restriction base="NMTOKEN">
@@ -4264,6 +4273,7 @@
                             <xs:enumeration value="OneSidedFront"/>
                             <xs:enumeration value="OneSidedBack"/>
                             <xs:enumeration value="TwoSided"/>
+                            <xs:enumeration value="Unprinted"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>

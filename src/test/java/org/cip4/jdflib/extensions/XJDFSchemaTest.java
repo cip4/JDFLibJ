@@ -39,8 +39,11 @@ package org.cip4.jdflib.extensions;
 import static org.junit.Assert.assertNotNull;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.junit.Test;
@@ -91,6 +94,39 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/@Usage", "Input");
 		root.setAttribute("Types", "ConventionalPrinting");
 		writeTest(root, "../SimpleCP.xjdf", true, null);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testProductPV()
+	{
+		final KElement root = new XJDFHelper(EnumVersion.Version_2_1, "j1").getRoot();
+		final XJDFHelper xjdfHelper = new XJDFHelper(root);
+		xjdfHelper.getCreateRootProduct(0).setAttribute(AttributeName.PARTVERSION, "PV1");
+		xjdfHelper.setTypes(JDFConstants.PRODUCT);
+		xjdfHelper.cleanUp();
+		writeTest(root, "../ProductPV.xjdf", true, null);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testProductPVBind()
+	{
+		final KElement root = new XJDFHelper(EnumVersion.Version_2_1, "j1").getRoot();
+		final XJDFHelper xjdfHelper = new XJDFHelper(root);
+		final ProductHelper createRootProduct = xjdfHelper.getCreateRootProduct(0);
+		createRootProduct.setID("i1");
+		final KElement createResource = createRootProduct.appendIntent(ElementName.BINDINGINTENT).getCreateResource();
+		createResource.setAttribute(XJDFConstants.ChildRefs, "i1 i1");
+		createResource.setAttribute(ElementName.BINDINGTYPE, "SaddleStitch");
+		createRootProduct.setAttribute(AttributeName.PARTVERSION, "PV1");
+		xjdfHelper.setTypes(JDFConstants.PRODUCT);
+		xjdfHelper.cleanUp();
+		writeTest(root, "../ProductPV.xjdf", true, null);
 	}
 
 	/**

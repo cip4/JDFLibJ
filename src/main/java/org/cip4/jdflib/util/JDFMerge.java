@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -770,66 +770,71 @@ public class JDFMerge
 
 	private void calcSpawnStatus(final JDFResource leafRes, final boolean bLocal)
 	{
-		if (leafRes == null)
+		if (leafRes != null)
 		{
-			return;
-		}
-		prepareNewSpawnMap();
-		final VString spawnIDs = leafRes.getSpawnIDs(false);
-		final String resID = leafRes.getID();
-		if (spawnIDs == null || spawnIDs.isEmpty())
-		{
-			removeSpawnAttributes(leafRes);
-			return;
-		}
-		else if (bLocal || vsRW.contains(resID))
-		{
-			boolean bWrite = bLocal;
-
-			for (final String resSpawnID : spawnIDs) // check for multiple rw spawns
+			prepareNewSpawnMap();
+			final VString spawnIDs = leafRes.getSpawnIDs(false);
+			final String resID = leafRes.getID();
+			if (spawnIDs == null || spawnIDs.isEmpty())
 			{
-				final JDFSpawned spawnedAudit = newSpawnMap.get(resSpawnID);
-				if (spawnedAudit != null)
+				removeSpawnAttributes(leafRes);
+				return;
+			}
+			else if (bLocal || vsRW.contains(resID))
+			{
+				boolean bWrite = bLocal;
+
+				for (final String resSpawnID : spawnIDs) // check for multiple rw spawns
 				{
-					final VString rw = spawnedAudit.getrRefsRWCopied();
-					if (rw != null && rw.contains(resID))
+					final JDFSpawned spawnedAudit = newSpawnMap.get(resSpawnID);
+					if (spawnedAudit != null)
 					{
-						bWrite = true;
-					}
-				}
-				else
-				// clean up spurious spawnids of spawns that were initiated off line
-				{
-					final String mainSpawnID = leafRes.getJDFRoot().getSpawnID(true);
-					if (KElement.isWildCard(mainSpawnID)) // only remove unknown spawnids in a real main ticket
-					// Spawned spawnids may be specified in a spawn ancestor
-					{
-						leafRes.removeFromAttribute(AttributeName.SPAWNIDS, resSpawnID, null, null, -1);
-						final String spawnIDsNew = leafRes.getAttribute_KElement(AttributeName.SPAWNIDS, null, null);
-						if (StringUtil.getNonEmpty(spawnIDsNew) == null)
+						final VString rw = spawnedAudit.getrRefsRWCopied();
+						if (rw != null && rw.contains(resID))
 						{
-							removeSpawnAttributes(leafRes);
+							bWrite = true;
+						}
+					}
+					else
+					// clean up spurious spawnids of spawns that were initiated off line
+					{
+						if (cleanSpurious(leafRes, resSpawnID))
+						{
 							return;
 						}
 					}
 				}
-			}
-			if (bWrite)
-			{
-				leafRes.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
-				leafRes.setLocked(true);
-			}
-			else
-			{
-				// leafRes.setSpawnStatus(EnumSpawnStatus.SpawnedRO);
-				// leafRes.setLocked(false);
+				if (bWrite)
+				{
+					leafRes.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
+					leafRes.setLocked(true);
+				}
 			}
 		}
-		else
-		// this was ro
+	}
+
+	/**
+	 *
+	 * @param leafRes
+	 * @param resSpawnID
+	 * @return
+	 */
+	boolean cleanSpurious(final JDFResource leafRes, final String resSpawnID)
+	{
+		final JDFNode jdfRoot = leafRes.getJDFRoot();
+		final String mainSpawnID = jdfRoot == null ? null : jdfRoot.getSpawnID(true);
+		if (KElement.isWildCard(mainSpawnID)) // only remove unknown spawnids in a real main ticket
+		// Spawned spawnids may be specified in a spawn ancestor
 		{
-			// nop
+			leafRes.removeFromAttribute(AttributeName.SPAWNIDS, resSpawnID, null, null, -1);
+			final String spawnIDsNew = leafRes.getAttribute_KElement(AttributeName.SPAWNIDS, null, null);
+			if (StringUtil.getNonEmpty(spawnIDsNew) == null)
+			{
+				removeSpawnAttributes(leafRes);
+				return true;
+			}
 		}
+		return false;
 	}
 
 	/**
