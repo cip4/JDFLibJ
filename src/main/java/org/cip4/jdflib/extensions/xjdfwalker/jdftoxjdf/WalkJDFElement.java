@@ -385,8 +385,7 @@ public class WalkJDFElement extends WalkElement
 			return null;
 		}
 		final JDFResourceLink resLink = (rl instanceof JDFResourceLink) ? (JDFResourceLink) rl : null;
-		final boolean needCheckExchange = !jdfToXJDF.isSingleNode() || (resLink != null && EnumUsage.Input.equals(resLink.getUsage()) && resLink.hasNonEmpty(AttributeName.COMBINEDPROCESSINDEX));
-		if (needCheckExchange && isExchangeResource(linkTarget))
+		if (isExchangeResource(resLink, linkTarget))
 		{
 			return null;
 		}
@@ -456,19 +455,26 @@ public class WalkJDFElement extends WalkElement
 
 	/**
 	 *
+	 * @param resLink
 	 * @param linkTarget
 	 * @return
 	 */
-	private boolean isExchangeResource(final JDFResource linkTarget)
+	boolean isExchangeResource(final JDFResourceLink resLink, final JDFResource linkTarget)
 	{
-		final JDFResource resInRoot = linkTarget == null ? null : linkTarget.getResourceRoot();
-		if (resInRoot != null)
+
+		if (!jdfToXJDF.isSingleNode()
+				|| (resLink != null && EnumUsage.Input.equals(resLink.getUsage()) && resLink.hasNonEmpty(AttributeName.COMBINEDPROCESSINDEX) && !resLink.getCombinedProcessIndex().contains(0)))
 		{
-			final VElement vCreators = resInRoot.getCreator(true);
-			if (vCreators != null && vCreators.size() > 0)
+
+			final JDFResource resInRoot = linkTarget == null ? null : linkTarget.getResourceRoot();
+			if (resInRoot != null)
 			{
-				final VElement vConsumers = resInRoot.getCreator(false);
-				return (vConsumers != null && vConsumers.size() > 0);
+				final VElement vCreators = resInRoot.getCreator(true);
+				if (!ContainerUtil.isEmpty(vCreators))
+				{
+					final VElement vConsumers = resInRoot.getCreator(false);
+					return (!ContainerUtil.isEmpty(vConsumers));
+				}
 			}
 		}
 		return false;
