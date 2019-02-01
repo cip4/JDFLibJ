@@ -3744,17 +3744,13 @@ public class JDFElement extends KElement
 			if (parent != null && kElem.getNodeName().equals(parent.getNodeName()))
 			{
 				final JDFResource r = (JDFResource) parent;
-				VString il2 = ignoreList;
-				if (il2 == null)
-				{
-					il2 = new VString();
-					il2.add(AttributeName.ID);
-					il2.add(AttributeName.PARTUSAGE);
-					il2.add(AttributeName.PARTIDKEYS);
-					il2.add(AttributeName.CLASS);
-					il2.appendUnique(r.getPartIDKeys());
-				}
-
+				final VString il2 = new VString();
+				il2.add(AttributeName.ID);
+				il2.add(AttributeName.PARTUSAGE);
+				il2.add(AttributeName.PARTIDKEYS);
+				il2.add(AttributeName.CLASS);
+				il2.appendUnique(r.getPartIDKeys());
+				il2.appendUnique(ignoreList);
 				setAttributes(parent, il2);
 			}
 		}

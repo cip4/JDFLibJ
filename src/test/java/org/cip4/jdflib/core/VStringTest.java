@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -374,6 +374,24 @@ public class VStringTest extends TestCase
 		v.appendUnique("c");
 		assertEquals(3, v.size());
 		v.appendUnique("c");
+		assertEquals(3, v.size());
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testAppendUniqueV()
+	{
+		final VString v = new VString();
+		v.appendUnique((String) null);
+		assertEquals(0, v.size());
+		v.appendUnique("a");
+		assertEquals(1, v.size());
+		v.appendUnique(v);
+		assertEquals(1, v.size());
+		final VString v2 = new VString("b c");
+		v.appendUnique(v2);
 		assertEquals(3, v.size());
 	}
 
