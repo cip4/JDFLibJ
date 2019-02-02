@@ -411,6 +411,8 @@ public abstract class JDFTestCaseBase
 	{
 		String ext = UrlUtil.extension(filename);
 		int minor = 0;
+		new File(sm_dirTestDataTemp + "xjdfexamples").mkdirs();
+		new File(sm_dirTestDataTemp + "jdfexamples").mkdirs();
 		if (ext.startsWith("x"))
 		{
 			if (e.getParentNode_KElement() == null)

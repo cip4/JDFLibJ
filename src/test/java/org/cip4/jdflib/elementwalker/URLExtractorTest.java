@@ -377,6 +377,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 		assertFalse(out.exists());
 		parentFile.setReadable(true);
 		parentFile.setExecutable(true);
+		parentFile.setWritable(true);
 		assertTrue(FileUtil.deleteAll(inDir));
 	}
 
