@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -309,6 +309,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 		assertTrue(write2String.indexOf("URLOut1/boooo.pdf") > 0);
 		assertTrue(new File(sm_dirTestDataTemp + "URLOut1/boooo.pdf").exists());
 		assertTrue(file.exists());
+		assertTrue(FileUtil.deleteAll(inDir));
 	}
 
 	/**
@@ -341,6 +342,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 		assertTrue(write2String.indexOf("URLIn2/content/boooo.pdf") > 0);
 		assertFalse(out.exists());
 		assertTrue(file.exists());
+		assertTrue(FileUtil.deleteAll(inDir));
 	}
 
 	/**
@@ -375,7 +377,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 		assertFalse(out.exists());
 		parentFile.setReadable(true);
 		parentFile.setExecutable(true);
-		assertTrue(FileUtil.deleteAll(parentFile));
+		assertTrue(FileUtil.deleteAll(inDir));
 	}
 
 	/**
@@ -402,6 +404,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 		final String write2String = rl.toDisplayXML(2);
 		assertTrue(write2String.indexOf("URLIn3/content/boooo.pdf") > 0);
 		assertFalse(out.exists());
+		assertTrue(FileUtil.deleteAll(inDir));
 	}
 
 	/**
@@ -428,6 +431,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 		assertTrue(new File(sm_dirTestDataTemp + "URLIn5/content/boo oo.pdf").exists());
 		assertTrue(write2String.indexOf("URLOut5/content/boo%20oo.pdf") > 0);
 		assertTrue(write2String.indexOf("URLOut5/content/aaa%20oo.pdf") > 0);
+		assertTrue(FileUtil.deleteAll(dumpDir));
 	}
 
 	/**
