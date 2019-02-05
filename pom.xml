@@ -124,7 +124,10 @@
                     <source>1.7</source>
                     <target>1.7</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
-          </configuration>
+                    <compilerArgs>
+                        <arg>-encoding UTF-8</arg>
+                    </compilerArgs>
+                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
