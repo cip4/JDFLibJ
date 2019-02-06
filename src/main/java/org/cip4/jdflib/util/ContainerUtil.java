@@ -699,7 +699,7 @@ public class ContainerUtil
 	 */
 	public static <A> Collection<A> unify(final Collection<A> c)
 	{
-		if (c == null || c.size() < 2)
+		if (size(c) < 2)
 		{
 			return c;
 		}

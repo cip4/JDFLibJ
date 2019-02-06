@@ -662,9 +662,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 */
 	public void appendUnique(final JDFAttributeMap map)
 	{
-		for (int i = 0; i < size(); i++)
+		for (final JDFAttributeMap m : this)
 		{
-			if (elementAt(i).equals(map))
+			if (m.equals(map))
 			{
 				return;
 			}
