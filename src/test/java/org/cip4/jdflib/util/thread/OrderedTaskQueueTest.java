@@ -86,6 +86,15 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 			final boolean b = ThreadUtil.sleep(t);
 			log.info("Sleep=" + b + " waited: " + i);
 		}
+
+		/**
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString()
+		{
+			return "WaitRunner [i=" + i + ", t=" + t + "]";
+		}
 	}
 
 	/**
@@ -102,7 +111,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 			task = new WaitRunner(i, 10000);
 			q.queue(task);
 		}
-		for (int i = 0; i < 3333; i++)
+		for (int i = 0; i < 333; i++)
 		{
 			if (q.getCurrentRunning() < 3)
 				ThreadUtil.sleep(3);
@@ -114,6 +123,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 				ThreadUtil.sleep(3);
 		}
 		assertEquals(q.getCurrentRunning(), 2);
+		ThreadUtil.sleep(33);
 		q.interruptCurrent(1);
 		for (int i = 0; i < 142; i++)
 		{
