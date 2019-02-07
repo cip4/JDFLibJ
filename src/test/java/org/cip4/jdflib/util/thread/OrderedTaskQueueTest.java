@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -108,14 +108,14 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 				ThreadUtil.sleep(3);
 		}
 		q.interruptTask(task);
-		for (int i = 0; i < 33; i++)
+		for (int i = 0; i < 333; i++)
 		{
 			if (q.getCurrentRunning() > 2)
 				ThreadUtil.sleep(3);
 		}
 		assertEquals(q.getCurrentRunning(), 2);
 		q.interruptCurrent(1);
-		for (int i = 0; i < 42; i++)
+		for (int i = 0; i < 142; i++)
 		{
 			if (q.getCurrentRunning() > 0)
 				ThreadUtil.sleep(3);
