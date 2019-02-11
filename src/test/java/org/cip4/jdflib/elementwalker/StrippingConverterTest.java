@@ -37,6 +37,7 @@
 package org.cip4.jdflib.elementwalker;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumBindingEdge;
 import org.cip4.jdflib.core.ElementName;
@@ -44,6 +45,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFLayoutPreparationParams;
+import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.junit.Test;
@@ -65,6 +67,22 @@ public class StrippingConverterTest
 		assertEquals(EnumBindingEdge.Bottom.getName(), ass.getBindingSide().getName());
 	}
 
+	@Test
+	public void testAutomated()
+	{
+		final JDFLayoutPreparationParams lpp = createlpp();
+		lpp.setBindingEdge(EnumBindingEdge.Bottom);
+		final JDFNode parentJDF = lpp.getParentJDF();
+		final StrippingConverter strippingConverter = new StrippingConverter(lpp, parentJDF);
+		strippingConverter.convert();
+		final JDFStrippingParams spp = (JDFStrippingParams) parentJDF.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+		assertTrue(spp.getAutomated());
+	}
+
+	/**
+	 *
+	 * @return
+	 */
 	JDFLayoutPreparationParams createlpp()
 	{
 		final JDFNode n = JDFNode.createRoot();

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,7 +44,6 @@
 package org.cip4.jdflib.util;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Vector;
 
@@ -143,8 +142,8 @@ public class SScanfTest extends JDFTestCaseBase
 		System.gc();
 		ThreadUtil.sleep(123);
 		final long mem2 = new MemorySpy().getCurrentMem();
-
-		assertTrue(mem2 - mem < 20000000);
+		if (mem2 > mem)
+			assertEquals(mem2, mem, 42000000);
 	}
 
 	/**

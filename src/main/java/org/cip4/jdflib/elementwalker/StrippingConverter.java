@@ -116,6 +116,7 @@ public class StrippingConverter
 		convertParentNode();
 		convertAssembly();
 		strippingParams = (JDFStrippingParams) parent.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
+		strippingParams.setAutomated(true);
 		strippingParams.clonePartitions(layPrepParams, null);
 		final VElement vThis = layPrepParams.getLeaves(false);
 		for (final KElement e : vThis)
@@ -299,8 +300,7 @@ public class StrippingConverter
 	private void addSinglePosition(final int x, final int y, final int n, final JDFXYPair numberUp)
 	{
 		final String bsName = getBSName(x, y, n, numberUp);
-		final JDFStrippingParams sp = (JDFStrippingParams) (bsName == null ? strippingParams
-				: strippingParams.getCreatePartition(new JDFAttributeMap(AttributeName.BINDERYSIGNATURENAME, bsName), null));
+		final JDFStrippingParams sp = (JDFStrippingParams) (bsName == null ? strippingParams : strippingParams.getCreatePartition(new JDFAttributeMap(AttributeName.BINDERYSIGNATURENAME, bsName), null));
 		final JDFPosition position = sp.appendPosition();
 		position.setRelativeBox(getRelativeBox(x, y, n, numberUp));
 		position.copyAttribute(AttributeName.ORIENTATION, layPrepParams, AttributeName.ROTATE, null, null);
