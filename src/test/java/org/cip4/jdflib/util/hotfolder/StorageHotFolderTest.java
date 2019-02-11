@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -273,6 +273,31 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			ThreadUtil.sleep(4);
 			if (!file.exists() && tmpHFDir.listFiles().length == 0)
 				break;
+		}
+		assertFalse(file.exists());
+		assertEquals(tmpHFDir.listFiles().length, 0, 0);
+		hf.stop();
+	}
+
+	/**
+	 *
+	 * check problems with special characters
+	 *
+	 * @throws IOException
+	 */
+	@Test
+	public synchronized void testEvilFile() throws IOException
+	{
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		final File file = new File(theHFDir + File.separator + ".~#~2.xml");
+		file.createNewFile();
+		for (int i = 0; i < 1234; i++)
+		{
+			ThreadUtil.sleep(4);
+			if (!file.exists() && tmpHFDir.listFiles().length == 0)
+			{
+				break;
+			}
 		}
 		assertFalse(file.exists());
 		assertEquals(tmpHFDir.listFiles().length, 0, 0);

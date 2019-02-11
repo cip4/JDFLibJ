@@ -526,7 +526,7 @@ public class FileUtil
 			final OutputStream fos = getBufferedOutputStream(fil);
 			if (fos == null)
 				return null;
-			IOUtils.copy(fis, fos);
+			IOUtils.copyLarge(fis, fos);
 			fos.flush();
 			fos.close();
 			fis.close();

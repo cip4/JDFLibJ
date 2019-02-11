@@ -185,13 +185,13 @@ public class ContainerUtil
 	}
 
 	/**
-	 * create a Vector from an Array, skipping null elements
+	 * create an ArrayList from an Array, skipping null elements
 	 *
 	 * @param <A> the type
 	 * @param array the array to convert
 	 * @return a Vector<a>
 	 */
-	public static <A> List<A> toArrayList(final A[] array)
+	public static <A> ArrayList<A> toArrayList(final A[] array)
 	{
 		if (array == null)
 		{

@@ -586,6 +586,64 @@ public class FileUtilTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	public void testCopyFileLarge() throws Exception
+	{
+		final File fNew = new File(sm_dirTestDataTemp + "Big.txt");
+		final byte[] b = new byte[100000];
+		for (int i = 0; i < 100000; i++)
+		{
+			b[i] = (byte) (i % 256);
+		}
+		final OutputStream os = FileUtil.getBufferedOutputStream(fNew);
+		for (int i = 0; i < 50000; i++)
+			os.write(b);
+
+		os.flush();
+		os.close();
+		assertEquals(5000000000l, fNew.length(), 10000);
+
+		final File copy = new File(sm_dirTestDataTemp + "Big2.txt");
+		assertTrue(FileUtil.copyFile(fNew, copy));
+		assertEquals(5000000000l, copy.length(), 10000);
+
+		fNew.delete();
+		copy.delete();
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testMoveFileLarge() throws Exception
+	{
+		final File fNew = new File(sm_dirTestDataTemp + "Big3.txt");
+		final byte[] b = new byte[100000];
+		for (int i = 0; i < 100000; i++)
+		{
+			b[i] = (byte) (i % 256);
+		}
+		final OutputStream os = FileUtil.getBufferedOutputStream(fNew);
+		for (int i = 0; i < 50000; i++)
+			os.write(b);
+
+		os.flush();
+		os.close();
+		assertEquals(5000000000l, fNew.length(), 10000);
+
+		final File copy = new File(sm_dirTestDataTemp + "Big4.txt");
+		assertTrue(FileUtil.moveFile(fNew, copy));
+		assertEquals(5000000000l, copy.length(), 10000);
+
+		fNew.delete();
+		copy.delete();
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	public void testCopyFileToDir() throws Exception
 	{
 		final byte[] b = new byte[55555];
