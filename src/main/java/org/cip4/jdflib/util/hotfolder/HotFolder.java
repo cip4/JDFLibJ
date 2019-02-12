@@ -50,6 +50,7 @@ package org.cip4.jdflib.util.hotfolder;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
@@ -338,7 +339,7 @@ public class HotFolder
 					}
 					if (files != null)
 					{
-						final ArrayList<File> vf = ContainerUtil.toArrayList(files);
+						final List<File> vf = ContainerUtil.toArrayList(files);
 						for (int i = vf.size() - 1; i >= 0; i--)
 						{
 							if (vf.get(i) == null)

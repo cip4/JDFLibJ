@@ -191,7 +191,7 @@ public class ContainerUtil
 	 * @param array the array to convert
 	 * @return a Vector<a>
 	 */
-	public static <A> ArrayList<A> toArrayList(final A[] array)
+	public static <A> List<A> toArrayList(final A[] array)
 	{
 		if (array == null)
 		{
