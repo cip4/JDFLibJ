@@ -127,7 +127,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		q.interruptCurrent(1);
 		for (int i = 0; i < 142; i++)
 		{
-			if (q.getCurrentRunning() > 0)
+			if (q.getCurrentRunning() > 0 || q.size() > 0)
 				ThreadUtil.sleep(3);
 		}
 		assertEquals(q.getCurrentRunning(), 0);
