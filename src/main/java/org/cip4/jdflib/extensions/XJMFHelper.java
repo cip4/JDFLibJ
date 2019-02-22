@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -84,18 +84,20 @@ public class XJMFHelper extends MessagePoolHelper
 	public XJMFHelper()
 	{
 		super(null);
-		newXJMF();
+		newXJMF(EnumVersion.Version_2_0);
 	}
 
 	/**
+	 * @return
 	 *
 	 */
-	void newXJMF()
+	public XJMFHelper newXJMF(final EnumVersion v)
 	{
-		final JDFDoc doc = new JDFDoc(XJDFConstants.XJMF, EnumVersion.Version_2_0);
+		final JDFDoc doc = new JDFDoc(XJDFConstants.XJMF, v);
 		doc.setInitOnCreate(false);
 		theElement = doc.getRoot();
 		cleanUp();
+		return this;
 	}
 
 	/**

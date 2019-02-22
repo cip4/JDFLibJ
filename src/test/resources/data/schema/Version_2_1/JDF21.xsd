@@ -111,6 +111,14 @@
     <xs:simpleType name="PDFPath">
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
+                   
+	<xs:simpleType name="PrintQuality">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="High"/>
+            <xs:enumeration value="Normal"/>
+            <xs:enumeration value="Draft"/>
+        </xs:restriction>
+    </xs:simpleType>
 
     <xs:simpleType name="duration">
         <xs:restriction base="xs:string"/>
@@ -2175,15 +2183,7 @@
                 <xs:attribute name="PaperRef" type="IDREF" use="optional"/>
                 <xs:attribute name="PlateRef" type="IDREF" use="optional"/>
                 <xs:attribute name="Polarity" type="Polarity" use="optional"/>
-                <xs:attribute name="PrintQuality" use="optional">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:NMTOKEN">
-                            <xs:enumeration value="High"/>
-                            <xs:enumeration value="Normal"/>
-                            <xs:enumeration value="Draft"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
+                <xs:attribute name="PrintQuality" type="PrintQuality" use="optional"/>
                 <xs:attribute name="ProofPaperRef" type="IDREF" use="optional"/>
                 <xs:attribute name="Scaling" type="XYPair" use="optional"/>
                 <xs:attribute name="ScalingOrigin" type="XYPair" use="optional"/>
@@ -5620,7 +5620,7 @@
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="FillMark"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
                 <xs:element maxOccurs="1" minOccurs="0" ref="JobField"/>
-                <xs:element maxOccurs="1" minOccurs="1" ref="RefAnchor"/>
+                <xs:element maxOccurs="1" minOccurs="0" ref="RefAnchor"/>
             </xs:sequence>
             <xs:attribute name="AbsoluteHeight" type="float" use="optional"/>
             <xs:attribute name="AbsoluteWidth" type="float" use="optional"/>
@@ -6459,13 +6459,9 @@
     <xs:complexType name="PrintCondition">
         <xs:complexContent>
             <xs:extension base="SpecificResource">
-                <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="Device"/>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
-                </xs:sequence>
-                <xs:attribute name="AimCurve" type="TransferFunction" use="optional"/>
-                <xs:attribute name="Density" type="float" use="optional"/>
-                <xs:attribute name="Name" type="string" use="required"/>
+                  <xs:attribute name="ColorantOrder" type="NMTOKENS" use="required"/>
+                  <xs:attribute name="Name" type="NMTOKEN" use="required"/>
+                  <xs:attribute name="PrintQuality" type="PrintQuality" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

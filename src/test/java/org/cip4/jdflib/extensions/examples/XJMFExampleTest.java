@@ -37,6 +37,7 @@
 package org.cip4.jdflib.extensions.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPrintQuality;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
@@ -47,6 +48,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -317,6 +319,47 @@ public class XJMFExampleTest extends JDFTestCaseBase
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
 		writeTest(xjmfHelper, "jmf/paperResourceSignal.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testResponsePrintCondition()
+	{
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
+		final XJMFHelper xjmfHelper = new XJMFHelper().newXJMF(EnumVersion.Version_2_1);
+		;
+		final MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Resource);
+		q.getHeader().setID("S1");
+		q.getHeader().setAttribute(AttributeName.REFID, "Sub1");
+		final JDFResourceInfo ri = (JDFResourceInfo) q.appendElement(ElementName.RESOURCEINFO);
+		ri.setAttribute(AttributeName.SCOPE, "Allowed");
+		final SetHelper sh = new SetHelper(ri.appendElement(XJDFConstants.ResourceSet));
+		sh.setUsage(EnumUsage.Input);
+		sh.setName(ElementName.PRINTCONDITION);
+		final String[] colors = new String[] { "Cyan Magenta Yellow Black", "Cyan Magenta Yellow Black", "Cyan Magenta Yellow Black Orange Green Violet",
+				"Cyan Magenta Yellow Black Orange Green Violet Varnish" };
+		final String[] names = new String[] { "draft", "standard", "7color", "7colorVarnish" };
+		int n = -1;
+		for (final String name : names)
+		{
+			n++;
+			for (final String paper : new String[] { "Coated", "Uncoated" })
+			{
+				final String pcPart = name + paper;
+				final ResourceHelper rh = sh.appendPartition(ElementName.PRINTCONDITION, pcPart, true);
+				rh.setDescriptiveName(name + " print condition for " + paper);
+				final KElement pc = rh.getResource();
+				pc.setAttribute(AttributeName.NAME, name);
+				pc.setAttribute(ElementName.COLORANTORDER, colors[n]);
+				final EnumPrintQuality pq = n < 1 ? EnumPrintQuality.Draft : n > 2 ? EnumPrintQuality.High : EnumPrintQuality.Normal;
+				pc.setAttribute(AttributeName.PRINTQUALITY, pq.getName());
+			}
+		}
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "jmf/PrintConditionResponse.xjmf");
 	}
 
 	/**
