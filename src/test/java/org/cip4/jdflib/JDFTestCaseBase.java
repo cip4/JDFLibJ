@@ -537,7 +537,7 @@ public abstract class JDFTestCaseBase
 			dVal.write2File(sm_dirTestDataTemp + fileBase + ".val.xml", 2, false);
 		}
 		assertEquals(valResult, VALID);
-
+		log.info("Successfully converted " + tmpXJDF);
 		final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		final JDFDoc converted = jdfConverter.convert(xjdfRoot);
 		converted.write2File(sm_dirTestDataTemp + fileBase + ".xjdf.jdf", 2, false);

@@ -480,6 +480,22 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testKnownDevicesDetailedResponse()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Response, EnumType.KnownDevices);
+		final JDFDeviceInfo deviceInfo = jmf.getResponse(0).appendDeviceList().appendDeviceInfo();
+		deviceInfo.setDeviceID("d1");
+		deviceInfo.setDeviceStatus(EnumDeviceStatus.Unknown);
+		deviceInfo.getCreateDevice().setJMFURL("http://myjmf/devid");
+		final KElement x = convertToXJDF(jmf);
+		assertEquals("http://myjmf/devid", x.getXPathAttribute("ResponseKnownDevices/Device/@XJMFURL", null));
+		writeRoundTrip(jmf, "KnownDevResp2.jmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testAbortQEResponse()
 	{
 		final JDFJMF jmf0 = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Command, EnumType.AbortQueueEntry);
