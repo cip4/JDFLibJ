@@ -107,15 +107,13 @@ public class VElement extends Vector<KElement>
 		}
 	}
 
-	// **************************************** Methods
-	// *********************************************
 	/**
 	 * toString
 	 *
 	 * @return String
 	 */
 	@Override
-	public String toString()
+	public synchronized String toString()
 	{
 		return "VElement[ --> " + super.toString() + " ]";
 	}
@@ -526,7 +524,7 @@ public class VElement extends Vector<KElement>
 	 * @return KElement - the requested item or null, if index is out of bounds
 	 */
 	@Override
-	public KElement elementAt(int index)
+	public synchronized KElement elementAt(int index)
 	{
 		if (index < 0)
 		{
@@ -546,7 +544,7 @@ public class VElement extends Vector<KElement>
 	 * @return KElement - the requested item or null, if index is out of bounds
 	 */
 	@Override
-	public KElement get(int index)
+	public synchronized KElement get(int index)
 	{
 		if (index < 0)
 		{

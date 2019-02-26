@@ -1222,7 +1222,7 @@ public class KElement extends ElementNSImpl implements Element
 	public String getNamespaceURI()
 	{
 		String s = super.getNamespaceURI();
-		if ((s != null && s != JDFCoreConstants.EMPTYSTRING) || ((DocumentXMLImpl) getOwnerDocument()).isIgnoreNSDefault())
+		if (s != null && !JDFConstants.EMPTYSTRING.equals(s) || ((DocumentXMLImpl) getOwnerDocument()).isIgnoreNSDefault())
 		{
 			return s;
 		}

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -216,7 +216,7 @@ public class JDFIntegerList extends JDFNumList
 	 * @return boolean - true if equal otherwise false
 	 */
 	@Override
-	public boolean equals(final Object other)
+	public synchronized boolean equals(final Object other)
 	{
 		if (this == other)
 		{
@@ -238,9 +238,9 @@ public class JDFIntegerList extends JDFNumList
 	 * hashCode complements equals() to fulfill the equals/hashCode contract
 	 */
 	@Override
-	public int hashCode()
+	public synchronized int hashCode()
 	{
-		return this.toString().hashCode();
+		return toString().hashCode();
 	}
 
 	/**

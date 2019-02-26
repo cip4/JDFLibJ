@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,22 +83,23 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.util.HashUtil;
 
 /**
- * This class is a representation of a JDFShape. It is a blank separated list of double values consisting of a width(x), a height(y) and a depth(z) value. this
- * spans a standard right-handed xyz coordinate system
+ * This class is a representation of a JDFShape. It is a blank separated list of double values consisting of a width(x), a height(y) and a depth(z) value. this spans a standard right-handed xyz
+ * coordinate system
  */
 public class JDFShape extends JDFNumList
 {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * factory for JDFShape that silently returns null in case of illegal strings
-	 * @param s the string to parse - if JDFXYPair compatible, a 0  z dimension value is assumed
+	 * 
+	 * @param s the string to parse - if JDFXYPair compatible, a 0 z dimension value is assumed
 	 * @return the JDFShape, null if s is not compatible
 	 */
-	public static JDFShape createShape(String s)
+	public static JDFShape createShape(final String s)
 	{
 		if (s == null || s.length() == 0)
 			return null;
@@ -107,7 +108,7 @@ public class JDFShape extends JDFNumList
 		{
 			return new JDFShape(s);
 		}
-		catch (DataFormatException x)
+		catch (final DataFormatException x)
 		{
 			return null;
 		}
@@ -123,9 +124,9 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * constructor - constructs a shape with all values set via a Vector of Double objects
-	 * 
+	 *
 	 * @param v the given vector
-	 * 
+	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 * @deprecated use typesafe constructors
 	 */
@@ -137,9 +138,9 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * constructor - constructs a shape with all values set via a String
-	 * 
+	 *
 	 * @param s the given String
-	 * 
+	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFShape(final String s) throws DataFormatException
@@ -149,9 +150,9 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * constructor - constructs a shape with all values set via a JDFNumberList
-	 * 
+	 *
 	 * @param nl the given number list
-	 * 
+	 *
 	 * @throws DataFormatException - if the JDFNumberList has not a valid format
 	 */
 	public JDFShape(final JDFNumList nl) throws DataFormatException
@@ -161,10 +162,10 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * constructor - constructs a shape with all values set via a JDFNumberList
-	 * 
+	 *
 	 * @param nl the given number list
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public JDFShape(final JDFShape nl)
 	{
@@ -173,19 +174,19 @@ public class JDFShape extends JDFNumList
 	}
 
 	/**
-	 * swap x and y coordinates - 
-	 * 
+	 * swap x and y coordinates -
+	 *
 	 */
 	public void swapXY()
 	{
-		double tmp = getX();
+		final double tmp = getX();
 		setX(getY());
 		setY(tmp);
 	}
 
 	/**
 	 * constructor - constructs a new JDFShape with the given double values
-	 * 
+	 *
 	 * @param x the x value
 	 * @param y the y value
 	 * @param z the z value
@@ -200,7 +201,7 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * constructor - constructs a new JDFShape with the given 2 double values third is default = 0.
-	 * 
+	 *
 	 * @param x the width
 	 * @param y the height
 	 */
@@ -216,7 +217,7 @@ public class JDFShape extends JDFNumList
 	// *********************************************
 	/**
 	 * isValid - true if the size of the vector is 3 and all instances are Double types
-	 * 
+	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
 	@Override
@@ -228,7 +229,7 @@ public class JDFShape extends JDFNumList
 			throw new DataFormatException("Data format exception! size=" + size());
 		}
 
-		for (Object o : this)
+		for (final Object o : this)
 		{
 			if (!(o instanceof Double))
 			{
@@ -248,11 +249,11 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * equals - returns true if both JDFShapes are equal, otherwise false
-	 * 
+	 *
 	 * @return boolean - true if equal otherwise false
 	 */
 	@Override
-	public boolean equals(final Object other)
+	public synchronized boolean equals(final Object other)
 	{
 		if (this == other)
 		{
@@ -276,14 +277,14 @@ public class JDFShape extends JDFNumList
 	 * hashCode complements equals() to fulfill the equals/hashCode contract
 	 */
 	@Override
-	public int hashCode()
+	public synchronized int hashCode()
 	{
-		return HashUtil.hashCode(super.hashCode(), this.toString());
+		return HashUtil.hashCode(super.hashCode(), toString());
 	}
 
 	/**
 	 * isGreaterOrEqual - equality operator >=
-	 * 
+	 *
 	 * @param x the JDFShape object to compare to
 	 * @return boolean - true if this >= x
 	 */
@@ -294,7 +295,7 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * isLessOrEqual - equality operator <=
-	 * 
+	 *
 	 * @param x the JDFShape object to compare to
 	 * @return boolean - true if this <= x
 	 */
@@ -305,7 +306,7 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * isGreater - equality operator >
-	 * 
+	 *
 	 * @param x the JDFShape object to compare to
 	 * @return boolean - true if this > x
 	 */
@@ -316,7 +317,7 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * isLess - equality operator <
-	 * 
+	 *
 	 * @param x the JDFShape object to compare to
 	 * @return boolean - true if this < x
 	 */
@@ -327,9 +328,9 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * getHeight - returns the height
-	 * 
+	 *
 	 * @deprecated use getY - attention height and width were accidentally exchanged
-	 * 
+	 *
 	 * @return double - the height
 	 */
 	@Deprecated
@@ -340,9 +341,9 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * getY - returns the width
-	 * 
+	 *
 	 * @return double - the width
-	 * 
+	 *
 	 */
 	public double getY()
 	{
@@ -351,7 +352,7 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * setHeight - sets the height
-	 * 
+	 *
 	 * @deprecated attention height and width were accidentally exchanged
 	 * @param height the height
 	 */
@@ -363,7 +364,7 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * setY - sets the height
-	 * 
+	 *
 	 * @param y the height
 	 */
 	public void setY(final double y)
@@ -373,10 +374,10 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * getWidth - returns the width
-	 * 
+	 *
 	 * @deprecated use getX - attention height and width were accidentally exchanged
 	 * @return double - the width
-	 * 
+	 *
 	 */
 	@Deprecated
 	public double getWidth()
@@ -386,9 +387,9 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * getX - returns the width
-	 * 
+	 *
 	 * @return double - the width
-	 * 
+	 *
 	 */
 	public double getX()
 	{
@@ -397,7 +398,7 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * setWidth - sets the x value
-	 * 
+	 *
 	 * @param x the width
 	 */
 	public void setX(final double x)
@@ -407,7 +408,7 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * setWidth - sets the width
-	 * 
+	 *
 	 * @deprecated attention height and width were accidentally exchanged
 	 * @param width the width
 	 */
@@ -419,7 +420,7 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * getLength - returns the length
-	 * 
+	 *
 	 * @deprecated use getZ
 	 * @return double - the length
 	 */
@@ -431,7 +432,7 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * getZ - returns the z value
-	 * 
+	 *
 	 * @return double - the length
 	 */
 	public double getZ()
@@ -441,7 +442,7 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * setLength - sets the length
-	 * 
+	 *
 	 * @deprecated
 	 * @param length the length
 	 */
@@ -453,7 +454,7 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * set the z value
-	 * 
+	 *
 	 * @param z
 	 */
 	public void setZ(final double z)

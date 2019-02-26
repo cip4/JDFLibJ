@@ -328,7 +328,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * @return String - the JDFNumList as a String
 	 */
 	@Override
-	public String toString()
+	public synchronized String toString()
 	{
 		final StringBuffer sb = new StringBuffer();
 
@@ -398,7 +398,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * @return boolean - true if equal otherwise false
 	 */
 	@Override
-	public boolean equals(final Object other)
+	public synchronized boolean equals(final Object other)
 	{
 		if (this == other)
 		{
@@ -435,7 +435,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * hashCode complements equals() to fulfill the equals/hashCode contract
 	 */
 	@Override
-	public int hashCode()
+	public synchronized int hashCode()
 	{
 		return toString().hashCode();
 	}
@@ -447,7 +447,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * @return Object - the range object at the given position, null if i is out of range
 	 */
 	@Override
-	public Object elementAt(int i)
+	public synchronized Object elementAt(int i)
 	{
 		if (i < 0)
 		{
@@ -520,7 +520,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 *
 	 */
 	@Override
-	public void removeElementAt(int i)
+	public synchronized void removeElementAt(int i)
 	{
 		if (i < 0)
 		{
@@ -733,7 +733,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * @see java.util.Vector#clone()
 	 */
 	@Override
-	public JDFNumList clone()
+	public synchronized JDFNumList clone()
 	{
 		return (JDFNumList) super.clone();
 	}

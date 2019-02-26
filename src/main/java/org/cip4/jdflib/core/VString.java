@@ -205,7 +205,7 @@ public class VString extends Vector<String>
 	 * @return the string at index
 	 */
 	@Override
-	public String elementAt(int index)
+	public synchronized String elementAt(int index)
 	{
 		if (index < 0)
 		{
@@ -219,7 +219,7 @@ public class VString extends Vector<String>
 	 * @return the string at index
 	 */
 	@Override
-	public String get(int index)
+	public synchronized String get(int index)
 	{
 		if (index < 0)
 		{
@@ -234,7 +234,7 @@ public class VString extends Vector<String>
 	 * @return String
 	 */
 	@Override
-	public String toString()
+	public synchronized String toString()
 	{
 		return "vString[ --> " + super.toString() + " ]";
 	}
