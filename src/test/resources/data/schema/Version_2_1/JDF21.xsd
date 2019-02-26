@@ -3508,6 +3508,8 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
+            <xs:attribute name="DescriptiveName" type="string" use="optional"/>
+            <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -4103,6 +4105,8 @@
             <xs:attribute name="BlockName" type="NMTOKEN" use="required"/>
             <xs:attribute name="Box" type="rectangle" use="optional"/>
             <xs:attribute name="CutWidth" type="float" use="optional"/>
+            <xs:attribute name="DescriptiveName" type="string" use="optional"/>
+            <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
