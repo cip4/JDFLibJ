@@ -1,75 +1,39 @@
-/**
- *  class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
- *  
- *  @COPYRIGHT Heidelberger Druckmaschinen AG, 2006. ALL RIGHTS RESERVED.
- **/
+
 /**
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2002 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2006, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2006, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  * 
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ *
  */
 
 package org.cip4.jdflib.resource.process.prepress;
@@ -84,40 +48,41 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 {
+	private static final String SEARCH_PATH = "SearchPath";
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * ructor for JDFAssetListCreationParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFAssetListCreationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFAssetListCreationParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * ructor for JDFAssetListCreationParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFAssetListCreationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFAssetListCreationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * ructor for JDFAssetListCreationParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFAssetListCreationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFAssetListCreationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -126,7 +91,7 @@ public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -135,20 +100,20 @@ public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 		return "JDFAssetListCreationParams[  --> " + super.toString() + " ]";
 	}
 
-	public JDFFileSpec getSearchPath(int iSkip)
+	public JDFFileSpec getSearchPath(final int iSkip)
 	{
 		int iSkipLocal = iSkip;
 
 		JDFFileSpec res = null;
-		VElement v = getChildElementVector(ElementName.FILESPEC, null, null, true, 0, false);
-		int siz = v.size();
+		final VElement v = getChildElementVector(ElementName.FILESPEC, null, null, true, 0, false);
+		final int siz = v.size();
 
 		for (int i = 0; i < siz; i++)
 		{
 			res = (JDFFileSpec) v.elementAt(i);
 			if (res.hasAttribute(AttributeName.RESOURCEUSAGE))
 			{
-				if (res.getResourceUsage() == "SearchPath")
+				if (SEARCH_PATH.equals(res.getResourceUsage()))
 				{
 					if (iSkipLocal >= 0)
 					{
@@ -165,7 +130,7 @@ public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 		return res;
 	}
 
-	public JDFFileSpec getCreateSearchPath(int iSkip)
+	public JDFFileSpec getCreateSearchPath(final int iSkip)
 	{
 
 		JDFFileSpec res = getSearchPath(iSkip);
@@ -180,25 +145,25 @@ public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 	public JDFFileSpec appendSearchPath()
 	{
 
-		JDFFileSpec res = appendFileSpec();
-		res.setResourceUsage("SearchPath");
+		final JDFFileSpec res = appendFileSpec();
+		res.setResourceUsage(SEARCH_PATH);
 
 		return res;
 	}
 
 	@Override
-	public VString getInvalidElements(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+	public VString getInvalidElements(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
 	{
 
-		VString vElem = new VString();
+		final VString vElem = new VString();
 		int n = 0;
-		int nElem = numChildElements(ElementName.FILESPEC, null);
+		final int nElem = numChildElements(ElementName.FILESPEC, null);
 
 		for (int i = 0; i < nElem; i++)
 		{
 
-			String ru = getFileSpec(i).getResourceUsage();
-			if (!ru.equals("SearchPath"))
+			final String ru = getFileSpec(i).getResourceUsage();
+			if (!ru.equals(SEARCH_PATH))
 			{
 				vElem.appendUnique(ElementName.FILESPEC);
 				if (++n >= nMax)

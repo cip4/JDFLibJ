@@ -82,6 +82,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFTransferFunction;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -102,6 +103,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFCoilBindingParams;
+import org.cip4.jdflib.resource.JDFCuttingParams;
 import org.cip4.jdflib.resource.JDFHoleLine;
 import org.cip4.jdflib.resource.JDFInsert;
 import org.cip4.jdflib.resource.JDFInterpretingParams;
@@ -132,6 +134,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
+import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -2426,6 +2429,32 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final SetHelper set = new XJDFHelper(xjdf).getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Spine");
 		assertNotNull(set);
 		assertEquals("Red", set.getPartition(0).getResource().getAttribute(AttributeName.COLOR));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCutBlocDescName()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.setType(EnumType.Cutting);
+		final JDFCuttingParams cp = (JDFCuttingParams) n.addResource(ElementName.CUTTINGPARAMS, EnumUsage.Input);
+		final JDFCutBlock cbo = cp.appendCutBlock();
+		final JDFXYPair size = new JDFXYPair(10, 20);
+		cbo.setBlockSize(size);
+		final JDFMatrix m = JDFMatrix.getUnitMatrix();
+		final JDFXYPair shift = new JDFXYPair(400, 600);
+		m.shift(shift);
+		cbo.setBlockTrf(m);
+		cbo.setDescriptiveName("desc name");
+		cbo.setProductID("pid");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+
+		final JDFCutBlock cb = (JDFCutBlock) xjdf.getXPathElement("ResourceSet/Resource/CuttingParams/CutBlock");
+		assertEquals("pid", cb.getAttribute(XJDFConstants.ExternalID));
+		assertEquals("desc name", cb.getDescriptiveName());
 	}
 
 	/**

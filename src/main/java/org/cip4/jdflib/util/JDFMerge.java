@@ -552,12 +552,12 @@ public class JDFMerge
 			}
 
 			// 131204 RP also skip all sub-JDF nodes!!!
-			if (nodeName.equals(ElementName.JDF))
+			if (ElementName.JDF.equals(nodeName))
 			{
 				continue;
 			}
 			// 050708 RP special handling for comments
-			if (nodeName == ElementName.COMMENT)
+			if (ElementName.COMMENT.equals(nodeName))
 			{
 				mergeComments(overwriteLocalNode, toMergeLocalNode);
 				continue;
