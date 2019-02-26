@@ -1394,6 +1394,25 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
+	*
+	*/
+	@Test
+	public void testMetaDataMulti()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.RasterReading);
+		final JDFRunList r1 = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		final JDFResource p0 = r1.addPartition(EnumPartIDKey.Metadata0, "m1");
+		final JDFResource p1 = p0.addPartition(EnumPartIDKey.Metadata1, "m2");
+		p1.setProductID("p1");
+		r1.setFileURL("file:///foo.pdf");
+		final JDFRunList r2 = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Output);
+		r2.setFileURL("file:///fooout.pdf");
+
+		writeRoundTrip(n, "metadata");
+	}
+
+	/**
 	 *
 	 */
 	@Test

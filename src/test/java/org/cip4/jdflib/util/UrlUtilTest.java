@@ -673,7 +673,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testFileToURL()
 	{
-		if (FileUtil.isWindows())
+		if (PlatformUtil.isWindows())
 		{ // on windows
 			final File f = new File("C:\\IO.SYS");
 			String s = UrlUtil.fileToUrl(f, false);

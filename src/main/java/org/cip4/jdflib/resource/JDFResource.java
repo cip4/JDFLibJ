@@ -354,7 +354,7 @@ public class JDFResource extends JDFElement
 		atrInfoTable_UpdateID_Required[0] = new AtrInfoTable(AttributeName.UPDATEID, 0x44444221, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
-	private static AtrInfoTable[] atrInfoTable_PartIDKeys = new AtrInfoTable[71];
+	private static AtrInfoTable[] atrInfoTable_PartIDKeys = new AtrInfoTable[70];
 	static
 	{
 		atrInfoTable_PartIDKeys[0] = new AtrInfoTable(AttributeName.BINDERYSIGNATURENAME, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
@@ -415,10 +415,10 @@ public class JDFResource extends JDFElement
 		atrInfoTable_PartIDKeys[55] = new AtrInfoTable(AttributeName.PRODUCTPART, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		for (int i = 0; i < 10; i++)
 			atrInfoTable_PartIDKeys[56 + i] = new AtrInfoTable(AttributeName.METADATA + i, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable_PartIDKeys[67] = new AtrInfoTable(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, 0x33661111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable_PartIDKeys[68] = new AtrInfoTable(AttributeName.LOTID, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable_PartIDKeys[69] = new AtrInfoTable(AttributeName.PRINTCONDITION, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable_PartIDKeys[70] = new AtrInfoTable(AttributeName.SETCOPIES, 0x33311111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable_PartIDKeys[66] = new AtrInfoTable(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, 0x33661111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable_PartIDKeys[67] = new AtrInfoTable(AttributeName.LOTID, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable_PartIDKeys[68] = new AtrInfoTable(AttributeName.PRINTCONDITION, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable_PartIDKeys[69] = new AtrInfoTable(AttributeName.SETCOPIES, 0x33311111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 
 	}
 

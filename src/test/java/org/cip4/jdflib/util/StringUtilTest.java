@@ -946,7 +946,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	@Test
 	public void testuncToUrl()
 	{
-		if (FileUtil.isWindows())
+		if (PlatformUtil.isWindows())
 		{
 			final String unc = "\\\\myHost\\a\\.\\b\\..\\c äöü%.txt";
 			final String iri = "file://myHost/a/c%20äöü%25.txt";

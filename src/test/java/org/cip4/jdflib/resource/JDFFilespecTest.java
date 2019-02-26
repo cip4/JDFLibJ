@@ -70,6 +70,7 @@ import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.MimeUtilTest;
+import org.cip4.jdflib.util.PlatformUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Test;
@@ -91,7 +92,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		final JDFNode n = doc.getJDFRoot();
 		final JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, null, EnumUsage.Input, null, null, null, null);
 		final JDFFileSpec fs2 = (JDFFileSpec) n.addResource(ElementName.FILESPEC, null, EnumUsage.Input, null, null, null, null);
-		if (FileUtil.isWindows())
+		if (PlatformUtil.isWindows())
 		{
 			fs.setAbsoluteFileURL(new File("C:\\ist blöd\\fnord is €"), false);
 			fs2.setAbsoluteFileURL(new File("C:\\ist blöd\\fnord is €"), true);
