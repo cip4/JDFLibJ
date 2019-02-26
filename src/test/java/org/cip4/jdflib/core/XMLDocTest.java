@@ -93,6 +93,7 @@ import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFSpawn;
+import org.cip4.jdflib.util.PlatformUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -989,7 +990,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		final String out = "/bad::\\nogood\\junk.jdf";
 		final File f = new File(out);
 		f.delete();
-		if (FileUtil.isWindows())
+		if (PlatformUtil.isWindows())
 		{
 			assertFalse(d.write2File(out, 2, true));
 			assertFalse(f.exists());

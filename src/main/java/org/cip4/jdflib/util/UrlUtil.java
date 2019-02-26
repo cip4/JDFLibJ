@@ -643,7 +643,7 @@ public class UrlUtil
 
 		urlString = UrlUtil.unEscape(urlString);
 
-		if (FileUtil.isWindows()) // on windows
+		if (PlatformUtil.isWindows()) // on windows
 		{
 			if (urlString.startsWith("///") && urlString.length() > 6 && urlString.charAt(4) == ':' && urlString.charAt(5) == '/')
 			{

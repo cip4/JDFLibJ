@@ -845,11 +845,11 @@ public class FileUtil
 			return null;
 		}
 		String path = file.getPath();
-		if (File.separator != "/")
+		if (!JDFConstants.SLASH.equals(File.separator))
 		{
-			path = StringUtil.replaceString(path, File.separator, "/");
+			path = StringUtil.replaceString(path, File.separator, JDFConstants.SLASH);
 			path = UrlUtil.cleanDots(path);
-			path = StringUtil.replaceString(path, "/", File.separator);
+			path = StringUtil.replaceString(path, JDFConstants.SLASH, File.separator);
 		}
 		else
 		{
@@ -1183,9 +1183,11 @@ public class FileUtil
 	/**
 	 *
 	 * @return true if we are on a windows file system
+	 * @deprecated use {@link PlatformUtil}
 	 */
+	@Deprecated
 	public static boolean isWindows()
 	{
-		return File.separator.equals("\\");
+		return PlatformUtil.isWindows();
 	}
 }
