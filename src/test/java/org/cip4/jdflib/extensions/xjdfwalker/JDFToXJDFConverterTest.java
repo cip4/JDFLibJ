@@ -295,6 +295,26 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testTypesMulti()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setJobPartID("p");
+		n.setType(EnumType.ProcessGroup);
+		final VString typs = new VString("Cutting Folding Folding Cutting");
+		n.setTypes(typs);
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		conv.setSingleNode(true);
+		final KElement xjdf = conv.convert(n);
+
+		assertEquals(typs, new XJDFHelper(xjdf).getTypes());
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testCPI()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();

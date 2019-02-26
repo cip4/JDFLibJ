@@ -122,7 +122,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	{
 		this();
 		if (moreMap != null)
+		{
 			add(moreMap);
+		}
 	}
 
 	/**
@@ -131,7 +133,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @return String
 	 */
 	@Override
-	public String toString()
+	public synchronized String toString()
 	{
 		return "VJDFAttributeMap: " + showKeys("\n", JDFConstants.SPACE);
 	}
@@ -231,7 +233,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 		final VJDFAttributeMap vec = new VJDFAttributeMap();
 
 		if (isEmpty())
+		{
 			add(new JDFAttributeMap());
+		}
 		for (final JDFAttributeMap map : this)
 		{
 			for (final String val : vsValues)
@@ -373,7 +377,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	{
 		clear();
 		if (vec != null)
+		{
 			addAll(vec);
+		}
 	}
 
 	/**
@@ -410,7 +416,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 				{
 					minSize = map.size();
 					if (minSize == 0)
+					{
 						break;
+					}
 				}
 			}
 		}
@@ -428,7 +436,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @return JDFAttributeMap - the selected element
 	 */
 	@Override
-	public JDFAttributeMap elementAt(int i)
+	public synchronized JDFAttributeMap elementAt(int i)
 	{
 		if (i < 0)
 		{
@@ -444,7 +452,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @return JDFAttributeMap - the selected element
 	 */
 	@Override
-	public JDFAttributeMap get(int i)
+	public synchronized JDFAttributeMap get(int i)
 	{
 		if (i < 0)
 		{
@@ -626,9 +634,13 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 		final JDFAttributeMap newMap = new JDFAttributeMap();
 
 		if (isEmpty())
+		{
 			return null;
+		}
 		else if (size() == 1)
+		{
 			return get(0).clone();
+		}
 
 		final JDFAttributeMap map0 = get(0);
 		final VString keys = map0.getKeys();
@@ -769,7 +781,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	public void overlapMap(final VJDFAttributeMap vMap)
 	{
 		if (vMap == null)
+		{
 			return;
+		}
 		final Set<JDFAttributeMap> set = ContainerUtil.toHashSet(vMap);
 		for (int i = size() - 1; i >= 0; i--)
 		{
@@ -875,7 +889,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @return boolean - true if the maps are equal, otherwise false
 	 */
 	@Override
-	public boolean equals(final Object other)
+	public synchronized boolean equals(final Object other)
 	{
 		if (this == other)
 		{
@@ -916,7 +930,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @return int
 	 */
 	@Override
-	public int hashCode()
+	public synchronized int hashCode()
 	{
 		return HashUtil.hashCode(0, this);
 	}
@@ -987,7 +1001,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @return
 	 */
 	@Override
-	public VJDFAttributeMap clone()
+	public synchronized VJDFAttributeMap clone()
 	{
 		return new VJDFAttributeMap(this);
 	}

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -225,7 +225,7 @@ public class WalkJDF extends WalkJDFElement
 	/**
 	 * @param newRootP
 	 */
-	private void updateTypes(final KElement newRootP, final String types)
+	void updateTypes(final KElement newRootP, final String types)
 	{
 		if (newRootP.hasAttribute(AttributeName.TYPES))
 		{
@@ -237,8 +237,13 @@ public class WalkJDF extends WalkJDFElement
 		}
 		final VString t2 = StringUtil.tokenize(types, null, false);
 		final VString t1 = StringUtil.tokenize(newRootP.getAttribute(AttributeName.TYPES), null, false);
-		// t1.removeStrings(JDFConstants.PRODUCT, 0);
-		t1.appendUnique(t2);
+		if (t2 != null)
+		{
+			for (final String t : t2)
+			{
+				t1.appendUnique(t);
+			}
+		}
 		t1.removeStrings(JDFConstants.PROCESSGROUP, 0);
 		t1.removeStrings(JDFConstants.COMBINED, 0);
 
@@ -252,7 +257,7 @@ public class WalkJDF extends WalkJDFElement
 
 	/**
 	 * replace deprecated types with manualLabor
-	 * 
+	 *
 	 * @param t1
 	 */
 	void removeDeprecatedTypes(final VString t1)
