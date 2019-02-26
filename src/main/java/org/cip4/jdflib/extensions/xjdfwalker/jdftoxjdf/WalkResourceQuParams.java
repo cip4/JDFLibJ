@@ -80,6 +80,7 @@ public class WalkResourceQuParams extends WalkJDFSubElement
 		if (scope == null && context != null)
 			map.put(AttributeName.SCOPE, "Job".equals(context) ? "Job" : "Present");
 
+		map.remove(AttributeName.CONTEXT);
 		map.remove(AttributeName.CLASSES);
 		map.remove(AttributeName.LOTDETAILS);
 		map.remove(AttributeName.LOTID);
