@@ -651,6 +651,7 @@ public class JDFMessage extends JDFAutoMessage
 			final String message = f == null ? "JDFMessage.setQuery: illegal family type " : "JDFMessage.setQuery: illegal family type " + f.getName();
 			throw new JDFException(message);
 		}
+		setVersion(q.getVersion(true));
 		setrefID(q.getID());
 		setType(q.getType());
 	}
@@ -739,6 +740,7 @@ public class JDFMessage extends JDFAutoMessage
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, null);
 		final JDFSignal signal = jmf.getSignal(0);
 		signal.setQuery(this);
+		jmf.setVersion(getVersion(true));
 		signal.copyElements(getChildElementVector(null, null), null);
 		signal.removeChild(ElementName.SUBSCRIPTION, null, 0);
 		return jmf;

@@ -44,7 +44,7 @@ import org.cip4.jdflib.util.ThreadUtil;
 
 /**
  * asynchronous janitor class
- * 
+ *
  * @author rainer prosi
  * @date Dec 9, 2011
  */
@@ -93,7 +93,7 @@ public final class RegularJanitor
 	/**
 	 *
 	 * set the interval between sweeps in seconds
-	 * 
+	 *
 	 * @param interval
 	 */
 	public void setInterval(int interval)
@@ -121,7 +121,7 @@ public final class RegularJanitor
 	 *
 	 * @return
 	 */
-	int numSweepers()
+	public int numSweepers()
 	{
 		return vSweepers.size();
 	}
@@ -364,7 +364,7 @@ public final class RegularJanitor
 
 	/**
 	 * get the singleton janitor
-	 * 
+	 *
 	 * @return
 	 */
 	public static RegularJanitor getJanitor()

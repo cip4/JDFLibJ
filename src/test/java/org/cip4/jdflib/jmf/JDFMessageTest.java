@@ -42,6 +42,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -555,8 +556,24 @@ public class JDFMessageTest extends TestCase
 
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
+	/**
+	 *
+	 */
+	@Test
+	public void testCreateSignalVersion()
+	{
+		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
+		jmf.setVersion(EnumVersion.Version_1_3);
+		assertEquals(command.getXSIType(), "CommandUpdateJDF");
+		command.setType("foo:bar");
+		assertNull(command.getXSIType());
+		assertEquals(command.getType(), "foo:bar");
+		final JDFJMF sig = command.createSignal();
+		final JDFSignal signal = sig.getSignal(0);
+		assertEquals(EnumVersion.Version_1_3, signal.getVersion(false));
+		assertEquals(EnumVersion.Version_1_3, signal.getJMFRoot().getVersion(true));
+
+	}
 
 	/**
 	 * @see junit.framework.TestCase#toString()
