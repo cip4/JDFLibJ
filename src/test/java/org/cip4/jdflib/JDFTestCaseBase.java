@@ -593,7 +593,7 @@ public abstract class JDFTestCaseBase
 		{
 			dVal.write2File(sm_dirTestDataTemp + fileBase + ".val.xml", 2, false);
 		}
-		assertEquals(valResult, VALID);
+		assertEquals(VALID, valResult);
 		if (level != null)
 		{
 			final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
