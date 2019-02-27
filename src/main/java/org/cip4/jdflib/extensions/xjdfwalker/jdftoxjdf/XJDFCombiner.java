@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -248,7 +249,7 @@ public class XJDFCombiner
 					if (pos >= 0)
 					{
 						typeList[i++] = pos;
-						oldTypes.remove(pos);
+						oldTypes.set(pos, JDFConstants.EMPTYSTRING);
 					}
 					else
 					{
