@@ -85,6 +85,27 @@ public class XJDFCombinerTest extends JDFTestCaseBase
 		assertEquals(0, ct[0]);
 	}
 
+	@Test
+	public void testCombineTypesMulti()
+	{
+		final Vector<XJDFHelper> vh = new Vector<>();
+		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
+		h.addType(EnumType.Product);
+		vh.add(h);
+
+		final XJDFHelper h2 = new XJDFHelper("j1", "p2", null);
+		h2.addType(EnumType.Cutting);
+		h2.addType(EnumType.Folding);
+		h2.addType(EnumType.Cutting);
+		vh.add(h2);
+
+		final XJDFCombiner c = new XJDFCombiner(vh.get(0), vh.get(1));
+		final int[] ct = c.combineTypes();
+		assertEquals(3, ct.length);
+		for (int i = 0; i < ct.length; i++)
+			assertEquals(i + 1, ct[i]);
+	}
+
 	/**
 	 *
 	 */

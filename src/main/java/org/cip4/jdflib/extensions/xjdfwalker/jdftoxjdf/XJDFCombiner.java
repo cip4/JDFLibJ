@@ -227,11 +227,12 @@ public class XJDFCombiner
 	int[] combineTypes()
 	{
 		final VString types = h.getTypes();
+		final VString mainTypes = mainHelper.getTypes();
 		final VString oldTypes = mainHelper.getTypes();
-		if (ContainerUtil.getNonEmpty(oldTypes) != null)
+		if (!ContainerUtil.isEmpty(oldTypes))
 		{
 			final int typeList[] = new int[types.size()];
-			if (ContainerUtil.getNonEmpty(oldTypes) == null)
+			if (ContainerUtil.isEmpty(oldTypes))
 			{
 				for (int i = 0; i < types.size(); i++)
 				{
@@ -247,12 +248,13 @@ public class XJDFCombiner
 					if (pos >= 0)
 					{
 						typeList[i++] = pos;
+						oldTypes.remove(pos);
 					}
 					else
 					{
-						typeList[i++] = oldTypes.size();
-						oldTypes.add(t);
-						mainHelper.setTypes(oldTypes);
+						typeList[i++] = mainTypes.size();
+						mainTypes.add(t);
+						mainHelper.setTypes(mainTypes);
 					}
 				}
 			}
