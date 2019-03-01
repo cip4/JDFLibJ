@@ -60,6 +60,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
+import org.cip4.jdflib.elementwalker.IWalker;
 import org.cip4.jdflib.extensions.AuditPoolHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.MessageResourceHelper;
@@ -2964,5 +2965,16 @@ class PostXJDFWalker extends BaseElementWalker
 	{
 		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll + ", removeSignatureName="
 				+ removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
+	}
+
+	void combineSameSets()
+	{
+		final KElement root = newRootHelper.getRoot();
+		final IWalker w = getFactory().getWalker(root);
+		if (w instanceof WalkXJDF)
+		{
+			((WalkXJDF) w).combineSameSets((JDFElement) root);
+		}
+
 	}
 }

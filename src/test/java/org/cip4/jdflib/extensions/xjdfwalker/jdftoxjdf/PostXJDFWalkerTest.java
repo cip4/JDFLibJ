@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -111,6 +111,21 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated"));
 		assertNotNull(h.getRoot().getXPathElement("AuditPool/AuditCreated/Header"));
 		assertNull(h.getRoot().getXPathElement("AuditPool/Header"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSameSets()
+	{
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
+		h.appendResourceSet("a", EnumUsage.Input).appendPartition("Run", "r1", true);
+		h.appendResourceSet("a", EnumUsage.Input).appendPartition("Run", "r2", true);
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.combineSameSets();
+		assertNull(h.getSet("a", 1));
+		assertEquals(2, h.getSet("a", 0).getPartMapVector().size());
 	}
 
 	/**

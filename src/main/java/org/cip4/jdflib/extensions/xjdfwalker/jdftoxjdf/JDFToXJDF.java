@@ -469,6 +469,7 @@ public class JDFToXJDF extends PackageElementWalker
 		pw.setRemoveSignatureName(removeSignatureName);
 		pw.setRetainAll(bRetainAll);
 		pw.setNewVersion(getNewVersion());
+		pw.combineSameSets();
 		pw.walkTreeKidsFirst(newRoot);
 		if (bJMF)
 		{
