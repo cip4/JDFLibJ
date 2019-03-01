@@ -2589,6 +2589,7 @@ class PostXJDFWalker extends BaseElementWalker
 			final boolean cloneBS = layoutMap != null && layoutMap.containsKey(AttributeName.BINDERYSIGNATURENAME);
 			final String bsName = getBSName(strippingParams, layoutMap);
 			final String bsID = getBSID(strippingParams, bsName);
+			final String bsResID = strippingParams.getNonEmpty("BinerySignatureRef");
 			final JDFAttributeMap bsMap = new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsID);
 			final String cellIndex = layoutMap == null ? null : layoutMap.remove(AttributeName.CELLINDEX);
 			final ResourceHelper layoutPartitionH = layoutseth.getCreateVPartition(layoutMaps, true);
@@ -2597,7 +2598,7 @@ class PostXJDFWalker extends BaseElementWalker
 
 			final VElement childElementVector = updateCells(strippingParams, cellIndex);
 
-			final ResourceHelper bsHelper = getBSHelper(cloneBS, bsID, bsMap);
+			final ResourceHelper bsHelper = getBSHelper(cloneBS, bsID, bsResID, bsMap);
 
 			final JDFBinderySignature bs = (JDFBinderySignature) bsHelper.getCreateResource();
 			moveStripCells(bs, childElementVector);
@@ -2644,12 +2645,17 @@ class PostXJDFWalker extends BaseElementWalker
 			return childElementVector;
 		}
 
-		protected ResourceHelper getBSHelper(boolean cloneBS, final String bsID, final JDFAttributeMap bsMap)
+		protected ResourceHelper getBSHelper(boolean cloneBS, final String bsID, final String bsResID, final JDFAttributeMap bsMap)
 		{
 			SetHelper bsSet = newRootHelper.getSet(ElementName.BINDERYSIGNATURE, 0);
 			if (bsSet == null)
 				bsSet = newRootHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
-			ResourceHelper bsHelper = bsSet.getPartition(XJDFConstants.BinderySignatureID, bsID);
+
+			ResourceHelper bsHelper = bsSet.getPartition(bsResID);
+			if (bsHelper == null)
+			{
+				bsHelper = bsSet.getPartition(XJDFConstants.BinderySignatureID, bsID);
+			}
 			if (bsHelper == null)
 			{
 				bsHelper = bsSet.getPartition(0);
