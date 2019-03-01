@@ -2589,7 +2589,7 @@ class PostXJDFWalker extends BaseElementWalker
 			final boolean cloneBS = layoutMap != null && layoutMap.containsKey(AttributeName.BINDERYSIGNATURENAME);
 			final String bsName = getBSName(strippingParams, layoutMap);
 			final String bsID = getBSID(strippingParams, bsName);
-			final String bsResID = strippingParams.getNonEmpty("BinerySignatureRef");
+			final String bsResID = strippingParams.getNonEmpty("BinderySignatureRef");
 			final JDFAttributeMap bsMap = new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsID);
 			final String cellIndex = layoutMap == null ? null : layoutMap.remove(AttributeName.CELLINDEX);
 			final ResourceHelper layoutPartitionH = layoutseth.getCreateVPartition(layoutMaps, true);
