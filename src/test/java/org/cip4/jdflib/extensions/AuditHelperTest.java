@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 
@@ -79,12 +80,12 @@ public class AuditHelperTest extends TestCase
 	 */
 	public void testXJMFResource()
 	{
-		final KElement audit = KElement.createRoot(XJDFConstants.AuditResource, null);
-		final AuditHelper ah = new AuditHelper(audit);
-		final KElement header = ah.appendElement(XJDFConstants.Header);
-		final KElement rs = ah.appendElement(XJDFConstants.ResourceSet);
-		final XJMFHelper xjmf=ah.makeXJMFSignal();
-		wr
+		final XJDFHelper h = new XJDFHelper("j1", null);
+		final AuditResourceHelper ah = (AuditResourceHelper) h.getCreateAuditPool().appendMessage(XJDFConstants.AuditResource);
+		final SetHelper rs = ah.appendSet(ElementName.RUNLIST);
+		rs.appendPartition("Run", "R1", true).getResource().appendElement(ElementName.FILESPEC).setAttribute(AttributeName.URL, "u");
+		final XJMFHelper xjmf = ah.makeXJMFSignal();
+		assertEquals("u", xjmf.getMessageHelper(0).getRoot().getXPathAttribute("ResourceInfo/ResourceSet/Resource/RunList/FileSpec/@URL", null));
 	}
 
 }

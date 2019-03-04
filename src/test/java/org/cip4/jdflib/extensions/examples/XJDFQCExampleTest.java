@@ -47,10 +47,12 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.AuditResourceHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.XJMFHelper;
 import org.cip4.jdflib.resource.JDFColorMeasurementConditions;
 import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.process.JDFColorControlStrip;
@@ -186,13 +188,66 @@ public class XJDFQCExampleTest extends JDFTestCaseBase
 				defect.setAttribute(AttributeName.SIZE, 200, null);
 				defect.setAttribute(AttributeName.SEVERITY, 20, null);
 				final JDFRectangle box = new JDFRectangle(1000, 4000, 1008, 4050);
-				defect.setAttribute(AttributeName.BOX, UrlUtil.escape(box.getString(0), false));
-				fs.setURL("http://imagehost/getImageDetails.php?Image=" + i + "&Box=" + box.getString(0));
+				defect.setAttribute(AttributeName.BOX, box.getString(0));
+				fs.setURL("http://imagehost/getImageDetails.php?Image=" + i + "&Box=" + UrlUtil.escape(box.getString(0), false));
 			}
 		}
 		h.getAuditPool().getCreateMessageResourceHelper(shRes).copySet(shRes);
 		h.cleanUp();
 		writeTest(h.getRoot(), "../QualityControlInspectRes.xjdf", true, null);
+
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public final void testInspectionQualityControlResultXJMF()
+	{
+		final XJDFHelper h = new XJDFHelper(EnumVersion.Version_2_1, "qcinspection");
+		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.ConventionalPrinting);
+		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.QualityControl);
+		final SetHelper sh = h.appendResourceSet(ElementName.QUALITYCONTROLPARAMS, EnumUsage.Input);
+		final ResourceHelper rh = sh.getCreatePartition(0, true);
+		final JDFQualityControlParams qpr = (JDFQualityControlParams) rh.getResource();
+		qpr.setAttribute(AttributeName.QUALITYCONTROLMETHODS, "Inspection");
+
+		final SetHelper shPV = h.appendResourceSet(ElementName.PREVIEW, EnumUsage.Input);
+		final ResourceHelper rhPV = shPV.getCreatePartition(0, true);
+		final JDFPreview pv = (JDFPreview) rhPV.getResource();
+		pv.setFileSpecURL("File://foo/images/myImage.png");
+
+		final SetHelper shRes = h.appendResourceSet(ElementName.QUALITYCONTROLRESULT, EnumUsage.Output);
+		for (int i = 1; i < 2; i++)
+		{
+			final ResourceHelper rhRes = shRes.getCreatePartition(ElementName.QUALITYMEASUREMENT, "M" + i, true);
+			rhRes.ensurePart(AttributeName.SHEETNAME, "S1");
+			final JDFQualityControlResult qcr = (JDFQualityControlResult) rhRes.getResource();
+			qcr.setAttribute(AttributeName.START, new JDFDate(), null);
+			qcr.setAttribute(AttributeName.MEASUREMENTS, 1, null);
+			qcr.setAttribute(AttributeName.MEASUREMENTUSAGE, "Standard", null);
+			qcr.setAttribute(AttributeName.SAMPLE, (i * 100) + " " + (i * 100), null);
+			final KElement inspection = qcr.appendElement(ElementName.INSPECTION);
+			final JDFFileSpec fs = (JDFFileSpec) inspection.appendElement(ElementName.FILESPEC);
+			fs.setURL("http://imagehost/getImage.php?Image=" + i);
+			if (i == 1)
+			{
+				final KElement defect = inspection.appendElement(ElementName.DEFECT);
+				defect.setAttribute(AttributeName.DEFECTTYPE, "ImageDefect");
+				defect.setAttribute(AttributeName.DEFECTTYPEDETAILS, "ImageMismatch");
+				defect.setAttribute(AttributeName.SIZE, 200, null);
+				defect.setAttribute(AttributeName.SEVERITY, 20, null);
+				final JDFRectangle box = new JDFRectangle(1000, 4000, 1008, 4050);
+				defect.setAttribute(AttributeName.BOX, box.getString(0));
+				fs.setURL("http://imagehost/getImageDetails.php?Image=" + i + "&Box=" + UrlUtil.escape(box.getString(0), false));
+			}
+		}
+		final SetHelper sn = h.getAuditPool().getCreateMessageResourceHelper(shRes).copySet(shRes);
+		final AuditResourceHelper mrh = (AuditResourceHelper) h.getAuditPool().getMessageResourceHelper(sn);
+		final XJMFHelper xjmf = mrh.makeXJMFSignal();
+		xjmf.cleanUp();
+		writeTest(xjmf.getRoot(), "../QualityControlInspectRes.xjmf", true, null);
 
 	}
 
