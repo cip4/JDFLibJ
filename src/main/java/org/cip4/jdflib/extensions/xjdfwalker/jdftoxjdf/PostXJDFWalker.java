@@ -609,7 +609,15 @@ class PostXJDFWalker extends BaseElementWalker
 					final MessageResourceHelper arh = ah.getCreateMessageResourceHelper(sh);
 					final SetHelper shNew = arh.getSet();
 					final ResourceHelper phNew = shNew.getCreateVPartition(sh.getPartMapVector(), false);
-					phNew.getRoot().copyElement(partAmount, null);
+					final JDFAmountPool apNew = phNew.getAmountPool();
+					if (apNew == null)
+					{
+						phNew.getRoot().copyElement(partAmount, null);
+					}
+					else
+					{
+						apNew.copyElements(partAmount.getMatchingPartAmountVector(null), null);
+					}
 					walkTree(shNew.getRoot(), null);
 				}
 				final VElement vpa = partAmount.getChildElementVector(ElementName.PARTAMOUNT, null);
