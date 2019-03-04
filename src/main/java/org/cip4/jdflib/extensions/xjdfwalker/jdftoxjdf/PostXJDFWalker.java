@@ -1646,38 +1646,40 @@ class PostXJDFWalker extends BaseElementWalker
 		 *
 		 * @param v
 		 */
-		private void combineSameSets(final JDFElement xjdf)
+		void combineSameSets(final JDFElement xjdf)
 		{
-			final Vector<SetHelper> v = new XJDFHelper(xjdf).getSets();
-
-			while (v.size() > 0)
+			if (!isRetainAll())
 			{
-				final Vector<SetHelper> sameSets = new Vector<>();
-				final SetHelper firstSet = v.remove(0);
-				sameSets.add(firstSet);
-				for (int j = 0; j < v.size(); j++)
-				{
-					final SetHelper next = v.get(j);
-					if (sameSetType(firstSet, next))
-					{
-						sameSets.add(next);
-						v.remove(j);
-						j--;
-					}
-				}
+				final Vector<SetHelper> v = new XJDFHelper(xjdf).getSets();
 
-				final KElement root = firstSet.getRoot();
-				for (int j = 1; j < sameSets.size(); j++)
+				while (v.size() > 0)
 				{
-					final Vector<ResourceHelper> parts = sameSets.get(j).getPartitions();
-					for (final ResourceHelper ph : parts)
+					final Vector<SetHelper> sameSets = new Vector<>();
+					final SetHelper firstSet = v.remove(0);
+					sameSets.add(firstSet);
+					for (int j = 0; j < v.size(); j++)
 					{
-						root.copyElement(ph.getRoot(), null);
+						final SetHelper next = v.get(j);
+						if (sameSetType(firstSet, next))
+						{
+							sameSets.add(next);
+							v.remove(j);
+							j--;
+						}
 					}
-					sameSets.get(j).getRoot().deleteNode();
+
+					final KElement root = firstSet.getRoot();
+					for (int j = 1; j < sameSets.size(); j++)
+					{
+						final Vector<ResourceHelper> parts = sameSets.get(j).getPartitions();
+						for (final ResourceHelper ph : parts)
+						{
+							root.copyElement(ph.getRoot(), null);
+						}
+						sameSets.get(j).getRoot().deleteNode();
+					}
 				}
 			}
-
 		}
 
 		/**

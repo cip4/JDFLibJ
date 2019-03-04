@@ -132,6 +132,22 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testSameSetsRetain()
+	{
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
+		h.appendResourceSet("a", EnumUsage.Input).appendPartition("Run", "r1", true);
+		h.appendResourceSet("a", EnumUsage.Input).appendPartition("Run", "r2", true);
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.setRetainAll(true);
+		w.combineSameSets();
+		assertNotNull(h.getSet("a", 1));
+		assertEquals(1, h.getSet("a", 0).getPartMapVector().size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testHeadbandStrip()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);

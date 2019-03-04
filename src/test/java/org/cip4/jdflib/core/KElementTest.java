@@ -57,6 +57,7 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
@@ -65,6 +66,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.SimpleNodeComparator;
 import org.cip4.jdflib.core.KElement.SingleXPathComparator;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -74,6 +76,7 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.CPUTimer;
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
 import org.w3c.dom.Element;
@@ -2774,6 +2777,30 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals("root resource attributes not copied", e2.getAttribute("AgentName"), "a1");
 		assertEquals("leaf resource attributes not copied", e2.getAttribute("SignatureName"), "S1");
 
+	}
+
+	/**
+	 * @throws DataFormatException
+	 *
+	 */
+	@Test
+	public void testSetAttributeDate() throws DataFormatException
+	{
+		final KElement e = KElement.createRoot("a", null);
+		e.setAttribute("d", new JDFDate(1234567891000l), null);
+		assertEquals(1234567891000l, new JDFDate(e.getAttribute("d")).getTimeInMillis());
+	}
+
+	/**
+	 * @throws DataFormatException
+	 *
+	 */
+	@Test
+	public void testSetAttributeXYPair() throws DataFormatException
+	{
+		final KElement e = KElement.createRoot("a", null);
+		e.setAttribute("d", new JDFXYPair(123.456, 234.567), 2);
+		assertEquals("123.46 234.57", e.getAttribute("d"));
 	}
 
 	/**

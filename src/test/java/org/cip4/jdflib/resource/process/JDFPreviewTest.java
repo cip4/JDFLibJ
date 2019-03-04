@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -87,7 +87,7 @@ public class JDFPreviewTest extends JDFTestCaseBase
 	@Test
 	public final void testSetPreviewType()
 	{
-		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setVersion(EnumVersion.Version_1_4);
 		final JDFPreview pv = (JDFPreview) n.addResource(ElementName.PREVIEW, EnumUsage.Input);
 		final JDFResource pv1 = pv.addPartition(EnumPartIDKey.SignatureName, "v");
@@ -95,6 +95,19 @@ public class JDFPreviewTest extends JDFTestCaseBase
 		assertEquals(1, pv.getPartIDKeys().size());
 		pv1.setPreviewType(EnumPreviewType.Separation);
 		assertEquals(1, pv.getPartIDKeys().size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public final void testGetCreateFileSpec()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setVersion(EnumVersion.Version_1_4);
+		final JDFPreview pv = (JDFPreview) n.addResource(ElementName.PREVIEW, EnumUsage.Input);
+		pv.setFileSpecURL("abc");
+		assertEquals("abc", pv.getFileSpec().getURL());
 	}
 
 	/**

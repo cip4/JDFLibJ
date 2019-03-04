@@ -800,41 +800,29 @@ public final class AttributeName
 	public static final String DEADLINE = "DeadLine";
 	/** */
 	public static final String DEFAULTID = "DefaultID";
-	/** */
 	public static final String DEFAULTJDF = "DefaultJDF";
-	/** */
 	public static final String DEFAULTPRIORITY = "DefaultPriority";
-	/** */
 	public static final String DEFAULTRENDERINGINTENT = "DefaultRenderingIntent";
-	/** */
 	public static final String DEFAULTTRAPPING = "DefaultTrapping";
-	/** */
 	public static final String DEFAULTVALUE = "DefaultValue";
-	/** */
+
+	public static final String DEFECTREASON = "DefectReason";
+	public static final String DEFECTTYPE = "DefectType";
+	public static final String DEFECTTYPEDETAILS = "DefectTypeDetails";
+
 	public static final String DELIVERYMODE = "DeliveryMode";
-	/** */
 	public static final String DELIVERYUNIT = "DeliveryUnit";
-	/** */
 	public static final String DELIVERYUNIT0 = "DeliveryUnit0";
-	/** */
 	public static final String DELIVERYUNIT1 = "DeliveryUnit1";
-	/** */
 	public static final String DELIVERYUNIT2 = "DeliveryUnit2";
-	/** */
 	public static final String DELIVERYUNIT3 = "DeliveryUnit3";
-	/** */
 	public static final String DELIVERYUNIT4 = "DeliveryUnit4";
-	/** */
 	public static final String DELIVERYUNIT5 = "DeliveryUnit5";
-	/** */
 	public static final String DELIVERYUNIT6 = "DeliveryUnit6";
-	/** */
 	public static final String DELIVERYUNIT7 = "DeliveryUnit7";
-	/** */
 	public static final String DELIVERYUNIT8 = "DeliveryUnit8";
-	/** */
 	public static final String DELIVERYUNIT9 = "DeliveryUnit9";
-	/** */
+
 	public static final String DENSITY = "Density";
 	/** */
 	public static final String DENSITYSTANDARD = "DensityStandard";
@@ -1897,25 +1885,18 @@ public final class AttributeName
 	public static final String MAXWIDTH = "MaxWidth";
 	/** */
 	public static final String MEASUREMENTFILTER = "MeasurementFilter";
-	/** */
+	public static final String MEASUREMENTS = "Measurements";
+	public static final String MEASUREMENTUSAGE = "MeasurementUsage";
+
 	public static final String MEDIACOLORNAME = "MediaColorName";
-	/** */
 	public static final String MEDIACOLORNAMEDETAILS = "MediaColorNameDetails";
-	/** */
 	public static final String MEDIALABEL = "MediaLabel";
-	/** */
 	public static final String MEDIALOCATION = "MediaLocation";
-	/** */
 	public static final String MEDIAQUALITY = "MediaQuality";
-	/** */
 	public static final String MEDIASETCOUNT = "MediaSetCount";
-	/** */
 	public static final String MEDIASIDE = "MediaSide";
-	/** */
 	public static final String MEDIATYPE = "MediaType";
-	/** */
 	public static final String MEDIATYPEDETAILS = "MediaTypeDetails";
-	/** */
 	public static final String MEDIAUNIT = "MediaUnit";
 	/** */
 	public static final String MELTINGTEMPERATURE = "MeltingTemperature";
@@ -2878,22 +2859,15 @@ public final class AttributeName
 	public static final String RSUBREF = "rSubRef";
 	/** */
 	public static final String RUN = "Run";
-	/** */
 	public static final String RUNINDEX = "RunIndex";
-	/** */
 	public static final String RUNPAGE = "RunPage";
-	/** */
 	public static final String RUNPAGERANGE = "RunPageRange";
-	/** */
 	public static final String RUNSET = "RunSet";
-	/** */
 	public static final String RUNTAG = "RunTag";
-	/** */
 	public static final String RUNTAGS = "RunTags";
 
-	/** */
+	public static final String SAMPLE = "Sample";
 	public static final String SAMPLEBACKING = "SampleBacking";
-	/** */
 	public static final String SAMPLEINTERVAL = "SampleInterval";
 	/** */
 	public static final String SCALE = "Scale";

@@ -99,8 +99,10 @@ import org.apache.xerces.dom.NodeImpl;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFNumList;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -420,6 +422,30 @@ public class KElement extends ElementNSImpl implements Element
 	{
 		final String s = StringUtil.setvString(value);
 		setAttribute(key, s, nameSpaceURI);
+	}
+
+	/**
+	 *
+	 * @param key
+	 * @param value
+	 * @param nameSpaceURI
+	 */
+	public void setAttribute(final String key, JDFDate value, final String nameSpaceURI)
+	{
+		if (value == null)
+			value = new JDFDate();
+		setAttribute(key, value.getDateTimeISO(), nameSpaceURI);
+	}
+
+	/**
+	 *
+	 * @param key
+	 * @param value
+	 * @param nameSpaceURI
+	 */
+	public void setAttribute(final String key, final JDFNumList value, final int precision)
+	{
+		setAttribute(key, value == null ? null : value.getString(precision));
 	}
 
 	/**

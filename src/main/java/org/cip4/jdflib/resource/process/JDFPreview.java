@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -54,7 +54,9 @@ import org.cip4.jdflib.auto.JDFAutoPreview;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.ifaces.IURLSetter;
+import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.DOMException;
 
 /**
@@ -202,6 +204,57 @@ public class JDFPreview extends JDFAutoPreview implements IURLSetter
 	public EnumPreviewFileType getEnumPreviewFileType()
 	{
 		return EnumPreviewFileType.getEnum(getAttribute(AttributeName.PREVIEWFILETYPE, null, EnumPreviewFileType.PNG.getName()));
+	}
+
+	/**
+	 * (25) getCreateFileSpec
+	 *
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+	}
+
+	/**
+	 * get RunList/LayoutElement/FileSpec or RunList/FileSpec in case of XJDF
+	 *
+	 * @return JDFFileSpec FileSpec if it exists, else null
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC);
+	}
+
+	/**
+	 * get RunList/LayoutElement/FileSpec/@URL also evaluate RunList/@directory and concatinate Directory + URL in case URL is a relative URL
+	 *
+	 * @Directory is ignored if URL contains a scheme or is an absolute URL
+	 *
+	 * @return URL if a URL or Directory attribute exists, else null
+	 */
+	public String getFileURL()
+	{
+		final JDFFileSpec fspec = getFileSpec();
+		if (fspec == null)
+		{
+			return null;
+		}
+
+		return UrlUtil.getURLWithDirectory(getDirectory(), fspec.getURL());
+	}
+
+	/**
+	 * set RunList/FileSpec/@URL - only for 2.0
+	 *
+	 * @param url the url to set
+	 * @return true if ok
+	 */
+	public boolean setFileSpecURL(final String url)
+	{
+		final JDFFileSpec fspec = getCreateFileSpec();
+		fspec.setMimeURL(url);
+		return true;
 	}
 
 }

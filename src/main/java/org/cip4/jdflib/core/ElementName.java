@@ -482,17 +482,14 @@ public final class ElementName
 	public static final String DBTEMPLATEMERGING = "DBTemplateMerging";
 	/** */
 	public static final String DCTPARAMS = "DCTParams";
-	/** */
+	public static final String DEFECT = "Defect";
 	public static final String DELETED = "Deleted";
-	/** */
+
 	public static final String DELIVERY = "Delivery";
-	/** */
 	public static final String DELIVERYCHARGE = "DeliveryCharge";
-	/** */
 	public static final String DELIVERYINTENT = "DeliveryIntent";
-	/** */
 	public static final String DELIVERYPARAMS = "DeliveryParams";
-	/** */
+
 	public static final String DENSITYMEASURINGFIELD = "DensityMeasuringField";
 	/** */
 	public static final String DEPENDENCIES = "Dependencies";
@@ -903,7 +900,7 @@ public final class ElementName
 	public static final String INTERPRETINGDETAILS = "InterpretingDetails";
 	/** */
 	public static final String INTERPRETINGPARAMS = "InterpretingParams";
-	/** */
+	public static final String INSPECTION = "Inspection";
 	public static final String ISOPAPERSUBSTRATE = "ISOPaperSubstrate";
 	/** */
 	public static final String ISPRESENTEVALUATION = "IsPresentEvaluation";
