@@ -70,7 +70,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 		{
 			return null;
 		}
-		final VElement v = theElement.getXPathElementVector("*/ResourceInfo/@ResourceSet[@Name=\"" + name + "\"]", 0);
+		final VElement v = theElement.getXPathElementVector("*/ResourceInfo/ResourceSet[@Name=\"" + name + "\"]", 0);
 		if (v != null)
 		{
 			for (final KElement e : v)
@@ -113,6 +113,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 		if (ah == null)
 		{
 			ah = new MessageResourceHelper(theElement.appendElement(XJDFConstants.AuditResource));
+
 			final KElement set = ah.getRoot().appendElement(ElementName.RESOURCEINFO).appendElement(XJDFConstants.ResourceSet);
 			final SetHelper shNew = new SetHelper(set);
 			shNew.setName(name);
