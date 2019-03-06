@@ -52,6 +52,35 @@ import org.junit.Test;
 public class HTTPDetailsTest
 {
 
+	private final class TestConnection extends HttpURLConnection
+	{
+		private TestConnection(final URL arg0)
+		{
+			super(arg0);
+		}
+
+		@Override
+		public void connect() throws IOException
+		{
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public boolean usingProxy()
+		{
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public void disconnect()
+		{
+			// TODO Auto-generated method stub
+
+		}
+	}
+
 	/**
 	 *
 	 */
@@ -83,34 +112,25 @@ public class HTTPDetailsTest
 	@Test
 	public void testBearer() throws MalformedURLException
 	{
-		final HttpURLConnection uc = new HttpURLConnection(new URL("http://foo.com"))
-		{
-
-			@Override
-			public void connect() throws IOException
-			{
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public boolean usingProxy()
-			{
-				// TODO Auto-generated method stub
-				return false;
-			}
-
-			@Override
-			public void disconnect()
-			{
-				// TODO Auto-generated method stub
-
-			}
-		};
+		final HttpURLConnection uc = new TestConnection(new URL("http://foo.com"));
 		final HTTPDetails d = new HTTPDetails();
 		d.setBearerToken("abc");
 		d.applyTo(uc);
 		assertEquals("Bearer abc", uc.getRequestProperty(UrlUtil.AUTHORIZATION));
+	}
+
+	/**
+	 * @throws MalformedURLException
+	 *
+	 */
+	@Test
+	public void testSetHeader() throws MalformedURLException
+	{
+		final HttpURLConnection uc = new TestConnection(new URL("http://foo.com"));
+		final HTTPDetails d = new HTTPDetails();
+		d.setHeader("abc", "def");
+		d.applyTo(uc);
+		assertEquals("def", uc.getRequestProperty("abc"));
 	}
 
 }

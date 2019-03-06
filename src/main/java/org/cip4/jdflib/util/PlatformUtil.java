@@ -63,7 +63,7 @@ public class PlatformUtil
 	}
 
 	/**
-	 * Returns either the non-empty property or env variale key
+	 * Returns either the non-empty property or environment variable key
 	 *
 	 * @return the value
 	 */
@@ -73,6 +73,16 @@ public class PlatformUtil
 		if (StringUtil.isEmpty(property))
 			property = System.getenv(key);
 		return StringUtil.getNonEmpty(property);
+	}
+
+	/**
+	 * Returns true if we have a variable
+	 *
+	 * @return the value
+	 */
+	public static boolean hasProperty(final String key)
+	{
+		return getProperty(key) != null;
 	}
 
 	/**

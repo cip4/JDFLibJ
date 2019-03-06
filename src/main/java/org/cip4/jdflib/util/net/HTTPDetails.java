@@ -40,6 +40,7 @@ package org.cip4.jdflib.util.net;
 
 import java.net.HttpURLConnection;
 
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
@@ -64,6 +65,7 @@ public class HTTPDetails
 		redirect = 0;
 		bearerToken = null;
 		connectionTimeout = UrlUtil.getConnectionTimeout();
+		headers = new JDFAttributeMap();
 	}
 
 	/**
@@ -89,6 +91,7 @@ public class HTTPDetails
 	private int chunkSize;
 	private boolean bKeepAlive;
 	private String bearerToken;
+	private final JDFAttributeMap headers;
 
 	/**
 	 * @return the bearerToken
@@ -177,18 +180,34 @@ public class HTTPDetails
 			{
 				urlCon.setChunkedStreamingMode(chunkSize);
 			}
-			urlCon.setRequestProperty(UrlUtil.CONNECTION, bKeepAlive ? UrlUtil.KEEPALIVE : UrlUtil.CLOSE);
+			setHeader(UrlUtil.CONNECTION, bKeepAlive ? UrlUtil.KEEPALIVE : UrlUtil.CLOSE);
 			if (!StringUtil.isEmpty(bearerToken))
 			{
-				urlCon.setRequestProperty(UrlUtil.AUTHORIZATION, BEARER + " " + bearerToken);
+				setHeader(UrlUtil.AUTHORIZATION, BEARER + " " + bearerToken);
 			}
 			urlCon.setConnectTimeout(getConnectionTimeout());
-
+			for (final String key : headers.keySet())
+			{
+				urlCon.setRequestProperty(key, headers.get(key));
+			}
 		}
-		else
+	}
+
+	/**
+	 *
+	 * @param key
+	 * @param val
+	 */
+	public void setHeader(final String key, final String val)
+	{
+		if (!StringUtil.isEmpty(key))
 		{
-
+			if (StringUtil.isEmpty(val))
+				headers.remove(key);
+			else
+				headers.put(key, val);
 		}
+
 	}
 
 	/**
@@ -213,7 +232,8 @@ public class HTTPDetails
 	@Override
 	public String toString()
 	{
-		return "HTTPDetails [chunkSize=" + chunkSize + ", bKeepAlive=" + bKeepAlive + ", bearerToken=" + bearerToken + ", redirect=" + redirect + ", connectionTimeout=" + connectionTimeout + "]";
+		return "HTTPDetails [chunkSize=" + chunkSize + ", bKeepAlive=" + bKeepAlive + ", bearerToken=" + bearerToken + ", redirect=" + redirect + ", connectionTimeout=" + connectionTimeout
+				+ "headers: " + headers.showKeys(null) + "]";
 	}
 
 }
