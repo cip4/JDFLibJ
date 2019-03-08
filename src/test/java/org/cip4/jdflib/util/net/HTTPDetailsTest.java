@@ -133,4 +133,30 @@ public class HTTPDetailsTest
 		assertEquals("def", uc.getRequestProperty("abc"));
 	}
 
+	/**
+	 * @throws MalformedURLException
+	 *
+	 */
+	@Test
+	public void testGetHeaders() throws MalformedURLException
+	{
+		final HttpURLConnection uc = new TestConnection(new URL("http://foo.com"));
+		final HTTPDetails d = new HTTPDetails();
+		d.setHeader("abc", "def");
+		assertEquals("abc", d.getHeaders().get(0));
+	}
+
+	/**
+	 * @throws MalformedURLException
+	 *
+	 */
+	@Test
+	public void testGetHeader() throws MalformedURLException
+	{
+		final HttpURLConnection uc = new TestConnection(new URL("http://foo.com"));
+		final HTTPDetails d = new HTTPDetails();
+		d.setHeader("abc", "def");
+		assertEquals("def", d.getHeader("abc"));
+	}
+
 }

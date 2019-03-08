@@ -40,6 +40,7 @@ package org.cip4.jdflib.util.net;
 
 import java.net.HttpURLConnection;
 
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -234,6 +235,25 @@ public class HTTPDetails
 	{
 		return "HTTPDetails [chunkSize=" + chunkSize + ", bKeepAlive=" + bKeepAlive + ", bearerToken=" + bearerToken + ", redirect=" + redirect + ", connectionTimeout=" + connectionTimeout
 				+ "headers: " + headers.showKeys(null) + "]";
+	}
+
+	/**
+	 * @param key
+	 * @return
+	 * 
+	 */
+	public String getHeader(final String key)
+	{
+		return headers.get(key);
+	}
+
+	/**
+	 * @return
+	 *
+	 */
+	public VString getHeaders()
+	{
+		return headers.getKeys();
 	}
 
 }
