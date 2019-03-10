@@ -142,7 +142,7 @@ public class URLReader
 
 	/**
 	 * add a root for local files
-	 * 
+	 *
 	 * @param root
 	 */
 	public void addLocalRoot(final File root)
@@ -288,7 +288,9 @@ public class URLReader
 		if (UrlUtil.isNet(urlString))
 		{
 			final UrlPart part = UrlUtil.writeToURL(urlString, null, UrlUtil.GET, null, null);
-			return part == null || UrlUtil.isReturnCodeOK(part.getResponseCode()) ? part.getResponseStream() : null;
+			if (part == null)
+				return null;
+			return UrlUtil.isReturnCodeOK(part.getResponseCode()) ? part.getResponseStream() : null;
 		}
 		return null;
 	}

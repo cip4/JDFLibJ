@@ -66,7 +66,7 @@ public class XPathWalker extends BaseElementWalker
 	/**
 	 * the method to create xpaths
 	 */
-	public int method = 1;
+	int method = 1;
 
 	static class XPathBuilder
 	{
