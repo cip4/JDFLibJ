@@ -189,7 +189,7 @@ public class XJDFQCExampleTest extends JDFTestCaseBase
 				defect.setAttribute(AttributeName.SEVERITY, 20, null);
 				final JDFRectangle box = new JDFRectangle(1000, 4000, 1008, 4050);
 				defect.setAttribute(AttributeName.BOX, box.getString(0));
-				fs.setURL("http://imagehost/getImageDetails.php?Image=" + i + "&Box=" + UrlUtil.escape(box.getString(0), false));
+				fs.setURL("http://imagehost/getImageDetails.php?Image=" + i + "&Box=" + UrlUtil.escape(box.getString(0), false, false));
 			}
 		}
 		h.getAuditPool().getCreateMessageResourceHelper(shRes).copySet(shRes);
@@ -240,7 +240,7 @@ public class XJDFQCExampleTest extends JDFTestCaseBase
 				defect.setAttribute(AttributeName.SEVERITY, 20, null);
 				final JDFRectangle box = new JDFRectangle(1000, 4000, 1008, 4050);
 				defect.setAttribute(AttributeName.BOX, box.getString(0));
-				fs.setURL("http://imagehost/getImageDetails.php?Image=" + i + "&Box=" + UrlUtil.escape(box.getString(0), false));
+				fs.setURL("http://imagehost/getImageDetails.php?Image=" + i + "&Box=" + UrlUtil.escape(box.getString(0), false, false));
 			}
 		}
 		final SetHelper sn = h.getAuditPool().getCreateMessageResourceHelper(shRes).copySet(shRes);

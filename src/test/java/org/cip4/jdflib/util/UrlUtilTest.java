@@ -189,16 +189,17 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testEscape()
 	{
-		assertNull(UrlUtil.escape(null, true));
-		assertNull(UrlUtil.escape(null, false));
-		assertEquals("%20", UrlUtil.escape(" ", false));
-		assertEquals("foo%20bar", UrlUtil.escape("foo bar", true));
-		assertEquals("%e2%82%ac", UrlUtil.escape("€", true));
-		assertEquals("€", UrlUtil.escape("€", false));
-		assertEquals("%23", UrlUtil.escape("#", false));
-		assertEquals(UrlUtil.escape("世界中のあらゆる情", false), "世界中のあらゆる情");
-		assertEquals("ô", UrlUtil.escape("ô", false));
-
+		assertNull(UrlUtil.escape(null, true, false));
+		assertNull(UrlUtil.escape(null, false, false));
+		assertEquals("%20", UrlUtil.escape(" ", false, false));
+		assertEquals("a/b", UrlUtil.escape("a/b", false, false));
+		assertEquals("a%2fb", UrlUtil.escape("a/b", false, true));
+		assertEquals("foo%20bar", UrlUtil.escape("foo bar", true, false));
+		assertEquals("%e2%82%ac", UrlUtil.escape("€", true, false));
+		assertEquals("€", UrlUtil.escape("€", false, false));
+		assertEquals("%23", UrlUtil.escape("#", false, false));
+		assertEquals(UrlUtil.escape("世界中のあらゆる情", false, false), "世界中のあらゆる情");
+		assertEquals("ô", UrlUtil.escape("ô", false, false));
 	}
 
 	/**
@@ -213,7 +214,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("a?b=c&bb=cc", UrlUtil.addParameter("a?b=c", "bb", "cc"));
 		assertEquals("a?b=c%20d", UrlUtil.addParameter("a", "b", "c d"));
 		assertEquals("a?b=http%3a%2f%2fwww.example.com", UrlUtil.addParameter("a", "b", "http://www.example.com"));
-		assertEquals("ô", UrlUtil.escape("ô", false));
+		assertEquals("ô", UrlUtil.escape("ô", false, false));
 	}
 
 	/**
@@ -389,6 +390,18 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertTrue(UrlUtil.isRedirect(302));
 		assertFalse(UrlUtil.isRedirect(42));
 		assertFalse(UrlUtil.isRedirect(-301));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testIsReturnOK()
+	{
+		assertTrue(UrlUtil.isReturnCodeOK(202));
+		assertTrue(UrlUtil.isReturnCodeOK(200));
+		assertFalse(UrlUtil.isReturnCodeOK(420));
+		assertFalse(UrlUtil.isReturnCodeOK(20));
 	}
 
 	/**

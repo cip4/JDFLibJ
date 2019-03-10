@@ -280,7 +280,7 @@ public class UrlUtil
 		relPath = StringUtil.replaceChar(relPath, '\\', "/", 0);
 		final byte[] utf8 = StringUtil.getUTF8Bytes(relPath);
 		relPath = new String(utf8);
-		relPath = UrlUtil.escape(relPath, bEscape128);
+		relPath = UrlUtil.escape(relPath, bEscape128, false);
 		return relPath;
 	}
 
@@ -574,7 +574,7 @@ public class UrlUtil
 			s = StringUtil.replaceChar(s, '\\', JDFConstants.SLASH, 0);
 		}
 		s = UrlUtil.cleanDots(s);
-		s = escape(s, bEscape128);
+		s = escape(s, bEscape128, false);
 		if (s != null && s.charAt(0) != '/')
 		{
 			s = "///" + s;
@@ -719,7 +719,7 @@ public class UrlUtil
 			return url == null ? null : url.toExternalForm();
 		}
 		String url = StringUtil.replaceCharSet(unc, "\\", "/", 0);
-		url = escape(url, escape128);
+		url = escape(url, escape128, false);
 		return "file:" + url;
 	}
 
@@ -753,8 +753,8 @@ public class UrlUtil
 		final int posQMark = baseUrl.indexOf("?");
 		final String flag = posQMark >= 0 ? "&" : "?";
 		final StringBuilder buf = new StringBuilder(baseUrl);
-		key = escape(key, true);
-		val = escape(val, true);
+		key = escape(key, true, false);
+		val = escape(val, true, false);
 		val = StringUtil.escape(val, ":/", "%", 16, 2, -1, -1);
 		buf.append(flag).append(key).append("=").append(val);
 		return buf.toString();
@@ -787,20 +787,35 @@ public class UrlUtil
 	 * @param toEscape the string to escape
 	 * @param bEscape128 if true, also escape >128, else leave non-ascii7 as is
 	 * @return the escaped string
+	 *
 	 */
-	public static String escape(String toEscape, final boolean bEscape128)
+	public static String escape(final String toEscape, final boolean bEscape128)
+	{
+		return escape(toEscape, bEscape128, false);
+	}
+
+	/**
+	 * standard url escaping
+	 *
+	 * @param toEscape the string to escape
+	 * @param bEscape128 if true, also escape >128, else leave non-ascii7 as is
+	 * @param escapeSlash if true also escape '/'
+	 * @return the escaped string
+	 */
+	public static String escape(String toEscape, final boolean bEscape128, final boolean escapeSlash)
 	{
 		if (toEscape == null)
 			return null;
+		final String esc = escapeSlash ? m_URIEscape + JDFConstants.SLASH : m_URIEscape;
 		if (bEscape128)
 		{
 			final byte[] utf8Bytes = StringUtil.getUTF8Bytes(toEscape);
 			toEscape = new String(utf8Bytes);
-			toEscape = StringUtil.escape(toEscape, m_URIEscape, "%", 16, 2, 0x21, 127);
+			toEscape = StringUtil.escape(toEscape, esc, "%", 16, 2, 0x21, 127);
 		}
 		else
 		{
-			toEscape = StringUtil.escape(toEscape, m_URIEscape, "%", 16, 2, 0x21, 0x7fffffff);
+			toEscape = StringUtil.escape(toEscape, esc, "%", 16, 2, 0x21, 0x7fffffff);
 		}
 		return toEscape;
 	}
@@ -1140,7 +1155,7 @@ public class UrlUtil
 		{
 			urlString = "file:" + urlString.substring(5);
 			urlString = UrlUtil.unEscape(urlString);
-			urlString = UrlUtil.escape(urlString, false);
+			urlString = UrlUtil.escape(urlString, false, false);
 		}
 		else if (UrlUtil.isCID(urlString))
 		{
@@ -1825,6 +1840,17 @@ public class UrlUtil
 	public static boolean isRedirect(final int responseCode)
 	{
 		return responseCode == 301 || responseCode == 302 || responseCode == 303 || responseCode == 307 || responseCode == 308;
+	}
+
+	/**
+	 * return true if the response code should redirect
+	 *
+	 * @param responseCode
+	 * @return
+	 */
+	public static boolean isReturnCodeOK(final int responseCode)
+	{
+		return responseCode / 100 == 2;
 	}
 
 	private static BiHashMap<String, String> mimeMap = null;

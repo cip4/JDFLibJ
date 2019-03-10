@@ -104,7 +104,7 @@ public class URLReader
 	public URLReader(final String urlString)
 	{
 		this.urlString = urlString;
-		localRoots = new Vector<File>();
+		localRoots = new Vector<>();
 		log = LogFactory.getLog(getClass());
 		notRelative = null;
 	}
@@ -114,16 +114,16 @@ public class URLReader
 	 * @param doc
 	 *
 	 */
-	public URLReader(final String urlString, XMLDoc doc)
+	public URLReader(final String urlString, final XMLDoc doc)
 	{
 		this(urlString);
 		bodypart = doc.getBodyPart();
 		zip = doc.getZipReader();
-		String orig = doc.getOriginalFileName();
+		final String orig = doc.getOriginalFileName();
 		if (orig != null)
 		{
-			File f = new File(orig);
-			File parent = f.getParentFile();
+			final File f = new File(orig);
+			final File parent = f.getParentFile();
 			if (parent != null)
 			{
 				addLocalRoot(parent);
@@ -135,16 +135,17 @@ public class URLReader
 	 *
 	 * @param bodyPart
 	 */
-	public void setBodyPart(BodyPart bodyPart)
+	public void setBodyPart(final BodyPart bodyPart)
 	{
 		this.bodypart = bodyPart;
 	}
 
 	/**
 	 * add a root for local files
+	 * 
 	 * @param root
 	 */
-	public void addLocalRoot(File root)
+	public void addLocalRoot(final File root)
 	{
 		if (root == null)
 		{
@@ -161,7 +162,7 @@ public class URLReader
 	 *
 	 * @param zip
 	 */
-	public void setZipReader(ZipReader zip)
+	public void setZipReader(final ZipReader zip)
 	{
 		this.zip = zip;
 	}
@@ -194,7 +195,7 @@ public class URLReader
 		InputStream retStream = null;
 		if (zip != null)
 		{
-			ZipEntry e = zip.getEntry(urlString);
+			final ZipEntry e = zip.getEntry(urlString);
 			retStream = e == null ? null : zip.getInputStream();
 		}
 		return retStream;
@@ -215,7 +216,7 @@ public class URLReader
 				retStream = getZipInputStream();
 				if (retStream == null)
 				{
-					File file = getFile();
+					final File file = getFile();
 					if (file != null)
 					{
 						retStream = FileUtil.getBufferedInputStream(file);
@@ -242,8 +243,8 @@ public class URLReader
 	 */
 	public XMLDoc getXMLDoc()
 	{
-		InputStream retStream = getURLInputStream();
-		XMLDoc doc = XMLDoc.parseStream(retStream);
+		final InputStream retStream = getURLInputStream();
+		final XMLDoc doc = XMLDoc.parseStream(retStream);
 		applyDoc(doc);
 		return doc;
 	}
@@ -254,8 +255,8 @@ public class URLReader
 	 */
 	public JDFDoc getJDFDoc()
 	{
-		InputStream retStream = getURLInputStream();
-		JDFDoc doc = JDFDoc.parseStream(retStream);
+		final InputStream retStream = getURLInputStream();
+		final JDFDoc doc = JDFDoc.parseStream(retStream);
 		applyDoc(doc);
 		return doc;
 	}
@@ -265,15 +266,15 @@ public class URLReader
 	 *
 	 * @param doc
 	 */
-	private void applyDoc(XMLDoc doc)
+	private void applyDoc(final XMLDoc doc)
 	{
 		if (doc != null)
 		{
 			doc.setBodyPart(bodypart);
 			doc.setZipReader(zip);
-			String url = notRelative == null ? urlString : notRelative.getAbsolutePath();
-			File f = UrlUtil.urlToFile(url);
-			String filename = f == null ? null : f.getAbsolutePath();
+			final String url = notRelative == null ? urlString : notRelative.getAbsolutePath();
+			final File f = UrlUtil.urlToFile(url);
+			final String filename = f == null ? null : f.getAbsolutePath();
 			doc.setOriginalFileName(filename);
 		}
 	}
@@ -286,8 +287,8 @@ public class URLReader
 	{
 		if (UrlUtil.isNet(urlString))
 		{
-			UrlPart part = UrlUtil.writeToURL(urlString, null, UrlUtil.GET, null, null);
-			return part == null || part.getResponseCode() != 200 ? null : part.getResponseStream();
+			final UrlPart part = UrlUtil.writeToURL(urlString, null, UrlUtil.GET, null, null);
+			return part == null || UrlUtil.isReturnCodeOK(part.getResponseCode()) ? part.getResponseStream() : null;
 		}
 		return null;
 	}
@@ -315,9 +316,9 @@ public class URLReader
 		if (UrlUtil.isRelativeURL(urlString))
 		{
 			final File fLocal = UrlUtil.urlToFile(urlString);
-			for (File root : localRoots)
+			for (final File root : localRoots)
 			{
-				File f = FileUtil.getFileInDirectory(root, fLocal);
+				final File f = FileUtil.getFileInDirectory(root, fLocal);
 				if ((f != null) && f.canRead())
 				{
 					notRelative = f;

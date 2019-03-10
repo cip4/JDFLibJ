@@ -142,7 +142,7 @@ class URLWriter
 				if (urlPart != null)
 				{
 					final int responseCode = urlPart.getResponseCode();
-					if (responseCode == 200)
+					if (UrlUtil.isReturnCodeOK(responseCode))
 					{
 						return urlPart;
 					}
@@ -157,7 +157,7 @@ class URLWriter
 							{
 								urlPart = fallBack;
 							}
-							else if (urlPart.getResponseCode() == 200)
+							else if (UrlUtil.isReturnCodeOK(urlPart.getResponseCode()))
 							{
 								return urlPart;
 							}

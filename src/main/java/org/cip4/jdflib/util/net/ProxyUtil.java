@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  * 04022005 VF initial version
@@ -76,15 +44,16 @@ import java.net.Proxy;
 import java.net.ProxySelector;
 import java.net.URI;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
 /**
  * internal proxy handler
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class ProxyUtil
 {
@@ -92,10 +61,11 @@ public class ProxyUtil
 
 	/**
 	 * get the uri of the host with protocol and port for proxy selection
+	 *
 	 * @param url
 	 * @return
 	 */
-	public static URI getHostURI(URL url)
+	public static URI getHostURI(final URL url)
 	{
 		if (url == null)
 			return null;
@@ -110,7 +80,7 @@ public class ProxyUtil
 			}
 			uri = new URI(str);
 		}
-		catch (Exception x)
+		catch (final Exception x)
 		{
 			uri = null;
 		}
@@ -118,64 +88,68 @@ public class ProxyUtil
 	}
 
 	/**
-	 * 
+	 *
 	 * @param use, if true use the system proxy properties
 	 */
-	public static void setUseSystemDefault(boolean use)
+	public static void setUseSystemDefault(final boolean use)
 	{
 		System.setProperty(USE_SYSTEM_PROXIES, "" + use);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param use, if true use the system proxy properties
 	 */
-	public static boolean isUseSystemDefault(boolean use)
+	public static boolean isUseSystemDefault(final boolean use)
 	{
-		String def = System.getProperty(USE_SYSTEM_PROXIES);
+		final String def = System.getProperty(USE_SYSTEM_PROXIES);
 		return StringUtil.parseBoolean(def, false);
 	}
 
 	/**
 	 * same as ProxySelector.getDefault() but always ensure that local is first in the list
+	 *
 	 * @param uri
 	 * @return
 	 */
-	public static List<Proxy> getProxiesWithLocal(URI uri)
+	public static List<Proxy> getProxiesWithLocal(final URI uri)
 	{
-		ProxySelector selector = ProxySelector.getDefault();
-		List<Proxy> list = selector.select(uri);
+		final ProxySelector selector = ProxySelector.getDefault();
+		final List<Proxy> list = selector.select(uri);
 		// make sure local is first in list - this is certainly faster
 		if (!list.contains(Proxy.NO_PROXY))
 		{
-			List<Proxy> list2 = new Vector<Proxy>();
+			final List<Proxy> list2 = new ArrayList<>();
 			list2.add(Proxy.NO_PROXY);
 			list2.addAll(list);
-			list = list2;
+			return list2;
 		}
-		return list;
+		else
+		{
+			return list;
+		}
 	}
 
 	/**
 	 * setup the environment for proxies
-	 * 
+	 *
 	 * @param proxy the proxy url - NO PORT!
 	 * @param port the proxy port
 	 * @param user the user for authentication, if null no authentication is attempted
 	 * @param pw the pass word for authentication
 	 */
-	public static void setProxy(String proxy, int port, String user, String pw)
+	public static void setProxy(String proxy, final int port, final String user, final String pw)
 	{
 		proxy = UrlUtil.removeProtocol(proxy);
 		if (StringUtil.getNonEmpty(proxy) == null)
 		{
-			URLProxySelector ups = new URLProxySelector(null);
+			final URLProxySelector ups = new URLProxySelector(null);
 			ProxySelector.setDefault(ups);
 		}
 		else
 		{
-			Proxy p = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(StringUtil.token(proxy, 0, ":"), port));
-			URLProxySelector ups = new URLProxySelector(p);
+			final Proxy p = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(StringUtil.token(proxy, 0, ":"), port));
+			final URLProxySelector ups = new URLProxySelector(p);
 			ProxySelector.setDefault(ups);
 			if (user != null)
 			{
@@ -185,7 +159,7 @@ public class ProxyUtil
 	}
 
 	/**
-	 * 
+	 *
 	 * @param proxy
 	 */
 	public static void setProxy(String proxy)
@@ -197,7 +171,7 @@ public class ProxyUtil
 		else
 		{
 			proxy = UrlUtil.removeProtocol(proxy);
-			int port = StringUtil.parseInt(StringUtil.token(StringUtil.token(proxy, 1, ":"), 0, "/"), -1);
+			final int port = StringUtil.parseInt(StringUtil.token(StringUtil.token(proxy, 1, ":"), 0, "/"), -1);
 			proxy = StringUtil.token(proxy, 0, ":");
 			setProxy(proxy, port, null, null);
 		}
