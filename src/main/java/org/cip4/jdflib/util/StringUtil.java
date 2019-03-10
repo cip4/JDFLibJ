@@ -2120,7 +2120,7 @@ public class StringUtil
 	/**
 	 * unescape a String which was escaped with the Java StringUtil.escape method
 	 *
-	 * @param strToUnescape the String to unescape. For example <code>zz\d6\zzz\c4\\dc\z\d6\\24\\3f\zz�z</code>
+	 * @param strToUnescape the String to unescape. For example <code>zz\d6\zzz\c4\\dc\z\d6\\24\\3f\zz@z</code>
 	 * @param strEscapeChar the char which indicates a escape sequence "\\" in this case (thats also the default)
 	 * @param iRadix the radix of the escape sequenze. 16 in this example.
 	 * @param escapeLen the number of digits per escaped char, not including strEscapeChar

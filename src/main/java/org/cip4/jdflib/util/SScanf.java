@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -54,6 +54,7 @@ import org.cip4.jdflib.core.VString;
  */
 public class SScanf extends ScanfReader implements Iterator<Object>
 {
+	private static final String RARE = "__comma__@@-eher selten";
 	private final VString vFmt;
 	private int pos = 0;
 
@@ -68,7 +69,7 @@ public class SScanf extends ScanfReader implements Iterator<Object>
 	public SScanf(final String theString, final String format)
 	{
 		super(new StringReader(theString));
-		final String newFMT = StringUtil.replaceString(format, "%%", "__comma__��-eher selten");
+		final String newFMT = StringUtil.replaceString(format, "%%", RARE);
 		vFmt = StringUtil.tokenize(newFMT, "%", false);
 		int siz = vFmt.size();
 		// make sure we have exactly 1 element per "real" %
@@ -83,7 +84,7 @@ public class SScanf extends ScanfReader implements Iterator<Object>
 		for (int i = 0; i < siz; i++)
 		{
 			String fmtString = vFmt.get(i);
-			fmtString = StringUtil.replaceString(fmtString, "__comma__��-eher selten", "%%");
+			fmtString = StringUtil.replaceString(fmtString, RARE, "%%");
 			vFmt.set(i, firstChar + fmtString);
 			firstChar = "%";
 		}

@@ -3413,7 +3413,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 *
-	
+
 	 *
 	 */
 
@@ -7429,7 +7429,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 * @deprecated 06�221 use getInheritedNodeInfo(String attName)
+	 * @deprecated use getInheritedNodeInfo(String attName)
 	 * @return JDFDuration
 	 */
 	@Deprecated

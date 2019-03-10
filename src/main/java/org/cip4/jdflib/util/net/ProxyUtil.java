@@ -98,12 +98,13 @@ public class ProxyUtil
 
 	/**
 	 *
-	 * @param use, if true use the system proxy properties
+	 * @param use, the default if not set
+	 * @return if true use the system proxy properties
 	 */
 	public static boolean isUseSystemDefault(final boolean use)
 	{
 		final String def = System.getProperty(USE_SYSTEM_PROXIES);
-		return StringUtil.parseBoolean(def, false);
+		return StringUtil.parseBoolean(def, use);
 	}
 
 	/**
