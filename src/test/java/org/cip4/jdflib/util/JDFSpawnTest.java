@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -1303,6 +1303,37 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetSpawnLeaves()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.RibbonName, "r1");
+		r.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
+		final JDFSpawn sp = new JDFSpawn(n);
+		sp.vSpawnParts = new VJDFAttributeMap(new JDFAttributeMap(EnumPartIDKey.BinderySignatureName, "B"));
+		assertEquals(r2, sp.getSpawnLeaves(r).get(0));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCheckSpawnLeaves()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.RibbonName, "r1");
+		r.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
+		final JDFSpawn sp = new JDFSpawn(n);
+		sp.vRWResources_in = new VString(ElementName.ADHESIVEBINDINGPARAMS);
+		sp.vSpawnParts = new VJDFAttributeMap(new JDFAttributeMap(EnumPartIDKey.BinderySignatureName, "B"));
+		assertEquals(r2, sp.checkSpawnedResources().iterator().next());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testSpawnPartNoSide()
 	{
 		for (int l = 0; l < 2; l++)
@@ -1348,7 +1379,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 */
 	private JDFNode createSpawnMain(final int l)
 	{
-		final JDFDoc d = new JDFDoc("JDF");
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
 		final JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
@@ -1385,7 +1416,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	@Test
 	public void testSpawnPart2Side()
 	{
-		final JDFDoc d = new JDFDoc("JDF");
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
 		final JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);

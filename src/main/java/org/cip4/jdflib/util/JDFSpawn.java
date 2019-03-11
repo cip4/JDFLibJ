@@ -385,11 +385,9 @@ public class JDFSpawn
 		}
 
 		final HashSet<JDFElement> vRootLinks = node.getAllRefs(null, true);
-		final Iterator<JDFElement> iter = vRootLinks.iterator();
-		while (iter.hasNext())
+		for (final KElement e : vRootLinks)
 		{
-			final JDFElement liRoot = iter.next();
-			checkSpawnedResource(vRWResources, vMultiRes, liRoot);
+			checkSpawnedResource(vRWResources, vMultiRes, (JDFElement) e);
 		}
 		// empty if all is well
 		return vMultiRes.isEmpty() ? null : vMultiRes;
@@ -402,7 +400,7 @@ public class JDFSpawn
 	 * @param vMultiRes
 	 * @param liRoot
 	 */
-	private void checkSpawnedResource(final VString vRWResources, final HashSet<JDFResource> vMultiRes, final JDFElement liRoot)
+	void checkSpawnedResource(final VString vRWResources, final HashSet<JDFResource> vMultiRes, final JDFElement liRoot)
 	{
 		JDFResource r = null;
 		boolean bResRW = false;
@@ -442,7 +440,7 @@ public class JDFSpawn
 		}
 	}
 
-	private VElement getSpawnLeaves(final JDFResource r)
+	VElement getSpawnLeaves(final JDFResource r)
 	{
 		VElement vRes = new VElement();
 		if (vSpawnParts == null || vSpawnParts.isEmpty())
@@ -451,7 +449,11 @@ public class JDFSpawn
 		}
 		else
 		{
-			final VElement partitionVector = r.getPartitionVector(vSpawnParts, null);
+			VElement partitionVector = r.getPartitionVector(vSpawnParts, null);
+			if (ContainerUtil.isEmpty(partitionVector))
+			{
+				partitionVector = r.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
+			}
 			if (partitionVector != null)
 			{
 				for (final KElement e : partitionVector)
