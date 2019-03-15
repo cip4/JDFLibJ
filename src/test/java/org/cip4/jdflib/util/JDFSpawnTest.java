@@ -1361,19 +1361,27 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource r = n.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
-		final JDFResource r2 = r.addPartition(EnumPartIDKey.RunSet, "r1");
+		final JDFResource r21 = r.addPartition(EnumPartIDKey.RunSet, "r1");
+		final JDFResource r22 = r.addPartition(EnumPartIDKey.RunSet, "r2");
 		final JDFResourceLink l = n.getLink(r, null);
-		l.setPart(EnumPartIDKey.RunSet.getName(), "r1");
-		final JDFSpawn sp = new JDFSpawn(n);
-		sp.vSpawnParts = new VJDFAttributeMap(new JDFAttributeMap(EnumPartIDKey.Run, "Run"));
-		sp.vRWResources_in = new VString(ElementName.ADHESIVEBINDINGPARAMS);
-		final JDFNode ns = sp.spawn();
-		final JDFResource rs = ns.getResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input, 0);
-		assertNull(rs.getResourceRoot().getSpawnIDs(false));
-		assertNotNull(rs.getSpawnIDs(false).get(0));
-		final JDFResource rm = n.getResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input, 0);
-		assertNull(rm.getResourceRoot().getSpawnIDs(false));
-		assertNotNull(rm.getSpawnIDs(false).get(0));
+		final VJDFAttributeMap pm = new VJDFAttributeMap();
+		for (int i = 1; i <= 2; i++)
+		{
+			log.info("loop " + i);
+			pm.clear();
+			pm.add(new JDFAttributeMap(EnumPartIDKey.RunSet.getName(), "r" + i));
+			l.setPartMapVector(pm);
+			final JDFSpawn sp = new JDFSpawn(n);
+			sp.vSpawnParts = new VJDFAttributeMap(new JDFAttributeMap(EnumPartIDKey.Run, "Run" + i));
+			sp.vRWResources_in = new VString(ElementName.ADHESIVEBINDINGPARAMS);
+			final JDFNode ns = sp.spawn();
+			final JDFResource rs = ns.getResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input, 0);
+			assertNull(rs.getResourceRoot().getSpawnIDs(false));
+			assertNotNull(rs.getSpawnIDs(false).get(0));
+			final JDFResource rm = n.getResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input, 0);
+			assertNull(rm.getResourceRoot().getSpawnIDs(false));
+			assertNotNull(rm.getSpawnIDs(false).get(0));
+		}
 	}
 
 	/**

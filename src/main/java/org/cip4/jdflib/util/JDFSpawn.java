@@ -251,23 +251,15 @@ public class JDFSpawn
 		{
 			spawnParentNode = node;
 			// don't copy the whole history along
-			JDFAuditPool ap = rootOut.getAuditPool();
-			if (ap != null)
-			{
-				rootOut.removeChild(ap);
-				ap = rootOut.appendAuditPool();
-			}
+			rootOut.removeChild(ElementName.AUDITPOOL, null, 0);
+			rootOut.appendAuditPool();
 
 			// The AncestorPool of the original JDF contains the appropriate Part elements
 			final JDFAncestorPool ancpool = rootOut.getAncestorPool();
-			VJDFAttributeMap preSpawnedParts = new VJDFAttributeMap();
+			final VJDFAttributeMap preSpawnedParts = (ancpool == null) ? null : ancpool.getPartMapVector();
 
-			if (ancpool != null)
-			{
-				preSpawnedParts = ancpool.getPartMapVector();
-			}
 			// 150102 RP add AncestorPool pre spawn part handling
-			if (!preSpawnedParts.isEmpty())
+			if (!VJDFAttributeMap.isEmpty(preSpawnedParts))
 			{
 				vSpawnParts.overlapMap(preSpawnedParts);
 			}
@@ -317,8 +309,7 @@ public class JDFSpawn
 		for (final KElement e : vn)
 		{
 			final JDFNode node = (JDFNode) e;
-			// make sure we have a nodeinfo in all spawned nodes of main in case we have to
-			// merge stati
+			// make sure we have a nodeinfo in all spawned nodes of main in case we have to merge stati
 			node.prepareNodeInfo(vSpawnParts);
 		}
 	}
@@ -386,9 +377,9 @@ public class JDFSpawn
 		}
 
 		final HashSet<JDFElement> vRootLinks = node.getAllRefs(null, true);
-		for (final KElement e : vRootLinks)
+		for (final JDFElement e : vRootLinks)
 		{
-			checkSpawnedResource(vRWResources, vMultiRes, (JDFElement) e);
+			checkSpawnedResource(vRWResources, vMultiRes, e);
 		}
 		// empty if all is well
 		return vMultiRes.isEmpty() ? null : vMultiRes;
@@ -423,6 +414,17 @@ public class JDFSpawn
 				bResRW = resFitsRWRes(r, vRWResources);
 			}
 		}
+		fillMultiRes(vMultiRes, r, bResRW);
+	}
+
+	/**
+	 *
+	 * @param vMultiRes
+	 * @param r
+	 * @param bResRW
+	 */
+	void fillMultiRes(final HashSet<JDFResource> vMultiRes, final JDFResource r, final boolean bResRW)
+	{
 		if (bResRW && r != null)
 		{
 			final VElement vRes = getSpawnLeaves(r);
@@ -515,7 +517,7 @@ public class JDFSpawn
 		// avoid double counting of this node's root element in case of partitioned
 		// spawning
 		int startAncestorLoop = 0;
-		if ((vs.size() > 0) && ((vs.elementAt(0)).equals(lastAncestorID)))
+		if (!vs.isEmpty() && ((vs.elementAt(0)).equals(lastAncestorID)))
 		{
 			startAncestorLoop = 1;
 		}
@@ -1077,6 +1079,11 @@ public class JDFSpawn
 			vMainPart.add(rMain);
 		}
 
+		updateSpawnIDsinMainParts(spawnID, vPartMap, vMainPart);
+	}
+
+	void updateSpawnIDsinMainParts(final String spawnID, final VJDFAttributeMap vPartMap, final VElement vMainPart)
+	{
 		for (final KElement e : vMainPart)
 		{
 			final JDFResource rMainPart = (JDFResource) e;
@@ -1098,13 +1105,7 @@ public class JDFSpawn
 					break;
 				}
 			}
-			if (!bSpawnIdentical && !bSpawnID && vPartMap != null)
-			{
-				if (!vPartMap.subMap(rMainPart.getPartMap()))
-				{
-					bSpawnID = true; // bluff existing spawnID so that it does not get set below
-				}
-			}
+			bSpawnID = bSpawnID || !bSpawnIdentical && vPartMap != null && !vPartMap.subMap(rMainPart.getPartMap());
 
 			if (!bSpawnID)
 			{
@@ -1539,9 +1540,6 @@ public class JDFSpawn
 			for (final KElement e : firstLevel)
 			{
 				final JDFResource rFirstLevel = (JDFResource) e;
-				// String partVal = keys == null ? null :
-				// rFirstLevel.getAttribute_KElement(key0, null, null);
-				// if (partVal != null && !keys.contains(partVal))
 				final String partValue = rFirstLevel.getAttribute_KElement(key0, null, null);
 				currentMap.put(key0, partValue);
 				if (!JDFPart.overlapPartMap(currentMap, vSpawnParts, false))
@@ -1812,57 +1810,68 @@ public class JDFSpawn
 		 * @param vLinkMap
 		 * @return
 		 */
-		private EnumSpawnStatus spawnPart(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain, final boolean partsRO,
-				final VJDFAttributeMap vLinkMap)
+		EnumSpawnStatus spawnPart(final JDFResource r, final String spawnID, JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain, final boolean partsRO, final VJDFAttributeMap vLinkMap)
 		{
 			final boolean isRW = EnumSpawnStatus.SpawnedRW.equals(copyStatus);
-			if (vSpawnParts != null && vSpawnParts.size() > 0 && (JDFResource.EnumSpawnStatus.SpawnedRW.equals(copyStatus) || partsRO))
+			if (!VJDFAttributeMap.isEmpty(vSpawnParts) && (JDFResource.EnumSpawnStatus.SpawnedRW.equals(copyStatus) || partsRO))
 			{
-				final JDFAttributeMap partMap = r.getPartMap();
-				final VElement vSubParts = getSubParts(r, partMap, vLinkMap);
-
-				if (vSubParts.isEmpty())
-				{
-					return spawnPart(r, spawnID, JDFResource.EnumSpawnStatus.SpawnedRO, bStayinMain, false, vLinkMap);
-				}
-				for (final KElement e : vSubParts)
-				{
-					final JDFResource pLeaf = (JDFResource) e;
-					// set the lock of the leaf to true if it is RO, else unlock it
-					if (bStayinMain)
-					{
-						if (isRW || !EnumSpawnStatus.SpawnedRW.equals(pLeaf.getSpawnStatus()))
-						{
-							pLeaf.setSpawnStatus(copyStatus);
-							pLeaf.setLocked(isRW);
-						}
-						pLeaf.appendSpawnIDs(spawnID);
-					}
-					else
-					{
-						pLeaf.setLocked(!isRW);
-						pLeaf.setSpawnIDs(spawnID);
-					}
-				}
+				copyStatus = spawnPartitionedPart(r, spawnID, copyStatus, bStayinMain, vLinkMap, isRW);
 			}
 			else
 			// no partitions
 			{
+				spawnComplete(r, spawnID, copyStatus, bStayinMain, isRW);
+
+			}
+			return copyStatus;
+		}
+
+		void spawnComplete(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain, final boolean isRW)
+		{
+			if (bStayinMain)
+			{
+				if (isRW || (!EnumSpawnStatus.SpawnedRW.equals(r.getSpawnStatus())))
+				{
+					r.setSpawnStatus(copyStatus);
+					r.setLocked(isRW);
+				}
+				r.appendSpawnIDs(spawnID);
+			}
+			else
+			{
+				r.setLocked(!isRW);
+				r.setSpawnIDs(new VString(spawnID, null));
+			}
+		}
+
+		JDFResource.EnumSpawnStatus spawnPartitionedPart(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain,
+				final VJDFAttributeMap vLinkMap, final boolean isRW)
+		{
+			final JDFAttributeMap partMap = r.getPartMap();
+			final VElement vSubParts = getSubParts(r, partMap, vLinkMap);
+
+			if (ContainerUtil.isEmpty(vSubParts))
+			{
+				return spawnPart(r, spawnID, JDFResource.EnumSpawnStatus.SpawnedRO, bStayinMain, false, vLinkMap);
+			}
+			for (final KElement e : vSubParts)
+			{
+				final JDFResource pLeaf = (JDFResource) e;
+				// set the lock of the leaf to true if it is RO, else unlock it
 				if (bStayinMain)
 				{
-					if (isRW || (!EnumSpawnStatus.SpawnedRW.equals(r.getSpawnStatus())))
+					if (isRW || !EnumSpawnStatus.SpawnedRW.equals(pLeaf.getSpawnStatus()))
 					{
-						r.setSpawnStatus(copyStatus);
-						r.setLocked(isRW);
+						pLeaf.setSpawnStatus(copyStatus);
+						pLeaf.setLocked(isRW);
 					}
-					r.appendSpawnIDs(spawnID);
+					pLeaf.appendSpawnIDs(spawnID);
 				}
 				else
 				{
-					r.setLocked(!isRW);
-					r.setSpawnIDs(new VString(spawnID, null));
+					pLeaf.setLocked(!isRW);
+					pLeaf.setSpawnIDs(spawnID);
 				}
-
 			}
 			return copyStatus;
 		}
