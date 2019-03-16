@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -38,6 +38,7 @@
  */
 package org.cip4.jdflib.util.thread;
 
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -54,7 +55,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 {
 	private int maxParallel;
 	private ThreadPoolExecutor executor;
-	private final Vector<TaskRunner> current;
+	private final ArrayList<TaskRunner> current;
 	int nThread;
 
 	private class NextRunner extends TaskRunner
@@ -238,7 +239,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	MultiTaskQueue(final String name)
 	{
 		super(name);
-		current = new Vector<>();
+		current = new ArrayList<>();
 		maxParallel = 0;
 		setMaxParallel(2);
 		nThread = 1;

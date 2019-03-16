@@ -102,7 +102,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public void testInterruptTask()
+	synchronized public void testInterruptTask()
 	{
 		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multiiii2", 3);
 		WaitRunner task = null;
@@ -139,7 +139,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void test3Entry()
+	synchronized public void test3Entry()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test");
 		assertEquals(q.getAvQueue(), 0);
@@ -161,7 +161,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStop()
+	synchronized public void testStop()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("tesffft2");
 		assertTrue(q.queue(new WaitRunner(1)));
@@ -175,7 +175,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testInterruptCurrent()
+	synchronized public void testInterruptCurrent()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test3r33");
 		assertTrue(q.queue(new WaitRunner(1, 10000)));
@@ -199,7 +199,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStopOne()
+	synchronized public void testStopOne()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("teffst4");
 		assertTrue(q.queue(new WaitRunner(1)));
@@ -213,7 +213,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testStopAll()
+	synchronized public void testStopAll()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test554");
 		assertTrue(q.queue(new WaitRunner(1, 200)));
@@ -227,7 +227,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testQueue()
+	synchronized public void testQueue()
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test42");
 		assertTrue(q.queue(new WaitRunner(1, 200)));
