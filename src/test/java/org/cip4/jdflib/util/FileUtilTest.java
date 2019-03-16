@@ -602,16 +602,16 @@ public class FileUtilTest extends JDFTestCaseBase
 			b[i] = (byte) (i % 256);
 		}
 		final OutputStream os = FileUtil.getBufferedOutputStream(fNew);
-		for (int i = 0; i < 50000; i++)
+		for (int i = 0; i < 5000; i++)
 			os.write(b);
 
 		os.flush();
 		os.close();
-		assertEquals(5000000000l, fNew.length(), 10000);
+		assertEquals(500000000l, fNew.length(), 10000);
 
 		final File copy = new File(sm_dirTestDataTemp + "Big2.txt");
 		assertTrue(FileUtil.copyFile(fNew, copy));
-		assertEquals(5000000000l, copy.length(), 10000);
+		assertEquals(500000000l, copy.length(), 10000);
 
 		fNew.delete();
 		copy.delete();
@@ -631,16 +631,16 @@ public class FileUtilTest extends JDFTestCaseBase
 			b[i] = (byte) (i % 256);
 		}
 		final OutputStream os = FileUtil.getBufferedOutputStream(fNew);
-		for (int i = 0; i < 50000; i++)
+		for (int i = 0; i < 5000; i++)
 			os.write(b);
 
 		os.flush();
 		os.close();
-		assertEquals(5000000000l, fNew.length(), 10000);
+		assertEquals(500000000l, fNew.length(), 10000);
 
 		final File copy = new File(sm_dirTestDataTemp + "Big4.txt");
 		assertTrue(FileUtil.moveFile(fNew, copy));
-		assertEquals(5000000000l, copy.length(), 10000);
+		assertEquals(500000000l, copy.length(), 10000);
 
 		fNew.delete();
 		copy.delete();

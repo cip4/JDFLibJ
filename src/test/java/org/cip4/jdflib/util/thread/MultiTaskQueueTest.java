@@ -172,7 +172,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	public void testManyMulti()
 	{
 		nRun = 0;
-		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi2", 3);
+		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi2b", 3);
 		assertEquals(0, q.getAvQueue());
 		assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 333; i++)
@@ -197,7 +197,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 	@Test
 	public void testManyMultiIdle()
 	{
-		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi2a", 3);
+		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi2aa", 3);
 		assertEquals(0, q.getAvQueue());
 		assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 555; i++)
