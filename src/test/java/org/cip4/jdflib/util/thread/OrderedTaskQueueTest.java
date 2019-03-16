@@ -43,6 +43,7 @@ import static org.junit.Assert.assertTrue;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -102,6 +103,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	@Ignore
 	synchronized public void testInterruptTask()
 	{
 		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multiiii2", 3);
