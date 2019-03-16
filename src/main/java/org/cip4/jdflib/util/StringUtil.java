@@ -1660,7 +1660,7 @@ public class StringUtil
 	 *
 	 * @param buffer the String which you want to encode to HexBinary
 	 * @param len the length of the buffer. <br>
-	 *            If<0, default is -1. In this case the lenght of the char array will be used.
+	 *            If<0, default is -1. In this case the length of the char array will be used.
 	 * @return the hexbinary representation
 	 */
 

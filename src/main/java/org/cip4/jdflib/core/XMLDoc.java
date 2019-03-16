@@ -1609,6 +1609,22 @@ public class XMLDoc implements Cloneable
 	}
 
 	/**
+	 * @return Returns the m_OriginalFileName.
+	 */
+	public XMLDoc getValidationResult()
+	{
+		return ((DocumentJDFImpl) m_doc).m_validationResult;
+	}
+
+	/**
+	 * @return Returns the m_OriginalFileName.
+	 */
+	public boolean isSchemaValid()
+	{
+		return getValidationResult() != null && XMLErrorHandler.VALID.equals(getValidationResult().getRoot().getAttribute(XMLErrorHandler.VALIDATION_RESULT));
+	}
+
+	/**
 	 * @param url the url to write to
 	 * @param strContentType the content type; if null use text/xml
 	 * @param det the details to set

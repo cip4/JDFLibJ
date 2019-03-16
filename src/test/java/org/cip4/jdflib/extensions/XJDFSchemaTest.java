@@ -36,7 +36,9 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
@@ -44,8 +46,12 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
 
 /**
@@ -107,7 +113,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		xjdfHelper.getCreateRootProduct(0).setAttribute(AttributeName.PARTVERSION, "PV1");
 		xjdfHelper.setTypes(JDFConstants.PRODUCT);
 		xjdfHelper.cleanUp();
-		writeTest(root, "../ProductPV.xjdf", true, null);
+		assertTrue(reparse(root, 2, 1));
 	}
 
 	/**
@@ -138,7 +144,67 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
 		root.setXPathAttribute("ResourceSet[@Name=\"Color\"]/Resource/Color/@CMYK", "1 0.2 0.3 0.4");
 		root.setAttribute("Types", "ConventionalPrinting");
-		writeTest(root, "../SimpleCMYK.xjdf", true, null);
+		assertTrue(reparse(root, 2, 0));
+		root.setXPathAttribute("ResourceSet[@Name=\"Color\"]/Resource/Color/@CMYK", "1 0.2 0.3");
+		assertFalse(reparse(root, 2, 0));
+		root.setXPathAttribute("ResourceSet[@Name=\"Color\"]/Resource/Color/@CMYK", "1 0.2 0.3 0.4 0.5");
+		assertFalse(reparse(root, 2, 0));
+		root.setXPathAttribute("ResourceSet[@Name=\"Color\"]/Resource/Color/@CMYK", "1 0,2 0,3 0,4");
+		assertFalse(reparse(root, 2, 0));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testFileSpecValidate()
+	{
+		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@CheckSum", StringUtil.setHexBinaryBytes(new byte[] { 1, 2, 3 }, -1));
+		root.setAttribute("Types", "ConventionalPrinting");
+		assertTrue(reparse(root, 2, 0));
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@CheckSum", "123");
+		assertFalse(reparse(root, 2, 0));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testDateTimeValidate()
+	{
+		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
+		root.setXPathAttribute("ResourceSet[@Name=\"NodeInfo\"]/Resource/NodeInfo/@Start", "12345");
+		root.setAttribute("Types", "ConventionalPrinting");
+		final String xml = root.getOwnerDocument_KElement().write2String(2);
+		final JDFParser p = getXJDFSchemaParser(2, 0);
+		final JDFDoc xParsed = p.parseString(xml);
+		assertFalse(xParsed.isSchemaValid());
+		root.setXPathAttribute("ResourceSet[@Name=\"NodeInfo\"]/Resource/NodeInfo/@Start", new JDFDate().getDateTimeISO());
+		final String xml2 = root.getOwnerDocument_KElement().write2String(2);
+		final JDFParser p2 = getXJDFSchemaParser(2, 0);
+		final JDFDoc xParsed2 = p2.parseString(xml2);
+		assertTrue(xParsed2.isSchemaValid());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testDurationValidate()
+	{
+		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
+		root.setXPathAttribute("ResourceSet[@Name=\"NodeInfo\"]/Resource/NodeInfo/@TotalDuration", "12345");
+		root.setAttribute("Types", "ConventionalPrinting");
+		final String xml = root.getOwnerDocument_KElement().write2String(2);
+		final JDFParser p = getXJDFSchemaParser(2, 0);
+		final JDFDoc xParsed = p.parseString(xml);
+		assertFalse(xParsed.isSchemaValid());
+		root.setXPathAttribute("ResourceSet[@Name=\"NodeInfo\"]/Resource/NodeInfo/@TotalDuration", new JDFDuration(999).getDurationISO());
+		final String xml2 = root.getOwnerDocument_KElement().write2String(2);
+		final JDFParser p2 = getXJDFSchemaParser(2, 0);
+		final JDFDoc xParsed2 = p2.parseString(xml2);
+		assertTrue(xParsed2.isSchemaValid());
 	}
 
 	/**

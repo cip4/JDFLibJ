@@ -38,6 +38,7 @@
 package org.cip4.jdflib;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -102,6 +103,31 @@ public abstract class JDFTestCaseBase
 
 	/**
 	 *
+	 * @param e
+	 * @param major
+	 * @param minor
+	 * @return
+	 */
+	protected boolean reparse(final KElement e, final int major, final int minor)
+	{
+		final String written = e.toXML();
+		assertNotNull(written);
+		final JDFParser p = getSchemaParser(major, minor);
+		final JDFDoc xParsed = p.parseString(written);
+		return xParsed.isSchemaValid();
+	}
+
+	protected static JDFParser getSchemaParser(final int major, final int minor)
+	{
+		if (major == 1)
+			return getSchemaParser(EnumVersion.getEnum(major, minor));
+		else if (major == 2)
+			return getXJDFSchemaParser(major, minor);
+		return null;
+	}
+
+	/**
+	 *
 	 * @return
 	 */
 	public static String getXJDFSchema()
@@ -115,7 +141,7 @@ public abstract class JDFTestCaseBase
 	 */
 	public static String getXJDFSchema(final int major, final int minor)
 	{
-		final String file = StringUtil.replaceToken(sm_dirTestSchema, -1, File.separator, "Version_" + major + "_" + minor) + "JDF2" + minor + ".xsd";
+		final String file = StringUtil.replaceToken(sm_dirTestSchema, -1, File.separator, "Version_" + major + "_" + minor) + "xjdf.xsd";
 		return UrlUtil.normalize(file);
 	}
 
@@ -456,13 +482,12 @@ public abstract class JDFTestCaseBase
 			final String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + filename;
 			final JDFParser p = getXJDFSchemaParser(2, minor);
 			final JDFDoc xParsed = p.parseFile(xjdfFile);
-			final XMLDoc dVal = xParsed.getValidationResult();
-			final String valResult = dVal.getRoot().getAttribute("ValidationResult");
-			if (!VALID.equals(valResult))
+			if (!xParsed.isSchemaValid())
 			{
+				final XMLDoc dVal = xParsed.getValidationResult();
 				dVal.write2File(UrlUtil.newExtension(xjdfFile, "val.xml"), 2, false);
 			}
-			assertEquals(VALID, valResult);
+			assertTrue(VALID, xParsed.isSchemaValid());
 			return xParsed;
 
 		}
@@ -717,7 +742,7 @@ public abstract class JDFTestCaseBase
 	 *
 	 * @return
 	 */
-	protected JDFParser getSchemaParser(final EnumVersion version)
+	protected static JDFParser getSchemaParser(final EnumVersion version)
 	{
 		int minor = 6;
 		if (EnumVersion.Version_2_1.equals(version) || EnumVersion.Version_1_7.equals(version))

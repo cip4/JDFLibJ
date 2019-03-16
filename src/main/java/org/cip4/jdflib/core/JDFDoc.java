@@ -691,14 +691,6 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**
-	 * @return Returns the m_OriginalFileName.
-	 */
-	public XMLDoc getValidationResult()
-	{
-		return ((DocumentJDFImpl) m_doc).m_validationResult;
-	}
-
-	/**
 	 * if true (the default) initialize element when they are created, else don't call init() when an element is initially created
 	 *
 	 * @param bInitOnCreate

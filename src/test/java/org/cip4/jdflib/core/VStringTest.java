@@ -38,20 +38,25 @@
  */
 package org.cip4.jdflib.core;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
-
-import junit.framework.TestCase;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class VStringTest extends TestCase
+public class VStringTest extends JDFTestCaseBase
 {
 	/**
 	 *
@@ -232,6 +237,35 @@ public class VStringTest extends TestCase
 		v.add("b");
 		v.sort();
 		assertEquals("a b c", StringUtil.setvString(v, " ", null, null), "a b c");
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testPerformance()
+	{
+		final long t0 = System.currentTimeMillis();
+		for (int i = 0; i < 1000; i++)
+		{
+			final VString v = new VString();
+			for (int j = 0; j < 1000; j++)
+			{
+				v.add("" + j);
+			}
+		}
+		final long t1 = System.currentTimeMillis();
+		for (int i = 0; i < 1000; i++)
+		{
+			final ArrayList<String> v = new ArrayList<>();
+			for (int j = 0; j < 1000; j++)
+			{
+				v.add("" + j);
+			}
+		}
+		final long t2 = System.currentTimeMillis();
+		log.info(("v " + (t1 - t0)));
+		log.info(("a " + (t2 - t1)));
 	}
 
 	/**
