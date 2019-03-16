@@ -36,7 +36,9 @@
  */
 package org.cip4.jdflib.extensions;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
@@ -130,7 +132,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	@Override
 	public void cleanUp()
 	{
-		final Vector<MessageHelper> vA = getMessageHelpers();
+		final List<MessageHelper> vA = getMessageHelpers();
 		if (vA != null)
 		{
 			for (final MessageHelper ah : vA)
@@ -147,7 +149,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	 * @deprecated use getMessageHelpes
 	 */
 	@Deprecated
-	public Vector<MessageHelper> getAuditHelpers()
+	public List<MessageHelper> getAuditHelpers()
 	{
 		return getMessageHelpers();
 	}
@@ -156,9 +158,9 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	 *
 	 * @return
 	 */
-	public Vector<MessageHelper> getMessageHelpers()
+	public List<MessageHelper> getMessageHelpers()
 	{
-		final Vector<MessageHelper> vA = new Vector<>();
+		final ArrayList<MessageHelper> vA = new ArrayList<>();
 		final VElement v = theElement.getChildElementVector(null, null);
 		for (final KElement e : v)
 		{
@@ -190,6 +192,27 @@ public class MessagePoolHelper extends BaseXJDFHelper
 			return new MessageHelper(e);
 	}
 
+	public MessageHelper getMessageHelper(final String type, int i)
+	{
+		if (StringUtil.isEmpty(type))
+			return getMessageHelper(i);
+		else
+		{
+			final List<MessageHelper> messageHelpers = getMessageHelpers();
+			if (i < 0)
+			{
+				Collections.reverse(messageHelpers);
+				i = -1 - i;
+			}
+			for (final MessageHelper mh : messageHelpers)
+			{
+				if (type.equals(mh.getType()) && (i >= 0 && i-- == 0))
+					return mh;
+			}
+		}
+		return null;
+	}
+
 	/**
 	 *
 	 * @param e
@@ -197,7 +220,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	 */
 	public MessageHelper getMessageHelper(int i)
 	{
-		final Vector<MessageHelper> v = getMessageHelpers();
+		final List<MessageHelper> v = getMessageHelpers();
 		if (v == null)
 			return null;
 		if (i < 0)

@@ -38,12 +38,14 @@ package org.cip4.jdflib.extensions;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.extensions.MessageHelper.EFamily;
 import org.cip4.jdflib.extensions.xjdfwalker.IDRemover;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -65,10 +67,10 @@ public class XJMFHelper extends MessagePoolHelper
 	 *
 	 * @return
 	 */
-	public Vector<MessageHelper> getMessageHelpers(final EnumFamily family)
+	public List<MessageHelper> getMessageHelpers(final EFamily family)
 	{
-		final Vector<MessageHelper> vA = getMessageHelpers();
-		final Vector<MessageHelper> vM = new Vector<>();
+		final List<MessageHelper> vA = getMessageHelpers();
+		final List<MessageHelper> vM = new Vector<>();
 		for (final MessageHelper mh : vA)
 		{
 			if (family == null || family.equals(mh.getFamily()))

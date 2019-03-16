@@ -43,7 +43,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
@@ -57,6 +56,10 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class MessageHelper extends BaseXJDFHelper
 {
+	public enum EFamily
+	{
+		Audit, Command, Query, Response, Signal
+	};
 
 	/**
 	 * @param audit
@@ -198,7 +201,7 @@ public class MessageHelper extends BaseXJDFHelper
 		{
 			return false;
 		}
-		return localName.startsWith(ElementName.COMMAND) || localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE);
+		return new MessageHelper(element).getFamily() != null;
 	}
 
 	/**
@@ -223,6 +226,15 @@ public class MessageHelper extends BaseXJDFHelper
 	 *
 	 * @return
 	 */
+	public boolean isAudit()
+	{
+		return getLocalName().startsWith(ElementName.AUDIT);
+	}
+
+	/**
+	 *
+	 * @return
+	 */
 	public boolean isSignal()
 	{
 		return getLocalName().startsWith(ElementName.SIGNAL);
@@ -241,25 +253,31 @@ public class MessageHelper extends BaseXJDFHelper
 		ensureHeader(theElement).setAttribute(AttributeName.REFID, id);
 	}
 
-	public EnumFamily getFamily()
+	public EFamily getFamily()
 	{
 		if (isCommand())
-			return EnumFamily.Command;
+			return EFamily.Command;
 		else if (isQuery())
-			return EnumFamily.Query;
+			return EFamily.Query;
 		else if (isSignal())
-			return EnumFamily.Signal;
+			return EFamily.Signal;
 		else if (isResponse())
-			return EnumFamily.Response;
+			return EFamily.Response;
+		else if (isAudit())
+			return EFamily.Audit;
 		return null;
 
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public String getType()
 	{
-		final EnumFamily f = getFamily();
+		final EFamily f = getFamily();
 		final String name = getLocalName();
-		return (f == null || f.getName().equals(name)) ? null : StringUtil.rightStr(name, -f.getName().length());
+		return (f == null || f.name().equals(name)) ? null : StringUtil.rightStr(name, -f.name().length());
 
 	}
 

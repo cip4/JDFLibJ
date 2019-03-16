@@ -47,6 +47,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.extensions.MessageHelper.EFamily;
 import org.cip4.jdflib.jmf.JDFKnownMsgQuParams;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -152,9 +153,9 @@ public class MessageHelperTest extends JDFTestCaseBase
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
-		assertEquals(EnumFamily.Command, mh.getFamily());
+		assertEquals(EFamily.Command, mh.getFamily());
 		mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
-		assertEquals(EnumFamily.Signal, mh.getFamily());
+		assertEquals(EFamily.Signal, mh.getFamily());
 	}
 
 	/**
@@ -209,7 +210,7 @@ public class MessageHelperTest extends JDFTestCaseBase
 	public void testFamilyMessageForeign()
 	{
 		final XMLDoc d = new XMLDoc("foo:CommandBar", "foo");
-		assertEquals(EnumFamily.Command, new MessageHelper(d.getRoot()).getFamily());
+		assertEquals(EFamily.Command, new MessageHelper(d.getRoot()).getFamily());
 	}
 
 	/**
