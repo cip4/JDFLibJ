@@ -39,7 +39,6 @@
 package org.cip4.jdflib.util.thread;
 
 import java.util.ArrayList;
-import java.util.Vector;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -155,7 +154,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	@Override
 	public boolean interruptCurrent(final int minAge)
 	{
-		final Vector<TaskRunner> currentCopy = new Vector<>();
+		final ArrayList<TaskRunner> currentCopy = new ArrayList<>();
 		currentCopy.addAll(current);
 		boolean bRet = false;
 		for (final TaskRunner next : currentCopy)
@@ -176,7 +175,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	 */
 	public boolean interruptTask(final Runnable theRunner)
 	{
-		final Vector<TaskRunner> currentCopy = new Vector<>();
+		final ArrayList<TaskRunner> currentCopy = new ArrayList<>();
 		currentCopy.addAll(current);
 		boolean bRet = false;
 		for (final TaskRunner next : currentCopy)
@@ -216,12 +215,12 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	 * @return true if we successfully interrupted or no entries were running
 	 *
 	 */
-	Vector<Runnable> getCurrent(final int minAge)
+	ArrayList<Runnable> getCurrent(final int minAge)
 	{
-		final Vector<TaskRunner> currentCopy = new Vector<>();
+		final ArrayList<TaskRunner> currentCopy = new ArrayList<>();
 		currentCopy.addAll(current);
 
-		final Vector<Runnable> vReturn = new Vector<>();
+		final ArrayList<Runnable> vReturn = new ArrayList<>();
 		for (final TaskRunner next : currentCopy)
 		{
 			if (next.getRunTime() >= minAge)
