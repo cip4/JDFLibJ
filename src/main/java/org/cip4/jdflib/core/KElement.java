@@ -1745,15 +1745,12 @@ public class KElement extends ElementNSImpl implements Element
 
 		while (kElem != null)
 		{
-			if (bAlwaysFit || kElem.fitsName_KElement(nodeName, nameSpaceURI))
+			if ((bAlwaysFit || kElem.fitsName_KElement(nodeName, nameSpaceURI)) && (bMapEmpty || kElem.includesAttributes(mAttrib, bAnd)))
 			{
-				if (bMapEmpty || kElem.includesAttributes(mAttrib, bAnd))
+				v.add(kElem);
+				if (++iSize == maxSize)
 				{
-					v.add(kElem);
-					if (++iSize == maxSize)
-					{
-						break;
-					}
+					break;
 				}
 			}
 

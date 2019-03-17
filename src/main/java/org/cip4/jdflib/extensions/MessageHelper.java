@@ -43,6 +43,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
@@ -201,7 +202,7 @@ public class MessageHelper extends BaseXJDFHelper
 		{
 			return false;
 		}
-		return new MessageHelper(element).getFamily() != null;
+		return new MessageHelper(element).getEFamily() != null;
 	}
 
 	/**
@@ -253,7 +254,26 @@ public class MessageHelper extends BaseXJDFHelper
 		ensureHeader(theElement).setAttribute(AttributeName.REFID, id);
 	}
 
-	public EFamily getFamily()
+	/**
+	 * @deprecated
+	 * @return
+	 */
+	@Deprecated
+	public EnumFamily getFamily()
+	{
+		if (isCommand())
+			return EnumFamily.Command;
+		else if (isQuery())
+			return EnumFamily.Query;
+		else if (isSignal())
+			return EnumFamily.Signal;
+		else if (isResponse())
+			return EnumFamily.Response;
+		return null;
+
+	}
+
+	public EFamily getEFamily()
 	{
 		if (isCommand())
 			return EFamily.Command;
@@ -275,7 +295,7 @@ public class MessageHelper extends BaseXJDFHelper
 	 */
 	public String getType()
 	{
-		final EFamily f = getFamily();
+		final EFamily f = getEFamily();
 		final String name = getLocalName();
 		return (f == null || f.name().equals(name)) ? null : StringUtil.rightStr(name, -f.name().length());
 

@@ -73,7 +73,7 @@ public class XJMFHelper extends MessagePoolHelper
 		final List<MessageHelper> vM = new Vector<>();
 		for (final MessageHelper mh : vA)
 		{
-			if (family == null || family.equals(mh.getFamily()))
+			if (family == null || family.equals(mh.getEFamily()))
 				vM.add(mh);
 		}
 		return vM;

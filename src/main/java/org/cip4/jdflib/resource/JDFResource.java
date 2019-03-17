@@ -2425,7 +2425,7 @@ public class JDFResource extends JDFElement
 	/**
 	 * @return
 	 */
-	public List<? extends KElement> getDirectPartitionArray()
+	public List<KElement> getDirectPartitionArray()
 	{
 		final Class<? extends JDFResource> clazz = getClass();
 		if (clazz.equals(JDFResource.class))
