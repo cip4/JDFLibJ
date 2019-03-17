@@ -37,6 +37,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -383,7 +384,7 @@ class PostConverter
 					cleanPageList(resRoot);
 				}
 				cleanLeaf(resRoot, false);
-				final VElement leaves = resRoot.getLeaves(true);
+				final List<JDFResource> leaves = resRoot.getLeafArray(true);
 				for (final KElement leaf : leaves)
 				{
 					leaf.removeChildrenByClass(JDFPart.class);
@@ -559,7 +560,7 @@ class PostConverter
 		{
 			if (dep == null)
 				return;
-			final VElement v = dep.getChildElementVector_KElement("RunListRef", null, null, true, 0);
+			final List<KElement> v = dep.getChildArray_KElement("RunListRef", null, null, true, 0);
 			if (v == null)
 				return;
 			for (final KElement e : v)
@@ -569,7 +570,7 @@ class PostConverter
 				final JDFResource root = rl.getTargetRoot();
 				if (root != null)
 				{
-					final VElement vR = root.getLeaves(true);
+					final List<JDFResource> vR = root.getLeafArray(true);
 					VElement v2 = root.getLinksAndRefs(true, false);
 					if (v2 != null)
 					{
@@ -591,7 +592,8 @@ class PostConverter
 						final JDFLayoutElement loe = (r instanceof JDFRunList) ? ((JDFRunList) r).getLayoutElement() : null;
 						if (loe != null)
 						{
-							r.moveElements(loe.getChildElementVector_KElement(null, null, null, true, 0), null);
+							final Collection<KElement> v3 = loe.getChildArray_KElement(null, null, null, true, 0);
+							r.moveElements(v3, null);
 							r.setAttributes(loe);
 							loe.deleteNode();
 						}

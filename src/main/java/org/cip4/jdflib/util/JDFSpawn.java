@@ -45,6 +45,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
@@ -462,7 +463,7 @@ public class JDFSpawn
 				for (final KElement e : partitionVector)
 				{
 					final JDFResource rPart = (JDFResource) e;
-					vRes.addAll(rPart.getLeaves(false));
+					vRes.addAll(rPart.getLeafArray(false));
 				}
 				vRes.unify();
 			}
@@ -1534,7 +1535,7 @@ public class JDFSpawn
 		final int size = partIDKeys.size();
 		// Set<String> keys = EnumPartIDKey.PartVersion.getName().equals(key0) ? null :
 		// ContainerUtil.toHashSet(vSpawnParts.getPartValues(key0, true));
-		final Vector<? extends KElement> firstLevel = r.getDirectPartitionVector();
+		final List<? extends KElement> firstLevel = r.getDirectPartitionArray();
 		if (firstLevel != null)
 		{
 			for (final KElement e : firstLevel)
@@ -1933,11 +1934,12 @@ public class JDFSpawn
 		}
 
 		// move away all pre-existing partitions and dump them into the new nodes
-		final VElement ve = r.getChildElementVector_KElement(r.getNodeName(), r.getNamespaceURI(), null, true, 9999999);
+		final Collection<KElement> ve = r.getChildArray_KElement(r.getNodeName(), r.getNamespaceURI(), null, true, 9999999);
 		final KElement[] tmp = new KElement[ve.size()];
-		for (int i = 0; i < ve.size(); i++)
+		int n = 0;
+		for (final KElement e : ve)
 		{
-			tmp[i] = ve.item(i).deleteNode();
+			tmp[n++] = e.deleteNode();
 		}
 		r.removeAttribute(AttributeName.PARTIDKEYS);
 		final VElement vNew = r.getResourceRoot().createPartitions(vSpawnParts, rootPartIDKeys);

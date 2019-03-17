@@ -79,6 +79,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -86,6 +87,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -1604,8 +1606,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public synchronized KElement[] getChildElementArray()
 	{
-		final VElement v = new VElement();
-		v.ensureCapacity(10); // good guess to avoid resizing too often
+		final ArrayList<KElement> v = new ArrayList<>();
 		Node n = getFirstChild();
 		while (n != null)
 		{
@@ -1673,6 +1674,20 @@ public class KElement extends ElementNSImpl implements Element
 
 	/**
 	 * Get all children from the actual element matching the given conditions<br>
+	 * convenience for getChildElementVector(nodeName, nameSpaceURI, null, true, 0, true)
+	 *
+	 * @param nodeName element name you are searching for
+	 * @param nameSpaceURI nameSpace you are searching for
+	 * @return VElement vector with all found elements, an empty vector if no elements match
+	 * @default getChildElementVector(null, null)
+	 */
+	public Collection<KElement> getChildArray(final String nodeName, final String nameSpaceURI)
+	{
+		return getChildArray_KElement(nodeName, nameSpaceURI, null, true, 0);
+	}
+
+	/**
+	 * Get all children from the actual element matching the given conditions<br>
 	 * does NOT get refElement targets although the attributes are checked in the target elements in case of refElements
 	 *
 	 * @param nodeName element name you are searching for
@@ -1684,9 +1699,29 @@ public class KElement extends ElementNSImpl implements Element
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */
-	public synchronized VElement getChildElementVector_KElement(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize)
+	public synchronized VElement getChildElementVector_KElement(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize)
 	{
 		final VElement v = new VElement();
+		v.addAll(getChildArray_KElement(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize));
+		return v;
+	}
+
+	/**
+	 * Get all children from the actual element matching the given conditions<br>
+	 * does NOT get refElement targets although the attributes are checked in the target elements in case of refElements
+	 *
+	 * @param nodeName element name you are searching for
+	 * @param nameSpaceURI nameSpace you are searching for
+	 * @param mAttrib attributes you are lokking for
+	 * @param bAnd if true, a child is only added if it has all attributes specified in Attributes mAttrib
+	 * @param maxSize maximum size of the element vector
+	 * @return VElement vector with all found elements, an empty vector if no elements match
+	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
+	 * @default getChildElementVector(null, null, null, true, 0)
+	 */
+	public List<KElement> getChildArray_KElement(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize)
+	{
+		final ArrayList<KElement> v = new ArrayList<>();
 		if (isWildCard(nodeName))
 		{
 			nodeName = null;
@@ -1714,7 +1749,7 @@ public class KElement extends ElementNSImpl implements Element
 			{
 				if (bMapEmpty || kElem.includesAttributes(mAttrib, bAnd))
 				{
-					v.addElement(kElem);
+					v.add(kElem);
 					if (++iSize == maxSize)
 					{
 						break;
@@ -1749,6 +1784,22 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 *
+	 * @param clazz
+	 * @param bRecurse
+	 * @param nMax
+	 * @deprecated use getChildArrayByClass
+	 * @return
+	 */
+	@Deprecated
+	public <a extends KElement> Vector<a> getChildrenByClass(final Class<a> clazz, final boolean bRecurse, final int nMax)
+	{
+		final Vector<a> v = new Vector<>();
+		v.addAll(getChildArrayByClass(clazz, bRecurse, nMax));
+		return v;
+	}
+
+	/**
 	 * Get all children from the actual element matching the given conditions<br>
 	 * does NOT get refElement targets although the attributes are checked in the target elements in case of refElements never null
 	 *
@@ -1761,9 +1812,9 @@ public class KElement extends ElementNSImpl implements Element
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */
 	@SuppressWarnings("unchecked")
-	public <a extends KElement> Vector<a> getChildrenByClass(final Class<a> clazz, final boolean bRecurse, final int nMax)
+	public <a extends KElement> List<a> getChildArrayByClass(final Class<a> clazz, final boolean bRecurse, final int nMax)
 	{
-		final Vector<a> v = new Vector<>();
+		final List<a> v = new ArrayList<>();
 		Node n = getFirstChild();
 		boolean bFound = false;
 		while (n != null)
@@ -1775,7 +1826,7 @@ public class KElement extends ElementNSImpl implements Element
 			}
 			if (bRecurse && (n instanceof KElement))
 			{
-				final Vector<a> childrenByClass = ((KElement) n).getChildrenByClass(clazz, bRecurse, nMax);
+				final Collection<a> childrenByClass = ((KElement) n).getChildArrayByClass(clazz, bRecurse, nMax);
 				if (childrenByClass != null)
 				{
 					v.addAll(childrenByClass);
@@ -2480,6 +2531,19 @@ public class KElement extends ElementNSImpl implements Element
 	public VString getAttributeVector_KElement()
 	{
 		final VString v = new VString();
+		final Collection<String> c = getAttributeArray_KElement();
+		v.addAll(c);
+		return v;
+	}
+
+	/**
+	 * Gets all attribute keys of 'this' as a vector of strings
+	 *
+	 * @return VString: a vector of all attribute keys in 'this'
+	 */
+	public List<String> getAttributeArray_KElement()
+	{
+		final List<String> v = new ArrayList<>();
 		final NamedNodeMap nm = getAttributes();
 		if (nm != null)
 		{
@@ -2488,15 +2552,12 @@ public class KElement extends ElementNSImpl implements Element
 			for (int i = 0; i < siz; i++)
 			{
 				final Node a = nm.item(i);
-				v.addElement(a.getNodeName());
+				v.add(a.getNodeName());
 			}
 		}
 
 		return v;
 	}
-
-	// //////////////////////////////////////////////////////////////////////////
-	// ///
 
 	/**
 	 * looking for a specified target with an id, e.g. resource.<br>
@@ -3239,7 +3300,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param v the vector of elements to append, if null nothing happens
 	 * @param beforeChild the child before which to append the elements of the vector
 	 */
-	public void moveElements(final VElement v, final KElement beforeChild)
+	public void moveElements(final Collection<KElement> v, final KElement beforeChild)
 	{
 		if (v == null)
 		{
@@ -5734,22 +5795,19 @@ public class KElement extends ElementNSImpl implements Element
 		}
 
 		// get all subnodes, INCLUDING partition leaves
-		VElement v = getChildElementVector_KElement(null, null, null, true, 0);
-		int siz = v.size();
-		for (int i = 0; i < siz; i++) // do not recurse down again for the
-		// leaves, we've already done that
+		Collection<KElement> v = getChildArray_KElement(null, null, null, true, 0);
+		for (final KElement e : v) // do not recurse down again for the leaves, we've already done that
 		{
-			v.item(i).fillHashSet(attName, attNS, preFill, false);
+			e.fillHashSet(attName, attNS, preFill, false);
 		}
 
 		if (bFirst)
 		{
 			// also get all lower level parent partition refs
 			v = getChildElementVector(null, null, null, true, 0, false);
-			siz = v.size();
-			for (int i = 0; i < siz; i++)
+			for (final KElement e : v)
 			{
-				v.item(i).fillHashSet(attName, attNS, preFill, true);
+				e.fillHashSet(attName, attNS, preFill, true);
 			}
 		}
 	}

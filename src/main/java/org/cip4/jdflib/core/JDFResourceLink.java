@@ -655,14 +655,14 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 				if (e != null)
 				{
 					final JDFResource p = (JDFResource) e;
-					final VElement targetVector = p.getLeaves(false);
+					final List<JDFResource> targetVector = p.getLeafArray(false);
 					leaves.addAll(targetVector);
 				}
 			}
 		}
 		else
 		{ // calculate availability directly, but only for the subelements as specified by
-				// partMap
+			// partMap
 			final VElement leaves2 = getTargetVector(-1);
 			for (final KElement e : leaves2)
 			{
@@ -1583,7 +1583,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		else if (amountPool != null)
 		{
 
-			final VElement vResLeaves = r.getLeaves(false);
+			final List<JDFResource> vResLeaves = r.getLeafArray(false);
 			final HashSet<JDFPartAmount> hsDone = new HashSet<>();
 			for (final KElement leaf : vResLeaves)
 			{

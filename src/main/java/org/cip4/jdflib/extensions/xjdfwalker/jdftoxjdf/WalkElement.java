@@ -36,8 +36,8 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.List;
 import java.util.Set;
-import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
@@ -252,7 +252,7 @@ public class WalkElement extends BaseWalker
 			return null;
 		if (original instanceof JDFResource)
 		{
-			final Vector<? extends KElement> leaves = ((JDFResource) original).getDirectPartitionVector();
+			final List<? extends KElement> leaves = ((JDFResource) original).getDirectPartitionArray();
 			for (final KElement leaf : leaves)
 			{
 				safeRename(leaf, newName);

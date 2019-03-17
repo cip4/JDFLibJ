@@ -47,6 +47,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
@@ -1788,11 +1789,11 @@ public class JDFValidator
 		}
 		final JDFAttributeMap mInv = new JDFAttributeMap(IS_VALID, "false");
 		final JDFAttributeMap mVal = new JDFAttributeMap(IS_VALID, "true");
-		final VElement vEl = root.getChildElementVector_KElement(null, null, null, true, 0);
+		final List<KElement> vEl = root.getChildArray_KElement(null, null, null, true, 0);
 		boolean bValid = true;
 		for (int i = vEl.size() - 1; i >= 0; i--)
 		{
-			final KElement el = vEl.elementAt(i);
+			final KElement el = vEl.get(i);
 			// ignore separationpools etc - only TestElement and TestAttribute
 			// are important
 			if (el == null || !el.getLocalName().startsWith("Test"))

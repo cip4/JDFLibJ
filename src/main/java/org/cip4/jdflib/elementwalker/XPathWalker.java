@@ -44,6 +44,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
@@ -254,11 +255,10 @@ public class XPathWalker extends BaseElementWalker
 			}
 			if (bAttribute)
 			{
-				final VString vkeys = e.getAttributeVector_KElement();
+				final List<String> vkeys = e.getAttributeArray_KElement();
 				Collections.sort(vkeys);
-				for (int i = 0; i < vkeys.size(); i++)
+				for (final String key : vkeys)
 				{
-					final String key = vkeys.get(i);
 					final String path = s + "/@" + key;
 					if ((pathsFound == null || !pathsFound.contains(path)))
 					{

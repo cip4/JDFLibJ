@@ -47,6 +47,7 @@
 package org.cip4.jdflib.resource.process;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -57,6 +58,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.JDFResource;
 import org.w3c.dom.DOMException;
 
 /**
@@ -176,7 +178,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	 */
 	public VString getAllSeparations()
 	{
-		final VElement e = getLeaves(false);
+		final List<JDFResource> e = getLeafArray(false);
 		if (e == null)
 		{
 			return null;

@@ -42,6 +42,7 @@ package org.cip4.jdflib.util;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
@@ -710,10 +711,9 @@ public class JDFMerge
 				{
 					trg = trgKeep;
 				}
-				final VElement vr = trg.getLeaves(true);
-				for (int l = 0; l < vr.size(); l++)
+				final List<JDFResource> vr = trg.getLeafArray(true);
+				for (final JDFResource r : vr)
 				{
-					final JDFResource r = (JDFResource) vr.elementAt(l);
 					r.updateAmounts(EnumAmountMerge.UpdateLink.equals(amountPolicy));
 				}
 			}
@@ -1461,10 +1461,9 @@ public class JDFMerge
 	 */
 	private void cleanupSpawn(final JDFResource oldRes)
 	{
-		final VElement v = oldRes.getLeaves(true);
-		for (final KElement e : v)
+		final List<JDFResource> v = oldRes.getLeafArray(true);
+		for (final JDFResource r : v)
 		{
-			final JDFResource r = (JDFResource) e;
 			if (!r.hasAttribute_KElement(AttributeName.SPAWNIDS, null, false))
 			{
 				removeSpawnAttributes(r);

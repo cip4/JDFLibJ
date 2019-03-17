@@ -2787,8 +2787,8 @@ class PostXJDFWalker extends BaseElementWalker
 		 */
 		private void ensureLayoutPositions(final JDFStrippingParams strippingParams, final JDFLayout layoutPartition, final String bsID)
 		{
-			VElement positions = strippingParams.getChildElementVector(ElementName.POSITION, null);
-			if (positions != null && positions.size() > 0)
+			Collection<KElement> positions = strippingParams.getChildArray(ElementName.POSITION, null);
+			if (!ContainerUtil.isEmpty(positions))
 			{
 				layoutPartition.moveElements(positions, null);
 			}

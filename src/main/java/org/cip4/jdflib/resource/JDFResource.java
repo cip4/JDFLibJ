@@ -38,6 +38,7 @@
 
 package org.cip4.jdflib.resource;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -2194,11 +2195,9 @@ public class JDFResource extends JDFElement
 			return;
 		}
 		setPartIDKeys(partIDKeys);
-		final VElement vLeaves = r.getLeaves(false); // only need the real leaves
-		final int leafSize = vLeaves.size();
-		for (int i = 0; i < leafSize; i++)
+		final List<JDFResource> vLeaves = r.getLeafArray(false); // only need the real leaves
+		for (final JDFResource leaf : vLeaves)
 		{
-			final JDFResource leaf = (JDFResource) vLeaves.get(i);
 			final JDFAttributeMap partMap = leaf.getPartMap();
 			partMap.reduceMap(partIDKeys);
 			getCreatePartition(partMap, partIDKeys);
@@ -2363,12 +2362,29 @@ public class JDFResource extends JDFElement
 	 *
 	 * @default getLeaves(false)
 	 */
-
 	public VElement getLeaves(final boolean bAll)
 	{
-		// want possibly intermediate nodes, check the kids
-		final Vector<? extends KElement> vAllChildren = getDirectPartitionVector();
 		final VElement vLeaves = new VElement();
+		vLeaves.addAll(getLeafArray(bAll));
+		return vLeaves;
+
+	}
+
+	/**
+	 * Gets a list of all direct leaves
+	 *
+	 * @param bAll if true include all intermediate and leaf nodes including this<br>
+	 *            if false, include only the final leaves
+	 *
+	 * @return VElement - the vector of all leaves - never null
+	 *
+	 * @default getLeaves(false)
+	 */
+	public List<JDFResource> getLeafArray(final boolean bAll)
+	{
+		// want possibly intermediate nodes, check the kids
+		final List<? extends KElement> vAllChildren = getDirectPartitionArray();
+		final ArrayList<JDFResource> vLeaves = new ArrayList<>();
 
 		if (vAllChildren == null || vAllChildren.isEmpty())
 		{
@@ -2383,11 +2399,10 @@ public class JDFResource extends JDFElement
 				vLeaves.add(this);
 			}
 
-			final int size = vAllChildren.size();
-			for (int i = 0; i < size; i++)
+			for (final KElement e : vAllChildren)
 			{
-				final JDFResource pi = (JDFResource) vAllChildren.elementAt(i);
-				final VElement v = pi.getLeaves(bAll);
+				final JDFResource pi = (JDFResource) e;
+				final List<JDFResource> v = pi.getLeafArray(bAll);
 				vLeaves.addAll(v);
 			}
 		}
@@ -2405,6 +2420,18 @@ public class JDFResource extends JDFElement
 			return getChildElementVector_KElement(getNodeName(), null, null, true, 0);
 		else
 			return super.getChildrenByClass(clazz, false, 0);
+	}
+
+	/**
+	 * @return
+	 */
+	public List<? extends KElement> getDirectPartitionArray()
+	{
+		final Class<? extends JDFResource> clazz = getClass();
+		if (clazz.equals(JDFResource.class))
+			return getChildArray_KElement(getNodeName(), null, null, true, 0);
+		else
+			return super.getChildArrayByClass(clazz, false, 0);
 	}
 
 	/**
@@ -2498,12 +2525,27 @@ public class JDFResource extends JDFElement
 
 	/**
 	 *
+	 * @param clazz
+	 * @param bRecurse
+	 * @param nMax
+	 * @deprecated use getChildArrayByClass
+	 * @return
+	 */
+	@Override
+	@Deprecated
+	public <a extends KElement> Vector<a> getChildrenByClass(final Class<a> clazz, final boolean bRecurse, final int nMax)
+	{
+		return super.getChildrenByClass(clazz, bRecurse, nMax);
+	}
+
+	/**
+	 *
 	 * @see org.cip4.jdflib.core.KElement#getChildrenByClass(java.lang.Class, boolean, int)
 	 */
 	@Override
-	public <a extends KElement> Vector<a> getChildrenByClass(final Class<a> clazz, final boolean bRecurse, final int nMax)
+	public <a extends KElement> List<a> getChildArrayByClass(final Class<a> clazz, final boolean bRecurse, final int nMax)
 	{
-		Vector<a> v = super.getChildrenByClass(clazz, bRecurse, nMax);
+		List<a> v = super.getChildArrayByClass(clazz, bRecurse, nMax);
 
 		KElement ke = this;
 		if (v.isEmpty() && clazz != getClass())
@@ -2512,7 +2554,7 @@ public class JDFResource extends JDFElement
 			ke = ke.getParentNode_KElement();
 			if (ke != null && ke.getNodeName().equals(nodeName))
 			{
-				v = ke.getChildrenByClass(clazz, false, nMax);
+				v = ke.getChildArrayByClass(clazz, false, nMax);
 			}
 		}
 		return v;
@@ -2710,14 +2752,14 @@ public class JDFResource extends JDFElement
 		final VElement v = new VElement();
 		if (!hasAttribute(partType.getName(), null, false))
 		{
-			final VElement vLeaves = getLeaves(false);
+			final List<JDFResource> vLeaves = getLeafArray(false);
 
 			final int size = values.size();
 			for (int i = 0; i < vLeaves.size(); i++)
 			{
 				for (int j = 0; j < size; j++)
 				{
-					final JDFResource p = (JDFResource) vLeaves.elementAt(i);
+					final JDFResource p = vLeaves.get(i);
 					v.add(p.addPartition(partType, values.get(j)));
 				}
 			}
@@ -2829,12 +2871,12 @@ public class JDFResource extends JDFElement
 	 */
 	public VElement getAttributePartVector(final String key)
 	{
-		final VElement leaves = getLeaves(false);
+		final List<JDFResource> leaves = getLeafArray(false);
 		final VElement v = new VElement();
 
 		for (int i = 0; i < leaves.size(); i++)
 		{
-			final JDFResource p = ((JDFResource) leaves.elementAt(i)).getAttributePart(key);
+			final JDFResource p = leaves.get(i).getAttributePart(key);
 
 			if (p != null)
 			{
@@ -3035,13 +3077,12 @@ public class JDFResource extends JDFElement
 		final int size = vValidParts.size();
 		if (size != 0 && getPartIDKeys().size() > 0)
 		{
-			final VElement leaves = getLeaves(true);
+			final List<JDFResource> leaves = getLeafArray(true);
 
 			// loop over all leaves of this resource
-			for (int i = 0; i < leaves.size(); i++)
+			for (final JDFResource leaf : leaves)
 			{
 				boolean bOK = false;
-				final JDFResource leaf = (JDFResource) leaves.elementAt(i);
 				final JDFAttributeMap leafMap = leaf.getPartMap();
 
 				for (int j = 0; j < size && !bOK; j++)
@@ -3952,25 +3993,22 @@ public class JDFResource extends JDFElement
 	 */
 	public VJDFAttributeMap getPartMapVector(final boolean bIntermediate)
 	{
-		final VElement allNodes = getLeaves(bIntermediate);
+		final List<JDFResource> allNodes = getLeafArray(bIntermediate);
 		final VJDFAttributeMap vReturn = new VJDFAttributeMap();
 		final VString ids = getPartIDKeys();
 
-		for (int j = 0; j < allNodes.size(); j++)
+		for (final JDFResource r : allNodes)
 		{
 			final JDFAttributeMap m = new JDFAttributeMap();
-			final JDFResource r = (JDFResource) allNodes.elementAt(j);
 
-			for (int i = 0; i < ids.size(); i++)
+			for (final String strIds : ids)
 			{
-				final String strIds = ids.elementAt(i);
-
 				if (r.hasAttribute(strIds, null, false))
 				{
-					m.put(strIds, r.getAttribute(strIds, null, JDFConstants.EMPTYSTRING));
+					m.put(strIds, r.getAttribute(strIds));
 				}
 			}
-			if (m.size() > 0)
+			if (!m.isEmpty())
 			{
 				vReturn.add(m);
 			}
@@ -7006,12 +7044,11 @@ public class JDFResource extends JDFElement
 	{
 		EnumResStatus minStatus = null;
 
-		final VElement v = getLeaves(bAll);
+		final List<JDFResource> v = getLeafArray(bAll);
 		if (v != null)
 		{
-			for (final KElement e : v)
+			for (final JDFResource r : v)
 			{
-				final JDFResource r = (JDFResource) e;
 				if (minStatus == null)
 				{
 					minStatus = r.getResStatus(false);
@@ -7538,8 +7575,15 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFResource getLeaf(final int i)
 	{
-		final VElement v = getLeaves(false);
-		return (JDFResource) v.get(i);
+		final List<JDFResource> v = getLeafArray(false);
+		try
+		{
+			return v.get(i);
+		}
+		catch (final Exception x)
+		{
+			return null;
+		}
 	}
 
 	@Override

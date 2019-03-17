@@ -3413,7 +3413,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 *
-
+	
 	 *
 	 */
 
@@ -4511,7 +4511,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 					for (final KElement r : vRes)
 					{
 						final JDFResource res = (JDFResource) r;
-						v.addAll(res.getLeaves(false));
+						v.addAll(res.getLeafArray(false));
 					}
 				}
 				else

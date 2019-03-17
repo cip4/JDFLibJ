@@ -46,6 +46,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -246,7 +247,7 @@ public class VStringTest extends JDFTestCaseBase
 	public void testPerformance()
 	{
 		final long t0 = System.currentTimeMillis();
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 10000; i++)
 		{
 			final VString v = new VString();
 			for (int j = 0; j < 1000; j++)
@@ -255,7 +256,7 @@ public class VStringTest extends JDFTestCaseBase
 			}
 		}
 		final long t1 = System.currentTimeMillis();
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 10000; i++)
 		{
 			final ArrayList<String> v = new ArrayList<>();
 			for (int j = 0; j < 1000; j++)
@@ -264,8 +265,36 @@ public class VStringTest extends JDFTestCaseBase
 			}
 		}
 		final long t2 = System.currentTimeMillis();
+		final Vector<String> v = new Vector<>();
+		for (int i = 0; i < 1000; i++)
+		{
+			v.add("" + i);
+		}
+		for (int i = 0; i < 10000; i++)
+		{
+			for (int j = 0; j < 1000; j++)
+			{
+				final String s = v.get(j);
+			}
+		}
+		final long t3 = System.currentTimeMillis();
+		final ArrayList<String> a = new ArrayList<>();
+		for (int i = 0; i < 1000; i++)
+		{
+			a.add("" + i);
+		}
+		for (int i = 0; i < 10000; i++)
+		{
+			for (int j = 0; j < 1000; j++)
+			{
+				final String s = a.get(j);
+			}
+		}
+		final long t4 = System.currentTimeMillis();
 		log.info(("v " + (t1 - t0)));
 		log.info(("a " + (t2 - t1)));
+		log.info(("vg " + (t3 - t2)));
+		log.info(("ag " + (t4 - t3)));
 	}
 
 	/**

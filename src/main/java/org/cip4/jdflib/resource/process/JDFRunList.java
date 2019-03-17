@@ -50,6 +50,7 @@ package org.cip4.jdflib.resource.process;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -1403,14 +1404,13 @@ public class JDFRunList extends JDFAutoRunList
 			final int nPage = pages.getElementCount();
 			return nPage;
 		}
+		final List<KElement> v = getChildArray_KElement(getLocalName(), getNamespaceURI(), null, true, 0);
 
-		final VElement v = getChildElementVector_KElement(getLocalName(), getNamespaceURI(), null, true, 0);
 		if (v != null)
 		{
-			final int siz = v.size();
-			for (int i = 0; i < siz; i++)
+			for (final KElement e : v)
 			{
-				final int page = ((JDFRunList) v.elementAt(i)).getNPage();
+				final int page = ((JDFRunList) e).getNPage();
 				if (page < 0)
 				{
 					return -1;
@@ -1607,13 +1607,13 @@ public class JDFRunList extends JDFAutoRunList
 			}
 		}
 
-		final VElement v2 = getLeaves(true);
+		final List<JDFResource> v2 = getLeafArray(true);
 		if (v2 != null)
 		{
 			siz = v2.size();
 			for (int i = siz - 1; i >= 0; i--)
 			{
-				final JDFRunList rl = (JDFRunList) v2.elementAt(i);
+				final JDFRunList rl = (JDFRunList) v2.get(i);
 				if (v != null && v.contains(rl))
 				{
 					v2.remove(rl); // it's a leaf
@@ -1630,7 +1630,7 @@ public class JDFRunList extends JDFAutoRunList
 			siz = v2.size();
 			for (int i = siz - 1; i >= 0; i--)
 			{
-				final JDFRunList rl = (JDFRunList) v2.elementAt(i);
+				final JDFRunList rl = (JDFRunList) v2.get(i);
 				final int page = rl.getNPage();
 				if (page > 0)
 				{
@@ -1677,8 +1677,10 @@ public class JDFRunList extends JDFAutoRunList
 		{
 			return false;
 		}
+		final VElement v1 = new VElement();
+		v1.addAll(getChildArray_KElement(getLocalName(), getNamespaceURI(), null, true, 0));
 
-		final VElement v = getChildElementVector_KElement(getLocalName(), getNamespaceURI(), null, true, 0);
+		final VElement v = v1;
 		if (v != null)
 		{
 			final int siz = v.size();

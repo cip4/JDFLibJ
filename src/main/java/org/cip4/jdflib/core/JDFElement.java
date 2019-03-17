@@ -80,6 +80,7 @@ package org.cip4.jdflib.core;
 import java.io.File;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -704,7 +705,7 @@ public class JDFElement extends KElement
 			nMax = Integer.MAX_VALUE;
 		}
 
-		final VString vAtts = getAttributeVector_KElement();
+		final Collection<String> vAtts = getAttributeArray_KElement();
 		final VString vUnknown = new VString();
 		if (vKnownKeys.contains("*"))
 		{
@@ -725,24 +726,27 @@ public class JDFElement extends KElement
 			}
 		}
 
-		for (int i = 0; i < vAtts.size() && vUnknown.size() < nMax; i++)
+		if (vUnknown.size() < nMax)
 		{
-			final String strAtts = vAtts.elementAt(i);
-			final String ns = KElement.xmlnsPrefix(strAtts);
-			if ((JDFConstants.XSI.equals(ns)) || JDFConstants.XMLNS.equals(ns))
+			for (final String strAtts : vAtts)
 			{
-				continue;
-			}
-
-			if (bAllNS || ns == null || vInNameSpace.contains(ns))
-			{
-				if (!vKnownKeys.contains(strAtts))
+				final String ns = KElement.xmlnsPrefix(strAtts);
+				if ((JDFConstants.XSI.equals(ns)) || JDFConstants.XMLNS.equals(ns))
 				{
-					vUnknown.addElement(strAtts);
+					continue;
+				}
+
+				if (bAllNS || ns == null || vInNameSpace.contains(ns))
+				{
+					if (!vKnownKeys.contains(strAtts))
+					{
+						vUnknown.addElement(strAtts);
+						if (vUnknown.size() >= nMax)
+							break;
+					}
 				}
 			}
 		}
-
 		return vUnknown;
 	}
 
@@ -4834,11 +4838,11 @@ public class JDFElement extends KElement
 		HashSet<String> h = new HashSet<>();
 		if (bExpand && (this instanceof JDFResource))
 		{
-			final VElement vLeaves = ((JDFResource) this).getLeaves(true);
+			final List<JDFResource> vLeaves = ((JDFResource) this).getLeafArray(true);
 			final int siz = vLeaves.size();
 			for (int i = 0; i < siz; i++)
 			{
-				final HashSet<String> h2 = vLeaves.item(i).fillHashSet(AttributeName.RREF, null);
+				final HashSet<String> h2 = vLeaves.get(i).fillHashSet(AttributeName.RREF, null);
 				if (h2 != null)
 				{
 					h.addAll(h2);
@@ -6387,12 +6391,10 @@ public class JDFElement extends KElement
 			return vDoneRefs;
 		}
 
-		final VElement v = getChildElementVector_KElement(null, null, null, true, 0); // grabemall
+		final Collection<KElement> v = getChildArray_KElement(null, null, null, true, 0); // grabemall
 
-		final int size = v.size();
-		for (int i = 0; i < size; i++)
+		for (final KElement e : v)
 		{
-			final KElement e = v.elementAt(i);
 			if (e instanceof JDFRefElement)
 			{
 				final JDFRefElement ref = (JDFRefElement) e;

@@ -38,6 +38,7 @@
 package org.cip4.jdflib.resource;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
@@ -341,7 +342,7 @@ public class PartitionGetter
 		for (final KElement e : v)
 		{
 			final JDFResource r = (JDFResource) e;
-			final VElement vr = r.getLeaves(false);
+			final List<JDFResource> vr = r.getLeafArray(false);
 			vNew.addAll(vr);
 		}
 		vNew.unify();

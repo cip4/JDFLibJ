@@ -39,6 +39,7 @@ package org.cip4.jdflib.resource;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
@@ -71,7 +72,7 @@ class PartitionMap
 	{
 		leafMap.put(parentMap, parent);
 		final String key = partIDKeys.get(parentMap.size());
-		final Vector<? extends KElement> v = key == null ? null : parent.getDirectPartitionVector();
+		final List<? extends KElement> v = key == null ? null : parent.getDirectPartitionArray();
 		if (v != null && !v.isEmpty())
 		{
 			for (final KElement e : v)

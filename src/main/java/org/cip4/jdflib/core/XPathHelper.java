@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.core;
 
+import java.util.Collection;
 import java.util.Set;
 
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -635,7 +636,7 @@ class XPathHelper
 		final JDFAttributeMap map = new JDFAttributeMap();
 		for (final KElement e : vEle)
 		{
-			final VString vKeys = e.getAttributeVector_KElement();
+			final Collection<String> vKeys = e.getAttributeArray_KElement();
 			final String baseXPath = new XPathHelper(e).buildXPath(base, 1);
 			final String nodeName = e.getNodeName();
 			String prefix = KElement.xmlnsPrefix(nodeName);

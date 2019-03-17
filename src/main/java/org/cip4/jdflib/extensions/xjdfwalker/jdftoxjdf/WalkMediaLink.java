@@ -36,12 +36,13 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.List;
+
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
@@ -125,7 +126,7 @@ public class WalkMediaLink extends WalkResLink
 			final JDFMedia media = (JDFMedia) rl.getLinkRoot();
 			comp.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 			comp.clonePartitions(media, null);
-			final VElement leaves = media.getLeaves(false);
+			final List<JDFResource> leaves = media.getLeafArray(false);
 			for (final KElement leaf : leaves)
 			{
 				final JDFMedia rLeaf = (JDFMedia) leaf;
