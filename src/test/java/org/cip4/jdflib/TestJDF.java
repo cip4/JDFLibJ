@@ -182,6 +182,7 @@ public class TestJDF extends JDFTestCaseBase
 	}
 
 	@Test
+	@Ignore
 	public void testCheckSpawnedResources() throws Throwable
 	{
 		final JDFDoc jdfDoc = JDFDoc.parseFile("C:/data/spawnedrw.jdf");
@@ -205,6 +206,7 @@ public class TestJDF extends JDFTestCaseBase
 	}
 
 	@Test
+	@Ignore
 	public void testSpawnedResources() throws Throwable
 	{
 		final JDFDoc jdfDoc = JDFDoc.parseFile("C:/data/spawnedrw.jdf");
