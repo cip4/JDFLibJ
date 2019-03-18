@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -138,7 +138,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 				break;
 			}
 		}
-		assertEquals(q.size(), 7);
+		assertEquals(q.size(), 5, 2);
 		for (int i = 0; i < 42; i++)
 		{
 			ThreadUtil.sleep(100);
@@ -152,9 +152,9 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 		assertTrue(q.getAvRun() > 0);
 		assertEquals(q.size(), 0);
 		assertTrue(q.queue(new WaitRunner(4)));
-		for (int i = 0; i < 42; i++)
+		for (int i = 0; i < 420; i++)
 		{
-			ThreadUtil.sleep(100);
+			ThreadUtil.sleep(10);
 			if (q.size() == 0)
 			{
 				break;
