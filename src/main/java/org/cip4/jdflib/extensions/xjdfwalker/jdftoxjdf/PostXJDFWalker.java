@@ -2790,7 +2790,7 @@ class PostXJDFWalker extends BaseElementWalker
 			Collection<KElement> positions = strippingParams.getChildArray(ElementName.POSITION, null);
 			if (!ContainerUtil.isEmpty(positions))
 			{
-				layoutPartition.moveElements(positions, null);
+				layoutPartition.moveArray(positions, null);
 			}
 			else
 			{

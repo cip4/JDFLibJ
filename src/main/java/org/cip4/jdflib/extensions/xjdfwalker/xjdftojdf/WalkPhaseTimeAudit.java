@@ -77,7 +77,7 @@ public class WalkPhaseTimeAudit extends WalkAudit
 		moveFromSender(xjdf, xjdf.getElement(XJDFConstants.Header));
 		final Collection<KElement> v = xjdf.getChildArray(null, null);
 		final KElement signalStatus = xjdf.appendElement("SignalStatus");
-		signalStatus.moveElements(v, null);
+		signalStatus.moveArray(v, null);
 		signalStatus.setAttributes(xjdf);
 		xjdf.removeAttribute(AttributeName.TIME);
 		final JDFJMF jmf = new JDFDoc(ElementName.JMF).getJMFRoot();

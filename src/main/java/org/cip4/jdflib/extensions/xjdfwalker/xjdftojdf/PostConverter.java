@@ -593,7 +593,7 @@ class PostConverter
 						if (loe != null)
 						{
 							final Collection<KElement> v3 = loe.getChildArray_KElement(null, null, null, true, 0);
-							r.moveElements(v3, null);
+							r.moveArray(v3, null);
 							r.setAttributes(loe);
 							loe.deleteNode();
 						}

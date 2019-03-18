@@ -3292,12 +3292,24 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 *
+	 * @param v
+	 * @param beforeChild
+	 * @deprecated use moveArray
+	 */
+	@Deprecated
+	public void moveElements(final VElement v, final KElement beforeChild)
+	{
+		moveArray(v, beforeChild);
+	}
+
+	/**
 	 * move all children in a vector of elements in the order of the vector
 	 *
 	 * @param v the vector of elements to append, if null nothing happens
 	 * @param beforeChild the child before which to append the elements of the vector
 	 */
-	public void moveElements(final Collection<KElement> v, final KElement beforeChild)
+	public void moveArray(final Collection<KElement> v, final KElement beforeChild)
 	{
 		if (v == null)
 		{

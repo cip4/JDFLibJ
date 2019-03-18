@@ -278,7 +278,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 
 		pc.setPartMap(mPart);
 		final KElement cond = pc.appendElement(AttributeName.CONDITION);
-		cond.moveElements(pc.getChildElementVector(ElementName.PART, null), null);
+		cond.moveArray(pc.getChildElementVector(ElementName.PART, null), null);
 		cond.setAttribute(XJDFConstants.PartContext, AttributeName.DOCINDEX);
 		xjdfHelper.cleanUp();
 		setSnippet(shLO, true);
@@ -315,7 +315,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 
 		pc.setPartMap(mPart);
 		final KElement cond = pc.appendElement(AttributeName.CONDITION);
-		cond.moveElements(pc.getChildElementVector(ElementName.PART, null), null);
+		cond.moveArray(pc.getChildElementVector(ElementName.PART, null), null);
 		cond.setAttribute(XJDFConstants.PartContext, AttributeName.DOCINDEX);
 
 		po = lo.appendElement(XJDFConstants.PlacedObject);
