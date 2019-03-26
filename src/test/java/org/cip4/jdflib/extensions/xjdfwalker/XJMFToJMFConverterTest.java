@@ -38,6 +38,7 @@ package org.cip4.jdflib.extensions.xjdfwalker;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
@@ -50,6 +51,7 @@ import org.cip4.jdflib.extensions.XJMFHelper;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFResourceQuParams;
+import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
 
 /**
@@ -87,6 +89,20 @@ public class XJMFToJMFConverterTest extends JDFTestCaseBase
 		final JDFDoc d = xc.convert(h.getRoot());
 		final JDFResourceQuParams rqp2 = d.getJMFRoot().getQuery(0).getResourceQuParams();
 		assertEquals(EnumScope.Allowed, rqp2.getScope());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSenderID()
+	{
+		final XJMFHelper h = new XJMFHelper();
+		final MessageHelper mh = h.appendMessage(EnumFamily.Signal, EnumType.Status);
+		mh.appendElement(ElementName.DEVICEINFO).setAttribute(AttributeName.DEVICEID, "d1");
+		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		final JDFDoc d = xc.convert(h.getRoot());
+		assertNull(StringUtil.getNonEmpty(d.getJMFRoot().getDeviceID()));
 	}
 
 }

@@ -36,6 +36,8 @@
  */
 package org.cip4.jdflib.elementwalker;
 
+import java.util.List;
+
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoContentObject.EnumAnchor;
@@ -61,6 +63,7 @@ import org.cip4.jdflib.resource.JDFImageShift;
 import org.cip4.jdflib.resource.JDFLayoutPreparationParams;
 import org.cip4.jdflib.resource.JDFModified;
 import org.cip4.jdflib.resource.JDFPageCell;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
@@ -118,7 +121,7 @@ public class StrippingConverter
 		strippingParams = (JDFStrippingParams) parent.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
 		strippingParams.setAutomated(true);
 		strippingParams.clonePartitions(layPrepParams, null);
-		final VElement vThis = layPrepParams.getLeaves(false);
+		final List<JDFResource> vThis = layPrepParams.getLeafArray(false);
 		for (final KElement e : vThis)
 		{
 			new StrippingConverter((JDFLayoutPreparationParams) e, parent).convertLeaf();
@@ -151,9 +154,9 @@ public class StrippingConverter
 		final VElement v = layPrepParams.getLinksAndRefs(true, true);
 		if (v != null)
 		{
-			for (int i = 0; i < v.size(); i++)
+			for (final KElement e : v)
 			{
-				v.get(i).deleteNode();
+				e.deleteNode();
 			}
 		}
 
@@ -173,6 +176,7 @@ public class StrippingConverter
 		}
 		final JDFExternalImpositionTemplate template = layPrepParams.getExternalImpositionTemplate();
 		strippingParams.copyElement(template, null);
+		strippingParams.copyElement(layPrepParams.getFitPolicy(), null);
 		setPosition();
 		setStripMarks(layPrepParams.getFrontMarkList(), EnumMarkSide.Front);
 		setStripMarks(layPrepParams.getBackMarkList(), EnumMarkSide.Back);
@@ -199,11 +203,11 @@ public class StrippingConverter
 		}
 		else if (EnumSides.TwoSidedFlipY.equals(sides))
 		{
-			strippingParams.getCreateStripCellParams().setSides(JDFAutoStripCellParams.EnumSides.TwoSidedHeadToFoot);
+			strippingParams.getCreateStripCellParams().setSides(JDFAutoStripCellParams.EnumSides.TwoSidedHeadToHead);
 		}
 		else if (EnumSides.TwoSidedFlipX.equals(sides))
 		{
-			strippingParams.getCreateStripCellParams().setSides(JDFAutoStripCellParams.EnumSides.TwoSidedHeadToHead);
+			strippingParams.getCreateStripCellParams().setSides(JDFAutoStripCellParams.EnumSides.TwoSidedHeadToFoot);
 		}
 
 	}
@@ -300,7 +304,8 @@ public class StrippingConverter
 	private void addSinglePosition(final int x, final int y, final int n, final JDFXYPair numberUp)
 	{
 		final String bsName = getBSName(x, y, n, numberUp);
-		final JDFStrippingParams sp = (JDFStrippingParams) (bsName == null ? strippingParams : strippingParams.getCreatePartition(new JDFAttributeMap(AttributeName.BINDERYSIGNATURENAME, bsName), null));
+		final JDFStrippingParams sp = (JDFStrippingParams) (bsName == null ? strippingParams
+				: strippingParams.getCreatePartition(new JDFAttributeMap(AttributeName.BINDERYSIGNATURENAME, bsName), null));
 		final JDFPosition position = sp.appendPosition();
 		position.setRelativeBox(getRelativeBox(x, y, n, numberUp));
 		position.copyAttribute(AttributeName.ORIENTATION, layPrepParams, AttributeName.ROTATE, null, null);

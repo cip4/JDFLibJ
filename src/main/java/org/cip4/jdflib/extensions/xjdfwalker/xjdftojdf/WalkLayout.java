@@ -125,6 +125,11 @@ public class WalkLayout extends WalkStrippingParams
 				stripParams.getCreateExternalImpositionTemplate().moveElement(myElm, null);
 				foundSome = true;
 			}
+			else if (ElementName.FITPOLICY.equals(localName))
+			{
+				// TODO fix when stripping valid
+				myElm.deleteNode();
+			}
 		}
 		return foundSome;
 	}

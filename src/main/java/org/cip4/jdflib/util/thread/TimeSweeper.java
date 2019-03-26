@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -29,9 +29,9 @@
  *
  * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
  * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- * 
+ *
  * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
- * 
+ *
  *
  */
 package org.cip4.jdflib.util.thread;
@@ -42,7 +42,7 @@ import org.cip4.jdflib.util.JDFDate;
 
 /**
  * class that sweeps at a regular interval - useful in case multiple sweepers with differing timing requirements are run
- * 
+ *
  * @author rainer prosi
  * @date Dec 10, 2011
  */
@@ -81,7 +81,7 @@ public class TimeSweeper implements Sweeper
 
 	/**
 	 *
-	 * 
+	 *
 	 * @param interval in seconds
 	 */
 	protected void setInterval(final int interval)
@@ -91,7 +91,7 @@ public class TimeSweeper implements Sweeper
 
 	/**
 	 *
-	 * 
+	 *
 	 * @param interval in seconds
 	 */
 	protected void setFirstInterval(final int interval)
@@ -102,7 +102,7 @@ public class TimeSweeper implements Sweeper
 	/**
 	 *
 	 * get the subclass or class of the runner
-	 * 
+	 *
 	 * @return
 	 */
 	public Class<?> getRunnerClass()
@@ -112,7 +112,7 @@ public class TimeSweeper implements Sweeper
 
 	/**
 	 * if true we want to sweep
-	 * 
+	 *
 	 * @see org.cip4.jdflib.util.thread.Sweeper#needSweep()
 	 */
 	@Override
@@ -127,7 +127,7 @@ public class TimeSweeper implements Sweeper
 
 	/**
 	 * default is nop or runner.run
-	 * 
+	 *
 	 * @see org.cip4.jdflib.util.thread.Sweeper#sweep()
 	 */
 	@Override
@@ -146,6 +146,7 @@ public class TimeSweeper implements Sweeper
 				log.info(getClass().getSimpleName() + " Completed sweeping# " + nSweep);
 			}
 		}
+		t0 = System.currentTimeMillis() + interval;
 		return runner != null;
 	}
 

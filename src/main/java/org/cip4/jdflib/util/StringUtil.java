@@ -527,7 +527,7 @@ public class StringUtil
 	 * @param strWork the string to tokenize
 	 * @param delim the delimiter, if null use whitespace
 	 * @param delim2token should a delimiter be a token?
-	 * @return the vector of strings
+	 * @return the vector of strings - never null
 	 */
 	public static VString tokenize(final String strWork, String delim, final boolean delim2token)
 	{

@@ -39,6 +39,7 @@
 package org.cip4.jdflib.util.thread;
 
 import java.util.ArrayList;
+import java.util.Vector;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -54,7 +55,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 {
 	private int maxParallel;
 	private ThreadPoolExecutor executor;
-	private final ArrayList<TaskRunner> current;
+	private final Vector<TaskRunner> current;
 	int nThread;
 
 	private class NextRunner extends TaskRunner
@@ -238,7 +239,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	MultiTaskQueue(final String name)
 	{
 		super(name);
-		current = new ArrayList<>();
+		current = new Vector<>();
 		maxParallel = 0;
 		setMaxParallel(2);
 		nThread = 1;
