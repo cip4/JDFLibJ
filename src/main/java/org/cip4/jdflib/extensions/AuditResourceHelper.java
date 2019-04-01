@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.util.StringUtil;
@@ -60,6 +61,7 @@ public class AuditResourceHelper extends MessageResourceHelper
 	{
 		final XJMFHelper xh = new XJMFHelper();
 		final KElement m = xh.getRoot().copyElement(getRoot(), null);
+		xh.setAttribute(AttributeName.VERSION, getXRoot().getAttribute(AttributeName.VERSION));
 		m.renameElement(StringUtil.replaceString(m.getNodeName(), ElementName.AUDIT, ElementName.SIGNAL), null);
 		return xh;
 	}

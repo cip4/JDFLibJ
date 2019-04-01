@@ -496,8 +496,8 @@ public abstract class JDFTestCaseBase
 
 	int getMinor(final KElement e)
 	{
-		final String s = e.getNamespaceURI();
-		return StringUtil.parseInt(StringUtil.token(s, -1, "_"), 0);
+		final String s = e.getInheritedAttribute(AttributeName.VERSION, null, "2.0");
+		return StringUtil.parseInt(StringUtil.token(s, 1, "."), 0);
 	}
 
 	protected KElement convertToXJDF(final KElement e)

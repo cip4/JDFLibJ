@@ -56,6 +56,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.xjdfwalker.IDRemover;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -202,7 +203,10 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 
 		final JDFDoc doc = new JDFDoc(XJDFConstants.XJDF, version);
 		doc.setInitOnCreate(false);
+
 		theElement = doc.getRoot();
+		if (EnumUtil.aLessThanB(EnumVersion.Version_2_0, version))
+			theElement.setAttribute(AttributeName.VERSION, version.getName());
 		final AuditPoolHelper aph = getCreateAuditPool();
 		aph.appendMessage(XJDFConstants.AuditCreated);
 	}

@@ -3328,8 +3328,7 @@ public class JDFElement extends KElement
 	 *
 	 * @default getChildrenByTagName(s,null,null, false, true, 0)
 	 */
-	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize,
-			final boolean bFollowRefs)
+	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize, final boolean bFollowRefs)
 	{
 		final VElement v = super.getChildrenByTagName_KElement(bFollowRefs ? null : elementName, nameSpaceURI, mAttrib, bDirect, bAnd, bFollowRefs ? -1 : maxSize);
 
@@ -3430,7 +3429,7 @@ public class JDFElement extends KElement
 						// be null and will be skipped
 						if (target != null)
 						{ // we want the jdfElem version of IncludesAttributes,
-							// so we must upcast
+								// so we must upcast
 							if (bMapEmpty || target.includesAttributes(mAttrib, bAnd))
 							{
 								v.addElement(target);
@@ -4082,6 +4081,10 @@ public class JDFElement extends KElement
 			{
 				return "http://www.CIP4.org/JDFSchema_1_1";
 			}
+		}
+		else if (majorVersion == 2)
+		{
+			return "http://www.CIP4.org/JDFSchema_2_0";
 		}
 		return "http://www.CIP4.org/JDFSchema_" + majorVersion + "_" + minorVersion;
 	}
@@ -5628,12 +5631,14 @@ public class JDFElement extends KElement
 				continue;
 			}
 
-			if (((EnumPoolType.ResourcePool.equals(poolType)) || (EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType))) && e instanceof JDFResource)
+			if (((EnumPoolType.ResourcePool.equals(poolType)) || (EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType)))
+					&& e instanceof JDFResource)
 			{
 				continue;
 			}
 
-			if (((EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.RefElement.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType))) && e instanceof JDFRefElement)
+			if (((EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.RefElement.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType)))
+					&& e instanceof JDFRefElement)
 			{
 				continue;
 			}
@@ -6158,8 +6163,7 @@ public class JDFElement extends KElement
 	 *
 	 * @default getChildWithMatchingAttribute(nodeName, attName, null, null, 0, true, EnumAttributeType.Any);
 	 */
-	public JDFElement getChildWithMatchingAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index, final boolean bDirect,
-			final AttributeInfo.EnumAttributeType dataType)
+	public JDFElement getChildWithMatchingAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index, final boolean bDirect, final AttributeInfo.EnumAttributeType dataType)
 	{
 		final VElement v = getChildrenByTagName(nodeName, nameSpaceURI, null, bDirect, true, 0);
 		final int siz = v.size();
@@ -6660,14 +6664,8 @@ public class JDFElement extends KElement
 	{
 		if (EnumUtil.aLessThanB(version, EnumVersion.Version_2_0))
 			return getSchemaURL(1, 1);
-		else if (EnumVersion.Version_2_0.equals(version))
-			return getSchemaURL(2, 0);
-		else if (EnumVersion.Version_2_1.equals(version))
-			return getSchemaURL(2, 1);
-		else if (EnumVersion.Version_2_2.equals(version))
-			return getSchemaURL(2, 2);
 		else
-			return null;
+			return getSchemaURL(2, 0);
 	}
 
 	/**

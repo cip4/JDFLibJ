@@ -41,6 +41,7 @@ import java.io.OutputStream;
 import java.util.List;
 import java.util.Vector;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
@@ -49,6 +50,7 @@ import org.cip4.jdflib.extensions.MessageHelper.EFamily;
 import org.cip4.jdflib.extensions.xjdfwalker.IDRemover;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 public class XJMFHelper extends MessagePoolHelper
@@ -98,6 +100,10 @@ public class XJMFHelper extends MessagePoolHelper
 		final JDFDoc doc = new JDFDoc(XJDFConstants.XJMF, v);
 		doc.setInitOnCreate(false);
 		theElement = doc.getRoot();
+		if (EnumUtil.aLessThanB(EnumVersion.Version_2_0, v))
+		{
+			theElement.setAttribute(AttributeName.VERSION, v.getName());
+		}
 		cleanUp();
 		return this;
 	}

@@ -68,6 +68,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -540,6 +541,9 @@ public class JDFToXJDF extends PackageElementWalker
 		final JDFDoc newDoc = new JDFDoc(bJMF ? (bTypeSafeMessage ? XJDFConstants.XJMF : rootJMF) : XJDFConstants.XJDF, getNewVersion());
 		newDoc.setInitOnCreate(false);
 		newRoot = newDoc.getRoot();
+		newRoot.setNamespaceURI(getSchemaURL(newVersion));
+		if (EnumUtil.aLessThanB(EnumVersion.Version_2_0, newVersion))
+			newRoot.setAttribute(AttributeName.VERSION, newVersion.getName());
 		newRoot.setNamespaceURI(getSchemaURL(newVersion));
 		first = new HashSet<>();
 	}
