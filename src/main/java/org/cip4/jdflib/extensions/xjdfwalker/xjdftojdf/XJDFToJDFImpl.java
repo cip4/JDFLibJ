@@ -56,6 +56,7 @@ import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -429,7 +430,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 				final String val = map.get(key);
 				if ((e2 instanceof JDFElement) && EnumAttributeType.isRange(((JDFElement) e2).getAttributeInfo().getAttributeType(key)) && val.indexOf(JDFConstants.TILDE) < 0)
 				{
-					final VString v = new VString(val, null);
+					final StringArray v = new StringArray(val, null);
 					if (v.size() % 2 == 0)
 					{
 						final JDFNameRangeList nrl = new JDFNameRangeList();

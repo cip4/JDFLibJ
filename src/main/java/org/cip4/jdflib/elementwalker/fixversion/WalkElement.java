@@ -47,6 +47,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNameRangeList;
@@ -390,14 +391,14 @@ public class WalkElement extends BaseWalker
 			}
 			else if (atType.equals(EnumAttributeType.IDREFS))
 			{
-				final VString vvalues = new VString(value, " ");
+				final StringArray vvalues = new StringArray(value, " ");
 				for (int i = 0; i < vvalues.size(); i++)
 				{
 					String s = vvalues.get(i);
 					if (s.length() > 0 && StringUtils.isNumeric(s.substring(0, 1)))
 					{
 						s = "_" + s;
-						vvalues.setElementAt(s, i);
+						vvalues.set(i, s);
 					}
 				}
 				el.setAttribute(key, vvalues, null);

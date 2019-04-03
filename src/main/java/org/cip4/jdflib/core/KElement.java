@@ -427,6 +427,20 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * Sets an NMTOKENS attribute to all elements from parameter value will be concatenate with blanks to the resulting NMTOKEN
+	 *
+	 * @param key the name of the attribute to set
+	 * @param value the values for the attribute key
+	 * @param nameSpaceURI the namespace of the key
+	 * @default setvStringAttribute(key, vStr, null)
+	 */
+	public void setAttribute(final String key, final List<String> value, final String nameSpaceURI)
+	{
+		final String s = StringUtil.setvString(value);
+		setAttribute(key, s, nameSpaceURI);
+	}
+
+	/**
 	 *
 	 * @param key
 	 * @param value

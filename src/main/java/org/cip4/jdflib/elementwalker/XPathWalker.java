@@ -51,6 +51,7 @@ import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.Element;
 
@@ -62,7 +63,7 @@ public class XPathWalker extends BaseElementWalker
 	/**
 	 * the attribute names to set as [@att] rather than [n] if method=3
 	 */
-	final VString attNames = new VString("Name,ChannelType,ContactTypes,IDUsage", ",");
+	final StringArray attNames = new StringArray("Name,ChannelType,ContactTypes,IDUsage", ",");
 
 	/**
 	 * the method to create xpaths

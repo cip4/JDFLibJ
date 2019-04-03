@@ -61,6 +61,7 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.cformat.PrintfFormat;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 
@@ -202,17 +203,17 @@ public class StringUtil
 	{
 		final StringBuilder s = new StringBuilder();
 
-		final VString vs = new VString(str, delim);
+		final StringArray vs = new StringArray(str, delim);
 		final int size = vs.size();
 
 		if (size > 0)
 		{
-			s.append(vs.elementAt(0).trim());
+			s.append(vs.get(0).trim());
 
 			for (int i = 1; i < size; i++)
 			{
 				s.append(delim);
-				s.append(vs.elementAt(i).trim());
+				s.append(vs.get(i).trim());
 			}
 		}
 		return s.toString();
