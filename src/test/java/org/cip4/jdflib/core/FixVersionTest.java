@@ -463,7 +463,7 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertNull(ci.getAttribute(AttributeName.NUMCOLORS, null, null));
 		assertEquals(ci.getColorsUsed().getSeparations().size(), 4);
 		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
-		fixVersion.setFixNewDuplicate(false);
+		fixVersion.setFixNewDuplicate(true);
 		converted = fixVersion.convert(ci);
 		assertTrue(converted);
 		assertEquals(ci.getNumColors(), 4);

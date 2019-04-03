@@ -52,7 +52,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
-import org.cip4.jdflib.core.VString;
 import org.w3c.dom.Element;
 
 /**
@@ -72,17 +71,17 @@ public class XPathWalker extends BaseElementWalker
 
 	static class XPathBuilder
 	{
-		XPathBuilder(final KElement _e, final int countSiblings, final VString attName)
+		XPathBuilder(final KElement _e, final int countSiblings, final List<String> attNames)
 		{
 			super();
 			this.elem = _e;
 			methCountSiblings = countSiblings;
-			attributeNames = attName;
+			attributeNames = attNames;
 		}
 
 		KElement elem;
 		int methCountSiblings;
-		VString attributeNames;
+		List<String> attributeNames;
 
 		/**
 		 * Gets the XPath full tree representation of 'this'
