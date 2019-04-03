@@ -64,10 +64,6 @@ import org.cip4.jdflib.util.StringUtil;
 public class StringArray extends ArrayList<String>
 {
 	private static final long serialVersionUID = 1L;
-	/**
-	 * the empty VString
-	 */
-	final public static StringArray emptyVector = new StringArray();
 
 	/**
 	 * are we null or empty or contain only an empty JDFAttributeMap
@@ -141,15 +137,12 @@ public class StringArray extends ArrayList<String>
 			{
 				strSep = JDFCoreConstants.BLANK;
 			}
-			if (strSep.length() == 1)
+			if (strSep.length() == 1 && strIn.indexOf(strSep) < 0)
 			{
-				// performance boost...
-				if (strIn.indexOf(strSep) < 0)
-				{
-					add(strIn);
-					return;
-				}
+				add(strIn);
+				return;
 			}
+
 			final StringTokenizer sToken = new StringTokenizer(strIn, strSep);
 			while (sToken.hasMoreTokens())
 			{
