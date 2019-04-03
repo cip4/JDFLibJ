@@ -1388,6 +1388,42 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testSpawnMismatchRunListMulti()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
+		final JDFResource r21 = r.addPartition(EnumPartIDKey.RunSet, "r1");
+		final JDFResource r22 = r.addPartition(EnumPartIDKey.RunSet, "r2");
+		final JDFResourceLink l = n.getLink(r, null);
+		final VJDFAttributeMap pm = new VJDFAttributeMap();
+		pm.clear();
+		pm.add(new JDFAttributeMap(EnumPartIDKey.RunSet.getName(), "r1"));
+		pm.add(new JDFAttributeMap(EnumPartIDKey.RunSet.getName(), "r2"));
+		l.setPartMapVector(pm);
+		final JDFSpawn sp = new JDFSpawn(n);
+		sp.vSpawnParts = pm.clone();
+		sp.vRWResources_in = new VString(ElementName.ADHESIVEBINDINGPARAMS);
+		final JDFNode ns = sp.spawn();
+		final JDFResource rs = ns.getResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input, 0);
+		assertNull(rs.getResourceRoot().getSpawnIDs(false));
+		final VElement rsl = rs.getLeaves(false);
+		for (final KElement l0 : rsl)
+		{
+			assertNotNull(((JDFResource) l0).getSpawnIDs(false).get(0));
+		}
+		final JDFResource rm = n.getResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input, 0);
+		assertNull(rm.getResourceRoot().getSpawnIDs(false));
+		final VElement rml = rm.getLeaves(false);
+		for (final KElement l0 : rml)
+		{
+			assertNotNull(((JDFResource) l0).getSpawnIDs(false).get(0));
+		}
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testCheckSpawnLeaves()
 	{
 		final JDFNode n = JDFNode.createRoot();

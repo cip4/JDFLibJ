@@ -165,7 +165,7 @@ public class FixVersionImpl extends PackageElementWalker
 		bOK = true;
 		fixICSVersions = false;
 		bLayoutPrepToStripping = false;
-		bFixNewDuplicate = true;
+		bFixNewDuplicate = false;
 		firsthour = 6;
 		lasthour = 18;
 		ignoreMap = new VectorMap<>();

@@ -462,7 +462,9 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertTrue(converted);
 		assertNull(ci.getAttribute(AttributeName.NUMCOLORS, null, null));
 		assertEquals(ci.getColorsUsed().getSeparations().size(), 4);
-		converted = new FixVersion(EnumVersion.Version_1_5).convert(ci);
+		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
+		fixVersion.setFixNewDuplicate(false);
+		converted = fixVersion.convert(ci);
 		assertTrue(converted);
 		assertEquals(ci.getNumColors(), 4);
 		assertEquals(ci.getColorsUsed().getSeparations().size(), 0);
@@ -648,7 +650,9 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertTrue(converted);
 		assertNull(ci.getAttribute(AttributeName.NUMCOLORS, null, null));
 		assertEquals(ci.getColorsUsed().getSeparations().size(), 4);
-		converted = new FixVersion(EnumVersion.Version_1_5).convert(ci);
+		final FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
+		fixVersion.setFixNewDuplicate(true);
+		converted = fixVersion.convert(ci);
 		assertTrue(converted);
 		assertEquals(ci.getNumColors(), 4);
 		assertEquals(ci.getColorsUsed().getSeparations().size(), 0);
