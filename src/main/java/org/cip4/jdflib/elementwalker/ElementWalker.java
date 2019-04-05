@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,6 +36,8 @@
  */
 package org.cip4.jdflib.elementwalker;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 
@@ -48,7 +50,8 @@ import org.cip4.jdflib.core.VElement;
  */
 public class ElementWalker
 {
-	protected IWalkerFactory theFactory;
+	final protected IWalkerFactory theFactory;
+	final Log log = LogFactory.getLog(ElementWalker.class);
 
 	/**
 	 * @param _theFactory used to find the individual instances for the children
@@ -108,12 +111,16 @@ public class ElementWalker
 	 * @param w
 	 * @return
 	 */
-	private KElement doWalk(final KElement e, final KElement trackElem, final IWalker w)
+	KElement doWalk(final KElement e, final KElement trackElem, final IWalker w)
 	{
 		KElement b = null;
 		try
 		{
 			w.prepareWalk(e, trackElem);
+		}
+		catch (final Throwable t)
+		{
+			log.error("Problems walking", t);
 		}
 		finally
 		{
@@ -122,6 +129,10 @@ public class ElementWalker
 		try
 		{
 			b = w.walk(e, trackElem);
+		}
+		catch (final Throwable t)
+		{
+			log.error("Problems walking", t);
 		}
 		finally
 		{
