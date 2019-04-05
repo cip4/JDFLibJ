@@ -52,6 +52,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFDropItem;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFDropItemIntent extends JDFAutoDropItemIntent
@@ -115,13 +116,23 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 	}
 
 	/**
-	 * Get parent node of 'this' - node DeliveryIntent
+	 * Get ancestor node of 'this' - node DeliveryIntent
 	 *
 	 * @return JDFDeliveryIntent: DeliveryIntent node
 	 */
 	public JDFDeliveryIntent getParentDeliveryIntent()
 	{
 		return (JDFDeliveryIntent) getDeepParent(ElementName.DELIVERYINTENT, 0);
+	}
+
+	/**
+	 * Get parent node of 'this' - node DropIntent
+	 *
+	 * @return DropIntent: DropIntent node
+	 */
+	public JDFDropIntent getParentDropIntent()
+	{
+		return (JDFDropIntent) getDeepParent(ElementName.DROPINTENT, 0);
 	}
 
 	/**
@@ -166,5 +177,21 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 			copyElement(e, null);
 			e = e.getNextSiblingElement();
 		}
+	}
+
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoDropItemIntent#getDropID()
+	 */
+	@Override
+	public String getDropID()
+	{
+
+		String dropID = super.getDropID();
+		if (StringUtil.isEmpty(dropID))
+		{
+			final JDFDropIntent parentDropIntent = getParentDropIntent();
+			dropID = parentDropIntent == null ? null : parentDropIntent.getDropID();
+		}
+		return dropID;
 	}
 }

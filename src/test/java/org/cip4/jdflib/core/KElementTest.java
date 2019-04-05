@@ -1359,6 +1359,17 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testCopyAttributeNull()
+	{
+		final KElement root = KElement.createRoot("a", null);
+		final KElement a = root.appendElement("a");
+		assertNull(a.copyAttribute("b", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testCopyAttribute()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
