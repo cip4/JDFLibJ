@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -72,5 +72,15 @@ public class AuditPoolHelperTest extends TestCase
 		final AuditPoolHelper aph = new AuditPoolHelper(auditPool);
 		final AuditHelper ah = aph.appendAudit(ElementName.NOTIFICATION);
 		assertNotNull(ah.getHeader());
+	}
+
+	/**
+	*
+	*/
+	public void testGetHelper()
+	{
+		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL, null);
+		assertNull(AuditPoolHelper.getHelper(null));
+		assertEquals(auditPool, AuditPoolHelper.getHelper(auditPool).getRoot());
 	}
 }
