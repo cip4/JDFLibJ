@@ -121,7 +121,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		@Override
 		public boolean hotFile(final File hotFile)
 		{
-			final File dumpDir = new File(sm_dirTestDataTemp + "URLOut" + n);
+			final File dumpDir = new File(sm_dirTestDataTemp + "URLOut" + ai.get());
 			dumpDir.delete();
 			final URLExtractor ex = new URLExtractor(dumpDir, hotFile.getParent(), null);
 			ex.setWantLog(true);
@@ -139,7 +139,6 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	File theHFDir;
 	File tmpHFDir;
 	static AtomicInteger ai = new AtomicInteger(0);
-	int n = 0;
 
 	/**
 	 *
@@ -151,7 +150,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	{
 		OrderedTaskQueue.shutDownAll();
 		super.setUp();
-		n = ai.incrementAndGet();
+		final int n = ai.incrementAndGet();
 		theHFDir = new File(sm_dirTestDataTemp + File.separator + "StHFTest" + n);
 		FileUtil.deleteAll(theHFDir);
 		theHFDir.mkdirs();
@@ -169,7 +168,6 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	 *
 	 * @throws IOException
 	 */
-	@Test
 	public synchronized void testSimple() throws IOException
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
@@ -241,11 +239,11 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		d.write2File(hfPath + "/dummy space.jdf", 2, false);
 		final File file = new File(hfPath + "/dummy space.jdf");
 		assertTrue(file.exists());
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 4200; i++)
 		{
 			ThreadUtil.sleep(10);
 			final File file2 = new File(hfPath + "/OK/dummy space");
-			if (!file.exists() && !content.exists() && file2.isDirectory() && tmpHFDir.listFiles().length == 0)
+			if (!file.exists() && !content.exists() && !content.exists() && file2.isDirectory() && tmpHFDir.listFiles().length == 0)
 				break;
 		}
 		assertFalse(file.getAbsolutePath(), file.exists());
@@ -510,7 +508,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		for (int i = 0; i < 1000; i++)
 		{
 			ThreadUtil.sleep(50);
-			if (ok.listFiles().length >= 2 && error.listFiles().length >= 2)
+			if (ok.listFiles().length >= 2 && error.listFiles().length >= 2 && tmpHFDir.listFiles().length < 2)
 				break;
 		}
 		assertEquals(ok.listFiles().length, 2, 1);
