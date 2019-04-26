@@ -149,6 +149,16 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
+	 *
+	 * @param partMap
+	 * @return
+	 */
+	public static VJDFAttributeMap getVector(final JDFAttributeMap partMap)
+	{
+		return JDFAttributeMap.isEmpty(partMap) ? null : new VJDFAttributeMap(partMap);
+	}
+
+	/**
 	 * are we null or empty or contain only an empty JDFAttributeMap
 	 *
 	 * @param v

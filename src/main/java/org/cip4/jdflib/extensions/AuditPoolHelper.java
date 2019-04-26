@@ -54,6 +54,22 @@ public class AuditPoolHelper extends MessagePoolHelper
 	}
 
 	/**
+	 * factory to create a helper from an element
+	 *
+	 * @param root the element to parse if not an XJDF - search in ancestors of element
+	 * @return the helper
+	 */
+	public static AuditPoolHelper getHelper(final KElement root)
+	{
+		if (root == null)
+			return null;
+		if (root.getLocalName().equals(ElementName.AUDITPOOL))
+			return new AuditPoolHelper(root);
+		else
+			return null;
+	}
+
+	/**
 	 *
 	 * @param auditType
 	 * @return

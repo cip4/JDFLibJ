@@ -601,6 +601,17 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * tests maxSize method
+	 */
+	@Test
+	public void testGetVector()
+	{
+		assertNull(VJDFAttributeMap.getVector(null));
+		assertNull(VJDFAttributeMap.getVector(new JDFAttributeMap()));
+		assertEquals(new VJDFAttributeMap(new JDFAttributeMap("a", "b")), VJDFAttributeMap.getVector(new JDFAttributeMap("a", "b")));
+	}
+
+	/**
 	 *
 	 */
 	@Test

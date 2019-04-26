@@ -41,7 +41,6 @@ import java.util.Collection;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -49,7 +48,6 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -326,15 +324,20 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public ResourceHelper appendPartition(final JDFAttributeMap partMap, final boolean addRes)
 	{
+		return appendResource(JDFAttributeMap.isEmpty(partMap) ? null : new VJDFAttributeMap(partMap), addRes);
+	}
+
+	/**
+	 * @param partMap
+	 * @param addRes if true, also add the detailed resource element, e.g. Layout
+	 * @return
+	 */
+	public ResourceHelper appendResource(final VJDFAttributeMap partMaps, final boolean addRes)
+	{
 		final KElement newPart = theElement.appendElement(getPartitionName());
 		final ResourceHelper partitionHelper = new ResourceHelper(newPart);
 		partitionHelper.cleanUp();
-		if (partMap != null && partMap.size() > 0)
-		{
-			final JDFPart part = (JDFPart) newPart.appendElement(ElementName.PART);
-			updatePartitions(partMap);
-			part.setPartMap(partMap);
-		}
+		partitionHelper.setPartMapVector(partMaps);
 
 		final String resName = getName();
 		if (resName != null && addRes)
@@ -359,11 +362,17 @@ public class SetHelper extends BaseXJDFHelper
 	 *
 	 * @param partMap
 	 */
-	private void updatePartitions(final JDFAttributeMap partMap)
+	private void updatePartitions(final VJDFAttributeMap partMaps)
 	{
-		final String sep = partMap.get(AttributeName.SEPARATION);
-		if (sep != null)
-			partMap.put(AttributeName.SEPARATION, StringUtil.replaceChar(sep, ' ', "_", 0));
+		if (partMaps != null)
+		{
+			for (final JDFAttributeMap partMap : partMaps)
+			{
+				final String sep = partMap.get(AttributeName.SEPARATION);
+				if (sep != null)
+					partMap.put(AttributeName.SEPARATION, StringUtil.replaceChar(sep, ' ', "_", 0));
+			}
+		}
 	}
 
 	/**
