@@ -49,6 +49,7 @@
 package org.cip4.jdflib.datatypes;
 
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
@@ -88,6 +89,15 @@ public class JDFMatrix extends JDFNumList
 	public JDFMatrix()
 	{
 		super(MAX_MATRIX_DIMENSION);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.datatypes.JDFNumList#clone()
+	 */
+	@Override
+	public synchronized JDFMatrix clone()
+	{
+		return (JDFMatrix) super.clone();
 	}
 
 	/**
@@ -198,7 +208,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * factory for JDFXYPair that silently returns null in case of illegal strings
-	 * 
+	 *
 	 * @param s the string to parse
 	 * @return the JDFXYPair, null if s is not compatible
 	 */
@@ -521,6 +531,20 @@ public class JDFMatrix extends JDFNumList
 	}
 
 	/**
+	 * applies this to a point
+	 * @param inCoordinate
+	 * @return
+	 */
+	public JDFXYPair transform(final JDFXYPair inCoordinate)
+	{
+		if (inCoordinate == null)
+			return null;
+		final Point2D p = inCoordinate.getPoint2D();
+		getAffineTransform().transform(p, p);
+		return new JDFXYPair(p.getX(), p.getY());
+	}
+
+	/**
 	 * shifts Tx and Ty by the amount specified
 	 *
 	 * @param tx shift in x direction
@@ -585,5 +609,14 @@ public class JDFMatrix extends JDFNumList
 		setTx(point == null ? 0 : point.getX());
 		setTy(point == null ? 0 : point.getY());
 		return this;
+	}
+
+	public JDFRectangle transform(final JDFRectangle jdfRectangle)
+	{
+		if (jdfRectangle == null)
+			return null;
+		final JDFXYPair ll = transform(jdfRectangle.getLL());
+		final JDFXYPair ur = transform(jdfRectangle.getUR());
+		return new JDFRectangle(ll, ur);
 	}
 }

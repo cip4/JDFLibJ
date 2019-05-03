@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,8 +71,8 @@
  * JDFRectangleRangeTest.java
  *
  * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.datatypes;
@@ -84,13 +84,13 @@ import junit.framework.TestCase;
 public class JDFRectangleTest extends TestCase
 {
 	/**
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
 	public final void testRectangle() throws Exception
 	{
-		JDFRectangle r1 = new JDFRectangle("0 0 1 1");
+		final JDFRectangle r1 = new JDFRectangle("0 0 1 1");
 		JDFRectangle r2 = new JDFRectangle("0 0 1 1");
 		assertTrue(r1.equals(r2));
 		assertTrue(r1.isGreaterOrEqual(r2));
@@ -114,13 +114,13 @@ public class JDFRectangleTest extends TestCase
 	}
 
 	/**
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
 	public final void testRectangleMm() throws Exception
 	{
-		JDFRectangle r1 = new JDFRectangle();
+		final JDFRectangle r1 = new JDFRectangle();
 		r1.setLlxMm(0);
 		r1.setLlyMm(0);
 		r1.setUrxMm(1);
@@ -167,84 +167,136 @@ public class JDFRectangleTest extends TestCase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testShift()
 	{
-		JDFRectangle r = JDFRectangle.createRectangle("0 0 1 1");
+		final JDFRectangle r = JDFRectangle.createRectangle("0 0 1 1");
 		r.shift(5, 10);
-		JDFRectangle r2 = JDFRectangle.createRectangle("5 10 6 11");
+		final JDFRectangle r2 = JDFRectangle.createRectangle("5 10 6 11");
 		assertEquals(r, r2);
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetLL()
 	{
-		JDFRectangle r = JDFRectangle.createRectangle("5 10 6 11");
+		final JDFRectangle r = JDFRectangle.createRectangle("5 10 6 11");
 		assertEquals(new JDFXYPair(5, 10), r.getLL());
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetUR()
 	{
-		JDFRectangle r = JDFRectangle.createRectangle("5 10 6 11");
+		final JDFRectangle r = JDFRectangle.createRectangle("5 10 6 11");
 		assertEquals(new JDFXYPair(6, 11), r.getUR());
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testFromXYPair()
 	{
-		JDFXYPair size = new JDFXYPair(2, 3);
-		JDFRectangle r = new JDFRectangle(size);
+		final JDFXYPair size = new JDFXYPair(2, 3);
+		final JDFRectangle r = new JDFRectangle(size);
 		assertEquals(size, r.getSize());
 		assertEquals(size, r.getUR());
 		assertEquals(new JDFXYPair(), r.getLL());
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testGetSize()
 	{
-		JDFRectangle r = JDFRectangle.createRectangle("5 10 6 12");
+		final JDFRectangle r = JDFRectangle.createRectangle("5 10 6 12");
 		assertEquals(new JDFXYPair(1, 2), r.getSize());
 	}
 
 	/**
-	* 
+	 *
+	 */
+	@Test
+	public void testGetCenter()
+	{
+		final JDFRectangle r = JDFRectangle.createRectangle("4 10 6 12");
+		assertEquals(new JDFXYPair(5, 11), r.getCenter());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSetCenter()
+	{
+		final JDFRectangle r = JDFRectangle.createRectangle("4 10 6 12");
+		assertEquals(new JDFXYPair(5, 11), r.getCenter());
+		final JDFRectangle r2 = r.clone();
+		r2.setCenter(r2.getCenter());
+		assertEquals(r2, r);
+		r2.setCenter(new JDFXYPair(15, 31));
+		r.shift(10, 20);
+		assertEquals(r2, r);
+
+	}
+
+	/**
+	*
 	*/
 	@Test
 	public void testShiftXY()
 	{
-		JDFRectangle r = JDFRectangle.createRectangle("0 0 1 1");
+		final JDFRectangle r = JDFRectangle.createRectangle("0 0 1 1");
 		r.shift(new JDFXYPair(5, 10));
-		JDFRectangle r2 = JDFRectangle.createRectangle("5 10 6 11");
+		final JDFRectangle r2 = JDFRectangle.createRectangle("5 10 6 11");
 		assertEquals(r, r2);
 	}
 
 	/**
-	 * 
+	*
+	*/
+	@Test
+	public void testNormalize()
+	{
+		final JDFRectangle r = JDFRectangle.createRectangle("0 0 1 1");
+		final JDFRectangle r2 = r.clone();
+		assertEquals(r2, r.normalize());
+		final JDFRectangle r3 = JDFRectangle.createRectangle("1 1 0 0");
+		assertEquals(r2, r3.normalize());
+	}
+
+	/**
+	 *
 	 */
 	@Test
 	public void testCreate()
 	{
-		JDFRectangle r = JDFRectangle.createRectangle("1 2 3 4");
-		JDFRectangle r2 = new JDFRectangle();
+		final JDFRectangle r = JDFRectangle.createRectangle("1 2 3 4");
+		final JDFRectangle r2 = new JDFRectangle();
 		r2.setLlx(1);
 		r2.setLly(2);
 		r2.setUrx(3);
 		r2.setUry(4);
 		assertEquals(r, r2);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public final void testClone()
+	{
+
+		final JDFRectangle ab = new JDFRectangle(1.0, 2.0, 3, 4);
+		final JDFRectangle ac = ab.clone();
+		assertEquals(ab, ac);
 	}
 }

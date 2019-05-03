@@ -67,6 +67,15 @@ public class XJMFHelper extends MessagePoolHelper
 
 	/**
 	 *
+	 *  default version - currently 2.0
+	 */
+	public void setVersion(final EnumVersion v)
+	{
+		setAttribute(AttributeName.VERSION, v == null ? XJDFHelper.defaultVersion().getName() : v.getName());
+	}
+
+	/**
+	 *
 	 * @return
 	 */
 	public List<MessageHelper> getMessageHelpers(final EFamily family)

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -47,6 +47,7 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import java.awt.geom.Point2D;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
@@ -212,6 +213,15 @@ public class JDFXYPair extends JDFNumList
 	}
 
 	/**
+	 *
+	 * @return
+	 */
+	public Point2D getPoint2D()
+	{
+		return new Point2D.Double(getX(), getY());
+	}
+
+	/**
 	 * setX - sets the x coordinate
 	 *
 	 * @param x the x coordinate
@@ -339,5 +349,41 @@ public class JDFXYPair extends JDFNumList
 			}
 		}
 		return this;
+	}
+
+	/**
+	 *
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public JDFXYPair shift(final double x, final double y)
+	{
+		setX(getX() + x);
+		setY(getY() + y);
+		return this;
+	}
+
+	/**
+	 *
+	 * @param xy
+	 * @return
+	 */
+	public JDFXYPair shift(final JDFXYPair xy)
+	{
+		if (xy == null)
+			return this;
+		else
+			return shift(xy.getX(), xy.getY());
+
+	}
+
+	/**
+	 * @see org.cip4.jdflib.datatypes.JDFNumList#clone()
+	 */
+	@Override
+	public synchronized JDFXYPair clone()
+	{
+		return (JDFXYPair) super.clone();
 	}
 }

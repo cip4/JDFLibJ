@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,9 +75,9 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 
 /**
  * common Interface for ContentObjects and MarkObjects
- * 
+ *
  * @author prosirai
- * 
+ *
  */
 public interface IPlacedObject
 {
@@ -88,17 +88,17 @@ public interface IPlacedObject
 	 */
 	/**
 	 * (36) set attribute SourceClipPath
-	 * 
+	 *
 	 * @param value : the value to set the attribute to
 	 */
-	public abstract void setSourceClipPath(String value);
+	public void setSourceClipPath(String value);
 
 	/**
 	 * (23) get String attribute SourceClipPath
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
-	public abstract String getSourceClipPath();
+	public String getSourceClipPath();
 
 	/*
 	 * --------------------------------------------------------------------- Methods for Attribute LayerID
@@ -106,17 +106,17 @@ public interface IPlacedObject
 	 */
 	/**
 	 * (36) set attribute LayerID
-	 * 
+	 *
 	 * @param value : the value to set the attribute to
 	 */
-	public abstract void setLayerID(int value);
+	public void setLayerID(int value);
 
 	/**
 	 * (15) get int attribute LayerID
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
-	public abstract int getLayerID();
+	public int getLayerID();
 
 	/*
 	 * --------------------------------------------------------------------- Methods for Attribute CTM
@@ -124,25 +124,25 @@ public interface IPlacedObject
 	 */
 	/**
 	 * (36) set attribute CTM
-	 * 
+	 *
 	 * @param value : the value to set the attribute to
 	 */
-	public abstract void setCTM(JDFMatrix value);
+	public void setCTM(JDFMatrix value);
 
 	/**
 	 * (36) set attribute CTM
-	 * 
+	 *
 	 * @param value : the value to set the attribute to
-	 * @param precision 
+	 * @param precision
 	 */
-	public abstract void setCTM(JDFMatrix value, int precision);
+	public void setCTM(JDFMatrix value, int precision);
 
 	/**
 	 * (20) get JDFMatrix attribute CTM
-	 * 
+	 *
 	 * @return JDFMatrixthe value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
 	 */
-	public abstract JDFMatrix getCTM();
+	public JDFMatrix getCTM();
 
 	/*
 	 * --------------------------------------------------------------------- Methods for Attribute Ord
@@ -150,17 +150,17 @@ public interface IPlacedObject
 	 */
 	/**
 	 * (36) set attribute Ord
-	 * 
+	 *
 	 * @param value : the value to set the attribute to
 	 */
-	public abstract void setOrd(int value);
+	public void setOrd(int value);
 
 	/**
 	 * (15) get int attribute Ord
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
-	public abstract int getOrd();
+	public int getOrd();
 
 	/*
 	 * --------------------------------------------------------------------- Methods for Attribute HalfTonePhaseOrigin
@@ -168,17 +168,17 @@ public interface IPlacedObject
 	 */
 	/**
 	 * (36) set attribute HalfTonePhaseOrigin
-	 * 
+	 *
 	 * @param value : the value to set the attribute to
 	 */
-	public abstract void setHalfTonePhaseOrigin(JDFXYPair value);
+	public void setHalfTonePhaseOrigin(JDFXYPair value);
 
 	/**
 	 * (20) get JDFXYPair attribute HalfTonePhaseOrigin
-	 * 
+	 *
 	 * @return JDFXYPairthe value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
 	 */
-	public abstract JDFXYPair getHalfTonePhaseOrigin();
+	public JDFXYPair getHalfTonePhaseOrigin();
 
 	/*
 	 * --------------------------------------------------------------------- Methods for Attribute OrdID
@@ -186,17 +186,17 @@ public interface IPlacedObject
 	 */
 	/**
 	 * (36) set attribute OrdID
-	 * 
+	 *
 	 * @param value : the value to set the attribute to
 	 */
-	public abstract void setOrdID(int value);
+	public void setOrdID(int value);
 
 	/**
 	 * (15) get int attribute OrdID
-	 * 
+	 *
 	 * @return int the value of the attribute
 	 */
-	public abstract int getOrdID();
+	public int getOrdID();
 
 	/*
 	 * --------------------------------------------------------------------- Methods for Attribute TrimCTM
@@ -204,33 +204,33 @@ public interface IPlacedObject
 	 */
 	/**
 	 * (36) set attribute TrimCTM
-	 * 
+	 *
 	 * @param value : the value to set the attribute to
 	 */
-	public abstract void setTrimCTM(JDFMatrix value);
+	public void setTrimCTM(JDFMatrix value);
 
 	/**
 	 * (36) set attribute TrimCTM
-	 * 
+	 *
 	 * @param value : the value to set the attribute to
-	 * @param precision 
+	 * @param precision
 	 */
-	public abstract void setTrimCTM(JDFMatrix value, int precision);
+	public void setTrimCTM(JDFMatrix value, int precision);
 
 	/**
 	 * convenience method to set TrimSize
-	 * 
+	 *
 	 * @param xy : the value to set TrimSize to
 	 */
-	public abstract void setTrimSize(JDFXYPair xy);
+	public void setTrimSize(JDFXYPair xy);
 
 	/**
 	 * convenience method to set TrimSize
-	 * 
+	 *
 	 * @param x : the value to set the x Dimension to
 	 * @param y : the value to set the y Dimension to
 	 */
-	public abstract void setTrimSize(double x, double y);
+	public void setTrimSize(double x, double y);
 
 	/**
 	 * @param x
@@ -247,10 +247,10 @@ public interface IPlacedObject
 
 	/**
 	 * (20) get JDFMatrix attribute TrimCTM
-	 * 
+	 *
 	 * @return JDFMatrixthe value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
 	 */
-	public abstract JDFMatrix getTrimCTM();
+	public JDFMatrix getTrimCTM();
 
 	/*
 	 * --------------------------------------------------------------------- Methods for Attribute ClipBox
@@ -258,18 +258,18 @@ public interface IPlacedObject
 	 */
 	/**
 	 * (36) set attribute ClipBox
-	 * 
+	 *
 	 * @param value : the value to set the attribute to
 	 */
-	public abstract void setClipBox(JDFRectangle value);
+	public void setClipBox(JDFRectangle value);
 
 	/**
 	 * (20) get JDFRectangle attribute ClipBox
-	 * 
+	 *
 	 * @return JDFRectanglethe value of the attribute, null if a the attribute value is not a valid to create a
 	 *         JDFRectangle
 	 */
-	public abstract JDFRectangle getClipBox();
+	public JDFRectangle getClipBox();
 
 	/*
 	 * --------------------------------------------------------------------- Methods for Attribute ClipPath
@@ -277,24 +277,31 @@ public interface IPlacedObject
 	 */
 	/**
 	 * (36) set attribute ClipPath
-	 * 
+	 *
 	 * @param value : the value to set the attribute to
 	 */
-	public abstract void setClipPath(String value);
+	public void setClipPath(String value);
 
 	/**
 	 * (36) set attribute ClipPath
-	 * 
+	 *
 	 * @param value : the value to set the attribute to
-	 * @param precision 
+	 * @param precision
 	 */
-	public abstract void setClipPath(String value, int precision);
+	public void setClipPath(String value, int precision);
 
 	/**
 	 * (23) get String attribute ClipPath
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
-	public abstract String getClipPath();
+	public String getClipPath();
+
+	/**
+	 *  get the bounding box in absolute coordinates
+	 *
+	 * @return the value of the attribute
+	 */
+	public JDFRectangle getRect();
 
 }

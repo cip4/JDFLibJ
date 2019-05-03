@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -156,6 +156,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 			jobID = "Job_" + new JDFDate().getFormattedDateTime("MMdd_hhmmss");
 		theElement.setAttribute(AttributeName.JOBID, jobID);
 		theElement.setAttribute(AttributeName.JOBPARTID, jobPartID);
+
 		setParts(parts);
 		cleanUp();
 	}
@@ -1149,12 +1150,20 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
+	 *
+	 * @return default version - currently 2.0
+	 */
+	public void setVersion(final EnumVersion v)
+	{
+		setAttribute(AttributeName.VERSION, v == null ? defaultVersion().getName() : v.getName());
+	}
+
+	/**
 	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setExternalID(java.lang.String)
 	 */
 	@Override
-	void setExternalID(final String newID)
+	public void setExternalID(final String newID)
 	{
-		// TODO Auto-generated method stub
 		super.setExternalID(newID);
 	}
 

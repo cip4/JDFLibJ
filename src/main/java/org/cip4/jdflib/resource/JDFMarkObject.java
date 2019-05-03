@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,13 +87,14 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.ifaces.IPlacedObject;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * 
- *  
+ *
+ *
  * @author rainer prosi
  * @date Sep 18, 2012
  */
@@ -103,11 +104,11 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 
 	/**
 	 * Constructor for JDFMarkObject
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFMarkObject(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFMarkObject(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -117,27 +118,27 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFMarkObject(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFMarkObject(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFMarkObject
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFMarkObject(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFMarkObject(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString()
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -148,12 +149,12 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 
 	/**
 	 * set attribute Ord
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 * @throws JDFException with stack trace if value < 0
 	 */
 	@Override
-	public void setOrd(int value)
+	public void setOrd(final int value)
 	{
 
 		if (value < 0)
@@ -166,14 +167,14 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 
 	/**
 	 * get int attribute Ord
-	 * 
+	 *
 	 * @return int: the value of the attribute
 	 * @throws JDFException with stack trace if result < 0
 	 */
 	@Override
 	public int getOrd()
 	{
-		int result = super.getOrd();
+		final int result = super.getOrd();
 
 		if (result < 0)
 		{
@@ -184,10 +185,11 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setTrimSize(double, double)
 	 */
-	public void setTrimSize(double x, double y)
+	@Override
+	public void setTrimSize(final double x, final double y)
 	{
 		setTrimSize(new JDFXYPair(x, y));
 	}
@@ -197,7 +199,8 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 	 * @param y
 	 * @param precision number of digits in decimal
 	 */
-	public void setTrimSize(final double x, final double y, int precision)
+	@Override
+	public void setTrimSize(final double x, final double y, final int precision)
 	{
 		setTrimSize(new JDFXYPair(x, y), precision);
 	}
@@ -206,7 +209,8 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 	 * @param jdfxyPair
 	 * @param precision number of digits in decimal
 	 */
-	public void setTrimSize(JDFXYPair jdfxyPair, int precision)
+	@Override
+	public void setTrimSize(final JDFXYPair jdfxyPair, final int precision)
 	{
 		setAttribute(AttributeName.TRIMSIZE, jdfxyPair, null, precision);
 	}
@@ -214,7 +218,8 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 	/**
 	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setCTM(org.cip4.jdflib.datatypes.JDFMatrix, int)
 	 */
-	public void setCTM(JDFMatrix value, int precision)
+	@Override
+	public void setCTM(final JDFMatrix value, final int precision)
 	{
 		setAttribute(AttributeName.CTM, value, null, precision);
 	}
@@ -222,28 +227,53 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 	/**
 	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setTrimCTM(org.cip4.jdflib.datatypes.JDFMatrix, int)
 	 */
-	public void setTrimCTM(JDFMatrix value, int precision)
+	@Override
+	public void setTrimCTM(final JDFMatrix value, final int precision)
 	{
 		setAttribute(AttributeName.TRIMCTM, value, null, precision);
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setClipPath(java.lang.String, int)
 	 */
-	public void setClipPath(String value, int precision)
+	@Override
+	public void setClipPath(final String value, final int precision)
 	{
-		VString v = StringUtil.tokenize(value, " ", false);
+		final VString v = StringUtil.tokenize(value, " ", false);
 		if (v != null)
 		{
 			for (int i = 0; i < v.size(); i++)
 			{
-				String s = v.get(i);
+				final String s = v.get(i);
 				if (StringUtil.isNumber(s))
 					v.set(i, StringUtil.formatDouble(StringUtil.parseDouble(s, 0), precision));
 			}
 		}
 		super.setClipPath(StringUtil.setvString(v));
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IPlacedObject#getRect()
+	 */
+	@Override
+	public JDFRectangle getRect()
+	{
+		final JDFMatrix ctm = getTrimCTM();
+		final JDFXYPair trimSize = getTrimSize();
+		if (ctm == null || trimSize == null)
+			return null;
+		return ctm.transform(new JDFRectangle(trimSize));
+	}
+
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoMarkObject#getTrimCTM()
+	 */
+	@Override
+	public JDFMatrix getTrimCTM()
+	{
+		final JDFMatrix trimCTM = super.getTrimCTM();
+		return trimCTM == null ? getCTM() : trimCTM;
 	}
 
 }

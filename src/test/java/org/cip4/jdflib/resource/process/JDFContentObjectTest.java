@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,31 +56,36 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 package org.cip4.jdflib.resource.process;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
- * 
- * 
+ *
+ *
  * @author rainer prosi
  * @date before Sep 18, 2012
  */
@@ -91,7 +96,7 @@ public class JDFContentObjectTest extends JDFTestCaseBase
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -99,70 +104,83 @@ public class JDFContentObjectTest extends JDFTestCaseBase
 	{
 		// TODO Auto-generated method stub
 		super.setUp();
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode n = doc.getJDFRoot();
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode n = doc.getJDFRoot();
 		n.setType(EnumType.Imposition);
 		lo = (JDFLayout) n.addResource(ElementName.LAYOUT, null);
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public void testcalcOrd()
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			Assert.assertEquals(JDFContentObject.calcOrd(0, 10, 0, 2, 2, i), 0 + i);
-			Assert.assertEquals(JDFContentObject.calcOrd(-1, 10, 0, 2, 2, i), -1);
-			Assert.assertEquals(JDFContentObject.calcOrd(-1, 12, 0, 2, 2, i), 11 + i);
-			Assert.assertEquals(JDFContentObject.calcOrd(-1, 12, 1, 2, 2, i), 9 + i);
-			Assert.assertEquals(JDFContentObject.calcOrd(-2, 10, 2, 2, 2, i), 6 + i);
-			Assert.assertEquals(JDFContentObject.calcOrd(-2, 10, 3, 2, 2, i), -1);
-			Assert.assertEquals(JDFContentObject.calcOrd(0, 13, 3, 2, 2, i), 6 + i);
-			Assert.assertEquals(JDFContentObject.calcOrd(0, 12, 3, 2, 2, i), -1);
+			assertEquals(JDFContentObject.calcOrd(0, 10, 0, 2, 2, i), 0 + i);
+			assertEquals(JDFContentObject.calcOrd(-1, 10, 0, 2, 2, i), -1);
+			assertEquals(JDFContentObject.calcOrd(-1, 12, 0, 2, 2, i), 11 + i);
+			assertEquals(JDFContentObject.calcOrd(-1, 12, 1, 2, 2, i), 9 + i);
+			assertEquals(JDFContentObject.calcOrd(-2, 10, 2, 2, 2, i), 6 + i);
+			assertEquals(JDFContentObject.calcOrd(-2, 10, 3, 2, 2, i), -1);
+			assertEquals(JDFContentObject.calcOrd(0, 13, 3, 2, 2, i), 6 + i);
+			assertEquals(JDFContentObject.calcOrd(0, 12, 3, 2, 2, i), -1);
 
-			Assert.assertEquals(JDFContentObject.calcOrd(-2, 13, 3, 2, 2, i), 8 + i);
-			Assert.assertEquals(JDFContentObject.calcOrd(-2, 12, 3, 2, 2, i), -1);
-			Assert.assertEquals(JDFContentObject.calcOrd(-2, 12, 3, 2, 2, i), -1);
-			Assert.assertEquals(JDFContentObject.calcOrd(-1, 10, 1, 2, 2, i), 9 + i);
+			assertEquals(JDFContentObject.calcOrd(-2, 13, 3, 2, 2, i), 8 + i);
+			assertEquals(JDFContentObject.calcOrd(-2, 12, 3, 2, 2, i), -1);
+			assertEquals(JDFContentObject.calcOrd(-2, 12, 3, 2, 2, i), -1);
+			assertEquals(JDFContentObject.calcOrd(-1, 10, 1, 2, 2, i), 9 + i);
 		}
 	}
 
 	/**
-	* 
-	*  
+	*
+	*
 	*/
 	@Test
 	public void testSetTrimSize()
 	{
-		JDFContentObject co = lo.appendContentObject();
+		final JDFContentObject co = lo.appendContentObject();
 		co.setTrimSize(1.12345, 2.3456, 2);
-		Assert.assertTrue(co.toXML().indexOf("1.12 2.35\"") > 0);
+		assertTrue(co.toXML().indexOf("1.12 2.35\"") > 0);
 	}
 
 	/**
-	* 
-	*  
+	*
+	*
+	*/
+	@Test
+	public void testGetRect()
+	{
+		final JDFContentObject co = lo.appendContentObject();
+		co.setTrimSize(1.2345, 2.3456);
+		co.setCTM(JDFMatrix.getUnitMatrix());
+		assertEquals(new JDFRectangle(0, 0, 1.2345, 2.3456), co.getRect());
+	}
+
+	/**
+	*
+	*
 	*/
 	@Test
 	public void testSetCTM()
 	{
-		JDFContentObject co = lo.appendContentObject();
+		final JDFContentObject co = lo.appendContentObject();
 		co.setTrimSize(1.12345, 2.3456, 2);
-		Assert.assertTrue(co.toXML().indexOf("1.12 2.35\"") > 0);
+		assertTrue(co.toXML().indexOf("1.12 2.35\"") > 0);
 	}
 
 	/**
-	* 
-	*  
+	*
+	*
 	*/
 	@Test
 	public void testSetClipPath()
 	{
-		JDFContentObject co = lo.appendContentObject();
+		final JDFContentObject co = lo.appendContentObject();
 		co.setClipPath("1.0000004 1.2345678 l 1 2 3 g ds", 2);
-		Assert.assertEquals(co.getClipPath(), ("1 1.23 l 1 2 3 g ds"));
+		assertEquals(co.getClipPath(), ("1 1.23 l 1 2 3 g ds"));
 	}
 }

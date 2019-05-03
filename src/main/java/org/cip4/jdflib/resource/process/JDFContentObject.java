@@ -85,13 +85,14 @@ import org.cip4.jdflib.auto.JDFAutoContentObject;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.ifaces.IPlacedObject;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * before May 14, 2009
  */
 public class JDFContentObject extends JDFAutoContentObject implements IPlacedObject
@@ -109,11 +110,21 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
 	}
 
 	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoMarkObject#getTrimCTM()
+	 */
+	@Override
+	public JDFMatrix getTrimCTM()
+	{
+		final JDFMatrix trimCTM = super.getTrimCTM();
+		return trimCTM == null ? getCTM() : trimCTM;
+	}
+
+	/**
 	 * Constructor for JDFContentObject
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * 
+	 *
 	 */
 	public JDFContentObject(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
@@ -126,7 +137,7 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 * 
+	 *
 	 */
 	public JDFContentObject(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
@@ -137,7 +148,7 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -151,7 +162,8 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
 	 * @param y
 	 * @param precision number of digits in decimal
 	 */
-	public void setTrimSize(final double x, final double y, int precision)
+	@Override
+	public void setTrimSize(final double x, final double y, final int precision)
 	{
 		setTrimSize(new JDFXYPair(x, y), precision);
 	}
@@ -160,7 +172,8 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
 	 * @param jdfxyPair
 	 * @param precision number of digits in decimal
 	 */
-	public void setTrimSize(JDFXYPair jdfxyPair, int precision)
+	@Override
+	public void setTrimSize(final JDFXYPair jdfxyPair, final int precision)
 	{
 		setAttribute(AttributeName.TRIMSIZE, jdfxyPair, null, precision);
 	}
@@ -168,7 +181,8 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
 	/**
 	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setCTM(org.cip4.jdflib.datatypes.JDFMatrix, int)
 	 */
-	public void setCTM(JDFMatrix value, int precision)
+	@Override
+	public void setCTM(final JDFMatrix value, final int precision)
 	{
 		setAttribute(AttributeName.CTM, value, null, precision);
 	}
@@ -176,32 +190,48 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
 	/**
 	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setTrimCTM(org.cip4.jdflib.datatypes.JDFMatrix, int)
 	 */
-	public void setTrimCTM(JDFMatrix value, int precision)
+	@Override
+	public void setTrimCTM(final JDFMatrix value, final int precision)
 	{
 		setAttribute(AttributeName.TRIMCTM, value, null, precision);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IPlacedObject#getRect()
+	 */
+	@Override
+	public JDFRectangle getRect()
+	{
+		final JDFMatrix ctm = getTrimCTM();
+		final JDFXYPair trimSize = getTrimSize();
+		if (ctm == null || trimSize == null)
+			return null;
+		return ctm.transform(new JDFRectangle(trimSize));
 	}
 
 	/**
 	 * @param x
 	 * @param y
 	 */
+	@Override
 	public void setTrimSize(final double x, final double y)
 	{
 		setTrimSize(new JDFXYPair(x, y));
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setClipPath(java.lang.String, int)
 	 */
-	public void setClipPath(String value, int precision)
+	@Override
+	public void setClipPath(final String value, final int precision)
 	{
-		VString v = StringUtil.tokenize(value, " ", false);
+		final VString v = StringUtil.tokenize(value, " ", false);
 		if (v != null)
 		{
 			for (int i = 0; i < v.size(); i++)
 			{
-				String s = v.get(i);
+				final String s = v.get(i);
 				if (StringUtil.isNumber(s))
 					v.set(i, StringUtil.formatDouble(StringUtil.parseDouble(s, 0), precision));
 			}
@@ -211,7 +241,7 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
 
 	/**
 	 * calculates a "real" ord value in an automated layout
-	 * 
+	 *
 	 * @param ord the Value of Ord in the layout
 	 * @param nPages the total number of pages that are consumed by the Layout, if frontOffset!=0 the pages before frontOffset are NOT counted
 	 * @param loop which sheet loop are we on?
