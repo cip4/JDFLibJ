@@ -303,6 +303,52 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * ensure the correct case of n attribute, if present
+	 * @param key
+	 * @return
+	 */
+	public String ensureCase(final String key)
+	{
+		String val = getNonEmpty_KElement(key);
+		if (val == null)
+		{
+			val = getIgnoreCase_KElement(key);
+			if (val != null)
+			{
+				removeIgnoreCase(key);
+				setAttribute(key, val);
+			}
+		}
+		return val;
+	}
+
+	public void removeIgnoreCase(final String key)
+	{
+		if (key != null)
+		{
+			final JDFAttributeMap m = getAttributeMap();
+			for (final String keys : m.keySet())
+			{
+				if (key.equalsIgnoreCase(keys))
+					removeAttribute(keys);
+			}
+		}
+	}
+
+	public void removeIgnoreCase_KElement(final String key)
+	{
+		if (key != null)
+		{
+			final JDFAttributeMap m = getAttributeMap_KElement();
+			for (final String keys : m.keySet())
+			{
+				if (key.equalsIgnoreCase(keys))
+					removeAttribute_KElement(keys, null);
+			}
+		}
+	}
+
+	/**
 	 * similar to getAttribute but returns null for all empty strings
 	 *
 	 * Gets an attribute value out of an element
