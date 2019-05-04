@@ -242,6 +242,17 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetIgnoreCase()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SignatureName, "v1");
+		assertEquals("v1", m1.getIgnoreCase("SignatureName".toLowerCase()));
+		assertNull(m1.getIgnoreCase("aaa"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetNonEmpty()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SignatureName, "");

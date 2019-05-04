@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -316,6 +316,23 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertEquals(am.get("foo:bar"), "foobar");
 		am = xm2.getAttributeMap();
 		assertEquals(am.get("foo:bar"), "foobar");
+	}
+
+	/**
+	 * test the the generalized partition matching
+	 */
+	@Test
+	public void testGetIgnoreCase()
+	{
+		final JDFNode root = new JDFDoc(ElementName.JDF).getJDFRoot();
+		root.setType(JDFNode.EnumType.ConventionalPrinting.getName(), true);
+		final JDFExposedMedia xm = (JDFExposedMedia) root.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.AnyInput, null);
+		xm.setProofType(JDFExposedMedia.EnumProofType.Page);
+
+		final JDFExposedMedia xm2 = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.SheetName, "S1");
+		assertEquals("Page", xm.getIgnoreCase("PROOFTYPE"));
+		assertEquals("Page", xm2.getIgnoreCase("PROOFTYPE"));
+		assertNull(xm2.getIgnoreCase_KElement("PROOFTYPE"));
 	}
 
 	/**
@@ -2273,8 +2290,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
 		for (int i = 0; i < 2222; i++)
 		{
-			xm.addPartition(EnumPartIDKey.SignatureName, "Sig" + i).addPartition(EnumPartIDKey.SheetName, "Sheet" + i).addPartition(EnumPartIDKey.Side, "Front")
-					.addPartition(EnumPartIDKey.Separation, "Black").appendElement(ElementName.MEDIA);
+			xm.addPartition(EnumPartIDKey.SignatureName, "Sig" + i).addPartition(EnumPartIDKey.SheetName, "Sheet"
+					+ i).addPartition(EnumPartIDKey.Side, "Front").addPartition(EnumPartIDKey.Separation, "Black").appendElement(ElementName.MEDIA);
 		}
 
 		final CPUTimer ct = new CPUTimer(false);

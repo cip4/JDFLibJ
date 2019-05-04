@@ -308,7 +308,35 @@ public class KElement extends ElementNSImpl implements Element
 	 * Gets an attribute value out of an element
 	 *
 	 * @param strLocalName the name of the attribute you want to have
-	 * @return String the value of the Attribute or emptystring
+	 * @return String the value of the Attribute or null
+	 */
+	public String getIgnoreCase(final String strLocalName)
+	{
+		final JDFAttributeMap map = getAttributeMap();
+		return map.getIgnoreCase(strLocalName);
+	}
+
+	/**
+	 * similar to getAttribute but returns null for all empty strings
+	 *
+	 * Gets an attribute value out of an element
+	 *
+	 * @param strLocalName the name of the attribute you want to have
+	 * @return String the value of the Attribute or null
+	 */
+	public String getIgnoreCase_KElement(final String strLocalName)
+	{
+		final JDFAttributeMap map = getAttributeMap_KElement();
+		return map.getIgnoreCase(strLocalName);
+	}
+
+	/**
+	 * similar to getAttribute but returns null for all empty strings
+	 *
+	 * Gets an attribute value out of an element
+	 *
+	 * @param strLocalName the name of the attribute you want to have
+	 * @return String the value of the Attribute or null
 	 */
 	public String getNonEmpty(final String strLocalName)
 	{
@@ -322,7 +350,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * Gets an attribute value out of an element
 	 *
 	 * @param strLocalName the name of the attribute you want to have
-	 * @return String the value of the Attribute or emptystring
+	 * @return String the value of the Attribute or null
 	 */
 	public String getNonEmpty_KElement(final String strLocalName)
 	{
@@ -623,7 +651,8 @@ public class KElement extends ElementNSImpl implements Element
 					namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), false);
 					if (!ContainerUtil.equals(namespaceURI2, nameSpaceURI))
 					{
-						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2 + "; attempting to set URI: " + nameSpaceURI;
+						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
+								+ "; attempting to set URI: " + nameSpaceURI;
 						kLog.error(message);
 						throw new JDFException(message);
 					}
@@ -736,13 +765,13 @@ public class KElement extends ElementNSImpl implements Element
 							// already there
 							if (key.equals(nodeName))
 							{ // overwrite default namespace with qualified
-								// namespace or vice versa
+									// namespace or vice versa
 								removeAttribute(nodeName);
 								super.setAttribute(key, value);
 							}
 							else
 							{ // same qualified name, simply overwrite the
-								// value
+									// value
 								a.setNodeValue(value);
 							}
 						}
@@ -751,8 +780,8 @@ public class KElement extends ElementNSImpl implements Element
 							final String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 							if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
 							{
-								throw new JDFException(
-										"KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2 + "; attempting to set URI: " + nameSpaceURI);
+								throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2
+										+ "; attempting to set URI: " + nameSpaceURI);
 							}
 							try
 							{

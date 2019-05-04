@@ -822,4 +822,22 @@ public class JDFAttributeMap extends HashMap<String, String>
 	{
 		return jdfAttributeMap == null || jdfAttributeMap.isEmpty();
 	}
+
+	/**
+	 *
+	 * @param strLocalName
+	 * @return
+	 */
+	public String getIgnoreCase(final String strLocalName)
+	{
+		if (!StringUtil.isEmpty(strLocalName))
+		{
+			for (final String key : keySet())
+			{
+				if (strLocalName.equalsIgnoreCase(key))
+					return get(key);
+			}
+		}
+		return null;
+	}
 }
