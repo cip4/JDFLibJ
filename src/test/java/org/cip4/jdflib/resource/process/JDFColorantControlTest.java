@@ -363,14 +363,17 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		assertEquals(2, leaf.getColorantAliasMap().size());
 	}
 
+	/**
+	 * we no longer check all leaves as these can be individualized
+	 */
 	@Test
 	public void testGetColorantAliasMapRec()
 	{
 		final JDFColorantControl cBlatt = (JDFColorantControl) colControl.addPartition(EnumPartIDKey.SheetName, "s1");
 		final JDFColorantAlias a1 = cBlatt.appendColorantAlias("s1", "t1");
 		final JDFColorantAlias a2 = cBlatt.appendColorantAlias("s2", "t2");
-		assertEquals("t2", colControl.getColorantAliasMap().get("s2"));
-		assertEquals(2, colControl.getColorantAliasMap().size());
+		assertEquals("t2", cBlatt.getColorantAliasMap().get("s2"));
+		assertEquals(2, cBlatt.getColorantAliasMap().size());
 
 	}
 

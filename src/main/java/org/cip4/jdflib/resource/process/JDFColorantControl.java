@@ -54,8 +54,6 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorantControl;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFSeparationList;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource;
@@ -289,24 +287,13 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	public JDFAttributeMap getColorantAliasMap()
 	{
 		final JDFAttributeMap map = new JDFAttributeMap();
-		if (isLeaf())
+		final Collection<JDFColorantAlias> vcc = getChildArrayByClass(JDFColorantAlias.class, false, 0);
+		for (final JDFColorantAlias ca : vcc)
 		{
-			final Collection<JDFColorantAlias> vcc = getChildrenByClass(JDFColorantAlias.class, false, 0);
-			for (final JDFColorantAlias ca : vcc)
-			{
-				final VString seps = ca.getSeparations();
-				final String target = ca.getReplacementColorantName();
-				for (final String sep : seps)
-					map.put(sep, target);
-			}
-		}
-		else
-		{
-			final VElement v = getLeaves(false);
-			for (final KElement e : v)
-			{
-				map.putAll(((JDFColorantControl) e).getColorantAliasMap());
-			}
+			final VString seps = ca.getSeparations();
+			final String target = ca.getReplacementColorantName();
+			for (final String sep : seps)
+				map.put(sep, target);
 		}
 		return map;
 	}
