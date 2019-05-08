@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -147,12 +147,54 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	}
 
 	@Test
+	public void testGetPosTime() throws DataFormatException
+	{
+		final JDFTransferFunction tf = new JDFTransferFunction("10 0.1 20 0.2 30 0.3 100 1.0");
+		final long t0 = System.currentTimeMillis();
+		for (int i = 0; i < 10000; i++)
+		{
+			assertEquals(0, tf.getPos(0, true));
+			assertEquals(-1, tf.getPos(0, false));
+			assertEquals(0, tf.getPos(10, false));
+			assertEquals(0, tf.getPos(10, true));
+			assertEquals(0, tf.getPos(15, false));
+			assertEquals(1, tf.getPos(15, true));
+			assertEquals(2, tf.getPos(55, false));
+			assertEquals(3, tf.getPos(55, true));
+			assertEquals(3, tf.getPos(100, true));
+			assertEquals(3, tf.getPos(100, false));
+			assertEquals(-1, tf.getPos(155, false));
+			assertEquals(-1, tf.getPos(155, true));
+		}
+		log.info(" t=" + (System.currentTimeMillis() - t0));
+	}
+
+	@Test
 	public void testGetVal() throws DataFormatException
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("0 0 10 0.1 20 0.2 30 0.3 100 1.0");
-		assertEquals(0, tf.getValue(0), 0);
-		for (int i = 0; i < 100; i++)
-			assertEquals(0.01 * i, tf.getValue(i), 0.000001);
+		final long t0 = System.currentTimeMillis();
+		for (int j = 0; j < 10000; j++)
+		{
+			assertEquals(0, tf.getValue(0), 0);
+			for (int i = 0; i < 100; i++)
+				assertEquals(0.01 * i, tf.getValue(i), 0.000001);
+		}
+		log.info(" t=" + (System.currentTimeMillis() - t0));
+	}
+
+	@Test
+	public void testGetFastVal() throws DataFormatException
+	{
+		final JDFTransferFunction tf = new JDFTransferFunction("0 0 10 0.1 20 0.2 30 0.3 100 1.0");
+		final long t0 = System.currentTimeMillis();
+		for (int j = 0; j < 100000; j++)
+		{
+			assertEquals(0, tf.getFastValue(0), 0);
+			for (int i = 0; i < 100; i++)
+				assertEquals(0.01 * i, tf.getFastValue(i), 0.000001);
+		}
+		log.info(" t=" + (System.currentTimeMillis() - t0));
 	}
 
 	@Test

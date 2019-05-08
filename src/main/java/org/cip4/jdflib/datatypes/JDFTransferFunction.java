@@ -77,6 +77,7 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import java.util.Collection;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
@@ -115,6 +116,7 @@ public class JDFTransferFunction extends JDFNumList
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
+	private double[] cache;
 
 	/**
 	 * constructs a xy pair with all values set to 0.0 Double
@@ -123,6 +125,7 @@ public class JDFTransferFunction extends JDFNumList
 	public JDFTransferFunction()
 	{
 		super();
+		cache = null;
 	}
 
 	/**
@@ -135,6 +138,7 @@ public class JDFTransferFunction extends JDFNumList
 	public JDFTransferFunction(final String s) throws DataFormatException
 	{
 		super(s);
+		cache = null;
 	}
 
 	/**
@@ -149,6 +153,7 @@ public class JDFTransferFunction extends JDFNumList
 	public JDFTransferFunction(final Vector v) throws DataFormatException
 	{
 		super(v);
+		cache = null;
 	}
 
 	/**
@@ -161,6 +166,7 @@ public class JDFTransferFunction extends JDFNumList
 	public JDFTransferFunction(final JDFNumList nl) throws DataFormatException
 	{
 		super(nl.toString());
+		cache = null;
 	}
 
 	/**
@@ -175,6 +181,7 @@ public class JDFTransferFunction extends JDFNumList
 	{
 		super();
 		addAll(tf);
+		cache = tf.cache;
 	}
 
 	// **************************************** Methods
@@ -233,6 +240,7 @@ public class JDFTransferFunction extends JDFNumList
 	 */
 	public void add(final double x, final double y)
 	{
+		cache = null;
 		add(Double.valueOf(x));
 		add(Double.valueOf(y));
 	}
@@ -271,7 +279,7 @@ public class JDFTransferFunction extends JDFNumList
 	}
 
 	/**
-	 * get the x value at index note that each index consumes 2 elements (the x and y value)
+	 * get the min and max value of X
 	 *
 	 * @param index
 	 * @return
@@ -290,6 +298,38 @@ public class JDFTransferFunction extends JDFNumList
 	public double getY(final int index)
 	{
 		return doubleAt(2 * index + 1);
+	}
+
+	/**
+	 * get the Y value at x-value x - we interpolate linearly from a cache
+	 *
+	 * @param index
+	 * @return
+	 */
+	public double getFastValue(final double x)
+	{
+		final JDFXYPair r = getXRange();
+		final double x0 = r.getX();
+		final double d = r.getY() - x0;
+		if (cache == null)
+		{
+			final double d1 = d * 0.001;
+			cache = new double[1001];
+			for (int i = 0; i <= 1000; i++)
+			{
+				cache[i] = getValue(x0 + i * d1);
+			}
+		}
+		final double dX = (x - x0) / (d * 0.001);
+		final int iX = (int) dX;
+		if (iX < 0)
+			return cache[0];
+		if (iX >= 1000)
+			return cache[1000];
+		final double mx = dX - iX;
+		if (mx == 0)
+			return cache[iX];
+		return cache[iX] + (cache[iX + 1] - cache[iX]) * 0.001 * mx;
 	}
 
 	/**
@@ -340,7 +380,7 @@ public class JDFTransferFunction extends JDFNumList
 	 */
 	int getPos(final double x, final boolean upper)
 	{
-		int numPoints = numPoints();
+		final int numPoints = numPoints();
 		for (int i = 0; i < numPoints; i++)
 		{
 			final double x2 = getX(i);
@@ -384,5 +424,41 @@ public class JDFTransferFunction extends JDFNumList
 	public void add(final JDFTransferFunction tf)
 	{
 		addAll(tf);
+		cache = null;
+	}
+
+	/**
+	 * @see java.util.Vector#add(java.lang.Object)
+	 */
+	@Override
+	public synchronized boolean add(final Object e)
+	{
+		cache = null;
+		return super.add(e);
+	}
+
+	/**
+	 * @see java.util.Vector#addAll(java.util.Collection)
+	 */
+	@Override
+	public synchronized boolean addAll(final Collection<? extends Object> c)
+	{
+		cache = null;
+		return super.addAll(c);
+	}
+
+	/**
+	 * @see java.util.Vector#clear()
+	 */
+	@Override
+	public void clear()
+	{
+		cache = null;
+		super.clear();
+	}
+
+	public void resetCache()
+	{
+		cache = null;
 	}
 }
