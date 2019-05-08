@@ -849,7 +849,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 */
 	public boolean subMap(final VJDFAttributeMap vMap)
 	{
-		if (vMap == null)
+		if (isEmpty(vMap))
 		{
 			return true;
 		}

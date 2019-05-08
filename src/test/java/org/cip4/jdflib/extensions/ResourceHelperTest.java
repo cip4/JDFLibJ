@@ -89,6 +89,39 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testMatchesEmpty()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
+		final ResourceHelper rh = sh.getCreatePartition(null, false);
+		final VJDFAttributeMap vmap = new VJDFAttributeMap();
+		assertTrue(rh.matches(new JDFAttributeMap()));
+		assertTrue(rh.matches(vmap));
+		vmap.add(new JDFAttributeMap());
+		assertTrue(rh.matches(vmap));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMatches()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
+		final ResourceHelper rh = sh.getCreatePartition(new JDFAttributeMap("Run", "r1"), false);
+		final VJDFAttributeMap vmap = new VJDFAttributeMap();
+		assertFalse(rh.matches(new JDFAttributeMap()));
+		assertFalse(rh.matches(vmap));
+		vmap.add(new JDFAttributeMap());
+		assertFalse(rh.matches(vmap));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetResource()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);

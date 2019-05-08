@@ -76,6 +76,21 @@ public class SetHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetEmpty()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
+		final ResourceHelper rh = sh.getCreatePartition(null, false);
+		final VJDFAttributeMap vmap = new VJDFAttributeMap();
+		assertEquals(rh, sh.getPartition(vmap));
+		vmap.add(new JDFAttributeMap());
+		assertEquals(rh, sh.getPartition(vmap));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetName()
 	{
 		final SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));

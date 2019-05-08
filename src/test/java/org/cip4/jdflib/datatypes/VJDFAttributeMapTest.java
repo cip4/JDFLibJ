@@ -98,11 +98,33 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		v.add(m2);
 		assertTrue(v.subMap(m1));
 		assertTrue(v.subMap(m2));
+		assertTrue(v.subMap(new JDFAttributeMap()));
+		assertTrue(v.subMap((JDFAttributeMap) null));
 		v.put("a3", "v4");
 		final JDFAttributeMap m3 = new JDFAttributeMap(m1);
 		assertTrue(v.subMap(m3));
 		m3.put("a3", "v5");
 		assertFalse(v.subMap(m3));
+	}
+
+	/**
+	 * tests subMap()
+	 */
+	@Test
+	public void testSubMapV()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		final JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		m2.put("a2", "v3");
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		v.add(m1);
+		v.add(m2);
+		final VJDFAttributeMap v2 = new VJDFAttributeMap();
+		v2.add(m1);
+		assertTrue(v.subMap(v2));
+		assertTrue(v.subMap(new VJDFAttributeMap()));
+		assertTrue(v.subMap((VJDFAttributeMap) null));
 	}
 
 	/**
