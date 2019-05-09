@@ -90,21 +90,31 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFNumberList extends JDFNumList
 {
+	public JDFNumberList(final double[] array)
+	{
+		super(array);
+	}
+
+	public JDFNumberList(final JDFNumList nl) throws DataFormatException
+	{
+		super(nl);
+	}
+
 	public JDFNumberList()
 	{
 		super();
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * constructs a number list with the given string
-	 * 
+	 *
 	 * @param s the given String
-	 * 
+	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFNumberList(final String s) throws DataFormatException
@@ -117,7 +127,7 @@ public class JDFNumberList extends JDFNumList
 	 * @param s the string to parse
 	 * @return the JDFNumberList, null if s is not compatible
 	 */
-	public static JDFNumberList createNumberList(String s)
+	public static JDFNumberList createNumberList(final String s)
 	{
 		if (s != null && s.length() > 0)
 		{
@@ -125,7 +135,7 @@ public class JDFNumberList extends JDFNumList
 			{
 				return new JDFNumberList(s);
 			}
-			catch (DataFormatException x)
+			catch (final DataFormatException x)
 			{
 				return null;
 			}
@@ -138,9 +148,9 @@ public class JDFNumberList extends JDFNumList
 
 	/**
 	 * constructs a number list with the given vector
-	 * 
+	 *
 	 * @param v the given vector
-	 * 
+	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 * @deprecated use typesafe constructors
 	 */
@@ -154,13 +164,13 @@ public class JDFNumberList extends JDFNumList
 	// *********************************************
 	/**
 	 * isValid - true if all instances are Double types
-	 * 
+	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
 	@Override
 	public boolean isValid() throws DataFormatException
 	{
-		for (Object o : this)
+		for (final Object o : this)
 		{
 			if (!(o instanceof Double))
 			{
@@ -172,7 +182,7 @@ public class JDFNumberList extends JDFNumList
 
 	/**
 	 * add - add a double value to the vector
-	 * 
+	 *
 	 * @param x the double value
 	 */
 	public void add(final double x)
@@ -182,9 +192,9 @@ public class JDFNumberList extends JDFNumList
 
 	/**
 	 * add - adds a number list to the already existing number list
-	 * 
+	 *
 	 * @param s the given string
-	 * 
+	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public void add(final String s) throws DataFormatException
@@ -203,7 +213,7 @@ public class JDFNumberList extends JDFNumList
 
 	/**
 	 * return true if at least one value in the list is d
-	 * 
+	 *
 	 * @param d the value to search
 	 * @return
 	 */

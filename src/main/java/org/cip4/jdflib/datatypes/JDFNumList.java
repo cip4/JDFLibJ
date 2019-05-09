@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -162,6 +162,34 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 		for (int i = 0; i < size; i++)
 		{
 			addElement(Double.valueOf(0.0));
+		}
+	}
+
+	/**
+	 * constructor - constructs a number list with the given size and sets all values set to 0.0 Double
+	 *
+	 * @param size the given size
+	 */
+	public JDFNumList(final int[] array)
+	{
+		super(array.length);
+		for (final int element : array)
+		{
+			addElement(element);
+		}
+	}
+
+	/**
+	 * constructor - constructs a number list with the given size and sets all values set to 0.0 Double
+	 *
+	 * @param size the given size
+	 */
+	public JDFNumList(final double[] array)
+	{
+		super(array.length);
+		for (final double element : array)
+		{
+			addElement(element);
 		}
 	}
 

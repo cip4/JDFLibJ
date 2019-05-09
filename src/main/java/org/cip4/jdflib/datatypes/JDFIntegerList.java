@@ -431,9 +431,9 @@ public class JDFIntegerList extends JDFNumList
 	public void setIntArray(final int[] iArray)
 	{
 		clear();
-		for (int i = 0; i < iArray.length; i++)
+		for (final int i : iArray)
 		{
-			add(Integer.valueOf(iArray[i]));
+			add(i);
 		}
 	}
 
