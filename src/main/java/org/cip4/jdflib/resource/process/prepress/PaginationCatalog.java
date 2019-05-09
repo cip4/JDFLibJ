@@ -104,62 +104,67 @@ public class PaginationCatalog
 		theMap = fill();
 	}
 
+	private void putMap(final String fc, final int rows, final int[] pages)
+	{
+		theMap.put(fc, new CatalogEntry(rows, pages));
+	}
+
 	private HashMap<String, CatalogEntry> fill()
 	{
 		theMap = new HashMap<>();
-		theMap.put("F2-1", new CatalogEntry(1, new int[] { 0 }));
+		putMap("F2-1", 1, new int[] { 0 });
 
-		theMap.put("F4-1", new CatalogEntry(1, new int[] { 1, 2 }));
-		theMap.put("F4-2", new CatalogEntry(1, new int[] { 3, 0 }));
+		putMap("F4-1", 1, new int[] { 1, 2 });
+		putMap("F4-2", 1, new int[] { 3, 0 });
 
-		theMap.put("F6-1", new CatalogEntry(1, new int[] { 4, 3, 0 }));
-		theMap.put("F6-2", new CatalogEntry(1, new int[] { 0, 3, 4 }));
-		theMap.put("F6-4", new CatalogEntry(1, new int[] { 2, 1, 4 }));
-		theMap.put("F6-5", new CatalogEntry(1, new int[] { 1, 4, 3 }));
-		theMap.put("F6-8", new CatalogEntry(1, new int[] { 5, 2, 1 }));
+		putMap("F6-1", 1, new int[] { 4, 3, 0 });
+		putMap("F6-2", 1, new int[] { 0, 3, 4 });
+		putMap("F6-4", 1, new int[] { 2, 1, 4 });
+		putMap("F6-5", 1, new int[] { 1, 4, 3 });
+		putMap("F6-8", 1, new int[] { 5, 2, 1 });
 
-		theMap.put("F8-1", new CatalogEntry(1, new int[] { 5, 2, 1, 6 }));
-		theMap.put("F8-2", new CatalogEntry(1, new int[] { 1, 6, 5, 2 }));
-		theMap.put("F8-3", new CatalogEntry(1, new int[] { 1, 6, 5, 2 }));
-		theMap.put("F8-4", new CatalogEntry(1, new int[] { 1, 2, 5, 6 }));
-		theMap.put("F8-5", new CatalogEntry(1, new int[] { 2, 1, 6, 5 }));
-		theMap.put("F8-6", new CatalogEntry(1, new int[] { 1, 6, 3, 4 }));
-		theMap.put("F8-7", new CatalogEntry(2, new int[] { 2, 1, 5, 6 }));
+		putMap("F8-1", 1, new int[] { 5, 2, 1, 6 });
+		putMap("F8-2", 1, new int[] { 1, 6, 5, 2 });
+		putMap("F8-3", 1, new int[] { 1, 6, 5, 2 });
+		putMap("F8-4", 1, new int[] { 1, 2, 5, 6 });
+		putMap("F8-5", 1, new int[] { 2, 1, 6, 5 });
+		putMap("F8-6", 1, new int[] { 1, 6, 3, 4 });
+		putMap("F8-7", 2, new int[] { 2, 1, 5, 6 });
 
-		theMap.put("F10-1", new CatalogEntry(1, new int[] { 8, 7, 4, 3, 0 }));
-		theMap.put("F10-2", new CatalogEntry(1, new int[] { 1, 8, 3, 6, 5 }));
-		theMap.put("F10-3", new CatalogEntry(1, new int[] { 1, 8, 7, 2, 5 }));
+		putMap("F10-1", 1, new int[] { 8, 7, 4, 3, 0 });
+		putMap("F10-2", 1, new int[] { 1, 8, 3, 6, 5 });
+		putMap("F10-3", 1, new int[] { 1, 8, 7, 2, 5 });
 
-		theMap.put("F12-1", new CatalogEntry(1, new int[] { 1, 10, 9, 2, 5, 6 }));
-		theMap.put("F12-2", new CatalogEntry(1, new int[] { 9, 2, 1, 10, 7, 4 }));
-		theMap.put("F12-3", new CatalogEntry(1, new int[] { 9, 6, 1, 2, 5, 10 }));
-		theMap.put("F12-4", new CatalogEntry(1, new int[] { 1, 10, 5, 6, 9, 2 }));
-		theMap.put("F12-5", new CatalogEntry(1, new int[] { 6, 1, 10, 9, 2, 5 }));
-		theMap.put("F12-6", new CatalogEntry(1, new int[] { 1, 2, 5, 6, 9, 10 }));
-		theMap.put("F12-7", new CatalogEntry(2, new int[] { 1, 2, 5, 10, 9, 6 }));
-		theMap.put("F12-8", new CatalogEntry(2, new int[] { 0, 3, 4, 11, 8, 7 }));
-		theMap.put("F12-9", new CatalogEntry(2, new int[] { 3, 4, 1, 8, 7, 10 }));
-		theMap.put("F12-10", new CatalogEntry(2, new int[] { 4, 1, 2, 7, 10, 9 }));
-		theMap.put("F12-11", new CatalogEntry(2, new int[] { 6, 5, 2, 9, 10, 1 }));
-		theMap.put("F12-12", new CatalogEntry(3, new int[] { 2, 1, 9, 10, 6, 5 }));
-		theMap.put("F12-13", new CatalogEntry(3, new int[] { 5, 6, 2, 1, 9, 10 }));
-		theMap.put("F12-14", new CatalogEntry(3, new int[] { 9, 10, 6, 5, 1, 2 }));
+		putMap("F12-1", 1, new int[] { 1, 10, 9, 2, 5, 6 });
+		putMap("F12-2", 1, new int[] { 9, 2, 1, 10, 7, 4 });
+		putMap("F12-3", 1, new int[] { 9, 6, 1, 2, 5, 10 });
+		putMap("F12-4", 1, new int[] { 1, 10, 5, 6, 9, 2 });
+		putMap("F12-5", 1, new int[] { 6, 1, 10, 9, 2, 5 });
+		putMap("F12-6", 1, new int[] { 1, 2, 5, 6, 9, 10 });
+		putMap("F12-7", 2, new int[] { 1, 2, 5, 10, 9, 6 });
+		putMap("F12-8", 2, new int[] { 0, 3, 4, 11, 8, 7 });
+		putMap("F12-9", 2, new int[] { 3, 4, 1, 8, 7, 10 });
+		putMap("F12-10", 2, new int[] { 4, 1, 2, 7, 10, 9 });
+		putMap("F12-11", 2, new int[] { 6, 5, 2, 9, 10, 1 });
+		putMap("F12-12", 3, new int[] { 2, 1, 9, 10, 6, 5 });
+		putMap("F12-13", 3, new int[] { 5, 6, 2, 1, 9, 10 });
+		putMap("F12-14", 3, new int[] { 9, 10, 6, 5, 1, 2 });
 
-		theMap.put("F14-1", new CatalogEntry(1, new int[] { 12, 11, 8, 7, 4, 3, 0 }));
+		putMap("F14-1", 1, new int[] { 12, 11, 8, 7, 4, 3, 0 });
 
-		theMap.put("F16-1", new CatalogEntry(1, new int[] { 9, 6, 1, 14, 13, 2, 5, 10 }));
-		theMap.put("F16-2", new CatalogEntry(1, new int[] { 1, 14, 9, 6, 5, 10, 13, 2 }));
-		theMap.put("F16-3", new CatalogEntry(1, new int[] { 5, 10, 13, 2, 1, 14, 9, 6 }));
-		theMap.put("F16-4", new CatalogEntry(1, new int[] { 13, 2, 5, 10, 9, 6, 1, 14 }));
-		theMap.put("F16-5", new CatalogEntry(1, new int[] { 15, 12, 11, 8, 7, 4, 3, 0 }));
-		theMap.put("F16-6", new CatalogEntry(2, new int[] { 5, 10, 9, 6, 2, 13, 14, 1 }));
-		theMap.put("F16-7", new CatalogEntry(2, new int[] { 13, 2, 1, 14, 10, 5, 6, 9 }));
-		theMap.put("F16-8", new CatalogEntry(2, new int[] { 9, 6, 5, 10, 15, 1, 2, 13 }));
-		theMap.put("F16-9", new CatalogEntry(2, new int[] { 6, 1, 2, 5, 9, 14, 13, 10 }));
-		theMap.put("F16-10", new CatalogEntry(2, new int[] { 2, 5, 6, 1, 13, 10, 9, 14 }));
-		theMap.put("F16-11", new CatalogEntry(2, new int[] { 6, 5, 2, 1, 9, 10, 13, 14 }));
-		theMap.put("F16-12", new CatalogEntry(2, new int[] { 4, 3, 6, 1, 11, 12, 9, 14 }));
-		theMap.put("F16-13", new CatalogEntry(4, new int[] { 2, 1, 13, 14, 10, 9, 5, 6 }));
+		putMap("F16-1", 1, new int[] { 9, 6, 1, 14, 13, 2, 5, 10 });
+		putMap("F16-2", 1, new int[] { 1, 14, 9, 6, 5, 10, 13, 2 });
+		putMap("F16-3", 1, new int[] { 5, 10, 13, 2, 1, 14, 9, 6 });
+		putMap("F16-4", 1, new int[] { 13, 2, 5, 10, 9, 6, 1, 14 });
+		putMap("F16-5", 1, new int[] { 15, 12, 11, 8, 7, 4, 3, 0 });
+		putMap("F16-6", 2, new int[] { 5, 10, 9, 6, 2, 13, 14, 1 });
+		putMap("F16-7", 2, new int[] { 13, 2, 1, 14, 10, 5, 6, 9 });
+		putMap("F16-8", 2, new int[] { 9, 6, 5, 10, 15, 1, 2, 13 });
+		putMap("F16-9", 2, new int[] { 6, 1, 2, 5, 9, 14, 13, 10 });
+		putMap("F16-10", 2, new int[] { 2, 5, 6, 1, 13, 10, 9, 14 });
+		putMap("F16-11", 2, new int[] { 6, 5, 2, 1, 9, 10, 13, 14 });
+		putMap("F16-12", 2, new int[] { 4, 3, 6, 1, 11, 12, 9, 14 });
+		putMap("F16-13", 4, new int[] { 2, 1, 13, 14, 10, 9, 5, 6 });
 
 		// TODO continue
 		return theMap;
@@ -180,5 +185,11 @@ public class PaginationCatalog
 	public String toString()
 	{
 		return "PaginationCatalog [" + (theMap != null ? "theMap=" + theMap : "") + "]";
+	}
+
+	public JDFIntegerList getFrontPages(final String fc)
+	{
+		final CatalogEntry catalogEntry = theMap.get(fc);
+		return catalogEntry == null ? null : catalogEntry.getFrontPages();
 	}
 }

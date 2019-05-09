@@ -38,6 +38,7 @@
 package org.cip4.jdflib.resource.process.prepress;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
@@ -48,6 +49,19 @@ public class PaginationCatalogTest
 	public void testconstruct()
 	{
 		assertNotNull(PaginationCatalog.instance());
+	}
+
+	@Test
+	public void testToString()
+	{
+		assertNotNull(PaginationCatalog.instance().toString());
+	}
+
+	@Test
+	public void testTgetFrontPages()
+	{
+		assertNotNull(PaginationCatalog.instance().getFrontPages("F4-2"));
+		assertNull(PaginationCatalog.instance().getFrontPages("ffff"));
 	}
 
 }
