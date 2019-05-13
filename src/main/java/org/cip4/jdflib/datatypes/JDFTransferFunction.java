@@ -311,25 +311,26 @@ public class JDFTransferFunction extends JDFNumList
 		final JDFXYPair r = getXRange();
 		final double x0 = r.getX();
 		final double d = r.getY() - x0;
+		final int FAST_POINTS = 100;
 		if (cache == null)
 		{
-			final double d1 = d * 0.001;
+			final double d1 = d / FAST_POINTS;
 			cache = new double[1001];
-			for (int i = 0; i <= 1000; i++)
+			for (int i = 0; i <= FAST_POINTS; i++)
 			{
 				cache[i] = getValue(x0 + i * d1);
 			}
 		}
-		final double dX = (x - x0) / (d * 0.001);
+		final double dX = (x - x0) / (d / FAST_POINTS);
 		final int iX = (int) dX;
 		if (iX < 0)
 			return cache[0];
-		if (iX >= 1000)
-			return cache[1000];
+		if (iX >= FAST_POINTS)
+			return cache[FAST_POINTS];
 		final double mx = dX - iX;
 		if (mx == 0)
 			return cache[iX];
-		return cache[iX] + (cache[iX + 1] - cache[iX]) * 0.001 * mx;
+		return cache[iX] + (cache[iX + 1] - cache[iX]) / FAST_POINTS * mx;
 	}
 
 	/**

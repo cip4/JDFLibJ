@@ -48,6 +48,8 @@
 
 package org.cip4.jdflib.core;
 
+import java.util.Collection;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoSeparationList;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
@@ -115,10 +117,10 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	public VString getSeparations()
 	{
 		final VString vName = new VString();
-		final VElement v = getChildElementVector(ElementName.SEPARATIONSPEC, null, null, false, 0, false);
-		for (final KElement e : v)
+		final Collection<JDFSeparationSpec> v = getAllSeparationSpec();
+		for (final JDFSeparationSpec e : v)
 		{
-			final JDFSeparationSpec sep = (JDFSeparationSpec) e;
+			final JDFSeparationSpec sep = e;
 			final String sepName = sep.getName();
 			vName.add(sepName);
 		}

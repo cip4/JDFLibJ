@@ -58,7 +58,7 @@ public class PaginationCatalogTest
 	}
 
 	@Test
-	public void testTgetFrontPages()
+	public void testgetFrontPages()
 	{
 		assertNotNull(PaginationCatalog.instance().getFrontPages("F4-2"));
 		assertNull(PaginationCatalog.instance().getFrontPages("ffff"));

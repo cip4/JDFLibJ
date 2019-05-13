@@ -187,6 +187,7 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	public void testGetFastVal() throws DataFormatException
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction("0 0 10 0.1 20 0.2 30 0.3 100 1.0");
+		tf.getFastValue(0);
 		final long t0 = System.currentTimeMillis();
 		for (int j = 0; j < 100000; j++)
 		{

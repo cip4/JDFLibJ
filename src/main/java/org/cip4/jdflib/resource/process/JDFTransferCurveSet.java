@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -47,7 +47,6 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoTransferCurveSet;
-import org.cip4.jdflib.core.KElement;
 import org.w3c.dom.DOMException;
 
 public class JDFTransferCurveSet extends JDFAutoTransferCurveSet
@@ -101,38 +100,41 @@ public class JDFTransferCurveSet extends JDFAutoTransferCurveSet
 
 	/**
 	 *
-	 * @param name
+	 * @param sepName
 	 * @return
 	 */
-	public JDFTransferCurve getCreateTransferCurve(final String name)
+	public JDFTransferCurve getCreateTransferCurve(final String sepName)
 	{
-		JDFTransferCurve tc = getTransferCurve(name);
-		if (tc == null || !this.equals(tc.getParentNode()))
+		JDFTransferCurve tc = getTransferCurve(sepName);
+		if (tc == null || !this.equals(tc.getParentNode()) || !isWildCard(sepName) && isWildCard(tc.getSeparation()))
 		{
 			tc = appendTransferCurve();
-			tc.setSeparation(name);
+			tc.setSeparation(sepName);
 		}
 		return tc;
 	}
 
 	/**
 	 *
-	 * @param name
+	 * @param sepName
 	 * @return
 	 */
-	public JDFTransferCurve getTransferCurve(final String name)
+	public JDFTransferCurve getTransferCurve(final String sepName)
 	{
+		JDFTransferCurve wildcard = null;
 		for (int i = 0; true; i++)
 		{
 			final JDFTransferCurve tc = getTransferCurve(i);
 			if (tc == null)
 				break;
-			if (KElement.isWildCard(name) || name.equals(tc.getSeparation()))
+			if (isWildCard(sepName) || sepName.equals(tc.getSeparation()))
 			{
 				return tc;
 			}
+			if (isWildCard(tc.getSeparation()))
+				wildcard = tc;
 		}
-		return null;
+		return wildcard;
 	}
 
 }

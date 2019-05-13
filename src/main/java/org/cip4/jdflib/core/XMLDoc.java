@@ -534,47 +534,54 @@ public class XMLDoc implements Cloneable
 	 */
 	public void write2Stream(final OutputStream outStream, final int indent, final boolean bPreserveSpace) throws IOException
 	{
-		for (int i = 1; true; i++)
+		if (outStream == null)
 		{
-			try
+			log.error("Cannot write to null stream");
+		}
+		else
+		{
+			for (int i = 1; true; i++)
 			{
-				final OutputFormat format = new OutputFormat(m_doc);
+				try
+				{
+					final OutputFormat format = new OutputFormat(m_doc);
 
-				if (bPreserveSpace)
-				{
-					format.setPreserveSpace(true);
-				}
+					if (bPreserveSpace)
+					{
+						format.setPreserveSpace(true);
+					}
 
-				if (indent < 1)
-				{
-					format.setIndenting(false);
-				}
-				else
-				{
-					format.setIndenting(true);
-					format.setIndent(indent);
-					// TODO remove schema defaulted attributes when serializing
-				}
+					if (indent < 1)
+					{
+						format.setIndenting(false);
+					}
+					else
+					{
+						format.setIndenting(true);
+						format.setIndent(indent);
+						// TODO remove schema defaulted attributes when serializing
+					}
 
-				final XMLSerializer serial = new XMLSerializer(outStream, format);
-				// serial.setNamespaces(false); // ###DOM_1_nodes
-				serial.setNamespaces(true);
-				serial.asDOMSerializer();
-				synchronized (m_doc)
-				{
-					serial.serialize(m_doc);
+					final XMLSerializer serial = new XMLSerializer(outStream, format);
+					// serial.setNamespaces(false); // ###DOM_1_nodes
+					serial.setNamespaces(true);
+					serial.asDOMSerializer();
+					synchronized (m_doc)
+					{
+						serial.serialize(m_doc);
+					}
+					return; // all is well here
 				}
-				return; // all is well here
-			}
-			catch (final Exception x)
-			{
-				if (i >= 5)
+				catch (final Exception x)
 				{
-					log.error("writing to Stream, bailing out after " + i + " attempts", x);
-					throw x; // try n times, else ciao
+					if (i >= 5)
+					{
+						log.error("writing to Stream, bailing out after " + i + " attempts", x);
+						throw x; // try n times, else ciao
+					}
+					ThreadUtil.sleep((100 * i));
+					log.warn("retry exception #" + i + " for writing to stream; original XML file=" + getOriginalFileName(), x);
 				}
-				ThreadUtil.sleep((100 * i));
-				log.warn("retry exception #" + i + " for writing to stream; original XML file=" + getOriginalFileName(), x);
 			}
 		}
 	}

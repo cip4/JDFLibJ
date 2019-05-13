@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -39,6 +39,7 @@
 package org.cip4.jdflib.resource.process;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -71,6 +72,23 @@ public class JDFTransferCurveSetTest extends JDFTestCaseBase
 		assertEquals(tc, p.getCreateTransferCurve("Cyan"));
 		assertEquals(tc, p.getTransferCurve("Cyan"));
 		assertNull(p.getTransferCurve("Magenta"));
+		assertEquals(tc, p.getTransferCurve("*"));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetTransfercurveEmpty()
+	{
+		final JDFTransferCurveSet p = (JDFTransferCurveSet) new JDFDoc(ElementName.TRANSFERCURVESET).getRoot();
+		assertNull(p.getTransferCurve(null));
+		final JDFTransferCurve tc = p.getCreateTransferCurve("*");
+		final JDFTransferCurve tcc = p.getCreateTransferCurve("Cyan");
+		assertNotEquals(tc, tcc);
+		assertEquals(tcc, p.getTransferCurve("Cyan"));
+		assertEquals(tc, p.getTransferCurve("Green"));
 		assertEquals(tc, p.getTransferCurve("*"));
 
 	}
