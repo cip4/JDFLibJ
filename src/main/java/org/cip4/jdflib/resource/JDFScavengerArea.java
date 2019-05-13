@@ -162,15 +162,14 @@ public class JDFScavengerArea extends JDFAutoScavengerArea
 	 */
 	public VString getSeparations()
 	{
-		final VString vName = new VString();
+		final VString vs = new VString();
 		final Collection<JDFSeparationSpec> v = getAllSeparationSpec();
-		for (final JDFSeparationSpec e : v)
+		for (final JDFSeparationSpec s : v)
 		{
-			final JDFSeparationSpec sep = e;
-			final String sepName = sep.getName();
-			vName.add(sepName);
+			final String sepName = s.getName();
+			vs.add(sepName);
 		}
-		return vName;
+		return vs;
 	}
 
 	/**
@@ -191,9 +190,9 @@ public class JDFScavengerArea extends JDFAutoScavengerArea
 	 */
 	public JDFSeparationSpec appendSeparation(final String sep)
 	{
-		final JDFSeparationSpec separationSpec = appendSeparationSpec();
-		separationSpec.setName(sep);
-		return separationSpec;
+		final JDFSeparationSpec ss = appendSeparationSpec();
+		ss.setName(sep);
+		return ss;
 	}
 
 	/**

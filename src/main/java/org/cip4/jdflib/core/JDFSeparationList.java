@@ -118,9 +118,8 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	{
 		final VString vName = new VString();
 		final Collection<JDFSeparationSpec> v = getAllSeparationSpec();
-		for (final JDFSeparationSpec e : v)
+		for (final JDFSeparationSpec sep : v)
 		{
-			final JDFSeparationSpec sep = e;
 			final String sepName = sep.getName();
 			vName.add(sepName);
 		}
@@ -161,12 +160,12 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	 */
 	public void ensureSeparations(final VString vSeps)
 	{
-		if (vSeps == null)
-			return;
-
-		for (final String sep : vSeps)
+		if (vSeps != null)
 		{
-			getCreateSeparation(sep);
+			for (final String sep : vSeps)
+			{
+				getCreateSeparation(sep);
+			}
 		}
 	}
 
@@ -187,11 +186,10 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	 */
 	public JDFSeparationSpec getCreateSeparation(final String sep)
 	{
-		JDFSeparationSpec separationSpec = getSeparationSpec(sep);
+		final JDFSeparationSpec separationSpec = getSeparationSpec(sep);
 		if (separationSpec == null)
 		{
-			separationSpec = appendSeparationSpec();
-			separationSpec.setName(sep);
+			return appendSeparation(sep);
 		}
 		return separationSpec;
 	}
