@@ -462,4 +462,44 @@ public class JDFTransferFunction extends JDFNumList
 	{
 		cache = null;
 	}
+
+	/**
+	 * multiplies a complete transfer function to the vector only useful for 0-1 ranged transfer functions
+	 *
+	 * @param tf the given transfer function to add
+	 */
+	public void multiply(final JDFTransferFunction tf)
+	{
+		if (tf != null)
+		{
+			final JDFNumberList xPoints = new JDFNumberList();
+			int j = 0;
+			for (int i = 0; i < numPoints(); i++)
+			{
+				while (j < tf.numPoints() && tf.getX(j) <= getX(i))
+				{
+					if (tf.getX(j) < getX(i))
+					{
+						xPoints.add(tf.getX(j));
+					}
+					j++;
+				}
+				xPoints.add(getX(i));
+
+			}
+			final JDFTransferFunction t = new JDFTransferFunction();
+			for (int i = 0; i < xPoints.size(); i++)
+			{
+				final double x = xPoints.doubleAt(i);
+				double y = getValue(x) * tf.getValue(x);
+				if (x > 0)
+				{
+					y /= x;
+				}
+				t.add(x, y);
+			}
+			clear();
+			addAll(t);
+		}
+	}
 }

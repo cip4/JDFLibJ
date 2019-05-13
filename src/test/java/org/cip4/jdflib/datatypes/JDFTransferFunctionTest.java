@@ -223,4 +223,16 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 		assertEquals(0, tf.getXRange().getY(), 0);
 	}
 
+	@Test
+	public void testMultiply() throws DataFormatException
+	{
+		final JDFTransferFunction tf = new JDFTransferFunction("0 0 1 2.0");
+		final JDFTransferFunction tf2 = new JDFTransferFunction("0 0 0.5 0.4 1 1.0");
+		tf.multiply(tf2);
+		assertEquals(3, tf.numPoints());
+		assertEquals(0.0, tf.getValue(0.0), 0);
+		assertEquals(0.8, tf.getValue(0.5), 0);
+		assertEquals(2.0, tf.getValue(1.0), 0);
+
+	}
 }
