@@ -177,8 +177,19 @@ public class JDFXYPair extends JDFNumList
 		set(1, Double.valueOf(y));
 	}
 
-	// **************************************** Methods
-	// *********************************************
+	/**
+	 * constructs a new JDFXYPair with the given double values
+	 *
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 */
+	public JDFXYPair(final int x, final int y)
+	{
+		super(MAX_XY_DIMENSION);
+		set(0, Integer.valueOf(x));
+		set(1, Integer.valueOf(y));
+	}
+
 	/**
 	 * isValid - valid if the size of the vector is 2 and all instances are Double types
 	 *

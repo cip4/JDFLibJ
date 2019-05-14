@@ -917,6 +917,58 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	}
 
 	/**
+	 * return the absolute norm (sqrt of sum of values)
+	 *
+	 * @return
+	 */
+	public double min()
+	{
+		double min = Double.MAX_VALUE;
+		final int size = size();
+		for (int i = 0; i < size; i++)
+		{
+			final double di = doubleAt(i);
+			if (di < min)
+				min = di;
+		}
+		return min;
+	}
+
+	/**
+	 * return the absolute norm (sqrt of sum of values)
+	 *
+	 * @return
+	 */
+	public JDFNumList shift(final double x)
+	{
+		final int size = size();
+		for (int i = 0; i < size; i++)
+		{
+			final double di = doubleAt(i);
+			set(i, di + x);
+		}
+		return this;
+	}
+
+	/**
+	 * return the absolute norm (sqrt of sum of values)
+	 *
+	 * @return
+	 */
+	public double max()
+	{
+		double max = Double.MIN_VALUE;
+		final int size = size();
+		for (int i = 0; i < size; i++)
+		{
+			final double di = doubleAt(i);
+			if (di > max)
+				max = di;
+		}
+		return max;
+	}
+
+	/**
 	 * return the n dimensional volume (product of all values)
 	 *
 	 * @return

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -223,6 +223,19 @@ public class JDFNumListTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public final void testShift()
+	{
+		final JDFShape s = new JDFShape(10.5, 20.5, 5.5);
+		s.shift(4.5);
+		assertEquals(15, s.getX(), 0);
+		assertEquals(25, s.getY(), 0);
+		assertEquals(10, s.getZ(), 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public final void testScaleFromMM()
 	{
 		final JDFShape s = new JDFShape(100, 200, 50);
@@ -383,6 +396,28 @@ public class JDFNumListTest extends JDFTestCaseBase
 		final JDFNumberList nl2 = new JDFNumberList("-3 4");
 		assertEquals(nl.norm(), nl2.norm(), 0.0001);
 		assertEquals(nl.norm(), 5, 0.0);
+	}
+
+	/**
+	 * @throws Exception
+	 *
+	 */
+	@Test
+	public void testMin() throws Exception
+	{
+		final JDFNumberList nl = new JDFNumberList("4 3 8 7 ");
+		assertEquals(3, nl.min(), 0);
+	}
+
+	/**
+	 * @throws Exception
+	 *
+	 */
+	@Test
+	public void testMax() throws Exception
+	{
+		final JDFNumberList nl = new JDFNumberList("4 3 8 7 -15");
+		assertEquals(8, nl.max(), 0);
 	}
 
 	/**

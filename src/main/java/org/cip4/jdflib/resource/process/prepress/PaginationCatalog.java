@@ -37,21 +37,24 @@
  */
 package org.cip4.jdflib.resource.process.prepress;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.util.ContainerUtil;
 
 public class PaginationCatalog
 {
 	class CatalogEntry
 	{
-		public CatalogEntry(final int rows, final int[] frontPages)
+		CatalogEntry(final int rows, final int[] frontPages)
 		{
 			super();
 			this.frontPages = new int[frontPages.length / rows][rows];
 			for (int i = 0; i < frontPages.length; i++)
 			{
-				this.frontPages[i / rows][i % rows] = frontPages[i];
+				this.frontPages[i / rows][i % rows] = frontPages[i] - 1;
 			}
 		}
 
@@ -106,65 +109,102 @@ public class PaginationCatalog
 
 	private void putMap(final String fc, final int rows, final int[] pages)
 	{
-		theMap.put(fc, new CatalogEntry(rows, pages));
+		theMap.put(fc.toLowerCase(), new CatalogEntry(rows, pages));
 	}
 
 	private HashMap<String, CatalogEntry> fill()
 	{
 		theMap = new HashMap<>();
-		putMap("F2-1", 1, new int[] { 0 });
+		putMap("F2-1", 1, new int[] { 1 });
 
-		putMap("F4-1", 1, new int[] { 1, 2 });
-		putMap("F4-2", 1, new int[] { 3, 0 });
+		putMap("F4-1", 1, new int[] { 2, 3 });
+		putMap("F4-2", 1, new int[] { 4, 1 });
 
-		putMap("F6-1", 1, new int[] { 4, 3, 0 });
-		putMap("F6-2", 1, new int[] { 0, 3, 4 });
-		putMap("F6-4", 1, new int[] { 2, 1, 4 });
-		putMap("F6-5", 1, new int[] { 1, 4, 3 });
-		putMap("F6-8", 1, new int[] { 5, 2, 1 });
+		putMap("F6-1", 1, new int[] { 5, 4, 1 });
+		putMap("F6-2", 1, new int[] { 1, 4, 5 });
+		putMap("F6-4", 1, new int[] { 3, 2, 5 });
+		putMap("F6-5", 1, new int[] { 2, 5, 4 });
+		putMap("F6-8", 1, new int[] { 6, 3, 2 });
 
-		putMap("F8-1", 1, new int[] { 5, 2, 1, 6 });
-		putMap("F8-2", 1, new int[] { 1, 6, 5, 2 });
-		putMap("F8-3", 1, new int[] { 1, 6, 5, 2 });
-		putMap("F8-4", 1, new int[] { 1, 2, 5, 6 });
-		putMap("F8-5", 1, new int[] { 2, 1, 6, 5 });
-		putMap("F8-6", 1, new int[] { 1, 6, 3, 4 });
-		putMap("F8-7", 2, new int[] { 2, 1, 5, 6 });
+		putMap("F8-1", 1, new int[] { 6, 3, 2, 7 });
+		putMap("F8-2", 1, new int[] { 2, 7, 6, 3 });
+		putMap("F8-3", 1, new int[] { 2, 3, 6, 7 });
+		putMap("F8-4", 1, new int[] { 3, 2, 7, 6 });
+		putMap("F8-5", 1, new int[] { 4, 5, 2, 7 });
+		putMap("F8-6", 1, new int[] { 2, 7, 4, 5 });
+		putMap("F8-7", 2, new int[] { 3, 2, 6, 7 });
 
-		putMap("F10-1", 1, new int[] { 8, 7, 4, 3, 0 });
-		putMap("F10-2", 1, new int[] { 1, 8, 3, 6, 5 });
-		putMap("F10-3", 1, new int[] { 1, 8, 7, 2, 5 });
+		putMap("F10-1", 1, new int[] { 9, 8, 5, 4, 1 });
+		putMap("F10-2", 1, new int[] { 2, 9, 4, 7, 6 });
+		putMap("F10-3", 1, new int[] { 2, 9, 8, 3, 6 });
 
-		putMap("F12-1", 1, new int[] { 1, 10, 9, 2, 5, 6 });
-		putMap("F12-2", 1, new int[] { 9, 2, 1, 10, 7, 4 });
-		putMap("F12-3", 1, new int[] { 9, 6, 1, 2, 5, 10 });
-		putMap("F12-4", 1, new int[] { 1, 10, 5, 6, 9, 2 });
-		putMap("F12-5", 1, new int[] { 6, 1, 10, 9, 2, 5 });
-		putMap("F12-6", 1, new int[] { 1, 2, 5, 6, 9, 10 });
-		putMap("F12-7", 2, new int[] { 1, 2, 5, 10, 9, 6 });
-		putMap("F12-8", 2, new int[] { 0, 3, 4, 11, 8, 7 });
-		putMap("F12-9", 2, new int[] { 3, 4, 1, 8, 7, 10 });
-		putMap("F12-10", 2, new int[] { 4, 1, 2, 7, 10, 9 });
-		putMap("F12-11", 2, new int[] { 6, 5, 2, 9, 10, 1 });
-		putMap("F12-12", 3, new int[] { 2, 1, 9, 10, 6, 5 });
-		putMap("F12-13", 3, new int[] { 5, 6, 2, 1, 9, 10 });
-		putMap("F12-14", 3, new int[] { 9, 10, 6, 5, 1, 2 });
+		putMap("F12-1", 1, new int[] { 2, 11, 10, 3, 6, 7 });
+		putMap("F12-2", 1, new int[] { 10, 3, 2, 11, 8, 5 });
+		putMap("F12-3", 1, new int[] { 10, 7, 2, 3, 6, 11 });
+		putMap("F12-4", 1, new int[] { 2, 11, 6, 7, 10, 3 });
+		putMap("F12-5", 1, new int[] { 7, 2, 11, 10, 3, 6 });
+		putMap("F12-6", 1, new int[] { 2, 3, 6, 7, 10, 11 });
+		putMap("F12-7", 2, new int[] { 2, 3, 6, 11, 10, 7 });
+		putMap("F12-8", 2, new int[] { 1, 4, 5, 12, 9, 8 });
+		putMap("F12-9", 2, new int[] { 4, 5, 2, 9, 8, 11 });
+		putMap("F12-10", 2, new int[] { 5, 2, 3, 8, 11, 10 });
+		putMap("F12-11", 2, new int[] { 7, 6, 3, 10, 11, 2 });
+		putMap("F12-12", 3, new int[] { 3, 2, 10, 11, 7, 6 });
+		putMap("F12-13", 3, new int[] { 6, 7, 3, 2, 10, 11 });
+		putMap("F12-14", 3, new int[] { 10, 11, 7, 6, 2, 3 });
 
-		putMap("F14-1", 1, new int[] { 12, 11, 8, 7, 4, 3, 0 });
+		putMap("F14-1", 1, new int[] { 13, 12, 9, 8, 5, 4, 1 });
 
-		putMap("F16-1", 1, new int[] { 9, 6, 1, 14, 13, 2, 5, 10 });
-		putMap("F16-2", 1, new int[] { 1, 14, 9, 6, 5, 10, 13, 2 });
-		putMap("F16-3", 1, new int[] { 5, 10, 13, 2, 1, 14, 9, 6 });
-		putMap("F16-4", 1, new int[] { 13, 2, 5, 10, 9, 6, 1, 14 });
-		putMap("F16-5", 1, new int[] { 15, 12, 11, 8, 7, 4, 3, 0 });
-		putMap("F16-6", 2, new int[] { 5, 10, 9, 6, 2, 13, 14, 1 });
-		putMap("F16-7", 2, new int[] { 13, 2, 1, 14, 10, 5, 6, 9 });
-		putMap("F16-8", 2, new int[] { 9, 6, 5, 10, 15, 1, 2, 13 });
-		putMap("F16-9", 2, new int[] { 6, 1, 2, 5, 9, 14, 13, 10 });
-		putMap("F16-10", 2, new int[] { 2, 5, 6, 1, 13, 10, 9, 14 });
-		putMap("F16-11", 2, new int[] { 6, 5, 2, 1, 9, 10, 13, 14 });
-		putMap("F16-12", 2, new int[] { 4, 3, 6, 1, 11, 12, 9, 14 });
-		putMap("F16-13", 4, new int[] { 2, 1, 13, 14, 10, 9, 5, 6 });
+		putMap("F16-1", 1, new int[] { 10, 7, 2, 15, 14, 3, 6, 11 });
+		putMap("F16-2", 1, new int[] { 2, 15, 10, 7, 6, 11, 14, 3 });
+		putMap("F16-3", 1, new int[] { 6, 11, 14, 3, 2, 15, 10, 7 });
+		putMap("F16-4", 1, new int[] { 14, 3, 6, 11, 10, 7, 2, 15 });
+		putMap("F16-5", 1, new int[] { 16, 13, 12, 9, 8, 5, 4, 1 });
+		putMap("F16-6", 2, new int[] { 6, 11, 10, 7, 3, 14, 15, 2 });
+		putMap("F16-7", 2, new int[] { 14, 3, 2, 15, 11, 6, 7, 10 });
+		putMap("F16-8", 2, new int[] { 10, 7, 6, 11, 16, 2, 3, 14 });
+		putMap("F16-9", 2, new int[] { 7, 2, 3, 6, 10, 15, 14, 11 });
+		putMap("F16-10", 2, new int[] { 3, 6, 7, 2, 14, 11, 10, 15 });
+		putMap("F16-11", 2, new int[] { 7, 6, 3, 2, 10, 11, 14, 15 });
+		putMap("F16-12", 2, new int[] { 5, 4, 7, 2, 12, 13, 10, 15 });
+		putMap("F16-13", 4, new int[] { 3, 2, 14, 15, 11, 10, 6, 7 });
+
+		putMap("F18-1", 1, new int[] { 17, 16, 13, 12, 9, 8, 5, 4, 1 });
+		putMap("F18-2", 1, new int[] { 2, 11, 14, 17, 8, 5, 4, 9, 16 });
+		putMap("F18-3", 1, new int[] { 2, 17, 8, 9, 16, 3, 6, 13, 12 });
+		putMap("F18-4", 1, new int[] { 17, 8, 5, 4, 9, 16, 13, 12, 1 });
+		putMap("F18-5", 3, new int[] { 17, 16, 13, 8, 9, 12, 5, 4, 1 });
+		putMap("F18-6", 3, new int[] { 2, 3, 6, 17, 16, 13, 8, 9, 12 });
+		putMap("F18-7", 3, new int[] { 15, 14, 17, 10, 11, 8, 3, 2, 5 });
+		putMap("F18-8", 3, new int[] { 4, 5, 2, 15, 14, 17, 10, 11, 8 });
+		putMap("F18-9", 3, new int[] { 13, 16, 17, 12, 9, 8, 1, 4, 5 });
+
+		putMap("F20-1", 2, new int[] { 9, 2, 3, 8, 5, 12, 19, 18, 13, 16 });
+		putMap("F20-2", 2, new int[] { 2, 3, 6, 7, 10, 19, 18, 15, 14, 11 });
+
+		putMap("F24-1", 2, new int[] { 14, 11, 10, 15, 18, 7, 23, 2, 3, 22, 19, 6 });
+		putMap("F24-2", 2, new int[] { 16, 9, 8, 17, 14, 11, 21, 4, 5, 20, 23, 2 });
+		putMap("F24-3", 2, new int[] { 11, 2, 3, 10, 7, 6, 14, 23, 22, 15, 18, 19 });
+		putMap("F24-4", 2, new int[] { 5, 8, 9, 4, 1, 12, 20, 17, 16, 21, 24, 13 });
+		putMap("F24-5", 2, new int[] { 3, 10, 11, 2, 5, 8, 22, 15, 14, 23, 20, 17 });
+		putMap("F24-6", 2, new int[] { 11, 10, 7, 6, 3, 2, 14, 15, 18, 19, 22, 23 });
+		putMap("F24-7", 2, new int[] { 6, 19, 18, 7, 10, 15, 3, 22, 23, 2, 11, 14 });
+		putMap("F24-8", 4, new int[] { 2, 3, 6, 23, 22, 19, 14, 15, 18, 11, 10, 7 });
+		putMap("F24-9", 4, new int[] { 1, 4, 5, 24, 21, 20, 13, 16, 17, 12, 9, 8 });
+		putMap("F24-10", 4, new int[] { 4, 5, 2, 21, 20, 23, 16, 17, 14, 9, 8, 11 });
+		putMap("F24-11", 3, new int[] { 10, 15, 14, 11, 3, 22, 23, 2, 6, 19, 18, 7 });
+
+		putMap("F28-1", 2, new int[] { 2, 3, 6, 7, 10, 11, 14, 27, 26, 23, 22, 19, 18, 15 });
+
+		putMap("F32-1", 1, new int[] { 10, 23, 26, 7, 2, 31, 18, 15, 14, 19, 30, 3, 6, 27, 22, 11 });
+		putMap("F32-2", 2, new int[] { 10, 23, 18, 15, 14, 19, 22, 11, 7, 26, 31, 2, 3, 30, 27, 6 });
+		putMap("F32-3", 2, new int[] { 26, 7, 2, 31, 30, 3, 6, 27, 23, 10, 15, 18, 19, 14, 11, 22 });
+		putMap("F32-4", 4, new int[] { 27, 22, 23, 26, 6, 11, 10, 7, 3, 14, 15, 2, 30, 19, 18, 31 });
+		putMap("F32-5", 4, new int[] { 3, 14, 15, 2, 30, 19, 18, 31, 27, 22, 23, 26, 6, 11, 10, 7 });
+		putMap("F32-6", 4, new int[] { 11, 6, 7, 10, 22, 27, 26, 23, 19, 30, 31, 18, 14, 3, 2, 15 });
+		putMap("F32-7", 4, new int[] { 7, 6, 3, 2, 26, 27, 30, 31, 23, 22, 19, 18, 10, 11, 14, 15 });
+		putMap("F32-8", 4, new int[] { 7, 2, 3, 6, 26, 31, 30, 27, 23, 18, 19, 22, 10, 15, 14, 11 });
+		putMap("F32-9", 4, new int[] { 14, 19, 18, 15, 3, 30, 31, 2, 6, 27, 26, 7, 11, 22, 23, 10 });
 
 		// TODO continue
 		return theMap;
@@ -187,9 +227,47 @@ public class PaginationCatalog
 		return "PaginationCatalog [" + (theMap != null ? "theMap=" + theMap : "") + "]";
 	}
 
+	/**
+	 *
+	 * @param fc
+	 * @return
+	 */
 	public JDFIntegerList getFrontPages(final String fc)
 	{
-		final CatalogEntry catalogEntry = theMap.get(fc);
+		final CatalogEntry catalogEntry = getEntry(fc);
 		return catalogEntry == null ? null : catalogEntry.getFrontPages();
+	}
+
+	/**
+	 *
+	 * @param fc
+	 * @return
+	 */
+	public JDFIntegerList getBackPages(final String fc)
+	{
+		final CatalogEntry catalogEntry = getEntry(fc);
+		return catalogEntry == null ? null : catalogEntry.getBackPages();
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public Collection<String> getKeys()
+	{
+		return ContainerUtil.getKeyArray(theMap);
+	}
+
+	public JDFXYPair getNUp(final String fc)
+	{
+		final CatalogEntry catalogEntry = getEntry(fc);
+		return catalogEntry == null ? null : new JDFXYPair(catalogEntry.frontPages.length, catalogEntry.frontPages[0].length);
+	}
+
+	CatalogEntry getEntry(final String fc)
+	{
+		if (fc == null)
+			return null;
+		return theMap.get(fc.toLowerCase());
 	}
 }

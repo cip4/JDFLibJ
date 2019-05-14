@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -128,6 +128,19 @@ public class JDFIntegerListTest extends JDFTestCaseBase
 		l.addX(4).add(5);
 		assertEquals(4, l.get(1));
 		assertEquals(3, l.size());
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testShift()
+	{
+		final JDFIntegerList l = new JDFIntegerList(1);
+		l.addX(4).shift(10);
+		assertEquals(11, l.get(0));
+		assertEquals(14, l.get(1));
+		assertEquals(2, l.size());
 	}
 
 	/**

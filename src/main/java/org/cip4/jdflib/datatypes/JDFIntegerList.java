@@ -404,6 +404,22 @@ public class JDFIntegerList extends JDFNumList
 	}
 
 	/**
+	 * must keep this because otherwise the object vector gets corrupted with Double objects
+	 *
+	 * @see org.cip4.jdflib.datatypes.JDFNumList#scale(double)
+	 */
+	public JDFIntegerList shift(final int shift)
+	{
+		final int[] a = getIntArray();
+		for (int i = 0; i < a.length; i++)
+		{
+			a[i] += shift;
+		}
+		setIntArray(a);
+		return this;
+	}
+
+	/**
 	 * getIntArray - returns this integer list as an int array
 	 *
 	 * @return int[] - the int array

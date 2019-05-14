@@ -44,6 +44,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -372,6 +374,28 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		final Vector<String> v = ContainerUtil.getKeyVector(hm);
 		assertEquals(v.size(), 10);
 		final Vector<String> vs = ContainerUtil.getKeyVector(hm);
+		assertTrue(vs.containsAll(v));
+		assertTrue(v.containsAll(vs));
+		for (int i = 0; i < 10; i++)
+		{
+			assertTrue(v.contains("" + i));
+		}
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetKeyArray()
+	{
+		final HashMap<String, String> hm = new HashMap<>();
+		for (int i = 0; i < 10; i++)
+		{
+			hm.put("" + i, "a" + i);
+		}
+		final Collection<String> v = ContainerUtil.getKeyArray(hm);
+		assertEquals(v.size(), 10);
+		final ArrayList<String> vs = (ArrayList<String>) ContainerUtil.getKeyArray(hm);
 		assertTrue(vs.containsAll(v));
 		assertTrue(v.containsAll(vs));
 		for (int i = 0; i < 10; i++)

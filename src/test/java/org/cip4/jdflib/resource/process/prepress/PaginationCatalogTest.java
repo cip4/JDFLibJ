@@ -37,31 +37,82 @@
  */
 package org.cip4.jdflib.resource.process.prepress;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
+import java.util.Collection;
+
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.junit.Test;
 
 public class PaginationCatalogTest
 {
 
+	/**
+	 *
+	 */
 	@Test
 	public void testconstruct()
 	{
 		assertNotNull(PaginationCatalog.instance());
 	}
 
+	/**
+	 *
+	 */
 	@Test
 	public void testToString()
 	{
 		assertNotNull(PaginationCatalog.instance().toString());
 	}
 
+	/**
+	 *
+	 */
 	@Test
 	public void testgetFrontPages()
 	{
 		assertNotNull(PaginationCatalog.instance().getFrontPages("F4-2"));
 		assertNull(PaginationCatalog.instance().getFrontPages("ffff"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testNUP()
+	{
+		assertEquals(new JDFXYPair(1, 1), PaginationCatalog.instance().getNUp("f2-1"));
+		assertEquals(new JDFXYPair(2, 1), PaginationCatalog.instance().getNUp("f4-1"));
+		assertEquals(new JDFXYPair(4, 2), PaginationCatalog.instance().getNUp("f16-7"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testComplete()
+	{
+		final PaginationCatalog pc = PaginationCatalog.instance();
+		final Collection<String> keys = pc.getKeys();
+		for (final String key : keys)
+		{
+			final JDFIntegerList p = pc.getBackPages(key);
+			p.addAll(pc.getFrontPages(key));
+			ContainerUtil.unify(p);
+			final JDFXYPair nUp = pc.getNUp(key);
+			final double size = 2 * nUp.getX() * nUp.getY();
+			assertEquals(key, size, p.size(), 0);
+			for (int i = 0; i < size; i++)
+			{
+				assertTrue(p.doubleAt(i) >= 0);
+				assertTrue(p.doubleAt(i) < size);
+			}
+		}
 	}
 
 }

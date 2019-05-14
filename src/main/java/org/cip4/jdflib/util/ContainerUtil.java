@@ -583,7 +583,7 @@ public class ContainerUtil
 		synchronized (m)
 		{
 			final Set<A> keySet = m.keySet();
-			if (keySet.size() == 0)
+			if (keySet.isEmpty())
 			{
 				return null;
 			}
@@ -779,4 +779,26 @@ public class ContainerUtil
 	{
 		return c == null ? true : c.isEmpty();
 	}
+
+	public static <A> Collection<A> getKeyArray(final Map<A, ?> m)
+	{
+		if (m == null)
+		{
+			return null;
+		}
+
+		synchronized (m)
+		{
+			final Set<A> keySet = m.keySet();
+			if (keySet.isEmpty())
+			{
+				return null;
+			}
+			final ArrayList<A> v = new ArrayList<>();
+			v.ensureCapacity(keySet.size());
+			v.addAll(keySet);
+			return v;
+		}
+	}
+
 }
