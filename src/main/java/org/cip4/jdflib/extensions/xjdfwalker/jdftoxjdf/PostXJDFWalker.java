@@ -2573,7 +2573,9 @@ class PostXJDFWalker extends BaseElementWalker
 				return strippingParams; // nuff done
 			}
 			// TODO multiple lower level stripparams partitions
-			final SetHelper layoutseth = newRootHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+			SetHelper layoutseth = newRootHelper.getSet(ElementName.LAYOUT, EnumUsage.Input);
+			if (layoutseth == null)
+				layoutseth = newRootHelper.getCreateSet(ElementName.LAYOUT, EnumUsage.Output);
 
 			final VJDFAttributeMap vmap = new ResourceHelper(strippingParams.getParentNode_KElement()).getPartMapVector();
 			mergeStrippingParamsLayout((JDFStrippingParams) strippingParams, layoutseth, vmap);
