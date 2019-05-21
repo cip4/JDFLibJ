@@ -72,8 +72,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	private static final long serialVersionUID = 1L;
 
-	// **************************************** Constructors
-	// ****************************************
 	/**
 	 * constructor
 	 */
@@ -103,7 +101,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	public JDFAttributeMap(final String key, final ValuedEnum value)
 	{
 		super();
-		put(key, value.getName());
+		put(key, value == null ? null : value.getName());
 	}
 
 	/**
@@ -114,7 +112,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	public JDFAttributeMap(final Map<String, String> inputMap)
 	{
 		super();
-		if (inputMap != null && inputMap.size() > 0)
+		if (inputMap != null && !inputMap.isEmpty())
 		{
 			putAll(inputMap);
 		}
@@ -422,11 +420,8 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public void andMap(final JDFAttributeMap subMap)
 	{
-		final Iterator<String> it = getKeys().iterator();
-
-		while (it.hasNext())
+		for (final String key : keySet())
 		{
-			final String key = it.next();
 			String subMapVal = subMap.get(key); // if this is null, we have a mismatch
 			final String thisVal = subMapVal == null ? null : get(key);
 			if (subMapVal != null && !subMapVal.equals(thisVal))
@@ -454,10 +449,8 @@ public class JDFAttributeMap extends HashMap<String, String>
 		}
 
 		final JDFAttributeMap newMap = new JDFAttributeMap(subMap);
-		final Iterator<String> it = keySet().iterator();
-		while (it.hasNext())
+		for (final String key : keySet())
 		{
-			final String key = it.next();
 			final String val = get(key);
 			final String subVal = subMap.get(key);
 			if (subVal == null || val.equals(subVal))
@@ -470,7 +463,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 			}
 		}
 
-		return newMap.size() == 0 ? null : newMap;
+		return newMap.isEmpty() ? null : newMap;
 	}
 
 	/**
@@ -481,15 +474,13 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public JDFAttributeMap getAndMap(final JDFAttributeMap subMap)
 	{
-		if (subMap == null || subMap.size() == 0)
+		if (subMap == null || subMap.isEmpty())
 		{
 			return null;
 		}
 		final JDFAttributeMap newMap = new JDFAttributeMap();
-		final Iterator<String> it = keySet().iterator();
-		while (it.hasNext())
+		for (final String key : keySet())
 		{
-			final String key = it.next();
 			final String val = get(key);
 			final String subVal = subMap.get(key);
 			if (val.equals(subVal))
@@ -501,7 +492,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 				return null;
 			}
 		}
-		return newMap.size() == 0 ? null : newMap;
+		return newMap.isEmpty() ? null : newMap;
 	}
 
 	/**
@@ -518,10 +509,8 @@ public class JDFAttributeMap extends HashMap<String, String>
 			clear();
 			return this;
 		}
-		final Iterator<String> it = getKeys().iterator();
-		while (it.hasNext())
+		for (final String key : keySet())
 		{
-			final String key = it.next();
 			if (!keySet.contains(key))
 			{
 				remove(key);
@@ -835,7 +824,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 			for (final String key : keySet())
 			{
 				if (strLocalName.equalsIgnoreCase(key))
+				{
 					return get(key);
+				}
 			}
 		}
 		return null;

@@ -614,8 +614,6 @@ public class MimeUtilTest extends JDFTestCaseBase
 		assertTrue(new File(sm_dirTestDataTemp + File.separator + "TestWriteMime" + File.separator + "test.icc").exists());
 	}
 
-	// ////////////////////////////////////////////////////////////////////
-
 	/**
 	 * @throws Exception
 	 */

@@ -78,7 +78,7 @@ public class StringCache
 			getCreateString(ElementName.JMF);
 			getCreateString(XJDFConstants.XJDF);
 			getCreateString(XJDFConstants.XJMF);
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < 32; i++)
 				getCreateString("" + i);
 		}
 		else if (!enable)
