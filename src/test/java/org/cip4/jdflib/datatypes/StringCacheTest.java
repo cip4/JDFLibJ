@@ -51,7 +51,7 @@ public class StringCacheTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testAddMany()
+	public synchronized void testAddMany()
 	{
 		for (int i = 0; i < 10000; i++)
 		{
@@ -68,7 +68,7 @@ public class StringCacheTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetMany()
+	public synchronized void testGetMany()
 	{
 		StringCache.enable(false);
 		StringCache.enable(true);
@@ -76,18 +76,19 @@ public class StringCacheTest extends JDFTestCaseBase
 		{
 			StringCache.getString("_" + (i % 100));
 		}
-		assertEquals(30, StringCache.size(), 10);
+		assertEquals(51, StringCache.size(), 10);
 		StringCache.getCreateString(null);
-		assertEquals(31, StringCache.size(), 10);
+		assertEquals(52, StringCache.size(), 10);
 		StringCache.enable(false);
 		assertEquals(0, StringCache.size());
+		StringCache.enable(true);
 	}
 
 	/**
 	 *
 	 */
 	@Test
-	public void testCreateNull()
+	public synchronized void testCreateNull()
 	{
 		StringCache.enable(true);
 		assertNull(StringCache.getCreateString(null));
@@ -98,7 +99,7 @@ public class StringCacheTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testNull()
+	public synchronized void testNull()
 	{
 		StringCache.enable(true);
 		assertNull(StringCache.getString(null));
