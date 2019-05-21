@@ -60,6 +60,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -420,17 +421,28 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public void andMap(final JDFAttributeMap subMap)
 	{
-		for (final String key : keySet())
+		if (JDFAttributeMap.isEmpty(subMap))
 		{
-			String subMapVal = subMap.get(key); // if this is null, we have a mismatch
-			final String thisVal = subMapVal == null ? null : get(key);
-			if (subMapVal != null && !subMapVal.equals(thisVal))
+			clear();
+		}
+		else
+		{
+			final Collection<String> keySet = ContainerUtil.getKeyArray(this);
+			if (keySet != null)
 			{
-				subMapVal = null;
-			}
-			if (subMapVal == null)
-			{
-				remove(key);
+				for (final String key : keySet)
+				{
+					String subMapVal = subMap.get(key); // if this is null, we have a mismatch
+					final String thisVal = subMapVal == null ? null : get(key);
+					if (subMapVal != null && !subMapVal.equals(thisVal))
+					{
+						subMapVal = null;
+					}
+					if (subMapVal == null)
+					{
+						remove(key);
+					}
+				}
 			}
 		}
 	}
@@ -509,11 +521,15 @@ public class JDFAttributeMap extends HashMap<String, String>
 			clear();
 			return this;
 		}
-		for (final String key : keySet())
+		final Collection<String> a = ContainerUtil.getKeyArray(this);
+		if (a != null)
 		{
-			if (!keySet.contains(key))
+			for (final String key : a)
 			{
-				remove(key);
+				if (!keySet.contains(key))
+				{
+					remove(key);
+				}
 			}
 		}
 		return this;

@@ -314,6 +314,24 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testAndMap()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		final JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		m1.andMap(m2);
+		assertEquals(m1, m2);
+		final JDFAttributeMap m3 = new JDFAttributeMap(m2);
+		m3.put("a3", "v2");
+		m1.andMap(m3);
+		assertEquals(m1, m2);
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetOrMap()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
