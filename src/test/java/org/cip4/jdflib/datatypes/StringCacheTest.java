@@ -42,10 +42,22 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.VString;
 import org.junit.Test;
 
 public class StringCacheTest extends JDFTestCaseBase
 {
+
+	/**
+	*
+	*/
+	@Test
+	public synchronized void testAddAll()
+	{
+		assertEquals(51, StringCache.size(), 10);
+		StringCache.addAll(new VString("a b c d e f g h i j"));
+		assertEquals(60, StringCache.size(), 10);
+	}
 
 	/**
 	 *

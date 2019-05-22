@@ -47,6 +47,7 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import org.cip4.jdflib.core.ElementName;
@@ -59,6 +60,10 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 public class StringCache
 {
 	static private HashMap<String, String> theSet = null;
+
+	private StringCache()
+	{
+	}
 
 	/**
 	 *
@@ -137,5 +142,20 @@ public class StringCache
 	public static int size()
 	{
 		return theSet == null ? 0 : theSet.size();
+	}
+
+	/**
+	 *
+	 * @param c
+	 */
+	public static void addAll(final Collection<String> c)
+	{
+		if (c != null && theSet != null)
+		{
+			for (final String s : c)
+			{
+				getCreateString(s);
+			}
+		}
 	}
 }
