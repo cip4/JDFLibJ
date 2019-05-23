@@ -248,7 +248,7 @@ public class ContainerUtil
 
 		if (iSkip < 0)
 		{
-			final Vector<IMatches> v = getMatches(c, obj);
+			final List<IMatches> v = getMatchesList(c, obj);
 			if (v == null)
 			{
 				return null;
@@ -292,7 +292,7 @@ public class ContainerUtil
 
 		if (iSkip < 0)
 		{
-			final Vector<A> v = getMatches(match, c);
+			final List<A> v = getMatchesList(match, c);
 			if (v == null)
 			{
 				return null;
@@ -344,6 +344,31 @@ public class ContainerUtil
 	}
 
 	/**
+	 * return a matching element from a collection of IMatches
+	 *
+	 * @param <A> the data type
+	 * @param c the collection to search
+	 * @param obj the search key for matches
+	 * @return Vector of matching a
+	 */
+	public static <A> List<IMatches> getMatchesList(final Collection<? extends IMatches> c, final A obj)
+	{
+		if (c == null)
+		{
+			return null;
+		}
+		final List<IMatches> l = new ArrayList<>();
+		for (final IMatches m : c)
+		{
+			if (m.matches(obj))
+			{
+				l.add(m);
+			}
+		}
+		return l.isEmpty() ? null : l;
+	}
+
+	/**
 	 * return a matching element from a collection
 	 *
 	 * @param <A> the data type
@@ -358,6 +383,31 @@ public class ContainerUtil
 			return null;
 		}
 		final Vector<A> v = new Vector<>();
+		for (final A b : c)
+		{
+			if (m.matches(b))
+			{
+				v.add(b);
+			}
+		}
+		return v.isEmpty() ? null : v;
+	}
+
+	/**
+	 * return a matching element from a collection
+	 *
+	 * @param <A> the data type
+	 * @param c the collection to search
+	 * @param obj the matches
+	 * @return Vector of matching a
+	 */
+	public static <A> List<A> getMatchesList(final IMatches m, final Collection<A> c)
+	{
+		if (c == null)
+		{
+			return null;
+		}
+		final List<A> v = new ArrayList<>();
 		for (final A b : c)
 		{
 			if (m.matches(b))
@@ -734,25 +784,25 @@ public class ContainerUtil
 		{
 			return c;
 		}
-		final Vector<A> vect = new Vector<>(c.size());
+		final ArrayList<A> al = new ArrayList<>(c.size());
 
 		for (final A el : c)
 		{
-			final Vector<IMatches> mm = getMatches(vect, el);
+			final List<IMatches> mm = getMatchesList(al, el);
 			if (mm == null)
 			{
-				vect.add(el);
+				al.add(el);
 			}
 		}
-		if (vect.size() < c.size())
+		if (al.size() < c.size())
 		{
-			final Vector<A> v2 = new Vector<>();
-			for (int i = vect.size() - 1; i >= 0; i--)
+			final List<A> v2 = new ArrayList<>();
+			for (int i = al.size() - 1; i >= 0; i--)
 			{
-				final Vector<IMatches> mm = getMatches(v2, vect.get(i));
+				final List<IMatches> mm = getMatchesList(v2, al.get(i));
 				if (mm == null)
 				{
-					v2.add(vect.get(i));
+					v2.add(al.get(i));
 				}
 			}
 			c.clear();
@@ -787,18 +837,14 @@ public class ContainerUtil
 			return null;
 		}
 
-		synchronized (m)
+		final Set<A> keySet = m.keySet();
+		if (keySet.isEmpty())
 		{
-			final Set<A> keySet = m.keySet();
-			if (keySet.isEmpty())
-			{
-				return null;
-			}
-			final ArrayList<A> v = new ArrayList<>();
-			v.ensureCapacity(keySet.size());
-			v.addAll(keySet);
-			return v;
+			return null;
 		}
+		final ArrayList<A> v = new ArrayList<>();
+		v.ensureCapacity(keySet.size());
+		v.addAll(keySet);
+		return v;
 	}
-
 }

@@ -276,6 +276,22 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetMatchList()
+	{
+		final Vector<SimpleMatch> v = new Vector<>();
+		for (int i = 0; i < 10; i++)
+		{
+			v.add(new SimpleMatch(i % 2));
+		}
+		final SimpleMatch simpleMatch1 = new SimpleMatch(1);
+		assertEquals(ContainerUtil.getMatchesList(v, simpleMatch1).size(), 5);
+		assertEquals(ContainerUtil.getMatch(v, simpleMatch1, 0), simpleMatch1);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetMatchInverted()
 	{
 		final Vector<Integer> v = new Vector<>();
@@ -285,6 +301,22 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		}
 		final SimpleMatch simpleMatch1 = new SimpleMatch(1);
 		assertEquals(ContainerUtil.getMatches(simpleMatch1, v).size(), 5);
+		assertEquals(ContainerUtil.getMatch(simpleMatch1, v, 0), Integer.valueOf(1));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetMatchListInverted()
+	{
+		final List<Integer> v = new ArrayList<>();
+		for (int i = 0; i < 10; i++)
+		{
+			v.add(Integer.valueOf(i % 2));
+		}
+		final SimpleMatch simpleMatch1 = new SimpleMatch(1);
+		assertEquals(ContainerUtil.getMatchesList(simpleMatch1, v).size(), 5);
 		assertEquals(ContainerUtil.getMatch(simpleMatch1, v, 0), Integer.valueOf(1));
 	}
 
