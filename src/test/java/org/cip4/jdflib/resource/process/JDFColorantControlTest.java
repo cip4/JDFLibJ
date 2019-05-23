@@ -343,6 +343,23 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	}
 
 	@Test
+	public void testGetColorantAliasRep()
+	{
+		final JDFColorantControl cBlatt = (JDFColorantControl) colControl.addPartition(EnumPartIDKey.SheetName, "s1");
+		final Collection<JDFColorantAlias> col = cBlatt.getAllColorantAlias();
+		assertEquals(col.size(), 0);
+		final JDFColorantAlias a1 = colControl.appendColorantAlias("s1", "t1");
+		final JDFColorantAlias a2 = colControl.appendColorantAlias("s2", "t2");
+		assertEquals(a1, colControl.getColorantAliasForReplacement("t1"));
+		assertEquals(a2, colControl.getColorantAliasForReplacement("t2"));
+		assertNull(colControl.getColorantAliasForReplacement("s1"));
+		assertEquals(a1, cBlatt.getColorantAliasForReplacement("t1"));
+		assertEquals(a2, cBlatt.getColorantAliasForReplacement("t2"));
+		assertNull(cBlatt.getColorantAliasForReplacement("s1"));
+
+	}
+
+	@Test
 	public void testGetColorantAliasMap()
 	{
 		final JDFColorantAlias a1 = colControl.appendColorantAlias("s1", "t1");
@@ -350,6 +367,16 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		assertEquals("t2", colControl.getColorantAliasMap().get("s2"));
 		assertEquals(2, colControl.getColorantAliasMap().size());
 
+	}
+
+	@Test
+	public void testAppendColorantAlias()
+	{
+		final JDFColorantAlias a1 = colControl.appendColorantAlias("s1", "t1");
+		final JDFColorantAlias a2 = colControl.appendColorantAlias("s21", "t2");
+		final JDFColorantAlias a22 = colControl.appendColorantAlias("s22", "t2");
+		assertEquals(a2, a22);
+		assertEquals(3, colControl.getColorantAliasMap().size());
 	}
 
 	@Test

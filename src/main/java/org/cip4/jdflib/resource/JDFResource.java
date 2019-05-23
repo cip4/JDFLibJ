@@ -2560,6 +2560,25 @@ public class JDFResource extends JDFElement
 		return v;
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public <a extends KElement> a getChildWithAttribute(final Class<a> clazz, final String attName, final String attVal)
+	{
+		a c = super.getChildWithAttribute(clazz, attName, attVal);
+
+		KElement ke = this;
+		if (c == null && clazz != getClass())
+		{
+			final String nodeName = getNodeName();
+			ke = ke.getParentNode_KElement();
+			if (ke != null && ke.getNodeName().equals(nodeName))
+			{
+				c = ke.getChildWithAttribute(clazz, attName, attVal);
+			}
+		}
+		return c;
+	}
+
 	/**
 	 * Get the Attribute Map of the actual element also following inheritance
 	 *

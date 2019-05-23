@@ -304,6 +304,7 @@ public class KElement extends ElementNSImpl implements Element
 
 	/**
 	 * ensure the correct case of n attribute, if present
+	 *
 	 * @param key
 	 * @return
 	 */
@@ -697,8 +698,7 @@ public class KElement extends ElementNSImpl implements Element
 					namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), false);
 					if (!ContainerUtil.equals(namespaceURI2, nameSpaceURI))
 					{
-						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
-								+ "; attempting to set URI: " + nameSpaceURI;
+						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2 + "; attempting to set URI: " + nameSpaceURI;
 						kLog.error(message);
 						throw new JDFException(message);
 					}
@@ -811,13 +811,13 @@ public class KElement extends ElementNSImpl implements Element
 							// already there
 							if (key.equals(nodeName))
 							{ // overwrite default namespace with qualified
-									// namespace or vice versa
+								// namespace or vice versa
 								removeAttribute(nodeName);
 								super.setAttribute(key, value);
 							}
 							else
 							{ // same qualified name, simply overwrite the
-									// value
+								// value
 								a.setNodeValue(value);
 							}
 						}
@@ -826,8 +826,8 @@ public class KElement extends ElementNSImpl implements Element
 							final String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 							if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
 							{
-								throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2
-										+ "; attempting to set URI: " + nameSpaceURI);
+								throw new JDFException(
+										"KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2 + "; attempting to set URI: " + nameSpaceURI);
 							}
 							try
 							{
@@ -1924,6 +1924,24 @@ public class KElement extends ElementNSImpl implements Element
 			n = n.getNextSibling();
 		}
 		return v;
+	}
+
+	@SuppressWarnings("unchecked")
+	public <a extends KElement> a getChildWithAttribute(final Class<a> clazz, final String attName, final String attVal)
+	{
+		Node n = getFirstChild();
+		while (n != null)
+		{
+			if (clazz.isInstance(n))
+			{
+				if (((KElement) n).includesAttribute(attName, attVal))
+				{
+					return (a) n;
+				}
+			}
+			n = n.getNextSibling();
+		}
+		return null;
 	}
 
 	/**

@@ -52,6 +52,7 @@ import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorantControl;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.VString;
@@ -269,7 +270,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	 */
 	public JDFColorantAlias getColorantAlias(final String sourceColor)
 	{
-		final Collection<JDFColorantAlias> vcc = getChildrenByClass(JDFColorantAlias.class, false, 0);
+		final Collection<JDFColorantAlias> vcc = getChildArrayByClass(JDFColorantAlias.class, false, 0);
 		for (final JDFColorantAlias ca : vcc)
 		{
 			final VString seps = ca.getSeparations();
@@ -277,6 +278,32 @@ public class JDFColorantControl extends JDFAutoColorantControl
 				return ca;
 		}
 		return null;
+	}
+
+	/**
+	 *
+	 * @param replacementColor the source color to search
+	 * @return
+	 */
+	public JDFColorantAlias getColorantAliasForReplacement(final String replacementColor)
+	{
+		return getChildWithAttribute(JDFColorantAlias.class, AttributeName.REPLACEMENTCOLORANTNAME, replacementColor);
+	}
+
+	/**
+	 *
+	 * @param replacementColor the source color to search
+	 * @return
+	 */
+	public JDFColorantAlias getCreateColorantAliasForReplacement(final String replacementColor)
+	{
+		JDFColorantAlias c = getColorantAliasForReplacement(replacementColor);
+		if (c == null)
+		{
+			c = appendColorantAlias();
+			c.setReplacementColorantName(replacementColor);
+		}
+		return c;
 	}
 
 	/**
@@ -332,7 +359,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	 */
 	public JDFColorantAlias appendColorantAlias(final String source, final String replacement)
 	{
-		final JDFColorantAlias ca = appendColorantAlias();
+		final JDFColorantAlias ca = getCreateColorantAliasForReplacement(replacement);
 		ca.setReplacementColorantName(replacement);
 		ca.appendSeparationSpec().setName(source);
 		return ca;
