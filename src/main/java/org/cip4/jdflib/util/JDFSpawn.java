@@ -155,6 +155,27 @@ public class JDFSpawn
 	 * list of partitions to spawn
 	 */
 	public VJDFAttributeMap vSpawnParts = null;
+	/**
+	 * list of partitions to spawn
+	 */
+	private VString vROSpawnParts;
+
+	/**
+	 * @return the vROSpawnParts
+	 */
+	public VString getvROSpawnParts()
+	{
+		return vROSpawnParts;
+	}
+
+	/**
+	 * @param vROSpawnParts the vROSpawnParts to set if set
+	 */
+	public void setvROSpawnParts(final VString vROSpawnParts)
+	{
+		this.vROSpawnParts = vROSpawnParts;
+		bSpawnROPartsOnly = !VString.isEmpty(vROSpawnParts);
+	}
 
 	private final Set<JDFAttributeMap> setSpawnParts;
 	private boolean bInformative = false;
@@ -471,8 +492,6 @@ public class JDFSpawn
 		return vRes;
 	}
 
-	// ///////////////////////////////////////////////////////////////////////
-
 	private VElement prepareSpawnLinks(final JDFNode node)
 	{
 		final VElement vn = node.getvJDFNode(null, null, false);
@@ -730,7 +749,7 @@ public class JDFSpawn
 				{
 					// reduce partitions of all RW resources and of RO resources if requested
 					final JDFResource copyRoot = ((JDFResource) vRes.elementAt(0)).getResourceRoot();
-					reducePartitions(copyRoot);
+					reducePartitions(copyRoot, bResRW);
 				}
 				else
 				{
@@ -946,17 +965,18 @@ public class JDFSpawn
 		{
 			finalizePartitions(spawnAudit, outLinks, mainLinks);
 		}
-		removeRO(outLinks, spawnAudit.getNewSpawnID());
-		removeRO(mainLinks, spawnAudit.getNewSpawnID());
+		removeRO(outLinks, spawnAudit.getNewSpawnID(), false);
+		removeRO(mainLinks, spawnAudit.getNewSpawnID(), true);
 		finalizeStatusAndAudits(spawnAudit);
 	}
 
-	private void removeRO(final VElement outLinks, final String spawnID)
+	private void removeRO(final VElement outLinks, final String spawnID, final boolean isMain)
 	{
 		final String ro = EnumSpawnStatus.SpawnedRO.getName();
 		for (final KElement e : outLinks)
 		{
-			final JDFResource linkRoot = ((JDFResourceLink) e).getLinkRoot();
+			final JDFResourceLink rl = (JDFResourceLink) e;
+			final JDFResource linkRoot = rl.getLinkRoot();
 			if (linkRoot != null)
 			{
 				final VElement v = linkRoot.getLeaves(true);
@@ -1027,8 +1047,14 @@ public class JDFSpawn
 	 * @param link
 	 * @param vNewMap
 	 */
-	private void reduceLinkPartAmounts(final JDFResourceLink link, final VJDFAttributeMap vNewMap)
+	private void reduceLinkPartAmounts(final JDFResourceLink link, VJDFAttributeMap vNewMap)
 	{
+		if (!linkFitsRWRes(link, vRWResources_in) && !VString.isEmpty(vROSpawnParts) && !VJDFAttributeMap.isEmpty(vNewMap))
+		{
+			vNewMap = vNewMap.clone();
+			final VString pik = getPartIDKeys(link.getLinkRoot(), false);
+			vNewMap.reduceMap(pik);
+		}
 		link.setPartMapVector(vNewMap);
 		final JDFAmountPool ap = link.getAmountPool();
 		final VElement partAmounts = ap == null ? null : ap.getChildElementVector(ElementName.PARTAMOUNT, null);
@@ -1275,6 +1301,8 @@ public class JDFSpawn
 	 */
 	private boolean linkFitsRWRes(final JDFResourceLink li, final VString vRWResources)
 	{
+		if (vRWResources == null)
+			return false;
 		boolean bResRW = vRWResources.contains(li.getNamedProcessUsage());
 		// 200602 RP added fix
 		if (!bResRW)
@@ -1347,8 +1375,8 @@ public class JDFSpawn
 							}
 							else
 							{
-								final Vector<JDFIdentical> v = child.getChildrenByClass(JDFIdentical.class, true, 0);
-								if (v != null && v.size() > 0)
+								final List<JDFIdentical> v = child.getChildArrayByClass(JDFIdentical.class, true, 0);
+								if (v != null && !v.isEmpty())
 								{
 
 									final VElement v2 = new VElement();
@@ -1464,15 +1492,15 @@ public class JDFSpawn
 	 *
 	 * @param r
 	 */
-	private void reducePartitions(final JDFResource r)
+	private void reducePartitions(final JDFResource r, final boolean bRW)
 	{
 		if (r == null || vSpawnParts == null || vSpawnParts.size() == 0 || isReduced.contains(r.getID()))
 		{
 			return;
 		}
 
-		final VString partIDKeys = r.getPartIDKeys();
-		if (partIDKeys == null || partIDKeys.size() == 0)
+		final VString partIDKeys = getPartIDKeys(r, bRW);
+		if (VString.isEmpty(partIDKeys))
 		{
 			return;
 		}
@@ -1481,8 +1509,7 @@ public class JDFSpawn
 		{
 			reduceFast(r, partIDKeys, 0, new JDFAttributeMap());
 		}
-		// in case we spawn lower than, only remove partitions that are parallel to our
-		// spawning
+		// in case we spawn lower than, only remove partitions that are parallel to our spawning
 		int nMax = 999;
 
 		final VElement vSubParts = r.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
@@ -1682,15 +1709,15 @@ public class JDFSpawn
 	private JDFResource copyPart(final JDFResourcePool targetResPool, final JDFResource r, final boolean bRW)
 	{
 		final JDFResource rNew;
-		final VString partIDKeys = r.getPartIDKeys();
-		if ((bRW || bSpawnROPartsOnly) && partIDKeys != null && partIDKeys.size() != 0)
+		final VString partIDKeys = getPartIDKeys(r, bRW);
+		if ((bRW || bSpawnROPartsOnly) && !VString.isEmpty(partIDKeys))
 		{
 			final String resName = r.getNodeName();
 			rNew = (JDFResource) targetResPool.appendElement(resName);
 			rNew.setAttributesRaw(r);
 			final VJDFAttributeMap linkedIdentical = bSpawnIdentical ? new VJDFAttributeMap() : null;
 			copyPartImpl(r, rNew, partIDKeys, 0, new JDFAttributeMap(), linkedIdentical, resName);
-			if (linkedIdentical != null && linkedIdentical.size() > 0)
+			if (!VJDFAttributeMap.isEmpty(linkedIdentical))
 			{
 				linkedIdentical.unify();
 				for (final JDFAttributeMap idMap : linkedIdentical)
@@ -1705,6 +1732,27 @@ public class JDFSpawn
 		}
 		isReduced.add(r.getID());
 		return rNew;
+	}
+
+	VString getPartIDKeys(final JDFResource r, final boolean bRW)
+	{
+		final VString partIDKeys = r == null ? null : r.getPartIDKeys();
+		if (!bRW && partIDKeys != null && !VString.isEmpty(vROSpawnParts))
+		{
+			final int lastPart = partIDKeys.size();
+			for (int i = 0; i < lastPart; i++)
+			{
+				if (!vROSpawnParts.contains(partIDKeys.get(i)))
+				{
+					for (int j = i; j < lastPart; j++)
+					{
+						partIDKeys.remove(i);
+					}
+					break;
+				}
+			}
+		}
+		return partIDKeys;
 	}
 
 	/**

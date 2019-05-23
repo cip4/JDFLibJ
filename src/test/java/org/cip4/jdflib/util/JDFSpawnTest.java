@@ -1319,6 +1319,56 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetPartIDKeys()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.RibbonName, "r1");
+		final JDFResource r3 = r2.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource r4 = r3.addPartition(EnumPartIDKey.Side, "Front");
+
+		final JDFSpawn sp = new JDFSpawn(n);
+		sp.vSpawnParts = new VJDFAttributeMap(r4.getPartMap());
+		assertEquals(r.getPartIDKeys(), sp.getPartIDKeys(r, false));
+		assertEquals(r.getPartIDKeys(), sp.getPartIDKeys(r, true));
+
+		sp.setvROSpawnParts(new VString("RibbonName SheetName"));
+		assertEquals(r.getPartIDKeys(), sp.getPartIDKeys(r, true));
+		assertEquals(new VString("RibbonName SheetName"), sp.getPartIDKeys(r, false));
+		sp.setvROSpawnParts(new VString("SheetName"));
+		assertEquals(r.getPartIDKeys(), sp.getPartIDKeys(r, true));
+		assertEquals(new VString(), sp.getPartIDKeys(r, false));
+		sp.setvROSpawnParts(new VString("Run"));
+		assertEquals(r.getPartIDKeys(), sp.getPartIDKeys(r, true));
+		assertEquals(new VString(), sp.getPartIDKeys(r, false));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testROParts()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.RibbonName, "r1");
+		final JDFResource r3 = r2.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource r41 = r3.addPartition(EnumPartIDKey.Side, "Front");
+		final JDFResource r42 = r3.addPartition(EnumPartIDKey.Side, "Back");
+
+		final JDFSpawn sp = new JDFSpawn(n);
+		sp.vSpawnParts = new VJDFAttributeMap(r41.getPartMap());
+
+		sp.setvROSpawnParts(new VString("RibbonName SheetName"));
+		final JDFNode n2 = sp.spawn();
+		final JDFResource rs = n2.getResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input, 0);
+		assertEquals(2, rs.getLeaves(false).size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testUpdateSpawnIDsInMain()
 	{
 		final JDFNode n = JDFNode.createRoot();
@@ -3563,10 +3613,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		assertTrue(rl.toString().indexOf("SpawnedRW") > 0);
 		assertEquals(spawned.getAncestorPool().getPartMapVector(), vm);
 
-		// assertEquals(rl.getPartition(ms2, null).getAttribute_KElement(AttributeName.SPAWNSTATUS), "SpawnedRW");
-		// assertEquals(rl.getPartition(ms,
-		// null).getAttribute_KElement(AttributeName.SPAWNSTATUS),"");
-
 		final JDFMerge m = new JDFMerge(nr);
 		n = m.mergeJDF(spawned, null, EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
 
@@ -3587,8 +3633,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFNode root = readJDF.getJDFRoot();
 		final JDFNode spawnNode = (JDFNode) root.getTarget("Link070822_032611973_013511", AttributeName.ID);
 		final VJDFAttributeMap vSpawnParts = new VJDFAttributeMap();
-		// "ImP1.MR" with "VJDFAttributeMap: [0]JDFAttributeMap: { (PartVersion
-		// = Eng Eng) (SheetName = S0C) (SignatureName = Sig001) }
+
 		final JDFAttributeMap partMap = new JDFAttributeMap();
 		partMap.put("PartVersion", "Eng Eng");
 		partMap.put("SheetName", "S0C");
