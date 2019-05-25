@@ -1927,17 +1927,14 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	@SuppressWarnings("unchecked")
-	public <a extends KElement> a getChildWithAttribute(final Class<a> clazz, final String attName, final String attVal)
+	public <A extends KElement> A getChildWithAttribute(final Class<A> clazz, final String attName, final String attVal)
 	{
 		Node n = getFirstChild();
 		while (n != null)
 		{
-			if (clazz.isInstance(n))
+			if (clazz.isInstance(n) && ((KElement) n).includesAttribute(attName, attVal))
 			{
-				if (((KElement) n).includesAttribute(attName, attVal))
-				{
-					return (a) n;
-				}
+				return (A) n;
 			}
 			n = n.getNextSibling();
 		}

@@ -2561,10 +2561,9 @@ public class JDFResource extends JDFElement
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public <a extends KElement> a getChildWithAttribute(final Class<a> clazz, final String attName, final String attVal)
+	public <A extends KElement> A getChildWithAttribute(final Class<A> clazz, final String attName, final String attVal)
 	{
-		a c = super.getChildWithAttribute(clazz, attName, attVal);
+		A c = super.getChildWithAttribute(clazz, attName, attVal);
 
 		KElement ke = this;
 		if (c == null && clazz != getClass())
