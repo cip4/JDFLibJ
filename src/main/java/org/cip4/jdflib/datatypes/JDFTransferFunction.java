@@ -210,6 +210,17 @@ public class JDFTransferFunction extends JDFNumList
 	}
 
 	/**
+	 * isUnit - true if we are 0 0 1 1
+	 *
+	 *
+	 */
+	public boolean isUnit()
+	{
+
+		return size() == 4 && doubleAt(0) == 0 && doubleAt(1) == 0 && doubleAt(2) == 1 && doubleAt(3) == 1;
+	}
+
+	/**
 	 * add - adds a xy coordinate to the vector
 	 *
 	 * @param xy the xy coordinate to add
@@ -315,22 +326,26 @@ public class JDFTransferFunction extends JDFNumList
 		if (cache == null)
 		{
 			final double d1 = d / FAST_POINTS;
-			cache = new double[1001];
+			cache = new double[FAST_POINTS + 2];
 			for (int i = 0; i <= FAST_POINTS; i++)
 			{
 				cache[i] = getValue(x0 + i * d1);
 			}
+			cache[FAST_POINTS + 1] = getValue(r.getY());
 		}
-		final double dX = (x - x0) / (d / FAST_POINTS);
+		final double dX = (x - x0) * FAST_POINTS / d;
 		final int iX = (int) dX;
 		if (iX < 0)
 			return cache[0];
 		if (iX >= FAST_POINTS)
 			return cache[FAST_POINTS];
 		final double mx = dX - iX;
-		if (mx == 0)
+		// if we are really close, dont bother
+		if (mx < 0.000001)
 			return cache[iX];
-		return cache[iX] + (cache[iX + 1] - cache[iX]) / FAST_POINTS * mx;
+		else if (mx > 0.999999)
+			return cache[iX + 1];
+		return cache[iX] + mx * (cache[iX + 1] - cache[iX]);
 	}
 
 	/**

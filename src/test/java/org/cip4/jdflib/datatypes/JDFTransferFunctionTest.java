@@ -69,6 +69,8 @@
 package org.cip4.jdflib.datatypes;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Vector;
 import java.util.zip.DataFormatException;
@@ -84,6 +86,18 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	{
 		final JDFTransferFunction tf = new JDFTransferFunction();
 		assertEquals(0, tf.size());
+	}
+
+	@Test
+	public void testisUnit()
+	{
+		final JDFTransferFunction tf = new JDFTransferFunction();
+		assertFalse(tf.isUnit());
+		tf.add(0, 0);
+		assertFalse(tf.isUnit());
+		tf.add(1, 1);
+		assertTrue(tf.isUnit());
+		tf.add(1, 1);
 	}
 
 	@Test
@@ -186,14 +200,45 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 	@Test
 	public void testGetFastVal() throws DataFormatException
 	{
-		final JDFTransferFunction tf = new JDFTransferFunction("0 0 10 0.1 20 0.2 30 0.3 100 1.0");
+		final JDFTransferFunction tf = new JDFTransferFunction("0 0 10 0.05 20 0.1 30 0.15 200 1.0 460 2.3");
+		tf.getFastValue(0);
+		final long t0 = System.currentTimeMillis();
+		for (int j = 0; j < 10000; j++)
+		{
+			assertEquals(0, tf.getFastValue(0), 0);
+			for (int i = 0; i < 460; i++)
+				assertEquals(0.005 * i, tf.getFastValue(i), 0.000001);
+		}
+		log.info(" t=" + (System.currentTimeMillis() - t0));
+	}
+
+	@Test
+	public void testGetFastValUnit() throws DataFormatException
+	{
+		final JDFTransferFunction tf = new JDFTransferFunction("0 0 1 1");
 		tf.getFastValue(0);
 		final long t0 = System.currentTimeMillis();
 		for (int j = 0; j < 100000; j++)
 		{
 			assertEquals(0, tf.getFastValue(0), 0);
+			assertEquals(0, tf.getFastValue(-1), 0);
+			assertEquals(1, tf.getFastValue(1), 0);
+			assertEquals(1, tf.getFastValue(3), 0);
 			for (int i = 0; i < 100; i++)
-				assertEquals(0.01 * i, tf.getFastValue(i), 0.000001);
+				assertEquals(0.01 * i, tf.getFastValue(i * 0.01), 0.000001);
+		}
+		log.info(" t=" + (System.currentTimeMillis() - t0));
+	}
+
+	@Test
+	public void testIslUnit() throws DataFormatException
+	{
+		final JDFTransferFunction tf = new JDFTransferFunction("0 0 1 1");
+		final long t0 = System.currentTimeMillis();
+		for (int j = 0; j < 100000; j++)
+		{
+			for (int i = 0; i < 100; i++)
+				assertTrue(tf.isUnit());
 		}
 		log.info(" t=" + (System.currentTimeMillis() - t0));
 	}
