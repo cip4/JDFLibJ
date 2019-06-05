@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,8 +69,10 @@
 package org.cip4.jdflib.extensions.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -81,6 +83,7 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFExpr;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMetadataMap;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.UrlUtil;
@@ -217,6 +220,51 @@ public class XJDFRunListTest extends JDFTestCaseBase
 
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "resources/RunList2.xjdf");
+
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public final void testMultiSet()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, null, null);
+		xjdfHelper.setTypes(EnumType.DigitalPrinting.getName());
+		xjdfHelper.setVersion(EnumVersion.Version_2_1);
+		final SetHelper rlh = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, null);
+		final ResourceHelper runh = rlh.appendPartition(null, true);
+		final JDFRunList rl = (JDFRunList) runh.getResource();
+		rl.setNPage(480);
+		rl.setAttribute("DocPages", "2 8 2");
+		rl.appendElement(ElementName.FILESPEC).setAttribute(AttributeName.URL, "File:///ManyBrochures.pdf");
+
+		final SetHelper setMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
+		final ResourceHelper rhm0 = setMedia.getCreatePartition(new JDFAttributeMap(AttributeName.DOCINDEX, "0 0"), true);
+		rhm0.appendPartMap(new JDFAttributeMap(AttributeName.DOCINDEX, "2 2"));
+		final JDFMedia m0 = (JDFMedia) rhm0.getResource();
+		m0.setMediaType(EnumMediaType.Paper);
+		m0.setWeight(150);
+		rhm0.setDescriptiveName("Media for front and back covers");
+		final ResourceHelper rhm1 = setMedia.getCreatePartition(new JDFAttributeMap(AttributeName.DOCINDEX, "1 1"), true);
+		rhm1.setDescriptiveName("Media for inner pages");
+		final String idm0 = rhm0.getRoot().appendAnchor("M02");
+
+		final JDFMedia m1 = (JDFMedia) rhm1.getResource();
+		m1.setWeight(100);
+		m1.setMediaType(EnumMediaType.Paper);
+		final String idm1 = rhm1.getRoot().appendAnchor("M1");
+
+		final SetHelper setCompIn = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
+		final ResourceHelper rhc0 = setCompIn.getCreatePartition(new JDFAttributeMap(AttributeName.DOCINDEX, "0 0"), true);
+		rhc0.appendPartMap(new JDFAttributeMap(AttributeName.DOCINDEX, "2 2"));
+		rhc0.setDescriptiveName("Physical media for front and back covers");
+		rhc0.getResource().setAttribute("MediaRef", idm0);
+		final ResourceHelper rhc1 = setCompIn.getCreatePartition(new JDFAttributeMap(AttributeName.DOCINDEX, "1 1"), true);
+		rhc1.getResource().setAttribute("MediaRef", idm1);
+
+		cleanSnippets(xjdfHelper);
+		writeTest(xjdfHelper, "resources/DocPages.xjdf");
 
 	}
 
