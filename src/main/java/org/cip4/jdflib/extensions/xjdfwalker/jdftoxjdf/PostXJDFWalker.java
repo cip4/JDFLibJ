@@ -37,9 +37,11 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
+import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoStripCellParams.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
@@ -80,6 +82,8 @@ import org.cip4.jdflib.resource.intent.JDFArtDelivery;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
+import org.cip4.jdflib.resource.process.JDFAssembly;
+import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
@@ -2096,6 +2100,74 @@ class PostXJDFWalker extends BaseElementWalker
 
 		}
 
+	}
+
+	/**
+	 *
+	 * @author rainer prosi
+	 *
+	 */
+	public class WalkAssembly extends WalkResourceElement
+	{
+		/**
+		 *
+		 */
+		public WalkAssembly()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return !isRetainAll();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ElementName.ASSEMBLY, null);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			updateSections((JDFAssembly) xjdf);
+			return super.walk(xjdf, dummy);
+		}
+
+		private void updateSections(final JDFAssembly assembly)
+		{
+			final EnumOrder o = assembly.getOrder();
+			final JDFAssemblySection ass = assembly.getElementByClass(JDFAssemblySection.class, 0, false);
+			if (ass != null)
+			{
+				if (EnumOrder.Collecting.equals(o))
+				{
+					final List<JDFAssemblySection> l = assembly.getChildArrayByClass(JDFAssemblySection.class, false, 0);
+					final int size = ContainerUtil.size(l);
+					if (size > 1)
+					{
+						for (int i = 1; i < size; i++)
+						{
+							l.get(i - 1).moveElement(l.get(i), null);
+						}
+					}
+				}
+				assembly.setOrder(EnumOrder.List);
+			}
+		}
 	}
 
 	/**

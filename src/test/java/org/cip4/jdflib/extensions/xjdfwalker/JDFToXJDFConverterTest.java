@@ -2069,6 +2069,41 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testAssemblyCollect()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Stripping);
+		final JDFAssembly as = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
+		as.setOrder(EnumOrder.Collecting);
+		as.appendAssemblySection().setAssemblyID("a1");
+		as.appendAssemblySection().setAssemblyID("a2");
+		as.appendAssemblySection().setAssemblyID("a3");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		final SetHelper sh = new XJDFHelper(xjdf).getSet(ElementName.ASSEMBLY, EnumUsage.Input);
+		final JDFAssembly asx = (JDFAssembly) sh.getPartition(0).getResource();
+		assertEquals("a1", asx.getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
+		assertNull(asx.getAssemblySection(1));
+		assertEquals("a2", asx.getAssemblySection(0).getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
+		assertNull(asx.getAssemblySection(0).getAssemblySection(1));
+		assertEquals("a3", asx.getAssemblySection(0).getAssemblySection(0).getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
+		assertNull(asx.getAssemblySection(0).getAssemblySection(0).getAssemblySection(1));
+
+		sh.cleanUp();
+		assertEquals("a1", asx.getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
+		assertNull(asx.getAssemblySection(1));
+		assertEquals("a2", asx.getAssemblySection(0).getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
+		assertNull(asx.getAssemblySection(0).getAssemblySection(1));
+		assertEquals("a3", asx.getAssemblySection(0).getAssemblySection(0).getAssemblySection(0).getAttribute(XJDFConstants.BinderySignatureID));
+		assertNull(asx.getAssemblySection(0).getAssemblySection(0).getAssemblySection(1));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testMediaComponentAmount()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
