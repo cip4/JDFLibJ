@@ -759,8 +759,9 @@ public class JDFSpawn
 				for (int resParts = 0; resParts < siz; resParts++)
 				{
 					final JDFResource r = (JDFResource) vRes.elementAt(resParts);
-					if (resParts == 0 && spawnID.equals(r.getAttribute(AttributeName.SPAWNID)))
+					if (r == null || resParts == 0 && StringUtil.equals(spawnID, r.getAttribute(AttributeName.SPAWNID)))
 						break;
+
 					final JDFResource rRoot1 = (JDFResource) vResRoot.elementAt(resParts);
 					final PartSpawn partSpawner = new PartSpawn();
 					if (!bInformative)
