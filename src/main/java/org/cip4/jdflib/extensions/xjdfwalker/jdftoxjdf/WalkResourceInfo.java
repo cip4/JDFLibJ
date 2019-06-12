@@ -99,7 +99,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 		moveToResourceSet((JDFResourceInfo) eNew, ri);
 		updateInfos((JDFResourceInfo) eNew);
 		eNew.removeAttribute(AttributeName.RESOURCENAME);
-		return null; // we are done with all relevant kids from JDF
+		return eNew;
 	}
 
 	void updateInfos(final JDFResourceInfo eNew)
@@ -177,14 +177,12 @@ public class WalkResourceInfo extends WalkJDFSubElement
 				{
 					ph.getRoot().moveAttribute(XJDFConstants.ExternalID, ri);
 				}
-
 			}
 			else if (ph.getRoot().getElement(ElementName.AMOUNTPOOL) == null)
 			{
-				final JDFAmountPool ap2 = (JDFAmountPool) ap.getParentNode_KElement().copyElement(ap, null);
-				ap2.reducePartAmounts(ph.getPartMapVector());
-				jdfToXJDF.walkTree(ap2, ph.getRoot());
-				ap2.deleteNode();
+				ap.reducePartAmounts(ph.getPartMapVector());
+				jdfToXJDF.walkTree(ap, ph.getRoot());
+				ap.deleteNode();
 			}
 		}
 		if (newParts.size() > 1)
@@ -196,6 +194,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 			ri.removeAttribute(XJDFConstants.ExternalID);
 		}
 		ri.removeChild(ElementName.AMOUNTPOOL, null, 0);
+		jdfRI.removeChild(ElementName.AMOUNTPOOL, null, 0);
 	}
 
 	/**
