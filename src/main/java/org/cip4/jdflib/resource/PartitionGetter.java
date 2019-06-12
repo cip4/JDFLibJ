@@ -276,7 +276,13 @@ public class PartitionGetter
 		final VJDFAttributeMap vMap = getPartitionMaps(vm, partUsage);
 		final VElement v = new VElement();
 		for (final JDFAttributeMap map : vMap)
-			v.add(leafMap.get(map));
+		{
+			final JDFResource jdfResource = leafMap.get(map);
+			if (jdfResource != null)
+			{
+				v.add(jdfResource);
+			}
+		}
 		return v;
 	}
 

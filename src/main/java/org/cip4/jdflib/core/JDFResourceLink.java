@@ -786,7 +786,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	 */
 	private VElement getMapTargetVector(final VJDFAttributeMap vmParts, final int nMax, final boolean followIdentical)
 	{
-		VElement v = new VElement();
+		final VElement v = new VElement();
 		// get the resource root
 		final JDFResource resRoot = getLinkRoot();
 		if (resRoot == null)
@@ -794,7 +794,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 			return v;
 		}
 
-		if (vmParts == null || vmParts.isEmpty())
+		if (VJDFAttributeMap.isEmpty(vmParts))
 		{
 			v.addElement(resRoot);
 			return v;
@@ -806,7 +806,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		{
 			vmParts.reduceMap(resRoot.getPartIDKeys().getSet());
 		}
-		if (vmParts.isEmpty())
+		if (VJDFAttributeMap.isEmpty(vmParts))
 		{
 			v.addElement(resRoot);
 			return v;
@@ -814,8 +814,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 		final PartitionGetter partitionGetter = new PartitionGetter(resRoot);
 		partitionGetter.setFollowIdentical(followIdentical);
-		v = partitionGetter.getPartitionVector(vmParts, partUsage);
-		return v;
+		return partitionGetter.getPartitionVector(vmParts, partUsage);
 	}
 
 	/**
