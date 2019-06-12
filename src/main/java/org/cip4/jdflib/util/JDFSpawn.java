@@ -869,22 +869,22 @@ public class JDFSpawn
 	 */
 	private void addIdentical(final VElement vRes)
 	{
-		if (!bSpawnIdentical || ContainerUtil.isEmpty(vRes) || VJDFAttributeMap.isEmpty(vSpawnParts))
+		if (!bSpawnIdentical)
 		{
 			return;
 		}
-		final JDFResource jdfResource = (JDFResource) vRes.get(0);
-		if (jdfResource == null)
+
+		if (vRes == null || vRes.size() == 0 || vSpawnParts == null || vSpawnParts.size() == 0)
 		{
 			return;
 		}
-		final JDFResource resRoot = jdfResource.getResourceRoot();
+		final JDFResource resRoot = ((JDFResource) vRes.get(0)).getResourceRoot();
 		final String id = resRoot.getID();
 		if (noIdentical.contains(id))
 			return;
 
-		final List<JDFIdentical> identicals = resRoot.getChildArrayByClass(JDFIdentical.class, true, -1);
-		if (ContainerUtil.isEmpty(identicals))
+		final Vector<JDFIdentical> identicals = resRoot.getChildrenByClass(JDFIdentical.class, true, -1);
+		if (identicals == null || identicals.size() == 0)
 		{
 			noIdentical.add(id);
 			return;
@@ -898,8 +898,9 @@ public class JDFSpawn
 		{
 			final JDFResource identParent = (JDFResource) ident.getParentNode_KElement();
 			final JDFAttributeMap identMap = identParent.getPartMap();
-			for (final JDFAttributeMap mapPart : vSpawnParts)
+			for (int j = 0; j < vSpawnParts.size(); j++)
 			{
+				final JDFAttributeMap mapPart = vSpawnParts.elementAt(j);
 				if (mapPart.subMap(identMap))
 				{
 					vRes.add(identParent);
