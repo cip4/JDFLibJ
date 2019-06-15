@@ -51,7 +51,7 @@ import org.cip4.jdflib.core.VElement;
 public class ElementWalker
 {
 	final protected IWalkerFactory theFactory;
-	final Log log = LogFactory.getLog(ElementWalker.class);
+	final protected Log log = LogFactory.getLog(getClass());
 
 	/**
 	 * @param _theFactory used to find the individual instances for the children

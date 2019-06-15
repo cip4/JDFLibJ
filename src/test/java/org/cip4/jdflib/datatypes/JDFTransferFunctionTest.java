@@ -280,4 +280,20 @@ public class JDFTransferFunctionTest extends JDFTestCaseBase
 		assertEquals(2.0, tf.getValue(1.0), 0);
 
 	}
+
+	@Test
+	public void testMultiplyStatic() throws DataFormatException
+	{
+		final JDFTransferFunction tf = new JDFTransferFunction("0 0 1 2.0");
+		final JDFTransferFunction tf2 = new JDFTransferFunction("0 0 0.5 0.4 1 1.0");
+		final JDFTransferFunction tf3 = JDFTransferFunction.multiply(tf, tf2);
+		assertEquals(3, tf3.numPoints());
+		assertEquals(0.0, tf3.getValue(0.0), 0);
+		assertEquals(0.8, tf3.getValue(0.5), 0);
+		assertEquals(2.0, tf3.getValue(1.0), 0);
+		final JDFTransferFunction tf4 = JDFTransferFunction.multiply(tf, null);
+		assertEquals(tf, tf4);
+		final JDFTransferFunction tf5 = JDFTransferFunction.multiply(null, tf);
+		assertEquals(tf, tf5);
+	}
 }

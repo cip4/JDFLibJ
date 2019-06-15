@@ -57,8 +57,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -91,7 +89,6 @@ import org.cip4.jdflib.util.UrlUtil;
  */
 public class MimeWriter extends MimeHelper implements IStreamWriter
 {
-	private final Log log;
 
 	private static class MyMimeMessage extends MimeMessage
 	{
@@ -216,7 +213,6 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	public MimeWriter()
 	{
 		super();
-		log = LogFactory.getLog(getClass());
 		createMimePackage();
 	}
 
@@ -227,7 +223,6 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	public MimeWriter(final Multipart mp)
 	{
 		super();
-		log = LogFactory.getLog(getClass());
 		theMultipart = mp;
 	}
 

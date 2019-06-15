@@ -106,6 +106,34 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testVersion20()
+	{
+		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
+		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/Resource/ConventionalPrintingParams/@WorkStyle", "WorkAndTurn");
+		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/@Usage", "Input");
+		root.setAttribute("Types", "ConventionalPrinting");
+		root.setAttribute(AttributeName.VERSION, "2.0");
+		writeTest(root, "../SimpleCP.xjdf", true, null);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testVersion21()
+	{
+		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
+		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/Resource/ConventionalPrintingParams/@WorkStyle", "WorkAndTurn");
+		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/@Usage", "Input");
+		root.setAttribute("Types", "ConventionalPrinting");
+		root.setAttribute(AttributeName.VERSION, "2.1");
+		writeTest(root, "../SimpleCP.xjdf", true, null);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testProductPV()
 	{
 		final KElement root = new XJDFHelper(EnumVersion.Version_2_1, "j1").getRoot();

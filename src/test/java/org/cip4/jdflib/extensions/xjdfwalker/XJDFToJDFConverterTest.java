@@ -1109,6 +1109,22 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws Throwable
+	 *
+	 */
+	@Test
+	public void testCustomerInfoNumber() throws Throwable
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "p1");
+		h.getCreateSet(ElementName.CUSTOMERINFO, EnumUsage.Input).getCreatePartition(null, true).getResource().setAttribute(AttributeName.CUSTOMERID, "12345.000");
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(h);
+		final JDFNode n = d.getJDFRoot();
+		assertEquals("12345.000", n.getCustomerInfo().getCustomerID());
+	}
+
+	/**
 	 *
 	 *
 	 */

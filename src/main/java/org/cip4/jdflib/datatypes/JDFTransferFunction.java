@@ -479,6 +479,26 @@ public class JDFTransferFunction extends JDFNumList
 	}
 
 	/**
+	 * returns the multiplied tf - in case one of thr arguments is null or unit, the other argument is returned unmodified
+	 * 
+	 * @param tf1
+	 * @param tf2
+	 * @return
+	 */
+	public static JDFTransferFunction multiply(final JDFTransferFunction tf1, final JDFTransferFunction tf2)
+	{
+		if (tf1 == null || tf1.isUnit())
+			return tf2;
+		if (tf2 != null && !tf2.isUnit())
+		{
+			final JDFTransferFunction tfRet = new JDFTransferFunction(tf1);
+			tfRet.multiply(tf2);
+			return tfRet;
+		}
+		return tf1;
+	}
+
+	/**
 	 * multiplies a complete transfer function to the vector only useful for 0-1 ranged transfer functions
 	 *
 	 * @param tf the given transfer function to add

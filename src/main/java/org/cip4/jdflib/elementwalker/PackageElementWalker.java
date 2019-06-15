@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,8 +44,6 @@ import java.security.CodeSource;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -67,7 +65,6 @@ public class PackageElementWalker extends ElementWalker
 	 */
 	private static final String WALK_CLASS = "Walk*.class";
 
-	final protected Log log;
 	static VectorMap<Class<?>, String> classes = null;
 
 	/**
@@ -77,7 +74,6 @@ public class PackageElementWalker extends ElementWalker
 	{
 		super(_theFactory);
 		final Class<? extends PackageElementWalker> myClass = getClass();
-		log = LogFactory.getLog(myClass);
 		if (classes == null)
 			classes = new VectorMap<>();
 		constructWalkers();
