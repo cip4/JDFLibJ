@@ -45,6 +45,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
 
@@ -453,6 +454,61 @@ public class ZipReaderTest extends JDFTestCaseBase
 		final ZipEntry e = r.getEntry("dir1/bigzip.pdf");
 		assertNotNull(e);
 		r.close();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testGetBigEntryStatic()
+	{
+		final ZipReader r = ZipReader.getZipReader(new File(sm_dirTestData + "dir1.zip"));
+		final ZipEntry e = r.getEntry("dir1/bigzip.pdf");
+		assertNotNull(e);
+		r.close();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testGetManyBigEntryStatic()
+	{
+		final ArrayList<ZipReader> l = new ArrayList<>();
+		for (int i = 0; i < 10; i++)
+		{
+			final ZipReader r = ZipReader.getZipReader(new File(sm_dirTestData + "dir1.zip"));
+			final ZipEntry e = r.getEntry("dir1/bigzip.pdf");
+			assertNotNull(e);
+			l.add(r);
+			final MemorySpy ms = new MemorySpy();
+			log.info(i + " " + ms.getSummary());
+		}
+		for (final ZipReader r : l)
+			r.close();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testGetManyReadersBigEntryStatic()
+	{
+		final ArrayList<ZipReader> l = new ArrayList<>();
+		for (int i = 0; i < 2; i++)
+		{
+			final ZipReader r = ZipReader.getZipReaders(FileUtil.getBufferedInputStream(new File(sm_dirTestData + "dir1.zip")), 1).get(0);
+			final ZipEntry e = r.getEntry("dir1/bigzip.pdf");
+			assertNotNull(e);
+			l.add(r);
+			final MemorySpy ms = new MemorySpy();
+			log.info(i + " " + ms.getSummary());
+		}
+		for (final ZipReader r : l)
+			r.close();
 	}
 
 	/**

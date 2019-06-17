@@ -306,7 +306,9 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	}
 
 	/**
-	 * creates an input output stream class from any stream if is alraedy is a buffered inputstream, no copy is made
+	 * creates an input output stream class from any stream
+	 *
+	 * if is already is a buffered inputstream, no copy is made
 	 *
 	 * @param is the inputstream to buffer
 	 * @param maxLength the maximum length in memory
@@ -417,7 +419,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 				try
 				{
 					isTmpFile = true;
-					file = File.createTempFile("ByteArray", null);
+					file = File.createTempFile("ByteArray.", null);
 				}
 				catch (final IOException e)
 				{
@@ -522,7 +524,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 			int avail = 0;
 			try
 			{
-				avail = is.available();
+				avail = (is instanceof ByteArrayIOInputStream) ? 0 : is.available();
 				if (avail > maxLength)
 				{
 					ensureStream(avail);

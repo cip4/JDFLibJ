@@ -323,7 +323,24 @@ public class ZipReader
 	 */
 	public static ZipReader getZipReader(final InputStream is)
 	{
-		final Vector<ZipReader> v = getZipReaders(is, 1);
+		ByteArrayIOStream keepBuffer = null;
+		try
+		{
+			final ZipReader newReader = new ZipReader(is);
+			newReader.buffer();
+			keepBuffer = newReader.bios;
+			final ZipEntry nextEntry = newReader.getNextEntry();
+			if (nextEntry != null && StringUtil.getNonEmpty(getEntryName(nextEntry)) != null)
+			{
+				newReader.reset();
+				return newReader;
+			}
+		}
+		catch (final Exception x)
+		{
+
+		}
+		final Vector<ZipReader> v = getZipReaders(keepBuffer == null ? is : keepBuffer.getInputStream(), 1);
 		return v != null && v.size() == 1 ? v.get(0) : null;
 	}
 
