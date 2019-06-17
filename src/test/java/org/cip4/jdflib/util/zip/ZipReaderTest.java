@@ -512,6 +512,21 @@ public class ZipReaderTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testGetZipReaderFileNoSearch()
+	{
+		ZipReader zr = ZipReader.getZipReader(new File(sm_dirTestData + "CIP4 JDFEditor 2.4-SNAPSHOT.exe"), false);
+		if (zr == null)
+		{
+			zr = ZipReader.getZipReader(new File(sm_dirTestData + "CIP4_JDFEditor_2.4-SNAPSHOT.exe"), false);
+		}
+		assertNull(zr);
+	}
+
+	/**
 	 * @throws IOException
 	 *
 	 *
