@@ -323,6 +323,16 @@ public class ZipReader
 	 */
 	public static ZipReader getZipReader(final InputStream is)
 	{
+		return getZipReader(is, false);
+	}
+
+	/**
+	 * get a zip reader that searches itself for a valid zip header
+	 *
+	 * @param is
+	 */
+	public static ZipReader getZipReader(final InputStream is, final boolean bSearch)
+	{
 		ByteArrayIOStream keepBuffer = null;
 		try
 		{
@@ -340,8 +350,12 @@ public class ZipReader
 		{
 
 		}
-		final Vector<ZipReader> v = getZipReaders(keepBuffer == null ? is : keepBuffer.getInputStream(), 1);
-		return v != null && v.size() == 1 ? v.get(0) : null;
+		if (bSearch)
+		{
+			final Vector<ZipReader> v = getZipReaders(keepBuffer == null ? is : keepBuffer.getInputStream(), 1);
+			return v != null && v.size() == 1 ? v.get(0) : null;
+		}
+		return null;
 	}
 
 	/**
@@ -705,6 +719,16 @@ public class ZipReader
 	public static ZipReader getZipReader(final File jarFile)
 	{
 		return getZipReader(FileUtil.getBufferedInputStream(jarFile));
+	}
+
+	/**
+	 *
+	 * @param jarFile
+	 * @return
+	 */
+	public static ZipReader getZipReader(final File jarFile, final boolean search)
+	{
+		return getZipReader(FileUtil.getBufferedInputStream(jarFile), search);
 	}
 
 	/**

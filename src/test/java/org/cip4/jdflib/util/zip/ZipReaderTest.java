@@ -498,7 +498,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	public void testGetManyReadersBigEntryStatic()
 	{
 		final ArrayList<ZipReader> l = new ArrayList<>();
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < 1; i++)
 		{
 			final ZipReader r = ZipReader.getZipReaders(FileUtil.getBufferedInputStream(new File(sm_dirTestData + "dir1.zip")), 1).get(0);
 			final ZipEntry e = r.getEntry("dir1/bigzip.pdf");
