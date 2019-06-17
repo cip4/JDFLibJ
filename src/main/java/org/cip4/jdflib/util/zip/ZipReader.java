@@ -323,7 +323,7 @@ public class ZipReader
 	 */
 	public static ZipReader getZipReader(final InputStream is)
 	{
-		return getZipReader(is, false);
+		return getZipReader(is, true);
 	}
 
 	/**
