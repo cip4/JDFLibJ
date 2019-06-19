@@ -53,11 +53,13 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.XJMFHelper;
 import org.junit.Test;
 
 public class PostXJDFWalkerTest extends JDFTestCaseBase
@@ -126,6 +128,30 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		w.combineSameSets();
 		assertNull(h.getSet("a", 1));
 		assertEquals(2, h.getSet("a", 0).getPartMapVector().size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSameResInfo()
+	{
+		final XJMFHelper h = new XJMFHelper();
+		final MessageHelper mh = h.appendMessage("ResponseResource");
+		int j = 0;
+		for (int i = 0; i < 10; i++)
+		{
+			final KElement ri = mh.getRoot().appendElement(ElementName.RESOURCEINFO);
+			j++;
+			final KElement rs0 = ri.appendElement(XJDFConstants.ResourceSet);
+			rs0.setAttribute(AttributeName.NAME, "Media");
+			new SetHelper(rs0).appendResource(null, true).setDescriptiveName("foo " + j);
+		}
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.walkTree(mh.getRoot(), null);
+		assertEquals(1, mh.getRoot().getChildArray(ElementName.RESOURCEINFO, null).size());
+		final SetHelper s2 = new SetHelper(mh.getRoot().getElement("ResourceInfo").getElement(XJDFConstants.ResourceSet));
+		assertEquals(10, s2.getPartitions().size());
 	}
 
 	/**

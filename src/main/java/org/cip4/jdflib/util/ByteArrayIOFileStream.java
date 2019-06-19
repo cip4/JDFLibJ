@@ -54,6 +54,7 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 
 import org.apache.commons.io.IOUtils;
+import org.cip4.jdflib.core.JDFException;
 
 /**
  * Shared input / outputStream class write once, read many...
@@ -161,6 +162,11 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 			}
 		}
 
+		/**
+		 * throws JDFException if an IOException occurred
+		 * 
+		 * @see org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream#seek(long)
+		 */
 		@Override
 		public void seek(long pos)
 		{
@@ -177,6 +183,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 			}
 			catch (final IOException e)
 			{
+				throw new JDFException(e.getMessage());
 			}
 		}
 
@@ -378,7 +385,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	@Override
 	public synchronized String toString()
 	{
-		return "ByteArrayIOFileStream: size= " + count + " maxLength=" + maxLength;
+		return "ByteArrayIOFileStream: size= " + count + " maxLength=" + maxLength + "isTmp=" + isTmpFile + "File=" + file;
 	}
 
 	/**

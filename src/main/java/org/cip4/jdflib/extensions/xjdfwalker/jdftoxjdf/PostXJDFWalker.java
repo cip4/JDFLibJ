@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
@@ -71,6 +72,7 @@ import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFHeadBandApplicationParams;
@@ -1653,67 +1655,6 @@ class PostXJDFWalker extends BaseElementWalker
 			// TODO treat outputs backwards...
 			combineSameSets(xjdf);
 		}
-
-		/**
-		 *
-		 * @param v
-		 */
-		void combineSameSets(final JDFElement xjdf)
-		{
-			if (!isRetainAll())
-			{
-				final Vector<SetHelper> v = new XJDFHelper(xjdf).getSets();
-
-				while (v.size() > 0)
-				{
-					final Vector<SetHelper> sameSets = new Vector<>();
-					final SetHelper firstSet = v.remove(0);
-					sameSets.add(firstSet);
-					for (int j = 0; j < v.size(); j++)
-					{
-						final SetHelper next = v.get(j);
-						if (sameSetType(firstSet, next))
-						{
-							sameSets.add(next);
-							v.remove(j);
-							j--;
-						}
-					}
-
-					final KElement root = firstSet.getRoot();
-					for (int j = 1; j < sameSets.size(); j++)
-					{
-						final Vector<ResourceHelper> parts = sameSets.get(j).getPartitions();
-						for (final ResourceHelper ph : parts)
-						{
-							root.copyElement(ph.getRoot(), null);
-						}
-						sameSets.get(j).getRoot().deleteNode();
-					}
-				}
-			}
-		}
-
-		/**
-		 *
-		 * @param firstSet
-		 * @param next
-		 * @return
-		 */
-		private boolean sameSetType(final SetHelper firstSet, final SetHelper next)
-		{
-			boolean same = firstSet.getName().equals(next.getName());
-			if (same)
-				same = StringUtil.equals(firstSet.getProcessUsage(), next.getProcessUsage());
-			if (same)
-				same = ContainerUtil.equals(firstSet.getUsage(), next.getUsage());
-			if (same)
-				same = ContainerUtil.equals(firstSet.getXPathValue("@CombinedProcessIndex"), next.getXPathValue("@CombinedProcessIndex"));
-			if (same)
-				same = ContainerUtil.equals(firstSet.getXPathValue("Resource/Media/@MediaType"), next.getXPathValue("Resource/Media/@MediaType"));
-
-			return same;
-		}
 	}
 
 	/**
@@ -2575,6 +2516,80 @@ class PostXJDFWalker extends BaseElementWalker
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 *
 	 */
+	protected class WalkResourceMessage extends WalkMessage
+	{
+
+		/**
+		 *
+		 */
+		public WalkResourceMessage()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			mergeResourceInfos(xjdf);
+			return super.walk(xjdf, dummy);
+		}
+
+		private void mergeResourceInfos(final KElement xjdf)
+		{
+			final List<JDFResourceInfo> vr = xjdf.getChildArrayByClass(JDFResourceInfo.class, false, 0);
+
+			if (!ContainerUtil.isEmpty(vr))
+			{
+				final List<SetHelper> sets = new ArrayList<>();
+				for (final JDFResourceInfo ri : vr)
+				{
+					final Collection<KElement> childArray = ri.getChildArray(XJDFConstants.ResourceSet, null);
+					for (final KElement e : childArray)
+					{
+						sets.add(new SetHelper(e));
+					}
+				}
+				combineSameSets(sets);
+				for (final JDFResourceInfo ri : vr)
+				{
+					if (!ri.hasChildElement(XJDFConstants.ResourceSet, null))
+					{
+						ri.deleteNode();
+					}
+				}
+			}
+
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public boolean matches(final KElement e)
+		{
+			return super.matches(e) && e.getLocalName().endsWith(XJDFConstants.Resource);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString("SignalResource ResponseResource");
+		}
+
+	}
+
+	/**
+	 * class that ensures that we do not have signaturename partitions
+	 *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 *
+	 */
 	protected class WalkAudit extends WalkElement
 	{
 
@@ -3063,8 +3078,73 @@ class PostXJDFWalker extends BaseElementWalker
 		final IWalker w = getFactory().getWalker(root);
 		if (w instanceof WalkXJDF)
 		{
-			((WalkXJDF) w).combineSameSets((JDFElement) root);
+			combineSameSets((JDFElement) root);
 		}
 
+	}
+
+	/**
+	 *
+	 * @param v
+	 */
+	void combineSameSets(final JDFElement xjdf)
+	{
+		if (!isRetainAll())
+		{
+			final Vector<SetHelper> v = new XJDFHelper(xjdf).getSets();
+			combineSameSets(v);
+		}
+	}
+
+	void combineSameSets(final List<SetHelper> v)
+	{
+		while (v.size() > 0)
+		{
+			final ArrayList<SetHelper> sameSets = new ArrayList<>();
+			final SetHelper firstSet = v.remove(0);
+			sameSets.add(firstSet);
+			for (int j = 0; j < v.size(); j++)
+			{
+				final SetHelper next = v.get(j);
+				if (sameSetType(firstSet, next))
+				{
+					sameSets.add(next);
+					v.remove(j);
+					j--;
+				}
+			}
+
+			final KElement root = firstSet.getRoot();
+			for (int j = 1; j < sameSets.size(); j++)
+			{
+				final Vector<ResourceHelper> parts = sameSets.get(j).getPartitions();
+				for (final ResourceHelper ph : parts)
+				{
+					root.copyElement(ph.getRoot(), null);
+				}
+				sameSets.get(j).getRoot().deleteNode();
+			}
+		}
+	}
+
+	/**
+	 *
+	 * @param firstSet
+	 * @param next
+	 * @return
+	 */
+	private boolean sameSetType(final SetHelper firstSet, final SetHelper next)
+	{
+		boolean same = firstSet.getName().equals(next.getName());
+		if (same)
+			same = StringUtil.equals(firstSet.getProcessUsage(), next.getProcessUsage());
+		if (same)
+			same = ContainerUtil.equals(firstSet.getUsage(), next.getUsage());
+		if (same)
+			same = ContainerUtil.equals(firstSet.getXPathValue("@CombinedProcessIndex"), next.getXPathValue("@CombinedProcessIndex"));
+		if (same)
+			same = ContainerUtil.equals(firstSet.getXPathValue("Resource/Media/@MediaType"), next.getXPathValue("Resource/Media/@MediaType"));
+
+		return same;
 	}
 }
