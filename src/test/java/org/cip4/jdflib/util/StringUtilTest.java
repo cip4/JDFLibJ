@@ -1261,6 +1261,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	{
 		assertFalse(StringUtil.isInteger(""));
 		assertFalse(StringUtil.isInteger("a"));
+		assertFalse(StringUtil.isInteger("1.0"));
 		assertTrue(StringUtil.isInteger("123"));
 		assertTrue(StringUtil.isInteger("-123"));
 		assertTrue(StringUtil.isInteger("+123"));
