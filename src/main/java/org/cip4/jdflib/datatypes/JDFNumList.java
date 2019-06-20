@@ -778,15 +778,12 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	{
 		if (other == null)
 			return false;
-		if (size() != other.size())
+		final int size = size();
+		if (size != other.size())
 			return false;
-		JDFNumList dif;
-		dif = clone();
-		dif.subtract(other);
-		dif.abs();
-		for (int i = 0; i < size(); i++)
+		for (int i = 0; i < size; i++)
 		{
-			if (dif.doubleAt(i) > delta)
+			if (!StringUtil.isEqual(doubleAt(i), other.doubleAt(i), delta))
 				return false;
 		}
 		return true;

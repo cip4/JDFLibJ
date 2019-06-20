@@ -64,6 +64,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
+import org.cip4.jdflib.datatypes.JDFNumberList;
 
 /**
  * collection of static string utilities
@@ -73,6 +74,11 @@ import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
  */
 public class StringUtil
 {
+	enum EDataType
+	{
+		string, integer, number, bool, numberlist, date
+	}
+
 	/**
 	 *
 	 */
@@ -1269,19 +1275,33 @@ public class StringUtil
 	 */
 	public static boolean isEqual(final double d1, final double d2)
 	{
+		return isEqual(d1, d2, JDFBaseDataTypes.EPSILON);
+	}
+
+	/**
+	 * return true if d1 and d2 are within a range of epsilon or close enough to be serialized identically
+	 *
+	 * @param d1
+	 * @param d2
+	 * @return true if (almost) identical
+	 */
+	public static boolean isEqual(final double d1, final double d2, final double delta)
+	{
 		if (d1 == d2)
 		{
 			return true;
 		}
-		if (Math.abs(d1 - d2) < JDFBaseDataTypes.EPSILON)
+		if (delta > 0)
 		{
-			return true;
+			if (Math.abs(d1 - d2) <= delta)
+			{
+				return true;
+			}
+			if (delta < 0.42 && d1 != 0 && Math.abs((d2 / d1) - 1.0) < delta)
+			{
+				return true;
+			}
 		}
-		if (d1 != 0 && Math.abs((d2 / d1) - 1.0) < JDFBaseDataTypes.EPSILON)
-		{
-			return true;
-		}
-
 		return false;
 	}
 
@@ -1344,8 +1364,6 @@ public class StringUtil
 		return true;
 	}
 
-	// ///////////////////////////////////////////////////////////////////
-
 	/**
 	 * checks whether a string matches the boolean values "true" or "false"
 	 *
@@ -1355,6 +1373,49 @@ public class StringUtil
 	public static boolean isBoolean(final String strWork)
 	{
 		return parseBoolean(strWork, true) == parseBoolean(strWork, false);
+	}
+
+	/**
+	 * checks whether a string matches the boolean values "true" or "false"
+	 *
+	 * @param strWork the string to check
+	 * @return boolean true if strWork is represents boolean value
+	 */
+	public static boolean isDate(final String strWork)
+	{
+		return JDFDate.createDate(strWork) != null;
+	}
+
+	/**
+	 * checks whether a string matches the boolean values "true" or "false"
+	 *
+	 * @param strWork the string to check
+	 * @return boolean true if strWork is represents boolean value
+	 */
+	public static boolean isNumberList(final String strWork)
+	{
+		return JDFNumberList.createNumberList(strWork) != null;
+	}
+
+	/**
+	 *
+	 * @param s
+	 * @return null if nulkl, else the datatype
+	 */
+	public static EDataType getDataType(final String s)
+	{
+		if (s == null)
+			return null;
+		else if (isNumber(s))
+			return isInteger(s) ? EDataType.integer : EDataType.number;
+		else if (isBoolean(s))
+			return EDataType.bool;
+		else if (isDate(s))
+			return EDataType.date;
+		else if (isNumberList(s))
+			return EDataType.numberlist;
+		else
+			return EDataType.string;
 	}
 
 	/**
@@ -2559,6 +2620,55 @@ public class StringUtil
 	{
 		regExp = simpleRegExptoRegExp(regExp);
 		return matches(str, regExp);
+	}
+
+	public static boolean equals(final String attribute, final String attribute2, final double delta)
+	{
+		if (isEmpty(attribute))
+			return isEmpty(attribute2);
+
+		if (equals(attribute.trim(), attribute2.trim()))
+		{
+			return true;
+		}
+		if (delta >= 0 && attribute != null && attribute2 != null)
+		{
+			final EDataType dt = getDataType(attribute);
+			final EDataType dt2 = getDataType(attribute2);
+			final boolean isNumber = EDataType.number.equals(dt) && EDataType.integer.equals(dt2) || EDataType.number.equals(dt2) && EDataType.integer.equals(dt);
+
+			if (!isNumber && !ContainerUtil.equals(dt, dt2))
+			{
+				return false;
+			}
+			if (EDataType.integer.equals(dt) && !isNumber)
+			{
+				return parseInt(attribute, -1) == parseInt(attribute2, -2);
+			}
+			else if (EDataType.number.equals(dt) || isNumber)
+			{
+				final double parseDouble = parseDouble(attribute, -1);
+				final double parseDouble2 = parseDouble(attribute2, -2);
+				return isEqual(parseDouble, parseDouble2, delta);
+			}
+			else if (EDataType.bool.equals(dt))
+			{
+				return parseBoolean(attribute, true) == parseBoolean(attribute2, false);
+			}
+			else if (EDataType.numberlist.equals(dt))
+			{
+				final JDFNumberList nl1 = JDFNumberList.createNumberList(attribute);
+				final JDFNumberList nl2 = JDFNumberList.createNumberList(attribute2);
+				return nl1.matches(nl2, delta);
+			}
+			else if (EDataType.date.equals(dt))
+			{
+				final JDFDate d1 = JDFDate.createDate(attribute);
+				final JDFDate d2 = JDFDate.createDate(attribute2);
+				return Math.abs(d1.getTimeInMillis() - d2.getTimeInMillis()) < 1111;
+			}
+		}
+		return false;
 	}
 
 	/**

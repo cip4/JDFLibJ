@@ -46,7 +46,21 @@ public class XMLCompareWalkerTest extends JDFTestCaseBase
 		final KElement e2 = KElement.createRoot("a", null);
 		e2.setAttribute("b", "b2");
 		final XMLCompareWalker w = new XMLCompareWalker(e1, e2);
-		w.addIgnore("b");
+		w.addIgnore("b", true);
+		assertTrue(w.compare().isEmpty());
+	}
+
+	@Test
+	public void testSimpleIgnoreValue()
+	{
+		final KElement e1 = KElement.createRoot("a", null);
+		e1.setAttribute("b", "b1");
+		final KElement e2 = KElement.createRoot("a", null);
+		e2.setAttribute("b", "");
+		final XMLCompareWalker w = new XMLCompareWalker(e1, e2);
+		w.addIgnore("b", true);
+		assertFalse(w.compare().isEmpty());
+		w.addIgnore("b", false);
 		assertTrue(w.compare().isEmpty());
 	}
 
@@ -71,7 +85,7 @@ public class XMLCompareWalkerTest extends JDFTestCaseBase
 		final XMLCompareWalker w = new XMLCompareWalker(e1, e2);
 		w.setPrecision(0);
 		assertFalse(w.compare().isEmpty());
-		w.setPrecision(3);
+		w.setPrecision(0.001);
 		assertTrue(w.compare().isEmpty());
 	}
 

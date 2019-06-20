@@ -57,20 +57,12 @@ public class XMLCompareWalker extends BaseElementWalker
 {
 	final Map<String, MyPair<String, String>> theMap;
 	private boolean first;
-	private int precision;
+	private double precision;
 
 	/**
-	 * @return the precision
+	 * @param precision the precision delta to set
 	 */
-	public int getPrecision()
-	{
-		return precision;
-	}
-
-	/**
-	 * @param precision the precision to set
-	 */
-	public void setPrecision(final int precision)
+	public void setPrecision(final double precision)
 	{
 		this.precision = precision;
 	}
@@ -93,6 +85,7 @@ public class XMLCompareWalker extends BaseElementWalker
 	private final KElement e2;
 	private final KElement e1;
 	private final Set<String> ignore;
+	private final Set<String> ignoreValue;
 
 	/**
 	 * @param w
@@ -106,6 +99,7 @@ public class XMLCompareWalker extends BaseElementWalker
 		this.e2 = e2;
 		precision = -1;
 		ignore = new HashSet<>();
+		ignoreValue = new HashSet<>();
 	}
 
 	/**
@@ -134,25 +128,29 @@ public class XMLCompareWalker extends BaseElementWalker
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
 			final String myPath = e.buildRelativeXPath(e.getParentNode_KElement(), method);
-			final KElement e2 = trackElem == null ? null : trackElem.getXPathElement(myPath);
+			final KElement eNew = trackElem == null ? null : trackElem.getXPathElement(myPath);
 			final VString keys = e.getAttributeVector();
 			for (final String key : keys)
 			{
-				final MyPair<String, String> diff = myCompare(key, e.getAttribute(key), e2 == null ? null : e2.getNonEmpty(key));
+				final MyPair<String, String> diff = myCompare(key, e.getAttribute(key), eNew == null ? null : eNew.getNonEmpty(key));
 				if (diff != null)
 				{
-					final String ret = e.buildRelativeXPath((first ? e1.getParentNode_KElement() : e2.getParentNode_KElement()), method) + "/@" + key;
+					final String ret = e.buildRelativeXPath((first ? e1.getParentNode_KElement() : eNew.getParentNode_KElement()), method) + "/@" + key;
 					theMap.put(ret, diff);
 				}
 			}
-			return e2;
+			return eNew;
 		}
 
 		MyPair<String, String> myCompare(final String key, final String attribute, final String attribute2)
 		{
-			if (wantKey(key) && !matches(attribute, attribute2))
+			if (wantKey(key))
 			{
-				return first ? new MyPair<>(attribute, attribute2) : new MyPair<>(attribute2, attribute);
+				final boolean ok = wantValue(key) ? StringUtil.equals(attribute, attribute2, precision) : StringUtil.isEmpty(attribute) == StringUtil.isEmpty(attribute2);
+				if (!ok)
+				{
+					return first ? new MyPair<>(attribute, attribute2) : new MyPair<>(attribute2, attribute);
+				}
 			}
 			return null;
 		}
@@ -162,32 +160,9 @@ public class XMLCompareWalker extends BaseElementWalker
 			return !ignore.contains(key);
 		}
 
-		boolean matches(final String attribute, final String attribute2)
+		boolean wantValue(final String key)
 		{
-			if (precision >= 0 && attribute != null && attribute2 != null)
-			{
-				if (StringUtil.isInteger(attribute) && StringUtil.isInteger(attribute2))
-				{
-					return StringUtil.parseInt(attribute, -1) == StringUtil.parseInt(attribute2, -2);
-				}
-				if (StringUtil.isNumber(attribute) && StringUtil.isNumber(attribute2))
-				{
-					final double parseDouble = StringUtil.parseDouble(attribute, -1);
-					final double parseDouble2 = StringUtil.parseDouble(attribute2, -2);
-					if (parseDouble == parseDouble2)
-						return true;
-					if (precision > 0)
-					{
-						if (parseDouble * parseDouble2 < 0)
-							return false;
-						final double mx = Math.max(Math.abs(parseDouble), Math.abs(parseDouble2));
-						final double mn = Math.min(Math.abs(parseDouble), Math.abs(parseDouble2));
-						return mn / mx > 1.0 - (Math.pow(0.1, precision));
-					}
-				}
-
-			}
-			return StringUtil.equals(attribute, attribute2);
+			return !ignoreValue.contains(key);
 		}
 
 		/**
@@ -211,22 +186,33 @@ public class XMLCompareWalker extends BaseElementWalker
 	}
 
 	/**
-	 * @param method the method to set
+	 *
+	 * @param keys
+	 * @param valueOnly
 	 */
-	public void addIgnore(final Collection<String> keys)
+	public void addIgnore(final Collection<String> keys, final boolean valueOnly)
 	{
 		if (keys != null)
 		{
 			for (final String key : keys)
-				addIgnore(key);
+				addIgnore(key, valueOnly);
 		}
 	}
 
-	public void addIgnore(final String key)
+	/**
+	 *
+	 * @param key
+	 * @param valueOnly
+	 */
+	public void addIgnore(final String key, final boolean valueOnly)
 	{
 		if (!StringUtil.isEmpty(key))
-			ignore.add(key);
-
+		{
+			if (valueOnly)
+				ignoreValue.add(key);
+			else
+				ignore.add(key);
+		}
 	}
 
 }

@@ -61,6 +61,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.util.StringUtil.EDataType;
 import org.cip4.jdflib.util.StringUtil.StringReplacer;
 import org.junit.Test;
 
@@ -1257,6 +1258,21 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testEqualsPrecision()
+	{
+		assertTrue(StringUtil.equals("", null, 0.001));
+		assertTrue(StringUtil.equals(null, null, 0.001));
+		assertTrue(StringUtil.equals("1", "1.0", 0));
+		assertTrue(StringUtil.equals("1", "1.0001", 0.001));
+		assertTrue(StringUtil.equals("1 2", "1.0001 2.0002", 0.001));
+		assertTrue(StringUtil.equals("true", "TRUE", 0));
+		assertTrue(StringUtil.equals(new JDFDate().getDateTimeISO(), new JDFDate().addOffset(1, 0, 0, 0).getDateTimeISO(), 0));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testisInteger()
 	{
 		assertFalse(StringUtil.isInteger(""));
@@ -1344,7 +1360,44 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertFalse(StringUtil.isID("1abc"));
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 *
+	 */
+	@Test
+	public void testIsDate()
+	{
+		assertTrue(StringUtil.isDate(new JDFDate().getDateTimeISO()));
+		assertTrue(StringUtil.isDate(new JDFDate().getDateISO()));
+		assertFalse(StringUtil.isDate("1abc"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testList()
+	{
+		assertTrue(StringUtil.isNumberList("1"));
+		assertTrue(StringUtil.isNumberList("1.04 6.777"));
+		assertFalse(StringUtil.isNumberList("a"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testgetDatatype()
+	{
+		assertEquals(EDataType.integer, StringUtil.getDataType("-1"));
+		assertEquals(EDataType.integer, StringUtil.getDataType("1234567890"));
+		assertEquals(EDataType.bool, StringUtil.getDataType(" false "));
+		assertEquals(EDataType.date, StringUtil.getDataType(new JDFDate().getDateTimeISO()));
+		assertEquals(EDataType.number, StringUtil.getDataType(" 1e15 "));
+		assertEquals(EDataType.number, StringUtil.getDataType(" 1.234 "));
+		assertEquals(EDataType.numberlist, StringUtil.getDataType(" 1 1.234 "));
+		assertEquals(EDataType.string, StringUtil.getDataType(" 1a1.234 "));
+		assertNull(StringUtil.getDataType(null));
+	}
 
 	/**
 	 *
