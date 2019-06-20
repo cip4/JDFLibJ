@@ -2622,6 +2622,14 @@ public class StringUtil
 		return matches(str, regExp);
 	}
 
+	/**
+	 * siple comparison of strings with some heuristics
+	 *
+	 * @param attribute
+	 * @param attribute2
+	 * @param delta
+	 * @return
+	 */
 	public static boolean equals(final String attribute, final String attribute2, final double delta)
 	{
 		if (isEmpty(attribute))
@@ -2631,7 +2639,7 @@ public class StringUtil
 		{
 			return true;
 		}
-		if (delta >= 0 && attribute != null && attribute2 != null)
+		if (delta >= 0)
 		{
 			final EDataType dt = getDataType(attribute);
 			final EDataType dt2 = getDataType(attribute2);
