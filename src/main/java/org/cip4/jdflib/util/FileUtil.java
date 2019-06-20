@@ -57,6 +57,7 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
@@ -69,6 +70,8 @@ import org.cip4.jdflib.ifaces.IStreamWriter;
  */
 public class FileUtil
 {
+
+	private static Log log = LogFactory.getLog(FileUtil.class);
 
 	private FileUtil()
 	{
@@ -518,9 +521,13 @@ public class FileUtil
 	 */
 	public static File streamToFile(final InputStream fis, final File fil)
 	{
-		if (fis == null)
+		if (fis == null || fil == null)
 			return null;
-		createNewFile(fil);
+		final boolean ok = createNewFile(fil);
+		if (!ok)
+		{
+			log.warn("Could not create target file: " + fil.getAbsolutePath());
+		}
 		try
 		{
 			final OutputStream fos = getBufferedOutputStream(fil);
@@ -533,6 +540,7 @@ public class FileUtil
 		}
 		catch (final IOException x)
 		{
+			log.error("Snafu streaming to " + fil.getAbsolutePath(), x);
 			return null;
 		}
 		return fil;
@@ -942,7 +950,7 @@ public class FileUtil
 			bOK = file.delete();
 			if (bInterupt || i++ > loops)
 			{
-				LogFactory.getLog(FileUtil.class).warn("cannot force delete of file: " + file.getAbsolutePath() + " modifications=" + bMod);
+				log.warn("cannot force delete of file: " + file.getAbsolutePath() + " modifications=" + bMod);
 				break;
 			}
 		}

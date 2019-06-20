@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -43,6 +43,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.RollingBackupFile;
+import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.file.FileSorter;
 
@@ -144,7 +145,15 @@ class StorageHotFolderListener implements HotFolderListener
 			copyCompleted(hotFile, false);
 			return false; // not good
 		}
-		final boolean b = theListener.hotFile(storedFile);
+		boolean b = false;
+		try
+		{
+			b = theListener.hotFile(storedFile);
+		}
+		catch (final Throwable t)
+		{
+			log.error("Could not process " + hotFile, t);
+		}
 		copyCompleted(storedFile, b);
 		return b;
 	}
@@ -325,7 +334,9 @@ class StorageHotFolderListener implements HotFolderListener
 
 	File getStoredFile(final File hotFile)
 	{
-		final String name = hotFile.getName();
+		final String name = hotFile==null ? null: hotFile.getName();
+		if(StringUtil.isEmpty(name))
+			return null;
 		final File tmpDir = getTmpDir();
 		final File newAbsoluteFile = FileUtil.getFileInDirectory(tmpDir, new File(name));
 		boolean ok = false;
