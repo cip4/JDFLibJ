@@ -421,6 +421,25 @@ public class JDFMatrix extends JDFNumList
 	 *
 	 * @return
 	 */
+	public EnumOrientation getOrientation()
+	{
+		final boolean isFlip = isFlip();
+		final double angle = getAngle();
+		if (Math.abs(angle) < 1)
+			return isFlip ? EnumOrientation.Flip0 : EnumOrientation.Rotate0;
+		if (Math.abs(angle - 90) < 1)
+			return isFlip ? EnumOrientation.Flip90 : EnumOrientation.Rotate90;
+		if (Math.abs(angle - 180) < 1)
+			return isFlip ? EnumOrientation.Flip180 : EnumOrientation.Rotate180;
+		if (Math.abs(angle - 270) < 1)
+			return isFlip ? EnumOrientation.Flip270 : EnumOrientation.Rotate270;
+		return null;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
 	public double getAngle()
 	{
 		final double det = getAffineTransform().getDeterminant();
