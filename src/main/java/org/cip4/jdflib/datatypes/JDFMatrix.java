@@ -424,17 +424,30 @@ public class JDFMatrix extends JDFNumList
 	public double getAngle()
 	{
 		final double det = getAffineTransform().getDeterminant();
-		if (det < 0.00001)
+		final double aDet = Math.abs(det);
+		if (aDet < 0.00001)
 		{
 			return 0;
 		}
-		final double a = getA() / det;
+		final double a = getA() / aDet;
 		final double b = getB() / det;
 		final double angleb = Math.asin(b) * 180 / Math.PI;
 		double angleA = Math.acos(a) * 180 / Math.PI;
 		if (angleb < 0)
+		{
 			angleA += 180;
+		}
 		return angleA;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public boolean isFlip()
+	{
+		final double det = getAffineTransform().getDeterminant();
+		return det < 0;
 	}
 
 	/**
@@ -532,6 +545,7 @@ public class JDFMatrix extends JDFNumList
 
 	/**
 	 * applies this to a point
+	 *
 	 * @param inCoordinate
 	 * @return
 	 */

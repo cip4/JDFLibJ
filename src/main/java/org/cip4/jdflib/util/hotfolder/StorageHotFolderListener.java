@@ -37,7 +37,8 @@
 package org.cip4.jdflib.util.hotfolder;
 
 import java.io.File;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -301,7 +302,7 @@ class StorageHotFolderListener implements HotFolderListener
 		{
 			final FileSorter fs = new FileSorter(bOK ? okStorage : errorStorage);
 			final File[] list = fs.sortLastModified(true);
-			final Vector<File> vList = new Vector<>();
+			final List<File> vList = new ArrayList<>();
 			for (final File f : list)
 			{
 				if (!f.isDirectory())
@@ -312,30 +313,34 @@ class StorageHotFolderListener implements HotFolderListener
 			int i = 0;
 			for (final File hotFile : vList)
 			{
-				i++;
-				boolean ok = i > maxStore ? FileUtil.forceDelete(hotFile) : true;
-				if (!ok)
-				{
-					log.warn("failed to delete temporary file " + hotFile.getAbsolutePath());
-				}
+				cleanupSingle(i++, hotFile);
+			}
+		}
+	}
 
-				final File aux = i > maxAux ? FileUtil.getAuxDir(hotFile) : null;
-				if (aux != null)
-				{
-					ok = FileUtil.deleteAll(aux);
-					if (!ok)
-					{
-						log.warn("failed to delete temporary directory " + aux.getAbsolutePath());
-					}
-				}
+	void cleanupSingle(final int i, final File hotFile)
+	{
+		boolean ok = i > maxStore ? FileUtil.forceDelete(hotFile) : true;
+		if (!ok)
+		{
+			log.warn("failed to delete temporary file " + hotFile.getAbsolutePath());
+		}
+
+		final File aux = i > maxAux ? FileUtil.getAuxDir(hotFile) : null;
+		if (aux != null)
+		{
+			ok = FileUtil.deleteAll(aux);
+			if (!ok)
+			{
+				log.warn("failed to delete temporary directory " + aux.getAbsolutePath());
 			}
 		}
 	}
 
 	File getStoredFile(final File hotFile)
 	{
-		final String name = hotFile==null ? null: hotFile.getName();
-		if(StringUtil.isEmpty(name))
+		final String name = hotFile == null ? null : hotFile.getName();
+		if (StringUtil.isEmpty(name))
 			return null;
 		final File tmpDir = getTmpDir();
 		final File newAbsoluteFile = FileUtil.getFileInDirectory(tmpDir, new File(name));
