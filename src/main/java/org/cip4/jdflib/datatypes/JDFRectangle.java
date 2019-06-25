@@ -108,7 +108,7 @@ public class JDFRectangle extends JDFNumList
 
 	/**
 	 * factory for JDFRectangle that silently returns null in case of illegal strings
-	 * 
+	 *
 	 * @param s the string to parse
 	 * @return the JDFRectangle, null if s is not compatible
 	 */
@@ -444,6 +444,24 @@ public class JDFRectangle extends JDFNumList
 	}
 
 	/**
+	 *
+	 * @param scaleFactor
+	 * @return
+	 */
+	public JDFRectangle scale(final JDFXYPair scaleFactor)
+	{
+		if (scaleFactor != null)
+		{
+			setLlx(getLlx() * scaleFactor.getX());
+			setUrx(getUrx() * scaleFactor.getX());
+			setLly(getLly() * scaleFactor.getY());
+			setUry(getUry() * scaleFactor.getY());
+		}
+
+		return this;
+	}
+
+	/**
 	 * shifts this by the amount specified
 	 *
 	 * @param shift in x and y direction
@@ -466,6 +484,19 @@ public class JDFRectangle extends JDFNumList
 	public boolean isGreaterOrEqual(final JDFRectangle r)
 	{
 		return (getLlx() <= r.getLlx()) && (getLly() <= r.getLly()) && (getUrx() >= r.getUrx()) && (getUry() >= r.getUry());
+	}
+
+	/**
+	 * isInside - true it the point is inside this
+	 *
+	 * @param p the pount to check
+	 * @return boolean - true if <code>this</this> < r
+	 */
+	public boolean isInside(final JDFXYPair p)
+	{
+		if (p == null)
+			return false;
+		return getLlx() <= p.getX() && (getUrx() >= p.getX()) && getLly() <= p.getY() && getUry() >= p.getY();
 	}
 
 	/**
