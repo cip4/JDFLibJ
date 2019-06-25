@@ -191,6 +191,23 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
 	}
 
 	/**
+	 * (20) get JDFXYPair attribute TrimSize
+	 *
+	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 */
+	@Override
+	public JDFXYPair getTrimSize()
+	{
+		final JDFXYPair siz = super.getTrimSize();
+		if (siz == null)
+		{
+			final JDFRectangle rect = getClipBox();
+			return rect == null ? null : rect.getSize();
+		}
+		return siz;
+	}
+
+	/**
 	 * @param x
 	 * @param y
 	 */
