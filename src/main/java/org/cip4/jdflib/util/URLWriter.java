@@ -40,6 +40,7 @@ package org.cip4.jdflib.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.Proxy;
@@ -48,10 +49,12 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.ifaces.IStreamWriter;
-import org.cip4.jdflib.util.UrlUtil.StreamReader;
+import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.net.HTTPDetails;
 import org.cip4.jdflib.util.net.ProxyUtil;
 
@@ -68,10 +71,11 @@ class URLWriter
 
 	static final Log log = LogFactory.getLog(URLWriter.class);
 	private final String strUrl;
-	private IStreamWriter streamWriter;
+	private final ByteArrayIOStream stream;
 	private final String method;
 	private final String contentType;
 	private final HTTPDetails details;
+	private final IStreamWriter writer;
 	private static int nLogged = 0;
 
 	/**
@@ -85,14 +89,52 @@ class URLWriter
 	public URLWriter(final String strUrl, final IStreamWriter streamWriter, final String method, String contentType, final HTTPDetails details)
 	{
 		this.strUrl = strUrl;
-		this.streamWriter = streamWriter;
 		this.method = method;
 		if (contentType == null)
 			contentType = UrlUtil.TEXT_UNKNOWN;
 		this.contentType = StringUtil.token(contentType, 0, "\r\n");
-
 		this.details = details;
+		this.stream = getStream(streamWriter);
+		this.writer = stream != null ? null : streamWriter;
 
+	}
+
+	/**
+	 * @param strUrl the URL to write to
+	 * @param stream the input stream to read from
+	 * @param streamWriter
+	 * @param method HEAD, GET or POST
+	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
+	 * @param details
+	 */
+	public URLWriter(final InputStream is, final String strUrl, final String method, String contentType, final HTTPDetails details)
+	{
+		this.strUrl = strUrl;
+		this.method = method;
+		if (contentType == null)
+			contentType = UrlUtil.TEXT_UNKNOWN;
+		this.contentType = StringUtil.token(contentType, 0, "\r\n");
+		this.details = details;
+		this.stream = (is == null) ? null : new ByteArrayIOFileStream(is, 1234567);
+		this.writer = null;
+	}
+
+	private ByteArrayIOStream getStream(final IStreamWriter inWriter)
+	{
+		// we can retain the original - we never need to buffer
+		if (inWriter == null || UrlUtil.isFile(strUrl))
+			return null;
+
+		final ByteArrayIOStream bufStream = new ByteArrayIOFileStream(1234567);
+		try
+		{
+			inWriter.writeStream(bufStream);
+		}
+		catch (final IOException e)
+		{
+			return null;
+		}
+		return bufStream;
 	}
 
 	/**
@@ -119,24 +161,9 @@ class URLWriter
 
 			final List<Proxy> list = ProxyUtil.getProxiesWithLocal(uri);
 
-			ByteArrayIOStream bufStream = streamWriter != null && list.size() > 1 ? new ByteArrayIOStream() : null;
-			if (bufStream != null)
-			{
-				try
-				{
-					streamWriter.writeStream(bufStream);
-				}
-				catch (final IOException e)
-				{
-					bufStream = null;
-				}
-			}
 			for (final Proxy proxy : list)
 			{
-				if (bufStream != null)
-				{
-					streamWriter = new StreamReader(bufStream.getInputStream());
-				}
+
 				final boolean bWantLog = list.size() == 1 || !proxy.equals(Proxy.NO_PROXY);
 				urlPart = callProxy(proxy, bWantLog);
 				if (urlPart != null)
@@ -146,13 +173,20 @@ class URLWriter
 					{
 						return urlPart;
 					}
-					else if (UrlUtil.isRedirect(responseCode) && (details == null || details.getRedirect() < 42) && streamWriter == null)
+					else if (UrlUtil.isRedirect(responseCode) && (details == null || details.getRedirect() < 42))
 					{
-						final String newLocation = urlPart.getConnection().getHeaderField("Location");
+						String newLocation = urlPart.getConnection().getHeaderField("Location");
+						if (StringUtil.isEmpty(newLocation) && UrlUtil.isHttp(strUrl))
+						{
+							newLocation = StringUtil.replaceToken(newLocation, 0, JDFConstants.COLON, "https");
+						}
 						if (newLocation != null)
 						{
 							fallBack = urlPart;
-							urlPart = new URLWriter(newLocation, null, method, contentType, HTTPDetails.getRedirect(details)).writeToURL();
+
+							final ByteArrayIOInputStream newInput = stream == null ? null : stream.getInputStream();
+							urlPart = new URLWriter(newInput, newLocation, method, contentType, HTTPDetails.getRedirect(details)).writeToURL();
+
 							if (urlPart == null)
 							{
 								urlPart = fallBack;
@@ -171,6 +205,7 @@ class URLWriter
 			}
 		}
 		return urlPart == null ? fallBack : urlPart;
+
 	}
 
 	/**
@@ -179,7 +214,14 @@ class URLWriter
 	private UrlPart writeFile()
 	{
 		File f = UrlUtil.urlToFile(strUrl);
-		f = FileUtil.writeFile(streamWriter, f);
+		if (writer != null)
+		{
+			f = FileUtil.writeFile(writer, f);
+		}
+		else if (stream != null)
+		{
+			FileUtil.streamToFile(stream.getInputStream(), f);
+		}
 		try
 		{
 			return new UrlPart(f);
@@ -237,12 +279,15 @@ class URLWriter
 	 */
 	private void output(final HttpURLConnection httpURLconnection) throws IOException
 	{
-		final boolean doOutput = streamWriter != null;
+		final boolean doOutput = writer != null || stream != null;
 		httpURLconnection.setDoOutput(doOutput);
 		if (doOutput)
 		{
-			final OutputStream out = httpURLconnection.getOutputStream();
-			streamWriter.writeStream(out);
+			final OutputStream out = StreamUtil.getBufferedOutputStream(httpURLconnection.getOutputStream());
+			if (writer != null)
+				writer.writeStream(out);
+			else
+				IOUtils.copy(stream.getInputStream(), out);
 			out.flush();
 			out.close();
 		}

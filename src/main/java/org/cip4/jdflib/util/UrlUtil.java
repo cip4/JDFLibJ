@@ -70,6 +70,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.ifaces.IURLSetter;
+import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeHelper;
 
@@ -1570,30 +1571,8 @@ public class UrlUtil
 	 */
 	public static UrlPart writeToURL(final String strUrl, final InputStream stream, final String method, final String contentType, final org.cip4.jdflib.util.net.HTTPDetails det)
 	{
-		final StreamReader streamReader = stream == null ? null : new StreamReader(stream);
-		return writerToURL(strUrl, streamReader, method, contentType, det);
-	}
-
-	static class StreamReader implements IStreamWriter
-	{
-		/**
-		 *
-		 * @param input
-		 */
-		StreamReader(final InputStream input)
-		{
-			super();
-			this.input = input;
-		}
-
-		private final InputStream input;
-
-		@Override
-		public void writeStream(final OutputStream os) throws IOException
-		{
-			IOUtils.copy(input, os);
-		}
-
+		final org.cip4.jdflib.util.URLWriter urlWriter = new org.cip4.jdflib.util.URLWriter(stream, strUrl, method, contentType, det);
+		return urlWriter.writeToURL();
 	}
 
 	/**

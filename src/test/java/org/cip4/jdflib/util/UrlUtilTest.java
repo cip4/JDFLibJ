@@ -70,7 +70,6 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
-import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.UrlUtil.URLProtocol;
 import org.cip4.jdflib.util.net.HTTPDetails;
 import org.junit.Test;
@@ -240,22 +239,6 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws IOException
-	 *
-	 */
-	@Test
-	public void testStreamWriter() throws IOException
-	{
-		if (!isTestNetwork())
-			return;
-		final ByteArrayIOStream byteArrayIOStream = new ByteArrayIOStream("abc".getBytes());
-		final ByteArrayIOInputStream inputStream = byteArrayIOStream.getInputStream();
-		assertNotNull(UrlUtil.writerToURL("http://www.example.com", new UrlUtil.StreamReader(inputStream), UrlUtil.POST, UrlUtil.TEXT_PLAIN, null));
-		inputStream.close();
-		byteArrayIOStream.close();
-	}
-
-	/**
 	 *
 	 */
 	@Test
@@ -263,7 +246,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		if (!isTestNetwork())
 			return;
-		assertNotNull(UrlUtil.writeToURL("http://google.com", new ByteArrayInputStream("foo".getBytes()), UrlUtil.POST, "foo/bar", null));
+		final UrlPart writeToURL = UrlUtil.writeToURL("http://google.com", new ByteArrayInputStream("foo".getBytes()), UrlUtil.POST, "foo/bar", null);
+		assertNotNull(writeToURL);
+		writeToURL.buffer();
 	}
 
 	/**
