@@ -326,11 +326,18 @@ public class WalkXElement extends BaseWalker
 					ref.setAttribute("rRef", p.getID());
 
 					final VJDFAttributeMap vpartmap = p.getPartMap();
-					if (vpartmap != null)
+					if (!VJDFAttributeMap.isEmpty(vpartmap))
 					{
-						for (int j = 0; j < vpartmap.size(); j++)
+						final KElement part = ref.appendElement(ElementName.PART);
+						part.setAttributes(vpartmap.get(0));
+						for (int j = 1; j < vpartmap.size(); j++)
 						{
-							ref.appendElement(ElementName.PART).setAttributes(vpartmap.get(j));
+							final JDFAttributeMap map = vpartmap.get(j);
+							for (final String key : map.keySet())
+							{
+								part.appendAttribute(key, map.get(key), null, null, true);
+
+							}
 						}
 					}
 				}

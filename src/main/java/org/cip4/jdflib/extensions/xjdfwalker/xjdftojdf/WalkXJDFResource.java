@@ -40,11 +40,13 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNameRange;
@@ -154,11 +156,20 @@ public class WalkXJDFResource extends WalkXElement
 				final VString vals = vParts.getPartValues(key, false);
 				if (ContainerUtil.size(vals) > 1)
 				{
+					final VString resVals = new VString(vals);
+					for (int i = 0; i < vals.size(); i++)
+					{
+						final String single = vals.get(i);
+						if (StringUtil.token(single, 1, null) == null)
+						{
+							resVals.set(i, single + JDFConstants.SPACE + single);
+						}
+					}
 					final String newVal = vals.getString();
 					vParts.put(key, newVal);
 					vParts.unify();
 					if (res.hasAttribute(key))
-						res.setAttribute(key, newVal);
+						res.setAttribute(key, resVals.getString());
 				}
 			}
 		}
@@ -166,8 +177,8 @@ public class WalkXJDFResource extends WalkXElement
 		handleIdentical(vParts, res.getResourceRoot());
 	}
 
-	private final static VString keepKeys = new VString("SignatureName SheetName Side PartVersion Separation BlockName Run DocIndex RunIndex SetIndex SheetIndex", null);
-	private final static VString indexKeys = new VString("RunIndex DocIndex SetIndex SheetIndex", null);
+	private final static StringArray keepKeys = new StringArray("SignatureName SheetName Side PartVersion Separation BlockName Run DocIndex RunIndex SetIndex SheetIndex", null);
+	private final static StringArray indexKeys = new StringArray("RunIndex DocIndex SetIndex SheetIndex", null);
 
 	/**
 	 *
