@@ -39,12 +39,14 @@ package org.cip4.jdflib.util.zip;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFConstants;
@@ -285,8 +287,22 @@ public class ZipReader
 				final File parent = newFile.getParentFile();
 				if (parent != null)
 					parent.mkdirs();
-				final File created = FileUtil.streamToFile(zis, newFile);
-				if (created == null)
+				boolean ok = FileUtil.createNewFile(newFile);
+				if (ok)
+				{
+					final OutputStream fos = FileUtil.getBufferedOutputStream(newFile);
+					if (fos != null)
+					{
+						IOUtils.copyLarge(zis, fos);
+						fos.flush();
+						fos.close();
+					}
+					else
+					{
+						ok = false;
+					}
+				}
+				if (!ok)
 				{
 					log.error("Snafu unpacking zip to: " + fileName);
 					zis.closeEntry();
