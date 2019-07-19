@@ -36,19 +36,15 @@
  */
 package org.cip4.jdflib.util.zip;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFConstants;
@@ -268,7 +264,7 @@ public class ZipReader
 	 */
 	public boolean unPack(final File dir, final ZipEntry ze)
 	{
-		if (dir == null)
+		if (dir == null || ze == null)
 			return false;
 		if (currentEntry != ze)
 		{
@@ -277,22 +273,25 @@ public class ZipReader
 		}
 		final String fileName = getEntryName(ze);
 		final File file = new File(fileName);
-		final File absoluteFile = FileUtil.getFileInDirectory(dir, file);
+		final File newFile = FileUtil.getFileInDirectory(dir, file);
 		try
 		{
 			if (ze.isDirectory())
 			{
-				absoluteFile.mkdirs();
+				newFile.mkdirs();
 			}
 			else
 			{
-				final File parent = absoluteFile.getParentFile();
+				final File parent = newFile.getParentFile();
 				if (parent != null)
 					parent.mkdirs();
-				final OutputStream fos = new BufferedOutputStream(new FileOutputStream(absoluteFile));
-				IOUtils.copy(zis, fos);
-				fos.flush();
-				fos.close();
+				final File created = FileUtil.streamToFile(zis, newFile);
+				if (created == null)
+				{
+					log.error("Snafu unpacking zip to: " + fileName);
+					zis.closeEntry();
+					return false;
+				}
 			}
 			zis.closeEntry();
 		}
@@ -311,7 +310,7 @@ public class ZipReader
 	 */
 	public static String getEntryName(final ZipEntry ze)
 	{
-		String fileName = ze.getName();
+		String fileName = ze == null ? null : ze.getName();
 		fileName = StringUtil.replaceChar(fileName, '\\', JDFConstants.SLASH, 0);
 		return UrlUtil.cleanDots(fileName);
 	}

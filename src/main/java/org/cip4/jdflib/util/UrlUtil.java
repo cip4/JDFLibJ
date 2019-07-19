@@ -50,7 +50,6 @@ package org.cip4.jdflib.util;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -61,7 +60,6 @@ import javax.mail.BodyPart;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCoreConstants;
@@ -70,7 +68,6 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.ifaces.IURLSetter;
-import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeHelper;
 
@@ -1759,11 +1756,9 @@ public class UrlUtil
 	public static boolean isZIPType(final String contentType)
 	{
 		String lower = StringUtil.normalize(contentType, true);
-		if (contentType == null)
-			return false;
-		while (lower.endsWith(";"))
+		while (lower != null && lower.endsWith(";"))
 			lower = StringUtil.leftStr(lower, -1);
-		return APPLICATION_ZIP.equals(lower) || APPLICATION_XZIP.equals(lower) || lower.endsWith("+zip");
+		return lower != null && (APPLICATION_ZIP.equals(lower) || APPLICATION_XZIP.equals(lower) || lower.endsWith("+zip"));
 	}
 
 	/**

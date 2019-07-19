@@ -92,6 +92,23 @@ public class ZipReaderTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testunpackSingle()
+	{
+		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
+		final File dir = new File(sm_dirTestDataTemp + "schema.zip.dir");
+		FileUtil.deleteAll(dir);
+		assertFalse(r.unPack(dir, null));
+		assertTrue(r.unPack(dir, r.getNextEntry()));
+		assertTrue(dir.isDirectory());
+		assertEquals(1, dir.listFiles().length);
+
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testGetEntryStream()
 	{
 		final ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
