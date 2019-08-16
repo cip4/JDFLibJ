@@ -1819,18 +1819,29 @@ public class JDFSpawn
 					}
 					else
 					{
-						final JDFAttributeMap idMap = ((JDFResource) child).getIdenticalMap();
+						final VJDFAttributeMap idMap = getIdenticals((JDFResource) child);
 						if (linkedIdentical != null)
 						{
 							target.copyElement(child, null);
 							if (idMap != null)
 							{
-								linkedIdentical.add(idMap);
+								linkedIdentical.addAll(idMap);
 							}
 						}
-						else if (idMap == null) // we don't want identicals but have one - don't copy
+						else if (child.getElement(ElementName.IDENTICAL) == null) // we don't want identicals but have one - don't copy
 						{
-							target.copyElement(child, null);
+							final JDFResource copied = (JDFResource) target.copyElement(child, null);
+							if (idMap != null)
+							{
+								final List<JDFResource> cLeaves = copied.getLeafArray(false);
+								for (final JDFResource leaf : cLeaves)
+								{
+									if (leaf.hasChildElement(ElementName.IDENTICAL, null))
+									{
+										leaf.deleteNode();
+									}
+								}
+							}
 						}
 					}
 				}
@@ -1842,6 +1853,22 @@ public class JDFSpawn
 			child = child.getNextSiblingElement();
 		}
 		currentMap.remove(key0);
+	}
+
+	VJDFAttributeMap getIdenticals(final JDFResource child)
+	{
+		final VJDFAttributeMap ret = new VJDFAttributeMap();
+		final List<JDFResource> leaves = child.getLeafArray(false);
+		for (final JDFResource leaf : leaves)
+		{
+			final JDFAttributeMap single = leaf.getIdenticalMap();
+			if (single != null)
+			{
+				ret.add(single);
+			}
+		}
+		ret.unify();
+		return VJDFAttributeMap.isEmpty(ret) ? null : ret;
 	}
 
 	private class PartSpawn
