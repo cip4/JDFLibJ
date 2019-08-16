@@ -1778,20 +1778,14 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	@Test
 	public void testSpawnIdentical()
 	{
-		for (int i = 1; i < 2; i++)
+		for (int i = 0; i < 2; i++) // ro / rw
 		{
 			for (int ii = 0; ii < 2; ii++) // spawnidentical = true / false
 			{
-				JDFNode n = new JDFDoc("JDF").getJDFRoot();
+				JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 				final JDFNode root = n;
-				if (i == 0)
-				{
-					n.setType(EnumType.ImageSetting);
-				}
-				else
-				{
-					n.setType(EnumType.ProcessGroup);
-				}
+				n.setType(EnumType.ProcessGroup);
+
 				for (int j = 0; j < 2; j++) // in or out
 				{
 					JDFResource r = j == 0 ? n.addResource("ExposedMedia", EnumUsage.Output) : n.addResource("Media", EnumUsage.Input);
@@ -1803,18 +1797,16 @@ public class JDFSpawnTest extends JDFTestCaseBase
 					rEN.setIdentical(rDE);
 				}
 				final VString vRWRes = new VString();
-				vRWRes.add(ElementName.EXPOSEDMEDIA);
+				if (i > 0)
+					vRWRes.add(ElementName.EXPOSEDMEDIA);
 				final VJDFAttributeMap vPartMap = new VJDFAttributeMap();
 				final JDFAttributeMap map = new JDFAttributeMap("SheetName", "s1");
 				map.put("PartVersion", "EN");
 				vPartMap.add(map);
 				final JDFAttributeMap map2 = new JDFAttributeMap("SheetName", "s1");
 				map2.put("PartVersion", "DE");
-				if (i == 1)
-				{
-					n = root.addJDFNode(EnumType.ImageSetting);
-					n.copyElement(root.getResourceLinkPool(), null);
-				}
+				n = root.addJDFNode(EnumType.ImageSetting);
+				n.copyElement(root.getResourceLinkPool(), null);
 				final JDFSpawn spawn = new JDFSpawn(n); // fudge to test output
 				spawn.bFixResources = false;
 				if (ii == 1)
