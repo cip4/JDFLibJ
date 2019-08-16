@@ -1723,9 +1723,10 @@ public class JDFSpawn
 			if (!VJDFAttributeMap.isEmpty(linkedIdentical))
 			{
 				linkedIdentical.unify();
+				final VString idParts = r.getPartIDKeys();
 				for (final JDFAttributeMap idMap : linkedIdentical)
 				{
-					copySingle(rNew, r, idMap, partIDKeys, 0);
+					copySingle(rNew, r, idMap, idParts, 0);
 				}
 			}
 		}
