@@ -602,7 +602,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			refElms.add(ElementName.CONTENTDATA);
 			refElms.add(ElementName.BINDERYSIGNATURE);
 			refElms.add(ElementName.DIELAYOUT);
-			refElms.add(ElementName.COLOR);
 			refElms.add(ElementName.COLORMEASUREMENTCONDITIONS);
 			refElms.add(ElementName.APPROVALPARAMS);
 			refElms.add(ElementName.APPROVALPERSON);
