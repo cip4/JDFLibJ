@@ -228,16 +228,17 @@ class XPathHelper
 		{
 			final KElement r = theElement.getDocRoot();
 			final int nextPos = path.indexOf(JDFCoreConstants.SLASH, 2);
+          
+          	if (nextPos == -1)
+			{
+				return theElement;
+			}
+          
 			if (!path.substring(1, nextPos).equals(r.getNodeName()))
 			{
 				throw new JDFException("GetCreateXPathElement:: invalid path: " + path);
 			}
-
-			if (nextPos == -1)
-			{
-				return theElement;
-			}
-
+          
 			return new XPathHelper(r).getCreateXPathElement(path.substring(nextPos + 1));
 		}
 
