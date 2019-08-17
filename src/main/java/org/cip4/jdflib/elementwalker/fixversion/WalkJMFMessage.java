@@ -127,11 +127,11 @@ public class WalkJMFMessage extends WalkElement
 			return false;
 		boolean b = false;
 		b = b || JDFMessage.EnumType.AbortQueueEntry.equals(type);
-		b = b || JDFMessage.EnumType.RemoveQueueEntry.equals(type);
+		b = b || JDFMessage.EnumType.RemoveQueueEntry.equals(type); // duplicate. possibly something is wrong
 		b = b || JDFMessage.EnumType.HoldQueueEntry.equals(type);
 		b = b || JDFMessage.EnumType.SuspendQueueEntry.equals(type);
 		b = b || JDFMessage.EnumType.ResumeQueueEntry.equals(type);
-		b = b || JDFMessage.EnumType.RemoveQueueEntry.equals(type);
+		b = b || JDFMessage.EnumType.RemoveQueueEntry.equals(type); // duplicate. possibly something is wrong
 		b = b || JDFMessage.EnumType.ResubmitQueueEntry.equals(type);
 		b = b || JDFMessage.EnumType.SetQueueEntryPosition.equals(type);
 		b = b || JDFMessage.EnumType.SetQueueEntryPriority.equals(type);
