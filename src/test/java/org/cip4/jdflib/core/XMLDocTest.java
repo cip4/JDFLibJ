@@ -1211,7 +1211,7 @@ public class XMLDocTest extends JDFTestCaseBase
 				final KElement e3 = e2.appendElement("Created");
 				for (int i = 33; i < 199; i++)
 				{
-					if (i < 2)
+					if (i < 2) // this expression will always be false!
 					{
 						e3.setAttribute("k" + String.valueOf(i), "value" + String.valueOf(i));
 					}
