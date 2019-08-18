@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
@@ -174,6 +175,10 @@ public class WalkRefElement extends WalkJDFElement
 			final String attName = getRefName(re);
 			for (final KElement ref : v)
 			{
+				if (!ref.hasNonEmpty(AttributeName.ID))
+				{
+					ref.setID(ref.generateDotID(AttributeName.ID, null));
+				}
 				xjdf.appendAttribute(attName, ref.getID(), null, JDFConstants.BLANK, true);
 			}
 		}

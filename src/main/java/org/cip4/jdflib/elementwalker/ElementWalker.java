@@ -36,10 +36,11 @@
  */
 package org.cip4.jdflib.elementwalker;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 
 /**
  *
@@ -86,7 +87,7 @@ public class ElementWalker
 			if (b != null)
 			{
 				// do not follow refelements
-				final VElement v = e.getChildElementVector_KElement(null, null, null, true, -1);
+				final List<KElement> v = e.getChildArray_KElement(null, null, null, true, -1);
 				for (final KElement e2 : v)
 				{
 					n += walkTree(e2, b);
@@ -155,7 +156,7 @@ public class ElementWalker
 		}
 		int n = 0;
 		// do not follow refelements - also MUST use VElement rather than iterator to retain walking ability, even if elements are deleted
-		final VElement v = e.getChildElementVector_KElement(null, null, null, true, -1);
+		final List<KElement> v = e.getChildArray_KElement(null, null, null, true, -1);
 		for (final KElement e2 : v)
 		{
 			n += walkTreeKidsFirst(e2);

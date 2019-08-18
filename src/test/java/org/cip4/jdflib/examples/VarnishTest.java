@@ -174,6 +174,5 @@ public class VarnishTest extends JDFTestCaseBase
 			}
 		}
 		writeRoundTrip(n, "varnishing");
-		//d.write2File(sm_dirTestDataTemp + "varnishing.jdf", 2, true);
 	}
 }
