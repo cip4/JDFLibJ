@@ -4271,7 +4271,7 @@ public class KElement extends ElementNSImpl implements Element
 				return; // heureka - nothing to do!
 
 		}
-		final List<KElement> v = getChildArray_KElement(null, null, null, true, -1);
+		final VElement v = getChildElementVector_KElement(null, null, null, true, -1);
 		KElement before = null;
 		if (v != null && v.size() > 0)
 		{
