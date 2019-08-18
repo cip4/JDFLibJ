@@ -949,7 +949,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		conv.setCleanup(false);
 		final KElement xjdf = conv.convert(n);
 		assertNotNull(xjdf.getXPathAttribute("ResourceSet/@ID", null));
-		assertNotNull(xjdf.getXPathAttribute("ResourceSet/Resource/@ID", null));
 	}
 
 	/**
