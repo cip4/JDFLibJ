@@ -61,7 +61,7 @@ public class EnsureNSUri extends BaseElementWalker
 
 	/**
 	 * add a prefix / uri pair
-	 * 
+	 *
 	 * @param prefix the namespace prefix - may be null for empty namespace
 	 * @param uri the URI must not be null
 	 * @throws IllegalArgumentException if uri is null
@@ -77,7 +77,7 @@ public class EnsureNSUri extends BaseElementWalker
 
 	/**
 	 * add a an alias
-	 * 
+	 *
 	 * @param badPrefix the ns prefix to rename (e.g. ns1)
 	 * @param goodPrefix the destination prefix
 	 */
@@ -244,7 +244,7 @@ public class EnsureNSUri extends BaseElementWalker
 
 		/**
 		 *
-		 * 
+		 *
 		 * @param prefix
 		 * @param localName
 		 * @param uri
@@ -256,7 +256,10 @@ public class EnsureNSUri extends BaseElementWalker
 				prefix = "";
 			String s2 = aliasMap.get(prefix);
 			if ("<".equals(s2))
-				return "";
+			{
+				final String newPrefix = uri == null ? null : nsMap.getKey(uri);
+				return newPrefix == null ? "" : newPrefix;
+			}
 			if (s2 == null && uri != null)
 			{
 				final String newPrefix = nsMap.getKey(uri);

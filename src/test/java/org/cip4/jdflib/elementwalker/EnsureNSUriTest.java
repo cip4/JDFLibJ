@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,14 +91,14 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	@Test
 	public void testEnsureNS()
 	{
-		XMLDoc d = new XMLDoc("foo", "bar");
-		KElement root = d.getRoot();
+		final XMLDoc d = new XMLDoc("foo", "bar");
+		final KElement root = d.getRoot();
 		root.addNameSpace("n1", "n6");
 		root.setAttribute("n1:gg", "gg");
-		KElement e = root.appendElement("n1:bar", "n66");
+		final KElement e = root.appendElement("n1:bar", "n66");
 		e.appendElement("n1:gg").setAttribute("n1:test", "123");
 
-		EnsureNSUri ensure = new EnsureNSUri();
+		final EnsureNSUri ensure = new EnsureNSUri();
 		ensure.addNS("n1", "www.n1.com");
 		ensure.walk(root);
 
@@ -111,16 +111,16 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	@Test
 	public void testEnsureNSKeepUnknown()
 	{
-		XMLDoc d = new XMLDoc("foo", "www.foo.com");
-		KElement root = d.getRoot();
-		KElement e = root.appendElement("n1:bar", "n66");
+		final XMLDoc d = new XMLDoc("foo", "www.foo.com");
+		final KElement root = d.getRoot();
+		final KElement e = root.appendElement("n1:bar", "n66");
 		e.setAttribute("a", "b");
 		e.setAttribute("n1:aa", "b");
-		KElement e2 = root.appendElement("n1:bar", "n66");
+		final KElement e2 = root.appendElement("n1:bar", "n66");
 		e2.setAttribute("a", "b");
 		e2.setAttribute("n1:aa", "b");
 
-		EnsureNSUri ensure = new EnsureNSUri();
+		final EnsureNSUri ensure = new EnsureNSUri();
 		ensure.walk(root);
 
 		assertEquals(e.getPrefix(), "n1");
@@ -133,13 +133,13 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	@Test
 	public void testEnsureNSNull()
 	{
-		XMLDoc d = new XMLDoc("foo", null);
-		KElement root = d.getRoot();
-		KElement e = root.appendElement("bar", "n66");
+		final XMLDoc d = new XMLDoc("foo", null);
+		final KElement root = d.getRoot();
+		final KElement e = root.appendElement("bar", "n66");
 		e.appendElement("gg", "n77").setAttribute("ntest", "123");
 		e.appendElement("blub:bb", "www.blub.com").setAttribute("blub:ntest", "123");
 
-		EnsureNSUri ensure = new EnsureNSUri();
+		final EnsureNSUri ensure = new EnsureNSUri();
 		ensure.addNS(null, "www.n1.com");
 		ensure.addAlias("blub", null);
 		ensure.walk(root);
@@ -155,13 +155,13 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	@Test
 	public void testEnsureNSDefault()
 	{
-		XMLDoc d = new XMLDoc("foo", "foo.com");
-		KElement root = d.getRoot();
-		KElement e = root.appendElement("xxx:bar", "n66");
+		final XMLDoc d = new XMLDoc("foo", "foo.com");
+		final KElement root = d.getRoot();
+		final KElement e = root.appendElement("xxx:bar", "n66");
 		e.appendElement("gg", "blah.com");
 		root.appendElement("ccc");
 
-		EnsureNSUri ensure = new EnsureNSUri();
+		final EnsureNSUri ensure = new EnsureNSUri();
 		ensure.addNS("xxx", "blah.com");
 		ensure.walk(root);
 		assertEquals(root.toXML().indexOf("xxx:ccc"), -1);
@@ -171,15 +171,31 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testEnsureNS2Default()
+	{
+		final XMLDoc d = new XMLDoc("foo", "foo.com");
+		final KElement root = d.getRoot();
+		final KElement e = root.appendElement("bar", "bar.com");
+
+		final EnsureNSUri ensure = new EnsureNSUri();
+		ensure.addNS("xxx", "bar.com");
+		ensure.walk(root);
+		assertTrue(root.toXML().indexOf("xxx:bar") > 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testEnsureNSMapToDefault()
 	{
-		XMLDoc d = new XMLDoc("foo:foo", "foo.com");
-		KElement root = d.getRoot();
-		KElement e = root.appendElement("bar:bar", "foo.com");
+		final XMLDoc d = new XMLDoc("foo:foo", "foo.com");
+		final KElement root = d.getRoot();
+		final KElement e = root.appendElement("bar:bar", "foo.com");
 		e.appendElement("gg:gg", "foo.com");
 		root.appendElement("ccc");
 
-		EnsureNSUri ensure = new EnsureNSUri();
+		final EnsureNSUri ensure = new EnsureNSUri();
 		ensure.addNS(null, "foo.com");
 		ensure.walk(root);
 		assertEquals(root.toXML().indexOf("bar:"), -1);
@@ -192,19 +208,19 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	@Test
 	public void testEnsureNSAlias()
 	{
-		XMLDoc d = new XMLDoc("foo", "bar");
-		KElement root = d.getRoot();
+		final XMLDoc d = new XMLDoc("foo", "bar");
+		final KElement root = d.getRoot();
 		root.addNameSpace("n1", "n6");
 		root.addNameSpace("n2", "n6");
 		root.setAttribute("n1:gg", "gg");
 		root.setAttribute("n3:gg", "other", "www.n3.com");
-		KElement e = root.appendElement("n2:bar", "n6");
+		final KElement e = root.appendElement("n2:bar", "n6");
 		e.appendElement("n1:gg").setAttribute("n1:test", "123");
 		e.appendElement("n2:gg").setAttribute("n2:test", "123");
 		e.appendElement("n3:next").setAttribute("n3:test", "456");
 		e.appendElement("n3:foofoo").setAttribute("n3:test", "456");
 
-		EnsureNSUri ensure = new EnsureNSUri();
+		final EnsureNSUri ensure = new EnsureNSUri();
 		ensure.addNS("n1", "www.n1.com");
 		ensure.addAlias("n2", "n1");
 		ensure.walk(root);
@@ -221,18 +237,18 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	@Test
 	public void testEnsureNSAliasBackwards()
 	{
-		XMLDoc d = new XMLDoc("foo", "bar");
-		KElement root = d.getRoot();
+		final XMLDoc d = new XMLDoc("foo", "bar");
+		final KElement root = d.getRoot();
 		root.addNameSpace("n1", "www.n1.com");
 		root.addNameSpace("n2", "www.n1.com");
 		root.setAttribute("n1:gg", "gg");
 		root.setAttribute("n3:gg", "other", "www.n3.com");
-		KElement e = root.appendElement("n2:bar", "www.n1.com");
+		final KElement e = root.appendElement("n2:bar", "www.n1.com");
 		e.appendElement("n1:gg").setAttribute("n1:test", "123");
 		e.appendElement("n2:gg").setAttribute("n2:test", "123");
 		e.appendElement("n3:next").setAttribute("n3:test", "456");
 
-		EnsureNSUri ensure = new EnsureNSUri();
+		final EnsureNSUri ensure = new EnsureNSUri();
 		ensure.addNS("n1", "www.n1.com");
 		ensure.walk(root);
 
@@ -247,14 +263,14 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	@Test
 	public void testBigEnsureNS()
 	{
-		File f = new File(sm_dirTestData + "evilparts.jdf");
+		final File f = new File(sm_dirTestData + "evilparts.jdf");
 		assertTrue(String.format("File %s not exists.", sm_dirTestData + "evilparts.jdf"), f.exists());
 
-		CPUTimer ct = new CPUTimer(true);
-		XMLDoc d = XMLDoc.parseFile(sm_dirTestData + "evilparts.jdf");
-		KElement root = d.getRoot();
+		final CPUTimer ct = new CPUTimer(true);
+		final XMLDoc d = XMLDoc.parseFile(sm_dirTestData + "evilparts.jdf");
+		final KElement root = d.getRoot();
 		assertNotNull(root);
-		EnsureNSUri ensure = new EnsureNSUri();
+		final EnsureNSUri ensure = new EnsureNSUri();
 		ensure.addNS("HDM", "www.hdm.com");
 		ensure.walk(root);
 		ct.stop();

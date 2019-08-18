@@ -284,9 +284,9 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		root.getCreateXPathElement("ResourceSet/Resource/Part");
 		final KElement m = root.getCreateXPathElement("ResourceSet/Resource/Media");
 		final ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
-		assertNull(m.getParentNode_KElement().getAttribute("ID", null, null));
+		m.getParentNode_KElement().setID("iii");
 		ph.cleanUp();
-		assertEquals(ph.getPartition().getID(), m.getParentNode_KElement().getAttribute(AttributeName.ID, null, null));
+		assertEquals("iii", m.getParentNode_KElement().getAttribute(AttributeName.ID, null, null));
 	}
 
 	/**

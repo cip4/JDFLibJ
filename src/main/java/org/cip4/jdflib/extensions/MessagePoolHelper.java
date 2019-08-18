@@ -41,6 +41,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.util.ContainerUtil;
@@ -186,8 +187,8 @@ public class MessagePoolHelper extends BaseXJDFHelper
 			return newMessageResourceHelper(e);
 		else if (XJDFConstants.SignalResource.equals(name))
 			return newMessageResourceHelper(e);
-		else if (XJDFConstants.AuditStatus.equals(name))
-			return new MessageHelper(e);
+		else if (name.startsWith(JDFConstants.AUDIT))
+			return new AuditHelper(e);
 		else
 			return new MessageHelper(e);
 	}

@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.util.StringUtil;
@@ -78,6 +79,16 @@ public class AuditHelper extends MessageHelper
 		final KElement m = xh.getRoot().copyElement(getRoot(), null);
 		m.renameElement(StringUtil.replaceString(m.getNodeName(), ElementName.AUDIT, ElementName.SIGNAL), null);
 		return xh;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.MessageHelper#cleanUp()
+	 */
+	@Override
+	public void cleanUp()
+	{
+		super.cleanUp();
+		getHeader().removeAttribute(AttributeName.ID, null);
 	}
 
 }

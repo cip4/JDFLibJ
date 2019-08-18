@@ -147,6 +147,7 @@ public abstract class XJDFConstants
 	public static final String WasteDetails = "WasteDetails";
 
 	public static final String XJDF = "XJDF";
+	public static final String XJDFPREFIX = XJDF.toLowerCase();
 	public static final String XJMF = "XJMF";
 	public static final String XJMFURL = "XJMFURL";
 
