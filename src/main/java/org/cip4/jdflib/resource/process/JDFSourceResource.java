@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,6 +76,8 @@
  *
  */
 package org.cip4.jdflib.resource.process;
+
+import java.util.List;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.JDFElement;
@@ -228,12 +230,11 @@ public class JDFSourceResource extends JDFElement
 			return v;
 		}
 
-		final VElement v2 = getChildElementVector_KElement(null, null, null, true, 0);
+		final List<KElement> v2 = getChildArray_KElement(null, null, null, true, 0);
 		int n = 0;
-		final int size = v2.size();
-		for (int i = 0; i < size; i++)
+		for (final KElement e : v2)
 		{
-			if (v2.elementAt(i) instanceof JDFRefElement)
+			if (e instanceof JDFRefElement)
 			{
 				n++;
 			}
@@ -241,11 +242,11 @@ public class JDFSourceResource extends JDFElement
 
 		if (n > 1)
 		{
-			for (int i = 0; i < size; i++)
+			for (final KElement e : v2)
 			{
-				if (v2.elementAt(i) instanceof JDFRefElement)
+				if (e instanceof JDFRefElement)
 				{
-					v.appendUnique(v2.elementAt(i).getLocalName());
+					v.appendUnique(e.getLocalName());
 				}
 			}
 		}

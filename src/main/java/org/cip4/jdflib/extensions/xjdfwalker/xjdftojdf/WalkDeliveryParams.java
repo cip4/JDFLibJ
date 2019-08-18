@@ -37,11 +37,11 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
@@ -103,7 +103,7 @@ public class WalkDeliveryParams extends WalkResource
 			drop.setDropID(dropID);
 		}
 		final VString dropKnown = drop.knownElements();
-		final VElement vMyElm = xjdfDeliveryParams.getChildElementVector_KElement(null, null, null, true, 0);
+		final List<KElement> vMyElm = xjdfDeliveryParams.getChildArray_KElement(null, null, null, true, 0);
 		for (final KElement myElm : vMyElm)
 		{
 			final String localName = myElm.getLocalName();

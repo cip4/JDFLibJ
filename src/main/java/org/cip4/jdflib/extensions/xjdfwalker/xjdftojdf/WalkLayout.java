@@ -37,13 +37,13 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
@@ -111,7 +111,7 @@ public class WalkLayout extends WalkStrippingParams
 			}
 		}
 		final VString stripKnown = stripParams.knownElements();
-		final VElement vMyElm = e.getChildElementVector_KElement(null, null, null, true, 0);
+		final List<KElement> vMyElm = e.getChildArray_KElement(null, null, null, true, 0);
 		for (final KElement myElm : vMyElm)
 		{
 			final String localName = myElm.getLocalName();

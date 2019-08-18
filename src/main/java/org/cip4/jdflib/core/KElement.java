@@ -698,7 +698,8 @@ public class KElement extends ElementNSImpl implements Element
 					namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), false);
 					if (!ContainerUtil.equals(namespaceURI2, nameSpaceURI))
 					{
-						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2 + "; attempting to set URI: " + nameSpaceURI;
+						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
+								+ "; attempting to set URI: " + nameSpaceURI;
 						kLog.error(message);
 						throw new JDFException(message);
 					}
@@ -811,13 +812,13 @@ public class KElement extends ElementNSImpl implements Element
 							// already there
 							if (key.equals(nodeName))
 							{ // overwrite default namespace with qualified
-								// namespace or vice versa
+									// namespace or vice versa
 								removeAttribute(nodeName);
 								super.setAttribute(key, value);
 							}
 							else
 							{ // same qualified name, simply overwrite the
-								// value
+									// value
 								a.setNodeValue(value);
 							}
 						}
@@ -826,8 +827,8 @@ public class KElement extends ElementNSImpl implements Element
 							final String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 							if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
 							{
-								throw new JDFException(
-										"KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2 + "; attempting to set URI: " + nameSpaceURI);
+								throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2
+										+ "; attempting to set URI: " + nameSpaceURI);
 							}
 							try
 							{
@@ -2451,11 +2452,9 @@ public class KElement extends ElementNSImpl implements Element
 	public HashMap<String, KElement> getElementHashMap(final String elementName, final String elementNS, final String attName)
 	{
 		final HashMap<String, KElement> m = new HashMap<>();
-		final VElement v = getChildElementVector_KElement(elementName, elementNS, new JDFAttributeMap(attName, (String) null), true, 0);
-		final int siz = v.size();
-		for (int i = 0; i < siz; i++)
+		final List<KElement> v = getChildArray_KElement(elementName, elementNS, new JDFAttributeMap(attName, (String) null), true, 0);
+		for (final KElement e : v)
 		{
-			final KElement e = v.elementAt(i);
 			m.put(e.getAttribute(attName), e);
 		}
 		return m;
@@ -2813,17 +2812,18 @@ public class KElement extends ElementNSImpl implements Element
 		if (!ContainerUtil.equals(getText(), kElem.getText()))
 			return false;
 
-		final VElement l1 = getChildElementVector_KElement(null, null, null, true, 0);
-		final VElement l2 = kElem.getChildElementVector_KElement(null, null, null, true, 0);
+		final List<KElement> l1 = getChildArray_KElement(null, null, null, true, 0);
+		final List<KElement> l2 = kElem.getChildArray_KElement(null, null, null, true, 0);
 
-		if (l1.size() != l2.size())
+		final int l1Size = l1.size();
+		if (l1Size != l2.size())
 		{
 			return false;
 		}
-		for (int i = 0; i < l1.size(); i++)
+		for (int i = 0; i < l1Size; i++)
 		{
-			final KElement kNode1 = l1.elementAt(i);
-			final KElement kNode2 = l2.elementAt(i);
+			final KElement kNode1 = l1.get(i);
+			final KElement kNode2 = l2.get(i);
 
 			if (!kNode1.isEqual(kNode2))
 			{
@@ -4234,7 +4234,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public synchronized void sortChildren(final Comparator<KElement> comparator, final boolean bRecursive)
 	{
-		final VElement v = getChildElementVector_KElement(null, null, null, true, -1);
+		final List<KElement> v = getChildArray_KElement(null, null, null, true, -1);
 		Collections.sort(v, comparator);
 		for (final KElement e : v)
 		{
@@ -4271,7 +4271,7 @@ public class KElement extends ElementNSImpl implements Element
 				return; // heureka - nothing to do!
 
 		}
-		final VElement v = getChildElementVector_KElement(null, null, null, true, -1);
+		final List<KElement> v = getChildArray_KElement(null, null, null, true, -1);
 		KElement before = null;
 		if (v != null && v.size() > 0)
 		{
@@ -6014,7 +6014,7 @@ public class KElement extends ElementNSImpl implements Element
 			return idPrefix + uniqueID(0);
 		}
 
-		final VElement vn = p.getChildElementVector_KElement(nodeName, nameSpaceURI, null, true, 0);
+		final List<KElement> vn = p.getChildArray_KElement(nodeName, nameSpaceURI, null, true, 0);
 		final int siz = vn.size();
 		parentID += JDFCoreConstants.DOT;
 
@@ -6024,7 +6024,7 @@ public class KElement extends ElementNSImpl implements Element
 			boolean bFound = false;
 			for (int j = 0; j < siz; j++)
 			{
-				if (nn.equals(vn.elementAt(j).getAttribute(key, nameSpaceURI, null)))
+				if (nn.equals(vn.get(j).getAttribute(key, nameSpaceURI, null)))
 				{
 					bFound = true;
 					break;

@@ -3226,7 +3226,7 @@ public class JDFElement extends KElement
 	 */
 	public void inlineRefElements(final String nodeName, final String nameSpaceURI, final boolean bDirect)
 	{
-		VElement v = getRefElements();
+		final VElement v = getRefElements();
 		for (final KElement e : v)
 		{
 			final JDFRefElement re = (JDFRefElement) e;
@@ -3247,8 +3247,8 @@ public class JDFElement extends KElement
 		// now loop over all (!) children, to see if any descendants match
 		if (!bDirect)
 		{
-			v = getChildElementVector_KElement(null, null, null, true, 0);
-			for (final KElement e : v)
+			final List<KElement> v2 = getChildArray_KElement(null, null, null, true, 0);
+			for (final KElement e : v2)
 			{
 				if (e instanceof JDFElement)
 				{
