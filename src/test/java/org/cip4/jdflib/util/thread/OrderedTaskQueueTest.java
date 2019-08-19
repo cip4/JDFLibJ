@@ -235,7 +235,7 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test42");
 		assertTrue(q.queue(new WaitRunner(1, 200)));
-		assertEquals(0, q.idle);
+		assertEquals(0, q.idle.get());
 	}
 
 	@Override
