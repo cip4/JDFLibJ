@@ -78,7 +78,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 			super.run();
 			current.remove(this);
 			ThreadUtil.notifyAll(mutex);
-			idle = 0;
+			idle.set(0);
 		}
 
 	}
@@ -260,7 +260,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	@Override
 	void runTask(final TaskRunner r)
 	{
-		idle = 0;
+		idle.set(0);
 		final NextRunner nr = new NextRunner(r);
 		current.add(nr);
 		executor.submit(nr);

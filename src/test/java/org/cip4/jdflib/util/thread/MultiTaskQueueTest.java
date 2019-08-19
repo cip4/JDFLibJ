@@ -205,7 +205,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 			final WaitRunner task = new WaitRunner(i, 5);
 			task.addRun = false;
 			q.queue(task);
-			assertEquals(0, q.idle, 2);
+			assertEquals(0, q.idle.get(), 2);
 		}
 
 		for (int i = 0; i < 442; i++)
@@ -216,7 +216,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 				break;
 			}
 		}
-		assertEquals(0, q.idle, 1);
+		assertEquals(0, q.idle.get(), 1);
 	}
 
 	/**

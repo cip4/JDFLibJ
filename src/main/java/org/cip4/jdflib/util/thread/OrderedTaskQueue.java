@@ -41,6 +41,7 @@ package org.cip4.jdflib.util.thread;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -118,7 +119,8 @@ public class OrderedTaskQueue extends Thread
 				sumRun += getRunTime();
 				done++;
 				myThread = null;
-				idle = 0;
+				idle.set(0);
+				;
 			}
 		}
 
@@ -163,7 +165,7 @@ public class OrderedTaskQueue extends Thread
 	}
 
 	final Vector<TaskRunner> queue;
-	int idle;
+	final AtomicInteger idle;
 	final Log log;
 	MyMutex mutex;
 	int started;
@@ -191,7 +193,7 @@ public class OrderedTaskQueue extends Thread
 				orderedTaskQueue = new OrderedTaskQueue(name);
 				theMap.put(name, orderedTaskQueue);
 			}
-			orderedTaskQueue.idle = 0;
+			orderedTaskQueue.idle.set(0);
 			return orderedTaskQueue;
 		}
 	}
@@ -230,7 +232,7 @@ public class OrderedTaskQueue extends Thread
 		started = done = 0;
 		sumQueue = 0;
 		sumRun = 0;
-		idle = 0;
+		idle = new AtomicInteger();
 		start();
 	}
 
@@ -261,7 +263,7 @@ public class OrderedTaskQueue extends Thread
 	public void shutDown()
 	{
 		log.info("shutting down " + toString());
-		idle = -1;
+		idle.set(-1);
 		theMap.remove(getName());
 		ThreadUtil.notify(mutex);
 		ThreadUtil.join(this, 10);
@@ -315,7 +317,7 @@ public class OrderedTaskQueue extends Thread
 	 */
 	public boolean queue(final Runnable task)
 	{
-		if (idle < 0)
+		if (idle.get() < 0)
 		{
 			log.error("cannot queue task in stopped queue");
 			return false;
@@ -324,7 +326,7 @@ public class OrderedTaskQueue extends Thread
 		{
 			queue.add(new TaskRunner(task));
 		}
-		idle = 0;
+		idle.set(0);
 		ThreadUtil.notifyAll(mutex);
 		return true;
 	}
@@ -346,14 +348,14 @@ public class OrderedTaskQueue extends Thread
 			{
 				log.error("whazzup queueing ordered task ", e);
 			}
-			if (idle < 0)
+			if (idle.get() < 0)
 			{
 				log.info("end of ordered task loop");
 				ThreadUtil.notifyAll(mutex);
 				mutex = null;
 				break;
 			}
-			if (idle++ > 2)
+			if (idle.incrementAndGet() > 3)
 			{
 				shutDown();
 			}
@@ -369,7 +371,7 @@ public class OrderedTaskQueue extends Thread
 	 */
 	private void runTasks()
 	{
-		while (idle >= 0)
+		while (idle.get() >= 0)
 		{
 			currentRunning = getFirstTask();
 
@@ -393,7 +395,7 @@ public class OrderedTaskQueue extends Thread
 	 */
 	void runTask(final TaskRunner r)
 	{
-		idle = 0;
+		idle.set(0);
 		r.run();
 	}
 
@@ -408,7 +410,7 @@ public class OrderedTaskQueue extends Thread
 		{
 			if (queue.size() > 0)
 			{
-				idle = 0;
+				idle.set(0);
 				return queue.remove(0);
 			}
 		}
