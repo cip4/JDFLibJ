@@ -45,7 +45,7 @@ import org.cip4.jdflib.core.VString;
 
 /**
  * any matching class will be removed with extreme prejudice...
- * 
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
@@ -160,6 +160,7 @@ public class WalkIgnore extends WalkElement
 		{
 			final HashSet<String> v = new HashSet<>();
 			v.add(ElementName.ACTIONPOOL);
+			v.add(ElementName.ANCESTORPOOL);
 			v.add(ElementName.DELETED);
 			v.add(ElementName.DEVCAPPOOL);
 			v.add(ElementName.DEVCAPS);
