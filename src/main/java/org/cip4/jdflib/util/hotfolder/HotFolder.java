@@ -332,8 +332,12 @@ public class HotFolder
 
 							if (!found)
 							{
-								final FileTime ft = lastFileTime.remove(i--); // not there anymore - note the -- for undo remove
-								log.info("removing disappearing file: " + ft);
+								final FileTime ft = lastFileTime.get(i);
+								if (!ft.f.exists())// not there anymore - note the -- for undo remove
+								{
+									lastFileTime.remove(i--);
+									log.info("removing disappearing file: " + ft);
+								}
 							}
 						}
 					}
