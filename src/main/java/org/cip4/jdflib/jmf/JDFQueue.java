@@ -45,8 +45,8 @@ package org.cip4.jdflib.jmf;
 
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoQueue;
@@ -250,7 +250,7 @@ public class JDFQueue extends JDFAutoQueue
 	 */
 	public VElement getQueueEntryVector()
 	{
-		final Vector<JDFQueueEntry> v1 = getChildrenByClass(JDFQueueEntry.class, false, -1);
+		final List<JDFQueueEntry> v1 = getChildArrayByClass(JDFQueueEntry.class, false, -1);
 		final VElement v = new VElement();
 		if (v1 != null)
 		{
@@ -294,7 +294,7 @@ public class JDFQueue extends JDFAutoQueue
 	{
 		HashMap<String, JDFQueueEntry> map = null;
 
-		final Vector<JDFQueueEntry> v = getChildrenByClass(JDFQueueEntry.class, false, -1);
+		final List<JDFQueueEntry> v = getChildArrayByClass(JDFQueueEntry.class, false, -1);
 		if (v != null)
 		{
 			final int siz = v.size();

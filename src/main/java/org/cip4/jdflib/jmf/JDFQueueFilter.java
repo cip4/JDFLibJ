@@ -2,68 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -82,6 +50,7 @@ package org.cip4.jdflib.jmf;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
@@ -152,6 +121,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		 * modifies queue to match this filter by removing all non-matching entries
 		 *
 		 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
+		 * 
 		 * @return
 		 * @deprecated use copyTo
 		 *
@@ -201,7 +171,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		/**
 		 *
 		 */
-		private void addRemoved(JDFQueue copyQueue)
+		private void addRemoved(final JDFQueue copyQueue)
 		{
 			if (lastMap != null && lastMap.size() > 0)
 			{
@@ -210,7 +180,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 				while (qeIt.hasNext())
 				{
 					final String qeID = qeIt.next();
-					JDFQueueEntry removedQE = lastMap.get(qeID);
+					final JDFQueueEntry removedQE = lastMap.get(qeID);
 					if (qeMatch.matches(removedQE))
 					{
 						final JDFQueueEntry qe = (JDFQueueEntry) copyQueue.copyElement(removedQE, qeFirst);
@@ -251,12 +221,13 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 		/**
 		 * copies queueEntry if it matches this filter and removes all non-matching attributes and elements
+		 * 
 		 * @param newQueue the new parent queue
 		 *
 		 * @param qe the queue entry to copy
 		 * @return the copied element, null if this was not copied
 		 */
-		private JDFQueueEntry copyTo(JDFQueue newQueue, JDFQueueEntry qe)
+		private JDFQueueEntry copyTo(final JDFQueue newQueue, JDFQueueEntry qe)
 		{
 			if (qe == null)
 				return null;
@@ -288,9 +259,10 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 		/**
 		 * remove any redundant details
+		 * 
 		 * @param qe the QueueEntry to clean up
 		 */
-		private void cleanQE(JDFQueueEntry qe)
+		private void cleanQE(final JDFQueueEntry qe)
 		{
 			if (qed == null)
 			{
@@ -302,10 +274,10 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			}
 			if (EnumUtil.aLessEqualsThanB(qed, EnumQueueEntryDetails.JobPhase))
 			{
-				Vector<JDFJobPhase> v = qe.getChildrenByClass(JDFJobPhase.class, false, -1);
+				final List<JDFJobPhase> v = qe.getChildArrayByClass(JDFJobPhase.class, false, -1);
 				if (v != null)
 				{
-					for (JDFJobPhase jp : v)
+					for (final JDFJobPhase jp : v)
 					{
 						jp.removeChildren(ElementName.JDF, null, null);
 					}
@@ -318,7 +290,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		 *
 		 * @return true if this element has been removed because it is identical to a previous element (no change)
 		 */
-		private boolean noDifference(final JDFQueueEntry qe, boolean clean)
+		private boolean noDifference(final JDFQueueEntry qe, final boolean clean)
 		{
 			if (lastMap == null)
 			{
@@ -348,7 +320,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		 * @param parent the parent element to create the queue in; may be null
 		 * @return
 		 */
-		protected JDFQueue copyTo(KElement parent)
+		protected JDFQueue copyTo(final KElement parent)
 		{
 			JDFQueue newQueue = (JDFQueue) (parent == null ? new JDFDoc(ElementName.QUEUE).getRoot() : parent.appendElement(ElementName.QUEUE));
 			newQueue.setAttributes(theQueue);
@@ -356,7 +328,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			{
 				newQueue.setAttribute(AttributeName.QUEUESIZE, theQueue.getQueueSize(), null);
 			}
-			Set<String> s = getQueueEntryDefSet();
+			final Set<String> s = getQueueEntryDefSet();
 			if (s == null)
 			{
 				copyAll(newQueue);
@@ -384,16 +356,16 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		 * @param newQueue
 		 * @param s
 		 */
-		private void copySet(JDFQueue newQueue, Set<String> s)
+		private void copySet(final JDFQueue newQueue, final Set<String> s)
 		{
 			int n = 0;
-			int maxEntries = getMaxEntries();
-			for (String qeid : s)
+			final int maxEntries = getMaxEntries();
+			for (final String qeid : s)
 			{
 				if (n == maxEntries)
 					break;
-				JDFQueueEntry qe = theQueue.getQueueEntry(qeid);
-				JDFQueueEntry qeNew = copyTo(newQueue, qe);
+				final JDFQueueEntry qe = theQueue.getQueueEntry(qeid);
+				final JDFQueueEntry qeNew = copyTo(newQueue, qe);
 				if (qeNew != null)
 					n++;
 			}
@@ -403,14 +375,14 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		 *
 		 * @param newQueue
 		 */
-		private void copyAll(JDFQueue newQueue)
+		private void copyAll(final JDFQueue newQueue)
 		{
 			int n = 0;
 			JDFQueueEntry qe = (JDFQueueEntry) theQueue.getFirstChildElement(ElementName.QUEUEENTRY, null);
 			final int maxEntries = getMaxEntries();
 			while (n < maxEntries && qe != null)
 			{
-				JDFQueueEntry qeNew = copyTo(newQueue, qe);
+				final JDFQueueEntry qeNew = copyTo(newQueue, qe);
 				if (qeNew != null)
 					n++;
 				qe = qe.getNextQueueEntry();
@@ -425,7 +397,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	 *
 	 * @param queueEntrieDefs
 	 */
-	public void setQueueEntrieDefs(Set<String> queueEntrieDefs)
+	public void setQueueEntrieDefs(final Set<String> queueEntrieDefs)
 	{
 		this.queueEntrieDefs = queueEntrieDefs;
 	}
@@ -518,10 +490,9 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	}
 
 	/**
-	 * @deprecated - use copyTo
-	 * modifies queue to match this filter by removing all non-matching entries
+	 * @deprecated - use copyTo modifies queue to match this filter by removing all non-matching entries
 	 *
-	 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
+	 *             make sure that this is a copy of any original queue as the incoming queue itself is not cloned
 	 *
 	 * @param theQueue the queue to modify
 	 * @param lastQueue the last queue to diff against, note that this must be the complete queue prior to the last call of match
@@ -539,12 +510,13 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * (9) get attribute QueueEntryDetails
+	 * 
 	 * @return the value of the attribute
 	 */
 	@Override
 	public EnumQueueEntryDetails getQueueEntryDetails()
 	{
-		String det = getAttribute(AttributeName.QUEUEENTRYDETAILS, null, "Brief");
+		final String det = getAttribute(AttributeName.QUEUEENTRYDETAILS, null, "Brief");
 		if ("None".equals(det))
 			return EnumQueueEntryDetails.None;
 		if ("Brief".equals(det))
@@ -584,7 +556,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			jobID = StringUtil.getNonEmpty(getJobID());
 			jobPartID = StringUtil.getNonEmpty(getJobPartID());
 
-			Vector<EnumQueueEntryStatus> vs = getStatusList();
+			final Vector<EnumQueueEntryStatus> vs = getStatusList();
 			if (vs == null)
 			{
 				statusList = null;
@@ -592,13 +564,13 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			else
 			{
 				statusList = new VString();
-				for (EnumQueueEntryStatus e : vs)
+				for (final EnumQueueEntryStatus e : vs)
 				{
 					statusList.add(e.getName());
 				}
 			}
 
-			VElement v = getChildElementVector(ElementName.GENERALID, null);
+			final VElement v = getChildElementVector(ElementName.GENERALID, null);
 			if (v.size() == 0)
 			{
 				generalIDS = null;
@@ -611,6 +583,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 		/**
 		 * return true if the queuentry matches this filter
+		 * 
 		 * @param qe the queueentry to check
 		 * @return
 		 */
@@ -632,7 +605,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			}
 			if (activation != null)
 			{
-				EnumActivation qeActivation = qe.getActivation();
+				final EnumActivation qeActivation = qe.getActivation();
 				if (!activation.equals(qeActivation) || qeActivation == null && activation.equals(EnumActivation.Active))
 					return false;
 			}
@@ -674,7 +647,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			// TODO define relationship of n-m overlap in filter and qe
 			if (generalIDS != null)
 			{
-				boolean b = matchesGeneralIDs(qe);
+				final boolean b = matchesGeneralIDs(qe);
 				if (!b)
 				{
 					return false;
@@ -689,7 +662,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		 */
 		private boolean matchesGeneralIDs(final JDFQueueEntry qe)
 		{
-			VectorMap<String, JDFGeneralID> qeGeneralIDS = qe.getGeneralIDVectorMap();
+			final VectorMap<String, JDFGeneralID> qeGeneralIDS = qe.getGeneralIDVectorMap();
 
 			// assume all entries in filter must exist
 			if (qeGeneralIDS.size() < generalIDS.size())
@@ -697,22 +670,22 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 				return false;
 			}
 
-			Set<String> keys = generalIDS.keySet();
+			final Set<String> keys = generalIDS.keySet();
 			// loop over all keys of filter and require at least one matching qe entry per key
-			for (String key : keys)
+			for (final String key : keys)
 			{
-				Vector<JDFGeneralID> qeGIDs = qeGeneralIDS.get(key);
+				final Vector<JDFGeneralID> qeGIDs = qeGeneralIDS.get(key);
 				if (qeGIDs == null) // we have no matching entry to filter in qe
 					return false;
 
-				Vector<JDFGeneralID> filterGIDs = generalIDS.get(key);
+				final Vector<JDFGeneralID> filterGIDs = generalIDS.get(key);
 				boolean gotIt = false;
 
 				// loop over all filters with this key
-				for (JDFGeneralID filterValue : filterGIDs)
+				for (final JDFGeneralID filterValue : filterGIDs)
 				{
 					// loop over all generalids with key in qe
-					for (JDFGeneralID qeValue : qeGIDs)
+					for (final JDFGeneralID qeValue : qeGIDs)
 					{
 						if (qeValue.matches(filterValue))
 						{
@@ -733,6 +706,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * return true if the queuentry matches this filter
+	 * 
 	 * @param qe the queueentry to check
 	 * @return
 	 */
@@ -742,19 +716,21 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	}
 
 	/**
-	  * (5) set attribute Activation
-	  * @param enumVar the enumVar to set the attribute to
-	  */
+	 * (5) set attribute Activation
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 */
 	@Override
-	public void setActivation(EnumActivation enumVar)
+	public void setActivation(final EnumActivation enumVar)
 	{
 		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Activation
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Activation
+	 * 
+	 * @return the value of the attribute
+	 */
 	@Override
 	public EnumActivation getActivation()
 	{
@@ -789,8 +765,8 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		final Vector<JDFQueueEntryDef> v = getChildrenByClass(JDFQueueEntryDef.class, false, 0);
 		if (v != null && v.size() > 0)
 		{
-			set = new HashSet<String>();
-			for (JDFQueueEntryDef qed : v)
+			set = new HashSet<>();
+			for (final JDFQueueEntryDef qed : v)
 			{
 				final String qeid = qed.getQueueEntryID();
 				if (!isWildCard(qeid))
@@ -860,21 +836,22 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * copy theQueue to newParent while applying the filter
+	 * 
 	 * @param theQueue the queue to copy
 	 * @param lastQueue the previously created queue
 	 * @param resp the JDF response message, may be null
 	 * @return
 	 */
-	public JDFQueue copy(JDFQueue theQueue, JDFQueue lastQueue, KElement resp)
+	public JDFQueue copy(final JDFQueue theQueue, final JDFQueue lastQueue, final KElement resp)
 	{
-		QueueMatcher queueMatcher = new QueueMatcher(theQueue, lastQueue);
+		final QueueMatcher queueMatcher = new QueueMatcher(theQueue, lastQueue);
 		return queueMatcher.copyTo(resp);
 	}
 
 	/**
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#getIdentifier()
 	 * @return
-	*/
+	 */
 	@Override
 	public NodeIdentifier getIdentifier()
 	{
@@ -884,7 +861,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	/**
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.NodeIdentifier)
 	 * @param ni
-	*/
+	 */
 	@Override
 	public void setIdentifier(NodeIdentifier ni)
 	{
@@ -900,16 +877,17 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * just a different default...
+	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueFilter#getMaxEntries()
 	 */
 	@Override
 	public int getMaxEntries()
 	{
-		KElement parent = getParentNode_KElement();
+		final KElement parent = getParentNode_KElement();
 		int def = 0;
 		if (parent instanceof JDFMessage)
 		{
-			EnumType t = ((JDFMessage) parent).getEnumType();
+			final EnumType t = ((JDFMessage) parent).getEnumType();
 			if (EnumType.QueueStatus.equals(t))
 				def = Integer.MAX_VALUE;
 		}

@@ -2,82 +2,48 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2006, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *  
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2006, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  * 
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
+ * 
+ *
  */
 /**
- *========================================================================== class JDFPhaseTime extends JDFAutoPhaseTime
- * created 2001-09-06T10:02:57GMT+02:00 ==========================================================================
- *          @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- *              @Author  sabjon@topmail.de   using a code generator
- * Warning! very preliminary test version. Interface subject to change without prior notice! Revision history:   ...
+ * ========================================================================== class JDFPhaseTime extends JDFAutoPhaseTime created 2001-09-06T10:02:57GMT+02:00
+ * ==========================================================================
+ * 
+ * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
+ * @Author sabjon@topmail.de using a code generator Warning! very preliminary test version. Interface subject to change without prior notice! Revision history: ...
  */
 
 package org.cip4.jdflib.resource;
-
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPhaseTime;
@@ -108,8 +74,8 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * 14.11.2008
+ *
+ *         14.11.2008
  */
 public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 {
@@ -117,7 +83,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * Constructor for JDFPhaseTime
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -128,7 +94,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * Constructor for JDFPhaseTime
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -140,7 +106,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * Constructor for JDFPhaseTime
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -153,7 +119,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * toString()
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -164,7 +130,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * set all parts to those defined in vParts
-	 * 
+	 *
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
@@ -175,7 +141,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * set all parts to those defined by mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
@@ -186,7 +152,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * remove the part defined by mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
@@ -197,7 +163,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * check whether the part defined in mPart is included
-	 * 
+	 *
 	 * @param mPart attribute map to look for
 	 * @return boolean - returns true if the part exists
 	 */
@@ -211,12 +177,12 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 	 * return a vector of unknown element nodenames
 	 * <p>
 	 * default: GetInvalidElements(true, 999999)
-	 * 
+	 *
 	 * @param bIgnorePrivate used by JDFElement during the validation
 	 * @param nMax maximum size of the returned vector
 	 * @return Vector - vector of unknown element nodenames
-	 * 
-	 * !!! Do not change the signature of this method
+	 *
+	 *         !!! Do not change the signature of this method
 	 */
 	@Override
 	public VString getUnknownElements(final boolean bIgnorePrivate, final int nMax)
@@ -226,9 +192,8 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * copy a Vector of resourceLinks into this PhaseTime
-	 * 
-	 * @param vRL the Vector of resourceLinks to copy - the order is significant, because the first rl will be used to fill the Amount in
-	 * Signal/DeviceInfo/JobPhase
+	 *
+	 * @param vRL the Vector of resourceLinks to copy - the order is significant, because the first rl will be used to fill the Amount in Signal/DeviceInfo/JobPhase
 	 */
 	public void setLinks(final VElement vRL)
 	{
@@ -256,7 +221,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * return the ResourceLink in <code>this</code>, null if none exists
-	 * 
+	 *
 	 * @param iSkip the nTh resourceLink to retrieve
 	 * @return JDFResourceLink - <code>this</code> phaseTimes ResourceLink
 	 */
@@ -280,7 +245,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * return the ResourceLink in <code>this</code>, null if none exists
-	 * 
+	 *
 	 * @return JDFResourceLink - this phaseTimes ResourceLink
 	 */
 	public VElement getLinkVector()
@@ -300,11 +265,12 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * gets the DeviceID from the first child device, null if none was set
+	 * 
 	 * @return the deviceID
 	 */
 	public String getDeviceID()
 	{
-		JDFDevice d = getDevice(0);
+		final JDFDevice d = getDevice(0);
 		if (d == null)
 			return null;
 		return StringUtil.getNonEmpty(d.getDeviceID());
@@ -312,31 +278,33 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * gets the DeviceID from all child devices, null if none was set
+	 * 
 	 * @return the deviceID
 	 */
 	public VString getDeviceIDs()
 	{
-		Vector<JDFDevice> vd = getChildrenByClass(JDFDevice.class, false, 0);
+		final List<JDFDevice> vd = getChildArrayByClass(JDFDevice.class, false, 0);
 		if (vd == null)
 			return null;
-		VString ret = new VString();
-		for (JDFDevice d : vd)
+		final VString ret = new VString();
+		for (final JDFDevice d : vd)
 			ret.add(d.getDeviceID());
 		return ret;
 	}
 
 	/**
 	 * set Device/@DeviceID
+	 * 
 	 * @param deviceID
 	 */
-	public void setDeviceID(String deviceID)
+	public void setDeviceID(final String deviceID)
 	{
 		getCreateDevice(0).setDeviceID(deviceID);
 	}
 
 	/**
 	 * get the implied duration from Start and End
-	 * 
+	 *
 	 * @return JDFDuration the duration
 	 */
 	public JDFDuration getDuration()
@@ -426,6 +394,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * sort by timestamp using the end time
+	 * 
 	 * @param a1 an audit
 	 * @param a2 another audit
 	 * @return @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
@@ -440,15 +409,15 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 	}
 
 	/**
-	 * 
+	 *
 	 * @param phase
 	 */
-	public void setPhase(JDFJobPhase phase)
+	public void setPhase(final JDFJobPhase phase)
 	{
 		if (phase != null)
 		{
-			JDFJMF jmf = (JDFJMF) phase.getDeepParent(ElementName.JMF, 0);
-			JDFDeviceInfo devInfo = (JDFDeviceInfo) phase.getParentNode_KElement();
+			final JDFJMF jmf = (JDFJMF) phase.getDeepParent(ElementName.JMF, 0);
+			final JDFDeviceInfo devInfo = (JDFDeviceInfo) phase.getParentNode_KElement();
 			setStatusDetails(phase.getStatusDetails());
 			setStatus(phase.getStatus());
 			setPartMapVector(phase.getPartMapVector());

@@ -2526,7 +2526,7 @@ public class KElement extends ElementNSImpl implements Element
 	{
 		if (iSkip < 0)
 		{
-			final Vector<a> v = getChildrenByClass(clazz, bRecurse, 0);
+			final List<a> v = getChildArrayByClass(clazz, bRecurse, 0);
 			if (v != null)
 			{
 				iSkip = v.size() + iSkip;

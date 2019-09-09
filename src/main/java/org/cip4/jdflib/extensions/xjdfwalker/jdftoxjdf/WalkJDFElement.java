@@ -36,7 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import java.util.Vector;
+import java.util.List;
 
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
@@ -794,7 +794,7 @@ public class WalkJDFElement extends WalkElement
 		}
 		final KElement cNew = safeRename(pl, XJDFConstants.Content);
 		cNew.appendAttribute(AttributeName.PARTIDKEYS, AttributeName.PAGENUMBER, null, null, true);
-		final Vector<JDFPageData> vpd = cNew.getChildrenByClass(JDFPageData.class, true, 0);
+		final List<JDFPageData> vpd = cNew.getChildArrayByClass(JDFPageData.class, true, 0);
 		if (vpd != null)
 		{
 			int i = 0;

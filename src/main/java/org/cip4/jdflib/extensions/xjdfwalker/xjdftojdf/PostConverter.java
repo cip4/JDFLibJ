@@ -38,7 +38,6 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -542,7 +541,7 @@ class PostConverter
 		 */
 		private void fixDependencies(final JDFNode root)
 		{
-			final Vector<JDFDependencies> vDep = root.getChildrenByClass(JDFDependencies.class, true, 0);
+			final List<JDFDependencies> vDep = root.getChildArrayByClass(JDFDependencies.class, true, 0);
 			if (vDep == null)
 				return;
 			for (final JDFDependencies dep : vDep)

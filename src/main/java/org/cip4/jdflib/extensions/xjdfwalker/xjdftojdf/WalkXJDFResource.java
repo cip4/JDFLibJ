@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -262,7 +263,7 @@ public class WalkXJDFResource extends WalkXElement
 	 */
 	VJDFAttributeMap getPartMaps(final ResourceHelper rh)
 	{
-		final Vector<JDFPart> parts = rh.getRoot().getChildrenByClass(JDFPart.class, false, 0);
+		final List<JDFPart> parts = rh.getRoot().getChildArrayByClass(JDFPart.class, false, 0);
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		for (final JDFPart part : parts)
 		{

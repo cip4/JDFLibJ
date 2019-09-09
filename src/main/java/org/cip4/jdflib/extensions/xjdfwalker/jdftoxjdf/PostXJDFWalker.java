@@ -479,7 +479,7 @@ class PostXJDFWalker extends BaseElementWalker
 			if (partAmount.hasNonEmpty(AttributeName.TRANSFORMATION) || partAmount.hasNonEmpty(AttributeName.ORIENTATION))
 			{
 				final KElement parentRes = partAmount.getDeepParent(XJDFConstants.Resource, 0);
-				final Vector<JDFPartAmount> vPA = partAmount.getParentNode_KElement().getChildrenByClass(JDFPartAmount.class, false, 0);
+				final List<JDFPartAmount> vPA = partAmount.getParentNode_KElement().getChildArrayByClass(JDFPartAmount.class, false, 0);
 				for (int i = 1; i < vPA.size(); i++)
 				{
 					final KElement parentResClone = parentRes.getParentNode_KElement().copyElement(parentRes, parentRes.getNextSiblingElement());

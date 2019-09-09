@@ -37,6 +37,7 @@
  */
 package org.cip4.jdflib.pool;
 
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
@@ -156,7 +157,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 		/**
 		 * returns the attribute occurrence in PartAmount, or the default in the ResourceLink
-		 * 
+		 *
 		 * @param poolParent the pool parent
 		 *
 		 * @param attrib the attribute name
@@ -242,7 +243,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		/**
 		 * get the minimum value of all matching AmountPool/PartAmount/@attName as a double PartAmounts match if all attributes match those in PartAmount, i.e. mPart is a submap of the searched
 		 * PartAmount elements
-		 * 
+		 *
 		 * @param poolParent
 		 * @param attName the Attribute name , e.g Amount, ActualAmount
 		 * @param mPart
@@ -288,7 +289,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		/**
 		 * get the sum of all matching AmountPool/PartAmount/@attName as a double PartAmounts match if all attributes match those in PartAmount, i.e. mPart is a submap of the searched PartAmount
 		 * elements
-		 * 
+		 *
 		 * @param poolParent
 		 * @param attName the Attribute name , e.g Amount, ActualAmount
 		 * @param mPart
@@ -437,7 +438,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 		/**
 		 * get an amountmap for the Amountpool of poolParent
-		 * 
+		 *
 		 * @param poolParent the pool parent
 		 * @param vPartIDKeys
 		 * @return the AmountMap for the Amountpool, null if no amountpool exists
@@ -699,7 +700,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	{
 		if (mPart != null && mPart.size() == 0)
 			mPart = null;
-		final Vector<JDFPartAmount> vPartAmount = getChildrenByClass(JDFPartAmount.class, true, 0);
+		final List<JDFPartAmount> vPartAmount = getChildArrayByClass(JDFPartAmount.class, true, 0);
 		for (final JDFPartAmount partAmount : vPartAmount)
 		{
 			final VJDFAttributeMap vMapPart = partAmount.getPartMapVector();
@@ -723,7 +724,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		if (mPart != null && mPart.size() == 0)
 			mPart = null;
 
-		final Vector<JDFPartAmount> vPartAmount = getChildrenByClass(JDFPartAmount.class, true, 0);
+		final List<JDFPartAmount> vPartAmount = getChildArrayByClass(JDFPartAmount.class, true, 0);
 		for (final JDFPartAmount partAmount : vPartAmount)
 		{
 			VJDFAttributeMap vMapPart = partAmount == null ? null : partAmount.getPartMapVector();
@@ -764,7 +765,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		{
 			vPart = null;
 		}
-		final Vector<JDFPartAmount> vPartAmount = getChildrenByClass(JDFPartAmount.class, true, 0);
+		final List<JDFPartAmount> vPartAmount = getChildArrayByClass(JDFPartAmount.class, true, 0);
 		for (final JDFPartAmount partAmount : vPartAmount)
 		{
 			final VJDFAttributeMap vMapPart = partAmount.getPartMapVector();
@@ -789,7 +790,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		int n = 0;
 		if (mPart != null && mPart.size() == 0)
 			mPart = null;
-		final Vector<JDFPartAmount> vPartAmount = getChildrenByClass(JDFPartAmount.class, true, 0);
+		final List<JDFPartAmount> vPartAmount = getChildArrayByClass(JDFPartAmount.class, true, 0);
 		for (final JDFPartAmount partAmount : vPartAmount)
 		{
 			final VJDFAttributeMap vMapPart = partAmount.getPartMapVector();
@@ -881,7 +882,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 	/**
 	 * get an AmountMap for this Amountpool
-	 * 
+	 *
 	 * @param vPartIDKeys
 	 * @return the AmountMap for the Amountpool, null if no amountpool exists
 	 */
@@ -960,7 +961,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	 */
 	public VElement getMatchingPartAmountVector(final JDFAttributeMap mPart)
 	{
-		final Vector<JDFPartAmount> vPartAmount = getChildrenByClass(JDFPartAmount.class, true, 0);
+		final List<JDFPartAmount> vPartAmount = getChildArrayByClass(JDFPartAmount.class, true, 0);
 		final int size = vPartAmount.size();
 		if (size == 0)
 		{
