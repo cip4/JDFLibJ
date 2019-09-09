@@ -971,7 +971,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		final VElement vPA = new VElement();
 		for (int i = 0; i < size; i++)
 		{
-			final JDFPartAmount ps = vPartAmount.elementAt(i);
+			final JDFPartAmount ps = vPartAmount.get(i);
 			final VJDFAttributeMap mm = ps.getPartMapVector();
 			if (mm != null)
 			{

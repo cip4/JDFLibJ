@@ -30,20 +30,22 @@
  *
  * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
  * originally based on software copyright (c) 1999-2006, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- * 
+ *
  * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
- * 
+ *
  *
  */
 /**
  * ========================================================================== class JDFPhaseTime extends JDFAutoPhaseTime created 2001-09-06T10:02:57GMT+02:00
  * ==========================================================================
- * 
+ *
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
  * @Author sabjon@topmail.de using a code generator Warning! very preliminary test version. Interface subject to change without prior notice! Revision history: ...
  */
 
 package org.cip4.jdflib.resource;
+
+import java.util.List;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPhaseTime;
@@ -265,7 +267,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * gets the DeviceID from the first child device, null if none was set
-	 * 
+	 *
 	 * @return the deviceID
 	 */
 	public String getDeviceID()
@@ -278,7 +280,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * gets the DeviceID from all child devices, null if none was set
-	 * 
+	 *
 	 * @return the deviceID
 	 */
 	public VString getDeviceIDs()
@@ -294,7 +296,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * set Device/@DeviceID
-	 * 
+	 *
 	 * @param deviceID
 	 */
 	public void setDeviceID(final String deviceID)
@@ -394,7 +396,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 
 	/**
 	 * sort by timestamp using the end time
-	 * 
+	 *
 	 * @param a1 an audit
 	 * @param a2 another audit
 	 * @return @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
