@@ -56,6 +56,7 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.zip.DataFormatException;
 
@@ -3055,6 +3056,26 @@ public class KElementTest extends JDFTestCaseBase
 		v = jdfPool.getChildrenByTagName("RunList", null, null, false, true, -1);
 		assertEquals("Wrong number of child elements found", v.size(), 10);
 		v = jdfPool.getChildrenByTagName("RunList", null, null, false, true, 5);
+		assertEquals("Wrong number of child elements found", v.size(), 5);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetChildArrayByClass()
+	{
+		final String xmlFile = "getChildrenByTagNameTest.jdf";
+
+		final JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData + xmlFile);
+
+		final JDFNode jdfRoot = (JDFNode) jdfDoc.getRoot();
+		final JDFResourcePool jdfPool = jdfRoot.getResourcePool();
+		List<JDFRunList> v = jdfPool.getChildArrayByClass(JDFRunList.class, true, 0);
+		assertEquals("Wrong number of child elements found", v.size(), 10);
+		v = jdfPool.getChildArrayByClass(JDFRunList.class, true, -1);
+		assertEquals("Wrong number of child elements found", v.size(), 10);
+		v = jdfPool.getChildArrayByClass(JDFRunList.class, true, 5);
 		assertEquals("Wrong number of child elements found", v.size(), 5);
 	}
 

@@ -698,8 +698,7 @@ public class KElement extends ElementNSImpl implements Element
 					namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), false);
 					if (!ContainerUtil.equals(namespaceURI2, nameSpaceURI))
 					{
-						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
-								+ "; attempting to set URI: " + nameSpaceURI;
+						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2 + "; attempting to set URI: " + nameSpaceURI;
 						kLog.error(message);
 						throw new JDFException(message);
 					}
@@ -812,13 +811,13 @@ public class KElement extends ElementNSImpl implements Element
 							// already there
 							if (key.equals(nodeName))
 							{ // overwrite default namespace with qualified
-									// namespace or vice versa
+								// namespace or vice versa
 								removeAttribute(nodeName);
 								super.setAttribute(key, value);
 							}
 							else
 							{ // same qualified name, simply overwrite the
-									// value
+								// value
 								a.setNodeValue(value);
 							}
 						}
@@ -827,8 +826,8 @@ public class KElement extends ElementNSImpl implements Element
 							final String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 							if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
 							{
-								throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2
-										+ "; attempting to set URI: " + nameSpaceURI);
+								throw new JDFException(
+										"KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2 + "; attempting to set URI: " + nameSpaceURI);
 							}
 							try
 							{
@@ -1898,33 +1897,47 @@ public class KElement extends ElementNSImpl implements Element
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */
-	@SuppressWarnings("unchecked")
 	public <a extends KElement> List<a> getChildArrayByClass(final Class<a> clazz, final boolean bRecurse, final int nMax)
 	{
 		final List<a> v = new ArrayList<>();
-		Node n = getFirstChild();
-		boolean bFound = false;
-		while (n != null)
-		{
-			if (clazz.isInstance(n))
-			{
-				v.add((a) n);
-				bFound = true;
-			}
-			if (bRecurse && (n instanceof KElement))
-			{
-				final Collection<a> childrenByClass = ((KElement) n).getChildArrayByClass(clazz, bRecurse, nMax);
-				if (childrenByClass != null)
-				{
-					v.addAll(childrenByClass);
-					bFound = true;
-				}
-			}
-			if (bFound && nMax > 0 && nMax >= v.size())
-				break;
-			n = n.getNextSibling();
-		}
+		getChildArrayByClass(clazz, bRecurse, nMax, v);
 		return v;
+	}
+
+	/**
+	 * Get all children from the actual element matching the given conditions<br>
+	 * does NOT get refElement targets although the attributes are checked in the target elements in case of refElements never null
+	 *
+	 * @param clazz
+	 * @param <a>
+	 * @param bRecurse if true recurse through all children, grandchildren etc.
+	 * @param nMax maximum number to search - if 0 or negative, search all
+	 * @return Vector<a> vector with all found elements, never null
+	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
+	 * @default getChildElementVector(null, null, null, true, 0)
+	 */
+	@SuppressWarnings("unchecked")
+	<a extends KElement> int getChildArrayByClass(final Class<a> clazz, final boolean bRecurse, final int nMax, final List<a> v)
+	{
+		Node node = getFirstChild();
+		int n = 0;
+		while (node != null)
+		{
+			if (clazz.isInstance(node))
+			{
+				v.add((a) node);
+				if (++n == nMax)
+					return n;
+			}
+			if (bRecurse && (node instanceof KElement))
+			{
+				n += ((KElement) node).getChildArrayByClass(clazz, bRecurse, nMax - n, v);
+				if (nMax > 0 && n == nMax)
+					return n;
+			}
+			node = node.getNextSibling();
+		}
+		return n;
 	}
 
 	@SuppressWarnings("unchecked")
