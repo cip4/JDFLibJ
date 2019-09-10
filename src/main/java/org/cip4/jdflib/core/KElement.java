@@ -1878,9 +1878,9 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return
 	 */
 	@Deprecated
-	public <a extends KElement> Vector<a> getChildrenByClass(final Class<a> clazz, final boolean bRecurse, final int nMax)
+	public <A extends KElement> Vector<A> getChildrenByClass(final Class<A> clazz, final boolean bRecurse, final int nMax)
 	{
-		final Vector<a> v = new Vector<>();
+		final Vector<A> v = new Vector<>();
 		v.addAll(getChildArrayByClass(clazz, bRecurse, nMax));
 		return v;
 	}
@@ -1890,16 +1890,16 @@ public class KElement extends ElementNSImpl implements Element
 	 * does NOT get refElement targets although the attributes are checked in the target elements in case of refElements never null
 	 *
 	 * @param clazz
-	 * @param <a>
+	 * @param <A>
 	 * @param bRecurse if true recurse through all children, grandchildren etc.
 	 * @param nMax maximum number to search - if 0 or negative, search all
 	 * @return Vector<a> vector with all found elements, never null
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */
-	public <a extends KElement> List<a> getChildArrayByClass(final Class<a> clazz, final boolean bRecurse, final int nMax)
+	public <A extends KElement> List<A> getChildArrayByClass(final Class<A> clazz, final boolean bRecurse, final int nMax)
 	{
-		final List<a> v = new ArrayList<>();
+		final List<A> v = new ArrayList<>();
 		getChildArrayByClass(clazz, bRecurse, nMax, v);
 		return v;
 	}
@@ -1909,7 +1909,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * does NOT get refElement targets although the attributes are checked in the target elements in case of refElements never null
 	 *
 	 * @param clazz
-	 * @param <a>
+	 * @param <A>
 	 * @param bRecurse if true recurse through all children, grandchildren etc.
 	 * @param nMax maximum number to search - if 0 or negative, search all
 	 * @return Vector<a> vector with all found elements, never null
@@ -1917,7 +1917,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */
 	@SuppressWarnings("unchecked")
-	<a extends KElement> int getChildArrayByClass(final Class<a> clazz, final boolean bRecurse, final int nMax, final List<a> v)
+	<A extends KElement> int getChildArrayByClass(final Class<A> clazz, final boolean bRecurse, final int nMax, final List<A> v)
 	{
 		Node node = getFirstChild();
 		int n = 0;
@@ -1925,7 +1925,7 @@ public class KElement extends ElementNSImpl implements Element
 		{
 			if (clazz.isInstance(node))
 			{
-				v.add((a) node);
+				v.add((A) node);
 				if (++n == nMax)
 					return n;
 			}

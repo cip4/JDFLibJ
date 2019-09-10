@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,7 +44,6 @@
 package org.cip4.jdflib.resource.intent;
 
 import java.util.List;
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDropIntent;
@@ -74,7 +73,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDropIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
+	public JDFDropIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -87,7 +86,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDropIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
+	public JDFDropIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -101,7 +100,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFDropIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFDropIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -293,7 +292,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 */
 	public void setFromDrop(final JDFDrop drop)
 	{
-		final Vector<JDFDropItem> vdi = drop.getChildrenByClass(JDFDropItem.class, false, 0);
+		final List<JDFDropItem> vdi = drop.getChildArrayByClass(JDFDropItem.class, false, 0);
 		for (final JDFDropItem dropItem : vdi)
 		{
 			final JDFDropItemIntent dropItemIntent = appendDropItemIntent();
