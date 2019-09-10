@@ -410,7 +410,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	public synchronized void testBig() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
-		final File file = new File(theHF + File.separator + "f1Big.txt");
+		final File file = new File(theHF + File.separator + "f1Bigab.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
 
