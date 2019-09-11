@@ -203,6 +203,8 @@ public class UrlUtil
 	 *
 	 */
 	public static final String TEXT_CSV = "text/csv";
+	public static final String TEXT_JSON = "text/json";
+	public static final String APPLICATION_JSON = "application/json";
 	/**
 	 *
 	 */
@@ -1738,13 +1740,34 @@ public class UrlUtil
 		if (contentType == null)
 			return false;
 
-		String lower = StringUtil.normalize(contentType, true);
-		while (lower.endsWith(";"))
-			lower = StringUtil.leftStr(lower, -1);
+		final String lower = normalizeType(contentType);
 
 		if (TEXT_XML.equals(lower) || APPLICATION_XML.equals(lower))
 			return true;
 		return (lower.startsWith("application") || (lower.startsWith("text"))) && lower.endsWith("+xml");
+	}
+
+	/**
+	 * check whether the mime type is a known xml dialect
+	 *
+	 * @param contentType
+	 * @return
+	 */
+	public static boolean isJSONType(final String contentType)
+	{
+		if (contentType == null)
+			return false;
+
+		final String lower = normalizeType(contentType);
+		return TEXT_JSON.equals(lower) || APPLICATION_JSON.equals(lower);
+	}
+
+	private static String normalizeType(final String contentType)
+	{
+		String lower = StringUtil.normalize(contentType, true);
+		while (lower.endsWith(";"))
+			lower = StringUtil.leftStr(lower, -1);
+		return lower;
 	}
 
 	/**

@@ -157,7 +157,7 @@ public class HotFolderTest extends JDFTestCaseBase
 			for (int i = 0; i < 10; i++)
 			{
 				Thread.sleep(20);
-				assertEquals("Loop " + i, n0, Thread.activeCount(), 7);
+				assertEquals("Loop " + i, n0, Thread.activeCount(), 8);
 				hf.restart();
 			}
 			if (n0 < Thread.activeCount())
@@ -166,7 +166,7 @@ public class HotFolderTest extends JDFTestCaseBase
 			{
 				Thread.sleep(20);
 				hf.stop();
-				assertEquals("Loop " + i, n0 - 1, Thread.activeCount(), 7);
+				assertEquals("Loop " + i, n0 - 1, Thread.activeCount(), 8);
 			}
 		}
 	}

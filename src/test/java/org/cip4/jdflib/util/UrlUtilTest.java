@@ -574,6 +574,18 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testIsJSONType()
+	{
+		assertFalse(UrlUtil.isJSONType("text/xml"));
+		assertFalse(UrlUtil.isJSONType("TEXT/XML"));
+		assertTrue(UrlUtil.isJSONType("TEXT/JSON; "));
+		assertTrue(UrlUtil.isJSONType("application/json "));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testIsZIPType()
 	{
 		assertFalse(UrlUtil.isZIPType("text/xml"));
