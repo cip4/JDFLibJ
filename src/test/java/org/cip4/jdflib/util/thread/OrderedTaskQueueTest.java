@@ -170,8 +170,28 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("tesffft2");
 		assertTrue(q.queue(new WaitRunner(1)));
 		q.shutDown();
-		ThreadUtil.sleep(142);
+		for (int i = 0; i < 100; i++)
+		{
+			if (!q.isLive())
+				break;
+			else
+				ThreadUtil.sleep(2);
+		}
 		assertFalse(q.queue(new WaitRunner(2)));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	synchronized public void testIsLive()
+	{
+		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("live");
+		assertTrue(q.isLive());
+		assertTrue(q.queue(new WaitRunner(1)));
+		assertTrue(q.isLive());
+		q.shutDown();
 	}
 
 	/**
@@ -208,7 +228,13 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("teffst4");
 		assertTrue(q.queue(new WaitRunner(1)));
 		OrderedTaskQueue.shutDown("teffst4");
-		ThreadUtil.sleep(13);
+		for (int i = 0; i < 100; i++)
+		{
+			if (!q.isLive())
+				break;
+			else
+				ThreadUtil.sleep(2);
+		}
 		assertFalse(q.queue(new WaitRunner(2)));
 	}
 
@@ -222,7 +248,13 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test554");
 		assertTrue(q.queue(new WaitRunner(1, 200)));
 		OrderedTaskQueue.shutDownAll();
-		ThreadUtil.sleep(1);
+		for (int i = 0; i < 100; i++)
+		{
+			if (!q.isLive())
+				break;
+			else
+				ThreadUtil.sleep(2);
+		}
 		assertFalse(q.queue(new WaitRunner(2, 200)));
 	}
 

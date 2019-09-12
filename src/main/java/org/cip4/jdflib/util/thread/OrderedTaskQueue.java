@@ -312,6 +312,15 @@ public class OrderedTaskQueue extends Thread
 
 	/**
 	 *
+	 * @return
+	 */
+	public boolean isLive()
+	{
+		return idle.get() >= 0;
+	}
+
+	/**
+	 *
 	 * @param task the thing to send off
 	 * @return true if successfully queued
 	 */
