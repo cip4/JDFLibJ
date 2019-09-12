@@ -964,6 +964,23 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testCopyIntoTxt()
+	{
+		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
+		final KElement root = doc.getRoot();
+		root.setText("1");
+
+		final XMLDoc doc2 = new XMLDoc("Test", "www.test.com");
+		final KElement root2 = doc2.getRoot();
+
+		root2.copyInto(root, true);
+		assertEquals("1", root2.getText());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testMergeElementElements()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
@@ -1191,6 +1208,21 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue(rootClone.isEqual(e));
 		assertNotSame(rootClone, e);
 		assertNotSame(rootClone.getOwnerDocument(), e.getOwnerDocument());
+	}
+
+	/**
+	 * @throws CloneNotSupportedException
+	 *
+	 */
+	@Test
+	public void testCloneNewDocText() throws CloneNotSupportedException
+	{
+		final XMLDoc doc = new XMLDoc("root", null);
+		final KElement e = doc.getRoot();
+		e.setText("a");
+		final KElement rootClone = e.cloneNewDoc();
+		assertEquals("a", rootClone.getText());
+
 	}
 
 	/**

@@ -3555,7 +3555,6 @@ public class KElement extends ElementNSImpl implements Element
 			removeAttributes(null);
 		}
 		setAttributes(src);
-		setText(src.getText());
 		final String srcNS = StringUtil.getNonEmpty(src.getNamespaceURI());
 		if (srcNS != null)
 			setNamespaceURI(srcNS);

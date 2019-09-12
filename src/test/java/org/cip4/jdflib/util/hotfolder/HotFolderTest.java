@@ -43,7 +43,6 @@
  */
 package org.cip4.jdflib.util.hotfolder;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -130,14 +129,14 @@ public class HotFolderTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 		{
 			Thread.sleep(1);
-			assertEquals("Loop " + i, Thread.activeCount(), n0, 6);
+			assertTrue("Loop " + i, Thread.activeCount() - n0 < 7);
 			hf.restart();
 		}
 		for (int i = 0; i < 3; i++)
 		{
 			hf.stop();
 			Thread.sleep(1);
-			assertEquals("Loop " + i, Thread.activeCount(), n0 - 1, 6);
+			assertTrue("Loop " + i, Thread.activeCount() - n0 < 6);
 		}
 	}
 
@@ -157,7 +156,7 @@ public class HotFolderTest extends JDFTestCaseBase
 			for (int i = 0; i < 10; i++)
 			{
 				Thread.sleep(20);
-				assertEquals("Loop " + i, n0, Thread.activeCount(), 8);
+				assertTrue("Loop " + i, n0 - Thread.activeCount() < 8);
 				hf.restart();
 			}
 			if (n0 < Thread.activeCount())
@@ -166,7 +165,7 @@ public class HotFolderTest extends JDFTestCaseBase
 			{
 				Thread.sleep(20);
 				hf.stop();
-				assertEquals("Loop " + i, n0 - 1, Thread.activeCount(), 8);
+				assertTrue("Loop " + i, n0 - Thread.activeCount() < 8);
 			}
 		}
 	}
@@ -182,26 +181,26 @@ public class HotFolderTest extends JDFTestCaseBase
 		file.createNewFile();
 		assertTrue(file.exists());
 
-		for (int i = 0; i < 45 && file.exists(); i++)
+		for (int i = 0; i < 145 && file.exists(); i++)
 		{
-			ThreadUtil.sleep(1000);
+			ThreadUtil.sleep(100);
 		}
 		assertFalse(file.exists());
 		hf.stop();
 		hf.stop();
 		file.createNewFile();
 		assertTrue(file.exists());
-		for (int i = 0; i < 15 && !file.exists(); i++)
+		for (int i = 0; i < 150 && !file.exists(); i++)
 		{
-			ThreadUtil.sleep(1000);
+			ThreadUtil.sleep(100);
 		}
 		assertTrue(file.exists());
 		hf.restart();
 		hf.restart();
 		hf.restart();
-		for (int i = 0; i < 15 && file.exists(); i++)
+		for (int i = 0; i < 150 && file.exists(); i++)
 		{
-			ThreadUtil.sleep(1000);
+			ThreadUtil.sleep(100);
 		}
 		assertFalse(file.exists());
 	}
