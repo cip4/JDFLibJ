@@ -105,6 +105,7 @@ import org.cip4.jdflib.datatypes.JDFNumList;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.MyPair;
 import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -2514,7 +2515,7 @@ public class KElement extends ElementNSImpl implements Element
 	/**
 	 * getElement - Get the actual element by java class
 	 *
-	 * @param <a> the data type to return
+	 * @param <A> the data type to return
 	 * @param clazz java class of the requested element
 	 * @param iSkip number of element to get, if negative count backwards (-1 is the last)
 	 * @param bRecurse if true recurse sub elements
@@ -2522,17 +2523,51 @@ public class KElement extends ElementNSImpl implements Element
 	 *
 	 */
 	@SuppressWarnings("unchecked")
-	public <a extends KElement> a getElementByClass(final Class<a> clazz, int iSkip, final boolean bRecurse)
+	public <A extends KElement> A getElementByClass(final Class<A> clazz, int iSkip, final boolean bRecurse)
 	{
 		if (iSkip < 0)
 		{
-			final List<a> v = getChildArrayByClass(clazz, bRecurse, 0);
+			final List<A> v = getChildArrayByClass(clazz, bRecurse, 0);
 			if (v != null)
 			{
 				iSkip = v.size() + iSkip;
 				return iSkip >= 0 ? v.get(iSkip) : null;
 			}
 		}
+		else if (bRecurse)
+		{
+			final MyPair<A, Integer> mp = getElementByClassImpl(clazz, iSkip);
+			return mp == null ? null : mp.a;
+		}
+		else
+		{
+			KElement n = getFirstChildElement();
+			int i = 0;
+			while (n != null)
+			{
+				if (clazz.isInstance(n))
+				{
+					if (iSkip == i++)
+					{
+						return (A) n;
+					}
+				}
+				n = n.getNextSiblingElement();
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * recursion implementation
+	 *
+	 * @param clazz
+	 * @param iSkip
+	 * @return a pair of either the return value or the number of elements skipped in case we want later
+	 */
+	@SuppressWarnings("unchecked")
+	private <A extends KElement> MyPair<A, Integer> getElementByClassImpl(final Class<A> clazz, final int iSkip)
+	{
 		KElement n = getFirstChildElement();
 		int i = 0;
 		while (n != null)
@@ -2541,18 +2576,22 @@ public class KElement extends ElementNSImpl implements Element
 			{
 				if (iSkip == i++)
 				{
-					return (a) n;
+					return new MyPair<>((A) n, Integer.valueOf(i));
 				}
 			}
-			if (bRecurse)
+			final MyPair<A, Integer> ret = n.getElementByClassImpl(clazz, iSkip - i);
+			if (ret != null)
 			{
-				final a ret = n.getElementByClass(clazz, iSkip - i, bRecurse);
-				if (ret != null)
+				if (ret.a != null)
+				{
 					return ret;
+				}
+				i += ret.b;
 			}
 			n = n.getNextSiblingElement();
 		}
-		return null;
+
+		return i == 0 ? null : new MyPair<A, Integer>(null, Integer.valueOf(i));
 	}
 
 	/**

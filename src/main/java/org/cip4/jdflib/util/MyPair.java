@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,11 +68,14 @@
  */
 package org.cip4.jdflib.util;
 
+import org.cip4.jdflib.core.JDFConstants;
+
 /**
  * trivial typesafe pair class
+ *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * 11.12.2008
+ *
+ *         11.12.2008
  * @param <aData> datatype of a
  * @param <bData> datatype of b
  */
@@ -104,25 +107,25 @@ public class MyPair<aData, bData>
 	@Override
 	public String toString()
 	{
-		return getClass().getSimpleName() + a + "," + b;
+		return getClass().getSimpleName() + JDFConstants.SPACE + a + JDFConstants.COMMA + b;
 	}
 
 	/**
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object arg0)
+	public boolean equals(final Object arg0)
 	{
 		if (!(arg0 instanceof MyPair<?, ?>))
 		{
 			return false;
 		}
-		MyPair<?, ?> mp = (MyPair<?, ?>) arg0;
+		final MyPair<?, ?> mp = (MyPair<?, ?>) arg0;
 		return ContainerUtil.equals(a, mp.a) && ContainerUtil.equals(b, mp.b);
 	}
 
 	/**
-	 * 
+	 *
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -135,7 +138,7 @@ public class MyPair<aData, bData>
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public aData getA()
@@ -144,16 +147,16 @@ public class MyPair<aData, bData>
 	}
 
 	/**
-	 * 
+	 *
 	 * @param a
 	 */
-	public void setA(aData a)
+	public void setA(final aData a)
 	{
 		this.a = a;
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public bData getB()
@@ -162,10 +165,10 @@ public class MyPair<aData, bData>
 	}
 
 	/**
-	 * 
+	 *
 	 * @param b
 	 */
-	public void setB(bData b)
+	public void setB(final bData b)
 	{
 		this.b = b;
 	}

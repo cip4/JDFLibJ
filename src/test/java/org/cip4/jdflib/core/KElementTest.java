@@ -415,6 +415,37 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetElementByClassRec()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFAuditPool ap = n.getCreateAuditPool();
+		ap.addCreated("a", null).appendComment().setText("a");
+		ap.addCreated("b", null).appendComment().setText("b");
+		assertEquals("a", n.getElementByClass(JDFComment.class, 0, true).getText());
+		assertEquals("b", n.getElementByClass(JDFComment.class, 1, true).getText());
+		assertEquals("a", n.getElementByClass(JDFComment.class, -2, true).getText());
+		assertEquals("b", n.getElementByClass(JDFComment.class, -1, true).getText());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetElementByClassDirect()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.appendComment().setText("a");
+		n.appendComment().setText("b");
+		assertEquals("a", n.getElementByClass(JDFComment.class, 0, false).getText());
+		assertEquals("b", n.getElementByClass(JDFComment.class, 1, false).getText());
+		assertEquals("b", n.getElementByClass(JDFComment.class, -1, false).getText());
+		assertEquals("a", n.getElementByClass(JDFComment.class, -2, false).getText());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetElementById()
 	{
 		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">" + "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>" + "</ELEM3>" + "</ELEM2>" + "</JDF>";
