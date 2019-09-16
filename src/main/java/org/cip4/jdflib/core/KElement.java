@@ -2528,11 +2528,8 @@ public class KElement extends ElementNSImpl implements Element
 		if (iSkip < 0)
 		{
 			final List<A> v = getChildArrayByClass(clazz, bRecurse, 0);
-			if (v != null)
-			{
-				iSkip = v.size() + iSkip;
-				return iSkip >= 0 ? v.get(iSkip) : null;
-			}
+			iSkip = v.size() + iSkip;
+			return iSkip >= 0 ? v.get(iSkip) : null;
 		}
 		else if (bRecurse)
 		{
@@ -2572,13 +2569,11 @@ public class KElement extends ElementNSImpl implements Element
 		int i = 0;
 		while (n != null)
 		{
-			if (clazz.isInstance(n))
+			if (clazz.isInstance(n) && (iSkip == i++))
 			{
-				if (iSkip == i++)
-				{
-					return new MyPair<>((A) n, Integer.valueOf(i));
-				}
+				return new MyPair<>((A) n, Integer.valueOf(i));
 			}
+
 			final MyPair<A, Integer> ret = n.getElementByClassImpl(clazz, iSkip - i);
 			if (ret != null)
 			{
