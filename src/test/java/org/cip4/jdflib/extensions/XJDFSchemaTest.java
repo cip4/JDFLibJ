@@ -49,6 +49,8 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
@@ -247,6 +249,41 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		root.setAttribute("Types", "ConventionalPrinting");
 		root.getElement(ElementName.AUDITPOOL).removeChildren(null, null, null);
 		writeTest(root, "../NoAudit.xjdf", false, null);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAuditExtensions()
+	{
+		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
+		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/Resource/ConventionalPrintingParams/@WorkStyle", "WorkAndTurn");
+		root.setXPathAttribute("ResourceSet[@Name=\"ConventionalPrintingParams\"]/@Usage", "Input");
+		root.setAttribute("Types", "ConventionalPrinting");
+		final XJDFHelper xjdfHelper = new XJDFHelper(root);
+		xjdfHelper.setVersion(EnumVersion.Version_2_1);
+		final AuditPoolHelper aph = xjdfHelper.getAuditPool();
+		final AuditHelper ah = aph.appendAudit("AuditCreated");
+		ah.getRoot().appendElement("foo:bar", "www.foo.com");
+		xjdfHelper.cleanUp();
+		writeTest(xjdfHelper, sm_dirTestDataTemp + "audit.ext.xjdf");
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMessageExtensions()
+	{
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Query, EnumType.KnownMessages);
+		xjmfHelper.setVersion(EnumVersion.Version_2_1);
+		mh.getRoot().appendElement("foo:bar", "www.foo.com");
+		xjmfHelper.cleanUp();
+		writeTest(xjmfHelper, sm_dirTestDataTemp + "jmf.ext.xjmf");
+
 	}
 
 }

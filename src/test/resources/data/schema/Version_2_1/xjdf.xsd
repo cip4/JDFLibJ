@@ -1237,6 +1237,7 @@
     <xs:complexType abstract="true" name="Message">
         <xs:sequence>
             <xs:element maxOccurs="1" minOccurs="1" ref="Header"/>
+            <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
         </xs:sequence>
         <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
@@ -1626,6 +1627,7 @@
     <xs:complexType abstract="true" name="Audit">
         <xs:sequence>
             <xs:element maxOccurs="1" minOccurs="1" ref="Header"/>
+            <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
         </xs:sequence>
         <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
