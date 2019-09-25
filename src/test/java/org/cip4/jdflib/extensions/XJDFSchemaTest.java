@@ -267,7 +267,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		final AuditHelper ah = aph.appendAudit("AuditCreated");
 		ah.getRoot().appendElement("foo:bar", "www.foo.com");
 		xjdfHelper.cleanUp();
-		writeTest(xjdfHelper, sm_dirTestDataTemp + "audit.ext.xjdf");
+		writeTest(xjdfHelper, "../audit.ext.xjdf");
 
 	}
 
@@ -282,7 +282,7 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		xjmfHelper.setVersion(EnumVersion.Version_2_1);
 		mh.getRoot().appendElement("foo:bar", "www.foo.com");
 		xjmfHelper.cleanUp();
-		writeTest(xjmfHelper, sm_dirTestDataTemp + "jmf.ext.xjmf");
+		writeTest(xjmfHelper, "../jmf.ext.xjmf");
 
 	}
 

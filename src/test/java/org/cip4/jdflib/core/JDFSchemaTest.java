@@ -405,7 +405,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		KElement.setLongID(false);
 		final File foo = new File(sm_dirTestSchema).getParentFile();
 		assertTrue("please mount the svn schema parallel to jdflibJ", foo.isDirectory());
-		p = getSchemaParser();
+		p = getSchemaParser(EnumVersion.Version_1_7);
 	}
 
 	/**
