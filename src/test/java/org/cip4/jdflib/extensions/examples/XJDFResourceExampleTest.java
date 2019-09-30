@@ -91,6 +91,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorantAlias;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
@@ -162,10 +163,15 @@ public class XJDFResourceExampleTest extends JDFTestCaseBase
 		final JDFInterpretingParams intp = (JDFInterpretingParams) rint.getResource();
 		intp.setPrintQuality(EnumPrintQuality.High);
 
-		final SetHelper smed = h.getCreateSet(ElementName.MEDIA, EnumUsage.Input);
+		final SetHelper smed = h.getCreateSet(ElementName.MEDIA, null);
 		final ResourceHelper rmed = smed.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
 		final JDFMedia med = (JDFMedia) rmed.getResource();
 		med.setMediaType(EnumMediaType.Paper);
+
+		final SetHelper scomp = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
+		final ResourceHelper rcomp = scomp.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
+		final JDFComponent comp = (JDFComponent) rcomp.getResource();
+		comp.setAttribute("MediaRef", rmed.ensureID());
 
 		final SetHelper scol = h.getCreateSet(ElementName.COLOR, EnumUsage.Input);
 		for (final String sep : JDFSeparationList.SEPARATIONS_CMYK)
@@ -199,10 +205,15 @@ public class XJDFResourceExampleTest extends JDFTestCaseBase
 		h.setVersion(EnumVersion.Version_2_1);
 		h.addType(EnumType.ColorSpaceConversion).addType(EnumType.Interpreting).addType(EnumType.Rendering).addType(EnumType.DigitalPrinting);
 
-		final SetHelper smed = h.getCreateSet(ElementName.MEDIA, EnumUsage.Input);
+		final SetHelper smed = h.getCreateSet(ElementName.MEDIA, null);
 		final ResourceHelper rmed = smed.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
 		final JDFMedia med = (JDFMedia) rmed.getResource();
 		med.setMediaType(EnumMediaType.Paper);
+
+		final SetHelper scomp = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
+		final ResourceHelper rcomp = scomp.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
+		final JDFComponent comp = (JDFComponent) rcomp.getResource();
+		comp.setAttribute("MediaRef", rmed.ensureID());
 
 		final SetHelper printCondition = h.getCreateSet(ElementName.PRINTCONDITION, EnumUsage.Input);
 		final ResourceHelper rPC = printCondition.getCreatePartition(0, true);
@@ -254,7 +265,8 @@ public class XJDFResourceExampleTest extends JDFTestCaseBase
 				rpc.setAttribute(AttributeName.PRINTQUALITY, "Normal");
 			}
 		}
-		final SetHelper smed = h.getCreateSet(ElementName.MEDIA, EnumUsage.Input);
+		final SetHelper smed = h.getCreateSet(ElementName.MEDIA, null);
+		final SetHelper scomp = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
 		for (final String pc : pcs)
 		{
 			final ResourceHelper rmed = smed.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), pc, true);
@@ -263,6 +275,11 @@ public class XJDFResourceExampleTest extends JDFTestCaseBase
 			final String coating = StringUtil.token(pc, -1, "-");
 			rmed.setExternalID("Media-" + coating);
 			med.setAttribute(XJDFConstants.Coating, coating);
+
+			final ResourceHelper rcomp = scomp.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), pc, true);
+			final JDFComponent comp = (JDFComponent) rcomp.getResource();
+			comp.setAttribute("MediaRef", rmed.ensureID());
+
 		}
 
 		final SetHelper scsp = h.getCreateSet(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input);

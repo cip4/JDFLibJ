@@ -427,6 +427,37 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 */
+	@Test
+	public void testStrippingMultiPageFold()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "MultiPage", null);
+		xjdfHelper.setTypes("Stripping");
+
+		final SetHelper shBS = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		final ResourceHelper rhBS1 = shBS.appendPartition(XJDFConstants.BinderySignatureID, "BS1", true);
+		final JDFBinderySignature bs1 = (JDFBinderySignature) rhBS1.getResource();
+		bs1.setFoldCatalog("F8-7");
+		bs1.setBinderySignatureType(EnumBinderySignatureType.Fold);
+		bs1.setAttribute("MultiPageFold", "BS1 BS2");
+
+		final ResourceHelper rhBS2 = shBS.appendPartition(XJDFConstants.BinderySignatureID, "BS2", true);
+		final JDFBinderySignature bs2 = (JDFBinderySignature) rhBS2.getResource();
+		bs2.setFoldCatalog("F8-7");
+		bs2.setBinderySignatureType(EnumBinderySignatureType.Fold);
+		bs2.setAttribute("MultiPageFold", "BS1 BS2");
+
+		final SetHelper shLO = xjdfHelper.getCreateSet(ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper rhLO = shLO.appendPartition(AttributeName.SHEETNAME, "Sheet1", true);
+		final JDFLayout lo = (JDFLayout) rhLO.getResource();
+		final JDFPosition pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
+		pos.setAttribute(XJDFConstants.BinderySignatureID, "BS1");
+		cleanSnippets(xjdfHelper);
+		//writeTest(xjdfHelper, "processes/MultiPageFold.xjdf");
+	}
+
+	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override

@@ -65,4 +65,14 @@ public class AuditResourceHelper extends MessageResourceHelper
 		m.renameElement(StringUtil.replaceString(m.getNodeName(), ElementName.AUDIT, ElementName.SIGNAL), null);
 		return xh;
 	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.MessageResourceHelper#cleanUp()
+	 */
+	@Override
+	public void cleanUp()
+	{
+		super.cleanUp();
+		getHeader().removeAttribute(AttributeName.ID);
+	}
 }
