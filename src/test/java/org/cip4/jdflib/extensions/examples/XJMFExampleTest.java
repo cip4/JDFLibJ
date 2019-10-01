@@ -121,6 +121,21 @@ public class XJMFExampleTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testCommandForceGang()
+	{
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ForceGang);
+		command.getHeader().setAttribute(AttributeName.ID, "C1");
+		command.setXPathValue(ElementName.GANGCMDFILTER + "/@Policy", "Optimized");
+		xjmfHelper.cleanUp();
+		setSnippet(xjmfHelper, true);
+		writeTest(xjmfHelper, "jmf/CommandForceGang.xjmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testCommandRemoveQE()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();

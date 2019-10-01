@@ -430,10 +430,10 @@ public abstract class JDFTestCaseBase
 	 *
 	 * @param e
 	 * @param filename
-	 * @param convertX
+	 * @param parseSchema
 	 * @param snippetPath TODO
 	 */
-	protected XMLDoc writeTest(final KElement e, String filename, final boolean convertX, final String snippetPath)
+	protected XMLDoc writeTest(final KElement e, String filename, final boolean parseSchema, final String snippetPath)
 	{
 		String ext = UrlUtil.extension(filename);
 		int minor = 0;
@@ -458,7 +458,7 @@ public abstract class JDFTestCaseBase
 				e.write2File(sm_dirTestDataTemp + "jdfexamples/" + filename);
 			}
 
-			if (convertX)
+			if (parseSchema)
 			{
 				ext = "x" + ext;
 				final KElement x = convertToXJDF(e);
@@ -477,7 +477,7 @@ public abstract class JDFTestCaseBase
 				minor = getMinor(x);
 			}
 		}
-		if (convertX)
+		if (parseSchema)
 		{
 			final String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + filename;
 			final JDFParser p = getXJDFSchemaParser(2, minor);

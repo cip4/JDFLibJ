@@ -115,7 +115,7 @@ public class XJDFQCExampleTest extends JDFTestCaseBase
 			final KElement patch = ccs.appendElement(XJMFQCExampleTest.PATCH);
 			patch.setAttribute(XJDFConstants.ExternalID, "Patch_" + i);
 			patch.setAttribute(AttributeName.CENTER, "50 " + (i * 100));
-			patch.setAttribute(AttributeName.DIAMETER, "30");
+			patch.setAttribute(AttributeName.SIZE, "30 30");
 			patch.setAttribute(AttributeName.PATCHUSAGE, "Color");
 
 		}

@@ -265,6 +265,13 @@
             <xs:enumeration value="NoGang"/>
         </xs:restriction>
     </xs:simpleType>
+                
+    <xs:simpleType name="ForceGangPolicy">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="All"/>
+            <xs:enumeration value="Optimized"/>
+        </xs:restriction>
+    </xs:simpleType>
 
     <xs:simpleType name="Edge">
         <xs:restriction base="xs:NMTOKEN">
@@ -475,7 +482,6 @@
             <xs:enumeration value="TopRight"/>
         </xs:restriction>
     </xs:simpleType>
-
 
     <xs:simpleType name="NamedColor">
  		<xs:restriction base="xs:string">
@@ -1143,14 +1149,7 @@
     <xs:element name="GangCmdFilter">
         <xs:complexType>
             <xs:attribute name="GangNames" type="xs:NMTOKENS" use="optional"/>
-            <xs:attribute name="Policy" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:NMTOKEN">
-                        <xs:enumeration value="All"/>
-                        <xs:enumeration value="Optimized"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="Policy" type="ForceGangPolicy" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -2373,6 +2372,7 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="PrintCondition" type="xs:NMTOKEN" use="optional"/>
+            <xs:attribute name="Product" type="xs:NMTOKEN" use="optional"/>
             <xs:attribute name="ProductPart" type="xs:NMTOKEN" use="optional"/>
             <xs:attribute name="QualityMeasurement" type="xs:NMTOKEN" use="optional"/>
             <xs:attribute name="Run" type="xs:NMTOKEN" use="optional"/>
@@ -3628,6 +3628,14 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:element name="BindingQuality">
+        <xs:complexType>
+            <xs:attribute name="FlexValue" type="xs:float" use="optional"/>
+            <xs:attribute name="PullOutValue" type="xs:float" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="BindingQualityParams">
         <xs:complexType>
             <xs:attribute name="FlexValue" type="xs:float" use="optional"/>
@@ -4472,6 +4480,16 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+   <xs:element name="GangPreparationParams" substitutionGroup="SpecificResource" type="GangPreparationParams"/>
+    <xs:complexType name="GangPreparationParams">
+        <xs:complexContent>
+            <xs:extension base="SpecificResource">
+                <xs:attribute name="GangName" type="xs:NMTOKEN" use="optional"/>
+                <xs:attribute name="JobIDs" type="xs:NMTOKENS" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
     <xs:element name="GeneralID">
         <xs:complexType>
@@ -4760,10 +4778,13 @@
                     <xs:element maxOccurs="1" minOccurs="0" ref="TabDimensions"/>
                 </xs:sequence>
                 <xs:attribute name="BackBrightness" type="xs:float" use="optional"/>
+                <xs:attribute name="BackCIETint" type="xs:float" use="optional"/>
+                <xs:attribute name="BackCIEWhiteness" type="xs:float" use="optional"/>
                 <xs:attribute name="BackCoating" type="Coating" use="optional"/>
                 <xs:attribute name="BackCoatingDetail" type="xs:NMTOKEN" use="optional"/>
                 <xs:attribute name="BackGlossValue" type="xs:float" use="optional"/>
                 <xs:attribute name="BackISOPaperSubstrate" type="ISOPaperSubstrate" use="optional"/>
+                <xs:attribute name="BackLabColorValue" type="LabColor" use="optional"/>
                 <xs:attribute name="Brightness" type="xs:float" use="optional"/>
                 <xs:attribute name="CIETint" type="xs:float" use="optional"/>
                 <xs:attribute name="CIEWhiteness" type="xs:float" use="optional"/>
@@ -4975,7 +4996,6 @@
             </xs:sequence>
             <xs:attribute name="Center" type="XYPair" use="optional"/>
             <xs:attribute name="Density" type="xs:float" use="optional"/>
-            <xs:attribute name="Diameter" type="xs:float" use="optional"/>
             <xs:attribute name="ExternalID" type="xs:NMTOKEN" use="optional"/>
             <xs:attribute name="Lab" type="LabColor" use="optional"/>
             <xs:attribute name="NeutralDensity" type="xs:float" use="optional"/>
@@ -4990,6 +5010,7 @@
                         </xs:simpleType>
 			</xs:attribute>
             <xs:attribute name="RGB" type="sRGBColor" use="optional"/>
+            <xs:attribute name="Size" type="XYPair" use="optional"/>
             <xs:attribute name="Spectrum" type="TransferFunction" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -5209,6 +5230,7 @@
             <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="BindingQualityParams"/>
+                    <xs:element maxOccurs="1" minOccurs="0" ref="BindingQuality"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="ColorControlStrip"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="RegistrationQuality"/>
@@ -5231,6 +5253,7 @@
             <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="BindingQualityMeasurement"/>
+                    <xs:element maxOccurs="1" minOccurs="0" ref="BindingQuality"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="ColorControlStrip"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="Inspection"/>
@@ -5519,6 +5542,7 @@
     <xs:complexType name="SheetOptimizingParams">
         <xs:complexContent>
             <xs:extension base="SpecificResource">
+            	<xs:attribute name="Policy" type="ForceGangPolicy" use="optional"/>
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="1" ref="ConvertingConfig"/>
                     <xs:element maxOccurs="unbounded" minOccurs="1" ref="GangElement"/>
