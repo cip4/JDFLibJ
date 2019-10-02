@@ -74,5 +74,10 @@ public class AuditResourceHelper extends MessageResourceHelper
 	{
 		super.cleanUp();
 		getHeader().removeAttribute(AttributeName.ID);
+		final SetHelper sh = getSet();
+		if (sh != null)
+		{
+			sh.removeIDs();
+		}
 	}
 }

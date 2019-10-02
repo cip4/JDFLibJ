@@ -39,6 +39,7 @@ package org.cip4.jdflib.extensions;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -89,6 +90,23 @@ public class AuditHelper extends MessageHelper
 	{
 		super.cleanUp();
 		getHeader().removeAttribute(AttributeName.ID, null);
+		final VElement v = theElement.getChildrenByTagName(XJDFConstants.ResourceSet, null, null, false, true, 0);
+		if (v != null)
+		{
+			for (final KElement e : v)
+			{
+				new SetHelper(e).cleanUp();
+				e.removeAttribute(AttributeName.ID);
+				final VElement vRes = e.getChildElementVector(ElementName.RESOURCE, null);
+				if (vRes != null)
+				{
+					for (final KElement res : vRes)
+					{
+						res.removeAttribute(AttributeName.ID);
+					}
+				}
+			}
+		}
 	}
 
 }

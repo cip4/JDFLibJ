@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,7 +41,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFSubscription;
@@ -79,23 +78,6 @@ public class MessageHelper extends BaseXJDFHelper
 	{
 		super.cleanUp();
 		ensureHeader(theElement);
-		final VElement v = theElement.getChildrenByTagName(XJDFConstants.ResourceSet, null, null, false, true, 0);
-		if (v != null)
-		{
-			for (final KElement e : v)
-			{
-				new SetHelper(e).cleanUp();
-				e.removeAttribute(AttributeName.ID);
-				final VElement vRes = e.getChildElementVector(ElementName.RESOURCE, null);
-				if (vRes != null)
-				{
-					for (final KElement res : vRes)
-					{
-						res.removeAttribute(AttributeName.ID);
-					}
-				}
-			}
-		}
 	}
 
 	/**

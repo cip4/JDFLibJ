@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,6 +44,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
@@ -780,6 +781,39 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final JDFAmountPool aPool = ph.getAmountPool();
 		assertEquals(1, aPool.numChildElements(ElementName.PARTAMOUNT, null));
 		assertTrue(JDFAttributeMap.isEmpty(aPool.getPartAmount(0).getPartMap()));
+	}
+
+	/**
+	 *
+	 * test ink resource signal
+	 */
+	@Test
+	public void testBuildResourceSignalPlateMedia()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
+
+		final JDFSignal signal = jmf.getSignal(0);
+		final JDFResourceQuParams rqp = signal.getCreateResourceQuParams(0);
+		rqp.setJobID("job1");
+		rqp.setJobPartID("ConvPrint.1");
+		final JDFResourceInfo ri = signal.getCreateResourceInfo(0);
+		ri.setResourceName(ElementName.EXPOSEDMEDIA);
+		final JDFAttributeMap map = new JDFAttributeMap();
+		final JDFExposedMedia xm = (JDFExposedMedia) ri.appendResource(null);
+		map.put(AttributeName.SIGNATURENAME, "sig1");
+		xm.getCreatePartition(map, null);
+		map.put(AttributeName.SHEETNAME, "s1");
+		xm.getCreatePartition(map, null);
+		final JDFExposedMedia xmp = (JDFExposedMedia) xm.getCreatePartition(map, null);
+		xmp.setDescriptiveName("keep dis");
+		xmp.appendMedia().setMediaType(EnumMediaType.Plate);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		xjmf.write2File(sm_dirTestDataTemp + "resourcePlate2.xjmf");
+		final KElement xri = xjmf.getElement(XJDFConstants.SignalResource).getElement(ElementName.RESOURCEINFO);
+		assertNull(xri.getElement(ElementName.MEDIA));
+		final KElement xri1 = xjmf.getElement(XJDFConstants.SignalResource).getElement(ElementName.RESOURCEINFO, null, 1);
+		assertEquals(xri.getXPathAttribute("ResourceSet/Resource/ExposedMedia/@MediaRef", "a"), xri1.getXPathAttribute("ResourceSet/Resource/@ID", "b"));
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -77,24 +77,31 @@ public class WalkResourceInfo extends WalkJDFSubElement
 		final JDFResourceInfo ri = (JDFResourceInfo) resInfo;
 		final KElement eNew = super.walk(ri, xjdf);
 
-		final VElement vr = ri.getChildElementVector(null, null);
 		int nRes = 0;
-		for (final KElement e : vr)
+		int n0 = 1;
+		while (n0 > 0)
 		{
-			if (e instanceof JDFResource)
+			final VElement vr = ri.getChildElementVector(null, null);
+			n0 = 0;
+			for (final KElement e : vr)
 			{
-				final JDFResource r = (JDFResource) e;
-				if (nRes == 0)
+				if (e instanceof JDFResource)
 				{
-					setResource(ri, r, eNew);
+					n0++;
+					final JDFResource r = (JDFResource) e;
+					if (nRes == 0)
+					{
+						setResource(ri, r, eNew);
+					}
+					else
+					{
+						setResource(null, r, eNew);
+					}
+					r.deleteNode();
+					nRes++;
 				}
-				else
-				{
-					setResource(null, r, eNew);
-				}
-				r.deleteNode();
-				nRes++;
 			}
+
 		}
 		moveToResourceSet((JDFResourceInfo) eNew, ri);
 		updateInfos((JDFResourceInfo) eNew);
@@ -128,6 +135,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 						}
 					}
 					n++;
+					ri.copyAttribute(AttributeName.RESOURCENAME, ri.getElement(XJDFConstants.ResourceSet), AttributeName.NAME, null, null);
 				}
 			}
 		}

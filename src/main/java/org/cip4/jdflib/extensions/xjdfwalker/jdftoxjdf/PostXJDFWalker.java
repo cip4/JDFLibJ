@@ -2608,6 +2608,17 @@ class PostXJDFWalker extends BaseElementWalker
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			moveToSender(xjdf);
+			final VElement v = xjdf.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.ID, JDFConstants.STAR), false, true, 0);
+			if (v != null)
+			{
+				for (final KElement e : v)
+				{
+					if (!XJDFConstants.Header.equals(e.getLocalName()))
+					{
+						e.removeAttribute(AttributeName.ID);
+					}
+				}
+			}
 			return super.walk(xjdf, dummy);
 		}
 
@@ -3046,17 +3057,7 @@ class PostXJDFWalker extends BaseElementWalker
 			sender.moveAttribute(AttributeName.REFID, xjdf);
 			if (!sender.hasAttribute(AttributeName.DEVICEID))
 				sender.setAttribute(AttributeName.DEVICEID, "dummy");
-			final VElement v = xjdf.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.ID, JDFConstants.STAR), false, true, 0);
-			if (v != null)
-			{
-				for (final KElement e : v)
-				{
-					if (!XJDFConstants.Header.equals(e.getLocalName()))
-					{
-						e.removeAttribute(AttributeName.ID);
-					}
-				}
-			}
+
 			// ensure clean namespaces
 			getFactory().getWalker(sender).walk(sender, null);
 		}
