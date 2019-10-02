@@ -5542,11 +5542,11 @@
     <xs:complexType name="SheetOptimizingParams">
         <xs:complexContent>
             <xs:extension base="SpecificResource">
-            	<xs:attribute name="Policy" type="ForceGangPolicy" use="optional"/>
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="1" ref="ConvertingConfig"/>
                     <xs:element maxOccurs="unbounded" minOccurs="1" ref="GangElement"/>
                 </xs:sequence>
+            	<xs:attribute name="Policy" type="ForceGangPolicy" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
