@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -743,6 +743,23 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final JDFDoc d = xCon.convert(h);
 		assertEquals("p2", d.getJDFRoot().getDescriptiveName());
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testDescName2RootProducts()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		h.setDescriptiveName("h1");
+		h.getCreateRootProduct(0).setAttribute(AttributeName.DESCRIPTIVENAME, "p1");
+		h.getCreateRootProduct(1).setAttribute(AttributeName.DESCRIPTIVENAME, "p2");
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(h);
+		assertEquals("p1", d.getJDFRoot().getJDF(0).getDescriptiveName());
+		assertEquals("p2", d.getJDFRoot().getJDF(1).getDescriptiveName());
 	}
 
 	/**
