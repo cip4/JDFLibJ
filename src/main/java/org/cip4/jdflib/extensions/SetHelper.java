@@ -814,6 +814,9 @@ public class SetHelper extends BaseXJDFHelper
 		setAttribute(AttributeName.NAME, name);
 	}
 
+	/**
+	 *
+	 */
 	public void removeIDs()
 	{
 		removeAttribute(AttributeName.ID, null);
