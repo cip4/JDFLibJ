@@ -1143,6 +1143,28 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
+	*
+	*
+	*/
+	@Test
+	public void testColorantControlDCO()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ImageSetting);
+
+		final JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		cc.appendDeviceColorantOrder().setSeparations(new VString("sep1,sep2", ","));
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+
+		final ResourceHelper partition = new XJDFHelper(xjdf).getPartition(ElementName.COLORANTCONTROL, 0, 0);
+		final JDFColorantControl cNew = (JDFColorantControl) partition.getResource();
+		assertEquals("sep1 sep2", cNew.getAttribute(ElementName.COLORANTORDER));
+		assertNull(cNew.getNonEmpty(ElementName.DEVICECOLORANTORDER));
+	}
+
+	/**
 	 *
 	 *
 	 */
