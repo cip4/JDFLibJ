@@ -5927,15 +5927,15 @@ public class JDFElement extends KElement
 	public JDFGeneralID setGeneralID(final String idUsage, final String idValue)
 	{
 		final JDFGeneralID gid;
-		final VElement v = getChildElementVector_JDFElement(ElementName.GENERALID, null, new JDFAttributeMap(AttributeName.IDUSAGE, idUsage), true, 0, true);
-		if (v.size() >= 1)
+		final List<KElement> v = getChildArray_KElement(ElementName.GENERALID, null, new JDFAttributeMap(AttributeName.IDUSAGE, idUsage), true, 0);
+		if (!v.isEmpty())
 		{
-			gid = (JDFGeneralID) v.elementAt(0);
+			gid = (JDFGeneralID) v.get(0);
 
 			// remove any duplicates
 			for (int i = 1; i < v.size(); i++)
 			{
-				v.elementAt(i).deleteNode();
+				v.get(i).deleteNode();
 			}
 			gid.setIDValue(idValue);
 			gid.setIDUsage(idUsage);
