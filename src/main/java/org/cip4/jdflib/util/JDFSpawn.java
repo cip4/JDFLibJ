@@ -973,9 +973,10 @@ public class JDFSpawn
 		finalizeStatusAndAudits(spawnAudit);
 	}
 
+	final static String ro = EnumSpawnStatus.SpawnedRO.getName();
+
 	private void removeRO(final VElement outLinks, final String spawnID, final boolean isMain)
 	{
-		final String ro = EnumSpawnStatus.SpawnedRO.getName();
 		for (final KElement e : outLinks)
 		{
 			final JDFResourceLink rl = (JDFResourceLink) e;
@@ -990,10 +991,32 @@ public class JDFSpawn
 						r.removeFromAttribute(AttributeName.SPAWNIDS, spawnID, null, null, 0);
 						r.removeAttribute_KElement(AttributeName.SPAWNSTATUS, null);
 					}
+					if (r instanceof JDFElement)
+					{
+						final VElement refs = ((JDFElement) r).getRefElements();
+						if (refs != null)
+						{
+							for (final KElement ref : refs)
+							{
+								final JDFResource targetRoot = ((JDFRefElement) ref).getTarget();
+								final VElement vT = targetRoot == null ? null : targetRoot.getLeaves(true);
+								if (vT != null)
+								{
+									for (final KElement target : vT)
+									{
+										if (ro.equals(target.getAttribute_KElement(AttributeName.SPAWNSTATUS)))
+										{
+											target.removeFromAttribute(AttributeName.SPAWNIDS, spawnID, null, null, 0);
+											target.removeAttribute_KElement(AttributeName.SPAWNSTATUS, null);
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}
-
 	}
 
 	/**
