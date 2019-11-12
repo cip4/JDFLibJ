@@ -142,6 +142,7 @@ public abstract class XJDFConstants
 	public static final String TypeDetails = "TypeDetails";
 
 	public static final String VariableType = "VariableType";
+	public static final String VerificationResult = "VerificationResult";
 
 	public static final String Waste = "Waste";
 	public static final String WasteDetails = "WasteDetails";

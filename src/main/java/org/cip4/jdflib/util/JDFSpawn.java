@@ -986,32 +986,42 @@ public class JDFSpawn
 				final VElement v = linkRoot.getLeaves(true);
 				for (final KElement r : v)
 				{
-					if (ro.equals(r.getAttribute_KElement(AttributeName.SPAWNSTATUS)))
+					removeROFromLeaf(spawnID, r);
+				}
+			}
+		}
+	}
+
+	void removeROFromLeaf(final String spawnID, final KElement r)
+	{
+		if (ro.equals(r.getAttribute_KElement(AttributeName.SPAWNSTATUS)))
+		{
+			r.removeFromAttribute(AttributeName.SPAWNIDS, spawnID, null, null, 0);
+			r.removeAttribute_KElement(AttributeName.SPAWNSTATUS, null);
+		}
+		if (r instanceof JDFElement)
+		{
+			removeROFromElement(spawnID, r);
+		}
+	}
+
+	void removeROFromElement(final String spawnID, final KElement r)
+	{
+		final VElement refs = ((JDFElement) r).getRefElements();
+		if (refs != null)
+		{
+			for (final KElement ref : refs)
+			{
+				final JDFResource targetRoot = ((JDFRefElement) ref).getTarget();
+				final VElement vT = targetRoot == null ? null : targetRoot.getLeaves(true);
+				if (vT != null)
+				{
+					for (final KElement target : vT)
 					{
-						r.removeFromAttribute(AttributeName.SPAWNIDS, spawnID, null, null, 0);
-						r.removeAttribute_KElement(AttributeName.SPAWNSTATUS, null);
-					}
-					if (r instanceof JDFElement)
-					{
-						final VElement refs = ((JDFElement) r).getRefElements();
-						if (refs != null)
+						if (ro.equals(target.getAttribute_KElement(AttributeName.SPAWNSTATUS)))
 						{
-							for (final KElement ref : refs)
-							{
-								final JDFResource targetRoot = ((JDFRefElement) ref).getTarget();
-								final VElement vT = targetRoot == null ? null : targetRoot.getLeaves(true);
-								if (vT != null)
-								{
-									for (final KElement target : vT)
-									{
-										if (ro.equals(target.getAttribute_KElement(AttributeName.SPAWNSTATUS)))
-										{
-											target.removeFromAttribute(AttributeName.SPAWNIDS, spawnID, null, null, 0);
-											target.removeAttribute_KElement(AttributeName.SPAWNSTATUS, null);
-										}
-									}
-								}
-							}
+							target.removeFromAttribute(AttributeName.SPAWNIDS, spawnID, null, null, 0);
+							target.removeAttribute_KElement(AttributeName.SPAWNSTATUS, null);
 						}
 					}
 				}
@@ -2408,9 +2418,9 @@ public class JDFSpawn
 
 			if (vROCopied != null)
 			{
-				for (final String ro : vROCopied)
+				for (final String roCopied : vROCopied)
 				{
-					final JDFResource oldRes = (JDFResource) parent.getTarget(ro, AttributeName.ID);
+					final JDFResource oldRes = (JDFResource) parent.getTarget(roCopied, AttributeName.ID);
 					if (oldRes != null)
 					{
 						oldRes.unSpawnPart(strSpawnID, JDFResource.EnumSpawnStatus.SpawnedRO);
