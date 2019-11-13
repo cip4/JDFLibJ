@@ -635,6 +635,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.stringToURL("https://foo"), new URL("https://foo"));
 		assertNull("empty File: should be null", UrlUtil.stringToURL("File:"));
 		assertEquals(UrlUtil.stringToURL("http%3A%2F%2FDRU-CIP4HD1%3A6331"), new URL("http://DRU-CIP4HD1:6331"));
+		assertEquals(new URL("https://foo/-a1d3-7b4e52b36407/dywEqM_chouchou-dÉc-2019.pdf"), UrlUtil.stringToURL("https://foo/-a1d3-7b4e52b36407/dywEqM_chouchou-dÉc-2019.pdf"));
+
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -648,6 +650,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertTrue(UrlUtil.isEscaped("http%3A%2F%2FDRU-CIP4HD1%3A6331"));
 		assertFalse(UrlUtil.isEscaped("file:http%3A%2F%2FDRU-CIP4HD1%3A6331"));
 		assertFalse(UrlUtil.isEscaped("text%20a.pdf"));
+		assertFalse(UrlUtil.isEscaped("-a1d3-7b4e52b36407/dywEqM_chouchou-dÉc-2019.pdf"));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
