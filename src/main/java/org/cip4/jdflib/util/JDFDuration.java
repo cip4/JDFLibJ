@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -88,7 +88,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * does some heuristics to create a duration if duration is purely numeric, we guess days
-	 * 
+	 *
 	 * @param duration
 	 * @return
 	 */
@@ -149,7 +149,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * Makes a copy of the<code>JDFDuration</code> object 'd'
-	 * 
+	 *
 	 * @param d the duration
 	 */
 	public JDFDuration(final JDFDuration d)
@@ -247,7 +247,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	private void init(String strDuration) throws DataFormatException
 	{
 
-		strDuration = StringUtil.zappTokenWS(strDuration, " ");
+		strDuration = StringUtil.normalize(strDuration, false);
 		boolean bComplete = strDuration.matches(REGEX_DURATION);
 		m_lDuration = 0;
 
