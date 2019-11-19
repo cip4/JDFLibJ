@@ -48,7 +48,6 @@
 package org.cip4.jdflib.datatypes;
 
 import java.util.ArrayList;
-import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.JDFConstants;
@@ -232,38 +231,44 @@ public class JDFDurationRangeList extends JDFRangeList
 	@Override
 	public boolean isOrdered()
 	{
-		final int siz = rangeList.size();
-		if (siz == 0)
-			return false; // attempt to operate on a null element
+		final ArrayList<JDFDuration> v = getOrderedArray();
 
-		final Vector<JDFDuration> v = new Vector<>(); // vector of ranges
-		for (int i = 0; i < siz; i++)
-		{
-			final JDFDurationRange r = (JDFDurationRange) rangeList.get(i);
-			v.addElement(r.getLeft());
-			if (!r.getLeft().equals(r.getRight()))
-			{
-				v.addElement(r.getRight());
-			}
-		}
-
-		final int n = v.size() - 1;
+		final int n = v == null ? 0 : v.size() - 1;
 		if (n == 0)
 			return true; // single value
 
-		final JDFDuration first = (v.elementAt(0));
-		final JDFDuration last = (v.elementAt(n));
+		final JDFDuration first = (v.get(0));
+		final JDFDuration last = (v.get(n));
 
 		for (int j = 0; j < n; j++)
 		{
-			final JDFDuration value = (v.elementAt(j));
-			final JDFDuration nextvalue = (v.elementAt(j + 1));
+			final JDFDuration value = (v.get(j));
+			final JDFDuration nextvalue = (v.get(j + 1));
 
 			if (((first.equals(last) && value.equals(nextvalue)) || (first.isShorter(last) && (value.isShorter(nextvalue) || value.equals(nextvalue)))
 					|| (first.isLonger(last) && (value.isLonger(nextvalue) || value.equals(nextvalue)))) == false)
 				return false;
 		}
 		return true;
+	}
+
+	protected ArrayList<JDFDuration> getOrderedArray()
+	{
+		final int siz = rangeList.size();
+		if (siz == 0)
+			return null; // attempt to operate on a null element
+
+		final ArrayList<JDFDuration> v = new ArrayList<>(); // vector of ranges
+		for (int i = 0; i < siz; i++)
+		{
+			final JDFDurationRange r = (JDFDurationRange) rangeList.get(i);
+			v.add(r.getLeft());
+			if (!r.getLeft().equals(r.getRight()))
+			{
+				v.add(r.getRight());
+			}
+		}
+		return v;
 	}
 
 	/**
@@ -275,30 +280,15 @@ public class JDFDurationRangeList extends JDFRangeList
 	public boolean isUniqueOrdered()
 	{
 
-		final int siz = rangeList.size();
-		if (siz == 0)
-		{
-			return false; // attempt to operate on a null element
-		}
+		final ArrayList<JDFDuration> v = getOrderedArray();
 
-		final Vector<JDFDuration> v = new Vector<>(); // vector of ranges
-		for (int i = 0; i < siz; i++)
-		{
-			final JDFDurationRange r = (JDFDurationRange) rangeList.get(i);
-			v.addElement(r.getLeft());
-			if (!r.getLeft().equals(r.getRight()))
-			{
-				v.addElement(r.getRight());
-			}
-		}
-
-		final int n = v.size() - 1;
+		final int n = v == null ? 0 : v.size() - 1;
 		if (n == 0)
 		{
 			return true; // single value
 		}
-		final JDFDuration first = v.elementAt(0);
-		final JDFDuration last = v.elementAt(n);
+		final JDFDuration first = v.get(0);
+		final JDFDuration last = v.get(n);
 
 		if (first.equals(last))
 		{
@@ -306,8 +296,8 @@ public class JDFDurationRangeList extends JDFRangeList
 		}
 		for (int j = 0; j < n; j++)
 		{
-			final JDFDuration value = v.elementAt(j);
-			final JDFDuration nextvalue = v.elementAt(j + 1);
+			final JDFDuration value = v.get(j);
+			final JDFDuration nextvalue = v.get(j + 1);
 
 			if (((first.isShorter(last) && value.isShorter(nextvalue)) || (first.isLonger(last) && value.isLonger(nextvalue))) == false)
 				return false;

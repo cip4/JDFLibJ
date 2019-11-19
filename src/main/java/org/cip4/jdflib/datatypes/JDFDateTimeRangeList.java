@@ -48,7 +48,6 @@
 package org.cip4.jdflib.datatypes;
 
 import java.util.ArrayList;
-import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.JDFConstants;
@@ -239,38 +238,44 @@ public class JDFDateTimeRangeList extends JDFRangeList
 	@Override
 	public boolean isOrdered()
 	{
-		final int siz = rangeList.size();
-		if (siz == 0)
-			return false; // attempt to operate on a null element
+		final ArrayList<JDFDate> al = getOrderedArray();
 
-		final Vector<JDFDate> v = new Vector<>(); // vector of ranges
-		for (int i = 0; i < siz; i++)
-		{
-			final JDFDateTimeRange r = (JDFDateTimeRange) rangeList.get(i);
-			v.addElement(r.getLeft());
-			if (!r.getLeft().equals(r.getRight()))
-			{
-				v.addElement(r.getRight());
-			}
-		}
-
-		final int n = v.size() - 1;
-		if (n == 0)
+		final int n1 = al == null ? 0 : al.size() - 1;
+		if (n1 == 0)
 			return true; // single value
 
-		final JDFDate first = (v.elementAt(0));
-		final JDFDate last = (v.elementAt(n));
+		final JDFDate first = (al.get(0));
+		final JDFDate last = (al.get(n1));
 
-		for (int j = 0; j < n; j++)
+		for (int j = 0; j < n1; j++)
 		{
-			final JDFDate value = (v.elementAt(j));
-			final JDFDate nextvalue = (v.elementAt(j + 1));
+			final JDFDate value = (al.get(j));
+			final JDFDate nextvalue = (al.get(j + 1));
 
 			if (((first.equals(last) && value.equals(nextvalue)) || (first.isEarlier(last) && (value.isEarlier(nextvalue) || value.equals(nextvalue)))
 					|| (first.isLater(last) && (value.isLater(nextvalue) || value.equals(nextvalue)))) == false)
 				return false;
 		}
 		return true;
+	}
+
+	protected ArrayList<JDFDate> getOrderedArray()
+	{
+		final int siz = rangeList.size();
+		if (siz == 0)
+			return null; // attempt to operate on a null element
+
+		final ArrayList<JDFDate> al = new ArrayList<>(); // vector of ranges
+		for (int i = 0; i < siz; i++)
+		{
+			final JDFDateTimeRange r = (JDFDateTimeRange) rangeList.get(i);
+			al.add(r.getLeft());
+			if (!r.getLeft().equals(r.getRight()))
+			{
+				al.add(r.getRight());
+			}
+		}
+		return al;
 	}
 
 	/**
@@ -281,31 +286,15 @@ public class JDFDateTimeRangeList extends JDFRangeList
 	@Override
 	public boolean isUniqueOrdered()
 	{
+		final ArrayList<JDFDate> v = getOrderedArray();
 
-		final int siz = rangeList.size();
-		if (siz == 0)
-		{
-			return false; // attempt to operate on a null element
-		}
-
-		final Vector<JDFDate> v = new Vector<>(); // vector of ranges
-		for (int i = 0; i < siz; i++)
-		{
-			final JDFDateTimeRange r = (JDFDateTimeRange) rangeList.get(i);
-			v.addElement(r.getLeft());
-			if (!r.getLeft().equals(r.getRight()))
-			{
-				v.addElement(r.getRight());
-			}
-		}
-
-		final int n = v.size() - 1;
+		final int n = v == null ? 0 : v.size() - 1;
 		if (n == 0)
 		{
 			return true; // single value
 		}
-		final JDFDate first = v.elementAt(0);
-		final JDFDate last = v.elementAt(n);
+		final JDFDate first = v.get(0);
+		final JDFDate last = v.get(n);
 
 		if (first.equals(last))
 		{
@@ -313,8 +302,8 @@ public class JDFDateTimeRangeList extends JDFRangeList
 		}
 		for (int j = 0; j < n; j++)
 		{
-			final JDFDate value = v.elementAt(j);
-			final JDFDate nextvalue = v.elementAt(j + 1);
+			final JDFDate value = v.get(j);
+			final JDFDate nextvalue = v.get(j + 1);
 
 			if (((first.isEarlier(last) && value.isEarlier(nextvalue)) || (first.isLater(last) && value.isLater(nextvalue))) == false)
 				return false;

@@ -49,7 +49,6 @@
 package org.cip4.jdflib.datatypes;
 
 import java.util.ArrayList;
-import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.JDFConstants;
@@ -252,37 +251,43 @@ public class JDFRectangleRangeList extends JDFRangeList
 	@Override
 	public boolean isOrdered()
 	{
-		final int siz = rangeList.size();
-		if (siz == 0)
-			return false; // attempt to operate on a null element
+		final ArrayList<JDFRectangle> v = getOrderedArray();
 
-		final Vector<JDFRectangle> v = new Vector<>(); // vector of ranges
-		for (int i = 0; i < siz; i++)
-		{
-			final JDFRectangleRange r = (JDFRectangleRange) rangeList.get(i);
-			v.addElement(r.getLeft());
-			if (!r.getLeft().equals(r.getRight()))
-			{
-				v.addElement(r.getRight());
-			}
-		}
-
-		final int n = v.size() - 1;
+		final int n = v == null ? 0 : v.size() - 1;
 		if (n == 0)
 			return true; // single value
 
-		final JDFRectangle first = (v.elementAt(0));
-		final JDFRectangle last = (v.elementAt(n));
+		final JDFRectangle first = (v.get(0));
+		final JDFRectangle last = (v.get(n));
 
 		for (int j = 0; j < n; j++)
 		{
-			final JDFRectangle value = (v.elementAt(j));
-			final JDFRectangle nextvalue = (v.elementAt(j + 1));
+			final JDFRectangle value = (v.get(j));
+			final JDFRectangle nextvalue = (v.get(j + 1));
 
 			if (((first.equals(last) && value.equals(nextvalue)) || (first.isLess(last) && value.isLessOrEqual(nextvalue)) || (first.isGreater(last) && value.isGreaterOrEqual(nextvalue))) == false)
 				return false;
 		}
 		return true;
+	}
+
+	protected ArrayList<JDFRectangle> getOrderedArray()
+	{
+		final int siz = rangeList.size();
+		if (siz == 0)
+			return null; // attempt to operate on a null element
+
+		final ArrayList<JDFRectangle> v = new ArrayList<>(); // vector of ranges
+		for (int i = 0; i < siz; i++)
+		{
+			final JDFRectangleRange r = (JDFRectangleRange) rangeList.get(i);
+			v.add(r.getLeft());
+			if (!r.getLeft().equals(r.getRight()))
+			{
+				v.add(r.getRight());
+			}
+		}
+		return v;
 	}
 
 	/**
@@ -293,31 +298,15 @@ public class JDFRectangleRangeList extends JDFRangeList
 	@Override
 	public boolean isUniqueOrdered()
 	{
+		final ArrayList<JDFRectangle> v = getOrderedArray();
 
-		final int siz = rangeList.size();
-		if (siz == 0)
-		{
-			return false; // attempt to operate on a null element
-		}
-
-		final Vector<JDFRectangle> v = new Vector<>(); // vector of ranges
-		for (int i = 0; i < siz; i++)
-		{
-			final JDFRectangleRange r = (JDFRectangleRange) rangeList.get(i);
-			v.addElement(r.getLeft());
-			if (!r.getLeft().equals(r.getRight()))
-			{
-				v.addElement(r.getRight());
-			}
-		}
-
-		final int n = v.size() - 1;
+		final int n = v == null ? 0 : v.size() - 1;
 		if (n == 0)
 		{
 			return true; // single value
 		}
-		final JDFRectangle first = v.elementAt(0);
-		final JDFRectangle last = v.elementAt(n);
+		final JDFRectangle first = v.get(0);
+		final JDFRectangle last = v.get(n);
 
 		if (first.equals(last))
 		{
@@ -325,8 +314,8 @@ public class JDFRectangleRangeList extends JDFRangeList
 		}
 		for (int j = 0; j < n; j++)
 		{
-			final JDFRectangle value = v.elementAt(j);
-			final JDFRectangle nextvalue = v.elementAt(j + 1);
+			final JDFRectangle value = v.get(j);
+			final JDFRectangle nextvalue = v.get(j + 1);
 
 			if (((first.isLess(last) && value.isLess(nextvalue)) || (first.isGreater(last) && value.isGreater(nextvalue))) == false)
 				return false;
