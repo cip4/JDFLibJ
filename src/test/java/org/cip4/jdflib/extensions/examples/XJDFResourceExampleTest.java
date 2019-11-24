@@ -38,7 +38,6 @@ package org.cip4.jdflib.extensions.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp.EnumOperation;
-import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPrintQuality;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -131,7 +130,7 @@ public class XJDFResourceExampleTest extends JDFTestCaseBase
 		final SetHelper sint = h.getCreateSet(ElementName.PRINTCONDITION, EnumUsage.Input);
 		final ResourceHelper rint = sint.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
 		final JDFPrintCondition intp = (JDFPrintCondition) rint.getResource();
-		intp.setAttribute("PrintQuality", EnumPrintQuality.High.getName());
+		//		intp.setAttribute("PrintQuality", EnumPrintQuality.High.getName());
 		intp.setAttribute("Name", "7-Color");
 
 		final SetHelper smed = h.getCreateSet(ElementName.MEDIA, null);
