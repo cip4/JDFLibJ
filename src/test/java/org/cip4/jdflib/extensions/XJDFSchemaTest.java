@@ -201,6 +201,27 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testNetworkHeader()
+	{
+		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@CheckSum", StringUtil.setHexBinaryBytes(new byte[] { 1, 2, 3 }, -1));
+		root.setAttribute("Types", "ConventionalPrinting");
+		assertTrue(reparse(root, 2, 1));
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/NetworkHeader/@Name", "HeaderName");
+		assertFalse(reparse(root, 2, 1));
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/NetworkHeader/@Value", "HeaderName");
+		assertTrue(reparse(root, 2, 1));
+		assertFalse(reparse(root, 2, 0));
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/NetworkHeader[2]/@Name", "HeaderName");
+		assertFalse(reparse(root, 2, 1));
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/NetworkHeader[2]/@Value", "HeaderName");
+		assertTrue(reparse(root, 2, 1));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testDateTimeValidate()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();

@@ -55,7 +55,6 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.resource.JDFInterpretingParams;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFColor;
@@ -66,6 +65,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
+import org.cip4.jdflib.resource.process.press.JDFPrintCondition;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
 
@@ -128,10 +128,11 @@ public class XJDFResourceExampleTest extends JDFTestCaseBase
 		final XJDFHelper h = new XJDFHelper("PrintCondition", null, null);
 		h.addType(EnumType.ColorSpaceConversion).addType(EnumType.Interpreting).addType(EnumType.Rendering).addType(EnumType.DigitalPrinting);
 
-		final SetHelper sint = h.getCreateSet(ElementName.INTERPRETINGPARAMS, EnumUsage.Input);
+		final SetHelper sint = h.getCreateSet(ElementName.PRINTCONDITION, EnumUsage.Input);
 		final ResourceHelper rint = sint.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
-		final JDFInterpretingParams intp = (JDFInterpretingParams) rint.getResource();
-		intp.setPrintQuality(EnumPrintQuality.High);
+		final JDFPrintCondition intp = (JDFPrintCondition) rint.getResource();
+		intp.setAttribute("PrintQuality", EnumPrintQuality.High.getName());
+		intp.setAttribute("Name", "7-Color");
 
 		final SetHelper smed = h.getCreateSet(ElementName.MEDIA, null);
 		final ResourceHelper rmed = smed.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
