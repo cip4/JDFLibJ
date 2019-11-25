@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -29,14 +29,15 @@
  *
  * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
  * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- * 
+ *
  * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
- * 
+ *
  *
  */
 package org.cip4.jdflib.util.file;
 
 import java.io.File;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.BackupDirectory;
@@ -46,7 +47,7 @@ import org.cip4.jdflib.util.UrlUtil;
 
 /**
  * backup directory that creates countable file names with varying extensions
- * 
+ *
  * @author rainer prosi
  * @date July 10, 2012
  */
@@ -56,7 +57,7 @@ public class RollingBackupDirectory extends BackupDirectory
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	private int ordBackup;
+	private final AtomicInteger ordBackup;
 	private final String baseName;
 	private final String baseExt;
 
@@ -71,11 +72,11 @@ public class RollingBackupDirectory extends BackupDirectory
 		super(file, nBackupp);
 		baseName = UrlUtil.prefix(base);
 		baseExt = UrlUtil.extension(base);
-		ordBackup = calcOrdBackup();
+		ordBackup = new AtomicInteger(calcOrdBackup());
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	private int calcOrdBackup()
@@ -97,7 +98,7 @@ public class RollingBackupDirectory extends BackupDirectory
 	}
 
 	/**
-	 * 
+	 *
 	 * @param file
 	 * @return
 	 */
@@ -119,7 +120,7 @@ public class RollingBackupDirectory extends BackupDirectory
 
 	/**
 	 *
-	 * 
+	 *
 	 * @return
 	 */
 	public File getNewFile()
@@ -129,7 +130,7 @@ public class RollingBackupDirectory extends BackupDirectory
 
 	/**
 	 *
-	 * 
+	 *
 	 * @param ext
 	 * @return
 	 */
@@ -140,7 +141,7 @@ public class RollingBackupDirectory extends BackupDirectory
 			ext = "";
 		else if (!ext.startsWith("."))
 			ext = "." + ext;
-		final String newFile = baseName + "." + (++ordBackup) + ext + newExt;
+		final String newFile = baseName + "." + ordBackup.incrementAndGet() + ext + newExt;
 		return getNewFile(newFile);
 	}
 
