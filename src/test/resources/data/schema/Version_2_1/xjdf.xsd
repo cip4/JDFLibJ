@@ -850,6 +850,7 @@
             <xs:attribute name="CommentURL" type="URL" use="optional"/>
             <xs:attribute name="DescriptiveName" type="xs:string" use="optional"/>
             <xs:attribute name="Duration" type="xs:duration" use="optional"/>
+            <xs:attribute name="Expires" type="xs:dateTime" use="optional"/>
             <xs:attribute name="ExternalID" type="xs:NMTOKEN" use="optional"/>
             <xs:attribute name="GrossWeight" type="xs:float" use="optional"/>
             <xs:attribute name="ID" type="xs:ID" use="optional"/>
@@ -1816,6 +1817,7 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
+                    <xs:element maxOccurs="2" minOccurs="0" ref="FileSpec"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="IconList"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Module"/>
@@ -4419,6 +4421,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element maxOccurs="1" minOccurs="0" ref="Disposition"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="NetworkHeader"/>
             </xs:sequence>
             <xs:attribute name="CheckSum" type="xs:hexBinary" use="optional"/>
             <xs:attribute name="Encoding" type="xs:NMTOKEN" use="optional"/>
@@ -4931,6 +4934,14 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="NetworkHeader">
+        <xs:complexType>
+            <xs:attribute name="Name" type="xs:string" use="required"/>
+            <xs:attribute name="Value" type="xs:string" use="required"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="NotificationFilter">
         <xs:complexType>
             <xs:attribute name="Classes" use="optional">
@@ -5232,7 +5243,7 @@
                     <xs:element maxOccurs="1" minOccurs="0" ref="BindingQualityParams"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="BindingQuality"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="ColorControlStrip"/>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
+                    <xs:element maxOccurs="2" minOccurs="0" ref="FileSpec"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="RegistrationQuality"/>
                 </xs:sequence>
                 <xs:attribute name="Box" type="rectangle" use="optional"/>

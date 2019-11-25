@@ -4580,7 +4580,7 @@ public class JDFResource extends JDFElement
 				final JDFResource r = (JDFResource) n;
 				// recurse into parents
 				final VElement v2 = r.getChildElementVector(element, nameSpaceURI, mAttrib, bAnd, maxSize, bResolveTarget);
-				final VString nodeNames = v.getElementNameVector(false);
+				final Set<String> nodeNames = v.getElementNameSet(false);
 				for (int i = v2.size() - 1; i >= 0; i--)
 				{
 					if (nodeNames.contains(v2.item(i).getLocalName()))

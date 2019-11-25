@@ -40,6 +40,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -48,6 +51,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -61,6 +65,136 @@ import org.junit.Test;
  */
 public class XJDFSchemaTest extends JDFTestCaseBase
 {
+
+	class ChangeOrderMaker
+	{
+
+		protected HashSet<String> fillIgnore()
+		{
+			final HashSet<String> s = new HashSet<>();
+			s.add("Intent");
+			s.add("PartWaste");
+			s.add("Dependent");
+			s.add("XJDF");
+			s.add("ResourceSet");
+			s.add("DeviceInfo");
+			s.add("GangInfo");
+			s.add("JobPhase");
+			s.add("Header");
+			s.add("MessageService");
+			s.add("PipeParams");
+			s.add("QueueEntry");
+			s.add("QueueSubmissionParams");
+			s.add("RequestQueueEntryParams");
+			s.add("ResourceCmdParams");
+			s.add("ResourceQuParams");
+			s.add("ResubmissionParams");
+			s.add("ReturnQueueEntryParams");
+			s.add("Subscription");
+			s.add("SubscriptionInfo");
+			s.add("BundleItem/@Amount");
+			s.add("Event");
+			s.add("Icon");
+			s.add("Milestone");
+			s.add("Notification");
+			s.add("ProcessRun");
+			s.add("Module/@ModuleID");
+			s.add("ColorantAlias");
+			s.add("ComChannel");
+			s.add("GeneralID");
+
+			s.add("AmountPool/PartAmount");
+			s.add("ProductList/Product");
+			s.add("XJMF");
+			s.add("Message");
+			s.add("ResourceInfo");
+			s.add("Audit/Header");
+			s.add("ModifyQueueEntryParams");
+			s.add("");
+			return s;
+		}
+
+		void createChangeOrder(final int minor)
+		{
+
+			final XMLDoc d = XMLDoc.parseFile(getXJDFSchema(2, minor));
+			final KElement root = d.getRoot();
+			final VElement attribs = root.getChildrenByTagName("xs:attribute", null, null, false, true, 0);
+			for (final KElement a : attribs)
+			{
+				if (!isRequired(a))
+				{
+					log.info("making optional attribute: " + getPath(a) + "/@" + a.getAttribute("name"));
+					a.setAttribute("use", "optional");
+				}
+			}
+			final VElement elems = root.getChildrenByTagName("xs:element", null, null, false, true, 0);
+			final VElement rootelems = root.getChildElementVector("xs:element", null);
+			elems.removeAll(rootelems);
+			for (final KElement e : elems)
+			{
+				if (!isRequiredElem(e))
+				{
+					log.info("making optional element: " + getPath(e) + "/" + e.getAttribute("name") + e.getAttribute("ref"));
+					e.setAttribute("minOccurs", "0");
+				}
+			}
+			root.write2File(sm_dirTestDataTemp + "changeschema/xjdf2_" + minor + "/xjdf.xsd");
+		}
+
+		Set<String> ignore;
+
+		ChangeOrderMaker()
+		{
+			super();
+			ignore = fillIgnore();
+		}
+
+		private boolean isRequiredElem(final KElement e)
+		{
+			final String parentPath = getPath(e);
+			final String path = parentPath + "/" + e.getAttribute("name") + e.getAttribute("ref");
+
+			if ("0".equals(getMinOccurs(e)) || ignore.contains(path) || ignore.contains(parentPath) || isMessage(parentPath))
+				return true;
+			return false;
+		}
+
+		private boolean isMessage(final String parentPath)
+		{
+			return MessageHelper.isMessage(new XMLDoc(parentPath, null).getRoot());
+		}
+
+		protected String getMinOccurs(final KElement e)
+		{
+			if (e == null)
+				return "1";
+			final String nonEmpty = e.getNonEmpty("minOccurs");
+			if (nonEmpty == null)
+				return getMinOccurs(e.getParentNode_KElement());
+			return nonEmpty;
+		}
+
+		private boolean isRequired(final KElement a)
+		{
+			final String parentPath = getPath(a);
+			final String path = parentPath + "/@" + a.getAttribute("name");
+
+			if ("optional".equals(a.getNonEmpty("use")) || ignore.contains(path) || ignore.contains(parentPath))
+				return true;
+			return false;
+		}
+
+		private String getPath(final KElement a)
+		{
+			final KElement p = a.getParentNode_KElement();
+			final String s = p.getAttribute("name") + p.getAttribute("ref");
+			if (s.isEmpty())
+				return getPath(p);
+			else
+				return s;
+		}
+	}
 
 	/**
 	 *
@@ -116,6 +250,18 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		root.setAttribute("Types", "ConventionalPrinting");
 		root.setAttribute(AttributeName.VERSION, "2.0");
 		writeTest(root, "../SimpleCP.xjdf", true, null);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testChange()
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			new ChangeOrderMaker().createChangeOrder(i);
+		}
 	}
 
 	/**
@@ -195,6 +341,27 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		assertTrue(reparse(root, 2, 0));
 		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@CheckSum", "123");
 		assertFalse(reparse(root, 2, 0));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testNetworkHeader()
+	{
+		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@CheckSum", StringUtil.setHexBinaryBytes(new byte[] { 1, 2, 3 }, -1));
+		root.setAttribute("Types", "ConventionalPrinting");
+		assertTrue(reparse(root, 2, 1));
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/NetworkHeader/@Name", "HeaderName");
+		assertFalse(reparse(root, 2, 1));
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/NetworkHeader/@Value", "HeaderName");
+		assertTrue(reparse(root, 2, 1));
+		assertFalse(reparse(root, 2, 0));
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/NetworkHeader[2]/@Name", "HeaderName");
+		assertFalse(reparse(root, 2, 1));
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/NetworkHeader[2]/@Value", "HeaderName");
+		assertTrue(reparse(root, 2, 1));
 	}
 
 	/**

@@ -47,6 +47,8 @@
 package org.cip4.jdflib.core;
 
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.KElement.SimpleNodeComparator;
@@ -237,10 +239,10 @@ public class VElement extends Vector<KElement>
 			return;
 		}
 		ensureCapacity(size() + l.length);
-		for (int i = 0; i < l.length; i++)
+		for (final a element : l)
 		{
-			if (l[i] != null)
-				add(l[i]);
+			if (element != null)
+				add(element);
 		}
 	}
 
@@ -463,6 +465,22 @@ public class VElement extends Vector<KElement>
 		for (int i = 0; i < size; i++)
 		{
 			v.add(bLocal ? item(i).getLocalName() : item(i).getNodeName());
+		}
+		return v;
+	}
+
+	/**
+	 * get the node names of this vector in the same order
+	 *
+	 * @param bLocal if true use getLocalName() else getNodeName() o each item
+	 * @return VString vector of node names
+	 */
+	public Set<String> getElementNameSet(final boolean bLocal)
+	{
+		final HashSet<String> v = new HashSet<>();
+		for (final KElement e : this)
+		{
+			v.add(bLocal ? e.getLocalName() : e.getNodeName());
 		}
 		return v;
 	}
