@@ -327,6 +327,33 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testResourceIdentical()
+	{
+		final XJDFHelper h = new XJDFHelper("j", "p", null);
+		h.setTypes(EnumType.ImageSetting.getName());
+		ResourceHelper r = h.getCreateSet(ElementName.NODEINFO, EnumUsage.Input).getCreatePartition(0, true);
+		r.appendPartMap(new JDFAttributeMap(AttributeName.SHEETNAME, "s1"));
+		r.appendPartMap(new JDFAttributeMap(AttributeName.SHEETNAME, "s2"));
+		r.appendPartMap(new JDFAttributeMap(AttributeName.SHEETNAME, "s3"));
+		r = h.getCreateSet(ElementName.NODEINFO, EnumUsage.Input).getCreatePartition(1, true);
+		r.appendPartMap(new JDFAttributeMap(AttributeName.SHEETNAME, "s4"));
+		r.appendPartMap(new JDFAttributeMap(AttributeName.SHEETNAME, "s5"));
+		r.appendPartMap(new JDFAttributeMap(AttributeName.SHEETNAME, "s6"));
+		final JDFDoc template = new JDFDoc("JDF");
+		template.getJDFRoot().setType(EnumType.Product);
+		final XJDFToJDFConverter conv = new XJDFToJDFConverter(template);
+		final JDFDoc docjdf0 = conv.convert(h);
+		final JDFDoc docjdf = conv.convert(h);
+		final JDFNodeInfo nij = docjdf.getJDFRoot().getNodeInfo();
+		assertEquals(4, nij.getChildArrayByClass(JDFIdentical.class, true, 0).size());
+
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testNodeInfoStatus()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "p", null);

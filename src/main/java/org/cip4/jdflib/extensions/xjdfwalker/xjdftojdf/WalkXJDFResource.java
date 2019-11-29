@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -250,7 +250,8 @@ public class WalkXJDFResource extends WalkXElement
 			{
 				final JDFAttributeMap partMap = vParts.get(i);
 				final JDFResource rPart = res.getCreatePartition(partMap, JDFPart.guessPartIDKeys(partMap));
-				rPart.appendIdentical().setPartMap(targetMap);
+
+				rPart.getCreateIdentical().setPartMap(targetMap);
 			}
 		}
 
