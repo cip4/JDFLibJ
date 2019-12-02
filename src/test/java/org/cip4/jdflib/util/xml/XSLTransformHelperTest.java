@@ -49,6 +49,8 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.XMLParser;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
@@ -208,6 +210,19 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 		final XMLDoc d = new XSLTransformHelper(n, xsl).getTransformElement();
 		final JDFContact c2 = (new JDFDoc(d).getJDFRoot().getElementByClass(JDFContact.class, 0, true));
 		assertTrue(c2.getContactTypes().contains("Approver"));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testJMFMilestoneZapp()
+	{
+		final JDFJMF jmf = new JMFBuilder().buildMilestone("dummy", "j");
+		final XMLDoc xsl = XMLDoc.parseFile(sm_dirTestData + "xsl/milestonedummy.xsl");
+		final XMLDoc d = new XSLTransformHelper(jmf, xsl).getTransformElement();
+		assertNull(d.getRoot().getElement(ElementName.SIGNAL));
 	}
 
 	/**
