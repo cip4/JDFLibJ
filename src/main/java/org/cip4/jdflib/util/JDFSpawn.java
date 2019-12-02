@@ -1317,9 +1317,8 @@ public class JDFSpawn
 			final Vector<EnumPartIDKey> vImplicitPartitions = r.getImplicitPartitions();
 			if (vImplicitPartitions != null)
 			{
-				for (int ii = 0; ii < vImplicitPartitions.size(); ii++)
+				for (final JDFResource.EnumPartIDKey e : vImplicitPartitions)
 				{
-					final JDFResource.EnumPartIDKey e = vImplicitPartitions.elementAt(ii);
 					vPartKeys.add(e.getName());
 				}
 			}
@@ -2019,8 +2018,8 @@ public class JDFSpawn
 					final VJDFAttributeMap other;
 					if (!VJDFAttributeMap.isEmpty(vLinkMap))
 					{
-						other = new VJDFAttributeMap(vLinkMap);
-						other.overlapMap(vSpawnParts);
+						other = new VJDFAttributeMap(vSpawnParts);
+						other.overlapMap(vLinkMap);
 					}
 					else
 					{

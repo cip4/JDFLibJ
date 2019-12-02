@@ -366,6 +366,28 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * tests OvelapsMap for vectors of maps
+	 */
+	@Test
+	public void testOverlapMap()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		m1.put("a3", "v3");
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		v.add(m1.clone());
+		final VJDFAttributeMap v2 = new VJDFAttributeMap();
+		final VJDFAttributeMap clone = v.clone();
+		clone.overlapMap(v2);
+		assertEquals(m1, clone.get(0));
+		assertEquals(v.size(), clone.size());
+		v2.add(new JDFAttributeMap("a2", "v2"));
+		clone.overlapMap(v2);
+		assertEquals(1, clone.size());
+		assertEquals(m1, clone.get(0));
+	}
+
+	/**
 	 * tests addAll
 	 */
 	@Test
