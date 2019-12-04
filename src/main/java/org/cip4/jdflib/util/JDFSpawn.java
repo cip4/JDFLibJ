@@ -2018,8 +2018,15 @@ public class JDFSpawn
 					final VJDFAttributeMap other;
 					if (!VJDFAttributeMap.isEmpty(vLinkMap))
 					{
-						other = new VJDFAttributeMap(vSpawnParts);
-						other.overlapMap(vLinkMap);
+						if (vLinkMap.getKeys().containsAny(vSpawnParts.getKeys()))
+						{
+							other = new VJDFAttributeMap(vSpawnParts);
+							other.overlapMap(vLinkMap);
+						}
+						else
+						{
+							other = vLinkMap;
+						}
 					}
 					else
 					{

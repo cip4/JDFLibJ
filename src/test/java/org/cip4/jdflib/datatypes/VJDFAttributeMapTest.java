@@ -319,6 +319,35 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * tests OvelapsMap for individual maps
+	 */
+	@Test
+	public void testGetOrMapsDouble()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		final JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		m2.put("a2", "v3");
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		v.add(m1);
+		v.add(m2);
+
+		final JDFAttributeMap m3 = new JDFAttributeMap("b1", "vb1");
+		m3.put("b2", "vb2");
+		final JDFAttributeMap m4 = new JDFAttributeMap(m3);
+		m4.put("b2", "vb3");
+		final VJDFAttributeMap vb = new VJDFAttributeMap();
+		vb.add(m3);
+		vb.add(m4);
+
+		final VJDFAttributeMap v2 = new VJDFAttributeMap(v);
+
+		final VJDFAttributeMap vOr = v.getOrMaps(vb);
+		assertEquals(4, vOr.size());
+		assertEquals(v2, v.getOrMaps(new VJDFAttributeMap()));
+	}
+
+	/**
 	 * tests OvelapsMap for vectors of maps
 	 */
 	@Test
@@ -359,10 +388,26 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		final VJDFAttributeMap v2 = new VJDFAttributeMap();
 		final VJDFAttributeMap clone = v.clone();
 		clone.overlapMap(v2);
-		assertEquals(v.size(), clone.size());
-		v2.add(new JDFAttributeMap("a2", "v2"));
+	}
+
+	/**
+	 * tests OvelapsMap for vectors of maps
+	 */
+	@Test
+	public void testOverlapMapVector2()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		final JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		m2.put("a2", "v3");
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		v.add(m1);
+		v.add(m2);
+		final VJDFAttributeMap v2 = new VJDFAttributeMap();
+		final VJDFAttributeMap clone = v.clone();
+		v2.add(new JDFAttributeMap("b", "c"));
 		clone.overlapMap(v2);
-		assertEquals(1, clone.size());
+		assertEquals(v, clone);
 	}
 
 	/**

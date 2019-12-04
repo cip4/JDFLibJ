@@ -48,6 +48,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -152,6 +153,56 @@ public class PartitionGetterTest
 		final PartitionGetter g = new PartitionGetter(r);
 		assertEquals(r, g.getPartition(new JDFAttributeMap(), EnumPartUsage.Explicit));
 		assertEquals(r, g.getPartition(new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1"), EnumPartUsage.Implicit));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetimplicitVector()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFResource p = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
+		final PartitionGetter g = new PartitionGetter(r);
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final JDFAttributeMap d1 = new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1");
+		d1.put("Run", "r1");
+		final JDFAttributeMap d2 = new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1");
+		d2.put("Run", "r1");
+
+		vMap.add(d1);
+		vMap.add(d2);
+		final VElement partitionVector = g.getPartitionVector(vMap, EnumPartUsage.Implicit);
+		assertEquals(1, partitionVector.size());
+		assertEquals(p, partitionVector.get(0));
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testGetimplicitVector2()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EMBOSSINGPARAMS).getRoot();
+		final JDFResource p = r.addPartition(EnumPartIDKey.DeliveryUnit0, "d1");
+		final PartitionGetter g = new PartitionGetter(r);
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final JDFAttributeMap d1 = new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1");
+		d1.put("Run", "r1");
+		final JDFAttributeMap d2 = new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d1");
+		d2.put("Run", "r2");
+		final JDFAttributeMap d3 = new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d2");
+		d3.put("Run", "r1");
+		final JDFAttributeMap d4 = new JDFAttributeMap(EnumPartIDKey.DeliveryUnit0, "d2");
+		d4.put("Run", "r2");
+
+		vMap.add(d1);
+		vMap.add(d2);
+		vMap.add(d3);
+		vMap.add(d4);
+		final VElement partitionVector = g.getPartitionVector(vMap, EnumPartUsage.Sparse);
+		assertEquals(1, partitionVector.size());
+		assertEquals(p, partitionVector.get(0));
 	}
 
 	/**
