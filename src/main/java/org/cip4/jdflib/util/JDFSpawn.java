@@ -2018,15 +2018,11 @@ public class JDFSpawn
 					final VJDFAttributeMap other;
 					if (!VJDFAttributeMap.isEmpty(vLinkMap))
 					{
-						if (vLinkMap.getKeys().containsAny(vSpawnParts.getKeys()))
-						{
-							other = new VJDFAttributeMap(vSpawnParts);
-							other.overlapMap(vLinkMap);
-						}
-						else
-						{
-							other = vLinkMap;
-						}
+						final VJDFAttributeMap linkMapClone = vLinkMap.clone();
+						linkMapClone.overlapMap(vSpawnParts);
+						final VJDFAttributeMap spawnClone = new VJDFAttributeMap(vSpawnParts);
+						spawnClone.overlapMap(vLinkMap);
+						other = vLinkMap.getOrMaps(spawnClone);
 					}
 					else
 					{
