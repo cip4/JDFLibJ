@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,12 +36,19 @@
  */
 package org.cip4.jdflib.extensions;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -200,6 +207,7 @@ public class ProductHelper extends BaseXJDFHelper
 	 * @return the productID of the product
 	 *
 	 */
+	@Override
 	public String getExternalID()
 	{
 		return getAttribute(XJDFConstants.ExternalID);
@@ -218,6 +226,7 @@ public class ProductHelper extends BaseXJDFHelper
 	 * @return the productID of the product
 	 *
 	 */
+	@Override
 	public String getDescriptiveName()
 	{
 		return getAttribute(AttributeName.DESCRIPTIVENAME);
@@ -226,6 +235,7 @@ public class ProductHelper extends BaseXJDFHelper
 	/**
 	 * @param id
 	 */
+	@Override
 	public void setDescriptiveName(final String id)
 	{
 		setAttribute(AttributeName.DESCRIPTIVENAME, id);
@@ -291,17 +301,92 @@ public class ProductHelper extends BaseXJDFHelper
 	@Deprecated
 	public void setChild(final ProductHelper phCover, final int amount)
 	{
-		KElement e = theElement.getChildWithAttribute("ChildProduct", "Childref", null, phCover.theElement.getID(), 0, true);
-		if (e == null)
+		if (phCover != null)
 		{
-			e = theElement.appendElement("ChildProduct");
-			e.copyAttribute("ChildRef", phCover.theElement, "ID", null, null);
-			phCover.theElement.removeAttribute(rootProduct);
+			final IntentHelper childIntent = getCreateChildIntent();
+			KElement e = theElement.getChildWithAttribute("ChildProduct", "Childref", null, phCover.theElement.getID(), 0, true);
+			if (e == null)
+			{
+				e = theElement.appendElement("ChildProduct");
+				e.copyAttribute("ChildRef", phCover.theElement, "ID", null, null);
+				phCover.theElement.removeAttribute(rootProduct);
+			}
+			if (amount > 0)
+			{
+				e.setAttribute("Amount", amount, null);
+			}
 		}
-		if (amount > 0)
+	}
+
+	/**
+	 * @param phCover
+	 *
+	 */
+	public void setChild(final ProductHelper phKid)
+	{
+		if (phKid != null)
 		{
-			e.setAttribute("Amount", amount, null);
+			final IntentHelper childIntent = getCreateChildIntent();
+			final String id = phKid.ensureID();
+			childIntent.getCreateResource().appendAttribute(XJDFConstants.ChildRefs, id, null, null, true);
 		}
+	}
+
+	/**
+	 * the intenthelper that accepts kids
+	 *
+	 * @return
+	 */
+	IntentHelper getCreateChildIntent()
+	{
+		IntentHelper ret = getChildIntent();
+		if (ret == null)
+			ret = getCreateIntent(ElementName.BINDINGINTENT);
+		return ret;
+	}
+
+	List<String> getChildRefs(final boolean bRecurse)
+	{
+		final IntentHelper kids = getChildIntent();
+
+		if (kids == null)
+			return null;
+		final String refs = kids.getSpan(XJDFConstants.ChildRefs);
+		final StringArray a = StringArray.getVString(refs, null);
+		if (a == null || !bRecurse)
+			return a;
+		final String id = getID();
+		final Collection<KElement> v = theElement.getParentNode_KElement().getChildArray(JDFConstants.PRODUCT, null);
+		for (int i = 0; i < a.size(); i++)
+		{
+			final String ida = a.get(i);
+			for (final KElement e : v)
+			{
+				if (ida.equals(e.getID()))
+				{
+					final List<String> grandkids = new ProductHelper(e).getChildRefs(false);
+					if (grandkids != null)
+					{
+						a.appendUnique(grandkids);
+					}
+				}
+			}
+		}
+		return a;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	IntentHelper getChildIntent()
+	{
+		IntentHelper ret = getIntent(ElementName.BINDINGINTENT);
+		if (ret == null)
+			ret = getIntent(ElementName.INSERTINGINTENT);
+		if (ret == null)
+			ret = getIntent(XJDFConstants.AssemblingIntent);
+		return ret;
 	}
 
 	/**
@@ -309,24 +394,50 @@ public class ProductHelper extends BaseXJDFHelper
 	 *
 	 * @param nChild the index of the child
 	 * @return
-	 * @deprecated
+	 *
 	 */
-	@Deprecated
 	public ProductHelper getChild(final int nChild)
 	{
-		final KElement e = theElement.getElement("ChildProduct", null, nChild);
-		if (e == null)
+		final List<String> childRefs = getChildRefs(false);
+		final String kidRef = childRefs == null ? null : childRefs.get(nChild);
+		if (kidRef != null)
 		{
-			return null;
+			final KElement list = theElement.getParentNode_KElement();
+			final KElement kid = list.getChildWithAttribute(XJDFConstants.Product, AttributeName.ID, null, kidRef, 0, true);
+			return kid == null ? null : new ProductHelper(kid);
 		}
-		final String id = e.getAttribute("ChildRef", null, null);
-		if (id == null)
+		return null;
+
+	}
+
+	/**
+	 * get the nth child of this
+	 *
+	 * @param nChild the index of the child
+	 * @return
+	 *
+	 */
+	public ProductHelper getParent()
+	{
+		if (isRootProduct())
+			return null;
+		final String id = getID();
+		if (StringUtil.isEmpty(id))
+			return null;
+		final List<KElement> list = theElement.getParentNode_KElement().getChildArray_KElement(XJDFConstants.Product, null, null, false, 0);
+		if (ContainerUtil.isEmpty(list))
+			return null;
+
+		for (final KElement e : list)
 		{
-			return null;
+			final ProductHelper ph = new ProductHelper(e);
+			final List<String> childRefs = ph.getChildRefs(false);
+			if (childRefs != null && childRefs.contains(id))
+				return ph;
 		}
-		final KElement list = theElement.getParentNode_KElement();
-		final KElement kid = list.getChildWithAttribute("Product", "ID", null, id, 0, true);
-		return kid == null ? null : new ProductHelper(kid);
+
+		return null;
+
 	}
 
 	/**
@@ -335,13 +446,12 @@ public class ProductHelper extends BaseXJDFHelper
 	 * @param productType the productType attribute
 	 * @param n the index of the child
 	 * @return
-	 * @deprecated
+	 *
 	 */
-	@Deprecated
 	public ProductHelper getChild(final String productType, int n)
 	{
-		final Vector<ProductHelper> v = getChildren();
-		if (v == null || v.size() < n)
+		final List<ProductHelper> v = getChildren(false);
+		if (ContainerUtil.isEmpty(v))
 		{
 			return null;
 		}
@@ -360,30 +470,23 @@ public class ProductHelper extends BaseXJDFHelper
 	 * get the vector of children of this
 	 *
 	 * @return
-	 * @deprecated
 	 */
-	@Deprecated
-	public Vector<ProductHelper> getChildren()
+	public List<ProductHelper> getChildren(final boolean recurse)
 	{
-		final VElement v = theElement.getChildElementVector("ChildProduct", null);
-		if (v == null)
+		final List<String> childRefs = getChildRefs(recurse);
+		if (childRefs != null)
 		{
-			return null;
-		}
-		final Vector<ProductHelper> vRet = new Vector<>();
-		final KElement list = theElement.getParentNode_KElement();
-		for (final KElement e : v)
-		{
-			final String id = e.getAttribute("ChildRef", null, null);
-			if (id == null)
+			final KElement list = theElement.getParentNode_KElement();
+			final List<ProductHelper> ret = new ArrayList<>();
+			for (final String id : childRefs)
 			{
-				continue;
+
+				final KElement kid = list.getChildWithAttribute(XJDFConstants.Product, AttributeName.ID, null, id, 0, true);
+				ret.add(new ProductHelper(kid));
 			}
-			final KElement kid = list.getChildWithAttribute("Product", "ID", null, id, 0, true);
-			if (kid != null)
-				vRet.add(new ProductHelper(kid));
+			return ret;
 		}
-		return vRet;
+		return null;
 	}
 
 	/**

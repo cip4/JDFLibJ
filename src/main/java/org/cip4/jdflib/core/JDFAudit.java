@@ -69,7 +69,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	private static final long serialVersionUID = 1L;
 	final private static String m_libAgentName = "CIP4 JDF Writer Java";
-	final private static String m_libAgentVersion = "1.6 BLD 018";
+	final private static String m_libAgentVersion = "1.6 BLD 019";
 
 	// use reasonable defaults
 	private static String m_strAgentName = m_libAgentName;
@@ -468,6 +468,18 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 		}
 
 		setAttribute(AttributeName.AUTHOR, by, JDFConstants.EMPTYSTRING);
+	}
+
+	/**
+	 *
+	 * @param by
+	 */
+	public void updateAgent(final String by)
+	{
+		if (!StringUtil.isEmpty(by))
+		{
+			setAgentName(getAgentName() + ": " + by);
+		}
 	}
 
 	/**

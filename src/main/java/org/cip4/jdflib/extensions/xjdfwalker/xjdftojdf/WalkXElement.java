@@ -296,7 +296,7 @@ public class WalkXElement extends BaseWalker
 		{
 			for (final String key : keys)
 			{
-				if ((key.endsWith("Ref") || key.endsWith("Refs")) && !key.equals("rRef"))
+				if ((key.endsWith("Ref") || key.endsWith("Refs")) && !key.equals("rRef") && !key.equals(XJDFConstants.ChildRefs))
 				{
 					final String value = map.get(key);
 					cleanRef(e, trackElem, key, value);

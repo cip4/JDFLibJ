@@ -75,20 +75,29 @@ public class WalkProduct extends WalkXElement
 	public KElement walk(final KElement xjdfProduct, final KElement trackElem)
 	{
 		JDFNode theNode = (JDFNode) trackElem;
+		final JDFNode root = theNode.getRoot();
+		final ProductHelper productHelper = new ProductHelper(xjdfProduct);
 		if (ProductHelper.PRODUCT.equals(theNode.getType()))
 		{
-			final JDFNode tmp = theNode.getRoot().getChildJDFNode(xjdfProduct.getAttribute(AttributeName.ID), false);
+			JDFNode tmp = root.getChildJDFNode(xjdfProduct.getAttribute(AttributeName.ID), false);
 			if (tmp != null)
 			{
 				theNode = tmp;
 			}
 			else if (!xjdfToJDFImpl.firstproductInList)
 			{
-				theNode = theNode.addProduct();
-			}
-			else
-			{
-				// nop
+
+				final ProductHelper parent = productHelper.getParent();
+				final String id = parent == null ? null : parent.getID();
+				tmp = id == null ? null : root.getChildJDFNode(id, false);
+				if (tmp != null)
+				{
+					theNode = tmp.addProduct();
+				}
+				else
+				{
+					theNode = theNode.addProduct();
+				}
 			}
 		}
 		else
@@ -98,8 +107,11 @@ public class WalkProduct extends WalkXElement
 		xjdfToJDFImpl.firstproductInList = false;
 		copyToNode(xjdfProduct, theNode);
 		final JDFComponent c = fixComponent(theNode, xjdfProduct);
-
-		updateDeliveryIntent(xjdfProduct, theNode, c);
+		// we only do voodoo default if no explicit deliveryparams exists
+		if (productHelper.isRootProduct() && xjdfToJDFImpl.xjdf.getSet(ElementName.DELIVERYPARAMS, 0) == null)
+		{
+			updateDeliveryIntent(xjdfProduct, theNode, c);
+		}
 		return theNode;
 	}
 
@@ -116,18 +128,18 @@ public class WalkProduct extends WalkXElement
 		final double overage = rlc.getMaxAmount();
 		final double underage = rlc.getMinAmount();
 		final double amount = StringUtil.parseDouble(xjdfProduct.getAttribute(AttributeName.AMOUNT, null, null), -1000.);
-		if (amount > 0 && (overage > 0 || underage > 0))
+		if (amount > 0)
 		{
-			final JDFDeliveryIntent di = (JDFDeliveryIntent) theNode.getCreateResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
+			final JDFDeliveryIntent di = (JDFDeliveryIntent) theNode.getRoot().getCreateResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
 			if (overage > 0)
 			{
-				di.appendOverage().setActual(100.0 * (overage - amount) / amount);
+				di.getCreateOverage().setActual(100.0 * (overage - amount) / amount);
 			}
 			if (underage > 0)
 			{
-				di.appendUnderage().setActual(100.0 * (amount - underage) / amount);
+				di.getCreateUnderage().setActual(100.0 * (amount - underage) / amount);
 			}
-			final JDFDropItemIntent dropItemIntent = di.appendDropIntent().appendDropItemIntent();
+			final JDFDropItemIntent dropItemIntent = di.getCreateDropIntent(0).appendDropItemIntent();
 			dropItemIntent.setAmount((int) amount);
 			dropItemIntent.refElement(c);
 		}

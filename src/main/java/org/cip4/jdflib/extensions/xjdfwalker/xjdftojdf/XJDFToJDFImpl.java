@@ -89,7 +89,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	boolean foundProduct;
 	boolean foundProductList;
 	JDFNode currentJDFNode;
-	KElement xjdf;
+	XJDFHelper xjdf;
 	/**
 	 * if true, create the product, else ignore it
 	 */
@@ -231,13 +231,13 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		else
 		{
 			prepareRoot();
-			final JDFNode theNode = findNode(xjdf, true);
+			final KElement root = xjdf.getRoot();
+			final JDFNode theNode = findNode(root, true);
 			if (theNode == null)
 			{
 				return null;
 			}
-			idMap = new IDFinder().getMap(xjdf);
-			walkTree(xjdf, theNode);
+			walkTree(root, theNode);
 			new PostConverter(this, theNode).postConvert();
 		}
 		return jdfDoc;
@@ -248,8 +248,9 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 */
 	private void convertXJMF()
 	{
-		idMap = new IDFinder().getMap(xjdf);
-		walkTree(xjdf, jdfDoc.getRoot());
+		final KElement root = xjdf.getRoot();
+		idMap = new IDFinder().getMap(root);
+		walkTree(root, jdfDoc.getRoot());
 	}
 
 	/**
@@ -259,19 +260,20 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 */
 	private boolean prepareConvert(final KElement _xjdf)
 	{
-		xjdf = _xjdf.cloneNewDoc();
+		idMap = new IDFinder().getMap(_xjdf);
+		final KElement newXJDF = reparse(_xjdf.cloneNewDoc());
+		xjdf = new XJDFHelper(newXJDF);
 		final String docType = xjdf.getLocalName();
 		final boolean isJMF = ElementName.JMF.equals(docType) || XJDFConstants.XJMF.equals(docType);
 		if (jdfDoc == null)
 		{
 			final String strDocType = isJMF ? ElementName.JMF : ElementName.JDF;
 			jdfDoc = new JDFDoc(strDocType);
-			jdfDoc.copyMeta(xjdf.getOwnerDocument_KElement());
+			jdfDoc.copyMeta(newXJDF.getOwnerDocument_KElement());
 		}
-		xjdf = reparse(xjdf);
 		xjdf.setAttribute(AttributeName.MAXVERSION, getXJDFVersion().getName());
 		xjdf.setAttribute(AttributeName.VERSION, getVersion().getName());
-		new XJDFHelper(xjdf).reorder();
+		xjdf.cleanUp(false);
 		return isJMF;
 	}
 
@@ -319,7 +321,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		}
 		else
 		{
-			if (!"Product".equals(root.getType()))
+			if (!JDFConstants.PRODUCT.equals(root.getType()))
 			{
 				root = createProductRoot();
 			}
@@ -464,7 +466,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	{
 		if (xjdf != null)
 		{
-			final String ns = xjdf.getNamespaceURI();
+			final String ns = xjdf.getRoot().getNamespaceURI();
 			final int minor = StringUtil.parseInt(StringUtil.token(ns, -1, JDFConstants.UNDERSCORE), -1);
 			if (minor == 1)
 				version = (EnumVersion) EnumUtil.max(EnumVersion.Version_1_7, version);

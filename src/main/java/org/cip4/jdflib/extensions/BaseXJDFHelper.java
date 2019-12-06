@@ -139,7 +139,10 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 * reorder elements in their canonical order - usually nop
+	 * 
+	 * @deprecated use cleanup
 	 */
+	@Deprecated
 	public void reorder()
 	{
 		return;

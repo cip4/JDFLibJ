@@ -92,7 +92,7 @@ public class WalkResourceAudit extends WalkAudit
 		if (ri == null)
 			return;
 
-		final XJDFHelper h = new XJDFHelper(xjdfToJDFImpl.xjdf);
+		final XJDFHelper h = xjdfToJDFImpl.xjdf;
 		final KElement resSet = ri.getElement(XJDFConstants.ResourceSet);
 		final SetHelper sha = resSet == null ? null : new SetHelper(resSet);
 		final SetHelper sh = sha == null ? null : h.getSet(sha.getName(), sha.getUsage(), sha.getProcessUsage());

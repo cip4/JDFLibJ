@@ -89,6 +89,7 @@ import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.PartitionGetter;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
+import org.cip4.jdflib.resource.intent.JDFDropIntent;
 import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
@@ -108,6 +109,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
+import org.cip4.jdflib.span.JDFSpanBindingType.EnumSpanBindingType;
 import org.junit.Test;
 
 /**
@@ -343,6 +345,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		template.getJDFRoot().setType(EnumType.Product);
 		final XJDFToJDFConverter conv = new XJDFToJDFConverter(template);
 		final JDFDoc docjdf0 = conv.convert(h);
+		final JDFNodeInfo nij0 = docjdf0.getJDFRoot().getNodeInfo();
+		assertEquals(4, nij0.getChildArrayByClass(JDFIdentical.class, true, 0).size());
 		final JDFDoc docjdf = conv.convert(h);
 		final JDFNodeInfo nij = docjdf.getJDFRoot().getNodeInfo();
 		assertEquals(4, nij.getChildArrayByClass(JDFIdentical.class, true, 0).size());
@@ -1416,6 +1420,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	@Test
 	public void testResourceLinkPart2()
 	{
+		KElement.setLongID(false);
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
 		final KElement e = h.getRoot();
@@ -1495,11 +1500,83 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final ProductHelper body = h.appendProduct();
 		final ProductHelper book = h.appendProduct();
 		book.setRoot();
-		book.setChild(cover, 1);
-		book.setChild(body, 1);
+		book.setChild(cover);
+		book.setChild(body);
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final JDFDoc d = xCon.convert(h);
 		assertEquals(d.getJDFRoot().getJobPartID(true), "root");
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testCoverBodyProduct()
+	{
+		final XJDFHelper h = new XJDFHelper("j", "root", null);
+		final ProductHelper cover = h.appendProduct();
+		cover.setDescriptiveName("Cover");
+		cover.setID("Cover");
+		cover.setRoot(false);
+		final ProductHelper body = h.appendProduct();
+		body.setID("Body");
+		body.setDescriptiveName("Body");
+		body.setRoot(false);
+		final ProductHelper book = h.appendProduct();
+		book.setRoot();
+		book.setDescriptiveName("Book");
+		book.setID("Book");
+		final ProductHelper card = h.appendProduct();
+		card.setRoot();
+		card.setDescriptiveName("Card");
+		card.setID("Card");
+		book.appendIntent(ElementName.BINDINGINTENT).setAttribute(ElementName.BINDINGTYPE, EnumSpanBindingType.CornerStitch.getName());
+		book.setChild(cover);
+		book.setChild(body);
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(h);
+		final JDFNode parent = d.getJDFRoot();
+		assertEquals(2, parent.getvJDFNode(null, null, true).size());
+		assertEquals(5, parent.getvJDFNode(null, null, false).size());
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testCoverBodyProductDelivery()
+	{
+		final XJDFHelper h = new XJDFHelper("j", "root", null);
+		final ProductHelper cover = h.appendProduct();
+		cover.setDescriptiveName("Cover");
+		cover.setID("Cover");
+		cover.setRoot(false);
+		cover.setAmount(1);
+		final ProductHelper body = h.appendProduct();
+		body.setID("Body");
+		body.setDescriptiveName("Body");
+		body.setRoot(false);
+		body.setAmount(2);
+		final ProductHelper book = h.appendProduct();
+		book.setRoot();
+		book.setDescriptiveName("Book");
+		book.setID("Book");
+		book.setAmount(200);
+		final ProductHelper card = h.appendProduct();
+		card.setRoot();
+		card.setDescriptiveName("Card");
+		card.setID("Card");
+		card.setAmount(500);
+		book.appendIntent(ElementName.BINDINGINTENT).setAttribute(ElementName.BINDINGTYPE, EnumSpanBindingType.CornerStitch.getName());
+		book.setChild(cover);
+		book.setChild(body);
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(h);
+		final JDFNode parent = d.getJDFRoot();
+		final JDFDeliveryIntent di = (JDFDeliveryIntent) parent.getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
+		final JDFDropIntent dri = di.getDropIntent(0);
 	}
 
 	/**
@@ -1555,8 +1632,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 			final ProductHelper body = h.appendProduct();
 			final ProductHelper book = h.appendProduct();
 			book.setRoot();
-			book.setChild(cover, 1);
-			book.setChild(body, 1);
+			book.setChild(cover);
+			book.setChild(body);
 		}
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final JDFDoc d = xCon.convert(h);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -70,9 +70,9 @@ public class ProductHelperTest extends JDFTestCaseBase
 		final KElement body = productList.appendElement("Product");
 		body.setAttribute(AttributeName.PRODUCTTYPE, "Body");
 		final ProductHelper phCover = new ProductHelper(cover);
-		ph.setChild(phCover, 1);
+		ph.setChild(phCover);
 		final ProductHelper phBody = new ProductHelper(body);
-		ph.setChild(phBody, 1);
+		ph.setChild(phBody);
 		assertEquals(ph.getChild(0).getProduct(), phCover.getProduct());
 		assertEquals(ph.getChild(1).getProduct(), phBody.getProduct());
 		assertEquals(ph.getChild("Body", 0).getProduct(), phBody.getProduct());
@@ -118,6 +118,34 @@ public class ProductHelperTest extends JDFTestCaseBase
 		assertNull(ph.getIntent(XJDFConstants.AssemblingIntent));
 		ph.appendIntent(XJDFConstants.AssemblingIntent);
 		assertNotNull(ph.getIntent(XJDFConstants.AssemblingIntent));
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testGetChildIntentDefault()
+	{
+		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		final ProductHelper ph = theHelper.appendProduct();
+		assertNull(ph.getIntent(ElementName.BINDINGINTENT));
+		final IntentHelper ih = ph.getCreateChildIntent();
+		assertEquals(ih, ph.getIntent(ElementName.BINDINGINTENT));
+
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testGetChildIntentExist()
+	{
+		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		final ProductHelper ph = theHelper.appendProduct();
+		final IntentHelper asi = ph.appendIntent(XJDFConstants.AssemblingIntent);
+		final IntentHelper ih = ph.getCreateChildIntent();
+		assertEquals(ih, asi);
+
 	}
 
 	/**
@@ -243,4 +271,77 @@ public class ProductHelperTest extends JDFTestCaseBase
 		assertEquals(ph.getOverproduction(), 100.0, 0.0001);
 	}
 
+	/**
+	 *
+	 */
+	@Test
+	public void testSetChild()
+	{
+		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+
+		final ProductHelper ph = theHelper.getCreateRootProduct(0);
+		final ProductHelper ph1 = theHelper.getCreateProduct("i1");
+		final ProductHelper ph2 = theHelper.getCreateProduct("i2");
+
+		ph.setChild(ph1);
+		assertEquals("i1", ph.getIntent(ElementName.BINDINGINTENT).getResource().getAttribute(XJDFConstants.ChildRefs));
+		ph.setChild(ph2);
+		assertEquals("i1 i2", ph.getIntent(ElementName.BINDINGINTENT).getResource().getAttribute(XJDFConstants.ChildRefs));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetChildRefs()
+	{
+		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+
+		final ProductHelper ph = theHelper.getCreateRootProduct(0);
+		final ProductHelper ph1 = theHelper.getCreateProduct("i1");
+		final ProductHelper ph2 = theHelper.getCreateProduct("i2");
+		final ProductHelper ph21 = theHelper.getCreateProduct("i21");
+		final ProductHelper ph22 = theHelper.getCreateProduct("i22");
+
+		ph.setChild(ph1);
+		assertEquals("i1", ph.getChildRefs(true).get(0));
+		assertEquals(1, ph.getChildRefs(true).size());
+		assertEquals("i1", ph.getChildRefs(false).get(0));
+		assertEquals(1, ph.getChildRefs(false).size());
+		ph.setChild(ph2);
+		ph2.setChild(ph21);
+		ph2.setChild(ph22);
+		assertEquals("i1", ph.getChildRefs(true).get(0));
+		assertEquals(4, ph.getChildRefs(true).size());
+		assertEquals("i2", ph.getChildRefs(false).get(1));
+		assertEquals(2, ph.getChildRefs(false).size());
+
+		// dead loop?
+		ph22.setChild(ph2);
+		assertEquals("i1", ph.getChildRefs(true).get(0));
+		assertEquals(4, ph.getChildRefs(true).size());
+		assertEquals("i2", ph.getChildRefs(false).get(1));
+		assertEquals(2, ph.getChildRefs(false).size());
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetParent()
+	{
+		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+
+		final ProductHelper ph = theHelper.getCreateRootProduct(0);
+		final ProductHelper ph1 = theHelper.getCreateProduct("i1");
+		final ProductHelper ph2 = theHelper.getCreateProduct("i2");
+
+		ph.setChild(ph1);
+		assertEquals(ph, ph1.getParent());
+		ph.setChild(ph2);
+		assertEquals(ph, ph1.getParent());
+		assertEquals(ph, ph2.getParent());
+
+	}
 }

@@ -112,7 +112,7 @@ public class WalkPosition extends WalkXElement
 				if (bsID != null)
 				{
 					e.removeAttribute(XJDFConstants.BinderySignatureID);
-					final SetHelper bsSet = XJDFHelper.getHelper(xjdfToJDFImpl.xjdf).getSet(ElementName.BINDERYSIGNATURE, 0);
+					final SetHelper bsSet = xjdfToJDFImpl.xjdf.getSet(ElementName.BINDERYSIGNATURE, 0);
 					if (bsSet != null)
 					{
 						bsSet.getPartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsID));

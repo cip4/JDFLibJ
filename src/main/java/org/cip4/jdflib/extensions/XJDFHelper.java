@@ -39,6 +39,7 @@ package org.cip4.jdflib.extensions;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -487,7 +488,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	{
 		final KElement productList = theElement == null ? null : theElement.getElement(ProductHelper.PRODUCTLIST);
 		final VElement products = productList == null ? null : productList.getChildElementVector(ProductHelper.PRODUCT, null);
-		if (products == null || products.size() == 0)
+		if (ContainerUtil.isEmpty(products))
 			return null;
 
 		final Vector<ProductHelper> vph = new Vector<>();
@@ -774,7 +775,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	public ProductHelper appendProduct()
 	{
 		final KElement product = theElement.getCreateElement(ProductHelper.PRODUCTLIST).appendElement(ProductHelper.PRODUCT);
-		reorder();
 		final ProductHelper productHelper = new ProductHelper(product);
 		productHelper.setRoot(productHelper.isRootProduct());
 		return productHelper;
@@ -930,7 +930,15 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	@Override
 	public void cleanUp()
 	{
-		theElement.sortChildren(new XJDFCleanupComparator(), false);
+		cleanUp(true);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#cleanUp()
+	 */
+	public void cleanUp(final boolean zappIDs)
+	{
+		super.cleanUp();
 		final Vector<SetHelper> v = getSets();
 		if (v != null)
 		{
@@ -943,9 +951,11 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		final Vector<ProductHelper> vp = getProductHelpers();
 		if (!ContainerUtil.isEmpty(vp))
 		{
+			sortProducts(vp);
 			for (final ProductHelper ph : vp)
 			{
 				ph.cleanUp();
+				theElement.getElement(XJDFConstants.ProductList).moveElement(ph.getProduct(), null);
 			}
 		}
 		final AuditPoolHelper auditPool = getAuditPool();
@@ -953,7 +963,49 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		{
 			auditPool.cleanUp();
 		}
-		new IDRemover().removeIDs(theElement);
+		if (zappIDs)
+			new IDRemover().removeIDs(theElement);
+	}
+
+	void sortProducts(final List<ProductHelper> vp)
+	{
+		int jRoot = 0;
+		final int size = vp.size();
+		for (int i = 0; i < size; i++)
+		{
+			if (vp.get(i).isRootProduct())
+			{
+				if (jRoot != i)
+				{
+					final ProductHelper ph0 = vp.set(jRoot, vp.get(i));
+					vp.set(i, ph0);
+					i--;
+				}
+				jRoot++;
+			}
+		}
+		for (int i = 0; i < size; i++)
+		{
+			final List<String> kids = vp.get(i).getChildRefs(false);
+			if (!ContainerUtil.isEmpty(kids))
+			{
+				int p0 = i + 1;
+				for (int j = i + 1; j < size; j++)
+				{
+					final String id = vp.get(j).getID();
+					if (kids.contains(id))
+					{
+						if (p0 != j)
+						{
+							final ProductHelper ph0 = vp.set(p0, vp.get(j));
+							vp.set(j, ph0);
+						}
+						p0++;
+					}
+				}
+			}
+		}
+
 	}
 
 	/**

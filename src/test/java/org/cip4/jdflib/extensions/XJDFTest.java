@@ -576,7 +576,7 @@ public class XJDFTest extends JDFTestCaseBase
 		final ProductHelper rootP = h.appendProduct();
 		final ProductHelper subP = h.appendProduct();
 		rootP.setRoot();
-		rootP.setChild(subP, 0);
+		rootP.setChild(subP);
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final KElement xRoot = h.getRoot();
 		final JDFDoc d = xCon.convert(xRoot);

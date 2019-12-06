@@ -41,8 +41,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
@@ -269,8 +271,8 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		assertEquals(h.numProductHelpers(false), 2);
 		final ProductHelper book = h.appendProduct();
 		book.setRoot();
-		book.setChild(cover, 1);
-		book.setChild(body, 1);
+		book.setChild(cover);
+		book.setChild(body);
 		assertEquals(h.numProductHelpers(true), 1);
 		assertEquals(h.numProductHelpers(false), 3);
 	}
@@ -558,6 +560,34 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		final KElement ap = theHelper.getRoot().getElement(ElementName.AUDITPOOL);
 		assertEquals(theHelper.getRoot().getFirstChildElement(), ap);
 		assertEquals(theHelper.getRootProduct(0).getRoot().getParentNode_KElement().getPreviousSiblingElement(), ap);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSortProducts()
+	{
+		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+
+		final ProductHelper ph21 = theHelper.getCreateProduct("i21");
+		ph21.setRoot(false);
+		final ProductHelper ph22 = theHelper.getCreateProduct("i22");
+		final ProductHelper ph = theHelper.getCreateProduct("i");
+		ph.setRoot();
+		final ProductHelper ph1 = theHelper.getCreateProduct("i1");
+		final ProductHelper ph2 = theHelper.getCreateProduct("i2");
+
+		ph.setChild(ph1);
+		ph.setChild(ph2);
+		ph2.setChild(ph21);
+		ph2.setChild(ph22);
+
+		theHelper.cleanUp();
+		final Vector<ProductHelper> vp = theHelper.getProductHelpers();
+		assertEquals(0, vp.indexOf(ph));
+		assertTrue(vp.indexOf(ph2) < vp.indexOf(ph22));
+		assertTrue(vp.indexOf(ph2) < vp.indexOf(ph21));
 	}
 
 	/**

@@ -1232,8 +1232,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 			final ProductHelper body = h.appendProduct();
 			final ProductHelper book = h.appendProduct();
 			book.setRoot();
-			book.setChild(cover, 1);
-			book.setChild(body, 1);
+			book.setChild(cover);
+			book.setChild(body);
 		}
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final JDFDoc d = xCon.convert(h);
