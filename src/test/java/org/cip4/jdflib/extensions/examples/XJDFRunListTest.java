@@ -56,6 +56,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMetadataMap;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.UrlUtil;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -196,6 +197,7 @@ public class XJDFRunListTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	@Ignore
 	public final void testMultiSet()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, null, null);

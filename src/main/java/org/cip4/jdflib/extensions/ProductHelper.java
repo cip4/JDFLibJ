@@ -328,6 +328,7 @@ public class ProductHelper extends BaseXJDFHelper
 		{
 			final IntentHelper childIntent = getCreateChildIntent();
 			final String id = phKid.ensureID();
+			phKid.setRoot(false);
 			childIntent.getCreateResource().appendAttribute(XJDFConstants.ChildRefs, id, null, null, true);
 		}
 	}

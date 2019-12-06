@@ -134,6 +134,7 @@ public class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 		final ProductHelper phPos = xjdfHelper.getCreateRootProduct(1);
 		createPoster(phPos);
 
+		xjdfHelper.cleanUp();
 		writeRoundTripX(xjdfHelper.getRoot(), "GTComplexVT", null);
 		// writeRoundTripX(xjdfHelper.getRoot(), "GTComplexVT", EnumValidationLevel.NoWarnComplete);
 	}
