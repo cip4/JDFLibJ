@@ -2528,9 +2528,9 @@ public class KElement extends ElementNSImpl implements Element
 		if (iSkip < 0)
 		{
 			final List<A> v = getChildArrayByClass(clazz, bRecurse, 0);
-				iSkip = v.size() + iSkip;
-				return iSkip >= 0 ? v.get(iSkip) : null;
-			}
+			iSkip = v.size() + iSkip;
+			return iSkip >= 0 ? v.get(iSkip) : null;
+		}
 		else if (bRecurse)
 		{
 			final MyPair<A, Integer> mp = getElementByClassImpl(clazz, iSkip);
@@ -4980,7 +4980,7 @@ public class KElement extends ElementNSImpl implements Element
 		{
 			if (bAlwaysFit || e.fitsName_KElement(nodeName, nameSpaceURI))
 			{
-				if (bDirect && (mAttrib == null || e.includesAttributes(mAttrib, bAnd)))
+				if (mAttrib == null || e.includesAttributes(mAttrib, bAnd))
 				{
 					// this guy is the one
 					return e;

@@ -190,6 +190,18 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test for getNonEmpty
+	 */
+	@Test
+	public void testHasContent()
+	{
+		assertFalse(StringUtil.hasContent(" "));
+		assertFalse(StringUtil.hasContent(null));
+		assertFalse(StringUtil.hasContent("\t\n "));
+		assertTrue(StringUtil.hasContent(" a"));
+	}
+
+	/**
 	 * test for gerRandomString
 	 */
 	@Test

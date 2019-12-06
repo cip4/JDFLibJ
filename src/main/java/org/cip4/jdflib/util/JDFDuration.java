@@ -248,7 +248,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	{
 
 		strDuration = StringUtil.normalize(strDuration, false);
-		boolean bComplete = strDuration.matches(REGEX_DURATION);
+		boolean bComplete = strDuration == null ? false : strDuration.matches(REGEX_DURATION);
 		m_lDuration = 0;
 
 		if (bComplete)

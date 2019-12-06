@@ -1074,6 +1074,19 @@ public class StringUtil
 
 	/**
 	 *
+	 * normalize a string by stripping and converting any internal whitespace to a single blank
+	 *
+	 * @param strWork the input
+	 *
+	 * @return the output; null if all characters were removed
+	 */
+	public static String normalize(final String strWork)
+	{
+		return normalize(strWork, false, JDFConstants.BLANK);
+	}
+
+	/**
+	 *
 	 * normalize a string by stripping and converting any internal whitespace to the value of replace
 	 *
 	 * @param strWork the input
@@ -1171,7 +1184,7 @@ public class StringUtil
 	}
 
 	/**
-	 * return true if s==null or s=="", else s<br/>
+	 * return true if s==null or s==""
 	 *
 	 * @param s
 	 * @return
@@ -1179,6 +1192,17 @@ public class StringUtil
 	public static boolean isEmpty(final String s)
 	{
 		return s == null || JDFConstants.EMPTYSTRING.equals(s);
+	}
+
+	/**
+	 * return false if s==null or s has only whotespace
+	 *
+	 * @param s
+	 * @return
+	 */
+	public static boolean hasContent(final String s)
+	{
+		return s != null && !JDFConstants.EMPTYSTRING.equals(s) && normalize(s, false) != null;
 	}
 
 	/**
