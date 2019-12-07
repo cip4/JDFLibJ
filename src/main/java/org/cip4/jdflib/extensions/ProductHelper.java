@@ -491,6 +491,22 @@ public class ProductHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * get the vector of children of this
+	 *
+	 * @return
+	 * @deprecated use list / boolean
+	 */
+	@Deprecated
+	public Vector<ProductHelper> getChildren()
+	{
+		final List<ProductHelper> kids = getChildren(false);
+		final Vector<ProductHelper> vph = new Vector<>();
+		if (kids != null)
+			vph.addAll(kids);
+		return vph;
+	}
+
+	/**
 	 * @return
 	 *
 	 */
