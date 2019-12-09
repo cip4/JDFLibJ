@@ -37,6 +37,7 @@
 package org.cip4.jdflib.extensions;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -80,6 +81,7 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	@Override
 	public Collection<XJDFHelper> splitXJDF(final XJDFHelper root)
 	{
+		prepareRoot(root);
 		final Vector<VString> newTypes = splitTypes(root);
 		final Vector<XJDFHelper> ret = new Vector<>();
 		if (newTypes != null && newTypes.size() > 0)
@@ -98,6 +100,24 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 			ret.add(root);
 		}
 		return ret;
+	}
+
+	/**
+	 * we want IDs to avoid double transformation
+	 * 
+	 * @param root
+	 */
+	protected void prepareRoot(final XJDFHelper root)
+	{
+		final List<SetHelper> sets = root == null ? null : root.getSets();
+		if (sets != null)
+		{
+			for (final SetHelper set : sets)
+			{
+				set.ensureID();
+			}
+		}
+
 	}
 
 	/**

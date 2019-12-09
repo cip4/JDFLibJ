@@ -252,7 +252,7 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 			return;
 		}
 		final String name = getName(set);
-		final LinkInfo li = map.getStar(name);
+		final LinkInfo li = map.getStar(name, true);
 		if (li == null)
 		{
 			set.deleteNode();

@@ -62,6 +62,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.PartitionGetter;
@@ -497,8 +498,13 @@ public class WalkXJDFResource extends WalkXElement
 		}
 		try
 		{
-			final JDFResource p = jdfRes.getCreatePartition(reduced, JDFPart.guessPartIDKeys(reduced));
-			return p;
+			final JDFResource p0 = jdfRes.getPartition(reduced, EnumPartUsage.Explicit);
+			if (p0 != null)
+			{
+				// we don't redo existing resources that would duplicate lots of stuff.
+				return null;
+			}
+			return jdfRes.getCreatePartition(reduced, JDFPart.guessPartIDKeys(reduced));
 		}
 		catch (final Exception x)
 		{
