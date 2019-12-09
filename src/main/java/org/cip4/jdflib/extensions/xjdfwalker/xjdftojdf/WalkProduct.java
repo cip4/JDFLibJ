@@ -171,21 +171,14 @@ public class WalkProduct extends WalkXElement
 	private JDFComponent fixComponent(final JDFNode theNode, final KElement xjdfProduct)
 	{
 		JDFComponent c = (JDFComponent) theNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+		final ProductHelper productHelper = new ProductHelper(xjdfProduct);
 		if (c == null)
 		{
 			c = (JDFComponent) theNode.addResource(ElementName.COMPONENT, EnumUsage.Output);
 			xjdfToJDFImpl.idMap.put(c.getID(), new IDPart(c.getID(), null));
-			final boolean isRootProduct = new ProductHelper(xjdfProduct).isRootProduct();
+			final boolean isRootProduct = productHelper.isRootProduct();
 			final EnumComponentType partialFinal = isRootProduct ? EnumComponentType.FinalProduct : EnumComponentType.PartialProduct;
 			c.setComponentType(partialFinal, null);
-			if (!isRootProduct)
-			{
-				final JDFNode parent = theNode.getParentJDF();
-				if (parent != null && EnumType.Product.equals(parent.getEnumType()))
-				{
-					parent.ensureLink(c, EnumUsage.Input, null);
-				}
-			}
 		}
 		final AttributeInfo info = c.getAttributeInfo();
 		final VString cKnown = info.knownAttribs();
@@ -206,7 +199,17 @@ public class WalkProduct extends WalkXElement
 			rl.moveAttribute(AttributeName.AMOUNT, theNode);
 			rl.moveAttribute(AttributeName.MINAMOUNT, theNode);
 			rl.moveAttribute(AttributeName.MAXAMOUNT, theNode);
+			if (!productHelper.isRootProduct())
+			{
+				final JDFNode parent = theNode.getParentJDF();
+				if (parent != null && EnumType.Product.equals(parent.getEnumType()))
+				{
+					final JDFResourceLink inLink = parent.ensureLink(c, EnumUsage.Input, null);
+					inLink.copyAttribute(AttributeName.AMOUNT, rl);
+				}
+			}
 		}
+
 		return c;
 	}
 

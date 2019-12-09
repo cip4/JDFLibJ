@@ -608,6 +608,33 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
+	*
+	*
+	*/
+	@Test
+	public void testProductComponentAmount()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		h.setTypes(JDFConstants.PRODUCT);
+		final ProductHelper p1 = h.appendProduct();
+		p1.setAmount(10);
+		final ProductHelper p11 = h.appendProduct();
+		final ProductHelper p12 = h.appendProduct();
+		p11.setAmount(20);
+		p12.setAmount(20);
+		p1.setChild(p11);
+		p1.setChild(p12);
+
+		h.cleanUp();
+		final JDFDoc d = xCon.convert(h);
+		assertNotNull(d);
+		final JDFNode n = d.getJDFRoot();
+		assertEquals(20, n.getLink(ElementName.COMPONENT, EnumUsage.Input, null).getAmount(), 0.0);
+		assertEquals(10, n.getLink(ElementName.COMPONENT, EnumUsage.Output, null).getAmount(), 0.0);
+	}
+
+	/**
 	 * check that signame gets automagically inserted below sheetname
 	 */
 	@Test
