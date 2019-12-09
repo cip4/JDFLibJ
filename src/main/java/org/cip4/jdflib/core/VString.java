@@ -600,7 +600,7 @@ public class VString extends Vector<String>
 				ret.add(s);
 			}
 		}
-		return ret.size() > 0 ? ret : null;
+		return ret.isEmpty() ? null : ret;
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,6 +41,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -267,6 +268,35 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		assertNull(splitter.checkProduct(color, new VString("Product")));
 		assertNotNull(splitter.checkProduct(color, new VString("Climbing")));
 		assertNotNull(splitter.checkProduct(niProduct, new VString("Product")));
+
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testProcessUsage()
+	{
+		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		h.addType(EnumType.Imposition);
+		h.addType(EnumType.ConventionalPrinting);
+		final SetHelper rlDoc = h.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "Document");
+		rlDoc.setExternalID("rl");
+		h.removeSet(ElementName.NODEINFO);
+		final SetHelper niCP = h.getCreateSet(ElementName.NODEINFO, EnumUsage.Input, JDFConstants.CONVENTIONALPRINTING);
+		niCP.setExternalID("cp");
+		final SetHelper niIm = h.getCreateSet(ElementName.NODEINFO, EnumUsage.Input, JDFConstants.IMPOSITION);
+		niIm.setExternalID("im");
+		final List<XJDFHelper> s = (List<XJDFHelper>) splitter.splitXJDF(h);
+		s.remove(0);
+		assertEquals("im", s.get(0).getSet(ElementName.NODEINFO, 0).getExternalID());
+		assertNull("im", s.get(0).getSet(ElementName.NODEINFO, 1));
+		assertEquals("rl", s.get(0).getSet(ElementName.RUNLIST, 0).getExternalID());
+		assertEquals("cp", s.get(1).getSet(ElementName.NODEINFO, 0).getExternalID());
+		assertNull("cp", s.get(1).getSet(ElementName.NODEINFO, 1));
 
 	}
 

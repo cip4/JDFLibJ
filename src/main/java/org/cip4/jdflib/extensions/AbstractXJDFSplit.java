@@ -173,16 +173,21 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 		String processUsage = set.getProcessUsage();
 		if (processUsage != null)
 		{
-			if ("EndCustomer".equals(processUsage))
-				processUsage = "Product";
-
-			if (!types.contains(processUsage))
+			if ("EndCustomer".equals(processUsage) && types.contains(JDFConstants.PRODUCT))
 			{
-				set.deleteNode();
+				processUsage = JDFConstants.PRODUCT;
+				set = null;
+			}
+			else if (EnumType.getEnum(processUsage) != null)
+			{
+				if (!types.contains(processUsage))
+				{
+					set.deleteNode();
+				}
+				// we still flag null but do not delete to avoid further processing in case we found an explicit match
+				set = null;
 			}
 
-			// we still flag null but do not delete to avoid further processing in case we found an explicit match
-			set = null;
 		}
 		return set;
 	}
