@@ -383,6 +383,44 @@ public class JDFRectangle extends JDFNumList
 	}
 
 	/**
+	 * get the common (intersected area) of this with r
+	 *
+	 * @param r the new rect, null if r=null
+	 * @return
+	 */
+	public JDFRectangle getInterSection(final JDFRectangle r)
+	{
+		if (r == null)
+			return null;
+
+		final double llx = Math.max(getLlx(), r.getLlx());
+		final double lly = Math.max(getLly(), r.getLly());
+		final double urx = Math.min(getUrx(), r.getUrx());
+		final double ury = Math.min(getUry(), r.getUry());
+		return urx > llx && ury > lly ? new JDFRectangle(llx, lly, urx, ury) : null;
+
+	}
+
+	/**
+	 * get the common (intersected area) of this with r
+	 *
+	 * @param r the new rect, null if r=null
+	 * @return
+	 */
+	public JDFRectangle getBoundingRect(final JDFRectangle r)
+	{
+		if (r == null)
+			return clone();
+
+		final double llx = Math.min(getLlx(), r.getLlx());
+		final double lly = Math.min(getLly(), r.getLly());
+		final double urx = Math.max(getUrx(), r.getUrx());
+		final double ury = Math.max(getUry(), r.getUry());
+		return new JDFRectangle(llx, lly, urx, ury);
+
+	}
+
+	/**
 	 * shifts this by the amount specified
 	 *
 	 * @param tx shift in x direction

@@ -267,6 +267,38 @@ public class JDFRectangleTest extends TestCase
 	}
 
 	/**
+	*
+	*/
+	@Test
+	public void testInterSect()
+	{
+		final JDFRectangle r = JDFRectangle.createRectangle("10 10 100 100");
+		final JDFRectangle r2 = JDFRectangle.createRectangle("2 2 5 5");
+		assertNull(r.getInterSection(r2));
+		assertNull(r2.getInterSection(r));
+		assertEquals(r2, r2.getInterSection(r2));
+		final JDFRectangle r3 = JDFRectangle.createRectangle("20 20 200 2000");
+		assertEquals(JDFRectangle.createRectangle("20 20 100 100"), r3.getInterSection(r));
+		assertEquals(JDFRectangle.createRectangle("20 20 100 100"), r.getInterSection(r3));
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testBounding()
+	{
+		final JDFRectangle r = JDFRectangle.createRectangle("10 5 100 100");
+		final JDFRectangle r2 = JDFRectangle.createRectangle("2 2 5 5");
+		assertEquals(r, r2.getBoundingRect(r));
+		assertEquals(r, r.getBoundingRect(r2));
+		assertEquals(r, r.getBoundingRect(null));
+		final JDFRectangle r3 = JDFRectangle.createRectangle("20 20 200 2000");
+		assertEquals(JDFRectangle.createRectangle("10 5 200 2000"), r3.getBoundingRect(r));
+		assertEquals(JDFRectangle.createRectangle("10 5 200 2000"), r.getBoundingRect(r3));
+	}
+
+	/**
 	 *
 	 */
 	@Test
