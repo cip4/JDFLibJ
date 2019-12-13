@@ -289,7 +289,7 @@ public class JDFRectangleTest extends TestCase
 	public void testBounding()
 	{
 		final JDFRectangle r = JDFRectangle.createRectangle("10 5 100 100");
-		final JDFRectangle r2 = JDFRectangle.createRectangle("2 2 5 5");
+		final JDFRectangle r2 = JDFRectangle.createRectangle("22 22 45 45");
 		assertEquals(r, r2.getBoundingRect(r));
 		assertEquals(r, r.getBoundingRect(r2));
 		assertEquals(r, r.getBoundingRect(null));

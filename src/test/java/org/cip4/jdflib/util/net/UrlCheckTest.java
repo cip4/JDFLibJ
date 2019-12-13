@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -72,6 +72,42 @@ public class UrlCheckTest extends JDFTestCaseBase
 		}
 
 		assertNotNull(ping);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testHTTPDetails()
+	{
+		if (!isTestNetwork())
+			return;
+		UrlPart ping = null;
+		final HTTPDetails det = new HTTPDetails();
+		for (int i = 0; i < 3; i++)
+		{
+			final UrlCheck urlCheck = new UrlCheck("https://www.google.com");
+			urlCheck.setHTTPDetails(det);
+			ping = urlCheck.ping(9999);
+			if (ping != null)
+				break;
+		}
+
+		assertNotNull(ping);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testHTTPDetailsString()
+	{
+		final HTTPDetails det = new HTTPDetails();
+		final UrlCheck urlCheck = new UrlCheck("https://www.google.com");
+		urlCheck.setHTTPDetails(det);
+		assertNotNull(urlCheck.toString());
 	}
 
 	/**

@@ -234,13 +234,13 @@ public class HTTPDetails
 	public String toString()
 	{
 		return "HTTPDetails [chunkSize=" + chunkSize + ", bKeepAlive=" + bKeepAlive + ", bearerToken=" + bearerToken + ", redirect=" + redirect + ", connectionTimeout=" + connectionTimeout
-				+ "headers: " + headers.showKeys(null) + "]";
+				+ " headers: " + headers.showKeys(null) + "]";
 	}
 
 	/**
 	 * @param key
 	 * @return
-	 * 
+	 *
 	 */
 	public String getHeader(final String key)
 	{
