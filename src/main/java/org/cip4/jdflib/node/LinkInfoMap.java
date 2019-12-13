@@ -37,8 +37,8 @@
 package org.cip4.jdflib.node;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.Vector;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -74,7 +74,7 @@ public class LinkInfoMap extends HashMap<String, LinkInfo>
 	 */
 	LinkInfoMap(final LinkInfoMap info)
 	{
-		final Vector<String> keys = ContainerUtil.getKeyVector(info);
+		final Collection<String> keys = ContainerUtil.getKeyArray(info);
 		if (keys != null)
 		{
 			for (final String key : keys)
@@ -108,7 +108,7 @@ public class LinkInfoMap extends HashMap<String, LinkInfo>
 	{
 		if (typeLinkInfo != null)
 		{
-			final Vector<String> resNames = ContainerUtil.getKeyVector(typeLinkInfo);
+			final Collection<String> resNames = ContainerUtil.getKeyArray(typeLinkInfo);
 			if (resNames != null)
 			{
 				for (final String resName : resNames)

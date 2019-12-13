@@ -847,4 +847,9 @@ public class ContainerUtil
 		v.addAll(keySet);
 		return v;
 	}
+
+	public static <A> List<A> getKeyList(final Map<A, ?> m)
+	{
+		return (List<A>) getKeyArray(m);
+	}
 }

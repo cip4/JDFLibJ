@@ -67,6 +67,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.PartitionGetter;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.MyPair;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -91,9 +92,12 @@ public class WalkXJDFResource extends WalkXElement
 	{
 		final JDFNode theNode = getNode(xjdfRes, parent);
 		final JDFResource res;
+		boolean isNew = true;
 		if (theNode != null)
 		{
-			res = getResourceRoot(theNode, xjdfRes);
+			final MyPair<JDFResource, Boolean> mp = getResourceRoot(theNode, xjdfRes);
+			res = mp.getA();
+			isNew = mp.getB().booleanValue();
 		}
 		else if (parent instanceof JDFResourceInfo)
 		{
@@ -111,7 +115,7 @@ public class WalkXJDFResource extends WalkXElement
 		}
 		rh.getCreateResource();
 		final VJDFAttributeMap vParts = getPartMaps(rh);
-
+		isNew = isNew || !hasPartition(res, rh.getPartMap(), theNode);
 		final KElement newPartitionElement = createPartition(res, vParts.get(0), theNode);
 		if (newPartitionElement == null)
 		{
@@ -141,7 +145,7 @@ public class WalkXJDFResource extends WalkXElement
 			}
 		}
 		newPartitionElement.setAttributes(map);
-		return newPartitionElement;
+		return isNew ? newPartitionElement : null;
 	}
 
 	/**
@@ -298,7 +302,7 @@ public class WalkXJDFResource extends WalkXElement
 	 * @param xjdfRes
 	 * @return
 	 */
-	private JDFResource getResourceRoot(final JDFNode theNode, final KElement xjdfRes)
+	private MyPair<JDFResource, Boolean> getResourceRoot(final JDFNode theNode, final KElement xjdfRes)
 	{
 		final JDFNode newRoot = theNode.getJDFRoot();
 		final ResourceHelper ph = new ResourceHelper(xjdfRes);
@@ -350,7 +354,7 @@ public class WalkXJDFResource extends WalkXElement
 			}
 
 		}
-		return res;
+		return new MyPair<>(res, Boolean.valueOf(isNew));
 	}
 
 	/**
@@ -485,25 +489,41 @@ public class WalkXJDFResource extends WalkXElement
 	 * @param theNode
 	 * @return
 	 */
+	protected boolean hasPartition(final JDFResource jdfRes, final JDFAttributeMap partMap, final JDFNode theNode)
+	{
+		if (JDFAttributeMap.isEmpty(partMap))
+		{
+			return true;
+		}
+		final JDFAttributeMap reduced = removeImplicitParts(jdfRes, partMap);
+		if (JDFAttributeMap.isEmpty(reduced))
+		{
+			return true;
+		}
+		final JDFResource p0 = jdfRes.getPartition(reduced, EnumPartUsage.Explicit);
+		return p0 != null;
+	}
+
+	/**
+	 *
+	 * @param jdfRes
+	 * @param partMap
+	 * @param theNode
+	 * @return
+	 */
 	protected KElement createPartition(final JDFResource jdfRes, final JDFAttributeMap partMap, final JDFNode theNode)
 	{
-		if (partMap == null || partMap.isEmpty())
+		if (JDFAttributeMap.isEmpty(partMap))
 		{
 			return jdfRes;
 		}
 		final JDFAttributeMap reduced = removeImplicitParts(jdfRes, partMap);
-		if (reduced == null || reduced.isEmpty())
+		if (JDFAttributeMap.isEmpty(reduced))
 		{
 			return jdfRes;
 		}
 		try
 		{
-			final JDFResource p0 = jdfRes.getPartition(reduced, EnumPartUsage.Explicit);
-			if (p0 != null)
-			{
-				// we don't redo existing resources that would duplicate lots of stuff.
-				return null;
-			}
 			return jdfRes.getCreatePartition(reduced, JDFPart.guessPartIDKeys(reduced));
 		}
 		catch (final Exception x)
