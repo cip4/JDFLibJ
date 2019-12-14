@@ -39,6 +39,7 @@ package org.cip4.jdflib.extensions.examples;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -75,12 +76,14 @@ public class XJDFFinishingTest extends JDFTestCaseBase
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Bundle", null, null);
 		xjdfHelper.setTypes(EnumType.Palletizing.getName());
+		xjdfHelper.setVersion(EnumVersion.Version_2_1);
 		final ProductHelper book = xjdfHelper.getCreateRootProduct(0);
 		book.setID("BookProductID");
+		book.setExternalID("BookExternalID");
 		book.setAmount(4200);
 
 		final SetHelper shBook = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Input);
-		final ResourceHelper bookHelper = shBook.getCreatePartition(XJDFConstants.ProductPart, "BookProductID", true);
+		final ResourceHelper bookHelper = shBook.getCreatePartition(XJDFConstants.Product, "BookExternalID", true);
 		bookHelper.setID("BookComponentID");
 		bookHelper.setAttribute(AttributeName.GROSSWEIGHT, "" + 650);
 		bookHelper.setAmount(4200, null, true);

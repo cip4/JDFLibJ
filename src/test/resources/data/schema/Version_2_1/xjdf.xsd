@@ -1129,6 +1129,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Activity"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="Event"/>
                 <xs:element maxOccurs="2" minOccurs="0" ref="FileSpec"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="JobPhase"/>
             </xs:sequence>
@@ -1247,6 +1248,7 @@
             <xs:attribute name="AgentName" type="xs:string" use="optional"/>
             <xs:attribute name="AgentVersion" type="xs:string" use="optional"/>
             <xs:attribute name="Author" type="xs:string" use="optional"/>
+            <xs:attribute name="DescriptiveName" type="xs:string" use="optional"/>
             <xs:attribute name="DeviceID" type="xs:NMTOKEN" use="required"/>
             <xs:attribute name="ICSVersions" type="xs:NMTOKENS" use="optional"/>
             <xs:attribute name="ID" type="xs:ID" use="optional"/>
@@ -1463,6 +1465,7 @@
     <xs:element name="ResourceInfo">
         <xs:complexType>
             <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="Event"/>
                 <xs:element maxOccurs="1" minOccurs="0" ref="MISDetails"/>
                 <xs:element maxOccurs="1" minOccurs="1" ref="ResourceSet"/>
             </xs:sequence>
@@ -2484,6 +2487,9 @@
 
     <xs:element name="ProofItem" type="ProofItem"/>
     <xs:complexType name="ProofItem">
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
+        </xs:sequence>
         <xs:attribute name="Amount" type="xs:int" use="optional"/>
         <xs:attribute name="ColorType" use="optional">
             <xs:simpleType>
@@ -3011,6 +3017,9 @@
     <xs:complexType name="ProductionIntent">
         <xs:complexContent>
             <xs:extension base="ProductIntent">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="Certification"/>
+                </xs:sequence>
                 <xs:attribute name="PrintPreference" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
@@ -3877,6 +3886,16 @@
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
+
+   <xs:element name="ColorMeasurement">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="0" ref="ColorControlStrip"/>
+            </xs:sequence>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+
 
     <xs:element name="ColorMeasurementConditions">
         <xs:complexType>
@@ -4899,6 +4918,7 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="Certification"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
                 </xs:sequence>
                 <xs:attribute name="Color" type="NamedColor" use="optional"/>
@@ -5242,13 +5262,20 @@
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="BindingQualityParams"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="BindingQuality"/>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="ColorControlStrip"/>
+                    <xs:element maxOccurs="1" minOccurs="0" ref="ColorMeasurement"/>
                     <xs:element maxOccurs="2" minOccurs="0" ref="FileSpec"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="RegistrationQuality"/>
                 </xs:sequence>
                 <xs:attribute name="Box" type="rectangle" use="optional"/>
                 <xs:attribute name="Position" type="Face" use="optional"/>
-                <xs:attribute name="QualityBase" type="xs:NMTOKENS" use="optional"/>
+                <xs:attribute name="QualityBase" use="optional">
+					<xs:simpleType>
+                      <xs:restriction base="xs:NMTOKEN">
+                          <xs:enumeration value="Absolute"/>
+                          <xs:enumeration value="Standard"/>
+                      </xs:restriction>
+					</xs:simpleType>
+ 				</xs:attribute>
                 <xs:attribute name="QualityControlMethods" type="xs:NMTOKENS" use="optional"/>
                 <xs:attribute name="SampleInterval" type="xs:int" use="optional"/>
                 <xs:attribute name="Severity" type="Score" use="optional"/>
@@ -5265,7 +5292,7 @@
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="BindingQualityMeasurement"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="BindingQuality"/>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="ColorControlStrip"/>
+                    <xs:element maxOccurs="1" minOccurs="0" ref="ColorMeasurement"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="Inspection"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="RegistrationQuality"/>
@@ -5864,6 +5891,9 @@
 
     <xs:element name="SurfaceColor" type="SurfaceColor"/>
     <xs:complexType name="SurfaceColor">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="Certification"/>
+        </xs:sequence>
         <xs:attribute name="Coatings" type="xs:NMTOKENS" use="optional"/>
         <xs:attribute name="ColorsUsed" type="xs:NMTOKENS" use="optional"/>
         <xs:attribute name="Coverage" type="xs:float" use="optional"/>
@@ -6299,6 +6329,7 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="Certification"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
                 </xs:sequence>
                 <xs:attribute name="InkType" type="xs:NMTOKENS" use="optional"/>
