@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -67,23 +67,23 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.elementwalker;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
 
 /**
  * simple implementation of the IWalkerFactory
- * 
+ *
  * @author prosirai
- * 
+ *
  */
 public class BaseWalkerFactory implements IWalkerFactory
 {
@@ -92,16 +92,16 @@ public class BaseWalkerFactory implements IWalkerFactory
 	{
 		super();
 		maxDepth = 0;
-		vBaseWalker = new Vector<BaseWalker>();
+		vBaseWalker = new ArrayList<BaseWalker>();
 		nameMap = new HashMap<String, BaseWalker>();
 	}
 
 	protected int maxDepth;
-	protected final Vector<BaseWalker> vBaseWalker;
+	protected final List<BaseWalker> vBaseWalker;
 	private final Map<String, BaseWalker> nameMap;
 
 	/**
-	 * 
+	 *
 	 * get the appropriate walker for a given element
 	 * @see org.cip4.jdflib.elementwalker.IWalkerFactory#getWalker(org.cip4.jdflib .core.KElement)
 	 */
@@ -110,15 +110,15 @@ public class BaseWalkerFactory implements IWalkerFactory
 	{
 		if (toCheck != null)
 		{
-			String name = toCheck.getLocalName();
-			BaseWalker walkerByName = nameMap.get(name);
+			final String name = toCheck.getLocalName();
+			final BaseWalker walkerByName = nameMap.get(name);
 			// sometimes we have additional restrictions that make a named walker a mismatch
 			if (walkerByName != null && walkerByName.matches(toCheck))
 			{
 				return walkerByName;
 			}
 		}
-		for (BaseWalker w : vBaseWalker)
+		for (final BaseWalker w : vBaseWalker)
 		{
 			if (w.matches(toCheck))
 			{
@@ -131,17 +131,17 @@ public class BaseWalkerFactory implements IWalkerFactory
 	/**
 	 * add a walker to this and make sure that abstract walkers are sorted at the end of the list so that superclass walkers are always found first called by
 	 * BaseWorker so no need for external calls
-	 * 
+	 *
 	 * @param w the walker to add
 	 */
 	void addWalker(final BaseWalker w)
 	{
 		final int d = w.getDepth();
 		maxDepth = d > maxDepth ? d : maxDepth;
-		VString elementNames = w.getElementNames();
+		final List<String> elementNames = w.getElementNames();
 		if (elementNames != null)
 		{
-			for (String name : elementNames)
+			for (final String name : elementNames)
 			{
 				nameMap.put(name, w);
 			}
@@ -166,7 +166,7 @@ public class BaseWalkerFactory implements IWalkerFactory
 	 * Getter for vBaseWalker attribute.
 	 * @return the vBaseWalker
 	 */
-	public Vector<BaseWalker> getBaseWalkers()
+	public List<BaseWalker> getBaseWalkers()
 	{
 		return vBaseWalker;
 	}
