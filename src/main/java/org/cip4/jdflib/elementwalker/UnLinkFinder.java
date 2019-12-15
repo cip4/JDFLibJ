@@ -162,7 +162,7 @@ public class UnLinkFinder extends BaseElementWalker
 		walkTree(n, null);
 		List<KElement> toValueVector = ContainerUtil.toArrayList(linkData.resMap, false);
 		final List<KElement> toValueVectorRef = linkData.refMap.getAllValues();
-		toValueVector = (Vector<KElement>) ContainerUtil.addAll(toValueVector, toValueVectorRef);
+		toValueVector = (List<KElement>) ContainerUtil.addAll(toValueVector, toValueVectorRef);
 		if (toValueVector == null)
 			return null;
 		final VElement ret = new VElement();

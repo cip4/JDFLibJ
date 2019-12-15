@@ -231,6 +231,67 @@ public class ContainerUtil
 	}
 
 	/**
+	 * checks whether at least one of a given vector of strings is contained in <code>this</code>
+	 *
+	 * @param others the VSTring of values to test
+	 * @return true if at least one String in other is in <code>this</code>
+	 */
+	public static <A> boolean containsAny(final Collection<A> c, final Collection<A> others)
+	{
+		if (isEmpty(others))
+		{
+			return false;
+		}
+		for (final A other : others)
+		{
+			if (c.contains(other))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * vector of strings that is contained in <code>this</code>
+	 *
+	 * @param others the VString of values to test
+	 * @return true if at least one String in other is in <code>this</code>
+	 */
+	public static <A> List<A> getOverlapping(final Collection<A> c, final Collection<A> others)
+	{
+		if (others == null)
+		{
+			return null;
+		}
+		final List<A> ret = new ArrayList<>();
+		for (final A s : c)
+		{
+			if (others.contains(s))
+			{
+				ret.add(s);
+			}
+		}
+		return !ret.isEmpty() ? ret : null;
+	}
+
+	/**
+	 * appends all strings of an array to <code>this</code>
+	 *
+	 * @param strings the array of strings to append to <code>this</code>
+	 */
+	public static <A> void addAll(final Collection<A> c, final A[] a)
+	{
+		if (a != null && c != null)
+		{
+			for (final A aa : a)
+			{
+				c.add(aa);
+			}
+		}
+	}
+
+	/**
 	 * return a matching element from a collection of IMatches
 	 *
 	 * @param <a> the data type
@@ -616,6 +677,61 @@ public class ContainerUtil
 			}
 			return inv;
 		}
+	}
+
+	/**
+	 * AppendUnique - append a string but ignore multiple entries
+	 *
+	 * @param a the A to append, if null nothing is added
+	 */
+	public static <A> void appendUnique(final Collection<A> c, final A a)
+	{
+		if (a != null && !c.contains(a))
+		{
+			c.add(a);
+		}
+	}
+
+	/**
+	 *
+	 * @param l
+	 * @param i
+	 * @return
+	 */
+	public static <A> int index(final List<A> l, int i)
+	{
+		if (l == null)
+			return -1;
+		final int size = l.size();
+		if (i < 0)
+		{
+			i += size;
+		}
+		return i >= size ? -2 : i;
+	}
+
+	/**
+	 *
+	 * @param l
+	 * @param i
+	 * @return
+	 */
+	public static <A> A get(final List<A> l, int i)
+	{
+		i = index(l, i);
+		return i >= 0 ? l.get(i) : null;
+	}
+
+	/**
+	 * remove but also implementing the usual neg number syntax
+	 *
+	 * @param index if 0, or positive count from front, else if negative from back
+	 * @see java.util.Vector#remove(int)
+	 */
+	public static <A> A remove(final List<A> l, int i)
+	{
+		i = index(l, i);
+		return i >= 0 ? l.remove(i) : null;
 	}
 
 	/**

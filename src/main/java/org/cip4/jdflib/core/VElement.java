@@ -205,10 +205,7 @@ public class VElement extends Vector<KElement>
 	 */
 	public void appendUnique(final KElement elem)
 	{
-		if (elem != null && !contains(elem))
-		{
-			addElement(elem);
-		}
+		ContainerUtil.appendUnique(this, elem);
 	}
 
 	/**
@@ -218,11 +215,7 @@ public class VElement extends Vector<KElement>
 	 */
 	public void addAll(final VElement elem)
 	{
-		if (elem == null || elem.size() == 0)
-		{
-			return;
-		}
-		super.addAll(elem);
+		ContainerUtil.addAll(this, elem);
 
 	}
 
@@ -234,16 +227,7 @@ public class VElement extends Vector<KElement>
 	 */
 	public <a extends KElement> void addAll(final a[] l)
 	{
-		if (l == null)
-		{
-			return;
-		}
-		ensureCapacity(size() + l.length);
-		for (final a element : l)
-		{
-			if (element != null)
-				add(element);
-		}
+		ContainerUtil.addAll(this, l);
 	}
 
 	/**
@@ -542,17 +526,9 @@ public class VElement extends Vector<KElement>
 	 * @return KElement - the requested item or null, if index is out of bounds
 	 */
 	@Override
-	public synchronized KElement elementAt(int index)
+	public synchronized KElement elementAt(final int index)
 	{
-		if (index < 0)
-		{
-			index += size();
-		}
-		if (size() <= index)
-		{
-			return null;
-		}
-		return super.elementAt(index);
+		return ContainerUtil.get(this, index);
 	}
 
 	/**
@@ -562,17 +538,10 @@ public class VElement extends Vector<KElement>
 	 * @return KElement - the requested item or null, if index is out of bounds
 	 */
 	@Override
-	public synchronized KElement get(int index)
+	public synchronized KElement get(final int index)
 	{
-		if (index < 0)
-		{
-			index += size();
-		}
-		if (size() <= index)
-		{
-			return null;
-		}
-		return super.get(index);
+		final int i = ContainerUtil.index(this, index);
+		return i >= 0 ? super.get(i) : null;
 	}
 
 	/**
@@ -583,8 +552,7 @@ public class VElement extends Vector<KElement>
 	 */
 	public KElement item(final int index)
 	{
-
-		return elementAt(index);
+		return ContainerUtil.get(this, index);
 	}
 
 	/**

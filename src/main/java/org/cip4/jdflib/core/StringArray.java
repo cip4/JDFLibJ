@@ -171,13 +171,10 @@ public class StringArray extends ArrayList<String>
 	 * @return the string at index
 	 */
 	@Override
-	public String get(int index)
+	public String get(final int index)
 	{
-		if (index < 0)
-		{
-			index += size();
-		}
-		return index >= 0 && index < size() ? super.get(index) : null;
+		final int i = ContainerUtil.index(this, index);
+		return i >= 0 ? super.get(i) : null;
 	}
 
 	/**
@@ -187,10 +184,7 @@ public class StringArray extends ArrayList<String>
 	 */
 	public void appendUnique(final String string)
 	{
-		if (string != null && !contains(string))
-		{
-			add(string);
-		}
+		ContainerUtil.appendUnique(this, string);
 	}
 
 	/**
@@ -256,23 +250,6 @@ public class StringArray extends ArrayList<String>
 	}
 
 	/**
-	 * get a string from <code>this</code>
-	 *
-	 * @param s the String you are looking for
-	 * @return the String if found or null if <code>this</code> does not contain s
-	 */
-	public String get(final String s)
-	{
-		if (contains(s))
-		{
-			final int i = indexOf(s);
-			return get(i);
-		}
-
-		return null;
-	}
-
-	/**
 	 * gets a set with all entries of the VString<br/>
 	 * note that the set retains ordering (LinkedHashSet)
 	 *
@@ -298,10 +275,7 @@ public class StringArray extends ArrayList<String>
 	public void addAll(final String[] strings)
 	{
 		ensureCapacity(size() + strings.length);
-		for (final String string : strings)
-		{
-			add(string);
-		}
+		ContainerUtil.addAll(this, strings);
 	}
 
 	/**
@@ -310,20 +284,9 @@ public class StringArray extends ArrayList<String>
 	 * @param others the VSTring of values to test
 	 * @return true if at least one String in other is in <code>this</code>
 	 */
-	public boolean containsAny(final StringArray others)
+	public boolean containsAny(final Collection<String> others)
 	{
-		if (isEmpty(others))
-		{
-			return false;
-		}
-		for (final String other : others)
-		{
-			if (contains(other))
-			{
-				return true;
-			}
-		}
-		return false;
+		return ContainerUtil.containsAny(this, others);
 	}
 
 	/**
@@ -356,13 +319,10 @@ public class StringArray extends ArrayList<String>
 	 * @see java.util.Vector#remove(int)
 	 */
 	@Override
-	public String remove(int index)
+	public String remove(final int index)
 	{
-		if (index < 0)
-		{
-			index += size();
-		}
-		return super.remove(index);
+		final int i = ContainerUtil.index(this, index);
+		return i < 0 ? null : super.remove(i);
 	}
 
 	/**

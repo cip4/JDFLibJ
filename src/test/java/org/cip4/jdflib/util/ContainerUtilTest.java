@@ -249,8 +249,8 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		final VString v1 = new VString("a b c", null);
 		final VString v2 = new VString("e f g", null);
 		final VString v3 = new VString("a b c e f g", null);
-		assertEquals(ContainerUtil.addAll(null, null), null);
-		assertEquals(ContainerUtil.addAll(v1, null), v1);
+		assertEquals(ContainerUtil.addAll(null, (List<String>) null), null);
+		assertEquals(ContainerUtil.addAll(v1, (List<String>) null), v1);
 		assertEquals(ContainerUtil.addAll(null, v1), v1);
 		assertEquals(ContainerUtil.addAll(v1, v2), v3);
 		assertEquals(v1, v3);
