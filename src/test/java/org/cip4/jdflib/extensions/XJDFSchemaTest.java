@@ -333,6 +333,22 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testCountryCodeValidate()
+	{
+		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
+		root.setAttribute("Types", "ConventionalPrinting");
+		root.setXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/Address/@CountryCode", "DE");
+		assertTrue(reparse(root, 2, 1));
+		root.setXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/Address/@CountryCode", "D2");
+		assertFalse(reparse(root, 2, 1));
+		root.setXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/Address/@CountryCode", "987");
+		assertFalse(reparse(root, 2, 1));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testFileSpecValidate()
 	{
 		final KElement root = new XJDFHelper("j1", "p", null).getRoot();

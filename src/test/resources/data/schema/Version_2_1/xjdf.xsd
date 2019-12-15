@@ -1023,22 +1023,6 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="Comment">
-        <xs:complexType>
-            <xs:simpleContent>
-                <xs:extension base="xs:string">
-                    <xs:attribute name="Author" type="xs:string" use="optional"/>
-                    <xs:attribute name="ExternalID" type="xs:NMTOKEN" use="optional"/>
-                    <xs:attribute name="Language" type="language" use="optional"/>
-                    <xs:attribute name="PersonalID" type="xs:NMTOKEN" use="optional"/>
-                    <xs:attribute name="TimeStamp" type="xs:dateTime" use="optional"/>
-                    <xs:attribute name="Type" type="xs:NMTOKEN" use="optional"/>
-                    <xs:anyAttribute namespace="##other" processContents="lax"/>
-                </xs:extension>
-            </xs:simpleContent>
-        </xs:complexType>
-    </xs:element>
-
     <xs:element name="CustomerInfo" substitutionGroup="SpecificResource" type="CustomerInfo"/>
     <xs:complexType name="CustomerInfo">
         <xs:complexContent>
@@ -1210,6 +1194,8 @@
             <xs:attribute name="ModuleIDs" type="xs:NMTOKENS" use="optional"/>
             <xs:attribute name="PercentCompleted" type="xs:float" use="optional"/>
             <xs:attribute name="QueueEntryID" type="xs:NMTOKEN" use="optional"/>
+            <xs:attribute name="RelatedJobID" type="xs:NMTOKEN" use="optional"/>
+            <xs:attribute name="RelatedJobPartID" type="xs:NMTOKEN" use="optional"/>
             <xs:attribute name="RestTime" type="xs:duration" use="optional"/>
             <xs:attribute name="StartTime" type="xs:dateTime" use="optional"/>
             <xs:attribute name="Status" type="NodeStatus" use="required"/>
@@ -1381,6 +1367,8 @@
             <xs:attribute name="JobPartID" type="xs:NMTOKEN" use="optional"/>
             <xs:attribute name="Priority" type="xs:int" use="optional"/>
             <xs:attribute name="QueueEntryID" type="xs:NMTOKEN" use="required"/>
+            <xs:attribute name="RelatedJobID" type="xs:NMTOKEN" use="optional"/>
+            <xs:attribute name="RelatedJobPartID" type="xs:NMTOKEN" use="optional"/>
             <xs:attribute name="StartTime" type="xs:dateTime" use="optional"/>
             <xs:attribute name="Status" type="NodeStatus" use="required"/>
             <xs:attribute name="StatusDetails" type="xs:NMTOKEN" use="optional"/>
@@ -1746,10 +1734,46 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:element name="CellCondition">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="1" ref="Condition"/>
+            </xs:sequence>
+            <xs:attribute name="Side" type="Side" use="required"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="CoilBindingDetails">
         <xs:complexType>
             <xs:attribute name="CoilShape" type="xs:NMTOKEN" use="optional"/>
             <xs:attribute name="Diameter" type="xs:float" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+
+   <xs:element name="Comment">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="Author" type="xs:string" use="optional"/>
+                    <xs:attribute name="ExternalID" type="xs:NMTOKEN" use="optional"/>
+                    <xs:attribute name="Language" type="language" use="optional"/>
+                    <xs:attribute name="PersonalID" type="xs:NMTOKEN" use="optional"/>
+                    <xs:attribute name="TimeStamp" type="xs:dateTime" use="optional"/>
+                    <xs:attribute name="Type" type="xs:NMTOKEN" use="optional"/>
+                    <xs:anyAttribute namespace="##other" processContents="lax"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Condition">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="1" ref="Part"/>
+            </xs:sequence>
+            <xs:attribute name="PartContext" type="xs:NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -1851,7 +1875,8 @@
                 <xs:attribute name="KnownLocalizations" type="languages" use="optional"/>
                 <xs:attribute name="Manufacturer" type="xs:string" use="optional"/>
                 <xs:attribute name="ManufacturerURL" type="URL" use="optional"/>
-                <xs:attribute name="Packaging" use="optional">
+                <xs:attribute name="MaxRunSpeed" type="xs:float" use="optional"/>
+                 <xs:attribute name="Packaging" use="optional">
                     <xs:simpleType>
                         <xs:list>
                             <xs:simpleType>
@@ -2308,16 +2333,6 @@
             <xs:sequence>
                 <xs:element maxOccurs="unbounded" minOccurs="1" ref="Condition"/>
             </xs:sequence>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="Condition">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="unbounded" minOccurs="1" ref="Part"/>
-            </xs:sequence>
-            <xs:attribute name="PartContext" type="xs:NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -2804,7 +2819,7 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
-                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="3"/>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="4"/>
                 </xs:sequence>
                 <xs:attribute name="Accepted" type="xs:int" use="optional"/>
                 <xs:attribute name="Rejected" type="xs:int" use="optional"/>
@@ -3346,8 +3361,14 @@
             <xs:attribute name="City" type="xs:string" use="optional"/>
             <xs:attribute name="CivicNumber" type="xs:string" use="optional"/>
             <xs:attribute name="Country" type="xs:string" use="optional"/>
-            <xs:attribute name="CountryCode" type="xs:NMTOKEN" use="optional"/>
-            <xs:attribute name="ExtendedAddress" type="xs:string" use="optional"/>
+            <xs:attribute name="CountryCode" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                       <xs:pattern value="[a-zA-Z][a-zA-Z]"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+           <xs:attribute name="ExtendedAddress" type="xs:string" use="optional"/>
             <xs:attribute name="PostalCode" type="xs:string" use="optional"/>
             <xs:attribute name="PostBox" type="xs:string" use="optional"/>
             <xs:attribute name="Region" type="xs:string" use="optional"/>
@@ -5636,6 +5657,9 @@
 
     <xs:element name="SignatureCell">
         <xs:complexType>
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" ref="CellCondition"/>
+            </xs:sequence>
             <xs:attribute name="BackPages" type="IntegerList" use="optional"/>
             <xs:attribute name="BackSpread" type="IntegerList" use="optional"/>
             <xs:attribute name="BleedFace" type="xs:float" use="optional"/>
@@ -5694,9 +5718,13 @@
             <xs:sequence>
                 <xs:element maxOccurs="1" minOccurs="0" ref="BarcodeReproParams"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="FillMark"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="ColorControlStrip"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="CutMark"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
                 <xs:element maxOccurs="1" minOccurs="0" ref="JobField"/>
                 <xs:element maxOccurs="1" minOccurs="0" ref="RefAnchor"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="RegisterMark"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="ScavengerArea"/>
             </xs:sequence>
             <xs:attribute name="AbsoluteHeight" type="xs:float" use="optional"/>
             <xs:attribute name="AbsoluteWidth" type="xs:float" use="optional"/>

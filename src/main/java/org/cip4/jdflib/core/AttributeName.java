@@ -211,23 +211,17 @@ public final class AttributeName
 	public static final String ANNOTATIONTYPE = "AnnotationType";
 	/** */
 	public static final String ANTIALIASIMAGES = "AntiAliasImages";
-	/** */
 	public static final String ANTIALIASING = "AntiAliasing";
 	/** */
+	public static final String APERTURE = "Aperture";
 	public static final String APPLICATION = "Application";
-	/** */
 	public static final String APPLICATIONAREA = "ApplicationArea";
-	/** */
 	public static final String APPOS = "AppOS";
-	/** */
+
 	public static final String APPROVALROLE = "ApprovalRole";
-	/** */
 	public static final String APPROVALROLEDETAILS = "ApprovalRoleDetails";
-	/** */
 	public static final String APPROVALSTATE = "ApprovalState";
-	/** */
 	public static final String APPROVALSTATEDETAILS = "ApprovalStateDetails";
-	/** */
 	public static final String APPVERSION = "AppVersion";
 	/** */
 	public static final String AREA = "Area";
@@ -1437,6 +1431,7 @@ public final class AttributeName
 	public static final String IGNOREUCR = "IgnoreUCR";
 	/** */
 	public static final String ILLUMINATION = "Illumination";
+	public static final String ILLUMINATIONANGLE = "IlluminationAngle";
 	/** */
 	public static final String IMAGABLESIDE = "ImagableSide";
 	/** */
@@ -1867,7 +1862,7 @@ public final class AttributeName
 	public static final String MAXQUANTITY = "MaxQuantity";
 	/** */
 	public static final String MAXRESOLUTION = "MaxResolution";
-	/** */
+	public static final String MAXRUNSPEED = "MaxRunSpeed";
 	public static final String MAXSEARCHRECURSION = "MaxSearchRecursion";
 	/** */
 	public static final String MAXSTACKDEPTH = "MaxStackDepth";
@@ -1884,6 +1879,7 @@ public final class AttributeName
 	/** */
 	public static final String MAXWIDTH = "MaxWidth";
 	/** */
+	public static final String MEASUREMENTANGLE = "MeasurementAngle";
 	public static final String MEASUREMENTFILTER = "MeasurementFilter";
 	public static final String MEASUREMENTS = "Measurements";
 	public static final String MEASUREMENTUSAGE = "MeasurementUsage";
@@ -2435,23 +2431,17 @@ public final class AttributeName
 	public static final String PIXELWIDTH = "PixelWidth";
 	/** */
 	public static final String PLATELAYOUT = "PlateLayout";
-	/** */
 	public static final String PLATEPOSITION = "PlatePosition";
-	/** */
 	public static final String PLATETECHNOLOGY = "PlateTechnology";
-	/** */
 	public static final String PLATETYPE = "PlateType";
-	/** */
 	public static final String PLATEUSAGE = "PlateUsage";
 	/** */
 	public static final String POLARITY = "Polarity";
-	/** */
 	public static final String POLARITYCHANGE = "PolarityChange";
-	/** */
+	public static final String POLICY = "Policy";
 	public static final String POOL = "Pool";
 	/** */
 	public static final String POSITION = "Position";
-	/** */
 	public static final String POSITIONPOLICY = "PositionPolicy";
 	/** */
 	public static final String POSITIONX = "PositionX";
@@ -2652,6 +2642,7 @@ public final class AttributeName
 
 	/** */
 	public static final String QFACTOR = "QFactor";
+	public static final String QUALITYCBASE = "QualityBase";
 	public static final String QUALITYCONTROLMETHODS = "QualityControlMethods";
 	public static final String QUANTTABLE = "QuantTable";
 	/** */
@@ -3084,6 +3075,7 @@ public final class AttributeName
 	/** */
 	public static final String SOURCECSS = "SourceCSs";
 	/** */
+	public static final String SOURCEDEVICEID = "SourceDeviceID";
 	public static final String SOURCEFREQUENCY = "SourceFrequency";
 	/** */
 	public static final String SOURCEMEDIABOX = "SourceMediaBox";
@@ -3115,19 +3107,15 @@ public final class AttributeName
 	public static final String SPECIALINK = "SpecialInk";
 	/** */
 	public static final String SPECIFICYIELD = "SpecificYield";
+	public static final String SPECTRALRESOLUTION = "SpectralResolution";
 	public static final String SPECTRUM = "Spectrum";
 	public static final String SPEED = "Speed";
 	/** */
 	public static final String SPINE = "Spine";
-	/** */
 	public static final String SPINEBOARDWIDTH = "SpineBoardWidth";
-	/** */
 	public static final String SPINECOLOR = "SpineColor";
-	/** */
 	public static final String SPINECOLORDETAILS = "SpineColorDetails";
-	/** */
 	public static final String SPINETHICKNESS = "SpineThickness";
-	/** */
 	public static final String SPINEWIDTH = "SpineWidth";
 	/** */
 	public static final String SPLITDOCUMENTS = "SplitDocuments";

@@ -46,7 +46,10 @@ public abstract class XJDFConstants
 	public static final String AuditResource = "AuditResource";
 	public static final String AuditStatus = "AuditStatus";
 
+	public static final String BackCIETint = "BackCIETint";
+	public static final String BackCIEWhiteness = "BackCIEWhiteness";
 	public static final String BackCoating = "BackCoating";
+	public static final String BackLabColorValue = "BackLabColorValue";
 	public static final String BindIn = "BindIn";
 	public static final String BinderySignatureID = "BinderySignatureID";
 	public static final String BinderySignatureIDs = "BinderySignatureIDs";
@@ -69,7 +72,12 @@ public abstract class XJDFConstants
 	public static final String Cover = "Cover";
 
 	public static final String Dependent = "Dependent";
-	public static final String DROP_ID = "DropID";
+	public static final String DropID = "DropID";
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
+	public static final String DROP_ID = DropID;
 
 	public static final String ExternalID = "ExternalID";
 

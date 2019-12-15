@@ -325,15 +325,11 @@ public final class ElementName
 	public static final String COLORICCSTANDARD = "ColorICCStandard";
 	/** */
 	public static final String COLORINTENT = "ColorIntent";
-	/** */
+	public static final String COLORMEASUREMENT = "ColorMeasurement";
 	public static final String COLORMEASUREMENTCONDITIONS = "ColorMeasurementConditions";
-	/** */
 	public static final String COLORNAME = "ColorName";
-	/** */
 	public static final String COLORNAMEDETAILS = "ColorNameDetails";
-	/** */
 	public static final String COLORPOOL = "ColorPool";
-	/** */
 	public static final String COLORSCONSTRAINTSPOOL = "ColorsConstraintsPool";
 	/** @deprecated COLORSPACECONVERSION */
 	@Deprecated
@@ -736,14 +732,11 @@ public final class ElementName
 
 	/** */
 	public static final String GANGCMDFILTER = "GangCmdFilter";
-	/** */
 	public static final String GANGELEMENT = "GangElement";
-	/** */
 	public static final String GANGINFO = "GangInfo";
-	/** */
-	public static final String GANGSOURCE = "GangSource";
-	/** */
+	public static final String GANGPREPARATIONPARAMS = "GangPreparationParams";
 	public static final String GANGQUFILTER = "GangQuFilter";
+	public static final String GANGSOURCE = "GangSource";
 	/** */
 	public static final String GATHERING = "Gathering";
 	/** */
@@ -1085,6 +1078,7 @@ public final class ElementName
 	public static final String NAMESTATE = "NameState";
 	/** */
 	public static final String NEWCOMMENT = "NewComment";
+	public static final String NETWORKHEADER = "NetworkHeader";
 	/** */
 	public static final String NEWJDFCMDPARAMS = "NewJDFCmdParams";
 	/** */
@@ -1413,11 +1407,10 @@ public final class ElementName
 	public static final String REFERENCEXOBJPARAMS = "ReferenceXObjParams";
 	/** */
 	public static final String REGISTERMARK = "RegisterMark";
-	/** */
 	public static final String REGISTERRIBBON = "RegisterRibbon";
 	/** */
 	public static final String REGISTRATION = "Registration";
-	/** */
+	public static final String REGISTRATIONQUALITY = "RegistrationQuality";
 	public static final String REJECTED = "Rejected";
 	/** */
 	public static final String REMOVED = "Removed";

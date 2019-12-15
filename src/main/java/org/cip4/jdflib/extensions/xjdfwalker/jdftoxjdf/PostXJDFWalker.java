@@ -1092,14 +1092,14 @@ class PostXJDFWalker extends BaseElementWalker
 					final ResourceHelper ph = new ResourceHelper(param);
 					final SetHelper sh = new SetHelper(set);
 					final JDFAttributeMap partMap = ph.getPartMap();
-					partMap.put(XJDFConstants.DROP_ID, "DROP_0");
+					partMap.put(XJDFConstants.DropID, "DROP_0");
 					ph.setPartMap(partMap);
 
 					delParams.removeChildren(ElementName.DROP, null, null);
 					for (int j = 0; j < size; j++)
 					{
 						final int i = (j + 1) % size;
-						partMap.put(XJDFConstants.DROP_ID, "DROP_" + i);
+						partMap.put(XJDFConstants.DropID, "DROP_" + i);
 						KElement newDrop;
 						ResourceHelper newParam;
 						if (i != 0)

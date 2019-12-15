@@ -452,7 +452,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		final ResourceHelper rhLO = shLO.appendPartition(AttributeName.SHEETNAME, "Sheet1", true);
 		final JDFLayout lo = (JDFLayout) rhLO.getResource();
 		final JDFPosition pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
-		pos.setAttribute(XJDFConstants.BinderySignatureID, "BS1");
+		pos.setAttribute(XJDFConstants.BinderySignatureID, "BS1 BS2");
 		cleanSnippets(xjdfHelper);
 		//writeTest(xjdfHelper, "processes/MultiPageFold.xjdf");
 	}
