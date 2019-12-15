@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -39,7 +39,6 @@ package org.cip4.jdflib.pool;
 
 import java.util.List;
 import java.util.Set;
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoAmountPool;
@@ -56,8 +55,8 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.IAmountPoolContainer;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.StringUtil;
-import org.cip4.jdflib.util.VectorMap;
 
 /**
  * This class represents a JDF-AuditPool
@@ -68,7 +67,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	 * map of an amountpool that allows quick access to multiple amounts Class AmountMap
 	 *
 	 */
-	public class AmountMap extends VectorMap<JDFAttributeMap, JDFPartAmount>
+	public class AmountMap extends ListMap<JDFAttributeMap, JDFPartAmount>
 	{
 
 		private final VString m_vsUsedPartIDKeys = new VString();
@@ -119,7 +118,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 			double dValue = -1.0;
 			final JDFAttributeMap amUsedParts = new JDFAttributeMap(amParts);
 			amUsedParts.reduceMap(m_vsUsedPartIDKeys);
-			final Vector<JDFPartAmount> lpa = get(amUsedParts);
+			final List<JDFPartAmount> lpa = get(amUsedParts);
 
 			if (lpa != null)
 			{

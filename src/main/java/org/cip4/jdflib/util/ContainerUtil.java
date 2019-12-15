@@ -588,7 +588,9 @@ public class ContainerUtil
 	 * @param <B> data type of the map value
 	 * @param m the map to invert
 	 * @return the inverted map
+	 * @deprecated
 	 */
+	@Deprecated
 	public static <A, B> VectorMap<B, A> getInvertedMap(final Map<A, B> m)
 	{
 		if (m == null)
@@ -617,12 +619,50 @@ public class ContainerUtil
 	}
 
 	/**
+	 * create an inverted map with keys and values swapped.<br/>
+	 * The new values are vectors since a map may have identical values for different keys
+	 *
+	 * @param <A> data type of the map key
+	 * @param <B> data type of the map value
+	 * @param m the map to invert
+	 * @return the inverted map
+	 */
+	public static <A, B> ListMap<B, A> getInvertedListMap(final Map<A, B> m)
+	{
+		if (m == null)
+		{
+			return null;
+		}
+
+		synchronized (m)
+		{
+			final ListMap<B, A> inv = new ListMap<>();
+			final Collection<A> keys = m.keySet();
+			if (keys.size() == 0)
+			{
+				return null;
+			}
+			for (final A key : keys)
+			{
+				final B val = m.get(key);
+				if (val != null)
+				{
+					inv.putOne(val, key);
+				}
+			}
+			return inv;
+		}
+	}
+
+	/**
 	 * create a Vector of key values from a map
 	 *
 	 * @param <A> data type of the map key
 	 * @param m the map to dump to an array
 	 * @return the vector of keys - note that this Vector goes NOT reflect changes to the map
+	 * @deprecated
 	 */
+	@Deprecated
 	public static <A> Vector<A> getKeyVector(final Map<A, ?> m)
 	{
 		if (m == null)

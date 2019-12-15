@@ -41,13 +41,13 @@ import java.io.File;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.security.CodeSource;
-import java.util.Vector;
+import java.util.List;
 import java.util.zip.ZipEntry;
 
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
-import org.cip4.jdflib.util.VectorMap;
 import org.cip4.jdflib.util.zip.ZipReader;
 
 /**
@@ -65,7 +65,7 @@ public class PackageElementWalker extends ElementWalker
 	 */
 	private static final String WALK_CLASS = "Walk*.class";
 
-	static VectorMap<Class<?>, String> classes = null;
+	static ListMap<Class<?>, String> classes = null;
 
 	/**
 	 * @param _theFactory
@@ -73,9 +73,8 @@ public class PackageElementWalker extends ElementWalker
 	public PackageElementWalker(final BaseWalkerFactory _theFactory)
 	{
 		super(_theFactory);
-		final Class<? extends PackageElementWalker> myClass = getClass();
 		if (classes == null)
-			classes = new VectorMap<>();
+			classes = new ListMap<>();
 		constructWalkers();
 	}
 
@@ -116,7 +115,7 @@ public class PackageElementWalker extends ElementWalker
 	 * @param classVector
 	 *
 	 */
-	private void constructWorkersVClass(final Vector<String> classVector)
+	private void constructWorkersVClass(final List<String> classVector)
 	{
 		for (final String classConst : classVector)
 		{

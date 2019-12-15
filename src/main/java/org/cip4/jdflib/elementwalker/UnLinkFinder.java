@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -67,12 +67,13 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.elementwalker;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -85,11 +86,11 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.VectorMap;
+import org.cip4.jdflib.util.ListMap;
 
 /**
  * @author Dr. Rainer Prosi
- * 
+ *
  *  finds unlinked resources - example usage of the walker classes
  */
 public class UnLinkFinder extends BaseElementWalker
@@ -97,7 +98,7 @@ public class UnLinkFinder extends BaseElementWalker
 	protected LinkData linkData;
 
 	/**
-	 * 
+	 *
 	 */
 	public UnLinkFinder()
 	{
@@ -112,14 +113,14 @@ public class UnLinkFinder extends BaseElementWalker
 	/**
 	 * @param ignoreForeign the ignoreForeign to set
 	 */
-	public void setIgnoreForeign(boolean ignoreForeign)
+	public void setIgnoreForeign(final boolean ignoreForeign)
 	{
 		this.ignoreForeign = ignoreForeign;
 	}
 
 	/**
 	 * get a vector of all unlinked resources of n and its children
-	 * 
+	 *
 	 * @param n the node to walk
 	 * @return the vector of unlinked resources
 	 */
@@ -133,7 +134,7 @@ public class UnLinkFinder extends BaseElementWalker
 
 	/**
 	 * get a vector of all unlinked resources of n and its children
-	 * 
+	 *
 	 * @param n the node to walk
 	 * @return the vector of unlinked resources
 	 */
@@ -141,13 +142,17 @@ public class UnLinkFinder extends BaseElementWalker
 	{
 		linkData.clear();
 		walkTree(n, null);
-		final Vector<KElement> toValueVector = linkData.refMap.getAllValues();
-		return toValueVector == null ? null : new VElement(toValueVector);
+		final List<KElement> toValueVector = linkData.refMap.getAllValues();
+		if (toValueVector == null)
+			return null;
+		final VElement ret = new VElement();
+		ret.addAll(toValueVector);
+		return ret;
 	}
 
 	/**
 	 * get a vector of all unlinked resources of n and its children
-	 * 
+	 *
 	 * @param n the node to walk
 	 * @return the vector of unlinked resources
 	 */
@@ -155,15 +160,19 @@ public class UnLinkFinder extends BaseElementWalker
 	{
 		linkData.clear();
 		walkTree(n, null);
-		Vector<KElement> toValueVector = ContainerUtil.toValueVector(linkData.resMap, false);
-		final Vector<KElement> toValueVectorRef = linkData.refMap.getAllValues();
+		List<KElement> toValueVector = ContainerUtil.toArrayList(linkData.resMap, false);
+		final List<KElement> toValueVectorRef = linkData.refMap.getAllValues();
 		toValueVector = (Vector<KElement>) ContainerUtil.addAll(toValueVector, toValueVectorRef);
-		return toValueVector == null ? null : new VElement(toValueVector);
+		if (toValueVector == null)
+			return null;
+		final VElement ret = new VElement();
+		ret.addAll(toValueVector);
+		return ret;
 	}
 
 	/**
 	 * erase all unlinked resources that are in n
-	 * 
+	 *
 	 * @param n the node to clean
 	 */
 	public void eraseUnlinkedResources(final JDFNode n)
@@ -173,7 +182,7 @@ public class UnLinkFinder extends BaseElementWalker
 
 	/**
 	 * erase all unlinked resources that are in n
-	 * 
+	 *
 	 * @param n the node to clean
 	 */
 	public void eraseUnlinkedRefs(final JDFNode n)
@@ -183,7 +192,7 @@ public class UnLinkFinder extends BaseElementWalker
 
 	/**
 	 * erase all unlinked resources that are in n
-	 * 
+	 *
 	 * @param n the node to clean
 	 */
 	public void eraseUnlinked(final JDFNode n)
@@ -193,10 +202,10 @@ public class UnLinkFinder extends BaseElementWalker
 
 	/**
 	 * erase all unlinked resources that are in n
-	 * 
+	 *
 	 * @param n the node to clean
-	 * @param ref 
-	 * @param res 
+	 * @param ref
+	 * @param res
 	 */
 	private void eraseUnlinked(final JDFNode n, final boolean ref, final boolean res)
 	{
@@ -230,9 +239,9 @@ public class UnLinkFinder extends BaseElementWalker
 
 	/**
 	 * collection of maps
-	 * 
+	 *
 	 * @author prosirai
-	 * 
+	 *
 	 */
 	protected class LinkData
 	{
@@ -240,12 +249,12 @@ public class UnLinkFinder extends BaseElementWalker
 		{
 			super();
 			resMap = new HashMap<String, KElement>();
-			refMap = new VectorMap<String, KElement>();
+			refMap = new ListMap<String, KElement>();
 			doneSet = new HashSet<String>();
 		}
 
 		HashMap<String, KElement> resMap;
-		VectorMap<String, KElement> refMap;
+		ListMap<String, KElement> refMap;
 		HashSet<String> doneSet;
 
 		protected void clear()
@@ -258,9 +267,9 @@ public class UnLinkFinder extends BaseElementWalker
 
 	/**
 	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
-	 * 
+	 *
 	 * @author prosirai
-	 * 
+	 *
 	 */
 	public class WalkRes extends BaseWalker
 	{
@@ -314,9 +323,9 @@ public class UnLinkFinder extends BaseElementWalker
 
 	/**
 	 * the link and ref walker
-	 * 
+	 *
 	 * @author prosirai
-	 * 
+	 *
 	 */
 	public class WalkRef extends BaseWalker
 	{

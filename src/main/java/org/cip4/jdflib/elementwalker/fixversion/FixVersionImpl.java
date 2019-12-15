@@ -47,8 +47,8 @@ import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
 import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.StringUtil;
-import org.cip4.jdflib.util.VectorMap;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG<br/>
@@ -65,7 +65,7 @@ public class FixVersionImpl extends PackageElementWalker
 	protected boolean bZappInvalid;
 	protected boolean bZappDeprecated;
 	protected boolean bFixNewDuplicate;
-	final VectorMap<String, String> ignoreMap;
+	final ListMap<String, String> ignoreMap;
 
 	/**
 	 * @return the bFixNewDuplicate
@@ -168,7 +168,7 @@ public class FixVersionImpl extends PackageElementWalker
 		bFixNewDuplicate = false;
 		firsthour = 6;
 		lasthour = 18;
-		ignoreMap = new VectorMap<>();
+		ignoreMap = new ListMap<>();
 		ignoreMap.setUnique(true);
 	}
 
@@ -302,8 +302,8 @@ public class FixVersionImpl extends PackageElementWalker
 	@Override
 	public String toString()
 	{
-		return "FixVersion [bFixIDs=" + bFixIDs + ", bZappInvalid=" + bZappInvalid + ", bZappDeprecated=" + bZappDeprecated + ", bFixNewDuplicate=" + bFixNewDuplicate + ", firsthour=" + firsthour
-				+ ", lasthour=" + lasthour + ", " + (version != null ? "version=" + version + ", " : "") + "fixICSVersions=" + fixICSVersions + ", bLayoutPrepToStripping=" + bLayoutPrepToStripping
-				+ "]";
+		return "FixVersion [bFixIDs=" + bFixIDs + ", bZappInvalid=" + bZappInvalid + ", bZappDeprecated=" + bZappDeprecated + ", bFixNewDuplicate=" + bFixNewDuplicate
+				+ ", firsthour=" + firsthour + ", lasthour=" + lasthour + ", " + (version != null ? "version=" + version + ", " : "") + "fixICSVersions=" + fixICSVersions
+				+ ", bLayoutPrepToStripping=" + bLayoutPrepToStripping + "]";
 	}
 }

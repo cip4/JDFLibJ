@@ -79,9 +79,13 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 /**
@@ -89,24 +93,105 @@ import java.util.Vector;
  *
  * @author Rainer Prosi
  * @param <key> the type used for the key
- * @param <vectorObject> the type used for individual elements of each vector in the map
- * @deprecated use ListMap
+ * @param <listObject> the type used for individual elements of each vector in the map
+ *
  */
-@Deprecated
-public class VectorMap<key, vectorObject> extends ListMap<key, vectorObject>
+public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 {
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = -2180413692846276265L;
+	private static final long serialVersionUID = -23;
+	boolean bUnique;
+
+	/**
+	 * fill this with the values in map by switching key and value
+	 * @param map
+	 */
+	public void fillInvertedMap(final Map<listObject, key> map)
+	{
+		final boolean keepUnique = bUnique; // performance - we cannot be not unique so need not check
+		setUnique(false);
+		if (map != null)
+		{
+			for (final listObject k : map.keySet())
+			{
+				final key k2 = map.get(k);
+				if (k2 != null)
+				{
+					putOne(k2, k);
+				}
+			}
+		}
+		setUnique(keepUnique);
+	}
 
 	/**
 	 * null constructor
 	 */
-	public VectorMap()
+	public ListMap()
 	{
 		super();
 		setUnique(true);
+	}
+
+	/**
+	 * get the value for key
+	 * @param key the search key
+	 * @param i the index in the vecor matching key; if <0 count from the back of the vector
+	 * @return the matching vectorObject; null if the key does not exist or i is out of range
+	 */
+	public listObject getOne(final Object key, int i)
+	{
+		final List<listObject> c = get(key);
+		if (c == null)
+		{
+			return null;
+		}
+
+		final int n = c.size();
+		if (i < 0)
+		{
+			i += n;
+		}
+
+		if (i < 0 || i >= n)
+		{
+			return null;
+		}
+
+		return c.get(i);
+	}
+
+	/**
+	 * get the index of singleObject in the vector of key
+	 * @param key the key of the vector
+	 * @param singleObject the object to search
+	 * @return -2: no such key; -1: no value in key; else the index in the vexctor of key
+	 */
+	public int getIndex(final key key, final listObject singleObject)
+	{
+		final List<listObject> keyVector = get(key);
+		if (keyVector == null)
+		{
+			return -2;
+		}
+		return keyVector.indexOf(singleObject);
+	}
+
+	/**
+	 * get the size of the vector for key
+	 * @param key the key of the vector
+	 * @return the size of the vector for key, 0 if no key exists
+	 */
+	public int size(final key key)
+	{
+		final List<listObject> c = get(key);
+		if (c == null)
+		{
+			return 0;
+		}
+		return c.size();
 	}
 
 	/**
@@ -114,13 +199,12 @@ public class VectorMap<key, vectorObject> extends ListMap<key, vectorObject>
 	 * @param key the key of the vector
 	 * @param val the vector element
 	 */
-	@Override
-	public void putOne(final key key, final vectorObject val)
+	public void putOne(final key key, final listObject val)
 	{
-		List<vectorObject> v = get(key);
+		List<listObject> v = get(key);
 		if (v == null)
 		{
-			v = new Vector<vectorObject>();
+			v = new Vector<listObject>();
 			put(key, v);
 		}
 		if (!bUnique || !v.contains(val))
@@ -135,9 +219,17 @@ public class VectorMap<key, vectorObject> extends ListMap<key, vectorObject>
 	 * @param key the key of the vector
 	 * @param vVal the vector of elements
 	 */
-	public synchronized void appendUnique(final key key, final Vector<vectorObject> vVal)
+	public synchronized void appendUnique(final key key, final List<listObject> vVal)
 	{
-		super.appendUnique(key, vVal);
+		if (vVal == null)
+			return;
+		final boolean keepUnique = bUnique;
+		bUnique = true;
+		for (final listObject val : vVal)
+		{
+			putOne(key, val);
+		}
+		bUnique = keepUnique;
 	}
 
 	/**
@@ -146,26 +238,101 @@ public class VectorMap<key, vectorObject> extends ListMap<key, vectorObject>
 	 * @param map the map to add
 	 *
 	 */
-	public void appendUnique(final VectorMap<key, vectorObject> map)
+	public void appendUnique(final ListMap<key, listObject> map)
 	{
-		super.appendUnique(map);
+		if (map == null)
+			return;
+		final Iterator<key> it = map.keySet().iterator();
+		while (it.hasNext())
+		{
+			final key next = it.next();
+			appendUnique(next, map.get(next));
+		}
 	}
 
 	/**
 	 * get all values as one big vector, multiple entries are retained (see {@link ContainerUtil}.unify())
 	 * @return a vector of all values, null if empty
 	 */
-	@Override
-	public Vector<vectorObject> getAllValues()
+	public List<listObject> getAllValues()
 	{
-		Vector<vectorObject> v = new Vector<vectorObject>();
-		final Collection<List<vectorObject>> c = values();
-		final Iterator<List<vectorObject>> it = c.iterator();
+		List<listObject> v = new ArrayList<listObject>();
+		final Collection<List<listObject>> c = values();
+		final Iterator<List<listObject>> it = c.iterator();
 		while (it.hasNext())
 		{
-			v = (Vector<vectorObject>) ContainerUtil.addAll(v, it.next());
+			v = (List<listObject>) ContainerUtil.addAll(v, it.next());
 		}
 		return v.size() == 0 ? null : v;
+	}
+
+	/**
+	 * get an inverted map that uses all entries a s keys and vice versa<br/>
+	 * note that the behavior is undefined in case of multiple identical values
+	 * @return an inverted map
+	 */
+	public Map<listObject, key> getInvertedMap()
+	{
+		final HashMap<listObject, key> inverted = new HashMap<listObject, key>();
+		final Set<key> keys = keySet();
+		for (final key k : keys)
+		{
+			final List<listObject> v = get(k);
+			if (v != null)
+			{
+				for (final listObject vo : v)
+					inverted.put(vo, k);
+			}
+		}
+		return inverted;
+	}
+
+	/**
+	 * remove the value for key,also remove key if the vector is empty
+	 *
+	 * @param key the key of the vector
+	 * @param val the vector element
+	 */
+	public void removeOne(final key key, final listObject val)
+	{
+		final List<listObject> v = get(key);
+		if (v != null)
+		{
+			v.remove(val);
+			if (v.size() == 0)
+			{
+				remove(key);
+			}
+		}
+	}
+
+	/**
+	 * replace the value for key, add if oldObj==null or is not there
+	 *
+	 * @param key the key of the vector
+	 * @param newObj the new object to set
+	 * @param oldObj the old object to replace
+	 */
+	public void setOne(final key key, final listObject newObj, final listObject oldObj)
+	{
+
+		final List<listObject> v = get(key);
+		if (v != null)
+		{
+			final int i = v.indexOf(oldObj);
+			if (i < 0)
+			{
+				putOne(key, newObj);
+			}
+			else
+			{
+				v.set(i, newObj);
+			}
+		}
+		else
+		{
+			putOne(key, newObj);
+		}
 	}
 
 	/**
@@ -176,13 +343,12 @@ public class VectorMap<key, vectorObject> extends ListMap<key, vectorObject>
 	 * @param pos the index in the vector, may be <0 to count from the end
 	 * @throws IllegalArgumentException if pos is negative and abs(pos)>size()
 	 */
-	@Override
-	public void setOne(final key key, final vectorObject newObj, int pos)
+	public void setOne(final key key, final listObject newObj, int pos)
 	{
-		List<vectorObject> v = get(key);
+		List<listObject> v = get(key);
 		if (v == null)
 		{
-			v = new Vector<vectorObject>();
+			v = new Vector<listObject>();
 			put(key, v);
 		}
 		if (pos < 0)
@@ -197,12 +363,20 @@ public class VectorMap<key, vectorObject> extends ListMap<key, vectorObject>
 	}
 
 	/**
-	 * @see java.util.HashMap#get(java.lang.Object)
+	 * Getter for bUnique attribute.
+	 * @return the bUnique
 	 */
-	@Override
-	public Vector<vectorObject> get(final Object key)
+	public boolean isUnique()
 	{
-		return (Vector<vectorObject>) super.get(key);
+		return bUnique;
 	}
 
+	/**
+	 * Setter for bUnique attribute.
+	 * @param bUnique the bUnique to set
+	 */
+	public void setUnique(final boolean bUnique)
+	{
+		this.bUnique = bUnique;
+	}
 }

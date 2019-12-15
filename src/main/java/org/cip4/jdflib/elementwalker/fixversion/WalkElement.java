@@ -36,7 +36,7 @@
  */
 package org.cip4.jdflib.elementwalker.fixversion;
 
-import java.util.Vector;
+import java.util.List;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.StringUtils;
@@ -117,12 +117,12 @@ public class WalkElement extends BaseWalker
 			el.removeAttributes(null);
 			el.setAttributes(m);
 		}
-		final Vector<String> keys = ContainerUtil.getKeyVector(m);
+		final List<String> keys = ContainerUtil.getKeyList(m);
 		final AttributeInfo ai = el.getAttributeInfo();
 		if (keys != null)
 		{
 			final String localName = el.getLocalName();
-			final Vector<String> ignore = fixVersion.ignoreMap.get(localName);
+			final List<String> ignore = fixVersion.ignoreMap.get(localName);
 			for (final String key : keys)
 			{
 				final String value = m.get(key);
