@@ -48,10 +48,12 @@
 package org.cip4.jdflib.core;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -125,6 +127,22 @@ public class VString extends Vector<String>
 	public static VString getVString(final String strIn, final String strSep)
 	{
 		return StringUtil.getNonEmpty(strIn) == null ? null : new VString(strIn, strSep);
+	}
+
+	/**
+	 * simple static factory - null if strIn is null or empty
+	 *
+	 * @param strIn
+	 * @param strSep
+	 * @return
+	 */
+	public static VString getVString(final Collection<String> c)
+	{
+		if (ContainerUtil.isEmpty(c))
+			return null;
+		final VString v = new VString();
+		v.addAll(c);
+		return v;
 	}
 
 	/**
@@ -219,13 +237,10 @@ public class VString extends Vector<String>
 	 * @return the string at index
 	 */
 	@Override
-	public synchronized String get(int index)
+	public synchronized String get(final int index)
 	{
-		if (index < 0)
-		{
-			index += size();
-		}
-		return index >= 0 && index < size() ? super.get(index) : null;
+		final int i = ContainerUtil.index(this, index);
+		return i >= 0 ? super.get(i) : null;
 	}
 
 	/**
@@ -552,10 +567,7 @@ public class VString extends Vector<String>
 	public void addAll(final String[] strings)
 	{
 		ensureCapacity(size() + strings.length);
-		for (final String string : strings)
-		{
-			add(string);
-		}
+		ContainerUtil.addAll(this, strings);
 	}
 
 	/**
@@ -566,18 +578,7 @@ public class VString extends Vector<String>
 	 */
 	public boolean containsAny(final VString others)
 	{
-		if (others == null)
-		{
-			return false;
-		}
-		for (final String other : others)
-		{
-			if (contains(other))
-			{
-				return true;
-			}
-		}
-		return false;
+		return ContainerUtil.containsAny(this, others);
 	}
 
 	/**
@@ -588,19 +589,9 @@ public class VString extends Vector<String>
 	 */
 	public VString getOverlapping(final VString others)
 	{
-		if (others == null)
-		{
-			return null;
-		}
-		final VString ret = new VString();
-		for (final String s : this)
-		{
-			if (others.contains(s))
-			{
-				ret.add(s);
-			}
-		}
-		return ret.isEmpty() ? null : ret;
+		final List<String> l = ContainerUtil.getOverlapping(this, others);
+
+		return ContainerUtil.isEmpty(l) ? null : getVString(l);
 	}
 
 	/**
@@ -622,13 +613,10 @@ public class VString extends Vector<String>
 	 * @see java.util.Vector#remove(int)
 	 */
 	@Override
-	public synchronized String remove(int index)
+	public synchronized String remove(final int index)
 	{
-		if (index < 0)
-		{
-			index += size();
-		}
-		return super.remove(index);
+		final int i = ContainerUtil.index(this, index);
+		return i >= 0 ? super.remove(i) : null;
 	}
 
 	/**

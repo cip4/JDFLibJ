@@ -286,7 +286,8 @@ public class ContainerUtil
 		{
 			for (final A aa : a)
 			{
-				c.add(aa);
+				if (aa != null)
+					c.add(aa);
 			}
 		}
 	}
