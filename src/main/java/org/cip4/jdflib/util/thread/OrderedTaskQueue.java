@@ -120,7 +120,6 @@ public class OrderedTaskQueue extends Thread
 				done++;
 				myThread = null;
 				idle.set(0);
-				;
 			}
 		}
 
