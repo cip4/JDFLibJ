@@ -3486,7 +3486,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 		final VElement v = new VElement();
 		final List<KElement> l = bDirect ? getTree(ElementName.JDF, null, null, bDirect, true) : getTree(ElementName.JDF);
-
+		if (l.size() > 1)
+		{
+			final KElement e0 = l.remove(0);
+			l.add(e0);
+		}
 		final boolean wantTask = !KElement.isWildCard(task);
 		for (final KElement e : l)
 		{
