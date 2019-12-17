@@ -448,8 +448,7 @@ public class KElementTest extends JDFTestCaseBase
 	@Test
 	public void testGetElementById()
 	{
-		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">" + "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>" + "</ELEM3>"
-				+ "</ELEM2>" + "</JDF>";
+		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">" + "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>" + "</ELEM3>" + "</ELEM2>" + "</JDF>";
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -1616,9 +1615,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue(kElement3.getNamespaceURI().equals(cip4NameSpaceURI));
 		assertTrue(kElement3.getPrefix().equals(cip4Prefix1));
 
-		final String jdfDocString = "<JDF ID=\"n051221_021145422_000005\" Version=\"1.3\" " + "xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" "
-				+ "xmlns:JDF=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:JDFS=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:jdf=\"http://www.CIP4.org/JDFSchema_1_1\">"
-				+ "<kElement0/>" + "<JDF:kElement1/>" + "<JDFS:kElement2/>" + "<jdf:kElement3/>" + "</JDF>";
+		final String jdfDocString = "<JDF ID=\"n051221_021145422_000005\" Version=\"1.3\" " + "xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:JDF=\"http://www.CIP4.org/JDFSchema_1_1\" "
+				+ "xmlns:JDFS=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:jdf=\"http://www.CIP4.org/JDFSchema_1_1\">" + "<kElement0/>" + "<JDF:kElement1/>" + "<JDFS:kElement2/>"
+				+ "<jdf:kElement3/>" + "</JDF>";
 
 		final JDFParser p = new JDFParser();
 		final JDFDoc jdfDoc = p.parseString(jdfDocString);
@@ -2238,6 +2237,7 @@ public class KElementTest extends JDFTestCaseBase
 		aa.setAttribute("b", "c");
 		ab.setAttribute("b", "c");
 		final List<KElement> tree = e.getTree("a");
+		assertTrue(tree.contains(e));
 		assertTrue(tree.contains(aa));
 		assertTrue(tree.contains(a1));
 		assertFalse(tree.contains(ab));
@@ -3335,7 +3335,7 @@ public class KElementTest extends JDFTestCaseBase
 	public void testPushUp()
 	{
 		{// defines a logical test block
-				// pushup from 4 to 1
+			// pushup from 4 to 1
 			final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 			final JDFNode root = (JDFNode) jdfDoc.getRoot();
 			KElement e = root;
@@ -3350,7 +3350,7 @@ public class KElementTest extends JDFTestCaseBase
 		}
 
 		{// defines a logical test block
-				// pushup with emptystring
+			// pushup with emptystring
 			final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 			final JDFNode root = (JDFNode) jdfDoc.getRoot();
 			KElement e = root;
@@ -3365,7 +3365,7 @@ public class KElementTest extends JDFTestCaseBase
 		}
 
 		{// defines a logical test block
-				// pushup and force parentNode == null
+			// pushup and force parentNode == null
 			final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 			final JDFNode root = (JDFNode) jdfDoc.getRoot();
 			KElement e = root;

@@ -699,8 +699,7 @@ public class KElement extends ElementNSImpl implements Element
 					namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), false);
 					if (!ContainerUtil.equals(namespaceURI2, nameSpaceURI))
 					{
-						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
-								+ "; attempting to set URI: " + nameSpaceURI;
+						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2 + "; attempting to set URI: " + nameSpaceURI;
 						kLog.error(message);
 						throw new JDFException(message);
 					}
@@ -813,13 +812,13 @@ public class KElement extends ElementNSImpl implements Element
 							// already there
 							if (key.equals(nodeName))
 							{ // overwrite default namespace with qualified
-									// namespace or vice versa
+								// namespace or vice versa
 								removeAttribute(nodeName);
 								super.setAttribute(key, value);
 							}
 							else
 							{ // same qualified name, simply overwrite the
-									// value
+								// value
 								a.setNodeValue(value);
 							}
 						}
@@ -828,8 +827,8 @@ public class KElement extends ElementNSImpl implements Element
 							final String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 							if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
 							{
-								throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2
-										+ "; attempting to set URI: " + nameSpaceURI);
+								throw new JDFException(
+										"KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2 + "; attempting to set URI: " + nameSpaceURI);
 							}
 							try
 							{
@@ -4958,19 +4957,26 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param nodeName elementname you are searching for
 	 * @return VElement vector with all found elements
 	 */
+
 	public List<KElement> getTree(final String nodeName)
+	{
+		return getTree(nodeName, true);
+	}
+
+	List<KElement> getTree(final String nodeName, final boolean addself)
 	{
 		final ArrayList<KElement> v = new ArrayList<>();
 		KElement e = getFirstChildElement();
 		final boolean bAlwaysFit = KElement.isWildCard(nodeName);
-
+		if (addself && (bAlwaysFit || getLocalName().equals(nodeName)))
+			v.add(this);
 		while (e != null)
 		{
 			if (bAlwaysFit || e.fitsName_KElement(nodeName, null))
 			{
 				// this guy is the one
 				v.add(e);
-				final List<KElement> vv = e.getTree(nodeName);
+				final List<KElement> vv = e.getTree(nodeName, false);
 				v.addAll(vv);
 			}
 			e = e.getNextSiblingElement();
