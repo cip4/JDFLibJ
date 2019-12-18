@@ -73,7 +73,7 @@ public class XMLErrorHandler implements ErrorHandler
 	/**
 	 * @return the wantLog
 	 */
-	protected static boolean isWantLog()
+	public static boolean isWantLog()
 	{
 		return wantLog;
 	}
@@ -81,7 +81,7 @@ public class XMLErrorHandler implements ErrorHandler
 	/**
 	 * @param wantLog the wantLog to set
 	 */
-	protected static void setWantLog(final boolean wantLog)
+	public static void setWantLog(final boolean wantLog)
 	{
 		XMLErrorHandler.wantLog = wantLog;
 	}
@@ -211,9 +211,6 @@ public class XMLErrorHandler implements ErrorHandler
 				root.setAttribute(VALIDATION_RESULT, VALID);
 		}
 	}
-
-	// //////////////////////////////////////////////////////////////////////////
-	// //////////
 
 	/**
 	 * @see java.lang.Object#toString()
