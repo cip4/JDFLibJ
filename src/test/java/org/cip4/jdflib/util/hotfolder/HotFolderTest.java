@@ -48,6 +48,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
@@ -91,15 +92,15 @@ public class HotFolderTest extends JDFTestCaseBase
 
 	}
 
-	static int n = 1000;
+	static AtomicInteger n = new AtomicInteger(1000);
 
 	@Before
 	@Override
 	public synchronized void setUp() throws Exception
 	{
-		n++;
+		n.incrementAndGet();
 		super.setUp();
-		theHF = new File(sm_dirTestDataTemp + File.separator + "HFTest" + n);
+		theHF = new File(sm_dirTestDataTemp + File.separator + "HFTest" + n.get());
 		theHF.mkdirs();
 		HotFolder.setDefaultStabilizeTime(420);
 	}

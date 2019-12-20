@@ -63,6 +63,7 @@ import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.file.FileSorter;
 import org.cip4.jdflib.util.thread.MultiTaskQueue;
+import org.cip4.jdflib.util.thread.MyMutex;
 
 /**
  * a very simple hotfolder watcher subdirectories are ignored
@@ -80,21 +81,26 @@ public class HotFolder
 	 * the time in milliseconds to wait for stabilization
 	 */
 	public int stabilizeTime = defaultStabilizeTime; // time between reads in milliseconds - also minimum length of non-modification
+	private int maxConcurrent;
 
 	/**
 	 * @param maxConcurrent the maxConcurrent to set
 	 */
 	public void setMaxConcurrent(int maxConcurrent)
 	{
-		if (maxConcurrent < theRunner.maxConcurrent)
+		if (runThread != null)
 		{
-			maxConcurrent = theRunner.maxConcurrent;
+			if (maxConcurrent < runThread.maxConcurrent)
+			{
+				maxConcurrent = runThread.maxConcurrent;
+			}
+			if (maxConcurrent > 42)
+			{
+				maxConcurrent = 42;
+			}
+			runThread.maxConcurrent = maxConcurrent;
 		}
-		if (maxConcurrent > 42)
-		{
-			maxConcurrent = 42;
-		}
-		theRunner.maxConcurrent = maxConcurrent;
+		this.maxConcurrent = maxConcurrent;
 	}
 
 	/**
@@ -103,7 +109,7 @@ public class HotFolder
 	 */
 	public int getMaxConcurrent()
 	{
-		return theRunner.maxConcurrent;
+		return runThread == null ? 0 : runThread.maxConcurrent;
 	}
 
 	private final File dir;
@@ -131,7 +137,7 @@ public class HotFolder
 				{
 					boolean found = false;
 					final FileTime lftAt = lastFileTime.get(i);
-					for (int j = 0; !theRunner.interrupt && j < fileListLength; j++)
+					for (int j = 0; runThread != null && j < fileListLength; j++)
 					// loop over all matching files in the directory
 					{
 						final File fileJ = files[j];
@@ -273,6 +279,7 @@ public class HotFolder
 			addListener(_hfl, ext);
 			restart();
 		}
+		maxConcurrent = 1;
 	}
 
 	/**
@@ -288,13 +295,14 @@ public class HotFolder
 		{
 			log.error("Cannot use read only hot folder at");
 		}
-		runThread = theRunner;
-		theRunner.add(this);
+		runThread = getTherunner();
+		runThread.add(this);
+		setMaxConcurrent(maxConcurrent);
 		lastModified = -1;
 		hfRunning.clear();
 	}
 
-	static HotFolderRunner theRunner = new HotFolderRunner();
+	static HotFolderRunner theRunner = null;
 
 	/**
 	 * stop this thread;
@@ -317,6 +325,7 @@ public class HotFolder
 	static class HotFolderRunner extends Thread
 	{
 		List<HotFolder> hotfolders;
+		MyMutex mutex;
 
 		/**
 		 * stop this thread;
@@ -325,14 +334,13 @@ public class HotFolder
 		void quit()
 		{
 			final String name = getName();
-			log.info("Stopping hot folder: " + name);
+			log.info("Stopping hot folder runner: " + name);
 			interrupt = true;
-			if (maxConcurrent > 1)
-			{
-				MultiTaskQueue.shutDown(name);
-			}
+			ThreadUtil.notifyAll(mutex);
+			MultiTaskQueue.shutDown(name);
 			ThreadUtil.notifyAll(this);
 			log.info("Finished stopping hot folder: " + name);
+			theRunner = null;
 		}
 
 		public void add(final HotFolder hotFolder)
@@ -340,13 +348,17 @@ public class HotFolder
 			hotfolders.remove(hotFolder);
 			hotfolders.add(hotFolder);
 			if (maxConcurrent < hotfolders.size() && maxConcurrent < 13)
-				maxConcurrent = 13;
-
+				maxConcurrent = Math.min(13, hotfolders.size());
+			ThreadUtil.notifyAll(mutex);
 		}
 
 		public void remove(final HotFolder hotFolder)
 		{
 			hotfolders.remove(hotFolder);
+			if (hotfolders.isEmpty())
+			{
+				quit();
+			}
 
 		}
 
@@ -358,10 +370,11 @@ public class HotFolder
 			log.info("Starting hotfolder runner");
 			interrupt = false;
 			start();
+			mutex = new MyMutex();
 		}
 
 		boolean interrupt;
-		int maxConcurrent;
+		private int maxConcurrent = 1;
 
 		/**
 		 * @see java.lang.Thread#run()
@@ -382,7 +395,7 @@ public class HotFolder
 					final long t1 = System.currentTimeMillis();
 					if (t1 - t0 < getDefaultStabilizeTime())
 					{
-						ThreadUtil.sleep(getDefaultStabilizeTime() - (int) (t1 - t0));
+						ThreadUtil.wait(mutex, getDefaultStabilizeTime() - (int) (t1 - t0));
 					}
 				}
 			}
@@ -396,7 +409,7 @@ public class HotFolder
 	 */
 	private File[] getHotFiles()
 	{
-		if (theRunner.interrupt)
+		if (runThread == null || runThread.interrupt)
 			return null;
 
 		final File[] files = FileUtil.listFilesWithExtension(dir, getAllExtensions());
@@ -430,15 +443,16 @@ public class HotFolder
 			if (fileJ.exists())
 			{
 				final HotFileRunner runner = new HotFileRunner(fileJ);
-				if (theRunner.maxConcurrent == 1)
+				if (getMaxConcurrent() == 1)
 				{
 					runner.run();
 				}
 				else
 				{
-					final MultiTaskQueue taskQueue = MultiTaskQueue.getCreateQueue(theRunner.getName(), theRunner.maxConcurrent);
+					final MultiTaskQueue taskQueue = MultiTaskQueue.getCreateQueue(runThread.getName(), getMaxConcurrent());
 					found = taskQueue.queue(runner);
 				}
+				lastFileTime.remove(lftAt);
 			}
 			else
 			{
@@ -659,5 +673,15 @@ public class HotFolder
 		if (!(obj instanceof HotFolder))
 			return false;
 		return dir.equals(((HotFolder) obj).dir);
+	}
+
+	/**
+	 * @return the therunner
+	 */
+	protected static HotFolderRunner getTherunner()
+	{
+		if (theRunner == null)
+			theRunner = new HotFolderRunner();
+		return theRunner;
 	}
 }
