@@ -79,12 +79,12 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		public CountListener()
 		{
 			super();
-			iCount = 0;
-			delay = 0;
+			iCount = new AtomicInteger(0);
+			delay = 1;
 		}
 
 		private int delay;
-		private int iCount;
+		private final AtomicInteger iCount;
 
 		/**
 		 * dummy that alternates ok and false
@@ -96,7 +96,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		{
 			if (delay > 0)
 				ThreadUtil.sleep(delay);
-			return iCount++ % 2 == 0;
+			return iCount.getAndIncrement() % 2 == 0;
 		}
 
 		/**
@@ -582,7 +582,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		final CountListener cl = new CountListener();
 		cl.setDelay(2000);
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, cl);
-		hf.setMaxConcurrent(10);
+		hf.setMaxConcurrent(20);
 		hf.setStabilizeTime(100);
 		File error = new File("error");
 		hf.setErrorStorage(error);
@@ -594,7 +594,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 
 		for (int i = 0; i < 10; i++)
 		{
-			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
+			final File file = new File(theHFDir + File.separator + "fok_err" + i + ".txt");
 			file.createNewFile();
 		}
 		ThreadUtil.sleep(2000);
@@ -604,7 +604,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		for (int i = 0; i < 1000; i++)
 		{
 			ThreadUtil.sleep(50);
-			if (ok.listFiles().length >= 5 && error.listFiles().length >= 5 && tmpHFDir.listFiles().length < 2)
+			if (ok.listFiles().length >= 4 && error.listFiles().length >= 4 && tmpHFDir.listFiles().length < 2)
 				break;
 		}
 		assertEquals(ok.listFiles().length, 5, 1);

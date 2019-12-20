@@ -390,17 +390,11 @@ public class HotFolder
 				{
 					mod = folder.loop() || mod;
 				}
-				if (!mod)
-				{
-					final long t1 = System.currentTimeMillis();
-					if (t1 - t0 < getDefaultStabilizeTime())
-					{
-						ThreadUtil.wait(mutex, getDefaultStabilizeTime() - (int) (t1 - t0));
-					}
-				}
+				final long t1 = System.currentTimeMillis();
+				final int millis = mod ? 0 : getDefaultStabilizeTime() - (int) (t1 - t0);
+				ThreadUtil.wait(mutex, Math.max(100, millis));
 			}
 		}
-
 	}
 
 	/**
