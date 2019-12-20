@@ -84,19 +84,11 @@ public class HotFolder
 	/**
 	 * @param maxConcurrent the maxConcurrent to set
 	 */
-	public void setMaxConcurrent(int maxConcurrent)
+	public void setMaxConcurrent(final int maxConcurrent)
 	{
 		if (runThread != null)
 		{
-			if (maxConcurrent < runThread.maxConcurrent)
-			{
-				maxConcurrent = runThread.maxConcurrent;
-			}
-			if (maxConcurrent > 42)
-			{
-				maxConcurrent = 42;
-			}
-			runThread.maxConcurrent = maxConcurrent;
+			runThread.setMaxConcurrent(maxConcurrent);
 		}
 		this.maxConcurrent = maxConcurrent;
 	}

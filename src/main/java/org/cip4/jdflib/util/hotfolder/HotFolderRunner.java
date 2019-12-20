@@ -62,6 +62,21 @@ class HotFolderRunner extends Thread
 		mutex = new MyMutex();
 	}
 
+	/**
+	 * @param maxConcurrent the maxConcurrent to set
+	 */
+	public void setMaxConcurrent(int maxConcurrent)
+	{
+		if (maxConcurrent > this.maxConcurrent)
+		{
+			if (maxConcurrent > 42)
+			{
+				maxConcurrent = 42;
+			}
+			this.maxConcurrent = maxConcurrent;
+		}
+	}
+
 	boolean interrupt;
 	int maxConcurrent = 1;
 
