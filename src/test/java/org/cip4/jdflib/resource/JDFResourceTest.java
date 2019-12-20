@@ -1584,6 +1584,52 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 */
+	@Test
+	public void testGetPartitionGap()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFResource media = n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
+
+		final JDFMedia mp1 = (JDFMedia) media.addPartition(EnumPartIDKey.SignatureName, "sig1");
+		final JDFMedia m1 = (JDFMedia) mp1.addPartition(EnumPartIDKey.SheetName, "sh1");
+
+		final JDFMedia mp2 = (JDFMedia) media.addPartition(EnumPartIDKey.SignatureName, "sig2");
+		final JDFMedia m2 = (JDFMedia) mp2.addPartition(EnumPartIDKey.SheetName, "sh2");
+
+		final JDFAttributeMap map = new JDFAttributeMap();
+		map.put(EnumPartIDKey.SheetName, "sh1");
+		assertEquals(m1, media.getPartition(map, null));
+		assertEquals(m1, media.getPartition(map, EnumPartUsage.Explicit));
+		assertEquals(m1, media.getPartition(map, EnumPartUsage.Implicit));
+		assertEquals(m1, media.getPartition(map, EnumPartUsage.Sparse));
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testGetPartitionGapNot()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFResource media = n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
+
+		final JDFMedia mp1 = (JDFMedia) media.addPartition(EnumPartIDKey.SignatureName, "sig1");
+		final JDFMedia m1 = (JDFMedia) mp1.addPartition(EnumPartIDKey.SheetName, "sh1");
+
+		final JDFMedia mp2 = (JDFMedia) media.addPartition(EnumPartIDKey.SignatureName, "sig2");
+		final JDFMedia m2 = (JDFMedia) mp2.addPartition(EnumPartIDKey.SheetName, "sh2");
+
+		final JDFAttributeMap map = new JDFAttributeMap();
+		map.put(EnumPartIDKey.SheetName, "sh3");
+		assertEquals(null, media.getPartition(map, null));
+		assertEquals(null, media.getPartition(map, EnumPartUsage.Explicit));
+		assertEquals(media, media.getPartition(map, EnumPartUsage.Implicit));
+		assertEquals(null, media.getPartition(map, EnumPartUsage.Sparse));
+	}
+
+	/**
 	 * test whether getpartition works for when inconsistently called
 	 */
 	@Test
@@ -2290,8 +2336,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
 		for (int i = 0; i < 2222; i++)
 		{
-			xm.addPartition(EnumPartIDKey.SignatureName, "Sig" + i).addPartition(EnumPartIDKey.SheetName, "Sheet"
-					+ i).addPartition(EnumPartIDKey.Side, "Front").addPartition(EnumPartIDKey.Separation, "Black").appendElement(ElementName.MEDIA);
+			xm.addPartition(EnumPartIDKey.SignatureName, "Sig" + i).addPartition(EnumPartIDKey.SheetName, "Sheet" + i).addPartition(EnumPartIDKey.Side, "Front")
+					.addPartition(EnumPartIDKey.Separation, "Black").appendElement(ElementName.MEDIA);
 		}
 
 		final CPUTimer ct = new CPUTimer(false);

@@ -38,6 +38,7 @@
  */
 package org.cip4.jdflib.util.thread;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -246,7 +247,7 @@ public class OrderedTaskQueue extends Thread
 	public static void shutDownAll()
 	{
 		LogFactory.getLog(OrderedTaskQueue.class).info("shutting down " + theMap.size() + " ordered queues");
-		final Vector<String> v = ContainerUtil.getKeyVector(theMap);
+		final Collection<String> v = ContainerUtil.getKeyArray(theMap);
 		if (v != null)
 		{
 			for (final String key : v)
@@ -261,7 +262,6 @@ public class OrderedTaskQueue extends Thread
 	 */
 	public void shutDown()
 	{
-		log.info("shutting down " + toString());
 		idle.set(-1);
 		theMap.remove(getName());
 		ThreadUtil.notify(mutex);
@@ -345,7 +345,6 @@ public class OrderedTaskQueue extends Thread
 	@Override
 	public void run()
 	{
-		log.info("starting ordered task queue loop");
 		while (true)
 		{
 			try
@@ -358,7 +357,6 @@ public class OrderedTaskQueue extends Thread
 			}
 			if (idle.get() < 0)
 			{
-				log.info("end of ordered task loop");
 				ThreadUtil.notifyAll(mutex);
 				mutex = null;
 				break;
