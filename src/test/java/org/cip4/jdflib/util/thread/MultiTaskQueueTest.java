@@ -102,6 +102,7 @@ public class MultiTaskQueueTest extends JDFTestCaseBase
 		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multi0", 3);
 		assertEquals(0, q.size());
 		q.queue(new WaitRunner(0, 1000));
+		ThreadUtil.sleep(2);
 		assertEquals(1, q.size());
 		ThreadUtil.sleep(42);
 		assertEquals(1, q.size());

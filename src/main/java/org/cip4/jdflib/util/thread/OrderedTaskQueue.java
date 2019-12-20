@@ -232,7 +232,7 @@ public class OrderedTaskQueue extends Thread
 		started = done = 0;
 		sumQueue = 0;
 		sumRun = 0;
-		idle = new AtomicInteger();
+		idle = new AtomicInteger(0);
 		start();
 	}
 
