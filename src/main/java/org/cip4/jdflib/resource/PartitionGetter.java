@@ -411,7 +411,7 @@ public class PartitionGetter
 	{
 		final int maxSize = 1 + lastPos(m, resourceRoot.getPartIDKeys(), true);
 		VJDFAttributeMap v = new VJDFAttributeMap();
-		final VJDFAttributeMap vExp = EnumPartUsage.Explicit.equals(partUsage) ? null : new VJDFAttributeMap();
+		final VJDFAttributeMap vExp = EnumPartUsage.Implicit.equals(partUsage) ? new VJDFAttributeMap() : null;
 		for (final JDFAttributeMap map : leafMap.keySet())
 		{
 			if (map.size() <= maxSize)
