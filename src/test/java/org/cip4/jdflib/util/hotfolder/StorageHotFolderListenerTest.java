@@ -40,6 +40,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
@@ -104,6 +105,22 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 		theHFDir.mkdirs();
 		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), new StorageHotFolder(theHFDir, theHFDir, null, null));
 		assertFalse(hl.hotFile(new File("a")));
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	public void testBoom2() throws IOException
+	{
+		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "Foo");
+		FileUtil.deleteAll(theHFDir);
+		theHFDir.mkdirs();
+		final File file = new File(theHFDir, "a");
+		file.createNewFile();
+		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), new StorageHotFolder(theHFDir, theHFDir, null, null));
+		assertFalse(hl.hotFile(file));
 	}
 
 }

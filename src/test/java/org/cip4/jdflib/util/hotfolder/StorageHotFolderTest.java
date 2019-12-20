@@ -80,8 +80,10 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		{
 			super();
 			iCount = 0;
+			delay = 0;
 		}
 
+		private int delay;
 		private int iCount;
 
 		/**
@@ -92,7 +94,25 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		@Override
 		public boolean hotFile(final File hotFile)
 		{
+			if (delay > 0)
+				ThreadUtil.sleep(delay);
 			return iCount++ % 2 == 0;
+		}
+
+		/**
+		 * @return the delay
+		 */
+		protected int getDelay()
+		{
+			return delay;
+		}
+
+		/**
+		 * @param delay the delay to set
+		 */
+		protected void setDelay(final int delay)
+		{
+			this.delay = delay;
 		}
 
 	}
@@ -546,6 +566,52 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		assertEquals(tmpHFDir.listFiles().length, 0, 5);
 		assertEquals(error.listFiles().length, 42, 13);
 
+		hf.stop();
+	}
+
+	/**
+	 *
+	 * ok or error folder testing
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public synchronized void testOKErrorMultiDelay() throws Exception
+	{
+
+		final CountListener cl = new CountListener();
+		cl.setDelay(2000);
+		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, cl);
+		hf.setMaxConcurrent(10);
+		hf.setStabilizeTime(100);
+		File error = new File("error");
+		hf.setErrorStorage(error);
+		File ok = new File("ok");
+		hf.setOKStorage(ok);
+		hf.setMaxStore(42);
+		hf.restart();
+		ThreadUtil.sleep(500);
+
+		for (int i = 0; i < 10; i++)
+		{
+			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
+			file.createNewFile();
+		}
+		ThreadUtil.sleep(2000);
+		final long t0 = System.currentTimeMillis();
+		ok = FileUtil.getFileInDirectory(theHFDir, ok);
+		error = FileUtil.getFileInDirectory(theHFDir, error);
+		for (int i = 0; i < 1000; i++)
+		{
+			ThreadUtil.sleep(50);
+			if (ok.listFiles().length >= 2 && error.listFiles().length >= 2 && tmpHFDir.listFiles().length < 2)
+				break;
+		}
+		assertEquals(ok.listFiles().length, 5, 1);
+		assertEquals(tmpHFDir.listFiles().length, 0, 1);
+		assertEquals(error.listFiles().length, 5, 1);
+		// not 2000 * 10...
+		assertTrue(System.currentTimeMillis() - t0 < 5000);
 		hf.stop();
 	}
 

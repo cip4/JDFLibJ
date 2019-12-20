@@ -48,7 +48,8 @@
 package org.cip4.jdflib.util.hotfolder;
 
 import java.io.File;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -75,7 +76,7 @@ public class StorageHotFolder
 		return hf.getDir();
 	}
 
-	final Vector<StorageHotFolderListener> listenerImpl;
+	final List<StorageHotFolderListener> listenerImpl;
 
 	/**
 	 *
@@ -102,7 +103,7 @@ public class StorageHotFolder
 		{
 			moveFromTemp(_hotFolderDir);
 		}
-		listenerImpl = new Vector<>();
+		listenerImpl = new ArrayList<>();
 		hf = new HotFolder(_hotFolderDir, null, null);
 		if (hfListener != null)
 		{
