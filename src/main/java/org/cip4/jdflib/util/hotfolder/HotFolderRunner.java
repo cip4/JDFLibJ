@@ -2,6 +2,7 @@ package org.cip4.jdflib.util.hotfolder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,7 +15,13 @@ class HotFolderRunner extends Thread
 	List<HotFolder> hotfolders;
 	MyMutex mutex;
 	private static Log log = LogFactory.getLog(HotFolderRunner.class);
-	static HotFolderRunner theRunner = null;
+	static final AtomicReference<HotFolderRunner> theRunner = new AtomicReference<>(null);
+
+	public static void shutDown()
+	{
+		if (getTherunner() != null)
+			getTherunner().quit();
+	}
 
 	/**
 	 * stop this thread;
@@ -29,7 +36,7 @@ class HotFolderRunner extends Thread
 		MultiTaskQueue.shutDown(name);
 		ThreadUtil.notifyAll(this);
 		log.info("Finished stopping hot folder: " + name);
-		theRunner = null;
+		theRunner.set(null);
 	}
 
 	public void add(final HotFolder hotFolder)
@@ -69,9 +76,9 @@ class HotFolderRunner extends Thread
 	{
 		if (maxConcurrent > this.maxConcurrent)
 		{
-			if (maxConcurrent > 42)
+			if (maxConcurrent > 13)
 			{
-				maxConcurrent = 42;
+				maxConcurrent = 13;
 			}
 			this.maxConcurrent = maxConcurrent;
 		}
@@ -86,6 +93,7 @@ class HotFolderRunner extends Thread
 	@Override
 	public void run()
 	{
+		log.info("start of loop " + this);
 		while (!interrupt)
 		{
 			final long t0 = System.currentTimeMillis();
@@ -98,6 +106,7 @@ class HotFolderRunner extends Thread
 			final int millis = mod ? 0 : HotFolder.getDefaultStabilizeTime() - (int) (t1 - t0);
 			ThreadUtil.wait(mutex, Math.max(100, millis));
 		}
+		log.info("end of loop " + this);
 	}
 
 	/**
@@ -105,8 +114,20 @@ class HotFolderRunner extends Thread
 	 */
 	static HotFolderRunner getTherunner()
 	{
-		if (theRunner == null)
-			theRunner = new HotFolderRunner();
-		return theRunner;
+		synchronized (theRunner)
+		{
+			if (theRunner.get() == null)
+				theRunner.set(new HotFolderRunner());
+			return theRunner.get();
+		}
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "HotFolderRunner [" + (hotfolders != null ? "hotfolder size=" + hotfolders.size() + ", " : "") + "interrupt=" + interrupt + ", maxConcurrent=" + maxConcurrent + "]";
 	}
 }

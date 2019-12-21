@@ -44,6 +44,7 @@
 package org.cip4.jdflib.util.hotfolder;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -117,6 +118,17 @@ public class HotFolderTest extends JDFTestCaseBase
 		assertTrue(file.exists());
 		ThreadUtil.sleep(000);
 		assertTrue(file.exists());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public synchronized void testShutdown() throws Exception
+	{
+		hf = new HotFolder(theHF, null, new MyListener(false));
+		assertNotNull(hf.runThread);
+		HotFolderRunner.shutDown();
 	}
 
 	/**

@@ -215,7 +215,7 @@ public class HotFolder
 	private long lastModified = -1;
 	private final ArrayList<FileTime> lastFileTime;
 	protected final ArrayList<ExtensionListener> hfl;
-	private HotFolderRunner runThread;
+	HotFolderRunner runThread;
 	final Set<File> hfRunning;
 	static final private Log log = LogFactory.getLog(HotFolder.class);
 
@@ -254,7 +254,6 @@ public class HotFolder
 	 */
 	public HotFolder(final File _dir, final String ext, final HotFolderListener _hfl)
 	{
-		setMaxConcurrent(1);
 		dir = _dir;
 		dir.mkdirs();
 		dir.setWritable(true);
@@ -264,12 +263,12 @@ public class HotFolder
 		hfRunning = new HashSet<>();
 		runThread = null;
 		allExtensions = null;
+		setMaxConcurrent(1);
 		if (_hfl != null)
 		{
 			addListener(_hfl, ext);
 			restart();
 		}
-		maxConcurrent = 1;
 	}
 
 	/**
