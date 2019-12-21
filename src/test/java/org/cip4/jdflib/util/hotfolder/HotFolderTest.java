@@ -46,6 +46,7 @@ package org.cip4.jdflib.util.hotfolder;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -151,6 +152,50 @@ public class HotFolderTest extends JDFTestCaseBase
 			Thread.sleep(1);
 			assertTrue("Loop " + i, Thread.activeCount() - n0 < 6);
 		}
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public synchronized void testMany() throws Exception
+	{
+		final int n0 = Thread.activeCount();
+		final File manyDir = new File(sm_dirTestDataTemp, "manyhf");
+		for (int i = 0; i < 1000; i++)
+		{
+			final File singleHF = new File(manyDir, "single" + i);
+			hf = new HotFolder(singleHF, null, new MyListener(true));
+
+		}
+		assertTrue("Loop ", Thread.activeCount() - n0 < 17);
+		for (int i = 0; i < 1000; i++)
+		{
+			final File singleHF = new File(manyDir, "single" + i);
+			for (int j = 0; j < 10; j++)
+			{
+				final File towrite = new File(singleHF, j + ".txt");
+				towrite.createNewFile();
+			}
+		}
+		for (int l = 0; l < 100; l++)
+		{
+			int n = 0;
+			ThreadUtil.sleep(100);
+			for (int i = 0; i < 1000; i++)
+			{
+				final File singleHF = new File(manyDir, "single" + i);
+				for (int j = 0; j < 10; j++)
+				{
+					final File towrite = new File(singleHF, j + ".txt");
+					if (towrite.exists())
+						n++;
+				}
+			}
+			if (n == 0)
+				return;
+		}
+		fail("not gone");
 	}
 
 	/**

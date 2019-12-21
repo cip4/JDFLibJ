@@ -98,7 +98,8 @@ class HotFolderRunner extends Thread
 		{
 			final long t0 = System.currentTimeMillis();
 			boolean mod = false;
-			for (final HotFolder folder : hotfolders)
+			final ArrayList<HotFolder> local = new ArrayList<>(hotfolders);
+			for (final HotFolder folder : local)
 			{
 				mod = folder.loop() || mod;
 			}

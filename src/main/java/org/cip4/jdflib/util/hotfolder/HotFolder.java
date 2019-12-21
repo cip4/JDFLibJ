@@ -143,7 +143,6 @@ public class HotFolder
 						if (!ft.f.exists())// not there anymore - note the -- for undo remove
 						{
 							lastFileTime.remove(i--);
-							log.info("removing disappearing file: " + ft);
 						}
 					}
 				}
