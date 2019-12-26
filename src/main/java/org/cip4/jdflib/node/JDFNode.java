@@ -2347,12 +2347,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			}
 			stat = null;
 
-			final VElement vLeaves = ni.getLeaves(false);
+			final List<JDFResource> vLeaves = ni.getLeafArray(false);
 			final int size = vLeaves.size();
 
 			for (int i = 0; i < size; i++)
 			{
-				JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.elementAt(i);
+				JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.get(i);
 				JDFAttributeMap map = niCmp.getPartMap();
 				if (identicalSrcMap != null)
 					map.putAll(identicalSrcMap);
@@ -2456,11 +2456,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 					identicalSrcMap = identicalSrc.getPartMap();
 			}
 
-			final VElement vLeaves = ni.getLeaves(false);
+			final List<JDFResource> vLeaves = ni.getLeafArray(false);
 			final int size = vLeaves.size();
 			for (int i = 0; i < size; i++)
 			{
-				final JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.elementAt(i);
+				final JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.get(i);
 				final JDFAttributeMap map = niCmp.getPartMap();
 				if (identicalSrcMap != null)
 					map.putAll(identicalSrcMap);
@@ -3806,8 +3806,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			root.deleteNode();
 		}
 	}
-
-	// ///////////////////////////////////////////////////////////////////////
 
 	private boolean fixNiCiToResource(final int i, final String nam, final String linkNam)
 	{
@@ -5615,7 +5613,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			if (nici instanceof JDFResource)
 			{
-				final VElement vLeaves = ((JDFResource) nici).getLeaves(true);
+				final List<JDFResource> vLeaves = ((JDFResource) nici).getLeafArray(true);
 				for (final KElement leaf : vLeaves)
 				{
 					if (leaf.hasXPathNode(xPath))

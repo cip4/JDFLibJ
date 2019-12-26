@@ -421,7 +421,7 @@ public class WalkJDFElement extends WalkElement
 		for (final KElement e : vRes)
 		{
 			final JDFResource r = (JDFResource) e;
-			final VElement vLeaves = r.getLeaves(false);
+			final List<JDFResource> vLeaves = r.getLeafArray(false);
 			for (final KElement eLeaf : vLeaves)
 			{
 				final JDFResource leaf = (JDFResource) eLeaf;

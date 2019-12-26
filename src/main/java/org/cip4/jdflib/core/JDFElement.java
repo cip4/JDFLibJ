@@ -3180,17 +3180,9 @@ public class JDFElement extends KElement
 	 */
 	public VElement getRefElements()
 	{
-		final VElement v = getChildElementVector(null, null, null, true, 0, false);
-		// loop backwords so that I don't invalidate the vector by deleting
-		for (int i = v.size() - 1; i >= 0; i--)
-		{
-			final KElement e = v.item(i);
-			// cant be null
-			if (!(e instanceof JDFRefElement))
-			{
-				v.remove(i);
-			}
-		}
+		final List<JDFRefElement> vr = getChildArrayByClass_KElement(JDFRefElement.class, false, 0);
+		final VElement v = new VElement();
+		v.addAll(vr);
 		return v;
 	}
 
@@ -3227,10 +3219,9 @@ public class JDFElement extends KElement
 	 */
 	public void inlineRefElements(final String nodeName, final String nameSpaceURI, final boolean bDirect)
 	{
-		final VElement v = getRefElements();
-		for (final KElement e : v)
+		final List<JDFRefElement> v = getChildArrayByClass_KElement(JDFRefElement.class, false, 0);
+		for (final JDFRefElement re : v)
 		{
-			final JDFRefElement re = (JDFRefElement) e;
 			// it fits - inline it
 			if (re.fitsName(nodeName, nameSpaceURI))
 			{

@@ -1900,6 +1900,23 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public <A extends KElement> List<A> getChildArrayByClass(final Class<A> clazz, final boolean bRecurse, final int nMax)
 	{
+		return getChildArrayByClass_KElement(clazz, bRecurse, nMax);
+	}
+
+	/**
+	 * Get all children from the actual element matching the given conditions<br>
+	 * does NOT get refElement targets although the attributes are checked in the target elements in case of refElements never null
+	 *
+	 * @param clazz
+	 * @param <A>
+	 * @param bRecurse if true recurse through all children, grandchildren etc.
+	 * @param nMax maximum number to search - if 0 or negative, search all
+	 * @return Vector<a> vector with all found elements, never null
+	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
+	 * @default getChildElementVector(null, null, null, true, 0)
+	 */
+	public <A extends KElement> List<A> getChildArrayByClass_KElement(final Class<A> clazz, final boolean bRecurse, final int nMax)
+	{
 		final List<A> v = new ArrayList<>();
 		getChildArrayByClass(clazz, bRecurse, nMax, v);
 		return v;
@@ -1918,7 +1935,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */
 	@SuppressWarnings("unchecked")
-	<A extends KElement> int getChildArrayByClass(final Class<A> clazz, final boolean bRecurse, final int nMax, final List<A> v)
+	final <A extends KElement> int getChildArrayByClass(final Class<A> clazz, final boolean bRecurse, final int nMax, final List<A> v)
 	{
 		Node node = getFirstChild();
 		int n = 0;

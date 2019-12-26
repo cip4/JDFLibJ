@@ -40,6 +40,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -448,7 +449,7 @@ public class JDFSpawn
 	{
 		if (bResRW && r != null)
 		{
-			final VElement vRes = getSpawnLeaves(r);
+			final List<JDFResource> vRes = getSpawnLeaves(r);
 			final VString partIDKeys = r.getPartIDKeys();
 			for (final KElement e : vRes)
 			{
@@ -464,12 +465,12 @@ public class JDFSpawn
 		}
 	}
 
-	VElement getSpawnLeaves(final JDFResource r)
+	List<JDFResource> getSpawnLeaves(final JDFResource r)
 	{
-		VElement vRes = new VElement();
+		List<JDFResource> vRes = new ArrayList<>();
 		if (vSpawnParts == null || vSpawnParts.isEmpty())
 		{
-			vRes = r.getLeaves(false);
+			vRes = r.getLeafArray(false);
 		}
 		else
 		{
@@ -485,7 +486,7 @@ public class JDFSpawn
 					final JDFResource rPart = (JDFResource) e;
 					vRes.addAll(rPart.getLeafArray(false));
 				}
-				vRes.unify();
+				ContainerUtil.unify(vRes);
 			}
 		}
 		return vRes;
@@ -982,7 +983,7 @@ public class JDFSpawn
 			final JDFResource linkRoot = rl.getLinkRoot();
 			if (linkRoot != null)
 			{
-				final VElement v = linkRoot.getLeaves(true);
+				final List<JDFResource> v = linkRoot.getLeafArray(true);
 				for (final KElement r : v)
 				{
 					removeROFromLeaf(spawnID, r);
@@ -1006,13 +1007,13 @@ public class JDFSpawn
 
 	void removeROFromElement(final String spawnID, final KElement r)
 	{
-		final VElement refs = ((JDFElement) r).getRefElements();
+		final List<JDFRefElement> refs = r.getChildArrayByClass_KElement(JDFRefElement.class, false, 0);
 		if (refs != null)
 		{
 			for (final KElement ref : refs)
 			{
 				final JDFResource targetRoot = ((JDFRefElement) ref).getTarget();
-				final VElement vT = targetRoot == null ? null : targetRoot.getLeaves(true);
+				final List<JDFResource> vT = targetRoot == null ? null : targetRoot.getLeafArray(true);
 				if (vT != null)
 				{
 					for (final KElement target : vT)
@@ -1154,7 +1155,7 @@ public class JDFSpawn
 				continue;
 			}
 
-			final VElement leaves = rMainPart.getLeaves(true);
+			final List<JDFResource> leaves = rMainPart.getLeafArray(true);
 			boolean bSpawnID = false;
 
 			// if any child node or leaf has this spawnID we need not do anything
