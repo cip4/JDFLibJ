@@ -44,7 +44,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.Vector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -1160,7 +1159,7 @@ public class JDFMerge
 	 */
 	private void expandLinkedResources(final JDFResourceLinkPool resourceLinkPool)
 	{
-		final Vector<JDFResourceLink> links = resourceLinkPool == null ? null : resourceLinkPool.getLinks();
+		final List<JDFResourceLink> links = resourceLinkPool == null ? null : resourceLinkPool.getLinks();
 		if (links != null)
 		{
 			for (final JDFResourceLink rl : links)

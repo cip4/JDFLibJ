@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -76,8 +76,8 @@ import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.StringUtil;
-import org.cip4.jdflib.util.VectorMap;
 
 /**
  *
@@ -121,7 +121,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		 * modifies queue to match this filter by removing all non-matching entries
 		 *
 		 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
-		 * 
+		 *
 		 * @return
 		 * @deprecated use copyTo
 		 *
@@ -221,7 +221,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 		/**
 		 * copies queueEntry if it matches this filter and removes all non-matching attributes and elements
-		 * 
+		 *
 		 * @param newQueue the new parent queue
 		 *
 		 * @param qe the queue entry to copy
@@ -259,7 +259,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 		/**
 		 * remove any redundant details
-		 * 
+		 *
 		 * @param qe the QueueEntry to clean up
 		 */
 		private void cleanQE(final JDFQueueEntry qe)
@@ -510,7 +510,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * (9) get attribute QueueEntryDetails
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	@Override
@@ -539,7 +539,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		private final JDFDate olderThan;
 		private final JDFDate newerThan;
 		private final EnumActivation activation;
-		private VectorMap<String, JDFGeneralID> generalIDS;
+		private ListMap<String, JDFGeneralID> generalIDS;
 
 		protected QueueEntryMatcher()
 		{
@@ -577,13 +577,13 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			}
 			else
 			{
-				generalIDS = getGeneralIDVectorMap();
+				generalIDS = getGeneralIDListMap();
 			}
 		}
 
 		/**
 		 * return true if the queuentry matches this filter
-		 * 
+		 *
 		 * @param qe the queueentry to check
 		 * @return
 		 */
@@ -662,7 +662,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		 */
 		private boolean matchesGeneralIDs(final JDFQueueEntry qe)
 		{
-			final VectorMap<String, JDFGeneralID> qeGeneralIDS = qe.getGeneralIDVectorMap();
+			final ListMap<String, JDFGeneralID> qeGeneralIDS = qe.getGeneralIDListMap();
 
 			// assume all entries in filter must exist
 			if (qeGeneralIDS.size() < generalIDS.size())
@@ -674,11 +674,11 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			// loop over all keys of filter and require at least one matching qe entry per key
 			for (final String key : keys)
 			{
-				final Vector<JDFGeneralID> qeGIDs = qeGeneralIDS.get(key);
+				final List<JDFGeneralID> qeGIDs = qeGeneralIDS.get(key);
 				if (qeGIDs == null) // we have no matching entry to filter in qe
 					return false;
 
-				final Vector<JDFGeneralID> filterGIDs = generalIDS.get(key);
+				final List<JDFGeneralID> filterGIDs = generalIDS.get(key);
 				boolean gotIt = false;
 
 				// loop over all filters with this key
@@ -706,7 +706,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * return true if the queuentry matches this filter
-	 * 
+	 *
 	 * @param qe the queueentry to check
 	 * @return
 	 */
@@ -717,7 +717,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * (5) set attribute Activation
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	@Override
@@ -728,7 +728,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * (9) get attribute Activation
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	@Override
@@ -762,8 +762,8 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		}
 		HashSet<String> set = null;
 
-		final Vector<JDFQueueEntryDef> v = getChildrenByClass(JDFQueueEntryDef.class, false, 0);
-		if (v != null && v.size() > 0)
+		final List<JDFQueueEntryDef> v = getChildArrayByClass(JDFQueueEntryDef.class, false, 0);
+		if (v != null && !v.isEmpty())
 		{
 			set = new HashSet<>();
 			for (final JDFQueueEntryDef qed : v)
@@ -836,7 +836,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * copy theQueue to newParent while applying the filter
-	 * 
+	 *
 	 * @param theQueue the queue to copy
 	 * @param lastQueue the previously created queue
 	 * @param resp the JDF response message, may be null
@@ -877,7 +877,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * just a different default...
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueFilter#getMaxEntries()
 	 */
 	@Override

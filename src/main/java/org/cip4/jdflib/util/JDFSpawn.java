@@ -48,7 +48,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Vector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -1314,7 +1313,7 @@ public class JDFSpawn
 		if (!JDFResource.EnumPartUsage.Implicit.equals(r.getPartUsage()))
 		{
 			final VString vPartKeys = r.getPartIDKeys();
-			final Vector<EnumPartIDKey> vImplicitPartitions = r.getImplicitPartitions();
+			final List<EnumPartIDKey> vImplicitPartitions = r.getImplicitPartitions();
 			if (vImplicitPartitions != null)
 			{
 				for (final JDFResource.EnumPartIDKey e : vImplicitPartitions)
