@@ -128,7 +128,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	public synchronized void testShutdown() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(false));
-		assertNotNull(hf.runThread);
+		assertNotNull(HotFolderRunner.getTherunner());
 		HotFolderRunner.shutDown();
 	}
 

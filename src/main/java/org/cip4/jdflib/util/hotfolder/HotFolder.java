@@ -61,7 +61,6 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.file.FileSorter;
-import org.cip4.jdflib.util.thread.MultiTaskQueue;
 
 /**
  * a very simple hotfolder watcher subdirectories are ignored
@@ -79,18 +78,13 @@ public class HotFolder
 	 * the time in milliseconds to wait for stabilization
 	 */
 	public int stabilizeTime = defaultStabilizeTime; // time between reads in milliseconds - also minimum length of non-modification
-	private int maxConcurrent;
 
 	/**
 	 * @param maxConcurrent the maxConcurrent to set
 	 */
 	public void setMaxConcurrent(final int maxConcurrent)
 	{
-		if (runThread != null)
-		{
-			runThread.setMaxConcurrent(maxConcurrent);
-		}
-		this.maxConcurrent = maxConcurrent;
+		HotFolderRunner.getCreateTherunner().setMaxConcurrent(maxConcurrent);
 	}
 
 	/**
@@ -99,7 +93,8 @@ public class HotFolder
 	 */
 	public int getMaxConcurrent()
 	{
-		return runThread == null ? 0 : runThread.maxConcurrent;
+		final HotFolderRunner r = HotFolderRunner.getTherunner();
+		return r == null ? 0 : r.getMaxConcurrent();
 	}
 
 	private final File dir;
@@ -127,7 +122,7 @@ public class HotFolder
 				{
 					boolean found = false;
 					final FileTime lftAt = lastFileTime.get(i);
-					for (int j = 0; runThread != null && j < fileListLength; j++)
+					for (int j = 0; getMaxConcurrent() > 0 && j < fileListLength; j++)
 					// loop over all matching files in the directory
 					{
 						final File fileJ = files[j];
@@ -214,7 +209,6 @@ public class HotFolder
 	private long lastModified = -1;
 	private final ArrayList<FileTime> lastFileTime;
 	protected final ArrayList<ExtensionListener> hfl;
-	HotFolderRunner runThread;
 	final Set<File> hfRunning;
 	static final private Log log = LogFactory.getLog(HotFolder.class);
 
@@ -260,8 +254,8 @@ public class HotFolder
 		lastFileTime = new ArrayList<>();
 		hfl = new ArrayList<>();
 		hfRunning = new HashSet<>();
-		runThread = null;
 		allExtensions = null;
+		HotFolderRunner.getCreateTherunner();
 		setMaxConcurrent(1);
 		if (_hfl != null)
 		{
@@ -275,17 +269,13 @@ public class HotFolder
 	 */
 	public synchronized void restart()
 	{
-		if (runThread != null)
-		{
-			stop();
-		}
+		stop();
 		if (!dir.canWrite())
 		{
 			log.error("Cannot use read only hot folder at");
 		}
-		runThread = HotFolderRunner.getTherunner();
-		runThread.add(this);
-		setMaxConcurrent(maxConcurrent);
+		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
+		r.add(this);
 		lastModified = -1;
 		hfRunning.clear();
 	}
@@ -296,15 +286,15 @@ public class HotFolder
 	 */
 	public synchronized void stop()
 	{
-		if (runThread != null)
+		final HotFolderRunner r = HotFolderRunner.getTherunner();
+		if (r != null)
 		{
-			runThread.remove(this);
-			runThread = null;
+			r.remove(this);
 			log.info("stopped hot folder at: " + dir.getAbsolutePath());
 		}
 		else
 		{
-			log.info("Stopping stopped hot folder: ");
+			log.info("Stopping stopped hot folder at: " + dir.getAbsolutePath());
 		}
 	}
 
@@ -314,10 +304,12 @@ public class HotFolder
 	 */
 	private File[] getHotFiles()
 	{
-		if (runThread == null || runThread.interrupt)
+		final HotFolderRunner r = HotFolderRunner.getTherunner();
+		if (r == null)
 			return null;
 
 		final File[] files = FileUtil.listFilesWithExtension(dir, getAllExtensions());
+		int n = 0;
 		if (files != null)
 		{
 			for (int i = 0; i < files.length; i++)
@@ -335,9 +327,13 @@ public class HotFolder
 				{
 					files[i] = null;
 				}
+				else
+				{
+					n++;
+				}
 			}
 		}
-		return files;
+		return n == 0 ? null : files;
 	}
 
 	private boolean processSingleFile(final File[] files, final FileTime lftAt, final int j, final File fileJ)
@@ -347,16 +343,8 @@ public class HotFolder
 		{
 			if (fileJ.exists())
 			{
-				final HotFileRunner runner = new HotFileRunner(fileJ);
-				if (getMaxConcurrent() == 1)
-				{
-					runner.run();
-				}
-				else
-				{
-					final MultiTaskQueue taskQueue = MultiTaskQueue.getCreateQueue(runThread.getName(), getMaxConcurrent());
-					found = taskQueue.queue(runner);
-				}
+
+				HotFolderRunner.getTherunner().runFile(new HotFileRunner(fileJ));
 				lastFileTime.remove(lftAt);
 			}
 			else
@@ -371,59 +359,6 @@ public class HotFolder
 
 		files[j] = null; // this file has been processed, remove from list for performance
 		return found;
-	}
-
-	/**
-	 *
-	 * @author rainer prosi
-	 *
-	 */
-	class HotFileRunner implements Runnable
-	{
-		File fileJ;
-
-		HotFileRunner(final File fileJ)
-		{
-			super();
-			if (hfRunning != null)
-			{
-				hfRunning.add(fileJ);
-			}
-			this.fileJ = fileJ;
-		}
-
-		/**
-		 *
-		 * @see java.lang.Runnable#run()
-		 */
-		@Override
-		public void run()
-		{
-			for (final ExtensionListener xl : hfl)
-			{
-				try
-				{
-					xl.hotFile(fileJ); // exists and stabilized - call callbacks
-				}
-				catch (final Throwable x)
-				{
-					log.error("exception processing hot files", x);
-				}
-			}
-			if (fileJ != null)
-			{
-				hfRunning.remove(fileJ);
-			}
-		}
-
-		/**
-		 * @see java.lang.Object#toString()
-		 */
-		@Override
-		public String toString()
-		{
-			return "HotFileRunner [fileJ=" + fileJ + "]";
-		}
 	}
 
 	/**
@@ -508,6 +443,59 @@ public class HotFolder
 				}
 			}
 			fl.hotFile(file);
+		}
+	}
+
+	/**
+	 *
+	 * @author rainer prosi
+	 *
+	 */
+	class HotFileRunner implements Runnable
+	{
+		File fileJ;
+
+		HotFileRunner(final File fileJ)
+		{
+			super();
+			if (hfRunning != null)
+			{
+				hfRunning.add(fileJ);
+			}
+			this.fileJ = fileJ;
+		}
+
+		/**
+		 *
+		 * @see java.lang.Runnable#run()
+		 */
+		@Override
+		public void run()
+		{
+			for (final ExtensionListener xl : hfl)
+			{
+				try
+				{
+					xl.hotFile(fileJ); // exists and stabilized - call callbacks
+				}
+				catch (final Throwable x)
+				{
+					log.error("exception processing hot files", x);
+				}
+			}
+			if (fileJ != null)
+			{
+				hfRunning.remove(fileJ);
+			}
+		}
+
+		/**
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString()
+		{
+			return "HotFileRunner [fileJ=" + fileJ + "]";
 		}
 	}
 
