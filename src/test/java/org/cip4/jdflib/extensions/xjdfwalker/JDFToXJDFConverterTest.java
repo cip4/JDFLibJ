@@ -1619,6 +1619,32 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testProductPartVersion()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Product);
+
+		final JDFNode n1 = n.addJDFNode(EnumType.Product);
+		final JDFComponent c1 = (JDFComponent) n1.addResource(ElementName.COMPONENT, null);
+		c1.setComponentType(EnumComponentType.FinalProduct, null);
+		n1.ensureLink(c1.addPartition(EnumPartIDKey.PartVersion, "v1"), EnumUsage.Output, null).setAmount(100);
+
+		final JDFNode n2 = n.addJDFNode(EnumType.Product);
+		final JDFComponent c2 = (JDFComponent) n2.addResource(ElementName.COMPONENT, null);
+		c2.setComponentType(EnumComponentType.FinalProduct, null);
+		n2.ensureLink(c2.addPartition(EnumPartIDKey.PartVersion, "v2"), EnumUsage.Output, null).setAmount(200);
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		final XJDFHelper h = new XJDFHelper(xjdf);
+		assertEquals("v1", h.getRootProduct(0).getAttribute(AttributeName.PARTVERSION));
+		assertEquals("v2", h.getRootProduct(1).getAttribute(AttributeName.PARTVERSION));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testNotificationAudit()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -2080,10 +2106,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
 		final SetHelper sh = new XJDFHelper(xjdf).getSet(ElementName.ASSEMBLY, EnumUsage.Input);
-		assertEquals(4, sh.getRoot().getChildrenByClass(JDFAssemblySection.class, true, 0).size());
+		assertEquals(4, sh.getRoot().getChildArrayByClass(JDFAssemblySection.class, true, 0).size());
 
 		sh.cleanUp();
-		assertEquals(4, sh.getRoot().getChildrenByClass(JDFAssemblySection.class, true, 0).size());
+		assertEquals(4, sh.getRoot().getChildArrayByClass(JDFAssemblySection.class, true, 0).size());
 	}
 
 	/**

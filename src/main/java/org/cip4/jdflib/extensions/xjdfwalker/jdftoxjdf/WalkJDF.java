@@ -326,6 +326,7 @@ public class WalkJDF extends WalkJDFElement
 		map.remove(AttributeName.TEMPLATEVERSION);
 		map.remove(AttributeName.VERSION);
 		map.remove(AttributeName.XMLNS);
+		map.remove(AttributeName.XSITYPE);
 		super.updateAttributes(map);
 	}
 

@@ -1769,7 +1769,7 @@ class PostXJDFWalker extends BaseElementWalker
 			else
 			{
 				// TODO fix to subelements
-				final IntentHelper insert = ph.getIntent(ElementName.INSERTINGINTENT);
+				final IntentHelper insert = ph.getIntent(XJDFConstants.AssemblingIntent);
 				if (insert != null)
 				{
 					insert.getCreateResource().moveAttribute(XJDFConstants.ChildRefs, ph.getRoot());
