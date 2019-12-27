@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -81,6 +81,20 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFToXJDF extends PackageElementWalker
 {
+	private static EnumVersion defaultVersion = EnumVersion.Version_2_1;
+
+	public static void setDefaultVersion(final EnumVersion v)
+	{
+		if (!EnumUtil.aLessThanB(v, EnumVersion.Version_2_0))
+		{
+			JDFToXJDF.defaultVersion = v;
+		}
+	}
+
+	public static EnumVersion getDefaultVersion()
+	{
+		return defaultVersion;
+	}
 
 	/**
 	 *
@@ -94,7 +108,7 @@ public class JDFToXJDF extends PackageElementWalker
 		componentProductMap = new JDFAttributeMap();
 		resourceAlias = new HashSet<>();
 		wantDependent = true;
-		newVersion = null;
+		newVersion = getDefaultVersion();
 	}
 
 	/**
@@ -337,7 +351,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	public void setNewVersion(final EnumVersion newVersion)
 	{
-		this.newVersion = newVersion == null ? EnumVersion.Version_2_0 : newVersion;
+		this.newVersion = newVersion == null ? getDefaultVersion() : newVersion;
 	}
 
 	/**
@@ -1012,5 +1026,19 @@ public class JDFToXJDF extends PackageElementWalker
 	public void setWantDependent(final boolean wantDependent)
 	{
 		this.wantDependent = wantDependent;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "JDFToXJDF [trackAudits=" + trackAudits + ", newRoot=" + newRoot + ", oldRoot=" + oldRoot + ", first=" + first + ", bExplicitWaste=" + bExplicitWaste + ", bRetainAll=" + bRetainAll
+				+ ", bCleanup=" + bCleanup + ", bMergeLayout=" + bMergeLayout + ", bMergeLayoutPrep=" + bMergeLayoutPrep + ", bMergeRunList=" + bMergeRunList + ", bRetainSpawnInfo=" + bRetainSpawnInfo
+				+ ", bSingleNode=" + bSingleNode + ", bUpdateVersion=" + bUpdateVersion + ", bTypeSafeMessage=" + bTypeSafeMessage + ", bAbstractMessage=" + bAbstractMessage + ", bSpanAsAttribute="
+				+ bSpanAsAttribute + ", bIntentPartition=" + bIntentPartition + ", bParameterSet=" + bParameterSet + ", wantProduct=" + wantProduct + ", componentProductMap=" + componentProductMap
+				+ ", resourceAlias=" + resourceAlias + ", bHTMLColor=" + bHTMLColor + ", bConvertTilde=" + bConvertTilde + ", rootID=" + rootID + ", removeSignatureName=" + removeSignatureName
+				+ ", processPartition=" + processPartition + ", wantDependent=" + wantDependent + ", newVersion=" + newVersion + "]";
 	}
 }
