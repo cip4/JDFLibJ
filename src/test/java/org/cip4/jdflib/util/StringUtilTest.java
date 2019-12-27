@@ -984,7 +984,18 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.zappTokenWS(" n2 ", null), "n2");
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 *
+	 */
+	@Test
+	public void testHasTokenNeg()
+	{
+		assertTrue(StringUtil.hasToken("1", "1", null, -1));
+		assertTrue(StringUtil.hasToken("1 2 1", "1", null, -1));
+		assertTrue(StringUtil.hasToken("1 2 1", "2", null, -1));
+		assertFalse(StringUtil.hasToken("1 2 1", "2", null, -2));
+		assertFalse(StringUtil.hasToken("1 2 1", "1", null, -3));
+	}
 
 	/**
 	 *
@@ -1042,10 +1053,8 @@ public class StringUtilTest extends JDFTestCaseBase
 			StringUtil.hasToken(s2, "ab", " ", 0);
 		}
 		final long t2 = System.currentTimeMillis();
-		System.out.println(t2 - t0);
+		log.info("" + (t2 - t0));
 	}
-
-	// /////////////////////////////////////////////////////////////////////////
 
 	/**
 	 *
