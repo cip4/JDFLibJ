@@ -529,14 +529,11 @@ public final class AttributeName
 	/** */
 	public static final String CITY = "City";
 	/** */
+	public static final String CLAIM = "Claim";
 	public static final String CLAMPCOLOR = "ClampColor";
-	/** */
 	public static final String CLAMPCOLORDETAILS = "ClampColorDetails";
-	/** */
 	public static final String CLAMPD = "ClampD";
-	/** */
 	public static final String CLAMPSIZE = "ClampSize";
-	/** */
 	public static final String CLAMPSYSTEM = "ClampSystem";
 	/** */
 	public static final String CLASS = "Class";
@@ -2193,6 +2190,7 @@ public final class AttributeName
 	/** */
 	public static final String ORDSCONSUMED = "OrdsConsumed";
 	/** */
+	public static final String ORGANIZATION = "Organization";
 	public static final String ORGANIZATIONNAME = "OrganizationName";
 	/** */
 	public static final String ORIENTATION = "Orientation";

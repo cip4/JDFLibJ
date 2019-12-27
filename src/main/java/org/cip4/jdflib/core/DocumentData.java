@@ -196,6 +196,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.CASINGINPARAMS, JDFLIB + "resource.JDFCasingInParams");
 		sm_PackageNames.put(ElementName.CCITTFAXPARAMS, JDFLIB + "resource.process.JDFCCITTFaxParams");
 		sm_PackageNames.put(ElementName.CERTIFICATE, JDFLIB + "jmf.JDFCertificate");
+		sm_PackageNames.put(ElementName.CERTIFICATION, JDFLIB + "resource.JDFCertification");
 		sm_PackageNames.put(ElementName.CHANGEDATTRIBUTE, JDFLIB + "resource.JDFChangedAttribute");
 		sm_PackageNames.put(ElementName.CHANGEDPATH, JDFLIB + "jmf.JDFChangedPath");
 		sm_PackageNames.put(ElementName.CHANNELBINDING, JDFLIB + "resource.process.postpress.JDFChannelBinding");

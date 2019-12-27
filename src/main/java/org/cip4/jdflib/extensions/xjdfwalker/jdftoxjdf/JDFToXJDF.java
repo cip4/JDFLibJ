@@ -81,7 +81,7 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFToXJDF extends PackageElementWalker
 {
-	private static EnumVersion defaultVersion = EnumVersion.Version_2_1;
+	private static EnumVersion defaultVersion = EnumVersion.Version_2_0;
 
 	public static void setDefaultVersion(final EnumVersion v)
 	{
