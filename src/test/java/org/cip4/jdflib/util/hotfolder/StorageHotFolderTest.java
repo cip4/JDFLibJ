@@ -582,7 +582,6 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		final CountListener cl = new CountListener();
 		cl.setDelay(2000);
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, cl);
-		hf.setMaxConcurrent(20);
 		hf.setStabilizeTime(100);
 		File error = new File("error");
 		hf.setErrorStorage(error);
@@ -590,6 +589,7 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		hf.setOKStorage(ok);
 		hf.setMaxStore(42);
 		hf.restart();
+		hf.setMaxConcurrent(20);
 		ThreadUtil.sleep(500);
 
 		for (int i = 0; i < 10; i++)
