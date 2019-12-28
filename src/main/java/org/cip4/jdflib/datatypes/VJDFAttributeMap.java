@@ -58,6 +58,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.HashUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  *
@@ -225,7 +226,7 @@ public class VJDFAttributeMap extends ArrayList<JDFAttributeMap>
 	 */
 	public void extendMap(final String strKey, final VString vsValues)
 	{
-		if (vsValues == null || vsValues.isEmpty())
+		if (StringUtil.isEmpty(vsValues) || StringUtil.isEmpty(strKey))
 		{
 			return;
 		}

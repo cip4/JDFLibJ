@@ -70,7 +70,10 @@ public class VString extends Vector<String>
 	private static final long serialVersionUID = 1L;
 	/**
 	 * the empty VString
+	 *
+	 * @deprecated grab your own... this is a potential leak, since it can be modified
 	 */
+	@Deprecated
 	final public static VString emptyVector = new VString();
 
 	/**

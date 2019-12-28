@@ -3407,7 +3407,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 *
-
+	
 	 *
 	 */
 
@@ -6827,7 +6827,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		final JDFNode p = addJDFNode(EnumType.ProcessGroup);
 		p.setType(EnumType.ProcessGroup.getName(), false);
-		if (tasks != null && !tasks.equals(VString.emptyVector))
+		if (!StringUtil.isEmpty(tasks))
 		{
 			p.setTypes(tasks);
 		}
