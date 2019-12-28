@@ -2089,13 +2089,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			return false; // has previously been initialized
 		}
 
-		final String id = appendAnchor(null);
+		appendAnchor(null);
 		// 080612 moved from root only to all nodes
 		ensureCreated();
 		if (isJDFRoot())
 		{
-			// create a standard JDFRoot with namespace, version, comment and
-			// audit pool
+			// create a standard JDFRoot with namespace, version, comment and audit pool
 			addNameSpace(null, getSchemaURL());
 			setVersion(getDefaultJDFVersion());
 
@@ -2104,26 +2103,21 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			if (getOwnerDocument_KElement().getXMLComment() == null && getOwnerDocument_KElement().getRoot() != null)
 				setXMLComment(comment);
 
-			// set an initial jobpartid
-			if (!hasAttribute(AttributeName.JOBPARTID))
-			{
-				setJobPartID(id);
-			}
 		}
-		else
-		{
-			// set an initial jobpartid
-			if (!hasAttribute(AttributeName.JOBPARTID))
-			{
-				setJobPartID(generateDotID(AttributeName.JOBPARTID, null));
-			}
-		}
-
+		ensureJobPartID();
 		setStatus(JDFElement.EnumNodeStatus.Waiting);
 		return true;
 	}
 
-	// ////////////////////////////////////////////////////////////////////
+	public String ensureJobPartID()
+	{
+		if (!hasNonEmpty(AttributeName.JOBPARTID))
+		{
+			final String jpid = generateDotID(AttributeName.JOBPARTID, null);
+			setJobPartID(jpid);
+		}
+		return getJobPartID(false);
+	}
 
 	/**
 	 * is this the JDF root element, i.e. it has no JDF above it
@@ -4836,11 +4830,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public boolean isTypesNode()
 	{
 		final EnumType type2 = getEnumType();
-		// return EnumType.ProcessGroup.equals(type2) &&
-		// !hasChildElement(ElementName.JDF, null) ||
-		// EnumType.Combined.equals(type2);
 		return EnumType.ProcessGroup.equals(type2) || EnumType.Combined.equals(type2);
-
 	}
 
 	/**

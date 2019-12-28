@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -161,7 +161,7 @@ public class FixVersionImpl extends PackageElementWalker
 		bFixIDs = true;
 		bZappInvalid = false;
 		bZappDeprecated = false;
-		version = EnumUtil.aLessThanB(EnumVersion.Version_2_0, _version) ? EnumVersion.Version_2_0 : _version;
+		version = _version;
 		bOK = true;
 		fixICSVersions = false;
 		bLayoutPrepToStripping = false;
@@ -302,8 +302,8 @@ public class FixVersionImpl extends PackageElementWalker
 	@Override
 	public String toString()
 	{
-		return "FixVersion [bFixIDs=" + bFixIDs + ", bZappInvalid=" + bZappInvalid + ", bZappDeprecated=" + bZappDeprecated + ", bFixNewDuplicate=" + bFixNewDuplicate
-				+ ", firsthour=" + firsthour + ", lasthour=" + lasthour + ", " + (version != null ? "version=" + version + ", " : "") + "fixICSVersions=" + fixICSVersions
-				+ ", bLayoutPrepToStripping=" + bLayoutPrepToStripping + "]";
+		return "FixVersion [bFixIDs=" + bFixIDs + ", bZappInvalid=" + bZappInvalid + ", bZappDeprecated=" + bZappDeprecated + ", bFixNewDuplicate=" + bFixNewDuplicate + ", firsthour=" + firsthour
+				+ ", lasthour=" + lasthour + ", " + (version != null ? "version=" + version + ", " : "") + "fixICSVersions=" + fixICSVersions + ", bLayoutPrepToStripping=" + bLayoutPrepToStripping
+				+ "]";
 	}
 }

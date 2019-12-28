@@ -761,6 +761,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf20.setSingleNode(true);
 		xjdf20.setSpanAsAttribute(true);
 		xjdf20.setRetainAll(true);
+		xjdf20.setNewVersion(EnumVersion.Version_2_1);
 		final KElement xjdf = xjdf20.makeNewJDF(nP, null);
 		xjdf.write2File(sm_dirTestDataTemp + "retain.xjdf");
 		assertNotNull(xjdf);
@@ -1534,6 +1535,20 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
 		assertEquals("w1", new XJDFHelper(xjdf).getSet(ElementName.NODEINFO, null).getPartition(0).getAttribute(XJDFConstants.ExternalID));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testVersion()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFToXJDF conv = new JDFToXJDF();
+		conv.setRetainAll(true);
+		conv.setNewVersion(EnumVersion.Version_2_1);
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		assertEquals("2.1", xjdf.getAttribute(AttributeName.VERSION));
 	}
 
 	/**

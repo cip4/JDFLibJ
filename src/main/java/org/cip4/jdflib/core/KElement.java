@@ -6200,14 +6200,14 @@ public class KElement extends ElementNSImpl implements Element
 			}
 			m_lStoreID.set(id % 1000000);
 		}
-		final String s = StringUtil.rightStr("000000" + m_lStoreID.getAndIncrement(), 6);
+		String s = JDFConstants.UNDERSCORE + StringUtil.rightStr("000000" + m_lStoreID.getAndIncrement(), 6);
 		// time + 6 digits (ID)
 		if (bDate)
 		{
-			final String date = dateFormatter.format(new Date());
-			return "_" + date + "_" + s;
+			final String date = JDFConstants.UNDERSCORE + dateFormatter.format(new Date());
+			s = date + s;
 		}
-		return "_" + s;
+		return s;
 	}
 
 	/**

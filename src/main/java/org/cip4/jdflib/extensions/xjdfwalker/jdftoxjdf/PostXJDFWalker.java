@@ -377,7 +377,7 @@ class PostXJDFWalker extends BaseElementWalker
 			part.renameAttribute(AttributeName.SETSHEETINDEX, AttributeName.SHEETINDEX);
 
 			part.removeAttribute(AttributeName.SUBRUN);
-			part.renameAttribute(AttributeName.WEBPRODUCT, AttributeName.PRODUCTPART);
+			part.renameAttribute(AttributeName.WEBPRODUCT, AttributeName.PRODUCT);
 			part.removeAttribute(AttributeName.WEBSETUP);
 
 			final String name = part.getNonEmpty(XJDFConstants.TransferCurveName);
