@@ -44,14 +44,14 @@ import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.util.VectorMap;
+import org.cip4.jdflib.util.ListMap;
 
 /**
  * @author prosirai finds all reslinks and resrefs
  */
 public class LinkRefFinder extends BaseElementWalker
 {
-	protected final VectorMap<String, KElement> theMap;
+	protected final ListMap<String, KElement> theMap;
 	protected final boolean bRef;
 	protected final boolean bLink;
 
@@ -65,7 +65,7 @@ public class LinkRefFinder extends BaseElementWalker
 		super(new BaseWalkerFactory());
 		bRef = ref;
 		bLink = link;
-		theMap = new VectorMap<>();
+		theMap = new ListMap<>();
 		new BaseWalker(getFactory()); // need a default walker
 	}
 
@@ -75,7 +75,7 @@ public class LinkRefFinder extends BaseElementWalker
 	 * @param n the node to walk
 	 * @return the vector of unlinked resourcerefs and resourceLinks
 	 */
-	public VectorMap<String, KElement> getMap(final JDFNode n)
+	public ListMap<String, KElement> getMap(final JDFNode n)
 	{
 		theMap.clear();
 		walkTree(n, null);
@@ -136,7 +136,7 @@ public class LinkRefFinder extends BaseElementWalker
 	/**
 	 * @return the theMap
 	 */
-	public VectorMap<String, KElement> getTheMap()
+	public ListMap<String, KElement> getTheMap()
 	{
 		return theMap;
 	}

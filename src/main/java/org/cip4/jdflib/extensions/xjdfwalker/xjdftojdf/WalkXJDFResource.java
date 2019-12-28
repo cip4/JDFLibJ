@@ -37,7 +37,6 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import java.util.List;
-import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -337,7 +336,7 @@ public class WalkXJDFResource extends WalkXElement
 				rl.copyAttribute(AttributeName.COMBINEDPROCESSINDEX, setRoot);
 				rl.setrRef(id);
 				res.removeAttribute(AttributeName.USAGE);
-				final VString reslinks = XJDFToJDFConverter.getResLinkAttribs();
+				final List<String> reslinks = XJDFToJDFConverter.getResLinkAttribs();
 				for (final String key : reslinks)
 				{
 					if (res.hasAttribute(key))
@@ -407,7 +406,7 @@ public class WalkXJDFResource extends WalkXElement
 		parent.setResourceName(name);
 		final JDFResource res = parent.getCreateResource(name);
 
-		final VString reslinks = XJDFToJDFConverter.getResLinkAttribs();
+		final List<String> reslinks = XJDFToJDFConverter.getResLinkAttribs();
 		for (final String key : reslinks)
 		{
 			if (res.hasAttribute(key))
@@ -440,7 +439,7 @@ public class WalkXJDFResource extends WalkXElement
 		if (ap != null && rl != null)
 		{
 			final KElement newAmountPool = rl.getCreateElement(ElementName.AMOUNTPOOL);
-			final Vector<JDFPartAmount> vpa = ap.getChildrenByClass(JDFPartAmount.class, false, 0);
+			final List<JDFPartAmount> vpa = ap.getChildArrayByClass(JDFPartAmount.class, false, 0);
 			for (final JDFPartAmount pa : vpa)
 			{
 				VJDFAttributeMap vParts = pa.getPartMapVector();
@@ -536,7 +535,7 @@ public class WalkXJDFResource extends WalkXElement
 
 	protected JDFAttributeMap removeImplicitParts(final JDFResource jdfRes, final JDFAttributeMap partMap)
 	{
-		final Vector<EnumPartIDKey> implicitPartitions = jdfRes.getImplicitPartitions();
+		final List<EnumPartIDKey> implicitPartitions = jdfRes.getImplicitPartitions();
 		if (implicitPartitions != null)
 		{
 			final JDFAttributeMap ret = partMap.clone();

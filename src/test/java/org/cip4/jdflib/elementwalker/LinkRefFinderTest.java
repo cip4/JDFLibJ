@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -39,6 +39,8 @@ package org.cip4.jdflib.elementwalker;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -48,7 +50,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.util.VectorMap;
+import org.cip4.jdflib.util.ListMap;
 import org.junit.Test;
 
 /**
@@ -69,7 +71,7 @@ public class LinkRefFinderTest extends JDFTestCaseBase
 	public void testGetTheMap()
 	{
 		final LinkRefFinder lrf = new LinkRefFinder(true, true);
-		final VectorMap<String, KElement> m = lrf.getMap(n);
+		final ListMap<String, KElement> m = lrf.getMap(n);
 		assertEquals(m, lrf.getTheMap());
 	}
 
@@ -104,11 +106,11 @@ public class LinkRefFinderTest extends JDFTestCaseBase
 			nV++;
 		}
 		final LinkRefFinder lrf = new LinkRefFinder(bRef, bLink);
-		final VectorMap<String, KElement> vm = lrf.getMap(n);
+		final ListMap<String, KElement> vm = lrf.getMap(n);
 		for (int i = 0; i < 1000; i++)
 		{
 			final JDFMedia m2 = (JDFMedia) vM.get(i);
-			final VElement vRef = new VElement(vm.get(m2.getID()));
+			final List<KElement> vRef = vm.get(m2.getID());
 			assertNotNull(vRef);
 			assertEquals("A link and a ref", vRef.size(), nV);
 		}

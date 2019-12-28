@@ -191,7 +191,6 @@ public class WalkJDF extends WalkJDFElement
 		{
 			newRootP.setID(null);
 			newRootP.setAttribute(AttributeName.VERSION, jdfToXJDF.getNewVersion().getName());
-			newRootP.setAttribute(AttributeName.MAXVERSION, jdfToXJDF.getNewVersion().getName());
 		}
 		updateTypes(newRootP, node.getTypesString());
 		namedFeaturesToGeneralID(node, newRootP);

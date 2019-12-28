@@ -53,6 +53,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -113,8 +114,8 @@ import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.CPUTimer;
+import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.StringUtil;
-import org.cip4.jdflib.util.VectorMap;
 import org.junit.Test;
 
 /**
@@ -2136,13 +2137,13 @@ public class JDFResourceTest extends JDFTestCaseBase
 		log.info("time 21: " + (t2 - t1));
 
 		final LinkRefFinder lrf = new LinkRefFinder(true, true);
-		final VectorMap<String, KElement> vm = lrf.getMap(n);
+		final ListMap<String, KElement> vm = lrf.getMap(n);
 		final long t3 = System.currentTimeMillis();
 		log.info("time 32: " + (t3 - t2));
 		for (int i = 0; i < 500; i++)
 		{
 			final JDFMedia m2 = (JDFMedia) vM.get(i);
-			final VElement vRef = new VElement(vm.get(m2.getID()));
+			final List<KElement> vRef = vm.get(m2.getID());
 			assertNotNull(vRef);
 			assertEquals("A link and a ref", vRef.size(), 2);
 		}
