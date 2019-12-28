@@ -51,6 +51,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Collection;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -1211,6 +1212,17 @@ public class StringUtil
 	public static boolean isEmpty(final String s)
 	{
 		return s == null || JDFConstants.EMPTYSTRING.equals(s);
+	}
+
+	/**
+	 * are we null or empty or contain only an empty JDFAttributeMap
+	 *
+	 * @param v
+	 * @return
+	 */
+	public static boolean isEmpty(final Collection<String> v)
+	{
+		return v == null || v.isEmpty() || v.size() == 1 && StringUtil.isEmpty(v.iterator().next());
 	}
 
 	/**

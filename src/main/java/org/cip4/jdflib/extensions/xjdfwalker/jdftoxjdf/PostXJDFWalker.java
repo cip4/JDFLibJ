@@ -3093,7 +3093,8 @@ class PostXJDFWalker extends BaseElementWalker
 		if (!isRetainAll())
 		{
 			final Vector<SetHelper> v = new XJDFHelper(xjdf).getSets();
-			combineSameSets(v);
+			if (v != null)
+				combineSameSets(v);
 		}
 	}
 

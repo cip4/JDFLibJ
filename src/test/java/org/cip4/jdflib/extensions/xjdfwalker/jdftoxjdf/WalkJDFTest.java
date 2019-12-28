@@ -121,4 +121,14 @@ public class WalkJDFTest extends JDFTestCaseBase
 		assertNull(xjdf.getXPathElement("AuditPool/AuditCreated[2]"));
 	}
 
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	public void setUp() throws Exception
+	{
+		JDFToXJDF.setDefaultVersion(EnumVersion.Version_2_0);
+		super.setUp();
+	}
+
 }

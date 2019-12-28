@@ -36,6 +36,8 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.List;
+
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -44,7 +46,6 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
@@ -123,7 +124,7 @@ public class WalkResLink extends WalkJDFElement
 		}
 		else
 		{
-			final VElement v = setResource(rl, linkTarget, jdfToXJDF.newRoot);
+			final List<KElement> v = setResource(rl, linkTarget, jdfToXJDF.newRoot);
 			if (v != null)
 			{
 				final boolean isLegacy = EnumUtil.aLessThanB(jdfToXJDF.getNewVersion(), EnumVersion.Version_2_1);
@@ -269,9 +270,9 @@ public class WalkResLink extends WalkJDFElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#setResource(org.cip4.jdflib.core.JDFElement, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected VElement setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
+	protected List<KElement> setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
 	{
-		final VElement newResources = super.setResource(rl, linkTarget, xRoot);
+		final List<KElement> newResources = super.setResource(rl, linkTarget, xRoot);
 		if (XJDF20.rootName.equals(xRoot.getLocalName()))
 		{
 			setNodePartitions(rl, newResources);
@@ -280,9 +281,9 @@ public class WalkResLink extends WalkJDFElement
 		return newResources;
 	}
 
-	private void setNodePartitions(final JDFElement rl, final VElement newResources)
+	private void setNodePartitions(final JDFElement rl, final List<KElement> newResources)
 	{
-		if (newResources != null && newResources.size() > 0 && !jdfToXJDF.isWantProcessList() && !jdfToXJDF.isSingleNode())
+		if (!ContainerUtil.isEmpty(newResources) && !jdfToXJDF.isWantProcessList() && !jdfToXJDF.isSingleNode())
 		{
 			final JDFNode parentNode = rl.getParentJDF();
 			final JDFNode parentProduct = getParentProduct(parentNode);

@@ -36,12 +36,13 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.List;
+
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFPart;
@@ -69,9 +70,9 @@ public class WalkColorIntentResLink extends WalkResLink
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#setResource(org.cip4.jdflib.core.JDFResourceLink, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected VElement setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xjdf)
+	protected List<KElement> setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xjdf)
 	{
-		final VElement v = super.setResource(rl, linkTarget, xjdf);
+		final List<KElement> v = super.setResource(rl, linkTarget, xjdf);
 		KElement thecolorIntent = null;
 		for (final KElement e1 : v)
 		{

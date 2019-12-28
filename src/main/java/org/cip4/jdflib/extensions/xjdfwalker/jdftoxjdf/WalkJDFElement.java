@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
@@ -377,7 +378,7 @@ public class WalkJDFElement extends WalkElement
 	 * @param xRoot
 	 * @return the vector of partitions
 	 */
-	protected VElement setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
+	protected List<KElement> setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
 	{
 		final String className = jdfToXJDF.getClassName(linkTarget);
 		if (className == null || xRoot == null || linkTarget == null)
@@ -415,9 +416,9 @@ public class WalkJDFElement extends WalkElement
 		return loopLeaves(rl, className, resourceSet, nLeaves, vRes);
 	}
 
-	VElement loopLeaves(final JDFElement rl, final String className, final KElement resourceSet, final int nLeaves, final VElement vRes)
+	List<KElement> loopLeaves(final JDFElement rl, final String className, final KElement resourceSet, final int nLeaves, final VElement vRes)
 	{
-		final VElement v = new VElement();
+		final List<KElement> v = new ArrayList<>();
 		for (final KElement e : vRes)
 		{
 			final JDFResource r = (JDFResource) e;

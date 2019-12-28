@@ -81,7 +81,7 @@ public class VString extends Vector<String>
 	 */
 	public static boolean isEmpty(final VString v)
 	{
-		return v == null || v.isEmpty() || v.size() == 1 && StringUtil.isEmpty(v.get(0));
+		return StringUtil.isEmpty(v);
 	}
 
 	/**

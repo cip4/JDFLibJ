@@ -58,6 +58,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -182,11 +183,26 @@ public class StringUtilTest extends JDFTestCaseBase
 	 * test for getNonEmpty
 	 */
 	@Test
-	public void testIsNonEmpty()
+	public void testIsEmpty()
 	{
 		assertTrue(StringUtil.isEmpty(""));
-		assertTrue(StringUtil.isEmpty(null));
+		assertTrue(StringUtil.isEmpty((String) null));
 		assertFalse(StringUtil.isEmpty("a"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testIsEmptyList()
+	{
+		assertTrue(StringUtil.isEmpty((StringArray) null));
+		final StringArray v = new StringArray();
+		assertTrue(StringUtil.isEmpty(v));
+		v.appendUnique("");
+		assertTrue(StringUtil.isEmpty(v));
+		v.set(0, "b");
+		assertFalse(StringUtil.isEmpty(v));
 	}
 
 	/**
