@@ -377,7 +377,7 @@ class PostXJDFWalker extends BaseElementWalker
 			part.renameAttribute(AttributeName.SETSHEETINDEX, AttributeName.SHEETINDEX);
 
 			part.removeAttribute(AttributeName.SUBRUN);
-			part.renameAttribute(AttributeName.WEBPRODUCT, AttributeName.PRODUCTPART);
+			part.renameAttribute(AttributeName.WEBPRODUCT, AttributeName.PRODUCT);
 			part.removeAttribute(AttributeName.WEBSETUP);
 
 			final String name = part.getNonEmpty(XJDFConstants.TransferCurveName);
@@ -1769,7 +1769,7 @@ class PostXJDFWalker extends BaseElementWalker
 			else
 			{
 				// TODO fix to subelements
-				final IntentHelper insert = ph.getIntent(ElementName.INSERTINGINTENT);
+				final IntentHelper insert = ph.getIntent(XJDFConstants.AssemblingIntent);
 				if (insert != null)
 				{
 					insert.getCreateResource().moveAttribute(XJDFConstants.ChildRefs, ph.getRoot());
@@ -3093,7 +3093,8 @@ class PostXJDFWalker extends BaseElementWalker
 		if (!isRetainAll())
 		{
 			final Vector<SetHelper> v = new XJDFHelper(xjdf).getSets();
-			combineSameSets(v);
+			if (v != null)
+				combineSameSets(v);
 		}
 	}
 

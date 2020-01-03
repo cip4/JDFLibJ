@@ -40,11 +40,11 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.Vector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -633,18 +633,17 @@ public class JDFMerge
 		JDFResource root = targetRes.getResourceRoot();
 		final VString partIDKeys = root.getPartIDKeys();
 		final VString mergeIDKeys = toMerge.getPartIDKeys();
-		final VElement allChildren = resToMerge.getNodesWithSpawnID(spawnID);
+		final List<JDFResource> allChildren = resToMerge.getNodesWithSpawnID(spawnID);
 
 		// No spawntargets take all
 		if (allChildren.isEmpty())
 		{
-			allChildren.addElement(toMerge);
+			allChildren.add(toMerge);
 		}
 
 		boolean bTargetGone = false;
-		for (int i = 0; i < allChildren.size(); i++)
+		for (final JDFResource src : allChildren)
 		{
-			final JDFResource src = (JDFResource) allChildren.elementAt(i);
 			if (src.getIdentical() != null)
 			{
 				continue; // no need to merge identical elements
@@ -751,10 +750,9 @@ public class JDFMerge
 		// copy resource from orig to spawned node
 		poolToMerge.copyElement(res1, null);
 		res1 = poolToMerge.getResourceByID(resID);
-		final VElement resLeafsSpawned = res1.getNodesWithSpawnID(spawnID);
-		for (int leaf = 0; leaf < resLeafsSpawned.size(); leaf++)
+		final List<JDFResource> resLeafsSpawned = res1.getNodesWithSpawnID(spawnID);
+		for (final JDFResource leafRes : resLeafsSpawned)
 		{
-			final JDFResource leafRes = (JDFResource) resLeafsSpawned.elementAt(leaf);
 			leafRes.removeFromSpawnIDs(spawnID);
 			final VString spawnIDs = leafRes.getSpawnIDs(false);
 			if (spawnIDs != null)
@@ -1160,7 +1158,7 @@ public class JDFMerge
 	 */
 	private void expandLinkedResources(final JDFResourceLinkPool resourceLinkPool)
 	{
-		final Vector<JDFResourceLink> links = resourceLinkPool == null ? null : resourceLinkPool.getLinks();
+		final List<JDFResourceLink> links = resourceLinkPool == null ? null : resourceLinkPool.getLinks();
 		if (links != null)
 		{
 			for (final JDFResourceLink rl : links)
@@ -1192,17 +1190,17 @@ public class JDFMerge
 			throw new JDFException("JDFResource.mergeSpawnIDs  merging incompatible resources ID = " + mainRes.getID() + " IDMerge = " + resToMerge.getID());
 		}
 
-		final VElement allLeaves = new VElement();
-		final VElement spawnedLeaves = mainRes.getNodesWithSpawnID(spawnID);
+		final List<JDFResource> allLeaves = new ArrayList<>();
+		final List<JDFResource> spawnedLeaves = mainRes.getNodesWithSpawnID(spawnID);
 
 		// Only manipulate leaves and subleaves that were explicitly spawned
 		if (spawnedLeaves != null)
 		{
 			for (final KElement e : spawnedLeaves)
 			{
-				allLeaves.addAll(((JDFResource) e).getLeaves(true));
+				allLeaves.addAll(((JDFResource) e).getLeafArray(true));
 			}
-			allLeaves.unify();
+			ContainerUtil.unify(allLeaves);
 		}
 
 		final VString partIDKeys = mainRes.getPartIDKeys();
@@ -1324,7 +1322,7 @@ public class JDFMerge
 				}
 			}
 
-			final VElement oldResLeafsSpawned = oldRes.getNodesWithSpawnID(spawnID);
+			final List<JDFResource> oldResLeafsSpawned = oldRes.getNodesWithSpawnID(spawnID);
 			for (final KElement leaf : oldResLeafsSpawned)
 			{
 				final JDFResource leafRes = (JDFResource) leaf;
@@ -1431,10 +1429,10 @@ public class JDFMerge
 
 			// merge all potential new spawnIds from subJDFNode to this
 			mergeSpawnIDs(oldRes, newRes, true);
-			final VElement oldResLeafsSpawned = oldRes.getNodesWithSpawnID(spawnID);
+			final List<JDFResource> oldResLeafsSpawned = oldRes.getNodesWithSpawnID(spawnID);
 			for (int leaf = 0; leaf < oldResLeafsSpawned.size(); leaf++)
 			{
-				final JDFResource leafRes = (JDFResource) oldResLeafsSpawned.elementAt(leaf);
+				final JDFResource leafRes = oldResLeafsSpawned.get(leaf);
 				// handle multiple spawns (reference count of spawned audits!)
 				leafRes.removeFromSpawnIDs(spawnID);
 				calcSpawnStatus(leafRes, false);

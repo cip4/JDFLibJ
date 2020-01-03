@@ -681,7 +681,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		final CPUTimer ct = new CPUTimer(false);
 		final JDFQueue qLast = (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
 		final JDFQueueEntry qeLast = qLast.appendQueueEntry();
-		for (int i = 0; i < 9400; i++)
+		for (int i = 0; i < 9600; i++)
 		{
 			final JDFQueueEntry qe = theQueue.appendQueueEntry();
 			qe.setPriority((i * 317) % 99);

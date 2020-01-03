@@ -276,7 +276,8 @@ public class JDFResource extends JDFElement
 		atrInfoTable_Abstract[8] = new AtrInfoTable(AttributeName.PIPEURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable_Abstract[9] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_Abstract[10] = new AtrInfoTable(AttributeName.RREFS, 0x44444433, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSpawnStatus.getEnum(0), EnumSpawnStatus.NotSpawned.getName());
+		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSpawnStatus.getEnum(0),
+				EnumSpawnStatus.NotSpawned.getName());
 		atrInfoTable_Abstract[12] = new AtrInfoTable(AttributeName.SPAWNIDS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable_Abstract[13] = new AtrInfoTable(AttributeName.SORTING, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable_Abstract[14] = new AtrInfoTable(AttributeName.SORTAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
@@ -311,7 +312,8 @@ public class JDFResource extends JDFElement
 	{
 		atrInfoTable_ID_Class_Required[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
 		atrInfoTable_ID_Class_Required[1] = new AtrInfoTable(AttributeName.CLASS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumResourceClass.getEnum(0), null);
-		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0), EnumPartUsage.Explicit.getName());
+		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0),
+				EnumPartUsage.Explicit.getName());
 
 	}
 
@@ -2429,7 +2431,7 @@ public class JDFResource extends JDFElement
 		if (clazz.equals(JDFResource.class))
 			return getChildArray_KElement(getNodeName(), null, null, true, 0);
 		else
-			return super.getChildArrayByClass(clazz, false, 0);
+			return super.getChildArrayByClass_KElement(clazz, false, 0);
 	}
 
 	/**
@@ -2463,15 +2465,13 @@ public class JDFResource extends JDFElement
 	 */
 	public VString getPartValues(final EnumPartIDKey partType)
 	{
-		final VElement v = getLeaves(false);
+		final List<JDFResource> v = getLeafArray(false);
 		final VString vs = new VString();
 
-		for (int i = 0; i < v.size(); i++)
+		for (final JDFResource p : v)
 		{
-			final JDFResource p = (JDFResource) v.elementAt(i);
-			final String s = p.getAttribute(partType.getName(), null, JDFConstants.EMPTYSTRING);
-
-			if (s != null && !s.equals(JDFConstants.EMPTYSTRING))
+			final String s = p.getNonEmpty(partType.getName());
+			if (s != null)
 			{
 				boolean bOK = true;
 				for (int j = 0; j < vs.size() && bOK; j++)
@@ -3411,16 +3411,15 @@ public class JDFResource extends JDFElement
 			boolean hasData = false;
 			while (!hasData)
 			{
-				final VElement v = getLeaves(false);
+				final List<JDFResource> v = getLeafArray(false);
 				v.remove(JDFResource.this);
 				if (v.isEmpty())
 					break;
-				final VElement zapp = force ? v : new VElement();
+				final List<JDFResource> zapp = force ? v : new ArrayList<JDFResource>();
 				if (!force)
 				{
-					for (final KElement e : v)
+					for (final JDFResource r : v)
 					{
-						final JDFResource r = (JDFResource) e;
 						if (containsData(r))
 						{
 							hasData = true;
@@ -3862,11 +3861,9 @@ public class JDFResource extends JDFElement
 	 */
 	public void unSpawnPart(final String spawnID, final EnumSpawnStatus spawnStatus)
 	{
-		final VElement vLeaves = getNodesWithSpawnID(spawnID);
-		for (int i = 0; i < vLeaves.size(); i++)
+		final List<JDFResource> vLeaves = getNodesWithSpawnID(spawnID);
+		for (final JDFResource leaf : vLeaves)
 		{
-			final JDFResource leaf = (JDFResource) vLeaves.elementAt(i);
-
 			leaf.removeFromSpawnIDs(spawnID);
 			if (spawnStatus == EnumSpawnStatus.SpawnedRW)
 			{
@@ -3892,15 +3889,14 @@ public class JDFResource extends JDFElement
 	 * @param spawnID the spawnID to look for
 	 * @return VElement - the vector of nodes or leaves of 'this' that contain spawnID
 	 */
-	public VElement getNodesWithSpawnID(final String spawnID)
+	public List<JDFResource> getNodesWithSpawnID(final String spawnID)
 	{
-		final VElement v2 = getLeaves(true);
+		final List<JDFResource> v2 = getLeafArray(true);
 
 		for (int i = v2.size() - 1; i >= 0; i--)
 		{
-			final JDFElement e = (JDFElement) v2.elementAt(i);
-			if (!e.hasAttribute_KElement(AttributeName.SPAWNIDS, null, false)
-					|| !e.includesMatchingAttribute(AttributeName.SPAWNIDS, spawnID, AttributeInfo.EnumAttributeType.NMTOKENS))
+			final JDFElement e = v2.get(i);
+			if (!e.hasAttribute_KElement(AttributeName.SPAWNIDS, null, false) || !e.includesMatchingAttribute(AttributeName.SPAWNIDS, spawnID, AttributeInfo.EnumAttributeType.NMTOKENS))
 			{
 				v2.remove(i);
 			}
@@ -4685,9 +4681,9 @@ public class JDFResource extends JDFElement
 			// Check found part ID key.
 			if (strPartIDKey != null)
 			{
-				if ((strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCCOPIES))
-						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCRUNINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCSHEETINDEX))
-						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_RUNINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_SHEETINDEX))
+				if ((strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCCOPIES)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCRUNINDEX))
+						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCSHEETINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_RUNINDEX))
+						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_SHEETINDEX))
 				// values not allowed according to JDF 1.2, 3.8.2.4
 				// || (strPartIDKey.equals (AttributeName.SORTING))
 				// || (strPartIDKey.equals (AttributeName.SORTAMOUNT))
@@ -7509,22 +7505,22 @@ public class JDFResource extends JDFElement
 
 		if (vLinks == null)
 		{
-			VElement vRefs = getRefElements();
+			final ArrayList<JDFResource> v2 = new ArrayList<>();
+			final List<JDFRefElement> vRefs = getChildArrayByClass(JDFRefElement.class, false, 0);
 			if (vRefs != null)
 			{
-				final VElement v2 = new VElement();
-				for (int j = 0; j < vRefs.size(); j++)
+				for (final JDFRefElement re : vRefs)
 				{
-					v2.add(((JDFRefElement) vRefs.get(j)).getTarget());
+					v2.add(re.getTarget());
 				}
-				vRefs = v2;
 			}
 			deleteNode();
-			if (vRefs != null)
+			if (v2 != null)
 			{
-				for (int j = 0; j < vRefs.size(); j++)
+				ContainerUtil.unify(v2);
+				for (final JDFResource r : v2)
 				{
-					((JDFResource) vRefs.get(j)).deleteUnLinked();
+					r.deleteUnLinked();
 				}
 			}
 			bRet = true;

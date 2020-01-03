@@ -44,6 +44,7 @@ package org.cip4.jdflib.util;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
@@ -1449,10 +1450,9 @@ public class StatusCounter
 					for (int i = 0; i < size; i++)
 					{
 						final JDFResource r = (JDFResource) vRes.get(i);
-						final VElement leaves = r.getLeaves(false);
-						for (int j = 0; j < leaves.size(); j++)
+						final List<JDFResource> leaves = r.getLeafArray(false);
+						for (final JDFResource rr : leaves)
 						{
-							final JDFResource rr = (JDFResource) leaves.get(j);
 							final VJDFAttributeMap vMap = rr.getPartMapVector(false);
 							if (m_vPartMap != null && m_vPartMap.overlapsMap(vMap))
 							{

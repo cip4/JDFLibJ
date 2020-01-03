@@ -116,6 +116,7 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.MyPair;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.URLReader;
@@ -3179,17 +3180,9 @@ public class JDFElement extends KElement
 	 */
 	public VElement getRefElements()
 	{
-		final VElement v = getChildElementVector(null, null, null, true, 0, false);
-		// loop backwords so that I don't invalidate the vector by deleting
-		for (int i = v.size() - 1; i >= 0; i--)
-		{
-			final KElement e = v.item(i);
-			// cant be null
-			if (!(e instanceof JDFRefElement))
-			{
-				v.remove(i);
-			}
-		}
+		final List<JDFRefElement> vr = getChildArrayByClass_KElement(JDFRefElement.class, false, 0);
+		final VElement v = new VElement();
+		v.addAll(vr);
 		return v;
 	}
 
@@ -3226,10 +3219,9 @@ public class JDFElement extends KElement
 	 */
 	public void inlineRefElements(final String nodeName, final String nameSpaceURI, final boolean bDirect)
 	{
-		final VElement v = getRefElements();
-		for (final KElement e : v)
+		final List<JDFRefElement> v = getChildArrayByClass_KElement(JDFRefElement.class, false, 0);
+		for (final JDFRefElement re : v)
 		{
-			final JDFRefElement re = (JDFRefElement) e;
 			// it fits - inline it
 			if (re.fitsName(nodeName, nameSpaceURI))
 			{
@@ -3328,7 +3320,8 @@ public class JDFElement extends KElement
 	 *
 	 * @default getChildrenByTagName(s,null,null, false, true, 0)
 	 */
-	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize, final boolean bFollowRefs)
+	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize,
+			final boolean bFollowRefs)
 	{
 		final VElement v = super.getChildrenByTagName_KElement(bFollowRefs ? null : elementName, nameSpaceURI, mAttrib, bDirect, bAnd, bFollowRefs ? -1 : maxSize);
 
@@ -3429,7 +3422,7 @@ public class JDFElement extends KElement
 						// be null and will be skipped
 						if (target != null)
 						{ // we want the jdfElem version of IncludesAttributes,
-								// so we must upcast
+							// so we must upcast
 							if (bMapEmpty || target.includesAttributes(mAttrib, bAnd))
 							{
 								v.addElement(target);
@@ -5631,14 +5624,12 @@ public class JDFElement extends KElement
 				continue;
 			}
 
-			if (((EnumPoolType.ResourcePool.equals(poolType)) || (EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType)))
-					&& e instanceof JDFResource)
+			if (((EnumPoolType.ResourcePool.equals(poolType)) || (EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType))) && e instanceof JDFResource)
 			{
 				continue;
 			}
 
-			if (((EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.RefElement.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType)))
-					&& e instanceof JDFRefElement)
+			if (((EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.RefElement.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType))) && e instanceof JDFRefElement)
 			{
 				continue;
 			}
@@ -6006,7 +5997,9 @@ public class JDFElement extends KElement
 	 *
 	 *
 	 * @return VectorMap<String, JDFGeneralID> the map of lists of attribute values
+	 * @deprecated
 	 */
+	@Deprecated
 	public VectorMap<String, JDFGeneralID> getGeneralIDVectorMap()
 	{
 		final VElement v = getChildElementVector(ElementName.GENERALID, null);
@@ -6024,6 +6017,28 @@ public class JDFElement extends KElement
 	}
 
 	/**
+	 * Gets a map of all GeneralID key-value Pair lists if multiple generalIDs with the same IDUsage are specified, each GeneralID is added to the VectorMap
+	 *
+	 *
+	 * @return VectorMap<String, JDFGeneralID> the map of lists of attribute values
+	 */
+	public ListMap<String, JDFGeneralID> getGeneralIDListMap()
+	{
+		final Collection<KElement> v = getChildArray(ElementName.GENERALID, null);
+		if (v.isEmpty())
+		{
+			return null;
+		}
+		final ListMap<String, JDFGeneralID> vm = new ListMap<>();
+		for (final KElement e : v)
+		{
+			final JDFGeneralID gid = (JDFGeneralID) e;
+			vm.putOne(gid.getIDUsage(), gid);
+		}
+		return vm;
+	}
+
+	/**
 	 * Gets a map of all GeneralID key-value Pairs if multiple generalIDs with the same IDUsage are specified, the last one is added to the map
 	 *
 	 *
@@ -6031,7 +6046,7 @@ public class JDFElement extends KElement
 	 */
 	public JDFAttributeMap getGeneralIDMap()
 	{
-		final VElement v = getChildElementVector(ElementName.GENERALID, null);
+		final Collection<KElement> v = getChildArray(ElementName.GENERALID, null);
 		if (v.size() == 0)
 		{
 			return null;
@@ -6163,7 +6178,8 @@ public class JDFElement extends KElement
 	 *
 	 * @default getChildWithMatchingAttribute(nodeName, attName, null, null, 0, true, EnumAttributeType.Any);
 	 */
-	public JDFElement getChildWithMatchingAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index, final boolean bDirect, final AttributeInfo.EnumAttributeType dataType)
+	public JDFElement getChildWithMatchingAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index, final boolean bDirect,
+			final AttributeInfo.EnumAttributeType dataType)
 	{
 		final VElement v = getChildrenByTagName(nodeName, nameSpaceURI, null, bDirect, true, 0);
 		final int siz = v.size();

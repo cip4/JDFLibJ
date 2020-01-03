@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.resource.intent;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
@@ -59,4 +60,14 @@ public class JDFMediaIntentTest
 		ns.setActual(EnumISOPaperSubstrate.PS1);
 	}
 
+	/**
+	 *
+	 */
+	@Test
+	public void testCert()
+	{
+		final JDFMediaIntent ci = (JDFMediaIntent) new JDFDoc(ElementName.MEDIAINTENT).getRoot();
+		ci.appendCertification().setOrganization("o1");
+		assertEquals("o1", ci.getCertification(0).getOrganization());
+	}
 }

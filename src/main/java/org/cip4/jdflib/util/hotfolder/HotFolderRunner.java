@@ -7,11 +7,13 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.ThreadUtil;
+import org.cip4.jdflib.util.hotfolder.HotFolder.HotFileRunner;
 import org.cip4.jdflib.util.thread.MultiTaskQueue;
 import org.cip4.jdflib.util.thread.MyMutex;
 
 class HotFolderRunner extends Thread
 {
+
 	List<HotFolder> hotfolders;
 	MyMutex mutex;
 	private static Log log = LogFactory.getLog(HotFolderRunner.class);
@@ -118,7 +120,7 @@ class HotFolderRunner extends Thread
 	/**
 	 * @return the therunner
 	 */
-	static HotFolderRunner getTherunner()
+	static HotFolderRunner getCreateTherunner()
 	{
 		synchronized (theRunner)
 		{
@@ -129,11 +131,46 @@ class HotFolderRunner extends Thread
 	}
 
 	/**
+	 * @return the therunner
+	 */
+	static HotFolderRunner getTherunner()
+	{
+		synchronized (theRunner)
+		{
+			final HotFolderRunner hotFolderRunner = theRunner.get();
+
+			return hotFolderRunner == null || hotFolderRunner.interrupt ? null : hotFolderRunner;
+		}
+	}
+
+	/**
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
 		return "HotFolderRunner [" + (hotfolders != null ? "hotfolder size=" + hotfolders.size() + ", " : "") + "interrupt=" + interrupt + ", maxConcurrent=" + maxConcurrent + "]";
+	}
+
+	/**
+	 * @return the maxConcurrent
+	 */
+	public int getMaxConcurrent()
+	{
+		return maxConcurrent;
+	}
+
+	boolean runFile(final HotFileRunner runner)
+	{
+		if (getMaxConcurrent() == 1)
+		{
+			runner.run();
+		}
+		else
+		{
+			final MultiTaskQueue taskQueue = MultiTaskQueue.getCreateQueue(getName(), getMaxConcurrent());
+			return taskQueue.queue(runner);
+		}
+		return true;
 	}
 }

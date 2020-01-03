@@ -36,13 +36,14 @@
  */
 package org.cip4.jdflib.extensions;
 
+import java.util.Collection;
+
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -134,7 +135,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public VJDFAttributeMap getPartMapVector()
 	{
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();
-		final VElement vParts = theElement.getChildElementVector(ElementName.PART, null);
+		final Collection<KElement> vParts = theElement.getChildArray(ElementName.PART, null);
 		if (vParts != null)
 		{
 			for (final KElement e : vParts)

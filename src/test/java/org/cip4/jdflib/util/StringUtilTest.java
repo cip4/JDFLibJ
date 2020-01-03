@@ -58,6 +58,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -182,11 +183,26 @@ public class StringUtilTest extends JDFTestCaseBase
 	 * test for getNonEmpty
 	 */
 	@Test
-	public void testIsNonEmpty()
+	public void testIsEmpty()
 	{
 		assertTrue(StringUtil.isEmpty(""));
-		assertTrue(StringUtil.isEmpty(null));
+		assertTrue(StringUtil.isEmpty((String) null));
 		assertFalse(StringUtil.isEmpty("a"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testIsEmptyList()
+	{
+		assertTrue(StringUtil.isEmpty((StringArray) null));
+		final StringArray v = new StringArray();
+		assertTrue(StringUtil.isEmpty(v));
+		v.appendUnique("");
+		assertTrue(StringUtil.isEmpty(v));
+		v.set(0, "b");
+		assertFalse(StringUtil.isEmpty(v));
 	}
 
 	/**
@@ -984,7 +1000,18 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.zappTokenWS(" n2 ", null), "n2");
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 *
+	 */
+	@Test
+	public void testHasTokenNeg()
+	{
+		assertTrue(StringUtil.hasToken("1", "1", null, -1));
+		assertTrue(StringUtil.hasToken("1 2 1", "1", null, -1));
+		assertTrue(StringUtil.hasToken("1 2 1", "2", null, -1));
+		assertFalse(StringUtil.hasToken("1 2 1", "2", null, -2));
+		assertFalse(StringUtil.hasToken("1 2 1", "1", null, -3));
+	}
 
 	/**
 	 *
@@ -1042,10 +1069,8 @@ public class StringUtilTest extends JDFTestCaseBase
 			StringUtil.hasToken(s2, "ab", " ", 0);
 		}
 		final long t2 = System.currentTimeMillis();
-		System.out.println(t2 - t0);
+		log.info("" + (t2 - t0));
 	}
-
-	// /////////////////////////////////////////////////////////////////////////
 
 	/**
 	 *

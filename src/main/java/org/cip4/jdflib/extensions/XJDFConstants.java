@@ -36,6 +36,8 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.core.ElementName;
+
 public abstract class XJDFConstants
 {
 	public static final String AssemblingIntent = "AssemblingIntent";
@@ -143,6 +145,7 @@ public abstract class XJDFConstants
 	public static final String SourceFrequencyMax = "SourceFrequencyMax";
 	public static final String SourceFrequencyMin = "SourceFrequencyMin";
 	public static final String StickOn = "StickOn";
+	public static final String Surface = ElementName.SURFACE;
 	public static final String SurfaceColor = "SurfaceColor";
 
 	public static final String TransferCurveName = "TransferCurveName";

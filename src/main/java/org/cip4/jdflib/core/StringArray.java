@@ -73,7 +73,7 @@ public class StringArray extends ArrayList<String>
 	 */
 	public static boolean isEmpty(final Collection<String> v)
 	{
-		return v == null || v.isEmpty() || v.size() == 1 && StringUtil.isEmpty(v.iterator().next());
+		return StringUtil.isEmpty(v);
 	}
 
 	/**
@@ -194,7 +194,7 @@ public class StringArray extends ArrayList<String>
 	 */
 	public void appendUnique(final Collection<String> v)
 	{
-		if (!StringArray.isEmpty(v))
+		if (!StringUtil.isEmpty(v))
 		{
 			final int size = v.size();
 			if (size == 1) // speedup for single append

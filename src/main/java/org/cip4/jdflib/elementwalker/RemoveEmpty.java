@@ -41,8 +41,8 @@ package org.cip4.jdflib.elementwalker;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
-import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -551,7 +551,7 @@ public class RemoveEmpty extends BaseElementWalker
 		 */
 		Collection<JDFRefElement> getRefs(final JDFResource r)
 		{
-			final Vector<KElement> v = rf == null ? null : rf.getTheMap().get(r.getID());
+			final List<KElement> v = rf == null ? null : rf.getTheMap().get(r.getID());
 			if (v != null)
 			{
 				final ArrayList<JDFRefElement> vr = new ArrayList<>();
@@ -574,7 +574,7 @@ public class RemoveEmpty extends BaseElementWalker
 		 */
 		Collection<JDFResourceLink> getLinks(final JDFResource r)
 		{
-			final Vector<KElement> v = rf == null ? null : rf.getTheMap().get(r.getID());
+			final List<KElement> v = rf == null ? null : rf.getTheMap().get(r.getID());
 			if (v != null)
 			{
 				final ArrayList<JDFResourceLink> vr = new ArrayList<>();

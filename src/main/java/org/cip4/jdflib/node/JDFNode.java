@@ -2089,13 +2089,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			return false; // has previously been initialized
 		}
 
-		final String id = appendAnchor(null);
+		appendAnchor(null);
 		// 080612 moved from root only to all nodes
 		ensureCreated();
 		if (isJDFRoot())
 		{
-			// create a standard JDFRoot with namespace, version, comment and
-			// audit pool
+			// create a standard JDFRoot with namespace, version, comment and audit pool
 			addNameSpace(null, getSchemaURL());
 			setVersion(getDefaultJDFVersion());
 
@@ -2104,26 +2103,21 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			if (getOwnerDocument_KElement().getXMLComment() == null && getOwnerDocument_KElement().getRoot() != null)
 				setXMLComment(comment);
 
-			// set an initial jobpartid
-			if (!hasAttribute(AttributeName.JOBPARTID))
-			{
-				setJobPartID(id);
-			}
 		}
-		else
-		{
-			// set an initial jobpartid
-			if (!hasAttribute(AttributeName.JOBPARTID))
-			{
-				setJobPartID(generateDotID(AttributeName.JOBPARTID, null));
-			}
-		}
-
+		ensureJobPartID();
 		setStatus(JDFElement.EnumNodeStatus.Waiting);
 		return true;
 	}
 
-	// ////////////////////////////////////////////////////////////////////
+	public String ensureJobPartID()
+	{
+		if (!hasNonEmpty(AttributeName.JOBPARTID))
+		{
+			final String jpid = generateDotID(AttributeName.JOBPARTID, null);
+			setJobPartID(jpid);
+		}
+		return getJobPartID(false);
+	}
 
 	/**
 	 * is this the JDF root element, i.e. it has no JDF above it
@@ -2347,12 +2341,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			}
 			stat = null;
 
-			final VElement vLeaves = ni.getLeaves(false);
+			final List<JDFResource> vLeaves = ni.getLeafArray(false);
 			final int size = vLeaves.size();
 
 			for (int i = 0; i < size; i++)
 			{
-				JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.elementAt(i);
+				JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.get(i);
 				JDFAttributeMap map = niCmp.getPartMap();
 				if (identicalSrcMap != null)
 					map.putAll(identicalSrcMap);
@@ -2456,11 +2450,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 					identicalSrcMap = identicalSrc.getPartMap();
 			}
 
-			final VElement vLeaves = ni.getLeaves(false);
+			final List<JDFResource> vLeaves = ni.getLeafArray(false);
 			final int size = vLeaves.size();
 			for (int i = 0; i < size; i++)
 			{
-				final JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.elementAt(i);
+				final JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.get(i);
 				final JDFAttributeMap map = niCmp.getPartMap();
 				if (identicalSrcMap != null)
 					map.putAll(identicalSrcMap);
@@ -3413,7 +3407,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 *
-
+	
 	 *
 	 */
 
@@ -3806,8 +3800,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			root.deleteNode();
 		}
 	}
-
-	// ///////////////////////////////////////////////////////////////////////
 
 	private boolean fixNiCiToResource(final int i, final String nam, final String linkNam)
 	{
@@ -4838,11 +4830,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public boolean isTypesNode()
 	{
 		final EnumType type2 = getEnumType();
-		// return EnumType.ProcessGroup.equals(type2) &&
-		// !hasChildElement(ElementName.JDF, null) ||
-		// EnumType.Combined.equals(type2);
 		return EnumType.ProcessGroup.equals(type2) || EnumType.Combined.equals(type2);
-
 	}
 
 	/**
@@ -5615,7 +5603,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			if (nici instanceof JDFResource)
 			{
-				final VElement vLeaves = ((JDFResource) nici).getLeaves(true);
+				final List<JDFResource> vLeaves = ((JDFResource) nici).getLeafArray(true);
 				for (final KElement leaf : vLeaves)
 				{
 					if (leaf.hasXPathNode(xPath))
@@ -6839,7 +6827,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		final JDFNode p = addJDFNode(EnumType.ProcessGroup);
 		p.setType(EnumType.ProcessGroup.getName(), false);
-		if (tasks != null && !tasks.equals(VString.emptyVector))
+		if (!StringUtil.isEmpty(tasks))
 		{
 			p.setTypes(tasks);
 		}

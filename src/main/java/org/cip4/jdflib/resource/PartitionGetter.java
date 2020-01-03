@@ -305,7 +305,7 @@ public class PartitionGetter
 				final JDFAttributeMap removeImplicitPartions = removeImplicitPartions(map.clone(), partUsage);
 				if (removeImplicitPartions != null && !removeImplicitPartions.isEmpty())
 				{
-					vmNew.appendUnique(removeImplicitPartions);
+					vmNew.add(removeImplicitPartions);
 				}
 			}
 			vm = vmNew;

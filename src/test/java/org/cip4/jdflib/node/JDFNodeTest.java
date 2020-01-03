@@ -3,68 +3,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party acknowledgments
+ * normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior written permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE. ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
  */
@@ -155,7 +123,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 */
 	public void testgetLinkedResourceVector()
 	{
-		JDFNode n = creatXMDoc().getJDFRoot();
+		final JDFNode n = creatXMDoc().getJDFRoot();
 		assertNull(n.getLinkedResourceVector(EnumUsage.Output, ElementName.EXPOSEDMEDIA, null, true));
 		assertEquals(n.getLinkedResourceVector(EnumUsage.Input, ElementName.EXPOSEDMEDIA, null, true).size(), 8);
 	}
@@ -182,8 +150,8 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFParser p = new JDFParser();
 		final JDFDoc d = p.parseFile(sm_dirTestData + "evilparts.jdf");
 		final JDFNode n = d.getJDFRoot();
-		CPUTimer ct = new CPUTimer(true);
-		VString v = n.getPartIDKeys(null);
+		final CPUTimer ct = new CPUTimer(true);
+		final VString v = n.getPartIDKeys(null);
 		assertNotNull(v);
 		ct.stop();
 		System.out.println(ct.toString());
@@ -225,13 +193,13 @@ public class JDFNodeTest extends JDFTestCaseBase
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
-		JDFNode nc1 = n.addJDFNode(EnumType.ConventionalPrinting);
-		JDFNode nf1 = n.addJDFNode(EnumType.Folding);
-		JDFNode nc2 = n.addJDFNode(EnumType.ConventionalPrinting);
-		JDFNode nf2 = n.addJDFNode(EnumType.Folding);
-		JDFResource r = n.addResource(ElementName.COMPONENT, null);
-		JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
-		JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		final JDFNode nc1 = n.addJDFNode(EnumType.ConventionalPrinting);
+		final JDFNode nf1 = n.addJDFNode(EnumType.Folding);
+		final JDFNode nc2 = n.addJDFNode(EnumType.ConventionalPrinting);
+		final JDFNode nf2 = n.addJDFNode(EnumType.Folding);
+		final JDFResource r = n.addResource(ElementName.COMPONENT, null);
+		final JDFResource r1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
 		nc1.linkResource(r1, EnumUsage.Output, null);
 		nf1.linkResource(r1, EnumUsage.Input, null);
 		nc2.linkResource(r2, EnumUsage.Output, null);
@@ -401,6 +369,22 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testEnsureJobPartID()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		final String jpid = n.getNonEmpty(AttributeName.JOBPARTID);
+		n.setType(EnumType.Product);
+		assertNotNull(jpid);
+		assertEquals(jpid, n.ensureJobPartID());
+		final JDFNode n2 = n.addJDFNode("Foo");
+		assertTrue(n2.ensureJobPartID().startsWith(jpid));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testEnsureLinkProcessUsage()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -422,9 +406,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.Product);
-		JDFNode n2 = n.addJDFNode("ProcessGroup");
-		JDFResource r1 = n2.addResource("ExposedMedia", EnumUsage.Input);
-		JDFResource r2 = n2.addResource("Media", null);
+		final JDFNode n2 = n.addJDFNode("ProcessGroup");
+		final JDFResource r1 = n2.addResource("ExposedMedia", EnumUsage.Input);
+		final JDFResource r2 = n2.addResource("Media", null);
 		r1.addPartition(EnumPartIDKey.SheetName, "s1").refElement(r2);
 		n.ensureLink(r1, EnumUsage.Input, null);
 		assertTrue(n.getResourcePool().getPoolChildren(null, null, null).contains(r2));
@@ -440,9 +424,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.Product);
-		JDFNode n2 = n.addJDFNode("ProcessGroup");
-		JDFResource r1 = n2.addResource("ExposedMedia", EnumUsage.Input);
-		JDFResource r2 = n2.addResource("Media", null);
+		final JDFNode n2 = n.addJDFNode("ProcessGroup");
+		final JDFResource r1 = n2.addResource("ExposedMedia", EnumUsage.Input);
+		final JDFResource r2 = n2.addResource("Media", null);
 		r1.refElement(r2);
 		r2.refElement(r1);
 		r2.refElement(r2);
@@ -553,7 +537,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	@Test
 	public void testParseStreamNull()
 	{
-		JDFNode n = JDFNode.parseStream(null);
+		final JDFNode n = JDFNode.parseStream(null);
 		assertNull(n);
 	}
 
@@ -564,7 +548,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	@Test
 	public void testParseStream()
 	{
-		JDFNode n = JDFNode.parseStream(FileUtil.getBufferedInputStream(new File(sm_dirTestData + "job.jdf")));
+		final JDFNode n = JDFNode.parseStream(FileUtil.getBufferedInputStream(new File(sm_dirTestData + "job.jdf")));
 		assertNotNull(n);
 	}
 
@@ -591,6 +575,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * test whether combinedprocessIndex is automagically and correctly assigned
+	 * 
 	 * @throws Exception
 	 *
 	 */
@@ -978,7 +963,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		n.addResource("Media", EnumUsage.Input);
 		n.addResource("Media", EnumUsage.Input);
 		JDFResourceLink rl0 = n.getLink(0, null, null, null);
-		JDFResourceLink rl1 = n.getLink(1, null, null, null);
+		final JDFResourceLink rl1 = n.getLink(1, null, null, null);
 		assertNotNull(rl1);
 		n.removeLink(rl0, true);
 		assertNull(n.getLink(1, null, null, null));
@@ -998,14 +983,14 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFDoc gd = new JDFDoc("JDF");
 		final JDFNode n = gd.getJDFRoot();
 		n.setCombined(new VString("Interpreting Rendering Screening", null));
-		JDFResource r1 = n.addResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input);
-		JDFResourceLink rl1 = n.getLink(r1, null);
+		final JDFResource r1 = n.addResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input);
+		final JDFResourceLink rl1 = n.getLink(r1, null);
 		assertEquals(rl1.getCombinedProcessIndex(), new JDFIntegerList("0"));
-		JDFResource r2 = n.addResource(ElementName.RENDERINGPARAMS, EnumUsage.Input);
-		JDFResourceLink rl2 = n.getLink(r2, null);
+		final JDFResource r2 = n.addResource(ElementName.RENDERINGPARAMS, EnumUsage.Input);
+		final JDFResourceLink rl2 = n.getLink(r2, null);
 		assertEquals(rl2.getCombinedProcessIndex(), new JDFIntegerList("1"));
-		JDFResource r3 = n.addResource(ElementName.SCREENINGPARAMS, EnumUsage.Input);
-		JDFResourceLink rl3 = n.getLink(r3, null);
+		final JDFResource r3 = n.addResource(ElementName.SCREENINGPARAMS, EnumUsage.Input);
+		final JDFResourceLink rl3 = n.getLink(r3, null);
 		assertEquals(rl3.getCombinedProcessIndex(), new JDFIntegerList("2"));
 		n.removeFromTypes("Rendering", 1, true);
 		assertNotNull(n.getLink(r2, null));
@@ -1124,11 +1109,11 @@ public class JDFNodeTest extends JDFTestCaseBase
 		root.setVersion(JDFElement.EnumVersion.Version_1_3);
 		final JDFAttributeMap pm = new JDFAttributeMap(EnumPartIDKey.SheetName.getName(), "s1");
 		root.setPartStatus(pm, EnumNodeStatus.Waiting, null);
-		JDFNodeInfo ni = (JDFNodeInfo) root.getNodeInfo().getPartition(pm, null);
+		final JDFNodeInfo ni = (JDFNodeInfo) root.getNodeInfo().getPartition(pm, null);
 		assertNotNull(ni);
-		JDFResourceLink rl = root.getLink(ni, null);
+		final JDFResourceLink rl = root.getLink(ni, null);
 		rl.setPartMap(pm);
-		JDFAttributeMap pm2 = new JDFAttributeMap(EnumPartIDKey.SheetName.getName(), "s2");
+		final JDFAttributeMap pm2 = new JDFAttributeMap(EnumPartIDKey.SheetName.getName(), "s2");
 		root.setPartStatus(pm2, EnumNodeStatus.Completed, null);
 		assertEquals(root.getPartStatus(pm2, 0), EnumNodeStatus.Completed);
 	}
@@ -1791,7 +1776,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		doc.write2File(sm_dirTestDataTemp + "createNodeInfoTest.xml", 0, true);
 		final JDFCustomerInfo myCustInfo = node.getCreateCustomerInfo();
 		myCustInfo.appendContact();
-		//assertTrue("contact is res", myContact.getResourceClass() == EnumResourceClass.Parameter);
+		// assertTrue("contact is res", myContact.getResourceClass() == EnumResourceClass.Parameter);
 		assertNotNull(node.getNodeInfo());
 		node.removeNodeInfo();
 		assertNull(node.getNodeInfo());
@@ -2194,7 +2179,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		n.setStatus(EnumNodeStatus.Ready);
 		n.setType("Product", true);
 		JDFComponent co = (JDFComponent) n.appendMatchingResource("Component", EnumProcessUsage.Cover, null);
-		final Vector<EnumComponentType> vType = new Vector<EnumComponentType>();
+		final Vector<EnumComponentType> vType = new Vector<>();
 		vType.add(EnumComponentType.FinalProduct);
 		vType.add(EnumComponentType.Block);
 		co.setComponentType(vType);
@@ -2524,8 +2509,8 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	* @throws DataFormatException
-	*/
+	 * @throws DataFormatException
+	 */
 	@Test
 	public void testGetNodeInfoCombinedProc() throws DataFormatException
 	{
@@ -2595,7 +2580,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode root = doc.getJDFRoot();
-		JDFNodeInfo ni2 = (JDFNodeInfo) root.addResource(ElementName.NODEINFO, null);
+		final JDFNodeInfo ni2 = (JDFNodeInfo) root.addResource(ElementName.NODEINFO, null);
 		root.appendAncestorPool().appendAncestor().refElement(ni2);
 		assertEquals(ni2, root.getAncestorElement(ElementName.NODEINFO, null));
 	}
@@ -2620,11 +2605,11 @@ public class JDFNodeTest extends JDFTestCaseBase
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode root = doc.getJDFRoot();
-		JDFNodeInfo ni2 = (JDFNodeInfo) root.addResource(ElementName.NODEINFO, null);
+		final JDFNodeInfo ni2 = (JDFNodeInfo) root.addResource(ElementName.NODEINFO, null);
 		root.appendAncestorPool().appendAncestor().refElement(ni2);
 		ni2.setJobPriority(42);
 		assertEquals("42", root.getAncestorElementAttribute(ElementName.NODEINFO, AttributeName.JOBPRIORITY, null, null));
-		JDFNodeInfo ni3 = root.getCreateNodeInfo();
+		final JDFNodeInfo ni3 = root.getCreateNodeInfo();
 		ni3.setJobPriority(43);
 		assertEquals("43", root.getAncestorElementAttribute(ElementName.NODEINFO, AttributeName.JOBPRIORITY, null, null));
 	}

@@ -36,12 +36,13 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.List;
+
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -118,9 +119,9 @@ public class WalkTransferCurvePoolRef extends WalkRefElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#setResource(org.cip4.jdflib.core.JDFElement, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected VElement setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
+	protected List<KElement> setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
 	{
-		final VElement vRes = super.setResource(rl, linkTarget, xRoot);
+		final List<KElement> vRes = super.setResource(rl, linkTarget, xRoot);
 		if (!jdfToXJDF.isRetainAll() && vRes != null && vRes.size() > 0)
 		{
 			final KElement res = vRes.get(0);

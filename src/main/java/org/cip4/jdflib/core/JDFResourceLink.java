@@ -1055,11 +1055,11 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		final int nPartChildren = vPartMap == null ? 0 : vPartMap.size();
 		final JDFResource root = getLinkRoot();
 
-		final VElement leaves = root.getLeaves(false);
+		final List<JDFResource> leaves = root.getLeafArray(false);
 		// loop over resource leaves
-		for (int i = 0; i < leaves.size(); i++)
+		for (final JDFResource r : leaves)
 		{
-			final JDFAttributeMap leafMap = ((JDFResource) leaves.elementAt(i)).getPartMap();
+			final JDFAttributeMap leafMap = r.getPartMap();
 			if (nPartChildren > 0 && vPartMap != null) // suppress possible NPE warning for vPartMap
 			{ // it's reduced
 				for (int j = 0; j < nPartChildren; j++)

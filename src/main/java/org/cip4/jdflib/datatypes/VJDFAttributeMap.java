@@ -46,8 +46,10 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
@@ -56,6 +58,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.HashUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  *
@@ -66,7 +69,7 @@ import org.cip4.jdflib.util.HashUtil;
  * @version 1.0 2002-01-24
  *
  */
-public class VJDFAttributeMap extends Vector<JDFAttributeMap>
+public class VJDFAttributeMap extends ArrayList<JDFAttributeMap>
 {
 	/**
 	 *
@@ -86,7 +89,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 *
 	 * @param toAdd Vector of elements to clone
 	 */
-	public VJDFAttributeMap(final Vector<JDFAttributeMap> toAdd)
+	public VJDFAttributeMap(final List<JDFAttributeMap> toAdd)
 	{
 		super();
 		if (toAdd != null)
@@ -192,18 +195,6 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * Returns the vector with JDFAttributeMap elements
-	 *
-	 * @return Vector - the vector with JDFAttributeMap elements
-	 * @deprecated - use this
-	 */
-	@Deprecated
-	public Vector<JDFAttributeMap> getVector()
-	{
-		return this;
-	}
-
-	/**
 	 * @param strKey the attribute to get values from
 	 * @param bUnique if true, ensure unique vector, else the vector corresponds to the vector of values
 	 * @return the Vector of all values
@@ -235,7 +226,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 */
 	public void extendMap(final String strKey, final VString vsValues)
 	{
-		if (vsValues == null || vsValues.isEmpty())
+		if (StringUtil.isEmpty(vsValues) || StringUtil.isEmpty(strKey))
 		{
 			return;
 		}
@@ -383,7 +374,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 *
 	 * @param vec the Vector with JDFAttributeMap elements
 	 */
-	public void setVector(final Vector<JDFAttributeMap> vec)
+	public void setVector(final List<JDFAttributeMap> vec)
 	{
 		clear();
 		if (vec != null)
@@ -445,14 +436,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @param i the given position (may be<0 to count backwards)
 	 * @return JDFAttributeMap - the selected element
 	 */
-	@Override
-	public synchronized JDFAttributeMap elementAt(int i)
+	public JDFAttributeMap elementAt(final int i)
 	{
-		if (i < 0)
-		{
-			i += size();
-		}
-		return super.elementAt(i);
+		return get(i);
 	}
 
 	/**
@@ -462,7 +448,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @return JDFAttributeMap - the selected element
 	 */
 	@Override
-	public synchronized JDFAttributeMap get(int i)
+	public JDFAttributeMap get(int i)
 	{
 		if (i < 0)
 		{
@@ -487,6 +473,12 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 			}
 		}
 		unify();
+	}
+
+	public void removeElementAt(final int i)
+	{
+		remove(i);
+
 	}
 
 	/**
@@ -684,15 +676,14 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 */
 	public void appendUnique(final JDFAttributeMap map)
 	{
-		for (final JDFAttributeMap m : this)
-		{
-			if (m.equals(map))
-			{
-				return;
-			}
-		}
+		if (!contains(map))
+			add(map);
+	}
 
-		addElement(map);
+	public void addElement(final JDFAttributeMap map)
+	{
+		add(map);
+
 	}
 
 	/**
@@ -899,7 +890,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @return boolean - true if the maps are equal, otherwise false
 	 */
 	@Override
-	public synchronized boolean equals(final Object other)
+	public boolean equals(final Object other)
 	{
 		if (this == other)
 		{
@@ -1011,7 +1002,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @return
 	 */
 	@Override
-	public synchronized VJDFAttributeMap clone()
+	public VJDFAttributeMap clone()
 	{
 		return new VJDFAttributeMap(this);
 	}
@@ -1052,6 +1043,11 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 			}
 		}
 
+	}
+
+	public void setElementAt(final JDFAttributeMap mTmp, final int j)
+	{
+		set(j, mTmp);
 	}
 
 }

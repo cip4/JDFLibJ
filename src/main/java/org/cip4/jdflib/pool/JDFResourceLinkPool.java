@@ -640,7 +640,8 @@ public class JDFResourceLinkPool extends JDFPool
 							{
 								if (bReplace)
 								{
-									vMap.setElementAt(mTmp, j);
+									final int j1 = j;
+									vMap.set(j1, mTmp);
 								}
 								else
 								{ // already replaced one, clear all other

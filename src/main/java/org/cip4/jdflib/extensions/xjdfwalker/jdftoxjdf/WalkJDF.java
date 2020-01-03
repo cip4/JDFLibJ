@@ -190,6 +190,7 @@ public class WalkJDF extends WalkJDFElement
 		if (jdfToXJDF.isUpdateVersion())
 		{
 			newRootP.setID(null);
+			newRootP.setAttribute(AttributeName.VERSION, jdfToXJDF.getNewVersion().getName());
 		}
 		updateTypes(newRootP, node.getTypesString());
 		namedFeaturesToGeneralID(node, newRootP);
@@ -326,6 +327,7 @@ public class WalkJDF extends WalkJDFElement
 		map.remove(AttributeName.TEMPLATEVERSION);
 		map.remove(AttributeName.VERSION);
 		map.remove(AttributeName.XMLNS);
+		map.remove(AttributeName.XSITYPE);
 		super.updateAttributes(map);
 	}
 

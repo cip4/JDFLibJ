@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -38,6 +38,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -47,6 +49,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.resource.JDFCertification;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.JDFMediaLayers;
 import org.cip4.jdflib.span.JDFIntegerSpan;
@@ -81,7 +84,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREPRINTED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.MEDIASETCOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.USERMEDIATYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.USERMEDIATYPE, 0x44333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -90,38 +93,39 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[29];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[30];
 	static
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.BACKCOATINGS, 0x66666666);
 		elemInfoTable[1] = new ElemInfoTable(ElementName.BRIGHTNESS, 0x66666666);
 		elemInfoTable[2] = new ElemInfoTable(ElementName.BUYERSUPPLIED, 0x66666666);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.DIMENSIONS, 0x77777766);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.FLUTE, 0x66661111);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.FLUTEDIRECTION, 0x66661111);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.FRONTCOATINGS, 0x66666666);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.GRADE, 0x66666666);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.GRAINDIRECTION, 0x66666611);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.HOLECOUNT, 0x77777776);
-		elemInfoTable[10] = new ElemInfoTable(ElementName.HOLETYPE, 0x66666661);
-		elemInfoTable[11] = new ElemInfoTable(ElementName.ISOPAPERSUBSTRATE, 0x66666661);
-		elemInfoTable[12] = new ElemInfoTable(ElementName.MEDIACOLOR, 0x66666666);
-		elemInfoTable[13] = new ElemInfoTable(ElementName.MEDIACOLORDETAILS, 0x66666611);
-		elemInfoTable[14] = new ElemInfoTable(ElementName.MEDIAQUALITY, 0x66661111);
-		elemInfoTable[15] = new ElemInfoTable(ElementName.MEDIATYPE, 0x66666661);
-		elemInfoTable[16] = new ElemInfoTable(ElementName.MEDIATYPEDETAILS, 0x66666111);
-		elemInfoTable[17] = new ElemInfoTable(ElementName.MEDIAUNIT, 0x77777766);
-		elemInfoTable[18] = new ElemInfoTable(ElementName.OPACITY, 0x66666666);
-		elemInfoTable[19] = new ElemInfoTable(ElementName.OPACITYLEVEL, 0x66666611);
-		elemInfoTable[20] = new ElemInfoTable(ElementName.RECYCLED, 0x77777766);
-		elemInfoTable[21] = new ElemInfoTable(ElementName.RECYCLEDPERCENTAGE, 0x66666611);
-		elemInfoTable[22] = new ElemInfoTable(ElementName.STOCKBRAND, 0x66666666);
-		elemInfoTable[23] = new ElemInfoTable(ElementName.STOCKTYPE, 0x66666666);
-		elemInfoTable[24] = new ElemInfoTable(ElementName.TEXTURE, 0x66666666);
-		elemInfoTable[25] = new ElemInfoTable(ElementName.THICKNESS, 0x66666661);
-		elemInfoTable[26] = new ElemInfoTable(ElementName.USWEIGHT, 0x77777766);
-		elemInfoTable[27] = new ElemInfoTable(ElementName.WEIGHT, 0x66666666);
-		elemInfoTable[28] = new ElemInfoTable(ElementName.MEDIALAYERS, 0x66661111);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.CERTIFICATION, 0x33111111);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.DIMENSIONS, 0x77777766);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.FLUTE, 0x66661111);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.FLUTEDIRECTION, 0x66661111);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.FRONTCOATINGS, 0x66666666);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.GRADE, 0x66666666);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.GRAINDIRECTION, 0x66666611);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.HOLECOUNT, 0x77777776);
+		elemInfoTable[11] = new ElemInfoTable(ElementName.HOLETYPE, 0x66666661);
+		elemInfoTable[12] = new ElemInfoTable(ElementName.ISOPAPERSUBSTRATE, 0x66666661);
+		elemInfoTable[13] = new ElemInfoTable(ElementName.MEDIACOLOR, 0x66666666);
+		elemInfoTable[14] = new ElemInfoTable(ElementName.MEDIACOLORDETAILS, 0x66666611);
+		elemInfoTable[15] = new ElemInfoTable(ElementName.MEDIAQUALITY, 0x66661111);
+		elemInfoTable[16] = new ElemInfoTable(ElementName.MEDIATYPE, 0x66666661);
+		elemInfoTable[17] = new ElemInfoTable(ElementName.MEDIATYPEDETAILS, 0x66666111);
+		elemInfoTable[18] = new ElemInfoTable(ElementName.MEDIAUNIT, 0x77777766);
+		elemInfoTable[19] = new ElemInfoTable(ElementName.OPACITY, 0x66666666);
+		elemInfoTable[20] = new ElemInfoTable(ElementName.OPACITYLEVEL, 0x66666611);
+		elemInfoTable[21] = new ElemInfoTable(ElementName.RECYCLED, 0x77777766);
+		elemInfoTable[22] = new ElemInfoTable(ElementName.RECYCLEDPERCENTAGE, 0x66666611);
+		elemInfoTable[23] = new ElemInfoTable(ElementName.STOCKBRAND, 0x66666666);
+		elemInfoTable[24] = new ElemInfoTable(ElementName.STOCKTYPE, 0x66666666);
+		elemInfoTable[25] = new ElemInfoTable(ElementName.TEXTURE, 0x66666666);
+		elemInfoTable[26] = new ElemInfoTable(ElementName.THICKNESS, 0x66666661);
+		elemInfoTable[27] = new ElemInfoTable(ElementName.USWEIGHT, 0x77777766);
+		elemInfoTable[28] = new ElemInfoTable(ElementName.WEIGHT, 0x66666666);
+		elemInfoTable[29] = new ElemInfoTable(ElementName.MEDIALAYERS, 0x66661111);
 	}
 
 	@Override
@@ -136,7 +140,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMediaIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoMediaIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -148,7 +152,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMediaIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoMediaIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -161,7 +165,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoMediaIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoMediaIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -187,7 +191,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setPrePrinted(boolean value)
+	public void setPrePrinted(final boolean value)
 	{
 		setAttribute(AttributeName.PREPRINTED, value, null);
 	}
@@ -210,7 +214,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setMediaSetCount(int value)
+	public void setMediaSetCount(final int value)
 	{
 		setAttribute(AttributeName.MEDIASETCOUNT, value, null);
 	}
@@ -233,7 +237,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setUserMediaType(String value)
+	public void setUserMediaType(final String value)
 	{
 		setAttribute(AttributeName.USERMEDIATYPE, value, null);
 	}
@@ -343,6 +347,48 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	public JDFOptionSpan appendBuyerSupplied() throws JDFException
 	{
 		return (JDFOptionSpan) appendElementN(ElementName.BUYERSUPPLIED, 1, null);
+	}
+
+	/**
+	 * (26) getCreateCertification
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFCertification the element
+	 */
+	public JDFCertification getCreateCertification(final int iSkip)
+	{
+		return (JDFCertification) getCreateElement_JDFElement(ElementName.CERTIFICATION, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element Certification
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFCertification the element default is getCertification(0)
+	 */
+	public JDFCertification getCertification(final int iSkip)
+	{
+		return (JDFCertification) getElement(ElementName.CERTIFICATION, null, iSkip);
+	}
+
+	/**
+	 * Get all Certification from the current element
+	 * 
+	 * @return Collection<JDFCertification>, null if none are available
+	 */
+	public Collection<JDFCertification> getAllCertification()
+	{
+		return getChildrenByClass(JDFCertification.class, false, 0);
+	}
+
+	/**
+	 * (30) append element Certification
+	 * 
+	 * @return JDFCertification the element
+	 */
+	public JDFCertification appendCertification()
+	{
+		return (JDFCertification) appendElement(ElementName.CERTIFICATION, null);
 	}
 
 	/**

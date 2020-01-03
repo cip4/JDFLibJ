@@ -73,6 +73,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNamedColor;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -760,6 +761,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjdf20.setSingleNode(true);
 		xjdf20.setSpanAsAttribute(true);
 		xjdf20.setRetainAll(true);
+		xjdf20.setNewVersion(EnumVersion.Version_2_1);
 		final KElement xjdf = xjdf20.makeNewJDF(nP, null);
 		xjdf.write2File(sm_dirTestDataTemp + "retain.xjdf");
 		assertNotNull(xjdf);
@@ -1219,6 +1221,37 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testColorIntentCert()
+	{
+		final JDFToXJDF conv = new JDFToXJDF();
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Product);
+		final JDFComponent co = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		co.setComponentType(EnumComponentType.PartialProduct, null);
+		final JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
+		final JDFColorIntent cif = (JDFColorIntent) ci.addPartition(EnumPartIDKey.Side, "Front");
+		cif.appendColorsUsed().setCMYK();
+		cif.appendCoatings().setActual("Varnish");
+		cif.appendElement(ElementName.CERTIFICATION).setAttribute(AttributeName.ORGANIZATION, "fsc");
+		final JDFColorIntent cib = (JDFColorIntent) ci.addPartition(EnumPartIDKey.Side, "Back");
+		cib.appendCoatings().setActual("Mess");
+		cib.setNumColors(1);
+		final KElement xjdf = conv.convert(n);
+		final ProductHelper ph = new XJDFHelper(xjdf).getProductHelpers().get(0);
+		assertNotNull(ph);
+		final IntentHelper ih = ph.getIntent("ColorIntent");
+		final KElement e = ih.getResource();
+		assertEquals(e.getChildElementVector(XJDFConstants.SurfaceColor, null).size(), 2);
+		assertEquals("fsc", e.getElement(XJDFConstants.SurfaceColor).getElement(ElementName.CERTIFICATION, null, 0).getAttribute(AttributeName.ORGANIZATION));
+		assertNull("fsc", e.getElement(XJDFConstants.SurfaceColor, null, 1).getElement(ElementName.CERTIFICATION));
+		// writeRoundTrip(n, "ColorIntent");
+	}
+
+	/**
 	*
 	*
 	*/
@@ -1508,6 +1541,20 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testVersion()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFToXJDF conv = new JDFToXJDF();
+		conv.setRetainAll(true);
+		conv.setNewVersion(EnumVersion.Version_2_1);
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		assertEquals("2.1", xjdf.getAttribute(AttributeName.VERSION));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testCounterID()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -1613,6 +1660,32 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.makeNewJDF(n, null);
 		assertNull(xjdf.getXPathAttribute("ProductList/Product/IntentSet", null));
 		assertEquals(xjdf.getXPathAttribute("ProductList/Product/Intent/@Name", null), ElementName.LAYOUTINTENT);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testProductPartVersion()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Product);
+
+		final JDFNode n1 = n.addJDFNode(EnumType.Product);
+		final JDFComponent c1 = (JDFComponent) n1.addResource(ElementName.COMPONENT, null);
+		c1.setComponentType(EnumComponentType.FinalProduct, null);
+		n1.ensureLink(c1.addPartition(EnumPartIDKey.PartVersion, "v1"), EnumUsage.Output, null).setAmount(100);
+
+		final JDFNode n2 = n.addJDFNode(EnumType.Product);
+		final JDFComponent c2 = (JDFComponent) n2.addResource(ElementName.COMPONENT, null);
+		c2.setComponentType(EnumComponentType.FinalProduct, null);
+		n2.ensureLink(c2.addPartition(EnumPartIDKey.PartVersion, "v2"), EnumUsage.Output, null).setAmount(200);
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		final XJDFHelper h = new XJDFHelper(xjdf);
+		assertEquals("v1", h.getRootProduct(0).getAttribute(AttributeName.PARTVERSION));
+		assertEquals("v2", h.getRootProduct(1).getAttribute(AttributeName.PARTVERSION));
 	}
 
 	/**
@@ -1731,6 +1804,15 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFDoc d = invert.convert(xjdf);
 		final JDFNode n2 = d.getJDFRoot();
 		assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.ProcessRun, null, null).getPartMapVector().size(), 2);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testDefVersion()
+	{
+		assertEquals(EnumVersion.Version_2_0, JDFToXJDF.getDefaultVersion());
 	}
 
 	/**
@@ -2080,10 +2162,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
 		final SetHelper sh = new XJDFHelper(xjdf).getSet(ElementName.ASSEMBLY, EnumUsage.Input);
-		assertEquals(4, sh.getRoot().getChildrenByClass(JDFAssemblySection.class, true, 0).size());
+		assertEquals(4, sh.getRoot().getChildArrayByClass(JDFAssemblySection.class, true, 0).size());
 
 		sh.cleanUp();
-		assertEquals(4, sh.getRoot().getChildrenByClass(JDFAssemblySection.class, true, 0).size());
+		assertEquals(4, sh.getRoot().getChildArrayByClass(JDFAssemblySection.class, true, 0).size());
 	}
 
 	/**

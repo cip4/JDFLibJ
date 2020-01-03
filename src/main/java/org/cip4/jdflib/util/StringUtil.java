@@ -51,6 +51,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Collection;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -622,11 +623,19 @@ public class StringUtil
 	 */
 	public static boolean hasToken(final String strWork, final String token, String delim, final int iSkip)
 	{
+		if (isEmpty(strWork))
+			return false;
 		if (delim == null)
-			delim = " ";
-		if (iSkip <= 0)
+			delim = JDFConstants.SPACE;
+		if (iSkip == 0 || iSkip == -1)
 			return indexOfToken(strWork, token, delim, 0) >= 0;
-		if (strWork != null)
+		if (iSkip < -1)
+		{
+			final StringArray a = StringArray.getVString(strWork, null);
+			final String[] as = a.toArray(new String[] {});
+			return hasToken(as, token, iSkip);
+		}
+		else
 		{
 			int posToken1 = strWork.indexOf(token);
 			if (posToken1 < 0)
@@ -669,17 +678,28 @@ public class StringUtil
 		if (strWork != null)
 		{
 			int n = 0;
-			for (final String element : strWork)
+			if (iSkip < 0)
 			{
-				if (element.equals(token))
+				for (int i = strWork.length - 1; i >= 0; i--)
 				{
-					if (n++ >= iSkip)
+					if (token.equals(strWork[i]) && (--n <= iSkip))
+					{
+						return true;
+					}
+				}
+			}
+			else
+			{
+				for (final String element : strWork)
+				{
+					if (token.equals(element) && (n++ >= iSkip))
 					{
 						return true;
 					}
 				}
 			}
 		}
+
 		return false;
 	}
 
@@ -1192,6 +1212,17 @@ public class StringUtil
 	public static boolean isEmpty(final String s)
 	{
 		return s == null || JDFConstants.EMPTYSTRING.equals(s);
+	}
+
+	/**
+	 * are we null or empty or contain only an empty JDFAttributeMap
+	 *
+	 * @param v
+	 * @return
+	 */
+	public static boolean isEmpty(final Collection<String> v)
+	{
+		return v == null || v.isEmpty() || v.size() == 1 && StringUtil.isEmpty(v.iterator().next());
 	}
 
 	/**
