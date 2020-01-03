@@ -102,10 +102,15 @@ class HotFolderRunner extends Thread
 			for (final HotFolder folder : local)
 			{
 				mod = folder.loop() || mod;
+				if (interrupt)
+					break;
 			}
-			final long t1 = System.currentTimeMillis();
-			final int millis = mod ? 0 : HotFolder.getDefaultStabilizeTime() - (int) (t1 - t0);
-			ThreadUtil.wait(mutex, Math.max(100, millis));
+			if (!interrupt)
+			{
+				final long t1 = System.currentTimeMillis();
+				final int millis = mod ? 0 : HotFolder.getDefaultStabilizeTime() - (int) (t1 - t0);
+				ThreadUtil.wait(mutex, Math.max(100, millis));
+			}
 		}
 		log.info("end of loop " + this);
 	}
