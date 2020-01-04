@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -421,21 +421,22 @@ class StorageHotFolderListener implements HotFolderListener
 	}
 
 	/**
-	 *
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString()
-	{
-		return "StorageHotFolderListener: ok=" + okStorage + " error=" + errorStorage + " " + parent;
-	}
-
-	/**
 	 * @param maxAuxDirs the auxFactor to set if >1 then aux files get zapped earlier
 	 */
 	public void setMaxAux(final int maxAuxDirs)
 	{
 		this.maxAux = maxAuxDirs;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "StorageHotFolderListener [" + (storage != null ? "storage=" + storage + ", " : "") + (errorStorage != null ? "errorStorage=" + errorStorage + ", " : "")
+				+ (okStorage != null ? "okStorage=" + okStorage + ", " : "") + (parent != null ? "parent=" + parent + ", " : "") + "nHotOK=" + nHotOK + ", nHotError=" + nHotError
+				+ ", nQueued=" + nQueued + ", maxStore=" + maxStore + ", maxAux=" + maxAux + "]";
 	}
 
 }

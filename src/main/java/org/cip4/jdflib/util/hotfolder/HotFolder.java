@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -56,6 +56,7 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.FileUtil;
@@ -367,9 +368,9 @@ public class HotFolder
 	 * @author prosirai
 	 *
 	 */
-	protected class FileTime
+	protected static class FileTime
 	{
-		protected File f;
+		protected final File f;
 		protected long modified;
 
 		protected FileTime(final File _f)
@@ -386,24 +387,24 @@ public class HotFolder
 	}
 
 	/**
-	 * simple container class that retains the last known mod date of a file
+	 * simple listenerner class that processes files by extension
 	 *
 	 * @author prosirai
 	 *
 	 */
-	protected class ExtensionListener
+	protected static class ExtensionListener
 	{
-		final protected HotFolderListener fl;
+		final protected HotFolderListener folderListener;
 		final protected Set<String> extension;
 
 		protected ExtensionListener(final HotFolderListener _hfl, String ext)
 		{
-			fl = _hfl;
+			folderListener = _hfl;
 			ext = StringUtil.getNonEmpty(ext);
 			if (ext != null)
 			{
 				extension = new HashSet<>();
-				final VString vs = StringUtil.tokenize(ext, ",", false);
+				final StringArray vs = StringArray.getVString(ext, JDFConstants.COMMA);
 				for (String s : vs)
 				{
 					if (s.startsWith("."))
@@ -442,7 +443,16 @@ public class HotFolder
 					}
 				}
 			}
-			fl.hotFile(file);
+			folderListener.hotFile(file);
+		}
+
+		/**
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString()
+		{
+			return "ExtensionListener [" + (extension != null ? "extension=" + extension : "") + "]";
 		}
 	}
 
@@ -453,7 +463,7 @@ public class HotFolder
 	 */
 	class HotFileRunner implements Runnable
 	{
-		File fileJ;
+		final File fileJ;
 
 		HotFileRunner(final File fileJ)
 		{

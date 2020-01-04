@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,29 +56,29 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.util;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ *
  */
 public class ThreadUtil
 {
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @author rainer prosi
 	 * @date Nov 14, 2012
 	 * @deprecated use org.cip4.jdflib.util.thread.MyMutex
@@ -88,7 +88,7 @@ public class ThreadUtil
 	{
 
 		/**
-		 * 
+		 *
 		 */
 		public MyMutex()
 		{
@@ -100,86 +100,25 @@ public class ThreadUtil
 	/**
 	 * abstract class to run uninteruptable stuff in an interruptable thread
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 * 
+	 *
 	 * 11.12.2008
 	 * @param <a> the returned object data type
+	 * @deprecated use the local class
 	 */
-	public static abstract class WaitTimeout<a> implements Runnable
+	@Deprecated
+	public static abstract class WaitTimeout<a> extends org.cip4.jdflib.util.thread.WaitTimeout<a>
 	{
-		/**
-		 * this is the handle routine that may take longer <br/>
-		 * it should return the expected object when completed
-		 * 
-		 * @return the object that this whole class is about
-		 */
-		protected abstract a handle();
 
-		/**
-		 * called prior to starting thread, overwrite to initialize in the constructor
-		 */
-		private void setup()
-		{
-			baseName = "WaitThread";
-		}
-
-		private MyMutex mutex;
-		private final int waitMillis;
-		private a theObject;
-		private static int threadNumber = 0;
-		private Thread myThread = null;
-		protected String baseName;
-
-		/**
-		 * @param millis wait timeout in milliseconds
-		 */
 		public WaitTimeout(final int millis)
 		{
-
-			waitMillis = millis;
-			theObject = null;
-			setup();
-			mutex = new MyMutex();
-			myThread = new Thread(this, baseName + threadNumber++);
-		}
-
-		/**
-		 * 
-		 * start the thread
-		 */
-		public final void start()
-		{
-			myThread.start();
-		}
-
-		/**
-		 * @see java.lang.Runnable#run()
-		 */
-		@Override
-		public final void run()
-		{
-			theObject = handle();
-			ThreadUtil.notifyAll(mutex);
-			mutex = null;
-		}
-
-		/**
-		 * @return the object that you waited for, null if the timeout is reached
-		 */
-		public final a getWaitedObject()
-		{
-			if (mutex != null)
-			{
-				ThreadUtil.wait(mutex, waitMillis);
-				mutex = null;
-			}
-			return theObject;
+			super(millis);
 		}
 
 	}
 
 	/**
 	 * simple sleep wrapper that catches its exception
-	 * 
+	 *
 	 * @param millis
 	 * @return true if normal exit, false if interupted
 	 */
@@ -206,7 +145,7 @@ public class ThreadUtil
 	 * @param millis
 	 * @return true if normal exit, false if interupted
 	 */
-	public static boolean join(final Thread thread, int millis)
+	public static boolean join(final Thread thread, final int millis)
 	{
 		if (thread == null)
 		{
@@ -232,7 +171,7 @@ public class ThreadUtil
 
 	/**
 	 * simple wait wrapper that synchronizes catches its exception
-	 * 
+	 *
 	 * @param mutex the object that will wait, if null we assume we need not wait
 	 * @param millis milliseconds to wait, 0 or lower: indefinite wait
 	 * @return true if normal exit, false if interupted or mutex is null
