@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -43,15 +43,19 @@ import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFConvertingConfig;
+import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.junit.Test;
@@ -93,11 +97,54 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 			final JDFLayout lo = (JDFLayout) phLO.getCreateResource();
 			final SetHelper sh = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 			final JDFBinderySignature bs = (JDFBinderySignature) sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS" + i), true).getResource();
-			bs.setBinderySignatureType(EnumBinderySignatureType.Fold);
+			bs.setBinderySignatureType(EnumBinderySignatureType.Grid);
 			lo.appendElement(ElementName.POSITION).setAttribute(XJDFConstants.BinderySignatureID, "BS" + i);
 		}
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "processes/SimpleGangOut.xjdf");
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testOptimizeCutBlock()
+	{
+		for (int i = 0; i < 6; i++)
+		{
+			final JDFElement e = (JDFElement) addGang();
+			e.setAttribute(AttributeName.NPAGE, "1");
+			e.setAttribute(AttributeName.PAGEDIMENSION, new JDFXYPair(500, 350).scaleFromMM(), null);
+			if (i % 2 == 0)
+				e.setAttribute(AttributeName.OPERATIONS, "Laminate");
+
+		}
+		xjdfHelper.setVersion(EnumVersion.Version_2_1);
+		final JDFCutBlock cb = (JDFCutBlock) convertingConfig.getCreateElement(ElementName.CUTBLOCK);
+		cb.setAttribute(AttributeName.BOX, new JDFRectangle(0, 0, 500, 700).scaleFromMM(), null);
+		cb.setBlockName("B1");
+		cb.setAttribute(AttributeName.OPERATIONS, "Laminate");
+		final JDFCutBlock cb2 = (JDFCutBlock) convertingConfig.getCreateElement(ElementName.CUTBLOCK, null, 1);
+		cb2.setAttribute(AttributeName.BOX, new JDFRectangle(500, 0, 1000, 700).scaleFromMM(), null);
+		cb2.setBlockName("B2");
+
+		writeTest(xjdfHelper, "CutGangIn.xjdf");
+		for (int i = 0; i < 6; i++)
+		{
+			final JDFAttributeMap partMap = new JDFAttributeMap("BinderySignatureID", "BS" + i);
+			final String sn = "S" + (i / 2);
+			partMap.put("SheetName", sn);
+			final ResourceHelper phLO = layout.appendPartition(partMap, true);
+			phLO.setAmount(1000, partMap, true);
+			final JDFLayout lo = (JDFLayout) phLO.getCreateResource();
+			final SetHelper sh = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+			final JDFBinderySignature bs = (JDFBinderySignature) sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS" + i), true).getResource();
+			bs.setBinderySignatureType(EnumBinderySignatureType.Grid);
+			lo.appendElement(ElementName.POSITION).setAttribute(XJDFConstants.BinderySignatureID, "BS" + i);
+		}
+		cleanSnippets(xjdfHelper);
+		writeTest(xjdfHelper, "processes/CutGangOut.xjdf");
 	}
 
 	/**
@@ -193,10 +240,10 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 		sheetOptimizingParams = hpSheetOptim.getCreateResource();
 
 		convertingConfig = (JDFConvertingConfig) sheetOptimizingParams.appendElement(ElementName.CONVERTINGCONFIG);
-		convertingConfig.setAttribute(AttributeName.SHEETHEIGHT + "Max", 700 * 72 / 2.54, null);
-		convertingConfig.setAttribute(AttributeName.SHEETHEIGHT + "Min", 700 * 72 / 2.54, null);
-		convertingConfig.setAttribute(AttributeName.SHEETWIDTH + "Max", 1000 * 72 / 2.54, null);
-		convertingConfig.setAttribute(AttributeName.SHEETWIDTH + "Min", 1000 * 72 / 2.54, null);
+		convertingConfig.setAttribute(AttributeName.SHEETHEIGHT + "Max", 70 * 72 / 2.54, null);
+		convertingConfig.setAttribute(AttributeName.SHEETHEIGHT + "Min", 70 * 72 / 2.54, null);
+		convertingConfig.setAttribute(AttributeName.SHEETWIDTH + "Max", 100 * 72 / 2.54, null);
+		convertingConfig.setAttribute(AttributeName.SHEETWIDTH + "Min", 100 * 72 / 2.54, null);
 
 	}
 

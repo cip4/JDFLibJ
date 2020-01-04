@@ -4105,6 +4105,7 @@
     <xs:element name="ConvertingConfig">
         <xs:complexType>
             <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="CutBlock"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Device"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Media"/>
             </xs:sequence>
@@ -4128,6 +4129,7 @@
             <xs:attribute name="CutWidth" type="xs:float" use="optional"/>
             <xs:attribute name="DescriptiveName" type="xs:string" use="optional"/>
             <xs:attribute name="ExternalID" type="xs:NMTOKEN" use="optional"/>
+            <xs:attribute name="Operations" type="xs:NMTOKENS" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5628,6 +5630,7 @@
             <xs:attribute name="NPage" type="xs:int" use="optional"/>
             <xs:attribute name="NumberUp" type="XYPair" use="optional"/>
             <xs:attribute name="OneSheet" type="xs:NMTOKEN" use="optional"/>
+            <xs:attribute name="Operations" type="xs:NMTOKENS" use="optional"/>
             <xs:attribute name="OrderQuantity" type="xs:int" use="optional"/>
             <xs:attribute name="PageDimension" type="XYPair" use="optional"/>
             <xs:attribute name="Priority" type="xs:int" use="optional"/>
