@@ -154,12 +154,15 @@ public class HotFolder
 						vf.remove(i);
 					}
 				}
-				files = vf.toArray(new File[0]);
-				files = new FileSorter(files).sortLastModified(false);
-
-				for (final File f : files) // the file is new - add to list for next check
+				if (!vf.isEmpty())
 				{
-					lastFileTime.add(new FileTime(f));
+					files = vf.toArray(new File[0]);
+					files = new FileSorter(files).sortLastModified(false);
+
+					for (final File f : files) // the file is new - add to list for next check
+					{
+						lastFileTime.add(new FileTime(f));
+					}
 				}
 			}
 		}
