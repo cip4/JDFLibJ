@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -43,13 +43,18 @@ import static org.junit.Assert.assertTrue;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.xml.validation.SchemaFactory;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.JDFParserFactory;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.XMLDoc;
@@ -58,7 +63,11 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlUtil;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.xml.sax.SAXNotRecognizedException;
+import org.xml.sax.SAXNotSupportedException;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -293,6 +302,36 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws SAXNotSupportedException
+	 * @throws SAXNotRecognizedException
+	 *
+	 */
+	@Test
+	@Ignore
+	public void testLocalSchema() throws SAXNotRecognizedException, SAXNotSupportedException
+	{
+		final KElement schema = KElement.parseFile(getXJDFSchema(2, 1));
+		schema.setAttribute("vc:minVersion", "1.1", "http://www.w3.org/2007/XMLSchema-versioning");
+		final KElement rect = schema.getChildWithAttribute("xs:simpleType", "name", null, "rectangle", 0, true);
+		final KElement restrict = rect.getElement("xs:restriction");
+		restrict.appendElement("xs:assert").setAttribute("test", "fn:starts-with($value, '0 0 ')");
+		final String schemaUrl = sm_dirTestDataTemp + "testschema.xsd";
+		schema.write2File(schemaUrl);
+		final KElement root = new XJDFHelper(EnumVersion.Version_2_1, "j1").getRoot();
+		final XJDFHelper xjdfHelper = new XJDFHelper(root);
+		xjdfHelper.getCreateRootProduct(0).setAttribute(AttributeName.PARTVERSION, "PV1");
+		xjdfHelper.setTypes(JDFConstants.PRODUCT);
+		final KElement c = xjdfHelper.getCreateSet(XJDFConstants.Content, EnumUsage.Input).getCreatePartition(0, true).getResource();
+		c.setAttribute(AttributeName.SOURCEBLEEDBOX, "0 0 1 2");
+		xjdfHelper.cleanUp();
+		final JDFParser parser = JDFParserFactory.getFactory().get();
+		parser.setSchemaLocation(JDFElement.getSchemaURL(2, 1), UrlUtil.normalize(schemaUrl));
+		//TODO update linked xerces
+		SchemaFactory.newInstance("http://www.w3.org/XML/XMLSchema/v1.1");
+		assertNotNull(parser.parseString(root.toXML()));
+	}
+
+	/**
 	 *
 	 */
 	@Test
@@ -356,6 +395,20 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		root.setAttribute("Types", "ConventionalPrinting");
 		assertTrue(reparse(root, 2, 0));
 		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@CheckSum", "123");
+		assertFalse(reparse(root, 2, 0));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testFileSpecValidateLong()
+	{
+		final KElement root = new XJDFHelper("j1", "p", null).getRoot();
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@FileSize", "123456789012345");
+		root.setAttribute("Types", "ConventionalPrinting");
+		assertTrue(reparse(root, 2, 0));
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/RunList/FileSpec/@FileSize", "123456789012345.12");
 		assertFalse(reparse(root, 2, 0));
 	}
 
