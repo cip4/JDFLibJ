@@ -132,19 +132,78 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 		writeTest(xjdfHelper, "CutGangIn.xjdf");
 		for (int i = 0; i < 6; i++)
 		{
-			final JDFAttributeMap partMap = new JDFAttributeMap("BinderySignatureID", "BS" + i);
 			final String sn = "S" + (i / 2);
-			partMap.put("SheetName", sn);
-			final ResourceHelper phLO = layout.appendPartition(partMap, true);
+			final JDFAttributeMap partMap = new JDFAttributeMap(AttributeName.SHEETNAME, sn);
+			final ResourceHelper phLO = layout.getCreatePartition(partMap, true);
 			phLO.setAmount(1000, partMap, true);
 			final JDFLayout lo = (JDFLayout) phLO.getCreateResource();
+			final JDFPosition pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
+			final JDFRectangle relBox = new JDFRectangle(0, 0, 0.5, 1);
+			if (i % 2 == 1)
+				relBox.shift(0.5, 0);
+			pos.setRelativeBox(relBox);
+			pos.setAttribute(XJDFConstants.BinderySignatureID, "BS" + i);
+
 			final SetHelper sh = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 			final JDFBinderySignature bs = (JDFBinderySignature) sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS" + i), true).getResource();
 			bs.setBinderySignatureType(EnumBinderySignatureType.Grid);
-			lo.appendElement(ElementName.POSITION).setAttribute(XJDFConstants.BinderySignatureID, "BS" + i);
+			bs.setNumberUp(1, 1);
+			final KElement gang = sheetOptimizingParams.getElement(ElementName.GANGELEMENT, null, i);
+
+			gang.setAttribute(XJDFConstants.BinderySignatureIDs, "BS" + i);
+
 		}
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "processes/CutGangOut.xjdf");
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testOptimizeCutBlockBS()
+	{
+		for (int i = 0; i < 6; i++)
+		{
+			final JDFElement e = (JDFElement) addGang();
+			e.setAttribute(AttributeName.NPAGE, "1");
+			e.setAttribute(AttributeName.PAGEDIMENSION, new JDFXYPair(500, 350).scaleFromMM(), null);
+			e.setAttribute(XJDFConstants.BinderySignatureIDs, "BS" + i);
+			if (i % 2 == 0)
+				e.setAttribute(AttributeName.OPERATIONS, "Laminate");
+
+			final SetHelper sh = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+			final JDFBinderySignature bs = (JDFBinderySignature) sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS" + i), true).getResource();
+			bs.setBinderySignatureType(EnumBinderySignatureType.Grid);
+			bs.setNumberUp(1, 1);
+		}
+		xjdfHelper.setVersion(EnumVersion.Version_2_1);
+		final JDFCutBlock cb = (JDFCutBlock) convertingConfig.getCreateElement(ElementName.CUTBLOCK);
+		cb.setAttribute(AttributeName.BOX, new JDFRectangle(0, 0, 500, 700).scaleFromMM(), null);
+		cb.setBlockName("B1");
+		cb.setAttribute(AttributeName.OPERATIONS, "Laminate");
+		final JDFCutBlock cb2 = (JDFCutBlock) convertingConfig.getCreateElement(ElementName.CUTBLOCK, null, 1);
+		cb2.setAttribute(AttributeName.BOX, new JDFRectangle(500, 0, 1000, 700).scaleFromMM(), null);
+		cb2.setBlockName("B2");
+
+		writeTest(xjdfHelper, "CutGangInBS.xjdf");
+		for (int i = 0; i < 6; i++)
+		{
+			final String sn = "S" + (i / 2);
+			final JDFAttributeMap partMap = new JDFAttributeMap(AttributeName.SHEETNAME, sn);
+			final ResourceHelper phLO = layout.getCreatePartition(partMap, true);
+			phLO.setAmount(1000, partMap, true);
+			final JDFLayout lo = (JDFLayout) phLO.getCreateResource();
+			final JDFPosition pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
+			final JDFRectangle relBox = new JDFRectangle(0, 0, 0.5, 1);
+			if (i % 2 == 1)
+				relBox.shift(0.5, 0);
+			pos.setRelativeBox(relBox);
+			pos.setAttribute(XJDFConstants.BinderySignatureID, "BS" + i);
+		}
+		cleanSnippets(xjdfHelper);
+		writeTest(xjdfHelper, "processes/CutGangOutBS.xjdf");
 	}
 
 	/**
@@ -209,7 +268,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 	{
 		final KElement gang = sheetOptimizingParams.appendElement(ElementName.GANGELEMENT);
 		gang.setAttribute(AttributeName.GANGELEMENTID, "Gang_" + gang.numSiblingElements(ElementName.GANGELEMENT, null));
-		gang.setAttribute("MinQuantity", 1000, null);
+		gang.setAttribute(AttributeName.ORDERQUANTITY, 1000, null);
 		return gang;
 	}
 
