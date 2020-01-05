@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -276,8 +276,7 @@ public class JDFResource extends JDFElement
 		atrInfoTable_Abstract[8] = new AtrInfoTable(AttributeName.PIPEURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable_Abstract[9] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_Abstract[10] = new AtrInfoTable(AttributeName.RREFS, 0x44444433, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSpawnStatus.getEnum(0),
-				EnumSpawnStatus.NotSpawned.getName());
+		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSpawnStatus.getEnum(0), EnumSpawnStatus.NotSpawned.getName());
 		atrInfoTable_Abstract[12] = new AtrInfoTable(AttributeName.SPAWNIDS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable_Abstract[13] = new AtrInfoTable(AttributeName.SORTING, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable_Abstract[14] = new AtrInfoTable(AttributeName.SORTAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
@@ -312,8 +311,7 @@ public class JDFResource extends JDFElement
 	{
 		atrInfoTable_ID_Class_Required[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
 		atrInfoTable_ID_Class_Required[1] = new AtrInfoTable(AttributeName.CLASS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumResourceClass.getEnum(0), null);
-		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0),
-				EnumPartUsage.Explicit.getName());
+		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0), EnumPartUsage.Explicit.getName());
 
 	}
 
@@ -2257,7 +2255,7 @@ public class JDFResource extends JDFElement
 		{
 			return false;
 		}
-		final Vector<EnumPartIDKey> vImplicitKeys = getImplicitPartitions();
+		final List<EnumPartIDKey> vImplicitKeys = getImplicitPartitions();
 		if (vImplicitKeys != null)
 		{
 			if (vImplicitKeys.contains(key))
@@ -3896,7 +3894,8 @@ public class JDFResource extends JDFElement
 		for (int i = v2.size() - 1; i >= 0; i--)
 		{
 			final JDFElement e = v2.get(i);
-			if (!e.hasAttribute_KElement(AttributeName.SPAWNIDS, null, false) || !e.includesMatchingAttribute(AttributeName.SPAWNIDS, spawnID, AttributeInfo.EnumAttributeType.NMTOKENS))
+			if (!e.hasAttribute_KElement(AttributeName.SPAWNIDS, null, false)
+					|| !e.includesMatchingAttribute(AttributeName.SPAWNIDS, spawnID, AttributeInfo.EnumAttributeType.NMTOKENS))
 			{
 				v2.remove(i);
 			}
@@ -4101,9 +4100,10 @@ public class JDFResource extends JDFElement
 
 					// remember idix of vtmp Vector of Integer (object type, not
 					// the simple datatype)
-					final Vector<Integer> vTmp = new Vector<>();
+					final List<Integer> vTmp = new ArrayList<>();
 
-					for (int j = 0; j < vKids.size(); j++)
+					final int size = vKids.size();
+					for (int j = 0; j < size; j++)
 					{
 						final JDFAttributeMap kidMap = ((JDFResource) vKids.elementAt(j)).getPartMap(partIDKeys);
 						final int index = vTest.indexOf(kidMap);
@@ -4113,8 +4113,7 @@ public class JDFResource extends JDFElement
 						}
 						else
 						{
-							// we found a child in the resource that is not in vTest, --> we cannot
-							// consolidate
+							// we found a child in the resource that is not in vTest, --> we cannot consolidate
 							vTmp.clear();
 							break;
 						}
@@ -4131,16 +4130,16 @@ public class JDFResource extends JDFElement
 							int posMax = -1;
 							for (int kk = 0; kk < vTmp.size(); kk++)
 							{
-								if ((vTmp.elementAt(kk)).intValue() > mymax)
+								if ((vTmp.get(kk)).intValue() > mymax)
 								{
-									mymax = (vTmp.elementAt(kk)).intValue();
+									mymax = (vTmp.get(kk)).intValue();
 									posMax = kk;
 								}
 							}
 
 							// remove all kids
 							vTest.removeElementAt(mymax);
-							vTmp.removeElementAt(posMax);
+							vTmp.remove(posMax);
 						}
 
 						// add parent
@@ -4430,7 +4429,6 @@ public class JDFResource extends JDFElement
 								hasConditionAmount = true;
 								rlAmount = rl.getAmount(partMapGood);
 							}
-
 						}
 
 						if (!hasConditionActualAmount)
@@ -4681,9 +4679,9 @@ public class JDFResource extends JDFElement
 			// Check found part ID key.
 			if (strPartIDKey != null)
 			{
-				if ((strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCCOPIES)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCRUNINDEX))
-						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCSHEETINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_RUNINDEX))
-						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_SHEETINDEX))
+				if ((strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCCOPIES))
+						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCRUNINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCSHEETINDEX))
+						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_RUNINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_SHEETINDEX))
 				// values not allowed according to JDF 1.2, 3.8.2.4
 				// || (strPartIDKey.equals (AttributeName.SORTING))
 				// || (strPartIDKey.equals (AttributeName.SORTAMOUNT))
@@ -5859,7 +5857,7 @@ public class JDFResource extends JDFElement
 		final String s = partType.getName();
 		final JDFResource r = getResourceRoot();
 
-		final Vector<EnumPartIDKey> implicitPartitions = getImplicitPartitions();
+		final List<EnumPartIDKey> implicitPartitions = getImplicitPartitions();
 		if (implicitPartitions != null && implicitPartitions.contains(partType))
 		{
 			throw new JDFException("AddPartIDKey: attempting to add implicit partition: " + s);
@@ -7211,91 +7209,6 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * gets an element as defined by XPath to value <br>
-	 *
-	 *
-	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 *
-	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
-	 *            <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
-	 *
-	 * @return KElement the specified element
-	 * @throws IllegalArgumentException if path is not supported
-	 */
-	// @Override
-	// public KElement getXPathElement(String path)
-	// {
-	// VElement v= getXPathElementVector(path, 1);
-	// if(v==null || v.size()<1) {
-	// final String nodeName=getNodeName();
-	// KElement ke=this;
-	// while (v == null || v.size()==0)
-	// {
-	// ke = ke.getParentNode_KElement();
-	// if (ke == null || !ke.getNodeName().equals(nodeName))
-	// {
-	// return null;
-	// }
-	// v = ke.getXPathElementVector(path, 1);
-	// }
-	// }
-	// return v.item(0);
-	// }
-	// /**
-	// * Recursively adds the partition leaves defined in vPartMap
-	// *
-	// * @param vPartMap the vector of maps of part keys
-	// * @param vPartIDKeys the vector of partIDKeys strings of the resource. If
-	// empty (the default) the Resource PartIDKeys attribute is used
-	// * @return VElement - vector of newly created partitions
-	// *
-	// * @throws JDFException if there are in the partMap not matching partitions
-	// * @throws JDFException if there is an attempt to fill non-matching partIDKeys
-	// * @throws JDFException if by adding of last partition key there is either
-	// non-continuous partmap or left more than one key
-	// *
-	// * @default createPartitions(vPartMap, VString.emptyVector)
-	// */
-	// public VElement createPartitions(final VJDFAttributeMap vPartMap, final
-	// VString vPartIDKeys)
-	// {
-	// final VString tmp = new VString();
-	// final VElement vExist = getPartitionVector(vPartMap, null);
-	//
-	// Set<JDFAttributeMap> setExist = new HashSet<JDFAttributeMap>();
-	// for (int i = 0; i < vExist.size(); i++)
-	// {
-	// JDFResource resource = (JDFResource) vExist.get(i);
-	// JDFAttributeMap partMap = resource.getPartMap();
-	// partMap.reduceMap(vPartIDKeys);
-	// setExist.add(partMap);
-	// }
-	//
-	// for (int i = 0; i < vPartMap.size(); i++)
-	// {
-	// final JDFAttributeMap map = vPartMap.elementAt(i);
-	// if (!setExist.contains(map))
-	// {
-	// tmp.clear();
-	// for (int j = 0; j < vPartIDKeys.size(); j++)
-	// {
-	// if (map.containsKey(vPartIDKeys.elementAt(j)))
-	// {
-	// tmp.add(vPartIDKeys.elementAt(j));
-	// }
-	// }
-	// vExist.add(getCreatePartition(map, tmp));
-	// setExist.add(map);
-	// }
-	// else
-	// {
-	// // nop
-	// }
-	// }
-	//
-	// return vExist;
-	// }
-	/**
 	 * Recursively adds the partition leaves defined in vPartMap
 	 *
 	 * @param vPartMap the vector of maps of part keys
@@ -7744,7 +7657,7 @@ public class JDFResource extends JDFElement
 					final JDFAttributeMap partMap = getPartMap();
 					if (old != null && pm.partSize() > partMap.size())
 					{
-						final Vector<JDFAttributeMap> keySet = pm.keyVector();
+						final List<JDFAttributeMap> keySet = pm.keyVector();
 						for (final JDFAttributeMap map : keySet)
 						{
 							if (old.equals(map.get(key)))
@@ -7754,7 +7667,6 @@ public class JDFResource extends JDFElement
 								map.put(key, value);
 								pm.put(map, r);
 							}
-
 						}
 					}
 					else
