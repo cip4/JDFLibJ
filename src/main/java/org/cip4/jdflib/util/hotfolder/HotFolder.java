@@ -129,14 +129,19 @@ public class HotFolder
 						final File fileJ = files[j];
 						if (fileJ != null && fileJ.equals(lftAt.f))
 						{
-							found = found || processSingleFile(files, lftAt, j, fileJ);
+							final boolean processed = processSingleFile(lftAt);
+							if (processed)
+							{
+								found = processed;
+								files[j] = null;
+							}
 						}
 					}
 
 					if (!found)
 					{
 						final FileTime ft = lastFileTime.get(i);
-						if (!ft.f.exists())// not there anymore - note the -- for undo remove
+						if (!ft.exists())// not there anymore - note the -- for undo remove
 						{
 							lastFileTime.remove(i--);
 						}
@@ -340,28 +345,25 @@ public class HotFolder
 		return n == 0 ? null : files;
 	}
 
-	private boolean processSingleFile(final File[] files, final FileTime lftAt, final int j, final File fileJ)
+	private boolean processSingleFile(final FileTime lftAt)
 	{
 		boolean found = true;
-		if (fileJ.lastModified() == lftAt.modified && ((lftAt.modified + stabilizeTime) < System.currentTimeMillis()))
+		if (lftAt.sameModified() && ((lftAt.modified + stabilizeTime) < System.currentTimeMillis()))
 		{
-			if (fileJ.exists())
-			{
-
-				HotFolderRunner.getTherunner().runFile(new HotFileRunner(fileJ));
-				lastFileTime.remove(lftAt);
-			}
-			else
-			{
-				found = false;
-			}
+			HotFolderRunner.getTherunner().runFile(new HotFileRunner(lftAt.f));
+			lastFileTime.remove(lftAt);
 		}
+		else if (!lftAt.exists())
+		{
+			lastFileTime.remove(lftAt);
+			found = false;
+		}
+
 		else
 		{
-			lftAt.modified = files[j].lastModified();
+			lftAt.updateModified();
 		}
 
-		files[j] = null; // this file has been processed, remove from list for performance
 		return found;
 	}
 
@@ -382,10 +384,65 @@ public class HotFolder
 			modified = -1;
 		}
 
+		protected void updateModified()
+		{
+			modified = lastModified();
+		}
+
+		protected boolean exists()
+		{
+			return f == null ? false : f.exists();
+		}
+
+		protected boolean sameModified()
+		{
+			return modified > 0 && modified == lastModified();
+		}
+
+		protected long lastModified()
+		{
+			return f == null ? 0 : f.lastModified();
+		}
+
 		@Override
 		public String toString()
 		{
 			return f + JDFConstants.BLANK + modified;
+		}
+
+		/**
+		 * @see java.lang.Object#hashCode()
+		 */
+		@Override
+		public int hashCode()
+		{
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((f == null) ? 0 : f.hashCode());
+			return result;
+		}
+
+		/**
+		 * @see java.lang.Object#equals(java.lang.Object)
+		 */
+		@Override
+		public boolean equals(final Object obj)
+		{
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			final FileTime other = (FileTime) obj;
+			if (f == null)
+			{
+				if (other.f != null)
+					return false;
+			}
+			else if (!f.equals(other.f))
+				return false;
+			return true;
 		}
 	}
 
@@ -549,7 +606,7 @@ public class HotFolder
 	}
 
 	/**
-	 * @param stabilizeTime the stabilizeTime to set
+	 * @param stabilizeTime the stabilizeTime to set in milliseconds
 	 */
 	public void setStabilizeTime(final int stabilizeTime)
 	{

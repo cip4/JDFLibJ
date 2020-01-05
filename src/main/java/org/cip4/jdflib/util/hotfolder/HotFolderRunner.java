@@ -111,10 +111,10 @@ class HotFolderRunner extends Thread
 		super("HotFolderRunner");
 		hotfolders = new ArrayList<>();
 		setDaemon(true);
-		log.info("Starting hotfolder runner");
+		log.info("Starting hotfolder runner thread");
 		interrupt = false;
-		start();
 		mutex = new MyMutex();
+		start();
 	}
 
 	/**
