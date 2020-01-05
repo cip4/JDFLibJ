@@ -358,92 +358,12 @@ public class HotFolder
 			lastFileTime.remove(lftAt);
 			found = false;
 		}
-
 		else
 		{
 			lftAt.updateModified();
 		}
 
 		return found;
-	}
-
-	/**
-	 * simple container class that retains the last known mod date of a file
-	 *
-	 * @author prosirai
-	 *
-	 */
-	protected static class FileTime
-	{
-		protected final File f;
-		protected long modified;
-
-		protected FileTime(final File _f)
-		{
-			f = _f;
-			modified = -1;
-		}
-
-		protected void updateModified()
-		{
-			modified = lastModified();
-		}
-
-		protected boolean exists()
-		{
-			return f == null ? false : f.exists();
-		}
-
-		protected boolean sameModified()
-		{
-			return modified > 0 && modified == lastModified();
-		}
-
-		protected long lastModified()
-		{
-			return f == null ? 0 : f.lastModified();
-		}
-
-		@Override
-		public String toString()
-		{
-			return f + JDFConstants.BLANK + modified;
-		}
-
-		/**
-		 * @see java.lang.Object#hashCode()
-		 */
-		@Override
-		public int hashCode()
-		{
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + ((f == null) ? 0 : f.hashCode());
-			return result;
-		}
-
-		/**
-		 * @see java.lang.Object#equals(java.lang.Object)
-		 */
-		@Override
-		public boolean equals(final Object obj)
-		{
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			final FileTime other = (FileTime) obj;
-			if (f == null)
-			{
-				if (other.f != null)
-					return false;
-			}
-			else if (!f.equals(other.f))
-				return false;
-			return true;
-		}
 	}
 
 	/**
