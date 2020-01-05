@@ -305,7 +305,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testExtension() throws Exception
 	{
-		for (int conc = 0; conc < 5; conc += 4)
+		for (int conc = 1; conc < 6; conc += 4)
 		{
 			hf = new HotFolder(theHF, ".txt,txt2", new MyListener(true));
 			hf.setStabilizeTime(111);
@@ -329,7 +329,7 @@ public class HotFolderTest extends JDFTestCaseBase
 
 			for (int i = 0; i < 420; i++)
 			{
-				ThreadUtil.sleep(20);
+				ThreadUtil.sleep(100);
 				if (!file.exists() && !file3.exists())
 					break;
 			}
@@ -500,7 +500,7 @@ public class HotFolderTest extends JDFTestCaseBase
 	public synchronized void testBigConcurrent() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
-		hf.setMaxConcurrent(3);
+		hf.setMaxConcurrent(8);
 		final File file = new File(theHF + File.separator + "f1Big.txt");
 		final File file2 = new File(theHF + File.separator + "f2Big.txt");
 		file.createNewFile();
@@ -525,7 +525,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		fos.close();
 		fos2.close();
 
-		for (int i = 1; i < 160 && file.exists(); i++)
+		for (int i = 1; i < 666 && file.exists(); i++)
 		{
 			ThreadUtil.sleep(100);
 		}
