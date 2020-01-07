@@ -40,6 +40,7 @@ package org.cip4.jdflib.util.hotfolder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.logging.Log;
@@ -60,7 +61,9 @@ class HotFolderRunner extends Thread
 	public static void shutDown()
 	{
 		if (getTherunner() != null)
+		{
 			getTherunner().quit();
+		}
 	}
 
 	/**
@@ -71,7 +74,7 @@ class HotFolderRunner extends Thread
 	{
 		final String name = getName();
 		log.info("Stopping hot folder runner: " + name);
-		interrupt = true;
+		interrupt.set(true);
 		ThreadUtil.notifyAll(mutex);
 		MultiTaskQueue.shutDown(name);
 		ThreadUtil.notifyAll(this);
@@ -112,7 +115,7 @@ class HotFolderRunner extends Thread
 		hotfolders = new ArrayList<>();
 		setDaemon(true);
 		log.info("Starting hotfolder runner thread");
-		interrupt = false;
+		interrupt = new AtomicBoolean(false);
 		mutex = new MyMutex();
 		start();
 	}
@@ -134,7 +137,7 @@ class HotFolderRunner extends Thread
 		}
 	}
 
-	boolean interrupt;
+	final AtomicBoolean interrupt;
 	int maxConcurrent = 1;
 
 	/**
@@ -144,7 +147,7 @@ class HotFolderRunner extends Thread
 	public void run()
 	{
 		log.info("start of loop " + this);
-		while (!interrupt)
+		while (!interrupt.get())
 		{
 			final long t0 = System.currentTimeMillis();
 			boolean mod = false;
@@ -152,10 +155,13 @@ class HotFolderRunner extends Thread
 			for (final HotFolder folder : local)
 			{
 				mod = folder.loop() || mod;
-				if (interrupt)
+				if (interrupt.get())
+				{
+					log.info("interrupted in hotfilder loop " + folder);
 					break;
+				}
 			}
-			if (!interrupt)
+			if (!interrupt.get())
 			{
 				final long t1 = System.currentTimeMillis();
 				final int millis = mod ? 0 : HotFolder.getDefaultStabilizeTime() - (int) (t1 - t0);
@@ -187,7 +193,7 @@ class HotFolderRunner extends Thread
 		{
 			final HotFolderRunner hotFolderRunner = theRunner.get();
 
-			return hotFolderRunner == null || hotFolderRunner.interrupt ? null : hotFolderRunner;
+			return hotFolderRunner == null || hotFolderRunner.interrupt.get() ? null : hotFolderRunner;
 		}
 	}
 
