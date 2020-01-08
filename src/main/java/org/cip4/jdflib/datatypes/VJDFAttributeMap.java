@@ -49,6 +49,7 @@ package org.cip4.jdflib.datatypes;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Vector;
 
@@ -689,8 +690,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 */
 	public void appendUnique(final JDFAttributeMap map)
 	{
-		if (!contains(map))
-			add(map);
+		ContainerUtil.appendUnique(this, map);
 	}
 
 	@Override
@@ -711,12 +711,11 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * Method appendUnique.
 	 *
-	 * @param map maps to append
+	 * @param maps maps to append
 	 */
-	public void appendUnique(final VJDFAttributeMap map)
+	public void appendUnique(final VJDFAttributeMap maps)
 	{
-		addAll(map);
-		unify();
+		ContainerUtil.appendUnique(this, maps);
 	}
 
 	/**
@@ -741,9 +740,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	{
 		for (int i = this.size() - 1; i >= 0; i--)
 		{
-			if (!elementAt(i).overlapMap(map))
+			if (!get(i).overlapMap(map))
 			{
-				removeElementAt(i);
+				remove(i);
 			}
 		}
 	}
@@ -805,7 +804,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 			final JDFAttributeMap attributeMap = get(i);
 			if (!set.contains(attributeMap) && !attributeMap.overlapMap(vMap))
 			{
-				removeElementAt(i);
+				remove(i);
 			}
 		}
 	}
@@ -1028,16 +1027,19 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 */
 	public void removeMaps(final JDFAttributeMap map)
 	{
-		if (map == null || map.size() == 0)
+		if (JDFAttributeMap.isEmpty(map))
 		{
 			clear();
 		}
-		for (int i = size() - 1; i >= 0; i--)
+		else
 		{
-			final JDFAttributeMap map0 = get(i);
-			if (map0 != null && map0.subMap(map))
+			for (int i = size() - 1; i >= 0; i--)
 			{
-				removeElementAt(i);
+				final JDFAttributeMap map0 = get(i);
+				if (map0 != null && map0.subMap(map))
+				{
+					removeElementAt(i);
+				}
 			}
 		}
 	}
@@ -1051,12 +1053,11 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	{
 		if (commonMap != null)
 		{
-			for (final String key : commonMap.keySet())
+			for (final Entry<String, String> entry : commonMap.entrySet())
 			{
-				put(key, commonMap.get(key));
+				put(entry.getKey(), entry.getValue());
 			}
 		}
-
 	}
 
 	@Override

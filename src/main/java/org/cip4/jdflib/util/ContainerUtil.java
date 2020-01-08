@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -681,7 +681,7 @@ public class ContainerUtil
 	}
 
 	/**
-	 * AppendUnique - append a string but ignore multiple entries
+	 * AppendUnique - append an object but ignore multiple entries
 	 *
 	 * @param a the A to append, if null nothing is added
 	 */
@@ -690,6 +690,20 @@ public class ContainerUtil
 		if (a != null && !c.contains(a))
 		{
 			c.add(a);
+		}
+	}
+
+	/**
+	 * AppendUnique - append an object but ignore multiple entries
+	 *
+	 * @param a the A to append, if null nothing is added
+	 */
+	public static <A> void appendUnique(final Collection<A> c, final Collection<A> a)
+	{
+		if (!isEmpty(a))
+		{
+			c.addAll(a);
+			unify(c);
 		}
 	}
 

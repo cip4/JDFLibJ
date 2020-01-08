@@ -496,10 +496,10 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 			}
 		}
 		final long t1 = System.currentTimeMillis();
-		System.out.println(t1 - t0);
+		log.info("" + (t1 - t0));
 		v.unify();
 		final long t2 = System.currentTimeMillis();
-		System.out.println(t2 - t1);
+		log.info("" + (t2 - t1));
 	}
 
 	/**
