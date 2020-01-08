@@ -46,7 +46,6 @@
  */
 package org.cip4.jdflib.datatypes;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -69,7 +68,7 @@ import org.cip4.jdflib.util.StringUtil;
  * @version 1.0 2002-01-24
  *
  */
-public class VJDFAttributeMap extends ArrayList<JDFAttributeMap>
+public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 {
 	/**
 	 *
@@ -436,6 +435,7 @@ public class VJDFAttributeMap extends ArrayList<JDFAttributeMap>
 	 * @param i the given position (may be<0 to count backwards)
 	 * @return JDFAttributeMap - the selected element
 	 */
+	@Override
 	public JDFAttributeMap elementAt(final int i)
 	{
 		return get(i);
@@ -475,6 +475,7 @@ public class VJDFAttributeMap extends ArrayList<JDFAttributeMap>
 		unify();
 	}
 
+	@Override
 	public void removeElementAt(final int i)
 	{
 		remove(i);
@@ -680,6 +681,7 @@ public class VJDFAttributeMap extends ArrayList<JDFAttributeMap>
 			add(map);
 	}
 
+	@Override
 	public void addElement(final JDFAttributeMap map)
 	{
 		add(map);
@@ -1045,6 +1047,7 @@ public class VJDFAttributeMap extends ArrayList<JDFAttributeMap>
 
 	}
 
+	@Override
 	public void setElementAt(final JDFAttributeMap mTmp, final int j)
 	{
 		set(j, mTmp);
