@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -60,6 +60,7 @@ import org.cip4.jdflib.util.ContainerUtil;
  */
 public class PartitionGetter
 {
+	private static final String[] NON_EVIL = new String[] { AttributeName.RUN, AttributeName.SIGNATURENAME, AttributeName.SHEETNAME, AttributeName.SIDE, AttributeName.SEPARATION };
 	/**
 	 *
 	 */
@@ -132,18 +133,19 @@ public class PartitionGetter
 						return EnumPartUsage.Explicit.equals(partUsage) || leafMap.get(onlyMap) == null ? null : onlyMap;
 					}
 					else
+					{
 						onlyMap = map.clone();
+					}
 				}
 			}
 		}
-
 		return onlyMap;
 	}
 
 	boolean containsEvil(final JDFAttributeMap partMap)
 	{
 		int s = partMap.size();
-		for (final String key : new String[] { AttributeName.RUN, AttributeName.SIGNATURENAME, AttributeName.SHEETNAME, AttributeName.SIDE, AttributeName.SEPARATION })
+		for (final String key : NON_EVIL)
 		{
 			if (partMap.containsKey(key))
 				s--;
@@ -810,7 +812,8 @@ public class PartitionGetter
 		final int s = vPartIDKeys == null ? 0 : vPartIDKeys.size();
 		if (s < partMap.size())
 		{
-			throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + "insufficient partIDKeys " + leafMap.getPartIDKeys() + " for " + partMap);
+			throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + "insufficient partIDKeys " + leafMap.getPartIDKeys()
+					+ " for " + partMap);
 		}
 		// create all partitions
 		JDFAttributeMap map = thisMap;
@@ -830,8 +833,8 @@ public class PartitionGetter
 			}
 			else
 			{
-				throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + " attempting to fill non-matching partIDKeys: " + key + " valid keys: "
-						+ "Current PartIDKeys: " + resourceRoot.getPartIDKeys() + " complete map: " + partMap);
+				throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + " attempting to fill non-matching partIDKeys: " + key
+						+ " valid keys: " + "Current PartIDKeys: " + resourceRoot.getPartIDKeys() + " complete map: " + partMap);
 			}
 		}
 		return r;
@@ -1100,7 +1103,8 @@ public class PartitionGetter
 				if (!JDFPart.overlapPartMap(localPartMap, partMap, strictPartVersion))
 				{
 					if (create)
-						throw new JDFException("Incompatible part maps: local: " + localPartMap.showKeys(null) + " request: " + partMap.showKeys(null) + " ID=" + resourceRoot.getID());
+						throw new JDFException("Incompatible part maps: local: " + localPartMap.showKeys(null) + " request: " + partMap.showKeys(null) + " ID="
+								+ resourceRoot.getID());
 					else
 						return null;
 				}
