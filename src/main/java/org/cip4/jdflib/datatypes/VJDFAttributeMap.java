@@ -88,7 +88,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 *
 	 * @param toAdd Vector of elements to clone
 	 */
-	public VJDFAttributeMap(final List<JDFAttributeMap> toAdd)
+	public VJDFAttributeMap(final Vector<JDFAttributeMap> toAdd)
 	{
 		super();
 		if (toAdd != null)
