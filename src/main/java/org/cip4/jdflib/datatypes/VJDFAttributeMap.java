@@ -628,6 +628,18 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
+	 * Returns the vector with JDFAttributeMap elements
+	 *
+	 * @return Vector - the vector with JDFAttributeMap elements
+	 * @deprecated - use this
+	 */
+	@Deprecated
+	public Vector<JDFAttributeMap> getVector()
+	{
+		return this;
+	}
+
+	/**
 	 * return the map that is common to all elements of this. All keys exist and have the same value
 	 *
 	 * @return the vector of all keys
