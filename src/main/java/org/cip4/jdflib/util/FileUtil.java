@@ -905,8 +905,7 @@ public class FileUtil
 		{
 			return null;
 		}
-		final String fullPath = dir.getPath() + File.separator + localFile.getPath();
-		final File fullFile = new File(fullPath);
+		final File fullFile = new File(dir, localFile.getPath());
 		return cleanDots(fullFile);
 	}
 

@@ -3633,14 +3633,14 @@ public class KElementTest extends JDFTestCaseBase
 	{
 		final XMLDoc d = new XMLDoc("e", null);
 		final KElement root = d.getRoot();
-		root.setXMLComment("foo");
+		root.setXMLComment("foo", true);
 		assertEquals(d.getDocumentElement().getParentNode().getFirstChild().getNodeValue(), "foo");
-		root.setXMLComment("bar");
+		root.setXMLComment("bar", true);
 		assertEquals(d.getDocumentElement().getParentNode().getFirstChild().getNodeValue(), "bar");
 		final KElement e2 = root.appendElement("e2");
-		e2.setXMLComment("foobar");
+		e2.setXMLComment("foobar", true);
 		assertEquals(root.getFirstChild().getNodeValue(), "foobar");
-		e2.setXMLComment("foobar2");
+		e2.setXMLComment("foobar2", true);
 		assertEquals(root.getFirstChild().getNodeValue(), "foobar2");
 		assertEquals(root.getFirstChild().getNextSibling(), e2);
 		assertNull(root.getFirstChild().getNextSibling().getNextSibling());
@@ -4082,7 +4082,7 @@ public class KElementTest extends JDFTestCaseBase
 	public void testSetComment()
 	{
 		final KElement root = new XMLDoc("root", null).getRoot();
-		root.setXMLComment("foo");
+		root.setXMLComment("foo", true);
 		assertNotNull(root.getPreviousSibling());
 	}
 

@@ -280,7 +280,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	{
 		JDFElement.setLongID(false);
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
-		lo.setXMLComment("Layout that illustrates dynamic mark placement - all margins are 25 points (gutter=2*25)");
+		lo.setXMLComment("Layout that illustrates dynamic mark placement - all margins are 25 points (gutter=2*25)", true);
 		lo.setSurfaceContentsBox(new JDFRectangle(0, 0, 500, 350));
 		final JDFSheet s = lo.appendSheet();
 		final JDFSurface su = s.appendFrontSurface();
@@ -302,11 +302,11 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 		{
 			final JDFMarkObject mark0 = su.appendMarkObject();
-			mark0.setXMLComment("Register Mark on the top right of the sheet - assumed size is 20*30, assumed sheet size is 500*350");
+			mark0.setXMLComment("Register Mark on the top right of the sheet - assumed size is 20*30, assumed sheet size is 500*350", true);
 			mark0.setTrimSize(20, 30);
 			mark0.setCTM(new JDFMatrix(1, 0, 0, 1, 500 - 20, 350 - 30));
 			mark0.appendDeviceMark().setAttribute("Anchor", "TopRight");
-			mark0.appendRegisterMark().setXMLComment("mark metadata goes here");
+			mark0.appendRegisterMark().setXMLComment("mark metadata goes here", true);
 			appendRefAnchor(mark0, "TopRight", "Parent", null);
 		}
 
@@ -314,7 +314,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 			final JDFMarkObject mark0 = su.appendMarkObject();
 			mark0.setXMLComment("Vertical Slug Line beginning at the top of the bottom margin of of the sheet between the 2 pages"
 					+ "\nnote that no TrimSize need be specified and therefore TrimCTM / CTM place the point defined by @Anchor"
-					+ "\nnote also that the anchor points to centerleft which is in the unrotated (horizontal) cs of the slug line");
+					+ "\nnote also that the anchor points to centerleft which is in the unrotated (horizontal) cs of the slug line", true);
 			final JDFMatrix m0 = new JDFMatrix(1, 0, 0, 1, 0, 0);
 			m0.rotate(90);
 			m0.shift(250, 25);
@@ -324,7 +324,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 			dm.setFontSize(10);
 			dm.setFont("GhostCrypt");
 			final JDFJobField jf = mark0.appendJobField();
-			jf.setXMLComment("Result: Sheet Printed by Dracula at the moonphase FullMoon");
+			jf.setXMLComment("Result: Sheet Printed by Dracula at the moonphase FullMoon", true);
 			jf.setAttribute("JobFormat", "Sheet Printed by %s at the moonphase %s");
 			jf.setAttribute("JobTemplate", "Operator,MoonPhase");
 			appendRefAnchor(mark0, "BottomCenter", "Parent", null);
@@ -333,7 +333,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		for (int i = 0; i < 2; i++)
 		{
 			final JDFMarkObject mark0 = su.appendMarkObject();
-			mark0.setXMLComment("Horizonzal Slug Line, centered 5 points over the top of page " + i + "\nnote that page is not yet a predefined token\n");
+			mark0.setXMLComment("Horizonzal Slug Line, centered 5 points over the top of page " + i + "\nnote that page is not yet a predefined token\n", true);
 			final JDFMatrix m0 = new JDFMatrix(1, 0, 0, 1, 0, 0);
 			m0.rotate(90);
 			m0.shift(25 + 100, 300 + 25 + 5);
@@ -346,7 +346,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 			dm.setAttribute("Anchor", "BottomCenter");
 			dm.setFontSize(8);
 			final JDFJobField jf = mark0.appendJobField();
-			jf.setXMLComment("Result: Page # " + i + " for Customer, Polanski - Job: J11");
+			jf.setXMLComment("Result: Page # " + i + " for Customer, Polanski - Job: J11", true);
 			jf.setAttribute("JobFormat", "Page # %i for Customer, %s - Job: %s");
 			jf.setAttribute("JobTemplate", "Page,JobRecipientName,JobID");
 			appendRefAnchor(mark0, "BottomCenter", "Sibling", id[i]);

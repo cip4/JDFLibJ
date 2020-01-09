@@ -775,7 +775,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 			}
 			final KElement root = (complexElement != null) ? complexElement : compType;
-			root.setXMLComment(" ** Complex type definition for " + name + " ** ");
+			root.setXMLComment(" ** Complex type definition for " + name + " ** ", true);
 
 			return compType;
 		}
@@ -906,7 +906,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			e.setAttribute("name", name + "Type");
 			e.setAttribute("type", name + "Type");
 			e.setAttribute("abstract", true, null);
-			e.setXMLComment("** abstract type for substitution only ** ");
+			e.setXMLComment("** abstract type for substitution only ** ", true);
 			e = out.appendElement("xs:complexType");
 			e.setAttribute("name", name + "Type");
 		}

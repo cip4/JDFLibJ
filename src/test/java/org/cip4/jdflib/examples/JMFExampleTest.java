@@ -96,7 +96,7 @@ public class JMFExampleTest extends JDFTestCaseBase
 			activity.setAttribute("PersonalID", "P1");
 			activity.setAttribute("ActivityName", "Polishing");
 			activity.setAttribute("ActivityID", "ID1234");
-			activity.setXMLComment("The following activity is NOT job related (direct child of deviceInfo) \ndo we need both cost center and MISDetails here?");
+			activity.setXMLComment("The following activity is NOT job related (direct child of deviceInfo) \ndo we need both cost center and MISDetails here?", true);
 			di.appendElement(ElementName.EMPLOYEE).setAttribute("PersonalID", "P1");
 			di.appendElement(ElementName.EMPLOYEE).setAttribute("PersonalID", "P2");
 			di.appendElement(ElementName.EMPLOYEE).setAttribute("PersonalID", "P3");
@@ -110,12 +110,12 @@ public class JMFExampleTest extends JDFTestCaseBase
 			activity.setAttribute("ActivityName", "Washup");
 			activity.setAttribute("ActivityID", "ID1234");
 			activity.setAttribute("PersonalID", "P2");
-			activity.setXMLComment("The following activity is job related (direct child of jobphase) \ndo we need both cost center and MISDetails here?");
+			activity.setXMLComment("The following activity is job related (direct child of jobphase) \ndo we need both cost center and MISDetails here?", true);
 			activity = jp.appendElement("Activity");
 			activity.setAttribute("ActivityName", "NosePoking");
 			activity.setAttribute("ActivityID", "ID1236");
 			activity.setAttribute("PersonalID", "P3");
-			activity.setXMLComment("The following 2nd activity is job related (direct child of jobphase) \ndo we need both cost center and MISDetails here?");
+			activity.setXMLComment("The following 2nd activity is job related (direct child of jobphase) \ndo we need both cost center and MISDetails here?", true);
 		}
 
 		writeTest(jmf, "Activity.jmf", true, null);

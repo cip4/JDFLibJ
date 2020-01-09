@@ -236,17 +236,17 @@ public class JMFResourceTest extends JDFTestCaseBase
 		jmf.setSenderID("DeviceSenderID");
 
 		final JDFQuery q = jmf.appendQuery(EnumType.Resource);
-		q.setXMLComment("This is the query for a catalog");
+		q.setXMLComment("This is the query for a catalog", true);
 
 		final JDFResourceQuParams rqp = q.appendResourceQuParams();
 		rqp.setExact(true);
-		rqp.setXMLComment("Scope=Allowed is a new attribute to describe that we want a complet list of all known resources");
+		rqp.setXMLComment("Scope=Allowed is a new attribute to describe that we want a complet list of all known resources", true);
 		rqp.setResourceName(new VString(ElementName.MEDIA, null));
 		// rqp.setAttribute("Scope", "Allowed");
 
 		JDFResponse r = q.createResponse().getResponse(0);
 		r = (JDFResponse) jmf.moveElement(r, null);
-		r.setXMLComment("This is the response to the query - generally it will be in it's own jmf...\nThe list of ResourceInfo + the ResourceQuParams could also be specified in a Signal.");
+		r.setXMLComment("This is the response to the query - generally it will be in it's own jmf...\nThe list of ResourceInfo + the ResourceQuParams could also be specified in a Signal.", true);
 
 		for (int i = 1; i < 5; i++)
 		{
@@ -260,7 +260,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 			m.setMediaType(EnumMediaType.Paper);
 			m.setMediaQuality("Qual_" + (1 + i % 3));
 			m.setResStatus((i < 2 ? EnumResStatus.Available : EnumResStatus.Unavailable), false);
-			ri.setXMLComment("More attributes can be added as needed; Available = loaded");
+			ri.setXMLComment("More attributes can be added as needed; Available = loaded", true);
 		}
 		doc.write2File(sm_dirTestDataTemp + "MediaCatalog.jmf", 2, false);
 		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
@@ -277,17 +277,17 @@ public class JMFResourceTest extends JDFTestCaseBase
 		jmf.setSenderID("DeviceSenderID");
 
 		final JDFQuery q = jmf.appendQuery(EnumType.Resource);
-		q.setXMLComment("This is the query for a catalog");
+		q.setXMLComment("This is the query for a catalog", true);
 
 		final JDFResourceQuParams rqp = q.appendResourceQuParams();
 		rqp.setExact(true);
-		rqp.setXMLComment("Scope=Allowed is a new attribute to describe that we want a complet list of all known resources");
+		rqp.setXMLComment("Scope=Allowed is a new attribute to describe that we want a complet list of all known resources", true);
 		rqp.setResourceName(new VString(ElementName.MEDIA, null));
 		// rqp.setAttribute("Scope", "Allowed");
 
 		final JDFSignal signal = q.createSignal().getSignal(0);
 		doc = signal.getOwnerDocument_JDFElement();
-		signal.setXMLComment("This is a signal based on the query - generally it will be in it's own jmf...\nThe list of ResourceInfo + the ResourceQuParams could also be specified in a Signal.");
+		signal.setXMLComment("This is a signal based on the query - generally it will be in it's own jmf...\nThe list of ResourceInfo + the ResourceQuParams could also be specified in a Signal.", true);
 
 		for (int i = 1; i < 5; i++)
 		{
@@ -301,7 +301,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 			m.setMediaType(EnumMediaType.Paper);
 			m.setMediaQuality("Qual_" + (1 + i % 3));
 			m.setResStatus((i < 2 ? EnumResStatus.Available : EnumResStatus.Unavailable), false);
-			ri.setXMLComment("More attributes can be added as needed; Available = loaded");
+			ri.setXMLComment("More attributes can be added as needed; Available = loaded", true);
 		}
 		doc.write2File(sm_dirTestDataTemp + "MediaCatalogSignal.jmf", 2, false);
 		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
@@ -318,17 +318,17 @@ public class JMFResourceTest extends JDFTestCaseBase
 		jmf.setSenderID("DeviceSenderID");
 
 		final JDFQuery q = jmf.appendQuery(EnumType.Resource);
-		q.setXMLComment("This is the query for a catalog");
+		q.setXMLComment("This is the query for a catalog", true);
 
 		final JDFResourceQuParams rqp = q.appendResourceQuParams();
 		rqp.setExact(true);
-		rqp.setXMLComment("Scope=Allowed is a new attribute to describe that we want a complete list of all known resources");
+		rqp.setXMLComment("Scope=Allowed is a new attribute to describe that we want a complete list of all known resources", true);
 		rqp.setResourceName(new VString(ElementName.MEDIA, null));
 		// rqp.setAttribute("Scope", "Allowed");
 
 		JDFResponse r = q.createResponse().getResponse(0);
 		r = (JDFResponse) jmf.moveElement(r, null);
-		r.setXMLComment("This is the response to the query - generally it will be in it's own jmf...\nThe list of ResourceInfo + the ResourceQuParams could also be specified in a Signal.");
+		r.setXMLComment("This is the response to the query - generally it will be in it's own jmf...\nThe list of ResourceInfo + the ResourceQuParams could also be specified in a Signal.", true);
 
 		for (int i = 1; i < 5; i++)
 		{
@@ -341,7 +341,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 			shapeTemp.setStandard(standard);
 			shapeTemp.setName(standard + "_" + i);
 
-			ri.setXMLComment("More attributes can be added as needed; Available = loaded");
+			ri.setXMLComment("More attributes can be added as needed; Available = loaded", true);
 		}
 		doc.write2File(sm_dirTestDataTemp + "EcmaCatalog.jmf", 2, false);
 		assertTrue(jmf.isValid(EnumValidationLevel.Complete));

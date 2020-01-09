@@ -257,7 +257,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 	public void testAutomateLayout1() throws Exception
 	{
 		n.setXMLComment("This is the simplest example of an automated layout\n" + "The structure is aligned as closely as possible with a static Layout\n"
-				+ "note that the actual processes and outputs have been omitted for brevity");
+				+ "note that the actual processes and outputs have been omitted for brevity", true);
 
 		setUpAutomatedInputRunList();
 		rl.setDescriptiveName("This is a RunList specifiying 100 instance documents of 14 pages each in a ppml file");
@@ -319,7 +319,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 	{
 		n.setXMLComment("This another example of an automated layout\n"
 				+ "The structure is aligned close to a static Layout but additionally uses OrdExpression and allows for varying numbers of pages in the runlist\n"
-				+ "note that the actual processes and outputs have been omitted for brevity");
+				+ "note that the actual processes and outputs have been omitted for brevity", true);
 
 		setUpAutomatedInputRunList();
 		rl.setDescriptiveName("This is a RunList specifiying 100 instance documents of varying pages each in a ppml file");
@@ -380,7 +380,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 	public void testAutomateLayout3() throws Exception
 	{
 		n.setXMLComment("This is a simple example of an automated layout that positions multiple instance documents onto one sheet\n"
-				+ "The structure is aligned as closely as possible with a static Layout\n" + "note that the actual processes and outputs have been omitted for brevity");
+				+ "The structure is aligned as closely as possible with a static Layout\n" + "note that the actual processes and outputs have been omitted for brevity", true);
 
 		setUpAutomatedInputRunList();
 		rl.setDescriptiveName("This is a RunList specifiying 100 instance documents of 14 pages each in a ppml file");
@@ -448,7 +448,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 	public void testAutomateLayout4() throws Exception
 	{
 		n.setXMLComment("This is a simple example of an automated layout that positions multiple instance documents onto one sheet\n"
-				+ "The structure is aligned as closely as possible with a static Layout\n" + "note that the actual processes and outputs have been omitted for brevity");
+				+ "The structure is aligned as closely as possible with a static Layout\n" + "note that the actual processes and outputs have been omitted for brevity", true);
 
 		setUpAutomatedInputRunList();
 		rl.setDescriptiveName("This is a RunList specifiying 100 instance documents of 14 pages each in a ppml file.\n" + "DocCopies requests a repeat of 50 copies per document");
@@ -533,7 +533,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		n.setXMLComment("This is a simple Automated Booklet using negative ords\n" + "New Attribute @OrdsConsumed limits the number of ords consumed by an automated Layout\n"
 				+ "Negative Ord values are assumed to flow backwards\n" + "MaxOrd is not specified and must be calculated by counting the number of different ord values\n"
 				+ "If we want to keep maxord, it would have to be replaced by an xypair that specifies hom many are consumed from back and from front\n"
-				+ "If the number of pages is not mod 4, blank pages are retained at the back of the layout");
+				+ "If the number of pages is not mod 4, blank pages are retained at the back of the layout", true);
 
 		setUpAutomatedInputRunList();
 		rl.setDescriptiveName("This is any RunList...");
@@ -581,7 +581,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 				+ "New Attribute @OrdsConsumed limits the number of ords consumed by an automated Layout\n" + "Negative Ord values are assumed to flow backwards\n"
 				+ "New Attribute @OrdReset defines the scope of ords\n" + "MaxOrd is not specified and must be calculated by counting the number of different ord values\n"
 				+ "If we want to keep maxord, it would have to be replaced by an xypair that specifies hom many are consumed from back and from front\n"
-				+ "If the number of pages is not mod 4, blank pages are retained at the back of the layout");
+				+ "If the number of pages is not mod 4, blank pages are retained at the back of the layout", true);
 
 		n.setType(EnumType.Combined);
 		n.setTypes(new VString("Interpreting Rendering DigitalPrinting Inserting Stitching", null));
@@ -703,7 +703,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 						+ "New Attribute @OrdsConsumed limits the number of ords consumed by an automated Layout\n" + "Negative Ord values are assumed to flow backwards\n"
 						+ "MaxOrd is not specified and must be calculated by counting the number of different ord values\n"
 						+ "If we want to keep maxord, it would have to be replaced by an xypair that specifies hom many are consumed from back and from front\n"
-						+ "If the number of pages is not mod 4, blank pages are retained at the back of the layout");
+						+ "If the number of pages is not mod 4, blank pages are retained at the back of the layout", true);
 
 				setUpAutomatedInputRunList();
 				rl.setDescriptiveName("This is any RunList...");
@@ -720,7 +720,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 				JDFContentObject co;
 				if (i == 0)
 				{
-					cover.setXMLComment("the cover consumes pages 0 and -1 and is not printed on the inside=back");
+					cover.setXMLComment("the cover consumes pages 0 and -1 and is not printed on the inside=back", true);
 					for (int k = 0; k < 1 + j; k++)
 					{
 
@@ -741,7 +741,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 				}
 				else if (i == 1)
 				{
-					cover.setXMLComment("the cover consumes page 0 as a wraparound and is not printed on the inside=back");
+					cover.setXMLComment("the cover consumes page 0 as a wraparound and is not printed on the inside=back", true);
 					for (int k = 0; k < j; k++)
 					{
 						co = coverFront.appendContentObject();
@@ -755,7 +755,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 				}
 				else if (i == 2)
 				{
-					cover.setXMLComment("the cover consumes page 0 as a wraparound and is not printed on the inside=back");
+					cover.setXMLComment("the cover consumes page 0 as a wraparound and is not printed on the inside=back", true);
 
 					co = coverFront.appendContentObject();
 					co.setDescriptiveName("wraparound cover Page 0");
@@ -764,7 +764,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 					sheet.setAttribute("OrdsConsumed", "1 -5");
 					JDFLayout centerfold = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Centerfold");
 					centerfold.setAutomated(true);
-					centerfold.setXMLComment("the cetertfold is an asymmetric z-fold that consumes 1 large page on the front and 3 pages on the back");
+					centerfold.setXMLComment("the cetertfold is an asymmetric z-fold that consumes 1 large page on the front and 3 pages on the back", true);
 					centerfold.setAttribute("OrdsConsumed", "-4 -1");
 					co = ((JDFLayout) centerfold.addPartition(EnumPartIDKey.Side, "Front")).appendContentObject();
 					co.setDescriptiveName("centerfold front spread");
@@ -786,7 +786,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 						+ "In this case ord=0 actually starts at ord(RunList)=1 and ord -1 actually starts at ord(RunList -2)\n"
 						+ "The advantage is that the offsets for the loop are specified in OrdsConsumed while the loop increments are specified in the ords:\n"
 						+ "Ord RL (++) = OrdsConsumed_x + Ord + n*maxOrd_x\n"
-						+ "Ord RL (--) = 1+ OrdsConsumed_y + Ord - n*maxOrd_y (the first 1 in the equation is from the fact that -1+-1 is actually still -1)\n");
+						+ "Ord RL (--) = 1+ OrdsConsumed_y + Ord - n*maxOrd_y (the first 1 in the equation is from the fact that -1+-1 is actually still -1)\n", true);
 				JDFLayout sheetFront = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 				JDFLayout sheetBack = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Back);
 				for (int k = 0; k <= j; k++)
@@ -832,7 +832,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 	@Test
 	public void testCutAndStack() throws Exception
 	{
-		n.setXMLComment("This is a simple cut and stack layout witrh 2 stacks of one page each (two sided)\n");
+		n.setXMLComment("This is a simple cut and stack layout witrh 2 stacks of one page each (two sided)\n", true);
 
 		setUpAutomatedInputRunList();
 		rl.setDescriptiveName("This is any RunList...");
@@ -842,7 +842,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		lo.setAutomated(true);
 		lo.setXMLComment("2 stacks with 2 pages\n" + "The algorithm for calculating which pages go where is:\n"
 				+ "Ord + MaxOrd*SheetLoop%(MaxOrd*MaxStack*StackDepth) + StackOrd*StackDepth\n"
-				+ "Each set of stacks consumes 2 * 2 * 100 = 400 Pages (4 ContentObjects = 2 front, 2 Back / Sheet * 100 StackDepth");
+				+ "Each set of stacks consumes 2 * 2 * 100 = 400 Pages (4 ContentObjects = 2 front, 2 Back / Sheet * 100 StackDepth", true);
 		lo.setAttribute("StackDepth", "100");
 		lo.setAttribute("MaxStack", "2");
 		JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheSheet");
@@ -852,14 +852,14 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		co.setOrd(0);
 		co.setAttribute("StackOrd", "0");
 		co.setDescriptiveName("Front Page 0,2,4..., Stack 0");
-		co.setXMLComment("this co consumes all pages 0,2,4...198, 400,402,404...598, 800....");
+		co.setXMLComment("this co consumes all pages 0,2,4...198, 400,402,404...598, 800....", true);
 
 		co = coverFront.appendContentObject();
 		co.setCTM(new JDFMatrix(1, 0, 0, 1, 8.5 * 72, 0));
 		co.setOrd(0);
 		co.setAttribute("StackOrd", "1");
 		co.setDescriptiveName("Front Page 0,2,4,..., Stack 1");
-		co.setXMLComment("this co consumes all pages 200,202,204...398, 600,602,604...798, 1000....");
+		co.setXMLComment("this co consumes all pages 200,202,204...398, 600,602,604...798, 1000....", true);
 
 		JDFLayout coverBack = (JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Back);
 		co = coverBack.appendContentObject();
@@ -867,14 +867,14 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		co.setOrd(1);
 		co.setAttribute("StackOrd", "0");
 		co.setDescriptiveName("Back Page 1,3,5, Stack 0");
-		co.setXMLComment("this co consumes all pages 1,3,5...199, 401,403,405...499, 801....");
+		co.setXMLComment("this co consumes all pages 1,3,5...199, 401,403,405...499, 801....", true);
 
 		co = coverBack.appendContentObject();
 		co.setCTM(new JDFMatrix(1, 0, 0, 1, 0, 0));
 		co.setOrd(1);
 		co.setAttribute("StackOrd", "1");
 		co.setDescriptiveName("Back Page 1,3,5, Stack 1");
-		co.setXMLComment("this co consumes all pages 201,203,205...299, 601,603,605...799, 1001....");
+		co.setXMLComment("this co consumes all pages 201,203,205...299, 601,603,605...799, 1001....", true);
 
 		doc.write2File(sm_dirTestDataTemp + "CutStack.jdf", 2, false);
 	}

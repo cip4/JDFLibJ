@@ -92,7 +92,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	public final void testColorantAlias()
 	{
 		final JDFColorantAlias ca = colControl.appendColorantAlias();
-		ca.setXMLComment("ColorantAlias that maps the predefined separation Black");
+		ca.setXMLComment("ColorantAlias that maps the predefined separation Black", true);
 		ca.setReplacementColorantName("Green");
 		assertTrue(ca.isValid(EnumValidationLevel.Incomplete));
 		assertFalse(ca.isValid(EnumValidationLevel.Complete));
@@ -117,14 +117,14 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	public final void testActualColorName()
 	{
 
-		colParams.setXMLComment("Note that all Strings in ColorantParams etc. use Color/@Name, NOT Color/@ActualColorName");
+		colParams.setXMLComment("Note that all Strings in ColorantParams etc. use Color/@Name, NOT Color/@ActualColorName", true);
 		colParams.setSeparations(new VString("Spot1,BlackText", ","));
-		colControl.setXMLComment("Simple colorantcontrol from MIS: CMYK + 1 spot+ 1 black text version; knows no more");
+		colControl.setXMLComment("Simple colorantcontrol from MIS: CMYK + 1 spot+ 1 black text version; knows no more", true);
 		d.write2File(sm_dirTestDataTemp + "ActualColorName_MIS.jdf", 2, false);
 
-		colControl.setXMLComment("ColorantControl after prepress has correctly set ActualColorName based on pdl content");
+		colControl.setXMLComment("ColorantControl after prepress has correctly set ActualColorName based on pdl content", true);
 		JDFColor co = colPool.appendColorWithName("Black", null);
-		co.setXMLComment("Color that maps the predefined separation Black\n" + "ActualColorName is the new attribute that replaces ExposedMedia/@DescriptiveName as the \"Main\" PDL color");
+		co.setXMLComment("Color that maps the predefined separation Black\n" + "ActualColorName is the new attribute that replaces ExposedMedia/@DescriptiveName as the \"Main\" PDL color", true);
 		co.setCMYK(new JDFCMYKColor(0, 0, 0, 1));
 		assertTrue(co.isValid(EnumValidationLevel.Incomplete));
 		co.setAttribute("ActualColorName", "Schwarz");
@@ -134,7 +134,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		co.setCMYK(new JDFCMYKColor(0, 0, 1, 0));
 
 		co = colPool.appendColorWithName("Cyan", null);
-		co.setXMLComment("ActualColorName defaults to Name if not specified");
+		co.setXMLComment("ActualColorName defaults to Name if not specified", true);
 		co.setCMYK(new JDFCMYKColor(1, 0, 0, 0));
 
 		co = colPool.appendColorWithName("Magenta", null);
@@ -149,7 +149,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		d.write2File(sm_dirTestDataTemp + "ActualColorName_Prepress.jdf", 2, false);
 
 		final JDFColorantAlias ca = colControl.appendColorantAlias();
-		ca.setXMLComment("ColorantAlias that maps the additional representation (noir) to the predefined separation Black");
+		ca.setXMLComment("ColorantAlias that maps the additional representation (noir) to the predefined separation Black", true);
 		ca.setReplacementColorantName("Black");
 		assertTrue(ca.isValid(EnumValidationLevel.Incomplete));
 		assertFalse(ca.isValid(EnumValidationLevel.Complete));

@@ -144,7 +144,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 			JDFPageElement pe = pd.appendPageElement();
 			pe.setAttribute("ContentDataRefs", cd.getID());
 		}
-		pl.setXMLComment("Note that multiple page elements may but need not be specified\nit is also possible to reference only on pageEleemnt that spans the entire book");
+		pl.setXMLComment("Note that multiple page elements may but need not be specified\nit is also possible to reference only on pageEleemnt that spans the entire book", true);
 
 		writeTest(d.getRoot(), "resources/ContentMetaData.jdf", false, null);
 	}
@@ -163,7 +163,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 		c.refElement(pl);
 		c1.setPageListIndex(new JDFIntegerRangeList("0~8"));
 		c2.setPageListIndex(new JDFIntegerRangeList("9~16"));
-		c.setXMLComment("this is the output component with two stacks\n the imposition engine is aware of the pagelist index and can set it appropriately");
+		c.setXMLComment("this is the output component with two stacks\n the imposition engine is aware of the pagelist index and can set it appropriately", true);
 		d.write2File(sm_dirTestDataTemp + "ContentMetaDataStack.jdf", 2, false);
 	}
 

@@ -123,7 +123,7 @@ public class WalkJMF extends WalkJDFElement
 	 */
 	private void setRootAttributes(final JDFJMF jmf, final KElement xjmfRoot)
 	{
-		xjmfRoot.setXMLComment("XJDF converter version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion());
+		xjmfRoot.setXMLComment("XJDF converter version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), true);
 
 		setAttributes(jmf, xjmfRoot);
 		if (!jdfToXJDF.isRetainAll())

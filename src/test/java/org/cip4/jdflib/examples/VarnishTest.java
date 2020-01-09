@@ -115,7 +115,7 @@ public class VarnishTest extends JDFTestCaseBase
 
 		final JDFConventionalPrintingParams cpp = (JDFConventionalPrintingParams) n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
 		cpp.setWorkStyle(EnumWorkStyle.Simplex);
-		cpp.setXMLComment("Module 0 and 7 are varnishing modules, 1-4 are process colors and 6 is the ink module used to varnish");
+		cpp.setXMLComment("Module 0 and 7 are varnishing modules, 1-4 are process colors and 6 is the ink module used to varnish", true);
 		final JDFComponent c = (JDFComponent) n.appendMatchingResource("Component", JDFNode.EnumProcessUsage.AnyOutput, null);
 		c.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 		final JDFExposedMedia xm = (JDFExposedMedia) n.appendMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.Plate, null);

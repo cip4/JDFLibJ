@@ -322,7 +322,7 @@ public class ContentCreationTest extends PreflightTest
 		final JDFIdentificationField identificationField = barcodeProductionParams.appendIdentificationField();
 		identificationField.setEncoding(EnumEncoding.Barcode);
 		identificationField.setEncodingDetails("EAN");
-		barcodeProductionParams.setXMLComment("barcode details here");
+		barcodeProductionParams.setXMLComment("barcode details here", true);
 	}
 
 	/**
@@ -376,7 +376,7 @@ public class ContentCreationTest extends PreflightTest
 			sm2_2.setAttribute("CTM", m.toString());
 		nextAnchor.setAttribute("rRef", idAnchor);
 		nextAnchor.setAttribute("AnchorType", anchorType);
-		nextAnchor.setXMLComment(xmlComment);
+		nextAnchor.setXMLComment(xmlComment, true);
 	}
 
 	/**

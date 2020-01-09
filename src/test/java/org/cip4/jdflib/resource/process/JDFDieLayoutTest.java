@@ -110,22 +110,22 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 		station.setStationName("Box");
 		station.setStationAmount(3);
 		JDFResource sm = n.addResource("StationMap", EnumResourceClass.Parameter, null, null, null, null, null);
-		sm.setXMLComment("The partition structure should reflect the product structure ");
+		sm.setXMLComment("The partition structure should reflect the product structure ", true);
 		JDFResource sm1 = sm.addPartition(EnumPartIDKey.PartVersion, "Strawberry");
 		sm1.setAttribute("StationName", "Lid");
 		sm1.setAttribute("MapAmount", "3");
 		sm1.setAttribute("StationIndex", "0 1 2");
-		sm1.setXMLComment("3*Strawberry MUST be placed on station index 0-2");
+		sm1.setXMLComment("3*Strawberry MUST be placed on station index 0-2", true);
 
 		sm1 = sm.addPartition(EnumPartIDKey.PartVersion, "Blueberry");
 		sm1.setAttribute("StationName", "Lid");
 		sm1.setAttribute("MapAmount", "2");
-		sm1.setXMLComment("2*Blueberry can be placed on any remaining lid station");
+		sm1.setXMLComment("2*Blueberry can be placed on any remaining lid station", true);
 
 		sm1 = sm.addPartition(EnumPartIDKey.PartVersion, "Cherry");
 		sm1.setAttribute("StationName", "Lid");
 		sm1.setAttribute("MapAmount", "4");
-		sm1.setXMLComment("4*Cherry can be placed on any remaining lid station");
+		sm1.setXMLComment("4*Cherry can be placed on any remaining lid station", true);
 
 		dl.refElement(sm);
 

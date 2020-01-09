@@ -148,7 +148,8 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 					e.setAttribute("minOccurs", "0");
 				}
 			}
-			root.write2File(sm_dirTestDataTemp + "changeschema/xjdf2_" + minor + "/xjdf.xsd");
+			root.setXMLComment(" XJDF 2." + minor + " Schema updated on " + new JDFDate().getFormattedDateTime(JDFDate.DATEISO) + " ", false);
+			d.write2File(sm_dirTestDataTemp + "changeschema/xjdf2_" + minor + "/xjdf.xsd", 2, false);
 		}
 
 		Set<String> ignore;

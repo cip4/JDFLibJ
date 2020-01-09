@@ -672,10 +672,10 @@ public class JDFRunListTest extends JDFTestCaseBase
 		final KElement tagSet = tagMap.appendElement(EXPR);
 		tagSet.setAttribute("Path", "/x3141");
 		tagMap.setXMLComment("This tagmap specifies which document structure corresponds to a Document\n"
-				+ " thus incrementing DocIndex or forcing an implicit RunList/@EndofDocument=true\n D100 is the tiff tag 0x3141");
+				+ " thus incrementing DocIndex or forcing an implicit RunList/@EndofDocument=true\n D100 is the tiff tag 0x3141", true);
 
 		rl.setFileURL("bigVariable.tiff");
-		rl.setXMLComment("this runlist points to a tiff file with arbitrary structural tagging defined in the tiff tags");
+		rl.setXMLComment("this runlist points to a tiff file with arbitrary structural tagging defined in the tiff tags", true);
 	}
 
 	/**
@@ -703,7 +703,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	public void testObjectTagsMetadata()
 	{
 		final KElement tagMap = rl.appendElement(METADATA_MAP);
-		tagMap.setXMLComment("This tagmap specifies The path for the NMTOKEN \"ObjectTag\"");
+		tagMap.setXMLComment("This tagmap specifies The path for the NMTOKEN \"ObjectTag\"", true);
 		tagMap.setAttribute("Name", "ObjectTags");
 		tagMap.setAttribute(AttributeName.VALUEFORMAT, "%s");
 		tagMap.setAttribute(AttributeName.CONTEXT, "Object");
@@ -720,10 +720,10 @@ public class JDFRunListTest extends JDFTestCaseBase
 			final JDFStringEvaluation eval = (JDFStringEvaluation) tagSet.appendElement(ElementName.STRINGEVALUATION);
 			eval.setAttribute("Path", "TIFFXMP:Make");
 			eval.setRegExp("(.*)" + s + "(.*)");
-			eval.setXMLComment("Any acme camera is mapped to \"" + s + "\"");
+			eval.setXMLComment("Any acme camera is mapped to \"" + s + "\"", true);
 		}
 		final JDFColorSpaceConversionParams csp = (JDFColorSpaceConversionParams) root.addResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input);
-		csp.setXMLComment("This ColorSpaceConversionParams treats Acme and Bcme cameras the same but differentiates for Ccme");
+		csp.setXMLComment("This ColorSpaceConversionParams treats Acme and Bcme cameras the same but differentiates for Ccme", true);
 		final JDFColorSpaceConversionOp op1 = csp.appendColorSpaceConversionOp();
 		op1.setAttribute("ObjectTags", "Acme Bcme");
 		final JDFColorSpaceConversionOp op2 = csp.appendColorSpaceConversionOp();
@@ -754,11 +754,11 @@ public class JDFRunListTest extends JDFTestCaseBase
 		loBB.refElement(medB);
 		final JDFLayout loSB = (JDFLayout) lo.addPartition(EnumPartIDKey.RunTags, "MaleSmallBody FemaleSmallBody");
 		loSB.refElement(medB);
-		lo.setXMLComment("Layout for versioned product");
+		lo.setXMLComment("Layout for versioned product", true);
 
 		final KElement metaMap = rl.appendElement(METADATA_MAP);
 		metaMap.setXMLComment("The MetadataMap element maps arbitrary tags in the document to a structural RunTag partition key\n" + "Note that any partition key may be mapped.\n"
-				+ "Note also that although an XPath syntax is used, this may be mapped to any hierarchical structure including but not limited to XML.\n");
+				+ "Note also that although an XPath syntax is used, this may be mapped to any hierarchical structure including but not limited to XML.\n", true);
 
 		metaMap.setAttribute("Name", "RunTags");
 		metaMap.setAttribute(AttributeName.DATATYPE, "PartIDKey");
@@ -766,12 +766,12 @@ public class JDFRunListTest extends JDFTestCaseBase
 		metaMap.setAttribute(AttributeName.VALUETEMPLATE, "sex,section");
 
 		KElement expr = metaMap.appendElement(EXPR);
-		expr.setXMLComment("This expression maps the value of /Dokument/Rezipient/@Sex to a variable \"sex\"\n" + "The Mapping is unconditional, therefore no Term is required");
+		expr.setXMLComment("This expression maps the value of /Dokument/Rezipient/@Sex to a variable \"sex\"\n" + "The Mapping is unconditional, therefore no Term is required", true);
 		expr.setAttribute("Name", "sex");
 		expr.setAttribute("Path", "/Dokument/Rezipient/@Sex");
 
 		expr = metaMap.appendElement(EXPR);
-		expr.setXMLComment("Maps all elements with /Dokument/Sektion=Einband to Cover");
+		expr.setXMLComment("Maps all elements with /Dokument/Sektion=Einband to Cover", true);
 		expr.setAttribute("Name", "section");
 		expr.setAttribute("Value", "Cover");
 		JDFNameEvaluation nev = (JDFNameEvaluation) expr.appendElement(ElementName.NAMEEVALUATION);
@@ -779,7 +779,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 		nev.setRegExp("Einband");
 
 		expr = metaMap.appendElement(EXPR);
-		expr.setXMLComment("Maps all elements with /Dokument/Sektion=HauptTeil and >50 pages to BigBody");
+		expr.setXMLComment("Maps all elements with /Dokument/Sektion=HauptTeil and >50 pages to BigBody", true);
 		expr.setAttribute("Name", "section");
 		expr.setAttribute("Value", "BigBody");
 
@@ -792,7 +792,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 		iev.setValueList(new JDFIntegerRangeList("51~INF"));
 
 		expr = metaMap.appendElement(EXPR);
-		expr.setXMLComment("Maps all elements with /Dokument/Sektion=HauptTeil and <=50 pages to SmallBody");
+		expr.setXMLComment("Maps all elements with /Dokument/Sektion=HauptTeil and <=50 pages to SmallBody", true);
 		expr.setAttribute("Name", "section");
 		expr.setAttribute("Value", "SmallBody");
 
@@ -805,11 +805,11 @@ public class JDFRunListTest extends JDFTestCaseBase
 		iev.setValueList(new JDFIntegerRangeList("0~INF"));
 
 		rl.setFileURL("bigVariable.ppml");
-		rl.setXMLComment("this runlist points to a ppml with arbitrary structural tagging");
+		rl.setXMLComment("this runlist points to a ppml with arbitrary structural tagging", true);
 
 		final JDFResourceLink rll = root.getLink(rl, null);
 		rll.appendPart().setDocIndex(new JDFIntegerRangeList("10 ~ 20"));
-		rll.setXMLComment("this link selects the 11-20 document");
+		rll.setXMLComment("this link selects the 11-20 document", true);
 
 		doc.write2File(sm_dirTestDataTemp + "metadataMap.jdf", 2, false);
 	}

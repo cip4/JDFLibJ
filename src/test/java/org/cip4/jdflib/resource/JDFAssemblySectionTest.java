@@ -133,7 +133,7 @@ public class JDFAssemblySectionTest extends JDFTestCaseBase
 		asss.setAssemblyIDs(new VString("a b c", " "));
 		ass = as.getAssemblySection(0);
 		ass = as.getAssemblySection(1);
-		ass.setXMLComment("MyComment");
+		ass.setXMLComment("MyComment", true);
 		ass = as.getAssemblySection(2);
 
 		Collection<JDFAssemblySection> vASS = as.getAllAssemblySection();

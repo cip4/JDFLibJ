@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,6 +76,7 @@ package org.cip4.jdflib.core;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
@@ -699,7 +700,8 @@ public class KElement extends ElementNSImpl implements Element
 					namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), false);
 					if (!ContainerUtil.equals(namespaceURI2, nameSpaceURI))
 					{
-						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2 + "; attempting to set URI: " + nameSpaceURI;
+						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
+								+ "; attempting to set URI: " + nameSpaceURI;
 						kLog.error(message);
 						throw new JDFException(message);
 					}
@@ -812,13 +814,13 @@ public class KElement extends ElementNSImpl implements Element
 							// already there
 							if (key.equals(nodeName))
 							{ // overwrite default namespace with qualified
-								// namespace or vice versa
+									// namespace or vice versa
 								removeAttribute(nodeName);
 								super.setAttribute(key, value);
 							}
 							else
 							{ // same qualified name, simply overwrite the
-								// value
+									// value
 								a.setNodeValue(value);
 							}
 						}
@@ -827,8 +829,8 @@ public class KElement extends ElementNSImpl implements Element
 							final String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 							if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
 							{
-								throw new JDFException(
-										"KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2 + "; attempting to set URI: " + nameSpaceURI);
+								throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2
+										+ "; attempting to set URI: " + nameSpaceURI);
 							}
 							try
 							{
@@ -3855,8 +3857,22 @@ public class KElement extends ElementNSImpl implements Element
 	 * removed The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
 	 *
 	 * @param commentText the comment text to set
+	 * @deprecated Use {@link #setXMLComment(String,boolean)} instead
 	 */
-	public void setXMLComment(String commentText)
+	@Deprecated
+	public void setXMLComment(final String commentText)
+	{
+		setXMLComment(commentText, true);
+	}
+
+	/**
+	 * set a DOM comment <code>&lt;!-- XMLComment --&gt;</code> in front of <code>this</code> if an xml Comment node already exists directly in front of <code>this</code>, the previous comment is
+	 * removed The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
+	 *
+	 * @param commentText the comment text to set
+	 * @param single TODO
+	 */
+	public void setXMLComment(String commentText, final boolean single)
 	{
 		if (commentText == null)
 			return;
@@ -3866,15 +3882,18 @@ public class KElement extends ElementNSImpl implements Element
 			commentText = StringUtil.replaceString(commentText, "--", "__");
 			final Comment newChild = getOwnerDocument().createComment(commentText);
 			getOwnerDocument().insertBefore(newChild, this);
-			final Node last = newChild.getPreviousSibling();
-			if (last != null && last.getNodeType() == Node.COMMENT_NODE)
+			if (single)
 			{
-				getOwnerDocument().removeChild(last);
+				final Node last = newChild.getPreviousSibling();
+				if (last != null && last.getNodeType() == Node.COMMENT_NODE)
+				{
+					getOwnerDocument().removeChild(last);
+				}
 			}
 		}
 		else
 		{
-			final Node last = getPreviousSibling();
+			final Node last = single ? getPreviousSibling() : null;
 			e.appendXMLComment(commentText, this);
 			if (last != null && last.getNodeType() == Node.COMMENT_NODE)
 			{
@@ -6307,6 +6326,28 @@ public class KElement extends ElementNSImpl implements Element
 	public void setNonEmpty(final String key, final String val)
 	{
 		setAttribute(key, StringUtil.getNonEmpty(val));
+	}
+
+	/**
+	 *
+	 * @param s
+	 * @return
+	 */
+	public static KElement parseStream(final InputStream s)
+	{
+		final XMLDoc f = XMLDoc.parseStream(s);
+		return f == null ? null : f.getRoot();
+	}
+
+	/**
+	 *
+	 * @param filename
+	 * @return
+	 */
+	public static KElement parseString(final String filename)
+	{
+		final XMLDoc f = XMLDoc.parseString(filename);
+		return f == null ? null : f.getRoot();
 	}
 
 	/**

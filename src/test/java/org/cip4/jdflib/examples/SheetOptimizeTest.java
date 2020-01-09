@@ -119,7 +119,7 @@ public class SheetOptimizeTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
 		n.setXMLComment("this is a process PRIOR to stripping - the output is the completed strippingparams\n"
-				+ "note that each GangElement is essentially a simplified stripping description of the individual product with additional amounts");
+				+ "note that each GangElement is essentially a simplified stripping description of the individual product with additional amounts", true);
 		n.setType("SheetOptimizing", false);
 		final JDFRunList rl1 = (JDFRunList) n.addResource("RunList", EnumUsage.Input);
 		rl1.addPDF("file1.pdf", 0, -1);
@@ -128,7 +128,7 @@ public class SheetOptimizeTest extends JDFTestCaseBase
 
 		final JDFResource sheetOptParams = n.addResource("SheetOptimizingParams", EnumUsage.Input);
 		sheetOptParams.setXMLComment("Similar to DieLayoutProductionParams\nalso add general parameters for optimization"
-				+ "\nalso discuss reusing repeatdesc versus dedicated GangElement");
+				+ "\nalso discuss reusing repeatdesc versus dedicated GangElement", true);
 
 		final JDFConvertingConfig cc = (JDFConvertingConfig) sheetOptParams.appendElement(ElementName.CONVERTINGCONFIG, null);
 		cc.setSheetHeight(new JDFNumberRange(600, 800));
@@ -138,20 +138,20 @@ public class SheetOptimizeTest extends JDFTestCaseBase
 		cc.setMarginTop(36);
 		cc.setMarginLeft(36);
 		cc.setMarginRight(36);
-		cc.setXMLComment("Here we also should ask ourselves whether we want to reuse ConvertingConfig or create our own resource?");
+		cc.setXMLComment("Here we also should ask ourselves whether we want to reuse ConvertingConfig or create our own resource?", true);
 
 		final JDFElement repDesc = (JDFElement) sheetOptParams.appendElement("GangElement", null);
 		repDesc.setAttribute("OrderQuantity", 5000, null);
 		repDesc.setAttribute("JobID", "IndividualJobID");
 		repDesc.setAttribute("NPage", "16");
 		repDesc.setAttribute("Dimension", "300 400");
-		repDesc.setXMLComment("simple description of an individual job with no knowledge of the pdf - is this a valid scenario?");
-		repDesc.appendElement(ElementName.MEDIA).setXMLComment("Should Media go here or be inferred from the output Stripping which is matched by some partition key in SheetoptimizingParams?");
+		repDesc.setXMLComment("simple description of an individual job with no knowledge of the pdf - is this a valid scenario?", true);
+		repDesc.appendElement(ElementName.MEDIA).setXMLComment("Should Media go here or be inferred from the output Stripping which is matched by some partition key in SheetoptimizingParams?", true);
 		repDesc.refElement(rl1);
 
 		JDFAssembly assembly = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Output);
 		assembly.setJobID(repDesc.getAttribute(AttributeName.JOBID));
-		assembly.setXMLComment("one output assembly/GangElement (JobID) \n it is necessary to create multiple GangElement entries/jobID e.g. for cover + body - this would make @OrderBinderySignatures redundant because strict ordering could be achieved by always providing exactly the number of pages required");
+		assembly.setXMLComment("one output assembly/GangElement (JobID) \n it is necessary to create multiple GangElement entries/jobID e.g. for cover + body - this would make @OrderBinderySignatures redundant because strict ordering could be achieved by always providing exactly the number of pages required", true);
 
 		{
 			final JDFElement repDesca = (JDFElement) sheetOptParams.appendElement("GangElement", null);
@@ -160,19 +160,19 @@ public class SheetOptimizeTest extends JDFTestCaseBase
 			repDesca.setAttribute("NPage", "24");
 			repDesca.setAttribute("Dimension", "300 400");
 			repDesca.setAttribute(AttributeName.GRAINDIRECTION, "LongEdge");
-			repDesca.setXMLComment("simple description of an individual job with no knowledge of the pdf but with knowledge of a BinderySignature");
-			repDesca.appendElement(ElementName.MEDIA).setXMLComment("Should Media go here or be inferred from the output Stripping which is matched by some partition key in SheetoptimizingParams?");
+			repDesca.setXMLComment("simple description of an individual job with no knowledge of the pdf but with knowledge of a BinderySignature", true);
+			repDesca.appendElement(ElementName.MEDIA).setXMLComment("Should Media go here or be inferred from the output Stripping which is matched by some partition key in SheetoptimizingParams?", true);
 			repDesca.refElement(rl2);
 			JDFBinderySignature bsa = (JDFBinderySignature) repDesca.appendElement(ElementName.BINDERYSIGNATURE);
 			bsa.setFoldCatalog("F16-2");
 			bsa = (JDFBinderySignature) repDesca.appendElement(ElementName.BINDERYSIGNATURE);
 			bsa.setFoldCatalog("F8-2");
-			bsa.setXMLComment("do we need all pages of binderysignatures to add up or do we assume that the optimizer will do its best by repeating appropriate binderysignatures if less bs than pages are provided");
+			bsa.setXMLComment("do we need all pages of binderysignatures to add up or do we assume that the optimizer will do its best by repeating appropriate binderysignatures if less bs than pages are provided", true);
 			JDFSeparationList sl = (JDFSeparationList) repDesca.appendElement(ElementName.SEPARATIONLIST);
 			sl.setCMYK();
 			sl.renameElement("Colors", null);
 			repDesca.copyElement(sl, null).renameElement("BackColors", null);
-			sl.setXMLComment("is this ok or do we want a complete colorantcontrol?");
+			sl.setXMLComment("is this ok or do we want a complete colorantcontrol?", true);
 		}
 		{
 			final JDFElement repDesca = (JDFElement) sheetOptParams.appendElement("GangElement", null);
@@ -181,13 +181,13 @@ public class SheetOptimizeTest extends JDFTestCaseBase
 			repDesca.setAttribute("NPage", "40");
 			repDesca.setAttribute("Dimension", "300 400");
 			repDesca.setAttribute("OrderBinderySignatures", "Reorder");
-			repDesca.setXMLComment("simple description of an individual job with no knowledge of the pdf but with knowledge of a BinderySignature");
-			repDesca.appendElement(ElementName.MEDIA).setXMLComment("Should Media go here or be inferred from the output Stripping which is matched by some partition key in SheetoptimizingParams?");
+			repDesca.setXMLComment("simple description of an individual job with no knowledge of the pdf but with knowledge of a BinderySignature", true);
+			repDesca.appendElement(ElementName.MEDIA).setXMLComment("Should Media go here or be inferred from the output Stripping which is matched by some partition key in SheetoptimizingParams?", true);
 			JDFBinderySignature bsa = (JDFBinderySignature) repDesca.appendElement(ElementName.BINDERYSIGNATURE);
 			bsa.setFoldCatalog("F16-2");
 			bsa = (JDFBinderySignature) repDesca.appendElement(ElementName.BINDERYSIGNATURE);
 			bsa.setFoldCatalog("F8-2");
-			bsa.setXMLComment("do we need all pages of binderysignatures to add up or do we assume that the optimizer will do its best by repeating appropriate binderysignatures if less bs than pages are provided");
+			bsa.setXMLComment("do we need all pages of binderysignatures to add up or do we assume that the optimizer will do its best by repeating appropriate binderysignatures if less bs than pages are provided", true);
 			assembly = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Output);
 			assembly.setJobID(repDesca.getAttribute(AttributeName.JOBID));
 		}
@@ -198,7 +198,7 @@ public class SheetOptimizeTest extends JDFTestCaseBase
 		repDesc1.setAttribute("OrderQuantity", 5000, null);
 		final JDFBinderySignature bs1 = (JDFBinderySignature) repDesc1.appendElement(ElementName.BINDERYSIGNATURE);
 		bs1.setFoldCatalog("F8-2");
-		repDesc1.setXMLComment("do we want to explicitly specify BinderySignatures or do we only send # pages or allow both?");
+		repDesc1.setXMLComment("do we want to explicitly specify BinderySignatures or do we only send # pages or allow both?", true);
 		repDesc1.setAttribute("JobID", "IndividualJobIDB");
 		assembly = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Output);
 		assembly.setJobID(repDesc1.getAttribute(AttributeName.JOBID));
@@ -213,11 +213,11 @@ public class SheetOptimizeTest extends JDFTestCaseBase
 		assembly.setJobID(repDesc1.getAttribute(AttributeName.JOBID));
 
 		JDFStrippingParams stripparams = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Output);
-		stripparams.setXMLComment("This is the empty shell that should be filled by the optimizer");
+		stripparams.setXMLComment("This is the empty shell that should be filled by the optimizer", true);
 		stripparams.setResStatus(EnumResStatus.Unavailable, false);
 		JDFResourceLink strpLink = n.getLink(stripparams, null);
 		strpLink.setAmount(1234, new JDFAttributeMap("SheetName", "S1"));
-		strpLink.getAmountPool().setXMLComment("\n planned ideal amounts go here - I assume we do not want an entire process network and that the amounts are minimum # of planned good copies");
+		strpLink.getAmountPool().setXMLComment("\n planned ideal amounts go here - I assume we do not want an entire process network and that the amounts are minimum # of planned good copies", true);
 
 		d.write2File(sm_dirTestDataTemp + "sheetOptimize.jdf", 2, false);
 	}
@@ -237,12 +237,12 @@ public class SheetOptimizeTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
 		n.setXMLComment("this is a process PRIOR to stripping - the output is the completed strippingparams\n"
-				+ "note that each GangElement is essentially a simplified stripping description of the individual product with additional amounts");
+				+ "note that each GangElement is essentially a simplified stripping description of the individual product with additional amounts", true);
 		n.setType("SheetOptimizing", false);
 
 		final JDFResource sheetOptParams = n.addResource("SheetOptimizingParams", EnumUsage.Input);
 		sheetOptParams.setXMLComment("Similar to DieLayoutProductionParams\nalso add general parameters for optimization"
-				+ "\nalso discuss reusing repeatdesc versus dedicated GangElement");
+				+ "\nalso discuss reusing repeatdesc versus dedicated GangElement", true);
 
 		final JDFConvertingConfig cc = (JDFConvertingConfig) sheetOptParams.appendElement(ElementName.CONVERTINGCONFIG, null);
 		cc.setSheetHeight(new JDFNumberRange(600, 800));
@@ -252,17 +252,17 @@ public class SheetOptimizeTest extends JDFTestCaseBase
 		cc.setMarginTop(36);
 		cc.setMarginLeft(36);
 		cc.setMarginRight(36);
-		cc.setXMLComment("Here we also should ask ourselves whether we want to reuse ConvertingConfig or create our own resource?");
+		cc.setXMLComment("Here we also should ask ourselves whether we want to reuse ConvertingConfig or create our own resource?", true);
 
 		createNewGangElement(n, 1, sheetOptParams);
 		createNewGangElement(n, 2, sheetOptParams);
 
 		JDFStrippingParams stripparams = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Output);
-		stripparams.setXMLComment("This is the empty shell describes the optimided gang jobs and should be filled by the optimizer");
+		stripparams.setXMLComment("This is the empty shell describes the optimided gang jobs and should be filled by the optimizer", true);
 		stripparams.setResStatus(EnumResStatus.Unavailable, false);
 		JDFResourceLink strpLink = n.getLink(stripparams, null);
 		strpLink.setAmount(1234, new JDFAttributeMap("SheetName", "S1"));
-		strpLink.getAmountPool().setXMLComment("\n planned ideal amounts go here - I assume we do not want an entire process network and that the amounts are minimum # of planned good copies");
+		strpLink.getAmountPool().setXMLComment("\n planned ideal amounts go here - I assume we do not want an entire process network and that the amounts are minimum # of planned good copies", true);
 
 		d.write2File(sm_dirTestDataTemp + "sheetOptimizeNew.jdf", 2, false);
 	}
@@ -276,8 +276,8 @@ public class SheetOptimizeTest extends JDFTestCaseBase
 		repDesca.setAttribute("OrderQuantity", i * 2000, null);
 		repDesca.setAttribute("JobID", "IndividualJobID_" + i);
 		repDesca.setAttribute(AttributeName.GRAINDIRECTION, "LongEdge");
-		repDesca.setXMLComment("description of an individual job with 3 Fold sheets, one of which must be ganged: AssemblyID=AssemID" + i + "3");
-		repDesca.appendElement(ElementName.MEDIA).setXMLComment("Should Media go here or be inferred from the output Stripping which is matched by some partition key in SheetoptimizingParams?");
+		repDesca.setXMLComment("description of an individual job with 3 Fold sheets, one of which must be ganged: AssemblyID=AssemID" + i + "3", true);
+		repDesca.appendElement(ElementName.MEDIA).setXMLComment("Should Media go here or be inferred from the output Stripping which is matched by some partition key in SheetoptimizingParams?", true);
 		repDesca.refElement(rl2);
 		repDesca.setAttribute(AttributeName.ASSEMBLYIDS, "AssemID" + i + "3");
 
@@ -290,7 +290,7 @@ public class SheetOptimizeTest extends JDFTestCaseBase
 		sl.renameElement("Colors", null);
 		repDesca.copyElement(sl, null).renameElement("BackColors", null);
 		JDFStrippingParams sp = (JDFStrippingParams) repDesca.appendElement(ElementName.STRIPPINGPARAMS);
-		sp.setXMLComment("This Input StrippingParams describes the individual set of foldingsheets with NO sheet context.");
+		sp.setXMLComment("This Input StrippingParams describes the individual set of foldingsheets with NO sheet context.", true);
 		sp.makeRootResource(null, null, true);
 		JDFStrippingParams spa = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.BinderySignatureName, "BS_" + i + "_1");
 		spa.setAssemblyIDs(new VString("AssemID" + i + "1 AssemID" + i + "2", null));

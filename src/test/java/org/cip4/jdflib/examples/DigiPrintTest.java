@@ -328,7 +328,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 						for (final String sep : cmyk)
 						{
 							final JDFCommand command = jmf.appendCommand();
-							command.setXMLComment("The " + (i + 1) + " push: " + (3 + j) + " body sheets");
+							command.setXMLComment("The " + (i + 1) + " push: " + (3 + j) + " body sheets", true);
 							command.setType(JDFMessage.EnumType.PipePush);
 							command.setSenderID("RIP");
 							final JDFPipeParams pp = createPipeParams(command);
@@ -563,9 +563,9 @@ public class DigiPrintTest extends JDFTestCaseBase
 	public void testDirectProof()
 	{
 		n.setXMLComment("Example workflow with initioal warmup phase, one direct proof and 100 copies of 10 sheets each.\n"
-				+ "The direct proof is acceptable and included in the good output");
+				+ "The direct proof is acceptable and included in the good output", true);
 		digiParams.setDirectProofAmount(1);
-		digiParams.setXMLComment("1 initial proof is requested");
+		digiParams.setXMLComment("1 initial proof is requested", true);
 		rlComp.setAmount(100, null);
 		final JDFAuditPool ap = n.getAuditPool();
 
@@ -583,7 +583,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 		doc.write2File(sm_dirTestDataTemp + File.separator + "DigiPrintAmount_initial.jdf", 2, false);
 
 		stCounter.setPhase(EnumNodeStatus.InProgress, "Waste", EnumDeviceStatus.Running, null);
-		ap.getLastPhase(null, null).setXMLComment("Phase where warm up waste is produced");
+		ap.getLastPhase(null, null).setXMLComment("Phase where warm up waste is produced", true);
 		stCounter.addPhase(mediaRef, 0, 2, true);
 		stCounter.addPhase(compRef, 0, 20, true);
 
@@ -593,16 +593,16 @@ public class DigiPrintTest extends JDFTestCaseBase
 		stCounter.addPhase(mediaRef, 1, 0, true);
 		stCounter.addPhase(compRef, 10, 0, true);
 		stCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null);
-		ap.getLastPhase(null, null).setXMLComment("Phase where 1 proof is produced");
+		ap.getLastPhase(null, null).setXMLComment("Phase where 1 proof is produced", true);
 
 		stCounter.setPhase(EnumNodeStatus.Stopped, "WaitForApproval", EnumDeviceStatus.Stopped, null);
-		ap.getLastPhase(null, null).setXMLComment("Phase where the proof is evaluated while the device is stopped");
+		ap.getLastPhase(null, null).setXMLComment("Phase where the proof is evaluated while the device is stopped", true);
 		stCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null);
 
 		stCounter.addPhase(mediaRef, 99, 0, true);
 		stCounter.addPhase(compRef, 990, 0, true);
 		stCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null);
-		ap.getLastPhase(null, null).setXMLComment("Phase where the 100 copies are produced");
+		ap.getLastPhase(null, null).setXMLComment("Phase where the 100 copies are produced", true);
 
 		stCounter.setPhase(EnumNodeStatus.Completed, "Idle", EnumDeviceStatus.Idle, null);
 		stCounter.setResourceAudit(mediaRef, EnumReason.ProcessResult);
@@ -817,7 +817,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 						for (final String sep : cmyk)
 						{
 							final JDFCommand command = jmf.appendCommand();
-							command.setXMLComment("The " + (i + 1) + " push: " + (3 + j) + " body sheets");
+							command.setXMLComment("The " + (i + 1) + " push: " + (3 + j) + " body sheets", true);
 							command.setType(JDFMessage.EnumType.PipePush);
 							command.setSenderID("RIP");
 							final JDFPipeParams pp = createPipeParams(command);
@@ -851,7 +851,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 		for (int j = 0; j < 2; j++)
 		{
 			final JDFCommand command = jmf.appendCommand();
-			command.setXMLComment("The " + j + " set: ");
+			command.setXMLComment("The " + j + " set: ", true);
 			command.setType(JDFMessage.EnumType.PipePush);
 			command.setSenderID("RIP");
 			final JDFPipeParams pp = createPipeParams(command);
@@ -861,7 +861,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 			pa0.getPart(0).setAttribute(EnumPartIDKey.Metadata1.getName(), ((j == 0) ? "Hot" : "Cold"));
 			pa0.setActualAmount(2 * (j + 3), null);
 			pa0.setAmount((j + 1) * 200, null);
-			pa0.setXMLComment("is this the right place for requested number of copies?");
+			pa0.setXMLComment("is this the right place for requested number of copies?", true);
 			for (final String cb : coverBody)
 			{
 				for (int i = 0; i < 2 + j; i++)
@@ -905,24 +905,24 @@ public class DigiPrintTest extends JDFTestCaseBase
 	@Test
 	public void testVariableManifests() throws Exception
 	{
-		ruli.setXMLComment("the set / doc / ... structure is transferred from the pre-impositioning pdl");
+		ruli.setXMLComment("the set / doc / ... structure is transferred from the pre-impositioning pdl", true);
 
 		final JDFPageList pl = (JDFPageList) n.addResource(ElementName.PAGELIST, null);
 		pl.setResStatus(EnumResStatus.Available, false);
 
 		final JDFContentList cl = (JDFContentList) pl.appendContentList().makeRootResource(null, null, true);
 		cl.setResStatus(EnumResStatus.Available, false);
-		cl.setXMLComment("Should we allow for content-data cross references to forther contentdata fields?");
+		cl.setXMLComment("Should we allow for content-data cross references to forther contentdata fields?", true);
 		ruli.refPageList(pl);
 		comp.refPageList(pl);
 		int pageCount = 0;
 		digiParams.setSides(EnumSides.TwoSidedFlipY);
-		digiParams.setXMLComment("the sides attribute may be overridden by explicitly or implicitly missing runlist input elements");
+		digiParams.setXMLComment("the sides attribute may be overridden by explicitly or implicitly missing runlist input elements", true);
 
 		final VString vRun = new VString("Letter BrochureMale BrochureFemale", null);
 
 		final JDFStitchingParams sp = (JDFStitchingParams) n.addResource(ElementName.STITCHINGPARAMS, EnumUsage.Input);
-		med.setXMLComment("Media Partitioning is convenience only- the actual media selection is done by the digitalprintingparams MediaRef");
+		med.setXMLComment("Media Partitioning is convenience only- the actual media selection is done by the digitalprintingparams MediaRef", true);
 		for (int i = 0; i < vRun.size(); i++)
 		{
 			final String part = vRun.elementAt(i);
@@ -932,7 +932,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 			final JDFDigitalPrintingParams digiPart = (JDFDigitalPrintingParams) digiParams.addPartition(EnumPartIDKey.Run, part);
 			digiPart.refMedia(partMedia);
 
-			sp.setXMLComment("how are multiple runs stitched together e.g. cover + body?");
+			sp.setXMLComment("how are multiple runs stitched together e.g. cover + body?", true);
 			final JDFStitchingParams spPart = (JDFStitchingParams) sp.addPartition(EnumPartIDKey.Run, part);
 			if (i == 0)
 			{
@@ -958,7 +958,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 			lMeta.setAttribute("Record", "" + i);
 			final String gender = i % 2 == 0 ? "Male" : "Female";
 			lMeta.setAttribute("Gender", gender);
-			lMeta.setXMLComment("Note that the final format of the metadata element is open");
+			lMeta.setXMLComment("Note that the final format of the metadata element is open", true);
 			final KElement bMeta = brochure.appendElement("Metadata");
 			bMeta.setAttribute("Record", "" + i);
 			bMeta.setAttribute("Gender", gender);
@@ -973,7 +973,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 			co.setPageListIndex(new JDFIntegerRangeList(new JDFIntegerRange(pageCount, pageCount + page - 1)));
 			co.setSurfaceCount(2 * ((page + 1) / 2));
 			run.setPages(new JDFIntegerRangeList("0~" + (page - 1)));
-			run.setXMLComment("Cover Letter - record " + i);
+			run.setXMLComment("Cover Letter - record " + i, true);
 			run.setEndOfDocument(true);
 			JDFPageData pd = pl.appendPageData();
 			pd.refContentData(letter);
@@ -990,12 +990,12 @@ public class DigiPrintTest extends JDFTestCaseBase
 			co.setSurfaceCount(2 * ((page + 1 + 1) / 2)); // the 2nd +1 is for
 			// the blank inside cover
 			run.setPages(new JDFIntegerRangeList("0~" + (page - 1)));
-			run.setXMLComment("Brochure - record " + i);
+			run.setXMLComment("Brochure - record " + i, true);
 			run.setEndOfDocument(true);
 			runSet.setEndOfSet(true);
 			run.setAttribute("SkipBlankOrds", "1");
 			run.setNPage(page + 1);
-			run.setXMLComment("SkipBlankOrds specifies the relative position of pages to skip\n1 specifies that the first back sheet is skipped\nNPage MUST be incremented by the # of skipped pages.");
+			run.setXMLComment("SkipBlankOrds specifies the relative position of pages to skip\n1 specifies that the first back sheet is skipped\nNPage MUST be incremented by the # of skipped pages.", true);
 			pd = pl.appendPageData();
 			pd.refContentData(brochure);
 			pd.setAttribute("PageIndex", pageCount + " ~ " + (pageCount + page - 1));

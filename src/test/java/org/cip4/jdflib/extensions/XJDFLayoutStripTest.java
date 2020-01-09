@@ -211,7 +211,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 				{
 					final ResourceHelper cuph = cush.appendPartition(new JDFAttributeMap("Product", "P" + ii), true);
 					final ResourceHelper coph = cosh.appendPartition(new JDFAttributeMap("Product", "P" + ii), true);
-					coph.getResource().setXMLComment("Contact, Address etc go here");
+					coph.getResource().setXMLComment("Contact, Address etc go here", true);
 					coph.getResource().setAttribute("ContactTypes", "Customer");
 					final JDFCustomerInfo ci = (JDFCustomerInfo) cuph.getResource();
 					ci.setAttribute("ContactRefs", coph.getID());
@@ -242,7 +242,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 				final JDFContentObject co = initContentObject(lo, k * 8 + i);
 				co.appendElement("StripCellParams");
 				co.appendElement("SignatureCell");
-				co.setXMLComment("we would probably simply merge signaturecell and stripcellparams into each co");
+				co.setXMLComment("we would probably simply merge signaturecell and stripcellparams into each co", true);
 
 			}
 		}
@@ -286,7 +286,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		theHelper.getRoot().setXMLComment("create a stripping in a layout\n Stripping now consumes a layout");
+		theHelper.getRoot().setXMLComment("create a stripping in a layout\n Stripping now consumes a layout", true);
 		theHelper.getRoot().setAttribute("Types", "Imposition");
 
 		losh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);

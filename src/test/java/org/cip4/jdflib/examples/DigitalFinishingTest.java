@@ -329,27 +329,27 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Command, EnumType.PipePush);
 		jmf.setSenderID("Guru");
 		JDFCommand command = jmf.getCreateCommand(0);
-		command.setXMLComment("The initial push: cover + 7 body sheets");
+		command.setXMLComment("The initial push: cover + 7 body sheets", true);
 		command.setType(EnumType.PipePush);
 		command.setSenderID("Printer");
 		JDFPipeParams pp = createPipeParams(command);
 		createAmountPool(pp, 0, 7, 7);
 
 		command = jmf.appendCommand();
-		command.setXMLComment("The 2nd push: cover + 5 body sheets");
+		command.setXMLComment("The 2nd push: cover + 5 body sheets", true);
 		command.setType(EnumType.PipePush);
 		command.setSenderID("Printer");
 		pp = createPipeParams(command);
 		createAmountPool(pp, 1, 5, 5);
 
 		command = jmf.appendCommand();
-		command.setXMLComment("paper jam in finisher");
+		command.setXMLComment("paper jam in finisher", true);
 		command.setType(EnumType.PipePause);
 		command.setSenderID("Finisher");
 		pp = createPipeParams(command);
 
 		command = jmf.appendCommand();
-		command.setXMLComment("request for restart at start of 2nd booklet");
+		command.setXMLComment("request for restart at start of 2nd booklet", true);
 		command.setType(EnumType.PipePull);
 		command.setSenderID("Finisher");
 		pp = createPipeParams(command);
@@ -358,21 +358,21 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		ap.getCreatePartAmount(m);
 
 		command = jmf.appendCommand();
-		command.setXMLComment("resend the 2nd push: cover + 5 body sheets");
+		command.setXMLComment("resend the 2nd push: cover + 5 body sheets", true);
 		command.setType(EnumType.PipePush);
 		command.setSenderID("Printer");
 		pp = createPipeParams(command);
 		createAmountPool(pp, 1, 5, 5);
 
 		command = jmf.appendCommand();
-		command.setXMLComment("The 3rd push: cover + 12 body sheets");
+		command.setXMLComment("The 3rd push: cover + 12 body sheets", true);
 		command.setType(EnumType.PipePush);
 		command.setSenderID("Printer");
 		pp = createPipeParams(command);
 		createAmountPool(pp, 2, 12, 12);
 
 		command = jmf.appendCommand();
-		command.setXMLComment("paper jam in printer - invalidate the cover + 4 pages previously sent");
+		command.setXMLComment("paper jam in printer - invalidate the cover + 4 pages previously sent", true);
 		command.setType(EnumType.PipePause);
 		command.setSenderID("Printer");
 		pp = createPipeParams(command);
@@ -381,14 +381,14 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		ap.getPartAmount(1).getPart(0).setAttribute("Condition", "Waste");
 
 		command = jmf.appendCommand();
-		command.setXMLComment("resend the 3rd push: cover + 12 body sheets");
+		command.setXMLComment("resend the 3rd push: cover + 12 body sheets", true);
 		command.setType(EnumType.PipePush);
 		command.setSenderID("Printer");
 		pp = createPipeParams(command);
 		createAmountPool(pp, 2, 12, 12);
 
 		command = jmf.appendCommand();
-		command.setXMLComment("we are done");
+		command.setXMLComment("we are done", true);
 		command.setType(EnumType.PipeClose);
 		command.setSenderID("Printer");
 		pp = createPipeParams(command);
@@ -408,7 +408,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		for (int j = 0; j < 2; j++)
 		{
 			JDFCommand command = jmf.appendCommand();
-			command.setXMLComment("The initial push: cover page");
+			command.setXMLComment("The initial push: cover page", true);
 			command.setType(EnumType.PipePush);
 			command.setSenderID("Printer");
 			JDFPipeParams pp = createPipeParams(command);
@@ -416,7 +416,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 			for (int i = 0; i < 3 + j; i++)
 			{
 				command = jmf.appendCommand();
-				command.setXMLComment("The " + (i + 1) + " push: " + (3 + j) + " body sheets");
+				command.setXMLComment("The " + (i + 1) + " push: " + (3 + j) + " body sheets", true);
 				command.setType(EnumType.PipePush);
 				command.setSenderID("Printer");
 				pp = createPipeParams(command);
@@ -549,7 +549,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		for (int j = 0; j < 2; j++)
 		{
 			JDFCommand command = jmf.appendCommand();
-			command.setXMLComment("The initial push: cover page");
+			command.setXMLComment("The initial push: cover page", true);
 			command.setType(EnumType.PipePush);
 			command.setSenderID("Printer");
 			JDFPipeParams pp = createPipeParams(command);
@@ -560,7 +560,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 			for (int i = 0; i < 1 + j; i++)
 			{
 				command = jmf.appendCommand();
-				command.setXMLComment("The " + (i + 1) + " push: " + (3 + j) + " body sheets");
+				command.setXMLComment("The " + (i + 1) + " push: " + (3 + j) + " body sheets", true);
 				command.setType(EnumType.PipePush);
 				command.setSenderID("Printer");
 				pp = createPipeParams(command);

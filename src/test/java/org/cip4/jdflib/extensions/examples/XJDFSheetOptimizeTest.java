@@ -85,7 +85,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 			e.setAttribute("NPage", "1");
 			e.setAttribute("PageDimension", "333 222");
 		}
-		xjdfHelper.getRoot().setXMLComment("most trivial list of single page documents - e.g. business cards");
+		xjdfHelper.getRoot().setXMLComment("most trivial list of single page documents - e.g. business cards", true);
 		writeTest(xjdfHelper, "SimpleGangIn.xjdf");
 		for (int i = 0; i < 6; i++)
 		{

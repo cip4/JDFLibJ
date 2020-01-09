@@ -181,7 +181,7 @@ public class WalkJDF extends WalkJDFElement
 
 	private void setRootAttributes(final JDFNode node, final KElement newRootP)
 	{
-		newRootP.setXMLComment("JDFToXJDF version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion());
+		newRootP.setXMLComment("JDFToXJDF version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), true);
 		newRootP.setAttribute(AttributeName.JOBID, node.getJobID(true));
 		setAttributes(node, newRootP);
 

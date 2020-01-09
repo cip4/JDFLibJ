@@ -71,20 +71,20 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	@Test
 	public void testAddSheet1()
 	{
-		theHelper.getRoot().setXMLComment("Assume incremental adding of an additional 3rd plate");
+		theHelper.getRoot().setXMLComment("Assume incremental adding of an additional 3rd plate", true);
 		theHelper.getRoot().setAttribute("Types", "PlateMaking");
 		final SetHelper rlh = theHelper.getCreateSet(XJDFConstants.Resource, "RunList", EnumUsage.Input);
 		ResourceHelper p = rlh.getCreatePartition(null, true);
 		final JDFRunList rl = (JDFRunList) p.getCreateResource();
 		rl.setNPage(48);
-		rlh.getSet().setXMLComment("set the updated total number of pages");
+		rlh.getSet().setXMLComment("set the updated total number of pages", true);
 
 		final SetHelper loh = theHelper.getCreateSet(XJDFConstants.Resource, "Layout", EnumUsage.Input);
 		p = loh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		final JDFLayout lo = (JDFLayout) p.getCreateResource();
 		final JDFBinderySignature bs = (JDFBinderySignature) lo.appendElement(ElementName.BINDERYSIGNATURE);
 		bs.setNumberUp(new JDFXYPair(4, 4));
-		loh.getSet().setXMLComment("only specify the 3rd sheet");
+		loh.getSet().setXMLComment("only specify the 3rd sheet", true);
 
 		final SetHelper mh = theHelper.getCreateSet(XJDFConstants.Resource, "Media", EnumUsage.Input);
 		p = mh.getCreatePartition(null, true);
@@ -105,7 +105,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	@Test
 	public void testAddProcess()
 	{
-		theHelper.getRoot().setXMLComment("Added Varnishing - how do we differentiate varnishing only from add varnishing\n");
+		theHelper.getRoot().setXMLComment("Added Varnishing - how do we differentiate varnishing only from add varnishing\n", true);
 		theHelper.getRoot().setAttribute("Types", "Varnishing");
 		final SetHelper rlh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.VARNISHINGPARAMS, EnumUsage.Input);
 		final ResourceHelper p = rlh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
@@ -119,7 +119,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	@Test
 	public void testProductOnly()
 	{
-		theHelper.getRoot().setXMLComment("Product description only\n");
+		theHelper.getRoot().setXMLComment("Product description only\n", true);
 		// h.getRoot().setAttribute("Types", "Varnishing");
 		final ProductHelper ph = theHelper.appendProduct();
 		ph.setRoot();
@@ -152,20 +152,20 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	@Test
 	public void testRemoveSheet()
 	{
-		theHelper.getRoot().setXMLComment("Assume incremental removal of an existing 3rd plate");
+		theHelper.getRoot().setXMLComment("Assume incremental removal of an existing 3rd plate", true);
 		theHelper.getRoot().setAttribute("Types", "PlateMaking");
 		final SetHelper rlh = theHelper.getCreateSet(XJDFConstants.Resource, "RunList", EnumUsage.Input);
 		ResourceHelper p = rlh.getCreatePartition(null, true);
 		final JDFRunList rl = (JDFRunList) p.getCreateResource();
 		rl.setNPage(32);
-		rlh.getSet().setXMLComment("set the updated reduced total number of pages");
+		rlh.getSet().setXMLComment("set the updated reduced total number of pages", true);
 
 		final SetHelper nih = theHelper.getCreateSet(XJDFConstants.Resource, "NodeInfo", EnumUsage.Input);
 		p = nih.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		final JDFNodeInfo ni = (JDFNodeInfo) p.getCreateResource();
 		ni.setNodeStatus(EnumNodeStatus.Aborted);
 		ni.setNodeStatusDetails("Removed");
-		nih.getSet().setXMLComment("All other dependent resources must be appropriately modified by the device");
+		nih.getSet().setXMLComment("All other dependent resources must be appropriately modified by the device", true);
 
 		theHelper.writeToFile(sm_dirTestDataTemp + "removeSheet1.xjdf");
 	}
@@ -176,7 +176,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	@Test
 	public void testUpdateAmount()
 	{
-		theHelper.getRoot().setXMLComment("update the required amount for sheet=s3");
+		theHelper.getRoot().setXMLComment("update the required amount for sheet=s3", true);
 		theHelper.getRoot().setAttribute("Types", "ConventionalPrinting");
 
 		theHelper.removeSet(ElementName.NODEINFO);
