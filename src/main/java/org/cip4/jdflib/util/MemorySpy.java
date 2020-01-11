@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -50,7 +50,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -221,7 +220,7 @@ public class MemorySpy
 	 */
 	public String getSummary()
 	{
-		final StringBuffer b = new StringBuffer();
+		final StringBuilder b = new StringBuilder();
 		final Map<String, Long> map = getSummaryMap();
 		for (final String s : map.keySet())
 			b.append("Mem ").append(s).append(": ").append(map.get(s)).append("\n");
@@ -288,9 +287,9 @@ public class MemorySpy
 	public String toString()
 	{
 		final Map<String, Long> sizeMap = getSizeMap();
-		final Vector<String> keys = ContainerUtil.getKeyVector(sizeMap);
+		final List<String> keys = ContainerUtil.getKeyList(sizeMap);
 		Collections.sort(keys);
-		final StringBuffer b = new StringBuffer("MemorySpy: \n");
+		final StringBuilder b = new StringBuilder("MemorySpy: \n");
 		for (final String key : keys)
 		{
 			b.append(key);

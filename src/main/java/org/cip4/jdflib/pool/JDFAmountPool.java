@@ -48,6 +48,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -70,7 +71,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	public class AmountMap extends ListMap<JDFAttributeMap, JDFPartAmount>
 	{
 
-		private final VString m_vsUsedPartIDKeys = new VString();
+		private final StringArray m_vsUsedPartIDKeys = new StringArray();
 
 		/**
 		 *
@@ -82,7 +83,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		 *
 		 * @param vsPartIDKeys
 		 */
-		AmountMap(final VString vsPartIDKeys)
+		AmountMap(final List<String> vsPartIDKeys)
 		{
 			final VElement vPartAmount = getChildElementVector(ElementName.PARTAMOUNT, null, null, true, 0, false);
 
@@ -98,7 +99,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 					{
 						final JDFAttributeMap amPart = vamParts == null ? new JDFAttributeMap() : vamParts.elementAt(p);
 						amPart.reduceMap(vsPartIDKeys);
-						m_vsUsedPartIDKeys.appendUnique(amPart.getKeys());
+						m_vsUsedPartIDKeys.appendUnique(amPart.getKeyList());
 						putOne(amPart, pa);
 					}
 				}

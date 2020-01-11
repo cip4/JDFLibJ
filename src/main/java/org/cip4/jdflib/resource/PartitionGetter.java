@@ -44,8 +44,8 @@ import java.util.Set;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
@@ -182,7 +182,7 @@ public class PartitionGetter
 		if (size > 1 || leafMap.hasMissingKeys(partMap))
 		{
 			final JDFAttributeMap reducedMap = partMap.clone();
-			final VString partIDKeys = resourceRoot.getPartIDKeys();
+			final StringArray partIDKeys = resourceRoot.getPartIDKeyList();
 			reducedMap.reduceMap(partIDKeys);
 			for (int i = partIDKeys.size(); i >= 0; i--)
 			{
@@ -588,7 +588,7 @@ public class PartitionGetter
 				{
 					// not nice, but this is what the old algorithm did - find the closest common ancestor
 					partitionFromMap = vMap.getCommonMap();
-					final VString partIDKeys = resourceRoot.getPartIDKeys();
+					final StringArray partIDKeys = resourceRoot.getPartIDKeyList();
 					final int lastPos = lastPos(partitionFromMap, partIDKeys, false) - 1;
 					final int firstPos = firstPos(partitionFromMap, partIDKeys);
 					for (int i = Math.max(firstPos, lastPos); i < partIDKeys.size(); i++)
@@ -601,7 +601,7 @@ public class PartitionGetter
 		return partitionFromMap;
 	}
 
-	int firstPos(final JDFAttributeMap partitionFromMap, final VString partIDKeys)
+	int firstPos(final JDFAttributeMap partitionFromMap, final List<String> partIDKeys)
 	{
 		int firstPos = 0;
 		for (final String key : partIDKeys)
@@ -624,7 +624,7 @@ public class PartitionGetter
 	protected JDFResource getDeepPart(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
 		JDFResource retRes = null;
-		final VString partIDKeys = resourceRoot.getPartIDKeys();
+		final StringArray partIDKeys = resourceRoot.getPartIDKeyList();
 
 		final VElement vRes = getPartitionVector(m, partUsage);
 
@@ -728,15 +728,15 @@ public class PartitionGetter
 	 * @param vPartKeys
 	 * @return VString the reordered VString of partIDKeys
 	 */
-	private VString reorderPartKeys(final VString vPartKeys)
+	private List<String> reorderPartKeys(final List<String> vPartKeys)
 	{
 		if (vPartKeys == null || vPartKeys.isEmpty())
 		{
 			return resourceRoot.getPartIDKeys();
 		}
-		VString vPartIDKeys = new VString(vPartKeys);
-		final VString vExistingPartKeys = resourceRoot.getPartIDKeys();
-		final VString vTmpPartIDKeys = new VString();
+		List<String> vPartIDKeys = new StringArray(vPartKeys);
+		final StringArray vExistingPartKeys = resourceRoot.getPartIDKeyList();
+		final StringArray vTmpPartIDKeys = new StringArray();
 		if (vExistingPartKeys != null && !vExistingPartKeys.isEmpty())
 		{
 			boolean allIn = true;
@@ -756,7 +756,7 @@ public class PartitionGetter
 
 			for (int i = 0; i < n; i++)
 			{
-				final String partKey = vExistingPartKeys.elementAt(i);
+				final String partKey = vExistingPartKeys.get(i);
 				if (!vPartIDKeys.contains(partKey)) // allow reordering of the
 				// existing partidkeys
 				{
@@ -767,7 +767,7 @@ public class PartitionGetter
 			}
 			for (int i = 0; i < vPartIDKeys.size(); i++)
 			{
-				vTmpPartIDKeys.add(vPartIDKeys.elementAt(i));
+				vTmpPartIDKeys.add(vPartIDKeys.get(i));
 			}
 			vPartIDKeys = vTmpPartIDKeys;
 		}
@@ -788,7 +788,7 @@ public class PartitionGetter
 	 *
 	 * @default getCreatePartition(partMap, null)
 	 */
-	public JDFResource getCreatePartition(JDFAttributeMap partMap, final VString vPartKeys)
+	public JDFResource getCreatePartition(JDFAttributeMap partMap, final List<String> vPartKeys)
 	{
 		partMap = getCompletePartMap(partMap, true);
 		if (partMap == null || partMap.isEmpty())
@@ -801,19 +801,20 @@ public class PartitionGetter
 
 		r = getPartition(partMap, EnumPartUsage.Implicit);
 		final JDFAttributeMap thisMap = r.getPartMap();
-		final VString localKeys = thisMap.getKeys();
+		final StringArray localKeys = thisMap.getKeyList();
 		if (thisMap.size() == partMap.size())
 			return r;
 
-		final VString vPartIDKeys = updatePartIDKeys(partMap, vPartKeys);
+		final List<String> vPartIDKeys = updatePartIDKeys(partMap, vPartKeys);
 
-		resourceRoot.setPartIDKeys(vPartIDKeys);
+		resourceRoot.setPartIDKeyList(vPartIDKeys);
 		leafMap.updatePartIDKeys(vPartIDKeys);
 
 		final int s = vPartIDKeys == null ? 0 : vPartIDKeys.size();
 		if (s < partMap.size())
 		{
-			throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + "insufficient partIDKeys " + leafMap.getPartIDKeys() + " for " + partMap);
+			throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + "insufficient partIDKeys " + leafMap.getPartIDKeys()
+					+ " for " + partMap);
 		}
 		// create all partitions
 		JDFAttributeMap map = thisMap;
@@ -833,8 +834,8 @@ public class PartitionGetter
 			}
 			else
 			{
-				throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + " attempting to fill non-matching partIDKeys: " + key + " valid keys: "
-						+ "Current PartIDKeys: " + resourceRoot.getPartIDKeys() + " complete map: " + partMap);
+				throw new JDFException("GetCreatePartition: " + resourceRoot.getNodeName() + " ID=" + resourceRoot.getID() + " attempting to fill non-matching partIDKeys: " + key
+						+ " valid keys: " + "Current PartIDKeys: " + resourceRoot.getPartIDKeys() + " complete map: " + partMap);
 			}
 		}
 		return r;
@@ -846,29 +847,29 @@ public class PartitionGetter
 	 * @param vPartKeys
 	 * @return
 	 */
-	VString updatePartIDKeys(final JDFAttributeMap partMap, VString vPartKeys)
+	List<String> updatePartIDKeys(final JDFAttributeMap partMap, List<String> vPartKeys)
 	{
 		final int lastPos = 1 + lastPos(partMap, vPartKeys, false);
 		int size = vPartKeys == null ? 0 : vPartKeys.size();
 		if (vPartKeys != null && lastPos < size)
 		{
-			vPartKeys = new VString(vPartKeys);
+			vPartKeys = new StringArray(vPartKeys);
 			while (lastPos < size)
 			{
 				vPartKeys.remove(lastPos);
 				size--;
 			}
 		}
-		VString vPartIDKeys = reorderPartKeys(vPartKeys);
+		List<String> vPartIDKeys = reorderPartKeys(vPartKeys);
 		// check whether we are already ok
-		final VString newKeys = partMap.getKeys();
+		final List<String> newKeys = partMap.getKeyList();
 		if (vPartIDKeys != null)
 		{
 			newKeys.removeAll(vPartIDKeys);
 		}
 		if (newKeys.size() == 1)
 		{
-			vPartIDKeys = (VString) ContainerUtil.addAll(vPartIDKeys, newKeys);
+			vPartIDKeys = (List<String>) ContainerUtil.addAll(vPartIDKeys, newKeys);
 		}
 		// only heuristically add stuff if needed...
 		else if (newKeys.size() > 1)
@@ -897,7 +898,7 @@ public class PartitionGetter
 		{
 			throw new JDFException("Attempting to add null partition to resource: " + parent.buildXPath(null, 1));
 		}
-		VString partIDKeys = leafMap.getPartIDKeys();
+		List<String> partIDKeys = leafMap.getPartIDKeys();
 		final int posOfType = partIDKeys == null ? -1 : partIDKeys.indexOf(partType.getName());
 		if (posOfType < 0)
 		{
@@ -955,15 +956,15 @@ public class PartitionGetter
 	 *
 	 * @default createPartitions(vPartMap, VString.emptyVector)
 	 */
-	public VElement createPartitions(final VJDFAttributeMap vPartMap, final VString vPartIDKeys)
+	public VElement createPartitions(final VJDFAttributeMap vPartMap, final List<String> vPartIDKeys)
 	{
 		final VElement v = new VElement();
 		if (vPartMap != null)
 		{
-			VString currentPartIDKeys = resourceRoot.getPartIDKeys();
+			List<String> currentPartIDKeys = resourceRoot.getPartIDKeys();
 			if (currentPartIDKeys != null)
 			{
-				currentPartIDKeys.appendUnique(vPartIDKeys);
+				ContainerUtil.appendUnique(currentPartIDKeys, vPartIDKeys);
 			}
 			else
 			{
@@ -979,7 +980,7 @@ public class PartitionGetter
 		return v;
 	}
 
-	private VJDFAttributeMap updateCreate(final VJDFAttributeMap vPartMap, final VString vPartIDKeys)
+	private VJDFAttributeMap updateCreate(final VJDFAttributeMap vPartMap, final List<String> vPartIDKeys)
 	{
 		final VJDFAttributeMap newMap = new VJDFAttributeMap();
 		for (final JDFAttributeMap map : vPartMap)
@@ -1006,7 +1007,7 @@ public class PartitionGetter
 	 * @param vPartIDKeys
 	 * @return
 	 */
-	boolean hasGap(final JDFAttributeMap next, VString vPartIDKeys)
+	boolean hasGap(final JDFAttributeMap next, List<String> vPartIDKeys)
 	{
 		if (vPartIDKeys == null)
 			vPartIDKeys = resourceRoot.getPartIDKeys();
@@ -1019,7 +1020,7 @@ public class PartitionGetter
 	 * @param vPartIDKeys
 	 * @return
 	 */
-	int lastPos(final JDFAttributeMap next, final VString vPartIDKeys, final boolean newIsGap)
+	int lastPos(final JDFAttributeMap next, final List<String> vPartIDKeys, final boolean newIsGap)
 	{
 		int last = -1;
 		if (vPartIDKeys != null)
@@ -1027,7 +1028,7 @@ public class PartitionGetter
 			final Set<String> keys = next.keySet();
 			for (final String pik : keys)
 			{
-				int nextlast = vPartIDKeys.index(pik);
+				int nextlast = vPartIDKeys.indexOf(pik);
 				if (newIsGap && nextlast == -1)
 					nextlast = Math.max(vPartIDKeys.size(), next.size());
 				last = Math.max(last, nextlast);
@@ -1044,7 +1045,7 @@ public class PartitionGetter
 	 * @param vPartIDKeys the known base partidkeys
 	 * @return the best guess vector of partidkeys
 	 */
-	private VString expandKeysFromNode(final JDFAttributeMap partMap, final VString vPartIDKeys)
+	private List<String> expandKeysFromNode(final JDFAttributeMap partMap, final List<String> vPartIDKeys)
 	{
 		final JDFNode n = resourceRoot.getParentJDF();
 		if (n == null)
@@ -1052,7 +1053,7 @@ public class PartitionGetter
 			return vPartIDKeys;
 		}
 
-		final VString nodeKeys = n.getPartIDKeys(partMap);
+		final List<String> nodeKeys = n.getPartIDKeys(partMap);
 		final int nodeKeySize = nodeKeys.size();
 
 		final int partKeySize = vPartIDKeys != null ? vPartIDKeys.size() : 0;
@@ -1103,7 +1104,8 @@ public class PartitionGetter
 				if (!JDFPart.overlapPartMap(localPartMap, partMap, strictPartVersion))
 				{
 					if (create)
-						throw new JDFException("Incompatible part maps: local: " + localPartMap.showKeys(null) + " request: " + partMap.showKeys(null) + " ID=" + resourceRoot.getID());
+						throw new JDFException("Incompatible part maps: local: " + localPartMap.showKeys(null) + " request: " + partMap.showKeys(null) + " ID="
+								+ resourceRoot.getID());
 					else
 						return null;
 				}

@@ -67,6 +67,7 @@ import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -239,10 +240,8 @@ public class JDFResource extends JDFElement
 			return super.getDeepPart(m, partUsage);
 		}
 
-		@Override
 		public JDFResource getCreatePartition(final JDFAttributeMap partMap, final VString vPartKeys)
 		{
-			// TODO Auto-generated method stub
 			return super.getCreatePartition(partMap, vPartKeys);
 		}
 
@@ -1832,6 +1831,15 @@ public class JDFResource extends JDFElement
 	 */
 	public void setPartIDKeys(final VString partIDKeys)
 	{
+		setPartIDKeyList(partIDKeys);
+	}
+
+	/**
+	 *
+	 * @param partIDKeys
+	 */
+	public void setPartIDKeyList(final List<String> partIDKeys)
+	{
 		getResourceRoot().setAttribute(AttributeName.PARTIDKEYS, StringUtil.setvString(partIDKeys, JDFConstants.BLANK, null, null));
 	}
 
@@ -1844,8 +1852,7 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFResource mergeCloneResource(final JDFResource oldRes)
 	{
-		final JDFAttributeMap m = getAttributeMap(); // get all preset
-		// attributes
+		final JDFAttributeMap m = getAttributeMap(); // get all preset attributes
 		mergeElement(oldRes, false); // clone oldRes onto this
 		setAttributes(m); // reset all preset attributes
 
@@ -3197,16 +3204,16 @@ public class JDFResource extends JDFElement
 	/**
 	 * Gets a map of all partition key-value pairs for this leaf / node. This includes a recursion to the part root.
 	 *
-	 * @param ids
+	 * @param partIDKeys
 	 * @return the part attribute map for 'this' leaf / node - reused for performance enhancement; never null
 	 */
-	public JDFAttributeMap getPartMap(final VString ids)
+	public JDFAttributeMap getPartMap(final List<String> partIDKeys)
 	{
 		final JDFAttributeMap m = new JDFAttributeMap();
 		KElement rLocal = this;
-		for (int i = ids.size() - 1; i >= 0; i--)
+		for (int i = partIDKeys.size() - 1; i >= 0; i--)
 		{
-			final String attName = ids.get(i);
+			final String attName = partIDKeys.get(i);
 			final String s = rLocal.getAttribute_KElement(attName, null, null);
 			if (s != null)
 			{
@@ -5918,6 +5925,22 @@ public class JDFResource extends JDFElement
 		{
 			final String idKeys = partRoot.getAttributeRaw(AttributeName.PARTIDKEYS);
 			return StringUtil.tokenize(idKeys, JDFConstants.BLANK, false);
+		}
+		return null;
+	}
+
+	/**
+	 * Gets a list of all valid part keys for this resource
+	 *
+	 * @return VString - list of all PartIDKeys
+	 */
+	public StringArray getPartIDKeyList()
+	{
+		final JDFResource partRoot = getResourceRoot();
+		if (partRoot != null)
+		{
+			final String idKeys = partRoot.getAttributeRaw(AttributeName.PARTIDKEYS);
+			return StringArray.getVString(idKeys, null);
 		}
 		return null;
 	}

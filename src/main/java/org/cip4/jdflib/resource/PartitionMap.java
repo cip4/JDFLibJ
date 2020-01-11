@@ -43,7 +43,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.ContainerUtil;
 
@@ -56,13 +56,14 @@ class PartitionMap
 	PartitionMap(final JDFResource r)
 	{
 		super();
-		partIDKeys = r.getPartIDKeys();
+		final StringArray partIDKeyList = r.getPartIDKeyList();
+		partIDKeys = partIDKeyList == null ? new StringArray() : partIDKeyList;
 		leafMap = new LinkedHashMap<>();
 		addPartitionMap(new JDFAttributeMap(), r.getResourceRoot());
 	}
 
 	private final HashMap<JDFAttributeMap, JDFResource> leafMap;
-	private final VString partIDKeys;
+	private final List<String> partIDKeys;
 
 	/**
 	 * @return
@@ -108,7 +109,7 @@ class PartitionMap
 	 *
 	 * @return
 	 */
-	VString getPartIDKeys()
+	List<String> getPartIDKeys()
 	{
 		return partIDKeys;
 	}
@@ -148,9 +149,9 @@ class PartitionMap
 	 *
 	 * @param vPartIDKeys
 	 */
-	void updatePartIDKeys(final VString vPartIDKeys)
+	void updatePartIDKeys(final List<String> vPartIDKeys)
 	{
-		partIDKeys.appendUnique(vPartIDKeys);
+		ContainerUtil.appendUnique(partIDKeys, vPartIDKeys);
 	}
 
 	/**

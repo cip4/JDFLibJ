@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -59,6 +59,7 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
@@ -152,7 +153,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 		for (final String strKey : vsKeys)
 		{
 			final String strValue = this.get(strKey);
-			sb.append(k == 0 ? "" : sep).append('(').append(strKey).append(" = ").append(strValue).append(')');
+			sb.append(k == 0 ? JDFConstants.EMPTYSTRING : sep).append('(').append(strKey).append(" = ").append(strValue).append(')');
 			k++;
 		}
 		return sb.toString();
@@ -317,14 +318,24 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public boolean overlapMap(final VJDFAttributeMap vMap)
 	{
-		if (vMap == null || vMap.isEmpty())
+		return overlapsMap(vMap);
+	}
+
+	/**
+	 * Method overlapMap.
+	 *
+	 * @param vMap the vector submaps to check against
+	 * @return true if this has at least one entry that vMap contains at least a submap or supermap of
+	 */
+	public boolean overlapsMap(final Collection<JDFAttributeMap> vMap)
+	{
+		if (ContainerUtil.isEmpty(vMap))
 		{
 			return true;
 		}
-		final int size = vMap.size();
-		for (int i = 0; i < size; i++)
+		for (final JDFAttributeMap m : vMap)
 		{
-			if (overlapMap(vMap.elementAt(i)))
+			if (overlapMap(m))
 			{
 				return true;
 			}
@@ -782,10 +793,24 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * get the keys as a Vector,
 	 *
 	 * @return
+	 * @deprecated use getKeyList
 	 */
+	@Deprecated
 	public VString getKeys()
 	{
 		final VString thisKeys = new VString();
+		thisKeys.addAll(keySet());
+		return thisKeys;
+	}
+
+	/**
+	 * get the keys as a Vector,
+	 *
+	 * @return
+	 */
+	public StringArray getKeyList()
+	{
+		final StringArray thisKeys = new StringArray();
 		thisKeys.addAll(keySet());
 		return thisKeys;
 	}

@@ -208,10 +208,12 @@ public class WalkElement extends BaseWalker
 				if (EnumAttributeType.isRange(jdf.getAtrType(key)))
 				{
 					final JDFNameRangeList rl = JDFNameRangeList.createNameRangeList(map.get(key));
+
 					if (rl != null)
 					{
-						final StringBuffer buf = new StringBuffer();
-						for (int i = 0; i < rl.size(); i++)
+						final int size = rl.size();
+						final StringBuilder buf = new StringBuilder();
+						for (int i = 0; i < size; i++)
 						{
 							final JDFNameRange r = (JDFNameRange) rl.at(i);
 							if (i > 0)

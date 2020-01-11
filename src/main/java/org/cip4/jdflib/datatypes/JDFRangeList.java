@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -58,12 +58,8 @@ import org.cip4.jdflib.util.HashUtil;
  */
 public abstract class JDFRangeList implements JDFBaseDataTypes
 {
-	// **************************************** Constructors
-	// ****************************************
 	protected ArrayList<JDFRange> rangeList = new ArrayList<>();
 
-	// **************************************** Constructors
-	// ****************************************
 	/**
 	 * constructor
 	 */
@@ -156,7 +152,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 	public final String toString()
 	{
 		final int sz = rangeList.size();
-		final StringBuffer s = new StringBuffer((sz + 1) * 16);
+		final StringBuilder s = new StringBuilder((sz + 1) * 16);
 		for (int i = 0; i < sz; i++)
 		{
 			s.append(rangeList.get(i).toString());

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -358,7 +358,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	@Override
 	public synchronized String toString()
 	{
-		final StringBuffer sb = new StringBuffer();
+		final StringBuilder sb = new StringBuilder();
 
 		final int size = size();
 		for (int i = 0; i < size; i++)
@@ -394,9 +394,10 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 */
 	public String getString(final int precision)
 	{
-		final StringBuffer sb = new StringBuffer();
+		final StringBuilder sb = new StringBuilder();
 
-		for (int i = 0; i < size(); i++)
+		final int size = size();
+		for (int i = 0; i < size; i++)
 		{
 			if (i > 0)
 			{

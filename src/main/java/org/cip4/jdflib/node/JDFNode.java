@@ -1277,7 +1277,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			for (int i = vLinks.size() - 1; i >= 0; i--)
 			{
 				final JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(i);
-				if (rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX) && !rl.includesMatchingAttribute(AttributeName.COMBINEDPROCESSINDEX, indexString, AttributeInfo.EnumAttributeType.IntegerList))
+				if (rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX)
+						&& !rl.includesMatchingAttribute(AttributeName.COMBINEDPROCESSINDEX, indexString, AttributeInfo.EnumAttributeType.IntegerList))
 				{
 					vLinks.remove(i);
 				}
@@ -1749,8 +1750,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		 * @param resourceLink
 		 * @param types
 		 */
-		public static void generateCombinedProcessIndex(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage, final JDFResourceLink resourceLink,
-				final VString types)
+		public static void generateCombinedProcessIndex(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage, final JDFResourceLink resourceLink, final VString types)
 		{
 			if (resourceLink == null || jdfResource == null || resourceLink instanceof JDFPartAmount)
 				return;
@@ -2878,8 +2878,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @default addResource(name, null, usage, null, null, null,null)
 	 */
-	public JDFResource addResource(final String strName, JDFResource.EnumResourceClass resClass, final EnumUsage usage, final EnumProcessUsage processUsage, JDFNode resRoot, final String nameSpaceURI,
-			final JDFResource toReplace)
+	public JDFResource addResource(final String strName, JDFResource.EnumResourceClass resClass, final EnumUsage usage, final EnumProcessUsage processUsage, JDFNode resRoot, final String nameSpaceURI, final JDFResource toReplace)
 	{
 		if (resRoot == null)
 		{
@@ -2906,7 +2905,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		}
 
 		// parameters and consumables are assumed to be available by default
-		if (EnumUsage.Input.equals(usage) && (EnumResourceClass.Parameter.equals(resClass) || EnumResourceClass.Consumable.equals(resClass) || EnumResourceClass.Intent.equals(resClass)))
+		if (EnumUsage.Input.equals(usage)
+				&& (EnumResourceClass.Parameter.equals(resClass) || EnumResourceClass.Consumable.equals(resClass) || EnumResourceClass.Intent.equals(resClass)))
 		{
 			r.setResStatus(EnumResStatus.Available, false);
 		}
@@ -3407,7 +3407,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 *
-	
+
 	 *
 	 */
 
@@ -3842,7 +3842,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 							final JDFPartStatus ps = (JDFPartStatus) vPartStatus.elementAt(ips);
 							try
 							{ // see if the partstatus is consistent with what
-								// we have
+									// we have
 								ni = (JDFNodeInfo) r.getCreatePartition(ps.getPartMap(), partIDKeys);
 							}
 							catch (final JDFException ex)
@@ -4314,8 +4314,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @default spawn(parentURL, null, null, null, false, false, false, false)
 	 */
 	@Deprecated
-	public JDFNode spawn(final String parentURL, final String spawnURL, final VString vRWResources_in, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly, final boolean bCopyNodeInfo,
-			final boolean bCopyCustomerInfo, final boolean bCopyComments)
+	public JDFNode spawn(final String parentURL, final String spawnURL, final VString vRWResources_in, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly, final boolean bCopyNodeInfo, final boolean bCopyCustomerInfo, final boolean bCopyComments)
 	{
 		final JDFSpawn spawn = new JDFSpawn(this);
 		return spawn.spawn(parentURL, spawnURL, vRWResources_in, vSpawnParts, bSpawnROPartsOnly, bCopyNodeInfo, bCopyCustomerInfo, bCopyComments);
@@ -4344,8 +4343,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @deprecated use JDFSpawn.spawnInformative()
 	 */
 	@Deprecated
-	public JDFNode spawnInformative(final String parentURL, final String spawnURL, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly, final boolean bCopyNodeInfo,
-			final boolean bCopyCustomerInfo, final boolean bCopyComments)
+	public JDFNode spawnInformative(final String parentURL, final String spawnURL, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly, final boolean bCopyNodeInfo, final boolean bCopyCustomerInfo, final boolean bCopyComments)
 	{
 		final JDFSpawn _spawn = new JDFSpawn(this);
 		return _spawn.spawnInformative(parentURL, spawnURL, vSpawnParts, bSpawnROPartsOnly, bCopyNodeInfo, bCopyCustomerInfo, bCopyComments);
@@ -4386,8 +4384,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			final KElement m = v.elementAt(i);
 			final String strName = m.getNodeName();
 			KElement mHere = null;
-			if ((strName.equals(ElementName.NODEINFO)) || (strName.equals(ElementName.CUSTOMERINFO)) || (strName.equals(ElementName.RESOURCEPOOL)) || (strName.equals(ElementName.RESOURCELINKPOOL))
-					|| (strName.equals(ElementName.ANCESTORPOOL)) || (strName.equals(ElementName.AUDITPOOL)))
+			if ((strName.equals(ElementName.NODEINFO)) || (strName.equals(ElementName.CUSTOMERINFO)) || (strName.equals(ElementName.RESOURCEPOOL))
+					|| (strName.equals(ElementName.RESOURCELINKPOOL)) || (strName.equals(ElementName.ANCESTORPOOL)) || (strName.equals(ElementName.AUDITPOOL)))
 			{
 				mHere = getElement_JDFElement(m.getNodeName(), null, 0);
 			}
@@ -5742,8 +5740,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			return null;
 		}
-		final JDFResourceLink rl = (JDFResourceLink) rlp.getChildWithMatchingAttribute("NodeInfoLink", AttributeName.COMBINEDPROCESSINDEX, null, String.valueOf(combinedProcessIndex), 0, true,
-				AttributeInfo.EnumAttributeType.IntegerList);
+		final JDFResourceLink rl = (JDFResourceLink) rlp.getChildWithMatchingAttribute("NodeInfoLink", AttributeName.COMBINEDPROCESSINDEX, null, String.valueOf(combinedProcessIndex), 0, true, AttributeInfo.EnumAttributeType.IntegerList);
 		if (rl == null)
 		{
 			return null;
@@ -8031,8 +8028,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		return vp;
 	}
 
-	private ExecPartFlags addExecutablePartitions(final JDFResourceLink link, final JDFResource res, final VString vsPartIDKeys, final VJDFAttributeMap vamPartMaps,
-			final JDFResource.EnumResStatus minStatus, final boolean bCheckNodeStatus)
+	private ExecPartFlags addExecutablePartitions(final JDFResourceLink link, final JDFResource res, final VString vsPartIDKeys, final VJDFAttributeMap vamPartMaps, final JDFResource.EnumResStatus minStatus, final boolean bCheckNodeStatus)
 	{
 		final JDFAttributeMap amPartMap = res.getPartMap();
 
@@ -8314,7 +8310,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				{
 					final JDFResource resource = (JDFResource) linkedResources.elementAt(i);
 					final VString partIDKeys = resource.getPartIDKeys();
-					if (partIDKeys.size() >= partMap.size() && partIDKeys.containsAll(partMap.getKeys()))
+					if (partIDKeys.size() >= partMap.size() && partIDKeys.containsAll(partMap.getKeyList()))
 					{
 						matchingPartIDKeys = partIDKeys;
 						break;
