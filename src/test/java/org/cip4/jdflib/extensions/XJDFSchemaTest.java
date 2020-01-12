@@ -58,6 +58,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.util.JDFDate;
@@ -125,6 +126,19 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 
 		void createChangeOrder(final int minor)
 		{
+			final String date = new JDFDate().getFormattedDateTime(JDFDate.DATEISO);
+			final String commentText = " XJDF 2." + minor + " job submission schema updated on " + date + " ";
+			final XMLDoc d0 = XMLDoc.parseFile(getXJDFSchema(2, minor));
+			d0.getRoot().setXMLComment(commentText, false);
+			d0.write2File(sm_dirTestDataTemp + "schema/xjdf.2_" + minor + "." + date + ".xsd", 2, false);
+			d0.write2File(sm_dirTestDataTemp + "schema/xjdf.job.2_" + minor + "/xjdf.xsd", 2, false);
+
+			final XMLDoc ds = XMLDoc.parseFile(getXJDFSchema(2, minor));
+			ds.getRoot().setXMLComment(" strict " + commentText, false);
+			final VElement vlax = ds.getRoot().getChildrenByTagName(null, null, new JDFAttributeMap("processContents", "lax"), false, false, 0);
+			for (final KElement e : vlax)
+				e.setAttribute("processContents", "strict");
+			ds.write2File(sm_dirTestDataTemp + "schema/xjdf.strict.2_" + minor + "." + date + ".xsd", 2, false);
 
 			final XMLDoc d = XMLDoc.parseFile(getXJDFSchema(2, minor));
 			final KElement root = d.getRoot();
@@ -148,8 +162,9 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 					e.setAttribute("minOccurs", "0");
 				}
 			}
-			root.setXMLComment(" XJDF 2." + minor + " Schema updated on " + new JDFDate().getFormattedDateTime(JDFDate.DATEISO) + " ", false);
-			d.write2File(sm_dirTestDataTemp + "changeschema/xjdf2_" + minor + "/xjdf.xsd", 2, false);
+			root.setXMLComment(" XJDF 2." + minor + " changeorder schema updated on " + date + " ", false);
+			d.write2File(sm_dirTestDataTemp + "schema/xjdf.changeorder.2_" + minor + "." + date + ".xsd", 2, false);
+			d.write2File(sm_dirTestDataTemp + "schema/xjdf.changeorder.2_" + minor + "/xjdf.xsd", 2, false);
 		}
 
 		Set<String> ignore;
