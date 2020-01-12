@@ -59,6 +59,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFAttributeMapArray;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.IAmountPoolContainer;
 import org.cip4.jdflib.ifaces.IMatches;
@@ -302,6 +303,17 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 			}
 		}
 		return s;
+	}
+
+	/**
+	 * get part map array
+	 *
+	 * @return array of attribute, one for each part
+	 */
+	@Override
+	public JDFAttributeMapArray getPartMapArray()
+	{
+		return super.getPartMapArray();
 	}
 
 	/**

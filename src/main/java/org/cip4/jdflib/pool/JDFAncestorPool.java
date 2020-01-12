@@ -2,70 +2,36 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment mrSubRefay appear in the software itself, if and wherever such third-party
+ * acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior writtenrestartProcesses() permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERN
- }ATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERN }ATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE. ====================================================================
  *
- }
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software restartProcesses()
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * } This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software restartProcesses() copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  */
 /**
@@ -76,10 +42,7 @@
  *
  * Last changes
  *
- * 2002-07-02 JG added Part element support
- * 2002-07-02 JG added GetPoolChild, GetPoolChildren
- * 2002-07-02 JG added CopyNodeData
- * 2002-07-02 JG added GetAncestorAttribute(), HasAncestorAttribute()
+ * 2002-07-02 JG added Part element support 2002-07-02 JG added GetPoolChild, GetPoolChildren 2002-07-02 JG added CopyNodeData 2002-07-02 JG added GetAncestorAttribute(), HasAncestorAttribute()
  * 2002-07-02 JG added GetAncestorElement(), HasAncestorElement()
  *
  */
@@ -100,19 +63,20 @@ import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFAttributeMapArray;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 
 /**
- * 
+ *
  * Description: This class represents an JDFAncestorPool
- * 
+ *
  * @author Torsten Kaehlert
- * 
+ *
  * @version 1.0 2002-01-28
- * 
+ *
  */
 public class JDFAncestorPool extends JDFAutoAncestorPool
 {
@@ -120,50 +84,50 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
 	/**
 	 * Constructor for JDFAncestorPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFAncestorPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFAncestorPool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAncestorPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFAncestorPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFAncestorPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAncestorPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFAncestorPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFAncestorPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * searches for the first attribute occurence in the ancestor elements
-	 * 
+	 *
 	 * @param attrib the attribute name
 	 * @param nameSpaceURI the XML-namespace
 	 * @param def the default if it does not exist
 	 * @since 180502
 	 * @return value of attribute found, value of def if not available
 	 */
-	public String getAncestorAttribute(String attrib, String nameSpaceURI, String def)
+	public String getAncestorAttribute(final String attrib, final String nameSpaceURI, final String def)
 	{
 		final VElement v = getPoolChildren(null);
 
@@ -182,30 +146,30 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
 	/**
 	 * @deprecated
-	 * 
+	 *
 	 * @param element
 	 * @param nameSpaceURI
 	 * @return an element
 	 */
 	@Deprecated
-	public KElement getAncestorElement(String element, String nameSpaceURI)
+	public KElement getAncestorElement(final String element, final String nameSpaceURI)
 	{
 		return getAncestorElement(element, nameSpaceURI, null);
 	}
 
 	/**
 	 * searches for the first element occurence in the ancestor elements
-	 * 
+	 *
 	 * @param element the element name
 	 * @param nameSpaceURI the XML-namespace of the element
 	 * @param xPath the xpath of a required attribute
 	 * @since 290502
 	 * @return value of attribute found, empty string if not available
 	 */
-	public KElement getAncestorElement(String element, String nameSpaceURI, String xPath)
+	public KElement getAncestorElement(final String element, final String nameSpaceURI, final String xPath)
 	{
 		final VElement v = getPoolChildren(null);
-		boolean bWildCard = isWildCard(xPath);
+		final boolean bWildCard = isWildCard(xPath);
 		// the last in list is the direct parent, the first is the original root
 		for (int i = v.size() - 1; i >= 0; i--)
 		{
@@ -220,28 +184,28 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
 	/**
 	 * true id a non default occurence in the ancestor elements exists
-	 * 
+	 *
 	 * @param attrib the attribute name
 	 * @param nameSpaceURI the XML-namespace
 	 * @since 180502
 	 * @return value of attribute found, empty string if not available
 	 */
-	public boolean hasAncestorElement(String attrib, String nameSpaceURI)
+	public boolean hasAncestorElement(final String attrib, final String nameSpaceURI)
 	{
 		return getAncestorElement(attrib, nameSpaceURI, null) != null;
 	}
 
 	/**
 	 * Get the linked resources matching some conditions
-	 * 
+	 *
 	 * @param mResAtt map of Resource attributes to search for
 	 * @param bFollowRefs true if internal references shall be followed
-	 * 
+	 *
 	 * @return vResource: vector with all elements matching the conditions
-	 * 
+	 *
 	 *         default: GetLinkedResources(new JDFAttributeMap(), false)
 	 */
-	public VElement getLinkedResources(JDFAttributeMap mResAtt, boolean bFollowRefs)
+	public VElement getLinkedResources(final JDFAttributeMap mResAtt, final boolean bFollowRefs)
 	{
 		final VElement vChild = getPoolChildren(mResAtt);
 		final VElement vElem = new VElement();
@@ -255,26 +219,26 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
 	/**
 	 * Copy all data from rootNode into the Ancestor elements of this
-	 * 
+	 *
 	 * @param parentNode the closest parent Node that contains the information to be copied
 	 * @deprecated use public void copyNodeData (JDFNode parentNode, false, false) instead
 	 */
 	@Deprecated
-	public void copyNodeData(JDFNode parentNode)
+	public void copyNodeData(final JDFNode parentNode)
 	{
 		copyNodeData(parentNode, true, true, true);
 	}
 
 	/**
 	 * Copy all data from parentNode into the ancestor elements of this
-	 * 
+	 *
 	 * @param parentNode the closest parent Node that contains the information to be copied
 	 * @param bCopyNodeInfo if true, also copy the NodeInfo into the ancestor
 	 * @param bCopyCustomerInfo if true, also copy the CustomerInfo into the ancestor
 	 * @param bCopyComments if true, also copy the comments and generalID elements into the ancestor
 	 * @default copyNodeData(parentNode, false, false, false);
 	 */
-	public void copyNodeData(JDFNode parentNode, boolean bCopyNodeInfo, boolean bCopyCustomerInfo, boolean bCopyComments)
+	public void copyNodeData(final JDFNode parentNode, final boolean bCopyNodeInfo, final boolean bCopyCustomerInfo, final boolean bCopyComments)
 	{
 		final VElement vAncestors = getPoolChildren(null);
 		JDFNode node = parentNode;
@@ -304,7 +268,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 						if (nodeInfo.getParentNode_KElement() instanceof JDFResourcePool)
 						{
 							// add a low level refelement, the copying takes place in addspawnedresources
-							JDFRefElement re = (JDFRefElement) ancestor.appendElement(ElementName.NODEINFO + JDFConstants.REF);
+							final JDFRefElement re = (JDFRefElement) ancestor.appendElement(ElementName.NODEINFO + JDFConstants.REF);
 							re.setrRef(nodeInfo.getID());
 							re.setPartMap(nodeInfo.getPartMap());
 						}
@@ -323,7 +287,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 						if (customerInfo.getParentNode_KElement() instanceof JDFResourcePool)
 						{
 							// add a low level refelement, the copying takes place inaddspawnedresources
-							JDFRefElement re = (JDFRefElement) ancestor.appendElement(ElementName.CUSTOMERINFO + JDFConstants.REF);
+							final JDFRefElement re = (JDFRefElement) ancestor.appendElement(ElementName.CUSTOMERINFO + JDFConstants.REF);
 							re.setrRef(customerInfo.getID());
 							re.setPartMap(customerInfo.getPartMap());
 						}
@@ -336,20 +300,20 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
 				if (bCopyComments)
 				{
-					Vector<JDFComment> vc = node.getChildrenByClass(JDFComment.class, false, 0);
-					for (KElement comment : vc)
+					final Vector<JDFComment> vc = node.getChildrenByClass(JDFComment.class, false, 0);
+					for (final KElement comment : vc)
 					{
 						ancestor.copyElement(comment, null);
 					}
-					Vector<JDFGeneralID> vgid = node.getChildrenByClass(JDFGeneralID.class, false, 0);
-					for (KElement generalid : vgid)
+					final Vector<JDFGeneralID> vgid = node.getChildrenByClass(JDFGeneralID.class, false, 0);
+					for (final KElement generalid : vgid)
 					{
 						ancestor.copyElement(generalid, null);
 					}
 				}
 			}
 
-			JDFNode node2 = node.getParentJDF();
+			final JDFNode node2 = node.getParentJDF();
 
 			// 100602 RP added i--
 			if (node2 == null)
@@ -382,34 +346,34 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
 	/**
 	 * Gets all children with the attribute out of the pool
-	 * 
+	 *
 	 * @param mAttrib the attribute to search for
 	 * @return VElement: a vector with all elements in the pool matching the conditions
-	 * 
+	 *
 	 *         default: GetPoolChildren(null)
 	 */
-	public VElement getPoolChildren(JDFAttributeMap mAttrib)
+	public VElement getPoolChildren(final JDFAttributeMap mAttrib)
 	{
 		return getPoolChildrenGeneric(ElementName.ANCESTOR, mAttrib, null);
 	}
 
 	/**
 	 * get a child from the pool matching the parameters
-	 * 
+	 *
 	 * @param i the index of the child or -1 to make a new one.
 	 * @param mAttrib an attribute to search for
 	 * @return JDFAncestor: the pool child matching the above conditions
-	 * 
+	 *
 	 *         default: GetPoolChild(i, null)
 	 */
-	public JDFAncestor getPoolChild(int i, JDFAttributeMap mAttrib)
+	public JDFAncestor getPoolChild(final int i, final JDFAttributeMap mAttrib)
 	{
 		return (JDFAncestor) getPoolChildGeneric(i, ElementName.ANCESTOR, mAttrib, JDFConstants.EMPTYSTRING);
 	}
 
 	/**
 	 * get part map vector
-	 * 
+	 *
 	 * @return VJDFAttributeMap: vector of mAttribute, one for each part
 	 */
 	@Override
@@ -419,59 +383,70 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 	}
 
 	/**
+	 * get part map array
+	 *
+	 * @return array of attribute, one for each part
+	 */
+	@Override
+	public JDFAttributeMapArray getPartMapArray()
+	{
+		return super.getPartMapArray();
+	}
+
+	/**
 	 * set all parts to those define in vParts
-	 * 
+	 *
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
-	public void setPartMapVector(VJDFAttributeMap vParts)
+	public void setPartMapVector(final VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
 	}
 
 	/**
 	 * set all parts to those define in vParts
-	 * 
+	 *
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
-	public void setPartMap(JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
 	}
 
 	/**
 	 * remove the part defined in mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
-	public void removePartMap(JDFAttributeMap mPart)
+	public void removePartMap(final JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
 	}
 
 	/**
 	 * check whether the part defined in mPart is included
-	 * 
+	 *
 	 * @param mPart attribute map for the part to remove
 	 * @return true if the part exists
 	 */
 	@Override
-	public boolean hasPartMap(JDFAttributeMap mPart)
+	public boolean hasPartMap(final JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);
 	}
 
 	/**
 	 * check whether a defined attribute exists in the ancestor elements
-	 * 
+	 *
 	 * @param attrib the attribute name to look for
 	 * @param nameSpaceURI the XML-namespace to search in
 	 * @since 180502
 	 * @return value of attribute found, empty string if not available
 	 */
-	public boolean hasAncestorAttribute(String attrib, String nameSpaceURI)
+	public boolean hasAncestorAttribute(final String attrib, final String nameSpaceURI)
 	{
 		return getAncestorAttribute(attrib, nameSpaceURI, null) != null;
 	}
@@ -479,7 +454,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 	/**
 	 * searches for the first attribute occurence in the ancestor elements subelements<br>
 	 * e.g. the JobPriority in NodeInfo
-	 * 
+	 *
 	 * @param element node name to look in
 	 * @param attrib the attribute name
 	 * @param nameSpaceURI the XML-namespace
@@ -487,7 +462,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 	 * @since 200503
 	 * @return value of attribute found, empty string if not available
 	 */
-	public String getAncestorElementAttribute(String element, String attrib, String nameSpaceURI, String def)
+	public String getAncestorElementAttribute(final String element, final String attrib, final String nameSpaceURI, final String def)
 	{
 		final VElement v = getPoolChildren(null);
 		// the last in list is the direct parent, the first is the original root
@@ -506,7 +481,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
 	/**
 	 * check whether the Ancestor pool contains any part elements
-	 * 
+	 *
 	 * @return true if the pool comtains part elements
 	 */
 	public boolean isPartitioned()

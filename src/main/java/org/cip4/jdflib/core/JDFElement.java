@@ -97,6 +97,7 @@ import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFAttributeMapArray;
 import org.cip4.jdflib.datatypes.JDFNameRange;
 import org.cip4.jdflib.datatypes.JDFNumList;
 import org.cip4.jdflib.datatypes.JDFRange;
@@ -3320,7 +3321,8 @@ public class JDFElement extends KElement
 	 *
 	 * @default getChildrenByTagName(s,null,null, false, true, 0)
 	 */
-	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize, final boolean bFollowRefs)
+	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize,
+			final boolean bFollowRefs)
 	{
 		final VElement v = super.getChildrenByTagName_KElement(bFollowRefs ? null : elementName, nameSpaceURI, mAttrib, bDirect, bAnd, bFollowRefs ? -1 : maxSize);
 
@@ -3421,7 +3423,7 @@ public class JDFElement extends KElement
 						// be null and will be skipped
 						if (target != null)
 						{ // we want the jdfElem version of IncludesAttributes,
-								// so we must upcast
+							// so we must upcast
 							if (bMapEmpty || target.includesAttributes(mAttrib, bAnd))
 							{
 								v.addElement(target);
@@ -4675,16 +4677,29 @@ public class JDFElement extends KElement
 	 */
 	protected VJDFAttributeMap getPartMapVector()
 	{
-		final VElement vE = getChildElementVector(ElementName.PART, null, null, true, 0, false);
-
-		final int size = vE.size();
-		final VJDFAttributeMap v = size == 0 ? null : new VJDFAttributeMap();
-		for (int i = 0; i < size; i++)
+		final List<JDFPart> vE = getChildArrayByClass(JDFPart.class, false, 0);
+		final VJDFAttributeMap v = ContainerUtil.isEmpty(vE) ? null : new VJDFAttributeMap();
+		for (final JDFPart part : vE)
 		{
-			final JDFPart part = (JDFPart) vE.elementAt(i);
 			v.add(part.getPartMap());
 		}
 		return v;
+	}
+
+	/**
+	 * GetPartMapVector returns a vector of partmaps, null if no parts are present
+	 *
+	 * @return Vector
+	 */
+	protected JDFAttributeMapArray getPartMapArray()
+	{
+		final List<JDFPart> aPart = getChildArrayByClass(JDFPart.class, false, 0);
+		final JDFAttributeMapArray a = ContainerUtil.isEmpty(aPart) ? null : new JDFAttributeMapArray();
+		for (final JDFPart pt : aPart)
+		{
+			a.add(pt.getPartMap());
+		}
+		return a;
 	}
 
 	/**
@@ -4694,7 +4709,7 @@ public class JDFElement extends KElement
 	 */
 	protected JDFAttributeMap getPartMap()
 	{
-		final JDFPart p = (JDFPart) getElement(ElementName.PART, null, 0);
+		final JDFPart p = getElementByClass(JDFPart.class, 0, false);
 		if (p == null)
 		{
 			return null;
@@ -4728,7 +4743,7 @@ public class JDFElement extends KElement
 	 */
 	protected void setPartMap(final JDFAttributeMap mPart)
 	{
-		removeChildren(ElementName.PART, null, null);
+		removeChildrenByClass(JDFPart.class);
 		if (!JDFAttributeMap.isEmpty(mPart))
 		{
 			final KElement p = appendElement(ElementName.PART, null);
@@ -4743,17 +4758,20 @@ public class JDFElement extends KElement
 	 */
 	protected void removePartMap(final JDFAttributeMap mPart)
 	{
-		final VElement vE = getChildElementVector(ElementName.PART, null, null, true, 0, false);
+		final List<JDFPart> aPart = getChildArrayByClass(JDFPart.class, false, 0);
 
-		final int size = vE.size();
-		for (int i = 0; i < size; i++)
+		int i = 0;
+		for (final KElement p : aPart)
 		{
-			final KElement e_i = (vE.elementAt(i));
-			final JDFAttributeMap a_Map = e_i.getAttributeMap();
+			final JDFAttributeMap a_Map = p.getAttributeMap();
 
 			if (a_Map.subMap(mPart))
 			{
-				vE.remove(i);
+				aPart.remove(i);
+			}
+			else
+			{
+				i++;
 			}
 		}
 	}
@@ -4766,15 +4784,11 @@ public class JDFElement extends KElement
 	 */
 	protected boolean hasPartMap(final JDFAttributeMap mPart)
 	{
-		final VElement vE = getChildElementVector(ElementName.PART, null, null, true, 0, false);
-
-		final int size = vE.size();
-		for (int i = 0; i < size; i++)
+		final List<JDFPart> aPart = getChildArrayByClass(JDFPart.class, false, 0);
+		for (final KElement part : aPart)
 		{
-			final KElement e_i = (vE.elementAt(i));
-			final JDFAttributeMap a_Map = e_i.getAttributeMap();
-
-			if (a_Map.subMap(mPart))
+			final JDFAttributeMap map = part.getAttributeMap();
+			if (map.subMap(mPart))
 			{
 				return true;
 			}
@@ -5623,14 +5637,12 @@ public class JDFElement extends KElement
 				continue;
 			}
 
-			if (((EnumPoolType.ResourcePool.equals(poolType)) || (EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType)))
-					&& e instanceof JDFResource)
+			if (((EnumPoolType.ResourcePool.equals(poolType)) || (EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType))) && e instanceof JDFResource)
 			{
 				continue;
 			}
 
-			if (((EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.RefElement.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType)))
-					&& e instanceof JDFRefElement)
+			if (((EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.RefElement.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType))) && e instanceof JDFRefElement)
 			{
 				continue;
 			}
@@ -6179,7 +6191,8 @@ public class JDFElement extends KElement
 	 *
 	 * @default getChildWithMatchingAttribute(nodeName, attName, null, null, 0, true, EnumAttributeType.Any);
 	 */
-	public JDFElement getChildWithMatchingAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index, final boolean bDirect, final AttributeInfo.EnumAttributeType dataType)
+	public JDFElement getChildWithMatchingAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index, final boolean bDirect,
+			final AttributeInfo.EnumAttributeType dataType)
 	{
 		final VElement v = getChildrenByTagName(nodeName, nameSpaceURI, null, bDirect, true, 0);
 		final int siz = v.size();

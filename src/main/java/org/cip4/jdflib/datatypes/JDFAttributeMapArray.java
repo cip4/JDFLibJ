@@ -330,15 +330,15 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	 */
 	public int maxSize()
 	{
-		int maxSize = 0;
+		int mx = 0;
 		for (final JDFAttributeMap map : this)
 		{
-			if (map != null && map.size() > maxSize)
+			if (map != null)
 			{
-				maxSize = map.size();
+				mx = Math.max(mx, map.size());
 			}
 		}
-		return maxSize;
+		return mx;
 	}
 
 	/**
@@ -348,24 +348,17 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	 */
 	public int minSize()
 	{
-		int minSize = 9999999;
-		if (size() > 0)
+		int minSize = isEmpty() ? 0 : Integer.MAX_VALUE;
+		for (final JDFAttributeMap map : this)
 		{
-			for (final JDFAttributeMap map : this)
+			if (map != null)
 			{
-				if (map != null && map.size() < minSize)
+				minSize = Math.min(minSize, map.size());
+				if (minSize == 0)
 				{
-					minSize = map.size();
-					if (minSize == 0)
-					{
-						break;
-					}
+					break;
 				}
 			}
-		}
-		else
-		{
-			minSize = 0;
 		}
 		return minSize;
 	}
@@ -468,7 +461,7 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	 */
 	public JDFAttributeMap getCommonMap()
 	{
-		final JDFAttributeMap newMap = new JDFAttributeMap();
+		final JDFAttributeMap nm = new JDFAttributeMap();
 
 		if (isEmpty())
 		{
@@ -476,33 +469,41 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 		}
 		else if (size() == 1)
 		{
-			return get(0).clone();
+			return new JDFAttributeMap(get(0));
 		}
 
-		final JDFAttributeMap map0 = get(0);
-		final StringArray keys = map0.getKeyList();
-		for (final String key : keys)
+		final JDFAttributeMap m0 = get(0);
+		final StringArray keyList = m0.getKeyList();
+		for (final String key : keyList)
 		{
-			String val0 = map0.get(key);
-			if (val0 != null)
+			String target = m0.get(key);
+			if (target != null)
 			{
-				for (final JDFAttributeMap map : this)
+				for (final JDFAttributeMap m : this)
 				{
-					final String val = map.get(key);
-					if (!val0.equals(val))
+					final String val = m.get(key);
+					if (!target.equals(val))
 					{
-						val0 = null;
+						target = null;
 						break;
 					}
 				}
-				if (val0 != null)
+				if (target != null)
 				{
-					newMap.put(key, val0);
+					nm.put(key, target);
 				}
 			}
 		}
 
-		return newMap;
+		return nm;
+	}
+
+	/**
+	 * unify - make VElement unique, retaining initial order
+	 */
+	public void unify()
+	{
+		ContainerUtil.unify(this);
 	}
 
 	/**
@@ -512,14 +513,6 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	public void appendUnique(final JDFAttributeMap map)
 	{
 		ContainerUtil.appendUnique(this, map);
-	}
-
-	/**
-	 * unify - make VElement unique, retaining initial order
-	 */
-	public void unify()
-	{
-		ContainerUtil.unify(this);
 	}
 
 	/**
@@ -736,17 +729,6 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	}
 
 	/**
-	 * hashCode complements equals() to fulfill the equals/hashCode contract
-	 *
-	 * @return int
-	 */
-	@Override
-	public int hashCode()
-	{
-		return HashUtil.hashCode(0, this);
-	}
-
-	/**
 	 * put the key value pair into all entries
 	 *
 	 * @param key the key to set - may be either String or Enum
@@ -755,7 +737,7 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	 */
 	public void put(final Object key, final Object value)
 	{
-		String s1 = null;
+		final String s1;
 		if (key instanceof String)
 		{
 			s1 = (String) key;
@@ -764,8 +746,12 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 		{
 			s1 = ((ValuedEnum) key).getName();
 		}
+		else
+		{
+			s1 = null;
+		}
 
-		String s2 = null;
+		String s2;
 		if (value instanceof String)
 		{
 			s2 = (String) value;
@@ -773,6 +759,10 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 		else if (value instanceof ValuedEnum)
 		{
 			s2 = ((ValuedEnum) value).getName();
+		}
+		else
+		{
+			s2 = null;
 		}
 
 		if (s1 != null && s2 != null)
@@ -783,6 +773,17 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 		{
 			throw new IllegalArgumentException("wrong key and value types in put: " + key + " " + value);
 		}
+	}
+
+	/**
+	 * hashCode complements equals() to fulfill the equals/hashCode contract
+	 *
+	 * @return int
+	 */
+	@Override
+	public int hashCode()
+	{
+		return HashUtil.hashCode(42, this);
 	}
 
 	/**

@@ -61,6 +61,7 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResourceLink;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFAttributeMapArray;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.IAmountPoolContainer;
@@ -1933,6 +1934,17 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	public VJDFAttributeMap getPartMapVector()
 	{
 		return super.getPartMapVector();
+	}
+
+	/**
+	 * get part map array
+	 *
+	 * @return array of attribute, one for each part
+	 */
+	@Override
+	public JDFAttributeMapArray getPartMapArray()
+	{
+		return super.getPartMapArray();
 	}
 
 	/**

@@ -64,6 +64,15 @@ import org.junit.Test;
  */
 public class JDFAttributeMapArrayTest extends JDFTestCaseBase
 {
+	@Test
+	public void testGetArray()
+	{
+		assertNull(JDFAttributeMapArray.getArray(null));
+		assertNull(JDFAttributeMapArray.getArray(new JDFAttributeMap()));
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		assertEquals(m1, JDFAttributeMapArray.getArray(m1).get(0));
+	}
+
 	/**
 	 * tests clone
 	 */
