@@ -37,7 +37,7 @@
  */
 /**
  * ========================================================================== class JDFJobPhase extends JDFResource ==========================================================================
- * 
+ *
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED Warning! very preliminary test version. Interface subject to change without prior notice! Revision history: ...
  **/
 
@@ -204,36 +204,36 @@ public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
 	}
 
 	/**
-	 * set all parts to those defined in vParts
-	 *
-	 * @param vParts vector of attribute maps for the parts
-	 */
-	@Override
-	public void setPartMapVector(final VJDFAttributeMap vParts)
-	{
-		super.setPartMapVector(vParts);
-	}
-
-	/**
 	 * set part to the one defined in mPart
 	 *
-	 * @param mPart attribute map for the part to set
+	 * @param m attribute map for the part to set
 	 */
 	@Override
-	public void setPartMap(final JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap m)
 	{
-		super.setPartMap(mPart);
+		super.setPartMap(m);
 	}
 
 	/**
 	 * remove the part defined in mPart
 	 *
-	 * @param mPart attribute map for the part to remove
+	 * @param mP attribute map for the part to remove
 	 */
 	@Override
-	public void removePartMap(final JDFAttributeMap mPart)
+	public void removePartMap(final JDFAttributeMap mP)
 	{
-		super.removePartMap(mPart);
+		super.removePartMap(mP);
+	}
+
+	/**
+	 * set all parts to those defined in vParts
+	 *
+	 * @param vP vector of attribute maps for the parts
+	 */
+	@Override
+	public void setPartMapVector(final VJDFAttributeMap vP)
+	{
+		super.setPartMapVector(vP);
 	}
 
 	/**
@@ -270,7 +270,7 @@ public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
 
 	/**
 	 * apply all values of a JDF Node to this
-	 * 
+	 *
 	 * @param node the node to apply
 	 */
 	public void applyNode(final JDFNode node)
