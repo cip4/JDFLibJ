@@ -147,8 +147,8 @@ public class JDFAttributeMap extends HashMap<String, String>
 			sep = JDFConstants.EMPTYSTRING;
 		}
 		final StringBuilder sb = new StringBuilder();
-		final VString vsKeys = getKeys();
-		vsKeys.sort();
+		final StringArray vsKeys = getKeyList();
+		vsKeys.sort(null);
 		int k = 0;
 		for (final String strKey : vsKeys)
 		{

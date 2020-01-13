@@ -572,7 +572,7 @@ public class WalkXJDFResource extends WalkXElement
 			part.setSignatureName(signatureName);
 		}
 		p.renameKey(AttributeName.METADATA, AttributeName.METADATA0);
-		final VString keys = p.getKeys();
+		final List<String> keys = p.getKeyList();
 		for (final String key : keys)
 		{
 			if (EnumPartIDKey.getEnum(key) == null)

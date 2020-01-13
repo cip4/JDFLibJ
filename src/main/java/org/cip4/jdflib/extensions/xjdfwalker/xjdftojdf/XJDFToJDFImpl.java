@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,6 +40,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
@@ -487,7 +488,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		{
 			final JDFAttributeMap map = e.getAttributeMap();
 			final JDFElement ir = (JDFElement) e;
-			final VString keys = map.getKeys();
+			final List<String> keys = map.getKeyList();
 			final VString knownElements = ir.knownElements();
 			for (final String name : keys)
 			{

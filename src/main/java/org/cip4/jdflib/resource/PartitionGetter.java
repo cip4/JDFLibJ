@@ -166,7 +166,7 @@ public class PartitionGetter
 	{
 		partMap = partMap.clone();
 		partMap.reduceMap(leafMap.getPartIDKeys());
-		partMap.removeKeys(current.getKeys());
+		partMap.removeKeys(current.keySet());
 		return !partMap.isEmpty();
 	}
 

@@ -1497,16 +1497,13 @@ public class JDFSpawn
 			return true;
 		}
 
-		final VString keys = testMap.getKeys();
-		final int ks = keys.size();
-
-		for (int i = 0; i < vSpawnParts.size(); i++)
+		final Set<String> keys = testMap.keySet();
+		for (final JDFAttributeMap map : vSpawnParts)
 		{
 			boolean bOK = true;
-			final JDFAttributeMap map = vSpawnParts.elementAt(i);
-			for (int j = 0; j < ks; j++)
+
+			for (final String key : keys)
 			{
-				final String key = keys.get(j);
 				final String linkValue = map.get(key);
 				if (linkValue != null && !JDFPart.matchesPart(key, testMap.get(key), linkValue, false))
 				{
@@ -1519,7 +1516,7 @@ public class JDFSpawn
 				return true;
 			}
 		}
-		return ks <= 0;
+		return keys.isEmpty();
 	}
 
 	/**

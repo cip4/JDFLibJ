@@ -149,7 +149,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		assertNotNull(nested_spawn_node);
 		final JDFMerge merge = new JDFMerge(subjdfDocRoot);
 
-		// this is the feature taht is being tested..
+		// this is the feature that is being tested..
 		merge.bUpdateStati = true;
 		final JDFNode nodeM = merge.mergeJDF(nested_spawn_node, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
 		assertNotNull(nodeM);

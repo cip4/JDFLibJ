@@ -44,7 +44,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNameRange;
 import org.cip4.jdflib.datatypes.JDFNameRangeList;
@@ -202,7 +201,7 @@ public class WalkElement extends BaseWalker
 	{
 		if (jdfToXJDF.isConvertTilde() && map != null)
 		{
-			final VString keys = map.getKeys();
+			final List<String> keys = map.getKeyList();
 			for (final String key : keys)
 			{
 				if (EnumAttributeType.isRange(jdf.getAtrType(key)))

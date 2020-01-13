@@ -1110,7 +1110,7 @@ public class JDFMerge
 				{
 					final JDFPartAmount mainPartAmount = mainLink.getCreateAmountPool().getCreatePartAmount(subLinkParts.elementAt(i));
 					mainPartAmount.setAttributes(subLinkMap);
-					mainLink.removeAttributes(subLinkMap.getKeys());
+					mainLink.removeAttributes(subLinkMap.keySet());
 				}
 			}
 			else

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -1013,14 +1013,14 @@ class XPathHelper
 		VElement vRet = new VElement();
 		if (v != null && v.size() > 0)
 		{
-			if (map != null && map.size() > 0)
+			if (!JDFAttributeMap.isEmpty(map))
 			{
-				final VString keys = map.getKeys();
+				final Set<String> keys = map.keySet();
 				for (final String key : keys)
 				{
 					for (final KElement e : v)
 					{
-						if (e.getXPathAttribute(key, "").equals(map.get(key)))
+						if (e.getXPathAttribute(key, JDFConstants.EMPTYSTRING).equals(map.get(key)))
 						{
 							vRet.add(e);
 						}
@@ -1034,7 +1034,7 @@ class XPathHelper
 		}
 		else if (map != null && create)
 		{
-			final VString keys = map.getKeys();
+			final Set<String> keys = map.keySet();
 			final KElement e = theElement.appendElement(newPath);
 			for (final String key : keys)
 			{
