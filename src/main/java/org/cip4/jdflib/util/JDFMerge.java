@@ -1128,7 +1128,7 @@ public class JDFMerge
 						final JDFAttributeMap subPartMap = subPartAmount.getPartMap();
 						final JDFPartAmount mainPartAmount = mainLink.getCreateAmountPool().getCreatePartAmount(subPartMap);
 						mainPartAmount.setAttributes(subAmountMap);
-						mainLink.removeAttributes(subAmountMap.getKeys());
+						mainLink.removeAttributes(subAmountMap.keySet());
 					}
 				}
 			}
