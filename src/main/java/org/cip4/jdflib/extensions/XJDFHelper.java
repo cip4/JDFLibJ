@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -132,7 +132,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 		super();
 		if (xjdf == null)
 		{
-			newXJDF(EnumVersion.Version_2_0);
+			newXJDF(getDefaultVersion());
 		}
 		else
 		{
@@ -201,7 +201,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	void newXJDF(EnumVersion version)
 	{
 		if (version == null)
-			version = EnumVersion.Version_2_0;
+			version = getDefaultVersion();
 
 		final JDFDoc doc = new JDFDoc(XJDFConstants.XJDF, version);
 		doc.setInitOnCreate(false);

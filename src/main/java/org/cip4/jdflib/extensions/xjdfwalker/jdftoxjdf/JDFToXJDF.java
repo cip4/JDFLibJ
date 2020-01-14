@@ -59,6 +59,7 @@ import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.elementwalker.IWalker;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
 import org.cip4.jdflib.elementwalker.RemoveEmpty;
+import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.XJMFHelper;
@@ -81,7 +82,7 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFToXJDF extends PackageElementWalker
 {
-	private static EnumVersion defaultVersion = EnumVersion.Version_2_0;
+	private static EnumVersion defaultVersion = BaseXJDFHelper.getDefaultVersion();
 
 	public static void setDefaultVersion(final EnumVersion v)
 	{

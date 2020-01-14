@@ -65,6 +65,7 @@ import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.IWalker;
 import org.cip4.jdflib.extensions.AuditPoolHelper;
+import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.MessageResourceHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
@@ -159,7 +160,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 */
 	public void setNewVersion(final EnumVersion newVersion)
 	{
-		this.newVersion = newVersion == null ? EnumVersion.Version_2_0 : newVersion;
+		this.newVersion = newVersion == null ? BaseXJDFHelper.getDefaultVersion() : newVersion;
 	}
 
 	/**

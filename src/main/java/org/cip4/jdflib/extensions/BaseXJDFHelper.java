@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,6 +41,7 @@ import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.util.ContainerUtil;
 
@@ -52,6 +53,23 @@ import org.cip4.jdflib.util.ContainerUtil;
 public abstract class BaseXJDFHelper
 {
 	protected final static Log log = LogFactory.getLog(BaseXJDFHelper.class);
+	private static EnumVersion defaultVersion = EnumVersion.Version_2_0;
+
+	/**
+	 * @return the defaultVersion
+	 */
+	public static EnumVersion getDefaultVersion()
+	{
+		return defaultVersion;
+	}
+
+	/**
+	 * @param defaultVersion the defaultVersion to set
+	 */
+	public static void setDefaultVersion(final EnumVersion defaultVersion)
+	{
+		BaseXJDFHelper.defaultVersion = defaultVersion;
+	}
 
 	/**
 	 *
@@ -139,7 +157,7 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 * reorder elements in their canonical order - usually nop
-	 * 
+	 *
 	 * @deprecated use cleanup
 	 */
 	@Deprecated
