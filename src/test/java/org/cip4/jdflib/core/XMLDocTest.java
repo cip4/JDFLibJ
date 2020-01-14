@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,7 +90,6 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.util.ByteArrayIOStream;
-import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.PlatformUtil;
@@ -340,6 +339,24 @@ public class XMLDocTest extends JDFTestCaseBase
 		final XMLDoc doc = new XMLDoc("test", null);
 		doc.setXSLTURL("a.b");
 		assertEquals("a.b", doc.getXSLTURL());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSetRoot()
+	{
+		final XMLDoc doc = new XMLDoc("test", null);
+		try
+		{
+			doc.setRoot("a", "b");
+			fail("must bang");
+		}
+		catch (final Exception e)
+		{
+
+		}
 	}
 
 	/**
