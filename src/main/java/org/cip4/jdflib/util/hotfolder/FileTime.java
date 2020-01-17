@@ -76,7 +76,7 @@ class FileTime
 
 	protected long lastModified()
 	{
-		return ((f == null) || !f.canWrite() || !f.canExecute()) ? 0 : f.lastModified();
+		return ((f == null) || !f.canWrite()) ? 0 : f.lastModified();
 	}
 
 	@Override
