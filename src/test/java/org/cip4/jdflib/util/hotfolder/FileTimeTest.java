@@ -38,11 +38,14 @@
  */
 package org.cip4.jdflib.util.hotfolder;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.Test;
 
 public class FileTimeTest extends JDFTestCaseBase
@@ -52,6 +55,25 @@ public class FileTimeTest extends JDFTestCaseBase
 	public void testExists()
 	{
 		assertTrue(new FileTime(new File(sm_dirTestData)).exists());
+	}
+
+	@Test
+	public void testmodified()
+	{
+		final FileTime ft = new FileTime(new File(sm_dirTestData));
+		final long updateModified = ft.updateModified();
+		assertEquals(System.currentTimeMillis(), updateModified, 1000);
+		ThreadUtil.sleep(400);
+		assertEquals(updateModified, ft.updateModified(), 100);
+	}
+
+	@Test
+	public void testSameModified()
+	{
+		final FileTime ft = new FileTime(new File(sm_dirTestData));
+		assertFalse(ft.sameModified());
+		ft.updateModified();
+		assertTrue(ft.sameModified());
 	}
 
 }

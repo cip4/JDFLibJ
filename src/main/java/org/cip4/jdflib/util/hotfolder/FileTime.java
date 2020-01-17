@@ -59,9 +59,10 @@ class FileTime
 		modified = -1;
 	}
 
-	protected void updateModified()
+	protected long updateModified()
 	{
-		modified = lastModified();
+		modified = (modified <= 0) ? System.currentTimeMillis() : Math.max(modified, lastModified());
+		return modified;
 	}
 
 	protected boolean exists()
@@ -71,7 +72,8 @@ class FileTime
 
 	protected boolean sameModified()
 	{
-		return modified > 0 && modified == lastModified();
+		final long lastModified = lastModified();
+		return lastModified > 0 && modified >= lastModified;
 	}
 
 	protected long lastModified()
