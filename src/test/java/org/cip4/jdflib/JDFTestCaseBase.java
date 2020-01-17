@@ -515,7 +515,7 @@ public abstract class JDFTestCaseBase
 
 	protected void writeRoundTrip(final JDFElement root, final String fileBase)
 	{
-		writeRoundTrip(root, fileBase, EnumVersion.Version_2_0);
+		writeRoundTrip(root, fileBase, BaseXJDFHelper.getDefaultVersion());
 	}
 
 	/**

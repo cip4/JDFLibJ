@@ -366,6 +366,31 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	public synchronized void testStabilize() throws Exception
+	{
+		hf = new HotFolder(theHF, null, new MyListener(true));
+		hf.setStabilizeTime(3333);
+		ThreadUtil.sleep(300); // time to start up
+		final File file = new File(theHF + File.separator + "f123.txt");
+		file.createNewFile();
+		assertTrue(file.exists());
+		final long t0 = System.currentTimeMillis();
+		for (int i = 0; i < 420; i++)
+		{
+			ThreadUtil.sleep(100);
+			if (!file.exists())
+				break;
+		}
+		assertFalse(file.exists());
+
+		assertTrue(System.currentTimeMillis() - t0 > 3000);
+		hf.stop();
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	public synchronized void testDir() throws Exception
 	{
 		hf = new HotFolder(theHF, ".txt", new MyListener(true));

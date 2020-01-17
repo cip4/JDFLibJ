@@ -344,7 +344,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	public EnumVersion getNewVersion()
 	{
-		return newVersion == null ? EnumVersion.Version_2_0 : newVersion;
+		return newVersion == null ? getDefaultVersion() : newVersion;
 	}
 
 	/**

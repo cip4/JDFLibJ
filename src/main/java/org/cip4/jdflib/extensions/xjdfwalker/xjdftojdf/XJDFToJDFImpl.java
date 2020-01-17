@@ -66,6 +66,7 @@ import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
+import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder;
@@ -621,6 +622,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		final EnumVersion v = getVersion();
 		if (EnumVersion.Version_1_7.equals(v))
 			return EnumVersion.Version_2_1;
-		return EnumVersion.Version_2_0;
+		return BaseXJDFHelper.getDefaultVersion();
 	}
 }
