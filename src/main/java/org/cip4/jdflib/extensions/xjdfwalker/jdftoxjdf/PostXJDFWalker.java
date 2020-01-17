@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -2824,15 +2824,19 @@ class PostXJDFWalker extends BaseElementWalker
 				{
 					final KElement ni = nih.getCreateResource();
 					final KElement gangSrc = ni.getCreateChildWithAttribute(ElementName.GANGSOURCE, XJDFConstants.BinderySignatureID, null, bsName, 0);
-					gangSrc.moveAttribute(AttributeName.JOBID, strippingParams);
-					final ProductHelper ph = getProduct(jobID, bsName);
-					if (ph != null)
+					if (!gangSrc.hasNonEmpty(AttributeName.JOBID))
+						gangSrc.moveAttribute(AttributeName.JOBID, strippingParams);
+					if (!gangSrc.hasNonEmpty(AttributeName.COPIES))
 					{
-						gangSrc.setAttribute(AttributeName.COPIES, ph.getAmount(), null);
-					}
-					else
-					{
-						gangSrc.setAttribute(AttributeName.COPIES, 0, null);
+						final ProductHelper ph = getProduct(jobID, bsName);
+						if (ph != null)
+						{
+							gangSrc.setAttribute(AttributeName.COPIES, ph.getAmount(), null);
+						}
+						else
+						{
+							gangSrc.setAttribute(AttributeName.COPIES, 0, null);
+						}
 					}
 				}
 			}

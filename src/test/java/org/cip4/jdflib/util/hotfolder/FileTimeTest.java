@@ -43,8 +43,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.FileOutputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.Test;
 
@@ -65,6 +67,32 @@ public class FileTimeTest extends JDFTestCaseBase
 		assertEquals(System.currentTimeMillis(), updateModified, 1000);
 		ThreadUtil.sleep(400);
 		assertEquals(updateModified, ft.updateModified(), 100);
+	}
+
+	@Test
+	public void testmodifiedFile() throws Exception
+	{
+		final File dummy = new File(sm_dirTestDataTemp + "dummy.file");
+		final FileTime ft = new FileTime(dummy);
+		FileUtil.forceDelete(dummy);
+		FileUtil.createNewFile(dummy);
+		ThreadUtil.sleep(2);
+		for (int i = 0; i < 20; i++)
+		{
+			final FileOutputStream fos = new FileOutputStream(dummy, true);
+			for (int j = 0; j < 200; j++)
+			{// incrementally fill file
+				fos.write(i);
+			}
+			fos.flush();
+			fos.close();
+
+			ThreadUtil.sleep(100);
+			final long updateModified = ft.updateModified();
+			assertEquals(System.currentTimeMillis(), updateModified, 100);
+
+		}
+
 	}
 
 	@Test

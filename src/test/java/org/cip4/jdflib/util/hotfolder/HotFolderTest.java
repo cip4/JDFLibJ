@@ -496,20 +496,20 @@ public class HotFolderTest extends JDFTestCaseBase
 		file.createNewFile();
 		assertTrue(file.exists());
 
-		final FileOutputStream fos = new FileOutputStream(file);
 		for (int i = 0; i < 20; i++)
 		{
+			final FileOutputStream fos = new FileOutputStream(file, true);
 			for (int j = 0; j < 200; j++)
 			{// incrementally fill file
 				fos.write(i);
 			}
 			fos.flush();
+			fos.close();
 
 			ThreadUtil.sleep(5);
 
 		}
 		assertTrue(file.exists());
-		fos.close();
 
 		for (int i = 0; i < 600 && file.exists(); i++)
 		{
