@@ -74,7 +74,7 @@ public class HotFolder
 	/**
 	 * the default time time in milliseconds to wait for stabilization
 	 */
-	private static int defaultStabilizeTime = 2222; // time between reads in milliseconds -
+	private static int defaultStabilizeTime = 4000; // time between reads in milliseconds -
 	/**
 	 * the time in milliseconds to wait for stabilization
 	 */
@@ -526,11 +526,11 @@ public class HotFolder
 	}
 
 	/**
-	 * @param stabilizeTime the stabilizeTime to set in milliseconds
+	 * @param stabilizeTime the stabilizeTime to set in milliseconds - we always ensure at least 2000 because some OS have 1000 file modified garnularity
 	 */
 	public void setStabilizeTime(final int stabilizeTime)
 	{
-		if (stabilizeTime > 0)
+		if (stabilizeTime >= 2000)
 		{
 			this.stabilizeTime = stabilizeTime;
 		}

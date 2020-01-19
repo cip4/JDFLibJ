@@ -43,6 +43,7 @@
  */
 package org.cip4.jdflib.util.hotfolder;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -117,7 +118,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		final File file = new File(theHF + File.separator + "f1.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
-		ThreadUtil.sleep(000);
+		ThreadUtil.sleep(1);
 		assertTrue(file.exists());
 	}
 
@@ -492,12 +493,14 @@ public class HotFolderTest extends JDFTestCaseBase
 	public synchronized void testBig() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
+		hf.setStabilizeTime(2222);
 		final File file = new File(theHF + File.separator + "f1Bigab.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
 
 		for (int i = 0; i < 20; i++)
 		{
+			ThreadUtil.sleep(100);
 			final FileOutputStream fos = new FileOutputStream(file, true);
 			for (int j = 0; j < 200; j++)
 			{// incrementally fill file
@@ -506,15 +509,15 @@ public class HotFolderTest extends JDFTestCaseBase
 			fos.flush();
 			fos.close();
 
-			ThreadUtil.sleep(5);
-
 		}
+		final long t0 = System.currentTimeMillis();
 		assertTrue(file.exists());
 
 		for (int i = 0; i < 600 && file.exists(); i++)
 		{
 			ThreadUtil.sleep(100);
 		}
+		assertEquals(3333, System.currentTimeMillis() - t0, 2222);
 		assertFalse(file.exists());
 	}
 
