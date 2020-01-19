@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -49,6 +49,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -156,7 +157,7 @@ public class JDFPart extends JDFAutoPart
 			return map.getKeys();
 		}
 		final VString v = new VString();
-		final VString keys = map.getKeys();
+		final StringArray keys = map.getKeyList();
 		if (keys.contains(AttributeName.SIGNATURENAME))
 		{
 			v.add(AttributeName.SIGNATURENAME);

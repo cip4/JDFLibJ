@@ -515,8 +515,8 @@ class PostXJDFWalker extends BaseElementWalker
 				{
 					final JDFPart p = (JDFPart) e;
 					final JDFAttributeMap partMap = p.getPartMap();
-					final VString nextKeys = partMap.getKeys();
-					keys.appendUnique(nextKeys);
+					final Collection<String> nextKeys = partMap.keySet();
+					ContainerUtil.appendUnique(keys, nextKeys);
 				}
 				VJDFAttributeMap vPA = partAmount.getPartMapVector();
 				if (vPA == null)

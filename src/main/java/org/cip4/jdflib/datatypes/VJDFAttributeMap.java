@@ -622,7 +622,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 		final VString v = new VString();
 		for (final JDFAttributeMap map : this)
 		{
-			v.addAll(map.getKeys());
+			v.addAll(map.getKeyList());
 		}
 		v.unify();
 		return v;
@@ -659,7 +659,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 		}
 
 		final JDFAttributeMap map0 = get(0);
-		final VString keys = map0.getKeys();
+		final Collection<String> keys = map0.keySet();
 		for (final String key : keys)
 		{
 			String val0 = map0.get(key);
