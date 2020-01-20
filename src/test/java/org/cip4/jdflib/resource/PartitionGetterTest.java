@@ -51,6 +51,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFAttributeMapArray;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -80,7 +81,7 @@ public class PartitionGetterTest
 	@Test
 	public void testRemoveImplicitDup()
 	{
-		final VJDFAttributeMap vmap = new VJDFAttributeMap();
+		final JDFAttributeMapArray vmap = new JDFAttributeMapArray();
 		for (int i = 0; i < 4; i++)
 		{
 			final JDFAttributeMap m = new JDFAttributeMap("a", "v" + i);
@@ -220,6 +221,38 @@ public class PartitionGetterTest
 		assertEquals(ab, pg.getPartition(new JDFAttributeMap(AttributeName.PARTVERSION, "a b"), EnumPartUsage.Explicit));
 		assertEquals(cd, pg.getPartition(new JDFAttributeMap(AttributeName.PARTVERSION, "c"), EnumPartUsage.Explicit));
 		assertNull(pg.getPartition(new JDFAttributeMap(AttributeName.PARTVERSION, "e"), EnumPartUsage.Explicit));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testPVResSkip()
+	{
+		final JDFResource r = (JDFResource) new JDFDoc(ElementName.EXPOSEDMEDIA).getRoot();
+		final JDFResource ab = r.addPartition(EnumPartIDKey.SheetName, "sh1").addPartition(EnumPartIDKey.PartVersion, "a b");
+		final JDFResource cd = r.addPartition(EnumPartIDKey.SheetName, "sh2").addPartition(EnumPartIDKey.PartVersion, "c d");
+		final JDFResource abs1 = ab.addPartition(EnumPartIDKey.Separation, "s1");
+		final JDFResource cds1 = cd.addPartition(EnumPartIDKey.Separation, "s1");
+		final JDFResource cds2 = cd.addPartition(EnumPartIDKey.Separation, "s2");
+
+		final PartitionGetter pg = new PartitionGetter(r);
+		pg.setStrictPartVersion(false);
+
+		final JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SheetName, "sh1");
+		m1.put(EnumPartIDKey.Separation, "s1");
+
+		final JDFAttributeMap m2 = new JDFAttributeMap(EnumPartIDKey.SheetName, "sh2");
+		m2.put(EnumPartIDKey.Separation, "s1");
+
+		assertEquals(abs1, pg.getPartition(m1, EnumPartUsage.Implicit));
+		assertEquals(cds1, pg.getPartition(m2, EnumPartUsage.Implicit));
+
+		m1.put(EnumPartIDKey.Separation, "s2");
+		m2.put(EnumPartIDKey.Separation, "s2");
+		assertEquals(cds2, pg.getPartition(m2, EnumPartUsage.Implicit));
+		assertEquals(ab, pg.getPartition(m1, EnumPartUsage.Implicit));
+
 	}
 
 	/**

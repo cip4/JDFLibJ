@@ -48,6 +48,7 @@ import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFAttributeMapArray;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -325,7 +326,7 @@ public class PartitionGetter
 		{
 			for (final JDFAttributeMap map : vm)
 			{
-				final VJDFAttributeMap next = getPartitionMaps(map, partUsage, true);
+				final JDFAttributeMapArray next = getPartitionMaps(map, partUsage, true);
 				v.addAll(next);
 			}
 		}
@@ -374,7 +375,7 @@ public class PartitionGetter
 		if (m == null)
 			return null;
 
-		final VJDFAttributeMap vMap = getPartitionMaps(m, partUsage, true);
+		final JDFAttributeMapArray vMap = getPartitionMaps(m, partUsage, true);
 		final VElement v = new VElement();
 		for (final JDFAttributeMap map : vMap)
 			v.add(leafMap.get(map));
@@ -391,7 +392,7 @@ public class PartitionGetter
 	 *
 	 * @default getPartitionVector(m, null)
 	 */
-	VJDFAttributeMap getPartitionMaps(JDFAttributeMap m, EnumPartUsage partUsage, final boolean updateIdentical)
+	JDFAttributeMapArray getPartitionMaps(JDFAttributeMap m, EnumPartUsage partUsage, final boolean updateIdentical)
 	{
 		if (partUsage == null)
 			partUsage = resourceRoot.getPartUsage();
@@ -401,7 +402,7 @@ public class PartitionGetter
 		JDFAttributeMap fast = getPartitionFromMap(m, EnumPartUsage.Explicit);
 		if (updateIdentical && fast != null)
 			fast = updateIdentical(fast);
-		final VJDFAttributeMap v = (fast != null) ? new VJDFAttributeMap(fast) : specialSearch(m, partUsage);
+		final JDFAttributeMapArray v = (fast != null) ? new JDFAttributeMapArray(fast) : specialSearch(m, partUsage);
 
 		return v;
 	}
@@ -411,11 +412,11 @@ public class PartitionGetter
 	 * @param partUsage
 	 * @param v
 	 */
-	VJDFAttributeMap specialSearch(final JDFAttributeMap m, final EnumPartUsage partUsage)
+	JDFAttributeMapArray specialSearch(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
 		final int maxSize = 1 + lastPos(m, resourceRoot.getPartIDKeys(), true);
-		VJDFAttributeMap v = new VJDFAttributeMap();
-		final VJDFAttributeMap vExp = EnumPartUsage.Implicit.equals(partUsage) ? new VJDFAttributeMap() : null;
+		JDFAttributeMapArray v = new JDFAttributeMapArray();
+		final JDFAttributeMapArray vExp = EnumPartUsage.Implicit.equals(partUsage) && !resourceRoot.getPartIDKeyList().contains(AttributeName.PARTVERSION) ? new JDFAttributeMapArray() : null;
 		for (final JDFAttributeMap map : leafMap.keySet())
 		{
 			if (map.size() <= maxSize)
@@ -424,7 +425,9 @@ public class PartitionGetter
 				{
 					v.add(map);
 					if (vExp != null)
+					{
 						vExp.add(map);
+					}
 				}
 				else if (EnumPartUsage.Implicit.equals(partUsage) && JDFPart.overlapPartMap(map, m, strictPartVersion))
 				{
@@ -450,7 +453,7 @@ public class PartitionGetter
 	/**
 	 * @param v
 	 */
-	void removeImplicitDuplicates(final VJDFAttributeMap v)
+	void removeImplicitDuplicates(final JDFAttributeMapArray v)
 	{
 		for (int i = v.size() - 1; i >= 0; i--)
 		{
@@ -572,7 +575,7 @@ public class PartitionGetter
 	JDFAttributeMap reducePartMap(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
 		JDFAttributeMap partitionFromMap = null;
-		final VJDFAttributeMap vMap = getPartitionMaps(m, partUsage, false);
+		final JDFAttributeMapArray vMap = getPartitionMaps(m, partUsage, false);
 		if (vMap != null)
 		{
 			if (vMap.size() == 1)
