@@ -49,6 +49,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -64,6 +65,7 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFPart extends JDFAutoPart
 {
+	private static final String ALL = "All";
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -278,7 +280,7 @@ public class JDFPart extends JDFAutoPart
 			return false;
 
 		boolean b;
-		b = resourceValue.equals(linkValue);
+		b = resourceValue.equals(linkValue) || KElement.isWildCard(resourceValue) || KElement.isWildCard(linkValue) || ALL.equalsIgnoreCase(linkValue) || ALL.equalsIgnoreCase(resourceValue);
 		if (!b)
 		{
 			final int iResPos = resourceValue.indexOf(' ');

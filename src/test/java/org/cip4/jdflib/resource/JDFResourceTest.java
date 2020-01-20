@@ -1646,13 +1646,38 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFResource r = fp.getCreatePartition(m, new VString("SignatureName SheetName PartVersion", null));
 		final JDFAttributeMap m2 = new JDFAttributeMap("SignatureName", "Sig1");
 		m2.put("SheetName", "Sheet1");
-		m2.put("PartVersion", "*");
+		m2.put("PartVersion", "B");
 		JDFResource r2 = fp.getPartition(m2, EnumPartUsage.Implicit);
 		assertEquals(r.getParentNode_KElement(), r2);
 		r2 = fp.getPartition(m2, EnumPartUsage.Sparse);
 		assertNull(r2);
 		r2 = fp.getPartition(m2, EnumPartUsage.Explicit);
 		assertNull(r2);
+	}
+
+	/**
+	 * test whether getpartition works for when inconsistently called
+	 */
+	@Test
+	public void testGetPartition_PartVersionWild()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode n = doc.getJDFRoot();
+		n.setType(EnumType.Folding);
+		final JDFFoldingParams fp = (JDFFoldingParams) n.addResource(ElementName.FOLDINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFAttributeMap m = new JDFAttributeMap("SignatureName", "Sig1");
+		m.put("SheetName", "Sheet1");
+		m.put("PartVersion", "A");
+		final JDFResource r = fp.getCreatePartition(m, new VString("SignatureName SheetName PartVersion", null));
+		final JDFAttributeMap m2 = new JDFAttributeMap("SignatureName", "Sig1");
+		m2.put("SheetName", "Sheet1");
+		m2.put("PartVersion", "All");
+		JDFResource r2 = fp.getPartition(m2, EnumPartUsage.Implicit);
+		assertEquals(r, r2);
+		r2 = fp.getPartition(m2, EnumPartUsage.Sparse);
+		assertEquals(r, r2);
+		r2 = fp.getPartition(m2, EnumPartUsage.Explicit);
+		assertEquals(r, r2);
 	}
 
 	/**

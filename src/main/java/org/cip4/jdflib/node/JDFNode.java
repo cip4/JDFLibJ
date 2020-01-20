@@ -2917,25 +2917,30 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		}
 		if (toReplace != null)
 		{
-			final JDFAuditPool auditPool = getCreateAuditPool();
-			final JDFResourceAudit resourceAudit = auditPool.addResourceAudit(null);
-			resourceAudit.addNewOldLink(true, r, usage);
-			resourceAudit.addNewOldLink(false, toReplace, usage);
-			final JDFResourceLinkPool resourceLinkPool = getResourceLinkPool();
-			final VElement vRL = (resourceLinkPool == null) ? null : resourceLinkPool.getInOutLinks(usage, true, null, null);
-			if (vRL != null)
+			replaceUpdate(usage, toReplace, r);
+		}
+		return r;
+	}
+
+	protected void replaceUpdate(final EnumUsage usage, final JDFResource toReplace, final JDFResource r)
+	{
+		final JDFAuditPool auditPool = getCreateAuditPool();
+		final JDFResourceAudit resourceAudit = auditPool.addResourceAudit(null);
+		resourceAudit.addNewOldLink(true, r, usage);
+		resourceAudit.addNewOldLink(false, toReplace, usage);
+		final JDFResourceLinkPool resourceLinkPool = getResourceLinkPool();
+		final VElement vRL = (resourceLinkPool == null) ? null : resourceLinkPool.getInOutLinks(usage, true, null, null);
+		if (vRL != null)
+		{
+			for (int i = 0; i < vRL.size(); i++)
 			{
-				for (int i = 0; i < vRL.size(); i++)
+				final JDFResourceLink l = (JDFResourceLink) vRL.elementAt(i);
+				if (l.getTarget() == toReplace)
 				{
-					final JDFResourceLink l = (JDFResourceLink) vRL.elementAt(i);
-					if (l.getTarget() == toReplace)
-					{
-						l.deleteNode();
-					}
+					l.deleteNode();
 				}
 			}
 		}
-		return r;
 	}
 
 	/**

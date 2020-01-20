@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -125,7 +125,7 @@ public class JDFPartTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testMatchesPartPartVersion()
+	public void testMatchesPartVersion()
 	{
 		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng eng", false));
 		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng fra", false));
@@ -142,6 +142,19 @@ public class JDFPartTest extends JDFTestCaseBase
 		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng eng", "eng", true));
 		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "fra eng", true));
 		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra eng", "fra eng", true));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testMatchesPartVersionWildcard()
+	{
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "*", "eng eng", false));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "All", "eng fra", false));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "*", "eng", false));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "All", "eng", false));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "* fra eng", "fra ALL", false));
 	}
 
 	/**
