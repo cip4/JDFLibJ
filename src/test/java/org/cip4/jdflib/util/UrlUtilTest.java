@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -141,6 +141,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.TEXT_XML, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.xsl"));
 		assertEquals(UrlUtil.APPLICATION_CFF2, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.cf2"));
 		assertEquals(UrlUtil.APPLICATION_ZIP, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.zip"));
+		assertEquals(UrlUtil.APPLICATION_JSON, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.jsn"));
+		assertEquals(UrlUtil.APPLICATION_JSON, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.json"));
 		assertEquals(UrlUtil.getMimeTypeFromURL(null), JDFConstants.MIME_TEXTUNKNOWN);
 		assertEquals(UrlUtil.getMimeTypeFromURL("foo.PDF"), JDFConstants.MIME_PDF);
 	}
