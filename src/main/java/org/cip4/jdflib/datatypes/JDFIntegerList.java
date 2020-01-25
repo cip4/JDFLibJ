@@ -374,7 +374,7 @@ public class JDFIntegerList extends JDFNumList
 	}
 
 	@Override
-	public void sort()
+	public JDFIntegerList sort()
 	{
 		final int[] a = getIntArray();
 		Arrays.sort(a);
@@ -383,7 +383,7 @@ public class JDFIntegerList extends JDFNumList
 		{
 			setInt(pos++, d);
 		}
-
+		return this;
 	}
 
 	/**
@@ -500,7 +500,7 @@ public class JDFIntegerList extends JDFNumList
 	 * @throws IllegalArgumentException if sizes don't match
 	 */
 	@Override
-	public void subtract(final JDFNumList l)
+	public JDFIntegerList subtract(final JDFNumList l)
 	{
 		if (l != null && size() == l.size())
 		{
@@ -512,5 +512,6 @@ public class JDFIntegerList extends JDFNumList
 				setElementAt(Integer.valueOf(me[i]), i);
 			}
 		}
+		return this;
 	}
 }

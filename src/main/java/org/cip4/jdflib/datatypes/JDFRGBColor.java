@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -57,6 +57,7 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFRGBColor extends JDFNumList
 {
+	private static final double BIT_255 = 255.;
 	/**
 	 *
 	 */
@@ -131,9 +132,10 @@ public class JDFRGBColor extends JDFNumList
 	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFRGBColor(final JDFNumList nl) throws DataFormatException
+	public JDFRGBColor(final JDFRGBColor nl)
 	{
-		super(nl);
+		super();
+		addAll(nl);
 	}
 
 	/**
@@ -149,6 +151,21 @@ public class JDFRGBColor extends JDFNumList
 		set(0, r);
 		set(1, g);
 		set(2, b);
+	}
+
+	/**
+	 * constructs a new RGB color with the given double values
+	 *
+	 * @param r the color red
+	 * @param g the color green
+	 * @param b the color blue
+	 */
+	public JDFRGBColor(final int r, final int g, final int b)
+	{
+		super(MAX_RGB_COLOR);
+		set(0, r / BIT_255);
+		set(1, g / BIT_255);
+		set(2, b / BIT_255);
 	}
 
 	/**
@@ -211,7 +228,7 @@ public class JDFRGBColor extends JDFNumList
 	 */
 	public void setR255(final int red)
 	{
-		set(0, red / 255.);
+		set(0, red / BIT_255);
 	}
 
 	/**
@@ -241,7 +258,7 @@ public class JDFRGBColor extends JDFNumList
 	 */
 	public void setG255(final int green)
 	{
-		set(1, green / 255.);
+		set(1, green / BIT_255);
 	}
 
 	/**
@@ -261,7 +278,7 @@ public class JDFRGBColor extends JDFNumList
 	 */
 	public int getR255()
 	{
-		return (int) (255. * doubleAt(0));
+		return (int) (BIT_255 * doubleAt(0));
 	}
 
 	/**
@@ -271,7 +288,7 @@ public class JDFRGBColor extends JDFNumList
 	 */
 	public int getG255()
 	{
-		return (int) (255. * doubleAt(1));
+		return (int) (BIT_255 * doubleAt(1));
 	}
 
 	/**
@@ -281,7 +298,7 @@ public class JDFRGBColor extends JDFNumList
 	 */
 	public int getB255()
 	{
-		return (int) (255. * doubleAt(2));
+		return (int) (BIT_255 * doubleAt(2));
 	}
 
 	/**
@@ -301,7 +318,7 @@ public class JDFRGBColor extends JDFNumList
 	 */
 	public void setB255(final int blue)
 	{
-		set(2, blue / 255.);
+		set(2, blue / BIT_255);
 	}
 
 	/**
@@ -364,7 +381,7 @@ public class JDFRGBColor extends JDFNumList
 	 */
 	public static double[] getCMYKArray(final int r, final int g, final int b)
 	{
-		return getCMYKArray(r / 255., g / 255., b / 255.);
+		return getCMYKArray(r / BIT_255, g / BIT_255, b / BIT_255);
 	}
 
 }

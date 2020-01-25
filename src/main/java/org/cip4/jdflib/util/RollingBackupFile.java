@@ -132,12 +132,12 @@ public class RollingBackupFile extends File
 		{
 			String ext = name.substring(start.length() + 1);
 			final StringArray extA = StringArray.getVString(ext, ".");
-			if (!StringUtil.isEmpty(extA))
-				if (StringUtil.isInteger(extA.get(0)))
-					ext = StringUtil.removeToken(ext, 0, ".");
-			return ext;
+			if (!StringUtil.isEmpty(extA) && StringUtil.isInteger(extA.get(0)))
+			{
+				ext = StringUtil.removeToken(ext, 0, ".");
+			}
+			return StringUtil.getNonEmpty(ext);
 		}
-
 		return null;
 	}
 
