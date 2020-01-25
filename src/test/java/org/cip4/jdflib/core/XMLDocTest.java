@@ -698,7 +698,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		}
 		System.gc();
 		final long l2 = doc.getDocMemoryUsed();
-		assertEquals(l2, l, 1000000);
+		assertEquals(l, l2, 2000000);
 	}
 
 	/**
