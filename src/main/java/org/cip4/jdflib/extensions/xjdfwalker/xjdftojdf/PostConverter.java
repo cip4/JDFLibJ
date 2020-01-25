@@ -195,10 +195,22 @@ class PostConverter
 				{
 					for (final KElement e : links)
 					{
-						cleanLinkAmount(e);
+						cleanLink(e);
 					}
 				}
 				n = n.getParentJDF();
+			}
+		}
+
+		void cleanLink(final KElement e)
+		{
+			if (ElementName.BINDERYSIGNATURE.equals(((JDFResourceLink) e).getLinkedResourceName()))
+			{
+				e.deleteNode();
+			}
+			else
+			{
+				cleanLinkAmount(e);
 			}
 		}
 

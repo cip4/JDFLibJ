@@ -939,7 +939,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	public void cleanUp(final boolean zappIDs)
 	{
 		super.cleanUp();
-		final Vector<SetHelper> v = getSets();
+		final List<SetHelper> v = getSets();
 		if (v != null)
 		{
 			for (final SetHelper sh : v)
@@ -1198,7 +1198,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	 */
 	public static EnumVersion defaultVersion()
 	{
-		return EnumVersion.Version_2_0;
+		return getDefaultVersion();
 	}
 
 	/**

@@ -44,9 +44,11 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
@@ -119,9 +121,11 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	 */
 	private JDFContentObject initContentObject(final JDFLayout lo, final int i)
 	{
-		final JDFContentObject co = lo.appendContentObject();
-		co.setAttribute("PositionRef", "pos" + (i % 8) / 4);
-		co.setAttribute("PageIndex", i, null);
+		final KElement po = lo.appendElement(XJDFConstants.PlacedObject);
+		final JDFContentObject co = (JDFContentObject) po.appendElement(ElementName.CONTENTOBJECT);
+		po.setAttribute("PositionRef", "pos" + (i % 8) / 4);
+		po.setAttribute(AttributeName.ORD, i, null);
+		po.setAttribute(AttributeName.CTM, JDFMatrix.getUnitMatrix(), 2);
 		return co;
 	}
 
@@ -131,8 +135,8 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	private void initBS(final JDFBinderySignature bs, final int i)
 	{
 		bs.setFoldCatalog("F8-4");
-		bs.setAttribute(AttributeName.ASSEMBLYID, "Ass_ID" + i);
-		bs.appendElement("StripCellParams");
+		bs.setXPathAttribute("../Part/@BinderySignatureID", "Ass_ID" + i);
+		bs.appendElement("SignatureCell");
 	}
 
 	/**
@@ -141,7 +145,8 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	@Test
 	public void testStripLayout_AllinOne()
 	{
-
+		theHelper.setTypes("Stripping");
+		theHelper.setJobID("j");
 		for (int k = 0; k < 2; k++)
 		{
 			final JDFAttributeMap sheetMap = getSheetMap(1);
@@ -154,24 +159,26 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 				initContentObject(lo, k * 8 + i);
 			}
 		}
+		losh.setUsage(EnumUsage.Output);
 		final ResourceHelper loh = losh.appendPartition(getSheetMap(1), true);
 		final JDFLayout lo = (JDFLayout) loh.getResource();
-		final JDFBinderySignature bs = (JDFBinderySignature) lo.appendElement(ElementName.BINDERYSIGNATURE);
+		bssh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		final ResourceHelper bsh = bssh.getCreatePartition(0, true);
+		final JDFBinderySignature bs = (JDFBinderySignature) bsh.getResource();
 		initBS(bs, 0);
 
 		for (int i = 0; i < 2; i++)
 		{
-			final JDFPosition pos = (JDFPosition) bs.appendElement(ElementName.POSITION);
+			final JDFPosition pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
 			pos.setID("pos" + i);
 			if (i == 0)
 				pos.setRelativeBox(new JDFRectangle(0, 0, 0.5, 1));
 			else
 				pos.setRelativeBox(new JDFRectangle(0.5, 0, 1, 1));
 
-			pos.setAttribute("AssemblyIDs", "CutSheet1");
+			pos.setAttribute(XJDFConstants.BinderySignatureID, "Ass_ID0");
 		}
-
-		theHelper.writeToFile(sm_dirTestDataTemp + "loStrip1.xjdf");
+		writeRoundTripX(theHelper, "loStrip1", EnumValidationLevel.Incomplete);
 	}
 
 	/**

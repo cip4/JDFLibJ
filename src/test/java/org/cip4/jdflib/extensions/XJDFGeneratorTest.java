@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,6 +41,7 @@ import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -130,20 +131,22 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 		phCover.getProduct().setAttribute("DescriptiveName", "Cover");
 		final IntentHelper coverMedia = phCover.getCreateIntent("MediaIntent");
 		coverMedia.setSpan("Weight", "150", "NumberSpan");
+		coverMedia.setSpan(AttributeName.MEDIATYPE, "Paper", null);
 
 		final ProductHelper phBody = theHelper.appendProduct();
 		ph.setChild(phBody);
 		phBody.getProduct().setAttribute("DescriptiveName", "Body");
 		final IntentHelper bodyMedia = phBody.getCreateIntent("MediaIntent");
 		bodyMedia.setSpan("Weight", "100", "NumberSpan");
+		bodyMedia.setSpan(AttributeName.MEDIATYPE, "Paper", null);
 
 		final IntentHelper binding = ph.getCreateIntent("BindingIntent");
 		binding.setSpan("BindingType", EnumSpanBindingType.SaddleStitch.getName(), "EnumerationSpan");
-		binding.setSpan("CoverRef", phCover.getProduct().getID(), null);
+		binding.setSpan("ChildRefs", phCover.getProduct().getID(), null);
 		final IntentHelper layout = ph.getCreateIntent("LayoutIntent");
 		layout.setSpan("Dimensions", "700 1000", "XYPairSpan");
-
-		theHelper.writeToFile(sm_dirTestDataTemp + "product1.xjdf");
+		theHelper.cleanUp();
+		writeRoundTripX(theHelper, "product1", EnumValidationLevel.Incomplete);
 	}
 
 	/**
