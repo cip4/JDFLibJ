@@ -374,7 +374,7 @@ public class JDFIntegerList extends JDFNumList
 	}
 
 	@Override
-	public JDFIntegerList sort()
+	public void sort()
 	{
 		final int[] a = getIntArray();
 		Arrays.sort(a);
@@ -383,7 +383,6 @@ public class JDFIntegerList extends JDFNumList
 		{
 			setInt(pos++, d);
 		}
-		return this;
 	}
 
 	/**

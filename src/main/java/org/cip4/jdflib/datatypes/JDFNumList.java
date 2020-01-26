@@ -864,7 +864,10 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 		return (Double) elementAt(i);
 	}
 
-	public JDFNumList sort()
+	/**
+	 *
+	 */
+	public void sort()
 	{
 		final double[] a = getDoubleList();
 		Arrays.sort(a);
@@ -873,7 +876,6 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 		{
 			set(pos++, d);
 		}
-		return this;
 	}
 
 	/**
