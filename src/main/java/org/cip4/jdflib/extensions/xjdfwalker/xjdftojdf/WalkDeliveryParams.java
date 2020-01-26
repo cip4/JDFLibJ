@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -39,11 +39,13 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 import java.util.Iterator;
 import java.util.List;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDrop;
 import org.cip4.jdflib.util.StringUtil;
@@ -79,7 +81,7 @@ public class WalkDeliveryParams extends WalkResource
 	 * @param jdfDeliveryParams
 	 * @return
 	 */
-	private boolean moveToDrop(final KElement xjdfDeliveryParams, final KElement jdfDeliveryParams)
+	private boolean moveToDrop(final KElement xjdfDeliveryParams)
 	{
 		final JDFDrop drop = ((JDFDeliveryParams) xjdfDeliveryParams).appendDrop();
 		final VString vAtt = drop.knownAttributes();
@@ -124,8 +126,19 @@ public class WalkDeliveryParams extends WalkResource
 	@Override
 	public KElement walk(final KElement xjdfDelParams, final KElement jdfDelParams)
 	{
-		moveToDrop(xjdfDelParams, jdfDelParams);
-		final KElement walk = super.walk(xjdfDelParams, jdfDelParams);
+		moveToDrop(xjdfDelParams);
+		final KElement jdfDelParams2;
+		if (jdfDelParams.hasNonEmpty(AttributeName.DROPID))
+		{
+			jdfDelParams2 = jdfDelParams.getParentNode_KElement();
+			jdfDelParams.deleteNode();
+			((JDFResource) jdfDelParams2).getResourceRoot().removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.DROPID, null, null, 0);
+		}
+		else
+		{
+			jdfDelParams2 = jdfDelParams;
+		}
+		final KElement walk = super.walk(xjdfDelParams, jdfDelParams2);
 		return walk;
 	}
 

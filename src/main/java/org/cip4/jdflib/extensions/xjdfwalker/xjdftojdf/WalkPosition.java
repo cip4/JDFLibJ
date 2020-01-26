@@ -47,6 +47,7 @@ import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
@@ -83,11 +84,33 @@ public class WalkPosition extends WalkXElement
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		final JDFStrippingParams stripParams = (trackElem instanceof JDFStrippingParams) ? (JDFStrippingParams) trackElem : null;
+		final JDFStrippingParams stripParams = ensurePartition(e, trackElem);
+		if (stripParams == null)
+			return null;
 		doCells(e, stripParams);
-		final KElement walk = super.walk(e, trackElem);
+		final KElement walk = super.walk(e, stripParams);
 		moveBSRef(e, stripParams);
 		return walk;
+	}
+
+	/**
+	 *
+	 * @param e
+	 * @param trackElem
+	 * @return
+	 */
+	JDFStrippingParams ensurePartition(final KElement e, final KElement trackElem)
+	{
+		JDFStrippingParams ret = (trackElem instanceof JDFStrippingParams) ? (JDFStrippingParams) trackElem : null;
+		if (ret != null)
+		{
+			final String bsid = e.getNonEmpty(XJDFConstants.BinderySignatureID);
+			if (bsid != null && ret.getBinderySignatureName().isEmpty())
+			{
+				ret = (JDFStrippingParams) ret.getCreatePartition(EnumPartIDKey.BinderySignatureName, bsid, null);
+			}
+		}
+		return ret;
 	}
 
 	/**
@@ -106,7 +129,7 @@ public class WalkPosition extends WalkXElement
 			{
 				stripParams.moveElement(bsRef, null);
 			}
-			else
+			else if (stripParams.getElement_KElement(ElementName.BINDERYSIGNATURE + "Ref", null, 0) == null)
 			{
 				final String bsID = e.getNonEmpty(XJDFConstants.BinderySignatureID);
 				if (bsID != null)
@@ -121,6 +144,7 @@ public class WalkPosition extends WalkXElement
 						re.setrRef(id);
 						re.setPartMap(new JDFAttributeMap(AttributeName.BINDERYSIGNATURENAME, bsID));
 					}
+					stripParams.appendAssemblyIDs(bsID, true);
 				}
 			}
 		}

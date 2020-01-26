@@ -62,6 +62,7 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
@@ -73,6 +74,7 @@ import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
 import org.cip4.jdflib.resource.process.JDFPageData;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.resource.process.JDFStripCellParams;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -394,11 +396,70 @@ class PostConverter
 				{
 					cleanPageList(resRoot);
 				}
+				else if (ElementName.BINDERYSIGNATURE.equals(localName))
+				{
+					cleanBinderySignature(resRoot);
+				}
 				cleanLeaf(resRoot, false);
 				final List<JDFResource> leaves = resRoot.getLeafArray(true);
 				for (final KElement leaf : leaves)
 				{
 					leaf.removeChildrenByClass(JDFPart.class);
+				}
+			}
+		}
+
+		private void cleanBinderySignature(final JDFResource resRoot)
+		{
+			final JDFResource strippingParams = theNode.getResource(ElementName.STRIPPINGPARAMS, null, 0);
+			if (strippingParams != null)
+			{
+				final List<JDFResource> spLeaves = strippingParams.getLeafArray(false);
+				for (final JDFResource sp : spLeaves)
+				{
+					final JDFResource bs = resRoot.getPartition(sp.getPartMap(), EnumPartUsage.Implicit);
+					moveToStipping(bs, sp);
+				}
+			}
+
+		}
+
+		void moveToStipping(final JDFResource bs, final JDFResource sp)
+		{
+			final List<KElement> vsc = bs.getChildArray_KElement(ElementName.SIGNATURECELL, null, null, false, 0);
+			if (!ContainerUtil.isEmpty(vsc))
+			{
+				for (final KElement sc : vsc)
+				{
+					moveToStripCell(sc, sp);
+				}
+			}
+
+		}
+
+		/**
+		 *
+		 * @param sp
+		 * @param bs
+		 * @return
+		 */
+		void moveToStripCell(final KElement signatureCell, final JDFResource sp)
+		{
+			final JDFStripCellParams stripCell = (JDFStripCellParams) sp.appendElement(ElementName.STRIPCELLPARAMS);
+			final VString stripCellKnown = stripCell.knownAttributes();
+			final JDFAttributeMap sigCelMap = signatureCell.getAttributeMap();
+			sigCelMap.reduceMap(stripCellKnown);
+			if (sigCelMap.isEmpty())
+			{
+				stripCell.deleteNode();
+			}
+			else
+			{
+				for (final String key : sigCelMap.keySet())
+					stripCell.moveAttribute(key, signatureCell);
+				if (signatureCell.getAttributeMap().isEmpty())
+				{
+					signatureCell.deleteNode();
 				}
 			}
 		}

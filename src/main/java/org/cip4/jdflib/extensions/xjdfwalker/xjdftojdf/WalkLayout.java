@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,7 +36,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -47,6 +46,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.util.StringUtil;
@@ -98,11 +98,9 @@ public class WalkLayout extends WalkStrippingParams
 		vAtt.add("MediaRef");
 		vAtt.add("DeviceRef");
 		final JDFAttributeMap map = e.getAttributeMap();
-		final Iterator<String> it = map.getKeyIterator();
 		boolean foundSome = false;
-		while (it.hasNext())
+		for (final String s : map.keySet())
 		{
-			final String s = it.next();
 			if (vAtt.contains(s))
 			{
 				stripParams.setAttribute(s, map.get(s));
@@ -152,12 +150,19 @@ public class WalkLayout extends WalkStrippingParams
 			final JDFAttributeMap partMap = trackLayout.getPartMap();
 			final JDFStrippingParams sp = (JDFStrippingParams) node.getCreateResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
 			final JDFStrippingParams part = (JDFStrippingParams) sp.getCreatePartition(partMap, trackLayout.getPartIDKeys());
-			final KElement foo = part.appendElement("foo");
+			final KElement foo = part.appendElement(ElementName.RESOURCEPOOL);
 			xjdfToJDFImpl.walkTree(stripParams, foo);
 			final KElement tmpStripParams = foo.getElement(ElementName.STRIPPINGPARAMS);
 			tmpStripParams.removeAttribute(AttributeName.CLASS);
 			tmpStripParams.removeAttribute(AttributeName.ID);
+
+			tmpStripParams.removeAttribute(AttributeName.PARTIDKEYS);
+
 			part.copyInto(tmpStripParams, false);
+			if (tmpStripParams.getElement_KElement(ElementName.STRIPPINGPARAMS, null, 0) != null)
+			{
+				sp.addPartIDKey(EnumPartIDKey.BinderySignatureName);
+			}
 			foo.deleteNode();
 		}
 

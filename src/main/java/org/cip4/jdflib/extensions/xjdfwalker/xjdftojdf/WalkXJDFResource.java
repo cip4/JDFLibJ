@@ -576,7 +576,7 @@ public class WalkXJDFResource extends WalkXElement
 		final List<String> keys = p.getKeyList();
 		for (final String key : keys)
 		{
-			if (EnumPartIDKey.getEnum(key) == null)
+			if (EnumPartIDKey.getEnum(key) == null && !AttributeName.DROPID.equals(key))
 			{
 				p.remove(key);
 			}
@@ -600,7 +600,6 @@ public class WalkXJDFResource extends WalkXElement
 			}
 		}
 		p.remove(AttributeName.PRODUCTPART);
-		p.remove(AttributeName.DROPID);
 		p.remove(XJDFConstants.ContactType);
 		return p;
 	}

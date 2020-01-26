@@ -41,6 +41,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
+import org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation;
 import org.cip4.jdflib.auto.JDFAutoStripCellParams.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.AttributeName;
@@ -51,6 +52,7 @@ import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
@@ -65,6 +67,7 @@ import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
+import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
 import org.junit.Test;
 
@@ -392,6 +395,29 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	}
 
 	/**
+	 * @throws Exception
+	 *
+	 */
+	@Test
+	public void testSigCell1() throws Exception
+	{
+		theHelper.setTypes("Stripping");
+		bssh = theHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+
+		final JDFBinderySignature bs1 = (JDFBinderySignature) bssh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS1"), true).getResource();
+		bs1.setBinderySignatureType(EnumBinderySignatureType.Fold);
+		final JDFSignatureCell sc = bs1.appendSignatureCell();
+		sc.setFrontPages(new JDFIntegerList("0 1 2"));
+		sc.setAttribute(AttributeName.BLEEDFACE, "42");
+		sc.setOrientation(EnumOrientation.Down);
+		sc.setAttribute(AttributeName.SIDES, "TwoSidedHeadToFoot");
+
+		losh.getCreatePartition(0, true).getResource().appendElement(ElementName.POSITION).setAttribute(XJDFConstants.BinderySignatureID, "BS1");
+
+		writeRoundTripX(theHelper, "sc1", EnumValidationLevel.Incomplete);
+	}
+
+	/**
 	 *
 	 */
 	@Test
@@ -429,6 +455,35 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		final JDFDoc converted = jdfConverter.convert(theHelper);
 		assertNotNull(converted.getJDFRoot().getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0).getElement(ElementName.BINDERYSIGNATURE));
 		writeRoundTripX(theHelper, "multiBS", EnumValidationLevel.Incomplete);
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testBSMultiAssembly()
+	{
+		theHelper.setTypes("Stripping");
+		bssh = theHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+
+		final ResourceHelper bsRes = bssh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS1"), true);
+		bsRes.appendPartMap(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS2"));
+		final JDFBinderySignature bs1 = (JDFBinderySignature) bsRes.getResource();
+		bs1.setBinderySignatureType(EnumBinderySignatureType.Fold);
+		final KElement loRes = losh.getCreatePartition(0, true).getResource();
+		loRes.appendElement(ElementName.POSITION).setAttribute(XJDFConstants.BinderySignatureID, "BS1");
+		loRes.appendElement(ElementName.POSITION).setAttribute(XJDFConstants.BinderySignatureID, "BS2");
+
+		final SetHelper assh = theHelper.getCreateSet(ElementName.ASSEMBLY, EnumUsage.Input);
+		final JDFAssembly assembly = (JDFAssembly) assh.getCreatePartition(0, true).getResource();
+		assembly.setOrder(EnumOrder.Collecting);
+		assembly.setAttribute(XJDFConstants.BinderySignatureIDs, "BS1 BS2");
+
+		final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
+		final JDFDoc converted = jdfConverter.convert(theHelper);
+		assertNotNull(converted.getJDFRoot().getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0).getElement(ElementName.BINDERYSIGNATURE));
+		writeRoundTripX(theHelper, "multiBsAss", EnumValidationLevel.Incomplete);
 
 	}
 

@@ -328,6 +328,7 @@ class PostXJDFWalker extends BaseElementWalker
 			}
 
 			ensureNmtoken(part, AttributeName.SHEETNAME);
+			part.renameAttribute(AttributeName.BINDERYSIGNATURENAME, XJDFConstants.BinderySignatureID);
 			part.removeAttribute(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX);
 			part.removeAttribute(AttributeName.BUNDLEITEMINDEX);
 			part.removeAttribute(AttributeName.CELLINDEX);
@@ -2871,6 +2872,8 @@ class PostXJDFWalker extends BaseElementWalker
 		String getBSName(final JDFStrippingParams strippingParams, final JDFAttributeMap map)
 		{
 			String bsName = map == null ? null : map.remove(AttributeName.BINDERYSIGNATURENAME);
+			if (bsName == null)
+				bsName = map == null ? null : map.remove(XJDFConstants.BinderySignatureID);
 			final String bsn2 = strippingParams.getNonEmpty(XJDFConstants.BinderySignatureIDs);
 			if (bsn2 != null)
 			{
