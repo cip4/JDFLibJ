@@ -2698,7 +2698,7 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				layoutMap.remove(AttributeName.SIGNATURENAME);
 			}
-			final boolean cloneBS = layoutMap != null && layoutMap.containsKey(AttributeName.BINDERYSIGNATURENAME);
+			final boolean cloneBS = layoutMap != null;
 			final String bsName = getBSName(strippingParams, layoutMap);
 			final String bsID = getBSID(strippingParams, bsName);
 			final String bsResID = strippingParams.getNonEmpty("BinderySignatureRef");
