@@ -114,8 +114,9 @@ public class WalkXJDFResource extends WalkXElement
 		}
 		rh.getCreateResource();
 		final VJDFAttributeMap vParts = getPartMaps(rh);
-		isNew = isNew || !hasPartition(res, rh.getPartMap(), theNode);
-		final KElement newPartitionElement = createPartition(res, vParts.get(0), theNode);
+		final JDFAttributeMap p0 = ContainerUtil.isEmpty(vParts) ? new JDFAttributeMap() : vParts.get(0);
+		isNew = isNew || !hasPartition(res, p0, theNode);
+		final KElement newPartitionElement = createPartition(res, p0, theNode);
 		if (newPartitionElement == null)
 		{
 			return null;
