@@ -37,7 +37,10 @@
 package org.cip4.jdflib.extensions;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
+import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
+import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoStripCellParams.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.AttributeName;
@@ -57,6 +60,7 @@ import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -294,7 +298,8 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	{
 		super.setUp();
 		theHelper.getRoot().setXMLComment("create a stripping in a layout\n Stripping now consumes a layout", true);
-		theHelper.getRoot().setAttribute("Types", "Imposition");
+		theHelper.setTypes("Imposition");
+		theHelper.setJobID("j");
 
 		losh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
 		bssh = null;
@@ -353,4 +358,55 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		assertEquals("OneSided", bsNew.getSignatureCell(0).getAttribute(AttributeName.SIDES));
 
 	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAssemblyOnly()
+	{
+		theHelper.setTypes("Stripping");
+		bssh = theHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		final SetHelper assh = theHelper.getCreateSet(ElementName.ASSEMBLY, EnumUsage.Input);
+		final JDFAssembly assembly = (JDFAssembly) assh.getCreatePartition(0, true).getResource();
+		assembly.setOrder(EnumOrder.Collecting);
+		assembly.setAttribute(XJDFConstants.BinderySignatureIDs, "bs1 bs2 bs3");
+
+		writeRoundTripX(theHelper, "onlyAssembly", EnumValidationLevel.Incomplete);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testBSOnly()
+	{
+		theHelper.setTypes("Stripping");
+		bssh = theHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+
+		final JDFBinderySignature bs1 = (JDFBinderySignature) bssh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS1"), true).getResource();
+		bs1.setBinderySignatureType(EnumBinderySignatureType.Fold);
+		losh.getCreatePartition(0, true).getResource().appendElement(ElementName.POSITION).setAttribute(XJDFConstants.BinderySignatureID, "BS1");
+
+		writeRoundTripX(theHelper, "onlyBS", EnumValidationLevel.Incomplete);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testBSRetain()
+	{
+		theHelper.setTypes("Stripping");
+		bssh = theHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+
+		final JDFBinderySignature bs1 = (JDFBinderySignature) bssh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS1"), true).getResource();
+		bs1.setBinderySignatureType(EnumBinderySignatureType.Fold);
+		losh.getCreatePartition(0, true).getResource().appendElement(ElementName.POSITION).setAttribute(XJDFConstants.BinderySignatureID, "BS1");
+		final XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
+		final JDFDoc converted = jdfConverter.convert(theHelper);
+		assertNotNull(converted.getJDFRoot().getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getElement(ElementName.BINDERYSIGNATURE));
+
+	}
+
 }

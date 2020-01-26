@@ -40,6 +40,7 @@ import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -121,7 +122,8 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	public void testProductOnly()
 	{
 		theHelper.getRoot().setXMLComment("Product description only\n", true);
-		// h.getRoot().setAttribute("Types", "Varnishing");
+		theHelper.setJobID("j");
+		theHelper.setTypes(JDFConstants.PRODUCT);
 		final ProductHelper ph = theHelper.appendProduct();
 		ph.setRoot();
 		ph.setAmount(4200);

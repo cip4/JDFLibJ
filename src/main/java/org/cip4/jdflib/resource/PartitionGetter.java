@@ -965,14 +965,7 @@ public class PartitionGetter
 		if (vPartMap != null)
 		{
 			List<String> currentPartIDKeys = resourceRoot.getPartIDKeys();
-			if (currentPartIDKeys != null)
-			{
-				ContainerUtil.appendUnique(currentPartIDKeys, vPartIDKeys);
-			}
-			else
-			{
-				currentPartIDKeys = vPartIDKeys;
-			}
+			currentPartIDKeys = (List<String>) ContainerUtil.appendUnique(currentPartIDKeys, vPartIDKeys);
 
 			final VJDFAttributeMap newMaps = updateCreate(vPartMap, currentPartIDKeys);
 			for (final JDFAttributeMap partMap : newMaps)

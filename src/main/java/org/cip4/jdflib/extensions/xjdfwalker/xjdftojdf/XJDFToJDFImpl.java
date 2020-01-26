@@ -264,9 +264,9 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	{
 		idMap = new IDFinder().getMap(_xjdf);
 		final KElement newXJDF = reparse(_xjdf.cloneNewDoc());
-		xjdf = new XJDFHelper(newXJDF);
-		final String docType = xjdf.getLocalName();
+		final String docType = newXJDF.getLocalName();
 		final boolean isJMF = ElementName.JMF.equals(docType) || XJDFConstants.XJMF.equals(docType);
+		xjdf = new XJDFHelper(newXJDF);
 		if (jdfDoc == null)
 		{
 			final String strDocType = isJMF ? ElementName.JMF : ElementName.JDF;

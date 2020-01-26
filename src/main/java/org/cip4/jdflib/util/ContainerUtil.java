@@ -698,13 +698,18 @@ public class ContainerUtil
 	 *
 	 * @param a the A to append, if null nothing is added
 	 */
-	public static <A> void appendUnique(final Collection<A> c, final Collection<A> a)
+	public static <A> Collection<A> appendUnique(final Collection<A> c, final Collection<A> a)
 	{
+		if (c == null)
+		{
+			return a;
+		}
 		if (!isEmpty(a))
 		{
 			c.addAll(a);
 			unify(c);
 		}
+		return c;
 	}
 
 	/**
