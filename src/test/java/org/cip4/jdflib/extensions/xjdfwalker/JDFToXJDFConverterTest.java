@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -2173,6 +2173,28 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 */
 	@Test
 	public void testAssemblyCollect()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Stripping);
+		final JDFAssembly as = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
+		as.setOrder(EnumOrder.Collecting);
+		as.setAssemblyIDs(VString.getVString("AS1 AS2 AS3", null));
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		final SetHelper sh = new XJDFHelper(xjdf).getSet(ElementName.ASSEMBLY, EnumUsage.Input);
+		final JDFAssembly asx = (JDFAssembly) sh.getPartition(0).getResource();
+		assertEquals("AS1 AS2 AS3", asx.getNonEmpty(XJDFConstants.BinderySignatureIDs));
+
+		sh.cleanUp();
+		assertEquals("AS1 AS2 AS3", asx.getNonEmpty(XJDFConstants.BinderySignatureIDs));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testAssemblySectionCollect()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Stripping);
