@@ -180,6 +180,10 @@ public class PartitionGetter
 	 */
 	JDFAttributeMap getImplicitPartitionFromMap(final JDFAttributeMap partMap, final EnumPartUsage partUsage)
 	{
+		if (!resourceRoot.hasNonEmpty_KElement(AttributeName.PARTIDKEYS))
+		{
+			return new JDFAttributeMap();
+		}
 		int size = partMap.size();
 		if (size > 1 || leafMap.hasMissingKeys(partMap))
 		{
