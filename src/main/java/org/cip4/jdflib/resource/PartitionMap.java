@@ -149,9 +149,10 @@ class PartitionMap
 	 *
 	 * @param vPartIDKeys
 	 */
-	void updatePartIDKeys(final List<String> vPartIDKeys)
+	void setPartIDKeys(final List<String> vPartIDKeys)
 	{
-		ContainerUtil.appendUnique(partIDKeys, vPartIDKeys);
+		partIDKeys.clear();
+		ContainerUtil.addAll(partIDKeys, vPartIDKeys);
 	}
 
 	/**

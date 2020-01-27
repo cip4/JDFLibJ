@@ -7659,6 +7659,7 @@ public class JDFResource extends JDFElement
 	static
 	{
 		setPartIDKeys.addAll(EnumPartIDKey.getEnumMap().keySet());
+		setPartIDKeys.add(AttributeName.PARTIDKEYS);
 	}
 
 	/**
@@ -7674,31 +7675,42 @@ public class JDFResource extends JDFElement
 
 			if (pm != null)
 			{
-				final String old = getNonEmpty_KElement(key);
-				if (!StringUtil.equals(old, value))
+				if (resourceRoot == this && AttributeName.PARTIDKEYS.equals(key))
 				{
-					final JDFAttributeMap partMapOld = old == null ? null : getPartMap();
-					super.setAttribute(key, value, nameSpaceURI);
-					final JDFAttributeMap partMap = getPartMap();
-					if (old != null && pm.partSize() > partMap.size())
+					final String oldpik = resourceRoot.getAttribute(AttributeName.PARTIDKEYS);
+					if (!StringUtil.equals(oldpik, value))
 					{
-						final List<JDFAttributeMap> keySet = pm.keyVector();
-						for (final JDFAttributeMap map : keySet)
+						pm.setPartIDKeys(StringArray.getVString(value, null));
+					}
+				}
+				else
+				{
+					final String old = getNonEmpty_KElement(key);
+					if (!StringUtil.equals(old, value))
+					{
+						final JDFAttributeMap partMapOld = old == null ? null : getPartMap();
+						super.setAttribute(key, value, nameSpaceURI);
+						final JDFAttributeMap partMap = getPartMap();
+						if (old != null && pm.partSize() > partMap.size())
 						{
-							if (old.equals(map.get(key)))
+							final List<JDFAttributeMap> keySet = pm.keyVector();
+							for (final JDFAttributeMap map : keySet)
 							{
-								// need to remove and put to ensure valid hash - do not simply modify the map; it is a hash key
-								final JDFResource r = pm.remove(map);
-								map.put(key, value);
-								pm.put(map, r);
+								if (old.equals(map.get(key)))
+								{
+									// need to remove and put to ensure valid hash - do not simply modify the map; it is a hash key
+									final JDFResource r = pm.remove(map);
+									map.put(key, value);
+									pm.put(map, r);
+								}
 							}
 						}
-					}
-					else
-					{
-						if (partMapOld != null)
-							pm.remove(partMapOld);
-						pm.put(partMap, this);
+						else
+						{
+							if (partMapOld != null)
+								pm.remove(partMapOld);
+							pm.put(partMap, this);
+						}
 					}
 				}
 			}

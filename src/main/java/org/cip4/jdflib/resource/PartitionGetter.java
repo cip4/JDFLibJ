@@ -812,7 +812,6 @@ public class PartitionGetter
 		final List<String> vPartIDKeys = updatePartIDKeys(partMap, vPartKeys);
 
 		resourceRoot.setPartIDKeyList(vPartIDKeys);
-		leafMap.updatePartIDKeys(vPartIDKeys);
 
 		final int s = vPartIDKeys == null ? 0 : vPartIDKeys.size();
 		if (s < partMap.size())
@@ -930,7 +929,6 @@ public class PartitionGetter
 		{
 			resourceRoot.addPartIDKey(partType);
 			partIDKeys = resourceRoot.getPartIDKeys();
-			leafMap.updatePartIDKeys(partIDKeys);
 		}
 		final JDFAttributeMap map = parent.getPartMap();
 		map.put(partType.getName(), value);
