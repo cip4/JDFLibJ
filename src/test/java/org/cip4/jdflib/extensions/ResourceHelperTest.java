@@ -137,6 +137,18 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testSetResourceAttribute()
+	{
+		final ResourceHelper rh = new XJDFHelper("j1", null).getCreateSet(ElementName.MEDIA, EnumUsage.Input).getCreatePartition(0, false);
+		assertNull(rh.getResourceAttribute("foo"));
+		rh.setResourceAttribute("foo", "bar");
+		assertEquals("bar", rh.getResourceAttribute("foo"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testGetStatus()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
@@ -394,6 +406,19 @@ public class ResourceHelperTest extends JDFTestCaseBase
 		final KElement comp = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Input).getCreatePartition(null, true).getResource();
 		rhm.ensureReference(comp, null);
 		assertEquals(rhm.getID(), comp.getAttribute("MediaRef"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testEnsureReference2()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", null);
+		final ResourceHelper rhm = h.getCreateSet(ElementName.MEDIA, null).getCreatePartition(null, false);
+		final ResourceHelper comp = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Input).getCreatePartition(null, true);
+		rhm.ensureReference(comp, null);
+		assertEquals(rhm.getID(), comp.getResourceAttribute("MediaRef"));
 	}
 
 	/**

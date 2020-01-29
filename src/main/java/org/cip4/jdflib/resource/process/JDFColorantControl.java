@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -54,6 +54,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorantControl;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -220,26 +221,26 @@ public class JDFColorantControl extends JDFAutoColorantControl
 		final String model = getProcessColorModel();
 		if ("DeviceCMY".equals(model))
 		{
-			vName.add("Cyan");
-			vName.add("Magenta");
-			vName.add("Yellow");
+			vName.add(JDFConstants.SEPARATION_CYAN);
+			vName.add(JDFConstants.SEPARATION_MAGENTA);
+			vName.add(JDFConstants.SEPARATION_YELLOW);
 		}
 		else if ("DeviceCMYK".equals(model))
 		{
-			vName.add("Cyan");
-			vName.add("Magenta");
-			vName.add("Yellow");
-			vName.add("Black");
+			vName.add(JDFConstants.SEPARATION_CYAN);
+			vName.add(JDFConstants.SEPARATION_MAGENTA);
+			vName.add(JDFConstants.SEPARATION_YELLOW);
+			vName.add(JDFConstants.SEPARATION_BLACK);
 		}
 		else if ("DeviceGray".equals(model))
 		{
-			vName.add("Black");
+			vName.add(JDFConstants.SEPARATION_BLACK);
 		}
 		else if ("DeviceRGB".equals(model))
 		{
-			vName.add("Red");
-			vName.add("Green");
-			vName.add("Blue");
+			vName.add(JDFConstants.SEPARATION_RED);
+			vName.add(JDFConstants.SEPARATION_GREEN);
+			vName.add(JDFConstants.SEPARATION_BLUE);
 		}
 		else if ("DeviceN".equals(model))
 		{

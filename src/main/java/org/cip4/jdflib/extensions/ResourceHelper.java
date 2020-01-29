@@ -209,9 +209,10 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
+	 * ensure a reference *FROM* src
 	 *
 	 * @param src
-	 * @param key
+	 * @param key the reference key in src
 	 *
 	 */
 	public void ensureReference(final KElement src, String key)
@@ -225,6 +226,18 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 			final String id = ensureID();
 			src.setAttribute(key, id);
 		}
+	}
+
+	/**
+	 * ensure a reference *FROM* src's explicit resource
+	 *
+	 * @param src
+	 * @param key the reference key in src
+	 *
+	 */
+	public void ensureReference(final ResourceHelper src, final String key)
+	{
+		ensureReference(src == null ? null : src.getResource(), key);
 	}
 
 	/**
@@ -499,6 +512,14 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
+	 *
+	 */
+	public void setResourceAttribute(final String attrib, final String value)
+	{
+		getCreateResource().setAttribute(attrib, value);
+	}
+
+	/**
 	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getCreateAmountPool()
 	 */
 	@Override
@@ -592,6 +613,12 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public void setGeneralID(final String idUsage, final String idValue)
 	{
 		super.setGeneralID(idUsage, idValue);
+	}
+
+	public Object getResourceAttribute(final String string)
+	{
+		final KElement resource = getResource();
+		return resource == null ? null : resource.getNonEmpty(string);
 	}
 
 }

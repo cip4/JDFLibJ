@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -46,6 +46,7 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoPreview.EnumPreviewUsage;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.ICSConstants;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -83,7 +84,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	/**
 	 *
 	 */
-	public static final String MISCPS_PRINTING = "MISCPS.Printing";
+	public static final String MISCPS_PRINTING = ICSConstants.MISCPS_PRINTING;
 	/**
 	 *
 	 */
@@ -134,7 +135,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	protected void fillCatMaps()
 	{
 		super.fillCatMaps();
-		catMap.put(MISCPS_PRINTING, new VString("InkZoneCalculation ConventionalPrinting", null));
+		catMap.put(ICSConstants.MISCPS_PRINTING, new VString("InkZoneCalculation ConventionalPrinting", null));
 	}
 
 	/**
@@ -157,7 +158,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	{
 		if (grayBox)
 		{
-			setCategory(MISCPS_PRINTING);
+			setCategory(ICSConstants.MISCPS_PRINTING);
 		}
 		// theStatusCounter.addIgnorePart(EnumPartIDKey.Side);
 		theStatusCounter.addIgnorePart(EnumPartIDKey.Separation);

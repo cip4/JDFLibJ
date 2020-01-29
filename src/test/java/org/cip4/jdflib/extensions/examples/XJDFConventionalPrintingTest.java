@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -37,24 +37,32 @@
 package org.cip4.jdflib.extensions.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumSheetLay;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.ICSConstants;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.util.JDFDate;
 import org.junit.Test;
 
 /**
@@ -89,6 +97,58 @@ public class XJDFConventionalPrintingTest extends JDFTestCaseBase
 		m.setMediaType(EnumMediaType.Paper);
 
 		writeRoundTripX(xjdfHelper, "simpleConventional", EnumValidationLevel.Complete);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testP2SCP()
+	{
+
+		final XJDFHelper xjdfHelper = new XJDFHelper("CP2", null);
+		xjdfHelper.setTypes(EnumType.ConventionalPrinting.getName());
+		xjdfHelper.setCategory(ICSConstants.MISCPS_PRINTING);
+		xjdfHelper.setDescriptiveName("My press run of sheet s1");
+
+		final ProductHelper rootProduct = xjdfHelper.getCreateRootProduct(0);
+		rootProduct.setAmount(800);
+
+		final JDFAttributeMap sheetmap = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
+
+		final SetHelper shNI = xjdfHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
+		final ResourceHelper rhNI = shNI.getCreatePartition(sheetmap, true);
+		final JDFNodeInfo ni = (JDFNodeInfo) rhNI.getResource();
+		ni.setEnd(new JDFDate().addOffset(0, 0, 0, 99));
+		ni.setJobPriority(100);
+
+		final SetHelper shSheet = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
+		final ResourceHelper rhSheet = shSheet.getCreatePartition(sheetmap, true);
+		final SetHelper shMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
+		final ResourceHelper rhMedia = shMedia.getCreatePartition(sheetmap, true);
+		rhMedia.ensureReference(rhSheet, null);
+		final JDFMedia m = (JDFMedia) rhMedia.getCreateResource();
+		m.setDimensionCM(70, 50);
+		m.setMediaType(EnumMediaType.Paper);
+		m.setISOPaperSubstrate(EnumISOPaperSubstrate.PS3);
+		m.setGrainDirection(EnumGrainDirection.XDirection);
+
+		final SetHelper shCPP = xjdfHelper.getCreateSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
+		final JDFConventionalPrintingParams cpp = (JDFConventionalPrintingParams) (shCPP.getCreatePartition(sheetmap, true).getResource());
+		cpp.setWorkStyle(EnumWorkStyle.Perfecting);
+		cpp.setSheetLay(EnumSheetLay.Left);
+
+		final SetHelper shout = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
+		shout.getCreatePartition(sheetmap, false).setAmount(444, null, true);
+		shout.getCreatePartition(sheetmap, false).setAmount(44, null, false);
+		final JDFComponent comp = (JDFComponent) rhSheet.getResource();
+		rhMedia.ensureReference(comp, null);
+
+		final SetHelper shcc = xjdfHelper.getCreateSet(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		final JDFColorantControl cc = (JDFColorantControl) shcc.getCreatePartition(sheetmap, true).getResource();
+		cc.setAttribute(ElementName.COLORANTORDER, JDFConstants.SEPARATIONS_CMYK, null);
+
+		writeRoundTripX(xjdfHelper, "p2sConventional", EnumValidationLevel.Complete);
 	}
 
 	/**

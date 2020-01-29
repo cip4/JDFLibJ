@@ -1047,6 +1047,15 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
+	 *
+	 * @param cat
+	 */
+	public void setCategory(final String cat)
+	{
+		setAttribute(AttributeName.CATEGORY, cat);
+	}
+
+	/**
 	 * @return the productID of the product
 	 *
 	 */
