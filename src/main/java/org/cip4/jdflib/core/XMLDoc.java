@@ -253,12 +253,11 @@ public class XMLDoc implements Cloneable
 	}
 
 	/**
-	 * constructor
+	 * convenience constructor
 	 *
 	 * @param strDocType ElementName.JDF, ElementName.JMF, "Config" ...
-	 * @deprecated use XMLDoc(String strDocType, String namespaceURI)
+	 *
 	 */
-	@Deprecated
 	public XMLDoc(final String strDocType)
 	{
 		this(strDocType, null);

@@ -418,6 +418,33 @@ public class HotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	public synchronized void testGetListener() throws Exception
+	{
+		final MyListener myl = new MyListener(true);
+		hf = new HotFolder(theHF, ".txt", myl);
+		hf.addListener(myl, "xml");
+		assertEquals(hf.getListener(0).getListener(), myl);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public synchronized void testGetExtension() throws Exception
+	{
+		final MyListener myl = new MyListener(true);
+		hf = new HotFolder(theHF, null, null);
+		assertEquals(null, hf.getAllExtensions());
+		hf.addListener(myl, "xml");
+		assertEquals("xml", hf.getAllExtensions());
+		hf.addListener(myl, "txt");
+		assertEquals("xml,txt", hf.getAllExtensions());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	public synchronized void testLog() throws Exception
 	{
 		hf = new HotFolder(theHF, ".txt", new MyListener(true));

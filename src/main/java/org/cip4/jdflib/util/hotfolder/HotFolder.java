@@ -57,10 +57,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.StringArray;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.FileUtil;
-import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.file.FileSorter;
 
 /**
@@ -86,6 +84,16 @@ public class HotFolder
 	public void setMaxConcurrent(final int maxConcurrent)
 	{
 		HotFolderRunner.getCreateTherunner().setMaxConcurrent(maxConcurrent);
+	}
+
+	/**
+	 *
+	 * @param i
+	 * @return
+	 */
+	public ExtensionListener getListener(final int i)
+	{
+		return ContainerUtil.get(hfl, i);
 	}
 
 	/**
@@ -187,7 +195,7 @@ public class HotFolder
 	 *
 	 * @return the comma separated list of extensions
 	 */
-	private String getAllExtensions()
+	String getAllExtensions()
 	{
 		if (allExtensions != null)
 			return allExtensions;
@@ -196,7 +204,7 @@ public class HotFolder
 		{
 			return null;
 		}
-		final VString allextensions = new VString();
+		final StringArray allextensions = new StringArray();
 		for (int i = 0; i < hfl.size(); i++)
 		{
 			final Set<String> ext = hfl.get(i).extension;
@@ -211,7 +219,7 @@ public class HotFolder
 			}
 		}
 		allextensions.unify();
-		allExtensions = allextensions.size() == 0 ? null : StringUtil.setvString(allextensions, ",", null, null);
+		allExtensions = allextensions.getString(JDFConstants.COMMA, null, null);
 		return allExtensions;
 	}
 
@@ -364,76 +372,6 @@ public class HotFolder
 		}
 
 		return found;
-	}
-
-	/**
-	 * simple listenerner class that processes files by extension
-	 *
-	 * @author prosirai
-	 *
-	 */
-	protected static class ExtensionListener
-	{
-		final protected HotFolderListener folderListener;
-		final protected Set<String> extension;
-
-		protected ExtensionListener(final HotFolderListener _hfl, String ext)
-		{
-			folderListener = _hfl;
-			ext = StringUtil.getNonEmpty(ext);
-			if (ext != null)
-			{
-				extension = new HashSet<>();
-				final StringArray vs = StringArray.getVString(ext, JDFConstants.COMMA);
-				for (String s : vs)
-				{
-					if (s.startsWith("."))
-					{
-						s = s.substring(1);
-					}
-					s = s.toLowerCase();
-					extension.add(s);
-				}
-			}
-			else
-			{
-				extension = null;
-			}
-		}
-
-		/**
-		 * @param file
-		 */
-		public void hotFile(final File file)
-		{
-			if (file == null)
-			{
-				return;
-			}
-			if (extension != null)
-			{
-				String fileExt = FileUtil.getExtension(file);
-				if (fileExt != null)
-				{
-					fileExt = fileExt.toLowerCase();
-					if (!extension.contains(fileExt))
-					{
-						// wrong extension
-						return;
-					}
-				}
-			}
-			folderListener.hotFile(file);
-		}
-
-		/**
-		 * @see java.lang.Object#toString()
-		 */
-		@Override
-		public String toString()
-		{
-			return "ExtensionListener [" + (extension != null ? "extension=" + extension : "") + "]";
-		}
 	}
 
 	/**

@@ -904,7 +904,7 @@ public class PartitionGetter
 		{
 			throw new JDFException("Attempting to add null partition to resource: " + parent.buildXPath(null, 1));
 		}
-		List<String> partIDKeys = leafMap.getPartIDKeys();
+		final List<String> partIDKeys = leafMap.getPartIDKeys();
 		final int posOfType = partIDKeys == null ? -1 : partIDKeys.indexOf(partType.getName());
 		if (posOfType < 0)
 		{
@@ -932,7 +932,6 @@ public class PartitionGetter
 		if (partIDKeys == null || !partIDKeys.contains(partType.getName()))
 		{
 			resourceRoot.addPartIDKey(partType);
-			partIDKeys = resourceRoot.getPartIDKeys();
 		}
 		final JDFAttributeMap map = parent.getPartMap();
 		map.put(partType.getName(), value);
