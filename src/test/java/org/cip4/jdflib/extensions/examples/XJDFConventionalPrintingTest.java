@@ -46,6 +46,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.ICSConstants;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -113,6 +114,10 @@ public class XJDFConventionalPrintingTest extends JDFTestCaseBase
 
 		final ProductHelper rootProduct = xjdfHelper.getCreateRootProduct(0);
 		rootProduct.setAmount(800);
+
+		final SetHelper shCI = xjdfHelper.getCreateSet(ElementName.CUSTOMERINFO, EnumUsage.Input);
+		final JDFCustomerInfo ci = (JDFCustomerInfo) shCI.getCreatePartition(0, true).getResource();
+		ci.setCustomerID("C1");
 
 		final JDFAttributeMap sheetmap = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
 

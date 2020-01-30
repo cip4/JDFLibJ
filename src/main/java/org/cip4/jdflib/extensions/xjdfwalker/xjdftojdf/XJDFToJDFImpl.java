@@ -84,6 +84,7 @@ import org.cip4.jdflib.util.UnitParser;
  */
 public class XJDFToJDFImpl extends PackageElementWalker
 {
+	static final String PRODUCT_NAME = "generated product component";
 	JDFDoc jdfDoc;
 	Map<String, IDPart> idMap;
 	boolean firstConvert;
@@ -401,7 +402,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		parent.moveElement(oldParent.getResourcePool(), null);
 
 		final JDFComponent c = (JDFComponent) parent.addResource(ElementName.COMPONENT, EnumUsage.Output);
-		c.setDescriptiveName("dummy output");
+		c.setDescriptiveName(PRODUCT_NAME);
 		c.setComponentType(EnumComponentType.FinalProduct, null);
 
 		firstConvert = true;

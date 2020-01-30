@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -726,7 +726,7 @@ class PostConverter
 			parentProduct.appendNodeInfo().setDescriptiveName("Generated root NodeInfo");
 		}
 		final JDFResource r = parentProduct.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
-		if (r != null && "dummy outout".equals(r.getDescriptiveName()))
+		if (r != null && XJDFToJDFImpl.PRODUCT_NAME.equals(r.getDescriptiveName()))
 		{
 			final JDFResource rNode = childNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
 			if (rNode != null)
