@@ -1,7 +1,5 @@
-/*
- *
+/**
  * The CIP4 Software License, Version 1.0
- *
  *
  * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
@@ -43,8 +41,7 @@ package org.cip4.jdflib.core;
  *
  * list of ICS related enums and STrings
  *
- * @author rainerprosi
- * @date Sep 15, 2010
+ * @author rainer prosi
  */
 public abstract class ICSConstants
 {
