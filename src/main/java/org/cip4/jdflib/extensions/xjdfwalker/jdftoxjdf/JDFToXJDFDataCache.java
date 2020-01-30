@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -37,9 +37,11 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import java.util.HashSet;
+import java.util.List;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -75,18 +77,18 @@ class JDFToXJDFDataCache
 	 */
 	private JDFToXJDFDataCache()
 	{
-		resAttribs = generateResourceAttributes();
-		elemAttribs = generateElementAttributes();
+		resAttribs = new StringArray(generateResourceAttributes());
+		elemAttribs = new StringArray(generateElementAttributes());
 		inlineSet = generateInlineSet();
-		placedObjectAttribs = generatePlacedObjectAttributes();
-		amountAttribs = new VString("Amount,ActualAmount,MinAmount,MaxAmount", ",");
+		placedObjectAttribs = new StringArray(generatePlacedObjectAttributes());
+		amountAttribs = new StringArray("Amount,ActualAmount,MinAmount,MaxAmount", ",");
 	}
 
 	/**
 	 *
 	 * @return
 	 */
-	private VString generatePlacedObjectAttributes()
+	private List<String> generatePlacedObjectAttributes()
 	{
 		final JDFContentObject co = (JDFContentObject) new JDFDoc(ElementName.CONTENTOBJECT).getRoot();
 		final JDFMarkObject mo = (JDFMarkObject) new JDFDoc(ElementName.MARKOBJECT).getRoot();
@@ -95,18 +97,18 @@ class JDFToXJDFDataCache
 		return vmo.getOverlapping(vco);
 	}
 
-	private final VString elemAttribs;
+	private final StringArray elemAttribs;
 	private final HashSet<String> inlineSet;
-	private final VString resAttribs;
-	private final VString placedObjectAttribs;
-	final private VString amountAttribs;
+	private final StringArray resAttribs;
+	private final StringArray placedObjectAttribs;
+	final private StringArray amountAttribs;
 
 	/**
 	 *
 	 *
 	 * @return
 	 */
-	private VString generateElementAttributes()
+	private List<String> generateElementAttributes()
 	{
 		final JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc(ElementName.RESOURCEPOOL).getRoot();
 		return dummyResPool.knownAttributes();
@@ -172,7 +174,7 @@ class JDFToXJDFDataCache
 	 *
 	 * @return
 	 */
-	private VString generateResourceAttributes()
+	private List<String> generateResourceAttributes()
 	{
 		VString ra = new VString();
 		final JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc(ElementName.RESOURCEPOOL).getRoot();
@@ -192,7 +194,7 @@ class JDFToXJDFDataCache
 	/**
 	 * @return the elemAttribs
 	 */
-	static VString getElemAttribs()
+	static StringArray getElemAttribs()
 	{
 		return getCache().elemAttribs;
 	}
@@ -208,7 +210,7 @@ class JDFToXJDFDataCache
 	/**
 	 * @return the resAttribs
 	 */
-	static VString getResAttribs()
+	static StringArray getResAttribs()
 	{
 		return getCache().resAttribs;
 	}
@@ -216,7 +218,7 @@ class JDFToXJDFDataCache
 	/**
 	 * @return the placedObjectAttribs
 	 */
-	static VString getPlacedObjectAttribs()
+	static StringArray getPlacedObjectAttribs()
 	{
 		return getCache().placedObjectAttribs;
 	}
@@ -225,7 +227,7 @@ class JDFToXJDFDataCache
 	 *
 	 * @return
 	 */
-	static VString getAmountAttribs()
+	static StringArray getAmountAttribs()
 	{
 		return getCache().amountAttribs;
 	}

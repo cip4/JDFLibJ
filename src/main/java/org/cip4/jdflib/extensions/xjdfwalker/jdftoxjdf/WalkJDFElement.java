@@ -492,8 +492,8 @@ public class WalkJDFElement extends WalkElement
 	boolean isExchangeResource(final JDFResourceLink resLink, final JDFResource linkTarget)
 	{
 
-		if (!jdfToXJDF.isSingleNode()
-				|| (resLink != null && EnumUsage.Input.equals(resLink.getUsage()) && resLink.hasNonEmpty(AttributeName.COMBINEDPROCESSINDEX) && !resLink.getCombinedProcessIndex().contains(0)))
+		if (!jdfToXJDF.isSingleNode() || (resLink != null && EnumUsage.Input.equals(resLink.getUsage()) && resLink.hasNonEmpty(AttributeName.COMBINEDPROCESSINDEX)
+				&& !resLink.getCombinedProcessIndex().contains(0)))
 		{
 
 			final JDFResource resInRoot = linkTarget == null ? null : linkTarget.getResourceRoot();
@@ -583,7 +583,7 @@ public class WalkJDFElement extends WalkElement
 			if (ap == null)
 			{
 				final JDFAttributeMap amounts = rl.getAttributeMap().reduceMap(JDFToXJDFDataCache.getAmountAttribs());
-				if (amounts.size() > 0)
+				if (!amounts.isEmpty())
 				{
 					ap = (JDFAmountPool) newLeaf.getCreateElement(ElementName.AMOUNTPOOL);
 					for (final String key : amounts.keySet())
