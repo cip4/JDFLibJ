@@ -626,12 +626,12 @@ class PostXJDFWalker extends BaseElementWalker
 					if (apNew == null)
 					{
 						phNew.getRoot().copyElement(partAmount, null);
+						walkTree(shNew.getRoot(), null);
 					}
 					else
 					{
 						apNew.copyElements(partAmount.getMatchingPartAmountVector(null), null);
 					}
-					walkTree(shNew.getRoot(), null);
 				}
 				final VElement vpa = partAmount.getChildElementVector(ElementName.PARTAMOUNT, null);
 				for (final KElement pa : vpa)
