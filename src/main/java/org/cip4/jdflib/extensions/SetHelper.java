@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -38,6 +38,7 @@ package org.cip4.jdflib.extensions;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -79,6 +80,20 @@ public class SetHelper extends BaseXJDFHelper
 	 *
 	 */
 	public static final String RESOURCE_SET = XJDFConstants.ResourceSet;
+
+	/**
+	 *
+	 * @param bGood good=true
+	 * @return
+	 */
+	public double getAmountSum(final boolean bGood)
+	{
+		double a = 0;
+		final List<ResourceHelper> l = getPartitionList();
+		for (final ResourceHelper h : l)
+			a += h.getAmountSum(bGood);
+		return a;
+	}
 
 	/**
 	 * @param set the set to help on
@@ -380,9 +395,27 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public Vector<ResourceHelper> getPartitions()
 	{
-		final VElement v = theElement.getChildElementVector(getPartitionName(), null);
+		final Collection<KElement> v = theElement.getChildArray(getPartitionName(), null);
 
 		final Vector<ResourceHelper> v2 = new Vector<>();
+		if (v != null)
+		{
+			for (final KElement e : v)
+			{
+				v2.add(new ResourceHelper(e));
+			}
+		}
+		return v2;
+	}
+
+	/**
+	 * @return the vector of partition helpers
+	 */
+	public List<ResourceHelper> getPartitionList()
+	{
+		final Collection<KElement> v = theElement.getChildArray(getPartitionName(), null);
+
+		final ArrayList<ResourceHelper> v2 = new ArrayList<>();
 		if (v != null)
 		{
 			for (final KElement e : v)

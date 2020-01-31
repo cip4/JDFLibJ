@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -52,6 +52,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.junit.Test;
 
 /**
@@ -70,6 +71,28 @@ public class SetHelperTest extends JDFTestCaseBase
 		assertNull(SetHelper.getHelper(null));
 		final SetHelper sh = SetHelper.getHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetAmountSum()
+	{
+		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
+		final KElement root = d.getRoot();
+		root.getCreateXPathElement("ResourceSet/Resource/Media");
+		final ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
+		final SetHelper sh = ph.getSet();
+		final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.RibbonName, "D1");
+		ph.setAmount(22, null, true);
+		ph.setAmount(33, null, false);
+		assertEquals(22, sh.getAmountSum(true), 0.001);
+		assertEquals(33, sh.getAmountSum(false), 0.001);
+		ph.setAmount(333, map, true);
+		assertEquals(355, sh.getAmountSum(true), 0.001);
+		assertEquals(33, sh.getAmountSum(false), 0.001);
+
 	}
 
 	/**

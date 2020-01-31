@@ -380,6 +380,26 @@ public class ResourceHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testGetAmountSum()
+	{
+		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);
+		final KElement root = d.getRoot();
+		root.getCreateXPathElement("ResourceSet/Resource/Media");
+		final ResourceHelper ph = new ResourceHelper(root.getXPathElement("ResourceSet/Resource"));
+		final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.RibbonName, "D1");
+		ph.setAmount(22, null, true);
+		ph.setAmount(33, null, false);
+		assertEquals(22, ph.getAmountSum(true), 0.001);
+		assertEquals(33, ph.getAmountSum(false), 0.001);
+		ph.setAmount(333, map, true);
+		assertEquals(355, ph.getAmountSum(true), 0.001);
+		assertEquals(33, ph.getAmountSum(false), 0.001);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testEnsureParts()
 	{
 		final JDFDoc d = new JDFDoc(XJDFConstants.XJDF);

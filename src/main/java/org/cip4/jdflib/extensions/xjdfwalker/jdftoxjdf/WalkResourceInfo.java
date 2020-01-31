@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,11 +36,13 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.Collection;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -51,6 +53,7 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.pool.JDFAmountPool;
+import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
@@ -103,9 +106,11 @@ public class WalkResourceInfo extends WalkJDFSubElement
 			}
 
 		}
+
 		moveToResourceSet((JDFResourceInfo) eNew, ri);
 		updateInfos((JDFResourceInfo) eNew);
 		eNew.removeAttribute(AttributeName.RESOURCENAME);
+		resInfo.removeChildrenByClass(JDFPart.class);
 		return eNew;
 	}
 
@@ -149,14 +154,43 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	private void moveToResourceSet(final JDFResourceInfo ri, final JDFResourceInfo jdfRI)
 	{
 		VJDFAttributeMap vPartMap = jdfRI.getPartMapVector();
+		final boolean hasScope = jdfRI.hasNonEmpty(AttributeName.SCOPE);
+		final SetHelper sh0 = SetHelper.getHelper(ri.getElement(XJDFConstants.ResourceSet));
 		if (VJDFAttributeMap.isEmpty(vPartMap))
 		{
-			final SetHelper sh = SetHelper.getHelper(ri.getElement(XJDFConstants.ResourceSet));
-			vPartMap = sh == null ? null : sh.getPartMapVector();
+			vPartMap = sh0 == null ? null : sh0.getPartMapVector();
+		}
+		else
+		{
+			final Vector<ResourceHelper> vp = sh0.getPartitions();
+			if (vp != null)
+			{
+				for (final ResourceHelper rh : vp)
+				{
+					VJDFAttributeMap m = rh.getPartMapVector();
+					m = VJDFAttributeMap.isEmpty(m) ? vPartMap : m.getOrMaps(vPartMap);
+					rh.setPartMapVector(m);
+				}
+			}
+
 		}
 		// needed for no amountpool in original
 		setAmountPool(jdfRI, jdfRI, null);
 		final JDFAmountPool ap = jdfRI.getAmountPool();
+		if (!hasScope)
+		{
+			final boolean isJobScope;
+			if (sh0 != null)
+			{
+				isJobScope = sh0.getAmountSum(true) <= 0;
+			}
+			else
+			{
+				isJobScope = jdfRI.getAmountPoolSumDouble(AttributeName.ACTUALAMOUNT, null) > 0;
+			}
+			final String value = isJobScope ? "Job" : "Estimate";
+			ri.setAttribute(AttributeName.SCOPE, value);
+		}
 		String resName = ri.getXPathAttribute("ResourceSet/@Name", null);
 		if (resName == null)
 		{
@@ -171,27 +205,48 @@ public class WalkResourceInfo extends WalkJDFSubElement
 
 		set.moveAttribute(AttributeName.PROCESSUSAGE, ri);
 		set.moveAttribute(AttributeName.ORIENTATION, ri);
+		set.moveAttribute(AttributeName.UNIT, ri);
 		set.moveAttribute(AttributeName.USAGE, ri);
 
 		final SetHelper sh = new SetHelper(set);
 		final Vector<ResourceHelper> newParts = sh.getCreatePartitions(vPartMap, false);
+		final boolean isEstimate = "Estimate".equals(ri.getAttribute(AttributeName.SCOPE));
 		for (final ResourceHelper ph : newParts)
 		{
-			if (ap == null)
+			JDFAmountPool apx = ph.getAmountPool();
+			if (apx == null)
 			{
-				// TODO use correct amounts
-				ph.setAmount(ri.getActualAmount(), null, true);
-				if (newParts.size() == 1)
+				if (ap == null)
 				{
-					ph.getRoot().moveAttribute(XJDFConstants.ExternalID, ri);
+					// TODO use correct amounts
+					ph.setAmount(ri.getActualAmount(), null, true);
+					if (newParts.size() == 1)
+					{
+						ph.getRoot().moveAttribute(XJDFConstants.ExternalID, ri);
+					}
+				}
+				else if (ph.getRoot().getElement(ElementName.AMOUNTPOOL) == null)
+				{
+					ap.reducePartAmounts(ph.getPartMapVector());
+					jdfToXJDF.walkTree(ap, ph.getRoot());
+					ap.deleteNode();
 				}
 			}
-			else if (ph.getRoot().getElement(ElementName.AMOUNTPOOL) == null)
+			if (isEstimate)
 			{
-				ap.reducePartAmounts(ph.getPartMapVector());
-				jdfToXJDF.walkTree(ap, ph.getRoot());
-				ap.deleteNode();
+				apx = ph.getAmountPool();
+
+				final Collection<JDFPartAmount> cpa = apx == null ? null : apx.getAllPartAmount();
+				if (cpa != null)
+				{
+					for (final JDFPartAmount pa : cpa)
+					{
+						pa.renameAttribute(AttributeName.AMOUNT, AttributeName.ACTUALAMOUNT);
+						pa.renameAttribute(AttributeName.WASTE, "ActualWaste");
+					}
+				}
 			}
+
 		}
 		if (newParts.size() > 1)
 		{

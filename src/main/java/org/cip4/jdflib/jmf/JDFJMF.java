@@ -50,6 +50,7 @@
  */
 package org.cip4.jdflib.jmf;
 
+import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -81,6 +82,30 @@ public class JDFJMF extends JDFAutoJMF
 	private static final long serialVersionUID = 1L;
 	private static String theSenderID = null;
 	private static final Log mLog = LogFactory.getLog(JDFElement.class);
+
+	/**
+	 * parse a JMF file
+	 *
+	 * @param file
+	 * @return the parsed JDFNode
+	 */
+	public static JDFJMF parseFile(final File file)
+	{
+		final JDFDoc doc = JDFDoc.parseFile(file);
+		return doc == null ? null : doc.getJMFRoot();
+	}
+
+	/**
+	 * parse a JMF file
+	 *
+	 * @param fileName
+	 * @return the parsed JDFNode
+	 */
+	public static JDFJMF parseFile(final String fileName)
+	{
+		final JDFDoc doc = JDFDoc.parseFile(fileName);
+		return doc == null ? null : doc.getJMFRoot();
+	}
 
 	/**
 	 * Constructor for JDFJMF

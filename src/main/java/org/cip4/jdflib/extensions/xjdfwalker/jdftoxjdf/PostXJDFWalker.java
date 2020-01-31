@@ -102,6 +102,7 @@ import org.cip4.jdflib.resource.process.JDFStripCellParams;
 import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
 import org.cip4.jdflib.resource.process.postpress.JDFThreadSewingParams;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -125,6 +126,9 @@ class PostXJDFWalker extends BaseElementWalker
 	 */
 	private boolean bDeliveryIntent;
 	private boolean retainAll;
+
+	private static final StringArray metaKeys = new StringArray(new String[] { AttributeName.COMMANDRESULT, AttributeName.JOBID, AttributeName.JOBPARTID, AttributeName.LEVEL, AttributeName.MODULEID,
+			AttributeName.QUEUEENTRYID, AttributeName.SCOPE, AttributeName.SPEED, AttributeName.TOTALAMOUNT, AttributeName.TYPES });
 
 	/**
 	 *
@@ -2508,8 +2512,7 @@ class PostXJDFWalker extends BaseElementWalker
 		public boolean matches(final KElement e)
 		{
 			final String localName = e.getLocalName();
-			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE)
-					|| localName.startsWith(ElementName.COMMAND);
+			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE) || localName.startsWith(ElementName.COMMAND);
 		}
 
 	}
@@ -2547,16 +2550,20 @@ class PostXJDFWalker extends BaseElementWalker
 
 			if (!ContainerUtil.isEmpty(vr))
 			{
-				final List<SetHelper> sets = new ArrayList<>();
+				final ListMap<JDFAttributeMap, SetHelper> setMap = new ListMap<>();
 				for (final JDFResourceInfo ri : vr)
 				{
+					final JDFAttributeMap metaMap = getMetaMap(ri);
 					final Collection<KElement> childArray = ri.getChildArray(XJDFConstants.ResourceSet, null);
 					for (final KElement e : childArray)
 					{
-						sets.add(new SetHelper(e));
+						setMap.putOne(metaMap, new SetHelper(e));
 					}
 				}
-				combineSameSets(sets);
+
+				for (final List<SetHelper> sets : setMap.values())
+					combineSameSets(sets);
+
 				for (final JDFResourceInfo ri : vr)
 				{
 					if (!ri.hasChildElement(XJDFConstants.ResourceSet, null))
@@ -2566,6 +2573,13 @@ class PostXJDFWalker extends BaseElementWalker
 				}
 			}
 
+		}
+
+		private JDFAttributeMap getMetaMap(final JDFResourceInfo ri)
+		{
+			final JDFAttributeMap m = ri.getAttributeMap();
+			m.reduceMap(metaKeys);
+			return m;
 		}
 
 		/**
@@ -3079,8 +3093,8 @@ class PostXJDFWalker extends BaseElementWalker
 	@Override
 	public String toString()
 	{
-		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll
-				+ ", removeSignatureName=" + removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
+		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll + ", removeSignatureName="
+				+ removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
 	}
 
 	void combineSameSets()
@@ -3110,7 +3124,7 @@ class PostXJDFWalker extends BaseElementWalker
 
 	void combineSameSets(final List<SetHelper> v)
 	{
-		while (v.size() > 0)
+		while (v.size() > 1)
 		{
 			final ArrayList<SetHelper> sameSets = new ArrayList<>();
 			final SetHelper firstSet = v.remove(0);

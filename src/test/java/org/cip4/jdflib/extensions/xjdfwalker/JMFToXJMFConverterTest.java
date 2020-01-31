@@ -42,6 +42,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
@@ -84,6 +86,7 @@ import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFEvent;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFPerson;
@@ -708,7 +711,8 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
 		assertNotNull(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/Part/@LotID", null));
-		assertEquals(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/Part/@LotID", null), jmf.getXPathAttribute("Signal/ResourceInfo/AmountPool/PartAmount/Part/@LotID", null));
+		assertEquals(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/Part/@LotID", null),
+				jmf.getXPathAttribute("Signal/ResourceInfo/AmountPool/PartAmount/Part/@LotID", null));
 		assertEquals(10, xjmf.getXPathElementVector("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount", 0).size());
 
 		xjmf.write2File(sm_dirTestDataTemp + "resourceInk.xjmf");
@@ -744,7 +748,59 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 * test ink resource signal
 	 */
 	@Test
-	public void testResourceSignalActualAmount()
+	public void testResourceSignalScope()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
+
+		final JDFSignal signal = jmf.getSignal(0);
+		final JDFResourceQuParams rqp = signal.getCreateResourceQuParams(0);
+		rqp.setJobID("job1");
+		rqp.setAttribute(AttributeName.SCOPE, "Estimate");
+		final JDFResourceInfo ri = signal.getCreateResourceInfo(0);
+		ri.setResourceName(ElementName.MISCCONSUMABLE);
+		ri.setActualAmount(100);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals("Estimate", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@Scope", null));
+		assertEquals("100", xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
+
+		xjmf.write2File(sm_dirTestDataTemp + "resourceSpeed.xjmf");
+	}
+
+	/**
+	 *
+	 * test ink resource signal
+	 */
+	@Test
+	public void testResourceSignalGeneratedScopeEstimate()
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
+
+			final JDFSignal signal = jmf.getSignal(0);
+			final JDFResourceQuParams rqp = signal.getCreateResourceQuParams(0);
+			rqp.setJobID("job1");
+			final JDFResourceInfo ri = signal.getCreateResourceInfo(0);
+			ri.setResourceName(ElementName.MISCCONSUMABLE);
+			if (i == 1)
+				ri.appendElement(ElementName.MISCCONSUMABLE);
+			ri.setAmount(100);
+			final JDFToXJDF conv = new JDFToXJDF();
+			final KElement xjmf = conv.makeNewJMF(jmf);
+			assertEquals("Estimate", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@Scope", null));
+			assertEquals("100", xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
+
+			xjmf.write2File(sm_dirTestDataTemp + "resourceSpeed.xjmf");
+		}
+	}
+
+	/**
+	 *
+	 * test ink resource signal
+	 */
+	@Test
+	public void testResourceSignalGeneratedScopeJob()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
 
@@ -756,9 +812,123 @@ public class JMFToXJMFConverterTest extends JDFTestCaseBase
 		ri.setActualAmount(100);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals("Job", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@Scope", null));
 		assertEquals("100", xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
 
 		xjmf.write2File(sm_dirTestDataTemp + "resourceSpeed.xjmf");
+	}
+
+	/**
+	 *
+	 * test ink resource signal
+	 */
+	@Test
+	public void testResourceSignalInk()
+	{
+		final JDFJMF jmf = JDFJMF.parseFile(sm_dirTestData + "ink.jmf");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		xjmf.write2File(sm_dirTestDataTemp + "ink.xjmf");
+		assertEquals("Estimate", xjmf.getXPathAttribute("SignalResource/ResourceInfo[1]/@Scope", null));
+		assertEquals("Job", xjmf.getXPathAttribute("SignalResource/ResourceInfo[2]/@Scope", null));
+		assertEquals("118830", xjmf.getXPathAttribute("SignalResource/ResourceInfo[1]/@JobID", null));
+		assertEquals("118830", xjmf.getXPathAttribute("SignalResource/ResourceInfo[2]/@JobID", null));
+		final SetHelper sh = SetHelper.getHelper(xjmf.getXPathElement("SignalResource/ResourceInfo/ResourceSet"));
+		assertEquals(4, sh.getPartitions().size());
+		for (final ResourceHelper rh : sh.getPartitions())
+		{
+			assertTrue(rh.getAmount(null, true) > 0);
+			assertTrue(rh.getAmount(null, false) > 0);
+		}
+
+	}
+
+	/**
+	 *
+	 * test ink resource signal
+	 */
+	@Test
+	public void testResourceSignalKWH()
+	{
+		final JDFJMF jmf = JDFJMF.parseFile(sm_dirTestData + "kwh.jmf");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		xjmf.write2File(sm_dirTestDataTemp + "kwh.xjmf");
+		assertEquals("Job", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@Scope", null));
+		final SetHelper sh = SetHelper.getHelper(xjmf.getXPathElement("SignalResource/ResourceInfo/ResourceSet"));
+		final List<JDFResourceInfo> childArrayByClass = xjmf.getChildArrayByClass(JDFResourceInfo.class, true, 0);
+		assertEquals(3, childArrayByClass.size());
+		for (final ResourceHelper rh : sh.getPartitions())
+		{
+			assertTrue(rh.getAmount(null, true) > 0);
+			assertFalse(rh.getAmount(null, false) > 0);
+		}
+		for (final JDFResourceInfo ri : childArrayByClass)
+		{
+			assertTrue(ri.hasNonEmpty(AttributeName.MODULEID));
+		}
+	}
+
+	/**
+	 *
+	 * test ink resource signal
+	 */
+	@Test
+	public void testResourceSignalActualAmount()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
+
+		final JDFSignal signal = jmf.getSignal(0);
+		final JDFResourceQuParams rqp = signal.getCreateResourceQuParams(0);
+		rqp.setJobID("job1");
+		final JDFResourceInfo ri = signal.getCreateResourceInfo(0);
+		ri.setResourceName(ElementName.MISCCONSUMABLE);
+		ri.setAmount(50);
+		ri.setActualAmount(100);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals("50", xjmf.getXPathAttribute("SignalResource/ResourceInfo[1]/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
+		assertEquals("100", xjmf.getXPathAttribute("SignalResource/ResourceInfo[2]/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
+		assertEquals("Estimate", xjmf.getXPathAttribute("SignalResource/ResourceInfo[1]/@Scope", null));
+		assertEquals("Job", xjmf.getXPathAttribute("SignalResource/ResourceInfo[2]/@Scope", null));
+
+		xjmf.write2File(sm_dirTestDataTemp + "resourceSpeed.xjmf");
+	}
+
+	/**
+	 *
+	 * test ink resource signal
+	 */
+	@Test
+	public void testResourceSignalPart()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(false, null);
+
+		final JDFSignal signal = jmf.getSignal(0);
+		final JDFResourceQuParams rqp = signal.getCreateResourceQuParams(0);
+		rqp.setJobID("job1");
+		final JDFResourceInfo ri = signal.getCreateResourceInfo(0);
+		ri.setProductID("P1");
+		final JDFAttributeMap mPart = new JDFAttributeMap();
+		mPart.put(AttributeName.SIGNATURENAME, "Sig1");
+		mPart.put(AttributeName.SHEETNAME, "S1");
+		mPart.put(AttributeName.SIDE, "Front");
+		ri.setPartMap(mPart);
+		ri.setActualAmount(100);
+		final JDFResource mc = ri.appendResource(ElementName.MISCCONSUMABLE);
+		mc.setAttribute(AttributeName.CONSUMABLETYPE, "Foo");
+		mc.setDescriptiveName("name");
+		mc.setProductID("P1");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		xjmf.write2File(sm_dirTestDataTemp + "resourcePart.xjmf");
+		assertEquals("100", xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
+		final SetHelper sh = new SetHelper(xjmf.getXPathElement("SignalResource/ResourceInfo/ResourceSet"));
+		assertEquals(1, sh.getPartitions().size());
+		assertEquals("P1", sh.getPartition(0).getExternalID());
+		assertNull(xjmf.getXPathElement("SignalResource/ResourceInfo/Part"));
 	}
 
 	/**

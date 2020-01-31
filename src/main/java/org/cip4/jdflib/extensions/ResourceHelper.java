@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -49,6 +49,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.IAmountPoolContainer;
 import org.cip4.jdflib.pool.JDFAmountPool;
+import org.cip4.jdflib.pool.JDFAmountPool.AmountPoolHelper;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
@@ -473,6 +474,16 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 		final JDFAmountPool p = getAmountPool();
 		final JDFPartAmount pa = p == null ? null : p.getPartAmount(partMap);
 		return pa == null ? 0 : pa.getRealAttribute((bGood ? AttributeName.AMOUNT : AttributeName.WASTE), null, 0);
+	}
+
+	/**
+	 *
+	 * @param partMap
+	 * @return
+	 */
+	public double getAmountSum(final boolean bGood)
+	{
+		return AmountPoolHelper.getAmountPoolSumDouble(this, (bGood ? AttributeName.AMOUNT : AttributeName.WASTE), null);
 	}
 
 	/**
