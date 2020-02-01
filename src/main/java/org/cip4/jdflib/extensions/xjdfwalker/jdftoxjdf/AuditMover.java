@@ -52,7 +52,7 @@ import org.cip4.jdflib.pool.JDFAmountPool.AmountPoolHelper;
 
 class AuditMover
 {
-	public AuditMover(final KElement newRoot)
+	AuditMover(final KElement newRoot)
 	{
 		super();
 		this.newRoot = newRoot;

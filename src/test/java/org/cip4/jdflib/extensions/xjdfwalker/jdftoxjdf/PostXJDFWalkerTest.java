@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -80,24 +80,6 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
 		assertNull(h.getRoot().getXPathAttribute("AuditPool/AuditResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null));
-	}
-
-	/**
-	 *
-	 */
-	@Test
-	public void testAmounts()
-	{
-		final XJDFHelper h = new XJDFHelper("a", "p", null);
-		final SetHelper sni = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
-		final ResourceHelper pi = sni.getCreatePartition(null, true);
-		pi.setAmount(42, null, true);
-		pi.getAmountPool().getPartAmount(0).setActualAmount(66);
-
-		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
-		w.walkTreeKidsFirst(h.getRoot());
-		assertEquals(h.getRoot().getXPathAttribute("AuditPool/AuditResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null), "66");
-
 	}
 
 	/**

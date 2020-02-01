@@ -510,7 +510,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	@Override
 	public JDFResource getLinkRoot()
 	{
-		return (JDFResource) getResource();
+		return (JDFResource) ((getResource() instanceof JDFResource) ? getResource() : null);
 	}
 
 	/**
