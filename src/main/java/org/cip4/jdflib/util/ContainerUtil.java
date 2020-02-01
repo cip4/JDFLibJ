@@ -293,6 +293,17 @@ public class ContainerUtil
 	}
 
 	/**
+	 * null safe add
+	 *
+	 * @param strings the array of strings to append to <code>this</code>
+	 */
+	public static <A> void add(final Collection<A> c, final A a)
+	{
+		if (c != null && a != null)
+			c.add(a);
+	}
+
+	/**
 	 * return a matching element from a collection of IMatches
 	 *
 	 * @param <a> the data type

@@ -1245,4 +1245,5 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	{
 		super.setGeneralID(idUsage, idValue);
 	}
+
 }

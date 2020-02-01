@@ -39,6 +39,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import java.util.Collection;
 import java.util.Vector;
 
+import org.cip4.jdflib.auto.JDFAutoResourceInfo.EnumScope;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
@@ -210,7 +211,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 
 		final SetHelper sh = new SetHelper(set);
 		final Vector<ResourceHelper> newParts = sh.getCreatePartitions(vPartMap, false);
-		final boolean isEstimate = "Estimate".equals(ri.getAttribute(AttributeName.SCOPE));
+		final boolean isEstimate = EnumScope.Estimate.equals(ri.getScope());
 		for (final ResourceHelper ph : newParts)
 		{
 			JDFAmountPool apx = ph.getAmountPool();
@@ -232,7 +233,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 					ap.deleteNode();
 				}
 			}
-			if (isEstimate)
+			if (!isEstimate)
 			{
 				apx = ph.getAmountPool();
 
@@ -241,8 +242,8 @@ public class WalkResourceInfo extends WalkJDFSubElement
 				{
 					for (final JDFPartAmount pa : cpa)
 					{
-						pa.renameAttribute(AttributeName.AMOUNT, AttributeName.ACTUALAMOUNT);
-						pa.renameAttribute(AttributeName.WASTE, "ActualWaste");
+						pa.renameAttribute(AttributeName.ACTUALAMOUNT, AttributeName.AMOUNT);
+						pa.renameAttribute("ActualWaste", AttributeName.WASTE);
 					}
 				}
 			}

@@ -668,7 +668,7 @@ public class WalkJDFElement extends WalkElement
 				// Note that actualamount and actualwaste will be copied in a post processing step by @see PostXJDFWalker
 				final String wasteName = "Waste".equals(condition) ? null : condition;
 				paNew.copyAttribute("ActualWaste", pa, AttributeName.ACTUALAMOUNT, null, null);
-				paNew.copyAttribute("Waste", pa, AttributeName.AMOUNT, null, null);
+				paNew.copyAttribute(XJDFConstants.Waste, pa, AttributeName.AMOUNT, null, null);
 				paNew.setAttribute("WasteDetails", wasteName);
 			}
 			else

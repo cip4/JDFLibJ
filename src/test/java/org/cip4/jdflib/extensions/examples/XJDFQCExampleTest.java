@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -193,7 +193,7 @@ public class XJDFQCExampleTest extends JDFTestCaseBase
 				fs.setURL("http://imagehost/getImageDetails.php?Image=" + i + "&Box=" + UrlUtil.escape(box.getString(0), false, false));
 			}
 		}
-		h.getAuditPool().getCreateMessageResourceHelper(shRes).copySet(shRes);
+		h.getAuditPool().getCreateMessageResourceHelper(shRes).copySet(shRes, true);
 		h.cleanUp();
 		writeTest(h.getRoot(), "../QualityControlInspectRes.xjdf", true, null);
 
@@ -244,7 +244,7 @@ public class XJDFQCExampleTest extends JDFTestCaseBase
 				fs.setURL("http://imagehost/getImageDetails.php?Image=" + i + "&Box=" + UrlUtil.escape(box.getString(0), false, false));
 			}
 		}
-		final SetHelper sn = h.getAuditPool().getCreateMessageResourceHelper(shRes).copySet(shRes);
+		final SetHelper sn = h.getAuditPool().getCreateMessageResourceHelper(shRes).copySet(shRes, true);
 		final AuditResourceHelper mrh = (AuditResourceHelper) h.getAuditPool().getMessageResourceHelper(sn);
 		final XJMFHelper xjmf = mrh.makeXJMFSignal();
 		xjmf.cleanUp();

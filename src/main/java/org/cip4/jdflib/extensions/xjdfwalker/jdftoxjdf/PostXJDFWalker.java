@@ -65,10 +65,8 @@ import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.IWalker;
-import org.cip4.jdflib.extensions.AuditPoolHelper;
 import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
-import org.cip4.jdflib.extensions.MessageResourceHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -127,8 +125,8 @@ class PostXJDFWalker extends BaseElementWalker
 	private boolean bDeliveryIntent;
 	private boolean retainAll;
 
-	private static final StringArray metaKeys = new StringArray(new String[] { AttributeName.COMMANDRESULT, AttributeName.JOBID, AttributeName.JOBPARTID, AttributeName.LEVEL, AttributeName.MODULEID,
-			AttributeName.QUEUEENTRYID, AttributeName.SCOPE, AttributeName.SPEED, AttributeName.TOTALAMOUNT, AttributeName.TYPES });
+	private static final StringArray metaKeys = new StringArray(new String[] { AttributeName.COMMANDRESULT, AttributeName.JOBID, AttributeName.JOBPARTID, AttributeName.LEVEL,
+			AttributeName.MODULEID, AttributeName.QUEUEENTRYID, AttributeName.SCOPE, AttributeName.SPEED, AttributeName.TOTALAMOUNT, AttributeName.TYPES });
 
 	/**
 	 *
@@ -563,111 +561,6 @@ class PostXJDFWalker extends BaseElementWalker
 			return VString.getVString(ElementName.PARTAMOUNT, null);
 		}
 
-	}
-
-	/**
-	 * class that cleans up redundant partition keys
-	 *
-	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
-	 */
-	protected class WalkAmountPool extends WalkElement
-	{
-		/**
-		 *
-		 */
-		public WalkAmountPool()
-		{
-			super();
-		}
-
-		/**
-		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-		 */
-		@Override
-		public VString getElementNames()
-		{
-			return VString.getVString(ElementName.AMOUNTPOOL, null);
-		}
-
-		/**
-		 * @param ap
-		 * @return true if must continue
-		 */
-		@Override
-		public KElement walk(final KElement ap, final KElement dummy)
-		{
-			final JDFAmountPool pool = (JDFAmountPool) ap;
-			if (!retainAll)
-			{
-				moveActualToAudit(pool);
-			}
-			return super.walk(pool, dummy);
-		}
-
-		/**
-		 *
-		 * @param partAmount
-		 */
-		void moveActualToAudit(final JDFAmountPool partAmount)
-		{
-			if (partAmount.getDeepParent(ElementName.AUDITPOOL, 0) == null && partAmount.getDeepParent(XJDFConstants.XJMF, 0) == null)
-			{
-				final AuditPoolHelper ah = newRootHelper.getCreateAuditPool();
-				final KElement resource = partAmount.getDeepParent(XJDFConstants.Resource, 0);
-				final ResourceHelper ph = resource == null ? null : new ResourceHelper(resource);
-				final SetHelper sh = ph == null ? null : ph.getSet();
-				if (sh != null)
-				{
-					final MessageResourceHelper arh = ah.getCreateMessageResourceHelper(sh);
-					final SetHelper shNew = arh.getSet();
-					final ResourceHelper phNew = shNew.getCreateVPartition(sh.getPartMapVector(), false);
-					final JDFAmountPool apNew = phNew.getAmountPool();
-					if (apNew == null)
-					{
-						phNew.getRoot().copyElement(partAmount, null);
-						walkTree(shNew.getRoot(), null);
-					}
-					else
-					{
-						apNew.copyElements(partAmount.getMatchingPartAmountVector(null), null);
-					}
-				}
-				final VElement vpa = partAmount.getChildElementVector(ElementName.PARTAMOUNT, null);
-				for (final KElement pa : vpa)
-				{
-					pa.removeAttribute(AttributeName.ACTUALAMOUNT);
-					pa.removeAttribute("ActualWaste");
-				}
-
-			}
-			else
-			{
-				final VElement vpa = partAmount.getChildElementVector(ElementName.PARTAMOUNT, null);
-				for (final KElement pa : vpa)
-				{
-					fixPartAmount(pa);
-				}
-			}
-		}
-
-		public void fixPartAmount(final KElement pa)
-		{
-			pa.removeAttribute(AttributeName.AMOUNT);
-			pa.renameAttribute(AttributeName.ACTUALAMOUNT, AttributeName.AMOUNT);
-			pa.removeAttribute(AttributeName.WASTE);
-			pa.renameAttribute("ActualWaste", AttributeName.WASTE);
-		}
-
-		/**
-		 *
-		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-		 */
-		@Override
-		public boolean matches(final KElement e)
-		{
-			return (e instanceof JDFAmountPool);
-		}
 	}
 
 	/**
@@ -2512,7 +2405,8 @@ class PostXJDFWalker extends BaseElementWalker
 		public boolean matches(final KElement e)
 		{
 			final String localName = e.getLocalName();
-			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE) || localName.startsWith(ElementName.COMMAND);
+			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE)
+					|| localName.startsWith(ElementName.COMMAND);
 		}
 
 	}
@@ -3093,8 +2987,8 @@ class PostXJDFWalker extends BaseElementWalker
 	@Override
 	public String toString()
 	{
-		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll + ", removeSignatureName="
-				+ removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
+		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll
+				+ ", removeSignatureName=" + removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
 	}
 
 	void combineSameSets()

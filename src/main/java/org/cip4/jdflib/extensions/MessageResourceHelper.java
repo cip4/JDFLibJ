@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -91,7 +91,7 @@ public class MessageResourceHelper extends MessageHelper
 	 *
 	 * @return
 	 */
-	public SetHelper copySet(final SetHelper sh)
+	public SetHelper copySet(final SetHelper sh, final boolean keepDetails)
 	{
 		final KElement oldSet = sh == null ? null : sh.getRoot();
 		if (oldSet != null)
@@ -104,6 +104,13 @@ public class MessageResourceHelper extends MessageHelper
 			final KElement set = ri.copyElement(oldSet, null);
 			final SetHelper setHelper = new SetHelper(set);
 			setHelper.removeIDs();
+			if (!keepDetails)
+			{
+				for (final ResourceHelper rh : setHelper.getPartitionList())
+				{
+					rh.getRoot().removeChild(setHelper.getName(), null, 0);
+				}
+			}
 			return setHelper;
 		}
 		else

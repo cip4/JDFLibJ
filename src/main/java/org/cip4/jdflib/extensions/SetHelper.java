@@ -49,12 +49,14 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.ifaces.IMatches;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class SetHelper extends BaseXJDFHelper
+public class SetHelper extends BaseXJDFHelper implements IMatches
 {
 	/**
 	 *
@@ -370,24 +372,6 @@ public class SetHelper extends BaseXJDFHelper
 	public XJDFHelper getXJDF()
 	{
 		return XJDFHelper.getHelper(theElement);
-	}
-
-	/**
-	 * modify all partitions here
-	 *
-	 * @param partMap
-	 */
-	private void updatePartitions(final VJDFAttributeMap partMaps)
-	{
-		if (partMaps != null)
-		{
-			for (final JDFAttributeMap partMap : partMaps)
-			{
-				final String sep = partMap.get(AttributeName.SEPARATION);
-				if (sep != null)
-					partMap.put(AttributeName.SEPARATION, StringUtil.replaceChar(sep, ' ', "_", 0));
-			}
-		}
 	}
 
 	/**
@@ -873,7 +857,7 @@ public class SetHelper extends BaseXJDFHelper
 	{
 		if (bsHelper == null)
 			return -1;
-		final VElement v = theElement.getChildElementVector(getPartitionName(), null);
+		final List<KElement> v = theElement.getChildArray(getPartitionName(), null);
 		if (v == null)
 			return -1;
 		return v.indexOf(bsHelper.getRoot());
@@ -916,5 +900,20 @@ public class SetHelper extends BaseXJDFHelper
 	public void setGeneralID(final String idUsage, final String idValue)
 	{
 		super.setGeneralID(idUsage, idValue);
+	}
+
+	@Override
+	public boolean matches(final Object subset)
+	{
+		if (!(subset instanceof SetHelper))
+			return false;
+		final SetHelper sh = (SetHelper) subset;
+		if (!ContainerUtil.equals(sh.getUsage(), getUsage()))
+			return false;
+		if (!ContainerUtil.equals(sh.getProcessUsage(), getProcessUsage()))
+			return false;
+		if (!ContainerUtil.equals(sh.getCombinedProcessIndex(), getCombinedProcessIndex()))
+			return false;
+		return true;
 	}
 }

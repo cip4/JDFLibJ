@@ -79,12 +79,11 @@ public class MessagePoolHelper extends BaseXJDFHelper
 			for (final KElement e : v)
 			{
 				final SetHelper thisHelper = new SetHelper(e);
-				if (!ContainerUtil.equals(sh.getUsage(), thisHelper.getUsage()))
-					continue;
-				if (!ContainerUtil.equals(sh.getProcessUsage(), thisHelper.getProcessUsage()))
-					continue;
-				final KElement message = e.getParentNode_KElement().getParentNode_KElement();
-				return newMessageResourceHelper(message);
+				if (sh.matches(thisHelper))
+				{
+					final KElement message = e.getParentNode_KElement().getParentNode_KElement();
+					return newMessageResourceHelper(message);
+				}
 			}
 		}
 		return null;
@@ -167,7 +166,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 		{
 			if (!XJDFConstants.Header.equals(e.getLocalName()))
 			{
-				vA.add(getMessageHelper(e));
+				ContainerUtil.add(vA, getMessageHelper(e));
 			}
 		}
 		return vA;

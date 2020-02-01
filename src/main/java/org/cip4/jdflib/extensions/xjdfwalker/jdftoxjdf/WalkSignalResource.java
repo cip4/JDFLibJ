@@ -76,8 +76,8 @@ public class WalkSignalResource extends WalkSignal
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		splitAmounts(jdf);
 		moveFromQuParams(jdf);
+		splitAmounts(jdf);
 		return super.walk(jdf, xjdf);
 	}
 
@@ -86,14 +86,13 @@ public class WalkSignalResource extends WalkSignal
 		final List<JDFResourceInfo> vri = jdf.getChildArrayByClass(JDFResourceInfo.class, false, 0);
 		for (final JDFResourceInfo ri : vri)
 		{
-			if (ri.hasNonEmpty(AttributeName.SCOPE))
-				continue;
-			final double a = ri.getAmountPoolSumDouble(AttributeName.AMOUNT, null);
-			if (a > 0)
+			final double aa = ri.getAmountPoolSumDouble(AttributeName.ACTUALAMOUNT, null);
+			if (aa > 0)
 			{
-				final double aa = ri.getAmountPoolSumDouble(AttributeName.ACTUALAMOUNT, null);
-				if (aa > 0)
+				final double a = ri.getAmountPoolSumDouble(AttributeName.AMOUNT, null);
+				if (a > 0 && !ri.hasNonEmpty(AttributeName.SCOPE))
 				{
+
 					final JDFResourceInfo ri2 = (JDFResourceInfo) jdf.copyElement(ri, ri);
 
 					for (final JDFPartAmount pa : ri2.getChildArrayByClass(JDFPartAmount.class, true, 0))
@@ -102,14 +101,17 @@ public class WalkSignalResource extends WalkSignal
 					}
 					ri2.removeAttribute(AttributeName.ACTUALAMOUNT);
 					ri2.setAttribute(AttributeName.SCOPE, "Estimate");
-
-					for (final JDFPartAmount pa : ri.getChildArrayByClass(JDFPartAmount.class, true, 0))
-					{
-						pa.removeAttribute(AttributeName.AMOUNT);
-					}
-					ri.removeAttribute(AttributeName.AMOUNT);
-					ri.setAttribute(AttributeName.SCOPE, "Job");
 				}
+				for (final JDFPartAmount pa : ri.getChildArrayByClass(JDFPartAmount.class, true, 0))
+				{
+					pa.removeAttribute(AttributeName.AMOUNT);
+					pa.renameAttribute(AttributeName.ACTUALAMOUNT, AttributeName.AMOUNT);
+				}
+				ri.removeAttribute(AttributeName.AMOUNT);
+				ri.renameAttribute(AttributeName.ACTUALAMOUNT, AttributeName.AMOUNT);
+				if (!ri.hasNonEmpty(AttributeName.SCOPE))
+					ri.setAttribute(AttributeName.SCOPE, "Job");
+
 			}
 		}
 

@@ -39,6 +39,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
@@ -48,6 +49,7 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -59,13 +61,19 @@ import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.elementwalker.IWalker;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
 import org.cip4.jdflib.elementwalker.RemoveEmpty;
+import org.cip4.jdflib.extensions.AuditPoolHelper;
 import org.cip4.jdflib.extensions.BaseXJDFHelper;
+import org.cip4.jdflib.extensions.MessageResourceHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
+import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.XJMFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.RemoveEmptyXJDF;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.pool.JDFAmountPool;
+import org.cip4.jdflib.pool.JDFAmountPool.AmountPoolHelper;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
@@ -477,7 +485,71 @@ public class JDFToXJDF extends PackageElementWalker
 	 *
 	 * @param bJMF
 	 */
-	private void postWalk(final boolean bJMF)
+	void postWalk(final boolean bJMF)
+	{
+		final PostXJDFWalker pw = getPostWalker();
+		if (bJMF)
+		{
+			postWalkJMF(pw);
+		}
+		else
+		{
+			postWalkJDF(pw);
+		}
+		final RemoveEmpty removeEmpty = new RemoveEmptyXJDF();
+		removeEmpty.removEmptyElement(newRoot);
+	}
+
+	/**
+	 *
+	 * @param pw
+	 */
+	void postWalkJDF(final PostXJDFWalker pw)
+	{
+		copySetsToAudits();
+		pw.walkTreeKidsFirst(newRoot);
+		if (trackAudits)
+		{
+			final JDFAuditPool auditPool = (JDFAuditPool) newRoot.getCreateElement(ElementName.AUDITPOOL);
+			final boolean hasCreated = auditPool.hasChildElement(ElementName.CREATED, null) || auditPool.hasChildElement("AuditCreated", null);
+			if (!hasCreated)
+			{
+				final KElement c = auditPool.appendElement("AuditCreated");
+				final KElement header = c.appendElement(XJDFConstants.Header);
+				header.setAttribute(AttributeName.AGENTNAME, "JDF To XJDF Converter");
+				header.setAttribute(AttributeName.AGENTVERSION, JDFAudit.getStaticAgentVersion());
+				header.setAttribute(AttributeName.TIME, new JDFDate().getDateTimeISO());
+			}
+		}
+		if (isCleanup())
+		{
+			new XJDFHelper(newRoot).cleanUp();
+		}
+	}
+
+	/**
+	 *
+	 * @param pw
+	 */
+	void postWalkJMF(final PostXJDFWalker pw)
+	{
+		pw.walkTreeKidsFirst(newRoot);
+		if (newRoot.numChildElements(null, null) == newRoot.numChildElements(XJDFConstants.Header, null))
+		{
+			log.info("erased empty jmf");
+			newRoot = null;
+		}
+		else if (!isRetainAll() && isCleanup())
+		{
+			new XJMFHelper(newRoot).cleanUp();
+		}
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	PostXJDFWalker getPostWalker()
 	{
 		final PostXJDFWalker pw = new PostXJDFWalker((JDFElement) newRoot);
 		pw.setMergeLayout(bMergeLayout);
@@ -486,42 +558,82 @@ public class JDFToXJDF extends PackageElementWalker
 		pw.setRetainAll(bRetainAll);
 		pw.setNewVersion(getNewVersion());
 		pw.combineSameSets();
-		pw.walkTreeKidsFirst(newRoot);
-		if (bJMF)
+		return pw;
+	}
+
+	void copySetsToAudits()
+	{
+		final XJDFHelper h = new XJDFHelper(newRoot);
+		final AuditPoolHelper ah = h.getCreateAuditPool();
+		final List<SetHelper> sets = h.getSets();
+		if (sets != null)
 		{
-			if (newRoot.numChildElements(null, null) == newRoot.numChildElements(XJDFConstants.Header, null))
+			for (final SetHelper set : sets)
 			{
-				log.info("erased empty jmf");
-				newRoot = null;
+				final MessageResourceHelper arh = ah.getMessageResourceHelper(set);
+				if (arh == null)
+				{
+					copySetToAudits(set, ah);
+				}
+				else
+				{
+					copySetToAudits(set, null);
+				}
 			}
-			else if (!isRetainAll())
+		}
+	}
+
+	void copySetToAudits(final SetHelper set, final AuditPoolHelper ah)
+	{
+		for (final ResourceHelper rh : set.getPartitionList())
+		{
+			moveActualToAudit(rh, ah);
+		}
+
+	}
+
+	/**
+	 *
+	 * @param ah
+	 * @param partAmount
+	 * @param auditSets
+	 */
+	void moveActualToAudit(final ResourceHelper ph, final AuditPoolHelper ah)
+	{
+		if (AmountPoolHelper.getAmountPoolSumDouble(ph, "AcualWaste", null) > 0 || AmountPoolHelper.getAmountPoolSumDouble(ph, AttributeName.ACTUALAMOUNT, null) > 0)
+		{
+			final SetHelper sh = ph.getSet();
+			if (ah != null)
 			{
-				new XJMFHelper(newRoot).cleanUp();
+				final MessageResourceHelper arh = ah.getCreateMessageResourceHelper(sh);
+
+				final SetHelper shAudit = arh.getSet();
+				final ResourceHelper phNew = shAudit.getCreateVPartition(ph.getPartMapVector(), false);
+				final JDFAmountPool apNew = phNew.getAmountPool();
+				if (apNew == null)
+				{
+					final JDFAmountPool amountPool = ph.getAmountPool();
+					final JDFAmountPool apCopied = (JDFAmountPool) phNew.getRoot().copyElement(amountPool, null);
+					for (final JDFPartAmount pa : apCopied.getAllPartAmount())
+					{
+						pa.removeAttribute(AttributeName.AMOUNT);
+						pa.removeAttribute(XJDFConstants.Waste);
+						pa.removeAttribute(AttributeName.MAXAMOUNT);
+						pa.removeAttribute(AttributeName.MINAMOUNT);
+						pa.renameAttribute(AttributeName.ACTUALAMOUNT, AttributeName.AMOUNT);
+						pa.renameAttribute("ActualWaste", XJDFConstants.Waste);
+					}
+				}
+			}
+			final JDFAmountPool amountPool = ph.getAmountPool();
+			//fix locals
+			for (final JDFPartAmount pa : amountPool.getAllPartAmount())
+			{
+				pa.removeAttribute(AttributeName.ACTUALAMOUNT);
+				pa.removeAttribute("ActualWaste");
 			}
 
 		}
-		else
-		{
-			if (trackAudits)
-			{
-				final JDFAuditPool auditPool = (JDFAuditPool) newRoot.getCreateElement(ElementName.AUDITPOOL);
-				final boolean hasCreated = auditPool.hasChildElement(ElementName.CREATED, null) || auditPool.hasChildElement("AuditCreated", null);
-				if (!hasCreated)
-				{
-					final KElement c = auditPool.appendElement("AuditCreated");
-					final KElement header = c.appendElement(XJDFConstants.Header);
-					header.setAttribute(AttributeName.AGENTNAME, "JDF To XJDF Converter");
-					header.setAttribute(AttributeName.AGENTVERSION, JDFAudit.getStaticAgentVersion());
-					header.setAttribute(AttributeName.TIME, new JDFDate().getDateTimeISO());
-				}
-			}
-			if (isCleanup())
-			{
-				new XJDFHelper(newRoot).cleanUp();
-			}
-		}
-		final RemoveEmpty removeEmpty = new RemoveEmptyXJDF();
-		removeEmpty.removEmptyElement(newRoot);
 	}
 
 	/**
@@ -1035,11 +1147,12 @@ public class JDFToXJDF extends PackageElementWalker
 	@Override
 	public String toString()
 	{
-		return "JDFToXJDF [trackAudits=" + trackAudits + ", newRoot=" + newRoot + ", oldRoot=" + oldRoot + ", first=" + first + ", bExplicitWaste=" + bExplicitWaste + ", bRetainAll=" + bRetainAll
-				+ ", bCleanup=" + bCleanup + ", bMergeLayout=" + bMergeLayout + ", bMergeLayoutPrep=" + bMergeLayoutPrep + ", bMergeRunList=" + bMergeRunList + ", bRetainSpawnInfo=" + bRetainSpawnInfo
-				+ ", bSingleNode=" + bSingleNode + ", bUpdateVersion=" + bUpdateVersion + ", bTypeSafeMessage=" + bTypeSafeMessage + ", bAbstractMessage=" + bAbstractMessage + ", bSpanAsAttribute="
-				+ bSpanAsAttribute + ", bIntentPartition=" + bIntentPartition + ", bParameterSet=" + bParameterSet + ", wantProduct=" + wantProduct + ", componentProductMap=" + componentProductMap
-				+ ", resourceAlias=" + resourceAlias + ", bHTMLColor=" + bHTMLColor + ", bConvertTilde=" + bConvertTilde + ", rootID=" + rootID + ", removeSignatureName=" + removeSignatureName
-				+ ", processPartition=" + processPartition + ", wantDependent=" + wantDependent + ", newVersion=" + newVersion + "]";
+		return "JDFToXJDF [trackAudits=" + trackAudits + ", newRoot=" + newRoot + ", oldRoot=" + oldRoot + ", first=" + first + ", bExplicitWaste=" + bExplicitWaste
+				+ ", bRetainAll=" + bRetainAll + ", bCleanup=" + bCleanup + ", bMergeLayout=" + bMergeLayout + ", bMergeLayoutPrep=" + bMergeLayoutPrep + ", bMergeRunList="
+				+ bMergeRunList + ", bRetainSpawnInfo=" + bRetainSpawnInfo + ", bSingleNode=" + bSingleNode + ", bUpdateVersion=" + bUpdateVersion + ", bTypeSafeMessage="
+				+ bTypeSafeMessage + ", bAbstractMessage=" + bAbstractMessage + ", bSpanAsAttribute=" + bSpanAsAttribute + ", bIntentPartition=" + bIntentPartition
+				+ ", bParameterSet=" + bParameterSet + ", wantProduct=" + wantProduct + ", componentProductMap=" + componentProductMap + ", resourceAlias=" + resourceAlias
+				+ ", bHTMLColor=" + bHTMLColor + ", bConvertTilde=" + bConvertTilde + ", rootID=" + rootID + ", removeSignatureName=" + removeSignatureName + ", processPartition="
+				+ processPartition + ", wantDependent=" + wantDependent + ", newVersion=" + newVersion + "]";
 	}
 }
