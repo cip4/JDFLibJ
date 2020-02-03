@@ -379,7 +379,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public Vector<ResourceHelper> getPartitions()
 	{
-		final Collection<KElement> v = theElement.getChildArray(getPartitionName(), null);
+		final Collection<KElement> v = theElement.getChildList(getPartitionName(), null);
 
 		final Vector<ResourceHelper> v2 = new Vector<>();
 		if (v != null)
@@ -397,7 +397,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public List<ResourceHelper> getPartitionList()
 	{
-		final Collection<KElement> v = theElement.getChildArray(getPartitionName(), null);
+		final Collection<KElement> v = theElement.getChildList(getPartitionName(), null);
 
 		final ArrayList<ResourceHelper> v2 = new ArrayList<>();
 		if (v != null)
@@ -857,7 +857,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	{
 		if (bsHelper == null)
 			return -1;
-		final List<KElement> v = theElement.getChildArray(getPartitionName(), null);
+		final List<KElement> v = theElement.getChildList(getPartitionName(), null);
 		if (v == null)
 			return -1;
 		return v.indexOf(bsHelper.getRoot());

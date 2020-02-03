@@ -700,8 +700,7 @@ public class KElement extends ElementNSImpl implements Element
 					namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), false);
 					if (!ContainerUtil.equals(namespaceURI2, nameSpaceURI))
 					{
-						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
-								+ "; attempting to set URI: " + nameSpaceURI;
+						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2 + "; attempting to set URI: " + nameSpaceURI;
 						kLog.error(message);
 						throw new JDFException(message);
 					}
@@ -814,13 +813,13 @@ public class KElement extends ElementNSImpl implements Element
 							// already there
 							if (key.equals(nodeName))
 							{ // overwrite default namespace with qualified
-									// namespace or vice versa
+								// namespace or vice versa
 								removeAttribute(nodeName);
 								super.setAttribute(key, value);
 							}
 							else
 							{ // same qualified name, simply overwrite the
-									// value
+								// value
 								a.setNodeValue(value);
 							}
 						}
@@ -829,8 +828,8 @@ public class KElement extends ElementNSImpl implements Element
 							final String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 							if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
 							{
-								throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2
-										+ "; attempting to set URI: " + nameSpaceURI);
+								throw new JDFException(
+										"KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2 + "; attempting to set URI: " + nameSpaceURI);
 							}
 							try
 							{
@@ -1773,7 +1772,21 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return VElement vector with all found elements, an empty vector if no elements match
 	 * @default getChildElementVector(null, null)
 	 */
-	public List<KElement> getChildArray(final String nodeName, final String nameSpaceURI)
+	public List<KElement> getChildList(final String nodeName, final String nameSpaceURI)
+	{
+		return getChildArray_KElement(nodeName, nameSpaceURI, null, true, 0);
+	}
+
+	/**
+	 * Get all children from the actual element matching the given conditions<br>
+	 * convenience for getChildElementVector(nodeName, nameSpaceURI, null, true, 0, true)
+	 *
+	 * @param nodeName element name you are searching for
+	 * @param nameSpaceURI nameSpace you are searching for
+	 * @return VElement vector with all found elements, an empty vector if no elements match
+	 * @default getChildElementVector(null, null)
+	 */
+	public Collection<KElement> getChildArray(final String nodeName, final String nameSpaceURI)
 	{
 		return getChildArray_KElement(nodeName, nameSpaceURI, null, true, 0);
 	}

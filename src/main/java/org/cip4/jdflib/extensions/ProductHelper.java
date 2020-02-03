@@ -357,7 +357,7 @@ public class ProductHelper extends BaseXJDFHelper
 		if (a == null || !bRecurse)
 			return a;
 		final String id = getID();
-		final Collection<KElement> v = theElement.getParentNode_KElement().getChildArray(JDFConstants.PRODUCT, null);
+		final Collection<KElement> v = theElement.getParentNode_KElement().getChildList(JDFConstants.PRODUCT, null);
 		for (int i = 0; i < a.size(); i++)
 		{
 			final String ida = a.get(i);

@@ -93,7 +93,7 @@ public class WalkColorIntentResLink extends WalkResLink
 				}
 				surfaceColor.setAttributes(colorIntent.getAttributeMap());
 				thecolorIntent.removeAttributes(null);
-				surfaceColor.moveArray(colorIntent.getChildArray(null, null), null);
+				surfaceColor.moveArray(colorIntent.getChildList(null, null), null);
 				if (both)
 				{
 					thecolorIntent.copyElement(surfaceColor, null).setAttribute(XJDFConstants.Surface, EnumSide.Back.getName());

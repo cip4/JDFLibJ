@@ -2448,7 +2448,7 @@ class PostXJDFWalker extends BaseElementWalker
 				for (final JDFResourceInfo ri : vr)
 				{
 					final JDFAttributeMap metaMap = getMetaMap(ri);
-					final Collection<KElement> childArray = ri.getChildArray(XJDFConstants.ResourceSet, null);
+					final Collection<KElement> childArray = ri.getChildList(XJDFConstants.ResourceSet, null);
 					for (final KElement e : childArray)
 					{
 						setMap.putOne(metaMap, new SetHelper(e));
@@ -2805,7 +2805,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 */
 		private void ensureLayoutPositions(final JDFStrippingParams strippingParams, final JDFLayout layoutPartition, final String bsID)
 		{
-			Collection<KElement> positions = strippingParams.getChildArray(ElementName.POSITION, null);
+			Collection<KElement> positions = strippingParams.getChildList(ElementName.POSITION, null);
 			if (!ContainerUtil.isEmpty(positions))
 			{
 				layoutPartition.moveArray(positions, null);

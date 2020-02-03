@@ -6037,7 +6037,7 @@ public class JDFElement extends KElement
 	 */
 	public ListMap<String, JDFGeneralID> getGeneralIDListMap()
 	{
-		final Collection<KElement> v = getChildArray(ElementName.GENERALID, null);
+		final Collection<KElement> v = getChildList(ElementName.GENERALID, null);
 		if (v.isEmpty())
 		{
 			return null;
@@ -6059,7 +6059,7 @@ public class JDFElement extends KElement
 	 */
 	public JDFAttributeMap getGeneralIDMap()
 	{
-		final Collection<KElement> v = getChildArray(ElementName.GENERALID, null);
+		final Collection<KElement> v = getChildList(ElementName.GENERALID, null);
 		if (v.size() == 0)
 		{
 			return null;

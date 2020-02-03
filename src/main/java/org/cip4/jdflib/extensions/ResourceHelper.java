@@ -136,7 +136,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public VJDFAttributeMap getPartMapVector()
 	{
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();
-		final Collection<KElement> vParts = theElement.getChildArray(ElementName.PART, null);
+		final Collection<KElement> vParts = theElement.getChildList(ElementName.PART, null);
 		if (vParts != null)
 		{
 			for (final KElement e : vParts)

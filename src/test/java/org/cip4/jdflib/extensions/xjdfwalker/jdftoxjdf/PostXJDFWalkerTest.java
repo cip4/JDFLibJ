@@ -131,7 +131,7 @@ public class PostXJDFWalkerTest extends JDFTestCaseBase
 		}
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(mh.getRoot(), null);
-		assertEquals(1, mh.getRoot().getChildArray(ElementName.RESOURCEINFO, null).size());
+		assertEquals(1, mh.getRoot().getChildList(ElementName.RESOURCEINFO, null).size());
 		final SetHelper s2 = new SetHelper(mh.getRoot().getElement("ResourceInfo").getElement(XJDFConstants.ResourceSet));
 		assertEquals(10, s2.getPartitions().size());
 	}
