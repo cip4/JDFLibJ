@@ -37,6 +37,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoResourceInfo.EnumScope;
@@ -152,32 +153,98 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	 * @param ri
 	 * @param ap
 	 */
-	private void moveToResourceSet(final JDFResourceInfo ri, final JDFResourceInfo jdfRI)
+	void moveToResourceSet(final JDFResourceInfo ri, final JDFResourceInfo jdfRI)
 	{
-		VJDFAttributeMap vPartMap = jdfRI.getPartMapVector();
-		final boolean hasScope = jdfRI.hasNonEmpty(AttributeName.SCOPE);
 		final SetHelper sh0 = SetHelper.getHelper(ri.getElement(XJDFConstants.ResourceSet));
-		if (VJDFAttributeMap.isEmpty(vPartMap))
-		{
-			vPartMap = sh0 == null ? null : sh0.getPartMapVector();
-		}
-		else
-		{
-			final Vector<ResourceHelper> vp = sh0.getPartitions();
-			if (vp != null)
-			{
-				for (final ResourceHelper rh : vp)
-				{
-					VJDFAttributeMap m = rh.getPartMapVector();
-					m = VJDFAttributeMap.isEmpty(m) ? vPartMap : m.getOrMaps(vPartMap);
-					rh.setPartMapVector(m);
-				}
-			}
-
-		}
+		final VJDFAttributeMap vPartMap = getPartMaps(jdfRI, sh0);
 		// needed for no amountpool in original
 		setAmountPool(jdfRI, jdfRI, null);
 		final JDFAmountPool ap = jdfRI.getAmountPool();
+		setScope(ri, jdfRI, sh0);
+
+		final KElement set = getSetElement(ri);
+
+		final SetHelper sh = new SetHelper(set);
+		final Vector<ResourceHelper> newParts = sh.getCreatePartitions(vPartMap, false);
+		final boolean isEstimate = EnumScope.Estimate.equals(ri.getScope());
+		for (final ResourceHelper ph : newParts)
+		{
+			processPart(ri, ap, newParts, isEstimate, ph);
+		}
+		if (newParts.size() > 1)
+		{
+			set.moveAttribute(XJDFConstants.ExternalID, ri);
+		}
+		else
+		{
+			ri.removeAttribute(XJDFConstants.ExternalID);
+		}
+		ri.removeChild(ElementName.AMOUNTPOOL, null, 0);
+		jdfRI.removeChild(ElementName.AMOUNTPOOL, null, 0);
+	}
+
+	void processPart(final JDFResourceInfo ri, final JDFAmountPool ap, final Vector<ResourceHelper> newParts, final boolean isEstimate, final ResourceHelper ph)
+	{
+		JDFAmountPool apx = ph.getAmountPool();
+		if (apx == null)
+		{
+			if (ap == null)
+			{
+				// TODO use correct amounts
+				ph.setAmount(ri.getActualAmount(), null, true);
+				if (newParts.size() == 1)
+				{
+					ph.getRoot().moveAttribute(XJDFConstants.ExternalID, ri);
+				}
+			}
+			else if (ph.getRoot().getElement(ElementName.AMOUNTPOOL) == null)
+			{
+				ap.reducePartAmounts(ph.getPartMapVector());
+				jdfToXJDF.walkTree(ap, ph.getRoot());
+				ap.deleteNode();
+			}
+		}
+		if (!isEstimate)
+		{
+			apx = ph.getAmountPool();
+
+			final Collection<JDFPartAmount> cpa = apx == null ? null : apx.getAllPartAmount();
+			if (cpa != null)
+			{
+				for (final JDFPartAmount pa : cpa)
+				{
+					pa.renameAttribute(AttributeName.ACTUALAMOUNT, AttributeName.AMOUNT);
+					pa.renameAttribute("ActualWaste", AttributeName.WASTE);
+				}
+			}
+		}
+	}
+
+	KElement getSetElement(final JDFResourceInfo ri)
+	{
+		String resName = ri.getXPathAttribute("ResourceSet/@Name", null);
+		if (resName == null)
+		{
+			resName = ri.getResourceName();
+		}
+
+		KElement set = ri.getChildWithAttribute(XJDFConstants.ResourceSet, AttributeName.NAME, null, resName, 0, true);
+		if (set == null)
+		{
+			set = ri.appendElement(XJDFConstants.ResourceSet);
+			set.setAttribute(AttributeName.NAME, resName);
+		}
+
+		set.moveAttribute(AttributeName.PROCESSUSAGE, ri);
+		set.moveAttribute(AttributeName.ORIENTATION, ri);
+		set.moveAttribute(AttributeName.UNIT, ri);
+		set.moveAttribute(AttributeName.USAGE, ri);
+		return set;
+	}
+
+	void setScope(final JDFResourceInfo ri, final JDFResourceInfo jdfRI, final SetHelper sh0)
+	{
+		final boolean hasScope = jdfRI.hasNonEmpty(AttributeName.SCOPE);
 		if (!hasScope)
 		{
 			final boolean isJobScope;
@@ -192,73 +259,30 @@ public class WalkResourceInfo extends WalkJDFSubElement
 			final String value = isJobScope ? "Job" : "Estimate";
 			ri.setAttribute(AttributeName.SCOPE, value);
 		}
-		String resName = ri.getXPathAttribute("ResourceSet/@Name", null);
-		if (resName == null)
-		{
-			resName = ri.getResourceName();
-		}
-		KElement set = ri.getChildWithAttribute(XJDFConstants.ResourceSet, AttributeName.NAME, null, resName, 0, true);
-		if (set == null)
-		{
-			set = ri.appendElement(XJDFConstants.ResourceSet);
-			set.setAttribute(AttributeName.NAME, resName);
-		}
+	}
 
-		set.moveAttribute(AttributeName.PROCESSUSAGE, ri);
-		set.moveAttribute(AttributeName.ORIENTATION, ri);
-		set.moveAttribute(AttributeName.UNIT, ri);
-		set.moveAttribute(AttributeName.USAGE, ri);
-
-		final SetHelper sh = new SetHelper(set);
-		final Vector<ResourceHelper> newParts = sh.getCreatePartitions(vPartMap, false);
-		final boolean isEstimate = EnumScope.Estimate.equals(ri.getScope());
-		for (final ResourceHelper ph : newParts)
+	VJDFAttributeMap getPartMaps(final JDFResourceInfo jdfRI, final SetHelper sh0)
+	{
+		VJDFAttributeMap vPartMap = jdfRI.getPartMapVector();
+		if (VJDFAttributeMap.isEmpty(vPartMap))
 		{
-			JDFAmountPool apx = ph.getAmountPool();
-			if (apx == null)
-			{
-				if (ap == null)
-				{
-					// TODO use correct amounts
-					ph.setAmount(ri.getActualAmount(), null, true);
-					if (newParts.size() == 1)
-					{
-						ph.getRoot().moveAttribute(XJDFConstants.ExternalID, ri);
-					}
-				}
-				else if (ph.getRoot().getElement(ElementName.AMOUNTPOOL) == null)
-				{
-					ap.reducePartAmounts(ph.getPartMapVector());
-					jdfToXJDF.walkTree(ap, ph.getRoot());
-					ap.deleteNode();
-				}
-			}
-			if (!isEstimate)
-			{
-				apx = ph.getAmountPool();
-
-				final Collection<JDFPartAmount> cpa = apx == null ? null : apx.getAllPartAmount();
-				if (cpa != null)
-				{
-					for (final JDFPartAmount pa : cpa)
-					{
-						pa.renameAttribute(AttributeName.ACTUALAMOUNT, AttributeName.AMOUNT);
-						pa.renameAttribute("ActualWaste", AttributeName.WASTE);
-					}
-				}
-			}
-
-		}
-		if (newParts.size() > 1)
-		{
-			set.moveAttribute(XJDFConstants.ExternalID, ri);
+			vPartMap = sh0 == null ? null : sh0.getPartMapVector();
 		}
 		else
 		{
-			ri.removeAttribute(XJDFConstants.ExternalID);
+			final List<ResourceHelper> vp = sh0.getPartitions();
+			if (vp != null)
+			{
+				for (final ResourceHelper rh : vp)
+				{
+					VJDFAttributeMap m = rh.getPartMapVector();
+					m = VJDFAttributeMap.isEmpty(m) ? vPartMap : m.getOrMaps(vPartMap);
+					rh.setPartMapVector(m);
+				}
+			}
+
 		}
-		ri.removeChild(ElementName.AMOUNTPOOL, null, 0);
-		jdfRI.removeChild(ElementName.AMOUNTPOOL, null, 0);
+		return vPartMap;
 	}
 
 	/**
