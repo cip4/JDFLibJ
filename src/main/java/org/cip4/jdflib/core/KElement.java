@@ -700,7 +700,8 @@ public class KElement extends ElementNSImpl implements Element
 					namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), false);
 					if (!ContainerUtil.equals(namespaceURI2, nameSpaceURI))
 					{
-						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2 + "; attempting to set URI: " + nameSpaceURI;
+						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
+								+ "; attempting to set URI: " + nameSpaceURI;
 						kLog.error(message);
 						throw new JDFException(message);
 					}
@@ -813,13 +814,13 @@ public class KElement extends ElementNSImpl implements Element
 							// already there
 							if (key.equals(nodeName))
 							{ // overwrite default namespace with qualified
-								// namespace or vice versa
+									// namespace or vice versa
 								removeAttribute(nodeName);
 								super.setAttribute(key, value);
 							}
 							else
 							{ // same qualified name, simply overwrite the
-								// value
+									// value
 								a.setNodeValue(value);
 							}
 						}
@@ -828,8 +829,8 @@ public class KElement extends ElementNSImpl implements Element
 							final String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 							if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
 							{
-								throw new JDFException(
-										"KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2 + "; attempting to set URI: " + nameSpaceURI);
+								throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2
+										+ "; attempting to set URI: " + nameSpaceURI);
 							}
 							try
 							{
@@ -1697,6 +1698,18 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public synchronized KElement[] getChildElementArray()
 	{
+		final List<KElement> v = getChildList();
+		final int size = v.size();
+		final KElement[] a = new KElement[size];
+		return v.toArray(a);
+	}
+
+	/**
+	 * never null list of all kids
+	 * @return
+	 */
+	public List<KElement> getChildList()
+	{
 		final ArrayList<KElement> v = new ArrayList<>();
 		Node n = getFirstChild();
 		while (n != null)
@@ -1707,9 +1720,7 @@ public class KElement extends ElementNSImpl implements Element
 			}
 			n = n.getNextSibling();
 		}
-		final int size = v.size();
-		final KElement[] a = new KElement[size];
-		return v.toArray(a);
+		return v;
 	}
 
 	/**
@@ -4366,9 +4377,9 @@ public class KElement extends ElementNSImpl implements Element
 				return; // heureka - nothing to do!
 
 		}
-		final VElement v = getChildElementVector_KElement(null, null, null, true, -1);
+		final List<KElement> v = getChildList();
 		KElement before = null;
-		if (v != null && v.size() > 0)
+		if (!v.isEmpty())
 		{
 			int posBefore = v.size();
 			int posAfter = 0;
