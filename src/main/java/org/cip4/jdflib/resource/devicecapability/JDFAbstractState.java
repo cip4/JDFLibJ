@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFAbstractState.java
@@ -117,7 +117,7 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ *
  * befoer June 7, 2009
  */
 public abstract class JDFAbstractState extends JDFElement implements JDFBaseDataTypes, ICapabilityElement
@@ -165,7 +165,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * constructor for JDFAbstractState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -176,7 +176,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * constructor for JDFAbstractState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -188,7 +188,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * constructor for JDFAbstractState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -199,23 +199,9 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	// **************************************** Methods
-	// *********************************************
-
-	/**
-	 * toString
-	 * 
-	 * @return String
-	 */
-	@Override
-	public String toString()
-	{
-		return "JDFAbstractState[ --> " + super.toString() + " ]";
-	}
-
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 * 
+	 *
 	 * June 7, 2009
 	 */
 	@SuppressWarnings("unchecked")
@@ -272,24 +258,24 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 		}
 
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumUserDisplay Display = new EnumUserDisplay("Display");
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumUserDisplay Hide = new EnumUserDisplay("Hide");
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumUserDisplay Dependent = new EnumUserDisplay("Dependent");
 
 	}
 
 	/**
-	 * 
+	 *
 	 * add a value to the list of values defined by testlists
-	 * 
+	 *
 	 * @param value value to test
 	 * @param testlists switches between Allowed test lists and Present test lists. Has two values: Allowed and Present.
 	 */
@@ -297,7 +283,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Tests whether the defined value matches the Allowed test lists or the Present test lists specified for this state
-	 * 
+	 *
 	 * @param value value to test
 	 * @param testlists switches between Allowed test lists and Present test lists. Has two values: Allowed and Present.
 	 * @return boolean - true, if the value matches the test lists or if Allowed testlists are not specified
@@ -308,7 +294,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * Gets the NamePath of this State in form " <code>DevCapsName[Context=aaa, LinkUsage=ccc]/DevCapName1/DevCapName2../@StateName</code> "
 	 * <p>
 	 * default getNamePath(false)
-	 * 
+	 *
 	 * @return String - NamePath of this State
 	 */
 	public final String getNamePath()
@@ -365,9 +351,9 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * Gets the NamePath of this State in form " <code>DevCapsName[Context=aaa, LinkUsage=ccc]/DevCapName1/DevCapName2../@StateName</code> "
 	 * <p>
 	 * default getNamePath(false)
-	 * 
+	 *
 	 * @param bRecurse if true returns " <code>DevCapsName/SubelemName1/SubelemName2/../@StateName</code> "
-	 * 
+	 *
 	 * @return String - NamePath of this State
 	 */
 	public final VString getNamePathVector(final boolean bRecurse)
@@ -410,7 +396,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * get the ancestor devCaps, null if this resides in a DevCapPool
-	 * 
+	 *
 	 * @return JDFDevCaps
 	 */
 	public JDFDevCaps getParentDevCaps()
@@ -423,7 +409,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	/**
 	 * Sets attribute Availability
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	@Override
@@ -434,7 +420,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Gets typesafe enumerated attribute Availability
-	 * 
+	 *
 	 * @return EnumAvailability: the enumeration value of the attribute
 	 */
 	@Override
@@ -455,7 +441,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * get the parent devCap of this
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFDevCap getParentDevCap()
@@ -465,7 +451,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Sets attribute DevNS
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setDevNS(final String value)
@@ -475,7 +461,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Gets URI attribute DevNS
-	 * 
+	 *
 	 * @return String: the attribute value
 	 */
 	public String getDevNS()
@@ -485,7 +471,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Sets attribute HasDefault, default=true
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setHasDefault(final boolean value)
@@ -495,7 +481,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Gets boolean attribute HasDefault
-	 * 
+	 *
 	 * @return boolean: the attribute value
 	 */
 	public boolean getHasDefault()
@@ -505,7 +491,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Sets attribute MaxOccurs,
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMaxOccurs(final int value)
@@ -515,7 +501,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Gets integer attribute MaxOccurs
-	 * 
+	 *
 	 * @return int: the attribute value
 	 */
 	public int getMaxOccurs()
@@ -530,7 +516,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Sets attribute MinOccurs, default=1
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMinOccurs(final int value)
@@ -540,7 +526,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Get integer attribute MinOccurs
-	 * 
+	 *
 	 * @return int: the attribute value
 	 */
 	public int getMinOccurs()
@@ -551,7 +537,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	/**
 	 * Sets String attribute Name<br>
 	 * Since name is independent of the data type of the State element, the setter is defined here
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setName(final String value)
@@ -562,7 +548,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	/**
 	 * Gets String attribute Name<br>
 	 * Since name is independent of the data type of the State element,the getter is defined here
-	 * 
+	 *
 	 * @return String: the attribute value
 	 */
 	public String getName()
@@ -572,7 +558,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Sets attribute Required
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setRequired(final boolean value)
@@ -582,7 +568,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Gets boolean attribute Required
-	 * 
+	 *
 	 * @return boolean: the attribute value
 	 */
 	public boolean getRequired()
@@ -592,7 +578,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Sets attribute ListType, default=SingleValue
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setListType(final EnumListType value)
@@ -602,7 +588,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Gets typesafe enumerated attribute ListType
-	 * 
+	 *
 	 * @return EnumListType: the enumeration value of the attribute
 	 */
 	public EnumListType getListType()
@@ -612,7 +598,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Sets attribute ActionRefs
-	 * 
+	 *
 	 * @param value vector of ActionRefs
 	 */
 	public void setActionRefs(final VString value)
@@ -627,7 +613,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Gets NMTOKENS attribute ActionRefs
-	 * 
+	 *
 	 * @return VString: the attribute value
 	 */
 	public VString getActionRefs()
@@ -638,7 +624,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Sets attribute Editable
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setEditable(final boolean value)
@@ -648,7 +634,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Gets boolean attribute Editable
-	 * 
+	 *
 	 * @return boolean: the attribute value
 	 */
 	public boolean getEditable()
@@ -658,7 +644,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Sets attribute MacroRefs
-	 * 
+	 *
 	 * @param value vector of MacroRefs
 	 */
 	public void setMacroRefs(final VString value)
@@ -673,7 +659,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Get NMTOKENS attribute MacroRefs
-	 * 
+	 *
 	 * @return VString: the attribute value
 	 */
 	public VString getMacroRefs()
@@ -684,7 +670,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Sets attribute DependentMacroRef
-	 * 
+	 *
 	 * @param value vector of DependentMacroRef
 	 */
 	public void setDependentMacroRef(final String value)
@@ -694,7 +680,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Get string attribute DependentMacroRef
-	 * 
+	 *
 	 * @return String: the attribute value
 	 */
 	public String getDependentMacroRef()
@@ -704,7 +690,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Sets attribute UserDisplay, default=Display
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setUserDisplay(final EnumUserDisplay value)
@@ -714,7 +700,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Gets typesafe enumerated attribute UserDisplay
-	 * 
+	 *
 	 * @return EnumUserDisplay: the enumeration value of the attribute
 	 */
 	public EnumUserDisplay getUserDisplay()
@@ -730,7 +716,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * Gets the iSkip-th element Loc. If doesn't exist, it is created.
 	 * <p>
 	 * default: getCreateLoc(0)
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc: the matching element
 	 */
@@ -743,7 +729,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * Gets the iSkip-th element Loc
 	 * <p>
 	 * default: getCreateLoc(0)
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc: the matching element
 	 */
@@ -755,7 +741,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Appends element Loc to the end of <code>this</code>
-	 * 
+	 *
 	 * @return JDFLoc: newly created Loc element
 	 */
 	public JDFLoc appendLoc()
@@ -765,7 +751,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * set attribute AllowedLength
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	protected void setAllowedLength(final JDFIntegerRange value)
@@ -775,7 +761,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * get attribute AllowedLength
-	 * 
+	 *
 	 * @return JDFIntegerRange: the attribute value
 	 */
 	protected JDFIntegerRange getAllowedLength()
@@ -821,7 +807,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * fitsLength - tests, if the defined String <code>str</code> matches AllowedLength or the PresentLength, specified for this State
-	 * 
+	 *
 	 * @param str string to test
 	 * @param length switches between AllowedLength and PresentLength.
 	 * @return boolean - true, if 'str' matches Length or if AllowedLength is not specified
@@ -849,7 +835,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * gets the matching Attribute value String or AbstractSpan object from the parent, depending on the type of the state
-	 * 
+	 *
 	 * @param element the parent in which to search
 	 * @return Object: either a String or AbstractSpan
 	 */
@@ -866,9 +852,9 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * set the default values specified in this in element
-	 * 
+	 *
 	 * @param element the element to set the defaults on
-	 * @param bAll 
+	 * @param bAll
 	 * @return true if successful
 	 */
 	public boolean setDefaultsFromCaps(final KElement element, final boolean bAll)
@@ -982,9 +968,9 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * fitsListType - tests, if the defined <code>value</code> matches value of ListType attribute, specified for this State
-	 * 
+	 *
 	 * @param value value to test
-	 * 
+	 *
 	 * @return boolean - true, if 'value' matches specified ListType
 	 */
 	protected final boolean fitsListType(final String value)
@@ -1023,9 +1009,9 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 			return rangelist.size() == 1;
 		}
 		else if (listType.equals(EnumListType.List) || listType.equals(EnumListType.CompleteList) || // complete or
-				// not -
-				// tested in
-				// fitsValueList
+		// not -
+		// tested in
+		// fitsValueList
 				listType.equals(EnumListType.CompleteOrderedList) || // tested
 				// in
 				// fitsValueList
@@ -1066,7 +1052,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib. core.KElement.EnumValidationLevel, boolean, int)
 	 */
 	protected VString getInvalidAttributesImpl(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
@@ -1089,7 +1075,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Gets the j-th element Loc of the i-th element Value
-	 * 
+	 *
 	 * @param iSkip number of Value elements to skip (iSkip=0 - first Value element)
 	 * @param jSkip number of Loc subelements of i-th Value element to skip, (jSkip=0 - first Loc element)
 	 * @return JDFLoc: the matching Loc element
@@ -1106,7 +1092,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * get iSkip'th element Loc
-	 * 
+	 *
 	 * @param iSkip number of Value elements to skip (iSkip=0 - get first element)
 	 * @return JDFValueLoc: the element
 	 */
@@ -1117,7 +1103,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * appends element Loc to the end of the i-th subelement Value
-	 * 
+	 *
 	 * @param iSkip number of Value elements to skip (iSkip=0 - first Value element)
 	 * @return JDFLoc: newly created Loc element
 	 */
@@ -1133,7 +1119,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * Appends element ValueLoc
-	 * 
+	 *
 	 * @return JDFLoc: newly created ValueLoc element
 	 */
 	final public JDFValueLoc appendValueLoc()
@@ -1143,7 +1129,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * fitsRegExp - checks whether <code>str</code> matches the AllowedRegExp/PresentRegExp specified for this State
-	 * 
+	 *
 	 * @param str string to test
 	 * @param regexp switches between AllowedRegExp and PresentRegExp.
 	 * @return boolean - true, if <code>str</code> matches the RegExp or if AllowedRegExp is not specified
@@ -1191,7 +1177,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * get the availability of this devcaps based on the list of installed modules in ModuleRefs and ModulePool
-	 * 
+	 *
 	 * @return
 	 */
 	public EnumAvailability getModuleAvailability()
@@ -1221,8 +1207,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * get the DEvCapPool that contains devcap elements referenced by this
-	 * @param poolName 
-	 * 
+	 * @param poolName
+	 *
 	 * @return KElement the pool
 	 */
 	private KElement getParentPool(final String poolName)
@@ -1233,8 +1219,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * get the DEvCapPool that contains devcap elements referenced by this
-	 * @param poolName 
-	 * 
+	 * @param poolName
+	 *
 	 * @return KElement the pool
 	 */
 	private KElement getCreateParentPool(final String poolName)
@@ -1244,7 +1230,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	private KElement getPoolParent()
@@ -1263,7 +1249,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * (21) get VString attribute ModuleRefs
-	 * 
+	 *
 	 * @return VString the value of the attribute
 	 */
 	@Override
@@ -1296,7 +1282,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.core.JDFElement#getIDPrefix()
 	 */
 	@Override

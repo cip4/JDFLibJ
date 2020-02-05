@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -97,7 +97,7 @@ public class JDFSignal extends JDFAutoSignal
 
 	/**
 	 * Constructor for JDFSignal
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -108,7 +108,7 @@ public class JDFSignal extends JDFAutoSignal
 
 	/**
 	 * Constructor for JDFSignal
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -120,7 +120,7 @@ public class JDFSignal extends JDFAutoSignal
 
 	/**
 	 * Constructor for JDFSignal
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -131,22 +131,9 @@ public class JDFSignal extends JDFAutoSignal
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	// **************************************** Methods
-	// *********************************************
-	/**
-	 * toString
-	 * 
-	 * @return String
-	 */
-	@Override
-	public String toString()
-	{
-		return "JDFSignal[  --> " + super.toString() + " ]";
-	}
-
 	/**
 	 * converts a response to a signal that can be sent individually
-	 * 
+	 *
 	 * @param response the response to convert
 	 * @return true if successful
 	 * @deprecated use the two parameter variant
@@ -159,7 +146,7 @@ public class JDFSignal extends JDFAutoSignal
 
 	/**
 	 * converts a response to a signal that can be sent individually
-	 * 
+	 *
 	 * @param response the response to convert - should not be null
 	 * @param q the query that should be merged into the signal - may be null
 	 * @return true if successful
@@ -199,7 +186,7 @@ public class JDFSignal extends JDFAutoSignal
 		if (q != null)
 		{
 			final VElement v = q.getChildElementVector(null, null, null, true, 0, true);
-			KElement k0 = getFirstChildElement();
+			final KElement k0 = getFirstChildElement();
 			for (int i = 0; i < v.size(); i++)
 			{
 				final KElement item = v.item(i);
@@ -220,7 +207,7 @@ public class JDFSignal extends JDFAutoSignal
 
 	/**
 	 * legacy get first notification
-	 * @return 
+	 * @return
 	 */
 	public JDFNotification getNotification()
 	{
@@ -229,7 +216,7 @@ public class JDFSignal extends JDFAutoSignal
 
 	/**
 	 * legacy get first notification
-	 * @return 
+	 * @return
 	 */
 	public JDFNotification getCreateNotification()
 	{

@@ -67,6 +67,7 @@ import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
+import org.cip4.jdflib.resource.process.JDFRegisterMark;
 import org.cip4.jdflib.resource.process.JDFStripMark;
 import org.junit.Test;
 
@@ -283,6 +284,30 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		xjdfHelper.cleanUp();
 		setSnippet(shLO, true);
 		writeTest(xjdfHelper, "resources/pageCondition.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testRegisterMark()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "PageCondition", null);
+		xjdfHelper.setTypes("Imposition");
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper rh = shLO.appendPartition(AttributeName.SIDE, "Front", true);
+
+		final JDFLayout lo = (JDFLayout) rh.getResource();
+		final KElement po = lo.appendElement(XJDFConstants.PlacedObject);
+		po.setAttribute("Ord", "0");
+		po.setAttribute(AttributeName.CTM, JDFMatrix.getUnitMatrix().toString());
+		final JDFRegisterMark rm = (JDFRegisterMark) po.appendElement(ElementName.MARKOBJECT).appendElement(ElementName.REGISTERMARK);
+		rm.setCenter((JDFXYPair) new JDFXYPair(10, 250).scaleFromMM());
+		rm.setAttribute(AttributeName.SIZE, new JDFXYPair(10, 10).scaleFromMM(), 2);
+
+		xjdfHelper.cleanUp();
+		setSnippet(shLO, true);
+		//	writeRoundTripX(xjdfHelper, "registerMark", EnumValidationLevel.Incomplete);
 	}
 
 	/**

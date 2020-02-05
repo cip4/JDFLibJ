@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -132,19 +132,6 @@ public class JDFSourceResource extends JDFElement
 	public JDFSourceResource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	// **************************************** Methods
-	// *********************************************
-	/**
-	 * toString
-	 *
-	 * @return String
-	 */
-	@Override
-	public String toString()
-	{
-		return "JDFSourceResource[  --> " + super.toString() + " ]";
 	}
 
 	/**

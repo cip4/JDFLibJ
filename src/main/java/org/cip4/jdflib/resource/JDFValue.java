@@ -1,11 +1,11 @@
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFValue extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de   using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author: sabjon@topmail.de   using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  * Revision history:   ...
  */
 
@@ -86,9 +86,9 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
-		AttributeInfo ai = super.getTheAttributeInfo();
+		final AttributeInfo ai = super.getTheAttributeInfo();
 
-		KElement parent = getParentNode_KElement();
+		final KElement parent = getParentNode_KElement();
 		if (parent instanceof JDFAbstractState)
 		{
 			ai.updateReplace(atrInfoTable);
@@ -132,9 +132,9 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 	@Override
 	protected ElementInfo getTheElementInfo()
 	{
-		ElementInfo ei = super.getTheElementInfo();
+		final ElementInfo ei = super.getTheElementInfo();
 
-		Node parentNode = getParentNode();
+		final Node parentNode = getParentNode();
 		if (parentNode instanceof JDFAbstractState)
 		{
 			ei.updateAdd(elemInfoTable);
@@ -144,44 +144,38 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 
 	/**
 	 * Constructor for JDFValue
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFValue(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFValue(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFValue
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFValue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFValue(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFValue
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFValue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFValue(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	@Override
-	public String toString()
-	{
-		return "JDFValue[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -190,24 +184,24 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 	 * @return
 	 */
 	@Deprecated
-	public static EnumValueUsage stringToValueUsage(String enumName)
+	public static EnumValueUsage stringToValueUsage(final String enumName)
 	{
 		return EnumValueUsage.getEnum(enumName);
 	}
 
 	/**
 	 * (14) set attribute AllowedValue
-	 * 
+	 *
 	 * @param String value: the value to set the attribute to
 	 */
-	public void setAllowedValue(String value)
+	public void setAllowedValue(final String value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUE, value, null);
 	}
 
 	/**
 	 * (23) get String attribute AllowedValue
-	 * 
+	 *
 	 * @return String the value of the attribute
 	 */
 	public String getAllowedValue()
@@ -217,17 +211,17 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 
 	/**
 	 * (14) set attribute PresentValue
-	 * 
+	 *
 	 * @param String value: the value to set the attribute to
 	 */
-	public void setPresentValue(String value)
+	public void setPresentValue(final String value)
 	{
 		setAttribute(AttributeName.PRESENTVALUE, value, null);
 	}
 
 	/**
 	 * (23) get String attribute PresentValue
-	 * 
+	 *
 	 * @return String the value of the attribute
 	 */
 	public String getPresentValue()
@@ -242,17 +236,17 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 	// //////////////////////////////////////////////////////////////////////
 	/**
 	 * (5) set attribute ValueUsage
-	 * 
+	 *
 	 * @param EnumValueUsage enumVar: the enumVar to set the attribute to
 	 */
-	public void setValueUsage(EnumValueUsage enumVar)
+	public void setValueUsage(final EnumValueUsage enumVar)
 	{
 		setAttribute(AttributeName.VALUEUSAGE, enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get ValueUsage attribute ValueUsage
-	 * 
+	 *
 	 * @return EnumValueUsage the value of the attribute
 	 */
 	public EnumValueUsage getValueUsage()
@@ -262,17 +256,17 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 
 	/**
 	 * (14) set attribute Value
-	 * 
+	 *
 	 * @param String value: the value to set the attribute to
 	 */
-	public void setValue(String value)
+	public void setValue(final String value)
 	{
 		setAttribute(AttributeName.VALUE, value, null);
 	}
 
 	/**
 	 * (23) get String attribute Value
-	 * 
+	 *
 	 * @return String the value of the attribute
 	 */
 	public String getValue()
@@ -286,42 +280,42 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 
 	/**
 	 * (26) getCreateLoc
-	 * 
+	 *
 	 * @param int iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
-	public JDFLoc getCreateLoc(int iSkip)
+	public JDFLoc getCreateLoc(final int iSkip)
 	{
 		return (JDFLoc) getCreateElement_KElement("Loc", null, iSkip);
 	}
 
 	/**
 	 * (27) const get element Loc
-	 * 
+	 *
 	 * @param int iSkip number of elements to skip
 	 * @return JDFLoc the element default is getLoc(0)
 	 */
-	public JDFLoc getLoc(int iSkip)
+	public JDFLoc getLoc(final int iSkip)
 	{
 		return (JDFLoc) getElement("Loc", null, iSkip);
 	}
 
 	/**
 	 * (28) get vector of all direct child elements Loc
-	 * 
+	 *
 	 * @param JDFAttributeMap mAttrib the map of attributes to select
 	 * @param boolean bAnd if true all attributes in the map are AND'ed, else they are OR'ed
 	 * @deprecated use getChildElementVector() instead
 	 */
 	@Deprecated
-	public VElement getLocVector(JDFAttributeMap mAttrib, boolean bAnd)
+	public VElement getLocVector(final JDFAttributeMap mAttrib, final boolean bAnd)
 	{
-		VElement myResource = new VElement();
-		Vector vElem = getChildElementVector("Loc", null, mAttrib, bAnd, 0, true);
+		final VElement myResource = new VElement();
+		final Vector vElem = getChildElementVector("Loc", null, mAttrib, bAnd, 0, true);
 		for (int i = 0; i < vElem.size(); i++)
 		{
-			JDFElement k = (JDFElement) vElem.elementAt(i);
-			JDFLoc myJDFLoc = (JDFLoc) k;
+			final JDFElement k = (JDFElement) vElem.elementAt(i);
+			final JDFLoc myJDFLoc = (JDFLoc) k;
 			myResource.addElement(myJDFLoc);
 		}
 		return myResource;
@@ -342,4 +336,3 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 	}
 
 }// end namespace JDF
-

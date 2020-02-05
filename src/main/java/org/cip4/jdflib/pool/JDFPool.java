@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  *
@@ -99,7 +99,7 @@ public abstract class JDFPool extends JDFElement
 
 	/**
 	 * Constructor for JDFPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -110,7 +110,7 @@ public abstract class JDFPool extends JDFElement
 
 	/**
 	 * Constructor for JDFPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -122,7 +122,7 @@ public abstract class JDFPool extends JDFElement
 
 	/**
 	 * Constructor for JDFPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -133,24 +133,11 @@ public abstract class JDFPool extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	// **************************************** Methods
-	// *********************************************
-	/**
-	 * toString
-	 * 
-	 * @return String
-	 */
-	@Override
-	public String toString()
-	{
-		return "JDFPool[ --> " + super.toString() + " ]";
-	}
-
 	/**
 	 * Gets all children with the attributes <code>name, mAttrib, nameSpaceURI</code> from the pool
 	 * <p>
 	 * default: GetPoolChildrenGeneric (JDFConstants.EMPTYSTRING, new JDFAttributeMap(), JDFConstants.EMPTYSTRING)
-	 * 
+	 *
 	 * @param strName name of the Child
 	 * @param mAttrib the attribute to search for
 	 * @param nameSpaceURI nameSpaceURI to search in
@@ -171,13 +158,13 @@ public abstract class JDFPool extends JDFElement
 
 	/**
 	 * get a child from the pool matching the parameters
-	 * 
+	 *
 	 * @param i the index of the child, or -1 to make a new one.
 	 * @param strName the name of the element
 	 * @param mAttrib the attribute of the element
 	 * @param nameSpaceURI the namespace to search in
 	 * @return JDFElement: the pool child matching the above conditions
-	 * 
+	 *
 	 * default: GetPoolChildGeneric (i, JDFConstants.EMPTYSTRING, null, JDFConstants.EMPTYSTRING)
 	 */
 	protected JDFElement getPoolChildGeneric(int i, final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
@@ -200,7 +187,7 @@ public abstract class JDFPool extends JDFElement
 
 	/**
 	 * Append a new child if no identical child exists
-	 * 
+	 *
 	 * @param p the Child to add to the element
 	 */
 	protected void appendUniqueGeneric(final JDFElement p)
@@ -214,7 +201,7 @@ public abstract class JDFPool extends JDFElement
 	/**
 	 * Append all children of p for which no identical child exists <br/>
 	 * if elements have an ID attribute, this is sufficient for equivalence
-	 * 
+	 *
 	 * @param p the Child to add to the element
 	 */
 	protected void appendUniqueGeneric(final JDFPool p)

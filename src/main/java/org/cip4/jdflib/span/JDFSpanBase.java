@@ -115,7 +115,7 @@ public abstract class JDFSpanBase extends JDFElement
 	 * Constructor for JDFSpanBase
 	 * @param myOwnerDocument
 	 * @param qualifiedName
-	 * 
+	 *
 	 */
 	public JDFSpanBase(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
@@ -126,7 +126,7 @@ public abstract class JDFSpanBase extends JDFElement
 	 * Constructor for JDFSpanBase
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
-	 * 
+	 *
 	 * @param qualifiedName
 	 */
 	public JDFSpanBase(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
@@ -136,11 +136,11 @@ public abstract class JDFSpanBase extends JDFElement
 
 	/**
 	 * Constructor for JDFSpanBase
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
-	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 *
 	 */
 	public JDFSpanBase(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
@@ -204,15 +204,15 @@ public abstract class JDFSpanBase extends JDFElement
 		}
 
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumPriority None = new EnumPriority(JDFConstants.PRIORITY_NONE);
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumPriority Suggested = new EnumPriority(JDFConstants.PRIORITY_SUGGESTED);
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumPriority Required = new EnumPriority(JDFConstants.PRIORITY_REQUIRED);
 	}
@@ -274,65 +274,52 @@ public abstract class JDFSpanBase extends JDFElement
 		}
 
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumDataType DurationSpan = new EnumDataType(JDFConstants.DATATYPE_DURATION);
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumDataType IntegerSpan = new EnumDataType(JDFConstants.DATATYPE_INTEGER);
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumDataType NumberSpan = new EnumDataType(JDFConstants.DATATYPE_NUMBER);
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumDataType OptionSpan = new EnumDataType(JDFConstants.DATATYPE_OPTION);
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumDataType NameSpan = new EnumDataType(JDFConstants.DATATYPE_NAME);
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumDataType EnumerationSpan = new EnumDataType(JDFConstants.DATATYPE_ENUMERATION);
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumDataType ShapeSpan = new EnumDataType(JDFConstants.DATATYPE_SHAPE);
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumDataType StringSpan = new EnumDataType(JDFConstants.DATATYPE_STRING);
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumDataType TimeSpan = new EnumDataType(JDFConstants.DATATYPE_TIME);
 		/**
-		 * 
+		 *
 		 */
 		public static final EnumDataType XYPairSpan = new EnumDataType(JDFConstants.DATATYPE_XYPAIR);
 	}
 
-	// **************************************** Methods
-	// *********************************************
-	/**
-	 * toString
-	 * 
-	 * @return String
-	 */
-	@Override
-	public String toString()
-	{
-		return "JDFSpanBase[ --> " + super.toString() + " ]";
-	}
-
 	/**
 	 * Gets the value of this Span: te value of Actual if it exists, otherwise value = Preferred + Range combination
-	 * 
+	 *
 	 * @deprecated 060302 was never correctly implemented and is unnecessary...
-	 * 
+	 *
 	 * @return String - value as a String
 	 */
 	@Deprecated
@@ -343,8 +330,8 @@ public abstract class JDFSpanBase extends JDFElement
 
 	/**
 	 * Sets the value of attribute DataType
-	 * @param value 
-	 * 
+	 * @param value
+	 *
 	 */
 	public void setDataType(final EnumDataType value)
 	{
@@ -353,7 +340,7 @@ public abstract class JDFSpanBase extends JDFElement
 
 	/**
 	 * Gets the value of attribute DataType
-	 * 
+	 *
 	 * @return EnumDataType - the attribute DataType value
 	 */
 	public EnumDataType getDataType()
@@ -363,7 +350,7 @@ public abstract class JDFSpanBase extends JDFElement
 
 	/**
 	 * GetPriority
-	 * 
+	 *
 	 * @return EnumPriority
 	 */
 	public EnumPriority getPriority()
@@ -373,7 +360,7 @@ public abstract class JDFSpanBase extends JDFElement
 
 	/**
 	 * SetPriority
-	 * 
+	 *
 	 * @param p
 	 */
 	public void setPriority(final EnumPriority p)
@@ -383,7 +370,7 @@ public abstract class JDFSpanBase extends JDFElement
 
 	/**
 	 * GetName
-	 * 
+	 *
 	 *@deprecated 060301 use getNodeName or getLocalName
 	 * @return String
 	 */
@@ -395,7 +382,7 @@ public abstract class JDFSpanBase extends JDFElement
 
 	/**
 	 * PreferredToActual
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public boolean preferredToActual()
@@ -421,9 +408,9 @@ public abstract class JDFSpanBase extends JDFElement
 			return getAttribute(AttributeName.PREFERRED);
 		if (hasAttribute(AttributeName.RANGE))
 		{
-			String range = getAttribute(AttributeName.RANGE);
-			VString v = StringUtil.tokenize(range, "~ ", false);
-			int n = v.size() / 2;
+			final String range = getAttribute(AttributeName.RANGE);
+			final VString v = StringUtil.tokenize(range, "~ ", false);
+			final int n = v.size() / 2;
 			if (n > 0)
 			{
 				return v.get(n);
