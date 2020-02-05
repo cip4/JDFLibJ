@@ -38,7 +38,6 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoResourceInfo.EnumScope;
 import org.cip4.jdflib.core.AttributeName;
@@ -86,7 +85,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 		int n0 = 1;
 		while (n0 > 0)
 		{
-			final VElement vr = ri.getChildElementVector(null, null);
+			final Collection<KElement> vr = ri.getChildArray(null, null);
 			n0 = 0;
 			for (final KElement e : vr)
 			{
@@ -165,7 +164,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 		final KElement set = getSetElement(ri);
 
 		final SetHelper sh = new SetHelper(set);
-		final Vector<ResourceHelper> newParts = sh.getCreatePartitions(vPartMap, false);
+		final List<ResourceHelper> newParts = sh.getCreatePartitions(vPartMap, false);
 		final boolean isEstimate = EnumScope.Estimate.equals(ri.getScope());
 		for (final ResourceHelper ph : newParts)
 		{
@@ -183,7 +182,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 		jdfRI.removeChild(ElementName.AMOUNTPOOL, null, 0);
 	}
 
-	void processPart(final JDFResourceInfo ri, final JDFAmountPool ap, final Vector<ResourceHelper> newParts, final boolean isEstimate, final ResourceHelper ph)
+	void processPart(final JDFResourceInfo ri, final JDFAmountPool ap, final List<ResourceHelper> newParts, final boolean isEstimate, final ResourceHelper ph)
 	{
 		JDFAmountPool apx = ph.getAmountPool();
 		if (apx == null)
