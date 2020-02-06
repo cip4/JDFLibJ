@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -396,6 +396,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.GANGELEMENT, JDFLIB + "resource.process.JDFGangElement");
 		sm_PackageNames.put(ElementName.GANGINFO, JDFLIB + "jmf.JDFGangInfo");
 		sm_PackageNames.put(ElementName.GANGQUFILTER, JDFLIB + "jmf.JDFGangQuFilter");
+		sm_PackageNames.put(ElementName.GANGSOURCE, JDFLIB + "resource.JDFGangSource");
 		sm_PackageNames.put(ElementName.GATHERINGPARAMS, JDFLIB + "resource.JDFGatheringParams");
 		sm_PackageNames.put(ElementName.GENERALID, JDFLIB + "resource.process.JDFGeneralID");
 		sm_PackageNames.put(ElementName.GLUE, JDFLIB + "resource.process.postpress.JDFGlue");

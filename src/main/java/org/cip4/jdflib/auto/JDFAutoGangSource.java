@@ -47,12 +47,12 @@ import org.cip4.jdflib.core.JDFElement;
 
 /**
  *****************************************************************************
- * class JDFAutoCertification : public JDFElement
+ * class JDFAutoGangSource : public JDFElement
  *****************************************************************************
  * 
  */
 
-public abstract class JDFAutoCertification extends JDFElement
+public abstract class JDFAutoGangSource extends JDFElement
 {
 
 	private static final long serialVersionUID = 1L;
@@ -60,9 +60,9 @@ public abstract class JDFAutoCertification extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLAIM, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.IDENTIFIER, 0x33111111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORGANIZATION, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x33111111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COPIES, 0x22111111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x22111111, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -72,37 +72,37 @@ public abstract class JDFAutoCertification extends JDFElement
 	}
 
 	/**
-	 * Constructor for JDFAutoCertification
+	 * Constructor for JDFAutoGangSource
 	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCertification(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
+	protected JDFAutoGangSource(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
-	 * Constructor for JDFAutoCertification
+	 * Constructor for JDFAutoGangSource
 	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCertification(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
+	protected JDFAutoGangSource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
-	 * Constructor for JDFAutoCertification
+	 * Constructor for JDFAutoGangSource
 	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCertification(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+	protected JDFAutoGangSource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -112,72 +112,72 @@ public abstract class JDFAutoCertification extends JDFElement
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Claim ---------------------------------------------------------------------
+	 * --------------------------------------------------------------------- Methods for Attribute AssemblyID ---------------------------------------------------------------------
 	 */
 	/**
-	 * (36) set attribute Claim
+	 * (36) set attribute AssemblyID
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setClaim(final String value)
+	public void setAssemblyID(final String value)
 	{
-		setAttribute(AttributeName.CLAIM, value, null);
+		setAttribute(AttributeName.ASSEMBLYID, value, null);
 	}
 
 	/**
-	 * (23) get String attribute Claim
+	 * (23) get String attribute AssemblyID
 	 * 
 	 * @return the value of the attribute
 	 */
-	public String getClaim()
+	public String getAssemblyID()
 	{
-		return getAttribute(AttributeName.CLAIM, null, JDFCoreConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.ASSEMBLYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Identifier ---------------------------------------------------------------------
+	 * --------------------------------------------------------------------- Methods for Attribute Copies ---------------------------------------------------------------------
 	 */
 	/**
-	 * (36) set attribute Identifier
+	 * (36) set attribute Copies
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setIdentifier(final String value)
+	public void setCopies(final int value)
 	{
-		setAttribute(AttributeName.IDENTIFIER, value, null);
+		setAttribute(AttributeName.COPIES, value, null);
 	}
 
 	/**
-	 * (23) get String attribute Identifier
+	 * (15) get int attribute Copies
 	 * 
-	 * @return the value of the attribute
+	 * @return int the value of the attribute
 	 */
-	public String getIdentifier()
+	public int getCopies()
 	{
-		return getAttribute(AttributeName.IDENTIFIER, null, JDFCoreConstants.EMPTYSTRING);
+		return getIntAttribute(AttributeName.COPIES, null, 0);
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Organization ---------------------------------------------------------------------
+	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
 	 */
 	/**
-	 * (36) set attribute Organization
+	 * (36) set attribute JobID
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setOrganization(final String value)
+	public void setJobID(final String value)
 	{
-		setAttribute(AttributeName.ORGANIZATION, value, null);
+		setAttribute(AttributeName.JOBID, value, null);
 	}
 
 	/**
-	 * (23) get String attribute Organization
+	 * (23) get String attribute JobID
 	 * 
 	 * @return the value of the attribute
 	 */
-	public String getOrganization()
+	public String getJobID()
 	{
-		return getAttribute(AttributeName.ORGANIZATION, null, JDFCoreConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 }// end namespace JDF
