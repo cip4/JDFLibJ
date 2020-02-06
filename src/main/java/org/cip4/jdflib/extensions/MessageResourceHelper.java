@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -73,6 +74,16 @@ public class MessageResourceHelper extends MessageHelper
 	{
 		final KElement set = theElement.getCreateElement(ElementName.RESOURCEINFO).getCreateElement(XJDFConstants.ResourceSet);
 		return new SetHelper(set);
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public SetHelper getSet(final String name)
+	{
+		final KElement set = theElement.getChildWithAttribute(XJDFConstants.ResourceSet, AttributeName.NAME, null, name, 0, false);
+		return set == null ? null : new SetHelper(set);
 	}
 
 	/**

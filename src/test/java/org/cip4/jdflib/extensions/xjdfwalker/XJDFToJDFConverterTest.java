@@ -379,6 +379,33 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testNodeInfoGangSource()
+	{
+		final XJDFHelper h = new XJDFHelper("j", "p", null);
+		h.setTypes(EnumType.ImageSetting.getName());
+		final ResourceHelper partition = h.getCreateSet(ElementName.NODEINFO, EnumUsage.Input).getCreatePartition(0, true);
+		partition.setStatus(EnumResStatus.Available);
+		final JDFNodeInfo ni = (JDFNodeInfo) partition.getResource();
+		final KElement gs1 = ni.appendElement(ElementName.GANGSOURCE);
+		gs1.setAttribute(AttributeName.COPIES, 200, null);
+		gs1.setAttribute(XJDFConstants.BinderySignatureID, "BS1");
+		gs1.setAttribute(AttributeName.JOBID, "SourceJob1");
+		final KElement gs2 = ni.appendElement(ElementName.GANGSOURCE);
+		gs2.setAttribute(AttributeName.COPIES, 180, null);
+		gs2.setAttribute(XJDFConstants.BinderySignatureID, "BS2");
+		gs2.setAttribute(AttributeName.JOBID, "SourceJob2");
+
+		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		final JDFDoc docjdf = conv.convert(h);
+		final JDFNodeInfo nij = docjdf.getJDFRoot().getNodeInfo();
+		assertEquals("SourceJob1", nij.getElement(ElementName.GANGSOURCE).getAttribute(AttributeName.JOBID));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testNodeInfoMulti()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "p", null);
@@ -465,7 +492,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFColorantControl cc = (JDFColorantControl) h.getCreateSet(XJDFConstants.Resource, ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true).getResource();
 		cc.setAttribute(ElementName.COLORANTPARAMS, "Sep_1");
 		cc.setAttribute(ElementName.COLORANTORDER, "Sep_1");
-		h.getCreateSet(XJDFConstants.Resource, ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME, "Sep 1");
+		h.getCreateSet(XJDFConstants.Resource, ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME,
+				"Sep 1");
 
 		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
 		final JDFDoc docjdf = conv.convert(h);
@@ -550,7 +578,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final KElement c = e.appendElement(SetHelper.RESOURCE_SET);
 		c.setAttribute("Name", "Layout");
 		c.setAttribute("Usage", "Input");
-		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL", "file://foo.xml");
+		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL",
+				"file://foo.xml");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		final JDFNode root = d.getJDFRoot();

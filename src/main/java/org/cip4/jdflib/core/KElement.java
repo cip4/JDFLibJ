@@ -700,8 +700,7 @@ public class KElement extends ElementNSImpl implements Element
 					namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), false);
 					if (!ContainerUtil.equals(namespaceURI2, nameSpaceURI))
 					{
-						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
-								+ "; attempting to set URI: " + nameSpaceURI;
+						final String message = key + ": inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2 + "; attempting to set URI: " + nameSpaceURI;
 						kLog.error(message);
 						throw new JDFException(message);
 					}
@@ -814,13 +813,13 @@ public class KElement extends ElementNSImpl implements Element
 							// already there
 							if (key.equals(nodeName))
 							{ // overwrite default namespace with qualified
-									// namespace or vice versa
+								// namespace or vice versa
 								removeAttribute(nodeName);
 								super.setAttribute(key, value);
 							}
 							else
 							{ // same qualified name, simply overwrite the
-									// value
+								// value
 								a.setNodeValue(value);
 							}
 						}
@@ -829,8 +828,8 @@ public class KElement extends ElementNSImpl implements Element
 							final String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 							if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
 							{
-								throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2
-										+ "; attempting to set URI: " + nameSpaceURI);
+								throw new JDFException(
+										"KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2 + "; attempting to set URI: " + nameSpaceURI);
 							}
 							try
 							{
@@ -1706,6 +1705,7 @@ public class KElement extends ElementNSImpl implements Element
 
 	/**
 	 * never null list of all kids
+	 *
 	 * @return
 	 */
 	public List<KElement> getChildList()
@@ -3843,12 +3843,6 @@ public class KElement extends ElementNSImpl implements Element
 		return null;
 	}
 
-	// ************************** end of methods needed in JDFPartAmount
-	// ********
-	// //////////////////////////////////////////////////////////////////////////
-	// ************************** start of methods needed in JDFResponse
-	// ********
-
 	/**
 	 * append a DOM comment <code>&lt;!-- XMLComment --&gt;</code> The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
 	 *
@@ -3881,9 +3875,9 @@ public class KElement extends ElementNSImpl implements Element
 	 * removed The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
 	 *
 	 * @param commentText the comment text to set
-	 * @deprecated Use {@link #setXMLComment(String,boolean)} instead
+	 *
+	 *            Convenience - see {@link #setXMLComment(String,boolean)}
 	 */
-	@Deprecated
 	public void setXMLComment(final String commentText)
 	{
 		setXMLComment(commentText, true);
