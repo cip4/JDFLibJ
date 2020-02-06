@@ -4375,7 +4375,8 @@ public class KElement extends ElementNSImpl implements Element
 		KElement before = null;
 		if (!v.isEmpty())
 		{
-			int posBefore = v.size();
+			final int size = v.size();
+			int posBefore = size;
 			int posAfter = 0;
 			int lastPos = -1;
 			while (posBefore != posAfter)
@@ -4394,7 +4395,7 @@ public class KElement extends ElementNSImpl implements Element
 				}
 				lastPos = pos;
 			}
-			before = v.get(posBefore);
+			before = posBefore == size ? null : v.get(posBefore);
 		}
 		insertBefore(e, before);
 	}
