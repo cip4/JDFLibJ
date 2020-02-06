@@ -61,7 +61,7 @@ public class JDFGangSource extends JDFAutoGangSource
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFGangSource(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
+	public JDFGangSource(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -74,7 +74,7 @@ public class JDFGangSource extends JDFAutoGangSource
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFGangSource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
+	public JDFGangSource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -88,7 +88,7 @@ public class JDFGangSource extends JDFAutoGangSource
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFGangSource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFGangSource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
