@@ -286,6 +286,15 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
+	 *
+	 * @return
+	 */
+	public SetHelper getNodeInfo()
+	{
+		return getSet(ElementName.NODEINFO, 0);
+	}
+
+	/**
 	 * @param id
 	 * @return the parameterset and resourceset with a child partiton with ID=iD
 	 */

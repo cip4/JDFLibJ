@@ -67,6 +67,7 @@ import org.junit.Test;
  */
 public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 {
+	private static final String GANG = "Gang_";
 	private XJDFHelper xjdfHelper;
 	private KElement sheetOptimizingParams;
 	private SetHelper layout;
@@ -234,10 +235,15 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 			for (int j = 0; j < 2; j++)
 			{
 				addGang();
-				addOutLayout(i, j);
+				addOutLayout(i, j, false);
 			}
 		}
+		layout.getPartition(0).setAmount(500, null, true);
+
 		xjdfHelper.cleanUp();
+		setSnippet(xjdfHelper, true);
+		setSnippet(xjdfHelper.getAuditPool(), false);
+		setSnippet(xjdfHelper.getNodeInfo(), false);
 		writeTest(xjdfHelper, "processes/GangLayout.xjdf");
 	}
 
@@ -246,17 +252,26 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 	 * @param i
 	 * @param j
 	 */
-	private void addOutLayout(final int i, final int j)
+	private void addOutLayout(final int i, final int j, final boolean wantBS)
 	{
 		final JDFAttributeMap partMap = new JDFAttributeMap("SheetName", "Sheet1");
-		final String bsIJ = "BS_" + i + "_" + j;
-		partMap.put(XJDFConstants.BinderySignatureID, bsIJ);
-		final JDFLayout lo = (JDFLayout) layout.getCreatePartition(partMap, true).getResource();
-		final SetHelper sh = xjdfHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
-		final JDFBinderySignature bs = (JDFBinderySignature) sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsIJ), true).getResource();
-		bs.setBinderySignatureType(EnumBinderySignatureType.Grid);
-		final JDFPosition p = JDFPosition.createPosition(lo, i, j, 2, 2);
-		p.setAttribute(XJDFConstants.BinderySignatureID, bsIJ);
+		final ResourceHelper lor = layout.getCreatePartition(0, true);
+		lor.setPartMap(partMap);
+		final JDFLayout lo = (JDFLayout) lor.getResource();
+		final JDFPosition p = JDFPosition.createPosition(lo, i, j * 2, 2, 4);
+		p.setAttribute(AttributeName.GANGELEMENTID, GANG + (i * 2 + j));
+		final JDFPosition p2 = JDFPosition.createPosition(lo, i, j * 2 + 1, 2, 4);
+		p2.setAttribute(AttributeName.GANGELEMENTID, GANG + (i * 2 + j));
+		if (wantBS)
+		{
+			final SetHelper sh = xjdfHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+			final String bsIJ = "BS_" + i + "_" + j;
+			partMap.put(XJDFConstants.BinderySignatureID, bsIJ);
+			final JDFBinderySignature bs = (JDFBinderySignature) sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsIJ), true).getResource();
+			bs.setBinderySignatureType(EnumBinderySignatureType.Grid);
+			p.setAttribute(XJDFConstants.BinderySignatureID, bsIJ);
+			p2.setAttribute(XJDFConstants.BinderySignatureID, bsIJ);
+		}
 		assertNotNull(p);
 	}
 
@@ -267,8 +282,9 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 	private KElement addGang()
 	{
 		final KElement gang = sheetOptimizingParams.appendElement(ElementName.GANGELEMENT);
-		gang.setAttribute(AttributeName.GANGELEMENTID, "Gang_" + gang.numSiblingElements(ElementName.GANGELEMENT, null));
-		gang.setAttribute(AttributeName.ORDERQUANTITY, 1000, null);
+		final int nGang = gang.numSiblingElements(ElementName.GANGELEMENT, null);
+		gang.setAttribute(AttributeName.GANGELEMENTID, GANG + nGang);
+		gang.setAttribute(AttributeName.ORDERQUANTITY, 1000 - nGang * 50, null);
 		return gang;
 	}
 
@@ -299,9 +315,9 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 		sheetOptimizingParams = hpSheetOptim.getCreateResource();
 
 		convertingConfig = (JDFConvertingConfig) sheetOptimizingParams.appendElement(ElementName.CONVERTINGCONFIG);
-		convertingConfig.setAttribute(AttributeName.SHEETHEIGHT + "Max", 70 * 72 / 2.54, null);
+		convertingConfig.setAttribute(AttributeName.SHEETHEIGHT + "Max", 75 * 72 / 2.54, null);
 		convertingConfig.setAttribute(AttributeName.SHEETHEIGHT + "Min", 70 * 72 / 2.54, null);
-		convertingConfig.setAttribute(AttributeName.SHEETWIDTH + "Max", 100 * 72 / 2.54, null);
+		convertingConfig.setAttribute(AttributeName.SHEETWIDTH + "Max", 105 * 72 / 2.54, null);
 		convertingConfig.setAttribute(AttributeName.SHEETWIDTH + "Min", 100 * 72 / 2.54, null);
 
 	}
