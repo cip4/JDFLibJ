@@ -4649,7 +4649,6 @@ public class JDFResource extends JDFElement
 	 *
 	 * @return boolean - true if spawn is allowed.
 	 */
-
 	public boolean isSpawnAllowed()
 	{
 		final JDFAttributeMap amPartMap = getPartMap();
@@ -4661,8 +4660,7 @@ public class JDFResource extends JDFElement
 			final VString vsPartKeys = this.getPartIDKeys();
 			final int nPartKeys = vsPartKeys.size();
 
-			// find a partIDKey, which is in the partMap too (start from the
-			// end)
+			// find a partIDKey, which is in the partMap too (start from the end)
 			for (int i = nPartKeys - 1; i >= 0 && strPartIDKey == null; i--)
 			{
 				final String str = vsPartKeys.get(i);
@@ -4674,9 +4672,9 @@ public class JDFResource extends JDFElement
 			}
 
 			// Check found part ID key.
-			if ((strPartIDKey != null) && (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCCOPIES))
+			if ((strPartIDKey != null) && ((strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCCOPIES))
 					|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCRUNINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCSHEETINDEX))
-					|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_RUNINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_SHEETINDEX)))
+					|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_RUNINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_SHEETINDEX))))
 			{
 				return false;
 			}
