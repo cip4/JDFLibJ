@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -49,6 +49,7 @@
 package org.cip4.jdflib.datatypes;
 
 import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Point2D;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
@@ -610,12 +611,33 @@ public class JDFMatrix extends JDFNumList
 	 * @param m the matrix to concatinate
 	 *
 	 */
-	public void concat(final JDFMatrix m)
+	public JDFMatrix concat(final JDFMatrix m)
 	{
 		final AffineTransform a = getAffineTransform();
 		final AffineTransform ma = m.getAffineTransform();
 		a.concatenate(ma);
 		setAffineTransform(a);
+		return this;
+	}
+
+	/**
+	 * inverts this
+	 *
+	 * @param m the matrix to concatinate
+	 *
+	 */
+	public JDFMatrix invert()
+	{
+		final AffineTransform a = getAffineTransform();
+		try
+		{
+			setAffineTransform(a.createInverse());
+		}
+		catch (final NoninvertibleTransformException e)
+		{
+			// nop if not invertible
+		}
+		return this;
 	}
 
 	/**

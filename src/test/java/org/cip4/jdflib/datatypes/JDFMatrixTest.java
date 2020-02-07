@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -353,6 +353,30 @@ public class JDFMatrixTest extends JDFTestCaseBase
 		m.concat(m);
 		assertEquals(m, new JDFMatrix(EnumOrientation.Rotate0, 0, 0));
 
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testInvert()
+	{
+		final JDFMatrix m = new JDFMatrix(90, 20, 20);
+		final JDFMatrix m2 = new JDFMatrix(90, 20, 20).invert();
+		assertEquals(270, m2.getAngle(), 0.1);
+		assertEquals(JDFMatrix.getUnitMatrix(), m.concat(m2));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testInvert90()
+	{
+		final JDFMatrix m = JDFMatrix.getUnitMatrix();
+		final JDFMatrix m2 = JDFMatrix.getUnitMatrix();
+		m.invert();
+		assertEquals(m2, m);
 	}
 
 	/**
