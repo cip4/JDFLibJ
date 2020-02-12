@@ -43,8 +43,10 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFStrippingParams;
@@ -92,21 +94,28 @@ public class WalkLayout extends WalkStrippingParams
 		stripParams.deleteNode();
 	}
 
+	private static final StringArray copyRefs = new StringArray(
+			new String[] { XJDFConstants.FilmRef, XJDFConstants.PaperRef, XJDFConstants.PlateRef, XJDFConstants.ProofPaperRef, AttributeName.AUTOMATED });
+
 	private boolean moveToStripping(final KElement e, final JDFStrippingParams stripParams)
 	{
 		final VString vAtt = stripParams.knownAttributes();
-		vAtt.add("MediaRef");
-		vAtt.add("DeviceRef");
 		final JDFAttributeMap map = e.getAttributeMap();
 		boolean foundSome = false;
 		for (final String s : map.keySet())
 		{
-			if (vAtt.contains(s))
+			if (copyRefs.contains(s))
+			{
+				stripParams.setAttribute(s, map.get(s));
+				foundSome = true;
+			}
+			else if (vAtt.contains(s))
 			{
 				stripParams.setAttribute(s, map.get(s));
 				e.removeAttribute(s);
 				foundSome = true;
 			}
+
 		}
 		final VString stripKnown = stripParams.knownElements();
 		final List<KElement> vMyElm = e.getChildArray_KElement(null, null, null, true, 0);

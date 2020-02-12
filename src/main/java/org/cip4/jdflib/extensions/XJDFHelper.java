@@ -812,6 +812,16 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
+	 * @param name
+	 * @param usage
+	 * @return a new set element
+	 */
+	public SetHelper appendSet(final String name, final EnumUsage usage)
+	{
+		return appendSet(XJDFConstants.Resource, name, usage);
+	}
+
+	/**
 	 * @see java.lang.Object#toString()
 	 * @return
 	 */

@@ -44,7 +44,11 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
+import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
@@ -94,6 +98,8 @@ import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
+import org.cip4.jdflib.resource.process.JDFAssembly;
+import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
@@ -1733,6 +1739,58 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 			}
 			assertEquals(cif.getCoatings().getActual(), "DullVarnish");
 		}
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testStrippingMedia()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
+		xjdfHelper.setTypes("Stripping");
+		final SetHelper shBS = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		final ResourceHelper rhBS = shBS.appendPartition(null, true);
+		final JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
+		bs.setFoldCatalog("F16-6");
+		bs.setBinderySignatureType(EnumBinderySignatureType.Fold);
+
+		final SetHelper shPap = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
+		final ResourceHelper rhPap = shPap.getCreatePartition(AttributeName.SHEETNAME, "sheet1", true);
+		rhPap.setID("idPaper");
+		final JDFMedia pap = (JDFMedia) rhPap.getResource();
+		pap.setMediaType(EnumMediaType.Paper);
+
+		final SetHelper shPlate = xjdfHelper.appendResourceSet(ElementName.MEDIA, null);
+		final ResourceHelper rhPlate = shPlate.getCreatePartition(AttributeName.SHEETNAME, "sheet1", true);
+		rhPlate.setID("idPlate");
+		final JDFMedia plate = (JDFMedia) rhPlate.getResource();
+		plate.setMediaType(EnumMediaType.Plate);
+
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		rhBS.appendPartMap(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "bs1"));
+		final ResourceHelper rh = shLO.appendPartition(AttributeName.SHEETNAME, "sheet1", true);
+		final JDFLayout lo = (JDFLayout) rh.getResource();
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndBack.getName());
+		final KElement pos = lo.appendElement(ElementName.POSITION);
+		pos.setAttribute(XJDFConstants.BinderySignatureID, "bs1");
+
+		lo.setAttribute(XJDFConstants.PaperRef, "idPaper");
+		lo.setAttribute(XJDFConstants.PlateRef, "idPlate");
+
+		final SetHelper shAss = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.ASSEMBLY, EnumUsage.Input);
+		final ResourceHelper rhAss = shAss.appendPartition(null, true);
+		rhAss.getResource().setAttribute(XJDFConstants.BinderySignatureIDs, "bs1");
+		((JDFAssembly) rhAss.getResource()).setOrder(EnumOrder.Collecting);
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xjdfHelper);
+		final JDFNode n = d.getJDFRoot();
+		final JDFLayout loj = (JDFLayout) n.getResource(ElementName.LAYOUT, EnumUsage.Input, 0).getLeaf(0);
+		assertNotNull(loj.getMedia(1));
+		final JDFStrippingParams sp = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0);
+		assertNotNull(sp.getMedia(1));
+
 	}
 
 }

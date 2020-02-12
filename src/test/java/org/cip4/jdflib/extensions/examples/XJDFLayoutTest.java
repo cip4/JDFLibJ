@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,6 +41,7 @@ import java.util.Vector;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchorType;
 import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
@@ -66,6 +67,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFRegisterMark;
 import org.cip4.jdflib.resource.process.JDFStripMark;
@@ -307,7 +309,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 
 		xjdfHelper.cleanUp();
 		setSnippet(shLO, true);
-		//	writeRoundTripX(xjdfHelper, "registerMark", EnumValidationLevel.Incomplete);
+		// writeRoundTripX(xjdfHelper, "registerMark", EnumValidationLevel.Incomplete);
 	}
 
 	/**
@@ -455,6 +457,52 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testStrippingMedia()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
+		xjdfHelper.setTypes("Stripping");
+		final SetHelper shBS = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		final ResourceHelper rhBS = shBS.appendPartition(null, true);
+		final JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
+		bs.setFoldCatalog("F16-6");
+		bs.setBinderySignatureType(EnumBinderySignatureType.Fold);
+
+		final SetHelper shPap = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
+		final ResourceHelper rhPap = shPap.getCreatePartition(AttributeName.SHEETNAME, "sheet1", true);
+		rhPap.setID("idPaper");
+		final JDFMedia pap = (JDFMedia) rhPap.getResource();
+		pap.setMediaType(EnumMediaType.Paper);
+
+		final SetHelper shPlate = xjdfHelper.appendResourceSet(ElementName.MEDIA, null);
+		final ResourceHelper rhPlate = shPlate.getCreatePartition(AttributeName.SHEETNAME, "sheet1", true);
+		rhPlate.setID("idPlate");
+		final JDFMedia plate = (JDFMedia) rhPlate.getResource();
+		plate.setMediaType(EnumMediaType.Plate);
+
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		rhBS.appendPartMap(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "bs1"));
+		final ResourceHelper rh = shLO.appendPartition(AttributeName.SHEETNAME, "sheet1", true);
+		final JDFLayout lo = (JDFLayout) rh.getResource();
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndBack.getName());
+		final KElement pos = lo.appendElement(ElementName.POSITION);
+		pos.setAttribute(XJDFConstants.BinderySignatureID, "bs1");
+
+		lo.setAttribute(XJDFConstants.PaperRef, "idPaper");
+		lo.setAttribute(XJDFConstants.PlateRef, "idPlate");
+
+		final SetHelper shAss = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.ASSEMBLY, EnumUsage.Input);
+		final ResourceHelper rhAss = shAss.appendPartition(null, true);
+		rhAss.getResource().setAttribute(XJDFConstants.BinderySignatureIDs, "bs1");
+		((JDFAssembly) rhAss.getResource()).setOrder(EnumOrder.Collecting);
+		cleanSnippets(xjdfHelper);
+		writeTest(xjdfHelper, "processes/StrippingMedia.xjdf");
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testStrippingMultiPageFold()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "MultiPage", null);
@@ -479,7 +527,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		final JDFPosition pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
 		pos.setAttribute(XJDFConstants.BinderySignatureID, "BS1 BS2");
 		cleanSnippets(xjdfHelper);
-		//writeTest(xjdfHelper, "processes/MultiPageFold.xjdf");
+		// writeTest(xjdfHelper, "processes/MultiPageFold.xjdf");
 	}
 
 	/**

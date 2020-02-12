@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -84,6 +84,7 @@ public abstract class XJDFConstants
 	public static final String ExternalID = "ExternalID";
 
 	public static final String Face = "Face";
+	public static final String FilmRef = "FilmRef";
 	public static final String FolioFrom = "FolioFrom";
 	public static final String FolioTo = "FolioTo";
 
@@ -104,6 +105,7 @@ public abstract class XJDFConstants
 	public static final String ModifyQueueEntryParams = "ModifyQueueEntryParams";
 	public static final String ModuleIDs = "ModuleIDs";
 
+	public static final String PaperRef = "PaperRef";
 	public static final String Parent = "Parent";
 	public static final String ParentID = "ParentID";
 	public static final String PartContext = "PartContext";
@@ -111,6 +113,7 @@ public abstract class XJDFConstants
 	public static final String Pattern = "Pattern";
 	public static final String PlacedObject = "PlacedObject";
 	public static final String PositionRef = "PositionRef";
+	public static final String PlateRef = "PlateRef";
 	public static final String PreflightItem = "PreflightItem";
 	public static final String PrintStandard = "PrintStandard";
 	public static final String Process = "Process";
@@ -120,6 +123,7 @@ public abstract class XJDFConstants
 	public static final String Product = "Product";
 	public static final String ProductList = "ProductList";
 	public static final String ProductPart = "ProductPart";
+	public static final String ProofPaperRef = "ProofPaperRef";
 
 	public static final String QualityMeasurement = "QualityMeasurement";
 	public static final String QueueEntryIDs = "QueueEntryIDs";
