@@ -560,6 +560,10 @@ public class XMLDoc implements Cloneable
 						format.setIndent(indent);
 						// TODO remove schema defaulted attributes when serializing
 					}
+					if (!XMLFormatter.isDefault())
+					{
+						XMLFormatter.apply(format);
+					}
 
 					final XMLSerializer serial = new XMLSerializer(outStream, format);
 					// serial.setNamespaces(false); // ###DOM_1_nodes
