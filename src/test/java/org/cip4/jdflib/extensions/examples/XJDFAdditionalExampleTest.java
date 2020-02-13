@@ -38,7 +38,6 @@ package org.cip4.jdflib.extensions.examples;
 
 import java.util.Vector;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
@@ -65,7 +64,7 @@ import org.junit.Test;
  * @author rainer prosi
  *
  */
-public class XJDFAdditionalExampleTest extends JDFTestCaseBase
+public class XJDFAdditionalExampleTest extends ExampleTest
 {
 	/**
 	*

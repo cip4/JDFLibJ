@@ -63,7 +63,6 @@ import org.cip4.jdflib.core.JDFParserFactory;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.core.XMLFormatter;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.extensions.BaseXJDFHelper;
@@ -327,7 +326,6 @@ public abstract class JDFTestCaseBase
 		author = JDFAudit.getStaticAuthor();
 		mem = getCurrentMem();
 		log = LogFactory.getLog(getClass());
-		XMLFormatter.getFormatter().setLineWidth(55);
 	}
 
 	/**

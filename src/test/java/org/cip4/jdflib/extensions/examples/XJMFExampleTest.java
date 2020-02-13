@@ -36,7 +36,6 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPrintQuality;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
@@ -81,7 +80,7 @@ import org.junit.Test;
  * @author rainer prosi
  *
  */
-public class XJMFExampleTest extends JDFTestCaseBase
+public class XJMFExampleTest extends ExampleTest
 {
 	static final boolean defaultDateMilli = JDFDate.isWantISOMilliseconds();
 

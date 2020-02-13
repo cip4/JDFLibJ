@@ -45,11 +45,11 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.extensions.examples.ExampleTest;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.node.JDFSpawned;
@@ -65,7 +65,7 @@ import org.junit.Test;
 /**
  * @author MuchaD This implements the first fixture with unit tests for class JDFAudit.
  */
-public class JDFAuditTest extends JDFTestCaseBase
+public class JDFAuditTest extends ExampleTest
 {
 	private boolean bAutoAgent;
 

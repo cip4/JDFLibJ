@@ -74,7 +74,6 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.cformat.PrintfFormat;
 import org.cip4.jdflib.core.AttributeName;
@@ -89,6 +88,7 @@ import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.examples.ExampleTest;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -107,7 +107,7 @@ import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class AutomatedLayoutTest extends JDFTestCaseBase
+public class AutomatedLayoutTest extends ExampleTest
 {
 	private JDFDoc doc;
 	private JDFNode n;
@@ -126,7 +126,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		n.setType(EnumType.Stripping);
 		stripParams = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, null, EnumUsage.Input, null, null, null, null);
 		stripParams.getParentNode_KElement().appendXMLComment("Simple automated StrippingParams with exactly one sheet class\n", stripParams);
-		JDFStrippingParams stripSheet = (JDFStrippingParams) stripParams.addPartition(EnumPartIDKey.SheetName, "Sheets");
+		final JDFStrippingParams stripSheet = (JDFStrippingParams) stripParams.addPartition(EnumPartIDKey.SheetName, "Sheets");
 		stripSheet.setAttribute(AttributeName.AUTOMATED, true, null);
 		final String format = "Sheet%02i";
 		stripSheet.setAttribute("NameFormat", format);
@@ -164,7 +164,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 			n.getAuditPool().appendXMLComment("This is a simple example of an automated layout used for conventional prepress\n"
 					+ "The structure is aligned as closely as possible with a static Layout", null);
 
-			JDFRunList run = rl.addRun("file://host/data/test.pdf", 0, -1);
+			final JDFRunList run = rl.addRun("file://host/data/test.pdf", 0, -1);
 			run.setNPage(128);
 			rl.setResStatus(EnumResStatus.Available, true);
 			rl.setDescriptiveName("This is a RunList specifiying 128 pages each in a pdf file.");
@@ -178,9 +178,9 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 			lo.setAttribute("NameFormat", format);
 			lo.setAttribute("NameTemplate", "SheetNum");
 			lo.appendXMLComment("Simple automated Layout with exactly one sheet\n", null);
-			JDFLayout sheet = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Sheet");
+			final JDFLayout sheet = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Sheet");
 			sheet.setDescriptiveName("two sided 2 up sheet");
-			JDFLayout sheetFront = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+			final JDFLayout sheetFront = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 			JDFContentObject co = sheetFront.appendContentObject();
 			co.setCTM(new JDFMatrix(1, 0, 0, 1, 0, 0));
 			co.setOrd(0);
@@ -191,7 +191,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 			co.setOrd(1);
 			co.setDescriptiveName("Front 2nd, 6th, 10th... page");
 
-			JDFLayout sheetBack = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Back);
+			final JDFLayout sheetBack = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Back);
 			co = sheetBack.appendContentObject();
 			co.setCTM(new JDFMatrix(1, 0, 0, 1, 0, 0));
 			co.setOrd(2);
@@ -202,35 +202,35 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 			co.setOrd(3);
 			co.setDescriptiveName("Back 4th, 8th, 12th... page");
 
-			JDFRunList rlSheet = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null);
+			final JDFRunList rlSheet = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null);
 			rlSheet.setDirectory("file://host/out/");
 			if (loop == 0) // instantiate individually
 			{
-				PrintfFormat fmt = new PrintfFormat(format);
+				final PrintfFormat fmt = new PrintfFormat(format);
 				for (int i = 0; i < 128; i += 4)
 				{
 					final String sheetName = fmt.tostr(1 + i / 4);
-					JDFRunList rlp = (JDFRunList) rlSheet.addPartition(EnumPartIDKey.SheetName, sheetName);
-					JDFRunList rlF = (JDFRunList) rlp.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+					final JDFRunList rlp = (JDFRunList) rlSheet.addPartition(EnumPartIDKey.SheetName, sheetName);
+					final JDFRunList rlF = (JDFRunList) rlp.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 					rlF.appendLayoutElement().setMimeURL(sheetName + "Front.pdf");
-					JDFRunList rlB = (JDFRunList) rlp.addPartition(EnumPartIDKey.Side, EnumSide.Back);
+					final JDFRunList rlB = (JDFRunList) rlp.addPartition(EnumPartIDKey.Side, EnumSide.Back);
 					rlB.appendLayoutElement().setMimeURL(sheetName + "Back.pdf");
 				}
 			}
 			if (loop == 1) // instantiate individually
 			{
 				rlSheet.appendLayoutElement().setMimeURL("AllSheets.pdf");
-				PrintfFormat fmt = new PrintfFormat(format);
+				final PrintfFormat fmt = new PrintfFormat(format);
 				final JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList();
 				for (int i = 0; i < 128; i += 4)
 				{
 					final String sheetName = fmt.tostr(1 + i / 4);
-					JDFRunList rlp = (JDFRunList) rlSheet.addPartition(EnumPartIDKey.SheetName, sheetName);
-					JDFRunList rlF = (JDFRunList) rlp.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+					final JDFRunList rlp = (JDFRunList) rlSheet.addPartition(EnumPartIDKey.SheetName, sheetName);
+					final JDFRunList rlF = (JDFRunList) rlp.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 					integerRangeList.clear();
 					integerRangeList.append(i / 2);
 					rlF.setPages(integerRangeList);
-					JDFRunList rlB = (JDFRunList) rlp.addPartition(EnumPartIDKey.Side, EnumSide.Back);
+					final JDFRunList rlB = (JDFRunList) rlp.addPartition(EnumPartIDKey.Side, EnumSide.Back);
 					integerRangeList.clear();
 					integerRangeList.append(1 + i / 2);
 					rlB.setPages(integerRangeList);
@@ -239,7 +239,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 			else
 			// instantiate by template
 			{
-				JDFFileSpec fs = rlSheet.appendLayoutElement().appendFileSpec();
+				final JDFFileSpec fs = rlSheet.appendLayoutElement().appendFileSpec();
 				fs.setMimeType("application/pdf");
 				fs.setFileFormat(format + "%s_%s.pdf");
 				fs.setFileTemplate("SheetNum,Surface,Separation");
@@ -271,9 +271,9 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		lo.appendXMLComment("Layout for 2 Cover pages and 12 2 up two sided body pages\n The number of pages per instance document is fixed\n"
 				+ "This Layout is an example of an 'almost conventional' automated layout\n" + "MaxDocOrd is set to 1. This is redundant since 1 is the default.\n"
 				+ "A value of 1 explicitly resets all counters at a Document break.", null);
-		JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Cover");
+		final JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Cover");
 		cover.setDescriptiveName("one sided cover - the inner = back side is empty");
-		JDFLayout coverFront = (JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+		final JDFLayout coverFront = (JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 		JDFContentObject co = coverFront.appendContentObject();
 		co.setCTM(new JDFMatrix(1, 0, 0, 1, 0, 0));
 		co.setOrd(13);
@@ -285,7 +285,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 
 		for (int i = 0; i < 3; i++)
 		{
-			JDFLayout body = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Body" + (i + 1));
+			final JDFLayout body = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Body" + (i + 1));
 			body.setDescriptiveName("sheet " + (i + 1) + " of 3 of the insert");
 			JDFLayout bodySide = (JDFLayout) body.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 
@@ -331,12 +331,12 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		lo.setAutomated(true);
 		lo.appendXMLComment("Layout for 2 Cover pages and varying numbers of 2 up two sided body pages\n" + "The number of pages per instance document varies\n"
 				+ "MaxDocOrd is set to 1. This is redundant since 1 is the default.\n" + "A value of 1 explicitly resets all counters at a Document break.", null);
-		JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Cover");
+		final JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Cover");
 		cover.appendXMLComment("In this example, the cover is assumed to be the first two pages of each runlist\n" + "\n!!! We unfortunately have an issue here:\n"
 				+ "we cannot differentiate whether the cover should be repeated of not, i.e. whether the cover is executed once (the correct choice) or repeated between each body sheet.\n"
 				+ "Note that no MaxOrd is not set, as it varies between documents", null);
 		cover.setDescriptiveName("one sided cover - the inner = back side is empty");
-		JDFLayout coverFront = (JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+		final JDFLayout coverFront = (JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 		JDFContentObject co = coverFront.appendContentObject();
 		co.setCTM(new JDFMatrix(1, 0, 0, 1, 0, 0));
 		co.setOrdExpression("1");
@@ -346,7 +346,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		co.setOrdExpression("0");
 		co.setDescriptiveName("Back Cover Page - (back of brochure but front of sheet)");
 
-		JDFLayout body = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Body");
+		final JDFLayout body = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Body");
 		body.setDescriptiveName("abstract description of multiple body sheets");
 		JDFLayout bodySide = (JDFLayout) body.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 
@@ -393,9 +393,9 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		lo.setAutomated(true);
 		lo.appendXMLComment("Layout for 2*1 Cover page and 2*6 2 up two sided body pages\n The number of pages per instance document is fixed\n"
 				+ "This Layout is an example of an 'almost conventional' automated layout\n" + "MaxDocOrd is set to 2. Thus 2 documents are positioned on each sheet.\n", null);
-		JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Cover");
+		final JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Cover");
 		cover.setDescriptiveName("one sided cover - the inner = back side is empty");
-		JDFLayout coverFront = (JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+		final JDFLayout coverFront = (JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 		JDFContentObject co = coverFront.appendContentObject();
 		co.setCTM(new JDFMatrix(1, 0, 0, 1, 0, 0));
 		co.setOrd(0);
@@ -409,7 +409,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 
 		for (int i = 0; i < 3; i++)
 		{
-			JDFLayout body = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Body" + (i + 1));
+			final JDFLayout body = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Body" + (i + 1));
 			body.setDescriptiveName("sheet " + (i + 1) + " of 3 of the insert");
 			JDFLayout bodySide = (JDFLayout) body.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 
@@ -460,9 +460,9 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		lo.setMaxDocOrd(4);
 		lo.setAutomated(true);
 		lo.appendXMLComment("Layout for 4stacks on a sheet\n The number of pages per instance document is fixed\n" + "\n", null);
-		JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Stack");
+		final JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Stack");
 		cover.setDescriptiveName("one sided 4 up stack back side is empty");
-		JDFLayout coverFront = (JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+		final JDFLayout coverFront = (JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 		JDFContentObject co = coverFront.appendContentObject();
 		co.setCTM(new JDFMatrix(1, 0, 0, 1, 0, 0));
 		co.setOrd(0);
@@ -496,25 +496,25 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		n.setType(EnumType.Stripping);
 		stripParams = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, null, EnumUsage.Input, null, null, null, null);
 		stripParams.getParentNode_KElement().appendXMLComment("Simple automated StrippingParams for the cut&stack example layout\n", stripParams);
-		JDFStrippingParams stripSheet = (JDFStrippingParams) stripParams.addPartition(EnumPartIDKey.SheetName, "Sheets");
+		final JDFStrippingParams stripSheet = (JDFStrippingParams) stripParams.addPartition(EnumPartIDKey.SheetName, "Sheets");
 		stripSheet.setAttribute(AttributeName.AUTOMATED, true, null);
 		final String format = "Sheet%02i";
 		stripSheet.setAttribute("NameFormat", format);
 		stripSheet.setAttribute("NameTemplate", "SheetNum");
-		JDFStrippingParams stripStack0 = (JDFStrippingParams) stripSheet.addPartition(EnumPartIDKey.BinderySignatureName, "Stack0");
+		final JDFStrippingParams stripStack0 = (JDFStrippingParams) stripSheet.addPartition(EnumPartIDKey.BinderySignatureName, "Stack0");
 		stripParams.setAttribute("StackDepth", "100");
 
 		JDFBinderySignature binderySignature = stripStack0.appendBinderySignature();
 		stripStack0.appendPosition().setRelativeBox(new JDFRectangle(0, 0, 0.5, 1));
 		binderySignature = (JDFBinderySignature) binderySignature.makeRootResource(null, null, true);
 		binderySignature.setNumberUp(new JDFXYPair(1, 1));
-		JDFStrippingParams stripStack1 = (JDFStrippingParams) stripSheet.addPartition(EnumPartIDKey.BinderySignatureName, "Stack1");
+		final JDFStrippingParams stripStack1 = (JDFStrippingParams) stripSheet.addPartition(EnumPartIDKey.BinderySignatureName, "Stack1");
 		stripStack1.refElement(binderySignature);
 		stripStack1.appendPosition().setRelativeBox(new JDFRectangle(0.5, 0, 1, 1));
 		doc.write2File(sm_dirTestDataTemp + "AutomatedStrippingCutStack.jdf", 2, false);
 
-		KElement x = convertToXJDF(n);
-		XJDFHelper h = XJDFHelper.getHelper(x);
+		final KElement x = convertToXJDF(n);
+		final XJDFHelper h = XJDFHelper.getHelper(x);
 		h.getSet(ElementName.NODEINFO, 0);
 		h.cleanUp();
 		setSnippet(h, true);
@@ -540,10 +540,10 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		lo.setResStatus(EnumResStatus.Available, true);
 
-		JDFLayout sheet = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheSheet");
+		final JDFLayout sheet = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheSheet");
 		sheet.setAutomated(true);
 		sheet.setAttribute("OrdsConsumed", "0 -1");
-		JDFLayout sheetFront = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+		final JDFLayout sheetFront = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 		JDFContentObject co = sheetFront.appendContentObject();
 		co.setCTM(new JDFMatrix(1, 0, 0, 1, 0, 0));
 		co.setOrd(0);
@@ -554,7 +554,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		co.setOrd(-1);
 		co.setDescriptiveName("Back right page after folding -1 -3 -5 ... (Front sheet)");
 
-		JDFLayout sheetBack = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Back);
+		final JDFLayout sheetBack = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Back);
 		co = sheetBack.appendContentObject();
 		co.setCTM(new JDFMatrix(1, 0, 0, 1, 8.5 * 72, 0));
 		co.setOrd(1);
@@ -590,30 +590,30 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		lo.setResStatus(EnumResStatus.Available, true);
 
-		JDFMedia media = (JDFMedia) n.addResource("Media", EnumUsage.Input);
-		JDFMedia mediaC = (JDFMedia) media.addPartition(EnumPartIDKey.SheetName, "TheCover");
-		JDFMedia mediaCMale = (JDFMedia) mediaC.addPartition(EnumPartIDKey.SetTags, "Male");
-		JDFMedia mediaCFemale = (JDFMedia) mediaC.addPartition(EnumPartIDKey.SetTags, "Female");
+		final JDFMedia media = (JDFMedia) n.addResource("Media", EnumUsage.Input);
+		final JDFMedia mediaC = (JDFMedia) media.addPartition(EnumPartIDKey.SheetName, "TheCover");
+		final JDFMedia mediaCMale = (JDFMedia) mediaC.addPartition(EnumPartIDKey.SetTags, "Male");
+		final JDFMedia mediaCFemale = (JDFMedia) mediaC.addPartition(EnumPartIDKey.SetTags, "Female");
 
-		JDFComponent insert = (JDFComponent) n.addResource("Component", null, EnumUsage.Input, EnumProcessUsage.Child, null, null, null);
+		final JDFComponent insert = (JDFComponent) n.addResource("Component", null, EnumUsage.Input, EnumProcessUsage.Child, null, null, null);
 		// JDFComponent insertExist=(JDFComponent)
 		insert.addPartition(EnumPartIDKey.DocTags, "Exist");
 		// JDFComponent insertProspect=(JDFComponent)
 		insert.addPartition(EnumPartIDKey.DocTags, "Prospect");
 
-		JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheCover");
+		final JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheCover");
 		cover.setAutomated(false);
-		JDFLayout coverMale = (JDFLayout) cover.addPartition(EnumPartIDKey.SetTags, "Male");
+		final JDFLayout coverMale = (JDFLayout) cover.addPartition(EnumPartIDKey.SetTags, "Male");
 		coverMale.refMedia(mediaCMale);
-		JDFLayout coverMaleHi = (JDFLayout) coverMale.addPartition(EnumPartIDKey.PageTags, "Hi");
-		JDFLayout coverMaleLo = (JDFLayout) coverMale.addPartition(EnumPartIDKey.PageTags, "Low");
+		final JDFLayout coverMaleHi = (JDFLayout) coverMale.addPartition(EnumPartIDKey.PageTags, "Hi");
+		final JDFLayout coverMaleLo = (JDFLayout) coverMale.addPartition(EnumPartIDKey.PageTags, "Low");
 
-		JDFLayout coverFemale = (JDFLayout) cover.addPartition(EnumPartIDKey.SetTags, "Female");
+		final JDFLayout coverFemale = (JDFLayout) cover.addPartition(EnumPartIDKey.SetTags, "Female");
 		coverFemale.refMedia(mediaCFemale);
-		JDFLayout coverFemaleHi = (JDFLayout) coverFemale.addPartition(EnumPartIDKey.PageTags, "Hi");
-		JDFLayout coverFemaleLo = (JDFLayout) coverFemale.addPartition(EnumPartIDKey.PageTags, "Low");
+		final JDFLayout coverFemaleHi = (JDFLayout) coverFemale.addPartition(EnumPartIDKey.PageTags, "Hi");
+		final JDFLayout coverFemaleLo = (JDFLayout) coverFemale.addPartition(EnumPartIDKey.PageTags, "Low");
 
-		JDFLayout[] lo4 = new JDFLayout[4];
+		final JDFLayout[] lo4 = new JDFLayout[4];
 		lo4[0] = coverMaleHi;
 		lo4[1] = coverFemaleHi;
 		lo4[2] = coverMaleLo;
@@ -621,9 +621,9 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		JDFContentObject co;
 		for (int i = 0; i < 4; i++)
 		{
-			JDFLayout lolo = lo4[i];
+			final JDFLayout lolo = lo4[i];
 
-			JDFLayout coverFront = (JDFLayout) lolo.addPartition(EnumPartIDKey.Side, "Front");
+			final JDFLayout coverFront = (JDFLayout) lolo.addPartition(EnumPartIDKey.Side, "Front");
 
 			co = coverFront.appendContentObject();
 			co.setCTM(new JDFMatrix(1, 0, 0, 1, 0, 0));
@@ -635,7 +635,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 			co.setDescriptiveName("Back Cover Page Outside");
 			if (i < 2)
 			{
-				JDFLayout coverBack = (JDFLayout) lolo.addPartition(EnumPartIDKey.Side, "Back");
+				final JDFLayout coverBack = (JDFLayout) lolo.addPartition(EnumPartIDKey.Side, "Back");
 				co = coverBack.appendContentObject();
 				co.setCTM(new JDFMatrix(1, 0, 0, 1, 0, 0));
 				co.setOrd(0);
@@ -651,7 +651,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		sheet.setAttribute("OrdReset", "Set Doc");
 		sheet.setAttribute("OrdsConsumed", "0 -1");
 		sheet = (JDFLayout) sheet.addPartition(EnumPartIDKey.SetTags, "Male Female").addPartition(EnumPartIDKey.PageTags, "Hi Lo");
-		JDFLayout sheetFront = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+		final JDFLayout sheetFront = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 		co = sheetFront.appendContentObject();
 		co.setCTM(new JDFMatrix(1, 0, 0, 1, 0, 0));
 		co.setOrd(0);
@@ -662,7 +662,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		co.setOrd(-1);
 		co.setDescriptiveName("Back right page after folding -1 -3 -5 ... (Front sheet)");
 
-		JDFLayout sheetBack = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Back);
+		final JDFLayout sheetBack = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Back);
 		co = sheetBack.appendContentObject();
 		co.setCTM(new JDFMatrix(1, 0, 0, 1, 8.5 * 72, 0));
 		co.setOrd(1);
@@ -677,8 +677,8 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		s = StringUtil.replaceString(s, "DocTags", "Meta1");
 		s = StringUtil.replaceString(s, "PageTags", "Meta2");
 
-		File f = new File(sm_dirTestDataTemp + "TaggedAutomatedBooklet.jdf");
-		OutputStream os = new FileOutputStream(f);
+		final File f = new File(sm_dirTestDataTemp + "TaggedAutomatedBooklet.jdf");
+		final OutputStream os = new FileOutputStream(f);
 		os.write(s.getBytes());
 
 	}
@@ -712,11 +712,11 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 				if (j > 0)
 					lo.setAttribute("StackDepth", 100, null);
 
-				JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheCover");
+				final JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheCover");
 				cover.setAutomated(false);
-				JDFLayout sheet = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheSheet");
+				final JDFLayout sheet = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheSheet");
 				sheet.setAutomated(true);
-				JDFLayout coverFront = (JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+				final JDFLayout coverFront = (JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 				JDFContentObject co;
 				if (i == 0)
 				{
@@ -787,8 +787,8 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 						+ "The advantage is that the offsets for the loop are specified in OrdsConsumed while the loop increments are specified in the ords:\n"
 						+ "Ord RL (++) = OrdsConsumed_x + Ord + n*maxOrd_x\n"
 						+ "Ord RL (--) = 1+ OrdsConsumed_y + Ord - n*maxOrd_y (the first 1 in the equation is from the fact that -1+-1 is actually still -1)\n", true);
-				JDFLayout sheetFront = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Front);
-				JDFLayout sheetBack = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Back);
+				final JDFLayout sheetFront = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+				final JDFLayout sheetBack = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Back);
 				for (int k = 0; k <= j; k++)
 				{
 					co = sheetFront.appendContentObject();
@@ -845,8 +845,8 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 				+ "Each set of stacks consumes 2 * 2 * 100 = 400 Pages (4 ContentObjects = 2 front, 2 Back / Sheet * 100 StackDepth", true);
 		lo.setAttribute("StackDepth", "100");
 		lo.setAttribute("MaxStack", "2");
-		JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheSheet");
-		JDFLayout coverFront = (JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+		final JDFLayout cover = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheSheet");
+		final JDFLayout coverFront = (JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 		JDFContentObject co = coverFront.appendContentObject();
 		co.setCTM(new JDFMatrix(1, 0, 0, 1, 0, 0));
 		co.setOrd(0);
@@ -861,7 +861,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 		co.setDescriptiveName("Front Page 0,2,4,..., Stack 1");
 		co.setXMLComment("this co consumes all pages 200,202,204...398, 600,602,604...798, 1000....", true);
 
-		JDFLayout coverBack = (JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Back);
+		final JDFLayout coverBack = (JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Back);
 		co = coverBack.appendContentObject();
 		co.setCTM(new JDFMatrix(1, 0, 0, 1, 8.5 * 72, 0));
 		co.setOrd(1);
@@ -888,7 +888,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 	 */
 	private void setUpAutomatedInputRunList() throws DataFormatException
 	{
-		JDFRunList run = rl.addRun("file://host/data/test.ppml", 0, -1);
+		final JDFRunList run = rl.addRun("file://host/data/test.ppml", 0, -1);
 		Assert.assertEquals(run.getLayoutElement().getFileSpec().getMimeType(), UrlUtil.getMimeTypeFromURL(".ppml"));
 		run.setDocs(new JDFIntegerRangeList("0~99"));
 		rl.setResStatus(EnumResStatus.Available, true);

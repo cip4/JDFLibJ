@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -66,7 +66,6 @@ import java.io.File;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
@@ -92,6 +91,7 @@ import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.examples.ExampleTest;
 import org.cip4.jdflib.jmf.JDFDeviceFilter;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -151,7 +151,7 @@ import org.junit.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class JDFExampleDocTest extends JDFTestCaseBase
+public class JDFExampleDocTest extends ExampleTest
 {
 	private JDFDoc m_doc = null;
 
