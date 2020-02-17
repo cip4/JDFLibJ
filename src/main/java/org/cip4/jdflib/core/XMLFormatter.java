@@ -1,7 +1,9 @@
-/**
+/*
+ *
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ *
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -34,111 +36,86 @@
  *
  *
  */
-package org.cip4.jdflib.util.cxf;
+/**
+ * XMLDoc.java
+ *
+ * Copyright (c) 2001-2003 Heidelberger Druckmaschinen AG, All Rights Reserved.
+ *
+ */
+package org.cip4.jdflib.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import org.apache.xml.serialize.OutputFormat;
 
-import org.cip4.jdflib.datatypes.JDFRGBColor;
-import org.cip4.jdflib.datatypes.JDFTransferFunction;
-import org.cip4.jdflib.extensions.examples.ExampleTest;
-import org.cip4.jdflib.resource.process.JDFColor;
-import org.junit.Test;
-
-public class CxFColorObjectTest extends ExampleTest
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ *
+ *
+ */
+public class XMLFormatter implements Cloneable
 {
 
+	private int lineWidth = 0;
+
+	/**
+	 * @return the lineWidth
+	 */
+	public int getLineWidth()
+	{
+		return lineWidth;
+	}
+
+	/**
+	 * @param lineWidth the lineWidth to set
+	 */
+	public void setLineWidth(final int lineWidth)
+	{
+		this.lineWidth = lineWidth;
+	}
+
+	private XMLFormatter()
+	{
+		setDefault();
+	}
+
+	private static XMLFormatter theFormatter = new XMLFormatter();
+
 	/**
 	 *
+	 * @return
 	 */
-	@Test
-	public void testGetCIEColor()
+	public static XMLFormatter getFormatter()
 	{
-		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
-		final CxFColorObject colorObject = cxf.getColorObject(0);
-		assertNotNull(colorObject.getCieLab());
+		return theFormatter;
+	}
+
+	/**
+	 * @return the isDefault
+	 */
+	public static boolean isDefault()
+	{
+		return theFormatter.lineWidth == 0;
 	}
 
 	/**
 	 *
 	 */
-	@Test
-	public void testGetCMYKColor()
+	public void setDefault()
 	{
-		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
-		final CxFColorObject colorObject = cxf.getColorObject(0);
-		assertNotNull(colorObject.getCMYKColor());
+		setLineWidth(0);
 	}
 
 	/**
-	 *
+	 * @see java.lang.Object#toString()
 	 */
-	@Test
-	public void testGetJDFColor()
+	@Override
+	public String toString()
 	{
-		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
-		final CxFColorObject colorObject = cxf.getColorObject("black");
-		final JDFColor jdfColor = colorObject.getJDFColor();
-		assertEquals("black", jdfColor.getName());
+		return "XMLFormatter [isDefault=" + isDefault() + ", lineWidth=" + lineWidth + "]";
 	}
 
-	/**
-	 *
-	 */
-	@Test
-	public void testGetRGBColor()
+	public static void apply(final OutputFormat format)
 	{
-		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
-		final CxFColorObject colorObject = cxf.getColorObject("black");
-		final JDFRGBColor rgbColor = colorObject.getRGBColor();
-		assertEquals(rgbColor.getR(), rgbColor.getB(), 0);
-	}
+		format.setLineWidth(theFormatter.getLineWidth());
 
-	/**
-	 *
-	 */
-	@Test
-	public void testGetSpectrum()
-	{
-		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
-		final CxFColorObject colorObject = cxf.getColorObject("black");
-		final JDFTransferFunction tf = colorObject.getSpectrum();
-		assertEquals(31, tf.numPoints());
 	}
-
-	/**
-	 *
-	 */
-	@Test
-	public void testGetSpectrumStart()
-	{
-		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
-		final CxFColorObject colorObject = cxf.getColorObject("black");
-		final JDFTransferFunction tf = colorObject.getSpectrum();
-		assertEquals(400, tf.getX(0), 0);
-	}
-
-	/**
-	 *
-	 */
-	@Test
-	public void testGetSpectrumLast()
-	{
-		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
-		final CxFColorObject colorObject = cxf.getColorObject("black");
-		final JDFTransferFunction tf = colorObject.getSpectrum();
-		assertEquals(700, tf.getX(30), 0);
-	}
-
-	/**
-	 *
-	 */
-	@Test
-	public void testToString()
-	{
-		final CxFReader cxf = CxFReader.parseFile(sm_dirTestData + "cxf/ColorChecker.cxf");
-		final CxFColorObject colorObject = cxf.getColorObject(0);
-		assertEquals("CxFColorObject", colorObject.toString().substring(0, 14));
-	}
-
 }

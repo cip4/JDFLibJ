@@ -71,7 +71,6 @@ package org.cip4.jdflib.examples;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumAutomation;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumPosition;
@@ -85,6 +84,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.extensions.examples.ExampleTest;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -112,7 +112,7 @@ import org.junit.Test;
  * @author rainer prosi
  * @date Mar 3 2013
  */
-public class DigitalFinishingTest extends JDFTestCaseBase
+public class DigitalFinishingTest extends ExampleTest
 {
 	/**
 	 *
@@ -141,8 +141,8 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	@Test
 	public void testNearLineSimpleBarcode()
 	{
-		JDFDoc jdfDoc = new JDFDoc("JDF");
-		JDFNode n = jdfDoc.getJDFRoot();
+		final JDFDoc jdfDoc = new JDFDoc("JDF");
+		final JDFNode n = jdfDoc.getJDFRoot();
 		n.setJobID("SimpeBarcode");
 		n.setType(JDFNode.EnumType.ProcessGroup);
 
@@ -151,7 +151,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		c.setAutomation(EnumAutomation.Dynamic);
 		c = (JDFComponent) c.addPartition(EnumPartIDKey.SetIndex, "0~-1");
 		idp.ensureLink(c, EnumUsage.Output, null);
-		JDFIdentificationField barcode = c.appendIdentificationField();
+		final JDFIdentificationField barcode = c.appendIdentificationField();
 		barcode.setBoundingBox(new JDFRectangle(6, 6, 66, 66));
 		barcode.setPosition(EnumPosition.Front);
 		barcode.setValueFormat("%6s/Set%i/%i_Page%i/%i");
@@ -176,8 +176,8 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	@Test
 	public void testNearLineJDFBookletBarcode()
 	{
-		JDFDoc jdfDoc = new JDFDoc("JDF");
-		JDFNode n = jdfDoc.getJDFRoot();
+		final JDFDoc jdfDoc = new JDFDoc("JDF");
+		final JDFNode n = jdfDoc.getJDFRoot();
 		n.setJobID("J1");
 		n.setType(JDFNode.EnumType.ProcessGroup);
 
@@ -186,28 +186,28 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		c.setAutomation(EnumAutomation.Dynamic);
 		c = (JDFComponent) c.addPartition(EnumPartIDKey.SetIndex, "0~-1");
 		idp.ensureLink(c, EnumUsage.Output, null);
-		JDFComponent cover = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Cover");
+		final JDFComponent cover = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Cover");
 		cover.setSurfaceCount(2);
-		JDFIdentificationField barcode = c.appendIdentificationField();
+		final JDFIdentificationField barcode = c.appendIdentificationField();
 		barcode.setBoundingBox(new JDFRectangle(6, 6, 66, 66));
 		barcode.setPosition(EnumPosition.Front);
 		barcode.setValueFormat("Set%i/%i_Page%i/%i%.1s");
 		barcode.setValueTemplate("SetIndex,TotalSets,PoolSheetIndex,TotalSheetsInPool,MetaFoo");
 
-		JDFMetadataMap meta1 = (JDFMetadataMap) barcode.appendElement(ElementName.METADATAMAP);
+		final JDFMetadataMap meta1 = (JDFMetadataMap) barcode.appendElement(ElementName.METADATAMAP);
 		meta1.setName("RunTag");
-		JDFExpr exp11 = meta1.appendExpr();
+		final JDFExpr exp11 = meta1.appendExpr();
 		exp11.setValue("Cover");
-		JDFNameEvaluation n1 = (JDFNameEvaluation) exp11.appendTerm(EnumTerm.NameEvaluation);
+		final JDFNameEvaluation n1 = (JDFNameEvaluation) exp11.appendTerm(EnumTerm.NameEvaluation);
 		n1.setValueList(new VString("b", null));
 		n1.setPath("@MetaFoo");
-		JDFExpr exp12 = meta1.appendExpr();
+		final JDFExpr exp12 = meta1.appendExpr();
 		exp12.setValue("Body");
-		JDFNameEvaluation n2 = (JDFNameEvaluation) exp12.appendTerm(EnumTerm.NameEvaluation);
+		final JDFNameEvaluation n2 = (JDFNameEvaluation) exp12.appendTerm(EnumTerm.NameEvaluation);
 		n2.setPath("@MetaFoo");
 		n2.setValueList(new VString("c", null));
 
-		JDFComponent body = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Body");
+		final JDFComponent body = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Body");
 		body.setSurfaceCount(-1);
 
 		JDFNode booklet = n.addCombined(new VString("Collecting Stitching", null));
@@ -231,15 +231,15 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	@Test
 	public void testNearLineJDFBookletPipe()
 	{
-		JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
-		JDFNode n = jdfDoc.getJDFRoot();
+		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
+		final JDFNode n = jdfDoc.getJDFRoot();
 		n.setVersion(EnumVersion.Version_1_5);
 		n.setJobID("J1");
 		n.setType(JDFNode.EnumType.ProcessGroup);
 
 		JDFNode idp = n.addCombined(new VString("DigitalPrinting", null));
 
-		JDFRunList rl = (JDFRunList) idp.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		final JDFRunList rl = (JDFRunList) idp.addResource(ElementName.RUNLIST, EnumUsage.Input);
 		rl.setAttribute("Automation", "Dynamic");
 
 		idp.addResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
@@ -252,20 +252,20 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		c.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 
 		c = (JDFComponent) c.addPartition(EnumPartIDKey.SetIndex, "0~-1");
-		JDFResourceLink rlIDP = idp.ensureLink(c, EnumUsage.Output, null);
+		final JDFResourceLink rlIDP = idp.ensureLink(c, EnumUsage.Output, null);
 		rlIDP.setAmount(1, null);
 
-		JDFComponent cover = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Cover");
+		final JDFComponent cover = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Cover");
 		cover.setSurfaceCount(2);
-		JDFComponent body = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Body");
+		final JDFComponent body = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Body");
 		body.setSurfaceCount(-1);
 
 		JDFNode booklet = n.addCombined(new VString("Collecting Stitching", null));
 		booklet.ensureLink(cover, EnumUsage.Input, EnumProcessUsage.Cover);
 		booklet.addResource(ElementName.STITCHINGPARAMS, EnumUsage.Input);
-		JDFComponent outComponent = (JDFComponent) booklet.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		final JDFComponent outComponent = (JDFComponent) booklet.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		outComponent.setComponentType(EnumComponentType.FinalProduct, EnumComponentType.Block);
-		JDFResourceLink rlOutComp = booklet.ensureLink(c, EnumUsage.Output, null);
+		final JDFResourceLink rlOutComp = booklet.ensureLink(c, EnumUsage.Output, null);
 		rlOutComp.setAmount(1, null);
 
 		jdfDoc.write2File(sm_dirTestDataTemp + "BookletPipe.jdf", 2, false);
@@ -284,11 +284,11 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	 */
 	public void testNearLineJDFBookletPipeMetaData()
 	{
-		JDFDoc jdfDoc = new JDFDoc("JDF");
-		JDFNode n = jdfDoc.getJDFRoot();
+		final JDFDoc jdfDoc = new JDFDoc("JDF");
+		final JDFNode n = jdfDoc.getJDFRoot();
 		n.setJobID("J1");
 		n.setType(JDFNode.EnumType.ProcessGroup);
-		JDFNode idp = n.addCombined(new VString("DigitalPrinting", null));
+		final JDFNode idp = n.addCombined(new VString("DigitalPrinting", null));
 		JDFComponent c = (JDFComponent) idp.addResource(ElementName.COMPONENT, null);
 		c.setAttribute("Automation", "Dynamic");
 		c.setPipeID("PipeSheet");
@@ -297,23 +297,23 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		c = (JDFComponent) c.addPartition(EnumPartIDKey.SetIndex, "0~-1");
 		idp.ensureLink(c, EnumUsage.Output, null);
 
-		JDFMedia media = (JDFMedia) n.addResource("Media", EnumUsage.Input);
-		JDFMedia m1 = (JDFMedia) media.addPartition(EnumPartIDKey.Option, "BodyMedia");
-		JDFMedia m2 = (JDFMedia) media.addPartition(EnumPartIDKey.Option, "RichCoverMedia");
-		JDFMedia m3 = (JDFMedia) media.addPartition(EnumPartIDKey.Option, "PoorCoverMedia");
+		final JDFMedia media = (JDFMedia) n.addResource("Media", EnumUsage.Input);
+		final JDFMedia m1 = (JDFMedia) media.addPartition(EnumPartIDKey.Option, "BodyMedia");
+		final JDFMedia m2 = (JDFMedia) media.addPartition(EnumPartIDKey.Option, "RichCoverMedia");
+		final JDFMedia m3 = (JDFMedia) media.addPartition(EnumPartIDKey.Option, "PoorCoverMedia");
 
-		JDFComponent cover = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Cover");
+		final JDFComponent cover = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Cover");
 		cover.setSurfaceCount(2);
-		JDFComponent coverRich = (JDFComponent) cover.addPartition(EnumPartIDKey.Metadata0, "Rich");
+		final JDFComponent coverRich = (JDFComponent) cover.addPartition(EnumPartIDKey.Metadata0, "Rich");
 		coverRich.refMedia(m2);
-		JDFComponent coverPoor = (JDFComponent) cover.addPartition(EnumPartIDKey.Metadata0, "Poor");
+		final JDFComponent coverPoor = (JDFComponent) cover.addPartition(EnumPartIDKey.Metadata0, "Poor");
 		coverPoor.refMedia(m3);
 
-		JDFComponent body = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Body");
+		final JDFComponent body = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Body");
 		body.setSurfaceCount(-1);
 		body.refMedia(m1);
 
-		JDFNode booklet = n.addCombined(new VString("Collecting Stitching", null));
+		final JDFNode booklet = n.addCombined(new VString("Collecting Stitching", null));
 		booklet.ensureLink(cover, EnumUsage.Input, EnumProcessUsage.Cover);
 		booklet.linkResource(body, EnumUsage.Input, null);
 		writeTest(jdfDoc, "BookletPipeMeta.jdf");
@@ -326,7 +326,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	@Test
 	public void testPipePushSet()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Command, EnumType.PipePush);
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Command, EnumType.PipePush);
 		jmf.setSenderID("Guru");
 		JDFCommand command = jmf.getCreateCommand(0);
 		command.setXMLComment("The initial push: cover + 7 body sheets", true);
@@ -354,7 +354,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		command.setSenderID("Finisher");
 		pp = createPipeParams(command);
 		JDFAmountPool ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
-		JDFAttributeMap m = new JDFAttributeMap("SetIndex", "1~-1");
+		final JDFAttributeMap m = new JDFAttributeMap("SetIndex", "1~-1");
 		ap.getCreatePartAmount(m);
 
 		command = jmf.appendCommand();
@@ -403,7 +403,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	@Test
 	public void testPipePushSheet()
 	{
-		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setSenderID("Guru");
 		for (int j = 0; j < 2; j++)
 		{
@@ -430,14 +430,14 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	 *
 	 *
 	 */
-	void createPipePushSheetExample(int set, int sheet, int sheets, boolean bCover)
+	void createPipePushSheetExample(final int set, final int sheet, final int sheets, final boolean bCover)
 	{
-		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setSenderID("Printer");
 		jmf.setVersion(EnumVersion.Version_1_5);
-		JDFCommand command = jmf.appendCommand();
+		final JDFCommand command = jmf.appendCommand();
 		command.setType(EnumType.PipePush);
-		JDFPipeParams pp = createPipeParams(command);
+		final JDFPipeParams pp = createPipeParams(command);
 		createPartAmount(pp, set, sheet, sheets, bCover);
 		writeTest(jmf, "PipePushSheetExample" + set + "." + sheet + (bCover ? "c" : "b") + ".jmf", true, null);
 	}
@@ -544,7 +544,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	@Test
 	public void testPipePushSheetMeta() throws DataFormatException
 	{
-		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setSenderID("Guru");
 		for (int j = 0; j < 2; j++)
 		{
@@ -554,7 +554,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 			command.setSenderID("Printer");
 			JDFPipeParams pp = createPipeParams(command);
 			Vector<JDFPartAmount> vpa = createPartAmount(pp, j, 0, 1, true);
-			for (JDFPartAmount pa : vpa)
+			for (final JDFPartAmount pa : vpa)
 				pa.getPart(0).setMetadata(0, j == 0 ? "Rich" : "Poor");
 
 			for (int i = 0; i < 1 + j; i++)
@@ -565,7 +565,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 				command.setSenderID("Printer");
 				pp = createPipeParams(command);
 				vpa = createPartAmount(pp, j, i, 3 + j, false);
-				for (JDFPartAmount pa : vpa)
+				for (final JDFPartAmount pa : vpa)
 					pa.getPart(0).setMetadata(0, j == 0 ? "Rich" : "Poor");
 			}
 		}
@@ -578,9 +578,9 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	 * @param command
 	 * @return
 	 */
-	JDFPipeParams createPipeParams(JDFCommand command)
+	JDFPipeParams createPipeParams(final JDFCommand command)
 	{
-		JDFPipeParams pp = command.appendPipeParams();
+		final JDFPipeParams pp = command.appendPipeParams();
 		pp.setPipeID("PipeSheet");
 		pp.setJobID("J1");
 		pp.setJobPartID("Part");
@@ -593,10 +593,10 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	 * @param set
 	 * @param sheets
 	 */
-	Vector<JDFPartAmount> createPartAmount(JDFPipeParams pp, int set, int sheets, int plannedSheets, boolean bCover)
+	Vector<JDFPartAmount> createPartAmount(final JDFPipeParams pp, final int set, final int sheets, final int plannedSheets, final boolean bCover)
 	{
-		JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
-		JDFAttributeMap m = new JDFAttributeMap("SetIndex", "" + set);
+		final JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
+		final JDFAttributeMap m = new JDFAttributeMap("SetIndex", "" + set);
 		m.put(EnumPartIDKey.DocTags, bCover ? "Cover" : "Body");
 		JDFPartAmount pa = ap.getCreatePartAmount(m);
 		pa.setAmount(plannedSheets, null);
@@ -619,9 +619,9 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	 * @param set
 	 * @param sheets
 	 */
-	JDFAmountPool createAmountPool(JDFPipeParams pp, int set, int sheets, int plannedSheets)
+	JDFAmountPool createAmountPool(final JDFPipeParams pp, final int set, final int sheets, final int plannedSheets)
 	{
-		JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
+		final JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
 		createPartAmount(pp, set, sheets == plannedSheets ? 1 : 0, 1, true);
 		createPartAmount(pp, set, sheets, plannedSheets, false);
 		return ap;

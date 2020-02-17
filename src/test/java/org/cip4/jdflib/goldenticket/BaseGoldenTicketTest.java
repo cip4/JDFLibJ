@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.examples.ExampleTest;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
 
@@ -89,7 +90,7 @@ import org.cip4.jdflib.node.JDFNode;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
+public abstract class BaseGoldenTicketTest extends ExampleTest
 {
 
 	private static boolean defaultCheckSchema = true;

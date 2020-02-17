@@ -71,7 +71,6 @@ package org.cip4.jdflib.examples;
 
 import java.io.File;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides;
@@ -94,6 +93,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.extensions.examples.ExampleTest;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -141,7 +141,7 @@ import org.junit.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
-public class DigiPrintTest extends JDFTestCaseBase
+public class DigiPrintTest extends ExampleTest
 {
 	private JDFDoc doc;
 	private JDFNode n;

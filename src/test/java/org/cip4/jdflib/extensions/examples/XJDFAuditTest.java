@@ -36,13 +36,14 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.XMLFormatter;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.AuditPoolHelper;
 import org.cip4.jdflib.extensions.MessageResourceHelper;
@@ -62,7 +63,7 @@ import org.junit.Test;
  * @author rainer prosi
  *
  */
-public class XJDFAuditTest extends JDFTestCaseBase
+public class XJDFAuditTest extends ExampleTest
 {
 	/**
 	 *
@@ -156,5 +157,8 @@ public class XJDFAuditTest extends JDFTestCaseBase
 	{
 		super.setUp();
 		KElement.setLongID(false);
+		XMLFormatter.getFormatter().setLineWidth(55);
+		JDFAudit.setStaticAgentName("Writer");
+		JDFAudit.setStaticAgentVersion("V_" + XJDFHelper.defaultVersion().getName());
 	}
 }
