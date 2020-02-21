@@ -51,6 +51,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -577,7 +578,7 @@ public class StringUtil
 			final char c = strWork.charAt(i);
 			if (c == delimIn)
 			{
-				if (v.size() == 0)
+				if (v.isEmpty())
 				{
 					v.add(strWork.substring(0, i));
 					pos0 = i + 1;
@@ -589,7 +590,7 @@ public class StringUtil
 			}
 			else if (c == delimOut && depth-- == 0)
 			{
-				if (v.size() == 0)
+				if (v.isEmpty())
 				{
 					v.add(strWork.substring(0, i));
 					v.add("");
@@ -1884,8 +1885,6 @@ public class StringUtil
 			// maskiert das obere Byte
 			int p = unicodeArray[i * 2] & 0x00ff;
 
-			// System.out.println((int)'0');
-
 			if (p >= '0' && p <= '9')
 			{
 				c = (byte) (p - '0');
@@ -1950,14 +1949,7 @@ public class StringUtil
 	{
 		if (StringUtil.getNonEmpty(strUnicode) != null)
 		{
-			try
-			{
-				return strUnicode.getBytes(UTF8);
-			}
-			catch (final UnsupportedEncodingException e)
-			{
-				return null;
-			}
+			return strUnicode.getBytes(StandardCharsets.UTF_8);
 		}
 		return null;
 	}
