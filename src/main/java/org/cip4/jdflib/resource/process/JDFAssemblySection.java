@@ -71,7 +71,7 @@ public class JDFAssemblySection extends JDFAutoAssemblySection
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFAssemblySection(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
+	public JDFAssemblySection(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -84,7 +84,7 @@ public class JDFAssemblySection extends JDFAutoAssemblySection
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFAssemblySection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
+	public JDFAssemblySection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -98,13 +98,11 @@ public class JDFAssemblySection extends JDFAutoAssemblySection
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFAssemblySection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFAssemblySection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	// **************************************** Methods
-	// *********************************************
 	/**
 	 * toString
 	 *

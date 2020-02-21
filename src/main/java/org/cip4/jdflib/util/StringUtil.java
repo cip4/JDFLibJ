@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -1140,6 +1140,49 @@ public class StringUtil
 	public static String getDefaultNull(final String s, final String def)
 	{
 		return s == null || s.equals(def) ? null : s;
+	}
+
+	/**
+	 *
+	 * @param s1
+	 * @param s2
+	 * @param normalize
+	 * @param ignoreCase
+	 * @param ignoreEmpty
+	 * @param reduceSubstring if true slide over the string and check only the substring
+	 * @return
+	 */
+	public static int getDistance(final String s1, final String s2, final boolean normalize, final boolean ignoreCase, final boolean ignoreEmpty, final boolean reduceSubstring)
+	{
+		if (!reduceSubstring)
+			return getDistance(s1, s2, normalize, ignoreCase, ignoreEmpty);
+		else
+		{
+			final int s11 = length(s1);
+			final int s21 = length(s2);
+			final int min = Math.min(s11, s21);
+			final int max = Math.max(s11, s21);
+			if (min == 0)
+				return 0;
+			final String base = s11 < s21 ? s2 : s1;
+			final String other = s11 < s21 ? s1 : s2;
+			final int steps = max - min + 1;
+			int ret = Integer.MAX_VALUE;
+
+			for (int i = 0; i < steps; i++)
+			{
+				final int d = getDistance(base.substring(i, min + i), other, normalize, ignoreCase, ignoreEmpty);
+				ret = Math.min(d, ret);
+				if (ret == 0)
+					return ret;
+			}
+			return ret;
+		}
+	}
+
+	public static int length(final String s1)
+	{
+		return s1 == null ? 0 : s1.length();
 	}
 
 	/**

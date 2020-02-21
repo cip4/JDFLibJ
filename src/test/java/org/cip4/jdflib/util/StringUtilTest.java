@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -155,6 +155,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.getDistance("", null, false, false, false), 0);
 		assertEquals(StringUtil.getDistance("", "A", false, true, true), 0);
 		assertEquals(StringUtil.getDistance("B", "A", false, true, true), 8);
+		assertEquals(StringUtil.getDistance("AA", "A", false, true, true), 8);
 		assertEquals(StringUtil.getDistance("BB", "BA", false, true, true), 4);
 		assertEquals(StringUtil.getDistance("BBB", "BBA", false, true, true), 2);
 		assertEquals(StringUtil.getDistance("BBBB", "BBBA", false, true, true), 1);
@@ -166,6 +167,19 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.getDistance("a  b", "a B", true, true, false), 0);
 		assertEquals(StringUtil.getDistance("hallo", "hllo", true, true, false), 1);
 		assertEquals(StringUtil.getDistance("hasso", "haßo", true, true, false), 2);
+	}
+
+	/**
+	 * test for getDefaultNull
+	 */
+	@Test
+	public void testGetDistanceSlide()
+	{
+		assertEquals(0, StringUtil.getDistance("", null, false, false, false, true));
+		assertEquals(0, StringUtil.getDistance("AA", "A", false, true, true, true));
+		assertEquals(4, StringUtil.getDistance("AAABCS", "AC", false, true, true, true));
+		assertEquals(0, StringUtil.getDistance("AAABCS99999", "ABC", false, true, true, true));
+		assertEquals(0, StringUtil.getDistance("abc", "AAABCS99999", false, true, true, true));
 	}
 
 	/**
