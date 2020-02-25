@@ -6382,4 +6382,14 @@ public class KElement extends ElementNSImpl implements Element
 		final XMLDoc f = XMLDoc.parseFile(filename);
 		return f == null ? null : f.getRoot();
 	}
+
+	/**
+	 * cleanup all namespace stuff
+	 */
+	public void clearNSMap()
+	{
+		final DocumentXMLImpl doc = (DocumentXMLImpl) getOwnerDocument();
+		doc.nsMap.clear();
+
+	}
 }

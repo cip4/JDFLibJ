@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -87,6 +87,21 @@ public class XMLParser extends DOMParser
 		{
 			super(searchXML ? "<?xml" : null, stream, searchXML, 10000);
 		}
+
+		/**
+		 * same as read, returns -1 if not found
+		 *
+		 * @see java.io.BufferedInputStream#read()
+		 */
+		@Override
+		public synchronized int read()
+		{
+			int i = super.read();
+			while (i < 10 && i >= 0)
+				i = super.read();
+			return i;
+		}
+
 	}
 
 	/**
@@ -216,8 +231,9 @@ public class XMLParser extends DOMParser
 	 * @param stringInput string to parse
 	 * @return JDFDoc or null if parse failed default: parseString(stringInput)
 	 */
-	public XMLDoc parseString(final String stringInput)
+	public XMLDoc parseString(final String s)
 	{
+		final String stringInput = StringUtil.trim(s, null);
 		if (stringInput == null)
 		{
 			log.error("cannot parse null string");

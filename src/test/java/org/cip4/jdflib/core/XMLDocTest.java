@@ -539,6 +539,16 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test whether xmldoc.parse gives a clean empty kelement only doc
+	 */
+	@Test
+	public void testParseFileStringbad()
+	{
+		final XMLDoc d = XMLDoc.parseString("  \t<a/>   " + new String(new byte[] { 32, 0, 0, 0 }));
+		assertNotNull(d);
+	}
+
+	/**
 	 * @throws IOException bang
 	 * @throws SAXException bang
 	 *
