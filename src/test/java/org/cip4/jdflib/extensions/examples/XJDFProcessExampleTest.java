@@ -133,7 +133,7 @@ public class XJDFProcessExampleTest extends ExampleTest
 			final ResourceHelper rhdp = shdp.getCreatePartition(map, true);
 			final KElement dropItem = rhdp.getResource().appendElement(ElementName.DROPITEM);
 			dropItem.setAttribute(AttributeName.AMOUNT, "" + (i * 10));
-			dropItem.setAttribute(XJDFConstants.ItemRef, product.getID());
+			dropItem.setAttribute(XJDFConstants.ItemRef, product.ensureID());
 			map.put(XJDFConstants.ContactType, EnumContactType.Delivery.getName());
 			final ResourceHelper rhc = shc.getCreatePartition(map, true);
 			rhc.getResource().appendElement(ElementName.ADDRESS).setAttribute(AttributeName.CITY, "city" + i);

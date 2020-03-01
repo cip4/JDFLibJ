@@ -139,7 +139,7 @@ public class WalkPosition extends WalkXElement
 					if (bsSet != null)
 					{
 						bsSet.getPartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsID));
-						final String id = bsSet.getID();
+						final String id = bsSet.ensureID();
 						final JDFRefElement re = (JDFRefElement) stripParams.appendElement(ElementName.BINDERYSIGNATURE + "Ref");
 						re.setrRef(id);
 						re.setPartMap(new JDFAttributeMap(AttributeName.BINDERYSIGNATURENAME, bsID));

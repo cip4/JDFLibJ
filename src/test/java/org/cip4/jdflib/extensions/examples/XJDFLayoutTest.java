@@ -380,7 +380,7 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 		sm.setAttribute(AttributeName.ABSOLUTEHEIGHT, "99");
 		sm.setAttribute(AttributeName.ABSOLUTEWIDTH, "999");
 		final JDFRefAnchor ra = (JDFRefAnchor) sm.appendElement(ElementName.REFANCHOR);
-		ra.setrRef(rh.getID());
+		ra.setrRef(rh.ensureID());
 		ra.setAnchorType(EnumAnchorType.Parent);
 		ra.setAnchor(EnumAnchor.TopLeft);
 		final JDFJobField df = (JDFJobField) sm.appendElement(ElementName.JOBFIELD);

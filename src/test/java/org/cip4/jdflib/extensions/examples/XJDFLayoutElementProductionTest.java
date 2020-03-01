@@ -156,7 +156,7 @@ public class XJDFLayoutElementProductionTest extends ExampleTest
 		bccp.setCompensationValue(10);
 		bccp.setCompensationProcess(EnumCompensationProcess.Printing);
 
-		lop.setAttribute(AttributeName.CONTENTREFS, rhc.getID());
+		lop.setAttribute(AttributeName.CONTENTREFS, rhc.ensureID());
 		xjdfHelper.cleanUp();
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "subelements/LayoutElementBarcode.xjdf");
@@ -183,7 +183,7 @@ public class XJDFLayoutElementProductionTest extends ExampleTest
 		s.setCutPath("10 0 l 0 10 l -10 -10 l");
 		final JDFRunList rl = (JDFRunList) rhrl.getResource();
 		rl.setNPage(1);
-		lop.setAttribute(XJDFConstants.ShapeDefRef, rhc.getID());
+		lop.setAttribute(XJDFConstants.ShapeDefRef, rhc.ensureID());
 		xjdfHelper.cleanUp();
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "resources/LayoutElementLabel.xjdf");
@@ -208,7 +208,7 @@ public class XJDFLayoutElementProductionTest extends ExampleTest
 		s.appendFileSpec().setURL("file://myserver/myshare/olive.dd3");
 		final JDFRunList rl = (JDFRunList) rhrl.getResource();
 		rl.setNPage(1);
-		lop.setAttribute(XJDFConstants.ShapeDefRef, rhc.getID());
+		lop.setAttribute(XJDFConstants.ShapeDefRef, rhc.ensureID());
 		xjdfHelper.cleanUp();
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "resources/LayoutElementBox.xjdf");
