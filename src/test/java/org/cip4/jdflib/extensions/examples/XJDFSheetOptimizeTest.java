@@ -38,7 +38,6 @@ package org.cip4.jdflib.extensions.examples;
 
 import static org.junit.Assert.assertNotNull;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
@@ -68,7 +67,7 @@ import org.junit.Test;
  * @author rainer prosi
  * @date Dec 23, 2012
  */
-public class XJDFSheetOptimizeTest extends JDFTestCaseBase
+public class XJDFSheetOptimizeTest extends ExampleTest
 {
 	private static final String GANG = "Gang_";
 	private XJDFHelper xjdfHelper;

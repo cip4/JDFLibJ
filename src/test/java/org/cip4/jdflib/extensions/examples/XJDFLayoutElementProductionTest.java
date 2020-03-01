@@ -91,7 +91,7 @@ public class XJDFLayoutElementProductionTest extends ExampleTest
 
 		final JDFRunList rl = (JDFRunList) rhrl.getResource();
 		rl.setNPage(4);
-		lop.setAttribute(AttributeName.CONTENTREFS, rhc.getID());
+		lop.setAttribute(AttributeName.CONTENTREFS, rhc.ensureID());
 		xjdfHelper.cleanUp();
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "resources/LayoutElementPage.xjdf");

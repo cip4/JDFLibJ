@@ -44,7 +44,6 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.XMLFormatter;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -161,7 +160,6 @@ public class XJDFChangeOrderTest extends ExampleTest
 		seps.add("Spot1");
 		cc.setAttribute(ElementName.COLORANTPARAMS, seps, null);
 		cc.setAttribute(ElementName.COLORANTORDER, seps, null);
-		XMLFormatter.getFormatter().setLineWidth(30);
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);

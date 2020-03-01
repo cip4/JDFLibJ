@@ -228,7 +228,6 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 					coph.getResource().setXMLComment("Contact, Address etc go here", true);
 					coph.getResource().setAttribute("ContactTypes", "Customer");
 					final JDFCustomerInfo ci = (JDFCustomerInfo) cuph.getResource();
-					ci.setAttribute("ContactRefs", coph.getID());
 					ci.setCustomerOrderID("CustomerJob" + ii);
 					ph.setCustomerInfo(cuph);
 				}

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -101,7 +101,7 @@ public class WalkXJDFAuditAmount extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		String localName = toCheck.getLocalName();
+		final String localName = toCheck.getLocalName();
 		return "PhaseAmount".equals(localName) || "ResourceAmount".equals(localName);
 	}
 
@@ -116,21 +116,21 @@ public class WalkXJDFAuditAmount extends WalkXElement
 		KElement ret = null;
 		if (amountCopy != null)
 		{
-			String id = e.getAttribute(AttributeName.RREF);
+			final String id = e.getAttribute(AttributeName.RREF);
 			if (!StringUtil.isEmpty(id))
 			{
-				XJDFHelper h = XJDFHelper.getHelper(e);
-				SetHelper sh = h.getSetForPartition(id);
-				ResourceHelper ph = h.getPartition(id);
+				final XJDFHelper h = XJDFHelper.getHelper(e);
+				final SetHelper sh = h.getSetForPartition(id);
+				final ResourceHelper ph = h.getPartition(id);
 				if (sh != null)
 				{
-					KElement amountParent = amountCopy.getParentNode_KElement();
-					JDFResourceLink rl = (JDFResourceLink) amountParent.insertBefore(sh.getName() + "Link", amountCopy, null);
-					rl.setrRef(sh.getID());
+					final KElement amountParent = amountCopy.getParentNode_KElement();
+					final JDFResourceLink rl = (JDFResourceLink) amountParent.insertBefore(sh.getName() + "Link", amountCopy, null);
+					rl.setrRef(sh.ensureID());
 					rl.setUsage(sh.getUsage());
 					if (ph != null)
 					{
-						VJDFAttributeMap partMapVector = ph.getPartMapVector();
+						final VJDFAttributeMap partMapVector = ph.getPartMapVector();
 						partMapVector.remove(new JDFAttributeMap());
 						rl.setPartMapVector(partMapVector);
 					}

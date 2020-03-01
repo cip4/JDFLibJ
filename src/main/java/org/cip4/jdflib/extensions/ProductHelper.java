@@ -356,7 +356,6 @@ public class ProductHelper extends BaseXJDFHelper
 		final StringArray a = StringArray.getVString(refs, null);
 		if (a == null || !bRecurse)
 			return a;
-		final String id = getID();
 		final Collection<KElement> v = theElement.getParentNode_KElement().getChildList(JDFConstants.PRODUCT, null);
 		for (int i = 0; i < a.size(); i++)
 		{
@@ -524,7 +523,8 @@ public class ProductHelper extends BaseXJDFHelper
 		if (!b && theElement.getBoolAttribute(rootProduct, null, true))
 		{
 			final KElement list = theElement.getParentNode_KElement();
-			b = (list != null && list.getElement(XJDFConstants.Product, null, 0) == theElement && list.getChildWithAttribute(XJDFConstants.Product, rootProduct, null, "true", 0, true) == null);
+			b = (list != null && list.getElement(XJDFConstants.Product, null, 0) == theElement
+					&& list.getChildWithAttribute(XJDFConstants.Product, rootProduct, null, "true", 0, true) == null);
 		}
 		return b;
 	}
