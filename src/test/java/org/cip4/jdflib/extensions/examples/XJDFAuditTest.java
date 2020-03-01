@@ -43,7 +43,6 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.XMLFormatter;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.AuditPoolHelper;
 import org.cip4.jdflib.extensions.MessageResourceHelper;
@@ -120,7 +119,7 @@ public class XJDFAuditTest extends ExampleTest
 		final SetHelper qqp = xjdfHelper.getCreateSet(ElementName.QUALITYCONTROLPARAMS, EnumUsage.Input);
 		final SetHelper qqr = xjdfHelper.getCreateSet(ElementName.QUALITYCONTROLRESULT, EnumUsage.Output);
 		final ResourceHelper qpr = qqp.appendPartition(null, true);
-		qpr.getRoot().appendElement("cc:CxF", "http://colorexchangeformat.com/CxF3-core").setText("CxF requirement data is in here");
+		qpr.getRoot().appendElement("cc:CxF", "http://colorexchangeformat.com/CxF3-core").setText("\nCxF requirement data is in here\n");
 		qpr.getResource().setAttribute(AttributeName.SAMPLEINTERVAL, "42");
 
 		final AuditPoolHelper ah = xjdfHelper.getCreateAuditPool();
@@ -140,7 +139,7 @@ public class XJDFAuditTest extends ExampleTest
 				res.setFailed(0);
 				res.setAttribute(AttributeName.START, new JDFDate().addOffset(0, 0, meas * 2, 0).getDateTimeISO());
 				res.setAttribute(AttributeName.END, new JDFDate().addOffset(0, 0, meas * 2 + 1, 0).getDateTimeISO());
-				auditRes.getRoot().appendElement("cc:CxF", "http://colorexchangeformat.com/CxF3-core").setText("CxF measurement data is in here");
+				auditRes.getRoot().appendElement("cc:CxF", "http://colorexchangeformat.com/CxF3-core").setText("\nCxF measurement data is in here\n");
 			}
 		}
 
@@ -157,7 +156,6 @@ public class XJDFAuditTest extends ExampleTest
 	{
 		super.setUp();
 		KElement.setLongID(false);
-		XMLFormatter.getFormatter().setLineWidth(55);
 		JDFAudit.setStaticAgentName("Writer");
 		JDFAudit.setStaticAgentVersion("V_" + XJDFHelper.defaultVersion().getName());
 	}

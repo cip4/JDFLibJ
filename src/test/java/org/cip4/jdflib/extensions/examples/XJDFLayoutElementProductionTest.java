@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,7 +36,6 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoBarcodeCompParams.EnumCompensationProcess;
 import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumEncoding;
 import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumPurpose;
@@ -68,7 +67,7 @@ import org.junit.Test;
  * @author rainer prosi
  *
  */
-public class XJDFLayoutElementProductionTest extends JDFTestCaseBase
+public class XJDFLayoutElementProductionTest extends ExampleTest
 {
 	/**
 	 *

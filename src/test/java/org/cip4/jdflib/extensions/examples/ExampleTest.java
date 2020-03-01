@@ -38,6 +38,7 @@ package org.cip4.jdflib.extensions.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.XMLFormatter;
 
 /**
  *
@@ -55,5 +56,6 @@ public class ExampleTest extends JDFTestCaseBase
 	{
 		super.setUp();
 		KElement.setLongID(false);
+		XMLFormatter.getFormatter().setLineWidth(64);
 	}
 }

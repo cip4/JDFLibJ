@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,7 +36,6 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoVarnishingParams.EnumVarnishMethod;
 import org.cip4.jdflib.core.AttributeName;
@@ -45,6 +44,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.XMLFormatter;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -68,7 +68,7 @@ import org.junit.Test;
  * @author rainer prosi
  *
  */
-public class XJDFChangeOrderTest extends JDFTestCaseBase
+public class XJDFChangeOrderTest extends ExampleTest
 {
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
@@ -161,7 +161,7 @@ public class XJDFChangeOrderTest extends JDFTestCaseBase
 		seps.add("Spot1");
 		cc.setAttribute(ElementName.COLORANTPARAMS, seps, null);
 		cc.setAttribute(ElementName.COLORANTORDER, seps, null);
-
+		XMLFormatter.getFormatter().setLineWidth(30);
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);

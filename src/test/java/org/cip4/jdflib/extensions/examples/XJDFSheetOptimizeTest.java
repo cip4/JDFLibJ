@@ -40,6 +40,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
@@ -56,7 +57,9 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFConvertingConfig;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
+import org.cip4.jdflib.resource.process.JDFGangElement;
 import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.junit.Test;
 
@@ -110,11 +113,33 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testSimpleUpload()
+	{
+		final KElement e = addGang();
+		e.setAttribute("NPage", "1");
+		e.setAttribute("PageDimension", "333 222");
+		final JDFMedia media = (JDFMedia) e.appendElement(ElementName.MEDIA);
+		media.setMediaType(EnumMediaType.Paper);
+		media.setMediaQuality("MyQuality");
+
+		xjdfHelper.getRoot().setXMLComment("most trivial list of single page documents - e.g. business cards", true);
+		layout.deleteNode();
+		convertingConfig.deleteNode();
+
+		cleanSnippets(xjdfHelper);
+		writeTest(xjdfHelper, "processes/SimpleGangUpload.xjdf", false, null);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	public void testOptimizeCutBlock()
 	{
 		for (int i = 0; i < 6; i++)
 		{
-			final JDFElement e = (JDFElement) addGang();
+			final JDFElement e = addGang();
 			e.setAttribute(AttributeName.NPAGE, "1");
 			e.setAttribute(AttributeName.PAGEDIMENSION, new JDFXYPair(500, 350).scaleFromMM(), null);
 			if (i % 2 == 0)
@@ -167,7 +192,7 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 	{
 		for (int i = 0; i < 6; i++)
 		{
-			final JDFElement e = (JDFElement) addGang();
+			final JDFElement e = addGang();
 			e.setAttribute(AttributeName.NPAGE, "1");
 			e.setAttribute(AttributeName.PAGEDIMENSION, new JDFXYPair(500, 350).scaleFromMM(), null);
 			e.setAttribute(XJDFConstants.BinderySignatureIDs, "BS" + i);
@@ -279,12 +304,13 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 	 *
 	 *
 	 */
-	private KElement addGang()
+	private JDFGangElement addGang()
 	{
-		final KElement gang = sheetOptimizingParams.appendElement(ElementName.GANGELEMENT);
+		final JDFGangElement gang = (JDFGangElement) sheetOptimizingParams.appendElement(ElementName.GANGELEMENT);
 		final int nGang = gang.numSiblingElements(ElementName.GANGELEMENT, null);
-		gang.setAttribute(AttributeName.GANGELEMENTID, GANG + nGang);
-		gang.setAttribute(AttributeName.ORDERQUANTITY, 1000 - nGang * 50, null);
+		gang.setGangElementID(GANG + nGang);
+		gang.setJobID(GANG + nGang * 10);
+		gang.setOrderQuantity(1000 - nGang * 50);
 		return gang;
 	}
 
@@ -319,7 +345,6 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 		convertingConfig.setAttribute(AttributeName.SHEETHEIGHT + "Min", 70 * 72 / 2.54, null);
 		convertingConfig.setAttribute(AttributeName.SHEETWIDTH + "Max", 105 * 72 / 2.54, null);
 		convertingConfig.setAttribute(AttributeName.SHEETWIDTH + "Min", 100 * 72 / 2.54, null);
-
 	}
 
 	/**

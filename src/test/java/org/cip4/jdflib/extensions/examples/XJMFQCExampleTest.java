@@ -38,7 +38,6 @@ package org.cip4.jdflib.extensions.examples;
 
 import java.util.Vector;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -66,7 +65,7 @@ import org.junit.Test;
  * @author rainer prosi
  *
  */
-public class XJMFQCExampleTest extends JDFTestCaseBase
+public class XJMFQCExampleTest extends ExampleTest
 {
 
 	private static final String SPECTRUM = "Spectrum";

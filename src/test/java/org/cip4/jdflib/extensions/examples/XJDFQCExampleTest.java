@@ -36,7 +36,6 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -70,7 +69,7 @@ import org.junit.Test;
  * @author rainer prosi
  *
  */
-public class XJDFQCExampleTest extends JDFTestCaseBase
+public class XJDFQCExampleTest extends ExampleTest
 {
 
 	/**

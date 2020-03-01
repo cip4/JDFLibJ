@@ -36,7 +36,6 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp.EnumOperation;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
@@ -73,7 +72,7 @@ import org.junit.Test;
  * @author rainer prosi
  *
  */
-public class XJDFResourceExampleTest extends JDFTestCaseBase
+public class XJDFResourceExampleTest extends ExampleTest
 {
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()

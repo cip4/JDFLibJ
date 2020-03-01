@@ -414,6 +414,11 @@ public abstract class JDFTestCaseBase
 		writeTest(d.getRoot(), filename, true, null);
 	}
 
+	protected void writeTest(final BaseXJDFHelper h, final String filename, final boolean parseSchema, final String snippetPath)
+	{
+		writeTest(h.getRoot(), filename, parseSchema, snippetPath);
+	}
+
 	/**
 	 *
 	 * @param d
