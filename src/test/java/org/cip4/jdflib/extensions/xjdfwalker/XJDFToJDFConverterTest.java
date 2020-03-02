@@ -102,6 +102,7 @@ import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
+import org.cip4.jdflib.resource.process.JDFColorantAlias;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
@@ -210,6 +211,30 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNull(ccNew.getColorantParams());
 		assertEquals(ccNew.getColorantOrder().getSeparations(), new VString("Cyan Black", null));
 		assertNull(ccNew.getDeviceColorantOrder());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testColorantAlias()
+	{
+		final XJDFHelper h = new XJDFHelper("j", "p", null);
+		h.setTypes(EnumType.ImageSetting.getName());
+		final JDFColorantControl cc = (JDFColorantControl) h.getCreateSet(XJDFConstants.Resource, ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true).getResource();
+		final JDFColorantAlias ca = cc.appendColorantAlias();
+		ca.setReplacementColorantName("Cyan");
+		ca.setAttribute(AttributeName.COLORANTNAME, "nasty cyan");
+
+		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		final JDFDoc docjdf = conv.convert(h);
+		final JDFNode n = docjdf.getJDFRoot();
+
+		final JDFColorantControl ccNew = (JDFColorantControl) n.getResource(ElementName.COLORANTCONTROL, EnumUsage.Input, null, 0);
+		final JDFColorantAlias caNew = ccNew.getColorantAlias(0);
+		assertEquals("Cyan", caNew.getReplacementColorantName());
+		assertEquals("nasty cyan", caNew.getSeparation(0));
 	}
 
 	/**
