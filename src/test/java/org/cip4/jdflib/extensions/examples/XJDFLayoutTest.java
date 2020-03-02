@@ -41,6 +41,7 @@ import java.util.Vector;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
+import org.cip4.jdflib.auto.JDFAutoBundleItem.EnumOrientation;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchorType;
@@ -48,6 +49,7 @@ import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -507,27 +509,92 @@ public class XJDFLayoutTest extends JDFTestCaseBase
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "MultiPage", null);
 		xjdfHelper.setTypes("Stripping");
+		xjdfHelper.setVersion(EnumVersion.Version_2_1);
 
 		final SetHelper shBS = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 		final ResourceHelper rhBS1 = shBS.appendPartition(XJDFConstants.BinderySignatureID, "BS1", true);
 		final JDFBinderySignature bs1 = (JDFBinderySignature) rhBS1.getResource();
 		bs1.setFoldCatalog("F8-7");
 		bs1.setBinderySignatureType(EnumBinderySignatureType.Fold);
-		bs1.setAttribute("MultiPageFold", "BS1 BS2");
+
+		final KElement mp1 = bs1.appendElement(XJDFConstants.MultiPageFold);
+		mp1.setAttribute(XJDFConstants.BinderySignatureID, "BS1");
+		mp1.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Rotate0.getName());
+		final KElement mp2 = bs1.appendElement(XJDFConstants.MultiPageFold);
+		mp2.setAttribute(XJDFConstants.BinderySignatureID, "BS2");
+		mp2.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Rotate0.getName());
 
 		final ResourceHelper rhBS2 = shBS.appendPartition(XJDFConstants.BinderySignatureID, "BS2", true);
 		final JDFBinderySignature bs2 = (JDFBinderySignature) rhBS2.getResource();
 		bs2.setFoldCatalog("F8-7");
 		bs2.setBinderySignatureType(EnumBinderySignatureType.Fold);
-		bs2.setAttribute("MultiPageFold", "BS1 BS2");
+		bs2.copyElement(mp1, null);
+		bs2.copyElement(mp2, null);
 
 		final SetHelper shLO = xjdfHelper.getCreateSet(ElementName.LAYOUT, EnumUsage.Input);
 		final ResourceHelper rhLO = shLO.appendPartition(AttributeName.SHEETNAME, "Sheet1", true);
 		final JDFLayout lo = (JDFLayout) rhLO.getResource();
 		final JDFPosition pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
-		pos.setAttribute(XJDFConstants.BinderySignatureID, "BS1 BS2");
+		pos.setAttribute(XJDFConstants.BinderySignatureID, "BS1");
 		cleanSnippets(xjdfHelper);
-		// writeTest(xjdfHelper, "processes/MultiPageFold.xjdf");
+		writeTest(xjdfHelper, "processes/MultiPageFold.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testStrippingComeGo()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "ComeGo", null);
+		xjdfHelper.setTypes("Stripping");
+		xjdfHelper.setVersion(EnumVersion.Version_2_1);
+
+		final SetHelper shBS = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		final ResourceHelper rhBS1 = shBS.appendPartition(XJDFConstants.BinderySignatureID, "BS1", true);
+		final JDFBinderySignature bs1 = (JDFBinderySignature) rhBS1.getResource();
+		bs1.setFoldCatalog("F8-7");
+		bs1.setBinderySignatureType(EnumBinderySignatureType.Fold);
+
+		final KElement mp1 = bs1.appendElement(XJDFConstants.MultiPageFold);
+		mp1.setAttribute(XJDFConstants.BinderySignatureID, "BS1");
+		mp1.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Rotate0.getName());
+		final KElement mp2 = bs1.appendElement(XJDFConstants.MultiPageFold);
+		mp2.setAttribute(XJDFConstants.BinderySignatureID, "BS3");
+		mp2.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Flip0.getName());
+
+		final ResourceHelper rhBS2 = shBS.appendPartition(XJDFConstants.BinderySignatureID, "BS3", true);
+		final JDFBinderySignature bs2 = (JDFBinderySignature) rhBS2.getResource();
+		bs2.setFoldCatalog("F8-7");
+		bs2.setBinderySignatureType(EnumBinderySignatureType.Fold);
+		bs2.copyElement(mp1, null);
+		bs2.copyElement(mp2, null);
+
+		final ResourceHelper rhBS3 = shBS.appendPartition(XJDFConstants.BinderySignatureID, "BS2", true);
+		final JDFBinderySignature bs3 = (JDFBinderySignature) rhBS3.getResource();
+		bs3.setFoldCatalog("F8-7");
+		bs3.setBinderySignatureType(EnumBinderySignatureType.Fold);
+
+		final KElement mp3 = bs3.appendElement(XJDFConstants.MultiPageFold);
+		mp3.setAttribute(XJDFConstants.BinderySignatureID, "BS2");
+		mp3.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Rotate0.getName());
+		final KElement mp3b = bs3.appendElement(XJDFConstants.MultiPageFold);
+		mp3b.setAttribute(XJDFConstants.BinderySignatureID, "BS2");
+		mp3b.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Flip0.getName());
+
+		final SetHelper shLO = xjdfHelper.getCreateSet(ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper rhLO = shLO.appendPartition(AttributeName.SHEETNAME, "Sheet1", true);
+		final JDFLayout lo = (JDFLayout) rhLO.getResource();
+		final JDFPosition pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
+		pos.setAttribute(XJDFConstants.BinderySignatureID, "BS1");
+
+		final ResourceHelper rhL2 = shLO.appendPartition(AttributeName.SHEETNAME, "Sheet2", true);
+		final JDFLayout lo2 = (JDFLayout) rhL2.getResource();
+		final JDFPosition pos2 = (JDFPosition) lo2.appendElement(ElementName.POSITION);
+		pos2.setAttribute(XJDFConstants.BinderySignatureID, "BS2");
+
+		cleanSnippets(xjdfHelper);
+		writeTest(xjdfHelper, "processes/ComeGo.xjdf");
 	}
 
 	/**
