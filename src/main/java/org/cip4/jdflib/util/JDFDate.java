@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -373,7 +373,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	private void init(final String strDateTime, final int h, final int m) throws DataFormatException
 	{
-		if (strDateTime == null || strDateTime.equals(JDFConstants.EMPTYSTRING))
+		if (StringUtil.isEmpty(strDateTime))
 		{
 			lTimeInMillis = System.currentTimeMillis();
 			m_TimeZoneOffsetInMillis = TimeZone.getDefault().getOffset(lTimeInMillis);
@@ -585,18 +585,18 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 				throw new DataFormatException("bad time zone ");
 
 			final VString times = StringUtil.tokenize(time, ":", false);
-			if (times != null && times.size() >= 3)
+			if (times != null)
 			{
-				final int hours = StringUtil.parseInt(times.get(0), -1);
+				int hours = StringUtil.parseInt(times.get(0), -1);
 				if (hours < 0 || hours > 23)
-					throw new DataFormatException("JDFDate.init: invalid time hours " + times.get(0));
-				final int minutes = StringUtil.parseInt(times.get(1), -1);
+					hours = defaultHour;
+				int minutes = StringUtil.parseInt(times.get(1), -1);
 				if (minutes < 0 || minutes >= 60)
-					throw new DataFormatException("JDFDate.init: invalid time minutes " + times.get(1));
+					minutes = 0;
 
-				final int seconds = StringUtil.parseInt(times.get(2), -1);
+				int seconds = StringUtil.parseInt(times.get(2), 0);
 				if (seconds < 0 || seconds >= 60)
-					throw new DataFormatException("JDFDate.init: invalid time seconds " + times.get(2));
+					seconds = 0;
 				final NumberFormatter nf = new NumberFormatter();
 
 				final String newTime = nf.formatInt(hours, 2) + ":" + nf.formatInt(minutes, 2) + ":" + nf.formatInt(seconds, 2) + timeZone;
