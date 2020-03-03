@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -940,6 +940,8 @@ public class AttributeInfo
 			}
 			else if (iType == AttributeInfo.EnumAttributeType.dateTime)
 			{
+				if (val == null || val.length() < 20)
+					return false;
 				new JDFDate(val);
 				return val.indexOf('T') == 10; // pure dates are not valid
 			}
