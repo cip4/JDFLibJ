@@ -940,7 +940,7 @@ public class AttributeInfo
 			}
 			else if (iType == AttributeInfo.EnumAttributeType.dateTime)
 			{
-				if (val == null || val.length() < 20)
+				if (val.length() < 20)
 					return false;
 				new JDFDate(val);
 				return val.indexOf('T') == 10; // pure dates are not valid

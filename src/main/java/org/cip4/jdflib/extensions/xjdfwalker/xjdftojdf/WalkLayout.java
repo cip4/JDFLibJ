@@ -164,6 +164,7 @@ public class WalkLayout extends WalkStrippingParams
 			final KElement tmpStripParams = foo.getElement(ElementName.STRIPPINGPARAMS);
 			tmpStripParams.removeAttribute(AttributeName.CLASS);
 			tmpStripParams.removeAttribute(AttributeName.ID);
+			tmpStripParams.copyAttribute(AttributeName.STATUS, trackLayout);
 
 			tmpStripParams.removeAttribute(AttributeName.PARTIDKEYS);
 

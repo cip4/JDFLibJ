@@ -1812,10 +1812,11 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFDoc d = xCon.convert(xjdfHelper);
 		final JDFNode n = d.getJDFRoot();
 		final JDFLayout loj = (JDFLayout) n.getResource(ElementName.LAYOUT, EnumUsage.Input, 0).getLeaf(0);
+		assertEquals(EnumResStatus.Available, loj.getResStatus(false));
 		assertNotNull(loj.getMedia(1));
 		final JDFStrippingParams sp = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0);
 		assertNotNull(sp.getMedia(1));
-
+		assertEquals(EnumResStatus.Available, sp.getResStatus(false));
 	}
 
 }
