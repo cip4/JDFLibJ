@@ -235,6 +235,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFColorantAlias caNew = ccNew.getColorantAlias(0);
 		assertEquals("Cyan", caNew.getReplacementColorantName());
 		assertEquals("nasty cyan", caNew.getSeparation(0));
+		assertNull(caNew.getNonEmpty(AttributeName.COLORANTNAME));
 	}
 
 	/**
