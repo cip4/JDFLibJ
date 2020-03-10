@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -38,6 +38,7 @@
  */
 package org.cip4.jdflib.util.thread;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -254,7 +255,7 @@ public class DelayedPersist extends Thread
 	/**
 	 * @return the recommended next wait time
 	 */
-	private int persistQueues()
+	int persistQueues()
 	{
 		long t0 = 424242;
 		if (persistQueue.size() == 0)
@@ -265,13 +266,19 @@ public class DelayedPersist extends Thread
 
 		synchronized (persistQueue)
 		{
-			final Vector<IPersistable> v = ContainerUtil.getKeyVector(persistQueue);
+			final Collection<IPersistable> v = ContainerUtil.getKeyArray(persistQueue);
 			if (v == null)
 				return (int) t0;
 
 			for (final IPersistable qp : v)
 			{
 				final MyLong l = persistQueue.get(qp);
+				if (l == null)
+				{
+					persistQueue.remove(qp);
+					log.error("Snafu persisting mismatche key pair: " + qp.getClass().getCanonicalName());
+					continue;
+				}
 				if (stop || l.i < t)
 				{
 					theList.add(qp);

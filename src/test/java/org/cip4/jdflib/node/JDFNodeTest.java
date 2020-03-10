@@ -455,6 +455,8 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(n.getAttribute("Types"), "DigitalDelivery Combine Stripping Imposition");
 		n.insertTypeInTypes(EnumType.Imposition, 99999);
 		assertEquals(n.getAttribute("Types"), "DigitalDelivery Combine Stripping Imposition Imposition");
+		n.insertTypeInTypes(EnumType.DigitalPrinting, -1);
+		assertEquals(n.getAttribute("Types"), "DigitalDelivery Combine Stripping Imposition DigitalPrinting Imposition");
 
 	}
 
@@ -575,7 +577,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * test whether combinedprocessIndex is automagically and correctly assigned
-	 * 
+	 *
 	 * @throws Exception
 	 *
 	 */
