@@ -605,7 +605,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
 		assertNotNull(mp);
-		final File directory = new File(sm_dirTestDataTemp + File.separator + "TestWriteMime");
+		final File directory = new File(sm_dirTestDataTemp + File.separator + "TestWriteMime2");
 		if (directory.exists())
 		{
 			directory.delete();

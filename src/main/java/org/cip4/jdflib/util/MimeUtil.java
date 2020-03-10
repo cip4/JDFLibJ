@@ -442,7 +442,7 @@ public class MimeUtil extends UrlUtil
 			urlString = urlString.substring(0, urlString.length() - 1);
 		}
 
-		return "cid:" + new File(urlString).getName(); //
+		return "cid:" + StringUtil.normalize(new File(urlString).getName(), false, null); //
 	}
 
 	/**
