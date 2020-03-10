@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -77,6 +77,25 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 			ios.write(i);
 			assertEquals(ios.size(), 1 + i);
 		}
+		ios.close();
+
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	public void testFileSize() throws IOException
+	{
+		final ByteArrayIOFileStream ios = new ByteArrayIOFileStream(2000);
+		for (int i = 0; i < 12345; i++)
+		{
+			ios.write(i);
+			assertEquals(ios.size(), 1 + i);
+		}
+		ios.flush();
+		assertEquals(12345, ios.getFile().length());
 		ios.close();
 	}
 

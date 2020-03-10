@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -164,7 +164,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 
 		/**
 		 * throws JDFException if an IOException occurred
-		 * 
+		 *
 		 * @see org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream#seek(long)
 		 */
 		@Override
@@ -438,6 +438,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 				os = new RandomAccessFile(file, "rw");
 				os.write(buf, pos, count);
 				buf = null;
+				pos = count;
 				count = 0;
 			}
 			catch (final Exception e)
@@ -567,5 +568,13 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 			}
 		}
 		return super.size();
+	}
+
+	/**
+	 * @return the file
+	 */
+	public File getFile()
+	{
+		return file;
 	}
 }
