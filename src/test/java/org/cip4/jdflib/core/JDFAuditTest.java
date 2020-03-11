@@ -253,7 +253,7 @@ public class JDFAuditTest extends ExampleTest
 		final JDFAuditPool ap = n.getAuditPool();
 		assertNotNull(ap);
 		final JDFProcessRun p1 = ap.addProcessRun(EnumNodeStatus.Completed, null, null);
-		assertEquals(p1.getTimeStamp().getTimeInMillis(), new JDFDate().getTimeInMillis(), 2000);
+		assertEquals(p1.getTimeStamp().getTimeInMillis(), new JDFDate().getTimeInMillis(), 3000);
 	}
 
 	/**
