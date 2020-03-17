@@ -590,7 +590,6 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * Method testChildElementVector.
 	 *
 	 */
 	@Test
@@ -622,6 +621,21 @@ public class JDFElementTest extends JDFTestCaseBase
 			assertEquals(xm.numChildElements("MediaRef", null), 3);
 		}
 
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetRefElements()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
+		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, null);
+		xm.refMedia(m);
+		assertEquals(1, xm.getRefElements().size());
+		final JDFExposedMedia xm1 = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.BinderySignatureName, "BS1");
+		assertEquals(1, xm1.getRefElements().size());
 	}
 
 	/**
