@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,8 +41,10 @@ import static org.junit.Assert.assertNull;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumWorkType;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -138,6 +140,25 @@ public class WalkResourceInfoTest extends JDFTestCaseBase
 		final JDFResourceInfo ri = sig.appendResourceInfo();
 		ri.setResourceName(ElementName.MEDIA);
 		ri.setActualAmount(42);
+
+		final KElement xjmf = new JDFToXJDF().convert(jmf);
+
+		assertNull("42", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@ResourceName", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testNoResourceNamePart()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
+		final JDFSignal sig = jmf.getSignal(0);
+		sig.appendResourceQuParams().setJobID("j1");
+		final JDFResourceInfo ri = sig.appendResourceInfo();
+		ri.setResourceName(ElementName.MEDIA);
+		ri.setActualAmount(42);
+		ri.setPartMap(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"));
 
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
 
