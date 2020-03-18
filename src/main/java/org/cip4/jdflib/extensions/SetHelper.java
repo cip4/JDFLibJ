@@ -136,7 +136,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public ResourceHelper getPartition(final JDFAttributeMap map)
 	{
-		final Vector<ResourceHelper> v = getPartitions();
+		final List<ResourceHelper> v = getPartitionList();
 		for (final ResourceHelper ph : v)
 		{
 			if (ph.matches(map))
@@ -160,14 +160,9 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 * @param index
 	 * @return
 	 */
-	public ResourceHelper getPartition(int index)
+	public ResourceHelper getPartition(final int index)
 	{
-		final Vector<ResourceHelper> v = getPartitions();
-		if (index < 0)
-			index += v.size();
-		if (index >= v.size())
-			return null;
-		return (index < 0) ? null : v.get(index);
+		return ContainerUtil.get(getPartitionList(), index);
 	}
 
 	/**
@@ -274,7 +269,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public ResourceHelper getCreatePartition(int index, final boolean addRes)
 	{
-		Vector<ResourceHelper> v = getPartitions();
+		List<ResourceHelper> v = getPartitionList();
 		int size = v.size();
 		if (index < 0)
 			index += size;
@@ -301,7 +296,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public void removePartitions()
 	{
-		final Vector<ResourceHelper> v = getPartitions();
+		final List<ResourceHelper> v = getPartitionList();
 		for (final ResourceHelper ph : v)
 		{
 			ph.getPartition().deleteNode();
@@ -420,7 +415,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 		{
 			theElement.setAttribute(AttributeName.NAME, getName());
 		}
-		final Vector<ResourceHelper> kids = getPartitions();
+		final List<ResourceHelper> kids = getPartitionList();
 		if (kids != null)
 		{
 			for (final ResourceHelper kid : kids)
@@ -438,7 +433,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 		String name = theElement.getAttribute(AttributeName.NAME, null, null);
 		if (name == null)
 		{
-			final Vector<ResourceHelper> v = getPartitions();
+			final List<ResourceHelper> v = getPartitionList();
 			for (final ResourceHelper ph : v)
 			{
 				final KElement res = ph.getResource();
@@ -489,7 +484,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public ResourceHelper getPartition(final VJDFAttributeMap vmap)
 	{
-		final Vector<ResourceHelper> v = getPartitions();
+		final List<ResourceHelper> v = getPartitionList();
 		for (final ResourceHelper ph : v)
 		{
 			if (ph.matches(vmap))
@@ -759,7 +754,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	{
 		final String oldID = getID();
 		super.setID(newID);
-		final Vector<ResourceHelper> parts = getPartitions();
+		final List<ResourceHelper> parts = getPartitionList();
 		if (parts != null)
 		{
 			for (final ResourceHelper part : parts)
@@ -778,7 +773,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public VJDFAttributeMap getPartMapVector()
 	{
-		final Vector<ResourceHelper> vph = getPartitions();
+		final List<ResourceHelper> vph = getPartitionList();
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		for (final ResourceHelper ph : vph)
 		{
@@ -794,7 +789,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public Collection<VJDFAttributeMap> getPartMapVectors()
 	{
-		final Vector<ResourceHelper> vph = getPartitions();
+		final List<ResourceHelper> vph = getPartitionList();
 		final ArrayList<VJDFAttributeMap> vMap = new ArrayList<>();
 		for (final ResourceHelper ph : vph)
 		{
@@ -837,7 +832,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	public void removeIDs()
 	{
 		removeAttribute(AttributeName.ID, null);
-		final Vector<ResourceHelper> v = getPartitions();
+		final List<ResourceHelper> v = getPartitionList();
 		if (v != null)
 		{
 			for (final ResourceHelper ph : v)

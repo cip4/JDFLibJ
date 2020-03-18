@@ -1,5 +1,6 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -144,7 +145,7 @@ public class XJDFCombiner
 
 	void mergeSet(final SetHelper mainSet, final SetHelper s)
 	{
-		final Vector<ResourceHelper> v = s.getPartitions();
+		final List<ResourceHelper> v = s.getPartitionList();
 		for (final ResourceHelper r : v)
 		{
 			final ResourceHelper partition = mainSet.getPartition(getPartitions(r));

@@ -269,7 +269,7 @@ public class WalkResourceInfo extends WalkJDFSubElement
 		}
 		else
 		{
-			final List<ResourceHelper> vp = sh0 == null ? null : sh0.getPartitions();
+			final List<ResourceHelper> vp = sh0 == null ? null : sh0.getPartitionList();
 			if (vp != null)
 			{
 				for (final ResourceHelper rh : vp)

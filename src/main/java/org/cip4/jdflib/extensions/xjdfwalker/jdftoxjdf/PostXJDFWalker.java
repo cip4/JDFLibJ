@@ -74,7 +74,6 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFHeadBandApplicationParams;
 import org.cip4.jdflib.resource.JDFLaminatingParams;
 import org.cip4.jdflib.resource.JDFMarkObject;
@@ -125,8 +124,8 @@ class PostXJDFWalker extends BaseElementWalker
 	private boolean bDeliveryIntent;
 	private boolean retainAll;
 
-	private static final StringArray metaKeys = new StringArray(new String[] { AttributeName.COMMANDRESULT, AttributeName.JOBID, AttributeName.JOBPARTID, AttributeName.LEVEL,
-			AttributeName.MODULEID, AttributeName.QUEUEENTRYID, AttributeName.SCOPE, AttributeName.SPEED, AttributeName.TOTALAMOUNT, AttributeName.TYPES });
+	private static final StringArray metaKeys = new StringArray(new String[] { AttributeName.COMMANDRESULT, AttributeName.JOBID, AttributeName.JOBPARTID, AttributeName.LEVEL, AttributeName.MODULEID,
+			AttributeName.QUEUEENTRYID, AttributeName.SCOPE, AttributeName.SPEED, AttributeName.TOTALAMOUNT, AttributeName.TYPES });
 
 	/**
 	 *
@@ -2405,8 +2404,7 @@ class PostXJDFWalker extends BaseElementWalker
 		public boolean matches(final KElement e)
 		{
 			final String localName = e.getLocalName();
-			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE)
-					|| localName.startsWith(ElementName.COMMAND);
+			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE) || localName.startsWith(ElementName.COMMAND);
 		}
 
 	}
@@ -2987,8 +2985,8 @@ class PostXJDFWalker extends BaseElementWalker
 	@Override
 	public String toString()
 	{
-		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll
-				+ ", removeSignatureName=" + removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
+		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll + ", removeSignatureName="
+				+ removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
 	}
 
 	void combineSameSets()
@@ -3037,7 +3035,7 @@ class PostXJDFWalker extends BaseElementWalker
 			final KElement root = firstSet.getRoot();
 			for (int j = 1; j < sameSets.size(); j++)
 			{
-				final Vector<ResourceHelper> parts = sameSets.get(j).getPartitions();
+				final List<ResourceHelper> parts = sameSets.get(j).getPartitionList();
 				for (final ResourceHelper ph : parts)
 				{
 					root.copyElement(ph.getRoot(), null);

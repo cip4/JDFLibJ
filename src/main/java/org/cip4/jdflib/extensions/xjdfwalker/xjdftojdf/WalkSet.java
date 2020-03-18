@@ -101,7 +101,7 @@ public class WalkSet extends WalkXElement
 	void reorderResources(final KElement xjdf)
 	{
 		final SetHelper h = new SetHelper(xjdf);
-		final List<ResourceHelper> vp = h.getPartitions();
+		final List<ResourceHelper> vp = h.getPartitionList();
 		if (ContainerUtil.size(vp) > 1)
 		{
 			vp.sort(new PartSizeComparator());
