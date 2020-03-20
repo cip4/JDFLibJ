@@ -47,6 +47,7 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoApprovalDetails.EnumApprovalState;
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
@@ -124,6 +125,8 @@ import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.resource.intent.JDFPackingIntent;
 import org.cip4.jdflib.resource.intent.JDFScreeningIntent;
+import org.cip4.jdflib.resource.process.JDFApprovalDetails;
+import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFColor;
@@ -1746,6 +1749,31 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFDoc d = invert.convert(xjdf);
 		final JDFNode n2 = d.getJDFRoot();
 		assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.PhaseTime, null, null).getEmployee(0).getDescriptiveName(), "me");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testApprovalDetails()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Approval);
+		final JDFApprovalSuccess as = (JDFApprovalSuccess) n.addResource(ElementName.APPROVALSUCCESS, EnumUsage.Output);
+		final JDFApprovalDetails ad = as.appendApprovalDetails();
+		ad.setApprovalState(EnumApprovalState.Approved);
+		ad.appendComment().setText("ok");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		final XJDFHelper h = new XJDFHelper(xjdf);
+		final SetHelper set = h.getSet(ElementName.APPROVALDETAILS, 0);
+		assertNotNull(set);
+		assertNull(set.getPartition(1));
+		final JDFApprovalDetails det = (JDFApprovalDetails) set.getPartition(0).getResource();
+		assertEquals(EnumApprovalState.Approved, det.getApprovalState());
+		assertEquals("ok", set.getPartition(0).getComment(0));
+		assertNull(det.getElement_KElement(ElementName.APPROVALDETAILS, null, 0));
+
 	}
 
 	/**

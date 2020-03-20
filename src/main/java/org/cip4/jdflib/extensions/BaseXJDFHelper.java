@@ -39,6 +39,8 @@ package org.cip4.jdflib.extensions;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -399,6 +401,37 @@ public abstract class BaseXJDFHelper
 		{
 			return null;
 		}
+	}
+
+	/**
+	 *
+	 * @return the comment text
+	 */
+	public String getComment(final int i)
+	{
+		final KElement root = getRoot();
+		final KElement c = root == null ? null : root.getElement(ElementName.COMMENT, null, i);
+		return c == null ? null : c.getText();
+	}
+
+	/**
+	 *
+	 * @return the comment
+	 */
+	public JDFComment setComment(final String text)
+	{
+		final KElement root = getRoot();
+		if (root != null)
+		{
+			if (text == null)
+			{
+				root.removeChildren(ElementName.COMMENT, null, null);
+			}
+			final JDFComment c = root == null ? null : (JDFComment) root.getCreateElement(ElementName.COMMENT);
+			c.setText(text);
+			return c;
+		}
+		return null;
 	}
 
 	/**

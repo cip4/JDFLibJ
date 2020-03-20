@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -42,6 +42,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.junit.Test;
 
@@ -97,6 +99,18 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	{
 		theHelper.setGeneralID("foo", "Product");
 		assertEquals("Product", theHelper.getGeneralID("foo"));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testComment()
+	{
+		final SetHelper set = theHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
+		set.setComment("foo");
+		assertEquals("foo", set.getComment(0));
 	}
 
 	/**

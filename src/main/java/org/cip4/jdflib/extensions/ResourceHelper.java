@@ -559,6 +559,17 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 
 	/**
 	 *
+	 * @return the comment text
+	 */
+	public String getComment(final int i)
+	{
+		final KElement root = getRoot();
+		final KElement c = root == null ? null : root.getElement(ElementName.COMMENT, null, i);
+		return c == null ? null : c.getText();
+	}
+
+	/**
+	 *
 	 * @param externalID
 	 */
 	@Override
