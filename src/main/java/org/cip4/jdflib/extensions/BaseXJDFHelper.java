@@ -158,17 +158,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 * reorder elements in their canonical order - usually nop
-	 *
-	 * @deprecated use cleanup
-	 */
-	@Deprecated
-	public void reorder()
-	{
-		return;
-	}
-
-	/**
 	 *
 	 *
 	 * @param xpath
@@ -427,9 +416,12 @@ public abstract class BaseXJDFHelper
 			{
 				root.removeChildren(ElementName.COMMENT, null, null);
 			}
-			final JDFComment c = root == null ? null : (JDFComment) root.getCreateElement(ElementName.COMMENT);
-			c.setText(text);
-			return c;
+			else
+			{
+				final JDFComment c = (JDFComment) root.getCreateElement(ElementName.COMMENT);
+				c.setText(text);
+				return c;
+			}
 		}
 		return null;
 	}
