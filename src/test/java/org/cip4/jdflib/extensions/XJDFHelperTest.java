@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -551,12 +551,13 @@ public class XJDFHelperTest extends JDFTestCaseBase
 		assertNotNull(theHelper.getRootProductHelpers().get(0));
 	}
 
+	@Test
 	public void testReorder()
 	{
 		theHelper = new XJDFHelper("jID", "jpID", null);
-		theHelper.reorder();
 		theHelper.getCreateSet(XJDFConstants.Resource, "foo", null);
 		theHelper.appendProduct().setRoot();
+		theHelper.cleanUp();
 		final KElement ap = theHelper.getRoot().getElement(ElementName.AUDITPOOL);
 		assertEquals(theHelper.getRoot().getFirstChildElement(), ap);
 		assertEquals(theHelper.getRootProduct(0).getRoot().getParentNode_KElement().getPreviousSiblingElement(), ap);

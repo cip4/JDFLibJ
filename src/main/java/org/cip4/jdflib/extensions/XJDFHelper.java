@@ -1085,32 +1085,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 	}
 
 	/**
-	 * ensure we always have auditpool and productlist first
-	 *
-	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#reorder()
-	 */
-	@Override
-	public void reorder()
-	{
-		final KElement pl = theElement.getElement(ProductHelper.PRODUCTLIST);
-		final KElement ap = theElement.getElement(ElementName.AUDITPOOL);
-		if (pl != null)
-		{
-			KElement f = theElement.getFirstChildElement();
-			if (f == ap)
-			{
-				f = f.getNextSiblingElement();
-			}
-			theElement.moveElement(pl, f);
-		}
-		if (ap != null)
-		{
-			final KElement f = theElement.getFirstChildElement();
-			theElement.moveElement(ap, f);
-		}
-	}
-
-	/**
 	 * remove a types token
 	 *
 	 * @param typ
