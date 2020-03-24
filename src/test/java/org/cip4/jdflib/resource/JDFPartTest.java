@@ -88,6 +88,18 @@ public class JDFPartTest extends JDFTestCaseBase
 	/**
 	 *
 	 */
+	@Test
+	public void testGetPartMap()
+	{
+		final JDFAttributeMap map = new JDFAttributeMap("Side", "Front");
+		map.put("ID", "i");
+		part.setPartMap(map);
+		assertEquals(1, part.getPartMap().size());
+	}
+
+	/**
+	 *
+	 */
 	@Override
 	public void setUp()
 	{

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -246,14 +246,25 @@ public class OrderedTaskQueue extends Thread
 	 */
 	public static void shutDownAll()
 	{
-		LogFactory.getLog(OrderedTaskQueue.class).info("shutting down " + theMap.size() + " ordered queues");
-		final Collection<String> v = ContainerUtil.getKeyArray(theMap);
-		if (v != null)
+		final int size = theMap.size();
+		if (size > 0)
 		{
-			for (final String key : v)
+			LogFactory.getLog(OrderedTaskQueue.class).info("shutting down " + size + " ordered queues");
+			synchronized (theMap)
 			{
-				theMap.get(key).shutDown();
+				final Collection<String> v = ContainerUtil.getKeyArray(theMap);
+				if (v != null)
+				{
+					for (final String key : v)
+					{
+						theMap.get(key).shutDown();
+					}
+				}
 			}
+		}
+		else
+		{
+			LogFactory.getLog(OrderedTaskQueue.class).info("skipping shut down of " + size + " ordered queues");
 		}
 	}
 

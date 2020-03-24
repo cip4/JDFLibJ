@@ -38,7 +38,6 @@
 package org.cip4.jdflib.resource;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -57,6 +56,8 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.util.StringUtil;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -123,18 +124,21 @@ public class JDFPart extends JDFAutoPart
 	@Override
 	public JDFAttributeMap getPartMap()
 	{
-		final JDFAttributeMap am = getAttributeMap();
-		final Iterator<String> it = am.getKeyIterator();
-		final JDFAttributeMap retMap = new JDFAttributeMap();
-		while (it.hasNext())
+		final JDFAttributeMap m = new JDFAttributeMap();
+		final NamedNodeMap nm = getAttributes();
+		if (nm != null)
 		{
-			final String key = it.next();
-			if (EnumPartIDKey.getEnum(key) != null)
+			final int siz = nm.getLength();
+
+			for (int i = 0; i < siz; i++)
 			{
-				retMap.put(key, am.get(key));
+				final Node a = nm.item(i);
+				final String nodeName = a.getNodeName();
+				if (allparts.contains(nodeName))
+					m.put(nodeName, a.getNodeValue());
 			}
 		}
-		return retMap;
+		return m;
 	}
 
 	/**
@@ -437,6 +441,7 @@ public class JDFPart extends JDFAutoPart
 	}
 
 	static Set<String> fastparts = fillFastParts();
+	static Set<String> allparts = fillAllParts();
 
 	/**
 	 * @see org.cip4.jdflib.core.JDFElement#getTheElementInfo()
@@ -466,6 +471,18 @@ public class JDFPart extends JDFAutoPart
 			}
 
 		}
+		return hashSet;
+	}
+
+	static Set<String> fillAllParts()
+	{
+		final HashSet<String> hashSet = new HashSet<>();
+		for (final EnumPartIDKey e : EnumPartIDKey.getEnumList())
+		{
+			final String key = e.getName();
+			hashSet.add(key);
+		}
+
 		return hashSet;
 	}
 
