@@ -85,6 +85,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFTransferFunction;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -770,6 +771,27 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(xjdf);
 		assertNull(xjdf.getChildByTagName(ElementName.RESOURCEPOOL, null, 0, null, false, false));
 		writeRoundTrip(nP, "pack");
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@Test
+	public void testRetainPartID()
+	{
+		final JDFNode nP = createBaseProductNode();
+		nP.setJobPartID("jp1");
+		final JDFLayoutIntent loi = (JDFLayoutIntent) nP.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
+		loi.appendFinishedDimensions().setActual(new JDFShape(20, 30));
+		final JDFToXJDF xjdf20 = new JDFToXJDF();
+		xjdf20.setSingleNode(true);
+		xjdf20.setRetainAll(true);
+		xjdf20.setNewVersion(EnumVersion.Version_2_1);
+		final KElement xjdf = xjdf20.makeNewJDF(nP, null);
+		xjdf.write2File(sm_dirTestDataTemp + "retainJP.xjdf");
+		assertNotNull(xjdf);
+		assertEquals("jp1", xjdf.getXPathAttribute("ProductList/Product/@JobPartID", null));
 	}
 
 	/**

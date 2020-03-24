@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -66,8 +66,8 @@ public class AtrInfo
 {
 	private final long atrValidityStatus;
 	private final AttributeInfo.EnumAttributeType atrType;
-	private ValuedEnum enumEnum = null;
-	private String atrDefault = null;
+	private final ValuedEnum enumEnum;
+	private final String atrDefault;
 
 	/**
 	 * @param s
@@ -392,11 +392,11 @@ public class AtrInfo
 			masked = masked >> (4 * i);
 			if (masked == 2 || masked == 3)
 			{
-				// dirty hack to allow FixVersion with 2.0, if all bits, we also assume jdf 2.0 (xjdf)
+				// dirty hack to allow FixVersion with 2.x, if all bits, we also assume jdf 2.2 (xjdf)
 				if (i == 7)
-					i += 3;
-
-				return EnumVersion.getEnum(i + 1);
+					return EnumVersion.Version_2_2;
+				else
+					return EnumVersion.getEnum(i + 1);
 			}
 		}
 		return null;

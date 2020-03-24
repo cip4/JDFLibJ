@@ -1064,12 +1064,11 @@ public class JDFToXJDF extends PackageElementWalker
 	@Override
 	public String toString()
 	{
-		return "JDFToXJDF [trackAudits=" + trackAudits + ", newRoot=" + newRoot + ", oldRoot=" + oldRoot + ", first=" + first + ", bExplicitWaste=" + bExplicitWaste
-				+ ", bRetainAll=" + bRetainAll + ", bCleanup=" + bCleanup + ", bMergeLayout=" + bMergeLayout + ", bMergeLayoutPrep=" + bMergeLayoutPrep + ", bMergeRunList="
-				+ bMergeRunList + ", bRetainSpawnInfo=" + bRetainSpawnInfo + ", bSingleNode=" + bSingleNode + ", bUpdateVersion=" + bUpdateVersion + ", bTypeSafeMessage="
-				+ bTypeSafeMessage + ", bAbstractMessage=" + bAbstractMessage + ", bSpanAsAttribute=" + bSpanAsAttribute + ", bIntentPartition=" + bIntentPartition
-				+ ", bParameterSet=" + bParameterSet + ", wantProduct=" + wantProduct + ", componentProductMap=" + componentProductMap + ", resourceAlias=" + resourceAlias
-				+ ", bHTMLColor=" + bHTMLColor + ", bConvertTilde=" + bConvertTilde + ", rootID=" + rootID + ", removeSignatureName=" + removeSignatureName + ", processPartition="
-				+ processPartition + ", wantDependent=" + wantDependent + ", newVersion=" + newVersion + "]";
+		return "JDFToXJDF [trackAudits=" + trackAudits + ", newRoot=" + newRoot + ", oldRoot=" + oldRoot + ", first=" + first + ", bExplicitWaste=" + bExplicitWaste + ", bRetainAll=" + bRetainAll
+				+ ", bCleanup=" + bCleanup + ", bMergeLayout=" + bMergeLayout + ", bMergeLayoutPrep=" + bMergeLayoutPrep + ", bMergeRunList=" + bMergeRunList + ", bRetainSpawnInfo=" + bRetainSpawnInfo
+				+ ", bSingleNode=" + bSingleNode + ", bUpdateVersion=" + bUpdateVersion + ", bTypeSafeMessage=" + bTypeSafeMessage + ", bAbstractMessage=" + bAbstractMessage + ", bSpanAsAttribute="
+				+ bSpanAsAttribute + ", bIntentPartition=" + bIntentPartition + ", bParameterSet=" + bParameterSet + ", wantProduct=" + wantProduct + ", componentProductMap=" + componentProductMap
+				+ ", resourceAlias=" + resourceAlias + ", bHTMLColor=" + bHTMLColor + ", bConvertTilde=" + bConvertTilde + ", rootID=" + rootID + ", removeSignatureName=" + removeSignatureName
+				+ ", processPartition=" + processPartition + ", wantDependent=" + wantDependent + ", newVersion=" + newVersion + "]";
 	}
 }

@@ -40,6 +40,7 @@ package org.cip4.jdflib.core;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.junit.Test;
 
 import junit.framework.TestCase;
@@ -63,10 +64,8 @@ public class AttrInfoTest extends TestCase
 
 		ai = new AtrInfo(0x33333222, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		assertEquals("", ai.getFirstVersion(), EnumVersion.Version_1_0);
-		assertEquals("", ai.getLastVersion(), EnumVersion.Version_2_0);
+		assertEquals("", ai.getLastVersion(), ContainerUtil.get(EnumVersion.getEnumList(), -1));
 	}
-
-	// ////////////////////////////////////////////////////////////
 
 	/**
 	 *
@@ -128,7 +127,5 @@ public class AttrInfoTest extends TestCase
 		assertTrue(AttributeInfo.validStringForType("0 1 0 3", EnumAttributeType.TransferFunction, null));
 		assertFalse(AttributeInfo.validStringForType("0 1 0", EnumAttributeType.TransferFunction, null));
 	}
-
-	// ////////////////////////////////////////////////////////////
 
 }
