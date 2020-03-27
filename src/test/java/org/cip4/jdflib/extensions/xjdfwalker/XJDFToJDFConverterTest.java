@@ -43,7 +43,10 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoApprovalDetails.EnumApprovalState;
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
@@ -98,6 +101,8 @@ import org.cip4.jdflib.resource.intent.JDFInsertingIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
+import org.cip4.jdflib.resource.process.JDFApprovalDetails;
+import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFColor;
@@ -524,8 +529,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFColorantControl cc = (JDFColorantControl) h.getCreateSet(XJDFConstants.Resource, ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true).getResource();
 		cc.setAttribute(ElementName.COLORANTPARAMS, "Sep_1");
 		cc.setAttribute(ElementName.COLORANTORDER, "Sep_1");
-		h.getCreateSet(XJDFConstants.Resource, ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME,
-				"Sep 1");
+		h.getCreateSet(XJDFConstants.Resource, ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep_1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME, "Sep 1");
 
 		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
 		final JDFDoc docjdf = conv.convert(h);
@@ -610,8 +614,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final KElement c = e.appendElement(SetHelper.RESOURCE_SET);
 		c.setAttribute("Name", "Layout");
 		c.setAttribute("Usage", "Input");
-		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL",
-				"file://foo.xml");
+		c.appendElement(XJDFConstants.Resource).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL", "file://foo.xml");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		final JDFNode root = d.getJDFRoot();
@@ -757,6 +760,61 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertEquals(333, (int) rl.getAmount(new JDFAttributeMap(AttributeName.CONDITION, "Good")));
 		assertEquals(33, (int) rl.getAmount(new JDFAttributeMap(AttributeName.CONDITION, "Waste")));
 		assertNull(m.getElement("AmountPool"));
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testApprovalDetails()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
+		final SetHelper sh = xjdf.getCreateSet(XJDFConstants.Resource, ElementName.APPROVALDETAILS, EnumUsage.Input);
+		final ResourceHelper ph = sh.getCreatePartition(null, true);
+		ph.setComment("Approval ok");
+		final JDFApprovalDetails ad = (JDFApprovalDetails) ph.getCreateResource();
+		ad.setApprovalState(EnumApprovalState.Approved);
+
+		final JDFDoc d = xCon.convert(xjdf);
+		assertNotNull(d);
+		final JDFNode root = d.getJDFRoot();
+		final JDFApprovalSuccess s = (JDFApprovalSuccess) root.getResource(ElementName.APPROVALSUCCESS, EnumUsage.Input, 0);
+		final JDFApprovalDetails det = s.getApprovalDetails(0);
+		assertNotNull(det);
+		assertEquals("Approval ok", det.getComment(0).getText());
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testApprovalDetailsSheet()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper xjdf = new XJDFHelper("j1", null, null);
+		final SetHelper sh = xjdf.getCreateSet(XJDFConstants.Resource, ElementName.APPROVALDETAILS, EnumUsage.Input);
+		for (int i = 1; i < 3; i++)
+		{
+			final ResourceHelper ph = sh.getCreatePartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S" + i), true);
+			ph.setComment("Approval ok " + i);
+			final JDFApprovalDetails ad = (JDFApprovalDetails) ph.getCreateResource();
+			ad.setApprovalState(EnumApprovalState.Approved);
+		}
+
+		final JDFDoc d = xCon.convert(xjdf);
+		assertNotNull(d);
+		final JDFNode root = d.getJDFRoot();
+		final JDFApprovalSuccess s0 = (JDFApprovalSuccess) root.getResource(ElementName.APPROVALSUCCESS, EnumUsage.Input, 0);
+		final List<JDFResource> ls = s0.getLeafArray(false);
+		for (int i = 1; i < 3; i++)
+		{
+			final JDFApprovalDetails det = ((JDFApprovalSuccess) ls.get(i - 1)).getApprovalDetails(0);
+			assertNotNull(det);
+			assertEquals("Approval ok " + i, det.getComment(0).getText());
+		}
 	}
 
 	/**
