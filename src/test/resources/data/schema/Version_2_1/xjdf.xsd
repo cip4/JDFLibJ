@@ -1127,6 +1127,7 @@
             <xs:attribute name="Speed" type="xs:float" use="optional"/>
             <xs:attribute name="Status" type="DeviceStatus" use="required"/>
             <xs:attribute name="StatusDetails" type="xs:NMTOKEN" use="optional"/>
+            <xs:attribute name="ToolIDs" type="xs:NMTOKENS" use="optional"/>
             <xs:attribute name="TotalProductionCounter" type="xs:float" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -1200,6 +1201,7 @@
             <xs:attribute name="StartTime" type="xs:dateTime" use="optional"/>
             <xs:attribute name="Status" type="NodeStatus" use="required"/>
             <xs:attribute name="StatusDetails" type="xs:NMTOKEN" use="optional"/>
+            <xs:attribute name="ToolIDs" type="xs:NMTOKENS" use="optional"/>
             <xs:attribute name="Waste" type="xs:float" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -4555,16 +4557,6 @@
         </xs:complexContent>
     </xs:complexType>
     
-   <xs:element name="GangPreparationParams" substitutionGroup="SpecificResource" type="GangPreparationParams"/>
-    <xs:complexType name="GangPreparationParams">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource">
-                <xs:attribute name="GangName" type="xs:NMTOKEN" use="optional"/>
-                <xs:attribute name="JobIDs" type="xs:NMTOKENS" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <xs:element name="GeneralID">
         <xs:complexType>
             <xs:attribute name="DataType" use="optional">
@@ -4760,6 +4752,7 @@
                 <xs:attribute name="PaperRef" type="xs:IDREF" use="optional"/>
                 <xs:attribute name="PlateRef" type="xs:IDREF" use="optional"/>
                 <xs:attribute name="ProofPaperRef" type="xs:IDREF" use="optional"/>
+                <xs:attribute name="SheetLay" type="SheetLay" use="optional"/>
                 <xs:attribute name="SurfaceContentsBox" type="rectangle" use="optional"/>
                 <xs:attribute name="WorkStyle" type="WorkStyle" use="optional"/>
             </xs:extension>
@@ -5190,6 +5183,7 @@
             <xs:attribute name="MarginRight" type="xs:float" use="optional"/>
             <xs:attribute name="MarginTop" type="xs:float" use="optional"/>
             <xs:attribute name="Orientation" type="Orientation" use="optional"/>
+            <xs:attribute name="PositionOrd" type="xs:int" use="optional"/>
             <xs:attribute name="RelativeBox" type="rectangle" use="optional"/>
             <xs:attribute name="StackDepth" type="xs:int" use="optional"/>
             <xs:attribute name="StackOrd" type="xs:int" use="optional"/>
@@ -5687,6 +5681,7 @@
             <xs:attribute name="Operations" type="xs:NMTOKENS" use="optional"/>
             <xs:attribute name="OrderQuantity" type="xs:int" use="required"/>
             <xs:attribute name="PageDimension" type="XYPair" use="optional"/>
+            <xs:attribute name="PlacedQuantity" type="xs:int" use="optional"/>
             <xs:attribute name="Priority" type="xs:int" use="optional"/>
             <xs:attribute name="RotationPolicy" type="PositionPolicy" use="optional"/>
             <xs:attribute name="RunListRef" type="xs:IDREF" use="optional"/>
