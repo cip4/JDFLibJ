@@ -304,14 +304,10 @@ public class HotFolder
 	public synchronized void stop()
 	{
 		final HotFolderRunner r = HotFolderRunner.getTherunner();
-		if (r != null)
+		if (r != null && r.contains(this))
 		{
 			r.remove(this);
 			log.info("stopped hot folder at: " + dir.getAbsolutePath());
-		}
-		else
-		{
-			log.info("Stopping stopped hot folder at: " + dir.getAbsolutePath());
 		}
 	}
 

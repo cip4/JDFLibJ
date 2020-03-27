@@ -53,7 +53,7 @@ import org.cip4.jdflib.util.thread.MyMutex;
 class HotFolderRunner extends Thread
 {
 
-	List<HotFolder> hotfolders;
+	final List<HotFolder> hotfolders;
 	MyMutex mutex;
 	private static Log log = LogFactory.getLog(HotFolderRunner.class);
 	static final AtomicReference<HotFolderRunner> theRunner = new AtomicReference<>(null);
@@ -226,5 +226,15 @@ class HotFolderRunner extends Thread
 			return taskQueue.queue(runner);
 		}
 		return true;
+	}
+
+	/**
+	 * @param o
+	 * @return
+	 * @see java.util.List#contains(java.lang.Object)
+	 */
+	public boolean contains(final HotFolder o)
+	{
+		return hotfolders.contains(o);
 	}
 }
