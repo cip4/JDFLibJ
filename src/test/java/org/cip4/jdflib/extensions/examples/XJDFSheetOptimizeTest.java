@@ -259,11 +259,12 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 			for (int j = 0; j < 2; j++)
 			{
 				addGang();
-				addOutLayout(i, j, false);
+				addOutLayout(i, j, 0, 4, false);
 			}
 		}
-		layout.getPartition(0).setAmount(500, null, true);
+		layout.getPartition(0).setAmount(513, null, true);
 
+		xjdfHelper.setVersion(EnumVersion.Version_2_1);
 		xjdfHelper.cleanUp();
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
@@ -273,23 +274,53 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 
 	/**
 	 *
+	 *
+	 */
+	@Test
+	public void testOutputLayoutPositionOrd()
+	{
+		for (int k = 0; k < 2; k++)
+		{
+			for (int i = 0; i < 2; i++)
+			{
+				for (int j = 0; j < 1; j++)
+				{
+					addGang();
+					addOutLayout(i, j, k, 2, true);
+				}
+			}
+		}
+
+		xjdfHelper.cleanUp();
+		xjdfHelper.setVersion(EnumVersion.Version_2_1);
+		setSnippet(layout, true);
+		writeTest(xjdfHelper, "processes/GangLayoutPosOrd.xjdf");
+	}
+
+	/**
+	 *
 	 * @param i
 	 * @param j
 	 */
-	private void addOutLayout(final int i, final int j, final boolean wantBS)
+	private void addOutLayout(final int i, final int j, final int k, final int n, final boolean wantBS)
 	{
-		final JDFAttributeMap partMap = new JDFAttributeMap("SheetName", "Sheet1");
-		final ResourceHelper lor = layout.getCreatePartition(0, true);
+		final JDFAttributeMap partMap = new JDFAttributeMap("SheetName", "Sheet" + (k + 1));
+		final ResourceHelper lor = layout.getCreatePartition(k, true);
 		lor.setPartMap(partMap);
 		final JDFLayout lo = (JDFLayout) lor.getResource();
-		final JDFPosition p = JDFPosition.createPosition(lo, i, j * 2, 2, 4);
-		p.setAttribute(AttributeName.GANGELEMENTID, GANG + (i * 2 + j));
-		final JDFPosition p2 = JDFPosition.createPosition(lo, i, j * 2 + 1, 2, 4);
-		p2.setAttribute(AttributeName.GANGELEMENTID, GANG + (i * 2 + j));
+		final JDFPosition p = JDFPosition.createPosition(lo, i, j * 2, 2, n);
+		final int pOrd = n * k + i * n / 2 + j;
+		p.setAttribute(AttributeName.GANGELEMENTID, GANG + pOrd);
+		p.setAttribute(AttributeName.POSITIONORD, "" + pOrd);
+
+		final JDFPosition p2 = JDFPosition.createPosition(lo, i, j * 2 + 1, 2, n);
+		p2.setAttribute(AttributeName.GANGELEMENTID, GANG + pOrd);
+		p2.setAttribute(AttributeName.POSITIONORD, "" + pOrd);
+
 		if (wantBS)
 		{
 			final SetHelper sh = xjdfHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
-			final String bsIJ = "BS_" + i + "_" + j;
+			final String bsIJ = "BS_" + (k * n + i) + "_" + j;
 			partMap.put(XJDFConstants.BinderySignatureID, bsIJ);
 			final JDFBinderySignature bs = (JDFBinderySignature) sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsIJ), true).getResource();
 			bs.setBinderySignatureType(EnumBinderySignatureType.Grid);
@@ -309,7 +340,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 		final int nGang = gang.numSiblingElements(ElementName.GANGELEMENT, null);
 		gang.setGangElementID(GANG + nGang);
 		gang.setJobID(GANG + nGang * 10);
-		gang.setOrderQuantity(1000 - nGang * 50);
+		gang.setOrderQuantity(1000 - nGang * 50 + 25);
 		return gang;
 	}
 

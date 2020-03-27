@@ -2440,10 +2440,9 @@ public final class AttributeName
 	public static final String POOL = "Pool";
 	/** */
 	public static final String POSITION = "Position";
+	public static final String POSITIONORD = "PositionOrd";
 	public static final String POSITIONPOLICY = "PositionPolicy";
-	/** */
 	public static final String POSITIONX = "PositionX";
-	/** */
 	public static final String POSITIONY = "PositionY";
 	/** */
 	public static final String POSTALCODE = "PostalCode";
