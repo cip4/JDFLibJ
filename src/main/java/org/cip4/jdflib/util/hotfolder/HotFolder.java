@@ -287,9 +287,13 @@ public class HotFolder
 	public synchronized void restart()
 	{
 		stop();
-		if (!dir.canWrite())
+		if (dir.canWrite())
 		{
-			log.error("Cannot use read only hot folder at");
+			log.info("Restarting " + toString());
+		}
+		else
+		{
+			log.error("Cannot use read only hot folder at " + this);
 		}
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
 		r.add(this);
@@ -382,10 +386,7 @@ public class HotFolder
 		HotFileRunner(final File fileJ)
 		{
 			super();
-			if (hfRunning != null)
-			{
-				hfRunning.add(fileJ);
-			}
+			hfRunning.add(fileJ);
 			this.fileJ = fileJ;
 		}
 
@@ -404,7 +405,7 @@ public class HotFolder
 				}
 				catch (final Throwable x)
 				{
-					log.error("exception processing hot files", x);
+					log.error("exception processing hot file", x);
 				}
 			}
 			if (fileJ != null)
@@ -429,7 +430,7 @@ public class HotFolder
 	@Override
 	public String toString()
 	{
-		return getClass().getSimpleName() + " " + dir + " " + lastModified + " maxConcurrent=" + getMaxConcurrent();
+		return getClass().getSimpleName() + " " + dir + " " + lastModified;
 	}
 
 	/**

@@ -39,6 +39,7 @@ package org.cip4.jdflib.util.hotfolder;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -61,9 +62,9 @@ class StorageHotFolderListener implements HotFolderListener
 	private File okStorage;
 	final StorageHotFolder parent;
 	protected final Log log;
-	private int nHotOK;
-	private int nHotError;
-	private int nQueued;
+	private final AtomicInteger nHotOK;
+	private final AtomicInteger nHotError;
+	private final AtomicInteger nQueued;
 	private int maxStore;
 
 	/**
@@ -74,7 +75,9 @@ class StorageHotFolderListener implements HotFolderListener
 	StorageHotFolderListener(final File storageDir, final HotFolderListener hfListener, final StorageHotFolder parent)
 	{
 		super();
-		nHotOK = nHotError = nQueued = 0;
+		nHotOK = new AtomicInteger();
+		nHotError = new AtomicInteger();
+		nQueued = new AtomicInteger();
 		setMaxStore(42);
 		errorStorage = null;
 		okStorage = null;
@@ -296,7 +299,7 @@ class StorageHotFolderListener implements HotFolderListener
 	 */
 	private void cleanup(final boolean bOK)
 	{
-		final int nHot = bOK ? nHotOK++ : nHotError++;
+		final int nHot = bOK ? nHotOK.incrementAndGet() : nHotError.incrementAndGet();
 		final int check = Math.max(1, maxAux / 4);
 		if (nHot % check == 0)
 		{
@@ -321,7 +324,11 @@ class StorageHotFolderListener implements HotFolderListener
 	void cleanupSingle(final int i, final File hotFile)
 	{
 		boolean ok = i > maxStore ? FileUtil.forceDelete(hotFile) : true;
-		if (!ok)
+		if (ok)
+		{
+			log.info("deleted temporary file " + hotFile.getAbsolutePath());
+		}
+		else
 		{
 			log.warn("failed to delete temporary file " + hotFile.getAbsolutePath());
 		}
@@ -330,9 +337,13 @@ class StorageHotFolderListener implements HotFolderListener
 		if (aux != null)
 		{
 			ok = FileUtil.deleteAll(aux);
-			if (!ok)
+			if (ok)
 			{
-				log.warn("failed to delete temporary directory " + aux.getAbsolutePath());
+				log.info("deleted temporary aux directory " + aux.getAbsolutePath());
+			}
+			else
+			{
+				log.warn("failed to delete temporary aux directory " + aux.getAbsolutePath());
 			}
 		}
 	}
@@ -341,7 +352,10 @@ class StorageHotFolderListener implements HotFolderListener
 	{
 		final String name = hotFile == null ? null : hotFile.getName();
 		if (StringUtil.isEmpty(name))
+		{
+			log.error("invalid hot file: " + hotFile);
 			return null;
+		}
 		final File tmpDir = getTmpDir();
 		final File newAbsoluteFile = FileUtil.getFileInDirectory(tmpDir, new File(name));
 		boolean ok = false;
@@ -406,7 +420,7 @@ class StorageHotFolderListener implements HotFolderListener
 
 	private synchronized File getTmpDir()
 	{
-		return FileUtil.getFileInDirectory(storage, new File("tmp." + nQueued++));
+		return FileUtil.getFileInDirectory(storage, new File("tmp." + nQueued.incrementAndGet()));
 	}
 
 	/**
@@ -435,8 +449,8 @@ class StorageHotFolderListener implements HotFolderListener
 	public String toString()
 	{
 		return "StorageHotFolderListener [" + (storage != null ? "storage=" + storage + ", " : "") + (errorStorage != null ? "errorStorage=" + errorStorage + ", " : "")
-				+ (okStorage != null ? "okStorage=" + okStorage + ", " : "") + (parent != null ? "parent=" + parent + ", " : "") + "nHotOK=" + nHotOK + ", nHotError=" + nHotError
-				+ ", nQueued=" + nQueued + ", maxStore=" + maxStore + ", maxAux=" + maxAux + "]";
+				+ (okStorage != null ? "okStorage=" + okStorage + ", " : "") + (parent != null ? "parent=" + parent + ", " : "") + "nHotOK=" + nHotOK + ", nHotError=" + nHotError + ", nQueued="
+				+ nQueued + ", maxStore=" + maxStore + ", maxAux=" + maxAux + "]";
 	}
 
 }
