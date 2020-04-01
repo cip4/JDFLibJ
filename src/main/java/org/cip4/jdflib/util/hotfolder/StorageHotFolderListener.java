@@ -44,6 +44,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.MyPair;
 import org.cip4.jdflib.util.RollingBackupFile;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
@@ -142,8 +143,8 @@ class StorageHotFolderListener implements HotFolderListener
 	public boolean hotFile(final File hotFile)
 	{
 		log.info("processing hot file: " + hotFile);
-		final File storedFile = getStoredFile(hotFile);
-		if (storedFile == null)
+		final MyPair<File, File> storedFiles = getStoredFile(hotFile);
+		if (storedFiles == null)
 		{
 			log.warn("snafu retrieving file " + hotFile.getAbsolutePath());
 			copyCompleted(hotFile, false);
@@ -152,13 +153,16 @@ class StorageHotFolderListener implements HotFolderListener
 		boolean b = false;
 		try
 		{
-			b = theListener.hotFile(storedFile);
+			b = theListener.hotFile(storedFiles.getA());
 		}
 		catch (final Throwable t)
 		{
 			log.error("Could not process " + hotFile, t);
 		}
-		copyCompleted(storedFile, b);
+		copyCompleted(storedFiles.getA(), b);
+		log.info("deleting tmp file: " + storedFiles.getB());
+		FileUtil.deleteAll(storedFiles.getB());
+
 		return b;
 	}
 
@@ -167,6 +171,7 @@ class StorageHotFolderListener implements HotFolderListener
 	 *
 	 * @param storedFile the file to move
 	 * @param bOK if true, ok else error
+	 * @param bZappTmp
 	 */
 	void copyCompleted(final File storedFile, final boolean bOK)
 	{
@@ -264,7 +269,6 @@ class StorageHotFolderListener implements HotFolderListener
 			}
 		}
 		final File tmp = storedFile.getParentFile();
-		FileUtil.deleteAll(tmp);
 	}
 
 	protected boolean handleBad(final File storedFile, final boolean bOK)
@@ -323,20 +327,22 @@ class StorageHotFolderListener implements HotFolderListener
 
 	void cleanupSingle(final int i, final File hotFile)
 	{
-		boolean ok = i > maxStore ? FileUtil.forceDelete(hotFile) : true;
-		if (ok)
+		if (i > maxStore)
 		{
-			log.info("deleted temporary file " + hotFile.getAbsolutePath());
+			final boolean ok = FileUtil.forceDelete(hotFile);
+			if (ok)
+			{
+				log.info("deleted temporary file " + hotFile.getAbsolutePath());
+			}
+			else
+			{
+				log.warn("failed to delete temporary file " + hotFile.getAbsolutePath());
+			}
 		}
-		else
-		{
-			log.warn("failed to delete temporary file " + hotFile.getAbsolutePath());
-		}
-
 		final File aux = i > maxAux ? FileUtil.getAuxDir(hotFile) : null;
 		if (aux != null)
 		{
-			ok = FileUtil.deleteAll(aux);
+			final boolean ok = FileUtil.deleteAll(aux);
 			if (ok)
 			{
 				log.info("deleted temporary aux directory " + aux.getAbsolutePath());
@@ -348,7 +354,7 @@ class StorageHotFolderListener implements HotFolderListener
 		}
 	}
 
-	File getStoredFile(final File hotFile)
+	MyPair<File, File> getStoredFile(final File hotFile)
 	{
 		final String name = hotFile == null ? null : hotFile.getName();
 		if (StringUtil.isEmpty(name))
@@ -389,7 +395,7 @@ class StorageHotFolderListener implements HotFolderListener
 		{
 			processAux(hotFile, tmpDir);
 		}
-		return ok ? newAbsoluteFile : null;
+		return ok ? new MyPair<>(newAbsoluteFile, tmpDir) : null;
 	}
 
 	void processAux(final File hotFile, final File tmpDir)

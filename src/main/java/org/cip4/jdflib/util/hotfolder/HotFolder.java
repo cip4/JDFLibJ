@@ -119,12 +119,12 @@ public class HotFolder
 		final long t0 = System.currentTimeMillis();
 		final long lastMod = dir.lastModified();
 		final int n = lastFileTime.size();
-		if (lastMod > lastModified || lastFileTime.size() > 0 || (t0 - lastModified) < 42000)
+		if (lastMod > lastModified || n > 0 || (t0 - lastModified) < 42000)
 		// has the directory been touched?
 		{
 			lastModified = lastMod;
 			File[] files = getHotFiles();
-			if (lastFileTime.size() > 0)
+			if (lastFileTime.size() > 0 && files != null)
 			{
 				final int fileListLength = files == null ? 0 : files.length;
 				for (int i = 0; i < lastFileTime.size(); i++)
@@ -358,8 +358,8 @@ public class HotFolder
 		boolean found = true;
 		if (lftAt.sameModified() && ((lftAt.modified + stabilizeTime) < System.currentTimeMillis()))
 		{
-			HotFolderRunner.getTherunner().runFile(new HotFileRunner(lftAt.f));
 			lastFileTime.remove(lftAt);
+			HotFolderRunner.getTherunner().runFile(new HotFileRunner(lftAt.f));
 		}
 		else if (!lftAt.exists())
 		{

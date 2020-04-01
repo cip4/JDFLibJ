@@ -704,7 +704,7 @@ public class FileUtil
 		{
 			toDir.mkdirs();
 		}
-		final File newFile = getFileInDirectory(toDir, new File(fromFile.getName()));
+		final File newFile = new File(toDir, fromFile.getName());
 		final boolean b = moveFile(fromFile, newFile);
 		return b ? newFile : null;
 	}

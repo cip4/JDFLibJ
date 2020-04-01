@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,12 +36,17 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.junit.Test;
-
-import junit.framework.TestCase;
 
 /**
  * JUnit test case for PlatformUtil class.
@@ -51,7 +56,7 @@ import junit.framework.TestCase;
  *         01.09.2009
  *
  */
-public class PlatformUtilTest extends TestCase
+public class PlatformUtilTest extends JDFTestCaseBase
 {
 
 	/**
@@ -74,6 +79,16 @@ public class PlatformUtilTest extends TestCase
 		System.setProperty("foo.bar", "fnarf");
 		assertEquals("fnarf", PlatformUtil.getProperty("foo.bar"));
 		System.setProperty("foo.bar", "");
+	}
+
+	/**
+	 * Test method for {@link org.cip4.jdflib.util.PlatformUtil#isWindows()}.
+	 */
+	@Test
+	public void testGetJavaVersion()
+	{
+		log.info(PlatformUtil.getJavaVersion());
+		assertNotNull(PlatformUtil.getJavaVersion());
 	}
 
 	/**
