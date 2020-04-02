@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -84,7 +84,7 @@ public class TimeSweeper implements Sweeper
 	 *
 	 * @param interval in seconds
 	 */
-	protected void setInterval(final int interval)
+	public void setInterval(final int interval)
 	{
 		this.interval = 1000l * interval;
 	}
@@ -94,7 +94,7 @@ public class TimeSweeper implements Sweeper
 	 *
 	 * @param interval in seconds
 	 */
-	protected void setFirstInterval(final int interval)
+	public void setFirstInterval(final int interval)
 	{
 		this.t0 = System.currentTimeMillis() + 1000 * interval;
 	}

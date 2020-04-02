@@ -1157,7 +1157,7 @@ public final class AttributeName
 	public static final String FOLDERMODULEINDEX = "FolderModuleIndex";
 	/** */
 	public static final String FOLDINDEX = "FoldIndex";
-	/** */
+	public static final String FOLDINGDETAILS = "FoldingDetails";
 	public static final String FOLDINGWIDTH = "FoldingWidth";
 	/** */
 	public static final String FOLDLAY = "FoldLay";
