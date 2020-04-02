@@ -52,16 +52,19 @@ class FileTime
 {
 	protected final File f;
 	protected long modified;
+	protected long length;
 
 	protected FileTime(final File _f)
 	{
 		f = _f;
 		modified = -1;
+		length = 0;
 	}
 
 	protected long updateModified()
 	{
 		modified = (modified <= 0) ? System.currentTimeMillis() : Math.max(modified, lastModified());
+		length = lastLength();
 		return modified;
 	}
 
@@ -73,7 +76,8 @@ class FileTime
 	protected boolean sameModified()
 	{
 		final long lastModified = lastModified();
-		return lastModified > 0 && modified >= lastModified;
+		final long lastLength = lastLength();
+		return lastModified > 0 && modified >= lastModified && lastLength >= 0 && length == lastLength;
 	}
 
 	protected long lastModified()
@@ -81,10 +85,15 @@ class FileTime
 		return ((f == null) || !f.canWrite()) ? 0 : f.lastModified();
 	}
 
+	protected long lastLength()
+	{
+		return ((f == null) || !f.canWrite()) ? -1 : f.length();
+	}
+
 	@Override
 	public String toString()
 	{
-		return f + JDFConstants.BLANK + modified;
+		return f + JDFConstants.BLANK + modified + " " + length;
 	}
 
 	/**

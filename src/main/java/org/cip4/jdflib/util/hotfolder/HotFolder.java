@@ -72,7 +72,7 @@ public class HotFolder
 	/**
 	 * the default time time in milliseconds to wait for stabilization
 	 */
-	private static int defaultStabilizeTime = 4000; // time between reads in milliseconds -
+	private static int defaultStabilizeTime = 6666; // time between reads in milliseconds -
 	/**
 	 * the time in milliseconds to wait for stabilization
 	 */
