@@ -49,7 +49,6 @@ import org.cip4.jdflib.auto.JDFAutoFoldingIntent;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.w3c.dom.DOMException;
 
 public class JDFFoldingIntent extends JDFAutoFoldingIntent
 {
@@ -71,9 +70,8 @@ public class JDFFoldingIntent extends JDFAutoFoldingIntent
 	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
-	 * @throws DOMException
 	 */
-	public JDFFoldingIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
+	public JDFFoldingIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -84,9 +82,8 @@ public class JDFFoldingIntent extends JDFAutoFoldingIntent
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
-	 * @throws DOMException
 	 */
-	public JDFFoldingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
+	public JDFFoldingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -98,9 +95,8 @@ public class JDFFoldingIntent extends JDFAutoFoldingIntent
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
-	 * @throws DOMException
 	 */
-	public JDFFoldingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFFoldingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

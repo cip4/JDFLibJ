@@ -47,47 +47,40 @@ package org.cip4.jdflib.span;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.w3c.dom.DOMException;
 
 public class JDFSpanOrientation extends JDFEnumerationSpan
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Constructor for JDFSpanBindingLength
 	 *
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
-	 * @throws DOMException
 	 */
-	public JDFSpanOrientation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
+	public JDFSpanOrientation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
-	 * Constructor for JDFSpanBindingLength
 	 *
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @throws DOMException
 	 */
-	public JDFSpanOrientation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
+	public JDFSpanOrientation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
-	 * Constructor for JDFSpanBindingLength
 	 *
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
-	 * @throws DOMException
+	 * @param myLocalName
 	 */
-	public JDFSpanOrientation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFSpanOrientation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -103,14 +96,4 @@ public class JDFSpanOrientation extends JDFEnumerationSpan
 		return EnumOrientation.getEnum(0);
 	}
 
-	/**
-	 * toString
-	 *
-	 * @return String
-	 */
-	@Override
-	public String toString()
-	{
-		return "JDFSpanOrientation[  --> " + super.toString() + " ]";
-	}
 }

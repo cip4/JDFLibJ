@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.resource.intent;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 import org.cip4.jdflib.core.ElementName;
@@ -56,6 +57,7 @@ public class JDFFoldingIntentTest
 		final JDFFoldingIntent fi = (JDFFoldingIntent) new JDFDoc(ElementName.FOLDINGINTENT).getRoot();
 		final JDFSpanOrientation o = fi.getCreateOrientation();
 		o.setActual(EnumOrientation.Flip180);
+		assertEquals(EnumOrientation.Flip180.getName(), o.guessActual());
 	}
 
 	/**
