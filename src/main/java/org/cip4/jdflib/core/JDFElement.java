@@ -5963,9 +5963,8 @@ public class JDFElement extends KElement
 	 * @param idUsage
 	 *
 	 * @return String the attribute value
-	 * @deprecated use getGeneralID(idUsage, 0)
+	 *
 	 */
-	@Deprecated
 	public String getGeneralID(final String idUsage)
 	{
 		return getGeneralID(idUsage, 0);
@@ -5979,17 +5978,11 @@ public class JDFElement extends KElement
 	 *
 	 * @return String the attribute value
 	 */
-	public String getGeneralID(final String idUsage, int iPos)
+	public String getGeneralID(final String idUsage, final int iPos)
 	{
 		final VElement v = getChildElementVector(ElementName.GENERALID, null, new JDFAttributeMap(AttributeName.IDUSAGE, idUsage), true, 0, true);
-		if (iPos < 0)
-			iPos += v.size();
-		if (iPos < 0 || iPos >= v.size())
-		{
-			return null;
-		}
-		final JDFGeneralID gid = (JDFGeneralID) v.elementAt(iPos);
-		return gid.getIDValue();
+		final JDFGeneralID gid = (JDFGeneralID) ContainerUtil.get(v, iPos);
+		return gid == null ? null : gid.getIDValue();
 	}
 
 	/**
