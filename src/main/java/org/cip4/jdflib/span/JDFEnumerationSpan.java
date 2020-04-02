@@ -45,7 +45,6 @@
  */
 package org.cip4.jdflib.span;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Vector;
 
@@ -136,23 +135,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 			final ValuedEnum ve = (ValuedEnum) m.invoke(null, args);
 			return ve;
 		}
-		catch (final SecurityException e1)
-		{
-			// in case of exceptions, simply apply NMTOKENS rule
-		}
-		catch (final NoSuchMethodException e1)
-		{
-			// in case of exceptions, simply apply NMTOKENS rule
-		}
-		catch (final IllegalArgumentException e)
-		{
-			// in case of exceptions, simply apply NMTOKENS rule
-		}
-		catch (final IllegalAccessException e)
-		{
-			// in case of exceptions, simply apply NMTOKENS rule
-		}
-		catch (final InvocationTargetException e)
+		catch (final Exception e)
 		{
 			// in case of exceptions, simply apply NMTOKENS rule
 		}
