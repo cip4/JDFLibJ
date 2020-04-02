@@ -574,7 +574,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.OR, JDFLIB + "resource.devicecapability.JDFor");
 		sm_PackageNames.put(ElementName.ORDERINGPARAMS, JDFLIB + "resource.process.JDFOrderingParams");
 		sm_PackageNames.put(ElementName.ORGANIZATIONALUNIT, JDF_COMMENT);
-		sm_PackageNames.put(ElementName.ORIENTATION, NUMBER_SPAN);
+		sm_PackageNames.put(ElementName.ORIENTATION, "org.cip4.jdflib.span.JDFSpanOrientation");
 		sm_PackageNames.put(ElementName.OTHERWISE, JDFLIB + "resource.devicecapability.JDFotherwise");
 		sm_PackageNames.put(ElementName.OVERAGE, NUMBER_SPAN);
 

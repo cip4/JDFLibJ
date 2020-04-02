@@ -52,7 +52,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.postpress.JDFFold;
 import org.cip4.jdflib.span.JDFNameSpan;
-import org.cip4.jdflib.span.JDFNumberSpan;
+import org.cip4.jdflib.span.JDFSpanOrientation;
 
 /**
  *****************************************************************************
@@ -262,9 +262,9 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	 * 
 	 * @return JDFSpanOrientation the element
 	 */
-	public JDFNumberSpan getOrientation()
+	public JDFSpanOrientation getOrientation()
 	{
-		return (JDFNumberSpan) getElement(ElementName.ORIENTATION, null, 0);
+		return (JDFSpanOrientation) getElement(ElementName.ORIENTATION, null, 0);
 	}
 
 	/**
@@ -272,9 +272,9 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	 * 
 	 * @return JDFSpanOrientation the element
 	 */
-	public JDFNumberSpan getCreateOrientation()
+	public JDFSpanOrientation getCreateOrientation()
 	{
-		return (JDFNumberSpan) getCreateElement_JDFElement(ElementName.ORIENTATION, null, 0);
+		return (JDFSpanOrientation) getCreateElement_JDFElement(ElementName.ORIENTATION, null, 0);
 	}
 
 	/**
@@ -282,9 +282,9 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	 * 
 	 * @return JDFSpanOrientation the element @ if the element already exists
 	 */
-	public JDFNumberSpan appendOrientation()
+	public JDFSpanOrientation appendOrientation()
 	{
-		return (JDFNumberSpan) appendElementN(ElementName.ORIENTATION, 1, null);
+		return (JDFSpanOrientation) appendElementN(ElementName.ORIENTATION, 1, null);
 	}
 
 }
