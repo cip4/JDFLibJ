@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -208,8 +208,7 @@ public class RemovePrivate extends BaseElementWalker
 			}
 			else
 			{
-				b = !(toCheck instanceof JDFElement);
-				b = b && !JDFConstants.JDFNAMESPACE.equals(toCheck.getNamespaceURI());
+				b = !JDFConstants.JDFNAMESPACE.equals(toCheck.getNamespaceURI());
 			}
 			return b;
 		}

@@ -84,7 +84,7 @@ public class StringUtil
 	/**
 	 *
 	 */
-	public static final String UTF8 = "UTF-8";
+	public static final String UTF8 = StandardCharsets.UTF_8.name();
 
 	private static final String m_sep = JDFConstants.BLANK;
 
@@ -1988,7 +1988,7 @@ public class StringUtil
 			}
 			catch (final UnsupportedEncodingException e)
 			{
-				return null;
+				return new String(utf8, StandardCharsets.UTF_8);
 			}
 		}
 		return null;

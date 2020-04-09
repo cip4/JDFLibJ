@@ -79,6 +79,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6304,7 +6305,7 @@ public class KElement extends ElementNSImpl implements Element
 		}
 		try
 		{
-			stream.write(toXML().getBytes(StringUtil.UTF8));
+			stream.write(toXML().getBytes(StandardCharsets.UTF_8));
 			return true;
 		}
 		catch (final IOException e)
