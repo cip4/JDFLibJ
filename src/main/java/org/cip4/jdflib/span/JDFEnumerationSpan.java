@@ -45,9 +45,9 @@
  */
 package org.cip4.jdflib.span;
 
-import java.lang.reflect.Method;
 import java.util.Vector;
 
+import org.apache.commons.lang.enums.EnumUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -127,19 +127,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 */
 	public ValuedEnum getEnum(final String value)
 	{
-		try
-		{
-			final Class<?> methodArgs[] = { String.class };
-			final Method m = getEnumType().getClass().getMethod("getEnum", methodArgs);
-			final Object args[] = { value };
-			final ValuedEnum ve = (ValuedEnum) m.invoke(null, args);
-			return ve;
-		}
-		catch (final Exception e)
-		{
-			// in case of exceptions, simply apply NMTOKENS rule
-		}
-		return null;
+		return (ValuedEnum) EnumUtils.getEnum(getEnumType().getClass(), value);
 	}
 
 	/**
@@ -149,7 +137,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 */
 	public void setActual(final ValuedEnum value)
 	{
-		setAttribute(AttributeName.ACTUAL, value.getName(), null);
+		setAttribute(AttributeName.ACTUAL, value == null ? null : value.getName(), null);
 	}
 
 	/**
@@ -169,7 +157,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 */
 	public void setPreferred(final ValuedEnum value)
 	{
-		setAttribute(AttributeName.PREFERRED, value.getName(), null);
+		setAttribute(AttributeName.PREFERRED, value == null ? null : value.getName(), null);
 	}
 
 	/**
@@ -231,7 +219,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	public boolean init()
 	{
 		final boolean b = super.init();
-		this.setDataType(EnumDataType.EnumerationSpan);
+		setDataType(EnumDataType.EnumerationSpan);
 		return b;
 	}
 
