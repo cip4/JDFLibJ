@@ -439,6 +439,15 @@ public class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testUnEscape()
+	{
+		assertEquals("\\", StringUtil.unEscape("\\\\", "\\", -1, 1));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testExtension()
 	{
 		final String iri = "file://my.Host/a.n/c%20ï¿½ï¿½ï¿½%25&?.txtï¿½";

@@ -2314,6 +2314,10 @@ public class StringUtil
 			{
 				byteEscape[n++] = byteUnEscape[i];
 			}
+			else if (iRadix <= 0 && (i + 1) < byteUnEscape.length)
+			{
+				byteEscape[n++] = byteUnEscape[++i];
+			}
 			else
 			{
 				for (int j = 0; j < escapeLen; j++)
