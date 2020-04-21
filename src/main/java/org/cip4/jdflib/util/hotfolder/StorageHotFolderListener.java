@@ -376,7 +376,7 @@ class StorageHotFolderListener implements HotFolderListener
 					log.error("file disappeared while waiting: " + hotFile.getAbsolutePath());
 					return null;
 				}
-				if (!ThreadUtil.sleep(parent.getStabilizeTime()))
+				if (!ThreadUtil.sleep((i + 2) * parent.getStabilizeTime()))
 				{
 					log.error("Interrupted while waiting to move file from: " + hotFile.getAbsolutePath() + " to " + newAbsoluteFile.getAbsolutePath());
 					return null;

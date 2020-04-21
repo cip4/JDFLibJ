@@ -51,6 +51,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -1457,6 +1458,16 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(EDataType.numberlist, StringUtil.getDataType(" 1 1.234 "));
 		assertEquals(EDataType.string, StringUtil.getDataType(" 1a1.234 "));
 		assertNull(StringUtil.getDataType(null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testgetCharset()
+	{
+		assertEquals(StandardCharsets.UTF_8, StringUtil.getCharset(StringUtil.UTF8));
+		assertEquals(StandardCharsets.ISO_8859_1, StringUtil.getCharset("8859_1"));
 	}
 
 	/**

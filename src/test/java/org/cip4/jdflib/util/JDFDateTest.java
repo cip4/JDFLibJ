@@ -106,6 +106,17 @@ public class JDFDateTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testCreateDateSeconds() throws DataFormatException
+	{
+		assertEquals(JDFDate.createDate("1587055153"), new JDFDate(1587055153));
+		assertEquals(2020, new JDFDate(1587055153).getYear());
+	}
+
+	/**
+	 * @throws DataFormatException
+	 *
+	 */
+	@Test
 	public void testRoundDate() throws DataFormatException
 	{
 		final JDFDate d = new JDFDate();

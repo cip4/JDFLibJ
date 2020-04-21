@@ -51,6 +51,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
@@ -1494,6 +1495,23 @@ public class StringUtil
 	public static boolean isNumberList(final String strWork)
 	{
 		return JDFNumberList.createNumberList(strWork) != null;
+	}
+
+	/**
+	 *
+	 * @param csName
+	 * @return
+	 */
+	public static Charset getCharset(final String csName)
+	{
+		try
+		{
+			return Charset.forName(csName);
+		}
+		catch (final Exception e)
+		{
+			return null;
+		}
 	}
 
 	/**
