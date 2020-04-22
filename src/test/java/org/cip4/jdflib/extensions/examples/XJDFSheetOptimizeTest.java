@@ -168,6 +168,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 				relBox.shift(0.5, 0);
 			pos.setRelativeBox(relBox);
 			pos.setAttribute(XJDFConstants.BinderySignatureID, "BS" + i);
+			pos.setAttribute(AttributeName.GANGELEMENTID, GANG + i);
 
 			final SetHelper sh = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 			final JDFBinderySignature bs = (JDFBinderySignature) sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS" + i), true).getResource();
@@ -226,6 +227,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 				relBox.shift(0.5, 0);
 			pos.setRelativeBox(relBox);
 			pos.setAttribute(XJDFConstants.BinderySignatureID, "BS" + i);
+			pos.setAttribute(AttributeName.GANGELEMENTID, GANG + i);
 		}
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "processes/CutGangOutBS.xjdf");
@@ -258,7 +260,8 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 		{
 			for (int j = 0; j < 2; j++)
 			{
-				addGang();
+				addGang().setAttribute(XJDFConstants.PlacedQuantity, "" + (2 * 513));
+
 				addOutLayout(i, j, 0, 4, false);
 			}
 		}
@@ -339,7 +342,7 @@ public class XJDFSheetOptimizeTest extends ExampleTest
 		final JDFGangElement gang = (JDFGangElement) sheetOptimizingParams.appendElement(ElementName.GANGELEMENT);
 		final int nGang = gang.numSiblingElements(ElementName.GANGELEMENT, null);
 		gang.setGangElementID(GANG + nGang);
-		gang.setJobID(GANG + nGang * 10);
+		gang.setJobID("CustomerJob" + nGang * 10);
 		gang.setOrderQuantity(1000 - nGang * 50 + 25);
 		return gang;
 	}

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -116,7 +116,7 @@ public class WalkDeviceInfo extends WalkJDFSubElement
 	 *
 	 * @param map
 	 */
-	private void updateDeviceStatus(final JDFAttributeMap map)
+	void updateDeviceStatus(final JDFAttributeMap map)
 	{
 		map.renameKey(AttributeName.DEVICESTATUS, AttributeName.STATUS);
 		String status = map.get(AttributeName.STATUS);
@@ -133,7 +133,7 @@ public class WalkDeviceInfo extends WalkJDFSubElement
 			{
 				status = "Offline";
 			}
-			else if ("Setup".equals(status) || "Running".equals(status) || "Cleanup".equals(status))
+			else if ("Running".equals(status))
 			{
 				status = "Production";
 			}

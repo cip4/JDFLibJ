@@ -113,6 +113,7 @@ public abstract class XJDFConstants
 	public static final String PartWaste = "PartWaste";
 	public static final String Pattern = "Pattern";
 	public static final String PlacedObject = "PlacedObject";
+	public static final String PlacedQuantity = "PlacedQuantity";
 	public static final String PositionRef = "PositionRef";
 	public static final String PlateRef = "PlateRef";
 	public static final String PreflightItem = "PreflightItem";

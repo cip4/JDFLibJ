@@ -45,11 +45,13 @@
  */
 package org.cip4.jdflib.core;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.util.List;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -70,6 +72,7 @@ import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -416,6 +419,37 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	public void tearDown() throws Exception
 	{
 		super.tearDown();
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	@Ignore
+	public void testSamples()
+	{
+		final List<File> l = FileUtil.listFilesInTree(new File("/gitreps/jdfschema/samples"), "*.j*");
+		for (final File f : l)
+		{
+			if (!"further".equalsIgnoreCase(f.getParentFile().getName()))
+			{
+				if ("actionpool.jdf".equalsIgnoreCase(f.getName()))
+					continue;
+				if ("featurepool.jdf".equalsIgnoreCase(f.getName()))
+					continue;
+				if ("updateJDFCommand.jmf".equalsIgnoreCase(f.getName()))
+					continue;
+				if ("automatedImpositionMarkObject.jdf".equalsIgnoreCase(f.getName()))
+					continue;
+				if (f.getName().toLowerCase().indexOf("invalid") >= 0)
+					continue;
+				if (StringUtil.matchesIgnoreCase(f.getName(), "custom*.jmf"))
+					continue;
+				final JDFDoc doc = p.parseFile(f);
+				assertNotNull(f.getName(), doc);
+				assertEquals(f.getAbsolutePath(), "Valid", doc.getValidationResult().getRoot().getAttribute("ValidationResult"));
+			}
+		}
 	}
 
 }

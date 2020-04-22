@@ -36,11 +36,14 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.xml.validation.SchemaFactory;
@@ -61,6 +64,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
@@ -301,6 +305,25 @@ public class XJDFSchemaTest extends JDFTestCaseBase
 		root.setAttribute("Types", "ConventionalPrinting");
 		root.setAttribute(AttributeName.VERSION, "2.1");
 		writeTest(root, "../SimpleCP.xjdf", true, null);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	@Ignore
+	public void testSamples()
+	{
+		final List<File> l = FileUtil.listFilesInTree(new File("/gitreps/schema/xjdf/src/main/resources/samples"), "*.xj*");
+		for (final File f : l)
+		{
+			if (!"further".equalsIgnoreCase(f.getParentFile().getName()))
+			{
+				final JDFDoc doc = getXJDFSchemaParser(2, 1).parseFile(f);
+				assertNotNull(f.getName(), doc);
+				assertEquals(f.getAbsolutePath(), "Valid", doc.getValidationResult().getRoot().getAttribute("ValidationResult"));
+			}
+		}
 	}
 
 	/**

@@ -343,7 +343,7 @@ public class XJMFExampleTest extends ExampleTest
 	{
 		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
 		final XJMFHelper xjmfHelper = new XJMFHelper().newXJMF(EnumVersion.Version_2_1);
-		;
+
 		final MessageHelper q = xjmfHelper.appendMessage(EnumFamily.Response, EnumType.Resource);
 		q.getHeader().setID("S1");
 		q.getHeader().setAttribute(AttributeName.REFID, "Sub1");
