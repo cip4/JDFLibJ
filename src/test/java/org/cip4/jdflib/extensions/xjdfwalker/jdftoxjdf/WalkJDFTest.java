@@ -47,6 +47,7 @@ import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.junit.Test;
@@ -127,7 +128,7 @@ public class WalkJDFTest extends JDFTestCaseBase
 	@Override
 	public void setUp() throws Exception
 	{
-		JDFToXJDF.setDefaultVersion(EnumVersion.Version_2_0);
+		JDFToXJDF.setDefaultVersion(XJDFHelper.defaultVersion());
 		super.setUp();
 	}
 
