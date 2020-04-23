@@ -151,7 +151,7 @@ public abstract class JDFTestCaseBase
 	 */
 	protected static JDFParser getXJDFSchemaParser()
 	{
-		return getXJDFSchemaParser(2, 0);
+		return getXJDFSchemaParser(2, 1);
 	}
 
 	/**
