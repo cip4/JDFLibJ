@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,17 +88,17 @@ public class WalkDeviceInfoTest extends JDFTestCaseBase
 	@Test
 	public void testStatus()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
 		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Running);
 		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Setup);
 		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Cleanup);
 		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Down);
 		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Idle);
-		KElement xjmf = new JDFToXJDF().convert(jmf);
+		final KElement xjmf = new JDFToXJDF().convert(jmf);
 		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@Status", null), "Offline");
 		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[2]/@Status", null), "Production");
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[3]/@Status", null), "Production");
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[4]/@Status", null), "Production");
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[3]/@Status", null), "Setup");
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[4]/@Status", null), "Cleanup");
 		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[5]/@Status", null), "Offline");
 		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[6]/@Status", null), "Idle");
 	}

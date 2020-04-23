@@ -124,6 +124,7 @@ public class XJDFResourceExampleTest extends ExampleTest
 	public final void testPrintConditions()
 	{
 		final XJDFHelper h = new XJDFHelper("PrintCondition", null, null);
+		h.setVersion(EnumVersion.Version_2_0);
 		h.addType(EnumType.ColorSpaceConversion).addType(EnumType.Interpreting).addType(EnumType.Rendering).addType(EnumType.DigitalPrinting);
 
 		final SetHelper sint = h.getCreateSet(ElementName.PRINTCONDITION, EnumUsage.Input);
