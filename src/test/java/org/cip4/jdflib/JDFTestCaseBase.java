@@ -501,7 +501,7 @@ public abstract class JDFTestCaseBase
 
 	int getMinor(final KElement e)
 	{
-		final String s = e.getInheritedAttribute(AttributeName.VERSION, null, "2.0");
+		final String s = e.getInheritedAttribute(AttributeName.VERSION, null, "2.1");
 		return StringUtil.parseInt(StringUtil.token(s, 1, "."), 0);
 	}
 

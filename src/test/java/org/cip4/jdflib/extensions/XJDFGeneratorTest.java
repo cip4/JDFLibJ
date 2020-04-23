@@ -144,7 +144,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 
 		final IntentHelper binding = ph.getCreateIntent("BindingIntent");
 		binding.setSpan("BindingType", EnumSpanBindingType.SaddleStitch.getName(), "EnumerationSpan");
-		binding.setSpan("ChildRefs", phCover.getProduct().getID(), null);
+		binding.setSpan("ChildRefs", phCover.getProduct().getID() + " " + phBody.getProduct().getID(), null);
 		final IntentHelper layout = ph.getCreateIntent("LayoutIntent");
 		layout.setSpan("Dimensions", "700 1000", "XYPairSpan");
 		theHelper.cleanUp();
