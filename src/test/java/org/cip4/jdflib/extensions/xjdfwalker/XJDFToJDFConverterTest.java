@@ -1897,4 +1897,41 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertEquals(EnumResStatus.Available, sp.getResStatus(false));
 	}
 
+	/**
+	 *
+	 */
+	@Test
+	public void testStrippingAmount()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
+		xjdfHelper.setTypes("Stripping");
+		final SetHelper shBS = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		final ResourceHelper rhBS = shBS.appendPartition(null, true);
+		final JDFBinderySignature bs = (JDFBinderySignature) rhBS.getResource();
+		bs.setFoldCatalog("F16-6");
+		bs.setBinderySignatureType(EnumBinderySignatureType.Fold);
+
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		rhBS.appendPartMap(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "bs1"));
+		final ResourceHelper rh = shLO.appendPartition(AttributeName.SHEETNAME, "sheet1", true);
+		final JDFLayout lo = (JDFLayout) rh.getResource();
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndBack.getName());
+		final KElement pos = lo.appendElement(ElementName.POSITION);
+		pos.setAttribute(XJDFConstants.BinderySignatureID, "bs1");
+
+		rh.setAmount(100, null, true);
+		rh.setAmount(5, null, false);
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xjdfHelper);
+		final JDFNode n = d.getJDFRoot();
+		final JDFLayout loj = (JDFLayout) n.getResource(ElementName.LAYOUT, EnumUsage.Input, 0);
+		assertEquals(EnumResStatus.Available, loj.getResStatus(false));
+		final JDFStrippingParams sp = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+		assertEquals(EnumResStatus.Available, sp.getResStatus(false));
+		final JDFResourceLink rlLO = n.getLink(loj, EnumUsage.Input);
+		final JDFResourceLink rlSP = n.getLink(sp, EnumUsage.Input);
+		assertEquals(105, rlLO.getAmount(null), 0.1);
+		assertNull(rlSP.getAmountPool());
+	}
 }

@@ -42,13 +42,17 @@ package org.cip4.jdflib.extensions.xjdfwalker;
 import java.util.Collection;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
-import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.XJDFToJDFImpl;
 import org.cip4.jdflib.ifaces.IXJDFSplit;
+import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.resource.process.JDFColor;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -109,7 +113,43 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 		{
 			d = super.convert(xjdf);
 		}
+		mapActualColors(d);
 		return d;
+	}
+
+	void mapActualColors(final JDFDoc d)
+	{
+		final KElement root = d.getRoot();
+
+		final Collection<JDFColor> vc = root.getChildArrayByClass(JDFColor.class, true, 0);
+		if (vc != null)
+		{
+			for (final JDFColor c : vc)
+			{
+				fixColor(root, c);
+			}
+		}
+	}
+
+	void fixColor(final KElement root, final JDFColor c)
+	{
+		c.removeChildrenByClass(JDFPart.class);
+		final String actual = c.getActualColorName();
+		final String name = c.getName();
+		if (!name.equals(actual))
+		{
+			c.setName(actual);
+			final VElement v = root.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.SEPARATION, name), false, true, 0);
+			for (final KElement e : v)
+			{
+				e.setAttribute(AttributeName.SEPARATION, actual);
+			}
+			final VElement w = root.getChildrenByTagName(ElementName.SEPARATIONSPEC, null, new JDFAttributeMap(AttributeName.NAME, name), false, true, 0);
+			for (final KElement e : w)
+			{
+				e.setAttribute(AttributeName.NAME, actual);
+			}
+		}
 	}
 
 	/**
@@ -131,7 +171,7 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 	 */
 	protected boolean needSplit(final KElement xjdf)
 	{
-		return splitter != null && xjdf != null && XJDFConstants.XJDF.equals(xjdf.getLocalName());
+		return splitter != null && XJDFHelper.isXJDF(xjdf);
 	}
 
 	/**

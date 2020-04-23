@@ -266,13 +266,6 @@
         </xs:restriction>
     </xs:simpleType>
                 
-    <xs:simpleType name="ForceGangPolicy">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="All"/>
-            <xs:enumeration value="Optimized"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="Edge">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Bottom"/>
@@ -429,6 +422,11 @@
             <xs:enumeration value="PS6"/>
             <xs:enumeration value="PS7"/>
             <xs:enumeration value="PS8"/>
+            <xs:enumeration value="LWCPlus"/>
+            <xs:enumeration value="LWCStandard"/>
+            <xs:enumeration value="NewsPlus"/>
+            <xs:enumeration value="SCPlus"/>
+            <xs:enumeration value="SCStandard"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -803,10 +801,12 @@
 
     <xs:simpleType name="DeviceStatus">
         <xs:restriction base="xs:string">
+            <xs:enumeration value="Cleanup"/>
             <xs:enumeration value="Idle"/>
             <xs:enumeration value="NonProductive"/>
             <xs:enumeration value="Offline"/>
             <xs:enumeration value="Production"/>
+            <xs:enumeration value="Setup"/>
             <xs:enumeration value="Stopped"/>
         </xs:restriction>
     </xs:simpleType>
@@ -1136,7 +1136,14 @@
     <xs:element name="GangCmdFilter">
         <xs:complexType>
             <xs:attribute name="GangNames" type="xs:NMTOKENS" use="optional"/>
-            <xs:attribute name="Policy" type="ForceGangPolicy" use="optional"/>
+            <xs:attribute name="Policy" use="optional">
+        		<xs:simpleType>
+              		<xs:restriction base="xs:NMTOKEN">
+            			<xs:enumeration value="All"/>
+            			<xs:enumeration value="Optimized"/>
+        			</xs:restriction>
+    			</xs:simpleType>
+           </xs:attribute>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -1203,6 +1210,7 @@
             <xs:attribute name="StatusDetails" type="xs:NMTOKEN" use="optional"/>
             <xs:attribute name="ToolIDs" type="xs:NMTOKENS" use="optional"/>
             <xs:attribute name="Waste" type="xs:float" use="optional"/>
+            <xs:attribute name="WorkStepID" type="xs:NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5652,18 +5660,33 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="1" ref="ConvertingConfig"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ConvertingConfig"/>
                     <xs:element maxOccurs="unbounded" minOccurs="1" ref="GangElement"/>
                 </xs:sequence>
-            	<xs:attribute name="Policy" type="ForceGangPolicy" use="optional"/>
+            	<xs:attribute name="Policy" use="optional">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="All"/>
+                        <xs:enumeration value="Collect"/>
+                        <xs:enumeration value="Optimized"/>
+                    </xs:restriction>
+                 </xs:simpleType>
+            	</xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
     <xs:element name="GangElement">
         <xs:complexType>
+           <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="GeneralID"/>
+                <xs:element maxOccurs="1" minOccurs="0" ref="Media"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="RunList"/>
+            </xs:sequence>
             <xs:attribute name="BinderySignatureIDs" type="xs:NMTOKENS" use="optional"/>
             <xs:attribute name="CollapseBleeds" type="xs:boolean" use="optional"/>
+            <xs:attribute name="CustomerID" type="xs:NMTOKEN" use="optional"/>
+            <xs:attribute name="DeliveryDate" type="xs:dateTime" use="optional"/>
             <xs:attribute name="Dimension" type="XYPair" use="optional"/>
             <xs:attribute name="DueDate" type="xs:dateTime" use="optional"/>
             <xs:attribute name="ExternalID" type="xs:NMTOKEN" use="optional"/>

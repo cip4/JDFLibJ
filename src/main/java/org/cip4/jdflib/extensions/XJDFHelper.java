@@ -116,6 +116,26 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable
 
 	/**
 	 *
+	 * @param root
+	 * @return
+	 */
+	public static boolean isXJDF(final KElement root)
+	{
+		return root != null && XJDFConstants.XJDF.equals(root.getLocalName());
+	}
+
+	/**
+	 *
+	 * @param root
+	 * @return
+	 */
+	public static boolean isXJMF(final KElement root)
+	{
+		return root != null && XJDFConstants.XJMF.equals(root.getLocalName());
+	}
+
+	/**
+	 *
 	 * @param fileName
 	 * @return
 	 */

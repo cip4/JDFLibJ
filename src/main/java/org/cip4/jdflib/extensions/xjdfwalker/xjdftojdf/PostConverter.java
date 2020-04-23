@@ -66,8 +66,6 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
-import org.cip4.jdflib.resource.process.JDFColor;
-import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDependencies;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
@@ -546,15 +544,6 @@ class PostConverter
 		private void cleanColorPool(final JDFResource r)
 		{
 			final String id = r.getID();
-			final JDFColorPool cp = (JDFColorPool) r;
-			final Collection<JDFColor> vc = cp.getAllColor();
-			if (vc != null)
-			{
-				for (final JDFColor c : vc)
-				{
-					fixColor(c);
-				}
-			}
 			if (StringUtil.getNonEmpty(id) != null)
 			{
 				final VElement v = theNode.getRoot().getChildrenByTagName_KElement(null, null, new JDFAttributeMap("rRef", id), false, false, 0);
@@ -584,26 +573,6 @@ class PostConverter
 			}
 		}
 
-		private void fixColor(final JDFColor c)
-		{
-			c.removeChildrenByClass(JDFPart.class);
-			final String actual = c.getActualColorName();
-			final String name = c.getName();
-			if (!name.equals(actual))
-			{
-				c.setName(actual);
-				final VElement v = theNode.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.SEPARATION, name), false, true, 0);
-				for (final KElement e : v)
-				{
-					e.setAttribute(AttributeName.SEPARATION, actual);
-				}
-				final VElement w = theNode.getChildrenByTagName(ElementName.SEPARATIONSPEC, null, new JDFAttributeMap(AttributeName.NAME, name), false, true, 0);
-				for (final KElement e : w)
-				{
-					e.setAttribute(AttributeName.NAME, actual);
-				}
-			}
-		}
 	}
 
 	private class DependencyCleaner

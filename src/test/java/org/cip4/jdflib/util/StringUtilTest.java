@@ -1468,6 +1468,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	{
 		assertEquals(StandardCharsets.UTF_8, StringUtil.getCharset(StringUtil.UTF8));
 		assertEquals(StandardCharsets.ISO_8859_1, StringUtil.getCharset("8859_1"));
+		assertNull(StringUtil.getCharset("snafu"));
 	}
 
 	/**

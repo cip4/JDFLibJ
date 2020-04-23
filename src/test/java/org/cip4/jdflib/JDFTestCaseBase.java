@@ -441,7 +441,7 @@ public abstract class JDFTestCaseBase
 	protected XMLDoc writeTest(final KElement e, String filename, final boolean parseSchema, final String snippetPath)
 	{
 		String ext = UrlUtil.extension(filename);
-		int minor = 0;
+		int minor = 1;
 		new File(sm_dirTestDataTemp + "xjdfexamples").mkdirs();
 		new File(sm_dirTestDataTemp + "jdfexamples").mkdirs();
 		if (ext.startsWith("x"))

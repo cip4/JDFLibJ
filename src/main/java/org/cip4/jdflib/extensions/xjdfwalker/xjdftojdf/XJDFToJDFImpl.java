@@ -241,9 +241,19 @@ public class XJDFToJDFImpl extends PackageElementWalker
 				return null;
 			}
 			walkTree(root, theNode);
-			new PostConverter(this, theNode).postConvert();
+			postConvert(theNode);
 		}
 		return jdfDoc;
+	}
+
+	/**
+	 *
+	 * @param theNode
+	 */
+	protected void postConvert(final JDFNode theNode)
+	{
+		final PostConverter postConverter = new PostConverter(this, theNode);
+		postConverter.postConvert();
 	}
 
 	/**

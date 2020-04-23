@@ -55,7 +55,7 @@ import org.cip4.jdflib.util.ContainerUtil;
 public abstract class BaseXJDFHelper
 {
 	protected final static Log log = LogFactory.getLog(BaseXJDFHelper.class);
-	private static EnumVersion defaultVersion = EnumVersion.Version_2_0;
+	private static EnumVersion defaultVersion = EnumVersion.Version_2_1;
 
 	/**
 	 * @return the defaultVersion

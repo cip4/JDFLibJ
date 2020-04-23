@@ -38,6 +38,7 @@ package org.cip4.jdflib.util.hotfolder;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -121,6 +122,29 @@ public class StorageHotFolderListenerTest extends JDFTestCaseBase
 		file.createNewFile();
 		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), new StorageHotFolder(theHFDir, theHFDir, null, null));
 		assertFalse(hl.hotFile(file));
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	public void testHandleBad() throws IOException
+	{
+		final File theHFDir = new File(sm_dirTestDataTemp + File.separator + "FooBad");
+		FileUtil.deleteAll(theHFDir);
+		theHFDir.mkdirs();
+		final File file = new File(theHFDir, "a");
+		final File file2 = new File(theHFDir, "b");
+		file.createNewFile();
+		file2.createNewFile();
+		final StorageHotFolderListener hl = new StorageHotFolderListener(theHFDir, new BoomListener(), new StorageHotFolder(theHFDir, theHFDir, null, null));
+		hl.setOKStorage(new File("ok"));
+		hl.setErrorStorage(new File("nok"));
+		assertTrue(hl.handleBad(file, true));
+		assertFalse(file.exists());
+		assertTrue(hl.handleBad(file2, false));
+		assertFalse(file2.exists());
 	}
 
 }
