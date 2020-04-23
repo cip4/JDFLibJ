@@ -1862,7 +1862,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	@Test
 	public void testDefVersion()
 	{
-		assertEquals(EnumVersion.Version_2_0, JDFToXJDF.getDefaultVersion());
+		assertEquals(EnumVersion.Version_2_1, JDFToXJDF.getDefaultVersion());
 	}
 
 	/**

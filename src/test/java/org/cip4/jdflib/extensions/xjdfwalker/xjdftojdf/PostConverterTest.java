@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class PostConverterTest
@@ -90,18 +91,19 @@ public class PostConverterTest
 	*
 	*/
 	@Test
+	@Ignore
 	public void testColorantControlSpace()
 	{
-		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ImageSetting);
-		JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, EnumUsage.Input);
+		final JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, EnumUsage.Input);
 		cp.appendColorWithName("sep_1", null).setActualColorName("sep 1");
 		cp.appendColorWithName("sep_2", null).setActualColorName("sep 2");
 
-		JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		final JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
 		cc.appendColorantParams().setSeparations(new VString("sep_1,sep_2", ","));
 
-		PostConverter pc = new PostConverter(null, n);
+		final PostConverter pc = new PostConverter(null, n);
 		pc.new ResourceCleaner().cleanResources();
 
 		assertEquals("sep 1", cc.getColorantParams().getSeparation(0));
