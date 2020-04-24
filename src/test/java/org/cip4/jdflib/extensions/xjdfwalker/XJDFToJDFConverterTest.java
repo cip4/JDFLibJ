@@ -1934,4 +1934,32 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertEquals(105, rlLO.getAmount(null), 0.1);
 		assertNull(rlSP.getAmountPool());
 	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testStrippingDescName()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
+		xjdfHelper.setTypes("Stripping");
+
+		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper rh = shLO.appendPartition(AttributeName.SHEETNAME, "sheet1", true);
+		rh.setDescriptiveName("Description of the sheet");
+		final JDFLayout lo = (JDFLayout) rh.getResource();
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndBack.getName());
+		final KElement pos = lo.appendElement(ElementName.POSITION);
+		pos.setAttribute(XJDFConstants.BinderySignatureID, "bs1");
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xjdfHelper);
+		final JDFNode n = d.getJDFRoot();
+		final JDFLayout loj = (JDFLayout) n.getResource(ElementName.LAYOUT, EnumUsage.Input, 0);
+		assertEquals(EnumResStatus.Available, loj.getResStatus(false));
+		final JDFStrippingParams sp = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+		assertEquals(EnumResStatus.Available, sp.getResStatus(false));
+		assertEquals("Description of the sheet", loj.getLeaf(0).getDescriptiveName());
+		assertEquals("Description of the sheet", sp.getLeaf(0).getDescriptiveName());
+	}
 }

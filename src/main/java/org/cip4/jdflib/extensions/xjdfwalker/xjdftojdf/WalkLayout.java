@@ -173,6 +173,7 @@ public class WalkLayout extends WalkStrippingParams
 			{
 				sp.addPartIDKey(EnumPartIDKey.BinderySignatureName);
 			}
+			sp.copyAttribute(AttributeName.DESCRIPTIVENAME, trackLayout);
 			foo.deleteNode();
 		}
 
