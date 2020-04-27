@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -97,6 +97,36 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		assertNotNull(c.get(1).getSet(ElementName.COMPONENT, EnumUsage.Output));
 		assertNotNull(c.get(2).getSet(ElementName.COMPONENT, EnumUsage.Input));
 		assertNotNull(c.get(2).getSet(ElementName.COMPONENT, EnumUsage.Output).getPartition(0));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testSplitRef()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		h.setTypes("Product Stripping");
+		SetHelper s = h.appendResourceSet("Media", EnumUsage.Input);
+		final ResourceHelper p = s.appendPartition(null, true);
+		final JDFMedia media = (JDFMedia) p.getResource();
+		media.setMediaType(EnumMediaType.Plate);
+
+		s = h.appendResourceSet(ElementName.STRIPPINGPARAMS, null);
+		final JDFResource sp = (JDFResource) s.appendPartition(null, true).getResource();
+		sp.setAttribute("PaperRef", p.ensureID());
+
+		final XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+		c.setSplitter(splitter);
+
+		final JDFDoc d = c.convert(h.getRoot());
+		d.write2File(sm_dirTestDataTemp + "splitPaper.jdf", 2, false);
+
+		final JDFNode jdfRoot = d.getJDFRoot();
+		final JDFNode jdf0 = jdfRoot.getJDF(0);
+		final JDFResource strpParams = jdf0.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+		assertNotNull(strpParams.getElement(ElementName.MEDIA));
 	}
 
 	/**

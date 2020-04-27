@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -186,6 +186,16 @@ public class JDFRectangleTest extends TestCase
 	{
 		final JDFRectangle r = JDFRectangle.createRectangle("5 10 6 12");
 		assertEquals(new JDFXYPair(1, 2), r.getSize());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testGetArea()
+	{
+		final JDFRectangle r = JDFRectangle.createRectangle("1 2 3 4");
+		assertEquals(4, r.getArea(), 0.0);
 	}
 
 	/**

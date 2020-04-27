@@ -255,7 +255,8 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 		final LinkInfo li = map.getStar(name, true);
 		if (li == null)
 		{
-			set.deleteNode();
+			// we never delete in case of refs; we only zapp the usage so that they disappear if unreferenced
+			set.setUsage(null);
 		}
 		else
 		{
