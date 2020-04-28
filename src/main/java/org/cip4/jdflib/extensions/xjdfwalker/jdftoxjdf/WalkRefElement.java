@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -74,12 +74,15 @@ public class WalkRefElement extends WalkJDFElement
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final JDFRefElement refElem = (JDFRefElement) jdf;
-		if (mustInline(refElem.getRefLocalName()))
+		if (mustInline(refElem.getRefLocalName()) && refElem.getTarget() != null)
 		{
 			try
 			{
 				final JDFElement e = refElem.inlineRef();
-				jdfToXJDF.walkTree(e, xjdf);
+				if (e != null && !(e instanceof JDFRefElement))
+				{
+					jdfToXJDF.walkTree(e, xjdf);
+				}
 			}
 			catch (final JDFException x)
 			{

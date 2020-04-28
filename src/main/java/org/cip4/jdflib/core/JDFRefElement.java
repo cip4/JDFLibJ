@@ -2,89 +2,47 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+ * distribution.
  *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
+ * 3. The end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This product includes software developed by the The International Cooperation for
+ * the Integration of Processes in Prepress, Press and Postpress (www.cip4.org)" Alternately, this acknowledgment mrSubRefay appear in the software itself, if and wherever such third-party
+ * acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of Processes in Prepress, Press and Postpress" must not be used to endorse or promote products derived from this software
+ * without prior written permission. For written permission, please contact info@cip4.org.
  *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
- *    permission of the CIP4 organization
+ * 5. Products derived from this software may not be called "CIP4", nor may "CIP4" appear in their name, without prior writtenrestartProcesses() permission of the CIP4 organization
  *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
+ * Usage of this software in commercial products is subject to restrictions. For details please consult info@cip4.org.
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERN
- }ATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE INTERN }ATIONAL COOPERATION FOR THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE. ====================================================================
  *
- }
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software restartProcesses()
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ * } This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
+ * originally based on software restartProcesses() copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
+ * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  */
 
 /**
  *
- * COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2002
- *      ALL RIGHTS RESERVED
+ * COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2002 ALL RIGHTS RESERVED
  *
  * @author Thomas Kurberg
  *
- * Last changes
- * created 2002-02-04
- * 02-07-2002  JG - modified GetTarget to handle parts
- * 02-07-2002  JG - added part handling
- * 02-07-2002  JG - added OptionalElements
- * 02-07-2002  JG - added InlineRef
- * 02-07-2002  JG - modified GetTarget for parts pointing to elements that are not 
- * 02-07-2002  JG - added DeleteRef 
- * 26-11-2002  Kai Mattern - Bugfix in InLineRef
+ *         Last changes created 2002-02-04 02-07-2002 JG - modified GetTarget to handle parts 02-07-2002 JG - added part handling 02-07-2002 JG - added OptionalElements 02-07-2002 JG - added InlineRef
+ *         02-07-2002 JG - modified GetTarget for parts pointing to elements that are not 02-07-2002 JG - added DeleteRef 26-11-2002 Kai Mattern - Bugfix in InLineRef
  *
  */
 package org.cip4.jdflib.core;
@@ -97,8 +55,8 @@ import org.cip4.jdflib.resource.JDFResource;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * before August 21, 2009
+ *
+ *         before August 21, 2009
  */
 public class JDFRefElement extends JDFElement
 {
@@ -136,7 +94,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * Constructor for JDFRefElement
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -147,7 +105,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * Constructor for JDFRefElement
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -159,7 +117,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * Constructor for JDFRefElement
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -172,8 +130,9 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * test Part element existence
+	 *
 	 * @return
-	 * 
+	 *
 	 * @deprecated 060310 use inline hasChildElement(ElementName.PART, null);
 	 */
 	@Deprecated
@@ -184,7 +143,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * Set attribute rRef
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setrRef(final String value)
@@ -194,7 +153,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * returns true if the name specified fits the node name of this
-	 * 
+	 *
 	 * @param nodeName the name of the node to test. may be either local or qualified
 	 * @param nameSpaceURI the namespace of the node to test.
 	 * @return true if ok
@@ -223,7 +182,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * Get string attribute rRef
-	 * 
+	 *
 	 * @return String - the vaue of the attribute
 	 */
 	public String getrRef()
@@ -233,9 +192,9 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * Set attribute rSubRef
-	 * 
+	 *
 	 * @param value the value to set the attribute to
-	 *@deprecated in JDF 1.2
+	 * @deprecated in JDF 1.2
 	 */
 	@Deprecated
 	public void setrSubRef(final String value)
@@ -245,7 +204,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * Get string attribute rSubRef
-	 * 
+	 *
 	 * @return String - the vaue of the attribute
 	 */
 	public String getrSubRef()
@@ -254,7 +213,7 @@ public class JDFRefElement extends JDFElement
 	}
 
 	/**
-	 * 
+	 *
 	 * @see org.cip4.jdflib.core.JDFElement#isValid(org.cip4.jdflib.core.JDFElement.EnumValidationLevel)
 	 */
 	@Override
@@ -307,7 +266,7 @@ public class JDFRefElement extends JDFElement
 	/**
 	 * get the referenced target resource The resource's PartUsage is evaluated to correctly retrieve implicit or explicit partitions<br>
 	 * may return null
-	 * 
+	 *
 	 * @return JDFResource - the reference target partition
 	 */
 	public JDFResource getTargetRoot()
@@ -323,7 +282,7 @@ public class JDFRefElement extends JDFElement
 			}
 			return null;
 		}
-		JDFResource linkRoot = getLinkRoot(null);
+		final JDFResource linkRoot = getLinkRoot(null);
 		if (linkRoot != null && !getNodeName().equals(linkRoot.getRefString()))
 		{
 			return null;
@@ -335,9 +294,9 @@ public class JDFRefElement extends JDFElement
 	/**
 	 * get the referenced target resource The resource's PartUsage is evaluated to correctly retrieve implicit or explicit partitions<br>
 	 * may return null
-	 * 
+	 *
 	 * overrides the deprecated method JDFElement.getTarget()
-	 * 
+	 *
 	 * @return JDFResource - the reference target partition
 	 */
 	@Override
@@ -359,7 +318,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * Get element Part
-	 * 
+	 *
 	 * @return JDFPart - the element
 	 */
 	public JDFPart getPart()
@@ -369,7 +328,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * return the NodeName of the referenced resource
-	 * 
+	 *
 	 * @return the nodename of the referenced resource
 	 */
 	public String getRefNodeName()
@@ -392,7 +351,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * return the Localname of the target
-	 * 
+	 *
 	 * @return
 	 */
 	public String getRefLocalName()
@@ -415,7 +374,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * inline this refElement by replacing it with a copy of its target
-	 * 
+	 *
 	 * @return JDFElement - the newly created element
 	 * @throws JDFException if no target exists
 	 */
@@ -425,7 +384,7 @@ public class JDFRefElement extends JDFElement
 		final JDFResource targetRes = getTarget();
 		if (targetRes == null)
 		{
-			throw new JDFException("inlineRef: inlining null refElement rRef=" + getrRef());
+			throw new JDFException("inlineRef: inlining null " + getLocalName() + " rRef=" + getrRef());
 		}
 		final JDFResource newInline = (JDFResource) appendElement(targetRes.getNodeName(), null);
 
@@ -457,9 +416,9 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * delete this refElement and it's target
-	 * 
+	 *
 	 * @param bCheckRefCount if true, check that no other element refers to the target before deleting<br>
-	 * if bCheckRefCount=false, the target is force deleted
+	 *            if bCheckRefCount=false, the target is force deleted
 	 * @return JDFElement the deleted targeelement
 	 * @since 290502
 	 */
@@ -483,7 +442,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * Method AppendPart.
-	 * 
+	 *
 	 * @return JDFPart
 	 */
 	public JDFPart appendPart()
@@ -493,7 +452,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * get element JDFPart, create one if it doesn't exist
-	 * 
+	 *
 	 * @return JDFPart
 	 */
 	public JDFPart getCreatePart()
@@ -512,7 +471,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * get part map vector
-	 * 
+	 *
 	 * @deprecated 060310 not more than one is allowed - use getPartMap
 	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
 	 */
@@ -525,7 +484,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * get part map
-	 * 
+	 *
 	 * @return JDFAttributeMap: the attribute maps, one for each part
 	 */
 	@Override
@@ -536,7 +495,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * set all parts to those define in vParts
-	 * 
+	 *
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
@@ -557,7 +516,7 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * check whether the part defined in mPart is included
-	 * 
+	 *
 	 * @param mPart attribute map for the part to remove
 	 * @return boolean - returns true if the part exists
 	 */
