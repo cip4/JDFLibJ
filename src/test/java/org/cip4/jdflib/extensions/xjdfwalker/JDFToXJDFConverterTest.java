@@ -43,7 +43,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.util.Vector;
+import java.util.Collection;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -2710,7 +2710,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		product.write2File(sm_dirTestDataTemp + "getXJDFS.jdf");
 		final JDFToXJDF conv = new JDFToXJDF();
-		final Vector<XJDFHelper> v = conv.getXJDFs(product);
+		final Collection<XJDFHelper> v = conv.getXJDFs(product);
 		assertEquals(v.size(), 3);
 		for (final XJDFHelper h : v)
 		{

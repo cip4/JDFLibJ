@@ -37,8 +37,9 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Vector;
+import java.util.List;
 
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFConstants;
@@ -100,7 +101,7 @@ class MultiJDFToXJDF
 	XJDFZipWriter getZipWriter(final JDFNode rootNode)
 	{
 		this.jdfToXJDF.setSingleNode(true);
-		final Vector<XJDFHelper> vXJDFs = getXJDFs(rootNode, true);
+		final List<XJDFHelper> vXJDFs = getXJDFs(rootNode, true);
 		final XJDFZipWriter w = new XJDFZipWriter();
 		for (final XJDFHelper h : vXJDFs)
 		{
@@ -124,12 +125,12 @@ class MultiJDFToXJDF
 	 * @param root
 	 * @return
 	 */
-	Vector<XJDFHelper> getXJDFs(final JDFNode root, final boolean ordered)
+	List<XJDFHelper> getXJDFs(final JDFNode root, final boolean ordered)
 	{
 		if (root == null)
 			return null;
 		jdfToXJDF.setSingleNode(true);
-		final Vector<XJDFHelper> vRet = new Vector<>();
+		final List<XJDFHelper> vRet = new ArrayList<>();
 		final VElement v = getProcessNodes(root);
 		final boolean keepProduct = this.jdfToXJDF.wantProduct;
 		jdfToXJDF.wantProduct = true;

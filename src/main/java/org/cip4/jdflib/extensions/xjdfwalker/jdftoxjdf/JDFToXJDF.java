@@ -39,8 +39,8 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -655,7 +655,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * @param root
 	 * @return
 	 */
-	public Vector<XJDFHelper> getXJDFs(final JDFNode root)
+	public List<XJDFHelper> getXJDFs(final JDFNode root)
 	{
 		return getXJDFs(root, true);
 	}
@@ -666,7 +666,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * @param ordered
 	 * @return
 	 */
-	public Vector<XJDFHelper> getXJDFs(final JDFNode root, final boolean ordered)
+	public List<XJDFHelper> getXJDFs(final JDFNode root, final boolean ordered)
 	{
 		return new MultiJDFToXJDF(this).getXJDFs(root, ordered);
 	}
@@ -1045,7 +1045,7 @@ public class JDFToXJDF extends PackageElementWalker
 		final boolean oldCleanup = isCleanup();
 		setCleanup(false);
 		setWantDependent(false);
-		final Vector<XJDFHelper> v = getXJDFs(node);
+		final List<XJDFHelper> v = getXJDFs(node);
 
 		final XJDFHelper combinedHelper = new MultiXJDFCombiner(v).getCombinedHelper();
 		setCleanup(oldCleanup);

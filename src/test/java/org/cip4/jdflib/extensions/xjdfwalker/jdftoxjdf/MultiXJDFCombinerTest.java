@@ -41,6 +41,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -97,7 +98,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 		final VElement v0 = root.getChildrenByTagName(null, null, null, false, true, 0);
 		for (final KElement e : v0)
 			e.removeAttribute(AttributeName.DESCRIPTIVENAME);
-		final Vector<XJDFHelper> v = conv.getXJDFs(root);
+		final List<XJDFHelper> v = conv.getXJDFs(root);
 		assertEquals(3, v.size());
 		final XJDFHelper hc = new MultiXJDFCombiner(v).getCombinedHelper();
 		assertEquals(0, hc.getSet(ElementName.NODEINFO, 0).getCombinedProcessIndex().get(0));
@@ -114,7 +115,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 	{
 		final JDFToXJDF conv = new JDFToXJDF();
 		final JDFNode root = JDFNode.parseFile(sm_dirTestData + "sammel18.jdf");
-		final Vector<XJDFHelper> v = conv.getXJDFs(root);
+		final List<XJDFHelper> v = conv.getXJDFs(root);
 		final XJDFHelper hc = new MultiXJDFCombiner(v).getCombinedHelper();
 		assertNull(hc.getRoot().getElementByClass(JDFSeparationSpec.class, 0, true));
 	}
@@ -132,7 +133,7 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 			conv.setCleanup(false);
 			conv.setWantDependent(false);
 			final JDFNode root = JDFNode.parseFile(sm_dirTestData + "sammel19.jdf");
-			final Vector<XJDFHelper> v = conv.getXJDFs(root);
+			final List<XJDFHelper> v = conv.getXJDFs(root);
 			assertEquals(11, v.size());
 			final XJDFHelper hc = new MultiXJDFCombiner(v).getCombinedHelper();
 			writeRoundTripX(hc.getRoot(), "sammel19", null);
