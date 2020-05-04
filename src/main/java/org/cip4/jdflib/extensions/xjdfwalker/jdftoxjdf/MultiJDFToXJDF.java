@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -37,6 +37,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Vector;
 
 import org.apache.commons.logging.LogFactory;
@@ -99,7 +100,7 @@ class MultiJDFToXJDF
 	XJDFZipWriter getZipWriter(final JDFNode rootNode)
 	{
 		this.jdfToXJDF.setSingleNode(true);
-		final Vector<XJDFHelper> vXJDFs = getXJDFs(rootNode);
+		final Vector<XJDFHelper> vXJDFs = getXJDFs(rootNode, true);
 		final XJDFZipWriter w = new XJDFZipWriter();
 		for (final XJDFHelper h : vXJDFs)
 		{
@@ -123,33 +124,24 @@ class MultiJDFToXJDF
 	 * @param root
 	 * @return
 	 */
-	Vector<XJDFHelper> getXJDFs(final JDFNode root)
+	Vector<XJDFHelper> getXJDFs(final JDFNode root, final boolean ordered)
 	{
 		if (root == null)
 			return null;
-		this.jdfToXJDF.setSingleNode(true);
+		jdfToXJDF.setSingleNode(true);
 		final Vector<XJDFHelper> vRet = new Vector<>();
 		final VElement v = getProcessNodes(root);
 		final boolean keepProduct = this.jdfToXJDF.wantProduct;
-		this.jdfToXJDF.wantProduct = true;
+		jdfToXJDF.wantProduct = true;
 		if (JDFConstants.PRODUCT.equals(root.getType()))
 		{
 			final XJDFHelper xjdfHelper = convertSingle(root);
 			vRet.add(xjdfHelper);
 		}
-		this.jdfToXJDF.wantProduct = false;
-		for (int i = 0; i < v.size(); i++)
+		jdfToXJDF.wantProduct = false;
+		if (ordered)
 		{
-			for (int j = 0; j < i; j++)
-			{
-				final JDFNode ni = (JDFNode) v.get(i);
-				final JDFNode nj = (JDFNode) v.get(j);
-				if (nj.getPredecessors(true, false).contains(ni))
-				{
-					v.remove(ni);
-					v.insertElementAt(ni, j);
-				}
-			}
+			reorderNodes(v);
 		}
 		for (final KElement n : v)
 		{
@@ -158,6 +150,34 @@ class MultiJDFToXJDF
 		}
 		this.jdfToXJDF.wantProduct = keepProduct;
 		return vRet;
+	}
+
+	/**
+	 *
+	 * @param v
+	 */
+	void reorderNodes(final VElement v)
+	{
+		final HashMap<JDFNode, VElement> mapPred = new HashMap<>();
+		final int size = v.size();
+		for (int i = 0; i < size; i++)
+		{
+			final JDFNode ni = (JDFNode) v.get(i);
+			mapPred.put(ni, ni.getPredecessors(true, false));
+		}
+		for (int i = 0; i < size; i++)
+		{
+			for (int j = 0; j < i; j++)
+			{
+				final JDFNode ni = (JDFNode) v.get(i);
+				final JDFNode nj = (JDFNode) v.get(j);
+				if (mapPred.get(nj).contains(ni))
+				{
+					v.remove(ni);
+					v.insertElementAt(ni, j);
+				}
+			}
+		}
 	}
 
 	/**

@@ -159,6 +159,22 @@ public class MultiXJDFCombinerTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testSammelDropUnordered()
+	{
+		final JDFToXJDF conv = new JDFToXJDF();
+		conv.setSingleNode(false);
+		final JDFNode root = JDFNode.parseFile(sm_dirTestData + "sammel18.jdf");
+		final KElement e = conv.convert(root);
+		final XJDFHelper h = XJDFHelper.getHelper(e);
+		final SetHelper delivery = h.getSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
+		assertEquals(1, delivery.getPartitions().size());
+		assertNotNull(delivery.getPartition(0).getXPathElement("DeliveryParams/DropItem[6]"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testSammelBindSig()
 	{
 		final JDFToXJDF conv = new JDFToXJDF();

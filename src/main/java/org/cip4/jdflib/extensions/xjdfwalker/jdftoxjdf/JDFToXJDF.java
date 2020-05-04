@@ -657,7 +657,18 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	public Vector<XJDFHelper> getXJDFs(final JDFNode root)
 	{
-		return new MultiJDFToXJDF(this).getXJDFs(root);
+		return getXJDFs(root, true);
+	}
+
+	/**
+	 *
+	 * @param root
+	 * @param ordered
+	 * @return
+	 */
+	public Vector<XJDFHelper> getXJDFs(final JDFNode root, final boolean ordered)
+	{
+		return new MultiJDFToXJDF(this).getXJDFs(root, ordered);
 	}
 
 	/**
