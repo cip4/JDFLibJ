@@ -41,6 +41,7 @@ import java.io.OutputStream;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -654,10 +655,16 @@ public class JDFToXJDF extends PackageElementWalker
 	 *
 	 * @param root
 	 * @return
+	 * @deprecated
 	 */
-	public List<XJDFHelper> getXJDFs(final JDFNode root)
+	@Deprecated
+	public Vector<XJDFHelper> getXJDFs(final JDFNode root)
 	{
-		return getXJDFs(root, true);
+		final Vector<XJDFHelper> v = new Vector<>();
+		final List<XJDFHelper> l = getXJDFs(root, true);
+		if (l != null)
+			v.addAll(l);
+		return v;
 	}
 
 	/**
@@ -1045,7 +1052,7 @@ public class JDFToXJDF extends PackageElementWalker
 		final boolean oldCleanup = isCleanup();
 		setCleanup(false);
 		setWantDependent(false);
-		final List<XJDFHelper> v = getXJDFs(node);
+		final List<XJDFHelper> v = getXJDFs(node, true);
 
 		final XJDFHelper combinedHelper = new MultiXJDFCombiner(v).getCombinedHelper();
 		setCleanup(oldCleanup);

@@ -3274,7 +3274,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * tests getxpathattribute for partitions
+	 *
 	 */
 	@Test
 	public void testRemoveChildren()
@@ -3292,8 +3292,21 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertNotNull(xm.getMedia());
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
+	/**
+	 *
+	 */
+	@Test
+	public void testRemoveAttributeFromLeaves()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFResource xm = n.addResource("ExposedMedia", EnumUsage.Input);
+		xm.setAgentName("a1");
+		xm.addPartition(EnumPartIDKey.SheetIndex, "1").setAgentName("a2");
+		xm.removeAttributeFromLeaves(AttributeName.AGENTNAME, null);
+		assertEquals("", xm.getAgentName());
+		assertEquals("", xm.getLeaf(0).getAgentName());
+	}
+
 	/**
 	 * tests getxpathattribute for partitions
 	 */

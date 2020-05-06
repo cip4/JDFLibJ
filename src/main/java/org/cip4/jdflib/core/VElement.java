@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -375,11 +375,9 @@ public class VElement extends Vector<KElement>
 	 */
 	public void removeAttribute(final String key, final String nameSpaceURI)
 	{
-		final int siz = size();
-		for (int i = 0; i < siz; i++)
+		for (final KElement k : this)
 		{
-			final KElement k = elementAt(i);
-			k.removeAttribute(key, nameSpaceURI);
+			k.removeAttribute_KElement(key, nameSpaceURI);
 		}
 	}
 

@@ -104,6 +104,7 @@ import org.cip4.jdflib.datatypes.JDFRange;
 import org.cip4.jdflib.datatypes.JDFRangeList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.FixVersion;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.node.JDFAncestor;
@@ -5184,7 +5185,7 @@ public class JDFElement extends KElement
 		 */
 		public static EnumVersion getEnum(String enumName)
 		{
-			enumName = StringUtil.normalize(enumName, true);
+			enumName = StringUtil.normalize(enumName, false);
 			enumName = StringUtil.replaceChar(enumName, ' ', "", 0);
 			if ("1.9".equals(enumName))
 			{
@@ -5238,7 +5239,7 @@ public class JDFElement extends KElement
 			{
 				return EnumVersion.Version_2_2;
 			}
-			return enumName != null && enumName.startsWith("2") ? EnumVersion.Version_2_0 : JDFElement.getDefaultJDFVersion(); // the default
+			return enumName != null && enumName.startsWith("2") ? XJDFHelper.defaultVersion() : JDFElement.getDefaultJDFVersion(); // the default
 		}
 
 		/**

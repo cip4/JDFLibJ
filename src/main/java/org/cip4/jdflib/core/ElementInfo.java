@@ -229,26 +229,31 @@ public class ElementInfo
 	{
 		final VString matchingElements = new VString();
 		final Set<String> keySet = elementInfoTable.keySet();
-
+		if (keySet.isEmpty())
+			return matchingElements;
 		final long l2 = JDFVersions.getTheMask(version);
 		final long v2 = JDFVersions.getTheOffset(version);
+		final long s1 = (long) elemValidity1.getValue() << v2;
+		final long s2 = (long) elemValidity2.getValue() << v2;
+		final long s3 = (long) elemValidity3.getValue() << v2;
+		final long s4 = (long) elemValidity4.getValue() << v2;
 		for (final String theKey : keySet)
 		{
 			final ElemInfo ei = elementInfoTable.get(theKey);
 			final long eiValStatus = ei.getElemValidityStatus() & l2;
-			if (eiValStatus == ((long) elemValidity1.getValue() << v2))
+			if (eiValStatus == s1)
 			{
 				matchingElements.add(theKey);
 			}
-			else if (eiValStatus == ((long) elemValidity2.getValue() << v2))
+			else if (eiValStatus == s2)
 			{
 				matchingElements.add(theKey);
 			}
-			else if (eiValStatus == ((long) elemValidity3.getValue() << v2))
+			else if (eiValStatus == s3)
 			{
 				matchingElements.add(theKey);
 			}
-			else if (eiValStatus == ((long) elemValidity4.getValue() << v2))
+			else if (eiValStatus == s4)
 			{
 				matchingElements.add(theKey);
 			}
