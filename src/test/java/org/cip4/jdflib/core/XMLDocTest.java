@@ -196,7 +196,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		@Override
 		public void runMyThread()
 		{
-			System.out.println("parsing " + sm_dirTestData + "job.jdf " + iLoop);
+			log.info("parsing " + sm_dirTestData + "job.jdf " + iLoop);
 			final XMLDoc d = XMLDoc.parseFile(sm_dirTestData + "job.jdf");
 			assertNotNull("parsed " + sm_dirTestData + "job.jdf " + iLoop, d);
 		}
@@ -227,7 +227,7 @@ public class XMLDocTest extends JDFTestCaseBase
 					root.removeChild(n);
 				}
 			}
-			System.out.println("Completing " + iLoop);
+			log.info("Completing " + iLoop);
 		}
 	}
 
@@ -258,7 +258,7 @@ public class XMLDocTest extends JDFTestCaseBase
 			{
 				if (j % 100 == 0)
 				{
-					System.out.print("\n" + iLoop + " " + j + " " + new JDFDate().getTimeISO() + " - ");
+					log.info(iLoop + " " + j + " " + new JDFDate().getTimeISO() + " - ");
 				}
 				root.appendElement("bar");
 				System.out.print(".");
@@ -270,7 +270,7 @@ public class XMLDocTest extends JDFTestCaseBase
 					// assertTrue(file.createNewFile());
 					if (!d.write2File(file, 0, true))
 					{
-						System.out.println("snafu " + iLoop);
+						log.info("snafu " + iLoop);
 						throw new JDFException("Snafu");
 					}
 				}
@@ -936,15 +936,14 @@ public class XMLDocTest extends JDFTestCaseBase
 			new Thread(mr).start();
 
 		}
-		System.out.println("Writing start");
+		log.info("Writing start");
 		assertTrue(d.write2File(out, 2, true));
-		System.out.println("Writing done");
+		log.info("Writing done");
 		for (int i = 0; i < 10; i++)
 		{
 			if (mrs[i].hook != null)
 			{
-				// fail("exception: "+h.e);
-				System.out.println("******** Xerces known defect: not threadsafe: " + mrs[i].hook);
+				log.info("******** Xerces known defect: not threadsafe: " + mrs[i].hook);
 			}
 		}
 
@@ -973,12 +972,12 @@ public class XMLDocTest extends JDFTestCaseBase
 			threads[i].waitComplete();
 			if (threads[i].hook != null)
 			{
-				System.out.println("exception " + threads[i].hook);
+				log.info("exception " + threads[i].hook);
 				break;
 			}
-			System.out.println("done " + i);
+			log.info("done " + i);
 		}
-		System.out.println("all done ");
+		log.info("all done ");
 	}
 
 	/**
@@ -1074,7 +1073,7 @@ public class XMLDocTest extends JDFTestCaseBase
 				final long t2 = System.nanoTime();
 				if (i % 100 == 0)
 				{
-					System.out.println(i + " last " + (t2 - t1) + " average " + ((t2 - t) / (i + 1)) + " total " + (t2 - t) / 1000000);
+					log.info(i + " last " + (t2 - t1) + " average " + ((t2 - t) / (i + 1)) + " total " + (t2 - t) / 1000000);
 				}
 				t1 = t2;
 
@@ -1103,7 +1102,7 @@ public class XMLDocTest extends JDFTestCaseBase
 				final long t2 = System.nanoTime();
 				if (i % 100 == 0)
 				{
-					System.out.println(i + " " + (t2 - t1) + " " + ((t2 - t) / (i + 1)) + " " + (t2 - t) / 1000000);
+					log.info(i + " " + (t2 - t1) + " " + ((t2 - t) / (i + 1)) + " " + (t2 - t) / 1000000);
 				}
 				t1 = t2;
 			}
@@ -1250,13 +1249,13 @@ public class XMLDocTest extends JDFTestCaseBase
 			}
 			final long l2 = System.nanoTime();
 
-			System.out.println("xmldoc create: " + ii + " " + (l2 - l) / 1000000);
+			log.info("xmldoc create: " + ii + " " + (l2 - l) / 1000000);
 			final String fil = sm_dirTestDataTemp + "big" + ii + "writ.jdf";
 			d.write2File(fil, 2, false);
 			final File f = new File(fil);
 			final long l3 = System.nanoTime();
-			System.out.println("xmldoc write: " + ii + " " + (l3 - l2) / 1000000 + " " + f.length());
-			System.out.println("xmldoc total: " + ii + " " + (l3 - l) / 1000000 + "\n");
+			log.info("xmldoc write: " + ii + " " + (l3 - l2) / 1000000 + " " + f.length());
+			log.info("xmldoc total: " + ii + " " + (l3 - l) / 1000000 + "\n");
 		}
 	}
 

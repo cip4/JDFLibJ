@@ -419,7 +419,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			timezoneSet = true;
 			this.defaultH = h >= 0 ? h : defaultHour;
 			this.defaultM = m >= 0 ? m : 0;
-			l = StringUtil.parseLong(strDateTime, -1);
+			l = strDateTime.indexOf('-') >= 0 ? -1 : StringUtil.parseLong(strDateTime, -1);
 		}
 
 		/**

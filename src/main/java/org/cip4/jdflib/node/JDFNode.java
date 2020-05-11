@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -61,6 +61,7 @@ package org.cip4.jdflib.node;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -1493,7 +1494,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			// version >=1.3
 			JDFNodeInfo ni = getCreateNodeInfo();
 			ni = (JDFNodeInfo) ni.getResourceRoot(); // 101104 RP in case we set to a non linked resource, this avoids exceptions
-			if (getStatus() != JDFElement.EnumNodeStatus.Part)
+			if (!JDFElement.EnumNodeStatus.Part.equals(getStatus()))
 			{ // set a decent default status for implicit
 				ni.setNodeStatus(getStatus());
 				if (statusDetails != null)
@@ -1502,16 +1503,18 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				}
 			}
 
-			final JDFNodeInfo niLeaf = getPartitionForMap(mattr, ni);
-
-			if (niLeaf != null)
+			final Collection<JDFNodeInfo> niLeaves = getPartitionsForMap(mattr, ni);
+			for (final JDFNodeInfo niLeaf : niLeaves)
 			{
-				niLeaf.removeAttributeFromLeaves(AttributeName.NODESTATUS, null);
-				niLeaf.setNodeStatus(status);
-				if (statusDetails != null)
+				if (niLeaf != null)
 				{
-					niLeaf.removeAttributeFromLeaves(AttributeName.NODESTATUSDETAILS, null);
-					niLeaf.setNodeStatusDetails(statusDetails);
+					niLeaf.removeAttributeFromLeaves(AttributeName.NODESTATUS, null);
+					niLeaf.setNodeStatus(status);
+					if (statusDetails != null)
+					{
+						niLeaf.removeAttributeFromLeaves(AttributeName.NODESTATUSDETAILS, null);
+						niLeaf.setNodeStatusDetails(statusDetails);
+					}
 				}
 			}
 			setStatus(JDFElement.EnumNodeStatus.Part);
@@ -1522,17 +1525,41 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		 * @param ni
 		 * @return
 		 */
-		private JDFNodeInfo getPartitionForMap(final JDFAttributeMap mattr, final JDFNodeInfo ni)
+		private Collection<JDFNodeInfo> getPartitionsForMap(final JDFAttributeMap mattr, final JDFNodeInfo ni)
 		{
 			final JDFResource niRoot = ni.getResourceRoot();
+			final Collection<JDFNodeInfo> leaves = new ArrayList<>();
 			niRoot.setPartUsage(JDFResource.EnumPartUsage.Implicit);
 			JDFNodeInfo niLeaf;
 			niLeaf = (JDFNodeInfo) ni.getPartition(mattr, EnumPartUsage.Explicit);
 			if (niLeaf == null) // no preexisting matching partition - attempt to create it
 			{
-				niLeaf = (JDFNodeInfo) ni.getCreatePartition(mattr, null);
+				final VElement l2 = ni.getPartitionVector(mattr, EnumPartUsage.Explicit);
+				if (!ContainerUtil.isEmpty(l2))
+				{
+					for (final KElement e : l2)
+					{
+						leaves.add((JDFNodeInfo) e);
+					}
+				}
+				else
+				{
+					try
+					{
+						niLeaf = (JDFNodeInfo) ni.getCreatePartition(mattr, null);
+						leaves.add(niLeaf);
+					}
+					catch (final Exception x)
+					{
+						// nop
+					}
+				}
 			}
-			return niLeaf;
+			else
+			{
+				leaves.add(niLeaf);
+			}
+			return leaves;
 		}
 
 		/**
@@ -1609,7 +1636,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		public boolean setPartStatus(final VJDFAttributeMap vmattr, final EnumNodeStatus status, final String statusDetails)
 		{
 			boolean bRet = true;
-			if (vmattr != null && vmattr.size() > 0)
+			if (!ContainerUtil.isEmpty(vmattr))
 			{
 				for (final JDFAttributeMap map : vmattr)
 				{
@@ -3413,7 +3440,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 *
-
+	
 	 *
 	 */
 

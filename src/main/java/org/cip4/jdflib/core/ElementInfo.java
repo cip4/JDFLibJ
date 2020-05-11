@@ -263,6 +263,40 @@ public class ElementInfo
 	}
 
 	/**
+	 * Returns a list of element names matching the requested validity for the specified JDF version.
+	 *
+	 * @param elemValidity1 elemValidity: requested validity
+	 * @param elemValidity2
+	 * @return VString: list of strings containing the names of the matching elements
+	 */
+	private VString conformingElements(final EnumElementValidity elemValidity1, final EnumElementValidity elemValidity2)
+	{
+		final VString matchingElements = new VString();
+		final Set<String> keySet = elementInfoTable.keySet();
+		if (keySet.isEmpty())
+			return matchingElements;
+		final long l2 = JDFVersions.getTheMask(version);
+		final long v2 = JDFVersions.getTheOffset(version);
+		final long s1 = (long) elemValidity1.getValue() << v2;
+		final long s2 = (long) elemValidity2.getValue() << v2;
+		for (final String theKey : keySet)
+		{
+			final ElemInfo ei = elementInfoTable.get(theKey);
+			final long eiValStatus = ei.getElemValidityStatus() & l2;
+			if (eiValStatus == s1)
+			{
+				matchingElements.add(theKey);
+			}
+			else if (eiValStatus == s2)
+			{
+				matchingElements.add(theKey);
+			}
+		}
+
+		return matchingElements;
+	}
+
+	/**
 	 * Returns true if there is at least one sub-element matching the requested validity for the specified JDF version.
 	 *
 	 * @param elemValidity1 elemValidity: requested validity
@@ -284,7 +318,7 @@ public class ElementInfo
 	 */
 	public VString requiredElements()
 	{
-		return conformingElements(EnumElementValidity.Required, EnumElementValidity.SingleRequired, EnumElementValidity.Dummy, EnumElementValidity.Dummy);
+		return conformingElements(EnumElementValidity.Required, EnumElementValidity.SingleRequired);
 	}
 
 	/**
@@ -305,7 +339,7 @@ public class ElementInfo
 	 */
 	public VString deprecatedElements()
 	{
-		return conformingElements(EnumElementValidity.Deprecated, EnumElementValidity.SingleDeprecated, EnumElementValidity.Dummy, EnumElementValidity.Dummy);
+		return conformingElements(EnumElementValidity.Deprecated, EnumElementValidity.SingleDeprecated);
 	}
 
 	/**
@@ -325,7 +359,7 @@ public class ElementInfo
 	 */
 	public VString prereleaseElements()
 	{
-		return conformingElements(EnumElementValidity.None, EnumElementValidity.Dummy, EnumElementValidity.Dummy, EnumElementValidity.Dummy);
+		return conformingElements(EnumElementValidity.None, EnumElementValidity.Dummy);
 	}
 
 	/*

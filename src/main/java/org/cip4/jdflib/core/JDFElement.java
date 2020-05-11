@@ -5185,61 +5185,75 @@ public class JDFElement extends KElement
 		 */
 		public static EnumVersion getEnum(String enumName)
 		{
-			enumName = StringUtil.normalize(enumName, false);
-			enumName = StringUtil.replaceChar(enumName, ' ', "", 0);
-			if ("1.9".equals(enumName))
+			if (enumName != null && enumName.indexOf(' ') >= 0)
+				enumName = StringUtil.normalize(enumName, false, null);
+			if (StringUtil.isEmpty(enumName))
+				return JDFElement.getDefaultJDFVersion();
+
+			final char charAt = enumName.charAt(0);
+			if (charAt == '1')
 			{
-				return EnumVersion.Version_1_9;
+				if ("1.9".equals(enumName))
+				{
+					return EnumVersion.Version_1_9;
+				}
+				else if ("1.8".equals(enumName))
+				{
+					return EnumVersion.Version_1_8;
+				}
+				else if ("1.7".equals(enumName))
+				{
+					return EnumVersion.Version_1_7;
+				}
+				else if ("1.6".equals(enumName))
+				{
+					return EnumVersion.Version_1_6;
+				}
+				else if ("1.5".equals(enumName))
+				{
+					return EnumVersion.Version_1_5;
+				}
+				else if ("1.4".equals(enumName))
+				{
+					return EnumVersion.Version_1_4;
+				}
+				else if ("1.3".equals(enumName))
+				{
+					return EnumVersion.Version_1_3;
+				}
+				else if ("1.2".equals(enumName))
+				{
+					return EnumVersion.Version_1_2;
+				}
+				else if ("1.1".equals(enumName))
+				{
+					return EnumVersion.Version_1_1;
+				}
+				else if ("1.0".equals(enumName))
+				{
+					return EnumVersion.Version_1_0;
+				}
 			}
-			else if ("1.8".equals(enumName))
+			else if (charAt == '2')
 			{
-				return EnumVersion.Version_1_8;
+				if ("2.0".equals(enumName))
+				{
+					return EnumVersion.Version_2_0;
+				}
+				else if ("2.1".equals(enumName))
+				{
+					return EnumVersion.Version_2_1;
+				}
+				else if ("2.2".equals(enumName))
+				{
+					return EnumVersion.Version_2_2;
+				}
+				else
+				{
+					return XJDFHelper.defaultVersion();
+				}
 			}
-			else if ("1.7".equals(enumName))
-			{
-				return EnumVersion.Version_1_7;
-			}
-			else if ("1.6".equals(enumName))
-			{
-				return EnumVersion.Version_1_6;
-			}
-			else if ("1.5".equals(enumName))
-			{
-				return EnumVersion.Version_1_5;
-			}
-			else if ("1.4".equals(enumName))
-			{
-				return EnumVersion.Version_1_4;
-			}
-			else if ("1.3".equals(enumName))
-			{
-				return EnumVersion.Version_1_3;
-			}
-			else if ("1.2".equals(enumName))
-			{
-				return EnumVersion.Version_1_2;
-			}
-			else if ("1.1".equals(enumName))
-			{
-				return EnumVersion.Version_1_1;
-			}
-			else if ("1.0".equals(enumName))
-			{
-				return EnumVersion.Version_1_0;
-			}
-			else if ("2.0".equals(enumName))
-			{
-				return EnumVersion.Version_2_0;
-			}
-			else if ("2.1".equals(enumName))
-			{
-				return EnumVersion.Version_2_1;
-			}
-			else if ("2.2".equals(enumName))
-			{
-				return EnumVersion.Version_2_2;
-			}
-			return enumName != null && enumName.startsWith("2") ? XJDFHelper.defaultVersion() : JDFElement.getDefaultJDFVersion(); // the default
+			return JDFElement.getDefaultJDFVersion(); // the default
 		}
 
 		/**

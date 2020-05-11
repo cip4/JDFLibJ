@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -1118,6 +1118,33 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFAttributeMap pm2 = new JDFAttributeMap(EnumPartIDKey.SheetName.getName(), "s2");
 		root.setPartStatus(pm2, EnumNodeStatus.Completed, null);
 		assertEquals(root.getPartStatus(pm2, 0), EnumNodeStatus.Completed);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testSetPartStatusMisMatchPartVersion()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode root = doc.getJDFRoot();
+		root.setVersion(JDFElement.EnumVersion.Version_1_6);
+		final JDFAttributeMap pm = new JDFAttributeMap(EnumPartIDKey.SheetName.getName(), "s1");
+		pm.put(AttributeName.SIDE, "Front");
+		pm.put(AttributeName.PARTVERSION, "PV1");
+		final VJDFAttributeMap vp = new VJDFAttributeMap();
+		vp.add(pm.clone());
+		pm.put(AttributeName.SIDE, "Back");
+		vp.add(pm);
+		root.getCreateNodeInfo().setPartIDKeys(new VString("SheetName Side PartVersion"));
+		root.setPartStatus(vp, EnumNodeStatus.Waiting, null);
+
+		final VJDFAttributeMap vp2 = vp.clone();
+		vp2.removeKey(AttributeName.SIDE);
+
+		assertTrue(root.setPartStatus(vp2, EnumNodeStatus.Completed, null));
+		assertEquals(EnumNodeStatus.Completed, root.getPartStatus(vp.get(0), 0));
 	}
 
 	/**
