@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -238,6 +238,29 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	public void testDir()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
+		final File file = new File(sm_dirTestDataTemp + "URLIn88/content/boo");
+		rl.addPDF(UrlUtil.fileToUrl(file, false), 0, -1);
+		d.write2File(sm_dirTestDataTemp + "URLIn88/dummy.jdf", 2, false);
+
+		file.mkdirs();
+
+		final File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut88");
+		dumpDir.delete();
+		final URLExtractor ex = new URLExtractor(dumpDir, sm_dirTestDataTemp + "URLIn88", "http://foo");
+		ex.walkTree(d.getJDFRoot(), null);
+		final String write2String = d.write2String(0);
+		assertTrue(write2String.indexOf("http://foo/content/boo") < 0);
+		assertFalse(new File(sm_dirTestDataTemp + "URLOut88/content/boo").exists());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	public void testRelativePathFromJDF()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -249,7 +272,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 
 		final File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut9");
 		dumpDir.delete();
-		final URLExtractor ex = new URLExtractor(dumpDir, null, null);
+		final URLExtractor ex = new URLExtractor(dumpDir, sm_dirTestDataTemp + "URLIn9", null);
 		ex.walkTree(d.getJDFRoot(), null);
 		final String write2String = rl.toDisplayXML(2);
 		assertTrue(new File(sm_dirTestDataTemp + "URLOut9/content/boooo.pdf").exists());
@@ -425,7 +448,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 
 		final File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut5");
 		dumpDir.delete();
-		final URLExtractor ex = new URLExtractor(dumpDir, null, null);
+		final URLExtractor ex = new URLExtractor(dumpDir, sm_dirTestDataTemp + "URLIn5", null);
 		ex.walkTree(d.getJDFRoot(), null);
 		final String write2String = rl.toDisplayXML(2);
 		assertTrue(new File(sm_dirTestDataTemp + "URLOut5/content/boo oo.pdf").exists());
@@ -452,7 +475,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 
 		final File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut6");
 		dumpDir.delete();
-		final URLExtractor ex = new URLExtractor(dumpDir, null, null);
+		final URLExtractor ex = new URLExtractor(dumpDir, sm_dirTestDataTemp + "URLIn6", null);
 		ex.walkTree(d.getJDFRoot(), null);
 		final String write2String = rl.toDisplayXML(2);
 		assertTrue(new File(sm_dirTestDataTemp + "URLOut6/content/booüoo.pdf").exists());
@@ -476,7 +499,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 
 		final File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut7");
 		dumpDir.delete();
-		final URLExtractor ex = new URLExtractor(dumpDir, null, null);
+		final URLExtractor ex = new URLExtractor(dumpDir, sm_dirTestDataTemp + "URLIn7", null);
 		ex.setDeleteFile(true);
 		ex.walkTree(d.getJDFRoot(), null);
 		final String write2String = rl.toDisplayXML(2);

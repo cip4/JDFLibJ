@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -46,6 +46,7 @@ import java.util.Set;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.ifaces.IElementConverter;
 import org.cip4.jdflib.ifaces.IURLSetter;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -250,7 +251,10 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 			{
 				return true;
 			}
-			final File f = UrlUtil.urlToFile(url);
+			File f = UrlUtil.urlToFile(url);
+			if (currentURL != null)
+				f = FileUtil.cleanDots(new File(currentURL, f.getPath()));
+
 			if (f != null)
 			{
 				if (!f.exists())
@@ -270,6 +274,11 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 				if (!f.canRead())
 				{
 					log.warn("Cannot read file: " + f);
+					return false;
+				}
+				else if (f.isDirectory())
+				{
+					log.warn("Cannot copy directory: " + f);
 					return false;
 				}
 				return true;

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -49,6 +49,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -148,6 +149,37 @@ public class FileUtilTest extends JDFTestCaseBase
 		os.write("abc".getBytes());
 		os.close();
 		assertTrue(file.exists());
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	public void testGetBufferedInputStream() throws IOException
+	{
+		final File file = new File(sm_dirTestDataTemp + "bufOut.txt");
+		file.delete();
+		final OutputStream os = FileUtil.getBufferedOutputStream(file);
+		os.write("abc".getBytes());
+		os.close();
+		final BufferedInputStream bufferedInputStream = FileUtil.getBufferedInputStream(file);
+		assertNotNull(bufferedInputStream);
+		StreamUtil.close(bufferedInputStream);
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	public void testGetBufferedInputStreamDir() throws IOException
+	{
+		final File file = new File(sm_dirTestDataTemp + "testDir");
+		FileUtil.deleteAll(file);
+		file.mkdir();
+		final BufferedInputStream bufferedInputStream = FileUtil.getBufferedInputStream(file);
+		assertNull(bufferedInputStream);
 	}
 
 	/**
