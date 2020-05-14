@@ -252,9 +252,10 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 				return true;
 			}
 			File f = UrlUtil.urlToFile(url);
-			if (currentURL != null)
+			if (currentURL != null && UrlUtil.isRelativeURL(url))
+			{
 				f = FileUtil.cleanDots(new File(currentURL, f.getPath()));
-
+			}
 			if (f != null)
 			{
 				if (!f.exists())
