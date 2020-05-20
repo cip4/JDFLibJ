@@ -87,7 +87,6 @@ public class WalkNodeInfo extends WalkResource
 		xjdfToJDFImpl.moveAmountsToLink(partmap, map, rl);
 		map2.removeKeys(map.keySet());
 		e.removeAttributes(map2.keySet());
-
 		return super.walk(e, trackElem);
 	}
 

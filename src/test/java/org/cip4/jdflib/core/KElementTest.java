@@ -71,6 +71,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
+import org.cip4.jdflib.resource.JDFModified;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
@@ -449,8 +450,7 @@ public class KElementTest extends JDFTestCaseBase
 	@Test
 	public void testGetElementById()
 	{
-		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">" + "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>" + "</ELEM3>"
-				+ "</ELEM2>" + "</JDF>";
+		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">" + "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>" + "</ELEM3>" + "</ELEM2>" + "</JDF>";
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -1624,9 +1624,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue(kElement3.getNamespaceURI().equals(cip4NameSpaceURI));
 		assertTrue(kElement3.getPrefix().equals(cip4Prefix1));
 
-		final String jdfDocString = "<JDF ID=\"n051221_021145422_000005\" Version=\"1.3\" " + "xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" "
-				+ "xmlns:JDF=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:JDFS=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:jdf=\"http://www.CIP4.org/JDFSchema_1_1\">"
-				+ "<kElement0/>" + "<JDF:kElement1/>" + "<JDFS:kElement2/>" + "<jdf:kElement3/>" + "</JDF>";
+		final String jdfDocString = "<JDF ID=\"n051221_021145422_000005\" Version=\"1.3\" " + "xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:JDF=\"http://www.CIP4.org/JDFSchema_1_1\" "
+				+ "xmlns:JDFS=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:jdf=\"http://www.CIP4.org/JDFSchema_1_1\">" + "<kElement0/>" + "<JDF:kElement1/>" + "<JDFS:kElement2/>"
+				+ "<jdf:kElement3/>" + "</JDF>";
 
 		final JDFParser p = new JDFParser();
 		final JDFDoc jdfDoc = p.parseString(jdfDocString);
@@ -3232,36 +3232,14 @@ public class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public void testGetChildWithAttribute()
+	public void testGetChildWithAttributeClass()
 	{
-		final XMLDoc doc = new XMLDoc("Foo", null);
-		final KElement root = doc.getRoot();
-		assertEquals(root.getChildElementArray().length, 0);
-		root.appendElement("bar:bar", "www.bar.com");
-		final KElement bar2 = root.appendElement("bar2");
-		bar2.setAttribute("foo", "1");
-		bar2.setAttribute("ID", "id2");
-		final KElement bar3 = bar2.appendElement("bar3");
-		bar3.setAttribute("foo", "1");
-		bar3.setAttribute("foo2", "2");
-		bar3.setAttribute("ID", "id3");
-		assertEquals(root.getChildWithAttribute(null, "foo2", null, null, 0, false), bar3);
-		assertEquals(root.getChildWithAttribute(null, "foo", null, null, 0, false), bar2);
-		assertEquals(root.getChildWithAttribute(null, "foo", null, null, 1, false), bar3);
-		assertEquals(root.getChildWithAttribute(null, "foo", null, null, -1, false), bar3);
-		assertEquals(root.getChildWithAttribute(null, "foo", null, null, 0, true), bar2);
-		assertEquals(root.getChildWithAttribute(null, "foo", null, "1", 0, true), bar2);
-		assertEquals(root.getChildWithAttribute(null, "ID", null, "id2", 0, true), bar2);
-		assertNull(root.getChildWithAttribute(null, "ID", null, "id3", 0, true));
-
-		final XMLDoc doc2 = new XMLDoc("Foo", null);
-		final KElement root2 = doc2.getRoot();
-		final KElement bar22 = root2.appendElement("bar2");
-		bar22.setAttribute("ID", "id22");
-		assertEquals(root2.getChildWithAttribute(null, "ID", null, "id22", 0, true), bar22);
-		assertNull(root.getChildWithAttribute(null, "ID", null, "id22", 0, true));
-		bar3.moveElement(bar22, null);
-		assertNull(root2.getChildWithAttribute(null, "ID", null, "id22", 0, true));
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode n = doc.getJDFRoot();
+		final JDFModified m = n.getCreateAuditPool().addModified("me", null);
+		m.setID("ID");
+		assertNull(n.getChildWithAttribute(JDFModified.class, AttributeName.ID, "ID", false));
+		assertEquals(m, n.getChildWithAttribute(JDFModified.class, AttributeName.ID, "ID", true));
 	}
 
 	/**
@@ -3344,7 +3322,7 @@ public class KElementTest extends JDFTestCaseBase
 	public void testPushUp()
 	{
 		{// defines a logical test block
-				// pushup from 4 to 1
+			// pushup from 4 to 1
 			final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 			final JDFNode root = (JDFNode) jdfDoc.getRoot();
 			KElement e = root;
@@ -3359,7 +3337,7 @@ public class KElementTest extends JDFTestCaseBase
 		}
 
 		{// defines a logical test block
-				// pushup with emptystring
+			// pushup with emptystring
 			final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 			final JDFNode root = (JDFNode) jdfDoc.getRoot();
 			KElement e = root;
@@ -3374,7 +3352,7 @@ public class KElementTest extends JDFTestCaseBase
 		}
 
 		{// defines a logical test block
-				// pushup and force parentNode == null
+			// pushup and force parentNode == null
 			final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 			final JDFNode root = (JDFNode) jdfDoc.getRoot();
 			KElement e = root;

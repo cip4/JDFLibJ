@@ -1985,8 +1985,13 @@ public class KElement extends ElementNSImpl implements Element
 		return n;
 	}
 
-	@SuppressWarnings("unchecked")
 	public <A extends KElement> A getChildWithAttribute(final Class<A> clazz, final String attName, final String attVal)
+	{
+		return getChildWithAttribute(clazz, attName, attVal, false);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <A extends KElement> A getChildWithAttribute(final Class<A> clazz, final String attName, final String attVal, final boolean recurse)
 	{
 		Node n = getFirstChild();
 		while (n != null)
@@ -1994,6 +1999,12 @@ public class KElement extends ElementNSImpl implements Element
 			if (clazz.isInstance(n) && ((KElement) n).includesAttribute(attName, attVal))
 			{
 				return (A) n;
+			}
+			if (recurse && (n instanceof KElement))
+			{
+				final A b = ((KElement) n).getChildWithAttribute(clazz, attName, attVal, recurse);
+				if (b != null)
+					return b;
 			}
 			n = n.getNextSibling();
 		}
@@ -3089,9 +3100,8 @@ public class KElement extends ElementNSImpl implements Element
 	 *
 	 * @param nodeName name of the child node to get, if empty or null remove all
 	 * @param nameSpaceURI namespace to search in
-	 * @deprecated use three parameter version removeChildren(nodeName, nameSpaceURI, null);
+	 *
 	 */
-	@Deprecated
 	public void removeChildren(final String nodeName, final String nameSpaceURI)
 	{
 		removeChildren(nodeName, nameSpaceURI, null);

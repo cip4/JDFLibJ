@@ -118,6 +118,7 @@ import org.cip4.jdflib.resource.process.JDFDieLayoutProductionParams;
 import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
@@ -465,6 +466,43 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFNodeInfo nij = docjdf.getJDFRoot().getNodeInfo();
 		assertNotNull(nij);
 		assertNotSame(nij1, nij);
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	public void testNodeInfoCSR()
+	{
+		final XJDFHelper h = new XJDFHelper("j", "p", null);
+		h.getCreateRootProduct(0);
+		h.setTypes(EnumType.Product.getName());
+
+		final SetHelper setcontact = h.getCreateSet(XJDFConstants.Resource, ElementName.CONTACT, EnumUsage.Input);
+		final ResourceHelper rContact = setcontact.getCreatePartition(new JDFAttributeMap(XJDFConstants.ContactType, "Employee"), true);
+		rContact.setExternalID("P1");
+		final JDFContact c = (JDFContact) rContact.getCreateResource();
+		c.setAttribute(AttributeName.CONTACTTYPEDETAILS, "CSR");
+		final JDFPerson p = c.appendPerson();
+		p.setFirstName("First");
+		p.setFamilyName("Last");
+
+		final SetHelper set = h.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
+		final ResourceHelper partition = set.getCreatePartition(0, true);
+		partition.setStatus(EnumResStatus.Available);
+		final JDFNodeInfo ni = (JDFNodeInfo) partition.getResource();
+		ni.setAttribute(AttributeName.STATUS, "InProgress");
+		ni.setAttribute(AttributeName.PERSONALID, "P1");
+
+		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		conv.setCreateProduct(true);
+		final JDFDoc docjdf = conv.convert(h);
+		final JDFNodeInfo nij = docjdf.getJDFRoot().getNodeInfo();
+		assertNotNull(nij);
+		assertNotNull(nij.getEmployee());
+		assertEquals("P1", nij.getEmployee().getPersonalID());
+		assertEquals("First", nij.getEmployee().getPerson().getFirstName());
 	}
 
 	/**

@@ -42,6 +42,7 @@ import java.util.List;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -68,6 +69,7 @@ import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDependencies;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
 import org.cip4.jdflib.resource.process.JDFPageData;
@@ -394,6 +396,10 @@ class PostConverter
 				{
 					cleanPageList(resRoot);
 				}
+				else if (ElementName.NODEINFO.equals(localName))
+				{
+					updatePersonalID((JDFNodeInfo) resRoot);
+				}
 				else if (ElementName.BINDERYSIGNATURE.equals(localName))
 				{
 					cleanBinderySignature(resRoot);
@@ -405,6 +411,21 @@ class PostConverter
 					leaf.removeChildrenByClass(JDFPart.class);
 				}
 			}
+		}
+
+		void updatePersonalID(final JDFNodeInfo ni)
+		{
+			final String pi = ni.getNonEmpty(AttributeName.PERSONALID);
+			if (pi != null)
+			{
+				final JDFEmployee e = theNode.getChildWithAttribute(JDFEmployee.class, AttributeName.PERSONALID, pi, true);
+				if (e != null && !ni.equals(e.getParentNode()))
+				{
+					ni.copyElement(e, null);
+					ni.removeAttribute(AttributeName.PERSONALID);
+				}
+			}
+
 		}
 
 		private void cleanBinderySignature(final JDFResource resRoot)
