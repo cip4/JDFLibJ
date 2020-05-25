@@ -89,7 +89,10 @@ public class WalkContact extends WalkResource
 		{
 			c.removeAttribute(AttributeName.CONTACTTYPES);
 			c.renameAttribute(AttributeName.CONTACTTYPEDETAILS, AttributeName.ROLES, null, null);
-			c.moveAttribute(AttributeName.PERSONALID, h.getRoot(), XJDFConstants.ExternalID, null, null);
+			if (h != null)
+			{
+				c.moveAttribute(AttributeName.PERSONALID, h.getRoot(), XJDFConstants.ExternalID, null, null);
+			}
 		}
 		final KElement ret = super.walk(e, trackElem);
 		return ret;
